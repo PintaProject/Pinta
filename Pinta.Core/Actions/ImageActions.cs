@@ -160,7 +160,7 @@ public sealed class ImageActions
 
 		var oldBottomSurface = doc.Layers.UserLayers[0].Surface.Clone ();
 
-		CompoundHistoryItem hist = new CompoundHistoryItem (Resources.Icons.ImageFlatten, Translations.GetString ("Flatten"));
+		CompoundHistoryItem hist = new (Resources.Icons.ImageFlatten, Translations.GetString ("Flatten"));
 
 		for (int i = doc.Layers.UserLayers.Count - 1; i >= 1; i--)
 			hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.Layers.UserLayers[i], i));
@@ -232,7 +232,7 @@ public sealed class ImageActions
 		if (rect.Width <= 0 || rect.Height <= 0)
 			return;
 
-		ResizeHistoryItem hist = new ResizeHistoryItem (doc.ImageSize) {
+		ResizeHistoryItem hist = new (workspace, doc.ImageSize) {
 			Icon = Resources.Icons.ImageCrop,
 			Text = Translations.GetString ("Crop to Selection")
 		};

@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 
@@ -40,23 +41,23 @@ public sealed class LevelsEffect : BaseEffect
 		EffectData = new LevelsData ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 	{
+		TaskCompletionSource<bool> completionSource = new ();
+
 		LevelsDialog dialog = new (chrome, workspace, Data) {
 			Title = Name,
 			IconName = Icon,
 		};
 
 		dialog.OnResponse += (_, args) => {
-
-			if (args.ResponseId == (int) Gtk.ResponseType.None)
-				return;
-
-			OnConfigDialogResponse (args.ResponseId == (int) Gtk.ResponseType.Ok);
+			completionSource.SetResult (Gtk.ResponseType.Ok == (Gtk.ResponseType) args.ResponseId);
 			dialog.Destroy ();
 		};
 
 		dialog.Present ();
+
+		return completionSource.Task;
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

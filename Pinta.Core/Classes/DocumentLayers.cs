@@ -177,6 +177,8 @@ public sealed class DocumentLayers
 
 		LayerRemoved?.Invoke (this, new IndexEventArgs (index));
 		PintaCore.Layers.OnLayerRemoved ();
+
+		document.Workspace.Invalidate ();
 	}
 
 	/// <summary>
@@ -251,8 +253,7 @@ public sealed class DocumentLayers
 		var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
 		var g = new Context (surf);
-		g.AppendPath (document.Selection.SelectionPath);
-		g.Clip ();
+		document.Selection.Clip (g);
 
 		g.SetSourceSurface (user_layers[index].Surface, 0, 0);
 		g.Paint ();
@@ -333,6 +334,8 @@ public sealed class DocumentLayers
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (index));
 		PintaCore.Layers.OnLayerAdded ();
+
+		document.Workspace.Invalidate ();
 	}
 
 	/// <summary>

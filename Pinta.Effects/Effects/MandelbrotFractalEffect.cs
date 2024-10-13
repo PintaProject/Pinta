@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -45,7 +46,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		EffectData = new MandelbrotFractalData ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	#region Algorithm Code Ported From PDN

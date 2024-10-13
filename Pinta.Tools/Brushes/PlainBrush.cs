@@ -30,8 +30,14 @@ using Pinta.Core;
 
 namespace Pinta.Tools.Brushes;
 
-public sealed class PlainBrush : BasePaintBrush
+internal sealed class PlainBrush : BasePaintBrush
 {
+	private readonly WorkspaceManager workspace;
+	internal PlainBrush (WorkspaceManager workspace)
+	{
+		this.workspace = workspace;
+	}
+
 	public override string Name => Translations.GetString ("Normal");
 
 	public override int Priority => -100;
@@ -60,21 +66,23 @@ public sealed class PlainBrush : BasePaintBrush
 
 		// For some reason (?!) we need to inflate the dirty
 		// rectangle for small brush widths in zoomed images
-		var inflated = dirty.Inflated (1, 1);
+		RectangleI inflated = dirty.Inflated (1, 1);
 
 		return inflated;
 	}
 
-	private static void Draw (Context g, BrushStrokeArgs strokeArgs)
+	private void Draw (
+		Context g,
+		BrushStrokeArgs strokeArgs)
 	{
-		var x = strokeArgs.CurrentPosition.X;
-		var y = strokeArgs.CurrentPosition.Y;
+		int x = strokeArgs.CurrentPosition.X;
+		int y = strokeArgs.CurrentPosition.Y;
 
 		if (
 			(x == strokeArgs.LastPosition.X) &&
 			(y == strokeArgs.LastPosition.Y) &&
 			(g.LineWidth == 1) &&
-			PintaCore.Workspace.ActiveWorkspace.PointInCanvas ((PointD) strokeArgs.CurrentPosition)
+			workspace.ActiveWorkspace.PointInCanvas ((PointD) strokeArgs.CurrentPosition)
 		) {
 			x += 1;
 			y += 1;

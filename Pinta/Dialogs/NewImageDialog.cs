@@ -27,7 +27,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cairo;
 using Pinta.Core;
 
 namespace Pinta;
@@ -36,7 +35,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 {
 	private readonly bool has_clipboard;
 	private bool suppress_events;
-
+	private readonly PaletteManager palette;
 	private readonly Size clipboard_size;
 
 	private readonly PreviewArea preview_box;
@@ -60,6 +59,8 @@ public sealed class NewImageDialog : Gtk.Dialog
 	/// <param name="imgHeight">Initial value of the height entry.</param>
 	/// <param name="isClipboardSize">Indicates if there is an image on the clipboard (and the size parameters represent the clipboard image size).</param>
 	public NewImageDialog (
+		ChromeManager chrome,
+		PaletteManager palette,
 		Size initialSize,
 		BackgroundType initialBackgroundType,
 		bool isClipboardSize)
@@ -67,7 +68,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		// --- Control creation
 
 		// We don't show the background color option if it's the same as "White"
-		bool allowBackgroundColor = PintaCore.Palette.SecondaryColor.ToColorBgra () != ColorBgra.White;
+		bool allowBackgroundColor = palette.SecondaryColor.ToColorBgra () != ColorBgra.White;
 
 		bool hasClipboard = isClipboardSize;
 
@@ -112,7 +113,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.CheckButton secondaryBackgroundRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Background Color"));
 		secondaryBackgroundRadio.SetGroup (whiteBackgroundRadio);
 
-		Gtk.Image imageBackground = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, PintaCore.Palette.SecondaryColor).ToPixbuf ());
+		Gtk.Image imageBackground = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, palette.SecondaryColor).ToPixbuf ());
 		imageBackground.MarginEnd = 7;
 
 		Gtk.Box hboxBackground = CreateHorizontalBox (0, imageBackground, secondaryBackgroundRadio);
@@ -194,7 +195,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("New Image");
-		TransientFor = PintaCore.Chrome.MainWindow;
+		TransientFor = chrome.MainWindow;
 		Modal = true;
 		Resizable = false;
 		IconName = Resources.StandardIcons.DocumentNew;
@@ -207,6 +208,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		// --- References to keep
 
 		has_clipboard = hasClipboard;
+		this.palette = palette;
 		clipboard_size = initialSize;
 		preset_dropdown_model = presetDropdownModel;
 		preset_dropdown = presetDropdown;
@@ -394,7 +396,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		NewImageBackgroundType switch {
 			BackgroundType.White => new Cairo.Color (1, 1, 1),
 			BackgroundType.Transparent => new Cairo.Color (1, 1, 1, 0),
-			_ => PintaCore.Palette.SecondaryColor,
+			_ => palette.SecondaryColor,
 		};
 
 
@@ -417,7 +419,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
 				return Size.Empty;
 
-			var textParts = text.Split (' ');
+			string[] textParts = text.Split (' ');
 			int width = int.Parse (textParts[0]);
 			int height = int.Parse (textParts[2]);
 
@@ -515,7 +517,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		// Handle background color changes
 		white_background_radio.OnToggled += (o, e) => { if (white_background_radio.Active) preview_box.Update (new Cairo.Color (1, 1, 1)); };
-		secondary_background_radio.OnToggled += (o, e) => { if (secondary_background_radio.Active) preview_box.Update (PintaCore.Palette.SecondaryColor); };
+		secondary_background_radio.OnToggled += (o, e) => { if (secondary_background_radio.Active) preview_box.Update (palette.SecondaryColor); };
 		transparent_background_radio.OnToggled += (o, e) => { if (transparent_background_radio.Active) preview_box.Update (new Cairo.Color (1, 1, 1, 0)); };
 	}
 
@@ -532,7 +534,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
 				continue;
 
-			var textParts = text.Split ('x');
+			string[] textParts = text.Split ('x');
 			int width = int.Parse (textParts[0].Trim ());
 			int height = int.Parse (textParts[1].Trim ());
 
@@ -570,21 +572,18 @@ public sealed class NewImageDialog : Gtk.Dialog
 		public PreviewArea ()
 		{
 			WidthRequest = 300;
-
 			SetDrawFunc ((area, context, width, height) => Draw (context, width, height));
 		}
 
 		public void Update (Size size)
 		{
 			this.size = size;
-
 			QueueDraw ();
 		}
 
 		public void Update (Cairo.Color color)
 		{
 			this.color = color;
-
 			QueueDraw ();
 		}
 
@@ -592,11 +591,10 @@ public sealed class NewImageDialog : Gtk.Dialog
 		{
 			this.size = size;
 			this.color = color;
-
 			QueueDraw ();
 		}
 
-		private void Draw (Context cr, int widget_width, int widget_height)
+		private void Draw (Cairo.Context cr, int widget_width, int widget_height)
 		{
 			Size preview_size = GetPreviewSizeForDraw ();
 
@@ -608,7 +606,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 			if (color.A == 0) {
 				// Fill with transparent checkerboard pattern
-				Pattern pattern = CairoExtensions.CreateTransparentBackgroundPattern (16);
+				Cairo.Pattern pattern = CairoExtensions.CreateTransparentBackgroundPattern (16);
 				cr.FillRectangle (r, pattern);
 			} else {
 				// Fill with selected color
@@ -626,9 +624,9 @@ public sealed class NewImageDialog : Gtk.Dialog
 			if (size.Width <= MAX_SIZE && size.Height <= MAX_SIZE)
 				return size;
 			else if (size.Width > size.Height)
-				return new Size (MAX_SIZE, (int) (MAX_SIZE / (size.Width / (float) size.Height)));
+				return new (MAX_SIZE, (int) (MAX_SIZE / (size.Width / (float) size.Height)));
 			else
-				return new Size ((int) (MAX_SIZE / (size.Height / (float) size.Width)), MAX_SIZE);
+				return new ((int) (MAX_SIZE / (size.Height / (float) size.Width)), MAX_SIZE);
 		}
 	}
 }

@@ -47,20 +47,19 @@ public sealed class Document
 			selection = value;
 
 			// Listen for any changes to this selection.
-			selection.SelectionModified += (sender, args) => {
-				OnSelectionChanged ();
-			};
+			selection.SelectionModified += (_, _) => OnSelectionChanged ();
 
 			// Notify listeners that our selection has been modified.
 			OnSelectionChanged ();
 		}
 	}
 
-	public DocumentSelection PreviousSelection { get; set; } = new ();
+	public DocumentSelection PreviousSelection { get; set; }
 
 	public Document (Size size)
 	{
-		Selection = new DocumentSelection ();
+		PreviousSelection = new (this);
+		Selection = new DocumentSelection (this);
 
 		Layers = new DocumentLayers (this);
 		Workspace = new DocumentWorkspace (this);
@@ -70,8 +69,6 @@ public sealed class Document
 
 		ResetSelectionPaths ();
 	}
-
-	#region Public Properties
 
 	/// <summary>
 	/// Just the file name, like "dog.jpg".
@@ -116,15 +113,14 @@ public sealed class Document
 
 	public DocumentHistory History => Workspace.History;
 
-	public Core.Size ImageSize { get; set; }
+	public Size ImageSize { get; set; }
 
 	public bool IsDirty {
 		get => is_dirty;
 		set {
-			if (is_dirty != value) {
-				is_dirty = value;
-				OnIsDirtyChanged ();
-			}
+			if (is_dirty == value) return;
+			is_dirty = value;
+			OnIsDirtyChanged ();
 		}
 	}
 
@@ -133,9 +129,7 @@ public sealed class Document
 	public DocumentWorkspace Workspace { get; }
 
 	public delegate void LayerCloneEvent ();
-	#endregion
 
-	#region Public Methods
 	public RectangleI ClampToImageSize (RectangleI r)
 	{
 		int x = Math.Clamp (r.X, 0, ImageSize.Width);
@@ -157,7 +151,7 @@ public sealed class Document
 	/// </summary>
 	public void ClearFileReference ()
 	{
-		var name = DisplayName;
+		string name = DisplayName;
 		File = null;
 		FileType = null;
 		DisplayName = name;
@@ -308,9 +302,9 @@ public sealed class Document
 
 		PintaCore.Tools.Commit ();
 
-		ResizeHistoryItem hist = new (ImageSize) {
+		ResizeHistoryItem hist = new (PintaCore.Workspace, ImageSize) {
 			Icon = Resources.Icons.ImageResizeCanvas,
-			Text = Translations.GetString ("Resize Canvas")
+			Text = Translations.GetString ("Resize Canvas"),
 		};
 
 		hist.StartSnapshotOfImage ();
@@ -343,7 +337,7 @@ public sealed class Document
 
 		PintaCore.Tools.Commit ();
 
-		ResizeHistoryItem hist = new (ImageSize);
+		ResizeHistoryItem hist = new (PintaCore.Workspace, ImageSize);
 
 		hist.StartSnapshotOfImage ();
 
@@ -411,7 +405,6 @@ public sealed class Document
 	{
 		LayerCloned?.Invoke ();
 	}
-	#endregion
 
 	private void OnIsDirtyChanged ()
 	{
@@ -423,18 +416,13 @@ public sealed class Document
 		Renamed?.Invoke (this, EventArgs.Empty);
 	}
 
-	#region Private Methods
 	private void OnSelectionChanged ()
 	{
 		SelectionChanged?.Invoke (this, EventArgs.Empty);
 	}
-	#endregion
 
-	#region Public Events
 	public event EventHandler? IsDirtyChanged;
 	public event EventHandler? Renamed;
 	public event LayerCloneEvent? LayerCloned;
 	public event EventHandler? SelectionChanged;
-
-	#endregion
 }

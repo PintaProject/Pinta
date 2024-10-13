@@ -84,21 +84,21 @@ public sealed class HelpActions
 
 	private void Bugs_Activated (object sender, EventArgs e)
 	{
-		GtkExtensions.LaunchUri ("https://github.com/PintaProject/Pinta/issues");
+		system.LaunchUri ("https://github.com/PintaProject/Pinta/issues");
 	}
 
 	private void DisplayHelp (object sender, EventArgs e)
 	{
-		GtkExtensions.LaunchUri ("https://pinta-project.com/user-guide");
+		system.LaunchUri ("https://pinta-project.com/user-guide");
 	}
 
 	private void Translate_Activated (object sender, EventArgs e)
 	{
-		GtkExtensions.LaunchUri ("https://hosted.weblate.org/engage/pinta/");
+		system.LaunchUri ("https://hosted.weblate.org/engage/pinta/");
 	}
 
 	private void Website_Activated (object sender, EventArgs e)
 	{
-		GtkExtensions.LaunchUri ("https://www.pinta-project.com");
+		system.LaunchUri ("https://www.pinta-project.com");
 	}
 }

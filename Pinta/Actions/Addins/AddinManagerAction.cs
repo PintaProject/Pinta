@@ -34,12 +34,15 @@ internal sealed class AddinManagerAction : IActionHandler
 {
 	private readonly AddinActions addins;
 	private readonly ChromeManager chrome;
+	private readonly SystemManager system;
 	internal AddinManagerAction (
 		AddinActions addins,
-		ChromeManager chrome)
+		ChromeManager chrome,
+		SystemManager system)
 	{
 		this.addins = addins;
 		this.chrome = chrome;
+		this.system = system;
 	}
 
 	void IActionHandler.Initialize ()
@@ -55,7 +58,7 @@ internal sealed class AddinManagerAction : IActionHandler
 	private void Activated (object sender, EventArgs e)
 	{
 		AddinSetupService service = new (Mono.Addins.AddinManager.Registry);
-		AddinManagerDialog dialog = new (chrome.MainWindow, service);
+		AddinManagerDialog dialog = new (chrome.MainWindow, service, system);
 		dialog.Show ();
 	}
 }

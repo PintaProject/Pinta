@@ -24,58 +24,58 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk;
+using System;
+using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta;
 
-public static class ErrorDialog
+internal static class ErrorDialog
 {
-	public static void ShowMessage (Window parent, string message, string body)
+	internal static Task ShowMessage (
+		Gtk.Window parent,
+		string message,
+		string body)
 	{
 		System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, body);
 
-		var dialog = Adw.MessageDialog.New (parent, message, body);
+		Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
 
-		const string ok_response = "ok";
-		dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
-		dialog.DefaultResponse = ok_response;
-		dialog.CloseResponse = ok_response;
+		dialog.AddResponse (nameof (ErrorDialogResponse.OK), Translations.GetString ("_OK"));
+		dialog.DefaultResponse = nameof (ErrorDialogResponse.OK);
+		dialog.CloseResponse = nameof (ErrorDialogResponse.OK);
 
-		dialog.Present ();
+		return dialog.RunAsync ();
 	}
 
-	public static void ShowError (Window parent, string message, string body, string details)
+	internal static async Task<ErrorDialogResponse> ShowError (
+		Gtk.Window parent,
+		string message,
+		string body,
+		string details)
 	{
 		System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, details);
 
-		var dialog = Adw.MessageDialog.New (parent, message, body);
-
-		var text_view = Gtk.TextView.New ();
+		Gtk.TextView text_view = Gtk.TextView.New ();
 		text_view.Buffer!.SetText (details, -1);
 
-		var scroll = Gtk.ScrolledWindow.New ();
+		Gtk.ScrolledWindow scroll = Gtk.ScrolledWindow.New ();
 		scroll.HeightRequest = 250;
 		scroll.SetChild (text_view);
 
-		var expander = Gtk.Expander.New (Translations.GetString ("Details"));
+		Gtk.Expander expander = Gtk.Expander.New (Translations.GetString ("Details"));
 		expander.SetChild (scroll);
+
+		Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
 		dialog.SetExtraChild (expander);
+		dialog.AddResponse (nameof (ErrorDialogResponse.Bug), Translations.GetString ("Report Bug..."));
+		dialog.SetResponseAppearance (nameof (ErrorDialogResponse.Bug), Adw.ResponseAppearance.Suggested);
+		dialog.AddResponse (nameof (ErrorDialogResponse.OK), Translations.GetString ("_OK"));
+		dialog.DefaultResponse = nameof (ErrorDialogResponse.OK);
+		dialog.CloseResponse = nameof (ErrorDialogResponse.OK);
 
-		const string bug_response = "bug";
-		const string ok_response = "ok";
-		dialog.AddResponse (bug_response, Translations.GetString ("Report Bug..."));
-		dialog.SetResponseAppearance (bug_response, Adw.ResponseAppearance.Suggested);
-		dialog.AddResponse (ok_response, Translations.GetString ("_OK"));
-		dialog.DefaultResponse = ok_response;
-		dialog.CloseResponse = ok_response;
+		string responseText = await dialog.RunAsync ();
 
-		dialog.OnResponse += (_, args) => {
-			if (args.Response == bug_response)
-				PintaCore.Actions.Help.Bugs.Activate ();
-		};
-
-		dialog.Present ();
+		return Enum.Parse<ErrorDialogResponse> (responseText);
 	}
 }
-
