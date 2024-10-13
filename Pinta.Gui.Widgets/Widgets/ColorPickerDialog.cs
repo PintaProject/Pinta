@@ -295,6 +295,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	public void SetSmallMode (bool isSmallMode)
 	{
+		// incredibly silly workaround
+		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
+		this.SetOpacity (0.995f);
 		small_mode = isSmallMode;
 		if (isSmallMode) {
 			spacing = 2;
@@ -618,7 +621,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		sliders_box.Append (g_cps);
 		b_cps = new ColorPickerSlider (255, Translations.GetString ("Blue"), CurrentColor.B * 255.0, this, cps_padding_width, cps_width);
 		b_cps.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor with { G = args.value / 255.0 };
+			CurrentColor = CurrentColor with { B = args.value / 255.0 };
 			UpdateView ();
 		};
 		b_cps.gradient.SetDrawFunc ((area, context, width, height) =>
@@ -767,6 +770,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		else
 			Modal = true;
 		Setup ();
+		// incredibly silly workaround
+		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
+		this.SetOpacity (0.995f);
 
 		// Handles on active / off active
 		// When user clicks off the color picker, we assign the color picker values to the palette
@@ -775,10 +781,13 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		this.OnNotify += (sender, args) => {
 			if (args.Pspec.GetName () == "is-active" && continuous) {
 				if (!IsActive) {
+					this.SetOpacity (0.85f);
 					if (PintaCore.Palette.PrimaryColor != colors[0])
 						PintaCore.Palette.PrimaryColor = colors[0];
 					if (PintaCore.Palette.SecondaryColor != colors[1])
 						PintaCore.Palette.SecondaryColor = colors[1];
+				} else {
+					this.SetOpacity (1f);
 				}
 			}
 		};
