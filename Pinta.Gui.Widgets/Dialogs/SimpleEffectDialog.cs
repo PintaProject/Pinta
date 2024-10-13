@@ -389,7 +389,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? p
 			: default;
 
-		PointPickerWidget widget = new (initialPoint) { Label = caption };
+		PointPickerWidget widget = new (PintaCore.Workspace, initialPoint) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (settings.reflector, effectData, widget.Offset);
 
@@ -406,7 +406,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? p
 			: default;
 
-		PointPickerWidget widget = new (initialPoint) { Label = caption };
+		PointPickerWidget widget = new (PintaCore.Workspace, initialPoint) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (settings.reflector, effectData, widget.Point);
 
