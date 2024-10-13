@@ -22,6 +22,17 @@ public readonly struct HsvColor
 	public double Sat { get; init; } // 0-1
 	public double Val { get; init; } // 0-1
 
+	public static bool operator == (HsvColor c1, HsvColor c2)
+	{
+		if (Math.Abs (c1.Hue - c2.Hue) < 0.1 &&
+		    Math.Abs (c1.Sat - c2.Sat) < 0.001 &&
+		    Math.Abs (c1.Val - c2.Val) < 0.001)
+			return true;
+		return false;
+	}
+
+	public static bool operator != (HsvColor c1, HsvColor c2) => !(c1 == c2);
+
 	public HsvColor (double hue, double sat, double val)
 	{
 		if (hue < 0 || hue > 360)
@@ -53,7 +64,7 @@ public readonly struct HsvColor
 	}
 
 	public override readonly string ToString ()
-		=> $"({Hue:2}, {Sat:2}, {Val:2})";
+		=> $"({Hue:F2}, {Sat:F2}, {Val:F2})";
 
 	public override int GetHashCode ()
 		=> ((int) Hue + ((int) Sat << 8) + ((int) Val << 16)).GetHashCode ();
