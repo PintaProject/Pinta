@@ -15,14 +15,15 @@ namespace Pinta.Effects;
 
 internal static class PerlinNoise
 {
-	// precalculated rotation matrix coefficients
+	// Precomputed rotation matrix coefficients for rotating input coordinates
 	private static readonly double rot_11;
 	private static readonly double rot_12;
 	private static readonly double rot_21;
 	private static readonly double rot_22;
 
 	// Adapted to 2-D version in C# from 3-D version in Java from http://mrl.nyu.edu/~perlin/noise/
-	private static readonly ImmutableArray<int> permute_lookup;
+	// Permutation table for pseudorandom gradient directions
+	private static readonly ImmutableArray<int> permutation_table;
 	static PerlinNoise ()
 	{
 #pragma warning disable format
@@ -47,27 +48,31 @@ internal static class PerlinNoise
 			195,  78,  66, 215,  61, 156, 180,
 		};
 #pragma warning restore format
-		var permuteLookup = ImmutableArray.CreateBuilder<int> (512);
-		permuteLookup.Count = 512;
+		var permutationsBuilder = ImmutableArray.CreateBuilder<int> (512);
+		permutationsBuilder.Count = 512;
 		for (int i = 0; i < 256; i++) {
-			permuteLookup[256 + i] = permutationTable[i];
-			permuteLookup[i] = permutationTable[i];
+			permutationsBuilder[256 + i] = permutationTable[i];
+			permutationsBuilder[i] = permutationTable[i];
 		}
-		permute_lookup = permuteLookup.MoveToImmutable ();
+		permutation_table = permutationsBuilder.MoveToImmutable ();
 
-		// precalculate a rotation matrix - arbitrary angle... 
-		double angle = 137.2 / 180.0 * Math.PI;
+		// precalculate a rotation matrix - arbitrary angle...
+		DegreesAngle rotationDegrees = new (137.2);
+		RadiansAngle rotationRadians = rotationDegrees.ToRadians ();
 
-		rot_11 = Math.Cos (angle);
-		rot_12 = -Math.Sin (angle);
-		rot_21 = Math.Sin (angle);
-		rot_22 = Math.Cos (angle);
+		rot_11 = Math.Cos (rotationRadians.Radians);
+		rot_12 = -Math.Sin (rotationRadians.Radians);
+		rot_21 = Math.Sin (rotationRadians.Radians);
+		rot_22 = Math.Cos (rotationRadians.Radians);
 	}
 
 	private static double Fade (double t)
-	=> t * t * t * (t * (t * 6 - 15) + 10);
+		=> t * t * t * (t * (t * 6 - 15) + 10);
 
-	private static double Grad (int hash, double x, double y)
+	/// <returns>
+	/// Dot product of pseudorandom gradient vector and distance vector
+	/// </returns>
+	private static double Gradient (int hash, double x, double y)
 	{
 		int h = hash & 15;
 		double u = h < 8 ? x : y;
@@ -75,31 +80,37 @@ internal static class PerlinNoise
 		return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
 	}
 
-	public static double Compute (byte ix, byte iy, double x, double y, byte seed)
+	/// <returns>
+	/// Perlin noise value at specified grid coordinates and offsets
+	/// </returns>
+	public static double Compute (byte gridX, byte gridY, double offsetX, double offsetY, byte seed)
 	{
-		double u = Fade (x);
-		double v = Fade (y);
+		double u = Fade (offsetX);
+		double v = Fade (offsetY);
 
-		int a = permute_lookup[ix + seed] + iy;
-		int aa = permute_lookup[a];
-		int ab = permute_lookup[a + 1];
-		int b = permute_lookup[ix + 1 + seed] + iy;
-		int ba = permute_lookup[b];
-		int bb = permute_lookup[b + 1];
+		int a = permutation_table[gridX + seed] + gridY;
+		int aa = permutation_table[a];
+		int ab = permutation_table[a + 1];
+		int b = permutation_table[gridX + 1 + seed] + gridY;
+		int ba = permutation_table[b];
+		int bb = permutation_table[b + 1];
 
-		double gradAA = Grad (permute_lookup[aa], x, y);
-		double gradBA = Grad (permute_lookup[ba], x - 1, y);
+		double gradAA = Gradient (permutation_table[aa], offsetX, offsetY);
+		double gradBA = Gradient (permutation_table[ba], offsetX - 1, offsetY);
 
 		double edge1 = Utility.Lerp (gradAA, gradBA, u);
 
-		double gradAB = Grad (permute_lookup[ab], x, y - 1);
-		double gradBB = Grad (permute_lookup[bb], x - 1, y - 1);
+		double gradAB = Gradient (permutation_table[ab], offsetX, offsetY - 1);
+		double gradBB = Gradient (permutation_table[bb], offsetX - 1, offsetY - 1);
 
 		double edge2 = Utility.Lerp (gradAB, gradBB, u);
 
 		return Utility.Lerp (edge1, edge2, v);
 	}
 
+	/// <summary>
+	/// Computes fractal Perlin noise over multiple octaves
+	/// </summary>
 	public static double Compute (double x, double y, double detail, double roughness, byte seed)
 	{
 		double total = 0.0;
@@ -110,14 +121,12 @@ internal static class PerlinNoise
 		int octaves = (int) Math.Ceiling (detail);
 
 		for (int i = 0; i < octaves; i++) {
-			// rotate the coordinates.
+
 			// reduces correlation between octaves.
-			double xr = (x * rot_11) + (y * rot_12);
-			double yr = (x * rot_21) + (y * rot_22);
+			double rotatedX = (x * rot_11) + (y * rot_12);
+			double rotatedY = (x * rot_21) + (y * rot_22);
 
-			double noise = Noise (xr * frequency, yr * frequency, seed);
-
-			noise *= amplitude;
+			double noise = amplitude * Noise (rotatedX * frequency, rotatedY * frequency, seed);
 
 			// if this is the last 'partial' octave,
 			// reduce its contribution accordingly.
@@ -131,9 +140,8 @@ internal static class PerlinNoise
 
 			// if the contribution is going to be negligible,
 			// don't bother with higher octaves.
-			if (amplitude < 0.001) {
+			if (amplitude < 0.001)
 				break;
-			}
 
 			// setup for next octave
 			frequency += frequency;
@@ -141,41 +149,44 @@ internal static class PerlinNoise
 
 			// offset the coordinates by prime numbers, with prime difference.
 			// reduces correlation between octaves.
-			x = xr + 499;
-			y = yr + 506;
+			x = rotatedX + 499;
+			y = rotatedY + 506;
 		}
 
 		return total;
 	}
 
+	/// <returns>
+	/// Perlin noise at given coordinates.
+	/// </returns>
 	private static double Noise (double x, double y, byte seed)
 	{
 		double xf = Math.Floor (x);
 		double yf = Math.Floor (y);
 
-		int ix = (int) xf & 255;
-		int iy = (int) yf & 255;
+		int gridX = (int) xf & 255;
+		int gridY = (int) yf & 255;
 
-		x -= xf;
-		y -= yf;
+		double offsetX = x - xf;
+		double offsetY = y - yf;
 
-		double u = Fade (x);
-		double v = Fade (y);
+		double u = Fade (offsetX);
+		double v = Fade (offsetY);
 
-		int a = permute_lookup[ix + seed] + iy;
-		int aa = permute_lookup[a];
-		int ab = permute_lookup[a + 1];
-		int b = permute_lookup[ix + 1 + seed] + iy;
-		int ba = permute_lookup[b];
-		int bb = permute_lookup[b + 1];
+		int a = permutation_table[gridX + seed] + gridY;
+		int aa = permutation_table[a];
+		int ab = permutation_table[a + 1];
+		int b = permutation_table[gridX + 1 + seed] + gridY;
+		int ba = permutation_table[b];
+		int bb = permutation_table[b + 1];
 
-		double gradAA = Grad (permute_lookup[aa], x, y);
-		double gradBA = Grad (permute_lookup[ba], x - 1, y);
+		double gradAA = Gradient (permutation_table[aa], offsetX, offsetY);
+		double gradBA = Gradient (permutation_table[ba], offsetX - 1, offsetY);
 
 		double edge1 = Utility.Lerp (gradAA, gradBA, u);
 
-		double gradAB = Grad (permute_lookup[ab], x, y - 1);
-		double gradBB = Grad (permute_lookup[bb], x - 1, y - 1);
+		double gradAB = Gradient (permutation_table[ab], offsetX, offsetY - 1);
+		double gradBB = Gradient (permutation_table[bb], offsetX - 1, offsetY - 1);
 
 		double edge2 = Utility.Lerp (gradAB, gradBB, u);
 
