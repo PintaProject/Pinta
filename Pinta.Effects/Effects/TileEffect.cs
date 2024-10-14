@@ -124,33 +124,49 @@ public sealed class TileEffect : BaseEffect
 		float i = x - settings.hw;
 
 		for (int p = 0; p < settings.aaSamples; ++p) {
+
 			PointD pt = aaPoints[p];
 
-			float u = i + (float) pt.X;
-			float v = j - (float) pt.Y;
+			// Initial coordinates after applying anti-aliasing offsets
 
-			float s = settings.cos * u + settings.sin * v;
-			float t = -settings.sin * u + settings.cos * v;
+			float initialU = i + (float) pt.X;
+			float initialV = j - (float) pt.Y;
 
-			s += settings.intensity * (float) Math.Tan (s * settings.scale);
-			t += settings.intensity * (float) Math.Tan (t * settings.scale);
-			u = settings.cos * s - settings.sin * t;
-			v = settings.sin * s + settings.cos * t;
+			// Rotate coordinates to align with the effect's orientation
 
-			int xSample = (int) (settings.hw + u);
-			int ySample = (int) (settings.hh + v);
+			float rotatedS = settings.cos * initialU + settings.sin * initialV;
+			float rotatedT = -settings.sin * initialU + settings.cos * initialV;
 
-			xSample = (xSample + settings.width) % settings.width;
-			// This makes it a little faster
-			if (xSample < 0)
-				xSample = (xSample + settings.width) % settings.width;
+			// Apply intensity transformation to create the tile effect
 
-			ySample = (ySample + settings.height) % settings.height;
-			// This makes it a little faster
-			if (ySample < 0)
-				ySample = (ySample + settings.height) % settings.height;
+			float transformedS = rotatedS + settings.intensity * (float) Math.Tan (rotatedS * settings.scale);
+			float transformedT = rotatedT + settings.intensity * (float) Math.Tan (rotatedT * settings.scale);
 
-			PointI samplePosition = new (xSample, ySample);
+			// Rotate back to the original coordinate space
+
+			float finalU = settings.cos * transformedS - settings.sin * transformedT;
+			float finalV = settings.sin * transformedS + settings.cos * transformedT;
+
+			// Translate back to image coordinates
+
+			int unwrappedSampleX = (int) (settings.hw + finalU);
+			int unwrappedSampleY = (int) (settings.hh + finalV);
+
+			// Ensure coordinates wrap around the image dimensions
+
+			int wrappedSampleX = (unwrappedSampleX + settings.width) % settings.width;
+			int adjustedSampleX =
+				(wrappedSampleX < 0)
+				? (wrappedSampleX + settings.width) % settings.width
+				: wrappedSampleX;
+
+			int wrappedSampleY = (unwrappedSampleY + settings.height) % settings.height;
+			int adjustedSampleY =
+				(wrappedSampleY < 0)
+				? (wrappedSampleY + settings.height) % settings.height
+				: wrappedSampleY;
+
+			PointI samplePosition = new (adjustedSampleX, adjustedSampleY);
 
 			ColorBgra sample = src.GetColorBgra (src_data, settings.src_width, samplePosition);
 
@@ -164,9 +180,9 @@ public sealed class TileEffect : BaseEffect
 			b: (byte) (b / settings.aaSamples),
 			g: (byte) (g / settings.aaSamples),
 			r: (byte) (r / settings.aaSamples),
-			a: (byte) (a / settings.aaSamples)
-		);
+			a: (byte) (a / settings.aaSamples));
 	}
+
 	#endregion
 
 
