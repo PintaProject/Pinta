@@ -15,7 +15,7 @@ namespace Pinta.Effects;
 
 internal static class PerlinNoise
 {
-	// Precomputed rotation matrix coefficients for rotating input coordinates
+	// Precalculated rotation matrix coefficients
 	private static readonly double rot_11;
 	private static readonly double rot_12;
 	private static readonly double rot_21;
@@ -156,9 +156,6 @@ internal static class PerlinNoise
 		return total;
 	}
 
-	/// <returns>
-	/// Perlin noise at given coordinates.
-	/// </returns>
 	private static double Noise (double x, double y, byte seed)
 	{
 		double xf = Math.Floor (x);
