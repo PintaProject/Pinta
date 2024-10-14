@@ -46,14 +46,14 @@ public sealed class TileEffect : BaseEffect
 	private sealed record TileSettings (
 		int width,
 		int height,
-		float hw,
-		float hh,
+		float halfWidth,
+		float halfHeight,
 		float sin,
 		float cos,
-		float scale,
-		float intensity,
-		int aaLevel,
-		int aaSamples,
+		float tileScale,
+		float adjustedIntensity,
+		int antiAliasLevel,
+		int antiAliasSamples,
 		int src_width);
 	private TileSettings CreateSettings (ImageSurface src, ImageSurface dst)
 	{
@@ -68,31 +68,31 @@ public sealed class TileEffect : BaseEffect
 		return new (
 			width: width,
 			height: height,
-			hw: width / 2f,
-			hh: height / 2f,
+			halfWidth: width / 2f,
+			halfHeight: height / 2f,
 			sin: (float) Math.Sin (rotationTheta.Radians),
 			cos: (float) Math.Cos (rotationTheta.Radians),
-			scale: (float) Math.PI / tileSize,
-			intensity: preliminaryIntensity * preliminaryIntensity / 10 * Math.Sign (preliminaryIntensity),
-			aaLevel: aaLevel,
-			aaSamples: aaLevel * aaLevel + 1,
+			tileScale: (float) Math.PI / tileSize,
+			adjustedIntensity: preliminaryIntensity * preliminaryIntensity / 10 * Math.Sign (preliminaryIntensity),
+			antiAliasLevel: aaLevel,
+			antiAliasSamples: aaLevel * aaLevel + 1,
 			src_width: src.Width
 		);
 	}
 
 	private static void InitializeAntiAliasPoints (TileSettings settings, Span<PointD> destination)
 	{
-		for (int i = 0; i < settings.aaSamples; ++i) {
-			double x = i * settings.aaLevel / ((double) settings.aaSamples);
-			double y = i / (double) settings.aaSamples;
+		for (int i = 0; i < settings.antiAliasSamples; ++i) {
+
+			double x = i * settings.antiAliasLevel / ((double) settings.antiAliasSamples);
+			double y = i / (double) settings.antiAliasSamples;
 
 			x -= (int) x;
 
 			// RGSS + rotation to maximize AA quality
 			destination[i] = new PointD (
 				X: (double) (settings.cos * x + settings.sin * y),
-				Y: (double) (settings.cos * y - settings.sin * x)
-			);
+				Y: (double) (settings.cos * y - settings.sin * x));
 		}
 	}
 
@@ -100,7 +100,7 @@ public sealed class TileEffect : BaseEffect
 	{
 		TileSettings settings = CreateSettings (src, dst);
 
-		Span<PointD> aaPoints = stackalloc PointD[settings.aaSamples];
+		Span<PointD> aaPoints = stackalloc PointD[settings.antiAliasSamples];
 		InitializeAntiAliasPoints (settings, aaPoints);
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
@@ -108,7 +108,7 @@ public sealed class TileEffect : BaseEffect
 
 		foreach (var rect in rois) {
 			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
-				float j = pixel.coordinates.Y - settings.hh;
+				float j = pixel.coordinates.Y - settings.halfHeight;
 				dst_data[pixel.memoryOffset] = GetFinalPixelColor (src, settings, aaPoints, src_data, j, pixel.coordinates.X);
 			}
 		}
@@ -121,9 +121,9 @@ public sealed class TileEffect : BaseEffect
 		int r = 0;
 		int a = 0;
 
-		float i = x - settings.hw;
+		float i = x - settings.halfWidth;
 
-		for (int p = 0; p < settings.aaSamples; ++p) {
+		for (int p = 0; p < settings.antiAliasSamples; ++p) {
 
 			PointD pt = aaPoints[p];
 
@@ -139,8 +139,8 @@ public sealed class TileEffect : BaseEffect
 
 			// Apply intensity transformation to create the tile effect
 
-			float transformedS = rotatedS + settings.intensity * (float) Math.Tan (rotatedS * settings.scale);
-			float transformedT = rotatedT + settings.intensity * (float) Math.Tan (rotatedT * settings.scale);
+			float transformedS = rotatedS + settings.adjustedIntensity * (float) Math.Tan (rotatedS * settings.tileScale);
+			float transformedT = rotatedT + settings.adjustedIntensity * (float) Math.Tan (rotatedT * settings.tileScale);
 
 			// Rotate back to the original coordinate space
 
@@ -149,8 +149,8 @@ public sealed class TileEffect : BaseEffect
 
 			// Translate back to image coordinates
 
-			int unwrappedSampleX = (int) (settings.hw + finalU);
-			int unwrappedSampleY = (int) (settings.hh + finalV);
+			int unwrappedSampleX = (int) (settings.halfWidth + finalU);
+			int unwrappedSampleY = (int) (settings.halfHeight + finalV);
 
 			// Ensure coordinates wrap around the image dimensions
 
@@ -177,10 +177,10 @@ public sealed class TileEffect : BaseEffect
 		}
 
 		return ColorBgra.FromBgra (
-			b: (byte) (b / settings.aaSamples),
-			g: (byte) (g / settings.aaSamples),
-			r: (byte) (r / settings.aaSamples),
-			a: (byte) (a / settings.aaSamples));
+			b: (byte) (b / settings.antiAliasSamples),
+			g: (byte) (g / settings.antiAliasSamples),
+			r: (byte) (r / settings.antiAliasSamples),
+			a: (byte) (a / settings.antiAliasSamples));
 	}
 
 	#endregion
