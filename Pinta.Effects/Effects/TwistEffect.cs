@@ -62,7 +62,12 @@ public sealed class TwistEffect : BaseEffect
 		}
 	}
 
-	private static ColorBgra GetFinalPixelColor (ImageSurface src, RenderSettings settings, ReadOnlySpan<ColorBgra> src_data, float j, float i)
+	private static ColorBgra GetFinalPixelColor (
+		ImageSurface src,
+		RenderSettings settings,
+		ReadOnlySpan<ColorBgra> src_data,
+		float j,
+		float i)
 	{
 		int b = 0;
 		int g = 0;
@@ -75,15 +80,15 @@ public sealed class TwistEffect : BaseEffect
 			float u = i + (float) settings.AntialiasPoints[p].X;
 			float v = j + (float) settings.AntialiasPoints[p].Y;
 
-			double rad = Math.Sqrt (u * u + v * v);
-			double theta = Math.Atan2 (v, u);
-			double t = 1 - rad / settings.Maxrad;
-			t = (t < 0) ? 0 : (t * t * t);
-			theta += t * settings.Twist / 100;
+			double radialDistance = Math.Sqrt (u * u + v * v);
+			double originalTheta = Math.Atan2 (v, u);
+			double radialFactor = 1 - radialDistance / settings.Maxrad;
+			double twistAmount = (radialFactor < 0) ? 0 : (radialFactor * radialFactor * radialFactor);
+			double twistedTheta = originalTheta + (twistAmount * settings.Twist / 100);
 
 			PointI samplePosition = new (
-				X: (int) (settings.HalfWidth + (float) (rad * Math.Cos (theta))),
-				Y: (int) (settings.HalfHeight + (float) (rad * Math.Sin (theta)))
+				X: (int) (settings.HalfWidth + (float) (radialDistance * Math.Cos (twistedTheta))),
+				Y: (int) (settings.HalfHeight + (float) (radialDistance * Math.Sin (twistedTheta)))
 			);
 
 			ColorBgra sample = src.GetColorBgra (src_data, src.Width, samplePosition);
