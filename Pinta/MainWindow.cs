@@ -273,7 +273,7 @@ internal sealed class MainWindow
 			} catch (Exception e) {
 				// Translators: {0} is the name of an add-in.
 				string body = Translations.GetString ("The '{0}' add-in may not be compatible with this version of Pinta", args.ExtensionNode.Addin.Id);
-				PintaCore.Chrome.ShowErrorDialog (
+				_ = PintaCore.Chrome.ShowErrorDialog (
 					PintaCore.Chrome.MainWindow,
 					Translations.GetString ("Failed to initialize add-in"),
 					body, e.ToString ());

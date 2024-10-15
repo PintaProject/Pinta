@@ -74,7 +74,7 @@ internal sealed class NewScreenshotAction : IActionHandler
 
 		} catch (DBusException e) {
 
-			chrome.ShowErrorDialog (
+			await chrome.ShowErrorDialog (
 				chrome.MainWindow,
 				Translations.GetString ("Failed to take screenshot"),
 				Translations.GetString ("Failed to access XDG Desktop Portals"),
@@ -82,14 +82,14 @@ internal sealed class NewScreenshotAction : IActionHandler
 
 		} catch (NoHandlersForOSException e) {
 
-			chrome.ShowMessageDialog (
+			await chrome.ShowMessageDialog (
 				chrome.MainWindow,
 				e.Message,
 				string.Empty);
 
 		} catch (Exception ex) {
 
-			chrome.ShowErrorDialog (
+			await chrome.ShowErrorDialog (
 				chrome.MainWindow,
 				ex.Message,
 				string.Empty,
