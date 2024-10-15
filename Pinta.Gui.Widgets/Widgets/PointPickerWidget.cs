@@ -31,7 +31,7 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class PointPickerWidget : Gtk.Box
 {
-	private readonly WorkspaceManager workspace;
+	private readonly Size image_size;
 	private readonly Gtk.Label title_label;
 
 	private readonly Gtk.Button button_reset_x;
@@ -47,14 +47,14 @@ public sealed class PointPickerWidget : Gtk.Box
 	bool active = true;
 
 	public PointPickerWidget (
-		WorkspaceManager workspace,
+		Size imageSize,
 		PointI initialPoint)
 	{
 		// --- Build
 
 		const int spacing = 6;
 
-		adjusted_initial_point = AdjustToWidgetSize (workspace, initialPoint);
+		adjusted_initial_point = AdjustToWidgetSize (imageSize, initialPoint);
 
 		// --- Section label + line
 
@@ -75,13 +75,13 @@ public sealed class PointPickerWidget : Gtk.Box
 		// --- X spinner
 
 		Gtk.Label xLabel = Gtk.Label.New ("X:");
-		Gtk.SpinButton spinX = CreateSpinX (workspace);
+		Gtk.SpinButton spinX = CreateSpinX (imageSize);
 		Gtk.Button buttonResetX = CreateResetButton ();
 
 		// --- Y spinner
 
 		Gtk.Label yLabel = Gtk.Label.New ("Y:");
-		Gtk.SpinButton spinY = CreateSpinY (workspace);
+		Gtk.SpinButton spinY = CreateSpinY (imageSize);
 		Gtk.Button buttonResetY = CreateResetButton ();
 
 		// --- Vbox for spinners
@@ -117,7 +117,7 @@ public sealed class PointPickerWidget : Gtk.Box
 
 		// --- References to keep
 
-		this.workspace = workspace;
+		image_size = imageSize;
 
 		title_label = titleLabel;
 
@@ -142,7 +142,7 @@ public sealed class PointPickerWidget : Gtk.Box
 			Valign = Gtk.Align.Start,
 		};
 
-	private static Gtk.SpinButton CreateSpinX (WorkspaceManager workspace)
+	private static Gtk.SpinButton CreateSpinX (Size imageSize)
 	{
 		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (0, 100, 1);
 		result.CanFocus = true;
@@ -150,13 +150,13 @@ public sealed class PointPickerWidget : Gtk.Box
 		result.Numeric = true;
 		result.Adjustment!.PageIncrement = 10;
 		result.Valign = Gtk.Align.Start;
-		result.Adjustment!.Upper = workspace.ImageSize.Width;
+		result.Adjustment!.Upper = imageSize.Width;
 		result.Adjustment!.Lower = 0;
 		result.SetActivatesDefaultImmediate (true);
 		return result;
 	}
 
-	private static Gtk.SpinButton CreateSpinY (WorkspaceManager workspace)
+	private static Gtk.SpinButton CreateSpinY (Size imageSize)
 	{
 		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (0, 100, 1);
 		result.CanFocus = true;
@@ -164,18 +164,18 @@ public sealed class PointPickerWidget : Gtk.Box
 		result.Numeric = true;
 		result.Adjustment!.PageIncrement = 10;
 		result.Valign = Gtk.Align.Start;
-		result.Adjustment!.Upper = workspace.ImageSize.Height;
+		result.Adjustment!.Upper = imageSize.Height;
 		result.Adjustment!.Lower = 0;
 		result.SetActivatesDefaultImmediate (true);
 		return result;
 	}
 
 	private static PointI AdjustToWidgetSize (
-		WorkspaceManager workspace,
+		Size imageSize,
 		PointI logicalPoint
 	) => new (
-		X: (int) ((logicalPoint.X + 1.0) * workspace.ImageSize.Width / 2.0),
-		Y: (int) ((logicalPoint.Y + 1.0) * workspace.ImageSize.Height / 2.0));
+		X: (int) ((logicalPoint.X + 1.0) * imageSize.Width / 2.0),
+		Y: (int) ((logicalPoint.Y + 1.0) * imageSize.Height / 2.0));
 
 	public string Label {
 		get => title_label.GetText ();
@@ -197,8 +197,8 @@ public sealed class PointPickerWidget : Gtk.Box
 
 	public PointD Offset
 		=> new (
-			X: (spin_x.Value * 2.0 / workspace.ImageSize.Width) - 1.0,
-			Y: (spin_y.Value * 2.0 / workspace.ImageSize.Height) - 1.0
+			X: (spin_x.Value * 2.0 / image_size.Width) - 1.0,
+			Y: (spin_y.Value * 2.0 / image_size.Height) - 1.0
 		);
 
 	private void HandlePointpickergraphic1PositionChanged (object? sender, EventArgs e)
