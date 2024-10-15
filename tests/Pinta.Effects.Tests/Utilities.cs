@@ -55,8 +55,9 @@ internal static class Utilities
 				++diffs;
 
 				// Display info about the first few failures.
+
 				if (diffs <= 10)
-					Assert.Warn ($"Difference at pixel {i}, got {result_pixels[i]} vs {expected_pixels[i]}");
+					Assert.Warn ($"Difference at pixel {i}, got {result_pixels[i]} vs {expected_pixels[i]}, diff. of {ColorBgra.ColorDifference (result_pixels[i], expected_pixels[i])}");
 			}
 		}
 
