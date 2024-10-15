@@ -132,7 +132,7 @@ internal sealed class PasteAction : IActionHandler
 
 		Gdk.Texture? cb_texture = await cb.ReadTextureAsync ();
 		if (cb_texture is null) {
-			ShowClipboardEmptyDialog (chrome);
+			await ShowClipboardEmptyDialog (chrome);
 			return;
 		}
 
@@ -199,11 +199,11 @@ internal sealed class PasteAction : IActionHandler
 		doc.History.PushNewItem (paste_action);
 	}
 
-	public static void ShowClipboardEmptyDialog (ChromeManager chrome)
+	public static Task ShowClipboardEmptyDialog (ChromeManager chrome)
 	{
 		var primary = Translations.GetString ("Image cannot be pasted");
 		var secondary = Translations.GetString ("The clipboard does not contain an image.");
-		chrome.ShowMessageDialog (chrome.MainWindow, primary, secondary);
+		return chrome.ShowMessageDialog (chrome.MainWindow, primary, secondary);
 	}
 
 	public static async Task<Gtk.ResponseType> ShowExpandCanvasDialog (ChromeManager chrome)

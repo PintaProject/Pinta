@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-22 01:36+0000\n"
+"POT-Creation-Date: 2024-10-13 01:37+0000\n"
 "PO-Revision-Date: 2023-01-15 08:04+0000\n"
 "Last-Translator: Jongwon Kim <nanpa777@hanmail.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -48,7 +48,7 @@ msgstr "7 x 7 영역"
 msgid "9 x 9 Region"
 msgstr "9 x 9 영역"
 
-#: ../Pinta/MainWindow.cs:357
+#: ../Pinta/MainWindow.cs:365
 msgid "A_dd-ins"
 msgstr ""
 
@@ -66,7 +66,7 @@ msgstr "Pinta에 대하여"
 msgid "Add New Layer"
 msgstr "신규 레이어 추가"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:24
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:25
 msgid "Add Noise"
 msgstr "잡티 섞기"
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Added"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:390
+#: ../Pinta/MainWindow.cs:398
 msgid "Adjustments"
 msgstr ""
 
@@ -86,13 +86,13 @@ msgstr ""
 msgid "After select"
 msgstr "색 고른 후"
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:65
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:390
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:289
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:106
 msgid "All files"
 msgstr "모든 파일"
@@ -101,11 +101,11 @@ msgstr "모든 파일"
 msgid "Alpha Gradient"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:109
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:149
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:58
-#: ../Pinta.Effects/Effects/TwistEffect.cs:142
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:143
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:110
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:59
+#: ../Pinta.Effects/Effects/TwistEffect.cs:143
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:144
 msgid "Amount"
 msgstr "총계"
 
@@ -113,19 +113,19 @@ msgstr "총계"
 msgid "Anchor:"
 msgstr "저자:"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:150
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:193
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:121
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:80
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:151
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:122
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:81
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:308
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:140
 msgid "Angle"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:145
+#: ../Pinta.Effects/Effects/TwistEffect.cs:146
 msgid "Antialias"
 msgstr ""
 
@@ -141,9 +141,9 @@ msgstr "안티알리아싱 설정"
 msgid "Arrow"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:36
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:33
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:37
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:28
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:34
 msgid "Artistic"
 msgstr "미술품 흉내내기"
 
@@ -164,20 +164,20 @@ msgstr "자동으로 잘라내기"
 msgid "Auto Level"
 msgstr "자동 색보정"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:212
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:215
 #, csharp-format
 msgid "Available in repository: {0}"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:119
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:137
 msgid "Background"
 msgstr "배경색"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:112
+#: ../Pinta/Dialogs/NewImageDialog.cs:113
 msgid "Background Color"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:307
+#: ../Pinta/Dialogs/NewImageDialog.cs:309
 msgid "Background:"
 msgstr ""
 
@@ -213,16 +213,16 @@ msgstr ""
 msgid "Blue"
 msgstr "파랑"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:93
 msgid "Blue "
 msgstr "파랑 "
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:33
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:28
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:33
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:27
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:29
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:34
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:29
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:34
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:28
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:30
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:28
 msgid "Blurs"
 msgstr "흐릿하게 만들기"
 
@@ -235,28 +235,28 @@ msgstr "굵게"
 msgid "Bonfire"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:45
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:44
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:46
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
-#: ../Pinta.Effects/Effects/GlowEffect.cs:79
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:144
+#: ../Pinta.Effects/Effects/GlowEffect.cs:80
 msgid "Brightness"
 msgstr "밝기"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
 msgstr "밝기 / 대비"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:130
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:131
 msgid "Brush Size"
 msgstr "붓 크기"
 
@@ -265,7 +265,7 @@ msgstr "붓 크기"
 msgid "Brush width"
 msgstr "브러시 너비"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:23
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:24
 msgid "Bulge"
 msgstr "부풀리기"
 
@@ -287,10 +287,10 @@ msgstr "백분율 기준:"
 #: ../Pinta.Core/Actions/EditActions.cs:375
 #: ../Pinta.Core/Actions/EditActions.cs:418
 #: ../Pinta.Core/Actions/LayerActions.cs:188
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:249
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:90
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr ""
 
@@ -298,11 +298,11 @@ msgstr ""
 msgid "Canvas"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:115
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:126
 msgid "Cell Size"
 msgstr "셀 크기"
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:42
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
 msgstr ""
 
@@ -310,19 +310,19 @@ msgstr ""
 msgid "Center Align"
 msgstr "가운데 정렬"
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:41
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:184
+#: ../Pinta.Effects/Effects/WarpEffect.cs:185
 msgid "Center Offset"
 msgstr "중앙 오프셋"
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:43
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:127
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:128
 msgid "Centered"
 msgstr ""
 
@@ -359,7 +359,7 @@ msgstr "보조색 선택"
 msgid "Circles"
 msgstr "동그라미"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:20
+#: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Clamp"
 msgstr ""
 
@@ -409,10 +409,10 @@ msgstr "보조색을 선택하려면 클릭"
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:417
-#: ../Pinta/Dialogs/NewImageDialog.cs:439
-#: ../Pinta/Dialogs/NewImageDialog.cs:532
+#: ../Pinta/Dialogs/NewImageDialog.cs:360
+#: ../Pinta/Dialogs/NewImageDialog.cs:419
+#: ../Pinta/Dialogs/NewImageDialog.cs:441
+#: ../Pinta/Dialogs/NewImageDialog.cs:534
 msgid "Clipboard"
 msgstr ""
 
@@ -437,16 +437,16 @@ msgstr ""
 msgid "Closed Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:31
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:32
 msgid "Clouds"
 msgstr "구름"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:133
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:134
 msgid "Coarseness"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:14
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:15
 msgid "Color"
 msgstr ""
 
@@ -470,32 +470,32 @@ msgstr ""
 msgid "Color Picker"
 msgstr "색 고르기"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:87
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:88
 msgid "Color Range"
 msgstr "색 범위"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:171
 msgid "Color Saturation"
 msgstr "채도"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:186
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:191
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:192
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
 msgid "Color Scheme"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:188
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:189
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
 msgid "Color Scheme Source"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:212
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:213
 msgid "Color Sorting"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:154
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:155
 msgid "Coloring"
 msgstr ""
 
@@ -511,8 +511,8 @@ msgstr "내용"
 msgid "Contiguous"
 msgstr "내부"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:154
-#: ../Pinta.Effects/Effects/GlowEffect.cs:82
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:155
+#: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "대비"
 
@@ -540,13 +540,13 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
 
 #: ../Pinta.Core/Classes/Palette.cs:191
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:402
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:410
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:421
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:433
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "열 수 없는 파일 : {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:174
 msgid "Coverage"
 msgstr ""
 
@@ -555,15 +555,15 @@ msgstr ""
 msgid "Crop to Selection"
 msgstr "선택영역 잘라내기"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:26
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:138
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:136
 msgid "Curves"
 msgstr "커브"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:417
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:532
+#: ../Pinta/Dialogs/NewImageDialog.cs:362
+#: ../Pinta/Dialogs/NewImageDialog.cs:419
+#: ../Pinta/Dialogs/NewImageDialog.cs:443
+#: ../Pinta/Dialogs/NewImageDialog.cs:534
 msgid "Custom"
 msgstr ""
 
@@ -612,7 +612,7 @@ msgstr "선택해제"
 msgid "Deselect All"
 msgstr "전체 선택해제"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:61
+#: ../Pinta/Dialogs/ErrorDialog.cs:66
 msgid "Details"
 msgstr ""
 
@@ -620,26 +620,26 @@ msgstr ""
 msgid "Difference"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:122
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:124
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:123
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:125
 msgid "Distance"
 msgstr "거리"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:202
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:203
 msgid "Distance Metric"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:27
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:28
 #: ../Pinta.Effects/Effects/DentsEffect.cs:51
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:29
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:28
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:30
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:28
-#: ../Pinta.Effects/Effects/TileEffect.cs:27
-#: ../Pinta.Effects/Effects/TwistEffect.cs:28
+#: ../Pinta.Effects/Effects/TileEffect.cs:28
+#: ../Pinta.Effects/Effects/TwistEffect.cs:29
 msgid "Distort"
 msgstr "뒤틀어놓기"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:11
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:12
 msgid "Dithering"
 msgstr ""
 
@@ -647,7 +647,7 @@ msgstr ""
 msgid "Do not switch tool"
 msgstr "계속 색 고르기"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:206
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
 #, csharp-format
 msgid "Download size: {0}"
 msgstr ""
@@ -665,15 +665,15 @@ msgstr "쉽게 이미지를 생성하고 편집하세요."
 msgid "Edge Behavior"
 msgstr "경계선 처리"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:26
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
 msgid "Edge Detect"
 msgstr "테두리만 강조"
 
-#: ../Pinta/MainWindow.cs:353
+#: ../Pinta/MainWindow.cs:361
 msgid "Effe_cts"
 msgstr "효과(_C)"
 
-#: ../Pinta/MainWindow.cs:384
+#: ../Pinta/MainWindow.cs:392
 msgid "Effects"
 msgstr ""
 
@@ -692,7 +692,7 @@ msgstr "타원"
 msgid "Ellipse Select"
 msgstr "타원 선택"
 
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:26
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:27
 msgid "Emboss"
 msgstr "돋을새김"
 
@@ -713,7 +713,7 @@ msgstr "지우개"
 msgid "Error"
 msgstr "오류"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:133
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:134
 msgid "Error Diffusion Method"
 msgstr ""
 
@@ -726,12 +726,12 @@ msgstr "빼기(-) (오른쪽 클릭)"
 msgid "Expand"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:281
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:286
 msgid "Extension packages"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:173
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Factor"
 msgstr ""
 
@@ -739,7 +739,7 @@ msgstr ""
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:277
+#: ../Pinta/MainWindow.cs:278
 msgid "Failed to initialize add-in"
 msgstr ""
 
@@ -747,11 +747,11 @@ msgstr ""
 msgid "Failed to load extension package"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:428
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:453
 msgid "Failed to open image"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:236
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
 msgid "Failed to save image"
 msgstr ""
 
@@ -760,7 +760,7 @@ msgstr ""
 msgid "Failed to take screenshot"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:169
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:173
 msgid "Feather Canvas Edge"
 msgstr ""
 
@@ -815,11 +815,11 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 #: ../Pinta.Core/Actions/ImageActions.cs:163
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:159
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
 msgid "Flatten"
 msgstr "편평하게"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:155
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:161
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr ""
 
@@ -867,11 +867,11 @@ msgstr ""
 msgid "Font"
 msgstr "글꼴"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:27
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:28
 msgid "Fragment"
 msgstr "조각흔들기"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:119
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:120
 msgid "Fragments"
 msgstr "조각화"
 
@@ -879,7 +879,7 @@ msgstr "조각화"
 msgid "Freeform Shape"
 msgstr "자유도형 그리기"
 
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:23
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:24
 msgid "Frosted Glass"
 msgstr "젖빛 유리 씌우기"
 
@@ -887,11 +887,11 @@ msgstr "젖빛 유리 씌우기"
 msgid "Fullscreen"
 msgstr "전체화면"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:84
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:89
 msgid "Gallery"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
 msgstr "가우스 곡선식 흐리기"
 
@@ -899,7 +899,7 @@ msgstr "가우스 곡선식 흐리기"
 msgid "Global"
 msgstr "전체"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:26
+#: ../Pinta.Effects/Effects/GlowEffect.cs:27
 msgid "Glow"
 msgstr "발광 효과"
 
@@ -908,7 +908,7 @@ msgstr "발광 효과"
 msgid "Gradient"
 msgstr "그라디언트"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:94
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:92
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
 msgid "Green"
@@ -922,7 +922,7 @@ msgstr "모눈"
 msgid "Hard Light"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:333
+#: ../Pinta/Dialogs/NewImageDialog.cs:335
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:81
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:164
 msgid "Height:"
@@ -932,40 +932,40 @@ msgstr "높이:"
 msgid "Hide Layer"
 msgstr "레이어 숨기기"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "힌트: 최상의 결과를 얻으려면 먼저 선택 도구를 사용하여 각 눈을 선택하세요."
 
-#: ../Pinta/Pads/HistoryPad.cs:40 ../Pinta/Pads/HistoryPad.cs:49
+#: ../Pinta/Pads/HistoryPad.cs:48 ../Pinta/Pads/HistoryPad.cs:57
 msgid "History"
 msgstr "작업 기록"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
 msgid "Horizontal blue (B)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:242
 msgid "Horizontal green (G)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:245
 msgid "Horizontal red (R)"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:60
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 msgid "Hue"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
 msgstr "색조 / 채도"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO 파일은 255 x 255 픽셀보다 클 수 없습니다."
 
@@ -973,7 +973,7 @@ msgstr "ICO 파일은 255 x 255 픽셀보다 클 수 없습니다."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "저장하지 않으면, 모든 변경 사항을 잃어버립니다"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:396
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:404
 msgid "Image"
 msgstr "이미지"
 
@@ -998,7 +998,7 @@ msgstr "이미지 파일"
 msgid "Image larger than canvas"
 msgstr "캔버스보다 큰 이미지"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:230
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
 msgid "Image too large"
 msgstr "너무 큰 이미지"
 
@@ -1014,11 +1014,11 @@ msgstr "파일에서 가져오기..."
 msgid "Inches"
 msgstr "인치"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:151
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:152
 msgid "Ink Outline"
 msgstr "잉크 외곽선"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:32
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
 msgstr "먹으로 밑그림 그린 효과"
 
@@ -1035,25 +1035,25 @@ msgstr "입력 히스토그램"
 msgid "Install"
 msgstr "설치"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:245
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:250
 msgid "Install Extension Package"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:108
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:113
 msgid "Install from file..."
 msgstr "파일에서 설치..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:150
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:153
 msgid "Install..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:85
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:90
 msgid "Installed"
 msgstr "설치된 항목"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:180
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:168
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:140
+#: ../Pinta.Effects/Effects/TileEffect.cs:181
 msgid "Intensity"
 msgstr ""
 
@@ -1064,7 +1064,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:212
 msgid "Invert Colors"
 msgstr "색 반전"
 
@@ -1086,11 +1086,11 @@ msgstr "JPEG 화질"
 msgid "Jarvis-Judice-Ninke"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
 msgid "Julia Fractal"
 msgstr "줄리아 프랙탈"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:300
+#: ../Pinta/Dialogs/NewImageDialog.cs:302
 msgid "Landscape"
 msgstr ""
 
@@ -1129,7 +1129,7 @@ msgstr "보이는 레이어"
 msgid "Layer {0}"
 msgstr ""
 
-#: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:53
+#: ../Pinta/Pads/LayersPad.cs:48 ../Pinta/Pads/LayersPad.cs:61
 msgid "Layers"
 msgstr "레이어"
 
@@ -1247,7 +1247,7 @@ msgstr ""
 msgid "Length"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:22
+#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
 msgstr "레벨"
 
@@ -1268,11 +1268,11 @@ msgstr ""
 msgid "Lighten"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:117
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:118
 msgid "Lighting"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:66
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Lightness"
 msgstr "명도"
 
@@ -1302,7 +1302,7 @@ msgid "Linked"
 msgstr "연결됨"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:178
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:175
 msgid "Luminosity"
 msgstr "밝기"
 
@@ -1310,7 +1310,7 @@ msgstr "밝기"
 msgid "Magic Wand Select"
 msgstr "요술봉 선택"
 
-#: ../Pinta/MainWindow.cs:378
+#: ../Pinta/MainWindow.cs:386
 msgid "Main Menu"
 msgstr ""
 
@@ -1319,11 +1319,11 @@ msgstr ""
 msgid "Maintain aspect ratio"
 msgstr "비율 유지"
 
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
 msgid "Mandelbrot Fractal"
 msgstr "만델브로트의 프랙탈"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:26
+#: ../Pinta.Effects/Effects/MedianEffect.cs:27
 msgid "Median"
 msgstr "뭉개기"
 
@@ -1340,11 +1340,11 @@ msgstr ""
 msgid "Modified"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:142
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:145
 msgid "More Information..."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 msgid "Motion Blur"
 msgstr "움직임 효과"
 
@@ -1382,8 +1382,8 @@ msgstr ""
 msgid "New"
 msgstr "새 파일"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:127
-#: ../Pinta/Dialogs/NewImageDialog.cs:196
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:145
+#: ../Pinta/Dialogs/NewImageDialog.cs:197
 msgid "New Image"
 msgstr "새 그림"
 
@@ -1399,18 +1399,18 @@ msgstr "새 팔렛트 크기:"
 msgid "New..."
 msgstr "새로 만듦..."
 
-#: ../Pinta.Gui.Addins/AddinListView.cs:58
+#: ../Pinta.Gui.Addins/AddinListView.cs:57
 msgid "No Items Found"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
-#: ../Pinta.Effects/Effects/MedianEffect.cs:30
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:30
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
+#: ../Pinta.Effects/Effects/MedianEffect.cs:31
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:31
 msgid "Noise"
 msgstr "노이즈"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
-#: ../Pinta.Tools/Brushes/PlainBrush.cs:35
+#: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Normal"
 msgstr "보통"
@@ -1427,7 +1427,7 @@ msgstr ""
 msgid "Normal and Outline"
 msgstr "보통 과 외곽선"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:206
 msgid "Number of Cells"
 msgstr ""
 
@@ -1435,16 +1435,16 @@ msgstr ""
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:112
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:132
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:146
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:113
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:174
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:133
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:147
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
 msgstr ""
@@ -1455,7 +1455,7 @@ msgstr ""
 msgid "Offset Selection"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:23
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:24
 msgid "Oil Painting"
 msgstr "유화효과"
 
@@ -1466,7 +1466,7 @@ msgstr "투명도:"
 #: ../Pinta.Core/Actions/EditActions.cs:374
 #: ../Pinta.Core/Actions/FileActions.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:187
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:248
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "열기"
@@ -1475,7 +1475,7 @@ msgstr "열기"
 msgid "Open Curve Shape"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:314
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:329
 msgid "Open Image"
 msgstr "이미지 열기"
 
@@ -1497,11 +1497,11 @@ msgstr "팔렛트 파일 열기"
 msgid "Open..."
 msgstr "열기"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:316
+#: ../Pinta/Dialogs/NewImageDialog.cs:318
 msgid "Orientation:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:38
+#: ../Pinta.Effects/Effects/WarpEffect.cs:39
 msgid "Original"
 msgstr ""
 
@@ -1513,7 +1513,7 @@ msgstr "윤곽선"
 msgid "Outline Border"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:26
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:27
 msgid "Outline Edge"
 msgstr ""
 
@@ -1555,7 +1555,7 @@ msgid "Paintbrush"
 msgstr "붓"
 
 #: ../Pinta.Core/Actions/EditActions.cs:157
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:136
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:137
 msgid "Palette"
 msgstr "팔렛트"
 
@@ -1587,28 +1587,28 @@ msgstr "새 레이어로 붙여넣기"
 msgid "Pencil"
 msgstr "연필"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:29
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:30
 msgid "Pencil Sketch"
 msgstr "연필 밑그림 효과"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:84
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:85
 msgid "Pencil Tip Size"
 msgstr "연필심 크기"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:65
+#: ../Pinta.Effects/Effects/MedianEffect.cs:66
 msgid "Percentile"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:30
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:27
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:52
+#: ../Pinta.Effects/Effects/GlowEffect.cs:31
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:28
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:53
 msgid "Photo"
 msgstr "사진"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:57
 msgid "Pinta"
 msgstr ""
 
@@ -1628,7 +1628,7 @@ msgstr ""
 msgid "Pinta Website"
 msgstr "Pinta 웹사이트"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:219
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta는 해당 형식의 이미지 파일을 지원하지 않습니다."
 
@@ -1641,7 +1641,7 @@ msgid ""
 "help organize your creativity."
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:411
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:434
 msgid "Pinta supports the following file formats:"
 msgstr ""
 
@@ -1653,7 +1653,7 @@ msgstr ""
 msgid "Pixel Grid"
 msgstr "픽셀 안내선"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:23
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:24
 msgid "Pixelate"
 msgstr "그림낱 강조"
 
@@ -1679,20 +1679,20 @@ msgstr ""
 msgid "Polar Inversion"
 msgstr "구의 꼭지점 향해 객체 반복해서 넣기"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:296
+#: ../Pinta/Dialogs/NewImageDialog.cs:298
 msgid "Portrait"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:128
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:135
 msgid "Position"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:24
+#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
 msgid "Posterize"
 msgstr "포스터화"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:161
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:162
 msgid "Power"
 msgstr ""
 
@@ -1705,15 +1705,15 @@ msgstr ""
 msgid "Preset Gradient"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:341
+#: ../Pinta/Dialogs/NewImageDialog.cs:343
 msgid "Preset:"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:160
+#: ../Pinta/Dialogs/NewImageDialog.cs:161
 msgid "Preview"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:29
+#: ../Pinta.Effects/Effects/WarpEffect.cs:30
 msgid "Primary"
 msgstr ""
 
@@ -1721,10 +1721,10 @@ msgstr ""
 msgid "Print"
 msgstr "출력"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:190
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:176
-#: ../Pinta.Effects/Effects/WarpEffect.cs:181
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:176
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
+#: ../Pinta.Effects/Effects/WarpEffect.cs:182
 msgid "Quality"
 msgstr ""
 
@@ -1736,11 +1736,11 @@ msgstr "화질: "
 msgid "Quit"
 msgstr "종료"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:174
 msgid "RGB"
 msgstr "적녹청"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:23
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:24
 msgid "Radial Blur"
 msgstr "방사형 흐리기"
 
@@ -1748,45 +1748,45 @@ msgstr "방사형 흐리기"
 msgid "Radial Gradient"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:163
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:246
-#: ../Pinta.Effects/Effects/GlowEffect.cs:76
-#: ../Pinta.Effects/Effects/MedianEffect.cs:62
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:167
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
+#: ../Pinta.Effects/Effects/GlowEffect.cs:77
+#: ../Pinta.Effects/Effects/MedianEffect.cs:63
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:89
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:94
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:95
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:92
 msgid "Radius"
 msgstr "둥글림 정도"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:116
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:136
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:117
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:235
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
 msgid "Random"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:194
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:195
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
 msgid "Random Color Scheme Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:219
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:220
 msgid "Random Colors"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:185
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:152
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:177
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:186
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
 msgid "Random Noise"
 msgstr "잡티 마구섞기"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:222
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:223
 msgid "Random Point Locations"
 msgstr ""
 
@@ -1807,11 +1807,11 @@ msgstr "사각형 선택"
 msgid "Red"
 msgstr "빨강"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:93
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:91
 msgid "Red  "
 msgstr "빨강  "
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:23
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:24
 msgid "Red Eye Removal"
 msgstr "적목현상 제거"
 
@@ -1819,15 +1819,15 @@ msgstr "적목현상 제거"
 msgid "Redo"
 msgstr "재실행"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
 msgid "Reduce Noise"
 msgstr "노이즈 감소"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:26
+#: ../Pinta.Effects/Effects/WarpEffect.cs:27
 msgid "Reflect"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:100
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:105
 msgid "Refresh"
 msgstr "새로 고침"
 
@@ -1835,7 +1835,7 @@ msgstr "새로 고침"
 msgid "Released under the MIT X11 License."
 msgstr "MIT X11 사용허가 하에 배포됐습니다."
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:40
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:41
 msgid "Relief"
 msgstr "돋을새김"
 
@@ -1843,14 +1843,14 @@ msgstr "돋을새김"
 msgid "Rename Layer"
 msgstr "레이어 이름변경"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:37
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:38
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:28
 msgid "Render"
 msgstr "덧씌우기"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:204
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:195
 msgid "Rendering Effect"
 msgstr ""
 
@@ -1858,7 +1858,7 @@ msgstr ""
 msgid "Replace"
 msgstr ""
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:67
+#: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr ""
 
@@ -1870,7 +1870,7 @@ msgstr ""
 msgid "Reseed"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:197
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:209
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:241
 msgid "Reset"
 msgstr "초기화"
@@ -1879,7 +1879,7 @@ msgstr "초기화"
 msgid "Reset to Default"
 msgstr "기본값으로 재설정"
 
-#: ../Pinta.Core/Classes/Document.cs:310
+#: ../Pinta.Core/Classes/Document.cs:307
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
 msgid "Resize Canvas"
 msgstr "캔버스 크기 변경"
@@ -1901,14 +1901,14 @@ msgstr "이미지 크기조정..."
 msgid "Resize Palette"
 msgstr "팔렛트 크기 조정"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:197
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:198
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
 msgid "Reverse Color Scheme"
 msgstr ""
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:216
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
 msgid "Reverse Color Sorting"
 msgstr ""
 
@@ -1940,8 +1940,8 @@ msgstr "시계방향으로  90° 회전"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "반시계 방향으로   90° 회전"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:125
-#: ../Pinta.Effects/Effects/TileEffect.cs:174
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:126
+#: ../Pinta.Effects/Effects/TileEffect.cs:175
 msgid "Rotation"
 msgstr "회전"
 
@@ -1970,17 +1970,17 @@ msgid "Sampling"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:63
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:56
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
 msgid "Saturation Percentage"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:417
 #: ../Pinta.Core/Actions/FileActions.cs:55
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:89
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
 msgstr "저장"
 
@@ -1993,7 +1993,7 @@ msgstr "모두 저장"
 msgid "Save As..."
 msgstr "다른 이름으로 저장..."
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:86
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:92
 msgid "Save Image File"
 msgstr "이미지 파일 저장"
 
@@ -2006,7 +2006,7 @@ msgstr "팔렛트 파일 저장"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:158
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:159
 msgid "Scale"
 msgstr ""
 
@@ -2014,7 +2014,7 @@ msgstr ""
 msgid "Screen"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:32
+#: ../Pinta.Effects/Effects/WarpEffect.cs:33
 msgid "Secondary"
 msgstr ""
 
@@ -2039,7 +2039,7 @@ msgstr "색상 수 설정"
 msgid "Shape Type"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:23
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
 msgstr "선명하게"
 
@@ -2053,7 +2053,7 @@ msgid "Show Layer"
 msgstr "레이어 보이기"
 
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:209
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Show Points"
 msgstr ""
 
@@ -2087,11 +2087,11 @@ msgstr ""
 msgid "Soft Light"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:54
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:55
 msgid "Soften Portrait"
 msgstr "보드랍게 만들기"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:114
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:115
 msgid "Softness"
 msgstr "부드러움"
 
@@ -2107,8 +2107,8 @@ msgstr "사각형"
 msgid "Status Bar"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:141
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:93
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
 msgstr ""
 
@@ -2117,10 +2117,10 @@ msgstr ""
 msgid "Stucki"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:32
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:32
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:30
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:33
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:33
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:31
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:34
 msgid "Stylize"
 msgstr "테두리 효과"
 
@@ -2208,29 +2208,29 @@ msgid ""
 "will also be uninstalled:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:137
 msgid "Thickness"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:154
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:160
 msgid "This format does not support layers. Flatten image?"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:23
+#: ../Pinta.Effects/Effects/TileEffect.cs:24
 msgid "Tile Reflection"
 msgstr "매끄러운 타일에 반사효과"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:177
+#: ../Pinta.Effects/Effects/TileEffect.cs:178
 msgid "Tile Size"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:99
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:97
 msgid "Tip: Right-click to remove control points."
 msgstr "도움말: 오른쪽 딸깍으로 조정점을 지울 수 있습니다."
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:166
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:170
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:207
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:52
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:53
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
 #: ../Pinta.Tools/Tools/RecolorTool.cs:197
 msgid "Tolerance"
@@ -2244,7 +2244,7 @@ msgstr "도구"
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:371
+#: ../Pinta/MainWindow.cs:379
 msgid "Tool Windows"
 msgstr "도구 창"
 
@@ -2252,19 +2252,19 @@ msgstr "도구 창"
 msgid "Toolbar"
 msgstr "도구 모음"
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:39
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:38
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:40
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:107
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
 msgstr "보정대상 기준"
 
@@ -2276,8 +2276,8 @@ msgstr "현재 어플리케이션 번역하기"
 msgid "Transparency Mode"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:35
-#: ../Pinta/Dialogs/NewImageDialog.cs:120
+#: ../Pinta.Effects/Effects/WarpEffect.cs:36
+#: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr ""
 
@@ -2285,7 +2285,7 @@ msgstr ""
 msgid "Turbulence"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:24
+#: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
 msgstr "비틀기"
 
@@ -2307,7 +2307,7 @@ msgstr "밑줄"
 msgid "Undo"
 msgstr "실행취소"
 
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:25
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:26
 msgid "Unfocus"
 msgstr "초점 없애기"
 
@@ -2316,7 +2316,7 @@ msgstr "초점 없애기"
 msgid "Uninstall"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:168
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:171
 msgid "Uninstall..."
 msgstr ""
 
@@ -2326,12 +2326,12 @@ msgstr ""
 msgid "Union (+) ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:218
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:230
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "저장되지 않은 이미지 {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:309
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:324
 msgid "Unsupported file format"
 msgstr "지원하지 않는 파일 형식"
 
@@ -2339,15 +2339,15 @@ msgstr "지원하지 않는 파일 형식"
 msgid "Unsupported palette format"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:159
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:162
 msgid "Update..."
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:86
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:91
 msgid "Updates"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2357,28 +2357,28 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "일부 아이콘의 출처 :"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:199
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:202
 #, csharp-format
 msgid "Version: {0}"
 msgstr ""
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:248
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
 msgid "Vertical blue (B)"
 msgstr ""
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:251
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:252
 msgid "Vertical green (G)"
 msgstr ""
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:254
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:255
 msgid "Vertical red (R)"
 msgstr ""
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:49
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
 msgstr ""
 
@@ -2386,19 +2386,19 @@ msgstr ""
 msgid "Visible"
 msgstr "표시"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:21
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Voronoi Diagram"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:121
 msgid "Warmth"
 msgstr "따뜻함"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:105
+#: ../Pinta/Dialogs/NewImageDialog.cs:106
 msgid "White"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:325
+#: ../Pinta/Dialogs/NewImageDialog.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:73
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:157
 msgid "Width:"
@@ -2411,7 +2411,7 @@ msgstr "너비:"
 msgid "Window"
 msgstr "창"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:23
+#: ../Pinta.Effects/Effects/WarpEffect.cs:24
 msgid "Wrap"
 msgstr ""
 
@@ -2426,26 +2426,26 @@ msgid "Xor ({0} + Right Click)"
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:456
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:193
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:179
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:146
 msgid "Zoom"
 msgstr "확대"
 
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:23
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:24
 msgid "Zoom Blur"
 msgstr "확대해 흐리기"
 
@@ -2461,7 +2461,7 @@ msgstr "축소"
 msgid "Zoom to Selection"
 msgstr "선택영역 확대"
 
-#: ../Pinta/MainWindow.cs:349
+#: ../Pinta/MainWindow.cs:357
 msgid "_Adjustments"
 msgstr "조정(_A)"
 
@@ -2469,7 +2469,7 @@ msgstr "조정(_A)"
 #: ../Pinta.Core/Extensions/GtkExtensions.cs:230
 #: ../Pinta/Actions/Edit/PasteAction.cs:219
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:158
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
 #: ../Pinta/Dialogs/ProgressDialog.cs:56
 msgid "_Cancel"
 msgstr ""
@@ -2478,30 +2478,30 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:340
 msgid "_Edit"
 msgstr "편집(_E)"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:336
 msgid "_File"
 msgstr "자료 (_F)"
 
-#: ../Pinta/MainWindow.cs:365
+#: ../Pinta/MainWindow.cs:373
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: ../Pinta/MainWindow.cs:341
+#: ../Pinta/MainWindow.cs:349
 msgid "_Image"
 msgstr "이미지(_I)"
 
-#: ../Pinta/MainWindow.cs:345
+#: ../Pinta/MainWindow.cs:353
 msgid "_Layers"
 msgstr "레이어(_L)"
 
 #: ../Pinta.Core/Extensions/GtkExtensions.cs:227
 #: ../Pinta.Core/Extensions/GtkExtensions.cs:231
-#: ../Pinta.Gui.Addins/InstallDialog.cs:193 ../Pinta/Dialogs/ErrorDialog.cs:41
-#: ../Pinta/Dialogs/ErrorDialog.cs:69
+#: ../Pinta.Gui.Addins/InstallDialog.cs:193 ../Pinta/Dialogs/ErrorDialog.cs:44
+#: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
 msgstr ""
 
@@ -2509,11 +2509,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:344
 msgid "_View"
 msgstr "보기(_V)"
 
-#: ../Pinta/MainWindow.cs:361
+#: ../Pinta/MainWindow.cs:369
 msgid "_Window"
 msgstr "창(_W)"
 
@@ -2525,7 +2525,7 @@ msgstr "Pinta 기여자"
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:277
+#: ../Pinta/Dialogs/NewImageDialog.cs:279
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:96
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:68

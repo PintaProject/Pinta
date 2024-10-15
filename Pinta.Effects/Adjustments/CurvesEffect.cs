@@ -41,23 +41,19 @@ public sealed class CurvesEffect : BaseEffect
 		EffectData = new CurvesData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
+	public override async Task<bool> LaunchConfiguration ()
 	{
-		TaskCompletionSource<bool> completionSource = new ();
-
+		// TODO: Delegate `EffectData` changes to event handlers or similar
 		CurvesDialog dialog = new (chrome, Data) {
 			Title = Name,
 			IconName = Icon,
 		};
 
-		dialog.OnResponse += (_, args) => {
-			completionSource.SetResult (Gtk.ResponseType.Ok == (Gtk.ResponseType) args.ResponseId);
-			dialog.Destroy ();
-		};
+		Gtk.ResponseType response = await dialog.RunAsync ();
 
-		dialog.Present ();
+		dialog.Destroy ();
 
-		return completionSource.Task;
+		return Gtk.ResponseType.Ok == response;
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Cairo;
 
@@ -52,7 +53,7 @@ public sealed class PaletteManager : IPaletteService
 	private const string SECONDARY_COLOR_SETTINGS_KEY = "secondary-color";
 	private const string RECENT_COLORS_SETTINGS_KEY = "recently-used-colors";
 
-	private readonly List<Color> recently_used = new (MAX_RECENT_COLORS);
+	private readonly List<Color> recently_used;
 
 	public Color PrimaryColor {
 		get => primary;
@@ -61,8 +62,7 @@ public sealed class PaletteManager : IPaletteService
 
 	public int MaxRecentlyUsedColor => MAX_RECENT_COLORS;
 
-	// Return an IEnumerable to prevent modification of the list
-	public IEnumerable<Color> RecentlyUsedColors => recently_used;
+	public ReadOnlyCollection<Color> RecentlyUsedColors { get; }
 
 	public Color SecondaryColor {
 		get => secondary;
@@ -77,13 +77,18 @@ public sealed class PaletteManager : IPaletteService
 		SettingsManager settingsManager,
 		PaletteFormatManager paletteFormatManager)
 	{
+		List<Color> recentlyUsed = new (MAX_RECENT_COLORS);
+
+		recently_used = recentlyUsed;
+		RecentlyUsedColors = new ReadOnlyCollection<Color> (recentlyUsed);
+
 		settings_manager = settingsManager;
 		palette_format_manager = paletteFormatManager;
 
 		PopulateSavedPalette (paletteFormatManager);
 		PopulateRecentlyUsedColors ();
 
-		settingsManager.SaveSettingsBeforeQuit += (o, e) => {
+		settingsManager.SaveSettingsBeforeQuit += (_, _) => {
 			SaveCurrentPalette ();
 			SaveRecentlyUsedColors ();
 		};
@@ -154,22 +159,29 @@ public sealed class PaletteManager : IPaletteService
 	private void PopulateRecentlyUsedColors ()
 	{
 		// Primary / Secondary colors
-		var primary_color = settings_manager.GetSetting (PRIMARY_COLOR_SETTINGS_KEY, ColorBgra.Black.ToHexString ());
-		var secondary_color = settings_manager.GetSetting (SECONDARY_COLOR_SETTINGS_KEY, ColorBgra.White.ToHexString ());
+		string primary_color = settings_manager.GetSetting (PRIMARY_COLOR_SETTINGS_KEY, ColorBgra.Black.ToHexString ());
+		string secondary_color = settings_manager.GetSetting (SECONDARY_COLOR_SETTINGS_KEY, ColorBgra.White.ToHexString ());
 
-		SetColor (true, ColorBgra.TryParseHexString (primary_color, out var primary) ? primary.ToCairoColor () : new Color (0, 0, 0), false);
-		SetColor (false, ColorBgra.TryParseHexString (secondary_color, out var secondary) ? secondary.ToCairoColor () : new Color (1, 0, 0), false);
+		SetColor (
+			true,
+			ColorBgra.TryParseHexString (primary_color, out var primary) ? primary.ToCairoColor () : new Color (0, 0, 0),
+			false);
+
+		SetColor (
+			false,
+			ColorBgra.TryParseHexString (secondary_color, out var secondary) ? secondary.ToCairoColor () : new Color (1, 0, 0),
+			false);
 
 		// Recently used palette
-		var saved_colors = settings_manager.GetSetting (RECENT_COLORS_SETTINGS_KEY, string.Empty);
+		string saved_colors = settings_manager.GetSetting (RECENT_COLORS_SETTINGS_KEY, string.Empty);
 
-		foreach (var hex_color in saved_colors.Split (',')) {
+		foreach (string hex_color in saved_colors.Split (',')) {
 			if (ColorBgra.TryParseHexString (hex_color, out var color))
 				recently_used.Add (color.ToCairoColor ());
 		}
 
 		// Fill in with default color if not enough saved
-		var more_colors = MAX_RECENT_COLORS - recently_used.Count;
+		int more_colors = MAX_RECENT_COLORS - recently_used.Count;
 
 		if (more_colors > 0)
 			recently_used.AddRange (Enumerable.Repeat (new Color (.9, .9, .9), more_colors));
@@ -177,7 +189,7 @@ public sealed class PaletteManager : IPaletteService
 
 	private void SaveCurrentPalette ()
 	{
-		var palette_file = System.IO.Path.Combine (settings_manager.GetUserSettingsDirectory (), PALETTE_FILE);
+		string palette_file = System.IO.Path.Combine (settings_manager.GetUserSettingsDirectory (), PALETTE_FILE);
 		var palette_saver = palette_format_manager.Formats.FirstOrDefault (p => p.Extensions.Contains ("txt"))?.Saver;
 		if (palette_saver is not null)
 			CurrentPalette.Save (Gio.FileHelper.NewForPath (palette_file), palette_saver);
@@ -190,7 +202,7 @@ public sealed class PaletteManager : IPaletteService
 		settings_manager.PutSetting (SECONDARY_COLOR_SETTINGS_KEY, SecondaryColor.ToColorBgra ().ToHexString ());
 
 		// Recently used palette
-		var colors = string.Join (",", recently_used.Select (c => c.ToColorBgra ().ToHexString ()));
+		string colors = string.Join (",", recently_used.Select (c => c.ToColorBgra ().ToHexString ()));
 		settings_manager.PutSetting (RECENT_COLORS_SETTINGS_KEY, colors);
 	}
 

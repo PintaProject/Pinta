@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-22 01:36+0000\n"
+"POT-Creation-Date: 2024-10-13 01:37+0000\n"
 "PO-Revision-Date: 2024-06-03 15:09+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
@@ -48,7 +48,7 @@ msgstr "περιοχή 7 x 7"
 msgid "9 x 9 Region"
 msgstr "περιοχή 9 x 9"
 
-#: ../Pinta/MainWindow.cs:357
+#: ../Pinta/MainWindow.cs:365
 msgid "A_dd-ins"
 msgstr "Πρόσθετα"
 
@@ -66,7 +66,7 @@ msgstr "Σχετικά με το Pinta"
 msgid "Add New Layer"
 msgstr "Προσθήκη νέου επιπέδου"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:24
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:25
 msgid "Add Noise"
 msgstr "Προσθήκη θορύβου"
 
@@ -78,7 +78,7 @@ msgstr "Διαχείριση προσθέτων..."
 msgid "Added"
 msgstr "Προστέθηκε"
 
-#: ../Pinta/MainWindow.cs:390
+#: ../Pinta/MainWindow.cs:398
 msgid "Adjustments"
 msgstr "Προσαρμογές"
 
@@ -86,13 +86,13 @@ msgstr "Προσαρμογές"
 msgid "After select"
 msgstr "Μετά την επιλογή"
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:65
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:390
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:289
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:106
 msgid "All files"
 msgstr "Όλα τα αρχεία"
@@ -101,11 +101,11 @@ msgstr "Όλα τα αρχεία"
 msgid "Alpha Gradient"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:109
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:149
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:58
-#: ../Pinta.Effects/Effects/TwistEffect.cs:142
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:143
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:110
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:59
+#: ../Pinta.Effects/Effects/TwistEffect.cs:143
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:144
 msgid "Amount"
 msgstr "Ποσότητα"
 
@@ -113,19 +113,19 @@ msgstr "Ποσότητα"
 msgid "Anchor:"
 msgstr "Αγκύρωση:"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:150
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:193
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:196
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:121
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:80
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:151
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:122
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:81
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:308
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:140
 msgid "Angle"
 msgstr "Γωνία"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:145
+#: ../Pinta.Effects/Effects/TwistEffect.cs:146
 msgid "Antialias"
 msgstr "Εξομάλυνση"
 
@@ -141,9 +141,9 @@ msgstr "Ενεργοποίηση εξομάλυνσης γραφικών"
 msgid "Arrow"
 msgstr "Βέλος"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:36
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:33
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:37
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:28
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:34
 msgid "Artistic"
 msgstr "Καλλιτεχνικό"
 
@@ -164,20 +164,20 @@ msgstr "Αυτόματη περικοπή"
 msgid "Auto Level"
 msgstr "Αυτόματο επίπεδο"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:212
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:215
 #, csharp-format
 msgid "Available in repository: {0}"
 msgstr "Διαθέσιμο στο αποθετήριο: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:119
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:137
 msgid "Background"
 msgstr "Παρασκήνιο"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:112
+#: ../Pinta/Dialogs/NewImageDialog.cs:113
 msgid "Background Color"
 msgstr "Χρώμα Φόντου"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:307
+#: ../Pinta/Dialogs/NewImageDialog.cs:309
 msgid "Background:"
 msgstr "Φόντο:"
 
@@ -213,16 +213,16 @@ msgstr "Λειτουργία ανάμιξης"
 msgid "Blue"
 msgstr "Μπλε"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:93
 msgid "Blue "
 msgstr "Μπλε "
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:33
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:28
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:33
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:27
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:29
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:34
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:29
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:34
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:28
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:30
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:28
 msgid "Blurs"
 msgstr "Θολώματα"
 
@@ -235,28 +235,28 @@ msgstr "Έντονα"
 msgid "Bonfire"
 msgstr "Φλόγα"
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:45
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:44
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:46
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:143
-#: ../Pinta.Effects/Effects/GlowEffect.cs:79
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:144
+#: ../Pinta.Effects/Effects/GlowEffect.cs:80
 msgid "Brightness"
 msgstr "Φωτεινότητα"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
 msgstr "Φωτεινότητα / αντίθεση"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:130
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:131
 msgid "Brush Size"
 msgstr "Μέγεθος πινέλου"
 
@@ -265,7 +265,7 @@ msgstr "Μέγεθος πινέλου"
 msgid "Brush width"
 msgstr "Πλάτος βούρτσας"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:23
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:24
 msgid "Bulge"
 msgstr "Διόγκωση"
 
@@ -287,10 +287,10 @@ msgstr "Σε ποσοστό:"
 #: ../Pinta.Core/Actions/EditActions.cs:375
 #: ../Pinta.Core/Actions/EditActions.cs:418
 #: ../Pinta.Core/Actions/LayerActions.cs:188
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:249
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:90
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Ακύρωση"
 
@@ -298,11 +298,11 @@ msgstr "Ακύρωση"
 msgid "Canvas"
 msgstr "Καμβάς"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:115
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:126
 msgid "Cell Size"
 msgstr "Μέγεθος κελιού"
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:42
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
 msgstr ""
 
@@ -310,19 +310,19 @@ msgstr ""
 msgid "Center Align"
 msgstr "Στοίχιση στο κέντρο"
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:41
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:184
+#: ../Pinta.Effects/Effects/WarpEffect.cs:185
 msgid "Center Offset"
 msgstr "Μετατόπιση κέντρου"
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:43
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:127
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:128
 msgid "Centered"
 msgstr "Στο κέντρο"
 
@@ -359,7 +359,7 @@ msgstr "Επιλογή δευτερεύοντος χρώματος"
 msgid "Circles"
 msgstr "Κύκλοι"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:20
+#: ../Pinta.Effects/Effects/WarpEffect.cs:21
 msgid "Clamp"
 msgstr "Σφιγκτήρας"
 
@@ -418,10 +418,10 @@ msgstr "Πατήστε για να επιλέξετε δευτερεύον χρ�
 msgid "Click to switch between primary and secondary color."
 msgstr "Κλικ για εναλλαγή μεταξύ κύριου και δευτερεύοντος χρώματος."
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:417
-#: ../Pinta/Dialogs/NewImageDialog.cs:439
-#: ../Pinta/Dialogs/NewImageDialog.cs:532
+#: ../Pinta/Dialogs/NewImageDialog.cs:360
+#: ../Pinta/Dialogs/NewImageDialog.cs:419
+#: ../Pinta/Dialogs/NewImageDialog.cs:441
+#: ../Pinta/Dialogs/NewImageDialog.cs:534
 msgid "Clipboard"
 msgstr "Πρόχειρο"
 
@@ -446,16 +446,16 @@ msgstr "Σχήμα κλειστής καμπύλης"
 msgid "Closed Line/Curve Series"
 msgstr "Κλείσιμο σειράς Γραμμής/Καμπύλης"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:31
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:32
 msgid "Clouds"
 msgstr "Σύννεφα"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:133
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:134
 msgid "Coarseness"
 msgstr "Τραχύτητα"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:14
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:15
 msgid "Color"
 msgstr "Χρώμα"
 
@@ -479,32 +479,32 @@ msgstr "Λειτουργεία χρώματος"
 msgid "Color Picker"
 msgstr "Επιλογέας χρώματος"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:87
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:88
 msgid "Color Range"
 msgstr "Εύρος χρώματος"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:171
 msgid "Color Saturation"
 msgstr "Κορεσμός χρώματος"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:186
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:191
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:184
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:202
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:192
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
 msgid "Color Scheme"
 msgstr "Συνδυασμός χρωμάτων"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:188
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:181
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:199
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:189
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
 msgid "Color Scheme Source"
 msgstr "Πηγή συνδυασμού χρωμάτων"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:212
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:213
 msgid "Color Sorting"
 msgstr "Κατανομή χρωμάτων"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:154
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:155
 msgid "Coloring"
 msgstr "Χρωματισμός"
 
@@ -520,8 +520,8 @@ msgstr "Περιεχόμενα"
 msgid "Contiguous"
 msgstr "Συνεχόμενη"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:154
-#: ../Pinta.Effects/Effects/GlowEffect.cs:82
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:155
+#: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Αντίθεση"
 
@@ -549,13 +549,13 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Δεν ήταν δυνατή η εισαγωγή στρώσης \"{0}\" από {1}"
 
 #: ../Pinta.Core/Classes/Palette.cs:191
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:402
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:410
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:421
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:433
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Δεν ήταν δυνατό να ανοιχτεί το αρχείο: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:174
 msgid "Coverage"
 msgstr "Κάλυψη"
 
@@ -564,15 +564,15 @@ msgstr "Κάλυψη"
 msgid "Crop to Selection"
 msgstr "Περικοπή στην επιλογή"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:26
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:138
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:136
 msgid "Curves"
 msgstr "Καμπύλες"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:417
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:532
+#: ../Pinta/Dialogs/NewImageDialog.cs:362
+#: ../Pinta/Dialogs/NewImageDialog.cs:419
+#: ../Pinta/Dialogs/NewImageDialog.cs:443
+#: ../Pinta/Dialogs/NewImageDialog.cs:534
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
@@ -621,7 +621,7 @@ msgstr "Αποεπιλογή"
 msgid "Deselect All"
 msgstr "Αποεπιλογή όλου"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:61
+#: ../Pinta/Dialogs/ErrorDialog.cs:66
 msgid "Details"
 msgstr "Λεπτομέρειες"
 
@@ -629,26 +629,26 @@ msgstr "Λεπτομέρειες"
 msgid "Difference"
 msgstr "Διαφορά"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:122
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:124
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:123
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:125
 msgid "Distance"
 msgstr "Απόσταση"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:202
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:203
 msgid "Distance Metric"
 msgstr "Μονάδα απόστασης"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:27
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:28
 #: ../Pinta.Effects/Effects/DentsEffect.cs:51
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:29
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:28
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:30
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:28
-#: ../Pinta.Effects/Effects/TileEffect.cs:27
-#: ../Pinta.Effects/Effects/TwistEffect.cs:28
+#: ../Pinta.Effects/Effects/TileEffect.cs:28
+#: ../Pinta.Effects/Effects/TwistEffect.cs:29
 msgid "Distort"
 msgstr "Παραμόρφωση"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:11
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:12
 msgid "Dithering"
 msgstr "Dithering"
 
@@ -656,7 +656,7 @@ msgstr "Dithering"
 msgid "Do not switch tool"
 msgstr "Μην αλλάξετε εργαλείο"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:206
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
 #, csharp-format
 msgid "Download size: {0}"
 msgstr "Μέγεθος λήψης: {0}"
@@ -674,15 +674,15 @@ msgstr "Δημιουργήστε και επεξεργαστείτε εικόν�
 msgid "Edge Behavior"
 msgstr "Συμπεριφορά άκρων"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:26
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
 msgid "Edge Detect"
 msgstr "Εντοπισμός άκρων"
 
-#: ../Pinta/MainWindow.cs:353
+#: ../Pinta/MainWindow.cs:361
 msgid "Effe_cts"
 msgstr "Ε_φέ"
 
-#: ../Pinta/MainWindow.cs:384
+#: ../Pinta/MainWindow.cs:392
 msgid "Effects"
 msgstr "Εφφέ"
 
@@ -701,7 +701,7 @@ msgstr "Έλλειψη"
 msgid "Ellipse Select"
 msgstr "Ελλειψοειδής επιλογή"
 
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:26
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:27
 msgid "Emboss"
 msgstr "Εμβάθυνση"
 
@@ -722,7 +722,7 @@ msgstr "Γόμα"
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:133
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:134
 msgid "Error Diffusion Method"
 msgstr "Σφάλμα μεθόδους diffusion"
 
@@ -735,12 +735,12 @@ msgstr "Αποκλεισμός (-) (δεξί κλικ)"
 msgid "Expand"
 msgstr "Επέκταση"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:281
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:286
 msgid "Extension packages"
 msgstr "Πακέτα προσθέτων"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:187
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:173
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Factor"
 msgstr "Συντελεστής"
 
@@ -748,7 +748,7 @@ msgstr "Συντελεστής"
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Σφάλμα πρόσφασης στα XDG Desktop Portals"
 
-#: ../Pinta/MainWindow.cs:277
+#: ../Pinta/MainWindow.cs:278
 msgid "Failed to initialize add-in"
 msgstr "Σφάλμα εκκίνησης προσθέτου"
 
@@ -756,11 +756,11 @@ msgstr "Σφάλμα εκκίνησης προσθέτου"
 msgid "Failed to load extension package"
 msgstr "Σφάλμα φόρτωσης πακέτου προσθέτου"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:428
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:453
 msgid "Failed to open image"
 msgstr "Αποτυχία ανοίγματος εικόνας"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:236
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
 msgid "Failed to save image"
 msgstr "Αποτυχία αποθήκευσης της εικόνας"
 
@@ -769,7 +769,7 @@ msgstr "Αποτυχία αποθήκευσης της εικόνας"
 msgid "Failed to take screenshot"
 msgstr "Δεν ήταν δυνατή η λήψη screenshot"
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:169
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:173
 msgid "Feather Canvas Edge"
 msgstr ""
 
@@ -824,11 +824,11 @@ msgstr "τελείωμα εικονοστοιχείων"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 #: ../Pinta.Core/Actions/ImageActions.cs:163
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:159
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
 msgid "Flatten"
 msgstr "Ισοπέδωση"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:155
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:161
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr ""
 
@@ -876,11 +876,11 @@ msgstr "Φλόϋντ-Στάϊνμπεργκ (λάιτ)"
 msgid "Font"
 msgstr "Γραμματοσειρά"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:27
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:28
 msgid "Fragment"
 msgstr "Κατακερμάτιση"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:119
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:120
 msgid "Fragments"
 msgstr "Τεμάχια"
 
@@ -888,7 +888,7 @@ msgstr "Τεμάχια"
 msgid "Freeform Shape"
 msgstr "Σχήμα ελεύθερης μορφής"
 
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:23
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:24
 msgid "Frosted Glass"
 msgstr "Σμυριδωμένο γυαλί"
 
@@ -896,11 +896,11 @@ msgstr "Σμυριδωμένο γυαλί"
 msgid "Fullscreen"
 msgstr "Πλήρης οθόνη"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:84
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:89
 msgid "Gallery"
 msgstr "Συλλογή"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
 msgstr "Θόλωση Γκάους"
 
@@ -908,7 +908,7 @@ msgstr "Θόλωση Γκάους"
 msgid "Global"
 msgstr "Καθολική"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:26
+#: ../Pinta.Effects/Effects/GlowEffect.cs:27
 msgid "Glow"
 msgstr "Λάμψη"
 
@@ -917,7 +917,7 @@ msgstr "Λάμψη"
 msgid "Gradient"
 msgstr "Διαβάθμιση χρώματος"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:94
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:92
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
 msgid "Green"
@@ -931,7 +931,7 @@ msgstr "Πλέγμα"
 msgid "Hard Light"
 msgstr "Έντονο φως"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:333
+#: ../Pinta/Dialogs/NewImageDialog.cs:335
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:81
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:164
 msgid "Height:"
@@ -941,41 +941,41 @@ msgstr "Ύψος:"
 msgid "Hide Layer"
 msgstr "Απόκρυψη επιπέδου"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Υπόδειξη: Για καλύτερα αποτελέσματα, χρησιμοποιείστε τα εργαλεία επιλογής "
 "για την επιλογή κάθε οφθαλμού."
 
-#: ../Pinta/Pads/HistoryPad.cs:40 ../Pinta/Pads/HistoryPad.cs:49
+#: ../Pinta/Pads/HistoryPad.cs:48 ../Pinta/Pads/HistoryPad.cs:57
 msgid "History"
 msgstr "Ιστορικό"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
 msgid "Horizontal blue (B)"
 msgstr "Οριζόντιο μπλέ (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:242
 msgid "Horizontal green (G)"
 msgstr "Οριζόντιο πράσινο (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:245
 msgid "Horizontal red (R)"
 msgstr "Οριζόντιο κόκκινο (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:60
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 msgid "Hue"
 msgstr "Απόχρωση"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
 msgstr "Απόχρωση / κορεσμός"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
 "Αρχεία ICO δεν μπορούν να είναι μεγαλύτερα από 255 x 255 εικονοστοιχεία."
@@ -984,7 +984,7 @@ msgstr ""
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Αν δε γίνει αποθήκευση, οι αλλαγές θα χαθούν οριστικά."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:396
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:404
 msgid "Image"
 msgstr "Εικόνα"
 
@@ -1009,7 +1009,7 @@ msgstr "Αρχεία εικόνων"
 msgid "Image larger than canvas"
 msgstr "Η εικόνα είναι μεγαλύτερη από τον καμβά"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:230
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
 msgid "Image too large"
 msgstr "Η εικόνα είναι πολύ μεγάλη"
 
@@ -1025,11 +1025,11 @@ msgstr "Εισαγωγή από αρχείο..."
 msgid "Inches"
 msgstr "Ίντσες"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:151
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:152
 msgid "Ink Outline"
 msgstr "Περίγραμμα μελανιού"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:32
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
 msgstr "Σκίτσο μελάνης"
 
@@ -1046,25 +1046,25 @@ msgstr "Ιστόγραμμα εισόδου"
 msgid "Install"
 msgstr "Εγκατάσταση"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:245
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:250
 msgid "Install Extension Package"
 msgstr "Εγκατάσταση πακέτου προσθέτου"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:108
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:113
 msgid "Install from file..."
 msgstr "Εγκατάσταση από αρχείο..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:150
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:153
 msgid "Install..."
 msgstr "Εγκατάσταση..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:85
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:90
 msgid "Installed"
 msgstr "Εγκαταστάθηκε"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:180
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:168
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:140
+#: ../Pinta.Effects/Effects/TileEffect.cs:181
 msgid "Intensity"
 msgstr "Ένταση"
 
@@ -1075,7 +1075,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Διασταύρωση ({0} + δεξί κλικ)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:211
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:212
 msgid "Invert Colors"
 msgstr "Αντιστροφή χρωμάτων"
 
@@ -1097,11 +1097,11 @@ msgstr "Ποιότητα JPEG"
 msgid "Jarvis-Judice-Ninke"
 msgstr "Τζάρβις-Τζούντις-Νίνκε"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
 msgid "Julia Fractal"
 msgstr "Φράκταλ Τζούλια"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:300
+#: ../Pinta/Dialogs/NewImageDialog.cs:302
 msgid "Landscape"
 msgstr "Τοπίο"
 
@@ -1140,7 +1140,7 @@ msgstr "Επίπεδο σε εμφάνιση"
 msgid "Layer {0}"
 msgstr "Στρώση {0}"
 
-#: ../Pinta/Pads/LayersPad.cs:40 ../Pinta/Pads/LayersPad.cs:53
+#: ../Pinta/Pads/LayersPad.cs:48 ../Pinta/Pads/LayersPad.cs:61
 msgid "Layers"
 msgstr "Επίπεδα"
 
@@ -1298,7 +1298,7 @@ msgstr ""
 msgid "Length"
 msgstr "Μήκος"
 
-#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:22
+#: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
 msgstr "Επίπεδα"
 
@@ -1319,11 +1319,11 @@ msgstr "Φωτεινό"
 msgid "Lighten"
 msgstr "Πιο φωτεινό"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:117
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:118
 msgid "Lighting"
 msgstr "Φωτισμός"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:66
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Lightness"
 msgstr "Σχετική φωτεινότητα"
 
@@ -1353,7 +1353,7 @@ msgid "Linked"
 msgstr "Συνδεμένο"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:178
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:175
 msgid "Luminosity"
 msgstr "Φωτεινότητα"
 
@@ -1361,7 +1361,7 @@ msgstr "Φωτεινότητα"
 msgid "Magic Wand Select"
 msgstr "Επιλογή με το Μαγικό ραβδί"
 
-#: ../Pinta/MainWindow.cs:378
+#: ../Pinta/MainWindow.cs:386
 msgid "Main Menu"
 msgstr "Κυρίως μενού"
 
@@ -1370,11 +1370,11 @@ msgstr "Κυρίως μενού"
 msgid "Maintain aspect ratio"
 msgstr "Διατήρηση αναλογίας διαστάσεων"
 
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
 msgid "Mandelbrot Fractal"
 msgstr "Φράκταλ Μάντελμπροτ"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:26
+#: ../Pinta.Effects/Effects/MedianEffect.cs:27
 msgid "Median"
 msgstr "Διάμεση τιμή"
 
@@ -1391,11 +1391,11 @@ msgstr "Λειτουργία"
 msgid "Modified"
 msgstr "Τροποποιήθηκε"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:142
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:145
 msgid "More Information..."
 msgstr "Περισσότερες πληροφορίες..."
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 msgid "Motion Blur"
 msgstr "Θόλωση κίνησης"
 
@@ -1433,8 +1433,8 @@ msgstr "Κοντινότερος γείτονας"
 msgid "New"
 msgstr "Νέο"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:127
-#: ../Pinta/Dialogs/NewImageDialog.cs:196
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:145
+#: ../Pinta/Dialogs/NewImageDialog.cs:197
 msgid "New Image"
 msgstr "Νέα εικόνα"
 
@@ -1450,18 +1450,18 @@ msgstr "Νέο μέγεθος παλέττας:"
 msgid "New..."
 msgstr "Νέο..."
 
-#: ../Pinta.Gui.Addins/AddinListView.cs:58
+#: ../Pinta.Gui.Addins/AddinListView.cs:57
 msgid "No Items Found"
 msgstr "Δεν βρέθηκαν αποτελέσματα"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
-#: ../Pinta.Effects/Effects/MedianEffect.cs:30
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:30
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
+#: ../Pinta.Effects/Effects/MedianEffect.cs:31
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:31
 msgid "Noise"
 msgstr "Θόρυβος"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
-#: ../Pinta.Tools/Brushes/PlainBrush.cs:35
+#: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Normal"
 msgstr "Κανονικό"
@@ -1478,7 +1478,7 @@ msgstr "Κανονικό μέγεθος"
 msgid "Normal and Outline"
 msgstr "Κανονικό και περίγραμμα."
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:206
 msgid "Number of Cells"
 msgstr "Αριθμός κελιών"
 
@@ -1486,16 +1486,16 @@ msgstr "Αριθμός κελιών"
 msgid "Number of threads to use for rendering"
 msgstr "Αριθμός νημάτων προς απόδοση"
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:112
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:132
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:146
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:113
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:174
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:133
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:147
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
 msgstr "Μετατόπιση"
@@ -1506,7 +1506,7 @@ msgstr "Μετατόπιση"
 msgid "Offset Selection"
 msgstr "Επιλογή όφσετ"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:23
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:24
 msgid "Oil Painting"
 msgstr "Ζωγραφική λαδομπογιάς"
 
@@ -1517,7 +1517,7 @@ msgstr "Αδιαφάνεια:"
 #: ../Pinta.Core/Actions/EditActions.cs:374
 #: ../Pinta.Core/Actions/FileActions.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:187
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:248
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "Άνοιγμα"
@@ -1526,7 +1526,7 @@ msgstr "Άνοιγμα"
 msgid "Open Curve Shape"
 msgstr "Σχήμα ανοικτής καμπύλης"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:314
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:329
 msgid "Open Image"
 msgstr "Άνοιγμα εικόνας"
 
@@ -1548,11 +1548,11 @@ msgstr "Άνοιγμα αρχείου παλέτας"
 msgid "Open..."
 msgstr "Άνοιγμα..."
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:316
+#: ../Pinta/Dialogs/NewImageDialog.cs:318
 msgid "Orientation:"
 msgstr "Προσανατολισμός:"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:38
+#: ../Pinta.Effects/Effects/WarpEffect.cs:39
 msgid "Original"
 msgstr "Αρχικό"
 
@@ -1564,7 +1564,7 @@ msgstr "Εξωτερικό περίγραμμα"
 msgid "Outline Border"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:26
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:27
 msgid "Outline Edge"
 msgstr ""
 
@@ -1606,7 +1606,7 @@ msgid "Paintbrush"
 msgstr "Πινέλο"
 
 #: ../Pinta.Core/Actions/EditActions.cs:157
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:136
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:137
 msgid "Palette"
 msgstr "Παλέτα"
 
@@ -1638,28 +1638,28 @@ msgstr "Επικόλληση σε νέο επίπεδο"
 msgid "Pencil"
 msgstr "Μολύβι"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:29
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:30
 msgid "Pencil Sketch"
 msgstr "Σκίτσο με μολύβι"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:84
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:85
 msgid "Pencil Tip Size"
 msgstr "Μέγεθος μύτης μολυβιού"
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:65
+#: ../Pinta.Effects/Effects/MedianEffect.cs:66
 msgid "Percentile"
 msgstr "Ποσοστημόριο"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:30
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:27
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:52
+#: ../Pinta.Effects/Effects/GlowEffect.cs:31
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:28
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:53
 msgid "Photo"
 msgstr "Φωτογραφία"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:57
 msgid "Pinta"
 msgstr "Επεξεργασία εικόνας Pinta"
 
@@ -1679,7 +1679,7 @@ msgstr "Επεξεργασία εικόνας Pinta"
 msgid "Pinta Website"
 msgstr "Ιστοσελίδα Pinta"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:219
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "Pinta does not support saving images in this file format."
 msgstr ""
 "Το Pinta δεν υποστηρίζει δυνατότητα αποθήκευσης σε αυτό το φορμά αρχείου."
@@ -1699,7 +1699,7 @@ msgstr ""
 "δυνατότητα να δημιουργεί απεριόριστα επίπεδα για να οργανώσετε τη "
 "δημιουργικότητά σας."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:411
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:434
 msgid "Pinta supports the following file formats:"
 msgstr "Το Pinta υποστηρίζει τις ακόλουθες μορφές αρχείων:"
 
@@ -1711,7 +1711,7 @@ msgstr "Το Pinta υποστηρίζει τις ακόλουθες μορφές
 msgid "Pixel Grid"
 msgstr "Πλέγμα εικονοστοιχείου"
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:23
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:24
 msgid "Pixelate"
 msgstr "Εικονοστοιχειοποίηση"
 
@@ -1737,20 +1737,20 @@ msgstr "Το σημείο διαγράφηκε"
 msgid "Polar Inversion"
 msgstr "Πολική αναστροφή"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:296
+#: ../Pinta/Dialogs/NewImageDialog.cs:298
 msgid "Portrait"
 msgstr "Προσωπογραφία"
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:128
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:135
 msgid "Position"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:24
+#: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
 msgid "Posterize"
 msgstr "Ποστεροποίηση"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:161
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:162
 msgid "Power"
 msgstr "Δύναμη"
 
@@ -1763,15 +1763,15 @@ msgstr "Διατήρηση"
 msgid "Preset Gradient"
 msgstr "Προκαθορισμένο ντεγκραντέ"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:341
+#: ../Pinta/Dialogs/NewImageDialog.cs:343
 msgid "Preset:"
 msgstr "Προκαθορισμένο:"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:160
+#: ../Pinta/Dialogs/NewImageDialog.cs:161
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:29
+#: ../Pinta.Effects/Effects/WarpEffect.cs:30
 msgid "Primary"
 msgstr "Πρωτεύον"
 
@@ -1779,10 +1779,10 @@ msgstr "Πρωτεύον"
 msgid "Print"
 msgstr "Εκτύπωση"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:190
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:176
-#: ../Pinta.Effects/Effects/WarpEffect.cs:181
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:176
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
+#: ../Pinta.Effects/Effects/WarpEffect.cs:182
 msgid "Quality"
 msgstr "Ποιότητα"
 
@@ -1794,11 +1794,11 @@ msgstr "Ποιότητα: "
 msgid "Quit"
 msgstr "Έξοδος"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:174
 msgid "RGB"
 msgstr "RGB"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:23
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:24
 msgid "Radial Blur"
 msgstr "Ακτινικό θόλωμα"
 
@@ -1806,45 +1806,45 @@ msgstr "Ακτινικό θόλωμα"
 msgid "Radial Gradient"
 msgstr "Ακτινική διαβάθμιση χρώματος"
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:163
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:246
-#: ../Pinta.Effects/Effects/GlowEffect.cs:76
-#: ../Pinta.Effects/Effects/MedianEffect.cs:62
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:167
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
+#: ../Pinta.Effects/Effects/GlowEffect.cs:77
+#: ../Pinta.Effects/Effects/MedianEffect.cs:63
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:89
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:94
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:95
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:92
 msgid "Radius"
 msgstr "Ακτίνα"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:116
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:136
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:117
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:235
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
 msgid "Random"
 msgstr "Τυχαίο"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:194
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:187
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:205
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:195
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
 msgid "Random Color Scheme Seed"
 msgstr "Αριθμός τυχαίου συνδυασμού χρωμάτων"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:219
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:220
 msgid "Random Colors"
 msgstr "Τυχαία χρώματα"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:185
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:152
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:177
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:186
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
 msgid "Random Noise"
 msgstr "Τυχαίος θόρυβος"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:222
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:223
 msgid "Random Point Locations"
 msgstr "Τυχαία σημεία"
 
@@ -1865,11 +1865,11 @@ msgstr "Ορθογώνια επιλογή"
 msgid "Red"
 msgstr "Κόκκινο"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:93
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:91
 msgid "Red  "
 msgstr "Κόκκινο  "
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:23
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:24
 msgid "Red Eye Removal"
 msgstr "Αφαίρεση κόκκινου ματιού"
 
@@ -1877,15 +1877,15 @@ msgstr "Αφαίρεση κόκκινου ματιού"
 msgid "Redo"
 msgstr "Επανάληψη τελευταίας ενέργειας"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
 msgid "Reduce Noise"
 msgstr "Μείωση θορύβου"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:26
+#: ../Pinta.Effects/Effects/WarpEffect.cs:27
 msgid "Reflect"
 msgstr "Αντανάκλαση"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:100
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:105
 msgid "Refresh"
 msgstr "Ανανέωση"
 
@@ -1893,7 +1893,7 @@ msgstr "Ανανέωση"
 msgid "Released under the MIT X11 License."
 msgstr "Κυκλοφορεί κάτω απο την άδεια χρήσης MIT X11."
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:40
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:41
 msgid "Relief"
 msgstr "Ανάγλυφο"
 
@@ -1901,14 +1901,14 @@ msgstr "Ανάγλυφο"
 msgid "Rename Layer"
 msgstr "Μετονομασία επιπέδου"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:37
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:38
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:28
 msgid "Render"
 msgstr "Απόδοση"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:204
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:195
 msgid "Rendering Effect"
 msgstr "Απόδοση αποτελέσματος"
 
@@ -1916,7 +1916,7 @@ msgstr "Απόδοση αποτελέσματος"
 msgid "Replace"
 msgstr "Αντικατάσταση"
 
-#: ../Pinta/Dialogs/ErrorDialog.cs:67
+#: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Αναφορά σφάλματος..."
 
@@ -1928,7 +1928,7 @@ msgstr "Ανασύνθεση:"
 msgid "Reseed"
 msgstr "Επανατροφοδότηση"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:197
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:209
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:241
 msgid "Reset"
 msgstr "Επαναφορά"
@@ -1937,7 +1937,7 @@ msgstr "Επαναφορά"
 msgid "Reset to Default"
 msgstr "Επαναφορά στην προεπιλογή"
 
-#: ../Pinta.Core/Classes/Document.cs:310
+#: ../Pinta.Core/Classes/Document.cs:307
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
 msgid "Resize Canvas"
 msgstr "Αλλαγή μεγέθους καμβά"
@@ -1959,14 +1959,14 @@ msgstr "Αλλαγή μεγέθους εικόνας..."
 msgid "Resize Palette"
 msgstr "Αλλαγή μεγέθους της παλέτας"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:197
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:190
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:208
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:198
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
 msgid "Reverse Color Scheme"
 msgstr "Αντιστροφή συνδυασμού χρωμάτων"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:216
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
 msgid "Reverse Color Sorting"
 msgstr "Αντιστροφή κατανομής χρωμάτων"
 
@@ -1998,8 +1998,8 @@ msgstr "Περιστροφή 90° δεξιόστροφα"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "Περιστροφή 90° αριστερόστροφα"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:125
-#: ../Pinta.Effects/Effects/TileEffect.cs:174
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:126
+#: ../Pinta.Effects/Effects/TileEffect.cs:175
 msgid "Rotation"
 msgstr "Περιστροφή"
 
@@ -2028,17 +2028,17 @@ msgid "Sampling"
 msgstr "Δειγματοληψία"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:63
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "Κορεσμός"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:56
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
 msgid "Saturation Percentage"
 msgstr "Ποσοστό κορεσμού"
 
 #: ../Pinta.Core/Actions/EditActions.cs:417
 #: ../Pinta.Core/Actions/FileActions.cs:55
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:89
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
 msgstr "Αποθήκευση"
 
@@ -2051,7 +2051,7 @@ msgstr "Αποθήκευση όλων"
 msgid "Save As..."
 msgstr "Αποθήκευση ως…"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:86
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:92
 msgid "Save Image File"
 msgstr "Αποθήκευση αρχείου εικόνας"
 
@@ -2064,7 +2064,7 @@ msgstr "Αποθήκευση Αρχείου Παλέτας"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr "Αποθήκευση της εικόνας \"{0}\" πριν το κλείσιμο;"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:158
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:159
 msgid "Scale"
 msgstr "Κλίμακα"
 
@@ -2072,7 +2072,7 @@ msgstr "Κλίμακα"
 msgid "Screen"
 msgstr "Οθόνη"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:32
+#: ../Pinta.Effects/Effects/WarpEffect.cs:33
 msgid "Secondary"
 msgstr "Δευτερεύον"
 
@@ -2097,7 +2097,7 @@ msgstr "Καθορισμός αριθμού χρωμάτων"
 msgid "Shape Type"
 msgstr "Τύπος Σχήματος"
 
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:23
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
 msgstr "Όξυνση"
 
@@ -2111,7 +2111,7 @@ msgid "Show Layer"
 msgstr "Εμφάνισηη επιπέδου"
 
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:209
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Show Points"
 msgstr "Εμφάνιση σημείων"
 
@@ -2145,11 +2145,11 @@ msgstr "Ομαλό"
 msgid "Soft Light"
 msgstr "Απαλό φως"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:54
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:55
 msgid "Soften Portrait"
 msgstr "Κάντε πιο \"απαλό\" το ποτραίτο"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:114
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:115
 msgid "Softness"
 msgstr "Απαλότητα"
 
@@ -2165,8 +2165,8 @@ msgstr "Τετράγωνα"
 msgid "Status Bar"
 msgstr "Μπάρα κατάστασης"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:92
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:141
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:93
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
 msgstr "Δύναμη"
 
@@ -2175,10 +2175,10 @@ msgstr "Δύναμη"
 msgid "Stucki"
 msgstr "Στούκι"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:32
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:32
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:30
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:33
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:33
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:31
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:34
 msgid "Stylize"
 msgstr "Πρόσδοση ύφους"
 
@@ -2273,29 +2273,29 @@ msgstr ""
 "Υπάρχουν άλλα πακέτα προσθέτων που εξαρτώνται από προηγούμενα που θα "
 "απενεγκαταστηθούν:"
 
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:137
 msgid "Thickness"
 msgstr "Πάχος"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:154
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:160
 msgid "This format does not support layers. Flatten image?"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:23
+#: ../Pinta.Effects/Effects/TileEffect.cs:24
 msgid "Tile Reflection"
 msgstr "Αντανάκλαση πλακιδίου"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:177
+#: ../Pinta.Effects/Effects/TileEffect.cs:178
 msgid "Tile Size"
 msgstr "Μέγεθος στοιχείων"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:99
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:97
 msgid "Tip: Right-click to remove control points."
 msgstr "Βοήθημα: Πατήστε με δεξί κλικ για να αφαιρέσετε τα σημεία ελέγχου."
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:166
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:170
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:207
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:52
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:53
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
 #: ../Pinta.Tools/Tools/RecolorTool.cs:197
 msgid "Tolerance"
@@ -2309,7 +2309,7 @@ msgstr "Εργαλείο"
 msgid "Tool Box"
 msgstr "Κουτί εργαλείων"
 
-#: ../Pinta/MainWindow.cs:371
+#: ../Pinta/MainWindow.cs:379
 msgid "Tool Windows"
 msgstr "Εργαλειοθήκες"
 
@@ -2317,19 +2317,19 @@ msgstr "Εργαλειοθήκες"
 msgid "Toolbar"
 msgstr "Εργαλειοθήκη"
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:39
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:38
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:40
+#: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:107
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
 msgstr "Μεταφορά χάρτη"
 
@@ -2341,8 +2341,8 @@ msgstr "Μεταφράστε την εφαρμογή"
 msgid "Transparency Mode"
 msgstr "Λειτουργίας διαφάνειας"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:35
-#: ../Pinta/Dialogs/NewImageDialog.cs:120
+#: ../Pinta.Effects/Effects/WarpEffect.cs:36
+#: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr "Διαφανές"
 
@@ -2350,7 +2350,7 @@ msgstr "Διαφανές"
 msgid "Turbulence"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:24
+#: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
 msgstr "Συστροφή"
 
@@ -2372,7 +2372,7 @@ msgstr "Υπογράμμιση"
 msgid "Undo"
 msgstr "Αναίρεση"
 
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:25
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:26
 msgid "Unfocus"
 msgstr "Μη εστίαση"
 
@@ -2381,7 +2381,7 @@ msgstr "Μη εστίαση"
 msgid "Uninstall"
 msgstr "Απεγκατάσταση"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:168
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:171
 msgid "Uninstall..."
 msgstr "Απενεγκατάσταση..."
 
@@ -2391,12 +2391,12 @@ msgstr "Απενεγκατάσταση..."
 msgid "Union (+) ({0} + Left Click)"
 msgstr "Ένωση (+) ({0} + αριστερό κλικ)"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:218
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:230
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Μη αποθηκευμένη εικόνα {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:309
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:324
 msgid "Unsupported file format"
 msgstr "Μη υποστηριζόμενη μορφή αρχείου"
 
@@ -2404,15 +2404,15 @@ msgstr "Μη υποστηριζόμενη μορφή αρχείου"
 msgid "Unsupported palette format"
 msgstr "Μη υποστηριζόμενος τύπος παλέττας"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:159
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:162
 msgid "Update..."
 msgstr "Ενημέρωση..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:86
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:91
 msgid "Updates"
 msgstr "Ενημερώσεις"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:178
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2425,28 +2425,28 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Γίνεται χρήση μερικών εικονιδίων από:"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:199
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:202
 #, csharp-format
 msgid "Version: {0}"
 msgstr "Έκδοση: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:248
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
 msgid "Vertical blue (B)"
 msgstr "Κάθετο μπλε (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:251
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:252
 msgid "Vertical green (G)"
 msgstr "Κάθετο πράσινο (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:254
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:255
 msgid "Vertical red (R)"
 msgstr "Κάθετο κόκκινο (R)"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:49
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
 msgstr ""
 
@@ -2454,19 +2454,19 @@ msgstr ""
 msgid "Visible"
 msgstr "Ορατό"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:21
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Voronoi Diagram"
 msgstr "Διάγραμμα Voronoi"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:120
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:121
 msgid "Warmth"
 msgstr "Θερμότητα"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:105
+#: ../Pinta/Dialogs/NewImageDialog.cs:106
 msgid "White"
 msgstr "Άσπρο"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:325
+#: ../Pinta/Dialogs/NewImageDialog.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:73
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:157
 msgid "Width:"
@@ -2479,7 +2479,7 @@ msgstr "Πλάτος:"
 msgid "Window"
 msgstr "Παράθυρο"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:23
+#: ../Pinta.Effects/Effects/WarpEffect.cs:24
 msgid "Wrap"
 msgstr "Αναδίπλωση"
 
@@ -2494,13 +2494,13 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + δεξί κλικ)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:430
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:456
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Δεν έχετε πρόσβαση στο '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2508,14 +2508,14 @@ msgstr ""
 "Δεν έχετε πρόσβαση για τροποποίηση του '{0}'. Το αρχείο ή ο φάκελος μπορεί "
 "να είναι μόνο για ανάγνωση."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:193
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:179
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:146
 msgid "Zoom"
 msgstr "Μεγένθυση"
 
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:23
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:24
 msgid "Zoom Blur"
 msgstr "Θόλωμα μεγέθυνσης"
 
@@ -2531,7 +2531,7 @@ msgstr "Σμίκρυνση"
 msgid "Zoom to Selection"
 msgstr "Μεγέθυνση στην επιλογή"
 
-#: ../Pinta/MainWindow.cs:349
+#: ../Pinta/MainWindow.cs:357
 msgid "_Adjustments"
 msgstr "_Προσαρμογές"
 
@@ -2539,7 +2539,7 @@ msgstr "_Προσαρμογές"
 #: ../Pinta.Core/Extensions/GtkExtensions.cs:230
 #: ../Pinta/Actions/Edit/PasteAction.cs:219
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:158
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
 #: ../Pinta/Dialogs/ProgressDialog.cs:56
 msgid "_Cancel"
 msgstr "_Ακύρωση"
@@ -2548,30 +2548,30 @@ msgstr "_Ακύρωση"
 msgid "_Discard"
 msgstr "_Απόρριψη"
 
-#: ../Pinta/MainWindow.cs:332
+#: ../Pinta/MainWindow.cs:340
 msgid "_Edit"
 msgstr "_Επεξεργασία"
 
-#: ../Pinta/MainWindow.cs:328
+#: ../Pinta/MainWindow.cs:336
 msgid "_File"
 msgstr "_Αρχείο"
 
-#: ../Pinta/MainWindow.cs:365
+#: ../Pinta/MainWindow.cs:373
 msgid "_Help"
 msgstr "_Βοήθεια"
 
-#: ../Pinta/MainWindow.cs:341
+#: ../Pinta/MainWindow.cs:349
 msgid "_Image"
 msgstr "Ει_κόνα"
 
-#: ../Pinta/MainWindow.cs:345
+#: ../Pinta/MainWindow.cs:353
 msgid "_Layers"
 msgstr "Επίπε_δα"
 
 #: ../Pinta.Core/Extensions/GtkExtensions.cs:227
 #: ../Pinta.Core/Extensions/GtkExtensions.cs:231
-#: ../Pinta.Gui.Addins/InstallDialog.cs:193 ../Pinta/Dialogs/ErrorDialog.cs:41
-#: ../Pinta/Dialogs/ErrorDialog.cs:69
+#: ../Pinta.Gui.Addins/InstallDialog.cs:193 ../Pinta/Dialogs/ErrorDialog.cs:44
+#: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
 msgstr "_ΟΚ"
 
@@ -2579,11 +2579,11 @@ msgstr "_ΟΚ"
 msgid "_Save"
 msgstr "_Αποθήκευση"
 
-#: ../Pinta/MainWindow.cs:336
+#: ../Pinta/MainWindow.cs:344
 msgid "_View"
 msgstr "_Προβολή"
 
-#: ../Pinta/MainWindow.cs:361
+#: ../Pinta/MainWindow.cs:369
 msgid "_Window"
 msgstr "Παρά_θυρα"
 
@@ -2595,7 +2595,7 @@ msgstr "από τους συντελεστές της Pinta"
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "ζωγραφίζω;ζωγραφική;βάφω;βαφή;γραφικά;raster;2d;"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:277
+#: ../Pinta/Dialogs/NewImageDialog.cs:279
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:96
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:68
