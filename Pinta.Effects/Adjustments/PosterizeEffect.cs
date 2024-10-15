@@ -39,24 +39,19 @@ public sealed class PosterizeEffect : BaseEffect
 		EffectData = new PosterizeData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
+	public override async Task<bool> LaunchConfiguration ()
 	{
-		TaskCompletionSource<bool> completionSource = new ();
-
 		PosterizeDialog dialog = new (chrome) {
 			Title = Name,
 			IconName = Icon,
-			EffectData = Data,
+			EffectData = Data, // TODO: Delegate `EffectData` changes to event handlers or similar
 		};
 
-		dialog.OnResponse += (_, args) => {
-			completionSource.SetResult (Gtk.ResponseType.Ok == (Gtk.ResponseType) args.ResponseId);
-			dialog.Destroy ();
-		};
+		Gtk.ResponseType response = await dialog.RunAsync ();
 
-		dialog.Present ();
+		dialog.Destroy ();
 
-		return completionSource.Task;
+		return Gtk.ResponseType.Ok == response;
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

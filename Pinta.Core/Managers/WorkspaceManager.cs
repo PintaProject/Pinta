@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Cairo;
 
 namespace Pinta.Core;
@@ -412,17 +413,17 @@ public sealed class WorkspaceManager : IWorkspaceService
 		SelectionChanged?.Invoke (this, EventArgs.Empty);
 	}
 
-	private void ShowOpenFileErrorDialog (
+	private Task ShowOpenFileErrorDialog (
 		Gtk.Window parent,
 		string filename,
 		string primary_text,
 		string details)
 	{
 		string secondary_text = Translations.GetString ("Could not open file: {0}", filename);
-		chrome_manager.ShowErrorDialog (parent, primary_text, secondary_text, details);
+		return chrome_manager.ShowErrorDialog (parent, primary_text, secondary_text, details);
 	}
 
-	private void ShowUnsupportedFormatDialog (
+	private Task ShowUnsupportedFormatDialog (
 		Gtk.Window parent,
 		string filename,
 		string message,
@@ -443,10 +444,10 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		body.AppendJoin (", ", extensions);
 
-		chrome_manager.ShowErrorDialog (parent, message, body.ToString (), errors);
+		return chrome_manager.ShowErrorDialog (parent, message, body.ToString (), errors);
 	}
 
-	private void ShowFilePermissionErrorDialog (
+	private Task ShowFilePermissionErrorDialog (
 		Gtk.Window parent,
 		string filename)
 	{
@@ -455,7 +456,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		// Translators: {0} is the name of a file that the user does not have permission to open.
 		string details = Translations.GetString ("You do not have access to '{0}'.", filename);
 
-		chrome_manager.ShowMessageDialog (parent, message, details);
+		return chrome_manager.ShowMessageDialog (parent, message, details);
 	}
 
 	public event EventHandler<DocumentEventArgs>? DocumentCreated;

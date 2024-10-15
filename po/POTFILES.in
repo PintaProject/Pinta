@@ -150,6 +150,7 @@ Pinta.Core/Managers/SettingsManager.cs
 Pinta.Core/Managers/SystemManager.cs
 Pinta.Core/Managers/ToolManager.cs
 Pinta.Core/Managers/WorkspaceManager.cs
+Pinta.Core/Messages/ErrorDialogResponse.cs
 Pinta.Core/PaletteFormats/GimpPalette.cs
 Pinta.Core/PaletteFormats/IPaletteLoader.cs
 Pinta.Core/PaletteFormats/IPaletteSaver.cs

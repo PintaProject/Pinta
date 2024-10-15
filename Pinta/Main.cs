@@ -141,7 +141,7 @@ internal sealed class MainClass
 
 	private static void OnUnhandledException (Exception e)
 	{
-		PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
+		_ = PintaCore.Chrome.ShowErrorDialog (PintaCore.Chrome.MainWindow,
 				"Unhandled exception", e.Message, e.ToString ());
 	}
 
