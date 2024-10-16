@@ -8,6 +8,8 @@ namespace Pinta.Core;
 
 public sealed class DocumentLayers
 {
+	private readonly LayerManager layers;
+	private readonly ToolManager tools;
 	private readonly Document document;
 	private readonly List<UserLayer> user_layers = new ();
 
@@ -19,8 +21,13 @@ public sealed class DocumentLayers
 	// The layer used for selections
 	private Layer? selection_layer;
 
-	public DocumentLayers (Document document)
+	public DocumentLayers (
+		LayerManager layers,
+		ToolManager tools,
+		Document document)
 	{
+		this.layers = layers;
+		this.tools = tools;
 		this.document = document;
 	}
 
@@ -82,12 +89,10 @@ public sealed class DocumentLayers
 	/// </summary>
 	public UserLayer AddNewLayer (string name)
 	{
-		UserLayer layer;
-
-		if (string.IsNullOrEmpty (name))
-			layer = CreateLayer ();
-		else
-			layer = CreateLayer (name);
+		UserLayer layer =
+			string.IsNullOrEmpty (name)
+			? CreateLayer ()
+			: CreateLayer (name);
 
 		user_layers.Insert (CurrentUserLayerIndex + 1, layer);
 
@@ -97,7 +102,7 @@ public sealed class DocumentLayers
 		layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (user_layers.Count - 1));
-		PintaCore.Layers.OnLayerAdded ();
+		layers.OnLayerAdded ();
 		return layer;
 	}
 
@@ -122,15 +127,18 @@ public sealed class DocumentLayers
 	/// <summary>
 	/// Creates a new layer, but does not add it to the layer collection.
 	/// </summary>
-	public UserLayer CreateLayer (string? name = null, int? width = null, int? height = null)
+	public UserLayer CreateLayer (
+		string? name = null,
+		int? width = null,
+		int? height = null)
 	{
 		// Translators: {0} is a unique id for new layers, e.g. "Layer 2".
 		name ??= Translations.GetString ("Layer {0}", layer_name_int++);
 		width ??= document.ImageSize.Width;
 		height ??= document.ImageSize.Height;
 
-		var surface = CairoExtensions.CreateImageSurface (Format.Argb32, width.Value, height.Value);
-		var layer = new UserLayer (surface) { Name = name };
+		ImageSurface surface = CairoExtensions.CreateImageSurface (Format.Argb32, width.Value, height.Value);
+		UserLayer layer = new (surface) { Name = name };
 
 		return layer;
 	}
@@ -176,7 +184,7 @@ public sealed class DocumentLayers
 		layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
 
 		LayerRemoved?.Invoke (this, new IndexEventArgs (index));
-		PintaCore.Layers.OnLayerRemoved ();
+		layers.OnLayerRemoved ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -215,7 +223,7 @@ public sealed class DocumentLayers
 		layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (CurrentUserLayerIndex));
-		PintaCore.Layers.OnLayerAdded ();
+		layers.OnLayerAdded ();
 
 		return layer;
 	}
@@ -333,7 +341,7 @@ public sealed class DocumentLayers
 		layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (index));
-		PintaCore.Layers.OnLayerAdded ();
+		layers.OnLayerAdded ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -371,7 +379,7 @@ public sealed class DocumentLayers
 		Insert (layer, index - 1);
 
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
-		PintaCore.Layers.OnSelectedLayerChanged ();
+		layers.OnSelectedLayerChanged ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -391,7 +399,7 @@ public sealed class DocumentLayers
 		CurrentUserLayerIndex = index + 1;
 
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
-		PintaCore.Layers.OnSelectedLayerChanged ();
+		layers.OnSelectedLayerChanged ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -403,11 +411,11 @@ public sealed class DocumentLayers
 	{
 		// Ensure that the current tool's modifications are finalized before
 		// switching layers.
-		PintaCore.Tools.CurrentTool?.DoCommit (document);
+		tools.CurrentTool?.DoCommit (document);
 
 		CurrentUserLayerIndex = i;
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
-		PintaCore.Layers.OnSelectedLayerChanged ();
+		layers.OnSelectedLayerChanged ();
 	}
 
 	/// <summary>
@@ -426,6 +434,6 @@ public sealed class DocumentLayers
 	private void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
 	{
 		LayerPropertyChanged?.Invoke (sender, e);
-		PintaCore.Layers.RaiseLayerPropertyChangedEvent (sender, e);
+		layers.RaiseLayerPropertyChangedEvent (sender, e);
 	}
 }
