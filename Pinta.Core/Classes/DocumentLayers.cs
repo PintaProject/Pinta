@@ -205,12 +205,12 @@ public sealed class DocumentLayers
 	/// </summary>
 	public UserLayer DuplicateCurrentLayer ()
 	{
-		var source = CurrentUserLayer;
+		UserLayer source = CurrentUserLayer;
 		// Translators: this is the auto-generated name for a duplicated layer.
 		// {0} is the name of the source layer. Example: "Layer 3 copy".
-		var layer = CreateLayer (Translations.GetString ("{0} copy", source.Name));
+		UserLayer layer = CreateLayer (Translations.GetString ("{0} copy", source.Name));
 
-		var g = new Context (layer.Surface);
+		Context g = new (layer.Surface);
 		g.SetSourceSurface (source.Surface, 0, 0);
 		g.Paint ();
 
@@ -237,7 +237,7 @@ public sealed class DocumentLayers
 			throw new InvalidOperationException ("Cannot flatten image because there is only one layer.");
 
 		// Find the "bottom" layer
-		var bottom_layer = user_layers[0];
+		UserLayer bottom_layer = user_layers[0];
 
 		// Replace the bottom surface with the flattened image,
 		// and dispose the old surface
@@ -258,9 +258,9 @@ public sealed class DocumentLayers
 	/// </summary>
 	public ImageSurface GetClippedLayer (int index)
 	{
-		var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
+		ImageSurface surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
-		var g = new Context (surf);
+		Context g = new (surf);
 		document.Selection.Clip (g);
 
 		g.SetSourceSurface (user_layers[index].Surface, 0, 0);
@@ -275,18 +275,16 @@ public sealed class DocumentLayers
 	internal ImageSurface GetFlattenedImage (bool clip_to_selection = false)
 	{
 		// Create a new image surface
-		var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
+		ImageSurface surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
-		var g = new Context (surf);
+		Context g = new (surf);
 
-		if (clip_to_selection) {
+		if (clip_to_selection)
 			document.Selection.Clip (g);
-		}
 
 		// Blend each visible layer onto our surface
-		foreach (var layer in GetLayersToPaint (includeToolLayer: false)) {
+		foreach (var layer in GetLayersToPaint (includeToolLayer: false))
 			layer.Draw (g);
-		}
 
 		surf.MarkDirty ();
 		return surf;
@@ -355,11 +353,11 @@ public sealed class DocumentLayers
 			throw new InvalidOperationException ("Cannot flatten layer because current layer is the bottom layer.");
 
 		// Get our source and destination layers
-		var source = CurrentUserLayer;
-		var dest = user_layers[CurrentUserLayerIndex - 1];
+		UserLayer source = CurrentUserLayer;
+		UserLayer dest = user_layers[CurrentUserLayerIndex - 1];
 
 		// Blend the layers
-		var g = new Context (dest.Surface);
+		Context g = new (dest.Surface);
 		source.Draw (g);
 
 		DeleteCurrentLayer ();
@@ -373,7 +371,7 @@ public sealed class DocumentLayers
 		if (CurrentUserLayerIndex == 0)
 			throw new InvalidOperationException ("Cannot move layer down because current layer is the bottom layer.");
 
-		var layer = CurrentUserLayer;
+		UserLayer layer = CurrentUserLayer;
 		int index = CurrentUserLayerIndex;
 		DeleteLayer (index);
 		Insert (layer, index - 1);
@@ -392,10 +390,12 @@ public sealed class DocumentLayers
 		if (CurrentUserLayerIndex == user_layers.Count)
 			throw new InvalidOperationException ("Cannot move layer up because current layer is the top layer.");
 
-		var layer = CurrentUserLayer;
+		UserLayer layer = CurrentUserLayer;
 		int index = CurrentUserLayerIndex;
+
 		DeleteLayer (index);
 		Insert (layer, index + 1);
+
 		CurrentUserLayerIndex = index + 1;
 
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
