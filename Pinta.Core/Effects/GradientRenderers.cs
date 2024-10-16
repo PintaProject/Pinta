@@ -23,6 +23,8 @@ public static class GradientRenderers
 
 			dtdx = EndPoint.X == StartPoint.X ? 0 : vec.X / (mag * mag);
 			dtdy = EndPoint.Y == StartPoint.Y ? 0 : vec.Y / (mag * mag);
+
+			base.BeforeRender ();
 		}
 
 		protected internal LinearBase (bool alphaOnly, BinaryPixelOp normalBlendOp) : base (alphaOnly, normalBlendOp)
@@ -121,6 +123,8 @@ public static class GradientRenderers
 				0 => 0,
 				_ => 1f / distanceScale,
 			};
+
+			base.BeforeRender ();
 		}
 
 		public override byte ComputeByteLerp (int x, int y)
@@ -158,6 +162,8 @@ public static class GradientRenderers
 			double t = theta * InvPi;
 
 			t_offset = -t;
+
+			base.BeforeRender ();
 		}
 
 		public override byte ComputeByteLerp (int x, int y)
