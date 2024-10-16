@@ -23,12 +23,11 @@ public abstract class Histogram
 		get => histogram;
 
 		set {
-			if (value.Length == histogram.Length && value[0].Length == histogram[0].Length) {
-				histogram = value;
-				OnHistogramUpdated ();
-			} else {
+			if (value.Length != histogram.Length || value[0].Length != histogram[0].Length)
 				throw new ArgumentException ("value muse be an array of arrays of matching size", nameof (value));
-			}
+
+			histogram = value;
+			OnHistogramUpdated ();
 		}
 	}
 
@@ -45,9 +44,8 @@ public abstract class Histogram
 
 		histogram = new long[channels][];
 
-		for (int channel = 0; channel < channels; ++channel) {
+		for (int channel = 0; channel < channels; ++channel)
 			histogram[channel] = new long[entries];
-		}
 	}
 
 	public event EventHandler? HistogramChanged;
@@ -58,26 +56,19 @@ public abstract class Histogram
 
 	protected readonly ImmutableArray<ColorBgra> visual_colors;
 	public ColorBgra GetVisualColor (int channel)
-	{
-		return visual_colors[channel];
-	}
+		=> visual_colors[channel];
 
 	public long GetOccurrences (int channel, int val)
-	{
-		return histogram[channel][val];
-	}
+		=> histogram[channel][val];
 
 	public long GetMax ()
 	{
 		long max = -1;
 
-		foreach (long[] channelHistogram in histogram) {
-			foreach (long i in channelHistogram) {
-				if (i > max) {
+		foreach (long[] channelHistogram in histogram)
+			foreach (long i in channelHistogram)
+				if (i > max)
 					max = i;
-				}
-			}
-		}
 
 		return max;
 	}
@@ -86,11 +77,9 @@ public abstract class Histogram
 	{
 		long max = -1;
 
-		foreach (long i in histogram[channel]) {
-			if (i > max) {
+		foreach (long i in histogram[channel])
+			if (i > max)
 				max = i;
-			}
-		}
 
 		return max;
 	}
@@ -99,8 +88,17 @@ public abstract class Histogram
 	{
 		var ret = ImmutableArray.CreateBuilder<float> (Channels);
 		ret.Count = Channels;
+
 		for (int channel = 0; channel < Channels; ++channel) {
 			ReadOnlySpan<long> channelHistogram = histogram[channel];
+			ret[channel] = GetForChannel (channelHistogram);
+		}
+		return ret.MoveToImmutable ();
+
+		// --- Methods
+
+		static float GetForChannel (ReadOnlySpan<long> channelHistogram)
+		{
 			long avg = 0;
 			long sum = 0;
 
@@ -109,13 +107,11 @@ public abstract class Histogram
 				sum += channelHistogram[j];
 			}
 
-			if (sum != 0) {
-				ret[channel] = avg / (float) sum;
-			} else {
-				ret[channel] = 0;
-			}
+			return
+				sum == 0
+				? 0
+				: avg / (float) sum;
 		}
-		return ret.MoveToImmutable ();
 	}
 
 	public ImmutableArray<int> GetPercentile (float fraction)
@@ -124,20 +120,28 @@ public abstract class Histogram
 		ret.Count = Channels;
 		for (int channel = 0; channel < Channels; ++channel) {
 			ReadOnlySpan<long> channelHistogram = histogram[channel];
-			long integral = 0;
-			long sum = 0;
-			for (int j = 0; j < channelHistogram.Length; j++) {
-				sum += channelHistogram[j];
-			}
-			for (int j = 0; j < channelHistogram.Length; j++) {
-				integral += channelHistogram[j];
-				if (integral > sum * fraction) {
-					ret[channel] = j;
-					break;
-				}
-			}
+			ret[channel] = GetForChannel (channelHistogram);
 		}
 		return ret.MoveToImmutable ();
+
+		// --- Methods
+
+		int GetForChannel (ReadOnlySpan<long> channelHistogram)
+		{
+			long integral = 0;
+			long sum = 0;
+
+			for (int j = 0; j < channelHistogram.Length; j++)
+				sum += channelHistogram[j];
+
+			for (int j = 0; j < channelHistogram.Length; j++) {
+				integral += channelHistogram[j];
+				if (integral > sum * fraction)
+					return j;
+			}
+
+			return default;
+		}
 	}
 
 	public abstract ColorBgra GetMeanColor ();
