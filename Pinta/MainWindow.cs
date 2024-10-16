@@ -325,54 +325,54 @@ internal sealed class MainWindow
 				// Only use the application menu on macOS. On other platforms, these
 				// menu items appear under File, Help, etc.
 				// The first menu seems to be treated as the application menu.
-				var app_menu = Gio.Menu.New ();
+				Gio.Menu app_menu = Gio.Menu.New ();
 				PintaCore.Actions.App.RegisterActions (app, app_menu);
 				menu_bar.AppendSubmenu ("_Application", app_menu);
 			}
 		}
 
-		var file_menu = Gio.Menu.New ();
+		Gio.Menu file_menu = Gio.Menu.New ();
 		PintaCore.Actions.File.RegisterActions (app, file_menu);
 		menu_bar.AppendSubmenu (Translations.GetString ("_File"), file_menu);
 
-		var edit_menu = Gio.Menu.New ();
+		Gio.Menu edit_menu = Gio.Menu.New ();
 		PintaCore.Actions.Edit.RegisterActions (app, edit_menu);
 		menu_bar.AppendSubmenu (Translations.GetString ("_Edit"), edit_menu);
 
-		var view_menu = Gio.Menu.New ();
+		Gio.Menu view_menu = Gio.Menu.New ();
 		PintaCore.Actions.View.RegisterActions (app, view_menu);
 		menu_bar.AppendSubmenu (Translations.GetString ("_View"), view_menu);
 
-		var image_menu = Gio.Menu.New ();
+		Gio.Menu image_menu = Gio.Menu.New ();
 		PintaCore.Actions.Image.RegisterActions (app, image_menu);
 		if (!using_header_bar)
 			menu_bar.AppendSubmenu (Translations.GetString ("_Image"), image_menu);
 
-		var layers_menu = Gio.Menu.New ();
+		Gio.Menu layers_menu = Gio.Menu.New ();
 		PintaCore.Actions.Layers.RegisterActions (app, layers_menu);
 		menu_bar.AppendSubmenu (Translations.GetString ("_Layers"), layers_menu);
 
-		var adj_menu = Gio.Menu.New ();
+		Gio.Menu adj_menu = Gio.Menu.New ();
 		if (!using_header_bar)
 			menu_bar.AppendSubmenu (Translations.GetString ("_Adjustments"), adj_menu);
 
-		var effects_menu = Gio.Menu.New ();
+		Gio.Menu effects_menu = Gio.Menu.New ();
 		if (!using_header_bar)
 			menu_bar.AppendSubmenu (Translations.GetString ("Effe_cts"), effects_menu);
 
-		var addins_menu = Gio.Menu.New ();
+		Gio.Menu addins_menu = Gio.Menu.New ();
 		PintaCore.Actions.Addins.RegisterActions (app, addins_menu);
 		menu_bar.AppendSubmenu (Translations.GetString ("A_dd-ins"), addins_menu);
 
-		var window_menu = Gio.Menu.New ();
+		Gio.Menu window_menu = Gio.Menu.New ();
 		PintaCore.Actions.Window.RegisterActions (app, window_menu);
 		menu_bar.AppendSubmenu (Translations.GetString ("_Window"), window_menu);
 
-		var help_menu = Gio.Menu.New ();
+		Gio.Menu help_menu = Gio.Menu.New ();
 		PintaCore.Actions.Help.RegisterActions (app, help_menu);
 		menu_bar.AppendSubmenu (Translations.GetString ("_Help"), help_menu);
 
-		var pad_section = Gio.Menu.New ();
+		Gio.Menu pad_section = Gio.Menu.New ();
 		view_menu.AppendSection (null, pad_section);
 
 		show_pad = Gio.Menu.New ();
@@ -380,25 +380,25 @@ internal sealed class MainWindow
 
 		if (window_shell.HeaderBar is not null) {
 			var header_bar = window_shell.HeaderBar;
-			header_bar.PackEnd (new Gtk.MenuButton () {
+			header_bar.PackEnd (new Gtk.MenuButton {
 				MenuModel = menu_bar,
 				IconName = Resources.StandardIcons.OpenMenu,
 				TooltipText = Translations.GetString ("Main Menu"),
 			});
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
+			header_bar.PackEnd (new Gtk.MenuButton {
 				MenuModel = effects_menu,
 				IconName = Resources.Icons.EffectsDefault,
 				TooltipText = Translations.GetString ("Effects"),
 			});
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
+			header_bar.PackEnd (new Gtk.MenuButton {
 				MenuModel = adj_menu,
 				IconName = Resources.Icons.AdjustmentsBrightnessContrast,
 				TooltipText = Translations.GetString ("Adjustments"),
 			});
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
+			header_bar.PackEnd (new Gtk.MenuButton {
 				MenuModel = image_menu,
 				IconName = Resources.StandardIcons.ImageGeneric,
 				TooltipText = Translations.GetString ("Image"),
@@ -430,7 +430,7 @@ internal sealed class MainWindow
 	{
 		Gtk.Box statusbar = window_shell.CreateStatusBar ("statusbar");
 
-		statusbar.Append (new StatusBarColorPaletteWidget () {
+		statusbar.Append (new StatusBarColorPaletteWidget (PintaCore.Chrome, PintaCore.Palette) {
 			Hexpand = true,
 			Halign = Gtk.Align.Fill,
 		});
@@ -580,7 +580,7 @@ internal sealed class MainWindow
 			int image_x = PintaCore.Workspace.ImageSize.Width;
 			int image_y = PintaCore.Workspace.ImageSize.Height;
 
-			var canvas_window = PintaCore.Workspace.ActiveWorkspace.Canvas.Parent!;
+			Gtk.Widget canvas_window = PintaCore.Workspace.ActiveWorkspace.Canvas.Parent!;
 
 			int window_x = canvas_window.GetAllocatedWidth ();
 			int window_y = canvas_window.GetAllocatedHeight ();
