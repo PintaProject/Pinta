@@ -11,7 +11,7 @@ internal sealed class AddinListViewItem : GObject.Object
 	private readonly SetupService service;
 	private readonly AddinHeader info;
 	private readonly AddinStatus status;
-	private readonly Addin installed_addin;
+	private readonly Addin? installed_addin;
 	private readonly AddinRepositoryEntry? available_addin;
 
 	/// <summary>
@@ -60,16 +60,16 @@ internal sealed class AddinListViewItem : GObject.Object
 	public string Url => info.Url;
 
 	public bool Installed => installed_addin is not null;
-	public Addin Addin => installed_addin;
+	public Addin? Addin => installed_addin;
 	public AddinRepositoryEntry? RepositoryEntry => available_addin;
 
-	public bool CanDisable => installed_addin.Description.CanDisable;
+	public bool CanDisable => installed_addin?.Description.CanDisable ?? false;
 	public bool Enabled {
-		get => installed_addin.Enabled;
-		set => installed_addin.Enabled = value;
+		get => installed_addin!.Enabled;
+		set => installed_addin!.Enabled = value;
 	}
 
-	public bool CanUninstall => installed_addin.Description.CanUninstall;
+	public bool CanUninstall => installed_addin?.Description.CanUninstall ?? false;
 
 	public string? DownloadSize {
 		get {
