@@ -61,7 +61,7 @@ public sealed class Document
 		PreviousSelection = new (this);
 		Selection = new DocumentSelection (this);
 
-		Layers = new DocumentLayers (PintaCore.Layers, PintaCore.Tools, this);
+		Layers = new DocumentLayers (PintaCore.Tools, this);
 		Workspace = new DocumentWorkspace (this);
 		IsDirty = false;
 		HasBeenSavedInSession = false;

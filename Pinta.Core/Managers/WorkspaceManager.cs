@@ -157,6 +157,8 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	private readonly ChromeManager chrome_manager;
 	private readonly ImageConverterManager image_formats;
+	private readonly LayerManager layers;
+
 	public WorkspaceManager (
 		SystemManager systemManager,
 		ChromeManager chromeManager,
@@ -171,6 +173,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		chrome_manager = chromeManager;
 		image_formats = imageFormats;
+		this.layers = layers;
 	}
 
 	public int ActiveDocumentIndex
@@ -221,25 +224,49 @@ public sealed class WorkspaceManager : IWorkspaceService
 		string? file_type,
 		Size size)
 	{
-		Document doc = new (size);
+		Document document = new (size);
+		document.Layers.LayerAdded += Document_LayerAdded;
+		document.Layers.LayerRemoved += Document_LayerRemoved;
+		document.Layers.SelectedLayerChanged += Document_SelectedLayerChanged;
+		document.Layers.LayerPropertyChanged += Document_LayerPropertyChanged;
 
 		if (file is not null) {
 
 			if (string.IsNullOrEmpty (file_type))
 				throw new ArgumentNullException ($"nameof{file_type} must contain value.");
 
-			doc.File = file;
-			doc.FileType = file_type;
+			document.File = file;
+			document.FileType = file_type;
 		} else
-			doc.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
+			document.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
 
-		open_documents.Add (doc);
+		open_documents.Add (document);
 
-		OnDocumentCreated (new DocumentEventArgs (doc));
+		OnDocumentCreated (new DocumentEventArgs (document));
 
-		actions.Window.SetActiveDocument (doc);
+		actions.Window.SetActiveDocument (document);
 
-		return doc;
+		return document;
+	}
+
+	private void Document_LayerPropertyChanged (object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+	{
+		layers.RaiseLayerPropertyChangedEvent (sender, e);
+	}
+
+	private void Document_SelectedLayerChanged (object? sender, EventArgs e)
+	{
+		layers.OnSelectedLayerChanged ();
+	}
+
+	private void Document_LayerRemoved (object? sender, IndexEventArgs e)
+	{
+		layers.OnLayerRemoved ();
+	}
+
+	private void Document_LayerAdded (object? sender, IndexEventArgs e)
+	{
+		layers.OnLayerAdded ();
 	}
 
 	public void CloseDocument (
@@ -262,6 +289,10 @@ public sealed class WorkspaceManager : IWorkspaceService
 			}
 		}
 
+		document.Layers.LayerAdded += Document_LayerAdded;
+		document.Layers.LayerRemoved += Document_LayerRemoved;
+		document.Layers.SelectedLayerChanged += Document_SelectedLayerChanged;
+		document.Layers.LayerPropertyChanged += Document_LayerPropertyChanged;
 		document.Close ();
 
 		OnDocumentClosed (new DocumentEventArgs (document));

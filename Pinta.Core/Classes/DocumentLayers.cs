@@ -8,7 +8,6 @@ namespace Pinta.Core;
 
 public sealed class DocumentLayers
 {
-	private readonly LayerManager layers;
 	private readonly ToolManager tools;
 	private readonly Document document;
 	private readonly List<UserLayer> user_layers = new ();
@@ -22,11 +21,9 @@ public sealed class DocumentLayers
 	private Layer? selection_layer;
 
 	public DocumentLayers (
-		LayerManager layers,
 		ToolManager tools,
 		Document document)
 	{
-		this.layers = layers;
 		this.tools = tools;
 		this.document = document;
 	}
@@ -102,7 +99,7 @@ public sealed class DocumentLayers
 		layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (user_layers.Count - 1));
-		layers.OnLayerAdded ();
+
 		return layer;
 	}
 
@@ -184,7 +181,6 @@ public sealed class DocumentLayers
 		layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
 
 		LayerRemoved?.Invoke (this, new IndexEventArgs (index));
-		layers.OnLayerRemoved ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -223,7 +219,6 @@ public sealed class DocumentLayers
 		layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (CurrentUserLayerIndex));
-		layers.OnLayerAdded ();
 
 		return layer;
 	}
@@ -339,7 +334,6 @@ public sealed class DocumentLayers
 		layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (index));
-		layers.OnLayerAdded ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -377,7 +371,6 @@ public sealed class DocumentLayers
 		Insert (layer, index - 1);
 
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
-		layers.OnSelectedLayerChanged ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -399,7 +392,6 @@ public sealed class DocumentLayers
 		CurrentUserLayerIndex = index + 1;
 
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
-		layers.OnSelectedLayerChanged ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -415,7 +407,6 @@ public sealed class DocumentLayers
 
 		CurrentUserLayerIndex = i;
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
-		layers.OnSelectedLayerChanged ();
 	}
 
 	/// <summary>
@@ -434,6 +425,5 @@ public sealed class DocumentLayers
 	private void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
 	{
 		LayerPropertyChanged?.Invoke (sender, e);
-		layers.RaiseLayerPropertyChangedEvent (sender, e);
 	}
 }
