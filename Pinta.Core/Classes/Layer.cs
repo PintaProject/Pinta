@@ -58,7 +58,6 @@ public class Layer : ObservableObject
 	}
 
 	public ImageSurface Surface { get; set; }
-	public bool Tiled { get; internal set; }
 	public Matrix Transform { get; set; }
 
 	public static string OpacityProperty { get; } = nameof (Opacity);
