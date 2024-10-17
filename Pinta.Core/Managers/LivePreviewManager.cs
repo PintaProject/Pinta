@@ -75,9 +75,6 @@ public sealed class LivePreviewManager
 	public Cairo.ImageSurface LivePreviewSurface => live_preview_surface;
 	public RectangleI RenderBounds => render_bounds;
 
-	public event EventHandler<LivePreviewStartedEventArgs>? Started;
-	public event EventHandler<LivePreviewEndedEventArgs>? Ended;
-
 	public async void Start (BaseEffect effect)
 	{
 		if (live_preview_enabled)
@@ -105,7 +102,7 @@ public sealed class LivePreviewManager
 		// Handle selection path.
 		tool_manager.Commit ();
 		var selection = doc.Selection;
-		selection_path = (selection.Visible) ? selection.SelectionPath : null;
+		selection_path = selection.Visible ? selection.SelectionPath : null;
 		render_bounds = (selection_path != null) ? selection_path.GetBounds () : live_preview_surface.GetBounds ();
 		render_bounds = workspace_manager.ClampToImageSize (render_bounds);
 
@@ -118,8 +115,6 @@ public sealed class LivePreviewManager
 
 		if (effect.EffectData != null)
 			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
-
-		Started?.Invoke (this, new LivePreviewStartedEventArgs ());
 
 		AsyncEffectRenderer.Settings settings = new (
 			threadCount: system_manager.RenderThreads,
@@ -171,7 +166,6 @@ public sealed class LivePreviewManager
 	{
 		Debug.WriteLine ("LivePreviewManager.HandleCancel()");
 
-		FireLivePreviewEndedEvent (RenderStatus.Canceled, null);
 		live_preview_enabled = false;
 
 		live_preview_surface = null!;
@@ -207,7 +201,7 @@ public sealed class LivePreviewManager
 	{
 		Debug.WriteLine ("LivePreviewManager.HandleApply()");
 
-		var ctx = new Cairo.Context (layer.Surface);
+		Cairo.Context ctx = new (layer.Surface);
 		ctx.Save ();
 		workspace_manager.ActiveDocument.Selection.Clip (ctx);
 
@@ -216,8 +210,6 @@ public sealed class LivePreviewManager
 
 		workspace_manager.ActiveDocument.History.PushNewItem (history_item);
 		history_item = null!;
-
-		FireLivePreviewEndedEvent (RenderStatus.Completed, null);
 
 		live_preview_enabled = false;
 
@@ -298,13 +290,6 @@ public sealed class LivePreviewManager
 			else if (manager.apply_live_preview_flag)
 				manager.HandleApply ();
 		}
-	}
-
-	void FireLivePreviewEndedEvent (RenderStatus status, Exception? ex)
-	{
-		if (Ended == null) return;
-		LivePreviewEndedEventArgs args = new (status, ex);
-		Ended (this, args);
 	}
 
 	void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
