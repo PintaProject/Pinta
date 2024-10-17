@@ -273,7 +273,7 @@ public sealed class LivePreviewManager
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
 			chrome.ProgressDialog.Progress = progress;
-			manager.FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
+			manager.HandleUpdate (progress, updatedBounds);
 		}
 
 		protected override void OnCompletion (
@@ -292,7 +292,7 @@ public sealed class LivePreviewManager
 		}
 	}
 
-	void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
+	void HandleUpdate (double progress, RectangleI bounds)
 	{
 		double scale = workspace_manager.Scale;
 		PointD offset = workspace_manager.Offset;
