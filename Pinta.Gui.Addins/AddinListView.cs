@@ -10,8 +10,6 @@ internal sealed class AddinListView : Adw.Bin
 {
 	private readonly Gio.ListStore model;
 	private readonly Gtk.SingleSelection selection_model;
-	private readonly Gtk.SignalListItemFactory factory;
-	private readonly Gtk.ListView list_view;
 
 	private readonly Adw.StatusPage empty_list_page;
 	private readonly Gtk.ScrolledWindow list_view_scroll;
@@ -26,52 +24,64 @@ internal sealed class AddinListView : Adw.Bin
 
 	public AddinListView (SystemManager system)
 	{
-		model = Gio.ListStore.New (AddinListViewItem.GetGType ());
+		Gio.ListStore listStore = Gio.ListStore.New (AddinListViewItem.GetGType ());
 
-		selection_model = Gtk.SingleSelection.New (model);
-		selection_model.OnSelectionChanged ((_, _) => HandleSelectionChanged ());
-		selection_model.Autoselect = true;
+		Gtk.SingleSelection selectionModel = Gtk.SingleSelection.New (listStore);
+		selectionModel.OnSelectionChanged ((_, _) => HandleSelectionChanged ());
+		selectionModel.Autoselect = true;
 
-		factory = Gtk.SignalListItemFactory.New ();
-		factory.OnSetup += (factory, args) => {
+		Gtk.SignalListItemFactory itemFactory = Gtk.SignalListItemFactory.New ();
+		itemFactory.OnSetup += (factory, args) => {
 			var item = (Gtk.ListItem) args.Object;
 			item.SetChild (new AddinListViewItemWidget ());
 		};
-		factory.OnBind += (factory, args) => {
+		itemFactory.OnBind += (factory, args) => {
 			var list_item = (Gtk.ListItem) args.Object;
 			var model_item = (AddinListViewItem) list_item.GetItem ()!;
 			var widget = (AddinListViewItemWidget) list_item.GetChild ()!;
 			widget.Update (model_item);
 		};
 
-		// TODO - have an option to group by category like the old GTK2 addin dialog.
-		list_view = Gtk.ListView.New (selection_model, factory);
+		// TODO: have an option to group by category like the old GTK2 addin dialog.
+		Gtk.ListView listView = Gtk.ListView.New (selectionModel, itemFactory);
 
-		list_view_scroll = Gtk.ScrolledWindow.New ();
-		list_view_scroll.SetChild (list_view);
-		list_view_scroll.SetSizeRequest (300, 400);
-		list_view_scroll.SetPolicy (Gtk.PolicyType.Automatic, Gtk.PolicyType.Automatic);
+		Gtk.ScrolledWindow listViewScroll = Gtk.ScrolledWindow.New ();
+		listViewScroll.SetChild (listView);
+		listViewScroll.SetSizeRequest (300, 400);
+		listViewScroll.SetPolicy (Gtk.PolicyType.Automatic, Gtk.PolicyType.Automatic);
 
-		empty_list_page = new Adw.StatusPage () {
+		Adw.StatusPage emptyListPage = new () {
 			IconName = StandardIcons.SystemSearch,
-			Title = Translations.GetString ("No Items Found")
+			Title = Translations.GetString ("No Items Found"),
 		};
-		empty_list_page.AddCssClass (AdwaitaStyles.Compact);
+		emptyListPage.AddCssClass (AdwaitaStyles.Compact);
 
-		list_view_stack = Adw.ViewStack.New ();
-		list_view_stack.Add (list_view_scroll);
-		list_view_stack.Add (empty_list_page);
+		Adw.ViewStack listViewStack = Adw.ViewStack.New ();
+		listViewStack.Add (listViewScroll);
+		listViewStack.Add (emptyListPage);
 
-		info_view = new AddinInfoView (system);
-		info_view.OnAddinChanged += (o, e) => OnAddinChanged?.Invoke (o, e);
+		AddinInfoView infoView = new (system);
+		infoView.OnAddinChanged += (o, e) => OnAddinChanged?.Invoke (o, e);
 
-		var flap = Adw.Flap.New ();
+		Adw.Flap flap = Adw.Flap.New ();
 		flap.FoldPolicy = Adw.FlapFoldPolicy.Never;
 		flap.Locked = true;
-		flap.Content = list_view_stack;
+		flap.Content = listViewStack;
 		flap.Separator = Gtk.Separator.New (Gtk.Orientation.Vertical);
 		flap.FlapPosition = Gtk.PackType.End;
-		flap.SetFlap (info_view);
+		flap.SetFlap (infoView);
+
+		// --- References to keep
+
+		model = listStore;
+		selection_model = selectionModel;
+		list_view_scroll = listViewScroll;
+		empty_list_page = emptyListPage;
+		list_view_stack = listViewStack;
+		info_view = infoView;
+
+		// --- Post-initialization
+
 		SetChild (flap);
 	}
 
@@ -81,7 +91,11 @@ internal sealed class AddinListView : Adw.Bin
 		list_view_stack.VisibleChild = empty_list_page;
 	}
 
-	public void AddAddin (SetupService service, AddinHeader info, Addin addin, AddinStatus status)
+	public void AddAddin (
+		SetupService service,
+		AddinHeader info,
+		Addin addin,
+		AddinStatus status)
 	{
 		list_view_stack.VisibleChild = list_view_scroll;
 
@@ -92,7 +106,11 @@ internal sealed class AddinListView : Adw.Bin
 			HandleSelectionChanged ();
 	}
 
-	public void AddAddinRepositoryEntry (SetupService service, AddinHeader info, AddinRepositoryEntry addin, AddinStatus status)
+	public void AddAddinRepositoryEntry (
+		SetupService service,
+		AddinHeader info,
+		AddinRepositoryEntry addin,
+		AddinStatus status)
 	{
 		list_view_stack.VisibleChild = list_view_scroll;
 
@@ -118,5 +136,5 @@ internal enum AddinStatus
 	NotInstalled = 0,
 	Installed = 1,
 	Disabled = 2,
-	HasUpdate = 4
+	HasUpdate = 4,
 }
