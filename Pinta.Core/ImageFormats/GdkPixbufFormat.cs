@@ -31,10 +31,16 @@ namespace Pinta.Core;
 
 public class GdkPixbufFormat : IImageImporter, IImageExporter
 {
+	private readonly ActionManager actions;
+	private readonly WorkspaceManager workspace;
 	private readonly string filetype;
-
-	public GdkPixbufFormat (string filetype)
+	public GdkPixbufFormat (
+		ActionManager actions,
+		WorkspaceManager workspace,
+		string filetype)
 	{
+		this.actions = actions;
+		this.workspace = workspace;
 		this.filetype = filetype;
 	}
 
@@ -55,34 +61,37 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 
 		bg = bg.ApplyEmbeddedOrientation () ?? bg;
 
-		Size imagesize = new Size (bg.Width, bg.Height);
+		Size imagesize = new (bg.Width, bg.Height);
 
 		// TODO: Move "activate document" part out of file format class.
 		//       The creation of the document should be separate from
 		//       its activation.
-		Document doc = PintaCore.Workspace.CreateAndActivateDocument (
-			PintaCore.Actions,
+		Document doc = workspace.CreateAndActivateDocument (
+			actions,
 			file,
 			filetype,
 			imagesize);
+
 		doc.ImageSize = imagesize;
 		doc.Workspace.ViewSize = imagesize;
 
 		Layer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
 
-		var g = new Cairo.Context (layer.Surface);
+		Cairo.Context g = new (layer.Surface);
 		g.DrawPixbuf (bg, PointD.Zero);
 	}
 	#endregion
 
 	protected virtual void DoSave (Pixbuf pb, Gio.File file, string fileType, Gtk.Window parent)
 	{
-		using var stream = file.Replace ();
+		using Gio.OutputStream stream = file.Replace ();
 		try {
-			pb.SaveToStreamv (stream, fileType,
-					optionKeys: Array.Empty<string> (),
-					optionValues: Array.Empty<string> (),
-					cancellable: null);
+			pb.SaveToStreamv (
+				stream,
+				fileType,
+				optionKeys: Array.Empty<string> (),
+				optionValues: Array.Empty<string> (),
+				cancellable: null);
 		} finally {
 			stream.Close (null);
 		}
@@ -90,8 +99,7 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 
 	public void Export (Document document, Gio.File file, Gtk.Window parent)
 	{
-		var surf = document.GetFlattenedImage ();
-
+		Cairo.ImageSurface surf = document.GetFlattenedImage ();
 		using Pixbuf pb = surf.ToPixbuf ();
 		DoSave (pb, file, filetype, parent);
 	}

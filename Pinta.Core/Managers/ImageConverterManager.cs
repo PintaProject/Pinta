@@ -50,7 +50,11 @@ public sealed class ImageConverterManager
 
 		// Create all the formats we have our own importers/exporters for
 
-		OraFormat oraHandler = new ();
+		OraFormat oraHandler = new (
+			PintaCore.Actions,
+			PintaCore.Chrome,
+			PintaCore.Workspace);
+
 		FormatDescriptor oraFormatDescriptor = new (
 			displayPrefix: "OpenRaster",
 			extensions: new[] { "ora", "ORA" },
@@ -58,6 +62,7 @@ public sealed class ImageConverterManager
 			importer: oraHandler,
 			exporter: oraHandler,
 			supportsLayers: true);
+
 		yield return oraFormatDescriptor;
 
 		NetpbmPortablePixmap netpbmPortablePixmap = new ();
@@ -81,10 +86,17 @@ public sealed class ImageConverterManager
 			"tiff" => new string[] { "tif", "tiff", "TIF", "TIFF" },
 			_ => new string[] { formatName, formatNameUpperCase },
 		};
-		GdkPixbufFormat importer = new (formatName);
+		GdkPixbufFormat importer = new (
+			PintaCore.Actions,
+			PintaCore.Workspace,
+			formatName);
+
 		IImageExporter? exporter;
 		if (formatName == "jpeg")
-			exporter = importer = new JpegFormat ();
+			exporter = importer = new JpegFormat (
+				PintaCore.Actions,
+				PintaCore.Settings,
+				PintaCore.Workspace);
 		else if (formatName == "tga")
 			exporter = new TgaExporter ();
 		else if (format.IsWritable ())
@@ -119,7 +131,7 @@ public sealed class ImageConverterManager
 	/// </summary>
 	public void UnregisterFormatByExtension (string extension)
 	{
-		var normalized = NormalizeExtension (extension);
+		string normalized = NormalizeExtension (extension);
 		formats.RemoveAll (f => f.Extensions.Contains (normalized));
 	}
 
