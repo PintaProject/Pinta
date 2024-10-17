@@ -65,8 +65,6 @@ public sealed class LivePreviewManager
 	{
 		live_preview_enabled = false;
 
-		RenderUpdated += LivePreview_RenderUpdated;
-
 		workspace_manager = workspaceManager;
 		tool_manager = toolManager;
 		system_manager = systemManager;
@@ -78,7 +76,6 @@ public sealed class LivePreviewManager
 	public RectangleI RenderBounds => render_bounds;
 
 	public event EventHandler<LivePreviewStartedEventArgs>? Started;
-	public event EventHandler<LivePreviewRenderUpdatedEventArgs>? RenderUpdated;
 	public event EventHandler<LivePreviewEndedEventArgs>? Ended;
 
 	public async void Start (BaseEffect effect)
@@ -312,16 +309,8 @@ public sealed class LivePreviewManager
 
 	void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
 	{
-
-		RenderUpdated?.Invoke (this, new LivePreviewRenderUpdatedEventArgs (progress, bounds));
-	}
-
-	private void LivePreview_RenderUpdated (object? o, LivePreviewRenderUpdatedEventArgs args)
-	{
 		double scale = workspace_manager.Scale;
-		var offset = workspace_manager.Offset;
-
-		var bounds = args.Bounds;
+		PointD offset = workspace_manager.Offset;
 
 		// Transform bounds (Image -> Canvas -> Window)
 
