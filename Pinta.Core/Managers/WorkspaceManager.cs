@@ -165,8 +165,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 		ImageConverterManager imageFormats,
 		LayerManager layers)
 	{
-		layers.LayerPropertyChanged += (_, _) => this.Invalidate ();
-
 		open_documents = new List<Document> ();
 		OpenDocuments = new ReadOnlyCollection<Document> (open_documents);
 		SelectionHandler = new SelectionModeHandler (systemManager);
@@ -252,6 +250,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 	private void Document_LayerPropertyChanged (object? sender, System.ComponentModel.PropertyChangedEventArgs e)
 	{
 		layers.RaiseLayerPropertyChangedEvent (sender, e);
+		this.Invalidate ();
 	}
 
 	private void Document_SelectedLayerChanged (object? sender, EventArgs e)
