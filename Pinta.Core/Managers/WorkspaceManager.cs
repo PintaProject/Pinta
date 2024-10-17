@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,11 @@ public interface IWorkspaceService
 
 	event EventHandler? SelectionChanged;
 	event EventHandler? ActiveDocumentChanged;
+
+	public event EventHandler? LayerAdded;
+	public event EventHandler? LayerRemoved;
+	public event EventHandler? SelectedLayerChanged;
+	public event PropertyChangedEventHandler? LayerPropertyChanged;
 }
 
 public static class WorkspaceServiceExtensions
@@ -157,13 +163,11 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	private readonly ChromeManager chrome_manager;
 	private readonly ImageConverterManager image_formats;
-	private readonly LayerManager layers;
 
 	public WorkspaceManager (
 		SystemManager systemManager,
 		ChromeManager chromeManager,
-		ImageConverterManager imageFormats,
-		LayerManager layers)
+		ImageConverterManager imageFormats)
 	{
 		open_documents = new List<Document> ();
 		OpenDocuments = new ReadOnlyCollection<Document> (open_documents);
@@ -171,7 +175,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		chrome_manager = chromeManager;
 		image_formats = imageFormats;
-		this.layers = layers;
 	}
 
 	public int ActiveDocumentIndex
@@ -249,23 +252,23 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	private void Document_LayerPropertyChanged (object? sender, System.ComponentModel.PropertyChangedEventArgs e)
 	{
-		layers.RaiseLayerPropertyChangedEvent (sender, e);
+		LayerPropertyChanged?.Invoke (sender, e);
 		this.Invalidate ();
 	}
 
 	private void Document_SelectedLayerChanged (object? sender, EventArgs e)
 	{
-		layers.OnSelectedLayerChanged ();
+		SelectedLayerChanged?.Invoke (sender, e);
 	}
 
 	private void Document_LayerRemoved (object? sender, IndexEventArgs e)
 	{
-		layers.OnLayerRemoved ();
+		LayerRemoved?.Invoke (sender, e);
 	}
 
 	private void Document_LayerAdded (object? sender, IndexEventArgs e)
 	{
-		layers.OnLayerAdded ();
+		LayerAdded?.Invoke (sender, e);
 	}
 
 	public void CloseDocument (
@@ -491,6 +494,11 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		return chrome_manager.ShowMessageDialog (parent, message, details);
 	}
+
+	public event EventHandler? LayerAdded;
+	public event EventHandler? LayerRemoved;
+	public event EventHandler? SelectedLayerChanged;
+	public event PropertyChangedEventHandler? LayerPropertyChanged;
 
 	public event EventHandler<DocumentEventArgs>? DocumentCreated;
 	public event EventHandler<DocumentEventArgs>? DocumentOpened;

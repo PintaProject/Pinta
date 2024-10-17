@@ -33,7 +33,6 @@ public static class PintaCore
 	public static EffectsManager Effects { get; }
 	public static ImageConverterManager ImageFormats { get; }
 	public static IServiceManager Services { get; }
-	public static LayerManager Layers { get; }
 	public static LivePreviewManager LivePreview { get; }
 	public static PaintBrushManager PaintBrushes { get; }
 	public static PaletteFormatManager PaletteFormats { get; }
@@ -58,15 +57,14 @@ public static class PintaCore
 		PaintBrushManager paintBrushes = new ();
 		PaletteFormatManager paletteFormats = new ();
 		RecentFileManager recentFiles = new ();
-		LayerManager layers = new ();
 
 		// --- Services that depend on other services
 
 		ImageConverterManager imageFormats = new (settings);
-		WorkspaceManager workspace = new (system, chrome, imageFormats, layers);
+		WorkspaceManager workspace = new (system, chrome, imageFormats);
 		ToolManager tools = new (workspace, chrome);
 		PaletteManager palette = new (settings, paletteFormats);
-		ActionManager actions = new (chrome, imageFormats, layers, paletteFormats, palette, recentFiles, system, tools, workspace);
+		ActionManager actions = new (chrome, imageFormats, paletteFormats, palette, recentFiles, system, tools, workspace);
 		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
 		EffectsManager effects = new (actions, chrome, livePreview);
 
@@ -77,7 +75,6 @@ public static class PintaCore
 		services.AddService<ISettingsService> (settings);
 		services.AddService (actions);
 		services.AddService<IWorkspaceService> (workspace);
-		services.AddService (layers);
 		services.AddService<IPaintBrushService> (paintBrushes);
 		services.AddService<IToolService> (tools);
 		services.AddService (imageFormats);
@@ -97,7 +94,6 @@ public static class PintaCore
 		Settings = settings;
 		Actions = actions;
 		Workspace = workspace;
-		Layers = layers;
 		PaintBrushes = paintBrushes;
 		Tools = tools;
 		ImageFormats = imageFormats;

@@ -11,7 +11,6 @@
 using System;
 using System.Threading.Tasks;
 using Cairo;
-using Pango;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -105,7 +104,6 @@ public sealed class TextTool : BaseTool
 
 	private readonly IWorkspaceService workspace;
 	private readonly IPaletteService palette;
-	private readonly LayerManager layers;
 
 	#region Constructor
 
@@ -113,7 +111,6 @@ public sealed class TextTool : BaseTool
 	{
 		workspace = services.GetService<IWorkspaceService> ();
 		palette = services.GetService<IPaletteService> ();
-		layers = services.GetService<LayerManager> ();
 
 		im_context = Gtk.IMMulticontext.New ();
 		im_context.OnCommit += OnIMCommit;
@@ -121,7 +118,7 @@ public sealed class TextTool : BaseTool
 		im_context.OnPreeditChanged += OnPreeditChanged;
 		im_context.OnPreeditEnd += OnPreeditEnd;
 
-		layout = new Pinta.Core.TextLayout ();
+		layout = new TextLayout ();
 	}
 	#endregion
 
@@ -460,9 +457,9 @@ public sealed class TextTool : BaseTool
 		palette.PrimaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
 		palette.SecondaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
 
-		layers.LayerAdded += HandleSelectedLayerChanged;
-		layers.LayerRemoved += HandleSelectedLayerChanged;
-		layers.SelectedLayerChanged += HandleSelectedLayerChanged;
+		workspace.LayerAdded += HandleSelectedLayerChanged;
+		workspace.LayerRemoved += HandleSelectedLayerChanged;
+		workspace.SelectedLayerChanged += HandleSelectedLayerChanged;
 
 		// We always start off not in edit mode
 		is_editing = false;
@@ -482,9 +479,9 @@ public sealed class TextTool : BaseTool
 		palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
 		palette.SecondaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
 
-		layers.LayerAdded -= HandleSelectedLayerChanged;
-		layers.LayerRemoved -= HandleSelectedLayerChanged;
-		layers.SelectedLayerChanged -= HandleSelectedLayerChanged;
+		workspace.LayerAdded -= HandleSelectedLayerChanged;
+		workspace.LayerRemoved -= HandleSelectedLayerChanged;
+		workspace.SelectedLayerChanged -= HandleSelectedLayerChanged;
 
 		StopEditing (false);
 	}
