@@ -212,7 +212,6 @@ public sealed class DocumentLayers
 
 		layer.Hidden = source.Hidden;
 		layer.Opacity = source.Opacity;
-		layer.Tiled = source.Tiled;
 
 		user_layers.Insert (++CurrentUserLayerIndex, layer);
 
