@@ -79,8 +79,6 @@ public abstract class GradientRenderer
 
 	public abstract byte ComputeByteLerp (int x, int y);
 
-	public virtual void AfterRender () { }
-
 	private static AlphaBounds ComputeAlphaOnlyValuesFromColors (
 		ColorBgra startColor,
 		ColorBgra endColor)
@@ -134,7 +132,6 @@ public abstract class GradientRenderer
 		}
 
 		surface.MarkDirty ();
-		AfterRender ();
 	}
 
 	private ColorBgra GetFinalSolidColor (
@@ -186,7 +183,7 @@ public abstract class GradientRenderer
 				byte lerpByte = ComputeByteLerp (x, y);
 				byte lerpAlpha = lerp_alphas[lerpByte];
 				ColorBgra original = row[x];
-				var color = original.ToStraightAlpha ();
+				ColorBgra color = original.ToStraightAlpha ();
 				color.A = lerpAlpha;
 				row[x] = color.ToPremultipliedAlpha ();
 			}
@@ -194,7 +191,7 @@ public abstract class GradientRenderer
 			// If we're doing all color channels, and we're doing alpha blending, and if alpha blending is necessary
 			for (var x = rect.Left; x <= right; ++x) {
 				byte lerpByte = ComputeByteLerp (x, y);
-				var lerpColor = lerp_colors[lerpByte];
+				ColorBgra lerpColor = lerp_colors[lerpByte];
 				ColorBgra originalPixel = row[x];
 				row[x] = normal_blend_op.Apply (originalPixel, lerpColor);
 			}
@@ -202,7 +199,7 @@ public abstract class GradientRenderer
 		} else {
 			for (int x = rect.Left; x <= right; ++x) {
 				byte lerpByte = ComputeByteLerp (x, y);
-				var lerpColor = lerp_colors[lerpByte];
+				ColorBgra lerpColor = lerp_colors[lerpByte];
 				row[x] = lerpColor;
 			}
 		}

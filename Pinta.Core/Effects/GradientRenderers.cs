@@ -51,15 +51,14 @@ public static class GradientRenderers
 
 			start_x = (int) StartPoint.X;
 			start_y = (int) StartPoint.Y;
-
 		}
 
 		public override byte ComputeByteLerp (int x, int y)
 		{
-			var dx = x - start_x;
-			var dy = y - start_y;
+			int dx = x - start_x;
+			int dy = y - start_y;
 
-			var lerp = (dx * dtdx) + (dy * dtdy);
+			double lerp = (dx * dtdx) + (dy * dtdy);
 
 			return BoundLerp (lerp);
 		}
@@ -90,14 +89,14 @@ public static class GradientRenderers
 
 		public override byte ComputeByteLerp (int x, int y)
 		{
-			var dx = x - StartPoint.X;
-			var dy = y - StartPoint.Y;
+			double dx = x - StartPoint.X;
+			double dy = y - StartPoint.Y;
 
-			var lerp1 = (dx * dtdx) + (dy * dtdy);
-			var lerp2 = (dx * dtdy) - (dy * dtdx);
+			double lerp1 = (dx * dtdx) + (dy * dtdy);
+			double lerp2 = (dx * dtdy) - (dy * dtdx);
 
-			var absLerp1 = Math.Abs (lerp1);
-			var absLerp2 = Math.Abs (lerp2);
+			double absLerp1 = Math.Abs (lerp1);
+			double absLerp2 = Math.Abs (lerp2);
 
 			return BoundLerp (absLerp1 + absLerp2);
 		}
@@ -115,7 +114,7 @@ public static class GradientRenderers
 
 		public override void BeforeRender ()
 		{
-			var distanceScale = StartPoint.Distance (EndPoint);
+			double distanceScale = StartPoint.Distance (EndPoint);
 
 			start_x = (int) StartPoint.X;
 			start_y = (int) StartPoint.Y;
@@ -130,14 +129,16 @@ public static class GradientRenderers
 
 		public override byte ComputeByteLerp (int x, int y)
 		{
-			var dx = x - start_x;
-			var dy = y - start_y;
+			int dx = x - start_x;
+			int dy = y - start_y;
 
-			var distance = Math.Sqrt (dx * dx + dy * dy);
+			double distance = Math.Sqrt (dx * dx + dy * dy);
 
-			var result = distance * inv_distance_scale;
+			double result = distance * inv_distance_scale;
+
 			if (result < 0.0)
 				return 0;
+
 			return result > 1.0 ? (byte) 255 : (byte) (result * 255f);
 		}
 	}
@@ -153,25 +154,26 @@ public static class GradientRenderers
 
 		public override void BeforeRender ()
 		{
-			var ax = EndPoint.X - StartPoint.X;
-			var ay = EndPoint.Y - StartPoint.Y;
+			double ax = EndPoint.X - StartPoint.X;
+			double ay = EndPoint.Y - StartPoint.Y;
 
-			var theta = Math.Atan2 (ay, ax);
+			double theta = Math.Atan2 (ay, ax);
 
-			var t = theta * InvPi;
+			double t = theta * InvPi;
 
 			t_offset = -t;
+
 			base.BeforeRender ();
 		}
 
 		public override byte ComputeByteLerp (int x, int y)
 		{
-			var ax = x - StartPoint.X;
-			var ay = y - StartPoint.Y;
+			double ax = x - StartPoint.X;
+			double ay = y - StartPoint.Y;
 
-			var theta = Math.Atan2 (ay, ax);
+			double theta = Math.Atan2 (ay, ax);
 
-			var t = theta * InvPi;
+			double t = theta * InvPi;
 
 			return (byte) (BoundLerp (t + t_offset) * 255f);
 		}
