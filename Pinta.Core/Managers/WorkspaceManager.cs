@@ -160,8 +160,11 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public WorkspaceManager (
 		SystemManager systemManager,
 		ChromeManager chromeManager,
-		ImageConverterManager imageFormats)
+		ImageConverterManager imageFormats,
+		LayerManager layers)
 	{
+		layers.LayerPropertyChanged += (_, _) => this.Invalidate ();
+
 		open_documents = new List<Document> ();
 		OpenDocuments = new ReadOnlyCollection<Document> (open_documents);
 		SelectionHandler = new SelectionModeHandler (systemManager);

@@ -58,14 +58,14 @@ public static class PintaCore
 		PaintBrushManager paintBrushes = new ();
 		PaletteFormatManager paletteFormats = new ();
 		RecentFileManager recentFiles = new ();
+		LayerManager layers = new ();
 
 		// --- Services that depend on other services
 
 		ImageConverterManager imageFormats = new (settings);
-		WorkspaceManager workspace = new (system, chrome, imageFormats);
+		WorkspaceManager workspace = new (system, chrome, imageFormats, layers);
 		ToolManager tools = new (workspace, chrome);
 		PaletteManager palette = new (settings, paletteFormats);
-		LayerManager layers = new (workspace);
 		ActionManager actions = new (chrome, imageFormats, layers, paletteFormats, palette, recentFiles, system, tools, workspace);
 		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
 		EffectsManager effects = new (actions, chrome, livePreview);

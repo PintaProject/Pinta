@@ -31,12 +31,6 @@ namespace Pinta.Core;
 
 public sealed class LayerManager
 {
-	private readonly WorkspaceManager workspace_manager;
-	public LayerManager (WorkspaceManager workspaceManager)
-	{
-		workspace_manager = workspaceManager;
-	}
-
 	internal void OnLayerAdded ()
 	{
 		LayerAdded?.Invoke (this, EventArgs.Empty);
@@ -55,9 +49,6 @@ public sealed class LayerManager
 	internal void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
 	{
 		LayerPropertyChanged?.Invoke (sender, e);
-
-		//TODO Get the workspace to subscribe to this event, and invalidate itself.
-		workspace_manager.Invalidate ();
 	}
 
 	public event EventHandler? LayerAdded;
