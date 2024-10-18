@@ -291,10 +291,10 @@ public sealed class WorkspaceManager : IWorkspaceService
 			}
 		}
 
-		document.Layers.LayerAdded += Document_LayerAdded;
-		document.Layers.LayerRemoved += Document_LayerRemoved;
-		document.Layers.SelectedLayerChanged += Document_SelectedLayerChanged;
-		document.Layers.LayerPropertyChanged += Document_LayerPropertyChanged;
+		document.Layers.LayerAdded -= Document_LayerAdded;
+		document.Layers.LayerRemoved -= Document_LayerRemoved;
+		document.Layers.SelectedLayerChanged -= Document_SelectedLayerChanged;
+		document.Layers.LayerPropertyChanged -= Document_LayerPropertyChanged;
 		document.Close ();
 
 		OnDocumentClosed (new DocumentEventArgs (document));
