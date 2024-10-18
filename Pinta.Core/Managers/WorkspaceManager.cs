@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,11 @@ public interface IWorkspaceService
 
 	event EventHandler? SelectionChanged;
 	event EventHandler? ActiveDocumentChanged;
+
+	public event EventHandler? LayerAdded;
+	public event EventHandler? LayerRemoved;
+	public event EventHandler? SelectedLayerChanged;
+	public event PropertyChangedEventHandler? LayerPropertyChanged;
 }
 
 public static class WorkspaceServiceExtensions
@@ -157,6 +163,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	private readonly ChromeManager chrome_manager;
 	private readonly ImageConverterManager image_formats;
+
 	public WorkspaceManager (
 		SystemManager systemManager,
 		ChromeManager chromeManager,
@@ -218,25 +225,50 @@ public sealed class WorkspaceManager : IWorkspaceService
 		string? file_type,
 		Size size)
 	{
-		Document doc = new (size);
+		Document document = new (size);
+		document.Layers.LayerAdded += Document_LayerAdded;
+		document.Layers.LayerRemoved += Document_LayerRemoved;
+		document.Layers.SelectedLayerChanged += Document_SelectedLayerChanged;
+		document.Layers.LayerPropertyChanged += Document_LayerPropertyChanged;
 
 		if (file is not null) {
 
 			if (string.IsNullOrEmpty (file_type))
 				throw new ArgumentNullException ($"nameof{file_type} must contain value.");
 
-			doc.File = file;
-			doc.FileType = file_type;
+			document.File = file;
+			document.FileType = file_type;
 		} else
-			doc.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
+			document.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
 
-		open_documents.Add (doc);
+		open_documents.Add (document);
 
-		OnDocumentCreated (new DocumentEventArgs (doc));
+		OnDocumentCreated (new DocumentEventArgs (document));
 
-		actions.Window.SetActiveDocument (doc);
+		actions.Window.SetActiveDocument (document);
 
-		return doc;
+		return document;
+	}
+
+	private void Document_LayerPropertyChanged (object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+	{
+		LayerPropertyChanged?.Invoke (sender, e);
+		this.Invalidate ();
+	}
+
+	private void Document_SelectedLayerChanged (object? sender, EventArgs e)
+	{
+		SelectedLayerChanged?.Invoke (sender, e);
+	}
+
+	private void Document_LayerRemoved (object? sender, IndexEventArgs e)
+	{
+		LayerRemoved?.Invoke (sender, e);
+	}
+
+	private void Document_LayerAdded (object? sender, IndexEventArgs e)
+	{
+		LayerAdded?.Invoke (sender, e);
 	}
 
 	public void CloseDocument (
@@ -259,6 +291,10 @@ public sealed class WorkspaceManager : IWorkspaceService
 			}
 		}
 
+		document.Layers.LayerAdded -= Document_LayerAdded;
+		document.Layers.LayerRemoved -= Document_LayerRemoved;
+		document.Layers.SelectedLayerChanged -= Document_SelectedLayerChanged;
+		document.Layers.LayerPropertyChanged -= Document_LayerPropertyChanged;
 		document.Close ();
 
 		OnDocumentClosed (new DocumentEventArgs (document));
@@ -458,6 +494,11 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		return chrome_manager.ShowMessageDialog (parent, message, details);
 	}
+
+	public event EventHandler? LayerAdded;
+	public event EventHandler? LayerRemoved;
+	public event EventHandler? SelectedLayerChanged;
+	public event PropertyChangedEventHandler? LayerPropertyChanged;
 
 	public event EventHandler<DocumentEventArgs>? DocumentCreated;
 	public event EventHandler<DocumentEventArgs>? DocumentOpened;

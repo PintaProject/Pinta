@@ -45,7 +45,6 @@ public sealed class ActionManager
 	public ActionManager (
 		ChromeManager chrome,
 		ImageConverterManager imageFormats,
-		LayerManager layerManager,
 		PaletteFormatManager paletteFormats,
 		PaletteManager palette,
 		RecentFileManager recentFiles,
@@ -68,7 +67,7 @@ public sealed class ActionManager
 		FileActions file = new (system, app);
 		HelpActions help = new (system, app);
 		ImageActions image = new (tools, workspace, view);
-		LayerActions layers = new (chrome, imageFormats, layerManager, recentFiles, tools, workspace, image);
+		LayerActions layers = new (chrome, imageFormats, recentFiles, tools, workspace, image);
 
 		// --- References to keep
 

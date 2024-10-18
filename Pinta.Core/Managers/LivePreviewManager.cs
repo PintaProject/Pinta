@@ -65,8 +65,6 @@ public sealed class LivePreviewManager
 	{
 		live_preview_enabled = false;
 
-		RenderUpdated += LivePreview_RenderUpdated;
-
 		workspace_manager = workspaceManager;
 		tool_manager = toolManager;
 		system_manager = systemManager;
@@ -76,10 +74,6 @@ public sealed class LivePreviewManager
 	public bool IsEnabled => live_preview_enabled;
 	public Cairo.ImageSurface LivePreviewSurface => live_preview_surface;
 	public RectangleI RenderBounds => render_bounds;
-
-	public event EventHandler<LivePreviewStartedEventArgs>? Started;
-	public event EventHandler<LivePreviewRenderUpdatedEventArgs>? RenderUpdated;
-	public event EventHandler<LivePreviewEndedEventArgs>? Ended;
 
 	public async void Start (BaseEffect effect)
 	{
@@ -108,7 +102,7 @@ public sealed class LivePreviewManager
 		// Handle selection path.
 		tool_manager.Commit ();
 		var selection = doc.Selection;
-		selection_path = (selection.Visible) ? selection.SelectionPath : null;
+		selection_path = selection.Visible ? selection.SelectionPath : null;
 		render_bounds = (selection_path != null) ? selection_path.GetBounds () : live_preview_surface.GetBounds ();
 		render_bounds = workspace_manager.ClampToImageSize (render_bounds);
 
@@ -121,8 +115,6 @@ public sealed class LivePreviewManager
 
 		if (effect.EffectData != null)
 			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
-
-		Started?.Invoke (this, new LivePreviewStartedEventArgs ());
 
 		AsyncEffectRenderer.Settings settings = new (
 			threadCount: system_manager.RenderThreads,
@@ -174,7 +166,6 @@ public sealed class LivePreviewManager
 	{
 		Debug.WriteLine ("LivePreviewManager.HandleCancel()");
 
-		FireLivePreviewEndedEvent (RenderStatus.Canceled, null);
 		live_preview_enabled = false;
 
 		live_preview_surface = null!;
@@ -210,7 +201,7 @@ public sealed class LivePreviewManager
 	{
 		Debug.WriteLine ("LivePreviewManager.HandleApply()");
 
-		var ctx = new Cairo.Context (layer.Surface);
+		Cairo.Context ctx = new (layer.Surface);
 		ctx.Save ();
 		workspace_manager.ActiveDocument.Selection.Clip (ctx);
 
@@ -219,8 +210,6 @@ public sealed class LivePreviewManager
 
 		workspace_manager.ActiveDocument.History.PushNewItem (history_item);
 		history_item = null!;
-
-		FireLivePreviewEndedEvent (RenderStatus.Completed, null);
 
 		live_preview_enabled = false;
 
@@ -284,7 +273,7 @@ public sealed class LivePreviewManager
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
 			chrome.ProgressDialog.Progress = progress;
-			manager.FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
+			manager.HandleUpdate (progress, updatedBounds);
 		}
 
 		protected override void OnCompletion (
@@ -303,25 +292,10 @@ public sealed class LivePreviewManager
 		}
 	}
 
-	void FireLivePreviewEndedEvent (RenderStatus status, Exception? ex)
-	{
-		if (Ended == null) return;
-		LivePreviewEndedEventArgs args = new (status, ex);
-		Ended (this, args);
-	}
-
-	void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
-	{
-
-		RenderUpdated?.Invoke (this, new LivePreviewRenderUpdatedEventArgs (progress, bounds));
-	}
-
-	private void LivePreview_RenderUpdated (object? o, LivePreviewRenderUpdatedEventArgs args)
+	void HandleUpdate (double progress, RectangleI bounds)
 	{
 		double scale = workspace_manager.Scale;
-		var offset = workspace_manager.Offset;
-
-		var bounds = args.Bounds;
+		PointD offset = workspace_manager.Offset;
 
 		// Transform bounds (Image -> Canvas -> Window)
 
