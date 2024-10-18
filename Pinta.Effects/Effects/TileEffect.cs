@@ -74,7 +74,7 @@ public sealed class TileEffect : BaseEffect
 			halfHeight: height / 2f,
 			sin: (float) Math.Sin (rotationTheta.Radians),
 			cos: (float) Math.Cos (rotationTheta.Radians),
-			tileScale: (float) Math.PI / tileSize,
+			tileScale: MathF.PI / tileSize,
 			adjustedIntensity: preliminaryIntensity * preliminaryIntensity / 10 * Math.Sign (preliminaryIntensity),
 			antiAliasLevel: aaLevel,
 			antiAliasSamples: aaLevel * aaLevel + 1,
@@ -85,11 +85,11 @@ public sealed class TileEffect : BaseEffect
 		static Func<float, float> GetWaveFunction (WaveType waveType)
 		{
 			return waveType switch {
-				WaveType.Sine => n => (float) Math.Sin (n),
-				WaveType.Cosine => n => (float) Math.Cos (n),
-				WaveType.Tangent => n => (float) Math.Tan (n),
-				WaveType.Square => n => Math.Sign (Math.Sin (n)),
-				WaveType.Sawtooth => n => 2f * (n / (2f * (float) Math.PI) - (float) Math.Floor (0.5 + n / (2f * (float) Math.PI))),
+				WaveType.Sine => MathF.Sin,
+				WaveType.Cosine => MathF.Cos,
+				WaveType.Tangent => MathF.Tan,
+				WaveType.Square => n => Math.Sign (MathF.Sin (n)),
+				WaveType.Sawtooth => n => 2f * (n / (2f * MathF.PI) - MathF.Floor (0.5f + n / (2f * MathF.PI))),
 				_ => throw new InvalidEnumArgumentException (nameof (waveType), (int) waveType, typeof (WaveType)),
 			};
 		}
