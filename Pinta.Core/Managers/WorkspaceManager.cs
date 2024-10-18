@@ -241,6 +241,8 @@ public sealed class WorkspaceManager : IWorkspaceService
 		} else
 			document.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
 
+		document.MarkAttached ();
+
 		open_documents.Add (document);
 
 		OnDocumentCreated (new DocumentEventArgs (document));
@@ -296,6 +298,8 @@ public sealed class WorkspaceManager : IWorkspaceService
 		document.Layers.SelectedLayerChanged -= Document_SelectedLayerChanged;
 		document.Layers.LayerPropertyChanged -= Document_LayerPropertyChanged;
 		document.Close ();
+
+		document.MarkDetached ();
 
 		OnDocumentClosed (new DocumentEventArgs (document));
 	}

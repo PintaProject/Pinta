@@ -70,6 +70,20 @@ public sealed class Document
 		ResetSelectionPaths ();
 	}
 
+	private bool is_attached = false; // By default detached from workspace
+	internal void MarkAttached ()
+	{
+		if (is_attached)
+			throw new InvalidOperationException ("Document is already attached to a workspace. Detach it first");
+
+		is_attached = true;
+	}
+
+	internal void MarkDetached ()
+	{
+		is_attached = false;
+	}
+
 	/// <summary>
 	/// Just the file name, like "dog.jpg".
 	/// If HasFile is false, this may be something like "Unsaved image 1".
