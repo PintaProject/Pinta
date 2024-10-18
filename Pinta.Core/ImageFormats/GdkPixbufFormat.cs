@@ -40,7 +40,7 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 
 	#region IImageImporter implementation
 
-	public void Import (Gio.File file, Gtk.Window parent)
+	public Document Import (Gio.File file, Gtk.Window parent)
 	{
 		Pixbuf bg;
 
@@ -57,17 +57,16 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 
 		Size imageSize = new (bg.Width, bg.Height);
 
-		// TODO: Move "attach document" part out of file format class.
-		//       The creation of the document should be separate from
-		//       its activation.
 		Document newDocument = new (imageSize, file, filetype);
 		newDocument.Workspace.ViewSize = imageSize;
-		PintaCore.Workspace.AttachDocument (newDocument, PintaCore.Actions);
 
 		Layer layer = newDocument.Layers.AddNewLayer (file.GetDisplayName ());
 
 		Cairo.Context g = new (layer.Surface);
+
 		g.DrawPixbuf (bg, PointD.Zero);
+
+		return newDocument;
 	}
 	#endregion
 

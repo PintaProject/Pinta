@@ -36,5 +36,5 @@ public interface IImageImporter
 	/// <param name='parent'>
 	/// Window to be used as a parent for any dialogs that are shown.
 	/// </param>
-	void Import (Gio.File file, Gtk.Window parent);
+	Document Import (Gio.File file, Gtk.Window parent);
 }

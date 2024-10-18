@@ -160,7 +160,6 @@ public static class WorkspaceServiceExtensions
 public sealed class WorkspaceManager : IWorkspaceService
 {
 	private int active_document_index = -1;
-	private int new_file_name = 1;
 
 	private readonly ChromeManager chrome_manager;
 	private readonly ImageConverterManager image_formats;
@@ -326,14 +325,16 @@ public sealed class WorkspaceManager : IWorkspaceService
 			// Open the image and add it to the layers
 			IImageImporter? importer = image_formats.GetImporterByFile (file.GetDisplayName ());
 			if (importer is not null) {
-				importer.Import (file, parent);
+				Document imported = importer.Import (file, parent);
+				AttachDocument (imported, PintaCore.Actions);
 			} else {
 				// Unknown extension, so try every loader.
 				StringBuilder errors = new ();
 				bool loaded = false;
 				foreach (var format in image_formats.Formats.Where (f => !f.IsWriteOnly ())) {
 					try {
-						format.Importer!.Import (file, parent);
+						Document imported = format.Importer!.Import (file, parent);
+						AttachDocument (imported, PintaCore.Actions);
 						loaded = true;
 						break;
 					} catch (UnauthorizedAccessException) {

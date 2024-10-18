@@ -39,7 +39,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 	#region IImageImporter implementation
 
-	public void Import (Gio.File file, Gtk.Window parent)
+	public Document Import (Gio.File file, Gtk.Window parent)
 	{
 		using var stream = new GioStream (file.Read (cancellable: null));
 		using var zipfile = new ZipArchive (stream);
@@ -58,12 +58,8 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			Height: int.Parse (imageElement.GetAttribute ("h"))
 		);
 
-		// TODO: Move "attach document" part out of file format class.
-		//       The creation of the document should be separate from
-		//       its activation.
 		Document newDocument = new (imageSize, file, "ora");
 		newDocument.Workspace.ViewSize = imageSize;
-		PintaCore.Workspace.AttachDocument (newDocument, PintaCore.Actions);
 
 		XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0]!;
 		XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");
@@ -126,6 +122,8 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 				PintaCore.Chrome.ShowMessageDialog (PintaCore.Chrome.MainWindow, Translations.GetString ("Error"), details);
 			}
 		}
+
+		return newDocument;
 	}
 	#endregion
 
