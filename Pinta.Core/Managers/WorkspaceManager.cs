@@ -137,7 +137,7 @@ public static class WorkspaceServiceExtensions
 		Size imageSize,
 		Color backgroundColor)
 	{
-		Document doc = workspace.CreateDocument (imageSize, null, null);
+		Document doc = new (imageSize);
 		doc.Workspace.ViewSize = imageSize;
 		workspace.AttachDocument (doc, actions);
 
@@ -219,25 +219,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 	private readonly List<Document> open_documents;
 	public ReadOnlyCollection<Document> OpenDocuments { get; }
 	public bool HasOpenDocuments => open_documents.Count > 0;
-
-	public Document CreateDocument ( // TODO: Move creation part out of this class. Ideally, only activation/attachment should be here
-		Size size,
-		Gio.File? file,
-		string? file_type)
-	{
-		Document document = new (size);
-		if (file is not null) {
-
-			if (string.IsNullOrEmpty (file_type))
-				throw new ArgumentNullException ($"nameof{file_type} must contain value.");
-
-			document.File = file;
-			document.FileType = file_type;
-		} else
-			document.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
-
-		return document;
-	}
 
 	public void AttachDocument (
 		Document document,

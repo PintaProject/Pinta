@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Reflection.Metadata;
 using Cairo;
 
 namespace Pinta.Core;
@@ -56,8 +57,19 @@ public sealed class Document
 
 	public DocumentSelection PreviousSelection { get; set; }
 
+	private static int name_counter = 1;
+
 	public Document (Size size)
+		: this (size, null, null)
+	{ }
+
+	public Document (
+		Size size,
+		Gio.File? file,
+		string? fileType)
 	{
+		// --- Mandatory fields
+
 		PreviousSelection = new (this);
 		Selection = new DocumentSelection (this);
 
@@ -67,18 +79,29 @@ public sealed class Document
 		HasBeenSavedInSession = false;
 		ImageSize = size;
 
+		// --- Post-initialization 
+
+		if (file is not null) {
+
+			if (string.IsNullOrEmpty (fileType))
+				throw new ArgumentNullException ($"nameof{fileType} must contain value.");
+
+			File = file;
+			FileType = fileType;
+		} else
+			DisplayName = Translations.GetString ("Unsaved Image {0}", name_counter++);
+
 		ResetSelectionPaths ();
 	}
 
+	// This pair of methods is temporary, in order to ensure that a document is attached to a single workspace at a time
+	// While it exists, it is to be called exclusively from the workspace manager
 	private bool is_attached = false; // By default detached from workspace
 	internal void MarkAttached ()
 	{
-		if (is_attached)
-			throw new InvalidOperationException ("Document is already attached to a workspace. Detach it first");
-
+		if (is_attached) throw new InvalidOperationException ("Document is already attached to a workspace. Detach it first");
 		is_attached = true;
 	}
-
 	internal void MarkDetached ()
 	{
 		is_attached = false;

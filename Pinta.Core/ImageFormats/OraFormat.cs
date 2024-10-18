@@ -58,11 +58,10 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			Height: int.Parse (imageElement.GetAttribute ("h"))
 		);
 
-		// TODO: Move "activate document" part out of file format class.
+		// TODO: Move "attach document" part out of file format class.
 		//       The creation of the document should be separate from
 		//       its activation.
-		Document newDocument = PintaCore.Workspace.CreateDocument (imageSize, file, "ora");
-		newDocument.ImageSize = imageSize;
+		Document newDocument = new (imageSize, file, "ora");
 		newDocument.Workspace.ViewSize = imageSize;
 		PintaCore.Workspace.AttachDocument (newDocument, PintaCore.Actions);
 

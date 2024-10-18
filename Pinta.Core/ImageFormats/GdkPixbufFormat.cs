@@ -60,14 +60,13 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 		// TODO: Move "attach document" part out of file format class.
 		//       The creation of the document should be separate from
 		//       its activation.
-		Document newDocument = PintaCore.Workspace.CreateDocument (imageSize, file, filetype);
-		newDocument.ImageSize = imageSize;
+		Document newDocument = new (imageSize, file, filetype);
 		newDocument.Workspace.ViewSize = imageSize;
 		PintaCore.Workspace.AttachDocument (newDocument, PintaCore.Actions);
 
 		Layer layer = newDocument.Layers.AddNewLayer (file.GetDisplayName ());
 
-		var g = new Cairo.Context (layer.Surface);
+		Cairo.Context g = new (layer.Surface);
 		g.DrawPixbuf (bg, PointD.Zero);
 	}
 	#endregion
