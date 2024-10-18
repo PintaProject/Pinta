@@ -8,6 +8,7 @@ namespace Pinta.Core;
 
 public sealed class DocumentLayers
 {
+	private readonly ToolManager tools;
 	private readonly Document document;
 	private readonly List<UserLayer> user_layers = new ();
 
@@ -19,8 +20,11 @@ public sealed class DocumentLayers
 	// The layer used for selections
 	private Layer? selection_layer;
 
-	public DocumentLayers (Document document)
+	public DocumentLayers (
+		ToolManager tools,
+		Document document)
 	{
+		this.tools = tools;
 		this.document = document;
 	}
 
@@ -82,12 +86,10 @@ public sealed class DocumentLayers
 	/// </summary>
 	public UserLayer AddNewLayer (string name)
 	{
-		UserLayer layer;
-
-		if (string.IsNullOrEmpty (name))
-			layer = CreateLayer ();
-		else
-			layer = CreateLayer (name);
+		UserLayer layer =
+			string.IsNullOrEmpty (name)
+			? CreateLayer ()
+			: CreateLayer (name);
 
 		user_layers.Insert (CurrentUserLayerIndex + 1, layer);
 
@@ -97,7 +99,7 @@ public sealed class DocumentLayers
 		layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (user_layers.Count - 1));
-		PintaCore.Layers.OnLayerAdded ();
+
 		return layer;
 	}
 
@@ -122,15 +124,18 @@ public sealed class DocumentLayers
 	/// <summary>
 	/// Creates a new layer, but does not add it to the layer collection.
 	/// </summary>
-	public UserLayer CreateLayer (string? name = null, int? width = null, int? height = null)
+	public UserLayer CreateLayer (
+		string? name = null,
+		int? width = null,
+		int? height = null)
 	{
 		// Translators: {0} is a unique id for new layers, e.g. "Layer 2".
 		name ??= Translations.GetString ("Layer {0}", layer_name_int++);
 		width ??= document.ImageSize.Width;
 		height ??= document.ImageSize.Height;
 
-		var surface = CairoExtensions.CreateImageSurface (Format.Argb32, width.Value, height.Value);
-		var layer = new UserLayer (surface) { Name = name };
+		ImageSurface surface = CairoExtensions.CreateImageSurface (Format.Argb32, width.Value, height.Value);
+		UserLayer layer = new (surface) { Name = name };
 
 		return layer;
 	}
@@ -176,7 +181,6 @@ public sealed class DocumentLayers
 		layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
 
 		LayerRemoved?.Invoke (this, new IndexEventArgs (index));
-		PintaCore.Layers.OnLayerRemoved ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -197,12 +201,12 @@ public sealed class DocumentLayers
 	/// </summary>
 	public UserLayer DuplicateCurrentLayer ()
 	{
-		var source = CurrentUserLayer;
+		UserLayer source = CurrentUserLayer;
 		// Translators: this is the auto-generated name for a duplicated layer.
 		// {0} is the name of the source layer. Example: "Layer 3 copy".
-		var layer = CreateLayer (Translations.GetString ("{0} copy", source.Name));
+		UserLayer layer = CreateLayer (Translations.GetString ("{0} copy", source.Name));
 
-		var g = new Context (layer.Surface);
+		Context g = new (layer.Surface);
 		g.SetSourceSurface (source.Surface, 0, 0);
 		g.Paint ();
 
@@ -214,7 +218,6 @@ public sealed class DocumentLayers
 		layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (CurrentUserLayerIndex));
-		PintaCore.Layers.OnLayerAdded ();
 
 		return layer;
 	}
@@ -228,7 +231,7 @@ public sealed class DocumentLayers
 			throw new InvalidOperationException ("Cannot flatten image because there is only one layer.");
 
 		// Find the "bottom" layer
-		var bottom_layer = user_layers[0];
+		UserLayer bottom_layer = user_layers[0];
 
 		// Replace the bottom surface with the flattened image,
 		// and dispose the old surface
@@ -249,9 +252,9 @@ public sealed class DocumentLayers
 	/// </summary>
 	public ImageSurface GetClippedLayer (int index)
 	{
-		var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
+		ImageSurface surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
-		var g = new Context (surf);
+		Context g = new (surf);
 		document.Selection.Clip (g);
 
 		g.SetSourceSurface (user_layers[index].Surface, 0, 0);
@@ -266,18 +269,16 @@ public sealed class DocumentLayers
 	internal ImageSurface GetFlattenedImage (bool clip_to_selection = false)
 	{
 		// Create a new image surface
-		var surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
+		ImageSurface surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
-		var g = new Context (surf);
+		Context g = new (surf);
 
-		if (clip_to_selection) {
+		if (clip_to_selection)
 			document.Selection.Clip (g);
-		}
 
 		// Blend each visible layer onto our surface
-		foreach (var layer in GetLayersToPaint (includeToolLayer: false)) {
+		foreach (var layer in GetLayersToPaint (includeToolLayer: false))
 			layer.Draw (g);
-		}
 
 		surf.MarkDirty ();
 		return surf;
@@ -332,7 +333,6 @@ public sealed class DocumentLayers
 		layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (index));
-		PintaCore.Layers.OnLayerAdded ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -346,11 +346,11 @@ public sealed class DocumentLayers
 			throw new InvalidOperationException ("Cannot flatten layer because current layer is the bottom layer.");
 
 		// Get our source and destination layers
-		var source = CurrentUserLayer;
-		var dest = user_layers[CurrentUserLayerIndex - 1];
+		UserLayer source = CurrentUserLayer;
+		UserLayer dest = user_layers[CurrentUserLayerIndex - 1];
 
 		// Blend the layers
-		var g = new Context (dest.Surface);
+		Context g = new (dest.Surface);
 		source.Draw (g);
 
 		DeleteCurrentLayer ();
@@ -364,13 +364,12 @@ public sealed class DocumentLayers
 		if (CurrentUserLayerIndex == 0)
 			throw new InvalidOperationException ("Cannot move layer down because current layer is the bottom layer.");
 
-		var layer = CurrentUserLayer;
+		UserLayer layer = CurrentUserLayer;
 		int index = CurrentUserLayerIndex;
 		DeleteLayer (index);
 		Insert (layer, index - 1);
 
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
-		PintaCore.Layers.OnSelectedLayerChanged ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -383,14 +382,15 @@ public sealed class DocumentLayers
 		if (CurrentUserLayerIndex == user_layers.Count)
 			throw new InvalidOperationException ("Cannot move layer up because current layer is the top layer.");
 
-		var layer = CurrentUserLayer;
+		UserLayer layer = CurrentUserLayer;
 		int index = CurrentUserLayerIndex;
+
 		DeleteLayer (index);
 		Insert (layer, index + 1);
+
 		CurrentUserLayerIndex = index + 1;
 
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
-		PintaCore.Layers.OnSelectedLayerChanged ();
 
 		document.Workspace.Invalidate ();
 	}
@@ -402,11 +402,10 @@ public sealed class DocumentLayers
 	{
 		// Ensure that the current tool's modifications are finalized before
 		// switching layers.
-		PintaCore.Tools.CurrentTool?.DoCommit (document);
+		tools.CurrentTool?.DoCommit (document);
 
 		CurrentUserLayerIndex = i;
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
-		PintaCore.Layers.OnSelectedLayerChanged ();
 	}
 
 	/// <summary>
@@ -425,6 +424,5 @@ public sealed class DocumentLayers
 	private void RaiseLayerPropertyChangedEvent (object? sender, PropertyChangedEventArgs e)
 	{
 		LayerPropertyChanged?.Invoke (sender, e);
-		PintaCore.Layers.RaiseLayerPropertyChangedEvent (sender, e);
 	}
 }
