@@ -45,7 +45,6 @@ public sealed class LayerActions
 
 	private readonly ChromeManager chrome;
 	private readonly ImageConverterManager image_formats;
-	private readonly LayerManager layers;
 	private readonly RecentFileManager recent_files;
 	private readonly ToolManager tools;
 	private readonly WorkspaceManager workspace;
@@ -53,7 +52,6 @@ public sealed class LayerActions
 	public LayerActions (
 		ChromeManager chrome,
 		ImageConverterManager imageFormats,
-		LayerManager layers,
 		RecentFileManager recentFiles,
 		ToolManager tools,
 		WorkspaceManager workspace,
@@ -72,7 +70,6 @@ public sealed class LayerActions
 		Properties = new Command ("properties", Translations.GetString ("Layer Properties..."), null, Resources.Icons.LayerProperties);
 		this.chrome = chrome;
 		image_formats = imageFormats;
-		this.layers = layers;
 		recent_files = recentFiles;
 		this.tools = tools;
 		this.workspace = workspace;
@@ -142,9 +139,9 @@ public sealed class LayerActions
 		FlipVertical.Activated += HandlePintaCoreActionsLayersFlipVerticalActivated;
 		ImportFromFile.Activated += HandlePintaCoreActionsLayersImportFromFileActivated;
 
-		layers.LayerAdded += EnableOrDisableLayerActions;
-		layers.LayerRemoved += EnableOrDisableLayerActions;
-		layers.SelectedLayerChanged += EnableOrDisableLayerActions;
+		workspace.LayerAdded += EnableOrDisableLayerActions;
+		workspace.LayerRemoved += EnableOrDisableLayerActions;
+		workspace.SelectedLayerChanged += EnableOrDisableLayerActions;
 
 		EnableOrDisableLayerActions (null, EventArgs.Empty);
 	}
