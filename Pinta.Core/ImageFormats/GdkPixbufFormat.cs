@@ -38,24 +38,12 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 		this.filetype = filetype;
 	}
 
-	#region IImageImporter implementation
-
 	public Document Import (Gio.File file, Gtk.Window parent)
 	{
-		Pixbuf bg;
+		Pixbuf streamBuffer = ReadPixbuf (file);
+		Pixbuf effectiveBuffer = streamBuffer.ApplyEmbeddedOrientation () ?? streamBuffer;
 
-		// Handle any EXIF orientation flags
-		using (var fs = file.Read (cancellable: null)) {
-			try {
-				bg = Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when an error is thrown
-			} finally {
-				fs.Close (null);
-			}
-		}
-
-		bg = bg.ApplyEmbeddedOrientation () ?? bg;
-
-		Size imageSize = new (bg.Width, bg.Height);
+		Size imageSize = new (effectiveBuffer.Width, effectiveBuffer.Height);
 
 		Document newDocument = new (imageSize, file, filetype);
 		newDocument.Workspace.ViewSize = imageSize;
@@ -64,15 +52,25 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 
 		Cairo.Context g = new (layer.Surface);
 
-		g.DrawPixbuf (bg, PointD.Zero);
+		g.DrawPixbuf (effectiveBuffer, PointD.Zero);
 
 		return newDocument;
 	}
-	#endregion
+
+	private static Pixbuf ReadPixbuf (Gio.File file)
+	{
+		// Handle any EXIF orientation flags
+		using Gio.FileInputStream fs = file.Read (cancellable: null);
+		try {
+			return Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when an error is thrown
+		} finally {
+			fs.Close (null);
+		}
+	}
 
 	protected virtual void DoSave (Pixbuf pb, Gio.File file, string fileType, Gtk.Window parent)
 	{
-		using var stream = file.Replace ();
+		using Gio.OutputStream stream = file.Replace ();
 		try {
 			pb.SaveToStreamv (stream, fileType,
 					optionKeys: Array.Empty<string> (),
@@ -85,8 +83,7 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 
 	public void Export (Document document, Gio.File file, Gtk.Window parent)
 	{
-		var surf = document.GetFlattenedImage ();
-
+		Cairo.ImageSurface surf = document.GetFlattenedImage ();
 		using Pixbuf pb = surf.ToPixbuf ();
 		DoSave (pb, file, filetype, parent);
 	}
