@@ -137,8 +137,9 @@ public static class WorkspaceServiceExtensions
 		Size imageSize,
 		Color backgroundColor)
 	{
-		Document doc = workspace.CreateAndActivateDocument (actions, null, null, imageSize);
+		Document doc = workspace.CreateDocument (imageSize, null, null);
 		doc.Workspace.ViewSize = imageSize;
+		workspace.AttachDocument (doc, actions);
 
 		// Start with an empty white layer
 		Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
@@ -219,18 +220,12 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public ReadOnlyCollection<Document> OpenDocuments { get; }
 	public bool HasOpenDocuments => open_documents.Count > 0;
 
-	public Document CreateAndActivateDocument (
-		ActionManager actions,
+	public Document CreateDocument ( // TODO: Move creation part out of this class. Ideally, only activation/attachment should be here
+		Size size,
 		Gio.File? file,
-		string? file_type,
-		Size size)
+		string? file_type)
 	{
 		Document document = new (size);
-		document.Layers.LayerAdded += Document_LayerAdded;
-		document.Layers.LayerRemoved += Document_LayerRemoved;
-		document.Layers.SelectedLayerChanged += Document_SelectedLayerChanged;
-		document.Layers.LayerPropertyChanged += Document_LayerPropertyChanged;
-
 		if (file is not null) {
 
 			if (string.IsNullOrEmpty (file_type))
@@ -241,15 +236,24 @@ public sealed class WorkspaceManager : IWorkspaceService
 		} else
 			document.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
 
+		return document;
+	}
+
+	public void AttachDocument (
+		Document document,
+		ActionManager actions)
+	{
+		document.Layers.LayerAdded += Document_LayerAdded;
+		document.Layers.LayerRemoved += Document_LayerRemoved;
+		document.Layers.SelectedLayerChanged += Document_SelectedLayerChanged;
+		document.Layers.LayerPropertyChanged += Document_LayerPropertyChanged;
 		document.MarkAttached ();
 
 		open_documents.Add (document);
 
-		OnDocumentCreated (new DocumentEventArgs (document));
+		OnDocumentAttached (new DocumentEventArgs (document));
 
 		actions.Window.SetActiveDocument (document);
-
-		return document;
 	}
 
 	private void Document_LayerPropertyChanged (object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -278,6 +282,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 		Document document)
 	{
 		int index = open_documents.IndexOf (document);
+
+		if (index == -1) return; // TODO: Maybe throw an exception?
+
 		open_documents.Remove (document);
 
 		if (index == active_document_index) {
@@ -432,10 +439,10 @@ public sealed class WorkspaceManager : IWorkspaceService
 		ResetTitle ();
 	}
 
-	private void OnDocumentCreated (DocumentEventArgs e)
+	private void OnDocumentAttached (DocumentEventArgs e)
 	{
 		e.Document.SelectionChanged += (_, _) => OnSelectionChanged ();
-		DocumentCreated?.Invoke (this, e);
+		DocumentAttached?.Invoke (this, e);
 	}
 
 	private void OnDocumentOpened (DocumentEventArgs e)
@@ -504,7 +511,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public event EventHandler? SelectedLayerChanged;
 	public event PropertyChangedEventHandler? LayerPropertyChanged;
 
-	public event EventHandler<DocumentEventArgs>? DocumentCreated;
+	public event EventHandler<DocumentEventArgs>? DocumentAttached;
 	public event EventHandler<DocumentEventArgs>? DocumentOpened;
 	public event EventHandler<DocumentEventArgs>? DocumentClosed;
 

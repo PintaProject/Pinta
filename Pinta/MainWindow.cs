@@ -108,7 +108,7 @@ internal sealed class MainWindow
 
 		PintaCore.Workspace.ActiveDocumentChanged += ActiveDocumentChanged;
 
-		PintaCore.Workspace.DocumentCreated += Workspace_DocumentCreated;
+		PintaCore.Workspace.DocumentAttached += Workspace_DocumentCreated;
 		PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
 
 		DockNotebook notebook = canvas_pad.Notebook;

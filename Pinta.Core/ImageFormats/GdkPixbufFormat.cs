@@ -55,20 +55,17 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 
 		bg = bg.ApplyEmbeddedOrientation () ?? bg;
 
-		Size imagesize = new Size (bg.Width, bg.Height);
+		Size imageSize = new (bg.Width, bg.Height);
 
-		// TODO: Move "activate document" part out of file format class.
+		// TODO: Move "attach document" part out of file format class.
 		//       The creation of the document should be separate from
 		//       its activation.
-		Document doc = PintaCore.Workspace.CreateAndActivateDocument (
-			PintaCore.Actions,
-			file,
-			filetype,
-			imagesize);
-		doc.ImageSize = imagesize;
-		doc.Workspace.ViewSize = imagesize;
+		Document newDocument = PintaCore.Workspace.CreateDocument (imageSize, file, filetype);
+		newDocument.ImageSize = imageSize;
+		newDocument.Workspace.ViewSize = imageSize;
+		PintaCore.Workspace.AttachDocument (newDocument, PintaCore.Actions);
 
-		Layer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
+		Layer layer = newDocument.Layers.AddNewLayer (file.GetDisplayName ());
 
 		var g = new Cairo.Context (layer.Surface);
 		g.DrawPixbuf (bg, PointD.Zero);
