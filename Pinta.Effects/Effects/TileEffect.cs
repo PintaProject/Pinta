@@ -160,8 +160,8 @@ public sealed class TileEffect : BaseEffect
 
 			// Apply wave function
 
-			float functionS = (float) Math.Tan (rotatedS * settings.tileScale);
-			float functionT = (float) Math.Tan (rotatedT * settings.tileScale);
+			float functionS = settings.waveFunction (rotatedS * settings.tileScale);
+			float functionT = settings.waveFunction (rotatedT * settings.tileScale);
 
 			// Apply intensity transformation to create the tile effect
 
@@ -223,7 +223,7 @@ public sealed class TileEffect : BaseEffect
 		[Caption ("Intensity"), MinimumValue (-20), MaximumValue (20)]
 		public int Intensity { get; set; } = 8;
 
-		[Caption ("Wave Tyoe")]
+		[Caption ("Wave Type")]
 		public WaveType WaveType { get; set; } = WaveType.Tangent;
 	}
 
