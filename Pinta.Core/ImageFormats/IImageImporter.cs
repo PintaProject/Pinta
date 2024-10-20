@@ -30,11 +30,13 @@ namespace Pinta.Core;
 public interface IImageImporter
 {
 	/// <summary>
-	/// Imports a document into Pinta.
+	/// Loads a new document from a file.
 	/// </summary>
-	/// <param name='file'>The identifier of the file to be imported.</param>
+	/// <param name='file'>
+	/// The identifier of the file to be loaded.
+	/// </param>
 	/// <param name='parent'>
 	/// Window to be used as a parent for any dialogs that are shown.
 	/// </param>
-	Document Import (Gio.File file, Gtk.Window parent);
+	Document Import (Gio.File file);
 }

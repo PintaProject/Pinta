@@ -38,7 +38,7 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 		this.filetype = filetype;
 	}
 
-	public Document Import (Gio.File file, Gtk.Window parent)
+	public Document Import (Gio.File file)
 	{
 		Pixbuf streamBuffer = ReadPixbuf (file);
 		Pixbuf effectiveBuffer = streamBuffer.ApplyEmbeddedOrientation () ?? streamBuffer;

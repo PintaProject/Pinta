@@ -39,10 +39,10 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 	#region IImageImporter implementation
 
-	public Document Import (Gio.File file, Gtk.Window parent)
+	public Document Import (Gio.File file)
 	{
-		using var stream = new GioStream (file.Read (cancellable: null));
-		using var zipfile = new ZipArchive (stream);
+		using GioStream stream = new (file.Read (cancellable: null));
+		using ZipArchive zipfile = new (stream);
 
 		XmlDocument stackXml = new ();
 
