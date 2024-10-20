@@ -427,11 +427,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 		DocumentActivated?.Invoke (this, e);
 	}
 
-	private void OnDocumentOpened (DocumentEventArgs e)
-	{
-		DocumentOpened?.Invoke (this, e);
-	}
-
 	private void OnDocumentClosed (DocumentEventArgs e)
 	{
 		DocumentClosed?.Invoke (this, e);
@@ -494,7 +489,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public event PropertyChangedEventHandler? LayerPropertyChanged;
 
 	public event EventHandler<DocumentEventArgs>? DocumentActivated;
-	public event EventHandler<DocumentEventArgs>? DocumentOpened;
 	public event EventHandler<DocumentEventArgs>? DocumentClosed;
 
 	public event EventHandler? ActiveDocumentChanged;
