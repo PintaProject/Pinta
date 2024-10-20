@@ -162,3 +162,13 @@ jobs:
         artifact-configuration-slug: Zipped_Exe
         github-artifact-id: '${{ steps.upload-unsigned-installer.outputs.artifact-id }}'
         wait-for-completion: true
+        output-artifact-directory: './signed-artifacts'
+
+    - name: Upload Signed Installer
+      id: upload-signed-installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: "Pinta-signed.exe"
+        path: ./signed-artifacts/Pinta.exe
+        if-no-files-found: error
+      
