@@ -32,7 +32,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public class EllipseEngine : ShapeEngine
+public sealed class EllipseEngine : ShapeEngine
 {
 	/// <summary>
 	/// Create a new EllipseEngine.
@@ -44,17 +44,28 @@ public class EllipseEngine : ShapeEngine
 	/// <param name="fillColor">The fill color for the shape.</param>
 	/// <param name="brushWidth">The width of the outline of the shape.</param>
 	/// <param name="lineCap">Defines the edge of the line drawn.</param>
-	public EllipseEngine (UserLayer parentLayer, ReEditableLayer? drawingLayer,
-			      bool antialiasing, Color outlineColor, Color fillColor,
-			      int brushWidth, LineCap lineCap)
-	    : base (parentLayer, drawingLayer, BaseEditEngine.ShapeTypes.Ellipse,
-		    antialiasing, true, outlineColor, fillColor, brushWidth, lineCap)
-	{
-
-	}
+	public EllipseEngine (
+		UserLayer parentLayer,
+		ReEditableLayer? drawingLayer,
+		bool antialiasing,
+		Color outlineColor,
+		Color fillColor,
+		int brushWidth,
+		LineCap lineCap)
+	: base (
+		parentLayer,
+		drawingLayer,
+		BaseEditEngine.ShapeTypes.Ellipse,
+		antialiasing,
+		true,
+		outlineColor,
+		fillColor,
+		brushWidth,
+		lineCap)
+	{ }
 
 	private EllipseEngine (EllipseEngine src)
-	    : base (src)
+		: base (src)
 	{
 	}
 
@@ -63,7 +74,11 @@ public class EllipseEngine : ShapeEngine
 		return new EllipseEngine (this);
 	}
 
-	private static bool IsPerfectRectangle (PointD cp0, PointD cp1, PointD cp2, PointD cp3)
+	private static bool IsPerfectRectangle (
+		PointD cp0,
+		PointD cp1,
+		PointD cp2,
+		PointD cp3)
 	{
 		if (cp0.X == cp1.X) {
 			if (cp0.Y == cp3.Y && cp1.Y == cp2.Y && cp2.X == cp3.X) {
@@ -98,26 +113,23 @@ public class EllipseEngine : ShapeEngine
 		//everything is just a linear connection of control points. This is because the generated points are used in the check
 		//that determines if the mouse clicks on the shape.
 
-		int nextNum;
-
-		PointD currentPoint, nextPoint;
-
 		//Go through each control point.
 		for (int currentNum = 0; currentNum < ControlPoints.Count; ++currentNum) {
 			//Determine the next control point.
 
-			nextNum = currentNum + 1;
+			int nextNum = currentNum + 1;
 
-			if (nextNum >= ControlPoints.Count) {
+			if (nextNum >= ControlPoints.Count)
 				nextNum = 0;
-			}
 
-			currentPoint = ControlPoints[currentNum].Position;
-			nextPoint = ControlPoints[nextNum].Position;
+			PointD currentPoint = ControlPoints[currentNum].Position;
+			PointD nextPoint = ControlPoints[nextNum].Position;
 
 			//Lerp from the current point to the next point.
 			for (float lerpPos = 0.0f; lerpPos < 1.0f; lerpPos += 0.01f)
-				yield return new GeneratedPoint (Utility.Lerp (currentPoint, nextPoint, lerpPos), currentNum);
+				yield return new GeneratedPoint (
+					Utility.Lerp (currentPoint, nextPoint, lerpPos),
+					currentNum);
 		}
 	}
 
@@ -129,8 +141,10 @@ public class EllipseEngine : ShapeEngine
 
 		//This is mostly for time efficiency/optimization, but it can also help readability.
 		PointD
-			cp0 = ControlPoints[0].Position, cp1 = ControlPoints[1].Position,
-			cp2 = ControlPoints[2].Position, cp3 = ControlPoints[3].Position;
+			cp0 = ControlPoints[0].Position,
+			cp1 = ControlPoints[1].Position,
+			cp2 = ControlPoints[2].Position,
+			cp3 = ControlPoints[3].Position;
 
 		//An ellipse also requires that all 4 control points compose a perfect rectangle parallel/perpendicular to the window.
 		//So, confirm that it is indeed a perfect rectangle.
@@ -206,29 +220,25 @@ public class EllipseEngine : ShapeEngine
 		//The middle of the bounding Rectangle...
 		PointD c = new (
 			X: topLeft.X + r_x, // ...Horizontally speaking
-			Y: topLeft.Y + r_y // ...Vertically speaking
-		);
+			Y: topLeft.Y + r_y); // ...Vertically speaking
 
 		const double c_1 = 0.5522847498307933984022516322796d; //tan(pi / 8d) * 4d / 3d ~= 0.5522847498307933984022516322796d
 
 		// Save first quadrant to later close the ellipse
-		var first_quadrant = calculateCurvePoints (
+		var first_quadrant = CalculateCurvePoints (
 			tInterval,
 			c.X + r_x, c.Y,
 			c.X + r_x, c.Y - c_1 * r_y,
 			c.X + c_1 * r_x, c.Y - r_y,
 			c.X, c.Y - r_y,
-			3
-		);
+			3);
 
-		foreach (
-			var p in first_quadrant
-
-		) yield return p;
+		foreach (var p in first_quadrant)
+			yield return p;
 
 		foreach (
 			var p in
-			calculateCurvePoints (
+			CalculateCurvePoints (
 				tInterval,
 				c.X, c.Y - r_y,
 				c.X - c_1 * r_x, c.Y - r_y,
@@ -240,7 +250,7 @@ public class EllipseEngine : ShapeEngine
 
 		foreach (
 			var p in
-			calculateCurvePoints (
+			CalculateCurvePoints (
 				tInterval,
 				c.X - r_x, c.Y,
 				c.X - r_x, c.Y + c_1 * r_y,
@@ -252,7 +262,7 @@ public class EllipseEngine : ShapeEngine
 
 		foreach (
 			var p in
-			calculateCurvePoints (
+			CalculateCurvePoints (
 				tInterval,
 				c.X, c.Y + r_y,
 				c.X + c_1 * r_x, c.Y + r_y,
@@ -285,9 +295,12 @@ public class EllipseEngine : ShapeEngine
 	/// <param name="y3">Ending point Y (included in the returned Point(s)).</param>
 	/// <param name="cPIndex">The index of the previous ControlPoint to the generated points.</param>
 	/// <returns></returns>
-	protected static IEnumerable<GeneratedPoint> calculateCurvePoints (
+	private static IEnumerable<GeneratedPoint> CalculateCurvePoints (
 		double tInterval,
-		double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3,
+		double x0, double y0,
+		double x1, double y1,
+		double x2, double y2,
+		double x3, double y3,
 		int cPIndex)
 	{
 		//Generates points of partial Polygon containing the calculated Points in the curve.
@@ -313,11 +326,10 @@ public class EllipseEngine : ShapeEngine
 			double oneMinusTSquaredTimesTTimesThree = oneMinusTSquared * t * 3d;
 			double oneMinusTTimesTSquaredTimesThree = oneMinusT * tSquared * 3d;
 
-			yield return new GeneratedPoint (
+			yield return new (
 				new PointD (
 					X: oneMinusTCubed * x0 + oneMinusTSquaredTimesTTimesThree * x1 + oneMinusTTimesTSquaredTimesThree * x2 + tCubed * x3,
-					Y: oneMinusTCubed * y0 + oneMinusTSquaredTimesTTimesThree * y1 + oneMinusTTimesTSquaredTimesThree * y2 + tCubed * y3
-				),
+					Y: oneMinusTCubed * y0 + oneMinusTSquaredTimesTTimesThree * y1 + oneMinusTTimesTSquaredTimesThree * y2 + tCubed * y3),
 				cPIndex
 			);
 		}
