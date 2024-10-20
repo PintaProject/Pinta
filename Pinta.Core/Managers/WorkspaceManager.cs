@@ -139,7 +139,7 @@ public static class WorkspaceServiceExtensions
 	{
 		Document doc = new (imageSize);
 		doc.Workspace.ViewSize = imageSize;
-		workspace.AttachDocument (doc, actions);
+		workspace.ActivateDocument (doc, actions);
 
 		// Start with an empty white layer
 		Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
@@ -219,7 +219,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public ReadOnlyCollection<Document> OpenDocuments { get; }
 	public bool HasOpenDocuments => open_documents.Count > 0;
 
-	public void AttachDocument (
+	public void ActivateDocument (
 		Document document,
 		ActionManager actions)
 	{
@@ -231,12 +231,12 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		open_documents.Add (document);
 
-		OnDocumentAttached (new DocumentEventArgs (document));
+		OnDocumentActivated (new DocumentEventArgs (document));
 
 		actions.Window.SetActiveDocument (document);
 	}
 
-	private void Document_LayerPropertyChanged (object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+	private void Document_LayerPropertyChanged (object? sender, PropertyChangedEventArgs e)
 	{
 		LayerPropertyChanged?.Invoke (sender, e);
 		this.Invalidate ();
@@ -326,7 +326,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 			IImageImporter? importer = image_formats.GetImporterByFile (file.GetDisplayName ());
 			if (importer is not null) {
 				Document imported = importer.Import (file);
-				AttachDocument (imported, PintaCore.Actions);
+				ActivateDocument (imported, PintaCore.Actions);
 			} else {
 				// Unknown extension, so try every loader.
 				StringBuilder errors = new ();
@@ -334,7 +334,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 				foreach (var format in image_formats.Formats.Where (f => !f.IsWriteOnly ())) {
 					try {
 						Document imported = format.Importer!.Import (file);
-						AttachDocument (imported, PintaCore.Actions);
+						ActivateDocument (imported, PintaCore.Actions);
 						loaded = true;
 						break;
 					} catch (UnauthorizedAccessException) {
@@ -421,10 +421,10 @@ public sealed class WorkspaceManager : IWorkspaceService
 		ResetTitle ();
 	}
 
-	private void OnDocumentAttached (DocumentEventArgs e)
+	private void OnDocumentActivated (DocumentEventArgs e)
 	{
 		e.Document.SelectionChanged += (_, _) => OnSelectionChanged ();
-		DocumentAttached?.Invoke (this, e);
+		DocumentActivated?.Invoke (this, e);
 	}
 
 	private void OnDocumentOpened (DocumentEventArgs e)
@@ -493,7 +493,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public event EventHandler? SelectedLayerChanged;
 	public event PropertyChangedEventHandler? LayerPropertyChanged;
 
-	public event EventHandler<DocumentEventArgs>? DocumentAttached;
+	public event EventHandler<DocumentEventArgs>? DocumentActivated;
 	public event EventHandler<DocumentEventArgs>? DocumentOpened;
 	public event EventHandler<DocumentEventArgs>? DocumentClosed;
 

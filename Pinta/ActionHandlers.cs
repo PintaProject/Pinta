@@ -98,7 +98,7 @@ public sealed class ActionHandlers
 
 		// We need to toggle actions active/inactive
 		// when there isn't an open document
-		PintaCore.Workspace.DocumentAttached += Workspace_DocumentCreated;
+		PintaCore.Workspace.DocumentActivated += Workspace_DocumentCreated;
 		PintaCore.Workspace.DocumentClosed += Workspace_DocumentClosed;
 
 		// Initially, no documents are open.
