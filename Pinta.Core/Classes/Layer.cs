@@ -37,9 +37,9 @@ public class Layer : ObservableObject
 	private string name;
 	private BlendMode blend_mode;
 
-	public Layer (ImageSurface surface) : this (surface, false, 1f, "")
-	{
-	}
+	public Layer (ImageSurface surface)
+		: this (surface, false, 1f, "")
+	{ }
 
 	public Layer (
 		ImageSurface surface,
@@ -203,7 +203,7 @@ public class Layer : ObservableObject
 		int w = originalSize.Width;
 		int h = originalSize.Height;
 
-		return new Size (
+		return new (
 			(int) (w * cos + h * sin),
 			(int) (w * sin + h * cos));
 	}
@@ -218,7 +218,7 @@ public class Layer : ObservableObject
 		Context g = new (dest);
 
 		g.Scale (newSize.Width / (double) Surface.Width, newSize.Height / (double) Surface.Height);
-		g.SetSourceSurface (Surface, 0, 0, resamplingMode);
+		g.SetSourceSurface (Surface, resamplingMode);
 
 		g.Paint ();
 

@@ -633,11 +633,9 @@ namespace Pinta.Core
 
 		public static Path Clone (this Path path)
 		{
-			var doc = PintaCore.Workspace.ActiveDocument;
-
+			Document doc = PintaCore.Workspace.ActiveDocument;
 			Context g = new (doc.Layers.CurrentUserLayer.Surface);
 			g.AppendPath (path);
-
 			return g.CopyPath ();
 		}
 
@@ -683,7 +681,7 @@ namespace Pinta.Core
 
 		public static RectangleI GetBounds (this Path path)
 		{
-			var doc = PintaCore.Workspace.ActiveDocument;
+			Document doc = PintaCore.Workspace.ActiveDocument;
 			Context g = new (doc.Layers.CurrentUserLayer.Surface);
 			g.AppendPath (path);
 			return g.PathExtents ().ToInt ();
@@ -728,7 +726,13 @@ namespace Pinta.Core
 				x,
 				y);
 
-		public static ColorBgra GetBilinearSample (this ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int srcWidth, int srcHeight, float x, float y)
+		public static ColorBgra GetBilinearSample (
+			this ImageSurface src,
+			ReadOnlySpan<ColorBgra> src_data,
+			int srcWidth,
+			int srcHeight,
+			float x,
+			float y)
 		{
 			if (!Utility.IsNumber (x) || !Utility.IsNumber (y))
 				return ColorBgra.Transparent;
@@ -937,15 +941,14 @@ namespace Pinta.Core
 			int edgeCount = 0;
 
 			for (int i = 0; i < points.Length; ++i) {
+
 				PointI top = points[i];
 				PointI bottom = points[(i + 1) % points.Length];
-				int dy;
 
-				if (top.Y > bottom.Y) {
+				if (top.Y > bottom.Y)
 					(bottom, top) = (top, bottom);
-				}
 
-				dy = bottom.Y - top.Y;
+				int dy = bottom.Y - top.Y;
 
 				if (dy != 0) {
 					edgeTable[edgeCount] = new Edge (top.Y, bottom.Y, top.X << 8, ((bottom.X - top.X) << 8) / dy);
@@ -956,15 +959,15 @@ namespace Pinta.Core
 
 			// Sort edge table by miny
 			for (int i = 0; i < edgeCount - 1; ++i) {
+
 				int min = i;
 
 				for (int j = i + 1; j < edgeCount; ++j)
 					if (edgeTable[j].miny < edgeTable[min].miny)
 						min = j;
 
-				if (min != i) {
+				if (min != i)
 					(edgeTable[i], edgeTable[min]) = (edgeTable[min], edgeTable[i]);
-				}
 			}
 
 			// Compute how many scanlines we will be emitting
@@ -974,33 +977,26 @@ namespace Pinta.Core
 			int yscan1 = edgeTable[0].miny;
 
 			// we assume that edgeTable[0].miny == yscan
-			while (activeHigh < edgeCount - 1 &&
-				   edgeTable[activeHigh + 1].miny == yscan1) {
+			while (activeHigh < edgeCount - 1 && edgeTable[activeHigh + 1].miny == yscan1)
 				++activeHigh;
-			}
 
 			while (yscan1 <= ymax) {
+
 				// Find new edges where yscan == miny
-				while (activeHigh < edgeCount - 1 &&
-					   edgeTable[activeHigh + 1].miny == yscan1) {
+				while (activeHigh < edgeCount - 1 && edgeTable[activeHigh + 1].miny == yscan1)
 					++activeHigh;
-				}
 
 				int count = 0;
-				for (int i = activeLow; i <= activeHigh; ++i) {
-					if (edgeTable[i].maxy > yscan1) {
+				for (int i = activeLow; i <= activeHigh; ++i)
+					if (edgeTable[i].maxy > yscan1)
 						++count;
-					}
-				}
 
 				scanCount += count / 2;
 				++yscan1;
 
 				// Remove edges where yscan == maxy
-				while (activeLow < edgeCount - 1 &&
-					   edgeTable[activeLow].maxy <= yscan1) {
+				while (activeLow < edgeCount - 1 && edgeTable[activeLow].maxy <= yscan1)
 					++activeLow;
-				}
 
 				if (activeLow > activeHigh)
 					activeHigh = activeLow;
@@ -1030,15 +1026,15 @@ namespace Pinta.Core
 
 				// Sort the AET on x
 				for (int i = 0; i < activeCount - 1; ++i) {
+
 					int min = i;
 
 					for (int j = i + 1; j < activeCount; ++j)
 						if (edgeTable[active[j]].x < edgeTable[active[min]].x)
 							min = j;
 
-					if (min != i) {
+					if (min != i)
 						(active[i], active[min]) = (active[min], active[i]);
-					}
 				}
 
 				// For each pair of entries in the AET, fill in pixels between their info
@@ -1151,7 +1147,7 @@ namespace Pinta.Core
 
 		public static ImageSurface CreateTransparentBackgroundSurface (int size)
 		{
-			var surface = CreateImageSurface (Format.Argb32, size, size);
+			ImageSurface surface = CreateImageSurface (Format.Argb32, size, size);
 
 			// Draw the checkerboard
 			Context g = new (surface);
@@ -1260,8 +1256,6 @@ namespace Pinta.Core
 		public static void SetSourceSurface (
 			this Context g,
 			Surface surface,
-			double x,
-			double y,
 			ResamplingMode resamplingMode)
 		{
 			SurfacePattern src_pattern = new (surface) {
@@ -1388,11 +1382,10 @@ namespace Pinta.Core
 				scans = Array.Empty<RectangleI> ();
 			}
 
-			foreach (var rect in scans) {
+			foreach (var rect in scans)
 				stencil.Set (rect, true);
-			}
 
-			var queue = new System.Collections.Generic.Queue<PointI> (16);
+			Queue<PointI> queue = new (16);
 			queue.Enqueue (start);
 
 			while (queue.Count > 0) {
@@ -1410,9 +1403,10 @@ namespace Pinta.Core
 				}
 
 				int surfaceWidth = surface.Width;
-				while (localRight < surfaceWidth &&
-					   !stencil.Get (localRight, pt.Y) &&
-					   ColorBgra.ColorsWithinTolerance (cmp, row[localRight], tolerance)) {
+				while (
+					localRight < surfaceWidth
+					&& !stencil.Get (localRight, pt.Y)
+					&& ColorBgra.ColorsWithinTolerance (cmp, row[localRight], tolerance)) {
 					stencil.Set (localRight, pt.Y, true);
 					++localRight;
 				}
@@ -1420,7 +1414,7 @@ namespace Pinta.Core
 				++localLeft;
 				--localRight;
 
-				void checkRow (ReadOnlySpan<ColorBgra> surf_data, int row)
+				void CheckRow (ReadOnlySpan<ColorBgra> surf_data, int row)
 				{
 					int sleft = localLeft;
 					int sright = localLeft;
@@ -1431,25 +1425,23 @@ namespace Pinta.Core
 							ColorBgra.ColorsWithinTolerance (cmp, other_row[sx], tolerance)) {
 							++sright;
 						} else {
-							if (sright - sleft > 0) {
+							if (sright - sleft > 0)
 								queue.Enqueue (new PointI (sleft, row));
-							}
 
 							++sright;
 							sleft = sright;
 						}
 					}
 
-					if (sright - sleft > 0) {
+					if (sright - sleft > 0)
 						queue.Enqueue (new PointI (sleft, row));
-					}
 				}
 
 				if (pt.Y > 0)
-					checkRow (surf_data, pt.Y - 1);
+					CheckRow (surf_data, pt.Y - 1);
 
 				if (pt.Y < surface.Height - 1)
-					checkRow (surf_data, pt.Y + 1);
+					CheckRow (surf_data, pt.Y + 1);
 
 				if (localLeft < left)
 					left = localLeft;
@@ -1796,19 +1788,19 @@ namespace Pinta.Core
 
 		public static void TransformPoint (
 			this Matrix m,
-			ref Core.PointD p)
+			ref PointD p)
 		{
 			double newX = p.X;
 			double newY = p.Y;
 			m.TransformPoint (ref newX, ref newY);
-			p = new Core.PointD (newX, newY);
+			p = new PointD (newX, newY);
 		}
 
 		/// <summary>
 		/// Port of gdk_cairo_get_clip_rectangle from GTK3
 		/// </summary>
 		public static bool GetClipRectangle (
-			Cairo.Context context,
+			Context context,
 			out RectangleI rect)
 		{
 			context.ClipExtents (
