@@ -145,8 +145,20 @@ jobs:
         iscc installer/windows/installer.iss
 
     - name: Upload Installer
+      id: upload-unsigned-installer
       uses: actions/upload-artifact@v4
       with:
         name: "Pinta.exe"
         path: installer/windows/Pinta.exe
         if-no-files-found: error
+
+    - name: Sign Installer
+      uses: signpath/github-action-submit-signing-request@v1
+      with:
+        api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+        organization-id: "fb6d32c7-2808-4358-b9eb-f7482eb8c0a5"
+        project-slug: Pinta
+        signing-policy-slug: test-signing
+        artifact-configuration-slug: Zipped_Exe
+        github-artifact-id: '${{ steps.upload-unsigned-installer.outputs.artifact-id }}'
+        wait-for-completion: true
