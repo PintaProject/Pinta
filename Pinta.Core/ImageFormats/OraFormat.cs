@@ -39,11 +39,12 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 	#region IImageImporter implementation
 
-	public void Import (Gio.File file, Gtk.Window parent)
+	public Document Import (Gio.File file)
 	{
-		using var stream = new GioStream (file.Read (cancellable: null));
-		using var zipfile = new ZipArchive (stream);
-		XmlDocument stackXml = new XmlDocument ();
+		using GioStream stream = new (file.Read (cancellable: null));
+		using ZipArchive zipfile = new (stream);
+
+		XmlDocument stackXml = new ();
 
 		ZipArchiveEntry stackXmlEntry = zipfile.GetEntry ("stack.xml") ?? throw new XmlException ("No 'stack.xml' found in OpenRaster file");
 		stackXml.Load (stackXmlEntry.Open ());
@@ -52,28 +53,18 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 		// valid that we need to guard against.
 		XmlElement imageElement = stackXml.DocumentElement!;
 
-		Size imagesize = new Size (
+		Size imageSize = new (
 			Width: int.Parse (imageElement.GetAttribute ("w")),
 			Height: int.Parse (imageElement.GetAttribute ("h"))
 		);
 
-		// TODO: Move "activate document" part out of file format class.
-		//       The creation of the document should be separate from
-		//       its activation.
-		Document doc = PintaCore.Workspace.CreateAndActivateDocument (
-			PintaCore.Actions,
-			file,
-			"ora",
-			imagesize);
+		Document newDocument = new (imageSize, file, "ora");
 
 		XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0]!;
 		XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");
 
 		if (layerElements.Count == 0)
 			throw new XmlException ("No layers found in OpenRaster file");
-
-		doc.ImageSize = imagesize;
-		doc.Workspace.ViewSize = imagesize;
 
 		for (int i = 0; i < layerElements.Count; i++) {
 
@@ -106,8 +97,8 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 					}
 				}
 
-				UserLayer layer = doc.Layers.CreateLayer (name);
-				doc.Layers.Insert (layer, 0);
+				UserLayer layer = newDocument.Layers.CreateLayer (name);
+				newDocument.Layers.Insert (layer, 0);
 
 				string visibility = GetAttribute (layerElement, "visibility", "visible");
 				if (visibility == "hidden") {
@@ -118,7 +109,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 				layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
 
 				var pb = GdkPixbuf.Pixbuf.NewFromFile (tmp_file)!; // NRT: only nullable when an error is thrown
-				var g = new Context (layer.Surface);
+				Context g = new (layer.Surface);
 				g.DrawPixbuf (pb, (PointD) position);
 
 				try {
@@ -130,6 +121,8 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 				PintaCore.Chrome.ShowMessageDialog (PintaCore.Chrome.MainWindow, Translations.GetString ("Error"), details);
 			}
 		}
+
+		return newDocument;
 	}
 	#endregion
 
@@ -156,7 +149,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 	{
 		using MemoryStream ms = new MemoryStream ();
 		using XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8) {
-			Formatting = Formatting.Indented
+			Formatting = Formatting.Indented,
 		};
 
 		writer.WriteStartElement ("image");
