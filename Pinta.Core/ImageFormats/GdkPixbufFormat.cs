@@ -46,7 +46,6 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 		Size imageSize = new (effectiveBuffer.Width, effectiveBuffer.Height);
 
 		Document newDocument = new (imageSize, file, filetype);
-		newDocument.Workspace.ViewSize = imageSize;
 
 		Layer layer = newDocument.Layers.AddNewLayer (file.GetDisplayName ());
 

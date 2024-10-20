@@ -59,7 +59,6 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 		);
 
 		Document newDocument = new (imageSize, file, "ora");
-		newDocument.Workspace.ViewSize = imageSize;
 
 		XmlElement stackElement = (XmlElement) stackXml.GetElementsByTagName ("stack")[0]!;
 		XmlNodeList layerElements = stackElement.GetElementsByTagName ("layer");

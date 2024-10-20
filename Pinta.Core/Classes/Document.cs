@@ -91,6 +91,8 @@ public sealed class Document
 		} else
 			DisplayName = Translations.GetString ("Unsaved Image {0}", name_counter++);
 
+		Workspace.ViewSize = size;
+
 		ResetSelectionPaths ();
 	}
 
