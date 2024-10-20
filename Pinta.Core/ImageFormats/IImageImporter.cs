@@ -35,8 +35,5 @@ public interface IImageImporter
 	/// <param name='file'>
 	/// The identifier of the file to be loaded.
 	/// </param>
-	/// <param name='parent'>
-	/// Window to be used as a parent for any dialogs that are shown.
-	/// </param>
 	Document Import (Gio.File file);
 }
