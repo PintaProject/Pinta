@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Reflection.Metadata;
 using Cairo;
 
 namespace Pinta.Core;
@@ -56,8 +57,19 @@ public sealed class Document
 
 	public DocumentSelection PreviousSelection { get; set; }
 
+	private static int name_counter = 1;
+
 	public Document (Size size)
+		: this (size, null, null)
+	{ }
+
+	public Document (
+		Size size,
+		Gio.File? file,
+		string? fileType)
 	{
+		// --- Mandatory fields
+
 		PreviousSelection = new (this);
 		Selection = new DocumentSelection (this);
 
@@ -66,6 +78,20 @@ public sealed class Document
 		IsDirty = false;
 		HasBeenSavedInSession = false;
 		ImageSize = size;
+
+		// --- Post-initialization 
+
+		if (file is not null) {
+
+			if (string.IsNullOrEmpty (fileType))
+				throw new ArgumentNullException ($"nameof{fileType} must contain value.");
+
+			File = file;
+			FileType = fileType;
+		} else
+			DisplayName = Translations.GetString ("Unsaved Image {0}", name_counter++);
+
+		Workspace.ViewSize = size;
 
 		ResetSelectionPaths ();
 	}

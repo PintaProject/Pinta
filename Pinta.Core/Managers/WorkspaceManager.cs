@@ -137,8 +137,9 @@ public static class WorkspaceServiceExtensions
 		Size imageSize,
 		Color backgroundColor)
 	{
-		Document doc = workspace.CreateAndActivateDocument (actions, null, null, imageSize);
+		Document doc = new (imageSize);
 		doc.Workspace.ViewSize = imageSize;
+		workspace.ActivateDocument (doc, actions);
 
 		// Start with an empty white layer
 		Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
@@ -159,7 +160,6 @@ public static class WorkspaceServiceExtensions
 public sealed class WorkspaceManager : IWorkspaceService
 {
 	private int active_document_index = -1;
-	private int new_file_name = 1;
 
 	private readonly ChromeManager chrome_manager;
 	private readonly ImageConverterManager image_formats;
@@ -219,38 +219,23 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public ReadOnlyCollection<Document> OpenDocuments { get; }
 	public bool HasOpenDocuments => open_documents.Count > 0;
 
-	public Document CreateAndActivateDocument (
-		ActionManager actions,
-		Gio.File? file,
-		string? file_type,
-		Size size)
+	public void ActivateDocument (
+		Document document,
+		ActionManager actions)
 	{
-		Document document = new (size);
 		document.Layers.LayerAdded += Document_LayerAdded;
 		document.Layers.LayerRemoved += Document_LayerRemoved;
 		document.Layers.SelectedLayerChanged += Document_SelectedLayerChanged;
 		document.Layers.LayerPropertyChanged += Document_LayerPropertyChanged;
 
-		if (file is not null) {
-
-			if (string.IsNullOrEmpty (file_type))
-				throw new ArgumentNullException ($"nameof{file_type} must contain value.");
-
-			document.File = file;
-			document.FileType = file_type;
-		} else
-			document.DisplayName = Translations.GetString ("Unsaved Image {0}", new_file_name++);
-
 		open_documents.Add (document);
 
-		OnDocumentCreated (new DocumentEventArgs (document));
+		OnDocumentActivated (new DocumentEventArgs (document));
 
 		actions.Window.SetActiveDocument (document);
-
-		return document;
 	}
 
-	private void Document_LayerPropertyChanged (object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+	private void Document_LayerPropertyChanged (object? sender, PropertyChangedEventArgs e)
 	{
 		LayerPropertyChanged?.Invoke (sender, e);
 		this.Invalidate ();
@@ -276,6 +261,10 @@ public sealed class WorkspaceManager : IWorkspaceService
 		Document document)
 	{
 		int index = open_documents.IndexOf (document);
+
+		if (index == -1)
+			throw new ArgumentException ("Document was not found in workspace. Did you forget to activate it?", nameof (document));
+
 		open_documents.Remove (document);
 
 		if (index == active_document_index) {
@@ -334,14 +323,16 @@ public sealed class WorkspaceManager : IWorkspaceService
 			// Open the image and add it to the layers
 			IImageImporter? importer = image_formats.GetImporterByFile (file.GetDisplayName ());
 			if (importer is not null) {
-				importer.Import (file, parent);
+				Document imported = importer.Import (file);
+				ActivateDocument (imported, PintaCore.Actions);
 			} else {
 				// Unknown extension, so try every loader.
 				StringBuilder errors = new ();
 				bool loaded = false;
 				foreach (var format in image_formats.Formats.Where (f => !f.IsWriteOnly ())) {
 					try {
-						format.Importer!.Import (file, parent);
+						Document imported = format.Importer!.Import (file);
+						ActivateDocument (imported, PintaCore.Actions);
 						loaded = true;
 						break;
 					} catch (UnauthorizedAccessException) {
@@ -428,15 +419,10 @@ public sealed class WorkspaceManager : IWorkspaceService
 		ResetTitle ();
 	}
 
-	private void OnDocumentCreated (DocumentEventArgs e)
+	private void OnDocumentActivated (DocumentEventArgs e)
 	{
 		e.Document.SelectionChanged += (_, _) => OnSelectionChanged ();
-		DocumentCreated?.Invoke (this, e);
-	}
-
-	private void OnDocumentOpened (DocumentEventArgs e)
-	{
-		DocumentOpened?.Invoke (this, e);
+		DocumentActivated?.Invoke (this, e);
 	}
 
 	private void OnDocumentClosed (DocumentEventArgs e)
@@ -500,8 +486,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public event EventHandler? SelectedLayerChanged;
 	public event PropertyChangedEventHandler? LayerPropertyChanged;
 
-	public event EventHandler<DocumentEventArgs>? DocumentCreated;
-	public event EventHandler<DocumentEventArgs>? DocumentOpened;
+	public event EventHandler<DocumentEventArgs>? DocumentActivated;
 	public event EventHandler<DocumentEventArgs>? DocumentClosed;
 
 	public event EventHandler? ActiveDocumentChanged;
