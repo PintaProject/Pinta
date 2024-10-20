@@ -26,10 +26,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Xml;
 using Cairo;
+using GdkPixbuf;
 
 namespace Pinta.Core;
 
@@ -86,7 +88,6 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 				using (Stream stream_out = File.Open (tmp_file, FileMode.OpenOrCreate)) {
 					byte[] buffer = new byte[2048];
-
 					while (true) {
 						int len = s.Read (buffer, 0, buffer.Length);
 
@@ -108,7 +109,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 				layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
 				layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
 
-				var pb = GdkPixbuf.Pixbuf.NewFromFile (tmp_file)!; // NRT: only nullable when an error is thrown
+				Pixbuf pb = Pixbuf.NewFromFile (tmp_file)!; // NRT: only nullable when an error is thrown
 				Context g = new (layer.Surface);
 				g.DrawPixbuf (pb, (PointD) position);
 
@@ -126,8 +127,8 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 	}
 	#endregion
 
-	private static IFormatProvider GetFormat ()
-		=> System.Globalization.CultureInfo.CreateSpecificCulture ("en");
+	private static CultureInfo GetFormat ()
+		=> CultureInfo.CreateSpecificCulture ("en");
 
 	private static string GetAttribute (XmlElement element, string attribute, string defValue)
 	{
@@ -147,8 +148,8 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 	private static byte[] GetLayerXmlData (IReadOnlyList<UserLayer> layers)
 	{
-		using MemoryStream ms = new MemoryStream ();
-		using XmlTextWriter writer = new XmlTextWriter (ms, System.Text.Encoding.UTF8) {
+		using MemoryStream ms = new ();
+		using XmlTextWriter writer = new (ms, System.Text.Encoding.UTF8) {
 			Formatting = Formatting.Indented,
 		};
 
@@ -167,9 +168,10 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			writer.WriteAttributeString ("name", layer.Name);
 			writer.WriteAttributeString ("composite-op", BlendModeToStandard (layer.BlendMode));
 			writer.WriteAttributeString ("src", "data/layer" + i.ToString () + ".png");
-			if (layer.Hidden) {
+
+			if (layer.Hidden)
 				writer.WriteAttributeString ("visibility", "hidden");
-			}
+
 			writer.WriteEndElement ();
 		}
 
@@ -177,56 +179,50 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 		writer.WriteEndElement (); // image
 
 		writer.Close ();
+
 		return ms.ToArray ();
 	}
 
 	public void Export (Document document, Gio.File file, Gtk.Window parent)
 	{
-		using var file_stream = new GioStream (file.Replace ());
+		using GioStream file_stream = new (file.Replace ());
+		using ZipArchive archive = new (file_stream, ZipArchiveMode.Create);
 
-		using var archive = new ZipArchive (file_stream, ZipArchiveMode.Create);
-
-		{
-			var mimeBytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
-			ZipArchiveEntry entry = archive.CreateEntry ("mimetype", CompressionLevel.NoCompression);
-			using var s = entry.Open ();
-			s.Write (mimeBytes, 0, mimeBytes.Length);
+		var mimeBytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
+		ZipArchiveEntry mimeEntry = archive.CreateEntry ("mimetype", CompressionLevel.NoCompression);
+		using (Stream mimeStream = mimeEntry.Open ()) {
+			mimeStream.Write (mimeBytes, 0, mimeBytes.Length);
 		}
 
 		for (int i = 0; i < document.Layers.UserLayers.Count; i++) {
-			var pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
+			Pixbuf pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
 			byte[] buf = pb.SaveToBuffer ("png");
-
-			ZipArchiveEntry entry = archive.CreateEntry ($"data/layer{i}.png");
-			using var s = entry.Open ();
-			s.Write (buf, 0, buf.Length);
+			ZipArchiveEntry layerEntry = archive.CreateEntry ($"data/layer{i}.png");
+			using Stream layerStream = layerEntry.Open ();
+			layerStream.Write (buf, 0, buf.Length);
 		}
 
-		{
-			var userLayerBytes = GetLayerXmlData (document.Layers.UserLayers);
-			ZipArchiveEntry entry = archive.CreateEntry ("stack.xml");
-			using var s = entry.Open ();
-			s.Write (userLayerBytes, 0, userLayerBytes.Length);
+		var userLayerBytes = GetLayerXmlData (document.Layers.UserLayers);
+		ZipArchiveEntry stackEntry = archive.CreateEntry ("stack.xml");
+		using (Stream stackStream = stackEntry.Open ()) {
+			stackStream.Write (userLayerBytes, 0, userLayerBytes.Length);
 		}
 
 		// Add merged image.
 		var flattenedPb = document.GetFlattenedImage ().ToPixbuf ();
-		{
-			var mergedImageBytes = flattenedPb.SaveToBuffer ("png");
-			ZipArchiveEntry entry = archive.CreateEntry ("mergedimage.png");
-			using var s = entry.Open ();
-			s.Write (mergedImageBytes, 0, mergedImageBytes.Length);
+		var mergedImageBytes = flattenedPb.SaveToBuffer ("png");
+		ZipArchiveEntry mergedImageEntry = archive.CreateEntry ("mergedimage.png");
+		using (Stream mergedImageStream = mergedImageEntry.Open ()) {
+			mergedImageStream.Write (mergedImageBytes, 0, mergedImageBytes.Length);
 		}
 
 		// Add thumbnail.
-		{
-			Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
-			var thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, GdkPixbuf.InterpType.Bilinear)!;
-			var thumbnailBytes = thumb.SaveToBuffer ("png");
-			ZipArchiveEntry entry = archive.CreateEntry ("Thumbnails/thumbnail.png");
-			using var s = entry.Open ();
-			s.Write (thumbnailBytes, 0, thumbnailBytes.Length);
-		}
+		Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
+		var thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, GdkPixbuf.InterpType.Bilinear)!;
+		var thumbnailBytes = thumb.SaveToBuffer ("png");
+		ZipArchiveEntry thumbnailEntry = archive.CreateEntry ("Thumbnails/thumbnail.png");
+		using Stream thumbnailStream = thumbnailEntry.Open ();
+		thumbnailStream.Write (thumbnailBytes, 0, thumbnailBytes.Length);
 	}
 
 	private static string BlendModeToStandard (BlendMode mode)
