@@ -72,7 +72,7 @@ public sealed class Palette
 
 	public static Palette GetDefault ()
 	{
-		Palette p = new Palette ();
+		Palette p = new ();
 		p.LoadDefault ();
 		return p;
 	}
@@ -80,10 +80,9 @@ public sealed class Palette
 	public void LoadDefault ()
 	{
 		colors.Clear ();
-
 		colors.AddRange (EnumerateDefaultColors ());
-
 		colors.TrimExcess ();
+
 		OnPaletteChanged ();
 	}
 
@@ -143,24 +142,27 @@ public sealed class Palette
 
 	public void Load (PaletteFormatManager paletteFormats, Gio.File file)
 	{
-		(var loadedColors, var errors) = LoadColors (paletteFormats, file);
-
-		if (loadedColors is not null) {
+		try {
+			var loadedColors = LoadColors (paletteFormats, file);
 			colors = loadedColors;
 			colors.TrimExcess ();
 			OnPaletteChanged ();
-		} else {
+		} catch (Exception e) {
 			var parent = PintaCore.Chrome.MainWindow;
-			ShowUnsupportedFormatDialog (parent, file.GetParseName (), Translations.GetString ("Unsupported palette format"), errors);
+			ShowUnsupportedFormatDialog (
+				parent,
+				file.GetParseName (),
+				Translations.GetString ("Unsupported palette format"),
+				e.Message);
 		}
 	}
 
-	static (List<Color>? loadedColors, string errors) LoadColors (PaletteFormatManager paletteFormats, Gio.File file)
+	static List<Color> LoadColors (PaletteFormatManager paletteFormats, Gio.File file)
 	{
 		var loader = paletteFormats.GetFormatByFilename (file.GetDisplayName ())?.Loader;
 
 		if (loader != null)
-			return (loader.Load (file), string.Empty);
+			return loader.Load (file);
 
 		StringBuilder errors = new ();
 
@@ -169,7 +171,7 @@ public sealed class Palette
 			try {
 				var loaded_colors = format.Loader.Load (file);
 				if (loaded_colors != null)
-					return (loaded_colors, errors.ToString ());
+					return loaded_colors;
 			} catch (Exception e) {
 				// Record errors in case none of the formats work.
 				errors.AppendLine ($"Failed to load palette as {format.Filter.Name}:");
@@ -178,7 +180,7 @@ public sealed class Palette
 			}
 		}
 
-		return (null, errors.ToString ());
+		throw new Exception (errors.ToString ());
 	}
 
 	public void Save (Gio.File file, IPaletteSaver saver)
@@ -188,7 +190,7 @@ public sealed class Palette
 
 	private static Task ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
 	{
-		var details = new StringBuilder ();
+		StringBuilder details = new ();
 		details.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
 		details.AppendLine (Translations.GetString ("Pinta supports the following palette formats:"));
 
