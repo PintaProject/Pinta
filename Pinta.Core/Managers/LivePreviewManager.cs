@@ -101,7 +101,9 @@ public sealed class LivePreviewManager
 
 		// Handle selection path.
 		tool_manager.Commit ();
-		var selection = doc.Selection;
+
+		DocumentSelection selection = doc.Selection;
+
 		selection_path = selection.Visible ? selection.SelectionPath : null;
 		render_bounds = (selection_path != null) ? selection_path.GetBounds () : live_preview_surface.GetBounds ();
 		render_bounds = workspace_manager.ClampToImageSize (render_bounds);
@@ -171,18 +173,20 @@ public sealed class LivePreviewManager
 		live_preview_surface = null!;
 
 		workspace_manager.Invalidate ();
+
 		CleanUp ();
 	}
 
 	void Apply ()
 	{
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "LivePreviewManager.Apply()");
+
 		apply_live_preview_flag = true;
 
 		if (!renderer.IsRendering) {
 			HandleApply ();
 		} else {
-			var dialog = chrome_manager.ProgressDialog;
+			IProgressDialog dialog = chrome_manager.ProgressDialog;
 			dialog.Title = Translations.GetString ("Rendering Effect");
 			dialog.Text = effect.Name;
 			dialog.Progress = renderer.Progress;
@@ -240,7 +244,7 @@ public sealed class LivePreviewManager
 		history_item = null!;
 
 		// Hide progress dialog and clean up events.
-		var dialog = chrome_manager.ProgressDialog;
+		IProgressDialog dialog = chrome_manager.ProgressDialog;
 		dialog.Hide ();
 		dialog.Canceled -= HandleProgressDialogCancel;
 
@@ -273,7 +277,7 @@ public sealed class LivePreviewManager
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
 			chrome.ProgressDialog.Progress = progress;
-			manager.HandleUpdate (progress, updatedBounds);
+			manager.HandleUpdate (updatedBounds);
 		}
 
 		protected override void OnCompletion (
@@ -292,7 +296,7 @@ public sealed class LivePreviewManager
 		}
 	}
 
-	void HandleUpdate (double progress, RectangleI bounds)
+	void HandleUpdate (RectangleI bounds)
 	{
 		double scale = workspace_manager.Scale;
 		PointD offset = workspace_manager.Offset;
