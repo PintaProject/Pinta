@@ -325,7 +325,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 			// Open the image and add it to the layers
 			IImageImporter? importer = image_formats.GetImporterByFile (file.GetDisplayName ());
 			if (importer is not null) {
-				Document imported = importer.Import (file, parent);
+				Document imported = importer.Import (file);
 				AttachDocument (imported, PintaCore.Actions);
 			} else {
 				// Unknown extension, so try every loader.
@@ -333,7 +333,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 				bool loaded = false;
 				foreach (var format in image_formats.Formats.Where (f => !f.IsWriteOnly ())) {
 					try {
-						Document imported = format.Importer!.Import (file, parent);
+						Document imported = format.Importer!.Import (file);
 						AttachDocument (imported, PintaCore.Actions);
 						loaded = true;
 						break;
