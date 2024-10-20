@@ -263,7 +263,8 @@ public sealed class WorkspaceManager : IWorkspaceService
 	{
 		int index = open_documents.IndexOf (document);
 
-		if (index == -1) return; // TODO: Maybe throw an exception?
+		if (index == -1)
+			throw new ArgumentException ("Document was not found in workspace. Did you forget to activate it?", nameof (document));
 
 		open_documents.Remove (document);
 
