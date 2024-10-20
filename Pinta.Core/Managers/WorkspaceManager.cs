@@ -227,7 +227,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 		document.Layers.LayerRemoved += Document_LayerRemoved;
 		document.Layers.SelectedLayerChanged += Document_SelectedLayerChanged;
 		document.Layers.LayerPropertyChanged += Document_LayerPropertyChanged;
-		document.MarkAttached ();
 
 		open_documents.Add (document);
 
@@ -286,8 +285,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 		document.Layers.SelectedLayerChanged -= Document_SelectedLayerChanged;
 		document.Layers.LayerPropertyChanged -= Document_LayerPropertyChanged;
 		document.Close ();
-
-		document.MarkDetached ();
 
 		OnDocumentClosed (new DocumentEventArgs (document));
 	}

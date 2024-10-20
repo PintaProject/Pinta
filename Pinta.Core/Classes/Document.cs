@@ -96,19 +96,6 @@ public sealed class Document
 		ResetSelectionPaths ();
 	}
 
-	// This pair of methods is temporary, in order to ensure that a document is attached to a single workspace at a time
-	// While it exists, it is to be called exclusively from the workspace manager
-	private bool is_attached = false; // By default detached from workspace
-	internal void MarkAttached ()
-	{
-		if (is_attached) throw new InvalidOperationException ("Document is already attached to a workspace. Detach it first");
-		is_attached = true;
-	}
-	internal void MarkDetached ()
-	{
-		is_attached = false;
-	}
-
 	/// <summary>
 	/// Just the file name, like "dog.jpg".
 	/// If HasFile is false, this may be something like "Unsaved image 1".
