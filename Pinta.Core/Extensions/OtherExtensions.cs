@@ -89,28 +89,16 @@ public static class OtherExtensions
 				1);
 	}
 
-	public static bool In<T> (this T enumeration, params T[] values)
-	{
-		if (enumeration is null)
-			return false;
-
-		foreach (var en in values)
-			if (enumeration.Equals (en))
-				return true;
-
-		return false;
-	}
-
 	public static ColorBgra RandomColorBgra (this Random random, bool includeAlpha = false)
 	{
 		Span<byte> colorBytes = stackalloc byte[4];
 		random.NextBytes (colorBytes);
 		uint unsignedInteger = BitConverter.ToUInt32 (colorBytes);
 		ColorBgra baseColor = ColorBgra.FromUInt32 (unsignedInteger);
-		if (includeAlpha)
-			return baseColor;
-		else
-			return baseColor with { A = 255 };
+		return
+			includeAlpha
+			? baseColor
+			: baseColor with { A = 255 };
 	}
 
 	public static IReadOnlyList<IReadOnlyList<PointI>> CreatePolygonSet (
