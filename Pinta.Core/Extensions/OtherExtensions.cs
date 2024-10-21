@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace Pinta.Core;
 
@@ -110,6 +111,7 @@ public static class OtherExtensions
 			return Array.Empty<PointI[]> ();
 
 		List<IReadOnlyList<PointI>> polygons = new ();
+		List<PointI> pts = new ();
 
 		PointI start = bounds.Location ().ToInt ();
 
@@ -141,7 +143,7 @@ public static class OtherExtensions
 			if (!startFound)
 				break;
 
-			List<PointI> pts = new ();
+			pts.Clear ();
 
 			PointI last = new (start.X, start.Y + 1);
 			PointI curr = new (start.X, start.Y);
