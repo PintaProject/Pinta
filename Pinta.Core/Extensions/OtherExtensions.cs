@@ -113,22 +113,27 @@ public static class OtherExtensions
 			return baseColor with { A = 255 };
 	}
 
-	public static IReadOnlyList<IReadOnlyList<PointI>> CreatePolygonSet (this BitMask stencil, RectangleD bounds, PointI translateOffset)
+	public static IReadOnlyList<IReadOnlyList<PointI>> CreatePolygonSet (
+		this BitMask stencil,
+		RectangleD bounds,
+		PointI translateOffset)
 	{
 		if (stencil.IsEmpty)
 			return Array.Empty<PointI[]> ();
 
-		var polygons = new List<IReadOnlyList<PointI>> ();
+		List<IReadOnlyList<PointI>> polygons = new ();
 
 		PointI start = bounds.Location ().ToInt ();
-		var pts = new List<PointI> ();
+
 		int count = 0;
 
 		// find all islands
 		while (true) {
+
 			bool startFound = false;
 
 			while (true) {
+
 				if (stencil[start]) {
 					startFound = true;
 					break;
@@ -136,17 +141,19 @@ public static class OtherExtensions
 
 				start = start with { X = start.X + 1 };
 
-				if (start.X >= bounds.Right) {
-					start = start with { X = (int) bounds.X, Y = start.Y + 1 };
-					if (start.Y >= bounds.Bottom)
-						break;
-				}
+				if (start.X < bounds.Right)
+					continue;
+
+				start = start with { X = (int) bounds.X, Y = start.Y + 1 };
+
+				if (start.Y >= bounds.Bottom)
+					break;
 			}
 
 			if (!startFound)
 				break;
 
-			pts.Clear ();
+			List<PointI> pts = new ();
 
 			PointI last = new (start.X, start.Y + 1);
 			PointI curr = new (start.X, start.Y);
@@ -159,13 +166,11 @@ public static class OtherExtensions
 
 				PointI left = new (
 					X: (currLastDelta.X + currLastDelta.Y + 2) / 2 + curr.X - 1,
-					Y: (currLastDelta.Y - currLastDelta.X + 2) / 2 + curr.Y - 1
-				);
+					Y: (currLastDelta.Y - currLastDelta.X + 2) / 2 + curr.Y - 1);
 
 				PointI right = new (
 					X: (currLastDelta.X - currLastDelta.Y + 2) / 2 + curr.X - 1,
-					Y: (currLastDelta.Y + currLastDelta.X + 2) / 2 + curr.Y - 1
-				);
+					Y: (currLastDelta.Y + currLastDelta.X + 2) / 2 + curr.Y - 1);
 
 				if (bounds.ContainsPoint ((PointD) left) && stencil[left]) {
 					// go left
@@ -193,12 +198,14 @@ public static class OtherExtensions
 			}
 
 			PointI[] points = pts.ToArray ();
+
 			var scans = CairoExtensions.GetScans (points);
 
 			foreach (var scan in scans)
 				stencil.Invert (scan);
 
 			CairoExtensions.TranslatePointsInPlace (points, translateOffset);
+
 			polygons.Add (points);
 		}
 
