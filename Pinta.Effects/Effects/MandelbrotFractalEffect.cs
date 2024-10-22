@@ -54,7 +54,6 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	private const double Max = 100000;
 
 	private static readonly double inv_log_max = 1.0 / Math.Log (Max);
-	private const double Zoom_factor = 20.0;
 
 	private static readonly PointD offset_basis = new (X: -0.7, Y: -0.29);
 
@@ -62,9 +61,10 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	private static double Mandelbrot (double r, double i, int factor)
 	{
+		const int MAX_ITERATIONS = 1024;
 		int c = 0;
 		PointD p = new (0, 0);
-		while ((c * factor) < 1024 && Utility.MagnitudeSquared (p) < Max) {
+		while ((c * factor) < MAX_ITERATIONS && Utility.MagnitudeSquared (p) < Max) {
 			p = NextLocation (p, r, i);
 			++c;
 		}
@@ -92,11 +92,12 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		ColorGradient colorGradient);
 	private MandelbrotSettings CreateSettings (ImageSurface dst)
 	{
+		const double ZOOM_FACTOR = 20.0;
 		Size canvasSize = new (dst.Width, dst.Height);
-		double zoom = 1 + Zoom_factor * Data.Zoom;
+		double zoom = 1 + ZOOM_FACTOR * Data.Zoom;
 		int count = Data.Quality * Data.Quality + 1;
 
-		var baseGradient =
+		ColorGradient baseGradient =
 			GradientHelper
 			.CreateBaseGradientForEffect (
 				palette,
