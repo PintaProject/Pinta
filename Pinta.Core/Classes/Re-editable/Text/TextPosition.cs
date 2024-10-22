@@ -15,7 +15,6 @@ public readonly struct TextPosition : IComparable<TextPosition>
 {
 	public int Line { get; }
 	public int Offset { get; }
-
 	public TextPosition (int line, int offset)
 	{
 		Line = line;
@@ -29,29 +28,19 @@ public readonly struct TextPosition : IComparable<TextPosition>
 		=> new (Line, offset);
 
 	public override readonly bool Equals (object? obj)
-	{
-		return obj is TextPosition && this == (TextPosition) obj;
-	}
+		=> obj is TextPosition position && this == position;
 
 	public override readonly int GetHashCode ()
-	{
-		return new { Line, Offset }.GetHashCode ();
-	}
+		=> new { Line, Offset }.GetHashCode ();
 
 	public override readonly string ToString ()
-	{
-		return $"({Line}, {Offset})";
-	}
+		=> $"({Line}, {Offset})";
 
 	public static bool operator == (TextPosition x, TextPosition y)
-	{
-		return x.CompareTo (y) == 0;
-	}
+		=> x.CompareTo (y) == 0;
 
 	public static bool operator != (TextPosition x, TextPosition y)
-	{
-		return x.CompareTo (y) != 0;
-	}
+		=> x.CompareTo (y) != 0;
 
 	public readonly int CompareTo (TextPosition other)
 	{
@@ -62,12 +51,8 @@ public readonly struct TextPosition : IComparable<TextPosition>
 	}
 
 	public static TextPosition Max (TextPosition p1, TextPosition p2)
-	{
-		return (p1.CompareTo (p2) > 0) ? p1 : p2;
-	}
+		=> (p1.CompareTo (p2) > 0) ? p1 : p2;
 
 	public static TextPosition Min (TextPosition p1, TextPosition p2)
-	{
-		return (p1.CompareTo (p2) < 0) ? p1 : p2;
-	}
+		=> (p1.CompareTo (p2) < 0) ? p1 : p2;
 }

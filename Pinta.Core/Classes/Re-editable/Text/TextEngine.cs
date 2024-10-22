@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace Pinta.Core;
 
-public sealed class TextEngine
+public sealed partial class TextEngine
 {
 	private List<string> lines;
 
@@ -580,5 +580,7 @@ public sealed class TextEngine
 	/// Returns the index of the first character of each word in the line.
 	/// </summary>
 	private static IEnumerable<int> FindWords (string s)
-		=> Regex.Matches (s, @"\b\w").Select (m => m.Index);
+		=> FindWordsRegex ().Matches (s).Select (m => m.Index);
+
+	[GeneratedRegex (@"\b\w")] private static partial Regex FindWordsRegex ();
 }
