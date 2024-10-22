@@ -98,75 +98,59 @@ public sealed class EditActions
 	#region Initialization
 	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 	{
-		app.AddAccelAction (Undo, "<Primary>Z");
-		menu.AppendItem (Undo.CreateMenuItem ());
-
-		app.AddAccelAction (Redo, new[] { "<Primary><Shift>Z", "<Ctrl>Y" });
-		menu.AppendItem (Redo.CreateMenuItem ());
-
-		var paste_section = Gio.Menu.New ();
-		menu.AppendSection (null, paste_section);
-
-		app.AddAccelAction (Cut, "<Primary>X");
+		Gio.Menu paste_section = Gio.Menu.New ();
 		paste_section.AppendItem (Cut.CreateMenuItem ());
-
-		app.AddAccelAction (Copy, "<Primary>C");
 		paste_section.AppendItem (Copy.CreateMenuItem ());
-
-		app.AddAccelAction (CopyMerged, "<Primary><Shift>C");
 		paste_section.AppendItem (CopyMerged.CreateMenuItem ());
-
-		app.AddAccelAction (Paste, "<Primary>V");
 		paste_section.AppendItem (Paste.CreateMenuItem ());
-
-		app.AddAccelAction (PasteIntoNewLayer, "<Primary><Shift>V");
 		paste_section.AppendItem (PasteIntoNewLayer.CreateMenuItem ());
-
-		// Note: <Ctrl><Alt>V shortcut doesn't seem to work on Windows & macOS (bug 2047921). 
-		app.AddAccelAction (PasteIntoNewImage, new[] { "<Shift>V", "<Primary><Alt>V" });
 		paste_section.AppendItem (PasteIntoNewImage.CreateMenuItem ());
 
-		var sel_section = Gio.Menu.New ();
-		menu.AppendSection (null, sel_section);
-
-		app.AddAccelAction (SelectAll, "<Primary>A");
+		Gio.Menu sel_section = Gio.Menu.New ();
 		sel_section.AppendItem (SelectAll.CreateMenuItem ());
-
-		app.AddAccelAction (Deselect, new[] { "<Primary><Shift>A", "<Ctrl>D" });
 		sel_section.AppendItem (Deselect.CreateMenuItem ());
 
-		var edit_sel_section = Gio.Menu.New ();
-		menu.AppendSection (null, edit_sel_section);
-
-		app.AddAccelAction (EraseSelection, "Delete");
+		Gio.Menu edit_sel_section = Gio.Menu.New ();
 		edit_sel_section.AppendItem (EraseSelection.CreateMenuItem ());
-
-		app.AddAccelAction (FillSelection, "BackSpace");
 		edit_sel_section.AppendItem (FillSelection.CreateMenuItem ());
-
-		app.AddAccelAction (InvertSelection, "<Primary>I");
 		edit_sel_section.AppendItem (InvertSelection.CreateMenuItem ());
-
-		app.AddAccelAction (OffsetSelection, "<Primary><Shift>O");
 		edit_sel_section.AppendItem (OffsetSelection.CreateMenuItem ());
 
-		var palette_section = Gio.Menu.New ();
-		menu.AppendSection (null, palette_section);
+		Gio.Menu palette_section = Gio.Menu.New ();
 
-		var palette_menu = Gio.Menu.New ();
+		Gio.Menu palette_menu = Gio.Menu.New ();
+		palette_menu.AppendItem (LoadPalette.CreateMenuItem ());
+		palette_menu.AppendItem (SavePalette.CreateMenuItem ());
+		palette_menu.AppendItem (ResetPalette.CreateMenuItem ());
+		palette_menu.AppendItem (ResizePalette.CreateMenuItem ());
+
+		menu.AppendItem (Undo.CreateMenuItem ());
+		menu.AppendItem (Redo.CreateMenuItem ());
+		menu.AppendSection (null, paste_section);
+		menu.AppendSection (null, sel_section);
+		menu.AppendSection (null, edit_sel_section);
+		menu.AppendSection (null, palette_section);
 		menu.AppendSubmenu (Translations.GetString ("Palette"), palette_menu);
 
+		app.AddAccelAction (Undo, "<Primary>Z");
+		app.AddAccelAction (Redo, new[] { "<Primary><Shift>Z", "<Ctrl>Y" });
+		app.AddAccelAction (Cut, "<Primary>X");
+		app.AddAccelAction (Copy, "<Primary>C");
+		app.AddAccelAction (CopyMerged, "<Primary><Shift>C");
+		app.AddAccelAction (Paste, "<Primary>V");
+		app.AddAccelAction (PasteIntoNewLayer, "<Primary><Shift>V");
+		// Note: <Ctrl><Alt>V shortcut doesn't seem to work on Windows & macOS (bug 2047921). 
+		app.AddAccelAction (PasteIntoNewImage, new[] { "<Shift>V", "<Primary><Alt>V" });
+		app.AddAccelAction (SelectAll, "<Primary>A");
+		app.AddAccelAction (Deselect, new[] { "<Primary><Shift>A", "<Ctrl>D" });
+		app.AddAccelAction (EraseSelection, "Delete");
+		app.AddAccelAction (FillSelection, "BackSpace");
+		app.AddAccelAction (InvertSelection, "<Primary>I");
+		app.AddAccelAction (OffsetSelection, "<Primary><Shift>O");
 		app.AddAction (LoadPalette);
-		palette_menu.AppendItem (LoadPalette.CreateMenuItem ());
-
 		app.AddAction (SavePalette);
-		palette_menu.AppendItem (SavePalette.CreateMenuItem ());
-
 		app.AddAction (ResetPalette);
-		palette_menu.AppendItem (ResetPalette.CreateMenuItem ());
-
 		app.AddAction (ResizePalette);
-		palette_menu.AppendItem (ResizePalette.CreateMenuItem ());
 	}
 
 	public void CreateHistoryWindowToolBar (Gtk.Box toolbar)
