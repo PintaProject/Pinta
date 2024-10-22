@@ -177,7 +177,7 @@ public sealed class ViewActions
 		app.AddAction (ImageTabs);
 		app.AddAction (ColorScheme);
 
-	
+
 		menu.AppendSection (null, zoom_section);
 		menu.AppendSection (null, metric_section);
 		menu.AppendSection (null, show_hide_section);
@@ -319,10 +319,9 @@ public sealed class ViewActions
 	private void HandlePintaCoreActionsViewActualSizeActivated (object sender, EventArgs e)
 	{
 		int default_zoom = DefaultZoomIndex ();
-		if (ZoomComboBox.ComboBox.Active != default_zoom) {
-			ZoomComboBox.ComboBox.Active = default_zoom;
-			UpdateCanvasScale ();
-		}
+		if (ZoomComboBox.ComboBox.Active == default_zoom) return;
+		ZoomComboBox.ComboBox.Active = default_zoom;
+		UpdateCanvasScale ();
 	}
 
 	private void HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged (object? sender, EventArgs e)
