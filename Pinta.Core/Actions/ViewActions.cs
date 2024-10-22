@@ -162,7 +162,7 @@ public sealed class ViewActions
 
 		Gio.Menu color_scheme_section = Gio.Menu.New ();
 		color_scheme_section.AppendSubmenu (Translations.GetString ("Color Scheme"), color_scheme_menu);
-		
+
 		app.AddAccelAction (ZoomIn, new[] { "<Primary>plus", "<Primary>equal", "equal", "<Primary>KP_Add", "KP_Add" });
 		app.AddAccelAction (ZoomOut, new[] { "<Primary>minus", "<Primary>underscore", "minus", "<Primary>KP_Subtract", "KP_Subtract" });
 		app.AddAccelAction (ActualSize, new[] { "<Primary>0", "<Primary><Shift>A" });
@@ -197,7 +197,7 @@ public sealed class ViewActions
 		ZoomOut.Activated += HandlePintaCoreActionsViewZoomOutActivated;
 		ZoomComboBox.ComboBox.OnChanged += HandlePintaCoreActionsViewZoomComboBoxComboBoxChanged;
 
-		var focus_controller = Gtk.EventControllerFocus.New ();
+		Gtk.EventControllerFocus focus_controller = Gtk.EventControllerFocus.New ();
 		focus_controller.OnEnter += Entry_FocusInEvent;
 		focus_controller.OnLeave += Entry_FocusOutEvent;
 		ZoomComboBox.ComboBox.GetEntry ().AddController (focus_controller);
@@ -208,7 +208,7 @@ public sealed class ViewActions
 			workspace.Invalidate ();
 		};
 
-		var isFullscreen = false;
+		bool isFullscreen = false;
 
 		Fullscreen.Activated += (foo, bar) => {
 			if (!isFullscreen)
@@ -247,8 +247,8 @@ public sealed class ViewActions
 	/// </summary>
 	public static bool TryParsePercent (string text, out double percent)
 	{
-		var culture = CultureInfo.CurrentCulture;
-		var format = culture.NumberFormat;
+		CultureInfo culture = CultureInfo.CurrentCulture;
+		NumberFormatInfo format = culture.NumberFormat;
 
 		// In order to use double.TryParse, we must:
 		// - replace the decimal separator for percents with the regular separator.
@@ -257,17 +257,19 @@ public sealed class ViewActions
 		//   uses U+066A but the translation string uses U+0025, so there may be a bug in Mono.
 		// - remove the group separators, since they might be different from the regular
 		//   group separator, and the group sizes could also be different.
-		text = text.Replace (format.PercentGroupSeparator, string.Empty);
-		text = text.Replace (format.PercentSymbol, string.Empty);
-		text = text.Replace ("%", string.Empty);
-		text = text.Replace (format.PercentDecimalSeparator, format.NumberDecimalSeparator);
-		text = text.Trim ();
+		string processed =
+			text
+			.Replace (format.PercentGroupSeparator, string.Empty)
+			.Replace (format.PercentSymbol, string.Empty)
+			.Replace ("%", string.Empty)
+			.Replace (format.PercentDecimalSeparator, format.NumberDecimalSeparator)
+			.Trim ();
 
-		return double.TryParse (text,
-					NumberStyles.AllowDecimalPoint |
-					NumberStyles.AllowLeadingWhite |
-					NumberStyles.AllowTrailingWhite,
-					culture, out percent);
+		return double.TryParse (
+			processed,
+			NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
+			culture,
+			out percent);
 	}
 
 	/// <summary>
@@ -275,7 +277,7 @@ public sealed class ViewActions
 	/// </summary>
 	public static string ToPercent (double n)
 	{
-		var percent = (n * 100).ToString ("N0", CultureInfo.CurrentCulture);
+		string percent = (n * 100).ToString ("N0", CultureInfo.CurrentCulture);
 		// Translators: This specifies the format of the zoom percentage choices
 		// in the toolbar.
 		return Translations.GetString ("{0}%", percent);
@@ -309,10 +311,7 @@ public sealed class ViewActions
 		if (!TryParsePercent (text, out var percent))
 			return;
 
-		percent = Math.Min (percent, 3600);
-		percent /= 100.0;
-
-		workspace.Scale = percent;
+		workspace.Scale = Math.Min (percent, 3600) / 100.0;
 	}
 
 	#region Action Handlers
