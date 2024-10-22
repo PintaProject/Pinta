@@ -145,7 +145,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int b = 0;
 		int a = 0;
 
-		for (double i = 0; i < settings.count; i++) {
+		for (int i = 0; i < settings.count; i++) {
 
 			double u = (2.0 * target.X - settings.canvasSize.Width + (i * settings.invCount)) * settings.invH;
 			double v = (2.0 * target.Y - settings.canvasSize.Height + (i * settings.invQuality % 1)) * settings.invH;
@@ -154,12 +154,12 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			double theta = Math.Atan2 (v, u);
 			double thetaP = theta + settings.angleTheta.Radians;
 
-			double uP = radius * Math.Cos (thetaP);
-			double vP = radius * Math.Sin (thetaP);
+			double rotatedU = radius * Math.Cos (thetaP);
+			double rotatedV = radius * Math.Sin (thetaP);
 
 			double m = Mandelbrot (
-				r: (uP * settings.invZoom) + offset_basis.X,
-				i: (vP * settings.invZoom) + offset_basis.Y,
+				r: (rotatedU * settings.invZoom) + offset_basis.X,
+				i: (rotatedV * settings.invZoom) + offset_basis.Y,
 				factor: settings.factor);
 
 			double c = 64 + settings.factor * m;
