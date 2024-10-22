@@ -177,10 +177,11 @@ public sealed class ViewActions
 		app.AddAction (ImageTabs);
 		app.AddAction (ColorScheme);
 
-		menu.AppendSection (null, color_scheme_section);
+	
 		menu.AppendSection (null, zoom_section);
 		menu.AppendSection (null, metric_section);
 		menu.AppendSection (null, show_hide_section);
+		menu.AppendSection (null, color_scheme_section);
 	}
 
 	public void CreateStatusBar (Gtk.Box statusbar)
