@@ -150,7 +150,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 		double deltaU = settings.invCount * settings.invH;
 
-		for (int i = 0; i < settings.count; i++) {
+		for (double i = 0; i < settings.count; i++) {
 
 			double u = baseU + i * deltaU;
 			double v = baseV + i * settings.invQuality % 1 * settings.invH;
