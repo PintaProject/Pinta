@@ -27,7 +27,6 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using Gtk;
 
 namespace Pinta.Core;
 
@@ -122,79 +121,69 @@ public sealed class ViewActions
 	}.ToReadOnlyCollection ();
 
 	#region Initialization
+
 	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 	{
-		var zoom_section = Gio.Menu.New ();
-		menu.AppendSection (null, zoom_section);
+		bool mainToolbarPresent = chrome.MainToolBar is not null;
 
-		app.AddAccelAction (ZoomIn, new[] { "<Primary>plus", "<Primary>equal", "equal", "<Primary>KP_Add", "KP_Add" });
+		Gio.Menu zoom_section = Gio.Menu.New ();
 		zoom_section.AppendItem (ZoomIn.CreateMenuItem ());
-
-		app.AddAccelAction (ZoomOut, new[] { "<Primary>minus", "<Primary>underscore", "minus", "<Primary>KP_Subtract", "KP_Subtract" });
 		zoom_section.AppendItem (ZoomOut.CreateMenuItem ());
-
-		app.AddAccelAction (ActualSize, new[] { "<Primary>0", "<Primary><Shift>A" });
 		zoom_section.AppendItem (ActualSize.CreateMenuItem ());
-
-		app.AddAccelAction (ZoomToWindow, "<Primary>B");
 		zoom_section.AppendItem (ZoomToWindow.CreateMenuItem ());
-
-		app.AddAccelAction (Fullscreen, "F11");
 		zoom_section.AppendItem (Fullscreen.CreateMenuItem ());
 
-		var metric_section = Gio.Menu.New ();
-		menu.AppendSection (null, metric_section);
-
-		var metric_menu = Gio.Menu.New ();
-		metric_section.AppendSubmenu (Translations.GetString ("Ruler Units"), metric_menu);
-
-		app.AddAction (RulerMetric);
+		Gio.Menu metric_menu = Gio.Menu.New ();
 		metric_menu.Append (Translations.GetString ("Pixels"), $"app.{RulerMetric.Name}(0)");
 		metric_menu.Append (Translations.GetString ("Inches"), $"app.{RulerMetric.Name}(1)");
 		metric_menu.Append (Translations.GetString ("Centimeters"), $"app.{RulerMetric.Name}(2)");
 
-		var show_hide_section = Gio.Menu.New ();
-		menu.AppendSection (null, show_hide_section);
+		Gio.Menu metric_section = Gio.Menu.New ();
+		metric_section.AppendSubmenu (Translations.GetString ("Ruler Units"), metric_menu);
 
-		var show_hide_menu = Gio.Menu.New ();
+		Gio.Menu show_hide_menu = Gio.Menu.New ();
+		show_hide_menu.AppendItem (PixelGrid.CreateMenuItem ());
+		show_hide_menu.AppendItem (Rulers.CreateMenuItem ());
+		show_hide_menu.AppendItem (StatusBar.CreateMenuItem ());
+		show_hide_menu.AppendItem (ToolBox.CreateMenuItem ());
+		show_hide_menu.AppendItem (ImageTabs.CreateMenuItem ());
+		if (mainToolbarPresent) show_hide_menu.AppendItem (ToolBar.CreateMenuItem ());
+
+		Gio.Menu show_hide_section = Gio.Menu.New ();
 		show_hide_section.AppendSubmenu (Translations.GetString ("Show/Hide"), show_hide_menu);
 
-		app.AddAction (PixelGrid);
-		show_hide_menu.AppendItem (PixelGrid.CreateMenuItem ());
-
-		app.AddAction (Rulers);
-		show_hide_menu.AppendItem (Rulers.CreateMenuItem ());
-
-		if (chrome.MainToolBar is not null) {
-			app.AddAction (ToolBar);
-			show_hide_menu.AppendItem (ToolBar.CreateMenuItem ());
-		}
-
-		app.AddAction (StatusBar);
-		show_hide_menu.AppendItem (StatusBar.CreateMenuItem ());
-
-		app.AddAction (ToolBox);
-		show_hide_menu.AppendItem (ToolBox.CreateMenuItem ());
-
-		app.AddAction (ImageTabs);
-		show_hide_menu.AppendItem (ImageTabs.CreateMenuItem ());
-
-		var color_scheme_section = Gio.Menu.New ();
-		menu.AppendSection (null, color_scheme_section);
-
-		var color_scheme_menu = Gio.Menu.New ();
-		color_scheme_section.AppendSubmenu (Translations.GetString ("Color Scheme"), color_scheme_menu);
-
-		app.AddAction (ColorScheme);
+		Gio.Menu color_scheme_menu = Gio.Menu.New ();
 		// Translators: This refers to using the system's default color scheme.
 		color_scheme_menu.Append (Translations.GetString ("Default"), $"app.{ColorScheme.Name}(0)");
 		// Translators: This refers to using a light variant of the color scheme.
 		color_scheme_menu.Append (Translations.GetString ("Light"), $"app.{ColorScheme.Name}(1)");
 		// Translators: This refers to using a dark variant of the color scheme.
 		color_scheme_menu.Append (Translations.GetString ("Dark"), $"app.{ColorScheme.Name}(2)");
+
+		Gio.Menu color_scheme_section = Gio.Menu.New ();
+		color_scheme_section.AppendSubmenu (Translations.GetString ("Color Scheme"), color_scheme_menu);
+		
+		app.AddAccelAction (ZoomIn, new[] { "<Primary>plus", "<Primary>equal", "equal", "<Primary>KP_Add", "KP_Add" });
+		app.AddAccelAction (ZoomOut, new[] { "<Primary>minus", "<Primary>underscore", "minus", "<Primary>KP_Subtract", "KP_Subtract" });
+		app.AddAccelAction (ActualSize, new[] { "<Primary>0", "<Primary><Shift>A" });
+		app.AddAccelAction (ZoomToWindow, "<Primary>B");
+		app.AddAccelAction (Fullscreen, "F11");
+		app.AddAction (RulerMetric);
+		app.AddAction (PixelGrid);
+		app.AddAction (Rulers);
+		if (mainToolbarPresent) app.AddAction (ToolBar);
+		app.AddAction (StatusBar);
+		app.AddAction (ToolBox);
+		app.AddAction (ImageTabs);
+		app.AddAction (ColorScheme);
+
+		menu.AppendSection (null, color_scheme_section);
+		menu.AppendSection (null, zoom_section);
+		menu.AppendSection (null, metric_section);
+		menu.AppendSection (null, show_hide_section);
 	}
 
-	public void CreateStatusBar (Box statusbar)
+	public void CreateStatusBar (Gtk.Box statusbar)
 	{
 		statusbar.Append (GtkExtensions.CreateToolBarSeparator ());
 		statusbar.Append (ZoomOut.CreateToolBarItem ());
