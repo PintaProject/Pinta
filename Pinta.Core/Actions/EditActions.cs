@@ -215,9 +215,10 @@ public sealed class EditActions
 
 		tools.Commit ();
 
-		Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
+		ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-		var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface);
+		Context g = new (doc.Layers.CurrentUserLayer.Surface);
+
 		g.AppendPath (doc.Selection.SelectionPath);
 		g.FillRule = FillRule.EvenOdd;
 
@@ -225,7 +226,14 @@ public sealed class EditActions
 		g.Fill ();
 
 		doc.Workspace.Invalidate ();
-		doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionFill, Translations.GetString ("Fill Selection"), old, doc.Layers.CurrentUserLayerIndex));
+		doc.History.PushNewItem (
+			new SimpleHistoryItem (
+				Resources.Icons.EditSelectionFill,
+				Translations.GetString ("Fill Selection"),
+				old,
+				doc.Layers.CurrentUserLayerIndex
+			)
+		);
 	}
 
 	private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
@@ -234,7 +242,10 @@ public sealed class EditActions
 
 		tools.Commit ();
 
-		SelectionHistoryItem hist = new SelectionHistoryItem (Resources.StandardIcons.EditSelectAll, Translations.GetString ("Select All"));
+		SelectionHistoryItem hist = new (
+			Resources.StandardIcons.EditSelectAll,
+			Translations.GetString ("Select All"));
+
 		hist.TakeSnapshot ();
 
 		doc.ResetSelectionPaths ();
@@ -250,9 +261,10 @@ public sealed class EditActions
 
 		tools.Commit ();
 
-		Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
+		ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-		var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface);
+		Context g = new (doc.Layers.CurrentUserLayer.Surface);
+
 		g.AppendPath (doc.Selection.SelectionPath);
 		g.FillRule = FillRule.EvenOdd;
 
@@ -275,7 +287,10 @@ public sealed class EditActions
 
 		tools.Commit ();
 
-		SelectionHistoryItem hist = new SelectionHistoryItem (Resources.Icons.EditSelectionNone, Translations.GetString ("Deselect"));
+		SelectionHistoryItem hist = new (
+			Resources.Icons.EditSelectionNone,
+			Translations.GetString ("Deselect"));
+
 		hist.TakeSnapshot ();
 
 		doc.ResetSelectionPaths ();
@@ -288,7 +303,8 @@ public sealed class EditActions
 	{
 		Document doc = workspace.ActiveDocument;
 
-		var cb = GdkExtensions.GetDefaultClipboard ();
+		Gdk.Clipboard cb = GdkExtensions.GetDefaultClipboard ();
+
 		if (tools.CurrentTool?.DoHandleCopy (doc, cb) == true)
 			return;
 
@@ -302,7 +318,8 @@ public sealed class EditActions
 
 		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 
-		Context g = new Context (dest);
+		Context g = new (dest);
+
 		g.SetSourceSurface (src, -rect.X, -rect.Y);
 		g.Paint ();
 
@@ -311,19 +328,20 @@ public sealed class EditActions
 
 	private void HandlerPintaCoreActionsEditCopyMergedActivated (object sender, EventArgs e)
 	{
-		var cb = GdkExtensions.GetDefaultClipboard ();
-		var doc = workspace.ActiveDocument;
+		Gdk.Clipboard cb = GdkExtensions.GetDefaultClipboard ();
+		Document doc = workspace.ActiveDocument;
 
 		tools.Commit ();
 
 		// Get our merged ("flattened") image
-		var src = doc.GetFlattenedImage (/* clip_to_selection */ true);
-		var rect = doc.GetSelectedBounds (true);
+		ImageSurface src = doc.GetFlattenedImage (/* clip_to_selection */ true);
+		RectangleI rect = doc.GetSelectedBounds (true);
 
 		// Copy it to a correctly sized surface 
-		var dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
+		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 
-		var g = new Context (dest);
+		Context g = new (dest);
+
 		g.SetSourceSurface (src, -rect.X, -rect.Y);
 		g.Paint ();
 
@@ -333,11 +351,13 @@ public sealed class EditActions
 
 	private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)
 	{
-		var doc = workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		Gdk.Clipboard cb = GdkExtensions.GetDefaultClipboard ();
+
 		if (tools.CurrentTool?.DoHandleCut (doc, cb) == true)
 			return;
+
 		tools.Commit ();
 
 		// Copy selection
@@ -350,18 +370,24 @@ public sealed class EditActions
 	private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		if (tools.CurrentTool?.DoHandleUndo (doc) == true)
 			return;
+
 		doc.History.Undo ();
+
 		tools.CurrentTool?.DoAfterUndo (doc);
 	}
 
 	private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		if (tools.CurrentTool?.DoHandleRedo (doc) == true)
 			return;
+
 		doc.History.Redo ();
+
 		tools.CurrentTool?.DoAfterRedo (doc);
 	}
 
@@ -386,7 +412,7 @@ public sealed class EditActions
 
 		fcd.AddFilter (ff);
 
-		var ff2 = Gtk.FileFilter.New ();
+		Gtk.FileFilter ff2 = Gtk.FileFilter.New ();
 		ff2.Name = Translations.GetString ("All files");
 		ff2.AddPattern ("*");
 		fcd.AddFilter (ff2);
@@ -395,7 +421,8 @@ public sealed class EditActions
 			fcd.SetCurrentFolder (last_palette_dir);
 
 		fcd.OnResponse += (_, args) => {
-			var response = (Gtk.ResponseType) args.ResponseId;
+
+			Gtk.ResponseType response = (Gtk.ResponseType) args.ResponseId;
 
 			if (response != Gtk.ResponseType.Accept)
 				return;
@@ -418,8 +445,10 @@ public sealed class EditActions
 			Translations.GetString ("Cancel"));
 
 		foreach (var format in palette_formats.Formats) {
+
 			if (format.IsReadOnly ())
 				continue;
+
 			Gtk.FileFilter fileFilter = format.Filter;
 			fcd.AddFilter (fileFilter);
 		}
@@ -428,7 +457,8 @@ public sealed class EditActions
 			fcd.SetCurrentFolder (last_palette_dir);
 
 		fcd.OnResponse += (_, args) => {
-			var response = (Gtk.ResponseType) args.ResponseId;
+
+			Gtk.ResponseType response = (Gtk.ResponseType) args.ResponseId;
 
 			if (response != Gtk.ResponseType.Accept)
 				return;
@@ -438,7 +468,7 @@ public sealed class EditActions
 			// Add in the extension if necessary, based on the current selected file filter.
 			// Note: on macOS, fcd.Filter doesn't seem to properly update to the current filter.
 			// However, on macOS the dialog always adds the extension automatically, so this issue doesn't matter.
-			var basename = file.GetParent ()!.GetRelativePath (file)!;
+			string basename = file.GetParent ()!.GetRelativePath (file)!;
 			string extension = System.IO.Path.GetExtension (basename);
 			if (string.IsNullOrEmpty (extension)) {
 				var currentFormat = palette_formats.Formats.First (f => f.Filter == fcd.Filter);
@@ -446,7 +476,7 @@ public sealed class EditActions
 				file = file.GetParent ()!.GetChild (basename);
 			}
 
-			var format = palette_formats.GetFormatByFilename (basename) ?? throw new FormatException ();
+			PaletteDescriptor format = palette_formats.GetFormatByFilename (basename) ?? throw new FormatException ();
 			palette.CurrentPalette.Save (file, format.Saver);
 			last_palette_dir = file.GetParent ();
 		};
@@ -468,8 +498,10 @@ public sealed class EditActions
 		// Clear the selection resize handles if necessary.
 		doc.Layers.ToolLayer.Clear ();
 
-		SelectionHistoryItem historyItem = new SelectionHistoryItem (Resources.Icons.EditSelectionInvert,
-										 Translations.GetString ("Invert Selection"));
+		SelectionHistoryItem historyItem = new (
+			Resources.Icons.EditSelectionInvert,
+			Translations.GetString ("Invert Selection"));
+
 		historyItem.TakeSnapshot ();
 
 		doc.Selection.Invert (doc.ImageSize);
