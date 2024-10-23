@@ -34,21 +34,23 @@ public sealed class PaintShopProPalette : IPaletteLoader, IPaletteSaver
 {
 	public List<Color> Load (Gio.File file)
 	{
-		List<Color> colors = new List<Color> ();
-		using var stream = new GioStream (file.Read (null));
-		StreamReader reader = new StreamReader (stream);
+		using GioStream stream = new (file.Read (null));
+		using StreamReader reader = new (stream);
 
-		string? line = reader.ReadLine ();
-		if (line is null || !line.StartsWith ("JASC-PAL"))
+		string? headerLine = reader.ReadLine ();
+		if (headerLine is null || !headerLine.StartsWith ("JASC-PAL"))
 			throw new InvalidDataException ("Not a valid PaintShopPro palette file.");
 
-		line = reader.ReadLine (); // version
+		string? versionLine = reader.ReadLine ();
 
 		int numberOfColors = int.Parse (reader.ReadLine ()!); // NRT - Assumes valid formatted file
 		PintaCore.Palette.CurrentPalette.Resize (numberOfColors);
 
+		List<Color> colors = new ();
+
 		while (!reader.EndOfStream) {
-			line = reader.ReadLine ();
+
+			string? line = reader.ReadLine ();
 
 			if (line is null)
 				break;
@@ -65,15 +67,15 @@ public sealed class PaintShopProPalette : IPaletteLoader, IPaletteSaver
 
 	public void Save (IReadOnlyList<Color> colors, Gio.File file)
 	{
-		using var stream = new GioStream (file.Replace ());
-		StreamWriter writer = new StreamWriter (stream);
+		using GioStream stream = new (file.Replace ());
+		using StreamWriter writer = new (stream);
+
 		writer.WriteLine ("JASC-PAL");
 		writer.WriteLine ("0100");
 		writer.WriteLine (colors.Count.ToString ());
 
-		foreach (Color color in colors) {
+		foreach (Color color in colors)
 			writer.WriteLine ("{0} {1} {2}", (int) (color.R * 255), (int) (color.G * 255), (int) (color.B * 255));
-		}
 
 		writer.Close ();
 	}
