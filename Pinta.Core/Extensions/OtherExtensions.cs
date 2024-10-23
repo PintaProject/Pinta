@@ -89,46 +89,40 @@ public static class OtherExtensions
 				1);
 	}
 
-	public static bool In<T> (this T enumeration, params T[] values)
-	{
-		if (enumeration is null)
-			return false;
-
-		foreach (var en in values)
-			if (enumeration.Equals (en))
-				return true;
-
-		return false;
-	}
-
 	public static ColorBgra RandomColorBgra (this Random random, bool includeAlpha = false)
 	{
 		Span<byte> colorBytes = stackalloc byte[4];
 		random.NextBytes (colorBytes);
 		uint unsignedInteger = BitConverter.ToUInt32 (colorBytes);
 		ColorBgra baseColor = ColorBgra.FromUInt32 (unsignedInteger);
-		if (includeAlpha)
-			return baseColor;
-		else
-			return baseColor with { A = 255 };
+		return
+			includeAlpha
+			? baseColor
+			: baseColor with { A = 255 };
 	}
 
-	public static IReadOnlyList<IReadOnlyList<PointI>> CreatePolygonSet (this BitMask stencil, RectangleD bounds, PointI translateOffset)
+	public static IReadOnlyList<IReadOnlyList<PointI>> CreatePolygonSet (
+		this BitMask stencil,
+		RectangleD bounds,
+		PointI translateOffset)
 	{
 		if (stencil.IsEmpty)
 			return Array.Empty<PointI[]> ();
 
-		var polygons = new List<IReadOnlyList<PointI>> ();
+		List<IReadOnlyList<PointI>> polygons = new ();
+		List<PointI> pts = new ();
 
 		PointI start = bounds.Location ().ToInt ();
-		var pts = new List<PointI> ();
+
 		int count = 0;
 
 		// find all islands
 		while (true) {
+
 			bool startFound = false;
 
 			while (true) {
+
 				if (stencil[start]) {
 					startFound = true;
 					break;
@@ -136,11 +130,13 @@ public static class OtherExtensions
 
 				start = start with { X = start.X + 1 };
 
-				if (start.X >= bounds.Right) {
-					start = start with { X = (int) bounds.X, Y = start.Y + 1 };
-					if (start.Y >= bounds.Bottom)
-						break;
-				}
+				if (start.X < bounds.Right)
+					continue;
+
+				start = start with { X = (int) bounds.X, Y = start.Y + 1 };
+
+				if (start.Y >= bounds.Bottom)
+					break;
 			}
 
 			if (!startFound)
@@ -159,13 +155,11 @@ public static class OtherExtensions
 
 				PointI left = new (
 					X: (currLastDelta.X + currLastDelta.Y + 2) / 2 + curr.X - 1,
-					Y: (currLastDelta.Y - currLastDelta.X + 2) / 2 + curr.Y - 1
-				);
+					Y: (currLastDelta.Y - currLastDelta.X + 2) / 2 + curr.Y - 1);
 
 				PointI right = new (
 					X: (currLastDelta.X - currLastDelta.Y + 2) / 2 + curr.X - 1,
-					Y: (currLastDelta.Y + currLastDelta.X + 2) / 2 + curr.Y - 1
-				);
+					Y: (currLastDelta.Y + currLastDelta.X + 2) / 2 + curr.Y - 1);
 
 				if (bounds.ContainsPoint ((PointD) left) && stencil[left]) {
 					// go left
@@ -193,12 +187,14 @@ public static class OtherExtensions
 			}
 
 			PointI[] points = pts.ToArray ();
+
 			var scans = CairoExtensions.GetScans (points);
 
 			foreach (var scan in scans)
 				stencil.Invert (scan);
 
 			CairoExtensions.TranslatePointsInPlace (points, translateOffset);
+
 			polygons.Add (points);
 		}
 
