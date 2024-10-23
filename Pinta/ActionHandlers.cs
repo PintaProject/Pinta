@@ -113,8 +113,6 @@ public sealed class ActionHandlers
 
 	private void Workspace_DocumentCreated (object? sender, DocumentEventArgs e)
 	{
-		PintaCore.Actions.Window.AddDocument (e.Document);
-
 		ToggleActions (true);
 	}
 

@@ -61,6 +61,11 @@ public sealed class WindowActions
 			active_doc_action.ChangeState (e.Parameter);
 		};
 
+		workspace.DocumentActivated += (o, e) => {
+			e.Document.Renamed += (_, _) => RebuildDocumentMenu ();
+			e.Document.IsDirtyChanged += (_, _) => RebuildDocumentMenu ();
+			AddDocumentMenuItem (workspace.OpenDocuments.IndexOf (e.Document));
+		};
 		workspace.DocumentClosed += (_, _) => RebuildDocumentMenu ();
 
 		this.chrome = chrome;
@@ -87,14 +92,6 @@ public sealed class WindowActions
 	{
 		int idx = workspace.OpenDocuments.IndexOf (doc);
 		active_doc_action.Activate (GLib.Variant.NewInt32 (idx));
-	}
-
-	public void AddDocument (Document doc)
-	{
-		doc.Renamed += (o, e) => { RebuildDocumentMenu (); };
-		doc.IsDirtyChanged += (o, e) => { RebuildDocumentMenu (); };
-
-		AddDocumentMenuItem (workspace.OpenDocuments.IndexOf (doc));
 	}
 
 	private void AddDocumentMenuItem (int idx)
