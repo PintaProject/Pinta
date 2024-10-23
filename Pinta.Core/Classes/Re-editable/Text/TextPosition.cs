@@ -11,69 +11,48 @@ using System;
 
 namespace Pinta.Core;
 
-public struct TextPosition : IComparable<TextPosition>
+public readonly struct TextPosition : IComparable<TextPosition>
 {
-	private int line;
-	private int offset;
-
+	public int Line { get; }
+	public int Offset { get; }
 	public TextPosition (int line, int offset)
 	{
-		this.line = line;
-		this.offset = offset;
+		Line = line;
+		Offset = offset;
 	}
 
-	public int Line {
-		readonly get => line;
-		set => line = Math.Max (value, 0);
-	}
+	public TextPosition WithLine (int line)
+		=> new (line, Offset);
 
-	public int Offset {
-		readonly get => offset;
-		set => offset = Math.Max (value, 0);
-	}
+	public TextPosition WithOffset (int offset)
+		=> new (Line, offset);
 
-	#region Operators
 	public override readonly bool Equals (object? obj)
-	{
-		return obj is TextPosition && this == (TextPosition) obj;
-	}
+		=> obj is TextPosition position && this == position;
 
 	public override readonly int GetHashCode ()
-	{
-		return new { line, offset }.GetHashCode ();
-	}
+		=> new { Line, Offset }.GetHashCode ();
 
 	public override readonly string ToString ()
-	{
-		return $"({line}, {offset})";
-	}
+		=> $"({Line}, {Offset})";
 
 	public static bool operator == (TextPosition x, TextPosition y)
-	{
-		return x.CompareTo (y) == 0;
-	}
+		=> x.CompareTo (y) == 0;
 
 	public static bool operator != (TextPosition x, TextPosition y)
-	{
-		return x.CompareTo (y) != 0;
-	}
+		=> x.CompareTo (y) != 0;
 
 	public readonly int CompareTo (TextPosition other)
 	{
-		if (line.CompareTo (other.line) != 0)
-			return line.CompareTo (other.line);
+		if (Line.CompareTo (other.Line) != 0)
+			return Line.CompareTo (other.Line);
 		else
-			return offset.CompareTo (other.offset);
+			return Offset.CompareTo (other.Offset);
 	}
 
 	public static TextPosition Max (TextPosition p1, TextPosition p2)
-	{
-		return (p1.CompareTo (p2) > 0) ? p1 : p2;
-	}
+		=> (p1.CompareTo (p2) > 0) ? p1 : p2;
 
 	public static TextPosition Min (TextPosition p1, TextPosition p2)
-	{
-		return (p1.CompareTo (p2) < 0) ? p1 : p2;
-	}
-	#endregion
+		=> (p1.CompareTo (p2) < 0) ? p1 : p2;
 }
