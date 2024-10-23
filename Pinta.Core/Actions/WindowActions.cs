@@ -61,6 +61,8 @@ public sealed class WindowActions
 			active_doc_action.ChangeState (e.Parameter);
 		};
 
+		workspace.DocumentClosed += (_, _) => RebuildDocumentMenu ();
+
 		this.chrome = chrome;
 		this.workspace = workspace;
 	}
@@ -93,11 +95,6 @@ public sealed class WindowActions
 		doc.IsDirtyChanged += (o, e) => { RebuildDocumentMenu (); };
 
 		AddDocumentMenuItem (workspace.OpenDocuments.IndexOf (doc));
-	}
-
-	public void RemoveDocument ()
-	{
-		RebuildDocumentMenu ();
 	}
 
 	private void AddDocumentMenuItem (int idx)

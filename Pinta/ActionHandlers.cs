@@ -107,8 +107,6 @@ public sealed class ActionHandlers
 
 	private void Workspace_DocumentClosed (object? sender, DocumentEventArgs e)
 	{
-		PintaCore.Actions.Window.RemoveDocument ();
-
 		if (!PintaCore.Workspace.HasOpenDocuments)
 			ToggleActions (false);
 	}
