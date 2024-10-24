@@ -65,7 +65,7 @@ public sealed class CanvasRenderer
 		dst.Flush ();
 
 		// Our rectangle of interest
-		var r = new RectangleI (offset, dst.GetBounds ().Size).ToDouble ();
+		RectangleD r = new RectangleI (offset, dst.GetBounds ().Size).ToDouble ();
 		bool is_one_to_one = scale_factor.Ratio == 1;
 
 		Cairo.Context g = new (dst);
@@ -77,13 +77,14 @@ public sealed class CanvasRenderer
 		for (int i = 0; i < layers.Count; i++) {
 
 			Layer layer = layers[i];
-			Cairo.ImageSurface surf = layer.Surface;
 
-			// If we're in LivePreview, substitute current layer with the preview layer
-			if (enable_live_preview && layer == PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer && PintaCore.LivePreview.IsEnabled)
-				surf = PintaCore.LivePreview.LivePreviewSurface;
+			Cairo.ImageSurface surf =
+				(enable_live_preview && layer == PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer && PintaCore.LivePreview.IsEnabled)
+				? PintaCore.LivePreview.LivePreviewSurface // If we're in LivePreview, choose preview layer
+				: layer.Surface;
 
 			g.Save ();
+
 			if (!is_one_to_one) {
 				// Scale the source surface based on the zoom level.
 				double inv_scale = 1.0 / scale_factor.Ratio;
@@ -93,8 +94,9 @@ public sealed class CanvasRenderer
 			g.Transform (layer.Transform);
 
 			// Use nearest-neighbor interpolation when zoomed in so that there isn't any smoothing.
-			var filter = (scale_factor.Ratio <= 1) ? ResamplingMode.NearestNeighbor : ResamplingMode.Bilinear;
-			g.SetSourceSurface (surf, 0, 0, filter);
+			ResamplingMode filter = (scale_factor.Ratio <= 1) ? ResamplingMode.NearestNeighbor : ResamplingMode.Bilinear;
+
+			g.SetSourceSurface (surf, filter);
 
 			g.SetBlendMode (layer.BlendMode);
 			g.PaintWithAlpha (layer.Opacity);
@@ -139,6 +141,7 @@ public sealed class CanvasRenderer
 				continue;
 
 			var dst_row = dst_data.Slice (dstRow * dstWidth, dstWidth);
+
 			for (int x = offset.X & 1; x < dst_row.Length; x += 2)
 				dst_row[x] = ColorBgra.Black;
 		}

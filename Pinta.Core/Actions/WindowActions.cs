@@ -61,12 +61,20 @@ public sealed class WindowActions
 			active_doc_action.ChangeState (e.Parameter);
 		};
 
+		workspace.DocumentActivated += (o, e) => {
+			e.Document.Renamed += (_, _) => RebuildDocumentMenu ();
+			e.Document.IsDirtyChanged += (_, _) => RebuildDocumentMenu ();
+			AddDocumentMenuItem (workspace.OpenDocuments.IndexOf (e.Document));
+		};
+		workspace.DocumentClosed += (_, _) => RebuildDocumentMenu ();
+
 		this.chrome = chrome;
 		this.workspace = workspace;
 	}
 
-	#region Initialization
-	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
+	public void RegisterActions (
+		Gtk.Application app,
+		Gio.Menu menu)
 	{
 		app.AddAccelAction (SaveAll, "<Ctrl><Alt>A");
 		menu.AppendItem (SaveAll.CreateMenuItem ());
@@ -79,37 +87,20 @@ public sealed class WindowActions
 
 		app.AddAction (active_doc_action);
 	}
-	#endregion
-
-	#region Public Methods
 
 	public void SetActiveDocument (Document doc)
 	{
-		var idx = workspace.OpenDocuments.IndexOf (doc);
+		int idx = workspace.OpenDocuments.IndexOf (doc);
 		active_doc_action.Activate (GLib.Variant.NewInt32 (idx));
 	}
 
-	public void AddDocument (Document doc)
-	{
-		doc.Renamed += (o, e) => { RebuildDocumentMenu (); };
-		doc.IsDirtyChanged += (o, e) => { RebuildDocumentMenu (); };
-
-		AddDocumentMenuItem (workspace.OpenDocuments.IndexOf (doc));
-	}
-
-	public void RemoveDocument (Document doc)
-	{
-		RebuildDocumentMenu ();
-	}
-	#endregion
-
-	#region Private Methods
 	private void AddDocumentMenuItem (int idx)
 	{
-		var doc = workspace.OpenDocuments[idx];
-		var action_id = $"app.{doc_action_id}({idx})";
-		var label = $"{doc.DisplayName}{(doc.IsDirty ? '*' : string.Empty)}";
-		var menu_item = Gio.MenuItem.New (label, action_id);
+		Document doc = workspace.OpenDocuments[idx];
+		string action_id = $"app.{doc_action_id}({idx})";
+		string label = $"{doc.DisplayName}{(doc.IsDirty ? '*' : string.Empty)}";
+		Gio.MenuItem menu_item = Gio.MenuItem.New (label, action_id);
+
 		doc_section.AppendItem (menu_item);
 
 		// We only assign accelerators up to Alt-9
@@ -120,10 +111,10 @@ public sealed class WindowActions
 	private void RebuildDocumentMenu ()
 	{
 		doc_section.RemoveAll ();
+
 		for (int i = 0; i < workspace.OpenDocuments.Count; ++i)
 			AddDocumentMenuItem (i);
 
 		workspace.ResetTitle ();
 	}
-	#endregion
 }
