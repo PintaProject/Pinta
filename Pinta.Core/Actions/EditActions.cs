@@ -98,75 +98,59 @@ public sealed class EditActions
 	#region Initialization
 	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 	{
-		app.AddAccelAction (Undo, "<Primary>Z");
-		menu.AppendItem (Undo.CreateMenuItem ());
-
-		app.AddAccelAction (Redo, new[] { "<Primary><Shift>Z", "<Ctrl>Y" });
-		menu.AppendItem (Redo.CreateMenuItem ());
-
-		var paste_section = Gio.Menu.New ();
-		menu.AppendSection (null, paste_section);
-
-		app.AddAccelAction (Cut, "<Primary>X");
+		Gio.Menu paste_section = Gio.Menu.New ();
 		paste_section.AppendItem (Cut.CreateMenuItem ());
-
-		app.AddAccelAction (Copy, "<Primary>C");
 		paste_section.AppendItem (Copy.CreateMenuItem ());
-
-		app.AddAccelAction (CopyMerged, "<Primary><Shift>C");
 		paste_section.AppendItem (CopyMerged.CreateMenuItem ());
-
-		app.AddAccelAction (Paste, "<Primary>V");
 		paste_section.AppendItem (Paste.CreateMenuItem ());
-
-		app.AddAccelAction (PasteIntoNewLayer, "<Primary><Shift>V");
 		paste_section.AppendItem (PasteIntoNewLayer.CreateMenuItem ());
-
-		// Note: <Ctrl><Alt>V shortcut doesn't seem to work on Windows & macOS (bug 2047921). 
-		app.AddAccelAction (PasteIntoNewImage, new[] { "<Shift>V", "<Primary><Alt>V" });
 		paste_section.AppendItem (PasteIntoNewImage.CreateMenuItem ());
 
-		var sel_section = Gio.Menu.New ();
-		menu.AppendSection (null, sel_section);
-
-		app.AddAccelAction (SelectAll, "<Primary>A");
+		Gio.Menu sel_section = Gio.Menu.New ();
 		sel_section.AppendItem (SelectAll.CreateMenuItem ());
-
-		app.AddAccelAction (Deselect, new[] { "<Primary><Shift>A", "<Ctrl>D" });
 		sel_section.AppendItem (Deselect.CreateMenuItem ());
 
-		var edit_sel_section = Gio.Menu.New ();
-		menu.AppendSection (null, edit_sel_section);
-
-		app.AddAccelAction (EraseSelection, "Delete");
+		Gio.Menu edit_sel_section = Gio.Menu.New ();
 		edit_sel_section.AppendItem (EraseSelection.CreateMenuItem ());
-
-		app.AddAccelAction (FillSelection, "BackSpace");
 		edit_sel_section.AppendItem (FillSelection.CreateMenuItem ());
-
-		app.AddAccelAction (InvertSelection, "<Primary>I");
 		edit_sel_section.AppendItem (InvertSelection.CreateMenuItem ());
-
-		app.AddAccelAction (OffsetSelection, "<Primary><Shift>O");
 		edit_sel_section.AppendItem (OffsetSelection.CreateMenuItem ());
 
-		var palette_section = Gio.Menu.New ();
-		menu.AppendSection (null, palette_section);
+		Gio.Menu palette_section = Gio.Menu.New ();
 
-		var palette_menu = Gio.Menu.New ();
+		Gio.Menu palette_menu = Gio.Menu.New ();
+		palette_menu.AppendItem (LoadPalette.CreateMenuItem ());
+		palette_menu.AppendItem (SavePalette.CreateMenuItem ());
+		palette_menu.AppendItem (ResetPalette.CreateMenuItem ());
+		palette_menu.AppendItem (ResizePalette.CreateMenuItem ());
+
+		menu.AppendItem (Undo.CreateMenuItem ());
+		menu.AppendItem (Redo.CreateMenuItem ());
+		menu.AppendSection (null, paste_section);
+		menu.AppendSection (null, sel_section);
+		menu.AppendSection (null, edit_sel_section);
+		menu.AppendSection (null, palette_section);
 		menu.AppendSubmenu (Translations.GetString ("Palette"), palette_menu);
 
+		app.AddAccelAction (Undo, "<Primary>Z");
+		app.AddAccelAction (Redo, new[] { "<Primary><Shift>Z", "<Ctrl>Y" });
+		app.AddAccelAction (Cut, "<Primary>X");
+		app.AddAccelAction (Copy, "<Primary>C");
+		app.AddAccelAction (CopyMerged, "<Primary><Shift>C");
+		app.AddAccelAction (Paste, "<Primary>V");
+		app.AddAccelAction (PasteIntoNewLayer, "<Primary><Shift>V");
+		// Note: <Ctrl><Alt>V shortcut doesn't seem to work on Windows & macOS (bug 2047921). 
+		app.AddAccelAction (PasteIntoNewImage, new[] { "<Shift>V", "<Primary><Alt>V" });
+		app.AddAccelAction (SelectAll, "<Primary>A");
+		app.AddAccelAction (Deselect, new[] { "<Primary><Shift>A", "<Ctrl>D" });
+		app.AddAccelAction (EraseSelection, "Delete");
+		app.AddAccelAction (FillSelection, "BackSpace");
+		app.AddAccelAction (InvertSelection, "<Primary>I");
+		app.AddAccelAction (OffsetSelection, "<Primary><Shift>O");
 		app.AddAction (LoadPalette);
-		palette_menu.AppendItem (LoadPalette.CreateMenuItem ());
-
 		app.AddAction (SavePalette);
-		palette_menu.AppendItem (SavePalette.CreateMenuItem ());
-
 		app.AddAction (ResetPalette);
-		palette_menu.AppendItem (ResetPalette.CreateMenuItem ());
-
 		app.AddAction (ResizePalette);
-		palette_menu.AppendItem (ResizePalette.CreateMenuItem ());
 	}
 
 	public void CreateHistoryWindowToolBar (Gtk.Box toolbar)
@@ -215,9 +199,10 @@ public sealed class EditActions
 
 		tools.Commit ();
 
-		Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
+		ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-		var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface);
+		Context g = new (doc.Layers.CurrentUserLayer.Surface);
+
 		g.AppendPath (doc.Selection.SelectionPath);
 		g.FillRule = FillRule.EvenOdd;
 
@@ -225,7 +210,14 @@ public sealed class EditActions
 		g.Fill ();
 
 		doc.Workspace.Invalidate ();
-		doc.History.PushNewItem (new SimpleHistoryItem (Resources.Icons.EditSelectionFill, Translations.GetString ("Fill Selection"), old, doc.Layers.CurrentUserLayerIndex));
+		doc.History.PushNewItem (
+			new SimpleHistoryItem (
+				Resources.Icons.EditSelectionFill,
+				Translations.GetString ("Fill Selection"),
+				old,
+				doc.Layers.CurrentUserLayerIndex
+			)
+		);
 	}
 
 	private void HandlePintaCoreActionsEditSelectAllActivated (object sender, EventArgs e)
@@ -234,7 +226,10 @@ public sealed class EditActions
 
 		tools.Commit ();
 
-		SelectionHistoryItem hist = new SelectionHistoryItem (Resources.StandardIcons.EditSelectAll, Translations.GetString ("Select All"));
+		SelectionHistoryItem hist = new (
+			Resources.StandardIcons.EditSelectAll,
+			Translations.GetString ("Select All"));
+
 		hist.TakeSnapshot ();
 
 		doc.ResetSelectionPaths ();
@@ -250,9 +245,10 @@ public sealed class EditActions
 
 		tools.Commit ();
 
-		Cairo.ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
+		ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-		var g = new Cairo.Context (doc.Layers.CurrentUserLayer.Surface);
+		Context g = new (doc.Layers.CurrentUserLayer.Surface);
+
 		g.AppendPath (doc.Selection.SelectionPath);
 		g.FillRule = FillRule.EvenOdd;
 
@@ -275,7 +271,10 @@ public sealed class EditActions
 
 		tools.Commit ();
 
-		SelectionHistoryItem hist = new SelectionHistoryItem (Resources.Icons.EditSelectionNone, Translations.GetString ("Deselect"));
+		SelectionHistoryItem hist = new (
+			Resources.Icons.EditSelectionNone,
+			Translations.GetString ("Deselect"));
+
 		hist.TakeSnapshot ();
 
 		doc.ResetSelectionPaths ();
@@ -288,7 +287,8 @@ public sealed class EditActions
 	{
 		Document doc = workspace.ActiveDocument;
 
-		var cb = GdkExtensions.GetDefaultClipboard ();
+		Gdk.Clipboard cb = GdkExtensions.GetDefaultClipboard ();
+
 		if (tools.CurrentTool?.DoHandleCopy (doc, cb) == true)
 			return;
 
@@ -302,7 +302,8 @@ public sealed class EditActions
 
 		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 
-		Context g = new Context (dest);
+		Context g = new (dest);
+
 		g.SetSourceSurface (src, -rect.X, -rect.Y);
 		g.Paint ();
 
@@ -311,19 +312,20 @@ public sealed class EditActions
 
 	private void HandlerPintaCoreActionsEditCopyMergedActivated (object sender, EventArgs e)
 	{
-		var cb = GdkExtensions.GetDefaultClipboard ();
-		var doc = workspace.ActiveDocument;
+		Gdk.Clipboard cb = GdkExtensions.GetDefaultClipboard ();
+		Document doc = workspace.ActiveDocument;
 
 		tools.Commit ();
 
 		// Get our merged ("flattened") image
-		var src = doc.GetFlattenedImage (/* clip_to_selection */ true);
-		var rect = doc.GetSelectedBounds (true);
+		ImageSurface src = doc.GetFlattenedImage (/* clip_to_selection */ true);
+		RectangleI rect = doc.GetSelectedBounds (true);
 
 		// Copy it to a correctly sized surface 
-		var dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
+		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 
-		var g = new Context (dest);
+		Context g = new (dest);
+
 		g.SetSourceSurface (src, -rect.X, -rect.Y);
 		g.Paint ();
 
@@ -333,11 +335,13 @@ public sealed class EditActions
 
 	private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)
 	{
-		var doc = workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		Gdk.Clipboard cb = GdkExtensions.GetDefaultClipboard ();
+
 		if (tools.CurrentTool?.DoHandleCut (doc, cb) == true)
 			return;
+
 		tools.Commit ();
 
 		// Copy selection
@@ -350,18 +354,24 @@ public sealed class EditActions
 	private void HandlerPintaCoreActionsEditUndoActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		if (tools.CurrentTool?.DoHandleUndo (doc) == true)
 			return;
+
 		doc.History.Undo ();
+
 		tools.CurrentTool?.DoAfterUndo (doc);
 	}
 
 	private void HandlerPintaCoreActionsEditRedoActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		if (tools.CurrentTool?.DoHandleRedo (doc) == true)
 			return;
+
 		doc.History.Redo ();
+
 		tools.CurrentTool?.DoAfterRedo (doc);
 	}
 
@@ -386,7 +396,7 @@ public sealed class EditActions
 
 		fcd.AddFilter (ff);
 
-		var ff2 = Gtk.FileFilter.New ();
+		Gtk.FileFilter ff2 = Gtk.FileFilter.New ();
 		ff2.Name = Translations.GetString ("All files");
 		ff2.AddPattern ("*");
 		fcd.AddFilter (ff2);
@@ -395,7 +405,8 @@ public sealed class EditActions
 			fcd.SetCurrentFolder (last_palette_dir);
 
 		fcd.OnResponse += (_, args) => {
-			var response = (Gtk.ResponseType) args.ResponseId;
+
+			Gtk.ResponseType response = (Gtk.ResponseType) args.ResponseId;
 
 			if (response != Gtk.ResponseType.Accept)
 				return;
@@ -418,8 +429,10 @@ public sealed class EditActions
 			Translations.GetString ("Cancel"));
 
 		foreach (var format in palette_formats.Formats) {
+
 			if (format.IsReadOnly ())
 				continue;
+
 			Gtk.FileFilter fileFilter = format.Filter;
 			fcd.AddFilter (fileFilter);
 		}
@@ -428,7 +441,8 @@ public sealed class EditActions
 			fcd.SetCurrentFolder (last_palette_dir);
 
 		fcd.OnResponse += (_, args) => {
-			var response = (Gtk.ResponseType) args.ResponseId;
+
+			Gtk.ResponseType response = (Gtk.ResponseType) args.ResponseId;
 
 			if (response != Gtk.ResponseType.Accept)
 				return;
@@ -438,7 +452,7 @@ public sealed class EditActions
 			// Add in the extension if necessary, based on the current selected file filter.
 			// Note: on macOS, fcd.Filter doesn't seem to properly update to the current filter.
 			// However, on macOS the dialog always adds the extension automatically, so this issue doesn't matter.
-			var basename = file.GetParent ()!.GetRelativePath (file)!;
+			string basename = file.GetParent ()!.GetRelativePath (file)!;
 			string extension = System.IO.Path.GetExtension (basename);
 			if (string.IsNullOrEmpty (extension)) {
 				var currentFormat = palette_formats.Formats.First (f => f.Filter == fcd.Filter);
@@ -446,7 +460,7 @@ public sealed class EditActions
 				file = file.GetParent ()!.GetChild (basename);
 			}
 
-			var format = palette_formats.GetFormatByFilename (basename) ?? throw new FormatException ();
+			PaletteDescriptor format = palette_formats.GetFormatByFilename (basename) ?? throw new FormatException ();
 			palette.CurrentPalette.Save (file, format.Saver);
 			last_palette_dir = file.GetParent ();
 		};
@@ -468,8 +482,10 @@ public sealed class EditActions
 		// Clear the selection resize handles if necessary.
 		doc.Layers.ToolLayer.Clear ();
 
-		SelectionHistoryItem historyItem = new SelectionHistoryItem (Resources.Icons.EditSelectionInvert,
-										 Translations.GetString ("Invert Selection"));
+		SelectionHistoryItem historyItem = new (
+			Resources.Icons.EditSelectionInvert,
+			Translations.GetString ("Invert Selection"));
+
 		historyItem.TakeSnapshot ();
 
 		doc.Selection.Invert (doc.ImageSize);
