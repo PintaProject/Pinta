@@ -222,13 +222,13 @@ public sealed class TileEffect : BaseEffect
 		[Caption ("Wave Type")]
 		public TileType WaveType { get; set; } = TileType.CleavedEdges;
 	}
+}
 
-	public enum TileType
-	{
-		[Caption ("Cleaved Edges")]
-		CleavedEdges,
+public enum TileType
+{
+	[Caption ("Cleaved Edges")]
+	CleavedEdges,
 
-		[Caption ("Curved Edges")]
-		CurvedEdges,
-	}
+	[Caption ("Curved Edges")]
+	CurvedEdges,
 }
