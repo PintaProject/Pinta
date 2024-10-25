@@ -35,7 +35,6 @@ public sealed class TileEffect : BaseEffect
 	public TileEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-
 		EffectData = new TileData ();
 	}
 
@@ -82,15 +81,12 @@ public sealed class TileEffect : BaseEffect
 			waveFunction: GetWaveFunction (Data.WaveType)
 		);
 
-		static Func<float, float> GetWaveFunction (WaveType waveType)
+		static Func<float, float> GetWaveFunction (TileType waveType)
 		{
 			return waveType switch {
-				WaveType.Sine => n => (float) Math.Sin (n),
-				WaveType.Cosine => n => (float) Math.Cos (n),
-				WaveType.Tangent => n => (float) Math.Tan (n),
-				WaveType.Square => n => Math.Sign (Math.Sin (n)),
-				WaveType.Sawtooth => n => 2f * (n / (2f * (float) Math.PI) - (float) Math.Floor (0.5 + n / (2f * (float) Math.PI))),
-				_ => throw new InvalidEnumArgumentException (nameof (waveType), (int) waveType, typeof (WaveType)),
+				TileType.CleavedEdges => n => (float) Math.Tan (n),
+				TileType.CurvedEdges => n => (float) Math.Sin (n),
+				_ => throw new InvalidEnumArgumentException (nameof (waveType), (int) waveType, typeof (TileType)),
 			};
 		}
 	}
@@ -224,15 +220,15 @@ public sealed class TileEffect : BaseEffect
 		public int Intensity { get; set; } = 8;
 
 		[Caption ("Wave Type")]
-		public WaveType WaveType { get; set; } = WaveType.Tangent;
+		public TileType WaveType { get; set; } = TileType.CleavedEdges;
 	}
 
-	public enum WaveType
+	public enum TileType
 	{
-		Sine,
-		Cosine,
-		Tangent,
-		Square,
-		Sawtooth,
+		[Caption ("Cleaved Edges")]
+		CleavedEdges,
+
+		[Caption ("Curved Edges")]
+		CurvedEdges,
 	}
 }
