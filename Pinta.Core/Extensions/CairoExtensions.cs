@@ -886,20 +886,15 @@ namespace Pinta.Core
 					sy %= srcHeight;
 
 				int sleft = sx;
-				int sright;
-
-				if (sleft == (srcWidth - 1))
-					sright = 0;
-				else
-					sright = sleft + 1;
-
+				int sright =
+					sleft == (srcWidth - 1)
+					? 0
+					: sleft + 1;
 				int stop = sy;
-				int sbottom;
-
-				if (stop == (srcHeight - 1))
-					sbottom = 0;
-				else
-					sbottom = stop + 1;
+				int sbottom =
+					stop == (srcHeight - 1)
+					? 0
+					: stop + 1;
 
 				ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
 				ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
