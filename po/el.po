@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-13 01:37+0000\n"
-"PO-Revision-Date: 2024-06-03 15:09+0000\n"
+"PO-Revision-Date: 2024-10-27 19:00+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
 "Language: el\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -89,7 +89,7 @@ msgstr "Μετά την επιλογή"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Ευθυγράμμιση αντικειμένου"
 
 #: ../Pinta.Core/Actions/EditActions.cs:390
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
@@ -99,7 +99,7 @@ msgstr "Όλα τα αρχεία"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Διαβάθμιση άλφα"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:110
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
@@ -237,15 +237,15 @@ msgstr "Φλόγα"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "Κάτω κέντρο"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "Κάτω αριστερά"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "Κάτω δεξιά"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:144
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
@@ -304,7 +304,7 @@ msgstr "Μέγεθος κελιού"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "Κέντρο"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:234
 msgid "Center Align"
@@ -312,7 +312,7 @@ msgstr "Στοίχιση στο κέντρο"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "Κέντρο αριστερά"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:185
 msgid "Center Offset"
@@ -320,7 +320,7 @@ msgstr "Μετατόπιση κέντρου"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "Κέντρο δεξιά"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:128
 msgid "Centered"
@@ -396,7 +396,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
-msgstr "Κλικ και σύρετε για να περιηγηθείτε στην εικόνα"
+msgstr "Κλικ και σύρετε για να περιηγηθείτε στην εικόνα."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
 msgid "Click to reset primary and secondary color."
@@ -469,7 +469,7 @@ msgstr "Υπερέκθεση χρώματος"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:213
 msgid "Color Gradient"
-msgstr ""
+msgstr "Χρώμα διαβάθμισης"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
@@ -611,7 +611,7 @@ msgstr "Διαγράφηκε"
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:48
 msgid "Dents"
-msgstr ""
+msgstr "Βαθουλώματα"
 
 #: ../Pinta.Core/Actions/EditActions.cs:278
 msgid "Deselect"
@@ -771,11 +771,11 @@ msgstr "Δεν ήταν δυνατή η λήψη screenshot"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:173
 msgid "Feather Canvas Edge"
-msgstr ""
+msgstr "Λείανση άκρων του καμβά"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather Object"
-msgstr ""
+msgstr "Λείανση αντικειμένου"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -791,7 +791,7 @@ msgstr "Γέμισμα του φόντου"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:219
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Γέμισμα φόντου αντικειμένου"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:228
@@ -830,7 +830,7 @@ msgstr "Ισοπέδωση"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:161
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "Εξομαλύνοντας την εικόνα θα συγχωνεύσει όλα τα επίπεδα σε ένα."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:58
 #: ../Pinta.Core/Actions/LayerActions.cs:67
@@ -1440,7 +1440,7 @@ msgstr "Νέα εικόνα"
 
 #: ../Pinta.Core/Actions/FileActions.cs:51
 msgid "New Screenshot..."
-msgstr "Νέο στιγμιότυπο οθόνης"
+msgstr "Νέο στιγμιότυπο οθόνης..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:62
 msgid "New palette size:"
@@ -1476,7 +1476,7 @@ msgstr "Κανονικό μέγεθος"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:270
 msgid "Normal and Outline"
-msgstr "Κανονικό και περίγραμμα."
+msgstr "Κανονικό και περίγραμμα"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:206
 msgid "Number of Cells"
@@ -1490,7 +1490,7 @@ msgstr "Αριθμός νημάτων προς απόδοση"
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "Αντικείμενο"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:113
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:174
@@ -1562,15 +1562,15 @@ msgstr "Εξωτερικό περίγραμμα"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:216
 msgid "Outline Border"
-msgstr ""
+msgstr "Περίγραμμα μπορντούρας"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:27
 msgid "Outline Edge"
-msgstr ""
+msgstr "Περίγραμμα άκρων"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
 msgid "Outline Object"
-msgstr ""
+msgstr "Περίγραμμα αντικειμένου"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
@@ -1743,7 +1743,7 @@ msgstr "Προσωπογραφία"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:135
 msgid "Position"
-msgstr ""
+msgstr "Θέση"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1821,7 +1821,7 @@ msgstr "Ακτίνα"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:117
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
-msgstr ""
+msgstr "Ποσοστό ακτίνας"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:236
@@ -2279,7 +2279,7 @@ msgstr "Πάχος"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:160
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "Αυτός ο τύπος αρχείου δεν υποστηρίζει επίπεδα. Εξομάλυνση εικόνας;"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:24
 msgid "Tile Reflection"
@@ -2319,15 +2319,15 @@ msgstr "Εργαλειοθήκη"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
-msgstr ""
+msgstr "Πάνω κέντρο"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
-msgstr ""
+msgstr "Πάνω αριστερά"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
-msgstr ""
+msgstr "Πάνω δεξιά"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
@@ -2348,7 +2348,7 @@ msgstr "Διαφανές"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:121
 msgid "Turbulence"
-msgstr ""
+msgstr "Αναταραχή"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
@@ -2448,7 +2448,7 @@ msgstr "Κάθετο κόκκινο (R)"
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
-msgstr ""
+msgstr "Βινιέτα"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
