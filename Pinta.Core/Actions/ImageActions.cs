@@ -67,47 +67,38 @@ public sealed class ImageActions
 		this.view = view;
 	}
 
-	#region Initialization
 	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 	{
-		app.AddAccelAction (CropToSelection, "<Primary><Shift>X");
-		menu.AppendItem (CropToSelection.CreateMenuItem ());
-
-		app.AddAccelAction (AutoCrop, "<Ctrl><Alt>X");
-		menu.AppendItem (AutoCrop.CreateMenuItem ());
-
-		app.AddAccelAction (Resize, "<Primary>R");
-		menu.AppendItem (Resize.CreateMenuItem ());
-
-		app.AddAccelAction (CanvasSize, "<Primary><Shift>R");
-		menu.AppendItem (CanvasSize.CreateMenuItem ());
-
-		var flip_section = Gio.Menu.New ();
-		menu.AppendSection (null, flip_section);
-
-		app.AddAction (FlipHorizontal);
+		Gio.Menu flip_section = Gio.Menu.New ();
 		flip_section.AppendItem (FlipHorizontal.CreateMenuItem ());
-
-		app.AddAction (FlipVertical);
 		flip_section.AppendItem (FlipVertical.CreateMenuItem ());
 
-		var rotate_section = Gio.Menu.New ();
-		menu.AppendSection (null, rotate_section);
-
-		app.AddAccelAction (RotateCW, "<Primary>H");
+		Gio.Menu rotate_section = Gio.Menu.New ();
 		rotate_section.AppendItem (RotateCW.CreateMenuItem ());
-
-		app.AddAccelAction (RotateCCW, "<Primary>G");
 		rotate_section.AppendItem (RotateCCW.CreateMenuItem ());
-
-		app.AddAccelAction (Rotate180, "<Primary>J");
 		rotate_section.AppendItem (Rotate180.CreateMenuItem ());
 
-		var flatten_section = Gio.Menu.New ();
-		menu.AppendSection (null, flatten_section);
-
-		app.AddAccelAction (Flatten, "<Primary><Shift>F");
+		Gio.Menu flatten_section = Gio.Menu.New ();
 		flatten_section.AppendItem (Flatten.CreateMenuItem ());
+
+		app.AddAccelAction (CropToSelection, "<Primary><Shift>X");
+		app.AddAccelAction (AutoCrop, "<Ctrl><Alt>X");
+		app.AddAccelAction (Resize, "<Primary>R");
+		app.AddAccelAction (CanvasSize, "<Primary><Shift>R");
+		app.AddAction (FlipHorizontal);
+		app.AddAction (FlipVertical);
+		app.AddAccelAction (RotateCW, "<Primary>H");
+		app.AddAccelAction (RotateCCW, "<Primary>G");
+		app.AddAccelAction (Rotate180, "<Primary>J");
+		app.AddAccelAction (Flatten, "<Primary><Shift>F");
+
+		menu.AppendItem (CropToSelection.CreateMenuItem ());
+		menu.AppendItem (AutoCrop.CreateMenuItem ());
+		menu.AppendItem (Resize.CreateMenuItem ());
+		menu.AppendItem (CanvasSize.CreateMenuItem ());
+		menu.AppendSection (null, flip_section);
+		menu.AppendSection (null, rotate_section);
+		menu.AppendSection (null, flatten_section);
 	}
 
 	public void RegisterHandlers ()
@@ -121,24 +112,24 @@ public sealed class ImageActions
 		CropToSelection.Activated += HandlePintaCoreActionsImageCropToSelectionActivated;
 		AutoCrop.Activated += HandlePintaCoreActionsImageAutoCropActivated;
 
-		workspace.SelectionChanged += (o, _) => {
-			var visible = false;
+		workspace.SelectionChanged += (_, _) => {
+
+			bool visible = false;
+
 			if (workspace.HasOpenDocuments)
 				visible = workspace.ActiveDocument.Selection.Visible;
 
 			CropToSelection.Sensitive = visible;
 		};
 	}
-	#endregion
 
-	#region Action Handlers
 	private void HandlePintaCoreActionsImageRotateCCWActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
 
 		tools.Commit ();
-		doc.RotateImageCCW ();
 
+		doc.RotateImageCCW ();
 		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
 	}
 
@@ -147,8 +138,8 @@ public sealed class ImageActions
 		Document doc = workspace.ActiveDocument;
 
 		tools.Commit ();
-		doc.RotateImageCW ();
 
+		doc.RotateImageCW ();
 		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
 	}
 
@@ -158,9 +149,15 @@ public sealed class ImageActions
 
 		tools.Commit ();
 
-		var oldBottomSurface = doc.Layers.UserLayers[0].Surface.Clone ();
+		ImageSurface oldBottomSurface =
+			doc.Layers
+			.UserLayers[0]
+			.Surface
+			.Clone ();
 
-		CompoundHistoryItem hist = new (Resources.Icons.ImageFlatten, Translations.GetString ("Flatten"));
+		CompoundHistoryItem hist = new (
+			Resources.Icons.ImageFlatten,
+			Translations.GetString ("Flatten"));
 
 		for (int i = doc.Layers.UserLayers.Count - 1; i >= 1; i--)
 			hist.Push (new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.Layers.UserLayers[i], i));
@@ -168,6 +165,7 @@ public sealed class ImageActions
 		doc.Layers.FlattenLayers ();
 
 		hist.Push (new SimpleHistoryItem (string.Empty, string.Empty, oldBottomSurface, 0));
+
 		doc.History.PushNewItem (hist);
 	}
 
@@ -176,8 +174,8 @@ public sealed class ImageActions
 		Document doc = workspace.ActiveDocument;
 
 		tools.Commit ();
-		doc.RotateImage180 ();
 
+		doc.RotateImage180 ();
 		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
 	}
 
@@ -186,8 +184,8 @@ public sealed class ImageActions
 		Document doc = workspace.ActiveDocument;
 
 		tools.Commit ();
-		doc.FlipImageVertical ();
 
+		doc.FlipImageVertical ();
 		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipVertical));
 	}
 
@@ -196,8 +194,8 @@ public sealed class ImageActions
 		Document doc = workspace.ActiveDocument;
 
 		tools.Commit ();
-		doc.FlipImageHorizontal ();
 
+		doc.FlipImageHorizontal ();
 		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
 	}
 
@@ -218,14 +216,13 @@ public sealed class ImageActions
 
 		tools.Commit ();
 
-		var image = doc.GetFlattenedImage ();
+		ImageSurface image = doc.GetFlattenedImage ();
 
-		var rect = Utility.GetObjectBounds (image);
+		RectangleI rect = Utility.GetObjectBounds (image);
 
 		// Ignore the current selection when auto-cropping.
 		CropImageToRectangle (doc, rect, /*selection*/ null);
 	}
-	#endregion
 
 	void CropImageToRectangle (Document doc, RectangleI rect, Path? selection)
 	{
@@ -234,7 +231,7 @@ public sealed class ImageActions
 
 		ResizeHistoryItem hist = new (workspace, doc.ImageSize) {
 			Icon = Resources.Icons.ImageCrop,
-			Text = Translations.GetString ("Crop to Selection")
+			Text = Translations.GetString ("Crop to Selection"),
 		};
 		hist.StartSnapshotOfImage ();
 		hist.RestoreSelection = doc.Selection.Clone ();
