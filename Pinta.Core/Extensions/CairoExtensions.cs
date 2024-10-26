@@ -60,11 +60,14 @@ namespace Pinta.Core
 {
 	public static partial class CairoExtensions
 	{
-		private const string CairoLibraryName = "cairo-graphics";
+		private const string CAIRO_LIBRARY_NAME = "cairo-graphics";
 
 		static CairoExtensions ()
 		{
-			NativeImportResolver.RegisterLibrary (CairoLibraryName,
+			NativeImportResolver.RegisterLibrary (
+
+				library: CAIRO_LIBRARY_NAME,
+
 				windowsLibraryName: "libcairo-2.dll",
 				linuxLibraryName: "libcairo.so.2",
 				osxLibraryName: "libcairo.2.dylib"
@@ -82,8 +85,8 @@ namespace Pinta.Core
 			int lineWidth)
 		{
 			RectangleD e = // Effective rectangle
-				(lineWidth == 1)
-				? new RectangleD (r.X + 0.5, r.Y + 0.5, r.Width - 1, r.Height - 1) // Put it on a pixel line
+				lineWidth == 1
+				? new (r.X + 0.5, r.Y + 0.5, r.Width - 1, r.Height - 1) // Put it on a pixel line
 				: r;
 
 			g.Save ();
@@ -564,6 +567,7 @@ namespace Pinta.Core
 			g.LineCap = LineCap.Square;
 
 			RectangleD dirty = g.StrokeExtents ();
+
 			g.Stroke ();
 
 			g.Restore ();
@@ -625,6 +629,7 @@ namespace Pinta.Core
 				surf.Height);
 
 			Context g = new (newsurf);
+
 			g.SetSourceSurface (surf, 0, 0);
 			g.Paint ();
 
@@ -648,10 +653,12 @@ namespace Pinta.Core
 		public static void Clear (this Context g, RectangleD roi)
 		{
 			g.Save ();
+
 			g.Rectangle (roi.X, roi.Y, roi.Width, roi.Height);
 			g.Clip ();
 			g.Operator = Operator.Clear;
 			g.Paint ();
+
 			g.Restore ();
 		}
 
@@ -708,7 +715,10 @@ namespace Pinta.Core
 			this ImageSurface surf,
 			PointI position)
 		{
-			return ref surf.GetColorBgra (surf.GetReadOnlyPixelData (), surf.Width, position);
+			return ref surf.GetColorBgra (
+				surf.GetReadOnlyPixelData (),
+				surf.Width,
+				position);
 		}
 
 		public static RectangleI GetBounds (this ImageSurface surf)
@@ -760,10 +770,16 @@ namespace Pinta.Core
 				int sx = iu;
 				int sy = iv;
 				int sleft = sx;
-				int sright = (sleft == (srcWidth - 1)) ? sleft : sleft + 1;
+				int sright =
+					sleft == (srcWidth - 1)
+					? sleft
+					: sleft + 1;
 
 				int stop = sy;
-				int sbottom = (stop == (srcHeight - 1)) ? stop : stop + 1;
+				int sbottom =
+					stop == (srcHeight - 1)
+					? stop
+					: stop + 1;
 
 				ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
 				ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
@@ -818,10 +834,16 @@ namespace Pinta.Core
 				int sx = iu;
 				int sy = iv;
 				int sleft = sx;
-				int sright = (sleft == (srcWidth - 1)) ? sleft : sleft + 1;
+				int sright =
+					sleft == (srcWidth - 1)
+					? sleft
+					: sleft + 1;
 
 				int stop = sy;
-				int sbottom = (stop == (srcHeight - 1)) ? stop : stop + 1;
+				int sbottom =
+					stop == (srcHeight - 1)
+					? stop
+					: stop + 1;
 
 				ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
 				ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
@@ -873,17 +895,15 @@ namespace Pinta.Core
 				uint wll = sxfracinv * syfrac;
 				uint wlr = sxfrac * syfrac;
 
-				int sx = iu;
-				if (sx < 0)
-					sx = srcWidth - 1 + ((sx + 1) % srcWidth);
-				else if (sx > (srcWidth - 1))
-					sx %= srcWidth;
+				int sx =
+					(iu < 0) ? srcWidth - 1 + ((iu + 1) % srcWidth)
+					: (iu > (srcWidth - 1)) ? iu % srcWidth
+					: iu;
 
-				int sy = iv;
-				if (sy < 0)
-					sy = srcHeight - 1 + ((sy + 1) % srcHeight);
-				else if (sy > (srcHeight - 1))
-					sy %= srcHeight;
+				int sy =
+					(iv < 0) ? srcHeight - 1 + ((iv + 1) % srcHeight)
+					: (iv > (srcHeight - 1)) ? iv % srcHeight
+					: iv;
 
 				int sleft = sx;
 				int sright =
@@ -1304,20 +1324,20 @@ namespace Pinta.Core
 			public readonly RectangleI ToRectangleI () => new (X, Y, Width, Height);
 		}
 
-		[DllImport (CairoLibraryName, EntryPoint = "cairo_region_create_rectangle")]
+		[DllImport (CAIRO_LIBRARY_NAME, EntryPoint = "cairo_region_create_rectangle")]
 		private static extern Cairo.Internal.RegionOwnedHandle RegionCreateRectangle (ref CairoRectangleInt rect);
 
-		[LibraryImport (CairoLibraryName, EntryPoint = "cairo_region_contains_point")]
+		[LibraryImport (CAIRO_LIBRARY_NAME, EntryPoint = "cairo_region_contains_point")]
 		[return: MarshalAs (UnmanagedType.Bool)]
 		private static partial bool RegionContainsPoint (Cairo.Internal.RegionHandle handle, int x, int y);
 
-		[LibraryImport (CairoLibraryName, EntryPoint = "cairo_region_xor")]
+		[LibraryImport (CAIRO_LIBRARY_NAME, EntryPoint = "cairo_region_xor")]
 		private static partial Status RegionXor (Cairo.Internal.RegionHandle handle, Cairo.Internal.RegionHandle other);
 
-		[LibraryImport (CairoLibraryName, EntryPoint = "cairo_region_num_rectangles")]
+		[LibraryImport (CAIRO_LIBRARY_NAME, EntryPoint = "cairo_region_num_rectangles")]
 		private static partial int RegionNumRectangles (Cairo.Internal.RegionHandle handle);
 
-		[LibraryImport (CairoLibraryName, EntryPoint = "cairo_region_get_rectangle")]
+		[LibraryImport (CAIRO_LIBRARY_NAME, EntryPoint = "cairo_region_get_rectangle")]
 		private static partial int RegionGetRectangle (Cairo.Internal.RegionHandle handle, int i, out CairoRectangleInt rect);
 
 		public static Region CreateRegion (in RectangleI rect)
@@ -1667,8 +1687,17 @@ namespace Pinta.Core
 			// adjust the sizes accordingly for this padding.
 			// Cairo seems to sometimes ignore zero sized dashes though (e.g. for a dash pattern
 			// such as "- -" => { 0, 30, 0, 15 }, with brush width 15), so we always draw at least a length of 1.
-			double dash_size_offset = line_cap == LineCap.Butt ? 0.0 : -brush_width;
-			double space_size_offset = line_cap == LineCap.Butt ? 0.0 : brush_width;
+
+			double dash_size_offset =
+				line_cap == LineCap.Butt
+				? 0.0
+				: -brush_width;
+
+			double space_size_offset =
+				line_cap == LineCap.Butt
+				? 0.0
+				: brush_width;
+
 			dash_list = dashes.Select ((dash, i) => {
 				if ((i % 2) == 0)
 					return Math.Max (dash * brush_width + dash_size_offset, 1.0);
@@ -1704,6 +1733,7 @@ namespace Pinta.Core
 			context.SetDash (
 				dashes,
 				offset);
+
 			return isValidDashPattern;
 		}
 
