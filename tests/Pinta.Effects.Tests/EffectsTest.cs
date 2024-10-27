@@ -489,6 +489,23 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Tile3 ()
+	{
+		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.WaveType = TileType.Curved;
+		Utilities.TestEffect (effect, "tile3.png");
+	}
+
+	[Test]
+	public void Tile4 ()
+	{
+		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.TileSize = 10;
+		effect.Data.WaveType = TileType.Curved;
+		Utilities.TestEffect (effect, "tile4.png");
+	}
+
+	[Test]
 	public void Twist1 ()
 	{
 		TwistEffect effect = new (Utilities.CreateMockServices ());

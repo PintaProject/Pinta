@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
@@ -34,7 +35,6 @@ public sealed class TileEffect : BaseEffect
 	public TileEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-
 		EffectData = new TileData ();
 	}
 
@@ -54,7 +54,8 @@ public sealed class TileEffect : BaseEffect
 		float adjustedIntensity,
 		int antiAliasLevel,
 		int antiAliasSamples,
-		int src_width);
+		int src_width,
+		Func<float, float> waveFunction);
 	private TileSettings CreateSettings (ImageSurface src, ImageSurface dst)
 	{
 		int width = dst.Width;
@@ -76,8 +77,18 @@ public sealed class TileEffect : BaseEffect
 			adjustedIntensity: preliminaryIntensity * preliminaryIntensity / 10 * Math.Sign (preliminaryIntensity),
 			antiAliasLevel: aaLevel,
 			antiAliasSamples: aaLevel * aaLevel + 1,
-			src_width: src.Width
+			src_width: src.Width,
+			waveFunction: GetWaveFunction (Data.WaveType)
 		);
+
+		static Func<float, float> GetWaveFunction (TileType waveType)
+		{
+			return waveType switch {
+				TileType.SharpEdges => n => (float) Math.Tan (n),
+				TileType.Curved => n => (float) Math.Sin (n),
+				_ => throw new InvalidEnumArgumentException (nameof (waveType), (int) waveType, typeof (TileType)),
+			};
+		}
 	}
 
 	private static void InitializeAntiAliasPoints (TileSettings settings, Span<PointD> destination)
@@ -114,7 +125,13 @@ public sealed class TileEffect : BaseEffect
 		}
 	}
 
-	private static ColorBgra GetFinalPixelColor (ImageSurface src, TileSettings settings, ReadOnlySpan<PointD> aaPoints, ReadOnlySpan<ColorBgra> src_data, float j, int x)
+	private static ColorBgra GetFinalPixelColor (
+		ImageSurface src,
+		TileSettings settings,
+		ReadOnlySpan<PointD> aaPoints,
+		ReadOnlySpan<ColorBgra> src_data,
+		float j,
+		int x)
 	{
 		int b = 0;
 		int g = 0;
@@ -137,10 +154,15 @@ public sealed class TileEffect : BaseEffect
 			float rotatedS = settings.cos * initialU + settings.sin * initialV;
 			float rotatedT = -settings.sin * initialU + settings.cos * initialV;
 
+			// Apply wave function
+
+			float functionS = settings.waveFunction (rotatedS * settings.tileScale);
+			float functionT = settings.waveFunction (rotatedT * settings.tileScale);
+
 			// Apply intensity transformation to create the tile effect
 
-			float transformedS = rotatedS + settings.adjustedIntensity * (float) Math.Tan (rotatedS * settings.tileScale);
-			float transformedT = rotatedT + settings.adjustedIntensity * (float) Math.Tan (rotatedT * settings.tileScale);
+			float transformedS = rotatedS + settings.adjustedIntensity * functionS;
+			float transformedT = rotatedT + settings.adjustedIntensity * functionT;
 
 			// Rotate back to the original coordinate space
 
@@ -196,5 +218,17 @@ public sealed class TileEffect : BaseEffect
 
 		[Caption ("Intensity"), MinimumValue (-20), MaximumValue (20)]
 		public int Intensity { get; set; } = 8;
+
+		[Caption ("Tile Type")]
+		public TileType WaveType { get; set; } = TileType.SharpEdges;
 	}
+}
+
+public enum TileType
+{
+	[Caption ("Sharp Edges")]
+	SharpEdges,
+
+	[Caption ("Curved")]
+	Curved,
 }
