@@ -63,52 +63,40 @@ public sealed class FileActions
 		this.app = app;
 	}
 
-	#region Initialization
 	public void RegisterActions (Gtk.Application application, Gio.Menu menu)
 	{
-		application.AddAccelAction (New, "<Primary>N");
-		menu.AppendItem (New.CreateMenuItem ());
+		bool isMac = system.OperatingSystem == OS.Mac;
 
-		application.AddAction (NewScreenshot);
-		menu.AppendItem (NewScreenshot.CreateMenuItem ());
-
-		application.AddAccelAction (Open, "<Primary>O");
-		menu.AppendItem (Open.CreateMenuItem ());
-
-		var save_section = Gio.Menu.New ();
-		menu.AppendSection (null, save_section);
-
-		application.AddAccelAction (Save, "<Primary>S");
+		Gio.Menu save_section = Gio.Menu.New ();
 		save_section.AppendItem (Save.CreateMenuItem ());
-
-		application.AddAccelAction (SaveAs, "<Primary><Shift>S");
 		save_section.AppendItem (SaveAs.CreateMenuItem ());
 
-		var close_section = Gio.Menu.New ();
-		menu.AppendSection (null, close_section);
-
-		application.AddAccelAction (Close, "<Primary>W");
+		Gio.Menu close_section = Gio.Menu.New ();
 		close_section.AppendItem (Close.CreateMenuItem ());
+		if (!isMac) close_section.AppendItem (app.Exit.CreateMenuItem ()); // This is part of the application menu on macOS
 
-		// This is part of the application menu on macOS.
-		if (system.OperatingSystem != OS.Mac) {
-			var exit = app.Exit;
-			application.AddAccelAction (exit, "<Primary>Q");
-			close_section.AppendItem (exit.CreateMenuItem ());
-		}
-
-		// Printing is disabled for now until it is fully functional.
+		menu.AppendItem (New.CreateMenuItem ());
+		menu.AppendItem (NewScreenshot.CreateMenuItem ());
+		menu.AppendItem (Open.CreateMenuItem ());
+		menu.AppendSection (null, save_section);
+		menu.AppendSection (null, close_section);
 #if false
+		// Printing is disabled for now until it is fully functional.
 		menu.Append (Print.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask));
 		menu.AppendSeparator ();
 #endif
+
+		application.AddAccelAction (New, "<Primary>N");
+		application.AddAction (NewScreenshot);
+		application.AddAccelAction (Open, "<Primary>O");
+		application.AddAccelAction (Save, "<Primary>S");
+		application.AddAccelAction (SaveAs, "<Primary><Shift>S");
+		application.AddAccelAction (Close, "<Primary>W");
+		if (!isMac) application.AddAccelAction (app.Exit, "<Primary>Q"); // This is part of the application menu on macOS
 	}
 
 	public void RegisterHandlers () { }
 
-	#endregion
-
-	#region Event Invokers
 	internal bool RaiseSaveDocument (Document document, bool saveAs)
 	{
 		if (SaveDocument == null)
@@ -125,5 +113,4 @@ public sealed class FileActions
 		ModifyCompression?.Invoke (this, e);
 		return e.Cancel ? -1 : e.Quality;
 	}
-	#endregion
 }
