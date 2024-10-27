@@ -895,15 +895,25 @@ namespace Pinta.Core
 				uint wll = sxfracinv * syfrac;
 				uint wlr = sxfrac * syfrac;
 
-				int sx =
-					(iu < 0) ? srcWidth - 1 + ((iu + 1) % srcWidth)
-					: (iu > (srcWidth - 1)) ? iu % srcWidth
-					: iu;
+				int sx;
+				if (iu < 0) {
+					sx = srcWidth - 1 + ((iu + 1) % srcWidth);
+				} else if (iu > (srcWidth - 1)) {
+					sx = iu % srcWidth;
+				} else {
+					sx = iu;
+				}
 
-				int sy =
-					(iv < 0) ? srcHeight - 1 + ((iv + 1) % srcHeight)
-					: (iv > (srcHeight - 1)) ? iv % srcHeight
-					: iv;
+
+				int sy;
+				if (iv < 0) {
+					sy = srcHeight - 1 + ((iv + 1) % srcHeight);
+				} else if (iv > (srcHeight - 1)) {
+					sy = iv % srcHeight;
+				} else {
+					sy = iv;
+				}
+
 
 				int sleft = sx;
 				int sright =
