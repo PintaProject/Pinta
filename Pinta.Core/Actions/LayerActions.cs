@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 
 namespace Pinta.Core;
 
@@ -76,42 +75,33 @@ public sealed class LayerActions
 		this.image = image;
 	}
 
-	#region Initialization
 	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 	{
-		app.AddAccelAction (AddNewLayer, "<Primary><Shift>N");
-		menu.AppendItem (AddNewLayer.CreateMenuItem ());
-
-		app.AddAccelAction (DeleteLayer, "<Primary><Shift>Delete");
-		menu.AppendItem (DeleteLayer.CreateMenuItem ());
-
-		app.AddAccelAction (DuplicateLayer, "<Primary><Shift>D");
-		menu.AppendItem (DuplicateLayer.CreateMenuItem ());
-
-		app.AddAccelAction (MergeLayerDown, "<Primary>M");
-		menu.AppendItem (MergeLayerDown.CreateMenuItem ());
-
-		app.AddAction (ImportFromFile);
-		menu.AppendItem (ImportFromFile.CreateMenuItem ());
-
-		var flip_section = Gio.Menu.New ();
-		menu.AppendSection (null, flip_section);
-
-		app.AddAction (FlipHorizontal);
+		Gio.Menu flip_section = Gio.Menu.New ();
 		flip_section.AppendItem (FlipHorizontal.CreateMenuItem ());
-
-		app.AddAction (FlipVertical);
 		flip_section.AppendItem (FlipVertical.CreateMenuItem ());
-
-		app.AddAction (RotateZoom);
 		flip_section.AppendItem (RotateZoom.CreateMenuItem ());
 
-		var prop_section = Gio.Menu.New ();
-		menu.AppendSection (null, prop_section);
-
-		app.AddAccelAction (Properties, "F4");
+		Gio.Menu prop_section = Gio.Menu.New ();
 		prop_section.AppendItem (Properties.CreateMenuItem ());
 
+		menu.AppendItem (AddNewLayer.CreateMenuItem ());
+		menu.AppendItem (DeleteLayer.CreateMenuItem ());
+		menu.AppendItem (DuplicateLayer.CreateMenuItem ());
+		menu.AppendItem (MergeLayerDown.CreateMenuItem ());
+		menu.AppendItem (ImportFromFile.CreateMenuItem ());
+		menu.AppendSection (null, flip_section);
+		menu.AppendSection (null, prop_section);
+
+		app.AddAccelAction (AddNewLayer, "<Primary><Shift>N");
+		app.AddAccelAction (DeleteLayer, "<Primary><Shift>Delete");
+		app.AddAccelAction (DuplicateLayer, "<Primary><Shift>D");
+		app.AddAccelAction (MergeLayerDown, "<Primary>M");
+		app.AddAction (ImportFromFile);
+		app.AddAction (FlipHorizontal);
+		app.AddAction (FlipVertical);
+		app.AddAction (RotateZoom);
+		app.AddAccelAction (Properties, "F4");
 		app.AddAction (MoveLayerDown);
 		app.AddAction (MoveLayerUp);
 	}
@@ -145,9 +135,7 @@ public sealed class LayerActions
 
 		EnableOrDisableLayerActions (null, EventArgs.Empty);
 	}
-	#endregion
 
-	#region Action Handlers
 	private void EnableOrDisableLayerActions (object? sender, EventArgs e)
 	{
 		if (workspace.HasOpenDocuments && workspace.ActiveDocument.Layers.UserLayers.Count > 1) {
@@ -175,12 +163,13 @@ public sealed class LayerActions
 	private void HandlePintaCoreActionsLayersImportFromFileActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		tools.Commit ();
 
-		var fcd = FileChooserNative.New (
+		Gtk.FileChooserNative fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Open Image File"),
 			chrome.MainWindow,
-			FileChooserAction.Open,
+			Gtk.FileChooserAction.Open,
 			Translations.GetString ("Open"),
 			Translations.GetString ("Cancel"));
 
@@ -188,12 +177,11 @@ public sealed class LayerActions
 			fcd.SetCurrentFolder (dir);
 
 		// Add image files filter
-		var ff = FileFilter.New ();
+		var ff = Gtk.FileFilter.New ();
 		foreach (var format in image_formats.Formats) {
-			if (!format.IsWriteOnly ()) {
-				foreach (var ext in format.Extensions)
-					ff.AddPattern ($"*.{ext}");
-			}
+			if (format.IsWriteOnly ()) continue;
+			foreach (var ext in format.Extensions)
+				ff.AddPattern ($"*.{ext}");
 		}
 
 		// On Unix-like systems, file extensions are often considered optional.
@@ -212,34 +200,39 @@ public sealed class LayerActions
 		fcd.AddFilter (ff);
 
 		fcd.OnResponse += (_, args) => {
-			var response = (ResponseType) args.ResponseId;
-			if (response == ResponseType.Accept) {
+			var response = (Gtk.ResponseType) args.ResponseId;
 
-				Gio.File file = fcd.GetFile ()!;
+			if (response != Gtk.ResponseType.Accept)
+				return;
 
-				Gio.File? directory = file.GetParent ();
-				if (directory is not null)
-					recent_files.LastDialogDirectory = directory;
+			Gio.File file = fcd.GetFile ()!;
 
-				// Open the image and add it to the layers
-				UserLayer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
+			Gio.File? directory = file.GetParent ();
+			if (directory is not null)
+				recent_files.LastDialogDirectory = directory;
 
-				using var fs = file.Read (null);
-				try {
-					var bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when an error is thrown
-					var context = new Cairo.Context (layer.Surface);
-					context.DrawPixbuf (bg, PointD.Zero);
-				} finally {
-					fs.Close (null);
-				}
+			// Open the image and add it to the layers
+			UserLayer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
 
-				doc.Layers.SetCurrentUserLayer (layer);
-
-				AddLayerHistoryItem hist = new AddLayerHistoryItem (Resources.Icons.LayerImport, Translations.GetString ("Import From File"), doc.Layers.IndexOf (layer));
-				doc.History.PushNewItem (hist);
-
-				doc.Workspace.Invalidate ();
+			using Gio.FileInputStream fs = file.Read (null);
+			try {
+				GdkPixbuf.Pixbuf bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when an error is thrown
+				Cairo.Context context = new (layer.Surface);
+				context.DrawPixbuf (bg, PointD.Zero);
+			} finally {
+				fs.Close (null);
 			}
+
+			doc.Layers.SetCurrentUserLayer (layer);
+
+			AddLayerHistoryItem hist = new (
+				Resources.Icons.LayerImport,
+				Translations.GetString ("Import From File"),
+				doc.Layers.IndexOf (layer));
+
+			doc.History.PushNewItem (hist);
+
+			doc.Workspace.Invalidate ();
 		};
 
 
@@ -249,6 +242,7 @@ public sealed class LayerActions
 	private void HandlePintaCoreActionsLayersFlipVerticalActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		tools.Commit ();
 
 		doc.Layers.CurrentUserLayer.FlipVertical ();
@@ -259,6 +253,7 @@ public sealed class LayerActions
 	private void HandlePintaCoreActionsLayersFlipHorizontalActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		tools.Commit ();
 
 		doc.Layers.CurrentUserLayer.FlipHorizontal ();
@@ -269,9 +264,14 @@ public sealed class LayerActions
 	private void HandlePintaCoreActionsLayersMoveLayerUpActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		tools.Commit ();
 
-		SwapLayersHistoryItem hist = new SwapLayersHistoryItem (Resources.Icons.LayerMoveUp, Translations.GetString ("Move Layer Up"), doc.Layers.CurrentUserLayerIndex, doc.Layers.CurrentUserLayerIndex + 1);
+		SwapLayersHistoryItem hist = new (
+			Resources.Icons.LayerMoveUp,
+			Translations.GetString ("Move Layer Up"),
+			doc.Layers.CurrentUserLayerIndex,
+			doc.Layers.CurrentUserLayerIndex + 1);
 
 		doc.Layers.MoveCurrentLayerUp ();
 		doc.History.PushNewItem (hist);
@@ -280,9 +280,14 @@ public sealed class LayerActions
 	private void HandlePintaCoreActionsLayersMoveLayerDownActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		tools.Commit ();
 
-		SwapLayersHistoryItem hist = new SwapLayersHistoryItem (Resources.Icons.LayerMoveDown, Translations.GetString ("Move Layer Down"), doc.Layers.CurrentUserLayerIndex, doc.Layers.CurrentUserLayerIndex - 1);
+		SwapLayersHistoryItem hist = new (
+			Resources.Icons.LayerMoveDown,
+			Translations.GetString ("Move Layer Down"),
+			doc.Layers.CurrentUserLayerIndex,
+			doc.Layers.CurrentUserLayerIndex - 1);
 
 		doc.Layers.MoveCurrentLayerDown ();
 		doc.History.PushNewItem (hist);
@@ -291,17 +296,29 @@ public sealed class LayerActions
 	private void HandlePintaCoreActionsLayersMergeLayerDownActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		tools.Commit ();
 
 		int bottomLayerIndex = doc.Layers.CurrentUserLayerIndex - 1;
-		var oldBottomSurface = doc.Layers.UserLayers[bottomLayerIndex].Surface.Clone ();
+		Cairo.ImageSurface oldBottomSurface = doc.Layers.UserLayers[bottomLayerIndex].Surface.Clone ();
 
-		CompoundHistoryItem hist = new CompoundHistoryItem (Resources.Icons.LayerMergeDown, Translations.GetString ("Merge Layer Down"));
-		DeleteLayerHistoryItem h1 = new DeleteLayerHistoryItem (string.Empty, string.Empty, doc.Layers.CurrentUserLayer, doc.Layers.CurrentUserLayerIndex);
+		CompoundHistoryItem hist = new (
+			Resources.Icons.LayerMergeDown,
+			Translations.GetString ("Merge Layer Down"));
+
+		DeleteLayerHistoryItem h1 = new (
+			string.Empty,
+			string.Empty,
+			doc.Layers.CurrentUserLayer,
+			doc.Layers.CurrentUserLayerIndex);
 
 		doc.Layers.MergeCurrentLayerDown ();
 
-		SimpleHistoryItem h2 = new SimpleHistoryItem (string.Empty, string.Empty, oldBottomSurface, bottomLayerIndex);
+		SimpleHistoryItem h2 = new (
+			string.Empty,
+			string.Empty,
+			oldBottomSurface,
+			bottomLayerIndex);
 		hist.Push (h1);
 		hist.Push (h2);
 
@@ -311,6 +328,7 @@ public sealed class LayerActions
 	private void HandlePintaCoreActionsLayersDuplicateLayerActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		tools.Commit ();
 
 		UserLayer l = doc.Layers.DuplicateCurrentLayer ();
@@ -318,16 +336,24 @@ public sealed class LayerActions
 		// Make new layer the current layer
 		doc.Layers.SetCurrentUserLayer (l);
 
-		AddLayerHistoryItem hist = new AddLayerHistoryItem (Resources.Icons.LayerDuplicate, Translations.GetString ("Duplicate Layer"), doc.Layers.IndexOf (l));
+		AddLayerHistoryItem hist = new (
+			Resources.Icons.LayerDuplicate,
+			Translations.GetString ("Duplicate Layer"),
+			doc.Layers.IndexOf (l));
 		doc.History.PushNewItem (hist);
 	}
 
 	private void HandlePintaCoreActionsLayersDeleteLayerActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
+
 		tools.Commit ();
 
-		DeleteLayerHistoryItem hist = new DeleteLayerHistoryItem (Resources.Icons.LayerDelete, Translations.GetString ("Delete Layer"), doc.Layers.CurrentUserLayer, doc.Layers.CurrentUserLayerIndex);
+		DeleteLayerHistoryItem hist = new (
+			Resources.Icons.LayerDelete,
+			Translations.GetString ("Delete Layer"),
+			doc.Layers.CurrentUserLayer,
+			doc.Layers.CurrentUserLayerIndex);
 
 		doc.Layers.DeleteLayer (doc.Layers.CurrentUserLayerIndex);
 
@@ -344,8 +370,10 @@ public sealed class LayerActions
 		// Make new layer the current layer
 		doc.Layers.SetCurrentUserLayer (l);
 
-		AddLayerHistoryItem hist = new AddLayerHistoryItem (Resources.Icons.LayerNew, Translations.GetString ("Add New Layer"), doc.Layers.IndexOf (l));
+		AddLayerHistoryItem hist = new (
+			Resources.Icons.LayerNew,
+			Translations.GetString ("Add New Layer"),
+			doc.Layers.IndexOf (l));
 		doc.History.PushNewItem (hist);
 	}
-	#endregion
 }
