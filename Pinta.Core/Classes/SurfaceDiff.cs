@@ -120,28 +120,28 @@ public sealed class SurfaceDiff
 			() => new DiffBounds (orig_width, orig_height),
 			(row, loop, my_bounds) => {
 
-				int newLeft = my_bounds.left;
-				int newRight = my_bounds.right;
-				int newTop = my_bounds.top;
-				int newBottom = my_bounds.bottom;
-
 				int offset = row * orig_width;
 				var orig_row = original.GetReadOnlyPixelData ().Slice (offset, orig_width);
 				var updated_row = updated_surf.GetPixelData ().Slice (offset, orig_width);
 
 				bool change_in_row = false;
+				int newLeft = my_bounds.left;
+				int newRight = my_bounds.right;
 
 				for (int i = 0; i < orig_width; ++i) {
 					if (orig_row[i] == updated_row[i]) continue;
 					change_in_row = true;
-					newLeft = Math.Min (my_bounds.left, i);
-					newRight = Math.Max (my_bounds.right, i);
+					newLeft = Math.Min (newLeft, i);
+					newRight = Math.Max (newRight, i);
 				}
 
-				if (change_in_row) {
-					newTop = Math.Min (my_bounds.top, row);
-					newBottom = Math.Max (my_bounds.bottom, row);
-				}
+				int newTop = change_in_row
+					? Math.Min (my_bounds.top, row)
+					: my_bounds.top;
+
+				int newBottom = change_in_row
+					? Math.Max (my_bounds.bottom, row)
+					: my_bounds.bottom;
 
 				return new DiffBounds (newLeft, newRight, newTop, newBottom);
 			},
