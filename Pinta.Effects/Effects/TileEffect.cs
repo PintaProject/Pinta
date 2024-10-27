@@ -84,8 +84,8 @@ public sealed class TileEffect : BaseEffect
 		static Func<float, float> GetWaveFunction (TileType waveType)
 		{
 			return waveType switch {
-				TileType.CleavedEdges => n => (float) Math.Tan (n),
-				TileType.CurvedEdges => n => (float) Math.Sin (n),
+				TileType.SharpEdges => n => (float) Math.Tan (n),
+				TileType.Curved => n => (float) Math.Sin (n),
 				_ => throw new InvalidEnumArgumentException (nameof (waveType), (int) waveType, typeof (TileType)),
 			};
 		}
@@ -219,16 +219,16 @@ public sealed class TileEffect : BaseEffect
 		[Caption ("Intensity"), MinimumValue (-20), MaximumValue (20)]
 		public int Intensity { get; set; } = 8;
 
-		[Caption ("Wave Type")]
-		public TileType WaveType { get; set; } = TileType.CleavedEdges;
+		[Caption ("Tile Type")]
+		public TileType WaveType { get; set; } = TileType.SharpEdges;
 	}
 }
 
 public enum TileType
 {
-	[Caption ("Cleaved Edges")]
-	CleavedEdges,
+	[Caption ("Sharp Edges")]
+	SharpEdges,
 
-	[Caption ("Curved Edges")]
-	CurvedEdges,
+	[Caption ("Curved")]
+	Curved,
 }
