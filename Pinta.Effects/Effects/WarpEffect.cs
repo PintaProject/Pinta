@@ -52,20 +52,15 @@ public abstract class WarpEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> Chrome.LaunchSimpleEffectDialog (this);
 
-	protected double DefaultRadius { get; private set; } = 0;
-	protected double DefaultRadius2 { get; private set; } = 0;
-
 	protected abstract IPaletteService Palette { get; }
 	protected abstract IChromeService Chrome { get; }
 
 
 	#region Algorithm Code Ported From PDN
+
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		WarpSettings settings = CreateSettings ();
-
-		DefaultRadius = Math.Min (settings.selection.Width, settings.selection.Height) * 0.5;
-		DefaultRadius2 = DefaultRadius * DefaultRadius;
 
 		Span<PointD> aaPoints = stackalloc PointD[settings.aaSampleCount];
 		Utility.GetRgssOffsets (aaPoints, settings.aaSampleCount, Data.Quality);
@@ -81,28 +76,30 @@ public abstract class WarpEffect : BaseEffect
 		}
 	}
 
-	private sealed record WarpSettings (
-		RectangleI selection,
+	protected sealed record WarpSettings (
 		double x_center_offset,
 		double y_center_offset,
 		ColorBgra colPrimary,
 		ColorBgra colSecondary,
 		ColorBgra colTransparent,
 		int aaSampleCount,
-		WarpEdgeBehavior edgeBehavior);
+		WarpEdgeBehavior edgeBehavior,
+		double defaultRadius,
+		double defaultRadius2);
 	private WarpSettings CreateSettings ()
 	{
-		var selection = PintaCore.LivePreview.RenderBounds;
+		RectangleI selection = PintaCore.LivePreview.RenderBounds;
+		double defaultRadius = Math.Min (selection.Width, selection.Height) * 0.5;
 		return new (
-			selection: selection,
 			x_center_offset: selection.Left + (selection.Width * (1.0 + Data.CenterOffset.X) * 0.5),
 			y_center_offset: selection.Top + (selection.Height * (1.0 + Data.CenterOffset.Y) * 0.5),
 			colPrimary: Palette.PrimaryColor.ToColorBgra (),
 			colSecondary: Palette.SecondaryColor.ToColorBgra (),
 			colTransparent: ColorBgra.Transparent,
 			aaSampleCount: Data.Quality * Data.Quality,
-			edgeBehavior: Data.EdgeBehavior
-		);
+			edgeBehavior: Data.EdgeBehavior,
+			defaultRadius: defaultRadius,
+			defaultRadius2: defaultRadius * defaultRadius);
 	}
 
 	private ColorBgra GetPixelColor (
@@ -117,22 +114,35 @@ public abstract class WarpEffect : BaseEffect
 		double relativeX = target.X - settings.x_center_offset;
 		int sampleCount = 0;
 		for (int p = 0; p < settings.aaSampleCount; ++p) {
+
 			TransformData initialTd = new (
 				X: relativeX + aaPoints[p].X,
-				Y: relativeY - aaPoints[p].Y
-			);
-			TransformData td = InverseTransform (initialTd);
+				Y: relativeY - aaPoints[p].Y);
+
+			TransformData td = InverseTransform (initialTd, settings);
+
 			PointF preliminarySample = new (
 				x: (float) (td.X + settings.x_center_offset),
-				y: (float) (td.Y + settings.y_center_offset)
-			);
-			samples[sampleCount] = GetSample (settings, src, src_data, target, preliminarySample);
+				y: (float) (td.Y + settings.y_center_offset));
+
+			samples[sampleCount] = GetSample (
+				settings,
+				src,
+				src_data,
+				target,
+				preliminarySample);
+
 			++sampleCount;
 		}
 		return ColorBgra.Blend (samples[..sampleCount]);
 	}
 
-	private static ColorBgra GetSample (WarpSettings settings, ImageSurface src, ReadOnlySpan<ColorBgra> src_data, PointI target, PointF preliminarySample)
+	private static ColorBgra GetSample (
+		WarpSettings settings,
+		ImageSurface src,
+		ReadOnlySpan<ColorBgra> src_data,
+		PointI target,
+		PointF preliminarySample)
 	{
 		if (IsOnSurface (src, preliminarySample.X, preliminarySample.Y))
 			return src.GetBilinearSample (preliminarySample.X, preliminarySample.Y);
@@ -149,7 +159,9 @@ public abstract class WarpEffect : BaseEffect
 		};
 	}
 
-	protected abstract TransformData InverseTransform (TransformData data);
+	protected abstract TransformData InverseTransform (
+		TransformData data,
+		WarpSettings settings);
 
 	protected readonly record struct TransformData (double X, double Y);
 
@@ -177,6 +189,7 @@ public abstract class WarpEffect : BaseEffect
 	}
 
 	#endregion
+
 	public class WarpData : EffectData
 	{
 		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]

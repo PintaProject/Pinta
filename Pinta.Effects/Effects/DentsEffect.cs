@@ -67,7 +67,9 @@ public sealed class DentsEffect : WarpEffect
 	}
 
 	// Algorithm code ported from PDN
-	protected override TransformData InverseTransform (TransformData data)
+	protected override TransformData InverseTransform (
+		TransformData data,
+		WarpSettings settings)
 	{
 		double scale = Data.Scale;
 
@@ -80,8 +82,8 @@ public sealed class DentsEffect : WarpEffect
 
 		byte seed = Utility.ClampToByte (Data.Seed.Value);
 
-		double scaleR = (400.0 / DefaultRadius) / scale;
-		double refractionScale = (refraction / 100.0) / scaleR;
+		double scaleR = 400.0 / settings.defaultRadius / scale;
+		double refractionScale = refraction / 100.0 / scaleR;
 		double theta = Math.PI * 2.0 * turbulence / 10.0;
 		double effectiveRoughness = roughness / 100.0;
 
@@ -102,8 +104,7 @@ public sealed class DentsEffect : WarpEffect
 
 		return new (
 			X: data.X + (refractionScale * Math.Sin (-bumpAngle)),
-			Y: data.Y + (refractionScale * Math.Cos (bumpAngle))
-		);
+			Y: data.Y + (refractionScale * Math.Cos (bumpAngle)));
 	}
 }
 
