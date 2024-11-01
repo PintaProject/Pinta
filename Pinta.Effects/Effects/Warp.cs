@@ -62,10 +62,9 @@ public enum WarpEdgeBehavior
 public sealed record WarpSettings (
 	double xCenterOffset,
 	double yCenterOffset,
-	ColorBgra colPrimary,
-	ColorBgra colSecondary,
-	ColorBgra colTransparent,
-	int aaSampleCount,
+	ColorBgra primaryColor,
+	ColorBgra secondaryColor,
+	int antiAliasSampleCount,
 	WarpEdgeBehavior edgeBehavior,
 	double defaultRadius,
 	double defaultRadius2);
@@ -88,11 +87,11 @@ public static class Warp
 			WarpEdgeBehavior.Clamp => src.GetBilinearSampleClamped (preliminarySample.X, preliminarySample.Y),
 			WarpEdgeBehavior.Wrap => src.GetBilinearSampleWrapped (preliminarySample.X, preliminarySample.Y),
 			WarpEdgeBehavior.Reflect => src.GetBilinearSampleClamped (ReflectCoord (preliminarySample.X, src.Width), ReflectCoord (preliminarySample.Y, src.Height)),
-			WarpEdgeBehavior.Primary => settings.colPrimary,
-			WarpEdgeBehavior.Secondary => settings.colSecondary,
-			WarpEdgeBehavior.Transparent => settings.colTransparent,
+			WarpEdgeBehavior.Primary => settings.primaryColor,
+			WarpEdgeBehavior.Secondary => settings.secondaryColor,
+			WarpEdgeBehavior.Transparent => ColorBgra.Transparent,
 			WarpEdgeBehavior.Original => src_data[target.Y * src.Width + target.X],
-			_ => settings.colPrimary,
+			_ => settings.primaryColor,
 		};
 	}
 
@@ -129,8 +128,8 @@ public static class Warp
 	{
 		WarpSettings settings = CreateSettings (effect);
 
-		Span<PointD> aaPoints = stackalloc PointD[settings.aaSampleCount];
-		Utility.GetRgssOffsets (aaPoints, settings.aaSampleCount, effect.Data.Quality);
+		Span<PointD> aaPoints = stackalloc PointD[settings.antiAliasSampleCount];
+		Utility.GetRgssOffsets (aaPoints, settings.antiAliasSampleCount, effect.Data.Quality);
 
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
@@ -156,10 +155,9 @@ public static class Warp
 		return new (
 			xCenterOffset: selection.Left + (selection.Width * (1.0 + effect.Data.CenterOffset.X) * 0.5),
 			yCenterOffset: selection.Top + (selection.Height * (1.0 + effect.Data.CenterOffset.Y) * 0.5),
-			colPrimary: effect.Palette.PrimaryColor.ToColorBgra (),
-			colSecondary: effect.Palette.SecondaryColor.ToColorBgra (),
-			colTransparent: ColorBgra.Transparent,
-			aaSampleCount: effect.Data.Quality * effect.Data.Quality,
+			primaryColor: effect.Palette.PrimaryColor.ToColorBgra (),
+			secondaryColor: effect.Palette.SecondaryColor.ToColorBgra (),
+			antiAliasSampleCount: effect.Data.Quality * effect.Data.Quality,
 			edgeBehavior: effect.Data.EdgeBehavior,
 			defaultRadius: defaultRadius,
 			defaultRadius2: defaultRadius * defaultRadius);
@@ -176,10 +174,10 @@ public static class Warp
 	)
 		where TEffectData : EffectData, IWarpData
 	{
-		Span<ColorBgra> samples = stackalloc ColorBgra[settings.aaSampleCount];
+		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasSampleCount];
 		double relativeX = target.X - settings.xCenterOffset;
 		int sampleCount = 0;
-		for (int p = 0; p < settings.aaSampleCount; ++p) {
+		for (int p = 0; p < settings.antiAliasSampleCount; ++p) {
 
 			Warp.TransformData initialTd = new (
 				X: relativeX + aaPoints[p].X,
