@@ -29,6 +29,9 @@ public interface IWarpEffect<TEffectData> where TEffectData : EffectData, IWarpD
 		WarpSettings settings);
 
 	TEffectData Data { get; }
+
+	// TODO: Remove service dependencies
+	LivePreviewManager LivePreview { get; }
 	IPaletteService Palette { get; }
 }
 
@@ -148,7 +151,7 @@ public static class Warp
 
 	private static WarpSettings CreateSettings<TEffectData> (IWarpEffect<TEffectData> effect) where TEffectData : EffectData, IWarpData
 	{
-		RectangleI selection = PintaCore.LivePreview.RenderBounds; // TODO: Remove
+		RectangleI selection = effect.LivePreview.RenderBounds;
 		double defaultRadius = Math.Min (selection.Width, selection.Height) * 0.5;
 		return new (
 			xCenterOffset: selection.Left + (selection.Width * (1.0 + effect.Data.CenterOffset.X) * 0.5),

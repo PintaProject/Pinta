@@ -38,12 +38,14 @@ public sealed class PolarInversionEffect : BaseEffect, IWarpEffect<PolarInversio
 	public override Task<bool> LaunchConfiguration ()
 		=> Chrome.LaunchSimpleEffectDialog (this);
 
-	public IPaletteService Palette { get; }
 	public IChromeService Chrome { get; }
+	public LivePreviewManager LivePreview { get; }
+	public IPaletteService Palette { get; }
 	public PolarInversionEffect (IServiceProvider services)
 	{
-		Palette = services.GetService<IPaletteService> ();
 		Chrome = services.GetService<IChromeService> ();
+		LivePreview = services.GetService<LivePreviewManager> ();
+		Palette = services.GetService<IPaletteService> ();
 		EffectData = new PolarInversionData ();
 	}
 
