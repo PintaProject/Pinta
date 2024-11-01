@@ -62,7 +62,7 @@ public static class Warp
 {
 	public readonly record struct TransformData (double X, double Y);
 
-	public static ColorBgra GetSample (
+	private static ColorBgra GetSample (
 		this WarpSettings settings,
 		ImageSurface src,
 		ReadOnlySpan<ColorBgra> src_data,
@@ -87,7 +87,7 @@ public static class Warp
 	private static bool IsOnSurface (ImageSurface src, float u, float v)
 		=> (u >= 0 && u <= (src.Width - 1) && v >= 0 && v <= (src.Height - 1));
 
-	public static float ReflectCoord (float value, int max)
+	private static float ReflectCoord (float value, int max)
 	{
 		bool reflection = false;
 
@@ -126,7 +126,13 @@ public static class Warp
 		foreach (RectangleI rect in rois) {
 			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
 				double relativeY = pixel.coordinates.Y - settings.y_center_offset;
-				dst_data[pixel.memoryOffset] = effect.GetPixelColor (settings, src, src_data, aaPoints, relativeY, pixel.coordinates);
+				dst_data[pixel.memoryOffset] = effect.GetPixelColor (
+					settings,
+					src,
+					src_data,
+					aaPoints,
+					relativeY,
+					pixel.coordinates);
 			}
 		}
 	}
