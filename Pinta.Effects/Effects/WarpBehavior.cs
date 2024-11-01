@@ -7,11 +7,11 @@
 // Ported to Pinta by: Olivier Dufour <olivier.duff@gmail.com>                 //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System.Drawing;
 using System;
+using System.Drawing;
+using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
-using Cairo;
 
 namespace Pinta.Effects;
 
@@ -57,8 +57,8 @@ public enum WarpEdgeBehavior
 }
 
 public sealed record WarpSettings (
-	double x_center_offset,
-	double y_center_offset,
+	double xCenterOffset,
+	double yCenterOffset,
 	ColorBgra colPrimary,
 	ColorBgra colSecondary,
 	ColorBgra colTransparent,
@@ -134,7 +134,7 @@ public static class Warp
 
 		foreach (RectangleI rect in rois) {
 			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
-				double relativeY = pixel.coordinates.Y - settings.y_center_offset;
+				double relativeY = pixel.coordinates.Y - settings.yCenterOffset;
 				dst_data[pixel.memoryOffset] = effect.GetPixelColor (
 					settings,
 					src,
@@ -151,8 +151,8 @@ public static class Warp
 		RectangleI selection = PintaCore.LivePreview.RenderBounds; // TODO: Remove
 		double defaultRadius = Math.Min (selection.Width, selection.Height) * 0.5;
 		return new (
-			x_center_offset: selection.Left + (selection.Width * (1.0 + effect.Data.CenterOffset.X) * 0.5),
-			y_center_offset: selection.Top + (selection.Height * (1.0 + effect.Data.CenterOffset.Y) * 0.5),
+			xCenterOffset: selection.Left + (selection.Width * (1.0 + effect.Data.CenterOffset.X) * 0.5),
+			yCenterOffset: selection.Top + (selection.Height * (1.0 + effect.Data.CenterOffset.Y) * 0.5),
 			colPrimary: effect.Palette.PrimaryColor.ToColorBgra (),
 			colSecondary: effect.Palette.SecondaryColor.ToColorBgra (),
 			colTransparent: ColorBgra.Transparent,
@@ -174,7 +174,7 @@ public static class Warp
 		where TEffectData : EffectData, IWarpData
 	{
 		Span<ColorBgra> samples = stackalloc ColorBgra[settings.aaSampleCount];
-		double relativeX = target.X - settings.x_center_offset;
+		double relativeX = target.X - settings.xCenterOffset;
 		int sampleCount = 0;
 		for (int p = 0; p < settings.aaSampleCount; ++p) {
 
@@ -185,8 +185,8 @@ public static class Warp
 			Warp.TransformData td = effect.InverseTransform (initialTd, settings);
 
 			PointF preliminarySample = new (
-				x: (float) (td.X + settings.x_center_offset),
-				y: (float) (td.Y + settings.y_center_offset));
+				x: (float) (td.X + settings.xCenterOffset),
+				y: (float) (td.Y + settings.yCenterOffset));
 
 			samples[sampleCount] = settings.GetSample (
 				src,
