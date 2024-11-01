@@ -30,12 +30,14 @@
 // THE SOFTWARE. 
 
 using System;
+using System.Threading.Tasks;
+using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class DentsEffect : WarpEffect
+public sealed class DentsEffect : BaseEffect, IWarpEffect<DentsData>
 {
 	public sealed override string Icon
 		=> Resources.Icons.EffectsDistortDents;
@@ -50,15 +52,17 @@ public sealed class DentsEffect : WarpEffect
 	public sealed override string EffectMenuCategory
 		=> Translations.GetString ("Distort");
 
-	public new DentsData Data
+	public DentsData Data
 		=> (DentsData) EffectData!; // NRT - Set in constructor
 
 	public sealed override bool IsConfigurable
 		=> true;
 
-	protected override IPaletteService Palette { get; }
-	protected override IChromeService Chrome { get; }
+	public override Task<bool> LaunchConfiguration ()
+		=> Chrome.LaunchSimpleEffectDialog (this);
 
+	public IPaletteService Palette { get; }
+	public IChromeService Chrome { get; }
 	public DentsEffect (IServiceProvider services)
 	{
 		Palette = services.GetService<IPaletteService> ();
@@ -66,9 +70,14 @@ public sealed class DentsEffect : WarpEffect
 		EffectData = new DentsData ();
 	}
 
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	{
+		this.RenderWarpEffect (src, dst, rois);
+	}
+
 	// Algorithm code ported from PDN
-	protected override TransformData InverseTransform (
-		TransformData data,
+	public Warp.TransformData InverseTransform (
+		Warp.TransformData data,
 		WarpSettings settings)
 	{
 		double scale = Data.Scale;
@@ -108,7 +117,7 @@ public sealed class DentsEffect : WarpEffect
 	}
 }
 
-public sealed class DentsData : WarpEffect.WarpData
+public sealed class DentsData : EffectData, IWarpData
 {
 	[MinimumValue (1), MaximumValue (200)]
 	public double Scale { get; set; } = 25;
@@ -125,4 +134,12 @@ public sealed class DentsData : WarpEffect.WarpData
 
 	[MinimumValue (0), MaximumValue (255)]
 	public RandomSeed Seed { get; set; } = new (0);
+
+	[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
+	public int Quality { get; set; } = 2;
+
+	[Caption ("Center Offset")]
+	public PointD CenterOffset { get; set; }
+
+	public WarpEdgeBehavior EdgeBehavior { get; set; } = WarpEdgeBehavior.Wrap;
 }

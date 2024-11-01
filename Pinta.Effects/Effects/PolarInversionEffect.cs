@@ -8,28 +8,38 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Threading.Tasks;
+using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class PolarInversionEffect : WarpEffect
+public sealed class PolarInversionEffect : BaseEffect, IWarpEffect<PolarInversionData>
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortPolarInversion;
+	public override string Icon
+		=> Resources.Icons.EffectsDistortPolarInversion;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Polar Inversion");
+	public override string Name
+		=> Translations.GetString ("Polar Inversion");
 
-	public override bool IsConfigurable => true;
+	public PolarInversionData Data
+		=> (PolarInversionData) EffectData!;
 
-	public new PolarInversionData Data => (PolarInversionData) EffectData!;
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Distort");
 
-	public override string EffectMenuCategory => Translations.GetString ("Distort");
+	public override bool IsConfigurable
+		=> true;
 
-	protected override IPaletteService Palette { get; }
-	protected override IChromeService Chrome { get; }
+	public override Task<bool> LaunchConfiguration ()
+		=> Chrome.LaunchSimpleEffectDialog (this);
 
+	public IPaletteService Palette { get; }
+	public IChromeService Chrome { get; }
 	public PolarInversionEffect (IServiceProvider services)
 	{
 		Palette = services.GetService<IPaletteService> ();
@@ -37,9 +47,13 @@ public sealed class PolarInversionEffect : WarpEffect
 		EffectData = new PolarInversionData ();
 	}
 
-	#region Algorithm Code Ported From PDN
-	protected override TransformData InverseTransform (
-		TransformData transData,
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	{
+		this.RenderWarpEffect (src, dst, rois);
+	}
+
+	public Warp.TransformData InverseTransform (
+		Warp.TransformData transData,
 		WarpSettings settings)
 	{
 		double x = transData.X;
@@ -55,17 +69,18 @@ public sealed class PolarInversionEffect : WarpEffect
 			X: x * invertDistance,
 			Y: y * invertDistance);
 	}
-	#endregion
+}
 
-	public sealed class PolarInversionData : WarpEffect.WarpData
-	{
-		[MinimumValue (-4), MaximumValue (4)]
-		public double Amount { get; set; } = 0;
+public sealed class PolarInversionData : EffectData, IWarpData
+{
+	[MinimumValue (-4), MaximumValue (4)]
+	public double Amount { get; set; } = 0;
 
-		public PolarInversionData () : base ()
-		{
-			EdgeBehavior = WarpEdgeBehavior.Reflect;
-		}
+	[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
+	public int Quality { get; set; } = 2;
 
-	}
+	[Caption ("Center Offset")]
+	public PointD CenterOffset { get; set; }
+
+	public WarpEdgeBehavior EdgeBehavior { get; set; } = WarpEdgeBehavior.Reflect;
 }
