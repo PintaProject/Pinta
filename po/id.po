@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 01:37+0000\n"
+"POT-Creation-Date: 2024-11-03 01:38+0000\n"
 "PO-Revision-Date: 2024-03-24 08:01+0000\n"
 "Last-Translator: Rizal Muttaqin <riz_17_oke@yahoo.co.id>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/pinta/pinta/"
@@ -63,8 +63,8 @@ msgstr "Tentang"
 msgid "About Pinta"
 msgstr "Tentang Pinta"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:350
+#: ../Pinta.Core/Actions/LayerActions.cs:59
+#: ../Pinta.Core/Actions/LayerActions.cs:375
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Tambah Lapisan Baru"
@@ -94,7 +94,7 @@ msgstr "Setelah memilih"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
+#: ../Pinta.Core/Actions/EditActions.cs:400
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:106
 msgid "All files"
@@ -107,7 +107,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:110
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:59
-#: ../Pinta.Effects/Effects/TwistEffect.cs:143
+#: ../Pinta.Effects/Effects/TwistEffect.cs:148
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:144
 msgid "Amount"
 msgstr "Sebanyak"
@@ -117,9 +117,9 @@ msgid "Anchor:"
 msgstr "Jangkar:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:151
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:194
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:122
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:81
@@ -128,7 +128,7 @@ msgstr "Jangkar:"
 msgid "Angle"
 msgstr "Sudut"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:146
+#: ../Pinta.Effects/Effects/TwistEffect.cs:151
 msgid "Antialias"
 msgstr "Antialias"
 
@@ -172,7 +172,7 @@ msgstr "Auto-Level"
 msgid "Available in repository: {0}"
 msgstr "Tersedia di lumbung: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:137
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:145
 msgid "Background"
 msgstr "Latar Belakang"
 
@@ -193,7 +193,7 @@ msgstr "Berdasarkan karya Paint.NET:"
 msgid "Beautiful Italy"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:71
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Best Fit"
 msgstr "Paling Cocok"
 
@@ -229,7 +229,7 @@ msgstr "Biru "
 msgid "Blurs"
 msgstr "Buram"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:182
+#: ../Pinta.Tools/Tools/TextTool.cs:179
 msgid "Bold"
 msgstr "Tebal"
 
@@ -287,9 +287,9 @@ msgstr "Per ukuran absolut:"
 msgid "By percentage:"
 msgstr "Per persentasi:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:375
-#: ../Pinta.Core/Actions/EditActions.cs:418
-#: ../Pinta.Core/Actions/LayerActions.cs:188
+#: ../Pinta.Core/Actions/EditActions.cs:385
+#: ../Pinta.Core/Actions/EditActions.cs:429
+#: ../Pinta.Core/Actions/LayerActions.cs:174
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
@@ -309,7 +309,7 @@ msgstr "Ukuran Sel"
 msgid "Center"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:234
+#: ../Pinta.Tools/Tools/TextTool.cs:231
 msgid "Center Align"
 msgstr "Rata Tengah"
 
@@ -317,7 +317,7 @@ msgstr "Rata Tengah"
 msgid "Center Left"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:185
+#: ../Pinta.Effects/Effects/WarpEffect.cs:198
 msgid "Center Offset"
 msgstr "Ofset Tengah"
 
@@ -329,7 +329,7 @@ msgstr ""
 msgid "Centered"
 msgstr "Ditengahkan"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:154
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Centimeters"
 msgstr "Sentimeter"
 
@@ -398,11 +398,11 @@ msgstr "Klik dan seret untuk menggambar garis tepi area pemilihan."
 msgid "Click and drag to navigate image."
 msgstr "Klik dan seret untuk menavigasi citra."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:271
 msgid "Click to reset primary and secondary color."
 msgstr "Klik untuk mengatur ulang warna primer dan sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:253
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
 msgid "Click to select primary color."
 msgstr "Klik untuk memilih warna primer."
 
@@ -410,11 +410,11 @@ msgstr "Klik untuk memilih warna primer."
 msgid "Click to select region of similar color."
 msgstr "Pilih untuk memilih area yang warnanya mirip."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:256
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:263
 msgid "Click to select secondary color."
 msgstr "Klik untuk memilih warna sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:259
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:266
 msgid "Click to switch between primary and secondary color."
 msgstr "Klik untuk berganti antara warna primer dan sekunder."
 
@@ -487,16 +487,16 @@ msgstr "Kisaran Warna"
 msgid "Color Saturation"
 msgstr "Kepekatan Warna"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:186
+#: ../Pinta.Core/Actions/ViewActions.cs:164
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:192
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:185
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
 msgid "Color Scheme"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:189
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:182
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
 msgid "Color Scheme Source"
 msgstr ""
 
@@ -543,14 +543,14 @@ msgid "Cotton Candy"
 msgstr ""
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:129
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:121
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Tidak dapat mengimpor lapisan \"{0}\" dari {1}"
 
-#: ../Pinta.Core/Classes/Palette.cs:191
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:421
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:433
+#: ../Pinta.Core/Classes/Palette.cs:194
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:456
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Gagal membuka berkas: {0}"
@@ -560,9 +560,13 @@ msgid "Coverage"
 msgstr "Cakupan"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:54
-#: ../Pinta.Core/Actions/ImageActions.cs:237
+#: ../Pinta.Core/Actions/ImageActions.cs:234
 msgid "Crop to Selection"
 msgstr "Pangkas Pilihan"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:232
+msgid "Curved"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:136
@@ -577,12 +581,12 @@ msgid "Custom"
 msgstr "Kustom"
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
-#: ../Pinta.Core/Actions/EditActions.cs:266
+#: ../Pinta.Core/Actions/EditActions.cs:262
 msgid "Cut"
 msgstr "Potong"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:194
+#: ../Pinta.Core/Actions/ViewActions.cs:161
 msgid "Dark"
 msgstr ""
 
@@ -595,12 +599,12 @@ msgid "Dash"
 msgstr "Garis"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:190
+#: ../Pinta.Core/Actions/ViewActions.cs:157
 msgid "Default"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:63
-#: ../Pinta.Core/Actions/LayerActions.cs:333
+#: ../Pinta.Core/Actions/LayerActions.cs:60
+#: ../Pinta.Core/Actions/LayerActions.cs:354
 msgid "Delete Layer"
 msgstr "Hapus Lapisan"
 
@@ -613,7 +617,7 @@ msgstr "Dihapus"
 msgid "Dents"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:278
+#: ../Pinta.Core/Actions/EditActions.cs:276
 msgid "Deselect"
 msgstr "Awapilih"
 
@@ -643,7 +647,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:28
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:30
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:28
-#: ../Pinta.Effects/Effects/TileEffect.cs:28
+#: ../Pinta.Effects/Effects/TileEffect.cs:29
 #: ../Pinta.Effects/Effects/TwistEffect.cs:29
 msgid "Distort"
 msgstr "Distorsi"
@@ -661,8 +665,8 @@ msgstr "Jangan ganti alat"
 msgid "Download size: {0}"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:64
-#: ../Pinta.Core/Actions/LayerActions.cs:324
+#: ../Pinta.Core/Actions/LayerActions.cs:61
+#: ../Pinta.Core/Actions/LayerActions.cs:341
 msgid "Duplicate Layer"
 msgstr "Gandakan Lapisan"
 
@@ -710,7 +714,7 @@ msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
-#: ../Pinta.Core/Actions/EditActions.cs:267
+#: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Erase Selection"
 msgstr "Hapus Pilihan"
 
@@ -718,7 +722,7 @@ msgstr "Hapus Pilihan"
 msgid "Eraser"
 msgstr "Penghapus"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:130
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
 msgid "Error"
 msgstr "Kesalahan"
 
@@ -740,7 +744,7 @@ msgid "Extension packages"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:173
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 msgid "Factor"
 msgstr "Faktor"
 
@@ -756,7 +760,7 @@ msgstr ""
 msgid "Failed to load extension package"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:453
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:476
 msgid "Failed to open image"
 msgstr "Gagal membuka gambar"
 
@@ -785,7 +789,7 @@ msgstr "Laporkan Masalah"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:272
+#: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Fill Background"
 msgstr "Isi Latar belakang"
 
@@ -794,7 +798,7 @@ msgid "Fill Object Background"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
-#: ../Pinta.Core/Actions/EditActions.cs:228
+#: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Fill Selection"
 msgstr "Arsir Pilihan"
 
@@ -823,7 +827,7 @@ msgid "Finish Pixels"
 msgstr "Selesaikan Piksel"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
-#: ../Pinta.Core/Actions/ImageActions.cs:163
+#: ../Pinta.Core/Actions/ImageActions.cs:160
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
 msgid "Flatten"
 msgstr "Sedatarkan"
@@ -833,7 +837,7 @@ msgid "Flattening the image will merge all layers into a single layer."
 msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:67
+#: ../Pinta.Core/Actions/LayerActions.cs:64
 msgid "Flip Horizontal"
 msgstr "Balikkan Horizontal"
 
@@ -854,7 +858,7 @@ msgid "Flip Layer Vertical"
 msgstr "Balikkan Lapisan Vertikal"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:68
+#: ../Pinta.Core/Actions/LayerActions.cs:65
 msgid "Flip Vertical"
 msgstr "Balikkan Vertikal"
 
@@ -872,7 +876,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:158
+#: ../Pinta.Tools/Tools/TextTool.cs:155
 msgid "Font"
 msgstr "Font"
 
@@ -892,7 +896,7 @@ msgstr "Bentuk Bebas"
 msgid "Frosted Glass"
 msgstr "Kaca Buram"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:82
+#: ../Pinta.Core/Actions/ViewActions.cs:81
 msgid "Fullscreen"
 msgstr "Layar Penuh"
 
@@ -991,7 +995,7 @@ msgstr "Gambar"
 msgid "Image Editor"
 msgstr "Penyunting Gambar"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:75
+#: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Image Tabs"
 msgstr "Label Gambar"
 
@@ -999,7 +1003,7 @@ msgstr "Label Gambar"
 msgid "Image cannot be pasted"
 msgstr "Gambar tidak dapat ditempelkan"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:214
+#: ../Pinta.Core/Actions/LayerActions.cs:199
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:115
 msgid "Image files"
 msgstr "Berkas citra"
@@ -1012,15 +1016,15 @@ msgstr "Gambar lebih besar daripada kanvas"
 msgid "Image too large"
 msgstr "Gambar terlalu besar"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:241
+#: ../Pinta.Core/Actions/LayerActions.cs:230
 msgid "Import From File"
 msgstr "Impor Dari Berkas"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:66
+#: ../Pinta.Core/Actions/LayerActions.cs:63
 msgid "Import from File..."
 msgstr "Impor dari Berkas..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:153
+#: ../Pinta.Core/Actions/ViewActions.cs:138
 msgid "Inches"
 msgstr "Inci"
 
@@ -1063,7 +1067,7 @@ msgstr "Terpasang"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:168
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:140
-#: ../Pinta.Effects/Effects/TileEffect.cs:181
+#: ../Pinta.Effects/Effects/TileEffect.cs:219
 msgid "Intensity"
 msgstr "Intensitas"
 
@@ -1074,16 +1078,16 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Simpangan ({0} + Left Click)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:212
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:218
 msgid "Invert Colors"
 msgstr "Inversikan Warna"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:472
+#: ../Pinta.Core/Actions/EditActions.cs:487
 msgid "Invert Selection"
 msgstr "Inversikan Pilihan"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:194
+#: ../Pinta.Tools/Tools/TextTool.cs:191
 msgid "Italic"
 msgstr "Miring"
 
@@ -1125,7 +1129,7 @@ msgstr "Kelegapan Lapisan"
 msgid "Layer Properties"
 msgstr "Properti Lapisan"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:72
+#: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Layer Properties..."
 msgstr "Properti Lapisan..."
 
@@ -1134,7 +1138,7 @@ msgid "Layer Shown"
 msgstr "Lapisan Ditampilkan"
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:128
+#: ../Pinta.Core/Classes/DocumentLayers.cs:133
 #, csharp-format
 msgid "Layer {0}"
 msgstr "Lapisan {0}"
@@ -1143,7 +1147,7 @@ msgstr "Lapisan {0}"
 msgid "Layers"
 msgstr "Lapisan"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:222
+#: ../Pinta.Tools/Tools/TextTool.cs:219
 msgid "Left Align"
 msgstr "Rata Kiri"
 
@@ -1246,7 +1250,7 @@ msgstr ""
 "Klik kiri untuk mengisi area dengan warna primer, klik kanan untuk warna "
 "sekunder."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:99
+#: ../Pinta.Tools/Tools/TextTool.cs:98
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1270,12 +1274,12 @@ msgstr ""
 "Klik kiri untuk menetapkan warna primer.\n"
 "Klik kanan untuk menetapkan warna sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:250
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:257
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Klik kiri untuk mengeset warna primer. Klik kanan untuk warna sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:253
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1310,7 +1314,7 @@ msgid "License"
 msgstr "Lisensi"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:192
+#: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Light"
 msgstr ""
 
@@ -1377,8 +1381,8 @@ msgstr "Fraktal Mandelbrot"
 msgid "Median"
 msgstr "Median"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:65
-#: ../Pinta.Core/Actions/LayerActions.cs:302
+#: ../Pinta.Core/Actions/LayerActions.cs:62
+#: ../Pinta.Core/Actions/LayerActions.cs:307
 msgid "Merge Layer Down"
 msgstr "Gabungkan Ke Bawahnya"
 
@@ -1398,13 +1402,13 @@ msgstr ""
 msgid "Motion Blur"
 msgstr "Pengaburan Gerak"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:71
+#: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:288
 msgid "Move Layer Down"
 msgstr "Turunkan Lapisan"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:70
-#: ../Pinta.Core/Actions/LayerActions.cs:277
+#: ../Pinta.Core/Actions/LayerActions.cs:67
+#: ../Pinta.Core/Actions/LayerActions.cs:272
 msgid "Move Layer Up"
 msgstr "Naikkan Lapisan"
 
@@ -1432,7 +1436,7 @@ msgstr ""
 msgid "New"
 msgstr "Baru"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:145
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:153
 #: ../Pinta/Dialogs/NewImageDialog.cs:197
 msgid "New Image"
 msgstr "Citra Baru"
@@ -1449,7 +1453,7 @@ msgstr "Ukuran Baru Palet:"
 msgid "New..."
 msgstr "Baru..."
 
-#: ../Pinta.Gui.Addins/AddinListView.cs:57
+#: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
 msgstr ""
 
@@ -1461,7 +1465,7 @@ msgstr "Derau"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Normal"
 msgstr "Normal"
 
@@ -1469,11 +1473,11 @@ msgstr "Normal"
 msgid "Normal Blending"
 msgstr "Pencampuran Normal"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:73
+#: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Normal Size"
 msgstr "Ukuran Normal"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:270
+#: ../Pinta.Tools/Tools/TextTool.cs:267
 msgid "Normal and Outline"
 msgstr "Normal dan Skema"
 
@@ -1513,9 +1517,9 @@ msgstr "Cat Minyak"
 msgid "Opacity:"
 msgstr "Kelegapan:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:374
+#: ../Pinta.Core/Actions/EditActions.cs:384
 #: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:187
+#: ../Pinta.Core/Actions/LayerActions.cs:173
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
@@ -1525,11 +1529,11 @@ msgstr "Buka"
 msgid "Open Curve Shape"
 msgstr "Bentuk Kurva Terbuka"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:329
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:357
 msgid "Open Image"
 msgstr "Buka Citra"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:184
+#: ../Pinta.Core/Actions/LayerActions.cs:170
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:69
 msgid "Open Image File"
 msgstr "Buka Berkas Citra"
@@ -1538,7 +1542,7 @@ msgstr "Buka Berkas Citra"
 msgid "Open Line/Curve Series"
 msgstr "Seri Garis Terbuka/Kurva"
 
-#: ../Pinta.Core/Actions/EditActions.cs:371
+#: ../Pinta.Core/Actions/EditActions.cs:381
 msgid "Open Palette File"
 msgstr "Buka Berkas Palet"
 
@@ -1555,7 +1559,7 @@ msgstr "Orientasi:"
 msgid "Original"
 msgstr "Asli"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:271
+#: ../Pinta.Tools/Tools/TextTool.cs:268
 msgid "Outline"
 msgstr "Kerangka"
 
@@ -1576,7 +1580,7 @@ msgstr ""
 msgid "Outline Shape"
 msgstr "Bentuk Bergaris Tepi"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:285
+#: ../Pinta.Tools/Tools/TextTool.cs:282
 msgid "Outline width"
 msgstr "Lebar outline"
 
@@ -1604,12 +1608,12 @@ msgstr "Ember Cat"
 msgid "Paintbrush"
 msgstr "Kuas Cat"
 
-#: ../Pinta.Core/Actions/EditActions.cs:157
+#: ../Pinta.Core/Actions/EditActions.cs:133
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:137
 msgid "Palette"
 msgstr "Palet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:378
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Palette files"
 msgstr "Berkas-berkas palet"
 
@@ -1698,15 +1702,15 @@ msgstr ""
 "membuat lapisan (layer) tak terbatas untuk membantu mengatur kreativitas "
 "Anda."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:434
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta mendukung format berkas berikut:"
 
-#: ../Pinta.Core/Classes/Palette.cs:192
+#: ../Pinta.Core/Classes/Palette.cs:195
 msgid "Pinta supports the following palette formats:"
 msgstr "Pinta mendukung format palet berikut:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:76
+#: ../Pinta.Core/Actions/ViewActions.cs:75
 msgid "Pixel Grid"
 msgstr "Kisi Piksel"
 
@@ -1714,7 +1718,7 @@ msgstr "Kisi Piksel"
 msgid "Pixelate"
 msgstr "Pikselkan"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:152
+#: ../Pinta.Core/Actions/ViewActions.cs:137
 msgid "Pixels"
 msgstr "Piksel"
 
@@ -1740,7 +1744,7 @@ msgstr "Inversi Kutub"
 msgid "Portrait"
 msgstr "Potret"
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:135
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:130
 msgid "Position"
 msgstr ""
 
@@ -1779,9 +1783,9 @@ msgid "Print"
 msgstr "Cetak"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:176
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
-#: ../Pinta.Effects/Effects/WarpEffect.cs:182
+#: ../Pinta.Effects/Effects/WarpEffect.cs:195
 msgid "Quality"
 msgstr "Mutu"
 
@@ -1829,7 +1833,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:195
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:188
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:212
 msgid "Random Color Scheme Seed"
 msgstr ""
 
@@ -1907,7 +1911,7 @@ msgstr "Ubah Nama Lapisan"
 msgid "Render"
 msgstr "Pencitraan"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:195
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:190
 msgid "Rendering Effect"
 msgstr "Efek Lukis"
 
@@ -1936,7 +1940,7 @@ msgstr "Atur Ulang"
 msgid "Reset to Default"
 msgstr "Setel ulang ke Bawaan"
 
-#: ../Pinta.Core/Classes/Document.cs:307
+#: ../Pinta.Core/Classes/Document.cs:333
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
 msgid "Resize Canvas"
 msgstr "Ubah Ukuran Kanvas"
@@ -1960,7 +1964,7 @@ msgstr "Ubah Ukuran Palet"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:198
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:191
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:215
 msgid "Reverse Color Scheme"
 msgstr ""
 
@@ -1969,7 +1973,7 @@ msgstr ""
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Right Align"
 msgstr "Rata Kanan"
 
@@ -1978,7 +1982,7 @@ msgstr "Rata Kanan"
 msgid "Rotate / Zoom Layer"
 msgstr "Putar / Zum Lapisan"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:66
 msgid "Rotate / Zoom Layer..."
 msgstr "Putar / Zum Lapisan..."
 
@@ -1998,7 +2002,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Putar 90° Lawan-Perijam"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:126
-#: ../Pinta.Effects/Effects/TileEffect.cs:175
+#: ../Pinta.Effects/Effects/TileEffect.cs:213
 msgid "Rotation"
 msgstr "Putaran"
 
@@ -2014,11 +2018,11 @@ msgstr "Bentuk Garis Bulat"
 msgid "Rounded Rectangle"
 msgstr "Persegi Panjang Berlengkung"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Ruler Units"
 msgstr "Satuan Penggaris"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Rulers"
 msgstr "Mistar"
 
@@ -2035,7 +2039,7 @@ msgstr "Saturasi"
 msgid "Saturation Percentage"
 msgstr "Persentase Saturasi"
 
-#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/EditActions.cs:428
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2054,7 +2058,7 @@ msgstr "Simpan Sebagai..."
 msgid "Save Image File"
 msgstr "Simpan Berkas Citra"
 
-#: ../Pinta.Core/Actions/EditActions.cs:414
+#: ../Pinta.Core/Actions/EditActions.cs:425
 msgid "Save Palette File"
 msgstr "Simpan Berkas Palet"
 
@@ -2076,7 +2080,7 @@ msgid "Secondary"
 msgstr "Sekunder"
 
 #: ../Pinta.Core/Actions/EditActions.cs:80
-#: ../Pinta.Core/Actions/EditActions.cs:237
+#: ../Pinta.Core/Actions/EditActions.cs:231
 msgid "Select All"
 msgstr "Pilih Semua"
 
@@ -2096,12 +2100,16 @@ msgstr "Tentukan Jumlah Warna"
 msgid "Shape Type"
 msgstr "Tipe Bentuk"
 
+#: ../Pinta.Effects/Effects/TileEffect.cs:229
+msgid "Sharp Edges"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
 msgstr "Pertajam"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:267
 msgid "Shortcut key"
 msgstr "Kunci pintasan"
 
@@ -2114,7 +2122,7 @@ msgstr "Tampilkan Lapisan"
 msgid "Show Points"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:153
 msgid "Show/Hide"
 msgstr "Tampil/Sembunyikan"
 
@@ -2160,7 +2168,7 @@ msgstr "Cipratan"
 msgid "Squares"
 msgstr "Kotak"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:77
+#: ../Pinta.Core/Actions/ViewActions.cs:76
 msgid "Status Bar"
 msgstr "Bilah Status"
 
@@ -2189,15 +2197,15 @@ msgstr "Ganti ke alat Pensil"
 msgid "Switch to previous tool"
 msgstr "Ganti ke alat sebelumnya"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:84
+#: ../Pinta.Tools/Tools/TextTool.cs:83
 msgid "Text"
 msgstr "Teks"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:87
+#: ../Pinta.Tools/Tools/TextTool.cs:86
 msgid "Text - Finalize"
 msgstr "Teks - Selesaikan"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:260
+#: ../Pinta.Tools/Tools/TextTool.cs:257
 msgid "Text Style"
 msgstr "Corak Teks"
 
@@ -2273,13 +2281,17 @@ msgstr "Ketebalan"
 msgid "This format does not support layers. Flatten image?"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:24
+#: ../Pinta.Effects/Effects/TileEffect.cs:25
 msgid "Tile Reflection"
 msgstr "Refleksi Ubin"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:178
+#: ../Pinta.Effects/Effects/TileEffect.cs:216
 msgid "Tile Size"
 msgstr "Ukuran Ubin"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:222
+msgid "Tile Type"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:97
 msgid "Tip: Right-click to remove control points."
@@ -2297,7 +2309,7 @@ msgstr "Toleransi"
 msgid "Tool"
 msgstr "Alat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:78
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Tool Box"
 msgstr "Kotak Alat"
 
@@ -2305,7 +2317,7 @@ msgstr "Kotak Alat"
 msgid "Tool Windows"
 msgstr "Jendela Alat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:74
+#: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Toolbar"
 msgstr "Bilah Alat"
 
@@ -2338,7 +2350,7 @@ msgstr "Mode Transparansi"
 msgid "Transparent"
 msgstr "Transparan"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:121
+#: ../Pinta.Effects/Effects/DentsEffect.cs:122
 msgid "Turbulence"
 msgstr ""
 
@@ -2356,7 +2368,7 @@ msgstr ""
 msgid "Type"
 msgstr "Jenis"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:206
+#: ../Pinta.Tools/Tools/TextTool.cs:203
 msgid "Underline"
 msgstr "Garis Bawah"
 
@@ -2383,16 +2395,16 @@ msgstr ""
 msgid "Union (+) ({0} + Left Click)"
 msgstr "Satukan (+) ({0} + Klik Kiri)"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:230
+#: ../Pinta.Core/Classes/Document.cs:92
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Gambar yang Belum Disimpan {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:324
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:352
 msgid "Unsupported file format"
 msgstr "Format berkas tidak didukung"
 
-#: ../Pinta.Core/Classes/Palette.cs:153
+#: ../Pinta.Core/Classes/Palette.cs:155
 msgid "Unsupported palette format"
 msgstr "Format palet tidak didukung"
 
@@ -2463,8 +2475,8 @@ msgstr "Putih"
 msgid "Width:"
 msgstr "Lebar:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:121
-#: ../Pinta.Core/Actions/ViewActions.cs:311
+#: ../Pinta.Core/Actions/ViewActions.cs:120
+#: ../Pinta.Core/Actions/ViewActions.cs:303
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
@@ -2485,7 +2497,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Klik Kanan)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:456
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:479
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Anda tidak memiliki akses ke '{0}'."
@@ -2500,7 +2512,7 @@ msgstr ""
 "mungkin hanya-baca."
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:179
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:146
 msgid "Zoom"
@@ -2510,15 +2522,15 @@ msgstr "Zum"
 msgid "Zoom Blur"
 msgstr "Pengaburan Zum"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:69
+#: ../Pinta.Core/Actions/ViewActions.cs:68
 msgid "Zoom In"
 msgstr "Perbesar"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:70
+#: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Zoom Out"
 msgstr "Perkecil"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Zoom to Selection"
 msgstr "Zum ke Pilihan"
 
@@ -2619,7 +2631,7 @@ msgstr "{0} + klik kiri untuk set origin, klik kanan untuk paint."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:203
+#: ../Pinta.Core/Classes/DocumentLayers.cs:207
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0} salin"
@@ -2637,7 +2649,7 @@ msgstr "{0} palet ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:292
+#: ../Pinta.Core/Actions/ViewActions.cs:284
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

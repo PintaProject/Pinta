@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-13 01:37+0000\n"
+"POT-Creation-Date: 2024-11-03 01:38+0000\n"
 "PO-Revision-Date: 2024-09-30 09:32+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
@@ -62,8 +62,8 @@ msgstr "О приложении"
 msgid "About Pinta"
 msgstr "О приложении Pinta"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:350
+#: ../Pinta.Core/Actions/LayerActions.cs:59
+#: ../Pinta.Core/Actions/LayerActions.cs:375
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Добавить слой"
@@ -93,7 +93,7 @@ msgstr "После выбора"
 msgid "Align Object"
 msgstr "Выровнять объект"
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
+#: ../Pinta.Core/Actions/EditActions.cs:400
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:106
 msgid "All files"
@@ -106,7 +106,7 @@ msgstr "Градиент Альфа"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:110
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:59
-#: ../Pinta.Effects/Effects/TwistEffect.cs:143
+#: ../Pinta.Effects/Effects/TwistEffect.cs:148
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:144
 msgid "Amount"
 msgstr "Количество"
@@ -116,9 +116,9 @@ msgid "Anchor:"
 msgstr "Якорь:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:83
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:151
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:194
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:122
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:81
@@ -127,7 +127,7 @@ msgstr "Якорь:"
 msgid "Angle"
 msgstr "Угол"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:146
+#: ../Pinta.Effects/Effects/TwistEffect.cs:151
 msgid "Antialias"
 msgstr "Сглаживание"
 
@@ -171,7 +171,7 @@ msgstr "Автокоррекция"
 msgid "Available in repository: {0}"
 msgstr "Доступно в репозитории: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:137
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:145
 msgid "Background"
 msgstr "Фон"
 
@@ -192,7 +192,7 @@ msgstr "Основано на Paint.NET:"
 msgid "Beautiful Italy"
 msgstr "Прекрасная Италия"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:71
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Best Fit"
 msgstr "Уместить в окне"
 
@@ -228,7 +228,7 @@ msgstr "Синий "
 msgid "Blurs"
 msgstr "Размытие"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:182
+#: ../Pinta.Tools/Tools/TextTool.cs:179
 msgid "Bold"
 msgstr "Жирный"
 
@@ -286,9 +286,9 @@ msgstr "Абсолютный размер:"
 msgid "By percentage:"
 msgstr "В процентах:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:375
-#: ../Pinta.Core/Actions/EditActions.cs:418
-#: ../Pinta.Core/Actions/LayerActions.cs:188
+#: ../Pinta.Core/Actions/EditActions.cs:385
+#: ../Pinta.Core/Actions/EditActions.cs:429
+#: ../Pinta.Core/Actions/LayerActions.cs:174
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
@@ -308,7 +308,7 @@ msgstr "Размер ячейки"
 msgid "Center"
 msgstr "Центрировать"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:234
+#: ../Pinta.Tools/Tools/TextTool.cs:231
 msgid "Center Align"
 msgstr "По центру"
 
@@ -316,7 +316,7 @@ msgstr "По центру"
 msgid "Center Left"
 msgstr "По центру влево"
 
-#: ../Pinta.Effects/Effects/WarpEffect.cs:185
+#: ../Pinta.Effects/Effects/WarpEffect.cs:198
 msgid "Center Offset"
 msgstr "Смещение центра"
 
@@ -328,7 +328,7 @@ msgstr "По центру вправо"
 msgid "Centered"
 msgstr "Центрирование"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:154
+#: ../Pinta.Core/Actions/ViewActions.cs:139
 msgid "Centimeters"
 msgstr "Сантиметры"
 
@@ -402,11 +402,11 @@ msgstr ""
 msgid "Click and drag to navigate image."
 msgstr "Нажмите левую кнопку мыши и тяните для навигации по изображению."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:271
 msgid "Click to reset primary and secondary color."
 msgstr "Щёлкните для сброса основного и дополнительного цветов."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:253
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
 msgid "Click to select primary color."
 msgstr "Щёлкните, чтобы выбрать основной цвет."
 
@@ -414,11 +414,11 @@ msgstr "Щёлкните, чтобы выбрать основной цвет."
 msgid "Click to select region of similar color."
 msgstr "Щёлкните, чтобы выделить область с похожим цветом."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:256
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:263
 msgid "Click to select secondary color."
 msgstr "Щёлкните, чтобы выбрать дополнительный цвет."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:259
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:266
 msgid "Click to switch between primary and secondary color."
 msgstr "Щёлкните, чтобы переключиться между основным и дополнительным цветом."
 
@@ -491,16 +491,16 @@ msgstr "Цветовой диапазон"
 msgid "Color Saturation"
 msgstr "Насыщенность цвета"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:186
+#: ../Pinta.Core/Actions/ViewActions.cs:164
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:192
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:185
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
 msgid "Color Scheme"
 msgstr "Цветовая схема"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:189
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:182
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
 msgid "Color Scheme Source"
 msgstr "Источник для цветовой схемы"
 
@@ -547,14 +547,14 @@ msgid "Cotton Candy"
 msgstr "Сахарная вата"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:129
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:121
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Не удалось импортировать слой «{0}» из {1}"
 
-#: ../Pinta.Core/Classes/Palette.cs:191
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:421
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:433
+#: ../Pinta.Core/Classes/Palette.cs:194
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:456
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Не удалось открыть файл: {0}"
@@ -564,9 +564,13 @@ msgid "Coverage"
 msgstr "Покрытие"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:54
-#: ../Pinta.Core/Actions/ImageActions.cs:237
+#: ../Pinta.Core/Actions/ImageActions.cs:234
 msgid "Crop to Selection"
 msgstr "Кадрировать по выделенному"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:232
+msgid "Curved"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:136
@@ -581,12 +585,12 @@ msgid "Custom"
 msgstr "Пользовательский"
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
-#: ../Pinta.Core/Actions/EditActions.cs:266
+#: ../Pinta.Core/Actions/EditActions.cs:262
 msgid "Cut"
 msgstr "Вырезать"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:194
+#: ../Pinta.Core/Actions/ViewActions.cs:161
 msgid "Dark"
 msgstr "Тёмная"
 
@@ -599,12 +603,12 @@ msgid "Dash"
 msgstr "Штриховка"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:190
+#: ../Pinta.Core/Actions/ViewActions.cs:157
 msgid "Default"
 msgstr "По умолчанию"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:63
-#: ../Pinta.Core/Actions/LayerActions.cs:333
+#: ../Pinta.Core/Actions/LayerActions.cs:60
+#: ../Pinta.Core/Actions/LayerActions.cs:354
 msgid "Delete Layer"
 msgstr "Удалить слой"
 
@@ -617,7 +621,7 @@ msgstr "Удалено"
 msgid "Dents"
 msgstr "Вмятины"
 
-#: ../Pinta.Core/Actions/EditActions.cs:278
+#: ../Pinta.Core/Actions/EditActions.cs:276
 msgid "Deselect"
 msgstr "Сбросить выделение"
 
@@ -647,7 +651,7 @@ msgstr "Метрика расстояния"
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:28
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:30
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:28
-#: ../Pinta.Effects/Effects/TileEffect.cs:28
+#: ../Pinta.Effects/Effects/TileEffect.cs:29
 #: ../Pinta.Effects/Effects/TwistEffect.cs:29
 msgid "Distort"
 msgstr "Искажения"
@@ -665,8 +669,8 @@ msgstr "Не переключайте инструмент"
 msgid "Download size: {0}"
 msgstr "Размер загрузки: {0}"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:64
-#: ../Pinta.Core/Actions/LayerActions.cs:324
+#: ../Pinta.Core/Actions/LayerActions.cs:61
+#: ../Pinta.Core/Actions/LayerActions.cs:341
 msgid "Duplicate Layer"
 msgstr "Дублировать слой"
 
@@ -716,7 +720,7 @@ msgstr ""
 "для проведения отладки приложения"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
-#: ../Pinta.Core/Actions/EditActions.cs:267
+#: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Erase Selection"
 msgstr "Удалить выделение"
 
@@ -724,7 +728,7 @@ msgstr "Удалить выделение"
 msgid "Eraser"
 msgstr "Ластик"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:130
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:122
 msgid "Error"
 msgstr "Ошибка"
 
@@ -746,7 +750,7 @@ msgid "Extension packages"
 msgstr "Пакеты расширений"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:173
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 msgid "Factor"
 msgstr "Фактор"
 
@@ -762,7 +766,7 @@ msgstr "Не удалось инициализировать дополнени�
 msgid "Failed to load extension package"
 msgstr "Не удалось загрузить пакет расширения"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:453
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:476
 msgid "Failed to open image"
 msgstr "Не удалось открыть изображение"
 
@@ -791,7 +795,7 @@ msgstr "Сообщить о неполадке"
 msgid "Files to open"
 msgstr "Файлы для открытия"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:272
+#: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Fill Background"
 msgstr "Заливка фона"
 
@@ -800,7 +804,7 @@ msgid "Fill Object Background"
 msgstr "Заливка фона объекта"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
-#: ../Pinta.Core/Actions/EditActions.cs:228
+#: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Fill Selection"
 msgstr "Заполнить выделение"
 
@@ -829,7 +833,7 @@ msgid "Finish Pixels"
 msgstr "Завершить пиксели"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
-#: ../Pinta.Core/Actions/ImageActions.cs:163
+#: ../Pinta.Core/Actions/ImageActions.cs:160
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
 msgid "Flatten"
 msgstr "Объединить слои"
@@ -839,7 +843,7 @@ msgid "Flattening the image will merge all layers into a single layer."
 msgstr "Сведение изображения объединит все слои в один."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:67
+#: ../Pinta.Core/Actions/LayerActions.cs:64
 msgid "Flip Horizontal"
 msgstr "Отразить по горизонтали"
 
@@ -860,7 +864,7 @@ msgid "Flip Layer Vertical"
 msgstr "Отразить слой по вертикали"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:68
+#: ../Pinta.Core/Actions/LayerActions.cs:65
 msgid "Flip Vertical"
 msgstr "Отразить по вертикали"
 
@@ -878,7 +882,7 @@ msgstr "Флойда-Стейнберга"
 msgid "Floyd-Steinberg Lite"
 msgstr "Флойда-Стейнберга (лайт)"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:158
+#: ../Pinta.Tools/Tools/TextTool.cs:155
 msgid "Font"
 msgstr "Шрифт"
 
@@ -898,7 +902,7 @@ msgstr "Произвольная фигура"
 msgid "Frosted Glass"
 msgstr "Матовое стекло"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:82
+#: ../Pinta.Core/Actions/ViewActions.cs:81
 msgid "Fullscreen"
 msgstr "Во весь экран"
 
@@ -997,7 +1001,7 @@ msgstr "Изображение"
 msgid "Image Editor"
 msgstr "Графический редактор"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:75
+#: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Image Tabs"
 msgstr "Вкладки"
 
@@ -1005,7 +1009,7 @@ msgstr "Вкладки"
 msgid "Image cannot be pasted"
 msgstr "Изображение не может быть вставлено"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:214
+#: ../Pinta.Core/Actions/LayerActions.cs:199
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:115
 msgid "Image files"
 msgstr "Файлы изображений"
@@ -1018,15 +1022,15 @@ msgstr "Изображение больше, чем размер холста"
 msgid "Image too large"
 msgstr "Изображение слишком большое"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:241
+#: ../Pinta.Core/Actions/LayerActions.cs:230
 msgid "Import From File"
 msgstr "Импорт из файла"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:66
+#: ../Pinta.Core/Actions/LayerActions.cs:63
 msgid "Import from File..."
 msgstr "Импорт из файла..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:153
+#: ../Pinta.Core/Actions/ViewActions.cs:138
 msgid "Inches"
 msgstr "Дюймы"
 
@@ -1069,7 +1073,7 @@ msgstr "Установлено"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:168
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:140
-#: ../Pinta.Effects/Effects/TileEffect.cs:181
+#: ../Pinta.Effects/Effects/TileEffect.cs:219
 msgid "Intensity"
 msgstr "Интенсивность"
 
@@ -1080,16 +1084,16 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Пересечение ({0} + Левая кнопка мыши)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:212
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:218
 msgid "Invert Colors"
 msgstr "Обратить цвета"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:472
+#: ../Pinta.Core/Actions/EditActions.cs:487
 msgid "Invert Selection"
 msgstr "Обратить выделение"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:194
+#: ../Pinta.Tools/Tools/TextTool.cs:191
 msgid "Italic"
 msgstr "Курсивный"
 
@@ -1131,7 +1135,7 @@ msgstr "Непрозрачность слоя"
 msgid "Layer Properties"
 msgstr "Свойства слоя"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:72
+#: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Layer Properties..."
 msgstr "Параметры слоя..."
 
@@ -1140,7 +1144,7 @@ msgid "Layer Shown"
 msgstr "Видимый слой"
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:128
+#: ../Pinta.Core/Classes/DocumentLayers.cs:133
 #, csharp-format
 msgid "Layer {0}"
 msgstr "Слой {0}"
@@ -1149,7 +1153,7 @@ msgstr "Слой {0}"
 msgid "Layers"
 msgstr "Слои"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:222
+#: ../Pinta.Tools/Tools/TextTool.cs:219
 msgid "Left Align"
 msgstr "По левому краю"
 
@@ -1260,7 +1264,7 @@ msgstr ""
 "Щёлкните левой кнопкой мыши, чтобы залить область основным цветом, правой - "
 "дополнительным."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:99
+#: ../Pinta.Tools/Tools/TextTool.cs:98
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1285,13 +1289,13 @@ msgstr ""
 "Щёлкните левой кнопкой мыши, чтобы установить основной цвет.\n"
 "Щёлкните правой кнопкой мыши, чтобы установить дополнительный цвет."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:250
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:257
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Щёлкните левой кнопкой мыши для задания основного цвета. Щёлкните правой "
 "кнопкой для задания дополнительного цвета."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:253
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1327,7 +1331,7 @@ msgid "License"
 msgstr "Лицензия"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:192
+#: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Light"
 msgstr "Светлая"
 
@@ -1394,8 +1398,8 @@ msgstr "Фрактал Мандельброта"
 msgid "Median"
 msgstr "Медиана"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:65
-#: ../Pinta.Core/Actions/LayerActions.cs:302
+#: ../Pinta.Core/Actions/LayerActions.cs:62
+#: ../Pinta.Core/Actions/LayerActions.cs:307
 msgid "Merge Layer Down"
 msgstr "Объединить с нижележащим"
 
@@ -1415,13 +1419,13 @@ msgstr "Дополнительные сведения..."
 msgid "Motion Blur"
 msgstr "Размытие в движении"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:71
+#: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:288
 msgid "Move Layer Down"
 msgstr "Переместить слой вниз"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:70
-#: ../Pinta.Core/Actions/LayerActions.cs:277
+#: ../Pinta.Core/Actions/LayerActions.cs:67
+#: ../Pinta.Core/Actions/LayerActions.cs:272
 msgid "Move Layer Up"
 msgstr "Переместить слой вверх"
 
@@ -1449,7 +1453,7 @@ msgstr "Ближайший сосед"
 msgid "New"
 msgstr "Создать"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:145
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:153
 #: ../Pinta/Dialogs/NewImageDialog.cs:197
 msgid "New Image"
 msgstr "Новое изображение"
@@ -1466,7 +1470,7 @@ msgstr "Новый размер палитры:"
 msgid "New..."
 msgstr "Создать..."
 
-#: ../Pinta.Gui.Addins/AddinListView.cs:57
+#: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
 msgstr "Ничего не найдено"
 
@@ -1478,7 +1482,7 @@ msgstr "Шум"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Normal"
 msgstr "Обычный"
 
@@ -1486,11 +1490,11 @@ msgstr "Обычный"
 msgid "Normal Blending"
 msgstr "Нормальное наложение"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:73
+#: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Normal Size"
 msgstr "Исходный размер"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:270
+#: ../Pinta.Tools/Tools/TextTool.cs:267
 msgid "Normal and Outline"
 msgstr "Обычный и контур"
 
@@ -1530,9 +1534,9 @@ msgstr "Масляные краски"
 msgid "Opacity:"
 msgstr "Непрозрачность:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:374
+#: ../Pinta.Core/Actions/EditActions.cs:384
 #: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:187
+#: ../Pinta.Core/Actions/LayerActions.cs:173
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
@@ -1542,11 +1546,11 @@ msgstr "Открыть"
 msgid "Open Curve Shape"
 msgstr "Открытая кривая"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:329
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:357
 msgid "Open Image"
 msgstr "Открыть изображение"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:184
+#: ../Pinta.Core/Actions/LayerActions.cs:170
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:69
 msgid "Open Image File"
 msgstr "Открыть файл изображения"
@@ -1555,7 +1559,7 @@ msgstr "Открыть файл изображения"
 msgid "Open Line/Curve Series"
 msgstr "Группа открытых геометрических фигур/кривых"
 
-#: ../Pinta.Core/Actions/EditActions.cs:371
+#: ../Pinta.Core/Actions/EditActions.cs:381
 msgid "Open Palette File"
 msgstr "Открыть файл палитры"
 
@@ -1572,7 +1576,7 @@ msgstr "Ориентация:"
 msgid "Original"
 msgstr "Исходный"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:271
+#: ../Pinta.Tools/Tools/TextTool.cs:268
 msgid "Outline"
 msgstr "Контур"
 
@@ -1593,7 +1597,7 @@ msgstr "Контур объекта"
 msgid "Outline Shape"
 msgstr "Контур фигуры"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:285
+#: ../Pinta.Tools/Tools/TextTool.cs:282
 msgid "Outline width"
 msgstr "Ширина контура"
 
@@ -1621,12 +1625,12 @@ msgstr "Заливка"
 msgid "Paintbrush"
 msgstr "Кисть"
 
-#: ../Pinta.Core/Actions/EditActions.cs:157
+#: ../Pinta.Core/Actions/EditActions.cs:133
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:137
 msgid "Palette"
 msgstr "Палитра"
 
-#: ../Pinta.Core/Actions/EditActions.cs:378
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Palette files"
 msgstr "Файлы палитры"
 
@@ -1714,15 +1718,15 @@ msgstr ""
 "изображениям, а также имеет возможность создавать неограниченное количество "
 "слоев, чтобы помочь организовать ваше творчество."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:434
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta поддерживает следующие форматы файлов:"
 
-#: ../Pinta.Core/Classes/Palette.cs:192
+#: ../Pinta.Core/Classes/Palette.cs:195
 msgid "Pinta supports the following palette formats:"
 msgstr "Pinta поддерживает следующие форматы палитр:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:76
+#: ../Pinta.Core/Actions/ViewActions.cs:75
 msgid "Pixel Grid"
 msgstr "Пиксельная сетка"
 
@@ -1730,7 +1734,7 @@ msgstr "Пиксельная сетка"
 msgid "Pixelate"
 msgstr "Пикселизация"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:152
+#: ../Pinta.Core/Actions/ViewActions.cs:137
 msgid "Pixels"
 msgstr "Пиксели"
 
@@ -1756,7 +1760,7 @@ msgstr "Полярная инверсия"
 msgid "Portrait"
 msgstr "Книжная"
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:135
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:130
 msgid "Position"
 msgstr "Положение"
 
@@ -1795,9 +1799,9 @@ msgid "Print"
 msgstr "Печать"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:176
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:177
-#: ../Pinta.Effects/Effects/WarpEffect.cs:182
+#: ../Pinta.Effects/Effects/WarpEffect.cs:195
 msgid "Quality"
 msgstr "Качество"
 
@@ -1845,7 +1849,7 @@ msgstr "Случайный вариант"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:195
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:188
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:212
 msgid "Random Color Scheme Seed"
 msgstr "Случайные значения для цветовой схемы"
 
@@ -1923,7 +1927,7 @@ msgstr "Переименовать слой"
 msgid "Render"
 msgstr "Рисование"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:195
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:190
 msgid "Rendering Effect"
 msgstr "Эффект отрисовки"
 
@@ -1952,7 +1956,7 @@ msgstr "Сброс"
 msgid "Reset to Default"
 msgstr "Сбросить установки"
 
-#: ../Pinta.Core/Classes/Document.cs:307
+#: ../Pinta.Core/Classes/Document.cs:333
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
 msgid "Resize Canvas"
 msgstr "Изменить размер холста"
@@ -1976,7 +1980,7 @@ msgstr "Изменить размер палитры"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:198
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:191
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:215
 msgid "Reverse Color Scheme"
 msgstr "Обратная цветовая схема"
 
@@ -1985,7 +1989,7 @@ msgstr "Обратная цветовая схема"
 msgid "Reverse Color Sorting"
 msgstr "Сортировка цветов в обратном порядке"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:246
+#: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Right Align"
 msgstr "По правому краю"
 
@@ -1994,7 +1998,7 @@ msgstr "По правому краю"
 msgid "Rotate / Zoom Layer"
 msgstr "Повернуть / Увеличить слой"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:66
 msgid "Rotate / Zoom Layer..."
 msgstr "Повернуть / Увеличить слой..."
 
@@ -2014,7 +2018,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Повернуть на 90° против часовой стрелки"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:126
-#: ../Pinta.Effects/Effects/TileEffect.cs:175
+#: ../Pinta.Effects/Effects/TileEffect.cs:213
 msgid "Rotation"
 msgstr "Поворот"
 
@@ -2030,11 +2034,11 @@ msgstr "Скруглённая линия"
 msgid "Rounded Rectangle"
 msgstr "Скруглённый прямоугольник"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Ruler Units"
 msgstr "Единицы измерения"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Rulers"
 msgstr "Линейки"
 
@@ -2051,7 +2055,7 @@ msgstr "Насыщенность"
 msgid "Saturation Percentage"
 msgstr "Насыщенность в процентах"
 
-#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/EditActions.cs:428
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2070,7 +2074,7 @@ msgstr "Сохранить как..."
 msgid "Save Image File"
 msgstr "Сохранить файл изображения"
 
-#: ../Pinta.Core/Actions/EditActions.cs:414
+#: ../Pinta.Core/Actions/EditActions.cs:425
 msgid "Save Palette File"
 msgstr "Сохранить файл палитры"
 
@@ -2092,7 +2096,7 @@ msgid "Secondary"
 msgstr "Дополнительный"
 
 #: ../Pinta.Core/Actions/EditActions.cs:80
-#: ../Pinta.Core/Actions/EditActions.cs:237
+#: ../Pinta.Core/Actions/EditActions.cs:231
 msgid "Select All"
 msgstr "Выделить всё"
 
@@ -2112,12 +2116,16 @@ msgstr "Установить количество цветов"
 msgid "Shape Type"
 msgstr "Форма"
 
+#: ../Pinta.Effects/Effects/TileEffect.cs:229
+msgid "Sharp Edges"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
 msgstr "Добавить резкость"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:267
 msgid "Shortcut key"
 msgstr "Горячая клавиша"
 
@@ -2130,7 +2138,7 @@ msgstr "Показать слой"
 msgid "Show Points"
 msgstr "Показывать точки"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:160
+#: ../Pinta.Core/Actions/ViewActions.cs:153
 msgid "Show/Hide"
 msgstr "Показать/Скрыть"
 
@@ -2176,7 +2184,7 @@ msgstr "Брызги"
 msgid "Squares"
 msgstr "Квадраты"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:77
+#: ../Pinta.Core/Actions/ViewActions.cs:76
 msgid "Status Bar"
 msgstr "Строка состояния"
 
@@ -2205,15 +2213,15 @@ msgstr "Переключиться на инструмент \"Карандаш\
 msgid "Switch to previous tool"
 msgstr "Переключиться на предыдущий инструмент"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:84
+#: ../Pinta.Tools/Tools/TextTool.cs:83
 msgid "Text"
 msgstr "Текст"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:87
+#: ../Pinta.Tools/Tools/TextTool.cs:86
 msgid "Text - Finalize"
 msgstr "Текст - Завершить"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:260
+#: ../Pinta.Tools/Tools/TextTool.cs:257
 msgid "Text Style"
 msgstr "Стиль текста"
 
@@ -2295,13 +2303,17 @@ msgstr "Толщина"
 msgid "This format does not support layers. Flatten image?"
 msgstr "Этот формат не поддерживает слои. Свести изображение?"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:24
+#: ../Pinta.Effects/Effects/TileEffect.cs:25
 msgid "Tile Reflection"
 msgstr "Мозаичное отражение"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:178
+#: ../Pinta.Effects/Effects/TileEffect.cs:216
 msgid "Tile Size"
 msgstr "Размер плитки"
+
+#: ../Pinta.Effects/Effects/TileEffect.cs:222
+msgid "Tile Type"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:97
 msgid "Tip: Right-click to remove control points."
@@ -2319,7 +2331,7 @@ msgstr "Чувствительность"
 msgid "Tool"
 msgstr "Инструмент"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:78
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Tool Box"
 msgstr "Инструменты"
 
@@ -2327,7 +2339,7 @@ msgstr "Инструменты"
 msgid "Tool Windows"
 msgstr "Инструментальные окна"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:74
+#: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Toolbar"
 msgstr "Панель инструментов"
 
@@ -2360,7 +2372,7 @@ msgstr "Прозрачный режим"
 msgid "Transparent"
 msgstr "Прозрачный"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:121
+#: ../Pinta.Effects/Effects/DentsEffect.cs:122
 msgid "Turbulence"
 msgstr "Турбулентность"
 
@@ -2378,7 +2390,7 @@ msgstr "Двухрядный алгоритм Сьерры"
 msgid "Type"
 msgstr "Тип"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:206
+#: ../Pinta.Tools/Tools/TextTool.cs:203
 msgid "Underline"
 msgstr "Подчёркнутый"
 
@@ -2405,16 +2417,16 @@ msgstr "Удалить..."
 msgid "Union (+) ({0} + Left Click)"
 msgstr "Соединить (+) ({0} + Левая кнопка мыши)"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:230
+#: ../Pinta.Core/Classes/Document.cs:92
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Несохранённое изображение {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:324
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:352
 msgid "Unsupported file format"
 msgstr "Неподдерживаемый формат файла"
 
-#: ../Pinta.Core/Classes/Palette.cs:153
+#: ../Pinta.Core/Classes/Palette.cs:155
 msgid "Unsupported palette format"
 msgstr "Неподдерживаемый формат палитры"
 
@@ -2486,8 +2498,8 @@ msgstr "Белый"
 msgid "Width:"
 msgstr "Ширина:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:121
-#: ../Pinta.Core/Actions/ViewActions.cs:311
+#: ../Pinta.Core/Actions/ViewActions.cs:120
+#: ../Pinta.Core/Actions/ViewActions.cs:303
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
@@ -2508,7 +2520,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Правая кнопка мыши)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:456
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:479
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "У вас нет доступа к '{0}'."
@@ -2523,7 +2535,7 @@ msgstr ""
 "только для чтения."
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:179
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:146
 msgid "Zoom"
@@ -2533,15 +2545,15 @@ msgstr "Масштабирование"
 msgid "Zoom Blur"
 msgstr "Размытие с увеличением"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:69
+#: ../Pinta.Core/Actions/ViewActions.cs:68
 msgid "Zoom In"
 msgstr "Крупнее"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:70
+#: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Zoom Out"
 msgstr "Мельче"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Zoom to Selection"
 msgstr "По размеру выделения"
 
@@ -2665,7 +2677,7 @@ msgstr ""
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:203
+#: ../Pinta.Core/Classes/DocumentLayers.cs:207
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0} копия"
@@ -2683,7 +2695,7 @@ msgstr "{0} палитра ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:292
+#: ../Pinta.Core/Actions/ViewActions.cs:284
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
