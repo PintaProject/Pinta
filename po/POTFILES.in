@@ -91,9 +91,6 @@ Pinta.Core/EventArgs/DocumentCancelEventArgs.cs
 Pinta.Core/EventArgs/DocumentEventArgs.cs
 Pinta.Core/EventArgs/HistoryItemAddedEventArgs.cs
 Pinta.Core/EventArgs/IndexEventArgs.cs
-Pinta.Core/EventArgs/LivePreviewEndedEventArgs.cs
-Pinta.Core/EventArgs/LivePreviewRenderUpdatedEventArgs.cs
-Pinta.Core/EventArgs/LivePreviewStartedEventArgs.cs
 Pinta.Core/EventArgs/ModifyCompressionEventArgs.cs
 Pinta.Core/EventArgs/TextChangedEventArgs.cs
 Pinta.Core/EventArgs/ToolEventArgs.cs
@@ -138,7 +135,6 @@ Pinta.Core/Managers/ActionManager.cs
 Pinta.Core/Managers/ChromeManager.cs
 Pinta.Core/Managers/EffectsManager.cs
 Pinta.Core/Managers/ImageConverterManager.cs
-Pinta.Core/Managers/LayerManager.cs
 Pinta.Core/Managers/LivePreviewManager.cs
 Pinta.Core/Managers/PaintBrushManager.cs
 Pinta.Core/Managers/PaletteFormatManager.cs
