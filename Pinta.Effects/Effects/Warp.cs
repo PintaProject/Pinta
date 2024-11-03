@@ -8,6 +8,8 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Drawing;
 using Cairo;
 using Pinta.Core;
@@ -64,7 +66,7 @@ public sealed record WarpSettings (
 	double yCenterOffset,
 	ColorBgra primaryColor,
 	ColorBgra secondaryColor,
-	int antiAliasSampleCount,
+	ImmutableArray<PointD> antiAliasPoints,
 	WarpEdgeBehavior edgeBehavior,
 	double defaultRadius,
 	double defaultRadius2);
@@ -128,9 +130,6 @@ public static class Warp
 	{
 		WarpSettings settings = CreateSettings (effect);
 
-		Span<PointD> aaPoints = stackalloc PointD[settings.antiAliasSampleCount];
-		Utility.GetRgssOffsets (aaPoints, settings.antiAliasSampleCount, effect.Data.Quality);
-
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 
@@ -141,7 +140,6 @@ public static class Warp
 					settings,
 					src,
 					src_data,
-					aaPoints,
 					relativeY,
 					pixel.coordinates);
 			}
@@ -151,13 +149,15 @@ public static class Warp
 	private static WarpSettings CreateSettings<TEffectData> (IWarpEffect<TEffectData> effect) where TEffectData : EffectData, IWarpData
 	{
 		RectangleI selection = effect.LivePreview.RenderBounds;
+		int antiAliasSampleCount = effect.Data.Quality * effect.Data.Quality;
 		double defaultRadius = Math.Min (selection.Width, selection.Height) * 0.5;
+		ImmutableArray<PointD> antiAliasPoints = Utility.GetRgssOffsets (antiAliasSampleCount, effect.Data.Quality);
 		return new (
 			xCenterOffset: selection.Left + (selection.Width * (1.0 + effect.Data.CenterOffset.X) * 0.5),
 			yCenterOffset: selection.Top + (selection.Height * (1.0 + effect.Data.CenterOffset.Y) * 0.5),
 			primaryColor: effect.Palette.PrimaryColor.ToColorBgra (),
 			secondaryColor: effect.Palette.SecondaryColor.ToColorBgra (),
-			antiAliasSampleCount: effect.Data.Quality * effect.Data.Quality,
+			antiAliasPoints: antiAliasPoints,
 			edgeBehavior: effect.Data.EdgeBehavior,
 			defaultRadius: defaultRadius,
 			defaultRadius2: defaultRadius * defaultRadius);
@@ -168,20 +168,19 @@ public static class Warp
 		WarpSettings settings,
 		ImageSurface src,
 		ReadOnlySpan<ColorBgra> src_data,
-		ReadOnlySpan<PointD> aaPoints,
 		double relativeY,
 		PointI target
 	)
 		where TEffectData : EffectData, IWarpData
 	{
-		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasSampleCount];
+		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasPoints.Length];
 		double relativeX = target.X - settings.xCenterOffset;
 		int sampleCount = 0;
-		for (int p = 0; p < settings.antiAliasSampleCount; ++p) {
+		for (int p = 0; p < settings.antiAliasPoints.Length; ++p) {
 
 			Warp.TransformData initialTd = new (
-				X: relativeX + aaPoints[p].X,
-				Y: relativeY - aaPoints[p].Y);
+				X: relativeX + settings.antiAliasPoints[p].X,
+				Y: relativeY - settings.antiAliasPoints[p].Y);
 
 			Warp.TransformData td = effect.InverseTransform (initialTd, settings);
 

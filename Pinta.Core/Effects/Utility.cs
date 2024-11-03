@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Numerics;
 using System.Reflection;
 using Cairo;
@@ -160,10 +161,7 @@ public static class Utility
 		return (byte) r2;
 	}
 
-	public static void GetRgssOffsets (
-		Span<PointD> samplesArray,
-		int sampleCount,
-		int quality)
+	public static ImmutableArray<PointD> GetRgssOffsets (int sampleCount, int quality)
 	{
 		if (sampleCount < 1)
 			throw new ArgumentOutOfRangeException (nameof (sampleCount), $"{nameof (sampleCount)} must be [0, int.MaxValue]");
@@ -171,11 +169,11 @@ public static class Utility
 		if (sampleCount != quality * quality)
 			throw new ArgumentException ($"{nameof (sampleCount)} != ({nameof (quality)} * {nameof (quality)})");
 
-		if (sampleCount == 1) {
-			samplesArray[0] = PointD.Zero;
-			return;
-		}
+		if (sampleCount == 1)
+			return ImmutableArray.Create (PointD.Zero);
 
+		var builder = ImmutableArray.CreateBuilder<PointD> ();
+		builder.Count = sampleCount;
 		for (int i = 0; i < sampleCount; ++i) {
 
 			double y = (i + 1d) / (sampleCount + 1d);
@@ -183,8 +181,9 @@ public static class Utility
 			double baseX = y * quality;
 			double x = baseX - Math.Truncate (baseX);
 
-			samplesArray[i] = new PointD (x - 0.5d, y - 0.5d);
+			builder[i] = new PointD (x - 0.5d, y - 0.5d);
 		}
+		return builder.DrainToImmutable ();
 	}
 
 	public static int FastDivideShortByByte (ushort n, byte d)
