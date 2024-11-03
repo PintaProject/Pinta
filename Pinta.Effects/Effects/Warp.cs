@@ -65,7 +65,7 @@ public static class Warp
 		double defaultRadius,
 		double defaultRadius2);
 
-	private static bool IsOnSurface (ImageSurface src, float u, float v)
+	private static bool IsOnSurface (this ImageSurface src, float u, float v)
 		=> (u >= 0 && u <= (src.Width - 1) && v >= 0 && v <= (src.Height - 1));
 
 	private static float ReflectCoord (float value, int max)
@@ -149,7 +149,7 @@ public static class Warp
 		PixelOffset targetPixel,
 		PointF preliminarySample)
 	{
-		if (IsOnSurface (src, preliminarySample.X, preliminarySample.Y))
+		if (src.IsOnSurface (preliminarySample.X, preliminarySample.Y))
 			return src.GetBilinearSample (preliminarySample.X, preliminarySample.Y);
 
 		return settings.edgeBehavior switch {
@@ -160,7 +160,7 @@ public static class Warp
 			WarpEdgeBehavior.Secondary => settings.secondaryColor,
 			WarpEdgeBehavior.Transparent => ColorBgra.Transparent,
 			WarpEdgeBehavior.Original => src_data[targetPixel.memoryOffset],
-			_ => throw new ArgumentException($"{nameof(settings.edgeBehavior)} is out of range", nameof(settings)),
+			_ => throw new ArgumentException ($"{nameof (settings.edgeBehavior)} is out of range", nameof (settings)),
 		};
 	}
 }
