@@ -64,7 +64,7 @@ public sealed class PolarInversionEffect : BaseEffect
 					settings,
 					InverseTransform,
 					src,
-					src_data,
+					src_data[pixel.memoryOffset],
 					pixel);
 			}
 		}

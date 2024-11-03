@@ -111,7 +111,7 @@ public static class Warp
 		Settings settings,
 		TransformInverter transformInverter,
 		ImageSurface src,
-		ReadOnlySpan<ColorBgra> src_data,
+		ColorBgra originalColor,
 		PixelOffset targetPixel)
 	{
 		double relativeY = targetPixel.coordinates.Y - settings.yCenterOffset;
@@ -133,7 +133,7 @@ public static class Warp
 			samples[sampleCount] = GetSample (
 				settings,
 				src,
-				src_data,
+				originalColor,
 				targetPixel,
 				preliminarySample);
 
@@ -145,7 +145,7 @@ public static class Warp
 	private static ColorBgra GetSample (
 		Settings settings,
 		ImageSurface src,
-		ReadOnlySpan<ColorBgra> src_data,
+		ColorBgra originalColor,
 		PixelOffset targetPixel,
 		PointF preliminarySample)
 	{
@@ -159,7 +159,7 @@ public static class Warp
 			WarpEdgeBehavior.Primary => settings.primaryColor,
 			WarpEdgeBehavior.Secondary => settings.secondaryColor,
 			WarpEdgeBehavior.Transparent => ColorBgra.Transparent,
-			WarpEdgeBehavior.Original => src_data[targetPixel.memoryOffset],
+			WarpEdgeBehavior.Original => originalColor,
 			_ => throw new ArgumentException ($"{nameof (settings.edgeBehavior)} is out of range", nameof (settings)),
 		};
 	}
