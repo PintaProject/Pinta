@@ -135,12 +135,10 @@ public static class Warp
 
 		foreach (RectangleI rect in rois) {
 			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
-				double relativeY = pixel.coordinates.Y - settings.yCenterOffset;
 				dst_data[pixel.memoryOffset] = effect.GetPixelColor (
 					settings,
 					src,
 					src_data,
-					relativeY,
 					pixel.coordinates);
 			}
 		}
@@ -168,11 +166,11 @@ public static class Warp
 		WarpSettings settings,
 		ImageSurface src,
 		ReadOnlySpan<ColorBgra> src_data,
-		double relativeY,
 		PointI target
 	)
 		where TEffectData : EffectData, IWarpData
 	{
+		double relativeY = target.Y - settings.yCenterOffset;
 		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasPoints.Length];
 		double relativeX = target.X - settings.xCenterOffset;
 		int sampleCount = 0;
