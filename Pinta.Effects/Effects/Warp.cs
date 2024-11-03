@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Drawing;
 using Cairo;
@@ -22,19 +21,6 @@ public interface IWarpData
 	int Quality { get; }
 	PointD CenterOffset { get; }
 	WarpEdgeBehavior EdgeBehavior { get; }
-}
-
-public interface IWarpEffect<TEffectData> where TEffectData : EffectData, IWarpData
-{
-	Warp.TransformData InverseTransform (
-		Warp.TransformData data,
-		WarpSettings settings);
-
-	TEffectData Data { get; }
-
-	// TODO: Remove service dependencies
-	LivePreviewManager LivePreview { get; }
-	IPaletteService Palette { get; }
 }
 
 public enum WarpEdgeBehavior
@@ -61,22 +47,26 @@ public enum WarpEdgeBehavior
 	Original,
 }
 
-public sealed record WarpSettings (
-	double xCenterOffset,
-	double yCenterOffset,
-	ColorBgra primaryColor,
-	ColorBgra secondaryColor,
-	ImmutableArray<PointD> antiAliasPoints,
-	WarpEdgeBehavior edgeBehavior,
-	double defaultRadius,
-	double defaultRadius2);
-
 public static class Warp
 {
 	public readonly record struct TransformData (double X, double Y);
 
+	public delegate TransformData TransformInverter (
+		Settings warpSettings,
+		TransformData transform);
+
+	public sealed record Settings (
+		double xCenterOffset,
+		double yCenterOffset,
+		ColorBgra primaryColor,
+		ColorBgra secondaryColor,
+		ImmutableArray<PointD> antiAliasPoints,
+		WarpEdgeBehavior edgeBehavior,
+		double defaultRadius,
+		double defaultRadius2);
+
 	private static ColorBgra GetSample (
-		this WarpSettings settings,
+		this Warp.Settings settings,
 		ImageSurface src,
 		ReadOnlySpan<ColorBgra> src_data,
 		PointI target,
@@ -120,55 +110,32 @@ public static class Warp
 		return value;
 	}
 
-	public static void RenderWarpEffect<TEffectData> (
-		this IWarpEffect<TEffectData> effect,
-		ImageSurface src,
-		ImageSurface dst,
-		ReadOnlySpan<RectangleI> rois
-	)
-		where TEffectData : EffectData, IWarpData
+	public static Warp.Settings CreateSettings (
+		IWarpData warpData,
+		LivePreviewManager livePreview,
+		IPaletteService palette)
 	{
-		WarpSettings settings = CreateSettings (effect);
-
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-
-		foreach (RectangleI rect in rois) {
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
-				dst_data[pixel.memoryOffset] = effect.GetPixelColor (
-					settings,
-					src,
-					src_data,
-					pixel.coordinates);
-			}
-		}
-	}
-
-	private static WarpSettings CreateSettings<TEffectData> (IWarpEffect<TEffectData> effect) where TEffectData : EffectData, IWarpData
-	{
-		RectangleI selection = effect.LivePreview.RenderBounds;
-		int antiAliasSampleCount = effect.Data.Quality * effect.Data.Quality;
+		RectangleI selection = livePreview.RenderBounds;
+		int antiAliasSampleCount = warpData.Quality * warpData.Quality;
 		double defaultRadius = Math.Min (selection.Width, selection.Height) * 0.5;
-		ImmutableArray<PointD> antiAliasPoints = Utility.GetRgssOffsets (antiAliasSampleCount, effect.Data.Quality);
+		ImmutableArray<PointD> antiAliasPoints = Utility.GetRgssOffsets (antiAliasSampleCount, warpData.Quality);
 		return new (
-			xCenterOffset: selection.Left + (selection.Width * (1.0 + effect.Data.CenterOffset.X) * 0.5),
-			yCenterOffset: selection.Top + (selection.Height * (1.0 + effect.Data.CenterOffset.Y) * 0.5),
-			primaryColor: effect.Palette.PrimaryColor.ToColorBgra (),
-			secondaryColor: effect.Palette.SecondaryColor.ToColorBgra (),
+			xCenterOffset: selection.Left + (selection.Width * (1.0 + warpData.CenterOffset.X) * 0.5),
+			yCenterOffset: selection.Top + (selection.Height * (1.0 + warpData.CenterOffset.Y) * 0.5),
+			primaryColor: palette.PrimaryColor.ToColorBgra (),
+			secondaryColor: palette.SecondaryColor.ToColorBgra (),
 			antiAliasPoints: antiAliasPoints,
-			edgeBehavior: effect.Data.EdgeBehavior,
+			edgeBehavior: warpData.EdgeBehavior,
 			defaultRadius: defaultRadius,
 			defaultRadius2: defaultRadius * defaultRadius);
 	}
 
-	private static ColorBgra GetPixelColor<TEffectData> (
-		this IWarpEffect<TEffectData> effect,
-		WarpSettings settings,
+	public static ColorBgra GetPixelColor (
+		Warp.Settings settings,
+		TransformInverter transformInverter,
 		ImageSurface src,
 		ReadOnlySpan<ColorBgra> src_data,
-		PointI target
-	)
-		where TEffectData : EffectData, IWarpData
+		PointI target)
 	{
 		double relativeY = target.Y - settings.yCenterOffset;
 		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasPoints.Length];

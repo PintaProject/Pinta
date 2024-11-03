@@ -37,7 +37,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class DentsEffect : BaseEffect, IWarpEffect<DentsData>
+public sealed class DentsEffect : BaseEffect
 {
 	public sealed override string Icon
 		=> Resources.Icons.EffectsDistortDents;
@@ -59,28 +59,40 @@ public sealed class DentsEffect : BaseEffect, IWarpEffect<DentsData>
 		=> true;
 
 	public override Task<bool> LaunchConfiguration ()
-		=> Chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this);
 
-	public IChromeService Chrome { get; }
-	public LivePreviewManager LivePreview { get; }
-	public IPaletteService Palette { get; }
+	private readonly IChromeService chrome;
+	private readonly LivePreviewManager live_preview;
+	private readonly IPaletteService palette;
 	public DentsEffect (IServiceProvider services)
 	{
-		Chrome = services.GetService<IChromeService> ();
-		LivePreview = services.GetService<LivePreviewManager> ();
-		Palette = services.GetService<IPaletteService> ();
+		chrome = services.GetService<IChromeService> ();
+		live_preview = services.GetService<LivePreviewManager> ();
+		palette = services.GetService<IPaletteService> ();
 		EffectData = new DentsData ();
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		this.RenderWarpEffect (src, dst, rois);
+		Warp.Settings settings = Warp.CreateSettings (Data, live_preview, palette);
+		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+		foreach (RectangleI rect in rois) {
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
+				dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
+					settings,
+					InverseTransform,
+					src,
+					src_data,
+					pixel.coordinates);
+			}
+		}
 	}
 
 	// Algorithm code ported from PDN
 	public Warp.TransformData InverseTransform (
-		Warp.TransformData data,
-		WarpSettings settings)
+		Warp.Settings settings,
+		Warp.TransformData data)
 	{
 		double scale = Data.Scale;
 
