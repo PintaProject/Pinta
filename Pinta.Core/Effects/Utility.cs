@@ -183,7 +183,7 @@ public static class Utility
 
 			builder[i] = new PointD (x - 0.5d, y - 0.5d);
 		}
-		return builder.DrainToImmutable ();
+		return builder.MoveToImmutable ();
 	}
 
 	public static int FastDivideShortByByte (ushort n, byte d)
