@@ -66,7 +66,7 @@ public static class Warp
 		double defaultRadius2);
 
 	private static ColorBgra GetSample (
-		this Warp.Settings settings,
+		this Settings settings,
 		ImageSurface src,
 		ReadOnlySpan<ColorBgra> src_data,
 		PointI target,
@@ -110,7 +110,7 @@ public static class Warp
 		return value;
 	}
 
-	public static Warp.Settings CreateSettings (
+	public static Settings CreateSettings (
 		IWarpData warpData,
 		RectangleI selectionBounds,
 		IPaletteService palette)
@@ -130,7 +130,7 @@ public static class Warp
 	}
 
 	public static ColorBgra GetPixelColor (
-		Warp.Settings settings,
+		Settings settings,
 		TransformInverter transformInverter,
 		ImageSurface src,
 		ReadOnlySpan<ColorBgra> src_data,
@@ -142,11 +142,11 @@ public static class Warp
 		int sampleCount = 0;
 		for (int p = 0; p < settings.antiAliasPoints.Length; ++p) {
 
-			Warp.TransformData initialTd = new (
+			TransformData initialTd = new (
 				X: relativeX + settings.antiAliasPoints[p].X,
 				Y: relativeY - settings.antiAliasPoints[p].Y);
 
-			Warp.TransformData td = transformInverter (settings, initialTd);
+			TransformData td = transformInverter (settings, initialTd);
 
 			PointF preliminarySample = new (
 				x: (float) (td.X + settings.xCenterOffset),
