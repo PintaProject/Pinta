@@ -18,7 +18,7 @@ public sealed class CanvasRenderer
 {
 	private static readonly Cairo.Pattern tranparent_pattern;
 
-	private readonly bool enable_pixel_grid;
+	private readonly bool enable_grid;
 	private readonly bool enable_live_preview;
 
 	private Size source_size;
@@ -30,9 +30,9 @@ public sealed class CanvasRenderer
 	private ImmutableArray<int>? s_2_d_lookup_x;
 	private ImmutableArray<int>? s_2_d_lookup_y;
 
-	public CanvasRenderer (bool enable_pixel_grid, bool enableLivePreview)
+	public CanvasRenderer (bool enableGrid, bool enableLivePreview)
 	{
-		this.enable_pixel_grid = enable_pixel_grid;
+		enable_grid = enableGrid;
 		enable_live_preview = enableLivePreview;
 	}
 
@@ -104,7 +104,7 @@ public sealed class CanvasRenderer
 		}
 
 		// If we are at least 200% and grid is requested, draw it
-		if (enable_pixel_grid && PintaCore.Actions.View.PixelGrid.Value && scale_factor.Ratio <= 0.5d)
+		if (enable_grid && PintaCore.Actions.View.EnableCanvasGrid.Value && scale_factor.Ratio <= 0.5d)
 			RenderPixelGrid (dst, offset);
 
 		dst.MarkDirty ();
