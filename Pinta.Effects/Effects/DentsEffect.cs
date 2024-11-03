@@ -74,7 +74,11 @@ public sealed class DentsEffect : BaseEffect
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		Warp.Settings settings = Warp.CreateSettings (Data, live_preview, palette);
+		Warp.Settings settings = Warp.CreateSettings (
+			Data,
+			live_preview.RenderBounds,
+			palette);
+
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		foreach (RectangleI rect in rois) {

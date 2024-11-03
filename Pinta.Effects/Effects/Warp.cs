@@ -112,16 +112,15 @@ public static class Warp
 
 	public static Warp.Settings CreateSettings (
 		IWarpData warpData,
-		LivePreviewManager livePreview,
+		RectangleI selectionBounds,
 		IPaletteService palette)
 	{
-		RectangleI selection = livePreview.RenderBounds;
 		int antiAliasSampleCount = warpData.Quality * warpData.Quality;
-		double defaultRadius = Math.Min (selection.Width, selection.Height) * 0.5;
+		double defaultRadius = Math.Min (selectionBounds.Width, selectionBounds.Height) * 0.5;
 		ImmutableArray<PointD> antiAliasPoints = Utility.GetRgssOffsets (antiAliasSampleCount, warpData.Quality);
 		return new (
-			xCenterOffset: selection.Left + (selection.Width * (1.0 + warpData.CenterOffset.X) * 0.5),
-			yCenterOffset: selection.Top + (selection.Height * (1.0 + warpData.CenterOffset.Y) * 0.5),
+			xCenterOffset: selectionBounds.Left + (selectionBounds.Width * (1.0 + warpData.CenterOffset.X) * 0.5),
+			yCenterOffset: selectionBounds.Top + (selectionBounds.Height * (1.0 + warpData.CenterOffset.Y) * 0.5),
 			primaryColor: palette.PrimaryColor.ToColorBgra (),
 			secondaryColor: palette.SecondaryColor.ToColorBgra (),
 			antiAliasPoints: antiAliasPoints,
@@ -147,7 +146,7 @@ public static class Warp
 				X: relativeX + settings.antiAliasPoints[p].X,
 				Y: relativeY - settings.antiAliasPoints[p].Y);
 
-			Warp.TransformData td = effect.InverseTransform (initialTd, settings);
+			Warp.TransformData td = transformInverter (settings, initialTd);
 
 			PointF preliminarySample = new (
 				x: (float) (td.X + settings.xCenterOffset),
