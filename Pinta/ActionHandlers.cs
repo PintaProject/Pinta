@@ -27,6 +27,7 @@
 using System.Collections.Generic;
 using Pinta.Actions;
 using Pinta.Core;
+using Pinta.Core.Managers;
 
 namespace Pinta;
 
@@ -45,6 +46,7 @@ public sealed class ActionHandlers
 		SystemManager system = PintaCore.System;
 		ToolManager tools = PintaCore.Tools;
 		PaletteManager palette = PintaCore.Palette;
+		CanvasGridManager canvasGrid = PintaCore.CanvasGrid;
 		string applicationVersion = PintaCore.ApplicationVersion;
 
 		action_handlers = new ()
@@ -83,6 +85,7 @@ public sealed class ActionHandlers
 			new StatusBarToggledAction (actions.View, chrome),
 			new ToolBoxToggledAction (actions.View, chrome),
 			new ColorSchemeChangedAction (actions.View),
+			new EditCanvasGridAction(actions.View, chrome, canvasGrid),
 
 			// Window
 			new CloseAllDocumentsAction (actions, workspace),

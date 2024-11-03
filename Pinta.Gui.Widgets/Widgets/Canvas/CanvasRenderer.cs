@@ -132,7 +132,9 @@ public sealed class CanvasRenderer
 
 		var lookup_y = S2DLookupY;
 
-		for (int srcY = sTop; srcY <= sBottom; ++srcY) {
+		var gridHeight = PintaCore.CanvasGrid.CellHeight;
+
+		for (int srcY = sTop; srcY <= sBottom; srcY += gridHeight) {
 
 			int dstY = lookup_y[srcY];
 			int dstRow = dstY - offset.Y;
@@ -153,7 +155,9 @@ public sealed class CanvasRenderer
 
 		var lookup_x = S2DLookupX;
 
-		for (int srcX = sLeft; srcX <= sRight; ++srcX) {
+		var gridWidth = PintaCore.CanvasGrid.CellWidth;
+
+		for (int srcX = sLeft; srcX <= sRight; srcX += gridWidth) {
 
 			int dstX = lookup_x[srcX];
 			int dstCol = dstX - offset.X;

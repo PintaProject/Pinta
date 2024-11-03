@@ -24,6 +24,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using Pinta.Core.Managers;
+
 namespace Pinta.Core;
 
 public static class PintaCore
@@ -43,6 +45,7 @@ public static class PintaCore
 	public static SystemManager System { get; }
 	public static ToolManager Tools { get; }
 	public static WorkspaceManager Workspace { get; }
+	public static CanvasGridManager CanvasGrid { get; }
 
 	public const string ApplicationVersion = "2.2";
 
@@ -57,6 +60,7 @@ public static class PintaCore
 		PaintBrushManager paintBrushes = new ();
 		PaletteFormatManager paletteFormats = new ();
 		RecentFileManager recentFiles = new ();
+		CanvasGridManager canvasGrid = new ();
 
 		// --- Services that depend on other services
 
@@ -86,6 +90,7 @@ public static class PintaCore
 		services.AddService<IChromeService> (chrome);
 		services.AddService<ISystemService> (system);
 		services.AddService (effects);
+		services.AddService (canvasGrid);
 
 		// --- References to expose
 
@@ -103,6 +108,7 @@ public static class PintaCore
 		Palette = palette;
 		Chrome = chrome;
 		Effects = effects;
+		CanvasGrid = canvasGrid;
 
 		Services = services;
 	}
