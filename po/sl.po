@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-10-13 01:37+0000\n"
-"PO-Revision-Date: 2024-07-30 11:09+0000\n"
+"PO-Revision-Date: 2024-11-01 12:00+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -91,7 +91,7 @@ msgstr "Po izbiri"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Poravnani predmet"
 
 #: ../Pinta.Core/Actions/EditActions.cs:390
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
@@ -101,7 +101,7 @@ msgstr "Vse datoteke"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Alfa preliv"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:110
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
@@ -239,15 +239,15 @@ msgstr "Kres"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "Spodaj v sredini"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "Spodaj levo"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "Spodaj desno"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:144
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
@@ -306,7 +306,7 @@ msgstr "Velikost celice"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "V sredini"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:234
 msgid "Center Align"
@@ -314,7 +314,7 @@ msgstr "Središčna poravnava"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "Levo v sredini"
 
 #: ../Pinta.Effects/Effects/WarpEffect.cs:185
 msgid "Center Offset"
@@ -322,7 +322,7 @@ msgstr "Osrediščen odmik"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "Desno v sredini"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:128
 msgid "Centered"
@@ -468,7 +468,7 @@ msgstr "Barvni izogib"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:213
 msgid "Color Gradient"
-msgstr ""
+msgstr "Barvni preliv"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
@@ -771,11 +771,11 @@ msgstr "Spodletel je zajem zaslonske slike"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:173
 msgid "Feather Canvas Edge"
-msgstr ""
+msgstr "Rob peresnega platna"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather Object"
-msgstr ""
+msgstr "Peresni predmet"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -791,7 +791,7 @@ msgstr "Zapolni ozadje"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:219
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Zapolni ozadje predmeta"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:228
@@ -1486,7 +1486,7 @@ msgstr "Število niti uporabljene za izvajanje"
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "Predmet"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:113
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:174
@@ -1558,15 +1558,15 @@ msgstr "Obroba"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:216
 msgid "Outline Border"
-msgstr ""
+msgstr "Očrtaj mejo"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:27
 msgid "Outline Edge"
-msgstr ""
+msgstr "Očrtaj rob"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
 msgid "Outline Object"
-msgstr ""
+msgstr "Očrtaj predmet"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
@@ -1737,7 +1737,7 @@ msgstr "Pokončno"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:135
 msgid "Position"
-msgstr ""
+msgstr "Položaj"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -2312,15 +2312,15 @@ msgstr "Orodna vrstica"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
-msgstr ""
+msgstr "Zgoraj v sredini"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
-msgstr ""
+msgstr "Zgoraj levo"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
-msgstr ""
+msgstr "Zgoraj desno"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
