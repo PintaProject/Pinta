@@ -65,7 +65,7 @@ public sealed class PolarInversionEffect : BaseEffect
 					InverseTransform,
 					src,
 					src_data,
-					pixel.coordinates);
+					pixel);
 			}
 		}
 	}

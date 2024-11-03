@@ -88,7 +88,7 @@ public sealed class DentsEffect : BaseEffect
 					InverseTransform,
 					src,
 					src_data,
-					pixel.coordinates);
+					pixel);
 			}
 		}
 	}

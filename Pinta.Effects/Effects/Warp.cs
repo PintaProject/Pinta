@@ -65,28 +65,6 @@ public static class Warp
 		double defaultRadius,
 		double defaultRadius2);
 
-	private static ColorBgra GetSample (
-		this Settings settings,
-		ImageSurface src,
-		ReadOnlySpan<ColorBgra> src_data,
-		PointI target,
-		PointF preliminarySample)
-	{
-		if (IsOnSurface (src, preliminarySample.X, preliminarySample.Y))
-			return src.GetBilinearSample (preliminarySample.X, preliminarySample.Y);
-
-		return settings.edgeBehavior switch {
-			WarpEdgeBehavior.Clamp => src.GetBilinearSampleClamped (preliminarySample.X, preliminarySample.Y),
-			WarpEdgeBehavior.Wrap => src.GetBilinearSampleWrapped (preliminarySample.X, preliminarySample.Y),
-			WarpEdgeBehavior.Reflect => src.GetBilinearSampleClamped (ReflectCoord (preliminarySample.X, src.Width), ReflectCoord (preliminarySample.Y, src.Height)),
-			WarpEdgeBehavior.Primary => settings.primaryColor,
-			WarpEdgeBehavior.Secondary => settings.secondaryColor,
-			WarpEdgeBehavior.Transparent => ColorBgra.Transparent,
-			WarpEdgeBehavior.Original => src_data[target.Y * src.Width + target.X],
-			_ => settings.primaryColor,
-		};
-	}
-
 	private static bool IsOnSurface (ImageSurface src, float u, float v)
 		=> (u >= 0 && u <= (src.Width - 1) && v >= 0 && v <= (src.Height - 1));
 
@@ -134,11 +112,11 @@ public static class Warp
 		TransformInverter transformInverter,
 		ImageSurface src,
 		ReadOnlySpan<ColorBgra> src_data,
-		PointI target)
+		PixelOffset targetPixel)
 	{
-		double relativeY = target.Y - settings.yCenterOffset;
+		double relativeY = targetPixel.coordinates.Y - settings.yCenterOffset;
 		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasPoints.Length];
-		double relativeX = target.X - settings.xCenterOffset;
+		double relativeX = targetPixel.coordinates.X - settings.xCenterOffset;
 		int sampleCount = 0;
 		for (int p = 0; p < settings.antiAliasPoints.Length; ++p) {
 
@@ -152,14 +130,37 @@ public static class Warp
 				x: (float) (td.X + settings.xCenterOffset),
 				y: (float) (td.Y + settings.yCenterOffset));
 
-			samples[sampleCount] = settings.GetSample (
+			samples[sampleCount] = GetSample (
+				settings,
 				src,
 				src_data,
-				target,
+				targetPixel,
 				preliminarySample);
 
 			++sampleCount;
 		}
 		return ColorBgra.Blend (samples[..sampleCount]);
+	}
+
+	private static ColorBgra GetSample (
+		Settings settings,
+		ImageSurface src,
+		ReadOnlySpan<ColorBgra> src_data,
+		PixelOffset targetPixel,
+		PointF preliminarySample)
+	{
+		if (IsOnSurface (src, preliminarySample.X, preliminarySample.Y))
+			return src.GetBilinearSample (preliminarySample.X, preliminarySample.Y);
+
+		return settings.edgeBehavior switch {
+			WarpEdgeBehavior.Clamp => src.GetBilinearSampleClamped (preliminarySample.X, preliminarySample.Y),
+			WarpEdgeBehavior.Wrap => src.GetBilinearSampleWrapped (preliminarySample.X, preliminarySample.Y),
+			WarpEdgeBehavior.Reflect => src.GetBilinearSampleClamped (ReflectCoord (preliminarySample.X, src.Width), ReflectCoord (preliminarySample.Y, src.Height)),
+			WarpEdgeBehavior.Primary => settings.primaryColor,
+			WarpEdgeBehavior.Secondary => settings.secondaryColor,
+			WarpEdgeBehavior.Transparent => ColorBgra.Transparent,
+			WarpEdgeBehavior.Original => src_data[targetPixel.memoryOffset],
+			_ => throw new ArgumentException($"{nameof(settings.edgeBehavior)} is out of range", nameof(settings)),
+		};
 	}
 }
