@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Numerics;
 using System.Reflection;
 using Cairo;
@@ -485,10 +484,9 @@ public static class Utility
 	/// </summary>
 	private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, RectangleI rect, int y)
 	{
-		for (int x = rect.Left; x < rect.Right; ++x) {
+		for (int x = rect.Left; x < rect.Right; ++x)
 			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
 				return false;
-		}
 
 		return true;
 	}
@@ -498,10 +496,9 @@ public static class Utility
 	/// </summary>
 	private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, RectangleI rect, int x)
 	{
-		for (int y = rect.Top; y < rect.Bottom; ++y) {
+		for (int y = rect.Top; y < rect.Bottom; ++y)
 			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
 				return false;
-		}
 
 		return true;
 	}
