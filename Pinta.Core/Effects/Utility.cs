@@ -161,7 +161,7 @@ public static class Utility
 		return (byte) r2;
 	}
 
-	public static ImmutableArray<PointD> GetRgssOffsets (int sampleCount, int quality)
+	public static IReadOnlyList<PointD> GetRgssOffsets (int sampleCount, int quality)
 	{
 		if (sampleCount < 1)
 			throw new ArgumentOutOfRangeException (nameof (sampleCount), $"{nameof (sampleCount)} must be [0, int.MaxValue]");
@@ -170,10 +170,9 @@ public static class Utility
 			throw new ArgumentException ($"{nameof (sampleCount)} != ({nameof (quality)} * {nameof (quality)})");
 
 		if (sampleCount == 1)
-			return ImmutableArray.Create (PointD.Zero);
+			return new[] { PointD.Zero };
 
-		var builder = ImmutableArray.CreateBuilder<PointD> ();
-		builder.Count = sampleCount;
+		var result = new PointD[sampleCount];
 		for (int i = 0; i < sampleCount; ++i) {
 
 			double y = (i + 1d) / (sampleCount + 1d);
@@ -181,9 +180,9 @@ public static class Utility
 			double baseX = y * quality;
 			double x = baseX - Math.Truncate (baseX);
 
-			builder[i] = new PointD (x - 0.5d, y - 0.5d);
+			result[i] = new PointD (x - 0.5d, y - 0.5d);
 		}
-		return builder.MoveToImmutable ();
+		return result;
 	}
 
 	public static int FastDivideShortByByte (ushort n, byte d)

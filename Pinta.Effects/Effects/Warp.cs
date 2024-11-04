@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Drawing;
 using Cairo;
@@ -60,7 +61,7 @@ public static class Warp
 		double yCenterOffset,
 		ColorBgra primaryColor,
 		ColorBgra secondaryColor,
-		ImmutableArray<PointD> antiAliasPoints,
+		IReadOnlyList<PointD> antiAliasPoints,
 		WarpEdgeBehavior edgeBehavior,
 		double defaultRadius,
 		double defaultRadius2);
@@ -95,7 +96,7 @@ public static class Warp
 	{
 		int antiAliasSampleCount = warpData.Quality * warpData.Quality;
 		double defaultRadius = Math.Min (selectionBounds.Width, selectionBounds.Height) * 0.5;
-		ImmutableArray<PointD> antiAliasPoints = Utility.GetRgssOffsets (antiAliasSampleCount, warpData.Quality);
+		IReadOnlyList<PointD> antiAliasPoints = Utility.GetRgssOffsets (antiAliasSampleCount, warpData.Quality);
 		return new (
 			xCenterOffset: selectionBounds.Left + (selectionBounds.Width * (1.0 + warpData.CenterOffset.X) * 0.5),
 			yCenterOffset: selectionBounds.Top + (selectionBounds.Height * (1.0 + warpData.CenterOffset.Y) * 0.5),
@@ -115,10 +116,10 @@ public static class Warp
 		PixelOffset targetPixel)
 	{
 		double relativeY = targetPixel.coordinates.Y - settings.yCenterOffset;
-		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasPoints.Length];
+		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasPoints.Count];
 		double relativeX = targetPixel.coordinates.X - settings.xCenterOffset;
 		int sampleCount = 0;
-		for (int p = 0; p < settings.antiAliasPoints.Length; ++p) {
+		for (int p = 0; p < settings.antiAliasPoints.Count; ++p) {
 
 			TransformData initialTd = new (
 				X: relativeX + settings.antiAliasPoints[p].X,
