@@ -21,7 +21,7 @@ namespace Pinta.Core;
 /// </summary>
 public abstract class ColorDifferenceEffect : BaseEffect
 {
-	public void RenderColorDifferenceEffect (
+	public static void RenderColorDifferenceEffect (
 		double[,] weights,
 		ImageSurface src,
 		ImageSurface dest,

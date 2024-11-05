@@ -48,7 +48,7 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		var weights = ComputeWeights (Data.Angle.ToRadians ());
-		base.RenderColorDifferenceEffect (weights, src, dest, rois);
+		RenderColorDifferenceEffect (weights, src, dest, rois);
 	}
 
 	private static double[,] ComputeWeights (RadiansAngle angle)

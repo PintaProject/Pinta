@@ -44,7 +44,7 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 	public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		var weights = ComputeWeights (Data.Angle.ToRadians ());
-		base.RenderColorDifferenceEffect (weights, src, dst, rois);
+		RenderColorDifferenceEffect (weights, src, dst, rois);
 	}
 
 	private static double[,] ComputeWeights (RadiansAngle angle)
