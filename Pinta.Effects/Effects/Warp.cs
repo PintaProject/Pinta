@@ -9,7 +9,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Drawing;
 using Cairo;
 using Pinta.Core;
@@ -17,39 +16,39 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public interface IWarpData
-{
-	int Quality { get; }
-	PointD CenterOffset { get; }
-	WarpEdgeBehavior EdgeBehavior { get; }
-}
-
-public enum WarpEdgeBehavior
-{
-	[Caption ("Clamp")]
-	Clamp,
-
-	[Caption ("Wrap")]
-	Wrap,
-
-	[Caption ("Reflect")]
-	Reflect,
-
-	[Caption ("Primary")]
-	Primary,
-
-	[Caption ("Secondary")]
-	Secondary,
-
-	[Caption ("Transparent")]
-	Transparent,
-
-	[Caption ("Original")]
-	Original,
-}
-
 public static class Warp
 {
+	public interface IEffectData
+	{
+		int Quality { get; }
+		PointD CenterOffset { get; }
+		EdgeBehavior EdgeBehavior { get; }
+	}
+
+	public enum EdgeBehavior
+	{
+		[Caption ("Clamp")]
+		Clamp,
+
+		[Caption ("Wrap")]
+		Wrap,
+
+		[Caption ("Reflect")]
+		Reflect,
+
+		[Caption ("Primary")]
+		Primary,
+
+		[Caption ("Secondary")]
+		Secondary,
+
+		[Caption ("Transparent")]
+		Transparent,
+
+		[Caption ("Original")]
+		Original,
+	}
+
 	public readonly record struct TransformData (double X, double Y);
 
 	public delegate TransformData TransformInverter (
@@ -57,12 +56,11 @@ public static class Warp
 		TransformData transform);
 
 	public sealed record Settings (
-		double xCenterOffset,
-		double yCenterOffset,
+		PointD centerOffset,
 		ColorBgra primaryColor,
 		ColorBgra secondaryColor,
 		IReadOnlyList<PointD> antiAliasPoints,
-		WarpEdgeBehavior edgeBehavior,
+		EdgeBehavior edgeBehavior,
 		double defaultRadius,
 		double defaultRadius2);
 
@@ -90,16 +88,18 @@ public static class Warp
 	}
 
 	public static Settings CreateSettings (
-		IWarpData warpData,
+		IEffectData warpData,
 		RectangleI selectionBounds,
 		IPaletteService palette)
 	{
 		int antiAliasSampleCount = warpData.Quality * warpData.Quality;
 		double defaultRadius = Math.Min (selectionBounds.Width, selectionBounds.Height) * 0.5;
 		IReadOnlyList<PointD> antiAliasPoints = Utility.GetRgssOffsets (antiAliasSampleCount, warpData.Quality);
+		PointD centerOffset = new (
+			X: selectionBounds.Left + (selectionBounds.Width * (1.0 + warpData.CenterOffset.X) * 0.5),
+			Y: selectionBounds.Top + (selectionBounds.Height * (1.0 + warpData.CenterOffset.Y) * 0.5));
 		return new (
-			xCenterOffset: selectionBounds.Left + (selectionBounds.Width * (1.0 + warpData.CenterOffset.X) * 0.5),
-			yCenterOffset: selectionBounds.Top + (selectionBounds.Height * (1.0 + warpData.CenterOffset.Y) * 0.5),
+			centerOffset: centerOffset,
 			primaryColor: palette.PrimaryColor.ToColorBgra (),
 			secondaryColor: palette.SecondaryColor.ToColorBgra (),
 			antiAliasPoints: antiAliasPoints,
@@ -115,27 +115,27 @@ public static class Warp
 		ColorBgra originalColor,
 		PixelOffset targetPixel)
 	{
-		double relativeY = targetPixel.coordinates.Y - settings.yCenterOffset;
+		PointD relative = new (
+			X: targetPixel.coordinates.X - settings.centerOffset.X,
+			Y: targetPixel.coordinates.Y - settings.centerOffset.Y);
 		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasPoints.Count];
-		double relativeX = targetPixel.coordinates.X - settings.xCenterOffset;
 		int sampleCount = 0;
 		for (int p = 0; p < settings.antiAliasPoints.Count; ++p) {
 
 			TransformData initialTd = new (
-				X: relativeX + settings.antiAliasPoints[p].X,
-				Y: relativeY - settings.antiAliasPoints[p].Y);
+				X: relative.X + settings.antiAliasPoints[p].X,
+				Y: relative.Y - settings.antiAliasPoints[p].Y);
 
 			TransformData td = transformInverter (settings, initialTd);
 
 			PointF preliminarySample = new (
-				x: (float) (td.X + settings.xCenterOffset),
-				y: (float) (td.Y + settings.yCenterOffset));
+				x: (float) (td.X + settings.centerOffset.X),
+				y: (float) (td.Y + settings.centerOffset.Y));
 
 			samples[sampleCount] = GetSample (
 				settings,
 				src,
 				originalColor,
-				targetPixel,
 				preliminarySample);
 
 			++sampleCount;
@@ -147,20 +147,19 @@ public static class Warp
 		Settings settings,
 		ImageSurface src,
 		ColorBgra originalColor,
-		PixelOffset targetPixel,
 		PointF preliminarySample)
 	{
 		if (src.IsOnSurface (preliminarySample.X, preliminarySample.Y))
 			return src.GetBilinearSample (preliminarySample.X, preliminarySample.Y);
 
 		return settings.edgeBehavior switch {
-			WarpEdgeBehavior.Clamp => src.GetBilinearSampleClamped (preliminarySample.X, preliminarySample.Y),
-			WarpEdgeBehavior.Wrap => src.GetBilinearSampleWrapped (preliminarySample.X, preliminarySample.Y),
-			WarpEdgeBehavior.Reflect => src.GetBilinearSampleClamped (ReflectCoord (preliminarySample.X, src.Width), ReflectCoord (preliminarySample.Y, src.Height)),
-			WarpEdgeBehavior.Primary => settings.primaryColor,
-			WarpEdgeBehavior.Secondary => settings.secondaryColor,
-			WarpEdgeBehavior.Transparent => ColorBgra.Transparent,
-			WarpEdgeBehavior.Original => originalColor,
+			EdgeBehavior.Clamp => src.GetBilinearSampleClamped (preliminarySample.X, preliminarySample.Y),
+			EdgeBehavior.Wrap => src.GetBilinearSampleWrapped (preliminarySample.X, preliminarySample.Y),
+			EdgeBehavior.Reflect => src.GetBilinearSampleClamped (ReflectCoord (preliminarySample.X, src.Width), ReflectCoord (preliminarySample.Y, src.Height)),
+			EdgeBehavior.Primary => settings.primaryColor,
+			EdgeBehavior.Secondary => settings.secondaryColor,
+			EdgeBehavior.Transparent => ColorBgra.Transparent,
+			EdgeBehavior.Original => originalColor,
 			_ => throw new ArgumentException ($"{nameof (settings.edgeBehavior)} is out of range", nameof (settings)),
 		};
 	}
