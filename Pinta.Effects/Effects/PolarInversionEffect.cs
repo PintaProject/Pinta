@@ -8,39 +8,71 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Threading.Tasks;
+using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class PolarInversionEffect : WarpEffect
+public sealed class PolarInversionEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortPolarInversion;
+	public override string Icon
+		=> Resources.Icons.EffectsDistortPolarInversion;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Polar Inversion");
+	public override string Name
+		=> Translations.GetString ("Polar Inversion");
 
-	public override bool IsConfigurable => true;
+	public PolarInversionData Data
+		=> (PolarInversionData) EffectData!;
 
-	public new PolarInversionData Data => (PolarInversionData) EffectData!;
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Distort");
 
-	public override string EffectMenuCategory => Translations.GetString ("Distort");
+	public override bool IsConfigurable
+		=> true;
 
-	protected override IPaletteService Palette { get; }
-	protected override IChromeService Chrome { get; }
+	public override Task<bool> LaunchConfiguration ()
+		=> chrome.LaunchSimpleEffectDialog (this);
 
+	private readonly IChromeService chrome;
+	private readonly LivePreviewManager live_preview;
+	private readonly IPaletteService palette;
 	public PolarInversionEffect (IServiceProvider services)
 	{
-		Palette = services.GetService<IPaletteService> ();
-		Chrome = services.GetService<IChromeService> ();
+		chrome = services.GetService<IChromeService> ();
+		live_preview = services.GetService<LivePreviewManager> ();
+		palette = services.GetService<IPaletteService> ();
 		EffectData = new PolarInversionData ();
 	}
 
-	#region Algorithm Code Ported From PDN
-	protected override TransformData InverseTransform (
-		TransformData transData,
-		WarpSettings settings)
+	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	{
+		Warp.Settings settings = Warp.CreateSettings (
+			Data,
+			live_preview.RenderBounds,
+			palette);
+
+		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
+		foreach (RectangleI rect in rois) {
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
+				dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
+					settings,
+					InverseTransform,
+					src,
+					src_data[pixel.memoryOffset],
+					pixel);
+			}
+		}
+	}
+
+	public Warp.TransformData InverseTransform (
+		Warp.Settings settings,
+		Warp.TransformData transData)
 	{
 		double x = transData.X;
 		double y = transData.Y;
@@ -55,17 +87,18 @@ public sealed class PolarInversionEffect : WarpEffect
 			X: x * invertDistance,
 			Y: y * invertDistance);
 	}
-	#endregion
+}
 
-	public sealed class PolarInversionData : WarpEffect.WarpData
-	{
-		[MinimumValue (-4), MaximumValue (4)]
-		public double Amount { get; set; } = 0;
+public sealed class PolarInversionData : EffectData, IWarpData
+{
+	[MinimumValue (-4), MaximumValue (4)]
+	public double Amount { get; set; } = 0;
 
-		public PolarInversionData () : base ()
-		{
-			EdgeBehavior = WarpEdgeBehavior.Reflect;
-		}
+	[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
+	public int Quality { get; set; } = 2;
 
-	}
+	[Caption ("Center Offset")]
+	public PointD CenterOffset { get; set; }
+
+	public WarpEdgeBehavior EdgeBehavior { get; set; } = WarpEdgeBehavior.Reflect;
 }

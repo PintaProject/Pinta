@@ -160,10 +160,7 @@ public static class Utility
 		return (byte) r2;
 	}
 
-	public static void GetRgssOffsets (
-		Span<PointD> samplesArray,
-		int sampleCount,
-		int quality)
+	public static IReadOnlyList<PointD> GetRgssOffsets (int sampleCount, int quality)
 	{
 		if (sampleCount < 1)
 			throw new ArgumentOutOfRangeException (nameof (sampleCount), $"{nameof (sampleCount)} must be [0, int.MaxValue]");
@@ -171,11 +168,10 @@ public static class Utility
 		if (sampleCount != quality * quality)
 			throw new ArgumentException ($"{nameof (sampleCount)} != ({nameof (quality)} * {nameof (quality)})");
 
-		if (sampleCount == 1) {
-			samplesArray[0] = PointD.Zero;
-			return;
-		}
+		if (sampleCount == 1)
+			return new[] { PointD.Zero };
 
+		var result = new PointD[sampleCount];
 		for (int i = 0; i < sampleCount; ++i) {
 
 			double y = (i + 1d) / (sampleCount + 1d);
@@ -183,8 +179,9 @@ public static class Utility
 			double baseX = y * quality;
 			double x = baseX - Math.Truncate (baseX);
 
-			samplesArray[i] = new PointD (x - 0.5d, y - 0.5d);
+			result[i] = new PointD (x - 0.5d, y - 0.5d);
 		}
+		return result;
 	}
 
 	public static int FastDivideShortByByte (ushort n, byte d)
@@ -487,10 +484,9 @@ public static class Utility
 	/// </summary>
 	private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, RectangleI rect, int y)
 	{
-		for (int x = rect.Left; x < rect.Right; ++x) {
+		for (int x = rect.Left; x < rect.Right; ++x)
 			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
 				return false;
-		}
 
 		return true;
 	}
@@ -500,10 +496,9 @@ public static class Utility
 	/// </summary>
 	private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, RectangleI rect, int x)
 	{
-		for (int y = rect.Top; y < rect.Bottom; ++y) {
+		for (int y = rect.Top; y < rect.Bottom; ++y)
 			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
 				return false;
-		}
 
 		return true;
 	}
