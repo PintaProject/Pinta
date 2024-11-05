@@ -42,13 +42,10 @@ public sealed class AppActions
 	}
 
 	#region Initialization
-	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
+	public void RegisterActions (Gtk.Application app)
 	{
 		app.AddAction (About);
-		menu.AppendItem (About.CreateMenuItem ());
-
 		app.AddAccelAction (Exit, "<Primary>Q");
-		menu.AppendItem (Exit.CreateMenuItem ());
 	}
 
 	public void RegisterHandlers ()
