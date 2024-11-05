@@ -40,7 +40,7 @@ namespace Pinta.Core;
 
 
 // Only call methods on this class from a single thread (The UI thread).
-internal abstract class AsyncEffectRenderer
+internal sealed class AsyncEffectRenderer
 {
 	private readonly Settings settings;
 
@@ -154,13 +154,16 @@ internal abstract class AsyncEffectRenderer
 			HandleRenderCompletion (cancellationToken);
 	}
 
-	protected abstract void OnUpdate (
+	internal delegate void UpdateHandler (
 		double progress,
 		RectangleI updatedBounds);
 
-	protected abstract void OnCompletion (
+	internal delegate void CompletionHandler (
 		IReadOnlyList<Exception> exceptions,
 		CancellationToken cancellationToken);
+
+	public event UpdateHandler? Updated;
+	public event CompletionHandler? Completed;
 
 	internal void Dispose ()
 	{
@@ -323,7 +326,7 @@ internal abstract class AsyncEffectRenderer
 		}
 
 		if (IsRendering && !cancellationToken.IsCancellationRequested)
-			OnUpdate (Progress, bounds);
+			Updated?.Invoke (Progress, bounds);
 
 		return true;
 	}
@@ -342,7 +345,7 @@ internal abstract class AsyncEffectRenderer
 
 		timer_tick_id = 0;
 
-		OnCompletion (exceptions, cancellationToken);
+		Completed?.Invoke (exceptions, cancellationToken);
 
 		if (restart_render_flag)
 			StartRender ();
