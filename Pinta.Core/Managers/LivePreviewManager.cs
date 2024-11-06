@@ -78,6 +78,7 @@ public sealed class LivePreviewManager : ILivePreview
 
 	public Cairo.ImageSurface LivePreviewSurface => live_preview_surface;
 	public RectangleI RenderBounds => render_bounds;
+	public bool IsEnabled => live_preview_enabled;
 
 	public async void Start (BaseEffect effect)
 	{
