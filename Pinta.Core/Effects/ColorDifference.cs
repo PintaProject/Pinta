@@ -11,11 +11,10 @@ using Cairo;
 namespace Pinta.Core;
 
 /// <summary>
-/// ColorDifferenctEffect is a base class for my difference effects
+/// ColorDifferenctEffect is a utility class for difference effects
 /// that have floating point (double) convolution filters.
 /// its architecture is just like ConvolutionFilterEffect, adding a
-/// function (RenderColorDifferenceEffect) called from Render in each
-/// derived class.
+/// function (RenderColorDifferenceEffect) called from Render.
 /// It is also limited to 3x3 kernels.
 /// (Chris Crosetto)
 /// </summary>
