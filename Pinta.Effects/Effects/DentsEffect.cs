@@ -135,7 +135,7 @@ public sealed class DentsEffect : BaseEffect
 	}
 }
 
-public sealed class DentsData : EffectData, IWarpData
+public sealed class DentsData : EffectData, Warp.IEffectData
 {
 	[MinimumValue (1), MaximumValue (200)]
 	public double Scale { get; set; } = 25;
@@ -159,5 +159,5 @@ public sealed class DentsData : EffectData, IWarpData
 	[Caption ("Center Offset")]
 	public PointD CenterOffset { get; set; }
 
-	public WarpEdgeBehavior EdgeBehavior { get; set; } = WarpEdgeBehavior.Wrap;
+	public Warp.EdgeBehavior EdgeBehavior { get; set; } = Warp.EdgeBehavior.Wrap;
 }
