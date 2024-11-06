@@ -6,7 +6,6 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Collections.Generic;
 using Cairo;
 
 namespace Pinta.Core;
@@ -22,8 +21,8 @@ namespace Pinta.Core;
 /// </summary>
 public abstract class ColorDifferenceEffect : BaseEffect
 {
-	public void RenderColorDifferenceEffect (
-		IReadOnlyList<IReadOnlyList<double>> weights,
+	public static void RenderColorDifferenceEffect (
+		double[,] weights,
 		ImageSurface src,
 		ImageSurface dest,
 		ReadOnlySpan<RectangleI> rois)
@@ -61,7 +60,7 @@ public abstract class ColorDifferenceEffect : BaseEffect
 	}
 
 	private static ColorBgra GetFinalPixelColor (
-		IReadOnlyList<IReadOnlyList<double>> weights,
+		double[,] weights,
 		ReadOnlySpan<ColorBgra> src_data,
 		int src_width,
 		PointI fStart,
@@ -74,7 +73,7 @@ public abstract class ColorDifferenceEffect : BaseEffect
 		double bSum = 0.0;
 		for (int fy = fStart.Y; fy < fEnd.Y; ++fy) {
 			for (int fx = fStart.X; fx < fEnd.X; ++fx) {
-				double weight = weights[fy][fx];
+				double weight = weights[fy, fx];
 				ColorBgra c = src_data[(coordinates.Y - 1 + fy) * src_width + (coordinates.X - 1 + fx)];
 				rSum += weight * c.R;
 				gSum += weight * c.G;
