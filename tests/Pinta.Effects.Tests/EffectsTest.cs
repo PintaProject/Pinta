@@ -117,6 +117,15 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Dents7 ()
+	{
+		DentsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CenterOffset = new PointD (125, 125);
+		effect.Data.EdgeBehavior = Warp.EdgeBehavior.Clamp;
+		Utilities.TestEffect (effect, "dents7.png");
+	}
+
+	[Test]
 	public void Dithering1 ()
 	{
 		DitheringEffect effect = new (Utilities.CreateMockServices ());
