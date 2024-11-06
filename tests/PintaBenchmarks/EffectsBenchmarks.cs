@@ -146,7 +146,7 @@ public class EffectsBenchmarks
 		effect.Render (surface, dest_surface, bounds);
 	}
 
-	//[Benchmark] // Requires initialized PintaCore
+	[Benchmark]
 	public void PolarInversionEffect ()
 	{
 		var effect = new PolarInversionEffect (Utilities.CreateMockServices ());

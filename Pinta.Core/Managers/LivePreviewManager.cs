@@ -36,7 +36,12 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
 
-public sealed class LivePreviewManager
+public interface ILivePreview
+{
+	RectangleI RenderBounds { get; }
+}
+
+public sealed class LivePreviewManager : ILivePreview
 {
 	// NRT - These are set in Start(). This should be rewritten to be provably non-null.
 	bool live_preview_enabled;
@@ -71,7 +76,6 @@ public sealed class LivePreviewManager
 		chrome = chromeManager;
 	}
 
-	public bool IsEnabled => live_preview_enabled;
 	public Cairo.ImageSurface LivePreviewSurface => live_preview_surface;
 	public RectangleI RenderBounds => render_bounds;
 

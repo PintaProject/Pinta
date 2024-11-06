@@ -22,6 +22,7 @@ internal static class Utilities
 		manager.AddService<IChromeService> (new MockChromeManager ());
 		manager.AddService<IWorkspaceService> (new MockWorkspaceService ());
 		manager.AddService<ISystemService> (new MockSystemService ());
+		manager.AddService<ILivePreview> (new MockLivePreview (new RectangleI (0, 0, 250, 250)));
 		return manager;
 	}
 
@@ -34,7 +35,7 @@ internal static class Utilities
 		try {
 			var bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when error is thrown.
 			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, bg.Width, bg.Height);
-			var context = new Cairo.Context (surf);
+			Context context = new (surf);
 			context.DrawPixbuf (bg, 0, 0);
 			return surf;
 		} finally {
@@ -42,7 +43,10 @@ internal static class Utilities
 		}
 	}
 
-	public static void CompareImages (ImageSurface result, ImageSurface expected, int tolerance = 1)
+	public static void CompareImages (
+		ImageSurface result,
+		ImageSurface expected,
+		int tolerance = 1)
 	{
 		Assert.That (expected.GetSize (), Is.EqualTo (result.GetSize ()));
 
@@ -51,19 +55,25 @@ internal static class Utilities
 
 		int diffs = 0;
 		for (int i = 0; i < result_pixels.Length; ++i) {
-			if (!ColorBgra.ColorsWithinTolerance (result_pixels[i], expected_pixels[i], tolerance)) {
-				++diffs;
 
-				// Display info about the first few failures.
-				if (diffs <= 10)
-					Assert.Warn ($"Difference at pixel {i}, got {result_pixels[i]} vs {expected_pixels[i]}");
-			}
+			if (ColorBgra.ColorsWithinTolerance (result_pixels[i], expected_pixels[i], tolerance))
+				continue;
+
+			++diffs;
+
+			// Display info about the first few failures.
+			if (diffs <= 10)
+				Assert.Warn ($"Difference at pixel {i}, got {result_pixels[i]} vs {expected_pixels[i]}");
 		}
 
 		Assert.That (diffs, Is.EqualTo (0));
 	}
 
-	public static void TestEffect (BaseEffect effect, string result_image_name, string? save_image_name = null, string source_image_name = "input.png")
+	public static void TestEffect (
+		BaseEffect effect,
+		string result_image_name,
+		string? save_image_name = null,
+		string source_image_name = "input.png")
 	{
 		var source = Utilities.LoadImage (source_image_name);
 		var result = CairoExtensions.CreateImageSurface (Format.Argb32, source.Width, source.Height);
