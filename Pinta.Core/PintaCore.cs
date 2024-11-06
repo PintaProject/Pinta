@@ -81,7 +81,7 @@ public static class PintaCore
 		services.AddService (paletteFormats);
 		services.AddService (system);
 		services.AddService (recentFiles);
-		services.AddService (livePreview);
+		services.AddService<ILivePreview> (livePreview);
 		services.AddService<IPaletteService> (palette);
 		services.AddService<IChromeService> (chrome);
 		services.AddService<ISystemService> (system);
