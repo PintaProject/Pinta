@@ -391,10 +391,11 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
-	[Ignore ("Depends on PintaCore being initialized")]
 	public void PolarInversion1 ()
 	{
-		// TODO
+		PolarInversionEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Amount = 1;
+		Utilities.TestEffect (effect, "polarinversion1.png");
 	}
 
 	[Test]
