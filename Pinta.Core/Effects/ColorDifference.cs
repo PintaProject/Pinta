@@ -19,34 +19,33 @@ namespace Pinta.Core;
 /// It is also limited to 3x3 kernels.
 /// (Chris Crosetto)
 /// </summary>
-public abstract class ColorDifferenceEffect : BaseEffect
+public static class ColorDifference
 {
 	public static void RenderColorDifferenceEffect (
 		double[,] weights,
-		ImageSurface src,
-		ImageSurface dest,
+		ImageSurface source,
+		ImageSurface destination,
 		ReadOnlySpan<RectangleI> rois)
 	{
-		RectangleI src_rect = src.GetBounds ();
+		if (weights.GetLength (0) != 3 || weights.GetLength (1) != 3) throw new ArgumentException ("Must be a 3x3 array", nameof (weights));
 
-		// Cache these for a massive performance boost
-		var src_data = src.GetReadOnlyPixelData ();
-		var dst_data = dest.GetPixelData ();
-		int src_width = src.Width;
+		RectangleI surfaceBounds = source.GetBounds ();
+
+		var src_data = source.GetReadOnlyPixelData ();
+		var dst_data = destination.GetPixelData ();
+		int src_width = source.Width;
 
 		foreach (RectangleI rect in rois) {
 
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, source.GetSize ())) {
 
 				PointI fStart = new (
-					X: (pixel.coordinates.X == src_rect.X) ? 1 : 0,
-					Y: (pixel.coordinates.Y == src_rect.Y) ? 1 : 0
-				);
+					X: (pixel.coordinates.X == surfaceBounds.X) ? 1 : 0,
+					Y: (pixel.coordinates.Y == surfaceBounds.Y) ? 1 : 0);
 
 				PointI fEnd = new (
-					X: (pixel.coordinates.X == src_rect.X + src_rect.Width - 1) ? 2 : 3,
-					Y: (pixel.coordinates.Y == src_rect.Y + src_rect.Height - 1) ? 2 : 3
-				);
+					X: (pixel.coordinates.X == surfaceBounds.X + surfaceBounds.Width - 1) ? 2 : 3,
+					Y: (pixel.coordinates.Y == surfaceBounds.Y + surfaceBounds.Height - 1) ? 2 : 3);
 
 				dst_data[pixel.memoryOffset] = GetFinalPixelColor (
 					weights,

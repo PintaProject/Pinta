@@ -15,7 +15,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class EdgeDetectEffect : ColorDifferenceEffect
+public sealed class EdgeDetectEffect : BaseEffect
 {
 	public override string Icon
 		=> Pinta.Resources.Icons.EffectsStylizeEdgeDetect;
@@ -48,7 +48,7 @@ public sealed class EdgeDetectEffect : ColorDifferenceEffect
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		var weights = ComputeWeights (Data.Angle.ToRadians ());
-		RenderColorDifferenceEffect (weights, src, dest, rois);
+		ColorDifference.RenderColorDifferenceEffect (weights, src, dest, rois);
 	}
 
 	private static double[,] ComputeWeights (RadiansAngle angle)
