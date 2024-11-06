@@ -31,28 +31,17 @@ public static class ColorDifference
 
 		RectangleI surfaceBounds = source.GetBounds ();
 
-		var src_data = source.GetReadOnlyPixelData ();
-		var dst_data = destination.GetPixelData ();
-		int src_width = source.Width;
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationDataa = destination.GetPixelData ();
 
 		foreach (RectangleI rect in rois) {
 
 			foreach (var pixel in Utility.GeneratePixelOffsets (rect, source.GetSize ())) {
 
-				PointI fStart = new (
-					X: (pixel.coordinates.X == surfaceBounds.X) ? 1 : 0,
-					Y: (pixel.coordinates.Y == surfaceBounds.Y) ? 1 : 0);
-
-				PointI fEnd = new (
-					X: (pixel.coordinates.X == surfaceBounds.X + surfaceBounds.Width - 1) ? 2 : 3,
-					Y: (pixel.coordinates.Y == surfaceBounds.Y + surfaceBounds.Height - 1) ? 2 : 3);
-
-				dst_data[pixel.memoryOffset] = GetFinalPixelColor (
+				destinationDataa[pixel.memoryOffset] = GetFinalPixelColor (
 					weights,
-					src_data,
-					src_width,
-					fStart,
-					fEnd,
+					sourceData,
+					surfaceBounds,
 					pixel.coordinates);
 			}
 		}
@@ -60,28 +49,38 @@ public static class ColorDifference
 
 	private static ColorBgra GetFinalPixelColor (
 		double[,] weights,
-		ReadOnlySpan<ColorBgra> src_data,
-		int src_width,
-		PointI fStart,
-		PointI fEnd,
+		ReadOnlySpan<ColorBgra> sourceData,
+		RectangleI surfaceBounds,
 		PointI coordinates)
 	{
+		PointI fStart = new (
+			X: (coordinates.X == surfaceBounds.X) ? 1 : 0,
+			Y: (coordinates.Y == surfaceBounds.Y) ? 1 : 0);
+
+		PointI fEnd = new (
+			X: (coordinates.X == surfaceBounds.X + surfaceBounds.Width - 1) ? 2 : 3,
+			Y: (coordinates.Y == surfaceBounds.Y + surfaceBounds.Height - 1) ? 2 : 3);
+
 		// loop through each weight
+
 		double rSum = 0.0;
 		double gSum = 0.0;
 		double bSum = 0.0;
+
 		for (int fy = fStart.Y; fy < fEnd.Y; ++fy) {
 			for (int fx = fStart.X; fx < fEnd.X; ++fx) {
 				double weight = weights[fy, fx];
-				ColorBgra c = src_data[(coordinates.Y - 1 + fy) * src_width + (coordinates.X - 1 + fx)];
+				ColorBgra c = sourceData[(coordinates.Y - 1 + fy) * surfaceBounds.Width + (coordinates.X - 1 + fx)];
 				rSum += weight * c.R;
 				gSum += weight * c.G;
 				bSum += weight * c.B;
 			}
 		}
+
 		byte iRsum = Utility.ClampToByte (rSum);
 		byte iGsum = Utility.ClampToByte (gSum);
 		byte iBsum = Utility.ClampToByte (bSum);
+
 		return ColorBgra.FromBgra (iBsum, iGsum, iRsum, 255);
 	}
 }
