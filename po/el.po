@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-03 01:38+0000\n"
-"PO-Revision-Date: 2024-10-27 19:00+0000\n"
-"Last-Translator: yiannis ioannides <sub@wai.ai>\n"
+"PO-Revision-Date: 2024-11-08 18:00+0000\n"
+"Last-Translator: Chorwacjen <cutiemelo@proton.me>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.2-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -566,7 +566,7 @@ msgstr "Περικοπή στην επιλογή"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:232
 msgid "Curved"
-msgstr ""
+msgstr "καμπύλος"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:136
