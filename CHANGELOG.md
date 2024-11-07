@@ -46,6 +46,7 @@ Thanks to the following contributors who worked on this release:
 - Saving an image already saved in a format that supports multiple layers to a format that does not support layers will now explicitly prompt the user to flatten the image before saving, rather than silently flattening it (#909)
 
 ### Fixed
+- Twist effect applied locally based on selection instead of entire image
 - Fixed issues where the system language settings on macOS did not properly take effect in Pinta ([#1976178](https://bugs.launchpad.net/pinta/+bug/1976178))
 - Fixed an issue where the Pan tool's cursor could show up as a missing icon ([#2013047](https://bugs.launchpad.net/pinta/+bug/2013047))
 - Fixed errors when saving a file that was opened with a missing or incorrect extension ([#2013050](https://bugs.launchpad.net/pinta/+bug/2013050))
