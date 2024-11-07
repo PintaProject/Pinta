@@ -31,13 +31,13 @@ public static class ColorDifference
 		RectangleI surfaceBounds = source.GetBounds ();
 
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
-		Span<ColorBgra> destinationDataa = destination.GetPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
 		foreach (RectangleI rect in rois) {
 
 			foreach (var pixel in Utility.GeneratePixelOffsets (rect, source.GetSize ())) {
 
-				destinationDataa[pixel.memoryOffset] = GetFinalPixelColor (
+				destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 					weights,
 					sourceData,
 					surfaceBounds,
