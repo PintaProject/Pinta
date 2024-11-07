@@ -43,9 +43,6 @@ public interface ILivePreview
 
 public sealed class LivePreviewManager : ILivePreview
 {
-	bool apply_live_preview_flag;
-	bool cancel_live_preview_flag;
-
 	private readonly WorkspaceManager workspace;
 	private readonly ToolManager tools;
 	private readonly SystemManager system;
@@ -80,6 +77,8 @@ public sealed class LivePreviewManager : ILivePreview
 		var doc = workspace.ActiveDocument;
 
 		IsEnabled = true;
+		bool apply_live_preview_flag = false;
+		bool cancel_live_preview_flag = false;
 
 		Layer layer = doc.Layers.CurrentUserLayer;
 
