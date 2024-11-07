@@ -11,49 +11,36 @@ using Cairo;
 namespace Pinta.Core;
 
 /// <summary>
-/// ColorDifferenctEffect is a base class for my difference effects
+/// ColorDifferenctEffect is a utility class for difference effects
 /// that have floating point (double) convolution filters.
 /// its architecture is just like ConvolutionFilterEffect, adding a
-/// function (RenderColorDifferenceEffect) called from Render in each
-/// derived class.
+/// function (RenderColorDifferenceEffect) called from Render.
 /// It is also limited to 3x3 kernels.
 /// (Chris Crosetto)
 /// </summary>
-public abstract class ColorDifferenceEffect : BaseEffect
+public static class ColorDifference
 {
 	public static void RenderColorDifferenceEffect (
 		double[,] weights,
-		ImageSurface src,
-		ImageSurface dest,
+		ImageSurface source,
+		ImageSurface destination,
 		ReadOnlySpan<RectangleI> rois)
 	{
-		RectangleI src_rect = src.GetBounds ();
+		if (weights.GetLength (0) != 3 || weights.GetLength (1) != 3) throw new ArgumentException ("Must be a 3x3 array", nameof (weights));
 
-		// Cache these for a massive performance boost
-		var src_data = src.GetReadOnlyPixelData ();
-		var dst_data = dest.GetPixelData ();
-		int src_width = src.Width;
+		RectangleI surfaceBounds = source.GetBounds ();
+
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
 		foreach (RectangleI rect in rois) {
 
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, source.GetSize ())) {
 
-				PointI fStart = new (
-					X: (pixel.coordinates.X == src_rect.X) ? 1 : 0,
-					Y: (pixel.coordinates.Y == src_rect.Y) ? 1 : 0
-				);
-
-				PointI fEnd = new (
-					X: (pixel.coordinates.X == src_rect.X + src_rect.Width - 1) ? 2 : 3,
-					Y: (pixel.coordinates.Y == src_rect.Y + src_rect.Height - 1) ? 2 : 3
-				);
-
-				dst_data[pixel.memoryOffset] = GetFinalPixelColor (
+				destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 					weights,
-					src_data,
-					src_width,
-					fStart,
-					fEnd,
+					sourceData,
+					surfaceBounds,
 					pixel.coordinates);
 			}
 		}
@@ -61,28 +48,38 @@ public abstract class ColorDifferenceEffect : BaseEffect
 
 	private static ColorBgra GetFinalPixelColor (
 		double[,] weights,
-		ReadOnlySpan<ColorBgra> src_data,
-		int src_width,
-		PointI fStart,
-		PointI fEnd,
+		ReadOnlySpan<ColorBgra> sourceData,
+		RectangleI surfaceBounds,
 		PointI coordinates)
 	{
+		PointI fStart = new (
+			X: (coordinates.X == surfaceBounds.X) ? 1 : 0,
+			Y: (coordinates.Y == surfaceBounds.Y) ? 1 : 0);
+
+		PointI fEnd = new (
+			X: (coordinates.X == surfaceBounds.X + surfaceBounds.Width - 1) ? 2 : 3,
+			Y: (coordinates.Y == surfaceBounds.Y + surfaceBounds.Height - 1) ? 2 : 3);
+
 		// loop through each weight
+
 		double rSum = 0.0;
 		double gSum = 0.0;
 		double bSum = 0.0;
+
 		for (int fy = fStart.Y; fy < fEnd.Y; ++fy) {
 			for (int fx = fStart.X; fx < fEnd.X; ++fx) {
 				double weight = weights[fy, fx];
-				ColorBgra c = src_data[(coordinates.Y - 1 + fy) * src_width + (coordinates.X - 1 + fx)];
+				ColorBgra c = sourceData[(coordinates.Y - 1 + fy) * surfaceBounds.Width + (coordinates.X - 1 + fx)];
 				rSum += weight * c.R;
 				gSum += weight * c.G;
 				bSum += weight * c.B;
 			}
 		}
+
 		byte iRsum = Utility.ClampToByte (rSum);
 		byte iGsum = Utility.ClampToByte (gSum);
 		byte iBsum = Utility.ClampToByte (bSum);
+
 		return ColorBgra.FromBgra (iBsum, iGsum, iRsum, 255);
 	}
 }

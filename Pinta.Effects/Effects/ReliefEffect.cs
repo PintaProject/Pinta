@@ -14,14 +14,13 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class ReliefEffect : ColorDifferenceEffect
+public sealed class ReliefEffect : BaseEffect
 {
 	private readonly IChromeService chrome;
 
 	public ReliefEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-
 		EffectData = new ReliefData ();
 	}
 
@@ -44,7 +43,7 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 	public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
 		var weights = ComputeWeights (Data.Angle.ToRadians ());
-		RenderColorDifferenceEffect (weights, src, dst, rois);
+		ColorDifference.RenderColorDifferenceEffect (weights, src, dst, rois);
 	}
 
 	private static double[,] ComputeWeights (RadiansAngle angle)
