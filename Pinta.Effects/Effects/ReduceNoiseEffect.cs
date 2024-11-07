@@ -15,11 +15,8 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class ReduceNoiseEffect : LocalHistogramEffect
+public sealed class ReduceNoiseEffect : BaseEffect
 {
-	private int radius;
-	private double strength;
-
 	public override string Icon => Pinta.Resources.Icons.EffectsNoiseReduceNoise;
 
 	public sealed override bool IsTileable => true;
@@ -44,15 +41,7 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
-	public override ColorBgra Apply (in ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
-	{
-		ColorBgra normalized = GetPercentileOfColor (color, area, hb, hg, hr, ha);
-		double lerp = strength * (1 - 0.75 * color.GetIntensity ());
-
-		return ColorBgra.Lerp (color, normalized, lerp);
-	}
-
+	// Algorithm Code Ported From PDN
 	private static ColorBgra GetPercentileOfColor (ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 	{
 		int rc = 0;
@@ -77,13 +66,21 @@ public sealed class ReduceNoiseEffect : LocalHistogramEffect
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		radius = Data.Radius;
-		strength = -0.2 * Data.Strength;
+		int radius = Data.Radius;
+		double strength = -0.2 * Data.Strength;
 
 		foreach (var rect in rois)
-			RenderRect (radius, src, dest, rect);
+			LocalHistogram.RenderRect (Apply, radius, src, dest, rect);
+
+		// === Methods ===
+
+		ColorBgra Apply (ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
+		{
+			ColorBgra normalized = GetPercentileOfColor (color, area, hb, hg, hr, ha);
+			double lerp = strength * (1 - 0.75 * color.GetIntensity ());
+			return ColorBgra.Lerp (color, normalized, lerp);
+		}
 	}
-	#endregion
 
 	public sealed class ReduceNoiseData : EffectData
 	{

@@ -15,11 +15,8 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class MedianEffect : LocalHistogramEffect
+public sealed class MedianEffect : BaseEffect
 {
-	private int radius;
-	private int percentile;
-
 	public override string Icon => Pinta.Resources.Icons.EffectsNoiseMedian;
 
 	public sealed override bool IsTileable => true;
@@ -43,20 +40,20 @@ public sealed class MedianEffect : LocalHistogramEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
+	// Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		radius = Data.Radius;
-		percentile = Data.Percentile;
+		int radius = Data.Radius;
+		int percentile = Data.Percentile;
 
 		foreach (RectangleI rect in rois)
-			RenderRect (radius, src, dest, rect);
+			LocalHistogram.RenderRect (Apply, radius, src, dest, rect);
+
+		// === Methods ===
+
+		ColorBgra Apply (ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
+			=> LocalHistogram.GetPercentile (percentile, area, hb, hg, hr, ha);
 	}
-
-	public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
-		=> GetPercentile (percentile, area, hb, hg, hr, ha);
-
-	#endregion
 
 	public sealed class MedianData : EffectData
 	{

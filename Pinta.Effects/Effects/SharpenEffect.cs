@@ -15,7 +15,7 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class SharpenEffect : LocalHistogramEffect
+public sealed class SharpenEffect : BaseEffect
 {
 	public override string Icon => Pinta.Resources.Icons.EffectsPhotoSharpen;
 
@@ -34,7 +34,6 @@ public sealed class SharpenEffect : LocalHistogramEffect
 	public SharpenEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-
 		EffectData = new SharpenData ();
 	}
 
@@ -44,12 +43,12 @@ public sealed class SharpenEffect : LocalHistogramEffect
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		foreach (var rect in rois)
-			RenderRect (Data.Amount, src, dest, rect);
+			LocalHistogram.RenderRect (Apply, Data.Amount, src, dest, rect);
 	}
 
-	public override ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
+	private static ColorBgra Apply (ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 	{
-		ColorBgra median = GetPercentile (50, area, hb, hg, hr, ha);
+		ColorBgra median = LocalHistogram.GetPercentile (50, area, hb, hg, hr, ha);
 		return ColorBgra.Lerp (src, median, -0.5f);
 	}
 }
