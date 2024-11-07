@@ -18,7 +18,7 @@ namespace Pinta.Effects;
 
 public sealed class TwistEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortTwist;
+	public override string Icon => Resources.Icons.EffectsDistortTwist;
 
 	public sealed override bool IsTileable => true;
 
@@ -31,41 +31,41 @@ public sealed class TwistEffect : BaseEffect
 	public TwistData Data => (TwistData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
-
+	private readonly ILivePreview live_preview;
 	public TwistEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-
+		live_preview = services.GetService<ILivePreview> ();
 		EffectData = new TwistData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
+	// Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
-		RenderSettings settings = CreateSettings (dst);
+		TwistSettings settings = CreateSettings ();
 
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		ReadOnlySpan<ColorBgra> sourceData = src.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = dst.GetPixelData ();
 
 		foreach (var rect in rois) {
 			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
-				float j = pixel.coordinates.Y - settings.HalfHeight;
-				float i = pixel.coordinates.X - settings.HalfWidth;
-				dst_data[pixel.memoryOffset] =
+				float j = pixel.coordinates.Y - (settings.HalfHeight + settings.RenderBounds.Top);
+				float i = pixel.coordinates.X - (settings.HalfWidth + settings.RenderBounds.Left);
+				destinationData[pixel.memoryOffset] =
 					(i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
-					? src_data[pixel.memoryOffset]
-					: GetFinalPixelColor (src, settings, src_data, j, i);
+					? sourceData[pixel.memoryOffset]
+					: GetFinalPixelColor (src, settings, sourceData, j, i);
 			}
 		}
 	}
 
 	private static ColorBgra GetFinalPixelColor (
 		ImageSurface src,
-		RenderSettings settings,
-		ReadOnlySpan<ColorBgra> src_data,
+		TwistSettings settings,
+		ReadOnlySpan<ColorBgra> sourceData,
 		float j,
 		float i)
 	{
@@ -73,6 +73,7 @@ public sealed class TwistEffect : BaseEffect
 		int g = 0;
 		int r = 0;
 		int a = 0;
+
 		int antialiasSamples = settings.AntialiasPoints.Length;
 
 		for (int p = 0; p < antialiasSamples; ++p) {
@@ -87,11 +88,11 @@ public sealed class TwistEffect : BaseEffect
 			double twistedTheta = originalTheta + (twistAmount * settings.Twist / 100);
 
 			PointI samplePosition = new (
-				X: (int) (settings.HalfWidth + (float) (radialDistance * Math.Cos (twistedTheta))),
-				Y: (int) (settings.HalfHeight + (float) (radialDistance * Math.Sin (twistedTheta)))
+				X: (int) (settings.HalfWidth + settings.RenderBounds.Left + (float) (radialDistance * Math.Cos (twistedTheta))),
+				Y: (int) (settings.HalfHeight + settings.RenderBounds.Top + (float) (radialDistance * Math.Sin (twistedTheta)))
 			);
 
-			ColorBgra sample = src.GetColorBgra (src_data, src.Width, samplePosition);
+			ColorBgra sample = src.GetColorBgra (sourceData, src.Width, samplePosition);
 
 			b += sample.B;
 			g += sample.G;
@@ -105,20 +106,22 @@ public sealed class TwistEffect : BaseEffect
 			(byte) (a / antialiasSamples));
 	}
 
-	private sealed record RenderSettings (
+	private sealed record TwistSettings (
+		RectangleI RenderBounds,
 		float HalfWidth,
 		float HalfHeight,
 		float Maxrad,
 		float Twist,
 		ImmutableArray<PointD> AntialiasPoints);
 
-	private RenderSettings CreateSettings (ImageSurface dst)
+	private TwistSettings CreateSettings ()
 	{
+		RectangleI renderBounds = live_preview.RenderBounds;
 		float preliminaryTwist = Data.Amount;
-
-		float hw = dst.Width / 2.0f;
-		float hh = dst.Height / 2.0f;
+		float hw = renderBounds.Width / 2.0f;
+		float hh = renderBounds.Height / 2.0f;
 		return new (
+			RenderBounds: renderBounds,
 			HalfWidth: hw,
 			HalfHeight: hh,
 			Maxrad: Math.Min (hw, hh),
@@ -133,15 +136,13 @@ public sealed class TwistEffect : BaseEffect
 		var aaPoints = ImmutableArray.CreateBuilder<PointD> (aaSamples);
 		aaPoints.Count = aaSamples;
 		for (int i = 0; i < aaSamples; ++i) {
-			var prePtX = i * aaLevel / (float) aaSamples;
-			var ptX = prePtX - ((int) prePtX);
-			var ptY = i / (float) aaSamples;
+			float prePtX = i * aaLevel / (float) aaSamples;
+			float ptX = prePtX - ((int) prePtX);
+			float ptY = i / (float) aaSamples;
 			aaPoints[i] = new (ptX, ptY);
 		}
 		return aaPoints.MoveToImmutable ();
 	}
-
-	#endregion
 
 	public sealed class TwistData : EffectData
 	{
