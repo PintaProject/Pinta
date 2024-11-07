@@ -23,196 +23,203 @@ public class EffectsBenchmarks
 	[Benchmark]
 	public void AddNoiseEffect ()
 	{
-		var effect = new AddNoiseEffect (Utilities.CreateMockServices ());
+		AddNoiseEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void BulgeEffect ()
 	{
-		var effect = new BulgeEffect (Utilities.CreateMockServices ());
+		BulgeEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
-	//[Benchmark] // Requires initialized PintaCore
+	[Benchmark]
 	public void CloudsEffect ()
 	{
-		var effect = new CloudsEffect (Utilities.CreateMockServices ());
+		CloudsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Render (surface, dest_surface, bounds);
+	}
+
+	[Benchmark]
+	public void DentsEffect ()
+	{
+		DentsEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void EdgeDetectEffect ()
 	{
-		var effect = new EdgeDetectEffect (Utilities.CreateMockServices ());
+		EdgeDetectEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void EmbossEffect ()
 	{
-		var effect = new EmbossEffect (Utilities.CreateMockServices ());
+		EmbossEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void FragmentEffect ()
 	{
-		var effect = new FragmentEffect (Utilities.CreateMockServices ());
+		FragmentEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void FrostedGlassEffect ()
 	{
-		var effect = new FrostedGlassEffect (Utilities.CreateMockServices ());
+		FrostedGlassEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void GaussianBlurEffect ()
 	{
-		var effect = new GaussianBlurEffect (Utilities.CreateMockServices ());
+		GaussianBlurEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void GlowEffect ()
 	{
-		var effect = new GlowEffect (Utilities.CreateMockServices ());
+		GlowEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void InkSketchEffect ()
 	{
-		var effect = new InkSketchEffect (Utilities.CreateMockServices ());
+		InkSketchEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void JuliaFractalEffect ()
 	{
-		var effect = new JuliaFractalEffect (Utilities.CreateMockServices ());
+		JuliaFractalEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark] // Very slow
 	public void MandelbrotFractalEffect ()
 	{
-		var effect = new MandelbrotFractalEffect (Utilities.CreateMockServices ());
+		MandelbrotFractalEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void MedianEffect ()
 	{
-		var effect = new MedianEffect (Utilities.CreateMockServices ());
+		MedianEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void MotionBlurEffect ()
 	{
-		var effect = new MotionBlurEffect (Utilities.CreateMockServices ());
+		MotionBlurEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void OilPaintingEffect ()
 	{
-		var effect = new OilPaintingEffect (Utilities.CreateMockServices ());
+		OilPaintingEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void OutlineEffect ()
 	{
-		var effect = new OutlineEdgeEffect (Utilities.CreateMockServices ());
+		OutlineEdgeEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void PencilSketchEffect ()
 	{
-		var effect = new PencilSketchEffect (Utilities.CreateMockServices ());
+		PencilSketchEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void PixelateEffect ()
 	{
-		var effect = new PixelateEffect (Utilities.CreateMockServices ());
+		PixelateEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
-	//[Benchmark] // Requires initialized PintaCore
+	[Benchmark]
 	public void PolarInversionEffect ()
 	{
-		var effect = new PolarInversionEffect (Utilities.CreateMockServices ());
+		PolarInversionEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void RadialBlurEffect ()
 	{
-		var effect = new RadialBlurEffect (Utilities.CreateMockServices ());
+		RadialBlurEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void RedEyeRemoveEffect ()
 	{
-		var effect = new RedEyeRemoveEffect (Utilities.CreateMockServices ());
+		RedEyeRemoveEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void ReliefEffect ()
 	{
-		var effect = new ReliefEffect (Utilities.CreateMockServices ());
+		ReliefEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void SharpenEffect ()
 	{
-		var effect = new SharpenEffect (Utilities.CreateMockServices ());
+		SharpenEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void SoftenPortraitEffect ()
 	{
-		var effect = new SoftenPortraitEffect (Utilities.CreateMockServices ());
+		SoftenPortraitEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void TileEffect ()
 	{
-		var effect = new TileEffect (Utilities.CreateMockServices ());
+		TileEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void TwistEffect ()
 	{
-		var effect = new TwistEffect (Utilities.CreateMockServices ());
+		TwistEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void UnfocusEffect ()
 	{
-		var effect = new UnfocusEffect (Utilities.CreateMockServices ());
+		UnfocusEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 
 	[Benchmark]
 	public void ZoomBlurEffect ()
 	{
-		var effect = new ZoomBlurEffect (Utilities.CreateMockServices ());
+		ZoomBlurEffect effect = new (Utilities.CreateMockServices ());
 		effect.Render (surface, dest_surface, bounds);
 	}
 }

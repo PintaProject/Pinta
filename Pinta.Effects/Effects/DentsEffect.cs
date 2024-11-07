@@ -62,12 +62,12 @@ public sealed class DentsEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	private readonly IChromeService chrome;
-	private readonly LivePreviewManager live_preview;
+	private readonly ILivePreview live_preview;
 	private readonly IPaletteService palette;
 	public DentsEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-		live_preview = services.GetService<LivePreviewManager> ();
+		live_preview = services.GetService<ILivePreview> ();
 		palette = services.GetService<IPaletteService> ();
 		EffectData = new DentsData ();
 	}
