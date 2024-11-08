@@ -58,5 +58,7 @@ public sealed class ColorPanelWidget : DrawingArea
 	private void Draw (Context cr)
 	{
 		cr.FillRoundedRectangle (new RectangleD (0, 0, GetAllocatedWidth (), GetAllocatedHeight ()), 4, CairoColor);
+
+		cr.Dispose ();
 	}
 }

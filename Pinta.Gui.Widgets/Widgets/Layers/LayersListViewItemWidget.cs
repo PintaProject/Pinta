@@ -213,5 +213,7 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		g.LineWidth = 1;
 
 		g.Stroke ();
+
+		g.Dispose ();
 	}
 }

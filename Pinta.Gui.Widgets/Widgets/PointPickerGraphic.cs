@@ -156,6 +156,8 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 
 		// Point
 		g.DrawEllipse (settings.pointMarker, settings.pointMarkerColor, 2);
+
+		g.Dispose ();
 	}
 
 	private RectangleI GetDrawBounds ()

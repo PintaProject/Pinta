@@ -162,5 +162,7 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 
 		for (int i = 0; i < channelCount; ++i)
 			DrawChannel (g, Histogram.GetVisualColor (i), i, max, mean[i]);
+
+		g.Dispose ();
 	}
 }

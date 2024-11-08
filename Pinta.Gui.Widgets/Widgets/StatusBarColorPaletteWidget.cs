@@ -156,6 +156,8 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 		for (int i = 0; i < palette.Count; i++)
 			g.FillRectangle (GetSwatchBounds (i), palette[i]);
+
+		g.Dispose ();
 	}
 
 	private void DrawSwapIcon (Context g, Color color)
