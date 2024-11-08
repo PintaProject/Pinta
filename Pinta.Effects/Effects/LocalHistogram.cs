@@ -49,29 +49,6 @@ public static class LocalHistogram
 		Span<int> hg,
 		Span<int> hr);
 
-	/// <summary>
-	/// Default implementation of <see cref="Applier"/>
-	/// </summary>
-	public static ColorBgra ReturnOriginal (
-		ColorBgra src,
-		int area,
-		Span<int> hb,
-		Span<int> hg,
-		Span<int> hr,
-		Span<int> ha
-	) => src;
-
-	/// <summary>
-	/// Default implementation of <see cref="AlphaApplier"/>
-	/// </summary>
-	public static ColorBgra ReturnOriginal (
-		ColorBgra src,
-		int area,
-		int sum,
-		Span<int> hb,
-		Span<int> hg,
-		Span<int> hr) => src;
-
 	public static byte GetChannelPercentile (int minCount, Span<int> h)
 	{
 		int c = 0;
