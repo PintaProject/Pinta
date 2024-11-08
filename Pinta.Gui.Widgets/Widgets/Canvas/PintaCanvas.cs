@@ -209,6 +209,10 @@ public sealed class PintaCanvas : DrawingArea
 			DrawHandles (g, PintaCore.Tools.CurrentTool.Handles);
 			g.Restore ();
 		}
+
+		// Explicitly dispose the context to avoid memory growth (bug #939).
+		// This can be the last reference to a temporary surface from the GTK widget.
+		context.Dispose ();
 	}
 
 	private static void DrawHandles (Cairo.Context cr, IEnumerable<IToolHandle> controls)
