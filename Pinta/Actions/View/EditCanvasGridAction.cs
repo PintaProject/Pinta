@@ -30,7 +30,7 @@ internal sealed class EditCanvasGridAction : IActionHandler
 		view.EditCanvasGrid.Activated -= Activated;
 	}
 
-	private void Activated(object sender, EventArgs e)
+	private void Activated (object sender, EventArgs e)
 	{
 		CanvasGridSettingsDialog dialog = new (chrome, canvasGrid);
 

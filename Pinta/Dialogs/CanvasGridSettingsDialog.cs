@@ -93,7 +93,7 @@ public sealed class CanvasGridSettingsDialog : Dialog
 	private void SettingsChanged (object? sender, EventArgs e)
 	{
 		canvas_grid.ShowGrid = show_grid_checkbox.Active;
-		canvas_grid.CellWidth = grid_width_spinner.GetValueAsInt ();;
+		canvas_grid.CellWidth = grid_width_spinner.GetValueAsInt ();
 		canvas_grid.CellHeight = grid_height_spinner.GetValueAsInt ();
 	}
 
