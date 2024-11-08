@@ -105,7 +105,7 @@ public sealed class CanvasRenderer
 
 		// Draw the grid if it's enabled and we're zoomed in far enough
 		const int minGridLineDistance = 5;
-		if (enable_grid && PintaCore.Actions.View.EnableCanvasGrid.Value && GetMinGridLineDistance () >= minGridLineDistance)
+		if (enable_grid && PintaCore.CanvasGrid.ShowGrid && GetMinGridLineDistance () >= minGridLineDistance)
 			RenderPixelGrid (dst, offset);
 
 		dst.MarkDirty ();
