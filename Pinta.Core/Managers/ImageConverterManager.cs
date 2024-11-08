@@ -74,7 +74,9 @@ public sealed class ImageConverterManager
 
 	private static FormatDescriptor CreateFormatDescriptor (PixbufFormat format)
 	{
-		string formatName = format.GetName ().ToLowerInvariant ();
+		string formatName = format.GetName ()?.ToLowerInvariant () ??
+				throw new ArgumentException ($"{nameof (format)} has an empty name");
+
 		string formatNameUpperCase = formatName.ToUpperInvariant ();
 		var extensions = formatName switch {
 			"jpeg" => new string[] { "jpg", "jpeg", "JPG", "JPEG" },
@@ -95,7 +97,7 @@ public sealed class ImageConverterManager
 		FormatDescriptor formatDescriptor = new (
 			displayPrefix: formatNameUpperCase,
 			extensions: extensions,
-			mimes: format.GetMimeTypes (),
+			mimes: format.GetMimeTypes () ?? Array.Empty<string> (),
 			importer: importer,
 			exporter: exporter,
 			supportsLayers: false);
