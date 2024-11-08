@@ -54,62 +54,61 @@ public sealed class RadialBlurEffect : BaseEffect
 	}
 
 	private sealed record RadialBlurSettings (
-		int w,
-		int h,
-		int src_w,
+		Size canvasSize,
 		int fcx,
 		int fcy,
 		int n,
 		int fr);
 
-	private RadialBlurSettings CreateSettings (ImageSurface src, ImageSurface dst)
+	private RadialBlurSettings CreateSettings (ImageSurface source)
 	{
 		var offset = Data.Offset;
-		int w = dst.Width;
-		int h = dst.Height;
 		int quality = Data.Quality;
+		Size sourceSize = source.GetSize ();
 		return new (
-			w: w,
-			h: h,
-			src_w: src.Width,
-			fcx: (w << 15) + (int) (offset.X * (w << 15)),
-			fcy: (h << 15) + (int) (offset.Y * (h << 15)),
+			canvasSize: sourceSize,
+			fcx: (sourceSize.Width << 15) + (int) (offset.X * (sourceSize.Width << 15)),
+			fcy: (sourceSize.Height << 15) + (int) (offset.Y * (sourceSize.Height << 15)),
 			n: quality * quality * (30 + quality * quality),
 			fr: (int) (Data.Angle.Degrees * Math.PI * 65536.0 / 181.0)
 		);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (ImageSurface source, ImageSurface destination, ReadOnlySpan<RectangleI> rois)
 	{
 		if (Data.Angle.Degrees == 0) // Copy src to dest
 			return;
 
-		RadialBlurSettings settings = CreateSettings (src, dst);
+		RadialBlurSettings settings = CreateSettings (source);
 
-		var dst_data = dst.GetPixelData ();
-		var src_data = src.GetReadOnlyPixelData ();
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
 		foreach (RectangleI rect in rois) {
 
 			for (int y = rect.Top; y <= rect.Bottom; ++y) {
 
-				var dst_row = dst_data.Slice (y * settings.w, settings.w);
-				var src_row = src_data.Slice (y * settings.src_w, settings.src_w);
+				ReadOnlySpan<ColorBgra> sourceRow = sourceData.Slice (y * settings.canvasSize.Width, settings.canvasSize.Width);
+				Span<ColorBgra> destinationRow = destinationData.Slice (y * settings.canvasSize.Width, settings.canvasSize.Width);
 
 				for (int x = rect.Left; x <= rect.Right; ++x)
-					dst_row[x] = GetFinalPixelColor (settings, src_data, src_row, x, y);
+					destinationRow[x] = GetFinalPixelColor (settings, sourceData, sourceRow, x, y);
 			}
 		}
 	}
 
-	private static ColorBgra GetFinalPixelColor (RadialBlurSettings settings, ReadOnlySpan<ColorBgra> src_data, ReadOnlySpan<ColorBgra> src_row, int x, int y)
+	private static ColorBgra GetFinalPixelColor (
+		RadialBlurSettings settings,
+		ReadOnlySpan<ColorBgra> sourceData,
+		ReadOnlySpan<ColorBgra> sourceRow,
+		int x,
+		int y)
 	{
-		ColorBgra src_pixel = src_row[x];
+		ColorBgra src_pixel = sourceRow[x];
 
 		PointI f = new (
 			X: (x << 16) - settings.fcx,
-			Y: (y << 16) - settings.fcy
-		);
+			Y: (y << 16) - settings.fcy);
 
 		int fsr = settings.fr / settings.n;
 
@@ -127,29 +126,35 @@ public sealed class RadialBlurEffect : BaseEffect
 			o1 = Rotated (o1, fsr);
 			o2 = Rotated (o2, -fsr);
 
-			int u1 = o1.X + settings.fcx + 32768 >> 16;
-			int v1 = o1.Y + settings.fcy + 32768 >> 16;
+			PointI p1 = new (
+				X: o1.X + settings.fcx + 32768 >> 16,
+				Y: o1.Y + settings.fcy + 32768 >> 16);
 
-			if (u1 > 0 && v1 > 0 && u1 < settings.w && v1 < settings.h) {
-				ColorBgra sample = src_data[v1 * settings.src_w + u1];
+			if (p1.X > 0 && p1.Y > 0 && p1.X < settings.canvasSize.Width && p1.Y < settings.canvasSize.Height) {
+
+				ColorBgra sample = sourceData[p1.Y * settings.canvasSize.Width + p1.X];
 
 				sr += sample.R * sample.A;
 				sg += sample.G * sample.A;
 				sb += sample.B * sample.A;
 				sa += sample.A;
+
 				++sc;
 			}
 
-			int u2 = o2.X + settings.fcx + 32768 >> 16;
-			int v2 = o2.Y + settings.fcy + 32768 >> 16;
+			PointI p2 = new (
+				X: o2.X + settings.fcx + 32768 >> 16,
+				Y: o2.Y + settings.fcy + 32768 >> 16);
 
-			if (u2 > 0 && v2 > 0 && u2 < settings.w && v2 < settings.h) {
-				ColorBgra sample = src_data[v2 * settings.src_w + u2];
+			if (p2.X > 0 && p2.Y > 0 && p2.X < settings.canvasSize.Width && p2.Y < settings.canvasSize.Height) {
+
+				ColorBgra sample = sourceData[p2.Y * settings.canvasSize.Width + p2.X];
 
 				sr += sample.R * sample.A;
 				sg += sample.G * sample.A;
 				sb += sample.B * sample.A;
 				sa += sample.A;
+
 				++sc;
 			}
 		}
