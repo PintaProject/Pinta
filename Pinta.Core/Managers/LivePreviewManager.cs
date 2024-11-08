@@ -43,14 +43,8 @@ public interface ILivePreview
 
 public sealed class LivePreviewManager : ILivePreview
 {
-	Layer layer = null!;
-	Cairo.Path? selection_path;
-
 	bool apply_live_preview_flag;
 	bool cancel_live_preview_flag;
-	SimpleHistoryItem history_item = null!;
-
-	AsyncEffectRenderer renderer = null!;
 
 	private readonly WorkspaceManager workspace;
 	private readonly ToolManager tools;
@@ -83,13 +77,13 @@ public sealed class LivePreviewManager : ILivePreview
 		// Start rendering.
 		// Listen for changes to effectConfiguration object, and restart render if needed.
 
-		var doc = workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		IsEnabled = true;
 		apply_live_preview_flag = false;
 		cancel_live_preview_flag = false;
 
-		layer = doc.Layers.CurrentUserLayer;
+		Layer layer = doc.Layers.CurrentUserLayer;
 
 		//TODO Use the current tool layer instead.
 		LivePreviewSurface = CairoExtensions.CreateImageSurface (
@@ -102,19 +96,16 @@ public sealed class LivePreviewManager : ILivePreview
 
 		DocumentSelection selection = doc.Selection;
 
-		selection_path = selection.Visible ? selection.SelectionPath : null;
-		RenderBounds = (selection_path != null) ? selection_path.GetBounds () : LivePreviewSurface.GetBounds ();
+		Cairo.Path? selectionPath = selection.Visible ? selection.SelectionPath : null;
+		RenderBounds = (selectionPath != null) ? selectionPath.GetBounds () : LivePreviewSurface.GetBounds ();
 		RenderBounds = workspace.ClampToImageSize (RenderBounds);
 
-		history_item = new SimpleHistoryItem (effect.Icon, effect.Name);
-		history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
+		SimpleHistoryItem historyItem = new (effect.Icon, effect.Name);
+		historyItem.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
 		// Paint the pre-effect layer surface into into the working surface.
 		Cairo.Context ctx = new (LivePreviewSurface);
 		layer.Draw (ctx, layer.Surface, 1);
-
-		if (effect.EffectData != null)
-			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 
 		AsyncEffectRenderer.Settings settings = new (
 			threadCount: system.RenderThreads,
@@ -125,9 +116,13 @@ public sealed class LivePreviewManager : ILivePreview
 
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
-		renderer = new AsyncEffectRenderer (settings);
+		AsyncEffectRenderer renderer = new (settings);
 		renderer.Updated += OnUpdate;
 		renderer.Completed += OnCompletion;
+
+		if (effect.EffectData != null)
+			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
+
 		renderer.Start (effect, layer.Surface, LivePreviewSurface);
 
 		if (effect.IsConfigurable) {
@@ -154,13 +149,13 @@ public sealed class LivePreviewManager : ILivePreview
 
 			cancel_live_preview_flag = true;
 
-			renderer?.Cancel ();
+			renderer.Cancel ();
 
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
 			chrome.MainWindowBusy = true;
 
-			if (renderer == null || !renderer.IsRendering)
+			if (!renderer.IsRendering)
 				HandleCancel ();
 		}
 
@@ -213,8 +208,7 @@ public sealed class LivePreviewManager : ILivePreview
 			layer.DrawWithOperator (ctx, LivePreviewSurface, Cairo.Operator.Source);
 			ctx.Restore ();
 
-			workspace.ActiveDocument.History.PushNewItem (history_item);
-			history_item = null!;
+			workspace.ActiveDocument.History.PushNewItem (historyItem);
 
 			IsEnabled = false;
 
@@ -234,12 +228,7 @@ public sealed class LivePreviewManager : ILivePreview
 
 			LivePreviewSurface = null!;
 
-			if (renderer != null) {
-				renderer.Dispose ();
-				renderer = null!;
-			}
-
-			history_item = null!;
+			renderer.Dispose ();
 
 			// Hide progress dialog and clean up events.
 			IProgressDialog dialog = chrome.ProgressDialog;
@@ -251,8 +240,8 @@ public sealed class LivePreviewManager : ILivePreview
 
 		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
-			//TODO calculate bounds.
-			renderer!.Start (effect, layer.Surface, LivePreviewSurface);
+			// TODO: calculate bounds
+			renderer.Start (effect, layer.Surface, LivePreviewSurface);
 		}
 
 		void OnUpdate (
