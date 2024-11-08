@@ -54,24 +54,25 @@ public sealed class FragmentEffect : BaseEffect
 		DegreesAngle rotationDegrees,
 		int distance)
 	{
-		double pointStep = RadiansAngle.MAX_RADIANS / fragments;
-
-		RadiansAngle rotationRadians = rotationDegrees.ToRadians () - new RadiansAngle (Math.PI / 2);
+		RadiansAngle pointStep = new (RadiansAngle.MAX_RADIANS / fragments);
+		RadiansAngle rotationAngle = rotationDegrees.ToRadians () - new RadiansAngle (Math.PI / 2);
 
 		var pointOffsets = ImmutableArray.CreateBuilder<PointI> (fragments);
 		pointOffsets.Count = fragments;
-
 		for (int i = 0; i < fragments; i++) {
-			double currentRadians = rotationRadians.Radians + (pointStep * i);
+			RadiansAngle currentAngle = new (rotationAngle.Radians + (pointStep.Radians * i));
 			pointOffsets[i] = new PointI (
-				X: (int) Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
-				Y: (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
+				X: (int) Math.Round (distance * -Math.Sin (currentAngle.Radians), MidpointRounding.AwayFromZero),
+				Y: (int) Math.Round (distance * -Math.Cos (currentAngle.Radians), MidpointRounding.AwayFromZero));
 		}
 
 		return pointOffsets.MoveToImmutable ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
 		var pointOffsets = RecalcPointOffsets (
 			Data.Fragments,
