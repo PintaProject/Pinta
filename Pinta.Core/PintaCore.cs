@@ -60,7 +60,6 @@ public static class PintaCore
 		PaintBrushManager paintBrushes = new ();
 		PaletteFormatManager paletteFormats = new ();
 		RecentFileManager recentFiles = new ();
-		CanvasGridManager canvasGrid = new ();
 
 		// --- Services that depend on other services
 
@@ -71,6 +70,7 @@ public static class PintaCore
 		ActionManager actions = new (chrome, imageFormats, paletteFormats, palette, recentFiles, system, tools, workspace);
 		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
 		EffectsManager effects = new (actions, chrome, livePreview);
+		CanvasGridManager canvasGrid = new (workspace);
 
 		// --- Service manager
 
@@ -90,7 +90,7 @@ public static class PintaCore
 		services.AddService<IChromeService> (chrome);
 		services.AddService<ISystemService> (system);
 		services.AddService (effects);
-		services.AddService (canvasGrid);
+		services.AddService<ICanvasGridService> (canvasGrid);
 
 		// --- References to expose
 
