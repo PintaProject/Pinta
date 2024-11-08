@@ -84,38 +84,31 @@ public sealed class RadialBlurEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
-		foreach (RectangleI rect in rois) {
-
-			for (int y = rect.Top; y <= rect.Bottom; ++y) {
-
-				ReadOnlySpan<ColorBgra> sourceRow = sourceData.Slice (y * settings.canvasSize.Width, settings.canvasSize.Width);
-				Span<ColorBgra> destinationRow = destinationData.Slice (y * settings.canvasSize.Width, settings.canvasSize.Width);
-
-				for (int x = rect.Left; x <= rect.Right; ++x)
-					destinationRow[x] = GetFinalPixelColor (settings, sourceData, sourceRow, x, y);
-			}
-		}
+		foreach (RectangleI rect in rois)
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize))
+				destinationData[pixel.memoryOffset] = GetFinalPixelColor (
+					settings,
+					sourceData,
+					pixel);
 	}
 
 	private static ColorBgra GetFinalPixelColor (
 		RadialBlurSettings settings,
 		ReadOnlySpan<ColorBgra> sourceData,
-		ReadOnlySpan<ColorBgra> sourceRow,
-		int x,
-		int y)
+		PixelOffset pixel)
 	{
-		ColorBgra src_pixel = sourceRow[x];
+		ColorBgra sourcePixel = sourceData[pixel.memoryOffset];
 
 		PointI f = new (
-			X: (x << 16) - settings.fcx,
-			Y: (y << 16) - settings.fcy);
+			X: (pixel.coordinates.X << 16) - settings.fcx,
+			Y: (pixel.coordinates.Y << 16) - settings.fcy);
 
 		int fsr = settings.fr / settings.n;
 
-		int sr = src_pixel.R * src_pixel.A;
-		int sg = src_pixel.G * src_pixel.A;
-		int sb = src_pixel.B * src_pixel.A;
-		int sa = src_pixel.A;
+		int sr = sourcePixel.R * sourcePixel.A;
+		int sg = sourcePixel.G * sourcePixel.A;
+		int sb = sourcePixel.B * sourcePixel.A;
+		int sa = sourcePixel.A;
 		int sc = 1;
 
 		PointI o1 = f;
