@@ -19,7 +19,7 @@ public sealed class BulgeEffect : BaseEffect
 {
 	public sealed override bool IsTileable => true;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortBulge;
+	public override string Icon => Resources.Icons.EffectsDistortBulge;
 
 	public override string Name => Translations.GetString ("Bulge");
 
@@ -30,7 +30,6 @@ public sealed class BulgeEffect : BaseEffect
 	public BulgeData Data => (BulgeData) EffectData!;
 
 	private readonly IChromeService chrome;
-
 	public BulgeEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
@@ -40,70 +39,81 @@ public sealed class BulgeEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
-
 	private sealed record BulgeSettings (
-		float hw,
-		float hh,
-		float maxrad,
-		float amt,
-		int src_width,
-		int src_height);
-	private BulgeSettings CreateSettings (ImageSurface src, ImageSurface dst)
+		float halfWidth,
+		float halfHeight,
+		float maxRadius,
+		float amount,
+		int sourceWidth,
+		int sourceHeight);
+
+	private BulgeSettings CreateSettings (ImageSurface source)
 	{
 		float bulge = Data.Amount;
 
-		float hw = dst.Width / 2f;
-		float hh = dst.Height / 2f;
-		float maxrad = Math.Min (hw, hh) * Data.RadiusPercentage / 100f;
-		float amt = bulge / 100f;
+		float hw = source.Width / 2f;
+		float hh = source.Height / 2f;
 
-		hh += (float) Data.Offset.Y * hh;
-		hw += (float) Data.Offset.X * hw;
-
-		int src_width = src.Width;
-		int src_height = src.Height;
-
-		return new BulgeSettings (
-			hw: hw,
-			hh: hh,
-			maxrad: maxrad,
-			amt: amt,
-			src_width: src_width,
-			src_height: src_height
-		);
+		return new (
+			halfWidth: hw + ((float) Data.Offset.X * hw),
+			halfHeight: hh + ((float) Data.Offset.Y * hh),
+			maxRadius: Math.Min (hw, hh) * Data.RadiusPercentage / 100f,
+			amount: bulge / 100f,
+			sourceWidth: source.Width,
+			sourceHeight: source.Height);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	// Algorithm Code Ported From PDN
+	public override void Render (
+		ImageSurface source,
+		ImageSurface destination,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		BulgeSettings settings = CreateSettings (src, dst);
+		BulgeSettings settings = CreateSettings (source);
 
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
 		foreach (RectangleI rect in rois) {
 
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, new Size (settings.src_width, settings.src_height))) {
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, new Size (settings.sourceWidth, settings.sourceHeight))) {
 
-				float v = pixel.coordinates.Y - settings.hh;
-				float u = pixel.coordinates.X - settings.hw;
-				float r = (float) Math.Sqrt (u * u + v * v);
-				float rscale1 = (1f - (r / settings.maxrad));
-
-				if (rscale1 > 0) {
-					float rscale2 = 1 - settings.amt * rscale1 * rscale1;
-
-					float xp = u * rscale2;
-					float yp = v * rscale2;
-
-					dst_data[pixel.memoryOffset] = src.GetBilinearSampleClamped (src_data, settings.src_width, settings.src_height, xp + settings.hw, yp + settings.hh);
-				} else {
-					dst_data[pixel.memoryOffset] = src_data[pixel.memoryOffset];
-				}
+				destinationData[pixel.memoryOffset] = GetFinalPixelColor (
+					settings,
+					source,
+					sourceData,
+					pixel);
 			}
 		}
 	}
-	#endregion
+
+	private static ColorBgra GetFinalPixelColor (
+		BulgeSettings settings,
+		ImageSurface source,
+		ReadOnlySpan<ColorBgra> sourceData,
+		PixelOffset pixel)
+	{
+		float v = pixel.coordinates.Y - settings.halfHeight;
+		float u = pixel.coordinates.X - settings.halfWidth;
+
+		float r = (float) Utility.Magnitude (u, v);
+		float rscale1 = (1f - (r / settings.maxRadius));
+
+		if (rscale1 <= 0)
+			return sourceData[pixel.memoryOffset];
+
+		float rscale2 = 1 - settings.amount * rscale1 * rscale1;
+
+		float xp = u * rscale2;
+		float yp = v * rscale2;
+
+		return source.GetBilinearSampleClamped (
+			sourceData,
+			settings.sourceWidth,
+			settings.sourceHeight,
+			xp + settings.halfWidth,
+			yp + settings.halfHeight);
+	}
 
 	public sealed class BulgeData : EffectData
 	{
