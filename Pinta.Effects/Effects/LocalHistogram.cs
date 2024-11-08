@@ -13,9 +13,9 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public abstract class LocalHistogramEffect : BaseEffect
+public static class LocalHistogram
 {
-	protected static int GetMaxAreaForRadius (int radius)
+	private static int GetMaxAreaForRadius (int radius)
 	{
 		int cutoff = ((radius * 2 + 1) * (radius * 2 + 1) + 2) / 4;
 
@@ -33,12 +33,21 @@ public abstract class LocalHistogramEffect : BaseEffect
 		data.Clear ();
 	}
 
-	public virtual ColorBgra Apply (in ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
-		=> src;
+	public delegate ColorBgra Applier (
+		ColorBgra src,
+		int area,
+		Span<int> hb,
+		Span<int> hg,
+		Span<int> hr,
+		Span<int> ha);
 
-	//same as Apply, except the histogram is alpha-weighted instead of keeping a separate alpha channel histogram.
-	public virtual ColorBgra ApplyWithAlpha (in ColorBgra src, int area, int sum, Span<int> hb, Span<int> hg, Span<int> hr)
-		=> src;
+	public delegate ColorBgra AlphaApplier (
+		ColorBgra src,
+		int area,
+		int sum,
+		Span<int> hb,
+		Span<int> hg,
+		Span<int> hr);
 
 	public static byte GetChannelPercentile (int minCount, Span<int> h)
 	{
@@ -73,7 +82,8 @@ public abstract class LocalHistogramEffect : BaseEffect
 		return ColorBgra.FromBgra (b, g, r, a);
 	}
 
-	public void RenderRect (
+	public static void RenderRect (
+		Applier apply,
 		int rad,
 		ImageSurface src,
 		ImageSurface dst,
@@ -142,7 +152,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 			Span<ColorBgra> pd = dst_data.Slice (y * sourceSize.Width, sourceSize.Width);
 
 			for (int x = rect.Left; x <= rect.Right; x++) {
-				pd[x] = Apply (ps[x], area, hb, hg, hr, ha);
+				pd[x] = apply (ps[x], area, hb, hg, hr, ha);
 
 				// assert: u + x >= 0
 				left = -Math.Min (rad, x);
@@ -250,7 +260,8 @@ public abstract class LocalHistogramEffect : BaseEffect
 	}
 
 	//same as RenderRect, except the histogram is alpha-weighted instead of keeping a separate alpha channel histogram.
-	public void RenderRectWithAlpha (
+	public static void RenderRectWithAlpha (
+		AlphaApplier applyWithAlpha,
 		int rad,
 		ImageSurface src,
 		ImageSurface dst,
@@ -320,7 +331,7 @@ public abstract class LocalHistogramEffect : BaseEffect
 			Span<ColorBgra> pd = dst_data.Slice (y * sourceSize.Width, sourceSize.Width);
 
 			for (int x = rect.Left; x <= rect.Right; x++) {
-				pd[x] = ApplyWithAlpha (ps[x], area, sum, hb, hg, hr);
+				pd[x] = applyWithAlpha (ps[x], area, sum, hb, hg, hr);
 
 				// assert: u + x >= 0
 				left = -Math.Min (rad, x);

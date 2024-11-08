@@ -15,11 +15,9 @@ using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class UnfocusEffect : LocalHistogramEffect
+public sealed class UnfocusEffect : BaseEffect
 {
-	private int radius;
-
-	public override string Icon => Pinta.Resources.Icons.EffectsBlursUnfocus;
+	public override string Icon => Resources.Icons.EffectsBlursUnfocus;
 
 	public sealed override bool IsTileable => true;
 
@@ -43,16 +41,14 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
+	// Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		radius = Data.Radius;
-
 		foreach (var rect in rois)
-			RenderRectWithAlpha (radius, src, dest, rect);
+			LocalHistogram.RenderRectWithAlpha (ApplyWithAlpha, Data.Radius, src, dest, rect);
 	}
 
-	public override ColorBgra ApplyWithAlpha (in ColorBgra src, int area, int sum, Span<int> hb, Span<int> hg, Span<int> hr)
+	private static ColorBgra ApplyWithAlpha (ColorBgra src, int area, int sum, Span<int> hb, Span<int> hg, Span<int> hr)
 	{
 		//each slot of the histogram can contain up to area * 255. This will overflow an int when area > 32k
 		if (area < 32768) {
@@ -88,7 +84,6 @@ public sealed class UnfocusEffect : LocalHistogramEffect
 			return ColorBgra.FromBgraClamped (b / div, g / div, r / div, alpha);
 		}
 	}
-	#endregion
 
 	public sealed class UnfocusData : EffectData
 	{
