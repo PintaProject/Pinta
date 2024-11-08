@@ -8,7 +8,7 @@ internal sealed class EditCanvasGridAction : IActionHandler
 {
 	private readonly ViewActions view;
 	private readonly ChromeManager chrome;
-	private readonly CanvasGridManager canvasGrid;
+	private readonly CanvasGridManager canvas_grid;
 
 	internal EditCanvasGridAction (
 		ViewActions view,
@@ -17,7 +17,7 @@ internal sealed class EditCanvasGridAction : IActionHandler
 	{
 		this.view = view;
 		this.chrome = chrome;
-		this.canvasGrid = canvasGrid;
+		canvas_grid = canvasGrid;
 	}
 
 	void IActionHandler.Initialize ()
@@ -32,11 +32,11 @@ internal sealed class EditCanvasGridAction : IActionHandler
 
 	private void Activated (object sender, EventArgs e)
 	{
-		CanvasGridSettingsDialog dialog = new (chrome, canvasGrid);
+		CanvasGridSettingsDialog dialog = new (chrome, canvas_grid);
 
 		dialog.OnResponse += (_, args) => {
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
-				canvasGrid.SaveGridSettings ();
+				canvas_grid.SaveGridSettings ();
 			} else {
 				dialog.RevertChanges ();
 			}

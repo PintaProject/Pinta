@@ -496,7 +496,6 @@ internal sealed class MainWindow
 		PintaCore.Actions.View.StatusBar.Value = PintaCore.Settings.GetSetting ("statusbar-shown", true);
 		PintaCore.Actions.View.ToolBox.Value = PintaCore.Settings.GetSetting ("toolbox-shown", true);
 		PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
-		PintaCore.Actions.View.EnableCanvasGrid.Value = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
 
 		string dialog_uri = PintaCore.Settings.GetSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.DefaultDialogDirectory?.GetUri () ?? "");
 		PintaCore.RecentFiles.LastDialogDirectory = Gio.FileHelper.NewForUri (dialog_uri);
@@ -526,7 +525,6 @@ internal sealed class MainWindow
 		PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Value);
 		PintaCore.Settings.PutSetting ("statusbar-shown", PintaCore.Actions.View.StatusBar.Value);
 		PintaCore.Settings.PutSetting ("toolbox-shown", PintaCore.Actions.View.ToolBox.Value);
-		PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.EnableCanvasGrid.Value);
 		PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.LastDialogDirectory?.GetUri () ?? "");
 
 		if (PintaCore.Tools.CurrentTool is BaseTool tool)
