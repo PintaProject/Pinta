@@ -51,16 +51,16 @@ public sealed class FragmentEffect : BaseEffect
 
 	private static ImmutableArray<PointI> RecalcPointOffsets (
 		int fragments,
-		DegreesAngle rotation,
+		RadiansAngle rotation,
 		int distance)
 	{
 		RadiansAngle pointStep = new (RadiansAngle.MAX_RADIANS / fragments);
-		RadiansAngle rotationAngle = rotation.ToRadians () - new RadiansAngle (Math.PI / 2);
+		RadiansAngle adjustedRotation = rotation - new RadiansAngle (RadiansAngle.MAX_RADIANS / 4);
 
 		var pointOffsets = ImmutableArray.CreateBuilder<PointI> (fragments);
 		pointOffsets.Count = fragments;
 		for (int i = 0; i < fragments; i++) {
-			RadiansAngle currentAngle = new (rotationAngle.Radians + (pointStep.Radians * i));
+			RadiansAngle currentAngle = new (adjustedRotation.Radians + (pointStep.Radians * i));
 			pointOffsets[i] = new PointI (
 				X: (int) Math.Round (distance * -Math.Sin (currentAngle.Radians), MidpointRounding.AwayFromZero),
 				Y: (int) Math.Round (distance * -Math.Cos (currentAngle.Radians), MidpointRounding.AwayFromZero));
@@ -76,7 +76,7 @@ public sealed class FragmentEffect : BaseEffect
 	{
 		var pointOffsets = RecalcPointOffsets (
 			Data.Fragments,
-			Data.Rotation,
+			Data.Rotation.ToRadians (),
 			Data.Distance);
 
 		Span<ColorBgra> samples = stackalloc ColorBgra[pointOffsets.Length];
