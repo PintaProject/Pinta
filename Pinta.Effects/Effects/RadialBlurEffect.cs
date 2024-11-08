@@ -41,7 +41,7 @@ public sealed class RadialBlurEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
+	// Algorithm Code Ported From PDN
 
 	private static PointI Rotated (PointI f, int fr)
 	{
@@ -58,20 +58,21 @@ public sealed class RadialBlurEffect : BaseEffect
 		int fcx,
 		int fcy,
 		int n,
-		int fr);
+		int fsr);
 
 	private RadialBlurSettings CreateSettings (ImageSurface source)
 	{
 		var offset = Data.Offset;
 		int quality = Data.Quality;
 		Size sourceSize = source.GetSize ();
+		int n = quality * quality * (30 + quality * quality);
+		int fr = ((int) (Data.Angle.Degrees * Math.PI * 65536.0 / 181.0));
 		return new (
 			canvasSize: sourceSize,
 			fcx: (sourceSize.Width << 15) + (int) (offset.X * (sourceSize.Width << 15)),
 			fcy: (sourceSize.Height << 15) + (int) (offset.Y * (sourceSize.Height << 15)),
-			n: quality * quality * (30 + quality * quality),
-			fr: (int) (Data.Angle.Degrees * Math.PI * 65536.0 / 181.0)
-		);
+			n: n,
+			fsr: fr / n);
 	}
 
 	public override void Render (ImageSurface source, ImageSurface destination, ReadOnlySpan<RectangleI> rois)
@@ -103,8 +104,6 @@ public sealed class RadialBlurEffect : BaseEffect
 			X: (pixel.coordinates.X << 16) - settings.fcx,
 			Y: (pixel.coordinates.Y << 16) - settings.fcy);
 
-		int fsr = settings.fr / settings.n;
-
 		int sr = sourcePixel.R * sourcePixel.A;
 		int sg = sourcePixel.G * sourcePixel.A;
 		int sb = sourcePixel.B * sourcePixel.A;
@@ -116,8 +115,8 @@ public sealed class RadialBlurEffect : BaseEffect
 
 		for (int i = 0; i < settings.n; ++i) {
 
-			o1 = Rotated (o1, fsr);
-			o2 = Rotated (o2, -fsr);
+			o1 = Rotated (o1, settings.fsr);
+			o2 = Rotated (o2, -settings.fsr);
 
 			PointI p1 = new (
 				X: o1.X + settings.fcx + 32768 >> 16,
@@ -161,8 +160,6 @@ public sealed class RadialBlurEffect : BaseEffect
 				a: Utility.ClampToByte (sa / sc))
 			: ColorBgra.FromUInt32 (0);
 	}
-
-	#endregion
 
 	public sealed class RadialBlurData : EffectData
 	{
