@@ -35,6 +35,10 @@ public sealed class CanvasGridManager : ICanvasGridService
 
 	public CanvasGridManager ()
 	{
+		// Invalidate the workspace if the grid is changed to redraw the grid
+		SizeChanged += (_, __) => {
+			PintaCore.Workspace.Invalidate();
+		};
 	}
 
 	public event EventHandler? SizeChanged;
