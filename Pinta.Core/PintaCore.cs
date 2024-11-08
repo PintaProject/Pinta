@@ -70,7 +70,7 @@ public static class PintaCore
 		ActionManager actions = new (chrome, imageFormats, paletteFormats, palette, recentFiles, system, tools, workspace);
 		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
 		EffectsManager effects = new (actions, chrome, livePreview);
-		CanvasGridManager canvasGrid = new (workspace);
+		CanvasGridManager canvasGrid = new (workspace, settings);
 
 		// --- Service manager
 

@@ -9,47 +9,74 @@ public interface ICanvasGridService
 	int CellWidth { get; set; }
 	int CellHeight { get; set; }
 
-	public event EventHandler? SettingsChanged;
+	public void SaveGridSettings ();
+
+	public void LoadGridSettings ();
+
+	public event EventHandler SettingsChanged;
 }
 
 
 public sealed class CanvasGridManager : ICanvasGridService
 {
-	private bool show_grid = false;
-	private int cell_width = 1;
-	private int cell_height = 1;
+	private readonly SettingsManager settings;
+
+	private bool show_grid;
+	private int cell_width;
+	private int cell_height;
 
 	public bool ShowGrid {
 		get => show_grid;
-		set {
-			show_grid = value;
-			SettingsChanged?.Invoke(this, EventArgs.Empty);
-		}
+		set => SetProperty (ref show_grid, value);
 	}
 
 	public int CellWidth {
 		get => cell_width;
-		set {
-			cell_width = value;
-			SettingsChanged?.Invoke(this, EventArgs.Empty);
-		}
+		set => SetProperty (ref cell_width, value);
 	}
 
 	public int CellHeight {
 		get => cell_height;
-		set {
-			cell_height = value;
-			SettingsChanged?.Invoke(this, EventArgs.Empty);
-		}
+		set => SetProperty (ref cell_height, value);
 	}
 
-	public CanvasGridManager (WorkspaceManager workspace)
+	public CanvasGridManager (WorkspaceManager workspace, SettingsManager settings)
 	{
+		this.settings = settings;
+
 		// Invalidate the workspace if the grid is changed to redraw the grid
 		SettingsChanged += (_, __) => {
-			workspace.Invalidate();
+			workspace.Invalidate ();
 		};
+
+		LoadGridSettings ();
 	}
 
-	public event EventHandler? SettingsChanged;
+	public void SaveGridSettings ()
+	{
+		settings.PutSetting ("show-canvas-grid", ShowGrid);
+		settings.PutSetting ("canvas-grid-width", CellWidth);
+		settings.PutSetting ("canvas-grid-height", CellHeight);
+	}
+
+	public void LoadGridSettings ()
+	{
+		ShowGrid = settings.GetSetting ("show-canvas-grid", false);
+		CellWidth = settings.GetSetting ("canvas-grid-width", 64);
+		CellHeight = settings.GetSetting ("canvas-grid-height", 64);
+	}
+
+	private void SetProperty<T> (ref T field, T value)
+	{
+		// If the value hasn't changed, don't do anything
+		if (Equals (field, value)) {
+			return;
+		}
+
+		// Update the field and raise the event
+		field = value;
+		SettingsChanged?.Invoke (this, EventArgs.Empty);
+	}
+
+	public event EventHandler SettingsChanged;
 }

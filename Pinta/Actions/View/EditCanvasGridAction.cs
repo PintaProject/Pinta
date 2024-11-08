@@ -35,7 +35,9 @@ internal sealed class EditCanvasGridAction : IActionHandler
 		CanvasGridSettingsDialog dialog = new (chrome, canvasGrid);
 
 		dialog.OnResponse += (_, args) => {
-			if (args.ResponseId != (int) Gtk.ResponseType.Ok) {
+			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
+				canvasGrid.SaveGridSettings ();
+			} else {
 				dialog.RevertChanges ();
 			}
 
