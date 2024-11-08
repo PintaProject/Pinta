@@ -103,11 +103,26 @@ public sealed class CanvasRenderer
 			g.Restore ();
 		}
 
-		// If we are at least 200% and grid is requested, draw it
-		if (enable_grid && PintaCore.Actions.View.EnableCanvasGrid.Value && scale_factor.Ratio <= 0.5d)
+		// Draw the grid if it's enabled and we're zoomed in far enough
+		const int minGridLineDistance = 5;
+		if (enable_grid && PintaCore.Actions.View.EnableCanvasGrid.Value && GetMinGridLineDistance () >= minGridLineDistance)
 			RenderPixelGrid (dst, offset);
 
 		dst.MarkDirty ();
+	}
+
+	/// <summary>
+	/// Returns the minimum number of pixels that could be between the rendered grid lines.
+	/// </summary>
+	private int GetMinGridLineDistance ()
+	{
+		int cellHeight = PintaCore.CanvasGrid.CellHeight;
+		int cellWidth = PintaCore.CanvasGrid.CellWidth;
+
+		int minCanvasDistance = Math.Min (cellHeight, cellWidth);
+		double minRenderedDistance = minCanvasDistance / scale_factor.Ratio;
+
+		return (int) minRenderedDistance;
 	}
 
 	// Lazily create and cache these
