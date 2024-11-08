@@ -51,11 +51,11 @@ public sealed class FragmentEffect : BaseEffect
 
 	private static ImmutableArray<PointI> RecalcPointOffsets (
 		int fragments,
-		DegreesAngle rotationDegrees,
+		DegreesAngle rotation,
 		int distance)
 	{
 		RadiansAngle pointStep = new (RadiansAngle.MAX_RADIANS / fragments);
-		RadiansAngle rotationAngle = rotationDegrees.ToRadians () - new RadiansAngle (Math.PI / 2);
+		RadiansAngle rotationAngle = rotation.ToRadians () - new RadiansAngle (Math.PI / 2);
 
 		var pointOffsets = ImmutableArray.CreateBuilder<PointI> (fragments);
 		pointOffsets.Count = fragments;
@@ -94,16 +94,17 @@ public sealed class FragmentEffect : BaseEffect
 
 				for (int i = 0; i < pointOffsets.Length; ++i) {
 
-					int u = pixel.coordinates.X - pointOffsets[i].X;
-					int v = pixel.coordinates.Y - pointOffsets[i].Y;
+					PointI relative = new (
+						X: pixel.coordinates.X - pointOffsets[i].X,
+						Y: pixel.coordinates.Y - pointOffsets[i].Y);
 
-					if (u < 0 || u >= src_size.Width || v < 0 || v >= src_size.Height)
+					if (relative.X < 0 || relative.X >= src_size.Width || relative.Y < 0 || relative.Y >= src_size.Height)
 						continue;
 
 					samples[sampleCount] = src.GetColorBgra (
 						src_data,
 						src_size.Width,
-						new (u, v));
+						relative);
 
 					++sampleCount;
 				}
