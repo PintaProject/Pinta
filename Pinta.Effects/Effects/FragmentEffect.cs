@@ -70,8 +70,8 @@ public sealed class FragmentEffect : BaseEffect
 	}
 
 	public override void Render (
-		ImageSurface src,
-		ImageSurface dst,
+		ImageSurface source,
+		ImageSurface destination,
 		ReadOnlySpan<RectangleI> rois)
 	{
 		var pointOffsets = RecalcPointOffsets (
@@ -81,14 +81,14 @@ public sealed class FragmentEffect : BaseEffect
 
 		Span<ColorBgra> samples = stackalloc ColorBgra[pointOffsets.Length];
 
-		Size src_size = src.GetSize ();
+		Size sourceSize = source.GetSize ();
 
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
 
 		foreach (RectangleI rect in rois) {
 
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src_size)) {
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, sourceSize)) {
 
 				int sampleCount = 0;
 
@@ -98,12 +98,12 @@ public sealed class FragmentEffect : BaseEffect
 						X: pixel.coordinates.X - pointOffsets[i].X,
 						Y: pixel.coordinates.Y - pointOffsets[i].Y);
 
-					if (relative.X < 0 || relative.X >= src_size.Width || relative.Y < 0 || relative.Y >= src_size.Height)
+					if (relative.X < 0 || relative.X >= sourceSize.Width || relative.Y < 0 || relative.Y >= sourceSize.Height)
 						continue;
 
-					samples[sampleCount] = src.GetColorBgra (
+					samples[sampleCount] = source.GetColorBgra (
 						src_data,
-						src_size.Width,
+						sourceSize.Width,
 						relative);
 
 					++sampleCount;
