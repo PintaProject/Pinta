@@ -125,7 +125,7 @@ public sealed class GradientTool : BaseTool
 
 		// Initialize the scratch layer with the (original) current layer, if any blending is required.
 		if (gr.AlphaOnly || (gr.AlphaBlending && (gr.StartColor.A != 255 || gr.EndColor.A != 255))) {
-			var g = new Context (scratch_layer);
+			using Context g = new (scratch_layer);
 			document.Selection.Clip (g);
 			g.SetSourceSurface (undo_surface!, 0, 0);
 			g.Operator = Operator.Source;
@@ -136,7 +136,7 @@ public sealed class GradientTool : BaseTool
 		gr.Render (scratch_layer, selection_bounds_array);
 
 		// Transfer the result back to the current layer.
-		var context = document.CreateClippedContext ();
+		using Context context = document.CreateClippedContext ();
 		context.SetSourceSurface (scratch_layer, 0, 0);
 		context.Operator = Operator.Source;
 		context.Paint ();

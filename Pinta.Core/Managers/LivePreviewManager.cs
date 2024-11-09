@@ -110,7 +110,7 @@ public sealed class LivePreviewManager : ILivePreview
 		history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
 		// Paint the pre-effect layer surface into into the working surface.
-		Cairo.Context ctx = new (LivePreviewSurface);
+		using Cairo.Context ctx = new (LivePreviewSurface);
 		layer.Draw (ctx, layer.Surface, 1);
 
 		if (effect.EffectData != null)
@@ -206,7 +206,7 @@ public sealed class LivePreviewManager : ILivePreview
 		{
 			Debug.WriteLine ("LivePreviewManager.HandleApply()");
 
-			Cairo.Context ctx = new (layer.Surface);
+			using Cairo.Context ctx = new (layer.Surface);
 			ctx.Save ();
 			workspace.ActiveDocument.Selection.Clip (ctx);
 

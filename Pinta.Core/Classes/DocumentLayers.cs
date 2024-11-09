@@ -206,7 +206,7 @@ public sealed class DocumentLayers
 		// {0} is the name of the source layer. Example: "Layer 3 copy".
 		UserLayer layer = CreateLayer (Translations.GetString ("{0} copy", source.Name));
 
-		Context g = new (layer.Surface);
+		using Context g = new (layer.Surface);
 		g.SetSourceSurface (source.Surface, 0, 0);
 		g.Paint ();
 
@@ -254,7 +254,7 @@ public sealed class DocumentLayers
 	{
 		ImageSurface surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
-		Context g = new (surf);
+		using Context g = new (surf);
 		document.Selection.Clip (g);
 
 		g.SetSourceSurface (user_layers[index].Surface, 0, 0);
@@ -271,7 +271,7 @@ public sealed class DocumentLayers
 		// Create a new image surface
 		ImageSurface surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
-		Context g = new (surf);
+		using Context g = new (surf);
 
 		if (clip_to_selection)
 			document.Selection.Clip (g);
@@ -350,7 +350,7 @@ public sealed class DocumentLayers
 		UserLayer dest = user_layers[CurrentUserLayerIndex - 1];
 
 		// Blend the layers
-		Context g = new (dest.Surface);
+		using Context g = new (dest.Surface);
 		source.Draw (g);
 
 		DeleteCurrentLayer ();

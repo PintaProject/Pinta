@@ -97,7 +97,7 @@ public class Layer : ObservableObject
 			Surface.Width,
 			Surface.Height);
 
-		Context g = new (dest);
+		using Context g = new (dest);
 
 		g.SetMatrix (CairoExtensions.CreateMatrix (-1, 0, 0, 1, Surface.Width, 0));
 		g.SetSourceSurface (Surface, 0, 0);
@@ -114,7 +114,7 @@ public class Layer : ObservableObject
 			Surface.Width,
 			Surface.Height);
 
-		Context g = new (dest);
+		using Context g = new (dest);
 
 		g.SetMatrix (CairoExtensions.CreateMatrix (1, 0, 0, -1, 0, Surface.Height));
 		g.SetSourceSurface (Surface, 0, 0);
@@ -183,7 +183,7 @@ public class Layer : ObservableObject
 			new_size.Width,
 			new_size.Height);
 
-		Context g = new (dest);
+		using Context g = new (dest);
 
 		g.Transform (xform);
 		g.SetSourceSurface (Surface, 0, 0);
@@ -215,7 +215,7 @@ public class Layer : ObservableObject
 			newSize.Width,
 			newSize.Height);
 
-		Context g = new (dest);
+		using Context g = new (dest);
 
 		g.Scale (newSize.Width / (double) Surface.Width, newSize.Height / (double) Surface.Height);
 		g.SetSourceSurface (Surface, resamplingMode);
@@ -238,7 +238,7 @@ public class Layer : ObservableObject
 
 		PointD anchorPoint = GetAnchorPoint (delta, anchor);
 
-		Context g = new (dest);
+		using Context g = new (dest);
 
 		g.SetSourceSurface (Surface, anchorPoint.X, anchorPoint.Y);
 		g.Paint ();
@@ -267,7 +267,7 @@ public class Layer : ObservableObject
 			rect.Width,
 			rect.Height);
 
-		Context g = new (dest);
+		using Context g = new (dest);
 
 		// Move the selected content to the upper left
 		g.Translate (-rect.X, -rect.Y);

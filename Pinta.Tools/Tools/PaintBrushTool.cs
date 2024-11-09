@@ -124,7 +124,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 			surface_modified = true;
 
 		var surf = document.Layers.ToolLayer.Surface;
-		var g = document.CreateClippedToolContext ();
+		using Context g = document.CreateClippedToolContext ();
 
 		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 		g.LineWidth = BrushWidth;
@@ -148,9 +148,9 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		var gDest = new Context (document.Layers.CurrentUserLayer.Surface);
+		using Context g = new (document.Layers.CurrentUserLayer.Surface);
 
-		document.Layers.ToolLayer.Draw (gDest);
+		document.Layers.ToolLayer.Draw (g);
 
 		document.Layers.ToolLayer.Hidden = true;
 
