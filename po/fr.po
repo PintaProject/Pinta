@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-03 01:38+0000\n"
-"PO-Revision-Date: 2024-09-09 05:09+0000\n"
-"Last-Translator: Matthieu LAURENT <matthieu.laurent69@proton.me>\n"
+"PO-Revision-Date: 2024-11-08 18:00+0000\n"
+"Last-Translator: Melr1 19 An220 <achille.toupin@laposte.net>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -100,7 +100,7 @@ msgstr "Tous les fichiers"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Dégradé Alpha"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:110
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
@@ -399,15 +399,15 @@ msgstr "Cliquer et déplacer pour naviguer dans l'image."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:271
 msgid "Click to reset primary and secondary color."
-msgstr "Cliquez ici pour réinitialiser les couleurs primaires et secondaires"
+msgstr "Cliquer ici pour réinitialiser les couleurs primaire et secondaire."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
 msgid "Click to select primary color."
-msgstr "Cliquer pour sélectionner la couleur primaire"
+msgstr "Cliquer pour sélectionner la couleur primaire."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:49
 msgid "Click to select region of similar color."
-msgstr "Cliquer pour sélectionner une région de couleur similaire"
+msgstr "Cliquer pour sélectionner une région de couleur similaire."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:263
 msgid "Click to select secondary color."
@@ -468,7 +468,7 @@ msgstr "Densité couleur -"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:213
 msgid "Color Gradient"
-msgstr ""
+msgstr "Dégradé de couleur"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
@@ -497,7 +497,7 @@ msgstr "Schéma de couleur"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:182
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
 msgid "Color Scheme Source"
-msgstr ""
+msgstr "Source du schéma de couleur"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:213
 msgid "Color Sorting"
@@ -565,7 +565,7 @@ msgstr "Rogner"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:232
 msgid "Curved"
-msgstr ""
+msgstr "Courbé"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:136
@@ -614,7 +614,7 @@ msgstr "Supprimé"
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:48
 msgid "Dents"
-msgstr ""
+msgstr "Bosses"
 
 #: ../Pinta.Core/Actions/EditActions.cs:276
 msgid "Deselect"
@@ -780,7 +780,7 @@ msgstr "Adoucir le Bord du Canevas"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather Object"
-msgstr ""
+msgstr "Plume"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -796,7 +796,7 @@ msgstr "Remplir le fond"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:219
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Remplir le fond de l'objet"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:216
@@ -959,17 +959,17 @@ msgstr "Historique"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:239
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "Bleu horizontal (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:242
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "Vert horizontal (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:245
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "Rouge horizontal (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
@@ -1177,6 +1177,12 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selection outline by a single pixel."
 msgstr ""
+"Clic gauche et glisser la sélection pour déplacer le contenu sélectionné.\n"
+"Maintenir {0} pour mettre à l'échelle au lieu de déplacer.\n"
+"Clic droit et glisser la sélection pour tourner le contenu sélectionné.\n"
+"Maintenir Shift pour tourner pas à pas.\n"
+"Utiliser les touches fléchées pour déplacer le contenu sélectionné pixel par "
+"pixel."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:58
@@ -1832,7 +1838,7 @@ msgstr "Bruit aléatoire"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:223
 msgid "Random Point Locations"
-msgstr ""
+msgstr "Positions de point aléatoires"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -1904,7 +1910,7 @@ msgstr "Remplacer"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
-msgstr ""
+msgstr "Signaler un bogue..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:73
 msgid "Resampling:"
@@ -1949,12 +1955,12 @@ msgstr "Redimensionner la palette"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:191
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:215
 msgid "Reverse Color Scheme"
-msgstr ""
+msgstr "Inverser le schéma de couleur"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
 msgid "Reverse Color Sorting"
-msgstr ""
+msgstr "Inverser le tri par couleurs"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Right Align"
@@ -2103,7 +2109,7 @@ msgstr "Afficher le calque"
 #. Translators: The user can choose whether or not to render the points used in the calculation of a Voronoi diagram
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Show Points"
-msgstr ""
+msgstr "Afficher les points"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:153
 msgid "Show/Hide"
@@ -2112,12 +2118,12 @@ msgstr "Afficher/Masquer"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
 msgid "Sierra Lite"
-msgstr ""
+msgstr "Sierra Léger"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
@@ -2163,7 +2169,7 @@ msgstr "Force"
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Stucki"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
@@ -2205,7 +2211,7 @@ msgstr "Le presse-papier ne contient pas d'image"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:189
 msgid "The file may be an invalid or corrupt extension package"
-msgstr ""
+msgstr "Le fichier est peut-être un paquet d'extension invalide ou corrompu"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:74
 msgid "The following dependencies could not be resolved:"
@@ -2228,6 +2234,8 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"L'image chargée est plus grande que le canevas. Que voulez-vous faire pour "
+"la taille du canevas ?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:341
 msgid "The installation failed!"
@@ -2242,6 +2250,8 @@ msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
+"Le paquet d'extension sélectionné ne peut pas être installé car il y a des "
+"conflits de dépendance."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:348
 msgid "The uninstallation failed!"
@@ -2256,6 +2266,8 @@ msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
 msgstr ""
+"Il y a d'autres paquets d'extension qui dépendent des précédents qui vont "
+"aussi être désinstallés :"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:137
 msgid "Thickness"
@@ -2371,7 +2383,7 @@ msgstr "Désinstaller"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:171
 msgid "Uninstall..."
-msgstr ""
+msgstr "Désinstaller..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
@@ -2390,11 +2402,11 @@ msgstr "Format de fichier non pris en charge"
 
 #: ../Pinta.Core/Classes/Palette.cs:155
 msgid "Unsupported palette format"
-msgstr ""
+msgstr "Format de palette non supporté"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:162
 msgid "Update..."
-msgstr ""
+msgstr "Mettre à jour..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:91
 msgid "Updates"
@@ -2416,27 +2428,27 @@ msgstr "Utilisation d'icônes provenant de :"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:202
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "Version : {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:249
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Bleu vertical (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:252
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Vert vertical (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:255
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "Rouge vertical (R)"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
-msgstr ""
+msgstr "Vignette"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
@@ -2444,7 +2456,7 @@ msgstr "Visible"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Diagramme de Voronoï"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:121
 msgid "Warmth"
@@ -2581,7 +2593,7 @@ msgstr "par les contributeurs de Pinta"
 
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
-msgstr "dessiner;dessin;peinture;peinture;graphiques;trame;2d;"
+msgstr "dessiner ; dessin ; peindre ; peinture ; graphiques ; trame ; 2d ;"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:279
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:96
