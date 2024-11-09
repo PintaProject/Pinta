@@ -47,73 +47,72 @@ public sealed class FragmentEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
+	// Algorithm Code Ported From PDN
 
-	private static ImmutableArray<PointI> RecalcPointOffsets (int fragments, DegreesAngle rotationDegrees, int distance)
+	private static ImmutableArray<PointI> RecalcPointOffsets (
+		int fragments,
+		RadiansAngle rotation,
+		int distance)
 	{
-		double pointStep = RadiansAngle.MAX_RADIANS / fragments;
-
-		RadiansAngle rotationRadians = rotationDegrees.ToRadians () - new RadiansAngle (Math.PI / 2);
+		RadiansAngle pointStep = new (RadiansAngle.MAX_RADIANS / fragments);
+		RadiansAngle adjustedRotation = rotation - new RadiansAngle (RadiansAngle.MAX_RADIANS / 4);
 
 		var pointOffsets = ImmutableArray.CreateBuilder<PointI> (fragments);
 		pointOffsets.Count = fragments;
-
 		for (int i = 0; i < fragments; i++) {
-			double currentRadians = rotationRadians.Radians + (pointStep * i);
+			RadiansAngle currentAngle = new (adjustedRotation.Radians + (pointStep.Radians * i));
 			pointOffsets[i] = new PointI (
-				X: (int) Math.Round (distance * -Math.Sin (currentRadians), MidpointRounding.AwayFromZero),
-				Y: (int) Math.Round (distance * -Math.Cos (currentRadians), MidpointRounding.AwayFromZero));
+				X: (int) Math.Round (distance * -Math.Sin (currentAngle.Radians), MidpointRounding.AwayFromZero),
+				Y: (int) Math.Round (distance * -Math.Cos (currentAngle.Radians), MidpointRounding.AwayFromZero));
 		}
 
 		return pointOffsets.MoveToImmutable ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (
+		ImageSurface source,
+		ImageSurface destination,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		var pointOffsets = RecalcPointOffsets (Data.Fragments, Data.Rotation, Data.Distance);
+		var pointOffsets = RecalcPointOffsets (
+			Data.Fragments,
+			Data.Rotation.ToRadians (),
+			Data.Distance);
 
-		int poLength = pointOffsets.Length;
-		Span<PointI> pointOffsetsPtr = stackalloc PointI[poLength];
+		Span<ColorBgra> samples = stackalloc ColorBgra[pointOffsets.Length];
 
-		for (int i = 0; i < poLength; ++i)
-			pointOffsetsPtr[i] = pointOffsets[i];
+		Size sourceSize = source.GetSize ();
 
-		Span<ColorBgra> samples = stackalloc ColorBgra[poLength];
-
-		int src_width = src.Width;
-		int src_height = src.Height;
-
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
 
 		foreach (RectangleI rect in rois) {
 
-			for (int y = rect.Top; y <= rect.Bottom; y++) {
+			foreach (var pixel in Utility.GeneratePixelOffsets (rect, sourceSize)) {
 
-				var dst_row = dst_data.Slice (y * src_width, src_width);
+				int sampleCount = 0;
 
-				for (int x = rect.Left; x <= rect.Right; x++) {
+				for (int i = 0; i < pointOffsets.Length; ++i) {
 
-					int sampleCount = 0;
+					PointI relative = new (
+						X: pixel.coordinates.X - pointOffsets[i].X,
+						Y: pixel.coordinates.Y - pointOffsets[i].Y);
 
-					for (int i = 0; i < poLength; ++i) {
+					if (relative.X < 0 || relative.X >= sourceSize.Width || relative.Y < 0 || relative.Y >= sourceSize.Height)
+						continue;
 
-						int u = x - pointOffsetsPtr[i].X;
-						int v = y - pointOffsetsPtr[i].Y;
+					samples[sampleCount] = source.GetColorBgra (
+						src_data,
+						sourceSize.Width,
+						relative);
 
-						if (u < 0 || u >= src_width || v < 0 || v >= src_height)
-							continue;
-
-						samples[sampleCount] = src.GetColorBgra (src_data, src_width, new (u, v));
-						++sampleCount;
-					}
-
-					dst_row[x] = ColorBgra.Blend (samples[..sampleCount]);
+					++sampleCount;
 				}
+
+				dst_data[pixel.memoryOffset] = ColorBgra.Blend (samples[..sampleCount]);
 			}
 		}
 	}
-	#endregion
 
 	public sealed class FragmentData : EffectData
 	{
