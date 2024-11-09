@@ -138,7 +138,7 @@ public sealed class CloudsEffect : BaseEffect
 		// Have to lock because effect renderer is multithreaded
 		lock (render_lock) {
 
-			Context g = new (dst);
+			using Context g = new (dst);
 
 			// - Clear any previous render from the destination
 			// - Copy the source to the destination

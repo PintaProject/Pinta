@@ -62,7 +62,7 @@ public sealed class DocumentSelection
 	public Path SelectionPath {
 		get {
 			if (selection_path == null) {
-				Context g = new (owning_document.Layers.CurrentUserLayer.Surface);
+				using Context g = new (owning_document.Layers.CurrentUserLayer.Surface);
 				selection_path = g.CreatePolygonPath (ConvertToPolygonSet (SelectionPolygons));
 			}
 

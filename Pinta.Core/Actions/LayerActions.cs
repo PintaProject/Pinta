@@ -217,7 +217,7 @@ public sealed class LayerActions
 			using Gio.FileInputStream fs = file.Read (null);
 			try {
 				GdkPixbuf.Pixbuf bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when an error is thrown
-				Cairo.Context context = new (layer.Surface);
+				using Cairo.Context context = new (layer.Surface);
 				context.DrawPixbuf (bg, PointD.Zero);
 			} finally {
 				fs.Close (null);

@@ -131,6 +131,8 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 		g.DrawEllipse (settings.ellipseOutlineRect, settings.color, 1);
 		g.FillEllipse (settings.gripEllipseRect, settings.color);
 		g.DrawLine (settings.center, settings.endPoint, settings.color, 1);
+
+		g.Dispose ();
 	}
 
 	public event EventHandler? ValueChanged;

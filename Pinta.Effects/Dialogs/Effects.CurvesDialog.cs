@@ -483,6 +483,8 @@ public sealed class CurvesDialog : Gtk.Dialog
 		DrawGrid (g);
 		DrawControlPoints (g);
 
+		g.Dispose ();
+
 		return;
 
 		// Methods

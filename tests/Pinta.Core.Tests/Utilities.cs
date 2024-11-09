@@ -103,7 +103,7 @@ internal static class Utilities
 		try {
 			var bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when error is thrown.
 			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, bg.Width, bg.Height);
-			var context = new Cairo.Context (surf);
+			using var context = new Cairo.Context (surf);
 			context.DrawPixbuf (bg, PointD.Zero);
 			return surf;
 		} finally {

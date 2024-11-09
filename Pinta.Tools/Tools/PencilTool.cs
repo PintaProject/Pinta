@@ -126,7 +126,7 @@ public sealed class PencilTool : BaseTool
 		if (document.Workspace.PointInCanvas (e.PointDouble))
 			surface_modified = true;
 
-		var g = document.CreateClippedContext ();
+		using Context g = document.CreateClippedContext ();
 
 		g.Antialias = Antialias.None;
 

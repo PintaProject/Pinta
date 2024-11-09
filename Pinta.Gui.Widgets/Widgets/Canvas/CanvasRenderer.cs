@@ -68,7 +68,7 @@ public sealed class CanvasRenderer
 		RectangleD r = new RectangleI (offset, dst.GetBounds ().Size).ToDouble ();
 		bool is_one_to_one = scale_factor.Ratio == 1;
 
-		Cairo.Context g = new (dst);
+		using Cairo.Context g = new (dst);
 
 		// Create the transparent checkerboard background
 		g.Translate (-offset.X, -offset.Y);

@@ -112,7 +112,7 @@ public sealed class FreeformShapeTool : BaseBrushTool
 
 		document.Layers.ToolLayer.Clear ();
 
-		var g = document.CreateClippedToolContext ();
+		using Context g = document.CreateClippedToolContext ();
 		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
 		g.SetDashFromString (dash_pattern, BrushWidth);
@@ -156,7 +156,7 @@ public sealed class FreeformShapeTool : BaseBrushTool
 		document.Layers.ToolLayer.Clear ();
 		document.Layers.ToolLayer.Hidden = true;
 
-		Context g = document.CreateClippedContext ();
+		using Context g = document.CreateClippedContext ();
 		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
 		g.SetDashFromString (dash_pattern, BrushWidth);

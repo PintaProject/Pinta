@@ -95,7 +95,7 @@ public sealed class EraserTool : BaseBrushTool
 		if (document.Workspace.PointInCanvas (new_pointd))
 			surface_modified = true;
 
-		var g = document.CreateClippedContext ();
+		using Context g = document.CreateClippedContext ();
 		var last_pointd = (PointD) last_point.Value;
 		switch (eraser_type) {
 			case EraserType.Normal:
@@ -144,7 +144,7 @@ public sealed class EraserTool : BaseBrushTool
 	{
 		var tmp_surface = CairoExtensions.CreateImageSurface (Format.Argb32, dest_rect.Width, dest_rect.Height);
 
-		var g = new Context (tmp_surface) { Operator = Operator.Source };
+		using Context g = new (tmp_surface) { Operator = Operator.Source };
 
 		g.SetSourceSurface (surf, -dest_rect.Left, -dest_rect.Top);
 		g.Rectangle (new RectangleD (0, 0, dest_rect.Width, dest_rect.Height));

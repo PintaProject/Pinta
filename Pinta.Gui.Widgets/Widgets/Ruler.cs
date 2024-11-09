@@ -324,6 +324,8 @@ public sealed class Ruler : DrawingArea
 		cr.Stroke ();
 
 		// TODO-GTK3 - cache the ticks
+
+		cr.Dispose ();
 	}
 
 	private static int GetFontSize (

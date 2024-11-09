@@ -101,7 +101,7 @@ public sealed class CloneStampTool : BaseBrushTool
 			return;
 		}
 
-		var g = document.CreateClippedToolContext ();
+		using Cairo.Context g = document.CreateClippedToolContext ();
 		g.Antialias = UseAntialiasing ? Cairo.Antialias.Subpixel : Cairo.Antialias.None;
 
 		g.MoveTo (last_point.Value.X, last_point.Value.Y);
@@ -124,7 +124,7 @@ public sealed class CloneStampTool : BaseBrushTool
 	{
 		painting = false;
 
-		var g = new Cairo.Context (document.Layers.CurrentUserLayer.Surface);
+		using Cairo.Context g = new (document.Layers.CurrentUserLayer.Surface);
 		g.SetSourceSurface (document.Layers.ToolLayer.Surface, 0, 0);
 		g.Paint ();
 

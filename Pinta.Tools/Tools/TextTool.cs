@@ -981,7 +981,7 @@ public sealed class TextTool : BaseTool
 			ClearTextLayer ();
 		}
 
-		Cairo.Context g = new (surf);
+		using Cairo.Context g = new (surf);
 
 		var options = new Cairo.FontOptions ();
 
@@ -1015,7 +1015,7 @@ public sealed class TextTool : BaseTool
 
 		//Fill in background
 		if (BackgroundFill) {
-			Cairo.Context g2 = new (surf);
+			using Cairo.Context g2 = new (surf);
 			selection?.Clip (g2);
 
 			g2.FillRectangle (CurrentTextLayout.GetLayoutBounds ().ToDouble (), palette.SecondaryColor);

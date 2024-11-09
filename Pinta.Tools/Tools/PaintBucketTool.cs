@@ -63,11 +63,11 @@ public sealed class PaintBucketTool : FloodTool
 	{
 		var surf = document.Layers.ToolLayer.Surface;
 
-		var g = new Context (surf) {
+		using Context tool_layer_ctx = new (surf) {
 			Operator = Operator.Source
 		};
-		g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, 0, 0);
-		g.Paint ();
+		tool_layer_ctx.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, 0, 0);
+		tool_layer_ctx.Paint ();
 
 		var hist = new SimpleHistoryItem (Icon, Name);
 		hist.TakeSnapshotOfLayer (document.Layers.CurrentUserLayer);
@@ -91,10 +91,10 @@ public sealed class PaintBucketTool : FloodTool
 
 		// Transfer the temp layer to the real one,
 		// respecting any selection area
-		g = document.CreateClippedContext ();
-		g.Operator = Operator.Source;
-		g.SetSourceSurface (surf, 0, 0);
-		g.Paint ();
+		using Context layer_ctx = document.CreateClippedContext ();
+		layer_ctx.Operator = Operator.Source;
+		layer_ctx.SetSourceSurface (surf, 0, 0);
+		layer_ctx.Paint ();
 
 		document.Layers.ToolLayer.Clear ();
 		document.History.PushNewItem (hist);

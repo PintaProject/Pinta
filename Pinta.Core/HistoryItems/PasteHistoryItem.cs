@@ -50,7 +50,7 @@ public sealed class PasteHistoryItem : BaseHistoryItem
 		doc.Layers.CreateSelectionLayer ();
 		doc.Layers.ShowSelectionLayer = true;
 
-		var g = new Cairo.Context (doc.Layers.SelectionLayer.Surface);
+		using Cairo.Context g = new (doc.Layers.SelectionLayer.Surface);
 		g.SetSourceSurface (paste_image, 0, 0);
 		g.Paint ();
 

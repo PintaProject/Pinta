@@ -143,7 +143,7 @@ public class RecolorTool : BaseBrushTool
 
 		tmp_layer.MarkDirty ();
 
-		var g = document.CreateClippedContext ();
+		using Context g = document.CreateClippedContext ();
 		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 
 		g.MoveTo (last_point.Value.X, last_point.Value.Y);
