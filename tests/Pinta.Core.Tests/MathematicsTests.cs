@@ -25,16 +25,14 @@ internal sealed class MathematicsTests
 		Assert.That (result2, Is.EqualTo (expected));
 	}
 
-	[TestCase (0, 0)]
 	[TestCase (1, 0)]
-	[TestCase (0, 1)]
-	[TestCase (1, -1)]
+	[TestCase (0, 0)]
 	[TestCase (-1, 1)]
-	[TestCase (-1, -1)]
-	[TestCase (0, -1)]
 	[TestCase (-1, 0)]
+	[TestCase (-1, -1)]
 	public void EuclidGCD_RejectsInvalidInputs (int a, int b)
 	{
 		Assert.Throws<ArgumentOutOfRangeException> (() => Mathematics.EuclidGCD (a, b));
+		Assert.Throws<ArgumentOutOfRangeException> (() => Mathematics.EuclidGCD (b, a));
 	}
 }
