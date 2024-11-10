@@ -1,7 +1,6 @@
 using System;
 using Gtk;
 using Pinta.Core;
-using Pinta.Core.Managers;
 
 namespace Pinta;
 

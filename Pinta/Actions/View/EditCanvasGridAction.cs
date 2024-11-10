@@ -1,6 +1,5 @@
 using System;
 using Pinta.Core;
-using Pinta.Core.Managers;
 
 namespace Pinta.Actions;
 

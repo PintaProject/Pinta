@@ -27,7 +27,6 @@
 using System.Collections.Generic;
 using Pinta.Actions;
 using Pinta.Core;
-using Pinta.Core.Managers;
 
 namespace Pinta;
 

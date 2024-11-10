@@ -1,6 +1,6 @@
 using System;
 
-namespace Pinta.Core.Managers;
+namespace Pinta.Core;
 
 
 public interface ICanvasGridService
