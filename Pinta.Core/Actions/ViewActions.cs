@@ -72,7 +72,7 @@ public sealed class ViewActions
 		ActualSize = new Command ("ActualSize", Translations.GetString ("Normal Size"), null, Resources.StandardIcons.ZoomOriginal);
 		ToolBar = new ToggleCommand ("Toolbar", Translations.GetString ("Toolbar"), null, null);
 		ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
-		EditCanvasGrid = new Command ("EditCanvasGrid", Translations.GetString ("Edit Grid"), null, Resources.Icons.ViewGrid);
+		EditCanvasGrid = new Command ("EditCanvasGrid", Translations.GetString ("Canvas Grid..."), null, Resources.Icons.ViewGrid);
 		StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
 		ToolBox = new ToggleCommand ("ToolBox", Translations.GetString ("Tool Box"), null, null);
 		Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);

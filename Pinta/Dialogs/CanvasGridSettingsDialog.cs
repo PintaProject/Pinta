@@ -53,7 +53,7 @@ public sealed class CanvasGridSettingsDialog : Dialog
 		mainVbox.SetOrientation (Orientation.Vertical);
 		mainVbox.Append (grid);
 
-		Title = Translations.GetString ("Grid Settings");
+		Title = Translations.GetString ("Canvas Grid Settings");
 		TransientFor = chrome.MainWindow;
 		Modal = true;
 		IconName = Resources.Icons.ViewGrid;
