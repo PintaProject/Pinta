@@ -66,7 +66,7 @@ public sealed class LayersListViewItem : GObject.Object
 			doc.Layers.SelectionLayer,
 		};
 
-		canvas_renderer ??= new CanvasRenderer (false, false);
+		canvas_renderer ??= new CanvasRenderer (null, false);
 		canvas_renderer.Initialize (doc.ImageSize, new Size (widthRequest, heightRequest));
 		canvas_renderer.Render (layers, surface, PointI.Zero);
 

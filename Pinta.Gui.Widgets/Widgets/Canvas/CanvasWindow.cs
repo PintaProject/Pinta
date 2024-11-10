@@ -53,7 +53,8 @@ public sealed class CanvasWindow : Gtk.Grid
 
 	public CanvasWindow (
 		WorkspaceManager workspace,
-		Document document)
+		Document document,
+		ICanvasGridService canvasGrid)
 	{
 		this.workspace = workspace;
 		this.document = document;
@@ -81,7 +82,7 @@ public sealed class CanvasWindow : Gtk.Grid
 		// The mouse handler in PintaCanvas grabs focus away from toolbar widgets.
 		Focusable = true;
 
-		Canvas = new PintaCanvas (this, document) { Name = "canvas" };
+		Canvas = new PintaCanvas (this, document, canvasGrid) { Name = "canvas" };
 
 		// Rulers
 		horizontal_ruler = new Ruler (Gtk.Orientation.Horizontal) { Metric = MetricType.Pixels };
