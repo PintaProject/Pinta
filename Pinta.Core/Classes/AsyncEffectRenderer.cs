@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
@@ -75,8 +76,7 @@ internal sealed class AsyncEffectRenderer
 	Cairo.ImageSurface? source_surface;
 	Cairo.ImageSurface? dest_surface;
 
-	bool is_rendering;
-	bool restart_render_flag;
+	TaskCompletionSource completion_source;
 	CancellationTokenSource cancellation_source;
 	ConcurrentQueue<RectangleI> queued_tiles;
 	int tiles_count = 0;
@@ -91,11 +91,14 @@ internal sealed class AsyncEffectRenderer
 
 	internal AsyncEffectRenderer (Settings settings)
 	{
+		TaskCompletionSource initialCompletionSource = new ();
+		initialCompletionSource.SetResult ();
+
 		effect = null;
 		source_surface = null;
 		dest_surface = null;
 
-		is_rendering = false;
+		completion_source = initialCompletionSource;
 		cancellation_source = new ();
 		updated_lock = new object ();
 		is_updated = false;
@@ -107,7 +110,7 @@ internal sealed class AsyncEffectRenderer
 		this.settings = settings;
 	}
 
-	internal bool IsRendering => is_rendering;
+	internal bool IsRendering => !completion_source.Task.IsCompleted;
 
 	internal double Progress {
 		get {
@@ -117,11 +120,20 @@ internal sealed class AsyncEffectRenderer
 		}
 	}
 
+	private readonly object completion_swap_lock = new ();
 	internal void Start (
 		BaseEffect effect,
 		Cairo.ImageSurface source,
 		Cairo.ImageSurface dest)
 	{
+		TaskCompletionSource newCompletionSource = new ();
+		lock (completion_swap_lock) {
+			if (IsRendering) {
+				throw new InvalidOperationException ("Render is in progress");
+			}
+			completion_source = newCompletionSource;
+		}
+
 		Debug.WriteLine ("AsyncEffectRenderer.Start ()");
 
 		// It is important the effect's properties don't change during rendering.
@@ -131,27 +143,14 @@ internal sealed class AsyncEffectRenderer
 		source_surface = source;
 		dest_surface = dest;
 
-		// If a render is already in progress, then cancel it,
-		// and start a new render.
-		if (IsRendering) {
-			cancellation_source.Cancel ();
-			restart_render_flag = true;
-			return;
-		}
-
 		StartRender ();
 	}
 
-	internal void Cancel ()
+	internal Task Cancel ()
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
-
-		CancellationToken cancellationToken = cancellation_source.Token;
 		cancellation_source.Cancel ();
-		restart_render_flag = false;
-
-		if (!IsRendering)
-			HandleRenderCompletion (cancellationToken);
+		return completion_source.Task;
 	}
 
 	internal delegate void UpdateHandler (
@@ -189,8 +188,6 @@ internal sealed class AsyncEffectRenderer
 		// === Body ===
 		// ------------
 
-		is_rendering = true;
-		restart_render_flag = false;
 		is_updated = false;
 
 		render_exceptions.Clear ();
@@ -254,7 +251,22 @@ internal sealed class AsyncEffectRenderer
 					0,
 					0,
 					() => {
-						HandleRenderCompletion (cancellationToken);
+						var exceptions =
+							render_exceptions.IsEmpty
+							? Array.Empty<Exception> ()
+							: render_exceptions.ToArray ();
+
+						HandleTimerTick (cancellationToken);
+
+						if (timer_tick_id > 0)
+							GLib.Source.Remove (timer_tick_id);
+
+						timer_tick_id = 0;
+
+						Completed?.Invoke (exceptions, cancellationToken);
+
+						completion_source.SetResult ();
+
 						return false; // don't call the timer again
 					}
 				);
@@ -329,27 +341,5 @@ internal sealed class AsyncEffectRenderer
 			Updated?.Invoke (Progress, bounds);
 
 		return true;
-	}
-
-	void HandleRenderCompletion (CancellationToken cancellationToken)
-	{
-		var exceptions =
-			render_exceptions.IsEmpty
-			? Array.Empty<Exception> ()
-			: render_exceptions.ToArray ();
-
-		HandleTimerTick (cancellationToken);
-
-		if (timer_tick_id > 0)
-			GLib.Source.Remove (timer_tick_id);
-
-		timer_tick_id = 0;
-
-		Completed?.Invoke (exceptions, cancellationToken);
-
-		if (restart_render_flag)
-			StartRender ();
-		else
-			is_rendering = false;
 	}
 }
