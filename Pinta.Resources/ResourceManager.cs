@@ -108,7 +108,7 @@ public static class ResourceLoader
 			if (HasResource (assembly, name)) {
 				using var stream = assembly.GetManifestResourceStream (name)!;
 				var buffer = new byte[stream.Length];
-				stream.Read (buffer, 0, buffer.Length);
+				stream.ReadExactly (buffer);
 
 				var bytes = GLib.Bytes.New (buffer);
 				image = Gdk.Texture.NewFromBytes (bytes);
