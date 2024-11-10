@@ -56,7 +56,7 @@ public readonly struct ScaleFactor
 		if (denominator <= 0)
 			throw new ArgumentOutOfRangeException (nameof (denominator), "must be greater than 0(denominator = " + denominator + ")");
 
-		if (numerator < 0)
+		if (numerator <= 0)
 			throw new ArgumentOutOfRangeException (nameof (numerator), "must be greater than 0(numerator = " + numerator + ")");
 
 		// Clamp
@@ -68,10 +68,14 @@ public readonly struct ScaleFactor
 			denominator = MaxValue.denominator;
 		}
 
-		// TODO: Simplify fraction
+		int gcd = Mathematics.EuclidGCD (numerator, denominator);
 
-		this.numerator = numerator;
-		this.denominator = denominator;
-		Ratio = numerator / (double) denominator;
+		int reducedNumerator = numerator / gcd;
+		int reducedDenominator = denominator / gcd;
+
+		this.numerator = reducedNumerator;
+		this.denominator = reducedDenominator;
+
+		Ratio = reducedNumerator / (double) reducedDenominator;
 	}
 }
