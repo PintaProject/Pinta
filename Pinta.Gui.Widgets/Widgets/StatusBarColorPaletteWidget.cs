@@ -312,17 +312,11 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	{
 		ColorPickerDialog dialog = new ColorPickerDialog (PintaCore.Chrome, colors, selectedColorIndex, false, title);
 
-		dialog.OnResponse += (_, args) => dialog.Destroy ();
-
 		dialog.Show ();
 
 		var response = dialog.RunBlocking ();
 		if (response == Gtk.ResponseType.Ok) {
-			Color[]? result = new Color[colors.Length];
-			for (int i = 0; i < colors.Length; i++) {
-				result[i] = dialog.colors[i];
-			}
-
+			Color[] result = dialog.colors;
 			dialog.Destroy ();
 			return result;
 		}
