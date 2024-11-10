@@ -98,14 +98,14 @@ internal static class PerlinNoise
 		double gradAA = Gradient (permutation_table[aa], offsetX, offsetY);
 		double gradBA = Gradient (permutation_table[ba], offsetX - 1, offsetY);
 
-		double edge1 = Utility.Lerp (gradAA, gradBA, u);
+		double edge1 = Mathematics.Lerp (gradAA, gradBA, u);
 
 		double gradAB = Gradient (permutation_table[ab], offsetX, offsetY - 1);
 		double gradBB = Gradient (permutation_table[bb], offsetX - 1, offsetY - 1);
 
-		double edge2 = Utility.Lerp (gradAB, gradBB, u);
+		double edge2 = Mathematics.Lerp (gradAB, gradBB, u);
 
-		return Utility.Lerp (edge1, edge2, v);
+		return Mathematics.Lerp (edge1, edge2, v);
 	}
 
 	/// <summary>
@@ -180,14 +180,14 @@ internal static class PerlinNoise
 		double gradAA = Gradient (permutation_table[aa], offsetX, offsetY);
 		double gradBA = Gradient (permutation_table[ba], offsetX - 1, offsetY);
 
-		double edge1 = Utility.Lerp (gradAA, gradBA, u);
+		double edge1 = Mathematics.Lerp (gradAA, gradBA, u);
 
 		double gradAB = Gradient (permutation_table[ab], offsetX, offsetY - 1);
 		double gradBB = Gradient (permutation_table[bb], offsetX - 1, offsetY - 1);
 
-		double edge2 = Utility.Lerp (gradAB, gradBB, u);
+		double edge2 = Mathematics.Lerp (gradAB, gradBB, u);
 
-		double lerped = Utility.Lerp (edge1, edge2, v);
+		double lerped = Mathematics.Lerp (edge1, edge2, v);
 
 		return lerped;
 	}

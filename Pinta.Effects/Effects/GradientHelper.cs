@@ -94,10 +94,10 @@ internal static class GradientHelper
 							.Range (0, stopsCount)
 							.Select (
 								n => {
-									double fraction = Utility.InvLerp<double> (0, stopsCount + 1, n + 1);
+									double fraction = Mathematics.InvLerp<double> (0, stopsCount + 1, n + 1);
 									return
 										KeyValuePair.Create (
-											Utility.Lerp (DefaultStartPosition, DefaultEndPosition, fraction),
+											Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, fraction),
 											random.RandomColorBgra ());
 								}
 							)
@@ -118,7 +118,7 @@ internal static class GradientHelper
 				DefaultStartPosition,
 				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.White,
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.White,
 				}),
 
 			PresetGradients.BlackAndWhite => ColorGradient.Create (
@@ -133,9 +133,9 @@ internal static class GradientHelper
 				DefaultStartPosition,
 				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.Black,
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.Red,
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.Yellow,
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.Black,
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.Red,
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.Yellow,
 				}),
 
 			PresetGradients.CherryBlossom => ColorGradient.Create (
@@ -144,8 +144,8 @@ internal static class GradientHelper
 				DefaultStartPosition,
 				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.FromBgr (235, 206, 135),
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (193, 182, 255),
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.FromBgr (235, 206, 135),
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (193, 182, 255),
 				}),
 
 			PresetGradients.CottonCandy => ColorGradient.Create (
@@ -154,9 +154,9 @@ internal static class GradientHelper
 				DefaultStartPosition,
 				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.FromBgr (180, 105, 255),
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.FromBgr (219, 112, 219),
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (230, 216, 173),
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.FromBgr (180, 105, 255),
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.FromBgr (219, 112, 219),
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (230, 216, 173),
 				}),
 
 			PresetGradients.Electric => ColorGradient.Create (
@@ -165,9 +165,9 @@ internal static class GradientHelper
 				DefaultStartPosition,
 				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.Black,
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.Blue,
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.Cyan,
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.Black,
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.Blue,
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.Cyan,
 				}),
 
 			PresetGradients.LimeLemon => ColorGradient.Create (
@@ -176,9 +176,9 @@ internal static class GradientHelper
 				DefaultStartPosition,
 				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.FromBgr (0, 128, 0),
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.FromBgr (0, 255, 0),
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (0, 255, 255),
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.FromBgr (0, 128, 0),
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.FromBgr (0, 255, 0),
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (0, 255, 255),
 				}),
 
 			PresetGradients.PinaColada => ColorGradient.Create (
@@ -187,7 +187,7 @@ internal static class GradientHelper
 				DefaultStartPosition,
 				DefaultEndPosition,
 				new Dictionary<double, ColorBgra> {
-					[Utility.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.Yellow,
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.Yellow,
 				}),
 
 			_ => CreateColorGradient (PresetGradients.Electric),

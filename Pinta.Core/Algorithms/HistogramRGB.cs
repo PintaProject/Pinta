@@ -18,9 +18,9 @@ namespace Pinta.Core;
 /// </summary>
 public sealed class HistogramRgb : Histogram
 {
-	public HistogramRgb () : base (3, 256, rgb_visual_colors)
-	{
-	}
+	public HistogramRgb ()
+		: base (3, 256, rgb_visual_colors)
+	{ }
 
 	private static ImmutableArray<ColorBgra> CreateVisualColors () => ImmutableArray.CreateRange (new[] { ColorBgra.Blue, ColorBgra.Green, ColorBgra.Red });
 	private static readonly ImmutableArray<ColorBgra> rgb_visual_colors = CreateVisualColors ();
@@ -66,9 +66,8 @@ public sealed class HistogramRgb : Histogram
 
 	public void SetFromLeveledHistogram (HistogramRgb inputHistogram, UnaryPixelOps.Level upo)
 	{
-		if (inputHistogram == null || upo == null) {
+		if (inputHistogram == null || upo == null)
 			return;
-		}
 
 		Clear ();
 
@@ -103,7 +102,7 @@ public sealed class HistogramRgb : Histogram
 						channelHistogramOutput[v] += channelHistogramInput[i];
 					}
 				} else {
-					channelHistogramOutput[v] = (int) (slopes[c] * Utility.Lerp (
+					channelHistogramOutput[v] = (int) (slopes[c] * Mathematics.Lerp (
 					    channelHistogramInput[(int) Math.Floor (before[c])],
 					    channelHistogramInput[(int) Math.Ceiling (before[c])],
 					    before[c] - Math.Floor (before[c])));
@@ -119,7 +118,6 @@ public sealed class HistogramRgb : Histogram
 		ColorBgra lo = GetPercentileColor (0.005f);
 		ColorBgra md = GetMeanColor ();
 		ColorBgra hi = GetPercentileColor (0.995f);
-
 		return UnaryPixelOps.Level.AutoFromLoMdHi (lo, md, hi);
 	}
 }

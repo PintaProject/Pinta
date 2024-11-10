@@ -156,7 +156,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			double u = baseU + i * deltaU;
 			double v = baseV + (i * settings.invQuality % 1) * settings.invH;
 
-			double radius = Utility.Magnitude (u, v);
+			double radius = Mathematics.Magnitude (u, v);
 			double theta = Math.Atan2 (v, u);
 			double thetaP = theta + settings.angleTheta.Radians;
 
