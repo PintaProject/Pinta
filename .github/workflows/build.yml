@@ -17,10 +17,10 @@ jobs:
   build-ubuntu:
     runs-on: ubuntu-22.04
 
-    # Test building with .NET 7 and .NET 8
+    # Test building with .NET 8 and .NET 9
     strategy:
       matrix:
-        dotnet_version: [7.0.x, 8.0.x]
+        dotnet_version: [8.0.x, 9.0.x]
 
     env:
       # Skip pkg-config version checks. Ubuntu 22.04 doesn't have a recent
@@ -38,8 +38,8 @@ jobs:
       with:
         dotnet-version: ${{matrix.dotnet_version}}
     - name: Create temporary global.json
-      if: matrix.dotnet_version == '7.0.x'
-      run: mv .github/workflows/dotnet7.global.json ./global.json
+      if: matrix.dotnet_version == '9.0.x'
+      run: mv .github/workflows/dotnet9.global.json ./global.json
     - name: Install Apt Dependencies
       run: |
         sudo apt update
