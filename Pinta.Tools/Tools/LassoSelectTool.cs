@@ -90,7 +90,7 @@ public class LassoSelectTool : BaseTool
 
 		var surf = document.Layers.SelectionLayer.Surface;
 
-		var g = new Context (surf) {
+		using Context g = new (surf) {
 			Antialias = Antialias.Subpixel
 		};
 
@@ -120,7 +120,7 @@ public class LassoSelectTool : BaseTool
 	{
 		var surf = document.Layers.SelectionLayer.Surface;
 
-		var g = new Context (surf);
+		using Context g = new (surf);
 		if (path != null) {
 			g.AppendPath (path);
 			path = null;

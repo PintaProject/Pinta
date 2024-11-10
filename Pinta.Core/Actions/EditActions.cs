@@ -201,7 +201,7 @@ public sealed class EditActions
 
 		ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-		Context g = new (doc.Layers.CurrentUserLayer.Surface);
+		using Context g = new (doc.Layers.CurrentUserLayer.Surface);
 
 		g.AppendPath (doc.Selection.SelectionPath);
 		g.FillRule = FillRule.EvenOdd;
@@ -247,7 +247,7 @@ public sealed class EditActions
 
 		ImageSurface old = doc.Layers.CurrentUserLayer.Surface.Clone ();
 
-		Context g = new (doc.Layers.CurrentUserLayer.Surface);
+		using Context g = new (doc.Layers.CurrentUserLayer.Surface);
 
 		g.AppendPath (doc.Selection.SelectionPath);
 		g.FillRule = FillRule.EvenOdd;
@@ -302,7 +302,7 @@ public sealed class EditActions
 
 		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 
-		Context g = new (dest);
+		using Context g = new (dest);
 
 		g.SetSourceSurface (src, -rect.X, -rect.Y);
 		g.Paint ();
@@ -324,7 +324,7 @@ public sealed class EditActions
 		// Copy it to a correctly sized surface 
 		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 
-		Context g = new (dest);
+		using Context g = new (dest);
 
 		g.SetSourceSurface (src, -rect.X, -rect.Y);
 		g.Paint ();

@@ -340,6 +340,8 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	{
 		DrawGradient (g);
 		DrawTriangles (g);
+
+		g.Dispose ();
 	}
 
 	private void OnValueChanged (int index)

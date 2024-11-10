@@ -628,7 +628,7 @@ namespace Pinta.Core
 				surf.Width,
 				surf.Height);
 
-			Context g = new (newsurf);
+			using Context g = new (newsurf);
 
 			g.SetSourceSurface (surf, 0, 0);
 			g.Paint ();
@@ -639,14 +639,14 @@ namespace Pinta.Core
 		public static Path Clone (this Path path)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			Context g = new (doc.Layers.CurrentUserLayer.Surface);
+			using Context g = new (doc.Layers.CurrentUserLayer.Surface);
 			g.AppendPath (path);
 			return g.CopyPath ();
 		}
 
 		public static void Clear (this ImageSurface surface)
 		{
-			Context g = new (surface) { Operator = Operator.Clear };
+			using Context g = new (surface) { Operator = Operator.Clear };
 			g.Paint ();
 		}
 
@@ -689,7 +689,7 @@ namespace Pinta.Core
 		public static RectangleI GetBounds (this Path path)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
-			Context g = new (doc.Layers.CurrentUserLayer.Surface);
+			using Context g = new (doc.Layers.CurrentUserLayer.Surface);
 			g.AppendPath (path);
 			return g.PathExtents ().ToInt ();
 		}
@@ -1175,7 +1175,7 @@ namespace Pinta.Core
 			ImageSurface surface = CreateImageSurface (Format.Argb32, size, size);
 
 			// Draw the checkerboard
-			Context g = new (surface);
+			using Context g = new (surface);
 
 			// Fill white
 			g.FillRectangle (new RectangleD (0, 0, size, size), new Color (1, 1, 1));
@@ -1856,7 +1856,7 @@ namespace Pinta.Core
 			Color color)
 		{
 			ImageSurface surf = CreateImageSurface (Cairo.Format.Argb32, size, size);
-			Context g = new (surf);
+			using Context g = new (surf);
 
 			g.FillRectangle (new RectangleD (0, 0, size, size), color);
 			g.DrawRectangle (new RectangleD (0, 0, size, size), new Color (0, 0, 0), 1);
@@ -1867,7 +1867,7 @@ namespace Pinta.Core
 		public static ImageSurface CreateTransparentColorSwatch (int size, bool drawBorder)
 		{
 			ImageSurface surface = CreateTransparentBackgroundSurface (size);
-			Context g = new (surface);
+			using Context g = new (surface);
 
 			if (drawBorder)
 				g.DrawRectangle (new RectangleD (0, 0, size, size), new Color (0, 0, 0), 1);

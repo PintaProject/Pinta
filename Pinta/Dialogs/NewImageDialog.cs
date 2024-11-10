@@ -617,6 +617,8 @@ public sealed class NewImageDialog : Gtk.Dialog
 			cr.DrawRectangle (new RectangleD (r.X - 1, r.Y - 1, r.Width + 2, r.Height + 2), new Cairo.Color (.5, .5, .5), 1);
 			cr.DrawRectangle (new RectangleD (r.X - 2, r.Y - 2, r.Width + 4, r.Height + 4), new Cairo.Color (.8, .8, .8), 1);
 			cr.DrawRectangle (new RectangleD (r.X - 3, r.Y - 3, r.Width + 6, r.Height + 6), new Cairo.Color (.9, .9, .9), 1);
+
+			cr.Dispose ();
 		}
 
 		private Size GetPreviewSizeForDraw () // Figure out the dimensions of the preview to draw

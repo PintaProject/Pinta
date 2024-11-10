@@ -3,9 +3,9 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="GirCore.Adw-1" Version="0.5.0" />
-    <PackageVersion Include="GirCore.Gtk-4.0" Version="0.5.0" />
-    <PackageVersion Include="GirCore.PangoCairo-1.0" Version="0.5.0" />
+    <PackageVersion Include="GirCore.Adw-1" Version="0.6.0-preview.1" />
+    <PackageVersion Include="GirCore.Gtk-4.0" Version="0.6.0-preview.1" />
+    <PackageVersion Include="GirCore.PangoCairo-1.0" Version="0.6.0-preview.1" />
     <!-- Note: at least 1.4.2-alpha3 is required for fixes to uninstalling addins, from https://github.com/mono/mono-addins/pull/198 -->
     <PackageVersion Include="Mono.Addins" Version="1.4.2-alpha.4" />
     <PackageVersion Include="Mono.Addins.Setup" Version="1.4.2-alpha.4" />

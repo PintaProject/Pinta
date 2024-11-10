@@ -140,7 +140,7 @@ public static class GdkExtensions
 		shapeY = imgToShapeY - iconBBox.Top;
 
 		var i = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, iconBBox.Width, iconBBox.Height);
-		var g = new Cairo.Context (i);
+		using Cairo.Context g = new (i);
 		// Don't show shape if shapeWidth less than 3,
 		if (shapeWidth > 3) {
 			int diam = Math.Max (1, shapeWidth - 2);

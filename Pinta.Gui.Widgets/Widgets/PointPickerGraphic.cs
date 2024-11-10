@@ -77,7 +77,7 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 
 		thumbnail = CairoExtensions.CreateImageSurface (Format.Argb32, bounds.Width, bounds.Height);
 
-		var g = new Context (thumbnail);
+		using Context g = new (thumbnail);
 		g.Scale (scalex, scaley);
 
 		foreach (var layer in doc.Layers.GetLayersToPaint ())
@@ -156,6 +156,8 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 
 		// Point
 		g.DrawEllipse (settings.pointMarker, settings.pointMarkerColor, 2);
+
+		g.Dispose ();
 	}
 
 	private RectangleI GetDrawBounds ()

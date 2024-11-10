@@ -1151,7 +1151,7 @@ public abstract class BaseEditEngine
 
 		Document doc = workspace.ActiveDocument;
 
-		var g = new Context (l.Surface);
+		using Context g = new (l.Surface);
 		g.AppendPath (doc.Selection.SelectionPath);
 		g.FillRule = FillRule.EvenOdd;
 		g.Clip ();

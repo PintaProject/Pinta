@@ -110,7 +110,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 				layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
 
 				Pixbuf pb = Pixbuf.NewFromFile (tmp_file)!; // NRT: only nullable when an error is thrown
-				Context g = new (layer.Surface);
+				using Context g = new (layer.Surface);
 				g.DrawPixbuf (pb, (PointD) position);
 
 				try {

@@ -179,7 +179,7 @@ internal sealed class PasteAction : IActionHandler
 								 Math.Max (doc.ImageSize.Height, cb_image.Height));
 		doc.Layers.ShowSelectionLayer = true;
 
-		Cairo.Context g = new (doc.Layers.SelectionLayer.Surface);
+		using Cairo.Context g = new (doc.Layers.SelectionLayer.Surface);
 		g.SetSourceSurface (cb_image, 0, 0);
 		g.Paint ();
 

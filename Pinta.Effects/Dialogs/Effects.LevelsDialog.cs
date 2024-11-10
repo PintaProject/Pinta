@@ -603,7 +603,9 @@ public partial class LevelsDialog : Gtk.Dialog
 		if (args.NPress != 2) // double click
 			return;
 
-		ColorPanelWidget panel = (ColorPanelWidget) controller.GetWidget ();
+		ColorPanelWidget panel = (ColorPanelWidget?) controller.GetWidget () ??
+				throw new Exception ("Controller widget should be non-null");
+
 		var ccd = Gtk.ColorChooserDialog.New (Translations.GetString ("Choose Color"), chrome.MainWindow);
 		ccd.UseAlpha = true;
 		ccd.SetColor (panel.CairoColor);

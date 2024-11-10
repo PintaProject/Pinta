@@ -131,7 +131,7 @@ public static class ResourceLoader
 	private static Texture CreateMissingImage (int size)
 	{
 		var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, size, size);
-		var g = new Cairo.Context (surf);
+		using Cairo.Context g = new (surf);
 		g.SetSourceRgb (1, 1, 1);
 		g.Rectangle (0, 0, size, size);
 		g.Fill ();

@@ -197,26 +197,10 @@ public sealed class Document
 		return g;
 	}
 
-	public Context CreateClippedContext (bool antialias)
-	{
-		Context g = new (Layers.CurrentUserLayer.Surface);
-		Selection.Clip (g);
-		g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
-		return g;
-	}
-
 	public Context CreateClippedToolContext ()
 	{
 		Context g = new (Layers.ToolLayer.Surface);
 		Selection.Clip (g);
-		return g;
-	}
-
-	public Context CreateClippedToolContext (bool antialias)
-	{
-		Context g = new (Layers.ToolLayer.Surface);
-		Selection.Clip (g);
-		g.Antialias = antialias ? Antialias.Subpixel : Antialias.None;
 		return g;
 	}
 
@@ -232,7 +216,7 @@ public sealed class Document
 
 		Layer layer = Layers.SelectionLayer;
 
-		Context g = new (Layers.CurrentUserLayer.Surface);
+		using Context g = new (Layers.CurrentUserLayer.Surface);
 		selection.Clip (g);
 		layer.DrawWithOperator (g, Operator.Source, opacity: 1.0, transform: true);
 
@@ -270,7 +254,7 @@ public sealed class Document
 			1,
 			1);
 
-		Context g = new (dst);
+		using Context g = new (dst);
 
 		foreach (var layer in Layers.GetLayersToPaint ()) {
 

@@ -85,20 +85,20 @@ public sealed class MoveSelectedTool : BaseTransformTool
 			document.Layers.SelectionLayer.Opacity = document.Layers.CurrentUserLayer.Opacity;
 			document.Layers.SelectionLayer.Hidden = document.Layers.CurrentUserLayer.Hidden;
 
-			var g = new Context (document.Layers.SelectionLayer.Surface);
-			g.AppendPath (document.Selection.SelectionPath);
-			g.FillRule = FillRule.EvenOdd;
-			g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, 0, 0);
-			g.Clip ();
-			g.Paint ();
+			using Context selection_ctx = new (document.Layers.SelectionLayer.Surface);
+			selection_ctx.AppendPath (document.Selection.SelectionPath);
+			selection_ctx.FillRule = FillRule.EvenOdd;
+			selection_ctx.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, 0, 0);
+			selection_ctx.Clip ();
+			selection_ctx.Paint ();
 
 			var surf = document.Layers.CurrentUserLayer.Surface;
 
-			g = new Context (surf);
-			g.AppendPath (document.Selection.SelectionPath);
-			g.FillRule = FillRule.EvenOdd;
-			g.Operator = Cairo.Operator.Clear;
-			g.Fill ();
+			using Context surf_ctx = new (surf);
+			surf_ctx.AppendPath (document.Selection.SelectionPath);
+			surf_ctx.FillRule = FillRule.EvenOdd;
+			surf_ctx.Operator = Cairo.Operator.Clear;
+			surf_ctx.Fill ();
 		}
 
 		document.Workspace.Invalidate ();
