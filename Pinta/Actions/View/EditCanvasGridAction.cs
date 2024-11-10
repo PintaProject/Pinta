@@ -16,7 +16,7 @@ internal sealed class EditCanvasGridAction : IActionHandler
 	{
 		this.view = view;
 		this.chrome = chrome;
-		canvas_grid = canvasGrid;
+		this.canvas_grid = canvasGrid;
 	}
 
 	void IActionHandler.Initialize ()
