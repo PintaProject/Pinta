@@ -40,11 +40,11 @@ public sealed class CanvasGridSettingsDialog : Dialog
 
 		grid.Attach (show_grid_checkbox, 0, 0, 2, 1);
 
-		grid.Attach (CreateLabel ("Width:", Align.End), 0, 1, 1, 1);
+		grid.Attach (CreateLabel (Translations.GetString("Width:"), Align.End), 0, 1, 1, 1);
 		grid.Attach (grid_width_spinner, 1, 1, 1, 1);
 		grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
 
-		grid.Attach (CreateLabel ("Height:", Align.End), 0, 2, 1, 1);
+		grid.Attach (CreateLabel (Translations.GetString("Height:"), Align.End), 0, 2, 1, 1);
 		grid.Attach (grid_height_spinner, 1, 2, 1, 1);
 		grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 2, 1, 1);
 
@@ -75,7 +75,7 @@ public sealed class CanvasGridSettingsDialog : Dialog
 
 	private static Label CreateLabel (string text, Align horizontalAlign)
 	{
-		Label result = Label.New (Translations.GetString (text));
+		Label result = Label.New (text);
 		result.Halign = horizontalAlign;
 		return result;
 	}
