@@ -51,10 +51,8 @@ public static class GdkExtensions
 	/// </summary>
 	public static bool IsControlPressed (this ModifierType m)
 	{
-		// The Cmd key is GDK_MOD2_MASK, which is no longer a public constant as of GTK4
 		if (PintaCore.System.OperatingSystem == OS.Mac) {
-			var modifier_val = (uint) m;
-			return (modifier_val & 16) != 0;
+			return m.HasFlag (ModifierType.MetaMask);
 		} else
 			return m.HasFlag (ModifierType.ControlMask);
 	}

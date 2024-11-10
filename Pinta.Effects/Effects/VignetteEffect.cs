@@ -30,6 +30,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
@@ -64,7 +65,7 @@ public sealed class VignetteEffect : BaseEffect
 		EffectData = new VignetteData ();
 	}
 
-	public override void LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	private sealed record VignetteSettings (

@@ -14,6 +14,8 @@ Thanks to the following contributors who worked on this release:
 - @Matthieu-LAURENT39
 - @khoidauminh
 - @potatoes1286
+- @TheodorLasse
+- @f-i-l-i-p
 
 ### Added
 - Ported to GTK4 and libadwaita
@@ -27,8 +29,9 @@ Thanks to the following contributors who worked on this release:
 - Added a new "Dithering" effect (#457)
 - Added "Voronoi Diagram" effect (#692)
 - Ported "Vignette" and "Dents" effects from Paint.NET 3.36 (#881, #885)
-- Added "Feather" effect (#886, #953)
-- Added "Align object" effect (#936, #961)
+- Added "Feather Object" effect (#886, #953)
+- Added "Align Object" effect (#936, #961)
+- Added "Outline Object" effect (#971)
 - Added support for exporting to portable pixmap (`.ppm`) files (#549)
   - Importing is not supported yet.
 - Added a nearest-neighbor resampling mode when resizing images (#596)
@@ -65,6 +68,8 @@ Thanks to the following contributors who worked on this release:
 - Fixed unexpected drawing behavior when using semi-transparent colors with the Paint Brush tool (#941)
 - The Text tool now supports configuring whether antialiasing is enabled (#935)
 - Fixed various artifacts in the shape tools, particularly with larger brush widths (#733, #955)
+- Fixed an issue where the text tool did not immediately redraw after changes to the font or color of unfinalized text (#952, #975)
+- Fixed a bug where cut / paste operations did not behave as expected with complex selections (#951, #978)
 
 ## [2.1.2](https://github.com/PintaProject/Pinta/releases/tag/2.1.2) - 2024/04/20
 

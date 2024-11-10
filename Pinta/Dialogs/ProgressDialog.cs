@@ -36,9 +36,9 @@ public sealed class ProgressDialog : Dialog, IProgressDialog
 	private readonly ProgressBar progress_bar;
 	uint timeout_id;
 
-	public ProgressDialog ()
+	public ProgressDialog (ChromeManager chrome)
 	{
-		TransientFor = PintaCore.Chrome.MainWindow;
+		TransientFor = chrome.MainWindow;
 		Modal = true;
 
 		OnResponse += (_, args) => Canceled?.Invoke (this, EventArgs.Empty);
@@ -81,11 +81,15 @@ public sealed class ProgressDialog : Dialog, IProgressDialog
 
 	void IProgressDialog.Show ()
 	{
-		timeout_id = GLib.Functions.TimeoutAdd (0, 500, () => {
-			Show ();
-			timeout_id = 0;
-			return false;
-		});
+		timeout_id = GLib.Functions.TimeoutAdd (
+			0,
+			500,
+			() => {
+				Show ();
+				timeout_id = 0;
+				return false;
+			}
+		);
 	}
 
 	void IProgressDialog.Hide ()

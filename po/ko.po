@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-08 01:27+0000\n"
+"POT-Creation-Date: 2024-09-22 01:36+0000\n"
 "PO-Revision-Date: 2023-01-15 08:04+0000\n"
 "Last-Translator: Jongwon Kim <nanpa777@hanmail.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -87,7 +87,7 @@ msgid "After select"
 msgstr "색 고른 후"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:65
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
 msgid "Align Object"
 msgstr ""
 
@@ -96,6 +96,10 @@ msgstr ""
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:106
 msgid "All files"
 msgstr "모든 파일"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
+msgid "Alpha Gradient"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:109
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:149
@@ -454,6 +458,10 @@ msgstr ""
 msgid "Color Dodge"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:213
+msgid "Color Gradient"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
 msgstr ""
@@ -752,12 +760,12 @@ msgstr ""
 msgid "Failed to take screenshot"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:19
-msgid "Feather"
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:169
+msgid "Feather Canvas Edge"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:143
-msgid "Feather Canvas Edge"
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:19
+msgid "Feather Object"
 msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
@@ -771,6 +779,10 @@ msgstr ""
 #: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Fill Background"
 msgstr "배경 채우기"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:219
+msgid "Fill Object Background"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:228
@@ -1040,7 +1052,7 @@ msgid "Installed"
 msgstr "설치된 항목"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:139
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:139
 #: ../Pinta.Effects/Effects/TileEffect.cs:180
 msgid "Intensity"
 msgstr ""
@@ -1423,8 +1435,9 @@ msgstr ""
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
 msgstr ""
 
@@ -1492,10 +1505,21 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:26
 #: ../Pinta.Tools/Tools/TextTool.cs:271
 msgid "Outline"
 msgstr "윤곽선"
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:216
+msgid "Outline Border"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:26
+msgid "Outline Edge"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
+msgid "Outline Object"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
@@ -1659,7 +1683,7 @@ msgstr "구의 꼭지점 향해 객체 반복해서 넣기"
 msgid "Portrait"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:139
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:128
 msgid "Position"
 msgstr ""
 
@@ -1724,10 +1748,11 @@ msgstr "방사형 흐리기"
 msgid "Radial Gradient"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:137
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:163
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:246
 #: ../Pinta.Effects/Effects/GlowEffect.cs:76
 #: ../Pinta.Effects/Effects/MedianEffect.cs:62
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:89
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:94
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:92
@@ -1825,7 +1850,7 @@ msgstr "레이어 이름변경"
 msgid "Render"
 msgstr "덧씌우기"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:211
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:204
 msgid "Rendering Effect"
 msgstr ""
 
@@ -1854,7 +1879,7 @@ msgstr "초기화"
 msgid "Reset to Default"
 msgstr "기본값으로 재설정"
 
-#: ../Pinta.Core/Classes/Document.cs:313
+#: ../Pinta.Core/Classes/Document.cs:310
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
 msgid "Resize Canvas"
 msgstr "캔버스 크기 변경"
@@ -1863,7 +1888,7 @@ msgstr "캔버스 크기 변경"
 msgid "Resize Canvas..."
 msgstr "캔버스 크기조정..."
 
-#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:38
+#: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:84
 msgid "Resize Image"
 msgstr "그림 크기 조정"
@@ -2094,7 +2119,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:32
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:32
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:30
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:30
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:33
 msgid "Stylize"
 msgstr "테두리 효과"
@@ -2183,7 +2208,7 @@ msgid ""
 "will also be uninstalled:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEffect.cs:136
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
 msgid "Thickness"
 msgstr ""
 
@@ -2203,7 +2228,8 @@ msgstr ""
 msgid "Tip: Right-click to remove control points."
 msgstr "도움말: 오른쪽 딸깍으로 조정점을 지울 수 있습니다."
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:140
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:166
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:207
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:52
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
 #: ../Pinta.Tools/Tools/RecolorTool.cs:197
@@ -2528,7 +2554,7 @@ msgstr ""
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:201
+#: ../Pinta.Core/Classes/DocumentLayers.cs:203
 #, csharp-format
 msgid "{0} copy"
 msgstr ""

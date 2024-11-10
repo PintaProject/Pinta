@@ -29,6 +29,7 @@
 #endif
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using Debug = System.Diagnostics.Debug;
@@ -80,7 +81,7 @@ public sealed class LivePreviewManager
 	public event EventHandler<LivePreviewRenderUpdatedEventArgs>? RenderUpdated;
 	public event EventHandler<LivePreviewEndedEventArgs>? Ended;
 
-	public void Start (BaseEffect effect)
+	public async void Start (BaseEffect effect)
 	{
 		if (live_preview_enabled)
 			throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
@@ -115,7 +116,7 @@ public sealed class LivePreviewManager
 		history_item.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
 		// Paint the pre-effect layer surface into into the working surface.
-		var ctx = new Cairo.Context (live_preview_surface);
+		Cairo.Context ctx = new (live_preview_surface);
 		layer.Draw (ctx, layer.Surface, 1);
 
 		if (effect.EffectData != null)
@@ -123,43 +124,26 @@ public sealed class LivePreviewManager
 
 		Started?.Invoke (this, new LivePreviewStartedEventArgs ());
 
-		// If the effect isn't tileable, there is a single tile for the entire render bounds.
-		// Otherwise, render each row in parallel.
-		int tileWidth = render_bounds.Width;
-		int tileHeight = 1;
-		if (!effect.IsTileable)
-			tileHeight = render_bounds.Height;
-
 		AsyncEffectRenderer.Settings settings = new (
 			threadCount: system_manager.RenderThreads,
-			tileWidth: tileWidth,
-			tileHeight: tileHeight,
+			renderBounds: render_bounds,
+			effectIsTileable: effect.IsTileable,
 			updateMilliseconds: 100,
 			threadPriority: ThreadPriority.BelowNormal);
 
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
 		renderer = new Renderer (this, settings, chrome_manager);
-		renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+		renderer.Start (effect, layer.Surface, live_preview_surface);
 
 		if (effect.IsConfigurable) {
-			EventHandler<BaseEffect.ConfigDialogResponseEventArgs>? handler = null;
-			handler = (_, args) => {
-				if (!args.Accepted) {
-					chrome_manager.MainWindowBusy = true;
-					Cancel ();
-				} else {
-					chrome_manager.MainWindowBusy = true;
-					Apply ();
-				}
 
-				// Unsubscribe once we're done.
-				effect.ConfigDialogResponse -= handler;
-			};
-
-			effect.ConfigDialogResponse += handler;
-
-			effect.LaunchConfiguration ();
+			bool response = await effect.LaunchConfiguration ();
+			chrome_manager.MainWindowBusy = true;
+			if (response)
+				Apply ();
+			else
+				Cancel ();
 
 		} else {
 			chrome_manager.MainWindowBusy = true;
@@ -277,33 +261,37 @@ public sealed class LivePreviewManager
 	void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 	{
 		//TODO calculate bounds.
-		renderer.Start (effect, layer.Surface, live_preview_surface, render_bounds);
+		renderer.Start (effect, layer.Surface, live_preview_surface);
 	}
 
 	private sealed class Renderer : AsyncEffectRenderer
 	{
 		readonly LivePreviewManager manager;
-		readonly ChromeManager chrome_manager;
+		readonly ChromeManager chrome;
 		internal Renderer (
 			LivePreviewManager manager,
 			AsyncEffectRenderer.Settings settings,
-			ChromeManager chromeManager)
+			ChromeManager chrome)
 			: base (settings)
 		{
 			this.manager = manager;
-			this.chrome_manager = chromeManager;
+			this.chrome = chrome;
 		}
 
-		protected override void OnUpdate (double progress, RectangleI updatedBounds)
+		protected override void OnUpdate (
+			double progress,
+			RectangleI updatedBounds)
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
-			chrome_manager.ProgressDialog.Progress = progress;
+			chrome.ProgressDialog.Progress = progress;
 			manager.FireLivePreviewRenderUpdatedEvent (progress, updatedBounds);
 		}
 
-		protected override void OnCompletion (bool cancelled, Exception[] exceptions)
+		protected override void OnCompletion (
+			IReadOnlyList<Exception> exceptions,
+			CancellationToken cancellationToken)
 		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancelled);
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancellationToken.IsCancellationRequested);
 
 			if (!manager.live_preview_enabled)
 				return;
@@ -317,10 +305,9 @@ public sealed class LivePreviewManager
 
 	void FireLivePreviewEndedEvent (RenderStatus status, Exception? ex)
 	{
-		if (Ended != null) {
-			var args = new LivePreviewEndedEventArgs (status, ex);
-			Ended (this, args);
-		}
+		if (Ended == null) return;
+		LivePreviewEndedEventArgs args = new (status, ex);
+		Ended (this, args);
 	}
 
 	void FireLivePreviewRenderUpdatedEvent (double progress, RectangleI bounds)
@@ -341,12 +328,11 @@ public sealed class LivePreviewManager
 		// Calculate canvas bounds.
 		PointD bounds1 = new (
 			X: bounds.Left * scale,
-			Y: bounds.Top * scale
-		);
+			Y: bounds.Top * scale);
+
 		PointD bounds2 = new (
 			X: (bounds.Right + 1) * scale,
-			Y: (bounds.Bottom + 1) * scale
-		);
+			Y: (bounds.Bottom + 1) * scale);
 
 		// TODO Figure out why when scale > 1 that I need add on an
 		// extra pixel of padding.
@@ -370,8 +356,7 @@ public sealed class LivePreviewManager
 			X: x,
 			Y: y,
 			Width: (int) Math.Ceiling (bounds2.X) - x,
-			Height: (int) Math.Ceiling (bounds2.Y) - y
-		);
+			Height: (int) Math.Ceiling (bounds2.Y) - y);
 
 		// Tell GTK to expose the drawing area.
 		workspace_manager.ActiveWorkspace.InvalidateWindowRect (areaToInvalidate);

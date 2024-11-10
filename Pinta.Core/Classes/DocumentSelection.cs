@@ -34,6 +34,12 @@ namespace Pinta.Core;
 
 public sealed class DocumentSelection
 {
+	private readonly Document owning_document;
+	internal DocumentSelection (Document owningDocument)
+	{
+		this.owning_document = owningDocument;
+	}
+
 	private Path? selection_path;
 
 	public List<List<IntPoint>> SelectionPolygons { get; set; } = new ();
@@ -56,9 +62,7 @@ public sealed class DocumentSelection
 	public Path SelectionPath {
 		get {
 			if (selection_path == null) {
-				var doc = PintaCore.Workspace.ActiveDocument;
-
-				var g = new Context (doc.Layers.CurrentUserLayer.Surface);
+				Context g = new (owning_document.Layers.CurrentUserLayer.Surface);
 				selection_path = g.CreatePolygonPath (ConvertToPolygonSet (SelectionPolygons));
 			}
 
@@ -86,7 +90,10 @@ public sealed class DocumentSelection
 		g.Clip ();
 	}
 
-	public void Draw (Cairo.Context g, double scale, bool fillSelection)
+	public void Draw (
+		Context g,
+		double scale,
+		bool fillSelection)
 	{
 		g.Save ();
 		g.Scale (scale, scale);
@@ -118,11 +125,11 @@ public sealed class DocumentSelection
 	/// </summary>
 	public DocumentSelection Clone ()
 	{
-		return new DocumentSelection {
+		return new (owning_document) {
 			SelectionPolygons = SelectionPolygons.ToList (),
 			Origin = new PointD (Origin.X, Origin.Y),
 			End = new PointD (End.X, End.Y),
-			visible = visible
+			visible = visible,
 		};
 	}
 
@@ -160,7 +167,7 @@ public sealed class DocumentSelection
 
 			int pointNumber = 0;
 
-			foreach (IntPoint ip in ipL) {
+			foreach (var ip in ipL) {
 				resultingPolygonSet[polygonNumber][pointNumber] = new PointI ((int) ip.X, (int) ip.Y);
 
 				++pointNumber;
@@ -197,11 +204,11 @@ public sealed class DocumentSelection
 		transform.TransformPoint (ref origin);
 		transform.TransformPoint (ref end);
 
-		return new DocumentSelection {
+		return new (owning_document) {
 			SelectionPolygons = newPolygons,
 			Origin = origin,
 			End = end,
-			visible = visible
+			visible = visible,
 		};
 	}
 
@@ -287,7 +294,16 @@ public sealed class DocumentSelection
 	/// <param name="x3">Ending point X (included in the returned Point(s)).</param>
 	/// <param name="y3">Ending point Y (included in the returned Point(s)).</param>
 	/// <returns>Iterator for points of partial polygon</returns>
-	private static IEnumerable<IntPoint> CalculateCurvePoints (double tInterval, double x0, double y0, double x1, double y1, double x2, double y2, double x3, double y3)
+	private static IEnumerable<IntPoint> CalculateCurvePoints (
+		double tInterval,
+		double x0,
+		double y0,
+		double x1,
+		double y1,
+		double x2,
+		double y2,
+		double x3,
+		double y3)
 	{
 		//t will go from tInterval to 1d at the interval of tInterval. t starts
 		//at tInterval instead of 0d because the first Point in the curve is
@@ -316,7 +332,7 @@ public sealed class DocumentSelection
 			double oneMinusTSquaredTimesTTimesThree = oneMinusTSquared * t * 3d;
 			double oneMinusTTimesTSquaredTimesThree = oneMinusT * tSquared * 3d;
 
-			yield return new IntPoint (
+			yield return new (
 				x: (long) (oneMinusTCubed * x0 + oneMinusTSquaredTimesTTimesThree * x1 + oneMinusTTimesTSquaredTimesThree * x2 + tCubed * x3),
 				y: (long) (oneMinusTCubed * y0 + oneMinusTSquaredTimesTTimesThree * y1 + oneMinusTTimesTSquaredTimesThree * y2 + tCubed * y3)
 			);
@@ -427,10 +443,10 @@ public sealed class DocumentSelection
 	/// </summary>
 	public RectangleD GetBounds ()
 	{
-		var minX = double.MaxValue;
-		var minY = double.MaxValue;
-		var maxX = double.MinValue;
-		var maxY = double.MinValue;
+		double minX = double.MaxValue;
+		double minY = double.MaxValue;
+		double maxX = double.MinValue;
+		double maxY = double.MinValue;
 
 		// Calculate the minimum rectangular bounds that surround the current selection.
 		foreach (var li in SelectionPolygons) {
@@ -444,8 +460,12 @@ public sealed class DocumentSelection
 
 		// Invalid (empty) rectangle - avoid overflow from maxX - minX
 		if (minX > maxX || minY > maxY)
-			return new RectangleD ();
+			return new ();
 
-		return new RectangleD (minX, minY, maxX - minX, maxY - minY);
+		return new (
+			minX,
+			minY,
+			maxX - minX,
+			maxY - minY);
 	}
 }

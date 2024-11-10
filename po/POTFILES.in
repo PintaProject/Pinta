@@ -201,7 +201,8 @@ Pinta.Effects/Effects/MandelbrotFractalEffect.cs
 Pinta.Effects/Effects/MedianEffect.cs
 Pinta.Effects/Effects/MotionBlurEffect.cs
 Pinta.Effects/Effects/OilPaintingEffect.cs
-Pinta.Effects/Effects/OutlineEffect.cs
+Pinta.Effects/Effects/OutlineEdgeEffect.cs
+Pinta.Effects/Effects/OutlineObjectEffect.cs
 Pinta.Effects/Effects/PencilSketchEffect.cs
 Pinta.Effects/Effects/PixelateEffect.cs
 Pinta.Effects/Effects/PolarInversionEffect.cs

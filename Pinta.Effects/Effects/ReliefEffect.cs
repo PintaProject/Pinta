@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Threading.Tasks;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
@@ -32,7 +33,7 @@ public sealed class ReliefEffect : ColorDifferenceEffect
 
 	public override string EffectMenuCategory => Translations.GetString ("Stylize");
 
-	public override void LaunchConfiguration ()
+	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	public override string Icon => Pinta.Resources.Icons.EffectsStylizeRelief;
