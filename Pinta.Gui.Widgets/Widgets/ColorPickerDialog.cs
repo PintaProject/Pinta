@@ -757,18 +757,24 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		contentArea.Append (mainVbox);
 	}
 
-	public ColorPickerDialog (ChromeManager chrome, Color[] palette, int currentColorIndex, bool continuous = false, string title = "Color Picker", bool showSwatches = false)
+	/// <summary>
+	///
+	/// </summary>
+	/// <param name="chrome">Current Chrome Manager.</param>
+	/// <param name="palette">Palette of adjustable </param>
+	/// <param name="currentColorIndex"></param>
+	/// <param name="livePalette">Determines modality of the dialog and live palette behaviour. If true, dialog will not block rest of app and will update
+	/// the current palette as the color is changed.</param>
+	/// <param name="title">Title of the dialog.</param>
+	public ColorPickerDialog (ChromeManager chrome, Color[] palette, int currentColorIndex, bool livePalette, string title)
 	{
 		original_colors = palette;
 		colors = (Color[]) palette.Clone ();
 		color_index = currentColorIndex;
 		chrome_manager = chrome;
 		window_title = title;
-		show_swatches = showSwatches;
-		if (continuous)
-			Modal = false;
-		else
-			Modal = true;
+		show_swatches = livePalette;
+		Modal = livePalette;
 		Setup ();
 		// incredibly silly workaround
 		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
@@ -779,7 +785,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// we only do this on off active because otherwise the recent color palette would be spammed
 		// every time the color changes
 		this.OnNotify += (sender, args) => {
-			if (args.Pspec.GetName () == "is-active" && continuous) {
+			if (args.Pspec.GetName () == "is-active" && livePalette) {
 				if (!IsActive) {
 					this.SetOpacity (0.85f);
 					if (PintaCore.Palette.PrimaryColor != colors[0])
@@ -791,6 +797,27 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				}
 			}
 		};
+
+		if (livePalette) {
+			EventHandler PrimaryChangeHandler = (sender, args) => {
+				colors[0] = ((PaletteManager) sender!).PrimaryColor;
+				Console.WriteLine("AWE");
+				UpdateView ();
+			};
+			EventHandler SecondaryChangeHandler = (sender, args) => {
+				colors[1] = ((PaletteManager) sender!).SecondaryColor;
+				UpdateView ();
+			};
+
+			PintaCore.Palette.PrimaryColorChanged += PrimaryChangeHandler;
+			PintaCore.Palette.SecondaryColorChanged += SecondaryChangeHandler;
+
+			this.OnResponse += (sender, args) => {
+				PintaCore.Palette.PrimaryColorChanged -= PrimaryChangeHandler;
+				PintaCore.Palette.SecondaryColorChanged -= SecondaryChangeHandler;
+			};
+		}
+
 
 		this.SetDefaultResponse (Gtk.ResponseType.Cancel);
 	}

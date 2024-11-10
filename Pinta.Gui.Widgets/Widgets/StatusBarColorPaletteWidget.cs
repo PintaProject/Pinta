@@ -105,19 +105,11 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 					break;
 
 				if (button == GtkExtensions.MouseRightButton) {
-					if (active_color_picker != null) {
-						active_color_picker.colors[1] = PintaCore.Palette.CurrentPalette[index];
-						active_color_picker.UpdateView ();
-					}
 					PintaCore.Palette.SecondaryColor = PintaCore.Palette.CurrentPalette[index];
 				} else if (button == GtkExtensions.MouseLeftButton) {
-					if (active_color_picker != null) {
-						active_color_picker.colors[0] = PintaCore.Palette.CurrentPalette[index];
-						active_color_picker.UpdateView ();
-					}
 					PintaCore.Palette.PrimaryColor = PintaCore.Palette.CurrentPalette[index];
 				} else {
-					var color = GetUserChosenColor (new[] { PintaCore.Palette.CurrentPalette[index] }, title: "Choose Palette Color")?[0];
+					var color = GetUserChosenColor (new[] { PintaCore.Palette.CurrentPalette[index] }, 0, Translations.GetString("Choose Palette Color"))?[0];
 					if (color != null)
 						PintaCore.Palette.CurrentPalette[index] = color.Value;
 				}
@@ -132,16 +124,8 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 				var recentColor = PintaCore.Palette.RecentlyUsedColors.ElementAt (recent_index);
 				if (button == GtkExtensions.MouseRightButton) {
-					if (active_color_picker != null) {
-						active_color_picker.colors[0] = recentColor;
-						active_color_picker.UpdateView ();
-					}
 					PintaCore.Palette.SetColor (false, recentColor, false);
 				} else if (button == GtkExtensions.MouseLeftButton) {
-					if (active_color_picker != null) {
-						active_color_picker.colors[0] = recentColor;
-						active_color_picker.UpdateView ();
-					}
 					PintaCore.Palette.SetColor (true, recentColor, false);
 				}
 
@@ -309,7 +293,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			return;
 		active_color_picker = new ColorPickerDialog (PintaCore.Chrome,
 			new[] { PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor },
-			0, true);
+			paletteIndex, true, Translations.GetString ("Color Picker"));
 		active_color_picker.Show ();
 		active_color_picker.OnResponse += (sender, args) => {
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
@@ -324,9 +308,9 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	}
 
 
-	private static Color[]? GetUserChosenColor (Color[] colors, int selectedColorIndex = 0, string title = "Color Picker")
+	private static Color[]? GetUserChosenColor (Color[] colors, int selectedColorIndex, string title)
 	{
-		ColorPickerDialog dialog = new ColorPickerDialog (PintaCore.Chrome, colors, selectedColorIndex, false, title, true);
+		ColorPickerDialog dialog = new ColorPickerDialog (PintaCore.Chrome, colors, selectedColorIndex, false, title);
 
 		dialog.OnResponse += (_, args) => dialog.Destroy ();
 
