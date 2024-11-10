@@ -34,6 +34,8 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 {
+	private static ColorPickerDialog? active_color_picker;
+
 	private readonly RectangleD primary_rect = new (4, 3, 24, 24);
 	private readonly RectangleD secondary_rect = new (17, 16, 24, 24);
 	private readonly RectangleD swap_rect = new (27, 2, 15, 15);
@@ -77,8 +79,10 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		var element = GetElementAtPoint (point);
 		switch (element) {
 			case WidgetElement.PrimaryColor:
+				RunColorPicker (0);
+				break;
 			case WidgetElement.SecondaryColor:
-				RunColorPicker ();
+				RunColorPicker (1);
 				break;
 			case WidgetElement.SwapColors:
 				var temp = PintaCore.Palette.PrimaryColor;
@@ -298,8 +302,8 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			QueueDraw ();
 	}
 
-	public static ColorPickerDialog? active_color_picker;
-	private static void RunColorPicker ()
+
+	private static void RunColorPicker (int paletteIndex)
 	{
 		if (active_color_picker != null)
 			return;
