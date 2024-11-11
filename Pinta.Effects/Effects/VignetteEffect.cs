@@ -80,11 +80,10 @@ public sealed class VignetteEffect : BaseEffect
 		Size canvasSize = src.GetSize ();
 		double r1 = Math.Max (canvasSize.Width, canvasSize.Height) * 0.5d;
 		double r2 = r1 * Convert.ToDouble (Data.RadiusPercentage) / 100d;
-		double effectiveRadius = r2 * r2;
 		double amount = Data.Amount;
 		return new (
 			canvasSize: canvasSize,
-			radiusR: Math.PI / (8 * effectiveRadius),
+			radiusR: Math.PI / (8 * (r2 * r2)),
 			amount: amount,
 			amount1: 1d - amount,
 			centerOffset: Data.Offset);
@@ -92,38 +91,44 @@ public sealed class VignetteEffect : BaseEffect
 
 	// Algorithm code ported from PDN
 	public override void Render (
-		ImageSurface src,
-		ImageSurface dst,
+		ImageSurface source,
+		ImageSurface destination,
 		ReadOnlySpan<RectangleI> rois)
 	{
-		VignetteSettings settings = CreateSettings (src);
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (RectangleI roi in rois) {
-			foreach (var pixel in Utility.GeneratePixelOffsets (roi, settings.canvasSize)) {
-				double iy = pixel.coordinates.Y - settings.centerOffset.Y;
-				double iy2 = iy * iy;
-				double ix = pixel.coordinates.X - settings.centerOffset.X;
-				double d = (iy2 + (ix * ix)) * settings.radiusR;
-				double factor = Math.Cos (d);
-				ColorBgra src_color = src_data[pixel.memoryOffset];
-				if (factor <= 0 || d > Math.PI) {
-					dst_data[pixel.memoryOffset] = ColorBgra.FromBgra (
-						r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.R) * settings.amount1))),
-						g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.G) * settings.amount1))),
-						b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.B) * settings.amount1))),
-						a: src_color.A);
-				} else {
-					double factor2 = factor * factor;
-					double factor4 = factor2 * factor2;
-					double effectiveFactor = settings.amount1 + (settings.amount * factor4);
-					dst_data[pixel.memoryOffset] = ColorBgra.FromBgra (
-						r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.R) * effectiveFactor))),
-						g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.G) * effectiveFactor))),
-						b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (src_color.B) * effectiveFactor))),
-						a: src_color.A);
-				}
-			}
+		VignetteSettings settings = CreateSettings (source);
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
+		foreach (RectangleI roi in rois)
+			foreach (var pixel in Utility.GeneratePixelOffsets (roi, settings.canvasSize))
+				destinationData[pixel.memoryOffset] = GetFinalPixelColor (settings, sourceData, pixel);
+	}
+
+	private static ColorBgra GetFinalPixelColor (
+		VignetteSettings settings,
+		ReadOnlySpan<ColorBgra> sourceData,
+		PixelOffset pixel)
+	{
+		double iy = pixel.coordinates.Y - settings.centerOffset.Y;
+		double iy2 = iy * iy;
+		double ix = pixel.coordinates.X - settings.centerOffset.X;
+		double d = (iy2 + (ix * ix)) * settings.radiusR;
+		double factor = Math.Cos (d);
+		ColorBgra originalColor = sourceData[pixel.memoryOffset];
+		if (factor <= 0 || d > Math.PI) {
+			return ColorBgra.FromBgra (
+				r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.R) * settings.amount1))),
+				g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.G) * settings.amount1))),
+				b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.B) * settings.amount1))),
+				a: originalColor.A);
+		} else {
+			double factor2 = factor * factor;
+			double factor4 = factor2 * factor2;
+			double effectiveFactor = settings.amount1 + (settings.amount * factor4);
+			return ColorBgra.FromBgra (
+				r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.R) * effectiveFactor))),
+				g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.G) * effectiveFactor))),
+				b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.B) * effectiveFactor))),
+				a: originalColor.A);
 		}
 	}
 }
