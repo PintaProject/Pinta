@@ -48,7 +48,7 @@ public enum PresetGradients
 	[Caption ("Lime Lemon")]
 	LimeLemon,
 
-	// Translators: Gradient with bright, high-energy, and otherworldly tones of purple and yellow, along with a dark red that gives off the appearance of burning
+	// Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
 	[Caption ("Martian Lava")]
 	MartianLava,
 
