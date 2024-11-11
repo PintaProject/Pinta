@@ -126,10 +126,6 @@ internal sealed class AsyncEffectRenderer
 		// So a copy is made for the render.
 		BaseEffect effectClone = effect.Clone ();
 
-		// ------------
-		// === Body ===
-		// ------------
-
 		is_updated = false;
 
 		ConcurrentQueue<Exception> renderExceptions = new ();
@@ -149,25 +145,25 @@ internal sealed class AsyncEffectRenderer
 		// Start slave render threads.
 		var slaves =
 			Enumerable.Range (0, settings.ThreadCount - 1)
-			.Select (_ => StartSlaveThread (cancellationToken))
+			.Select (_ => StartSlaveThread ())
 			.ToImmutableArray ();
 
 		// Start the master render thread.
-		Thread master = StartMasterThread (cancellationToken, slaves);
+		Thread master = StartMasterThread ();
 
 		// Start timer used to periodically fire update events on the UI thread.
 		timer_tick_id = GLib.Functions.TimeoutAdd (
 			0,
 			(uint) settings.UpdateMillis,
-			() => HandleTimerTick (cancellationToken));
+			HandleTimerTick);
 
 		// ---------------
 		// === Methods ===
 		// ---------------
 
-		Thread StartSlaveThread (CancellationToken cancellationToken)
+		Thread StartSlaveThread ()
 		{
-			return StartRenderThread (() => RenderNextTile (cancellationToken));
+			return StartRenderThread (RenderNextTile);
 		}
 
 		Thread StartRenderThread (ThreadStart callback)
@@ -177,12 +173,12 @@ internal sealed class AsyncEffectRenderer
 			return result;
 		}
 
-		Thread StartMasterThread (CancellationToken cancellationToken, ImmutableArray<Thread> slaves)
+		Thread StartMasterThread ()
 		{
 			return StartRenderThread (() => {
 
 				// Do part of the rendering on the master thread.
-				RenderNextTile (cancellationToken);
+				RenderNextTile ();
 
 				// Wait for slave threads to complete.
 				foreach (var slave in slaves)
@@ -198,7 +194,7 @@ internal sealed class AsyncEffectRenderer
 							? Array.Empty<Exception> ()
 							: renderExceptions.ToArray ();
 
-						HandleTimerTick (cancellationToken);
+						HandleTimerTick ();
 
 						if (timer_tick_id > 0)
 							GLib.Source.Remove (timer_tick_id);
@@ -217,7 +213,7 @@ internal sealed class AsyncEffectRenderer
 		}
 
 		// Runs on a background thread.
-		void RenderNextTile (CancellationToken cancellationToken)
+		void RenderNextTile ()
 		{
 			// Fetch the next tile index and render it.
 			while (true) {
@@ -262,7 +258,7 @@ internal sealed class AsyncEffectRenderer
 		}
 
 		// Called on the UI thread.
-		bool HandleTimerTick (CancellationToken cancellationToken)
+		bool HandleTimerTick ()
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " Timer tick.");
 
