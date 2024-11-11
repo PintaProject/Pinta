@@ -72,15 +72,10 @@ internal sealed class AsyncEffectRenderer
 		}
 	}
 
-	BaseEffect? effect;
-	Cairo.ImageSurface? source_surface;
-	Cairo.ImageSurface? dest_surface;
-
 	TaskCompletionSource completion_source;
 	CancellationTokenSource cancellation_source;
 	ConcurrentQueue<RectangleI> queued_tiles;
 	int tiles_count = 0;
-	readonly ConcurrentQueue<Exception> render_exceptions;
 
 	uint timer_tick_id;
 
@@ -94,16 +89,11 @@ internal sealed class AsyncEffectRenderer
 		TaskCompletionSource initialCompletionSource = new ();
 		initialCompletionSource.SetResult ();
 
-		effect = null;
-		source_surface = null;
-		dest_surface = null;
-
 		completion_source = initialCompletionSource;
 		cancellation_source = new ();
 		updated_lock = new object ();
 		is_updated = false;
 		queued_tiles = new ConcurrentQueue<RectangleI> ();
-		render_exceptions = new ConcurrentQueue<Exception> ();
 
 		timer_tick_id = 0;
 
@@ -138,59 +128,15 @@ internal sealed class AsyncEffectRenderer
 
 		// It is important the effect's properties don't change during rendering.
 		// So a copy is made for the render.
-		this.effect = effect.Clone ();
+		BaseEffect effectClone = effect.Clone ();
 
-		source_surface = source;
-		dest_surface = dest;
-
-		StartRender ();
-	}
-
-	internal Task Cancel ()
-	{
-		Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
-		cancellation_source.Cancel ();
-		return completion_source.Task;
-	}
-
-	internal delegate void UpdateHandler (
-		double progress,
-		RectangleI updatedBounds);
-
-	internal delegate void CompletionHandler (
-		IReadOnlyList<Exception> exceptions,
-		CancellationToken cancellationToken);
-
-	public event UpdateHandler? Updated;
-	public event CompletionHandler? Completed;
-
-	internal void Dispose ()
-	{
-		if (timer_tick_id > 0)
-			GLib.Source.Remove (timer_tick_id);
-
-		timer_tick_id = 0;
-	}
-
-	CancellationToken ReplaceCancellationSource ()
-	{
-		CancellationTokenSource newSource = new ();
-		CancellationTokenSource oldSource = cancellation_source;
-		oldSource.Cancel (); // Safe to call multiple times
-		oldSource.Dispose (); // Not safe to call multiple times, so this is the only place it should be called
-		cancellation_source = newSource;
-		return newSource.Token;
-	}
-
-	void StartRender ()
-	{
 		// ------------
 		// === Body ===
 		// ------------
 
 		is_updated = false;
 
-		render_exceptions.Clear ();
+		ConcurrentQueue<Exception> renderExceptions = new ();
 
 		ConcurrentQueue<RectangleI> targetTiles = new (
 			settings.EffectIsTileable
@@ -252,9 +198,9 @@ internal sealed class AsyncEffectRenderer
 					0,
 					() => {
 						var exceptions =
-							render_exceptions.IsEmpty
+							renderExceptions.IsEmpty
 							? Array.Empty<Exception> ()
-							: render_exceptions.ToArray ();
+							: renderExceptions.ToArray ();
 
 						HandleTimerTick (cancellationToken);
 
@@ -273,73 +219,109 @@ internal sealed class AsyncEffectRenderer
 
 			});
 		}
-	}
 
-	// Runs on a background thread.
-	void RenderNextTile (CancellationToken cancellationToken)
-	{
-		// Fetch the next tile index and render it.
-		while (true) {
+		// Runs on a background thread.
+		void RenderNextTile (CancellationToken cancellationToken)
+		{
+			// Fetch the next tile index and render it.
+			while (true) {
 
-			if (cancellationToken.IsCancellationRequested) return;
-			if (!queued_tiles.TryDequeue (out RectangleI tileBounds)) return;
+				if (cancellationToken.IsCancellationRequested) return;
+				if (!queued_tiles.TryDequeue (out RectangleI tileBounds)) return;
 
-			Exception? exception = null;
+				Exception? exception = null;
 
-			try {
-				// NRT - These are set in Start () before getting here
-				if (!cancellationToken.IsCancellationRequested) {
-					dest_surface!.Flush ();
-					effect!.Render (source_surface!, dest_surface, stackalloc[] { tileBounds });
-					dest_surface.MarkDirty (tileBounds);
+				try {
+					// NRT - These are set in Start () before getting here
+					if (!cancellationToken.IsCancellationRequested) {
+						dest.Flush ();
+						effectClone.Render (source, dest, stackalloc[] { tileBounds });
+						dest.MarkDirty (tileBounds);
+					}
+
+				} catch (Exception ex) {
+					exception = ex;
+					Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectClone.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
 				}
 
-			} catch (Exception ex) {
-				exception = ex;
-				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effect!.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
+				// Ignore completions of tiles after a cancel or from a previous render.
+				if (!IsRendering || cancellationToken.IsCancellationRequested)
+					return;
+
+				// Update bounds to be shown on next expose.
+				lock (updated_lock) {
+					if (is_updated) {
+						updated_area = RectangleI.Union (tileBounds, updated_area);
+					} else {
+						is_updated = true;
+						updated_area = tileBounds;
+					}
+				}
+
+				if (exception == null)
+					continue;
+
+				renderExceptions.Enqueue (exception);
 			}
+		}
 
-			// Ignore completions of tiles after a cancel or from a previous render.
-			if (!IsRendering || cancellationToken.IsCancellationRequested)
-				return;
+		// Called on the UI thread.
+		bool HandleTimerTick (CancellationToken cancellationToken)
+		{
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " Timer tick.");
 
-			// Update bounds to be shown on next expose.
+			RectangleI bounds;
+
 			lock (updated_lock) {
-				if (is_updated) {
-					updated_area = RectangleI.Union (tileBounds, updated_area);
-				} else {
-					is_updated = true;
-					updated_area = tileBounds;
-				}
+
+				if (!is_updated)
+					return true;
+
+				is_updated = false;
+
+				bounds = updated_area;
 			}
 
-			if (exception == null)
-				continue;
+			if (IsRendering && !cancellationToken.IsCancellationRequested)
+				Updated?.Invoke (Progress, bounds);
 
-			render_exceptions.Enqueue (exception);
+			return true;
 		}
 	}
 
-	// Called on the UI thread.
-	bool HandleTimerTick (CancellationToken cancellationToken)
+	internal Task Cancel ()
 	{
-		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " Timer tick.");
+		Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
+		cancellation_source.Cancel ();
+		return completion_source.Task;
+	}
 
-		RectangleI bounds;
+	internal delegate void UpdateHandler (
+		double progress,
+		RectangleI updatedBounds);
 
-		lock (updated_lock) {
+	internal delegate void CompletionHandler (
+		IReadOnlyList<Exception> exceptions,
+		CancellationToken cancellationToken);
 
-			if (!is_updated)
-				return true;
+	public event UpdateHandler? Updated;
+	public event CompletionHandler? Completed;
 
-			is_updated = false;
+	internal void Dispose ()
+	{
+		if (timer_tick_id > 0)
+			GLib.Source.Remove (timer_tick_id);
 
-			bounds = updated_area;
-		}
+		timer_tick_id = 0;
+	}
 
-		if (IsRendering && !cancellationToken.IsCancellationRequested)
-			Updated?.Invoke (Progress, bounds);
-
-		return true;
+	CancellationToken ReplaceCancellationSource ()
+	{
+		CancellationTokenSource newSource = new ();
+		CancellationTokenSource oldSource = cancellation_source;
+		oldSource.Cancel (); // Safe to call multiple times
+		oldSource.Dispose (); // Not safe to call multiple times, so this is the only place it should be called
+		cancellation_source = newSource;
+		return newSource.Token;
 	}
 }
