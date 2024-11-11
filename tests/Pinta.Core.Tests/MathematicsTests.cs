@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Gtk;
 using NUnit.Framework;
 
 namespace Pinta.Core.Tests;
@@ -41,42 +39,50 @@ internal sealed class MathematicsTests
 	}
 
 	[TestCaseSource (nameof (lerp_cases))]
-	public void Lerp_ComputesValues (double from, double to, double frac, double expected)
+	public void Lerp_ComputesValues (LerpCase values)
 	{
-		double result = Mathematics.Lerp (from, to, frac);
-		Assert.That (result, Is.EqualTo (expected).Within (1e-10));
+		double result = Mathematics.Lerp (
+			values.from,
+			values.to,
+			values.frac);
+
+		Assert.That (result, Is.EqualTo (values.result).Within (1e-10));
 	}
 
 	[TestCaseSource (nameof (inv_lerp_cases))]
-	public void InvLerp_ComputesValues (double from, double to, double value, double expected)
+	public void InvLerp_ComputesValues (LerpCase values)
 	{
-		double inverse = Mathematics.InvLerp (from, to, value);
-		Assert.That (inverse, Is.EqualTo (expected).Within (1e-10));
+		double inverse = Mathematics.InvLerp (
+			values.from,
+			values.to,
+			values.result);
+
+		Assert.That (inverse, Is.EqualTo (values.frac).Within (1e-10));
 	}
 
 	[TestCaseSource (nameof (one_way_lerp_cases))]
-	public void InvLerp_RejectsSame (double from, double to, double value, double _)
+	public void InvLerp_RejectsSame (LerpCase values)
 	{
-		Assert.Throws<ArgumentException> (() => Mathematics.InvLerp (from, to, value));
+		Assert.Throws<ArgumentException> (() => Mathematics.InvLerp (values.from, values.to, values.result));
 	}
 
 	private static readonly IReadOnlyList<TestCaseData> lerp_cases =
 		GenerateRegularLerpCases ()
 		.Concat (GenerateOneWayLerpCases ())
-		.Select (c => new TestCaseData (c.from, c.to, c.frac, c.result))
+		.Select (c => new TestCaseData (c))
 		.ToArray ();
 
 	private static readonly IReadOnlyList<TestCaseData> inv_lerp_cases =
 		GenerateRegularLerpCases ()
-		.Select (c => new TestCaseData (c.from, c.to, c.result, c.frac))
+		.Select (c => new TestCaseData (c))
 		.ToArray ();
 
 	private static readonly IReadOnlyList<TestCaseData> one_way_lerp_cases =
 		GenerateOneWayLerpCases ()
-		.Select (c => new TestCaseData (c.from, c.to, c.result, c.frac))
+		.Select (c => new TestCaseData (c))
 		.ToArray ();
 
-	private readonly record struct LerpCase (
+	public readonly record struct LerpCase (
 		double from,
 		double to,
 		double frac,
