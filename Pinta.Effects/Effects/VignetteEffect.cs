@@ -90,17 +90,16 @@ public sealed class VignetteEffect : BaseEffect
 	}
 
 	// Algorithm code ported from PDN
-	public override void Render (
+	protected override void Render (
 		ImageSurface source,
 		ImageSurface destination,
-		ReadOnlySpan<RectangleI> rois)
+		RectangleI roi)
 	{
 		VignetteSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
-		foreach (RectangleI roi in rois)
-			foreach (var pixel in Utility.GeneratePixelOffsets (roi, settings.canvasSize))
-				destinationData[pixel.memoryOffset] = GetFinalPixelColor (settings, sourceData, pixel);
+		foreach (var pixel in Utility.GeneratePixelOffsets (roi, settings.canvasSize))
+			destinationData[pixel.memoryOffset] = GetFinalPixelColor (settings, sourceData, pixel);
 	}
 
 	private static ColorBgra GetFinalPixelColor (
