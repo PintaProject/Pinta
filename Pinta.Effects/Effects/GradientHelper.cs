@@ -48,6 +48,10 @@ public enum PresetGradients
 	[Caption ("Lime Lemon")]
 	LimeLemon,
 
+	// Translators: Gradient with bright, high-energy, and otherworldly tones of purple and yellow, along with a dark red that gives off the appearance of burning
+	[Caption ("Martian Lava")]
+	MartianLava,
+
 	// Translators: Gradient with different shades of brownish yellow
 	[Caption ("Piña Colada")]
 	PinaColada,
@@ -179,6 +183,18 @@ internal static class GradientHelper
 					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.25)] = ColorBgra.FromBgr (0, 128, 0),
 					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.50)] = ColorBgra.FromBgr (0, 255, 0),
 					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.75)] = ColorBgra.FromBgr (0, 255, 255),
+				}),
+
+			PresetGradients.MartianLava => ColorGradient.Create (
+				ColorBgra.FromBgr (26, 12, 70),
+				ColorBgra.FromBgr (93, 117, 228),
+				DefaultStartPosition,
+				DefaultEndPosition,
+				new Dictionary<double, ColorBgra> {
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.2)] = ColorBgra.FromBgr (103, 101, 213),
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.4)] = ColorBgra.FromBgr (25, 219, 200),
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.6)] = ColorBgra.FromBgr (124, 52, 59),
+					[Mathematics.Lerp (DefaultStartPosition, DefaultEndPosition, 0.8)] = ColorBgra.FromBgr (248, 133, 0),
 				}),
 
 			PresetGradients.PinaColada => ColorGradient.Create (
