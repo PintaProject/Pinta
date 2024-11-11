@@ -39,7 +39,7 @@ public sealed class ViewActions
 	public Command ActualSize { get; }
 	public ToggleCommand ToolBar { get; }
 	public ToggleCommand ImageTabs { get; }
-	public ToggleCommand PixelGrid { get; }
+	public Command EditCanvasGrid { get; }
 	public ToggleCommand StatusBar { get; }
 	public ToggleCommand ToolBox { get; }
 	public ToggleCommand Rulers { get; }
@@ -72,7 +72,7 @@ public sealed class ViewActions
 		ActualSize = new Command ("ActualSize", Translations.GetString ("Normal Size"), null, Resources.StandardIcons.ZoomOriginal);
 		ToolBar = new ToggleCommand ("Toolbar", Translations.GetString ("Toolbar"), null, null);
 		ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
-		PixelGrid = new ToggleCommand ("PixelGrid", Translations.GetString ("Pixel Grid"), null, Resources.Icons.ViewGrid);
+		EditCanvasGrid = new Command ("EditCanvasGrid", Translations.GetString ("Canvas Grid..."), null, Resources.Icons.ViewGrid);
 		StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
 		ToolBox = new ToggleCommand ("ToolBox", Translations.GetString ("Tool Box"), null, null);
 		Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
@@ -133,6 +133,9 @@ public sealed class ViewActions
 		zoom_section.AppendItem (ZoomToWindow.CreateMenuItem ());
 		zoom_section.AppendItem (Fullscreen.CreateMenuItem ());
 
+		Gio.Menu grid_section = Gio.Menu.New ();
+		grid_section.AppendItem (EditCanvasGrid.CreateMenuItem ());
+
 		Gio.Menu metric_menu = Gio.Menu.New ();
 		metric_menu.Append (Translations.GetString ("Pixels"), $"app.{RulerMetric.Name}(0)");
 		metric_menu.Append (Translations.GetString ("Inches"), $"app.{RulerMetric.Name}(1)");
@@ -142,7 +145,6 @@ public sealed class ViewActions
 		metric_section.AppendSubmenu (Translations.GetString ("Ruler Units"), metric_menu);
 
 		Gio.Menu show_hide_menu = Gio.Menu.New ();
-		show_hide_menu.AppendItem (PixelGrid.CreateMenuItem ());
 		show_hide_menu.AppendItem (Rulers.CreateMenuItem ());
 		show_hide_menu.AppendItem (StatusBar.CreateMenuItem ());
 		show_hide_menu.AppendItem (ToolBox.CreateMenuItem ());
@@ -168,8 +170,8 @@ public sealed class ViewActions
 		app.AddAccelAction (ActualSize, new[] { "<Primary>0", "<Primary><Shift>A" });
 		app.AddAccelAction (ZoomToWindow, "<Primary>B");
 		app.AddAccelAction (Fullscreen, "F11");
+		app.AddAction (EditCanvasGrid);
 		app.AddAction (RulerMetric);
-		app.AddAction (PixelGrid);
 		app.AddAction (Rulers);
 		if (mainToolbarPresent) app.AddAction (ToolBar);
 		app.AddAction (StatusBar);
@@ -177,8 +179,8 @@ public sealed class ViewActions
 		app.AddAction (ImageTabs);
 		app.AddAction (ColorScheme);
 
-
 		menu.AppendSection (null, zoom_section);
+		menu.AppendSection (null, grid_section);
 		menu.AppendSection (null, metric_section);
 		menu.AppendSection (null, show_hide_section);
 		menu.AppendSection (null, color_scheme_section);
@@ -204,10 +206,6 @@ public sealed class ViewActions
 		ZoomComboBox.ComboBox.GetEntry ().AddController (focus_controller);
 
 		ActualSize.Activated += HandlePintaCoreActionsViewActualSizeActivated;
-
-		PixelGrid.Toggled += (_) => {
-			workspace.Invalidate ();
-		};
 
 		bool isFullscreen = false;
 

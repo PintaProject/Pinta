@@ -18,7 +18,7 @@ public sealed class CanvasRenderer
 {
 	private static readonly Cairo.Pattern tranparent_pattern;
 
-	private readonly bool enable_pixel_grid;
+	private readonly ICanvasGridService? canvas_grid;
 	private readonly bool enable_live_preview;
 
 	private Size source_size;
@@ -30,9 +30,9 @@ public sealed class CanvasRenderer
 	private ImmutableArray<int>? s_2_d_lookup_x;
 	private ImmutableArray<int>? s_2_d_lookup_y;
 
-	public CanvasRenderer (bool enable_pixel_grid, bool enableLivePreview)
+	public CanvasRenderer (ICanvasGridService? canvasGrid, bool enableLivePreview)
 	{
-		this.enable_pixel_grid = enable_pixel_grid;
+		canvas_grid = canvasGrid;
 		enable_live_preview = enableLivePreview;
 	}
 
@@ -103,11 +103,27 @@ public sealed class CanvasRenderer
 			g.Restore ();
 		}
 
-		// If we are at least 200% and grid is requested, draw it
-		if (enable_pixel_grid && PintaCore.Actions.View.PixelGrid.Value && scale_factor.Ratio <= 0.5d)
-			RenderPixelGrid (dst, offset);
+		// Draw the grid if it's enabled and we're zoomed in far enough
+		const int minGridLineDistance = 5;
+		if (canvas_grid is { ShowGrid: true } && GetMinGridLineDistance (canvas_grid) >= minGridLineDistance)
+			RenderPixelGrid (dst, offset, canvas_grid);
 
 		dst.MarkDirty ();
+	}
+
+	/// <summary>
+	/// Returns the minimum number of pixels that could be between the rendered grid lines.
+	/// </summary>
+	/// <param name="canvasGrid">Canvas grid to use for the calculations</param>
+	private int GetMinGridLineDistance (ICanvasGridService canvasGrid)
+	{
+		int cellHeight = canvasGrid.CellHeight;
+		int cellWidth = canvasGrid.CellWidth;
+
+		int minCanvasDistance = Math.Min (cellHeight, cellWidth);
+		double minRenderedDistance = minCanvasDistance / scale_factor.Ratio;
+
+		return (int) minRenderedDistance;
 	}
 
 	// Lazily create and cache these
@@ -118,7 +134,7 @@ public sealed class CanvasRenderer
 
 	#region Algorithms ported from PDN
 
-	private void RenderPixelGrid (Cairo.ImageSurface dst, PointI offset)
+	private void RenderPixelGrid (Cairo.ImageSurface dst, PointI offset, ICanvasGridService canvasGrid)
 	{
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
@@ -132,7 +148,9 @@ public sealed class CanvasRenderer
 
 		var lookup_y = S2DLookupY;
 
-		for (int srcY = sTop; srcY <= sBottom; ++srcY) {
+		var gridHeight = canvasGrid.CellHeight;
+
+		for (int srcY = sTop; srcY <= sBottom; srcY += gridHeight) {
 
 			int dstY = lookup_y[srcY];
 			int dstRow = dstY - offset.Y;
@@ -153,7 +171,9 @@ public sealed class CanvasRenderer
 
 		var lookup_x = S2DLookupX;
 
-		for (int srcX = sLeft; srcX <= sRight; ++srcX) {
+		var gridWidth = canvasGrid.CellWidth;
+
+		for (int srcX = sLeft; srcX <= sRight; srcX += gridWidth) {
 
 			int dstX = lookup_x[srcX];
 			int dstCol = dstX - offset.X;
