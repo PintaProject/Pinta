@@ -111,15 +111,18 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 
 		var points = new PointD[entryCount + 2];
 
-		points[entryCount] = new PointD (X: Utility.Lerp<double> (l, r, -1), Y: Utility.Lerp<double> (t, b, 20));
-		points[entryCount + 1] = new PointD (X: Utility.Lerp<double> (l, r, -1), Y: Utility.Lerp<double> (b, t, 20));
+		points[entryCount] = new PointD (
+			X: Mathematics.Lerp<double> (l, r, -1),
+			Y: Mathematics.Lerp<double> (t, b, 20));
+		points[entryCount + 1] = new PointD (
+			X: Mathematics.Lerp<double> (l, r, -1),
+			Y: Mathematics.Lerp<double> (b, t, 20));
 
 		for (int i = 0; i < entryCount; i += entryCount - 1) {
 
 			points[i] = new PointD (
-				X: Utility.Lerp (l, r, hist[i] / (float) max),
-				Y: Utility.Lerp (t, b, i / (float) entryCount)
-			);
+				X: Mathematics.Lerp<double> (l, r, hist[i] / (float) max),
+				Y: Mathematics.Lerp<double> (t, b, i / (float) entryCount));
 
 			points[i] = CheckedPoint (rect, points[i]);
 		}
@@ -131,9 +134,8 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 			sum3 += hist[i + 1];
 
 			points[i] = new PointD (
-				X: Utility.Lerp (l, r, sum3 / (float) (max * 3.1f)),
-				Y: Utility.Lerp (t, b, i / (float) entryCount)
-			);
+				X: Mathematics.Lerp<double> (l, r, sum3 / (float) (max * 3.1f)),
+				Y: Mathematics.Lerp<double> (t, b, i / (float) entryCount));
 
 			points[i] = CheckedPoint (rect, points[i]);
 			sum3 -= hist[i - 1];

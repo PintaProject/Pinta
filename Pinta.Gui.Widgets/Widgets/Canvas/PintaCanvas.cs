@@ -40,12 +40,12 @@ public sealed class PintaCanvas : DrawingArea
 
 	public CanvasWindow CanvasWindow { get; }
 
-	public PintaCanvas (CanvasWindow window, Document document)
+	public PintaCanvas (CanvasWindow window, Document document, ICanvasGridService canvasGrid)
 	{
 		CanvasWindow = window;
 		this.document = document;
 
-		cr = new CanvasRenderer (true, true);
+		cr = new CanvasRenderer (canvasGrid, true);
 
 		// Keep the widget the same size as the canvas
 		document.Workspace.ViewSizeChanged += (_, _) => SetRequisition (document.Workspace.ViewSize);

@@ -19,12 +19,10 @@ Thanks to the following contributors who worked on this release:
 
 ### Added
 - Ported to GTK4 and libadwaita
-  - Due to API changes in GTK4, the File -> New Screenshot option now invokes platform-specific tools (the XDG screenshot portal on Linux, and the screenshot tool on maCOS). This is currently unsupported on Windows
-  - Added a preference (in the `View` menu) for switching between a dark or light color scheme.
 - Upgraded the minimum required .NET version to 8.0
 - Restored support for add-ins, which had been disabled in Pinta 2.0 due to technical limitations
-  - Ported the add-in manager dialog to GTK4
-  - The add-in manager dialog now filters out old versions incompatible with the current version of Pinta, or new addins requiring future version of Pinta ([#1580205](https://bugs.launchpad.net/pinta/+bug/1580205))
+- Added a preference (in the `View` menu) for switching between a dark or light color scheme
+- Added a canvas grid with customizable size, replacing the previous pixel grid (#1028, #1105)
 - Added a new "Dithering" effect (#457)
 - Added "Voronoi Diagram" effect (#692)
 - Ported "Vignette" and "Dents" effects from Paint.NET 3.36 (#881, #885)
@@ -32,7 +30,6 @@ Thanks to the following contributors who worked on this release:
 - Added "Align Object" effect (#936, #961)
 - Added "Outline Object" effect (#971)
 - Added support for exporting to portable pixmap (`.ppm`) files (#549)
-  - Importing is not supported yet.
 - Added a nearest-neighbor resampling mode when resizing images (#596)
 - Added support for customizable gradients in the fractal and clouds effects (#578, #678, #683)
 - Added a new `Offset Selection` option to the `Edit` menu to expand or contract the current selection (#661, #740, #746)
@@ -40,9 +37,11 @@ Thanks to the following contributors who worked on this release:
 - Improved zooming behavior with trackpads, including support for the pinch to zoom gesture (#634, #715)
 
 ### Changed
+- Due to API changes in GTK4, the File -> New Screenshot option now invokes platform-specific tools (the XDG screenshot portal on Linux, and the screenshot tool on maCOS). This is currently unsupported on Windows
 - When building Pinta using the Makefile, 'dotnet publish' is now run during the build step rather than the install step.
 - Added a "Reseed" button for the random noise used by several effects (such as "Add Noise" and "Frosted Glass").  Previously, the noise pattern changed every time the effect was computed (including when other parameters were changed).
 - Saving an image already saved in a format that supports multiple layers to a format that does not support layers will now explicitly prompt the user to flatten the image before saving, rather than silently flattening it (#909)
+- The add-in manager dialog now filters out old versions incompatible with the current version of Pinta, or new addins requiring future version of Pinta ([#1580205](https://bugs.launchpad.net/pinta/+bug/1580205))
 
 ### Fixed
 - Twist effect applied locally based on selection instead of entire image (#1089)

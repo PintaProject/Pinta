@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using System.Reflection;
 using Cairo;
 
@@ -27,27 +26,14 @@ public static class Utility
 	public static byte ClampToByte (int x)
 		=> (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
-	public static TNumber Lerp<TNumber> (
-		TNumber from,
-		TNumber to,
-		TNumber frac
-	) where TNumber : IFloatingPoint<TNumber>
-		=> from + frac * (to - from);
-
-	public static double MagnitudeSquared (double x, double y)
-		=> x * x + y * y;
-
 	public static double MagnitudeSquared (PointD p)
-		=> MagnitudeSquared (p.X, p.Y);
-
-	public static double Magnitude (double x, double y)
-		=> Math.Sqrt (x * x + y * y);
+		=> Mathematics.MagnitudeSquared (p.X, p.Y);
 
 	public static double Magnitude (this PointD point)
-		=> Magnitude (point.X, point.Y);
+		=> Mathematics.Magnitude (point.X, point.Y);
 
 	public static double Magnitude (this PointI point)
-		=> Magnitude (point.X, point.Y);
+		=> Mathematics.Magnitude<double> (point.X, point.Y);
 
 	public static double Distance (this PointD origin, in PointD dest)
 		=> Magnitude (origin - dest);
@@ -73,29 +59,14 @@ public static class Utility
 		}
 	}
 
-	/// <exception cref="ArgumentException">
-	/// Difference between upper and lower bounds is zero
-	/// </exception>
-	public static TNumber InvLerp<TNumber> (
-		TNumber from,
-		TNumber to,
-		TNumber value) where TNumber : IFloatingPoint<TNumber>
-	{
-		TNumber valueSpan = to - from;
-		if (valueSpan == TNumber.Zero)
-			throw new ArgumentException ("Difference between upper and lower bounds cannot be zero", $"{nameof (from)}, {nameof (to)}");
-		TNumber offset = value - from;
-		return offset / valueSpan;
-	}
-
 	public static PointD Lerp (
 		PointD from,
 		PointD to,
 		float frac
 	)
 		=> new (
-			X: Lerp (from.X, to.X, frac),
-			Y: Lerp (from.Y, to.Y, frac));
+			X: Mathematics.Lerp (from.X, to.X, frac),
+			Y: Mathematics.Lerp (from.Y, to.Y, frac));
 
 	public static void Swap<T> (
 		ref T a,
