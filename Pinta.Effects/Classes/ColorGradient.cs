@@ -150,7 +150,7 @@ internal sealed class ColorGradient
 
 	private ColorBgra HandleNoStops (double position)
 	{
-		double fraction = Utility.InvLerp (StartPosition, EndPosition, position);
+		double fraction = Mathematics.InvLerp (StartPosition, EndPosition, position);
 		return ColorBgra.Lerp (StartColor, EndColor, fraction);
 	}
 
@@ -163,19 +163,19 @@ internal sealed class ColorGradient
 			return ColorBgra.Lerp (
 				sorted_colors[^1],
 				EndColor,
-				Utility.InvLerp (sorted_positions[^1], EndPosition, position));
+				Mathematics.InvLerp (sorted_positions[^1], EndPosition, position));
 		var immediatelyHigher = KeyValuePair.Create (sorted_positions[matchComplement], sorted_colors[matchComplement]);
 		int immediatelyLowerIndex = matchComplement - 1;
 		if (immediatelyLowerIndex < 0) // No stops before
 			return ColorBgra.Lerp (
 				StartColor,
 				immediatelyHigher.Value,
-				Utility.InvLerp (StartPosition, immediatelyHigher.Key, position));
+				Mathematics.InvLerp (StartPosition, immediatelyHigher.Key, position));
 		var immediatelyLower = KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]);
 		return ColorBgra.Lerp ( // Stops exist both before and after
 			immediatelyLower.Value,
 			immediatelyHigher.Value,
-			Utility.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position));
+			Mathematics.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position));
 	}
 
 	private static IEnumerable<KeyValuePair<double, ColorBgra>> EmptyStops ()

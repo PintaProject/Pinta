@@ -46,6 +46,7 @@ public sealed class PolarInversionEffect : BaseEffect
 		chrome = services.GetService<IChromeService> ();
 		live_preview = services.GetService<ILivePreview> ();
 		palette = services.GetService<IPaletteService> ();
+
 		EffectData = new PolarInversionData ();
 	}
 
@@ -78,9 +79,9 @@ public sealed class PolarInversionEffect : BaseEffect
 		double y = transData.Y;
 
 		// NOTE: when x and y are zero, this will divide by zero and return NaN
-		double invertDistance = Utility.Lerp (
+		double invertDistance = Mathematics.Lerp (
 			1.0,
-			settings.defaultRadius2 / Utility.MagnitudeSquared (x, y),
+			settings.defaultRadius2 / Mathematics.MagnitudeSquared (x, y),
 			Data.Amount);
 
 		return new (
