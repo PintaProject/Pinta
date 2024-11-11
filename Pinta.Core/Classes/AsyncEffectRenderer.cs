@@ -120,16 +120,19 @@ internal sealed class AsyncEffectRenderer
 		}
 	}
 
+	private readonly object completion_swap_lock = new ();
 	internal void Start (
 		BaseEffect effect,
 		Cairo.ImageSurface source,
 		Cairo.ImageSurface dest)
 	{
 		TaskCompletionSource newCompletionSource = new ();
-		if (IsRendering) {
-			throw new InvalidOperationException ("Render is in progress");
+		lock (completion_swap_lock) {
+			if (IsRendering) {
+				throw new InvalidOperationException ("Render is in progress");
+			}
+			completion_source = newCompletionSource;
 		}
-		completion_source = newCompletionSource;
 
 		Debug.WriteLine ("AsyncEffectRenderer.Start ()");
 
