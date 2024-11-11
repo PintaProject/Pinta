@@ -37,9 +37,7 @@ namespace Pinta.Core;
 
 public sealed class OraFormat : IImageImporter, IImageExporter
 {
-	private const int ThumbMaxSize = 256;
-
-	#region IImageImporter implementation
+	private const int THUMB_MAX_SIZE = 256;
 
 	public Document Import (Gio.File file)
 	{
@@ -125,7 +123,6 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 		return newDocument;
 	}
-	#endregion
 
 	private static CultureInfo GetFormat ()
 		=> CultureInfo.CreateSpecificCulture ("en");
@@ -138,12 +135,12 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 
 	private static Size GetThumbDimensions (int width, int height)
 	{
-		if (width <= ThumbMaxSize && height <= ThumbMaxSize)
+		if (width <= THUMB_MAX_SIZE && height <= THUMB_MAX_SIZE)
 			return new (width, height);
 		else if (width > height)
-			return new (ThumbMaxSize, (int) ((double) height / width * ThumbMaxSize));
+			return new (THUMB_MAX_SIZE, (int) ((double) height / width * THUMB_MAX_SIZE));
 		else
-			return new ((int) ((double) width / height * ThumbMaxSize), ThumbMaxSize);
+			return new ((int) ((double) width / height * THUMB_MAX_SIZE), THUMB_MAX_SIZE);
 	}
 
 	private static byte[] GetLayerXmlData (IReadOnlyList<UserLayer> layers)
@@ -187,13 +184,24 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 	{
 		using GioStream file_stream = new (file.Replace ());
 		using ZipArchive archive = new (file_stream, ZipArchiveMode.Create);
+		Pixbuf flattenedPb = document.GetFlattenedImage ().ToPixbuf ();
+		AddMimeEntry (archive);
+		AddLayerEntries (archive, document);
+		AddStackEntry (archive, document);
+		AddMergedImage (archive, flattenedPb);
+		AddThumbnail (archive, flattenedPb);
+	}
 
-		var mimeBytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
+	private static void AddMimeEntry (ZipArchive archive)
+	{
+		byte[] mimeBytes = System.Text.Encoding.ASCII.GetBytes ("image/openraster");
 		ZipArchiveEntry mimeEntry = archive.CreateEntry ("mimetype", CompressionLevel.NoCompression);
-		using (Stream mimeStream = mimeEntry.Open ()) {
-			mimeStream.Write (mimeBytes, 0, mimeBytes.Length);
-		}
+		using Stream mimeStream = mimeEntry.Open ();
+		mimeStream.Write (mimeBytes, 0, mimeBytes.Length);
+	}
 
+	private static void AddLayerEntries (ZipArchive archive, Document document)
+	{
 		for (int i = 0; i < document.Layers.UserLayers.Count; i++) {
 			Pixbuf pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
 			byte[] buf = pb.SaveToBuffer ("png");
@@ -201,25 +209,29 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 			using Stream layerStream = layerEntry.Open ();
 			layerStream.Write (buf, 0, buf.Length);
 		}
+	}
 
-		var userLayerBytes = GetLayerXmlData (document.Layers.UserLayers);
+	private static void AddStackEntry (ZipArchive archive, Document document)
+	{
+		byte[] userLayerBytes = GetLayerXmlData (document.Layers.UserLayers);
 		ZipArchiveEntry stackEntry = archive.CreateEntry ("stack.xml");
-		using (Stream stackStream = stackEntry.Open ()) {
-			stackStream.Write (userLayerBytes, 0, userLayerBytes.Length);
-		}
+		using Stream stackStream = stackEntry.Open ();
+		stackStream.Write (userLayerBytes, 0, userLayerBytes.Length);
+	}
 
-		// Add merged image.
-		var flattenedPb = document.GetFlattenedImage ().ToPixbuf ();
-		var mergedImageBytes = flattenedPb.SaveToBuffer ("png");
+	private static void AddMergedImage (ZipArchive archive, Pixbuf flattenedPb)
+	{
+		byte[] mergedImageBytes = flattenedPb.SaveToBuffer ("png");
 		ZipArchiveEntry mergedImageEntry = archive.CreateEntry ("mergedimage.png");
-		using (Stream mergedImageStream = mergedImageEntry.Open ()) {
-			mergedImageStream.Write (mergedImageBytes, 0, mergedImageBytes.Length);
-		}
+		using Stream mergedImageStream = mergedImageEntry.Open ();
+		mergedImageStream.Write (mergedImageBytes, 0, mergedImageBytes.Length);
+	}
 
-		// Add thumbnail.
+	private static void AddThumbnail (ZipArchive archive, Pixbuf flattenedPb)
+	{
 		Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
-		var thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, GdkPixbuf.InterpType.Bilinear)!;
-		var thumbnailBytes = thumb.SaveToBuffer ("png");
+		Pixbuf thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, InterpType.Bilinear)!; // Creates new Pixbuf
+		byte[] thumbnailBytes = thumb.SaveToBuffer ("png");
 		ZipArchiveEntry thumbnailEntry = archive.CreateEntry ("Thumbnails/thumbnail.png");
 		using Stream thumbnailStream = thumbnailEntry.Open ();
 		thumbnailStream.Write (thumbnailBytes, 0, thumbnailBytes.Length);
