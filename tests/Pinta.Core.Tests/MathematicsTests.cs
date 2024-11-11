@@ -98,9 +98,9 @@ internal sealed class MathematicsTests
 		yield return new (0.0, 10.0, 2.0, 20.0);
 		yield return new (0.0, 10.0, -1.0, -10.0);
 		yield return new (1.0e10, 2.0e10, 0.5, 1.5e10);
-		yield return new (1.0e-10, 2.0e-10, 0.5, 1.5e-10);
+		yield return new (1.0e-5, 2.0e-5, 0.5, 1.5e-5);
 		yield return new (1.0e10, 2.0e10, -1.0, 0);
-		yield return new (1.0e-10, 2.0e-10, -1.0, 0);
+		yield return new (1.0e-5, 2.0e-5, -1.0, 0);
 	}
 
 	// Regular cases that throw if they are inverted
