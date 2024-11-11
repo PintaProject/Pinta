@@ -145,11 +145,13 @@ internal sealed class AsyncEffectRenderer
 		// Start slave render threads.
 		var slaves =
 			Enumerable.Range (0, settings.ThreadCount - 1)
-			.Select (_ => StartSlaveThread ())
+			.Select (_ => StartRenderThread (RenderNextTile))
 			.ToImmutableArray ();
 
 		// Start the master render thread.
-		Thread master = StartMasterThread ();
+		Thread master = StartRenderThread (
+			new ThreadStart (RenderNextTile) // Do part of the rendering on the master thread.
+			+ new ThreadStart (CoordinateSlaveThreads));
 
 		// Start timer used to periodically fire update events on the UI thread.
 		timer_tick_id = GLib.Functions.TimeoutAdd (
@@ -161,11 +163,6 @@ internal sealed class AsyncEffectRenderer
 		// === Methods ===
 		// ---------------
 
-		Thread StartSlaveThread ()
-		{
-			return StartRenderThread (RenderNextTile);
-		}
-
 		Thread StartRenderThread (ThreadStart callback)
 		{
 			Thread result = new (callback) { Priority = settings.ThreadPriority };
@@ -173,43 +170,36 @@ internal sealed class AsyncEffectRenderer
 			return result;
 		}
 
-		Thread StartMasterThread ()
+		void CoordinateSlaveThreads ()
 		{
-			return StartRenderThread (() => {
+			// Wait for slave threads to complete.
+			foreach (var slave in slaves)
+				slave.Join ();
 
-				// Do part of the rendering on the master thread.
-				RenderNextTile ();
+			// Change back to the UI thread to notify of completion.
+			GLib.Functions.TimeoutAdd (
+				0,
+				0,
+				() => {
+					var exceptions =
+						renderExceptions.IsEmpty
+						? Array.Empty<Exception> ()
+						: renderExceptions.ToArray ();
 
-				// Wait for slave threads to complete.
-				foreach (var slave in slaves)
-					slave.Join ();
+					HandleTimerTick ();
 
-				// Change back to the UI thread to notify of completion.
-				GLib.Functions.TimeoutAdd (
-					0,
-					0,
-					() => {
-						var exceptions =
-							renderExceptions.IsEmpty
-							? Array.Empty<Exception> ()
-							: renderExceptions.ToArray ();
+					if (timer_tick_id > 0)
+						GLib.Source.Remove (timer_tick_id);
 
-						HandleTimerTick ();
+					timer_tick_id = 0;
 
-						if (timer_tick_id > 0)
-							GLib.Source.Remove (timer_tick_id);
+					Completed?.Invoke (exceptions, cancellationToken);
 
-						timer_tick_id = 0;
+					newCompletionSource.SetResult ();
 
-						Completed?.Invoke (exceptions, cancellationToken);
-
-						newCompletionSource.SetResult ();
-
-						return false; // don't call the timer again
-					}
-				);
-
-			});
+					return false; // don't call the timer again
+				}
+			);
 		}
 
 		// Runs on a background thread.
