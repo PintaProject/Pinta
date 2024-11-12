@@ -17,7 +17,7 @@ namespace Pinta.Effects;
 
 public sealed class ZoomBlurEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsBlursZoomBlur;
+	public override string Icon => Resources.Icons.EffectsBlursZoomBlur;
 
 	public sealed override bool IsTileable => true;
 
@@ -40,61 +40,60 @@ public sealed class ZoomBlurEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
+	// Algorithm Code Ported From PDN
 
 	private sealed record ZoomBlurSettings (
-		int src_width,
-		int dst_width,
-		long fcx,
-		long fcy,
+		RectangleI sourceBounds,
+		Size size,
+		long fc_x,
+		long fc_y,
 		long fz);
 
-	private ZoomBlurSettings CreateSettings (ImageSurface src, ImageSurface dst)
+	private ZoomBlurSettings CreateSettings (ImageSurface source)
 	{
 		PointI offset = Data.Offset;
-
-		long w = dst.Width;
-		long h = dst.Height;
-		long fox = (long) (w * offset.X * 32768.0);
-		long foy = (long) (h * offset.Y * 32768.0);
-
+		Size size = source.GetSize ();
+		long w = source.Width;
+		long h = source.Height;
+		long fo_x = (long) (w * offset.X * 32768.0);
+		long fo_y = (long) (h * offset.Y * 32768.0);
 		return new (
-			src_width: src.Width,
-			dst_width: dst.Width,
-			fcx: fox + (w << 15),
-			fcy: foy + (h << 15),
-			fz: Data.Amount
-		);
+			sourceBounds: source.GetBounds (),
+			size: size,
+			fc_x: fo_x + (w << 15),
+			fc_y: fo_y + (h << 15),
+			fz: Data.Amount);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (
+		ImageSurface source,
+		ImageSurface destination,
+		RectangleI roi)
 	{
 		if (Data.Amount == 0)
 			return; // Copy src to dest
 
-		ZoomBlurSettings settings = CreateSettings (src, dst);
-
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		RectangleI src_bounds = src.GetBounds ();
-
-		foreach (var rect in rois) {
-			for (int y = rect.Top; y <= rect.Bottom; ++y) {
-				var src_row = src_data.Slice (y * settings.src_width, settings.src_width);
-				var dst_row = dst_data.Slice (y * settings.dst_width, settings.dst_width);
-
-				for (int x = rect.Left; x <= rect.Right; ++x)
-					dst_row[x] = GetFinalPixelColor (src, settings, src_data, src_bounds, y, src_row, x);
-			}
-		}
+		ZoomBlurSettings settings = CreateSettings (source);
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
+		foreach (var pixel in Utility.GeneratePixelOffsets (roi, settings.size))
+			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
+				source,
+				settings,
+				sourceData,
+				pixel);
 	}
 
-	private static ColorBgra GetFinalPixelColor (ImageSurface src, ZoomBlurSettings settings, ReadOnlySpan<ColorBgra> src_data, RectangleI src_bounds, int y, ReadOnlySpan<ColorBgra> src_row, int x)
+	private static ColorBgra GetFinalPixelColor (
+		ImageSurface src,
+		ZoomBlurSettings settings,
+		ReadOnlySpan<ColorBgra> sourceData,
+		PixelOffset pixel)
 	{
-		const int n = 64;
+		const int N = 64;
 
-		long fx = (x << 16) - settings.fcx;
-		long fy = (y << 16) - settings.fcy;
+		long fx = (pixel.coordinates.X << 16) - settings.fc_x;
+		long fy = (pixel.coordinates.Y << 16) - settings.fc_y;
 
 		int sr = 0;
 		int sg = 0;
@@ -102,23 +101,28 @@ public sealed class ZoomBlurEffect : BaseEffect
 		int sa = 0;
 		int sc = 0;
 
-		ColorBgra src_pixel = src_row[x];
+		ColorBgra src_pixel = sourceData[pixel.memoryOffset];
 		sr += src_pixel.R * src_pixel.A;
 		sg += src_pixel.G * src_pixel.A;
 		sb += src_pixel.B * src_pixel.A;
 		sa += src_pixel.A;
 		++sc;
 
-		for (int i = 0; i < n; ++i) {
+		for (int i = 0; i < N; ++i) {
 
 			fx -= ((fx >> 4) * settings.fz) >> 10;
 			fy -= ((fy >> 4) * settings.fz) >> 10;
 
-			int u = (int) (fx + settings.fcx + 32768 >> 16);
-			int v = (int) (fy + settings.fcy + 32768 >> 16);
+			PointI transformed = new (
+				X: (int) (fx + settings.fc_x + 32768 >> 16),
+				Y: (int) (fy + settings.fc_y + 32768 >> 16));
 
-			if (src_bounds.Contains (u, v)) {
-				ColorBgra src_pixel_2 = src.GetColorBgra (src_data, settings.src_width, new (u, v));
+			if (settings.sourceBounds.Contains (transformed)) {
+
+				ColorBgra src_pixel_2 = src.GetColorBgra (
+					sourceData,
+					settings.size.Width,
+					transformed);
 
 				sr += src_pixel_2.R * src_pixel_2.A;
 				sg += src_pixel_2.G * src_pixel_2.A;
@@ -137,7 +141,6 @@ public sealed class ZoomBlurEffect : BaseEffect
 				a: Utility.ClampToByte (sa / sc))
 			: ColorBgra.FromUInt32 (0);
 	}
-	#endregion
 
 	public sealed class ZoomBlurData : EffectData
 	{
