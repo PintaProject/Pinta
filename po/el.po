@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-03 01:38+0000\n"
-"PO-Revision-Date: 2024-11-08 18:00+0000\n"
-"Last-Translator: Chorwacjen <cutiemelo@proton.me>\n"
+"PO-Revision-Date: 2024-11-11 20:02+0000\n"
+"Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -566,7 +566,7 @@ msgstr "Περικοπή στην επιλογή"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:232
 msgid "Curved"
-msgstr "καμπύλος"
+msgstr "Κυρτό"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:136
@@ -2103,7 +2103,7 @@ msgstr "Τύπος Σχήματος"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:229
 msgid "Sharp Edges"
-msgstr ""
+msgstr "Αιχμηρές άκρες"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
@@ -2299,7 +2299,7 @@ msgstr "Μέγεθος στοιχείων"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:222
 msgid "Tile Type"
-msgstr ""
+msgstr "Τύπος ψηφίδας"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:97
 msgid "Tip: Right-click to remove control points."
