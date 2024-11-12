@@ -55,60 +55,27 @@ internal static class ErrorDialog
 		string details)
 	{
 		Console.Error.WriteLine ("Pinta: {0}\n{1}", message, details);
-		PintaErrorDialog dialog = new (parent, message, body, details);
-		string responseText = await dialog.RunAsync (dispose: true);
+
+		using Gtk.TextView text_view = Gtk.TextView.New ();
+		text_view.Buffer!.SetText (details, -1);
+
+		using Gtk.ScrolledWindow scroll = Gtk.ScrolledWindow.New ();
+		scroll.HeightRequest = 250;
+		scroll.SetChild (text_view);
+
+		using Gtk.Expander expander = Gtk.Expander.New (Translations.GetString ("Details"));
+		expander.SetChild (scroll);
+
+		using Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
+		dialog.SetExtraChild (expander);
+		dialog.AddResponse (nameof (ErrorDialogResponse.Bug), Translations.GetString ("Report Bug..."));
+		dialog.SetResponseAppearance (nameof (ErrorDialogResponse.Bug), Adw.ResponseAppearance.Suggested);
+		dialog.AddResponse (nameof (ErrorDialogResponse.OK), Translations.GetString ("_OK"));
+		dialog.DefaultResponse = nameof (ErrorDialogResponse.OK);
+		dialog.CloseResponse = nameof (ErrorDialogResponse.OK);
+
+		string responseText = await dialog.RunAsync ();
+
 		return Enum.Parse<ErrorDialogResponse> (responseText);
-	}
-
-	private sealed class PintaErrorDialog : Adw.MessageDialog
-	{
-		private readonly Gtk.TextView text_view;
-		private readonly Gtk.ScrolledWindow text_scroll;
-		private readonly Gtk.Expander details_expander;
-		public PintaErrorDialog (
-			Gtk.Window parent,
-			string message,
-			string body,
-			string details)
-		{
-			Gtk.TextView textView = Gtk.TextView.New ();
-			textView.Buffer!.SetText (details, -1);
-
-			Gtk.ScrolledWindow textScroll = Gtk.ScrolledWindow.New ();
-			textScroll.HeightRequest = 250;
-			textScroll.SetChild (textView);
-
-			Gtk.Expander detailsExpander = Gtk.Expander.New (Translations.GetString ("Details"));
-			detailsExpander.SetChild (textScroll);
-
-			// --- References to keep
-
-			text_view = textView;
-			text_scroll = textScroll;
-			details_expander = detailsExpander;
-
-			// --- Initialization
-
-			SetParent (parent);
-			SetHeading (message);
-			SetBody (body);
-
-			SetExtraChild (detailsExpander);
-
-			AddResponse (nameof (ErrorDialogResponse.Bug), Translations.GetString ("Report Bug..."));
-			SetResponseAppearance (nameof (ErrorDialogResponse.Bug), Adw.ResponseAppearance.Suggested);
-			AddResponse (nameof (ErrorDialogResponse.OK), Translations.GetString ("_OK"));
-
-			DefaultResponse = nameof (ErrorDialogResponse.OK);
-			CloseResponse = nameof (ErrorDialogResponse.OK);
-		}
-
-		public override void Dispose ()
-		{
-			base.Dispose ();
-			details_expander.Dispose ();
-			text_scroll.Dispose ();
-			text_view.Dispose ();
-		}
 	}
 }
