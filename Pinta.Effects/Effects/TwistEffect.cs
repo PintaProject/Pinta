@@ -43,32 +43,34 @@ public sealed class TwistEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this);
 
 	// Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (
+		ImageSurface source,
+		ImageSurface destination,
+		RectangleI roi)
 	{
 		TwistSettings settings = CreateSettings ();
-
-		ReadOnlySpan<ColorBgra> sourceData = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> destinationData = dst.GetPixelData ();
-
-		foreach (var rect in rois) {
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
-				float j = pixel.coordinates.Y - (settings.HalfHeight + settings.RenderBounds.Top);
-				float i = pixel.coordinates.X - (settings.HalfWidth + settings.RenderBounds.Left);
-				destinationData[pixel.memoryOffset] =
-					(i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
-					? sourceData[pixel.memoryOffset]
-					: GetFinalPixelColor (src, settings, sourceData, j, i);
-			}
-		}
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
+		foreach (var pixel in Utility.GeneratePixelOffsets (roi, source.GetSize ()))
+			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
+				settings,
+				source,
+				sourceData,
+				pixel);
 	}
 
 	private static ColorBgra GetFinalPixelColor (
-		ImageSurface src,
 		TwistSettings settings,
+		ImageSurface src,
 		ReadOnlySpan<ColorBgra> sourceData,
-		float j,
-		float i)
+		PixelOffset pixel)
 	{
+		float j = pixel.coordinates.Y - (settings.HalfHeight + settings.RenderBounds.Top);
+		float i = pixel.coordinates.X - (settings.HalfWidth + settings.RenderBounds.Left);
+
+		if (i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
+			return sourceData[pixel.memoryOffset];
+
 		int b = 0;
 		int g = 0;
 		int r = 0;
@@ -130,18 +132,18 @@ public sealed class TwistEffect : BaseEffect
 		);
 	}
 
-	private static ImmutableArray<PointD> InitializeAntialiasPoints (int aaLevel)
+	private static ImmutableArray<PointD> InitializeAntialiasPoints (int antiAliasLevel)
 	{
-		int aaSamples = aaLevel * aaLevel + 1;
-		var aaPoints = ImmutableArray.CreateBuilder<PointD> (aaSamples);
-		aaPoints.Count = aaSamples;
-		for (int i = 0; i < aaSamples; ++i) {
-			float prePtX = i * aaLevel / (float) aaSamples;
-			float ptX = prePtX - ((int) prePtX);
-			float ptY = i / (float) aaSamples;
-			aaPoints[i] = new (ptX, ptY);
+		int antiAliasSample = antiAliasLevel * antiAliasLevel + 1;
+		var antiAliasPoints = ImmutableArray.CreateBuilder<PointD> (antiAliasSample);
+		antiAliasPoints.Count = antiAliasSample;
+		for (int i = 0; i < antiAliasSample; ++i) {
+			float pre_pt_x = i * antiAliasLevel / (float) antiAliasSample;
+			float pt_x = pre_pt_x - ((int) pre_pt_x);
+			float pt_y = i / (float) antiAliasSample;
+			antiAliasPoints[i] = new (pt_x, pt_y);
 		}
-		return aaPoints.MoveToImmutable ();
+		return antiAliasPoints.MoveToImmutable ();
 	}
 
 	public sealed class TwistData : EffectData
