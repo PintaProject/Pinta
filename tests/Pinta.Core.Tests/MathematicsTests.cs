@@ -93,7 +93,6 @@ internal sealed class MathematicsTests
 	{
 		yield return new (0.0, 10.0, 0.0, 0.0);
 		yield return new (0.0, 10.0, 1.0, 10.0);
-		yield return new (0.0, 10.0, 1.0, 10.0);
 		yield return new (0.0, 10.0, 1.5, 15.0);
 		yield return new (0.0, 10.0, 2.0, 20.0);
 		yield return new (0.0, 10.0, -1.0, -10.0);
