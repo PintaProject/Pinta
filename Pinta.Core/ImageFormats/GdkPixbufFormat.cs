@@ -40,8 +40,8 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 
 	public Document Import (Gio.File file)
 	{
-		Pixbuf streamBuffer = ReadPixbuf (file);
-		Pixbuf effectiveBuffer = streamBuffer.ApplyEmbeddedOrientation () ?? streamBuffer;
+		using Pixbuf streamBuffer = ReadPixbuf (file);
+		using Pixbuf effectiveBuffer = streamBuffer.ApplyEmbeddedOrientation () ?? streamBuffer;
 
 		Size imageSize = new (effectiveBuffer.Width, effectiveBuffer.Height);
 

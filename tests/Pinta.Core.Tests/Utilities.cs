@@ -99,11 +99,11 @@ internal static class Utilities
 	public static ImageSurface LoadImage (string imageFilePath)
 	{
 		var file = Gio.FileHelper.NewForPath (imageFilePath);
-		using var fs = file.Read (null);
+		using Gio.FileInputStream fs = file.Read (null);
 		try {
-			var bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when error is thrown.
-			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, bg.Width, bg.Height);
-			using var context = new Cairo.Context (surf);
+			using GdkPixbuf.Pixbuf bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when error is thrown.
+			ImageSurface surf = CairoExtensions.CreateImageSurface (Format.Argb32, bg.Width, bg.Height); // Not disposing because it will be returned
+			using Context context = new (surf);
 			context.DrawPixbuf (bg, PointD.Zero);
 			return surf;
 		} finally {
