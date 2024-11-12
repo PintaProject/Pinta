@@ -1,6 +1,6 @@
 using Cairo;
-using Pinta.Core;
 using GdkPixbuf;
+using Pinta.Core;
 
 namespace PintaBenchmarks;
 
