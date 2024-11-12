@@ -44,7 +44,7 @@ public sealed class LevelsEffect : BaseEffect
 	public override async Task<bool> LaunchConfiguration ()
 	{
 		// TODO: Delegate `EffectData` changes to event handlers or similar
-		LevelsDialog dialog = new (chrome, workspace, Data) {
+		using LevelsDialog dialog = new (chrome, workspace, Data) {
 			Title = Name,
 			IconName = Icon,
 		};

@@ -41,7 +41,7 @@ public sealed class PosterizeEffect : BaseEffect
 
 	public override async Task<bool> LaunchConfiguration ()
 	{
-		PosterizeDialog dialog = new (chrome) {
+		using PosterizeDialog dialog = new (chrome) {
 			Title = Name,
 			IconName = Icon,
 			EffectData = Data, // TODO: Delegate `EffectData` changes to event handlers or similar

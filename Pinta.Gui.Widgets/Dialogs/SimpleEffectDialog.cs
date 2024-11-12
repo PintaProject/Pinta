@@ -91,7 +91,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		if (effect.EffectData == null)
 			throw new ArgumentException ($"{effect.EffectData} should not be null", nameof (effect));
 
-		SimpleEffectDialog dialog = new (
+		using SimpleEffectDialog dialog = new (
 			effect.Name,
 			effect.Icon,
 			effect.EffectData,
