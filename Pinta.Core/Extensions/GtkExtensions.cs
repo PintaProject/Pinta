@@ -385,7 +385,9 @@ public static partial class GtkExtensions
 			dialog.Modal = true;
 
 		dialog.OnResponse += (_, args) => {
+
 			response = (Gtk.ResponseType) args.ResponseId;
+
 			if (loop.IsRunning ())
 				loop.Quit ();
 		};
@@ -397,7 +399,7 @@ public static partial class GtkExtensions
 	}
 
 	// TODO-GTK4 (bindings) - replace with adw_message_dialog_choose() once adwaita 1.3 is available, like in v0.4 of gir.core
-	public static Task<string> RunAsync (this Adw.MessageDialog dialog)
+	public static Task<string> RunAsync (this Adw.MessageDialog dialog, bool dispose = false)
 	{
 		TaskCompletionSource<string> completionSource = new ();
 
@@ -407,6 +409,7 @@ public static partial class GtkExtensions
 		{
 			completionSource.SetResult (args.Response);
 			dialog.OnResponse -= ResponseCallback;
+			if (dispose) dialog.Dispose ();
 		}
 
 		dialog.OnResponse += ResponseCallback;
@@ -415,7 +418,7 @@ public static partial class GtkExtensions
 		return completionSource.Task;
 	}
 
-	public static Task<Gtk.ResponseType> RunAsync (this Gtk.Dialog dialog)
+	public static Task<Gtk.ResponseType> RunAsync (this Gtk.Dialog dialog, bool dispose = false)
 	{
 		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
 
@@ -425,6 +428,7 @@ public static partial class GtkExtensions
 		{
 			completionSource.SetResult ((Gtk.ResponseType) args.ResponseId);
 			dialog.OnResponse -= ResponseCallback;
+			if (dispose) dialog.Dispose ();
 		}
 
 		dialog.OnResponse += ResponseCallback;
