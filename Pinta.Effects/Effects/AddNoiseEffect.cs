@@ -20,7 +20,7 @@ public sealed class AddNoiseEffect : BaseEffect
 {
 	public sealed override bool IsTileable => true;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsNoiseAddNoise;
+	public override string Icon => Resources.Icons.EffectsNoiseAddNoise;
 
 	public override string Name => Translations.GetString ("Add Noise");
 
@@ -30,13 +30,7 @@ public sealed class AddNoiseEffect : BaseEffect
 
 	public NoiseData Data => (NoiseData) EffectData!;  // NRT - Set in constructor
 
-	static AddNoiseEffect ()
-	{
-		lookup = CreateLookup ();
-	}
-
 	private readonly IChromeService chrome;
-
 	public AddNoiseEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
@@ -46,9 +40,9 @@ public sealed class AddNoiseEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
-	private const int TableSize = 16384;
-	private static readonly ImmutableArray<int> lookup;
+	// Algorithm Code Ported From PDN
+	private const int TABLE_SIZE = 16384;
+	private static readonly ImmutableArray<int> lookup = CreateLookup ();
 
 	private static double NormalCurve (double x, double scale)
 		=> scale * Math.Exp (-x * x / 2);
@@ -64,36 +58,36 @@ public sealed class AddNoiseEffect : BaseEffect
 			double s = 0;
 			scale = (l + r) * 0.5;
 
-			for (int i = 0; i < TableSize; ++i) {
+			for (int i = 0; i < TABLE_SIZE; ++i) {
 
-				s += NormalCurve (16.0 * ((double) i - TableSize / 2) / TableSize, scale);
+				s += NormalCurve (16.0 * ((double) i - TABLE_SIZE / 2) / TABLE_SIZE, scale);
 
 				if (s > 1000000)
 					break;
 			}
 
-			if (s > TableSize)
+			if (s > TABLE_SIZE)
 				r = scale;
-			else if (s < TableSize)
+			else if (s < TABLE_SIZE)
 				l = scale;
 			else
 				break;
 		}
 
-		var result = ImmutableArray.CreateBuilder<int> (TableSize);
-		result.Count = TableSize;
+		var result = ImmutableArray.CreateBuilder<int> (TABLE_SIZE);
+		result.Count = TABLE_SIZE;
 
 		double sum = 0;
 		int roundedSum = 0, lastRoundedSum;
 
-		for (int i = 0; i < TableSize; ++i) {
+		for (int i = 0; i < TABLE_SIZE; ++i) {
 
-			sum += NormalCurve (16.0 * ((double) i - TableSize / 2) / TableSize, scale);
+			sum += NormalCurve (16.0 * ((double) i - TABLE_SIZE / 2) / TABLE_SIZE, scale);
 			lastRoundedSum = roundedSum;
 			roundedSum = (int) sum;
 
 			for (int j = lastRoundedSum; j < roundedSum; ++j)
-				result[j] = (i - TableSize / 2) * 65536 / TableSize;
+				result[j] = (i - TABLE_SIZE / 2) * 65536 / TABLE_SIZE;
 		}
 
 		return result.MoveToImmutable ();
@@ -120,48 +114,53 @@ public sealed class AddNoiseEffect : BaseEffect
 		);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (
+		ImageSurface source,
+		ImageSurface destination,
+		RectangleI rect)
 	{
-		AddNoiseSettings settings = CreateSettings (src);
+		AddNoiseSettings settings = CreateSettings (source);
 
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
-		foreach (var rect in rois) {
+		// Reseed the random number generator for each rectangle being rendered.
+		// This should produce consistent results regardless of the number of threads
+		// being used to render the effect, but will change if the effect is tiled differently.
+		Random rand = new (settings.seed.GetValueForRegion (rect));
 
-			// Reseed the random number generator for each rectangle being rendered.
-			// This should produce consistent results regardless of the number of threads
-			// being used to render the effect, but will change if the effect is tiled differently.
-			Random rand = new (settings.seed.GetValueForRegion (rect));
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.size)) {
-
-				if (rand.NextDouble () > settings.coverage) {
-					dst_data[pixel.memoryOffset] = src_data[pixel.memoryOffset];
-					continue;
-				}
-
-				int _r = lookup[rand.Next (TableSize)];
-				int _g = lookup[rand.Next (TableSize)];
-				int _b = lookup[rand.Next (TableSize)];
-
-				int i = (4899 * _r + 9618 * _g + 1867 * _b) >> 14;
-
-				int r = i + (((_r - i) * settings.sat) >> 12);
-				int g = i + (((_g - i) * settings.sat) >> 12);
-				int b = i + (((_b - i) * settings.sat) >> 12);
-
-				ColorBgra src_pixel = src_data[pixel.memoryOffset];
-
-				dst_data[pixel.memoryOffset] = ColorBgra.FromBgra (
-					b: Utility.ClampToByte (src_pixel.B + ((b * settings.dev + 32768) >> 16)),
-					g: Utility.ClampToByte (src_pixel.G + ((g * settings.dev + 32768) >> 16)),
-					r: Utility.ClampToByte (src_pixel.R + ((r * settings.dev + 32768) >> 16)),
-					a: src_pixel.A
-				);
-			}
-		}
+		foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.size))
+			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
+				settings,
+				rand,
+				sourceData[pixel.memoryOffset]);
 	}
-	#endregion
+
+	private static ColorBgra GetFinalPixelColor (
+		AddNoiseSettings settings,
+		Random rand,
+		ColorBgra original)
+	{
+		if (rand.NextDouble () > settings.coverage)
+			return original;
+
+		int _r = lookup[rand.Next (TABLE_SIZE)];
+		int _g = lookup[rand.Next (TABLE_SIZE)];
+		int _b = lookup[rand.Next (TABLE_SIZE)];
+
+		int i = (4899 * _r + 9618 * _g + 1867 * _b) >> 14;
+
+		int r = i + (((_r - i) * settings.sat) >> 12);
+		int g = i + (((_g - i) * settings.sat) >> 12);
+		int b = i + (((_b - i) * settings.sat) >> 12);
+
+		return ColorBgra.FromBgra (
+			b: Utility.ClampToByte (original.B + ((b * settings.dev + 32768) >> 16)),
+			g: Utility.ClampToByte (original.G + ((g * settings.dev + 32768) >> 16)),
+			r: Utility.ClampToByte (original.R + ((r * settings.dev + 32768) >> 16)),
+			a: original.A
+		);
+	}
 
 	public sealed class NoiseData : EffectData
 	{
