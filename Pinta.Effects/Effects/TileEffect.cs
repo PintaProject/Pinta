@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Cairo;
@@ -18,20 +19,25 @@ namespace Pinta.Effects;
 
 public sealed class TileEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortTile;
+	public override string Icon
+		=> Resources.Icons.EffectsDistortTile;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Tile Reflection");
+	public override string Name
+		=> Translations.GetString ("Tile Reflection");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Distort");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Distort");
 
-	public TileData Data => (TileData) EffectData!;
+	public TileData Data
+		=> (TileData) EffectData!;
 
 	private readonly IChromeService chrome;
-
 	public TileEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
@@ -41,43 +47,36 @@ public sealed class TileEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
-
 	private sealed record TileSettings (
-		int width,
-		int height,
+		Size size,
 		float halfWidth,
 		float halfHeight,
 		float sin,
 		float cos,
 		float tileScale,
 		float adjustedIntensity,
-		int antiAliasLevel,
-		int antiAliasSamples,
-		int src_width,
+		IReadOnlyList<PointD> antiAliasPoints,
 		Func<float, float> waveFunction);
-	private TileSettings CreateSettings (ImageSurface src, ImageSurface dst)
+
+	private TileSettings CreateSettings (ImageSurface source)
 	{
-		int width = dst.Width;
-		int height = dst.Height;
+		const int ANTI_ALIAS_LEVEL = 4;
+		Size size = source.GetSize ();
 		RadiansAngle rotationTheta = Data.Rotation.ToRadians ();
 		float preliminaryIntensity = Data.Intensity;
 		int tileSize = Data.TileSize;
-
-		int aaLevel = 4;
-
+		int antiAliasSample = ANTI_ALIAS_LEVEL * ANTI_ALIAS_LEVEL + 1;
+		float sin = (float) Math.Sin (rotationTheta.Radians);
+		float cos = (float) Math.Cos (rotationTheta.Radians);
 		return new (
-			width: width,
-			height: height,
-			halfWidth: width / 2f,
-			halfHeight: height / 2f,
-			sin: (float) Math.Sin (rotationTheta.Radians),
-			cos: (float) Math.Cos (rotationTheta.Radians),
+			size: size,
+			halfWidth: size.Width / 2f,
+			halfHeight: size.Height / 2f,
+			sin: sin,
+			cos: cos,
 			tileScale: (float) Math.PI / tileSize,
 			adjustedIntensity: preliminaryIntensity * preliminaryIntensity / 10 * Math.Sign (preliminaryIntensity),
-			antiAliasLevel: aaLevel,
-			antiAliasSamples: aaLevel * aaLevel + 1,
-			src_width: src.Width,
+			antiAliasPoints: InitializeAntiAliasPoints (ANTI_ALIAS_LEVEL, antiAliasSample, sin, cos),
 			waveFunction: GetWaveFunction (Data.WaveType)
 		);
 
@@ -91,106 +90,108 @@ public sealed class TileEffect : BaseEffect
 		}
 	}
 
-	private static void InitializeAntiAliasPoints (TileSettings settings, Span<PointD> destination)
+	private static PointD[] InitializeAntiAliasPoints (
+		int antiAliasLevel,
+		int antiAliasSamples,
+		float sin,
+		float cos)
 	{
-		for (int i = 0; i < settings.antiAliasSamples; ++i) {
+		var result = new PointD[antiAliasSamples];
 
-			double x = i * settings.antiAliasLevel / ((double) settings.antiAliasSamples);
-			double y = i / (double) settings.antiAliasSamples;
+		for (int i = 0; i < antiAliasSamples; ++i) {
+
+			double x = i * antiAliasLevel / ((double) antiAliasSamples);
+			double y = i / (double) antiAliasSamples;
 
 			x -= (int) x;
 
 			// RGSS + rotation to maximize AA quality
-			destination[i] = new PointD (
-				X: (double) (settings.cos * x + settings.sin * y),
-				Y: (double) (settings.cos * y - settings.sin * x));
+			result[i] = new PointD (
+				X: (double) (cos * x + sin * y),
+				Y: (double) (cos * y - sin * x));
 		}
+		return result;
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (
+		ImageSurface source,
+		ImageSurface destination,
+		RectangleI roi)
 	{
-		TileSettings settings = CreateSettings (src, dst);
-
-		Span<PointD> aaPoints = stackalloc PointD[settings.antiAliasSamples];
-		InitializeAntiAliasPoints (settings, aaPoints);
-
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
-
-		foreach (var rect in rois) {
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
-				float j = pixel.coordinates.Y - settings.halfHeight;
-				dst_data[pixel.memoryOffset] = GetFinalPixelColor (src, settings, aaPoints, src_data, j, pixel.coordinates.X);
-			}
-		}
+		TileSettings settings = CreateSettings (source);
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
+		foreach (var pixel in Utility.GeneratePixelOffsets (roi, source.GetSize ()))
+			dst_data[pixel.memoryOffset] = GetFinalPixelColor (
+				source,
+				settings,
+				sourceData,
+				pixel);
 	}
 
+	// Algorithm Code Ported From PDN
 	private static ColorBgra GetFinalPixelColor (
-		ImageSurface src,
+		ImageSurface source,
 		TileSettings settings,
-		ReadOnlySpan<PointD> aaPoints,
-		ReadOnlySpan<ColorBgra> src_data,
-		float j,
-		int x)
+		ReadOnlySpan<ColorBgra> sourceData,
+		PixelOffset pixel)
 	{
 		int b = 0;
 		int g = 0;
 		int r = 0;
 		int a = 0;
 
-		float i = x - settings.halfWidth;
+		float i = pixel.coordinates.X - settings.halfWidth;
+		float j = pixel.coordinates.Y - settings.halfHeight;
 
-		for (int p = 0; p < settings.antiAliasSamples; ++p) {
+		for (int p = 0; p < settings.antiAliasPoints.Count; ++p) {
 
-			PointD pt = aaPoints[p];
+			PointD pt = settings.antiAliasPoints[p];
 
 			// Initial coordinates after applying anti-aliasing offsets
-
 			float initialU = i + (float) pt.X;
 			float initialV = j - (float) pt.Y;
 
 			// Rotate coordinates to align with the effect's orientation
-
 			float rotatedS = settings.cos * initialU + settings.sin * initialV;
 			float rotatedT = -settings.sin * initialU + settings.cos * initialV;
 
 			// Apply wave function
-
 			float functionS = settings.waveFunction (rotatedS * settings.tileScale);
 			float functionT = settings.waveFunction (rotatedT * settings.tileScale);
 
 			// Apply intensity transformation to create the tile effect
-
 			float transformedS = rotatedS + settings.adjustedIntensity * functionS;
 			float transformedT = rotatedT + settings.adjustedIntensity * functionT;
 
 			// Rotate back to the original coordinate space
-
 			float finalU = settings.cos * transformedS - settings.sin * transformedT;
 			float finalV = settings.sin * transformedS + settings.cos * transformedT;
 
 			// Translate back to image coordinates
-
 			int unwrappedSampleX = (int) (settings.halfWidth + finalU);
 			int unwrappedSampleY = (int) (settings.halfHeight + finalV);
 
 			// Ensure coordinates wrap around the image dimensions
 
-			int wrappedSampleX = (unwrappedSampleX + settings.width) % settings.width;
+			int wrappedSampleX = (unwrappedSampleX + settings.size.Width) % settings.size.Width;
 			int adjustedSampleX =
 				(wrappedSampleX < 0)
-				? (wrappedSampleX + settings.width) % settings.width
+				? (wrappedSampleX + settings.size.Width) % settings.size.Width
 				: wrappedSampleX;
 
-			int wrappedSampleY = (unwrappedSampleY + settings.height) % settings.height;
+			int wrappedSampleY = (unwrappedSampleY + settings.size.Height) % settings.size.Height;
 			int adjustedSampleY =
 				(wrappedSampleY < 0)
-				? (wrappedSampleY + settings.height) % settings.height
+				? (wrappedSampleY + settings.size.Height) % settings.size.Height
 				: wrappedSampleY;
 
 			PointI samplePosition = new (adjustedSampleX, adjustedSampleY);
 
-			ColorBgra sample = src.GetColorBgra (src_data, settings.src_width, samplePosition);
+			ColorBgra sample = source.GetColorBgra (
+				sourceData,
+				settings.size.Width,
+				samplePosition);
 
 			b += sample.B;
 			g += sample.G;
@@ -199,14 +200,11 @@ public sealed class TileEffect : BaseEffect
 		}
 
 		return ColorBgra.FromBgra (
-			b: (byte) (b / settings.antiAliasSamples),
-			g: (byte) (g / settings.antiAliasSamples),
-			r: (byte) (r / settings.antiAliasSamples),
-			a: (byte) (a / settings.antiAliasSamples));
+			b: (byte) (b / settings.antiAliasPoints.Count),
+			g: (byte) (g / settings.antiAliasPoints.Count),
+			r: (byte) (r / settings.antiAliasPoints.Count),
+			a: (byte) (a / settings.antiAliasPoints.Count));
 	}
-
-	#endregion
-
 
 	public sealed class TileData : EffectData
 	{
