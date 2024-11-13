@@ -56,7 +56,6 @@ public sealed class FragmentEffect : BaseEffect
 	{
 		RadiansAngle pointStep = new (RadiansAngle.MAX_RADIANS / fragments);
 		RadiansAngle adjustedRotation = rotation - new RadiansAngle (RadiansAngle.MAX_RADIANS / 4);
-
 		var pointOffsets = ImmutableArray.CreateBuilder<PointI> (fragments);
 		pointOffsets.Count = fragments;
 		for (int i = 0; i < fragments; i++) {
@@ -69,49 +68,64 @@ public sealed class FragmentEffect : BaseEffect
 		return pointOffsets.MoveToImmutable ();
 	}
 
-	public override void Render (
+	protected override void Render (
 		ImageSurface source,
 		ImageSurface destination,
-		ReadOnlySpan<RectangleI> rois)
+		RectangleI roi)
 	{
-		var pointOffsets = RecalcPointOffsets (
-			Data.Fragments,
-			Data.Rotation.ToRadians (),
-			Data.Distance);
-
-		Span<ColorBgra> samples = stackalloc ColorBgra[pointOffsets.Length];
-
-		Size sourceSize = source.GetSize ();
-
-		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
+		FragmentSettings settings = CreateSettings (source);
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = destination.GetPixelData ();
+		foreach (var pixel in Utility.GeneratePixelOffsets (roi, settings.sourceSize))
+			dst_data[pixel.memoryOffset] = GetFinalPixelColor (
+				settings,
+				source,
+				sourceData,
+				pixel);
+	}
 
-		foreach (RectangleI rect in rois) {
+	private sealed record FragmentSettings (
+		Size sourceSize,
+		ImmutableArray<PointI> pointOffsets);
+	private FragmentSettings CreateSettings (ImageSurface source)
+	{
+		return new (
+			sourceSize: source.GetSize (),
+			pointOffsets: RecalcPointOffsets (
+				Data.Fragments,
+				Data.Rotation.ToRadians (),
+				Data.Distance)
+		);
+	}
 
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, sourceSize)) {
+	private static ColorBgra GetFinalPixelColor (
+		FragmentSettings settings,
+		ImageSurface source,
+		ReadOnlySpan<ColorBgra> src_data,
+		PixelOffset pixel)
+	{
+		Span<ColorBgra> samples = stackalloc ColorBgra[settings.pointOffsets.Length];
 
-				int sampleCount = 0;
+		int sampleCount = 0;
 
-				for (int i = 0; i < pointOffsets.Length; ++i) {
+		for (int i = 0; i < settings.pointOffsets.Length; ++i) {
 
-					PointI relative = new (
-						X: pixel.coordinates.X - pointOffsets[i].X,
-						Y: pixel.coordinates.Y - pointOffsets[i].Y);
+			PointI relative = new (
+				X: pixel.coordinates.X - settings.pointOffsets[i].X,
+				Y: pixel.coordinates.Y - settings.pointOffsets[i].Y);
 
-					if (relative.X < 0 || relative.X >= sourceSize.Width || relative.Y < 0 || relative.Y >= sourceSize.Height)
-						continue;
+			if (relative.X < 0 || relative.X >= settings.sourceSize.Width || relative.Y < 0 || relative.Y >= settings.sourceSize.Height)
+				continue;
 
-					samples[sampleCount] = source.GetColorBgra (
-						src_data,
-						sourceSize.Width,
-						relative);
+			samples[sampleCount] = source.GetColorBgra (
+				src_data,
+				settings.sourceSize.Width,
+				relative);
 
-					++sampleCount;
-				}
-
-				dst_data[pixel.memoryOffset] = ColorBgra.Blend (samples[..sampleCount]);
-			}
+			++sampleCount;
 		}
+
+		return ColorBgra.Blend (samples[..sampleCount]);
 	}
 
 	public sealed class FragmentData : EffectData
