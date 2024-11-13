@@ -116,7 +116,6 @@ public sealed class LivePreviewManager : ILivePreview
 
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
-		SemaphoreSlim restartSemaphore = new (1, 1);
 		int handlersInQueue = 0;
 		AsyncEffectRenderer renderer = new (settings);
 		renderer.Updated += OnUpdate;
@@ -242,17 +241,12 @@ public sealed class LivePreviewManager : ILivePreview
 
 		async void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
-			Interlocked.Increment (ref handlersInQueue);
-			await restartSemaphore.WaitAsync ();
-			try {
-				// TODO: calculate bounds
-				Interlocked.Decrement (ref handlersInQueue);
-				if (handlersInQueue > 0) return;
-				await renderer.Cancel ();
-				renderer.Start (effect, layer.Surface, LivePreviewSurface);
-			} finally {
-				restartSemaphore.Release ();
-			}
+			// TODO: calculate bounds
+			handlersInQueue++;
+			await renderer.Cancel ();
+			handlersInQueue--;
+			if (handlersInQueue > 0) return;
+			renderer.Start (effect, layer.Surface, LivePreviewSurface);
 		}
 
 		void OnUpdate (
