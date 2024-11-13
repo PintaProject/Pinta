@@ -107,7 +107,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 				layer.Opacity = double.Parse (GetAttribute (layerElement, "opacity", "1"), GetFormat ());
 				layer.BlendMode = StandardToBlendMode (GetAttribute (layerElement, "composite-op", "svg:src-over"));
 
-				Pixbuf pb = Pixbuf.NewFromFile (tmp_file)!; // NRT: only nullable when an error is thrown
+				using Pixbuf pb = Pixbuf.NewFromFile (tmp_file)!; // NRT: only nullable when an error is thrown
 				using Context g = new (layer.Surface);
 				g.DrawPixbuf (pb, (PointD) position);
 
@@ -184,12 +184,12 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 	{
 		using GioStream file_stream = new (file.Replace ());
 		using ZipArchive archive = new (file_stream, ZipArchiveMode.Create);
-		Pixbuf flattenedPb = document.GetFlattenedImage ().ToPixbuf ();
+		using Pixbuf flattened = document.GetFlattenedImage ().ToPixbuf ();
 		AddMimeEntry (archive);
 		AddLayerEntries (archive, document);
 		AddStackEntry (archive, document);
-		AddMergedImage (archive, flattenedPb);
-		AddThumbnail (archive, flattenedPb);
+		AddMergedImage (archive, flattened);
+		AddThumbnail (archive, flattened);
 	}
 
 	private static void AddMimeEntry (ZipArchive archive)
@@ -203,7 +203,7 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 	private static void AddLayerEntries (ZipArchive archive, Document document)
 	{
 		for (int i = 0; i < document.Layers.UserLayers.Count; i++) {
-			Pixbuf pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
+			using Pixbuf pb = document.Layers.UserLayers[i].Surface.ToPixbuf ();
 			byte[] buf = pb.SaveToBuffer ("png");
 			ZipArchiveEntry layerEntry = archive.CreateEntry ($"data/layer{i}.png");
 			using Stream layerStream = layerEntry.Open ();
@@ -219,18 +219,18 @@ public sealed class OraFormat : IImageImporter, IImageExporter
 		stackStream.Write (userLayerBytes, 0, userLayerBytes.Length);
 	}
 
-	private static void AddMergedImage (ZipArchive archive, Pixbuf flattenedPb)
+	private static void AddMergedImage (ZipArchive archive, Pixbuf flattened)
 	{
-		byte[] mergedImageBytes = flattenedPb.SaveToBuffer ("png");
+		byte[] mergedImageBytes = flattened.SaveToBuffer ("png");
 		ZipArchiveEntry mergedImageEntry = archive.CreateEntry ("mergedimage.png");
 		using Stream mergedImageStream = mergedImageEntry.Open ();
 		mergedImageStream.Write (mergedImageBytes, 0, mergedImageBytes.Length);
 	}
 
-	private static void AddThumbnail (ZipArchive archive, Pixbuf flattenedPb)
+	private static void AddThumbnail (ZipArchive archive, Pixbuf flattened)
 	{
-		Size newSize = GetThumbDimensions (flattenedPb.Width, flattenedPb.Height);
-		Pixbuf thumb = flattenedPb.ScaleSimple (newSize.Width, newSize.Height, InterpType.Bilinear)!; // Creates new Pixbuf
+		Size newSize = GetThumbDimensions (flattened.Width, flattened.Height);
+		using Pixbuf thumb = flattened.ScaleSimple (newSize.Width, newSize.Height, InterpType.Bilinear)!; // Creates new Pixbuf
 		byte[] thumbnailBytes = thumb.SaveToBuffer ("png");
 		ZipArchiveEntry thumbnailEntry = archive.CreateEntry ("Thumbnails/thumbnail.png");
 		using Stream thumbnailStream = thumbnailEntry.Open ();

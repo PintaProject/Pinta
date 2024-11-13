@@ -31,10 +31,10 @@ internal static class Utilities
 		var assembly_path = System.IO.Path.GetDirectoryName (typeof (Utilities).Assembly.Location);
 		var file = Gio.FileHelper.NewForPath (System.IO.Path.Combine (assembly_path!, "Assets", image_name));
 
-		using var fs = file.Read (null);
+		using Gio.FileInputStream fs = file.Read (null);
 		try {
-			var bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when error is thrown.
-			var surf = CairoExtensions.CreateImageSurface (Format.Argb32, bg.Width, bg.Height);
+			using GdkPixbuf.Pixbuf bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when error is thrown.
+			ImageSurface surf = CairoExtensions.CreateImageSurface (Format.Argb32, bg.Width, bg.Height); // Not disposing because it will be returned
 			using Context context = new (surf);
 			context.DrawPixbuf (bg, 0, 0);
 			return surf;
@@ -75,17 +75,19 @@ internal static class Utilities
 		string? save_image_name = null,
 		string source_image_name = "input.png")
 	{
-		var source = Utilities.LoadImage (source_image_name);
-		var result = CairoExtensions.CreateImageSurface (Format.Argb32, source.Width, source.Height);
-		var expected = LoadImage (result_image_name);
+		using ImageSurface source = Utilities.LoadImage (source_image_name);
+		using ImageSurface result = CairoExtensions.CreateImageSurface (Format.Argb32, source.Width, source.Height);
+		using ImageSurface expected = LoadImage (result_image_name);
 
 		effect.Render (source, result, stackalloc[] { source.GetBounds () });
 
 		// For debugging, optionally save out the result to a file.
-		if (save_image_name != null) {
-			result.ToPixbuf ().Savev (save_image_name, "png",
-				System.Array.Empty<string> (), System.Array.Empty<string> ());
-		}
+		if (save_image_name != null)
+			result.ToPixbuf ().Savev (
+				save_image_name,
+				"png",
+				Array.Empty<string> (),
+				Array.Empty<string> ());
 
 		CompareImages (result, expected);
 	}

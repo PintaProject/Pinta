@@ -175,11 +175,14 @@ internal sealed class PasteAction : IActionHandler
 		}
 
 		// Copy the paste to the temp layer, which should be at least the size of this document.
-		doc.Layers.CreateSelectionLayer (Math.Max (doc.ImageSize.Width, cb_image.Width),
-								 Math.Max (doc.ImageSize.Height, cb_image.Height));
+		doc.Layers.CreateSelectionLayer (
+			Math.Max (doc.ImageSize.Width, cb_image.Width),
+			Math.Max (doc.ImageSize.Height, cb_image.Height));
+
 		doc.Layers.ShowSelectionLayer = true;
 
 		using Cairo.Context g = new (doc.Layers.SelectionLayer.Surface);
+
 		g.SetSourceSurface (cb_image, 0, 0);
 		g.Paint ();
 
@@ -201,16 +204,17 @@ internal sealed class PasteAction : IActionHandler
 
 	public static Task ShowClipboardEmptyDialog (ChromeManager chrome)
 	{
-		var primary = Translations.GetString ("Image cannot be pasted");
-		var secondary = Translations.GetString ("The clipboard does not contain an image.");
+		string primary = Translations.GetString ("Image cannot be pasted");
+		string secondary = Translations.GetString ("The clipboard does not contain an image.");
 		return chrome.ShowMessageDialog (chrome.MainWindow, primary, secondary);
 	}
 
 	public static async Task<Gtk.ResponseType> ShowExpandCanvasDialog (ChromeManager chrome)
 	{
-		var primary = Translations.GetString ("Image larger than canvas");
-		var secondary = Translations.GetString ("The image being pasted is larger than the canvas. What would you like to do to the canvas size?");
-		var dialog = Adw.MessageDialog.New (chrome.MainWindow, primary, secondary);
+		string primary = Translations.GetString ("Image larger than canvas");
+		string secondary = Translations.GetString ("The image being pasted is larger than the canvas. What would you like to do to the canvas size?");
+
+		using Adw.MessageDialog dialog = Adw.MessageDialog.New (chrome.MainWindow, primary, secondary);
 
 		const string cancel_response = "cancel";
 		const string reject_response = "reject";

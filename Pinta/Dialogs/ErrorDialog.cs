@@ -37,7 +37,7 @@ internal static class ErrorDialog
 		string message,
 		string body)
 	{
-		System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, body);
+		Console.Error.WriteLine ("Pinta: {0}\n{1}", message, body);
 
 		Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
 
@@ -45,7 +45,7 @@ internal static class ErrorDialog
 		dialog.DefaultResponse = nameof (ErrorDialogResponse.OK);
 		dialog.CloseResponse = nameof (ErrorDialogResponse.OK);
 
-		return dialog.RunAsync ();
+		return dialog.RunAsync (dispose: true);
 	}
 
 	internal static async Task<ErrorDialogResponse> ShowError (
@@ -54,19 +54,19 @@ internal static class ErrorDialog
 		string body,
 		string details)
 	{
-		System.Console.Error.WriteLine ("Pinta: {0}\n{1}", message, details);
+		Console.Error.WriteLine ("Pinta: {0}\n{1}", message, details);
 
-		Gtk.TextView text_view = Gtk.TextView.New ();
+		using Gtk.TextView text_view = Gtk.TextView.New ();
 		text_view.Buffer!.SetText (details, -1);
 
-		Gtk.ScrolledWindow scroll = Gtk.ScrolledWindow.New ();
+		using Gtk.ScrolledWindow scroll = Gtk.ScrolledWindow.New ();
 		scroll.HeightRequest = 250;
 		scroll.SetChild (text_view);
 
-		Gtk.Expander expander = Gtk.Expander.New (Translations.GetString ("Details"));
+		using Gtk.Expander expander = Gtk.Expander.New (Translations.GetString ("Details"));
 		expander.SetChild (scroll);
 
-		Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
+		using Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
 		dialog.SetExtraChild (expander);
 		dialog.AddResponse (nameof (ErrorDialogResponse.Bug), Translations.GetString ("Report Bug..."));
 		dialog.SetResponseAppearance (nameof (ErrorDialogResponse.Bug), Adw.ResponseAppearance.Suggested);

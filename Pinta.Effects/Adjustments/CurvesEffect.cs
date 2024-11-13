@@ -44,7 +44,7 @@ public sealed class CurvesEffect : BaseEffect
 	public override async Task<bool> LaunchConfiguration ()
 	{
 		// TODO: Delegate `EffectData` changes to event handlers or similar
-		CurvesDialog dialog = new (chrome, Data) {
+		using CurvesDialog dialog = new (chrome, Data) {
 			Title = Name,
 			IconName = Icon,
 		};
