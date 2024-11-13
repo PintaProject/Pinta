@@ -619,7 +619,7 @@ internal sealed class EffectsTest
 	{
 		ZoomBlurEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Amount = 50;
-		effect.Data.Offset = new (10, 20);
+		effect.Data.Offset = new (-1, -1);
 		Utilities.TestEffect (effect, "zoomblur2.png");
 	}
 
