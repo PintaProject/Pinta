@@ -68,7 +68,7 @@ internal sealed class EffectsTest
 	public void Dents1 ()
 	{
 		DentsEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.CenterOffset = new PointD (0, 0);
+		effect.Data.CenterOffset = new CenterOffset (0, 0);
 		Utilities.TestEffect (effect, "dents1.png");
 	}
 
@@ -76,7 +76,7 @@ internal sealed class EffectsTest
 	public void Dents2 ()
 	{
 		DentsEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.CenterOffset = new PointD (0, 0);
+		effect.Data.CenterOffset = new CenterOffset (0, 0);
 		effect.Data.Scale = 50;
 		Utilities.TestEffect (effect, "dents2.png");
 	}
@@ -85,7 +85,7 @@ internal sealed class EffectsTest
 	public void Dents3 ()
 	{
 		DentsEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.CenterOffset = new PointD (0, 0);
+		effect.Data.CenterOffset = new CenterOffset (0, 0);
 		effect.Data.Roughness = 100;
 		Utilities.TestEffect (effect, "dents3.png");
 	}
@@ -94,7 +94,7 @@ internal sealed class EffectsTest
 	public void Dents4 ()
 	{
 		DentsEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.CenterOffset = new PointD (0, 0);
+		effect.Data.CenterOffset = new CenterOffset (0, 0);
 		effect.Data.Tension = 100;
 		Utilities.TestEffect (effect, "dents4.png");
 	}
@@ -103,7 +103,7 @@ internal sealed class EffectsTest
 	public void Dents5 ()
 	{
 		DentsEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.CenterOffset = new PointD (0, 0);
+		effect.Data.CenterOffset = new CenterOffset (0, 0);
 		effect.Data.Quality = 1;
 		Utilities.TestEffect (effect, "dents5.png");
 	}
@@ -112,7 +112,7 @@ internal sealed class EffectsTest
 	public void Dents6 ()
 	{
 		DentsEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.CenterOffset = new PointD (-1, -1);
+		effect.Data.CenterOffset = new CenterOffset (-1, -1);
 		Utilities.TestEffect (effect, "dents6.png");
 	}
 
@@ -120,7 +120,7 @@ internal sealed class EffectsTest
 	public void Dents7 ()
 	{
 		DentsEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.CenterOffset = new PointD (0, 0);
+		effect.Data.CenterOffset = new CenterOffset (0, 0);
 		effect.Data.EdgeBehavior = Warp.EdgeBehavior.Clamp;
 		Utilities.TestEffect (effect, "dents7.png");
 	}
