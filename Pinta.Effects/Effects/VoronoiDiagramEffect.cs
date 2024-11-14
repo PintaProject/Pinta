@@ -76,16 +76,15 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		);
 	}
 
-	public override void Render (
+	protected override void Render (
 		ImageSurface src,
 		ImageSurface dst,
-		ReadOnlySpan<RectangleI> rois)
+		RectangleI roi)
 	{
 		VoronoiSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (RectangleI roi in rois)
-			foreach (var kvp in roi.GeneratePixelOffsets (settings.size).Select (CreateColor))
-				dst_data[kvp.Key] = kvp.Value;
+		foreach (var kvp in roi.GeneratePixelOffsets (settings.size).Select (CreateColor))
+			dst_data[kvp.Key] = kvp.Value;
 
 		KeyValuePair<int, ColorBgra> CreateColor (PixelOffset pixel)
 		{
