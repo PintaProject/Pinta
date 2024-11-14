@@ -51,12 +51,12 @@ public sealed class ZoomBlurEffect : BaseEffect
 
 	private ZoomBlurSettings CreateSettings (ImageSurface source)
 	{
-		PointD offset = Data.Offset;
+		CenterOffset<double> offset = Data.Offset;
 		Size size = source.GetSize ();
 		long w = source.Width;
 		long h = source.Height;
-		long fo_x = (long) (w * offset.X * 32768.0);
-		long fo_y = (long) (h * offset.Y * 32768.0);
+		long fo_x = (long) (w * offset.Horizontal * 32768.0);
+		long fo_y = (long) (h * offset.Vertical * 32768.0);
 		return new (
 			sourceBounds: source.GetBounds (),
 			size: size,
@@ -148,7 +148,7 @@ public sealed class ZoomBlurEffect : BaseEffect
 		public int Amount { get; set; } = 10;
 
 		[Caption ("Offset")]
-		public PointD Offset { get; set; } = new (0, 0);
+		public CenterOffset<double> Offset { get; set; } = new (0, 0);
 
 		[Skip]
 		public override bool IsDefault => Amount == 0;

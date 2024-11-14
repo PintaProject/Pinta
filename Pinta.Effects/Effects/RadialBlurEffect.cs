@@ -69,8 +69,8 @@ public sealed class RadialBlurEffect : BaseEffect
 		int fr = ((int) (Data.Angle.Degrees * Math.PI * 65536.0 / 181.0));
 		return new (
 			canvasSize: sourceSize,
-			fcx: (sourceSize.Width << 15) + (int) (offset.X * (sourceSize.Width << 15)),
-			fcy: (sourceSize.Height << 15) + (int) (offset.Y * (sourceSize.Height << 15)),
+			fcx: (sourceSize.Width << 15) + (int) (offset.Horizontal * (sourceSize.Width << 15)),
+			fcy: (sourceSize.Height << 15) + (int) (offset.Vertical * (sourceSize.Height << 15)),
 			n: n,
 			fsr: fr / n);
 	}
@@ -167,7 +167,7 @@ public sealed class RadialBlurEffect : BaseEffect
 		public DegreesAngle Angle { get; set; } = new (2);
 
 		[Caption ("Offset")]
-		public PointD Offset { get; set; } = new (0, 0);
+		public CenterOffset<double> Offset { get; set; } = new (0, 0);
 
 		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
 		[Hint ("Use low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]

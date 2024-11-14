@@ -21,7 +21,7 @@ public static class Warp
 	public interface IEffectData
 	{
 		int Quality { get; }
-		PointD CenterOffset { get; }
+		CenterOffset<double> CenterOffset { get; }
 		EdgeBehavior EdgeBehavior { get; }
 	}
 
@@ -96,8 +96,8 @@ public static class Warp
 		double defaultRadius = Math.Min (selectionBounds.Width, selectionBounds.Height) * 0.5;
 		IReadOnlyList<PointD> antiAliasPoints = Utility.GetRgssOffsets (antiAliasSampleCount, warpData.Quality);
 		PointD centerOffset = new (
-			X: selectionBounds.Left + (selectionBounds.Width * (1.0 + warpData.CenterOffset.X) * 0.5),
-			Y: selectionBounds.Top + (selectionBounds.Height * (1.0 + warpData.CenterOffset.Y) * 0.5));
+			X: selectionBounds.Left + (selectionBounds.Width * (1.0 + warpData.CenterOffset.Horizontal) * 0.5),
+			Y: selectionBounds.Top + (selectionBounds.Height * (1.0 + warpData.CenterOffset.Vertical) * 0.5));
 		return new (
 			centerOffset: centerOffset,
 			primaryColor: palette.PrimaryColor.ToColorBgra (),
