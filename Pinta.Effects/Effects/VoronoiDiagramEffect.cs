@@ -16,7 +16,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		=> Resources.Icons.EffectsRenderVoronoiDiagram;
 
 	public override bool IsTileable
-		=> false;
+		=> true;
 
 	public override string Name
 		=> Translations.GetString ("Voronoi Diagram");
@@ -31,9 +31,11 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		=> (VoronoiDiagramData) EffectData!; // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
+	private readonly ILivePreview live_preview;
 	public VoronoiDiagramEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
+		live_preview = services.GetService<ILivePreview> ();
 		EffectData = new VoronoiDiagramData ();
 	}
 
@@ -47,9 +49,11 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		ImmutableArray<ColorBgra> colors,
 		Func<PointD, PointD, double> distanceCalculator);
 
-	private VoronoiSettings CreateSettings (ImageSurface dst, RectangleI roi)
+	private VoronoiSettings CreateSettings (ImageSurface dst)
 	{
 		VoronoiDiagramData data = Data;
+
+		RectangleI roi = live_preview.RenderBounds;
 
 		ColorSorting colorSorting = data.ColorSorting;
 
@@ -72,12 +76,16 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		);
 	}
 
-	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
+	public override void Render (
+		ImageSurface src,
+		ImageSurface dst,
+		ReadOnlySpan<RectangleI> rois)
 	{
-		VoronoiSettings settings = CreateSettings (dst, roi);
+		VoronoiSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (var kvp in roi.GeneratePixelOffsets (settings.size).AsParallel ().Select (CreateColor))
-			dst_data[kvp.Key] = kvp.Value;
+		foreach (RectangleI roi in rois)
+			foreach (var kvp in roi.GeneratePixelOffsets (settings.size).AsParallel ().Select (CreateColor))
+				dst_data[kvp.Key] = kvp.Value;
 
 		KeyValuePair<int, ColorBgra> CreateColor (PixelOffset pixel)
 		{
