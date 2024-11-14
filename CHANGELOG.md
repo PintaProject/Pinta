@@ -35,6 +35,7 @@ Thanks to the following contributors who worked on this release:
 - Added a new `Offset Selection` option to the `Edit` menu to expand or contract the current selection (#661, #740, #746)
 - The Windows build of Pinta now supports loading `.webp` images (#770)
 - Improved zooming behavior with trackpads, including support for the pinch to zoom gesture (#634, #715)
+- The Windows installer is now signed, thanks to the support of [SignPath](https://about.signpath.io/) (#1054)
 
 ### Changed
 - Due to API changes in GTK4, the File -> New Screenshot option now invokes platform-specific tools (the XDG screenshot portal on Linux, and the screenshot tool on maCOS). This is currently unsupported on Windows
