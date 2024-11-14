@@ -231,7 +231,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			return CreateCheckBox;
 		else if (memberType == typeof (PointI))
 			return CreatePointPicker;
-		else if (memberType == typeof (PointD))
+		else if (memberType == typeof (CenterOffset))
 			return CreateOffsetPicker;
 		else if (memberType.IsEnum)
 			return CreateEnumComboBox;
@@ -379,14 +379,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		EffectData effectData,
 		MemberSettings settings)
 	{
-		PointI initialPoint =
-			(settings.reflector.GetValue (effectData) is PointI p)
-			? p
-			: default;
+		PointPickerWidget widget = new (PintaCore.Workspace.ImageSize, PointI.Zero) { Label = caption };
 
-		PointPickerWidget widget = new (PintaCore.Workspace.ImageSize, initialPoint) { Label = caption };
-
-		widget.PointPicked += (_, _) => SetAndNotify (settings.reflector, effectData, widget.Offset);
+		widget.PointPicked += (_, _) => SetAndNotify (
+			settings.reflector,
+			effectData,
+			CenterOffset.FromPoint (widget.Offset));
 
 		return widget;
 	}
