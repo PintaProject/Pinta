@@ -116,6 +116,7 @@ public sealed class LivePreviewManager : ILivePreview
 
 		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
+		int handlersInQueue = 0;
 		AsyncEffectRenderer renderer = new (settings);
 		renderer.Updated += OnUpdate;
 		renderer.Completed += OnCompletion;
@@ -238,9 +239,13 @@ public sealed class LivePreviewManager : ILivePreview
 			chrome.MainWindowBusy = false;
 		}
 
-		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
+		async void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
 			// TODO: calculate bounds
+			handlersInQueue++;
+			await renderer.Cancel ();
+			handlersInQueue--;
+			if (handlersInQueue > 0) return;
 			renderer.Start (effect, layer.Surface, LivePreviewSurface);
 		}
 

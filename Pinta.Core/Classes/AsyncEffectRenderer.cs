@@ -34,6 +34,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
@@ -71,16 +72,10 @@ internal sealed class AsyncEffectRenderer
 		}
 	}
 
-	BaseEffect? effect;
-	Cairo.ImageSurface? source_surface;
-	Cairo.ImageSurface? dest_surface;
-
-	bool is_rendering;
-	bool restart_render_flag;
+	TaskCompletionSource completion_source;
 	CancellationTokenSource cancellation_source;
 	ConcurrentQueue<RectangleI> queued_tiles;
 	int tiles_count = 0;
-	readonly ConcurrentQueue<Exception> render_exceptions;
 
 	uint timer_tick_id;
 
@@ -91,23 +86,21 @@ internal sealed class AsyncEffectRenderer
 
 	internal AsyncEffectRenderer (Settings settings)
 	{
-		effect = null;
-		source_surface = null;
-		dest_surface = null;
+		TaskCompletionSource initialCompletionSource = new ();
+		initialCompletionSource.SetResult ();
 
-		is_rendering = false;
+		completion_source = initialCompletionSource;
 		cancellation_source = new ();
 		updated_lock = new object ();
 		is_updated = false;
 		queued_tiles = new ConcurrentQueue<RectangleI> ();
-		render_exceptions = new ConcurrentQueue<Exception> ();
 
 		timer_tick_id = 0;
 
 		this.settings = settings;
 	}
 
-	internal bool IsRendering => is_rendering;
+	internal bool IsRendering => !completion_source.Task.IsCompleted;
 
 	internal double Progress {
 		get {
@@ -122,36 +115,167 @@ internal sealed class AsyncEffectRenderer
 		Cairo.ImageSurface source,
 		Cairo.ImageSurface dest)
 	{
+		if (IsRendering) throw new InvalidOperationException ("Render is in progress");
+
+		TaskCompletionSource newCompletionSource = new ();
+		completion_source = newCompletionSource;
+
 		Debug.WriteLine ("AsyncEffectRenderer.Start ()");
 
 		// It is important the effect's properties don't change during rendering.
 		// So a copy is made for the render.
-		this.effect = effect.Clone ();
+		BaseEffect effectClone = effect.Clone ();
 
-		source_surface = source;
-		dest_surface = dest;
+		is_updated = false;
 
-		// If a render is already in progress, then cancel it,
-		// and start a new render.
-		if (IsRendering) {
-			cancellation_source.Cancel ();
-			restart_render_flag = true;
-			return;
+		ConcurrentQueue<Exception> renderExceptions = new ();
+
+		ConcurrentQueue<RectangleI> targetTiles = new (
+			settings.EffectIsTileable
+			? settings.RenderBounds.ToRows () // If effect is tileable, render each row in parallel.
+			: new[] { settings.RenderBounds }); // If the effect isn't tileable, there is a single tile for the entire render bounds
+
+		queued_tiles = targetTiles;
+		tiles_count = targetTiles.Count;
+
+		CancellationToken cancellationToken = ReplaceCancellationSource ();
+
+		Debug.WriteLine ("AsyncEffectRenderer.Start () Render starting."); // TODO: Show some kind of ID, perhaps the address
+
+		// Start slave render threads.
+		var slaves =
+			Enumerable.Range (0, settings.ThreadCount - 1)
+			.Select (_ => StartRenderThread (RenderNextTile))
+			.ToImmutableArray ();
+
+		// Start the master render thread.
+		Thread master = StartRenderThread (
+			new ThreadStart (RenderNextTile) // Do part of the rendering on the master thread.
+			+ new ThreadStart (CoordinateSlaveThreads));
+
+		// Start timer used to periodically fire update events on the UI thread.
+		timer_tick_id = GLib.Functions.TimeoutAdd (
+			0,
+			(uint) settings.UpdateMillis,
+			HandleTimerTick);
+
+		// ---------------
+		// === Methods ===
+		// ---------------
+
+		Thread StartRenderThread (ThreadStart callback)
+		{
+			Thread result = new (callback) { Priority = settings.ThreadPriority };
+			result.Start ();
+			return result;
 		}
 
-		StartRender ();
+		void CoordinateSlaveThreads ()
+		{
+			// Wait for slave threads to complete.
+			foreach (var slave in slaves)
+				slave.Join ();
+
+			// Change back to the UI thread to notify of completion.
+			GLib.Functions.TimeoutAdd (
+				0,
+				0,
+				() => {
+					var exceptions =
+						renderExceptions.IsEmpty
+						? Array.Empty<Exception> ()
+						: renderExceptions.ToArray ();
+
+					HandleTimerTick ();
+
+					if (timer_tick_id > 0)
+						GLib.Source.Remove (timer_tick_id);
+
+					timer_tick_id = 0;
+
+					Completed?.Invoke (exceptions, cancellationToken);
+
+					newCompletionSource.SetResult ();
+
+					return false; // don't call the timer again
+				}
+			);
+		}
+
+		// Runs on a background thread.
+		void RenderNextTile ()
+		{
+			// Fetch the next tile index and render it.
+			while (true) {
+
+				if (cancellationToken.IsCancellationRequested) return;
+				if (!queued_tiles.TryDequeue (out RectangleI tileBounds)) return;
+
+				Exception? exception = null;
+
+				try {
+					// NRT - These are set in Start () before getting here
+					if (!cancellationToken.IsCancellationRequested) {
+						dest.Flush ();
+						effectClone.Render (source, dest, stackalloc[] { tileBounds });
+						dest.MarkDirty (tileBounds);
+					}
+
+				} catch (Exception ex) {
+					exception = ex;
+					Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectClone.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
+				}
+
+				// Ignore completions of tiles after a cancel or from a previous render.
+				if (!IsRendering || cancellationToken.IsCancellationRequested)
+					return;
+
+				// Update bounds to be shown on next expose.
+				lock (updated_lock) {
+					if (is_updated) {
+						updated_area = RectangleI.Union (tileBounds, updated_area);
+					} else {
+						is_updated = true;
+						updated_area = tileBounds;
+					}
+				}
+
+				if (exception == null)
+					continue;
+
+				renderExceptions.Enqueue (exception);
+			}
+		}
+
+		// Called on the UI thread.
+		bool HandleTimerTick ()
+		{
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " Timer tick.");
+
+			RectangleI bounds;
+
+			lock (updated_lock) {
+
+				if (!is_updated)
+					return true;
+
+				is_updated = false;
+
+				bounds = updated_area;
+			}
+
+			if (IsRendering && !cancellationToken.IsCancellationRequested)
+				Updated?.Invoke (Progress, bounds);
+
+			return true;
+		}
 	}
 
-	internal void Cancel ()
+	internal Task Cancel ()
 	{
 		Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
-
-		CancellationToken cancellationToken = cancellation_source.Token;
 		cancellation_source.Cancel ();
-		restart_render_flag = false;
-
-		if (!IsRendering)
-			HandleRenderCompletion (cancellationToken);
+		return completion_source.Task;
 	}
 
 	internal delegate void UpdateHandler (
@@ -181,175 +305,5 @@ internal sealed class AsyncEffectRenderer
 		oldSource.Dispose (); // Not safe to call multiple times, so this is the only place it should be called
 		cancellation_source = newSource;
 		return newSource.Token;
-	}
-
-	void StartRender ()
-	{
-		// ------------
-		// === Body ===
-		// ------------
-
-		is_rendering = true;
-		restart_render_flag = false;
-		is_updated = false;
-
-		render_exceptions.Clear ();
-
-		ConcurrentQueue<RectangleI> targetTiles = new (
-			settings.EffectIsTileable
-			? settings.RenderBounds.ToRows () // If effect is tileable, render each row in parallel.
-			: new[] { settings.RenderBounds }); // If the effect isn't tileable, there is a single tile for the entire render bounds
-
-		queued_tiles = targetTiles;
-		tiles_count = targetTiles.Count;
-
-		CancellationToken cancellationToken = ReplaceCancellationSource ();
-
-		Debug.WriteLine ("AsyncEffectRenderer.Start () Render starting."); // TODO: Show some kind of ID, perhaps the address
-
-		// Start slave render threads.
-		var slaves =
-			Enumerable.Range (0, settings.ThreadCount - 1)
-			.Select (_ => StartSlaveThread (cancellationToken))
-			.ToImmutableArray ();
-
-		// Start the master render thread.
-		Thread master = StartMasterThread (cancellationToken, slaves);
-
-		// Start timer used to periodically fire update events on the UI thread.
-		timer_tick_id = GLib.Functions.TimeoutAdd (
-			0,
-			(uint) settings.UpdateMillis,
-			() => HandleTimerTick (cancellationToken));
-
-		// ---------------
-		// === Methods ===
-		// ---------------
-
-		Thread StartSlaveThread (CancellationToken cancellationToken)
-		{
-			return StartRenderThread (() => RenderNextTile (cancellationToken));
-		}
-
-		Thread StartRenderThread (ThreadStart callback)
-		{
-			Thread result = new (callback) { Priority = settings.ThreadPriority };
-			result.Start ();
-			return result;
-		}
-
-		Thread StartMasterThread (CancellationToken cancellationToken, ImmutableArray<Thread> slaves)
-		{
-			return StartRenderThread (() => {
-
-				// Do part of the rendering on the master thread.
-				RenderNextTile (cancellationToken);
-
-				// Wait for slave threads to complete.
-				foreach (var slave in slaves)
-					slave.Join ();
-
-				// Change back to the UI thread to notify of completion.
-				GLib.Functions.TimeoutAdd (
-					0,
-					0,
-					() => {
-						HandleRenderCompletion (cancellationToken);
-						return false; // don't call the timer again
-					}
-				);
-
-			});
-		}
-	}
-
-	// Runs on a background thread.
-	void RenderNextTile (CancellationToken cancellationToken)
-	{
-		// Fetch the next tile index and render it.
-		while (true) {
-
-			if (cancellationToken.IsCancellationRequested) return;
-			if (!queued_tiles.TryDequeue (out RectangleI tileBounds)) return;
-
-			Exception? exception = null;
-
-			try {
-				// NRT - These are set in Start () before getting here
-				if (!cancellationToken.IsCancellationRequested) {
-					dest_surface!.Flush ();
-					effect!.Render (source_surface!, dest_surface, stackalloc[] { tileBounds });
-					dest_surface.MarkDirty (tileBounds);
-				}
-
-			} catch (Exception ex) {
-				exception = ex;
-				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effect!.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
-			}
-
-			// Ignore completions of tiles after a cancel or from a previous render.
-			if (!IsRendering || cancellationToken.IsCancellationRequested)
-				return;
-
-			// Update bounds to be shown on next expose.
-			lock (updated_lock) {
-				if (is_updated) {
-					updated_area = RectangleI.Union (tileBounds, updated_area);
-				} else {
-					is_updated = true;
-					updated_area = tileBounds;
-				}
-			}
-
-			if (exception == null)
-				continue;
-
-			render_exceptions.Enqueue (exception);
-		}
-	}
-
-	// Called on the UI thread.
-	bool HandleTimerTick (CancellationToken cancellationToken)
-	{
-		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " Timer tick.");
-
-		RectangleI bounds;
-
-		lock (updated_lock) {
-
-			if (!is_updated)
-				return true;
-
-			is_updated = false;
-
-			bounds = updated_area;
-		}
-
-		if (IsRendering && !cancellationToken.IsCancellationRequested)
-			Updated?.Invoke (Progress, bounds);
-
-		return true;
-	}
-
-	void HandleRenderCompletion (CancellationToken cancellationToken)
-	{
-		var exceptions =
-			render_exceptions.IsEmpty
-			? Array.Empty<Exception> ()
-			: render_exceptions.ToArray ();
-
-		HandleTimerTick (cancellationToken);
-
-		if (timer_tick_id > 0)
-			GLib.Source.Remove (timer_tick_id);
-
-		timer_tick_id = 0;
-
-		Completed?.Invoke (exceptions, cancellationToken);
-
-		if (restart_render_flag)
-			StartRender ();
-		else
-			is_rendering = false;
 	}
 }
