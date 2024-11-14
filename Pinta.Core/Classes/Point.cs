@@ -34,6 +34,8 @@ public readonly record struct PointI (int X, int Y)
 	public static PointI Zero { get; } = new (0, 0);
 	public override readonly string ToString () => $"{X}, {Y}";
 
+	public readonly PointD ToDouble () => new (X, Y);
+
 	public PointI Rotated90CCW () // Counterclockwise
 		=> new (-Y, X);
 
