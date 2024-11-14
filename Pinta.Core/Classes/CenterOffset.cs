@@ -14,8 +14,4 @@ namespace Pinta.Core;
 /// </summary>
 public readonly record struct CenterOffset (
 	double Horizontal,
-	double Vertical)
-{
-	public static CenterOffset FromPoint (PointD p)
-		=> new (p.X, p.Y);
-};
+	double Vertical);
