@@ -195,7 +195,7 @@ public sealed class PointPickerWidget : Gtk.Box
 		}
 	}
 
-	public CenterOffset Offset => new (
+	public CenterOffset<double> Offset => new (
 		Horizontal: (spin_x.Value * 2.0 / image_size.Width) - 1.0,
 		Vertical: (spin_y.Value * 2.0 / image_size.Height) - 1.0);
 

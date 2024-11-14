@@ -21,7 +21,7 @@ public static class Warp
 	public interface IEffectData
 	{
 		int Quality { get; }
-		CenterOffset CenterOffset { get; }
+		CenterOffset<double> CenterOffset { get; }
 		EdgeBehavior EdgeBehavior { get; }
 	}
 

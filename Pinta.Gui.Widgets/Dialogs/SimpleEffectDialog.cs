@@ -231,7 +231,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			return CreateCheckBox;
 		else if (memberType == typeof (PointI))
 			return CreatePointPicker;
-		else if (memberType == typeof (CenterOffset))
+		else if (memberType == typeof (CenterOffset<double>))
 			return CreateOffsetPicker;
 		else if (memberType.IsEnum)
 			return CreateEnumComboBox;

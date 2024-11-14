@@ -167,7 +167,7 @@ public sealed class RadialBlurEffect : BaseEffect
 		public DegreesAngle Angle { get; set; } = new (2);
 
 		[Caption ("Offset")]
-		public CenterOffset Offset { get; set; } = new (0, 0);
+		public CenterOffset<double> Offset { get; set; } = new (0, 0);
 
 		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
 		[Hint ("Use low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]

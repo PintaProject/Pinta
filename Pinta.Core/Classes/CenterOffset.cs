@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace Pinta.Core;
 
 /// <summary>
@@ -12,6 +14,7 @@ namespace Pinta.Core;
 ///         image's right edge it would be 1
 ///     </para>
 /// </summary>
-public readonly record struct CenterOffset (
-	double Horizontal,
-	double Vertical);
+public readonly record struct CenterOffset<TNumber> (
+	TNumber Horizontal,
+	TNumber Vertical
+) where TNumber : IFloatingPoint<TNumber>;
