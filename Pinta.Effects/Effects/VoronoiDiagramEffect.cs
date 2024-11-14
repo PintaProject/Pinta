@@ -84,7 +84,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		VoronoiSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		foreach (RectangleI roi in rois)
-			foreach (var kvp in roi.GeneratePixelOffsets (settings.size).AsParallel ().Select (CreateColor))
+			foreach (var kvp in roi.GeneratePixelOffsets (settings.size).Select (CreateColor))
 				dst_data[kvp.Key] = kvp.Value;
 
 		KeyValuePair<int, ColorBgra> CreateColor (PixelOffset pixel)
