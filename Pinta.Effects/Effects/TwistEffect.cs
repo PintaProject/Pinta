@@ -68,22 +68,19 @@ public sealed class TwistEffect : BaseEffect
 		float j = pixel.coordinates.Y - (settings.HalfHeight + settings.RenderBounds.Top);
 		float i = pixel.coordinates.X - (settings.HalfWidth + settings.RenderBounds.Left);
 
-		if (i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
+		if (Mathematics.Magnitude (i, j) > (settings.Maxrad + 1) * (settings.Maxrad + 1))
 			return sourceData[pixel.memoryOffset];
 
-		int b = 0;
-		int g = 0;
-		int r = 0;
-		int a = 0;
-
 		int antialiasSamples = settings.AntialiasPoints.Length;
+
+		Span<ColorBgra> samples = stackalloc ColorBgra[antialiasSamples];
 
 		for (int p = 0; p < antialiasSamples; ++p) {
 
 			float u = i + (float) settings.AntialiasPoints[p].X;
 			float v = j + (float) settings.AntialiasPoints[p].Y;
 
-			double radialDistance = Math.Sqrt (u * u + v * v);
+			double radialDistance = Mathematics.Magnitude (u, v);
 			double originalTheta = Math.Atan2 (v, u);
 			double radialFactor = 1 - radialDistance / settings.Maxrad;
 			double twistAmount = (radialFactor < 0) ? 0 : (radialFactor * radialFactor * radialFactor);
@@ -94,18 +91,10 @@ public sealed class TwistEffect : BaseEffect
 				Y: (int) (settings.HalfHeight + settings.RenderBounds.Top + (float) (radialDistance * Math.Sin (twistedTheta)))
 			);
 
-			ColorBgra sample = src.GetColorBgra (sourceData, src.Width, samplePosition);
-
-			b += sample.B;
-			g += sample.G;
-			r += sample.R;
-			a += sample.A;
+			samples[p] = src.GetColorBgra (sourceData, src.Width, samplePosition);
 		}
-		return ColorBgra.FromBgra (
-			(byte) (b / antialiasSamples),
-			(byte) (g / antialiasSamples),
-			(byte) (r / antialiasSamples),
-			(byte) (a / antialiasSamples));
+
+		return ColorBgra.Blend (samples);
 	}
 
 	private sealed record TwistSettings (
@@ -120,13 +109,13 @@ public sealed class TwistEffect : BaseEffect
 	{
 		RectangleI renderBounds = live_preview.RenderBounds;
 		float preliminaryTwist = Data.Amount;
-		float hw = renderBounds.Width / 2.0f;
-		float hh = renderBounds.Height / 2.0f;
+		float halfWidth = renderBounds.Width / 2.0f;
+		float halfHeight = renderBounds.Height / 2.0f;
 		return new (
 			RenderBounds: renderBounds,
-			HalfWidth: hw,
-			HalfHeight: hh,
-			Maxrad: Math.Min (hw, hh),
+			HalfWidth: halfWidth,
+			HalfHeight: halfHeight,
+			Maxrad: Math.Min (halfWidth, halfHeight),
 			Twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist),
 			AntialiasPoints: InitializeAntialiasPoints (Data.Antialias)
 		);
