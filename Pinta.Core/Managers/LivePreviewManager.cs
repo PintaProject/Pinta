@@ -73,6 +73,8 @@ public sealed class LivePreviewManager : ILivePreview
 		if (IsEnabled)
 			throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
 
+		string effectName = effect.Name;
+
 		// Create live preview surface.
 		// Start rendering.
 		// Listen for changes to effectConfiguration object, and restart render if needed.
@@ -258,11 +260,12 @@ public sealed class LivePreviewManager : ILivePreview
 			HandleUpdate (updatedBounds);
 		}
 
-		void OnCompletion (
-			IReadOnlyList<Exception> exceptions,
-			CancellationToken cancellationToken)
+		void OnCompletion (AsyncEffectRenderer.CompletionInfo completion)
 		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancellationToken.IsCancellationRequested);
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + completion.WasCanceled);
+
+			foreach (var ex in completion.Errors)
+				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectName + " exception: " + ex.Message + "\n" + ex.StackTrace);
 
 			if (!IsEnabled)
 				return;
