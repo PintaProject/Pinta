@@ -268,10 +268,12 @@ internal sealed class AsyncEffectRenderer
 		}
 	}
 
-	internal Task<CompletionInfo> Cancel ()
+	internal Task<CompletionInfo> Finish (bool cancel)
 	{
-		Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
-		cancellation_source.Cancel ();
+		if (cancel) {
+			Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
+			cancellation_source.Cancel ();
+		}
 		return completion_source.Task;
 	}
 

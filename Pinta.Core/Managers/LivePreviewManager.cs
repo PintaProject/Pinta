@@ -149,7 +149,7 @@ public sealed class LivePreviewManager : ILivePreview
 
 			cancel_live_preview_flag = true;
 
-			renderer.Cancel ();
+			renderer.Finish (cancel: true);
 
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
@@ -242,7 +242,7 @@ public sealed class LivePreviewManager : ILivePreview
 		{
 			// TODO: calculate bounds
 			handlersInQueue++;
-			await renderer.Cancel ();
+			await renderer.Finish (cancel: true);
 			handlersInQueue--;
 			if (handlersInQueue > 0) return;
 			renderer.Start (effect, layer.Surface, LivePreviewSurface);
