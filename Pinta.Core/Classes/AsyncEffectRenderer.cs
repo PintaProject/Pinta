@@ -80,9 +80,6 @@ internal sealed class AsyncEffectRenderer
 
 	uint timer_tick_id;
 
-	readonly object updated_lock;
-	bool is_updated;
-
 	RectangleI updated_area;
 
 	private readonly Settings settings;
@@ -99,8 +96,6 @@ internal sealed class AsyncEffectRenderer
 
 		completion_source = initialCompletionSource;
 		cancellation_source = new ();
-		updated_lock = new object ();
-		is_updated = false;
 		queued_tiles = new ConcurrentQueue<RectangleI> ();
 
 		timer_tick_id = 0;
@@ -134,7 +129,8 @@ internal sealed class AsyncEffectRenderer
 		// So a copy is made for the render.
 		BaseEffect effectClone = effect.Clone ();
 
-		is_updated = false;
+		object updated_lock = new ();
+		bool is_updated = false;
 
 		ConcurrentQueue<Exception> renderExceptions = new ();
 
