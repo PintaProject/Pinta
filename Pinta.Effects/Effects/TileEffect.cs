@@ -120,9 +120,9 @@ public sealed class TileEffect : BaseEffect
 	{
 		TileSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = destination.GetPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 		foreach (var pixel in Utility.GeneratePixelOffsets (roi, source.GetSize ()))
-			dst_data[pixel.memoryOffset] = GetFinalPixelColor (
+			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 				source,
 				settings,
 				sourceData,
@@ -136,10 +136,7 @@ public sealed class TileEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
 	{
-		int b = 0;
-		int g = 0;
-		int r = 0;
-		int a = 0;
+		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasPoints.Count];
 
 		float i = pixel.coordinates.X - settings.halfWidth;
 		float j = pixel.coordinates.Y - settings.halfHeight;
@@ -175,12 +172,12 @@ public sealed class TileEffect : BaseEffect
 			// Ensure coordinates wrap around the image dimensions
 
 			int wrappedSampleX = (unwrappedSampleX + settings.size.Width) % settings.size.Width;
+			int wrappedSampleY = (unwrappedSampleY + settings.size.Height) % settings.size.Height;
+
 			int adjustedSampleX =
 				(wrappedSampleX < 0)
 				? (wrappedSampleX + settings.size.Width) % settings.size.Width
 				: wrappedSampleX;
-
-			int wrappedSampleY = (unwrappedSampleY + settings.size.Height) % settings.size.Height;
 			int adjustedSampleY =
 				(wrappedSampleY < 0)
 				? (wrappedSampleY + settings.size.Height) % settings.size.Height
@@ -188,22 +185,13 @@ public sealed class TileEffect : BaseEffect
 
 			PointI samplePosition = new (adjustedSampleX, adjustedSampleY);
 
-			ColorBgra sample = source.GetColorBgra (
+			samples[p] = source.GetColorBgra (
 				sourceData,
 				settings.size.Width,
 				samplePosition);
-
-			b += sample.B;
-			g += sample.G;
-			r += sample.R;
-			a += sample.A;
 		}
 
-		return ColorBgra.FromBgra (
-			b: (byte) (b / settings.antiAliasPoints.Count),
-			g: (byte) (g / settings.antiAliasPoints.Count),
-			r: (byte) (r / settings.antiAliasPoints.Count),
-			a: (byte) (a / settings.antiAliasPoints.Count));
+		return ColorBgra.Blend (samples);
 	}
 
 	public sealed class TileData : EffectData
