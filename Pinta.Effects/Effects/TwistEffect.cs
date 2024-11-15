@@ -68,7 +68,7 @@ public sealed class TwistEffect : BaseEffect
 		float j = pixel.coordinates.Y - (settings.HalfHeight + settings.RenderBounds.Top);
 		float i = pixel.coordinates.X - (settings.HalfWidth + settings.RenderBounds.Left);
 
-		if (Mathematics.Magnitude (i, j) > (settings.Maxrad + 1) * (settings.Maxrad + 1))
+		if (Mathematics.MagnitudeSquared (i, j) > (settings.Maxrad + 1) * (settings.Maxrad + 1))
 			return sourceData[pixel.memoryOffset];
 
 		int antialiasSamples = settings.AntialiasPoints.Length;
