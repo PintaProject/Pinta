@@ -247,5 +247,12 @@ partial class GtkExtensions
 
 		return result;
 	}
+
+	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
+	public static void GetColor (this Gtk.StyleContext context, out Cairo.Color color)
+	{
+		StyleContextGetColor (context.Handle, out var gdk_color);
+		color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
+	}
 }
 

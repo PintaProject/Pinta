@@ -69,32 +69,6 @@ public static partial class GtkExtensions
 	// TODO-GTK4 (bindings) - add pre-defined VariantType's to gir.core (https://github.com/gircore/gir.core/issues/843)
 	public static readonly GLib.VariantType IntVariantType = GLib.VariantType.New ("i");
 
-	public static void AddAction (
-		this Gtk.Application app,
-		Command action)
-	{
-		app.AddAction (action.Action);
-	}
-
-	public static void AddAccelAction (
-		this Gtk.Application app,
-		Command action,
-		string accel)
-	{
-		app.AddAccelAction (action, new[] { accel });
-	}
-
-	public static void AddAccelAction (
-		this Gtk.Application app,
-		Command action,
-		IEnumerable<string> accels)
-	{
-		app.AddAction (action);
-		app.SetAccelsForAction (
-			action.FullName,
-			accels.Select (a => PintaCore.System.ConvertPrimaryKey (a)).ToArray ());
-	}
-
 	/// <summary>
 	/// Convert the "<Primary>" accelerator to the Ctrl or Command key, depending on the platform.
 	/// This was done automatically in GTK3, but does not happen in GTK4.
@@ -183,13 +157,6 @@ public static partial class GtkExtensions
 		public float Green;
 		public float Blue;
 		public float Alpha;
-	}
-
-	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
-	public static void GetColor (this Gtk.StyleContext context, out Cairo.Color color)
-	{
-		StyleContextGetColor (context.Handle, out var gdk_color);
-		color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
 	}
 
 	[LibraryImport (GtkLibraryName, EntryPoint = "gtk_style_context_get_color")]
