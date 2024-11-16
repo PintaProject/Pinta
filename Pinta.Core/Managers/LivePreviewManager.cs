@@ -43,9 +43,6 @@ public interface ILivePreview
 
 public sealed class LivePreviewManager : ILivePreview
 {
-	bool apply_live_preview_flag;
-	bool cancel_live_preview_flag;
-
 	private readonly WorkspaceManager workspace;
 	private readonly ToolManager tools;
 	private readonly SystemManager system;
@@ -73,6 +70,8 @@ public sealed class LivePreviewManager : ILivePreview
 		if (IsEnabled)
 			throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
 
+		string effectName = effect.Name;
+
 		// Create live preview surface.
 		// Start rendering.
 		// Listen for changes to effectConfiguration object, and restart render if needed.
@@ -80,8 +79,8 @@ public sealed class LivePreviewManager : ILivePreview
 		Document doc = workspace.ActiveDocument;
 
 		IsEnabled = true;
-		apply_live_preview_flag = false;
-		cancel_live_preview_flag = false;
+		bool apply_live_preview_flag = false;
+		bool cancel_live_preview_flag = false;
 
 		Layer layer = doc.Layers.CurrentUserLayer;
 
@@ -150,7 +149,7 @@ public sealed class LivePreviewManager : ILivePreview
 
 			cancel_live_preview_flag = true;
 
-			renderer.Cancel ();
+			renderer.Finish (cancel: true);
 
 			// Show a busy cursor, and make the main window insensitive,
 			// until the cancel has completed.
@@ -243,7 +242,7 @@ public sealed class LivePreviewManager : ILivePreview
 		{
 			// TODO: calculate bounds
 			handlersInQueue++;
-			await renderer.Cancel ();
+			await renderer.Finish (cancel: true);
 			handlersInQueue--;
 			if (handlersInQueue > 0) return;
 			renderer.Start (effect, layer.Surface, LivePreviewSurface);
@@ -258,11 +257,12 @@ public sealed class LivePreviewManager : ILivePreview
 			HandleUpdate (updatedBounds);
 		}
 
-		void OnCompletion (
-			IReadOnlyList<Exception> exceptions,
-			CancellationToken cancellationToken)
+		void OnCompletion (AsyncEffectRenderer.CompletionInfo completion)
 		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + cancellationToken.IsCancellationRequested);
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + completion.WasCanceled);
+
+			foreach (var ex in completion.Errors)
+				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectName + " exception: " + ex.Message + "\n" + ex.StackTrace);
 
 			if (!IsEnabled)
 				return;
