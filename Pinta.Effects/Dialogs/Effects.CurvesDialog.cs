@@ -31,7 +31,6 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-
 public sealed class CurvesDialog : Gtk.Dialog
 {
 	private readonly Gtk.ComboBoxText combo_map;
@@ -43,12 +42,9 @@ public sealed class CurvesDialog : Gtk.Dialog
 	private readonly Gtk.Button button_reset;
 	private readonly Gtk.Label label_tip;
 
-	private sealed class ControlPointDrawingInfo
-	{
-		public Cairo.Color Color { get; set; }
-		public bool IsActive { get; set; }
-	}
-
+	private sealed record ControlPointDrawingInfo (
+		Color Color,
+		bool IsActive);
 
 	private const int SIZE = 256; // drawing area width and height
 	private const int RADIUS = 6; // Control point radius
@@ -80,9 +76,11 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	public CurvesData EffectData { get; }
 
-	public CurvesDialog (IChromeService chrome, CurvesData effectData)
+	public CurvesDialog (
+		IChromeService chrome,
+		CurvesData effectData)
 	{
-		const int spacing = 6;
+		const int SPACING = 6;
 
 		Gtk.ComboBoxText comboMap = CreateComboMap ();
 
@@ -100,7 +98,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		Gtk.GestureClick clickController = CreateCurvesClickController ();
 
-		Gtk.Box boxAbove = new () { Spacing = spacing };
+		Gtk.Box boxAbove = new () { Spacing = SPACING };
 		boxAbove.SetOrientation (Gtk.Orientation.Horizontal);
 		boxAbove.Append (Gtk.Label.New (Translations.GetString ("Transfer Map")));
 		boxAbove.Append (comboMap);
@@ -113,7 +111,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 		boxBelow.Prepend (checkRed);
 		boxBelow.Append (buttonReset);
 
-		Gtk.DrawingArea curvesDrawing = new Gtk.DrawingArea {
+		Gtk.DrawingArea curvesDrawing = new () {
 			WidthRequest = 256,
 			HeightRequest = 256,
 			CanFocus = true,
@@ -125,7 +123,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		Gtk.Box content_area = this.GetContentAreaBox ();
 		content_area.SetAllMargins (12);
-		content_area.Spacing = spacing;
+		content_area.Spacing = SPACING;
 		content_area.Append (boxAbove);
 		content_area.Append (curvesDrawing);
 		content_area.Append (boxBelow);
@@ -226,15 +224,8 @@ public sealed class CurvesDialog : Gtk.Dialog
 	{
 		Gtk.CheckButton result = new () { Label = label, Active = true };
 		result.Hide ();
-		result.OnToggled += HandleCheckToggled;
+		result.OnToggled += (_, _) => InvalidateDrawing ();
 		return result;
-
-		// Handlers
-
-		void HandleCheckToggled (object? o, EventArgs args)
-		{
-			InvalidateDrawing ();
-		}
 	}
 
 	private Gtk.EventControllerMotion CreateCurvesMotionController ()
@@ -250,12 +241,13 @@ public sealed class CurvesDialog : Gtk.Dialog
 			Gtk.EventControllerMotion controller,
 			Gtk.EventControllerMotion.MotionSignalArgs args)
 		{
-			int x = (int) args.X;
-			int y = (int) args.Y;
+			PointI p = new (
+				X: (int) args.X,
+				Y: (int) args.Y);
 
-			last_mouse_pos = new (x, y);
+			last_mouse_pos = p;
 
-			if (x < 0 || x >= SIZE || y < 0 || y >= SIZE)
+			if (p.X < 0 || p.X >= SIZE || p.Y < 0 || p.Y >= SIZE)
 				return;
 
 			if (!controller.GetCurrentEventState ().IsLeftMousePressed ()) {
@@ -266,9 +258,9 @@ public sealed class CurvesDialog : Gtk.Dialog
 			if (last_cpx is not null) {
 				// The first and last control points cannot be removed, so also forbid dragging them away.
 				if (last_cpx == 0)
-					x = 0;
+					p = p with { X = 0 };
 				else if (last_cpx == SIZE - 1)
-					x = SIZE - 1;
+					p = p with { X = SIZE - 1 };
 				else {
 					// Remove the old version of the control point being edited.
 					foreach (var controlPoints in GetActiveControlPoints ()) {
@@ -279,8 +271,8 @@ public sealed class CurvesDialog : Gtk.Dialog
 			}
 
 			// Don't allow overwriting any of the original control points while dragging.
-			if (!orig_cps.Contains (x))
-				AddControlPoint (x, y);
+			if (!orig_cps.Contains (p.X))
+				AddControlPoint (p);
 			else
 				last_cpx = null;
 
@@ -308,14 +300,14 @@ public sealed class CurvesDialog : Gtk.Dialog
 			if (controller.GetCurrentMouseButton () == MouseButton.Left) {
 
 				orig_cps.Clear ();
-				foreach (var controlPoints in GetActiveControlPoints ()) {
+
+				foreach (var controlPoints in GetActiveControlPoints ())
 					orig_cps.UnionWith (controlPoints.Keys);
-				}
 
 				if (SnapToControlPointProximity (GetActiveControlPoints (), ref pos))
 					orig_cps.Remove (pos.X); // Allow dragging the snapped control point.
 
-				AddControlPoint (pos.X, pos.Y);
+				AddControlPoint (pos);
 			}
 
 			if (controller.GetCurrentMouseButton () != MouseButton.Right) {
@@ -325,19 +317,22 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 			// user pressed right button
 			foreach (var controlPoints in GetActiveControlPoints ()) {
+
 				for (int i = 0; i < controlPoints.Count; i++) {
-					int cpx = controlPoints.Keys[i];
-					int cpy = SIZE - 1 - controlPoints.Values[i];
+
+					PointI cp = new (
+						X: controlPoints.Keys[i],
+						Y: SIZE - 1 - controlPoints.Values[i]);
 
 					//we cannot allow user to remove first or last control point
 
-					if (cpx == 0 && cpy == SIZE - 1)
+					if (cp.X == 0 && cp.Y == SIZE - 1)
 						continue;
 
-					if (cpx == SIZE - 1 && cpy == 0)
+					if (cp.X == SIZE - 1 && cp.Y == 0)
 						continue;
 
-					if (CheckControlPointProximity (cpx, cpy, pos)) {
+					if (CheckControlPointProximity (cp, pos)) {
 						controlPoints.RemoveAt (i);
 						break;
 					}
@@ -355,15 +350,17 @@ public sealed class CurvesDialog : Gtk.Dialog
 			ref PointI pos)
 		{
 			foreach (var controlPoints in activeControlPoints) {
+
 				for (int i = 0; i < controlPoints.Count; i++) {
 
-					int cpx = controlPoints.Keys[i];
-					int cpy = SIZE - 1 - controlPoints.Values[i];
+					PointI cp = new (
+						X: controlPoints.Keys[i],
+						Y: SIZE - 1 - controlPoints.Values[i]);
 
-					if (!CheckControlPointProximity (cpx, cpy, pos))
+					if (!CheckControlPointProximity (cp, pos))
 						continue;
 
-					pos = new PointI (X: cpx, Y: cpy);
+					pos = cp;
 
 					return true;
 				}
@@ -431,50 +428,47 @@ public sealed class CurvesDialog : Gtk.Dialog
 			yield return ControlPoints[2];
 	}
 
-	private void AddControlPoint (int x, int y)
+	private void AddControlPoint (PointI cp)
 	{
 		foreach (var controlPoints in GetActiveControlPoints ())
-			controlPoints[x] = SIZE - 1 - y;
+			controlPoints[cp.X] = SIZE - 1 - cp.Y;
 
-		last_cpx = x;
+		last_cpx = cp.X;
 
 		UpdateLivePreview (nameof (ControlPoints));
 	}
 
 	//cpx, cpyx - control point's x and y coordinates
-	private static bool CheckControlPointProximity (int cpx, int cpy, PointI pos)
-		=> Math.Sqrt (Math.Pow (cpx - pos.X, 2) + Math.Pow (cpy - pos.Y, 2)) < RADIUS;
+	private static bool CheckControlPointProximity (PointI cp, PointI pos)
+		=> Math.Sqrt (Math.Pow (cp.X - pos.X, 2) + Math.Pow (cp.Y - pos.Y, 2)) < RADIUS;
 
 	private IEnumerator<ControlPointDrawingInfo> GetDrawingInfos ()
 	{
 		if (Mode == ColorTransferMode.Luminosity) {
 			curves_drawing.GetStyleContext ().GetColor (out var fg_color);
-			yield return new ControlPointDrawingInfo {
-				Color = fg_color,
-				IsActive = true,
-			};
+			yield return new ControlPointDrawingInfo (
+				Color: fg_color,
+				IsActive: true);
 			yield break;
 		}
 
-		yield return new ControlPointDrawingInfo {
-			Color = new Color (0.9, 0, 0),
-			IsActive = check_red.Active,
-		};
+		yield return new ControlPointDrawingInfo (
+			Color: new Color (0.9, 0, 0),
+			IsActive: check_red.Active);
 
-		yield return new ControlPointDrawingInfo {
-			Color = new Color (0, 0.9, 0),
-			IsActive = check_green.Active,
-		};
+		yield return new ControlPointDrawingInfo (
+			Color: new Color (0, 0.9, 0),
+			IsActive: check_green.Active);
 
-		yield return new ControlPointDrawingInfo {
-			Color = new Color (0, 0, 0.9),
-			IsActive = check_blue.Active,
-		};
+		yield return new ControlPointDrawingInfo (
+			Color: new Color (0, 0, 0.9),
+			IsActive: check_blue.Active);
 	}
 
 	private void HandleDrawingDrawnEvent (Context g)
 	{
 		curves_drawing.GetStyleContext ().GetColor (out var fg_color);
+
 		g.SetSourceColor (fg_color);
 
 		DrawBorder (g);
@@ -498,22 +492,24 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		void DrawPointerCross (Context g)
 		{
-			int x = last_mouse_pos.X;
-			int y = last_mouse_pos.Y;
+			PointI p = last_mouse_pos;
 
-			if (x < 0 || x >= SIZE || y < 0 || y >= SIZE) {
+			if (p.X < 0 || p.X >= SIZE || p.Y < 0 || p.Y >= SIZE) {
 				label_point.SetText (string.Empty);
 				return;
 			}
 
 			g.LineWidth = 0.5;
-			g.MoveTo (x, 0);
-			g.LineTo (x, SIZE);
-			g.MoveTo (0, y);
-			g.LineTo (SIZE, y);
+
+			g.MoveTo (p.X, 0);
+			g.LineTo (p.X, SIZE);
+
+			g.MoveTo (0, p.Y);
+			g.LineTo (SIZE, p.Y);
+
 			g.Stroke ();
 
-			label_point.SetText ($"({x}, {y})");
+			label_point.SetText ($"({p})");
 		}
 
 		void DrawSpline (Context g)
@@ -527,7 +523,9 @@ public sealed class CurvesDialog : Gtk.Dialog
 			foreach (var controlPoints in ControlPoints) {
 
 				int points = controlPoints.Count;
-				SplineInterpolator interpolator = new SplineInterpolator ();
+
+				SplineInterpolator interpolator = new ();
+
 				IList<int> xa = controlPoints.Keys;
 				IList<int> ya = controlPoints.Values;
 
@@ -565,14 +563,17 @@ public sealed class CurvesDialog : Gtk.Dialog
 			g.LineWidth = 1;
 
 			for (int i = 1; i < 4; i++) {
+
 				g.MoveTo (i * SIZE / 4, 0);
 				g.LineTo (i * SIZE / 4, SIZE);
+
 				g.MoveTo (0, i * SIZE / 4);
 				g.LineTo (SIZE, i * SIZE / 4);
 			}
 
 			g.MoveTo (0, SIZE - 1);
 			g.LineTo (SIZE - 1, 0);
+
 			g.Stroke ();
 
 			g.SetDash (Array.Empty<double> (), 0);
@@ -590,24 +591,59 @@ public sealed class CurvesDialog : Gtk.Dialog
 				var info = infos.Current;
 
 				for (int i = 0; i < controlPoints.Count; i++) {
-					int cpx = controlPoints.Keys[i];
-					int cpy = SIZE - 1 - controlPoints.Values[i];
-					RectangleD rect;
+
+					PointI cp = new (
+						X: controlPoints.Keys[i],
+						Y: SIZE - 1 - controlPoints.Values[i]);
 
 					if (info.IsActive) {
-						if (CheckControlPointProximity (cpx, cpy, lastMousePos)) {
-							rect = new RectangleD (cpx - (RADIUS + 2) / 2, cpy - (RADIUS + 2) / 2, RADIUS + 2, RADIUS + 2);
-							g.DrawEllipse (rect, new Color (0.2, 0.2, 0.2), 2);
-							rect = new RectangleD (cpx - RADIUS / 2, cpy - RADIUS / 2, RADIUS, RADIUS);
-							g.FillEllipse (rect, new Color (0.9, 0.9, 0.9));
+
+						if (CheckControlPointProximity (cp, lastMousePos)) {
+
+							RectangleD outline = new (
+								X: cp.X - (RADIUS + 2) / 2,
+								Y: cp.Y - (RADIUS + 2) / 2,
+								Width: RADIUS + 2,
+								Height: RADIUS + 2);
+
+							g.DrawEllipse (
+								outline,
+								new Color (0.2, 0.2, 0.2),
+								2);
+
+							RectangleD fill = new (
+								X: cp.X - RADIUS / 2,
+								Y: cp.Y - RADIUS / 2,
+								Width: RADIUS,
+								Height: RADIUS);
+
+							g.FillEllipse (
+								fill,
+								new Color (0.9, 0.9, 0.9));
+
 						} else {
-							rect = new RectangleD (cpx - RADIUS / 2, cpy - RADIUS / 2, RADIUS, RADIUS);
-							g.DrawEllipse (rect, info.Color, 2);
+							RectangleD outline = new (
+								X: cp.X - RADIUS / 2,
+								Y: cp.Y - RADIUS / 2,
+								Width: RADIUS,
+								Height: RADIUS);
+
+							g.DrawEllipse (
+								outline,
+								info.Color,
+								2);
 						}
 					}
 
-					rect = new RectangleD (cpx - (RADIUS - 2) / 2, cpy - (RADIUS - 2) / 2, RADIUS - 2, RADIUS - 2);
-					g.FillEllipse (rect, info.Color);
+					RectangleD rect = new (
+						cp.X - (RADIUS - 2) / 2,
+						cp.Y - (RADIUS - 2) / 2,
+						RADIUS - 2,
+						RADIUS - 2);
+
+					g.FillEllipse (
+						rect,
+						info.Color);
 				}
 			}
 
