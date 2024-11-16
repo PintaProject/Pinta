@@ -30,6 +30,7 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -44,7 +45,7 @@ internal sealed class AsyncEffectRenderer
 {
 	internal readonly record struct CompletionInfo (
 		bool WasCanceled,
-		ConcurrentQueue<Exception> Errors);
+		IReadOnlyList<Exception> Errors);
 
 	internal sealed class Settings
 	{
@@ -90,7 +91,7 @@ internal sealed class AsyncEffectRenderer
 		initialCompletionSource.SetResult (
 			new (
 				WasCanceled: false,
-				Errors: new ()
+				Errors: Array.Empty<Exception> ()
 			)
 		);
 
@@ -194,7 +195,7 @@ internal sealed class AsyncEffectRenderer
 
 					CompletionInfo completion = new (
 						WasCanceled: cancellationToken.IsCancellationRequested,
-						Errors: renderExceptions);
+						Errors: renderExceptions.ToArray ());
 
 					Completed?.Invoke (completion);
 
