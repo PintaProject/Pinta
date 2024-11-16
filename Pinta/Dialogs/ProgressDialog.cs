@@ -25,41 +25,49 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class ProgressDialog : Dialog, IProgressDialog
+public sealed class ProgressDialog : Gtk.Dialog, IProgressDialog
 {
-	private readonly Label label;
-	private readonly ProgressBar progress_bar;
-	uint timeout_id;
+	private readonly Gtk.Label text_label;
+	private readonly Gtk.ProgressBar progress_bar;
+
+	public event EventHandler<EventArgs>? Canceled;
 
 	public ProgressDialog (ChromeManager chrome)
 	{
+		Gtk.Label textLabel = new ();
+		Gtk.ProgressBar progressBar = new ();
+
+		// --- References to keep
+
+		text_label = textLabel;
+		progress_bar = progressBar;
+
+		// --- Initialization (Gtk.Widget)
+
+		Hide ();
+
+		// --- Initialization (Gtk.Window)
+
 		TransientFor = chrome.MainWindow;
 		Modal = true;
+		DefaultWidth = 400;
+		DefaultHeight = 114;
 
-		OnResponse += (_, args) => Canceled?.Invoke (this, EventArgs.Empty);
+		// --- Initialization (Gtk.Dialog)
 
 		var content_area = this.GetContentAreaBox ();
 		content_area.Spacing = 6;
 		content_area.SetAllMargins (2);
+		content_area.Append (textLabel);
+		content_area.Append (progressBar);
 
-		label = new Label ();
-		content_area.Append (label);
+		AddButton (Translations.GetString ("_Cancel"), (int) Gtk.ResponseType.Cancel);
 
-		progress_bar = new ProgressBar ();
-		content_area.Append (progress_bar);
-
-		AddButton (Translations.GetString ("_Cancel"), (int) ResponseType.Cancel);
-
-		DefaultWidth = 400;
-		DefaultHeight = 114;
-
-		timeout_id = 0;
-		Hide ();
+		OnResponse += (_, args) => Canceled?.Invoke (this, EventArgs.Empty);
 	}
 
 	public new string Title {
@@ -68,8 +76,8 @@ public sealed class ProgressDialog : Dialog, IProgressDialog
 	}
 
 	public string Text {
-		get => label.GetText ();
-		set => label.SetText (value);
+		get => text_label.GetText ();
+		set => text_label.SetText (value);
 	}
 
 	public double Progress {
@@ -77,7 +85,7 @@ public sealed class ProgressDialog : Dialog, IProgressDialog
 		set => progress_bar.Fraction = value;
 	}
 
-	public event EventHandler<EventArgs>? Canceled;
+	uint timeout_id = 0;
 
 	void IProgressDialog.Show ()
 	{
@@ -96,6 +104,7 @@ public sealed class ProgressDialog : Dialog, IProgressDialog
 	{
 		if (timeout_id != 0)
 			GLib.Source.Remove (timeout_id);
+
 		Hide ();
 	}
 }
