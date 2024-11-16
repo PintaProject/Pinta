@@ -43,7 +43,9 @@ namespace Pinta.Core;
 // Only call methods on this class from a single thread (The UI thread).
 internal sealed class AsyncEffectRenderer
 {
-	private readonly Settings settings;
+	internal readonly record struct CompletionInfo (
+		bool WasCanceled,
+		IReadOnlyList<Exception> Errors);
 
 	internal sealed class Settings
 	{
@@ -72,27 +74,29 @@ internal sealed class AsyncEffectRenderer
 		}
 	}
 
-	TaskCompletionSource completion_source;
+	TaskCompletionSource<CompletionInfo> completion_source;
 	CancellationTokenSource cancellation_source;
 	ConcurrentQueue<RectangleI> queued_tiles;
 	int tiles_count = 0;
 
 	uint timer_tick_id;
 
-	readonly object updated_lock;
-	bool is_updated;
-
 	RectangleI updated_area;
+
+	private readonly Settings settings;
 
 	internal AsyncEffectRenderer (Settings settings)
 	{
-		TaskCompletionSource initialCompletionSource = new ();
-		initialCompletionSource.SetResult ();
+		TaskCompletionSource<CompletionInfo> initialCompletionSource = new ();
+		initialCompletionSource.SetResult (
+			new (
+				WasCanceled: false,
+				Errors: Array.Empty<Exception> ()
+			)
+		);
 
 		completion_source = initialCompletionSource;
 		cancellation_source = new ();
-		updated_lock = new object ();
-		is_updated = false;
 		queued_tiles = new ConcurrentQueue<RectangleI> ();
 
 		timer_tick_id = 0;
@@ -117,7 +121,7 @@ internal sealed class AsyncEffectRenderer
 	{
 		if (IsRendering) throw new InvalidOperationException ("Render is in progress");
 
-		TaskCompletionSource newCompletionSource = new ();
+		TaskCompletionSource<CompletionInfo> newCompletionSource = new ();
 		completion_source = newCompletionSource;
 
 		Debug.WriteLine ("AsyncEffectRenderer.Start ()");
@@ -126,7 +130,8 @@ internal sealed class AsyncEffectRenderer
 		// So a copy is made for the render.
 		BaseEffect effectClone = effect.Clone ();
 
-		is_updated = false;
+		object updated_lock = new ();
+		bool is_updated = false;
 
 		ConcurrentQueue<Exception> renderExceptions = new ();
 
@@ -181,11 +186,6 @@ internal sealed class AsyncEffectRenderer
 				0,
 				0,
 				() => {
-					var exceptions =
-						renderExceptions.IsEmpty
-						? Array.Empty<Exception> ()
-						: renderExceptions.ToArray ();
-
 					HandleTimerTick ();
 
 					if (timer_tick_id > 0)
@@ -193,9 +193,13 @@ internal sealed class AsyncEffectRenderer
 
 					timer_tick_id = 0;
 
-					Completed?.Invoke (exceptions, cancellationToken);
+					CompletionInfo completion = new (
+						WasCanceled: cancellationToken.IsCancellationRequested,
+						Errors: renderExceptions.ToArray ());
 
-					newCompletionSource.SetResult ();
+					Completed?.Invoke (completion);
+
+					newCompletionSource.SetResult (completion);
 
 					return false; // don't call the timer again
 				}
@@ -210,9 +214,6 @@ internal sealed class AsyncEffectRenderer
 
 				if (cancellationToken.IsCancellationRequested) return;
 				if (!queued_tiles.TryDequeue (out RectangleI tileBounds)) return;
-
-				Exception? exception = null;
-
 				try {
 					// NRT - These are set in Start () before getting here
 					if (!cancellationToken.IsCancellationRequested) {
@@ -220,10 +221,8 @@ internal sealed class AsyncEffectRenderer
 						effectClone.Render (source, dest, stackalloc[] { tileBounds });
 						dest.MarkDirty (tileBounds);
 					}
-
 				} catch (Exception ex) {
-					exception = ex;
-					Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectClone.Name + " exception: " + ex.Message + "\n" + ex.StackTrace);
+					renderExceptions.Enqueue (ex);
 				}
 
 				// Ignore completions of tiles after a cancel or from a previous render.
@@ -239,11 +238,6 @@ internal sealed class AsyncEffectRenderer
 						updated_area = tileBounds;
 					}
 				}
-
-				if (exception == null)
-					continue;
-
-				renderExceptions.Enqueue (exception);
 			}
 		}
 
@@ -271,10 +265,12 @@ internal sealed class AsyncEffectRenderer
 		}
 	}
 
-	internal Task Cancel ()
+	internal Task<CompletionInfo> Finish (bool cancel)
 	{
-		Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
-		cancellation_source.Cancel ();
+		if (cancel) {
+			Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
+			cancellation_source.Cancel ();
+		}
 		return completion_source.Task;
 	}
 
@@ -282,12 +278,8 @@ internal sealed class AsyncEffectRenderer
 		double progress,
 		RectangleI updatedBounds);
 
-	internal delegate void CompletionHandler (
-		IReadOnlyList<Exception> exceptions,
-		CancellationToken cancellationToken);
-
 	public event UpdateHandler? Updated;
-	public event CompletionHandler? Completed;
+	public event Action<CompletionInfo>? Completed;
 
 	internal void Dispose ()
 	{
