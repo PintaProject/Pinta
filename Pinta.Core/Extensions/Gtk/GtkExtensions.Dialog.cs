@@ -30,6 +30,25 @@ namespace Pinta.Core;
 
 partial class GtkExtensions
 {
+	public static Task<Gtk.ResponseType> ShowAsync (this Gtk.NativeDialog dialog, bool dispose = false)
+	{
+		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
+
+		void ResponseCallback (
+			Gtk.NativeDialog sender,
+			Gtk.NativeDialog.ResponseSignalArgs args)
+		{
+			completionSource.SetResult ((Gtk.ResponseType) args.ResponseId);
+			dialog.OnResponse -= ResponseCallback;
+			if (dispose) dialog.Dispose ();
+		}
+
+		dialog.OnResponse += ResponseCallback;
+		dialog.Show ();
+
+		return completionSource.Task;
+	}
+
 	/// <summary>
 	/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
 	/// This can be useful for compatibility with old code that relies on this behaviour, but new code should be

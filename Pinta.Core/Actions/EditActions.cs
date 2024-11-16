@@ -375,18 +375,10 @@ public sealed class EditActions
 		tools.CurrentTool?.DoAfterRedo (doc);
 	}
 
-	private void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
+	private async void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 	{
-		var fcd = Gtk.FileChooserNative.New (
-			Translations.GetString ("Open Palette File"),
-			chrome.MainWindow,
-			Gtk.FileChooserAction.Open,
-			Translations.GetString ("Open"),
-			Translations.GetString ("Cancel"));
-
-		var ff = Gtk.FileFilter.New ();
+		using Gtk.FileFilter ff = Gtk.FileFilter.New ();
 		ff.Name = Translations.GetString ("Palette files");
-
 		foreach (var format in palette_formats.Formats) {
 			if (format.IsWriteOnly ())
 				continue;
@@ -394,29 +386,29 @@ public sealed class EditActions
 				ff.AddPattern ($"*.{ext}");
 		}
 
-		fcd.AddFilter (ff);
-
-		Gtk.FileFilter ff2 = Gtk.FileFilter.New ();
+		using Gtk.FileFilter ff2 = Gtk.FileFilter.New ();
 		ff2.Name = Translations.GetString ("All files");
 		ff2.AddPattern ("*");
-		fcd.AddFilter (ff2);
 
+		using Gtk.FileChooserNative fcd = Gtk.FileChooserNative.New (
+			Translations.GetString ("Open Palette File"),
+			chrome.MainWindow,
+			Gtk.FileChooserAction.Open,
+			Translations.GetString ("Open"),
+			Translations.GetString ("Cancel"));
+		fcd.AddFilter (ff);
+		fcd.AddFilter (ff2);
 		if (last_palette_dir != null)
 			fcd.SetCurrentFolder (last_palette_dir);
 
-		fcd.OnResponse += (_, args) => {
+		Gtk.ResponseType response = await fcd.ShowAsync ();
 
-			Gtk.ResponseType response = (Gtk.ResponseType) args.ResponseId;
+		if (response != Gtk.ResponseType.Accept)
+			return;
 
-			if (response != Gtk.ResponseType.Accept)
-				return;
-
-			Gio.File file = fcd.GetFile ()!;
-			last_palette_dir = file.GetParent ();
-			palette.CurrentPalette.Load (palette_formats, file);
-		};
-
-		fcd.Show ();
+		Gio.File file = fcd.GetFile ()!;
+		last_palette_dir = file.GetParent ();
+		palette.CurrentPalette.Load (palette_formats, file);
 	}
 
 	private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
