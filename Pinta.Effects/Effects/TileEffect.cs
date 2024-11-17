@@ -166,29 +166,15 @@ public sealed class TileEffect : BaseEffect
 			float finalV = settings.sin * transformedS + settings.cos * transformedT;
 
 			// Translate back to image coordinates
-			int unwrappedSampleX = (int) (settings.halfWidth + finalU);
-			int unwrappedSampleY = (int) (settings.halfHeight + finalV);
+			float unwrappedSampleX = settings.halfWidth + finalU;
+			float unwrappedSampleY = settings.halfHeight + finalV;
 
-			// Ensure coordinates wrap around the image dimensions
-
-			int wrappedSampleX = (unwrappedSampleX + settings.size.Width) % settings.size.Width;
-			int wrappedSampleY = (unwrappedSampleY + settings.size.Height) % settings.size.Height;
-
-			int adjustedSampleX =
-				(wrappedSampleX < 0)
-				? (wrappedSampleX + settings.size.Width) % settings.size.Width
-				: wrappedSampleX;
-			int adjustedSampleY =
-				(wrappedSampleY < 0)
-				? (wrappedSampleY + settings.size.Height) % settings.size.Height
-				: wrappedSampleY;
-
-			PointI samplePosition = new (adjustedSampleX, adjustedSampleY);
-
-			samples[p] = source.GetColorBgra (
+			samples[p] = source.GetBilinearSampleWrapped (
 				sourceData,
 				settings.size.Width,
-				samplePosition);
+				settings.size.Height,
+				unwrappedSampleX,
+				unwrappedSampleY);
 		}
 
 		return ColorBgra.Blend (samples);
