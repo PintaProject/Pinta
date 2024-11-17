@@ -160,13 +160,32 @@ public sealed class LayerActions
 			MoveLayerUp.Sensitive = false;
 	}
 
-	private void HandlePintaCoreActionsLayersImportFromFileActivated (object sender, EventArgs e)
+	private async void HandlePintaCoreActionsLayersImportFromFileActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
 
 		tools.Commit ();
 
-		Gtk.FileChooserNative fcd = Gtk.FileChooserNative.New (
+		// Add image files filter
+		using Gtk.FileFilter ff = Gtk.FileFilter.New ();
+		foreach (var format in image_formats.Formats) {
+			if (format.IsWriteOnly ()) continue;
+			foreach (string ext in format.Extensions)
+				ff.AddPattern ($"*.{ext}");
+		}
+
+		// On Unix-like systems, file extensions are often considered optional.
+		// Files can often also be identified by their MIME types.
+		// Windows does not understand MIME types natively.
+		// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
+		if (SystemManager.GetOperatingSystem () != OS.Windows)
+			foreach (var format in image_formats.Formats)
+				foreach (var mime in format.Mimes)
+					ff.AddMimeType (mime);
+
+		ff.Name = Translations.GetString ("Image files");
+
+		using Gtk.FileChooserNative fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Open Image File"),
 			chrome.MainWindow,
 			Gtk.FileChooserAction.Open,
@@ -176,45 +195,23 @@ public sealed class LayerActions
 		if (recent_files.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
 			fcd.SetCurrentFolder (dir);
 
-		// Add image files filter
-		var ff = Gtk.FileFilter.New ();
-		foreach (var format in image_formats.Formats) {
-			if (format.IsWriteOnly ()) continue;
-			foreach (var ext in format.Extensions)
-				ff.AddPattern ($"*.{ext}");
-		}
-
-		// On Unix-like systems, file extensions are often considered optional.
-		// Files can often also be identified by their MIME types.
-		// Windows does not understand MIME types natively.
-		// Adding a MIME filter on Windows would break the native file picker and force a GTK file picker instead.
-		if (SystemManager.GetOperatingSystem () != OS.Windows) {
-			foreach (var format in image_formats.Formats) {
-				foreach (var mime in format.Mimes) {
-					ff.AddMimeType (mime);
-				}
-			}
-		}
-
-		ff.Name = Translations.GetString ("Image files");
 		fcd.AddFilter (ff);
 
-		fcd.OnResponse += (_, args) => {
-			var response = (Gtk.ResponseType) args.ResponseId;
+		Gtk.ResponseType response = await fcd.ShowAsync ();
 
-			if (response != Gtk.ResponseType.Accept)
-				return;
+		if (response != Gtk.ResponseType.Accept)
+			return;
 
-			Gio.File file = fcd.GetFile ()!;
+		Gio.File file = fcd.GetFile ()!;
 
-			Gio.File? directory = file.GetParent ();
-			if (directory is not null)
-				recent_files.LastDialogDirectory = directory;
+		Gio.File? directory = file.GetParent ();
+		if (directory is not null)
+			recent_files.LastDialogDirectory = directory;
 
-			// Open the image and add it to the layers
-			UserLayer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
+		// Open the image and add it to the layers
+		UserLayer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
 
-			using Gio.FileInputStream fs = file.Read (null);
+		using (Gio.FileInputStream fs = file.Read (null)) {
 			try {
 				using GdkPixbuf.Pixbuf bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when an error is thrown
 				using Cairo.Context context = new (layer.Surface);
@@ -222,21 +219,18 @@ public sealed class LayerActions
 			} finally {
 				fs.Close (null);
 			}
+		}
 
-			doc.Layers.SetCurrentUserLayer (layer);
+		AddLayerHistoryItem hist = new (
+			Resources.Icons.LayerImport,
+			Translations.GetString ("Import From File"),
+			doc.Layers.IndexOf (layer));
 
-			AddLayerHistoryItem hist = new (
-				Resources.Icons.LayerImport,
-				Translations.GetString ("Import From File"),
-				doc.Layers.IndexOf (layer));
+		// --- Changes to document go after everything else is completed successfully
 
-			doc.History.PushNewItem (hist);
-
-			doc.Workspace.Invalidate ();
-		};
-
-
-		fcd.Show ();
+		doc.Layers.SetCurrentUserLayer (layer);
+		doc.History.PushNewItem (hist);
+		doc.Workspace.Invalidate ();
 	}
 
 	private void HandlePintaCoreActionsLayersFlipVerticalActivated (object sender, EventArgs e)
