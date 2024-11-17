@@ -38,9 +38,11 @@ public sealed class TileEffect : BaseEffect
 		=> (TileData) EffectData!;
 
 	private readonly IChromeService chrome;
+	private readonly IPaletteService palette;
 	public TileEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
+		palette = services.GetService<IPaletteService> ();
 		EffectData = new TileData ();
 	}
 
@@ -55,6 +57,7 @@ public sealed class TileEffect : BaseEffect
 		float cos,
 		float tileScale,
 		float adjustedIntensity,
+		EdgeBehavior edgeBehavior,
 		IReadOnlyList<PointD> antiAliasPoints,
 		Func<float, float> waveFunction);
 
@@ -76,6 +79,7 @@ public sealed class TileEffect : BaseEffect
 			cos: cos,
 			tileScale: (float) Math.PI / tileSize,
 			adjustedIntensity: preliminaryIntensity * preliminaryIntensity / 10 * Math.Sign (preliminaryIntensity),
+			edgeBehavior: Data.EdgeBehavior,
 			antiAliasPoints: InitializeAntiAliasPoints (ANTI_ALIAS_LEVEL, antiAliasSample, sin, cos),
 			waveFunction: GetWaveFunction (Data.WaveType)
 		);
@@ -130,13 +134,15 @@ public sealed class TileEffect : BaseEffect
 	}
 
 	// Algorithm Code Ported From PDN
-	private static ColorBgra GetFinalPixelColor (
+	private ColorBgra GetFinalPixelColor (
 		ImageSurface source,
 		TileSettings settings,
 		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
 	{
 		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasPoints.Count];
+
+		ColorBgra original = sourceData[pixel.memoryOffset];
 
 		float i = pixel.coordinates.X - settings.halfWidth;
 		float j = pixel.coordinates.Y - settings.halfHeight;
@@ -166,18 +172,65 @@ public sealed class TileEffect : BaseEffect
 			float finalV = settings.sin * transformedS + settings.cos * transformedT;
 
 			// Translate back to image coordinates
-			float unwrappedSampleX = settings.halfWidth + finalU;
-			float unwrappedSampleY = settings.halfHeight + finalV;
+			float preliminaryX = settings.halfWidth + finalU;
+			float preliminaryY = settings.halfHeight + finalV;
 
-			samples[p] = source.GetBilinearSampleWrapped (
+			samples[p] = GetSample (
+				settings,
+				source,
 				sourceData,
-				settings.size.Width,
-				settings.size.Height,
-				unwrappedSampleX,
-				unwrappedSampleY);
+				original,
+				preliminaryX,
+				preliminaryY);
 		}
 
 		return ColorBgra.Blend (samples);
+	}
+
+	private ColorBgra GetSample (
+		TileSettings settings,
+		ImageSurface source,
+		ReadOnlySpan<ColorBgra> sourceData,
+		ColorBgra original,
+		float preliminaryX,
+		float preliminaryY)
+	{
+		if (IsOnSurface (settings, preliminaryX, preliminaryY))
+			return source.GetBilinearSample (preliminaryX, preliminaryY);
+
+		return settings.edgeBehavior switch {
+			EdgeBehavior.Clamp => source.GetBilinearSampleClamped (sourceData, settings.size.Width, settings.size.Height, preliminaryX, preliminaryY),
+			EdgeBehavior.Wrap => source.GetBilinearSampleWrapped (sourceData, settings.size.Width, settings.size.Height, preliminaryX, preliminaryY),
+			EdgeBehavior.Reflect => source.GetBilinearSampleClamped (sourceData, settings.size.Width, settings.size.Height, ReflectCoord (preliminaryX, settings.size.Width), ReflectCoord (preliminaryY, settings.size.Height)),
+			EdgeBehavior.Primary => palette.PrimaryColor.ToColorBgra (),
+			EdgeBehavior.Secondary => palette.SecondaryColor.ToColorBgra (),
+			EdgeBehavior.Transparent => ColorBgra.Transparent,
+			EdgeBehavior.Original => original,
+			_ => throw new ArgumentException ($"{nameof (settings.edgeBehavior)} is out of range", nameof (settings)),
+		};
+	}
+
+	private static bool IsOnSurface (TileSettings settings, float u, float v)
+		=> (u >= 0 && u <= (settings.size.Width - 1) && v >= 0 && v <= (settings.size.Height - 1));
+
+	private static float ReflectCoord (float value, int max)
+	{
+		bool reflection = false;
+
+		while (value < 0) {
+			value += max;
+			reflection = !reflection;
+		}
+
+		while (value > max) {
+			value -= max;
+			reflection = !reflection;
+		}
+
+		if (reflection)
+			value = max - value;
+
+		return value;
 	}
 
 	public sealed class TileData : EffectData
@@ -193,6 +246,33 @@ public sealed class TileEffect : BaseEffect
 
 		[Caption ("Tile Type")]
 		public TileType WaveType { get; set; } = TileType.SharpEdges;
+
+		[Caption ("Edge Behavior")]
+		public EdgeBehavior EdgeBehavior { get; set; } = EdgeBehavior.Wrap;
+	}
+
+	public enum EdgeBehavior
+	{
+		[Caption ("Clamp")]
+		Clamp,
+
+		[Caption ("Wrap")]
+		Wrap,
+
+		[Caption ("Reflect")]
+		Reflect,
+
+		[Caption ("Primary")]
+		Primary,
+
+		[Caption ("Secondary")]
+		Secondary,
+
+		[Caption ("Transparent")]
+		Transparent,
+
+		[Caption ("Original")]
+		Original,
 	}
 }
 
