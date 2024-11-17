@@ -100,7 +100,7 @@ public sealed class RotateZoomLayerAction : IActionHandler
 		var center_x = image_size.Width / 2.0;
 		var center_y = image_size.Height / 2.0;
 
-		xform.Translate ((1 + data.Pan.X) * center_x, (1 + data.Pan.Y) * center_y);
+		xform.Translate ((1 + data.Pan.Horizontal) * center_x, (1 + data.Pan.Vertical) * center_y);
 		xform.Rotate (-data.Angle.ToRadians ().Radians);
 		xform.Scale (data.Zoom, data.Zoom);
 		xform.Translate (-center_x, -center_y);
@@ -141,12 +141,12 @@ public sealed class RotateZoomLayerAction : IActionHandler
 		public DegreesAngle Angle { get; set; } = new (0);
 
 		[Caption ("Pan")]
-		public PointD Pan { get; set; } = new (0, 0);
+		public CenterOffset<double> Pan { get; set; } = new (0, 0);
 
 		[Caption ("Zoom"), MinimumValue (0), MaximumValue (16)]
 		public double Zoom { get; set; } = 1.0;
 
-		public override bool IsDefault => Angle.Degrees == 0 && Pan.X == 0.0 && Pan.Y == 0.0 && Zoom == 1.0;
+		public override bool IsDefault => Angle.Degrees == 0 && Pan.Horizontal == 0.0 && Pan.Vertical == 0.0 && Zoom == 1.0;
 	}
 }
 
