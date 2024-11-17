@@ -513,6 +513,54 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Tile5 ()
+	{
+		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.EdgeBehavior = EdgeBehavior.Clamp;
+		Utilities.TestEffect (effect, "tile5.png");
+	}
+
+	[Test]
+	public void Tile6 ()
+	{
+		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.EdgeBehavior = EdgeBehavior.Reflect;
+		Utilities.TestEffect (effect, "tile6.png");
+	}
+
+	[Test]
+	public void Tile7 ()
+	{
+		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.EdgeBehavior = EdgeBehavior.Primary;
+		Utilities.TestEffect (effect, "tile7.png");
+	}
+
+	[Test]
+	public void Tile8 ()
+	{
+		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.EdgeBehavior = EdgeBehavior.Secondary;
+		Utilities.TestEffect (effect, "tile8.png");
+	}
+
+	[Test]
+	public void Tile9 ()
+	{
+		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.EdgeBehavior = EdgeBehavior.Transparent;
+		Utilities.TestEffect (effect, "tile9.png");
+	}
+
+	[Test]
+	public void Tile10 ()
+	{
+		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.EdgeBehavior = EdgeBehavior.Original;
+		Utilities.TestEffect (effect, "tile10.png");
+	}
+
+	[Test]
 	public void Twist1 ()
 	{
 		TwistEffect effect = new (Utilities.CreateMockServices ());
