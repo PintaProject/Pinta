@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
@@ -23,30 +22,6 @@ public static class Warp
 		int Quality { get; }
 		CenterOffset<double> CenterOffset { get; }
 		EdgeBehavior EdgeBehavior { get; }
-	}
-
-	public enum EdgeBehavior
-	{
-		[Caption ("Clamp")]
-		Clamp,
-
-		[Caption ("Wrap")]
-		Wrap,
-
-		[Caption ("Reflect")]
-		Reflect,
-
-		[Caption ("Primary")]
-		Primary,
-
-		[Caption ("Secondary")]
-		Secondary,
-
-		[Caption ("Transparent")]
-		Transparent,
-
-		[Caption ("Original")]
-		Original,
 	}
 
 	public readonly record struct TransformData (double X, double Y);

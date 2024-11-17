@@ -101,5 +101,5 @@ public sealed class PolarInversionData : EffectData, Warp.IEffectData
 	[Caption ("Center Offset")]
 	public CenterOffset<double> CenterOffset { get; set; }
 
-	public Warp.EdgeBehavior EdgeBehavior { get; set; } = Warp.EdgeBehavior.Reflect;
+	public EdgeBehavior EdgeBehavior { get; set; } = EdgeBehavior.Reflect;
 }

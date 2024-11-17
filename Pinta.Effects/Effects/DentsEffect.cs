@@ -159,5 +159,5 @@ public sealed class DentsData : EffectData, Warp.IEffectData
 	[Caption ("Center Offset")]
 	public CenterOffset<double> CenterOffset { get; set; }
 
-	public Warp.EdgeBehavior EdgeBehavior { get; set; } = Warp.EdgeBehavior.Wrap;
+	public EdgeBehavior EdgeBehavior { get; set; } = EdgeBehavior.Wrap;
 }
