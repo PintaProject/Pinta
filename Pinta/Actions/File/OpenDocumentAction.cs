@@ -80,7 +80,7 @@ internal sealed class OpenDocumentAction : IActionHandler
 		Gio.ListModel? selection;
 		try {
 			selection = await fileDialog.OpenMultipleAsync (chrome.MainWindow);
-		} catch (GLib.GException gex) when (gex.Message == "Dismissed by user") {
+		} catch (GLib.GException gex) { // If we wanted to filter, the `Message` is "Dismissed by user"
 			return; // Execution unexpectedly reaches this point when user cancels file selection
 		}
 
