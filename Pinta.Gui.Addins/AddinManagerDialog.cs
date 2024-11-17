@@ -11,7 +11,7 @@ namespace Pinta.Gui.Addins;
 
 public sealed class AddinManagerDialog : Adw.Window
 {
-	private readonly SetupService service;
+	private readonly SetupService setup_service;
 	private readonly SystemManager system;
 
 	private readonly AddinListView installed_list;
@@ -66,7 +66,7 @@ public sealed class AddinManagerDialog : Adw.Window
 
 		// --- References to keep
 
-		this.service = service;
+		this.setup_service = service;
 		this.system = system;
 
 		progress_bar = progressBar;
@@ -123,7 +123,7 @@ public sealed class AddinManagerDialog : Adw.Window
 		progress_bar.ShowProgress ();
 
 		Task.Run (() => {
-			service.Repositories.UpdateAllRepositories (progress_bar);
+			setup_service.Repositories.UpdateAllRepositories (progress_bar);
 		}).ContinueWith (_ => {
 			// Execute UI updates on the main thread.
 			GLib.Functions.IdleAdd (
@@ -144,7 +144,7 @@ public sealed class AddinManagerDialog : Adw.Window
 
 		foreach (Addin ainfo in AddinManager.Registry.GetModules (AddinSearchFlags.IncludeAddins | AddinSearchFlags.LatestVersionsOnly)) {
 
-			if (!Utilities.InApplicationNamespace (service, ainfo.Id) || ainfo.Description.IsHidden)
+			if (!Utilities.InApplicationNamespace (setup_service, ainfo.Id) || ainfo.Description.IsHidden)
 				continue;
 
 			AddinHeader ah = SetupService.GetAddinHeader (ainfo);
@@ -156,7 +156,7 @@ public sealed class AddinManagerDialog : Adw.Window
 			if (addininfoInstalled.GetUpdate (ainfo) != null)
 				st |= AddinStatus.HasUpdate;
 #endif
-			installed_list.AddAddin (service, ah, ainfo, st);
+			installed_list.AddAddin (setup_service, ah, ainfo, st);
 		}
 
 	}
@@ -165,12 +165,12 @@ public sealed class AddinManagerDialog : Adw.Window
 	{
 		gallery_list.Clear ();
 
-		IReadOnlyList<AddinRepositoryEntry> reps = service.Repositories.GetAvailableAddins (RepositorySearchFlags.None);
+		IReadOnlyList<AddinRepositoryEntry> reps = setup_service.Repositories.GetAvailableAddins (RepositorySearchFlags.None);
 		reps = FilterToLatestCompatibleVersion (reps);
 
 		foreach (var arep in reps) {
 
-			if (!Utilities.InApplicationNamespace (service, arep.Addin.Id))
+			if (!Utilities.InApplicationNamespace (setup_service, arep.Addin.Id))
 				continue;
 
 			AddinStatus status = AddinStatus.NotInstalled;
@@ -189,7 +189,7 @@ public sealed class AddinManagerDialog : Adw.Window
 					status |= AddinStatus.HasUpdate;
 			}
 
-			gallery_list.AddAddinRepositoryEntry (service, arep.Addin, arep, status);
+			gallery_list.AddAddinRepositoryEntry (setup_service, arep.Addin, arep, status);
 		}
 	}
 
@@ -197,11 +197,11 @@ public sealed class AddinManagerDialog : Adw.Window
 	{
 		updates_list.Clear ();
 
-		IReadOnlyList<AddinRepositoryEntry> reps = service.Repositories.GetAvailableAddins (RepositorySearchFlags.None);
+		IReadOnlyList<AddinRepositoryEntry> reps = setup_service.Repositories.GetAvailableAddins (RepositorySearchFlags.None);
 		reps = FilterToLatestCompatibleVersion (reps);
 
 		foreach (var arep in reps) {
-			if (!Utilities.InApplicationNamespace (service, arep.Addin.Id))
+			if (!Utilities.InApplicationNamespace (setup_service, arep.Addin.Id))
 				continue;
 
 			// Check if this addin is installed and is an earlier version.
@@ -213,7 +213,7 @@ public sealed class AddinManagerDialog : Adw.Window
 			if (!installed.Enabled || Utilities.GetMissingDependencies (installed).Any ())
 				status |= AddinStatus.Disabled;
 
-			updates_list.AddAddinRepositoryEntry (service, arep.Addin, arep, status);
+			updates_list.AddAddinRepositoryEntry (setup_service, arep.Addin, arep, status);
 		}
 	}
 
@@ -241,12 +241,12 @@ public sealed class AddinManagerDialog : Adw.Window
 		return filtered_addins;
 	}
 
-	private void HandleInstallFromFileClicked ()
+	private async void HandleInstallFromFileClicked ()
 	{
-		Gtk.FileFilter mpackFilter = CreateMpackFilter ();
-		Gtk.FileFilter catchAllFilter = CreateCatchAllFilter ();
+		using Gtk.FileFilter mpackFilter = CreateMpackFilter ();
+		using Gtk.FileFilter catchAllFilter = CreateCatchAllFilter ();
 
-		Gtk.FileChooserNative dialog = Gtk.FileChooserNative.New (
+		using Gtk.FileChooserNative dialog = Gtk.FileChooserNative.New (
 			Translations.GetString ("Install Extension Package"),
 			this,
 			Gtk.FileChooserAction.Open,
@@ -257,25 +257,22 @@ public sealed class AddinManagerDialog : Adw.Window
 		dialog.AddFilter (mpackFilter);
 		dialog.AddFilter (catchAllFilter);
 
-		dialog.OnResponse += (_, e) => {
+		Gtk.ResponseType response = await dialog.ShowAsync ();
 
-			if (e.ResponseId != (int) Gtk.ResponseType.Accept)
-				return;
+		if (response != Gtk.ResponseType.Accept)
+			return;
 
-			IReadOnlyList<string> files =
-				dialog.GetFileList ()
-				.Select (f => f.GetPath () ?? string.Empty)
-				.Where (f => !string.IsNullOrEmpty (f))
-				.ToArray ();
+		IReadOnlyList<string> files =
+			dialog.GetFileList ()
+			.Select (f => f.GetPath () ?? string.Empty)
+			.Where (f => !string.IsNullOrEmpty (f))
+			.ToArray ();
 
-			InstallDialog install_dialog = new (this, service);
+		InstallDialog install_dialog = new (this, setup_service); // TODO: dispose properly after making async
+		if (install_dialog.InitForInstall (files)) {
 			install_dialog.OnSuccess += (_, _) => LoadAll ();
-
-			if (install_dialog.InitForInstall (files))
-				install_dialog.Show ();
-		};
-
-		dialog.Show ();
+			install_dialog.Show ();
+		}
 
 		// --- Utility methods
 
