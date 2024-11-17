@@ -60,44 +60,40 @@ internal sealed class OpenDocumentAction : IActionHandler
 		file.Open.Activated -= Activated;
 	}
 
-	private void Activated (object sender, EventArgs e)
+	private async void Activated (object sender, EventArgs e)
 	{
-		var imagesFilter = CreateImagesFilter ();
-		var catchAllFilter = CreateCatchAllFilter ();
+		using Gtk.FileFilter imagesFilter = CreateImagesFilter ();
+		using Gtk.FileFilter catchAllFilter = CreateCatchAllFilter ();
 
-		var fcd = Gtk.FileChooserNative.New (
-			Translations.GetString ("Open Image File"),
-			chrome.MainWindow,
-			Gtk.FileChooserAction.Open,
-			Translations.GetString ("Open"),
-			Translations.GetString ("Cancel"));
+		using Gio.ListStore filters = Gio.ListStore.New (Gtk.FileFilter.GetGType ());
+		filters.Append (imagesFilter);
+		filters.Append (catchAllFilter);
 
-		fcd.Modal = true;
-
-		fcd.AddFilter (imagesFilter);
-		fcd.AddFilter (catchAllFilter);
+		using Gtk.FileDialog fileDialog = Gtk.FileDialog.New ();
+		fileDialog.SetTitle (Translations.GetString ("Open Image File"));
+		fileDialog.SetFilters (filters);
+		fileDialog.Modal = true;
 
 		if (recent_files.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
-			fcd.SetCurrentFolder (dir);
+			fileDialog.SetInitialFolder (dir);
 
-		fcd.SelectMultiple = true;
+		var selection = await fileDialog.OpenFilesAsync (chrome.MainWindow);
 
-		fcd.OnResponse += (_, e) => {
+		if (selection is null)
+			return;
 
-			if (e.ResponseId != (int) Gtk.ResponseType.Accept)
-				return;
+		foreach (var file in selection) {
 
-			foreach (var file in fcd.GetFileList ()) {
-				if (!workspace.OpenFile (file))
-					continue;
-				recent_files.AddFile (file);
-				var directory = file.GetParent ();
-				if (directory is not null)
-					recent_files.LastDialogDirectory = directory;
-			}
-		};
+			if (!workspace.OpenFile (file))
+				continue;
 
-		fcd.Show ();
+			recent_files.AddFile (file);
+
+			Gio.File? directory = file.GetParent ();
+
+			if (directory is not null)
+				recent_files.LastDialogDirectory = directory;
+		}
 	}
 
 	private static Gtk.FileFilter CreateCatchAllFilter ()
