@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Cairo;
+using GLib.Internal;
 using Pinta.Core;
 
 namespace Pinta.Effects;
@@ -41,26 +42,6 @@ public static class Warp
 
 	private static bool IsOnSurface (this ImageSurface src, float u, float v)
 		=> (u >= 0 && u <= (src.Width - 1) && v >= 0 && v <= (src.Height - 1));
-
-	private static float ReflectCoord (float value, int max)
-	{
-		bool reflection = false;
-
-		while (value < 0) {
-			value += max;
-			reflection = !reflection;
-		}
-
-		while (value > max) {
-			value -= max;
-			reflection = !reflection;
-		}
-
-		if (reflection)
-			value = max - value;
-
-		return value;
-	}
 
 	public static Settings CreateSettings (
 		IEffectData warpData,
@@ -130,7 +111,7 @@ public static class Warp
 		return settings.edgeBehavior switch {
 			EdgeBehavior.Clamp => src.GetBilinearSampleClamped (preliminarySample.X, preliminarySample.Y),
 			EdgeBehavior.Wrap => src.GetBilinearSampleWrapped (preliminarySample.X, preliminarySample.Y),
-			EdgeBehavior.Reflect => src.GetBilinearSampleClamped (ReflectCoord (preliminarySample.X, src.Width), ReflectCoord (preliminarySample.Y, src.Height)),
+			EdgeBehavior.Reflect => src.GetBilinearSampleReflected (preliminarySample.X, preliminarySample.Y),
 			EdgeBehavior.Primary => settings.primaryColor,
 			EdgeBehavior.Secondary => settings.secondaryColor,
 			EdgeBehavior.Transparent => ColorBgra.Transparent,

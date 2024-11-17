@@ -201,7 +201,7 @@ public sealed class TileEffect : BaseEffect
 		return settings.edgeBehavior switch {
 			EdgeBehavior.Clamp => source.GetBilinearSampleClamped (sourceData, settings.size.Width, settings.size.Height, preliminaryX, preliminaryY),
 			EdgeBehavior.Wrap => source.GetBilinearSampleWrapped (sourceData, settings.size.Width, settings.size.Height, preliminaryX, preliminaryY),
-			EdgeBehavior.Reflect => source.GetBilinearSampleClamped (sourceData, settings.size.Width, settings.size.Height, ReflectCoord (preliminaryX, settings.size.Width), ReflectCoord (preliminaryY, settings.size.Height)),
+			EdgeBehavior.Reflect => source.GetBilinearSampleReflected (sourceData, settings.size.Width, settings.size.Height, preliminaryX, preliminaryY),
 			EdgeBehavior.Primary => palette.PrimaryColor.ToColorBgra (),
 			EdgeBehavior.Secondary => palette.SecondaryColor.ToColorBgra (),
 			EdgeBehavior.Transparent => ColorBgra.Transparent,
@@ -212,26 +212,6 @@ public sealed class TileEffect : BaseEffect
 
 	private static bool IsOnSurface (TileSettings settings, float u, float v)
 		=> (u >= 0 && u <= (settings.size.Width - 1) && v >= 0 && v <= (settings.size.Height - 1));
-
-	private static float ReflectCoord (float value, int max)
-	{
-		bool reflection = false;
-
-		while (value < 0) {
-			value += max;
-			reflection = !reflection;
-		}
-
-		while (value > max) {
-			value -= max;
-			reflection = !reflection;
-		}
-
-		if (reflection)
-			value = max - value;
-
-		return value;
-	}
 
 	public sealed class TileData : EffectData
 	{
