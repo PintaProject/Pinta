@@ -24,12 +24,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Pinta.Core;
 
 partial class GtkExtensions
 {
+	public static async Task<IReadOnlyList<Gio.File>?> OpenFilesAsync (
+		this Gtk.FileDialog fileDialog,
+		Gtk.Window parent)
+	{
+		Gio.ListModel? selection;
+		try {
+			selection = await fileDialog.OpenMultipleAsync (parent);
+		} catch (GLib.GException) {
+			// Docs: https://docs.gtk.org/gtk4/method.FileDialog.open_multiple_finish.html
+			// According to the documentation, an error is set if the user cancels
+			// TODO: filter by error code once gir.core allows for that
+			return null;
+		}
+
+		if (selection is null) return null;
+
+		uint itemCount = selection.GetNItems ();
+		var result = new Gio.File[itemCount];
+		for (uint i = 0; i < itemCount; i++) {
+			nint g_ref = selection.GetItem (i);
+			Gio.FileHelper file = new (handle: g_ref, ownedRef: true);
+			result[i] = file;
+		}
+		return result;
+	}
+
 	public static Task<Gtk.ResponseType> ShowAsync (this Gtk.NativeDialog dialog, bool dispose = false)
 	{
 		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
