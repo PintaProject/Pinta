@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
+using Gio;
 
 namespace Pinta.Core;
 
@@ -48,17 +48,8 @@ public static class GioExtensions
 	/// </summary>
 	public static string GetDisplayName (this Gio.File file)
 	{
-		Gio.FileInfo info = file.QueryInfo (
-			attributes: Gio.Constants.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
-			flags: Gio.FileQueryInfoFlags.None,
-			cancellable: null);
+		var info = file.QueryInfo (Constants.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, Gio.FileQueryInfoFlags.None, cancellable: null);
 		return info.GetDisplayName ();
-	}
-
-	public static IEnumerable<Gio.File> EnumerateAsFiles (this Gio.ListModel fileList)
-	{
-		for (uint i = 0, n = fileList.GetNItems (); i < n; i++)
-			yield return new Gio.FileHelper (fileList.GetItem (i), ownedRef: true);
 	}
 
 	/// <summary>
