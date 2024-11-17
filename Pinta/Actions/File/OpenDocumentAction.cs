@@ -77,26 +77,27 @@ internal sealed class OpenDocumentAction : IActionHandler
 		if (recent_files.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
 			fileDialog.SetInitialFolder (dir);
 
+		Gio.ListModel? selection;
 		try {
-			Gio.ListModel? selection = await fileDialog.OpenMultipleAsync (chrome.MainWindow);
-
-			if (selection is null)
-				return;
-
-			foreach (var file in selection.EnumerateAsFiles ()) {
-
-				if (!workspace.OpenFile (file))
-					continue;
-
-				recent_files.AddFile (file);
-
-				Gio.File? directory = file.GetParent ();
-
-				if (directory is not null)
-					recent_files.LastDialogDirectory = directory;
-			}
+			selection = await fileDialog.OpenMultipleAsync (chrome.MainWindow);
 		} catch (GLib.GException gex) when (gex.Message == "Dismissed by user") {
-			// Swallow
+			return; // Execution unexpectedly reaches this point when user cancels file selection
+		}
+
+		if (selection is null) // This is what we want to test instead of an exception
+			return;
+
+		foreach (var file in selection.EnumerateAsFiles ()) {
+
+			if (!workspace.OpenFile (file))
+				continue;
+
+			recent_files.AddFile (file);
+
+			Gio.File? directory = file.GetParent ();
+
+			if (directory is not null)
+				recent_files.LastDialogDirectory = directory;
 		}
 	}
 
