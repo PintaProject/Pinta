@@ -121,7 +121,7 @@ internal sealed class EffectsTest
 	{
 		DentsEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.CenterOffset = new CenterOffset<double> (0, 0);
-		effect.Data.EdgeBehavior = Warp.EdgeBehavior.Clamp;
+		effect.Data.EdgeBehavior = EdgeBehavior.Clamp;
 		Utilities.TestEffect (effect, "dents7.png");
 	}
 
