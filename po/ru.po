@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-17 01:41+0000\n"
-"PO-Revision-Date: 2024-11-19 03:00+0000\n"
+"PO-Revision-Date: 2024-11-20 13:00+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
 "\n"
@@ -306,7 +306,7 @@ msgstr "Настройки сетки холста"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:75
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Сетка холста..."
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:126
 msgid "Cell Size"
