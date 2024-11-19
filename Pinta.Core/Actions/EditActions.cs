@@ -377,38 +377,26 @@ public sealed class EditActions
 
 	private async void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 	{
-		using Gtk.FileFilter ff = Gtk.FileFilter.New ();
-		ff.Name = Translations.GetString ("Palette files");
-		foreach (var format in palette_formats.Formats) {
-			if (format.IsWriteOnly ())
-				continue;
-			foreach (var ext in format.Extensions)
-				ff.AddPattern ($"*.{ext}");
-		}
+		using Gtk.FileFilter palettesFilter = CreatePalettesFilter ();
+		using Gtk.FileFilter catchAllFilter = CreateCatchAllFilter ();
 
-		using Gtk.FileFilter ff2 = Gtk.FileFilter.New ();
-		ff2.Name = Translations.GetString ("All files");
-		ff2.AddPattern ("*");
+		using Gio.ListStore filters = Gio.ListStore.New (Gtk.FileFilter.GetGType ());
+		filters.Append (palettesFilter);
+		filters.Append (catchAllFilter);
 
-		using Gtk.FileChooserNative fcd = Gtk.FileChooserNative.New (
-			Translations.GetString ("Open Palette File"),
-			chrome.MainWindow,
-			Gtk.FileChooserAction.Open,
-			Translations.GetString ("Open"),
-			Translations.GetString ("Cancel"));
-		fcd.AddFilter (ff);
-		fcd.AddFilter (ff2);
+		using Gtk.FileDialog fileDialog = Gtk.FileDialog.New ();
+		fileDialog.SetTitle (Translations.GetString ("Open Palette File"));
+		fileDialog.SetFilters (filters);
 		if (last_palette_dir != null)
-			fcd.SetCurrentFolder (last_palette_dir);
+			fileDialog.SetInitialFolder (last_palette_dir);
 
-		Gtk.ResponseType response = await fcd.ShowAsync ();
+		var choice = await fileDialog.OpenFileAsync (chrome.MainWindow);
 
-		if (response != Gtk.ResponseType.Accept)
+		if (choice is null)
 			return;
 
-		Gio.File file = fcd.GetFile ()!;
-		last_palette_dir = file.GetParent ();
-		palette.CurrentPalette.Load (palette_formats, file);
+		last_palette_dir = choice.GetParent ();
+		palette.CurrentPalette.Load (palette_formats, choice);
 	}
 
 	private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
@@ -458,6 +446,32 @@ public sealed class EditActions
 		};
 
 		fcd.Show ();
+	}
+
+	private Gtk.FileFilter CreatePalettesFilter ()
+	{
+		Gtk.FileFilter palettesFilter = Gtk.FileFilter.New ();
+
+		palettesFilter.Name = Translations.GetString ("Palette files");
+
+		foreach (var format in palette_formats.Formats) {
+
+			if (format.IsWriteOnly ())
+				continue;
+
+			foreach (var ext in format.Extensions)
+				palettesFilter.AddPattern ($"*.{ext}");
+		}
+
+		return palettesFilter;
+	}
+
+	private static Gtk.FileFilter CreateCatchAllFilter ()
+	{
+		Gtk.FileFilter catchAllFilter = Gtk.FileFilter.New ();
+		catchAllFilter.Name = Translations.GetString ("All files");
+		catchAllFilter.AddPattern ("*");
+		return catchAllFilter;
 	}
 
 	private void HandlerPintaCoreActionsEditResetPaletteActivated (object sender, EventArgs e)

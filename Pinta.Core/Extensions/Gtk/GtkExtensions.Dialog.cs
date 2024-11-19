@@ -31,6 +31,23 @@ namespace Pinta.Core;
 
 partial class GtkExtensions
 {
+	public static async Task<Gio.File?> OpenFileAsync (
+		this Gtk.FileDialog fileDialog,
+		Gtk.Window parent)
+	{
+		Gio.File? choice;
+		try {
+			choice = await fileDialog.OpenAsync (parent);
+		} catch (GLib.GException) {
+			// Docs: https://docs.gtk.org/gtk4/method.FileDialog.open_finish.html
+			// According to the documentation, an error is set if the user cancels
+			// TODO: filter by error code once gir.core allows for that
+			return null;
+		}
+
+		return choice;
+	}
+
 	public static async Task<IReadOnlyList<Gio.File>?> OpenFilesAsync (
 		this Gtk.FileDialog fileDialog,
 		Gtk.Window parent)
