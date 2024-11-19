@@ -160,18 +160,13 @@ public sealed class LayerActions
 			MoveLayerUp.Sensitive = false;
 	}
 
-	private async void HandlePintaCoreActionsLayersImportFromFileActivated (object sender, EventArgs e)
+	private Gtk.FileFilter CreateImagesFileFilter ()
 	{
-		Document doc = workspace.ActiveDocument;
-
-		tools.Commit ();
-
-		// Add image files filter
-		using Gtk.FileFilter ff = Gtk.FileFilter.New ();
+		Gtk.FileFilter imagesFilter = Gtk.FileFilter.New ();
 		foreach (var format in image_formats.Formats) {
 			if (format.IsWriteOnly ()) continue;
 			foreach (string ext in format.Extensions)
-				ff.AddPattern ($"*.{ext}");
+				imagesFilter.AddPattern ($"*.{ext}");
 		}
 
 		// On Unix-like systems, file extensions are often considered optional.
@@ -181,37 +176,44 @@ public sealed class LayerActions
 		if (SystemManager.GetOperatingSystem () != OS.Windows)
 			foreach (var format in image_formats.Formats)
 				foreach (var mime in format.Mimes)
-					ff.AddMimeType (mime);
+					imagesFilter.AddMimeType (mime);
 
-		ff.Name = Translations.GetString ("Image files");
+		imagesFilter.Name = Translations.GetString ("Image files");
 
-		using Gtk.FileChooserNative fcd = Gtk.FileChooserNative.New (
-			Translations.GetString ("Open Image File"),
-			chrome.MainWindow,
-			Gtk.FileChooserAction.Open,
-			Translations.GetString ("Open"),
-			Translations.GetString ("Cancel"));
+		return imagesFilter;
+	}
 
+	private async void HandlePintaCoreActionsLayersImportFromFileActivated (object sender, EventArgs e)
+	{
+		Document doc = workspace.ActiveDocument;
+
+		tools.Commit ();
+
+		// Add image files filter
+		using Gtk.FileFilter imagesFilter = CreateImagesFileFilter ();
+
+		using Gio.ListStore fileFilters = Gio.ListStore.New (Gtk.FileFilter.GetGType ());
+		fileFilters.Append (imagesFilter);
+
+		using Gtk.FileDialog fileDialog = Gtk.FileDialog.New ();
+		fileDialog.SetTitle (Translations.GetString ("Open Image File"));
+		fileDialog.SetFilters (fileFilters);
 		if (recent_files.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
-			fcd.SetCurrentFolder (dir);
+			fileDialog.SetInitialFolder (dir);
 
-		fcd.AddFilter (ff);
+		Gio.File? choice = await fileDialog.OpenFileAsync (chrome.MainWindow);
 
-		Gtk.ResponseType response = await fcd.ShowAsync ();
+		if (choice is null) return;
 
-		if (response != Gtk.ResponseType.Accept)
-			return;
+		Gio.File? directory = choice.GetParent ();
 
-		Gio.File file = fcd.GetFile ()!;
-
-		Gio.File? directory = file.GetParent ();
 		if (directory is not null)
 			recent_files.LastDialogDirectory = directory;
 
 		// Open the image and add it to the layers
-		UserLayer layer = doc.Layers.AddNewLayer (file.GetDisplayName ());
+		UserLayer layer = doc.Layers.AddNewLayer (choice.GetDisplayName ());
 
-		using (Gio.FileInputStream fs = file.Read (null)) {
+		using (Gio.FileInputStream fs = choice.Read (null)) {
 			try {
 				using GdkPixbuf.Pixbuf bg = GdkPixbuf.Pixbuf.NewFromStream (fs, cancellable: null)!; // NRT: only nullable when an error is thrown
 				using Cairo.Context context = new (layer.Surface);
