@@ -246,24 +246,21 @@ public sealed class AddinManagerDialog : Adw.Window
 		using Gtk.FileFilter mpackFilter = CreateMpackFilter ();
 		using Gtk.FileFilter catchAllFilter = CreateCatchAllFilter ();
 
-		using Gtk.FileChooserNative dialog = Gtk.FileChooserNative.New (
-			Translations.GetString ("Install Extension Package"),
-			this,
-			Gtk.FileChooserAction.Open,
-			Translations.GetString ("Open"),
-			Translations.GetString ("Cancel"));
-		dialog.Modal = true;
-		dialog.SelectMultiple = true;
-		dialog.AddFilter (mpackFilter);
-		dialog.AddFilter (catchAllFilter);
+		using Gio.ListStore fileFilters = Gio.ListStore.New (Gtk.FileFilter.GetGType ());
+		fileFilters.Append (mpackFilter);
+		fileFilters.Append (catchAllFilter);
 
-		Gtk.ResponseType response = await dialog.ShowAsync ();
+		using Gtk.FileDialog fileDialog = Gtk.FileDialog.New ();
+		fileDialog.SetTitle (Translations.GetString ("Install Extension Package"));
+		fileDialog.SetFilters (fileFilters);
+		fileDialog.Modal = true;
 
-		if (response != Gtk.ResponseType.Accept)
-			return;
+		var choices = await fileDialog.OpenFilesAsync (this);
+
+		if (choices is null) return;
 
 		IReadOnlyList<string> files =
-			dialog.GetFileList ()
+			choices
 			.Select (f => f.GetPath () ?? string.Empty)
 			.Where (f => !string.IsNullOrEmpty (f))
 			.ToArray ();
