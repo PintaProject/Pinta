@@ -196,8 +196,10 @@ public sealed class TileEffect : BaseEffect
 		float preliminaryY)
 	{
 		if (IsOnSurface (settings, preliminaryX, preliminaryY)) {
-			int rowOffset = ((int) preliminaryY) * settings.size.Width;
-			int columnOffset = (int) (preliminaryX);
+			int floorX = (int) preliminaryX;
+			int floorY = (int) preliminaryY;
+			int rowOffset = floorY * settings.size.Width;
+			int columnOffset = floorX;
 			int pixelOffset = rowOffset + columnOffset;
 			return sourceData[pixelOffset];
 		}
