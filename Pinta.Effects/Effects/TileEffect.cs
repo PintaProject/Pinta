@@ -195,8 +195,12 @@ public sealed class TileEffect : BaseEffect
 		float preliminaryX,
 		float preliminaryY)
 	{
-		if (IsOnSurface (settings, preliminaryX, preliminaryY))
-			return source.GetBilinearSample (preliminaryX, preliminaryY);
+		if (IsOnSurface (settings, preliminaryX, preliminaryY)) {
+			int rowOffset = ((int) preliminaryY) * settings.size.Width;
+			int columnOffset = (int) (preliminaryX);
+			int pixelOffset = rowOffset + columnOffset;
+			return sourceData[pixelOffset];
+		}
 
 		return settings.edgeBehavior switch {
 			EdgeBehavior.Clamp => source.GetBilinearSampleClamped (sourceData, settings.size.Width, settings.size.Height, preliminaryX, preliminaryY),
