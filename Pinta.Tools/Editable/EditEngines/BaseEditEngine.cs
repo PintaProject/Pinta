@@ -489,6 +489,13 @@ public abstract class BaseEditEngine
 			case Gdk.Key.Right:
 				HandleRight (e);
 				return true;
+			case Gdk.Key.bracketleft:
+				if (BrushWidth > 1)
+					BrushWidth--;
+				return true;
+			case Gdk.Key.bracketright:
+				BrushWidth++;
+				return true;
 			default:
 				if (keyPressed.IsControlKey ()) {
 					// Redraw since the Ctrl key affects the hover cursor, etc

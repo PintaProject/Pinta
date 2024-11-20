@@ -49,7 +49,13 @@ public abstract class BaseBrushTool : BaseTool
 
 	protected override bool ShowAntialiasingButton => true;
 
-	protected int BrushWidth => brush_width?.GetValueAsInt () ?? DEFAULT_BRUSH_WIDTH;
+	protected int BrushWidth {
+		get => brush_width?.GetValueAsInt() ?? DEFAULT_BRUSH_WIDTH;
+		set {
+			if (brush_width is not null)
+				brush_width.Value = value;
+		}
+	}
 
 	protected override void OnBuildToolBar (Box tb)
 	{
@@ -84,6 +90,23 @@ public abstract class BaseBrushTool : BaseTool
 		surface_modified = false;
 		undo_surface = null;
 		mouse_button = MouseButton.None;
+	}
+
+	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
+	{
+		Gdk.Key keyPressed = e.Key;
+		switch (keyPressed)
+		{
+			case Gdk.Key.bracketleft:
+				if (BrushWidth > 1)
+					BrushWidth--;
+				return true;
+			case Gdk.Key.bracketright:
+				BrushWidth++;
+				return true;
+		}
+
+		return base.OnKeyDown (document, e);
 	}
 
 	protected override void OnSaveSettings (ISettingsService settings)
