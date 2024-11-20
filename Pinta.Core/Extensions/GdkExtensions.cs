@@ -27,7 +27,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Gdk;
+using Cairo;
 
 namespace Pinta.Core;
 
@@ -43,45 +43,45 @@ public static class GdkExtensions
 			osxLibraryName: "libgtk-4.1.dylib"
 		);
 	}
-	public static bool IsShiftPressed (this ModifierType m)
-		=> m.HasFlag (ModifierType.ShiftMask);
+	public static bool IsShiftPressed (this Gdk.ModifierType m)
+		=> m.HasFlag (Gdk.ModifierType.ShiftMask);
 
 	/// <summary>
 	/// Returns whether a Ctrl modifier is pressed (or the Cmd key on macOS).
 	/// </summary>
-	public static bool IsControlPressed (this ModifierType m)
+	public static bool IsControlPressed (this Gdk.ModifierType m)
 	{
-		if (PintaCore.System.OperatingSystem == OS.Mac) {
-			return m.HasFlag (ModifierType.MetaMask);
-		} else
-			return m.HasFlag (ModifierType.ControlMask);
+		if (PintaCore.System.OperatingSystem == OS.Mac)
+			return m.HasFlag (Gdk.ModifierType.MetaMask);
+		else
+			return m.HasFlag (Gdk.ModifierType.ControlMask);
 	}
 
-	public static bool IsAltPressed (this ModifierType m)
-		=> m.HasFlag (ModifierType.AltMask);
+	public static bool IsAltPressed (this Gdk.ModifierType m)
+		=> m.HasFlag (Gdk.ModifierType.AltMask);
 
-	public static bool IsLeftMousePressed (this ModifierType m)
-		=> m.HasFlag (ModifierType.Button1Mask);
+	public static bool IsLeftMousePressed (this Gdk.ModifierType m)
+		=> m.HasFlag (Gdk.ModifierType.Button1Mask);
 
-	public static bool IsRightMousePressed (this ModifierType m)
-		=> m.HasFlag (ModifierType.Button3Mask);
+	public static bool IsRightMousePressed (this Gdk.ModifierType m)
+		=> m.HasFlag (Gdk.ModifierType.Button3Mask);
 
 	/// <summary>
 	/// Returns whether this key is a Ctrl key (or the Cmd key on macOS).
 	/// </summary>
-	public static bool IsControlKey (this Key key)
+	public static bool IsControlKey (this Gdk.Key key)
 	{
 		if (PintaCore.System.OperatingSystem == OS.Mac)
-			return key == Key.Meta_L || key == Key.Meta_R;
+			return key == Gdk.Key.Meta_L || key == Gdk.Key.Meta_R;
 		else
-			return key == Key.Control_L || key == Key.Control_R;
+			return key == Gdk.Key.Control_L || key == Gdk.Key.Control_R;
 	}
 
 	/// <summary>
 	/// Returns whether any of the Ctrl/Cmd/Shift/Alt modifiers are active.
 	/// This prevents Caps Lock, Num Lock, etc from appearing as active modifier keys.
 	/// </summary>
-	public static bool HasModifierKey (this ModifierType current_state)
+	public static bool HasModifierKey (this Gdk.ModifierType current_state)
 		=> current_state.IsControlPressed () || current_state.IsShiftPressed () || current_state.IsAltPressed ();
 
 	/// <summary>
@@ -106,30 +106,32 @@ public static class GdkExtensions
 	{
 		Gdk.Texture img = PintaCore.Resources.GetIcon (imgName);
 
-		double zoom = 1d;
-		if (PintaCore.Workspace.HasOpenDocuments) {
-			zoom = Math.Min (30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale);
-		}
+		double zoom =
+			(PintaCore.Workspace.HasOpenDocuments)
+			? Math.Min (30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale)
+			: 1d;
 
-		shapeWidth = (int) Math.Min (800d, shapeWidth * zoom);
-		int halfOfShapeWidth = shapeWidth / 2;
+		int clampedWidth = (int) Math.Min (800d, shapeWidth * zoom);
+		int halfOfShapeWidth = clampedWidth / 2;
 
 		// Calculate bounding boxes around the both image and shape
 		// relative to the image top-left corner.
-		var imgBBox = new RectangleI (0, 0, img.Width, img.Height);
-		var shapeBBox = new RectangleI (
+
+		RectangleI imgBBox = new (0, 0, img.Width, img.Height);
+
+		RectangleI initialShapeBBox = new (
 			imgToShapeX - halfOfShapeWidth,
 			imgToShapeY - halfOfShapeWidth,
-			shapeWidth,
-			shapeWidth);
+			clampedWidth,
+			clampedWidth);
 
 		// Inflate shape bounding box to allow for anti-aliasing
-		shapeBBox = shapeBBox.Inflated (2, 2);
+		RectangleI inflatedBBox = initialShapeBBox.Inflated (2, 2);
 
 		// To determine required size of icon,
 		// find union of the image and shape bounding boxes
 		// (still relative to image top-left corner)
-		RectangleI iconBBox = imgBBox.Union (shapeBBox);
+		RectangleI iconBBox = imgBBox.Union (inflatedBBox);
 
 		// Image top-left corner in icon coordinates
 		int imgX = imgBBox.Left - iconBBox.Left;
@@ -139,19 +141,26 @@ public static class GdkExtensions
 		shapeX = imgToShapeX - iconBBox.Left;
 		shapeY = imgToShapeY - iconBBox.Top;
 
-		var i = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, iconBBox.Width, iconBBox.Height);
-		using Cairo.Context g = new (i);
+		ImageSurface i = CairoExtensions.CreateImageSurface (
+			Format.Argb32,
+			iconBBox.Width,
+			iconBBox.Height);
+
+		using Context g = new (i);
+
 		// Don't show shape if shapeWidth less than 3,
-		if (shapeWidth > 3) {
-			int diam = Math.Max (1, shapeWidth - 2);
-			var shapeRect = new RectangleD (
+		if (clampedWidth > 3) {
+
+			int diam = Math.Max (1, clampedWidth - 2);
+
+			RectangleD shapeRect = new (
 				shapeX - halfOfShapeWidth,
 				shapeY - halfOfShapeWidth,
 				diam,
 				diam);
 
-			Cairo.Color outerColor = new Cairo.Color (255, 255, 255, 0.75);
-			Cairo.Color innerColor = new Cairo.Color (0, 0, 0);
+			Color outerColor = new (255, 255, 255, 0.75);
+			Color innerColor = new (0, 0, 0);
 
 			switch (shape) {
 				case CursorShape.Ellipse:
@@ -168,36 +177,48 @@ public static class GdkExtensions
 		}
 
 		// Draw the image
-		var img_surf = img.ToSurface ();
+		ImageSurface img_surf = img.ToSurface ();
+
 		g.SetSourceSurface (img_surf, imgX, imgY);
 		g.Paint ();
 
-		return Texture.NewForPixbuf (i.ToPixbuf ());
+		return Gdk.Texture.NewForPixbuf (i.ToPixbuf ());
 	}
 
-	public static Key ToUpper (this Key k1)
+	public static Gdk.Key ToUpper (this Gdk.Key k1)
 	{
-		if (Enum.TryParse (k1.ToString ().ToUpperInvariant (), out Key result))
+		if (Enum.TryParse (k1.ToString ().ToUpperInvariant (), out Gdk.Key result))
 			return result;
-
-		return k1;
+		else
+			return k1;
 	}
 
 	// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard
-	public static Task<Texture?> ReadTextureAsync (this Gdk.Clipboard clipboard)
+	public static Task<Gdk.Texture?> ReadTextureAsync (this Gdk.Clipboard clipboard)
 	{
-		var tcs = new TaskCompletionSource<Texture?> ();
+		TaskCompletionSource<Gdk.Texture?> tcs = new ();
 
-		Gdk.Internal.Clipboard.ReadTextureAsync (clipboard.Handle, IntPtr.Zero, new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
-			IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (clipboard.Handle, args.Handle, out var error);
+		Gdk.Internal.Clipboard.ReadTextureAsync (
+			clipboard.Handle,
+			IntPtr.Zero,
+			new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
 
-			Texture? texture = texture = GObject.Internal.ObjectWrapper.WrapNullableHandle<Texture> (result, ownedRef: true);
+				IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (
+					clipboard.Handle,
+					args.Handle,
+					out var error);
 
-			if (!error.IsInvalid)
-				texture = null;
+				Gdk.Texture? texture = GObject.Internal.ObjectWrapper.WrapNullableHandle<Gdk.Texture> (
+					result,
+					ownedRef: true);
 
-			tcs.SetResult (texture);
-		}).NativeCallback, IntPtr.Zero);
+				if (!error.IsInvalid)
+					texture = null;
+
+				tcs.SetResult (texture);
+
+			}).NativeCallback,
+			IntPtr.Zero);
 
 		return tcs.Task;
 	}
@@ -217,15 +238,22 @@ public static class GdkExtensions
 	/// <summary>
 	/// Convert a texture to a Cairo surface.
 	/// </summary>
-	public static unsafe Cairo.ImageSurface ToSurface (this Gdk.Texture texture)
+	public static unsafe ImageSurface ToSurface (this Gdk.Texture texture)
 	{
-		var surf = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, texture.Width, texture.Height);
+		ImageSurface surf = CairoExtensions.CreateImageSurface (
+			Format.Argb32,
+			texture.Width,
+			texture.Height);
+
 		Span<byte> surf_data = surf.GetData ();
 
 		// TODO-GTK4 (bindings, unsubmitted) - needs support for primitive value arrays
 		var buffer = new byte[surf_data.Length];
 		fixed (byte* buffer_data = buffer)
-			Gdk.Internal.Texture.Download (texture.Handle, ref *buffer_data, (uint) surf.Stride);
+			Gdk.Internal.Texture.Download (
+				texture.Handle,
+				ref *buffer_data,
+				(uint) surf.Stride);
 
 		buffer.CopyTo (surf_data);
 		surf.MarkDirty ();
@@ -240,13 +268,13 @@ public static class GdkExtensions
 	// TODO-GTK4 (bindings) - Gdk.FileList.GetFiles() is not generated
 	public static Gio.File[] GetFilesHelper (this Gdk.FileList file_list)
 	{
-		var slist = new GLib.SList (FileListGetFiles (file_list.Handle));
+		GLib.SList slist = new (FileListGetFiles (file_list.Handle));
 
 		uint n = GLib.SList.Length (slist);
+
 		var result = new Gio.File[n];
-		for (uint i = 0; i < n; ++i) {
+		for (uint i = 0; i < n; ++i)
 			result[i] = new Gio.FileHelper (GLib.SList.NthData (slist, i), ownedRef: false);
-		}
 
 		return result;
 	}
