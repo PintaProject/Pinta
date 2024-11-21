@@ -38,7 +38,11 @@ namespace Pinta.Core;
 
 partial class CairoExtensions
 {
-	public static ColorBgra GetBilinearSample (this ImageSurface src, float x, float y)
+	public static ColorBgra GetBilinearSample (
+		this ImageSurface src,
+		float x,
+		float y
+	)
 		=> GetBilinearSample (
 			src,
 			src.GetReadOnlyPixelData (),
@@ -334,4 +338,4 @@ partial class CairoExtensions
 			0,
 			surfSource.Width,
 			surfSource.Height)!;
-		}
+}
