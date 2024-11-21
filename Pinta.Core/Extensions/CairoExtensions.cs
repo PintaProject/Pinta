@@ -935,6 +935,49 @@ namespace Pinta.Core
 			}
 		}
 
+		public static ColorBgra GetBilinearSampleReflected (
+			this ImageSurface src,
+			ReadOnlySpan<ColorBgra> src_data,
+			int srcWidth,
+			int srcHeight,
+			float x,
+			float y
+		) => src.GetBilinearSampleClamped (
+			src_data,
+			srcWidth,
+			srcHeight,
+			ReflectCoord (x, srcWidth),
+			ReflectCoord (y, srcHeight));
+
+		public static ColorBgra GetBilinearSampleReflected (
+			this ImageSurface src,
+			float x,
+			float y
+		) => GetBilinearSampleClamped (
+			src,
+			ReflectCoord (x, src.Width),
+			ReflectCoord (y, src.Height));
+
+		private static float ReflectCoord (float value, int max)
+		{
+			bool reflection = false;
+
+			while (value < 0) {
+				value += max;
+				reflection = !reflection;
+			}
+
+			while (value > max) {
+				value -= max;
+				reflection = !reflection;
+			}
+
+			if (reflection)
+				value = max - value;
+
+			return value;
+		}
+
 		public static void TranslatePointsInPlace (this Span<PointI> points, PointI delta)
 		{
 			for (int i = 0; i < points.Length; ++i)
