@@ -36,6 +36,7 @@ using Cairo;
 
 namespace Pinta.Core;
 
+// These are not intended to mutate the image surface
 partial class CairoExtensions
 {
 	/// <summary>
@@ -120,7 +121,7 @@ partial class CairoExtensions
 		return new (RegionCreateRectangle (ref cairo_rect));
 	}
 
-	public static bool ContainsPoint (this Cairo.Region region, int x, int y)
+	public static bool ContainsPoint (this Region region, int x, int y)
 		=> RegionContainsPoint (region.Handle, x, y);
 
 	public static RectangleD PathExtents (this Context context)
@@ -384,9 +385,9 @@ partial class CairoExtensions
 		return clip_exists;
 	}
 
-	private static void GetRectangle (this Cairo.Region region, int i, out CairoRectangleInt rect)
+	private static void GetRectangle (this Region region, int i, out CairoRectangleInt rect)
 		=> RegionGetRectangle (region.Handle, i, out rect);
 
-	private static int GetNumRectangles (this Cairo.Region region)
+	private static int GetNumRectangles (this Region region)
 		=> RegionNumRectangles (region.Handle);
 }

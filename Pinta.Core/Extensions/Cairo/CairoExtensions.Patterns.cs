@@ -40,6 +40,9 @@ namespace Pinta.Core;
 
 partial class CairoExtensions
 {
+	public static Pattern ToTiledPattern (this Surface surface)
+		=> new SurfacePattern (surface) { Extend = Extend.Repeat };
+
 	public static Pattern CreateTransparentBackgroundPattern (int size)
 		=>
 			CreateTransparentBackgroundSurface (size)

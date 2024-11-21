@@ -36,6 +36,7 @@ using Cairo;
 
 namespace Pinta.Core;
 
+// These operations mutate the surface
 partial class CairoExtensions
 {
 	// Most of these functions return an affected area
@@ -559,6 +560,24 @@ partial class CairoExtensions
 		g.DrawPixbuf (pixbuf, pixbuf_pos.X, pixbuf_pos.Y);
 	}
 
+	public static void Clear (this ImageSurface surface)
+	{
+		using Context g = new (surface) { Operator = Operator.Clear };
+		g.Paint ();
+	}
+
+	public static void Clear (this Context g, RectangleD roi)
+	{
+		g.Save ();
+
+		g.Rectangle (roi.X, roi.Y, roi.Width, roi.Height);
+		g.Clip ();
+		g.Operator = Operator.Clear;
+		g.Paint ();
+
+		g.Restore ();
+	}
+
 	public static Path CreatePolygonPath (
 		this Context g,
 		IReadOnlyList<IReadOnlyList<PointI>> polygonSet)
@@ -645,48 +664,11 @@ partial class CairoExtensions
 		g.Restore ();
 	}
 
-	public static void Clear (this ImageSurface surface)
+	public static void SetBlendMode (
+		this Context g,
+		BlendMode mode)
 	{
-		using Context g = new (surface) { Operator = Operator.Clear };
-		g.Paint ();
-	}
-
-	public static void Clear (this Context g, RectangleD roi)
-	{
-		g.Save ();
-
-		g.Rectangle (roi.X, roi.Y, roi.Width, roi.Height);
-		g.Clip ();
-		g.Operator = Operator.Clear;
-		g.Paint ();
-
-		g.Restore ();
-	}
-
-	public static ImageSurface Clone (this ImageSurface surf)
-	{
-		if (PintaCore.Workspace.HasOpenDocuments)
-			PintaCore.Workspace.ActiveDocument.SignalSurfaceCloned ();
-
-		ImageSurface newsurf = CreateImageSurface (
-			surf.Format,
-			surf.Width,
-			surf.Height);
-
-		using Context g = new (newsurf);
-
-		g.SetSourceSurface (surf, 0, 0);
-		g.Paint ();
-
-		return newsurf;
-	}
-
-	public static Path Clone (this Path path)
-	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
-		using Context g = new (doc.Layers.CurrentUserLayer.Surface);
-		g.AppendPath (path);
-		return g.CopyPath ();
+		g.Operator = GetBlendModeOperator (mode);
 	}
 
 	public static void MarkDirty (this ImageSurface surface, in RectangleI rect)
@@ -696,64 +678,6 @@ partial class CairoExtensions
 			rect.Y,
 			rect.Width,
 			rect.Height);
-	}
-
-	public static ImageSurface CreateTransparentBackgroundSurface (int size)
-	{
-		ImageSurface surface = CreateImageSurface (Format.Argb32, size, size);
-
-		// Draw the checkerboard
-		using Context g = new (surface);
-
-		// Fill white
-		g.FillRectangle (new RectangleD (0, 0, size, size), new Color (1, 1, 1));
-
-		Color color = new (0.78, 0.78, 0.78);
-		int half_size = size / 2;
-
-		// Draw gray squares
-		g.FillRectangle (new RectangleD (0, 0, half_size, half_size), color);
-		g.FillRectangle (new RectangleD (half_size, half_size, half_size, half_size), color);
-
-		return surface;
-	}
-
-	public static Pattern ToTiledPattern (this Surface surface)
-		=> new SurfacePattern (surface) { Extend = Extend.Repeat };
-
-	public static void SetSourceSurface (
-		this Context g,
-		Surface surface,
-		ResamplingMode resamplingMode)
-	{
-		SurfacePattern src_pattern = new (surface) {
-			Filter = resamplingMode.ToCairoFilter (),
-		};
-
-		g.SetSource (src_pattern);
-	}
-
-	/// <summary>
-	/// Wrapper method to create an ImageSurface and handle allocation failures.
-	/// </summary>
-	public static ImageSurface CreateImageSurface (
-		Format format,
-		int width,
-		int height)
-	{
-		ImageSurface surf = new (format, width, height);
-
-		if (surf == null || surf.Status == Cairo.Status.NoMemory)
-			throw new OutOfMemoryException ("Unable to allocate memory for image");
-
-		return surf;
-	}
-
-	public static void SetBlendMode (
-		this Context g,
-		BlendMode mode)
-	{
-		g.Operator = GetBlendModeOperator (mode);
 	}
 
 	private static Operator GetBlendModeOperator (BlendMode mode)
