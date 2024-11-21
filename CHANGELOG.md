@@ -18,6 +18,7 @@ Thanks to the following contributors who worked on this release:
 - @f-i-l-i-p
 
 ### Added
+- Ability to choose tile type (#1051) and edge behavior (#1141) in tile reflection effect
 - Ported to GTK4 and libadwaita
 - Upgraded the minimum required .NET version to 8.0
 - Restored support for add-ins, which had been disabled in Pinta 2.0 due to technical limitations
