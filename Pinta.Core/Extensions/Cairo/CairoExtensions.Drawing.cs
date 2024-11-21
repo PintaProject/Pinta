@@ -95,22 +95,6 @@ partial class CairoExtensions
 	}
 
 	/// <returns>Bounding rectangle of changed area</returns>
-	public static RectangleD StrokeExtents (this Context g)
-	{
-		g.StrokeExtents (
-			out double x1,
-			out double y1,
-			out double x2,
-			out double y2);
-
-		return new (
-			x1,
-			y1,
-			x2 - x1,
-			y2 - y1);
-	}
-
-	/// <returns>Bounding rectangle of changed area</returns>
 	public static RectangleD FillRectangle (
 		this Context g,
 		RectangleD r,
@@ -615,62 +599,6 @@ partial class CairoExtensions
 		g.Rectangle (r.X, r.Y, r.Width, r.Height);
 	}
 
-	public static void BlendSurface (
-		this Context g,
-		Surface src,
-		BlendMode mode = BlendMode.Normal,
-		double opacity = 1.0)
-	{
-		g.Save ();
-
-		g.SetBlendMode (mode);
-		g.SetSourceSurface (src, 0, 0);
-		g.PaintWithAlpha (opacity);
-
-		g.Restore ();
-	}
-
-	public static void BlendSurface (
-		this Context g,
-		Surface src,
-		RectangleD roi,
-		BlendMode mode = BlendMode.Normal,
-		double opacity = 1.0)
-	{
-		g.Save ();
-
-		g.Rectangle (roi);
-		g.Clip ();
-		g.SetBlendMode (mode);
-		g.SetSourceSurface (src, 0, 0);
-		g.PaintWithAlpha (opacity);
-
-		g.Restore ();
-	}
-	public static void BlendSurface (
-		this Context g,
-		Surface src,
-		PointD offset,
-		BlendMode mode = BlendMode.Normal,
-		double opacity = 1.0)
-	{
-		g.Save ();
-
-		g.Translate (offset.X, offset.Y);
-		g.SetBlendMode (mode);
-		g.SetSourceSurface (src, 0, 0);
-		g.PaintWithAlpha (opacity);
-
-		g.Restore ();
-	}
-
-	public static void SetBlendMode (
-		this Context g,
-		BlendMode mode)
-	{
-		g.Operator = GetBlendModeOperator (mode);
-	}
-
 	public static void MarkDirty (this ImageSurface surface, in RectangleI rect)
 	{
 		surface.MarkDirty (
@@ -678,68 +606,5 @@ partial class CairoExtensions
 			rect.Y,
 			rect.Width,
 			rect.Height);
-	}
-
-	private static Operator GetBlendModeOperator (BlendMode mode)
-		=> mode switch {
-			BlendMode.Normal => Operator.Over,
-			BlendMode.Multiply => (Operator) ExtendedOperators.Multiply,
-			BlendMode.ColorBurn => (Operator) ExtendedOperators.ColorBurn,
-			BlendMode.ColorDodge => (Operator) ExtendedOperators.ColorDodge,
-			BlendMode.HardLight => (Operator) ExtendedOperators.HardLight,
-			BlendMode.SoftLight => (Operator) ExtendedOperators.SoftLight,
-			BlendMode.Overlay => (Operator) ExtendedOperators.Overlay,
-			BlendMode.Difference => (Operator) ExtendedOperators.Difference,
-			BlendMode.Color => (Operator) ExtendedOperators.HslColor,
-			BlendMode.Luminosity => (Operator) ExtendedOperators.HslLuminosity,
-			BlendMode.Hue => (Operator) ExtendedOperators.HslHue,
-			BlendMode.Saturation => (Operator) ExtendedOperators.HslSaturation,
-			BlendMode.Lighten => (Operator) ExtendedOperators.Lighten,
-			BlendMode.Darken => (Operator) ExtendedOperators.Darken,
-			BlendMode.Screen => (Operator) ExtendedOperators.Screen,
-			BlendMode.Xor => Operator.Xor,
-			_ => throw new ArgumentOutOfRangeException (nameof (mode)),
-		};
-
-
-
-	private static Status Xor (this Region region, Region other)
-		=> RegionXor (region.Handle, other.Handle);
-
-	public enum ExtendedOperators
-	{
-		Clear = 0,
-
-		Source = 1,
-		SourceOver = 2,
-		SourceIn = 3,
-		SourceOut = 4,
-		SourceAtop = 5,
-
-		Destination = 6,
-		DestinationOver = 7,
-		DestinationIn = 8,
-		DestinationOut = 9,
-		DestinationAtop = 10,
-
-		Xor = 11,
-		Add = 12,
-		Saturate = 13,
-
-		Multiply = 14,
-		Screen = 15,
-		Overlay = 16,
-		Darken = 17,
-		Lighten = 18,
-		ColorDodge = 19,
-		ColorBurn = 20,
-		HardLight = 21,
-		SoftLight = 22,
-		Difference = 23,
-		Exclusion = 24,
-		HslHue = 25,
-		HslSaturation = 26,
-		HslColor = 27,
-		HslLuminosity = 28,
 	}
 }

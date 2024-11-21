@@ -39,6 +39,22 @@ namespace Pinta.Core;
 // These are not intended to mutate the image surface
 partial class CairoExtensions
 {
+	/// <returns>Bounding rectangle of changed area</returns>
+	public static RectangleD StrokeExtents (this Context g)
+	{
+		g.StrokeExtents (
+			out double x1,
+			out double y1,
+			out double x2,
+			out double y2);
+
+		return new (
+			x1,
+			y1,
+			x2 - x1,
+			y2 - y1);
+	}
+
 	/// <summary>
 	/// Computes and returns the Union (largest possible combination) of two Rectangles.
 	/// The two given Rectangles do not need to intersect.
