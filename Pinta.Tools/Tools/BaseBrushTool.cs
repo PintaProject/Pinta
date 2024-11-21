@@ -50,7 +50,7 @@ public abstract class BaseBrushTool : BaseTool
 	protected override bool ShowAntialiasingButton => true;
 
 	protected int BrushWidth {
-		get => brush_width?.GetValueAsInt() ?? DEFAULT_BRUSH_WIDTH;
+		get => brush_width?.GetValueAsInt () ?? DEFAULT_BRUSH_WIDTH;
 		set {
 			if (brush_width is not null)
 				brush_width.Value = value;
@@ -95,11 +95,9 @@ public abstract class BaseBrushTool : BaseTool
 	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
 	{
 		Gdk.Key keyPressed = e.Key;
-		switch (keyPressed)
-		{
+		switch (keyPressed) {
 			case Gdk.Key.bracketleft:
-				if (BrushWidth > 1)
-					BrushWidth--;
+				BrushWidth--;
 				return true;
 			case Gdk.Key.bracketright:
 				BrushWidth++;

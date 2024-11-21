@@ -181,8 +181,7 @@ public abstract class BaseEditEngine
 
 	protected virtual void BrushMinusButtonClickedEvent (object? o, EventArgs args)
 	{
-		if (BrushWidth > 1)
-			BrushWidth--;
+		BrushWidth--;
 
 		//No need to store previous settings or redraw, as this is done in the Changed event handler.
 	}
@@ -490,8 +489,7 @@ public abstract class BaseEditEngine
 				HandleRight (e);
 				return true;
 			case Gdk.Key.bracketleft:
-				if (BrushWidth > 1)
-					BrushWidth--;
+				BrushWidth--;
 				return true;
 			case Gdk.Key.bracketright:
 				BrushWidth++;
