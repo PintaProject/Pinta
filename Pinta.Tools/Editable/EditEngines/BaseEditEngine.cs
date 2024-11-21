@@ -277,6 +277,7 @@ public abstract class BaseEditEngine
 		if (brush_width == null) {
 
 			brush_width = GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, settings.GetSetting (BRUSH_WIDTH_SETTING (toolPrefix), BaseTool.DEFAULT_BRUSH_WIDTH));
+			brush_width.TooltipText = Translations.GetString ("Change brush width. Shortcut keys: [ ]");
 
 			brush_width.OnValueChanged += (o, e) => {
 

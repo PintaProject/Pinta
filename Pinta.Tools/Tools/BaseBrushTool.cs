@@ -45,6 +45,8 @@ public abstract class BaseBrushTool : BaseTool
 	protected BaseBrushTool (IServiceProvider services) : base (services)
 	{
 		Palette = services.GetService<IPaletteService> ();
+
+		BrushWidthSpinButton.TooltipText = Translations.GetString ("Change brush width. Shortcut keys: [ ]");
 	}
 
 	protected override bool ShowAntialiasingButton => true;
