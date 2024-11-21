@@ -200,18 +200,6 @@ public static partial class GtkExtensions
 		SelectionChangedSignal.Connect (o, handler);
 	}
 
-	// TODO-GTK4 (bindings) - wrapper for GetFiles() since Gio.ListModel.GetObject doesn't return a Gio.File instance (https://github.com/gircore/gir.core/issues/838)
-	public static IReadOnlyList<Gio.File> GetFileList (this Gtk.FileChooser file_chooser)
-	{
-		List<Gio.File> result = new ();
-
-		Gio.ListModel files = file_chooser.GetFiles ();
-		for (uint i = 0, n = files.GetNItems (); i < n; ++i)
-			result.Add (new Gio.FileHelper (files.GetItem (i), ownedRef: true));
-
-		return result;
-	}
-
 	// Manual binding for GetPreeditString
 	// TODO-GTK4 (bindings) - missing from gir.core: "opaque record parameter 'attrs' with direction != in not yet supported"
 	[DllImport (GtkLibraryName, EntryPoint = "gtk_im_context_get_preedit_string")]

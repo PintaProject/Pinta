@@ -64,6 +64,7 @@ partial class GtkExtensions
 
 		if (selection is null) return null;
 
+		// TODO-GTK4 (bindings) - Gio.ListModel.GetObject doesn't return a Gio.File instance (https://github.com/gircore/gir.core/issues/838)
 		uint itemCount = selection.GetNItems ();
 		var result = new Gio.File[itemCount];
 		for (uint i = 0; i < itemCount; i++) {
