@@ -16,6 +16,7 @@ Thanks to the following contributors who worked on this release:
 - @potatoes1286
 - @TheodorLasse
 - @f-i-l-i-p
+- @solarnomad7
 
 ### Added
 - Ported to GTK4 and libadwaita
@@ -37,6 +38,7 @@ Thanks to the following contributors who worked on this release:
 - The Windows build of Pinta now supports loading `.webp` images (#770)
 - Improved zooming behavior with trackpads, including support for the pinch to zoom gesture (#634, #715)
 - The Windows installer is now signed, thanks to the support of [SignPath](https://about.signpath.io/) (#1054)
+- The brush size and line width settings for many tools can now be adjusted with the `[` and `]` keyboard shortcuts (#796, #1155)
 
 ### Changed
 - Due to API changes in GTK4, the File -> New Screenshot option now invokes platform-specific tools (the XDG screenshot portal on Linux, and the screenshot tool on maCOS). This is currently unsupported on Windows
