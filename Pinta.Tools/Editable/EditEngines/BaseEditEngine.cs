@@ -181,8 +181,7 @@ public abstract class BaseEditEngine
 
 	protected virtual void BrushMinusButtonClickedEvent (object? o, EventArgs args)
 	{
-		if (BrushWidth > 1)
-			BrushWidth--;
+		BrushWidth--;
 
 		//No need to store previous settings or redraw, as this is done in the Changed event handler.
 	}
@@ -278,6 +277,7 @@ public abstract class BaseEditEngine
 		if (brush_width == null) {
 
 			brush_width = GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, settings.GetSetting (BRUSH_WIDTH_SETTING (toolPrefix), BaseTool.DEFAULT_BRUSH_WIDTH));
+			brush_width.TooltipText = Translations.GetString ("Change brush width. Shortcut keys: [ ]");
 
 			brush_width.OnValueChanged += (o, e) => {
 
@@ -488,6 +488,12 @@ public abstract class BaseEditEngine
 				return true;
 			case Gdk.Key.Right:
 				HandleRight (e);
+				return true;
+			case Gdk.Key.bracketleft:
+				BrushWidth--;
+				return true;
+			case Gdk.Key.bracketright:
+				BrushWidth++;
 				return true;
 			default:
 				if (keyPressed.IsControlKey ()) {
