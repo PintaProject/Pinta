@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-17 01:41+0000\n"
+"POT-Creation-Date: 2024-11-24 01:43+0000\n"
 "PO-Revision-Date: 2023-02-23 05:42+0000\n"
 "Last-Translator: Wu Tang <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
@@ -61,7 +61,7 @@ msgid "About Pinta"
 msgstr "关于 Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:375
+#: ../Pinta.Core/Actions/LayerActions.cs:371
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "添加新图层"
@@ -74,7 +74,7 @@ msgstr "增加噪点"
 msgid "Add-in Manager..."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:821
 msgid "Added"
 msgstr "已添加"
 
@@ -91,9 +91,9 @@ msgstr "选择后"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:106
+#: ../Pinta.Core/Actions/EditActions.cs:472
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "全部文件"
 
@@ -260,8 +260,8 @@ msgstr "亮度 / 对比度"
 msgid "Brush Size"
 msgstr "笔刷尺寸"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:272
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:124
 msgid "Brush width"
 msgstr "笔刷粗细"
 
@@ -284,12 +284,8 @@ msgstr "按绝对尺寸："
 msgid "By percentage:"
 msgstr "按百分比："
 
-#: ../Pinta.Core/Actions/EditActions.cs:398
-#: ../Pinta.Core/Actions/EditActions.cs:421
-#: ../Pinta.Core/Actions/LayerActions.cs:174
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:409
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "取消"
@@ -339,6 +335,11 @@ msgstr "居中对齐"
 msgid "Centimeters"
 msgstr "厘米"
 
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+msgid "Change brush width. Shortcut keys: [ ]"
+msgstr ""
+
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr "更改形状类型"
@@ -368,7 +369,7 @@ msgstr "选取副颜色"
 msgid "Circles"
 msgstr "圆圈"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:30
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
 msgstr "限制范围"
 
@@ -564,7 +565,7 @@ msgstr "覆盖范围"
 msgid "Crop to Selection"
 msgstr "裁剪到选择部分"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:218
+#: ../Pinta.Effects/Effects/TileEffect.cs:246
 msgid "Curved"
 msgstr ""
 
@@ -604,11 +605,11 @@ msgid "Default"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:354
+#: ../Pinta.Core/Actions/LayerActions.cs:350
 msgid "Delete Layer"
 msgstr "删除图层"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:660
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:666
 msgid "Deleted"
 msgstr "已删除"
 
@@ -666,7 +667,7 @@ msgid "Download size: {0}"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:341
+#: ../Pinta.Core/Actions/LayerActions.cs:337
 msgid "Duplicate Layer"
 msgstr "复制图层"
 
@@ -674,7 +675,7 @@ msgstr "复制图层"
 msgid "Easily create and edit images"
 msgstr "轻松创建和编辑图像"
 
-#: Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:236 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "边缘行为"
 
@@ -739,7 +740,7 @@ msgstr "排除 (-) (右键)"
 msgid "Expand"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:286
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
 msgstr ""
 
@@ -817,8 +818,8 @@ msgstr "填充形式"
 msgid "Fill and Outline Shape"
 msgstr "填充和边框"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1089
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1359
 msgid "Finalized"
 msgstr "已完成"
 
@@ -1002,8 +1003,8 @@ msgstr "图像标签"
 msgid "Image cannot be pasted"
 msgstr "无法粘贴图像"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:115
+#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "图像文件"
 
@@ -1015,7 +1016,7 @@ msgstr "图像比画布大"
 msgid "Image too large"
 msgstr "图像太大"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:230
+#: ../Pinta.Core/Actions/LayerActions.cs:228
 msgid "Import From File"
 msgstr "从文件导入"
 
@@ -1048,7 +1049,7 @@ msgstr "输入直方图"
 msgid "Install"
 msgstr "安装"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:250
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
 msgstr ""
 
@@ -1066,7 +1067,7 @@ msgstr "已安装"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
-#: ../Pinta.Effects/Effects/TileEffect.cs:205
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
 msgid "Intensity"
 msgstr "亮度"
 
@@ -1082,7 +1083,7 @@ msgid "Invert Colors"
 msgstr "反色"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:479
+#: ../Pinta.Core/Actions/EditActions.cs:493
 msgid "Invert Selection"
 msgstr "反向选择"
 
@@ -1351,7 +1352,7 @@ msgid "Median"
 msgstr "中值"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:307
+#: ../Pinta.Core/Actions/LayerActions.cs:303
 msgid "Merge Layer Down"
 msgstr "向下合并图层"
 
@@ -1359,7 +1360,7 @@ msgstr "向下合并图层"
 msgid "Mode"
 msgstr "模式"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:899
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:905
 msgid "Modified"
 msgstr "已修改"
 
@@ -1372,12 +1373,12 @@ msgid "Motion Blur"
 msgstr "动态模糊"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:288
+#: ../Pinta.Core/Actions/LayerActions.cs:284
 msgid "Move Layer Down"
 msgstr "下移图层"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:272
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Up"
 msgstr "上移图层"
 
@@ -1486,11 +1487,7 @@ msgstr "油画"
 msgid "Opacity:"
 msgstr "透明度："
 
-#: ../Pinta.Core/Actions/EditActions.cs:397
 #: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:173
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "打开"
 
@@ -1502,8 +1499,8 @@ msgstr "开放曲线形状"
 msgid "Open Image"
 msgstr "打开图像"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:170
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "打开图像文件"
 
@@ -1511,7 +1508,7 @@ msgstr "打开图像文件"
 msgid "Open Line/Curve Series"
 msgstr "开放直线/曲线系列"
 
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Open Palette File"
 msgstr "打开调色板文件"
 
@@ -1524,7 +1521,7 @@ msgstr "打开..."
 msgid "Orientation:"
 msgstr "方向："
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:48
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
 msgstr "原始"
 
@@ -1582,7 +1579,7 @@ msgstr "画笔"
 msgid "Palette"
 msgstr "调色板"
 
-#: ../Pinta.Core/Actions/EditActions.cs:381
+#: ../Pinta.Core/Actions/EditActions.cs:455
 msgid "Palette files"
 msgstr "调色板文件"
 
@@ -1688,12 +1685,12 @@ msgstr "像素"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:785
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:605
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:791
 msgid "Point Added"
 msgstr "点已添加"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:646
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:652
 msgid "Point Deleted"
 msgstr "点已删除"
 
@@ -1735,7 +1732,7 @@ msgstr "预设："
 msgid "Preview"
 msgstr "预览"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:39
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
 msgstr "主要"
 
@@ -1847,7 +1844,7 @@ msgstr "重做"
 msgid "Reduce Noise"
 msgstr "减少噪点"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:36
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
 msgstr "反射"
 
@@ -1965,7 +1962,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "逆时针旋转90°"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:199
+#: ../Pinta.Effects/Effects/TileEffect.cs:224
 msgid "Rotation"
 msgstr "旋转"
 
@@ -2002,7 +1999,7 @@ msgstr "饱和度"
 msgid "Saturation Percentage"
 msgstr "饱和率"
 
-#: ../Pinta.Core/Actions/EditActions.cs:420
+#: ../Pinta.Core/Actions/EditActions.cs:408
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2021,7 +2018,7 @@ msgstr "另存为..."
 msgid "Save Image File"
 msgstr "保存图像文件"
 
-#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/EditActions.cs:405
 msgid "Save Palette File"
 msgstr "保存调色板文件"
 
@@ -2038,7 +2035,7 @@ msgstr "缩放"
 msgid "Screen"
 msgstr "屏幕"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:42
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
 msgstr "次要"
 
@@ -2063,7 +2060,7 @@ msgstr "设置颜色数量"
 msgid "Shape Type"
 msgstr "形状类型"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:215
+#: ../Pinta.Effects/Effects/TileEffect.cs:243
 msgid "Sharp Edges"
 msgstr ""
 
@@ -2247,11 +2244,11 @@ msgstr ""
 msgid "Tile Reflection"
 msgstr "瓷砖反射效果"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:202
+#: ../Pinta.Effects/Effects/TileEffect.cs:227
 msgid "Tile Size"
 msgstr "方块大小"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:208
+#: ../Pinta.Effects/Effects/TileEffect.cs:233
 msgid "Tile Type"
 msgstr ""
 
@@ -2307,7 +2304,7 @@ msgstr "翻译这个应用程序"
 msgid "Transparency Mode"
 msgstr "透明模式"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:45
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr "透明"
@@ -2445,7 +2442,7 @@ msgstr "宽度："
 msgid "Window"
 msgstr "窗口"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:33
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
 msgid "Wrap"
 msgstr "循环"
 

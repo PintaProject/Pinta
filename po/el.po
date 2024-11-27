@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-17 01:41+0000\n"
+"POT-Creation-Date: 2024-11-24 01:43+0000\n"
 "PO-Revision-Date: 2024-11-11 20:02+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
@@ -61,7 +61,7 @@ msgid "About Pinta"
 msgstr "Σχετικά με το Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:375
+#: ../Pinta.Core/Actions/LayerActions.cs:371
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Προσθήκη νέου επιπέδου"
@@ -74,7 +74,7 @@ msgstr "Προσθήκη θορύβου"
 msgid "Add-in Manager..."
 msgstr "Διαχείριση προσθέτων..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:821
 msgid "Added"
 msgstr "Προστέθηκε"
 
@@ -91,9 +91,9 @@ msgstr "Μετά την επιλογή"
 msgid "Align Object"
 msgstr "Ευθυγράμμιση αντικειμένου"
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:106
+#: ../Pinta.Core/Actions/EditActions.cs:472
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
@@ -260,8 +260,8 @@ msgstr "Φωτεινότητα / αντίθεση"
 msgid "Brush Size"
 msgstr "Μέγεθος πινέλου"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:272
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:124
 msgid "Brush width"
 msgstr "Πλάτος βούρτσας"
 
@@ -284,12 +284,8 @@ msgstr "Σε απόλυτο μέγεθος:"
 msgid "By percentage:"
 msgstr "Σε ποσοστό:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:398
-#: ../Pinta.Core/Actions/EditActions.cs:421
-#: ../Pinta.Core/Actions/LayerActions.cs:174
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:409
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Ακύρωση"
@@ -339,6 +335,11 @@ msgstr "Στο κέντρο"
 msgid "Centimeters"
 msgstr "Εκατοστά"
 
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+msgid "Change brush width. Shortcut keys: [ ]"
+msgstr ""
+
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr "Τροποποιημένος τύπος σχήματος"
@@ -368,7 +369,7 @@ msgstr "Επιλογή δευτερεύοντος χρώματος"
 msgid "Circles"
 msgstr "Κύκλοι"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:30
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
 msgstr "Σφιγκτήρας"
 
@@ -573,7 +574,7 @@ msgstr "Κάλυψη"
 msgid "Crop to Selection"
 msgstr "Περικοπή στην επιλογή"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:218
+#: ../Pinta.Effects/Effects/TileEffect.cs:246
 msgid "Curved"
 msgstr "Κυρτό"
 
@@ -613,11 +614,11 @@ msgid "Default"
 msgstr "Προεπιλεγμένο"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:354
+#: ../Pinta.Core/Actions/LayerActions.cs:350
 msgid "Delete Layer"
 msgstr "Διαγραφή επιπέδου"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:660
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:666
 msgid "Deleted"
 msgstr "Διαγράφηκε"
 
@@ -675,7 +676,7 @@ msgid "Download size: {0}"
 msgstr "Μέγεθος λήψης: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:341
+#: ../Pinta.Core/Actions/LayerActions.cs:337
 msgid "Duplicate Layer"
 msgstr "Διπλότυπο επιπέδου"
 
@@ -683,7 +684,7 @@ msgstr "Διπλότυπο επιπέδου"
 msgid "Easily create and edit images"
 msgstr "Δημιουργήστε και επεξεργαστείτε εικόνες εύκολα"
 
-#: Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:236 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Συμπεριφορά άκρων"
 
@@ -748,7 +749,7 @@ msgstr "Αποκλεισμός (-) (δεξί κλικ)"
 msgid "Expand"
 msgstr "Επέκταση"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:286
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
 msgstr "Πακέτα προσθέτων"
 
@@ -826,8 +827,8 @@ msgstr "Στυλ γεμίσματος"
 msgid "Fill and Outline Shape"
 msgstr "Σχήμα γεμίσματος και περιγράμματος"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1089
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1359
 msgid "Finalized"
 msgstr "Τελοιοποιήθηκε"
 
@@ -1014,8 +1015,8 @@ msgstr "Καρτέλες εικόνας"
 msgid "Image cannot be pasted"
 msgstr "Η εικόνα δεν μπορεί να επικολληθεί"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:115
+#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "Αρχεία εικόνων"
 
@@ -1027,7 +1028,7 @@ msgstr "Η εικόνα είναι μεγαλύτερη από τον καμβά
 msgid "Image too large"
 msgstr "Η εικόνα είναι πολύ μεγάλη"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:230
+#: ../Pinta.Core/Actions/LayerActions.cs:228
 msgid "Import From File"
 msgstr "Εισαγωγή από αρχείο"
 
@@ -1060,7 +1061,7 @@ msgstr "Ιστόγραμμα εισόδου"
 msgid "Install"
 msgstr "Εγκατάσταση"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:250
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
 msgstr "Εγκατάσταση πακέτου προσθέτου"
 
@@ -1078,7 +1079,7 @@ msgstr "Εγκαταστάθηκε"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
-#: ../Pinta.Effects/Effects/TileEffect.cs:205
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
 msgid "Intensity"
 msgstr "Ένταση"
 
@@ -1094,7 +1095,7 @@ msgid "Invert Colors"
 msgstr "Αντιστροφή χρωμάτων"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:479
+#: ../Pinta.Core/Actions/EditActions.cs:493
 msgid "Invert Selection"
 msgstr "Αντιστροφή επιλογής"
 
@@ -1398,7 +1399,7 @@ msgid "Median"
 msgstr "Διάμεση τιμή"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:307
+#: ../Pinta.Core/Actions/LayerActions.cs:303
 msgid "Merge Layer Down"
 msgstr "Συγχώνευση επιπέδου προς τα κάτω"
 
@@ -1406,7 +1407,7 @@ msgstr "Συγχώνευση επιπέδου προς τα κάτω"
 msgid "Mode"
 msgstr "Λειτουργία"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:899
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:905
 msgid "Modified"
 msgstr "Τροποποιήθηκε"
 
@@ -1419,12 +1420,12 @@ msgid "Motion Blur"
 msgstr "Θόλωση κίνησης"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:288
+#: ../Pinta.Core/Actions/LayerActions.cs:284
 msgid "Move Layer Down"
 msgstr "Μετακίνηση επιπέδου προς τα κάτω"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:272
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Up"
 msgstr "Μετακίνηση επιπέδου προς τα πάνω"
 
@@ -1533,11 +1534,7 @@ msgstr "Ζωγραφική λαδομπογιάς"
 msgid "Opacity:"
 msgstr "Αδιαφάνεια:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:397
 #: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:173
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "Άνοιγμα"
 
@@ -1549,8 +1546,8 @@ msgstr "Σχήμα ανοικτής καμπύλης"
 msgid "Open Image"
 msgstr "Άνοιγμα εικόνας"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:170
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "Άνοιγμα αρχείου εικόνας"
 
@@ -1558,7 +1555,7 @@ msgstr "Άνοιγμα αρχείου εικόνας"
 msgid "Open Line/Curve Series"
 msgstr "Άνοιγμα σειράς Γραμμής/Καμπύλης"
 
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Open Palette File"
 msgstr "Άνοιγμα αρχείου παλέτας"
 
@@ -1571,7 +1568,7 @@ msgstr "Άνοιγμα..."
 msgid "Orientation:"
 msgstr "Προσανατολισμός:"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:48
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
 msgstr "Αρχικό"
 
@@ -1629,7 +1626,7 @@ msgstr "Πινέλο"
 msgid "Palette"
 msgstr "Παλέτα"
 
-#: ../Pinta.Core/Actions/EditActions.cs:381
+#: ../Pinta.Core/Actions/EditActions.cs:455
 msgid "Palette files"
 msgstr "Αρχεία παλέτας"
 
@@ -1739,12 +1736,12 @@ msgstr "Εικονοστοιχεία"
 msgid "Piña Colada"
 msgstr "Πίνα Κολάδα"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:785
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:605
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:791
 msgid "Point Added"
 msgstr "Το σημείο προστέθηκε"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:646
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:652
 msgid "Point Deleted"
 msgstr "Το σημείο διαγράφηκε"
 
@@ -1786,7 +1783,7 @@ msgstr "Προκαθορισμένο:"
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:39
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
 msgstr "Πρωτεύον"
 
@@ -1898,7 +1895,7 @@ msgstr "Επανάληψη τελευταίας ενέργειας"
 msgid "Reduce Noise"
 msgstr "Μείωση θορύβου"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:36
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
 msgstr "Αντανάκλαση"
 
@@ -2016,7 +2013,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Περιστροφή 90° αριστερόστροφα"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:199
+#: ../Pinta.Effects/Effects/TileEffect.cs:224
 msgid "Rotation"
 msgstr "Περιστροφή"
 
@@ -2053,7 +2050,7 @@ msgstr "Κορεσμός"
 msgid "Saturation Percentage"
 msgstr "Ποσοστό κορεσμού"
 
-#: ../Pinta.Core/Actions/EditActions.cs:420
+#: ../Pinta.Core/Actions/EditActions.cs:408
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2072,7 +2069,7 @@ msgstr "Αποθήκευση ως…"
 msgid "Save Image File"
 msgstr "Αποθήκευση αρχείου εικόνας"
 
-#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/EditActions.cs:405
 msgid "Save Palette File"
 msgstr "Αποθήκευση Αρχείου Παλέτας"
 
@@ -2089,7 +2086,7 @@ msgstr "Κλίμακα"
 msgid "Screen"
 msgstr "Οθόνη"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:42
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
 msgstr "Δευτερεύον"
 
@@ -2114,7 +2111,7 @@ msgstr "Καθορισμός αριθμού χρωμάτων"
 msgid "Shape Type"
 msgstr "Τύπος Σχήματος"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:215
+#: ../Pinta.Effects/Effects/TileEffect.cs:243
 msgid "Sharp Edges"
 msgstr "Αιχμηρές άκρες"
 
@@ -2305,11 +2302,11 @@ msgstr "Αυτός ο τύπος αρχείου δεν υποστηρίζει ε
 msgid "Tile Reflection"
 msgstr "Αντανάκλαση πλακιδίου"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:202
+#: ../Pinta.Effects/Effects/TileEffect.cs:227
 msgid "Tile Size"
 msgstr "Μέγεθος στοιχείων"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:208
+#: ../Pinta.Effects/Effects/TileEffect.cs:233
 msgid "Tile Type"
 msgstr "Τύπος ψηφίδας"
 
@@ -2365,7 +2362,7 @@ msgstr "Μεταφράστε την εφαρμογή"
 msgid "Transparency Mode"
 msgstr "Λειτουργίας διαφάνειας"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:45
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr "Διαφανές"
@@ -2504,7 +2501,7 @@ msgstr "Πλάτος:"
 msgid "Window"
 msgstr "Παράθυρο"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:33
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
 msgid "Wrap"
 msgstr "Αναδίπλωση"
 

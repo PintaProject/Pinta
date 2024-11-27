@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-17 01:41+0000\n"
+"POT-Creation-Date: 2024-11-24 01:43+0000\n"
 "PO-Revision-Date: 2023-12-20 15:51+0000\n"
 "Last-Translator: Miraficus <6325410@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/pinta/pinta/cs/>\n"
@@ -61,7 +61,7 @@ msgid "About Pinta"
 msgstr "O Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:375
+#: ../Pinta.Core/Actions/LayerActions.cs:371
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Přidat novou vrstvu"
@@ -74,7 +74,7 @@ msgstr "Přidat šum"
 msgid "Add-in Manager..."
 msgstr "Manažer addonů"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:821
 msgid "Added"
 msgstr "Přidané"
 
@@ -91,9 +91,9 @@ msgstr "Po výběru"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:106
+#: ../Pinta.Core/Actions/EditActions.cs:472
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Všechny soubory"
 
@@ -260,8 +260,8 @@ msgstr "Jas / Kontrast"
 msgid "Brush Size"
 msgstr "Velikost štětce"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:272
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:124
 msgid "Brush width"
 msgstr "Šířka štětce"
 
@@ -284,12 +284,8 @@ msgstr "Na velikost:"
 msgid "By percentage:"
 msgstr "Procentuelně:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:398
-#: ../Pinta.Core/Actions/EditActions.cs:421
-#: ../Pinta.Core/Actions/LayerActions.cs:174
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:409
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Zrušit"
@@ -339,6 +335,11 @@ msgstr "Vystředěné"
 msgid "Centimeters"
 msgstr "Centimetry"
 
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+msgid "Change brush width. Shortcut keys: [ ]"
+msgstr ""
+
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr "Změnit typ tvarování"
@@ -368,7 +369,7 @@ msgstr "Vybrat sekundární barvu"
 msgid "Circles"
 msgstr "Kruhy"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:30
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
 msgstr "Svorka"
 
@@ -566,7 +567,7 @@ msgstr "Pokrytí"
 msgid "Crop to Selection"
 msgstr "Vystřihnout do výběru"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:218
+#: ../Pinta.Effects/Effects/TileEffect.cs:246
 msgid "Curved"
 msgstr ""
 
@@ -606,11 +607,11 @@ msgid "Default"
 msgstr "Výchozí"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:354
+#: ../Pinta.Core/Actions/LayerActions.cs:350
 msgid "Delete Layer"
 msgstr "Smazat vrstvu"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:660
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:666
 msgid "Deleted"
 msgstr "Odstraněno"
 
@@ -668,7 +669,7 @@ msgid "Download size: {0}"
 msgstr "Velikost stahováných dat: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:341
+#: ../Pinta.Core/Actions/LayerActions.cs:337
 msgid "Duplicate Layer"
 msgstr "Duplikovat vrstvu"
 
@@ -676,7 +677,7 @@ msgstr "Duplikovat vrstvu"
 msgid "Easily create and edit images"
 msgstr "Snadné vytváření a úprava obrázků"
 
-#: Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:236 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Chování hran"
 
@@ -741,7 +742,7 @@ msgstr "Odečíst"
 msgid "Expand"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:286
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
 msgstr "Balíčky s rozšířeními"
 
@@ -819,8 +820,8 @@ msgstr "Styl výpně"
 msgid "Fill and Outline Shape"
 msgstr "Vyplnit a Obtáhnout tvar"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1089
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1359
 msgid "Finalized"
 msgstr "Dokončeno"
 
@@ -1006,8 +1007,8 @@ msgstr "Panely obrázků"
 msgid "Image cannot be pasted"
 msgstr "Nelze vložit obrázek"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:115
+#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "Soubory obrázků"
 
@@ -1019,7 +1020,7 @@ msgstr "Obrázek větší než plátno"
 msgid "Image too large"
 msgstr "Obrázek je příliš velký"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:230
+#: ../Pinta.Core/Actions/LayerActions.cs:228
 msgid "Import From File"
 msgstr "Vložit ze souboru"
 
@@ -1052,7 +1053,7 @@ msgstr "Vstupní histogram"
 msgid "Install"
 msgstr "Instalovat"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:250
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
 msgstr "Nainstalovat balíček s rozšířeními"
 
@@ -1070,7 +1071,7 @@ msgstr "Nainstalováno"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
-#: ../Pinta.Effects/Effects/TileEffect.cs:205
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
 msgid "Intensity"
 msgstr "Intenzita"
 
@@ -1086,7 +1087,7 @@ msgid "Invert Colors"
 msgstr "Invertovat barvy"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:479
+#: ../Pinta.Core/Actions/EditActions.cs:493
 msgid "Invert Selection"
 msgstr "Obrátit výběr"
 
@@ -1348,7 +1349,7 @@ msgid "Median"
 msgstr "Medián"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:307
+#: ../Pinta.Core/Actions/LayerActions.cs:303
 msgid "Merge Layer Down"
 msgstr "Spojit vrstvy"
 
@@ -1356,7 +1357,7 @@ msgstr "Spojit vrstvy"
 msgid "Mode"
 msgstr "Režim"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:899
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:905
 msgid "Modified"
 msgstr "Změněno"
 
@@ -1369,12 +1370,12 @@ msgid "Motion Blur"
 msgstr "Rozmazání pohybem"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:288
+#: ../Pinta.Core/Actions/LayerActions.cs:284
 msgid "Move Layer Down"
 msgstr "Posunout vrstvu dolů"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:272
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Up"
 msgstr "Posunout vrstvu nahoru"
 
@@ -1483,11 +1484,7 @@ msgstr "Olejomalba"
 msgid "Opacity:"
 msgstr "Průhlednost"
 
-#: ../Pinta.Core/Actions/EditActions.cs:397
 #: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:173
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "Otevřít"
 
@@ -1499,8 +1496,8 @@ msgstr "Tvar otevřené křivky"
 msgid "Open Image"
 msgstr "Otevřít obrázek"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:170
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "Otevřít obrázek"
 
@@ -1508,7 +1505,7 @@ msgstr "Otevřít obrázek"
 msgid "Open Line/Curve Series"
 msgstr "Otevřít sadu čar/křivek"
 
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Open Palette File"
 msgstr "Otevřít sobor s paletou"
 
@@ -1521,7 +1518,7 @@ msgstr "Otevřít..."
 msgid "Orientation:"
 msgstr "Orientace:"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:48
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
 msgstr "Původní"
 
@@ -1579,7 +1576,7 @@ msgstr "Štětec"
 msgid "Palette"
 msgstr "Paleta"
 
-#: ../Pinta.Core/Actions/EditActions.cs:381
+#: ../Pinta.Core/Actions/EditActions.cs:455
 msgid "Palette files"
 msgstr "Soubory palet"
 
@@ -1687,12 +1684,12 @@ msgstr "Pixely"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:785
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:605
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:791
 msgid "Point Added"
 msgstr "Bod přidán"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:646
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:652
 msgid "Point Deleted"
 msgstr "Bod odstraněn"
 
@@ -1734,7 +1731,7 @@ msgstr "Předvolba:"
 msgid "Preview"
 msgstr "Náhled"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:39
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
 msgstr "Hlavní"
 
@@ -1846,7 +1843,7 @@ msgstr "Udělat znovu"
 msgid "Reduce Noise"
 msgstr "Snížit šum"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:36
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
 msgstr "Odraz"
 
@@ -1964,7 +1961,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Otočit o 90° proti směru hodin"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:199
+#: ../Pinta.Effects/Effects/TileEffect.cs:224
 msgid "Rotation"
 msgstr "Rotace"
 
@@ -2001,7 +1998,7 @@ msgstr "Sytost"
 msgid "Saturation Percentage"
 msgstr "Procento sytosti"
 
-#: ../Pinta.Core/Actions/EditActions.cs:420
+#: ../Pinta.Core/Actions/EditActions.cs:408
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2020,7 +2017,7 @@ msgstr "Uložit jako..."
 msgid "Save Image File"
 msgstr "Uložení obrázku"
 
-#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/EditActions.cs:405
 msgid "Save Palette File"
 msgstr "Uložit soubor palety"
 
@@ -2037,7 +2034,7 @@ msgstr "Měřítko"
 msgid "Screen"
 msgstr "Obrazovka"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:42
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
 msgstr "Vedlejší"
 
@@ -2062,7 +2059,7 @@ msgstr "Nastavit počet barev"
 msgid "Shape Type"
 msgstr "Typ tvarování"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:215
+#: ../Pinta.Effects/Effects/TileEffect.cs:243
 msgid "Sharp Edges"
 msgstr ""
 
@@ -2250,11 +2247,11 @@ msgstr ""
 msgid "Tile Reflection"
 msgstr "Dlaždicový odraz"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:202
+#: ../Pinta.Effects/Effects/TileEffect.cs:227
 msgid "Tile Size"
 msgstr "Velikost dlaždic"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:208
+#: ../Pinta.Effects/Effects/TileEffect.cs:233
 msgid "Tile Type"
 msgstr ""
 
@@ -2310,7 +2307,7 @@ msgstr "Přeložit tuto aplikaci"
 msgid "Transparency Mode"
 msgstr "Režim průhlednosti"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:45
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr "Průhledné"
@@ -2448,7 +2445,7 @@ msgstr "Šířka:"
 msgid "Window"
 msgstr "Okno"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:33
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
 msgid "Wrap"
 msgstr "Obal"
 

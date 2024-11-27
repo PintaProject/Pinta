@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-17 01:41+0000\n"
+"POT-Creation-Date: 2024-11-24 01:43+0000\n"
 "PO-Revision-Date: 2016-08-19 19:11+0000\n"
 "Last-Translator: Alan <Unknown>\n"
 "Language-Team: Breton <br@li.org>\n"
@@ -61,7 +61,7 @@ msgid "About Pinta"
 msgstr "A-zivout Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:375
+#: ../Pinta.Core/Actions/LayerActions.cs:371
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Ouzhpennañ un dreuzfollenn nevez"
@@ -74,7 +74,7 @@ msgstr "Ouzhpennañ trouz"
 msgid "Add-in Manager..."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:821
 msgid "Added"
 msgstr "Ouzhpennet"
 
@@ -91,9 +91,9 @@ msgstr "Goude bezañ diuzet"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:106
+#: ../Pinta.Core/Actions/EditActions.cs:472
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "An holl restroù"
 
@@ -260,8 +260,8 @@ msgstr "Lintr/Dargemm"
 msgid "Brush Size"
 msgstr "Ment ar broust"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:272
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:124
 msgid "Brush width"
 msgstr "Led ar broust"
 
@@ -284,12 +284,8 @@ msgstr "Dre ar vent dizave :"
 msgid "By percentage:"
 msgstr "Dre zregantad :"
 
-#: ../Pinta.Core/Actions/EditActions.cs:398
-#: ../Pinta.Core/Actions/EditActions.cs:421
-#: ../Pinta.Core/Actions/LayerActions.cs:174
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:409
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr ""
@@ -339,6 +335,11 @@ msgstr "Kreizet"
 msgid "Centimeters"
 msgstr "Kentimetroù"
 
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+msgid "Change brush width. Shortcut keys: [ ]"
+msgstr ""
+
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr "Kemmet eo bet ar rizh lunioù"
@@ -368,7 +369,7 @@ msgstr "Dibab al liv eilvedel"
 msgid "Circles"
 msgstr "Kelc'hioù"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:30
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
 msgstr "Golv"
 
@@ -564,7 +565,7 @@ msgstr "Keitad"
 msgid "Crop to Selection"
 msgstr "Didroc'hañ ouzh an diuzad"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:218
+#: ../Pinta.Effects/Effects/TileEffect.cs:246
 msgid "Curved"
 msgstr ""
 
@@ -604,11 +605,11 @@ msgid "Default"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:354
+#: ../Pinta.Core/Actions/LayerActions.cs:350
 msgid "Delete Layer"
 msgstr "Dilemel an dreuzfollenn"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:660
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:666
 msgid "Deleted"
 msgstr "Dilamet"
 
@@ -666,7 +667,7 @@ msgid "Download size: {0}"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:341
+#: ../Pinta.Core/Actions/LayerActions.cs:337
 msgid "Duplicate Layer"
 msgstr "Eilañ an dreuzfollenn"
 
@@ -674,7 +675,7 @@ msgstr "Eilañ an dreuzfollenn"
 msgid "Easily create and edit images"
 msgstr "Krouiñ ha kempenn skeudennoù ent aes"
 
-#: Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:236 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Emzalc'h ar riblenn"
 
@@ -739,7 +740,7 @@ msgstr "Ezlakaat (-) (Klik a-zehou)"
 msgid "Expand"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:286
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
 msgstr ""
 
@@ -817,8 +818,8 @@ msgstr "Stil leuniañ"
 msgid "Fill and Outline Shape"
 msgstr "Lun leuniañ ha lun an drolinenn"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1089
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1359
 msgid "Finalized"
 msgstr "Peurlipet"
 
@@ -1004,8 +1005,8 @@ msgstr "Ivinelloù skeudennoù"
 msgid "Image cannot be pasted"
 msgstr "N'haller ket pegañ ar skeudenn"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:115
+#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "Restroù skeudenn"
 
@@ -1017,7 +1018,7 @@ msgstr "Brasoc'h eo ar skeudenn eget ar steuenn"
 msgid "Image too large"
 msgstr "Re vras eo ar skeudenn"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:230
+#: ../Pinta.Core/Actions/LayerActions.cs:228
 msgid "Import From File"
 msgstr "Enporzhiañ diouzh ur restr"
 
@@ -1050,7 +1051,7 @@ msgstr "Tellun enankañ"
 msgid "Install"
 msgstr "Staliañ"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:250
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
 msgstr ""
 
@@ -1068,7 +1069,7 @@ msgstr "Staliet"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
-#: ../Pinta.Effects/Effects/TileEffect.cs:205
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
 msgid "Intensity"
 msgstr "Kreñvder"
 
@@ -1084,7 +1085,7 @@ msgid "Invert Colors"
 msgstr "Tuginañ al livioù"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:479
+#: ../Pinta.Core/Actions/EditActions.cs:493
 msgid "Invert Selection"
 msgstr "Tuginañ an diuzad"
 
@@ -1353,7 +1354,7 @@ msgid "Median"
 msgstr "Krenn"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:307
+#: ../Pinta.Core/Actions/LayerActions.cs:303
 msgid "Merge Layer Down"
 msgstr "Toueziañ gant an dreuzfollenn a-zindan"
 
@@ -1361,7 +1362,7 @@ msgstr "Toueziañ gant an dreuzfollenn a-zindan"
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:899
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:905
 msgid "Modified"
 msgstr "Daskemmet"
 
@@ -1374,12 +1375,12 @@ msgid "Motion Blur"
 msgstr "Ruzed dre fiñval"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:288
+#: ../Pinta.Core/Actions/LayerActions.cs:284
 msgid "Move Layer Down"
 msgstr "Treuzfollenn d'an traoñ"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:272
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Up"
 msgstr "Treuzfollenn d'an nec'h"
 
@@ -1488,11 +1489,7 @@ msgstr "Livadur dre eoul"
 msgid "Opacity:"
 msgstr "Demerez :"
 
-#: ../Pinta.Core/Actions/EditActions.cs:397
 #: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:173
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "Digeriñ"
 
@@ -1504,8 +1501,8 @@ msgstr "Lun dre grommennoù digor"
 msgid "Open Image"
 msgstr "Digeriñ ur skeudenn"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:170
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "Digeriñ ur restr skeudenn"
 
@@ -1513,7 +1510,7 @@ msgstr "Digeriñ ur restr skeudenn"
 msgid "Open Line/Curve Series"
 msgstr "Spletadoù Linenn/Krommenn digor"
 
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Open Palette File"
 msgstr "Digeriñ ur restr livaoueg"
 
@@ -1526,7 +1523,7 @@ msgstr "Digeriñ..."
 msgid "Orientation:"
 msgstr "Reteradur :"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:48
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
 msgstr "Orinel"
 
@@ -1584,7 +1581,7 @@ msgstr "Broust livañ"
 msgid "Palette"
 msgstr "Livaoueg"
 
-#: ../Pinta.Core/Actions/EditActions.cs:381
+#: ../Pinta.Core/Actions/EditActions.cs:455
 msgid "Palette files"
 msgstr ""
 
@@ -1687,12 +1684,12 @@ msgstr "Pikselioù"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:785
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:605
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:791
 msgid "Point Added"
 msgstr "Poent ouzhpennet"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:646
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:652
 msgid "Point Deleted"
 msgstr "Dilamet eo bet ar poent"
 
@@ -1734,7 +1731,7 @@ msgstr "Ragarventenn :"
 msgid "Preview"
 msgstr "Alberz"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:39
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
 msgstr "Kentidik"
 
@@ -1846,7 +1843,7 @@ msgstr "Adober"
 msgid "Reduce Noise"
 msgstr "Digreskiñ an trouz"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:36
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
 msgstr "Damouezh"
 
@@ -1964,7 +1961,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "C'hwelañ dre 90° gant roud gin ar bizied"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:199
+#: ../Pinta.Effects/Effects/TileEffect.cs:224
 msgid "Rotation"
 msgstr "C'hwelañ"
 
@@ -2001,7 +1998,7 @@ msgstr "Peurvec'hiañ"
 msgid "Saturation Percentage"
 msgstr "Dregantad ar peurvec'hiañ"
 
-#: ../Pinta.Core/Actions/EditActions.cs:420
+#: ../Pinta.Core/Actions/EditActions.cs:408
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2020,7 +2017,7 @@ msgstr "Enrollañ evel..."
 msgid "Save Image File"
 msgstr "Enrollañ restr ar skeudenn"
 
-#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/EditActions.cs:405
 msgid "Save Palette File"
 msgstr "Enrollañ ar restr livaoueg"
 
@@ -2037,7 +2034,7 @@ msgstr "Skeulaat"
 msgid "Screen"
 msgstr "Skramm"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:42
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
 msgstr "Eilvedel"
 
@@ -2062,7 +2059,7 @@ msgstr "Arventennañ niver al livioù"
 msgid "Shape Type"
 msgstr "Rizh lunioù"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:215
+#: ../Pinta.Effects/Effects/TileEffect.cs:243
 msgid "Sharp Edges"
 msgstr ""
 
@@ -2246,11 +2243,11 @@ msgstr ""
 msgid "Tile Reflection"
 msgstr "Disvannadur er marelloù"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:202
+#: ../Pinta.Effects/Effects/TileEffect.cs:227
 msgid "Tile Size"
 msgstr "Ment ar marelloù"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:208
+#: ../Pinta.Effects/Effects/TileEffect.cs:233
 msgid "Tile Type"
 msgstr ""
 
@@ -2306,7 +2303,7 @@ msgstr "Treiñ an arload-mañ"
 msgid "Transparency Mode"
 msgstr ""
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:45
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr "Boull"
@@ -2445,7 +2442,7 @@ msgstr "Led :"
 msgid "Window"
 msgstr "Prenestr"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:33
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
 msgid "Wrap"
 msgstr "Ambakañ"
 

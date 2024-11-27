@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-17 01:41+0000\n"
+"POT-Creation-Date: 2024-11-24 01:43+0000\n"
 "PO-Revision-Date: 2016-06-06 03:47+0000\n"
 "Last-Translator: Tu Nguyen <minhtuvn@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -61,7 +61,7 @@ msgid "About Pinta"
 msgstr "Giới thiệu Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:375
+#: ../Pinta.Core/Actions/LayerActions.cs:371
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Thêm lớp mới"
@@ -74,7 +74,7 @@ msgstr "Thêm nhiễu"
 msgid "Add-in Manager..."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:821
 msgid "Added"
 msgstr "Được thêm vào"
 
@@ -91,9 +91,9 @@ msgstr "Sau khi lựa chọn"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:106
+#: ../Pinta.Core/Actions/EditActions.cs:472
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Mọi loại tệp"
 
@@ -260,8 +260,8 @@ msgstr "Độ sáng / Độ tương phản"
 msgid "Brush Size"
 msgstr "Cỡ chổi"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:272
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:124
 msgid "Brush width"
 msgstr "Bề rộng nét chổi vẽ"
 
@@ -284,12 +284,8 @@ msgstr "Theo kích thước tuyệt đối:"
 msgid "By percentage:"
 msgstr "Theo phần trăm:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:398
-#: ../Pinta.Core/Actions/EditActions.cs:421
-#: ../Pinta.Core/Actions/LayerActions.cs:174
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:409
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr ""
@@ -339,6 +335,11 @@ msgstr "Cân giữa"
 msgid "Centimeters"
 msgstr "Xăng-ti-mét"
 
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+msgid "Change brush width. Shortcut keys: [ ]"
+msgstr ""
+
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr "Thay kiểu hình dạng"
@@ -368,7 +369,7 @@ msgstr "Chọn màu phụ"
 msgid "Circles"
 msgstr "Vòng tròn"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:30
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
 msgstr "Kẹp"
 
@@ -564,7 +565,7 @@ msgstr "Phạm vi"
 msgid "Crop to Selection"
 msgstr "Cắt hình về phần lựa chọn"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:218
+#: ../Pinta.Effects/Effects/TileEffect.cs:246
 msgid "Curved"
 msgstr ""
 
@@ -604,11 +605,11 @@ msgid "Default"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:354
+#: ../Pinta.Core/Actions/LayerActions.cs:350
 msgid "Delete Layer"
 msgstr "Xoá bỏ lớp"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:660
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:666
 msgid "Deleted"
 msgstr "Bị xóa"
 
@@ -666,7 +667,7 @@ msgid "Download size: {0}"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:341
+#: ../Pinta.Core/Actions/LayerActions.cs:337
 msgid "Duplicate Layer"
 msgstr "Nhân đôi lớp"
 
@@ -674,7 +675,7 @@ msgstr "Nhân đôi lớp"
 msgid "Easily create and edit images"
 msgstr "Dễ dàng tạo và chỉnh sửa hình ảnh"
 
-#: Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:236 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Hành vi của gờ"
 
@@ -739,7 +740,7 @@ msgstr "Ngoại trừ (-) (Chuột phải)"
 msgid "Expand"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:286
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
 msgstr ""
 
@@ -817,8 +818,8 @@ msgstr "Cách thức tô đầy"
 msgid "Fill and Outline Shape"
 msgstr "Tô đầy và vẽ biên ngoài của hình"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1089
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1359
 msgid "Finalized"
 msgstr "Được hoàn thiện"
 
@@ -1004,8 +1005,8 @@ msgstr "Thẻ Hình ảnh"
 msgid "Image cannot be pasted"
 msgstr "Không thể dán hình ảnh."
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:115
+#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "Tệp hình ảnh"
 
@@ -1017,7 +1018,7 @@ msgstr "Hình ảnh lớn hơn Canvas"
 msgid "Image too large"
 msgstr "Hình ảnh quá lớn"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:230
+#: ../Pinta.Core/Actions/LayerActions.cs:228
 msgid "Import From File"
 msgstr "Nhập từ tệp"
 
@@ -1050,7 +1051,7 @@ msgstr "Biểu đồ cột dữ liệu vào"
 msgid "Install"
 msgstr "Cài đặt"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:250
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
 msgstr ""
 
@@ -1068,7 +1069,7 @@ msgstr "Đã cài đặt"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
-#: ../Pinta.Effects/Effects/TileEffect.cs:205
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
 msgid "Intensity"
 msgstr "Cường độ"
 
@@ -1084,7 +1085,7 @@ msgid "Invert Colors"
 msgstr "Đảo màu"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:479
+#: ../Pinta.Core/Actions/EditActions.cs:493
 msgid "Invert Selection"
 msgstr "Đảo vùng chọn"
 
@@ -1348,7 +1349,7 @@ msgid "Median"
 msgstr "Trung bình"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:307
+#: ../Pinta.Core/Actions/LayerActions.cs:303
 msgid "Merge Layer Down"
 msgstr "Ghép lớp xuống"
 
@@ -1356,7 +1357,7 @@ msgstr "Ghép lớp xuống"
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:899
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:905
 msgid "Modified"
 msgstr "Được sửa đổi"
 
@@ -1369,12 +1370,12 @@ msgid "Motion Blur"
 msgstr "Làm mở chuyển động"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:288
+#: ../Pinta.Core/Actions/LayerActions.cs:284
 msgid "Move Layer Down"
 msgstr "Chuyển lớp xuống dưới"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:272
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Up"
 msgstr "Chuyển lớp lên trên"
 
@@ -1483,11 +1484,7 @@ msgstr "Tranh sơn dầu"
 msgid "Opacity:"
 msgstr "Độ đục:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:397
 #: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:173
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "Mở"
 
@@ -1499,8 +1496,8 @@ msgstr "Kiểu đường cong mở"
 msgid "Open Image"
 msgstr "Mở hình ảnh"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:170
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "Mở tệp hình ảnh"
 
@@ -1508,7 +1505,7 @@ msgstr "Mở tệp hình ảnh"
 msgid "Open Line/Curve Series"
 msgstr "Loạt Đường thẳng / Đường cong mở"
 
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Open Palette File"
 msgstr "Mở tệp bảng màu"
 
@@ -1521,7 +1518,7 @@ msgstr "Mở..."
 msgid "Orientation:"
 msgstr "Định hướng"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:48
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
 msgstr "Nguyên bản"
 
@@ -1579,7 +1576,7 @@ msgstr "Bút vẽ"
 msgid "Palette"
 msgstr "Bảng màu"
 
-#: ../Pinta.Core/Actions/EditActions.cs:381
+#: ../Pinta.Core/Actions/EditActions.cs:455
 msgid "Palette files"
 msgstr ""
 
@@ -1682,12 +1679,12 @@ msgstr "Điểm ảnh"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:785
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:605
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:791
 msgid "Point Added"
 msgstr "Điểm được thêm vào"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:646
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:652
 msgid "Point Deleted"
 msgstr "Điểm được xóa"
 
@@ -1729,7 +1726,7 @@ msgstr "Chỉnh sẵn"
 msgid "Preview"
 msgstr ""
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:39
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
 msgstr "Chính"
 
@@ -1841,7 +1838,7 @@ msgstr "Làm lại"
 msgid "Reduce Noise"
 msgstr "Giảm nhiễu"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:36
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
 msgstr "Phản chiếu"
 
@@ -1959,7 +1956,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Xoay trái 90°"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:199
+#: ../Pinta.Effects/Effects/TileEffect.cs:224
 msgid "Rotation"
 msgstr "Xoay"
 
@@ -1996,7 +1993,7 @@ msgstr "Độ bão hòa"
 msgid "Saturation Percentage"
 msgstr "Phần trăm độ bão hòa"
 
-#: ../Pinta.Core/Actions/EditActions.cs:420
+#: ../Pinta.Core/Actions/EditActions.cs:408
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2015,7 +2012,7 @@ msgstr "Lưu như là..."
 msgid "Save Image File"
 msgstr "Lưu tệp hình ảnh"
 
-#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/EditActions.cs:405
 msgid "Save Palette File"
 msgstr "Lưu tệp bảng màu"
 
@@ -2032,7 +2029,7 @@ msgstr "Tỉ lệ"
 msgid "Screen"
 msgstr "Màn hình"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:42
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
 msgstr "Phụ"
 
@@ -2057,7 +2054,7 @@ msgstr "Đặt số lượng màu"
 msgid "Shape Type"
 msgstr "Kiểu hình dạng"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:215
+#: ../Pinta.Effects/Effects/TileEffect.cs:243
 msgid "Sharp Edges"
 msgstr ""
 
@@ -2241,11 +2238,11 @@ msgstr ""
 msgid "Tile Reflection"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:202
+#: ../Pinta.Effects/Effects/TileEffect.cs:227
 msgid "Tile Size"
 msgstr "Kích cỡ Ngói"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:208
+#: ../Pinta.Effects/Effects/TileEffect.cs:233
 msgid "Tile Type"
 msgstr ""
 
@@ -2301,7 +2298,7 @@ msgstr "Dịch ứng dụng này"
 msgid "Transparency Mode"
 msgstr ""
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:45
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr "Trong suốt"
@@ -2439,7 +2436,7 @@ msgstr "Bề rộng:"
 msgid "Window"
 msgstr "Cửa sổ"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:33
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
 msgid "Wrap"
 msgstr "Gói"
 

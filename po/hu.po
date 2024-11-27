@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-17 01:41+0000\n"
+"POT-Creation-Date: 2024-11-24 01:43+0000\n"
 "PO-Revision-Date: 2024-06-27 14:09+0000\n"
 "Last-Translator: Istvan Balogh <battlepuli@proton.me>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/pinta/pinta/hu/"
@@ -62,7 +62,7 @@ msgid "About Pinta"
 msgstr "Pinta névjegye"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:375
+#: ../Pinta.Core/Actions/LayerActions.cs:371
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Új réteg létrehozása"
@@ -75,7 +75,7 @@ msgstr "Zaj hozzáadása"
 msgid "Add-in Manager..."
 msgstr "Bővítmény Kezelő..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:821
 msgid "Added"
 msgstr ""
 
@@ -92,9 +92,9 @@ msgstr "Kijelölés után"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:106
+#: ../Pinta.Core/Actions/EditActions.cs:472
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Minden fájl"
 
@@ -261,8 +261,8 @@ msgstr "Fényerő / Kontraszt"
 msgid "Brush Size"
 msgstr "Ecsetméret"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:272
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:124
 msgid "Brush width"
 msgstr "Ecsetvastagság"
 
@@ -285,12 +285,8 @@ msgstr "Méret alapján:"
 msgid "By percentage:"
 msgstr "Százalékos:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:398
-#: ../Pinta.Core/Actions/EditActions.cs:421
-#: ../Pinta.Core/Actions/LayerActions.cs:174
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:409
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr ""
@@ -340,6 +336,11 @@ msgstr "Középen"
 msgid "Centimeters"
 msgstr "Centiméter"
 
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+msgid "Change brush width. Shortcut keys: [ ]"
+msgstr ""
+
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr ""
@@ -369,7 +370,7 @@ msgstr "Másodlagos szín kiválasztása"
 msgid "Circles"
 msgstr "Körecset"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:30
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
 msgstr ""
 
@@ -566,7 +567,7 @@ msgstr "Terjedelem"
 msgid "Crop to Selection"
 msgstr "Kijelölés méretére vágása"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:218
+#: ../Pinta.Effects/Effects/TileEffect.cs:246
 msgid "Curved"
 msgstr ""
 
@@ -606,11 +607,11 @@ msgid "Default"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:354
+#: ../Pinta.Core/Actions/LayerActions.cs:350
 msgid "Delete Layer"
 msgstr "Réteg törlése"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:660
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:666
 msgid "Deleted"
 msgstr ""
 
@@ -668,7 +669,7 @@ msgid "Download size: {0}"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:341
+#: ../Pinta.Core/Actions/LayerActions.cs:337
 msgid "Duplicate Layer"
 msgstr "Réteg duplikálása"
 
@@ -676,7 +677,7 @@ msgstr "Réteg duplikálása"
 msgid "Easily create and edit images"
 msgstr "Készíts és szerkessz képeket könnyedén"
 
-#: Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:236 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Szélek viselkedése"
 
@@ -741,7 +742,7 @@ msgstr "Leválaszt (-) (Jobb kattintás)"
 msgid "Expand"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:286
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
 msgstr ""
 
@@ -819,8 +820,8 @@ msgstr "Kitöltési stílus"
 msgid "Fill and Outline Shape"
 msgstr "Alakzat kitöltése és körvonala"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1089
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1359
 msgid "Finalized"
 msgstr ""
 
@@ -1004,8 +1005,8 @@ msgstr ""
 msgid "Image cannot be pasted"
 msgstr "A kép nem illeszthető be"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:115
+#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "Képfájlok"
 
@@ -1017,7 +1018,7 @@ msgstr "A kép nagyobb, mint a vászon"
 msgid "Image too large"
 msgstr "A kép túl nagy"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:230
+#: ../Pinta.Core/Actions/LayerActions.cs:228
 msgid "Import From File"
 msgstr "Importálás fájlból"
 
@@ -1050,7 +1051,7 @@ msgstr "Bemeneti hisztogram"
 msgid "Install"
 msgstr "Telepítés"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:250
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
 msgstr ""
 
@@ -1068,7 +1069,7 @@ msgstr "Telepítve"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
-#: ../Pinta.Effects/Effects/TileEffect.cs:205
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
 msgid "Intensity"
 msgstr "Intenzitás"
 
@@ -1084,7 +1085,7 @@ msgid "Invert Colors"
 msgstr "Színek invertálása"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:479
+#: ../Pinta.Core/Actions/EditActions.cs:493
 msgid "Invert Selection"
 msgstr "Kijelölés megfordítása"
 
@@ -1351,7 +1352,7 @@ msgid "Median"
 msgstr "Medián"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:307
+#: ../Pinta.Core/Actions/LayerActions.cs:303
 msgid "Merge Layer Down"
 msgstr "Réteg beolvasztása az alatta lévőbe"
 
@@ -1359,7 +1360,7 @@ msgstr "Réteg beolvasztása az alatta lévőbe"
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:899
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:905
 msgid "Modified"
 msgstr ""
 
@@ -1372,12 +1373,12 @@ msgid "Motion Blur"
 msgstr "Bemozdulás"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:288
+#: ../Pinta.Core/Actions/LayerActions.cs:284
 msgid "Move Layer Down"
 msgstr "Réteg lejjebb mozgatása"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:272
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Up"
 msgstr "Réteg feljebb mozgatása"
 
@@ -1486,11 +1487,7 @@ msgstr "Olajfestmény"
 msgid "Opacity:"
 msgstr "Áttetszőség:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:397
 #: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:173
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "Megnyitás"
 
@@ -1502,8 +1499,8 @@ msgstr ""
 msgid "Open Image"
 msgstr "Kép megnyitása"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:170
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "Kép megnyitása"
 
@@ -1511,7 +1508,7 @@ msgstr "Kép megnyitása"
 msgid "Open Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Open Palette File"
 msgstr "Paletta fájl megnyitása"
 
@@ -1524,7 +1521,7 @@ msgstr "Megnyitás…"
 msgid "Orientation:"
 msgstr ""
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:48
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
 msgstr ""
 
@@ -1582,7 +1579,7 @@ msgstr "Ecset"
 msgid "Palette"
 msgstr "Paletta"
 
-#: ../Pinta.Core/Actions/EditActions.cs:381
+#: ../Pinta.Core/Actions/EditActions.cs:455
 msgid "Palette files"
 msgstr ""
 
@@ -1685,12 +1682,12 @@ msgstr "Képpontok"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:785
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:605
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:791
 msgid "Point Added"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:646
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:652
 msgid "Point Deleted"
 msgstr ""
 
@@ -1732,7 +1729,7 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:39
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
 msgstr ""
 
@@ -1844,7 +1841,7 @@ msgstr "Mégis"
 msgid "Reduce Noise"
 msgstr "Zaj csökkentése"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:36
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
 msgstr "Visszaverődés"
 
@@ -1962,7 +1959,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Elforgatás 90°-kal az óramutató irányával ellentétesen"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:199
+#: ../Pinta.Effects/Effects/TileEffect.cs:224
 msgid "Rotation"
 msgstr "Elforgatás"
 
@@ -1999,7 +1996,7 @@ msgstr ""
 msgid "Saturation Percentage"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:420
+#: ../Pinta.Core/Actions/EditActions.cs:408
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2018,7 +2015,7 @@ msgstr "Mentés másként…"
 msgid "Save Image File"
 msgstr "Kép fájl mentése"
 
-#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/EditActions.cs:405
 msgid "Save Palette File"
 msgstr "Paletta fájl mentése"
 
@@ -2035,7 +2032,7 @@ msgstr "Méretarány"
 msgid "Screen"
 msgstr "Kivetítés"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:42
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
 msgstr ""
 
@@ -2060,7 +2057,7 @@ msgstr "Színek számának beállítása"
 msgid "Shape Type"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:215
+#: ../Pinta.Effects/Effects/TileEffect.cs:243
 msgid "Sharp Edges"
 msgstr ""
 
@@ -2244,11 +2241,11 @@ msgstr ""
 msgid "Tile Reflection"
 msgstr "Mozaik tükröződés"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:202
+#: ../Pinta.Effects/Effects/TileEffect.cs:227
 msgid "Tile Size"
 msgstr "Csempeméret"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:208
+#: ../Pinta.Effects/Effects/TileEffect.cs:233
 msgid "Tile Type"
 msgstr ""
 
@@ -2304,7 +2301,7 @@ msgstr "Az alkalmazás fordítása"
 msgid "Transparency Mode"
 msgstr ""
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:45
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr ""
@@ -2442,7 +2439,7 @@ msgstr "Szélesség:"
 msgid "Window"
 msgstr "Ablak"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:33
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
 msgid "Wrap"
 msgstr ""
 

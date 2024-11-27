@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-17 01:41+0000\n"
+"POT-Creation-Date: 2024-11-24 01:43+0000\n"
 "PO-Revision-Date: 2023-04-24 16:26+0000\n"
 "Last-Translator: Miron Cristea <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -62,7 +62,7 @@ msgid "About Pinta"
 msgstr "Despre Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:375
+#: ../Pinta.Core/Actions/LayerActions.cs:371
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Adaugă strat nou"
@@ -75,7 +75,7 @@ msgstr "Adaugă zgomot"
 msgid "Add-in Manager..."
 msgstr "Managerul de suplimente"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:821
 msgid "Added"
 msgstr "Adăugat"
 
@@ -92,9 +92,9 @@ msgstr "După selecţie"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:106
+#: ../Pinta.Core/Actions/EditActions.cs:472
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Toate fişierele"
 
@@ -261,8 +261,8 @@ msgstr "Luminozitate / contrast"
 msgid "Brush Size"
 msgstr "Mărime pensulă"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:272
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:124
 msgid "Brush width"
 msgstr "Grosime pensulă"
 
@@ -285,12 +285,8 @@ msgstr "După dimensiune absolută:"
 msgid "By percentage:"
 msgstr "După procentaj:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:398
-#: ../Pinta.Core/Actions/EditActions.cs:421
-#: ../Pinta.Core/Actions/LayerActions.cs:174
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:409
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Anulează"
@@ -340,6 +336,11 @@ msgstr "Centrat"
 msgid "Centimeters"
 msgstr "Centimetri"
 
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+msgid "Change brush width. Shortcut keys: [ ]"
+msgstr ""
+
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr "Modificare tip formă"
@@ -369,7 +370,7 @@ msgstr "Alege culoarea secundară"
 msgid "Circles"
 msgstr "Cercuri"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:30
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
 msgstr "Restrânge"
 
@@ -573,7 +574,7 @@ msgstr "Acoperire"
 msgid "Crop to Selection"
 msgstr "Decupează selecția"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:218
+#: ../Pinta.Effects/Effects/TileEffect.cs:246
 msgid "Curved"
 msgstr ""
 
@@ -613,11 +614,11 @@ msgid "Default"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:354
+#: ../Pinta.Core/Actions/LayerActions.cs:350
 msgid "Delete Layer"
 msgstr "Şterge strat"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:660
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:666
 msgid "Deleted"
 msgstr "Şters"
 
@@ -675,7 +676,7 @@ msgid "Download size: {0}"
 msgstr "Dimensiunea descarcarii: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:341
+#: ../Pinta.Core/Actions/LayerActions.cs:337
 msgid "Duplicate Layer"
 msgstr "Clonează stratul"
 
@@ -683,7 +684,7 @@ msgstr "Clonează stratul"
 msgid "Easily create and edit images"
 msgstr "Creați și editați imagini cu ușurință"
 
-#: Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:236 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Comportament la margine"
 
@@ -748,7 +749,7 @@ msgstr "Exclude (-) (Click dreapta)"
 msgid "Expand"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:286
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
 msgstr "Pachete de extensie"
 
@@ -826,8 +827,8 @@ msgstr "Stil de umplere"
 msgid "Fill and Outline Shape"
 msgstr "Umple și conturează formă"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1089
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1359
 msgid "Finalized"
 msgstr "Finalizat"
 
@@ -1013,8 +1014,8 @@ msgstr "File de imagine"
 msgid "Image cannot be pasted"
 msgstr "Imaginea nu poate fi lipită"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:115
+#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "Fișiere imagine"
 
@@ -1026,7 +1027,7 @@ msgstr "Imagine mai mare decât canvas"
 msgid "Image too large"
 msgstr "Imagine prea mare"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:230
+#: ../Pinta.Core/Actions/LayerActions.cs:228
 msgid "Import From File"
 msgstr "Importă din fişier"
 
@@ -1059,7 +1060,7 @@ msgstr "Histogramă de intrare"
 msgid "Install"
 msgstr "Instalează"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:250
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
 msgstr "Instalare Pachet de Extensie"
 
@@ -1077,7 +1078,7 @@ msgstr "Instalat"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
-#: ../Pinta.Effects/Effects/TileEffect.cs:205
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
 msgid "Intensity"
 msgstr "Intensitate"
 
@@ -1093,7 +1094,7 @@ msgid "Invert Colors"
 msgstr "Inversează culorile"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:479
+#: ../Pinta.Core/Actions/EditActions.cs:493
 msgid "Invert Selection"
 msgstr "Inversează selecția"
 
@@ -1362,7 +1363,7 @@ msgid "Median"
 msgstr "Mediană"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:307
+#: ../Pinta.Core/Actions/LayerActions.cs:303
 msgid "Merge Layer Down"
 msgstr "Combină cu stratul inferior"
 
@@ -1370,7 +1371,7 @@ msgstr "Combină cu stratul inferior"
 msgid "Mode"
 msgstr "Mod"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:899
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:905
 msgid "Modified"
 msgstr "Modificat"
 
@@ -1383,12 +1384,12 @@ msgid "Motion Blur"
 msgstr "Efect de estompare în mișcare"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:288
+#: ../Pinta.Core/Actions/LayerActions.cs:284
 msgid "Move Layer Down"
 msgstr "Mută stratul mai jos"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:272
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Up"
 msgstr "Mută stratul mai sus"
 
@@ -1497,11 +1498,7 @@ msgstr "Pictură în ulei"
 msgid "Opacity:"
 msgstr "Opacitate:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:397
 #: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:173
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "Deschide"
 
@@ -1513,8 +1510,8 @@ msgstr "Formă curbă deschisă"
 msgid "Open Image"
 msgstr "Deschide imagine"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:170
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "Deschide fişier imagine"
 
@@ -1522,7 +1519,7 @@ msgstr "Deschide fişier imagine"
 msgid "Open Line/Curve Series"
 msgstr "Serie linii/curbe deschise"
 
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Open Palette File"
 msgstr "Deschide fișier paletă"
 
@@ -1535,7 +1532,7 @@ msgstr "Deschide..."
 msgid "Orientation:"
 msgstr "Orientare:"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:48
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
 msgstr "Original"
 
@@ -1593,7 +1590,7 @@ msgstr "Pensulă de pictură"
 msgid "Palette"
 msgstr "Paletă"
 
-#: ../Pinta.Core/Actions/EditActions.cs:381
+#: ../Pinta.Core/Actions/EditActions.cs:455
 msgid "Palette files"
 msgstr "Fisiere de paleta"
 
@@ -1701,12 +1698,12 @@ msgstr "Pixeli"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:785
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:605
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:791
 msgid "Point Added"
 msgstr "Punct adăugat"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:646
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:652
 msgid "Point Deleted"
 msgstr "Punct şters"
 
@@ -1748,7 +1745,7 @@ msgstr "Prestabilit:"
 msgid "Preview"
 msgstr "Previzualizare"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:39
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
 msgstr "Primar"
 
@@ -1860,7 +1857,7 @@ msgstr "Refă"
 msgid "Reduce Noise"
 msgstr "Reducere zgomot"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:36
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
 msgstr "Reflectă"
 
@@ -1978,7 +1975,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Roteşte 90° contra acelor de ceas"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:199
+#: ../Pinta.Effects/Effects/TileEffect.cs:224
 msgid "Rotation"
 msgstr "Rotație"
 
@@ -2015,7 +2012,7 @@ msgstr "Saturație"
 msgid "Saturation Percentage"
 msgstr "Procent saturaţie"
 
-#: ../Pinta.Core/Actions/EditActions.cs:420
+#: ../Pinta.Core/Actions/EditActions.cs:408
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2034,7 +2031,7 @@ msgstr "Salvează Ca..."
 msgid "Save Image File"
 msgstr "Salvează fișierul imagine"
 
-#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/EditActions.cs:405
 msgid "Save Palette File"
 msgstr "Salvează fișier paletă"
 
@@ -2051,7 +2048,7 @@ msgstr "Scalează"
 msgid "Screen"
 msgstr "Ecran"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:42
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
 msgstr "Secundar"
 
@@ -2076,7 +2073,7 @@ msgstr "Alege numărul de culori"
 msgid "Shape Type"
 msgstr "Tipul formei"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:215
+#: ../Pinta.Effects/Effects/TileEffect.cs:243
 msgid "Sharp Edges"
 msgstr ""
 
@@ -2264,11 +2261,11 @@ msgstr ""
 msgid "Tile Reflection"
 msgstr "Reflecție mozaic"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:202
+#: ../Pinta.Effects/Effects/TileEffect.cs:227
 msgid "Tile Size"
 msgstr "Mărime mozaic"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:208
+#: ../Pinta.Effects/Effects/TileEffect.cs:233
 msgid "Tile Type"
 msgstr ""
 
@@ -2324,7 +2321,7 @@ msgstr "Tradu această aplicaţie"
 msgid "Transparency Mode"
 msgstr "Mod transparent"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:45
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr "Transparent"
@@ -2462,7 +2459,7 @@ msgstr "Lungime:"
 msgid "Window"
 msgstr "Fereastră"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:33
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
 msgid "Wrap"
 msgstr "Împachetare"
 

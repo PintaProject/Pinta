@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-17 01:41+0000\n"
+"POT-Creation-Date: 2024-11-24 01:43+0000\n"
 "PO-Revision-Date: 2024-07-17 14:09+0000\n"
 "Last-Translator: Lucas Campello <lucas.campello@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -62,7 +62,7 @@ msgid "About Pinta"
 msgstr "Sobre o Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:375
+#: ../Pinta.Core/Actions/LayerActions.cs:371
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Adicionar Nova Camada"
@@ -75,7 +75,7 @@ msgstr "Adicionar Ruído"
 msgid "Add-in Manager..."
 msgstr "Gerenciador de Complementos..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:821
 msgid "Added"
 msgstr "Incluído"
 
@@ -92,9 +92,9 @@ msgstr "Pós-seleção"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:106
+#: ../Pinta.Core/Actions/EditActions.cs:472
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Todos os arquivos"
 
@@ -261,8 +261,8 @@ msgstr "Brilho / Contraste"
 msgid "Brush Size"
 msgstr "Tamanho do Pincel"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:272
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:124
 msgid "Brush width"
 msgstr "Largura do pincel"
 
@@ -285,12 +285,8 @@ msgstr "Por tamanho absoluto"
 msgid "By percentage:"
 msgstr "Por percentagem"
 
-#: ../Pinta.Core/Actions/EditActions.cs:398
-#: ../Pinta.Core/Actions/EditActions.cs:421
-#: ../Pinta.Core/Actions/LayerActions.cs:174
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:409
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Cancelar"
@@ -340,6 +336,11 @@ msgstr "Centralizado"
 msgid "Centimeters"
 msgstr "Centímetros"
 
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+msgid "Change brush width. Shortcut keys: [ ]"
+msgstr ""
+
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr "Mudar Tipo da Forma"
@@ -369,7 +370,7 @@ msgstr "Escolha a cor secundária"
 msgid "Circles"
 msgstr "Círculos"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:30
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
 msgstr "Fixar"
 
@@ -565,7 +566,7 @@ msgstr "Cobertura"
 msgid "Crop to Selection"
 msgstr "Recortar para Seleção"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:218
+#: ../Pinta.Effects/Effects/TileEffect.cs:246
 msgid "Curved"
 msgstr ""
 
@@ -605,11 +606,11 @@ msgid "Default"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:354
+#: ../Pinta.Core/Actions/LayerActions.cs:350
 msgid "Delete Layer"
 msgstr "Remover Camada"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:660
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:666
 msgid "Deleted"
 msgstr "Excluído"
 
@@ -667,7 +668,7 @@ msgid "Download size: {0}"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:341
+#: ../Pinta.Core/Actions/LayerActions.cs:337
 msgid "Duplicate Layer"
 msgstr "Duplicar Camada"
 
@@ -675,7 +676,7 @@ msgstr "Duplicar Camada"
 msgid "Easily create and edit images"
 msgstr "Crie e edite imagens facilmente"
 
-#: Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:236 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Comportamento nas Bordas"
 
@@ -740,7 +741,7 @@ msgstr "Excluir (-) (Clique Direito)"
 msgid "Expand"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:286
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
 msgstr ""
 
@@ -818,8 +819,8 @@ msgstr "Estilo do preenchimento"
 msgid "Fill and Outline Shape"
 msgstr "Formato do contorno e preenchimento"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1089
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1359
 msgid "Finalized"
 msgstr "Finalizado"
 
@@ -1006,8 +1007,8 @@ msgstr "Aba de Imagens"
 msgid "Image cannot be pasted"
 msgstr "Imagem não pôde ser colada"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:115
+#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "Arquivos de Imagem"
 
@@ -1019,7 +1020,7 @@ msgstr "Imagem maior que a tela"
 msgid "Image too large"
 msgstr "Imagem muito grande"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:230
+#: ../Pinta.Core/Actions/LayerActions.cs:228
 msgid "Import From File"
 msgstr "Importar de Um Arquivo"
 
@@ -1052,7 +1053,7 @@ msgstr "Histograma de entrada"
 msgid "Install"
 msgstr "Instalar"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:250
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
 msgstr ""
 
@@ -1070,7 +1071,7 @@ msgstr "Instalados"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
-#: ../Pinta.Effects/Effects/TileEffect.cs:205
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
 msgid "Intensity"
 msgstr "Intensidade"
 
@@ -1086,7 +1087,7 @@ msgid "Invert Colors"
 msgstr "Inverter cores"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:479
+#: ../Pinta.Core/Actions/EditActions.cs:493
 msgid "Invert Selection"
 msgstr "Inverter Seleção"
 
@@ -1375,7 +1376,7 @@ msgid "Median"
 msgstr "Mediano"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:307
+#: ../Pinta.Core/Actions/LayerActions.cs:303
 msgid "Merge Layer Down"
 msgstr "Unir à Camada Inferior"
 
@@ -1383,7 +1384,7 @@ msgstr "Unir à Camada Inferior"
 msgid "Mode"
 msgstr "Modo"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:899
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:905
 msgid "Modified"
 msgstr "Modificado Em"
 
@@ -1396,12 +1397,12 @@ msgid "Motion Blur"
 msgstr "Borrar por Movimento"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:288
+#: ../Pinta.Core/Actions/LayerActions.cs:284
 msgid "Move Layer Down"
 msgstr "Mover Camada para Baixo"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:272
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Up"
 msgstr "Mover Camada para Cima"
 
@@ -1510,11 +1511,7 @@ msgstr "Pintura a Óleo"
 msgid "Opacity:"
 msgstr "Opacidade:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:397
 #: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:173
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "Abrir"
 
@@ -1526,8 +1523,8 @@ msgstr "Abrir Forma da Curva"
 msgid "Open Image"
 msgstr "Abrir Imagem"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:170
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "Abrir Arquivo de Imagem"
 
@@ -1535,7 +1532,7 @@ msgstr "Abrir Arquivo de Imagem"
 msgid "Open Line/Curve Series"
 msgstr "Abrir Serie de Linhas/Curvas"
 
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Open Palette File"
 msgstr "Abrir arquivo de paleta"
 
@@ -1548,7 +1545,7 @@ msgstr "Abrir..."
 msgid "Orientation:"
 msgstr "Orientation:"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:48
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
 msgstr "AD_Original_ID"
 
@@ -1606,7 +1603,7 @@ msgstr "Pincel"
 msgid "Palette"
 msgstr "Paleta de cores"
 
-#: ../Pinta.Core/Actions/EditActions.cs:381
+#: ../Pinta.Core/Actions/EditActions.cs:455
 msgid "Palette files"
 msgstr "Arquivos de paleta"
 
@@ -1714,12 +1711,12 @@ msgstr "Pontos"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:785
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:605
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:791
 msgid "Point Added"
 msgstr "Ponto Adicionado"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:646
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:652
 msgid "Point Deleted"
 msgstr "Deletar Ponto"
 
@@ -1761,7 +1758,7 @@ msgstr "Predefinição:"
 msgid "Preview"
 msgstr "Pré-Visualizar"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:39
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
 msgstr "Primário"
 
@@ -1873,7 +1870,7 @@ msgstr "Refazer"
 msgid "Reduce Noise"
 msgstr "Reduzir ruído"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:36
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
 msgstr "Reflexão"
 
@@ -1991,7 +1988,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "Girar 90° Sentido Anti-horário"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:199
+#: ../Pinta.Effects/Effects/TileEffect.cs:224
 msgid "Rotation"
 msgstr "Rotação"
 
@@ -2028,7 +2025,7 @@ msgstr "Saturação"
 msgid "Saturation Percentage"
 msgstr "Percentual de Saturação"
 
-#: ../Pinta.Core/Actions/EditActions.cs:420
+#: ../Pinta.Core/Actions/EditActions.cs:408
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2047,7 +2044,7 @@ msgstr "Salvar Como..."
 msgid "Save Image File"
 msgstr "Salvar Arquivo de Imagem"
 
-#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/EditActions.cs:405
 msgid "Save Palette File"
 msgstr "Salvar arquivo de paleta"
 
@@ -2064,7 +2061,7 @@ msgstr "Escala"
 msgid "Screen"
 msgstr "Tela"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:42
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
 msgstr "Secundário"
 
@@ -2089,7 +2086,7 @@ msgstr "Definir Número de Cores"
 msgid "Shape Type"
 msgstr "Tipo de Formato"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:215
+#: ../Pinta.Effects/Effects/TileEffect.cs:243
 msgid "Sharp Edges"
 msgstr ""
 
@@ -2273,11 +2270,11 @@ msgstr ""
 msgid "Tile Reflection"
 msgstr "Reflexo de azulejo"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:202
+#: ../Pinta.Effects/Effects/TileEffect.cs:227
 msgid "Tile Size"
 msgstr "Tamanho Mosaico"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:208
+#: ../Pinta.Effects/Effects/TileEffect.cs:233
 msgid "Tile Type"
 msgstr ""
 
@@ -2333,7 +2330,7 @@ msgstr "Traduzir este Aplicativo"
 msgid "Transparency Mode"
 msgstr "Modo de Transparência"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:45
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr "Transparente"
@@ -2472,7 +2469,7 @@ msgstr "Largura:"
 msgid "Window"
 msgstr "Janela"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:33
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
 msgid "Wrap"
 msgstr "Quebrar"
 

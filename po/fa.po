@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-17 01:41+0000\n"
+"POT-Creation-Date: 2024-11-24 01:43+0000\n"
 "PO-Revision-Date: 2023-12-11 19:34+0000\n"
 "Last-Translator: Parsa <Unknown>\n"
 "Language-Team: Persian <fa@li.org>\n"
@@ -61,7 +61,7 @@ msgid "About Pinta"
 msgstr "درباره‌ی پینتا"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:375
+#: ../Pinta.Core/Actions/LayerActions.cs:371
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "افزودن لایه‌ی جدید"
@@ -74,7 +74,7 @@ msgstr "افزودن پارازیت"
 msgid "Add-in Manager..."
 msgstr "مدیریت افزونه"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:821
 msgid "Added"
 msgstr "اضافه‌شده"
 
@@ -91,9 +91,9 @@ msgstr "پس از انتخاب"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:294
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:106
+#: ../Pinta.Core/Actions/EditActions.cs:472
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "همه فایل‌ها"
 
@@ -260,8 +260,8 @@ msgstr "روشنایی / تضاد"
 msgid "Brush Size"
 msgstr "اندازه‌ی قلم"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:272
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:101
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:124
 msgid "Brush width"
 msgstr "پهنای قلم"
 
@@ -284,12 +284,8 @@ msgstr "با اندازه‌ی مطلق:"
 msgid "By percentage:"
 msgstr "با درصد:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:398
-#: ../Pinta.Core/Actions/EditActions.cs:421
-#: ../Pinta.Core/Actions/LayerActions.cs:174
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
+#: ../Pinta.Core/Actions/EditActions.cs:409
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr ""
@@ -339,6 +335,11 @@ msgstr "وسط‌چین"
 msgid "Centimeters"
 msgstr "سانتی‌متر"
 
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+msgid "Change brush width. Shortcut keys: [ ]"
+msgstr ""
+
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr "تغییر نوع شکل"
@@ -368,7 +369,7 @@ msgstr "انتخاب رنگ ثانویه"
 msgid "Circles"
 msgstr "دایروی"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:30
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
 msgstr "گیره زدن"
 
@@ -564,7 +565,7 @@ msgstr "پوشش"
 msgid "Crop to Selection"
 msgstr "برش‌زدن ناحیه‌ی منتخب"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:218
+#: ../Pinta.Effects/Effects/TileEffect.cs:246
 msgid "Curved"
 msgstr ""
 
@@ -604,11 +605,11 @@ msgid "Default"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:354
+#: ../Pinta.Core/Actions/LayerActions.cs:350
 msgid "Delete Layer"
 msgstr "حذف لایه"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:660
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:666
 msgid "Deleted"
 msgstr "حذف‌شده"
 
@@ -666,7 +667,7 @@ msgid "Download size: {0}"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:341
+#: ../Pinta.Core/Actions/LayerActions.cs:337
 msgid "Duplicate Layer"
 msgstr "نسخه برداری از لایه"
 
@@ -674,7 +675,7 @@ msgstr "نسخه برداری از لایه"
 msgid "Easily create and edit images"
 msgstr "ایجاد و ویرایش تصاویر به آسانی"
 
-#: Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:236 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "وضع لبه‌ها"
 
@@ -739,7 +740,7 @@ msgstr "تفریق"
 msgid "Expand"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:286
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
 msgstr ""
 
@@ -817,8 +818,8 @@ msgstr "شیوه‌ی پرکردن"
 msgid "Fill and Outline Shape"
 msgstr "لبه‌گیری و پرکردن شکل"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1083
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1353
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1089
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1359
 msgid "Finalized"
 msgstr "بسته‌شده"
 
@@ -1003,8 +1004,8 @@ msgstr "برگه‌های تصویر"
 msgid "Image cannot be pasted"
 msgstr "تصویر بازنشانی نمی‌شود"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:115
+#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "فایل های تصویری"
 
@@ -1016,7 +1017,7 @@ msgstr "تصویر بزرگ‌تر از بوم"
 msgid "Image too large"
 msgstr "تصویر خیلی حجیم است."
 
-#: ../Pinta.Core/Actions/LayerActions.cs:230
+#: ../Pinta.Core/Actions/LayerActions.cs:228
 msgid "Import From File"
 msgstr "وارد کردن از فایل"
 
@@ -1049,7 +1050,7 @@ msgstr "هیستوگرام ورودی"
 msgid "Install"
 msgstr "نصب کردن"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:250
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
 msgstr ""
 
@@ -1067,7 +1068,7 @@ msgstr "نصب‌شده"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
-#: ../Pinta.Effects/Effects/TileEffect.cs:205
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
 msgid "Intensity"
 msgstr "شدت"
 
@@ -1083,7 +1084,7 @@ msgid "Invert Colors"
 msgstr "وارونه کردن رنگها"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:479
+#: ../Pinta.Core/Actions/EditActions.cs:493
 msgid "Invert Selection"
 msgstr "گزینش معکوس"
 
@@ -1348,7 +1349,7 @@ msgid "Median"
 msgstr "میانه"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:307
+#: ../Pinta.Core/Actions/LayerActions.cs:303
 msgid "Merge Layer Down"
 msgstr "ترکیب با لایه‌ی زیرین"
 
@@ -1356,7 +1357,7 @@ msgstr "ترکیب با لایه‌ی زیرین"
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:899
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:905
 msgid "Modified"
 msgstr "تغییریافته"
 
@@ -1369,12 +1370,12 @@ msgid "Motion Blur"
 msgstr "حرکت تار شده"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:288
+#: ../Pinta.Core/Actions/LayerActions.cs:284
 msgid "Move Layer Down"
 msgstr "حرکت لایه به پایین"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:272
+#: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Up"
 msgstr "حرکت لایه به بالا"
 
@@ -1483,11 +1484,7 @@ msgstr "رنگ روغنی"
 msgid "Opacity:"
 msgstr "شفافیت:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:397
 #: ../Pinta.Core/Actions/FileActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:173
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:72
 msgid "Open"
 msgstr "بازکردن"
 
@@ -1499,8 +1496,8 @@ msgstr "شکل منحنی باز"
 msgid "Open Image"
 msgstr "بازکردن تصویر"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:170
-#: ../Pinta/Actions/File/OpenDocumentAction.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "بازکردن فایل تصویری"
 
@@ -1508,7 +1505,7 @@ msgstr "بازکردن فایل تصویری"
 msgid "Open Line/Curve Series"
 msgstr "دنباله‌های خط / منحنی باز"
 
-#: ../Pinta.Core/Actions/EditActions.cs:394
+#: ../Pinta.Core/Actions/EditActions.cs:388
 msgid "Open Palette File"
 msgstr "بازکردن پرونده جعبه‌رنگ"
 
@@ -1521,7 +1518,7 @@ msgstr "...باز کردن"
 msgid "Orientation:"
 msgstr "جهت:"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:48
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
 msgstr "اصلی"
 
@@ -1579,7 +1576,7 @@ msgstr "قلم‌مو"
 msgid "Palette"
 msgstr "جعبه‌رنگ"
 
-#: ../Pinta.Core/Actions/EditActions.cs:381
+#: ../Pinta.Core/Actions/EditActions.cs:455
 msgid "Palette files"
 msgstr ""
 
@@ -1682,12 +1679,12 @@ msgstr "پیکسل"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:785
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:605
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:791
 msgid "Point Added"
 msgstr "نقطه‌ی اضافه‌شده"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:646
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:652
 msgid "Point Deleted"
 msgstr "نقطه حذف‌شده"
 
@@ -1729,7 +1726,7 @@ msgstr "پیش‌تنظیم:"
 msgid "Preview"
 msgstr "پیش‌نمایش"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:39
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
 msgstr "اولیه"
 
@@ -1841,7 +1838,7 @@ msgstr "انجام دوبارهٔ کنش"
 msgid "Reduce Noise"
 msgstr "کاهش پارازیت"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:36
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
 msgstr "انعکاس"
 
@@ -1959,7 +1956,7 @@ msgid "Rotate 90° Counter-Clockwise"
 msgstr "چرخش 90 درجه در جهت عکس ساعت"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:199
+#: ../Pinta.Effects/Effects/TileEffect.cs:224
 msgid "Rotation"
 msgstr "دوران"
 
@@ -1996,7 +1993,7 @@ msgstr "اشباع رنگ"
 msgid "Saturation Percentage"
 msgstr "درصد اشباع رنگ"
 
-#: ../Pinta.Core/Actions/EditActions.cs:420
+#: ../Pinta.Core/Actions/EditActions.cs:408
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2015,7 +2012,7 @@ msgstr "...ذخیره به عنوان"
 msgid "Save Image File"
 msgstr "ذخیره‌سازی فایل تصویر"
 
-#: ../Pinta.Core/Actions/EditActions.cs:417
+#: ../Pinta.Core/Actions/EditActions.cs:405
 msgid "Save Palette File"
 msgstr "ذخیره‌ی پرونده‌ی جعبه‌رنگ"
 
@@ -2032,7 +2029,7 @@ msgstr "مقیاس"
 msgid "Screen"
 msgstr "پرده"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:42
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
 msgstr "ثانویه"
 
@@ -2057,7 +2054,7 @@ msgstr "تعیین تعداد رنگ جعبه"
 msgid "Shape Type"
 msgstr "نوع شکل"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:215
+#: ../Pinta.Effects/Effects/TileEffect.cs:243
 msgid "Sharp Edges"
 msgstr ""
 
@@ -2241,11 +2238,11 @@ msgstr ""
 msgid "Tile Reflection"
 msgstr "انعکاس مشبک"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:202
+#: ../Pinta.Effects/Effects/TileEffect.cs:227
 msgid "Tile Size"
 msgstr "اندازۀ کاشی"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:208
+#: ../Pinta.Effects/Effects/TileEffect.cs:233
 msgid "Tile Type"
 msgstr ""
 
@@ -2301,7 +2298,7 @@ msgstr "ترجمه کردن این برنامه"
 msgid "Transparency Mode"
 msgstr ""
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:45
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:121
 msgid "Transparent"
 msgstr "شفاف"
@@ -2439,7 +2436,7 @@ msgstr "عرض:"
 msgid "Window"
 msgstr "پنجره"
 
-#: ../Pinta.Effects/Algorithms/Warp.cs:33
+#: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
 msgid "Wrap"
 msgstr "پیچیدن"
 
