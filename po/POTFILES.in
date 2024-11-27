@@ -98,7 +98,16 @@ Pinta.Core/EventArgs/TextChangedEventArgs.cs
 Pinta.Core/EventArgs/ToolEventArgs.cs
 Pinta.Core/EventArgs/ToolKeyEventArgs.cs
 Pinta.Core/EventArgs/ToolMouseEventArgs.cs
-Pinta.Core/Extensions/CairoExtensions.cs
+Pinta.Core/Extensions/Cairo/CairoExtensions.Blending.cs
+Pinta.Core/Extensions/Cairo/CairoExtensions.Color.cs
+Pinta.Core/Extensions/Cairo/CairoExtensions.ColorType.cs
+Pinta.Core/Extensions/Cairo/CairoExtensions.Core.cs
+Pinta.Core/Extensions/Cairo/CairoExtensions.Drawing.cs
+Pinta.Core/Extensions/Cairo/CairoExtensions.External.cs
+Pinta.Core/Extensions/Cairo/CairoExtensions.Geometry.cs
+Pinta.Core/Extensions/Cairo/CairoExtensions.Patterns.cs
+Pinta.Core/Extensions/Cairo/CairoExtensions.Samples.cs
+Pinta.Core/Extensions/Cairo/CairoExtensions.cs
 Pinta.Core/Extensions/GdkExtensions.cs
 Pinta.Core/Extensions/GdkKey.cs
 Pinta.Core/Extensions/GdkPixbufExtensions.cs
@@ -180,6 +189,7 @@ Pinta.Effects/Algorithms/LocalHistogram.cs
 Pinta.Effects/Algorithms/PerlinNoise.cs
 Pinta.Effects/Algorithms/Warp.cs
 Pinta.Effects/Classes/ColorGradient.cs
+Pinta.Effects/Classes/EdgeBehavior.cs
 Pinta.Effects/Classes/ErrorDiffusionMatrix.cs
 Pinta.Effects/CoreEffectsExtension.cs
 Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs
