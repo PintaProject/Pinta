@@ -102,6 +102,12 @@ internal sealed class MathematicsTests
 		Assert.That (fractions.lhs.GetHashCode () == fractions.rhs.GetHashCode (), "Hashes are not equal");
 	}
 
+	[TestCase]
+	public void Fraction_Rejects_Zero_Denominator ()
+	{
+		Assert.Throws<ArgumentOutOfRangeException> (() => new Fraction<int> (1, 0));
+	}
+
 	private static readonly IReadOnlyList<TestCaseData> lerp_cases =
 		GenerateRegularLerpCases ()
 		.Concat (GenerateOneWayLerpCases ())
