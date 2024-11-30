@@ -82,7 +82,7 @@ public sealed class DentsEffect : BaseEffect
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		foreach (RectangleI rect in rois) {
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, src.GetSize ())) {
+			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, src.GetSize ())) {
 				dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
 					settings,
 					InverseTransform,

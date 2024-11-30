@@ -86,7 +86,7 @@ public sealed class RadialBlurEffect : BaseEffect
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
 		foreach (RectangleI rect in rois)
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize))
+			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, settings.canvasSize))
 				destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 					settings,
 					sourceData,

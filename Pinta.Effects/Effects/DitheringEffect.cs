@@ -56,7 +56,7 @@ public sealed class DitheringEffect : BaseEffect
 			}
 		}
 
-		foreach (var pixel in Utility.GeneratePixelOffsets (roi, dest.GetSize ())) {
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, dest.GetSize ())) {
 
 			ColorBgra originalPixel = dst_data[pixel.memoryOffset];
 			ColorBgra closestColor = FindClosestPaletteColor (settings.palette, originalPixel);

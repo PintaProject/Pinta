@@ -35,7 +35,7 @@ public static class ColorDifference
 
 		foreach (RectangleI rect in rois) {
 
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, source.GetSize ())) {
+			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, source.GetSize ())) {
 
 				destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 					weights,

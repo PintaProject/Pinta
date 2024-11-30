@@ -98,7 +98,7 @@ public sealed class VignetteEffect : BaseEffect
 		VignetteSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
-		foreach (var pixel in Utility.GeneratePixelOffsets (roi, settings.canvasSize))
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
 			destinationData[pixel.memoryOffset] = GetFinalPixelColor (settings, sourceData, pixel);
 	}
 

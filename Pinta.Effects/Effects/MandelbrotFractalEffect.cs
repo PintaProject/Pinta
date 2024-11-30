@@ -132,7 +132,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		MandelbrotSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		foreach (RectangleI rect in rois)
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize))
+			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, settings.canvasSize))
 				dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 
 		if (settings.invertColors)
