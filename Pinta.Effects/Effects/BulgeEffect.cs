@@ -76,7 +76,7 @@ public sealed class BulgeEffect : BaseEffect
 
 		foreach (RectangleI rect in rois) {
 
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, new Size (settings.sourceWidth, settings.sourceHeight))) {
+			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, new Size (settings.sourceWidth, settings.sourceHeight))) {
 
 				destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 					settings,
