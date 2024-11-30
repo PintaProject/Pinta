@@ -56,8 +56,7 @@ public sealed class TgaExporter : IImageExporter
 		ushort imageWidth,  // Image Width
 		ushort imageHeight, // Image Height
 		byte pixelDepth,    // Pixel Depth
-		byte imageDesc      // Image Descriptor
-	)
+		byte imageDesc)     // Image Descriptor
 	{
 		public readonly void WriteTo (BinaryWriter output)
 		{
@@ -87,11 +86,14 @@ public sealed class TgaExporter : IImageExporter
 
 	// For now, we only export in uncompressed ARGB32 format. If someone requests this functionality,
 	// we can always add more through an export dialog.
-	public void Export (Document document, Gio.File file, Gtk.Window parent)
+	public void Export (
+		Document document,
+		Gio.File file,
+		Gtk.Window parent)
 	{
-		ImageSurface surf = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
-		using var file_stream = new GioStream (file.Replace ());
-		using var writer = new BinaryWriter (file_stream);
+		using ImageSurface flattenedImage = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
+		using GioStream file_stream = new (file.Replace ());
+		using BinaryWriter writer = new (file_stream);
 
 		TgaHeader header = new (
 			idLength: (byte) (ImageIdField.Length + 1),
@@ -102,21 +104,21 @@ public sealed class TgaExporter : IImageExporter
 			cmapEntrySize: 0,
 			xOrigin: 0,
 			yOrigin: 0,
-			imageWidth: (ushort) surf.Width,
-			imageHeight: (ushort) surf.Height,
+			imageWidth: (ushort) flattenedImage.Width,
+			imageHeight: (ushort) flattenedImage.Height,
 			pixelDepth: 32,
-			imageDesc: 8 // 32-bit, lower-left origin, which is weird but hey...
-		);
+			imageDesc: 8); // 32-bit, lower-left origin, which is weird but hey...
+
 		header.WriteTo (writer);
 
 		writer.Write (ImageIdField);
 
-		Span<byte> data = surf.GetData ();
+		Span<byte> data = flattenedImage.GetData ();
 
 		// It just so happens that the Cairo ARGB32 internal representation matches
 		// the TGA format, except vertically-flipped. In little-endian, of course.
-		for (int y = surf.Height - 1; y >= 0; y--)
-			writer.Write (data.Slice (surf.Stride * y, surf.Stride));
+		for (int y = flattenedImage.Height - 1; y >= 0; y--)
+			writer.Write (data.Slice (flattenedImage.Stride * y, flattenedImage.Stride));
 
 	}
 }
