@@ -132,8 +132,7 @@ public sealed class DocumentWorkspace
 	private static Size CoercedToPositive (Size baseSize)
 		=> new (
 			Width: Math.Max (baseSize.Width, 1),
-			Height: Math.Max (baseSize.Height, 1)
-		);
+			Height: Math.Max (baseSize.Height, 1));
 
 	private static Size GetNewViewSize (Size imageSize, double scale)
 	{
@@ -229,9 +228,9 @@ public sealed class DocumentWorkspace
 	/// </param>
 	public PointD ViewPointToCanvas (PointD viewPoint)
 	{
-		var sf = new ScaleFactor (document.ImageSize.Width, ViewSize.Width);
-		var pt = sf.ScalePoint (viewPoint - Offset);
-		return new PointD (pt.X, pt.Y);
+		Fraction<int> sf = ScaleFactor.CreateClamped (document.ImageSize.Width, ViewSize.Width);
+		PointD pt = sf.ScalePoint (viewPoint - Offset);
+		return new (pt.X, pt.Y);
 	}
 
 	/// <summary>
@@ -239,9 +238,11 @@ public sealed class DocumentWorkspace
 	/// </summary>
 	public PointD CanvasPointToView (PointD canvasPoint)
 	{
-		var sf = new ScaleFactor (document.ImageSize.Width, ViewSize.Width);
-		var pt = sf.UnscalePoint (canvasPoint);
-		return new PointD (pt.X + Offset.X, pt.Y + Offset.Y);
+		Fraction<int> sf = ScaleFactor.CreateClamped (document.ImageSize.Width, ViewSize.Width);
+		PointD pt = sf.UnscalePoint (canvasPoint);
+		return new (
+			X: pt.X + Offset.X,
+			Y: pt.Y + Offset.Y);
 	}
 
 	public void ZoomIn ()
@@ -281,20 +282,17 @@ public sealed class DocumentWorkspace
 
 	public void ZoomToCanvasRectangle (RectangleD rect)
 	{
-		double ratio;
-
-		if (document.ImageSize.Width / rect.Width <= document.ImageSize.Height / rect.Height)
-			ratio = document.ImageSize.Width / rect.Width;
-		else
-			ratio = document.ImageSize.Height / rect.Height;
+		double ratio =
+			(document.ImageSize.Width / rect.Width <= document.ImageSize.Height / rect.Height)
+			? document.ImageSize.Width / rect.Width
+			: document.ImageSize.Height / rect.Height;
 
 		PintaCore.Actions.View.ZoomComboBox.ComboBox.GetEntry ().SetText (ViewActions.ToPercent (ratio));
 		GLib.MainContext.Default ().Iteration (false); //Force update of scrollbar upper before recenter
 
 		PointD newPoint = new (
 			X: rect.X + rect.Width / 2,
-			Y: rect.Y + rect.Height / 2
-		);
+			Y: rect.Y + rect.Height / 2);
 
 		RecenterView (newPoint);
 	}
