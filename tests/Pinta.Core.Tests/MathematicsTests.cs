@@ -112,13 +112,13 @@ internal sealed class MathematicsTests
 		.Select (c => new TestCaseData (c))
 		.ToArray ();
 
-	private static IEnumerable<UnequalFractionCase> GenerateEqualFractions ()
+	private static IEnumerable<EqualFractionCase> GenerateEqualFractions ()
 	{
-		yield return new (lesser: new (1, 3), greater: new (2, 6));
-		yield return new (lesser: new (1, 2), greater: new (2, 4));
-		yield return new (lesser: new (1, 1), greater: new (1, 1));
-		yield return new (lesser: new (1, 1), greater: new (2, 2));
-		yield return new (lesser: new (2, 3), greater: new (4, 6));
+		yield return new (lhs: new (1, 3), rhs: new (2, 6));
+		yield return new (lhs: new (1, 2), rhs: new (2, 4));
+		yield return new (lhs: new (1, 1), rhs: new (1, 1));
+		yield return new (lhs: new (1, 1), rhs: new (2, 2));
+		yield return new (lhs: new (2, 3), rhs: new (4, 6));
 	}
 
 	public readonly record struct UnequalFractionCase (
