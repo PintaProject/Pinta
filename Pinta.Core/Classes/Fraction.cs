@@ -29,11 +29,29 @@ public readonly struct Fraction<TInt> where TInt : IBinaryInteger<TInt>
 		}
 	}
 
+	public static bool operator == (Fraction<TInt> lhs, Fraction<TInt> rhs)
+		=> lhs.Equals (rhs);
+
+	public static bool operator != (Fraction<TInt> lhs, Fraction<TInt> rhs)
+		=> !lhs.Equals (rhs);
+
 	public static bool operator < (Fraction<TInt> lhs, Fraction<TInt> rhs)
 		=> (lhs.Numerator * rhs.Denominator) < (rhs.Numerator * lhs.Denominator);
 
 	public static bool operator > (Fraction<TInt> lhs, Fraction<TInt> rhs)
 		=> (lhs.Numerator * rhs.Denominator) > (rhs.Numerator * lhs.Denominator);
+
+	public bool Equals (Fraction<TInt> other)
+		=> Numerator == other.Numerator && Denominator == other.Denominator;
+
+	public override bool Equals (object? obj)
+	{
+		if (obj is not Fraction<TInt> other) return false;
+		return Equals (other);
+	}
+
+	public override int GetHashCode ()
+		=> Numerator.GetHashCode () ^ Denominator.GetHashCode ();
 }
 
 public static class FractionExtensions

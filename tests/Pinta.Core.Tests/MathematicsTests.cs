@@ -80,11 +80,26 @@ internal sealed class MathematicsTests
 		Assert.That (!(fractions.greater < fractions.lesser), "Negated comparison failed");
 	}
 
+	[TestCaseSource (nameof (unequal_fraction_cases))]
+	public void Fraction_Unequal (UnequalFractionCase fractions)
+	{
+		Assert.That (fractions.lesser != fractions.greater, "Inequality operator comparison failed");
+		Assert.That (!(fractions.lesser == fractions.greater), "Equality operator comparison failed");
+	}
+
 	[TestCaseSource (nameof (equal_fraction_cases))]
 	public void Fraction_Equal_Reduction (EqualFractionCase fractions)
 	{
 		Assert.That (fractions.lhs.Numerator == fractions.rhs.Numerator, "Numerators not equal");
 		Assert.That (fractions.lhs.Denominator == fractions.rhs.Denominator, "Denominators not equal");
+	}
+
+	[TestCaseSource (nameof (equal_fraction_cases))]
+	public void Fraction_Equal (EqualFractionCase fractions)
+	{
+		Assert.That (fractions.lhs == fractions.rhs, "Operator comparison failed");
+		Assert.That (!(fractions.lhs != fractions.rhs), "Inequality operator comparison failed");
+		Assert.That (fractions.lhs.GetHashCode () == fractions.rhs.GetHashCode (), "Hashes are not equal");
 	}
 
 	private static readonly IReadOnlyList<TestCaseData> lerp_cases =
