@@ -48,4 +48,17 @@ public static class Mathematics
 		TNumber offset = value - from;
 		return offset / valueSpan;
 	}
+
+	public static Fraction<TInt> Clamp<TInt> (
+		Fraction<TInt> original,
+		Fraction<TInt> min,
+		Fraction<TInt> max
+	)
+		where TInt : IBinaryInteger<TInt>
+	{
+		if (min > max) throw new ArgumentException ("Minimum should be less than maximum");
+		if (min > original) return min;
+		if (max < original) return max;
+		return original;
+	}
 }

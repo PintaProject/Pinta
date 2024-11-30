@@ -7,8 +7,6 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
-
 namespace Pinta.Core;
 
 /// <summary>
@@ -16,66 +14,40 @@ namespace Pinta.Core;
 /// Includes methods for Size[F]'s, Point[F]'s, Rectangle[F]'s,
 /// and various scalars
 /// </summary>
-public readonly struct ScaleFactor
+public static class ScaleFactor
 {
-	private readonly int denominator;
-	private readonly int numerator;
+	public static Fraction<int> OneToOne { get; } = new (1, 1);
+	public static Fraction<int> MinValue { get; } = new (1, 100);
+	public static Fraction<int> MaxValue { get; } = new (32, 1);
 
-	public double Ratio { get; }
+	public static int ScaleScalar (this in Fraction<int> fraction, int x) =>
+		(int) (((long) x * fraction.Numerator) / fraction.Denominator);
 
-	public static readonly ScaleFactor OneToOne = new (1, 1);
-	public static readonly ScaleFactor MinValue = new (1, 100);
-	public static readonly ScaleFactor MaxValue = new (32, 1);
+	public static int UnscaleScalar (this in Fraction<int> fraction, int x) =>
+		(int) (((long) x * fraction.Denominator) / fraction.Numerator);
 
-	public readonly int ScaleScalar (int x) =>
-		(int) (((long) x * numerator) / denominator);
+	public static double ScaleScalar (this in Fraction<int> fraction, double x) =>
+		x * fraction.Numerator / fraction.Denominator;
 
-	public readonly int UnscaleScalar (int x) =>
-		(int) (((long) x * denominator) / numerator);
+	public static double UnscaleScalar (this in Fraction<int> fraction, double x) =>
+		x * fraction.Denominator / fraction.Numerator;
 
-	public readonly double ScaleScalar (double x) =>
-		x * numerator / denominator;
+	public static PointD ScalePoint (this in Fraction<int> fraction, PointD p) =>
+		new (fraction.ScaleScalar (p.X), fraction.ScaleScalar (p.Y));
 
-	public readonly double UnscaleScalar (double x) =>
-		x * denominator / numerator;
+	public static PointD UnscalePoint (this in Fraction<int> fraction, PointD p) =>
+		new (fraction.UnscaleScalar (p.X), fraction.UnscaleScalar (p.Y));
 
-	public readonly PointD ScalePoint (PointD p) =>
-		new (ScaleScalar (p.X), ScaleScalar (p.Y));
+	public static double ComputeRatio (this in Fraction<int> fraction)
+		=> fraction.Numerator / (double) fraction.Denominator;
 
-	public readonly PointD UnscalePoint (PointD p) =>
-		new (UnscaleScalar (p.X), UnscaleScalar (p.Y));
-
-	public static bool operator < (ScaleFactor lhs, ScaleFactor rhs) =>
-		(lhs.numerator * rhs.denominator) < (rhs.numerator * lhs.denominator);
-
-	public static bool operator > (ScaleFactor lhs, ScaleFactor rhs) =>
-		(lhs.numerator * rhs.denominator) > (rhs.numerator * lhs.denominator);
-
-	public ScaleFactor (int numerator, int denominator)
+	/// <returns>
+	/// Fraction representing the scale factor,
+	/// clamped to <see cref="MinValue"/> and <see cref="MaxValue"/>
+	/// </returns>
+	public static Fraction<int> CreateClamped (int numerator, int denominator)
 	{
-		if (denominator <= 0)
-			throw new ArgumentOutOfRangeException (nameof (denominator), "must be greater than 0(denominator = " + denominator + ")");
-
-		if (numerator <= 0)
-			throw new ArgumentOutOfRangeException (nameof (numerator), "must be greater than 0(numerator = " + numerator + ")");
-
-		// Clamp
-		if ((numerator * MinValue.denominator) < (MinValue.numerator * denominator)) {
-			numerator = MinValue.numerator;
-			denominator = MinValue.denominator;
-		} else if ((MaxValue.numerator * denominator) > (MaxValue.numerator * denominator)) {
-			numerator = MaxValue.numerator;
-			denominator = MaxValue.denominator;
-		}
-
-		int gcd = Mathematics.EuclidGCD (numerator, denominator);
-
-		int reducedNumerator = numerator / gcd;
-		int reducedDenominator = denominator / gcd;
-
-		this.numerator = reducedNumerator;
-		this.denominator = reducedDenominator;
-
-		Ratio = reducedNumerator / (double) reducedDenominator;
+		Fraction<int> baseFraction = new (numerator, denominator);
+		return Mathematics.Clamp (baseFraction, MinValue, MaxValue);
 	}
 }
