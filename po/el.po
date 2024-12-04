@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-24 01:43+0000\n"
-"PO-Revision-Date: 2024-11-11 20:02+0000\n"
+"PO-Revision-Date: 2024-12-05 18:00+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
 "Language: el\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.9-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -296,11 +296,11 @@ msgstr "Καμβάς"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "Ρυθμίσεις πλέγματος καμβά"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:75
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Πλέγμα καμβά..."
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:126
 msgid "Cell Size"
@@ -338,7 +338,7 @@ msgstr "Εκατοστά"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Αλλαγή πλάτους βούρτσας. Πλήκτρα συντόμευσης: []"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
@@ -1365,7 +1365,7 @@ msgstr "Γραμμική διαβάθμιση χρώματος σε αντανά
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:77
 msgid "Linked"
-msgstr "Συνδεμένο"
+msgstr "Συνεδεμένο"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:173
@@ -1392,7 +1392,7 @@ msgstr "Φράκταλ Μάντελμπροτ"
 #. Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
 #: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Martian Lava"
-msgstr ""
+msgstr "Λάβα του Άρη"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:24
 msgid "Median"
@@ -2126,7 +2126,7 @@ msgstr "Πλήκτρο συντόμευσης"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 msgid "Show Grid"
-msgstr ""
+msgstr "Εμφάνιση πλέγματος"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 msgid "Show Layer"
