@@ -427,7 +427,7 @@ public sealed class TextTool : BaseTool
 			RedrawText (is_editing, true);
 	}
 
-	private void UpdateTextEngineColor()
+	private void UpdateTextEngineColor ()
 	{
 		if (PintaCore.Workspace.HasOpenDocuments) {
 			CurrentTextEngine.PrimaryColor = palette.PrimaryColor;

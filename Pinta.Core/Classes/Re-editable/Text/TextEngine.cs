@@ -28,9 +28,9 @@ public sealed partial class TextEngine
 
 	public Pango.FontDescription Font { get; private set; } = Pango.FontDescription.New ();
 
-	private Color primary_color = new(0,0,0);
+	private Color primary_color = new (0, 0, 0);
 
-	private Color secondary_color = new(0,0,0);
+	private Color secondary_color = new (0, 0, 0);
 	public Color PrimaryColor {
 		get => primary_color;
 		set {
