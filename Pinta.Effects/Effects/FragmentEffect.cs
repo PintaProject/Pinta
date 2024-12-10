@@ -76,7 +76,7 @@ public sealed class FragmentEffect : BaseEffect
 		FragmentSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = destination.GetPixelData ();
-		foreach (var pixel in Utility.GeneratePixelOffsets (roi, settings.sourceSize))
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.sourceSize))
 			dst_data[pixel.memoryOffset] = GetFinalPixelColor (
 				settings,
 				source,

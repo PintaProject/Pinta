@@ -51,7 +51,7 @@ public sealed class TwistEffect : BaseEffect
 		TwistSettings settings = CreateSettings ();
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
-		foreach (var pixel in Utility.GeneratePixelOffsets (roi, source.GetSize ()))
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ()))
 			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 				settings,
 				source,
