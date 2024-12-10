@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-24 01:43+0000\n"
-"PO-Revision-Date: 2016-06-06 03:47+0000\n"
-"Last-Translator: Rockworld <sumoisrock@gmail.com>\n"
-"Language-Team: Arabic <ar@li.org>\n"
+"POT-Creation-Date: 2024-12-08 01:47+0000\n"
+"PO-Revision-Date: 2024-12-08 08:00+0000\n"
+"Last-Translator: \"Jadiir M. Aal Jaidaan\" <ashrafquatre@gmail.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/pinta/pinta/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
-"3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 5.9-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
 msgid " (in user directory)"
@@ -51,7 +51,7 @@ msgstr "منطقة بمساحة 9 × 9"
 
 #: ../Pinta/MainWindow.cs:363
 msgid "A_dd-ins"
-msgstr ""
+msgstr "الإضافات"
 
 #: ../Pinta.Core/Actions/AppActions.cs:40
 msgid "About"
@@ -73,7 +73,7 @@ msgstr "أضف ضوضاء"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "مدير الإضافات..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:821
 msgid "Added"
@@ -100,7 +100,7 @@ msgstr "كل الملفّات"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "تدرج ألفا"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
@@ -168,7 +168,7 @@ msgstr "اضبط المستويات تلقائيا"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:215
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "متاح في المخزن:{0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:145
 msgid "Background"
@@ -184,12 +184,12 @@ msgstr "خلفية"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:93
 msgid "Based on the work of Paint.NET:"
-msgstr ""
+msgstr "مبني على العمل القائم بـPaint.NET:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "إيطاليا البهية"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Best Fit"
@@ -197,7 +197,7 @@ msgstr "أفضل ملائمة"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "خطي ثنائي"
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
@@ -234,19 +234,19 @@ msgstr "غليظ"
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
-msgstr ""
+msgstr "حريق"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "منتصف الأسفل"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "يسار الأسفل"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "يمين الأسفل"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:144
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
@@ -289,7 +289,7 @@ msgstr "بالنسبة المئوية"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
-msgstr ""
+msgstr "إلغاء"
 
 #: ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
@@ -297,11 +297,11 @@ msgstr "رقعة"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "إعدادات اللوحة"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:75
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "شبكة اللوحة..."
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:126
 msgid "Cell Size"
@@ -309,7 +309,7 @@ msgstr "مقاس الخلية"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "الوسط"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:231
 msgid "Center Align"
@@ -317,7 +317,7 @@ msgstr "محاذاة للوسط"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "يسار الوسط"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:159
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
@@ -326,7 +326,7 @@ msgstr "انزياح المركز"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "يمين الوسط"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:128
 msgid "Centered"
@@ -339,20 +339,20 @@ msgstr "سنتيمترات"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "غير حجم الفرشاة بالاختصار: []"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
-msgstr ""
+msgstr "تم تغيير نوع الشكل"
 
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:36
 msgid "Cherry Blossom"
-msgstr ""
+msgstr "أزهار الكرز"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:609
 msgid "Choose Color"
-msgstr ""
+msgstr "اختر لونًا"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:108
 msgid "Choose Palette Color"
@@ -379,6 +379,8 @@ msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
+"انقر وحرك المؤشر لرسم مستطيل.\n"
+"اضغط على Shift لرسم مربع."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:38
 msgid ""
