@@ -30,27 +30,21 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public sealed class Arrow
+public readonly record struct Arrow (
+	bool Show,
+	double ArrowSize,
+	double AngleOffset,
+	double LengthOffset)
 {
-	public bool Show { get; internal set; } = false;
-	public double ArrowSize { get; internal set; } = 10d;
-	public double AngleOffset { get; internal set; } = 15d;
-	public double LengthOffset { get; internal set; } = 10d;
+	public Arrow ()
+		: this (false, 10d, 15d, 10d)
+	{ }
+}
 
+public static class ArrowExtensions
+{
 	private const double RadiansToDegrees = Math.PI / 180d;
 	private const double InvRadiansToDegrees = 180d / Math.PI;
-
-	/// <summary>
-	/// Returns a clone of the Arrow.
-	/// </summary>
-	/// <returns>A clone of the Arrow.</returns>
-	public Arrow Clone ()
-		=> new () {
-			Show = Show,
-			ArrowSize = ArrowSize,
-			AngleOffset = AngleOffset,
-			LengthOffset = LengthOffset,
-		};
 
 	/// <summary>
 	/// Draws the arrow.
@@ -58,7 +52,12 @@ public sealed class Arrow
 	/// <param name="g">The drawing context.</param>
 	/// <param name="endPoint">The end point of a shape.</param>
 	/// <param name="almostEndPoint">The point right before the end point.</param>
-	public RectangleD Draw (Context g, Color outlineColor, PointD endPoint, PointD almostEndPoint)
+	public static RectangleD Draw (
+		this in Arrow arrow,
+		Context g,
+		Color outlineColor,
+		PointD endPoint,
+		PointD almostEndPoint)
 	{
 		//First, calculate the ending angle.
 		double endingAngle = Math.Atan (Math.Abs (endPoint.Y - almostEndPoint.Y) / Math.Abs (endPoint.X - almostEndPoint.X)) * InvRadiansToDegrees;
@@ -82,16 +81,16 @@ public sealed class Arrow
 			endPoint,
 
 			new PointD (
-				endPoint.X + Math.Cos ((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize,
-				endPoint.Y + Math.Sin ((endingAngle + 270 + AngleOffset) * RadiansToDegrees) * ArrowSize * -1d),
+				endPoint.X + Math.Cos ((endingAngle + 270 + arrow.AngleOffset) * RadiansToDegrees) * arrow.ArrowSize,
+				endPoint.Y + Math.Sin ((endingAngle + 270 + arrow.AngleOffset) * RadiansToDegrees) * arrow.ArrowSize * -1d),
 
 			new PointD (
-				endPoint.X + Math.Cos ((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset),
-				endPoint.Y + Math.Sin ((endingAngle + 180) * RadiansToDegrees) * (ArrowSize + LengthOffset) * -1d),
+				endPoint.X + Math.Cos ((endingAngle + 180) * RadiansToDegrees) * (arrow.ArrowSize + arrow.LengthOffset),
+				endPoint.Y + Math.Sin ((endingAngle + 180) * RadiansToDegrees) * (arrow.ArrowSize + arrow.LengthOffset) * -1d),
 
 			new PointD (
-				endPoint.X + Math.Cos ((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize,
-				endPoint.Y + Math.Sin ((endingAngle + 90 - AngleOffset) * RadiansToDegrees) * ArrowSize * -1d),
+				endPoint.X + Math.Cos ((endingAngle + 90 - arrow.AngleOffset) * RadiansToDegrees) * arrow.ArrowSize,
+				endPoint.Y + Math.Sin ((endingAngle + 90 - arrow.AngleOffset) * RadiansToDegrees) * arrow.ArrowSize * -1d),
 		};
 
 		//Draw the arrow.
@@ -102,8 +101,7 @@ public sealed class Arrow
 
 		PointD min = new (
 			X: Math.Min (Math.Min (arrowPoints[1].X, arrowPoints[2].X), arrowPoints[3].X),
-			Y: Math.Min (Math.Min (arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y)
-		);
+			Y: Math.Min (Math.Min (arrowPoints[1].Y, arrowPoints[2].Y), arrowPoints[3].Y));
 
 		return new RectangleD (
 			min.X,
