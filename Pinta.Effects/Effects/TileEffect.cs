@@ -125,7 +125,7 @@ public sealed class TileEffect : BaseEffect
 		TileSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
-		foreach (var pixel in Utility.GeneratePixelOffsets (roi, source.GetSize ()))
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ()))
 			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 				source,
 				settings,

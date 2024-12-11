@@ -99,7 +99,7 @@ public sealed class MotionBlurEffect : BaseEffect
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 
 		foreach (var rect in rois) {
-			foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.canvasSize)) {
+			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, settings.canvasSize)) {
 				int sampleCount = 0;
 				for (int j = 0; j < settings.points.Length; ++j) {
 					PointD pt = new (settings.points[j].X + pixel.coordinates.X, settings.points[j].Y + pixel.coordinates.Y);

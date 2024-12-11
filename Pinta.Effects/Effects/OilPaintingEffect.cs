@@ -54,7 +54,7 @@ public sealed class OilPaintingEffect : BaseEffect
 		OilPaintingSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = destination.GetPixelData ();
-		foreach (var pixel in Utility.GeneratePixelOffsets (roi, settings.canvasSize))
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
 			dst_data[pixel.memoryOffset] = GetFinalColor (
 				settings,
 				src_data,
