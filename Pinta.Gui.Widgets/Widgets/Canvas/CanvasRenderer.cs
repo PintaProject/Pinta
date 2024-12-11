@@ -23,7 +23,8 @@ public sealed class CanvasRenderer
 
 	private Size source_size;
 	private Size destination_size;
-	private ScaleFactor scale_factor;
+	private Fraction<int> scale_factor;
+	private double scale_ratio;
 
 	private ImmutableArray<int>? d_2_s_lookup_x;
 	private ImmutableArray<int>? d_2_s_lookup_y;
@@ -49,7 +50,9 @@ public sealed class CanvasRenderer
 		source_size = sourceSize;
 		destination_size = destinationSize;
 
-		scale_factor = new ScaleFactor (source_size.Width, destination_size.Width);
+		Fraction<int> scaleFactor = ScaleFactor.CreateClamped (source_size.Width, destination_size.Width);
+		scale_factor = scaleFactor;
+		scale_ratio = scale_factor.ComputeRatio ();
 
 		d_2_s_lookup_x = null;
 		d_2_s_lookup_y = null;
@@ -66,7 +69,7 @@ public sealed class CanvasRenderer
 
 		// Our rectangle of interest
 		RectangleD r = new RectangleI (offset, dst.GetBounds ().Size).ToDouble ();
-		bool is_one_to_one = scale_factor.Ratio == 1;
+		bool is_one_to_one = scale_ratio == 1;
 
 		using Cairo.Context g = new (dst);
 
@@ -87,14 +90,14 @@ public sealed class CanvasRenderer
 
 			if (!is_one_to_one) {
 				// Scale the source surface based on the zoom level.
-				double inv_scale = 1.0 / scale_factor.Ratio;
+				double inv_scale = 1.0 / scale_ratio;
 				g.Scale (inv_scale, inv_scale);
 			}
 
 			g.Transform (layer.Transform);
 
 			// Use nearest-neighbor interpolation when zoomed in so that there isn't any smoothing.
-			ResamplingMode filter = (scale_factor.Ratio <= 1) ? ResamplingMode.NearestNeighbor : ResamplingMode.Bilinear;
+			ResamplingMode filter = (scale_ratio <= 1) ? ResamplingMode.NearestNeighbor : ResamplingMode.Bilinear;
 
 			g.SetSourceSurface (surf, filter);
 
@@ -121,7 +124,7 @@ public sealed class CanvasRenderer
 		int cellWidth = canvasGrid.CellWidth;
 
 		int minCanvasDistance = Math.Min (cellHeight, cellWidth);
-		double minRenderedDistance = minCanvasDistance / scale_factor.Ratio;
+		double minRenderedDistance = minCanvasDistance / scale_ratio;
 
 		return (int) minRenderedDistance;
 	}
@@ -189,7 +192,7 @@ public sealed class CanvasRenderer
 	private static ImmutableArray<int> CreateLookupX (
 		int srcWidth,
 		int dstWidth,
-		ScaleFactor scaleFactor)
+		Fraction<int> scaleFactor)
 	{
 		int length = dstWidth + 1;
 		var lookup = ImmutableArray.CreateBuilder<int> (length);
@@ -207,7 +210,7 @@ public sealed class CanvasRenderer
 	private static ImmutableArray<int> CreateLookupY (
 		int srcHeight,
 		int dstHeight,
-		ScaleFactor scaleFactor)
+		Fraction<int> scaleFactor)
 	{
 		int length = dstHeight + 1;
 		var lookup = ImmutableArray.CreateBuilder<int> (length);
@@ -225,7 +228,7 @@ public sealed class CanvasRenderer
 	private static ImmutableArray<int> CreateS2DLookupX (
 		int srcWidth,
 		int dstWidth,
-		ScaleFactor scaleFactor)
+		Fraction<int> scaleFactor)
 	{
 		int length = srcWidth + 1;
 		var lookup = ImmutableArray.CreateBuilder<int> (length);
@@ -243,7 +246,7 @@ public sealed class CanvasRenderer
 	private static ImmutableArray<int> CreateS2DLookupY (
 		int srcHeight,
 		int dstHeight,
-		ScaleFactor scaleFactor)
+		Fraction<int> scaleFactor)
 	{
 		int length = srcHeight + 1;
 		var lookup = ImmutableArray.CreateBuilder<int> (length);

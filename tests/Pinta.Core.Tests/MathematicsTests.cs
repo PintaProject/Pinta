@@ -66,6 +66,48 @@ internal sealed class MathematicsTests
 		Assert.Throws<ArgumentException> (() => Mathematics.InvLerp (values.from, values.to, values.result));
 	}
 
+	[TestCaseSource (nameof (unequal_fraction_cases))]
+	public void Fraction_LessThan (UnequalFractionCase fractions)
+	{
+		Assert.That (fractions.lesser < fractions.greater, "Comparison failed");
+		Assert.That (!(fractions.lesser > fractions.greater), "Negated comparison failed");
+	}
+
+	[TestCaseSource (nameof (unequal_fraction_cases))]
+	public void Fraction_GreaterThan (UnequalFractionCase fractions)
+	{
+		Assert.That (fractions.greater > fractions.lesser, "Comparison failed");
+		Assert.That (!(fractions.greater < fractions.lesser), "Negated comparison failed");
+	}
+
+	[TestCaseSource (nameof (unequal_fraction_cases))]
+	public void Fraction_Unequal (UnequalFractionCase fractions)
+	{
+		Assert.That (fractions.lesser != fractions.greater, "Inequality operator comparison failed");
+		Assert.That (!(fractions.lesser == fractions.greater), "Equality operator comparison failed");
+	}
+
+	[TestCaseSource (nameof (equal_fraction_cases))]
+	public void Fraction_Equal_Reduction (EqualFractionCase fractions)
+	{
+		Assert.That (fractions.lhs.Numerator == fractions.rhs.Numerator, "Numerators not equal");
+		Assert.That (fractions.lhs.Denominator == fractions.rhs.Denominator, "Denominators not equal");
+	}
+
+	[TestCaseSource (nameof (equal_fraction_cases))]
+	public void Fraction_Equal (EqualFractionCase fractions)
+	{
+		Assert.That (fractions.lhs == fractions.rhs, "Operator comparison failed");
+		Assert.That (!(fractions.lhs != fractions.rhs), "Inequality operator comparison failed");
+		Assert.That (fractions.lhs.GetHashCode () == fractions.rhs.GetHashCode (), "Hashes are not equal");
+	}
+
+	[TestCase]
+	public void Fraction_Rejects_Zero_Denominator ()
+	{
+		Assert.Throws<ArgumentOutOfRangeException> (() => new Fraction<int> (1, 0));
+	}
+
 	private static readonly IReadOnlyList<TestCaseData> lerp_cases =
 		GenerateRegularLerpCases ()
 		.Concat (GenerateOneWayLerpCases ())
@@ -81,6 +123,43 @@ internal sealed class MathematicsTests
 		GenerateOneWayLerpCases ()
 		.Select (c => new TestCaseData (c))
 		.ToArray ();
+
+	public readonly record struct EqualFractionCase (
+		Fraction<int> lhs,
+		Fraction<int> rhs);
+
+	private static readonly IReadOnlyList<TestCaseData> equal_fraction_cases =
+		GenerateEqualFractions ()
+		.Select (c => new TestCaseData (c))
+		.ToArray ();
+
+	private static IEnumerable<EqualFractionCase> GenerateEqualFractions ()
+	{
+		yield return new (lhs: new (1, 3), rhs: new (2, 6));
+		yield return new (lhs: new (1, 2), rhs: new (2, 4));
+		yield return new (lhs: new (1, 1), rhs: new (1, 1));
+		yield return new (lhs: new (1, 1), rhs: new (2, 2));
+		yield return new (lhs: new (2, 3), rhs: new (4, 6));
+	}
+
+	public readonly record struct UnequalFractionCase (
+		Fraction<int> lesser,
+		Fraction<int> greater);
+
+	private static readonly IReadOnlyList<TestCaseData> unequal_fraction_cases =
+		GenerateUnequalFractions ()
+		.Select (c => new TestCaseData (c))
+		.ToArray ();
+
+	private static IEnumerable<UnequalFractionCase> GenerateUnequalFractions ()
+	{
+		yield return new (lesser: new (1, 2), greater: new (1, 1));
+		yield return new (lesser: new (1, 1), greater: new (2, 1));
+		yield return new (lesser: new (2, 3), greater: new (2, 1));
+		yield return new (lesser: new (3, 2), greater: new (2, 1));
+		yield return new (lesser: new (2, 1), greater: new (5, 2));
+		yield return new (lesser: new (5, 2), greater: new (3, 1));
+	}
 
 	public readonly record struct LerpCase (
 		double from,
