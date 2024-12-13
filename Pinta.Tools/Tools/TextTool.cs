@@ -295,6 +295,14 @@ public sealed class TextTool : BaseTool
 		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = StrokeText;
 
 		UpdateFont ();
+
+		if (workspace.HasOpenDocuments) {
+			//Make sure the event handler is never added twice.
+			workspace.ActiveDocument.LayerCloned -= FinalizeText;
+
+			//When an ImageSurface is Cloned, finalize the re-editable text (if applicable).
+			workspace.ActiveDocument.LayerCloned += FinalizeText;
+		}
 	}
 
 	protected override void OnSaveSettings (ISettingsService settings)
