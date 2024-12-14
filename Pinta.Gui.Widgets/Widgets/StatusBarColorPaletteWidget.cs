@@ -297,10 +297,10 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		active_color_picker.Show ();
 		active_color_picker.OnResponse += (sender, args) => {
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
-				if (PintaCore.Palette.PrimaryColor != active_color_picker.colors[0])
-					PintaCore.Palette.PrimaryColor = active_color_picker.colors[0];
-				if (PintaCore.Palette.SecondaryColor != active_color_picker.colors[1])
-					PintaCore.Palette.SecondaryColor = active_color_picker.colors[1];
+				if (PintaCore.Palette.PrimaryColor != active_color_picker.Colors[0])
+					PintaCore.Palette.PrimaryColor = active_color_picker.Colors[0];
+				if (PintaCore.Palette.SecondaryColor != active_color_picker.Colors[1])
+					PintaCore.Palette.SecondaryColor = active_color_picker.Colors[1];
 			}
 
 			active_color_picker = null;
@@ -316,7 +316,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 		var response = dialog.RunBlocking ();
 		if (response == Gtk.ResponseType.Ok) {
-			Color[] result = dialog.colors;
+			Color[] result = dialog.Colors;
 			dialog.Destroy ();
 			return result;
 		}
