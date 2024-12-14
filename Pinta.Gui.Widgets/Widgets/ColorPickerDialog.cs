@@ -423,14 +423,13 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		if (Colors.Length > 1) {
 			var colorDisplaySwap = new Gtk.Button ();
-			colorDisplaySwap.TooltipText = Translations.GetString ("Swap primary and secondary colors.");
-			colorDisplaySwap.SetIconName (Resources.Icons.LayerMoveUp);
+			// technically this label would be wrong if you have >2 colors but there is no situation in which there are >2 colors in the palette
+			var label = Translations.GetString ("Click to switch between primary and secondary color.");
+			var shortcut_label = Translations.GetString ("Shortcut key");
+			colorDisplaySwap.TooltipText = $"{label} {shortcut_label}: {"X"}";
+			colorDisplaySwap.SetIconName (Resources.StandardIcons.EditSwap);
 			colorDisplaySwap.OnClicked += (sender, args) => {
-				var swap = Colors[0];
-				for (int i = 0; i < Colors.Length - 1; i++)
-					Colors[i] = Colors[i + 1];
-				Colors[^1] = swap;
-				UpdateView ();
+				CycleColors ();
 			};
 
 			color_display_box.Append (colorDisplaySwap);
@@ -663,6 +662,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 
 		// 90% taken from SatusBarColorPaletteWidget
+		// todo: merge both
 
 		swatch_recent = new DrawingArea ();
 		swatch_recent.WidthRequest = 500;
@@ -739,6 +739,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 		AddController (click_gesture);
 
+		var keyboard_gesture = Gtk.EventControllerKey.New ();
+		keyboard_gesture.OnKeyPressed += (_, e) => {
+			if (e.GetKey () == Key.x)
+				CycleColors ();
+			return true;
+		};
+		AddController (keyboard_gesture);
+
 		var motion_controller = Gtk.EventControllerMotion.New ();
 		motion_controller.OnMotion += (_, args) => {
 			if (mouse_on_picker_surface)
@@ -788,7 +796,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		color_index = currentColorIndex;
 		chrome_manager = chrome;
 		window_title = title;
-		show_swatches = livePalette;
+		show_swatches = !livePalette;
 		Modal = livePalette;
 		Setup ();
 		// incredibly silly workaround
@@ -837,7 +845,17 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		this.SetDefaultResponse (Gtk.ResponseType.Cancel);
 	}
 
-	public void UpdateView ()
+	private void CycleColors ()
+	{
+		var swap = Colors[0];
+		for (int i = 0; i < Colors.Length - 1; i++)
+			Colors[i] = Colors[i + 1];
+		Colors[^1] = swap;
+		UpdateView ();
+	}
+
+
+	private void UpdateView ()
 	{
 		// Redraw picker surfaces
 		picker_surface_cursor.QueueDraw ();
