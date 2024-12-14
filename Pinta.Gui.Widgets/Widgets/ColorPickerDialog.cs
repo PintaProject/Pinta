@@ -6,7 +6,6 @@ using Gdk;
 using GLib;
 using Gtk;
 using Pinta.Core;
-using Pinta.Core.Extensions;
 using Color = Cairo.Color;
 using Context = Cairo.Context;
 
