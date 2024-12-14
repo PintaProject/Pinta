@@ -9,8 +9,6 @@ using Pinta.Core;
 using Pinta.Core.Extensions;
 using Color = Cairo.Color;
 using Context = Cairo.Context;
-using HeaderBar = Adw.HeaderBar;
-using String = System.String;
 
 namespace Pinta.Gui.Widgets.Widgets;
 
@@ -120,10 +118,10 @@ public class ColorPickerSlider : Gtk.Box
 		};
 
 		input.OnChanged ((o, e) => {
-			if (suppressEvent > 0) {
-				suppressEvent--;
+			// see SetValue about suppression
+			if (suppressEvent)
 				return;
-			}
+
 			var t = o.GetText ();
 			double val;
 			var success = double.TryParse (t, CultureInfo.InvariantCulture, out val);
@@ -151,7 +149,7 @@ public class ColorPickerSlider : Gtk.Box
 		slider_overlay.WidthRequest = sliderWidth;
 	}
 
-	private int suppressEvent = 0;
+	private bool suppressEvent = false;
 	public void SetValue (double val)
 	{
 		slider.SetValue (val);
@@ -162,16 +160,16 @@ public class ColorPickerSlider : Gtk.Box
 			// hackjob
 			// prevents OnValueChange from firing when we change the value internally
 			// because OnValueChange eventually calls SetValue so it causes a stack overflow
-			suppressEvent = 2;
+			suppressEvent = true;
 			input.SetText (Convert.ToInt32 (val).ToString ());
 		}
 		Gradient.QueueDraw ();
 		cursor.QueueDraw ();
+		suppressEvent = false;
 	}
 
 	public void DrawGradient (Context context, int width, int height, Color[] colors)
 	{
-		Console.WriteLine("droh");
 		context.Antialias = Antialias.None;
 		var draw_w = width - args.SliderPaddingWidth * 2;
 		var draw_h = height - args.SliderPaddingHeight * 2;
@@ -246,15 +244,13 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private int palette_display_size = 50;
 	private int palette_display_border_thickness = 3;
 	private Gtk.DrawingArea[] color_displays;
-	//private readonly Gtk.DrawingArea palette_display_primary;
-	//private readonly Gtk.DrawingArea palette_display_secondary;
 
 	// color surface
+	private int picker_surface_radius = 200 / 2;
+	private int picker_surface_padding = 10;
 	private Gtk.Box picker_surface_selector_box;
 	private Gtk.Box picker_surface_box;
 	private Gtk.Overlay picker_surface_overlay;
-	private int picker_surface_radius = 200 / 2;
-	private int picker_surface_padding = 10;
 	private Gtk.DrawingArea picker_surface;
 	private Gtk.DrawingArea picker_surface_cursor;
 	enum ColorSurfaceType
@@ -275,8 +271,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private Entry hex_entry;
 	private CheckboxOption hex_entry_add_alpha;
 
-	private int cps_padding_height = 10;
-	private int cps_padding_width = 14;
+	private const int cps_padding_height = 10;
+	private const int cps_padding_width = 14;
 	private int cps_width = 200;
 	private Gtk.Box sliders_box;
 	private ColorPickerSlider hue_cps;
@@ -305,7 +301,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private readonly ChromeManager chrome_manager;
 	private readonly string window_title;
 	private bool small_mode = false;
-	private readonly bool show_swatches = false;
+	private bool show_swatches = false;
 
 	private void SetSmallMode (bool isSmallMode)
 	{
@@ -428,6 +424,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		if (Colors.Length > 1) {
 			var colorDisplaySwap = new Gtk.Button ();
+			colorDisplaySwap.TooltipText = Translations.GetString ("Swap primary and secondary colors.");
 			colorDisplaySwap.SetIconName (Resources.Icons.LayerMoveUp);
 			colorDisplaySwap.OnClicked += (sender, args) => {
 				var swap = Colors[0];
