@@ -25,7 +25,7 @@ public class ColorPickerSlider : Gtk.Box
 		public double value;
 	}
 
-	public struct ColorPickerSliderArgs()
+	public struct ColorPickerSliderArgs ()
 	{
 		public int Upper { get; set; }
 		public string Text { get; set; }
@@ -646,7 +646,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 
 		sliders_box.Append (new Gtk.Separator ());
-		a_cps = new ColorPickerSlider (cpsArgs with { Upper = 255, Text = Translations.GetString ("Alpha"), Val = CurrentColor.A * 255.0});
+		a_cps = new ColorPickerSlider (cpsArgs with { Upper = 255, Text = Translations.GetString ("Alpha"), Val = CurrentColor.A * 255.0 });
 		a_cps.Gradient.SetDrawFunc ((_, c, w, h) => a_cps.DrawGradient (c, w, h, new Color[] {
 			CurrentColor with { A = 0 }, CurrentColor with { A = 1 } }));
 		a_cps.OnValueChange += (sender, args) => {
