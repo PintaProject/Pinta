@@ -8,8 +8,6 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
-using Cairo;
-using Pinta.Core.Extensions;
 
 namespace Pinta.Core;
 
