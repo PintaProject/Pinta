@@ -38,27 +38,6 @@ public static class Utility
 	public static double Distance (this PointD origin, in PointD dest)
 		=> Magnitude (origin - dest);
 
-	/// <returns>
-	/// Offsets of pixels, if we consider all pixels in a canvas of
-	/// size <paramref name="canvasSize"/> to be sequential in memory
-	/// (from left to right, and top to bottom)
-	/// </returns>
-	public static IEnumerable<PixelOffset> GeneratePixelOffsets (
-		this RectangleI roi,
-		Size canvasSize)
-	{
-		if (roi.Left < 0 || roi.Right >= canvasSize.Width || roi.Top < 0 || roi.Bottom >= canvasSize.Height)
-			throw new ArgumentException ($"Rectangle is out of size bounds");
-
-		for (int y = roi.Top; y <= roi.Bottom; y++) {
-			int rowOffset = y * canvasSize.Width;
-			for (int x = roi.Left; x <= roi.Right; x++)
-				yield return new (
-					coordinates: new (x, y),
-					memoryOffset: rowOffset + x);
-		}
-	}
-
 	public static PointD Lerp (
 		PointD from,
 		PointD to,
