@@ -915,64 +915,45 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		PointI center = new PointI (rad, rad);
 
 		if (picker_surface_type == ColorSurfaceType.HueAndSat) {
-			int stride = draw_width * 4;
-
-			Span<byte> data = stackalloc byte[draw_height * stride];
+			var img = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, draw_width, draw_height);
+			var data = img.GetPixelData ();
 
 			for (int y = 0; y < draw_height; y++) {
 				for (int x = 0; x < draw_width; x++) {
 					PointI pxl = new PointI (x, y);
 					PointI vec = pxl - center;
 					if (vec.Magnitude () <= rad) {
-						var h = (MathF.Atan2 (vec.Y, -vec.X) + MathF.PI) / (2f * MathF.PI) * 360f;
+						double h = (MathF.Atan2 (vec.Y, -vec.X) + MathF.PI) / (2f * MathF.PI) * 360f;
+						double s = Math.Min (vec.Magnitude () / rad, 1);
+						double v = picker_surface_option_draw_value.State ? CurrentColor.ToHsv ().Val : 1;
 
-						var s = Math.Min (vec.Magnitude () / rad, 1);
+						double d = rad - vec.Magnitude ();
+						double a = d < 1 ? d : 1;
 
-						double v = 1;
-						if (picker_surface_option_draw_value.State)
-							v = CurrentColor.ToHsv ().Val;
+						var c = Color.FromHsv (h, s, v, a);
 
-						var c = Color.FromHsv (h, s, v);
-
-						double a = 1;
-						var d = rad - vec.Magnitude ();
-						if (d < 1) {
-							a = d;
-						}
-
-						data[(y * stride) + (x * 4) + 0] = (byte) (c.R * 255);
-						data[(y * stride) + (x * 4) + 1] = (byte) (c.G * 255);
-						data[(y * stride) + (x * 4) + 2] = (byte) (c.B * 255);
-						data[(y * stride) + (x * 4) + 3] = (byte) (a * 255);
-					} else {
-						data[(y * stride) + (x * 4) + 0] = (byte) (0);
-						data[(y * stride) + (x * 4) + 1] = (byte) (0);
-						data[(y * stride) + (x * 4) + 2] = (byte) (0);
-						data[(y * stride) + (x * 4) + 3] = (byte) (0);
+						data[draw_width * y + x] = c.ToColorBgra ();
 					}
 				}
 			}
 
-			var img = MemoryTexture.New (draw_width, draw_height, MemoryFormat.R8g8b8a8, Bytes.New (data), (UIntPtr) stride).ToSurface ();
+			img.MarkDirty ();
 			g.SetSourceSurface (img, picker_surface_padding, picker_surface_padding);
 			g.Paint ();
 		} else if (picker_surface_type == ColorSurfaceType.SatAndVal) {
-			int stride = draw_width * 3;
-
-			Span<byte> data = stackalloc byte[draw_height * stride];
+			var img = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, draw_width, draw_height);
+			var data = img.GetPixelData ();
 
 			for (int y = 0; y < draw_height; y++) {
 				double s = 1.0 - (double) y / (draw_height - 1);
 				for (int x = 0; x < draw_width; x++) {
 					double v = (double) x / (draw_width - 1);
 					var c = Color.FromHsv (CurrentColor.ToHsv ().Hue, s, v);
-					data[(y * stride) + (x * 3) + 0] = (byte) (c.R * 255);
-					data[(y * stride) + (x * 3) + 1] = (byte) (c.G * 255);
-					data[(y * stride) + (x * 3) + 2] = (byte) (c.B * 255);
+					data[draw_width * y + x] = c.ToColorBgra ();
 				}
 			}
 
-			var img = MemoryTexture.New (draw_width, draw_height, MemoryFormat.R8g8b8, Bytes.New (data), (UIntPtr) stride).ToSurface ();
+			img.MarkDirty ();
 			g.SetSourceSurface (img, picker_surface_padding, picker_surface_padding);
 			g.Paint ();
 		}
