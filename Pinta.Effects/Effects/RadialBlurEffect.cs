@@ -104,9 +104,9 @@ public sealed class RadialBlurEffect : BaseEffect
 			X: (pixel.coordinates.X << 16) - settings.fcx,
 			Y: (pixel.coordinates.Y << 16) - settings.fcy);
 
-		int sr = sourcePixel.R * sourcePixel.A;
-		int sg = sourcePixel.G * sourcePixel.A;
-		int sb = sourcePixel.B * sourcePixel.A;
+		int sr = sourcePixel.R;
+		int sg = sourcePixel.G;
+		int sb = sourcePixel.B;
 		int sa = sourcePixel.A;
 		int sc = 1;
 
@@ -126,9 +126,9 @@ public sealed class RadialBlurEffect : BaseEffect
 
 				ColorBgra sample = sourceData[p1.Y * settings.canvasSize.Width + p1.X];
 
-				sr += sample.R * sample.A;
-				sg += sample.G * sample.A;
-				sb += sample.B * sample.A;
+				sr += sample.R;
+				sg += sample.G;
+				sb += sample.B;
 				sa += sample.A;
 
 				++sc;
@@ -142,9 +142,9 @@ public sealed class RadialBlurEffect : BaseEffect
 
 				ColorBgra sample = sourceData[p2.Y * settings.canvasSize.Width + p2.X];
 
-				sr += sample.R * sample.A;
-				sg += sample.G * sample.A;
-				sb += sample.B * sample.A;
+				sr += sample.R;
+				sg += sample.G;
+				sb += sample.B;
 				sa += sample.A;
 
 				++sc;
@@ -154,9 +154,9 @@ public sealed class RadialBlurEffect : BaseEffect
 		return
 			(sa > 0)
 			? ColorBgra.FromBgra (
-				b: Utility.ClampToByte (sb / sa),
-				g: Utility.ClampToByte (sg / sa),
-				r: Utility.ClampToByte (sr / sa),
+				b: Utility.ClampToByte (sb / sc),
+				g: Utility.ClampToByte (sg / sc),
+				r: Utility.ClampToByte (sr / sc),
 				a: Utility.ClampToByte (sa / sc))
 			: ColorBgra.FromUInt32 (0);
 	}
