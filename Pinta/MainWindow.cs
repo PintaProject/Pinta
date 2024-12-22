@@ -39,7 +39,6 @@ internal sealed class MainWindow
 	// NRT - Created in OnActivated
 	WindowShell window_shell = null!;
 	Dock dock = null!;
-	Gio.Menu show_pad = null!;
 
 	CanvasPad canvas_pad = null!;
 
@@ -373,9 +372,6 @@ internal sealed class MainWindow
 		var pad_section = Gio.Menu.New ();
 		view_menu.AppendSection (null, pad_section);
 
-		show_pad = Gio.Menu.New ();
-		pad_section.AppendSubmenu (Translations.GetString ("Tool Windows"), show_pad);
-
 		if (window_shell.HeaderBar is not null) {
 			var header_bar = window_shell.HeaderBar;
 			header_bar.PackEnd (new Gtk.MenuButton () {
@@ -463,6 +459,7 @@ internal sealed class MainWindow
 			Hexpand = true,
 			Halign = Gtk.Align.Fill,
 		};
+		PintaCore.Chrome.InitializeDock (dock);
 
 		// Canvas pad
 		canvas_pad = new CanvasPad ();
@@ -471,11 +468,11 @@ internal sealed class MainWindow
 
 		// Layer pad
 		LayersPad layers_pad = new (PintaCore.Actions.Layers);
-		layers_pad.Initialize (dock, app, show_pad);
+		layers_pad.Initialize (dock);
 
 		// History pad
 		HistoryPad history_pad = new (PintaCore.Actions.Edit);
-		history_pad.Initialize (dock, app, show_pad);
+		history_pad.Initialize (dock);
 
 		container.Append (dock);
 	}
@@ -496,6 +493,7 @@ internal sealed class MainWindow
 		PintaCore.Actions.View.StatusBar.Value = PintaCore.Settings.GetSetting ("statusbar-shown", true);
 		PintaCore.Actions.View.ToolBox.Value = PintaCore.Settings.GetSetting ("toolbox-shown", true);
 		PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
+		PintaCore.Actions.View.ToolWindows.Value = PintaCore.Settings.GetSetting ("tool-windows-shown", true);
 
 		string dialog_uri = PintaCore.Settings.GetSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.DefaultDialogDirectory?.GetUri () ?? "");
 		PintaCore.RecentFiles.LastDialogDirectory = Gio.FileHelper.NewForUri (dialog_uri);
@@ -522,6 +520,7 @@ internal sealed class MainWindow
 		PintaCore.Settings.PutSetting ("window-maximized", window_shell.Window.IsMaximized ());
 		PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Value);
 		PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Value);
+		PintaCore.Settings.PutSetting ("tool-windows-shown", PintaCore.Actions.View.ToolWindows.Value);
 		PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Value);
 		PintaCore.Settings.PutSetting ("statusbar-shown", PintaCore.Actions.View.StatusBar.Value);
 		PintaCore.Settings.PutSetting ("toolbox-shown", PintaCore.Actions.View.ToolBox.Value);

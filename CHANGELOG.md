@@ -46,6 +46,7 @@ Thanks to the following contributors who worked on this release:
 - Added a "Reseed" button for the random noise used by several effects (such as "Add Noise" and "Frosted Glass").  Previously, the noise pattern changed every time the effect was computed (including when other parameters were changed).
 - Saving an image already saved in a format that supports multiple layers to a format that does not support layers will now explicitly prompt the user to flatten the image before saving, rather than silently flattening it (#909)
 - The add-in manager dialog now filters out old versions incompatible with the current version of Pinta, or new addins requiring future version of Pinta ([#1580205](https://bugs.launchpad.net/pinta/+bug/1580205))
+- The tool windows on the right side of the dock layout can now be completely hidden (#1179)
 
 ### Fixed
 - Twist effect applied locally based on selection instead of entire image (#1089)

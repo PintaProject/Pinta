@@ -38,10 +38,7 @@ internal sealed class HistoryPad : IDockPad
 		this.edit = edit;
 	}
 
-	public void Initialize (
-		Dock workspace,
-		Gtk.Application app,
-		Gio.Menu padMenu)
+	public void Initialize (Dock workspace)
 	{
 		HistoryListView history = new ();
 		DockItem history_item = new (history, "History", iconName: Pinta.Resources.Icons.HistoryList) {
@@ -53,20 +50,5 @@ internal sealed class HistoryPad : IDockPad
 		history_tb.Append (edit.Redo.CreateDockToolBarItem ());
 
 		workspace.AddItem (history_item, DockPlacement.Right);
-
-		ToggleCommand show_history = new ("history", Translations.GetString ("History"), null, Resources.Icons.LayerDuplicate) {
-			Value = true,
-		};
-		app.AddAction (show_history);
-		padMenu.AppendItem (show_history.CreateMenuItem ());
-
-		show_history.Toggled += (val) => {
-			if (val)
-				history_item.Maximize ();
-			else
-				history_item.Minimize ();
-		};
-		history_item.MaximizeClicked += (_, _) => show_history.Value = true;
-		history_item.MinimizeClicked += (_, _) => show_history.Value = false;
 	}
 }

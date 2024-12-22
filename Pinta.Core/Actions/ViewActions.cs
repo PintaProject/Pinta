@@ -39,6 +39,7 @@ public sealed class ViewActions
 	public Command ActualSize { get; }
 	public ToggleCommand ToolBar { get; }
 	public ToggleCommand ImageTabs { get; }
+	public ToggleCommand ToolWindows { get; }
 	public Command EditCanvasGrid { get; }
 	public ToggleCommand StatusBar { get; }
 	public ToggleCommand ToolBox { get; }
@@ -72,6 +73,7 @@ public sealed class ViewActions
 		ActualSize = new Command ("ActualSize", Translations.GetString ("Normal Size"), null, Resources.StandardIcons.ZoomOriginal);
 		ToolBar = new ToggleCommand ("Toolbar", Translations.GetString ("Toolbar"), null, null);
 		ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
+		ToolWindows = new ToggleCommand ("ToolWindows", Translations.GetString ("Tool Windows"), null, null);
 		EditCanvasGrid = new Command ("EditCanvasGrid", Translations.GetString ("Canvas Grid..."), null, Resources.Icons.ViewGrid);
 		StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
 		ToolBox = new ToggleCommand ("ToolBox", Translations.GetString ("Tool Box"), null, null);
@@ -86,6 +88,7 @@ public sealed class ViewActions
 		// The toolbar is shown by default.
 		ToolBar.Value = true;
 		ImageTabs.Value = true;
+		ToolWindows.Value = true;
 		StatusBar.Value = true;
 		ToolBox.Value = true;
 
@@ -149,6 +152,7 @@ public sealed class ViewActions
 		show_hide_menu.AppendItem (StatusBar.CreateMenuItem ());
 		show_hide_menu.AppendItem (ToolBox.CreateMenuItem ());
 		show_hide_menu.AppendItem (ImageTabs.CreateMenuItem ());
+		show_hide_menu.AppendItem (ToolWindows.CreateMenuItem ());
 		if (mainToolbarPresent) show_hide_menu.AppendItem (ToolBar.CreateMenuItem ());
 
 		Gio.Menu show_hide_section = Gio.Menu.New ();
@@ -177,6 +181,7 @@ public sealed class ViewActions
 		app.AddAction (StatusBar);
 		app.AddAction (ToolBox);
 		app.AddAction (ImageTabs);
+		app.AddAction (ToolWindows);
 		app.AddAction (ColorScheme);
 
 		menu.AppendSection (null, zoom_section);
