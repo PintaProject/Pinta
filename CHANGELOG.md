@@ -46,6 +46,7 @@ Thanks to the following contributors who worked on this release:
 - Added a "Reseed" button for the random noise used by several effects (such as "Add Noise" and "Frosted Glass").  Previously, the noise pattern changed every time the effect was computed (including when other parameters were changed).
 - Saving an image already saved in a format that supports multiple layers to a format that does not support layers will now explicitly prompt the user to flatten the image before saving, rather than silently flattening it (#909)
 - The add-in manager dialog now filters out old versions incompatible with the current version of Pinta, or new addins requiring future version of Pinta ([#1580205](https://bugs.launchpad.net/pinta/+bug/1580205))
+- The tool windows on the right side of the dock layout can now be completely hidden (#1179)
 
 ### Fixed
 - Twist effect applied locally based on selection instead of entire image (#1089)
@@ -74,6 +75,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed various artifacts in the shape tools, particularly with larger brush widths (#733, #955)
 - Fixed an issue where the text tool did not immediately redraw after changes to the font or color of unfinalized text (#952, #975)
 - Fixed a bug where cut / paste operations did not behave as expected with complex selections (#951, #978)
+- Fixed transparency behavior for several effects (#1184)
 
 ## [2.1.2](https://github.com/PintaProject/Pinta/releases/tag/2.1.2) - 2024/04/20
 

@@ -32,14 +32,15 @@ namespace Pinta.Docking;
 /// </summary>
 public class Dock : Box
 {
-	private readonly DockPanel right_panel = new ();
 	private readonly Paned pane = Paned.New (Orientation.Horizontal);
+
+	public DockPanel RightPanel { get; private init; } = new ();
 
 	public Dock ()
 	{
 		SetOrientation (Orientation.Horizontal);
 
-		pane.EndChild = right_panel;
+		pane.EndChild = RightPanel;
 		pane.ResizeEndChild = false;
 		pane.ShrinkEndChild = false;
 		Append (pane);
@@ -54,7 +55,7 @@ public class Dock : Box
 				pane.ShrinkStartChild = false;
 				break;
 			case DockPlacement.Right:
-				right_panel.AddItem (item);
+				RightPanel.AddItem (item);
 				break;
 		}
 	}
@@ -66,7 +67,7 @@ public class Dock : Box
 #if false
 		settings.PutSetting (RightSplitPosKey, pane.Position);
 #endif
-		right_panel.SaveSettings (settings);
+		RightPanel.SaveSettings (settings);
 	}
 
 	public void LoadSettings (ISettingsService settings)
@@ -75,6 +76,6 @@ public class Dock : Box
 #if false
 		pane.Position = settings.GetSetting<int> (RightSplitPosKey, pane.Position);
 #endif
-		right_panel.LoadSettings (settings);
+		RightPanel.LoadSettings (settings);
 	}
 }

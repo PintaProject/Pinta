@@ -102,9 +102,9 @@ public sealed class ZoomBlurEffect : BaseEffect
 		int sc = 0;
 
 		ColorBgra src_pixel = sourceData[pixel.memoryOffset];
-		sr += src_pixel.R * src_pixel.A;
-		sg += src_pixel.G * src_pixel.A;
-		sb += src_pixel.B * src_pixel.A;
+		sr += src_pixel.R;
+		sg += src_pixel.G;
+		sb += src_pixel.B;
 		sa += src_pixel.A;
 		++sc;
 
@@ -124,9 +124,9 @@ public sealed class ZoomBlurEffect : BaseEffect
 					settings.size.Width,
 					transformed);
 
-				sr += src_pixel_2.R * src_pixel_2.A;
-				sg += src_pixel_2.G * src_pixel_2.A;
-				sb += src_pixel_2.B * src_pixel_2.A;
+				sr += src_pixel_2.R;
+				sg += src_pixel_2.G;
+				sb += src_pixel_2.B;
 				sa += src_pixel_2.A;
 				++sc;
 			}
@@ -135,9 +135,9 @@ public sealed class ZoomBlurEffect : BaseEffect
 		return
 			(sa != 0)
 			? ColorBgra.FromBgra (
-				b: Utility.ClampToByte (sb / sa),
-				g: Utility.ClampToByte (sg / sa),
-				r: Utility.ClampToByte (sr / sa),
+				b: Utility.ClampToByte (sb / sc),
+				g: Utility.ClampToByte (sg / sc),
+				r: Utility.ClampToByte (sr / sc),
 				a: Utility.ClampToByte (sa / sc))
 			: ColorBgra.FromUInt32 (0);
 	}

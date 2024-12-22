@@ -93,7 +93,7 @@ public sealed class InkSketchEffect : BaseEffect
 					int right = Math.Min (x + Radius + 1, dest.Width);
 
 					RectangleI adjustedBounds = RectangleI.FromLTRB (left, top, right, bottom);
-					ColorBgra baseRGB = CreateBaseRGB (src_data, width, x, y, adjustedBounds);
+					ColorBgra baseRGB = CreateBaseRGBA (src_data, width, x, y, adjustedBounds);
 					ColorBgra topLayer = CreateTopLayer (baseRGB);
 
 					// Change Blend Mode to Darken
@@ -104,11 +104,12 @@ public sealed class InkSketchEffect : BaseEffect
 		}
 	}
 
-	private static ColorBgra CreateBaseRGB (ReadOnlySpan<ColorBgra> src_data, int width, int x, int y, RectangleI adjustedBounds)
+	private static ColorBgra CreateBaseRGBA (ReadOnlySpan<ColorBgra> src_data, int width, int x, int y, RectangleI adjustedBounds)
 	{
 		int r = 0;
 		int g = 0;
 		int b = 0;
+		int a = 0;
 
 		for (int v = adjustedBounds.Top; v < adjustedBounds.Bottom; v++) {
 
@@ -124,13 +125,15 @@ public sealed class InkSketchEffect : BaseEffect
 				r += src_pixel.R * w;
 				g += src_pixel.G * w;
 				b += src_pixel.B * w;
+				a += src_pixel.A * w;
 			}
 		}
 
-		return ColorBgra.FromBgr (
+		return ColorBgra.FromBgra (
 			b: Utility.ClampToByte (b),
 			g: Utility.ClampToByte (g),
-			r: Utility.ClampToByte (r)
+			r: Utility.ClampToByte (r),
+			a: Utility.ClampToByte (a)
 		);
 	}
 
@@ -141,8 +144,8 @@ public sealed class InkSketchEffect : BaseEffect
 
 		// Adjust Brightness and Contrast
 		return
-			(topLayer.R > (Data.InkOutline * 255 / 100))
-			? ColorBgra.FromBgra (255, 255, 255, topLayer.A)
+			(topLayer.ToStraightAlpha ().R > (Data.InkOutline * 255 / 100))
+			? ColorBgra.FromBgra (topLayer.A, topLayer.A, topLayer.A, topLayer.A)
 			: ColorBgra.FromBgra (0, 0, 0, topLayer.A);
 	}
 	#endregion

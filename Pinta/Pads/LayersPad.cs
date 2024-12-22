@@ -38,10 +38,7 @@ internal sealed class LayersPad : IDockPad
 		layer_actions = layerActions;
 	}
 
-	public void Initialize (
-		Dock workspace,
-		Gtk.Application app,
-		Gio.Menu padMenu)
+	public void Initialize (Dock workspace)
 	{
 		LayersListView layers = new ();
 		DockItem layers_item = new DockItem (layers, "Layers", iconName: Pinta.Resources.Icons.LayerDuplicate) {
@@ -57,20 +54,5 @@ internal sealed class LayersPad : IDockPad
 		layers_tb.Append (layer_actions.MoveLayerDown.CreateDockToolBarItem ());
 
 		workspace.AddItem (layers_item, DockPlacement.Right);
-
-		ToggleCommand show_layers = new ("layers", Translations.GetString ("Layers"), null, Resources.Icons.LayerMergeDown) {
-			Value = true,
-		};
-		app.AddAction (show_layers);
-		padMenu.AppendItem (show_layers.CreateMenuItem ());
-
-		show_layers.Toggled += (val) => {
-			if (val)
-				layers_item.Maximize ();
-			else
-				layers_item.Minimize ();
-		};
-		layers_item.MaximizeClicked += (_, _) => show_layers.Value = true;
-		layers_item.MinimizeClicked += (_, _) => show_layers.Value = false;
 	}
 }
