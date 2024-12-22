@@ -34,7 +34,7 @@ public class Dock : Box
 {
 	private readonly Paned pane = Paned.New (Orientation.Horizontal);
 
-	public DockPanel RightPanel {get; private init; } = new();
+	public DockPanel RightPanel { get; private init; } = new ();
 
 	public Dock ()
 	{
