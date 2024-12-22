@@ -31,6 +31,7 @@ Pinta.Core/Classes/DocumentHistory.cs
 Pinta.Core/Classes/DocumentLayers.cs
 Pinta.Core/Classes/DocumentSelection.cs
 Pinta.Core/Classes/DocumentWorkspace.cs
+Pinta.Core/Classes/Fraction.cs
 Pinta.Core/Classes/HsvColor.cs
 Pinta.Core/Classes/IExtension.cs
 Pinta.Core/Classes/IToolHandle.cs
