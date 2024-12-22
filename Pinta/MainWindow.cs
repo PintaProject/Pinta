@@ -117,7 +117,7 @@ internal sealed class MainWindow
 
 	private void Workspace_DocumentClosed (object? sender, DocumentEventArgs e)
 	{
-		var tab = FindTabWithCanvas ((PintaCanvas) e.Document.Workspace.Canvas);
+		var tab = FindTabWithCanvas ((CanvasWindow) e.Document.Workspace.CanvasWindow);
 
 		if (tab != null)
 			canvas_pad.Notebook.RemoveTab (tab);
@@ -164,6 +164,7 @@ internal sealed class MainWindow
 			RulersVisible = PintaCore.Actions.View.Rulers.Value,
 			RulerMetric = GetCurrentRulerMetric ()
 		};
+		doc.Workspace.CanvasWindow = canvas;
 		doc.Workspace.Canvas = canvas.Canvas;
 
 		DocumentViewContent my_content = new (doc, canvas);
@@ -223,9 +224,9 @@ internal sealed class MainWindow
 		// first shot at handling the event if
 		// the mouse pointer is on the canvas
 		if (PintaCore.Workspace.HasOpenDocuments) {
-			var canvas_window = ((PintaCanvas) PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
+			var canvas_window = (CanvasWindow) PintaCore.Workspace.ActiveWorkspace.CanvasWindow;
 
-			if ((canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas) &&
+			if ((canvas_window.HasFocus || canvas_window.IsMouseOnCanvas) &&
 				 canvas_window.Canvas.DoKeyPressEvent (controller, args)) {
 				return true;
 			}
@@ -249,9 +250,9 @@ internal sealed class MainWindow
 		// Give the Canvas (and by extension the tools)
 		// first shot at handling the event if
 		// the mouse pointer is on the canvas
-		var canvas_window = ((PintaCanvas) PintaCore.Workspace.ActiveWorkspace.Canvas).CanvasWindow;
+		var canvas_window = (CanvasWindow) PintaCore.Workspace.ActiveWorkspace.CanvasWindow;
 
-		if (canvas_window.Canvas.HasFocus || canvas_window.IsMouseOnCanvas)
+		if (canvas_window.HasFocus || canvas_window.IsMouseOnCanvas)
 			canvas_window.Canvas.DoKeyReleaseEvent (controller, args);
 	}
 
@@ -575,10 +576,10 @@ internal sealed class MainWindow
 			int image_x = PintaCore.Workspace.ImageSize.Width;
 			int image_y = PintaCore.Workspace.ImageSize.Height;
 
-			var canvas_window = PintaCore.Workspace.ActiveWorkspace.Canvas.Parent!;
+			var canvas_viewport = PintaCore.Workspace.ActiveWorkspace.Canvas.Parent!;
 
-			int window_x = canvas_window.GetAllocatedWidth ();
-			int window_y = canvas_window.GetAllocatedHeight ();
+			int window_x = canvas_viewport.GetAllocatedWidth ();
+			int window_y = canvas_viewport.GetAllocatedHeight ();
 
 			double ratio =
 				(image_x / (double) window_x >= image_y / (double) window_y)
@@ -608,16 +609,16 @@ internal sealed class MainWindow
 		PintaCore.Actions.View.ResumeZoomUpdate ();
 
 		var doc = PintaCore.Workspace.ActiveDocument;
-		var tab = FindTabWithCanvas ((PintaCanvas) doc.Workspace.Canvas);
+		var tab = FindTabWithCanvas ((CanvasWindow) doc.Workspace.CanvasWindow);
 
 		if (tab != null)
 			canvas_pad.Notebook.ActiveItem = tab;
 
-		doc.Workspace.Canvas.GrabFocus ();
+		doc.Workspace.GrabFocusToCanvas ();
 	}
 
-	private IDockNotebookItem? FindTabWithCanvas (PintaCanvas canvas) =>
+	private IDockNotebookItem? FindTabWithCanvas (CanvasWindow canvas_window) =>
 		canvas_pad.Notebook.Items
-		.Where (i => ((CanvasWindow) i.Widget).Canvas == canvas)
+		.Where (i => ((CanvasWindow) i.Widget) == canvas_window)
 		.FirstOrDefault ();
 }

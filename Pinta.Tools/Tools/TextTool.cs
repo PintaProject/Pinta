@@ -334,7 +334,7 @@ public sealed class TextTool : BaseTool
 	private void HandleFontChanged (object? sender, EventArgs e)
 	{
 		if (workspace.HasOpenDocuments)
-			workspace.ActiveDocument.Workspace.Canvas.GrabFocus ();
+			workspace.ActiveDocument.Workspace.GrabFocusToCanvas ();
 
 		UpdateFont ();
 	}

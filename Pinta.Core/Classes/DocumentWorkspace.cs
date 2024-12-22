@@ -52,6 +52,7 @@ public sealed class DocumentWorkspace
 
 	#region Public Properties
 	public Gtk.DrawingArea Canvas { get; set; } = null!; // NRT - This is set soon after creation
+	public Gtk.Widget CanvasWindow { get; set; } = null!; // NRT - This is set soon after creation
 
 	/// <summary>
 	/// Returns whether the zoomed image fits in the window without requiring scrolling.
@@ -175,6 +176,19 @@ public sealed class DocumentWorkspace
 	public void InvalidateWindowRect (RectangleI windowRect)
 	{
 		OnCanvasInvalidated (new CanvasInvalidatedEventArgs (windowRect));
+	}
+
+	/// <summary>
+	/// Grabs focus to the canvas widget. This can be used to avoid leaving focus in
+	/// toolbar widgets, for example.
+	/// </summary>
+	public void GrabFocusToCanvas ()
+	{
+		bool gained_focus = CanvasWindow.GrabFocus ();
+		// Log a warning if something went wrong, e.g. there is a non-focusable widget
+		// in the hierarchy.
+		if (!gained_focus)
+			Console.Error.WriteLine ("Failed to gain focus on the canvas widget!");
 	}
 
 	/// <summary>

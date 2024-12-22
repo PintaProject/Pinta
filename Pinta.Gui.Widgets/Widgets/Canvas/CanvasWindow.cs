@@ -79,9 +79,9 @@ public sealed class CanvasWindow : Gtk.Grid
 		scroll_controller.OnDecelerate += (_, _) => gesture_zoom.IsActive (); // Cancel scroll deceleration when zooming
 		vp.AddController (scroll_controller);
 
-		// The mouse handler in PintaCanvas grabs focus away from toolbar widgets.
+		// The mouse handler in PintaCanvas grabs focus away from toolbar widgets, along
+		// with DocumentWorkpace.GrabFocusToCanvas()
 		Focusable = true;
-
 		Canvas = new PintaCanvas (this, document, canvasGrid) { Name = "canvas" };
 
 		// Rulers
