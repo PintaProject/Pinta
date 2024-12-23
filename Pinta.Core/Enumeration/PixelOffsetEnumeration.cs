@@ -4,6 +4,15 @@ using System.Collections.Generic;
 
 namespace Pinta.Core;
 
+/// <summary>
+/// Contains the information of a ROI and its related canvas
+/// such that an <see cref="IEnumerator{T}"/> of the positions
+/// and memory offsets of the contained pixels can be created.
+/// </summary>
+/// <remarks>
+/// This is instantiated by Pinta's core utility methods.
+/// It is not intended to be instantiated directly.
+/// </remarks>
 public readonly struct PixelOffsetEnumerable : IEnumerable<PixelOffset>
 {
 	private readonly RectangleI roi_bounds;
@@ -23,6 +32,14 @@ public readonly struct PixelOffsetEnumerable : IEnumerable<PixelOffset>
 	IEnumerator<PixelOffset> IEnumerable<PixelOffset>.GetEnumerator () => GetEnumerator ();
 }
 
+/// <summary>
+/// Iterates over all the positions and memory offsets
+/// of the pixels in a ROI (taking its related canvas into account).
+/// </summary>
+/// <remarks>
+/// Instantiated indirectly by <see cref="PixelOffsetEnumerable"/>.
+/// It is not intended to be instantiated directly.
+/// </remarks>
 public struct PixelOffsetEnumerator : IEnumerator<PixelOffset>
 {
 	private readonly Size canvas_size;
