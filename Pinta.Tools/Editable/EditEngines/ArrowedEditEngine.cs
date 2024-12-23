@@ -273,6 +273,7 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 	private Gtk.CheckButton CreateArrowOneEnabledCheckBox ()
 	{
 		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel ("1");
+		result.FocusOnClick = false;
 		result.Active = settings.GetSetting (ARROW1_SETTING (tool_prefix), previous_settings_1.Show);
 		result.OnToggled += (o, e) => ArrowEnabledToggled (true);
 		return result;
@@ -284,6 +285,7 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 	private Gtk.CheckButton CreateArrowTwoEnabledCheckBox ()
 	{
 		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel ("2");
+		result.FocusOnClick = false;
 		result.Active = settings.GetSetting (ARROW2_SETTING (tool_prefix), previous_settings_2.Show);
 		result.OnToggled += (o, e) => ArrowEnabledToggled (false);
 		return result;
