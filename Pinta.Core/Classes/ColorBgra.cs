@@ -115,18 +115,6 @@ public struct ColorBgra
 	public readonly byte GetIntensityByte () => (byte) ((7471 * B + 38470 * G + 19595 * R) >> 16);
 
 	/// <summary>
-	/// Returns the maximum value out of the B, G, and R values. Alpha is ignored.
-	/// </summary>
-	/// <returns></returns>
-	public readonly byte GetMaxColorChannelValue () => Math.Max (B, Math.Max (G, R));
-
-	/// <summary>
-	/// Returns the average of the B, G, and R values. Alpha is ignored.
-	/// </summary>
-	/// <returns></returns>
-	public readonly byte GetAverageColorChannelValue () => (byte) ((B + G + R) / 3);
-
-	/// <summary>
 	/// Compares two ColorBgra instance to determine if they are equal.
 	/// </summary>
 	public static bool operator == (ColorBgra lhs, ColorBgra rhs)
@@ -209,6 +197,7 @@ public struct ColorBgra
 
 	/// <summary>
 	/// Smoothly blends between two colors.
+	/// NOTE: this assumes unpremultipled alpha!
 	/// </summary>
 	public static ColorBgra Blend (ColorBgra ca, ColorBgra cb, byte cbAlpha)
 	{
@@ -234,43 +223,33 @@ public struct ColorBgra
 	}
 
 	/// <summary>
-	/// Linearly interpolates between two color values.
+	/// Linearly interpolates between two color values with premultiplied alpha.
 	/// </summary>
 	/// <param name="from">The color value that represents 0 on the lerp number line.</param>
 	/// <param name="to">The color value that represents 1 on the lerp number line.</param>
 	/// <param name="frac">A value in the range [0, 1].</param>
-	/// <remarks>
-	/// This method does a simple lerp on each color value and on the alpha channel. It does
-	/// not properly take into account the alpha channel's effect on color blending.
-	/// </remarks>
 	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, float frac) => FromBgra (
-			b: Utility.ClampToByte (Lerp (from.B, to.B, frac)),
-			g: Utility.ClampToByte (Lerp (from.G, to.G, frac)),
-			r: Utility.ClampToByte (Lerp (from.R, to.R, frac)),
-			a: Utility.ClampToByte (Lerp (from.A, to.A, frac))
+			b: Utility.ClampToByte (Mathematics.Lerp (from.B, to.B, frac)),
+			g: Utility.ClampToByte (Mathematics.Lerp (from.G, to.G, frac)),
+			r: Utility.ClampToByte (Mathematics.Lerp (from.R, to.R, frac)),
+			a: Utility.ClampToByte (Mathematics.Lerp (from.A, to.A, frac))
 		);
-	public static float Lerp (float from, float to, float frac) => from + frac * (to - from);
 
-	public static double Lerp (double from, double to, double frac) => from + frac * (to - from);
 	/// <summary>
-	/// Linearly interpolates between two color values.
+	/// Linearly interpolates between two color values with premultiplied alpha.
 	/// </summary>
 	/// <param name="from">The color value that represents 0 on the lerp number line.</param>
 	/// <param name="to">The color value that represents 1 on the lerp number line.</param>
 	/// <param name="frac">A value in the range [0, 1].</param>
-	/// <remarks>
-	/// This method does a simple lerp on each color value and on the alpha channel. It does
-	/// not properly take into account the alpha channel's effect on color blending.
-	/// </remarks>
 	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, double frac) => FromBgra (
-			b: Utility.ClampToByte (Lerp (from.B, to.B, frac)),
-			g: Utility.ClampToByte (Lerp (from.G, to.G, frac)),
-			r: Utility.ClampToByte (Lerp (from.R, to.R, frac)),
-			a: Utility.ClampToByte (Lerp (from.A, to.A, frac))
+			b: Utility.ClampToByte (Mathematics.Lerp (from.B, to.B, frac)),
+			g: Utility.ClampToByte (Mathematics.Lerp (from.G, to.G, frac)),
+			r: Utility.ClampToByte (Mathematics.Lerp (from.R, to.R, frac)),
+			a: Utility.ClampToByte (Mathematics.Lerp (from.A, to.A, frac))
 		);
 
 	/// <summary>
-	/// Blends four colors together based on the given weight values.
+	/// Blends four premultiplied colors together based on the given weight values.
 	/// </summary>
 	/// <returns>The blended color.</returns>
 	/// <remarks>
@@ -285,141 +264,10 @@ public struct ColorBgra
 #endif
 
 		const uint ww = 32768;
-		uint af = (c1.A * w1) + (c2.A * w2) + (c3.A * w3) + (c4.A * w4);
-		uint a = (af + ww) >> 16;
-
-		uint b;
-		uint g;
-		uint r;
-
-		if (a == 0) {
-			b = 0;
-			g = 0;
-			r = 0;
-		} else {
-			b = (uint) ((((long) c1.A * c1.B * w1) + ((long) c2.A * c2.B * w2) + ((long) c3.A * c3.B * w3) + ((long) c4.A * c4.B * w4)) / af);
-			g = (uint) ((((long) c1.A * c1.G * w1) + ((long) c2.A * c2.G * w2) + ((long) c3.A * c3.G * w3) + ((long) c4.A * c4.G * w4)) / af);
-			r = (uint) ((((long) c1.A * c1.R * w1) + ((long) c2.A * c2.R * w2) + ((long) c3.A * c3.R * w3) + ((long) c4.A * c4.R * w4)) / af);
-		}
-
-		return FromBgra ((byte) b, (byte) g, (byte) r, (byte) a);
-	}
-
-	/// <summary>
-	/// Blends the colors based on the given weight values.
-	/// </summary>
-	/// <param name="c">The array of color values.</param>
-	/// <param name="w">The array of weight values.</param>
-	/// <returns>
-	/// The weights should be fixed point numbers.
-	/// The total summation of the weight values will be treated as "1.0".
-	/// Each color will be blended in proportionally to its weight value respective to
-	/// the total summation of the weight values.
-	/// </returns>
-	/// <remarks>
-	/// "WAIP" stands for "weights, arbitrary integer precision"</remarks>
-	public static ColorBgra BlendColorsWAIP (ColorBgra[] c, uint[] w)
-	{
-		if (c.Length != w.Length) {
-			throw new ArgumentException ("c.Length != w.Length");
-		}
-
-		if (c.Length == 0) {
-			return FromUInt32 (0);
-		}
-
-		long wsum = 0;
-		long asum = 0;
-
-		for (int i = 0; i < w.Length; ++i) {
-			wsum += w[i];
-			asum += c[i].A * w[i];
-		}
-
-		uint a = (uint) ((asum + (wsum >> 1)) / wsum);
-
-		long b;
-		long g;
-		long r;
-
-		if (a == 0) {
-			b = 0;
-			g = 0;
-			r = 0;
-		} else {
-			b = 0;
-			g = 0;
-			r = 0;
-
-			for (int i = 0; i < c.Length; ++i) {
-				b += (long) c[i].A * c[i].B * w[i];
-				g += (long) c[i].A * c[i].G * w[i];
-				r += (long) c[i].A * c[i].R * w[i];
-			}
-
-			b /= asum;
-			g /= asum;
-			r /= asum;
-		}
-
-		return FromUInt32 ((uint) b + ((uint) g << 8) + ((uint) r << 16) + (a << 24));
-	}
-
-	/// <summary>
-	/// Blends the colors based on the given weight values.
-	/// </summary>
-	/// <param name="c">The array of color values.</param>
-	/// <param name="w">The array of weight values.</param>
-	/// <returns>
-	/// Each color will be blended in proportionally to its weight value respective to
-	/// the total summation of the weight values.
-	/// </returns>
-	/// <remarks>
-	/// "WFP" stands for "weights, floating-point"</remarks>
-	public static ColorBgra BlendColorsWFP (ColorBgra[] c, double[] w)
-	{
-		if (c.Length != w.Length) {
-			throw new ArgumentException ("c.Length != w.Length");
-		}
-
-		if (c.Length == 0) {
-			return FromUInt32 (0);
-		}
-
-		double wsum = 0;
-		double asum = 0;
-
-		for (int i = 0; i < w.Length; ++i) {
-			wsum += w[i];
-			asum += c[i].A * w[i];
-		}
-
-		double a = asum / wsum;
-		double aMultWsum = a * wsum;
-
-		double b;
-		double g;
-		double r;
-
-		if (asum == 0) {
-			b = 0;
-			g = 0;
-			r = 0;
-		} else {
-			b = 0;
-			g = 0;
-			r = 0;
-
-			for (int i = 0; i < c.Length; ++i) {
-				b += (double) c[i].A * c[i].B * w[i];
-				g += (double) c[i].A * c[i].G * w[i];
-				r += (double) c[i].A * c[i].R * w[i];
-			}
-
-			b /= aMultWsum;
-			g /= aMultWsum;
-			r /= aMultWsum;
-		}
+		uint r = (c1.R * w1 + c2.R * w2 + c3.R * w3 + c4.R * w4 + ww) >> 16;
+		uint g = (c1.G * w1 + c2.G * w2 + c3.G * w3 + c4.G * w4 + ww) >> 16;
+		uint b = (c1.B * w1 + c2.B * w2 + c3.B * w3 + c4.B * w4 + ww) >> 16;
+		uint a = (c1.A * w1 + c2.A * w2 + c3.A * w3 + c4.A * w4 + ww) >> 16;
 
 		return FromBgra ((byte) b, (byte) g, (byte) r, (byte) a);
 	}
@@ -435,29 +283,20 @@ public struct ColorBgra
 			return Transparent;
 
 		ulong a_sum = 0;
-		for (var i = 0; i < count; ++i)
+		ulong b_sum = 0;
+		ulong g_sum = 0;
+		ulong r_sum = 0;
+		for (int i = 0; i < count; ++i) {
 			a_sum += colors[i].A;
-
-		byte b = 0;
-		byte g = 0;
-		byte r = 0;
-		byte a = (byte) (a_sum / (ulong) count);
-
-		if (a_sum != 0) {
-			ulong b_sum = 0;
-			ulong g_sum = 0;
-			ulong r_sum = 0;
-
-			for (var i = 0; i < count; ++i) {
-				b_sum += colors[i].B;
-				g_sum += colors[i].G;
-				r_sum += colors[i].R;
-			}
-
-			b = (byte) (b_sum / (ulong) count);
-			g = (byte) (g_sum / (ulong) count);
-			r = (byte) (r_sum / (ulong) count);
+			b_sum += colors[i].B;
+			g_sum += colors[i].G;
+			r_sum += colors[i].R;
 		}
+
+		byte a = (byte) (a_sum / (ulong) count);
+		byte b = (byte) (b_sum / (ulong) count);
+		byte g = (byte) (g_sum / (ulong) count);
+		byte r = (byte) (r_sum / (ulong) count);
 
 		return FromBgra (b, g, r, a);
 	}
