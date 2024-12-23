@@ -120,7 +120,7 @@ partial class GtkExtensions
 		// tools can handle subsequent key events.
 		spin.OnValueChanged += (o, e) => {
 			if (PintaCore.Workspace.HasOpenDocuments)
-				PintaCore.Workspace.ActiveWorkspace.Canvas.GrabFocus ();
+				PintaCore.Workspace.ActiveWorkspace.GrabFocusToCanvas ();
 		};
 		return spin;
 	}
