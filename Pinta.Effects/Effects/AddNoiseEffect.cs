@@ -129,7 +129,7 @@ public sealed class AddNoiseEffect : BaseEffect
 		// being used to render the effect, but will change if the effect is tiled differently.
 		Random rand = new (settings.seed.GetValueForRegion (rect));
 
-		foreach (var pixel in Utility.GeneratePixelOffsets (rect, settings.size))
+		foreach (var pixel in Tiling.GeneratePixelOffsets (rect, settings.size))
 			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 				settings,
 				rand,

@@ -76,7 +76,7 @@ public sealed class ZoomBlurEffect : BaseEffect
 		ZoomBlurSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
-		foreach (var pixel in Utility.GeneratePixelOffsets (roi, settings.size))
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.size))
 			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 				source,
 				settings,

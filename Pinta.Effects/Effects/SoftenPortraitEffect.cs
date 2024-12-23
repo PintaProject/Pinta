@@ -100,7 +100,7 @@ public sealed class SoftenPortraitEffect : BaseEffect
 		Span<ColorBgra> dst_data = dest.GetPixelData ();
 
 		foreach (var roi in rois) {
-			foreach (var pixel in Utility.GeneratePixelOffsets (roi, src.GetSize ())) {
+			foreach (var pixel in Tiling.GeneratePixelOffsets (roi, src.GetSize ())) {
 				ColorBgra srcGrey = desaturate_op.Apply (src_data[pixel.memoryOffset]);
 				srcGrey.R = Utility.ClampToByte ((int) (srcGrey.R * settings.redAdjust));
 				srcGrey.B = Utility.ClampToByte ((int) (srcGrey.B * settings.blueAdjust));

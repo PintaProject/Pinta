@@ -72,7 +72,7 @@ public sealed class PencilSketchEffect : BaseEffect
 		Size canvasSize = src.GetSize ();
 
 		foreach (RectangleI roi in rois) {
-			foreach (var pixel in Utility.GeneratePixelOffsets (roi, canvasSize)) {
+			foreach (var pixel in Tiling.GeneratePixelOffsets (roi, canvasSize)) {
 				ColorBgra srcGrey = desaturate_op.Apply (src_data[pixel.memoryOffset]);
 				dst_data[pixel.memoryOffset] = color_dodge_op.Apply (srcGrey, dst_data[pixel.memoryOffset]);
 			}
