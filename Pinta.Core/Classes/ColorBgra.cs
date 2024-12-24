@@ -324,7 +324,7 @@ public struct ColorBgra
 	/// <returns>A ColorBgra value in premultiplied alpha form</returns>
 	public readonly ColorBgra ToPremultipliedAlpha () => FromBgra ((byte) (B * A / 255), (byte) (G * A / 255), (byte) (R * A / 255), A);
 
-	public static bool ColorsWithinTolerance (ColorBgra a, ColorBgra b, int tolerance)
+	public static int ColorDifference (ColorBgra a, ColorBgra b)
 	{
 		int diffR = a.R - b.R;
 		int diffG = a.G - b.G;
@@ -337,9 +337,10 @@ public struct ColorBgra
 		int summandA = diffA * diffA;
 
 		int sum = summandR + summandG + summandB + summandA;
-
-		return sum <= tolerance * tolerance * 4;
+		return sum;
 	}
+
+	public static bool ColorsWithinTolerance (ColorBgra a, ColorBgra b, int tolerance) => ColorDifference (a, b) <= tolerance * tolerance * 4;
 
 	/// <summary>
 	/// Brings the color channels from premultiplied alpha in straight alpha form.
