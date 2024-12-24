@@ -120,6 +120,9 @@ dotnet_naming_rule.fields_should_be_underline_separator.style = underline_separa
 # C# Code Style Rules         #
 ###############################
 
+# IDE0130: Namespace does not match folder structure
+dotnet_diagnostic.IDE0130.severity = none
+
 [*.cs]
 # var preferences
 csharp_style_var_for_built_in_types = true:silent
