@@ -268,7 +268,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	// hex + sliders
 	private Entry hex_entry;
-	private CheckboxOption hex_entry_add_alpha;
 
 	private const int cps_padding_height = 10;
 	private const int cps_padding_width = 14;
@@ -360,8 +359,22 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		DefaultHeight = 1;
 	}
 
-	private void Setup ()
+	/// <param name="chrome">Current Chrome Manager.</param>
+	/// <param name="palette">Palette of adjustable </param>
+	/// <param name="currentColorIndex"></param>
+	/// <param name="livePalette">Determines modality of the dialog and live palette behaviour. If true, dialog will not block rest of app and will update
+	/// the current palette as the color is changed.</param>
+	/// <param name="title">Title of the dialog.</param>
+	public ColorPickerDialog (ChromeManager chrome, Color[] palette, int currentColorIndex, bool livePalette, string title)
 	{
+		original_colors = palette;
+		Colors = (Color[]) palette.Clone ();
+		color_index = currentColorIndex;
+		chrome_manager = chrome;
+		window_title = title;
+		show_swatches = !livePalette;
+
+
 		// Top part of the color picker.
 		// Includes palette, color surface, sliders/hex
 		// Basically, the not-swatches
@@ -473,6 +486,13 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		picker_surface_selector_box.Homogeneous = true;
 		picker_surface_selector_box.Halign = Align.Center;
 
+		// Show Value toggle for hue sat picker surface
+		picker_surface_option_draw_value = new CheckboxOption (spacing, true, Translations.GetString ("Show Value"));
+		picker_surface_option_draw_value.Button.OnToggled += (o, e) => {
+			picker_surface_option_draw_value.Toggle ();
+			UpdateView ();
+		};
+
 		// When Gir.Core supports it, this should probably be replaced with a toggle group.
 		var pickerSurfaceHueSat = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Hue & Sat"));
 		if (picker_surface_type == ColorSurfaceType.HueAndSat)
@@ -524,12 +544,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		picker_surface_box.Append (picker_surface_overlay);
 
-		// Show Value toggle for hue sat picker surface
-		picker_surface_option_draw_value = new CheckboxOption (spacing, true, Translations.GetString ("Show Value"));
-		picker_surface_option_draw_value.Button.OnToggled += (o, e) => {
-			picker_surface_option_draw_value.Toggle ();
-			UpdateView ();
-		};
 		picker_surface_box.Append (picker_surface_option_draw_value);
 
 		#endregion
@@ -543,14 +557,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		var hexBox = new Gtk.Box { Spacing = spacing };
 
-		hex_entry_add_alpha = new CheckboxOption (spacing, true, Translations.GetString ("Add Alpha"));
-		hex_entry_add_alpha.Button.OnToggled += (sender, args) => {
-			hex_entry_add_alpha.Toggle ();
-			UpdateView ();
-		};
-
 		hexBox.Append (new Label { Label_ = Translations.GetString ("Hex"), WidthRequest = 50 });
-		hex_entry = new Entry { Text_ = CurrentColor.ToHex (hex_entry_add_alpha.State), MaxWidthChars = 10 };
+		hex_entry = new Entry { Text_ = CurrentColor.ToHex (), MaxWidthChars = 10 };
 		hex_entry.OnChanged ((o, e) => {
 			if (GetFocus ()?.Parent == hex_entry) {
 				CurrentColor = Color.FromHex (hex_entry.GetText ()) ?? CurrentColor;
@@ -559,8 +567,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		});
 
 		hexBox.Append (hex_entry);
-
-		hexBox.Append (hex_entry_add_alpha);
 
 
 		sliders_box.Append (hexBox);
@@ -763,7 +769,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		top_box.Append (picker_surface_box);
 		top_box.Append (sliders_box);
 
-
 		mainVbox.Append (top_box);
 		if (!small_mode)
 			mainVbox.Append (swatch_box);
@@ -778,27 +783,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		var contentArea = this.GetContentAreaBox ();
 		contentArea.SetAllMargins (margins);
 		contentArea.Append (mainVbox);
-	}
 
-	/// <summary>
-	///
-	/// </summary>
-	/// <param name="chrome">Current Chrome Manager.</param>
-	/// <param name="palette">Palette of adjustable </param>
-	/// <param name="currentColorIndex"></param>
-	/// <param name="livePalette">Determines modality of the dialog and live palette behaviour. If true, dialog will not block rest of app and will update
-	/// the current palette as the color is changed.</param>
-	/// <param name="title">Title of the dialog.</param>
-	public ColorPickerDialog (ChromeManager chrome, Color[] palette, int currentColorIndex, bool livePalette, string title)
-	{
-		original_colors = palette;
-		Colors = (Color[]) palette.Clone ();
-		color_index = currentColorIndex;
-		chrome_manager = chrome;
-		window_title = title;
-		show_swatches = !livePalette;
-		Modal = livePalette;
-		Setup ();
+
 		// incredibly silly workaround
 		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
 		this.SetOpacity (0.995f);
@@ -876,15 +862,13 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		// Update hex
 		if (GetFocus ()?.Parent != hex_entry)
-			hex_entry.SetText (CurrentColor.ToHex (hex_entry_add_alpha.State));
+			hex_entry.SetText (CurrentColor.ToHex ());
 
 		// Redraw palette displays
 		foreach (var display in color_displays) {
 			display.QueueDraw ();
 		}
 	}
-
-
 
 	private void DrawPaletteDisplay (Context g, Color c)
 	{
