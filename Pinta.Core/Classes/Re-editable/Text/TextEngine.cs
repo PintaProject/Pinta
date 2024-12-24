@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Cairo;
 
 namespace Pinta.Core;
 
@@ -26,6 +27,26 @@ public sealed partial class TextEngine
 	private TextPosition selection_start;
 
 	public Pango.FontDescription Font { get; private set; } = Pango.FontDescription.New ();
+
+	private Color primary_color = new (0, 0, 0);
+
+	private Color secondary_color = new (0, 0, 0);
+	public Color PrimaryColor {
+		get => primary_color;
+		set {
+			primary_color = new (value.R, value.G, value.B, value.A);
+			OnModified ();
+		}
+	}
+
+	public Color SecondaryColor {
+		get => secondary_color;
+		set {
+			secondary_color = new (value.R, value.G, value.B, value.A);
+			OnModified ();
+		}
+	}
+
 	public TextAlignment Alignment { get; private set; }
 	public bool Underline { get; private set; }
 
@@ -74,6 +95,8 @@ public sealed partial class TextEngine
 			current_pos = current_pos,
 			selection_start = selection_start,
 			Font = Font.Copy ()!, // NRT: pango_font_description_copy only returns null when given nullptr
+			PrimaryColor = primary_color,
+			SecondaryColor = secondary_color,
 			Alignment = Alignment,
 			Underline = Underline,
 			Origin = new PointI (Origin.X, Origin.Y)
