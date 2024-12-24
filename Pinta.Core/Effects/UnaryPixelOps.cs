@@ -132,7 +132,7 @@ public static class UnaryPixelOps
 	/// <summary>
 	/// Specialization of SetChannel that sets the alpha channel.
 	/// </summary>
-	/// <remarks>This class depends on the system being litte-endian with the alpha channel 
+	/// <remarks>This class depends on the system being litte-endian with the alpha channel
 	/// occupying the 8 most-significant-bits of a ColorBgra instance.
 	/// By the way, we use addition instead of bitwise-OR because an addition can be
 	/// perform very fast (0.5 cycles) on a Pentium 4.</remarks>
@@ -669,8 +669,8 @@ public static class UnaryPixelOps
 			color.G = Utility.ClampToByte ((intensity * 1024 + (color.G - intensity) * sat_factor) >> 10);
 			color.B = Utility.ClampToByte ((intensity * 1024 + (color.B - intensity) * sat_factor) >> 10);
 
-			HsvColor hsvColor = (new RgbColor (color.R, color.G, color.B)).ToHsv ();
-			int newHue = hsvColor.Hue;
+			HsvColor hsvColor = HsvColor.FromBgra (color);
+			int newHue = (int) hsvColor.Hue;
 
 			newHue += hue_delta;
 
@@ -678,10 +678,7 @@ public static class UnaryPixelOps
 
 			while (newHue > 360) { newHue -= 360; }
 
-			hsvColor = new HsvColor (newHue, hsvColor.Saturation, hsvColor.Value);
-
-			RgbColor rgbColor = hsvColor.ToRgb ();
-			ColorBgra newColor = ColorBgra.FromBgr ((byte) rgbColor.Blue, (byte) rgbColor.Green, (byte) rgbColor.Red);
+			ColorBgra newColor = (hsvColor with { Hue = newHue }).ToBgra ();
 			newColor = blend_op.Apply (newColor);
 			newColor.A = color.A;
 

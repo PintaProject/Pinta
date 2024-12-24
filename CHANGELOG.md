@@ -23,6 +23,7 @@ Thanks to the following contributors who worked on this release:
 - Upgraded the minimum required .NET version to 8.0
 - Restored support for add-ins, which had been disabled in Pinta 2.0 due to technical limitations
 - Added a preference (in the `View` menu) for switching between a dark or light color scheme
+- Added an improved color picker dialog (#570, #761, #1025)
 - Added a canvas grid with customizable size, replacing the previous pixel grid (#1028, #1105)
 - Added ability to choose tile type (#1051) and edge behavior (#1141) in tile reflection effect
 - Added a new "Dithering" effect (#457)
