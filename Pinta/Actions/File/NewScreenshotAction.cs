@@ -36,14 +36,18 @@ namespace Pinta.Actions;
 
 internal sealed class NewScreenshotAction : IActionHandler
 {
+	private readonly SystemManager system;
 	private readonly ChromeManager chrome;
 	private readonly WorkspaceManager workspace;
 	private readonly ActionManager actions;
+
 	internal NewScreenshotAction (
+		SystemManager system,
 		ChromeManager chrome,
 		WorkspaceManager workspace,
 		ActionManager actions)
 	{
+		this.system = system;
 		this.chrome = chrome;
 		this.workspace = workspace;
 		this.actions = actions;
@@ -62,13 +66,14 @@ internal sealed class NewScreenshotAction : IActionHandler
 	private async void Activated (object sender, EventArgs args)
 	{
 		// GTK4 removed gdk_pixbuf_get_from_window(), so we need to use OS-specific APis to take a screenshot.
-		// TODO-GTK4 - implement screenshots for Windows
 		try {
 
 			if (SystemManager.GetOperatingSystem () == OS.X11)
 				await HandleX11 ();
 			else if (SystemManager.GetOperatingSystem () == OS.Mac)
 				HandleMac ();
+			else if (SystemManager.GetOperatingSystem () == OS.Windows)
+				await HandleWindows ();
 			else
 				HandleDefault ();
 
@@ -168,5 +173,15 @@ internal sealed class NewScreenshotAction : IActionHandler
 				workspace.ActiveDocument.ClearFileReference ();
 			}
 		);
+	}
+
+	private async Task HandleWindows ()
+	{
+		// Launch the standard screen capture utility which will add to the clipboard.
+		// https://learn.microsoft.com/en-us/windows/uwp/launch-resume/launch-screen-snipping#open-a-new-snip-from-your-app
+		// LaunchUri() returns once the application is launched, not when it's finished, so we don't
+		// currently have a way to be notified when we can add a new document. Listening for clipboard change
+		// events could have many false positives.
+		await system.LaunchUri ("ms-screenclip:");
 	}
 }

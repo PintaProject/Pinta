@@ -52,7 +52,7 @@ public sealed class ActionHandlers
 		{
 			// File
 			new NewDocumentAction (actions, chrome, palette, settings, workspace),
-			new NewScreenshotAction (chrome, workspace, actions),
+			new NewScreenshotAction (system, chrome, workspace, actions),
 			new OpenDocumentAction (actions.File, chrome, workspace, recentFiles, imageFormats),
 			new SaveDocumentAction (actions.File, workspace),
 			new SaveDocumentAsAction (actions.File, workspace),
