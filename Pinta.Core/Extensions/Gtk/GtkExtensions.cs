@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using GObject;
 
 namespace Pinta.Core;
@@ -226,7 +227,7 @@ public static partial class GtkExtensions
 		attrs = new Pango.AttrList (attrs_handle);
 	}
 
-	public static async void LaunchUri (
+	public static async Task LaunchUri (
 		this SystemManager system,
 		string uri)
 	{
