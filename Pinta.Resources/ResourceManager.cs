@@ -64,7 +64,9 @@ public static class ResourceLoader
 			// This will also load any icons added by Gtk.IconFactory.AddDefault() .
 			var icon_theme = Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
 			var icon_paintable = icon_theme.LookupIcon (name, Array.Empty<string> (), size, 1, TextDirection.None, Gtk.IconLookupFlags.Preload);
-			if (icon_paintable == null || (name != StandardIcons.ImageMissing && icon_paintable.IconName!.StartsWith ("image-missing")))
+			if (icon_paintable == null)
+				return false;
+			if (name != StandardIcons.ImageMissing && icon_paintable.IconName!.StartsWith ("image-missing", StringComparison.InvariantCulture))
 				return false;
 
 			var snapshot = Gtk.Snapshot.New ();
@@ -130,7 +132,7 @@ public static class ResourceLoader
 	// https://github.com/mono/monodevelop/blob/master/main/src/core/MonoDevelop.Ide/gtk-gui/generated.cs
 	private static Texture CreateMissingImage (int size)
 	{
-		var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, size, size);
+		using var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, size, size);
 		using Cairo.Context g = new (surf);
 		g.SetSourceRgb (1, 1, 1);
 		g.Rectangle (0, 0, size, size);
