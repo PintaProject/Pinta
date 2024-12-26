@@ -345,6 +345,7 @@ public sealed class TextTool : BaseTool
 
 	private void HandlePintaCorePalettePrimaryColorChanged (object? sender, EventArgs e)
 	{
+		UpdateTextEngineColor ();
 		if (is_editing || (workspace.HasOpenDocuments && CurrentTextEngine.State == TextMode.NotFinalized))
 			RedrawText (is_editing, true);
 	}
@@ -425,6 +426,14 @@ public sealed class TextTool : BaseTool
 
 		if (is_editing || (workspace.HasOpenDocuments && CurrentTextEngine.State == TextMode.NotFinalized))
 			RedrawText (is_editing, true);
+	}
+
+	private void UpdateTextEngineColor ()
+	{
+		if (PintaCore.Workspace.HasOpenDocuments) {
+			CurrentTextEngine.PrimaryColor = palette.PrimaryColor;
+			CurrentTextEngine.SecondaryColor = palette.SecondaryColor;
+		}
 	}
 
 	private int OutlineWidth
@@ -887,6 +896,9 @@ public sealed class TextTool : BaseTool
 		//Store the previous state of the Text Engine.
 		undo_engine = CurrentTextEngine.Clone ();
 
+		//Update Text Engine to use current colors of color palette
+		UpdateTextEngineColor ();
+
 		//Stop ignoring any Surface.Clone calls from this point on.
 		ignore_clone_finalizations = false;
 	}
@@ -1008,14 +1020,14 @@ public sealed class TextTool : BaseTool
 
 		g.MoveTo (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y);
 
-		g.SetSourceColor (palette.PrimaryColor);
+		g.SetSourceColor (CurrentTextEngine.PrimaryColor);
 
 		//Fill in background
 		if (BackgroundFill) {
 			using Cairo.Context g2 = new (surf);
 			selection?.Clip (g2);
 
-			g2.FillRectangle (CurrentTextLayout.GetLayoutBounds ().ToDouble (), palette.SecondaryColor);
+			g2.FillRectangle (CurrentTextLayout.GetLayoutBounds ().ToDouble (), CurrentTextEngine.SecondaryColor);
 		}
 
 		// Draw the text
@@ -1023,13 +1035,13 @@ public sealed class TextTool : BaseTool
 			PangoCairo.Functions.ShowLayout (g, CurrentTextLayout.Layout);
 
 		if (FillText && StrokeText) {
-			g.SetSourceColor (palette.SecondaryColor);
+			g.SetSourceColor (CurrentTextEngine.SecondaryColor);
 			g.LineWidth = OutlineWidth;
 
 			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
 			g.Stroke ();
 		} else if (StrokeText) {
-			g.SetSourceColor (palette.PrimaryColor);
+			g.SetSourceColor (CurrentTextEngine.PrimaryColor);
 			g.LineWidth = OutlineWidth;
 
 			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
@@ -1039,7 +1051,7 @@ public sealed class TextTool : BaseTool
 		if (showCursor) {
 
 			var loc = CurrentTextLayout.GetCursorLocation ();
-			var color = palette.PrimaryColor;
+			var color = CurrentTextEngine.PrimaryColor;
 
 			g.DrawLine (
 				new PointD (loc.X, loc.Y),
