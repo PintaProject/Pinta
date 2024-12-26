@@ -48,7 +48,6 @@ public abstract class SelectTool : BaseTool
 
 	private readonly MoveHandle[] handles = new MoveHandle[8];
 	private int? active_handle;
-	private string? active_cursor_name;
 
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
 	protected override bool ShowAntialiasingButton => false;
@@ -59,14 +58,14 @@ public abstract class SelectTool : BaseTool
 		tools = services.GetService<IToolService> ();
 		workspace = services.GetService<IWorkspaceService> ();
 
-		handles[0] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeNW };
-		handles[1] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeSW };
-		handles[2] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeNE };
-		handles[3] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeSE };
-		handles[4] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeW };
-		handles[5] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeN };
-		handles[6] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeE };
-		handles[7] = new MoveHandle { CursorName = Pinta.Resources.StandardCursors.ResizeS };
+		handles[0] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeNW) };
+		handles[1] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeSW) };
+		handles[2] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeNE) };
+		handles[3] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeSE) };
+		handles[4] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeW) };
+		handles[5] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeN) };
+		handles[6] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeE) };
+		handles[7] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeS) };
 
 		workspace.SelectionChanged += AfterSelectionChange;
 	}
@@ -347,14 +346,12 @@ public abstract class SelectTool : BaseTool
 	{
 		var active_handle = FindHandleUnderPoint (window_point);
 		if (active_handle is not null) {
-			SetCursor (Cursor.NewFromName (active_handle.CursorName, null));
-			active_cursor_name = active_handle.CursorName;
+			SetCursor (active_handle.Cursor);
 			return;
 		}
 
-		if (active_cursor_name != null) {
+		if (CurrentCursor != DefaultCursor) {
 			SetCursor (DefaultCursor);
-			active_cursor_name = null;
 		}
 	}
 

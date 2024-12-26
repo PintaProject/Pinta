@@ -12,6 +12,7 @@ public sealed class MoveHandle : IToolHandle
 	private static readonly Cairo.Color fill_color = new (0, 0, 1, 1);
 	private static readonly Cairo.Color selection_fill_color = new (1, 0.5, 0, 1);
 	private static readonly Cairo.Color stroke_color = new (1, 1, 1, 0.7);
+	private static readonly Gdk.Cursor default_cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Default);
 
 	public PointD CanvasPosition { get; set; }
 
@@ -25,7 +26,7 @@ public sealed class MoveHandle : IToolHandle
 	/// </summary>
 	public bool Selected { get; set; } = false;
 
-	public string CursorName { get; init; } = Pinta.Resources.StandardCursors.Default;
+	public Gdk.Cursor Cursor { get; init; } = default_cursor;
 
 	/// <summary>
 	/// Tests whether the window point is inside the handle's area.
