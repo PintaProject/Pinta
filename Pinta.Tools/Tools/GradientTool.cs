@@ -49,7 +49,7 @@ public sealed class GradientTool : BaseTool
 	public override string Name => Translations.GetString ("Gradient");
 	public override string Icon => Pinta.Resources.Icons.ToolGradient;
 	public override string StatusBarText => Translations.GetString ("Click and drag to draw gradient from primary to secondary color.\nRight click to reverse.");
-	public override Gdk.Key ShortcutKey => Gdk.Key.G;
+	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_G);
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Gradient.png"), 9, 18, null);
 	public override int Priority => 31;
 	protected override bool ShowAlphaBlendingButton => true;

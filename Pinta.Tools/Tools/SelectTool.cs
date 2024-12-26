@@ -50,7 +50,7 @@ public abstract class SelectTool : BaseTool
 	private int? active_handle;
 	private string? active_cursor_name;
 
-	public override Gdk.Key ShortcutKey => Gdk.Key.S;
+	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
 	protected override bool ShowAntialiasingButton => false;
 	public override IEnumerable<MoveHandle> Handles => handles;
 

@@ -25,8 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using GObject;
@@ -135,13 +133,13 @@ public static partial class GtkExtensions
 	/// Provides convenient access to the Gdk.Key of the key being pressed.
 	/// </summary>
 	public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyPressedSignalArgs args)
-		=> (Gdk.Key) args.Keyval;
+		=> new Gdk.Key (args.Keyval);
 
 	/// <summary>
 	/// Provides convenient access to the Gdk.Key of the key being released.
 	/// </summary>
 	public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyReleasedSignalArgs args)
-		=> (Gdk.Key) args.Keyval;
+		=> new Gdk.Key (args.Keyval);
 
 	internal sealed class TextWrapper : Gtk.Text
 	{

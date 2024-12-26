@@ -89,7 +89,7 @@ public sealed class TextTool : BaseTool
 		=> Pinta.Resources.Icons.ToolText;
 
 	public override Gdk.Key ShortcutKey
-		=> Gdk.Key.T;
+		=> new (Gdk.Constants.KEY_T);
 
 	public override int Priority
 		=> 35;
@@ -706,52 +706,52 @@ public sealed class TextTool : BaseTool
 				// Assume that we are going to handle the key
 				keyHandled = true;
 
-				switch (e.Key) {
-					case Gdk.Key.BackSpace:
+				switch (e.Key.Value) {
+					case Gdk.Constants.KEY_BackSpace:
 						CurrentTextEngine.PerformBackspace ();
 						break;
 
-					case Gdk.Key.Delete:
+					case Gdk.Constants.KEY_Delete:
 						CurrentTextEngine.PerformDelete ();
 						break;
 
-					case Gdk.Key.KP_Enter:
-					case Gdk.Key.Return:
+					case Gdk.Constants.KEY_KP_Enter:
+					case Gdk.Constants.KEY_Return:
 						CurrentTextEngine.PerformEnter ();
 						break;
 
-					case Gdk.Key.Left:
+					case Gdk.Constants.KEY_Left:
 						CurrentTextEngine.PerformLeft (e.IsControlPressed, e.IsShiftPressed);
 						break;
 
-					case Gdk.Key.Right:
+					case Gdk.Constants.KEY_Right:
 						CurrentTextEngine.PerformRight (e.IsControlPressed, e.IsShiftPressed);
 						break;
 
-					case Gdk.Key.Up:
+					case Gdk.Constants.KEY_Up:
 						CurrentTextEngine.PerformUp (e.IsShiftPressed);
 						break;
 
-					case Gdk.Key.Down:
+					case Gdk.Constants.KEY_Down:
 						CurrentTextEngine.PerformDown (e.IsShiftPressed);
 						break;
 
-					case Gdk.Key.Home:
+					case Gdk.Constants.KEY_Home:
 						CurrentTextEngine.PerformHome (e.IsControlPressed, e.IsShiftPressed);
 						break;
 
-					case Gdk.Key.End:
+					case Gdk.Constants.KEY_End:
 						CurrentTextEngine.PerformEnd (e.IsControlPressed, e.IsShiftPressed);
 						break;
 
-					case Gdk.Key.Next:
-					case Gdk.Key.Prior:
+					case Gdk.Constants.KEY_Next:
+					case Gdk.Constants.KEY_Prior:
 						break;
 
-					case Gdk.Key.Escape:
+					case Gdk.Constants.KEY_Escape:
 						StopEditing (false);
 						return true;
-					case Gdk.Key.Insert:
+					case Gdk.Constants.KEY_Insert:
 						if (e.IsShiftPressed) {
 							CurrentTextEngine.PerformPaste (GdkExtensions.GetDefaultClipboard ()).Wait ();
 						} else if (e.IsControlPressed) {
@@ -760,7 +760,7 @@ public sealed class TextTool : BaseTool
 						break;
 					default:
 						if (e.IsControlPressed) {
-							if (e.Key == Gdk.Key.z) {
+							if (e.Key.Value == Gdk.Constants.KEY_z) {
 								//Ctrl + Z for undo while editing.
 								OnHandleUndo (document);
 
@@ -768,16 +768,16 @@ public sealed class TextTool : BaseTool
 									workspace.ActiveDocument.History.Undo ();
 
 								return true;
-							} else if (e.Key == Gdk.Key.i) {
+							} else if (e.Key.Value == Gdk.Constants.KEY_i) {
 								italic_btn.Toggle ();
 								UpdateFont ();
-							} else if (e.Key == Gdk.Key.b) {
+							} else if (e.Key.Value == Gdk.Constants.KEY_b) {
 								bold_btn.Toggle ();
 								UpdateFont ();
-							} else if (e.Key == Gdk.Key.u) {
+							} else if (e.Key.Value == Gdk.Constants.KEY_u) {
 								underscore_btn.Toggle ();
 								UpdateFont ();
-							} else if (e.Key == Gdk.Key.a) {
+							} else if (e.Key.Value == Gdk.Constants.KEY_a) {
 								// Select all of the text.
 								CurrentTextEngine.PerformHome (false, false);
 								CurrentTextEngine.PerformEnd (true, true);

@@ -457,33 +457,33 @@ public abstract class BaseEditEngine
 	public virtual bool HandleKeyDown (Document document, ToolKeyEventArgs e)
 	{
 		Gdk.Key keyPressed = e.Key;
-		switch (keyPressed) {
-			case Gdk.Key.Delete:
+		switch (keyPressed.Value) {
+			case Gdk.Constants.KEY_Delete:
 				HandleDelete ();
 				return true;
-			case Gdk.Key.Return:
-			case Gdk.Key.KP_Enter:
+			case Gdk.Constants.KEY_Return:
+			case Gdk.Constants.KEY_KP_Enter:
 				FinalizeAllShapes ();
 				return true;
-			case Gdk.Key.space:
+			case Gdk.Constants.KEY_space:
 				HandleSpace (e);
 				return true;
-			case Gdk.Key.Up:
+			case Gdk.Constants.KEY_Up:
 				HandleUp ();
 				return true;
-			case Gdk.Key.Down:
+			case Gdk.Constants.KEY_Down:
 				HandleDown ();
 				return true;
-			case Gdk.Key.Left:
+			case Gdk.Constants.KEY_Left:
 				HandleLeft (e);
 				return true;
-			case Gdk.Key.Right:
+			case Gdk.Constants.KEY_Right:
 				HandleRight (e);
 				return true;
-			case Gdk.Key.bracketleft:
+			case Gdk.Constants.KEY_bracketleft:
 				BrushWidth--;
 				return true;
-			case Gdk.Key.bracketright:
+			case Gdk.Constants.KEY_bracketright:
 				BrushWidth++;
 				return true;
 			default:
@@ -703,15 +703,15 @@ public abstract class BaseEditEngine
 		if (keyReleased.IsControlKey ())
 			DrawActiveShape (false, false, true, e.IsShiftPressed, false, false);
 
-		switch (keyReleased) {
-			case Gdk.Key.Delete:
-			case Gdk.Key.Return:
-			case Gdk.Key.KP_Enter:
-			case Gdk.Key.space:
-			case Gdk.Key.Up:
-			case Gdk.Key.Down:
-			case Gdk.Key.Left:
-			case Gdk.Key.Right:
+		switch (keyReleased.Value) {
+			case Gdk.Constants.KEY_Delete:
+			case Gdk.Constants.KEY_Return:
+			case Gdk.Constants.KEY_KP_Enter:
+			case Gdk.Constants.KEY_space:
+			case Gdk.Constants.KEY_Up:
+			case Gdk.Constants.KEY_Down:
+			case Gdk.Constants.KEY_Left:
+			case Gdk.Constants.KEY_Right:
 				return true;
 			default:
 				return false;

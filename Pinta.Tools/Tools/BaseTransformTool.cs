@@ -149,17 +149,17 @@ public abstract class BaseTransformTool : BaseTool
 		double dx = 0.0;
 		double dy = 0.0;
 
-		switch (e.Key) {
-			case Gdk.Key.Left:
+		switch (e.Key.Value) {
+			case Gdk.Constants.KEY_Left:
 				dx = -1;
 				break;
-			case Gdk.Key.Right:
+			case Gdk.Constants.KEY_Right:
 				dx = 1;
 				break;
-			case Gdk.Key.Up:
+			case Gdk.Constants.KEY_Up:
 				dy = -1;
 				break;
-			case Gdk.Key.Down:
+			case Gdk.Constants.KEY_Down:
 				dy = 1;
 				break;
 			default:

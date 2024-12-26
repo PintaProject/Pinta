@@ -96,12 +96,11 @@ public abstract class BaseBrushTool : BaseTool
 
 	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
 	{
-		Gdk.Key keyPressed = e.Key;
-		switch (keyPressed) {
-			case Gdk.Key.bracketleft:
+		switch (e.Key.Value) {
+			case Gdk.Constants.KEY_bracketleft:
 				BrushWidth--;
 				return true;
-			case Gdk.Key.bracketright:
+			case Gdk.Constants.KEY_bracketright:
 				BrushWidth++;
 				return true;
 		}

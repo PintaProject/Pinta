@@ -96,7 +96,7 @@ public sealed class PaletteManager : IPaletteService
 
 	public bool DoKeyPress (Gtk.EventControllerKey.KeyPressedSignalArgs args)
 	{
-		if (args.State.HasModifierKey () || args.GetKey ().ToUpper () != Gdk.Key.X)
+		if (args.State.HasModifierKey () || args.GetKey ().ToUpper ().Value != Gdk.Constants.KEY_X)
 			return false;
 
 		Color temp = PrimaryColor;

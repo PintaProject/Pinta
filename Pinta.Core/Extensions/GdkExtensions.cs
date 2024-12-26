@@ -67,17 +67,6 @@ public static class GdkExtensions
 		=> m.HasFlag (Gdk.ModifierType.Button3Mask);
 
 	/// <summary>
-	/// Returns whether this key is a Ctrl key (or the Cmd key on macOS).
-	/// </summary>
-	public static bool IsControlKey (this Gdk.Key key)
-	{
-		if (PintaCore.System.OperatingSystem == OS.Mac)
-			return key == Gdk.Key.Meta_L || key == Gdk.Key.Meta_R;
-		else
-			return key == Gdk.Key.Control_L || key == Gdk.Key.Control_R;
-	}
-
-	/// <summary>
 	/// Returns whether any of the Ctrl/Cmd/Shift/Alt modifiers are active.
 	/// This prevents Caps Lock, Num Lock, etc from appearing as active modifier keys.
 	/// </summary>
@@ -183,14 +172,6 @@ public static class GdkExtensions
 		g.Paint ();
 
 		return Gdk.Texture.NewForPixbuf (i.ToPixbuf ());
-	}
-
-	public static Gdk.Key ToUpper (this Gdk.Key k1)
-	{
-		if (Enum.TryParse (k1.ToString ().ToUpperInvariant (), out Gdk.Key result))
-			return result;
-		else
-			return k1;
 	}
 
 	// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard

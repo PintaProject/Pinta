@@ -48,7 +48,7 @@ public abstract class ShapeTool : BaseTool
 		system_manager = services.GetService<SystemManager> ();
 	}
 
-	public override Gdk.Key ShortcutKey => Gdk.Key.O;
+	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_O);
 	protected override bool ShowAntialiasingButton => true;
 	public virtual BaseEditEngine.ShapeTypes ShapeType => BaseEditEngine.ShapeTypes.ClosedLineCurveSeries;
 	public override bool IsEditableShapeTool => true;

@@ -41,7 +41,7 @@ public sealed class PanTool : BaseTool
 	public override string Icon => Pinta.Resources.Icons.ToolPan;
 	public override string StatusBarText => Translations.GetString ("Click and drag to navigate image.");
 	public override Gdk.Cursor DefaultCursor => GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Grab);
-	public override Gdk.Key ShortcutKey => Gdk.Key.H;
+	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_H);
 	public override int Priority => 11;
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)

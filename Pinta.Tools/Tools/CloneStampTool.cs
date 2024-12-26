@@ -48,7 +48,7 @@ public sealed class CloneStampTool : BaseBrushTool
 	// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 	public override string StatusBarText => Translations.GetString ("{0} + left click to set origin, left click to paint.", system_manager.CtrlLabel ());
 	public override bool CursorChangesOnZoom => true;
-	public override Key ShortcutKey => Key.L;
+	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_L);
 	public override int Priority => 47;
 	protected override bool ShowAntialiasingButton => true;
 

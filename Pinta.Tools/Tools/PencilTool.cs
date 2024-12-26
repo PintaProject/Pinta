@@ -51,7 +51,7 @@ public sealed class PencilTool : BaseTool
 		"Left click to draw freeform one-pixel wide lines with the primary color." +
 		"\nRight click to use the secondary color.");
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Pencil.png"), 7, 24, null);
-	public override Gdk.Key ShortcutKey => Gdk.Key.P;
+	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_P);
 	public override int Priority => 25;
 	protected override bool ShowAlphaBlendingButton => true;
 

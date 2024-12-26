@@ -47,7 +47,7 @@ public sealed class ToolBoxButton : ToggleButton
 		Show ();
 
 		string shortcutText = "";
-		if (tool.ShortcutKey != 0) {
+		if (tool.ShortcutKey != Gdk.Key.Invalid) {
 			var shortcutLabel = Translations.GetString ("Shortcut key");
 			shortcutText = $"{shortcutLabel}: {tool.ShortcutKey.ToString ().ToUpperInvariant ()}\n";
 		}

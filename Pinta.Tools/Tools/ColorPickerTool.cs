@@ -53,7 +53,7 @@ public sealed class ColorPickerTool : BaseTool
 	public override string Icon => Pinta.Resources.Icons.ToolColorPicker;
 	public override string StatusBarText => Translations.GetString ("Left click to set primary color.\nRight click to set secondary color.");
 	public override bool CursorChangesOnZoom => true;
-	public override Gdk.Key ShortcutKey => Gdk.Key.K;
+	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_K);
 	public override int Priority => 33;
 	private int SampleSize => SampleSizeDropDown.SelectedItem.GetTagOrDefault (1);
 	private bool SampleLayerOnly => SampleTypeDropDown.SelectedItem.GetTagOrDefault (false);

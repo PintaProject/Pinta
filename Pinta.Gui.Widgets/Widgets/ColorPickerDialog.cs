@@ -2,7 +2,6 @@ using System;
 using System.Globalization;
 using System.Linq;
 using Cairo;
-using Gdk;
 using Pinta.Core;
 using Color = Cairo.Color;
 using Context = Cairo.Context;
@@ -760,7 +759,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		var keyboard_gesture = Gtk.EventControllerKey.New ();
 		keyboard_gesture.OnKeyPressed += (_, e) => {
-			if (e.GetKey () == Key.x)
+			if (e.GetKey ().Value == Gdk.Constants.KEY_x)
 				CycleColors ();
 			return true;
 		};

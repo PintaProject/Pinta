@@ -118,10 +118,11 @@ public abstract class BaseTool
 		=> Enumerable.Empty<IToolHandle> ();
 
 	/// <summary>
-	/// The shortcut key used to activate this tool in the toolbox. Return 0 for no shortcut key.
+	/// The shortcut key used to activate this tool in the toolbox.
+	/// Return Gdk.Key.Invalid for no shortcut key.
 	/// </summary>
 	public virtual Gdk.Key ShortcutKey
-		=> 0;
+		=> Gdk.Key.Invalid;
 
 	/// <summary>
 	/// Affects the order of the tool in the toolbox. Lower numbers will appear first.
