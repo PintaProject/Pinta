@@ -65,7 +65,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Pinta-linux-dotnet-${{matrix.dotnet_version}}.zip
-        path: pinta-2.2.zip
+        path: pinta-3.0.zip
         if-no-files-found: error
 
   build-macos:

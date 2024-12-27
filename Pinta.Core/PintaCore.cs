@@ -45,7 +45,7 @@ public static class PintaCore
 	public static WorkspaceManager Workspace { get; }
 	public static CanvasGridManager CanvasGrid { get; }
 
-	public const string ApplicationVersion = "2.2";
+	public const string ApplicationVersion = "3.0";
 
 	static PintaCore ()
 	{

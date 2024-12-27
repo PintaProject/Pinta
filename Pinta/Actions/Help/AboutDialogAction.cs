@@ -79,7 +79,7 @@ internal sealed class AboutDialogAction : IActionHandler
 	{
 		string copyrightText = Translations.GetString ("Copyright");
 		string contributorsText = Translations.GetString ("by Pinta contributors");
-		return $"{copyrightText} (c) 2010-2023 {contributorsText}";
+		return $"{copyrightText} (c) 2010-2025 {contributorsText}";
 	}
 
 	private static string BuildLicenseText ()
