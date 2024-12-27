@@ -96,17 +96,21 @@ public sealed class HistoryListView : ScrolledWindow
 		// Clear out old items and rebuild.
 		model.RemoveMultiple (0, model.GetNItems ());
 
+		active_document = doc;
+
 		if (doc is not null) {
 			foreach (BaseHistoryItem item in doc.History.Items) {
 				model.Append (new HistoryListViewItem (item));
 			}
 
+			// Move selection to the document's current history item.
+			if (model.NItems > 0)
+				selection_model.SetSelected ((uint) doc.History.Pointer);
+
 			doc.History.HistoryItemAdded += OnHistoryItemAdded;
 			doc.History.ActionUndone += OnUndoOrRedo;
 			doc.History.ActionRedone += OnUndoOrRedo;
 		}
-
-		active_document = doc;
 	}
 
 	private void OnHistoryItemAdded (object? sender, HistoryItemAddedEventArgs args)
