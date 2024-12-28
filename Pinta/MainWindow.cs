@@ -72,7 +72,9 @@ internal sealed class MainWindow
 		PintaCore.Initialize ();
 
 		// Initialize extensions
-		AddinManager.Initialize ();
+		string addins_dir = System.IO.Path.Combine (PintaCore.Settings.GetUserSettingsDirectory (), "addins");
+		AddinManager.Initialize (addins_dir);
+
 		AddinManager.Registry.Update ();
 		var setupService = new AddinSetupService (AddinManager.Registry);
 		if (!setupService.AreRepositoriesRegistered ())
@@ -264,22 +266,24 @@ internal sealed class MainWindow
 	}
 
 	// Called when an extension node is added or removed
-	private void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
+	private async void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
 	{
-		IExtension extension = (IExtension) args.ExtensionObject;
 		if (args.Change == ExtensionChange.Add) {
 			try {
+				IExtension extension = (IExtension) args.ExtensionObject;
 				extension.Initialize ();
 			} catch (Exception e) {
 				// Translators: {0} is the name of an add-in.
 				string body = Translations.GetString ("The '{0}' add-in may not be compatible with this version of Pinta", args.ExtensionNode.Addin.Id);
-				_ = PintaCore.Chrome.ShowErrorDialog (
+				await PintaCore.Chrome.ShowErrorDialog (
 					PintaCore.Chrome.MainWindow,
 					Translations.GetString ("Failed to initialize add-in"),
 					body, e.ToString ());
 			}
-		} else
+		} else {
+			IExtension extension = (IExtension) args.ExtensionObject;
 			extension.Uninitialize ();
+		}
 	}
 
 	#region GUI Construction
