@@ -88,7 +88,7 @@ internal sealed class AddinInfoView : Adw.Bin
 
 		// --- Adwaita.Bin initialization
 
-		Child = view_stack;
+		Child = viewStack;
 
 		// --- References to keep
 
