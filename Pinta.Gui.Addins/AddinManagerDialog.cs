@@ -33,9 +33,9 @@ public sealed class AddinManagerDialog : Adw.Window
 		Gtk.Button installFileButton = CreateInstallFileButton ();
 		Gtk.Button refreshButton = CreateRefreshButton ();
 
-		AddinListView galleryList = CreateAddinList ();
-		AddinListView installedList = CreateAddinList ();
-		AddinListView updatesList = CreateAddinList ();
+		AddinListView galleryList = CreateAddinList (system);
+		AddinListView installedList = CreateAddinList (system);
+		AddinListView updatesList = CreateAddinList (system);
 
 		Adw.ViewStack viewStack = CreateViewStack (galleryList, installedList, updatesList);
 
@@ -92,7 +92,7 @@ public sealed class AddinManagerDialog : Adw.Window
 		return result;
 	}
 
-	private AddinListView CreateAddinList ()
+	private AddinListView CreateAddinList (SystemManager system)
 	{
 		AddinListView result = new (system);
 		result.OnAddinChanged += (_, _) => LoadAll ();

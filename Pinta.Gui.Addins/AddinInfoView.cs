@@ -230,9 +230,9 @@ internal sealed class AddinInfoView : Adw.Bin
 			current_item.Enabled = enable_switch.Active;
 	}
 
-	private void HandleInfoButtonClicked ()
+	private async void HandleInfoButtonClicked ()
 	{
-		system.LaunchUri (current_item!.Url);
+		await system.LaunchUri (current_item!.Url);
 	}
 
 	private void HandleInstallButtonClicked ()
