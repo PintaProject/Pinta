@@ -89,6 +89,7 @@ internal sealed class AddinListView : Adw.Bin
 	{
 		model.RemoveAll ();
 		list_view_stack.VisibleChild = empty_list_page;
+		info_view.Update (null);
 	}
 
 	public void AddAddin (
