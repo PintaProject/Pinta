@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-29 01:40+0000\n"
-"PO-Revision-Date: 2024-11-28 07:00+0000\n"
+"PO-Revision-Date: 2024-12-29 15:31+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -100,7 +100,7 @@ msgstr "Wszystkie pliki"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
@@ -955,7 +955,7 @@ msgstr "Wysokość:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:566
 msgid "Hex"
-msgstr ""
+msgstr "Szesnastkowy"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 msgid "Hide Layer"
@@ -994,7 +994,7 @@ msgstr "Odcień"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:503
 msgid "Hue & Sat"
-msgstr ""
+msgstr "Odcień i nasycenie"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
@@ -1527,7 +1527,7 @@ msgstr "Liczba wątków używanych do renderowania"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:419
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
@@ -1971,7 +1971,7 @@ msgstr "Przywróć domyślne"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:395
 msgid "Reset Color"
-msgstr ""
+msgstr "Zresetuj kolor"
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
@@ -2069,11 +2069,11 @@ msgstr "Próbkowanie"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
 msgid "Sat"
-msgstr ""
+msgstr "Nasycenie"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:512
 msgid "Sat & Value"
-msgstr ""
+msgstr "Nasycenie i wartość"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
@@ -2169,7 +2169,7 @@ msgstr "Pokaż warstwę"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:496
 msgid "Show Value"
-msgstr ""
+msgstr "Pokaż wartość"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Show/Hide"
@@ -2485,7 +2485,7 @@ msgstr "Wykorzystano ikony z:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:617
 msgid "Value"
-msgstr ""
+msgstr "Wartość"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:202
 #, csharp-format
