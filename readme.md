@@ -54,12 +54,11 @@ For building on the command line:
 
 - Install .NET 8 and GTK4
   - `brew install dotnet-sdk libadwaita adwaita-icon-theme gettext webp-pixbuf-loader`
+  - For Apple Silicon, set `DYLD_LIBRARY_PATH=/opt/homebrew/lib` in the environment so that Pinta can load the GTK libraries
 - Build:
   - `dotnet build`
 - Run:
   - `dotnet run --project Pinta`
-
-Alternatively, Pinta can be built by opening `Pinta.sln` in [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/).
 
 ## Building on Linux
 

@@ -21,6 +21,7 @@ Thanks to the following contributors who worked on this release:
 ### Added
 - Ported to GTK4 and libadwaita
 - Upgraded the minimum required .NET version to 8.0
+- Added an arm64 installer for macOS (Apple silicon)
 - Restored support for add-ins, which had been disabled in Pinta 2.0 due to technical limitations
 - Added a preference (in the `View` menu) for switching between a dark or light color scheme
 - Added an improved color picker dialog (#570, #761, #1025)
