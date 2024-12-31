@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-29 01:40+0000\n"
-"PO-Revision-Date: 2024-11-28 07:00+0000\n"
+"PO-Revision-Date: 2024-12-31 03:00+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -101,7 +101,7 @@ msgstr "Все файлы"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Alpha"
-msgstr ""
+msgstr "Альфа"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
@@ -961,7 +961,7 @@ msgstr "Высота:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:566
 msgid "Hex"
-msgstr ""
+msgstr "Шестнадц."
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 msgid "Hide Layer"
@@ -1000,7 +1000,7 @@ msgstr "Тон"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:503
 msgid "Hue & Sat"
-msgstr ""
+msgstr "Тон & Насыщ."
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
@@ -1534,7 +1534,7 @@ msgstr "Количество потоков, используемых для о�
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:419
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
@@ -1979,7 +1979,7 @@ msgstr "Сброс"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:395
 msgid "Reset Color"
-msgstr ""
+msgstr "Сбросить цвет"
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
@@ -2077,11 +2077,11 @@ msgstr "Выборка"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
 msgid "Sat"
-msgstr ""
+msgstr "Насыщ."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:512
 msgid "Sat & Value"
-msgstr ""
+msgstr "Насыщ. & Значение"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
@@ -2177,7 +2177,7 @@ msgstr "Показать слой"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:496
 msgid "Show Value"
-msgstr ""
+msgstr "Показать значение"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Show/Hide"
@@ -2494,7 +2494,7 @@ msgstr "Использованы некоторые значки из:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:617
 msgid "Value"
-msgstr ""
+msgstr "Значение"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:202
 #, csharp-format

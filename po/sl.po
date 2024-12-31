@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-29 01:40+0000\n"
-"PO-Revision-Date: 2024-12-24 11:28+0000\n"
+"PO-Revision-Date: 2024-12-31 03:00+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
 ">\n"
@@ -101,7 +101,7 @@ msgstr "Vse datoteke"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
@@ -346,7 +346,7 @@ msgstr "Centimetri"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr "Spremeni šiirino čopiča. Bližnica: [ ]"
+msgstr "Spremeni širino čopiča. Bližnjica: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:355
 msgid "Changed Shape Type"
@@ -955,7 +955,7 @@ msgstr "Višina:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:566
 msgid "Hex"
-msgstr ""
+msgstr "Heksa"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 msgid "Hide Layer"
@@ -993,7 +993,7 @@ msgstr "Odtenek"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:503
 msgid "Hue & Sat"
-msgstr ""
+msgstr "Odtenek & Nas"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
@@ -1514,7 +1514,7 @@ msgstr "Število niti uporabljene za izvajanje"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:419
 msgid "OK"
-msgstr ""
+msgstr "V redu"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
@@ -1958,7 +1958,7 @@ msgstr "Ponastavi"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:395
 msgid "Reset Color"
-msgstr ""
+msgstr "Ponastavi barvo"
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
@@ -2056,11 +2056,11 @@ msgstr "Vzorčenje"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
 msgid "Sat"
-msgstr ""
+msgstr "Nas"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:512
 msgid "Sat & Value"
-msgstr ""
+msgstr "Nas in vrednost"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
@@ -2156,7 +2156,7 @@ msgstr "Prikaži plast"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:496
 msgid "Show Value"
-msgstr ""
+msgstr "Prikaži vrednost"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Show/Hide"
@@ -2472,7 +2472,7 @@ msgstr "Nekatere ikone uporabljene od:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:617
 msgid "Value"
-msgstr ""
+msgstr "Vrednost"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:202
 #, csharp-format
