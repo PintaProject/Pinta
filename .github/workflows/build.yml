@@ -128,6 +128,9 @@ jobs:
     - name: Build
       run: dotnet build Pinta.sln -c Release
     - name: Test
+      env:
+        # Add libraries from homebrew to the search path so they can be loaded by gir.core
+        DYLD_LIBRARY_PATH: "/opt/homebrew/lib"
       run: dotnet test Pinta.sln -c Release
 
     - name: Add Cert to Keychain
