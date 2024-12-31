@@ -1,6 +1,15 @@
 #!/bin/sh
 set -e
 
+# Parse command line arguments
+runtimeid=$1
+
+if [ "$runtimeid" != "osx-x64" ] && [ "$runtimeid" != "osx-arm64" ]; then
+    echo "Invalid runtime identifier (should be osx-x64 or osx-arm64)"
+    echo "Usage: ./build_installer.sh runtimeid"
+    exit 1
+fi 
+
 MAC_APP_DIR="$PWD/package/Pinta.app"
 MAC_APP_BIN_DIR="${MAC_APP_DIR}/Contents/MacOS/"
 MAC_APP_RESOURCE_DIR="${MAC_APP_DIR}/Contents/Resources/"
@@ -15,7 +24,7 @@ run_codesign()
 
 mkdir -p ${MAC_APP_BIN_DIR} ${MAC_APP_RESOURCE_DIR} ${MAC_APP_SHARE_DIR}
 
-dotnet publish ../../Pinta.sln -p:PublishDir=${MAC_APP_BIN_DIR} -p:BuildTranslations=true -c Release -r osx-x64 --self-contained true
+dotnet publish ../../Pinta.sln -p:PublishDir=${MAC_APP_BIN_DIR} -p:BuildTranslations=true -c Release -r $runtimeid --self-contained true
 
 # Remove stuff we don't need.
 rm ${MAC_APP_BIN_DIR}/*.pdb

@@ -100,7 +100,7 @@ jobs:
         MAC_DEV_PASSWORD: ${{ secrets.MAC_DEV_PASSWORD }}
       run: |
         cd installer/macos
-        ./build_installer.sh
+        ./build_installer.sh osx-x64
 
     - name: Upload Installer
       if: github.event_name != 'pull_request'
@@ -146,7 +146,7 @@ jobs:
         MAC_DEV_PASSWORD: ${{ secrets.MAC_DEV_PASSWORD }}
       run: |
         cd installer/macos
-        ./build_installer.sh
+        ./build_installer.sh osx-arm64
 
     - name: Upload Installer
       if: github.event_name != 'pull_request'
