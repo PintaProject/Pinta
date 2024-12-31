@@ -40,7 +40,7 @@ cp pinta.icns ${MAC_APP_DIR}/Contents/Resources
 
 # Install the GTK dependencies.
 echo "Bundling GTK..."
-./bundle_gtk.py --resource_dir ${MAC_APP_RESOURCE_DIR}
+./bundle_gtk.py --runtime $runtimeid --resource_dir ${MAC_APP_RESOURCE_DIR}
 # Add the GTK lib dir to the library search path (for dlopen()), as an alternative to $DYLD_LIBRARY_PATH.
 install_name_tool -add_rpath "@executable_path/../Resources/lib" ${MAC_APP_BIN_DIR}/Pinta
 
