@@ -1,6 +1,15 @@
 #!/bin/sh
 set -e
 
+# Parse command line arguments
+runtimeid=$1
+
+if [ "$runtimeid" != "osx-x64" ] && [ "$runtimeid" != "osx-arm64" ]; then
+    echo "Invalid runtime identifier (should be osx-x64 or osx-arm64)"
+    echo "Usage: ./build_installer.sh runtimeid"
+    exit 1
+fi 
+
 MAC_APP_DIR="$PWD/package/Pinta.app"
 MAC_APP_BIN_DIR="${MAC_APP_DIR}/Contents/MacOS/"
 MAC_APP_RESOURCE_DIR="${MAC_APP_DIR}/Contents/Resources/"
@@ -15,7 +24,7 @@ run_codesign()
 
 mkdir -p ${MAC_APP_BIN_DIR} ${MAC_APP_RESOURCE_DIR} ${MAC_APP_SHARE_DIR}
 
-dotnet publish ../../Pinta.sln -p:PublishDir=${MAC_APP_BIN_DIR} -p:BuildTranslations=true -c Release -r osx-x64 --self-contained true
+dotnet publish ../../Pinta.sln -p:PublishDir=${MAC_APP_BIN_DIR} -p:BuildTranslations=true -c Release -r $runtimeid --self-contained true
 
 # Remove stuff we don't need.
 rm ${MAC_APP_BIN_DIR}/*.pdb
@@ -31,7 +40,7 @@ cp pinta.icns ${MAC_APP_DIR}/Contents/Resources
 
 # Install the GTK dependencies.
 echo "Bundling GTK..."
-./bundle_gtk.py --resource_dir ${MAC_APP_RESOURCE_DIR}
+./bundle_gtk.py --runtime $runtimeid --resource_dir ${MAC_APP_RESOURCE_DIR}
 # Add the GTK lib dir to the library search path (for dlopen()), as an alternative to $DYLD_LIBRARY_PATH.
 install_name_tool -add_rpath "@executable_path/../Resources/lib" ${MAC_APP_BIN_DIR}/Pinta
 
