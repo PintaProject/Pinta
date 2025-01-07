@@ -233,8 +233,7 @@ public abstract class SelectTool : BaseTool
 	/// </summary>
 	private void LoadFromDocument (Document document)
 	{
-		var selection = document.Selection;
-		handle.Rectangle = RectangleD.FromPoints (selection.Origin, selection.End);
+		handle.Rectangle = document.Selection.SelectionPath.GetBounds ().ToDouble ();
 		ShowHandles (document.Selection.Visible && tools.CurrentTool == this);
 	}
 }

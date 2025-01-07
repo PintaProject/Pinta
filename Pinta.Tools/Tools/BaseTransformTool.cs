@@ -37,6 +37,7 @@ public abstract class BaseTransformTool : BaseTool
 {
 	private readonly int rotate_steps = 32;
 	private readonly Matrix transform = CairoExtensions.CreateIdentityMatrix ();
+	private Matrix stored_handle_transform = CairoExtensions.CreateIdentityMatrix ();
 	private RectangleD source_rect;
 	private PointD original_point;
 	private PointD rect_original_point;
@@ -106,6 +107,7 @@ public abstract class BaseTransformTool : BaseTool
 		var constrain = e.IsShiftPressed;
 
 		transform.InitIdentity ();
+		rect_handle.Transform.InitMatrix (stored_handle_transform);
 
 		if (is_scaling) {
 			rect_handle.UpdateDrag (e.PointDouble, constrain ? ConstrainType.AspectRatio : ConstrainType.None);
@@ -115,6 +117,7 @@ public abstract class BaseTransformTool : BaseTool
 			var sx = (source_rect.Width > 0) ? (target_rect.Width / source_rect.Width) : 0.0;
 			var sy = (source_rect.Height > 0) ? (target_rect.Height / source_rect.Height) : 0.0;
 
+			//transform.Multiply (rect_handle.Transform);
 			transform.Translate (target_rect.Left, target_rect.Top);
 			transform.Scale (sx, sy);
 			transform.Translate (-source_rect.Left, -source_rect.Top);
@@ -136,8 +139,11 @@ public abstract class BaseTransformTool : BaseTool
 			transform.Translate (center.X, center.Y);
 			transform.Rotate (-angle);
 			transform.Translate (-center.X, -center.Y);
-			//TODO: the handle should rotate with the selection rather than just resizing to fit the new bounds
-			rect_handle.Rectangle = document.Selection.SelectionPath.GetBounds ().ToDouble ();
+
+			rect_handle.Transform.Translate (center.X, center.Y);
+			rect_handle.Transform.Rotate (-angle);
+			rect_handle.Transform.Translate (-center.X, -center.Y);
+			rect_handle.UpdateHandlePositions ();
 		} else {
 			// The cursor position can be a subpixel value. Round to an integer
 			// so that we only translate by entire pixels.
@@ -145,7 +151,8 @@ public abstract class BaseTransformTool : BaseTool
 			var dx = Math.Floor (e.PointDouble.X - original_point.X);
 			var dy = Math.Floor (e.PointDouble.Y - original_point.Y);
 			transform.Translate (dx, dy);
-			rect_handle.Rectangle = new RectangleD(rect_original_point.X + dx, rect_original_point.Y + dy, rect_handle.Rectangle.Width, rect_handle.Rectangle.Height);
+			rect_handle.Transform.Translate (dx, dy);
+			rect_handle.UpdateHandlePositions ();
 		}
 
 		OnUpdateTransform (document, transform);
@@ -215,6 +222,7 @@ public abstract class BaseTransformTool : BaseTool
 	{
 		source_rect = GetSourceRectangle (document);
 		transform.InitIdentity ();
+		stored_handle_transform.InitMatrix (rect_handle.Transform);
 	}
 
 	protected virtual void OnUpdateTransform (Document document, Matrix transform)
@@ -227,6 +235,8 @@ public abstract class BaseTransformTool : BaseTool
 		is_rotating = false;
 		is_scaling = false;
 		using_mouse = false;
+
+		stored_handle_transform.Multiply (rect_handle.Transform);
 	}
 
 	protected override void OnAfterUndo (Document document)
@@ -256,6 +266,8 @@ public abstract class BaseTransformTool : BaseTool
 	{
 		var dirty = rect_handle.InvalidateRect;
 		rect_handle.Rectangle = GetSourceRectangle (document);
+		rect_handle.Transform.InitIdentity ();
+		rect_handle.UpdateHandlePositions ();
 		dirty = dirty.Union (rect_handle.InvalidateRect);
 		PintaCore.Workspace.InvalidateWindowRect (dirty);
 	}

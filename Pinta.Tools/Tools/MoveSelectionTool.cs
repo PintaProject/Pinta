@@ -36,7 +36,6 @@ public sealed class MoveSelectionTool : BaseTransformTool
 
 	public MoveSelectionTool (IServiceManager service) : base (service)
 	{
-		rect_handle.InvertIfNegative = true;
 	}
 
 	public override string Name => Translations.GetString ("Move Selection");

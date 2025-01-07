@@ -126,7 +126,7 @@ public sealed class MoveSelectedTool : BaseTransformTool
 		if (hist != null)
 			document.History.PushNewItem (hist);
 
-		rect_handle.Rectangle = RectangleD.FromPoints (rect_handle.Rectangle.Location (), rect_handle.Rectangle.EndLocation ());
+		rect_handle.CorrectRectangle();
 
 		hist = null;
 		original_selection = null;

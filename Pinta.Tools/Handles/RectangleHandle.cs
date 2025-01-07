@@ -18,7 +18,9 @@ public class RectangleHandle : IToolHandle
 	private readonly MoveHandle[] handles = new MoveHandle[8];
 	private MoveHandle? active_handle = null;
 	private PointD? drag_start_pos = null;
+	private PointD drag_offset_from_handle = PointD.Zero;
 	private double aspect_ratio = 1;
+	public Matrix Transform { get; set; } = CairoExtensions.CreateIdentityMatrix ();
 
 	public RectangleHandle ()
 	{
@@ -88,6 +90,11 @@ public class RectangleHandle : IToolHandle
 	}
 
 	/// <summary>
+	/// Corrects the rectangle if the point meant to be the bottom right corner is above or to the left of the point meant to be the top left corner.
+	/// </summary>
+	public void CorrectRectangle () => Rectangle = RectangleD.FromPoints (start_pt, end_pt);
+
+	/// <summary>
 	/// Begins a drag operation if the mouse position is on top of a handle.
 	/// Mouse movements are clamped to fall within the specified image size.
 	/// </summary>
@@ -106,6 +113,7 @@ public class RectangleHandle : IToolHandle
 			return false;
 
 		drag_start_pos = view_pos;
+		drag_offset_from_handle = new PointD (canvas_pos.X - active_handle.CanvasPosition.X, canvas_pos.Y - active_handle.CanvasPosition.Y);
 		return true;
 	}
 
@@ -121,8 +129,8 @@ public class RectangleHandle : IToolHandle
 
 		// Clamp mouse position to the image size.
 		canvas_pos = new PointD (
-			Math.Round (Math.Clamp (canvas_pos.X, 0, image_size.Width)),
-			Math.Round (Math.Clamp (canvas_pos.Y, 0, image_size.Height)));
+			Math.Round (Math.Clamp (canvas_pos.X - drag_offset_from_handle.X, 0, image_size.Width)),
+			Math.Round (Math.Clamp (canvas_pos.Y - drag_offset_from_handle.Y, 0, image_size.Height)));
 
 		var dirty = InvalidateRect;
 
@@ -162,7 +170,6 @@ public class RectangleHandle : IToolHandle
 		var rect = Rectangle;
 		start_pt = rect.Location ();
 		end_pt = rect.EndLocation ();
-		Console.WriteLine($"Start: {start_pt}, End: {end_pt}");
 	}
 
 	/// <summary>
@@ -171,7 +178,7 @@ public class RectangleHandle : IToolHandle
 	public string? GetCursorAtPoint (PointD view_pos)
 		=> handles.FirstOrDefault (c => c.ContainsPoint (view_pos))?.CursorName;
 
-	private void UpdateHandlePositions ()
+	public void UpdateHandlePositions ()
 	{
 		var rect = Rectangle;
 		var center = rect.GetCenter ();
@@ -183,6 +190,12 @@ public class RectangleHandle : IToolHandle
 		handles[5].CanvasPosition = new PointD (center.X, rect.Top);
 		handles[6].CanvasPosition = new PointD (rect.Right, center.Y);
 		handles[7].CanvasPosition = new PointD (center.X, rect.Bottom);
+		foreach (var handle in handles) {
+			double x = handle.CanvasPosition.X;
+			double y = handle.CanvasPosition.Y;
+			Transform.TransformPoint (ref x, ref y);
+			handle.CanvasPosition = new PointD (x, y);
+		}
 	}
 
 	private void UpdateHandleUnderPoint (PointD view_pos)
@@ -193,13 +206,11 @@ public class RectangleHandle : IToolHandle
 		// at the same position so pick the bottom right corner.
 		var rect = Rectangle;
 		if (active_handle is not null && rect.Width == 0.0 && rect.Height == 0.0)
-			active_handle = handles[3];
+			active_handle = handles[(int)HandleIndex.BottomRight];
 	}
 
 	private void MoveActiveHandle (double x, double y, ConstrainType constrain = ConstrainType.None)
 	{
-		// Update the rectangle's size depending on which handle was dragged.
-		Console.WriteLine((HandleIndex)Array.IndexOf (handles, active_handle));
 		switch ((HandleIndex)Array.IndexOf (handles, active_handle)) {
 			case HandleIndex.TopLeft:
 				start_pt = new (x, y);

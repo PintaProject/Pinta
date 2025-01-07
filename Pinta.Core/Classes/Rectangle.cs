@@ -53,7 +53,7 @@ public readonly record struct RectangleD
 	/// </summary>
 	/// <param name="invert_if_negative">
 	/// Flips the start and end points if necessary to produce a rectangle with positive width and height.
-	/// Otherwise, a negative width or height is clamped to zero.
+	/// Otherwise, a negative width or height is allowed.
 	/// </param>
 	public static RectangleD FromPoints (in PointD start, in PointD end, bool invert_if_negative = true)
 	{
@@ -63,9 +63,9 @@ public readonly record struct RectangleD
 			double x1 = Math.Min (start.X, end.X);
 			double x2 = Math.Max (start.X, end.X);
 			return new RectangleD (x1, y1, x2 - x1, y2 - y1);
-		} else {
-			return new RectangleD (start.X, start.Y, end.X - start.X, end.Y - start.Y);
 		}
+
+		return new RectangleD (start.X, start.Y, end.X - start.X, end.Y - start.Y);
 	}
 
 	public static readonly RectangleD Zero;
