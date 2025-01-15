@@ -54,9 +54,15 @@ public sealed class CloudsEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
+	// Algorithm Code Ported From PDN
 
-	private static void RenderClouds (ImageSurface surface, RectangleI rect, int scale, byte seed, double power, ColorGradient gradient)
+	private static void RenderClouds (
+		ImageSurface surface,
+		RectangleI rect,
+		int scale,
+		byte seed,
+		double power,
+		ColorGradient gradient)
 	{
 		int w = surface.Width;
 		int h = surface.Height;
@@ -72,7 +78,14 @@ public sealed class CloudsEffect : BaseEffect
 		}
 	}
 
-	private static ColorBgra GetFinalPixelColor (int scale, byte seed, double power, ColorGradient gradient, int w, int dy, int x)
+	private static ColorBgra GetFinalPixelColor (
+		int scale,
+		byte seed,
+		double power,
+		ColorGradient gradient,
+		int w,
+		int dy,
+		int x)
 	{
 		int dx = 2 * x - w;
 		double val = 0;
@@ -81,20 +94,22 @@ public sealed class CloudsEffect : BaseEffect
 
 		for (int i = 0; i < 12 && mult > 0.03 && div > 0; ++i) {
 
-			double dxr = 65536 + dx / (double) div;
-			double dyr = 65536 + dy / (double) div;
+			PointD dr = new (
+				X: 65536 + dx / (double) div,
+				Y: 65536 + dy / (double) div);
 
-			int dxd = (int) dxr;
-			int dyd = (int) dyr;
+			PointI dd = new (
+				X: (int) dr.X,
+				Y: (int) dr.Y);
 
-			dxr -= dxd;
-			dyr -= dyd;
+			dr = new (
+				X: dr.X - dd.X,
+				Y: dr.Y - dd.Y);
 
 			double noise = PerlinNoise.Compute (
-				unchecked((byte) dxd),
-				unchecked((byte) dyd),
-				dxr, //(double)dxr / div,
-				dyr, //(double)dyr / div,
+				unchecked((byte) dd.X),
+				unchecked((byte) dd.Y),
+				dr, //(double)dxr / div, (double)dyr / div
 				(byte) (seed ^ i)
 			);
 
@@ -149,7 +164,6 @@ public sealed class CloudsEffect : BaseEffect
 			g.BlendSurface (temp, r.Location (), (BlendMode) CloudsData.BlendOps[Data.BlendMode]);
 		}
 	}
-	#endregion
 
 	public sealed class CloudsData : EffectData
 	{
