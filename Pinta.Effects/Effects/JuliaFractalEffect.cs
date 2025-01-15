@@ -50,7 +50,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 	// Algorithm Code Ported From PDN
 
-	private static readonly Julia Fractal = new (maxSquared: 10_000);
+	private static readonly Julia fractal = new (maxSquared: 10_000);
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
@@ -127,7 +127,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 				X: (uP - vP * settings.aspect) * settings.invZoom,
 				Y: (vP + uP * settings.aspect) * settings.invZoom);
 
-			double j = Fractal.Compute (jLoc, Jr, Ji);
+			double j = fractal.Compute (jLoc, Jr, Ji);
 
 			double c = settings.factor * j;
 

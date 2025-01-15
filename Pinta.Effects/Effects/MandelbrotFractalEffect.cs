@@ -55,7 +55,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	private readonly InvertColorsEffect invert_effect;
 
-	private static readonly Mandelbrot Fractal = new (
+	private static readonly Mandelbrot fractal = new (
 		maxIterations: 1024,
 		maxSquared: 100_000);
 
@@ -143,7 +143,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			double rotatedU = radius * Math.Cos (thetaP);
 			double rotatedV = radius * Math.Sin (thetaP);
 
-			double m = Fractal.Compute (
+			double m = fractal.Compute (
 				r: (rotatedU * settings.invZoom) + offset_basis.X,
 				i: (rotatedV * settings.invZoom) + offset_basis.Y,
 				factor: settings.factor);
