@@ -18,7 +18,7 @@ namespace Pinta.Effects;
 public sealed class JuliaFractalEffect : BaseEffect
 {
 	public override string Icon
-		=> Pinta.Resources.Icons.EffectsRenderJuliaFractal;
+		=> Resources.Icons.EffectsRenderJuliaFractal;
 
 	public sealed override bool IsTileable
 		=> true;
@@ -48,27 +48,9 @@ public sealed class JuliaFractalEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
+	// Algorithm Code Ported From PDN
 
-	private static readonly double log2_10000 = Math.Log (10000);
-
-	private static double Julia (PointD jLoc, double r, double i)
-	{
-		double c = 0;
-		while (c < 256 && Utility.MagnitudeSquared (jLoc) < 10000) {
-			jLoc = GetNextLocation (jLoc, r, i);
-			++c;
-		}
-		return c - (2 - 2 * log2_10000 / Math.Log (Utility.MagnitudeSquared (jLoc)));
-	}
-
-	private static PointD GetNextLocation (PointD jLoc, double r, double i)
-	{
-		double t = jLoc.X;
-		double x = (jLoc.X * jLoc.X) - (jLoc.Y * jLoc.Y) + r;
-		double y = (2 * t * jLoc.Y) + i;
-		return new (x, y);
-	}
+	private static readonly Julia Fractal = new (maxSquared: 10_000);
 
 	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
 	{
@@ -143,10 +125,9 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 			PointD jLoc = new (
 				X: (uP - vP * settings.aspect) * settings.invZoom,
-				Y: (vP + uP * settings.aspect) * settings.invZoom
-			);
+				Y: (vP + uP * settings.aspect) * settings.invZoom);
 
-			double j = Julia (jLoc, Jr, Ji);
+			double j = Fractal.Compute (jLoc, Jr, Ji);
 
 			double c = settings.factor * j;
 
@@ -166,7 +147,6 @@ public sealed class JuliaFractalEffect : BaseEffect
 			r: Utility.ClampToByte (r / settings.count),
 			a: Utility.ClampToByte (a / settings.count));
 	}
-	#endregion
 
 	public sealed class JuliaFractalData : EffectData
 	{
