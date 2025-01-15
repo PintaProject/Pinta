@@ -52,13 +52,12 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 	private static readonly Julia fractal = new (maxSquared: 10_000);
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
 	{
 		JuliaSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (RectangleI rect in rois)
-			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, settings.canvasSize))
-				dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
+			dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 	}
 
 	private sealed record JuliaSettings (

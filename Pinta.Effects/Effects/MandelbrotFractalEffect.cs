@@ -107,16 +107,15 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
 	{
 		MandelbrotSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		foreach (RectangleI rect in rois)
-			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, settings.canvasSize))
-				dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
+			dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 
 		if (settings.invertColors)
-			invert_effect.Render (dst, dst, rois);
+			invert_effect.Render (dst, dst, stackalloc[] { roi });
 	}
 
 	private static ColorBgra GetPixelColor (MandelbrotSettings settings, PointI target)
