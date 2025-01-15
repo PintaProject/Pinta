@@ -18,7 +18,7 @@ namespace Pinta.Effects;
 public sealed class MandelbrotFractalEffect : BaseEffect
 {
 	public override string Icon
-		=> Pinta.Resources.Icons.EffectsRenderMandelbrotFractal;
+		=> Resources.Icons.EffectsRenderMandelbrotFractal;
 
 	public sealed override bool IsTileable
 		=> true;
@@ -49,35 +49,15 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this);
 
-	#region Algorithm Code Ported From PDN
-
-	private const double Max = 100000;
-
-	private static readonly double inv_log_max = 1.0 / Math.Log (Max);
+	// Algorithm Code Ported From PDN
 
 	private static readonly PointD offset_basis = new (X: -0.7, Y: -0.29);
 
 	private readonly InvertColorsEffect invert_effect;
 
-	private static double Mandelbrot (double r, double i, int factor)
-	{
-		const int MAX_ITERATIONS = 1024;
-		int c = 0;
-		PointD p = new (0, 0);
-		while ((c * factor) < MAX_ITERATIONS && Utility.MagnitudeSquared (p) < Max) {
-			p = NextLocation (p, r, i);
-			++c;
-		}
-		return c - Math.Log (Utility.MagnitudeSquared (p)) * inv_log_max;
-	}
-
-	private static PointD NextLocation (PointD p, double r, double i)
-	{
-		double t = p.X;
-		double x = p.X * p.X - p.Y * p.Y + r;
-		double y = 2 * t * p.Y + i;
-		return new (x, y);
-	}
+	private static readonly Mandelbrot Fractal = new (
+		maxIterations: 1024,
+		maxSquared: 100_000);
 
 	private sealed record MandelbrotSettings (
 		Size canvasSize,
@@ -163,7 +143,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			double rotatedU = radius * Math.Cos (thetaP);
 			double rotatedV = radius * Math.Sin (thetaP);
 
-			double m = Mandelbrot (
+			double m = Fractal.Compute (
 				r: (rotatedU * settings.invZoom) + offset_basis.X,
 				i: (rotatedV * settings.invZoom) + offset_basis.Y,
 				factor: settings.factor);
@@ -187,7 +167,6 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			a: Utility.ClampToByte (a / settings.count)
 		);
 	}
-	#endregion
 
 	public sealed class MandelbrotFractalData : EffectData
 	{
