@@ -100,6 +100,7 @@ public sealed class DentsEffect : BaseEffect
 
 		double detail1 = dentsData.Roughness;
 		double detail2 = detail1;
+		double detail3 = 1.0 + (detail2 / 10.0);
 		double roughness = detail2;
 
 		double turbulence = dentsData.Tension;
@@ -110,8 +111,6 @@ public sealed class DentsEffect : BaseEffect
 		double refractionScale = dentsData.Refraction / 100.0 / scaleR;
 		double theta = RadiansAngle.MAX_RADIANS * turbulence / 10.0;
 		double effectiveRoughness = roughness / 100.0;
-
-		double detail3 = 1.0 + (detail2 / 10.0);
 
 		// We don't want the perlin noise frequency components exceeding the nyquist limit, so we will limit 'detail' appropriately
 		double maxDetail = Math.Floor (Math.Log (scaleR) / Math.Log (0.5));
