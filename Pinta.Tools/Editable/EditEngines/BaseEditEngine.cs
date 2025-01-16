@@ -575,7 +575,7 @@ public abstract class BaseEditEngine
 			return;
 
 		//Move the selected control point.
-		var originalPosition = SelectedPoint!.Position; // NRT - Checked by SelectedPointIndex
+		PointD originalPosition = SelectedPoint!.Position; // NRT - Checked by SelectedPointIndex
 		SelectedPoint.Position = originalPosition with { Y = originalPosition.Y - 1d };
 
 		DrawActiveShape (true, false, true, false, false);
@@ -1165,6 +1165,7 @@ public abstract class BaseEditEngine
 		Document doc = workspace.ActiveDocument;
 
 		using Context g = new (l.Surface);
+
 		g.AppendPath (doc.Selection.SelectionPath);
 		g.FillRule = FillRule.EvenOdd;
 		g.Clip ();
@@ -1259,7 +1260,7 @@ public abstract class BaseEditEngine
 
 		if (!changing_tension && draw_selection) {
 
-			var current_window_point = workspace.CanvasPointToView (current_point);
+			PointD current_window_point = workspace.CanvasPointToView (current_point);
 
 			SEngines.FindClosestControlPoint (
 				current_point,
@@ -1408,7 +1409,7 @@ public abstract class BaseEditEngine
 
 			PointD d = current_point - origin;
 
-			var length = Math.Max (Math.Abs (d.X), Math.Abs (d.Y));
+			double length = Math.Max (Math.Abs (d.X), Math.Abs (d.Y));
 
 			PointD offset = new (
 				X: length * Math.Sign (d.X),
@@ -1438,13 +1439,13 @@ public abstract class BaseEditEngine
 
 			RadiansAngle baseTheta = new (Math.Atan2 (dir.Y, dir.X));
 
-			double len = Math.Sqrt (dir.X * dir.X + dir.Y * dir.Y);
+			double length = Utility.Magnitude (dir);
 
 			RadiansAngle theta = new (Math.Round (12 * baseTheta.Radians / Math.PI) * Math.PI / 12);
 
 			current_point = new PointD (
-				X: adjacentPoint.Position.X + len * Math.Cos (theta.Radians),
-				Y: adjacentPoint.Position.Y + len * Math.Sin (theta.Radians));
+				X: adjacentPoint.Position.X + length * Math.Cos (theta.Radians),
+				Y: adjacentPoint.Position.Y + length * Math.Sin (theta.Radians));
 		}
 	}
 
