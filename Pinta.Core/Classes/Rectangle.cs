@@ -38,7 +38,7 @@ public readonly record struct RectangleD (
 		: this (point.X, point.Y, width, height)
 	{ }
 
-	public static readonly RectangleD Zero = new (0d, 0d, 0d, 0d);
+	public static RectangleD Zero { get; } = new (0d, 0d, 0d, 0d);
 
 	public readonly RectangleI ToInt ()
 		=> new (
@@ -82,9 +82,7 @@ public readonly record struct RectangleD (
 	public readonly PointD GetCenter ()
 		=> new (X + 0.5 * Width, Y + 0.5 * Height);
 
-	public readonly RectangleD Inflated (
-		double width,
-		double height)
+	public readonly RectangleD Inflated (double width, double height)
 	{
 		double newX = X - width;
 		double newY = Y - height;
@@ -93,24 +91,15 @@ public readonly record struct RectangleD (
 		return new (newX, newY, newWidth, newHeight);
 	}
 
-	public readonly RectangleD Clamp ()
+	public readonly RectangleD Clamped ()
 	{
 		double x = X;
 		double y = Y;
-		double w = Width;
-		double h = Height;
-
-		if (x < 0) {
-			w -= x;
-			x = 0;
-		}
-
-		if (y < 0) {
-			h -= y;
-			y = 0;
-		}
-
-		return new (x, y, w, h);
+		return new (
+			X: Math.Max (x, 0),
+			Y: Math.Max (y, 0),
+			Width: (x < 0) ? Width - x : Width,
+			Height: (y < 0) ? Height - y : Height);
 	}
 }
 
@@ -128,7 +117,7 @@ public readonly record struct RectangleI (
 		: this (point.X, point.Y, size.Width, size.Height)
 	{ }
 
-	public static readonly RectangleI Zero = new (0, 0, 0, 0);
+	public static RectangleI Zero { get; } = new (0, 0, 0, 0);
 
 	public static RectangleI FromLTRB (
 		int left,
@@ -175,30 +164,23 @@ public readonly record struct RectangleI (
 	public readonly bool Contains (in PointI pt)
 		=> Contains (pt.X, pt.Y);
 
-	public readonly RectangleI Intersect (RectangleI r)
+	public readonly RectangleI Intersect (in RectangleI r)
 		=> Intersect (this, r);
 
-	public static RectangleI Intersect (
-		in RectangleI a,
-		in RectangleI b)
+	public static RectangleI Intersect (in RectangleI a, in RectangleI b)
 	{
 		int left = Math.Max (a.Left, b.Left);
 		int right = Math.Min (a.Right, b.Right);
 		int top = Math.Max (a.Top, b.Top);
 		int bottom = Math.Min (a.Bottom, b.Bottom);
-
-		if (left > right || top > bottom)
-			return Zero;
-
+		if (left > right || top > bottom) return Zero;
 		return FromLTRB (left, top, right, bottom);
 	}
 
-	public readonly RectangleI Union (RectangleI r)
+	public readonly RectangleI Union (in RectangleI r)
 		=> Union (this, r);
 
-	public static RectangleI Union (
-		in RectangleI a,
-		in RectangleI b)
+	public static RectangleI Union (in RectangleI a, in RectangleI b)
 	{
 		int left = Math.Min (a.Left, b.Left);
 		int right = Math.Max (a.Right, b.Right);
@@ -209,10 +191,10 @@ public readonly record struct RectangleI (
 
 	public readonly RectangleI Inflated (int width, int height)
 	{
-		var newX = X - width;
-		var newY = Y - height;
-		var newWidth = Width + (width * 2);
-		var newHeight = Height + (height * 2);
+		int newX = X - width;
+		int newY = Y - height;
+		int newWidth = Width + (width * 2);
+		int newHeight = Height + (height * 2);
 		return new (newX, newY, newWidth, newHeight);
 	}
 }
