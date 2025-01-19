@@ -72,7 +72,7 @@ public sealed class DentsEffect : BaseEffect
 		EffectData = new DentsData ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
 	{
 		Warp.Settings settings = Warp.CreateSettings (
 			Data,
@@ -81,16 +81,13 @@ public sealed class DentsEffect : BaseEffect
 
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		foreach (RectangleI rect in rois) {
-			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, src.GetSize ())) {
-				dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
-					settings,
-					InverseTransform,
-					src,
-					src_data[pixel.memoryOffset],
-					pixel);
-			}
-		}
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, src.GetSize ()))
+			dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
+				settings,
+				InverseTransform,
+				src,
+				src_data[pixel.memoryOffset],
+				pixel);
 	}
 
 	// Algorithm code ported from PDN
@@ -98,40 +95,38 @@ public sealed class DentsEffect : BaseEffect
 		Warp.Settings settings,
 		Warp.TransformData data)
 	{
-		double scale = Data.Scale;
+		DentsData dentsData = Data;
 
-		double refraction = Data.Refraction;
-		double detail1 = Data.Roughness;
+		double detail1 = dentsData.Roughness;
 		double detail2 = detail1;
+		double detail3 = 1.0 + (detail2 / 10.0);
 		double roughness = detail2;
 
-		double turbulence = Data.Tension;
+		double turbulence = dentsData.Tension;
 
-		byte seed = Utility.ClampToByte (Data.Seed.Value);
+		byte seed = Utility.ClampToByte (dentsData.Seed.Value);
 
-		double scaleR = 400.0 / settings.defaultRadius / scale;
-		double refractionScale = refraction / 100.0 / scaleR;
-		double theta = Math.PI * 2.0 * turbulence / 10.0;
+		double scaleR = 400.0 / settings.defaultRadius / dentsData.Scale;
+		double refractionScale = dentsData.Refraction / 100.0 / scaleR;
+		double theta = RadiansAngle.MAX_RADIANS * turbulence / 10.0;
 		double effectiveRoughness = roughness / 100.0;
-
-		double detail3 = 1.0 + (detail2 / 10.0);
 
 		// We don't want the perlin noise frequency components exceeding the nyquist limit, so we will limit 'detail' appropriately
 		double maxDetail = Math.Floor (Math.Log (scaleR) / Math.Log (0.5));
 
 		double effectiveDetail = (detail3 > maxDetail && maxDetail >= 1.0) ? maxDetail : detail3;
 
-		double x = data.X;
-		double y = data.Y;
+		PointD p = new (
+			X: data.X,
+			Y: data.Y);
 
-		double ix = x * scaleR;
-		double iy = y * scaleR;
+		PointD i = p.Scaled (scaleR);
 
-		double bumpAngle = theta * PerlinNoise.Compute (ix, iy, effectiveDetail, effectiveRoughness, seed);
+		RadiansAngle bumpAngle = new (theta * PerlinNoise.Compute (i, effectiveDetail, effectiveRoughness, seed));
 
 		return new (
-			X: data.X + (refractionScale * Math.Sin (-bumpAngle)),
-			Y: data.Y + (refractionScale * Math.Cos (bumpAngle)));
+			X: p.X + (refractionScale * Math.Sin (-bumpAngle.Radians)),
+			Y: p.Y + (refractionScale * Math.Cos (bumpAngle.Radians)));
 	}
 }
 

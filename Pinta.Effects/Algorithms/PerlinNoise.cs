@@ -75,18 +75,20 @@ internal static class PerlinNoise
 	private static double Gradient (int hash, double x, double y)
 	{
 		int h = hash & 15;
-		double u = h < 8 ? x : y;
-		double v = h < 4 ? y : h == 12 || h == 14 ? x : 0;
-		return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
+		PointD rel = new (
+			X: h < 8 ? x : y,
+			Y: h < 4 ? y : h == 12 || h == 14 ? x : 0);
+		return ((h & 1) == 0 ? rel.X : -rel.X) + ((h & 2) == 0 ? rel.Y : -rel.Y);
 	}
 
 	/// <returns>
 	/// Perlin noise value at specified grid coordinates and offsets
 	/// </returns>
-	public static double Compute (byte gridX, byte gridY, double offsetX, double offsetY, byte seed)
+	public static double Compute (byte gridX, byte gridY, PointD offset, byte seed)
 	{
-		double u = Fade (offsetX);
-		double v = Fade (offsetY);
+		PointD faded = new (
+			X: Fade (offset.X),
+			Y: Fade (offset.Y));
 
 		int a = permutation_table[gridX + seed] + gridY;
 		int aa = permutation_table[a];
@@ -95,25 +97,26 @@ internal static class PerlinNoise
 		int ba = permutation_table[b];
 		int bb = permutation_table[b + 1];
 
-		double gradAA = Gradient (permutation_table[aa], offsetX, offsetY);
-		double gradBA = Gradient (permutation_table[ba], offsetX - 1, offsetY);
+		double gradAA = Gradient (permutation_table[aa], offset.X, offset.Y);
+		double gradBA = Gradient (permutation_table[ba], offset.X - 1, offset.Y);
 
-		double edge1 = Mathematics.Lerp (gradAA, gradBA, u);
+		double edge1 = Mathematics.Lerp (gradAA, gradBA, faded.X);
 
-		double gradAB = Gradient (permutation_table[ab], offsetX, offsetY - 1);
-		double gradBB = Gradient (permutation_table[bb], offsetX - 1, offsetY - 1);
+		double gradAB = Gradient (permutation_table[ab], offset.X, offset.Y - 1);
+		double gradBB = Gradient (permutation_table[bb], offset.X - 1, offset.Y - 1);
 
-		double edge2 = Mathematics.Lerp (gradAB, gradBB, u);
+		double edge2 = Mathematics.Lerp (gradAB, gradBB, faded.X);
 
-		return Mathematics.Lerp (edge1, edge2, v);
+		return Mathematics.Lerp (edge1, edge2, faded.Y);
 	}
 
 	/// <summary>
 	/// Computes fractal Perlin noise over multiple octaves
 	/// </summary>
-	public static double Compute (double x, double y, double detail, double roughness, byte seed)
+	public static double Compute (PointD pos, double detail, double roughness, byte seed)
 	{
 		double total = 0.0;
+
 		double frequency = 1;
 		double amplitude = 1;
 
@@ -123,25 +126,21 @@ internal static class PerlinNoise
 		for (int i = 0; i < octaves; i++) {
 
 			// reduces correlation between octaves.
-			double rotatedX = (x * rot_11) + (y * rot_12);
-			double rotatedY = (x * rot_21) + (y * rot_22);
+			PointD rotated = new (
+				X: (pos.X * rot_11) + (pos.Y * rot_12),
+				Y: (pos.X * rot_21) + (pos.Y * rot_22));
 
-			double noise = amplitude * Noise (rotatedX * frequency, rotatedY * frequency, seed);
-
-			// if this is the last 'partial' octave,
-			// reduce its contribution accordingly.
-			if (partialOctaveFactor < 1)
-				noise *= partialOctaveFactor;
+			double preliminaryNoise = amplitude * Noise (rotated.Scaled (frequency), seed);
+			double noise =
+				(partialOctaveFactor < 1)
+				? preliminaryNoise * partialOctaveFactor // if this is the last 'partial' octave, reduce its contribution accordingly.
+				: preliminaryNoise;
 
 			total += noise;
+			amplitude *= roughness; // scale amplitude for next octave.
 
-			// scale amplitude for next octave.
-			amplitude *= roughness;
-
-			// if the contribution is going to be negligible,
-			// don't bother with higher octaves.
 			if (amplitude < 0.001)
-				break;
+				break; // if the contribution is going to be negligible, don't bother with higher octaves.
 
 			// setup for next octave
 			frequency += frequency;
@@ -149,45 +148,48 @@ internal static class PerlinNoise
 
 			// offset the coordinates by prime numbers, with prime difference.
 			// reduces correlation between octaves.
-			x = rotatedX + 499;
-			y = rotatedY + 506;
+			pos = new PointD (
+				X: rotated.X + 499,
+				Y: rotated.Y + 506);
 		}
 
 		return total;
 	}
 
-	private static double Noise (double x, double y, byte seed)
+	private static double Noise (PointD pos, byte seed)
 	{
-		double xf = Math.Floor (x);
-		double yf = Math.Floor (y);
+		PointD f = new (
+			X: Math.Floor (pos.X),
+			Y: Math.Floor (pos.Y));
 
-		int gridX = (int) xf & 255;
-		int gridY = (int) yf & 255;
+		PointI gridPos = new (
+			X: (int) f.X & 255,
+			Y: (int) f.Y & 255);
 
-		double offsetX = x - xf;
-		double offsetY = y - yf;
+		PointD offset = pos - f;
 
-		double u = Fade (offsetX);
-		double v = Fade (offsetY);
+		PointD faded = new (
+			X: Fade (offset.X),
+			Y: Fade (offset.Y));
 
-		int a = permutation_table[gridX + seed] + gridY;
+		int a = permutation_table[gridPos.X + seed] + gridPos.Y;
 		int aa = permutation_table[a];
 		int ab = permutation_table[a + 1];
-		int b = permutation_table[gridX + 1 + seed] + gridY;
+		int b = permutation_table[gridPos.X + 1 + seed] + gridPos.Y;
 		int ba = permutation_table[b];
 		int bb = permutation_table[b + 1];
 
-		double gradAA = Gradient (permutation_table[aa], offsetX, offsetY);
-		double gradBA = Gradient (permutation_table[ba], offsetX - 1, offsetY);
+		double gradAA = Gradient (permutation_table[aa], offset.X, offset.Y);
+		double gradBA = Gradient (permutation_table[ba], offset.X - 1, offset.Y);
 
-		double edge1 = Mathematics.Lerp (gradAA, gradBA, u);
+		double edge1 = Mathematics.Lerp (gradAA, gradBA, faded.X);
 
-		double gradAB = Gradient (permutation_table[ab], offsetX, offsetY - 1);
-		double gradBB = Gradient (permutation_table[bb], offsetX - 1, offsetY - 1);
+		double gradAB = Gradient (permutation_table[ab], offset.X, offset.Y - 1);
+		double gradBB = Gradient (permutation_table[bb], offset.X - 1, offset.Y - 1);
 
-		double edge2 = Mathematics.Lerp (gradAB, gradBB, u);
+		double edge2 = Mathematics.Lerp (gradAB, gradBB, faded.X);
 
-		double lerped = Mathematics.Lerp (edge1, edge2, v);
+		double lerped = Mathematics.Lerp (edge1, edge2, faded.Y);
 
 		return lerped;
 	}
