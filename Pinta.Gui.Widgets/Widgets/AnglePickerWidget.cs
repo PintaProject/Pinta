@@ -8,110 +8,103 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class AnglePickerWidget : Box
+public sealed class AnglePickerWidget : Gtk.Box
 {
-	private readonly AnglePickerGraphic anglepickergraphic1;
-	private readonly SpinButton spin;
-	private readonly Button button;
-	private readonly Label label;
+	private readonly AnglePickerGraphic angle_picker_graphic;
+	private readonly Gtk.SpinButton numeric_spin;
+	private readonly Gtk.Label widget_label;
 	private readonly DegreesAngle initial_angle;
 
 	public AnglePickerWidget (DegreesAngle initialAngle)
 	{
-		const int spacing = 6;
+		const int SPACING = 6;
 
-		initial_angle = initialAngle;
+		Gtk.Label widgetLabel = new ();
+		widgetLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		// Section label + line
-		Box hbox1 = new () { Spacing = spacing };
-		hbox1.SetOrientation (Orientation.Horizontal);
+		Gtk.Box labelBox = new () { Spacing = SPACING };
+		labelBox.SetOrientation (Gtk.Orientation.Horizontal);
+		labelBox.Append (widgetLabel);
 
-		label = new Label ();
-		label.AddCssClass (AdwaitaStyles.Title4);
-
-		hbox1.Append (label);
-
-		// Angle graphic + spinner + reset button
-		Box hbox2 = new () { Spacing = spacing };
-		hbox2.SetOrientation (Orientation.Horizontal);
-
-		anglepickergraphic1 = new AnglePickerGraphic {
+		AnglePickerGraphic anglePickerGraphic = new () {
 			Hexpand = true,
-			Halign = Align.Center
+			Halign = Gtk.Align.Center,
 		};
-		hbox2.Append (anglepickergraphic1);
+		anglePickerGraphic.ValueChanged += HandleAnglePickerValueChanged;
 
-		spin = SpinButton.NewWithRange (0, 360, 1);
-		spin.Configure (spin.GetAdjustment (), 1, 2);
-		spin.CanFocus = true;
-		spin.Numeric = true;
-		spin.Adjustment!.PageIncrement = 10;
-		spin.Valign = Align.Start;
+		Gtk.SpinButton numericSpin = Gtk.SpinButton.NewWithRange (0, 360, 1);
+		numericSpin.Configure (numericSpin.GetAdjustment (), 1, 2);
+		numericSpin.CanFocus = true;
+		numericSpin.Numeric = true;
+		numericSpin.Adjustment!.PageIncrement = 10;
+		numericSpin.Valign = Gtk.Align.Start;
+		numericSpin.OnValueChanged += HandleSpinValueChanged;
+		numericSpin.SetActivatesDefaultImmediate (true);
 
-		hbox2.Append (spin);
-
-		// Reset button
-		button = new Button {
+		Gtk.Button resetButton = new () {
 			IconName = Resources.StandardIcons.GoPrevious,
 			WidthRequest = 28,
 			HeightRequest = 24,
 			CanFocus = true,
 			UseUnderline = true,
-			Valign = Align.Start
+			Valign = Gtk.Align.Start,
 		};
-		hbox2.Append (button);
+		resetButton.OnClicked += HandleButtonClicked;
 
-		// Main layout
-		SetOrientation (Orientation.Vertical);
-		Spacing = spacing;
-		Append (hbox1);
-		Append (hbox2);
+		Gtk.Box controlsBox = new () { Spacing = SPACING };
+		controlsBox.SetOrientation (Gtk.Orientation.Horizontal);
+		controlsBox.Append (anglePickerGraphic);
+		controlsBox.Append (numericSpin);
+		controlsBox.Append (resetButton);
 
-		anglepickergraphic1.ValueChanged += HandleAnglePickerValueChanged;
-		spin.OnValueChanged += HandleSpinValueChanged;
-		button.OnClicked += HandleButtonClicked;
+		// --- Initialization (Gtk.Widget)
 
-		OnRealize += (_, _) => anglepickergraphic1.Value = initialAngle;
+		OnRealize += (_, _) => anglePickerGraphic.Value = initialAngle;
 
-		spin.SetActivatesDefaultImmediate (true);
+		// --- Initialization (Gtk.Box)
+
+		SetOrientation (Gtk.Orientation.Vertical);
+		Spacing = SPACING;
+		Append (labelBox); // Section label + line
+		Append (controlsBox); // Angle graphic + spinner + reset button
+
+		// --- References to keep
+
+		initial_angle = initialAngle;
+		widget_label = widgetLabel;
+		angle_picker_graphic = anglePickerGraphic;
+		numeric_spin = numericSpin;
 	}
 
 	public string Label {
-		get => label.GetText ();
-		set => label.SetText (value);
+		get => widget_label.GetText ();
+		set => widget_label.SetText (value);
 	}
 
 	public DegreesAngle Value {
-		get => anglepickergraphic1.Value;
+		get => angle_picker_graphic.Value;
 		set {
-			if (anglepickergraphic1.Value == value)
-				return;
-
-			anglepickergraphic1.Value = value;
+			if (angle_picker_graphic.Value == value) return;
+			angle_picker_graphic.Value = value;
 			OnValueChanged ();
 		}
 	}
 
 	private void HandleAnglePickerValueChanged (object? sender, EventArgs e)
 	{
-		if (spin.Value == anglepickergraphic1.Value.Degrees)
-			return;
-
-		spin.Value = anglepickergraphic1.Value.Degrees;
+		if (numeric_spin.Value == angle_picker_graphic.Value.Degrees) return;
+		numeric_spin.Value = angle_picker_graphic.Value.Degrees;
 		OnValueChanged ();
 	}
 
 	private void HandleSpinValueChanged (object? sender, EventArgs e)
 	{
-		if (anglepickergraphic1.Value.Degrees == spin.Value)
-			return;
-
-		anglepickergraphic1.Value = new DegreesAngle (spin.Value);
+		if (angle_picker_graphic.Value.Degrees == numeric_spin.Value) return;
+		angle_picker_graphic.Value = new DegreesAngle (numeric_spin.Value);
 		OnValueChanged ();
 	}
 
