@@ -79,22 +79,31 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 	private sealed record SoftenPortraitSettings (
 		float redAdjust,
-		float blueAdjust);
+		float blueAdjust,
+		int blurRadius,
+		int brightness,
+		int contrast);
 
 	private SoftenPortraitSettings CreateSettings ()
 	{
 		int warmth = Data.Warmth;
 		return new (
 			redAdjust: 1.0f + (warmth / 100.0f),
-			blueAdjust: 1.0f - (warmth / 100.0f));
+			blueAdjust: 1.0f - (warmth / 100.0f),
+			blurRadius: 3 * Data.Softness,
+			brightness: Data.Lighting,
+			contrast: -Data.Lighting / 2);
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
 		SoftenPortraitSettings settings = CreateSettings ();
+		blur_effect.Data.Radius = settings.blurRadius;
+		bac_adjustment.Data.Brightness = settings.brightness;
+		bac_adjustment.Data.Contrast = settings.contrast;
 
 		blur_effect.Render (src, dest, rois);
-		bac_adjustment.Render (src, dest, rois);
+		bac_adjustment.Render (dest, dest, rois);
 
 		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = dest.GetPixelData ();
