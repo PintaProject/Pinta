@@ -55,8 +55,8 @@ public sealed class BulgeEffect : BaseEffect
 		float hh = source.Height / 2f;
 
 		return new (
-			halfWidth: hw + ((float) Data.Offset.X * hw),
-			halfHeight: hh + ((float) Data.Offset.Y * hh),
+			halfWidth: hw + ((float) Data.Offset.Horizontal * hw),
+			halfHeight: hh + ((float) Data.Offset.Vertical * hh),
 			maxRadius: Math.Min (hw, hh) * Data.RadiusPercentage / 100f,
 			amount: bulge / 100f,
 			sourceWidth: source.Width,
@@ -121,7 +121,7 @@ public sealed class BulgeEffect : BaseEffect
 		public int Amount { get; set; } = 45;
 
 		[Caption ("Offset")]
-		public PointD Offset { get; set; } = new (0.0, 0.0);
+		public CenterOffset<double> Offset { get; set; } = new (0.0, 0.0);
 
 		// Translators: This refers to how big the radius is as a percentage of the image's dimensions
 		[Caption ("Radius Percentage")]

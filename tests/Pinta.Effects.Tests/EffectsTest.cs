@@ -34,7 +34,7 @@ internal sealed class EffectsTest
 	{
 		BulgeEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Amount = 56;
-		effect.Data.Offset = PointD.Zero;
+		effect.Data.Offset = new CenterOffset<double> (0, 0);
 		Utilities.TestEffect (effect, "bulge1.png");
 	}
 
@@ -43,7 +43,7 @@ internal sealed class EffectsTest
 	{
 		BulgeEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Amount = -59;
-		effect.Data.Offset = new PointD (-0.184, -0.304);
+		effect.Data.Offset = new CenterOffset<double> (-0.184, -0.304);
 		Utilities.TestEffect (effect, "bulge2.png");
 	}
 
@@ -52,7 +52,7 @@ internal sealed class EffectsTest
 	{
 		BulgeEffect effect = new BulgeEffect (Utilities.CreateMockServices ());
 		effect.Data.Amount = 56;
-		effect.Data.Offset = PointD.Zero;
+		effect.Data.Offset = new CenterOffset<double> (0, 0);
 		effect.Data.RadiusPercentage = 50;
 		Utilities.TestEffect (effect, "bulge3.png");
 	}
