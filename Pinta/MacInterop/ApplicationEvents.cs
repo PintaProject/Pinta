@@ -154,11 +154,11 @@ public static class ApplicationEvents
 				open_urls += value;
 				if (open_urls_handler_ref == IntPtr.Zero)
 					open_urls_handler_ref = Carbon.InstallApplicationEventHandler (open_urls_delegate,
-						new CarbonEventTypeSpec[] {
+						[
 							//For some reason GetUrl doesn't take CarbonEventClass.AppleEvent
 							//need to use GURL, GURL
 							new CarbonEventTypeSpec (CarbonEventClass.Internet, (int)CarbonEventApple.GetUrl)
-						}
+						]
 					);
 			}
 		}

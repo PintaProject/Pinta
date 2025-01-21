@@ -347,12 +347,12 @@ public sealed class NewImageDialog : Gtk.Dialog
 	}
 
 	// Some arbitrary presets
-	private static readonly IReadOnlyList<Size> preset_sizes = new Size[] {
+	private static readonly IReadOnlyList<Size> preset_sizes = [
 		new (640, 480),
 		new (800, 600),
 		new (1024, 768),
 		new (1600, 1200),
-	};
+	];
 
 	private static IEnumerable<string> GeneratePresetEntries (bool hasClipboard)
 	{
@@ -542,7 +542,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			string newText = $"{newSize.Width} x {newSize.Height}";
 
 			if (newText != text)
-				preset_dropdown_model.Splice (i, 1, new[] { newText });
+				preset_dropdown_model.Splice (i, 1, [newText]);
 		}
 	}
 

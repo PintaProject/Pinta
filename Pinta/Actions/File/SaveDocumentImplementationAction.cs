@@ -107,7 +107,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		}
 
 		// Add all the formats we support to the save dialog
-		Dictionary<Gtk.FileFilter, FormatDescriptor> filetypes = new ();
+		Dictionary<Gtk.FileFilter, FormatDescriptor> filetypes = [];
 		foreach (var format in image_formats.Formats) {
 
 			if (format.IsReadOnly ())
