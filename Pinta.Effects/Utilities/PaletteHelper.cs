@@ -57,7 +57,7 @@ internal static class PaletteHelper
 
 		static Predefined ()
 		{
-			BlackWhite = ImmutableArray.CreateRange (new[] { ColorBgra.Black, ColorBgra.White });
+			BlackWhite = [ColorBgra.Black, ColorBgra.White];
 			old_ms_paint = new (() => EnumerateOldMsPaintColors ().ToImmutableArray ());
 			old_windows_16 = new (() => EnumerateOldWindows16Colors ().ToImmutableArray ());
 			old_windows_20 = new (() => EnumerateOldWindows20Colors ().ToImmutableArray ());
