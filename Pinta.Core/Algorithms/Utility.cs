@@ -458,7 +458,7 @@ public static class Utility
 		// Use the entire image bounds by default, or restrict to the provided search area.
 		RectangleI rect = searchArea ?? image.GetBounds ();
 		// Get the background color from the top-left pixel of the rectangle
-		Cairo.Color borderColor = image.GetColorBgra (new PointI (rect.Left, rect.Top)).ToCairoColor ();
+		Color borderColor = image.GetColorBgra (new PointI (rect.Left, rect.Top)).ToCairoColor ();
 
 		// Top down.
 		for (int y = rect.Top; y < rect.Bottom; ++y) {
