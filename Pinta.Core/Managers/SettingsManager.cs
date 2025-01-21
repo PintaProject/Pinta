@@ -87,7 +87,7 @@ public sealed class SettingsManager : ISettingsService
 			return;
 		}
 
-		var nodes = document.Element ("settings")?.Elements ("setting") ?? Enumerable.Empty<XElement> (); ;
+		var nodes = document.Element ("settings")?.Elements ("setting") ?? [];
 
 		foreach (var node in nodes) {
 			if (node.Attribute ("name")?.Value is not string name)

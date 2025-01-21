@@ -77,8 +77,8 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 		using Gio.OutputStream stream = file.Replace ();
 		try {
 			pb.SaveToStreamv (stream, fileType,
-					optionKeys: Array.Empty<string> (),
-					optionValues: Array.Empty<string> (),
+					optionKeys: [],
+					optionValues: [],
 					cancellable: null);
 		} finally {
 			stream.Close (null);

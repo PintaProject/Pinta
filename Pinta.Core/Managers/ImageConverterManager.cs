@@ -97,7 +97,7 @@ public sealed class ImageConverterManager
 		FormatDescriptor formatDescriptor = new (
 			displayPrefix: formatNameUpperCase,
 			extensions: extensions,
-			mimes: format.GetMimeTypes () ?? Array.Empty<string> (),
+			mimes: format.GetMimeTypes () ?? [],
 			importer: importer,
 			exporter: exporter,
 			supportsLayers: false);

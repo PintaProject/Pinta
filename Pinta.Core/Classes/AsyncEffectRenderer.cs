@@ -91,7 +91,7 @@ internal sealed class AsyncEffectRenderer
 		initialCompletionSource.SetResult (
 			new (
 				WasCanceled: false,
-				Errors: Array.Empty<Exception> ()
+				Errors: []
 			)
 		);
 

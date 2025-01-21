@@ -115,7 +115,7 @@ public abstract class BaseTool
 	/// A list of handles that should be drawn on the canvas window.
 	/// </summary>
 	public virtual IEnumerable<IToolHandle> Handles
-		=> Enumerable.Empty<IToolHandle> ();
+		=> [];
 
 	/// <summary>
 	/// The shortcut key used to activate this tool in the toolbox.

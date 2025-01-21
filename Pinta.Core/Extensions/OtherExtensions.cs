@@ -107,7 +107,7 @@ public static class OtherExtensions
 		PointI translateOffset)
 	{
 		if (stencil.IsEmpty)
-			return Array.Empty<PointI[]> ();
+			return [];
 
 		List<IReadOnlyList<PointI>> polygons = [];
 		List<PointI> pts = [];
