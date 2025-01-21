@@ -63,17 +63,17 @@ public static class Utility
 	/// array of bounding boxes.
 	/// </summary>
 	/// <param name="rects">The "region" you want to find a bounding box for.</param>
-	/// <param name="startIndex">Index of the first rectangle in the array to examine.</param>
+	/// <param name="start">Index of the first rectangle in the array to examine.</param>
 	/// <param name="length">Number of rectangles to examine, beginning at <b>startIndex</b>.</param>
 	/// <returns>A rectangle that surrounds the region.</returns>
-	public static RectangleI GetRegionBounds (ReadOnlySpan<RectangleI> rects, int startIndex, int length)
+	public static RectangleI GetRegionBounds (ReadOnlySpan<RectangleI> rects, int start, int length)
 	{
 		if (rects.Length == 0)
 			return RectangleI.Zero;
 
-		RectangleI unionsAggregate = rects[startIndex];
+		RectangleI unionsAggregate = rects[start];
 
-		for (int i = startIndex + 1; i < startIndex + length; ++i)
+		for (int i = start + 1; i < start + length; ++i)
 			unionsAggregate = unionsAggregate.Union (rects[i]);
 
 		return unionsAggregate;
