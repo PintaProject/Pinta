@@ -1,6 +1,6 @@
 // 
 // FileActionHandler.cs
-//  
+// 
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
 // 
