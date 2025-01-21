@@ -576,7 +576,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 			g.Stroke ();
 
-			g.SetDash (Array.Empty<double> (), 0);
+			g.SetDash ([], 0);
 		}
 
 		void DrawControlPoints (Context g)
