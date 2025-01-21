@@ -68,7 +68,7 @@ public sealed class FeatherEffect : BaseEffect
 				for (int x = roi.Left; x <= roi.Right; x++)
 					dst_row[x] = src_row[x];
 
-				Span<PointI> pixels = stackalloc PointI[] { PointI.Zero, PointI.Zero, PointI.Zero, PointI.Zero };
+				Span<PointI> pixels = [PointI.Zero, PointI.Zero, PointI.Zero, PointI.Zero];
 
 				// Collect a list of pixels that surround the object (border pixels)
 				for (int x = roi.Left; x <= roi.Right; x++) {
