@@ -1,6 +1,6 @@
 // 
 // ApplicationEvents.cs
-//  
+// 
 // Author:
 //       Michael Hutchinson <mhutchinson@novell.com>
 // 
