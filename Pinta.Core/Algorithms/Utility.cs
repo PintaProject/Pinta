@@ -432,7 +432,7 @@ public static class Utility
 	/// <summary>
 	/// Checks if all of the pixels in the row match the specified color.
 	/// </summary>
-	private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, RectangleI rect, int y)
+	private static bool IsConstantRow (ImageSurface surf, Color color, RectangleI rect, int y)
 	{
 		for (int x = rect.Left; x < rect.Right; ++x)
 			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
@@ -444,7 +444,7 @@ public static class Utility
 	/// <summary>
 	/// Checks if all of the pixels in the column (within the bounds of the rectangle) match the specified color.
 	/// </summary>
-	private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, RectangleI rect, int x)
+	private static bool IsConstantColumn (ImageSurface surf, Color color, RectangleI rect, int x)
 	{
 		for (int y = rect.Top; y < rect.Bottom; ++y)
 			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
