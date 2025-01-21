@@ -22,7 +22,7 @@ public sealed class HistogramRgb : Histogram
 		: base (3, 256, rgb_visual_colors)
 	{ }
 
-	private static ImmutableArray<ColorBgra> CreateVisualColors () => ImmutableArray.CreateRange (new[] { ColorBgra.Blue, ColorBgra.Green, ColorBgra.Red });
+	private static ImmutableArray<ColorBgra> CreateVisualColors () => [ColorBgra.Blue, ColorBgra.Green, ColorBgra.Red];
 	private static readonly ImmutableArray<ColorBgra> rgb_visual_colors = CreateVisualColors ();
 
 	public override ColorBgra GetMeanColor ()

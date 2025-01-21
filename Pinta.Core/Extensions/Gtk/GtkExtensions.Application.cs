@@ -43,7 +43,7 @@ partial class GtkExtensions
 		Command action,
 		string accel)
 	{
-		app.AddAccelAction (action, new[] { accel });
+		app.AddAccelAction (action, [accel]);
 	}
 
 	public static void AddAccelAction (

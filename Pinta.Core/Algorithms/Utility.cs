@@ -119,7 +119,7 @@ public static class Utility
 			throw new ArgumentException ($"{nameof (sampleCount)} != ({nameof (quality)} * {nameof (quality)})");
 
 		if (sampleCount == 1)
-			return new[] { PointD.Zero };
+			return [PointD.Zero];
 
 		var result = new PointD[sampleCount];
 		for (int i = 0; i < sampleCount; ++i) {
@@ -151,7 +151,7 @@ public static class Utility
 	// i = z * 3;
 	// (x / z) = ((x * masTable[i]) + masTable[i + 1]) >> masTable[i + 2)
 	private static readonly uint[] mas_table =
-	{
+	[
 		0x00000000, 0x00000000, 0,  // 0
 		0x00000001, 0x00000000, 0,  // 1
 		0x00000001, 0x00000000, 1,  // 2
@@ -408,7 +408,7 @@ public static class Utility
 		0x81848DA9, 0x00000000, 39, // 253
 		0x10204081, 0x10204081, 36, // 254
 		0x80808081, 0x00000000, 39, // 255
-	};
+	];
 
 	/// <summary>Gets the nearest step angle in radians.</summary>
 	/// 

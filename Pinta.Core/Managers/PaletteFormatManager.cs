@@ -38,13 +38,13 @@ public sealed class PaletteFormatManager
 		formats = new List<PaletteDescriptor> ();
 
 		PaintDotNetPalette pdnHandler = new PaintDotNetPalette ();
-		formats.Add (new PaletteDescriptor ("Paint.NET", new string[] { "txt", "TXT" }, pdnHandler, pdnHandler));
+		formats.Add (new PaletteDescriptor ("Paint.NET", ["txt", "TXT"], pdnHandler, pdnHandler));
 
 		GimpPalette gimpHandler = new GimpPalette ();
-		formats.Add (new PaletteDescriptor ("GIMP", new string[] { "gpl", "GPL" }, gimpHandler, gimpHandler));
+		formats.Add (new PaletteDescriptor ("GIMP", ["gpl", "GPL"], gimpHandler, gimpHandler));
 
 		PaintShopProPalette pspHandler = new PaintShopProPalette ();
-		formats.Add (new PaletteDescriptor ("PaintShop Pro", new string[] { "pal", "PAL" }, pspHandler, pspHandler));
+		formats.Add (new PaletteDescriptor ("PaintShop Pro", ["pal", "PAL"], pspHandler, pspHandler));
 	}
 
 	public IEnumerable<PaletteDescriptor> Formats => formats;

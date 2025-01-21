@@ -113,7 +113,7 @@ public sealed class DocumentSelection
 		g.StrokePreserve ();
 
 		// Draw a black dashed line over the white line
-		g.SetDash (new double[] { 2 / scale, 4 / scale }, 0);
+		g.SetDash ([2 / scale, 4 / scale], 0);
 		g.SetSourceColor (new Cairo.Color (0, 0, 0));
 
 		g.Stroke ();

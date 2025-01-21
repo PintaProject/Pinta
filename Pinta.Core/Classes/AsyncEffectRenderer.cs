@@ -138,7 +138,7 @@ internal sealed class AsyncEffectRenderer
 		ConcurrentQueue<RectangleI> targetTiles = new (
 			settings.EffectIsTileable
 			? settings.RenderBounds.ToRows () // If effect is tileable, render each row in parallel.
-			: new[] { settings.RenderBounds }); // If the effect isn't tileable, there is a single tile for the entire render bounds
+			: [settings.RenderBounds]); // If the effect isn't tileable, there is a single tile for the entire render bounds
 
 		queued_tiles = targetTiles;
 		tiles_count = targetTiles.Count;

@@ -567,7 +567,7 @@ public static class UnaryPixelOps
 		public Level () : this (
 			ColorBgra.Black,
 			ColorBgra.White,
-			new float[] { 1, 1, 1 },
+			[1, 1, 1],
 			ColorBgra.Black,
 			ColorBgra.White)
 		{ }

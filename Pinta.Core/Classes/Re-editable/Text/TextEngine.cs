@@ -60,7 +60,7 @@ public sealed partial class TextEngine
 	public event EventHandler? Modified;
 
 	public TextEngine ()
-		: this (new[] { string.Empty })
+		: this ([string.Empty])
 	{ }
 
 	public TextEngine (IEnumerable<string> lines)

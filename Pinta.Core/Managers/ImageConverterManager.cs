@@ -53,8 +53,8 @@ public sealed class ImageConverterManager
 		OraFormat oraHandler = new ();
 		FormatDescriptor oraFormatDescriptor = new (
 			displayPrefix: "OpenRaster",
-			extensions: new[] { "ora", "ORA" },
-			mimes: new[] { "image/openraster" },
+			extensions: ["ora", "ORA"],
+			mimes: ["image/openraster"],
 			importer: oraHandler,
 			exporter: oraHandler,
 			supportsLayers: true);
@@ -63,8 +63,8 @@ public sealed class ImageConverterManager
 		NetpbmPortablePixmap netpbmPortablePixmap = new ();
 		FormatDescriptor netpbmPortablePixmapDescriptor = new (
 			displayPrefix: "Netpbm Portable Pixmap",
-			extensions: new[] { "ppm", "PPM" },
-			mimes: new[] { "image/x-portable-pixmap" }, // Not official, but conventional
+			extensions: ["ppm", "PPM"],
+			mimes: ["image/x-portable-pixmap"], // Not official, but conventional
 			importer: null,
 			exporter: netpbmPortablePixmap,
 			supportsLayers: false
@@ -78,10 +78,10 @@ public sealed class ImageConverterManager
 				throw new ArgumentException ($"{nameof (format)} has an empty name");
 
 		string formatNameUpperCase = formatName.ToUpperInvariant ();
-		var extensions = formatName switch {
-			"jpeg" => new string[] { "jpg", "jpeg", "JPG", "JPEG" },
-			"tiff" => new string[] { "tif", "tiff", "TIF", "TIFF" },
-			_ => new string[] { formatName, formatNameUpperCase },
+		string[] extensions = formatName switch {
+			"jpeg" => ["jpg", "jpeg", "JPG", "JPEG"],
+			"tiff" => ["tif", "tiff", "TIF", "TIFF"],
+			_ => [formatName, formatNameUpperCase],
 		};
 		GdkPixbufFormat importer = new (formatName);
 		IImageExporter? exporter;
