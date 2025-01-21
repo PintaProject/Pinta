@@ -47,7 +47,7 @@ public sealed class FeatherEffect : BaseEffect
 		int threads = system.RenderThreads;
 		int tolerance = Data.Tolerance;
 
-		ConcurrentBag<PointI> borderPixels = new ();
+		ConcurrentBag<PointI> borderPixels = [];
 		// Color in any pixel that the stencil says we need to fill
 		// First pass
 		// Clean up dest, then collect all border pixels

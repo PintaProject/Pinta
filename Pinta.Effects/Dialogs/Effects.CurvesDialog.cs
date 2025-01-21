@@ -53,7 +53,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 	private int? last_cpx;
 	private PointI last_mouse_pos = new (0, 0);
 	// Keys of existing control points which cannot be overwritten by a new control point.
-	private readonly HashSet<int> orig_cps = new ();
+	private readonly HashSet<int> orig_cps = [];
 
 	//control points for luminosity transfer mode
 	private SortedList<int, int>[] luminosity_cps = null!; // NRT - Set via code flow
