@@ -559,7 +559,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		static void DrawGrid (Context g)
 		{
-			g.SetDash (new double[] { 4, 4 }, 2);
+			g.SetDash ([4, 4], 2);
 			g.LineWidth = 1;
 
 			for (int i = 1; i < 4; i++) {

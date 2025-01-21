@@ -32,7 +32,7 @@ public sealed class SepiaEffect : BaseEffect
 		level = new UnaryPixelOps.Level (
 			ColorBgra.Black,
 			ColorBgra.White,
-			new[] { 1.2f, 1.0f, 0.8f },
+			[1.2f, 1.0f, 0.8f],
 			ColorBgra.Black,
 			ColorBgra.White);
 	}
