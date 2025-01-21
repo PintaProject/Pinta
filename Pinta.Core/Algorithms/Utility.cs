@@ -63,17 +63,17 @@ public static class Utility
 	/// array of bounding boxes.
 	/// </summary>
 	/// <param name="rects">The "region" you want to find a bounding box for.</param>
-	/// <param name="start">Index of the first rectangle in the array to examine.</param>
+	/// <param name="startIndex">Index of the first rectangle in the array to examine.</param>
 	/// <param name="length">Number of rectangles to examine, beginning at <b>startIndex</b>.</param>
 	/// <returns>A rectangle that surrounds the region.</returns>
-	public static RectangleI GetRegionBounds (ReadOnlySpan<RectangleI> rects, int start, int length)
+	public static RectangleI GetRegionBounds (ReadOnlySpan<RectangleI> rects, int startIndex, int length)
 	{
 		if (rects.Length == 0)
 			return RectangleI.Zero;
 
-		RectangleI unionsAggregate = rects[start];
+		RectangleI unionsAggregate = rects[startIndex];
 
-		for (int i = start + 1; i < start + length; ++i)
+		for (int i = startIndex + 1; i < startIndex + length; ++i)
 			unionsAggregate = unionsAggregate.Union (rects[i]);
 
 		return unionsAggregate;
@@ -151,7 +151,7 @@ public static class Utility
 	// i = z * 3;
 	// (x / z) = ((x * masTable[i]) + masTable[i + 1]) >> masTable[i + 2)
 	private static readonly uint[] mas_table =
-	[
+	{
 		0x00000000, 0x00000000, 0,  // 0
 		0x00000001, 0x00000000, 0,  // 1
 		0x00000001, 0x00000000, 1,  // 2
@@ -408,7 +408,7 @@ public static class Utility
 		0x81848DA9, 0x00000000, 39, // 253
 		0x10204081, 0x10204081, 36, // 254
 		0x80808081, 0x00000000, 39, // 255
-	];
+	};
 
 	/// <summary>Gets the nearest step angle in radians.</summary>
 	/// 
@@ -432,7 +432,7 @@ public static class Utility
 	/// <summary>
 	/// Checks if all of the pixels in the row match the specified color.
 	/// </summary>
-	private static bool IsConstantRow (ImageSurface surf, Color color, RectangleI rect, int y)
+	private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, RectangleI rect, int y)
 	{
 		for (int x = rect.Left; x < rect.Right; ++x)
 			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
@@ -444,7 +444,7 @@ public static class Utility
 	/// <summary>
 	/// Checks if all of the pixels in the column (within the bounds of the rectangle) match the specified color.
 	/// </summary>
-	private static bool IsConstantColumn (ImageSurface surf, Color color, RectangleI rect, int x)
+	private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, RectangleI rect, int x)
 	{
 		for (int y = rect.Top; y < rect.Bottom; ++y)
 			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
@@ -458,7 +458,7 @@ public static class Utility
 		// Use the entire image bounds by default, or restrict to the provided search area.
 		RectangleI rect = searchArea ?? image.GetBounds ();
 		// Get the background color from the top-left pixel of the rectangle
-		Color borderColor = image.GetColorBgra (new PointI (rect.Left, rect.Top)).ToCairoColor ();
+		Cairo.Color borderColor = image.GetColorBgra (new PointI (rect.Left, rect.Top)).ToCairoColor ();
 
 		// Top down.
 		for (int y = rect.Top; y < rect.Bottom; ++y) {
