@@ -633,9 +633,9 @@ public static class UnaryPixelOps
 		public object Clone ()
 		{
 			Level copy = new Level (color_in_low, color_in_high, (float[]) gamma.Clone (), color_out_low, color_out_high) {
-				CurveB = CurveB.ToArray (),
-				CurveG = CurveG.ToArray (),
-				CurveR = CurveR.ToArray ()
+				CurveB = [.. CurveB],
+				CurveG = [.. CurveG],
+				CurveR = [.. CurveR]
 			};
 
 			return copy;

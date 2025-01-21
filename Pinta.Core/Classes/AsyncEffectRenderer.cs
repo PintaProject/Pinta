@@ -195,7 +195,7 @@ internal sealed class AsyncEffectRenderer
 
 					CompletionInfo completion = new (
 						WasCanceled: cancellationToken.IsCancellationRequested,
-						Errors: renderExceptions.ToArray ());
+						Errors: [.. renderExceptions]);
 
 					Completed?.Invoke (completion);
 

@@ -126,7 +126,7 @@ public sealed class DocumentSelection
 	public DocumentSelection Clone ()
 	{
 		return new (owning_document) {
-			SelectionPolygons = SelectionPolygons.ToList (),
+			SelectionPolygons = [.. SelectionPolygons],
 			Origin = new PointD (Origin.X, Origin.Y),
 			End = new PointD (End.X, End.Y),
 			visible = visible,

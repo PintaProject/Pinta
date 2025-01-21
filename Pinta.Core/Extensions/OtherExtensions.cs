@@ -186,7 +186,7 @@ public static class OtherExtensions
 					break;
 			}
 
-			PointI[] points = pts.ToArray ();
+			PointI[] points = [.. pts];
 
 			var scans = CairoExtensions.GetScans (points);
 
