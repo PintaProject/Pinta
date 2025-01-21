@@ -120,7 +120,7 @@ public sealed partial class TextEngine
 
 	public KeyValuePair<TextPosition, TextPosition>[] SelectionRegions {
 		get {
-			List<KeyValuePair<TextPosition, TextPosition>> regions = new ();
+			List<KeyValuePair<TextPosition, TextPosition>> regions = [];
 
 			TextPosition start = TextPosition.Min (current_pos, selection_start);
 			TextPosition end = TextPosition.Max (current_pos, selection_start);

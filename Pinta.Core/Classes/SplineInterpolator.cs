@@ -12,7 +12,7 @@ namespace Pinta.Core;
 
 public sealed class SplineInterpolator
 {
-	private readonly SortedList<double, double> points = new ();
+	private readonly SortedList<double, double> points = [];
 	private ImmutableArray<double> y2;
 
 	public int Count => points.Count;

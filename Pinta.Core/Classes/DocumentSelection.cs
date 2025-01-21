@@ -42,7 +42,7 @@ public sealed class DocumentSelection
 
 	private Path? selection_path;
 
-	public List<List<IntPoint>> SelectionPolygons { get; set; } = new ();
+	public List<List<IntPoint>> SelectionPolygons { get; set; } = [];
 	public Clipper SelectionClipper { get; } = new ();
 
 	public PointD Origin { get; set; }
@@ -362,7 +362,7 @@ public sealed class DocumentSelection
 	/// </param>
 	public void Invert (Core.Size imageSize)
 	{
-		List<List<IntPoint>> resultingPolygons = new List<List<IntPoint>> ();
+		List<List<IntPoint>> resultingPolygons = [];
 
 		var documentPolygon = CreateRectanglePolygon (new RectangleD (0, 0, imageSize.Width, imageSize.Height));
 
@@ -387,14 +387,14 @@ public sealed class DocumentSelection
 	public void Offset (double delta)
 	{
 		// Remove any self-intersections from the selection polygons.
-		List<List<IntPoint>> simplePolygons = new ();
+		List<List<IntPoint>> simplePolygons = [];
 
 		SelectionClipper.AddPaths (SelectionPolygons, PolyType.ptSubject, true);
 		SelectionClipper.Execute (ClipType.ctUnion, simplePolygons, PolyFillType.pftNonZero, PolyFillType.pftNonZero);
 		SelectionClipper.Clear ();
 
 		// Expand or contract the selection by the specified amount.
-		List<List<IntPoint>> offsetPolygons = new ();
+		List<List<IntPoint>> offsetPolygons = [];
 
 		ClipperOffset clipperOffset = new ();
 		clipperOffset.AddPaths (simplePolygons, JoinType.jtMiter, EndType.etClosedPolygon);
@@ -416,13 +416,13 @@ public sealed class DocumentSelection
 		// the first corner again. It is important to note that the order of the
 		// corners being added (clockwise) and the first/last Point being the same
 		// should be kept this way; otherwise, problems could result.
-		List<IntPoint> newPolygon = new () {
+		List<IntPoint> newPolygon = [
 			new (corner1X, corner1Y),
 			new (corner2X, corner1Y),
 			new (corner2X, corner2Y),
 			new (corner1X, corner2Y),
 			new (corner1X, corner1Y)
-		};
+		];
 
 		return newPolygon;
 	}

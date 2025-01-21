@@ -36,7 +36,7 @@ public sealed class PaintDotNetPalette : IPaletteLoader, IPaletteSaver
 {
 	public List<Color> Load (Gio.File file)
 	{
-		List<Color> colors = new List<Color> ();
+		List<Color> colors = [];
 		using var stream = new GioStream (file.Read (null));
 		using var reader = new StreamReader (stream);
 

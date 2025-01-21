@@ -109,8 +109,8 @@ public static class OtherExtensions
 		if (stencil.IsEmpty)
 			return Array.Empty<PointI[]> ();
 
-		List<IReadOnlyList<PointI>> polygons = new ();
-		List<PointI> pts = new ();
+		List<IReadOnlyList<PointI>> polygons = [];
+		List<PointI> pts = [];
 
 		PointI start = bounds.Location ().ToInt ();
 

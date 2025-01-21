@@ -38,7 +38,7 @@ public sealed class Palette
 {
 	public event EventHandler? PaletteChanged;
 
-	private List<Color> colors = new ();
+	private List<Color> colors = [];
 
 	private void OnPaletteChanged ()
 	{

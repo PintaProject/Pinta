@@ -31,8 +31,8 @@ namespace Pinta.Core;
 
 public sealed class EffectsActions
 {
-	public Dictionary<string, Gio.Menu> Menus { get; } = new ();
-	public Collection<Command> Actions { get; } = new ();
+	public Dictionary<string, Gio.Menu> Menus { get; } = [];
+	public Collection<Command> Actions { get; } = [];
 
 	private readonly ChromeManager chrome;
 	public EffectsActions (ChromeManager chrome)

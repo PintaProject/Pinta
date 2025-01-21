@@ -99,7 +99,7 @@ partial class CairoExtensions
 			return false;
 		}
 
-		List<double> dashes = new ();
+		List<double> dashes = [];
 
 		// Count the number of consecutive dashes / spaces.
 		// e.g. "---  - " produces { 3.0, 2.0, 1.0, 1.0 }

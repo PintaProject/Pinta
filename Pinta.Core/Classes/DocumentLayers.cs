@@ -10,7 +10,7 @@ public sealed class DocumentLayers
 {
 	private readonly ToolManager tools;
 	private readonly Document document;
-	private readonly List<UserLayer> user_layers = new ();
+	private readonly List<UserLayer> user_layers = [];
 
 	private int layer_name_int = 2;
 

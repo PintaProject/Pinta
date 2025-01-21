@@ -63,7 +63,7 @@ public sealed class SettingsManager : ISettingsService
 {
 	private const string SETTINGS_FILE = "settings.xml";
 
-	private readonly Dictionary<string, object> settings = new ();
+	private readonly Dictionary<string, object> settings = [];
 
 	/// <summary>
 	/// Handle this event to be given a chance to save settings to disk

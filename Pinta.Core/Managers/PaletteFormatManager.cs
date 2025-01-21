@@ -35,7 +35,7 @@ public sealed class PaletteFormatManager
 
 	public PaletteFormatManager ()
 	{
-		formats = new List<PaletteDescriptor> ();
+		formats = [];
 
 		PaintDotNetPalette pdnHandler = new PaintDotNetPalette ();
 		formats.Add (new PaletteDescriptor ("Paint.NET", ["txt", "TXT"], pdnHandler, pdnHandler));
