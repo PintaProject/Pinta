@@ -139,11 +139,10 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 			vals
 			.Select (GetYFromValue)
 			.Concat (
-				new double[]
-				{
+				[
 					rect.Y,
 					rect.Y + rect.Height
-				}
+				]
 			)
 			.OrderByDescending (v => v)
 			.ToImmutableArray ()
@@ -311,11 +310,11 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		double x = rect.X + rect.Width;
 
 		// right triangle
-		ReadOnlySpan<PointD> points = stackalloc PointD[] {
+		ReadOnlySpan<PointD> points = [
 			new (x, y),
 			new (x + X_pad * rect.Width, y + Y_pad * rect.Height),
 			new (x + X_pad * rect.Width, y - Y_pad * rect.Height),
-		};
+		];
 
 		g.FillPolygonal (points, color);
 	}
@@ -327,11 +326,11 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		Color color)
 	{
 		// left triangle
-		ReadOnlySpan<PointD> points = stackalloc PointD[] {
+		ReadOnlySpan<PointD> points = [
 			new (rect.X, y),
 			new (rect.X - X_pad * rect.Width, y + Y_pad * rect.Height),
 			new (rect.X - X_pad * rect.Width, y - Y_pad * rect.Height),
-		};
+		];
 
 		g.FillPolygonal (points, color);
 	}

@@ -46,7 +46,7 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 	public HistogramWidget ()
 	{
 		Histogram = new HistogramRgb ();
-		selected = new bool[] { true, true, true };
+		selected = [true, true, true];
 
 		SetDrawFunc ((_, context, _, _) => Draw (context));
 	}

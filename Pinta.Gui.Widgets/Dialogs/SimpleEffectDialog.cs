@@ -257,7 +257,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			select KeyValuePair.Create (translatedLabel, memberName);
 
 		Dictionary<string, string> label_to_member = new (mapping_items);
-		List<string> labels = new ();
+		List<string> labels = [];
 		foreach (var kvp in mapping_items) {
 			label_to_member[kvp.Key] = kvp.Value;
 			labels.Add (kvp.Key);
@@ -286,7 +286,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		var entries =
 			dict == null
-			? ImmutableArray<string>.Empty
+			? []
 			: dict.Keys.ToImmutableArray ();
 
 		ComboBoxWidget widget = new (entries) { Label = caption };
