@@ -37,7 +37,7 @@ public interface IPaintBrushService : IEnumerable<BasePaintBrush>
 
 public sealed class PaintBrushManager : IPaintBrushService
 {
-	private readonly List<BasePaintBrush> paint_brushes = new ();
+	private readonly List<BasePaintBrush> paint_brushes = [];
 
 	public event EventHandler<BrushEventArgs>? BrushAdded;
 	public event EventHandler<BrushEventArgs>? BrushRemoved;

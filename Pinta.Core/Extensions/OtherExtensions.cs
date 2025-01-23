@@ -107,10 +107,10 @@ public static class OtherExtensions
 		PointI translateOffset)
 	{
 		if (stencil.IsEmpty)
-			return Array.Empty<PointI[]> ();
+			return [];
 
-		List<IReadOnlyList<PointI>> polygons = new ();
-		List<PointI> pts = new ();
+		List<IReadOnlyList<PointI>> polygons = [];
+		List<PointI> pts = [];
 
 		PointI start = bounds.Location ().ToInt ();
 
@@ -186,7 +186,7 @@ public static class OtherExtensions
 					break;
 			}
 
-			PointI[] points = pts.ToArray ();
+			PointI[] points = [.. pts];
 
 			var scans = CairoExtensions.GetScans (points);
 

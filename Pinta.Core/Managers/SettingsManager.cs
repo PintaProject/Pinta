@@ -63,7 +63,7 @@ public sealed class SettingsManager : ISettingsService
 {
 	private const string SETTINGS_FILE = "settings.xml";
 
-	private readonly Dictionary<string, object> settings = new ();
+	private readonly Dictionary<string, object> settings = [];
 
 	/// <summary>
 	/// Handle this event to be given a chance to save settings to disk
@@ -87,7 +87,7 @@ public sealed class SettingsManager : ISettingsService
 			return;
 		}
 
-		var nodes = document.Element ("settings")?.Elements ("setting") ?? Enumerable.Empty<XElement> (); ;
+		var nodes = document.Element ("settings")?.Elements ("setting") ?? [];
 
 		foreach (var node in nodes) {
 			if (node.Attribute ("name")?.Value is not string name)

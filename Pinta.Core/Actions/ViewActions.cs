@@ -169,9 +169,9 @@ public sealed class ViewActions
 		Gio.Menu color_scheme_section = Gio.Menu.New ();
 		color_scheme_section.AppendSubmenu (Translations.GetString ("Color Scheme"), color_scheme_menu);
 
-		app.AddAccelAction (ZoomIn, new[] { "<Primary>plus", "<Primary>equal", "equal", "<Primary>KP_Add", "KP_Add" });
-		app.AddAccelAction (ZoomOut, new[] { "<Primary>minus", "<Primary>underscore", "minus", "<Primary>KP_Subtract", "KP_Subtract" });
-		app.AddAccelAction (ActualSize, new[] { "<Primary>0", "<Primary><Shift>A" });
+		app.AddAccelAction (ZoomIn, ["<Primary>plus", "<Primary>equal", "equal", "<Primary>KP_Add", "KP_Add"]);
+		app.AddAccelAction (ZoomOut, ["<Primary>minus", "<Primary>underscore", "minus", "<Primary>KP_Subtract", "KP_Subtract"]);
+		app.AddAccelAction (ActualSize, ["<Primary>0", "<Primary><Shift>A"]);
 		app.AddAccelAction (ZoomToWindow, "<Primary>B");
 		app.AddAccelAction (Fullscreen, "F11");
 		app.AddAction (EditCanvasGrid);

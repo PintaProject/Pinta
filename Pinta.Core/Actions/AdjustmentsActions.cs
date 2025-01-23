@@ -30,7 +30,7 @@ namespace Pinta.Core;
 
 public sealed class AdjustmentsActions
 {
-	public Collection<Command> Actions { get; } = new ();
+	public Collection<Command> Actions { get; } = [];
 
 	#region Public Methods
 	public void ToggleActionsSensitive (bool sensitive)
