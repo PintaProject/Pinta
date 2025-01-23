@@ -208,7 +208,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 	private static IEnumerable<ColorBgra> CreateColors (int colorCount, RandomSeed colorsSeed)
 	{
 		Random randomColorizer = new (colorsSeed.Value);
-		HashSet<ColorBgra> uniquenessTracker = new ();
+		HashSet<ColorBgra> uniquenessTracker = [];
 		while (uniquenessTracker.Count < colorCount) {
 			ColorBgra candidateColor = randomColorizer.RandomColorBgra ();
 			if (uniquenessTracker.Contains (candidateColor)) continue;

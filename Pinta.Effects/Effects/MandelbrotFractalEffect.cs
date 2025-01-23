@@ -115,7 +115,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 
 		if (settings.invertColors)
-			invert_effect.Render (dst, dst, stackalloc[] { roi });
+			invert_effect.Render (dst, dst, [roi]);
 	}
 
 	private static ColorBgra GetPixelColor (MandelbrotSettings settings, PointI target)

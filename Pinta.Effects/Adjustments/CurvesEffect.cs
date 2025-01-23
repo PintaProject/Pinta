@@ -75,14 +75,14 @@ public sealed class CurvesEffect : BaseEffect
 		switch (Data.Mode) {
 			case ColorTransferMode.Rgb:
 				UnaryPixelOps.ChannelCurve cc = new UnaryPixelOps.ChannelCurve ();
-				transferCurves = new byte[][] { cc.CurveR, cc.CurveG, cc.CurveB };
+				transferCurves = [cc.CurveR, cc.CurveG, cc.CurveB];
 				entries = 256;
 				op = cc;
 				break;
 
 			case ColorTransferMode.Luminosity:
 				UnaryPixelOps.LuminosityCurve lc = new UnaryPixelOps.LuminosityCurve ();
-				transferCurves = new byte[][] { lc.Curve };
+				transferCurves = [lc.Curve];
 				entries = 256;
 				op = lc;
 				break;
