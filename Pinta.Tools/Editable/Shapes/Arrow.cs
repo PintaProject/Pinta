@@ -76,7 +76,7 @@ public static class ArrowExtensions
 		}
 
 		//Calculate the points of the arrow.
-		ReadOnlySpan<PointD> arrowPoints = stackalloc[] {
+		ReadOnlySpan<PointD> arrowPoints = [
 
 			endPoint,
 
@@ -91,7 +91,7 @@ public static class ArrowExtensions
 			new PointD (
 				endPoint.X + Math.Cos ((endingAngle + 90 - arrow.AngleOffset) * RadiansToDegrees) * arrow.ArrowSize,
 				endPoint.Y + Math.Sin ((endingAngle + 90 - arrow.AngleOffset) * RadiansToDegrees) * arrow.ArrowSize * -1d),
-		};
+		];
 
 		//Draw the arrow.
 		g.FillPolygonal (arrowPoints, outlineColor);

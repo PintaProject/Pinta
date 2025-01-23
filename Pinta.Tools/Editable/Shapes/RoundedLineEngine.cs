@@ -85,7 +85,7 @@ public sealed class RoundedLineEngine : ShapeEngine
 	/// </summary>
 	public override void GeneratePoints (int brush_width)
 	{
-		List<GeneratedPoint> generatedPoints = new ();
+		List<GeneratedPoint> generatedPoints = [];
 
 		//Calculate the last ControlPoint's segment end points.
 		CalculateSegmentEndPoints (
@@ -115,7 +115,7 @@ public sealed class RoundedLineEngine : ShapeEngine
 			lineStartPoint = cornerEndPoint;
 		}
 
-		GeneratedPoints = generatedPoints.ToArray ();
+		GeneratedPoints = [.. generatedPoints];
 	}
 
 	/// <summary>

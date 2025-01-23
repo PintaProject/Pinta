@@ -46,7 +46,7 @@ public sealed class OrganizedPointCollection
 	/// </summary>
 	public OrganizedPointCollection ()
 	{
-		collection = new Dictionary<int, Dictionary<int, List<OrganizedPoint>>> ();
+		collection = [];
 	}
 
 	/// <summary>
@@ -59,7 +59,7 @@ public sealed class OrganizedPointCollection
 
 		foreach (KeyValuePair<int, Dictionary<int, List<OrganizedPoint>>> xSection in collection) {
 			//This must be created each time to ensure that it is fresh for each loop iteration.
-			Dictionary<int, List<OrganizedPoint>> tempSection = new Dictionary<int, List<OrganizedPoint>> ();
+			Dictionary<int, List<OrganizedPoint>> tempSection = [];
 
 			foreach (KeyValuePair<int, List<OrganizedPoint>> section in xSection.Value) {
 				tempSection.Add (section.Key,
@@ -86,14 +86,14 @@ public sealed class OrganizedPointCollection
 		//Ensure that the xSection for this particular point exists.
 		if (!collection.TryGetValue (sX, out var xSection)) {
 			//This particular X section does not exist yet; create it.
-			xSection = new Dictionary<int, List<OrganizedPoint>> ();
+			xSection = [];
 			collection.Add (sX, xSection);
 		}
 
 		//Ensure that the ySection (which is contained within the respective xSection) for this particular point exists.
 		if (!xSection.TryGetValue (sY, out var ySection)) {
 			//This particular Y section does not exist yet; create it.
-			ySection = new List<OrganizedPoint> ();
+			ySection = [];
 			xSection.Add (sY, ySection);
 		}
 

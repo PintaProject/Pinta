@@ -43,7 +43,7 @@ public class LassoSelectTool : BaseTool
 	private SelectionHistoryItem? hist;
 
 	private Path? path;
-	private readonly List<IntPoint> lasso_polygon = new ();
+	private readonly List<IntPoint> lasso_polygon = [];
 
 	public LassoSelectTool (IServiceProvider services) : base (services)
 	{
@@ -109,7 +109,7 @@ public class LassoSelectTool : BaseTool
 		g.ClosePath ();
 
 		document.Selection.SelectionPolygons.Clear ();
-		document.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
+		document.Selection.SelectionPolygons.Add ([.. lasso_polygon]);
 
 		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
 
@@ -130,7 +130,7 @@ public class LassoSelectTool : BaseTool
 		g.ClosePath ();
 
 		document.Selection.SelectionPolygons.Clear ();
-		document.Selection.SelectionPolygons.Add (lasso_polygon.ToList ());
+		document.Selection.SelectionPolygons.Add ([.. lasso_polygon]);
 		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
 		document.Workspace.Invalidate ();
 
