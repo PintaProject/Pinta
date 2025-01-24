@@ -48,8 +48,7 @@ public sealed class ActionHandlers
 		CanvasGridManager canvasGrid = PintaCore.CanvasGrid;
 		string applicationVersion = PintaCore.ApplicationVersion;
 
-		action_handlers =
-		[
+		action_handlers = [
 			// File
 			new NewDocumentAction (actions, chrome, palette, settings, workspace),
 			new NewScreenshotAction (system, chrome, workspace, actions),
