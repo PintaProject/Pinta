@@ -79,7 +79,7 @@ public static class LocalHistogram
 		byte g = GetChannelPercentile (minCount, hg);
 		byte r = GetChannelPercentile (minCount, hr);
 		byte a = GetChannelPercentile (minCount, ha);
-		return ColorBgra.FromBgra (b, g, r, a);
+		return ColorBgra.FromBgra (b, g, r, a).ToPremultipliedAlpha ();
 	}
 
 	public static void RenderRect (
@@ -139,7 +139,7 @@ public static class LocalHistogram
 				ReadOnlySpan<ColorBgra> psamples = src_data[((y + v) * sourceSize.Width + rect.Left + left)..];
 				for (int u = left, i = 0; u <= right; ++u, ++i) {
 					if ((u * u + v * v) > cutoff) continue;
-					ColorBgra psamp = psamples[i];
+					ColorBgra psamp = psamples[i].ToStraightAlpha ();
 					++area;
 					++hb[psamp.B];
 					++hg[psamp.G];
@@ -174,7 +174,7 @@ public static class LocalHistogram
 
 				while (v >= top) {
 					int u = leadingEdgeX[-v];
-					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) - u];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) - u].ToStraightAlpha ();
 
 					--hb[p.B];
 					--hg[p.G];
@@ -198,7 +198,7 @@ public static class LocalHistogram
 
 				while (v >= top) {
 					int u = leadingEdgeX[-v];
-					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) + u + 1];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) + u + 1].ToStraightAlpha ();
 					++hb[p.B];
 					++hg[p.G];
 					++hr[p.R];
@@ -222,7 +222,7 @@ public static class LocalHistogram
 
 				while (v <= bottom) {
 					int u = leadingEdgeX[v];
-					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) - u];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) - u].ToStraightAlpha ();
 					--hb[p.B];
 					--hg[p.G];
 					--hr[p.R];
@@ -246,7 +246,7 @@ public static class LocalHistogram
 
 				while (v <= bottom) {
 					int u = leadingEdgeX[v];
-					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) + u + 1];
+					ColorBgra p = src_data[(y * sourceSize.Width + x) + (v * stride) + u + 1].ToStraightAlpha ();
 					++hb[p.B];
 					++hg[p.G];
 					++hr[p.R];

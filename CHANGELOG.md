@@ -78,7 +78,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed an issue where the text tool did not immediately redraw after changes to the font or color of unfinalized text (#952, #975)
 - Fixed an issue where the text tool could unexpectedly redraw existing text with the latest palette color, or fail to finalize uncommitted text (#1097, #1176)
 - Fixed a bug where cut / paste operations did not behave as expected with complex selections (#951, #978)
-- Fixed transparency behavior for several effects (#1184)
+- Fixed transparency behavior for several effects (#1184, #1229)
 - Fixed issues with the Soften Portrait effect where the `Softness` and `Lighting` parameters had no effect (#1217)
 
 ## [2.1.2](https://github.com/PintaProject/Pinta/releases/tag/2.1.2) - 2024/04/20

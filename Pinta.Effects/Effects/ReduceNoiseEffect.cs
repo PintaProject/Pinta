@@ -48,20 +48,22 @@ public sealed class ReduceNoiseEffect : BaseEffect
 		int gc = 0;
 		int bc = 0;
 
-		for (int i = 0; i < color.R; ++i)
+		ColorBgra straight_color = color.ToStraightAlpha ();
+
+		for (int i = 0; i < straight_color.R; ++i)
 			rc += hr[i];
 
-		for (int i = 0; i < color.G; ++i)
+		for (int i = 0; i < straight_color.G; ++i)
 			gc += hg[i];
 
-		for (int i = 0; i < color.B; ++i)
+		for (int i = 0; i < straight_color.B; ++i)
 			bc += hb[i];
 
 		rc = (rc * 255) / area;
 		gc = (gc * 255) / area;
 		bc = (bc * 255) / area;
 
-		return ColorBgra.FromBgr ((byte) bc, (byte) gc, (byte) rc);
+		return ColorBgra.FromBgra ((byte) bc, (byte) gc, (byte) rc, straight_color.A).ToPremultipliedAlpha ();
 	}
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

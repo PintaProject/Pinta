@@ -106,7 +106,7 @@ public sealed class OutlineEdgeEffect : BaseEffect
 
 			int aCount = 0;
 			int a1 = 0;
-			while (a1 < 255 && hb[a1] == 0)
+			while (a1 < 255 && ha[a1] == 0)
 				++a1;
 
 			while (a1 < 255 && aCount < minCount1) {
@@ -124,7 +124,8 @@ public sealed class OutlineEdgeEffect : BaseEffect
 				b: (byte) (255 - (b2 - b1)),
 				g: (byte) (255 - (g2 - g1)),
 				r: (byte) (255 - (r2 - r1)),
-				a: (byte) a2);
+				a: (byte) a2)
+				.ToPremultipliedAlpha ();
 		}
 	}
 
