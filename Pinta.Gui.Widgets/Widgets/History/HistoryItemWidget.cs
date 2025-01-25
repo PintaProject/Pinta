@@ -31,7 +31,7 @@ public sealed class HistoryListViewItem : GObject.Object
 {
 	private readonly BaseHistoryItem item;
 
-	public HistoryListViewItem (BaseHistoryItem item) : base (true, Array.Empty<GObject.ConstructArgument> ())
+	public HistoryListViewItem (BaseHistoryItem item) : base (true, [])
 	{
 		if (string.IsNullOrEmpty (item.Text))
 			throw new ArgumentException ($"{nameof (item.Text)} must contain value.");

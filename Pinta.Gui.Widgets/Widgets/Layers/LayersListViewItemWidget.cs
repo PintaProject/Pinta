@@ -39,7 +39,7 @@ public sealed class LayersListViewItem : GObject.Object
 		Document doc,
 		UserLayer layer
 	)
-		: base (true, Array.Empty<GObject.ConstructArgument> ())
+		: base (true, [])
 	{
 		this.doc = doc;
 		this.layer = layer;

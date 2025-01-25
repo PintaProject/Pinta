@@ -13,7 +13,7 @@ internal static class ReflectionHelper
 			return fi.GetValue (o);
 
 		if (objectType.GetProperty (name) is PropertyInfo pi)
-			return pi.GetGetMethod ()?.Invoke (o, Array.Empty<object> ());
+			return pi.GetGetMethod ()?.Invoke (o, []);
 
 		if (objectType.GetMember (name).Length > 0)
 			throw new ArgumentException ($"Can't get value from member \'{name}\'. Only fields and attributes are supported");

@@ -69,14 +69,14 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 			double curpos = slider.GetValue () / max_val * (width - 2 * args.SliderPaddingWidth) + args.SliderPaddingWidth;
 
-			ReadOnlySpan<PointD> cursorPoly = stackalloc PointD[] {
+			ReadOnlySpan<PointD> cursorPoly = [
 				new PointD (curpos, height / 2),
 				new PointD (curpos + 4, 3 * height / 4),
 				new PointD (curpos + 4, height - outlineWidth / 2),
 				new PointD (curpos - 4, height - outlineWidth / 2),
 				new PointD (curpos - 4, 3 * height / 4),
 				new PointD (curpos, height / 2)
-			};
+			];
 
 			context.LineWidth = outlineWidth;
 			context.DrawPolygonal (cursorPoly, new Color (0, 0, 0), LineCap.Butt);
@@ -588,7 +588,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 
 		hue_cps = new ColorPickerSlider (cpsArgs with { Upper = 360, Text = Translations.GetString ("Hue"), Val = CurrentColor.ToHsv ().Hue, });
-		hue_cps.Gradient.SetDrawFunc ((_, c, w, h) => hue_cps.DrawGradient (c, w, h, new Color[] {
+		hue_cps.Gradient.SetDrawFunc ((_, c, w, h) => hue_cps.DrawGradient (c, w, h, [
 			CurrentColor.CopyHsv (hue: 0),
 			CurrentColor.CopyHsv (hue: 60),
 			CurrentColor.CopyHsv (hue: 120),
@@ -596,7 +596,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			CurrentColor.CopyHsv (hue: 240),
 			CurrentColor.CopyHsv (hue: 300),
 			CurrentColor.CopyHsv (hue: 360)
-		}));
+		]));
 		hue_cps.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor.CopyHsv (hue: args.value);
 			UpdateView ();
@@ -605,8 +605,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 
 		sat_cps = new ColorPickerSlider (cpsArgs with { Upper = 100, Text = Translations.GetString ("Sat"), Val = CurrentColor.ToHsv ().Sat * 100.0, });
-		sat_cps.Gradient.SetDrawFunc ((_, c, w, h) => sat_cps.DrawGradient (c, w, h, new Color[] {
-			CurrentColor.CopyHsv (sat: 0), CurrentColor.CopyHsv (sat: 1) }));
+		sat_cps.Gradient.SetDrawFunc ((_, c, w, h) => sat_cps.DrawGradient (c, w, h, [
+			CurrentColor.CopyHsv (sat: 0), CurrentColor.CopyHsv (sat: 1) ]));
 		sat_cps.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor.CopyHsv (sat: args.value / 100.0);
 			UpdateView ();
@@ -615,8 +615,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 
 		val_cps = new ColorPickerSlider (cpsArgs with { Upper = 100, Text = Translations.GetString ("Value"), Val = CurrentColor.ToHsv ().Val * 100.0 });
-		val_cps.Gradient.SetDrawFunc ((_, c, w, h) => val_cps.DrawGradient (c, w, h, new Color[] {
-			CurrentColor.CopyHsv (value: 0), CurrentColor.CopyHsv (value: 1) }));
+		val_cps.Gradient.SetDrawFunc ((_, c, w, h) => val_cps.DrawGradient (c, w, h, [
+			CurrentColor.CopyHsv (value: 0), CurrentColor.CopyHsv (value: 1) ]));
 		val_cps.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor.CopyHsv (value: args.value / 100.0);
 			UpdateView ();
@@ -628,8 +628,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 
 		r_cps = new ColorPickerSlider (cpsArgs with { Upper = 255, Text = Translations.GetString ("Red"), Val = CurrentColor.R * 255.0, });
-		r_cps.Gradient.SetDrawFunc ((_, c, w, h) => r_cps.DrawGradient (c, w, h, new Color[] {
-			CurrentColor with { R = 0 }, CurrentColor with { R = 1 } }));
+		r_cps.Gradient.SetDrawFunc ((_, c, w, h) => r_cps.DrawGradient (c, w, h, [
+			CurrentColor with { R = 0 }, CurrentColor with { R = 1 } ]));
 		r_cps.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor with { R = args.value / 255.0 };
 			UpdateView ();
@@ -638,8 +638,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 
 		g_cps = new ColorPickerSlider (cpsArgs with { Upper = 255, Text = Translations.GetString ("Green"), Val = CurrentColor.G * 255.0, });
-		g_cps.Gradient.SetDrawFunc ((_, c, w, h) => g_cps.DrawGradient (c, w, h, new Color[] {
-			CurrentColor with { G = 0 }, CurrentColor with { G = 1 } }));
+		g_cps.Gradient.SetDrawFunc ((_, c, w, h) => g_cps.DrawGradient (c, w, h, [
+			CurrentColor with { G = 0 }, CurrentColor with { G = 1 } ]));
 		g_cps.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor with { G = args.value / 255.0 };
 			UpdateView ();
@@ -648,8 +648,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 
 		b_cps = new ColorPickerSlider (cpsArgs with { Upper = 255, Text = Translations.GetString ("Blue"), Val = CurrentColor.B * 255.0 });
-		b_cps.Gradient.SetDrawFunc ((_, c, w, h) => b_cps.DrawGradient (c, w, h, new Color[] {
-			CurrentColor with { B = 0 }, CurrentColor with { B = 1 } }));
+		b_cps.Gradient.SetDrawFunc ((_, c, w, h) => b_cps.DrawGradient (c, w, h, [
+			CurrentColor with { B = 0 }, CurrentColor with { B = 1 } ]));
 		b_cps.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor with { B = args.value / 255.0 };
 			UpdateView ();
@@ -659,8 +659,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		sliders_box.Append (new Gtk.Separator ());
 		a_cps = new ColorPickerSlider (cpsArgs with { Upper = 255, Text = Translations.GetString ("Alpha"), Val = CurrentColor.A * 255.0 });
-		a_cps.Gradient.SetDrawFunc ((_, c, w, h) => a_cps.DrawGradient (c, w, h, new Color[] {
-			CurrentColor with { A = 0 }, CurrentColor with { A = 1 } }));
+		a_cps.Gradient.SetDrawFunc ((_, c, w, h) => a_cps.DrawGradient (c, w, h, [
+			CurrentColor with { A = 0 }, CurrentColor with { A = 1 } ]));
 		a_cps.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor with { A = args.value / 255.0 };
 			UpdateView ();

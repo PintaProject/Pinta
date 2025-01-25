@@ -125,14 +125,14 @@ public sealed class Ruler : DrawingArea
 		QueueDraw ();
 	}
 
-	private static readonly IReadOnlyList<double> pixels_ruler_scale = new double[] { 1, 2, 5, 10, 25, 50, 100, 250, 500, 1000 };
-	private static readonly IReadOnlyList<int> pixels_subdivide = new int[] { 1, 5, 10, 50, 100 };
+	private static readonly IReadOnlyList<double> pixels_ruler_scale = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
+	private static readonly IReadOnlyList<int> pixels_subdivide = [1, 5, 10, 50, 100];
 
-	private static readonly IReadOnlyList<double> inches_ruler_scale = new double[] { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 };
-	private static readonly IReadOnlyList<int> inches_subdivide = new int[] { 1, 2, 4, 8, 16 };
+	private static readonly IReadOnlyList<double> inches_ruler_scale = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512];
+	private static readonly IReadOnlyList<int> inches_subdivide = [1, 2, 4, 8, 16];
 
-	private static readonly IReadOnlyList<double> centimeters_ruler_scale = new double[] { 1, 2, 5, 10, 25, 50, 100, 250, 500, 1000 };
-	private static readonly IReadOnlyList<int> centimeters_subdivide = new int[] { 1, 5, 10, 50, 100 };
+	private static readonly IReadOnlyList<double> centimeters_ruler_scale = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
+	private static readonly IReadOnlyList<int> centimeters_subdivide = [1, 5, 10, 50, 100];
 
 	private sealed record RulerDrawSettings (
 		IReadOnlyList<int> subdivide,
