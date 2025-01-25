@@ -1079,7 +1079,7 @@ public sealed class TextTool : BaseTool
 			g.SetSourceColor (new Cairo.Color (1, 1, 1));
 			g.StrokePreserve ();
 
-			g.SetDash (new double[] { 2, 4 }, 0);
+			g.SetDash ([2, 4], 0);
 			g.SetSourceColor (new Cairo.Color (1, .1, .2));
 
 			g.Stroke ();

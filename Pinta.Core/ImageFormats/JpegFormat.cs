@@ -65,7 +65,7 @@ public sealed class JpegFormat : GdkPixbufFormat
 
 		using var stream = file.Replace ();
 		try {
-			pb.SaveToStreamv (stream, fileType, new string[] { "quality" }, new string[] { level.ToString () }, null);
+			pb.SaveToStreamv (stream, fileType, ["quality"], [level.ToString ()], null);
 		} finally {
 			stream.Close (null);
 		}

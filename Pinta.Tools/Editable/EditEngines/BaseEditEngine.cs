@@ -45,7 +45,7 @@ public abstract class BaseEditEngine
 		RoundedLineSeries,
 	}
 
-	public static Dictionary<ShapeTypes, ShapeTool> CorrespondingTools { get; } = new ();
+	public static Dictionary<ShapeTypes, ShapeTool> CorrespondingTools { get; } = [];
 
 	protected abstract string ShapeName { get; }
 
@@ -177,7 +177,7 @@ public abstract class BaseEditEngine
 	protected bool clicked_without_modifying = false;
 
 	//Stores the editable shape data.
-	public static ShapeEngineCollection SEngines = new ();
+	public static ShapeEngineCollection SEngines = [];
 
 	#region ToolbarEventHandlers
 
@@ -1204,7 +1204,7 @@ public abstract class BaseEditEngine
 			}
 		}
 
-		g.SetDash (Array.Empty<double> (), 0.0);
+		g.SetDash ([], 0.0);
 
 		//Draw anything extra (that not every shape has), like arrows.
 		DrawExtras (ref dirty, g, engine);
@@ -1454,7 +1454,7 @@ public abstract class BaseEditEngine
 	/// </summary>
 	protected void ResetShapes ()
 	{
-		SEngines = new ShapeEngineCollection ();
+		SEngines = [];
 
 		//The fields are modified instead of the properties here because a redraw call is undesired (for speed/efficiency).
 		SelectedPointIndex = -1;

@@ -105,7 +105,7 @@ public sealed class WindowActions
 
 		// We only assign accelerators up to Alt-9
 		if (idx < 9)
-			chrome.Application.SetAccelsForAction (action_id, new[] { $"<Alt>{idx + 1}" });
+			chrome.Application.SetAccelsForAction (action_id, [$"<Alt>{idx + 1}"]);
 	}
 
 	private void RebuildDocumentMenu ()

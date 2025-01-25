@@ -49,7 +49,7 @@ public sealed class OutlineObjectEffect : BaseEffect
 		ColorBgra primaryColor = palette.PrimaryColor.ToColorBgra ();
 		ColorBgra secondaryColor = palette.SecondaryColor.ToColorBgra ();
 
-		ConcurrentBag<PointI> borderPixels = new ();
+		ConcurrentBag<PointI> borderPixels = [];
 
 		// First pass
 		// Clean up dest, then collect all border pixels

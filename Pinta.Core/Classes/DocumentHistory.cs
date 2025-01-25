@@ -32,7 +32,7 @@ namespace Pinta.Core;
 public sealed class DocumentHistory
 {
 	private readonly Document document;
-	private readonly List<BaseHistoryItem> history = new ();
+	private readonly List<BaseHistoryItem> history = [];
 	private int clean_pointer = -1;
 
 	public event EventHandler<HistoryItemAddedEventArgs>? HistoryItemAdded;

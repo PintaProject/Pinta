@@ -89,6 +89,6 @@ public static class GioExtensions
 
 	public static void RemoveMultiple (this Gio.ListStore store, uint position, uint n_removals)
 	{
-		store.Splice (position, n_removals, Array.Empty<GObject.Object> (), 0);
+		store.Splice (position, n_removals, [], 0);
 	}
 }

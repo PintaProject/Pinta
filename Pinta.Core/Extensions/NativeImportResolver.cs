@@ -50,7 +50,7 @@ internal static class NativeImportResolver
 		}
 	};
 
-	private static readonly Dictionary<string, LibraryInfo> library_infos = new ();
+	private static readonly Dictionary<string, LibraryInfo> library_infos = [];
 
 	static NativeImportResolver ()
 	{

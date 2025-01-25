@@ -44,8 +44,8 @@ public sealed class EffectsManager
 		ChromeManager chromeManager,
 		LivePreviewManager livePreviewManager)
 	{
-		adjustments = new Dictionary<BaseEffect, Command> ();
-		effects = new Dictionary<BaseEffect, Command> ();
+		adjustments = [];
+		effects = [];
 
 		action_manager = actionManager;
 		chrome_manager = chromeManager;

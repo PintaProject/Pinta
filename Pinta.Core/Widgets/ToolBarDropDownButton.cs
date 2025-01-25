@@ -21,7 +21,7 @@ public sealed class ToolBarDropDownButton : Gtk.MenuButton
 	{
 		show_label = showLabel;
 
-		items = new List<ToolBarItem> ();
+		items = [];
 		Items = new ReadOnlyCollection<ToolBarItem> (items);
 		AlwaysShowArrow = true;
 

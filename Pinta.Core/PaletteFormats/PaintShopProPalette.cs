@@ -46,7 +46,7 @@ public sealed class PaintShopProPalette : IPaletteLoader, IPaletteSaver
 		int numberOfColors = int.Parse (reader.ReadLine ()!); // NRT - Assumes valid formatted file
 		PintaCore.Palette.CurrentPalette.Resize (numberOfColors);
 
-		List<Color> colors = new ();
+		List<Color> colors = [];
 
 		while (!reader.EndOfStream) {
 

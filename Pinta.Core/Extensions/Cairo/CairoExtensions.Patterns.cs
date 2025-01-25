@@ -94,12 +94,12 @@ partial class CairoExtensions
 		// An empty cairo pattern, a pattern with no dashes, or a pattern with a single dash just draws a normal line.
 		// Cairo draws a normal line when the dash list is empty.
 		if (!IsValidDashPattern (dash_pattern)) {
-			dash_list = Array.Empty<double> ();
+			dash_list = [];
 			offset = 0.0;
 			return false;
 		}
 
-		List<double> dashes = new ();
+		List<double> dashes = [];
 
 		// Count the number of consecutive dashes / spaces.
 		// e.g. "---  - " produces { 3.0, 2.0, 1.0, 1.0 }
@@ -215,7 +215,7 @@ partial class CairoExtensions
 				scans[i] = cairo_rect.ToRectangleI ();
 			}
 		} else {
-			scans = Array.Empty<RectangleI> ();
+			scans = [];
 		}
 
 		foreach (var rect in scans)
@@ -289,7 +289,7 @@ partial class CairoExtensions
 				scans[i] = cairo_rect.ToRectangleI ();
 			}
 		} else {
-			scans = Array.Empty<RectangleI> ();
+			scans = [];
 		}
 
 		foreach (var rect in scans)

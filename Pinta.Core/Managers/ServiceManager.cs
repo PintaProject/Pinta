@@ -55,7 +55,7 @@ public interface IServiceManager : IServiceProvider
 
 public sealed class ServiceManager : IServiceManager
 {
-	private readonly Dictionary<Type, object> services = new ();
+	private readonly Dictionary<Type, object> services = [];
 
 	public T AddService<T> (T implementation) where T : class
 	{

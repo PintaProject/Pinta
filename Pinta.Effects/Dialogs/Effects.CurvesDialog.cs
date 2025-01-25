@@ -53,7 +53,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 	private int? last_cpx;
 	private PointI last_mouse_pos = new (0, 0);
 	// Keys of existing control points which cannot be overwritten by a new control point.
-	private readonly HashSet<int> orig_cps = new ();
+	private readonly HashSet<int> orig_cps = [];
 
 	//control points for luminosity transfer mode
 	private SortedList<int, int>[] luminosity_cps = null!; // NRT - Set via code flow
@@ -559,7 +559,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		static void DrawGrid (Context g)
 		{
-			g.SetDash (new double[] { 4, 4 }, 2);
+			g.SetDash ([4, 4], 2);
 			g.LineWidth = 1;
 
 			for (int i = 1; i < 4; i++) {
@@ -576,7 +576,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 			g.Stroke ();
 
-			g.SetDash (Array.Empty<double> (), 0);
+			g.SetDash ([], 0);
 		}
 
 		void DrawControlPoints (Context g)
