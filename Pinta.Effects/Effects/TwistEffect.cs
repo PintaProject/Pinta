@@ -119,7 +119,7 @@ public sealed class TwistEffect : BaseEffect
 	private TwistSettings CreateSettings ()
 	{
 		RectangleI renderBounds = live_preview.RenderBounds;
-		float preliminaryTwist = Data.Amount;
+		float preliminaryTwist = -Data.Amount;
 		float hw = renderBounds.Width / 2.0f;
 		float hh = renderBounds.Height / 2.0f;
 		return new (
@@ -149,7 +149,7 @@ public sealed class TwistEffect : BaseEffect
 	public sealed class TwistData : EffectData
 	{
 		[Caption ("Amount"), MinimumValue (-100), MaximumValue (100)]
-		public int Amount { get; set; } = 45;
+		public int Amount { get; set; } = 30;
 
 		[Caption ("Antialias"), MinimumValue (0), MaximumValue (5)]
 		public int Antialias { get; set; } = 2;

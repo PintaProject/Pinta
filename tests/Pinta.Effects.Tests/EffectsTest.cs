@@ -564,6 +564,7 @@ internal sealed class EffectsTest
 	public void Twist1 ()
 	{
 		TwistEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Amount = -45;
 		Utilities.TestEffect (effect, "twist1.png");
 	}
 
@@ -571,7 +572,7 @@ internal sealed class EffectsTest
 	public void Twist2 ()
 	{
 		TwistEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.Amount = -20;
+		effect.Data.Amount = 20;
 		effect.Data.Antialias = 4;
 		Utilities.TestEffect (effect, "twist2.png");
 	}
