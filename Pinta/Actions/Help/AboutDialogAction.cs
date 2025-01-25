@@ -105,7 +105,7 @@ internal sealed class AboutDialogAction : IActionHandler
 	}
 
 	// AddCreditSection() isn't wrapped correctly by GtkSharp, so current and old authors are merged for now.
-	private readonly string[] authors = new[] {
+	private readonly string[] authors = [
 		"Cameron White (@cameronwhite)",
 		"Jonathan Pobst (@jpobst)",
 		"James Carroll (@MrCarroll)",
@@ -179,5 +179,5 @@ internal sealed class AboutDialogAction : IActionHandler
 		"@skkestrel",
 		"@tdaffin",
 		"@yaminb",
-	};
+	];
 }

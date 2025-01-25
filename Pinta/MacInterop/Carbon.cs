@@ -85,7 +85,7 @@ internal static partial class Carbon
 
 	public static IntPtr InstallEventHandler (IntPtr target, EventDelegate handler, CarbonEventTypeSpec type)
 	{
-		return InstallEventHandler (target, handler, new CarbonEventTypeSpec[] { type });
+		return InstallEventHandler (target, handler, [type]);
 	}
 
 	public static IntPtr InstallApplicationEventHandler (EventDelegate handler, CarbonEventTypeSpec[] types)
@@ -95,7 +95,7 @@ internal static partial class Carbon
 
 	public static IntPtr InstallApplicationEventHandler (EventDelegate handler, CarbonEventTypeSpec type)
 	{
-		return InstallEventHandler (GetApplicationEventTarget (), handler, new CarbonEventTypeSpec[] { type });
+		return InstallEventHandler (GetApplicationEventTarget (), handler, [type]);
 	}
 
 	#endregion
@@ -194,12 +194,12 @@ internal static partial class Carbon
 
 	internal static string UnConvertCharCode (int i)
 	{
-		return new string (stackalloc char[] {
+		return new string ([
 			(char) (i >> 24),
 			(char) (0xFF & (i >> 16)),
 			(char) (0xFF & (i >> 8)),
 			(char) (0xFF & i),
-		});
+		]);
 	}
 
 	#endregion
