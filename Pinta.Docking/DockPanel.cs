@@ -98,7 +98,7 @@ public sealed class DockPanel : Box
 	/// <summary>
 	/// List of the items in this panel, which may be minimized or maximized.
 	/// </summary>
-	private readonly List<DockPanelItem> items = new ();
+	private readonly List<DockPanelItem> items = [];
 
 	public DockPanel ()
 	{
