@@ -49,7 +49,7 @@ public sealed class DockNotebook : Box
 {
 	private readonly Adw.TabView tab_view = new ();
 	private readonly Adw.TabBar tab_bar = new ();
-	private readonly HashSet<IDockNotebookItem> items = new ();
+	private readonly HashSet<IDockNotebookItem> items = [];
 
 	public DockNotebook ()
 	{
