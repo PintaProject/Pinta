@@ -221,7 +221,7 @@ public sealed class AddinManagerDialog : Adw.Window
 	// updated version of the application.
 	private static IReadOnlyList<AddinRepositoryEntry> FilterToLatestCompatibleVersion (IReadOnlyList<AddinRepositoryEntry> addins)
 	{
-		Dictionary<string, string> latest_versions = new ();
+		Dictionary<string, string> latest_versions = [];
 		foreach (var a in addins) {
 			if (!Utilities.IsCompatibleWithAddinRoots (a))
 				continue;

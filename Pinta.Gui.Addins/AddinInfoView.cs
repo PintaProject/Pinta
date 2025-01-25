@@ -245,7 +245,7 @@ internal sealed class AddinInfoView : Adw.Bin
 
 		InstallDialog dialog = new (PintaCore.Chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
-		dialog.InitForInstall (new[] { current_item.RepositoryEntry });
+		dialog.InitForInstall ([current_item.RepositoryEntry]);
 		dialog.Show ();
 	}
 
@@ -259,7 +259,7 @@ internal sealed class AddinInfoView : Adw.Bin
 
 		InstallDialog dialog = new (PintaCore.Chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
-		dialog.InitForInstall (new[] { current_item.RepositoryEntry });
+		dialog.InitForInstall ([current_item.RepositoryEntry]);
 		dialog.Show ();
 	}
 
@@ -273,7 +273,7 @@ internal sealed class AddinInfoView : Adw.Bin
 
 		InstallDialog dialog = new (PintaCore.Chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
-		dialog.InitForUninstall (new[] { current_item.Addin });
+		dialog.InitForUninstall ([current_item.Addin]);
 		dialog.Show ();
 	}
 }

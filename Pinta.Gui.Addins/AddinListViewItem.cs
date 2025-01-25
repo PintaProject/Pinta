@@ -24,7 +24,7 @@ internal sealed class AddinListViewItem : GObject.Object
 		AddinStatus status)
 	: base (
 		true,
-		Array.Empty<GObject.ConstructArgument> ())
+		[])
 	{
 		this.service = service;
 		this.info = info;
@@ -42,7 +42,7 @@ internal sealed class AddinListViewItem : GObject.Object
 		AddinStatus status)
 	: base (
 		true,
-		Array.Empty<GObject.ConstructArgument> ())
+		[])
 	{
 		this.service = service;
 		this.info = info;
