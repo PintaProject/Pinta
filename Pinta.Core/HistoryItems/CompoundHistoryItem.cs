@@ -31,7 +31,7 @@ namespace Pinta.Core;
 
 public class CompoundHistoryItem : BaseHistoryItem
 {
-	protected List<BaseHistoryItem> history_stack = new ();
+	protected List<BaseHistoryItem> history_stack = [];
 	private List<ImageSurface>? snapshots;
 
 	public CompoundHistoryItem () : base ()
@@ -63,7 +63,7 @@ public class CompoundHistoryItem : BaseHistoryItem
 
 	public void StartSnapshotOfImage ()
 	{
-		snapshots = new List<ImageSurface> ();
+		snapshots = [];
 		foreach (UserLayer item in PintaCore.Workspace.ActiveDocument.Layers.UserLayers) {
 			snapshots.Add (item.Surface.Clone ());
 		}

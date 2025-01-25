@@ -133,16 +133,16 @@ public sealed class EditActions
 		menu.AppendSubmenu (Translations.GetString ("Palette"), palette_menu);
 
 		app.AddAccelAction (Undo, "<Primary>Z");
-		app.AddAccelAction (Redo, new[] { "<Primary><Shift>Z", "<Ctrl>Y" });
+		app.AddAccelAction (Redo, ["<Primary><Shift>Z", "<Ctrl>Y"]);
 		app.AddAccelAction (Cut, "<Primary>X");
 		app.AddAccelAction (Copy, "<Primary>C");
 		app.AddAccelAction (CopyMerged, "<Primary><Shift>C");
 		app.AddAccelAction (Paste, "<Primary>V");
 		app.AddAccelAction (PasteIntoNewLayer, "<Primary><Shift>V");
 		// Note: <Ctrl><Alt>V shortcut doesn't seem to work on Windows & macOS (bug 2047921). 
-		app.AddAccelAction (PasteIntoNewImage, new[] { "<Shift>V", "<Primary><Alt>V" });
+		app.AddAccelAction (PasteIntoNewImage, ["<Shift>V", "<Primary><Alt>V"]);
 		app.AddAccelAction (SelectAll, "<Primary>A");
-		app.AddAccelAction (Deselect, new[] { "<Primary><Shift>A", "<Ctrl>D" });
+		app.AddAccelAction (Deselect, ["<Primary><Shift>A", "<Ctrl>D"]);
 		app.AddAccelAction (EraseSelection, "Delete");
 		app.AddAccelAction (FillSelection, "BackSpace");
 		app.AddAccelAction (InvertSelection, "<Primary>I");

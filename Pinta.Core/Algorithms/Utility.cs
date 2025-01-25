@@ -119,7 +119,7 @@ public static class Utility
 			throw new ArgumentException ($"{nameof (sampleCount)} != ({nameof (quality)} * {nameof (quality)})");
 
 		if (sampleCount == 1)
-			return new[] { PointD.Zero };
+			return [PointD.Zero];
 
 		var result = new PointD[sampleCount];
 		for (int i = 0; i < sampleCount; ++i) {

@@ -100,7 +100,7 @@ public sealed class EllipseEngine : ShapeEngine
 	{
 		var points = CreatePoints ().ToImmutableArray ();
 		var fallbackPoints = CreateFallbackPoints (points);
-		GeneratedPoints = points.Concat (fallbackPoints).ToArray ();
+		GeneratedPoints = [.. points, .. fallbackPoints];
 	}
 
 	private IEnumerable<GeneratedPoint> CreateFallbackPoints (ImmutableArray<GeneratedPoint> points)

@@ -60,7 +60,7 @@ public sealed partial class TextEngine
 	public event EventHandler? Modified;
 
 	public TextEngine ()
-		: this (new[] { string.Empty })
+		: this ([string.Empty])
 	{ }
 
 	public TextEngine (IEnumerable<string> lines)
@@ -90,7 +90,7 @@ public sealed partial class TextEngine
 	public TextEngine Clone ()
 	{
 		TextEngine clonedTE = new () {
-			lines = lines.ToList (),
+			lines = [.. lines],
 			State = State,
 			current_pos = current_pos,
 			selection_start = selection_start,
@@ -120,7 +120,7 @@ public sealed partial class TextEngine
 
 	public KeyValuePair<TextPosition, TextPosition>[] SelectionRegions {
 		get {
-			List<KeyValuePair<TextPosition, TextPosition>> regions = new ();
+			List<KeyValuePair<TextPosition, TextPosition>> regions = [];
 
 			TextPosition start = TextPosition.Min (current_pos, selection_start);
 			TextPosition end = TextPosition.Max (current_pos, selection_start);
@@ -135,7 +135,7 @@ public sealed partial class TextEngine
 					p1 = new TextPosition (currentLinePos + 1, 0);
 			});
 
-			return regions.ToArray ();
+			return [.. regions];
 		}
 	}
 

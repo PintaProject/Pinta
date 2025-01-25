@@ -55,6 +55,7 @@ jobs:
     - name: Test
       run: make test
     - name: Verify code formatting
+      if: matrix.dotnet_version == '9.0.x'
       # Ignore warning CA1416 for unavailable platform-specific code, since this is unrelated to formatting.
       run: dotnet format --no-restore --verify-no-changes --exclude-diagnostics CA1416
     - name: Test Install
@@ -223,4 +224,4 @@ jobs:
         name: "Pinta-signed.exe"
         path: ./signed-artifacts/Pinta.exe
         if-no-files-found: error
-      
+

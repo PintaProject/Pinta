@@ -179,7 +179,7 @@ internal sealed class ColorGradient
 	}
 
 	private static IEnumerable<KeyValuePair<double, ColorBgra>> EmptyStops ()
-		=> Enumerable.Empty<KeyValuePair<double, ColorBgra>> ();
+		=> [];
 
 	/// <summary>
 	/// Creates gradient mapping based on start and end color,

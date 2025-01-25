@@ -101,11 +101,11 @@ public sealed class ShapeEngineCollection : List<ShapeEngine>
 public abstract class ShapeEngine
 {
 	//A collection of the original ControlPoints that the shape is based on and that the user interacts with.
-	public List<ControlPoint> ControlPoints { get; private set; } = new ();
-	public List<MoveHandle> ControlPointHandles { get; private set; } = new ();
+	public List<ControlPoint> ControlPoints { get; private set; } = [];
+	public List<MoveHandle> ControlPointHandles { get; private set; } = [];
 
 	//A collection of calculated GeneratedPoints that make up the entirety of the shape being drawn.
-	public GeneratedPoint[] GeneratedPoints { get; private protected set; } = Array.Empty<GeneratedPoint> ();
+	public GeneratedPoint[] GeneratedPoints { get; private protected set; } = [];
 
 	//An organized collection of the GeneratedPoints's points for optimized nearest point detection.
 	public OrganizedPointCollection OrganizedPoints { get; } = new ();

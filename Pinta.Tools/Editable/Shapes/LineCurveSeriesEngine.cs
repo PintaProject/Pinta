@@ -92,11 +92,11 @@ public sealed class LineCurveSeriesEngine : ShapeEngine
 	public override void GeneratePoints (int brush_width)
 	{
 		if (ControlPoints.Count < 2) {
-			GeneratedPoints = new[] { new GeneratedPoint (ControlPoints[0].Position, 0) };
+			GeneratedPoints = [new GeneratedPoint (ControlPoints[0].Position, 0)];
 			return;
 		}
 
-		List<GeneratedPoint> generatedPoints = new ();
+		List<GeneratedPoint> generatedPoints = [];
 
 		//Generate tangents for each of the smaller cubic Bezier curves that make up each segment of the resulting curve.
 
@@ -104,7 +104,7 @@ public sealed class LineCurveSeriesEngine : ShapeEngine
 		//control point's tension and the following control point's tension.
 
 		//Stores all of the tangent values.
-		List<PointD> bezierTangents = new ();
+		List<PointD> bezierTangents = [];
 
 		int pointCount = ControlPoints.Count - 1;
 		double pointCountDouble = pointCount;
@@ -180,7 +180,7 @@ public sealed class LineCurveSeriesEngine : ShapeEngine
 					0));
 		}
 
-		GeneratedPoints = generatedPoints.ToArray ();
+		GeneratedPoints = [.. generatedPoints];
 	}
 
 	/// <summary>

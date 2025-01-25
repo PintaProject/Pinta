@@ -56,7 +56,7 @@ partial class UserBlendOps
 	// (x / z) = ((x * masTable[i]) + masTable[i + 1]) >> masTable[i + 2)
 #pragma warning disable format
 	private static readonly uint[] mas_table =
-	{
+	[
 		0x00000000, 0x00000000, 0,  // 0
 		0x00000001, 0x00000000, 0,  // 1
 		0x00000001, 0x00000000, 1,  // 2
@@ -313,6 +313,6 @@ partial class UserBlendOps
 		0x81848DA9, 0x00000000, 39, // 253
 		0x10204081, 0x10204081, 36, // 254
 		0x80808081, 0x00000000, 39  // 255
-	};
+	];
 #pragma warning restore format
 }

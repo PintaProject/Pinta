@@ -169,7 +169,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		ChromeManager chromeManager,
 		ImageConverterManager imageFormats)
 	{
-		open_documents = new List<Document> ();
+		open_documents = [];
 		OpenDocuments = new ReadOnlyCollection<Document> (open_documents);
 		SelectionHandler = new SelectionModeHandler (systemManager);
 
