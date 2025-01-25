@@ -14,8 +14,8 @@ namespace Pinta.Gui.Addins;
 internal sealed class InstallDialog : Adw.Window
 {
 	private readonly SetupService service;
-	private readonly PackageCollection packages_to_install = new ();
-	private IReadOnlyList<string> addins_to_remove = Array.Empty<string> ();
+	private readonly PackageCollection packages_to_install = [];
+	private IReadOnlyList<string> addins_to_remove = [];
 	private readonly InstallErrorReporter error_reporter;
 
 	private readonly Adw.WindowTitle window_title;
@@ -218,7 +218,7 @@ internal sealed class InstallDialog : Adw.Window
 		uninstall_heading_label.SetLabel (Translations.GetString ("The following packages will be uninstalled:"));
 		uninstall_label.SetLabel (string.Join (Environment.NewLine, addinsToUninstall.Select (a => a.Name)));
 
-		HashSet<Addin> dependents = new ();
+		HashSet<Addin> dependents = [];
 		foreach (string id in addins_to_remove)
 			dependents.UnionWith (service.GetDependentAddins (id, true));
 
@@ -361,9 +361,9 @@ internal sealed class InstallErrorReporter : IErrorReporter
 
 	public InstallErrorReporter ()
 	{
-		errors = new List<string> ();
+		errors = [];
 		Errors = new ReadOnlyCollection<string> (errors);
-		warnings = new List<string> ();
+		warnings = [];
 		Warnings = new ReadOnlyCollection<string> (warnings);
 	}
 
