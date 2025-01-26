@@ -69,8 +69,8 @@ public sealed class TileEffect : BaseEffect
 		float preliminaryIntensity = Data.Intensity;
 		int tileSize = Data.TileSize;
 		int antiAliasSample = ANTI_ALIAS_LEVEL * ANTI_ALIAS_LEVEL + 1;
-		float sin = (float) Math.Sin (rotationTheta.Radians);
-		float cos = (float) Math.Cos (rotationTheta.Radians);
+		float sin = (float) Math.Sin (-rotationTheta.Radians);
+		float cos = (float) Math.Cos (-rotationTheta.Radians);
 		return new (
 			size: size,
 			halfWidth: size.Width / 2f,
