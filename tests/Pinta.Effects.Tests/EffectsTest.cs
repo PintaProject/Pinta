@@ -482,6 +482,7 @@ internal sealed class EffectsTest
 	public void Tile1 ()
 	{
 		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Rotation = new DegreesAngle (-30);
 		Utilities.TestEffect (effect, "tile1.png");
 	}
 
@@ -489,7 +490,7 @@ internal sealed class EffectsTest
 	public void Tile2 ()
 	{
 		TileEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.Rotation = new DegreesAngle (90);
+		effect.Data.Rotation = new DegreesAngle (-90);
 		effect.Data.TileSize = 32;
 		effect.Data.Intensity = 4;
 		Utilities.TestEffect (effect, "tile2.png");
@@ -499,6 +500,7 @@ internal sealed class EffectsTest
 	public void Tile3 ()
 	{
 		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Rotation = new DegreesAngle (-30);
 		effect.Data.WaveType = TileType.Curved;
 		Utilities.TestEffect (effect, "tile3.png");
 	}
@@ -507,6 +509,7 @@ internal sealed class EffectsTest
 	public void Tile4 ()
 	{
 		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Rotation = new DegreesAngle (-30);
 		effect.Data.TileSize = 10;
 		effect.Data.WaveType = TileType.Curved;
 		Utilities.TestEffect (effect, "tile4.png");
@@ -516,6 +519,7 @@ internal sealed class EffectsTest
 	public void Tile5 ()
 	{
 		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Rotation = new DegreesAngle (-30);
 		effect.Data.EdgeBehavior = EdgeBehavior.Clamp;
 		Utilities.TestEffect (effect, "tile5.png");
 	}
@@ -524,6 +528,7 @@ internal sealed class EffectsTest
 	public void Tile6 ()
 	{
 		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Rotation = new DegreesAngle (-30);
 		effect.Data.EdgeBehavior = EdgeBehavior.Reflect;
 		Utilities.TestEffect (effect, "tile6.png");
 	}
@@ -532,6 +537,7 @@ internal sealed class EffectsTest
 	public void Tile7 ()
 	{
 		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Rotation = new DegreesAngle (-30);
 		effect.Data.EdgeBehavior = EdgeBehavior.Primary;
 		Utilities.TestEffect (effect, "tile7.png");
 	}
@@ -540,6 +546,7 @@ internal sealed class EffectsTest
 	public void Tile8 ()
 	{
 		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Rotation = new DegreesAngle (-30);
 		effect.Data.EdgeBehavior = EdgeBehavior.Secondary;
 		Utilities.TestEffect (effect, "tile8.png");
 	}
@@ -548,6 +555,7 @@ internal sealed class EffectsTest
 	public void Tile9 ()
 	{
 		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Rotation = new DegreesAngle (-30);
 		effect.Data.EdgeBehavior = EdgeBehavior.Transparent;
 		Utilities.TestEffect (effect, "tile9.png");
 	}
@@ -556,6 +564,7 @@ internal sealed class EffectsTest
 	public void Tile10 ()
 	{
 		TileEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Rotation = new DegreesAngle (-30);
 		effect.Data.EdgeBehavior = EdgeBehavior.Original;
 		Utilities.TestEffect (effect, "tile10.png");
 	}
