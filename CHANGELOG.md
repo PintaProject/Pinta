@@ -6,17 +6,17 @@ All notable changes to this project (beginning with version 1.7) will be documen
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
 - @evgeniy-harchenko
-- @yarikoptic
+- @f-i-l-i-p
+- @khoidauminh
 - @Lehonti
-- @zWolfrost
-- @ptixed
 - @logiclrd
 - @Matthieu-LAURENT39
-- @khoidauminh
 - @potatoes1286
-- @TheodorLasse
-- @f-i-l-i-p
+- @ptixed
 - @solarnomad7
+- @TheodorLasse
+- @yarikoptic
+- @zWolfrost
 
 ### Added
 - Ported to GTK4 and libadwaita
