@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-29 01:40+0000\n"
-"PO-Revision-Date: 2024-07-17 14:09+0000\n"
-"Last-Translator: Lucas Campello <lucas.campello@gmail.com>\n"
+"PO-Revision-Date: 2025-01-30 13:11+0000\n"
+"Last-Translator: Tiago Lucas Flach <tiagolucas9830@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "pinta/pinta/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -81,7 +81,7 @@ msgstr "Incluído"
 
 #: ../Pinta/MainWindow.cs:397
 msgid "Adjustments"
-msgstr ""
+msgstr "Ajustes"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
@@ -90,7 +90,7 @@ msgstr "Pós-seleção"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Alinhar Objeto"
 
 #: ../Pinta.Core/Actions/EditActions.cs:472
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
@@ -100,11 +100,11 @@ msgstr "Todos os arquivos"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Gradiente Alfa"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
@@ -144,7 +144,7 @@ msgstr "Suavização Ligada"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:268
 msgid "Arrow"
-msgstr "Arrow"
+msgstr "Seta"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:37
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
@@ -155,7 +155,7 @@ msgstr "Artístico"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:238
 msgid "Auto"
@@ -172,7 +172,7 @@ msgstr "Níveis Automáticos"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:215
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "Disponível no repositório: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:145
 msgid "Background"
@@ -201,7 +201,7 @@ msgstr "Melhor Ajuste"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilinear"
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
@@ -377,18 +377,25 @@ msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
+"Clique e arraste para desenhar uma seleção retangular.\n"
+"Segure Shift para restringir a um quadrado."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
 msgstr ""
+"Clique e arraste para desenhar uma seleção elíptica.\n"
+"Segure Shift para restringir a um círculo."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
 msgstr ""
+"Clique e arraste para desenhar o gradiente da cor primária para a secundária."
+"\n"
+"Clique com o botão direito para inverter."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
@@ -494,7 +501,7 @@ msgstr "Saturação da Cor"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:185
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
 msgid "Color Scheme"
-msgstr ""
+msgstr "Esquema de Cores"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:189
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:182
@@ -548,7 +555,7 @@ msgstr ""
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:119
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr ""
+msgstr "Não foi possível importar a camada \"{0}\" de {1}"
 
 #: ../Pinta.Core/Classes/Palette.cs:194
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:444
@@ -590,7 +597,7 @@ msgstr "Cortar"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:167
 msgid "Dark"
-msgstr ""
+msgstr "Escuro"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
@@ -603,7 +610,7 @@ msgstr "Dash"
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:163
 msgid "Default"
-msgstr ""
+msgstr "Padrão"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:350
@@ -665,7 +672,7 @@ msgstr "Não trocar de ferramenta"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:209
 #, csharp-format
 msgid "Download size: {0}"
-msgstr ""
+msgstr "Tamanho do download: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:337
@@ -690,7 +697,7 @@ msgstr "Efeito_s"
 
 #: ../Pinta/MainWindow.cs:391
 msgid "Effects"
-msgstr ""
+msgstr "Efeitos"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
@@ -739,11 +746,11 @@ msgstr "Excluir (-) (Clique Direito)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:227
 msgid "Expand"
-msgstr ""
+msgstr "Expandir"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
-msgstr ""
+msgstr "Pacotes de extensão"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:173
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
@@ -760,7 +767,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:188
 msgid "Failed to load extension package"
-msgstr ""
+msgstr "Falha ao carregar pacote de extensão"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:476
 msgid "Failed to open image"
@@ -789,7 +796,7 @@ msgstr "Relatar um erro"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Arquivos para abrir"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:270
 msgid "Fill Background"
@@ -1065,7 +1072,7 @@ msgstr "Instalar"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Instalar Pacote de Extensão"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:113
 msgid "Install from file..."
@@ -1174,6 +1181,13 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"Clique com o botão esquerdo e arraste a seleção para mover o conteúdo "
+"selecionado.\n"
+"Segure {0} para dimensionar em vez de mover.\n"
+"Clique com o botão direito e arraste a seleção para girar o conteúdo "
+"selecionado.\n"
+"Segure Shift para girar em etapas.\n"
+"Use as teclas de seta para mover o conteúdo selecionado por um único pixel."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
 #, csharp-format
@@ -1184,6 +1198,13 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selection outline by a single pixel."
 msgstr ""
+"Clique com o botão esquerdo e arraste a seleção para mover o contorno da "
+"seleção.\n"
+"Segure {0} para dimensionar em vez de mover.\n"
+"Clique com o botão direito e arraste a seleção para girar o contorno da "
+"seleção.\n"
+"Segure Shift para girar em etapas.\n"
+"Use as teclas de seta para mover o contorno da seleção em um único pixel."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:58
@@ -1229,6 +1250,9 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
+"Clique com o botão esquerdo para desenhar linhas de um pixel de largura de "
+"forma livre com a cor primária.\n"
+"Clique com o botão direito para usar a cor secundária."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
@@ -1267,12 +1291,17 @@ msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
+"Clique com o botão esquerdo para substituir a cor secundária pela cor "
+"primária.\n"
+"Clique com o botão direito para inverter."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"Clique com o botão esquerdo para definir a cor primária.\n"
+"Clique com o botão direito para definir a cor secundária."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:268
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -1295,6 +1324,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"Clique com o botão esquerdo para aumentar o zoom.\n"
+"Clique com o botão direito para diminuir o zoom.\n"
+"Clique e arraste para aumentar o zoom da seleção."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:337
 msgid "Length"
@@ -1315,7 +1347,7 @@ msgstr "Licença"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Light"
-msgstr ""
+msgstr "Claro"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1400,7 +1432,7 @@ msgstr "Modificado Em"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:145
 msgid "More Information..."
-msgstr ""
+msgstr "Mais Informações..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 msgid "Motion Blur"
@@ -1434,7 +1466,7 @@ msgstr "Nome:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Vizinho Mais Próximo"
 
 #: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New"
@@ -1459,7 +1491,7 @@ msgstr "Novo..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
-msgstr ""
+msgstr "Nenhum Item Encontrado"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
@@ -1491,7 +1523,7 @@ msgstr ""
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "Número de threads a serem usados para renderização"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:419
 msgid "OK"
@@ -1922,11 +1954,11 @@ msgstr "Substituir"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
-msgstr ""
+msgstr "Reportar Erro..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:73
 msgid "Resampling:"
-msgstr ""
+msgstr "Reamostragem:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:62
 msgid "Reseed"
@@ -2238,7 +2270,7 @@ msgstr "A área de transferência não possui uma imagem."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:189
 msgid "The file may be an invalid or corrupt extension package"
-msgstr ""
+msgstr "O arquivo pode ser um pacote de extensão inválido ou corrompido"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:74
 msgid "The following dependencies could not be resolved:"
@@ -2275,6 +2307,8 @@ msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
+"Os pacotes de extensão selecionados não podem ser instalados porque há "
+"conflitos de dependência."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:348
 msgid "The uninstallation failed!"
@@ -2289,6 +2323,8 @@ msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
 msgstr ""
+"Existem outros pacotes de extensão que dependem dos anteriores e que também "
+"serão desinstalados:"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:133
 msgid "Thickness"
@@ -2404,7 +2440,7 @@ msgstr "Desinstalar"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:171
 msgid "Uninstall..."
-msgstr ""
+msgstr "Desinstalar..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
@@ -2423,11 +2459,11 @@ msgstr "Formato do arquivo não suportado"
 
 #: ../Pinta.Core/Classes/Palette.cs:155
 msgid "Unsupported palette format"
-msgstr ""
+msgstr "Formato de paleta não suportado"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:162
 msgid "Update..."
-msgstr ""
+msgstr "Atualizar..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:91
 msgid "Updates"
@@ -2453,7 +2489,7 @@ msgstr ""
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:202
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "Versão: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:299
@@ -2568,11 +2604,11 @@ msgstr "_Ajustes"
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cancelar"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
-msgstr ""
+msgstr "_Descartar"
 
 #: ../Pinta/MainWindow.cs:342
 msgid "_Edit"
@@ -2599,11 +2635,11 @@ msgstr "_Camadas"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:193 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr ""
+msgstr "_Salvar"
 
 #: ../Pinta/MainWindow.cs:346
 msgid "_View"
@@ -2662,7 +2698,8 @@ msgstr ""
 "  juliocbm https://launchpad.net/~emaildojulio\n"
 "  lucca https://launchpad.net/~lbpprado\n"
 "  maxwell souza https://launchpad.net/~maxjf1\n"
-"  rwsilva32 https://launchpad.net/~rwsilva32"
+"  rwsilva32 https://launchpad.net/~rwsilva32\n"
+"  Tiago Lucas Flach https://github.com/tiagoFlach"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:49
