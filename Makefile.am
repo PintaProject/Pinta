@@ -44,8 +44,9 @@ build/bin/Pinta.dll: Pinta.sln
 # target: build - Build Pinta.
 build: build/bin/Pinta.dll
 
+# Note we only publish the Pinta project, not the whole solution, to avoid races publishing to the same folder (#1241)
 publish/Pinta.dll: Pinta.sln
-	cd $(srcdir) && $(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) --self-contained false -p:PublishDir=$(abs_srcdir)/publish
+	cd $(srcdir) && $(DOTNET_CMD) publish Pinta/Pinta.csproj $(PINTA_BUILD_OPTS) --self-contained false -p:PublishDir=$(abs_srcdir)/publish
 
 # target: publish - Build Pinta for deployment.
 publish: publish/Pinta.dll
@@ -108,7 +109,7 @@ uninstall-hook:
 
 # target: releasezip - Make a self-contained release zip file.
 releasezip:
-	$(DOTNET_CMD) publish Pinta.sln $(PINTA_BUILD_OPTS) -r linux-x64 --self-contained true -p:PublishDir=$(abs_srcdir)/release
+	$(DOTNET_CMD) publish Pinta/Pinta.csproj $(PINTA_BUILD_OPTS) -r linux-x64 --self-contained true -p:PublishDir=$(abs_srcdir)/release
 	cd $(abs_srcdir)/release && zip -r ../$(RELEASE_FILE).zip * -x "*.pdb"
 
 EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Addins Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \

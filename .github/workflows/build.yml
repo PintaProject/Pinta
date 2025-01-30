@@ -188,7 +188,7 @@ jobs:
     - name: Build Installer
       run: |
         choco install innosetup -y -v
-        dotnet publish Pinta.sln -p:BuildTranslations=true -p:MinGWFolder=${MINGW_PREFIX} -c Release -r win-x64 --self-contained true -p:PublishDir=../release/bin
+        dotnet publish Pinta/Pinta.csproj -p:BuildTranslations=true -p:MinGWFolder=${MINGW_PREFIX} -c Release -r win-x64 --self-contained true -p:PublishDir=../release/bin
         cp -r release/bin/icons release/bin/locale release/share/
         rm -rf release/bin/icons release/bin/locale
         cp installer/macos/hicolor.index.theme release/share/icons/hicolor/index.theme
