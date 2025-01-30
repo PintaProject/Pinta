@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-29 01:40+0000\n"
-"PO-Revision-Date: 2024-11-08 18:00+0000\n"
-"Last-Translator: Melr1 19 An220 <achille.toupin@laposte.net>\n"
+"PO-Revision-Date: 2025-01-30 22:25+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.10-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -73,7 +73,7 @@ msgstr "Ajouter du bruit"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr "Gestionnaire d'ajouts..."
+msgstr "Gestionnaire d’ajouts..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
 msgid "Added"
@@ -90,7 +90,7 @@ msgstr "Après la sélection"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr "Aligner l'Objet"
+msgstr "Aligner l’Objet"
 
 #: ../Pinta.Core/Actions/EditActions.cs:472
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
@@ -100,7 +100,7 @@ msgstr "Tous les fichiers"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Alpha"
-msgstr ""
+msgstr "Alpha"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
@@ -303,11 +303,11 @@ msgstr "Canevas"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "Paramètres de la grille du canevas"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Grille du canevas…"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:126
 msgid "Cell Size"
@@ -419,7 +419,7 @@ msgstr "Cliquer pour sélectionner une région de couleur similaire."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
 msgid "Click to select secondary color."
-msgstr "Cliquer pour sélectionner la couleur secondaire"
+msgstr "Cliquer pour sélectionner la couleur secondaire."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:446
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:277
@@ -431,7 +431,7 @@ msgstr "Cliquez pour passer de la couleur primaire à la couleur secondaire."
 #: ../Pinta/Dialogs/NewImageDialog.cs:441
 #: ../Pinta/Dialogs/NewImageDialog.cs:534
 msgid "Clipboard"
-msgstr "Presse-papier"
+msgstr "Presse-papiers"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:46
 msgid "Clone Stamp"
@@ -649,7 +649,7 @@ msgstr "Distance"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:250
 msgid "Distance Metric"
-msgstr ""
+msgstr "Distance métrique"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:28
 #: ../Pinta.Effects/Effects/DentsEffect.cs:53
@@ -672,7 +672,7 @@ msgstr "Ne pas changer d'outil"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:209
 #, csharp-format
 msgid "Download size: {0}"
-msgstr "Taille du téléchargement: {0}"
+msgstr "Taille du téléchargement : {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:337
@@ -885,7 +885,7 @@ msgstr "Floyd-Steinberg"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr ""
+msgstr "Floyd-Steinberg Lite"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
@@ -1153,7 +1153,7 @@ msgstr "Propriétés du calque"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Layer Properties..."
-msgstr "Propriétés du calque"
+msgstr "Propriétés du calque…"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:88
 msgid "Layer Shown"
@@ -1256,7 +1256,7 @@ msgid ""
 "the secondary color."
 msgstr ""
 "Clic gauche pour remplir la région avec la couleur principale, clic droit "
-"pour remplir avec la couleur secondaire"
+"pour remplir avec la couleur secondaire."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:98
 msgid ""
@@ -1908,7 +1908,7 @@ msgstr "Actualiser"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:90
 msgid "Released under the MIT X11 License."
-msgstr "Mis à disposition sous licence MIT X11"
+msgstr "Mis à disposition sous licence MIT X11."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:40
 msgid "Relief"
@@ -2248,7 +2248,7 @@ msgstr ""
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:208
 msgid "The clipboard does not contain an image."
-msgstr "Le presse-papier ne contient pas d'image"
+msgstr "Le presse-papiers ne contient pas d’image."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:189
 msgid "The file may be an invalid or corrupt extension package"
