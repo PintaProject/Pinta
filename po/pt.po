@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-29 01:40+0000\n"
-"PO-Revision-Date: 2025-01-30 13:11+0000\n"
-"Last-Translator: Tiago Lucas Flach <tiagolucas9830@gmail.com>\n"
+"PO-Revision-Date: 2025-01-31 23:03+0000\n"
+"Last-Translator: Bruno Fragoso <darth_signa@hotmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/pinta/pinta/"
 "pt/>\n"
 "Language: pt\n"
@@ -2070,9 +2070,8 @@ msgid "Sat"
 msgstr "Sat"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:512
-#, fuzzy
 msgid "Sat & Value"
-msgstr "Sat & Valor"
+msgstr "Sat e Valor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
