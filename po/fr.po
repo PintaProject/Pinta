@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-29 01:40+0000\n"
 "PO-Revision-Date: 2025-01-31 23:03+0000\n"
-"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
+"Last-Translator: Melr1 19 An220 <achille.toupin@laposte.net>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -885,7 +885,7 @@ msgstr "Floyd-Steinberg"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr "Floyd-Steinberg Lite"
+msgstr "Floyd-Steinberg Léger"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
@@ -1597,11 +1597,11 @@ msgstr "Sélection des contours"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:216
 msgid "Outline Border"
-msgstr ""
+msgstr "Bordure de contour"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:24
 msgid "Outline Edge"
-msgstr ""
+msgstr "Bord de contour"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
 msgid "Outline Object"
@@ -2346,7 +2346,7 @@ msgstr "Taille des carreaux"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:233
 msgid "Tile Type"
-msgstr ""
+msgstr "Type de tuile"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
 msgid "Tip: Right-click to remove control points."
@@ -2416,7 +2416,7 @@ msgstr "Tordre"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
 msgid "Two-Row Sierra"
-msgstr ""
+msgstr "Sierra (2 rangs)"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
