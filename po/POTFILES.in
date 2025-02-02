@@ -15,6 +15,8 @@ Pinta.Core/Actions/WindowActions.cs
 Pinta.Core/Algorithms/ColorDifference.cs
 Pinta.Core/Algorithms/Histogram.cs
 Pinta.Core/Algorithms/HistogramRGB.cs
+Pinta.Core/Algorithms/Julia.cs
+Pinta.Core/Algorithms/Mandelbrot.cs
 Pinta.Core/Algorithms/Mathematics.cs
 Pinta.Core/Algorithms/Utility.cs
 Pinta.Core/Classes/Angle.cs
