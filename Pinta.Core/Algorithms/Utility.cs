@@ -123,12 +123,9 @@ public static class Utility
 
 		var result = new PointD[sampleCount];
 		for (int i = 0; i < sampleCount; ++i) {
-
 			double y = (i + 1d) / (sampleCount + 1d);
-
 			double baseX = y * quality;
 			double x = baseX - Math.Truncate (baseX);
-
 			result[i] = new PointD (x - 0.5d, y - 0.5d);
 		}
 		return result;
@@ -151,7 +148,7 @@ public static class Utility
 	// i = z * 3;
 	// (x / z) = ((x * masTable[i]) + masTable[i + 1]) >> masTable[i + 2)
 	private static readonly uint[] mas_table =
-	{
+	[
 		0x00000000, 0x00000000, 0,  // 0
 		0x00000001, 0x00000000, 0,  // 1
 		0x00000001, 0x00000000, 1,  // 2
@@ -408,7 +405,7 @@ public static class Utility
 		0x81848DA9, 0x00000000, 39, // 253
 		0x10204081, 0x10204081, 36, // 254
 		0x80808081, 0x00000000, 39, // 255
-	};
+	];
 
 	/// <summary>Gets the nearest step angle in radians.</summary>
 	/// 
@@ -419,11 +416,10 @@ public static class Utility
 	/// 
 	public static RadiansAngle GetNearestStepAngle (RadiansAngle angle, int steps)
 	{
-		if (steps < 1)
-			throw new ArgumentOutOfRangeException (nameof (steps));
+		ArgumentOutOfRangeException.ThrowIfLessThan (steps, 1);
 
-		const double fullTurn = RadiansAngle.MAX_RADIANS;
-		double stepAngle = fullTurn / steps;
+		const double FULL_TURN = RadiansAngle.MAX_RADIANS;
+		double stepAngle = FULL_TURN / steps;
 		double sector = Math.Round (angle.Radians / stepAngle) * stepAngle;
 
 		return new (sector);
@@ -458,7 +454,7 @@ public static class Utility
 		// Use the entire image bounds by default, or restrict to the provided search area.
 		RectangleI rect = searchArea ?? image.GetBounds ();
 		// Get the background color from the top-left pixel of the rectangle
-		Cairo.Color borderColor = image.GetColorBgra (new PointI (rect.Left, rect.Top)).ToCairoColor ();
+		Color borderColor = image.GetColorBgra (new PointI (rect.Left, rect.Top)).ToCairoColor ();
 
 		// Top down.
 		for (int y = rect.Top; y < rect.Bottom; ++y) {
