@@ -348,7 +348,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		foreach (var display in color_displays)
 			display.SetSizeRequest (palette_display_size, palette_display_size);
-		var pickerSurfaceDrawSize = (picker_surface_radius + picker_surface_padding) * 2;
+		int pickerSurfaceDrawSize = (picker_surface_radius + picker_surface_padding) * 2;
 
 		picker_surface_box.WidthRequest = pickerSurfaceDrawSize;
 		picker_surface_box.Spacing = spacing;
@@ -513,7 +513,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 
 		// When Gir.Core supports it, this should probably be replaced with a toggle group.
-		var pickerSurfaceHueSat = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Hue & Sat"));
+		Gtk.ToggleButton pickerSurfaceHueSat = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Hue & Sat"));
 		if (picker_surface_type == ColorSurfaceType.HueAndSat)
 			pickerSurfaceHueSat.Toggle ();
 		pickerSurfaceHueSat.OnToggled += (sender, args) => {
@@ -522,7 +522,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			UpdateView ();
 		};
 
-		var pickerSurfaceSatVal = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Sat & Value"));
+		Gtk.ToggleButton pickerSurfaceSatVal = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Sat & Value"));
 		if (picker_surface_type == ColorSurfaceType.SatAndVal)
 			pickerSurfaceSatVal.Toggle ();
 		pickerSurfaceSatVal.OnToggled += (sender, args) => {
@@ -574,7 +574,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		sliders_box = new Gtk.Box { Spacing = spacing };
 		sliders_box.SetOrientation (Gtk.Orientation.Vertical);
 
-		var hexBox = new Gtk.Box { Spacing = spacing };
+		Gtk.Box hexBox = new () { Spacing = spacing };
 
 		hexBox.Append (new Gtk.Label { Label_ = Translations.GetString ("Hex"), WidthRequest = 50 });
 		hex_entry = new Gtk.Entry { Text_ = CurrentColor.ToHex (), MaxWidthChars = 10 };
@@ -745,27 +745,42 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		click_gesture.OnPressed += (_, e) => {
 
 			PointD absPos = new (e.X, e.Y);
-			PointD relPos;
 
-			if (picker_surface.IsMouseInDrawingArea (this, absPos, out relPos)) {
+			if (picker_surface.IsMouseInDrawingArea (this, absPos, out PointD rel1)) {
+
 				mouse_on_picker_surface = true;
 				SetColorFromPickerSurface (new PointD (e.X, e.Y));
-			} else if (swatch_box.Visible && swatch_recent.IsMouseInDrawingArea (this, absPos, out relPos)) {
-				var recent_index = StatusBarColorPaletteWidget.GetSwatchAtLocation (relPos, new RectangleD (), true);
 
-				if (recent_index >= 0) {
-					CurrentColor = PintaCore.Palette.RecentlyUsedColors.ElementAt (recent_index);
-					UpdateView ();
-				}
-			} else if (swatch_box.Visible && swatch_palette.IsMouseInDrawingArea (this, absPos, out relPos)) {
-				var index = StatusBarColorPaletteWidget.GetSwatchAtLocation (relPos, new RectangleD ());
+				return;
+			}
 
-				if (index >= 0) {
-					CurrentColor = PintaCore.Palette.CurrentPalette[index];
-					UpdateView ();
-				}
+			if (swatch_box.Visible && swatch_recent.IsMouseInDrawingArea (this, absPos, out PointD rel2)) {
+
+				int recent_index = StatusBarColorPaletteWidget.GetSwatchAtLocation (rel2, new RectangleD (), true);
+
+				if (recent_index < 0)
+					return;
+
+				CurrentColor = PintaCore.Palette.RecentlyUsedColors.ElementAt (recent_index);
+
+				UpdateView ();
+
+				return;
+
+			}
+
+			if (swatch_box.Visible && swatch_palette.IsMouseInDrawingArea (this, absPos, out PointD rel3)) {
+
+				int index = StatusBarColorPaletteWidget.GetSwatchAtLocation (rel3, new RectangleD ());
+
+				if (index < 0)
+					return;
+
+				CurrentColor = PintaCore.Palette.CurrentPalette[index];
+				UpdateView ();
 			}
 		};
+
 		click_gesture.OnReleased += (_, e) => {
 			mouse_on_picker_surface = false;
 		};
@@ -820,29 +835,36 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// we only do this on off active because otherwise the recent color palette would be spammed
 		// every time the color changes
 		this.OnNotify += (sender, args) => {
-			if (args.Pspec.GetName () == "is-active" && livePalette) {
-				if (!IsActive) {
-					this.SetOpacity (0.85f);
-					if (PintaCore.Palette.PrimaryColor != Colors[0])
-						PintaCore.Palette.PrimaryColor = Colors[0];
-					if (PintaCore.Palette.SecondaryColor != Colors[1])
-						PintaCore.Palette.SecondaryColor = Colors[1];
-				} else {
-					this.SetOpacity (1f);
-				}
+
+			if (args.Pspec.GetName () != "is-active" || !livePalette)
+				return;
+
+			if (IsActive) {
+				this.SetOpacity (1f);
+				return;
 			}
+
+			this.SetOpacity (0.85f);
+
+			if (PintaCore.Palette.PrimaryColor != Colors[0])
+				PintaCore.Palette.PrimaryColor = Colors[0];
+
+			if (PintaCore.Palette.SecondaryColor != Colors[1])
+				PintaCore.Palette.SecondaryColor = Colors[1];
 		};
 
 		if (livePalette) {
-			EventHandler PrimaryChangeHandler = (sender, args) => {
-				Colors[0] = ((PaletteManager) sender!).PrimaryColor;
 
+			void PrimaryChangeHandler (object? sender, EventArgs args)
+			{
+				Colors[0] = ((PaletteManager) sender!).PrimaryColor;
 				UpdateView ();
-			};
-			EventHandler SecondaryChangeHandler = (sender, args) => {
+			}
+			void SecondaryChangeHandler (object? sender, EventArgs args)
+			{
 				Colors[1] = ((PaletteManager) sender!).SecondaryColor;
 				UpdateView ();
-			};
+			}
 
 			PintaCore.Palette.PrimaryColorChanged += PrimaryChangeHandler;
 			PintaCore.Palette.SecondaryColorChanged += SecondaryChangeHandler;
@@ -976,21 +998,25 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	// Takes in HSV values as tuple (h,s,v) and returns the position of that color in the picker surface.
 	private PointD HsvToPickerLocation (HsvColor hsv, int radius)
 	{
-		if (picker_surface_type == ColorSurfaceType.HueAndSat) {
-			double rad = hsv.Hue * (Math.PI / 180.0);
-			int mult = radius;
-			double mag = hsv.Sat * mult;
-			double x = Math.Cos (rad) * mag;
-			double y = Math.Sin (rad) * mag;
-			return new PointD (x, -y);
-		} else if (picker_surface_type == ColorSurfaceType.SatAndVal) {
-			int size = radius * 2;
-			double x = hsv.Val * (size - 1);
-			double y = size - hsv.Sat * (size - 1);
-			return new PointD (x - radius, y - radius);
-		}
+		switch (picker_surface_type) {
+			case ColorSurfaceType.HueAndSat: {
+					double rad = hsv.Hue * (Math.PI / 180.0);
+					int mult = radius;
+					double mag = hsv.Sat * mult;
+					double x = Math.Cos (rad) * mag;
+					double y = Math.Sin (rad) * mag;
+					return new (x, -y);
+				}
 
-		return PointD.Zero;
+			case ColorSurfaceType.SatAndVal: {
+					int size = radius * 2;
+					double x = hsv.Val * (size - 1);
+					double y = size - hsv.Sat * (size - 1);
+					return new (x - radius, y - radius);
+				}
+			default:
+				return PointD.Zero;
+		}
 	}
 
 	void SetColorFromPickerSurface (PointD point)
@@ -1002,27 +1028,35 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			out double x,
 			out double y);
 
-		PointI centre = new (picker_surface_radius, picker_surface_radius);
 		PointI cursor = new ((int) (point.X - x), (int) (point.Y - y));
 
-		PointI vecCursor = cursor - centre;
-
 		if (picker_surface_type == ColorSurfaceType.HueAndSat) {
+
+			PointI centre = new (picker_surface_radius, picker_surface_radius);
+			PointI vecCursor = cursor - centre;
+
 			double hue = (Math.Atan2 (vecCursor.Y, -vecCursor.X) + Math.PI) / (2f * Math.PI) * 360f;
 			double sat = Math.Min (vecCursor.Magnitude () / picker_surface_radius, 1);
+
 			CurrentColor = CurrentColor.CopyHsv (hue: hue, sat: sat);
+
 		} else if (picker_surface_type == ColorSurfaceType.SatAndVal) {
+
 			int size = picker_surface_radius * 2;
+
 			if (cursor.X > size - 1)
 				cursor = cursor with { X = size - 1 };
 			if (cursor.X < 0)
 				cursor = cursor with { X = 0 };
+
 			if (cursor.Y > size - 1)
 				cursor = cursor with { Y = size - 1 };
 			if (cursor.Y < 0)
 				cursor = cursor with { Y = 0 };
+
 			double s = 1f - (double) cursor.Y / (size - 1);
 			double v = (double) cursor.X / (size - 1);
+
 			CurrentColor = CurrentColor.CopyHsv (sat: s, value: v);
 		}
 		UpdateView ();
