@@ -32,8 +32,9 @@ internal sealed class AddinInfoView : Adw.Bin
 	public event EventHandler? OnAddinChanged;
 
 	private readonly SystemManager system;
+	private readonly IChromeService chrome;
 
-	public AddinInfoView (SystemManager system)
+	public AddinInfoView (SystemManager system, IChromeService chrome)
 	{
 		// --- Control creation
 
@@ -112,6 +113,7 @@ internal sealed class AddinInfoView : Adw.Bin
 		view_stack = viewStack;
 
 		this.system = system;
+		this.chrome = chrome;
 	}
 
 	private Gtk.Switch CreateEnableSwitch ()
@@ -172,10 +174,8 @@ internal sealed class AddinInfoView : Adw.Bin
 		result.AddCssClass (AdwaitaStyles.DestructiveAction);
 		result.OnClicked += (_, _) => HandleUninstallButtonClicked ();
 		result.Visible = false;
-
 		result.Hexpand = true;
 		result.Halign = Gtk.Align.End;
-
 		return result;
 	}
 
@@ -243,7 +243,7 @@ internal sealed class AddinInfoView : Adw.Bin
 		if (current_item.RepositoryEntry is null)
 			throw new InvalidOperationException ("The install button should not be available unless there is a repository entry");
 
-		InstallDialog dialog = new (PintaCore.Chrome.MainWindow, current_item.Service);
+		InstallDialog dialog = new (chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
 		dialog.InitForInstall ([current_item.RepositoryEntry]);
 		dialog.Show ();
@@ -257,7 +257,7 @@ internal sealed class AddinInfoView : Adw.Bin
 		if (current_item.RepositoryEntry is null)
 			throw new InvalidOperationException ("The update button should not be available unless there is a repository entry");
 
-		InstallDialog dialog = new (PintaCore.Chrome.MainWindow, current_item.Service);
+		InstallDialog dialog = new (chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
 		dialog.InitForInstall ([current_item.RepositoryEntry]);
 		dialog.Show ();
@@ -271,7 +271,7 @@ internal sealed class AddinInfoView : Adw.Bin
 		if (current_item.Addin is null)
 			throw new InvalidOperationException ("The uninstall button should not be available unless there is an installed addin");
 
-		InstallDialog dialog = new (PintaCore.Chrome.MainWindow, current_item.Service);
+		InstallDialog dialog = new (chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
 		dialog.InitForUninstall ([current_item.Addin]);
 		dialog.Show ();
