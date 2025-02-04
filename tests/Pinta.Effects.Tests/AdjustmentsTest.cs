@@ -49,7 +49,7 @@ internal sealed class AdjustmentsTest
 			{ 255, 255 }
 		};
 
-		effect.Data.ControlPoints = new[] { points };
+		effect.Data.ControlPoints = [points];
 		effect.Data.Mode = ColorTransferMode.Luminosity;
 
 		Utilities.TestEffect (effect, "curves1.png");
@@ -85,7 +85,7 @@ internal sealed class AdjustmentsTest
 		LevelsEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.Levels = new UnaryPixelOps.Level (
 			ColorBgra.Black, ColorBgra.White,
-			new float[] { 0.7f, 0.8f, 0.9f },
+			[0.7f, 0.8f, 0.9f],
 			ColorBgra.Red, ColorBgra.Green);
 
 		Utilities.TestEffect (effect, "level1.png");

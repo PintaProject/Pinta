@@ -9,11 +9,11 @@ namespace Pinta.Core.Tests;
 internal sealed class TextEngineTest
 {
 	// The string below contains combining characters, so there are fewer text elements than chars.
-	private readonly List<string> testSnippet = new () {
+	private readonly IReadOnlyList<string> test_snippet = [
 		"a\u0304\u0308bc\u0327",
 		"c\u0327ba\u0304\u0308",
 		"bc\u0327a\u0304\u0308"
-	};
+	];
 
 	private static string LinesToString (string[] lines) => string.Join (Environment.NewLine, lines);
 
@@ -26,45 +26,45 @@ internal sealed class TextEngineTest
 	[Test]
 	public void PerformEnter ()
 	{
-		var engine = new TextEngine (new List<string> () { "foo", "bar" });
+		TextEngine engine = new (["foo", "bar"]);
 		engine.SetCursorPosition (new TextPosition (1, 1), true);
 		engine.PerformEnter ();
 
 		Assert.That (engine.LineCount, Is.EqualTo (3));
-		Assert.That (engine.ToString (), Is.EqualTo (LinesToString (new string[] { "foo", "b", "ar" })));
+		Assert.That (engine.ToString (), Is.EqualTo (LinesToString (["foo", "b", "ar"])));
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (2, 0)));
 	}
 
 	[Test]
 	public void DeleteMultiLineSelection ()
 	{
-		var engine = new TextEngine (new List<string> () { "line 1", "line 2", "line 3" });
+		TextEngine engine = new (["line 1", "line 2", "line 3"]);
 		engine.SetCursorPosition (new TextPosition (0, 2), true);
 		engine.PerformDown (true);
 		engine.PerformDown (true);
 		engine.PerformDelete ();
 
 		Assert.That (engine.LineCount, Is.EqualTo (1));
-		Assert.That (engine.ToString (), Is.EqualTo (LinesToString (new string[] { "line 3" })));
+		Assert.That (engine.ToString (), Is.EqualTo (LinesToString (["line 3"])));
 	}
 
 	[Test]
 	public void DeleteSelection ()
 	{
-		var engine = new TextEngine (new List<string> () { "это тест", "это еще один тест" });
+		TextEngine engine = new (["это тест", "это еще один тест"]);
 		engine.SetCursorPosition (new TextPosition (0, 2), true);
 		engine.PerformDown (true);
 		engine.PerformDelete ();
 
 		Assert.That (engine.LineCount, Is.EqualTo (1));
-		Assert.That (engine.ToString (), Is.EqualTo (LinesToString (new string[] { "это еще один тест" })));
+		Assert.That (engine.ToString (), Is.EqualTo (LinesToString (["это еще один тест"])));
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 2)));
 	}
 
 	[Test]
 	public void BackspaceJoinLines ()
 	{
-		var engine = new TextEngine (new[] { "foo", "bar" });
+		TextEngine engine = new (["foo", "bar"]);
 		engine.SetCursorPosition (new TextPosition (1, 0), true);
 		engine.PerformBackspace ();
 
@@ -76,7 +76,7 @@ internal sealed class TextEngineTest
 	[Test]
 	public void Backspace ()
 	{
-		var engine = new TextEngine (testSnippet);
+		TextEngine engine = new (test_snippet);
 
 		// End of a line.
 		engine.SetCursorPosition (new TextPosition (0, 6), true);
@@ -103,7 +103,7 @@ internal sealed class TextEngineTest
 	[Test]
 	public void DeleteJoinLines ()
 	{
-		var engine = new TextEngine (new[] { "foo", "bar" });
+		TextEngine engine = new (["foo", "bar"]);
 		engine.SetCursorPosition (new TextPosition (0, 3), true);
 		engine.PerformDelete ();
 
@@ -123,7 +123,7 @@ internal sealed class TextEngineTest
 	[Test]
 	public void Delete ()
 	{
-		var engine = new TextEngine (testSnippet);
+		TextEngine engine = new (test_snippet);
 
 		// Beginning of a line.
 		engine.SetCursorPosition (new TextPosition (0, 0), true);
@@ -150,59 +150,77 @@ internal sealed class TextEngineTest
 	[Test]
 	public void PerformLeftRight ()
 	{
-		var engine = new TextEngine (testSnippet);
+		TextEngine engine = new (test_snippet);
 
 		engine.SetCursorPosition (new TextPosition (0, 3), true);
 		engine.PerformRight (false, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 4)));
+
 		engine.PerformRight (false, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 6)));
+
 		engine.PerformRight (false, false);
 		engine.PerformRight (false, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (1, 2)));
 
 		engine.PerformLeft (false, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (1, 0)));
+
 		engine.PerformLeft (false, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 6)));
 
 		// Should stay at the beginning / end when attempting to advance further.
 		engine.SetCursorPosition (new TextPosition (0, 0), true);
 		engine.PerformLeft (false, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 0)));
 
-		var endPosition = new TextPosition (testSnippet.Count - 1, testSnippet.Last ().Length);
+		TextPosition endPosition = new (test_snippet.Count - 1, test_snippet.Last ().Length);
 		engine.SetCursorPosition (endPosition, true);
 		engine.PerformRight (false, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (endPosition));
 	}
 
 	[Test]
 	public void PerformControlLeftRight ()
 	{
-		var engine = new TextEngine (new[] { string.Join ("  ", testSnippet) });
+		TextEngine engine = new ([string.Join ("  ", test_snippet)]);
 
 		engine.SetCursorPosition (new TextPosition (0, 0), true);
 		engine.PerformRight (true, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 8)));
+
 		engine.SetCursorPosition (new TextPosition (0, 7), true);
 		engine.PerformRight (true, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 8)));
+
 		engine.PerformRight (true, false);
 		engine.PerformRight (true, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 22)));
 
 		engine.PerformLeft (true, false);
 		engine.PerformLeft (true, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 8)));
+
 		engine.PerformLeft (true, false);
+
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 0)));
 	}
 
 	[Test]
 	public void PerformUpDown ()
 	{
-		var engine = new TextEngine (testSnippet);
+		TextEngine engine = new (test_snippet);
 
 		engine.SetCursorPosition (new TextPosition (1, 2), true);
 		engine.PerformUp (false);

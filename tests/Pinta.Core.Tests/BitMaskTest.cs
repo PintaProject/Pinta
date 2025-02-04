@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using NUnit.Framework;
 
 namespace Pinta.Core.Tests;
@@ -33,8 +32,8 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (out_of_bounds_access_cases))]
 	public void WidthAccessOutOfBoundsFails (int desiredWidth, int indexToAccess)
 	{
-		var mask = new BitMask (desiredWidth, DEFAULT_HEIGHT);
-		var coordinates = new PointI (indexToAccess, DEFAULT_HEIGHT_INDEX);
+		BitMask mask = new (desiredWidth, DEFAULT_HEIGHT);
+		PointI coordinates = new (indexToAccess, DEFAULT_HEIGHT_INDEX);
 		Assert.Throws<ArgumentOutOfRangeException> (() => _ = mask[indexToAccess, DEFAULT_HEIGHT_INDEX]);
 		Assert.Throws<ArgumentOutOfRangeException> (() => _ = mask[coordinates]);
 	}
@@ -42,8 +41,8 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (within_bounds_access_cases))]
 	public void WidthAccessWithinBoundsSucceeds (int desiredWidth, int indexToAccess)
 	{
-		var mask = new BitMask (desiredWidth, DEFAULT_HEIGHT);
-		var coordinates = new PointI (indexToAccess, DEFAULT_HEIGHT_INDEX);
+		BitMask mask = new (desiredWidth, DEFAULT_HEIGHT);
+		PointI coordinates = new (indexToAccess, DEFAULT_HEIGHT_INDEX);
 		Assert.DoesNotThrow (() => _ = mask[indexToAccess, DEFAULT_HEIGHT_INDEX]);
 		Assert.DoesNotThrow (() => _ = mask[coordinates]);
 	}
@@ -51,8 +50,8 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (out_of_bounds_access_cases))]
 	public void HeightAccessOutOfBoundsFails (int desiredHeight, int indexToAccess)
 	{
-		var mask = new BitMask (DEFAULT_WIDTH, desiredHeight);
-		var coordinates = new PointI (DEFAULT_WIDTH_INDEX, indexToAccess);
+		BitMask mask = new (DEFAULT_WIDTH, desiredHeight);
+		PointI coordinates = new (DEFAULT_WIDTH_INDEX, indexToAccess);
 		Assert.Throws<ArgumentOutOfRangeException> (() => _ = mask[DEFAULT_WIDTH_INDEX, indexToAccess]);
 		Assert.Throws<ArgumentOutOfRangeException> (() => _ = mask[coordinates]);
 	}
@@ -60,8 +59,8 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (within_bounds_access_cases))]
 	public void HeightAccessWithinBoundsSucceeds (int desiredHeight, int indexToAccess)
 	{
-		var mask = new BitMask (DEFAULT_WIDTH, desiredHeight);
-		var coordinates = new PointI (DEFAULT_WIDTH_INDEX, indexToAccess);
+		BitMask mask = new (DEFAULT_WIDTH, desiredHeight);
+		PointI coordinates = new (DEFAULT_WIDTH_INDEX, indexToAccess);
 		Assert.DoesNotThrow (() => _ = mask[DEFAULT_WIDTH_INDEX, indexToAccess]);
 		Assert.DoesNotThrow (() => _ = mask[coordinates]);
 	}
@@ -69,25 +68,25 @@ internal sealed class BitMaskTest
 	[TestCase (DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX)]
 	public void BitInitializedToFalse (int maskWidth, int maskHeight, int bitToTestX, int bitToTestY)
 	{
-		var mask = new BitMask (maskWidth, maskHeight);
-		var bit = mask[bitToTestX, bitToTestY];
+		BitMask mask = new (maskWidth, maskHeight);
+		bool bit = mask[bitToTestX, bitToTestY];
 		Assert.That (bit, Is.False);
 	}
 
 	[TestCase (DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX)]
 	public void BitInvertsWithXY (int maskWidth, int maskHeight, int bitToInvertX, int bitToInvertY)
 	{
-		var mask = new BitMask (maskWidth, maskHeight);
+		BitMask mask = new (maskWidth, maskHeight);
 		mask.Invert (bitToInvertX, bitToInvertY);
-		var bit = mask[bitToInvertX, bitToInvertY];
+		bool bit = mask[bitToInvertX, bitToInvertY];
 		Assert.That (bit, Is.True);
 	}
 
 	[TestCase (DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX, new[] { true, false, true, false })]
 	public void BitGetsSetXY (int maskWidth, int maskHeight, int bitToSetX, int bitToSetY, bool[] valuesToSetAndTest)
 	{
-		var mask = new BitMask (maskWidth, maskHeight);
-		var coordinates = new PointI (bitToSetX, bitToSetY);
+		BitMask mask = new (maskWidth, maskHeight);
+		PointI coordinates = new (bitToSetX, bitToSetY);
 		foreach (var value in valuesToSetAndTest) {
 			mask.Set (bitToSetX, bitToSetY, value);
 			Assert.That (mask[bitToSetX, bitToSetY], Is.EqualTo (value));
@@ -98,37 +97,37 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (invalid_indexing))]
 	public void RejectsInvalidIndexing_PairIndexer (int width, int height, int x, int y)
 	{
-		var bitmask = new BitMask (width, height);
+		BitMask bitmask = new (width, height);
 		Assert.Throws<ArgumentOutOfRangeException> (() => _ = bitmask[x, y]);
 	}
 
 	[TestCaseSource (nameof (invalid_indexing))]
 	public void RejectsInvalidIndexing_PointIndexer (int width, int height, int x, int y)
 	{
-		var bitmask = new BitMask (width, height);
-		var point = new PointI (x, y);
+		BitMask bitmask = new (width, height);
+		PointI point = new (x, y);
 		Assert.Throws<ArgumentOutOfRangeException> (() => _ = bitmask[point]);
 	}
 
 	[TestCaseSource (nameof (invalid_indexing))]
 	public void RejectsInvalidIndexing_GetMethod (int width, int height, int x, int y)
 	{
-		var bitmask = new BitMask (width, height);
+		BitMask bitmask = new (width, height);
 		Assert.Throws<ArgumentOutOfRangeException> (() => _ = bitmask.Get (x, y));
 	}
 
 	[TestCaseSource (nameof (invalid_indexing))]
 	public void RejectsInvalidIndexing_Invert (int width, int height, int x, int y)
 	{
-		var bitmask = new BitMask (width, height);
+		BitMask bitmask = new (width, height);
 		Assert.Throws<ArgumentOutOfRangeException> (() => bitmask.Invert (x, y));
 	}
 
 	[TestCaseSource (nameof (invalid_indexing))]
 	public void RejectsInvalidIndexing_SetPair (int width, int height, int x, int y)
 	{
-		var bitmask1 = new BitMask (width, height);
-		var bitmask2 = new BitMask (width, height);
+		BitMask bitmask1 = new (width, height);
+		BitMask bitmask2 = new (width, height);
 		Assert.Throws<ArgumentOutOfRangeException> (() => bitmask1.Set (x, y, true));
 		Assert.Throws<ArgumentOutOfRangeException> (() => bitmask2.Set (x, y, false));
 	}
@@ -136,10 +135,11 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (rectangle_set_test_cases))]
 	public void RectangleSetCorrectly (int width, int height, IEnumerable<KeyValuePair<RectangleI, bool>> areasToSet, IReadOnlyDictionary<PointI, bool> checks)
 	{
-		var bitmask = new BitMask (width, height);
-		foreach (var kvp in areasToSet) {
+		BitMask bitmask = new (width, height);
+
+		foreach (var kvp in areasToSet)
 			bitmask.Set (kvp.Key, kvp.Value);
-		}
+
 		foreach (var kvp in checks) {
 			Assert.That (kvp.Value, Is.EqualTo (bitmask[kvp.Key]));
 			Assert.That (kvp.Value, Is.EqualTo (bitmask[kvp.Key.X, kvp.Key.Y]));
@@ -149,10 +149,11 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (scanline_invert_test_cases))]
 	public void ScanlineInvertedCorrectly (int width, int height, IEnumerable<Scanline> scanlineInversionSequence, IReadOnlyDictionary<PointI, bool> checks)
 	{
-		var bitmask = new BitMask (width, height);
-		foreach (var scanline in scanlineInversionSequence) {
+		BitMask bitmask = new (width, height);
+
+		foreach (var scanline in scanlineInversionSequence)
 			bitmask.Invert (scanline);
-		}
+
 		foreach (var kvp in checks) {
 			Assert.That (kvp.Value, Is.EqualTo (bitmask[kvp.Key]));
 			Assert.That (kvp.Value, Is.EqualTo (bitmask[kvp.Key.X, kvp.Key.Y]));
@@ -162,7 +163,7 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (vertical_flip_cases))]
 	public void VerticalFlip (BitMask mask, IReadOnlyDictionary<PointI, bool> checksAfter)
 	{
-		var clone = mask.Clone ();
+		BitMask clone = mask.Clone ();
 		clone.FlipVertical ();
 		foreach (var kvp in checksAfter)
 			Assert.That (kvp.Value, Is.EqualTo (clone[kvp.Key]));
@@ -171,7 +172,7 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (horizontal_flip_cases))]
 	public void HorizontalFlip (BitMask mask, IReadOnlyDictionary<PointI, bool> checksAfter)
 	{
-		var clone = mask.Clone ();
+		BitMask clone = mask.Clone ();
 		clone.FlipHorizontal ();
 		foreach (var kvp in checksAfter)
 			Assert.That (kvp.Value, Is.EqualTo (clone[kvp.Key]));
@@ -180,7 +181,7 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (and_cases))]
 	public void And (BitMask left, BitMask right, IReadOnlyDictionary<PointI, bool> checksAfter)
 	{
-		var leftClone = left.Clone ();
+		BitMask leftClone = left.Clone ();
 		leftClone.And (right);
 		foreach (var kvp in checksAfter)
 			Assert.That (kvp.Value, Is.EqualTo (leftClone[kvp.Key]));
@@ -189,7 +190,7 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (or_cases))]
 	public void Or (BitMask left, BitMask right, IReadOnlyDictionary<PointI, bool> checksAfter)
 	{
-		var leftClone = left.Clone ();
+		BitMask leftClone = left.Clone ();
 		leftClone.Or (right);
 		foreach (var kvp in checksAfter)
 			Assert.That (kvp.Value, Is.EqualTo (leftClone[kvp.Key]));
@@ -198,7 +199,7 @@ internal sealed class BitMaskTest
 	[TestCaseSource (nameof (xor_cases))]
 	public void Xor (BitMask left, BitMask right, IReadOnlyDictionary<PointI, bool> checksAfter)
 	{
-		var leftClone = left.Clone ();
+		BitMask leftClone = left.Clone ();
 		leftClone.Xor (right);
 		foreach (var kvp in checksAfter)
 			Assert.That (kvp.Value, Is.EqualTo (leftClone[kvp.Key]));
@@ -461,11 +462,11 @@ internal sealed class BitMaskTest
 		Scanline topLeftLine = new (0, 0, 4);
 
 		var singleTopLeftSequence = new[] { topLeftLine };
-		var singleTopLeftChangedChecks = new Dictionary<PointI, bool> {
+		Dictionary<PointI, bool> singleTopLeftChangedChecks = new () {
 			[new (0, 0)] = true,
 			[new (3, 0)] = true,
 		};
-		var singleTopLeftOutOfRangeChecks = new Dictionary<PointI, bool> {
+		Dictionary<PointI, bool> singleTopLeftOutOfRangeChecks = new () {
 			[new (4, 0)] = false,
 			[new (0, 1)] = false,
 		};
@@ -478,7 +479,7 @@ internal sealed class BitMaskTest
 		yield return new (WIDTH, HEIGHT, doubleTopLeftSequence, singleTopLeftOutOfRangeChecks);
 
 		var singlePixelSequence = new[] { new Scanline (DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX, 1) };
-		var singlePixelChecks = new Dictionary<PointI, bool> { [new (DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX)] = true };
+		Dictionary<PointI, bool> singlePixelChecks = new () { [new (DEFAULT_WIDTH_INDEX, DEFAULT_HEIGHT_INDEX)] = true };
 		yield return new (DEFAULT_WIDTH, DEFAULT_HEIGHT, singlePixelSequence, singlePixelChecks);
 	}
 
@@ -490,7 +491,7 @@ internal sealed class BitMaskTest
 
 		RectangleI topLeftArea = new (0, 0, 2, 2);
 		var topLeftAreaSequence = new[] { KeyValuePair.Create (topLeftArea, true) };
-		var topLeftChecks = new Dictionary<PointI, bool> {
+		Dictionary<PointI, bool> topLeftChecks = new () {
 			[new (0, 0)] = true,
 			[new (3, 0)] = false,
 			[new (3, 3)] = false,
@@ -502,7 +503,7 @@ internal sealed class BitMaskTest
 
 		RectangleI bottomRightArea = new (2, 2, 2, 2);
 		var bottomRightAreaSequence = new[] { KeyValuePair.Create (bottomRightArea, true) };
-		var bottomRightChecks = new Dictionary<PointI, bool> {
+		Dictionary<PointI, bool> bottomRightChecks = new () {
 			[new (0, 0)] = false,
 			[new (3, 0)] = false,
 			[new (3, 3)] = true,
@@ -513,8 +514,8 @@ internal sealed class BitMaskTest
 		yield return new (WIDTH, HEIGHT, bottomRightAreaSequence, bottomRightChecks);
 	}
 
-	static readonly IReadOnlyList<TestCaseData> out_of_bounds_access_cases = new TestCaseData[]
-	{
+	static readonly IReadOnlyList<TestCaseData> out_of_bounds_access_cases =
+	[
 		new (0, 0),
 		new (0, 1),
 		new (1, 1),
@@ -525,18 +526,18 @@ internal sealed class BitMaskTest
 		new (1, int.MaxValue),
 		new (1, int.MaxValue - 1),
 		new (2, 2),
-	};
+	];
 
-	static readonly IReadOnlyList<TestCaseData> within_bounds_access_cases = new TestCaseData[]
-	{
+	static readonly IReadOnlyList<TestCaseData> within_bounds_access_cases =
+	[
 		new (DEFAULT_SIZE, DEFAULT_OFFSET),
 		new (2, 1),
-	};
+	];
 
-	static readonly IReadOnlyList<TestCaseData> invalid_indexing = new TestCaseData[]
-	{
+	static readonly IReadOnlyList<TestCaseData> invalid_indexing =
+	[
 		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, -1, 0),
 		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, 0, -1),
 		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, -1, -1),
-	};
+	];
 }
