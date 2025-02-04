@@ -94,7 +94,7 @@ public sealed class AddinManagerDialog : Adw.Window
 
 	private AddinListView CreateAddinList (SystemManager system)
 	{
-		AddinListView result = new (system);
+		AddinListView result = new (system, PintaCore.Chrome);
 		result.OnAddinChanged += (_, _) => LoadAll ();
 		return result;
 	}
