@@ -66,13 +66,12 @@ public sealed class ReduceNoiseEffect : BaseEffect
 		return ColorBgra.FromBgra ((byte) bc, (byte) gc, (byte) rc, straight_color.A).ToPremultipliedAlpha ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		int radius = Data.Radius;
 		double strength = -0.2 * Data.Strength;
 
-		foreach (var rect in rois)
-			LocalHistogram.RenderRect (Apply, radius, src, dest, rect);
+		LocalHistogram.RenderRect (Apply, radius, source, destination, roi);
 
 		// === Methods ===
 

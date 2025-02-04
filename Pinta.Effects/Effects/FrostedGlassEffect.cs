@@ -41,7 +41,7 @@ public sealed class FrostedGlassEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
-	#region Algorithm Code Ported From PDN
+	// Algorithm Code Ported From PDN
 
 	private sealed record FrostedGlassSettings (
 		int amount,
@@ -60,27 +60,24 @@ public sealed class FrostedGlassEffect : BaseEffect
 		);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		FrostedGlassSettings settings = CreateSettings (src);
+		FrostedGlassSettings settings = CreateSettings (source);
 
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
 
-		foreach (var rect in rois) {
+		Random random = new (settings.seed.GetValueForRegion (roi));
 
-			Random random = new (settings.seed.GetValueForRegion (rect));
+		for (int y = roi.Top; y <= roi.Bottom; ++y) {
 
-			for (int y = rect.Top; y <= rect.Bottom; ++y) {
+			var dst_row = dst_data.Slice (y * settings.src_width, settings.src_width);
 
-				var dst_row = dst_data.Slice (y * settings.src_width, settings.src_width);
+			int top = Math.Max (y - settings.amount, 0);
+			int bottom = Math.Min (y + settings.amount + 1, settings.src_height);
 
-				int top = Math.Max (y - settings.amount, 0);
-				int bottom = Math.Min (y + settings.amount + 1, settings.src_height);
-
-				for (int x = rect.Left; x <= rect.Right; ++x)
-					dst_row[x] = GetFinalPixelColor (settings, random, src_data, top, bottom, x);
-			}
+			for (int x = roi.Left; x <= roi.Right; ++x)
+				dst_row[x] = GetFinalPixelColor (settings, random, src_data, top, bottom, x);
 		}
 	}
 
@@ -144,7 +141,6 @@ public sealed class FrostedGlassEffect : BaseEffect
 			a: (byte) (avgAlpha[chosenIntensity] / intensityCount[chosenIntensity])
 		);
 	}
-	#endregion
 
 	public sealed class FrostedGlassData : EffectData
 	{

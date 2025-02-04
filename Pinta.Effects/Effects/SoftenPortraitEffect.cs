@@ -96,26 +96,24 @@ public sealed class SoftenPortraitEffect : BaseEffect
 			contrast: -Data.Lighting / 2);
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		SoftenPortraitSettings settings = CreateSettings ();
 		blur_effect.Data.Radius = settings.blurRadius;
 		bac_adjustment.Data.Brightness = settings.brightness;
 		bac_adjustment.Data.Contrast = settings.contrast;
 
-		blur_effect.Render (src, dest, rois);
-		bac_adjustment.Render (dest, dest, rois);
+		blur_effect.Render (source, destination, [roi]);
+		bac_adjustment.Render (destination, destination, [roi]);
 
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dest.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
 
-		foreach (var roi in rois) {
-			foreach (var pixel in Tiling.GeneratePixelOffsets (roi, src.GetSize ())) {
-				ColorBgra srcGrey = desaturate_op.Apply (src_data[pixel.memoryOffset]);
-				srcGrey.R = Utility.ClampToByte ((int) (srcGrey.R * settings.redAdjust));
-				srcGrey.B = Utility.ClampToByte ((int) (srcGrey.B * settings.blueAdjust));
-				dst_data[pixel.memoryOffset] = overlay_op.Apply (srcGrey, dst_data[pixel.memoryOffset]);
-			}
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ())) {
+			ColorBgra srcGrey = desaturate_op.Apply (src_data[pixel.memoryOffset]);
+			srcGrey.R = Utility.ClampToByte ((int) (srcGrey.R * settings.redAdjust));
+			srcGrey.B = Utility.ClampToByte ((int) (srcGrey.B * settings.blueAdjust));
+			dst_data[pixel.memoryOffset] = overlay_op.Apply (srcGrey, dst_data[pixel.memoryOffset]);
 		}
 	}
 }

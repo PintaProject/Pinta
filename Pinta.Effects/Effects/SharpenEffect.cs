@@ -41,10 +41,9 @@ public sealed class SharpenEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		foreach (var rect in rois)
-			LocalHistogram.RenderRect (Apply, Data.Amount, src, dest, rect);
+		LocalHistogram.RenderRect (Apply, Data.Amount, source, destination, roi);
 	}
 
 	private static ColorBgra Apply (ColorBgra src, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)

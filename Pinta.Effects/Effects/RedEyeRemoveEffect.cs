@@ -42,10 +42,10 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (ImageSurface source, ImageSurface destination, ReadOnlySpan<RectangleI> rois)
 	{
 		var op = new UnaryPixelOps.RedEyeRemove (Data.Tolerance, Data.Saturation);
-		op.Apply (dest, src, rois);
+		op.Apply (destination, source, rois);
 	}
 }
 

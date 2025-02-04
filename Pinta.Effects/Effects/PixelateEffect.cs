@@ -79,42 +79,40 @@ public sealed class PixelateEffect : BaseEffect
 	}
 
 
-	public override void Render (
-		ImageSurface src,
-		ImageSurface dest,
-		ReadOnlySpan<RectangleI> rois)
+	protected override void Render (
+		ImageSurface source,
+		ImageSurface destination,
+		RectangleI roi)
 	{
 		var cellSize = Data.CellSize;
 
-		RectangleI src_bounds = src.GetBounds ();
-		RectangleI dest_bounds = dest.GetBounds ();
+		RectangleI src_bounds = source.GetBounds ();
+		RectangleI dest_bounds = destination.GetBounds ();
 
-		var src_data = src.GetReadOnlyPixelData ();
-		var dst_data = dest.GetPixelData ();
+		var src_data = source.GetReadOnlyPixelData ();
+		var dst_data = destination.GetPixelData ();
 
-		foreach (var rect in rois) {
-			for (int y = rect.Top; y <= rect.Bottom; ++y) {
-				int yEnd = y + 1;
+		for (int y = roi.Top; y <= roi.Bottom; ++y) {
+			int yEnd = y + 1;
 
-				for (int x = rect.Left; x <= rect.Right; ++x) {
-					RectangleI cellRect = GetCellBox (x, y, cellSize).Intersect (dest_bounds);
-					ColorBgra color = ComputeCellColor (x, y, src_data, cellSize, src_bounds);
+			for (int x = roi.Left; x <= roi.Right; ++x) {
+				RectangleI cellRect = GetCellBox (x, y, cellSize).Intersect (dest_bounds);
+				ColorBgra color = ComputeCellColor (x, y, src_data, cellSize, src_bounds);
 
-					int xEnd = Math.Min (rect.Right, cellRect.Right);
-					yEnd = Math.Min (rect.Bottom, cellRect.Bottom);
+				int xEnd = Math.Min (roi.Right, cellRect.Right);
+				yEnd = Math.Min (roi.Bottom, cellRect.Bottom);
 
-					for (int y2 = y; y2 <= yEnd; ++y2) {
-						var dst_row = dst_data.Slice (y2 * dest_bounds.Width, dest_bounds.Width);
+				for (int y2 = y; y2 <= yEnd; ++y2) {
+					var dst_row = dst_data.Slice (y2 * dest_bounds.Width, dest_bounds.Width);
 
-						for (int x2 = x; x2 <= xEnd; ++x2)
-							dst_row[x2] = color;
-					}
-
-					x = xEnd;
+					for (int x2 = x; x2 <= xEnd; ++x2)
+						dst_row[x2] = color;
 				}
 
-				y = yEnd;
+				x = xEnd;
 			}
+
+			y = yEnd;
 		}
 	}
 	#endregion

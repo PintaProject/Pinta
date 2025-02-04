@@ -41,10 +41,10 @@ public sealed class ReliefEffect : BaseEffect
 	public override string Name => Translations.GetString ("Relief");
 
 	// Algorithm Code Ported From PDN
-	public override void Render (Cairo.ImageSurface src, Cairo.ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	public override void Render (Cairo.ImageSurface source, Cairo.ImageSurface destination, ReadOnlySpan<RectangleI> rois)
 	{
 		var weights = ComputeWeights (Data.Angle.ToRadians ());
-		ColorDifference.RenderColorDifferenceEffect (weights, src, dst, rois);
+		ColorDifference.RenderColorDifferenceEffect (weights, source, destination, rois);
 	}
 
 	private static double[,] ComputeWeights (RadiansAngle angle)

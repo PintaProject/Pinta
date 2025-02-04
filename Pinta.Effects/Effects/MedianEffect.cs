@@ -42,13 +42,12 @@ public sealed class MedianEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	// Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		int radius = Data.Radius;
 		int percentile = Data.Percentile;
 
-		foreach (RectangleI rect in rois)
-			LocalHistogram.RenderRect (Apply, radius, src, dest, rect);
+		LocalHistogram.RenderRect (Apply, radius, source, destination, roi);
 
 		// === Methods ===
 

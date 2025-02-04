@@ -48,7 +48,7 @@ public sealed class MotionBlurEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
-	#region Algorithm Code Ported From PDN
+	// Algorithm Code Ported From PDN
 
 	private sealed record MotionBlurSettings (
 		Size canvasSize,
@@ -87,33 +87,30 @@ public sealed class MotionBlurEffect : BaseEffect
 			points: points.MoveToImmutable ());
 	}
 
-	public override void Render (
-		ImageSurface src,
-		ImageSurface dst,
-		ReadOnlySpan<RectangleI> rois)
+	protected override void Render (
+		ImageSurface source,
+		ImageSurface destination,
+		RectangleI roi)
 	{
-		MotionBlurSettings settings = CreateSettings (src);
+		MotionBlurSettings settings = CreateSettings (source);
 
 		Span<ColorBgra> samples = stackalloc ColorBgra[settings.points.Length];
 
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
 
-		foreach (var rect in rois) {
-			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, settings.canvasSize)) {
-				int sampleCount = 0;
-				for (int j = 0; j < settings.points.Length; ++j) {
-					PointD pt = new (settings.points[j].X + pixel.coordinates.X, settings.points[j].Y + pixel.coordinates.Y);
-					if (pt.X < 0 || pt.Y < 0 || pt.X > (settings.canvasSize.Width - 1) || pt.Y > (settings.canvasSize.Height - 1))
-						continue;
-					samples[sampleCount] = src.GetBilinearSample (src_data, settings.canvasSize.Width, settings.canvasSize.Height, (float) pt.X, (float) pt.Y);
-					++sampleCount;
-				}
-				dst_data[pixel.memoryOffset] = ColorBgra.Blend (samples[..sampleCount]);
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize)) {
+			int sampleCount = 0;
+			for (int j = 0; j < settings.points.Length; ++j) {
+				PointD pt = new (settings.points[j].X + pixel.coordinates.X, settings.points[j].Y + pixel.coordinates.Y);
+				if (pt.X < 0 || pt.Y < 0 || pt.X > (settings.canvasSize.Width - 1) || pt.Y > (settings.canvasSize.Height - 1))
+					continue;
+				samples[sampleCount] = source.GetBilinearSample (src_data, settings.canvasSize.Width, settings.canvasSize.Height, (float) pt.X, (float) pt.Y);
+				++sampleCount;
 			}
+			dst_data[pixel.memoryOffset] = ColorBgra.Blend (samples[..sampleCount]);
 		}
 	}
-	#endregion
 
 	public sealed class MotionBlurData : EffectData
 	{

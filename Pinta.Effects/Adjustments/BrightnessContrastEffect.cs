@@ -55,38 +55,36 @@ public sealed class BrightnessContrastEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		if (!table_calculated)
 			Calculate ();
 
-		var src_data = src.GetReadOnlyPixelData ();
-		var dst_data = dest.GetPixelData ();
-		int width = src.Width;
+		var src_data = source.GetReadOnlyPixelData ();
+		var dst_data = destination.GetPixelData ();
+		int width = source.Width;
 
-		foreach (RectangleI rect in rois) {
-			for (int y = rect.Top; y <= rect.Bottom; y++) {
-				var src_row = src_data.Slice (y * width + rect.Left, rect.Width);
-				var dst_row = dst_data.Slice (y * width + rect.Left, rect.Width);
+		for (int y = roi.Top; y <= roi.Bottom; y++) {
+			var src_row = src_data.Slice (y * width + roi.Left, roi.Width);
+			var dst_row = dst_data.Slice (y * width + roi.Left, roi.Width);
 
-				if (divide == 0) {
-					for (int i = 0; i < src_row.Length; ++i) {
-						ColorBgra col = src_row[i];
-						uint c = rgb_table![col.GetIntensityByte ()]; // NRT - Set in Calculate
-						dst_row[i].Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
-					}
-				} else {
-					for (int i = 0; i < src_row.Length; ++i) {
-						ColorBgra col = src_row[i];
-						int intensity = col.GetIntensityByte ();
-						int shiftIndex = intensity * 256;
+			if (divide == 0) {
+				for (int i = 0; i < src_row.Length; ++i) {
+					ColorBgra col = src_row[i];
+					uint c = rgb_table![col.GetIntensityByte ()]; // NRT - Set in Calculate
+					dst_row[i].Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
+				}
+			} else {
+				for (int i = 0; i < src_row.Length; ++i) {
+					ColorBgra col = src_row[i];
+					int intensity = col.GetIntensityByte ();
+					int shiftIndex = intensity * 256;
 
-						col.R = rgb_table![shiftIndex + col.R];
-						col.G = rgb_table[shiftIndex + col.G];
-						col.B = rgb_table[shiftIndex + col.B];
+					col.R = rgb_table![shiftIndex + col.R];
+					col.G = rgb_table[shiftIndex + col.G];
+					col.B = rgb_table[shiftIndex + col.B];
 
-						dst_row[i] = col;
-					}
+					dst_row[i] = col;
 				}
 			}
 		}
