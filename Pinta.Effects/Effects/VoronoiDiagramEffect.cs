@@ -32,15 +32,17 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 	private readonly ILivePreview live_preview;
+	private readonly IWorkspaceService workspace;
 	public VoronoiDiagramEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		live_preview = services.GetService<ILivePreview> ();
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new VoronoiDiagramData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	private sealed record VoronoiSettings (
 		Size size,

@@ -30,15 +30,16 @@ public sealed class FrostedGlassEffect : BaseEffect
 	public FrostedGlassData Data => (FrostedGlassData) EffectData!;
 
 	private readonly IChromeService chrome;
-
+	private readonly IWorkspaceService workspace;
 	public FrostedGlassEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new FrostedGlassData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	#region Algorithm Code Ported From PDN
 

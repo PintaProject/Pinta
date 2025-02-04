@@ -39,15 +39,17 @@ public sealed class TileEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 	private readonly IPaletteService palette;
+	private readonly IWorkspaceService workspace;
 	public TileEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		palette = services.GetService<IPaletteService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new TileData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	private sealed record TileSettings (
 		Size size,

@@ -30,15 +30,16 @@ public sealed class SharpenEffect : BaseEffect
 	public SharpenData Data => (SharpenData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
-
+	private readonly IWorkspaceService workspace;
 	public SharpenEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new SharpenData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{

@@ -75,7 +75,7 @@ public sealed class ActionHandlers
 
 			// Layers
 			new LayerPropertiesAction (chrome, actions.Layers, workspace),
-			new RotateZoomLayerAction (actions.Layers, workspace, tools),
+			new RotateZoomLayerAction (chrome, actions.Layers, workspace, tools),
 
 			// View
 			new ToolBarToggledAction (actions.View, chrome),

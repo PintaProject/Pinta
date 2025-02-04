@@ -30,16 +30,16 @@ public sealed class ReduceNoiseEffect : BaseEffect
 	public ReduceNoiseData Data => (ReduceNoiseData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
-
+	private readonly IWorkspaceService workspace;
 	public ReduceNoiseEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new ReduceNoiseData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	// Algorithm Code Ported From PDN
 	private static ColorBgra GetPercentileOfColor (ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)

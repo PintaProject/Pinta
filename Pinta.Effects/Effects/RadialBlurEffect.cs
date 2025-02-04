@@ -30,16 +30,16 @@ public sealed class RadialBlurEffect : BaseEffect
 	public RadialBlurData Data => (RadialBlurData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
-
+	private readonly IWorkspaceService workspace;
 	public RadialBlurEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new RadialBlurData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	// Algorithm Code Ported From PDN
 

@@ -31,14 +31,16 @@ public sealed class AddNoiseEffect : BaseEffect
 	public NoiseData Data => (NoiseData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
+	private readonly IWorkspaceService workspace;
 	public AddNoiseEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new NoiseData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	// Algorithm Code Ported From PDN
 	private const int TABLE_SIZE = 16384;

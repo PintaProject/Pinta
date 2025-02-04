@@ -39,10 +39,12 @@ public sealed class InkSketchEffect : BaseEffect
 	public InkSketchData Data => (InkSketchData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
-
+	private readonly IWorkspaceService workspace;
 	public InkSketchEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
+		workspace = services.GetService<IWorkspaceService> ();
+
 		EffectData = new InkSketchData ();
 
 		glow_effect = new GlowEffect (services);
@@ -62,7 +64,7 @@ public sealed class InkSketchEffect : BaseEffect
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)

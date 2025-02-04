@@ -35,15 +35,16 @@ public sealed class EmbossEffect : BaseEffect
 	public EmbossData Data => (EmbossData) EffectData!;
 
 	private readonly IChromeService chrome;
-
+	private readonly IWorkspaceService workspace;
 	public EmbossEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new EmbossData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	#region Algorithm Code Ported From PDN
 

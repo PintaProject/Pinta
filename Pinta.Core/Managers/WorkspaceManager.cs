@@ -40,6 +40,7 @@ public interface IWorkspaceService
 	Document ActiveDocument { get; }
 	DocumentWorkspace ActiveWorkspace { get; }
 	bool HasOpenDocuments { get; }
+	Size ImageSize { get; }
 
 	SelectionModeHandler SelectionHandler { get; }
 

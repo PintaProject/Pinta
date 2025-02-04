@@ -41,25 +41,29 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class SimpleEffectDialog : Gtk.Dialog
 {
-	const uint Event_delay_millis = 100;
+	const uint EVENT_DELAY_MILLIS = 100;
 	uint event_delay_timeout_id;
 
 	private delegate bool TimeoutHandler ();
 	TimeoutHandler? timeout_func;
 
+	private readonly IWorkspaceService workspace;
+
 	/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 	/// fetched from the appropriate place.
 	/// </param>
 	public SimpleEffectDialog (
+		Gtk.Window parent,
 		string title,
 		string iconName,
 		EffectData effectData,
-		IAddinLocalizer localizer)
+		IAddinLocalizer localizer,
+		IWorkspaceService workspace)
 	{
 		// --- Initialization (Gtk.Window)
 
 		Title = title;
-		TransientFor = PintaCore.Chrome.MainWindow;
+		TransientFor = parent;
 		Modal = true;
 		IconName = iconName;
 		WidthRequest = 400;
@@ -79,6 +83,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			contentAreaBox.Append (widget);
 
 		OnClose += (_, _) => HandleClose ();
+
+		// --- References to keep
+
+		this.workspace = workspace;
 	}
 
 	/// <summary>
@@ -86,16 +94,22 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	/// The IAddinLocalizer provides a generic way to get translated strings both for
 	/// Pinta's effects and for effect add-ins.
 	/// </summary>
-	public static async Task<bool> Launch (BaseEffect effect, IAddinLocalizer localizer)
+	public static async Task<bool> Launch (
+		Gtk.Window parent,
+		BaseEffect effect,
+		IAddinLocalizer localizer,
+		IWorkspaceService workspace)
 	{
 		if (effect.EffectData == null)
 			throw new ArgumentException ($"{effect.EffectData} should not be null", nameof (effect));
 
 		using SimpleEffectDialog dialog = new (
+			parent,
 			effect.Name,
 			effect.Icon,
 			effect.EffectData,
-			localizer);
+			localizer,
+			workspace);
 
 		// Hookup event handling for live preview.
 		dialog.EffectDataChanged += (o, e) => effect.EffectData.FirePropertyChanged (e.PropertyName);
@@ -379,7 +393,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		EffectData effectData,
 		MemberSettings settings)
 	{
-		PointPickerWidget widget = new (PintaCore.Workspace.ImageSize, PointI.Zero) { Label = caption };
+		PointPickerWidget widget = new (workspace.ImageSize, PointI.Zero) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (
 			settings.reflector,
@@ -399,7 +413,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? p
 			: default;
 
-		PointPickerWidget widget = new (PintaCore.Workspace.ImageSize, initialPoint) { Label = caption };
+		PointPickerWidget widget = new (workspace.ImageSize, initialPoint) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (
 			settings.reflector,
@@ -477,7 +491,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		timeout_func = handler;
 		event_delay_timeout_id = GLib.Functions.TimeoutAdd (
 			0,
-			Event_delay_millis, () => {
+			EVENT_DELAY_MILLIS,
+			() => {
 				event_delay_timeout_id = 0;
 				timeout_func.Invoke ();
 				timeout_func = null;

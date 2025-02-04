@@ -30,14 +30,16 @@ public sealed class BulgeEffect : BaseEffect
 	public BulgeData Data => (BulgeData) EffectData!;
 
 	private readonly IChromeService chrome;
+	private readonly IWorkspaceService workspace;
 	public BulgeEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new BulgeData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	private sealed record BulgeSettings (
 		float halfWidth,

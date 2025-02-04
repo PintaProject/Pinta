@@ -32,15 +32,17 @@ public sealed class TwistEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 	private readonly ILivePreview live_preview;
+	private readonly IWorkspaceService workspace;
 	public TwistEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		live_preview = services.GetService<ILivePreview> ();
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new TwistData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	// Algorithm Code Ported From PDN
 	protected override void Render (

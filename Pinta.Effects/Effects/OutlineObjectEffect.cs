@@ -25,19 +25,20 @@ public sealed class OutlineObjectEffect : BaseEffect
 	public OutlineObjectData Data => (OutlineObjectData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
-	private readonly ISystemService system;
 	private readonly IPaletteService palette;
-
+	private readonly ISystemService system;
+	private readonly IWorkspaceService workspace;
 	public OutlineObjectEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-		system = services.GetService<ISystemService> ();
 		palette = services.GetService<IPaletteService> ();
+		system = services.GetService<ISystemService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new OutlineObjectData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
 	{
