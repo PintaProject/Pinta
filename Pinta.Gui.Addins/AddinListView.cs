@@ -60,7 +60,7 @@ internal sealed class AddinListView : Adw.Bin
 		listViewStack.Add (listViewScroll);
 		listViewStack.Add (emptyListPage);
 
-		AddinInfoView infoView = new (system);
+		AddinInfoView infoView = new (system, PintaCore.Chrome);
 		infoView.OnAddinChanged += (o, e) => OnAddinChanged?.Invoke (o, e);
 
 		Adw.Flap flap = Adw.Flap.New ();
