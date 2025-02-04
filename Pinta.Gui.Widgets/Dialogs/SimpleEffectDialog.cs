@@ -47,8 +47,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private delegate bool TimeoutHandler ();
 	TimeoutHandler? timeout_func;
 
-	private readonly IWorkspaceService workspace;
-
 	/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 	/// fetched from the appropriate place.
 	/// </param>
@@ -79,14 +77,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		Gtk.Box contentAreaBox = this.GetContentAreaBox ();
 		contentAreaBox.Spacing = 12;
 		contentAreaBox.SetAllMargins (6);
-		foreach (var widget in GenerateDialogWidgets (effectData, localizer))
+		foreach (var widget in GenerateDialogWidgets (effectData, localizer, workspace))
 			contentAreaBox.Append (widget);
 
 		OnClose += (_, _) => HandleClose ();
-
-		// --- References to keep
-
-		this.workspace = workspace;
 	}
 
 	/// <summary>
@@ -131,7 +125,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		timeout_func?.Invoke ();
 	}
 
-	private IEnumerable<Gtk.Widget> GenerateDialogWidgets (EffectData effectData, IAddinLocalizer localizer) =>
+	private IEnumerable<Gtk.Widget> GenerateDialogWidgets (EffectData effectData, IAddinLocalizer localizer, IWorkspaceService workspace) =>
 			effectData
 			.GetType ()
 			.GetMembers ()
@@ -139,7 +133,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			.Where (IsCustomProperty)
 			.Select (CreateSettings)
 			.Where (settings => !settings.skip)
-			.Select (settings => GenerateWidgetsForMember (settings, effectData, localizer))
+			.Select (settings => GenerateWidgetsForMember (settings, effectData, localizer, workspace))
 			.SelectMany (widgets => widgets);
 
 	private bool IsCustomProperty (MemberInfo memberInfo)
@@ -217,12 +211,13 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private IEnumerable<Gtk.Widget> GenerateWidgetsForMember (
 		MemberSettings settings,
 		EffectData effectData,
-		IAddinLocalizer localizer)
+		IAddinLocalizer localizer,
+		IWorkspaceService workspace)
 	{
 		WidgetFactory? widgetFactory = GetWidgetFactory (settings);
 
 		if (widgetFactory is not null)
-			yield return widgetFactory (localizer.GetString (settings.caption), effectData, settings);
+			yield return widgetFactory (localizer.GetString (settings.caption), effectData, settings, workspace);
 
 		if (settings.hint != null)
 			yield return CreateHintLabel (localizer.GetString (settings.hint));
@@ -253,12 +248,17 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			return null;
 	}
 
-	private delegate Gtk.Widget WidgetFactory (string caption, EffectData effectData, MemberSettings settings);
+	private delegate Gtk.Widget WidgetFactory (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings,
+		IWorkspaceService workspace);
 
 	private ComboBoxWidget CreateEnumComboBox (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		var memberNames = Enum.GetNames (settings.reflector.MemberType);
 
@@ -290,7 +290,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private ComboBoxWidget CreateComboBox (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		IDictionary<string, object>? dict = null;
 
@@ -316,7 +317,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private HScaleSpinButtonWidget CreateDoubleSlider (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		double initialValue =
 			(settings.reflector.GetValue (effectData) is double i)
@@ -346,7 +348,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private HScaleSpinButtonWidget CreateSlider (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		int initialValue =
 			(settings.reflector.GetValue (effectData) is int i)
@@ -376,7 +379,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private Gtk.CheckButton CreateCheckBox (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		Gtk.CheckButton widget = new () { Label = caption };
 
@@ -391,7 +395,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private PointPickerWidget CreateOffsetPicker (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		PointPickerWidget widget = new (workspace.ImageSize, PointI.Zero) { Label = caption };
 
@@ -406,7 +411,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private PointPickerWidget CreatePointPicker (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		PointI initialPoint =
 			(settings.reflector.GetValue (effectData) is PointI p)
@@ -426,7 +432,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private AnglePickerWidget CreateAnglePicker (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		DegreesAngle initialAngle =
 			(settings.reflector.GetValue (effectData) is DegreesAngle d)
@@ -463,7 +470,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private ReseedButtonWidget CreateSeed (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		var attributes = settings.reflector.Attributes;
 
