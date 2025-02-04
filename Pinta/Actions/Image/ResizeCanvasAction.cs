@@ -54,18 +54,12 @@ internal sealed class ResizeCanvasAction : IActionHandler
 		actions.Image.CanvasSize.Activated -= Activated;
 	}
 
-	private void Activated (object sender, EventArgs e)
+	private async void Activated (object sender, EventArgs e)
 	{
-		ResizeCanvasDialog dialog = new (chrome, workspace);
-
-		dialog.OnResponse += (_, args) => {
-
-			if (args.ResponseId == (int) Gtk.ResponseType.Ok)
-				dialog.SaveChanges ();
-
-			dialog.Destroy ();
-		};
-
-		dialog.Show ();
+		using ResizeCanvasDialog dialog = new (chrome, workspace);
+		Gtk.ResponseType response = await dialog.RunAsync ();
+		dialog.Destroy ();
+		if (response != Gtk.ResponseType.Ok) return;
+		dialog.SaveChanges ();
 	}
 }

@@ -57,32 +57,28 @@ internal sealed class OffsetSelectionAction : IActionHandler
 		edit.OffsetSelection.Activated -= Activated;
 	}
 
-	private void Activated (object sender, EventArgs e)
+	private async void Activated (object sender, EventArgs e)
 	{
-		OffsetSelectionDialog dialog = new (chrome);
+		using OffsetSelectionDialog dialog = new (chrome);
 
-		dialog.OnResponse += (_, args) => {
+		Gtk.ResponseType response = await dialog.RunAsync ();
 
-			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
+		dialog.Destroy ();
 
-				tools.Commit ();
+		if (response != Gtk.ResponseType.Ok) return;
 
-				Document document = workspace.ActiveDocument;
+		tools.Commit ();
 
-				document.Layers.ToolLayer.Clear ();
+		Document document = workspace.ActiveDocument;
 
-				SelectionHistoryItem historyItem = new (Resources.Icons.EditSelectionOffset, Translations.GetString ("Offset Selection"));
-				historyItem.TakeSnapshot ();
+		document.Layers.ToolLayer.Clear ();
 
-				document.Selection.Offset (dialog.Offset);
+		SelectionHistoryItem historyItem = new (Resources.Icons.EditSelectionOffset, Translations.GetString ("Offset Selection"));
+		historyItem.TakeSnapshot ();
 
-				document.History.PushNewItem (historyItem);
-				document.Workspace.Invalidate ();
-			}
+		document.Selection.Offset (dialog.Offset);
 
-			dialog.Destroy ();
-		};
-
-		dialog.Show ();
+		document.History.PushNewItem (historyItem);
+		document.Workspace.Invalidate ();
 	}
 }
