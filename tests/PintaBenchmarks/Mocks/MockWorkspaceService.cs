@@ -3,7 +3,7 @@ using Pinta.Core;
 
 namespace PintaBenchmarks;
 
-internal sealed class MockWorkspaceService : IWorkspaceService
+internal sealed class MockWorkspaceService (Size imageSize) : IWorkspaceService
 {
 	public Document ActiveDocument => throw new NotImplementedException ();
 
@@ -12,6 +12,8 @@ internal sealed class MockWorkspaceService : IWorkspaceService
 	public bool HasOpenDocuments => throw new NotImplementedException ();
 
 	public SelectionModeHandler SelectionHandler => throw new NotImplementedException ();
+
+	public Size ImageSize => imageSize;
 
 #pragma warning disable CS0067
 	// CS0067 is the compiler warning that tells us these events are never used
@@ -22,5 +24,6 @@ internal sealed class MockWorkspaceService : IWorkspaceService
 	public event EventHandler? LayerRemoved;
 	public event EventHandler? SelectedLayerChanged;
 	public event PropertyChangedEventHandler? LayerPropertyChanged;
+
 #pragma warning restore CS0067
 }

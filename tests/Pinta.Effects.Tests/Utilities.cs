@@ -17,19 +17,21 @@ internal static class Utilities
 
 	public static IServiceProvider CreateMockServices ()
 	{
+		Size imageSize = new (250, 250);
+
 		ServiceManager manager = new ();
 		manager.AddService<IPaletteService> (new MockPalette ());
 		manager.AddService<IChromeService> (new MockChromeManager ());
-		manager.AddService<IWorkspaceService> (new MockWorkspaceService ());
+		manager.AddService<IWorkspaceService> (new MockWorkspaceService (imageSize));
 		manager.AddService<ISystemService> (new MockSystemService ());
-		manager.AddService<ILivePreview> (new MockLivePreview (new RectangleI (0, 0, 250, 250)));
+		manager.AddService<ILivePreview> (new MockLivePreview (new RectangleI (0, 0, imageSize.Width, imageSize.Height)));
 		return manager;
 	}
 
 	public static ImageSurface LoadImage (string image_name)
 	{
-		var assembly_path = System.IO.Path.GetDirectoryName (typeof (Utilities).Assembly.Location);
-		var file = Gio.FileHelper.NewForPath (System.IO.Path.Combine (assembly_path!, "Assets", image_name));
+		string assembly_path = System.IO.Path.GetDirectoryName (typeof (Utilities).Assembly.Location)!;
+		Gio.File file = Gio.FileHelper.NewForPath (System.IO.Path.Combine (assembly_path, "Assets", image_name));
 
 		using Gio.FileInputStream fs = file.Read (null);
 		try {
@@ -79,15 +81,15 @@ internal static class Utilities
 		using ImageSurface result = CairoExtensions.CreateImageSurface (Format.Argb32, source.Width, source.Height);
 		using ImageSurface expected = LoadImage (result_image_name);
 
-		effect.Render (source, result, stackalloc[] { source.GetBounds () });
+		effect.Render (source, result, [source.GetBounds ()]);
 
 		// For debugging, optionally save out the result to a file.
 		if (save_image_name != null)
 			result.ToPixbuf ().Savev (
 				save_image_name,
 				"png",
-				Array.Empty<string> (),
-				Array.Empty<string> ());
+				[],
+				[]);
 
 		CompareImages (result, expected);
 	}
