@@ -23,7 +23,8 @@ public sealed class AddinManagerDialog : Adw.Window
 	public AddinManagerDialog (
 		Gtk.Window parent,
 		SetupService service,
-		SystemManager system)
+		SystemManager system,
+		IChromeService chrome)
 	{
 		// TODO - add a dialog for managing the list of repositories.
 		// TODO - support searching through the gallery
@@ -33,9 +34,9 @@ public sealed class AddinManagerDialog : Adw.Window
 		Gtk.Button installFileButton = CreateInstallFileButton ();
 		Gtk.Button refreshButton = CreateRefreshButton ();
 
-		AddinListView galleryList = CreateAddinList (system);
-		AddinListView installedList = CreateAddinList (system);
-		AddinListView updatesList = CreateAddinList (system);
+		AddinListView galleryList = CreateAddinList (system, chrome);
+		AddinListView installedList = CreateAddinList (system, chrome);
+		AddinListView updatesList = CreateAddinList (system, chrome);
 
 		Adw.ViewStack viewStack = CreateViewStack (galleryList, installedList, updatesList);
 
@@ -92,9 +93,9 @@ public sealed class AddinManagerDialog : Adw.Window
 		return result;
 	}
 
-	private AddinListView CreateAddinList (SystemManager system)
+	private AddinListView CreateAddinList (SystemManager system, IChromeService chrome)
 	{
-		AddinListView result = new (system, PintaCore.Chrome);
+		AddinListView result = new (system, chrome);
 		result.OnAddinChanged += (_, _) => LoadAll ();
 		return result;
 	}
