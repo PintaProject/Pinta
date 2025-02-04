@@ -12,7 +12,6 @@ namespace Pinta.Gui.Addins;
 public sealed class AddinManagerDialog : Adw.Window
 {
 	private readonly SetupService setup_service;
-	private readonly SystemManager system;
 
 	private readonly AddinListView installed_list;
 	private readonly AddinListView updates_list;
@@ -68,7 +67,6 @@ public sealed class AddinManagerDialog : Adw.Window
 		// --- References to keep
 
 		this.setup_service = service;
-		this.system = system;
 
 		progress_bar = progressBar;
 
