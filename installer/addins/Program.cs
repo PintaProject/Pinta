@@ -13,7 +13,7 @@ static void LocalizeManifest (FileInfo manifestFile, FileInfo[] resourceFiles)
 	manifestDoc.Load (manifestFile.FullName);
 
 	// The properties to translate.
-	string[] headerProperties = new[] { "Name", "Description" };
+	string[] headerProperties = ["Name", "Description"];
 	var headerPropertyNodes = headerProperties.Select (propertyName =>
 	    manifestDoc.SelectSingleNode ($"/Addin/Header/{propertyName}") ??
 	    throw new InvalidDataException ($"Add-in manifest does not specify header property '{propertyName}'"));
@@ -54,26 +54,26 @@ static void LocalizeManifest (FileInfo manifestFile, FileInfo[] resourceFiles)
 	manifestDoc.Save (manifestFile.FullName);
 }
 
-var manifestFileOption = new Option<FileInfo> (
-    name: "--manifest-file") {
-	IsRequired = true
-}.ExistingOnly ();
+var manifestFileOption =
+	new Option<FileInfo> (name: "--manifest-file") { IsRequired = true }
+	.ExistingOnly ();
 
-var resourceFilesOption = new Option<FileInfo[]> (
-    name: "--resource-files") {
-	IsRequired = true,
-	AllowMultipleArgumentsPerToken = true
-}.ExistingOnly ();
+var resourceFilesOption =
+	new Option<FileInfo[]> (name: "--resource-files") {
+		IsRequired = true,
+		AllowMultipleArgumentsPerToken = true,
+	}
+	.ExistingOnly ();
 
-var localizeManifestCommand = new Command (
-    name: "localize-manifest",
-    description: "Copy translations from resource files into the add-in manifest") {
-    manifestFileOption, resourceFilesOption
+Command localizeManifestCommand = new (
+	name: "localize-manifest",
+	description: "Copy translations from resource files into the add-in manifest")
+{
+	manifestFileOption,
+	resourceFilesOption,
 };
-
 localizeManifestCommand.SetHandler (LocalizeManifest, manifestFileOption, resourceFilesOption);
 
-var rootCommand = new RootCommand ("Command-line utilities for Pinta add-ins.");
+RootCommand rootCommand = new ("Command-line utilities for Pinta add-ins.");
 rootCommand.AddCommand (localizeManifestCommand);
-
 rootCommand.Invoke (args);

@@ -17,7 +17,7 @@ public class EffectsBenchmarks
 	{
 		surface = TestData.Get2000PixelImage ();
 		dest_surface = new ImageSurface (Format.Argb32, 2000, 2000);
-		bounds = new[] { surface.GetBounds () };
+		bounds = [surface.GetBounds ()];
 	}
 
 	[Benchmark]

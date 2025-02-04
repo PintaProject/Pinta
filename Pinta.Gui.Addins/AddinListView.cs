@@ -22,7 +22,7 @@ internal sealed class AddinListView : Adw.Bin
 	/// </summary>
 	public event EventHandler? OnAddinChanged;
 
-	public AddinListView (SystemManager system)
+	public AddinListView (SystemManager system, IChromeService chrome)
 	{
 		Gio.ListStore listStore = Gio.ListStore.New (AddinListViewItem.GetGType ());
 
@@ -60,7 +60,7 @@ internal sealed class AddinListView : Adw.Bin
 		listViewStack.Add (listViewScroll);
 		listViewStack.Add (emptyListPage);
 
-		AddinInfoView infoView = new (system);
+		AddinInfoView infoView = new (system, chrome);
 		infoView.OnAddinChanged += (o, e) => OnAddinChanged?.Invoke (o, e);
 
 		Adw.Flap flap = Adw.Flap.New ();
