@@ -59,13 +59,13 @@ public sealed class RotateZoomLayerAction : IActionHandler
 		layers.RotateZoom.Activated -= Activated;
 	}
 
-	private void Activated (object sender, EventArgs e)
+	private async void Activated (object sender, EventArgs e)
 	{
 		// TODO - allow the layer to be zoomed in or out
 
 		RotateZoomData data = new ();
 
-		SimpleEffectDialog dialog = new (
+		using SimpleEffectDialog dialog = new (
 			chrome.MainWindow,
 			Translations.GetString ("Rotate / Zoom Layer"),
 			Resources.Icons.LayerRotateZoom,
@@ -81,15 +81,15 @@ public sealed class RotateZoomLayerAction : IActionHandler
 			workspace.Invalidate ();
 		};
 
-		dialog.OnResponse += (_, args) => {
-			ClearLivePreview ();
-			if (args.ResponseId == (int) Gtk.ResponseType.Ok && !data.IsDefault)
-				ApplyTransform (data);
+		Gtk.ResponseType response = await dialog.RunAsync ();
 
-			dialog.Destroy ();
-		};
+		dialog.Destroy ();
 
-		dialog.Present ();
+		ClearLivePreview ();
+
+		if (response != Gtk.ResponseType.Ok || data.IsDefault) return;
+
+		ApplyTransform (data);
 	}
 
 	private void ClearLivePreview ()

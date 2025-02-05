@@ -210,6 +210,25 @@ partial class GtkExtensions
 		return completionSource.Task;
 	}
 
+	public static Task PresentAsync (this Gtk.Window window)
+	{
+		TaskCompletionSource completionSource = new ();
+
+		bool CloseRequestCallback (
+			Gtk.Window sender,
+			System.EventArgs args)
+		{
+			completionSource.SetResult ();
+			window.OnCloseRequest -= CloseRequestCallback;
+			return false; // Allow the dialog to close normally
+		}
+
+		window.OnCloseRequest += CloseRequestCallback;
+		window.Present ();
+
+		return completionSource.Task;
+	}
+
 	public static void SetDefaultResponse (
 		this Gtk.Dialog dialog,
 		Gtk.ResponseType response
