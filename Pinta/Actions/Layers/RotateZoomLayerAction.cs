@@ -33,14 +33,17 @@ namespace Pinta.Actions;
 
 public sealed class RotateZoomLayerAction : IActionHandler
 {
+	private readonly ChromeManager chrome;
 	private readonly LayerActions layers;
 	private readonly WorkspaceManager workspace;
 	private readonly ToolManager tools;
 	internal RotateZoomLayerAction (
+		ChromeManager chrome,
 		LayerActions layers,
 		WorkspaceManager workspace,
 		ToolManager tools)
 	{
+		this.chrome = chrome;
 		this.layers = layers;
 		this.workspace = workspace;
 		this.tools = tools;
@@ -63,10 +66,12 @@ public sealed class RotateZoomLayerAction : IActionHandler
 		RotateZoomData data = new ();
 
 		SimpleEffectDialog dialog = new (
+			chrome.MainWindow,
 			Translations.GetString ("Rotate / Zoom Layer"),
 			Resources.Icons.LayerRotateZoom,
 			data,
-			new PintaLocalizer ());
+			new PintaLocalizer (),
+			workspace);
 
 		// When parameters are modified, update the display transform of the layer.
 		dialog.EffectDataChanged += (o, args) => {

@@ -30,14 +30,16 @@ public sealed class BulgeEffect : BaseEffect
 	public BulgeData Data => (BulgeData) EffectData!;
 
 	private readonly IChromeService chrome;
+	private readonly IWorkspaceService workspace;
 	public BulgeEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new BulgeData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	private sealed record BulgeSettings (
 		float halfWidth,
@@ -64,27 +66,22 @@ public sealed class BulgeEffect : BaseEffect
 	}
 
 	// Algorithm Code Ported From PDN
-	public override void Render (
+	protected override void Render (
 		ImageSurface source,
 		ImageSurface destination,
-		ReadOnlySpan<RectangleI> rois)
+		RectangleI roi)
 	{
 		BulgeSettings settings = CreateSettings (source);
 
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
-		foreach (RectangleI rect in rois) {
-
-			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, new Size (settings.sourceWidth, settings.sourceHeight))) {
-
-				destinationData[pixel.memoryOffset] = GetFinalPixelColor (
-					settings,
-					source,
-					sourceData,
-					pixel);
-			}
-		}
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, new Size (settings.sourceWidth, settings.sourceHeight)))
+			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
+				settings,
+				source,
+				sourceData,
+				pixel);
 	}
 
 	private static ColorBgra GetFinalPixelColor (

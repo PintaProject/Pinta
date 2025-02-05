@@ -35,19 +35,20 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	public MandelbrotFractalData Data
 		=> (MandelbrotFractalData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IPaletteService palette;
 	private readonly IChromeService chrome;
-
+	private readonly IPaletteService palette;
+	private readonly IWorkspaceService workspace;
 	public MandelbrotFractalEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-		invert_effect = new (services);
 		palette = services.GetService<IPaletteService> ();
+		workspace = services.GetService<IWorkspaceService> ();
+		invert_effect = new (services);
 		EffectData = new MandelbrotFractalData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	// Algorithm Code Ported From PDN
 

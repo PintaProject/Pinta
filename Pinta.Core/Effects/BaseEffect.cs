@@ -53,7 +53,7 @@ public abstract class BaseEffect
 	/// <summary>
 	/// Returns the icon to use for the effect in the Adjustments/Effects menu and history pad.
 	/// </summary>
-	public virtual string Icon => Pinta.Resources.Icons.EffectsDefault;
+	public virtual string Icon => Resources.Icons.EffectsDefault;
 
 	/// <summary>
 	/// Returns whether this effect can display a configuration dialog to the user. (Implemented by LaunchConfiguration ().)
@@ -102,7 +102,11 @@ public abstract class BaseEffect
 	/// </param>
 	protected Task<bool> LaunchSimpleEffectDialog (AddinLocalizer localizer)
 	{
-		return PintaCore.Chrome.LaunchSimpleEffectDialog (this, new AddinLocalizerWrapper (localizer));
+		return PintaCore.Chrome.LaunchSimpleEffectDialog (
+			PintaCore.Chrome.MainWindow,
+			this,
+			new AddinLocalizerWrapper (localizer),
+			PintaCore.Workspace);
 	}
 
 	#region Overridable Render Methods
@@ -192,9 +196,7 @@ public abstract class EffectData : ObservableObject
 	/// </summary>
 	/// <returns>An identical copy of this EffectData.</returns>
 	public virtual EffectData Clone ()
-	{
-		return (EffectData) MemberwiseClone ();
-	}
+		=> (EffectData) MemberwiseClone ();
 
 	/// <summary>
 	/// Fires the PropertyChanged event for this ObservableObject.

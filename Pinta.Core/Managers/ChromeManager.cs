@@ -33,7 +33,12 @@ namespace Pinta.Core;
 public interface IChromeService
 {
 	Gtk.Window MainWindow { get; }
-	Task<bool> LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer);
+
+	Task<bool> LaunchSimpleEffectDialog (
+		Gtk.Window parent,
+		BaseEffect effect,
+		IAddinLocalizer localizer,
+		IWorkspaceService workspace);
 }
 
 public sealed class ChromeManager : IChromeService
@@ -173,9 +178,17 @@ public sealed class ChromeManager : IChromeService
 		OnStatusBarTextChanged (text);
 	}
 
-	public Task<bool> LaunchSimpleEffectDialog (BaseEffect effect, IAddinLocalizer localizer)
+	public Task<bool> LaunchSimpleEffectDialog (
+		Gtk.Window parent,
+		BaseEffect effect,
+		IAddinLocalizer localizer,
+		IWorkspaceService workspace)
 	{
-		return simple_effect_dialog_handler (effect, localizer);
+		return simple_effect_dialog_handler (
+			parent,
+			effect,
+			localizer,
+			workspace);
 	}
 
 	private void OnLastCanvasCursorPointChanged ()
@@ -204,4 +217,4 @@ public interface IProgressDialog
 
 public delegate Task<ErrorDialogResponse> ErrorDialogHandler (Gtk.Window parent, string message, string body, string details);
 public delegate Task MessageDialogHandler (Gtk.Window parent, string message, string body);
-public delegate Task<bool> SimpleEffectDialogHandler (BaseEffect effect, IAddinLocalizer localizer);
+public delegate Task<bool> SimpleEffectDialogHandler (Gtk.Window parent, BaseEffect effect, IAddinLocalizer localizer, IWorkspaceService workspace);

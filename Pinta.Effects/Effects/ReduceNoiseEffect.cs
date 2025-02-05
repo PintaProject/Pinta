@@ -30,16 +30,16 @@ public sealed class ReduceNoiseEffect : BaseEffect
 	public ReduceNoiseData Data => (ReduceNoiseData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
-
+	private readonly IWorkspaceService workspace;
 	public ReduceNoiseEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new ReduceNoiseData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	// Algorithm Code Ported From PDN
 	private static ColorBgra GetPercentileOfColor (ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
@@ -66,13 +66,12 @@ public sealed class ReduceNoiseEffect : BaseEffect
 		return ColorBgra.FromBgra ((byte) bc, (byte) gc, (byte) rc, straight_color.A).ToPremultipliedAlpha ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		int radius = Data.Radius;
 		double strength = -0.2 * Data.Strength;
 
-		foreach (var rect in rois)
-			LocalHistogram.RenderRect (Apply, radius, src, dest, rect);
+		LocalHistogram.RenderRect (Apply, radius, source, destination, roi);
 
 		// === Methods ===
 

@@ -30,16 +30,16 @@ public sealed class RadialBlurEffect : BaseEffect
 	public RadialBlurData Data => (RadialBlurData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
-
+	private readonly IWorkspaceService workspace;
 	public RadialBlurEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
-
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new RadialBlurData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	// Algorithm Code Ported From PDN
 
@@ -75,7 +75,7 @@ public sealed class RadialBlurEffect : BaseEffect
 			fsr: fr / n);
 	}
 
-	public override void Render (ImageSurface source, ImageSurface destination, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI rect)
 	{
 		if (Data.Angle.Degrees == 0) // Copy src to dest
 			return;
@@ -85,12 +85,11 @@ public sealed class RadialBlurEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
-		foreach (RectangleI rect in rois)
-			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, settings.canvasSize))
-				destinationData[pixel.memoryOffset] = GetFinalPixelColor (
-					settings,
-					sourceData,
-					pixel);
+		foreach (var pixel in Tiling.GeneratePixelOffsets (rect, settings.canvasSize))
+			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
+				settings,
+				sourceData,
+				pixel);
 	}
 
 	private static ColorBgra GetFinalPixelColor (

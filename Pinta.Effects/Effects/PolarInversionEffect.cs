@@ -36,39 +36,39 @@ public sealed class PolarInversionEffect : BaseEffect
 		=> true;
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	private readonly IChromeService chrome;
 	private readonly ILivePreview live_preview;
 	private readonly IPaletteService palette;
+	private readonly IWorkspaceService workspace;
 	public PolarInversionEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		live_preview = services.GetService<ILivePreview> ();
 		palette = services.GetService<IPaletteService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 
 		EffectData = new PolarInversionData ();
 	}
 
-	public override void Render (ImageSurface src, ImageSurface dst, ReadOnlySpan<RectangleI> rois)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI rect)
 	{
 		Warp.Settings settings = Warp.CreateSettings (
 			Data,
 			live_preview.RenderBounds,
 			palette);
 
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		foreach (RectangleI rect in rois) {
-			foreach (var pixel in Tiling.GeneratePixelOffsets (rect, src.GetSize ())) {
-				dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
-					settings,
-					InverseTransform,
-					src,
-					src_data[pixel.memoryOffset],
-					pixel);
-			}
-		}
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
+
+		foreach (var pixel in Tiling.GeneratePixelOffsets (rect, source.GetSize ()))
+			dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
+				settings,
+				InverseTransform,
+				source,
+				src_data[pixel.memoryOffset],
+				pixel);
 	}
 
 	public Warp.TransformData InverseTransform (

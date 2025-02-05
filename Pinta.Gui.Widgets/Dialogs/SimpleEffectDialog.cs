@@ -41,7 +41,7 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class SimpleEffectDialog : Gtk.Dialog
 {
-	const uint Event_delay_millis = 100;
+	const uint EVENT_DELAY_MILLIS = 100;
 	uint event_delay_timeout_id;
 
 	private delegate bool TimeoutHandler ();
@@ -51,15 +51,17 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	/// fetched from the appropriate place.
 	/// </param>
 	public SimpleEffectDialog (
+		Gtk.Window parent,
 		string title,
 		string iconName,
 		EffectData effectData,
-		IAddinLocalizer localizer)
+		IAddinLocalizer localizer,
+		IWorkspaceService workspace)
 	{
 		// --- Initialization (Gtk.Window)
 
 		Title = title;
-		TransientFor = PintaCore.Chrome.MainWindow;
+		TransientFor = parent;
 		Modal = true;
 		IconName = iconName;
 		WidthRequest = 400;
@@ -75,7 +77,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		Gtk.Box contentAreaBox = this.GetContentAreaBox ();
 		contentAreaBox.Spacing = 12;
 		contentAreaBox.SetAllMargins (6);
-		foreach (var widget in GenerateDialogWidgets (effectData, localizer))
+		foreach (var widget in GenerateDialogWidgets (effectData, localizer, workspace))
 			contentAreaBox.Append (widget);
 
 		OnClose += (_, _) => HandleClose ();
@@ -86,16 +88,22 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	/// The IAddinLocalizer provides a generic way to get translated strings both for
 	/// Pinta's effects and for effect add-ins.
 	/// </summary>
-	public static async Task<bool> Launch (BaseEffect effect, IAddinLocalizer localizer)
+	public static async Task<bool> Launch (
+		Gtk.Window parent,
+		BaseEffect effect,
+		IAddinLocalizer localizer,
+		IWorkspaceService workspace)
 	{
 		if (effect.EffectData == null)
 			throw new ArgumentException ($"{effect.EffectData} should not be null", nameof (effect));
 
 		using SimpleEffectDialog dialog = new (
+			parent,
 			effect.Name,
 			effect.Icon,
 			effect.EffectData,
-			localizer);
+			localizer,
+			workspace);
 
 		// Hookup event handling for live preview.
 		dialog.EffectDataChanged += (o, e) => effect.EffectData.FirePropertyChanged (e.PropertyName);
@@ -117,7 +125,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		timeout_func?.Invoke ();
 	}
 
-	private IEnumerable<Gtk.Widget> GenerateDialogWidgets (EffectData effectData, IAddinLocalizer localizer) =>
+	private IEnumerable<Gtk.Widget> GenerateDialogWidgets (EffectData effectData, IAddinLocalizer localizer, IWorkspaceService workspace) =>
 			effectData
 			.GetType ()
 			.GetMembers ()
@@ -125,7 +133,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			.Where (IsCustomProperty)
 			.Select (CreateSettings)
 			.Where (settings => !settings.skip)
-			.Select (settings => GenerateWidgetsForMember (settings, effectData, localizer))
+			.Select (settings => GenerateWidgetsForMember (settings, effectData, localizer, workspace))
 			.SelectMany (widgets => widgets);
 
 	private bool IsCustomProperty (MemberInfo memberInfo)
@@ -203,12 +211,13 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private IEnumerable<Gtk.Widget> GenerateWidgetsForMember (
 		MemberSettings settings,
 		EffectData effectData,
-		IAddinLocalizer localizer)
+		IAddinLocalizer localizer,
+		IWorkspaceService workspace)
 	{
 		WidgetFactory? widgetFactory = GetWidgetFactory (settings);
 
 		if (widgetFactory is not null)
-			yield return widgetFactory (localizer.GetString (settings.caption), effectData, settings);
+			yield return widgetFactory (localizer.GetString (settings.caption), effectData, settings, workspace);
 
 		if (settings.hint != null)
 			yield return CreateHintLabel (localizer.GetString (settings.hint));
@@ -239,12 +248,17 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			return null;
 	}
 
-	private delegate Gtk.Widget WidgetFactory (string caption, EffectData effectData, MemberSettings settings);
+	private delegate Gtk.Widget WidgetFactory (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings,
+		IWorkspaceService workspace);
 
 	private ComboBoxWidget CreateEnumComboBox (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		var memberNames = Enum.GetNames (settings.reflector.MemberType);
 
@@ -276,7 +290,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private ComboBoxWidget CreateComboBox (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		IDictionary<string, object>? dict = null;
 
@@ -302,7 +317,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private HScaleSpinButtonWidget CreateDoubleSlider (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		double initialValue =
 			(settings.reflector.GetValue (effectData) is double i)
@@ -332,7 +348,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private HScaleSpinButtonWidget CreateSlider (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		int initialValue =
 			(settings.reflector.GetValue (effectData) is int i)
@@ -362,7 +379,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private Gtk.CheckButton CreateCheckBox (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		Gtk.CheckButton widget = new () { Label = caption };
 
@@ -377,9 +395,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private PointPickerWidget CreateOffsetPicker (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
-		PointPickerWidget widget = new (PintaCore.Workspace.ImageSize, PointI.Zero) { Label = caption };
+		PointPickerWidget widget = new (workspace.ImageSize, PointI.Zero) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (
 			settings.reflector,
@@ -392,14 +411,15 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private PointPickerWidget CreatePointPicker (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		PointI initialPoint =
 			(settings.reflector.GetValue (effectData) is PointI p)
 			? p
 			: default;
 
-		PointPickerWidget widget = new (PintaCore.Workspace.ImageSize, initialPoint) { Label = caption };
+		PointPickerWidget widget = new (workspace.ImageSize, initialPoint) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (
 			settings.reflector,
@@ -412,7 +432,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private AnglePickerWidget CreateAnglePicker (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		DegreesAngle initialAngle =
 			(settings.reflector.GetValue (effectData) is DegreesAngle d)
@@ -449,7 +470,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private ReseedButtonWidget CreateSeed (
 		string caption,
 		EffectData effectData,
-		MemberSettings settings)
+		MemberSettings settings,
+		IWorkspaceService workspace)
 	{
 		var attributes = settings.reflector.Attributes;
 
@@ -477,7 +499,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		timeout_func = handler;
 		event_delay_timeout_id = GLib.Functions.TimeoutAdd (
 			0,
-			Event_delay_millis, () => {
+			EVENT_DELAY_MILLIS,
+			() => {
 				event_delay_timeout_id = 0;
 				timeout_func.Invoke ();
 				timeout_func = null;

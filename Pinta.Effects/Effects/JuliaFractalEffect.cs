@@ -35,18 +35,19 @@ public sealed class JuliaFractalEffect : BaseEffect
 	public JuliaFractalData Data
 		=> (JuliaFractalData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IPaletteService palette;
 	private readonly IChromeService chrome;
-
+	private readonly IPaletteService palette;
+	private readonly IWorkspaceService workspace;
 	public JuliaFractalEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		palette = services.GetService<IPaletteService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new JuliaFractalData ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this);
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	// Algorithm Code Ported From PDN
 
