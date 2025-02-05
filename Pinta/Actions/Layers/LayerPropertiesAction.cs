@@ -54,49 +54,47 @@ internal sealed class LayerPropertiesAction : IActionHandler
 		layers.Properties.Activated -= Activated;
 	}
 
-	private void Activated (object sender, EventArgs e)
+	private async void Activated (object sender, EventArgs e)
 	{
-		var doc = workspace.ActiveDocument;
+		Document active = workspace.ActiveDocument;
 
-		LayerPropertiesDialog dialog = new (chrome, workspace);
+		using LayerPropertiesDialog dialog = new (chrome, workspace);
 
-		dialog.OnResponse += (_, args) => {
-			var response = (Gtk.ResponseType) args.ResponseId;
-			if (response == Gtk.ResponseType.Ok && dialog.AreLayerPropertiesUpdated) {
+		Gtk.ResponseType response = await dialog.RunAsync ();
 
-				var historyMessage = GetLayerPropertyUpdateMessage (
-						dialog.InitialLayerProperties,
-						dialog.UpdatedLayerProperties);
+		dialog.Destroy ();
 
-				UpdateLayerPropertiesHistoryItem historyItem = new (
-					Resources.Icons.LayerProperties,
-					historyMessage,
-					doc.Layers.CurrentUserLayerIndex,
-					dialog.InitialLayerProperties,
-					dialog.UpdatedLayerProperties);
+		if (response == Gtk.ResponseType.Ok && dialog.AreLayerPropertiesUpdated) {
 
-				doc.History.PushNewItem (historyItem);
+			string historyMessage = GetLayerPropertyUpdateMessage (
+				dialog.InitialLayerProperties,
+				dialog.UpdatedLayerProperties);
 
+			UpdateLayerPropertiesHistoryItem historyItem = new (
+				Resources.Icons.LayerProperties,
+				historyMessage,
+				active.Layers.CurrentUserLayerIndex,
+				dialog.InitialLayerProperties,
+				dialog.UpdatedLayerProperties);
+
+			active.History.PushNewItem (historyItem);
+
+			workspace.ActiveWorkspace.Invalidate ();
+
+		} else {
+
+			Layer layer = active.Layers.CurrentUserLayer;
+			Layer selectionLayer = active.Layers.SelectionLayer;
+			LayerProperties initial = dialog.InitialLayerProperties;
+			initial.SetProperties (layer);
+
+			if (selectionLayer != null)
+				initial.SetProperties (selectionLayer);
+
+			if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
 				workspace.ActiveWorkspace.Invalidate ();
 
-			} else {
-
-				Layer layer = doc.Layers.CurrentUserLayer;
-				Layer selectionLayer = doc.Layers.SelectionLayer;
-				LayerProperties initial = dialog.InitialLayerProperties;
-				initial.SetProperties (layer);
-
-				if (selectionLayer != null)
-					initial.SetProperties (selectionLayer);
-
-				if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
-					workspace.ActiveWorkspace.Invalidate ();
-			}
-
-			dialog.Destroy ();
-		};
-
-		dialog.Present ();
+		}
 	}
 
 	private static string GetLayerPropertyUpdateMessage (LayerProperties initial, LayerProperties updated)

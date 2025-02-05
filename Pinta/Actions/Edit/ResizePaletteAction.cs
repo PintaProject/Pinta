@@ -54,9 +54,9 @@ internal sealed class ResizePaletteAction : IActionHandler
 		edit.ResizePalette.Activated -= Activated;
 	}
 
-	private void Activated (object sender, EventArgs e)
+	private async void Activated (object sender, EventArgs e)
 	{
-		SpinButtonEntryDialog dialog = new (
+		using SpinButtonEntryDialog dialog = new (
 			Translations.GetString ("Resize Palette"),
 			chrome.MainWindow,
 			Translations.GetString ("New palette size:"),
@@ -64,14 +64,12 @@ internal sealed class ResizePaletteAction : IActionHandler
 			96,
 			palette.CurrentPalette.Count);
 
-		dialog.OnResponse += (_, args) => {
+		Gtk.ResponseType response = await dialog.RunAsync ();
 
-			if (args.ResponseId == (int) Gtk.ResponseType.Ok)
-				palette.CurrentPalette.Resize (dialog.GetValue ());
+		dialog.Destroy ();
 
-			dialog.Destroy ();
-		};
+		if (response != Gtk.ResponseType.Ok) return;
 
-		dialog.Present ();
+		palette.CurrentPalette.Resize (dialog.GetValue ());
 	}
 }

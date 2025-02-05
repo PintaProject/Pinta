@@ -54,18 +54,12 @@ internal sealed class ResizeImageAction : IActionHandler
 		image.Resize.Activated -= Activated;
 	}
 
-	private void Activated (object sender, EventArgs e)
+	private async void Activated (object sender, EventArgs e)
 	{
-		ResizeImageDialog dialog = new (chrome, workspace);
-
-		dialog.OnResponse += (_, args) => {
-
-			if (args.ResponseId == (int) Gtk.ResponseType.Ok)
-				dialog.SaveChanges ();
-
-			dialog.Destroy ();
-		};
-
-		dialog.Show ();
+		using ResizeImageDialog dialog = new (chrome, workspace);
+		Gtk.ResponseType response = await dialog.RunAsync ();
+		dialog.Destroy ();
+		if (response != Gtk.ResponseType.Ok) return;
+		dialog.SaveChanges ();
 	}
 }
