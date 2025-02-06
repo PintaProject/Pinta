@@ -52,7 +52,7 @@ public sealed class DocumentWorkspace
 
 		this.document = document;
 
-		History = new DocumentHistory (document, actions.Edit);
+		History = new DocumentHistory (actions.Edit, document);
 	}
 
 	#region Public Events

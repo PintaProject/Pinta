@@ -31,8 +31,10 @@ namespace Pinta.Core;
 
 public sealed class DocumentHistory
 {
-	private readonly Document document;
 	private readonly EditActions edit;
+
+	private readonly Document document;
+	
 	private readonly List<BaseHistoryItem> history = [];
 	private int clean_pointer = -1;
 
@@ -41,11 +43,11 @@ public sealed class DocumentHistory
 	public event EventHandler? ActionRedone;
 
 	internal DocumentHistory (
-		Document document,
-		EditActions edit)
+		EditActions edit,
+		Document document)
 	{
-		this.document = document;
 		this.edit = edit;
+		this.document = document;
 	}
 
 	public bool CanRedo => Pointer < history.Count - 1;
