@@ -74,7 +74,7 @@ public sealed class Document
 		Selection = new DocumentSelection (this);
 
 		Layers = new DocumentLayers (PintaCore.Tools, this);
-		Workspace = new DocumentWorkspace (this);
+		Workspace = new DocumentWorkspace (PintaCore.Actions, PintaCore.Tools, this);
 		IsDirty = false;
 		HasBeenSavedInSession = false;
 		ImageSize = size;
