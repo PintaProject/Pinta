@@ -42,7 +42,7 @@ public sealed class DocumentWorkspace
 	internal DocumentWorkspace (Document document)
 	{
 		this.document = document;
-		History = new DocumentHistory (document);
+		History = new DocumentHistory (document, PintaCore.Actions.Edit);
 	}
 
 	#region Public Events

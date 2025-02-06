@@ -32,6 +32,7 @@ namespace Pinta.Core;
 public sealed class DocumentHistory
 {
 	private readonly Document document;
+	private readonly EditActions edit;
 	private readonly List<BaseHistoryItem> history = [];
 	private int clean_pointer = -1;
 
@@ -39,9 +40,12 @@ public sealed class DocumentHistory
 	public event EventHandler? ActionUndone;
 	public event EventHandler? ActionRedone;
 
-	internal DocumentHistory (Document document)
+	internal DocumentHistory (
+		Document document,
+		EditActions edit)
 	{
 		this.document = document;
+		this.edit = edit;
 	}
 
 	public bool CanRedo => Pointer < history.Count - 1;
@@ -77,9 +81,9 @@ public sealed class DocumentHistory
 			document.IsDirty = true;
 
 		if (history.Count > 1)
-			PintaCore.Actions.Edit.Undo.Sensitive = true;
+			edit.Undo.Sensitive = true;
 
-		PintaCore.Actions.Edit.Redo.Sensitive = false;
+		edit.Redo.Sensitive = false;
 
 		HistoryItemAdded?.Invoke (this, new HistoryItemAddedEventArgs (newItem));
 	}
@@ -102,9 +106,9 @@ public sealed class DocumentHistory
 			document.IsDirty = false;
 
 		if (Pointer == 0)
-			PintaCore.Actions.Edit.Undo.Sensitive = false;
+			edit.Undo.Sensitive = false;
 
-		PintaCore.Actions.Edit.Redo.Sensitive = true;
+		edit.Redo.Sensitive = true;
 
 		ActionUndone?.Invoke (this, EventArgs.Empty);
 	}
@@ -121,7 +125,7 @@ public sealed class DocumentHistory
 		item.State = HistoryItemState.Undo;
 
 		if (Pointer == history.Count - 1)
-			PintaCore.Actions.Edit.Redo.Sensitive = false;
+			edit.Redo.Sensitive = false;
 
 		if (Pointer == clean_pointer)
 			document.IsDirty = false;
@@ -129,7 +133,7 @@ public sealed class DocumentHistory
 			document.IsDirty = true;
 
 		if (history.Count > 1)
-			PintaCore.Actions.Edit.Undo.Sensitive = true;
+			edit.Undo.Sensitive = true;
 
 		ActionRedone?.Invoke (this, EventArgs.Empty);
 	}
@@ -163,7 +167,7 @@ public sealed class DocumentHistory
 
 		document.IsDirty = false;
 
-		PintaCore.Actions.Edit.Redo.Sensitive = false;
-		PintaCore.Actions.Edit.Undo.Sensitive = false;
+		edit.Redo.Sensitive = false;
+		edit.Undo.Sensitive = false;
 	}
 }
