@@ -34,7 +34,7 @@ public sealed class DocumentHistory
 	private readonly EditActions edit;
 
 	private readonly Document document;
-	
+
 	private readonly List<BaseHistoryItem> history = [];
 	private int clean_pointer = -1;
 
@@ -69,11 +69,10 @@ public sealed class DocumentHistory
 		for (var i = history.Count - 1; i >= 0; i--) {
 			var item = history[i];
 
-			if (item.State == HistoryItemState.Redo) {
+			if (item.State == HistoryItemState.Redo)
 				history.RemoveAt (i);
-			} else if (item.State == HistoryItemState.Undo) {
+			else if (item.State == HistoryItemState.Undo)
 				break;
-			}
 		}
 
 		history.Add (newItem);
