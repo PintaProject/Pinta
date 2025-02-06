@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Reflection.Metadata;
 using Cairo;
 
 namespace Pinta.Core;
@@ -59,11 +58,17 @@ public sealed class Document
 
 	private static int name_counter = 1;
 
-	public Document (Size size)
-		: this (size, null, null)
+	public Document (ActionManager actions, ToolManager tools, WorkspaceManager workspace, Size size)
+		: this (actions, tools, workspace, size, null, null)
 	{ }
 
+	private readonly ActionManager actions;
+	private readonly ToolManager tools;
+	private readonly WorkspaceManager workspace;
 	public Document (
+		ActionManager actions,
+		ToolManager tools,
+		WorkspaceManager workspace,
 		Size size,
 		Gio.File? file,
 		string? fileType)
@@ -73,11 +78,15 @@ public sealed class Document
 		PreviousSelection = new (this);
 		Selection = new DocumentSelection (this);
 
-		Layers = new DocumentLayers (PintaCore.Tools, this);
-		Workspace = new DocumentWorkspace (PintaCore.Actions, PintaCore.Tools, this);
+		Layers = new DocumentLayers (tools, this);
+		Workspace = new DocumentWorkspace (actions, tools, this);
 		IsDirty = false;
 		HasBeenSavedInSession = false;
 		ImageSize = size;
+
+		this.actions = actions;
+		this.tools = tools;
+		this.workspace = workspace;
 
 		// --- Post-initialization 
 
@@ -249,7 +258,7 @@ public sealed class Document
 	/// </summary>
 	public ColorBgra GetComputedPixel (PointI position)
 	{
-		ImageSurface dst = CairoExtensions.CreateImageSurface (
+		using ImageSurface dst = CairoExtensions.CreateImageSurface (
 			Format.Argb32,
 			1,
 			1);
@@ -310,9 +319,9 @@ public sealed class Document
 		if (ImageSize == newSize)
 			return;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
-		ResizeHistoryItem hist = new (PintaCore.Workspace, ImageSize) {
+		ResizeHistoryItem hist = new (workspace, ImageSize) {
 			Icon = Resources.Icons.ImageResizeCanvas,
 			Text = Translations.GetString ("Resize Canvas"),
 		};
@@ -345,9 +354,9 @@ public sealed class Document
 		if (ImageSize == newSize)
 			return;
 
-		PintaCore.Tools.Commit ();
+		tools.Commit ();
 
-		ResizeHistoryItem hist = new (PintaCore.Workspace, ImageSize);
+		ResizeHistoryItem hist = new (workspace, ImageSize);
 
 		hist.StartSnapshotOfImage ();
 
@@ -365,7 +374,7 @@ public sealed class Document
 		ResetSelectionPaths ();
 
 		Workspace.Scale = scale;
-		PintaCore.Actions.View.UpdateCanvasScale ();
+		actions.View.UpdateCanvasScale ();
 	}
 
 	// Rotate image 180 degrees (flip H+V)
@@ -397,7 +406,7 @@ public sealed class Document
 		ImageSize = new_size;
 		Workspace.ViewSize = new_size;
 
-		PintaCore.Actions.View.UpdateCanvasScale ();
+		actions.View.UpdateCanvasScale ();
 		ResetSelectionPaths ();
 		Workspace.Invalidate ();
 	}
@@ -405,7 +414,7 @@ public sealed class Document
 	// Returns true if successful, false if canceled
 	public bool Save (bool saveAs)
 	{
-		return PintaCore.Actions.File.RaiseSaveDocument (this, saveAs);
+		return actions.File.RaiseSaveDocument (this, saveAs);
 	}
 
 	/// <summary>

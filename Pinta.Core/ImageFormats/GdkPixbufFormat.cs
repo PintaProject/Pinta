@@ -46,7 +46,13 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 
 		Size imageSize = new (effectiveBuffer.Width, effectiveBuffer.Height);
 
-		Document newDocument = new (imageSize, file, filetype);
+		Document newDocument = new (
+			PintaCore.Actions,
+			PintaCore.Tools,
+			PintaCore.Workspace,
+			imageSize,
+			file,
+			filetype);
 
 		Layer layer = newDocument.Layers.AddNewLayer (file.GetDisplayName ());
 
