@@ -73,7 +73,10 @@ internal sealed class OffsetSelectionAction : IActionHandler
 
 		document.Layers.ToolLayer.Clear ();
 
-		SelectionHistoryItem historyItem = new (Resources.Icons.EditSelectionOffset, Translations.GetString ("Offset Selection"));
+		SelectionHistoryItem historyItem = new (
+			workspace,
+			Resources.Icons.EditSelectionOffset,
+			Translations.GetString ("Offset Selection"));
 		historyItem.TakeSnapshot ();
 
 		document.Selection.Offset (dialog.Offset);

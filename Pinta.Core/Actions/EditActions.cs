@@ -227,6 +227,7 @@ public sealed class EditActions
 		tools.Commit ();
 
 		SelectionHistoryItem hist = new (
+			workspace,
 			Resources.StandardIcons.EditSelectAll,
 			Translations.GetString ("Select All"));
 
@@ -272,6 +273,7 @@ public sealed class EditActions
 		tools.Commit ();
 
 		SelectionHistoryItem hist = new (
+			workspace,
 			Resources.Icons.EditSelectionNone,
 			Translations.GetString ("Deselect"));
 
@@ -489,6 +491,7 @@ public sealed class EditActions
 		doc.Layers.ToolLayer.Clear ();
 
 		SelectionHistoryItem historyItem = new (
+			workspace,
 			Resources.Icons.EditSelectionInvert,
 			Translations.GetString ("Invert Selection"));
 

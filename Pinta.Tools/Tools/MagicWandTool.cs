@@ -71,7 +71,7 @@ public sealed class MagicWandTool : FloodTool
 
 	protected override void OnFillRegionComputed (Document document, IReadOnlyList<IReadOnlyList<PointI>> polygonSet)
 	{
-		var undoAction = new SelectionHistoryItem (Icon, Name);
+		var undoAction = new SelectionHistoryItem (workspace, Icon, Name);
 		undoAction.TakeSnapshot ();
 
 		document.PreviousSelection = document.Selection.Clone ();

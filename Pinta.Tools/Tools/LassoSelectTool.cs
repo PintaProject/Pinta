@@ -69,7 +69,7 @@ public class LassoSelectTool : BaseTool
 		if (is_drawing)
 			return;
 
-		hist = new SelectionHistoryItem (Icon, Name);
+		hist = new SelectionHistoryItem (workspace, Icon, Name);
 		hist.TakeSnapshot ();
 
 		combine_mode = workspace.SelectionHandler.DetermineCombineMode (e);

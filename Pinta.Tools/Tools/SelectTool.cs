@@ -85,7 +85,7 @@ public abstract class SelectTool : BaseTool
 		if (is_drawing)
 			return;
 
-		hist = new SelectionHistoryItem (Icon, Name);
+		hist = new SelectionHistoryItem (workspace, Icon, Name);
 		hist.TakeSnapshot ();
 
 		reset_origin = e.WindowPoint;
