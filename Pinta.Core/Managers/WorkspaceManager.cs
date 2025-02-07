@@ -138,7 +138,7 @@ public static class WorkspaceServiceExtensions
 		Size imageSize,
 		Color backgroundColor)
 	{
-		Document doc = new (imageSize);
+		Document doc = new (PintaCore.Actions, PintaCore.Tools, PintaCore.Workspace, imageSize);
 		doc.Workspace.ViewSize = imageSize;
 		workspace.ActivateDocument (doc, actions);
 
