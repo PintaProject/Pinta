@@ -26,15 +26,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cairo;
 using ClipperLib;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public class LassoSelectTool : BaseTool
+public sealed class LassoSelectTool : BaseTool
 {
 	private readonly IWorkspaceService workspace;
 
@@ -57,10 +55,9 @@ public class LassoSelectTool : BaseTool
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18, null);
 	public override int Priority => 17;
 
-	protected override void OnBuildToolBar (Box tb)
+	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
 		base.OnBuildToolBar (tb);
-
 		workspace.SelectionHandler.BuildToolbar (tb, Settings);
 	}
 
@@ -84,15 +81,13 @@ public class LassoSelectTool : BaseTool
 		if (!is_drawing)
 			return;
 
-		var p = document.ClampToImageSize (e.PointDouble);
+		PointD p = document.ClampToImageSize (e.PointDouble);
 
 		document.Selection.Visible = true;
 
-		var surf = document.Layers.SelectionLayer.Surface;
+		ImageSurface surf = document.Layers.SelectionLayer.Surface;
 
-		using Context g = new (surf) {
-			Antialias = Antialias.Subpixel
-		};
+		using Context g = new (surf) { Antialias = Antialias.Subpixel };
 
 		if (path != null) {
 			g.AppendPath (path);
@@ -111,14 +106,17 @@ public class LassoSelectTool : BaseTool
 		document.Selection.SelectionPolygons.Clear ();
 		document.Selection.SelectionPolygons.Add ([.. lasso_polygon]);
 
-		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
+		SelectionModeHandler.PerformSelectionMode (
+			document,
+			combine_mode,
+			document.Selection.SelectionPolygons);
 
 		document.Workspace.Invalidate ();
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		var surf = document.Layers.SelectionLayer.Surface;
+		ImageSurface surf = document.Layers.SelectionLayer.Surface;
 
 		using Context g = new (surf);
 		if (path != null) {
@@ -131,7 +129,12 @@ public class LassoSelectTool : BaseTool
 
 		document.Selection.SelectionPolygons.Clear ();
 		document.Selection.SelectionPolygons.Add ([.. lasso_polygon]);
-		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
+
+		SelectionModeHandler.PerformSelectionMode (
+			document,
+			combine_mode,
+			document.Selection.SelectionPolygons);
+
 		document.Workspace.Invalidate ();
 
 		if (hist != null) {
