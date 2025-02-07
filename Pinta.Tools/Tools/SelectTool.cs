@@ -27,8 +27,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gdk;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -72,10 +70,9 @@ public abstract class SelectTool : BaseTool
 
 	protected abstract void DrawShape (Document document, RectangleD r, Layer l);
 
-	protected override void OnBuildToolBar (Box tb)
+	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
 		base.OnBuildToolBar (tb);
-
 		workspace.SelectionHandler.BuildToolbar (tb, Settings);
 	}
 
@@ -107,7 +104,7 @@ public abstract class SelectTool : BaseTool
 
 		// Do a full redraw for modes that can wipe existing selections outside the rectangle being drawn.
 		if (combine_mode == CombineMode.Replace || combine_mode == CombineMode.Intersect) {
-			var size = document.ImageSize;
+			Size size = document.ImageSize;
 			last_dirty = new RectangleI (0, 0, size.Width, size.Height);
 		}
 
@@ -121,14 +118,21 @@ public abstract class SelectTool : BaseTool
 			return;
 		}
 
-		var x = Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
-		var y = Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
-
 		// Should always be true, set in OnMouseDown
-		if (active_handle.HasValue)
-			OnHandleMoved (active_handle.Value, x, y, e.IsShiftPressed);
+		if (active_handle.HasValue) {
 
-		var dirty = ReDraw (document);
+			PointD p = new (
+				X: Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width)),
+				Y: Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height)));
+
+			OnHandleMoved (
+				active_handle.Value,
+				p.X,
+				p.Y,
+				e.IsShiftPressed);
+		}
+
+		RectangleI dirty = ReDraw (document);
 
 		UpdateHandlePositions ();
 
@@ -143,9 +147,9 @@ public abstract class SelectTool : BaseTool
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
 		// If the user didn't move the mouse, they want to deselect
-		var tolerance = 0;
+		const int TOLERANCE = 0;
 
-		if (Math.Abs (reset_origin.X - e.WindowPoint.X) <= tolerance && Math.Abs (reset_origin.Y - e.WindowPoint.Y) <= tolerance) {
+		if (Math.Abs (reset_origin.X - e.WindowPoint.X) <= TOLERANCE && Math.Abs (reset_origin.Y - e.WindowPoint.Y) <= TOLERANCE) {
 			// Mark as being done interactive drawing before invoking the deselect action.
 			// This will allow AfterSelectionChanged() to clear the selection.
 			is_drawing = false;
@@ -160,7 +164,7 @@ public abstract class SelectTool : BaseTool
 			PintaCore.Actions.Edit.Deselect.Activate ();
 
 		} else {
-			var dirty = ReDraw (document);
+			RectangleI dirty = ReDraw (document);
 
 			if (document.Selection != null) {
 				SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
@@ -189,9 +193,9 @@ public abstract class SelectTool : BaseTool
 
 		// When entering the tool, update the selection handles from the
 		// document's current selection.
-		if (document is not null) {
-			LoadFromDocument (document);
-		}
+		if (document is null) return;
+
+		LoadFromDocument (document);
 	}
 
 	protected override void OnSaveSettings (ISettingsService settings)
@@ -204,76 +208,102 @@ public abstract class SelectTool : BaseTool
 	private void OnHandleMoved (int handle, double x, double y, bool shift_pressed)
 	{
 		switch (handle) {
+
 			case 0:
 				shape_origin = new (x, y);
-				if (shift_pressed) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_origin = shape_origin with { X = shape_end.X - shape_end.Y + shape_origin.Y };
-					else
-						shape_origin = shape_origin with { Y = shape_end.Y - shape_end.X + shape_origin.X };
-				}
-				break;
+
+				if (!shift_pressed) return;
+
+				shape_origin =
+					(shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+					? (shape_origin with { X = shape_end.X - shape_end.Y + shape_origin.Y })
+					: (shape_origin with { Y = shape_end.Y - shape_end.X + shape_origin.X });
+
+				return;
+
 			case 1:
 				shape_origin = shape_origin with { X = x };
 				shape_end = shape_end with { Y = y };
-				if (shift_pressed) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_origin = shape_origin with { X = shape_end.X - shape_end.Y + shape_origin.Y };
-					else
-						shape_end = shape_end with { Y = shape_origin.Y + shape_end.X - shape_origin.X };
-				}
-				break;
+
+				if (!shift_pressed) return;
+
+				if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+					shape_origin = shape_origin with { X = shape_end.X - shape_end.Y + shape_origin.Y };
+				else
+					shape_end = shape_end with { Y = shape_origin.Y + shape_end.X - shape_origin.X };
+
+				return;
+
 			case 2:
 				shape_end = shape_end with { X = x };
 				shape_origin = shape_origin with { Y = y };
-				if (shift_pressed) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_end = shape_end with { X = shape_origin.X + shape_end.Y - shape_origin.Y };
-					else
-						shape_origin = shape_origin with { Y = shape_end.Y - shape_end.X + shape_origin.X };
-				}
-				break;
+
+				if (!shift_pressed) return;
+
+				if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+					shape_end = shape_end with { X = shape_origin.X + shape_end.Y - shape_origin.Y };
+				else
+					shape_origin = shape_origin with { Y = shape_end.Y - shape_end.X + shape_origin.X };
+
+				return;
+
 			case 3:
 				shape_end = new (x, y);
-				if (shift_pressed) {
-					if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-						shape_end = shape_end with { X = shape_origin.X + shape_end.Y - shape_origin.Y };
-					else
-						shape_end = shape_end with { Y = shape_origin.Y + shape_end.X - shape_origin.X };
-				}
-				break;
+
+				if (!shift_pressed)
+					return;
+
+				if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
+					shape_end = shape_end with { X = shape_origin.X + shape_end.Y - shape_origin.Y };
+				else
+					shape_end = shape_end with { Y = shape_origin.Y + shape_end.X - shape_origin.X };
+
+				return;
+
 			case 4:
 				shape_origin = shape_origin with { X = x };
-				if (shift_pressed) {
-					var d = shape_end.X - shape_origin.X;
-					shape_origin = shape_origin with { Y = (shape_origin.Y + shape_end.Y - d) / 2 };
-					shape_end = shape_end with { Y = (shape_origin.Y + shape_end.Y + d) / 2 };
-				}
-				break;
+
+				if (!shift_pressed) return;
+
+				double d4 = shape_end.X - shape_origin.X;
+				shape_origin = shape_origin with { Y = (shape_origin.Y + shape_end.Y - d4) / 2 };
+				shape_end = shape_end with { Y = (shape_origin.Y + shape_end.Y + d4) / 2 };
+
+				return;
+
 			case 5:
 				shape_origin = shape_origin with { Y = y };
-				if (shift_pressed) {
-					var d = shape_end.Y - shape_origin.Y;
-					shape_origin = shape_origin with { X = (shape_origin.X + shape_end.X - d) / 2 };
-					shape_end = shape_end with { X = (shape_origin.X + shape_end.X + d) / 2 };
-				}
-				break;
+
+				if (!shift_pressed) return;
+
+				double d5 = shape_end.Y - shape_origin.Y;
+				shape_origin = shape_origin with { X = (shape_origin.X + shape_end.X - d5) / 2 };
+				shape_end = shape_end with { X = (shape_origin.X + shape_end.X + d5) / 2 };
+
+				return;
+
 			case 6:
 				shape_end = shape_end with { X = x };
-				if (shift_pressed) {
-					var d = shape_end.X - shape_origin.X;
-					shape_origin = shape_origin with { Y = (shape_origin.Y + shape_end.Y - d) / 2 };
-					shape_end = shape_end with { Y = (shape_origin.Y + shape_end.Y + d) / 2 };
-				}
-				break;
+
+				if (!shift_pressed) return;
+
+				double d6 = shape_end.X - shape_origin.X;
+				shape_origin = shape_origin with { Y = (shape_origin.Y + shape_end.Y - d6) / 2 };
+				shape_end = shape_end with { Y = (shape_origin.Y + shape_end.Y + d6) / 2 };
+
+				return;
+
 			case 7:
 				shape_end = shape_end with { Y = y };
-				if (shift_pressed) {
-					var d = shape_end.Y - shape_origin.Y;
-					shape_origin = shape_origin with { X = (shape_origin.X + shape_end.X - d) / 2 };
-					shape_end = shape_end with { X = (shape_origin.X + shape_end.X + d) / 2 };
-				}
-				break;
+
+				if (!shift_pressed) return;
+
+				double d7 = shape_end.Y - shape_origin.Y;
+				shape_origin = shape_origin with { X = (shape_origin.X + shape_end.X - d7) / 2 };
+				shape_end = shape_end with { X = (shape_origin.X + shape_end.X + d7) / 2 };
+
+				return;
+
 			default:
 				throw new ArgumentOutOfRangeException (nameof (handle));
 		}
@@ -311,12 +341,12 @@ public abstract class SelectTool : BaseTool
 		document.Selection.Visible = true;
 		ShowHandles (true);
 
-		var rect = CairoExtensions.PointsToRectangle (shape_origin, shape_end);
+		RectangleD rect = CairoExtensions.PointsToRectangle (shape_origin, shape_end);
 
 		DrawShape (document, rect, document.Layers.SelectionLayer);
 
 		// Figure out a bounding box for everything that was drawn, and add a bit of padding.
-		var dirty = rect.ToInt ();
+		RectangleI dirty = rect.ToInt ();
 		dirty = dirty.Inflated (2, 2);
 		return dirty;
 	}
@@ -335,11 +365,10 @@ public abstract class SelectTool : BaseTool
 	private int? FindHandleIndexUnderPoint (PointD window_point)
 	{
 		var handle = FindHandleUnderPoint (window_point);
-		if (handle is not null) {
+		if (handle is not null)
 			return Array.IndexOf (handles, handle);
-		} else {
+		else
 			return null;
-		}
 	}
 
 	private void UpdateCursor (Document document, PointD window_point)
@@ -350,9 +379,8 @@ public abstract class SelectTool : BaseTool
 			return;
 		}
 
-		if (CurrentCursor != DefaultCursor) {
+		if (CurrentCursor != DefaultCursor)
 			SetCursor (DefaultCursor);
-		}
 	}
 
 	protected override void OnAfterUndo (Document document)
@@ -386,9 +414,9 @@ public abstract class SelectTool : BaseTool
 		shape_end = selection.End;
 		ShowHandles (document.Selection.Visible);
 
-		if (tools.CurrentTool == this) {
-			UpdateHandlePositions ();
-			document.Workspace.Invalidate ();
-		}
+		if (tools.CurrentTool != this) return;
+
+		UpdateHandlePositions ();
+		document.Workspace.Invalidate ();
 	}
 }
