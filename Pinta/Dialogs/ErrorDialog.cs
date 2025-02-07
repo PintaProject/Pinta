@@ -32,20 +32,20 @@ namespace Pinta;
 
 internal static class ErrorDialog
 {
-	internal static Task ShowMessage (
+	internal static async Task ShowMessage (
 		Gtk.Window parent,
 		string message,
 		string body)
 	{
 		Console.Error.WriteLine ("Pinta: {0}\n{1}", message, body);
 
-		Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
+		using Adw.MessageDialog dialog = Adw.MessageDialog.New (parent, message, body);
 
 		dialog.AddResponse (nameof (ErrorDialogResponse.OK), Translations.GetString ("_OK"));
 		dialog.DefaultResponse = nameof (ErrorDialogResponse.OK);
 		dialog.CloseResponse = nameof (ErrorDialogResponse.OK);
 
-		return dialog.RunAsync (dispose: true);
+		await dialog.RunAsync ();
 	}
 
 	internal static async Task<ErrorDialogResponse> ShowError (

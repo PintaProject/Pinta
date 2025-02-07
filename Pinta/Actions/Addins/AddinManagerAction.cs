@@ -55,10 +55,10 @@ internal sealed class AddinManagerAction : IActionHandler
 		addins.AddinManager.Activated -= Activated;
 	}
 
-	private void Activated (object sender, EventArgs e)
+	private async void Activated (object sender, EventArgs e)
 	{
 		AddinSetupService service = new (Mono.Addins.AddinManager.Registry);
-		AddinManagerDialog dialog = new (chrome.MainWindow, service, system, chrome);
-		dialog.Show ();
+		using AddinManagerDialog dialog = new (chrome.MainWindow, service, system, chrome);
+		await dialog.PresentAsync ();
 	}
 }

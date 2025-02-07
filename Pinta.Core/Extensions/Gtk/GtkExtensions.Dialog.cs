@@ -75,25 +75,6 @@ partial class GtkExtensions
 		return result;
 	}
 
-	public static Task<Gtk.ResponseType> ShowAsync (this Gtk.NativeDialog dialog, bool dispose = false)
-	{
-		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
-
-		void ResponseCallback (
-			Gtk.NativeDialog sender,
-			Gtk.NativeDialog.ResponseSignalArgs args)
-		{
-			completionSource.SetResult ((Gtk.ResponseType) args.ResponseId);
-			dialog.OnResponse -= ResponseCallback;
-			if (dispose) dialog.Dispose ();
-		}
-
-		dialog.OnResponse += ResponseCallback;
-		dialog.Show ();
-
-		return completionSource.Task;
-	}
-
 	/// <summary>
 	/// Similar to gtk_dialog_run() in GTK3, this runs the dialog in a blocking manner with a nested event loop.
 	/// This can be useful for compatibility with old code that relies on this behaviour, but new code should be
@@ -172,7 +153,7 @@ partial class GtkExtensions
 	}
 
 	// TODO-GTK4 (bindings) - replace with adw_message_dialog_choose() once adwaita 1.3 is available, like in v0.4 of gir.core
-	public static Task<string> RunAsync (this Adw.MessageDialog dialog, bool dispose = false)
+	public static Task<string> RunAsync (this Adw.MessageDialog dialog)
 	{
 		TaskCompletionSource<string> completionSource = new ();
 
@@ -182,7 +163,6 @@ partial class GtkExtensions
 		{
 			completionSource.SetResult (args.Response);
 			dialog.OnResponse -= ResponseCallback;
-			if (dispose) dialog.Dispose ();
 		}
 
 		dialog.OnResponse += ResponseCallback;
@@ -191,7 +171,7 @@ partial class GtkExtensions
 		return completionSource.Task;
 	}
 
-	public static Task<Gtk.ResponseType> RunAsync (this Gtk.Dialog dialog, bool dispose = false)
+	public static Task<Gtk.ResponseType> RunAsync (this Gtk.Dialog dialog)
 	{
 		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
 
@@ -201,11 +181,29 @@ partial class GtkExtensions
 		{
 			completionSource.SetResult ((Gtk.ResponseType) args.ResponseId);
 			dialog.OnResponse -= ResponseCallback;
-			if (dispose) dialog.Dispose ();
 		}
 
 		dialog.OnResponse += ResponseCallback;
 		dialog.Present ();
+
+		return completionSource.Task;
+	}
+
+	public static Task PresentAsync (this Gtk.Window window)
+	{
+		TaskCompletionSource completionSource = new ();
+
+		bool CloseRequestCallback (
+			Gtk.Window sender,
+			System.EventArgs args)
+		{
+			completionSource.SetResult ();
+			window.OnCloseRequest -= CloseRequestCallback;
+			return false; // Allow the dialog to close normally
+		}
+
+		window.OnCloseRequest += CloseRequestCallback;
+		window.Present ();
 
 		return completionSource.Task;
 	}

@@ -57,9 +57,9 @@ internal sealed class AboutDialogAction : IActionHandler
 		app.About.Activated -= Activated;
 	}
 
-	private void Activated (object sender, EventArgs e)
+	private async void Activated (object sender, EventArgs e)
 	{
-		Adw.AboutWindow dialog = Adw.AboutWindow.New ();
+		using Adw.AboutWindow dialog = Adw.AboutWindow.New ();
 		dialog.TransientFor = chrome.MainWindow;
 		dialog.Title = Translations.GetString ("About Pinta");
 		dialog.IconName = Icons.AboutPinta;
@@ -72,7 +72,7 @@ internal sealed class AboutDialogAction : IActionHandler
 		dialog.License = BuildLicenseText ();
 		dialog.Developers = authors;
 		dialog.TranslatorCredits = Translations.GetString ("translator-credits");
-		dialog.Present ();
+		await dialog.PresentAsync ();
 	}
 
 	private static string BuildCopyrightText ()
@@ -110,7 +110,7 @@ internal sealed class AboutDialogAction : IActionHandler
 		"@evgeniy-harchenko",
 		"@f-i-l-i-p",
 		"@khoidauminh",
-		"@Lehonti",
+		"Lehonti Ramos (@Lehonti)",
 		"@logiclrd",
 		"@Matthieu-LAURENT39",
 		"@potatoes1286",
