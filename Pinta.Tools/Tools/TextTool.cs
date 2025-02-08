@@ -29,8 +29,8 @@ public sealed class TextTool : BaseTool
 	private RectangleI old_cursor_bounds = RectangleI.Zero;
 
 	//This is used to temporarily store the UserLayer's and TextLayer's previous ImageSurface states.
-	private Cairo.ImageSurface? text_undo_surface;
-	private Cairo.ImageSurface? user_undo_surface;
+	private ImageSurface? text_undo_surface;
+	private ImageSurface? user_undo_surface;
 	private TextEngine? undo_engine;
 	// The last pre-editing string, if pre-editing is active.
 	private string? preedit_string;
@@ -59,7 +59,7 @@ public sealed class TextTool : BaseTool
 		}
 	}
 
-	private Pinta.Core.TextLayout CurrentTextLayout {
+	private TextLayout CurrentTextLayout {
 		get {
 			if (layout.Engine != CurrentTextEngine)
 				layout.Engine = CurrentTextEngine;
@@ -103,9 +103,6 @@ public sealed class TextTool : BaseTool
 
 	private readonly IWorkspaceService workspace;
 	private readonly IPaletteService palette;
-
-	#region Constructor
-
 	public TextTool (IServiceProvider services) : base (services)
 	{
 		workspace = services.GetService<IWorkspaceService> ();
@@ -121,7 +118,6 @@ public sealed class TextTool : BaseTool
 
 		DefaultCursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Text);
 	}
-	#endregion
 
 	#region ToolBar
 	// NRT - Created by OnBuildToolBar
@@ -212,7 +208,7 @@ public sealed class TextTool : BaseTool
 
 		tb.Append (GtkExtensions.CreateToolBarSeparator ());
 
-		var alignment = (TextAlignment) Settings.GetSetting (ALIGNMENT_SETTING, (int) TextAlignment.Left);
+		TextAlignment alignment = (TextAlignment) Settings.GetSetting (ALIGNMENT_SETTING, (int) TextAlignment.Left);
 
 		if (left_alignment_btn == null) {
 			left_alignment_btn = new Gtk.ToggleButton {
@@ -430,10 +426,9 @@ public sealed class TextTool : BaseTool
 
 	private void UpdateTextEngineColor ()
 	{
-		if (PintaCore.Workspace.HasOpenDocuments) {
-			CurrentTextEngine.PrimaryColor = palette.PrimaryColor;
-			CurrentTextEngine.SecondaryColor = palette.SecondaryColor;
-		}
+		if (!PintaCore.Workspace.HasOpenDocuments) return;
+		CurrentTextEngine.PrimaryColor = palette.PrimaryColor;
+		CurrentTextEngine.SecondaryColor = palette.SecondaryColor;
 	}
 
 	private int OutlineWidth
@@ -572,16 +567,17 @@ public sealed class TextTool : BaseTool
 				FinalizeText ();
 			}
 
-			if (!is_editing) {
-				// Start editing at the cursor location
-				click_point = pt;
-				CurrentTextEngine.Clear ();
-				UpdateFont ();
-				click_point = click_point with { Y = click_point.Y - (CurrentTextLayout.FontHeight / 2) };
-				CurrentTextEngine.Origin = click_point;
-				StartEditing ();
-				RedrawText (true, true);
-			}
+			if (is_editing)
+				return;
+
+			// Start editing at the cursor location
+			click_point = pt;
+			CurrentTextEngine.Clear ();
+			UpdateFont ();
+			click_point = click_point with { Y = click_point.Y - (CurrentTextLayout.FontHeight / 2) };
+			CurrentTextEngine.Origin = click_point;
+			StartEditing ();
+			RedrawText (true, true);
 		}
 	}
 
@@ -645,12 +641,8 @@ public sealed class TextTool : BaseTool
 		if (ctrl_key && workspace.HasOpenDocuments) {
 			//Go through every UserLayer.
 			foreach (UserLayer ul in document.Layers.UserLayers) {
-				//Check each UserLayer's editable text boundaries to see if they contain the mouse position.
-				if (ul.TextBounds.Contains (last_mouse_position)) {
-					//The mouse is over editable text.
-					showNormalCursor = true;
-				}
-
+				if (!ul.TextBounds.Contains (last_mouse_position)) continue; //Check each UserLayer's editable text boundaries to see if they contain the mouse position.
+				showNormalCursor = true; //The mouse is over editable text.
 			}
 		} else {
 			showNormalCursor = true;
@@ -805,11 +797,12 @@ public sealed class TextTool : BaseTool
 
 	protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
 	{
-		if (e.Key.IsControlKey () || e.IsControlPressed) {
-			ctrl_key = false;
+		if (!e.Key.IsControlKey () && !e.IsControlPressed)
+			return false;
 
-			UpdateMouseCursor (document);
-		}
+		ctrl_key = false;
+
+		UpdateMouseCursor (document);
 		return false;
 	}
 
@@ -927,6 +920,7 @@ public sealed class TextTool : BaseTool
 			//Create a new TextHistoryItem so that the committing of text can be undone.
 			doc.History.PushNewItem (
 				new TextHistoryItem (
+					workspace,
 					Icon,
 					Name,
 					text_undo_surface.Clone (),
@@ -978,7 +972,7 @@ public sealed class TextTool : BaseTool
 
 		RectangleI cursorBounds = RectangleI.Zero;
 
-		Cairo.ImageSurface surf;
+		ImageSurface surf;
 
 		if (!useTextLayer) {
 			//Draw text on the current UserLayer's surface as finalized text.
@@ -990,17 +984,15 @@ public sealed class TextTool : BaseTool
 			ClearTextLayer ();
 		}
 
-		using Cairo.Context g = new (surf);
+		using Context g = new (surf);
 
-		var options = new Cairo.FontOptions ();
+		FontOptions options = new ();
 
 		if (UseAntialiasing) {
-			// Adjusts antialiasing JUST for the outline brush
-			g.Antialias = Cairo.Antialias.Gray;
-			// Adjusts antialiasing for PangoCairo's text draw function
-			options.Antialias = Antialias.Gray;
+			g.Antialias = Antialias.Gray; // Adjusts antialiasing JUST for the outline brush
+			options.Antialias = Antialias.Gray; // Adjusts antialiasing for PangoCairo's text draw function
 		} else {
-			g.Antialias = Cairo.Antialias.None;
+			g.Antialias = Antialias.None;
 			options.Antialias = Antialias.None;
 		}
 
@@ -1009,9 +1001,17 @@ public sealed class TextTool : BaseTool
 
 
 		// Show selection if on text layer
+
 		if (useTextLayer) {
+
 			// Selected Text
-			Cairo.Color c = new Cairo.Color (0.7, 0.8, 0.9, 0.5);
+
+			Color c = new (
+				R: 0.7,
+				G: 0.8,
+				B: 0.9,
+				A: 0.5);
+
 			foreach (RectangleI rect in CurrentTextLayout.GetSelectionRectangles ())
 				g.FillRectangle (rect.ToDouble (), c);
 		}
@@ -1024,9 +1024,8 @@ public sealed class TextTool : BaseTool
 
 		//Fill in background
 		if (BackgroundFill) {
-			using Cairo.Context g2 = new (surf);
+			using Context g2 = new (surf);
 			selection?.Clip (g2);
-
 			g2.FillRectangle (CurrentTextLayout.GetLayoutBounds ().ToDouble (), CurrentTextEngine.SecondaryColor);
 		}
 
@@ -1050,8 +1049,8 @@ public sealed class TextTool : BaseTool
 
 		if (showCursor) {
 
-			var loc = CurrentTextLayout.GetCursorLocation ();
-			var color = CurrentTextEngine.PrimaryColor;
+			RectangleI loc = CurrentTextLayout.GetCursorLocation ();
+			Color color = CurrentTextEngine.PrimaryColor;
 
 			g.DrawLine (
 				new PointD (loc.X, loc.Y),
@@ -1066,6 +1065,7 @@ public sealed class TextTool : BaseTool
 
 
 		if (useTextLayer && (is_editing || ctrl_key) && !CurrentTextEngine.IsEmpty ()) {
+
 			//Draw the text edit rectangle.
 
 			g.Save ();
@@ -1076,11 +1076,11 @@ public sealed class TextTool : BaseTool
 
 			g.LineWidth = 1;
 
-			g.SetSourceColor (new Cairo.Color (1, 1, 1));
+			g.SetSourceColor (new Color (1, 1, 1));
 			g.StrokePreserve ();
 
 			g.SetDash ([2, 4], 0);
-			g.SetSourceColor (new Cairo.Color (1, .1, .2));
+			g.SetSourceColor (new Color (1, .1, .2));
 
 			g.Stroke ();
 
@@ -1113,8 +1113,8 @@ public sealed class TextTool : BaseTool
 		Document doc = workspace.ActiveDocument;
 
 		//Create a backup of everything before redrawing the text and etc.
-		Cairo.ImageSurface oldTextSurface = doc.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clone ();
-		Cairo.ImageSurface oldUserSurface = doc.Layers.CurrentUserLayer.Surface.Clone ();
+		ImageSurface oldTextSurface = doc.Layers.CurrentUserLayer.TextLayer.Layer.Surface.Clone ();
+		ImageSurface oldUserSurface = doc.Layers.CurrentUserLayer.Surface.Clone ();
 		TextEngine oldTextEngine = CurrentTextEngine.Clone ();
 
 		//Draw the text onto the UserLayer (without the cursor) rather than the TextLayer.
@@ -1130,6 +1130,7 @@ public sealed class TextTool : BaseTool
 		//Create a new TextHistoryItem so that the finalization of the text can be undone. Construct
 		//it on the spot so that it is more memory efficient if the changes are small.
 		TextHistoryItem hist = new (
+			workspace,
 			Icon,
 			FinalizeName,
 			oldTextSurface,
@@ -1167,10 +1168,11 @@ public sealed class TextTool : BaseTool
 
 	protected override bool OnHandleUndo (Document document)
 	{
-		if (is_editing) {
-			// commit a history item to let the undo action undo text history item
-			StopEditing (false);
-		}
+		if (!is_editing)
+			return false;
+
+		// commit a history item to let the undo action undo text history item
+		StopEditing (false);
 
 		return false;
 	}
@@ -1178,14 +1180,13 @@ public sealed class TextTool : BaseTool
 	protected override bool OnHandleRedo (Document document)
 	{
 		//Rather than redoing something, if the text has been edited then simply commit and do not redo.
-		if (is_editing && CurrentTextEngine.State == TextMode.Uncommitted) {
-			//Commit a new TextHistoryItem.
-			StopEditing (false);
+		if (!is_editing || CurrentTextEngine.State != TextMode.Uncommitted)
+			return false;
 
-			return true;
-		}
+		//Commit a new TextHistoryItem.
+		StopEditing (false);
 
-		return false;
+		return true;
 	}
 
 	#endregion
@@ -1197,12 +1198,11 @@ public sealed class TextTool : BaseTool
 		if (!is_editing)
 			return false;
 
-		if (await CurrentTextEngine.PerformPaste (cb)) {
-			RedrawText (true, true);
-			return true;
-		}
+		if (!await CurrentTextEngine.PerformPaste (cb))
+			return false;
 
-		return false;
+		RedrawText (true, true);
+		return true;
 	}
 
 	protected override bool OnHandleCopy (Document document, Gdk.Clipboard cb)

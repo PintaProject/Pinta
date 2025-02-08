@@ -41,6 +41,8 @@ public sealed class TextHistoryItem : BaseHistoryItem
 	TextEngine text_engine;
 	RectangleI text_bounds;
 
+	private readonly IWorkspaceService workspace;
+
 	/// <summary>
 	/// A history item for when text is created, edited, and/or finalized.
 	/// </summary>
@@ -50,30 +52,46 @@ public sealed class TextHistoryItem : BaseHistoryItem
 	/// <param name="passedUserSurface">The stored UserLayer surface.</param>
 	/// <param name="passedTextEngine">The text engine being used.</param>
 	/// <param name="passedUserLayer">The UserLayer being modified.</param>
-	public TextHistoryItem (string icon, string text, ImageSurface passedTextSurface,
-			       ImageSurface passedUserSurface, TextEngine passedTextEngine,
-			       UserLayer passedUserLayer) : base (icon, text)
+	public TextHistoryItem (
+		IWorkspaceService workspace,
+		string icon,
+		string text,
+		ImageSurface passedTextSurface,
+		ImageSurface passedUserSurface,
+		TextEngine passedTextEngine,
+		UserLayer passedUserLayer
+	)
+		: base (icon, text)
 	{
 		user_layer = passedUserLayer;
 
-
-		text_surface_diff = SurfaceDiff.Create (passedTextSurface, user_layer.TextLayer.Layer.Surface, true);
+		text_surface_diff = SurfaceDiff.Create (
+			original: passedTextSurface,
+			updated_surf: user_layer.TextLayer.Layer.Surface,
+			force: true);
 
 		if (text_surface_diff == null) {
 			text_surface = passedTextSurface;
 		}
 
-
-		user_surface_diff = SurfaceDiff.Create (passedUserSurface, user_layer.Surface, true);
+		user_surface_diff = SurfaceDiff.Create (
+			original: passedUserSurface,
+			updated_surf: user_layer.Surface,
+			force: true);
 
 		if (user_surface_diff == null) {
 			user_surface = passedUserSurface;
 		}
 
-
 		text_engine = passedTextEngine;
 
-		text_bounds = new RectangleI (user_layer.TextBounds.X, user_layer.TextBounds.Y, user_layer.TextBounds.Width, user_layer.TextBounds.Height);
+		text_bounds = new RectangleI (
+			user_layer.TextBounds.X,
+			user_layer.TextBounds.Y,
+			user_layer.TextBounds.Width,
+			user_layer.TextBounds.Height);
+
+		this.workspace = workspace;
 	}
 
 	public override void Undo ()
@@ -93,7 +111,7 @@ public sealed class TextHistoryItem : BaseHistoryItem
 
 		if (text_surface_diff != null) {
 			text_surface_diff.ApplyAndSwap (surf);
-			PintaCore.Workspace.Invalidate (text_surface_diff.GetBounds ());
+			workspace.Invalidate (text_surface_diff.GetBounds ());
 		} else {
 			// Undo to the "old" surface
 			user_layer.TextLayer.Layer.Surface = text_surface!; // NRT - Will be not-null if text_surface_diff is null
@@ -102,14 +120,12 @@ public sealed class TextHistoryItem : BaseHistoryItem
 			text_surface = surf;
 		}
 
-
-
 		// Grab the original surface
 		surf = user_layer.Surface;
 
 		if (user_surface_diff != null) {
 			user_surface_diff.ApplyAndSwap (surf);
-			PintaCore.Workspace.Invalidate (user_surface_diff.GetBounds ());
+			workspace.Invalidate (user_surface_diff.GetBounds ());
 		} else {
 			// Undo to the "old" surface
 			user_layer.Surface = user_surface!; // NRT - Will be not-null if user_surface_diff is null
@@ -118,12 +134,8 @@ public sealed class TextHistoryItem : BaseHistoryItem
 			user_surface = surf;
 		}
 
-
-
 		//Redraw everything since surfaces were swapped.
-		PintaCore.Workspace.Invalidate ();
-
-
+		workspace.Invalidate ();
 
 		//Store the old text data temporarily.
 		TextEngine oldTextEngine = text_engine;
