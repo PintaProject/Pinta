@@ -55,6 +55,7 @@ For building on the command line:
 - Install .NET 8 and GTK4
   - `brew install dotnet-sdk libadwaita adwaita-icon-theme gettext webp-pixbuf-loader`
   - For Apple Silicon, set `DYLD_LIBRARY_PATH=/opt/homebrew/lib` in the environment so that Pinta can load the GTK libraries
+  - For Intel, you may need to set `DYLD_LIBRARY_PATH=/usr/local/lib` when using .NET 9 or higher
 - Build:
   - `dotnet build`
 - Run:
