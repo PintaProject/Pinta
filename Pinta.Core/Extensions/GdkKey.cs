@@ -9,6 +9,12 @@ public readonly record struct Key (uint Value)
 {
 	public static Key Invalid { get; } = new (Gdk.Constants.KEY_VoidSymbol);
 
+	/// <summary>
+	/// Returns the name of the key value, e.g. 'A' for 'KEY_A'
+	/// </summary>
+	public string Name ()
+		=> Gdk.Functions.KeyvalName (Value) ?? string.Empty;
+
 	public Key ToUpper ()
 		=> new (Gdk.Functions.KeyvalToUpper (Value));
 
