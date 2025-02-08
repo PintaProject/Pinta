@@ -36,9 +36,11 @@ public sealed class MoveSelectionTool : BaseTransformTool
 	private DocumentSelection? original_selection;
 
 	private readonly SystemManager system_manager;
+	private readonly IWorkspaceService workspace;
 	public MoveSelectionTool (IServiceProvider services) : base (services)
 	{
 		system_manager = services.GetService<SystemManager> ();
+		workspace = services.GetService<IWorkspaceService> ();
 	}
 
 	public override string Name => Translations.GetString ("Move Selection");
@@ -65,7 +67,7 @@ public sealed class MoveSelectionTool : BaseTransformTool
 
 		original_selection = document.Selection.Clone ();
 
-		hist = new SelectionHistoryItem (Icon, Name);
+		hist = new SelectionHistoryItem (workspace, Icon, Name);
 		hist.TakeSnapshot ();
 	}
 

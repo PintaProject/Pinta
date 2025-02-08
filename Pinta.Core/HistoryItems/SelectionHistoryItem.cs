@@ -32,11 +32,18 @@ public sealed class SelectionHistoryItem : BaseHistoryItem
 	private DocumentSelection? old_previous_selection;
 
 	private bool hide_tool_layer;
+	private readonly IWorkspaceService workspace;
 
 	public override bool CausesDirty => false;
 
-	public SelectionHistoryItem (string icon, string text) : base (icon, text)
+	public SelectionHistoryItem (
+		IWorkspaceService workspace,
+		string icon,
+		string text
+	)
+		: base (icon, text)
 	{
+		this.workspace = workspace;
 	}
 
 	public override void Undo ()
@@ -51,7 +58,7 @@ public sealed class SelectionHistoryItem : BaseHistoryItem
 
 	private void Swap ()
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 		DocumentSelection swap_selection = doc.Selection;
 		bool swap_hide_tool_layer = doc.Layers.ToolLayer.Hidden;
 
@@ -65,12 +72,12 @@ public sealed class SelectionHistoryItem : BaseHistoryItem
 		old_previous_selection = doc.PreviousSelection;
 		doc.PreviousSelection = swap_selection!;
 
-		PintaCore.Workspace.Invalidate ();
+		workspace.Invalidate ();
 	}
 
 	public void TakeSnapshot ()
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		var doc = workspace.ActiveDocument;
 		old_selection = doc.Selection.Clone ();
 		old_previous_selection = doc.PreviousSelection.Clone ();
 		hide_tool_layer = doc.Layers.ToolLayer.Hidden;
