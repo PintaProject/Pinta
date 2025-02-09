@@ -13,14 +13,10 @@ public sealed class BitMask
 
 	public BitMask (int width, int height)
 	{
-		if (width < 0)
-			throw new ArgumentOutOfRangeException (nameof (width));
-		if (height < 0)
-			throw new ArgumentOutOfRangeException (nameof (height));
-
+		ArgumentOutOfRangeException.ThrowIfNegative (width);
+		ArgumentOutOfRangeException.ThrowIfNegative (height);
 		Width = width;
 		Height = height;
-
 		array = new BitArray (width * height);
 	}
 
@@ -47,28 +43,32 @@ public sealed class BitMask
 
 	public int Height { get; }
 
-	public bool IsEmpty => array.Length == 0;
+	public bool IsEmpty
+		=> array.Length == 0;
 
-	public void Clear (bool newValue) => array.SetAll (newValue);
+	public void Clear (bool newValue)
+		=> array.SetAll (newValue);
 
-	public bool Get (int x, int y) => array.Get (GetIndex (x, y));
+	public bool Get (int x, int y)
+		=> array.Get (GetIndex (x, y));
 
 	public void Invert (int x, int y)
 	{
-		var index = GetIndex (x, y);
+		int index = GetIndex (x, y);
 		array[index] = !array[index];
 	}
 
 	public void Invert (Scanline scan)
 	{
-		var x = scan.X;
+		int x = scan.X;
 		while (x < scan.X + scan.Length) {
 			Invert (x, scan.Y);
 			++x;
 		}
 	}
 
-	public void Set (int x, int y, bool newValue) => array[GetIndex (x, y)] = newValue;
+	public void Set (int x, int y, bool newValue)
+		=> array[GetIndex (x, y)] = newValue;
 
 	public void Set (RectangleI rect, bool newValue)
 	{
@@ -79,10 +79,8 @@ public sealed class BitMask
 
 	private int GetIndex (int x, int y)
 	{
-		if (x < 0)
-			throw new ArgumentOutOfRangeException (nameof (x));
-		if (y < 0)
-			throw new ArgumentOutOfRangeException (nameof (y));
+		ArgumentOutOfRangeException.ThrowIfNegative (x);
+		ArgumentOutOfRangeException.ThrowIfNegative (y);
 		return (y * Width) + x;
 	}
 
@@ -129,17 +127,19 @@ public sealed class BitMask
 		if (obj is not BitMask other) return false;
 		if (Width != other.Width) return false;
 		if (Height != other.Height) return false;
-		for (int i = 0; i < array.Length; i++) {
+
+		for (int i = 0; i < array.Length; i++)
 			if (array[i] != other.array[i])
 				return false;
-		}
+
 		return true;
 	}
 
 	/// <summary>
 	/// Inverts all bits in the bitmask
 	/// </summary>
-	public void Not () => array.Not ();
+	public void Not ()
+		=> array.Not ();
 
 	/// <summary>
 	/// Performs bit-by-bit AND in the area where
@@ -155,9 +155,12 @@ public sealed class BitMask
 		}
 
 		RectangleI overlap = GetOverlap (other, PointI.Zero);
+
 		if (overlap.IsEmpty) return;
+
 		int right = overlap.Right;
 		int bottom = overlap.Bottom;
+
 		for (int x = overlap.Left; x <= right; x++)
 			for (int y = overlap.Top; y <= bottom; y++)
 				this[x, y] = this[x, y] && other[x, y];
@@ -177,9 +180,12 @@ public sealed class BitMask
 		}
 
 		RectangleI overlap = GetOverlap (other, PointI.Zero);
+
 		if (overlap.IsEmpty) return;
+
 		int right = overlap.Right;
 		int bottom = overlap.Bottom;
+
 		for (int x = overlap.Left; x <= right; x++)
 			for (int y = overlap.Top; y <= bottom; y++)
 				this[x, y] = this[x, y] || other[x, y];
@@ -199,9 +205,12 @@ public sealed class BitMask
 		}
 
 		RectangleI overlap = GetOverlap (other, PointI.Zero);
+
 		if (overlap.IsEmpty) return;
+
 		int right = overlap.Right;
 		int bottom = overlap.Bottom;
+
 		for (int x = overlap.Left; x <= right; x++)
 			for (int y = overlap.Top; y <= bottom; y++)
 				this[x, y] = this[x, y] ^ other[x, y];
@@ -223,11 +232,10 @@ public sealed class BitMask
 
 		int right = bounds.Right;
 		int bottom = bounds.Bottom;
-		for (int y = bounds.Top; y <= bottom; y++) {
-			for (int x = bounds.Left; x <= right; x++) {
+
+		for (int y = bounds.Top; y <= bottom; y++)
+			for (int x = bounds.Left; x <= right; x++)
 				submask[x - bounds.Left, y - bounds.Top] = this[x, y];
-			}
-		}
 
 		return submask;
 	}
@@ -239,17 +247,16 @@ public sealed class BitMask
 		RectangleI thisRect = new (
 			point: PointI.Zero,
 			width: Width,
-			height: Height
-		);
+			height: Height);
 
 		RectangleI otherRect = new (
 			point: offset,
 			width: other.Width,
-			height: other.Height
-		);
+			height: other.Height);
 
 		return thisRect.Intersect (otherRect);
 	}
 
-	public override int GetHashCode () => Width.GetHashCode () ^ Height.GetHashCode ();
+	public override int GetHashCode ()
+		=> Width.GetHashCode () ^ Height.GetHashCode ();
 }
