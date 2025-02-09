@@ -24,7 +24,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 	public sealed override bool IsTileable => true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsBrightnessContrast;
+	public override string Icon => Resources.Icons.AdjustmentsBrightnessContrast;
 
 	public override string Name => Translations.GetString ("Brightness / Contrast");
 
@@ -80,8 +80,8 @@ public sealed class BrightnessContrastEffect : BaseEffect
 					int intensity = col.GetIntensityByte ();
 					int shiftIndex = intensity * 256;
 					dst_row[i] = ColorBgra.FromBgra (
-						b: rgb_table![shiftIndex + col.R],
-						g: rgb_table[shiftIndex + col.G],
+						b: rgb_table![shiftIndex + col.B],
+						g: rgb_table![shiftIndex + col.G],
 						r: rgb_table![shiftIndex + col.R],
 						a: col.A);
 				}
@@ -143,10 +143,9 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		public int Brightness {
 			get => brightness;
 			set {
-				if (value != brightness) {
-					brightness = value;
-					FirePropertyChanged (nameof (Brightness));
-				}
+				if (value == brightness) return;
+				brightness = value;
+				FirePropertyChanged (nameof (Brightness));
 			}
 		}
 
@@ -154,10 +153,9 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		public int Contrast {
 			get => contrast;
 			set {
-				if (value != contrast) {
-					contrast = value;
-					FirePropertyChanged (nameof (Contrast));
-				}
+				if (value == contrast) return;
+				contrast = value;
+				FirePropertyChanged (nameof (Contrast));
 			}
 		}
 
