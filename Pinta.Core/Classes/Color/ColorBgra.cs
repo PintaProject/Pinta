@@ -36,7 +36,7 @@ public readonly partial struct ColorBgra
 	/// </summary>
 	[NonSerialized]
 	[FieldOffset (0)]
-	public readonly uint Bgra;
+	public readonly uint BGRA;
 
 	private ColorBgra (byte b, byte g, byte r, byte a)
 	{
@@ -48,6 +48,6 @@ public readonly partial struct ColorBgra
 
 	private ColorBgra (uint bgra)
 	{
-		Bgra = bgra;
+		BGRA = bgra;
 	}
 }

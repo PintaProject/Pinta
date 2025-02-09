@@ -562,7 +562,7 @@ public partial class LevelsDialog : Gtk.Dialog
 	private void MaskChanged ()
 	{
 		uint maxBgra =
-			ColorBgra.Black.Bgra
+			ColorBgra.Black.BGRA
 			| (mask.R ? (uint) 0xFF0000 : 0)
 			| (mask.G ? (uint) 0xFF00 : 0)
 			| (mask.B ? (uint) 0xFF : 0);

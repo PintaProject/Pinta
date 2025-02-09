@@ -143,18 +143,18 @@ public static class UnaryPixelOps
 		private readonly uint add_value;
 
 		public override ColorBgra Apply (in ColorBgra color)
-			=> ColorBgra.FromUInt32 ((color.Bgra & 0x00ffffff) + add_value);
+			=> ColorBgra.FromUInt32 ((color.BGRA & 0x00ffffff) + add_value);
 
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
 			for (int i = 0; i < src.Length; ++i)
-				dst[i] = ColorBgra.FromUInt32 ((src[i].Bgra & 0x00ffffff) + add_value);
+				dst[i] = ColorBgra.FromUInt32 ((src[i].BGRA & 0x00ffffff) + add_value);
 		}
 
 		public override void Apply (Span<ColorBgra> dst)
 		{
 			for (int i = 0; i < dst.Length; ++i)
-				dst[i] = ColorBgra.FromUInt32 ((dst[i].Bgra & 0x00ffffff) + add_value);
+				dst[i] = ColorBgra.FromUInt32 ((dst[i].BGRA & 0x00ffffff) + add_value);
 		}
 
 		public SetAlphaChannel (byte alphaValue)
@@ -170,18 +170,18 @@ public static class UnaryPixelOps
 	public sealed class SetAlphaChannelTo255 : UnaryPixelOp
 	{
 		public override ColorBgra Apply (in ColorBgra color)
-			=> ColorBgra.FromUInt32 (color.Bgra | 0xff000000);
+			=> ColorBgra.FromUInt32 (color.BGRA | 0xff000000);
 
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
 			for (int i = 0; i < src.Length; ++i)
-				dst[i] = ColorBgra.FromUInt32 (src[i].Bgra | 0xff000000);
+				dst[i] = ColorBgra.FromUInt32 (src[i].BGRA | 0xff000000);
 		}
 
 		public override void Apply (Span<ColorBgra> dst)
 		{
 			for (int i = 0; i < dst.Length; ++i)
-				dst[i] = ColorBgra.FromUInt32 (dst[i].Bgra | 0xff000000);
+				dst[i] = ColorBgra.FromUInt32 (dst[i].BGRA | 0xff000000);
 		}
 	}
 

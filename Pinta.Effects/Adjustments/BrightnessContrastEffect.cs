@@ -72,7 +72,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 				for (int i = 0; i < src_row.Length; ++i) {
 					ColorBgra col = src_row[i];
 					uint c = rgb_table![col.GetIntensityByte ()]; // NRT - Set in Calculate
-					dst_row[i] = ColorBgra.FromUInt32 ((col.Bgra & 0xff000000) | c | (c << 8) | (c << 16));
+					dst_row[i] = ColorBgra.FromUInt32 ((col.BGRA & 0xff000000) | c | (c << 8) | (c << 16));
 				}
 			} else {
 				for (int i = 0; i < src_row.Length; ++i) {
