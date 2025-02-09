@@ -9,7 +9,7 @@ public sealed class Mandelbrot
 	private readonly int max_iterations;
 	public Mandelbrot (int maxIterations, double maxSquared)
 	{
-		ArgumentOutOfRangeException.ThrowIfLessThan (maxIterations, 1);
+		ArgumentOutOfRangeException.ThrowIfNegativeOrZero (maxIterations);
 		ArgumentOutOfRangeException.ThrowIfLessThanOrEqual (maxSquared, 1);
 		max_iterations = maxIterations;
 		max_squared = maxSquared;
