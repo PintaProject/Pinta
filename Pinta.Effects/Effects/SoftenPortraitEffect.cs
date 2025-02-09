@@ -111,9 +111,12 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ())) {
 			ColorBgra srcGrey = desaturate_op.Apply (src_data[pixel.memoryOffset]);
-			srcGrey.R = Utility.ClampToByte ((int) (srcGrey.R * settings.redAdjust));
-			srcGrey.B = Utility.ClampToByte ((int) (srcGrey.B * settings.blueAdjust));
-			dst_data[pixel.memoryOffset] = overlay_op.Apply (srcGrey, dst_data[pixel.memoryOffset]);
+			ColorBgra effective = ColorBgra.FromBgra (
+				b: Utility.ClampToByte ((int) (srcGrey.B * settings.blueAdjust)),
+				g: srcGrey.G,
+				r: Utility.ClampToByte ((int) (srcGrey.R * settings.redAdjust)),
+				a: srcGrey.A);
+			dst_data[pixel.memoryOffset] = overlay_op.Apply (effective, dst_data[pixel.memoryOffset]);
 		}
 	}
 }

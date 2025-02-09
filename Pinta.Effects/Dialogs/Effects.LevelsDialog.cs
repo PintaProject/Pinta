@@ -412,8 +412,7 @@ public partial class LevelsDialog : Gtk.Dialog
 					after[c] = Utility.ClampToByte (after[c] + diff);
 		}
 
-		after.A = 255;
-		return after;
+		return after.NewAlpha (255);
 	}
 
 	private float MaskGamma ()
@@ -562,11 +561,13 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private void MaskChanged ()
 	{
-		ColorBgra max = ColorBgra.Black;
+		uint maxBgra =
+			ColorBgra.Black.Bgra
+			| (mask.R ? (uint) 0xFF0000 : 0)
+			| (mask.G ? (uint) 0xFF00 : 0)
+			| (mask.B ? (uint) 0xFF : 0);
 
-		max.Bgra |= mask.R ? (uint) 0xFF0000 : 0;
-		max.Bgra |= mask.G ? (uint) 0xFF00 : 0;
-		max.Bgra |= mask.B ? (uint) 0xFF : 0;
+		ColorBgra max = ColorBgra.FromUInt32 (maxBgra);
 
 		Color maxcolor = max.ToCairoColor ();
 		gradient_input.MaxColor = maxcolor;

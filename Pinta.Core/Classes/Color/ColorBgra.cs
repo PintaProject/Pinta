@@ -17,24 +17,37 @@ namespace Pinta.Core;
 /// </summary>
 [Serializable]
 [StructLayout (LayoutKind.Explicit)]
-public partial struct ColorBgra
+public readonly partial struct ColorBgra
 {
 	[FieldOffset (0)]
-	public byte B;
+	public readonly byte B;
 
 	[FieldOffset (1)]
-	public byte G;
+	public readonly byte G;
 
 	[FieldOffset (2)]
-	public byte R;
+	public readonly byte R;
 
 	[FieldOffset (3)]
-	public byte A;
+	public readonly byte A;
 
 	/// <summary>
 	/// Lets you change B, G, R, and A at the same time.
 	/// </summary>
 	[NonSerialized]
 	[FieldOffset (0)]
-	public uint Bgra;
+	public readonly uint Bgra;
+
+	private ColorBgra (byte b, byte g, byte r, byte a)
+	{
+		B = b;
+		G = g;
+		R = r;
+		A = a;
+	}
+
+	private ColorBgra (uint bgra)
+	{
+		Bgra = bgra;
+	}
 }

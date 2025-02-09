@@ -143,9 +143,7 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 
 		byte intensity = selected[channel] ? (byte) 96 : (byte) 32;
 		ColorBgra pen_color = ColorBgra.Blend (ColorBgra.Black, color, intensity);
-		ColorBgra brush_color = color;
-
-		brush_color.A = intensity;
+		ColorBgra brush_color = color.NewAlpha (intensity);
 
 		g.LineWidth = 1;
 

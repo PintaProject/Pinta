@@ -140,12 +140,10 @@ public abstract class GradientRenderer
 	{
 		if (AlphaOnly && AlphaBlending) {
 			byte resultAlpha = (byte) Utility.FastDivideShortByByte ((ushort) (pixel.A * bounds.EndAlpha), 255);
-			ColorBgra result = pixel;
-			result.A = resultAlpha;
+			ColorBgra result = pixel.NewAlpha (resultAlpha);
 			return result;
 		} else if (AlphaOnly && !AlphaBlending) {
-			ColorBgra result = pixel;
-			result.A = bounds.EndAlpha;
+			ColorBgra result = pixel.NewAlpha (bounds.EndAlpha);
 			return result;
 		} else if (!AlphaOnly && AlphaBlending) {
 			return normal_blend_op.Apply (pixel, end_color);
@@ -183,8 +181,7 @@ public abstract class GradientRenderer
 				byte lerpByte = ComputeByteLerp (x, y);
 				byte lerpAlpha = lerp_alphas[lerpByte];
 				ColorBgra original = row[x];
-				ColorBgra color = original.ToStraightAlpha ();
-				color.A = lerpAlpha;
+				ColorBgra color = original.ToStraightAlpha ().NewAlpha (lerpAlpha);
 				row[x] = color.ToPremultipliedAlpha ();
 			}
 		} else if (!AlphaOnly && (AlphaBlending && (startAlpha != 255 || endAlpha != 255))) {
