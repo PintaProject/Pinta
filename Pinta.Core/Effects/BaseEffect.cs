@@ -93,23 +93,8 @@ public abstract class BaseEffect
 		return Task.FromResult (true); // Placeholder
 	}
 
-	/// <summary>
-	/// Launches the standard configuration dialog for this effect.
-	/// </summary>
-	/// <param name="localizer">
-	/// The localizer for the effect add-in. This is used to fetch translations for the
-	/// strings in the dialog.
-	/// </param>
-	protected Task<bool> LaunchSimpleEffectDialog (AddinLocalizer localizer)
-	{
-		return PintaCore.Chrome.LaunchSimpleEffectDialog (
-			PintaCore.Chrome.MainWindow,
-			this,
-			new AddinLocalizerWrapper (localizer),
-			PintaCore.Workspace);
-	}
-
 	#region Overridable Render Methods
+
 	/// <summary>
 	/// Performs the actual work of rendering an effect. Do not call base.Render ().
 	/// </summary>
@@ -135,10 +120,10 @@ public abstract class BaseEffect
 		int src_width = src.Width;
 		int dst_width = dst.Width;
 
-		for (int y = roi.Y; y <= roi.Bottom; ++y) {
-			Render (src_data.Slice (y * src_width + roi.X, roi.Width),
+		for (int y = roi.Y; y <= roi.Bottom; ++y)
+			Render (
+				src_data.Slice (y * src_width + roi.X, roi.Width),
 				dst_data.Slice (y * dst_width + roi.X, roi.Width));
-		}
 	}
 
 	/// <summary>
@@ -162,6 +147,7 @@ public abstract class BaseEffect
 	{
 		return color;
 	}
+
 	#endregion
 
 	// Effects that have any configuration state which is changed
@@ -175,7 +161,7 @@ public abstract class BaseEffect
 	/// <returns>An identical copy of this effect.</returns>
 	public virtual BaseEffect Clone ()
 	{
-		var effect = (BaseEffect) MemberwiseClone ();
+		BaseEffect effect = (BaseEffect) MemberwiseClone ();
 
 		if (effect.EffectData != null)
 			effect.EffectData = EffectData?.Clone ();
@@ -226,7 +212,5 @@ internal sealed class AddinLocalizerWrapper : IAddinLocalizer
 	}
 
 	public string GetString (string msgid)
-	{
-		return localizer.GetString (msgid);
-	}
+		=> localizer.GetString (msgid);
 };
