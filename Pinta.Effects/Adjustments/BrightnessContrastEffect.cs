@@ -24,7 +24,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 	public sealed override bool IsTileable => true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsBrightnessContrast;
+	public override string Icon => Resources.Icons.AdjustmentsBrightnessContrast;
 
 	public override string Name => Translations.GetString ("Brightness / Contrast");
 
@@ -72,19 +72,18 @@ public sealed class BrightnessContrastEffect : BaseEffect
 				for (int i = 0; i < src_row.Length; ++i) {
 					ColorBgra col = src_row[i];
 					uint c = rgb_table![col.GetIntensityByte ()]; // NRT - Set in Calculate
-					dst_row[i].Bgra = (col.Bgra & 0xff000000) | c | (c << 8) | (c << 16);
+					dst_row[i] = ColorBgra.FromUInt32 ((col.BGRA & 0xff000000) | c | (c << 8) | (c << 16));
 				}
 			} else {
 				for (int i = 0; i < src_row.Length; ++i) {
 					ColorBgra col = src_row[i];
 					int intensity = col.GetIntensityByte ();
 					int shiftIndex = intensity * 256;
-
-					col.R = rgb_table![shiftIndex + col.R];
-					col.G = rgb_table[shiftIndex + col.G];
-					col.B = rgb_table[shiftIndex + col.B];
-
-					dst_row[i] = col;
+					dst_row[i] = ColorBgra.FromBgra (
+						b: rgb_table![shiftIndex + col.B],
+						g: rgb_table![shiftIndex + col.G],
+						r: rgb_table![shiftIndex + col.R],
+						a: col.A);
 				}
 			}
 		}
@@ -144,10 +143,9 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		public int Brightness {
 			get => brightness;
 			set {
-				if (value != brightness) {
-					brightness = value;
-					FirePropertyChanged (nameof (Brightness));
-				}
+				if (value == brightness) return;
+				brightness = value;
+				FirePropertyChanged (nameof (Brightness));
 			}
 		}
 
@@ -155,10 +153,9 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		public int Contrast {
 			get => contrast;
 			set {
-				if (value != contrast) {
-					contrast = value;
-					FirePropertyChanged (nameof (Contrast));
-				}
+				if (value == contrast) return;
+				contrast = value;
+				FirePropertyChanged (nameof (Contrast));
 			}
 		}
 

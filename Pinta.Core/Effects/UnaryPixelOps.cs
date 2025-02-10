@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Xml.Schema;
 
 namespace Pinta.Core;
 
@@ -41,7 +42,7 @@ public static class UnaryPixelOps
 	[Serializable]
 	public sealed class Constant : UnaryPixelOp
 	{
-		private ColorBgra set_color;
+		private readonly ColorBgra set_color;
 
 		public override ColorBgra Apply (in ColorBgra color)
 			=> set_color;
@@ -70,7 +71,7 @@ public static class UnaryPixelOps
 	[Serializable]
 	public sealed class BlendConstant : UnaryPixelOp
 	{
-		private ColorBgra blend_color;
+		private readonly ColorBgra blend_color;
 
 		public override ColorBgra Apply (in ColorBgra color)
 		{
@@ -142,18 +143,18 @@ public static class UnaryPixelOps
 		private readonly uint add_value;
 
 		public override ColorBgra Apply (in ColorBgra color)
-			=> ColorBgra.FromUInt32 ((color.Bgra & 0x00ffffff) + add_value);
+			=> ColorBgra.FromUInt32 ((color.BGRA & 0x00ffffff) + add_value);
 
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
 			for (int i = 0; i < src.Length; ++i)
-				dst[i].Bgra = (src[i].Bgra & 0x00ffffff) + add_value;
+				dst[i] = ColorBgra.FromUInt32 ((src[i].BGRA & 0x00ffffff) + add_value);
 		}
 
 		public override void Apply (Span<ColorBgra> dst)
 		{
 			for (int i = 0; i < dst.Length; ++i)
-				dst[i].Bgra = (dst[i].Bgra & 0x00ffffff) + add_value;
+				dst[i] = ColorBgra.FromUInt32 ((dst[i].BGRA & 0x00ffffff) + add_value);
 		}
 
 		public SetAlphaChannel (byte alphaValue)
@@ -169,18 +170,18 @@ public static class UnaryPixelOps
 	public sealed class SetAlphaChannelTo255 : UnaryPixelOp
 	{
 		public override ColorBgra Apply (in ColorBgra color)
-			=> ColorBgra.FromUInt32 (color.Bgra | 0xff000000);
+			=> ColorBgra.FromUInt32 (color.BGRA | 0xff000000);
 
 		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
 		{
 			for (int i = 0; i < src.Length; ++i)
-				dst[i].Bgra = src[i].Bgra | 0xff000000;
+				dst[i] = ColorBgra.FromUInt32 (src[i].BGRA | 0xff000000);
 		}
 
 		public override void Apply (Span<ColorBgra> dst)
 		{
 			for (int i = 0; i < dst.Length; ++i)
-				dst[i].Bgra |= 0xff000000;
+				dst[i] = ColorBgra.FromUInt32 (dst[i].BGRA | 0xff000000);
 		}
 	}
 
@@ -406,25 +407,15 @@ public static class UnaryPixelOps
 			get => color_in_low;
 
 			set {
-				if (value.R == 255)
-					value.R = 254;
-
-				if (value.G == 255)
-					value.G = 254;
-
-				if (value.B == 255)
-					value.B = 254;
-
-				if (color_in_high.R < value.R + 1)
-					color_in_high.R = (byte) (value.R + 1);
-
-				if (color_in_high.G < value.G + 1)
-					color_in_high.G = (byte) (value.R + 1);
-
-				if (color_in_high.B < value.B + 1)
-					color_in_high.B = (byte) (value.R + 1);
-
-				color_in_low = value;
+				byte r = (value.R == 255) ? (byte) 254 : value.R;
+				byte g = (value.G == 255) ? (byte) 254 : value.G;
+				byte b = (value.B == 255) ? (byte) 254 : value.B;
+				color_in_high = ColorBgra.FromBgra (
+					b: (color_in_high.B < b + 1) ? (byte) (r + 1) : color_in_high.B,
+					g: (color_in_high.G < g + 1) ? (byte) (r + 1) : color_in_high.G,
+					r: (color_in_high.R < r + 1) ? (byte) (r + 1) : color_in_high.R,
+					a: color_in_high.A);
+				color_in_low = ColorBgra.FromBgra (b, g, r, value.A);
 				UpdateLookupTable ();
 			}
 		}
@@ -434,25 +425,15 @@ public static class UnaryPixelOps
 			get => color_in_high;
 
 			set {
-				if (value.R == 0)
-					value.R = 1;
-
-				if (value.G == 0)
-					value.G = 1;
-
-				if (value.B == 0)
-					value.B = 1;
-
-				if (color_in_low.R > value.R - 1)
-					color_in_low.R = (byte) (value.R - 1);
-
-				if (color_in_low.G > value.G - 1)
-					color_in_low.G = (byte) (value.R - 1);
-
-				if (color_in_low.B > value.B - 1)
-					color_in_low.B = (byte) (value.R - 1);
-
-				color_in_high = value;
+				byte r = (value.R == 0) ? (byte) 1 : value.R;
+				byte g = (value.G == 0) ? (byte) 1 : value.G;
+				byte b = (value.B == 0) ? (byte) 1 : value.B;
+				color_in_low = ColorBgra.FromBgra (
+					b: (color_in_low.B > b - 1) ? (byte) (r - 1) : color_in_low.B,
+					g: (color_in_low.G > g - 1) ? (byte) (r - 1) : color_in_low.G,
+					r: (color_in_low.R > r - 1) ? (byte) (r - 1) : color_in_low.R,
+					a: color_in_low.A);
+				color_in_high = ColorBgra.FromBgra (b, g, r, value.A);
 				UpdateLookupTable ();
 			}
 		}
@@ -462,25 +443,15 @@ public static class UnaryPixelOps
 			get => color_out_low;
 
 			set {
-				if (value.R == 255)
-					value.R = 254;
-
-				if (value.G == 255)
-					value.G = 254;
-
-				if (value.B == 255)
-					value.B = 254;
-
-				if (color_out_high.R < value.R + 1)
-					color_out_high.R = (byte) (value.R + 1);
-
-				if (color_out_high.G < value.G + 1)
-					color_out_high.G = (byte) (value.G + 1);
-
-				if (color_out_high.B < value.B + 1)
-					color_out_high.B = (byte) (value.B + 1);
-
-				color_out_low = value;
+				byte r = (value.R == 255) ? (byte) 254 : value.R;
+				byte g = (value.G == 255) ? (byte) 254 : value.G;
+				byte b = (value.B == 255) ? (byte) 254 : value.B;
+				color_out_high = ColorBgra.FromBgra (
+					b: (color_out_high.B < b + 1) ? (byte) (b + 1) : color_out_high.B,
+					g: (color_out_high.G < g + 1) ? (byte) (g + 1) : color_out_high.G,
+					r: (color_out_high.R < r + 1) ? (byte) (r + 1) : color_out_high.R,
+					a: color_out_high.A);
+				color_out_low = ColorBgra.FromBgra (b, g, r, value.A);
 				UpdateLookupTable ();
 			}
 		}
@@ -488,27 +459,16 @@ public static class UnaryPixelOps
 		private ColorBgra color_out_high;
 		public ColorBgra ColorOutHigh {
 			get => color_out_high;
-
 			set {
-				if (value.R == 0)
-					value.R = 1;
-
-				if (value.G == 0)
-					value.G = 1;
-
-				if (value.B == 0)
-					value.B = 1;
-
-				if (color_out_low.R > value.R - 1)
-					color_out_low.R = (byte) (value.R - 1);
-
-				if (color_out_low.G > value.G - 1)
-					color_out_low.G = (byte) (value.G - 1);
-
-				if (color_out_low.B > value.B - 1)
-					color_out_low.B = (byte) (value.B - 1);
-
-				color_out_high = value;
+				byte r = (value.R == 0) ? (byte) 1 : value.R;
+				byte g = (value.G == 0) ? (byte) 1 : value.G;
+				byte b = (value.B == 0) ? (byte) 1 : value.B;
+				color_out_low = ColorBgra.FromBgra (
+					b: (color_out_low.B > b - 1) ? (byte) (b - 1) : color_out_low.B,
+					g: (color_out_low.G > g - 1) ? (byte) (g - 1) : color_out_low.G,
+					r: (color_out_low.R > r - 1) ? (byte) (r - 1) : color_out_low.R,
+					a: color_out_low.A);
+				color_out_high = ColorBgra.FromBgra (b, g, r, value.A);
 				UpdateLookupTable ();
 			}
 		}
@@ -589,7 +549,7 @@ public static class UnaryPixelOps
 		public ColorBgra Apply (float r, float g, float b)
 		{
 			ColorBgra ret = new ColorBgra ();
-			ReadOnlySpan<float> input = stackalloc float[] { b, g, r };
+			ReadOnlySpan<float> input = [b, g, r];
 
 			for (int i = 0; i < 3; i++) {
 				float v = (input[i] - color_in_low[i]);
@@ -663,11 +623,12 @@ public static class UnaryPixelOps
 		public override ColorBgra Apply (in ColorBgra src_color)
 		{
 			//adjust saturation
-			ColorBgra color = src_color;
-			byte intensity = color.GetIntensityByte ();
-			color.R = Utility.ClampToByte ((intensity * 1024 + (color.R - intensity) * sat_factor) >> 10);
-			color.G = Utility.ClampToByte ((intensity * 1024 + (color.G - intensity) * sat_factor) >> 10);
-			color.B = Utility.ClampToByte ((intensity * 1024 + (color.B - intensity) * sat_factor) >> 10);
+			byte intensity = src_color.GetIntensityByte ();
+			ColorBgra color = ColorBgra.FromBgra (
+				b: Utility.ClampToByte ((intensity * 1024 + (src_color.B - intensity) * sat_factor) >> 10),
+				g: Utility.ClampToByte ((intensity * 1024 + (src_color.G - intensity) * sat_factor) >> 10),
+				r: Utility.ClampToByte ((intensity * 1024 + (src_color.R - intensity) * sat_factor) >> 10),
+				a: src_color.A);
 
 			HsvColor hsvColor = HsvColor.FromBgra (color);
 			int newHue = (int) hsvColor.Hue;
@@ -679,8 +640,7 @@ public static class UnaryPixelOps
 			while (newHue > 360) { newHue -= 360; }
 
 			ColorBgra newColor = (hsvColor with { Hue = newHue }).ToBgra ();
-			newColor = blend_op.Apply (newColor);
-			newColor.A = color.A;
+			newColor = blend_op.Apply (newColor).NewAlpha (color.A);
 
 			return newColor;
 		}

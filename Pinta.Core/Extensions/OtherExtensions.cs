@@ -98,7 +98,7 @@ public static class OtherExtensions
 		return
 			includeAlpha
 			? baseColor
-			: baseColor with { A = 255 };
+			: baseColor.NewAlpha (255);
 	}
 
 	public static IReadOnlyList<IReadOnlyList<PointI>> CreatePolygonSet (

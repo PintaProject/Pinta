@@ -144,14 +144,14 @@ public sealed class GaussianBlurEffect : BaseEffect
 				wcSum >>= 8;
 
 				if (waSum == 0 || wcSum == 0) {
-					dst_row[rect.Left].Bgra = 0;
+					dst_row[rect.Left] = ColorBgra.Zero;
 				} else {
 					byte alpha = (byte) (aSum / waSum);
 					byte blue = (byte) (bSum / wcSum);
 					byte green = (byte) (gSum / wcSum);
 					byte red = (byte) (rSum / wcSum);
 
-					dst_row[rect.Left].Bgra = ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ().Bgra;
+					dst_row[rect.Left] = ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ();
 				}
 
 				for (int x = rect.Left + 1; x <= rect.Right; ++x) {
@@ -228,14 +228,14 @@ public sealed class GaussianBlurEffect : BaseEffect
 					wcSum >>= 8;
 
 					if (waSum == 0 || wcSum == 0) {
-						dst_row[x].Bgra = 0;
+						dst_row[x] = ColorBgra.Zero;
 					} else {
 						byte alpha = (byte) (aSum / waSum);
 						byte blue = (byte) (bSum / wcSum);
 						byte green = (byte) (gSum / wcSum);
 						byte red = (byte) (rSum / wcSum);
 
-						dst_row[x].Bgra = ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ().Bgra;
+						dst_row[x] = ColorBgra.FromBgra (blue, green, red, alpha).ToPremultipliedAlpha ();
 					}
 				}
 			}
