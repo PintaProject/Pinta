@@ -8,7 +8,7 @@ public sealed class Julia
 	private readonly double log2_max;
 	public Julia (double maxSquared)
 	{
-		if (maxSquared <= 0) throw new ArgumentOutOfRangeException (nameof (maxSquared));
+		ArgumentOutOfRangeException.ThrowIfNegativeOrZero (maxSquared);
 		max_squared = maxSquared;
 		log2_max = Math.Log (maxSquared);
 	}
