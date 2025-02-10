@@ -163,8 +163,8 @@ public sealed class DocumentWorkspace
 	/// </param>
 	public void Invalidate (RectangleI canvasRect)
 	{
-		PointD canvasTopLeft = new PointD (canvasRect.Left, canvasRect.Top);
-		PointD canvasBtmRight = new PointD (canvasRect.Right + 1, canvasRect.Bottom + 1);
+		PointD canvasTopLeft = new (canvasRect.Left, canvasRect.Top);
+		PointD canvasBtmRight = new (canvasRect.Right + 1, canvasRect.Bottom + 1);
 
 		PointD winTopLeft = CanvasPointToView (canvasTopLeft);
 		PointD winBtmRight = CanvasPointToView (canvasBtmRight);
@@ -200,9 +200,7 @@ public sealed class DocumentWorkspace
 	/// Determines whether the rectangle lies (at least partially) outside the canvas area.
 	/// </summary>
 	public bool IsPartiallyOffscreen (RectangleI rect)
-	{
-		return rect.IsEmpty || rect.Left < 0 || rect.Top < 0;
-	}
+		=> rect.IsEmpty || rect.Left < 0 || rect.Top < 0;
 
 	public bool PointInCanvas (PointD point)
 	{
@@ -221,6 +219,7 @@ public sealed class DocumentWorkspace
 
 		var h_adjust = view.GetHadjustment ()!;
 		h_adjust.Value = Math.Clamp (point.X * Scale - h_adjust.PageSize / 2, h_adjust.Lower, h_adjust.Upper);
+
 		var v_adjust = view.GetVadjustment ()!;
 		v_adjust.Value = Math.Clamp (point.Y * Scale - v_adjust.PageSize / 2, v_adjust.Lower, v_adjust.Upper);
 	}
@@ -266,12 +265,12 @@ public sealed class DocumentWorkspace
 
 	public void ZoomIn ()
 	{
-		ZoomAndRecenterView (ZoomType.ZoomIn, center_point: null); // Zoom in relative to the center of the viewport.
+		ZoomAroundCenter (ZoomType.ZoomIn);
 	}
 
 	public void ZoomOut ()
 	{
-		ZoomAndRecenterView (ZoomType.ZoomOut, center_point: null); // Zoom out relative to the center of the viewport.
+		ZoomAroundCenter (ZoomType.ZoomOut);
 	}
 
 	public void ZoomInAroundViewPoint (in PointD view_point)
@@ -296,7 +295,7 @@ public sealed class DocumentWorkspace
 
 	public void ZoomManually ()
 	{
-		ZoomAndRecenterView (ZoomType.ZoomManually, center_point: null);
+		ZoomAroundCenter (ZoomType.ZoomManually);
 	}
 
 	public void ZoomToCanvasRectangle (RectangleD rect)
@@ -329,14 +328,25 @@ public sealed class DocumentWorkspace
 	}
 
 	/// <summary>
+	/// Zoom in/out around the center of the screen.
+	/// </summary>
+	private void ZoomAroundCenter (ZoomType zoomType)
+	{
+		Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
+		PointD center = new (
+			view.Hadjustment!.Value + (view.Hadjustment.PageSize / 2.0),
+			view.Vadjustment!.Value + (view.Vadjustment.PageSize / 2.0));
+		ZoomAndRecenterView (zoomType, center);
+	}
+
+	/// <summary>
 	/// Zoom in/out around a specific point.
 	/// </summary>
 	/// <param name="center_point">Center point to zoom around, in view coordinates</param>
-	private void ZoomAndRecenterView (ZoomType zoomType, PointD? center_point)
+	private void ZoomAndRecenterView (ZoomType zoomType, PointD center_point)
 	{
 		if (zoomType == ZoomType.ZoomOut && (ViewSize.Width == 1 || ViewSize.Height == 1))
 			return; //Can't zoom in past a 1x1 px canvas
-
 
 		if (!ViewActions.TryParsePercent (actions.View.ZoomComboBox.ComboBox.GetActiveText ()!, out var zoom))
 			zoom = Scale * 100;
@@ -347,17 +357,10 @@ public sealed class DocumentWorkspace
 
 		Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
-		// If no point was specified, zoom relative to the center of the screen.
-		if (!center_point.HasValue) {
-			center_point = new PointD (
-				view.Hadjustment!.Value + (view.Hadjustment.PageSize / 2.0),
-				view.Vadjustment!.Value + (view.Vadjustment.PageSize / 2.0));
-		}
+		double scroll_offset_x = center_point.X - view.Hadjustment!.Value - Offset.X;
+		double scroll_offset_y = center_point.Y - view.Vadjustment!.Value - Offset.Y;
 
-		double scroll_offset_x = center_point.Value.X - view.Hadjustment!.Value - Offset.X;
-		double scroll_offset_y = center_point.Value.Y - view.Vadjustment!.Value - Offset.Y;
-
-		PointD canvas_point = ViewPointToCanvas (center_point.Value);
+		PointD canvas_point = ViewPointToCanvas (center_point);
 
 		if (zoomType == ZoomType.ZoomIn || zoomType == ZoomType.ZoomOut) {
 
@@ -418,5 +421,6 @@ public sealed class DocumentWorkspace
 
 		actions.View.ResumeZoomUpdate ();
 	}
+
 	#endregion
 }
