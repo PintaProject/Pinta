@@ -69,8 +69,7 @@ partial class GtkExtensions
 		var result = new Gio.File[itemCount];
 		for (uint i = 0; i < itemCount; i++) {
 			nint g_ref = selection.GetItem (i);
-			Gio.FileHelper file = new (handle: g_ref, ownedRef: true);
-			result[i] = file;
+			result[i] = (Gio.FileHelper) GObject.Internal.InstanceWrapper.WrapHandle<Gio.FileHelper> (g_ref, ownedRef: true);
 		}
 		return result;
 	}
@@ -226,7 +225,7 @@ partial class GtkExtensions
 	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 	public static void GetColor (this Gtk.ColorChooserDialog dialog, out Cairo.Color color)
 	{
-		ColorChooserGetRgba (dialog.Handle, out var gdk_color);
+		ColorChooserGetRgba (dialog.Handle.DangerousGetHandle (), out var gdk_color);
 		color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
 	}
 }

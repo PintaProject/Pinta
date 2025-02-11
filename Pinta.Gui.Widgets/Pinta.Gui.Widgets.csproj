@@ -3,6 +3,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="GirCore.GObject-2.0.Integration" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
   </ItemGroup>
 </Project>
