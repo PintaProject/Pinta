@@ -205,7 +205,7 @@ partial class GtkExtensions
 			return;
 
 		// TODO-GTK4 (bindings, unsubmitted) - should be able to cast to a Gtk.Text from Gtk.Editable
-		TextWrapper text = new (editable.Handle, ownedRef: false);
+		Gtk.Text text = (Gtk.Text) GObject.Internal.InstanceWrapper.WrapHandle<Gtk.Text> (editable.Handle.DangerousGetHandle (), ownedRef: false);
 		text.SetActivatesDefault (activates);
 	}
 
@@ -251,7 +251,7 @@ partial class GtkExtensions
 	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 	public static void GetColor (this Gtk.StyleContext context, out Cairo.Color color)
 	{
-		StyleContextGetColor (context.Handle, out var gdk_color);
+		StyleContextGetColor (context.Handle.DangerousGetHandle (), out var gdk_color);
 		color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
 	}
 

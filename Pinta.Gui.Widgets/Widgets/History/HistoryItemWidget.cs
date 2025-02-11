@@ -22,16 +22,18 @@
 // THE SOFTWARE.
 
 using System;
+using GObject;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
 // GObject subclass for use with Gio.ListStore
-public sealed class HistoryListViewItem : GObject.Object
+[Subclass<GObject.Object>]
+public sealed partial class HistoryListViewItem
 {
-	private readonly BaseHistoryItem item;
+	private readonly BaseHistoryItem item = new ();
 
-	public HistoryListViewItem (BaseHistoryItem item) : base (true, [])
+	public HistoryListViewItem (BaseHistoryItem item) : this ()
 	{
 		if (string.IsNullOrEmpty (item.Text))
 			throw new ArgumentException ($"{nameof (item.Text)} must contain value.");
@@ -42,8 +44,8 @@ public sealed class HistoryListViewItem : GObject.Object
 		this.item = item;
 	}
 
-	public string Label => item.Text!;
-	public string IconName => item.Icon!;
+	public string Label => item.Text ?? string.Empty;
+	public string IconName => item.Icon ?? string.Empty;
 	public bool Active => item.State == HistoryItemState.Undo;
 }
 

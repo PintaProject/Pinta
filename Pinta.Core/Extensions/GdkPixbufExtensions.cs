@@ -46,7 +46,7 @@ public static partial class GdkPixbufExtensions
 	// TODO-GTK4 (bindings, unsubmitted) - needs support for primitive value arrays
 	public static byte[] SaveToBuffer (this Pixbuf pixbuf, string type)
 	{
-		SaveToBufferv (pixbuf.Handle, out IntPtr buffer, out uint buffer_size, type, IntPtr.Zero, IntPtr.Zero, out var error);
+		SaveToBufferv (pixbuf.Handle.DangerousGetHandle (), out IntPtr buffer, out uint buffer_size, type, IntPtr.Zero, IntPtr.Zero, out var error);
 		if (!error.IsInvalid)
 			throw new GLib.GException (error);
 

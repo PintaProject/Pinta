@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <PackageReference Include="GirCore.Adw-1" />
+    <PackageReference Include="GirCore.GObject-2.0.Integration" />
     <PackageReference Include="Mono.Addins" />
     <PackageReference Include="Mono.Addins.Setup" />
   </ItemGroup>

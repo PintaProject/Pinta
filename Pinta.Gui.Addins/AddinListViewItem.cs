@@ -1,4 +1,4 @@
-using System;
+using GObject;
 using Mono.Addins;
 using Mono.Addins.Setup;
 using Pinta.Core;
@@ -6,10 +6,11 @@ using Pinta.Core;
 namespace Pinta.Gui.Addins;
 
 // GObject subclass for use with Gio.ListStore
-internal sealed class AddinListViewItem : GObject.Object
+[Subclass<GObject.Object>]
+internal sealed partial class AddinListViewItem
 {
-	private readonly SetupService service;
-	private readonly AddinHeader info;
+	private readonly SetupService service = new ();
+	private readonly AddinHeader info = new AddinInfo ();
 	private readonly AddinStatus status;
 	private readonly Addin? installed_addin;
 	private readonly AddinRepositoryEntry? available_addin;
@@ -22,9 +23,7 @@ internal sealed class AddinListViewItem : GObject.Object
 		AddinHeader info,
 		Addin installed_addin,
 		AddinStatus status)
-	: base (
-		true,
-		[])
+	: this ()
 	{
 		this.service = service;
 		this.info = info;
@@ -40,9 +39,7 @@ internal sealed class AddinListViewItem : GObject.Object
 		AddinHeader info,
 		AddinRepositoryEntry available_addin,
 		AddinStatus status)
-	: base (
-		true,
-		[])
+	: this ()
 	{
 		this.service = service;
 		this.info = info;

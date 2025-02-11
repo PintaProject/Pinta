@@ -23,35 +23,40 @@
 
 using System;
 using Cairo;
+using GObject;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
 // GObject subclass for use with Gio.ListStore
-public sealed class LayersListViewItem : GObject.Object
+[Subclass<GObject.Object>]
+public sealed partial class LayersListViewItem
 {
 	private CanvasRenderer? canvas_renderer;
 
-	private readonly Document doc;
-	private readonly UserLayer layer;
+	// NRT - GObject requires a parameterless constructor, and these don't have simple defaults
+	private readonly Document? doc;
+	private readonly UserLayer? layer;
 
 	public LayersListViewItem (
 		Document doc,
 		UserLayer layer
-	)
-		: base (true, [])
+	) : this ()
 	{
 		this.doc = doc;
 		this.layer = layer;
 	}
 
-	public string Label => layer.Name;
-	public bool Visible => !layer.Hidden;
+	public string Label => layer?.Name ?? string.Empty;
+	public bool Visible => !layer?.Hidden ?? false;
 
 	public Cairo.ImageSurface BuildThumbnail (
 		int widthRequest,
 		int heightRequest)
 	{
+		if (doc is null || layer is null)
+			throw new InvalidOperationException ($"{nameof (LayersListViewItem)} is not initialized");
+
 		// If this is not the currently selected layer, just directly use the layer's surface.
 		if (layer != doc.Layers.CurrentUserLayer || !doc.Layers.ShowSelectionLayer)
 			return layer.Surface;
@@ -75,6 +80,9 @@ public sealed class LayersListViewItem : GObject.Object
 
 	public void HandleVisibilityToggled (bool visible)
 	{
+		if (this.doc is null || this.layer is null)
+			throw new InvalidOperationException ($"{nameof (LayersListViewItem)} is not initialized");
+
 		if (Visible == visible)
 			return;
 
