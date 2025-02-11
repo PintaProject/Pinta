@@ -46,7 +46,7 @@ public static partial class PangoExtensions
 
 	public static void GetCursorPos (this Layout layout, int index, out RectangleI strong_pos, out RectangleI weak_pos)
 	{
-		InternalGetCursorPos (layout.Handle, index, out var strong_pos_pango, out var weak_pos_pango);
+		InternalGetCursorPos (layout.Handle.DangerousGetHandle (), index, out var strong_pos_pango, out var weak_pos_pango);
 		strong_pos = strong_pos_pango.ToRectangleI ();
 		weak_pos = weak_pos_pango.ToRectangleI ();
 	}
@@ -56,7 +56,7 @@ public static partial class PangoExtensions
 
 	public static void GetPixelExtents (this Layout layout, out RectangleI ink_rect, out RectangleI logical_rect)
 	{
-		InternalGetPixelExtents (layout.Handle, out var ink_rect_pango, out var logical_rect_pango);
+		InternalGetPixelExtents (layout.Handle.DangerousGetHandle (), out var ink_rect_pango, out var logical_rect_pango);
 		ink_rect = ink_rect_pango.ToRectangleI ();
 		logical_rect = logical_rect_pango.ToRectangleI ();
 	}
@@ -66,7 +66,7 @@ public static partial class PangoExtensions
 
 	public static void IndexToPos (this Layout layout, int index, out RectangleI pos)
 	{
-		InternalIndexToPos (layout.Handle, index, out var pos_pango);
+		InternalIndexToPos (layout.Handle.DangerousGetHandle (), index, out var pos_pango);
 		pos = pos_pango.ToRectangleI ();
 	}
 
@@ -75,7 +75,7 @@ public static partial class PangoExtensions
 
 	public static void XyToIndex (this Layout layout, int x, int y, out int index, out int trailing)
 	{
-		InternalXyToIndex (layout.Handle, x, y, out index, out trailing);
+		InternalXyToIndex (layout.Handle.DangerousGetHandle (), x, y, out index, out trailing);
 	}
 
 	[LibraryImport (PangoLibraryName, EntryPoint = "pango_layout_xy_to_index")]

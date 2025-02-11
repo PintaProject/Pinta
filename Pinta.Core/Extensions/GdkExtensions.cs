@@ -180,18 +180,16 @@ public static class GdkExtensions
 		TaskCompletionSource<Gdk.Texture?> tcs = new ();
 
 		Gdk.Internal.Clipboard.ReadTextureAsync (
-			clipboard.Handle,
+			clipboard.Handle.DangerousGetHandle (),
 			IntPtr.Zero,
 			new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
 
 				IntPtr result = Gdk.Internal.Clipboard.ReadTextureFinish (
-					clipboard.Handle,
-					args.Handle,
+					clipboard.Handle.DangerousGetHandle (),
+					args.Handle.DangerousGetHandle (),
 					out var error);
 
-				Gdk.Texture? texture = GObject.Internal.ObjectWrapper.WrapNullableHandle<Gdk.Texture> (
-					result,
-					ownedRef: true);
+				Gdk.Texture? texture = (Gdk.Texture?) GObject.Internal.InstanceWrapper.WrapNullableHandle<Gdk.Texture> (result, ownedRef: true);
 
 				if (!error.IsInvalid)
 					texture = null;
@@ -232,7 +230,7 @@ public static class GdkExtensions
 		var buffer = new byte[surf_data.Length];
 		fixed (byte* buffer_data = buffer)
 			Gdk.Internal.Texture.Download (
-				texture.Handle,
+				texture.Handle.DangerousGetHandle (),
 				ref *buffer_data,
 				(uint) surf.Stride);
 
@@ -254,8 +252,10 @@ public static class GdkExtensions
 		uint n = GLib.SList.Length (slist);
 
 		var result = new Gio.File[n];
-		for (uint i = 0; i < n; ++i)
-			result[i] = new Gio.FileHelper (GLib.SList.NthData (slist, i), ownedRef: false);
+		for (uint i = 0; i < n; ++i) {
+			IntPtr file_ptr = GLib.SList.NthData (slist, i);
+			result[i] = (Gio.FileHelper) GObject.Internal.InstanceWrapper.WrapHandle<Gio.FileHelper> (file_ptr, ownedRef: false);
+		}
 
 		return result;
 	}

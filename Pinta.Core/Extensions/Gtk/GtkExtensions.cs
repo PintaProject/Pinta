@@ -141,13 +141,6 @@ public static partial class GtkExtensions
 	public static Gdk.Key GetKey (this Gtk.EventControllerKey.KeyReleasedSignalArgs args)
 		=> new Gdk.Key (args.Keyval);
 
-	internal sealed class TextWrapper : Gtk.Text
-	{
-		internal TextWrapper (IntPtr ptr, bool ownedRef)
-			: base (ptr, ownedRef)
-		{ }
-	}
-
 	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
 	[StructLayout (LayoutKind.Sequential)]
 	private struct GdkRGBA
@@ -215,7 +208,7 @@ public static partial class GtkExtensions
 		out int cursor_pos)
 	{
 		IMContextGetPreeditString (
-			context.Handle,
+			context.Handle.DangerousGetHandle (),
 			out var str_handle,
 			out var attrs_handle,
 			out cursor_pos);
