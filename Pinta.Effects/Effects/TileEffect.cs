@@ -71,8 +71,8 @@ public sealed class TileEffect : BaseEffect
 		float preliminaryIntensity = Data.Intensity;
 		int tileSize = Data.TileSize;
 		int antiAliasSample = ANTI_ALIAS_LEVEL * ANTI_ALIAS_LEVEL + 1;
-		float sin = (float) Math.Sin (-rotationTheta.Radians);
-		float cos = (float) Math.Cos (-rotationTheta.Radians);
+		float sin = MathF.Sin ((float) -rotationTheta.Radians);
+		float cos = MathF.Cos ((float) -rotationTheta.Radians);
 		return new (
 			size: size,
 			halfWidth: size.Width / 2f,
@@ -89,8 +89,8 @@ public sealed class TileEffect : BaseEffect
 		static Func<float, float> GetWaveFunction (TileType waveType)
 		{
 			return waveType switch {
-				TileType.SharpEdges => n => (float) Math.Tan (n),
-				TileType.Curved => n => (float) Math.Sin (n),
+				TileType.SharpEdges => MathF.Tan,
+				TileType.Curved => MathF.Sin,
 				_ => throw new InvalidEnumArgumentException (nameof (waveType), (int) waveType, typeof (TileType)),
 			};
 		}

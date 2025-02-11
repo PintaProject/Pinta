@@ -7,8 +7,6 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Linq;
-using System.Xml.Schema;
 
 namespace Pinta.Core;
 
@@ -498,7 +496,10 @@ public static class UnaryPixelOps
 			float[] gamma = new float[3];
 			for (int i = 0; i < 3; i++) {
 				if (lo[i] < md[i] && md[i] < hi[i])
-					gamma[i] = (float) Math.Clamp (Math.Log (0.5, (md[i] - lo[i]) / (float) (hi[i] - lo[i])), 0.1, 10.0);
+					gamma[i] = Math.Clamp (
+						MathF.Log (0.5f, (md[i] - lo[i]) / (float) (hi[i] - lo[i])),
+						0.1f,
+						10.0f);
 				else
 					gamma[i] = 1.0f;
 			}
@@ -580,10 +581,10 @@ public static class UnaryPixelOps
 			for (int i = 0; i < 3; i++) {
 
 				beforeOut[i] = color_in_low[i] + (color_in_high[i] - color_in_low[i]) *
-				    (float) Math.Pow ((float) (after[i] - color_out_low[i]) / (color_out_high[i] - color_out_low[i]), 1 / gamma[i]);
+				    MathF.Pow ((float) (after[i] - color_out_low[i]) / (color_out_high[i] - color_out_low[i]), 1 / gamma[i]);
 
 				slopesOut[i] = (color_in_high[i] - color_in_low[i]) / ((color_out_high[i] - color_out_low[i]) * gamma[i]) *
-				    (float) Math.Pow ((float) (after[i] - color_out_low[i]) / (color_out_high[i] - color_out_low[i]), 1 / gamma[i] - 1);
+				    MathF.Pow ((float) (after[i] - color_out_low[i]) / (color_out_high[i] - color_out_low[i]), 1 / gamma[i] - 1);
 
 				if (float.IsInfinity (slopesOut[i]) || float.IsNaN (slopesOut[i]))
 					slopesOut[i] = 0;
