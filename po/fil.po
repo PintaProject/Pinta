@@ -8,49 +8,50 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-29 01:40+0000\n"
-"PO-Revision-Date: 2012-04-02 01:08+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
-"Language-Team: Filipino <fil@li.org>\n"
+"PO-Revision-Date: 2025-02-13 14:02+0000\n"
+"Last-Translator: IverCoder <ivercoder+github@proton.me>\n"
+"Language-Team: Filipino <https://hosted.weblate.org/projects/pinta/pinta/fil/"
+">\n"
 "Language: fil\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.10-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
 msgid " (in user directory)"
-msgstr ""
+msgstr " (sa directory ng user)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
 msgid " Selection Mode: "
-msgstr ""
+msgstr " Mode ng Pagpili: "
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:70
 #: ../Pinta.Core/Managers/EffectsManager.cs:104
 msgid "..."
-msgstr "…"
+msgstr "..."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "3 x 3 Region"
-msgstr ""
+msgstr "3 x 3 na Rehiyon"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "5 x 5 Region"
-msgstr ""
+msgstr "5 x 5 na Rehiyon"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "7 x 7 Region"
-msgstr ""
+msgstr "7 x 7 na Rehiyon"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "9 x 9 Region"
-msgstr ""
+msgstr "9 x 9 na Rehiyon"
 
 #: ../Pinta/MainWindow.cs:367
 msgid "A_dd-ins"
-msgstr ""
+msgstr "Mga A_dd-in"
 
 #: ../Pinta.Core/Actions/AppActions.cs:40
 msgid "About"
@@ -64,46 +65,47 @@ msgstr "Tungkol sa Pinta"
 #: ../Pinta.Core/Actions/LayerActions.cs:371
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
-msgstr ""
+msgstr "Magdagdag ng Bagong Layer"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:25
 msgid "Add Noise"
-msgstr ""
+msgstr "Magdagdag ng Noise"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Tagapamahala ng mga Add-in..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
 msgid "Added"
-msgstr ""
+msgstr "Naidagdag"
 
 #: ../Pinta/MainWindow.cs:397
 msgid "Adjustments"
-msgstr ""
+msgstr "Mga Pagsasaayos"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
+#, fuzzy
 msgid "After select"
-msgstr ""
+msgstr "Pagkatapos piliin"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Ipantay ang Bagay"
 
 #: ../Pinta.Core/Actions/EditActions.cs:472
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
-msgstr "Lahat ng files"
+msgstr "Lahat ng mga file"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Alpha"
-msgstr ""
+msgstr "Alpha"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Gradient ng Alpha"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
@@ -111,11 +113,11 @@ msgstr ""
 #: ../Pinta.Effects/Effects/TwistEffect.cs:151
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:147
 msgid "Amount"
-msgstr ""
+msgstr "Halaga"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
 msgid "Anchor:"
-msgstr ""
+msgstr "Angkla:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
@@ -127,63 +129,63 @@ msgstr ""
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:316
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:140
 msgid "Angle"
-msgstr ""
+msgstr "Anggulo"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:154
 msgid "Antialias"
-msgstr ""
+msgstr "Antialias"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:358
 msgid "Antialiasing Off"
-msgstr ""
+msgstr "Naka-off ang Antialiasing"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:357
 msgid "Antialiasing On"
-msgstr ""
+msgstr "Naka-on ang Antialiasing"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:268
 msgid "Arrow"
-msgstr ""
+msgstr "Arrow"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:37
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:34
 msgid "Artistic"
-msgstr ""
+msgstr "Artistiko"
 
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:238
 msgid "Auto"
-msgstr "Auto"
+msgstr "Awto"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:55
 msgid "Auto Crop"
-msgstr ""
+msgstr "Awtong Pag-crop"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:24
 msgid "Auto Level"
-msgstr ""
+msgstr "Awtong Paglelebel"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:215
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "Available sa repositoryo: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:145
 msgid "Background"
-msgstr ""
+msgstr "Background"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:113
 msgid "Background Color"
-msgstr ""
+msgstr "Kulay ng Background"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:309
 msgid "Background:"
-msgstr ""
+msgstr "Background:"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:93
 msgid "Based on the work of Paint.NET:"
@@ -192,15 +194,16 @@ msgstr "Batay sa trabaho ng Paint.NET:"
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Magandang Italya"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:71
+#, fuzzy
 msgid "Best Fit"
-msgstr ""
+msgstr "Pinakasukat"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilinear"
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
@@ -210,7 +213,7 @@ msgstr "Itim at Puti"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:82
 msgid "Blend Mode"
-msgstr ""
+msgstr "Mode sa Pag-blend"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
@@ -229,122 +232,124 @@ msgstr "Bughaw "
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:28
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:28
 msgid "Blurs"
-msgstr ""
+msgstr "Blurs"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:180
 msgid "Bold"
-msgstr ""
+msgstr "Bold"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
-msgstr ""
+msgstr "Bonfire"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "Ibabang Gitna"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "Ibabang Kaliwa"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "Ibabang Kanan"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:144
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
 msgid "Brightness"
-msgstr ""
+msgstr "Liwanag"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr ""
+msgstr "Liwanag / Contrast"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:146
 msgid "Brush Size"
-msgstr ""
+msgstr "Size ng Brush"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:270
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:123
 msgid "Brush width"
-msgstr ""
+msgstr "Lapad ng brush"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:24
 msgid "Bulge"
-msgstr ""
+msgstr "Bulge"
 
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Burkes"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:101
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:178
 msgid "By absolute size:"
-msgstr ""
+msgstr "Base sa ganap na sukat:"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:59
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:171
 msgid "By percentage:"
-msgstr ""
+msgstr "Base sa porsyento:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:409
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:423
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
-msgstr ""
+msgstr "Kanselahin"
 
 #: ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
-msgstr ""
+msgstr "Canvas"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "Setting ng Grid sa Canvas"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
+#, fuzzy
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Grid sa Canvas..."
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:126
 msgid "Cell Size"
-msgstr ""
+msgstr "Sukat ng Cell"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "Gitna"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:232
+#, fuzzy
 msgid "Center Align"
 msgstr "Ihanay sa Gitna"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "Gitnang Kaliwa"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:159
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
 msgid "Center Offset"
-msgstr ""
+msgstr "Offset sa Gitna"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "Gitnang Kanan"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:128
 msgid "Centered"
-msgstr ""
+msgstr "Nakagitna"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:145
 msgid "Centimeters"
-msgstr ""
+msgstr "Sentimetro"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Palitan ang lapad ng brush. Shortcut key: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:355
 msgid "Changed Shape Type"
