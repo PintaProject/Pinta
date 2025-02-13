@@ -495,13 +495,13 @@ public static class UnaryPixelOps
 		{
 			float[] gamma = new float[3];
 			for (int i = 0; i < 3; i++) {
-				if (lo[i] < md[i] && md[i] < hi[i])
-					gamma[i] = Math.Clamp (
+				gamma[i] =
+					(lo[i] < md[i] && md[i] < hi[i])
+					? Math.Clamp (
 						MathF.Log (0.5f, (md[i] - lo[i]) / (float) (hi[i] - lo[i])),
 						0.1f,
-						10.0f);
-				else
-					gamma[i] = 1.0f;
+						10.0f)
+					: 1.0f;
 			}
 			return new Level (lo, hi, gamma, ColorBgra.Black, ColorBgra.White);
 		}
