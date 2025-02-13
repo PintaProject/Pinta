@@ -89,8 +89,8 @@ public sealed class TileEffect : BaseEffect
 		static Func<float, float> GetWaveFunction (TileType waveType)
 		{
 			return waveType switch {
-				TileType.SharpEdges => MathF.Tan,
-				TileType.Curved => MathF.Sin,
+				TileType.SharpEdges => n => (float) Math.Tan (n),
+				TileType.Curved => n => (float) Math.Sin (n),
 				_ => throw new InvalidEnumArgumentException (nameof (waveType), (int) waveType, typeof (TileType)),
 			};
 		}
