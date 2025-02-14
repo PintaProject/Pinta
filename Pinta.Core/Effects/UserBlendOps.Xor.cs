@@ -39,7 +39,7 @@ partial class UserBlendOps
 			{
 				y = lhs.A * (255 - rhs.A) + 0x80;
 				y = ((y >> 8) + y) >> 8;
-			};
+			}
 
 			int totalA = y + rhs.A;
 
@@ -97,7 +97,7 @@ partial class UserBlendOps
 				{
 					y = lhsA * (255 - rhsA) + 0x80;
 					y = ((y >> 8) + y) >> 8;
-				};
+				}
 				int totalA = y + rhsA;
 
 				if (totalA == 0) return ColorBgra.FromUInt32 (0);
