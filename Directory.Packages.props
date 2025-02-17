@@ -19,7 +19,7 @@
     <!-- Dependencies used for unit tests -->
     <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageVersion Include="NUnit" Version="4.3.2" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0" />
 
     <!-- To resolve dependency conflict with GirCore.GObject-2.0.Integration and BenchmarkDotNet -->
