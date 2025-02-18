@@ -103,10 +103,9 @@ public abstract class BaseEffect
 	protected Task<bool> LaunchSimpleEffectDialog (AddinLocalizer localizer)
 	{
 		return PintaCore.Chrome.LaunchSimpleEffectDialog (
-			PintaCore.Chrome.MainWindow,
-			this,
-			AddinUtilities.CreateWrapper (localizer),
-			PintaCore.Workspace);
+			PintaCore.Workspace,
+			localizer,
+			this);
 	}
 
 	#region Overridable Render Methods
