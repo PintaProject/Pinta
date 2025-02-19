@@ -12,8 +12,8 @@ public static class AddinUtilities
 	public static Task<bool> LaunchSimpleEffectDialog (
 		this IChromeService chrome,
 		IWorkspaceService workspace,
-		AddinLocalizer localizer,
-		BaseEffect effect)
+		BaseEffect effect,
+		AddinLocalizer localizer)
 	{
 		return chrome.LaunchSimpleEffectDialog (
 			chrome.MainWindow,

@@ -104,8 +104,8 @@ public abstract class BaseEffect
 	{
 		return PintaCore.Chrome.LaunchSimpleEffectDialog (
 			PintaCore.Workspace,
-			localizer,
-			this);
+			this,
+			localizer);
 	}
 
 	#region Overridable Render Methods
