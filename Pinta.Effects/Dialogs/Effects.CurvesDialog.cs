@@ -452,15 +452,15 @@ public sealed class CurvesDialog : Gtk.Dialog
 			yield break;
 		}
 
-		yield return new ControlPointDrawingInfo (
+		yield return new (
 			Color: new Color (0.9, 0, 0),
 			IsActive: check_red.Active);
 
-		yield return new ControlPointDrawingInfo (
+		yield return new (
 			Color: new Color (0, 0.9, 0),
 			IsActive: check_green.Active);
 
-		yield return new ControlPointDrawingInfo (
+		yield return new (
 			Color: new Color (0, 0, 0.9),
 			IsActive: check_blue.Active);
 	}
@@ -524,7 +524,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 				int points = controlPoints.Count;
 
-				SplineInterpolator interpolator = new ();
+				SplineInterpolator<double> interpolator = new ();
 
 				IList<int> xa = controlPoints.Keys;
 				IList<int> ya = controlPoints.Values;

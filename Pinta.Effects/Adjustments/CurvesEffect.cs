@@ -95,10 +95,14 @@ public sealed class CurvesEffect : BaseEffect
 		int channels = transferCurves.Length;
 
 		for (int channel = 0; channel < channels; channel++) {
+
 			SortedList<int, int> channelControlPoints = Data.ControlPoints![channel]; // NRT - Code expects this to be not-null
+
 			IList<int> xa = channelControlPoints.Keys;
 			IList<int> ya = channelControlPoints.Values;
-			SplineInterpolator interpolator = new SplineInterpolator ();
+
+			SplineInterpolator<double> interpolator = new ();
+
 			int length = channelControlPoints.Count;
 
 			for (int i = 0; i < length; i++) {
@@ -117,20 +121,19 @@ public sealed class CurvesEffect : BaseEffect
 public sealed class CurvesData : EffectData
 {
 	public SortedList<int, int>[]? ControlPoints { get; set; }
-
 	public ColorTransferMode Mode { get; set; }
 
 	public override CurvesData Clone ()
 	{
-		//			Not sure if we have to copy contents of ControlPoints
-		//			var controlPoints = new SortedList<int, int> [ControlPoints.Length];
-		//			
-		//			for (int i = 0; i < ControlPoints.Length; i++)
-		//				controlPoints[i] = new SortedList<int, int> (ControlPoints[i]);
+		// Not sure if we have to copy contents of ControlPoints
+		// var controlPoints = new SortedList<int, int> [ControlPoints.Length];
+		// 
+		// for (int i = 0; i < ControlPoints.Length; i++)
+		//     controlPoints[i] = new SortedList<int, int> (ControlPoints[i]);
 
 		return new () {
 			Mode = Mode,
-			ControlPoints = ControlPoints
+			ControlPoints = ControlPoints,
 		};
 	}
 }
