@@ -198,19 +198,3 @@ public abstract class EffectData : ObservableObject
 	/// </summary>
 	public virtual bool IsDefault => false;
 }
-
-/// <summary>
-/// Wrapper around the AddinLocalizer of an add-in.
-/// </summary>
-internal sealed class AddinLocalizerWrapper : IAddinLocalizer
-{
-	private readonly AddinLocalizer localizer;
-
-	public AddinLocalizerWrapper (AddinLocalizer localizer)
-	{
-		this.localizer = localizer;
-	}
-
-	public string GetString (string msgid)
-		=> localizer.GetString (msgid);
-};
