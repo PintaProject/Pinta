@@ -72,7 +72,7 @@ msgstr "Ruis toevoegen"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Add-in-beheerder..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
 msgid "Added"
@@ -475,7 +475,7 @@ msgstr "Kleur ontwijken"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:213
 msgid "Color Gradient"
-msgstr ""
+msgstr "Kleurverloop"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
@@ -509,7 +509,7 @@ msgstr "Bron kleurenschema"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:258
 msgid "Color Sorting"
-msgstr "Rangschikken op kleur"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:158
 msgid "Coloring"
@@ -748,7 +748,7 @@ msgstr "Uitbreiden"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
-msgstr ""
+msgstr "Extensies"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:173
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
@@ -757,28 +757,28 @@ msgstr "Factor"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:85
 msgid "Failed to access XDG Desktop Portals"
-msgstr ""
+msgstr "Kon XDG Desktop Portals niet bereiken"
 
 #: ../Pinta/MainWindow.cs:280
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Kon add-in niet initiëren"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:188
 msgid "Failed to load extension package"
-msgstr ""
+msgstr "Kon deze extensie niet laden"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:476
 msgid "Failed to open image"
-msgstr "De afbeelding kan niet worden geopend"
+msgstr "Kon de afbeelding niet openen"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
 msgid "Failed to save image"
-msgstr "De afbeelding kan niet worden opgeslagen"
+msgstr "Kon de afbeelding niet opslaan"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:84
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:109
 msgid "Failed to take screenshot"
-msgstr "Er kan geen schermfoto worden gemaakt"
+msgstr "Kon geen screenshot maken"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:173
 msgid "Feather Canvas Edge"
@@ -794,7 +794,7 @@ msgstr "Bug melden"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Te openen bestanden"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:270
 msgid "Fill Background"
@@ -802,7 +802,7 @@ msgstr "Achtergrond opvullen"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:219
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Achtergrond van object opvullen"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:216
@@ -837,11 +837,11 @@ msgstr "Pixels beëindigen"
 #: ../Pinta.Core/Actions/ImageActions.cs:160
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
 msgid "Flatten"
-msgstr "Plat maken"
+msgstr "Afbeelding afvlakken"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:161
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "Als u de afbeelding afvlakt, worden alle lagen samengevoegd to één enkele laag."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:58
 #: ../Pinta.Core/Actions/LayerActions.cs:64
@@ -876,12 +876,12 @@ msgstr "Vulmodus"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "Floyd-Steinberg"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr ""
+msgstr "Floyd-Steinbergachtige matrix"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
@@ -952,7 +952,7 @@ msgstr "Hoogte:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:566
 msgid "Hex"
-msgstr ""
+msgstr "Hex"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 msgid "Hide Layer"
@@ -997,7 +997,7 @@ msgstr "Tint/Verzadiging"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "ICO-bestanden mogen niet groter zijn dan 255 x 255 pixels."
+msgstr "ICO-bestanden mogen niet groter zijn dan 255 × 255 pixels."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1067,15 +1067,15 @@ msgstr "Installeren"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Extensie installeren"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:113
 msgid "Install from file..."
-msgstr "Installeren uit bestand…"
+msgstr "Installeren uit bestand..."
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:153
 msgid "Install..."
-msgstr "Installeren…"
+msgstr "Installeren..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:90
 msgid "Installed"
@@ -1114,7 +1114,7 @@ msgstr "JPEG-kwaliteit"
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
 msgid "Jarvis-Judice-Ninke"
-msgstr ""
+msgstr "Jarvis-Judice-Ninke"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
 msgid "Julia Fractal"
@@ -1176,6 +1176,12 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"Klik met de linkermuisknop en sleep de selectie om geselecteerde inhoud te verplaatsen.\n"
+"Houd {0} ingedrukt om de selectie te vergroten of verkleinen.\n"
+"Klik met de rechtermuisknop en sleep de selectie om geselecteerde inhoud te draaien.\n"
+"Houd Shift ingedrukt om het in kleine stapjes te draaien.\n"
+"Gebruik de pijltjesknoppen om de selectie pixel voor pixel te verplaatsen."
+
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
 #, csharp-format
@@ -1254,6 +1260,8 @@ msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"De linkermuisknop selecteert de primaire kleur.\n"
+"De rechtermuisknop selecteert de secondaire kleur."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:268
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -1275,6 +1283,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"Linkermuisknop om in te zoomen.\n"
+"Rechtermuisknop om uit te zoomen.\n"
+"Klik en sleep om de selectie in te zoomen."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:337
 msgid "Length"
@@ -1295,7 +1306,7 @@ msgstr "Licentie"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Light"
-msgstr ""
+msgstr "Licht"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1345,7 +1356,7 @@ msgstr "Toverstafselectie"
 
 #: ../Pinta/MainWindow.cs:385
 msgid "Main Menu"
-msgstr ""
+msgstr "Hoofdmenu"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:105
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:123
@@ -1380,7 +1391,7 @@ msgstr "Bewerkt"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:145
 msgid "More Information..."
-msgstr ""
+msgstr "Meer informatie..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 msgid "Motion Blur"
@@ -1427,7 +1438,7 @@ msgstr "Nieuwe afbeelding"
 
 #: ../Pinta.Core/Actions/FileActions.cs:51
 msgid "New Screenshot..."
-msgstr "Nieuwe schermfoto…"
+msgstr "Nieuwe schermfoto..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:62
 msgid "New palette size:"
@@ -1435,11 +1446,11 @@ msgstr "Nieuw paletgrootte:"
 
 #: ../Pinta.Core/Actions/FileActions.cs:50
 msgid "New..."
-msgstr "Nieuw…"
+msgstr "Nieuw..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
-msgstr ""
+msgstr "Geen items gevonden"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
@@ -1467,7 +1478,7 @@ msgstr "Standaard en omlijnen"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:253
 msgid "Number of Cells"
-msgstr ""
+msgstr "Aantal cellen"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
@@ -1475,13 +1486,13 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:419
 msgid "OK"
-msgstr ""
+msgstr "Oké"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "Object"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:123
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:169
@@ -1533,7 +1544,7 @@ msgstr "Paletbestand openen"
 #: ../Pinta.Core/Actions/EditActions.cs:83
 #: ../Pinta.Core/Actions/FileActions.cs:52
 msgid "Open..."
-msgstr "Openen…"
+msgstr "Openen..."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:318
 msgid "Orientation:"
@@ -1811,17 +1822,17 @@ msgstr ""
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:285
 msgid "Random"
-msgstr ""
+msgstr "Willekeurig"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:195
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:188
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:212
 msgid "Random Color Scheme Seed"
-msgstr ""
+msgstr "Willekeurige bron voor kleurenschema"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:265
 msgid "Random Colors"
-msgstr ""
+msgstr "Willekeuringe kleuren"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:186
@@ -1904,7 +1915,7 @@ msgstr "Vervangen"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
-msgstr ""
+msgstr "Bug rapporteren..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:73
 msgid "Resampling:"
@@ -1921,7 +1932,7 @@ msgstr "Herstellen"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:395
 msgid "Reset Color"
-msgstr ""
+msgstr "Kleur herstellen"
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
@@ -2081,7 +2092,7 @@ msgstr "Alles selecteren"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
-msgstr ""
+msgstr "Geselecteerde kleuren"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -2111,7 +2122,7 @@ msgstr "Sneltoets"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 msgid "Show Grid"
-msgstr ""
+msgstr "Raster tonen"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 msgid "Show Layer"
@@ -2119,7 +2130,7 @@ msgstr "Laag tonen"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:496
 msgid "Show Value"
-msgstr ""
+msgstr "Waarden tonen"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Show/Hide"
@@ -2549,7 +2560,7 @@ msgstr "_Aanpassingen"
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
-msgstr ""
+msgstr "_Annuleren"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
@@ -2580,11 +2591,11 @@ msgstr "_Lagen"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:193 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr ""
+msgstr "_Oké"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr ""
+msgstr "Op_slaan"
 
 #: ../Pinta/MainWindow.cs:346
 msgid "_View"
