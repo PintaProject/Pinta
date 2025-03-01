@@ -8,17 +8,18 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-29 01:40+0000\n"
-"PO-Revision-Date: 2022-02-10 07:50+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2025-02-28 10:02+0000\n"
+"Last-Translator: Stepan Andriiovych <4fbig9xyb@mozmail.com>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/uk/"
+">\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.10.2-rc\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
 msgid " (in user directory)"
@@ -73,7 +74,7 @@ msgstr "Додати шум"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Менеджер додатків..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
 msgid "Added"
@@ -81,7 +82,7 @@ msgstr "Додано"
 
 #: ../Pinta/MainWindow.cs:397
 msgid "Adjustments"
-msgstr ""
+msgstr "Коригування"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
@@ -90,7 +91,7 @@ msgstr "Після вибору"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Вирівняти об'єкт"
 
 #: ../Pinta.Core/Actions/EditActions.cs:472
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
@@ -100,11 +101,11 @@ msgstr "Всі файли"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Alpha"
-msgstr ""
+msgstr "Альфа"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Альфа градієнт"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
@@ -155,7 +156,7 @@ msgstr "Художній"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Еффект Аткінсона"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:238
 msgid "Auto"
@@ -172,7 +173,7 @@ msgstr "Автокорекція"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:215
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "Доступно у репозиторії: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:145
 msgid "Background"
@@ -188,12 +189,12 @@ msgstr "Тло:"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:93
 msgid "Based on the work of Paint.NET:"
-msgstr "Працює на базі Paint.NET"
+msgstr "Працює на базі Paint.NET:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Ефект \"Прекрасна Італія\""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Best Fit"
@@ -201,7 +202,7 @@ msgstr "Найкраще заповнення"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "Білінійність"
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
@@ -239,19 +240,19 @@ msgstr "Напівжирний"
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
-msgstr ""
+msgstr "Багаття"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "Знизу по центру"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "Знизу ліворуч"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "Знизу праворуч"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:144
 #: ../Pinta.Effects/Effects/GlowEffect.cs:80
@@ -269,7 +270,7 @@ msgstr "Розмір пензля"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:270
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:123
 msgid "Brush width"
-msgstr "Товщина пензля."
+msgstr "Товщина пензля"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:24
 msgid "Bulge"
@@ -278,12 +279,12 @@ msgstr "Опуклість"
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Ефект Бурке"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:101
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:178
 msgid "By absolute size:"
-msgstr "Абсолютний розмір"
+msgstr "За абсолютним розміром:"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:59
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:171
@@ -303,11 +304,11 @@ msgstr "Полотно"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "Налаштування сітки полотна"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Сітка полотна..."
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:126
 msgid "Cell Size"
@@ -315,15 +316,15 @@ msgstr "Розмір комірки"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "По центру"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:232
 msgid "Center Align"
-msgstr "Рівняння на середину"
+msgstr "Вирівнювання по центру"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "По центру ліворуч"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:159
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
@@ -332,7 +333,7 @@ msgstr "Зміщення центру"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "По центру праворуч"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:128
 msgid "Centered"
@@ -345,16 +346,16 @@ msgstr "Сантиметри"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Зміна ширини пензля. Гарячі клавіші: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:355
 msgid "Changed Shape Type"
-msgstr "Змінена форма"
+msgstr "Змінений тип форми"
 
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:36
 msgid "Cherry Blossom"
-msgstr ""
+msgstr "Вишневий цвіт"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:609
 msgid "Choose Color"
@@ -377,18 +378,25 @@ msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
+"Клацніть і перетягніть, щоб виділити прямокутник.\n"
+"Утримуйте \"Shift\", щоб був квадрат."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
 msgstr ""
+"Клацніть і перетягніть, щоб виділити еліпс.\n"
+"Утримуйте \"Shift\", щоб було коло."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
 msgstr ""
+"Клацніть і перетягніть, щоб намалювати градієнт від первинного до вторинного "
+"кольору.\n"
+"Клацніть правою кнопкою миші, для інверсії."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Click and drag to draw the outline for a selection area."
@@ -396,7 +404,7 @@ msgstr "За допомогою миші виділіть контур для в
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
-msgstr "Клацніть і перетягуйте для навігації по зображенню"
+msgstr "Клацніть і перетягуйте для навігації по зображенню."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
 msgid "Click to reset primary and secondary color."
@@ -428,7 +436,7 @@ msgstr "Буфер обміну"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:46
 msgid "Clone Stamp"
-msgstr "Штамп клонування."
+msgstr "Штамп клонування"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
 #: ../Pinta.Gui.Addins/InstallDialog.cs:316
@@ -470,7 +478,7 @@ msgstr "Освітлення кольору"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:213
 msgid "Color Gradient"
-msgstr ""
+msgstr "Градієнт кольору"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
@@ -494,17 +502,17 @@ msgstr "Насиченість кольору"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:185
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
 msgid "Color Scheme"
-msgstr ""
+msgstr "Схема кольорів"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:189
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:182
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
 msgid "Color Scheme Source"
-msgstr ""
+msgstr "Джерело схеми кольорів"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:258
 msgid "Color Sorting"
-msgstr ""
+msgstr "Сортування кольорів"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:158
 msgid "Coloring"
@@ -542,13 +550,13 @@ msgstr "Авторські права"
 #. Translators: Gradient with the colors of blue and pink cotton candy
 #: ../Pinta.Effects/Effects/GradientHelper.cs:40
 msgid "Cotton Candy"
-msgstr ""
+msgstr "Цукрова вата"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:119
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr ""
+msgstr "Не вдалося імпортувати шар \"{0}\" з {1}"
 
 #: ../Pinta.Core/Classes/Palette.cs:194
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:444
@@ -568,7 +576,7 @@ msgstr "Обрізати по виділеному"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:246
 msgid "Curved"
-msgstr ""
+msgstr "Викривлення"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:134
@@ -590,7 +598,7 @@ msgstr "Вирізати"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:167
 msgid "Dark"
-msgstr ""
+msgstr "Темний"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
@@ -603,7 +611,7 @@ msgstr "Пунктир"
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:163
 msgid "Default"
-msgstr ""
+msgstr "За замовчанням"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:350
@@ -617,7 +625,7 @@ msgstr "Вилучено"
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:50
 msgid "Dents"
-msgstr ""
+msgstr "Вм'ятини"
 
 #: ../Pinta.Core/Actions/EditActions.cs:276
 msgid "Deselect"
@@ -642,7 +650,7 @@ msgstr "Відстань"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:250
 msgid "Distance Metric"
-msgstr ""
+msgstr "Система відстаней"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:28
 #: ../Pinta.Effects/Effects/DentsEffect.cs:53
@@ -656,7 +664,7 @@ msgstr "Спотворення"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:12
 msgid "Dithering"
-msgstr ""
+msgstr "Тремтіння"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
@@ -665,7 +673,7 @@ msgstr "Не переключайте інструмент"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:209
 #, csharp-format
 msgid "Download size: {0}"
-msgstr ""
+msgstr "Розмір завантаження: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:337
@@ -690,12 +698,12 @@ msgstr "_Ефекти"
 
 #: ../Pinta/MainWindow.cs:391
 msgid "Effects"
-msgstr ""
+msgstr "Ефекти"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
 msgid "Electric"
-msgstr ""
+msgstr "Електричний"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
@@ -714,6 +722,7 @@ msgstr "Чеканка"
 #: ../Pinta/Main.cs:65
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
+"Увімкнути додаткові записи до журналу або зміни поведінки для налагодження"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:263
@@ -730,7 +739,7 @@ msgstr "Помилка"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:134
 msgid "Error Diffusion Method"
-msgstr ""
+msgstr "Метод дифузії помилок"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
@@ -739,11 +748,11 @@ msgstr "Від’єднати (-) (правий клік)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:227
 msgid "Expand"
-msgstr ""
+msgstr "Розгорнути"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
 msgid "Extension packages"
-msgstr ""
+msgstr "Пакети розширення функціоналу"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:173
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
@@ -752,15 +761,15 @@ msgstr "Фактор"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:85
 msgid "Failed to access XDG Desktop Portals"
-msgstr ""
+msgstr "Не вдалося отримати доступ до порталів робочого столу XDG"
 
 #: ../Pinta/MainWindow.cs:280
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Не вдалося ініціалізувати надбудову"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:188
 msgid "Failed to load extension package"
-msgstr ""
+msgstr "Не вдалося завантажити пакет розширення функціоналу"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:476
 msgid "Failed to open image"
@@ -777,11 +786,11 @@ msgstr "Не вдалося зробити знімок"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:173
 msgid "Feather Canvas Edge"
-msgstr ""
+msgstr "Ефект пір'їни країв полотна"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather Object"
-msgstr ""
+msgstr "Об'єкт ефекту пір'їни"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -789,7 +798,7 @@ msgstr "Звітувати про помилку"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Файли для відкриття"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:270
 msgid "Fill Background"
@@ -797,7 +806,7 @@ msgstr "Залити тло"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:219
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Заповнити фон об'єкту"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:216
@@ -836,7 +845,7 @@ msgstr "Об'єднати"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:161
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "Об'єднання всіх шарів зображення в один шар."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:58
 #: ../Pinta.Core/Actions/LayerActions.cs:64
@@ -871,12 +880,12 @@ msgstr "Режим заливки"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "Алгоритм Флойда-Стейнберга"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr ""
+msgstr "Алгоритм Флойда-Стейнберга полегшений"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
@@ -947,7 +956,7 @@ msgstr "Висота:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:566
 msgid "Hex"
-msgstr ""
+msgstr "Hex (шестигранний)"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 msgid "Hide Layer"
@@ -966,17 +975,17 @@ msgstr "Історія"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:289
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "Горизонтальний синій (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:292
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "Горизонтальний зелений (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:295
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "Горизонтальний червоний (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
@@ -986,7 +995,7 @@ msgstr "Відтінок"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:503
 msgid "Hue & Sat"
-msgstr ""
+msgstr "Відтінок і насиченість"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
@@ -1014,7 +1023,7 @@ msgstr "Вкладки зображень"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "Image cannot be pasted"
-msgstr "Зображення не може бути вставлене."
+msgstr "Зображення не може бути вставлене"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:181
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:111
@@ -1064,7 +1073,7 @@ msgstr "Встановити"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Встановити пакет розширення"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:113
 msgid "Install from file..."
@@ -1111,7 +1120,7 @@ msgstr "Якість JPEG"
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
 msgid "Jarvis-Judice-Ninke"
-msgstr ""
+msgstr "Ефекти тремтіння Jarvis-Judice-Ninke"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
 msgid "Julia Fractal"
@@ -1173,6 +1182,14 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"Клацніть лівою кнопкою миші та перетягніть вибір, щоб перемістити вибраний "
+"вміст.\n"
+"Утримуйте {0}, щоб масштабувати замість переміщення.\n"
+"Клацніть правою кнопкою миші та перетягніть вибір, щоб обертати вибраний "
+"вміст.\n"
+"Утримуйте перемикання, щоб обертатися покроково.\n"
+"Використовуйте клавіші зі стрілками для переміщення вибраного вмісту "
+"попіксельно."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
 #, csharp-format
@@ -1183,6 +1200,13 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selection outline by a single pixel."
 msgstr ""
+"Клацніть ліворуч і перетягніть вибір, щоб перемістити контур вибору.\n"
+"Утримуйте {0}, щоб масштабувати замість переміщення.\n"
+"Клацніть правою кнопкою миші та перетягніть вибір, щоб обертати контур "
+"вибору.\n"
+"Утримуйте перемикання, щоб обертатися покроково.\n"
+"Використовуйте клавіші зі стрілками для переміщення контуру вибору "
+"попіксельно."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:58
@@ -1203,12 +1227,32 @@ msgid ""
 "exact same position.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Клацніть ліворуч, щоб намалювати форму з первинним кольором.\n"
+"Клацніть ліворуч на форму, щоб додати контрольну точку.\n"
+"Клацніть ліворуч на контрольну точку та перетягніть, щоб перемістити її.\n"
+"Клацніть правою кнопкою миші на контрольній точці та перетягніть, щоб "
+"змінити її натяжіння.\n"
+"Тримайте перехід, щоб переходити до кутів.\n"
+"Використовуйте клавіші зі стрілками для переміщення вибраної точки "
+"управління.\n"
+"Натисніть {0} + стрілки вліво/вправо, щоб вибрати контрольні точки на "
+"замовлення.\n"
+"Натисніть \"Delete\", щоб видалити вибрану точку управління.\n"
+"Натисніть \"Пробіл\", щоб додати нову контрольну точку в положенні миші.\n"
+"Утримуйте {0} під час натискання місця, щоб створити точку управління в "
+"точно такому ж положенні.\n"
+"Утримуйте {0} під час клацання ліворуч на контрольній точці, щоб створити "
+"нову форму в точно такому ж положенні.\n"
+"Натисніть \"Enter\", щоб доопрацювати форму."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
+"Клацніть лівою кнопкою миші, щоб намалювати фрагментні однопіксельні широкі "
+"лінії з первинним кольором.\n"
+"Клацніть правою кнопкою миші, щоб використовувати вторинний колір."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
@@ -1245,12 +1289,16 @@ msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
+"Клацніть ліворуч, щоб замінити вторинний колір первинним кольором.\n"
+"Клацніть правою кнопкою миші, щоб інвертувати."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"Клацніть ліворуч, щоб встановити первинний колір.\n"
+"Клацніть правою кнопкою миші, щоб встановити вторинний колір."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:268
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -1273,6 +1321,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"Клацніть ліворуч, щоб збільшити масштаб.\n"
+"Клацніть правою кнопкою миші, щоб збільшити масштаб.\n"
+"Клацніть та потягніть для зміни масштабу вибраного фрагменту."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:337
 msgid "Length"
@@ -1293,7 +1344,7 @@ msgstr "Ліцензія"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Light"
-msgstr ""
+msgstr "Світлий"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1310,7 +1361,7 @@ msgstr "Яскравість"
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:48
 msgid "Lime Lemon"
-msgstr ""
+msgstr "Лаймовий"
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:43
 msgid "Line/Curve"
@@ -1326,7 +1377,7 @@ msgstr "Лінійний градієнт"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
-msgstr "Лінійний відображений градієнт."
+msgstr "Лінійний відображений градієнт"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:77
 msgid "Linked"
@@ -1343,7 +1394,7 @@ msgstr "Виділення чарівною паличкою"
 
 #: ../Pinta/MainWindow.cs:385
 msgid "Main Menu"
-msgstr ""
+msgstr "Головне меню"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:105
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:123
@@ -1357,7 +1408,7 @@ msgstr "Множина Мандельброта"
 #. Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
 #: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Martian Lava"
-msgstr ""
+msgstr "Марсіанська лава"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:24
 msgid "Median"
@@ -1378,7 +1429,7 @@ msgstr "Змінений"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:145
 msgid "More Information..."
-msgstr ""
+msgstr "Більше інформації..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 msgid "Motion Blur"
@@ -1412,7 +1463,7 @@ msgstr "Ім’я:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Найближчий сусід"
 
 #: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New"
@@ -1429,7 +1480,7 @@ msgstr "Новий скріншот..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:62
 msgid "New palette size:"
-msgstr "Новий розмір палітри"
+msgstr "Новий розмір палітри:"
 
 #: ../Pinta.Core/Actions/FileActions.cs:50
 msgid "New..."
@@ -1437,7 +1488,7 @@ msgstr "Новий..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
-msgstr ""
+msgstr "Не знайдено жодного елемента"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
@@ -1465,21 +1516,21 @@ msgstr "Нормальний та контурний"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:253
 msgid "Number of Cells"
-msgstr ""
+msgstr "Кількість клітин"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "Кількість потоків, щоб використати для візуалізації"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:419
 msgid "OK"
-msgstr ""
+msgstr "Добре"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "Об'єкт"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:123
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:169
@@ -1493,11 +1544,11 @@ msgstr "Зміщення"
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:74
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
-msgstr ""
+msgstr "Вибір зміщення"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
 msgid "Oil Painting"
-msgstr "Картина маслом."
+msgstr "Олійне малювання"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:98
 msgid "Opacity:"
@@ -1518,7 +1569,7 @@ msgstr "Відкрити зображення"
 #: ../Pinta.Core/Actions/LayerActions.cs:199
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
-msgstr "Відкрити зображення"
+msgstr "Відкрити файл зображення"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
 msgid "Open Line/Curve Series"
@@ -1547,15 +1598,15 @@ msgstr "Контур"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:216
 msgid "Outline Border"
-msgstr ""
+msgstr "Рамка контура"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:24
 msgid "Outline Edge"
-msgstr ""
+msgstr "Край контура"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
 msgid "Outline Object"
-msgstr ""
+msgstr "Об'єкт контуру"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
@@ -1701,7 +1752,7 @@ msgstr "Пікселів"
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:56
 msgid "Piña Colada"
-msgstr ""
+msgstr "Піна Колада"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:802
@@ -1722,7 +1773,7 @@ msgstr "Книжкова"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:130
 msgid "Position"
-msgstr ""
+msgstr "Позиціонування"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1736,11 +1787,11 @@ msgstr "Потужність"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:225
 msgid "Preserve"
-msgstr ""
+msgstr "Зберегти стан"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
-msgstr ""
+msgstr "Визначений градієнт"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:343
 msgid "Preset:"
@@ -1802,22 +1853,22 @@ msgstr "Радіус"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:127
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:141
 msgid "Radius Percentage"
-msgstr ""
+msgstr "Відсотки радіуса"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:285
 msgid "Random"
-msgstr ""
+msgstr "Випадковий"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:195
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:188
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:212
 msgid "Random Color Scheme Seed"
-msgstr ""
+msgstr "Забарвлення випадковою кольоровою гаммою"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:265
 msgid "Random Colors"
-msgstr ""
+msgstr "Випадкові кольори"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:186
@@ -1827,7 +1878,7 @@ msgstr "Білий шум"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:268
 msgid "Random Point Locations"
-msgstr ""
+msgstr "Випадкові місця розташування"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -1873,7 +1924,7 @@ msgstr "Оновити"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:90
 msgid "Released under the MIT X11 License."
-msgstr "Випущено за підтримки МТІ ліцензія X11"
+msgstr "Випущено за підтримки МТІ ліцензія X11."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:40
 msgid "Relief"
@@ -1900,11 +1951,11 @@ msgstr "Замінити"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
-msgstr ""
+msgstr "Повідомити про проблему..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:73
 msgid "Resampling:"
-msgstr ""
+msgstr "Переобробка:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:62
 msgid "Reseed"
@@ -1917,7 +1968,7 @@ msgstr "Скинути"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:395
 msgid "Reset Color"
-msgstr ""
+msgstr "Скинути налаштування кольору"
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
@@ -1949,12 +2000,12 @@ msgstr "Змінити розмір палітри"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:191
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:215
 msgid "Reverse Color Scheme"
-msgstr ""
+msgstr "Зворотна кольорова гама"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:262
 msgid "Reverse Color Sorting"
-msgstr ""
+msgstr "Зворотнє cортування кольору"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Right Align"
@@ -2015,16 +2066,16 @@ msgstr "Вибірка"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
 msgid "Sat"
-msgstr ""
+msgstr "Насиченість"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:512
 msgid "Sat & Value"
-msgstr ""
+msgstr "Насиченість і значення"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
-msgstr "Насиченість"
+msgstr "Налаштування насиченості"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
 msgid "Saturation Percentage"
@@ -2056,7 +2107,7 @@ msgstr "Зберегти Палітру"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr "Зберегти зміни до зображення «{0}»  до закриття?"
+msgstr "Зберегти зміни до зображення «{0}» до закриття?"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:159
 msgid "Scale"
@@ -2077,7 +2128,7 @@ msgstr "Виділити все"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
-msgstr ""
+msgstr "Обрані кольори"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -2093,7 +2144,7 @@ msgstr "Форма"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:243
 msgid "Sharp Edges"
-msgstr ""
+msgstr "Гострі краї"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
@@ -2107,7 +2158,7 @@ msgstr "Гаряча клавіша"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 msgid "Show Grid"
-msgstr ""
+msgstr "Відобразити сітку"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 msgid "Show Layer"
@@ -2115,7 +2166,7 @@ msgstr "Показати шар"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:496
 msgid "Show Value"
-msgstr ""
+msgstr "Показати значення"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Show/Hide"
@@ -2124,12 +2175,12 @@ msgstr "Показати/Приховати"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Ефекти високогір'я"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
 msgid "Sierra Lite"
-msgstr ""
+msgstr "Ефекти високогір'я полегшені"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
@@ -2175,7 +2226,7 @@ msgstr "Ефективність"
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Stucki (Тремтіння зображення через дифузію помилок)"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
@@ -2208,7 +2259,7 @@ msgstr "Стиль Тексту"
 #: ../Pinta/MainWindow.cs:277
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr ""
+msgstr "Додаток '{0}' може бути не сумісним з цією версією Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:208
 msgid "The clipboard does not contain an image."
@@ -2216,7 +2267,7 @@ msgstr "Буфер обміну не містить зображення."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:189
 msgid "The file may be an invalid or corrupt extension package"
-msgstr ""
+msgstr "Файл може бути недійсним або пошкодженим пакетом розширення"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:74
 msgid "The following dependencies could not be resolved:"
@@ -2239,6 +2290,8 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"Зображення, що вставляється, більше, ніж полотно. Що б ви хотіли зробити з "
+"розміром полотна?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:341
 msgid "The installation failed!"
@@ -2253,6 +2306,8 @@ msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
+"Вибрані пакети розширення не можуть бути встановлені, оскільки існують "
+"конфліктні залежності."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:348
 msgid "The uninstallation failed!"
@@ -2260,13 +2315,15 @@ msgstr "Вилучення не вдалося!"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:349
 msgid "The uninstallation has completed with warnings."
-msgstr "Вилучення завершилося з попередженнями!"
+msgstr "Вилучення завершилося з попередженнями."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:230
 msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
 msgstr ""
+"Є й інші пакети розширення, які залежать від попередніх, які також будуть "
+"видалені:"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:133
 msgid "Thickness"
@@ -2274,7 +2331,7 @@ msgstr "Товщина"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:160
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "Цей формат не підтримує шари. Об'єднати зображення?"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:29
 msgid "Tile Reflection"
@@ -2286,7 +2343,7 @@ msgstr "Розмір фрагментів мозаїки"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:233
 msgid "Tile Type"
-msgstr ""
+msgstr "Тип плитки"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
 msgid "Tip: Right-click to remove control points."
@@ -2318,15 +2375,15 @@ msgstr "Панель інструментів"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
-msgstr ""
+msgstr "Вгорі по центру"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
-msgstr ""
+msgstr "Вгорі ліворуч"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
-msgstr ""
+msgstr "Вгорі праворуч"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:103
 msgid "Transfer Map"
@@ -2347,7 +2404,7 @@ msgstr "Прозорий"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:149
 msgid "Turbulence"
-msgstr ""
+msgstr "Турбулентність"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
@@ -2356,7 +2413,7 @@ msgstr "Скручування"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
 msgid "Two-Row Sierra"
-msgstr ""
+msgstr "Дворядовий ефект високогір'я"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
@@ -2382,7 +2439,7 @@ msgstr "Вилучення"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:171
 msgid "Uninstall..."
-msgstr ""
+msgstr "Видалення..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
@@ -2401,11 +2458,11 @@ msgstr "Формат файлу не підтримується"
 
 #: ../Pinta.Core/Classes/Palette.cs:155
 msgid "Unsupported palette format"
-msgstr ""
+msgstr "Формат палітри не підтримується"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:162
 msgid "Update..."
-msgstr ""
+msgstr "Оновлення..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:91
 msgid "Updates"
@@ -2426,32 +2483,32 @@ msgstr "Використовує деякі іконки з:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:617
 msgid "Value"
-msgstr ""
+msgstr "Значення"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:202
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "Версія: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:299
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Вертикальний синій (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:302
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Вертикальний зелений (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:305
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "Вертикальний червоний (R)"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
-msgstr ""
+msgstr "Віньєтка"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
@@ -2459,7 +2516,7 @@ msgstr "Видимий"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Діаграма Вороного"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:121
 msgid "Warmth"
@@ -2489,7 +2546,7 @@ msgstr "Перенос"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:40
 msgid "Xor"
-msgstr "Xor"
+msgstr "Xor (логічне виключення)"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
@@ -2509,7 +2566,7 @@ msgstr "У вас немає прав доступу до «{0}»."
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
-"У вас немає доступу до внесення змін  до «{0}». Можливо, файл або теку "
+"У вас немає доступу до внесення змін до «{0}». Можливо, файл або теку "
 "призначено лише для читання."
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:179
@@ -2546,11 +2603,11 @@ msgstr "_Кольори"
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
-msgstr ""
+msgstr "_Відмінити"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
-msgstr ""
+msgstr "_Відмовитися"
 
 #: ../Pinta/MainWindow.cs:342
 msgid "_Edit"
@@ -2577,11 +2634,11 @@ msgstr "_Шари"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:193 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr ""
+msgstr "_Добре"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr ""
+msgstr "_Зберегти"
 
 #: ../Pinta/MainWindow.cs:346
 msgid "_View"
@@ -2614,7 +2671,7 @@ msgstr "пікселів"
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:74
 msgid "translator-credits"
 msgstr ""
-"Launchpad Contributions:\n"
+"Launchpad контриб'ютори:\n"
 "  Aleksandr Chepurnoy https://launchpad.net/~wuron\n"
 "  Cameron White https://launchpad.net/~cameronwhite91\n"
 "  Eugene Rozov https://launchpad.net/~eugene-rozov\n"
