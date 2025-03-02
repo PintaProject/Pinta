@@ -26,6 +26,7 @@
 
 using System;
 using System.Linq;
+using System.Threading;
 using Mono.Addins;
 using Pinta.Core;
 using Pinta.Docking;
@@ -42,6 +43,7 @@ internal sealed class MainWindow
 
 	CanvasPad canvas_pad = null!;
 
+	private int main_thread_id = -1;
 	private Gtk.DropTarget drop_target = null!;
 
 	public MainWindow (Adw.Application app)
@@ -81,6 +83,7 @@ internal sealed class MainWindow
 			setupService.RegisterRepositories (true);
 
 		// Look out for any changes in extensions
+		main_thread_id = Thread.CurrentThread.ManagedThreadId;
 		AddinManager.AddExtensionNodeHandler (typeof (IExtension), OnExtensionChanged);
 
 		// Load the user's previous settings
@@ -266,7 +269,24 @@ internal sealed class MainWindow
 	}
 
 	// Called when an extension node is added or removed
-	private async void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
+	// Note this may be called from any thread, not just the main UI thread!
+	private void OnExtensionChanged (object s, ExtensionNodeEventArgs args)
+	{
+		// Run synchronously if invoked from the main thread, e.g. when loading
+		// addins at startup we require them to be immediately loaded.
+		if (Thread.CurrentThread.ManagedThreadId == main_thread_id)
+			UpdateExtension (args);
+		else {
+			// Otherwise, schedule the addin to be loaded/unloaded from the main thread
+			// in case it touches the UI, e.g. to update menu items.
+			GLib.Functions.IdleAdd (GLib.Constants.PRIORITY_DEFAULT_IDLE, () => {
+				UpdateExtension (args);
+				return false;
+			});
+		}
+	}
+
+	private static void UpdateExtension (ExtensionNodeEventArgs args)
 	{
 		if (args.Change == ExtensionChange.Add) {
 			try {
@@ -275,7 +295,7 @@ internal sealed class MainWindow
 			} catch (Exception e) {
 				// Translators: {0} is the name of an add-in.
 				string body = Translations.GetString ("The '{0}' add-in may not be compatible with this version of Pinta", args.ExtensionNode.Addin.Id);
-				await PintaCore.Chrome.ShowErrorDialog (
+				_ = PintaCore.Chrome.ShowErrorDialog (
 					PintaCore.Chrome.MainWindow,
 					Translations.GetString ("Failed to initialize add-in"),
 					body, e.ToString ());
