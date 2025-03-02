@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-29 01:40+0000\n"
+"POT-Creation-Date: 2025-03-02 01:39+0000\n"
 "PO-Revision-Date: 2024-02-14 11:01+0000\n"
 "Last-Translator: ytkdg 0w8 <ytkdg0w8@duck.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/pinta/pinta/it/"
@@ -92,25 +92,25 @@ msgstr "Dopo la selezione"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:472
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:288
+#: ../Pinta.Core/Actions/EditActions.cs:474
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:287
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Tutti i Files"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:675
 msgid "Alpha"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:210
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:211
 msgid "Alpha Gradient"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:120
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:117
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:147
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:58
-#: ../Pinta.Effects/Effects/TwistEffect.cs:151
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:147
+#: ../Pinta.Effects/Effects/TwistEffect.cs:153
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
 msgid "Amount"
 msgstr "Quantità"
 
@@ -118,19 +118,19 @@ msgstr "Quantità"
 msgid "Anchor:"
 msgstr "Ancora:"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:194
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:203
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:122
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:166
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:77
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:120
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:78
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:316
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:140
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 msgid "Angle"
 msgstr "Angolo"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:154
+#: ../Pinta.Effects/Effects/TwistEffect.cs:156
 msgid "Antialias"
 msgstr "Anti-Aliasing"
 
@@ -174,7 +174,7 @@ msgstr "Livelli automatici"
 msgid "Available in repository: {0}"
 msgstr "Disponibile nella repository: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:145
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:146
 msgid "Background"
 msgstr "Sfondo"
 
@@ -215,7 +215,7 @@ msgstr "Modalità fusione"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:650
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:664
 msgid "Blue"
 msgstr "Blu"
 
@@ -232,7 +232,7 @@ msgstr "Blu "
 msgid "Blurs"
 msgstr "Sfocature"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:180
+#: ../Pinta.Tools/Tools/TextTool.cs:176
 msgid "Bold"
 msgstr "Grassetto"
 
@@ -253,8 +253,8 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:144
-#: ../Pinta.Effects/Effects/GlowEffect.cs:80
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
+#: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
 msgstr "Luminosità"
 
@@ -262,7 +262,7 @@ msgstr "Luminosità"
 msgid "Brightness / Contrast"
 msgstr "Luminosità / Contrasto"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:146
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:148
 msgid "Brush Size"
 msgstr "Dimensione pennello"
 
@@ -290,9 +290,9 @@ msgstr "In dimensioni assolute:"
 msgid "By percentage:"
 msgstr "In percentuale:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:409
+#: ../Pinta.Core/Actions/EditActions.cs:411
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:423
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:436
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Annulla"
@@ -309,7 +309,7 @@ msgstr ""
 msgid "Canvas Grid..."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:126
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
 msgstr "Dimensione cella"
 
@@ -317,7 +317,7 @@ msgstr "Dimensione cella"
 msgid "Center"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:232
+#: ../Pinta.Tools/Tools/TextTool.cs:228
 msgid "Center Align"
 msgstr "Allinea al centro"
 
@@ -325,7 +325,7 @@ msgstr "Allinea al centro"
 msgid "Center Left"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:159
+#: ../Pinta.Effects/Effects/DentsEffect.cs:156
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
 msgid "Center Offset"
 msgstr "Centra Offset"
@@ -334,7 +334,7 @@ msgstr "Centra Offset"
 msgid "Center Right"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:128
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:126
 msgid "Centered"
 msgstr "Centrato"
 
@@ -356,7 +356,7 @@ msgstr "Tipo di forma cambiata"
 msgid "Cherry Blossom"
 msgstr "Fiore di Ciliegio"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:609
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:610
 msgid "Choose Color"
 msgstr "Scegli colore"
 
@@ -397,7 +397,7 @@ msgstr ""
 "secondario.\n"
 "Click destro per invertire."
 
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
 msgid "Click and drag to draw the outline for a selection area."
 msgstr "Clicca e trascina per disegnare il contorno dell'area da selezionare."
 
@@ -421,7 +421,7 @@ msgstr "Fare click in una regione di colore simile."
 msgid "Click to select secondary color."
 msgstr "Clicca per selezionare il colore secondario."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:446
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:459
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:277
 msgid "Click to switch between primary and secondary color."
 msgstr "Clicca per passare dal colore primario a quello secondario."
@@ -458,7 +458,7 @@ msgstr "Linee chiuse/Curve"
 msgid "Clouds"
 msgstr "Nuvole"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:149
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:151
 msgid "Coarseness"
 msgstr "Ruvidezza"
 
@@ -475,7 +475,7 @@ msgstr "Brucia colore"
 msgid "Color Dodge"
 msgstr "Slava colore"
 
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:213
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:214
 msgid "Color Gradient"
 msgstr ""
 
@@ -488,32 +488,32 @@ msgstr "Modalità colore"
 msgid "Color Picker"
 msgstr "Selettore colore"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:88
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
 msgid "Color Range"
 msgstr "Intervallo di colore"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:170
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
 msgid "Color Saturation"
 msgstr "Saturazione colore"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:170
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:192
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:185
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:209
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:206
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Color Scheme"
 msgstr "Schema di Colori"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:189
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:182
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:206
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:203
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
 msgid "Color Scheme Source"
 msgstr "Origine Combinazione Colore"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:258
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:260
 msgid "Color Sorting"
 msgstr "Ordinamento del Colore"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:158
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:160
 msgid "Coloring"
 msgstr "Colorazione"
 
@@ -529,8 +529,8 @@ msgstr "Contenuti"
 msgid "Contiguous"
 msgstr "Contiguo"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:155
-#: ../Pinta.Effects/Effects/GlowEffect.cs:83
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
+#: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
 msgstr "Contrasto"
 
@@ -552,19 +552,19 @@ msgid "Cotton Candy"
 msgstr "Zucchero Filato"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:119
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:125
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Non è stato possibile importare il layer \"{0}\" da {1}"
 
 #: ../Pinta.Core/Classes/Palette.cs:194
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:456
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Impossibile aprire il file: {0}"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:173
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
 msgid "Coverage"
 msgstr "Copertura"
 
@@ -573,7 +573,7 @@ msgstr "Copertura"
 msgid "Crop to Selection"
 msgstr "Ritaglia la selezione"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:246
+#: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
 msgstr ""
 
@@ -590,7 +590,7 @@ msgid "Custom"
 msgstr "Personalizzata"
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
-#: ../Pinta.Core/Actions/EditActions.cs:262
+#: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Cut"
 msgstr "Taglia"
 
@@ -626,7 +626,7 @@ msgstr "Cancellato"
 msgid "Dents"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:276
+#: ../Pinta.Core/Actions/EditActions.cs:278
 msgid "Deselect"
 msgstr "Deseleziona"
 
@@ -642,12 +642,12 @@ msgstr "Dettagli"
 msgid "Difference"
 msgstr "Differenza"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:136
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:125
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:137
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:123
 msgid "Distance"
 msgstr "Distanza"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:250
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:252
 msgid "Distance Metric"
 msgstr "Distanza Metrica"
 
@@ -683,7 +683,7 @@ msgstr "Duplica livello"
 msgid "Easily create and edit images"
 msgstr "Crea e modifica immagini facilmente"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:236 Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:238 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Comportamento dei bordi"
 
@@ -724,7 +724,7 @@ msgstr ""
 "Attiva registrazione aggiuntiva o modifiche al comportamento per il debug"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
-#: ../Pinta.Core/Actions/EditActions.cs:263
+#: ../Pinta.Core/Actions/EditActions.cs:264
 msgid "Erase Selection"
 msgstr "Elimina la selezione"
 
@@ -732,11 +732,11 @@ msgstr "Elimina la selezione"
 msgid "Eraser"
 msgstr "Gomma"
 
-#: ../Pinta.Core/ImageFormats/OraFormat.cs:120
+#: ../Pinta.Core/ImageFormats/OraFormat.cs:126
 msgid "Error"
 msgstr "Errore"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:134
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:135
 msgid "Error Diffusion Method"
 msgstr "Metodo di Diffusione degli Errori"
 
@@ -749,12 +749,12 @@ msgstr "Escludi (-) (Tasto Destro)"
 msgid "Expand"
 msgstr "Espandi"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:280
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:279
 msgid "Extension packages"
 msgstr "Pacchetti di estensioni"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:173
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:153
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:173
 msgid "Factor"
 msgstr "Fattore"
 
@@ -770,7 +770,7 @@ msgstr "Impossibile inizializzare add-in"
 msgid "Failed to load extension package"
 msgstr "Impossibile caricare pacchetto di estensione"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:476
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:477
 msgid "Failed to open image"
 msgstr "Impossibile aprire l'immagine"
 
@@ -783,7 +783,7 @@ msgstr "Impossibile salvare l'immagine"
 msgid "Failed to take screenshot"
 msgstr "Impossibile scattare una schermata"
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:173
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:174
 msgid "Feather Canvas Edge"
 msgstr ""
 
@@ -799,11 +799,11 @@ msgstr "Segnala un bug"
 msgid "Files to open"
 msgstr "File da aprire"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:270
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Fill Background"
 msgstr "Riempi Sfondo"
 
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:219
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:220
 msgid "Fill Object Background"
 msgstr ""
 
@@ -828,7 +828,7 @@ msgid "Fill and Outline Shape"
 msgstr "Contorno e forma piena"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1096
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1379
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1380
 msgid "Finalized"
 msgstr "Finalizzato"
 
@@ -886,7 +886,7 @@ msgstr "Floyd-Steinberg"
 msgid "Floyd-Steinberg Lite"
 msgstr "Floyd-Steinberg Lite"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:156
+#: ../Pinta.Tools/Tools/TextTool.cs:152
 msgid "Font"
 msgstr "Carattere"
 
@@ -894,7 +894,7 @@ msgstr "Carattere"
 msgid "Fragment"
 msgstr "Frammentazione"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:133
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:134
 msgid "Fragments"
 msgstr "Frammenti"
 
@@ -910,7 +910,7 @@ msgstr "Vetro ghiacciato"
 msgid "Fullscreen"
 msgstr "Schermo intero"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:89
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Gallery"
 msgstr "Galleria"
 
@@ -934,7 +934,7 @@ msgstr "Sfumatura"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:640
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:654
 msgid "Green"
 msgstr "Verde"
 
@@ -953,15 +953,15 @@ msgstr "Alte luci"
 msgid "Height:"
 msgstr "Altezza:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:566
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:579
 msgid "Hex"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Hide Layer"
 msgstr "Nascondi livello"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Suggerimento: Per ottenere i migliori risultati, usa prima gli strumenti di "
@@ -972,27 +972,27 @@ msgid "History"
 msgstr "Cronologia"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:289
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:291
 msgid "Horizontal blue (B)"
 msgstr "Blu Orizzontale (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:292
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:294
 msgid "Horizontal green (G)"
 msgstr "Verde Orizzontale (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:295
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:297
 msgid "Horizontal red (R)"
 msgstr "Rosso Orizzontale (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:590
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:604
 msgid "Hue"
 msgstr "Tinta"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:503
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
 msgid "Hue & Sat"
 msgstr ""
 
@@ -1049,7 +1049,7 @@ msgstr "Importa dal file..."
 msgid "Inches"
 msgstr "Pollici"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:155
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:157
 msgid "Ink Outline"
 msgstr "Bordo ad inchiostro"
 
@@ -1070,25 +1070,25 @@ msgstr "Istogramma di partenza"
 msgid "Install"
 msgstr "Installa"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:254
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
 msgid "Install Extension Package"
 msgstr "Installa Pacchetto di Estensione"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:113
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:112
 msgid "Install from file..."
 msgstr "Installa da file..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:153
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:155
 msgid "Install..."
 msgstr "Installa..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:90
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:89
 msgid "Installed"
 msgstr "Installato"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:136
-#: ../Pinta.Effects/Effects/TileEffect.cs:230
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:137
+#: ../Pinta.Effects/Effects/TileEffect.cs:232
 msgid "Intensity"
 msgstr "Intensità"
 
@@ -1099,16 +1099,16 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Intersect ({0} + Click sinistro)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:218
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 msgid "Invert Colors"
 msgstr "Inverti i colori"
 
 #: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:493
+#: ../Pinta.Core/Actions/EditActions.cs:496
 msgid "Invert Selection"
 msgstr "Inverti la selezione"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:192
+#: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Italic"
 msgstr "Corsivo"
 
@@ -1129,7 +1129,7 @@ msgstr "Frattale Julia"
 msgid "Landscape"
 msgstr "Orizzontale"
 
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:51
 msgid "Lasso Select"
 msgstr "Selezione libera"
 
@@ -1137,15 +1137,15 @@ msgstr "Selezione libera"
 msgid "Layer"
 msgstr "Livello"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:88
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
 msgid "Layer Hidden"
 msgstr "Livello Nascosto"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:109
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Layer Opacity"
 msgstr "Opacità del livello"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:124
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:122
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "Proprietà del livello"
@@ -1154,7 +1154,7 @@ msgstr "Proprietà del livello"
 msgid "Layer Properties..."
 msgstr "Proprietà del livello..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:88
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
 msgid "Layer Shown"
 msgstr "Livello Mostrato"
 
@@ -1168,7 +1168,7 @@ msgstr "Livello {0}"
 msgid "Layers"
 msgstr "Livelli"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:220
+#: ../Pinta.Tools/Tools/TextTool.cs:216
 msgid "Left Align"
 msgstr "Allinea a sinistra"
 
@@ -1189,7 +1189,7 @@ msgstr ""
 "Utilizza i tasti freccia per spostare il contenuto selezionato di un singolo "
 "pixel."
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:48
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:50
 #, csharp-format
 msgid ""
 "Left click and drag the selection to move selection outline.\n"
@@ -1348,11 +1348,11 @@ msgstr "Chiaro"
 msgid "Lighten"
 msgstr "Schiarisci"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:118
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:129
 msgid "Lighting"
 msgstr "Illuminazione"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
 msgid "Lightness"
 msgstr "Luminosità"
 
@@ -1425,7 +1425,7 @@ msgstr "Modalità"
 msgid "Modified"
 msgstr "Modificato"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:145
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:147
 msgid "More Information..."
 msgstr "Più Informazioni..."
 
@@ -1447,7 +1447,7 @@ msgstr "Sposta il livello in alto"
 msgid "Move Selected Pixels"
 msgstr "Sposta i pixel selezionati"
 
-#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:44
+#: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
 msgid "Move Selection"
 msgstr "Muovi selezione"
 
@@ -1467,7 +1467,7 @@ msgstr "Vicino più prossimo"
 msgid "New"
 msgstr "Nuovo"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:153
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:154
 #: ../Pinta/Dialogs/NewImageDialog.cs:197
 msgid "New Image"
 msgstr "Nuova immagine"
@@ -1496,7 +1496,7 @@ msgstr "Disturbo"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:267
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:263
 msgid "Normal"
 msgstr "Normale"
 
@@ -1508,11 +1508,11 @@ msgstr "Mescola normale"
 msgid "Normal Size"
 msgstr "Dimensione normale"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:268
+#: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal and Outline"
 msgstr "Normale e contornato"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:253
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:255
 msgid "Number of Cells"
 msgstr "Numero delle Celle"
 
@@ -1520,7 +1520,7 @@ msgstr "Numero delle Celle"
 msgid "Number of threads to use for rendering"
 msgstr "Il numero di thread da usare per il rendering"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:419
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:432
 msgid "OK"
 msgstr ""
 
@@ -1530,16 +1530,16 @@ msgstr ""
 msgid "Object"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:123
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:169
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:137
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:150
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:120
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:168
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:139
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:151
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
 msgstr "Scostamento"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
-#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:74
+#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
 msgstr ""
@@ -1560,7 +1560,7 @@ msgstr "Apri"
 msgid "Open Curve Shape"
 msgstr "Curva aperta"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:357
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:358
 msgid "Open Image"
 msgstr "Apri immagine"
 
@@ -1573,7 +1573,7 @@ msgstr "Apri immagine"
 msgid "Open Line/Curve Series"
 msgstr "Linee aperte/Curve"
 
-#: ../Pinta.Core/Actions/EditActions.cs:388
+#: ../Pinta.Core/Actions/EditActions.cs:390
 msgid "Open Palette File"
 msgstr "Apri la Tavolozza"
 
@@ -1590,11 +1590,11 @@ msgstr "Orientamento:"
 msgid "Original"
 msgstr "Originale"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Tools/Tools/TextTool.cs:265
 msgid "Outline"
 msgstr "Bordo"
 
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:216
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:217
 msgid "Outline Border"
 msgstr ""
 
@@ -1611,7 +1611,7 @@ msgstr ""
 msgid "Outline Shape"
 msgstr "Solo contorno"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:283
+#: ../Pinta.Tools/Tools/TextTool.cs:279
 msgid "Outline width"
 msgstr "Larghezza contorno"
 
@@ -1640,16 +1640,16 @@ msgid "Paintbrush"
 msgstr "Pennello"
 
 #: ../Pinta.Core/Actions/EditActions.cs:133
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:137
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:138
 msgid "Palette"
 msgstr "Tavolozza"
 
-#: ../Pinta.Core/Actions/EditActions.cs:455
+#: ../Pinta.Core/Actions/EditActions.cs:457
 msgid "Palette files"
 msgstr "Tavolozze"
 
 #: ../Pinta.Tools/Tools/PanTool.cs:40
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:143
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:148
 msgid "Pan"
 msgstr "Muovi"
 
@@ -1676,7 +1676,7 @@ msgstr "Matita"
 msgid "Pencil Sketch"
 msgstr "Schizzo a matita"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:85
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
 msgid "Pencil Tip Size"
 msgstr "Dimensioni della punta della matita"
 
@@ -1733,7 +1733,7 @@ msgstr ""
 "la possibilità di creare un numero illimitato di livelli per aiutarti ad "
 "organizzare la tua creatività."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:458
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta supporta i seguenti formati di file:"
 
@@ -1780,7 +1780,7 @@ msgstr ""
 msgid "Posterize"
 msgstr "Posterizza"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:162
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:176
 msgid "Power"
 msgstr "Potenza"
 
@@ -1809,12 +1809,12 @@ msgstr "Primario"
 msgid "Print"
 msgstr "Stampa"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:156
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:176
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/DentsEffect.cs:153
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:271
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:273
 msgid "Quality"
 msgstr "Qualità"
 
@@ -1838,45 +1838,45 @@ msgstr "Sfocatura radiale"
 msgid "Radial Gradient"
 msgstr "Sfumatura radiale"
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:167
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
-#: ../Pinta.Effects/Effects/GlowEffect.cs:77
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:168
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:248
+#: ../Pinta.Effects/Effects/GlowEffect.cs:78
 #: ../Pinta.Effects/Effects/MedianEffect.cs:60
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:90
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:205
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:89
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:92
 msgid "Radius"
 msgstr "Raggio"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:127
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:141
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:124
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:143
 msgid "Radius Percentage"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:285
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:287
 msgid "Random"
 msgstr "Casuale"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:195
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:188
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:212
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:209
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 msgid "Random Color Scheme Seed"
 msgstr "Seme di Combinazione di Colori Casuale"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:265
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:267
 msgid "Random Colors"
 msgstr "Colori Casuali"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:176
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:186
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:153
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:178
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:200
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise"
 msgstr "Rumore casuale"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:268
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:270
 msgid "Random Point Locations"
 msgstr "Posizione Casuale dei Punti"
 
@@ -1894,7 +1894,7 @@ msgstr "Selezione rettangolare"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:102
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:630
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
 msgid "Red"
 msgstr "Rosso"
 
@@ -1918,7 +1918,7 @@ msgstr "Riduci disturbo"
 msgid "Reflect"
 msgstr "Rifletti"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:105
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:104
 msgid "Refresh"
 msgstr "Aggiorna"
 
@@ -1926,11 +1926,11 @@ msgstr "Aggiorna"
 msgid "Released under the MIT X11 License."
 msgstr "Rilasciato sotto la licenza MIT X11."
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:40
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:41
 msgid "Relief"
 msgstr "Rilievo"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:114
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:112
 msgid "Rename Layer"
 msgstr "Rinomina livello"
 
@@ -1966,7 +1966,7 @@ msgstr "Rigenera il seme"
 msgid "Reset"
 msgstr "Azzera"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:395
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:408
 msgid "Reset Color"
 msgstr ""
 
@@ -1974,7 +1974,7 @@ msgstr ""
 msgid "Reset to Default"
 msgstr "Ripristina valori predefiniti"
 
-#: ../Pinta.Core/Classes/Document.cs:317
+#: ../Pinta.Core/Classes/Document.cs:326
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
 msgid "Resize Canvas"
 msgstr "Ridimensiona dimensioni"
@@ -1996,23 +1996,23 @@ msgstr "Ridimensiona Immagine..."
 msgid "Resize Palette"
 msgstr "Ridimensiona Tavolozza"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:198
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:191
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:215
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:212
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 msgid "Reverse Color Scheme"
 msgstr "Combinazione di Colori Invertiti"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:262
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:264
 msgid "Reverse Color Sorting"
 msgstr "Invertire l'Ordinamento dei Colori"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:244
+#: ../Pinta.Tools/Tools/TextTool.cs:240
 msgid "Right Align"
 msgstr "Allinea a destra"
 
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:66
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:131
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:70
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:136
 msgid "Rotate / Zoom Layer"
 msgstr "Ruotare / Zoom Livello"
 
@@ -2035,8 +2035,8 @@ msgstr "Ruota di 90° in senso orario"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "Ruota di 90° in senso antiorario"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:139
-#: ../Pinta.Effects/Effects/TileEffect.cs:224
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:140
+#: ../Pinta.Effects/Effects/TileEffect.cs:226
 msgid "Rotation"
 msgstr "Rotazione"
 
@@ -2064,24 +2064,24 @@ msgstr "Righelli"
 msgid "Sampling"
 msgstr "Campionamento"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:621
 msgid "Sat"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:512
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:525
 msgid "Sat & Value"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
 msgid "Saturation"
 msgstr "Saturazione"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
 msgid "Saturation Percentage"
 msgstr "Percentuale di saturazione"
 
-#: ../Pinta.Core/Actions/EditActions.cs:408
+#: ../Pinta.Core/Actions/EditActions.cs:410
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2100,7 +2100,7 @@ msgstr "Salva con nome..."
 msgid "Save Image File"
 msgstr "Salva immagine"
 
-#: ../Pinta.Core/Actions/EditActions.cs:405
+#: ../Pinta.Core/Actions/EditActions.cs:407
 msgid "Save Palette File"
 msgstr "Salva la Tavolozza"
 
@@ -2109,7 +2109,7 @@ msgstr "Salva la Tavolozza"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr "Salvare le modifiche all'immagine \"{0}\" prima di chiuderla?"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:159
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:173
 msgid "Scale"
 msgstr "Ridimensiona"
 
@@ -2122,7 +2122,7 @@ msgid "Secondary"
 msgstr "Secondario"
 
 #: ../Pinta.Core/Actions/EditActions.cs:80
-#: ../Pinta.Core/Actions/EditActions.cs:231
+#: ../Pinta.Core/Actions/EditActions.cs:232
 msgid "Select All"
 msgstr "Seleziona Tutto"
 
@@ -2142,7 +2142,7 @@ msgstr "Imposta il numero di colori"
 msgid "Shape Type"
 msgstr "Tipo di figura"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:243
+#: ../Pinta.Effects/Effects/TileEffect.cs:245
 msgid "Sharp Edges"
 msgstr ""
 
@@ -2151,7 +2151,7 @@ msgid "Sharpen"
 msgstr "Nitidezza"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:447
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
 msgid "Shortcut key"
 msgstr "Scorciatoia"
@@ -2160,11 +2160,11 @@ msgstr "Scorciatoia"
 msgid "Show Grid"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Show Layer"
 msgstr "Mostra livello"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:496
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:509
 msgid "Show Value"
 msgstr ""
 
@@ -2202,7 +2202,7 @@ msgstr "Basse luci"
 msgid "Soften Portrait"
 msgstr "Ammorbidire il ritratto"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:115
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:126
 msgid "Softness"
 msgstr "Morbidezza"
 
@@ -2218,8 +2218,8 @@ msgstr "Quadrati"
 msgid "Status Bar"
 msgstr "Barra di stato"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:146
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:148
 msgid "Strength"
 msgstr "Forza"
 
@@ -2231,7 +2231,7 @@ msgstr "Stucki"
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:28
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:33
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:34
 msgid "Stylize"
 msgstr "Stilizza"
 
@@ -2251,7 +2251,7 @@ msgstr "Testo"
 msgid "Text - Finalize"
 msgstr "Testo - Finalizza"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:258
+#: ../Pinta.Tools/Tools/TextTool.cs:254
 msgid "Text Style"
 msgstr "Stile di testo"
 
@@ -2328,7 +2328,7 @@ msgstr ""
 "Esistono altri pacchetti di estensioni che dipendono da quelli precedenti "
 "che verranno anch'essi disinstallati:"
 
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:133
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:134
 msgid "Thickness"
 msgstr "Spessore"
 
@@ -2340,11 +2340,11 @@ msgstr ""
 msgid "Tile Reflection"
 msgstr "Riflessione di piastrelle"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:227
+#: ../Pinta.Effects/Effects/TileEffect.cs:229
 msgid "Tile Size"
 msgstr "Dimensione della piastrella"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:233
+#: ../Pinta.Effects/Effects/TileEffect.cs:235
 msgid "Tile Type"
 msgstr ""
 
@@ -2354,9 +2354,9 @@ msgstr ""
 "Suggerimento: fai Click con il tasto destro per rimuovere i punti di "
 "controllo."
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:170
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:207
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:53
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:171
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
 #: ../Pinta.Tools/Tools/RecolorTool.cs:197
 msgid "Tolerance"
@@ -2407,7 +2407,7 @@ msgstr "Modalità trasparenza"
 msgid "Transparent"
 msgstr "Trasparente"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:149
+#: ../Pinta.Effects/Effects/DentsEffect.cs:146
 msgid "Turbulence"
 msgstr ""
 
@@ -2425,7 +2425,7 @@ msgstr "Sierra a Due Vie"
 msgid "Type"
 msgstr "Tipo"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:204
+#: ../Pinta.Tools/Tools/TextTool.cs:200
 msgid "Underline"
 msgstr "Sottolineato"
 
@@ -2442,7 +2442,7 @@ msgstr "Sfoca"
 msgid "Uninstall"
 msgstr "Disinstalla"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:171
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:173
 msgid "Uninstall..."
 msgstr "Disinstalla..."
 
@@ -2452,12 +2452,12 @@ msgstr "Disinstalla..."
 msgid "Union (+) ({0} + Left Click)"
 msgstr "Union (+) ({0} + Click sinistro)"
 
-#: ../Pinta.Core/Classes/Document.cs:92
+#: ../Pinta.Core/Classes/Document.cs:101
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Immagine non salvata {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:352
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:353
 msgid "Unsupported file format"
 msgstr "Formato del file non supportato"
 
@@ -2465,15 +2465,15 @@ msgstr "Formato del file non supportato"
 msgid "Unsupported palette format"
 msgstr "Formato di palette non supportato"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:162
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:164
 msgid "Update..."
 msgstr "Aggiorna..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:91
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:90
 msgid "Updates"
 msgstr "Aggiornamenti"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:173
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2486,7 +2486,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Utilizzando delle icone da:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:617
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:631
 msgid "Value"
 msgstr ""
 
@@ -2496,17 +2496,17 @@ msgid "Version: {0}"
 msgstr "Versione: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:299
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:301
 msgid "Vertical blue (B)"
 msgstr "Blu Verticale (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:302
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:304
 msgid "Vertical green (G)"
 msgstr "Verde Verticale (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:305
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:307
 msgid "Vertical red (R)"
 msgstr "Rosso Verticale (R)"
 
@@ -2523,7 +2523,7 @@ msgstr "Visibile"
 msgid "Voronoi Diagram"
 msgstr "Diagramma di Voronoi"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:121
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:132
 msgid "Warmth"
 msgstr "Calore"
 
@@ -2540,8 +2540,8 @@ msgstr "Larghezza:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 #: ../Pinta.Core/Actions/ViewActions.cs:306
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:369
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:378
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:377
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:386
 msgid "Window"
 msgstr "Finestra"
 
@@ -2560,7 +2560,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Click destro)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:479
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:480
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Non hai accesso a '{0}'."
@@ -2574,10 +2574,10 @@ msgstr ""
 "Non si ha accesso alla modifica di '{0}'. Il file o la cartella potrebbero "
 "essere di sola lettura."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:179
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:179
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
-#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:146
+#: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
 msgstr "Ingrandimento"
 
