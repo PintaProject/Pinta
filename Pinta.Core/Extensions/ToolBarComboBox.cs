@@ -64,5 +64,27 @@ public sealed class ToolBarComboBox : Box
 			ComboBox.Active = activeIndex;
 
 		Append (ComboBox);
+
+		// Return focus to the canvas after selecting a combobox item, which normally focuses the entry widget.
+		// We don't want this if the user is actually typing in the entry, of course.
+		ComboBox.OnChanged += (_, _) => {
+			if (!ComboBox.HasEntry)
+				return;
+
+			Gtk.Widget? entryText = ComboBox.GetEntry ().GetFirstChild ();
+			if (entryText is null) {
+				System.Console.Error.WriteLine ("Failed to find child text widget for Gtk.Entry");
+				return;
+			}
+
+			if (!entryText.HasFocus) {
+				GLib.Functions.IdleAdd (0, () => {
+					if (PintaCore.Workspace.HasOpenDocuments)
+						PintaCore.Workspace.ActiveWorkspace.GrabFocusToCanvas ();
+
+					return false;
+				});
+			}
+		};
 	}
 }
