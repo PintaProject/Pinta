@@ -1,22 +1,39 @@
 using System;
+using System.Collections.Generic;
 using System.CommandLine;
 using System.IO;
 using System.Linq;
 using System.Xml;
+
+// Create a map from the header properties to their untranslated values, e.g. "Name" => "MyEffect"
+static Dictionary<string, string> ExtractHeaderProperties (XmlDocument manifestDoc)
+{
+	// The properties that we care about translating.
+	string[] headerProperties = ["Name", "Description"];
+
+	Dictionary<string, string> propertyMap = new ();
+	foreach (string propertyName in headerProperties) {
+		XmlNode? node = manifestDoc.SelectSingleNode ($"/Addin/Header/{propertyName}");
+		if (node is null)
+			throw new InvalidDataException ($"Add-in manifest does not specify header property '{propertyName}'");
+
+		propertyMap[node.Name] = node.InnerText;
+	}
+
+	return propertyMap;
+}
 
 // Insert translations from the resource files into the manifest (.addin.xml)
 // See https://github.com/mono/mono-addins/wiki/The-add-in-header
 static void LocalizeManifest (FileInfo manifestFile, FileInfo[] resourceFiles)
 {
 	Console.WriteLine ($"Loading manifest from {manifestFile}");
-	var manifestDoc = new XmlDocument () { PreserveWhitespace = true };
+	XmlDocument manifestDoc = new () { PreserveWhitespace = true };
 	manifestDoc.Load (manifestFile.FullName);
 
-	// The properties to translate.
-	string[] headerProperties = ["Name", "Description"];
-	var headerPropertyNodes = headerProperties.Select (propertyName =>
-	    manifestDoc.SelectSingleNode ($"/Addin/Header/{propertyName}") ??
-	    throw new InvalidDataException ($"Add-in manifest does not specify header property '{propertyName}'"));
+	Dictionary<string, string> headerProperties = ExtractHeaderProperties (manifestDoc);
+	XmlNode addinHeaderNode = manifestDoc.SelectSingleNode ("/Addin/Header")
+		?? throw new InvalidDataException ("Failed to find addin header node");
 
 	foreach (var resourceFile in resourceFiles) {
 		// Parse the locale name from filenames like Language.es.resx.
@@ -33,9 +50,8 @@ static void LocalizeManifest (FileInfo manifestFile, FileInfo[] resourceFiles)
 		var resourceDoc = new XmlDocument ();
 		resourceDoc.Load (resourceFile.FullName);
 
-		foreach (XmlNode headerPropertyNode in headerPropertyNodes) {
-			string propertyName = headerPropertyNode.Name;
-			var translationNode = resourceDoc.SelectSingleNode ($"/root/data[@name='{headerPropertyNode.InnerText}']/value");
+		foreach ((string propertyName, string propertyText) in headerProperties) {
+			XmlNode? translationNode = resourceDoc.SelectSingleNode ($"/root/data[@name='{propertyText}']/value");
 			if (translationNode is not null) {
 				Console.WriteLine ($" - Adding translation for {propertyName}: {translationNode.InnerText}");
 
@@ -44,7 +60,7 @@ static void LocalizeManifest (FileInfo manifestFile, FileInfo[] resourceFiles)
 				newNode.SetAttribute ("locale", langCode);
 				newNode.InnerText = translationNode.InnerText;
 
-				headerPropertyNode.ParentNode!.AppendChild (newNode);
+				addinHeaderNode.AppendChild (newNode);
 			} else
 				Console.WriteLine ($" - Did not find translation for {propertyName}");
 		}
