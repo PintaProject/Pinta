@@ -15,6 +15,8 @@ Pinta.Core/Actions/WindowActions.cs
 Pinta.Core/Algorithms/ColorDifference.cs
 Pinta.Core/Algorithms/Histogram.cs
 Pinta.Core/Algorithms/HistogramRGB.cs
+Pinta.Core/Algorithms/Julia.cs
+Pinta.Core/Algorithms/Mandelbrot.cs
 Pinta.Core/Algorithms/Mathematics.cs
 Pinta.Core/Algorithms/Utility.cs
 Pinta.Core/Classes/Angle.cs
@@ -24,7 +26,13 @@ Pinta.Core/Classes/BaseTool.cs
 Pinta.Core/Classes/BitMask.cs
 Pinta.Core/Classes/BrushStrokeArgs.cs
 Pinta.Core/Classes/CenterOffset.cs
-Pinta.Core/Classes/ColorBgra.cs
+Pinta.Core/Classes/Color/ColorBgra.Blending.cs
+Pinta.Core/Classes/Color/ColorBgra.Channels.cs
+Pinta.Core/Classes/Color/ColorBgra.Comparison.cs
+Pinta.Core/Classes/Color/ColorBgra.Conversion.cs
+Pinta.Core/Classes/Color/ColorBgra.Core.cs
+Pinta.Core/Classes/Color/ColorBgra.Defaults.cs
+Pinta.Core/Classes/Color/ColorBgra.cs
 Pinta.Core/Classes/ColorTransferMode.cs
 Pinta.Core/Classes/Document.cs
 Pinta.Core/Classes/DocumentHistory.cs
@@ -99,6 +107,7 @@ Pinta.Core/EventArgs/TextChangedEventArgs.cs
 Pinta.Core/EventArgs/ToolEventArgs.cs
 Pinta.Core/EventArgs/ToolKeyEventArgs.cs
 Pinta.Core/EventArgs/ToolMouseEventArgs.cs
+Pinta.Core/Extensions/AddinUtilities.cs
 Pinta.Core/Extensions/Cairo/CairoExtensions.Blending.cs
 Pinta.Core/Extensions/Cairo/CairoExtensions.Color.cs
 Pinta.Core/Extensions/Cairo/CairoExtensions.ColorType.cs
