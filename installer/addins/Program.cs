@@ -32,13 +32,20 @@ static void LocalizeManifest (FileInfo manifestFile, FileInfo[] resourceFiles)
 	manifestDoc.Load (manifestFile.FullName);
 
 	Dictionary<string, string> headerProperties = ExtractHeaderProperties (manifestDoc);
-	XmlNode addinHeaderNode = manifestDoc.SelectSingleNode ("/Addin/Header")
+
+	XmlNode addinRootNode = manifestDoc.DocumentElement
+		?? throw new InvalidDataException ("Failed to find addin root node");
+	XmlNode addinHeaderNode = addinRootNode.SelectSingleNode ("Header")
 		?? throw new InvalidDataException ("Failed to find addin header node");
 
-	foreach (var resourceFile in resourceFiles) {
+	XmlElement localizerNode = manifestDoc.CreateElement ("Localizer");
+	localizerNode.SetAttribute ("type", "StringTable");
+	addinRootNode.AppendChild (localizerNode);
+
+	foreach (FileInfo resourceFile in resourceFiles) {
 		// Parse the locale name from filenames like Language.es.resx.
 		// We don't need to process the template file (Language.resx).
-		var components = resourceFile.Name.Split ('.');
+		string[] components = resourceFile.Name.Split ('.');
 		if (components.Length != 3) {
 			Console.WriteLine ($"Skipping file {resourceFile}");
 			continue;
@@ -47,22 +54,40 @@ static void LocalizeManifest (FileInfo manifestFile, FileInfo[] resourceFiles)
 		string langCode = components[1];
 
 		Console.WriteLine ($"{langCode}: Loading resource {resourceFile}");
-		var resourceDoc = new XmlDocument ();
+		XmlDocument resourceDoc = new ();
 		resourceDoc.Load (resourceFile.FullName);
 
+		// Add translations for header properties.
 		foreach ((string propertyName, string propertyText) in headerProperties) {
 			XmlNode? translationNode = resourceDoc.SelectSingleNode ($"/root/data[@name='{propertyText}']/value");
 			if (translationNode is not null) {
-				Console.WriteLine ($" - Adding translation for {propertyName}: {translationNode.InnerText}");
+				Console.WriteLine ($" - Adding translation for '{propertyName}': '{translationNode.InnerText}'");
 
 				// Add a sibling node, e.g. <Name locale="es">Translated string</Name>
-				var newNode = manifestDoc.CreateElement (propertyName);
+				XmlElement newNode = manifestDoc.CreateElement (propertyName);
 				newNode.SetAttribute ("locale", langCode);
 				newNode.InnerText = translationNode.InnerText;
 
 				addinHeaderNode.AppendChild (newNode);
 			} else
 				Console.WriteLine ($" - Did not find translation for {propertyName}");
+		}
+
+		XmlElement localeNode = manifestDoc.CreateElement ("Locale");
+		localeNode.SetAttribute ("id", langCode);
+		localizerNode.AppendChild (localeNode);
+
+		// Add other strings into the manifest to use with the StringTable localizer.
+		foreach (XmlElement dataNode in resourceDoc.SelectNodes ("/root/data")!) {
+			XmlNode valueNode = dataNode.SelectSingleNode ("value")
+				?? throw new InvalidDataException ("Failed to find 'value' child node");
+
+			XmlElement msgNode = manifestDoc.CreateElement ("Msg");
+			msgNode.SetAttribute ("id", dataNode.GetAttribute ("name"));
+			msgNode.SetAttribute ("str", valueNode.InnerText);
+			localeNode.AppendChild (msgNode);
+
+			Console.WriteLine ($" - Adding translation for '{msgNode.GetAttribute ("id")}': '{msgNode.GetAttribute ("str")}'");
 		}
 	}
 
