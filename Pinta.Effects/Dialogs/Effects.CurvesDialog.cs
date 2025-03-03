@@ -28,7 +28,6 @@ using System;
 using System.Collections.Generic;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
@@ -99,19 +98,21 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		Gtk.GestureClick clickController = CreateCurvesClickController ();
 
-		Gtk.Box boxAbove = GtkExtensions.Stack ([
-			Gtk.Label.New (Translations.GetString ("Transfer Map")),
-			comboMap,
-			labelPoint]);
-		boxAbove.SetOrientation (Gtk.Orientation.Horizontal);
-		boxAbove.Spacing = SPACING;
+		StackStyle horizontalSpaced = new (Gtk.Orientation.Horizontal, SPACING);
+		Gtk.Box boxAbove = GtkExtensions.Stack (
+			horizontalSpaced,
+			[
+				Gtk.Label.New (Translations.GetString ("Transfer Map")),
+				comboMap,
+				labelPoint
+			]
+		);
 
-		Gtk.Box boxBelow = GtkExtensions.Stack ([
+		Gtk.Box boxBelow = GtkExtensions.StackHorizontal ([
 			checkRed,
 			checkGreen,
 			checkBlue,
 			buttonReset]);
-		boxBelow.SetOrientation (Gtk.Orientation.Horizontal);
 
 		Gtk.DrawingArea curvesDrawing = new () {
 			WidthRequest = 256,

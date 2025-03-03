@@ -80,45 +80,37 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.Label widthLabel = CreateWidthLabel ();
 		Gtk.Entry widthEntry = CreateLengthEntry ();
 		Gtk.Label widthUnitsLabel = CreateUnitsLabel ();
-
-		Gtk.Box widthHbox = GtkExtensions.Stack ([
+		Gtk.Box widthHbox = GtkExtensions.StackHorizontal ([
 			widthEntry,
 			widthUnitsLabel]);
-		widthHbox.SetOrientation (Gtk.Orientation.Horizontal);
 
 		Gtk.Label heightLabel = CreateHeightLabel ();
 		Gtk.Entry heightEntry = CreateLengthEntry ();
 		Gtk.Label heightUnitsLabel = CreateUnitsLabel ();
-
-		Gtk.Box heightHbox = GtkExtensions.Stack ([
+		Gtk.Box heightHbox = GtkExtensions.StackHorizontal ([
 			heightEntry,
 			heightUnitsLabel]);
-		heightHbox.SetOrientation (Gtk.Orientation.Horizontal);
 
 		// Orientation Radio options
 		Gtk.Label orientationLabel = CreateOrientationLabel ();
 
 		Gtk.CheckButton portraitRadio = CreatePortraitRadio ();
 		Gtk.Image portraitImage = CreateOrientationIcon (Resources.Icons.OrientationPortrait);
-
-		Gtk.Box portraitHbox = GtkExtensions.Stack ([
+		Gtk.Box portraitHbox = GtkExtensions.StackHorizontal ([
 			portraitImage,
 			portraitRadio]);
-		portraitHbox.SetOrientation (Gtk.Orientation.Horizontal);
 
 		Gtk.CheckButton landscapeRadio = CreateLandscapeRadio (portraitRadio);
 		Gtk.Image landscapeImage = CreateOrientationIcon (Resources.Icons.OrientationLandscape);
 
-		Gtk.Box landscapeHbox = GtkExtensions.Stack ([
+		Gtk.Box landscapeHbox = GtkExtensions.StackHorizontal ([
 			landscapeImage,
 			landscapeRadio]);
-		landscapeHbox.SetOrientation (Gtk.Orientation.Horizontal);
 
-		Gtk.Box orientationVbox = GtkExtensions.Stack ([
+		Gtk.Box orientationVbox = GtkExtensions.StackVertical ([
 			orientationLabel,
 			portraitHbox,
 			landscapeHbox]);
-		orientationVbox.SetOrientation (Gtk.Orientation.Vertical);
 
 		// Background Color options
 		Gtk.Label backgroundLabel = CreateBackgroundLabel ();
@@ -128,10 +120,9 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.Image imageWhite = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, new Cairo.Color (1, 1, 1)).ToPixbuf ());
 		imageWhite.MarginEnd = 7;
 
-		Gtk.Box hboxWhite = GtkExtensions.Stack ([
+		Gtk.Box hboxWhite = GtkExtensions.StackHorizontal ([
 			imageWhite,
 			whiteBackgroundRadio]);
-		hboxWhite.SetOrientation (Gtk.Orientation.Horizontal);
 
 		Gtk.CheckButton secondaryBackgroundRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Background Color"));
 		secondaryBackgroundRadio.SetGroup (whiteBackgroundRadio);
@@ -139,10 +130,9 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.Image imageBackground = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, palette.SecondaryColor).ToPixbuf ());
 		imageBackground.MarginEnd = 7;
 
-		Gtk.Box hboxBackground = GtkExtensions.Stack ([
+		Gtk.Box hboxBackground = GtkExtensions.StackHorizontal ([
 			imageBackground,
 			secondaryBackgroundRadio]);
-		hboxBackground.SetOrientation (Gtk.Orientation.Horizontal);
 
 		Gtk.CheckButton transparentBackgroundRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Transparent"));
 		transparentBackgroundRadio.SetGroup (secondaryBackgroundRadio);
@@ -150,10 +140,9 @@ public sealed class NewImageDialog : Gtk.Dialog
 		Gtk.Image imageTransparent = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateTransparentColorSwatch (16, true).ToPixbuf ());
 		imageTransparent.MarginEnd = 7;
 
-		Gtk.Box hboxTransparent = GtkExtensions.Stack ([
+		Gtk.Box hboxTransparent = GtkExtensions.StackHorizontal ([
 			imageTransparent,
 			transparentBackgroundRadio]);
-		hboxTransparent.SetOrientation (Gtk.Orientation.Horizontal);
 
 		IEnumerable<Gtk.Widget> GenerateBackgroundBoxItems ()
 		{
@@ -167,8 +156,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		}
 
 		var backgroundBoxItems = GenerateBackgroundBoxItems ().ToArray ();
-		Gtk.Box backgroundVbox = GtkExtensions.Stack (backgroundBoxItems);
-		backgroundVbox.SetOrientation (Gtk.Orientation.Vertical);
+		Gtk.Box backgroundVbox = GtkExtensions.StackVertical (backgroundBoxItems);
 		backgroundVbox.MarginTop = 4;
 
 		// Layout table for preset, width, and height
@@ -185,12 +173,17 @@ public sealed class NewImageDialog : Gtk.Dialog
 		layoutGrid.Attach (heightHbox, 1, 2, 1, 1);
 
 		// Put all the options together
-		Gtk.Box optionsVbox = GtkExtensions.Stack ([
-			layoutGrid,
-			orientationVbox,
-			backgroundVbox]);
-		optionsVbox.SetOrientation (Gtk.Orientation.Vertical);
-		optionsVbox.Spacing = 10;
+		StackStyle spacedVertical = new (
+			orientation: Gtk.Orientation.Vertical,
+			spacing: 10);
+		Gtk.Box optionsVbox = GtkExtensions.Stack (
+			spacedVertical,
+			[
+				layoutGrid,
+				orientationVbox,
+				backgroundVbox
+			]
+		);
 
 		// Layout the preview + the options
 
@@ -203,16 +196,20 @@ public sealed class NewImageDialog : Gtk.Dialog
 			Halign = Gtk.Align.Fill,
 		};
 
-		Gtk.Box previewVbox = GtkExtensions.Stack ([
+		Gtk.Box previewVbox = GtkExtensions.StackVertical ([
 			previewLabel,
 			previewBox]);
-		previewVbox.SetOrientation (Gtk.Orientation.Vertical);
 
-		Gtk.Box mainHbox = GtkExtensions.Stack ([
-			optionsVbox,
-			previewVbox]);
-		mainHbox.SetOrientation (Gtk.Orientation.Horizontal);
-		mainHbox.Spacing = 10;
+		StackStyle spacedHorizontal = new (
+			orientation: Gtk.Orientation.Vertical,
+			spacing: 10);
+		Gtk.Box mainHbox = GtkExtensions.Stack (
+			spacedHorizontal,
+			[
+				optionsVbox,
+				previewVbox
+			]
+		);
 
 		Gtk.Box contentArea = this.GetContentAreaBox ();
 		contentArea.SetAllMargins (8);

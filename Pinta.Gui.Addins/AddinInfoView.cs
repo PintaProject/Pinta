@@ -61,25 +61,35 @@ internal sealed class AddinInfoView : Adw.Bin
 
 		Gtk.Switch enableSwitch = CreateEnableSwitch ();
 
-		Gtk.Box hbox = GtkExtensions.Stack ([
-			enableSwitch,
-			installButton,
-			updateButton,
-			infoButton,
-			uninstallButton]);
-		hbox.SetOrientation (Gtk.Orientation.Horizontal);
-		hbox.Spacing = 6;
+		StackStyle spacedHorizontal = new (
+			orientation: Gtk.Orientation.Horizontal,
+			spacing: 6);
+		Gtk.Box hbox = GtkExtensions.Stack (
+			spacedHorizontal,
+			[
+				enableSwitch,
+				installButton,
+				updateButton,
+				infoButton,
+				uninstallButton
+			]
+		);
 		hbox.AddCssClass (AdwaitaStyles.Toolbar);
 
-		Gtk.Box contentBox = GtkExtensions.Stack ([
-			titleLabel,
-			versionLabel,
-			sizeLabel,
-			repoLabel,
-			descriptionLabel,
-			hbox]);
-		contentBox.SetOrientation (Gtk.Orientation.Vertical);
-		contentBox.Spacing = 10;
+		StackStyle spacedVertical = new (
+			orientation: Gtk.Orientation.Vertical,
+			spacing: 10);
+		Gtk.Box contentBox = GtkExtensions.Stack (
+			spacedVertical,
+			[
+				titleLabel,
+				versionLabel,
+				sizeLabel,
+				repoLabel,
+				descriptionLabel,
+				hbox
+			]
+		);
 		contentBox.SetAllMargins (10);
 
 		Adw.ViewStack viewStack = Adw.ViewStack.New ();
