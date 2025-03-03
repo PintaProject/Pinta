@@ -181,7 +181,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			[
 				layoutGrid,
 				orientationVbox,
-				backgroundVbox
+				backgroundVbox,
 			]
 		);
 
@@ -207,7 +207,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			spacedHorizontal,
 			[
 				optionsVbox,
-				previewVbox
+				previewVbox,
 			]
 		);
 
