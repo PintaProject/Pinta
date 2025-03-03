@@ -414,14 +414,15 @@ public sealed class NewImageDialog : Gtk.Dialog
 	private Size SelectedPresetSize {
 		get {
 			string text = preset_dropdown_model.GetString (preset_dropdown.Selected)!;
+
 			if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
 				return Size.Empty;
 
 			string[] textParts = text.Split (' ');
-			int width = int.Parse (textParts[0]);
-			int height = int.Parse (textParts[2]);
 
-			return new (width, height);
+			return new (
+				int.Parse (textParts[0]),
+				int.Parse (textParts[2]));
 		}
 	}
 
