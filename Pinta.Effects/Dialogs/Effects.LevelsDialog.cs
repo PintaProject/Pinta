@@ -108,11 +108,12 @@ public partial class LevelsDialog : Gtk.Dialog
 		Gtk.CheckButton checkBlue = new () { Label = Translations.GetString ("Blue"), Active = true };
 		checkBlue.OnToggled += HandleCheckBlueToggled;
 
-		Gtk.Box hboxChecks = new () { Spacing = spacing };
+		Gtk.Box hboxChecks = GtkExtensions.Stack ([
+			checkRed,
+			checkGreen,
+			checkBlue]);
 		hboxChecks.SetOrientation (Gtk.Orientation.Horizontal);
-		hboxChecks.Append (checkRed);
-		hboxChecks.Append (checkGreen);
-		hboxChecks.Append (checkBlue);
+		hboxChecks.Spacing = spacing;
 
 		Gtk.SpinButton spinInLow = Gtk.SpinButton.NewWithRange (0, 254, 1);
 		spinInLow.OnValueChanged += HandleSpinInLowValueChanged;
@@ -168,31 +169,35 @@ public partial class LevelsDialog : Gtk.Dialog
 		HistogramWidget histogramInput = new () { WidthRequest = 130, FlipHorizontal = true };
 		HistogramWidget histogramOutput = new () { WidthRequest = 130 };
 
-		Gtk.Box vboxInput = new () { Spacing = spacing };
+		Gtk.Box vboxInput = GtkExtensions.Stack ([
+			spinInHigh,
+			colorPanelInHigh,
+			colorPanelInLow,
+			spinInLow]);
 		vboxInput.SetOrientation (Gtk.Orientation.Vertical);
-		vboxInput.Append (spinInHigh);
-		vboxInput.Append (colorPanelInHigh);
-		vboxInput.Append (colorPanelInLow);
-		vboxInput.Append (spinInLow);
+		vboxInput.Spacing = spacing;
 
-		Gtk.Box hboxInput = new () { Spacing = spacing };
+		Gtk.Box hboxInput = GtkExtensions.Stack ([
+			vboxInput,
+			gradientInput]);
 		hboxInput.SetOrientation (Gtk.Orientation.Horizontal);
-		hboxInput.Append (vboxInput);
-		hboxInput.Append (gradientInput);
+		hboxInput.Spacing = spacing;
 
-		Gtk.Box vboxOutput = new () { Spacing = spacing };
+		Gtk.Box vboxOutput = GtkExtensions.Stack ([
+			spinOutHigh,
+			colorPanelOutHigh,
+			spinOutGamma,
+			colorPanelOutMid,
+			colorPanelOutLow,
+			spinOutLow]);
 		vboxOutput.SetOrientation (Gtk.Orientation.Vertical);
-		vboxOutput.Append (spinOutHigh);
-		vboxOutput.Append (colorPanelOutHigh);
-		vboxOutput.Append (spinOutGamma);
-		vboxOutput.Append (colorPanelOutMid);
-		vboxOutput.Append (colorPanelOutLow);
-		vboxOutput.Append (spinOutLow);
+		vboxOutput.Spacing = spacing;
 
-		Gtk.Box hboxOutput = new () { Spacing = spacing };
+		Gtk.Box hboxOutput = GtkExtensions.Stack ([
+			gradientOutput,
+			vboxOutput]);
 		hboxOutput.SetOrientation (Gtk.Orientation.Horizontal);
-		hboxOutput.Append (gradientOutput);
-		hboxOutput.Append (vboxOutput);
+		hboxOutput.Spacing = spacing;
 
 		// --- References to keep
 
@@ -246,13 +251,14 @@ public partial class LevelsDialog : Gtk.Dialog
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
-		Gtk.Box hboxLayout = new () { Spacing = spacing };
+		Gtk.Box hboxLayout = GtkExtensions.Stack ([
+			CreateLabelledWidget (histogram_input, Translations.GetString ("Input Histogram")),
+			CreateLabelledWidget (hboxInput, Translations.GetString ("Input")),
+			CreateLabelledWidget (hboxOutput, Translations.GetString ("Output")),
+			CreateLabelledWidget (histogram_output, Translations.GetString ("Output Histogram"))]);
 		hboxLayout.SetOrientation (Gtk.Orientation.Horizontal);
 		hboxLayout.SetAllMargins (spacing);
-		hboxLayout.Append (CreateLabelledWidget (histogram_input, Translations.GetString ("Input Histogram")));
-		hboxLayout.Append (CreateLabelledWidget (hboxInput, Translations.GetString ("Input")));
-		hboxLayout.Append (CreateLabelledWidget (hboxOutput, Translations.GetString ("Output")));
-		hboxLayout.Append (CreateLabelledWidget (histogram_output, Translations.GetString ("Output Histogram")));
+		hboxLayout.Spacing = spacing;
 
 		Gtk.Box contentArea = this.GetContentAreaBox ();
 		contentArea.Append (hboxLayout);
@@ -269,10 +275,11 @@ public partial class LevelsDialog : Gtk.Dialog
 			Gtk.Label label_widget = Gtk.Label.New (label);
 			label_widget.Halign = Gtk.Align.Start;
 
-			Gtk.Box vbox = new () { Spacing = spacing };
+			Gtk.Box vbox = GtkExtensions.Stack ([
+				label_widget,
+				widget]);
 			vbox.SetOrientation (Gtk.Orientation.Vertical);
-			vbox.Append (label_widget);
-			vbox.Append (widget);
+			vbox.Spacing = spacing;
 
 			return vbox;
 		}
@@ -288,7 +295,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private void UpdateInputHistogram ()
 	{
-		var doc = workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
 		ImageSurface surface = doc.Layers.CurrentUserLayer.Surface;
 		RectangleI rect = doc.Selection.SelectionPath.GetBounds ();
@@ -367,10 +374,9 @@ public partial class LevelsDialog : Gtk.Dialog
 		int count = 0, total = 0;
 
 		for (int c = 0; c < 3; c++) {
-			if (mask[c]) {
-				total += before[c];
-				count++;
-			}
+			if (!mask[c]) continue;
+			total += before[c];
+			count++;
 		}
 
 		if (count > 0)
@@ -421,10 +427,9 @@ public partial class LevelsDialog : Gtk.Dialog
 		float total = 0;
 
 		for (int c = 0; c < 3; c++) {
-			if (mask[c]) {
-				total += Levels.GetGamma (c);
-				count++;
-			}
+			if (!mask[c]) continue;
+			total += Levels.GetGamma (c);
+			count++;
 		}
 
 		if (count > 0)

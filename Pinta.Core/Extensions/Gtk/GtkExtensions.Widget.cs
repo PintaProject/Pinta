@@ -54,6 +54,22 @@ public static class AdwaitaStyles
 
 partial class GtkExtensions
 {
+	// TODO: Add argument for styling options
+	public static Gtk.Box Stack (ReadOnlySpan<Gtk.Widget> children) // TODO: Add 'params' keyword when updated to C#13
+	{
+		Gtk.Box stack = new ();
+		stack.AppendMultiple (children);
+		return stack;
+	}
+
+	public static void AppendMultiple (
+		this Gtk.Box box,
+		ReadOnlySpan<Gtk.Widget> children) // TODO: Add 'params' keyword when updated to C#13
+	{
+		foreach (var child in children)
+			box.Append (child);
+	}
+
 	/// <summary>
 	/// In GTK4, toolbars are just a Box with a different CSS style class.
 	/// </summary>
@@ -108,10 +124,10 @@ partial class GtkExtensions
 	}
 
 	public static Gtk.SpinButton CreateToolBarSpinButton (
-	double min,
-	double max,
-	double step,
-	double init_value)
+		double min,
+		double max,
+		double step,
+		double init_value)
 	{
 		Gtk.SpinButton spin = Gtk.SpinButton.NewWithRange (min, max, step);
 		spin.FocusOnClick = false;
@@ -119,8 +135,8 @@ partial class GtkExtensions
 		// After a spin button is edited, return focus to the canvas so that
 		// tools can handle subsequent key events.
 		spin.OnValueChanged += (o, e) => {
-			if (PintaCore.Workspace.HasOpenDocuments)
-				PintaCore.Workspace.ActiveWorkspace.GrabFocusToCanvas ();
+			if (!PintaCore.Workspace.HasOpenDocuments) return;
+			PintaCore.Workspace.ActiveWorkspace.GrabFocusToCanvas ();
 		};
 		return spin;
 	}

@@ -57,19 +57,25 @@ public sealed class PosterizeDialog : Gtk.Dialog
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
-		red_spinbox = CreateChannelSpinBox (Translations.GetString ("Red"));
-		green_spinbox = CreateChannelSpinBox (Translations.GetString ("Green"));
-		blue_spinbox = CreateChannelSpinBox (Translations.GetString ("Blue"));
-		link_button = CreateLinkButton ();
+		HScaleSpinButtonWidget redSpinbox = CreateChannelSpinBox (Translations.GetString ("Red"));
+		HScaleSpinButtonWidget greenSpinbox = CreateChannelSpinBox (Translations.GetString ("Green"));
+		HScaleSpinButtonWidget blueSpinbox = CreateChannelSpinBox (Translations.GetString ("Blue"));
+		Gtk.CheckButton linkButton = CreateLinkButton ();
+
+		red_spinbox = redSpinbox;
+		green_spinbox = greenSpinbox;
+		blue_spinbox = blueSpinbox;
+		link_button = linkButton;
 
 		Gtk.Box content_area = this.GetContentAreaBox ();
 		content_area.WidthRequest = 400;
 		content_area.SetAllMargins (6);
 		content_area.Spacing = 6;
-		content_area.Append (red_spinbox);
-		content_area.Append (green_spinbox);
-		content_area.Append (blue_spinbox);
-		content_area.Append (link_button);
+		content_area.AppendMultiple ([
+			redSpinbox,
+			greenSpinbox,
+			blueSpinbox,
+			linkButton]);
 	}
 
 	private static Gtk.CheckButton CreateLinkButton ()

@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using Cairo;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
@@ -98,18 +99,19 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		Gtk.GestureClick clickController = CreateCurvesClickController ();
 
-		Gtk.Box boxAbove = new () { Spacing = SPACING };
+		Gtk.Box boxAbove = GtkExtensions.Stack ([
+			Gtk.Label.New (Translations.GetString ("Transfer Map")),
+			comboMap,
+			labelPoint]);
 		boxAbove.SetOrientation (Gtk.Orientation.Horizontal);
-		boxAbove.Append (Gtk.Label.New (Translations.GetString ("Transfer Map")));
-		boxAbove.Append (comboMap);
-		boxAbove.Append (labelPoint);
+		boxAbove.Spacing = SPACING;
 
-		Gtk.Box boxBelow = new ();
+		Gtk.Box boxBelow = GtkExtensions.Stack ([
+			checkRed,
+			checkGreen,
+			checkBlue,
+			buttonReset]);
 		boxBelow.SetOrientation (Gtk.Orientation.Horizontal);
-		boxBelow.Prepend (checkBlue);
-		boxBelow.Prepend (checkGreen);
-		boxBelow.Prepend (checkRed);
-		boxBelow.Append (buttonReset);
 
 		Gtk.DrawingArea curvesDrawing = new () {
 			WidthRequest = 256,
@@ -124,10 +126,11 @@ public sealed class CurvesDialog : Gtk.Dialog
 		Gtk.Box content_area = this.GetContentAreaBox ();
 		content_area.SetAllMargins (12);
 		content_area.Spacing = SPACING;
-		content_area.Append (boxAbove);
-		content_area.Append (curvesDrawing);
-		content_area.Append (boxBelow);
-		content_area.Append (labelTip);
+		content_area.AppendMultiple ([
+			boxAbove,
+			curvesDrawing,
+			boxBelow,
+			labelTip]);
 
 		// --- Gtk.Window initialization
 
@@ -398,7 +401,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 		for (int i = 0; i < channels; i++) {
 			result[i] = new () {
 				{ 0, 0 },
-				{ SIZE - 1, SIZE - 1 }
+				{ SIZE - 1, SIZE - 1 },
 			};
 		}
 

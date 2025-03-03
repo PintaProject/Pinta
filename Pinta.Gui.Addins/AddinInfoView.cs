@@ -61,22 +61,26 @@ internal sealed class AddinInfoView : Adw.Bin
 
 		Gtk.Switch enableSwitch = CreateEnableSwitch ();
 
-		Gtk.Box hbox = Gtk.Box.New (Gtk.Orientation.Horizontal, 6);
+		Gtk.Box hbox = GtkExtensions.Stack ([
+			enableSwitch,
+			installButton,
+			updateButton,
+			infoButton,
+			uninstallButton]);
+		hbox.SetOrientation (Gtk.Orientation.Horizontal);
+		hbox.Spacing = 6;
 		hbox.AddCssClass (AdwaitaStyles.Toolbar);
-		hbox.Append (enableSwitch);
-		hbox.Append (installButton);
-		hbox.Append (updateButton);
-		hbox.Append (infoButton);
-		hbox.Append (uninstallButton);
 
-		Gtk.Box contentBox = Gtk.Box.New (Gtk.Orientation.Vertical, 10);
+		Gtk.Box contentBox = GtkExtensions.Stack ([
+			titleLabel,
+			versionLabel,
+			sizeLabel,
+			repoLabel,
+			descriptionLabel,
+			hbox]);
+		contentBox.SetOrientation (Gtk.Orientation.Vertical);
+		contentBox.Spacing = 10;
 		contentBox.SetAllMargins (10);
-		contentBox.Append (titleLabel);
-		contentBox.Append (versionLabel);
-		contentBox.Append (sizeLabel);
-		contentBox.Append (repoLabel);
-		contentBox.Append (descriptionLabel);
-		contentBox.Append (hbox);
 
 		Adw.ViewStack viewStack = Adw.ViewStack.New ();
 		viewStack.Add (emptyPage);
@@ -118,12 +122,10 @@ internal sealed class AddinInfoView : Adw.Bin
 
 	private Gtk.Switch CreateEnableSwitch ()
 	{
-		Gtk.Switch result = new () {
-			Visible = false
-		};
+		Gtk.Switch result = new () { Visible = false };
 		result.OnNotify += (o, e) => {
-			if (e.Pspec.GetName () == "active")
-				HandleEnableSwitched ();
+			if (e.Pspec.GetName () != "active") return;
+			HandleEnableSwitched ();
 		};
 		return result;
 	}
