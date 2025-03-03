@@ -63,7 +63,8 @@ internal sealed class AddinInfoView : Adw.Bin
 
 		StackStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Horizontal,
-			spacing: 6);
+			spacing: 6,
+			cssClass: AdwaitaStyles.Toolbar);
 		Gtk.Box hbox = GtkExtensions.Stack (
 			spacedHorizontal,
 			[
@@ -74,7 +75,6 @@ internal sealed class AddinInfoView : Adw.Bin
 				uninstallButton
 			]
 		);
-		hbox.AddCssClass (AdwaitaStyles.Toolbar);
 
 		StackStyle spacedVertical = new (
 			orientation: Gtk.Orientation.Vertical,

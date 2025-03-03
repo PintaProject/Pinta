@@ -71,6 +71,7 @@ partial class GtkExtensions
 
 		// --- Optional
 		if (style.Spacing.HasValue) stack.Spacing = style.Spacing.Value;
+		if (style.CssClass is not null) stack.AddCssClass (style.CssClass);
 
 		stack.AppendMultiple (children);
 

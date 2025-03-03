@@ -12,13 +12,16 @@ public sealed class StackStyle
 
 	// --- Optional
 	public int? Spacing { get; }
+	public string? CssClass { get; }
 
 	public StackStyle (
 		Gtk.Orientation orientation,
-		int? spacing = null)
+		int? spacing = null,
+		string? cssClass = null)
 	{
 		if (spacing.HasValue && spacing.Value < 0) throw new ArgumentOutOfRangeException (nameof (spacing));
 		Orientation = orientation;
 		Spacing = spacing;
+		CssClass = cssClass;
 	}
 }
