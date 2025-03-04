@@ -2,10 +2,10 @@ using System;
 
 namespace Pinta.Core;
 
-public sealed class StackStyle
+public sealed class BoxStyle
 {
-	public static StackStyle Horizontal { get; } = new (Gtk.Orientation.Horizontal);
-	public static StackStyle Vertical { get; } = new (Gtk.Orientation.Vertical);
+	public static BoxStyle Horizontal { get; } = new (Gtk.Orientation.Horizontal);
+	public static BoxStyle Vertical { get; } = new (Gtk.Orientation.Vertical);
 
 	// --- Mandatory
 	public Gtk.Orientation Orientation { get; }
@@ -14,7 +14,7 @@ public sealed class StackStyle
 	public int? Spacing { get; }
 	public string? CssClass { get; }
 
-	public StackStyle (
+	public BoxStyle (
 		Gtk.Orientation orientation,
 		int? spacing = null,
 		string? cssClass = null)

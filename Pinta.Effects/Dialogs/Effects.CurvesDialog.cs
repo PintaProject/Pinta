@@ -98,7 +98,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		Gtk.GestureClick clickController = CreateCurvesClickController ();
 
-		StackStyle horizontalSpaced = new (Gtk.Orientation.Horizontal, SPACING);
+		BoxStyle horizontalSpaced = new (Gtk.Orientation.Horizontal, SPACING);
 		Gtk.Box boxAbove = GtkExtensions.Box (
 			horizontalSpaced,
 			[

@@ -173,7 +173,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 		layoutGrid.Attach (heightHbox, 1, 2, 1, 1);
 
 		// Put all the options together
-		StackStyle spacedVertical = new (
+		BoxStyle spacedVertical = new (
 			orientation: Gtk.Orientation.Vertical,
 			spacing: 10);
 		Gtk.Box optionsVbox = GtkExtensions.Box (
@@ -200,7 +200,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			previewLabel,
 			previewBox]);
 
-		StackStyle spacedHorizontal = new (
+		BoxStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Vertical,
 			spacing: 10);
 		Gtk.Box mainHbox = GtkExtensions.Box (

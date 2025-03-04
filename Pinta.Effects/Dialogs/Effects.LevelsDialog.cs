@@ -99,8 +99,8 @@ public partial class LevelsDialog : Gtk.Dialog
 	{
 		const int SPACING = 6;
 
-		StackStyle horizontalSpaced = new (Gtk.Orientation.Horizontal, SPACING);
-		StackStyle verticalSpaced = new (Gtk.Orientation.Vertical, SPACING);
+		BoxStyle horizontalSpaced = new (Gtk.Orientation.Horizontal, SPACING);
+		BoxStyle verticalSpaced = new (Gtk.Orientation.Vertical, SPACING);
 
 		Gtk.CheckButton checkRed = new () { Label = Translations.GetString ("Red"), Active = true };
 		checkRed.OnToggled += HandleCheckRedToggled;

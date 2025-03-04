@@ -61,7 +61,7 @@ internal sealed class AddinInfoView : Adw.Bin
 
 		Gtk.Switch enableSwitch = CreateEnableSwitch ();
 
-		StackStyle spacedHorizontal = new (
+		BoxStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Horizontal,
 			spacing: 6,
 			cssClass: AdwaitaStyles.Toolbar);
@@ -76,7 +76,7 @@ internal sealed class AddinInfoView : Adw.Bin
 			]
 		);
 
-		StackStyle spacedVertical = new (
+		BoxStyle spacedVertical = new (
 			orientation: Gtk.Orientation.Vertical,
 			spacing: 10);
 		Gtk.Box contentBox = GtkExtensions.Box (
