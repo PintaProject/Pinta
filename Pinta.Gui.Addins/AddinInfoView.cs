@@ -65,7 +65,7 @@ internal sealed class AddinInfoView : Adw.Bin
 			orientation: Gtk.Orientation.Horizontal,
 			spacing: 6,
 			cssClass: AdwaitaStyles.Toolbar);
-		Gtk.Box hbox = GtkExtensions.Stack (
+		Gtk.Box hbox = GtkExtensions.Box (
 			spacedHorizontal,
 			[
 				enableSwitch,
@@ -79,7 +79,7 @@ internal sealed class AddinInfoView : Adw.Bin
 		StackStyle spacedVertical = new (
 			orientation: Gtk.Orientation.Vertical,
 			spacing: 10);
-		Gtk.Box contentBox = GtkExtensions.Stack (
+		Gtk.Box contentBox = GtkExtensions.Box (
 			spacedVertical,
 			[
 				titleLabel,

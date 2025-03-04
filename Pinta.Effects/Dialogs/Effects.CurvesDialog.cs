@@ -99,7 +99,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 		Gtk.GestureClick clickController = CreateCurvesClickController ();
 
 		StackStyle horizontalSpaced = new (Gtk.Orientation.Horizontal, SPACING);
-		Gtk.Box boxAbove = GtkExtensions.Stack (
+		Gtk.Box boxAbove = GtkExtensions.Box (
 			horizontalSpaced,
 			[
 				Gtk.Label.New (Translations.GetString ("Transfer Map")),
@@ -108,7 +108,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 			]
 		);
 
-		Gtk.Box boxBelow = GtkExtensions.StackHorizontal ([
+		Gtk.Box boxBelow = GtkExtensions.BoxHorizontal ([
 			checkRed,
 			checkGreen,
 			checkBlue,

@@ -54,13 +54,13 @@ public static class AdwaitaStyles
 
 partial class GtkExtensions
 {
-	public static Gtk.Box StackHorizontal (ReadOnlySpan<Gtk.Widget> children)
-		=> Stack (StackStyle.Horizontal, children);
+	public static Gtk.Box BoxHorizontal (ReadOnlySpan<Gtk.Widget> children)
+		=> Box (StackStyle.Horizontal, children);
 
-	public static Gtk.Box StackVertical (ReadOnlySpan<Gtk.Widget> children)
-		=> Stack (StackStyle.Vertical, children);
+	public static Gtk.Box BoxVertical (ReadOnlySpan<Gtk.Widget> children)
+		=> Box (StackStyle.Vertical, children);
 
-	public static Gtk.Box Stack (
+	public static Gtk.Box Box (
 		StackStyle style,
 		ReadOnlySpan<Gtk.Widget> children) // TODO: Add 'params' keyword when updated to C#13
 	{

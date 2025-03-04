@@ -111,7 +111,7 @@ public partial class LevelsDialog : Gtk.Dialog
 		Gtk.CheckButton checkBlue = new () { Label = Translations.GetString ("Blue"), Active = true };
 		checkBlue.OnToggled += HandleCheckBlueToggled;
 
-		Gtk.Box hboxChecks = GtkExtensions.Stack (
+		Gtk.Box hboxChecks = GtkExtensions.Box (
 			horizontalSpaced,
 			[
 				checkRed,
@@ -174,7 +174,7 @@ public partial class LevelsDialog : Gtk.Dialog
 		HistogramWidget histogramInput = new () { WidthRequest = 130, FlipHorizontal = true };
 		HistogramWidget histogramOutput = new () { WidthRequest = 130 };
 
-		Gtk.Box vboxInput = GtkExtensions.Stack (
+		Gtk.Box vboxInput = GtkExtensions.Box (
 			verticalSpaced,
 			[
 				spinInHigh,
@@ -184,7 +184,7 @@ public partial class LevelsDialog : Gtk.Dialog
 			]
 		);
 
-		Gtk.Box hboxInput = GtkExtensions.Stack (
+		Gtk.Box hboxInput = GtkExtensions.Box (
 			horizontalSpaced,
 			[
 				vboxInput,
@@ -192,7 +192,7 @@ public partial class LevelsDialog : Gtk.Dialog
 			]
 		);
 
-		Gtk.Box vboxOutput = GtkExtensions.Stack (
+		Gtk.Box vboxOutput = GtkExtensions.Box (
 			verticalSpaced,
 			[
 				spinOutHigh,
@@ -204,7 +204,7 @@ public partial class LevelsDialog : Gtk.Dialog
 			]
 		);
 
-		Gtk.Box hboxOutput = GtkExtensions.Stack (
+		Gtk.Box hboxOutput = GtkExtensions.Box (
 			horizontalSpaced,
 			[
 				gradientOutput,
@@ -264,7 +264,7 @@ public partial class LevelsDialog : Gtk.Dialog
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
-		Gtk.Box hboxLayout = GtkExtensions.Stack (
+		Gtk.Box hboxLayout = GtkExtensions.Box (
 			horizontalSpaced,
 			[
 				CreateLabelledWidget (histogram_input, Translations.GetString ("Input Histogram")),
@@ -290,7 +290,7 @@ public partial class LevelsDialog : Gtk.Dialog
 			Gtk.Label label_widget = Gtk.Label.New (label);
 			label_widget.Halign = Gtk.Align.Start;
 
-			Gtk.Box vbox = GtkExtensions.Stack (
+			Gtk.Box vbox = GtkExtensions.Box (
 				verticalSpaced,
 				[
 					label_widget,
