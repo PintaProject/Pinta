@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-02 01:39+0000\n"
-"PO-Revision-Date: 2022-02-04 16:45+0000\n"
-"Last-Translator: Feike Donia feikedonia@proton.me\n"
-"Language-Team: Dutch <nl@li.org>\n"
+"PO-Revision-Date: 2025-03-05 18:40+0000\n"
+"Last-Translator: Feike Donia <feikedonia@proton.me>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.3-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
 msgid " (in user directory)"
@@ -314,7 +314,7 @@ msgstr "Celgrootte"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "Midden"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:228
 msgid "Center Align"
@@ -992,11 +992,11 @@ msgstr "Tint"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
 msgid "Hue & Sat"
-msgstr ""
+msgstr "Tint-/Verzadiging"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
-msgstr "Tint/Verzadiging"
+msgstr "Tint-/Verzadiging"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
 msgid "ICO files can not be larger than 255 x 255 pixels."
@@ -1222,6 +1222,9 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
+"Klik met de linkermuisknop om lijnen van één pixel breed uit de vrije hand "
+"te tekenen met de primaire kleur.\n"
+"Klik met de rechtermuisknop om de secudaire kleur te gebruiken."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
@@ -1327,7 +1330,7 @@ msgstr "Helderheid"
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:48
 msgid "Lime Lemon"
-msgstr ""
+msgstr "Limoen-Citroen"
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:43
 msgid "Line/Curve"
@@ -1504,13 +1507,13 @@ msgstr "Object"
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:151
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
-msgstr "Verschuiven"
+msgstr "Offset"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
-msgstr ""
+msgstr "Offset-selectie"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
 msgid "Oil Painting"
