@@ -201,7 +201,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			previewBox]);
 
 		BoxStyle spacedHorizontal = new (
-			orientation: Gtk.Orientation.Vertical,
+			orientation: Gtk.Orientation.Horizontal,
 			spacing: 10);
 		Gtk.Box mainHbox = GtkExtensions.Box (
 			spacedHorizontal,
