@@ -38,7 +38,7 @@ def run_install_name_tool(lib, deps, lib_install_dir):
         subprocess.check_output(cmd)
 
 
-def collect_libs(src_lib, lib_deps, otool_lib_regex, otool_rel_lib_regex):
+def collect_libs(src_prefix, src_lib, lib_deps, otool_lib_regex, otool_rel_lib_regex):
     """
     Use otool -L to collect the library dependencies.
     """
@@ -46,9 +46,11 @@ def collect_libs(src_lib, lib_deps, otool_lib_regex, otool_rel_lib_regex):
     output = subprocess.check_output(cmd).decode('utf-8')
     referenced_paths = re.findall(otool_lib_regex, output)
 
-    folder = os.path.dirname(src_lib)
-    referenced_paths.extend([os.path.join(folder, lib)
-                            for lib in re.findall(otool_rel_lib_regex, output)])
+    # Search for relative libraries under {prefix}/lib.
+    # It would be more correct to use the library's LC_RPATH path, but
+    # this works fine for the homebrew-installed libraries.
+    referenced_paths.extend([os.path.join(src_prefix, "lib", rel_lib)
+                            for rel_lib in re.findall(otool_rel_lib_regex, output)])
 
     real_lib_paths = set([os.path.realpath(lib) for lib in referenced_paths])
 
@@ -56,7 +58,8 @@ def collect_libs(src_lib, lib_deps, otool_lib_regex, otool_rel_lib_regex):
 
     for lib in real_lib_paths:
         if lib not in lib_deps:
-            collect_libs(lib, lib_deps, otool_lib_regex, otool_rel_lib_regex)
+            collect_libs(src_prefix, lib, lib_deps,
+                         otool_lib_regex, otool_rel_lib_regex)
 
 
 def copy_resources(src_prefix, res_path):
@@ -87,7 +90,7 @@ def copy_plugins(src_prefix, res_path, lib_install_dir, otool_lib_regex, otool_r
 
             lib_path = os.path.join(root, lib)
             lib_deps = {}
-            collect_libs(lib_path, lib_deps, otool_lib_regex,
+            collect_libs(src_prefix, lib_path, lib_deps, otool_lib_regex,
                          otool_rel_lib_regex)
             run_install_name_tool(lib_path, lib_deps[lib_path],
                                   lib_install_dir)
@@ -135,7 +138,8 @@ otool_rel_lib_regex = re.compile(r"@rpath/(lib.*\.dylib)")
 lib_deps = {}
 for root_lib in ROOT_LIBS:
     lib_path = os.path.realpath(os.path.join(src_prefix, root_lib))
-    collect_libs(lib_path, lib_deps, otool_lib_regex, otool_rel_lib_regex)
+    collect_libs(src_prefix, lib_path, lib_deps,
+                 otool_lib_regex, otool_rel_lib_regex)
 
 lib_install_dir = os.path.join(args.resource_dir, 'lib')
 os.makedirs(lib_install_dir)
