@@ -54,7 +54,15 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 
 	public ResizeCanvasDialog (ChromeManager chrome, WorkspaceManager workspace)
 	{
-		const int spacing = 6;
+		const int SPACING = 6;
+
+		BoxStyle spacedVertical = new (
+			orientation: Gtk.Orientation.Vertical,
+			spacing: SPACING);
+
+		BoxStyle spacedHorizontal = new (
+			orientation: Gtk.Orientation.Horizontal,
+			spacing: SPACING);
 
 		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
 		percentageRadio.OnToggled += percentageRadio_Toggled;
@@ -64,11 +72,13 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
 		percentageSpinner.SetActivatesDefaultImmediate (true);
 
-		Gtk.Box hboxPercent = new () { Spacing = spacing };
-		hboxPercent.SetOrientation (Gtk.Orientation.Horizontal);
-		hboxPercent.Append (percentageRadio);
-		hboxPercent.Append (percentageSpinner);
-		hboxPercent.Append (Gtk.Label.New ("%"));
+		Gtk.Box hboxPercent = GtkExtensions.Box (
+			spacedHorizontal,
+			[
+				percentageRadio,
+				percentageSpinner,
+				Gtk.Label.New ("%")
+			]);
 
 		Gtk.Label widthLabel = Gtk.Label.New (Translations.GetString ("Width:"));
 		widthLabel.Halign = Gtk.Align.End;
@@ -87,8 +97,8 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		heightSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.Grid hwGrid = new () {
-			RowSpacing = spacing,
-			ColumnSpacing = spacing,
+			RowSpacing = SPACING,
+			ColumnSpacing = SPACING,
 			ColumnHomogeneous = false,
 		};
 		hwGrid.Attach (widthLabel, 0, 0, 1, 1);
@@ -139,8 +149,8 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		seButton.OnClicked += HandleSEButtonClicked;
 
 		Gtk.Grid grid = new () {
-			RowSpacing = spacing,
-			ColumnSpacing = spacing,
+			RowSpacing = SPACING,
+			ColumnSpacing = SPACING,
 			Halign = Gtk.Align.Center,
 			Valign = Gtk.Align.Center,
 		};
@@ -154,15 +164,17 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		grid.Attach (sButton, 1, 2, 1, 1);
 		grid.Attach (seButton, 2, 2, 1, 1);
 
-		Gtk.Box mainVbox = new () { Spacing = spacing };
-		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
-		mainVbox.Append (hboxPercent);
-		mainVbox.Append (absoluteRadio);
-		mainVbox.Append (hwGrid);
-		mainVbox.Append (aspectCheckBox);
-		mainVbox.Append (sep);
-		mainVbox.Append (alignLabel);
-		mainVbox.Append (grid);
+		Gtk.Box mainVbox = GtkExtensions.Box (
+			spacedVertical,
+			[
+				hboxPercent,
+				absoluteRadio,
+				hwGrid,
+				aspectCheckBox,
+				sep,
+				alignLabel,
+				grid,
+			]);
 
 		// --- Initialization (Gtk.Window)
 
@@ -221,8 +233,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 	{
 		Size newSize = new (
 			Width: width_spinner.GetValueAsInt (),
-			Height: height_spinner.GetValueAsInt ()
-		);
+			Height: height_spinner.GetValueAsInt ());
 
 		workspace.ResizeCanvas (newSize, anchor, null);
 	}

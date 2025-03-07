@@ -46,6 +46,14 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		ChromeManager chrome,
 		WorkspaceManager workspace)
 	{
+		BoxStyle spacedHorizontal = new (
+			orientation: Gtk.Orientation.Horizontal,
+			spacing: SPACING);
+
+		BoxStyle spacedVertical = new (
+			orientation: Gtk.Orientation.Vertical,
+			spacing: SPACING);
+
 		Gtk.CheckButton percentageRadio = CreatePercentageRadio ();
 		Gtk.CheckButton absoluteRadio = CreateAbsoluteRadio (percentageRadio);
 		Gtk.SpinButton percentageSpinner = CreatePercentageSpinner ();
@@ -53,7 +61,15 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		Gtk.SpinButton heightSpinner = CreateHeightSpinner (workspace.ImageSize.Height);
 		Gtk.CheckButton aspectCheckbox = CreateAspectCheckbox ();
 		Gtk.ComboBoxText resamplingCombobox = CreateResamplingCombobox ();
-		Gtk.Box hboxPercent = CreatePercentBox (percentageRadio, percentageSpinner);
+
+		Gtk.Box hboxPercent = GtkExtensions.Box (
+			spacedHorizontal,
+			[
+				percentageRadio,
+				percentageSpinner,
+				Gtk.Label.New ("%"),
+			]);
+
 		Gtk.Label widthLabel = CreateWidthLabel ();
 
 		Gtk.Label heightLabel = CreateHeightLabel ();
@@ -73,11 +89,13 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		grid.Attach (Gtk.Label.New (Translations.GetString ("Resampling:")), 0, 3, 1, 1);
 		grid.Attach (resamplingCombobox, 1, 3, 2, 1);
 
-		Gtk.Box mainVbox = new () { Spacing = SPACING };
-		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
-		mainVbox.Append (hboxPercent);
-		mainVbox.Append (absoluteRadio);
-		mainVbox.Append (grid);
+		Gtk.Box mainVbox = GtkExtensions.Box (
+			spacedVertical,
+			[
+				hboxPercent,
+				absoluteRadio,
+				grid,
+			]);
 
 		// --- Initialization (Gtk.Window)
 
@@ -137,18 +155,6 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 
 		result.Active = 0;
 
-		return result;
-	}
-
-	private static Gtk.Box CreatePercentBox (
-		Gtk.CheckButton percentageRadio,
-		Gtk.SpinButton percentageSpinner)
-	{
-		Gtk.Box result = new () { Spacing = SPACING };
-		result.SetOrientation (Gtk.Orientation.Horizontal);
-		result.Append (percentageRadio);
-		result.Append (percentageSpinner);
-		result.Append (Gtk.Label.New ("%"));
 		return result;
 	}
 

@@ -41,8 +41,13 @@ internal sealed class InstallDialog : Adw.Window
 	{
 		Adw.WindowTitle windowTitle = new ();
 
-		Gtk.Box content = Gtk.Box.New (Gtk.Orientation.Vertical, 12);
-		content.Append (new Adw.HeaderBar { TitleWidget = windowTitle });
+		BoxStyle spacedHorizontal = new (
+			orientation: Gtk.Orientation.Horizontal,
+			spacing: 12);
+
+		BoxStyle spacedVertical = new (
+			orientation: Gtk.Orientation.Vertical,
+			spacing: 12);
 
 		Gtk.Label errorHeadingLabel = Gtk.Label.New (Translations.GetString ("The selected extension packages can't be installed because there are dependency conflicts."));
 		errorHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
@@ -78,18 +83,21 @@ internal sealed class InstallDialog : Adw.Window
 		dependenciesLabel.AddCssClass (AdwaitaStyles.Body);
 		dependenciesLabel.AddCssClass (AdwaitaStyles.Error);
 
-		Gtk.Box labels = Gtk.Box.New (Gtk.Orientation.Vertical, 12);
+		Gtk.Box labels = GtkExtensions.Box (
+			spacedVertical,
+			[
+				errorHeadingLabel,
+				errorLabel,
+				warningHeadingLabel,
+				warningLabel,
+				installHeadingLabel,
+				installLabel,
+				uninstallHeadingLabel,
+				uninstallLabel,
+				dependenciesHeadingLabel,
+				dependenciesLabel,
+			]);
 		labels.SetAllMargins (6);
-		labels.Append (errorHeadingLabel);
-		labels.Append (errorLabel);
-		labels.Append (warningHeadingLabel);
-		labels.Append (warningLabel);
-		labels.Append (installHeadingLabel);
-		labels.Append (installLabel);
-		labels.Append (uninstallHeadingLabel);
-		labels.Append (uninstallLabel);
-		labels.Append (dependenciesHeadingLabel);
-		labels.Append (dependenciesLabel);
 
 		// Left align all labels.
 		Gtk.Widget? label = labels.GetFirstChild ();
@@ -106,7 +114,6 @@ internal sealed class InstallDialog : Adw.Window
 		InstallErrorReporter errorReporter = new ();
 
 		StatusProgressBar progressBar = new (scroll, errorReporter);
-		content.Append (progressBar);
 
 		Gtk.Button cancelButton = Gtk.Button.NewWithLabel (Translations.GetString ("Cancel"));
 		cancelButton.OnClicked += (_, _) => Close ();
@@ -120,8 +127,6 @@ internal sealed class InstallDialog : Adw.Window
 		buttons.Append (cancelButton);
 		buttons.Append (installButton);
 
-		content.Append (buttons);
-
 		// --- Initialization (Gtk.Widget)
 
 		WidthRequest = 500;
@@ -133,7 +138,13 @@ internal sealed class InstallDialog : Adw.Window
 
 		// --- Initialization (Adw.Window)
 
-		Content = content;
+		Content = GtkExtensions.Box (
+			spacedVertical,
+			[
+				new Adw.HeaderBar { TitleWidget = windowTitle },
+				progressBar,
+				buttons,
+			]);
 
 		// --- References to keep
 

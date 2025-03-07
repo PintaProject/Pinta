@@ -41,13 +41,19 @@ internal sealed class HistoryPad : IDockPad
 	public void Initialize (Dock workspace)
 	{
 		HistoryListView history = new ();
-		DockItem history_item = new (history, "History", iconName: Pinta.Resources.Icons.HistoryList) {
+
+		DockItem history_item = new (
+			child: history,
+			uniqueName: "History",
+			iconName: Resources.Icons.HistoryList
+		) {
 			Label = Translations.GetString ("History"),
 		};
 
 		Gtk.Box history_tb = history_item.AddToolBar ();
-		history_tb.Append (edit.Undo.CreateDockToolBarItem ());
-		history_tb.Append (edit.Redo.CreateDockToolBarItem ());
+		history_tb.AppendMultiple ([
+			edit.Undo.CreateDockToolBarItem (),
+			edit.Redo.CreateDockToolBarItem ()]);
 
 		workspace.AddItem (history_item, DockPlacement.Right);
 	}
