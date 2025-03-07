@@ -47,10 +47,16 @@ public sealed class SpinButtonEntryDialog : Gtk.Dialog
 		spinButton.Value = current;
 		spinButton.SetActivatesDefaultImmediate (true);
 
-		Gtk.Box hbox = new () { Spacing = 6 };
-		hbox.SetOrientation (Gtk.Orientation.Horizontal);
-		hbox.Append (labelControl);
-		hbox.Append (spinButton);
+		BoxStyle spacedHorizontal = new (
+			orientation: Gtk.Orientation.Horizontal,
+			spacing: 6);
+
+		Gtk.Box hbox = GtkExtensions.Box (
+			spacedHorizontal,
+			[
+				labelControl,
+				spinButton,
+			]);
 
 		// --- Initialization (Gtk.Box)
 
