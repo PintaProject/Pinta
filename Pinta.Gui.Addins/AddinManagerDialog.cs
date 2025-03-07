@@ -52,17 +52,15 @@ public sealed class AddinManagerDialog : Adw.Window
 		headerBar.PackStart (installFileButton);
 		headerBar.PackStart (refreshButton);
 
-		Gtk.Box content = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
-		content.Append (headerBar);
-		content.Append (toastOverlay);
-
 		// --- Property assignment (GTK window)
 
 		TransientFor = parent;
 
 		// --- Property assignment (Adwaita window)
 
-		Content = content;
+		Content = GtkExtensions.BoxVertical ([
+			headerBar,
+			toastOverlay]);
 
 		// --- References to keep
 

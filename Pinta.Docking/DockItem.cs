@@ -96,9 +96,9 @@ public sealed class DockItem : Gtk.Box
 
 		if (!locked) {
 
-			Gtk.Box titleLayout = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-			titleLayout.Append (labelWidget);
-			titleLayout.Append (buttonStack);
+			Gtk.Box titleLayout = GtkExtensions.BoxHorizontal ([
+				labelWidget,
+				buttonStack]);
 
 			Append (titleLayout);
 		}
@@ -121,6 +121,7 @@ public sealed class DockItem : Gtk.Box
 	{
 		Gtk.Button result = Gtk.Button.NewFromIconName (StandardIcons.WindowMinimize);
 		result.AddCssClass (AdwaitaStyles.Flat);
+
 		if (!locked)
 			result.OnClicked += (o, args) => Minimize ();
 

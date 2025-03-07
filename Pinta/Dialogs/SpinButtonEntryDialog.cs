@@ -24,43 +24,62 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class SpinButtonEntryDialog : Dialog
+public sealed class SpinButtonEntryDialog : Gtk.Dialog
 {
-	private readonly SpinButton spin_button;
+	private readonly Gtk.SpinButton spin_button;
 
-	public SpinButtonEntryDialog (string title, Window parent, string label, int min, int max, int current)
+	public SpinButtonEntryDialog (
+		string title,
+		Gtk.Window parent,
+		string labelText,
+		int min,
+		int max,
+		int current)
 	{
-		Title = title;
-		TransientFor = parent;
-		Modal = true;
-		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (ResponseType.Ok);
+		Gtk.Label labelControl = Gtk.Label.New (labelText);
+		labelControl.Xalign = 0;
 
-		var hbox = new Box () { Spacing = 6 };
-		hbox.SetOrientation (Orientation.Horizontal);
+		Gtk.SpinButton spinButton = Gtk.SpinButton.NewWithRange (min, max, 1);
+		spinButton.Value = current;
+		spinButton.SetActivatesDefaultImmediate (true);
 
-		var lbl = Label.New (label);
-		lbl.Xalign = 0;
-		hbox.Append (lbl);
+		BoxStyle spacedHorizontal = new (
+			orientation: Gtk.Orientation.Horizontal,
+			spacing: 6);
 
-		spin_button = SpinButton.NewWithRange (min, max, 1);
-		spin_button.Value = current;
-		hbox.Append (spin_button);
+		Gtk.Box hbox = GtkExtensions.Box (
+			spacedHorizontal,
+			[
+				labelControl,
+				spinButton,
+			]);
 
-		var content_area = this.GetContentAreaBox ();
+		// --- Initialization (Gtk.Box)
+
+		Gtk.Box content_area = this.GetContentAreaBox ();
 		content_area.SetAllMargins (12);
 		content_area.Append (hbox);
 
-		spin_button.SetActivatesDefaultImmediate (true);
+		// --- Initialization (Gtk.Window)
+
+		Title = title;
+		TransientFor = parent;
+		Modal = true;
+
+		// --- Initialization (Gtk.Dialog)
+
+		this.AddCancelOkButtons ();
+		this.SetDefaultResponse (Gtk.ResponseType.Ok);
+
+		// --- References to keep
+
+		spin_button = spinButton;
 	}
 
 	public int GetValue ()
-	{
-		return spin_button.GetValueAsInt ();
-	}
+		=> spin_button.GetValueAsInt ();
 }

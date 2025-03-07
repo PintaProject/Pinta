@@ -52,7 +52,15 @@ public sealed class PointPickerWidget : Gtk.Box
 	{
 		// --- Build
 
-		const int spacing = 6;
+		const int SPACING = 6;
+
+		BoxStyle spacedHorizontal = new (
+			orientation: Gtk.Orientation.Horizontal,
+			spacing: SPACING);
+
+		BoxStyle spacedVertical = new (
+			orientation: Gtk.Orientation.Vertical,
+			spacing: SPACING);
 
 		adjusted_initial_point = AdjustToWidgetSize (imageSize, initialPoint);
 
@@ -61,9 +69,9 @@ public sealed class PointPickerWidget : Gtk.Box
 		Gtk.Label titleLabel = new ();
 		titleLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Box labelAndTitle = new () { Spacing = spacing };
-		labelAndTitle.SetOrientation (Gtk.Orientation.Horizontal);
-		labelAndTitle.Append (titleLabel);
+		Gtk.Box labelAndTitle = GtkExtensions.Box (
+			spacedHorizontal,
+			[titleLabel]);
 
 		// --- PointPickerGraphic
 
@@ -86,32 +94,40 @@ public sealed class PointPickerWidget : Gtk.Box
 
 		// --- Vbox for spinners
 
-		Gtk.Box xControls = new () { Spacing = spacing };
-		xControls.SetOrientation (Gtk.Orientation.Horizontal);
-		xControls.Append (xLabel);
-		xControls.Append (spinX);
-		xControls.Append (buttonResetX);
+		Gtk.Box xControls = GtkExtensions.Box (
+			spacedHorizontal,
+			[
+				xLabel,
+				spinX,
+				buttonResetX,
+			]);
 
-		Gtk.Box yControls = new () { Spacing = spacing };
-		yControls.SetOrientation (Gtk.Orientation.Horizontal);
-		yControls.Append (yLabel);
-		yControls.Append (spinY);
-		yControls.Append (buttonResetY);
+		Gtk.Box yControls = GtkExtensions.Box (
+			spacedHorizontal,
+			[
+				yLabel,
+				spinY,
+				buttonResetY,
+			]);
 
-		Gtk.Box spinnersBox = new () { Spacing = spacing };
-		spinnersBox.SetOrientation (Gtk.Orientation.Vertical);
-		spinnersBox.Append (xControls);
-		spinnersBox.Append (yControls);
+		Gtk.Box spinnersBox = GtkExtensions.Box (
+			spacedVertical,
+			[
+				xControls,
+				yControls,
+			]);
 
-		Gtk.Box pointPickerBox = new () { Spacing = spacing };
-		pointPickerBox.SetOrientation (Gtk.Orientation.Horizontal);
-		pointPickerBox.Append (pointPickerGraphic);
-		pointPickerBox.Append (spinnersBox);
+		Gtk.Box pointPickerBox = GtkExtensions.Box (
+			spacedHorizontal,
+			[
+				pointPickerGraphic,
+				spinnersBox,
+			]);
 
 		// --- Main layout
 
 		SetOrientation (Gtk.Orientation.Vertical);
-		Spacing = spacing;
+		Spacing = SPACING;
 		Append (labelAndTitle);
 		Append (pointPickerBox);
 

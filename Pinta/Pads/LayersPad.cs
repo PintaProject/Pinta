@@ -41,17 +41,23 @@ internal sealed class LayersPad : IDockPad
 	public void Initialize (Dock workspace)
 	{
 		LayersListView layers = new ();
-		DockItem layers_item = new DockItem (layers, "Layers", iconName: Pinta.Resources.Icons.LayerDuplicate) {
+		DockItem layers_item = new (
+			child: layers,
+			uniqueName: "Layers",
+			iconName: Resources.Icons.LayerDuplicate
+		) {
 			Label = Translations.GetString ("Layers"),
 		};
 
 		Gtk.Box layers_tb = layers_item.AddToolBar ();
-		layers_tb.Append (layer_actions.AddNewLayer.CreateDockToolBarItem ());
-		layers_tb.Append (layer_actions.DeleteLayer.CreateDockToolBarItem ());
-		layers_tb.Append (layer_actions.DuplicateLayer.CreateDockToolBarItem ());
-		layers_tb.Append (layer_actions.MergeLayerDown.CreateDockToolBarItem ());
-		layers_tb.Append (layer_actions.MoveLayerUp.CreateDockToolBarItem ());
-		layers_tb.Append (layer_actions.MoveLayerDown.CreateDockToolBarItem ());
+		layers_tb.AppendMultiple ([
+			layer_actions.AddNewLayer.CreateDockToolBarItem (),
+			layer_actions.DeleteLayer.CreateDockToolBarItem (),
+			layer_actions.DuplicateLayer.CreateDockToolBarItem (),
+			layer_actions.MergeLayerDown.CreateDockToolBarItem (),
+			layer_actions.MoveLayerUp.CreateDockToolBarItem (),
+			layer_actions.MoveLayerDown.CreateDockToolBarItem (),
+		]);
 
 		workspace.AddItem (layers_item, DockPlacement.Right);
 	}
