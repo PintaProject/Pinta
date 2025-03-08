@@ -25,9 +25,43 @@
 // THE SOFTWARE.
 
 using System;
+using System.Numerics;
 
 /// Replacements for Cairo / GDK points that GtkSharp provided in the GTK3 build.
 namespace Pinta.Core;
+
+public readonly record struct Point<T> (T X, T Y) where T : INumber<T>
+{
+	public static Point<T> Zero { get; } = new (T.Zero, T.Zero);
+	public override readonly string ToString () => $"{X}, {Y}";
+
+	public readonly Point<TOut> Cast<TOut> () where TOut : INumber<TOut>
+	{
+		TOut newX = TOut.CreateSaturating (X);
+		TOut newY = TOut.CreateSaturating (Y);
+		return new (newX, newY);
+	}
+
+	public Point<T> Rotated90CCW () // Counterclockwise
+		=> new (-Y, X);
+
+	public static Point<T> operator + (in Point<T> left, in Point<T> right)
+		=> new (
+			X: left.X + right.X,
+			Y: left.Y + right.Y);
+
+	public static Point<T> operator - (in Point<T> left, in Point<T> right)
+		=> new (
+			X: left.X - right.X,
+			Y: left.Y - right.Y);
+
+	public readonly Point<T> Scaled (T factor)
+		=> new (
+			X * factor,
+			Y * factor);
+
+	// TODO: Rounding method
+}
 
 public readonly record struct PointI (int X, int Y)
 {
@@ -42,14 +76,12 @@ public readonly record struct PointI (int X, int Y)
 	public static PointI operator + (PointI left, PointI right)
 		=> new (
 			X: left.X + right.X,
-			Y: left.Y + right.Y
-		);
+			Y: left.Y + right.Y);
 
 	public static PointI operator - (PointI left, PointI right)
 		=> new (
 			X: left.X - right.X,
-			Y: left.Y - right.Y
-		);
+			Y: left.Y - right.Y);
 }
 
 public readonly record struct PointD (double X, double Y)
@@ -65,23 +97,27 @@ public readonly record struct PointD (double X, double Y)
 	/// </summary>
 	public readonly PointD Rounded () => new (Math.Round (X), Math.Round (Y));
 
-	public readonly PointD Scaled (double factor) => new (X * factor, Y * factor);
+	public readonly PointD Scaled (double factor)
+		=> new (
+			X * factor,
+			Y * factor);
 
-	public static PointD operator + (in PointD a, in PointD b) => new (a.X + b.X, a.Y + b.Y);
+	public static PointD operator + (in PointD a, in PointD b)
+		=> new (
+			a.X + b.X,
+			a.Y + b.Y);
 
 	public static explicit operator PointD (PointI p) => new (p.X, p.Y);
 
 	public static PointD operator + (PointD left, PointD right)
-	=> new (
-		X: left.X + right.X,
-		Y: left.Y + right.Y
-	);
+		=> new (
+			X: left.X + right.X,
+			Y: left.Y + right.Y);
 
 	public static PointD operator - (PointD left, PointD right)
 		=> new (
 			X: left.X - right.X,
-			Y: left.Y - right.Y
-		);
+			Y: left.Y - right.Y);
 }
 
 public readonly record struct Size (int Width, int Height)

@@ -9,9 +9,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using Cairo;
-using GLib.Internal;
 using Pinta.Core;
 
 namespace Pinta.Effects;
@@ -84,9 +82,9 @@ public static class Warp
 
 			TransformData td = transformInverter (settings, initialTd);
 
-			PointF preliminarySample = new (
-				x: (float) (td.X + settings.centerOffset.X),
-				y: (float) (td.Y + settings.centerOffset.Y));
+			Point<float> preliminarySample = new (
+				X: (float) (td.X + settings.centerOffset.X),
+				Y: (float) (td.Y + settings.centerOffset.Y));
 
 			samples[sampleCount] = GetSample (
 				settings,
@@ -103,7 +101,7 @@ public static class Warp
 		Settings settings,
 		ImageSurface src,
 		ColorBgra originalColor,
-		PointF preliminarySample)
+		Point<float> preliminarySample)
 	{
 		if (src.IsOnSurface (preliminarySample.X, preliminarySample.Y))
 			return src.GetBilinearSample (preliminarySample.X, preliminarySample.Y);
