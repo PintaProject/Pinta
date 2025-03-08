@@ -82,7 +82,7 @@ public static class Warp
 
 			TransformData td = transformInverter (settings, initialTd);
 
-			Point<float> preliminarySample = new (
+			Coordinate<float> preliminarySample = new (
 				X: (float) (td.X + settings.centerOffset.X),
 				Y: (float) (td.Y + settings.centerOffset.Y));
 
@@ -101,7 +101,7 @@ public static class Warp
 		Settings settings,
 		ImageSurface src,
 		ColorBgra originalColor,
-		Point<float> preliminarySample)
+		Coordinate<float> preliminarySample)
 	{
 		if (src.IsOnSurface (preliminarySample.X, preliminarySample.Y))
 			return src.GetBilinearSample (preliminarySample.X, preliminarySample.Y);
