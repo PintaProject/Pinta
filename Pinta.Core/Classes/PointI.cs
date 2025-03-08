@@ -30,79 +30,79 @@ using System.Numerics;
 /// Replacements for Cairo / GDK points that GtkSharp provided in the GTK3 build.
 namespace Pinta.Core;
 
-public readonly record struct Coordinate<T> (T X, T Y) where T : IFloatingPoint<T>
+public readonly record struct PointF<T> (T X, T Y) where T : IFloatingPoint<T>
 {
-	public static Coordinate<T> Zero { get; } = new (T.Zero, T.Zero);
+	public static PointF<T> Zero { get; } = new (T.Zero, T.Zero);
 	public override readonly string ToString () => $"{X}, {Y}";
 
-	public readonly Point<TOut> ToPoint<TOut> () where TOut : IBinaryInteger<TOut>
+	public readonly PointI<TOut> ToInteger<TOut> () where TOut : IBinaryInteger<TOut>
 	{
 		TOut newX = TOut.CreateSaturating (X);
 		TOut newY = TOut.CreateSaturating (Y);
 		return new (newX, newY);
 	}
 
-	public readonly Coordinate<TOut> Cast<TOut> () where TOut : IFloatingPoint<TOut>
+	public readonly PointF<TOut> Cast<TOut> () where TOut : IFloatingPoint<TOut>
 	{
 		TOut newX = TOut.CreateChecked (X);
 		TOut newY = TOut.CreateChecked (Y);
 		return new (newX, newY);
 	}
 
-	public readonly Coordinate<T> Rotated90CCW () // Counterclockwise
+	public readonly PointF<T> Rotated90CCW () // Counterclockwise
 		=> new (-Y, X);
 
-	public static Coordinate<T> operator + (in Coordinate<T> left, in Coordinate<T> right)
+	public static PointF<T> operator + (in PointF<T> left, in PointF<T> right)
 		=> new (
 			X: left.X + right.X,
 			Y: left.Y + right.Y);
 
-	public static Coordinate<T> operator - (in Coordinate<T> left, in Coordinate<T> right)
+	public static PointF<T> operator - (in PointF<T> left, in PointF<T> right)
 		=> new (
 			X: left.X - right.X,
 			Y: left.Y - right.Y);
 
-	public readonly Coordinate<T> Scaled (T factor)
+	public readonly PointF<T> Scaled (T factor)
 		=> new (
 			X * factor,
 			Y * factor);
 
-	public readonly Coordinate<T> Rounded ()
+	public readonly PointF<T> Rounded ()
 		=> new (
 			T.Round (X),
 			T.Round (Y));
 }
 
-public readonly record struct Point<T> (T X, T Y) where T : IBinaryInteger<T>
+public readonly record struct PointI<T> (T X, T Y) where T : IBinaryInteger<T>
 {
-	public static Point<T> Zero { get; } = new (T.Zero, T.Zero);
+	public static PointI<T> Zero { get; } = new (T.Zero, T.Zero);
 	public override readonly string ToString () => $"{X}, {Y}";
 
-	public readonly Coordinate<TOut> ToCoordinate<TOut> () where TOut : IFloatingPoint<TOut>
+	public readonly PointF<TOut> ToFloatingPoint<TOut> () where TOut : IFloatingPoint<TOut>
 	{
 		TOut newX = TOut.CreateSaturating (X);
 		TOut newY = TOut.CreateSaturating (Y);
 		return new (newX, newY);
 	}
 
-	public readonly Point<TOut> Cast<TOut> () where TOut : IBinaryInteger<TOut>
+	public readonly PointI<TOut> Cast<TOut> () where TOut : IBinaryInteger<TOut>
 	{
 		TOut newX = TOut.CreateChecked (X);
 		TOut newY = TOut.CreateChecked (Y);
 		return new (newX, newY);
 	}
 
-	public static Point<T> operator + (in Point<T> left, in Point<T> right)
+	public static PointI<T> operator + (in PointI<T> left, in PointI<T> right)
 		=> new (
 			X: left.X + right.X,
 			Y: left.Y + right.Y);
 
-	public static Point<T> operator - (in Point<T> left, in Point<T> right)
+	public static PointI<T> operator - (in PointI<T> left, in PointI<T> right)
 		=> new (
 			X: left.X - right.X,
 			Y: left.Y - right.Y);
 
-	public readonly Point<T> Scaled (T factor)
+	public readonly PointI<T> Scaled (T factor)
 		=> new (
 			X * factor,
 			Y * factor);

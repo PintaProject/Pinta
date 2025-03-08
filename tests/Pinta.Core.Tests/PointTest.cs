@@ -10,9 +10,9 @@ internal sealed class PointTest
 	{
 		double d = 1.4;
 		int i = (int) d;
-		Coordinate<double> original = new (d, d);
-		Point<int> expected = new (i, i);
-		Point<int> converted = original.ToPoint<int> ();
+		PointF<double> original = new (d, d);
+		PointI<int> expected = new (i, i);
+		PointI<int> converted = original.ToInteger<int> ();
 		Assert.That (converted, Is.EqualTo (expected));
 	}
 
@@ -21,9 +21,9 @@ internal sealed class PointTest
 	{
 		int i = 1;
 		double d = i;
-		Point<int> original = new (i, i);
-		Coordinate<double> expected = new (d, d);
-		Coordinate<double> converted = original.ToCoordinate<double> ();
+		PointI<int> original = new (i, i);
+		PointF<double> expected = new (d, d);
+		PointF<double> converted = original.ToFloatingPoint<double> ();
 		Assert.That (converted, Is.EqualTo (expected));
 	}
 }
