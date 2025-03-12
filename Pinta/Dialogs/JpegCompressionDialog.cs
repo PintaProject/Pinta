@@ -34,12 +34,12 @@ public sealed class JpegCompressionDialog : Gtk.Dialog
 
 	public JpegCompressionDialog (int defaultQuality, Gtk.Window parent)
 	{
-		Gtk.Label label = Gtk.Label.New (Translations.GetString ("Quality: "));
-		label.Xalign = 0;
+		Gtk.Label qualityLabel = Gtk.Label.New (Translations.GetString ("Quality: "));
+		qualityLabel.Xalign = 0;
 
-		Gtk.Scale compressionLevel = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 1, 100, 1);
-		compressionLevel.SetValue (defaultQuality);
-		compressionLevel.DrawValue = true;
+		Gtk.Scale levelScale = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 1, 100, 1);
+		levelScale.SetValue (defaultQuality);
+		levelScale.DrawValue = true;
 
 		// --- Initialization (Gtk.Window)
 
@@ -52,16 +52,16 @@ public sealed class JpegCompressionDialog : Gtk.Dialog
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
-		Gtk.Box contentArea = this.GetContentAreaBox ();
-		contentArea.SetAllMargins (6);
-		contentArea.Spacing = 3;
-		contentArea.AppendMultiple ([
-			label,
-			compressionLevel]);
+		Gtk.Box contentBox = this.GetContentAreaBox ();
+		contentBox.SetAllMargins (6);
+		contentBox.Spacing = 3;
+		contentBox.AppendMultiple ([
+			qualityLabel,
+			levelScale]);
 
 		// --- References to keep
 
-		compression_level = compressionLevel;
+		compression_level = levelScale;
 	}
 
 	public int CompressionLevel
