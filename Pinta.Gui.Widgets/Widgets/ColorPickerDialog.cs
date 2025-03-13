@@ -103,17 +103,24 @@ public sealed class ColorPickerSlider : Gtk.Box
 			double currentPosition = sliderControl.GetValue () / settings.Max * (width - 2 * settings.SliderPaddingWidth) + settings.SliderPaddingWidth;
 
 			ReadOnlySpan<PointD> cursorPoly = [
-				new PointD (currentPosition, height / 2),
-				new PointD (currentPosition + 4, 3 * height / 4),
-				new PointD (currentPosition + 4, height - outlineWidth / 2),
-				new PointD (currentPosition - 4, height - outlineWidth / 2),
-				new PointD (currentPosition - 4, 3 * height / 4),
-				new PointD (currentPosition, height / 2)
+				new (currentPosition, height / 2),
+				new (currentPosition + 4, 3 * height / 4),
+				new (currentPosition + 4, height - outlineWidth / 2),
+				new (currentPosition - 4, height - outlineWidth / 2),
+				new (currentPosition - 4, 3 * height / 4),
+				new (currentPosition, height / 2),
 			];
 
 			context.LineWidth = outlineWidth;
-			context.DrawPolygonal (cursorPoly, new Color (0, 0, 0), LineCap.Butt);
-			context.FillPolygonal (cursorPoly, new Color (1, 1, 1));
+
+			context.DrawPolygonal (
+				cursorPoly,
+				new Color (0, 0, 0),
+				LineCap.Butt);
+
+			context.FillPolygonal (
+				cursorPoly,
+				new Color (1, 1, 1));
 		});
 
 		Gtk.DrawingArea gradient = new ();
@@ -187,23 +194,32 @@ public sealed class ColorPickerSlider : Gtk.Box
 		int bsize = draw_h / 2;
 
 		// Draw transparency background
-		context.FillRectangle (new RectangleD (settings.SliderPaddingWidth, settings.SliderPaddingHeight, draw_w, draw_h), new Color (1, 1, 1));
+		context.FillRectangle (
+			new RectangleD (settings.SliderPaddingWidth, settings.SliderPaddingHeight, draw_w, draw_h),
+			new Color (1, 1, 1));
 
 		for (int x = settings.SliderPaddingWidth; x < x1; x += bsize * 2) {
+
 			int bwidth = bsize;
 
 			if (x + bsize > x1)
 				bwidth = x1 - x;
 
-			context.FillRectangle (new RectangleD (x, settings.SliderPaddingHeight, bwidth, bsize), new Color (.8, .8, .8));
+			context.FillRectangle (
+				new RectangleD (x, settings.SliderPaddingHeight, bwidth, bsize),
+				new Color (.8, .8, .8));
 		}
+
 		for (int x = settings.SliderPaddingWidth + bsize; x < x1; x += bsize * 2) {
+
 			int bwidth = bsize;
 
 			if (x + bsize > x1)
 				bwidth = x1 - x;
 
-			context.FillRectangle (new RectangleD (x, settings.SliderPaddingHeight + draw_h / 2, bwidth, bsize), new Color (.8, .8, .8));
+			context.FillRectangle (
+				new RectangleD (x, settings.SliderPaddingHeight + draw_h / 2, bwidth, bsize),
+				new Color (.8, .8, .8));
 		}
 
 		LinearGradient pat = new (
@@ -215,7 +231,12 @@ public sealed class ColorPickerSlider : Gtk.Box
 		for (int i = 0; i < colors.Length; i++)
 			pat.AddColorStop (i / (double) (colors.Length - 1), colors[i]);
 
-		context.Rectangle (settings.SliderPaddingWidth, settings.SliderPaddingHeight, draw_w, draw_h);
+		context.Rectangle (
+			settings.SliderPaddingWidth,
+			settings.SliderPaddingHeight,
+			draw_w,
+			draw_h);
+
 		context.SetSource (pat);
 		context.Fill ();
 	}
@@ -282,10 +303,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private bool mouse_on_picker_surface = false;
 	private readonly CheckboxOption picker_surface_option_draw_value;
 
-	// swatches
-	private readonly Gtk.DrawingArea swatch_recent;
-	private readonly Gtk.DrawingArea swatch_palette;
-
 	// hex + sliders
 	private readonly Gtk.Entry hex_entry;
 
@@ -348,6 +365,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		foreach (var display in color_displays)
 			display.SetSizeRequest (palette_display_size, palette_display_size);
+
 		int pickerSurfaceDrawSize = (picker_surface_radius + picker_surface_padding) * 2;
 
 		picker_surface_box.WidthRequest = pickerSurfaceDrawSize;
@@ -384,7 +402,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	/// <param name="livePalette">Determines modality of the dialog and live palette behaviour. If true, dialog will not block rest of app and will update
 	/// the current palette as the color is changed.</param>
 	/// <param name="title">Title of the dialog.</param>
-	public ColorPickerDialog (ChromeManager chrome, Color[] palette, int currentColorIndex, bool livePalette, string title)
+	public ColorPickerDialog (
+		ChromeManager chrome,
+		Color[] palette,
+		int currentColorIndex,
+		bool livePalette,
+		string title)
 	{
 		original_colors = palette;
 		Colors = (Color[]) palette.Clone ();
@@ -413,10 +436,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		title_bar.PackStart (reset_button);
 
 		Gtk.Button shrinkButton = new ();
+
 		if (small_mode)
 			shrinkButton.SetIconName (Resources.StandardIcons.WindowMaximize);
 		else
 			shrinkButton.SetIconName (Resources.StandardIcons.WindowMinimize);
+
 		shrinkButton.OnClicked += (sender, args) => {
 			var contentArea = this.GetContentAreaBox ();
 			//contentArea.RemoveAll ();
@@ -579,10 +604,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		hexBox.Append (new Gtk.Label { Label_ = Translations.GetString ("Hex"), WidthRequest = 50 });
 		hex_entry = new Gtk.Entry { Text_ = CurrentColor.ToHex (), MaxWidthChars = 10 };
 		hex_entry.OnChanged ((o, e) => {
-			if (GetFocus ()?.Parent == hex_entry) {
-				CurrentColor = Color.FromHex (hex_entry.GetText ()) ?? CurrentColor;
-				UpdateView ();
-			}
+			if ((GetFocus ()?.Parent) != hex_entry) return;
+			CurrentColor = Color.FromHex (hex_entry.GetText ()) ?? CurrentColor;
+			UpdateView ();
 		});
 
 		hexBox.Append (hex_entry);
@@ -684,18 +708,21 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 
 		#region Swatch
-		swatch_box = new Gtk.Box { Spacing = spacing };
-		swatch_box.SetOrientation (Gtk.Orientation.Vertical);
+
+		Gtk.Box swatchBox = new () { Spacing = spacing };
+
+		swatch_box = swatchBox;
+		swatchBox.SetOrientation (Gtk.Orientation.Vertical);
 
 
 		// 90% taken from SatusBarColorPaletteWidget
 		// todo: merge both
 
-		swatch_recent = new Gtk.DrawingArea ();
-		swatch_recent.WidthRequest = 500;
-		swatch_recent.HeightRequest = StatusBarColorPaletteWidget.SWATCH_SIZE * StatusBarColorPaletteWidget.PALETTE_ROWS;
+		Gtk.DrawingArea swatchRecent = new ();
+		swatchRecent.WidthRequest = 500;
+		swatchRecent.HeightRequest = StatusBarColorPaletteWidget.SWATCH_SIZE * StatusBarColorPaletteWidget.PALETTE_ROWS;
 
-		swatch_recent.SetDrawFunc ((area, g, width, height) => {
+		swatchRecent.SetDrawFunc ((area, g, width, height) => {
 
 			var recent = PintaCore.Palette.RecentlyUsedColors;
 			int recent_cols = PintaCore.Palette.MaxRecentlyUsedColor / StatusBarColorPaletteWidget.PALETTE_ROWS;
@@ -710,14 +737,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				g.FillRectangle (StatusBarColorPaletteWidget.GetSwatchBounds (i, recent_palette_rect, true), recent.ElementAt (i));
 		});
 
-		swatch_box.Append (swatch_recent);
+		swatchBox.Append (swatchRecent);
 
-		swatch_palette = new Gtk.DrawingArea ();
-
-		swatch_palette.WidthRequest = 500;
-		swatch_palette.HeightRequest = StatusBarColorPaletteWidget.SWATCH_SIZE * StatusBarColorPaletteWidget.PALETTE_ROWS;
-
-		swatch_palette.SetDrawFunc ((area, g, width, height) => {
+		Gtk.DrawingArea swatchPalette = new ();
+		swatchPalette.WidthRequest = 500;
+		swatchPalette.HeightRequest = StatusBarColorPaletteWidget.SWATCH_SIZE * StatusBarColorPaletteWidget.PALETTE_ROWS;
+		swatchPalette.SetDrawFunc ((area, g, width, height) => {
 
 			RectangleD palette_rect = new (
 				0,
@@ -730,10 +755,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			for (var i = 0; i < palette.Count; i++)
 				g.FillRectangle (StatusBarColorPaletteWidget.GetSwatchBounds (i, palette_rect), palette[i]);
 		});
-		swatch_box.Append (swatch_palette);
+		swatchBox.Append (swatchPalette);
 
 		if (!show_swatches)
-			swatch_box.SetVisible (false);
+			swatchBox.SetVisible (false);
 
 		#endregion
 
@@ -754,7 +779,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				return;
 			}
 
-			if (swatch_box.Visible && swatch_recent.IsMouseInDrawingArea (this, absPos, out PointD rel2)) {
+			if (swatchBox.Visible && swatchRecent.IsMouseInDrawingArea (this, absPos, out PointD rel2)) {
 
 				int recent_index = StatusBarColorPaletteWidget.GetSwatchAtLocation (rel2, new RectangleD (), true);
 
@@ -769,7 +794,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			}
 
-			if (swatch_box.Visible && swatch_palette.IsMouseInDrawingArea (this, absPos, out PointD rel3)) {
+			if (swatchBox.Visible && swatchPalette.IsMouseInDrawingArea (this, absPos, out PointD rel3)) {
 
 				int index = StatusBarColorPaletteWidget.GetSwatchAtLocation (rel3, new RectangleD ());
 
@@ -812,7 +837,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		mainVbox.Append (top_box);
 		if (!small_mode)
-			mainVbox.Append (swatch_box);
+			mainVbox.Append (swatchBox);
 
 		Title = Translations.GetString (window_title);
 		TransientFor = chrome_manager.MainWindow;
@@ -922,17 +947,32 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	{
 		int xy = palette_display_border_thickness;
 		int wh = palette_display_size - palette_display_border_thickness * 2;
+
 		g.Antialias = Antialias.None;
 
 		// make checker pattern
 		if (c.A != 1) {
-			g.FillRectangle (new RectangleD (xy, xy, wh, wh), new Color (1, 1, 1));
-			g.FillRectangle (new RectangleD (xy, xy, wh / 2, wh / 2), new Color (.8, .8, .8));
-			g.FillRectangle (new RectangleD (xy + wh / 2, xy + wh / 2, wh / 2, wh / 2), new Color (.8, .8, .8));
+
+			g.FillRectangle (
+				new RectangleD (xy, xy, wh, wh),
+				new Color (1, 1, 1));
+
+			g.FillRectangle (
+				new RectangleD (xy, xy, wh / 2, wh / 2),
+				new Color (.8, .8, .8));
+
+			g.FillRectangle (
+				new RectangleD (xy + wh / 2, xy + wh / 2, wh / 2, wh / 2),
+				new Color (.8, .8, .8));
 		}
 
-		g.FillRectangle (new RectangleD (xy, xy, wh, wh), c);
-		g.DrawRectangle (new RectangleD (xy, xy, wh, wh), new Color (0, 0, 0), palette_display_border_thickness);
+		g.FillRectangle (
+			new RectangleD (xy, xy, wh, wh),
+			c);
+
+		g.DrawRectangle (
+			new RectangleD (xy, xy, wh, wh),
+			new Color (0, 0, 0), palette_display_border_thickness);
 	}
 
 	private void DrawColorSurface (Context g)
@@ -948,7 +988,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		if (picker_surface_type == ColorSurfaceType.HueAndSat) {
 
-			ImageSurface img = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, draw_width, draw_height);
+			ImageSurface img = CairoExtensions.CreateImageSurface (Format.Argb32, draw_width, draw_height);
 			Span<ColorBgra> data = img.GetPixelData ();
 
 			for (int y = 0; y < draw_height; y++) {
@@ -977,7 +1017,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			g.Paint ();
 		} else if (picker_surface_type == ColorSurfaceType.SatAndVal) {
 
-			ImageSurface img = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, draw_width, draw_height);
+			ImageSurface img = CairoExtensions.CreateImageSurface (Format.Argb32, draw_width, draw_height);
 			Span<ColorBgra> data = img.GetPixelData ();
 
 			for (int y = 0; y < draw_height; y++) {
