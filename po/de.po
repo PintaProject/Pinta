@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-02 01:39+0000\n"
-"PO-Revision-Date: 2025-03-14 08:48+0000\n"
+"PO-Revision-Date: 2025-03-14 09:31+0000\n"
 "Last-Translator: Janek Ilsen <bananek@ik.me>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/pinta/pinta/de/>\n"
 "Language: de\n"
@@ -575,7 +575,7 @@ msgstr "Auf Auswahl zuschneiden"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
-msgstr ""
+msgstr "Gekrümmt"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:134
@@ -2716,7 +2716,9 @@ msgstr ""
 "  Tobias Bannert https://launchpad.net/~toba\n"
 "  Torsten Franz https://launchpad.net/~torsten.franz\n"
 "  UweS https://launchpad.net/~uwes\n"
-"  ziggystar https://launchpad.net/~ziggystar-gmx"
+"  ziggystar https://launchpad.net/~ziggystar-gmx\n"
+" \n"
+"Janek Ilsen"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:49
