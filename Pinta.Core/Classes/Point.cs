@@ -108,62 +108,62 @@ public readonly record struct PointI<T> (T X, T Y) where T : IBinaryInteger<T>
 			Y * factor);
 }
 
-public readonly record struct PointI (int X, int Y)
-{
-	public static PointI Zero { get; } = new (0, 0);
-	public override readonly string ToString () => $"{X}, {Y}";
+//public readonly record struct PointI (int X, int Y)
+//{
+//	public static PointI Zero { get; } = new (0, 0);
+//	public override readonly string ToString () => $"{X}, {Y}";
 
-	public readonly PointD ToDouble () => new (X, Y);
+//	public readonly PointD ToDouble () => new (X, Y);
 
-	public PointI Rotated90CCW () // Counterclockwise
-		=> new (-Y, X);
+//	public PointI Rotated90CCW () // Counterclockwise
+//		=> new (-Y, X);
 
-	public static PointI operator + (PointI left, PointI right)
-		=> new (
-			X: left.X + right.X,
-			Y: left.Y + right.Y);
+//	public static PointI operator + (PointI left, PointI right)
+//		=> new (
+//			X: left.X + right.X,
+//			Y: left.Y + right.Y);
 
-	public static PointI operator - (PointI left, PointI right)
-		=> new (
-			X: left.X - right.X,
-			Y: left.Y - right.Y);
-}
+//	public static PointI operator - (PointI left, PointI right)
+//		=> new (
+//			X: left.X - right.X,
+//			Y: left.Y - right.Y);
+//}
 
-public readonly record struct PointD (double X, double Y)
-{
-	public static PointD Zero { get; } = new (0, 0);
+//public readonly record struct PointD (double X, double Y)
+//{
+//	public static PointD Zero { get; } = new (0, 0);
 
-	public override readonly string ToString () => $"{X}, {Y}";
+//	public override readonly string ToString () => $"{X}, {Y}";
 
-	public readonly PointI ToInt () => new ((int) X, (int) Y);
+//	public readonly PointI ToInt () => new ((int) X, (int) Y);
 
-	/// <summary>
-	/// Returns a new point, rounded to the nearest integer coordinates.
-	/// </summary>
-	public readonly PointD Rounded () => new (Math.Round (X), Math.Round (Y));
+//	/// <summary>
+//	/// Returns a new point, rounded to the nearest integer coordinates.
+//	/// </summary>
+//	public readonly PointD Rounded () => new (Math.Round (X), Math.Round (Y));
 
-	public readonly PointD Scaled (double factor)
-		=> new (
-			X * factor,
-			Y * factor);
+//	public readonly PointD Scaled (double factor)
+//		=> new (
+//			X * factor,
+//			Y * factor);
 
-	public static PointD operator + (in PointD a, in PointD b)
-		=> new (
-			a.X + b.X,
-			a.Y + b.Y);
+//	public static PointD operator + (in PointD a, in PointD b)
+//		=> new (
+//			a.X + b.X,
+//			a.Y + b.Y);
 
-	public static explicit operator PointD (PointI p) => new (p.X, p.Y);
+//	public static explicit operator PointD (PointI p) => new (p.X, p.Y);
 
-	public static PointD operator + (PointD left, PointD right)
-		=> new (
-			X: left.X + right.X,
-			Y: left.Y + right.Y);
+//	public static PointD operator + (PointD left, PointD right)
+//		=> new (
+//			X: left.X + right.X,
+//			Y: left.Y + right.Y);
 
-	public static PointD operator - (PointD left, PointD right)
-		=> new (
-			X: left.X - right.X,
-			Y: left.Y - right.Y);
-}
+//	public static PointD operator - (PointD left, PointD right)
+//		=> new (
+//			X: left.X - right.X,
+//			Y: left.Y - right.Y);
+//}
 
 public readonly record struct Size (int Width, int Height)
 {
