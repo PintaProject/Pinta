@@ -206,12 +206,9 @@ public sealed class LivePreviewManager : ILivePreview
 			RectangleI updatedBounds)
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
-			chrome.ProgressDialog.Progress = progress;
-			HandleUpdate (updatedBounds);
-		}
 
-		void HandleUpdate (RectangleI bounds)
-		{
+			chrome.ProgressDialog.Progress = progress;
+
 			double scale = workspace.Scale;
 			PointD offset = workspace.Offset;
 
@@ -219,19 +216,19 @@ public sealed class LivePreviewManager : ILivePreview
 
 			// Calculate canvas bounds.
 			PointD bounds1 = new (
-				X: bounds.Left * scale,
-				Y: bounds.Top * scale);
+				X: updatedBounds.Left * scale,
+				Y: updatedBounds.Top * scale);
 
 			PointD bounds2 = new (
-				X: (bounds.Right + 1) * scale,
-				Y: (bounds.Bottom + 1) * scale);
+				X: (updatedBounds.Right + 1) * scale,
+				Y: (updatedBounds.Bottom + 1) * scale);
 
 			// TODO Figure out why when scale > 1 that I need add on an
 			// extra pixel of padding.
 			// I must being doing something wrong here.
 			if (scale > 1.0) {
 				//x1 = (bounds.Left-1) * scale;
-				bounds1 = bounds1 with { Y = (bounds.Top - 1) * scale };
+				bounds1 = bounds1 with { Y = (updatedBounds.Top - 1) * scale };
 				//x2 = (bounds.Right+1) * scale;
 				//y2 = (bounds.Bottom+1) * scale;
 			}
