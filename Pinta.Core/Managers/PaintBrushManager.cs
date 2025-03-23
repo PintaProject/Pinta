@@ -55,31 +55,25 @@ public sealed class PaintBrushManager : IPaintBrushService
 	/// <summary>
 	/// Remove a brush type.
 	/// </summary>
-	public void RemoveInstanceOfPaintBrush (System.Type paintBrush)
+	public void RemoveInstanceOfPaintBrush (Type paintBrush)
 	{
 		foreach (BasePaintBrush brush in paint_brushes) {
-			if (brush.GetType () == paintBrush) {
-				paint_brushes.Remove (brush);
-				paint_brushes.Sort (new BrushSorter ());
-				OnBrushRemoved (brush);
-				return;
-			}
+
+			if (brush.GetType () != paintBrush)
+				continue;
+
+			paint_brushes.Remove (brush);
+			paint_brushes.Sort (new BrushSorter ());
+			OnBrushRemoved (brush);
+			return;
 		}
 	}
 
-	#region IEnumerable<BasePaintBrush> implementation
 	public IEnumerator<BasePaintBrush> GetEnumerator ()
-	{
-		return paint_brushes.GetEnumerator ();
-	}
-	#endregion
+		=> paint_brushes.GetEnumerator ();
 
-	#region IEnumerable implementation
 	System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
-	{
-		return paint_brushes.GetEnumerator ();
-	}
-	#endregion
+		=> paint_brushes.GetEnumerator ();
 
 	private void OnBrushAdded (BasePaintBrush brush)
 	{
@@ -95,9 +89,8 @@ public sealed class PaintBrushManager : IPaintBrushService
 	{
 		public override int Compare (BasePaintBrush? x, BasePaintBrush? y)
 		{
-			var xstr = x is BasePaintBrush x2 && x2.Priority != 0 ? x2.Priority.ToString () : x?.Name;
-			var ystr = y is BasePaintBrush y2 && y2.Priority != 0 ? y2.Priority.ToString () : y?.Name;
-
+			string? xstr = x is BasePaintBrush x2 && x2.Priority != 0 ? x2.Priority.ToString () : x?.Name;
+			string? ystr = y is BasePaintBrush y2 && y2.Priority != 0 ? y2.Priority.ToString () : y?.Name;
 			return string.Compare (xstr, ystr);
 		}
 	}
