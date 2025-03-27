@@ -323,7 +323,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	// common state
 	private int color_index = 0;
 	public Color[] Colors { get; private set; }
-	private readonly ImmutableArray<Color> original_colors;
 
 	private Color CurrentColor {
 		get => Colors[color_index];
@@ -409,8 +408,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		bool livePalette,
 		string title)
 	{
-		original_colors = [.. palette];
-		Colors = [.. palette];
+		ImmutableArray<Color> original_colors = [.. palette];
+		Colors = [.. original_colors];
 		color_index = currentColorIndex;
 		chrome_manager = chrome;
 		window_title = title;
