@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-02 01:39+0000\n"
-"PO-Revision-Date: 2025-02-05 03:02+0000\n"
-"Last-Translator: Tiago Lucas Flach <tiagolucas9830@gmail.com>\n"
+"PO-Revision-Date: 2025-03-29 14:01+0000\n"
+"Last-Translator: burns <ahoradocafezinho@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "pinta/pinta/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.11-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -283,12 +283,12 @@ msgstr "Burkes"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:101
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:178
 msgid "By absolute size:"
-msgstr "Por tamanho absoluto"
+msgstr "Por tamanho absoluto:"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:59
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:171
 msgid "By percentage:"
-msgstr "Por percentagem"
+msgstr "Por percentagem:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:411
 #: ../Pinta.Gui.Addins/InstallDialog.cs:111
@@ -399,7 +399,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Clique e arraste para desenhar a linha da área a ser selecionada"
+msgstr "Clique e arraste para desenhar a linha da área selecionada."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -407,7 +407,7 @@ msgstr "Clique e arraste para navegar na imagem."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
 msgid "Click to reset primary and secondary color."
-msgstr "Clique para redefinir a cor primária e secundária"
+msgstr "Clique para redefinir a cor primária e secundária."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:271
 msgid "Click to select primary color."
@@ -784,9 +784,8 @@ msgid "Failed to take screenshot"
 msgstr "Falha ao obter captura de tela"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:174
-#, fuzzy
 msgid "Feather Canvas Edge"
-msgstr "Borda de Tela de Penas"
+msgstr "Borda de Penas"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather Object"
