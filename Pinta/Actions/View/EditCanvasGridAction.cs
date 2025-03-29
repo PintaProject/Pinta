@@ -32,12 +32,15 @@ internal sealed class EditCanvasGridAction : IActionHandler
 	private async void Activated (object sender, EventArgs e)
 	{
 		using CanvasGridSettingsDialog dialog = new (chrome, canvas_grid);
-		Gtk.ResponseType response = await dialog.RunAsync ();
-		dialog.Destroy ();
-		if (response == Gtk.ResponseType.Ok)
-			canvas_grid.SaveGridSettings ();
-		else
-			dialog.RevertChanges ();
+		try {
+			Gtk.ResponseType response = await dialog.RunAsync ();
+			if (response == Gtk.ResponseType.Ok)
+				canvas_grid.SaveGridSettings ();
+			else
+				dialog.RevertChanges ();
+		} finally {
+			dialog.Destroy ();
+		}
 	}
 }
 
