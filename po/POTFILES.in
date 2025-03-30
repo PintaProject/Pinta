@@ -123,6 +123,7 @@ Pinta.Core/Extensions/GdkKey.cs
 Pinta.Core/Extensions/GdkPixbufExtensions.cs
 Pinta.Core/Extensions/GioExtensions.cs
 Pinta.Core/Extensions/GioStream.cs
+Pinta.Core/Extensions/Gtk/BoxStyle.cs
 Pinta.Core/Extensions/Gtk/GtkExtensions.Application.cs
 Pinta.Core/Extensions/Gtk/GtkExtensions.Dialog.cs
 Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs
