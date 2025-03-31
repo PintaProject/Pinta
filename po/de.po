@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-02 01:39+0000\n"
-"PO-Revision-Date: 2024-07-14 09:09+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2025-03-14 09:36+0000\n"
+"Last-Translator: Janek Ilsen <bananek@ik.me>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/pinta/pinta/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.11-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
@@ -89,7 +89,7 @@ msgstr "Nach Auswahl"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Objekt ausrichten"
 
 #: ../Pinta.Core/Actions/EditActions.cs:474
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:287
@@ -99,11 +99,11 @@ msgstr "Alle Dateien"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:675
 msgid "Alpha"
-msgstr ""
+msgstr "Alpha"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:211
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Alphafarbverlauf"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:117
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:147
@@ -158,7 +158,7 @@ msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:238
 msgid "Auto"
-msgstr "Automatisch"
+msgstr "Auto"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:55
 msgid "Auto Crop"
@@ -229,7 +229,7 @@ msgstr "Blau "
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:28
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:28
 msgid "Blurs"
-msgstr "Unschärfe"
+msgstr "Unschärfen"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:176
 msgid "Bold"
@@ -242,15 +242,15 @@ msgstr "Lagerfeuer"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "Untere Mitte"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "Unten links"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "Unten rechts"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
@@ -302,11 +302,11 @@ msgstr "Zeichenfläche"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "Leinwandrastereinstellungen"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Leinwandraster..."
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
@@ -314,7 +314,7 @@ msgstr "Zellgröße"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "Mitte"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:228
 msgid "Center Align"
@@ -322,7 +322,7 @@ msgstr "Zentriert"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "Mittig links"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:156
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
@@ -331,7 +331,7 @@ msgstr "Mittelpunkt"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "Mittig rechts"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:126
 msgid "Centered"
@@ -344,7 +344,7 @@ msgstr "Zentimeter"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Pinselbreite ändern. Tastaturkürzel: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:355
 msgid "Changed Shape Type"
@@ -477,7 +477,7 @@ msgstr "Abwedeln"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:214
 msgid "Color Gradient"
-msgstr ""
+msgstr "Farbverlauf"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
@@ -575,7 +575,7 @@ msgstr "Auf Auswahl zuschneiden"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
-msgstr ""
+msgstr "Gekrümmt"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:134
@@ -806,7 +806,7 @@ msgstr "Hintergrund ausfüllen"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:220
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Objekthintergrund füllen"
 
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:216
@@ -958,7 +958,7 @@ msgstr "Höhe:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:579
 msgid "Hex"
-msgstr ""
+msgstr "Hex"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Hide Layer"
@@ -1540,7 +1540,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "Objekt"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:168
@@ -1980,7 +1980,7 @@ msgstr "Zurücksetzen"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:408
 msgid "Reset Color"
-msgstr ""
+msgstr "Farbe zurücksetzen"
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
@@ -2686,7 +2686,7 @@ msgstr "Pixel"
 msgid "translator-credits"
 msgstr ""
 "Launchpad-Beiträge:\n"
-"  Achmed Decker https://launchpad.net/~deckerac\n"
+" Achmed Decker https://launchpad.net/~deckerac\n"
 "  Adam Reichold https://launchpad.net/~adamreichold\n"
 "  Andre https://launchpad.net/~ajx\n"
 "  Benedict Etzel https://launchpad.net/~benedict-etzel\n"
@@ -2716,7 +2716,9 @@ msgstr ""
 "  Tobias Bannert https://launchpad.net/~toba\n"
 "  Torsten Franz https://launchpad.net/~torsten.franz\n"
 "  UweS https://launchpad.net/~uwes\n"
-"  ziggystar https://launchpad.net/~ziggystar-gmx"
+"  ziggystar https://launchpad.net/~ziggystar-gmx\n"
+"\n"
+" Janek Ilsen"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:49
