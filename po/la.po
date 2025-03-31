@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-02 01:39+0000\n"
-"PO-Revision-Date: 2013-10-15 01:04+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
-"Language-Team: Latin <la@li.org>\n"
+"PO-Revision-Date: 2025-03-26 01:40+0000\n"
+"Last-Translator: Champ0999 <champ0999@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Latin <https://hosted.weblate.org/projects/pinta/pinta/la/>\n"
 "Language: la\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:257
 msgid " (in user directory)"
@@ -30,7 +30,7 @@ msgstr ""
 #: ../Pinta.Core/Managers/EffectsManager.cs:70
 #: ../Pinta.Core/Managers/EffectsManager.cs:104
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "3 x 3 Region"
