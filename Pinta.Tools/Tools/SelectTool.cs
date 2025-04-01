@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Pinta.Core;
 
@@ -36,16 +37,16 @@ public abstract class SelectTool : BaseTool
 	private readonly IToolService tools;
 	private readonly IWorkspaceService workspace;
 
-	private bool is_drawing = false;
-	private PointD shape_origin;
-	private PointD reset_origin;
-	private PointD shape_end;
-	private RectangleI last_dirty;
-	private SelectionHistoryItem? hist;
-	private CombineMode combine_mode;
+	private readonly ImmutableArray<MoveHandle> handles;
 
-	private readonly MoveHandle[] handles = new MoveHandle[8];
-	private int? active_handle;
+	private bool is_drawing = false;
+	private PointD shape_origin = default;
+	private PointD reset_origin = default;
+	private PointD shape_end = default;
+	private RectangleI last_dirty = default;
+	private SelectionHistoryItem? hist = default;
+	private CombineMode combine_mode = default;
+	private int? active_handle = default;
 
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
 	protected override bool ShowAntialiasingButton => false;
@@ -56,14 +57,16 @@ public abstract class SelectTool : BaseTool
 		tools = services.GetService<IToolService> ();
 		workspace = services.GetService<IWorkspaceService> ();
 
-		handles[0] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeNW) };
-		handles[1] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeSW) };
-		handles[2] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeNE) };
-		handles[3] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeSE) };
-		handles[4] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeW) };
-		handles[5] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeN) };
-		handles[6] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeE) };
-		handles[7] = new MoveHandle { Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeS) };
+		handles = [
+			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeNW) },
+			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeSW) },
+			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeNE) },
+			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeSE) },
+			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeW) },
+			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeN) },
+			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeE) },
+			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeS) },
+		];
 
 		workspace.SelectionChanged += AfterSelectionChange;
 	}
@@ -91,8 +94,9 @@ public abstract class SelectTool : BaseTool
 		if (!active_handle.HasValue) {
 			combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (e);
 
-			var x = Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
-			var y = Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
+			double x = Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
+			double y = Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
+
 			shape_origin = new PointD (x, y);
 
 			document.PreviousSelection = document.Selection.Clone ();
@@ -321,7 +325,8 @@ public abstract class SelectTool : BaseTool
 			return MoveHandle.UnionInvalidateRects (handles);
 		}
 
-		var dirty = ComputeHandleBounds ();
+		RectangleI dirtyArea = ComputeHandleBounds ();
+
 		handles[0].CanvasPosition = new PointD (shape_origin.X, shape_origin.Y);
 		handles[1].CanvasPosition = new PointD (shape_origin.X, shape_end.Y);
 		handles[2].CanvasPosition = new PointD (shape_end.X, shape_origin.Y);
@@ -330,15 +335,17 @@ public abstract class SelectTool : BaseTool
 		handles[5].CanvasPosition = new PointD ((shape_origin.X + shape_end.X) / 2, shape_origin.Y);
 		handles[6].CanvasPosition = new PointD (shape_end.X, (shape_origin.Y + shape_end.Y) / 2);
 		handles[7].CanvasPosition = new PointD ((shape_origin.X + shape_end.X) / 2, shape_end.Y);
-		dirty = dirty.Union (ComputeHandleBounds ());
+
+		dirtyArea = dirtyArea.Union (ComputeHandleBounds ());
 
 		// Repaint at the old and new handle positions.
-		PintaCore.Workspace.InvalidateWindowRect (dirty);
+		PintaCore.Workspace.InvalidateWindowRect (dirtyArea);
 	}
 
 	private RectangleI ReDraw (Document document)
 	{
 		document.Selection.Visible = true;
+
 		ShowHandles (true);
 
 		RectangleD rect = CairoExtensions.PointsToRectangle (shape_origin, shape_end);
@@ -364,16 +371,17 @@ public abstract class SelectTool : BaseTool
 
 	private int? FindHandleIndexUnderPoint (PointD window_point)
 	{
-		var handle = FindHandleUnderPoint (window_point);
+		MoveHandle? handle = FindHandleUnderPoint (window_point);
 		if (handle is not null)
-			return Array.IndexOf (handles, handle);
+			return handles.IndexOf (handle);
 		else
 			return null;
 	}
 
 	private void UpdateCursor (Document document, PointD window_point)
 	{
-		var active_handle = FindHandleUnderPoint (window_point);
+		MoveHandle? active_handle = FindHandleUnderPoint (window_point);
+
 		if (active_handle is not null) {
 			SetCursor (active_handle.Cursor);
 			return;
@@ -409,14 +417,17 @@ public abstract class SelectTool : BaseTool
 	/// </summary>
 	private void LoadFromDocument (Document document)
 	{
-		var selection = document.Selection;
+		DocumentSelection selection = document.Selection;
+
 		shape_origin = selection.Origin;
 		shape_end = selection.End;
+
 		ShowHandles (document.Selection.Visible);
 
 		if (tools.CurrentTool != this) return;
 
 		UpdateHandlePositions ();
+
 		document.Workspace.Invalidate ();
 	}
 }

@@ -112,28 +112,31 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 		for (double i = 0; i < settings.count; i++) {
 
-			double u = (2.0 * target.X - settings.canvasSize.Width + (i * settings.invCount)) * settings.invH;
-			double v = (2.0 * target.Y - settings.canvasSize.Height + ((i * settings.invQuality) % 1)) * settings.invH;
+			PointD transformed = new (
+				X: (2.0 * target.X - settings.canvasSize.Width + (i * settings.invCount)) * settings.invH,
+				Y: (2.0 * target.Y - settings.canvasSize.Height + ((i * settings.invQuality) % 1)) * settings.invH);
 
-			RadiansAngle theta = new (Math.Atan2 (v, u));
+			RadiansAngle theta = new (Math.Atan2 (transformed.Y, transformed.X));
 			RadiansAngle thetaP = theta + settings.angleTheta;
 
-			double radius = Math.Sqrt ((u * u) + (v * v));
+			double radius = transformed.Magnitude ();
 
-			double uP = radius * Math.Cos (thetaP.Radians);
-			double vP = radius * Math.Sin (thetaP.Radians);
+			PointD p = new (
+				X: radius * Math.Cos (thetaP.Radians),
+				Y: radius * Math.Sin (thetaP.Radians));
 
 			PointD jLoc = new (
-				X: (uP - vP * settings.aspect) * settings.invZoom,
-				Y: (vP + uP * settings.aspect) * settings.invZoom);
+				X: (p.X - p.Y * settings.aspect) * settings.invZoom,
+				Y: (p.Y + p.X * settings.aspect) * settings.invZoom);
 
 			double j = fractal.Compute (jLoc, Jr, Ji);
 
-			double c = settings.factor * j;
+			double c = Math.Clamp (
+				settings.factor * j,
+				settings.colorGradient.StartPosition,
+				settings.colorGradient.EndPosition);
 
-			double clamped_c = Math.Clamp (c, settings.colorGradient.StartPosition, settings.colorGradient.EndPosition);
-
-			ColorBgra colorAddend = settings.colorGradient.GetColor (clamped_c);
+			ColorBgra colorAddend = settings.colorGradient.GetColor (c);
 
 			b += colorAddend.B;
 			g += colorAddend.G;
