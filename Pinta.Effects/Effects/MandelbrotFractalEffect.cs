@@ -133,26 +133,29 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 		for (double i = 0; i < settings.count; i++) {
 
-			double u = baseU + i * deltaU;
-			double v = baseV + (i * settings.invQuality % 1) * settings.invH;
+			PointD rel = new (
+				X: baseU + i * deltaU,
+				Y: baseV + (i * settings.invQuality % 1) * settings.invH);
 
-			double radius = Mathematics.Magnitude (u, v);
-			double theta = Math.Atan2 (v, u);
+			double radius = rel.Magnitude ();
+			double theta = Math.Atan2 (rel.Y, rel.X);
 			double thetaP = theta + settings.angleTheta.Radians;
 
-			double rotatedU = radius * Math.Cos (thetaP);
-			double rotatedV = radius * Math.Sin (thetaP);
+			PointD rotatedR = new (
+				X: radius * Math.Cos (thetaP),
+				Y: radius * Math.Sin (thetaP));
 
 			double m = fractal.Compute (
-				r: (rotatedU * settings.invZoom) + offset_basis.X,
-				i: (rotatedV * settings.invZoom) + offset_basis.Y,
+				r: (rotatedR.X * settings.invZoom) + offset_basis.X,
+				i: (rotatedR.Y * settings.invZoom) + offset_basis.Y,
 				factor: settings.factor);
 
-			double c = 64 + settings.factor * m;
+			double c = Math.Clamp (
+				64 + settings.factor * m,
+				settings.colorGradient.StartPosition,
+				settings.colorGradient.EndPosition);
 
-			double clamped_c = Math.Clamp (c, settings.colorGradient.StartPosition, settings.colorGradient.EndPosition);
-
-			ColorBgra colorAddend = settings.colorGradient.GetColor (clamped_c);
+			ColorBgra colorAddend = settings.colorGradient.GetColor (c);
 
 			r += colorAddend.R;
 			g += colorAddend.G;
