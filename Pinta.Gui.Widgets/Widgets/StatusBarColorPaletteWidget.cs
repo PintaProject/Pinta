@@ -103,9 +103,9 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				if (index < 0)
 					break;
 
-				if (button == GtkExtensions.MouseRightButton) {
+				if (button == GtkExtensions.MOUSE_RIGHT_BUTTON) {
 					PintaCore.Palette.SecondaryColor = PintaCore.Palette.CurrentPalette[index];
-				} else if (button == GtkExtensions.MouseLeftButton) {
+				} else if (button == GtkExtensions.MOUSE_LEFT_BUTTON) {
 					PintaCore.Palette.PrimaryColor = PintaCore.Palette.CurrentPalette[index];
 				} else {
 					var color = GetUserChosenColor ([PintaCore.Palette.CurrentPalette[index]], 0, Translations.GetString ("Choose Palette Color"))?[0];
@@ -122,9 +122,9 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 					break;
 
 				var recentColor = PintaCore.Palette.RecentlyUsedColors.ElementAt (recent_index);
-				if (button == GtkExtensions.MouseRightButton) {
+				if (button == GtkExtensions.MOUSE_RIGHT_BUTTON) {
 					PintaCore.Palette.SetColor (false, recentColor, false);
-				} else if (button == GtkExtensions.MouseLeftButton) {
+				} else if (button == GtkExtensions.MOUSE_LEFT_BUTTON) {
 					PintaCore.Palette.SetColor (true, recentColor, false);
 				}
 

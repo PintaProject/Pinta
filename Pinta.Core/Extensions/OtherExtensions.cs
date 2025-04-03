@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Pinta.Core;
 
@@ -199,5 +201,17 @@ public static class OtherExtensions
 		}
 
 		return polygons;
+	}
+
+	public static async Task LaunchUri (this SystemManager system, string uri)
+	{
+		// Workaround for macOS, which produces an "unsupported on current backend" error (https://gitlab.gnome.org/GNOME/gtk/-/issues/6788)
+		if (system.OperatingSystem == OS.Mac) {
+			Process process = Process.Start ("open", uri);
+			process.WaitForExit ();
+		} else {
+			Gtk.UriLauncher launcher = Gtk.UriLauncher.New (uri);
+			await launcher.LaunchAsync (PintaCore.Chrome.MainWindow);
+		}
 	}
 }
