@@ -500,9 +500,11 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		for (int i = 0; i < original_colors.Length; i++) {
 
+			int idx = i;
+
 			Gtk.DrawingArea display = new ();
 			display.SetSizeRequest (palette_display_size, palette_display_size);
-			display.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, Colors[i]));
+			display.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, Colors[idx]));
 
 			colorDisplayList.Append (display);
 			color_displays[i] = display;
