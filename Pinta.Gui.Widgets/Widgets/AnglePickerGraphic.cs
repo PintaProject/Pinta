@@ -26,7 +26,7 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 
 		// Handle click + drag.
 		var gesture = Gtk.GestureDrag.New ();
-		gesture.SetButton (GtkExtensions.MouseLeftButton);
+		gesture.SetButton (GtkExtensions.MOUSE_LEFT_BUTTON);
 
 		gesture.OnDragBegin += (_, args) => {
 			drag_start = new PointD (args.StartX, args.StartY);

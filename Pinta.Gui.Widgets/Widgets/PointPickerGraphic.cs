@@ -48,7 +48,7 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 
 		// Handle click + drag.
 		var drag_gesture = Gtk.GestureDrag.New ();
-		drag_gesture.SetButton (GtkExtensions.MouseLeftButton);
+		drag_gesture.SetButton (GtkExtensions.MOUSE_LEFT_BUTTON);
 
 		drag_gesture.OnDragBegin += (_, args) => {
 			drag_start = new PointD (args.StartX, args.StartY);

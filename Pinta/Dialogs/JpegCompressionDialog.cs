@@ -34,36 +34,34 @@ public sealed class JpegCompressionDialog : Gtk.Dialog
 
 	public JpegCompressionDialog (int defaultQuality, Gtk.Window parent)
 	{
+		Gtk.Label qualityLabel = Gtk.Label.New (Translations.GetString ("Quality: "));
+		qualityLabel.Xalign = 0;
+
+		Gtk.Scale levelScale = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 1, 100, 1);
+		levelScale.SetValue (defaultQuality);
+		levelScale.DrawValue = true;
+
+		// --- Initialization (Gtk.Window)
+
 		Title = Translations.GetString ("JPEG Quality");
 		TransientFor = parent;
 		Modal = true;
 
+		// --- Initialization (Gtk.Dialog)
+
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
-		Gtk.Label label = CreateQualityLabel ();
-		compression_level = CreateCompressionScale (defaultQuality);
+		Gtk.Box contentBox = this.GetContentAreaBox ();
+		contentBox.SetAllMargins (6);
+		contentBox.Spacing = 3;
+		contentBox.AppendMultiple ([
+			qualityLabel,
+			levelScale]);
 
-		Gtk.Box content_area = this.GetContentAreaBox ();
-		content_area.SetAllMargins (6);
-		content_area.Spacing = 3;
-		content_area.Append (label);
-		content_area.Append (compression_level);
-	}
+		// --- References to keep
 
-	private static Gtk.Label CreateQualityLabel ()
-	{
-		Gtk.Label result = Gtk.Label.New (Translations.GetString ("Quality: "));
-		result.Xalign = 0;
-		return result;
-	}
-
-	private static Gtk.Scale CreateCompressionScale (int defaultQuality)
-	{
-		Gtk.Scale result = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 1, 100, 1);
-		result.SetValue (defaultQuality);
-		result.DrawValue = true;
-		return result;
+		compression_level = levelScale;
 	}
 
 	public int CompressionLevel

@@ -24,40 +24,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-
 
 namespace Pinta.Core;
 
 public sealed class PaletteFormatManager
 {
-	private readonly List<PaletteDescriptor> formats;
+	public IReadOnlyList<PaletteDescriptor> Formats { get; }
 
 	public PaletteFormatManager ()
 	{
-		formats = [];
+		PaintDotNetPalette pdnHandler = new ();
+		GimpPalette gimpHandler = new ();
+		PaintShopProPalette pspHandler = new ();
 
-		PaintDotNetPalette pdnHandler = new PaintDotNetPalette ();
-		formats.Add (new PaletteDescriptor ("Paint.NET", ["txt", "TXT"], pdnHandler, pdnHandler));
-
-		GimpPalette gimpHandler = new GimpPalette ();
-		formats.Add (new PaletteDescriptor ("GIMP", ["gpl", "GPL"], gimpHandler, gimpHandler));
-
-		PaintShopProPalette pspHandler = new PaintShopProPalette ();
-		formats.Add (new PaletteDescriptor ("PaintShop Pro", ["pal", "PAL"], pspHandler, pspHandler));
+		Formats = [
+			new PaletteDescriptor (
+				"Paint.NET",
+				["txt", "TXT"],
+				pdnHandler,
+				pdnHandler),
+			new PaletteDescriptor (
+				"GIMP",
+				["gpl", "GPL"],
+				gimpHandler,
+				gimpHandler),
+			new PaletteDescriptor (
+				"PaintShop Pro",
+				["pal", "PAL"],
+				pspHandler,
+				pspHandler),
+		];
 	}
-
-	public IEnumerable<PaletteDescriptor> Formats => formats;
 
 	public PaletteDescriptor? GetFormatByFilename (string fileName)
 	{
-		string extension = System.IO.Path.GetExtension (fileName);
-		extension = NormalizeExtension (extension);
-		return formats.Where (p => p.Extensions.Contains (extension)).FirstOrDefault ();
-	}
+		string extension = Path.GetExtension (fileName);
 
-	private static string NormalizeExtension (string extension)
-	{
-		return extension.ToLowerInvariant ().TrimStart ('.').Trim ();
+		string normalized =
+			extension
+			.ToLowerInvariant ()
+			.TrimStart ('.')
+			.Trim ();
+
+		return
+			Formats
+			.Where (p => p.Extensions.Contains (normalized))
+			.FirstOrDefault ();
 	}
 }
