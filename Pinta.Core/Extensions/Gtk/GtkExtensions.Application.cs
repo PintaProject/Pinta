@@ -31,9 +31,13 @@ namespace Pinta.Core;
 
 partial class GtkExtensions
 {
-	public static void AddAction (
-		this Gtk.Application app,
-		Command action)
+	/// <summary>
+	/// Helper function to return the icon theme for the default display.
+	/// </summary>
+	public static Gtk.IconTheme GetDefaultIconTheme ()
+		=> Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
+
+	public static void AddAction (this Gtk.Application app, Command action)
 	{
 		app.AddAction (action.Action);
 	}
