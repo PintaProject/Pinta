@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
@@ -87,9 +88,7 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 
 	private readonly WorkspaceManager workspace_manager;
 	private readonly ChromeManager chrome_manager;
-	public ToolManager (
-		WorkspaceManager workspaceManager,
-		ChromeManager chromeManager)
+	public ToolManager (WorkspaceManager workspaceManager, ChromeManager chromeManager)
 	{
 		workspace_manager = workspaceManager;
 		chrome_manager = chromeManager;
@@ -120,7 +119,9 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 
 	public void RemoveInstanceOfTool<T> () where T : BaseTool
 	{
-		var tool = tools.OfType<T> ().FirstOrDefault ();
+		T? tool =
+			tools.OfType<T> ()
+			.FirstOrDefault ();
 
 		if (tool is null)
 			return;
@@ -155,7 +156,7 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 		if (sender is not ToolBoxButton tb)
 			return;
 
-		var new_tool = tb.Tool;
+		BaseTool new_tool = tb.Tool;
 
 		// Don't let the user unselect the current tool	
 		if (CurrentTool != null && new_tool.GetType ().Name == CurrentTool.GetType ().Name) {
@@ -211,43 +212,45 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 
 	public bool SetCurrentTool (string tool)
 	{
-		if (FindTool (tool) is BaseTool t) {
-			SetCurrentTool (t);
-			return true;
-		}
+		if (FindTool (tool) is not BaseTool t)
+			return false;
 
-		return false;
+		SetCurrentTool (t);
+		return true;
 	}
 
 	public bool SetCurrentTool (Gdk.Key shortcut)
 	{
-		if (FindNextTool (shortcut) is BaseTool tool) {
-			SetCurrentTool (tool);
-			return true;
-		}
+		if (FindNextTool (shortcut) is not BaseTool tool)
+			return false;
 
-		return false;
+		SetCurrentTool (tool);
+		return true;
 	}
 
 	private BaseTool? FindNextTool (Gdk.Key shortcut)
 	{
 		// Find all tools with this shortcut
-		var shortcut_tools = tools.Where (t => t.ShortcutKey.ToUpper () == shortcut.ToUpper ()).ToList ();
+		var shortcut_tools =
+			tools
+			.Where (t => t.ShortcutKey.ToUpper () == shortcut.ToUpper ())
+			.ToImmutableArray ();
 
 		// No tools with this shortcut, bail
-		if (shortcut_tools.Count == 0)
+		if (shortcut_tools.Length == 0)
 			return null;
 
 		// Only one option, return it
-		if (shortcut_tools.Count == 1 || CurrentTool is null)
+		if (shortcut_tools.Length == 1 || CurrentTool is null)
 			return shortcut_tools.First ();
 
 		// Get the tool after the currently selected tool
-		var next_index = shortcut_tools.IndexOf (CurrentTool) + 1;
+		int next_index = shortcut_tools.IndexOf (CurrentTool) + 1;
 
 		// Wrap if we're past the final tool
-		if (next_index >= shortcut_tools.Count)
+		if (next_index >= shortcut_tools.Length)
 			next_index = 0;
+
 		return shortcut_tools[next_index];
 	}
 
@@ -278,56 +281,61 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 			CurrentTool?.DoMouseUp (document, args);
 	}
 
-	public bool DoKeyDown (Document document, ToolKeyEventArgs args) => CurrentTool?.DoKeyDown (document, args) ?? false;
-	public bool DoKeyUp (Document document, ToolKeyEventArgs args) => CurrentTool?.DoKeyUp (document, args) ?? false;
+	public bool DoKeyDown (Document document, ToolKeyEventArgs args)
+		=> CurrentTool?.DoKeyDown (document, args) ?? false;
 
-	public void DoAfterSave (Document document) => CurrentTool?.DoAfterSave (document);
-	public Task<bool> DoHandlePaste (Document document, Gdk.Clipboard clipboard) => CurrentTool?.DoHandlePaste (document, clipboard) ?? Task.FromResult (false);
+	public bool DoKeyUp (Document document, ToolKeyEventArgs args)
+		=> CurrentTool?.DoKeyUp (document, args) ?? false;
 
-	public IEnumerator<BaseTool> GetEnumerator () => tools.GetEnumerator ();
+	public void DoAfterSave (Document document)
+		=> CurrentTool?.DoAfterSave (document);
 
-	System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator () => tools.GetEnumerator ();
+	public Task<bool> DoHandlePaste (Document document, Gdk.Clipboard clipboard)
+		=> CurrentTool?.DoHandlePaste (document, clipboard) ?? Task.FromResult (false);
+
+	public IEnumerator<BaseTool> GetEnumerator ()
+		=> tools.GetEnumerator ();
+
+	System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
+		=> tools.GetEnumerator ();
 
 	private bool TryMouseDownPanOverride (Document document, ToolMouseEventArgs args)
 	{
 		if (is_panning)
 			return true;
 
-		if (args.MouseButton == MouseButton.Middle && TryGetPanTool (out var pan)) {
-			is_panning = true;
-			stored_cursor = document.Workspace.Canvas.Cursor;
-			document.Workspace.Canvas.Cursor = pan.DefaultCursor;
-			pan.DoMouseDown (document, args);
-			return true;
-		}
+		if (args.MouseButton != MouseButton.Middle || !TryGetPanTool (out BaseTool? pan))
+			return false;
 
-		return false;
+		is_panning = true;
+		stored_cursor = document.Workspace.Canvas.Cursor;
+		document.Workspace.Canvas.Cursor = pan.DefaultCursor;
+		pan.DoMouseDown (document, args);
+		return true;
 	}
 
 	private bool TryMouseMovePanOverride (Document document, ToolMouseEventArgs args)
 	{
-		if (is_panning && TryGetPanTool (out var pan)) {
-			pan.DoMouseMove (document, args);
-			return true;
-		}
+		if (!is_panning || !TryGetPanTool (out var pan))
+			return false;
 
-		return false;
+		pan.DoMouseMove (document, args);
+		return true;
 	}
 
 	private bool TryMouseUpPanOverride (Document document, ToolMouseEventArgs args)
 	{
-		if (is_panning && TryGetPanTool (out var pan)) {
-			// Ignore any mouse button releases that aren't Middle
-			if (args.MouseButton != MouseButton.Middle)
-				return true;
+		if (!is_panning || !TryGetPanTool (out var pan))
+			return false;
 
-			is_panning = false;
-			pan.DoMouseUp (document, args);
-			document.Workspace.Canvas.Cursor = stored_cursor;
+		// Ignore any mouse button releases that aren't Middle
+		if (args.MouseButton != MouseButton.Middle)
 			return true;
-		}
 
-		return false;
+		is_panning = false;
+		pan.DoMouseUp (document, args);
+		document.Workspace.Canvas.Cursor = stored_cursor;
+		return true;
 	}
 
 	private bool TryGetPanTool ([NotNullWhen (true)] out BaseTool? tool)
@@ -342,15 +350,15 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 		public override int Compare (BaseTool? x, BaseTool? y)
 		{
 			int result = (x?.Priority ?? 0) - (y?.Priority ?? 0);
+
+			if (result != 0)
+				return result;
+
 			// If two tools have the same priority, sort by type name so that both tools can still
 			// be inserted into the set.
-			if (result == 0) {
-				string x_type = x?.GetType ().AssemblyQualifiedName ?? string.Empty;
-				string y_type = y?.GetType ().AssemblyQualifiedName ?? string.Empty;
-				result = x_type.CompareTo (y_type);
-			}
-
-			return result;
+			string x_type = x?.GetType ().AssemblyQualifiedName ?? string.Empty;
+			string y_type = y?.GetType ().AssemblyQualifiedName ?? string.Empty;
+			return x_type.CompareTo (y_type);
 		}
 	}
 
@@ -365,14 +373,15 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 	private Gtk.Separator ToolSeparator => tool_sep ??= GtkExtensions.CreateToolBarSeparator ();
 	private Gtk.Box ToolWidgetsBox => tool_widgets_box ??= Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 	// Scroll the toolbar contents if they are very long (e.g. the line/curve tool).
-	private Gtk.ScrolledWindow ToolWidgetsScroll => tool_widgets_scroll ??= new Gtk.ScrolledWindow () {
-		Child = ToolWidgetsBox,
-		HscrollbarPolicy = Gtk.PolicyType.Automatic,
-		VscrollbarPolicy = Gtk.PolicyType.Never,
-		HasFrame = false,
-		OverlayScrolling = true,
-		WindowPlacement = Gtk.CornerType.BottomRight,
-		Hexpand = true,
-		Halign = Gtk.Align.Fill
-	};
+	private Gtk.ScrolledWindow ToolWidgetsScroll
+		=> tool_widgets_scroll ??= new Gtk.ScrolledWindow () {
+			Child = ToolWidgetsBox,
+			HscrollbarPolicy = Gtk.PolicyType.Automatic,
+			VscrollbarPolicy = Gtk.PolicyType.Never,
+			HasFrame = false,
+			OverlayScrolling = true,
+			WindowPlacement = Gtk.CornerType.BottomRight,
+			Hexpand = true,
+			Halign = Gtk.Align.Fill,
+		};
 }
