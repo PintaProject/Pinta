@@ -26,46 +26,56 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class HistoryListView : ScrolledWindow
+public sealed class HistoryListView : Gtk.ScrolledWindow
 {
-	private readonly ListView view;
 	private readonly Gio.ListStore model;
 	private readonly Gtk.SingleSelection selection_model;
-	private readonly Gtk.SignalListItemFactory factory;
+
 	private Document? active_document;
 
 	public HistoryListView ()
 	{
-		CanFocus = false;
-		SetSizeRequest (200, 200);
-		SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
+		Gio.ListStore listModel = Gio.ListStore.New (HistoryListViewItem.GetGType ());
 
-		model = Gio.ListStore.New (HistoryListViewItem.GetGType ());
+		Gtk.SingleSelection selectionModel = Gtk.SingleSelection.New (listModel);
+		selectionModel.OnSelectionChanged (HandleSelectionChanged);
 
-		selection_model = Gtk.SingleSelection.New (model);
-		selection_model.OnSelectionChanged ((o, args) => HandleSelectionChanged (o, args));
-
-		factory = Gtk.SignalListItemFactory.New ();
-		factory.OnSetup += (factory, args) => {
+		Gtk.SignalListItemFactory signalFactory = Gtk.SignalListItemFactory.New ();
+		signalFactory.OnSetup += (factory, args) => {
 			var item = (Gtk.ListItem) args.Object;
 			item.SetChild (new HistoryItemWidget ());
 		};
-		factory.OnBind += (factory, args) => {
+		signalFactory.OnBind += (factory, args) => {
 			var list_item = (Gtk.ListItem) args.Object;
 			var model_item = (HistoryListViewItem) list_item.GetItem ()!;
 			var widget = (HistoryItemWidget) list_item.GetChild ()!;
 			widget.Update (model_item);
 		};
 
-		view = ListView.New (selection_model, factory);
-		view.CanFocus = false;
+		Gtk.ListView selectionView = Gtk.ListView.New (selectionModel, signalFactory);
+		selectionView.CanFocus = false;
 
-		SetChild (view);
+		// --- Initialization (Gtk.Widget)
+
+		CanFocus = false;
+		SetSizeRequest (200, 200);
+
+		// --- Initialization (Gtk.ScrolledWindow)
+
+		SetPolicy (Gtk.PolicyType.Automatic, Gtk.PolicyType.Automatic);
+		SetChild (selectionView);
+
+		// --- References to keep
+
+		model = listModel;
+		selection_model = selectionModel;
+
+		// --- Event handlers for the application
+		// TODO: Move handlers out of this constructor
 
 		PintaCore.Workspace.ActiveDocumentChanged += OnActiveDocumentChanged;
 	}
@@ -75,15 +85,21 @@ public sealed class HistoryListView : ScrolledWindow
 		ArgumentNullException.ThrowIfNull (active_document);
 
 		int index = (int) selection_model.Selected;
+
 		while (active_document.History.Pointer < index)
 			active_document.History.Redo ();
+
 		while (active_document.History.Pointer > index)
 			active_document.History.Undo ();
 	}
 
 	private void OnActiveDocumentChanged (object? sender, EventArgs e)
 	{
-		var doc = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null;
+		var doc =
+			PintaCore.Workspace.HasOpenDocuments
+			? PintaCore.Workspace.ActiveDocument
+			: null;
+
 		if (active_document == doc)
 			return;
 
@@ -98,19 +114,19 @@ public sealed class HistoryListView : ScrolledWindow
 
 		active_document = doc;
 
-		if (doc is not null) {
-			foreach (BaseHistoryItem item in doc.History.Items) {
-				model.Append (new HistoryListViewItem (item));
-			}
+		if (doc is null)
+			return;
 
-			// Move selection to the document's current history item.
-			if (model.NItems > 0)
-				selection_model.SetSelected ((uint) doc.History.Pointer);
+		foreach (BaseHistoryItem item in doc.History.Items)
+			model.Append (new HistoryListViewItem (item));
 
-			doc.History.HistoryItemAdded += OnHistoryItemAdded;
-			doc.History.ActionUndone += OnUndoOrRedo;
-			doc.History.ActionRedone += OnUndoOrRedo;
-		}
+		// Move selection to the document's current history item.
+		if (model.NItems > 0)
+			selection_model.SetSelected ((uint) doc.History.Pointer);
+
+		doc.History.HistoryItemAdded += OnHistoryItemAdded;
+		doc.History.ActionUndone += OnUndoOrRedo;
+		doc.History.ActionRedone += OnUndoOrRedo;
 	}
 
 	private void OnHistoryItemAdded (object? sender, HistoryItemAddedEventArgs args)
