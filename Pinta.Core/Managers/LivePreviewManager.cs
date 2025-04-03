@@ -69,7 +69,6 @@ public sealed class LivePreviewManager : ILivePreview
 		if (IsEnabled)
 			throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
 
-		// Handle selection path.
 		tools.Commit ();
 
 		Document doc = workspace.ActiveDocument;
