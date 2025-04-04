@@ -6,35 +6,23 @@ namespace Pinta;
 
 public sealed class CanvasGridSettingsDialog : Dialog
 {
-	private readonly CanvasGridManager canvas_grid;
-
-	private readonly bool initial_show_grid;
-	private readonly int initial_grid_width;
-	private readonly int initial_grid_height;
+	internal event EventHandler<Settings>? Updated;
 
 	private readonly CheckButton show_grid_checkbox;
 	private readonly SpinButton grid_width_spinner;
 	private readonly SpinButton grid_height_spinner;
 
-	private const int Spacing = 6;
+	private const int SPACING = 6;
 
-	internal CanvasGridSettingsDialog (
-		ChromeManager chrome,
-		CanvasGridManager canvasGrid)
+	internal CanvasGridSettingsDialog (ChromeManager chrome, Settings initialSettings)
 	{
-		canvas_grid = canvasGrid;
-
-		initial_show_grid = canvas_grid.ShowGrid;
-		initial_grid_width = canvas_grid.CellWidth;
-		initial_grid_height = canvas_grid.CellHeight;
-
-		show_grid_checkbox = CreateShowGridCheckbox (initial_show_grid, SettingsChanged);
-		grid_width_spinner = CreateSpinner (initial_grid_width, SettingsChanged);
-		grid_height_spinner = CreateSpinner (initial_grid_height, SettingsChanged);
+		show_grid_checkbox = CreateShowGridCheckbox (initialSettings.ShowGrid, SettingsChanged);
+		grid_width_spinner = CreateSpinner (initialSettings.CellSize.Width, SettingsChanged);
+		grid_height_spinner = CreateSpinner (initialSettings.CellSize.Height, SettingsChanged);
 
 		Grid grid = new () {
-			RowSpacing = Spacing,
-			ColumnSpacing = Spacing,
+			RowSpacing = SPACING,
+			ColumnSpacing = SPACING,
 			ColumnHomogeneous = false,
 		};
 
@@ -48,7 +36,7 @@ public sealed class CanvasGridSettingsDialog : Dialog
 		grid.Attach (grid_height_spinner, 1, 2, 1, 1);
 		grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 2, 1, 1);
 
-		Box mainVbox = new () { Spacing = Spacing };
+		Box mainVbox = new () { Spacing = SPACING };
 		mainVbox.SetOrientation (Orientation.Vertical);
 		mainVbox.Append (grid);
 
@@ -91,19 +79,15 @@ public sealed class CanvasGridSettingsDialog : Dialog
 
 	private void SettingsChanged (object? sender, EventArgs e)
 	{
-		canvas_grid.ShowGrid = show_grid_checkbox.Active;
-		canvas_grid.CellWidth = grid_width_spinner.GetValueAsInt ();
-		canvas_grid.CellHeight = grid_height_spinner.GetValueAsInt ();
+		Settings newSettings = new (
+			show_grid_checkbox.Active,
+			new (
+				grid_width_spinner.GetValueAsInt (),
+				grid_height_spinner.GetValueAsInt ()));
+
+		Updated?.Invoke (this, newSettings);
 	}
 
-	/// <summary>
-	/// Reverts the changes that the dialog made to the canvas grid.
-	/// </summary>
-	public void RevertChanges ()
-	{
-		canvas_grid.ShowGrid = initial_show_grid;
-		canvas_grid.CellWidth = initial_grid_width;
-		canvas_grid.CellHeight = initial_grid_height;
-	}
+	internal record struct Settings (bool ShowGrid, Size CellSize);
 }
 
