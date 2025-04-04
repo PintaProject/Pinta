@@ -63,7 +63,7 @@ public sealed class CanvasGridSettingsDialog : Dialog
 		Modal = true;
 		IconName = Resources.Icons.ViewGrid;
 
-		// --- Initializaiton (Gtk.Dialog)
+		// --- Initialization (Gtk.Dialog)
 
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (ResponseType.Ok);
