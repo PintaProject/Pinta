@@ -500,8 +500,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		for (int i = 0; i < original_colors.Length; i++) {
 
-			// This, unlike `i`, has a fixed value,
-   			// which is what should be captured by the lambda
+			// This, unlike `i`, has a fixed value
+  			// which is what should be captured by the lambda
 			int idx = i;
 
 			Gtk.DrawingArea display = new ();
