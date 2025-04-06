@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-02 01:39+0000\n"
+"POT-Creation-Date: 2025-04-06 01:45+0000\n"
 "PO-Revision-Date: 2025-03-14 09:36+0000\n"
 "Last-Translator: Janek Ilsen <bananek@ik.me>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/pinta/pinta/de/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Weblate 5.11-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:257
+#: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
 msgstr " (im Benutzerverzeichnis)"
 
@@ -48,7 +48,7 @@ msgstr "7 × 7-Bereich"
 msgid "9 x 9 Region"
 msgstr "9 × 9-Bereich"
 
-#: ../Pinta/MainWindow.cs:367
+#: ../Pinta/MainWindow.cs:387
 msgid "A_dd-ins"
 msgstr "Erweiterungen"
 
@@ -78,7 +78,7 @@ msgstr "Add-In-Manager..."
 msgid "Added"
 msgstr "Hinzugefügt"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:417
 msgid "Adjustments"
 msgstr "Anpassungen"
 
@@ -92,12 +92,12 @@ msgid "Align Object"
 msgstr "Objekt ausrichten"
 
 #: ../Pinta.Core/Actions/EditActions.cs:474
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:287
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:675
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:709
 msgid "Alpha"
 msgstr "Alpha"
 
@@ -113,14 +113,14 @@ msgstr "Alphafarbverlauf"
 msgid "Amount"
 msgstr "Menge"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:121
 msgid "Anchor:"
 msgstr "Ankerpunkt:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:120
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:78
@@ -156,7 +156,7 @@ msgstr "Künstlerisch"
 msgid "Atkinson"
 msgstr "Atkinson"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:238
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:256
 msgid "Auto"
 msgstr "Auto"
 
@@ -168,7 +168,7 @@ msgstr "Automatisch zuschneiden"
 msgid "Auto Level"
 msgstr "Automatische Tonwertkorrektur"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:215
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:227
 #, csharp-format
 msgid "Available in repository: {0}"
 msgstr "Verfügbar im Repository: {0}"
@@ -177,11 +177,11 @@ msgstr "Verfügbar im Repository: {0}"
 msgid "Background"
 msgstr "Hintergrund"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:113
+#: ../Pinta/Dialogs/NewImageDialog.cs:127
 msgid "Background Color"
 msgstr "Hintergrundfarbe"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:309
+#: ../Pinta/Dialogs/NewImageDialog.cs:307
 msgid "Background:"
 msgstr "Hintergrund:"
 
@@ -212,9 +212,9 @@ msgstr "Schwarz/Weiß"
 msgid "Blend Mode"
 msgstr "Mischmodus"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:664
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:699
 msgid "Blue"
 msgstr "Blau"
 
@@ -279,19 +279,19 @@ msgstr "Verbeulen"
 msgid "Burkes"
 msgstr "Burkes"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:101
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:184
 msgid "By absolute size:"
 msgstr "Absolute Werte:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:59
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:67
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
 msgid "By percentage:"
 msgstr "Prozentual:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:411
-#: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:436
+#: ../Pinta.Gui.Addins/InstallDialog.cs:118
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -355,7 +355,7 @@ msgstr "Formtyp ändern"
 msgid "Cherry Blossom"
 msgstr "Kirschblüte"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:610
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:632
 msgid "Choose Color"
 msgstr "Farbe wählen"
 
@@ -421,15 +421,15 @@ msgstr "Nach Farbe auswählen."
 msgid "Click to select secondary color."
 msgstr "Anklicken, um die Hintergrundfarbe festzulegen."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:459
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:277
 msgid "Click to switch between primary and secondary color."
 msgstr "Klicken um zwischen primärer und sekundärer Farbe zu wechseln."
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:419
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:534
+#: ../Pinta/Dialogs/NewImageDialog.cs:358
+#: ../Pinta/Dialogs/NewImageDialog.cs:418
+#: ../Pinta/Dialogs/NewImageDialog.cs:440
+#: ../Pinta/Dialogs/NewImageDialog.cs:533
 msgid "Clipboard"
 msgstr "Zwischenablage"
 
@@ -438,7 +438,7 @@ msgid "Clone Stamp"
 msgstr "Stempel klonen"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
-#: ../Pinta.Gui.Addins/InstallDialog.cs:316
+#: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
 msgstr "Schließen"
 
@@ -498,14 +498,14 @@ msgstr "Farbsättigung"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:170
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 msgid "Color Scheme"
 msgstr "Farbschema"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Color Scheme Source"
 msgstr "Farbschemaquelle"
 
@@ -578,14 +578,14 @@ msgid "Curved"
 msgstr "Gekrümmt"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:134
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:138
 msgid "Curves"
 msgstr "Gradationskurven"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:362
-#: ../Pinta/Dialogs/NewImageDialog.cs:419
-#: ../Pinta/Dialogs/NewImageDialog.cs:443
-#: ../Pinta/Dialogs/NewImageDialog.cs:534
+#: ../Pinta/Dialogs/NewImageDialog.cs:360
+#: ../Pinta/Dialogs/NewImageDialog.cs:418
+#: ../Pinta/Dialogs/NewImageDialog.cs:442
+#: ../Pinta/Dialogs/NewImageDialog.cs:533
 msgid "Custom"
 msgstr "Angepasst"
 
@@ -669,7 +669,7 @@ msgstr "Fehlerdiffusion"
 msgid "Do not switch tool"
 msgstr "Werkzeug nicht wechseln"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:221
 #, csharp-format
 msgid "Download size: {0}"
 msgstr "Downloadgröße: {0}"
@@ -691,11 +691,11 @@ msgstr "Kantenverhalten"
 msgid "Edge Detect"
 msgstr "Kanten erkennen"
 
-#: ../Pinta/MainWindow.cs:363
+#: ../Pinta/MainWindow.cs:383
 msgid "Effe_cts"
 msgstr "Effe_kte"
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:411
 msgid "Effects"
 msgstr "Effekte"
 
@@ -750,12 +750,12 @@ msgstr "Ausschluss (-) (Rechtsklick)"
 msgid "Expand"
 msgstr "Erweitern"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:279
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
 msgstr "Erweiterungspakete"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:153
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:173
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
 msgid "Factor"
 msgstr "Faktor"
 
@@ -763,11 +763,11 @@ msgstr "Faktor"
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Zugriff auf XDG Desktop Portale fehlgeschlagen"
 
-#: ../Pinta/MainWindow.cs:280
+#: ../Pinta/MainWindow.cs:300
 msgid "Failed to initialize add-in"
 msgstr "Add-in konnte nicht initialisiert werden"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:188
+#: ../Pinta.Gui.Addins/InstallDialog.cs:199
 msgid "Failed to load extension package"
 msgstr "Fehler beim Laden des Erweiterungspakets"
 
@@ -913,7 +913,7 @@ msgstr "Gefrorenes Glas"
 msgid "Fullscreen"
 msgstr "Vollbild"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:86
 msgid "Gallery"
 msgstr "Galerie"
 
@@ -935,9 +935,9 @@ msgid "Gradient"
 msgstr "Farbverlauf"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:654
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:690
 msgid "Green"
 msgstr "Grün"
 
@@ -950,13 +950,13 @@ msgid "Hard Light"
 msgstr "Grelles Licht"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
-#: ../Pinta/Dialogs/NewImageDialog.cs:335
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:81
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:164
+#: ../Pinta/Dialogs/NewImageDialog.cs:333
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:91
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
 msgid "Height:"
 msgstr "Höhe:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:579
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:623
 msgid "Hex"
 msgstr "Hex"
 
@@ -970,7 +970,7 @@ msgstr ""
 "Tipp: Beste Ergebnisse erzielt man, wenn zuvor jedes Auge mittels "
 "Auswahlwerkzeugen ausgewählt wurde."
 
-#: ../Pinta/Pads/HistoryPad.cs:45
+#: ../Pinta/Pads/HistoryPad.cs:50
 msgid "History"
 msgstr "Verlauf"
 
@@ -991,11 +991,11 @@ msgstr "Horizontales Rot (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:604
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
 msgid "Hue"
 msgstr "Farbton"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:557
 msgid "Hue & Sat"
 msgstr ""
 
@@ -1011,7 +1011,7 @@ msgstr "ICO-Dateien können nicht größer als 255 × 255 Pixel sein."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Wenn Sie nicht speichern, gehen alle Änderungen dauerhaft verloren."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:403
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:423
 msgid "Image"
 msgstr "Bild"
 
@@ -1060,32 +1060,32 @@ msgstr "Tintenkontur"
 msgid "Ink Sketch"
 msgstr "Tintenskizze"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:253
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Input"
 msgstr "Eingabe"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:252
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:270
 msgid "Input Histogram"
 msgstr "Eingabe-Histogramm"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:114
-#: ../Pinta.Gui.Addins/InstallDialog.cs:236
+#: ../Pinta.Gui.Addins/InstallDialog.cs:121
+#: ../Pinta.Gui.Addins/InstallDialog.cs:247
 msgid "Install"
 msgstr "Installieren"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
 msgstr "Installiere das Erweiterungspaket"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:112
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
 msgid "Install from file..."
 msgstr "Aus Datei installieren …"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:155
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:167
 msgid "Install..."
 msgstr "Installieren …"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:89
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:87
 msgid "Installed"
 msgstr "Installiert"
 
@@ -1102,7 +1102,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Schneiden ({0} + Linksklick)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
 msgid "Invert Colors"
 msgstr "Farben umkehren"
 
@@ -1115,7 +1115,7 @@ msgstr "Auswahl umkehren"
 msgid "Italic"
 msgstr "Kursiv"
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:37
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "JPEG Quality"
 msgstr "JPEG-Qualität"
 
@@ -1128,7 +1128,7 @@ msgstr "Jarvis-Judice-Ninke"
 msgid "Julia Fractal"
 msgstr "Julia-Fraktal"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:302
+#: ../Pinta/Dialogs/NewImageDialog.cs:300
 msgid "Landscape"
 msgstr "Querformat"
 
@@ -1167,7 +1167,7 @@ msgstr "Ebene wird angezeigt"
 msgid "Layer {0}"
 msgstr "Ebene {0}"
 
-#: ../Pinta/Pads/LayersPad.cs:45
+#: ../Pinta/Pads/LayersPad.cs:49
 msgid "Layers"
 msgstr "Ebenen"
 
@@ -1343,7 +1343,7 @@ msgstr "Länge"
 msgid "Levels"
 msgstr "Tonwertkorrektur"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:224
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:242
 msgid "Levels Adjustment"
 msgstr "Ebenenabgleich"
 
@@ -1389,12 +1389,12 @@ msgstr "Linearer Verlauf"
 msgid "Linear Reflected Gradient"
 msgstr "Linearer gespiegelter Verlauf"
 
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:77
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:83
 msgid "Linked"
 msgstr "Verknüpft"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:173
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
 msgstr "Leuchtkraft"
 
@@ -1402,12 +1402,12 @@ msgstr "Leuchtkraft"
 msgid "Magic Wand Select"
 msgstr "Zauberstab"
 
-#: ../Pinta/MainWindow.cs:385
+#: ../Pinta/MainWindow.cs:405
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:105
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:123
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:115
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Maintain aspect ratio"
 msgstr "Seitenverhältnis beibehalten"
 
@@ -1437,7 +1437,7 @@ msgstr "Modus"
 msgid "Modified"
 msgstr "Geändert"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:147
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:159
 msgid "More Information..."
 msgstr "Mehr Informationen..."
 
@@ -1480,7 +1480,7 @@ msgid "New"
 msgstr "Neu"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:154
-#: ../Pinta/Dialogs/NewImageDialog.cs:197
+#: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "Neues Bild"
 
@@ -1532,7 +1532,7 @@ msgstr "Anzahl der Zellen"
 msgid "Number of threads to use for rendering"
 msgstr "Anzahl der für das Rendering zu verwendenden Threads"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:432
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:453
 msgid "OK"
 msgstr ""
 
@@ -1594,7 +1594,7 @@ msgstr "Farbpalette öffnen"
 msgid "Open..."
 msgstr "Öffnen …"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:318
+#: ../Pinta/Dialogs/NewImageDialog.cs:316
 msgid "Orientation:"
 msgstr "Ausrichtung:"
 
@@ -1627,11 +1627,11 @@ msgstr "Nur Umrandung"
 msgid "Outline width"
 msgstr "Konturbreite"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:254
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
 msgid "Output"
 msgstr "Ausgabe"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:255
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
 msgid "Output Histogram"
 msgstr "Ausgabe-Histogramm"
 
@@ -1705,7 +1705,7 @@ msgid "Photo"
 msgstr "Foto"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:56
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1779,7 +1779,7 @@ msgstr "Punkt gelöscht"
 msgid "Polar Inversion"
 msgstr "Polare Umkehrung"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:298
+#: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
 msgstr "Hochformat"
 
@@ -1805,11 +1805,11 @@ msgstr "Beibehalten"
 msgid "Preset Gradient"
 msgstr "Voreingestellter Farbverlauf"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:343
+#: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
 msgstr "Voreinstellung:"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:161
+#: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
 msgstr "Vorschau"
 
@@ -1822,15 +1822,15 @@ msgid "Print"
 msgstr "Drucken"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:153
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:179
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:273
 msgid "Quality"
 msgstr "Qualität"
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:56
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:37
 msgid "Quality: "
 msgstr "Qualität: "
 
@@ -1838,7 +1838,7 @@ msgstr "Qualität: "
 msgid "Quit"
 msgstr "Beenden"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:172
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:176
 msgid "RGB"
 msgstr "RGB"
 
@@ -1873,8 +1873,8 @@ msgid "Random"
 msgstr "Zufällig"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 msgid "Random Color Scheme Seed"
 msgstr "Seed für zufälliges Farbschema"
 
@@ -1904,9 +1904,9 @@ msgstr "Rechteck"
 msgid "Rectangle Select"
 msgstr "Rechteckige Auswahl"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:102
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:681
 msgid "Red"
 msgstr "Rot"
 
@@ -1930,7 +1930,7 @@ msgstr "Rauschen verringern"
 msgid "Reflect"
 msgstr "Spiegeln"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:104
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
 msgstr "Aktualisieren"
 
@@ -1965,7 +1965,7 @@ msgstr "Ersetzen"
 msgid "Report Bug..."
 msgstr "Fehler melden..."
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:73
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:89
 msgid "Resampling:"
 msgstr "Abtastratenkonvertierung:"
 
@@ -1973,12 +1973,12 @@ msgstr "Abtastratenkonvertierung:"
 msgid "Reseed"
 msgstr "Neu erzeugen"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:207
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:241
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:259
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:408
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Reset Color"
 msgstr "Farbe zurücksetzen"
 
@@ -1987,7 +1987,7 @@ msgid "Reset to Default"
 msgstr "Vorgaben wiederherstellen"
 
 #: ../Pinta.Core/Classes/Document.cs:326
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:181
 msgid "Resize Canvas"
 msgstr "Größe der Zeichenfläche ändern"
 
@@ -1996,7 +1996,7 @@ msgid "Resize Canvas..."
 msgstr "Größe der Zeichenfläche ändern …"
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:84
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:102
 msgid "Resize Image"
 msgstr "Bildgröße ändern"
 
@@ -2009,8 +2009,8 @@ msgid "Resize Palette"
 msgstr "Neue Palettengröße festlegen"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 msgid "Reverse Color Scheme"
 msgstr "Farbschema umkehren"
 
@@ -2076,11 +2076,11 @@ msgstr "Lineale"
 msgid "Sampling"
 msgstr "Abtastgröße"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:621
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Sat"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:525
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:568
 msgid "Sat & Value"
 msgstr ""
 
@@ -2163,7 +2163,7 @@ msgid "Sharpen"
 msgstr "Schärfen"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:487
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
 msgid "Shortcut key"
 msgstr "Tastenkürzel"
@@ -2176,7 +2176,7 @@ msgstr ""
 msgid "Show Layer"
 msgstr "Ebene anzeigen"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:509
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:550
 msgid "Show Value"
 msgstr ""
 
@@ -2268,7 +2268,7 @@ msgid "Text Style"
 msgstr "Textstil"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:277
+#: ../Pinta/MainWindow.cs:297
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
@@ -2279,25 +2279,25 @@ msgstr ""
 msgid "The clipboard does not contain an image."
 msgstr "Die Zwischenablage enthält kein Bild."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:189
+#: ../Pinta.Gui.Addins/InstallDialog.cs:200
 msgid "The file may be an invalid or corrupt extension package"
 msgstr ""
 "Die Datei ist möglicherweise ein ungültiges oder beschädigtes "
 "Erweiterungspaket"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:74
+#: ../Pinta.Gui.Addins/InstallDialog.cs:79
 msgid "The following dependencies could not be resolved:"
 msgstr "Die folgenden Abhängigkeiten konnten nicht erfüllt werden:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:67
+#: ../Pinta.Gui.Addins/InstallDialog.cs:72
 msgid "The following packages need to be uninstalled:"
 msgstr "Die folgenden Pakete müssen entfernt werden:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:61
+#: ../Pinta.Gui.Addins/InstallDialog.cs:66
 msgid "The following packages will be installed:"
 msgstr "Die folgenden Pakete werden installiert:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:218
+#: ../Pinta.Gui.Addins/InstallDialog.cs:229
 msgid "The following packages will be uninstalled:"
 msgstr "Die folgenden Pakete werden entfernt:"
 
@@ -2309,15 +2309,15 @@ msgstr ""
 "Das eingefügte Bild ist größer als die Leinwand. Was möchten Sie mit der "
 "Leinwandgröße machen?"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:341
+#: ../Pinta.Gui.Addins/InstallDialog.cs:352
 msgid "The installation failed!"
 msgstr "Die Installation ist gescheitert!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:342
+#: ../Pinta.Gui.Addins/InstallDialog.cs:353
 msgid "The installation has completed with warnings."
 msgstr "Die Installation wurde mit Warnungen abgeschlossen."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:47
+#: ../Pinta.Gui.Addins/InstallDialog.cs:52
 msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
@@ -2325,15 +2325,15 @@ msgstr ""
 "Die ausgewählten Erweiterungspakete können nicht installiert werden, da es "
 "Abhängigkeitskonflikte gibt."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:348
+#: ../Pinta.Gui.Addins/InstallDialog.cs:359
 msgid "The uninstallation failed!"
 msgstr "Die Deinstallation ist gescheitert!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:349
+#: ../Pinta.Gui.Addins/InstallDialog.cs:360
 msgid "The uninstallation has completed with warnings."
 msgstr "Die Deinstallation wurde mit Warnungen abgeschlossen."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:230
+#: ../Pinta.Gui.Addins/InstallDialog.cs:241
 msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
@@ -2373,7 +2373,7 @@ msgstr "Tipp: Rechtsklick zum Entfernen von Steuerpunkten."
 msgid "Tolerance"
 msgstr "Fehlergrenze"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:363
+#: ../Pinta.Core/Managers/ToolManager.cs:371
 msgid "Tool"
 msgstr "Werkzeug"
 
@@ -2401,7 +2401,7 @@ msgstr ""
 msgid "Top Right"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:103
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
 msgstr "Karte übertragen"
 
@@ -2414,7 +2414,7 @@ msgid "Transparency Mode"
 msgstr "Transparentmodus"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
-#: ../Pinta/Dialogs/NewImageDialog.cs:121
+#: ../Pinta/Dialogs/NewImageDialog.cs:137
 msgid "Transparent"
 msgstr "Durchsichtig"
 
@@ -2448,12 +2448,12 @@ msgstr "Rückgängig"
 msgid "Unfocus"
 msgstr "Defokussieren"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:205
-#: ../Pinta.Gui.Addins/InstallDialog.cs:206
+#: ../Pinta.Gui.Addins/InstallDialog.cs:216
+#: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid "Uninstall"
 msgstr "Deinstallieren"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:173
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:185
 msgid "Uninstall..."
 msgstr "Deinstallieren..."
 
@@ -2476,11 +2476,11 @@ msgstr "Nicht unterstütztes Dateiformat"
 msgid "Unsupported palette format"
 msgstr "Nicht unterstütztes Palettenformat"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:164
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
 msgstr "Aktualisere..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:90
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
 msgstr "Aktualisierungen"
 
@@ -2497,11 +2497,11 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Einige Symbole benutzt von:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:631
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:670
 msgid "Value"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:202
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
 msgid "Version: {0}"
 msgstr "Version: {0}"
@@ -2538,14 +2538,14 @@ msgstr "Voronoi-Diagramm"
 msgid "Warmth"
 msgstr "Wärme"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:106
+#: ../Pinta/Dialogs/NewImageDialog.cs:118
 msgid "White"
 msgstr "Weiß"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
-#: ../Pinta/Dialogs/NewImageDialog.cs:327
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:73
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:157
+#: ../Pinta/Dialogs/NewImageDialog.cs:325
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:83
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:163
 msgid "Width:"
 msgstr "Breite:"
 
@@ -2585,8 +2585,8 @@ msgstr ""
 "Sie haben keine Berechtigung um \"{0}\" zu bearbeiten. Die Datei oder der "
 "Ordner könnten schreibgeschützt sein."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:179
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
@@ -2608,12 +2608,12 @@ msgstr "Verkleinern"
 msgid "Zoom to Selection"
 msgstr "Größe an Auswahl anpassen"
 
-#: ../Pinta/MainWindow.cs:359
+#: ../Pinta/MainWindow.cs:379
 msgid "_Adjustments"
 msgstr "A_npassungen"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:157
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:159
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:189
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:191
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
@@ -2625,29 +2625,29 @@ msgstr "_Abbrechen"
 msgid "_Discard"
 msgstr "_Verwerfen"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:362
 msgid "_Edit"
 msgstr "Bearbeite_n"
 
-#: ../Pinta/MainWindow.cs:338
+#: ../Pinta/MainWindow.cs:358
 msgid "_File"
 msgstr "_Datei"
 
-#: ../Pinta/MainWindow.cs:375
+#: ../Pinta/MainWindow.cs:395
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: ../Pinta/MainWindow.cs:351
+#: ../Pinta/MainWindow.cs:371
 msgid "_Image"
 msgstr "_Bild"
 
-#: ../Pinta/MainWindow.cs:355
+#: ../Pinta/MainWindow.cs:375
 msgid "_Layers"
 msgstr "_Ebenen"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:156
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:160
-#: ../Pinta.Gui.Addins/InstallDialog.cs:193 ../Pinta/Dialogs/ErrorDialog.cs:44
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:188
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:192
+#: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
 msgstr "_Bestätigen"
@@ -2656,11 +2656,11 @@ msgstr "_Bestätigen"
 msgid "_Save"
 msgstr "_Speichern"
 
-#: ../Pinta/MainWindow.cs:346
+#: ../Pinta/MainWindow.cs:366
 msgid "_View"
 msgstr "_Ansicht"
 
-#: ../Pinta/MainWindow.cs:371
+#: ../Pinta/MainWindow.cs:391
 msgid "_Window"
 msgstr "_Fenster"
 
@@ -2674,11 +2674,11 @@ msgstr "zeichnen;zeichnen;zeichnen;malen;malen;Grafik;Raster;2d;"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
-#: ../Pinta/Dialogs/NewImageDialog.cs:279
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:96
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:68
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:71
+#: ../Pinta/Dialogs/NewImageDialog.cs:277
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:106
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:84
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:87
 msgid "pixels"
 msgstr "Pixel"
 

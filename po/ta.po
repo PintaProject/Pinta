@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-02 01:39+0000\n"
+"POT-Creation-Date: 2025-04-06 01:45+0000\n"
 "PO-Revision-Date: 2025-01-28 10:02+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/pinta/pinta/ta/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.10-dev\n"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:257
+#: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
 msgstr " (பயனர் கோப்பகத்தில்)"
 
@@ -47,7 +47,7 @@ msgstr "7 ஃச் 7 பகுதி"
 msgid "9 x 9 Region"
 msgstr "9 ஃச் 9 Region"
 
-#: ../Pinta/MainWindow.cs:367
+#: ../Pinta/MainWindow.cs:387
 msgid "A_dd-ins"
 msgstr "A_dd-ins"
 
@@ -77,7 +77,7 @@ msgstr "சேர்க்கை மேலாளர் ..."
 msgid "Added"
 msgstr "சேர்க்கப்பட்டது"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:417
 msgid "Adjustments"
 msgstr "சரிசெய்தல்"
 
@@ -91,12 +91,12 @@ msgid "Align Object"
 msgstr "பொருளை சீரமைக்கவும்"
 
 #: ../Pinta.Core/Actions/EditActions.cs:474
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:287
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "அனைத்து கோப்புகள்"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:675
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:709
 msgid "Alpha"
 msgstr "அகர"
 
@@ -112,14 +112,14 @@ msgstr "ஆல்பா சாய்வு"
 msgid "Amount"
 msgstr "தொகை"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:121
 msgid "Anchor:"
 msgstr "நங்கூரம்:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:120
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:78
@@ -155,7 +155,7 @@ msgstr "கலை"
 msgid "Atkinson"
 msgstr "அட்கின்சன்"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:238
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:256
 msgid "Auto"
 msgstr "தானி"
 
@@ -167,7 +167,7 @@ msgstr "வாகன பயிர்"
 msgid "Auto Level"
 msgstr "வாகன நிலை"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:215
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:227
 #, csharp-format
 msgid "Available in repository: {0}"
 msgstr "களஞ்சியத்தில் கிடைக்கிறது: {0}"
@@ -176,11 +176,11 @@ msgstr "களஞ்சியத்தில் கிடைக்கிறத�
 msgid "Background"
 msgstr "பின்னணி"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:113
+#: ../Pinta/Dialogs/NewImageDialog.cs:127
 msgid "Background Color"
 msgstr "பின்னணி நிறம்"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:309
+#: ../Pinta/Dialogs/NewImageDialog.cs:307
 msgid "Background:"
 msgstr "பின்னணி:"
 
@@ -211,9 +211,9 @@ msgstr "கருப்பு மற்றும் வெள்ளை"
 msgid "Blend Mode"
 msgstr "கலப்பு பயன்முறை"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:664
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:699
 msgid "Blue"
 msgstr "நீலம்"
 
@@ -278,19 +278,19 @@ msgstr "வீக்கம்"
 msgid "Burkes"
 msgstr "பர்கேச்"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:101
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:184
 msgid "By absolute size:"
 msgstr "முழுமையான அளவு மூலம்:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:59
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:67
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
 msgid "By percentage:"
 msgstr "விழுக்காடு மூலம்:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:411
-#: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:436
+#: ../Pinta.Gui.Addins/InstallDialog.cs:118
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "ரத்துசெய்"
@@ -354,7 +354,7 @@ msgstr "மாற்றப்பட்ட வடிவ வகை"
 msgid "Cherry Blossom"
 msgstr "செர்ரி மலரும்"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:610
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:632
 msgid "Choose Color"
 msgstr "வண்ணத்தைத் தேர்வுசெய்க"
 
@@ -418,15 +418,15 @@ msgstr "ஒத்த வண்ணத்தின் பகுதியைத் 
 msgid "Click to select secondary color."
 msgstr "இரண்டாம் நிலை வண்ணத்தைத் தேர்ந்தெடுக்க சொடுக்கு செய்க."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:459
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:277
 msgid "Click to switch between primary and secondary color."
 msgstr "முதன்மை மற்றும் இரண்டாம் நிலை வண்ணத்திற்கு இடையில் மாற சொடுக்கு செய்க."
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:419
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:534
+#: ../Pinta/Dialogs/NewImageDialog.cs:358
+#: ../Pinta/Dialogs/NewImageDialog.cs:418
+#: ../Pinta/Dialogs/NewImageDialog.cs:440
+#: ../Pinta/Dialogs/NewImageDialog.cs:533
 msgid "Clipboard"
 msgstr "இடைநிலைப் பலகை"
 
@@ -435,7 +435,7 @@ msgid "Clone Stamp"
 msgstr "நகலி முத்திரை"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
-#: ../Pinta.Gui.Addins/InstallDialog.cs:316
+#: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
 msgstr "மூடு"
 
@@ -495,14 +495,14 @@ msgstr "வண்ண செறிவு"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:170
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 msgid "Color Scheme"
 msgstr "வண்ணத் திட்டம்"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Color Scheme Source"
 msgstr "வண்ண திட்ட சான்று"
 
@@ -575,14 +575,14 @@ msgid "Curved"
 msgstr "வளைந்த"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:134
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:138
 msgid "Curves"
 msgstr "வளைவுகள்"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:362
-#: ../Pinta/Dialogs/NewImageDialog.cs:419
-#: ../Pinta/Dialogs/NewImageDialog.cs:443
-#: ../Pinta/Dialogs/NewImageDialog.cs:534
+#: ../Pinta/Dialogs/NewImageDialog.cs:360
+#: ../Pinta/Dialogs/NewImageDialog.cs:418
+#: ../Pinta/Dialogs/NewImageDialog.cs:442
+#: ../Pinta/Dialogs/NewImageDialog.cs:533
 msgid "Custom"
 msgstr "தனிப்பயன்"
 
@@ -666,7 +666,7 @@ msgstr "Ditering"
 msgid "Do not switch tool"
 msgstr "கருவியை மாற்ற வேண்டாம்"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:221
 #, csharp-format
 msgid "Download size: {0}"
 msgstr "பதிவிறக்க அளவு: {0}"
@@ -688,11 +688,11 @@ msgstr "விளிம்பு நடத்தை"
 msgid "Edge Detect"
 msgstr "விளிம்பு கண்டறிதல்"
 
-#: ../Pinta/MainWindow.cs:363
+#: ../Pinta/MainWindow.cs:383
 msgid "Effe_cts"
 msgstr "Effe_cts"
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:411
 msgid "Effects"
 msgstr "விளைவுகள்"
 
@@ -745,12 +745,12 @@ msgstr "விலக்கு (-) (வலது கிளிக்)"
 msgid "Expand"
 msgstr "விரிவாக்கு"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:279
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
 msgstr "விரிவாக்க தொகுப்புகள்"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:153
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:173
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
 msgid "Factor"
 msgstr "காரணி"
 
@@ -758,11 +758,11 @@ msgstr "காரணி"
 msgid "Failed to access XDG Desktop Portals"
 msgstr "எக்ச்டிசி டெச்க்டாப் போர்ட்டல்களை அணுகுவதில் தோல்வி"
 
-#: ../Pinta/MainWindow.cs:280
+#: ../Pinta/MainWindow.cs:300
 msgid "Failed to initialize add-in"
 msgstr "கூடுதல் தொடங்குவதில் தோல்வி"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:188
+#: ../Pinta.Gui.Addins/InstallDialog.cs:199
 msgid "Failed to load extension package"
 msgstr "நீட்டிப்பு தொகுப்பை ஏற்றுவதில் தோல்வி"
 
@@ -906,7 +906,7 @@ msgstr "உறைந்த கண்ணாடி"
 msgid "Fullscreen"
 msgstr "முழு திரை"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:86
 msgid "Gallery"
 msgstr "கேலரி"
 
@@ -928,9 +928,9 @@ msgid "Gradient"
 msgstr "சரிவு"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:654
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:690
 msgid "Green"
 msgstr "பச்சை"
 
@@ -943,13 +943,13 @@ msgid "Hard Light"
 msgstr "கடினமான ஒளி"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
-#: ../Pinta/Dialogs/NewImageDialog.cs:335
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:81
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:164
+#: ../Pinta/Dialogs/NewImageDialog.cs:333
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:91
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
 msgid "Height:"
 msgstr "உயரம்:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:579
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:623
 msgid "Hex"
 msgstr "ஃச்"
 
@@ -963,7 +963,7 @@ msgstr ""
 "குறிப்பு: சிறந்த முடிவுகளுக்கு, ஒவ்வொரு கண்ணையும் தேர்ந்தெடுக்க முதலில் தேர்வு "
 "கருவிகளைப் பயன்படுத்தவும்."
 
-#: ../Pinta/Pads/HistoryPad.cs:45
+#: ../Pinta/Pads/HistoryPad.cs:50
 msgid "History"
 msgstr "வரலாறு"
 
@@ -984,11 +984,11 @@ msgstr "கிடைமட்ட சிவப்பு ("
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:604
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
 msgid "Hue"
 msgstr "வண்ணச்சாயல்"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:557
 msgid "Hue & Sat"
 msgstr "சாயல் மற்றும் காரி"
 
@@ -1004,7 +1004,7 @@ msgstr "ஐ.சி.ஓ கோப்புகள் 255 ஃச் 255 பிக�
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "நீங்கள் சேமிக்கவில்லை என்றால், எல்லா மாற்றங்களும் நிரந்தரமாக இழக்கப்படும்."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:403
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:423
 msgid "Image"
 msgstr "படம்"
 
@@ -1053,32 +1053,32 @@ msgstr "மை அவுட்லைன்"
 msgid "Ink Sketch"
 msgstr "மை ச்கெட்ச்"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:253
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Input"
 msgstr "உள்ளீடு"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:252
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:270
 msgid "Input Histogram"
 msgstr "உள்ளீட்டு இச்டோகிராம்"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:114
-#: ../Pinta.Gui.Addins/InstallDialog.cs:236
+#: ../Pinta.Gui.Addins/InstallDialog.cs:121
+#: ../Pinta.Gui.Addins/InstallDialog.cs:247
 msgid "Install"
 msgstr "நிறுவவும்"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
 msgstr "நீட்டிப்பு தொகுப்பை நிறுவவும்"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:112
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
 msgid "Install from file..."
 msgstr "கோப்பிலிருந்து நிறுவவும் ..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:155
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:167
 msgid "Install..."
 msgstr "நிறுவு ..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:89
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:87
 msgid "Installed"
 msgstr "நிறுவப்பட்டது"
 
@@ -1095,7 +1095,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "குறுக்குவெட்டு ({0} + இடது கிளிக்)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
 msgid "Invert Colors"
 msgstr "வண்ணங்களை தலைகீழ்"
 
@@ -1108,7 +1108,7 @@ msgstr "தலைகீழ் தேர்வு"
 msgid "Italic"
 msgstr "சாய்வு"
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:37
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "JPEG Quality"
 msgstr "JPEG தகுதி"
 
@@ -1121,7 +1121,7 @@ msgstr "சார்விச்-சூனிச் மடிந்தது"
 msgid "Julia Fractal"
 msgstr "சூலியா ஃப்ராக்டல்"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:302
+#: ../Pinta/Dialogs/NewImageDialog.cs:300
 msgid "Landscape"
 msgstr "நிலப்பரப்பு"
 
@@ -1160,7 +1160,7 @@ msgstr "அடுக்கு காட்டப்பட்டுள்ளத�
 msgid "Layer {0}"
 msgstr "அடுக்கு {0}"
 
-#: ../Pinta/Pads/LayersPad.cs:45
+#: ../Pinta/Pads/LayersPad.cs:49
 msgid "Layers"
 msgstr "அடுக்குகள்"
 
@@ -1319,7 +1319,7 @@ msgstr "நீளம்"
 msgid "Levels"
 msgstr "நிலைகள்"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:224
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:242
 msgid "Levels Adjustment"
 msgstr "நிலைகள் சரிசெய்தல்"
 
@@ -1365,12 +1365,12 @@ msgstr "நேரியல் சாய்வு"
 msgid "Linear Reflected Gradient"
 msgstr "நேரியல் பிரதிபலித்த சாய்வு"
 
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:77
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:83
 msgid "Linked"
 msgstr "இணைக்கப்பட்ட"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:173
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
 msgstr "ஒளிர்வு"
 
@@ -1378,12 +1378,12 @@ msgstr "ஒளிர்வு"
 msgid "Magic Wand Select"
 msgstr "மேசிக் வாண்ட் தேர்ந்தெடுக்கவும்"
 
-#: ../Pinta/MainWindow.cs:385
+#: ../Pinta/MainWindow.cs:405
 msgid "Main Menu"
 msgstr "பட்டியல் விளையாடுங்கள்"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:105
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:123
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:115
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Maintain aspect ratio"
 msgstr "விகித விகிதத்தை பராமரிக்கவும்"
 
@@ -1413,7 +1413,7 @@ msgstr "பயன்முறை"
 msgid "Modified"
 msgstr "மாற்றியமைக்கப்பட்ட"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:147
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:159
 msgid "More Information..."
 msgstr "மேலும் செய்தி ..."
 
@@ -1456,7 +1456,7 @@ msgid "New"
 msgstr "புதிய"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:154
-#: ../Pinta/Dialogs/NewImageDialog.cs:197
+#: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "புதிய படம்"
 
@@ -1508,7 +1508,7 @@ msgstr "கலங்களின் எண்ணிக்கை"
 msgid "Number of threads to use for rendering"
 msgstr "ரெண்டரிங்கிற்கு பயன்படுத்த நூல்களின் எண்ணிக்கை"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:432
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:453
 msgid "OK"
 msgstr "சரி"
 
@@ -1570,7 +1570,7 @@ msgstr "திறந்த தட்டு கோப்பு"
 msgid "Open..."
 msgstr "திறந்த ..."
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:318
+#: ../Pinta/Dialogs/NewImageDialog.cs:316
 msgid "Orientation:"
 msgstr "நோக்குநிலை:"
 
@@ -1603,11 +1603,11 @@ msgstr "அவுட்லைன் வடிவம்"
 msgid "Outline width"
 msgstr "அவுட்லைன் அகலம்"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:254
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
 msgid "Output"
 msgstr "வெளியீடு"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:255
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
 msgid "Output Histogram"
 msgstr "வெளியீட்டு இச்டோகிராம்"
 
@@ -1681,7 +1681,7 @@ msgid "Photo"
 msgstr "புகைப்படம்"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:56
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
 msgid "Pinta"
 msgstr "மேற்பரப்பு"
 
@@ -1753,7 +1753,7 @@ msgstr "புள்ளி நீக்கப்பட்டது"
 msgid "Polar Inversion"
 msgstr "துருவ தலைகீழ்"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:298
+#: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
 msgstr "உருவப்படம்"
 
@@ -1779,11 +1779,11 @@ msgstr "பாதுகாக்கவும்"
 msgid "Preset Gradient"
 msgstr "முன்னமைக்கப்பட்ட சாய்வு"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:343
+#: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
 msgstr "முன்னமைவு:"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:161
+#: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
 msgstr "முன்னோட்டம்"
 
@@ -1796,15 +1796,15 @@ msgid "Print"
 msgstr "அச்சிடுக"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:153
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:179
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:273
 msgid "Quality"
 msgstr "தகுதி"
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:56
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:37
 msgid "Quality: "
 msgstr "தரம்: "
 
@@ -1812,7 +1812,7 @@ msgstr "தரம்: "
 msgid "Quit"
 msgstr "வெளியேறு"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:172
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:176
 msgid "RGB"
 msgstr "ஆர்சிபி"
 
@@ -1847,8 +1847,8 @@ msgid "Random"
 msgstr "சீரற்ற"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 msgid "Random Color Scheme Seed"
 msgstr "சீரற்ற வண்ணத் திட்ட விதை"
 
@@ -1878,9 +1878,9 @@ msgstr "செவ்வகம்"
 msgid "Rectangle Select"
 msgstr "செவ்வகம் தேர்ந்தெடுக்கவும்"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:102
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:681
 msgid "Red"
 msgstr "சிவப்பு"
 
@@ -1904,7 +1904,7 @@ msgstr "சத்தத்தைக் குறைக்கவும்"
 msgid "Reflect"
 msgstr "பிரதிபலிக்கவும்"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:104
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
 msgstr "புதுப்பிப்பு"
 
@@ -1939,7 +1939,7 @@ msgstr "மாற்றவும்"
 msgid "Report Bug..."
 msgstr "பிழையைப் புகாரளிக்கவும் ..."
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:73
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:89
 msgid "Resampling:"
 msgstr "மறுசீரமைத்தல்:"
 
@@ -1947,12 +1947,12 @@ msgstr "மறுசீரமைத்தல்:"
 msgid "Reseed"
 msgstr "ஒத்திருக்கிறது"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:207
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:241
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:259
 msgid "Reset"
 msgstr "மீட்டமை"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:408
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Reset Color"
 msgstr "வண்ணத்தை மீட்டமை"
 
@@ -1961,7 +1961,7 @@ msgid "Reset to Default"
 msgstr "இயல்புநிலைக்கு மீட்டமைக்கவும்"
 
 #: ../Pinta.Core/Classes/Document.cs:326
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:181
 msgid "Resize Canvas"
 msgstr "கேன்வாசை மறுஅளவிடுங்கள்"
 
@@ -1970,7 +1970,7 @@ msgid "Resize Canvas..."
 msgstr "கேன்வாசை மறுஅளவிடுங்கள் ..."
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:84
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:102
 msgid "Resize Image"
 msgstr "படத்தை மறுஅளவிடுங்கள்"
 
@@ -1983,8 +1983,8 @@ msgid "Resize Palette"
 msgstr "மறுஅளவிடுதல் தட்டு"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 msgid "Reverse Color Scheme"
 msgstr "தலைகீழ் வண்ணத் திட்டம்"
 
@@ -2050,11 +2050,11 @@ msgstr "ஆட்சியாளர்கள்"
 msgid "Sampling"
 msgstr "மாதிரி எடுத்தல்"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:621
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Sat"
 msgstr "காரி"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:525
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:568
 msgid "Sat & Value"
 msgstr "காரி & மதிப்பு"
 
@@ -2137,7 +2137,7 @@ msgid "Sharpen"
 msgstr "கூர்மைப்படுத்துங்கள்"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:487
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
 msgid "Shortcut key"
 msgstr "குறுக்குவழி விசை"
@@ -2150,7 +2150,7 @@ msgstr "கட்டத்தைக் காட்டு"
 msgid "Show Layer"
 msgstr "அடுக்கு காட்டு"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:509
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:550
 msgid "Show Value"
 msgstr "மதிப்பைக் காட்டு"
 
@@ -2242,7 +2242,7 @@ msgid "Text Style"
 msgstr "உரை நடை"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:277
+#: ../Pinta/MainWindow.cs:297
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "பிண்டாவின் இந்த பதிப்போடு '{0}' சேர்க்கை பொருந்தாது"
@@ -2251,23 +2251,23 @@ msgstr "பிண்டாவின் இந்த பதிப்போடு 
 msgid "The clipboard does not contain an image."
 msgstr "கிளிப்போர்டில் ஒரு படம் இல்லை."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:189
+#: ../Pinta.Gui.Addins/InstallDialog.cs:200
 msgid "The file may be an invalid or corrupt extension package"
 msgstr "கோப்பு தவறான அல்லது ஊழல் நீட்டிப்பு தொகுப்பாக இருக்கலாம்"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:74
+#: ../Pinta.Gui.Addins/InstallDialog.cs:79
 msgid "The following dependencies could not be resolved:"
 msgstr "பின்வரும் சார்புகளை தீர்க்க முடியவில்லை:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:67
+#: ../Pinta.Gui.Addins/InstallDialog.cs:72
 msgid "The following packages need to be uninstalled:"
 msgstr "பின்வரும் தொகுப்புகளை நிறுவல் நீக்க வேண்டும்:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:61
+#: ../Pinta.Gui.Addins/InstallDialog.cs:66
 msgid "The following packages will be installed:"
 msgstr "பின்வரும் தொகுப்புகள் நிறுவப்படும்:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:218
+#: ../Pinta.Gui.Addins/InstallDialog.cs:229
 msgid "The following packages will be uninstalled:"
 msgstr "பின்வரும் தொகுப்புகள் நிறுவல் நீக்கப்படும்:"
 
@@ -2278,30 +2278,30 @@ msgid ""
 msgstr ""
 "ஒட்டப்படும் படம் கேன்வாசை விட பெரியது. கேன்வாச் அளவிற்கு நீங்கள் என்ன செய்ய விரும்புகிறீர்கள்?"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:341
+#: ../Pinta.Gui.Addins/InstallDialog.cs:352
 msgid "The installation failed!"
 msgstr "நிறுவல் தோல்வியடைந்தது!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:342
+#: ../Pinta.Gui.Addins/InstallDialog.cs:353
 msgid "The installation has completed with warnings."
 msgstr "நிறுவல் எச்சரிக்கைகளுடன் முடிக்கப்பட்டுள்ளது."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:47
+#: ../Pinta.Gui.Addins/InstallDialog.cs:52
 msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
 "தேர்ந்தெடுக்கப்பட்ட நீட்டிப்பு தொகுப்புகளை நிறுவ முடியாது, ஏனெனில் சார்பு மோதல்கள் உள்ளன."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:348
+#: ../Pinta.Gui.Addins/InstallDialog.cs:359
 msgid "The uninstallation failed!"
 msgstr "நிறுவல் நீக்குதல் தோல்வியடைந்தது!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:349
+#: ../Pinta.Gui.Addins/InstallDialog.cs:360
 msgid "The uninstallation has completed with warnings."
 msgstr "நிறுவல் நீக்குதல் எச்சரிக்கைகளுடன் நிறைவடைந்துள்ளது."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:230
+#: ../Pinta.Gui.Addins/InstallDialog.cs:241
 msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
@@ -2340,7 +2340,7 @@ msgstr "உதவிக்குறிப்பு: கட்டுப்பா�
 msgid "Tolerance"
 msgstr "பொறுமை"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:363
+#: ../Pinta.Core/Managers/ToolManager.cs:371
 msgid "Tool"
 msgstr "கருவி"
 
@@ -2368,7 +2368,7 @@ msgstr "மேல் இடது"
 msgid "Top Right"
 msgstr "மேல் வலது"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:103
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
 msgstr "இடமாற்ற வரைபடம்"
 
@@ -2381,7 +2381,7 @@ msgid "Transparency Mode"
 msgstr "வெளிப்படைத்தன்மை பயன்முறை"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
-#: ../Pinta/Dialogs/NewImageDialog.cs:121
+#: ../Pinta/Dialogs/NewImageDialog.cs:137
 msgid "Transparent"
 msgstr "வெளிப்படையானது"
 
@@ -2415,12 +2415,12 @@ msgstr "செயல்தவிர்"
 msgid "Unfocus"
 msgstr "ஐச்போகச்"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:205
-#: ../Pinta.Gui.Addins/InstallDialog.cs:206
+#: ../Pinta.Gui.Addins/InstallDialog.cs:216
+#: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid "Uninstall"
 msgstr "நிறுவல் நீக்க"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:173
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:185
 msgid "Uninstall..."
 msgstr "நிறுவல் நீக்க ..."
 
@@ -2443,11 +2443,11 @@ msgstr "ஆதரிக்கப்படாத கோப்பு வடிவ�
 msgid "Unsupported palette format"
 msgstr "ஆதரிக்கப்படாத தட்டு வடிவம்"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:164
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
 msgstr "புதுப்பிப்பு ..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:90
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
 msgstr "புதுப்பிப்புகள்"
 
@@ -2463,11 +2463,11 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "இதிலிருந்து சில சின்னங்களைப் பயன்படுத்துதல்:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:631
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:670
 msgid "Value"
 msgstr "மதிப்பு"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:202
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
 msgid "Version: {0}"
 msgstr "பதிப்பு: {0}"
@@ -2504,14 +2504,14 @@ msgstr "வோரோனோய் வரைபடம்"
 msgid "Warmth"
 msgstr "அரவணைப்பு"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:106
+#: ../Pinta/Dialogs/NewImageDialog.cs:118
 msgid "White"
 msgstr "வெள்ளை"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
-#: ../Pinta/Dialogs/NewImageDialog.cs:327
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:73
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:157
+#: ../Pinta/Dialogs/NewImageDialog.cs:325
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:83
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:163
 msgid "Width:"
 msgstr "அகலம்:"
 
@@ -2551,8 +2551,8 @@ msgstr ""
 "'{0}' ஐ மாற்றுவதற்கான அணுகல் உங்களுக்கு இல்லை. கோப்பு அல்லது கோப்புறை படிக்க மட்டுமே "
 "இருக்கலாம்."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:179
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
@@ -2574,12 +2574,12 @@ msgstr "சிறிதாக்கு"
 msgid "Zoom to Selection"
 msgstr "தேர்வுக்கு பெரிதாக்கு"
 
-#: ../Pinta/MainWindow.cs:359
+#: ../Pinta/MainWindow.cs:379
 msgid "_Adjustments"
 msgstr "_Adjustments"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:157
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:159
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:189
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:191
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
@@ -2591,29 +2591,29 @@ msgstr "_CANCEL"
 msgid "_Discard"
 msgstr "_ டிச்கார்ட்"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:362
 msgid "_Edit"
 msgstr "தொகு (_E)"
 
-#: ../Pinta/MainWindow.cs:338
+#: ../Pinta/MainWindow.cs:358
 msgid "_File"
 msgstr "கோப்பு (_F)"
 
-#: ../Pinta/MainWindow.cs:375
+#: ../Pinta/MainWindow.cs:395
 msgid "_Help"
 msgstr "உதவி (_H)"
 
-#: ../Pinta/MainWindow.cs:351
+#: ../Pinta/MainWindow.cs:371
 msgid "_Image"
 msgstr "_Image"
 
-#: ../Pinta/MainWindow.cs:355
+#: ../Pinta/MainWindow.cs:375
 msgid "_Layers"
 msgstr "_ லேயர்கள்"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:156
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:160
-#: ../Pinta.Gui.Addins/InstallDialog.cs:193 ../Pinta/Dialogs/ErrorDialog.cs:44
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:188
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:192
+#: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
 msgstr "_Ok"
@@ -2622,11 +2622,11 @@ msgstr "_Ok"
 msgid "_Save"
 msgstr "_சேவ்"
 
-#: ../Pinta/MainWindow.cs:346
+#: ../Pinta/MainWindow.cs:366
 msgid "_View"
 msgstr "காட்சி (_V)"
 
-#: ../Pinta/MainWindow.cs:371
+#: ../Pinta/MainWindow.cs:391
 msgid "_Window"
 msgstr "_ சாளரம்"
 
@@ -2640,11 +2640,11 @@ msgstr "டிரா; வரைதல்; பெயிண்ட்; ஓவிய
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
-#: ../Pinta/Dialogs/NewImageDialog.cs:279
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:96
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:68
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:71
+#: ../Pinta/Dialogs/NewImageDialog.cs:277
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:106
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:84
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:87
 msgid "pixels"
 msgstr "படப்புள்ளிகள்"
 
