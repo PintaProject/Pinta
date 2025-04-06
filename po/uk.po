@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-02 01:39+0000\n"
+"POT-Creation-Date: 2025-04-06 01:45+0000\n"
 "PO-Revision-Date: 2025-02-28 10:02+0000\n"
 "Last-Translator: Stepan Andriiovych <4fbig9xyb@mozmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/uk/"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Generator: Weblate 5.10.2-rc\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:257
+#: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
 msgstr " (у каталог користувача)"
 
@@ -50,7 +50,7 @@ msgstr "Область 7 на 7"
 msgid "9 x 9 Region"
 msgstr "Область 9 на 9"
 
-#: ../Pinta/MainWindow.cs:367
+#: ../Pinta/MainWindow.cs:387
 msgid "A_dd-ins"
 msgstr "Додатки"
 
@@ -80,7 +80,7 @@ msgstr "Менеджер додатків..."
 msgid "Added"
 msgstr "Додано"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:417
 msgid "Adjustments"
 msgstr "Коригування"
 
@@ -94,12 +94,12 @@ msgid "Align Object"
 msgstr "Вирівняти об'єкт"
 
 #: ../Pinta.Core/Actions/EditActions.cs:474
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:287
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Всі файли"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:675
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:709
 msgid "Alpha"
 msgstr "Альфа"
 
@@ -115,14 +115,14 @@ msgstr "Альфа градієнт"
 msgid "Amount"
 msgstr "Кількість"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:121
 msgid "Anchor:"
 msgstr "Прив’язка:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:120
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:78
@@ -158,7 +158,7 @@ msgstr "Художній"
 msgid "Atkinson"
 msgstr "Еффект Аткінсона"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:238
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:256
 msgid "Auto"
 msgstr "Автоматично"
 
@@ -170,7 +170,7 @@ msgstr "Автоматичне кадрування"
 msgid "Auto Level"
 msgstr "Автокорекція"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:215
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:227
 #, csharp-format
 msgid "Available in repository: {0}"
 msgstr "Доступно у репозиторії: {0}"
@@ -179,11 +179,11 @@ msgstr "Доступно у репозиторії: {0}"
 msgid "Background"
 msgstr "Фон"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:113
+#: ../Pinta/Dialogs/NewImageDialog.cs:127
 msgid "Background Color"
 msgstr "Колір тла"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:309
+#: ../Pinta/Dialogs/NewImageDialog.cs:307
 msgid "Background:"
 msgstr "Тло:"
 
@@ -214,9 +214,9 @@ msgstr "Чорно-біле"
 msgid "Blend Mode"
 msgstr "Режим змішування"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:664
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:699
 msgid "Blue"
 msgstr "Синій"
 
@@ -281,19 +281,19 @@ msgstr "Опуклість"
 msgid "Burkes"
 msgstr "Ефект Бурке"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:101
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:178
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:184
 msgid "By absolute size:"
 msgstr "За абсолютним розміром:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:59
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:171
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:67
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
 msgid "By percentage:"
 msgstr "У процентному співвідношенні:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:411
-#: ../Pinta.Gui.Addins/InstallDialog.cs:111
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:436
+#: ../Pinta.Gui.Addins/InstallDialog.cs:118
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Скасувати"
@@ -357,7 +357,7 @@ msgstr "Змінений тип форми"
 msgid "Cherry Blossom"
 msgstr "Вишневий цвіт"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:610
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:632
 msgid "Choose Color"
 msgstr "Виберіть колір"
 
@@ -422,15 +422,15 @@ msgstr "Вибрати регіон з аналогічним кольром."
 msgid "Click to select secondary color."
 msgstr "Клацніть, щоб вибрати додатковий колір."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:459
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:277
 msgid "Click to switch between primary and secondary color."
 msgstr "Клацніть, щоб перемкнутися між основним і вторинним кольорами."
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:419
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:534
+#: ../Pinta/Dialogs/NewImageDialog.cs:358
+#: ../Pinta/Dialogs/NewImageDialog.cs:418
+#: ../Pinta/Dialogs/NewImageDialog.cs:440
+#: ../Pinta/Dialogs/NewImageDialog.cs:533
 msgid "Clipboard"
 msgstr "Буфер обміну"
 
@@ -439,7 +439,7 @@ msgid "Clone Stamp"
 msgstr "Штамп клонування"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
-#: ../Pinta.Gui.Addins/InstallDialog.cs:316
+#: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
 msgstr "Закрити"
 
@@ -499,14 +499,14 @@ msgstr "Насиченість кольору"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:170
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 msgid "Color Scheme"
 msgstr "Схема кольорів"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Color Scheme Source"
 msgstr "Джерело схеми кольорів"
 
@@ -579,14 +579,14 @@ msgid "Curved"
 msgstr "Викривлення"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:134
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:138
 msgid "Curves"
 msgstr "Криві"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:362
-#: ../Pinta/Dialogs/NewImageDialog.cs:419
-#: ../Pinta/Dialogs/NewImageDialog.cs:443
-#: ../Pinta/Dialogs/NewImageDialog.cs:534
+#: ../Pinta/Dialogs/NewImageDialog.cs:360
+#: ../Pinta/Dialogs/NewImageDialog.cs:418
+#: ../Pinta/Dialogs/NewImageDialog.cs:442
+#: ../Pinta/Dialogs/NewImageDialog.cs:533
 msgid "Custom"
 msgstr "Власний"
 
@@ -670,7 +670,7 @@ msgstr "Тремтіння"
 msgid "Do not switch tool"
 msgstr "Не переключайте інструмент"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:221
 #, csharp-format
 msgid "Download size: {0}"
 msgstr "Розмір завантаження: {0}"
@@ -692,11 +692,11 @@ msgstr "Поведінка краю"
 msgid "Edge Detect"
 msgstr "Виділення краю"
 
-#: ../Pinta/MainWindow.cs:363
+#: ../Pinta/MainWindow.cs:383
 msgid "Effe_cts"
 msgstr "_Ефекти"
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:411
 msgid "Effects"
 msgstr "Ефекти"
 
@@ -750,12 +750,12 @@ msgstr "Від’єднати (-) (правий клік)"
 msgid "Expand"
 msgstr "Розгорнути"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:279
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
 msgstr "Пакети розширення функціоналу"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:153
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:173
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
 msgid "Factor"
 msgstr "Фактор"
 
@@ -763,11 +763,11 @@ msgstr "Фактор"
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Не вдалося отримати доступ до порталів робочого столу XDG"
 
-#: ../Pinta/MainWindow.cs:280
+#: ../Pinta/MainWindow.cs:300
 msgid "Failed to initialize add-in"
 msgstr "Не вдалося ініціалізувати надбудову"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:188
+#: ../Pinta.Gui.Addins/InstallDialog.cs:199
 msgid "Failed to load extension package"
 msgstr "Не вдалося завантажити пакет розширення функціоналу"
 
@@ -911,7 +911,7 @@ msgstr "Матове скло"
 msgid "Fullscreen"
 msgstr "На весь екран"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:86
 msgid "Gallery"
 msgstr "Галерея"
 
@@ -933,9 +933,9 @@ msgid "Gradient"
 msgstr "Градієнт"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:654
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:690
 msgid "Green"
 msgstr "Зелений"
 
@@ -948,13 +948,13 @@ msgid "Hard Light"
 msgstr "Яскраве світло"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
-#: ../Pinta/Dialogs/NewImageDialog.cs:335
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:81
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:164
+#: ../Pinta/Dialogs/NewImageDialog.cs:333
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:91
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
 msgid "Height:"
 msgstr "Висота:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:579
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:623
 msgid "Hex"
 msgstr "Hex (шестигранний)"
 
@@ -968,7 +968,7 @@ msgstr ""
 "Підказка: Для досягнення кращих результатів, спершу виділіть кожно око "
 "інструментами виділення."
 
-#: ../Pinta/Pads/HistoryPad.cs:45
+#: ../Pinta/Pads/HistoryPad.cs:50
 msgid "History"
 msgstr "Історія"
 
@@ -989,11 +989,11 @@ msgstr "Горизонтальний червоний (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:604
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
 msgid "Hue"
 msgstr "Відтінок"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:557
 msgid "Hue & Sat"
 msgstr "Відтінок і насиченість"
 
@@ -1009,7 +1009,7 @@ msgstr "Файли ICO не можуть бути більші ніж 255х255 �
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Якщо ви не збережете, всі зміни будуть безповоротно втрачені."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:403
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:423
 msgid "Image"
 msgstr "Зображення"
 
@@ -1058,32 +1058,32 @@ msgstr "Обводка чорнилом"
 msgid "Ink Sketch"
 msgstr "Ескіз чорнилами"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:253
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Input"
 msgstr "Вхід"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:252
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:270
 msgid "Input Histogram"
 msgstr "Вхідна гістограма"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:114
-#: ../Pinta.Gui.Addins/InstallDialog.cs:236
+#: ../Pinta.Gui.Addins/InstallDialog.cs:121
+#: ../Pinta.Gui.Addins/InstallDialog.cs:247
 msgid "Install"
 msgstr "Встановити"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:253
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
 msgstr "Встановити пакет розширення"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:112
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
 msgid "Install from file..."
 msgstr "Встановити з файлу..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:155
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:167
 msgid "Install..."
 msgstr "Встановлення..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:89
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:87
 msgid "Installed"
 msgstr "Встановлено"
 
@@ -1100,7 +1100,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Перетнути ({0} + клацання лівою кнопкою)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
 msgid "Invert Colors"
 msgstr "Інвертувати кольори"
 
@@ -1113,7 +1113,7 @@ msgstr "Інвертувати виділення"
 msgid "Italic"
 msgstr "Курсив"
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:37
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "JPEG Quality"
 msgstr "Якість JPEG"
 
@@ -1126,7 +1126,7 @@ msgstr "Ефекти тремтіння Jarvis-Judice-Ninke"
 msgid "Julia Fractal"
 msgstr "Фрактал Julia"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:302
+#: ../Pinta/Dialogs/NewImageDialog.cs:300
 msgid "Landscape"
 msgstr "Альбомна"
 
@@ -1165,7 +1165,7 @@ msgstr "Шар відображено"
 msgid "Layer {0}"
 msgstr "Шар {0}"
 
-#: ../Pinta/Pads/LayersPad.cs:45
+#: ../Pinta/Pads/LayersPad.cs:49
 msgid "Layers"
 msgstr "Шари"
 
@@ -1333,7 +1333,7 @@ msgstr "Довжина"
 msgid "Levels"
 msgstr "Рівні"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:224
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:242
 msgid "Levels Adjustment"
 msgstr "Корекція рівнів"
 
@@ -1379,12 +1379,12 @@ msgstr "Лінійний градієнт"
 msgid "Linear Reflected Gradient"
 msgstr "Лінійний відображений градієнт"
 
-#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:77
+#: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:83
 msgid "Linked"
 msgstr "Зв'язок"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:173
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
 msgstr "Освітленість"
 
@@ -1392,12 +1392,12 @@ msgstr "Освітленість"
 msgid "Magic Wand Select"
 msgstr "Виділення чарівною паличкою"
 
-#: ../Pinta/MainWindow.cs:385
+#: ../Pinta/MainWindow.cs:405
 msgid "Main Menu"
 msgstr "Головне меню"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:105
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:123
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:115
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Maintain aspect ratio"
 msgstr "Зберігати пропорції"
 
@@ -1427,7 +1427,7 @@ msgstr "Режим"
 msgid "Modified"
 msgstr "Змінений"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:147
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:159
 msgid "More Information..."
 msgstr "Більше інформації..."
 
@@ -1470,7 +1470,7 @@ msgid "New"
 msgstr "Новий"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:154
-#: ../Pinta/Dialogs/NewImageDialog.cs:197
+#: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "Нове зображення"
 
@@ -1522,7 +1522,7 @@ msgstr "Кількість клітин"
 msgid "Number of threads to use for rendering"
 msgstr "Кількість потоків, щоб використати для візуалізації"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:432
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:453
 msgid "OK"
 msgstr "Добре"
 
@@ -1584,7 +1584,7 @@ msgstr "Відкрити палітру"
 msgid "Open..."
 msgstr "Відкрити…"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:318
+#: ../Pinta/Dialogs/NewImageDialog.cs:316
 msgid "Orientation:"
 msgstr "Орієнтація:"
 
@@ -1617,11 +1617,11 @@ msgstr "Обвести фігуру"
 msgid "Outline width"
 msgstr "Товщина контуру"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:254
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
 msgid "Output"
 msgstr "Вихід"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:255
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
 msgid "Output Histogram"
 msgstr "Вихідна гістограма"
 
@@ -1695,7 +1695,7 @@ msgid "Photo"
 msgstr "Знімок"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:56
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1767,7 +1767,7 @@ msgstr "Точка вилучена"
 msgid "Polar Inversion"
 msgstr "Полярна інверсія"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:298
+#: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
 msgstr "Книжкова"
 
@@ -1793,11 +1793,11 @@ msgstr "Зберегти стан"
 msgid "Preset Gradient"
 msgstr "Визначений градієнт"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:343
+#: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
 msgstr "Шаблон:"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:161
+#: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
 msgstr "Попередній перегляд"
 
@@ -1810,15 +1810,15 @@ msgid "Print"
 msgstr "Друк"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:153
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:179
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:273
 msgid "Quality"
 msgstr "Якість"
 
-#: ../Pinta/Dialogs/JpegCompressionDialog.cs:56
+#: ../Pinta/Dialogs/JpegCompressionDialog.cs:37
 msgid "Quality: "
 msgstr "Якість: "
 
@@ -1826,7 +1826,7 @@ msgstr "Якість: "
 msgid "Quit"
 msgstr "Вихід"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:172
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:176
 msgid "RGB"
 msgstr "RGB"
 
@@ -1861,8 +1861,8 @@ msgid "Random"
 msgstr "Випадковий"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 msgid "Random Color Scheme Seed"
 msgstr "Забарвлення випадковою кольоровою гаммою"
 
@@ -1892,9 +1892,9 @@ msgstr "Прямокутник"
 msgid "Rectangle Select"
 msgstr "Прямокутне виділення"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:102
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:681
 msgid "Red"
 msgstr "Червоний"
 
@@ -1918,7 +1918,7 @@ msgstr "Зменшити шум"
 msgid "Reflect"
 msgstr "Віддзеркалення"
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:104
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
 msgstr "Оновити"
 
@@ -1953,7 +1953,7 @@ msgstr "Замінити"
 msgid "Report Bug..."
 msgstr "Повідомити про проблему..."
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:73
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:89
 msgid "Resampling:"
 msgstr "Переобробка:"
 
@@ -1961,12 +1961,12 @@ msgstr "Переобробка:"
 msgid "Reseed"
 msgstr "Перемішати"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:207
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:241
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:259
 msgid "Reset"
 msgstr "Скинути"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:408
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Reset Color"
 msgstr "Скинути налаштування кольору"
 
@@ -1975,7 +1975,7 @@ msgid "Reset to Default"
 msgstr "Початкові налаштування"
 
 #: ../Pinta.Core/Classes/Document.cs:326
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:169
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:181
 msgid "Resize Canvas"
 msgstr "Зміна розміру полотна"
 
@@ -1984,7 +1984,7 @@ msgid "Resize Canvas..."
 msgstr "Змінити розмір полотна..."
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:84
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:102
 msgid "Resize Image"
 msgstr "Змінити розмір зображення"
 
@@ -1997,8 +1997,8 @@ msgid "Resize Palette"
 msgstr "Змінити розмір палітри"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 msgid "Reverse Color Scheme"
 msgstr "Зворотна кольорова гама"
 
@@ -2064,11 +2064,11 @@ msgstr "Лінійки"
 msgid "Sampling"
 msgstr "Вибірка"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:621
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Sat"
 msgstr "Насиченість"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:525
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:568
 msgid "Sat & Value"
 msgstr "Насиченість і значення"
 
@@ -2151,7 +2151,7 @@ msgid "Sharpen"
 msgstr "Різкість"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:487
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
 msgid "Shortcut key"
 msgstr "Гаряча клавіша"
@@ -2164,7 +2164,7 @@ msgstr "Відобразити сітку"
 msgid "Show Layer"
 msgstr "Показати шар"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:509
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:550
 msgid "Show Value"
 msgstr "Показати значення"
 
@@ -2256,7 +2256,7 @@ msgid "Text Style"
 msgstr "Стиль Тексту"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:277
+#: ../Pinta/MainWindow.cs:297
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "Додаток '{0}' може бути не сумісним з цією версією Pinta"
@@ -2265,23 +2265,23 @@ msgstr "Додаток '{0}' може бути не сумісним з цією
 msgid "The clipboard does not contain an image."
 msgstr "Буфер обміну не містить зображення."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:189
+#: ../Pinta.Gui.Addins/InstallDialog.cs:200
 msgid "The file may be an invalid or corrupt extension package"
 msgstr "Файл може бути недійсним або пошкодженим пакетом розширення"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:74
+#: ../Pinta.Gui.Addins/InstallDialog.cs:79
 msgid "The following dependencies could not be resolved:"
 msgstr "Не вдалося задовольнити наступні залежності:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:67
+#: ../Pinta.Gui.Addins/InstallDialog.cs:72
 msgid "The following packages need to be uninstalled:"
 msgstr "Такі пакунки будуть вилучені:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:61
+#: ../Pinta.Gui.Addins/InstallDialog.cs:66
 msgid "The following packages will be installed:"
 msgstr "Будуть встановлені такі пакунки:"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:218
+#: ../Pinta.Gui.Addins/InstallDialog.cs:229
 msgid "The following packages will be uninstalled:"
 msgstr "Такі пакунки будуть вилучені:"
 
@@ -2293,15 +2293,15 @@ msgstr ""
 "Зображення, що вставляється, більше, ніж полотно. Що б ви хотіли зробити з "
 "розміром полотна?"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:341
+#: ../Pinta.Gui.Addins/InstallDialog.cs:352
 msgid "The installation failed!"
 msgstr "Встановлення неуспішне!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:342
+#: ../Pinta.Gui.Addins/InstallDialog.cs:353
 msgid "The installation has completed with warnings."
 msgstr "Встановлення завершено з попередженнями."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:47
+#: ../Pinta.Gui.Addins/InstallDialog.cs:52
 msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
@@ -2309,15 +2309,15 @@ msgstr ""
 "Вибрані пакети розширення не можуть бути встановлені, оскільки існують "
 "конфліктні залежності."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:348
+#: ../Pinta.Gui.Addins/InstallDialog.cs:359
 msgid "The uninstallation failed!"
 msgstr "Вилучення не вдалося!"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:349
+#: ../Pinta.Gui.Addins/InstallDialog.cs:360
 msgid "The uninstallation has completed with warnings."
 msgstr "Вилучення завершилося з попередженнями."
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:230
+#: ../Pinta.Gui.Addins/InstallDialog.cs:241
 msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
@@ -2357,7 +2357,7 @@ msgstr "Підказка: Клік правою кнопкою миші вида
 msgid "Tolerance"
 msgstr "Допустиме відхилення"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:363
+#: ../Pinta.Core/Managers/ToolManager.cs:371
 msgid "Tool"
 msgstr "Інструменти"
 
@@ -2385,7 +2385,7 @@ msgstr "Вгорі ліворуч"
 msgid "Top Right"
 msgstr "Вгорі праворуч"
 
-#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:103
+#: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
 msgstr "Карта нормалей"
 
@@ -2398,7 +2398,7 @@ msgid "Transparency Mode"
 msgstr "Режим прозорості"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
-#: ../Pinta/Dialogs/NewImageDialog.cs:121
+#: ../Pinta/Dialogs/NewImageDialog.cs:137
 msgid "Transparent"
 msgstr "Прозорий"
 
@@ -2432,12 +2432,12 @@ msgstr "Відмінити"
 msgid "Unfocus"
 msgstr "Розфокусування"
 
-#: ../Pinta.Gui.Addins/InstallDialog.cs:205
-#: ../Pinta.Gui.Addins/InstallDialog.cs:206
+#: ../Pinta.Gui.Addins/InstallDialog.cs:216
+#: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid "Uninstall"
 msgstr "Вилучення"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:173
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:185
 msgid "Uninstall..."
 msgstr "Видалення..."
 
@@ -2460,11 +2460,11 @@ msgstr "Формат файлу не підтримується"
 msgid "Unsupported palette format"
 msgstr "Формат палітри не підтримується"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:164
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
 msgstr "Оновлення..."
 
-#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:90
+#: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
 msgstr "Оновлення"
 
@@ -2481,11 +2481,11 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Використовує деякі іконки з:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:631
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:670
 msgid "Value"
 msgstr "Значення"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:202
+#: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
 msgid "Version: {0}"
 msgstr "Версія: {0}"
@@ -2522,14 +2522,14 @@ msgstr "Діаграма Вороного"
 msgid "Warmth"
 msgstr "Теплота"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:106
+#: ../Pinta/Dialogs/NewImageDialog.cs:118
 msgid "White"
 msgstr "Білий"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
-#: ../Pinta/Dialogs/NewImageDialog.cs:327
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:73
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:157
+#: ../Pinta/Dialogs/NewImageDialog.cs:325
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:83
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:163
 msgid "Width:"
 msgstr "Ширина:"
 
@@ -2569,8 +2569,8 @@ msgstr ""
 "У вас немає доступу до внесення змін до «{0}». Можливо, файл або теку "
 "призначено лише для читання."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:179
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
@@ -2592,12 +2592,12 @@ msgstr "Зменшити"
 msgid "Zoom to Selection"
 msgstr "По розміру виділення"
 
-#: ../Pinta/MainWindow.cs:359
+#: ../Pinta/MainWindow.cs:379
 msgid "_Adjustments"
 msgstr "_Кольори"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:157
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:159
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:189
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:191
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
@@ -2609,29 +2609,29 @@ msgstr "_Відмінити"
 msgid "_Discard"
 msgstr "_Відмовитися"
 
-#: ../Pinta/MainWindow.cs:342
+#: ../Pinta/MainWindow.cs:362
 msgid "_Edit"
 msgstr "_Правка"
 
-#: ../Pinta/MainWindow.cs:338
+#: ../Pinta/MainWindow.cs:358
 msgid "_File"
 msgstr "_Файл"
 
-#: ../Pinta/MainWindow.cs:375
+#: ../Pinta/MainWindow.cs:395
 msgid "_Help"
 msgstr "_Допомога"
 
-#: ../Pinta/MainWindow.cs:351
+#: ../Pinta/MainWindow.cs:371
 msgid "_Image"
 msgstr "_Малюнок"
 
-#: ../Pinta/MainWindow.cs:355
+#: ../Pinta/MainWindow.cs:375
 msgid "_Layers"
 msgstr "_Шари"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:156
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:160
-#: ../Pinta.Gui.Addins/InstallDialog.cs:193 ../Pinta/Dialogs/ErrorDialog.cs:44
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:188
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:192
+#: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
 msgstr "_Добре"
@@ -2640,11 +2640,11 @@ msgstr "_Добре"
 msgid "_Save"
 msgstr "_Зберегти"
 
-#: ../Pinta/MainWindow.cs:346
+#: ../Pinta/MainWindow.cs:366
 msgid "_View"
 msgstr "_Вигляд"
 
-#: ../Pinta/MainWindow.cs:371
+#: ../Pinta/MainWindow.cs:391
 msgid "_Window"
 msgstr "_Вікно"
 
@@ -2660,11 +2660,11 @@ msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
-#: ../Pinta/Dialogs/NewImageDialog.cs:279
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:96
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:68
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:71
+#: ../Pinta/Dialogs/NewImageDialog.cs:277
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:106
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:84
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:87
 msgid "pixels"
 msgstr "пікселів"
 
