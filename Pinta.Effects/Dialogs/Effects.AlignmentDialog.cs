@@ -124,10 +124,4 @@ public sealed class AlignmentDialog : Gtk.Dialog
 		bottom_center.SetActive (position == AlignPosition.BottomCenter);
 		bottom_right.SetActive (position == AlignPosition.BottomRight);
 	}
-
-	public void RunDialog ()
-	{
-		Present ();
-		OnResponse += (_, _) => Destroy ();
-	}
 }
