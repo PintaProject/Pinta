@@ -39,9 +39,8 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
 
-
 // Only call methods on this class from a single thread (The UI thread).
-internal sealed class AsyncEffectRenderer
+internal sealed class AsyncEffectRenderer : IDisposable
 {
 	internal readonly record struct CompletionInfo (
 		bool WasCanceled,
@@ -197,8 +196,6 @@ internal sealed class AsyncEffectRenderer
 						WasCanceled: cancellationToken.IsCancellationRequested,
 						Errors: [.. renderExceptions]);
 
-					Completed?.Invoke (completion);
-
 					newCompletionSource.SetResult (completion);
 
 					return false; // don't call the timer again
@@ -279,9 +276,8 @@ internal sealed class AsyncEffectRenderer
 		RectangleI updatedBounds);
 
 	public event UpdateHandler? Updated;
-	public event Action<CompletionInfo>? Completed;
 
-	internal void Dispose ()
+	public void Dispose ()
 	{
 		if (timer_tick_id > 0)
 			GLib.Source.Remove (timer_tick_id);
