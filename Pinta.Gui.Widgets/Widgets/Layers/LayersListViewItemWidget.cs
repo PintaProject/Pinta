@@ -61,7 +61,7 @@ public sealed partial class LayersListViewItem
 		if (layer != doc.Layers.CurrentUserLayer || !doc.Layers.ShowSelectionLayer)
 			return layer.Surface;
 
-		// It it is, then we may need to draw the
+		// If it is, then we may need to draw the
 		// selection layer over it, like when dragging a selection.
 		ImageSurface surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, widthRequest, heightRequest);
 
