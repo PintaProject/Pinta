@@ -29,7 +29,6 @@
 #endif
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using Debug = System.Diagnostics.Debug;
@@ -70,19 +69,13 @@ public sealed class LivePreviewManager : ILivePreview
 		if (IsEnabled)
 			throw new InvalidOperationException ("LivePreviewManager.Start() called while live preview is already enabled.");
 
-		string effectName = effect.Name;
-
-		// Create live preview surface.
-		// Start rendering.
-		// Listen for changes to effectConfiguration object, and restart render if needed.
+		tools.Commit ();
 
 		Document doc = workspace.ActiveDocument;
 
-		IsEnabled = true;
-		bool apply_live_preview_flag = false;
-		bool cancel_live_preview_flag = false;
+		DocumentSelection selection = doc.Selection;
 
-		Layer layer = doc.Layers.CurrentUserLayer;
+		IsEnabled = true;
 
 		//TODO Use the current tool layer instead.
 		LivePreviewSurface = CairoExtensions.CreateImageSurface (
@@ -90,21 +83,9 @@ public sealed class LivePreviewManager : ILivePreview
 			workspace.ImageSize.Width,
 			workspace.ImageSize.Height);
 
-		// Handle selection path.
-		tools.Commit ();
-
-		DocumentSelection selection = doc.Selection;
-
 		Cairo.Path? selectionPath = selection.Visible ? selection.SelectionPath : null;
 		RenderBounds = (selectionPath != null) ? selectionPath.GetBounds () : LivePreviewSurface.GetBounds ();
 		RenderBounds = workspace.ClampToImageSize (RenderBounds);
-
-		SimpleHistoryItem historyItem = new (effect.Icon, effect.Name);
-		historyItem.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
-
-		// Paint the pre-effect layer surface into into the working surface.
-		using Cairo.Context ctx = new (LivePreviewSurface);
-		layer.Draw (ctx, layer.Surface, 1);
 
 		AsyncEffectRenderer.Settings settings = new (
 			threadCount: system.RenderThreads,
@@ -113,129 +94,100 @@ public sealed class LivePreviewManager : ILivePreview
 			updateMilliseconds: 100,
 			threadPriority: ThreadPriority.BelowNormal);
 
-		Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
-
 		int handlersInQueue = 0;
-		AsyncEffectRenderer renderer = new (settings);
+		Layer layer = doc.Layers.CurrentUserLayer;
+
+		string effectName = effect.Name;
+
+		SimpleHistoryItem historyItem = new (effect.Icon, effect.Name);
+		historyItem.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
+
+		using AsyncEffectRenderer renderer = new (settings);
 		renderer.Updated += OnUpdate;
-		renderer.Completed += OnCompletion;
 
-		if (effect.EffectData != null)
-			effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
+		IProgressDialog dialog = chrome.ProgressDialog;
+		dialog.Title = Translations.GetString ("Rendering Effect");
+		dialog.Text = effect.Name;
+		dialog.Progress = renderer.Progress;
+		dialog.Canceled += HandleProgressDialogCancel;
 
-		renderer.Start (effect, layer.Surface, LivePreviewSurface);
+		try {
+			// Paint the pre-effect layer surface into into the working surface.
+			using Cairo.Context ctx = new (LivePreviewSurface);
+			layer.Draw (ctx, layer.Surface, 1);
 
-		if (effect.IsConfigurable) {
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
-			bool response = await effect.LaunchConfiguration ();
-			chrome.MainWindowBusy = true;
-			if (response)
-				Apply ();
-			else
-				Cancel ();
+			if (effect.EffectData != null)
+				effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 
-		} else {
-			chrome.MainWindowBusy = true;
-			Apply ();
-		}
+			renderer.Start (
+				effect,
+				layer.Surface,
+				LivePreviewSurface);
 
-		// === Methods ===
+			bool userConfirmed = !effect.IsConfigurable || await effect.LaunchConfiguration ();
 
-		// Method asks render task to complete, and then returns immediately. The cancel
-		// is not actually complete until the LivePreviewRenderCompleted event is fired.
-		void Cancel ()
-		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.Cancel()");
-
-			cancel_live_preview_flag = true;
-
-			renderer.Finish (cancel: true);
-
-			// Show a busy cursor, and make the main window insensitive,
-			// until the cancel has completed.
 			chrome.MainWindowBusy = true;
 
-			if (!renderer.IsRendering)
-				HandleCancel ();
-		}
+			if (!userConfirmed) {
+				Debug.WriteLine ("User decided not to proceed with the render");
+				await renderer.Finish (cancel: true);
+				return;
+			}
 
-		// Called from asynchronously from Renderer.OnCompletion ()
-		void HandleCancel ()
-		{
-			Debug.WriteLine ("LivePreviewManager.HandleCancel()");
+			// The user confirmed, so show progress dialog
 
-			IsEnabled = false;
-
-			LivePreviewSurface = null!;
-
-			workspace.Invalidate ();
-
-			CleanUp ();
-		}
-
-		void Apply ()
-		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "LivePreviewManager.Apply()");
 
-			apply_live_preview_flag = true;
+			dialog.Show ();
 
-			if (!renderer.IsRendering) {
-				HandleApply ();
-			} else {
-				IProgressDialog dialog = chrome.ProgressDialog;
-				dialog.Title = Translations.GetString ("Rendering Effect");
-				dialog.Text = effect.Name;
-				dialog.Progress = renderer.Progress;
-				dialog.Canceled += HandleProgressDialogCancel;
-				dialog.Show ();
+			var result = await renderer.Finish (cancel: false);
+
+			foreach (var ex in result.Errors)
+				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectName + " exception: " + ex.Message + "\n" + ex.StackTrace);
+
+			if (result.WasCanceled) {
+				Debug.WriteLine ("User decided to cancel the render");
+				await renderer.Finish (cancel: true);
+				return;
 			}
-		}
 
-		void HandleProgressDialogCancel (object? o, EventArgs e)
-		{
-			Cancel ();
-		}
+			// Was not canceled, so finally apply
 
-		// Called from asynchronously from Renderer.OnCompletion ()
-		void HandleApply ()
-		{
-			Debug.WriteLine ("LivePreviewManager.HandleApply()");
+			Debug.WriteLine ("Render completed without the user canceling");
 
-			using Cairo.Context ctx = new (layer.Surface);
-			ctx.Save ();
-			workspace.ActiveDocument.Selection.Clip (ctx);
+			using Cairo.Context context = new (layer.Surface);
 
-			layer.DrawWithOperator (ctx, LivePreviewSurface, Cairo.Operator.Source);
-			ctx.Restore ();
+			context.Save ();
+			workspace.ActiveDocument.Selection.Clip (context);
+
+			layer.DrawWithOperator (context, LivePreviewSurface, Cairo.Operator.Source);
+			context.Restore ();
 
 			workspace.ActiveDocument.History.PushNewItem (historyItem);
 
-			IsEnabled = false;
-
-			workspace.Invalidate (); //TODO keep track of dirty bounds.
-			CleanUp ();
-		}
-
-		// Clean up resources when live preview is disabled.
-		void CleanUp ()
-		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.CleanUp()");
+		} finally {
 
 			IsEnabled = false;
+			LivePreviewSurface = null!;
+			workspace.Invalidate ();
 
 			if (effect.EffectData != null)
 				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
 
-			LivePreviewSurface = null!;
+			chrome.MainWindowBusy = false;
 
-			renderer.Dispose ();
-
-			// Hide progress dialog and clean up events.
-			IProgressDialog dialog = chrome.ProgressDialog;
-			dialog.Hide ();
 			dialog.Canceled -= HandleProgressDialogCancel;
 
-			chrome.MainWindowBusy = false;
+			dialog.Hide ();
+		}
+
+		// === Methods ===
+
+		void HandleProgressDialogCancel (object? o, EventArgs e)
+		{
+			renderer.Finish (cancel: true);
 		}
 
 		async void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
@@ -253,28 +205,9 @@ public sealed class LivePreviewManager : ILivePreview
 			RectangleI updatedBounds)
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
+
 			chrome.ProgressDialog.Progress = progress;
-			HandleUpdate (updatedBounds);
-		}
 
-		void OnCompletion (AsyncEffectRenderer.CompletionInfo completion)
-		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnCompletion() cancelled: " + completion.WasCanceled);
-
-			foreach (var ex in completion.Errors)
-				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectName + " exception: " + ex.Message + "\n" + ex.StackTrace);
-
-			if (!IsEnabled)
-				return;
-
-			if (cancel_live_preview_flag)
-				HandleCancel ();
-			else if (apply_live_preview_flag)
-				HandleApply ();
-		}
-
-		void HandleUpdate (RectangleI bounds)
-		{
 			double scale = workspace.Scale;
 			PointD offset = workspace.Offset;
 
@@ -282,19 +215,19 @@ public sealed class LivePreviewManager : ILivePreview
 
 			// Calculate canvas bounds.
 			PointD bounds1 = new (
-				X: bounds.Left * scale,
-				Y: bounds.Top * scale);
+				X: updatedBounds.Left * scale,
+				Y: updatedBounds.Top * scale);
 
 			PointD bounds2 = new (
-				X: (bounds.Right + 1) * scale,
-				Y: (bounds.Bottom + 1) * scale);
+				X: (updatedBounds.Right + 1) * scale,
+				Y: (updatedBounds.Bottom + 1) * scale);
 
 			// TODO Figure out why when scale > 1 that I need add on an
 			// extra pixel of padding.
 			// I must being doing something wrong here.
 			if (scale > 1.0) {
 				//x1 = (bounds.Left-1) * scale;
-				bounds1 = bounds1 with { Y = (bounds.Top - 1) * scale };
+				bounds1 = bounds1 with { Y = (updatedBounds.Top - 1) * scale };
 				//x2 = (bounds.Right+1) * scale;
 				//y2 = (bounds.Bottom+1) * scale;
 			}
