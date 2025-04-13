@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2013-02-27 10:46+0000\n"
-"Last-Translator: Eraser <Unknown>\n"
-"Language-Team: Estonian <et@li.org>\n"
+"PO-Revision-Date: 2025-04-13 19:04+0000\n"
+"Last-Translator: Rivo Zängov <rivozangov@gmail.com>\n"
+"Language-Team: Estonian <https://hosted.weblate.org/projects/pinta/pinta/et/>"
+"\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
@@ -30,7 +31,7 @@ msgstr ""
 #: ../Pinta.Core/Managers/EffectsManager.cs:70
 #: ../Pinta.Core/Managers/EffectsManager.cs:104
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "3 x 3 Region"
@@ -58,7 +59,7 @@ msgstr "Programmist"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:64
 msgid "About Pinta"
-msgstr ""
+msgstr "Pinta info"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
 #: ../Pinta.Core/Actions/LayerActions.cs:371
@@ -72,24 +73,24 @@ msgstr "Lisa müra"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Lisade haldur..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
 msgid "Added"
-msgstr ""
+msgstr "Lisatud"
 
 #: ../Pinta/MainWindow.cs:417
 msgid "Adjustments"
-msgstr ""
+msgstr "Kohandused"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
-msgstr ""
+msgstr "Pärast valimist"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Objekti joondamine"
 
 #: ../Pinta.Core/Actions/EditActions.cs:474
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -99,11 +100,11 @@ msgstr "Kõik failid"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:709
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:211
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Alfa värviüleminek"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:117
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:147
@@ -143,7 +144,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:268
 msgid "Arrow"
-msgstr ""
+msgstr "Nool"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:37
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
@@ -154,7 +155,7 @@ msgstr "Kunstiline"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:256
 msgid "Auto"
@@ -162,11 +163,11 @@ msgstr "Automaatne"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:55
 msgid "Auto Crop"
-msgstr ""
+msgstr "Automaatne kärpimine"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:24
 msgid "Auto Level"
-msgstr ""
+msgstr "Automaatne tase"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:227
 #, csharp-format
@@ -179,11 +180,11 @@ msgstr "Taust"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:127
 msgid "Background Color"
-msgstr ""
+msgstr "Taustavärv"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:307
 msgid "Background:"
-msgstr ""
+msgstr "Taust:"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:93
 msgid "Based on the work of Paint.NET:"
@@ -192,7 +193,7 @@ msgstr ""
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Ilus itaalia"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Best Fit"
