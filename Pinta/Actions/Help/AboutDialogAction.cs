@@ -72,6 +72,7 @@ internal sealed class AboutDialogAction : IActionHandler
 		dialog.License = BuildLicenseText ();
 		dialog.Developers = authors;
 		dialog.TranslatorCredits = Translations.GetString ("translator-credits");
+		dialog.IssueUrl = "https://github.com/PintaProject/Pinta/issues";
 		await dialog.PresentAsync ();
 	}
 
