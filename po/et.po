@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2025-04-13 19:04+0000\n"
+"PO-Revision-Date: 2025-04-13 20:22+0000\n"
 "Last-Translator: Rivo Zängov <rivozangov@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/pinta/pinta/et/>"
 "\n"
@@ -35,19 +35,19 @@ msgstr "..."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "3 x 3 Region"
-msgstr ""
+msgstr "3 x 3 piirkond"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "5 x 5 Region"
-msgstr ""
+msgstr "5 x 5 piirkond"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "7 x 7 Region"
-msgstr ""
+msgstr "7 x 7 piirkond"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "9 x 9 Region"
-msgstr ""
+msgstr "9 x 9 piirkond"
 
 #: ../Pinta/MainWindow.cs:387
 msgid "A_dd-ins"
@@ -172,7 +172,7 @@ msgstr "Automaatne tase"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:227
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "Saadaval hoidlas: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:146
 msgid "Background"
@@ -243,15 +243,15 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "All keskel"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "All vasakul"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "All paremal"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
@@ -264,7 +264,7 @@ msgstr "Heledus / kontrast"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:148
 msgid "Brush Size"
-msgstr ""
+msgstr "Pintsli suurus"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:270
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:123
@@ -283,31 +283,31 @@ msgstr ""
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:184
 msgid "By absolute size:"
-msgstr ""
+msgstr "Absoluutse suuruse järgi:"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:67
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:177
 msgid "By percentage:"
-msgstr ""
+msgstr "Protsendi järgi:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:411
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
-msgstr ""
+msgstr "Tühista"
 
 #: ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
-msgstr ""
+msgstr "Lõuend"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "Lõuendi võrgustiku seaded"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Lõuendi võrgustik..."
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
@@ -315,7 +315,7 @@ msgstr "Kärje suurus"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "Keskel"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:228
 msgid "Center Align"
@@ -323,7 +323,7 @@ msgstr "Joonda keskele"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "Keskel paremal"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:156
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
@@ -332,7 +332,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "Keskel paremal"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:126
 msgid "Centered"
@@ -404,7 +404,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:271
 msgid "Click to select primary color."
-msgstr ""
+msgstr "Kliki, et valida peamine värv."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:49
 msgid "Click to select region of similar color."
@@ -424,11 +424,11 @@ msgstr ""
 #: ../Pinta/Dialogs/NewImageDialog.cs:440
 #: ../Pinta/Dialogs/NewImageDialog.cs:533
 msgid "Clipboard"
-msgstr ""
+msgstr "Lõikelaud"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:46
 msgid "Clone Stamp"
-msgstr ""
+msgstr "Klooni tempel"
 
 #: ../Pinta.Core/Actions/FileActions.cs:54
 #: ../Pinta.Gui.Addins/InstallDialog.cs:327
@@ -458,7 +458,7 @@ msgstr ""
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:15
 msgid "Color"
-msgstr ""
+msgstr "Värv"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 msgid "Color Burn"
@@ -470,11 +470,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:214
 msgid "Color Gradient"
-msgstr ""
+msgstr "Värviüleminek"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
-msgstr ""
+msgstr "Värvirežiim"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:305
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
@@ -487,28 +487,28 @@ msgstr "Värvivahemik"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
 msgid "Color Saturation"
-msgstr ""
+msgstr "Värvi küllastus"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:170
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 msgid "Color Scheme"
-msgstr ""
+msgstr "Värviskeem"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Color Scheme Source"
-msgstr ""
+msgstr "Värviskeemi allikas"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:260
 msgid "Color Sorting"
-msgstr ""
+msgstr "Värvide sorteerimine"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:160
 msgid "Coloring"
-msgstr ""
+msgstr "Värvimine"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
@@ -516,7 +516,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:44
 msgid "Contents"
-msgstr ""
+msgstr "Sisu"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:133
 msgid "Contiguous"
@@ -525,7 +525,7 @@ msgstr "Pidev"
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
-msgstr ""
+msgstr "Kontrast"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy"
@@ -559,12 +559,12 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
 msgid "Coverage"
-msgstr ""
+msgstr "Katvus"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:54
 #: ../Pinta.Core/Actions/ImageActions.cs:234
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Kärbi valiku järgi"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
@@ -580,7 +580,7 @@ msgstr "Kurvid"
 #: ../Pinta/Dialogs/NewImageDialog.cs:442
 #: ../Pinta/Dialogs/NewImageDialog.cs:533
 msgid "Custom"
-msgstr ""
+msgstr "Kohandatud"
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
 #: ../Pinta.Core/Actions/EditActions.cs:263
@@ -590,11 +590,11 @@ msgstr "Lõika"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:167
 msgid "Dark"
-msgstr ""
+msgstr "Tume"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
-msgstr ""
+msgstr "Tumedamaks"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:59
 msgid "Dash"
@@ -603,7 +603,7 @@ msgstr ""
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:163
 msgid "Default"
-msgstr ""
+msgstr "Vaikimisi"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:350
@@ -612,7 +612,7 @@ msgstr "Kustuta kiht"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:669
 msgid "Deleted"
-msgstr ""
+msgstr "Kustutatud"
 
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:50
@@ -629,11 +629,11 @@ msgstr "Eemalda kõik valikust"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "Üksikasjad"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Difference"
-msgstr ""
+msgstr "Erinevus"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:137
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:123
@@ -665,7 +665,7 @@ msgstr "Ära vaheta tööriista"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:221
 #, csharp-format
 msgid "Download size: {0}"
-msgstr ""
+msgstr "Allalaadimise suurus: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:337
@@ -674,7 +674,7 @@ msgstr "Kihi dubleerimine"
 
 #: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Easily create and edit images"
-msgstr ""
+msgstr "Loo ja muuda pilte kergesti"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:238 Polar Inversion dialog
 msgid "Edge Behavior"
@@ -690,7 +690,7 @@ msgstr "_Efektid"
 
 #: ../Pinta/MainWindow.cs:411
 msgid "Effects"
-msgstr ""
+msgstr "Efektid"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
@@ -718,7 +718,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/EditActions.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:264
 msgid "Erase Selection"
-msgstr ""
+msgstr "Kustuta valik"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
@@ -743,12 +743,12 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
-msgstr ""
+msgstr "Lisaprogrammide paketid"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
 msgid "Factor"
-msgstr ""
+msgstr "Faktor"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:85
 msgid "Failed to access XDG Desktop Portals"
@@ -768,12 +768,12 @@ msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
 msgid "Failed to save image"
-msgstr ""
+msgstr "Pildi salvestamine ebaõnnestus"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:84
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:109
 msgid "Failed to take screenshot"
-msgstr ""
+msgstr "Ekraanipildi tegemine ebaõnnestus"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:174
 msgid "Feather Canvas Edge"
@@ -785,15 +785,15 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
-msgstr ""
+msgstr "Teata veast"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Avatavad failid"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Fill Background"
-msgstr ""
+msgstr "Täida taust"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:220
 msgid "Fill Object Background"
@@ -904,7 +904,7 @@ msgstr "Täisekraan"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:86
 msgid "Gallery"
-msgstr ""
+msgstr "Galerii"
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
@@ -947,7 +947,7 @@ msgstr "Kõrgus:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:623
 msgid "Hex"
-msgstr ""
+msgstr "HEX"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Hide Layer"
@@ -1000,19 +1000,19 @@ msgstr "Kui Sa ei salvesta, siis lähevad kõik muudatused jäädavalt kaotsi."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:423
 msgid "Image"
-msgstr ""
+msgstr "Pilt"
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr ""
+msgstr "Pildiredaktor"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:75
 msgid "Image Tabs"
-msgstr ""
+msgstr "Pildi vahekaardid"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "Image cannot be pasted"
-msgstr ""
+msgstr "Pildi asetamine ebaõnnestus"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:181
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:111
@@ -1021,11 +1021,11 @@ msgstr "Pildifailid"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid "Image larger than canvas"
-msgstr ""
+msgstr "Pildid, mis on lõuendist suuremad"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
 msgid "Image too large"
-msgstr ""
+msgstr "Pilt on liiga suur"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:228
 msgid "Import From File"
@@ -1033,7 +1033,7 @@ msgstr "Impodi failist"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:63
 msgid "Import from File..."
-msgstr ""
+msgstr "Impordi failist..."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Inches"
@@ -1045,7 +1045,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
-msgstr ""
+msgstr "Visand tindiga"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Input"
@@ -1058,29 +1058,29 @@ msgstr ""
 #: ../Pinta.Gui.Addins/InstallDialog.cs:121
 #: ../Pinta.Gui.Addins/InstallDialog.cs:247
 msgid "Install"
-msgstr ""
+msgstr "Paigalda"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Paigalda lisaprogrammide pakett"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
 msgid "Install from file..."
-msgstr ""
+msgstr "Paigalda failist..."
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:167
 msgid "Install..."
-msgstr ""
+msgstr "Paigalda..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:87
 msgid "Installed"
-msgstr ""
+msgstr "Paigaldatud"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:137
 #: ../Pinta.Effects/Effects/TileEffect.cs:232
 msgid "Intensity"
-msgstr ""
+msgstr "Intensiivsus"
 
 #. Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
@@ -1121,7 +1121,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:51
 msgid "Lasso Select"
-msgstr ""
+msgstr "Lassoga valimine"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:240
 msgid "Layer"
@@ -1152,7 +1152,7 @@ msgstr "Nähtav kiht"
 #: ../Pinta.Core/Classes/DocumentLayers.cs:133
 #, csharp-format
 msgid "Layer {0}"
-msgstr ""
+msgstr "Kiht {0}"
 
 #: ../Pinta/Pads/LayersPad.cs:49
 msgid "Layers"
@@ -1263,7 +1263,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:337
 msgid "Length"
-msgstr ""
+msgstr "Pikkus"
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
@@ -1292,7 +1292,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
 msgid "Lightness"
-msgstr ""
+msgstr "Heledus"
 
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:48
@@ -1309,7 +1309,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
-msgstr ""
+msgstr "Lineaarne värviüleminek"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
@@ -1330,7 +1330,7 @@ msgstr ""
 
 #: ../Pinta/MainWindow.cs:405
 msgid "Main Menu"
-msgstr ""
+msgstr "Peamenüü"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:115
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
@@ -1357,15 +1357,15 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
-msgstr ""
+msgstr "Režiim"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:913
 msgid "Modified"
-msgstr ""
+msgstr "Muudetud"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:159
 msgid "More Information..."
-msgstr ""
+msgstr "Lisainfo..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 msgid "Motion Blur"
@@ -1383,7 +1383,7 @@ msgstr "Liiguta kiht ettepoole"
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
 msgid "Move Selected Pixels"
-msgstr ""
+msgstr "Liiguta valitud piksleid"
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
 msgid "Move Selection"
@@ -1399,7 +1399,7 @@ msgstr "Nimi:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Lähim naaber"
 
 #: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New"
@@ -1412,11 +1412,11 @@ msgstr "Uus pilt"
 
 #: ../Pinta.Core/Actions/FileActions.cs:51
 msgid "New Screenshot..."
-msgstr ""
+msgstr "Uus ekraanipilt..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:62
 msgid "New palette size:"
-msgstr ""
+msgstr "Uus paletti suurus:"
 
 #: ../Pinta.Core/Actions/FileActions.cs:50
 msgid "New..."
@@ -1452,7 +1452,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:255
 msgid "Number of Cells"
-msgstr ""
+msgstr "Lahtrite arv"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
@@ -1460,13 +1460,13 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:453
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "Objekt"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:168
@@ -1474,13 +1474,13 @@ msgstr ""
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:151
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
-msgstr ""
+msgstr "Nihe"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
-msgstr ""
+msgstr "Valiku nihe"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
 msgid "Oil Painting"
@@ -1522,11 +1522,11 @@ msgstr "Ava..."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:316
 msgid "Orientation:"
-msgstr ""
+msgstr "Suund:"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
-msgstr ""
+msgstr "Algne"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:265
 msgid "Outline"
@@ -1633,7 +1633,7 @@ msgstr "Foto"
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
 #: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
 msgid "Pinta"
-msgstr ""
+msgstr "Pinta"
 
 #: ../Pinta/AddinSetupService.cs:52
 msgid "Pinta Community Addins - Cross-Platform"
@@ -1649,7 +1649,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:45
 msgid "Pinta Website"
-msgstr ""
+msgstr "Pinta veebisait"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "Pinta does not support saving images in this file format."
@@ -1704,7 +1704,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:130
 msgid "Position"
-msgstr ""
+msgstr "Asukoht"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1726,15 +1726,15 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
-msgstr ""
+msgstr "Eelseade:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
-msgstr ""
+msgstr "Eelvaade"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
-msgstr ""
+msgstr "Peamine"
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Print"
@@ -1789,7 +1789,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:287
 msgid "Random"
-msgstr ""
+msgstr "Juhuslik"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
@@ -1799,7 +1799,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:267
 msgid "Random Colors"
-msgstr ""
+msgstr "Juhuslikud värvid"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:178
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
@@ -1847,11 +1847,11 @@ msgstr "Vähenda müra"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
-msgstr ""
+msgstr "Peegeldus"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
-msgstr ""
+msgstr "Värskenda"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:90
 msgid "Released under the MIT X11 License."
@@ -1878,11 +1878,11 @@ msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
 msgid "Replace"
-msgstr ""
+msgstr "Asenda"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
-msgstr ""
+msgstr "Teata veast..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:89
 msgid "Resampling:"
@@ -1899,7 +1899,7 @@ msgstr "Lähtesta"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Reset Color"
-msgstr ""
+msgstr "Taasta värv"
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
@@ -1912,7 +1912,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:57
 msgid "Resize Canvas..."
-msgstr ""
+msgstr "Muuda lõuendi suurust..."
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:102
@@ -1921,11 +1921,11 @@ msgstr "Pildi suuruse muutmine"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:56
 msgid "Resize Image..."
-msgstr ""
+msgstr "Muuda pildi suurust..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:60
 msgid "Resize Palette"
-msgstr ""
+msgstr "Muuda paleti suurust"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
@@ -2006,7 +2006,7 @@ msgstr ""
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
 msgid "Saturation"
-msgstr ""
+msgstr "Küllastus"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
 msgid "Saturation Percentage"
@@ -2033,7 +2033,7 @@ msgstr "Salvesta pildifail"
 
 #: ../Pinta.Core/Actions/EditActions.cs:407
 msgid "Save Palette File"
-msgstr ""
+msgstr "Salvesta paleti fail"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #, csharp-format
@@ -2046,7 +2046,7 @@ msgstr "Skaleerimine"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:39
 msgid "Screen"
-msgstr ""
+msgstr "Ekraan"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
@@ -2059,7 +2059,7 @@ msgstr "Vali kõik"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
-msgstr ""
+msgstr "Valitud värvid"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -2089,7 +2089,7 @@ msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 msgid "Show Grid"
-msgstr ""
+msgstr "Näita võrgustikku"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Show Layer"
@@ -2097,21 +2097,21 @@ msgstr "Näita kihti"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:550
 msgid "Show Value"
-msgstr ""
+msgstr "Näita väärtust"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Show/Hide"
-msgstr ""
+msgstr "Näita/Peida"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
 msgid "Sierra Lite"
-msgstr ""
+msgstr "Sierra Lite"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
@@ -2119,7 +2119,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:295
 msgid "Size"
-msgstr ""
+msgstr "Suurus"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
@@ -2147,7 +2147,7 @@ msgstr "Ruudud"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Status Bar"
-msgstr ""
+msgstr "Olekuriba"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:148
@@ -2157,7 +2157,7 @@ msgstr "Tugevus"
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Stucki"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
@@ -2224,11 +2224,11 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:352
 msgid "The installation failed!"
-msgstr ""
+msgstr "Paigaldamine ebaõnnestus!"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:353
 msgid "The installation has completed with warnings."
-msgstr ""
+msgstr "Paigaldamine on tehtud, aga seal oli mõninigaid hoiatusi."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:52
 msgid ""
@@ -2238,7 +2238,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:359
 msgid "The uninstallation failed!"
-msgstr ""
+msgstr "Eemaldamine ebaõnnestus!"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:360
 msgid "The uninstallation has completed with warnings."
@@ -2288,11 +2288,11 @@ msgstr "Tööriist"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Tool Box"
-msgstr ""
+msgstr "Tööriistad"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:76
 msgid "Tool Windows"
-msgstr ""
+msgstr "Tööriistade aknad"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Toolbar"
@@ -2300,15 +2300,15 @@ msgstr "Tööriistariba"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
-msgstr ""
+msgstr "Üleval keskel"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
-msgstr ""
+msgstr "Üleval vasakul"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
-msgstr ""
+msgstr "Üleval paremal"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
@@ -2325,7 +2325,7 @@ msgstr ""
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:137
 msgid "Transparent"
-msgstr ""
+msgstr "Läbipaistev"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:146
 msgid "Turbulence"
@@ -2360,11 +2360,11 @@ msgstr ""
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid "Uninstall"
-msgstr ""
+msgstr "Eemalda"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:185
 msgid "Uninstall..."
-msgstr ""
+msgstr "Eemalda..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
@@ -2387,11 +2387,11 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
-msgstr ""
+msgstr "Uuenda..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
-msgstr ""
+msgstr "Uuendused"
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
 msgid ""
@@ -2405,12 +2405,12 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:670
 msgid "Value"
-msgstr ""
+msgstr "Väärtus"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "Versioon: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:301
@@ -2446,7 +2446,7 @@ msgstr "Soojus"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:118
 msgid "White"
-msgstr ""
+msgstr "Valge"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
@@ -2523,11 +2523,11 @@ msgstr ""
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
-msgstr ""
+msgstr "_Tühista"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
-msgstr ""
+msgstr "_Eira"
 
 #: ../Pinta/MainWindow.cs:362
 msgid "_Edit"
@@ -2554,11 +2554,11 @@ msgstr "_Kihid"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr ""
+msgstr "_Salvesta"
 
 #: ../Pinta/MainWindow.cs:366
 msgid "_View"
@@ -2570,7 +2570,7 @@ msgstr "_Aken"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:81
 msgid "by Pinta contributors"
-msgstr ""
+msgstr "Pinta kaastöötajad"
 
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
@@ -2604,7 +2604,7 @@ msgstr ""
 #: ../Pinta.Core/Classes/DocumentLayers.cs:207
 #, csharp-format
 msgid "{0} copy"
-msgstr ""
+msgstr "{0} koopia"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:118
 #, csharp-format
