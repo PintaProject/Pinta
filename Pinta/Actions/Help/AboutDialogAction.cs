@@ -73,6 +73,7 @@ internal sealed class AboutDialogAction : IActionHandler
 		dialog.Developers = authors;
 		dialog.TranslatorCredits = Translations.GetString ("translator-credits");
 		dialog.IssueUrl = "https://github.com/PintaProject/Pinta/issues";
+		dialog.SupportUrl = "https://github.com/PintaProject/Pinta/discussions";
 		await dialog.PresentAsync ();
 	}
 
