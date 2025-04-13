@@ -80,7 +80,7 @@ For building on the command line:
 ## Getting help / contributing:
 
 - You can get technical help on the [Pinta Google Group](https://groups.google.com/group/pinta-project).
-- You can report bugs/issues on [Launchpad bug tracker](https://bugs.launchpad.net/pinta/+filebug).
+- You can report bugs/issues on [Github](https://github.com/PintaProject/Pinta/issues).
 - You can make suggestions on [Github](https://github.com/PintaProject/Pinta/discussions/categories/ideas).
 - You can help [translate Pinta to your native language](https://hosted.weblate.org/engage/pinta/).
 - You can fork the project on [Github](https://github.com/PintaProject/Pinta).
