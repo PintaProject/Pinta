@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2024-12-29 15:31+0000\n"
-"Last-Translator: Matthaiks <kitynska@gmail.com>\n"
+"PO-Revision-Date: 2025-04-14 04:39+0000\n"
+"Last-Translator: konrad <konradek@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.11-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -73,7 +73,7 @@ msgstr "Dodaj szum"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr "Menedżer dodatków..."
+msgstr "Zarządzaj dodatkami…"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
 msgid "Added"
@@ -81,7 +81,7 @@ msgstr "Dodano"
 
 #: ../Pinta/MainWindow.cs:417
 msgid "Adjustments"
-msgstr "Regulacje"
+msgstr "Korekcja"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
@@ -116,7 +116,7 @@ msgstr "Ilość"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:121
 msgid "Anchor:"
-msgstr "Kotwica:"
+msgstr "Punkt zaczepienia:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
@@ -163,11 +163,11 @@ msgstr "Automatycznie"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:55
 msgid "Auto Crop"
-msgstr "Automatyczne przycięcie"
+msgstr "Przycięcie automatyczne"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:24
 msgid "Auto Level"
-msgstr "Automatyczne poziomowanie"
+msgstr "Korekcja automatyczna"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:227
 #, csharp-format
@@ -188,7 +188,7 @@ msgstr "Tło:"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:93
 msgid "Based on the work of Paint.NET:"
-msgstr "Oparto na pracach nad Paint.NET:"
+msgstr "Opracowano z Paint.NET:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
@@ -283,7 +283,7 @@ msgstr "Burkesa"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:184
 msgid "By absolute size:"
-msgstr "Rozmiar bezwzględny:"
+msgstr "Bezwzględnie:"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:67
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:177
@@ -307,7 +307,7 @@ msgstr "Ustawienia siatki płótna"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Canvas Grid..."
-msgstr "Siatka płótna..."
+msgstr "Siatka płótna…"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
@@ -377,54 +377,54 @@ msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
-"Kliknij i przeciągaj, aby nakreślić zaznaczenie prostokątne.\n"
-"Przytrzymaj Shift, aby ograniczyć do kwadratu."
+"Nakreśl zaznaczenie prostokątne naciskając i przeciągając .\n"
+"Uzyskaj kwadrat przytrzymując Shift."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
 msgstr ""
-"Kliknij i przeciągnij, aby nakreślić zaznaczenie eliptyczne.\n"
-"Przytrzymaj Shift, aby ograniczyć do okręgu."
+"Nakreśl zaznaczenie eliptyczne naciskając i przeciągając.\n"
+"Uzyskaj okrąg przytrzymując Shift."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
 msgstr ""
-"Kliknij i przeciągnij, aby wypełnić gradientem od koloru podstawowego do "
-"dodatkowego.\n"
-"Prawy przycisk odwraca porządek kolorów."
+"Nakreśl gradient od koloru podstawowego do dodatkowego naciskając i "
+"przeciągając .\n"
+"Odwróć porządek kolorów za pomocą przycisku dodatkowego."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Kliknij i przeciągnij, aby nakreślić kontur obszaru zaznaczenia."
+msgstr "Nakreśl kontur obszaru zaznaczenia naciskając i przeciągając."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
-msgstr "Kliknij i przeciągnij, aby przenosić widok."
+msgstr "Kliknij i przeciągnij, aby przemieścić widok."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
 msgid "Click to reset primary and secondary color."
-msgstr "Kliknij, aby przywrócić kolory podstawowy i dodatkowy."
+msgstr "Naciśnij, by przywrócić kolory podstawowy i dodatkowy."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:271
 msgid "Click to select primary color."
-msgstr "Kliknij, aby wybrać kolor podstawowy."
+msgstr "Naciśnij, by wybrać kolor podstawowy."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:49
 msgid "Click to select region of similar color."
-msgstr "Kliknij, aby zaznaczyć obszar o podobnym kolorze."
+msgstr "Naciśnij, by zaznaczyć obszar o podobnym kolorze."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
 msgid "Click to select secondary color."
-msgstr "Kliknij, aby wybrać kolor dodatkowy."
+msgstr "Naciśnij, by wybrać kolor dodatkowy."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:277
 msgid "Click to switch between primary and secondary color."
-msgstr "Kliknij, aby przełączyć się między kolorem podstawowym a dodatkowym."
+msgstr "Naciśnij, by zamienić kolory podstawowy i dodatkowy."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
 #: ../Pinta/Dialogs/NewImageDialog.cs:418
@@ -562,7 +562,7 @@ msgstr "Nie można zaimportować warstwy „{0}” z {1}"
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:457
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "Nie udało się otworzyć pliku: {0}"
+msgstr "Nie można otworzyć pliku: {0}"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
 msgid "Coverage"
@@ -649,7 +649,7 @@ msgstr "Odległość"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:252
 msgid "Distance Metric"
-msgstr "Pomiar odległości"
+msgstr "Metryka odległości"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:28
 #: ../Pinta.Effects/Effects/DentsEffect.cs:53
@@ -663,7 +663,7 @@ msgstr "Zniekształcanie"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:12
 msgid "Dithering"
-msgstr "Dithering"
+msgstr "Rozpikselowanie tonalne"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
@@ -738,11 +738,11 @@ msgstr "Błąd"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:135
 msgid "Error Diffusion Method"
-msgstr "Metoda dyfuzji błędów"
+msgstr "Metoda rozpraszania błędów"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
-msgstr "Różnica (prawy przycisk myszy)"
+msgstr "Odejmowanie (dodatkowy przycisk myszy)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:227
@@ -879,12 +879,12 @@ msgstr "Tryb zalewania"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr "Floyda-Steinberga"
+msgstr "Floyda–Steinberga"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr "Floyda-Steinberga (lekki)"
+msgstr "Floyda–Steinberga (lekki)"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:152
 msgid "Font"
@@ -964,8 +964,8 @@ msgstr "Ukryj warstwę"
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Wskazówka: najlepsze efekty uzyskasz, zaznaczając uprzednio narzędziami "
-"każde z oczu."
+"Wskazówka: najlepsze efekty uzyskasz wskazując uprzednio narzędziami "
+"zaznaczania każde z oczu."
 
 #: ../Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -974,17 +974,17 @@ msgstr "Historia"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:291
 msgid "Horizontal blue (B)"
-msgstr "Poziome niebieskim (B)"
+msgstr "Poziome od niebieskiego (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:294
 msgid "Horizontal green (G)"
-msgstr "Poziome zielonym (G)"
+msgstr "Poziome od zielonego (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:297
 msgid "Horizontal red (R)"
-msgstr "Poziome czerwonym (R)"
+msgstr "Poziome od czerwonego (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
@@ -1097,7 +1097,7 @@ msgstr "Intensywność"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
-msgstr "Przecięcie ({0} + lewy przycisk myszy)"
+msgstr "Przecięcie ({0} + główny przycisk myszy)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
@@ -1120,7 +1120,7 @@ msgstr "Jakość JPEG"
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
 msgid "Jarvis-Judice-Ninke"
-msgstr "Jarvisa-Judice'a-Ninke'a"
+msgstr "Jarvisa-Judice’a-Ninke’a"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
 msgid "Julia Fractal"
@@ -1182,14 +1182,11 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
-"Kliknij lewym przyciskiem myszy i przeciągnij zaznaczenie, aby przenieść "
-"wybraną zawartość.\n"
-"Przytrzymaj {0}, aby skalować zamiast przesuwać.\n"
-"Kliknij prawym przyciskiem myszy i przeciągnij zaznaczenie, aby obrócić "
-"wybraną zawartość.\n"
-"Przytrzymaj Shift, aby obracać w krokach.\n"
-"Użyj klawiszy strzałek, aby przesunąć zaznaczoną zawartość o pojedynczy "
-"piksel."
+"Przenieś zaznaczoną treść naciskając główny przycisk myszy i przeciągając.\n"
+"Skaluj zamiast przenosić przytrzymując {0}.\n"
+"Obróć zaznaczoną treść naciskając dodatkowy przycisk myszy i przeciągając.\n"
+"Obracaj krokowo przytrzymując Shift.\n"
+"Przenieś zaznaczoną treść o jeden piksel za pomocą klawiszy strzałek."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:50
 #, csharp-format
@@ -1200,13 +1197,13 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selection outline by a single pixel."
 msgstr ""
-"Kliknij lewym przyciskiem myszy i przeciągnij zaznaczenie, aby przesunąć "
-"kontur zaznaczenia.\n"
-"Przytrzymaj {0}, aby skalować zamiast przesuwać.\n"
-"Kliknij prawym przyciskiem myszy i przeciągnij zaznaczenie, aby obrócić "
-"kontur zaznaczenia.\n"
-"Przytrzymaj Shift, aby obracać w krokach.\n"
-"Użyj klawiszy strzałek, aby przesunąć kontur zaznaczenia o pojedynczy piksel."
+"Przenieś kontur zaznaczenia naciskając główny przycisk myszy i przeciągając."
+"\n"
+"Skaluj zamiast przenosić przytrzymując {0}.\n"
+"Obróć kontur zaznaczenia naciskając dodatkowy przycisk myszy i przeciągając."
+"\n"
+"Obracaj krokowo przytrzymując Shift.\n"
+"Przenieś kontur zaznaczenia o jeden piksel za pomocą klawiszy strzałek."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:58
@@ -1227,33 +1224,31 @@ msgid ""
 "exact same position.\n"
 "Press Enter to finalize the shape."
 msgstr ""
-"Kliknij lewym przyciskiem myszy, aby narysować kształt za pomocą koloru "
-"podstawowego.\n"
-"Kliknij kształt lewym przyciskiem myszy, aby dodać punkt kontrolny.\n"
-"Kliknij lewym przyciskiem myszy punkt kontrolny i przeciągnij, aby go "
-"przesunąć.\n"
-"Kliknij prawym przyciskiem myszy punkt kontrolny i przeciągnij, aby zmienić "
-"jego napięcie.\n"
-"Przytrzymaj Shift, aby przyciągnąć do kątów.\n"
-"Użyj klawiszy strzałek, aby przesunąć wybrany punkt kontrolny.\n"
-"Naciśnij przycisk {0} + strzałki w lewo/w prawo, aby wybrać punkty kontrolne "
-"według kolejności.\n"
-"Naciśnij Usuń, aby usunąć wybrany punkt kontrolny.\n"
-"Naciśnij spację, aby dodać nowy punkt kontrolny w miejscu myszy.\n"
-"Przytrzymaj {0} i naciśnij spację, aby utworzyć punkt kontrolny dokładnie w "
-"tym samym miejscu.\n"
-"Przytrzymaj {0}, klikając lewym przyciskiem myszy punkt kontrolny, aby "
-"utworzyć nowy kształt w dokładnie tej samej pozycji.\n"
-"Naciśnij klawisz Enter, aby zakończyć kształt."
+"Nakreśl kształt kolorem podstawowym naciskając główny przycisku myszy.\n"
+"Dodaj punkt kontrolny naciskając na kształt głównym przyciskiem myszy.\n"
+"Przenieś punkt kontrolny przeciągając nacisnąwszy główny przycisk myszy.\n"
+"Zmień naprężenie punktu kontrolnego przeciągając nacisnąwszy dodatkowy "
+"przycisk myszy.\n"
+"Przyciągaj do kątów przytrzymując Shift.\n"
+"Przenieś punkt kontrolny naciskając klawisze strzałek.\n"
+"Wybieraj kolejne punktu kontrolne naciskając przycisk {0} + strzałki w lewo/"
+"w prawo.\n"
+"Usuń wybrany punkt kontrolny naciskając klawisz Delete.\n"
+"Dodaj nowy punkt kontrolny w położeniu wskaźnika naciskając spację.\n"
+"Utwórz punkt kontrolny w tym samym położeniu naciskając spację "
+"przytrzymawszy {0} .\n"
+"Utwórz nowy kształt w tym samym położeniu naciskając główny przycisk myszy "
+"przytrzymawszy {0} w położeniu punktu kontrolnego.\n"
+"Zakończ kształtowanie naciskając Enter."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
-"Kliknij lewym przyciskiem myszy, aby nakreślić odręcznie jednopikselowe "
-"linie kolorem podstawowym.\n"
-"Kliknij prawym przyciskiem myszy, aby użyć koloru dodatkowego."
+"Nakreśl odręcznie linie o szerokości jednego piksela w kolorze podstawowym "
+"naciskając główny przycisk myszy.\n"
+"Użyj koloru dodatkowego naciskając dodatkowy przycisk myszy."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
@@ -1261,62 +1256,62 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Kliknij lewym przyciskiem myszy, aby kreślić kolorem podstawowym; kliknij "
-"prawym przyciskiem, aby kreślić kolorem dodatkowym."
+"Kreśl kolorem podstawowym naciskając główny przycisk myszy; kreśl kolorem "
+"dodatkowym naciskając dodatkowy przycisk myszy."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:54
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
-"Kliknij lewym przyciskiem myszy, aby wygumkować do przezroczystości; lewym "
-"przyciskiem, aby wygumkować do koloru dodatkowego. "
+"Wygumkuj do przezroczystości naciskając główny przycisk myszy; wygumkuj do "
+"koloru dodatkowego naciskając dodatkowy przycisk myszy. "
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
-"Kliknij lewym przyciskiem myszy, aby wypełnić obszar kolorem podstawowym; "
-"kliknij prawym przyciskiem myszy, aby wypełnić kolorem dodatkowym."
+"Wypełnij obszar kolorem podstawowym naciskając główny przycisk myszy; "
+"wypełnij kolorem dodatkowym naciskając dodatkowy przycisk myszy."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:98
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"Kliknij lewym przyciskiem myszy, aby umieścić kursor, następnie wprowadź "
-"tekst. Tekst będzie mieć kolor podstawowy."
+"Umieść kursor naciskając główny przycisk myszy, następnie wprowadź tekst. "
+"Będzie on w kolorze podstawowym."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:60
 msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
-"Kliknij lewym przyciskiem myszy, aby zastąpić kolor dodatkowy kolorem "
-"podstawowy.\n"
-"Kliknij prawym przyciskiem myszy, aby zastępować na odwrót."
+"Zastąp kolor dodatkowy kolorem podstawowym naciskając główny przycisk myszy."
+"\n"
+"Zastępuj odwrotnie naciskając dodatkowy przycisk myszy."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
-"Lewy przycisk myszy ustawia kolor podstawowy.\n"
-"Prawy przycisk myszy ustawia kolor dodatkowy."
+"Ustaw kolor podstawowy naciskając główny przycisk myszy.\n"
+"Ustaw kolor dodatkowy naciskając dodatkowy przycisk myszy."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:268
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
-"Lewy przycisk myszy ustawia kolor podstawowy. Prawy przycisk myszy ustawia "
-"kolor dodatkowy."
+"Ustaw kolor podstawowy naciskając główny przycisk myszy. Ustaw kolor "
+"dodatkowy naciskając dodatkowy przycisk myszy."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
-"Kliknij, aby ustawić kolor: lewym przyciskiem – kolor podstawowy, prawym – "
-"kolor dodatkowy, środkowym – kolor z palety."
+"Ustaw kolor podstawowy, dodatkowy lub z palety naciskając odpowiednio "
+"główny, dodatkowy lub środkowy przycisk myszy."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1324,9 +1319,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
-"Kliknij lewym przyciskiem myszy, aby powiększyć.\n"
-"Kliknij prawym przyciskiem myszy, aby pomniejszyć.\n"
-"Kliknij i przeciągnij, aby powiększyć zaznaczenie."
+"Powiększ naciskając główny przycisk myszy.\n"
+"Pomniejsz naciskając dodatkowy przycisk myszy.\n"
+"Powiększ do zaznaczenia naciskając i przeciągając."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:337
 msgid "Length"
@@ -1441,12 +1436,12 @@ msgstr "Rozmycie ruchem"
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:284
 msgid "Move Layer Down"
-msgstr "Przesuń warstwę w dół"
+msgstr "Przenieś warstwę w dół"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:67
 #: ../Pinta.Core/Actions/LayerActions.cs:268
 msgid "Move Layer Up"
-msgstr "Przesuń warstwę w górę"
+msgstr "Przenieś warstwę w górę"
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
 msgid "Move Selected Pixels"
@@ -1454,7 +1449,7 @@ msgstr "Przenieś zaznaczone piksele"
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
 msgid "Move Selection"
-msgstr "Przesuń zaznaczenie"
+msgstr "Przenieś zaznaczenie"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:32
 msgid "Multiply"
@@ -1507,11 +1502,11 @@ msgstr "Normalny"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Normal Blending"
-msgstr "Normalne mieszanie"
+msgstr "Mieszanie normalne"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Normal Size"
-msgstr "Normalny rozmiar"
+msgstr "Rozmiar normalny"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal and Outline"
@@ -1881,7 +1876,7 @@ msgstr "Szum losowy"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:270
 msgid "Random Point Locations"
-msgstr "Losowe lokalizacje punktów"
+msgstr "Losowe położenia punktów"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -1971,7 +1966,7 @@ msgstr "Przywróć domyślne"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Reset Color"
-msgstr "Zresetuj kolor"
+msgstr "Przywróć kolor"
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
@@ -2406,11 +2401,11 @@ msgstr "Przezroczysty"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:146
 msgid "Turbulence"
-msgstr "Turbulencja"
+msgstr "Turbulentność"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
-msgstr "Wir"
+msgstr "Wirowość"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
@@ -2432,7 +2427,7 @@ msgstr "Cofnij"
 
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:24
 msgid "Unfocus"
-msgstr "Rozmycie powierzchowe"
+msgstr "Stłum ostrość"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
@@ -2447,7 +2442,7 @@ msgstr "Odinstaluj…"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
-msgstr "Kombinacja (+) ({0} + lewy przycisk myszy)"
+msgstr "Dodawanie (+) ({0} + główny przycisk myszy)"
 
 #: ../Pinta.Core/Classes/Document.cs:101
 #, csharp-format
@@ -2495,17 +2490,17 @@ msgstr "Wersja: {0}"
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:301
 msgid "Vertical blue (B)"
-msgstr "Pionowe niebieskim (B)"
+msgstr "Pionowe od niebieskiego (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:304
 msgid "Vertical green (G)"
-msgstr "Pionowe zielonym (G)"
+msgstr "Pionowe od zielonego (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:307
 msgid "Vertical red (R)"
-msgstr "Pionowe czerwonym (R)"
+msgstr "Pionowe od czerwonego (R)"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
@@ -2554,7 +2549,7 @@ msgstr "Różnica symetryczna"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr "Xor ({0} + prawy przycisk myszy)"
+msgstr "Różnica symetryczna ({0} + prawy przycisk myszy)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:480
@@ -2656,9 +2651,7 @@ msgstr "przez współtwórców Pinty"
 
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
-msgstr ""
-"draw;drawing;paint;painting;graphics;raster;2d;rysowanie;rysunek;obraz;"
-"grafika;rastrowa;"
+msgstr "obraz;rysowanie;rysunek;malowanie;kreślenie;grafika;rastrowa;raster;2d;"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
@@ -2706,8 +2699,8 @@ msgstr ""
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr ""
-"{0} + lewy przycisk myszy, aby ustawić początek, lewy przycisk myszy, aby "
-"malować."
+"Ustaw początek naciskając {0} + główny przycisk myszy; maluj naciskając "
+"główny przycisk myszy."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
