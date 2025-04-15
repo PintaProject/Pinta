@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2025-04-13 20:22+0000\n"
+"PO-Revision-Date: 2025-04-15 19:13+0000\n"
 "Last-Translator: Rivo Zängov <rivozangov@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/pinta/pinta/et/>"
 "\n"
@@ -26,7 +26,7 @@ msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
 msgid " Selection Mode: "
-msgstr ""
+msgstr " Valiku režiim: "
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:70
 #: ../Pinta.Core/Managers/EffectsManager.cs:104
@@ -51,7 +51,7 @@ msgstr "9 x 9 piirkond"
 
 #: ../Pinta/MainWindow.cs:387
 msgid "A_dd-ins"
-msgstr ""
+msgstr "Lisa_d"
 
 #: ../Pinta.Core/Actions/AppActions.cs:40
 msgid "About"
@@ -188,7 +188,7 @@ msgstr "Taust:"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:93
 msgid "Based on the work of Paint.NET:"
-msgstr ""
+msgstr "Põhineb Paint.NET-il:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
