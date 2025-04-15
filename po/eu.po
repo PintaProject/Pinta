@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2025-04-14 12:22+0000\n"
+"PO-Revision-Date: 2025-04-15 17:01+0000\n"
 "Last-Translator: Asier Saratsua Garmendia <asier.sarasua@gmail.com>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/pinta/pinta/eu/>\n"
 "Language: eu\n"
@@ -623,7 +623,7 @@ msgstr "Ezabatua"
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:50
 msgid "Dents"
-msgstr ""
+msgstr "Mailatuak"
 
 #: ../Pinta.Core/Actions/EditActions.cs:278
 msgid "Deselect"
@@ -662,7 +662,7 @@ msgstr "Distortsioa"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:12
 msgid "Dithering"
-msgstr ""
+msgstr "Bilbatzea"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
@@ -719,7 +719,7 @@ msgstr "Bozeldu"
 
 #: ../Pinta/Main.cs:65
 msgid "Enable additional logging or behavior changes for debugging"
-msgstr ""
+msgstr "Gaitu erregistro gehigarria edo portaera-aldaketak arazketarako"
 
 #: ../Pinta.Core/Actions/EditActions.cs:76
 #: ../Pinta.Core/Actions/EditActions.cs:264
@@ -736,7 +736,7 @@ msgstr "Errorea"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:135
 msgid "Error Diffusion Method"
-msgstr ""
+msgstr "Errore-barreiatzearen metodoa"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 msgid "Exclude (-) (Right Click)"
@@ -1094,7 +1094,7 @@ msgstr "Intentsitatea"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
-msgstr "Ebaki ({0} + ezkerreko klik)"
+msgstr "Ebaketa ({0} + ezkerreko klik)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
@@ -1179,6 +1179,12 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"Ezkerreko klik hautapenean eta arrastatu hautatutako edukia lekuz aldatzeko."
+"\n"
+"Eutsi {0} sakatuta eskala aldatzeko, lekuz aldatu ordez.\n"
+"Eskuineko klik hautapenean eta arrastatu hautatuta edukia biratzeko.\n"
+"Eutsi 'Shift' teklari urratsez urrats biratzeko.\n"
+"Erabili gezi-teklak hautatutako edukia pixel bakar batean lekuz aldatzeko."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:50
 #, csharp-format
@@ -1215,6 +1221,9 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
+"Ezkerreko klik forma librea marrazteko pixel bateko marrekin eta kolore "
+"nagusiarekin.\n"
+"Eskuineko klik bigarren mailako kolorea erabiltzeko."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
@@ -1222,7 +1231,7 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Ezkerreko klik-a kolore nagusiarekin marrazteko, eskuineko klik-a bigarren "
+"Ezkerreko klik kolore nagusiarekin marrazteko, eskuineko klik bigarren "
 "mailako kolorearekin marrazteko."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:54
@@ -1237,16 +1246,16 @@ msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
-"Ezkerreko klik-a eskualde bat kolore nagusiarekin betetzeko, eskuineko klik-"
-"a bigarren mailako kolorearekin betetzeko."
+"Ezkerreko klik eskualde bat kolore nagusiarekin betetzeko, eskuineko klik "
+"bigarren mailako kolorearekin betetzeko."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:98
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"Ezkerreko klik-a kurtsorea kokatzeko, ondoren idatzi textua. Testuaren "
-"kolorea kolore nagusia izango da."
+"Ezkerreko klik kurtsorea kokatzeko, ondoren idatzi testua. Testuaren kolorea "
+"kolore nagusia izango da."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:60
 msgid ""
@@ -1267,7 +1276,7 @@ msgstr ""
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:268
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
-"Ezkerreko klik-a kolore nagusia ezartzeko. Eskuineko klik-a bigarren mailako "
+"Ezkerreko klik kolore nagusia ezartzeko. Eskuineko klik bigarren mailako "
 "kolorea ezartzeko."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
@@ -1275,8 +1284,8 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
-"Ezkerreko klik-a kolore nagusia ezartzeko. Eskuineko klik-a bigarren mailako "
-"kolorea ezartzeko. Erdiko klik-a paletako kolorea hautatzeko."
+"Ezkerreko klik kolore nagusia ezartzeko. Eskuineko klik bigarren mailako "
+"kolorea ezartzeko. Erdiko klik paletako kolorea hautatzeko."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1426,7 +1435,7 @@ msgstr "Izena:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Aldameneko hurbilena"
 
 #: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New"
@@ -1828,7 +1837,7 @@ msgstr "Ausazkoa"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 msgid "Random Color Scheme Seed"
-msgstr ""
+msgstr "Ausazko kolore-eskemaren hazia"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:267
 msgid "Random Colors"
@@ -2409,7 +2418,7 @@ msgstr "Desinstalatu..."
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
-msgstr "Batu (+) ({0} + ezkerreko klik)"
+msgstr "Batuketa (+) ({0} + ezkerreko klik)"
 
 #: ../Pinta.Core/Classes/Document.cs:101
 #, csharp-format
@@ -2472,7 +2481,7 @@ msgstr "Gorri bertikala (R)"
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
-msgstr ""
+msgstr "Bineta"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
