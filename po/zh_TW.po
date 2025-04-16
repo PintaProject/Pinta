@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2025-04-16 11:10+0000\n"
+"PO-Revision-Date: 2025-04-16 11:13+0000\n"
 "Last-Translator: taijuin Lee <taijuin@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/pinta/pinta/zh_Hant/>\n"
@@ -2009,7 +2009,7 @@ msgstr "飽和度"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:568
 msgid "Sat & Value"
-msgstr ""
+msgstr "飽和度與值"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
@@ -2067,7 +2067,7 @@ msgstr "全選"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
-msgstr ""
+msgstr "選定的顏色"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -2083,7 +2083,7 @@ msgstr "形狀類型"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:245
 msgid "Sharp Edges"
-msgstr ""
+msgstr "鋒利的邊緣"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
@@ -2097,7 +2097,7 @@ msgstr "快速鍵"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 msgid "Show Grid"
-msgstr ""
+msgstr "顯示網格"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Show Layer"
