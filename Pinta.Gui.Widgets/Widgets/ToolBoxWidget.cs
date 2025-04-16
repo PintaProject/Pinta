@@ -8,9 +8,6 @@ public sealed class ToolBoxWidget : FlowBox
 {
 	public ToolBoxWidget ()
 	{
-		HeightRequest = 375;
-		AddCssClass (AdwaitaStyles.Linked);
-
 		PintaCore.Tools.ToolAdded += HandleToolAdded;
 		PintaCore.Tools.ToolRemoved += HandleToolRemoved;
 
@@ -20,7 +17,7 @@ public sealed class ToolBoxWidget : FlowBox
 		Homogeneous = true;
 		MinChildrenPerLine = 6;
 		MaxChildrenPerLine = 1024; // If there is enough vertical space, only use one column
-		Vexpand = false;
+		Vexpand = true;
 		Valign = Align.Start;
 	}
 
