@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2025-04-16 09:25+0000\n"
+"PO-Revision-Date: 2025-04-16 09:38+0000\n"
 "Last-Translator: taijuin Lee <taijuin@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/pinta/pinta/zh_Hant/>\n"
@@ -308,7 +308,7 @@ msgstr "畫布網格設定"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "畫布網格..."
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
@@ -316,7 +316,7 @@ msgstr "格子大小"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "中心"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:228
 msgid "Center Align"
@@ -324,7 +324,7 @@ msgstr "置中"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "中左"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:156
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
@@ -333,7 +333,7 @@ msgstr "中心偏移"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "中右"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:126
 msgid "Centered"
@@ -346,7 +346,7 @@ msgstr "公分(cm)"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "變更筆刷寬度。快捷鍵：[ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:355
 msgid "Changed Shape Type"
@@ -355,11 +355,11 @@ msgstr "已變更形狀類型"
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:36
 msgid "Cherry Blossom"
-msgstr ""
+msgstr "櫻花"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:632
 msgid "Choose Color"
-msgstr ""
+msgstr "選擇顏色"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:111
 msgid "Choose Palette Color"
