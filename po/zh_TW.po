@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2025-04-16 11:13+0000\n"
+"PO-Revision-Date: 2025-04-16 14:58+0000\n"
 "Last-Translator: taijuin Lee <taijuin@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/pinta/pinta/zh_Hant/>\n"
@@ -999,7 +999,7 @@ msgstr "圖示檔不能大於 255 × 255 像素。"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "如果不儲存，所有變更會永久失去。"
+msgstr "如果不儲存，所有變更會永久遺失。"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:423
 msgid "Image"
@@ -2009,7 +2009,7 @@ msgstr "飽和度"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:568
 msgid "Sat & Value"
-msgstr "飽和度與值"
+msgstr "飽和度與明度"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
@@ -2046,7 +2046,7 @@ msgstr "儲存調色盤檔案"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "關閉前要儲存對圖片「{0}」的變更？"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:173
 msgid "Scale"
@@ -2105,21 +2105,23 @@ msgstr "顯示圖層"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:550
 msgid "Show Value"
-msgstr ""
+msgstr "顯示明度"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Show/Hide"
-msgstr ""
+msgstr "顯示/隱藏"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
+#, fuzzy
 msgid "Sierra"
-msgstr ""
+msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
+#, fuzzy
 msgid "Sierra Lite"
-msgstr ""
+msgstr "Sierra Lite"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
@@ -2155,7 +2157,7 @@ msgstr "方塊"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Status Bar"
-msgstr ""
+msgstr "狀態列"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:148
@@ -2164,8 +2166,9 @@ msgstr "強度"
 
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
+#, fuzzy
 msgid "Stucki"
-msgstr ""
+msgstr "Stucki"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
@@ -2188,7 +2191,7 @@ msgstr "文字"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:86
 msgid "Text - Finalize"
-msgstr ""
+msgstr "文字 - 完成"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:254
 msgid "Text Style"
@@ -2198,7 +2201,7 @@ msgstr "文字樣式"
 #: ../Pinta/MainWindow.cs:297
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr ""
+msgstr "「{0}」附加元件可能與此版本的 Pinta 不相容"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:208
 msgid "The clipboard does not contain an image."
@@ -2206,7 +2209,7 @@ msgstr "剪貼簿不包含圖片。"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:200
 msgid "The file may be an invalid or corrupt extension package"
-msgstr ""
+msgstr "檔案可能是無效或損毀的擴充軟體包"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:79
 msgid "The following dependencies could not be resolved:"
@@ -2214,11 +2217,11 @@ msgstr "無法解決以下依存性問題："
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:72
 msgid "The following packages need to be uninstalled:"
-msgstr "要解除安裝以下套件："
+msgstr "要解除安裝以下軟體包："
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:66
 msgid "The following packages will be installed:"
-msgstr "會安裝以下套件："
+msgstr "會安裝以下軟體包："
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:229
 msgid "The following packages will be uninstalled:"
@@ -2533,11 +2536,11 @@ msgstr "調整(_A)"
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
-msgstr ""
+msgstr "取消(_C)"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
-msgstr ""
+msgstr "丟棄(_D)"
 
 #: ../Pinta/MainWindow.cs:362
 msgid "_Edit"
@@ -2564,11 +2567,11 @@ msgstr "圖層(_L)"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr ""
+msgstr "確定(_O)"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr ""
+msgstr "儲存(_S)"
 
 #: ../Pinta/MainWindow.cs:366
 msgid "_View"
