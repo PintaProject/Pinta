@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2025-04-16 14:58+0000\n"
+"PO-Revision-Date: 2025-04-17 11:15+0000\n"
 "Last-Translator: taijuin Lee <taijuin@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/pinta/pinta/zh_Hant/>\n"
@@ -371,25 +371,31 @@ msgstr "圓圈"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
-msgstr ""
+msgstr "限制範圍"
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:42
 msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
+"按一下並拖曳來繪製矩形選區。\n"
+"按住 Shift 鍵可限制為正方形。"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
 msgstr ""
+"按一下並拖曳來繪製橢圓形選區。\n"
+"按住 Shift 鍵可限制為圓形。"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
 msgstr ""
+"按一下並拖曳，以繪製從主要顏色到次要顏色的漸層。\n"
+"按一下滑鼠右鍵即可反轉。"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
 msgid "Click and drag to draw the outline for a selection area."
@@ -695,8 +701,9 @@ msgstr "特效"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
+#, fuzzy
 msgid "Electric"
-msgstr ""
+msgstr "Electric"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
@@ -1175,6 +1182,11 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"左擊並拖曳選取的內容，即可移動選取的內容。\n"
+"按住 {0} 不移動，而是縮放。\n"
+"右鍵按一下並拖曳選取區域，可旋轉選取的內容。\n"
+"按住 Shift 可逐級旋轉。\n"
+"使用方向鍵將選取的內容移動一個像素。"
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:50
 #, csharp-format
@@ -1185,6 +1197,11 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selection outline by a single pixel."
 msgstr ""
+"左擊並拖曳選取區域來移動選取輪廓。\n"
+"按住 {0} 不移動，而是縮放。\n"
+"按滑鼠右鍵並拖曳選取區域，以旋轉選取輪廓。\n"
+"按住 Shift 鍵可逐步旋轉。\n"
+"使用箭頭鍵移動選取範圍的單一像素。"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:58
@@ -1205,12 +1222,26 @@ msgid ""
 "exact same position.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"左鍵按一下以主色繪製形狀。\n"
+"在形狀上按一下滑鼠左鍵以加入控制點。\n"
+"在控制點上按一下滑鼠左鍵，然後拖曳來移動控制點。\n"
+"在控制點上按一下滑鼠右鍵，然後拖動以改變其張力。\n"
+"按住 Shift 鍵可捕捉角度。\n"
+"使用箭頭鍵移動選取的控制點。\n"
+"按 {0} + 左/右箭頭按順序選擇控制點。\n"
+"按 Delete 鍵刪除選取的控制點。\n"
+"按空格在滑鼠位置新增一個控制點。\n"
+"按住 {0} 的同時按空格，在完全相同的位置建立控制點。\n"
+"按住 {0}，同時左鍵點選控制點，在完全相同的位置建立新的形狀。\n"
+"按 Enter 鍵確定形狀。"
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
+"按一下滑鼠左鍵，使用主要顏色繪製一像素寬的自由形線條。\n"
+"按一下滑鼠右鍵可使用次要顏色。"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
@@ -1242,12 +1273,16 @@ msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
+"左鍵按一下可將次要顏色換成主要顏色。\n"
+"按一下滑鼠右鍵可反色。"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"左鍵按一下以設定主要顏色。\n"
+"按一下滑鼠右鍵可設定次要顏色。"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:268
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -1267,6 +1302,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"左鍵按一下可放大。\n"
+"右鍵按一下可縮小。\n"
+"按一下並拖曳以放大選取範圍。"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:337
 msgid "Length"
@@ -1406,7 +1444,7 @@ msgstr "名稱："
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "最近的鄰近"
 
 #: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New"
@@ -1670,14 +1708,17 @@ msgid ""
 "apply to your images, and also has the ability to create unlimited layers to "
 "help organize your creativity."
 msgstr ""
+"Pinta 是一款圖像編輯、繪圖和繪畫應用程式，介面簡單卻功能強大。Pinta "
+"擁有多種繪圖工具，包括：自由繪圖、矩形、圓和線條。它還有超過 35 "
+"種效果可套用在您的圖像上，還能建立無限圖層，幫助您組織創意。"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:458
 msgid "Pinta supports the following file formats:"
-msgstr ""
+msgstr "Pinta 支援下列檔案格式："
 
 #: ../Pinta.Core/Classes/Palette.cs:195
 msgid "Pinta supports the following palette formats:"
-msgstr ""
+msgstr "Pinta 支援下列調色盤格式："
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:24
 msgid "Pixelate"
@@ -2231,7 +2272,7 @@ msgstr "會解除安裝以下套件："
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
-msgstr ""
+msgstr "貼上的圖像大於畫布。您想如何調整畫布大小？"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:352
 msgid "The installation failed!"
@@ -2245,7 +2286,7 @@ msgstr "安裝程序完成，但有警告訊息。"
 msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
-msgstr ""
+msgstr "由於存在相依性衝突，因此無法安裝選取的擴充軟體包。"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:359
 msgid "The uninstallation failed!"
@@ -2259,7 +2300,7 @@ msgstr "解除安裝程序完成，但有警告訊息。"
 msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
-msgstr ""
+msgstr "還有其他依賴先前擴充包的擴充包也將被解除安裝："
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:134
 msgid "Thickness"
@@ -2267,7 +2308,7 @@ msgstr "厚度"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:160
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "此格式不支援圖層。壓平影像？"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:29
 msgid "Tile Reflection"
@@ -2279,7 +2320,7 @@ msgstr "瓷磚大小"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:235
 msgid "Tile Type"
-msgstr ""
+msgstr "磁磚類型"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
 msgid "Tip: Right-click to remove control points."
@@ -2299,7 +2340,7 @@ msgstr "工具"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Tool Box"
-msgstr ""
+msgstr "工具箱"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:76
 msgid "Tool Windows"
@@ -2311,15 +2352,15 @@ msgstr "工具列"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
-msgstr ""
+msgstr "頂端中心"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
-msgstr ""
+msgstr "左上方"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
-msgstr ""
+msgstr "右上方"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
@@ -2331,7 +2372,7 @@ msgstr "翻譯本軟體"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
-msgstr ""
+msgstr "透明模式"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:137
@@ -2340,7 +2381,7 @@ msgstr "透明"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:146
 msgid "Turbulence"
-msgstr ""
+msgstr "湍流"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
@@ -2349,7 +2390,7 @@ msgstr "扭曲"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
 msgid "Two-Row Sierra"
-msgstr ""
+msgstr "雙列 Sierra"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
@@ -2375,13 +2416,13 @@ msgstr "解除安裝"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:185
 msgid "Uninstall..."
-msgstr ""
+msgstr "解除安裝..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
-msgstr ""
+msgstr "聯合 (+) ({0} + 左鍵)"
 
 #: ../Pinta.Core/Classes/Document.cs:101
 #, csharp-format
@@ -2394,11 +2435,11 @@ msgstr "檔案格式不支援"
 
 #: ../Pinta.Core/Classes/Palette.cs:155
 msgid "Unsupported palette format"
-msgstr ""
+msgstr "不支援的調色盤格式"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
-msgstr ""
+msgstr "更新..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
@@ -2418,32 +2459,32 @@ msgstr "由此取用一些圖示："
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:670
 msgid "Value"
-msgstr ""
+msgstr "明度"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "版本：{0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:301
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "垂直藍色 (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:304
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "垂直綠色 (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:307
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "垂直紅色 (R)"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
-msgstr ""
+msgstr "小插圖"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
@@ -2451,7 +2492,7 @@ msgstr "可見"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Voronoi 圖表"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:132
 msgid "Warmth"
@@ -2487,20 +2528,20 @@ msgstr "互斥或(Xor)"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr ""
+msgstr "Xor ({0} + 右鍵按一下)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:480
 #, csharp-format
 msgid "You do not have access to '{0}'."
-msgstr ""
+msgstr "您無法存取「{0}」。"
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
-msgstr ""
+msgstr "您無權修改「{0}」。檔案或資料夾可能為唯讀。"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
@@ -2616,14 +2657,14 @@ msgstr ""
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:49
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
-msgstr ""
+msgstr "{0} + 左鍵設定原點，左鍵繪圖。"
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:207
 #, csharp-format
 msgid "{0} copy"
-msgstr ""
+msgstr "{0} 副本"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:118
 #, csharp-format
