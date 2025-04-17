@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2025-04-17 11:15+0000\n"
+"PO-Revision-Date: 2025-04-17 13:47+0000\n"
 "Last-Translator: taijuin Lee <taijuin@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/pinta/pinta/zh_Hant/>\n"
@@ -51,7 +51,7 @@ msgstr "9×9 區域"
 
 #: ../Pinta/MainWindow.cs:387
 msgid "A_dd-ins"
-msgstr "增益集(_D)"
+msgstr "附加元件(_D)"
 
 #: ../Pinta.Core/Actions/AppActions.cs:40
 msgid "About"
@@ -99,7 +99,6 @@ msgid "All files"
 msgstr "所有檔案"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:709
-#, fuzzy
 msgid "Alpha"
 msgstr "Alpha"
 
@@ -399,11 +398,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "按住滑鼠並拖動畫出選取區域的邊框"
+msgstr "按住滑鼠並拖動畫出選取區域的邊框。"
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
-msgstr "按住滑鼠並拖動以瀏覽圖片"
+msgstr "按住滑鼠並拖動以瀏覽圖片。"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
 msgid "Click to reset primary and secondary color."
@@ -701,7 +700,6 @@ msgstr "特效"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
-#, fuzzy
 msgid "Electric"
 msgstr "Electric"
 
@@ -878,7 +876,6 @@ msgstr "泛濫模式"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
-#, fuzzy
 msgid "Floyd-Steinberg"
 msgstr "Floyd-Steinberg"
 
@@ -955,7 +952,6 @@ msgid "Height:"
 msgstr "高度："
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:623
-#, fuzzy
 msgid "Hex"
 msgstr "Hex"
 
@@ -1118,7 +1114,6 @@ msgstr "JPEG 品質"
 
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
-#, fuzzy
 msgid "Jarvis-Judice-Ninke"
 msgstr "Jarvis-Judice-Ninke"
 
@@ -1266,7 +1261,7 @@ msgstr "點擊滑鼠左鍵，用主要顏色填滿一區域。點擊滑鼠右鍵
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
-msgstr "點擊滑鼠左鍵，輸入想要的文字。(文字顏色是主要顏色！)"
+msgstr "點擊滑鼠左鍵，輸入想要的文字。文字顏色是主要顏色。"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:60
 msgid ""
@@ -1457,7 +1452,7 @@ msgstr "新增圖片"
 
 #: ../Pinta.Core/Actions/FileActions.cs:51
 msgid "New Screenshot..."
-msgstr "新增螢幕擷圖 ..."
+msgstr "新增螢幕截圖 ..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:62
 msgid "New palette size:"
@@ -1698,7 +1693,7 @@ msgstr "Pinta 的官方網站"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta 不支援儲存這個檔案格式的圖片"
+msgstr "Pinta 不支援儲存這個檔案格式的圖片。"
 
 #: ../xdg/pinta.appdata.xml.in.h:1
 msgid ""
@@ -1730,7 +1725,6 @@ msgstr "像素"
 
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:56
-#, fuzzy
 msgid "Piña Colada"
 msgstr "Piña Colada"
 
@@ -1904,7 +1898,7 @@ msgstr "重新整理"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:90
 msgid "Released under the MIT X11 License."
-msgstr "以 MIT X11 許可證發行"
+msgstr "根據 MIT X11 授權釋出。"
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:41
 msgid "Relief"
@@ -2154,13 +2148,11 @@ msgstr "顯示/隱藏"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
-#, fuzzy
 msgid "Sierra"
 msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
-#, fuzzy
 msgid "Sierra Lite"
 msgstr "Sierra Lite"
 
@@ -2207,7 +2199,6 @@ msgstr "強度"
 
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
-#, fuzzy
 msgid "Stucki"
 msgstr "Stucki"
 
@@ -2628,7 +2619,7 @@ msgstr "屬於開發Pinta程式的貢獻者"
 
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
-msgstr "draw;drawing;paint;painting;graphics;raster;2d;"
+msgstr "draw;drawing;paint;painting;graphics;raster;2d;繪圖;繪畫;圖形;光柵;2D;"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
