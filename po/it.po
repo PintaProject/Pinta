@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2025-03-30 22:05+0000\n"
-"Last-Translator: cas9 <cas9@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/pinta/pinta/it/"
-">\n"
+"PO-Revision-Date: 2025-04-17 08:06+0000\n"
+"Last-Translator: Massimo S <info.max2@tiscali.it>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/pinta/pinta/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.11.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -59,7 +59,7 @@ msgstr "Informazioni"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:64
 msgid "About Pinta"
-msgstr "A proposito di Pinta"
+msgstr "Informazioni su Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:59
 #: ../Pinta.Core/Actions/LayerActions.cs:371
@@ -73,7 +73,7 @@ msgstr "Aggiungi disturbo"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr "Add-in Manager..."
+msgstr "Gestore Add-in..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
 msgid "Added"
@@ -624,7 +624,7 @@ msgstr "Cancellato"
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:50
 msgid "Dents"
-msgstr ""
+msgstr "Increspature"
 
 #: ../Pinta.Core/Actions/EditActions.cs:278
 msgid "Deselect"
@@ -785,11 +785,11 @@ msgstr "Impossibile scattare una schermata"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:174
 msgid "Feather Canvas Edge"
-msgstr ""
+msgstr "Sfocatura bordo tela"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather Object"
-msgstr ""
+msgstr "Sfuma oggetto"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "File a Bug"
@@ -955,7 +955,7 @@ msgstr "Altezza:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:623
 msgid "Hex"
-msgstr ""
+msgstr "Esadecimale"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Hide Layer"
@@ -994,7 +994,7 @@ msgstr "Tinta"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:557
 msgid "Hue & Sat"
-msgstr ""
+msgstr "Tonalità e saturazione"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
@@ -1406,7 +1406,7 @@ msgstr "Frattale Mandelbrot"
 #. Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
 #: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Martian Lava"
-msgstr ""
+msgstr "Lava marziana"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:24
 msgid "Median"
@@ -1522,7 +1522,7 @@ msgstr "Il numero di thread da usare per il rendering"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:453
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
@@ -1596,15 +1596,15 @@ msgstr "Bordo"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:217
 msgid "Outline Border"
-msgstr ""
+msgstr "Bordo esterno"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:24
 msgid "Outline Edge"
-msgstr ""
+msgstr "Contorno del bordo"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
 msgid "Outline Object"
-msgstr ""
+msgstr "Contorno dell'oggetto"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
@@ -2066,11 +2066,11 @@ msgstr "Campionamento"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Sat"
-msgstr ""
+msgstr "Saturazione"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:568
 msgid "Sat & Value"
-msgstr ""
+msgstr "Saturazione e luminosità"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
@@ -2144,7 +2144,7 @@ msgstr "Tipo di figura"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:245
 msgid "Sharp Edges"
-msgstr ""
+msgstr "Bordi affilati"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
@@ -2346,7 +2346,7 @@ msgstr "Dimensione della piastrella"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:235
 msgid "Tile Type"
-msgstr ""
+msgstr "Tipo di piastrella"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
 msgid "Tip: Right-click to remove control points."
@@ -2513,7 +2513,7 @@ msgstr "Rosso Verticale (R)"
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
-msgstr ""
+msgstr "Effetto vignetta"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
