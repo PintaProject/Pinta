@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2025-04-15 19:13+0000\n"
+"PO-Revision-Date: 2025-04-20 08:42+0000\n"
 "Last-Translator: Rivo Zängov <rivozangov@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/pinta/pinta/et/>"
 "\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.11.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
-msgstr ""
+msgstr " (kasutaja kaustas)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
 msgid " Selection Mode: "
@@ -211,7 +211,7 @@ msgstr "Mustvalge"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:82
 msgid "Blend Mode"
-msgstr ""
+msgstr "Sulatamise režiim"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
@@ -278,7 +278,7 @@ msgstr ""
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Burkes"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:184
@@ -328,7 +328,7 @@ msgstr "Keskel paremal"
 #: ../Pinta.Effects/Effects/DentsEffect.cs:156
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
 msgid "Center Offset"
-msgstr ""
+msgstr "Nihe keskelt"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
@@ -345,11 +345,11 @@ msgstr "Sentimeetrid"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Muuda pintsli suurust. Klaviatuuri otseteed: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:355
 msgid "Changed Shape Type"
-msgstr ""
+msgstr "Muudetud kujundi liik"
 
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:36
@@ -358,7 +358,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:632
 msgid "Choose Color"
-msgstr ""
+msgstr "Vali värv"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:111
 msgid "Choose Palette Color"
@@ -392,15 +392,15 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
 msgid "Click and drag to draw the outline for a selection area."
-msgstr ""
+msgstr "Kliki ja lohista, et joonistada valikuala piirjoon."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
-msgstr ""
+msgstr "Pildil liikumuseks klikki ja lohista."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
 msgid "Click to reset primary and secondary color."
-msgstr ""
+msgstr "Kliki, et nullida peamine ja teisejärguline värv."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:271
 msgid "Click to select primary color."
@@ -408,11 +408,11 @@ msgstr "Kliki, et valida peamine värv."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:49
 msgid "Click to select region of similar color."
-msgstr ""
+msgstr "Kliki, et valida sarnase värviga piirkonnad."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
 msgid "Click to select secondary color."
-msgstr ""
+msgstr "Kliki, et valida teisejärguline värv."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:277
@@ -739,7 +739,7 @@ msgstr ""
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:227
 msgid "Expand"
-msgstr ""
+msgstr "Laienda"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
@@ -822,7 +822,7 @@ msgstr ""
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1096
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1380
 msgid "Finalized"
-msgstr ""
+msgstr "Lõpetatud"
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:41
 msgid "Finish Pixels"
@@ -845,11 +845,11 @@ msgstr "Peegelda horisontaalselt"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:51
 msgid "Flip Image Horizontal"
-msgstr ""
+msgstr "Peegelda pilti horisontaalteljel"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:55
 msgid "Flip Image Vertical"
-msgstr ""
+msgstr "Peegelda pilti vertikaalteljel"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:76
 msgid "Flip Layer Horizontal"
@@ -888,11 +888,11 @@ msgstr "Fragment"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:134
 msgid "Fragments"
-msgstr ""
+msgstr "Fragmendid"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:51
 msgid "Freeform Shape"
-msgstr ""
+msgstr "Vabakäe kujund"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:24
 msgid "Frosted Glass"
@@ -1109,7 +1109,7 @@ msgstr "JPEG kvaliteet"
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
 msgid "Jarvis-Judice-Ninke"
-msgstr ""
+msgstr "Jarvis-Judice-Ninke"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
 msgid "Julia Fractal"
@@ -1280,15 +1280,15 @@ msgstr "Litsents"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Light"
-msgstr ""
+msgstr "Hele"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
-msgstr ""
+msgstr "Heledamaks"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:129
 msgid "Lighting"
-msgstr ""
+msgstr "Heledus"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
 msgid "Lightness"
@@ -1584,7 +1584,7 @@ msgstr "Värvipalett"
 
 #: ../Pinta.Core/Actions/EditActions.cs:457
 msgid "Palette files"
-msgstr ""
+msgstr "Paleti failid"
 
 #: ../Pinta.Tools/Tools/PanTool.cs:40
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:148
@@ -1599,12 +1599,12 @@ msgstr "Aseta"
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
 msgid "Paste Into New Image"
-msgstr ""
+msgstr "Aseta uuele pildile"
 
 #: ../Pinta.Core/Actions/EditActions.cs:74
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste Into New Layer"
-msgstr ""
+msgstr "Aseta uuele kihile"
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
@@ -1645,7 +1645,7 @@ msgstr ""
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
-msgstr ""
+msgstr "Pinta pildiredaktor"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:45
 msgid "Pinta Website"
@@ -1683,16 +1683,16 @@ msgstr "Pikslid"
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:56
 msgid "Piña Colada"
-msgstr ""
+msgstr "Piña Colada"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:802
 msgid "Point Added"
-msgstr ""
+msgstr "Punkt on lisatud"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:650
 msgid "Point Deleted"
-msgstr ""
+msgstr "Punkt on kustutatud"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:27
 msgid "Polar Inversion"
@@ -1718,11 +1718,11 @@ msgstr ""
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:225
 msgid "Preserve"
-msgstr ""
+msgstr "Säilita"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
-msgstr ""
+msgstr "Säilita värviüleminek"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
@@ -1784,7 +1784,7 @@ msgstr "Raadius"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:143
 msgid "Radius Percentage"
-msgstr ""
+msgstr "Raadiuse protsent"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:287
@@ -1903,12 +1903,12 @@ msgstr "Taasta värv"
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
-msgstr ""
+msgstr "Taasta vaikeväärtused"
 
 #: ../Pinta.Core/Classes/Document.cs:326
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:181
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Muuda lõuendi suurust"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:57
 msgid "Resize Canvas..."
@@ -1954,7 +1954,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/ImageActions.cs:62
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:47
 msgid "Rotate 180°"
-msgstr ""
+msgstr "Pööra 180°"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:60
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:59
@@ -1989,7 +1989,7 @@ msgstr "Joonlaua ühikud"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:80
 msgid "Rulers"
-msgstr ""
+msgstr "Joonlauad"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
 msgid "Sampling"
@@ -2085,7 +2085,7 @@ msgstr "Teravustamine"
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:487
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
 msgid "Shortcut key"
-msgstr ""
+msgstr "Klaviatuuri otsetee"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 msgid "Show Grid"
@@ -2139,7 +2139,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
-msgstr ""
+msgstr "Pritsmed"
 
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:35
 msgid "Squares"
@@ -2609,20 +2609,20 @@ msgstr "{0} koopia"
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:118
 #, csharp-format
 msgid "{0} image ({1})"
-msgstr ""
+msgstr "{0} pilt ({1})"
 
 #. Translators: {0} is the palette format (e.g. "GIMP") and {1} is a list of file extensions.
 #: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:63
 #, csharp-format
 msgid "{0} palette ({1})"
-msgstr ""
+msgstr "{0} palett ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
 #: ../Pinta.Core/Actions/ViewActions.cs:287
 #, csharp-format
 msgid "{0}%"
-msgstr ""
+msgstr "{0}%"
 
 #~ msgid "Choose Primary Color"
 #~ msgstr "Vali peamine värv"
