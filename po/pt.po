@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
 "PO-Revision-Date: 2025-04-22 23:24+0000\n"
-"Last-Translator: Lucas Campello <lucas.campello@gmail.com>\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/pinta/pinta/"
 "pt/>\n"
 "Language: pt\n"
@@ -993,7 +993,7 @@ msgstr "Tonalidade"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:557
 msgid "Hue & Sat"
-msgstr "Hue & Sat"
+msgstr "Tonalidade e saturação"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
@@ -2566,7 +2566,7 @@ msgstr "Não tem acesso a '{0}'."
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
-"Não tem acesso para modificar  '{0}'. O ficheiro ou pasta pode ser apenas de "
+"Não tem acesso para modificar '{0}'. O ficheiro ou pasta pode ser apenas de "
 "leitura."
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
