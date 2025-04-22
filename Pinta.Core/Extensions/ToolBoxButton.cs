@@ -44,8 +44,6 @@ public sealed class ToolBoxButton : ToggleButton
 
 		AddCssClass (AdwaitaStyles.Flat);
 
-		Show ();
-
 		string shortcutText = "";
 		if (tool.ShortcutKey != Gdk.Key.Invalid) {
 			var shortcutLabel = Translations.GetString ("Shortcut key");

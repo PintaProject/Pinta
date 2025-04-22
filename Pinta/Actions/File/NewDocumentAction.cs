@@ -62,8 +62,7 @@ internal sealed class NewDocumentAction : IActionHandler
 
 	private async void Activated (object sender, EventArgs e)
 	{
-		int imgWidth;
-		int imgHeight;
+		Size imageSize;
 		NewImageDialog.BackgroundType bg_type;
 		bool using_clipboard;
 
@@ -73,39 +72,44 @@ internal sealed class NewDocumentAction : IActionHandler
 		if (cb_texture is null) {
 			// An image was not on the clipboard,
 			// so use saved dimensions from settings
-			imgWidth = settings.GetSetting<int> ("new-image-width", 800);
-			imgHeight = settings.GetSetting<int> ("new-image-height", 600);
+			imageSize = new (
+				Width: settings.GetSetting<int> ("new-image-width", 800),
+				Height: settings.GetSetting<int> ("new-image-height", 600));
 			bg_type = settings.GetSetting<NewImageDialog.BackgroundType> (
 				"new-image-bg", NewImageDialog.BackgroundType.White);
 			using_clipboard = false;
 		} else {
-			imgWidth = cb_texture.Width;
-			imgHeight = cb_texture.Height;
+			imageSize = new (
+				Width: cb_texture.Width,
+				Height: cb_texture.Height);
 			bg_type = NewImageDialog.BackgroundType.White;
 			using_clipboard = true;
 		}
 
-		Size imageSize = new (imgWidth, imgHeight);
-		NewImageDialog dialog = new (chrome, palette, imageSize, bg_type, using_clipboard);
+		using NewImageDialog dialog = new (
+			chrome,
+			palette,
+			imageSize,
+			bg_type,
+			using_clipboard);
 
-		dialog.OnResponse += (_, e) => {
+		try {
+			Gtk.ResponseType response = await dialog.RunAsync ();
 
-			int response = e.ResponseId;
+			if (response != Gtk.ResponseType.Ok)
+				return;
 
-			if (response == (int) Gtk.ResponseType.Ok) {
-				workspace.NewDocument (
-					actions,
-					dialog.NewImageSize,
-					dialog.NewImageBackground);
+			workspace.NewDocument (
+				actions,
+				dialog.NewImageSize,
+				dialog.NewImageBackground);
 
-				settings.PutSetting ("new-image-width", dialog.NewImageWidth);
-				settings.PutSetting ("new-image-height", dialog.NewImageHeight);
-				settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
-			}
+			settings.PutSetting ("new-image-width", dialog.NewImageWidth);
+			settings.PutSetting ("new-image-height", dialog.NewImageHeight);
+			settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
 
+		} finally {
 			dialog.Destroy ();
-		};
-
-		dialog.Present ();
+		}
 	}
 }

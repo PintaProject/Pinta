@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2025-02-04 00:02+0000\n"
-"Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/pinta/pinta/fi/"
-">\n"
+"PO-Revision-Date: 2025-04-16 18:44+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/pinta/pinta/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.11.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -73,7 +73,7 @@ msgstr "Lisää kohinaa"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Lisäosien hallinta..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
 msgid "Added"
@@ -81,7 +81,7 @@ msgstr "Lisätty"
 
 #: ../Pinta/MainWindow.cs:417
 msgid "Adjustments"
-msgstr ""
+msgstr "Säädöt"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
@@ -90,7 +90,7 @@ msgstr "Valinnan jälkeen"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Tasaa objekti"
 
 #: ../Pinta.Core/Actions/EditActions.cs:474
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -155,7 +155,7 @@ msgstr "Artistinen"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:256
 msgid "Auto"
@@ -172,7 +172,7 @@ msgstr "Automaattinen taso"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:227
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "Saatavilla tietovarastosta: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:146
 msgid "Background"
@@ -193,7 +193,7 @@ msgstr "Perustuu ohjelmaan Paint.NET:"
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Kaunis Italia"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Best Fit"
@@ -239,7 +239,7 @@ msgstr "Lihavoitu"
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
-msgstr ""
+msgstr "Rovio"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -247,11 +247,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "Alas vasemmalle"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "Alas oikealle"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
@@ -278,7 +278,7 @@ msgstr "Pullistuma"
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Burkes"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:184
@@ -303,11 +303,11 @@ msgstr "Piirtopohja"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "Piirtopohjan ruudukon asetukset"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Piirtopohjan ruudukko..."
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
@@ -315,7 +315,7 @@ msgstr "Solun koko"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "Keskelle"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:228
 msgid "Center Align"
@@ -323,7 +323,7 @@ msgstr "Keskitä"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "Keskelle vasemmalle"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:156
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
@@ -332,7 +332,7 @@ msgstr "Keskusta"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "Keskelle oikealle"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:126
 msgid "Centered"
@@ -494,13 +494,13 @@ msgstr "Värikylläisyys"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 msgid "Color Scheme"
-msgstr ""
+msgstr "Väriteema"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Color Scheme Source"
-msgstr ""
+msgstr "Väriteeman lähde"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:260
 msgid "Color Sorting"
@@ -590,7 +590,7 @@ msgstr "Leikkaa"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:167
 msgid "Dark"
-msgstr ""
+msgstr "Tumma"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
@@ -603,7 +603,7 @@ msgstr "Katkoviiva"
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:163
 msgid "Default"
-msgstr ""
+msgstr "Oletus"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:350
@@ -665,7 +665,7 @@ msgstr "Älä vaihda työkalua"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:221
 #, csharp-format
 msgid "Download size: {0}"
-msgstr ""
+msgstr "Latauksen koko: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:337
@@ -690,7 +690,7 @@ msgstr "T_ehosteet"
 
 #: ../Pinta/MainWindow.cs:411
 msgid "Effects"
-msgstr ""
+msgstr "Tehosteet"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
@@ -739,11 +739,11 @@ msgstr "Vähennä (-) (Ctrl + Oikea hiiri)"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:227
 msgid "Expand"
-msgstr ""
+msgstr "Laajenna"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
-msgstr ""
+msgstr "Laajennuspaketit"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
@@ -756,11 +756,11 @@ msgstr ""
 
 #: ../Pinta/MainWindow.cs:300
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Lisäosan alustaminen epäonnistui"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:199
 msgid "Failed to load extension package"
-msgstr ""
+msgstr "Laajennuspaketin lataaminen epäonnistui"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:477
 msgid "Failed to open image"
@@ -789,7 +789,7 @@ msgstr "Ilmoita virheestä"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Avattavat tiedostot"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Fill Background"
@@ -871,7 +871,7 @@ msgstr "Tulvatila"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "Floyd-Steinberg"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
@@ -932,7 +932,7 @@ msgstr "Vihreä"
 
 #: ../Pinta.Tools/Brushes/GridBrush.cs:36
 msgid "Grid"
-msgstr "Ristikot"
+msgstr "Ruudukko"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:41
 msgid "Hard Light"
@@ -1023,7 +1023,7 @@ msgstr "Kuvatiedostot"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid "Image larger than canvas"
-msgstr "Kuva on suurempi kuin pohja"
+msgstr "Kuva on suurempi kuin piirtopohja"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
 msgid "Image too large"
@@ -1064,7 +1064,7 @@ msgstr "Asenna"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Asenna laajennuspaketti"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
 msgid "Install from file..."
@@ -1111,7 +1111,7 @@ msgstr "JPEG-laatu"
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
 msgid "Jarvis-Judice-Ninke"
-msgstr ""
+msgstr "Jarvis-Judice-Ninke"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
 msgid "Julia Fractal"
@@ -1293,7 +1293,7 @@ msgstr "Lisenssi"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Light"
-msgstr ""
+msgstr "Vaalea"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1343,7 +1343,7 @@ msgstr "Taikasauva"
 
 #: ../Pinta/MainWindow.cs:405
 msgid "Main Menu"
-msgstr ""
+msgstr "Päävalikko"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:115
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
@@ -1378,7 +1378,7 @@ msgstr "Muokattu"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:159
 msgid "More Information..."
-msgstr ""
+msgstr "Lisätietoja..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 msgid "Motion Blur"
@@ -1437,7 +1437,7 @@ msgstr "Uusi..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
-msgstr ""
+msgstr "Kohteita ei löytynyt"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
@@ -1465,7 +1465,7 @@ msgstr "Normaali ja ääriviiva"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:255
 msgid "Number of Cells"
-msgstr ""
+msgstr "Solujen määrä"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
@@ -1473,7 +1473,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:453
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
@@ -1808,7 +1808,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:287
 msgid "Random"
-msgstr ""
+msgstr "Satunnainen"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
@@ -1818,7 +1818,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:267
 msgid "Random Colors"
-msgstr ""
+msgstr "Satunnaiset värit"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:178
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
@@ -1901,7 +1901,7 @@ msgstr "Korvaa"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
-msgstr ""
+msgstr "Ilmoita virheestä..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:89
 msgid "Resampling:"
@@ -1918,7 +1918,7 @@ msgstr "Palauta"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Reset Color"
-msgstr ""
+msgstr "Nollaa väri"
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
@@ -1927,11 +1927,11 @@ msgstr "Palauta oletus"
 #: ../Pinta.Core/Classes/Document.cs:326
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:181
 msgid "Resize Canvas"
-msgstr "Pohjan koko"
+msgstr "Muuta piirtopohjan kokoa"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:57
 msgid "Resize Canvas..."
-msgstr "Pohjan koko..."
+msgstr "Muuta piirtopohjan kokoa..."
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:102
@@ -1950,7 +1950,7 @@ msgstr "Muuta paletin kokoa"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 msgid "Reverse Color Scheme"
-msgstr ""
+msgstr "Käänteinen väriteema"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:264
@@ -2078,7 +2078,7 @@ msgstr "Valitse kaikki"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
-msgstr ""
+msgstr "Valitut värit"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -2094,7 +2094,7 @@ msgstr "Muodon tyyppi"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:245
 msgid "Sharp Edges"
-msgstr ""
+msgstr "Terävät reunat"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
@@ -2108,7 +2108,7 @@ msgstr "Pikanäppäin"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 msgid "Show Grid"
-msgstr ""
+msgstr "Näytä ruudukko"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Show Layer"
@@ -2116,7 +2116,7 @@ msgstr "Näytä taso"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:550
 msgid "Show Value"
-msgstr ""
+msgstr "Näytä arvo"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Show/Hide"
@@ -2125,7 +2125,7 @@ msgstr "Näytä/piilota"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
@@ -2176,7 +2176,7 @@ msgstr "Voimakkuus"
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Stucki"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
@@ -2210,6 +2210,7 @@ msgstr "Tekstin tyyli"
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
+"Lisäosa '{0}' ei välttämättä ole yhteensopiva tämän Pinta-version kanssa"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:208
 msgid "The clipboard does not contain an image."
@@ -2218,6 +2219,7 @@ msgstr "Leikepöytä ei sisällä kuvaa."
 #: ../Pinta.Gui.Addins/InstallDialog.cs:200
 msgid "The file may be an invalid or corrupt extension package"
 msgstr ""
+"Tiedosto voi olla virheellinen tai laajennuspaketti voi olla rikkoutunut"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:79
 msgid "The following dependencies could not be resolved:"
@@ -2240,6 +2242,8 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"Liitettävä kuva on suurempi kuin piirtopohjan koko. Mitä haluat tehdä "
+"piirtopohjan koolle?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:352
 msgid "The installation failed!"
@@ -2254,6 +2258,8 @@ msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
+"Valittuja laajennuspaketteja ei voi asentaa riipuvuuksien yhteensopivuuden "
+"ristiriitojen vuoksi."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:359
 msgid "The uninstallation failed!"
@@ -2275,7 +2281,7 @@ msgstr "Paksuus"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:160
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "Tämä muoto ei tue tasoja. Tasataanko kuva?"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:29
 msgid "Tile Reflection"
@@ -2319,15 +2325,15 @@ msgstr "Työkalupalkki"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
-msgstr ""
+msgstr "Ylös keskelle"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
-msgstr ""
+msgstr "Ylös vasemmalle"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
-msgstr ""
+msgstr "Ylös oikealle"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
@@ -2383,7 +2389,7 @@ msgstr "Poista asennus"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:185
 msgid "Uninstall..."
-msgstr ""
+msgstr "Poista asennus..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
@@ -2406,7 +2412,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
-msgstr ""
+msgstr "Päivitä..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
@@ -2426,12 +2432,12 @@ msgstr "Käyttää kuvakkeita kokoelmista:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:670
 msgid "Value"
-msgstr ""
+msgstr "Arvo"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "Versio: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:301
@@ -2459,7 +2465,7 @@ msgstr "Näkyvä"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Voronoin diagrammi"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:132
 msgid "Warmth"
@@ -2546,11 +2552,11 @@ msgstr "_Säädöt"
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
-msgstr ""
+msgstr "_Peru"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
-msgstr ""
+msgstr "_Hylkää"
 
 #: ../Pinta/MainWindow.cs:362
 msgid "_Edit"
@@ -2577,11 +2583,11 @@ msgstr "T_asot"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr ""
+msgstr "_Tallenna"
 
 #: ../Pinta/MainWindow.cs:366
 msgid "_View"

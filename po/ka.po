@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2024-01-14 12:30+0000\n"
+"PO-Revision-Date: 2025-04-13 14:50+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
-"Language-Team: Georgian <https://hosted.weblate.org/projects/pinta/pinta/ka/"
-">\n"
+"Language-Team: Georgian <https://hosted.weblate.org/projects/pinta/pinta/ka/>"
+"\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.11-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -26,28 +26,28 @@ msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
 msgid " Selection Mode: "
-msgstr ""
+msgstr " მონიშვნის რეჟიმი: "
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:70
 #: ../Pinta.Core/Managers/EffectsManager.cs:104
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
 msgid "3 x 3 Region"
-msgstr ""
+msgstr "3 x 3 რეგიონი"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
 msgid "5 x 5 Region"
-msgstr ""
+msgstr "5 x 5 რეგიონი"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "7 x 7 Region"
-msgstr ""
+msgstr "7 x 7 რეგიონი"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "9 x 9 Region"
-msgstr ""
+msgstr "9 x 9 რეგიონი"
 
 #: ../Pinta/MainWindow.cs:387
 msgid "A_dd-ins"
@@ -55,7 +55,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/AppActions.cs:40
 msgid "About"
-msgstr ""
+msgstr "შესახებ"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:64
 msgid "About Pinta"
@@ -69,7 +69,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:25
 msgid "Add Noise"
-msgstr ""
+msgstr "ხმაურის დამატება"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
@@ -77,11 +77,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
 msgid "Added"
-msgstr ""
+msgstr "დამატებულია"
 
 #: ../Pinta/MainWindow.cs:417
 msgid "Adjustments"
-msgstr ""
+msgstr "მორგება"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
@@ -96,11 +96,11 @@ msgstr ""
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
-msgstr ""
+msgstr "ყველა ფაილი"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:709
 msgid "Alpha"
-msgstr ""
+msgstr "ალფა"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:211
 msgid "Alpha Gradient"
@@ -112,11 +112,11 @@ msgstr ""
 #: ../Pinta.Effects/Effects/TwistEffect.cs:153
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
 msgid "Amount"
-msgstr ""
+msgstr "რაოდენობა"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:121
 msgid "Anchor:"
-msgstr ""
+msgstr "მიმაგრება:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
@@ -128,11 +128,11 @@ msgstr ""
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:316
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 msgid "Angle"
-msgstr ""
+msgstr "კუთხე"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:156
 msgid "Antialias"
-msgstr ""
+msgstr "მომრგვალება"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:358
 msgid "Antialiasing Off"
@@ -144,7 +144,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:268
 msgid "Arrow"
-msgstr ""
+msgstr "ისარი"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:37
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
@@ -155,7 +155,7 @@ msgstr ""
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "ატკინსონი"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:256
 msgid "Auto"
@@ -176,15 +176,15 @@ msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:146
 msgid "Background"
-msgstr ""
+msgstr "ფონი"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:127
 msgid "Background Color"
-msgstr ""
+msgstr "ფონის ფერი"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:307
 msgid "Background:"
-msgstr ""
+msgstr "ფონი:"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:93
 msgid "Based on the work of Paint.NET:"
@@ -197,11 +197,11 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Best Fit"
-msgstr ""
+msgstr "საუკეთესოდ ჩატევა"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "ორხაზოვანი"
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
@@ -211,7 +211,7 @@ msgstr "შავ-თეთრი"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:82
 msgid "Blend Mode"
-msgstr ""
+msgstr "შერევის რეჟიმი"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
@@ -221,7 +221,7 @@ msgstr "ლურჯი"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:91
 msgid "Blue "
-msgstr ""
+msgstr "ლურჯი "
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:34
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:29
@@ -234,7 +234,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:176
 msgid "Bold"
-msgstr ""
+msgstr "გასქელება"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
@@ -243,20 +243,20 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "ქვემოთ ცენტრში"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "ქვედა მარცხენა"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "ქვედა მარჯვენა"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
-msgstr ""
+msgstr "სიკაშკაშე"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
@@ -264,7 +264,7 @@ msgstr "სიკაშკაშე/ კონტრასტი"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:148
 msgid "Brush Size"
-msgstr ""
+msgstr "ფუნჯის ზომა"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:270
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:123
@@ -273,7 +273,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:24
 msgid "Bulge"
-msgstr ""
+msgstr "ამობურცილობა"
 
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
@@ -295,11 +295,11 @@ msgstr ""
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
-msgstr ""
+msgstr "გაუქმება"
 
 #: ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
-msgstr ""
+msgstr "ტილო"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
 msgid "Canvas Grid Settings"
@@ -311,11 +311,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
-msgstr ""
+msgstr "უჯრედის ზომა"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "ცენტრი"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:228
 msgid "Center Align"
@@ -323,24 +323,24 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "მარცხენა ცენტრი"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:156
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
 msgid "Center Offset"
-msgstr ""
+msgstr "ცენტრის წანაცვლება"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "მარჯვენა ცენტრი"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:126
 msgid "Centered"
-msgstr ""
+msgstr "შუაზე გასწორებული"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:145
 msgid "Centimeters"
-msgstr ""
+msgstr "სანტიმეტრი"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
@@ -358,7 +358,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:632
 msgid "Choose Color"
-msgstr ""
+msgstr "აირჩიეთ ფერი"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:111
 msgid "Choose Palette Color"
@@ -366,7 +366,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:36
 msgid "Circles"
-msgstr ""
+msgstr "წრეები"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -424,7 +424,7 @@ msgstr ""
 #: ../Pinta/Dialogs/NewImageDialog.cs:440
 #: ../Pinta/Dialogs/NewImageDialog.cs:533
 msgid "Clipboard"
-msgstr ""
+msgstr "გაცვლის ბუფერი"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:46
 msgid "Clone Stamp"
@@ -433,11 +433,11 @@ msgstr ""
 #: ../Pinta.Core/Actions/FileActions.cs:54
 #: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
-msgstr ""
+msgstr "დახურვა"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:46
 msgid "Close All"
-msgstr ""
+msgstr "ყველას დახურვა"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:37
 msgid "Closed Curve Shape"
@@ -449,7 +449,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:32
 msgid "Clouds"
-msgstr ""
+msgstr "ღრუბლები"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:151
 msgid "Coarseness"
@@ -458,15 +458,15 @@ msgstr ""
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:15
 msgid "Color"
-msgstr ""
+msgstr "ფერი"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 msgid "Color Burn"
-msgstr ""
+msgstr "ფერის გამუქება"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:34
 msgid "Color Dodge"
-msgstr ""
+msgstr "ფერის გაღიავება"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:214
 msgid "Color Gradient"
@@ -474,27 +474,27 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
-msgstr ""
+msgstr "ფერის რეჟიმი"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:305
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
-msgstr ""
+msgstr "ფერის ამრჩევი"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
 msgid "Color Range"
-msgstr ""
+msgstr "ფერების დიაპაზონი"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
 msgid "Color Saturation"
-msgstr ""
+msgstr "ფერის გაჯერებულობა"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:170
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 msgid "Color Scheme"
-msgstr ""
+msgstr "ფერების სქემა"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
@@ -508,7 +508,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:160
 msgid "Coloring"
-msgstr ""
+msgstr "გაფერადება"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
@@ -516,7 +516,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:44
 msgid "Contents"
-msgstr ""
+msgstr "შემცველობა"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:133
 msgid "Contiguous"
@@ -525,11 +525,11 @@ msgstr ""
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
-msgstr ""
+msgstr "კონტრასტი"
 
 #: ../Pinta.Core/Actions/EditActions.cs:71
 msgid "Copy"
-msgstr ""
+msgstr "კოპირება"
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
 msgid "Copy Merged"
@@ -537,7 +537,7 @@ msgstr ""
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:80
 msgid "Copyright"
-msgstr ""
+msgstr "საავტორო უფლებები"
 
 #. Translators: Gradient with the colors of blue and pink cotton candy
 #: ../Pinta.Effects/Effects/GradientHelper.cs:40
@@ -559,16 +559,16 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
 msgid "Coverage"
-msgstr ""
+msgstr "დაფარვა"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:54
 #: ../Pinta.Core/Actions/ImageActions.cs:234
 msgid "Crop to Selection"
-msgstr ""
+msgstr "მონიშნულამდე ამოჭრა"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
-msgstr ""
+msgstr "მრუდი"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:138
@@ -580,39 +580,39 @@ msgstr "წირები"
 #: ../Pinta/Dialogs/NewImageDialog.cs:442
 #: ../Pinta/Dialogs/NewImageDialog.cs:533
 msgid "Custom"
-msgstr ""
+msgstr "ხელით"
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
 #: ../Pinta.Core/Actions/EditActions.cs:263
 msgid "Cut"
-msgstr ""
+msgstr "ამოჭრა"
 
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:167
 msgid "Dark"
-msgstr ""
+msgstr "მუქი"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
-msgstr ""
+msgstr "გამუქება"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:59
 msgid "Dash"
-msgstr ""
+msgstr "პანელი"
 
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:163
 msgid "Default"
-msgstr ""
+msgstr "ნაგულისხმევი"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:60
 #: ../Pinta.Core/Actions/LayerActions.cs:350
 msgid "Delete Layer"
-msgstr ""
+msgstr "ფენის წაშლა"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:669
 msgid "Deleted"
-msgstr ""
+msgstr "წაშლილია"
 
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:50
@@ -621,24 +621,24 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:278
 msgid "Deselect"
-msgstr ""
+msgstr "არჩევის მოხსნა"
 
 #: ../Pinta.Core/Actions/EditActions.cs:81
 msgid "Deselect All"
-msgstr ""
+msgstr "მონიშვნის მოხსნა"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "დეტალები"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Difference"
-msgstr ""
+msgstr "სხვაობა"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:137
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:123
 msgid "Distance"
-msgstr ""
+msgstr "მანძილი"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:252
 msgid "Distance Metric"
@@ -652,11 +652,11 @@ msgstr ""
 #: ../Pinta.Effects/Effects/TileEffect.cs:35
 #: ../Pinta.Effects/Effects/TwistEffect.cs:29
 msgid "Distort"
-msgstr ""
+msgstr "დამახინჯება"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:12
 msgid "Dithering"
-msgstr ""
+msgstr "დიზერინგი"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
@@ -670,7 +670,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:337
 msgid "Duplicate Layer"
-msgstr ""
+msgstr "ფენის დუბლირება"
 
 #: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Easily create and edit images"
@@ -678,11 +678,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:238 Polar Inversion dialog
 msgid "Edge Behavior"
-msgstr ""
+msgstr "კუთხის ქცევა"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
 msgid "Edge Detect"
-msgstr ""
+msgstr "წიბოს აღმოჩენა"
 
 #: ../Pinta/MainWindow.cs:383
 msgid "Effe_cts"
@@ -690,26 +690,26 @@ msgstr ""
 
 #: ../Pinta/MainWindow.cs:411
 msgid "Effects"
-msgstr ""
+msgstr "ეფექტები"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
 msgid "Electric"
-msgstr ""
+msgstr "ელექტრო"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
-msgstr ""
+msgstr "ოვალი"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:39
 msgid "Ellipse Select"
-msgstr ""
+msgstr "_ელიფსური მონიშვნა"
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:27
 msgid "Emboss"
-msgstr ""
+msgstr "ამოტვიფრვა"
 
 #: ../Pinta/Main.cs:65
 msgid "Enable additional logging or behavior changes for debugging"
@@ -722,11 +722,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:52
 msgid "Eraser"
-msgstr ""
+msgstr "საშლელი"
 
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:126
 msgid "Error"
-msgstr ""
+msgstr "შეცდომა"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:135
 msgid "Error Diffusion Method"
@@ -739,7 +739,7 @@ msgstr ""
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:227
 msgid "Expand"
-msgstr ""
+msgstr "ამოკეცვა"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
@@ -748,7 +748,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
 msgid "Factor"
-msgstr ""
+msgstr "ფაქტორი"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:85
 msgid "Failed to access XDG Desktop Portals"
@@ -764,11 +764,11 @@ msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:477
 msgid "Failed to open image"
-msgstr ""
+msgstr "გამოსახულების გახსნის შეცდომა"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
 msgid "Failed to save image"
-msgstr ""
+msgstr "ფაილის შენახვის შეცდომა"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:84
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:109
@@ -789,11 +789,11 @@ msgstr ""
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "გასახსნელი ფაილები"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Fill Background"
-msgstr ""
+msgstr "ფონის შევსება"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:220
 msgid "Fill Object Background"
@@ -802,7 +802,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/EditActions.cs:77
 #: ../Pinta.Core/Actions/EditActions.cs:216
 msgid "Fill Selection"
-msgstr ""
+msgstr "მონიშნულის შევსება"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
@@ -812,7 +812,7 @@ msgstr ""
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
-msgstr ""
+msgstr "შევსება: სტილი"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
@@ -832,7 +832,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/ImageActions.cs:160
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
 msgid "Flatten"
-msgstr ""
+msgstr "გაბრტყელება"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:161
 msgid "Flattening the image will merge all layers into a single layer."
@@ -841,7 +841,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/ImageActions.cs:58
 #: ../Pinta.Core/Actions/LayerActions.cs:64
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "ჰორიზონტალურად გადაბრუნება"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:51
 msgid "Flip Image Horizontal"
@@ -862,7 +862,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/ImageActions.cs:59
 #: ../Pinta.Core/Actions/LayerActions.cs:65
 msgid "Flip Vertical"
-msgstr ""
+msgstr "ვერტიკალურად გადაბრუნება"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:123
 msgid "Flood Mode"
@@ -871,7 +871,7 @@ msgstr ""
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "ფლოიდ-შტაინბერგი"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
@@ -880,11 +880,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:152
 msgid "Font"
-msgstr ""
+msgstr "ფონტი"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:28
 msgid "Fragment"
-msgstr ""
+msgstr "ფრაგმენტი"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:134
 msgid "Fragments"
@@ -900,28 +900,28 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:83
 msgid "Fullscreen"
-msgstr ""
+msgstr "სრულ ეკრანზე"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:86
 msgid "Gallery"
-msgstr ""
+msgstr "გალერეა"
 
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "გაუსის ბუნდოვნება"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:134
 msgid "Global"
-msgstr ""
+msgstr "გლობალური"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:27
 msgid "Glow"
-msgstr ""
+msgstr "ნათება"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:49
 #: ../Pinta.Tools/Tools/GradientTool.cs:178
 msgid "Gradient"
-msgstr ""
+msgstr "გრადაცია"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
@@ -932,22 +932,22 @@ msgstr "მწვანე"
 
 #: ../Pinta.Tools/Brushes/GridBrush.cs:36
 msgid "Grid"
-msgstr ""
+msgstr "ბადე"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:41
 msgid "Hard Light"
-msgstr ""
+msgstr "მაგარი სინათლე"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:91
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:170
 msgid "Height:"
-msgstr ""
+msgstr "სიმაღლე:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:623
 msgid "Hex"
-msgstr ""
+msgstr "&თექვს"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Hide Layer"
@@ -959,7 +959,7 @@ msgstr ""
 
 #: ../Pinta/Pads/HistoryPad.cs:50
 msgid "History"
-msgstr ""
+msgstr "ისტორია"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:291
@@ -980,7 +980,7 @@ msgstr ""
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
 msgid "Hue"
-msgstr ""
+msgstr "ტონი"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:557
 msgid "Hue & Sat"
@@ -1000,11 +1000,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:423
 msgid "Image"
-msgstr ""
+msgstr "გამოსახულება"
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr ""
+msgstr "გამოსახულებების რედაქტორი"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:75
 msgid "Image Tabs"
@@ -1017,7 +1017,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/LayerActions.cs:181
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
-msgstr ""
+msgstr "გამოსახულების ფაილები"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid "Image larger than canvas"
@@ -1037,7 +1037,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:144
 msgid "Inches"
-msgstr ""
+msgstr "დუიმი"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:157
 msgid "Ink Outline"
@@ -1058,7 +1058,7 @@ msgstr "შენატანის ჰისტოგრამა"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:121
 #: ../Pinta.Gui.Addins/InstallDialog.cs:247
 msgid "Install"
-msgstr ""
+msgstr "დაყენება"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
@@ -1070,17 +1070,17 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:167
 msgid "Install..."
-msgstr ""
+msgstr "დაყენება..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:87
 msgid "Installed"
-msgstr ""
+msgstr "დაყენებულია"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:137
 #: ../Pinta.Effects/Effects/TileEffect.cs:232
 msgid "Intensity"
-msgstr ""
+msgstr "ინტენსივობა"
 
 #. Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
@@ -1096,15 +1096,15 @@ msgstr "ფერების ინვერსია"
 #: ../Pinta.Core/Actions/EditActions.cs:78
 #: ../Pinta.Core/Actions/EditActions.cs:496
 msgid "Invert Selection"
-msgstr ""
+msgstr "მონიშვნის ინვერსია"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Italic"
-msgstr ""
+msgstr "დახრა"
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:46
 msgid "JPEG Quality"
-msgstr ""
+msgstr "JPEG-ის ხარისხი"
 
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
@@ -1117,7 +1117,7 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:300
 msgid "Landscape"
-msgstr ""
+msgstr "ლანდშაფტი"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:51
 msgid "Lasso Select"
@@ -1125,7 +1125,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:240
 msgid "Layer"
-msgstr ""
+msgstr "შრე"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
 msgid "Layer Hidden"
@@ -1138,7 +1138,7 @@ msgstr ""
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:122
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
-msgstr ""
+msgstr "ფენის თვისებები"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:69
 msgid "Layer Properties..."
@@ -1156,11 +1156,11 @@ msgstr ""
 
 #: ../Pinta/Pads/LayersPad.cs:49
 msgid "Layers"
-msgstr ""
+msgstr "ფენები"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:216
 msgid "Left Align"
-msgstr ""
+msgstr "მარცხნივ სწორება"
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
 #, csharp-format
@@ -1263,7 +1263,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:337
 msgid "Length"
-msgstr ""
+msgstr "სიგრძე"
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
@@ -1275,24 +1275,24 @@ msgstr "დონეების რეგულირება"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:89
 msgid "License"
-msgstr ""
+msgstr "ლიცენზია"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Light"
-msgstr ""
+msgstr "ღია"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
-msgstr ""
+msgstr "გაღიავება"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:129
 msgid "Lighting"
-msgstr ""
+msgstr "გამოკვეთა"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
 msgid "Lightness"
-msgstr ""
+msgstr "განათებულობა"
 
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:48
@@ -1301,7 +1301,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:43
 msgid "Line/Curve"
-msgstr ""
+msgstr "ხაზი/მრუდი"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
@@ -1309,7 +1309,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
-msgstr ""
+msgstr "ხაზოვანი გრადიენტი"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
@@ -1322,7 +1322,7 @@ msgstr "დაკავშირებული"
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
-msgstr ""
+msgstr "სიკაშკაშე"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:47
 msgid "Magic Wand Select"
@@ -1330,12 +1330,12 @@ msgstr ""
 
 #: ../Pinta/MainWindow.cs:405
 msgid "Main Menu"
-msgstr ""
+msgstr "მთავარი მენიუ"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:115
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Maintain aspect ratio"
-msgstr ""
+msgstr "ფარდობის შენარჩუნება"
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
 msgid "Mandelbrot Fractal"
@@ -1348,7 +1348,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:24
 msgid "Median"
-msgstr ""
+msgstr "მედიანი"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:62
 #: ../Pinta.Core/Actions/LayerActions.cs:303
@@ -1357,19 +1357,19 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
-msgstr ""
+msgstr "რეჟიმი"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:913
 msgid "Modified"
-msgstr ""
+msgstr "შეიცვალა"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:159
 msgid "More Information..."
-msgstr ""
+msgstr "მეტი ინფორმაცია..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 msgid "Motion Blur"
-msgstr ""
+msgstr "გადღაბნილი მოძრაობა"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:284
@@ -1387,28 +1387,28 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
 msgid "Move Selection"
-msgstr ""
+msgstr "მონიშნულის წაღება"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:32
 msgid "Multiply"
-msgstr ""
+msgstr "გამრავლება"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:67
 msgid "Name:"
-msgstr ""
+msgstr "სახელი:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "უახლოესი მეზობელი"
 
 #: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New"
-msgstr ""
+msgstr "ახალი"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:154
 #: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
-msgstr ""
+msgstr "ახალი გამოსახულება"
 
 #: ../Pinta.Core/Actions/FileActions.cs:51
 msgid "New Screenshot..."
@@ -1420,7 +1420,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:50
 msgid "New..."
-msgstr ""
+msgstr "ახალი..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
@@ -1430,13 +1430,13 @@ msgstr ""
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
 msgid "Noise"
-msgstr ""
+msgstr "ხმაური"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:263
 msgid "Normal"
-msgstr ""
+msgstr "ნორმალური"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Normal Blending"
@@ -1444,7 +1444,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:73
 msgid "Normal Size"
-msgstr ""
+msgstr "ნორმალური ზომა"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal and Outline"
@@ -1460,13 +1460,13 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:453
 msgid "OK"
-msgstr ""
+msgstr "დიახ"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "ობიექტი"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:168
@@ -1474,7 +1474,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:151
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
-msgstr ""
+msgstr "წანაცვლება"
 
 #: ../Pinta.Core/Actions/EditActions.cs:79
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
@@ -1488,11 +1488,11 @@ msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:98
 msgid "Opacity:"
-msgstr ""
+msgstr "გაუმჭირვალობა:"
 
 #: ../Pinta.Core/Actions/FileActions.cs:60
 msgid "Open"
-msgstr ""
+msgstr "გახსნა"
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:37
 msgid "Open Curve Shape"
@@ -1500,12 +1500,12 @@ msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:358
 msgid "Open Image"
-msgstr ""
+msgstr "გამოსახულების გახსნა"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:199
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
-msgstr ""
+msgstr "გამოსახულების ფაილის გახსნა"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
 msgid "Open Line/Curve Series"
@@ -1518,19 +1518,19 @@ msgstr ""
 #: ../Pinta.Core/Actions/EditActions.cs:83
 #: ../Pinta.Core/Actions/FileActions.cs:52
 msgid "Open..."
-msgstr ""
+msgstr "გახსნა..."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:316
 msgid "Orientation:"
-msgstr ""
+msgstr "ორიენტაცია:"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
-msgstr ""
+msgstr "ორიგინალი"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:265
 msgid "Outline"
-msgstr ""
+msgstr "კონტური"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:217
 msgid "Outline Border"
@@ -1551,7 +1551,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:279
 msgid "Outline width"
-msgstr ""
+msgstr "კიდის სიგანე"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
 msgid "Output"
@@ -1563,24 +1563,24 @@ msgstr "შედეგის ჰისტოგრამა"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:35
 msgid "Overlay"
-msgstr ""
+msgstr "დაფარვა"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:343
 msgid "Overwrite"
-msgstr ""
+msgstr "გადაწერა"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:44
 msgid "Paint Bucket"
-msgstr ""
+msgstr "დოკუმენტის დაბეჭდვა"
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
 msgid "Paintbrush"
-msgstr ""
+msgstr "სახატავი ფუნჯი"
 
 #: ../Pinta.Core/Actions/EditActions.cs:133
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:138
 msgid "Palette"
-msgstr ""
+msgstr "პალიტრა"
 
 #: ../Pinta.Core/Actions/EditActions.cs:457
 msgid "Palette files"
@@ -1589,13 +1589,13 @@ msgstr ""
 #: ../Pinta.Tools/Tools/PanTool.cs:40
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:148
 msgid "Pan"
-msgstr ""
+msgstr "Pan"
 
 #: ../Pinta.Core/Actions/EditActions.cs:73
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste"
-msgstr ""
+msgstr "ჩასმა"
 
 #: ../Pinta.Core/Actions/EditActions.cs:75
 msgid "Paste Into New Image"
@@ -1608,7 +1608,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr ""
+msgstr "ფანქარი"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:30
 msgid "Pencil Sketch"
@@ -1620,7 +1620,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:63
 msgid "Percentile"
-msgstr ""
+msgstr "ფინან. პროცენტული"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:31
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
@@ -1628,7 +1628,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:53
 msgid "Photo"
-msgstr ""
+msgstr "ფოტო"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
 #: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
@@ -1674,11 +1674,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:24
 msgid "Pixelate"
-msgstr ""
+msgstr "სურათის პიქსელებად დაყოფა"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Pixels"
-msgstr ""
+msgstr "პიქსელი"
 
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:56
@@ -1700,11 +1700,11 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
-msgstr ""
+msgstr "პორტრეტი"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:130
 msgid "Position"
-msgstr ""
+msgstr "მდებარეობა"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1713,12 +1713,12 @@ msgstr "პოსტერიზება"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:176
 msgid "Power"
-msgstr ""
+msgstr "კვება"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:225
 msgid "Preserve"
-msgstr ""
+msgstr "შენარჩუნება"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
@@ -1726,19 +1726,19 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
-msgstr ""
+msgstr "პრესეტი:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
-msgstr ""
+msgstr "მინიატურა"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
-msgstr ""
+msgstr "ძირითადი"
 
 #: ../Pinta.Core/Actions/FileActions.cs:57
 msgid "Print"
-msgstr ""
+msgstr "ბეჭდვა"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:153
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
@@ -1747,19 +1747,19 @@ msgstr ""
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:273
 msgid "Quality"
-msgstr ""
+msgstr "ხარისხი"
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:37
 msgid "Quality: "
-msgstr ""
+msgstr "ხარისხი: "
 
 #: ../Pinta.Core/Actions/AppActions.cs:41
 msgid "Quit"
-msgstr ""
+msgstr "გასვლა"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:176
 msgid "RGB"
-msgstr ""
+msgstr "RGB"
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:24
 msgid "Radial Blur"
@@ -1767,7 +1767,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
-msgstr ""
+msgstr "რადიალური გრადიენტი"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:168
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:248
@@ -1778,7 +1778,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:89
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:92
 msgid "Radius"
-msgstr ""
+msgstr "რადიუსი"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
@@ -1789,7 +1789,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:287
 msgid "Random"
-msgstr ""
+msgstr "შემთხვევითი"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
@@ -1805,7 +1805,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise"
-msgstr ""
+msgstr "შემთხვევითი ხმაური"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:270
 msgid "Random Point Locations"
@@ -1817,11 +1817,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:43
 msgid "Rectangle"
-msgstr ""
+msgstr "მართკუთხედი"
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
 msgid "Rectangle Select"
-msgstr ""
+msgstr "მართკუთხად მონიშვნა"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
@@ -1835,11 +1835,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:24
 msgid "Red Eye Removal"
-msgstr ""
+msgstr "_წითელი თვალის მოცილება"
 
 #: ../Pinta.Core/Actions/EditActions.cs:69
 msgid "Redo"
-msgstr ""
+msgstr "გამეორება"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:24
 msgid "Reduce Noise"
@@ -1847,11 +1847,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
-msgstr ""
+msgstr "არეკვლა"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
-msgstr ""
+msgstr "განახლება"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:90
 msgid "Released under the MIT X11 License."
@@ -1859,18 +1859,18 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:41
 msgid "Relief"
-msgstr ""
+msgstr "რელიეფი"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:112
 msgid "Rename Layer"
-msgstr ""
+msgstr "ფენის სახელის შეცვლა"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:28
 msgid "Render"
-msgstr ""
+msgstr "რენდერი"
 
 #: ../Pinta.Core/Managers/LivePreviewManager.cs:186
 msgid "Rendering Effect"
@@ -1878,7 +1878,7 @@ msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
 msgid "Replace"
-msgstr ""
+msgstr "ჩანაცვლება"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
@@ -1899,16 +1899,16 @@ msgstr "პარამეტრების ჩამოყრა"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Reset Color"
-msgstr ""
+msgstr "ფერის ჩამოყრა"
 
 #: ../Pinta.Core/Actions/EditActions.cs:85
 msgid "Reset to Default"
-msgstr ""
+msgstr "ნაგულისხმევ მნიშვნელობაზე ჩამოყრა"
 
 #: ../Pinta.Core/Classes/Document.cs:326
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:181
 msgid "Resize Canvas"
-msgstr ""
+msgstr "ტილოს ზომა"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:57
 msgid "Resize Canvas..."
@@ -1917,7 +1917,7 @@ msgstr ""
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:102
 msgid "Resize Image"
-msgstr ""
+msgstr "გამოსახულების ზომის შეცვლა"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:56
 msgid "Resize Image..."
@@ -1940,7 +1940,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:240
 msgid "Right Align"
-msgstr ""
+msgstr "მარჯვნივ სწორება"
 
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:70
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:136
@@ -1969,7 +1969,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:140
 #: ../Pinta.Effects/Effects/TileEffect.cs:226
 msgid "Rotation"
-msgstr ""
+msgstr "შემობრუნება"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
 msgid "Rounded Line Series"
@@ -1981,7 +1981,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
 msgid "Rounded Rectangle"
-msgstr ""
+msgstr "მომრგვალებული მართკუთხედი"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:148
 msgid "Ruler Units"
@@ -1993,11 +1993,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
 msgid "Sampling"
-msgstr ""
+msgstr "სემპლინგი"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
 msgid "Sat"
-msgstr ""
+msgstr "შაბ"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:568
 msgid "Sat & Value"
@@ -2006,7 +2006,7 @@ msgstr ""
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
 msgid "Saturation"
-msgstr ""
+msgstr "გაჯერებულობა"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
 msgid "Saturation Percentage"
@@ -2016,16 +2016,16 @@ msgstr ""
 #: ../Pinta.Core/Actions/FileActions.cs:55
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
-msgstr ""
+msgstr "შენახვა"
 
 #: ../Pinta.Core/Actions/WindowActions.cs:45
 msgid "Save All"
-msgstr ""
+msgstr "ყველას შენახვა"
 
 #: ../Pinta.Core/Actions/EditActions.cs:84
 #: ../Pinta.Core/Actions/FileActions.cs:56
 msgid "Save As..."
-msgstr ""
+msgstr "შენახვა, როგორც..."
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:92
 msgid "Save Image File"
@@ -2042,20 +2042,20 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:173
 msgid "Scale"
-msgstr ""
+msgstr "მასშტაბი"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:39
 msgid "Screen"
-msgstr ""
+msgstr "ეკრანი"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
-msgstr ""
+msgstr "მეორადი"
 
 #: ../Pinta.Core/Actions/EditActions.cs:80
 #: ../Pinta.Core/Actions/EditActions.cs:232
 msgid "Select All"
-msgstr ""
+msgstr "ყველას მონიშვნა"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
@@ -2071,15 +2071,15 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
 msgid "Shape Type"
-msgstr ""
+msgstr "მოხაზულობის ტიპი"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:245
 msgid "Sharp Edges"
-msgstr ""
+msgstr "მკვეთრი კუთხეები"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
-msgstr ""
+msgstr "გამკვეთრება"
 
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:487
@@ -2089,7 +2089,7 @@ msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 msgid "Show Grid"
-msgstr ""
+msgstr "ბადის ჩვენება"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Show Layer"
@@ -2101,12 +2101,12 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:159
 msgid "Show/Hide"
-msgstr ""
+msgstr "ჩვენება / დამალვა"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
@@ -2119,11 +2119,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:295
 msgid "Size"
-msgstr ""
+msgstr "ზომა"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
-msgstr ""
+msgstr "გლუვი"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -2135,7 +2135,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:126
 msgid "Softness"
-msgstr ""
+msgstr "სირბილე"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
@@ -2143,16 +2143,16 @@ msgstr ""
 
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:35
 msgid "Squares"
-msgstr ""
+msgstr "კვარატები"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Status Bar"
-msgstr ""
+msgstr "სტატუსის ზოლი"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:148
 msgid "Strength"
-msgstr ""
+msgstr "სიძლიერე"
 
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
@@ -2164,7 +2164,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:28
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:34
 msgid "Stylize"
-msgstr ""
+msgstr "სტილიზაცია"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
 msgid "Switch to Pencil tool"
@@ -2176,7 +2176,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:83
 msgid "Text"
-msgstr ""
+msgstr "ტექსტი"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:86
 msgid "Text - Finalize"
@@ -2252,7 +2252,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:134
 msgid "Thickness"
-msgstr ""
+msgstr "სისქე"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:160
 msgid "This format does not support layers. Flatten image?"
@@ -2264,7 +2264,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:229
 msgid "Tile Size"
-msgstr ""
+msgstr "ფილის ზომა"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:235
 msgid "Tile Type"
@@ -2280,15 +2280,15 @@ msgstr ""
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
 #: ../Pinta.Tools/Tools/RecolorTool.cs:197
 msgid "Tolerance"
-msgstr ""
+msgstr "დაშვება"
 
 #: ../Pinta.Core/Managers/ToolManager.cs:371
 msgid "Tool"
-msgstr ""
+msgstr "ხელსაწყო"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Tool Box"
-msgstr ""
+msgstr "ინსტრუმენტები"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:76
 msgid "Tool Windows"
@@ -2296,19 +2296,19 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:74
 msgid "Toolbar"
-msgstr ""
+msgstr "ხელსაწყოთა ზოლი"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
-msgstr ""
+msgstr "ზედა ცენტრი"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
-msgstr ""
+msgstr "ზედა მარცხენა"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
-msgstr ""
+msgstr "ზედა მარჯვენა"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
@@ -2325,11 +2325,11 @@ msgstr ""
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:137
 msgid "Transparent"
-msgstr ""
+msgstr "გამჭვირვალე"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:146
 msgid "Turbulence"
-msgstr ""
+msgstr "ტურბულენტობა"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
@@ -2343,28 +2343,28 @@ msgstr ""
 #: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
 msgid "Type"
-msgstr ""
+msgstr "ტიპი"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:200
 msgid "Underline"
-msgstr ""
+msgstr "ხაზგასმული"
 
 #: ../Pinta.Core/Actions/EditActions.cs:68
 msgid "Undo"
-msgstr ""
+msgstr "დაბრუნება"
 
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:24
 msgid "Unfocus"
-msgstr ""
+msgstr "ფოკუსის მოხსნა"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid "Uninstall"
-msgstr ""
+msgstr "წაშლა"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:185
 msgid "Uninstall..."
-msgstr ""
+msgstr "წაშლა..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
@@ -2379,7 +2379,7 @@ msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:353
 msgid "Unsupported file format"
-msgstr ""
+msgstr "ფაილის მხარდაუჭერელი ფორმატი"
 
 #: ../Pinta.Core/Classes/Palette.cs:155
 msgid "Unsupported palette format"
@@ -2387,11 +2387,11 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
-msgstr ""
+msgstr "განახლება..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
-msgstr ""
+msgstr "განახლებები"
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
 msgid ""
@@ -2405,7 +2405,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:670
 msgid "Value"
-msgstr ""
+msgstr "მნიშვნელობა"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
@@ -2430,11 +2430,11 @@ msgstr ""
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
-msgstr ""
+msgstr "ვინიეტი"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
-msgstr ""
+msgstr "ხილული"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Voronoi Diagram"
@@ -2446,25 +2446,25 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:118
 msgid "White"
-msgstr ""
+msgstr "თეთრი"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:83
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:163
 msgid "Width:"
-msgstr ""
+msgstr "სიგანე:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 #: ../Pinta.Core/Actions/ViewActions.cs:306
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:377
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:386
 msgid "Window"
-msgstr ""
+msgstr "ფანჯარა"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
 msgid "Wrap"
-msgstr ""
+msgstr "შემოხვევა"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:40
 msgid "Xor"
@@ -2494,7 +2494,7 @@ msgstr ""
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
-msgstr ""
+msgstr "მასშტაბი"
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:24
 msgid "Zoom Blur"
@@ -2502,15 +2502,15 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:69
 msgid "Zoom In"
-msgstr ""
+msgstr "გადიდება"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom Out"
-msgstr ""
+msgstr "დაპატარავება"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Zoom to Selection"
-msgstr ""
+msgstr "მონიშნულამდე გადიდება"
 
 #: ../Pinta/MainWindow.cs:379
 msgid "_Adjustments"
@@ -2523,50 +2523,50 @@ msgstr ""
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
-msgstr ""
+msgstr "გაუ_ქმება"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
-msgstr ""
+msgstr "_მოცილება"
 
 #: ../Pinta/MainWindow.cs:362
 msgid "_Edit"
-msgstr ""
+msgstr "_ჩასწორება"
 
 #: ../Pinta/MainWindow.cs:358
 msgid "_File"
-msgstr ""
+msgstr "_ფაილი"
 
 #: ../Pinta/MainWindow.cs:395
 msgid "_Help"
-msgstr ""
+msgstr "_დახმარება"
 
 #: ../Pinta/MainWindow.cs:371
 msgid "_Image"
-msgstr ""
+msgstr "_გამოსახულება"
 
 #: ../Pinta/MainWindow.cs:375
 msgid "_Layers"
-msgstr ""
+msgstr "_ფენები"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:188
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:192
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr ""
+msgstr "_დიახ"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr ""
+msgstr "_შენახვა"
 
 #: ../Pinta/MainWindow.cs:366
 msgid "_View"
-msgstr ""
+msgstr "_ხედი"
 
 #: ../Pinta/MainWindow.cs:391
 msgid "_Window"
-msgstr ""
+msgstr "_ფანჯარა"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:81
 msgid "by Pinta contributors"
@@ -2584,7 +2584,7 @@ msgstr ""
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:84
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:87
 msgid "pixels"
-msgstr ""
+msgstr "პიქსელი"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:74
 msgid "translator-credits"
