@@ -74,7 +74,7 @@ msgstr "Adicionar ruído"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr "Gestor de Complementos..."
+msgstr "Gestor de complementos..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
 msgid "Added"
