@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 
 namespace Pinta.Core;
@@ -33,8 +34,10 @@ namespace Pinta.Core;
 /// </summary>
 public sealed class EffectsManager
 {
-	private readonly Dictionary<BaseEffect, Command> adjustments;
-	private readonly Dictionary<BaseEffect, Command> effects;
+	private readonly Dictionary<Type, Command> adjustments;
+
+	private readonly Dictionary<Type, Command> effects;
+	private readonly Dictionary<Type, string> effects_categories;
 
 	private readonly ActionManager action_manager;
 	private readonly ChromeManager chrome_manager;
@@ -46,6 +49,7 @@ public sealed class EffectsManager
 	{
 		adjustments = [];
 		effects = [];
+		effects_categories = [];
 
 		action_manager = actionManager;
 		chrome_manager = chromeManager;
@@ -57,33 +61,38 @@ public sealed class EffectsManager
 	/// </summary>
 	/// <param name="adjustment">The adjustment to register</param>
 	/// <returns>The action created for this adjustment</returns>
-	public void RegisterAdjustment (BaseEffect adjustment)
+	public void RegisterAdjustment<T> (T adjustment) where T : BaseEffect
 	{
 #if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
 		if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (adjustment.Icon))
 			Console.Error.WriteLine ($"Icon {adjustment.Icon} for adjustment {adjustment.Name} not found");
 #endif
+		Type adjustmentType = typeof (T);
+
+		if (adjustments.ContainsKey (adjustmentType))
+			throw new Exception ($"An adjustment of type {adjustmentType} is already registered");
 
 		// Create a gtk action for each adjustment
-		Command act = new (
-			adjustment.GetType ().Name,
+		Command action = new (
+			adjustmentType.Name,
 			adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""),
 			string.Empty,
 			adjustment.Icon);
-		act.Activated += (o, args) => { live_preview_manager.Start (adjustment); };
 
-		action_manager.Adjustments.Actions.Add (act);
+		action.Activated += (o, args) => { live_preview_manager.Start (adjustment); };
+
+		action_manager.Adjustments.Actions.Add (action);
 
 		// If no key is specified, don't use an accelerated menu item
 		if (adjustment.AdjustmentMenuKey is null)
-			chrome_manager.Application.AddAction (act);
+			chrome_manager.Application.AddAction (action);
 		else {
-			chrome_manager.Application.AddAccelAction (act, adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey);
+			chrome_manager.Application.AddAccelAction (action, adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey);
 		}
 
-		chrome_manager.AdjustmentsMenu.AppendMenuItemSorted (act.CreateMenuItem ());
+		chrome_manager.AdjustmentsMenu.AppendMenuItemSorted (action.CreateMenuItem ());
 
-		adjustments.Add (adjustment, act);
+		adjustments.Add (adjustmentType, action);
 	}
 
 	/// <summary>
@@ -91,64 +100,64 @@ public sealed class EffectsManager
 	/// </summary>
 	/// <param name="effect">The effect to register</param>
 	/// <returns>The action created for this effect</returns>
-	public void RegisterEffect (BaseEffect effect)
+	public void RegisterEffect<T> (T effect) where T : BaseEffect
 	{
 #if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
 		if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (effect.Icon))
 			Console.Error.WriteLine ($"Icon {effect.Icon} for effect {effect.Name} not found");
 #endif
+		Type effectType = typeof (T);
+
+		if (effects.ContainsKey (effectType))
+			throw new Exception ($"An effect of type {effectType} is already registered");
 
 		// Create a gtk action and menu item for each effect
-		Command act = new (
-			effect.GetType ().Name,
+		Command action = new (
+			effectType.Name,
 			effect.Name + (effect.IsConfigurable ? Translations.GetString ("...") : ""),
 			string.Empty,
 			effect.Icon);
-		chrome_manager.Application.AddAction (act);
-		act.Activated += (o, args) => live_preview_manager.Start (effect);
 
-		action_manager.Effects.AddEffect (effect.EffectMenuCategory, act);
+		chrome_manager.Application.AddAction (action);
+		action.Activated += (o, args) => live_preview_manager.Start (effect);
 
-		effects.Add (effect, act);
+		action_manager.Effects.AddEffect (effect.EffectMenuCategory, action);
+
+		effects.Add (effectType, action);
+		effects_categories.Add (effectType, effect.EffectMenuCategory);
 	}
 
 	/// <summary>
 	/// Unregister an effect with Pinta, causing it to be removed from the Effects menu.
 	/// </summary>
 	/// <param name="effect_type">The type of the effect to unregister</param>
-	public void UnregisterInstanceOfEffect (System.Type effect_type)
+	public void UnregisterInstanceOfEffect<T> () where T : BaseEffect
 	{
-		foreach (BaseEffect effect in effects.Keys) {
+		Type effectType = typeof (T);
 
-			if (effect.GetType () != effect_type)
-				continue;
-
-			var action = effects[effect];
-
-			effects.Remove (effect);
-			action_manager.Effects.RemoveEffect (effect.EffectMenuCategory, action);
+		if (!effects.TryGetValue (effectType, out var action))
 			return;
-		}
+
+		string category = effects_categories[effectType];
+
+		effects.Remove (effectType);
+		action_manager.Effects.RemoveEffect (category, action);
+		effects_categories.Remove (effectType);
 	}
 
 	/// <summary>
 	/// Unregister an effect with Pinta, causing it to be removed from the Adjustments menu.
 	/// </summary>
 	/// <param name="adjustment_type">The type of the adjustment to unregister</param>
-	public void UnregisterInstanceOfAdjustment (System.Type adjustment_type)
+	public void UnregisterInstanceOfAdjustment<T> () where T : BaseEffect
 	{
-		foreach (BaseEffect adjustment in adjustments.Keys) {
+		Type adjustmentType = typeof (T);
 
-			if (adjustment.GetType () != adjustment_type)
-				continue;
-
-			var action = adjustments[adjustment];
-
-			adjustments.Remove (adjustment);
-			action_manager.Adjustments.Actions.Remove (action);
-			chrome_manager.AdjustmentsMenu.Remove (action);
-
+		if (!adjustments.TryGetValue (adjustmentType, out var action))
 			return;
-		}
+
+		adjustments.Remove (adjustmentType);
+		action_manager.Adjustments.Actions.Remove (action);
+		chrome_manager.AdjustmentsMenu.Remove (action);
 	}
 }
