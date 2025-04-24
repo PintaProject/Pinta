@@ -321,13 +321,24 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		active_color_picker = new ColorPickerDialog (PintaCore.Chrome,
 			[PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor],
 			paletteIndex, true, Translations.GetString ("Color Picker"));
+
+		Color primary = PintaCore.Palette.PrimaryColor;
+		Color secondary = PintaCore.Palette.SecondaryColor;
+
 		active_color_picker.Show ();
+
 		active_color_picker.OnResponse += (sender, args) => {
+
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
+
 				if (PintaCore.Palette.PrimaryColor != active_color_picker.Colors[0])
 					PintaCore.Palette.PrimaryColor = active_color_picker.Colors[0];
+
 				if (PintaCore.Palette.SecondaryColor != active_color_picker.Colors[1])
 					PintaCore.Palette.SecondaryColor = active_color_picker.Colors[1];
+			} else {
+				PintaCore.Palette.PrimaryColor = primary;
+				PintaCore.Palette.SecondaryColor = secondary;
 			}
 
 			active_color_picker = null;
