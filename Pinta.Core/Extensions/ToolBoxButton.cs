@@ -35,6 +35,19 @@ public sealed class ToolBoxButton : ToggleButton
 {
 	public BaseTool Tool { get; }
 
+	// Hello, this is a run-once "static" constructor, you may remember me from documentation such as https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-constructors
+	static ToolBoxButton ()
+	{
+		// Force icons to have a specific size regardless of size of the application canvas.
+		// Discussion #1374 where icons seems to be getting smaller when the screen gets bigger.
+		Gtk.CssProvider css = Gtk.CssProvider.New ();
+		css.LoadFromString (".ToolBoxButton { -gtk-icon-size: 2rem; }"); // Works well for high resolution and low resolution canvases across various DPI's
+		Gdk.Display? display = Gdk.Display.GetDefault () ?? null;
+		if (display is not null) {
+			Gtk.StyleContext.AddProviderForDisplay (display, css, 1);
+		}
+	}
+
 	public ToolBoxButton (BaseTool tool)
 	{
 		Tool = tool;
@@ -42,7 +55,8 @@ public sealed class ToolBoxButton : ToggleButton
 		Name = tool.Name;
 		CanFocus = false;
 
-		AddCssClass (AdwaitaStyles.Flat);
+
+		SetCssClasses (["ToolBoxButton", AdwaitaStyles.Flat]);
 
 		Show ();
 
