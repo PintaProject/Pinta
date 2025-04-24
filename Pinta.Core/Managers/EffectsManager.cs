@@ -134,7 +134,11 @@ public sealed class EffectsManager
 	public void UnregisterInstanceOfEffect<T> () where T : BaseEffect
 	{
 		Type effectType = typeof (T);
+		UnregisterInstanceOfEffect (effectType);
+	}
 
+	public void UnregisterInstanceOfEffect (Type effectType)
+	{
 		if (!effects.TryGetValue (effectType, out var action))
 			return;
 
