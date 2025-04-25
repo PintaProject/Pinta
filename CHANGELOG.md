@@ -14,6 +14,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Changed
 - Improved the sizing of the toolbox icons, particularly for high DPI displays (#1374)
+- Pinta now configures a compatibility version number for add-ins, to support running add-ins built against older versions such as Pinta 3.0 (#1379, #1389)
 
 ### Fixed
 
