@@ -243,31 +243,6 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 }
 
-public sealed class CheckboxOption : Gtk.Box
-{
-	public bool State { get; private set; }
-	public Gtk.CheckButton Button { get; }
-	public Gtk.Label Label { get; }
-	public CheckboxOption (int spacing, bool active, string text)
-	{
-		this.Spacing = spacing;
-		Button = new Gtk.CheckButton ();
-		State = active;
-		Button.Active = State;
-		this.Append (Button);
-
-		Label = new Gtk.Label { Label_ = text };
-		this.Append (Label);
-	}
-
-	public void Toggle ()
-	{
-		State = !State;
-		Button.Active = State;
-	}
-}
-
-
 public sealed class ColorPickerDialog : Gtk.Dialog
 {
 	private readonly Gtk.Box top_box;
@@ -298,7 +273,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private ColorSurfaceType picker_surface_type = ColorSurfaceType.HueAndSat;
 	// color surface options
 	private bool mouse_on_picker_surface = false;
-	private readonly CheckboxOption picker_surface_option_draw_value;
+	private readonly Gtk.CheckButton picker_surface_option_draw_value;
 
 	// hex + sliders
 	private readonly Gtk.Entry hex_entry;
@@ -510,7 +485,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		#endregion
 
-
 		// Picker surface; either is Hue & Sat (Color circle) or Sat & Val (Square)
 		// Also contains picker surface switcher + options
 		#region Picker Surface
@@ -518,11 +492,17 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		int pickerSurfaceDrawSize = (picker_surface_radius + picker_surface_padding) * 2;
 
 		// Show Value toggle for hue sat picker surface
-		picker_surface_option_draw_value = new CheckboxOption (spacing, true, Translations.GetString ("Show Value"));
-		picker_surface_option_draw_value.Button.OnToggled += (o, e) => {
-			picker_surface_option_draw_value.Toggle ();
-			UpdateView ();
+
+		// TODO: Can one configure spacing between box itself and its label?
+		//       Maybe with a CSS class...
+		Gtk.CheckButton pickerSurfaceOptionDrawValue = new () {
+			Active = true,
+			Label = Translations.GetString ("Show Value"),
 		};
+		pickerSurfaceOptionDrawValue.OnToggled += (o, e) => UpdateView ();
+
+		picker_surface_option_draw_value = pickerSurfaceOptionDrawValue;
+
 
 		// When Gir.Core supports it, this should probably be replaced with a toggle group.
 		Gtk.ToggleButton pickerSurfaceHueSat = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Hue & Sat"));
@@ -530,9 +510,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		if (picker_surface_type == ColorSurfaceType.HueAndSat)
 			pickerSurfaceHueSat.Toggle ();
 
-		pickerSurfaceHueSat.OnToggled += (sender, args) => {
+		pickerSurfaceHueSat.OnToggled += (_, _) => {
 			picker_surface_type = ColorSurfaceType.HueAndSat;
-			picker_surface_option_draw_value.SetVisible (true);
+			pickerSurfaceOptionDrawValue.SetVisible (true);
 			UpdateView ();
 		};
 
@@ -541,9 +521,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		if (picker_surface_type == ColorSurfaceType.SatAndVal)
 			pickerSurfaceSatVal.Toggle ();
 
-		pickerSurfaceSatVal.OnToggled += (sender, args) => {
+		pickerSurfaceSatVal.OnToggled += (_, _) => {
 			picker_surface_type = ColorSurfaceType.SatAndVal;
-			picker_surface_option_draw_value.SetVisible (false);
+			pickerSurfaceOptionDrawValue.SetVisible (false);
 			UpdateView ();
 		};
 
@@ -588,7 +568,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		pickerSurfaceBox.SetOrientation (Gtk.Orientation.Vertical);
 		pickerSurfaceBox.Append (pickerSurfaceSelectorBox);
 		pickerSurfaceBox.Append (pickerSurfaceOverlay);
-		pickerSurfaceBox.Append (picker_surface_option_draw_value);
+		pickerSurfaceBox.Append (pickerSurfaceOptionDrawValue);
 
 		#endregion
 
@@ -844,7 +824,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// When user clicks off the color picker, we assign the color picker values to the palette
 		// we only do this on off active because otherwise the recent color palette would be spammed
 		// every time the color changes
-		this.OnNotify += (sender, args) => {
+		this.OnNotify += (_, args) => {
 
 			if (args.Pspec.GetName () != "is-active" || !livePalette)
 				return;
@@ -870,6 +850,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				Colors[0] = ((PaletteManager) sender!).PrimaryColor;
 				UpdateView ();
 			}
+
 			void SecondaryChangeHandler (object? sender, EventArgs args)
 			{
 				Colors[1] = ((PaletteManager) sender!).SecondaryColor;
@@ -879,7 +860,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			PintaCore.Palette.PrimaryColorChanged += PrimaryChangeHandler;
 			PintaCore.Palette.SecondaryColorChanged += SecondaryChangeHandler;
 
-			this.OnResponse += (sender, args) => {
+			this.OnResponse += (_, _) => {
 				PintaCore.Palette.PrimaryColorChanged -= PrimaryChangeHandler;
 				PintaCore.Palette.SecondaryColorChanged -= SecondaryChangeHandler;
 			};
@@ -991,19 +972,19 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			int rad = picker_surface_radius;
 
-			PointI center = new PointI (rad, rad);
+			PointI center = new (rad, rad);
 
 			for (int y = 0; y < draw_height; y++) {
 				for (int x = 0; x < draw_width; x++) {
 
-					PointI pxl = new PointI (x, y);
+					PointI pxl = new (x, y);
 					PointI vec = pxl - center;
 
 					if (vec.Magnitude () > rad) continue;
 
 					double h = (MathF.Atan2 (vec.Y, -vec.X) + MathF.PI) / (2f * MathF.PI) * 360f;
 					double s = Math.Min (vec.Magnitude () / rad, 1);
-					double v = picker_surface_option_draw_value.State ? CurrentColor.ToHsv ().Val : 1;
+					double v = picker_surface_option_draw_value.Active ? CurrentColor.ToHsv ().Val : 1;
 
 					double d = rad - vec.Magnitude ();
 					double a = d < 1 ? d : 1;
