@@ -68,7 +68,24 @@ public sealed class EffectsManager
 			Console.Error.WriteLine ($"Icon {adjustment.Icon} for adjustment {adjustment.Name} not found");
 #endif
 		Type adjustmentType = typeof (T);
+		RegisterAdjustmentInternal (adjustment, adjustmentType);
+	}
 
+	/// <remarks>
+	/// Overload provided for compatibility with older add-ins
+	/// </remarks>
+	public void RegisterAdjustment (BaseEffect adjustment)
+	{
+#if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
+		if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (adjustment.Icon))
+			Console.Error.WriteLine ($"Icon {adjustment.Icon} for adjustment {adjustment.Name} not found");
+#endif
+		Type adjustmentType = adjustment.GetType ();
+		RegisterAdjustmentInternal (adjustment, adjustmentType);
+	}
+
+	private void RegisterAdjustmentInternal (BaseEffect adjustment, Type adjustmentType)
+	{
 		if (adjustments.ContainsKey (adjustmentType))
 			throw new Exception ($"An adjustment of type {adjustmentType} is already registered");
 
@@ -110,6 +127,9 @@ public sealed class EffectsManager
 		RegisterEffectInternal (effect, effectType);
 	}
 
+	/// <remarks>
+	/// Overload provided for compatibility with older add-ins
+	/// </remarks>
 	public void RegisterEffect (BaseEffect effect)
 	{
 #if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
