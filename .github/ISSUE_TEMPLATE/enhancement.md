@@ -2,7 +2,7 @@
 name: Enhancement
 about: Suggest an idea or improvement.
 title: ''
-labels: enhancement
+type: Feature
 assignees: ''
 
 ---

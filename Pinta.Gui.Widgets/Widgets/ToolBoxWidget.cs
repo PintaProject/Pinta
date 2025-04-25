@@ -12,13 +12,8 @@ public sealed class ToolBoxWidget : FlowBox
 		PintaCore.Tools.ToolRemoved += HandleToolRemoved;
 
 		SetOrientation (Orientation.Vertical);
-		ColumnSpacing = 0;
-		RowSpacing = 0;
-		Homogeneous = true;
-		MinChildrenPerLine = 6;
-		MaxChildrenPerLine = 1024; // If there is enough vertical space, only use one column
-		Vexpand = true;
-		Valign = Align.Start;
+		MinChildrenPerLine = 8; // Pinta 3 has 22 default tools, meaning a max of 3 columns regardless of size, smaller values don't lead to better use of visual space.
+		MaxChildrenPerLine = 1024; // Allow for single column if there's sufficient space to do so.
 	}
 
 	public void AddItem (ToolBoxButton item)
