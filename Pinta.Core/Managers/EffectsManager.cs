@@ -171,6 +171,9 @@ public sealed class EffectsManager
 		UnregisterInstanceOfEffect (effectType);
 	}
 
+	/// <remarks>
+	/// Overload provided for compatibility with older add-ins
+	/// </remarks>
 	public void UnregisterInstanceOfEffect (Type effectType)
 	{
 		if (!effects.TryGetValue (effectType, out var action))
