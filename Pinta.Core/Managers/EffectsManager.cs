@@ -107,7 +107,21 @@ public sealed class EffectsManager
 			Console.Error.WriteLine ($"Icon {effect.Icon} for effect {effect.Name} not found");
 #endif
 		Type effectType = typeof (T);
+		RegisterEffectInternal (effect, effectType);
+	}
 
+	public void RegisterEffect (BaseEffect effect)
+	{
+#if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
+		if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (effect.Icon))
+			Console.Error.WriteLine ($"Icon {effect.Icon} for effect {effect.Name} not found");
+#endif
+		Type effectType = effect.GetType ();
+		RegisterEffectInternal (effect, effectType);
+	}
+
+	private void RegisterEffectInternal (BaseEffect effect, Type effectType)
+	{
 		if (effects.ContainsKey (effectType))
 			throw new Exception ($"An effect of type {effectType} is already registered");
 
