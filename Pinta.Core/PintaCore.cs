@@ -46,6 +46,12 @@ public static class PintaCore
 	public static CanvasGridManager CanvasGrid { get; }
 
 	public const string ApplicationVersion = "3.1";
+	/// <summary>
+	/// The oldest version of Pinta for which add-ins built against it will still
+	/// run in the current version.
+	/// This should be updated when there are ABI-breaking changes.
+	/// </summary>
+	public const string AddinCompatVersion = "3.0";
 
 	static PintaCore ()
 	{

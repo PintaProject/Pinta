@@ -5,6 +5,7 @@ All notable changes to this project (beginning with version 1.7) will be documen
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
+- @JGCarroll
 - @Lehonti
 - @UrtsiSantsi
 
@@ -12,6 +13,8 @@ Thanks to the following contributors who worked on this release:
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
 
 ### Changed
+- Improved the sizing of the toolbox icons, particularly for high DPI displays (#1374)
+- Pinta now configures a compatibility version number for add-ins, to support running add-ins built against older versions such as Pinta 3.0 (#1379, #1389)
 
 ### Fixed
 
