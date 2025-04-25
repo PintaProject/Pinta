@@ -26,6 +26,7 @@
 
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 
@@ -73,7 +74,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		AddController (click_gesture);
 	}
 
-	private void HandleClick (PointD point, uint button)
+	private async void HandleClick (PointD point, uint button)
 	{
 		var element = GetElementAtPoint (point);
 		switch (element) {
@@ -108,7 +109,8 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				} else if (button == GtkExtensions.MOUSE_LEFT_BUTTON) {
 					PintaCore.Palette.PrimaryColor = PintaCore.Palette.CurrentPalette[index];
 				} else {
-					var color = GetUserChosenColor ([PintaCore.Palette.CurrentPalette[index]], 0, Translations.GetString ("Choose Palette Color"))?[0];
+					var colors = await GetUserChosenColor ([PintaCore.Palette.CurrentPalette[index]], 0, Translations.GetString ("Choose Palette Color"));
+					var color = colors?[0];
 					if (color != null)
 						PintaCore.Palette.CurrentPalette[index] = color.Value;
 				}
@@ -171,32 +173,45 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 	private void DrawSwapIcon (Context g, Color color)
 	{
-		const double arrow_size = 4;
+		const double ARROW_SIZE = 4;
 
 		g.Save ();
 		g.LineWidth = 1.5;
 		g.SetSourceColor (color);
 
-		const double radius = 11;
-		const double offset = 1;
+		const double RADIUS = 11;
+		const double OFFSET = 1;
 
-		double x = swap_rect.Left + radius;
-		double y = swap_rect.Bottom - offset;
+		PointD p1 = new (
+			X: swap_rect.Left + RADIUS,
+			Y: swap_rect.Bottom - OFFSET);
 
-		g.MoveTo (x, y);
-		g.CurveTo (x, y - radius - 2, x, y - radius + offset, swap_rect.Left + offset, swap_rect.Bottom - radius);
+		g.MoveTo (p1.X, p1.Y);
 
-		g.MoveTo (x - arrow_size, y - arrow_size);
-		g.LineTo (x, y);
-		g.LineTo (x + arrow_size, y - arrow_size);
+		g.CurveTo (
+			p1.X,
+			p1.Y - RADIUS - 2,
+			p1.X,
+			p1.Y - RADIUS + OFFSET,
+			swap_rect.Left + OFFSET,
+			swap_rect.Bottom - RADIUS);
 
-		x = swap_rect.Left + offset;
-		y = swap_rect.Bottom - radius;
-		g.MoveTo (x + arrow_size, y - arrow_size);
-		g.LineTo (x, y);
-		g.LineTo (x + arrow_size, y + arrow_size);
+		g.MoveTo (p1.X - ARROW_SIZE, p1.Y - ARROW_SIZE);
+
+		g.LineTo (p1.X, p1.Y);
+		g.LineTo (p1.X + ARROW_SIZE, p1.Y - ARROW_SIZE);
+
+		PointD p2 = new (
+			X: swap_rect.Left + OFFSET,
+			Y: swap_rect.Bottom - RADIUS);
+
+		g.MoveTo (p2.X + ARROW_SIZE, p2.Y - ARROW_SIZE);
+
+		g.LineTo (p2.X, p2.Y);
+		g.LineTo (p2.X + ARROW_SIZE, p2.Y + ARROW_SIZE);
 
 		g.Stroke ();
+
 		g.Restore ();
 	}
 
@@ -235,7 +250,10 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		return new (x, y, SWATCH_SIZE, SWATCH_SIZE);
 	}
 
-	public static int GetSwatchAtLocation (PointD point, RectangleD palette_bounds, bool recentColorPalette = false)
+	public static int GetSwatchAtLocation (
+		PointD point,
+		RectangleD palette_bounds,
+		bool recentColorPalette = false)
 	{
 		int max =
 			recentColorPalette
@@ -317,21 +335,28 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	}
 
 
-	private static Color[]? GetUserChosenColor (Color[] colors, int selectedColorIndex, string title)
+	private static async Task<Color[]?> GetUserChosenColor (
+		Color[] colors,
+		int selectedColorIndex,
+		string title)
 	{
-		ColorPickerDialog dialog = new ColorPickerDialog (PintaCore.Chrome, colors, selectedColorIndex, false, title);
+		using ColorPickerDialog dialog = new (
+			PintaCore.Chrome,
+			colors,
+			selectedColorIndex,
+			false, title);
 
-		dialog.Show ();
+		try {
+			Gtk.ResponseType response = await dialog.RunAsync ();
 
-		var response = dialog.RunBlocking ();
-		if (response == Gtk.ResponseType.Ok) {
-			Color[] result = dialog.Colors;
+			if (response != Gtk.ResponseType.Ok)
+				return null;
+
+			return dialog.Colors;
+
+		} finally {
 			dialog.Destroy ();
-			return result;
 		}
-
-		dialog.Destroy ();
-		return null;
 	}
 
 	private WidgetElement GetElementAtPoint (PointD point)
