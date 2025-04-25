@@ -31,6 +31,7 @@ using Mono.Addins;
 using Pinta.Core;
 using Pinta.Docking;
 using Pinta.Gui.Widgets;
+using Pinta.Resources;
 
 namespace Pinta;
 
@@ -313,6 +314,8 @@ internal sealed class MainWindow
 		int width = PintaCore.Settings.GetSetting ("window-size-width", 1100);
 		int height = PintaCore.Settings.GetSetting ("window-size-height", 750);
 		bool maximize = PintaCore.Settings.GetSetting ("window-maximized", false);
+
+		ResourceLoader.LoadCssStyles ();
 
 		window_shell = new WindowShell (
 			app,

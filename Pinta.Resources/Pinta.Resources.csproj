@@ -59,6 +59,9 @@
     <EmbeddedResource Include="Resources\Cursor.PaintBucket.png">
       <LogicalName>Cursor.PaintBucket.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\style.css" >
+      <LogicalName>style.css</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="GirCore.Gtk-4.0" />
