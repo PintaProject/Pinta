@@ -193,7 +193,14 @@ public sealed class EffectsManager
 	public void UnregisterInstanceOfAdjustment<T> () where T : BaseEffect
 	{
 		Type adjustmentType = typeof (T);
+		UnregisterInstamceOfAdjustment (adjustmentType);
+	}
 
+	/// <remarks>
+	/// Overload provided for compatibility with older add-ins
+	/// </remarks>
+	public void UnregisterInstamceOfAdjustment (Type adjustmentType)
+	{
 		if (!adjustments.TryGetValue (adjustmentType, out var action))
 			return;
 
