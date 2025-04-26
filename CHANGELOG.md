@@ -17,6 +17,7 @@ Thanks to the following contributors who worked on this release:
 - Pinta now configures a compatibility version number for add-ins, to support running add-ins built against older versions such as Pinta 3.0 (#1379, #1389)
 
 ### Fixed
+- Fixed an issue where the toolbar's height could change when switching tools (#1370, #1391) 
 
 ## [3.0](https://github.com/PintaProject/Pinta/releases/tag/3.0) - 2025/04/11
 
