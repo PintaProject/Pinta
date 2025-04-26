@@ -99,17 +99,42 @@ public sealed class MotionBlurEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = destination.GetPixelData ();
 
-		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize)) {
-			int sampleCount = 0;
-			for (int j = 0; j < settings.points.Length; ++j) {
-				PointD pt = new (settings.points[j].X + pixel.coordinates.X, settings.points[j].Y + pixel.coordinates.Y);
-				if (pt.X < 0 || pt.Y < 0 || pt.X > (settings.canvasSize.Width - 1) || pt.Y > (settings.canvasSize.Height - 1))
-					continue;
-				samples[sampleCount] = source.GetBilinearSample (src_data, settings.canvasSize.Width, settings.canvasSize.Height, (float) pt.X, (float) pt.Y);
-				++sampleCount;
-			}
-			dst_data[pixel.memoryOffset] = ColorBgra.Blend (samples[..sampleCount]);
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
+			dst_data[pixel.memoryOffset] = GetFinalPixelColor (
+				settings,
+				source,
+				src_data,
+				samples,
+				pixel);
+	}
+
+	private static ColorBgra GetFinalPixelColor (
+		MotionBlurSettings settings,
+		ImageSurface source,
+		ReadOnlySpan<ColorBgra> src_data,
+		Span<ColorBgra> samples,
+		in PixelOffset pixel)
+	{
+		int sampleCount = 0;
+
+		for (int j = 0; j < settings.points.Length; ++j) {
+
+			PointD pt = new (settings.points[j].X + pixel.coordinates.X, settings.points[j].Y + pixel.coordinates.Y);
+
+			if (pt.X < 0 || pt.Y < 0 || pt.X > (settings.canvasSize.Width - 1) || pt.Y > (settings.canvasSize.Height - 1))
+				continue;
+
+			samples[sampleCount] = source.GetBilinearSample (
+				src_data,
+				settings.canvasSize.Width,
+				settings.canvasSize.Height,
+				(float) pt.X,
+				(float) pt.Y);
+
+			++sampleCount;
 		}
+
+		return ColorBgra.Blend (samples[..sampleCount]);
 	}
 
 	public sealed class MotionBlurData : EffectData
