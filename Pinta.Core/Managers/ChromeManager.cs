@@ -212,7 +212,7 @@ public interface IProgressDialog
 	string Title { get; set; }
 	string Text { get; set; }
 	double Progress { get; set; }
-	event EventHandler<EventArgs> Canceled;
+	event EventHandler Canceled;
 }
 
 public delegate Task<ErrorDialogResponse> ErrorDialogHandler (Gtk.Window parent, string message, string body, string details);

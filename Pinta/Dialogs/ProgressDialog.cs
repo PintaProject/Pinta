@@ -34,7 +34,7 @@ public sealed class ProgressDialog : Gtk.Dialog, IProgressDialog
 	private readonly Gtk.Label text_label;
 	private readonly Gtk.ProgressBar progress_bar;
 
-	public event EventHandler<EventArgs>? Canceled;
+	public event EventHandler? Canceled;
 
 	public ProgressDialog (ChromeManager chrome)
 	{
@@ -83,28 +83,5 @@ public sealed class ProgressDialog : Gtk.Dialog, IProgressDialog
 	public double Progress {
 		get => progress_bar.Fraction;
 		set => progress_bar.Fraction = value;
-	}
-
-	uint timeout_id = 0;
-
-	void IProgressDialog.Show ()
-	{
-		timeout_id = GLib.Functions.TimeoutAdd (
-			0,
-			500,
-			() => {
-				Show ();
-				timeout_id = 0;
-				return false;
-			}
-		);
-	}
-
-	void IProgressDialog.Hide ()
-	{
-		if (timeout_id != 0)
-			GLib.Source.Remove (timeout_id);
-
-		Hide ();
 	}
 }

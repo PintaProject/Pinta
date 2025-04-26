@@ -111,6 +111,8 @@ public sealed class LivePreviewManager : ILivePreview
 		dialog.Progress = renderer.Progress;
 		dialog.Canceled += HandleProgressDialogCancel;
 
+		uint progress_timeout_id = 0;
+
 		try {
 			// Paint the pre-effect layer surface into into the working surface.
 			using Cairo.Context ctx = new (LivePreviewSurface);
@@ -140,7 +142,15 @@ public sealed class LivePreviewManager : ILivePreview
 
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "LivePreviewManager.Apply()");
 
-			dialog.Show ();
+			progress_timeout_id = GLib.Functions.TimeoutAdd (
+				0,
+				500,
+				() => {
+					dialog.Show ();
+					progress_timeout_id = 0;
+					return false;
+				}
+			);
 
 			var result = await renderer.Finish (cancel: false);
 
@@ -179,6 +189,9 @@ public sealed class LivePreviewManager : ILivePreview
 			chrome.MainWindowBusy = false;
 
 			dialog.Canceled -= HandleProgressDialogCancel;
+
+			if (progress_timeout_id != 0)
+				GLib.Source.Remove (progress_timeout_id);
 
 			dialog.Hide ();
 		}
