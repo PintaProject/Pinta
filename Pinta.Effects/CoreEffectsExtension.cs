@@ -97,53 +97,53 @@ internal sealed class CoreEffectsExtension : IExtension
 	public void Uninitialize ()
 	{
 		// Remove the adjustments
-		PintaCore.Effects.UnregisterInstanceOfAdjustment (typeof (AutoLevelEffect));
-		PintaCore.Effects.UnregisterInstanceOfAdjustment (typeof (BlackAndWhiteEffect));
-		PintaCore.Effects.UnregisterInstanceOfAdjustment (typeof (BrightnessContrastEffect));
-		PintaCore.Effects.UnregisterInstanceOfAdjustment (typeof (CurvesEffect));
-		PintaCore.Effects.UnregisterInstanceOfAdjustment (typeof (HueSaturationEffect));
-		PintaCore.Effects.UnregisterInstanceOfAdjustment (typeof (InvertColorsEffect));
-		PintaCore.Effects.UnregisterInstanceOfAdjustment (typeof (LevelsEffect));
-		PintaCore.Effects.UnregisterInstanceOfAdjustment (typeof (PosterizeEffect));
-		PintaCore.Effects.UnregisterInstanceOfAdjustment (typeof (SepiaEffect));
+		PintaCore.Effects.UnregisterInstanceOfAdjustment<AutoLevelEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfAdjustment<BlackAndWhiteEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfAdjustment<BrightnessContrastEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfAdjustment<CurvesEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfAdjustment<HueSaturationEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfAdjustment<InvertColorsEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfAdjustment<LevelsEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfAdjustment<PosterizeEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfAdjustment<SepiaEffect> ();
 
 		// Remove the effects
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (AddNoiseEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (AlignObjectEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (BulgeEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (CloudsEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (DentsEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (DitheringEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (EdgeDetectEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (EmbossEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (FragmentEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (FrostedGlassEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (GaussianBlurEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (GlowEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (FeatherEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (OutlineObjectEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (InkSketchEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (JuliaFractalEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (MandelbrotFractalEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (MedianEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (MotionBlurEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (OilPaintingEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (OutlineEdgeEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (PencilSketchEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (PixelateEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (PolarInversionEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (RadialBlurEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (RedEyeRemoveEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ReduceNoiseEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ReliefEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (SharpenEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (SoftenPortraitEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (TileEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (TwistEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (UnfocusEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (VignetteEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (VoronoiDiagramEffect));
-		PintaCore.Effects.UnregisterInstanceOfEffect (typeof (ZoomBlurEffect));
+		PintaCore.Effects.UnregisterInstanceOfEffect<AddNoiseEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<AlignObjectEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<BulgeEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<CloudsEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<DentsEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<DitheringEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<EdgeDetectEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<EmbossEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<FragmentEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<FrostedGlassEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<GaussianBlurEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<GlowEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<FeatherEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<OutlineObjectEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<InkSketchEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<JuliaFractalEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<MandelbrotFractalEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<MedianEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<MotionBlurEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<OilPaintingEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<OutlineEdgeEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<PencilSketchEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<PixelateEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<PolarInversionEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<RadialBlurEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<RedEyeRemoveEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<ReduceNoiseEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<ReliefEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<SharpenEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<SoftenPortraitEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<TileEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<TwistEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<UnfocusEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<VignetteEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<VoronoiDiagramEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<ZoomBlurEffect> ();
 	}
 	#endregion
 }
