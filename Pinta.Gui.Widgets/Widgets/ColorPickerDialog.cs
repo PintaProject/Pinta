@@ -493,8 +493,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		// Show Value toggle for hue sat picker surface
 
-		// TODO: Can one configure spacing between box itself and its label?
-		//       Maybe with a CSS class...
 		Gtk.CheckButton pickerSurfaceOptionDrawValue = new () {
 			Active = true,
 			Label = Translations.GetString ("Show Value"),
