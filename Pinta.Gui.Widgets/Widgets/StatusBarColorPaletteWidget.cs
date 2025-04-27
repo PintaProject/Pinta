@@ -85,7 +85,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				RunColorPicker (1);
 				break;
 			case WidgetElement.SwapColors:
-				var temp = PintaCore.Palette.PrimaryColor;
+				Color temp = PintaCore.Palette.PrimaryColor;
 
 				// Swapping should not trigger adding colors to recently used palette
 				PintaCore.Palette.SetColor (true, PintaCore.Palette.SecondaryColor, false);
@@ -99,7 +99,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				break;
 			case WidgetElement.Palette:
 
-				var index = GetSwatchAtLocation (point, palette_rect);
+				int index = GetSwatchAtLocation (point, palette_rect);
 
 				if (index < 0)
 					break;
@@ -118,12 +118,13 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				break;
 			case WidgetElement.RecentColorsPalette:
 
-				var recent_index = GetSwatchAtLocation (point, recent_palette_rect, true);
+				int recent_index = GetSwatchAtLocation (point, recent_palette_rect, true);
 
 				if (recent_index < 0)
 					break;
 
-				var recentColor = PintaCore.Palette.RecentlyUsedColors.ElementAt (recent_index);
+				Color recentColor = PintaCore.Palette.RecentlyUsedColors.ElementAt (recent_index);
+
 				if (button == GtkExtensions.MOUSE_RIGHT_BUTTON) {
 					PintaCore.Palette.SetColor (false, recentColor, false);
 				} else if (button == GtkExtensions.MOUSE_LEFT_BUTTON) {
@@ -318,9 +319,13 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	{
 		if (active_color_picker != null)
 			return;
-		active_color_picker = new ColorPickerDialog (PintaCore.Chrome,
+		active_color_picker = new ColorPickerDialog (
+			PintaCore.Chrome,
+			PintaCore.Palette,
 			[PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor],
-			paletteIndex, true, Translations.GetString ("Color Picker"));
+			paletteIndex,
+			true,
+			Translations.GetString ("Color Picker"));
 		active_color_picker.Show ();
 		active_color_picker.OnResponse += (sender, args) => {
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
@@ -342,9 +347,11 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	{
 		using ColorPickerDialog dialog = new (
 			PintaCore.Chrome,
+			PintaCore.Palette,
 			colors,
 			selectedColorIndex,
-			false, title);
+			false,
+			title);
 
 		try {
 			Gtk.ResponseType response = await dialog.RunAsync ();
@@ -363,14 +370,19 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	{
 		if (palette_rect.ContainsPoint (point))
 			return WidgetElement.Palette;
+
 		if (recent_palette_rect.ContainsPoint (point))
 			return WidgetElement.RecentColorsPalette;
+
 		if (primary_rect.ContainsPoint (point))
 			return WidgetElement.PrimaryColor;
+
 		if (secondary_rect.ContainsPoint (point))
 			return WidgetElement.SecondaryColor;
+
 		if (swap_rect.ContainsPoint (point))
 			return WidgetElement.SwapColors;
+
 		if (reset_rect.ContainsPoint (point))
 			return WidgetElement.ResetColors;
 

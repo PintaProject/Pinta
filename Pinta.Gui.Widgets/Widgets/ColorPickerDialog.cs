@@ -366,21 +366,23 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	}
 
 	/// <param name="chrome">Current Chrome Manager.</param>
-	/// <param name="palette">Palette of adjustable </param>
+	/// <param name="palette">Palette service.</param>
+	/// <param name="adjustable">Palette of adjustable </param>
 	/// <param name="currentColorIndex"></param>
 	/// <param name="livePalette">Determines modality of the dialog and live palette behaviour. If true, dialog will not block rest of app and will update
 	/// the current palette as the color is changed.</param>
 	/// <param name="windowTitle">Title of the dialog.</param>
 	public ColorPickerDialog (
 		ChromeManager chrome,
-		Color[] palette,
+		PaletteManager palette,
+		Color[] adjustable,
 		int currentColorIndex,
 		bool livePalette,
 		string windowTitle)
 	{
 		bool showWatches = !livePalette;
 
-		ImmutableArray<Color> originalColors = [.. palette];
+		ImmutableArray<Color> originalColors = [.. adjustable];
 
 		Colors = [.. originalColors];
 		color_index = currentColorIndex;
@@ -389,7 +391,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		#region Titlebar
 
 		Gtk.Button reset_button = new () { Label = Translations.GetString ("Reset Color") };
-		reset_button.OnClicked += (button, args) => {
+		reset_button.OnClicked += (_, _) => {
 			Colors = [.. originalColors];
 			UpdateView ();
 		};
@@ -400,7 +402,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			? Resources.StandardIcons.WindowMaximize
 			: Resources.StandardIcons.WindowMinimize);
 
-		shrinkButton.OnClicked += (sender, args) => {
+		shrinkButton.OnClicked += (_, _) => {
 			var contentArea = this.GetContentAreaBox ();
 			//contentArea.RemoveAll ();
 			SetSmallMode (!small_mode);
@@ -411,14 +413,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 
 		Gtk.Button ok_button = new () { Label = Translations.GetString ("OK") };
-		ok_button.OnClicked += (sender, args) => {
+		ok_button.OnClicked += (_, _) => {
 			this.Response ((int) Gtk.ResponseType.Ok);
 			this.Close ();
 		};
 		ok_button.AddCssClass (AdwaitaStyles.SuggestedAction);
 
 		Gtk.Button cancelButton = new () { Label = Translations.GetString ("Cancel") };
-		cancelButton.OnClicked += (sender, args) => {
+		cancelButton.OnClicked += (_, _) => {
 			this.Response ((int) Gtk.ResponseType.Ok); // TODO: Is this the right response?
 			this.Close ();
 		};
@@ -683,8 +685,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 		swatchRecent.SetDrawFunc ((area, g, width, height) => {
 
-			var recent = PintaCore.Palette.RecentlyUsedColors;
-			int recent_cols = PintaCore.Palette.MaxRecentlyUsedColor / StatusBarColorPaletteWidget.PALETTE_ROWS;
+			var recent = palette.RecentlyUsedColors;
+			int recent_cols = palette.MaxRecentlyUsedColor / StatusBarColorPaletteWidget.PALETTE_ROWS;
 
 			RectangleD recent_palette_rect = new (
 				0,
@@ -708,10 +710,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				width - StatusBarColorPaletteWidget.PALETTE_MARGIN,
 				StatusBarColorPaletteWidget.SWATCH_SIZE * StatusBarColorPaletteWidget.PALETTE_ROWS);
 
-			Palette palette = PintaCore.Palette.CurrentPalette;
+			Palette currentPalette = palette.CurrentPalette;
 
-			for (int i = 0; i < palette.Count; i++)
-				g.FillRectangle (StatusBarColorPaletteWidget.GetSwatchBounds (i, palette_rect), palette[i]);
+			for (int i = 0; i < currentPalette.Count; i++)
+				g.FillRectangle (StatusBarColorPaletteWidget.GetSwatchBounds (i, palette_rect), currentPalette[i]);
 		});
 
 		Gtk.Box swatchBox = new () { Spacing = spacing };
@@ -745,7 +747,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				if (recent_index < 0)
 					return;
 
-				CurrentColor = PintaCore.Palette.RecentlyUsedColors.ElementAt (recent_index);
+				CurrentColor = palette.RecentlyUsedColors.ElementAt (recent_index);
 
 				UpdateView ();
 
@@ -760,7 +762,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				if (index < 0)
 					return;
 
-				CurrentColor = PintaCore.Palette.CurrentPalette[index];
+				CurrentColor = palette.CurrentPalette[index];
 				UpdateView ();
 			}
 		};
@@ -834,33 +836,33 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			this.SetOpacity (0.85f);
 
-			if (PintaCore.Palette.PrimaryColor != Colors[0])
-				PintaCore.Palette.PrimaryColor = Colors[0];
+			if (palette.PrimaryColor != Colors[0])
+				palette.PrimaryColor = Colors[0];
 
-			if (PintaCore.Palette.SecondaryColor != Colors[1])
-				PintaCore.Palette.SecondaryColor = Colors[1];
+			if (palette.SecondaryColor != Colors[1])
+				palette.SecondaryColor = Colors[1];
 		};
 
 		if (livePalette) {
 
-			void PrimaryChangeHandler (object? sender, EventArgs args)
+			void PrimaryChangeHandler (object? sender, EventArgs _)
 			{
 				Colors[0] = ((PaletteManager) sender!).PrimaryColor;
 				UpdateView ();
 			}
 
-			void SecondaryChangeHandler (object? sender, EventArgs args)
+			void SecondaryChangeHandler (object? sender, EventArgs _)
 			{
 				Colors[1] = ((PaletteManager) sender!).SecondaryColor;
 				UpdateView ();
 			}
 
-			PintaCore.Palette.PrimaryColorChanged += PrimaryChangeHandler;
-			PintaCore.Palette.SecondaryColorChanged += SecondaryChangeHandler;
+			palette.PrimaryColorChanged += PrimaryChangeHandler;
+			palette.SecondaryColorChanged += SecondaryChangeHandler;
 
 			this.OnResponse += (_, _) => {
-				PintaCore.Palette.PrimaryColorChanged -= PrimaryChangeHandler;
-				PintaCore.Palette.SecondaryColorChanged -= SecondaryChangeHandler;
+				palette.PrimaryColorChanged -= PrimaryChangeHandler;
+				palette.SecondaryColorChanged -= SecondaryChangeHandler;
 			};
 		}
 
