@@ -1,0 +1,6 @@
+<Project>
+    <ItemGroup>
+        <ProjectReference Condition="'$(GirCoreSource)' != ''" Include="$(GirCoreSource)/src/Libs/PangoCairo-1.0/PangoCairo-1.0.csproj" />
+        <PackageReference Condition="'$(GirCoreSource)' == ''" Include="GirCore.PangoCairo-1.0" />
+    </ItemGroup>
+</Project>

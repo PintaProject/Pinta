@@ -1,0 +1,6 @@
+<Project>
+    <ItemGroup>
+        <ProjectReference Condition="'$(GirCoreSource)' != ''" Include="$(GirCoreSource)/src/Libs/Gtk-4.0/Gtk-4.0.csproj" />
+        <PackageReference Condition="'$(GirCoreSource)' == ''" Include="GirCore.Gtk-4.0" />
+    </ItemGroup>
+</Project>
