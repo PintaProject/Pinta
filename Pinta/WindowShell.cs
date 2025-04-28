@@ -55,6 +55,9 @@ public sealed class WindowShell
 			header_bar = Adw.HeaderBar.New ();
 			app_layout.AddTopBar (header_bar);
 		} else {
+			// If the header bar isn't being used, we use a regular Gtk.ApplicationWindow
+			// to have a traditional titlebar with the standard close / minimize buttons,
+			// and a menubar in the window unless a global menu is used (e.g. macOS)
 			app_window = Gtk.ApplicationWindow.New (app);
 			app_window.SetChild (app_layout);
 		}
