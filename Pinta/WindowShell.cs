@@ -59,6 +59,7 @@ public sealed class WindowShell
 			// to have a traditional titlebar with the standard close / minimize buttons,
 			// and a menubar in the window unless a global menu is used (e.g. macOS)
 			app_window = Gtk.ApplicationWindow.New (app);
+			app_window.ShowMenubar = true;
 			app_window.SetChild (app_layout);
 		}
 
