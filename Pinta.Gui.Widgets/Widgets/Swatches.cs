@@ -2,12 +2,6 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-/// <summary>
-/// Temporary utility methods for
-/// <see cref="StatusBarColorPaletteWidget"/>
-/// and
-/// <see cref="ColorPickerDialog"/>.
-/// </summary>
 internal static class Swatches
 {
 	internal const int PALETTE_ROWS = 2;
