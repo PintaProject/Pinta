@@ -85,14 +85,14 @@ public sealed class LayerActions
 		Gio.Menu prop_section = Gio.Menu.New ();
 		prop_section.AppendItem (Properties.CreateMenuItem ());
 
-		menu.AppendItem (AddNewLayer.CreateMenuItem ());
-		menu.AppendItem (DeleteLayer.CreateMenuItem ());
-		menu.AppendItem (DuplicateLayer.CreateMenuItem ());
-		menu.AppendItem (MergeLayerDown.CreateMenuItem ());
 		menu.AppendItem (ImportFromFile.CreateMenuItem ());
 		menu.AppendSection (null, flip_section);
 		menu.AppendSection (null, prop_section);
 
+		app.AddAccelAction (AddNewLayer, "<Primary><Shift>N");
+		app.AddAccelAction (DeleteLayer, "<Primary><Shift>Delete");
+		app.AddAccelAction (DuplicateLayer, "<Primary><Shift>D");
+		app.AddAccelAction (MergeLayerDown, "<Primary>M");
 		app.AddAction (ImportFromFile);
 		app.AddAction (FlipHorizontal);
 		app.AddAction (FlipVertical);
