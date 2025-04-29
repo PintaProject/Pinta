@@ -2,7 +2,7 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-internal static class Swatches
+internal static class PaletteWidget
 {
 	internal const int PALETTE_ROWS = 2;
 	internal const int SWATCH_SIZE = 19;
@@ -10,7 +10,7 @@ internal static class Swatches
 	internal const int PALETTE_MARGIN = 10;
 
 	public static int GetSwatchAtLocation (
-		this PaletteManager palette,
+		PaletteManager palette,
 		PointD point,
 		RectangleD palette_bounds,
 		bool recentColorPalette = false)
@@ -22,14 +22,14 @@ internal static class Swatches
 
 		// This could be more efficient, but is good enough for now
 		for (int i = 0; i < max; i++)
-			if (palette.GetSwatchBounds (i, palette_bounds, recentColorPalette).ContainsPoint (point))
+			if (GetSwatchBounds (palette, i, palette_bounds, recentColorPalette).ContainsPoint (point))
 				return i;
 
 		return -1;
 	}
 
 	public static RectangleD GetSwatchBounds (
-		this PaletteManager palette,
+		PaletteManager palette,
 		int index,
 		RectangleD palette_bounds,
 		bool recentColorPalette = false)

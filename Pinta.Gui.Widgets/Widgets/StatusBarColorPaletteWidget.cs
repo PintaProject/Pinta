@@ -62,7 +62,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		palette.RecentColorsChanged += new EventHandler (Palette_ColorChanged);
 		palette.CurrentPalette.PaletteChanged += new EventHandler (Palette_ColorChanged);
 
-		HeightRequest = Swatches.WIDGET_HEIGHT;
+		HeightRequest = PaletteWidget.WIDGET_HEIGHT;
 
 		OnResize += (_, e) => HandleSizeAllocated (e);
 		SetDrawFunc ((area, context, width, height) => Draw (context));
@@ -114,7 +114,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 			case WidgetElement.Palette:
 
-				int index = palette.GetSwatchAtLocation (point, palette_rect);
+				int index = PaletteWidget.GetSwatchAtLocation (palette, point, palette_rect);
 
 				if (index < 0)
 					break;
@@ -134,7 +134,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 			case WidgetElement.RecentColorsPalette:
 
-				int recent_index = palette.GetSwatchAtLocation (point, recent_palette_rect, true);
+				int recent_index = PaletteWidget.GetSwatchAtLocation (palette, point, recent_palette_rect, true);
 
 				if (recent_index < 0)
 					break;
@@ -176,13 +176,13 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		var recent = palette.RecentlyUsedColors;
 
 		for (int i = 0; i < recent.Count; i++)
-			g.FillRectangle (palette.GetSwatchBounds (i, recent_palette_rect, true), recent.ElementAt (i));
+			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true), recent.ElementAt (i));
 
 		// Draw color swatches
 		var currentPalette = palette.CurrentPalette;
 
 		for (int i = 0; i < currentPalette.Count; i++)
-			g.FillRectangle (palette.GetSwatchBounds (i, palette_rect), currentPalette[i]);
+			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, palette_rect), currentPalette[i]);
 
 		g.Dispose ();
 	}
@@ -236,14 +236,14 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		int width = e.Width;
 
 		// Store the bounds allocated for our palette
-		int recent_cols = palette.MaxRecentlyUsedColor / Swatches.PALETTE_ROWS;
+		int recent_cols = palette.MaxRecentlyUsedColor / PaletteWidget.PALETTE_ROWS;
 
-		recent_palette_rect = new RectangleD (50, 2, Swatches.SWATCH_SIZE * recent_cols, Swatches.SWATCH_SIZE * Swatches.PALETTE_ROWS);
+		recent_palette_rect = new RectangleD (50, 2, PaletteWidget.SWATCH_SIZE * recent_cols, PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
 		palette_rect = new RectangleD (
-			recent_palette_rect.Right + Swatches.PALETTE_MARGIN,
+			recent_palette_rect.Right + PaletteWidget.PALETTE_MARGIN,
 			2,
-			width - recent_palette_rect.Right - Swatches.PALETTE_MARGIN,
-			Swatches.SWATCH_SIZE * Swatches.PALETTE_ROWS);
+			width - recent_palette_rect.Right - PaletteWidget.PALETTE_MARGIN,
+			PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
 	}
 
 	/// <summary>
@@ -256,11 +256,11 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 		switch (GetElementAtPoint (point)) {
 			case WidgetElement.Palette:
-				if (palette.GetSwatchAtLocation (point, palette_rect) >= 0)
+				if (PaletteWidget.GetSwatchAtLocation (palette, point, palette_rect) >= 0)
 					text = Translations.GetString ("Left click to set primary color. Right click to set secondary color. Middle click to choose palette color.");
 				break;
 			case WidgetElement.RecentColorsPalette:
-				if (palette.GetSwatchAtLocation (point, recent_palette_rect, true) >= 0)
+				if (PaletteWidget.GetSwatchAtLocation (palette, point, recent_palette_rect, true) >= 0)
 					text = Translations.GetString ("Left click to set primary color. Right click to set secondary color.");
 				break;
 			case WidgetElement.PrimaryColor:

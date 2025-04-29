@@ -681,39 +681,39 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		Gtk.DrawingArea swatchRecent = new () {
 			WidthRequest = 500,
-			HeightRequest = Swatches.SWATCH_SIZE * Swatches.PALETTE_ROWS,
+			HeightRequest = PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS,
 		};
 		swatchRecent.SetDrawFunc ((area, g, width, height) => {
 
 			var recent = palette.RecentlyUsedColors;
-			int recent_cols = palette.MaxRecentlyUsedColor / Swatches.PALETTE_ROWS;
+			int recent_cols = palette.MaxRecentlyUsedColor / PaletteWidget.PALETTE_ROWS;
 
 			RectangleD recent_palette_rect = new (
 				0,
 				0,
-				Swatches.SWATCH_SIZE * recent_cols,
-				Swatches.SWATCH_SIZE * Swatches.PALETTE_ROWS);
+				PaletteWidget.SWATCH_SIZE * recent_cols,
+				PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
 
 			for (int i = 0; i < recent.Count; i++)
-				g.FillRectangle (palette.GetSwatchBounds (i, recent_palette_rect, true), recent.ElementAt (i));
+				g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true), recent.ElementAt (i));
 		});
 
 		Gtk.DrawingArea swatchPalette = new () {
 			WidthRequest = 500,
-			HeightRequest = Swatches.SWATCH_SIZE * Swatches.PALETTE_ROWS,
+			HeightRequest = PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS,
 		};
 		swatchPalette.SetDrawFunc ((area, g, width, height) => {
 
 			RectangleD palette_rect = new (
 				0,
 				0,
-				width - Swatches.PALETTE_MARGIN,
-				Swatches.SWATCH_SIZE * Swatches.PALETTE_ROWS);
+				width - PaletteWidget.PALETTE_MARGIN,
+				PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
 
 			Palette currentPalette = palette.CurrentPalette;
 
 			for (int i = 0; i < currentPalette.Count; i++)
-				g.FillRectangle (palette.GetSwatchBounds (i, palette_rect), currentPalette[i]);
+				g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, palette_rect), currentPalette[i]);
 		});
 
 		Gtk.Box swatchBox = new () { Spacing = spacing };
@@ -742,7 +742,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			if (swatchBox.Visible && swatchRecent.IsMouseInDrawingArea (this, absPos, out PointD rel2)) {
 
-				int recent_index = palette.GetSwatchAtLocation (rel2, new RectangleD (), true);
+				int recent_index = PaletteWidget.GetSwatchAtLocation (palette, rel2, new RectangleD (), true);
 
 				if (recent_index < 0)
 					return;
@@ -757,7 +757,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			if (swatchBox.Visible && swatchPalette.IsMouseInDrawingArea (this, absPos, out PointD rel3)) {
 
-				int index = palette.GetSwatchAtLocation (rel3, new RectangleD ());
+				int index = PaletteWidget.GetSwatchAtLocation (palette, rel3, new RectangleD ());
 
 				if (index < 0)
 					return;
