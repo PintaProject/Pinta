@@ -41,25 +41,28 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	private readonly RectangleD swap_rect = new (27, 2, 15, 15);
 	private readonly RectangleD reset_rect = new (2, 27, 15, 15);
 
+	private readonly ChromeManager chrome;
+	private readonly PaletteManager palette;
+
 	private RectangleD palette_rect;
 	private RectangleD recent_palette_rect;
 
-	public const int PALETTE_ROWS = 2;
-	public const int SWATCH_SIZE = 19;
-	public const int WIDGET_HEIGHT = 42;
-	public const int PALETTE_MARGIN = 10;
-
-	public StatusBarColorPaletteWidget ()
+	public StatusBarColorPaletteWidget (
+		ChromeManager chrome,
+		PaletteManager palette)
 	{
+		this.chrome = chrome;
+		this.palette = palette;
+
 		HasTooltip = true;
 		OnQueryTooltip += HandleQueryTooltip;
 
-		PintaCore.Palette.PrimaryColorChanged += new EventHandler (Palette_ColorChanged);
-		PintaCore.Palette.SecondaryColorChanged += new EventHandler (Palette_ColorChanged);
-		PintaCore.Palette.RecentColorsChanged += new EventHandler (Palette_ColorChanged);
-		PintaCore.Palette.CurrentPalette.PaletteChanged += new EventHandler (Palette_ColorChanged);
+		palette.PrimaryColorChanged += new EventHandler (Palette_ColorChanged);
+		palette.SecondaryColorChanged += new EventHandler (Palette_ColorChanged);
+		palette.RecentColorsChanged += new EventHandler (Palette_ColorChanged);
+		palette.CurrentPalette.PaletteChanged += new EventHandler (Palette_ColorChanged);
 
-		HeightRequest = WIDGET_HEIGHT;
+		HeightRequest = PaletteWidget.WIDGET_HEIGHT;
 
 		OnResize += (_, e) => HandleSizeAllocated (e);
 		SetDrawFunc ((area, context, width, height) => Draw (context));
@@ -77,60 +80,72 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	private async void HandleClick (PointD point, uint button)
 	{
 		var element = GetElementAtPoint (point);
+
 		switch (element) {
+
 			case WidgetElement.PrimaryColor:
+
 				RunColorPicker (0);
+
 				break;
+
 			case WidgetElement.SecondaryColor:
+
 				RunColorPicker (1);
+
 				break;
+
 			case WidgetElement.SwapColors:
-				Color temp = PintaCore.Palette.PrimaryColor;
+
+				Color temp = palette.PrimaryColor;
 
 				// Swapping should not trigger adding colors to recently used palette
-				PintaCore.Palette.SetColor (true, PintaCore.Palette.SecondaryColor, false);
-				PintaCore.Palette.SetColor (false, temp, false);
+				palette.SetColor (true, palette.SecondaryColor, false);
+				palette.SetColor (false, temp, false);
 
 				break;
+
 			case WidgetElement.ResetColors:
-				PintaCore.Palette.PrimaryColor = new Color (0, 0, 0);
-				PintaCore.Palette.SecondaryColor = new Color (1, 1, 1);
+
+				palette.PrimaryColor = new Color (0, 0, 0);
+				palette.SecondaryColor = new Color (1, 1, 1);
 
 				break;
+
 			case WidgetElement.Palette:
 
-				int index = GetSwatchAtLocation (point, palette_rect);
+				int index = PaletteWidget.GetSwatchAtLocation (palette, point, palette_rect);
 
 				if (index < 0)
 					break;
 
 				if (button == GtkExtensions.MOUSE_RIGHT_BUTTON) {
-					PintaCore.Palette.SecondaryColor = PintaCore.Palette.CurrentPalette[index];
+					palette.SecondaryColor = palette.CurrentPalette[index];
 				} else if (button == GtkExtensions.MOUSE_LEFT_BUTTON) {
-					PintaCore.Palette.PrimaryColor = PintaCore.Palette.CurrentPalette[index];
+					palette.PrimaryColor = palette.CurrentPalette[index];
 				} else {
-					var colors = await GetUserChosenColor ([PintaCore.Palette.CurrentPalette[index]], 0, Translations.GetString ("Choose Palette Color"));
+					var colors = await GetUserChosenColor ([palette.CurrentPalette[index]], 0, Translations.GetString ("Choose Palette Color"));
 					var color = colors?[0];
 					if (color != null)
-						PintaCore.Palette.CurrentPalette[index] = color.Value;
+						palette.CurrentPalette[index] = color.Value;
 				}
 
 				break;
+
 			case WidgetElement.RecentColorsPalette:
 
-				int recent_index = GetSwatchAtLocation (point, recent_palette_rect, true);
+				int recent_index = PaletteWidget.GetSwatchAtLocation (palette, point, recent_palette_rect, true);
 
 				if (recent_index < 0)
 					break;
 
-				Color recentColor = PintaCore.Palette.RecentlyUsedColors.ElementAt (recent_index);
+				Color recentColor = palette.RecentlyUsedColors.ElementAt (recent_index);
 
 				if (button == GtkExtensions.MOUSE_RIGHT_BUTTON) {
-					PintaCore.Palette.SetColor (false, recentColor, false);
+					palette.SetColor (false, recentColor, false);
 				} else if (button == GtkExtensions.MOUSE_LEFT_BUTTON) {
-					PintaCore.Palette.SetColor (true, recentColor, false);
+					palette.SetColor (true, recentColor, false);
 				}
-
 
 				break;
 		}
@@ -139,12 +154,12 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	private void Draw (Context g)
 	{
 		// Draw Secondary color swatch
-		g.FillRectangle (secondary_rect, PintaCore.Palette.SecondaryColor);
+		g.FillRectangle (secondary_rect, palette.SecondaryColor);
 		g.DrawRectangle (new RectangleD (secondary_rect.X + 1, secondary_rect.Y + 1, secondary_rect.Width - 2, secondary_rect.Height - 2), new Color (1, 1, 1), 1);
 		g.DrawRectangle (secondary_rect, new Color (0, 0, 0), 1);
 
 		// Draw Primary color swatch
-		g.FillRectangle (primary_rect, PintaCore.Palette.PrimaryColor);
+		g.FillRectangle (primary_rect, palette.PrimaryColor);
 		g.DrawRectangle (new RectangleD (primary_rect.X + 1, primary_rect.Y + 1, primary_rect.Width - 2, primary_rect.Height - 2), new Color (1, 1, 1), 1);
 		g.DrawRectangle (primary_rect, new Color (0, 0, 0), 1);
 
@@ -158,16 +173,16 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		g.FillRectangle (new RectangleD (reset_rect.Right - square_size, reset_rect.Bottom - square_size, square_size, square_size), fg_color);
 
 		// Draw recently used color swatches
-		var recent = PintaCore.Palette.RecentlyUsedColors;
+		var recent = palette.RecentlyUsedColors;
 
 		for (int i = 0; i < recent.Count; i++)
-			g.FillRectangle (GetSwatchBounds (i, recent_palette_rect, true), recent.ElementAt (i));
+			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true), recent.ElementAt (i));
 
 		// Draw color swatches
-		var palette = PintaCore.Palette.CurrentPalette;
+		var currentPalette = palette.CurrentPalette;
 
-		for (int i = 0; i < palette.Count; i++)
-			g.FillRectangle (GetSwatchBounds (i, palette_rect), palette[i]);
+		for (int i = 0; i < currentPalette.Count; i++)
+			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, palette_rect), currentPalette[i]);
 
 		g.Dispose ();
 	}
@@ -221,52 +236,14 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		int width = e.Width;
 
 		// Store the bounds allocated for our palette
-		int recent_cols = PintaCore.Palette.MaxRecentlyUsedColor / PALETTE_ROWS;
+		int recent_cols = palette.MaxRecentlyUsedColor / PaletteWidget.PALETTE_ROWS;
 
-		recent_palette_rect = new RectangleD (50, 2, SWATCH_SIZE * recent_cols, SWATCH_SIZE * PALETTE_ROWS);
-		palette_rect = new RectangleD (recent_palette_rect.Right + PALETTE_MARGIN, 2, width - recent_palette_rect.Right - PALETTE_MARGIN, SWATCH_SIZE * PALETTE_ROWS);
-	}
-
-	public static RectangleD GetSwatchBounds (
-		int index,
-		RectangleD palette_bounds,
-		bool recentColorPalette = false)
-	{
-		// Normal swatches are laid out like this:
-		// 0 | 2 | 4 | 6
-		// 1 | 3 | 5 | 7
-		// Recent swatches are laid out like this (it's less visually jarring as they change):
-		// 0 | 1 | 2 | 3
-		// 4 | 5 | 6 | 7
-
-		// First we need to figure out what row and column the color is
-		int recent_cols = PintaCore.Palette.MaxRecentlyUsedColor / PALETTE_ROWS;
-		int row = recentColorPalette ? index / recent_cols : index % PALETTE_ROWS;
-		int col = recentColorPalette ? index % recent_cols : index / PALETTE_ROWS;
-
-		// Now we need to construct the bounds of that row/column
-		double x = palette_bounds.X + (col * SWATCH_SIZE);
-		double y = palette_bounds.Y + (row * SWATCH_SIZE);
-
-		return new (x, y, SWATCH_SIZE, SWATCH_SIZE);
-	}
-
-	public static int GetSwatchAtLocation (
-		PointD point,
-		RectangleD palette_bounds,
-		bool recentColorPalette = false)
-	{
-		int max =
-			recentColorPalette
-			? PintaCore.Palette.RecentlyUsedColors.Count
-			: PintaCore.Palette.CurrentPalette.Count;
-
-		// This could be more efficient, but is good enough for now
-		for (int i = 0; i < max; i++)
-			if (GetSwatchBounds (i, palette_bounds, recentColorPalette).ContainsPoint (point))
-				return i;
-
-		return -1;
+		recent_palette_rect = new RectangleD (50, 2, PaletteWidget.SWATCH_SIZE * recent_cols, PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
+		palette_rect = new RectangleD (
+			recent_palette_rect.Right + PaletteWidget.PALETTE_MARGIN,
+			2,
+			width - recent_palette_rect.Right - PaletteWidget.PALETTE_MARGIN,
+			PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
 	}
 
 	/// <summary>
@@ -279,11 +256,11 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 		switch (GetElementAtPoint (point)) {
 			case WidgetElement.Palette:
-				if (GetSwatchAtLocation (point, palette_rect) >= 0)
+				if (PaletteWidget.GetSwatchAtLocation (palette, point, palette_rect) >= 0)
 					text = Translations.GetString ("Left click to set primary color. Right click to set secondary color. Middle click to choose palette color.");
 				break;
 			case WidgetElement.RecentColorsPalette:
-				if (GetSwatchAtLocation (point, recent_palette_rect, true) >= 0)
+				if (PaletteWidget.GetSwatchAtLocation (palette, point, recent_palette_rect, true) >= 0)
 					text = Translations.GetString ("Left click to set primary color. Right click to set secondary color.");
 				break;
 			case WidgetElement.PrimaryColor:
@@ -315,24 +292,27 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	}
 
 
-	private static void RunColorPicker (int paletteIndex)
+	private void RunColorPicker (int paletteIndex)
 	{
 		if (active_color_picker != null)
 			return;
 		active_color_picker = new ColorPickerDialog (
-			PintaCore.Chrome,
-			PintaCore.Palette,
-			[PintaCore.Palette.PrimaryColor, PintaCore.Palette.SecondaryColor],
+			chrome,
+			palette,
+			[palette.PrimaryColor, palette.SecondaryColor],
 			paletteIndex,
 			true,
 			Translations.GetString ("Color Picker"));
 		active_color_picker.Show ();
 		active_color_picker.OnResponse += (sender, args) => {
+
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
-				if (PintaCore.Palette.PrimaryColor != active_color_picker.Colors[0])
-					PintaCore.Palette.PrimaryColor = active_color_picker.Colors[0];
-				if (PintaCore.Palette.SecondaryColor != active_color_picker.Colors[1])
-					PintaCore.Palette.SecondaryColor = active_color_picker.Colors[1];
+
+				if (palette.PrimaryColor != active_color_picker.Colors[0])
+					palette.PrimaryColor = active_color_picker.Colors[0];
+
+				if (palette.SecondaryColor != active_color_picker.Colors[1])
+					palette.SecondaryColor = active_color_picker.Colors[1];
 			}
 
 			active_color_picker = null;
@@ -340,14 +320,14 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	}
 
 
-	private static async Task<Color[]?> GetUserChosenColor (
+	private async Task<Color[]?> GetUserChosenColor (
 		Color[] colors,
 		int selectedColorIndex,
 		string title)
 	{
 		using ColorPickerDialog dialog = new (
-			PintaCore.Chrome,
-			PintaCore.Palette,
+			chrome,
+			palette,
 			colors,
 			selectedColorIndex,
 			false,
