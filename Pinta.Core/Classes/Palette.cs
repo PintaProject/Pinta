@@ -28,9 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Cairo;
-using Gtk;
 
 namespace Pinta.Core;
 
@@ -149,8 +147,9 @@ public sealed class Palette
 			OnPaletteChanged ();
 		} catch (Exception e) {
 			var parent = PintaCore.Chrome.MainWindow;
-			ShowUnsupportedFormatDialog (
+			PintaCore.Chrome.ShowUnsupportedFormatDialog (
 				parent,
+				PintaCore.PaletteFormats.Formats,
 				file.GetParseName (),
 				Translations.GetString ("Unsupported palette format"),
 				e.Message);
@@ -186,26 +185,5 @@ public sealed class Palette
 	public void Save (Gio.File file, IPaletteSaver saver)
 	{
 		saver.Save (colors, file);
-	}
-
-	private static Task ShowUnsupportedFormatDialog (Window parent, string filename, string message, string errors)
-	{
-		StringBuilder details = new ();
-		details.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
-		details.AppendLine (Translations.GetString ("Pinta supports the following palette formats:"));
-
-		var extensions =
-			from format in PintaCore.PaletteFormats.Formats
-			where format.Loader != null
-			from extension in format.Extensions
-			where char.IsLower (extension.FirstOrDefault ())
-			orderby extension
-			select extension;
-
-		details.AppendJoin (", ", extensions);
-		details.AppendLine ();
-		details.AppendLine (errors);
-
-		return PintaCore.Chrome.ShowMessageDialog (parent, message, details.ToString ());
 	}
 }
