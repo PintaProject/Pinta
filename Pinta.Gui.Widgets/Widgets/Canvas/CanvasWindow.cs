@@ -46,8 +46,8 @@ public sealed class CanvasWindow : Gtk.Grid
 	private double cumulative_zoom_amount;
 	private double last_scale_delta;
 
-	private const double ZoomThresholdScroll = 1.25;
-	private const double ZoomThresholdPinch = 0.15;
+	private const double ZOOM_THRESHOLD_SCROLL = 1.25;
+	private const double ZOOM_THRESHOLD_PINCH = 0.15;
 
 	public PintaCanvas Canvas { get; }
 
@@ -56,74 +56,97 @@ public sealed class CanvasWindow : Gtk.Grid
 		Document document,
 		ICanvasGridService canvasGrid)
 	{
-		this.workspace = workspace;
-		this.document = document;
+		Gtk.GestureZoom gestureZoom = Gtk.GestureZoom.New ();
+		gestureZoom.SetPropagationPhase (Gtk.PropagationPhase.Bubble);
+		gestureZoom.OnScaleChanged += HandleGestureZoomScaleChanged;
+		gestureZoom.OnEnd += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
+		gestureZoom.OnCancel += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
 
-		ColumnHomogeneous = false;
-		RowHomogeneous = false;
+		Gtk.EventControllerScroll scrollController = Gtk.EventControllerScroll.New (Gtk.EventControllerScrollFlags.BothAxes); // Both axes must be captured so the zoom gesture can cancel them
+		scrollController.OnScroll += HandleScrollEvent;
+		scrollController.OnDecelerate += (_, _) => gestureZoom.IsActive (); // Cancel scroll deceleration when zooming
 
-		scrolled_window = new Gtk.ScrolledWindow ();
+		PintaCanvas canvas = new (this, document, canvasGrid) { Name = "canvas" };
+		canvas.OnResize += UpdateRulerRange;
 
-		gesture_zoom = Gtk.GestureZoom.New ();
-		gesture_zoom.SetPropagationPhase (Gtk.PropagationPhase.Bubble);
-		gesture_zoom.OnScaleChanged += HandleGestureZoomScaleChanged;
-		gesture_zoom.OnEnd += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
-		gesture_zoom.OnCancel += (_, _) => cumulative_zoom_amount = last_scale_delta = 0;
+		Gtk.Viewport viewPort = new ();
+		viewPort.AddController (scrollController);
+		viewPort.Child = canvas;
 
-		AddController (gesture_zoom);
+		Gtk.ScrolledWindow scrolledWindow = new () {
+			Hexpand = true,
+			Vexpand = true,
+			Child = viewPort,
+		};
+		scrolledWindow.Hadjustment!.OnValueChanged += UpdateRulerRange;
+		scrolledWindow.Vadjustment!.OnValueChanged += UpdateRulerRange;
 
-		Gtk.Viewport vp = new ();
+		Ruler horizontalRuler = new (Gtk.Orientation.Horizontal) {
+			Metric = MetricType.Pixels,
+			Visible = false,
+		};
 
-		var scroll_controller = Gtk.EventControllerScroll.New (Gtk.EventControllerScrollFlags.BothAxes); // Both axes must be captured so the zoom gesture can cancel them
-		scroll_controller.OnScroll += HandleScrollEvent;
-		scroll_controller.OnDecelerate += (_, _) => gesture_zoom.IsActive (); // Cancel scroll deceleration when zooming
-		vp.AddController (scroll_controller);
+		Ruler verticalRuler = new (Gtk.Orientation.Vertical) {
+			Metric = MetricType.Pixels,
+			Visible = false,
+		};
+
+		Gtk.EventControllerMotion motionController = Gtk.EventControllerMotion.New ();
+		motionController.OnMotion += HandleMotion;
+
+		// --- Initialization (Gtk.Widget)
 
 		// The mouse handler in PintaCanvas grabs focus away from toolbar widgets, along
 		// with DocumentWorkpace.GrabFocusToCanvas()
 		Focusable = true;
-		Canvas = new PintaCanvas (this, document, canvasGrid) { Name = "canvas" };
 
-		// Rulers
-		horizontal_ruler = new Ruler (Gtk.Orientation.Horizontal) { Metric = MetricType.Pixels };
+		AddController (gestureZoom);
+		AddController (motionController);
 
-		Attach (horizontal_ruler, 1, 0, 1, 1);
+		// --- Initialization (Gtk.Grid)
 
-		vertical_ruler = new Ruler (Gtk.Orientation.Vertical) { Metric = MetricType.Pixels };
+		ColumnHomogeneous = false;
+		RowHomogeneous = false;
 
-		Attach (vertical_ruler, 0, 1, 1, 1);
+		Attach (horizontalRuler, 1, 0, 1, 1);
+		Attach (verticalRuler, 0, 1, 1, 1);
+		Attach (scrolledWindow, 1, 1, 1, 1);
 
-		scrolled_window.Hexpand = true;
-		scrolled_window.Vexpand = true;
-		Attach (scrolled_window, 1, 1, 1, 1);
+		// --- References to keep
 
-		scrolled_window.Child = vp;
-		vp.Child = Canvas;
+		Canvas = canvas;
 
-		horizontal_ruler.Visible = false;
-		vertical_ruler.Visible = false;
+		this.workspace = workspace;
+		this.document = document;
 
-		scrolled_window.Hadjustment!.OnValueChanged += UpdateRulerRange;
-		scrolled_window.Vadjustment!.OnValueChanged += UpdateRulerRange;
+		scrolled_window = scrolledWindow;
+		gesture_zoom = gestureZoom;
+		horizontal_ruler = horizontalRuler;
+		vertical_ruler = verticalRuler;
+		motion_controller = motionController;
+
+		// --- Further initialization
+
 		document.Workspace.ViewSizeChanged += UpdateRulerRange;
-		Canvas.OnResize += UpdateRulerRange;
+	}
 
-		motion_controller = Gtk.EventControllerMotion.New ();
-		motion_controller.OnMotion += (_, args) => {
-			if (!workspace.HasOpenDocuments)
-				return;
+	private void HandleMotion (
+		Gtk.EventControllerMotion _,
+		Gtk.EventControllerMotion.MotionSignalArgs args)
+	{
+		if (!workspace.HasOpenDocuments)
+			return;
 
-			current_window_pos = new PointD (args.X, args.Y);
-			// These coordinates are relative to our grid widget, so transform into the child image
-			// view's coordinates, and then to the canvas coordinates.
-			this.TranslateCoordinates (Canvas, current_window_pos, out PointD view_pos);
-			current_canvas_pos = workspace.ViewPointToCanvas (view_pos);
+		PointD newPosition = new (args.X, args.Y);
 
-			horizontal_ruler.Position = current_canvas_pos.X;
-			vertical_ruler.Position = current_canvas_pos.Y;
-		};
+		// These coordinates are relative to our grid widget, so transform into the child image
+		// view's coordinates, and then to the canvas coordinates.
+		this.TranslateCoordinates (Canvas, newPosition, out PointD viewPos);
 
-		AddController (motion_controller);
+		current_window_pos = newPosition;
+		current_canvas_pos = workspace.ViewPointToCanvas (viewPos);
+		horizontal_ruler.Position = current_canvas_pos.X;
+		vertical_ruler.Position = current_canvas_pos.Y;
 	}
 
 	private void HandleGestureZoomScaleChanged (object? sender, EventArgs e)
@@ -135,7 +158,7 @@ public sealed class CanvasWindow : Gtk.Grid
 				cumulative_zoom_amount = 0; // Reset the counter if the user changes direction so that changing direction doesn't take extra movement
 
 			cumulative_zoom_amount += pinchDelta;
-			if (cumulative_zoom_amount <= -ZoomThresholdPinch) {
+			if (cumulative_zoom_amount <= -ZOOM_THRESHOLD_PINCH) {
 				document.Workspace.ZoomOutAroundCanvasPoint (current_canvas_pos);
 				cumulative_zoom_amount = 0;
 			}
@@ -144,7 +167,7 @@ public sealed class CanvasWindow : Gtk.Grid
 				cumulative_zoom_amount = 0;
 
 			cumulative_zoom_amount += pinchDelta;
-			if (cumulative_zoom_amount >= ZoomThresholdPinch) {
+			if (cumulative_zoom_amount >= ZOOM_THRESHOLD_PINCH) {
 				document.Workspace.ZoomInAroundCanvasPoint (current_canvas_pos);
 				cumulative_zoom_amount = 0;
 			}
@@ -236,7 +259,7 @@ public sealed class CanvasWindow : Gtk.Grid
 				cumulative_zoom_amount = 0;
 
 			cumulative_zoom_amount += args.Dy;
-			if (cumulative_zoom_amount <= -ZoomThresholdScroll) {
+			if (cumulative_zoom_amount <= -ZOOM_THRESHOLD_SCROLL) {
 				document.Workspace.ZoomInAroundCanvasPoint (current_canvas_pos);
 				cumulative_zoom_amount = 0;
 			}
@@ -246,7 +269,7 @@ public sealed class CanvasWindow : Gtk.Grid
 				cumulative_zoom_amount = 0;
 
 			cumulative_zoom_amount += args.Dy;
-			if (cumulative_zoom_amount >= ZoomThresholdScroll) {
+			if (cumulative_zoom_amount >= ZOOM_THRESHOLD_SCROLL) {
 				document.Workspace.ZoomOutAroundCanvasPoint (current_canvas_pos);
 				cumulative_zoom_amount = 0;
 			}
