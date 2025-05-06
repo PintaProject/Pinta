@@ -11,5 +11,8 @@
     <Authors>PintaProject</Authors>
     <Company />
     <Product />
+    
+    <!-- Add an absolute path to a local GirCore source directory to use it instead of the NuGet package -->
+    <GirCoreSource />
   </PropertyGroup>
 </Project>

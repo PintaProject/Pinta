@@ -29,6 +29,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6DE60B92-C365-4DB5-9D5F-956317DD2E19}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pinta.Gui.Addins", "Pinta.Gui.Addins\Pinta.Gui.Addins.csproj", "{2460CAAF-37BA-4795-8C86-7DFCB57F94A5}"
@@ -38,6 +40,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "installer", "installer", "{ADED7547-5FA7-4157-951F-1CA5C933B4F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pinta.AddinUtils", "installer\addins\Pinta.AddinUtils.csproj", "{90F56F18-1720-4F89-A5F9-6CA710CC9694}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "properties", "properties", "{38B8CD22-1CA6-4176-A4DE-ED43A1B6557F}"
+	ProjectSection(SolutionItems) = preProject
+		properties\ReferenceGirCoreAdw1.props = properties\ReferenceGirCoreAdw1.props
+		properties\ReferenceGirCorePangoCairo10.props = properties\ReferenceGirCorePangoCairo10.props
+		properties\ReferenceGirCoreGObject20Integration.props = properties\ReferenceGirCoreGObject20Integration.props
+		properties\ReferenceGirCoreGtk40.props = properties\ReferenceGirCoreGtk40.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,6 +112,7 @@ Global
 		{8A8B7C9F-4AE0-4E2B-A4DF-CBABCD0DE864} = {8D23D7B9-C97E-498C-A1C5-6159E305D9BA}
 		{3062EBB6-E84B-4EFF-BAB2-E0EAFF7EF755} = {8D23D7B9-C97E-498C-A1C5-6159E305D9BA}
 		{90F56F18-1720-4F89-A5F9-6CA710CC9694} = {ADED7547-5FA7-4157-951F-1CA5C933B4F7}
+		{38B8CD22-1CA6-4176-A4DE-ED43A1B6557F} = {6DE60B92-C365-4DB5-9D5F-956317DD2E19}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4985F1D9-0ABE-4E83-98D2-8D119EA4075D}
