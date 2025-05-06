@@ -26,12 +26,11 @@
 // THE SOFTWARE.
 
 using Cairo;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class ColorPanelWidget : DrawingArea
+public sealed class ColorPanelWidget : Gtk.DrawingArea
 {
 	private Color color;
 	public Color CairoColor {
@@ -44,20 +43,35 @@ public sealed class ColorPanelWidget : DrawingArea
 
 	public ColorPanelWidget ()
 	{
+		Gtk.GestureClick clickGesture = Gtk.GestureClick.New ();
+		clickGesture.SetButton (0); // Handle all buttons
+
+		// --- Initialization (Gtk.Widget)
+
 		HeightRequest = 24;
+		AddController (clickGesture);
+
+		// --- Initialization (Gtk.DrawingArea)
 
 		SetDrawFunc ((_, context, _, _) => Draw (context));
 
-		ClickGesture = Gtk.GestureClick.New ();
-		ClickGesture.SetButton (0); // Handle all buttons
-		AddController (ClickGesture);
+		// --- References to keep
+
+		ClickGesture = clickGesture;
 	}
 
-	public Gtk.GestureClick ClickGesture { get; private init; }
+	public Gtk.GestureClick ClickGesture { get; }
 
 	private void Draw (Context cr)
 	{
-		cr.FillRoundedRectangle (new RectangleD (0, 0, GetAllocatedWidth (), GetAllocatedHeight ()), 4, CairoColor);
+		cr.FillRoundedRectangle (
+			new RectangleD (
+				0,
+				0,
+				GetAllocatedWidth (),
+				GetAllocatedHeight ()),
+			4,
+			CairoColor);
 
 		cr.Dispose ();
 	}

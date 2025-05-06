@@ -1,0 +1,6 @@
+<Project>
+    <ItemGroup>
+        <ProjectReference Condition="'$(GirCoreSource)' != ''" Include="$(GirCoreSource)/src/Libs/Adw-1/Adw-1.csproj" />
+        <PackageReference Condition="'$(GirCoreSource)' == ''" Include="GirCore.Adw-1" />
+    </ItemGroup>
+</Project>

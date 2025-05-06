@@ -26,44 +26,45 @@
 
 using System;
 using System.Collections.Generic;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class ComboBoxWidget : Box
+public sealed class ComboBoxWidget : Gtk.Box
 {
-	private readonly Label title_label;
-	private readonly ComboBoxText combo_box;
+	private readonly Gtk.Label title_label;
+	private readonly Gtk.ComboBoxText combo_box;
 
 	public ComboBoxWidget (IEnumerable<string> entries)
 	{
-		const int spacing = 6;
+		const int SPACING = 6;
 
-		// Section label + line
-		Label titleLabel = new ();
+		Gtk.Label titleLabel = new ();
 		titleLabel.AddCssClass (AdwaitaStyles.Title4);
-		Box labelAndLine = new () { Spacing = spacing };
-		labelAndLine.SetOrientation (Orientation.Horizontal);
+
+		Gtk.Box labelAndLine = new () { Spacing = SPACING };
+		labelAndLine.SetOrientation (Gtk.Orientation.Horizontal);
 		labelAndLine.Append (titleLabel);
 
-		// Combobox
-		ComboBoxText comboBox = CreateComboBox (entries);
+		Gtk.ComboBoxText comboBox = CreateComboBox (entries);
 
-		// Storing references
-		title_label = titleLabel;
-		combo_box = comboBox;
+		// --- Initialization (Gtk.Box)
 
-		// Main layout
-		SetOrientation (Orientation.Vertical);
-		Spacing = spacing;
+		SetOrientation (Gtk.Orientation.Vertical);
+		Spacing = SPACING;
+
 		Append (labelAndLine);
 		Append (comboBox);
+
+		// --- References to keep
+
+		title_label = titleLabel;
+		combo_box = comboBox;
 	}
 
-	private ComboBoxText CreateComboBox (IEnumerable<string> entries)
+	private Gtk.ComboBoxText CreateComboBox (IEnumerable<string> entries)
 	{
-		ComboBoxText result = new ();
+		Gtk.ComboBoxText result = new ();
 
 		foreach (var s in entries)
 			result.AppendText (s);

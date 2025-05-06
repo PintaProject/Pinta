@@ -63,7 +63,6 @@
       <LogicalName>style.css</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="GirCore.Gtk-4.0" />
-  </ItemGroup>
+
+  <Import Project="../properties/ReferenceGirCoreGtk40.props" />
 </Project>
