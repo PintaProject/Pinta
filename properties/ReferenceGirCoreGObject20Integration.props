@@ -1,0 +1,6 @@
+<Project>
+    <ItemGroup>
+        <ProjectReference Condition="'$(GirCoreSource)' != ''" Include="$(GirCoreSource)/src/Extensions/GObject-2.0.Integration/GObject-2.0.Integration.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+        <PackageReference Condition="'$(GirCoreSource)' == ''" Include="GirCore.GObject-2.0.Integration" />
+    </ItemGroup>
+</Project>
