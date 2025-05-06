@@ -239,9 +239,11 @@ public static class OtherExtensions
 			select extension;
 
 		details.AppendJoin (", ", extensions);
-		details.AppendLine ();
-		details.AppendLine (errors);
 
-		return chrome.ShowMessageDialog (parent, message, details.ToString ());
+		return chrome.ShowErrorDialog (
+			parent,
+			message,
+			details.ToString (),
+			errors);
 	}
 }
