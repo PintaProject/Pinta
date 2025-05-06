@@ -876,8 +876,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	private void OnShrinkButtonClicked (Gtk.Button button, EventArgs args)
 	{
-		//var contentArea = this.GetContentAreaBox ();
-		//contentArea.RemoveAll ();
 		SetSmallMode (!small_mode);
 		button.SetIconName (
 			small_mode
