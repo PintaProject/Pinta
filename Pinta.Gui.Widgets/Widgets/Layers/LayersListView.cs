@@ -50,7 +50,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 		factory.OnSetup += HandleFactorySetup;
 		factory.OnBind += HandleFactoryBind;
 
-		Gtk.ListView view = Gtk.ListView.New (selection_model, factory);
+		Gtk.ListView view = Gtk.ListView.New (selectionModel, factory);
 		view.CanFocus = false;
 		view.OnActivate += HandleRowActivated;
 
