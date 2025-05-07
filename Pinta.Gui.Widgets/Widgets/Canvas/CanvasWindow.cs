@@ -52,6 +52,9 @@ public sealed class CanvasWindow : Gtk.Grid
 	public PintaCanvas Canvas { get; }
 
 	public CanvasWindow (
+		ActionManager actions,
+		ChromeManager chrome,
+		ToolManager tools,
 		WorkspaceManager workspace,
 		Document document,
 		ICanvasGridService canvasGrid)
@@ -67,13 +70,14 @@ public sealed class CanvasWindow : Gtk.Grid
 		scrollController.OnDecelerate += (_, _) => gestureZoom.IsActive (); // Cancel scroll deceleration when zooming
 
 		PintaCanvas canvas = new (
-			PintaCore.Actions,
-			PintaCore.Chrome,
-			PintaCore.Tools,
+			actions,
+			chrome,
+			tools,
 			workspace,
 			this,
 			document,
-			canvasGrid) {
+			canvasGrid
+		) {
 			Name = "canvas",
 		};
 
