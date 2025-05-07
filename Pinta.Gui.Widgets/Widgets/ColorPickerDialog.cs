@@ -294,6 +294,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	// common state
 	private int color_index = 0;
+
+	private readonly ImmutableArray<Color> original_colors;
 	public Color[] Colors { get; private set; }
 
 	private Color CurrentColor {
@@ -384,6 +386,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		ImmutableArray<Color> originalColors = [.. adjustable];
 
+		original_colors = originalColors;
 		Colors = [.. originalColors];
 		color_index = currentColorIndex;
 
@@ -391,44 +394,26 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		#region Titlebar
 
 		Gtk.Button reset_button = new () { Label = Translations.GetString ("Reset Color") };
-		reset_button.OnClicked += (_, _) => {
-			Colors = [.. originalColors];
-			UpdateView ();
-		};
+		reset_button.OnClicked += OnResetButtonClicked;
 
 		Gtk.Button shrinkButton = new ();
+		shrinkButton.OnClicked += OnShrinkButtonClicked;
 		shrinkButton.SetIconName (
 			small_mode
 			? Resources.StandardIcons.WindowMaximize
 			: Resources.StandardIcons.WindowMinimize);
 
-		shrinkButton.OnClicked += (_, _) => {
-			var contentArea = this.GetContentAreaBox ();
-			//contentArea.RemoveAll ();
-			SetSmallMode (!small_mode);
-			shrinkButton.SetIconName (
-				small_mode
-				? Resources.StandardIcons.WindowMaximize
-				: Resources.StandardIcons.WindowMinimize);
-		};
-
-		Gtk.Button ok_button = new () { Label = Translations.GetString ("OK") };
-		ok_button.OnClicked += (_, _) => {
-			this.Response ((int) Gtk.ResponseType.Ok);
-			this.Close ();
-		};
-		ok_button.AddCssClass (AdwaitaStyles.SuggestedAction);
+		Gtk.Button okButton = new () { Label = Translations.GetString ("OK") };
+		okButton.OnClicked += OnOkButtonClicked;
+		okButton.AddCssClass (AdwaitaStyles.SuggestedAction);
 
 		Gtk.Button cancelButton = new () { Label = Translations.GetString ("Cancel") };
-		cancelButton.OnClicked += (_, _) => {
-			this.Response ((int) Gtk.ResponseType.Ok); // TODO: Is this the right response?
-			this.Close ();
-		};
+		cancelButton.OnClicked += OnCancelButtonClicked;
 
 		Gtk.HeaderBar titleBar = new ();
 		titleBar.PackStart (reset_button);
 		titleBar.PackStart (shrinkButton);
-		titleBar.PackEnd (ok_button);
+		titleBar.PackEnd (okButton);
 		titleBar.PackEnd (cancelButton);
 		titleBar.SetShowTitleButtons (false);
 
@@ -576,7 +561,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		#region SliderAndHex
 
-		Gtk.Entry hexEntry = new Gtk.Entry { Text_ = CurrentColor.ToHex (), MaxWidthChars = 10 };
+		Gtk.Entry hexEntry = new () { Text_ = CurrentColor.ToHex (), MaxWidthChars = 10 };
 		hexEntry.OnChanged ((o, e) => {
 			if ((GetFocus ()?.Parent) != hexEntry) return;
 			CurrentColor = Color.FromHex (hexEntry.GetText ()) ?? CurrentColor;
@@ -659,7 +644,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			UpdateView ();
 		};
 
-		Gtk.Box slidersBox = new Gtk.Box { Spacing = spacing };
+		Gtk.Box slidersBox = new () { Spacing = spacing };
 		slidersBox.SetOrientation (Gtk.Orientation.Vertical);
 		slidersBox.Append (hexBox);
 		slidersBox.Append (hue_cps);
@@ -815,33 +800,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		contentArea.SetAllMargins (margins);
 		contentArea.Append (mainVbox);
 
-
 		// incredibly silly workaround
 		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
 		this.SetOpacity (0.995f);
-
-		// Handles on active / off active
-		// When user clicks off the color picker, we assign the color picker values to the palette
-		// we only do this on off active because otherwise the recent color palette would be spammed
-		// every time the color changes
-		this.OnNotify += (_, args) => {
-
-			if (args.Pspec.GetName () != "is-active" || !livePalette)
-				return;
-
-			if (IsActive) {
-				this.SetOpacity (1f);
-				return;
-			}
-
-			this.SetOpacity (0.85f);
-
-			if (palette.PrimaryColor != Colors[0])
-				palette.PrimaryColor = Colors[0];
-
-			if (palette.SecondaryColor != Colors[1])
-				palette.SecondaryColor = Colors[1];
-		};
 
 		if (livePalette) {
 
@@ -857,12 +818,39 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				UpdateView ();
 			}
 
+			// Handles on active / off active
+			// When user clicks off the color picker, we assign the color picker values to the palette
+			// we only do this on off active because otherwise the recent color palette would be spammed
+			// every time the color changes
+			void ActiveWindowChangeHandler (object? _, GObject.Object.NotifySignalArgs args)
+			{
+				if (args.Pspec.GetName () != "is-active")
+					return;
+
+				if (IsActive) {
+					this.SetOpacity (1.0f);
+					return;
+				}
+
+				this.SetOpacity (0.85f);
+
+				if (palette.PrimaryColor != Colors[0])
+					palette.PrimaryColor = Colors[0];
+
+				if (palette.SecondaryColor != Colors[1])
+					palette.SecondaryColor = Colors[1];
+			}
+
 			palette.PrimaryColorChanged += PrimaryChangeHandler;
 			palette.SecondaryColorChanged += SecondaryChangeHandler;
+			this.OnNotify += ActiveWindowChangeHandler;
 
+			// Remove event handlers on exit (in particular, we don't want to handle the
+			// 'is-active' property changing as the dialog is being closed (bug #1390)).
 			this.OnResponse += (_, _) => {
 				palette.PrimaryColorChanged -= PrimaryChangeHandler;
 				palette.SecondaryColorChanged -= SecondaryChangeHandler;
+				this.OnNotify -= ActiveWindowChangeHandler;
 			};
 		}
 
@@ -881,6 +869,33 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		sliders_box = slidersBox;
 		swatch_box = swatchBox;
 		top_box = topBox;
+	}
+
+	private void OnResetButtonClicked (Gtk.Button button, EventArgs args)
+	{
+		Colors = [.. original_colors];
+		UpdateView ();
+	}
+
+	private void OnShrinkButtonClicked (Gtk.Button button, EventArgs args)
+	{
+		SetSmallMode (!small_mode);
+		button.SetIconName (
+			small_mode
+			? Resources.StandardIcons.WindowMaximize
+			: Resources.StandardIcons.WindowMinimize);
+	}
+
+	private void OnOkButtonClicked (Gtk.Button button, EventArgs args)
+	{
+		this.Response ((int) Gtk.ResponseType.Ok);
+		this.Close ();
+	}
+
+	private void OnCancelButtonClicked (Gtk.Button button, EventArgs args)
+	{
+		this.Response ((int) Gtk.ResponseType.Cancel);
+		this.Close ();
 	}
 
 	private void CycleColors ()
