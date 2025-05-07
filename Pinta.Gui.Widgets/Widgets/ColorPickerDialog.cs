@@ -800,33 +800,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		contentArea.SetAllMargins (margins);
 		contentArea.Append (mainVbox);
 
-
 		// incredibly silly workaround
 		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
 		this.SetOpacity (0.995f);
-
-		// Handles on active / off active
-		// When user clicks off the color picker, we assign the color picker values to the palette
-		// we only do this on off active because otherwise the recent color palette would be spammed
-		// every time the color changes
-		this.OnNotify += (_, args) => {
-
-			if (args.Pspec.GetName () != "is-active" || !livePalette)
-				return;
-
-			if (IsActive) {
-				this.SetOpacity (1f);
-				return;
-			}
-
-			this.SetOpacity (0.85f);
-
-			if (palette.PrimaryColor != Colors[0])
-				palette.PrimaryColor = Colors[0];
-
-			if (palette.SecondaryColor != Colors[1])
-				palette.SecondaryColor = Colors[1];
-		};
 
 		if (livePalette) {
 
@@ -842,12 +818,39 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				UpdateView ();
 			}
 
+			// Handles on active / off active
+			// When user clicks off the color picker, we assign the color picker values to the palette
+			// we only do this on off active because otherwise the recent color palette would be spammed
+			// every time the color changes
+			void ActiveWindowChangeHandler (object? _, GObject.Object.NotifySignalArgs args)
+			{
+				if (args.Pspec.GetName () != "is-active")
+					return;
+
+				if (IsActive) {
+					this.SetOpacity (1.0f);
+					return;
+				}
+
+				this.SetOpacity (0.85f);
+
+				if (palette.PrimaryColor != Colors[0])
+					palette.PrimaryColor = Colors[0];
+
+				if (palette.SecondaryColor != Colors[1])
+					palette.SecondaryColor = Colors[1];
+			}
+
 			palette.PrimaryColorChanged += PrimaryChangeHandler;
 			palette.SecondaryColorChanged += SecondaryChangeHandler;
+			this.OnNotify += ActiveWindowChangeHandler;
 
+			// Remove event handlers on exit (in particular, we don't want to handle the
+			// 'is-active' property changing as the dialog is being closed (bug #1390)).
 			this.OnResponse += (_, _) => {
 				palette.PrimaryColorChanged -= PrimaryChangeHandler;
 				palette.SecondaryColorChanged -= SecondaryChangeHandler;
+				this.OnNotify -= ActiveWindowChangeHandler;
 			};
 		}
 
