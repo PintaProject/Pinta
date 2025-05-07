@@ -39,8 +39,19 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 
 	public CanvasWindow CanvasWindow { get; }
 
-	public PintaCanvas (CanvasWindow window, Document document, ICanvasGridService canvasGrid)
+	private readonly ToolManager tools;
+
+	public PintaCanvas (
+		ActionManager actions,
+		ChromeManager chrome,
+		ToolManager tools,
+		WorkspaceManager workspace,
+		CanvasWindow window,
+		Document document,
+		ICanvasGridService canvasGrid)
 	{
+		this.tools = tools;
+
 		CanvasWindow = window;
 		this.document = document;
 
@@ -83,8 +94,8 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 			// if this click is on a canvas that isn't currently the ActiveDocument yet, 
 			// we need to go ahead and make it the active document for the tools
 			// to use it, even though right after this the tab system would have switched it
-			if (PintaCore.Workspace.ActiveDocument != document)
-				PintaCore.Actions.Window.SetActiveDocument (document);
+			if (workspace.ActiveDocument != document)
+				actions.Window.SetActiveDocument (document);
 
 			PointD window_point = new (args.X, args.Y);
 			PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
@@ -97,7 +108,7 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 				RootPoint = CanvasWindow.WindowMousePosition,
 			};
 
-			PintaCore.Tools.DoMouseDown (document, tool_args);
+			tools.DoMouseDown (document, tool_args);
 		};
 
 		click_controller.OnReleased += (_, args) => {
@@ -113,7 +124,7 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 				RootPoint = CanvasWindow.WindowMousePosition,
 			};
 
-			PintaCore.Tools.DoMouseUp (document, tool_args);
+			tools.DoMouseUp (document, tool_args);
 		};
 
 		AddController (click_controller);
@@ -126,9 +137,9 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 			PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
 
 			if (document.Workspace.PointInCanvas (canvas_point))
-				PintaCore.Chrome.LastCanvasCursorPoint = canvas_point.ToInt ();
+				chrome.LastCanvasCursorPoint = canvas_point.ToInt ();
 
-			if (PintaCore.Tools.CurrentTool == null)
+			if (tools.CurrentTool == null)
 				return;
 
 			ToolMouseEventArgs tool_args = new () {
@@ -139,7 +150,7 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 				RootPoint = CanvasWindow.WindowMousePosition,
 			};
 
-			PintaCore.Tools.DoMouseMove (document, tool_args);
+			tools.DoMouseMove (document, tool_args);
 		};
 
 		AddController (motion_controller);
@@ -203,19 +214,19 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 
 		// Selection outline
 		if (document.Selection.Visible) {
-			string tool_name = PintaCore.Tools.CurrentTool?.GetType ().Name ?? string.Empty;
+			string tool_name = tools.CurrentTool?.GetType ().Name ?? string.Empty;
 			bool fillSelection = tool_name.Contains ("Select") && !tool_name.Contains ("Selected");
 			document.Selection.Draw (g, scale, fillSelection);
 		}
 
-		if (PintaCore.Tools.CurrentTool is not null) {
+		if (tools.CurrentTool is not null) {
 
 			g.Save ();
 
 			g.ResetClip (); // Don't clip the control at the edge of the image.
 			g.Translate (-x, -y);
 
-			DrawHandles (g, PintaCore.Tools.CurrentTool.Handles);
+			DrawHandles (g, tools.CurrentTool.Handles);
 
 			g.Restore ();
 		}
@@ -250,7 +261,7 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 			State = args.State,
 		};
 
-		return PintaCore.Tools.DoKeyDown (document, tool_args);
+		return tools.DoKeyDown (document, tool_args);
 	}
 
 	public bool DoKeyReleaseEvent (
@@ -263,6 +274,6 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 			State = args.State,
 		};
 
-		return PintaCore.Tools.DoKeyUp (document, tool_args);
+		return tools.DoKeyUp (document, tool_args);
 	}
 }
