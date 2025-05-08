@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System.Collections.Generic;
+using System;
 using System.Linq;
 
 namespace Pinta.Core;
@@ -49,7 +49,7 @@ partial class GtkExtensions
 
 	public static void SetActionsAndShortcuts (
 		this Gtk.Application app,
-		IEnumerable<Command> actions)
+		ReadOnlySpan<Command> actions)
 	{
 		foreach (var action in actions)
 			app.SetActionAndShortcuts (action);
