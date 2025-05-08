@@ -1030,7 +1030,7 @@ public sealed class TextTool : BaseTool
 		}
 
 		// Draw the text
-		if (FillText)
+		if (FillText && !StrokeText)
 			PangoCairo.Functions.ShowLayout (g, CurrentTextLayout.Layout);
 
 		if (FillText && StrokeText) {
@@ -1039,6 +1039,10 @@ public sealed class TextTool : BaseTool
 
 			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
 			g.Stroke ();
+
+   			g.MoveTo (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y);
+			g.SetSourceColor (CurrentTextEngine.PrimaryColor);
+			PangoCairo.Functions.ShowLayout (g, CurrentTextLayout.Layout);
 		} else if (StrokeText) {
 			g.SetSourceColor (CurrentTextEngine.PrimaryColor);
 			g.LineWidth = OutlineWidth;
