@@ -1040,7 +1040,7 @@ public sealed class TextTool : BaseTool
 			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
 			g.Stroke ();
 
-   			g.MoveTo (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y);
+			g.MoveTo (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y);
 			g.SetSourceColor (CurrentTextEngine.PrimaryColor);
 			PangoCairo.Functions.ShowLayout (g, CurrentTextLayout.Layout);
 		} else if (StrokeText) {
