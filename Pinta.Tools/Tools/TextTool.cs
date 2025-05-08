@@ -1038,7 +1038,7 @@ public sealed class TextTool : BaseTool
 			g.Stroke ();
 
 			// Position resets after g.Stroke ();
-			if(FillText) {
+			if (FillText) {
 				g.MoveTo (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y);
 				g.SetSourceColor (CurrentTextEngine.PrimaryColor);
 			}
