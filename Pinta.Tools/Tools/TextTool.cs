@@ -124,7 +124,7 @@ public sealed class TextTool : BaseTool
 	#region ToolBar
 	// NRT - Created by OnBuildToolBar
 	private Gtk.Label font_label = null!;
-	private Gtk.FontButton font_button = null!;
+	private Gtk.FontDialogButton font_button = null!;
 	private Gtk.ToggleButton bold_btn = null!;
 	private Gtk.ToggleButton italic_btn = null!;
 	private Gtk.ToggleButton underscore_btn = null!;
@@ -158,14 +158,24 @@ public sealed class TextTool : BaseTool
 		tb.Append (font_label);
 
 		if (font_button == null) {
-			font_button = new Gtk.FontButton {
-				UseSize = false,
-				UseFont = true,
-				CanFocus = false, // Default to Arial if possible.
-				Font = Settings.GetSetting (FONT_SETTING, "Arial 12"),
+			Gtk.FontDialog fontDialog = new () {
+				Modal = true,
 			};
 
-			font_button.OnFontSet += HandleFontChanged;
+			font_button = new () {
+				UseSize = false,
+				UseFont = true,
+				CanFocus = false,
+				FontDesc = Pango.FontDescription.FromString (
+					Settings.GetSetting (FONT_SETTING,
+					Gtk.Settings.GetDefault ()!.GtkFontName!)),
+			};
+			font_button.SetDialog (fontDialog);
+			font_button.OnNotify += (_, args) => {
+				if (args.Pspec.GetName () == "font-desc") {
+					HandleFontChanged ();
+				}
+			};
 		}
 
 		tb.Append (font_button);
@@ -286,7 +296,7 @@ public sealed class TextTool : BaseTool
 
 		if (outline_width == null) {
 			outline_width = GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, Settings.GetSetting (OUTLINE_WIDTH_SETTING, 2));
-			outline_width.OnValueChanged += HandleFontChanged;
+			outline_width.OnValueChanged += (_, __) => HandleFontChanged ();
 		}
 
 		tb.Append (outline_width);
@@ -301,7 +311,7 @@ public sealed class TextTool : BaseTool
 		base.OnSaveSettings (settings);
 
 		if (font_button is not null)
-			settings.PutSetting (FONT_SETTING, font_button.Font!);
+			settings.PutSetting (FONT_SETTING, font_button.FontDesc!.ToString ()!);
 
 		if (bold_btn is not null)
 			settings.PutSetting (BOLD_SETTING, bold_btn.Active);
@@ -322,7 +332,7 @@ public sealed class TextTool : BaseTool
 			settings.PutSetting (OUTLINE_WIDTH_SETTING, outline_width.GetValueAsInt ());
 	}
 
-	private void HandleFontChanged (object? sender, EventArgs e)
+	private void HandleFontChanged ()
 	{
 		if (workspace.HasOpenDocuments)
 			workspace.ActiveDocument.Workspace.GrabFocusToCanvas ();
@@ -415,7 +425,7 @@ public sealed class TextTool : BaseTool
 	{
 		if (workspace.HasOpenDocuments) {
 
-			var font = font_button.GetFontDesc ()!.Copy ()!; // NRT: Only nullable when nullptr is passed.
+			var font = font_button.FontDesc!.Copy ()!; // NRT: Only nullable when nullptr is passed.
 			font.SetWeight (bold_btn.Active ? Pango.Weight.Bold : Pango.Weight.Normal);
 			font.SetStyle (italic_btn.Active ? Pango.Style.Italic : Pango.Style.Normal);
 
