@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Pinta.Core;
@@ -213,5 +215,35 @@ public static class OtherExtensions
 			Gtk.UriLauncher launcher = Gtk.UriLauncher.New (uri);
 			await launcher.LaunchAsync (PintaCore.Chrome.MainWindow);
 		}
+	}
+
+	internal static Task ShowUnsupportedFormatDialog (
+		this ChromeManager chrome,
+		Gtk.Window parent,
+		IEnumerable<PaletteDescriptor> supportedPalettes,
+		string filename,
+		string message,
+		string errors)
+	{
+		StringBuilder details = new ();
+
+		details.AppendLine (Translations.GetString ("Could not open file: {0}", filename));
+		details.AppendLine (Translations.GetString ("Pinta supports the following palette formats:"));
+
+		var extensions =
+			from format in supportedPalettes
+			where format.Loader != null
+			from extension in format.Extensions
+			where char.IsLower (extension.FirstOrDefault ())
+			orderby extension
+			select extension;
+
+		details.AppendJoin (", ", extensions);
+
+		return chrome.ShowErrorDialog (
+			parent,
+			message,
+			details.ToString (),
+			errors);
 	}
 }

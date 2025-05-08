@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../properties/ReferenceGirCoreAdw1.props" />
+
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="GirCore.Adw-1" />
   </ItemGroup>
 </Project>

@@ -10,9 +10,10 @@
     <BuildTranslations>false</BuildTranslations>
   </PropertyGroup>
 
+  <Import Project="../properties/ReferenceGirCoreAdw1.props" />
+
   <ItemGroup>
     <PackageReference Include="Tmds.DBus" />
-    <PackageReference Include="GirCore.Adw-1" />
     <PackageReference Include="Mono.Addins" />
     <PackageReference Include="Mono.Addins.Setup" />
     <PackageReference Include="Mono.Addins.CecilReflector" />
