@@ -134,7 +134,7 @@ public sealed class FileActions
 
 			Close]);
 
-		if (isMac)
+		if (!isMac)
 			application.SetActionAndShortcuts (app.Exit); // This is part of the application menu on macOS
 	}
 
