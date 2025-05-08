@@ -164,7 +164,9 @@ public sealed class TextTool : BaseTool
 				UseSize = false,
 				UseFont = true,
 				CanFocus = false,
-				FontDesc = Pango.FontDescription.FromString (Settings.GetSetting (FONT_SETTING, "Arial 12")),
+				FontDesc = Pango.FontDescription.FromString (
+					Settings.GetSetting (FONT_SETTING,
+					Gtk.Settings.GetDefault ()!.GtkFontName!)),
 			};
 			font_button.SetDialog (fontDialog);
 			font_button.OnNotify += (_, args) => {
