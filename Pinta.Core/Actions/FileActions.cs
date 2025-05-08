@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Immutable;
 
 namespace Pinta.Core;
 
@@ -47,14 +48,52 @@ public sealed class FileActions
 		SystemManager system,
 		AppActions app)
 	{
-		New = new Command ("new", Translations.GetString ("New..."), null, Resources.StandardIcons.DocumentNew);
-		NewScreenshot = new Command ("NewScreenshot", Translations.GetString ("New Screenshot..."), null, Resources.StandardIcons.ViewFullscreen);
-		Open = new Command ("open", Translations.GetString ("Open..."), null, Resources.StandardIcons.DocumentOpen);
+		New = new Command (
+			"new",
+			Translations.GetString ("New..."),
+			null,
+			Resources.StandardIcons.DocumentNew,
+			shortcuts: ["<Primary>N"]);
 
-		Close = new Command ("close", Translations.GetString ("Close"), null, Resources.StandardIcons.WindowClose);
-		Save = new Command ("save", Translations.GetString ("Save"), null, Resources.StandardIcons.DocumentSave);
-		SaveAs = new Command ("saveAs", Translations.GetString ("Save As..."), null, Resources.StandardIcons.DocumentSaveAs);
-		Print = new Command ("print", Translations.GetString ("Print"), null, Resources.StandardIcons.DocumentPrint);
+		NewScreenshot = new Command (
+			"NewScreenshot",
+			Translations.GetString ("New Screenshot..."),
+			null,
+			Resources.StandardIcons.ViewFullscreen);
+
+		Open = new Command (
+			"open",
+			Translations.GetString ("Open..."),
+			null,
+			Resources.StandardIcons.DocumentOpen,
+			shortcuts: ["<Primary>O"]);
+
+		Close = new Command (
+			"close",
+			Translations.GetString ("Close"),
+			null,
+			Resources.StandardIcons.WindowClose,
+			shortcuts: ["<Primary>W"]);
+
+		Save = new Command (
+			"save",
+			Translations.GetString ("Save"),
+			null,
+			Resources.StandardIcons.DocumentSave,
+			shortcuts: ["<Primary>S"]);
+
+		SaveAs = new Command (
+			"saveAs",
+			Translations.GetString ("Save As..."),
+			null,
+			Resources.StandardIcons.DocumentSaveAs,
+			shortcuts: ["<Primary><Shift>S"]);
+
+		Print = new Command (
+			"print",
+			Translations.GetString ("Print"),
+			null,
+			Resources.StandardIcons.DocumentPrint);
 
 		New.ShortLabel = Translations.GetString ("New");
 		Open.ShortLabel = Translations.GetString ("Open");
@@ -85,14 +124,18 @@ public sealed class FileActions
 		menu.Append (Print.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask));
 		menu.AppendSeparator ();
 #endif
+		application.SetActionsAndShortcuts ([
+			New,
+			NewScreenshot,
+			Open,
 
-		application.AddAccelAction (New, "<Primary>N");
-		application.AddAction (NewScreenshot);
-		application.AddAccelAction (Open, "<Primary>O");
-		application.AddAccelAction (Save, "<Primary>S");
-		application.AddAccelAction (SaveAs, "<Primary><Shift>S");
-		application.AddAccelAction (Close, "<Primary>W");
-		if (!isMac) application.AddAccelAction (app.Exit, "<Primary>Q"); // This is part of the application menu on macOS
+			Save,
+			SaveAs,
+
+			Close]);
+
+		if (isMac)
+			application.SetActionAndShortcuts (app.Exit); // This is part of the application menu on macOS
 	}
 
 	public void RegisterHandlers () { }

@@ -37,27 +37,21 @@ partial class GtkExtensions
 	public static Gtk.IconTheme GetDefaultIconTheme ()
 		=> Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
 
-	public static void AddAction (this Gtk.Application app, Command action)
+	public static void SetActionAndShortcuts (
+		this Gtk.Application app,
+		Command action)
 	{
 		app.AddAction (action.Action);
-	}
-
-	public static void AddAccelAction (
-		this Gtk.Application app,
-		Command action,
-		string accel)
-	{
-		app.AddAccelAction (action, [accel]);
-	}
-
-	public static void AddAccelAction (
-		this Gtk.Application app,
-		Command action,
-		IEnumerable<string> accels)
-	{
-		app.AddAction (action);
 		app.SetAccelsForAction (
 			action.FullName,
-			accels.Select (a => PintaCore.System.ConvertPrimaryKey (a)).ToArray ());
+			[.. action.Shortcuts.Select (PintaCore.System.ConvertPrimaryKey)]);
+	}
+
+	public static void SetActionsAndShortcuts (
+		this Gtk.Application app,
+		IEnumerable<Command> actions)
+	{
+		foreach (var action in actions)
+			app.SetActionAndShortcuts (action);
 	}
 }

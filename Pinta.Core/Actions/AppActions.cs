@@ -37,26 +37,32 @@ public sealed class AppActions
 
 	public AppActions ()
 	{
-		About = new Command ("about", Translations.GetString ("About"), null, Resources.StandardIcons.HelpAbout);
-		Exit = new Command ("quit", Translations.GetString ("Quit"), null, Resources.StandardIcons.ApplicationExit);
+		About = new Command (
+			"about",
+			Translations.GetString ("About"),
+			null,
+			Resources.StandardIcons.HelpAbout);
+		Exit = new Command (
+			"quit",
+			Translations.GetString ("Quit"),
+			null,
+			Resources.StandardIcons.ApplicationExit,
+			shortcuts: ["<Primary>Q"]);
 	}
 
-	#region Initialization
 	public void RegisterActions (Gtk.Application app)
 	{
-		app.AddAction (About);
-		app.AddAccelAction (Exit, "<Primary>Q");
+		app.SetActionsAndShortcuts ([
+			About,
+			Exit]);
 	}
 
 	public void RegisterHandlers ()
 	{
 	}
-	#endregion
 
-	#region Event Invokers
 	public void RaiseBeforeQuit ()
 	{
 		BeforeQuit?.Invoke (this, EventArgs.Empty);
 	}
-	#endregion
 }

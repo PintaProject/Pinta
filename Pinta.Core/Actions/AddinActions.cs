@@ -65,7 +65,7 @@ public sealed class AddinActions
 	#region Initialization
 	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 	{
-		app.AddAction (AddinManager);
+		app.SetActionAndShortcuts (AddinManager);
 		menu.AppendItem (AddinManager.CreateMenuItem ());
 
 		addins_menu = Gio.Menu.New ();

@@ -51,16 +51,73 @@ public sealed class ImageActions
 		WorkspaceManager workspace,
 		ViewActions view)
 	{
-		CropToSelection = new Command ("croptoselection", Translations.GetString ("Crop to Selection"), null, Resources.Icons.ImageCrop);
-		AutoCrop = new Command ("autocrop", Translations.GetString ("Auto Crop"), null, Resources.Icons.ImageCrop);
-		Resize = new Command ("resize", Translations.GetString ("Resize Image..."), null, Resources.Icons.ImageResize);
-		CanvasSize = new Command ("canvassize", Translations.GetString ("Resize Canvas..."), null, Resources.Icons.ImageResizeCanvas);
-		FlipHorizontal = new Command ("fliphorizontal", Translations.GetString ("Flip Horizontal"), null, Resources.Icons.ImageFlipHorizontal);
-		FlipVertical = new Command ("flipvertical", Translations.GetString ("Flip Vertical"), null, Resources.Icons.ImageFlipVertical);
-		RotateCW = new Command ("rotatecw", Translations.GetString ("Rotate 90° Clockwise"), null, Resources.Icons.ImageRotate90CW);
-		RotateCCW = new Command ("rotateccw", Translations.GetString ("Rotate 90° Counter-Clockwise"), null, Resources.Icons.ImageRotate90CCW);
-		Rotate180 = new Command ("rotate180", Translations.GetString ("Rotate 180°"), null, Resources.Icons.ImageRotate180);
-		Flatten = new Command ("flatten", Translations.GetString ("Flatten"), null, Resources.Icons.ImageFlatten);
+		CropToSelection = new Command (
+			"croptoselection",
+			Translations.GetString ("Crop to Selection"),
+			null,
+			Resources.Icons.ImageCrop,
+			shortcuts: ["<Primary><Shift>X"]);
+
+		AutoCrop = new Command (
+			"autocrop",
+			Translations.GetString ("Auto Crop"),
+			null,
+			Resources.Icons.ImageCrop,
+			shortcuts: ["<Ctrl><Alt>X"]);
+
+		Resize = new Command (
+			"resize",
+			Translations.GetString ("Resize Image..."),
+			null,
+			Resources.Icons.ImageResize,
+			shortcuts: ["<Primary>R"]);
+
+		CanvasSize = new Command (
+			"canvassize",
+			Translations.GetString ("Resize Canvas..."),
+			null,
+			Resources.Icons.ImageResizeCanvas,
+			shortcuts: ["<Primary><Shift>R"]);
+
+		FlipHorizontal = new Command (
+			"fliphorizontal",
+			Translations.GetString ("Flip Horizontal"),
+			null,
+			Resources.Icons.ImageFlipHorizontal);
+
+		FlipVertical = new Command (
+			"flipvertical",
+			Translations.GetString ("Flip Vertical"),
+			null,
+			Resources.Icons.ImageFlipVertical);
+
+		RotateCW = new Command (
+			"rotatecw",
+			Translations.GetString ("Rotate 90° Clockwise"),
+			null,
+			Resources.Icons.ImageRotate90CW,
+			shortcuts: ["<Primary>H"]);
+
+		RotateCCW = new Command (
+			"rotateccw",
+			Translations.GetString ("Rotate 90° Counter-Clockwise"),
+			null,
+			Resources.Icons.ImageRotate90CCW,
+			shortcuts: ["<Primary>G"]);
+
+		Rotate180 = new Command (
+			"rotate180",
+			Translations.GetString ("Rotate 180°"),
+			null,
+			Resources.Icons.ImageRotate180,
+			shortcuts: ["<Primary>J"]);
+
+		Flatten = new Command (
+			"flatten",
+			Translations.GetString ("Flatten"),
+			null,
+			Resources.Icons.ImageFlatten,
+			shortcuts: ["<Primary><Shift>F"]);
 
 		this.tools = tools;
 		this.workspace = workspace;
@@ -81,17 +138,6 @@ public sealed class ImageActions
 		Gio.Menu flatten_section = Gio.Menu.New ();
 		flatten_section.AppendItem (Flatten.CreateMenuItem ());
 
-		app.AddAccelAction (CropToSelection, "<Primary><Shift>X");
-		app.AddAccelAction (AutoCrop, "<Ctrl><Alt>X");
-		app.AddAccelAction (Resize, "<Primary>R");
-		app.AddAccelAction (CanvasSize, "<Primary><Shift>R");
-		app.AddAction (FlipHorizontal);
-		app.AddAction (FlipVertical);
-		app.AddAccelAction (RotateCW, "<Primary>H");
-		app.AddAccelAction (RotateCCW, "<Primary>G");
-		app.AddAccelAction (Rotate180, "<Primary>J");
-		app.AddAccelAction (Flatten, "<Primary><Shift>F");
-
 		menu.AppendItem (CropToSelection.CreateMenuItem ());
 		menu.AppendItem (AutoCrop.CreateMenuItem ());
 		menu.AppendItem (Resize.CreateMenuItem ());
@@ -99,6 +145,21 @@ public sealed class ImageActions
 		menu.AppendSection (null, flip_section);
 		menu.AppendSection (null, rotate_section);
 		menu.AppendSection (null, flatten_section);
+
+		app.SetActionsAndShortcuts ([
+			CropToSelection,
+			AutoCrop,
+			Resize,
+			CanvasSize,
+
+			FlipHorizontal,
+			FlipVertical,
+
+			RotateCW,
+			RotateCCW,
+			Rotate180,
+
+			Flatten]);
 	}
 
 	public void RegisterHandlers ()
