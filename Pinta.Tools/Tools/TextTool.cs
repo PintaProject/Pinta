@@ -159,8 +159,8 @@ public sealed class TextTool : BaseTool
 			font_button = new Gtk.FontButton {
 				UseSize = false,
 				UseFont = true,
-				CanFocus = false, // Default to Arial if possible.
-				Font = Settings.GetSetting (FONT_SETTING, "Arial 12"),
+				CanFocus = false,
+				Font = Settings.GetSetting (FONT_SETTING, Gtk.Settings.GetDefault ()!.GtkFontName!),
 			};
 
 			font_button.OnFontSet += HandleFontChanged;
