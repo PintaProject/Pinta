@@ -1041,22 +1041,24 @@ public sealed class TextTool : BaseTool
 			g2.FillRectangle (CurrentTextLayout.GetLayoutBounds ().ToDouble (), CurrentTextEngine.SecondaryColor);
 		}
 
-		// Draw the text
-		if (FillText)
+		// Draws the text stroke
+		if (StrokeText) {
+			g.SetSourceColor (FillText ? CurrentTextEngine.SecondaryColor : CurrentTextEngine.PrimaryColor);
+			g.LineWidth = OutlineWidth;
+
+			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
+			g.Stroke ();
+
+			// Position resets after g.Stroke ();
+			if (FillText) {
+				g.MoveTo (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y);
+				g.SetSourceColor (CurrentTextEngine.PrimaryColor);
+			}
+		}
+
+		// Draws the text fill
+		if (FillText) {
 			PangoCairo.Functions.ShowLayout (g, CurrentTextLayout.Layout);
-
-		if (FillText && StrokeText) {
-			g.SetSourceColor (CurrentTextEngine.SecondaryColor);
-			g.LineWidth = OutlineWidth;
-
-			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
-			g.Stroke ();
-		} else if (StrokeText) {
-			g.SetSourceColor (CurrentTextEngine.PrimaryColor);
-			g.LineWidth = OutlineWidth;
-
-			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
-			g.Stroke ();
 		}
 
 		if (showCursor) {
