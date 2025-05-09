@@ -42,10 +42,25 @@ public sealed class WindowActions
 		ToolManager tools,
 		WorkspaceManager workspace)
 	{
-		SaveAll = new Command ("SaveAll", Translations.GetString ("Save All"), null, Resources.StandardIcons.DocumentSave);
-		CloseAll = new Command ("CloseAll", Translations.GetString ("Close All"), null, Resources.StandardIcons.WindowClose);
+		SaveAll = new Command (
+			"SaveAll",
+			Translations.GetString ("Save All"),
+			null,
+			Resources.StandardIcons.DocumentSave,
+			shortcuts: ["<Ctrl><Alt>A"]);
 
-		active_doc_action = Gio.SimpleAction.NewStateful (doc_action_id, GtkExtensions.IntVariantType, GLib.Variant.NewInt32 (-1));
+		CloseAll = new Command (
+			"CloseAll",
+			Translations.GetString ("Close All"),
+			null,
+			Resources.StandardIcons.WindowClose,
+			shortcuts: ["<Primary><Shift>W"]);
+
+		// TODO: Make `Command`
+		active_doc_action = Gio.SimpleAction.NewStateful (
+			doc_action_id,
+			GtkExtensions.IntVariantType,
+			GLib.Variant.NewInt32 (-1));
 
 		active_doc_action.OnActivate += (o, e) => {
 
@@ -76,14 +91,15 @@ public sealed class WindowActions
 		Gtk.Application app,
 		Gio.Menu menu)
 	{
-		app.AddAccelAction (SaveAll, "<Ctrl><Alt>A");
 		menu.AppendItem (SaveAll.CreateMenuItem ());
-
-		app.AddAccelAction (CloseAll, "<Primary><Shift>W");
 		menu.AppendItem (CloseAll.CreateMenuItem ());
 
 		doc_section = Gio.Menu.New ();
 		menu.AppendSection (null, doc_section);
+
+		app.AddCommands ([
+			SaveAll,
+			CloseAll]);
 
 		app.AddAction (active_doc_action);
 	}

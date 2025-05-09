@@ -25,7 +25,8 @@
 // THE SOFTWARE.
 
 using System;
-using Gio;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using GObject;
 
 namespace Pinta.Core;
@@ -37,7 +38,7 @@ public class Command
 {
 	public Gio.SimpleAction Action { get; }
 	public string Name => Action.Name!;
-	public SignalHandler<SimpleAction, SimpleAction.ActivateSignalArgs>? Activated;
+	public SignalHandler<Gio.SimpleAction, Gio.SimpleAction.ActivateSignalArgs>? Activated;
 	public void Activate ()
 	{
 		Action.Activate (null);
@@ -50,21 +51,31 @@ public class Command
 	public string FullName => $"app.{Name}";
 	public bool IsImportant { get; set; } = false;
 	public bool Sensitive { get => Action.Enabled; set => Action.Enabled = value; }
+	public ImmutableArray<string> Shortcuts { get; }
 
-	public Command (string name, string label, string? tooltip, string? icon_name, GLib.Variant? state = null)
+	public Command (
+		string name,
+		string label,
+		string? tooltip,
+		string? icon_name,
+		GLib.Variant? state = null,
+		IReadOnlyList<string>? shortcuts = null)
 	{
-		if (state is not null)
-			Action = Gio.SimpleAction.NewStateful (name, null, state);
-		else
-			Action = Gio.SimpleAction.New (name, null);
+		Action =
+			state is null
+			? Gio.SimpleAction.New (name, null)
+			: Gio.SimpleAction.NewStateful (name, null, state);
 
-		Action.OnActivate += (o, args) => {
-			Activated?.Invoke (o, args);
-		};
+		Action.OnActivate += (o, args) => Activated?.Invoke (o, args);
 
 		Label = label;
 		Tooltip = tooltip;
 		IconName = icon_name;
+
+		Shortcuts =
+			shortcuts is null
+			? ImmutableArray<string>.Empty
+			: shortcuts.ToImmutableArray ();
 	}
 
 	public Gio.MenuItem CreateMenuItem ()

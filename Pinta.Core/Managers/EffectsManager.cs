@@ -94,18 +94,17 @@ public sealed class EffectsManager
 			adjustmentType.Name,
 			adjustment.Name + (adjustment.IsConfigurable ? Translations.GetString ("...") : ""),
 			string.Empty,
-			adjustment.Icon);
+			adjustment.Icon,
+			shortcuts:
+				adjustment.AdjustmentMenuKey is null
+				? [] // If no key is specified, don't use an accelerated menu item
+				: [adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey]);
 
 		action.Activated += (o, args) => { live_preview_manager.Start (adjustment); };
 
 		action_manager.Adjustments.Actions.Add (action);
 
-		// If no key is specified, don't use an accelerated menu item
-		if (adjustment.AdjustmentMenuKey is null)
-			chrome_manager.Application.AddAction (action);
-		else {
-			chrome_manager.Application.AddAccelAction (action, adjustment.AdjustmentMenuKeyModifiers + adjustment.AdjustmentMenuKey);
-		}
+		chrome_manager.Application.AddCommand (action);
 
 		chrome_manager.AdjustmentsMenu.AppendMenuItemSorted (action.CreateMenuItem ());
 
@@ -152,7 +151,7 @@ public sealed class EffectsManager
 			string.Empty,
 			effect.Icon);
 
-		chrome_manager.Application.AddAction (action);
+		chrome_manager.Application.AddCommand (action);
 		action.Activated += (o, args) => live_preview_manager.Start (effect);
 
 		action_manager.Effects.AddEffect (effect.EffectMenuCategory, action);

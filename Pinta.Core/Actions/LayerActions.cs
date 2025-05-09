@@ -56,17 +56,77 @@ public sealed class LayerActions
 		WorkspaceManager workspace,
 		ImageActions image)
 	{
-		AddNewLayer = new Command ("addnewlayer", Translations.GetString ("Add New Layer"), null, Resources.Icons.LayerNew);
-		DeleteLayer = new Command ("deletelayer", Translations.GetString ("Delete Layer"), null, Resources.Icons.LayerDelete);
-		DuplicateLayer = new Command ("duplicatelayer", Translations.GetString ("Duplicate Layer"), null, Resources.Icons.LayerDuplicate);
-		MergeLayerDown = new Command ("mergelayerdown", Translations.GetString ("Merge Layer Down"), null, Resources.Icons.LayerMergeDown);
-		ImportFromFile = new Command ("importfromfile", Translations.GetString ("Import from File..."), null, Resources.Icons.LayerImport);
-		FlipHorizontal = new Command ("fliplayerhorizontal", Translations.GetString ("Flip Horizontal"), null, Resources.Icons.LayerFlipHorizontal);
-		FlipVertical = new Command ("fliplayervertical", Translations.GetString ("Flip Vertical"), null, Resources.Icons.LayerFlipVertical);
-		RotateZoom = new Command ("RotateZoom", Translations.GetString ("Rotate / Zoom Layer..."), null, Resources.Icons.LayerRotateZoom);
-		MoveLayerUp = new Command ("movelayerup", Translations.GetString ("Move Layer Up"), null, Resources.Icons.LayerMoveUp);
-		MoveLayerDown = new Command ("movelayerdown", Translations.GetString ("Move Layer Down"), null, Resources.Icons.LayerMoveDown);
-		Properties = new Command ("properties", Translations.GetString ("Layer Properties..."), null, Resources.Icons.LayerProperties);
+		AddNewLayer = new Command (
+			"addnewlayer",
+			Translations.GetString ("Add New Layer"),
+			null,
+			Resources.Icons.LayerNew,
+			shortcuts: ["<Primary><Shift>N"]);
+
+		DeleteLayer = new Command (
+			"deletelayer",
+			Translations.GetString ("Delete Layer"),
+			null,
+			Resources.Icons.LayerDelete,
+			shortcuts: ["<Primary><Shift>Delete"]);
+
+		DuplicateLayer = new Command (
+			"duplicatelayer",
+			Translations.GetString ("Duplicate Layer"),
+			null,
+			Resources.Icons.LayerDuplicate,
+			shortcuts: ["<Primary><Shift>D"]);
+
+		MergeLayerDown = new Command (
+			"mergelayerdown",
+			Translations.GetString ("Merge Layer Down"),
+			null,
+			Resources.Icons.LayerMergeDown,
+			shortcuts: ["<Primary>M"]);
+
+		ImportFromFile = new Command (
+			"importfromfile",
+			Translations.GetString ("Import from File..."),
+			null,
+			Resources.Icons.LayerImport);
+
+		FlipHorizontal = new Command (
+			"fliplayerhorizontal",
+			Translations.GetString ("Flip Horizontal"),
+			null,
+			Resources.Icons.LayerFlipHorizontal);
+
+		FlipVertical = new Command (
+			"fliplayervertical",
+			Translations.GetString ("Flip Vertical"),
+			null,
+			Resources.Icons.LayerFlipVertical);
+
+		RotateZoom = new Command (
+			"RotateZoom",
+			Translations.GetString ("Rotate / Zoom Layer..."),
+			null,
+			Resources.Icons.LayerRotateZoom);
+
+		MoveLayerUp = new Command (
+			"movelayerup",
+			Translations.GetString ("Move Layer Up"),
+			null,
+			Resources.Icons.LayerMoveUp);
+
+		MoveLayerDown = new Command (
+			"movelayerdown",
+			Translations.GetString ("Move Layer Down"),
+			null,
+			Resources.Icons.LayerMoveDown);
+
+		Properties = new Command (
+			"properties",
+			Translations.GetString ("Layer Properties..."),
+			null,
+			Resources.Icons.LayerProperties,
+			shortcuts: ["F4"]);
+
 		this.chrome = chrome;
 		image_formats = imageFormats;
 		recent_files = recentFiles;
@@ -93,17 +153,21 @@ public sealed class LayerActions
 		menu.AppendSection (null, flip_section);
 		menu.AppendSection (null, prop_section);
 
-		app.AddAccelAction (AddNewLayer, "<Primary><Shift>N");
-		app.AddAccelAction (DeleteLayer, "<Primary><Shift>Delete");
-		app.AddAccelAction (DuplicateLayer, "<Primary><Shift>D");
-		app.AddAccelAction (MergeLayerDown, "<Primary>M");
-		app.AddAction (ImportFromFile);
-		app.AddAction (FlipHorizontal);
-		app.AddAction (FlipVertical);
-		app.AddAction (RotateZoom);
-		app.AddAccelAction (Properties, "F4");
-		app.AddAction (MoveLayerDown);
-		app.AddAction (MoveLayerUp);
+		app.AddCommands ([
+			AddNewLayer,
+			DeleteLayer,
+			DuplicateLayer,
+			MergeLayerDown,
+			ImportFromFile,
+
+			FlipHorizontal,
+			FlipVertical,
+			RotateZoom,
+
+			Properties,
+
+			MoveLayerDown,
+			MoveLayerUp]);
 	}
 
 	public void CreateLayerWindowToolBar (Gtk.Box toolbar)
