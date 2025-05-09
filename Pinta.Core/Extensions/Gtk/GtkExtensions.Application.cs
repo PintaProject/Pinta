@@ -37,7 +37,7 @@ partial class GtkExtensions
 	public static Gtk.IconTheme GetDefaultIconTheme ()
 		=> Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
 
-	public static void SetActionAndShortcuts (
+	public static void AddCommand (
 		this Gtk.Application app,
 		Command action)
 	{
@@ -47,11 +47,11 @@ partial class GtkExtensions
 			[.. action.Shortcuts.Select (PintaCore.System.ConvertPrimaryKey)]);
 	}
 
-	public static void SetActionsAndShortcuts (
+	public static void AddCommands (
 		this Gtk.Application app,
 		ReadOnlySpan<Command> actions)
 	{
 		foreach (var action in actions)
-			app.SetActionAndShortcuts (action);
+			app.AddCommand (action);
 	}
 }

@@ -124,7 +124,7 @@ public sealed class FileActions
 		menu.Append (Print.CreateAcceleratedMenuItem (Gdk.Key.P, Gdk.ModifierType.ControlMask));
 		menu.AppendSeparator ();
 #endif
-		application.SetActionsAndShortcuts ([
+		application.AddCommands ([
 			New,
 			NewScreenshot,
 			Open,
@@ -135,7 +135,7 @@ public sealed class FileActions
 			Close]);
 
 		if (!isMac)
-			application.SetActionAndShortcuts (app.Exit); // This is part of the application menu on macOS
+			application.AddCommand (app.Exit); // This is part of the application menu on macOS
 	}
 
 	public void RegisterHandlers () { }

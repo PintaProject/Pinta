@@ -252,7 +252,7 @@ public sealed class ViewActions
 		menu.AppendSection (null, show_hide_section);
 		menu.AppendSection (null, color_scheme_section);
 
-		app.SetActionsAndShortcuts ([
+		app.AddCommands ([
 			ZoomIn,
 			ZoomOut,
 			ActualSize,
@@ -271,7 +271,7 @@ public sealed class ViewActions
 		app.AddAction (ColorScheme);
 
 		if (mainToolbarPresent)
-			app.SetActionAndShortcuts (ToolBar);
+			app.AddCommand (ToolBar);
 	}
 
 	public void CreateStatusBar (Gtk.Box statusbar)

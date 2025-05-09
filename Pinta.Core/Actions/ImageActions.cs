@@ -146,7 +146,7 @@ public sealed class ImageActions
 		menu.AppendSection (null, rotate_section);
 		menu.AppendSection (null, flatten_section);
 
-		app.SetActionsAndShortcuts ([
+		app.AddCommands ([
 			CropToSelection,
 			AutoCrop,
 			Resize,

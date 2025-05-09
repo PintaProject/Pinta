@@ -52,7 +52,7 @@ public sealed class AppActions
 
 	public void RegisterActions (Gtk.Application app)
 	{
-		app.SetActionsAndShortcuts ([
+		app.AddCommands ([
 			About,
 			Exit]);
 	}

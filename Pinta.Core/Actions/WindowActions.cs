@@ -97,7 +97,7 @@ public sealed class WindowActions
 		doc_section = Gio.Menu.New ();
 		menu.AppendSection (null, doc_section);
 
-		app.SetActionsAndShortcuts ([
+		app.AddCommands ([
 			SaveAll,
 			CloseAll]);
 

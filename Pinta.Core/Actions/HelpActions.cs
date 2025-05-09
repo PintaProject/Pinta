@@ -76,7 +76,7 @@ public sealed class HelpActions
 		menu.AppendItem (Bugs.CreateMenuItem ());
 		menu.AppendItem (Translate.CreateMenuItem ());
 
-		application.SetActionsAndShortcuts ([
+		application.AddCommands ([
 			Contents,
 			Website,
 			Bugs,
@@ -89,7 +89,7 @@ public sealed class HelpActions
 			menu.AppendSection (null, about_section);
 
 			Command about = app.About;
-			application.SetActionAndShortcuts (about);
+			application.AddCommand (about);
 			about_section.AppendItem (about.CreateMenuItem ());
 		}
 	}

@@ -153,7 +153,7 @@ public sealed class LayerActions
 		menu.AppendSection (null, flip_section);
 		menu.AppendSection (null, prop_section);
 
-		app.SetActionsAndShortcuts ([
+		app.AddCommands ([
 			AddNewLayer,
 			DeleteLayer,
 			DuplicateLayer,

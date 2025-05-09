@@ -234,7 +234,7 @@ public sealed class EditActions
 		menu.AppendSection (null, palette_section);
 		menu.AppendSubmenu (Translations.GetString ("Palette"), palette_menu);
 
-		app.SetActionsAndShortcuts ([
+		app.AddCommands ([
 
 			Undo,
 			Redo,
