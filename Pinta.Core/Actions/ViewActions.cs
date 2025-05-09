@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Globalization;
 
 namespace Pinta.Core;
@@ -49,7 +49,7 @@ public sealed class ViewActions
 	public Command Fullscreen { get; }
 
 	public ToolBarComboBox ZoomComboBox { get; }
-	public ReadOnlyCollection<string> ZoomCollection { get; }
+	public ImmutableArray<string> ZoomCollection { get; }
 
 	private string old_zoom_text = "";
 	private bool zoom_to_window_activated = false;
@@ -173,7 +173,7 @@ public sealed class ViewActions
 		this.workspace = workspace;
 	}
 
-	private static readonly ReadOnlyCollection<string> default_zoom_levels = new[] {
+	private static readonly ImmutableArray<string> default_zoom_levels = [
 		ToPercent (36),
 		ToPercent (24),
 		ToPercent (16),
@@ -198,7 +198,7 @@ public sealed class ViewActions
 		ToPercent (0.08),
 		ToPercent (0.05),
 		Translations.GetString ("Window")
-	}.ToReadOnlyCollection ();
+	];
 
 	#region Initialization
 
