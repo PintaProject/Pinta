@@ -23,6 +23,7 @@ Thanks to the following contributors who worked on this release:
 ### Fixed
 - Fixed an issue where the toolbar's height could change when switching tools (#1370, #1391) 
 - Fixed a bug where cancelling the color picker dialog could still update the palette colors (#1390, #1411)
+- The text tool's "Normal and Outline" mode now draws the outline behind the text to avoid obscuring it (#1423, #1426) 
 
 ## [3.0](https://github.com/PintaProject/Pinta/releases/tag/3.0) - 2025/04/11
 
