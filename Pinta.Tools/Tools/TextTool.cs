@@ -41,21 +41,21 @@ public sealed class TextTool : BaseTool
 	private readonly Gtk.IMMulticontext im_context;
 	private readonly TextLayout layout;
 
-	private static RectangleI CurrentTextBounds {
-		get => PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds;
+	private RectangleI CurrentTextBounds {
+		get => workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds;
 
 		set {
-			PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.PreviousTextBounds = PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds;
-			PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds = value;
+			workspace.ActiveDocument.Layers.CurrentUserLayer.PreviousTextBounds = workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds;
+			workspace.ActiveDocument.Layers.CurrentUserLayer.TextBounds = value;
 		}
 	}
 
-	private static TextEngine CurrentTextEngine {
+	private TextEngine CurrentTextEngine {
 		get {
-			if (!PintaCore.Workspace.HasOpenDocuments)
+			if (!workspace.HasOpenDocuments)
 				throw new InvalidOperationException ("Attempting to get CurrentTextEngine when there are no open documents");
 
-			return PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer.TextEngine;
+			return workspace.ActiveDocument.Layers.CurrentUserLayer.TextEngine;
 		}
 	}
 
@@ -101,12 +101,14 @@ public sealed class TextTool : BaseTool
 
 	protected override bool ShowAntialiasingButton => true;
 
-	private readonly IWorkspaceService workspace;
+	private readonly IChromeService chrome;
 	private readonly IPaletteService palette;
+	private readonly IWorkspaceService workspace;
 	public TextTool (IServiceProvider services) : base (services)
 	{
-		workspace = services.GetService<IWorkspaceService> ();
+		chrome = services.GetService<IChromeService> ();
 		palette = services.GetService<IPaletteService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 
 		im_context = Gtk.IMMulticontext.New ();
 		im_context.OnCommit += OnIMCommit;
@@ -436,7 +438,7 @@ public sealed class TextTool : BaseTool
 
 	private void UpdateTextEngineColor ()
 	{
-		if (!PintaCore.Workspace.HasOpenDocuments) return;
+		if (!workspace.HasOpenDocuments) return;
 		CurrentTextEngine.PrimaryColor = palette.PrimaryColor;
 		CurrentTextEngine.SecondaryColor = palette.SecondaryColor;
 	}
@@ -1007,7 +1009,7 @@ public sealed class TextTool : BaseTool
 		}
 
 		g.Save ();
-		PangoCairo.Functions.ContextSetFontOptions (PintaCore.Chrome.MainWindow.GetPangoContext (), options);
+		PangoCairo.Functions.ContextSetFontOptions (chrome.MainWindow.GetPangoContext (), options);
 
 
 		// Show selection if on text layer
@@ -1039,22 +1041,24 @@ public sealed class TextTool : BaseTool
 			g2.FillRectangle (CurrentTextLayout.GetLayoutBounds ().ToDouble (), CurrentTextEngine.SecondaryColor);
 		}
 
-		// Draw the text
-		if (FillText)
+		// Draws the text stroke
+		if (StrokeText) {
+			g.SetSourceColor (FillText ? CurrentTextEngine.SecondaryColor : CurrentTextEngine.PrimaryColor);
+			g.LineWidth = OutlineWidth;
+
+			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
+			g.Stroke ();
+
+			// Position resets after g.Stroke ();
+			if (FillText) {
+				g.MoveTo (CurrentTextEngine.Origin.X, CurrentTextEngine.Origin.Y);
+				g.SetSourceColor (CurrentTextEngine.PrimaryColor);
+			}
+		}
+
+		// Draws the text fill
+		if (FillText) {
 			PangoCairo.Functions.ShowLayout (g, CurrentTextLayout.Layout);
-
-		if (FillText && StrokeText) {
-			g.SetSourceColor (CurrentTextEngine.SecondaryColor);
-			g.LineWidth = OutlineWidth;
-
-			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
-			g.Stroke ();
-		} else if (StrokeText) {
-			g.SetSourceColor (CurrentTextEngine.PrimaryColor);
-			g.LineWidth = OutlineWidth;
-
-			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
-			g.Stroke ();
 		}
 
 		if (showCursor) {

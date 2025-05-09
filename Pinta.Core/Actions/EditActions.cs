@@ -65,25 +65,128 @@ public sealed class EditActions
 		ToolManager tools,
 		WorkspaceManager workspace)
 	{
-		Undo = new Command ("undo", Translations.GetString ("Undo"), null, Resources.StandardIcons.EditUndo);
-		Redo = new Command ("redo", Translations.GetString ("Redo"), null, Resources.StandardIcons.EditRedo);
-		Cut = new Command ("cut", Translations.GetString ("Cut"), null, Resources.StandardIcons.EditCut);
-		Copy = new Command ("copy", Translations.GetString ("Copy"), null, Resources.StandardIcons.EditCopy);
-		CopyMerged = new Command ("copymerged", Translations.GetString ("Copy Merged"), null, Resources.StandardIcons.EditCopy);
-		Paste = new Command ("paste", Translations.GetString ("Paste"), null, Resources.StandardIcons.EditPaste);
-		PasteIntoNewLayer = new Command ("pasteintonewlayer", Translations.GetString ("Paste Into New Layer"), null, Resources.StandardIcons.EditPaste);
-		PasteIntoNewImage = new Command ("pasteintonewimage", Translations.GetString ("Paste Into New Image"), null, Resources.StandardIcons.EditPaste);
-		EraseSelection = new Command ("eraseselection", Translations.GetString ("Erase Selection"), null, Resources.Icons.EditSelectionErase);
-		FillSelection = new Command ("fillselection", Translations.GetString ("Fill Selection"), null, Resources.Icons.EditSelectionFill);
-		InvertSelection = new Command ("invertselection", Translations.GetString ("Invert Selection"), null, Resources.Icons.EditSelectionFill);
-		OffsetSelection = new Command ("offsetselection", Translations.GetString ("Offset Selection"), null, Resources.Icons.EditSelectionOffset);
-		SelectAll = new Command ("selectall", Translations.GetString ("Select All"), null, Resources.StandardIcons.EditSelectAll);
-		Deselect = new Command ("deselect", Translations.GetString ("Deselect All"), null, Resources.Icons.EditSelectionNone);
+		Undo = new Command (
+			"undo",
+			Translations.GetString ("Undo"),
+			null,
+			Resources.StandardIcons.EditUndo,
+			shortcuts: ["<Primary>Z"]);
 
-		LoadPalette = new Command ("loadpalette", Translations.GetString ("Open..."), null, Resources.StandardIcons.DocumentOpen);
-		SavePalette = new Command ("savepalette", Translations.GetString ("Save As..."), null, Resources.StandardIcons.DocumentSave);
-		ResetPalette = new Command ("resetpalette", Translations.GetString ("Reset to Default"), null, Resources.StandardIcons.DocumentRevert);
-		ResizePalette = new Command ("resizepalette", Translations.GetString ("Set Number of Colors"), null, Resources.Icons.ImageResize);
+		Redo = new Command (
+			"redo",
+			Translations.GetString ("Redo"),
+			null,
+			Resources.StandardIcons.EditRedo,
+			shortcuts: ["<Primary><Shift>Z", "<Ctrl>Y"]);
+
+		Cut = new Command (
+			"cut",
+			Translations.GetString ("Cut"),
+			null,
+			Resources.StandardIcons.EditCut,
+			shortcuts: ["<Primary>X"]);
+
+		Copy = new Command (
+			"copy",
+			Translations.GetString ("Copy"),
+			null,
+			Resources.StandardIcons.EditCopy,
+			shortcuts: ["<Primary>C"]);
+
+		CopyMerged = new Command (
+			"copymerged",
+			Translations.GetString ("Copy Merged"),
+			null,
+			Resources.StandardIcons.EditCopy,
+			shortcuts: ["<Primary><Shift>C"]);
+
+		Paste = new Command (
+			"paste",
+			Translations.GetString ("Paste"),
+			null,
+			Resources.StandardIcons.EditPaste,
+			shortcuts: ["<Primary>V"]);
+
+		PasteIntoNewLayer = new Command (
+			"pasteintonewlayer",
+			Translations.GetString ("Paste Into New Layer"),
+			null,
+			Resources.StandardIcons.EditPaste,
+			shortcuts: ["<Primary><Shift>V"]);
+
+		// Note: <Ctrl><Alt>V shortcut doesn't seem to work on Windows & macOS (bug 2047921).
+		PasteIntoNewImage = new Command (
+			"pasteintonewimage",
+			Translations.GetString ("Paste Into New Image"),
+			null,
+			Resources.StandardIcons.EditPaste,
+			shortcuts: ["<Shift>V", "<Primary><Alt>V"]);
+
+		EraseSelection = new Command (
+			"eraseselection",
+			Translations.GetString ("Erase Selection"),
+			null,
+			Resources.Icons.EditSelectionErase,
+			shortcuts: ["Delete"]);
+
+		FillSelection = new Command (
+			"fillselection",
+			Translations.GetString ("Fill Selection"),
+			null,
+			Resources.Icons.EditSelectionFill,
+			shortcuts: ["BackSpace"]);
+
+		InvertSelection = new Command (
+			"invertselection",
+			Translations.GetString ("Invert Selection"),
+			null,
+			Resources.Icons.EditSelectionFill,
+			shortcuts: ["<Primary>I"]);
+
+		OffsetSelection = new Command (
+			"offsetselection",
+			Translations.GetString ("Offset Selection"),
+			null,
+			Resources.Icons.EditSelectionOffset,
+			shortcuts: ["<Primary><Shift>O"]);
+
+		SelectAll = new Command (
+			"selectall",
+			Translations.GetString ("Select All"),
+			null,
+			Resources.StandardIcons.EditSelectAll,
+			shortcuts: ["<Primary>A"]);
+
+		Deselect = new Command (
+			"deselect",
+			Translations.GetString ("Deselect All"),
+			null,
+			Resources.Icons.EditSelectionNone,
+			shortcuts: ["<Primary><Shift>A", "<Ctrl>D"]);
+
+		LoadPalette = new Command (
+			"loadpalette",
+			Translations.GetString ("Open..."),
+			null,
+			Resources.StandardIcons.DocumentOpen);
+
+		SavePalette = new Command (
+			"savepalette",
+			Translations.GetString ("Save As..."),
+			null,
+			Resources.StandardIcons.DocumentSave);
+
+		ResetPalette = new Command (
+			"resetpalette",
+			Translations.GetString ("Reset to Default"),
+			null,
+			Resources.StandardIcons.DocumentRevert);
+
+		ResizePalette = new Command (
+			"resizepalette",
+			Translations.GetString ("Set Number of Colors"),
+			null,
+			Resources.Icons.ImageResize);
 
 		Undo.Sensitive = false;
 		Redo.Sensitive = false;
@@ -95,7 +198,6 @@ public sealed class EditActions
 		this.workspace = workspace;
 	}
 
-	#region Initialization
 	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
 	{
 		Gio.Menu paste_section = Gio.Menu.New ();
@@ -132,25 +234,29 @@ public sealed class EditActions
 		menu.AppendSection (null, palette_section);
 		menu.AppendSubmenu (Translations.GetString ("Palette"), palette_menu);
 
-		app.AddAccelAction (Undo, "<Primary>Z");
-		app.AddAccelAction (Redo, ["<Primary><Shift>Z", "<Ctrl>Y"]);
-		app.AddAccelAction (Cut, "<Primary>X");
-		app.AddAccelAction (Copy, "<Primary>C");
-		app.AddAccelAction (CopyMerged, "<Primary><Shift>C");
-		app.AddAccelAction (Paste, "<Primary>V");
-		app.AddAccelAction (PasteIntoNewLayer, "<Primary><Shift>V");
-		// Note: <Ctrl><Alt>V shortcut doesn't seem to work on Windows & macOS (bug 2047921). 
-		app.AddAccelAction (PasteIntoNewImage, ["<Shift>V", "<Primary><Alt>V"]);
-		app.AddAccelAction (SelectAll, "<Primary>A");
-		app.AddAccelAction (Deselect, ["<Primary><Shift>A", "<Ctrl>D"]);
-		app.AddAccelAction (EraseSelection, "Delete");
-		app.AddAccelAction (FillSelection, "BackSpace");
-		app.AddAccelAction (InvertSelection, "<Primary>I");
-		app.AddAccelAction (OffsetSelection, "<Primary><Shift>O");
-		app.AddAction (LoadPalette);
-		app.AddAction (SavePalette);
-		app.AddAction (ResetPalette);
-		app.AddAction (ResizePalette);
+		app.AddCommands ([
+
+			Undo,
+			Redo,
+
+			Cut,
+			Copy,
+			CopyMerged,
+			Paste,
+			PasteIntoNewLayer,
+			PasteIntoNewImage,
+
+			SelectAll,
+			Deselect,
+
+			EraseSelection,
+			FillSelection,
+			InvertSelection,
+			OffsetSelection,
+			LoadPalette,
+			SavePalette,
+			ResetPalette,
+			ResizePalette]);
 	}
 
 	public void CreateHistoryWindowToolBar (Gtk.Box toolbar)
@@ -189,8 +295,6 @@ public sealed class EditActions
 			OffsetSelection.Sensitive = visible;
 		};
 	}
-
-	#endregion
 
 	#region Action Handlers
 	private void HandlePintaCoreActionsEditFillSelectionActivated (object sender, EventArgs e)

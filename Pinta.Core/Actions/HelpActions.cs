@@ -41,35 +41,55 @@ public sealed class HelpActions
 		SystemManager system,
 		AppActions app)
 	{
-		Contents = new Command ("contents", Translations.GetString ("Contents"), null, Resources.StandardIcons.HelpBrowser);
-		Website = new Command ("website", Translations.GetString ("Pinta Website"), null, Resources.Icons.HelpWebsite);
-		Bugs = new Command ("bugs", Translations.GetString ("File a Bug"), null, Resources.Icons.HelpBug);
-		Translate = new Command ("translate", Translations.GetString ("Translate This Application"), null, Resources.Icons.HelpTranslate);
+		Contents = new Command (
+			"contents",
+			Translations.GetString ("Contents"),
+			null,
+			Resources.StandardIcons.HelpBrowser,
+			shortcuts: ["F1"]);
+
+		Website = new Command (
+			"website",
+			Translations.GetString ("Pinta Website"),
+			null,
+			Resources.Icons.HelpWebsite);
+
+		Bugs = new Command (
+			"bugs",
+			Translations.GetString ("File a Bug"),
+			null,
+			Resources.Icons.HelpBug);
+
+		Translate = new Command (
+			"translate",
+			Translations.GetString ("Translate This Application"),
+			null,
+			Resources.Icons.HelpTranslate);
 
 		this.system = system;
 		this.app = app;
 	}
 	public void RegisterActions (Gtk.Application application, Gio.Menu menu)
 	{
-		application.AddAccelAction (Contents, "F1");
 		menu.AppendItem (Contents.CreateMenuItem ());
-
-		application.AddAction (Website);
 		menu.AppendItem (Website.CreateMenuItem ());
-
-		application.AddAction (Bugs);
 		menu.AppendItem (Bugs.CreateMenuItem ());
-
-		application.AddAction (Translate);
 		menu.AppendItem (Translate.CreateMenuItem ());
+
+		application.AddCommands ([
+			Contents,
+			Website,
+			Bugs,
+			Translate]);
 
 		// This is part of the application menu on macOS.
 		if (system.OperatingSystem != OS.Mac) {
+
 			var about_section = Gio.Menu.New ();
 			menu.AppendSection (null, about_section);
 
-			var about = app.About;
-			application.AddAction (about);
+			Command about = app.About;
+			application.AddCommand (about);
 			about_section.AppendItem (about.CreateMenuItem ());
 		}
 	}
