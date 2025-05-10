@@ -32,6 +32,9 @@ partial class GtkExtensions
 	private static string ConvertPrimaryKey (this SystemManager system, string accel) =>
 		accel.Replace ("<Primary>", system.OperatingSystem == OS.Mac ? "<Meta>" : "<Control>");
 
+	private static string ConvertPrimaryKey (string accel) =>
+		accel.Replace ("<Primary>", SystemManager.GetOperatingSystem () == OS.Mac ? "<Meta>" : "<Control>");
+
 	/// <summary>
 	/// Returns the platform-specific label for the "Primary" (Ctrl) key.
 	/// For example, this is the Cmd key on macOS.
@@ -42,6 +45,16 @@ partial class GtkExtensions
 			system.ConvertPrimaryKey ("<Primary>"),
 			out var key,
 			out var mods);
+
+		return Gtk.Functions.AcceleratorGetLabel (key, mods);
+	}
+
+	private static string ReadableAcceleratorLabel (string gtkLabel)
+	{
+		AcceleratorParse (
+			ConvertPrimaryKey (gtkLabel),
+			out uint key,
+			out Gdk.ModifierType mods);
 
 		return Gtk.Functions.AcceleratorGetLabel (key, mods);
 	}
