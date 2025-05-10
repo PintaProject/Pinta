@@ -111,16 +111,6 @@ partial class GtkExtensions
 	private static readonly string shortcut_label = Translations.GetString ("Shortcut key");
 	private static readonly string shortcuts_label = Translations.GetString ("Shortcut keys");
 
-	private static string ReadableAcceleratorLabel (string gtkLabel)
-	{
-		AcceleratorParse (
-			gtkLabel,
-			out uint key,
-			out Gdk.ModifierType mods);
-
-		return Gtk.Functions.AcceleratorGetLabel (key, mods);
-	}
-
 	public static Gtk.Button CreateToolBarItem (this Command action, bool force_icon_only = false)
 	{
 		string label = action.ShortLabel ?? action.Label;
