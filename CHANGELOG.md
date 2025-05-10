@@ -14,6 +14,7 @@ Thanks to the following contributors who worked on this release:
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
 - When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
 - Pinta now configures a compatibility version number for add-ins, to support running add-ins built against older versions such as Pinta 3.0 (#1379, #1389)
+- Keyboard shortcuts are now displayed on all toolbar button tooltips (#1408, #1432)
 
 ### Changed
 - Improved the sizing of the toolbox icons, particularly for high DPI displays (#1374)

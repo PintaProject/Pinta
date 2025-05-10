@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Text;
 using Gtk;
 
@@ -33,7 +33,7 @@ namespace Pinta.Core;
 
 public sealed class PaletteDescriptor
 {
-	public ReadOnlyCollection<string> Extensions { get; }
+	public ImmutableArray<string> Extensions { get; }
 
 	public IPaletteLoader Loader { get; }
 
@@ -43,7 +43,7 @@ public sealed class PaletteDescriptor
 
 	public PaletteDescriptor (string displayPrefix, IEnumerable<string> extensions, IPaletteLoader loader, IPaletteSaver saver)
 	{
-		Extensions = extensions.ToReadOnlyCollection ();
+		Extensions = [.. extensions];
 		Loader = loader;
 		Saver = saver;
 

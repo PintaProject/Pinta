@@ -26,7 +26,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
@@ -43,12 +43,12 @@ public sealed class FormatDescriptor
 	/// <summary>
 	/// A list of the supported extensions (for example, "jpeg" and "JPEG").
 	/// </summary>
-	public ReadOnlyCollection<string> Extensions { get; }
+	public ImmutableArray<string> Extensions { get; }
 
 	/// <summary>
 	/// A list of supported MIME types (for example, "image/jpg" and "image/png").
 	/// </summary>
-	public ReadOnlyCollection<string> Mimes { get; }
+	public ImmutableArray<string> Mimes { get; }
 
 	/// <summary>
 	/// The importer for this file format. This may be null if only exporting
@@ -81,14 +81,19 @@ public sealed class FormatDescriptor
 	/// <param name="importer">The importer for this file format, or null if importing is not supported.</param>
 	/// <param name="exporter">The exporter for this file format, or null if exporting is not supported.</param>
 	/// <param name="supportsLayers">Whether the format supports layers.</param>
-	public FormatDescriptor (string displayPrefix, IEnumerable<string> extensions, IEnumerable<string> mimes,
-				 IImageImporter? importer, IImageExporter? exporter, bool supportsLayers = false)
+	public FormatDescriptor (
+		string displayPrefix,
+		IEnumerable<string> extensions,
+		IEnumerable<string> mimes,
+		IImageImporter? importer,
+		IImageExporter? exporter,
+		bool supportsLayers = false)
 	{
 		if (importer == null && exporter == null)
 			throw new ArgumentException ("Format descriptor is initialized incorrectly", $"{nameof (importer)}, {nameof (exporter)}");
 
-		Extensions = extensions.ToReadOnlyCollection (); // Create a read-only copy
-		Mimes = mimes.ToReadOnlyCollection (); // Create a read-only copy
+		Extensions = [.. extensions]; // Create a read-only copy
+		Mimes = [.. mimes]; // Create a read-only copy
 		Importer = importer;
 		Exporter = exporter;
 		SupportsLayers = supportsLayers;
