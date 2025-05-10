@@ -12,15 +12,18 @@ Thanks to the following contributors who worked on this release:
 
 ### Added
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
+- When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
+- Pinta now configures a compatibility version number for add-ins, to support running add-ins built against older versions such as Pinta 3.0 (#1379, #1389)
 
 ### Changed
 - Improved the sizing of the toolbox icons, particularly for high DPI displays (#1374)
-- Pinta now configures a compatibility version number for add-ins, to support running add-ins built against older versions such as Pinta 3.0 (#1379, #1389)
-- When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
+- The text tool now uses the system's default font rather than being hardcoded to Arial, which may not exist on some systems (#1422, #1421)
+- Removed use of deprecated Gtk.FontButton (#1421)
 
 ### Fixed
 - Fixed an issue where the toolbar's height could change when switching tools (#1370, #1391) 
 - Fixed a bug where cancelling the color picker dialog could still update the palette colors (#1390, #1411)
+- The text tool's "Normal and Outline" mode now draws the outline behind the text to avoid obscuring it (#1423, #1426) 
 
 ## [3.0](https://github.com/PintaProject/Pinta/releases/tag/3.0) - 2025/04/11
 

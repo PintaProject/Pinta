@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System.Collections.Generic;
+using System;
 using System.Linq;
 
 namespace Pinta.Core;
@@ -37,27 +37,21 @@ partial class GtkExtensions
 	public static Gtk.IconTheme GetDefaultIconTheme ()
 		=> Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
 
-	public static void AddAction (this Gtk.Application app, Command action)
+	public static void AddCommand (
+		this Gtk.Application app,
+		Command action)
 	{
 		app.AddAction (action.Action);
-	}
-
-	public static void AddAccelAction (
-		this Gtk.Application app,
-		Command action,
-		string accel)
-	{
-		app.AddAccelAction (action, [accel]);
-	}
-
-	public static void AddAccelAction (
-		this Gtk.Application app,
-		Command action,
-		IEnumerable<string> accels)
-	{
-		app.AddAction (action);
 		app.SetAccelsForAction (
 			action.FullName,
-			accels.Select (a => PintaCore.System.ConvertPrimaryKey (a)).ToArray ());
+			[.. action.Shortcuts.Select (PintaCore.System.ConvertPrimaryKey)]);
+	}
+
+	public static void AddCommands (
+		this Gtk.Application app,
+		ReadOnlySpan<Command> actions)
+	{
+		foreach (var action in actions)
+			app.AddCommand (action);
 	}
 }
