@@ -44,6 +44,7 @@ public sealed class AnglePickerWidget : Gtk.Box
 		numericSpin.Valign = Gtk.Align.Start;
 		numericSpin.OnValueChanged += HandleSpinValueChanged;
 		numericSpin.SetActivatesDefaultImmediate (true);
+		numericSpin.Wrap = true;
 
 		Gtk.Button resetButton = new () {
 			IconName = Resources.StandardIcons.GoPrevious,
