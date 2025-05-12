@@ -868,9 +868,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			// every time the color changes
 			void ActiveWindowChangeHandler (object? _, GObject.Object.NotifySignalArgs args)
 			{
-				if (args.Pspec.GetName () != "is-active")
-					return;
-
 				if (IsActive) {
 					this.SetOpacity (1.0f);
 					return;
@@ -887,14 +884,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			palette.PrimaryColorChanged += PrimaryChangeHandler;
 			palette.SecondaryColorChanged += SecondaryChangeHandler;
-			this.OnNotify += ActiveWindowChangeHandler;
+			IsActivePropertyDefinition.Notify (this, ActiveWindowChangeHandler);
 
 			// Remove event handlers on exit (in particular, we don't want to handle the
 			// 'is-active' property changing as the dialog is being closed (bug #1390)).
 			this.OnResponse += (_, _) => {
 				palette.PrimaryColorChanged -= PrimaryChangeHandler;
 				palette.SecondaryColorChanged -= SecondaryChangeHandler;
-				this.OnNotify -= ActiveWindowChangeHandler;
+				IsActivePropertyDefinition.Unnotify (this, ActiveWindowChangeHandler);
 			};
 		}
 
