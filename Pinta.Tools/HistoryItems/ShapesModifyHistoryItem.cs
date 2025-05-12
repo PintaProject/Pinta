@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System.Collections.ObjectModel;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -32,7 +33,7 @@ public sealed class ShapesModifyHistoryItem : BaseHistoryItem
 {
 	private readonly BaseEditEngine ee;
 
-	private ShapeEngineCollection s_engines;
+	private Collection<ShapeEngine> s_engines;
 
 	private int selected_point_index, selected_shape_index;
 
@@ -46,7 +47,7 @@ public sealed class ShapesModifyHistoryItem : BaseHistoryItem
 	{
 		ee = passedEE;
 
-		s_engines = BaseEditEngine.SEngines.PartialClone ();
+		s_engines = new Collection<ShapeEngine> (BaseEditEngine.SEngines.PartialClone ());
 		selected_point_index = ee.SelectedPointIndex;
 		selected_shape_index = ee.SelectedShapeIndex;
 	}

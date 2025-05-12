@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Cairo;
 using Pinta.Core;
@@ -177,7 +178,7 @@ public abstract class BaseEditEngine
 	protected bool clicked_without_modifying = false;
 
 	//Stores the editable shape data.
-	public static ShapeEngineCollection SEngines = [];
+	public static Collection<ShapeEngine> SEngines = [];
 
 	#region ToolbarEventHandlers
 

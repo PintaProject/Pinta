@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System.Collections.ObjectModel;
 using Cairo;
 using Pinta.Core;
 
@@ -38,7 +39,7 @@ public sealed class ShapesHistoryItem : BaseHistoryItem
 	private readonly SurfaceDiff? user_surface_diff;
 	private ImageSurface? user_surface;
 
-	private ShapeEngineCollection s_engines;
+	private Collection<ShapeEngine> s_engines;
 
 	private int selected_point_index, selected_shape_index;
 
@@ -55,8 +56,17 @@ public sealed class ShapesHistoryItem : BaseHistoryItem
 	/// <param name="passedSelectedPointIndex">The selected point's index.</param>
 	/// <param name="passedSelectedShapeIndex">The selected point's shape index.</param>
 	/// <param name="passedRedrawEverything">Whether every shape should be redrawn when undoing (e.g. finalization).</param>
-	public ShapesHistoryItem (BaseEditEngine passedEE, string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer,
-			int passedSelectedPointIndex, int passedSelectedShapeIndex, bool passedRedrawEverything) : base (icon, text)
+	public ShapesHistoryItem (
+		BaseEditEngine passedEE,
+		string icon,
+		string text,
+		ImageSurface passedUserSurface,
+		UserLayer passedUserLayer,
+		int passedSelectedPointIndex,
+		int passedSelectedShapeIndex,
+		bool passedRedrawEverything
+	)
+		: base (icon, text)
 	{
 		ee = passedEE;
 
@@ -70,7 +80,7 @@ public sealed class ShapesHistoryItem : BaseHistoryItem
 		}
 
 
-		s_engines = BaseEditEngine.SEngines.PartialClone ();
+		s_engines = new Collection<ShapeEngine> (BaseEditEngine.SEngines.PartialClone ());
 		selected_point_index = passedSelectedPointIndex;
 		selected_shape_index = passedSelectedShapeIndex;
 
