@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Pinta.Resources;
 
 namespace Pinta.Core;
@@ -107,12 +108,24 @@ partial class GtkExtensions
 			box.Remove (child);
 	}
 
+	private static readonly string shortcut_label = Translations.GetString ("Shortcut key");
+	private static readonly string shortcuts_label = Translations.GetString ("Shortcut keys");
+
 	public static Gtk.Button CreateToolBarItem (this Command action, bool force_icon_only = false)
 	{
 		string label = action.ShortLabel ?? action.Label;
+
+		string baseTooltip = action.Tooltip ?? action.Label;
+
+		string fullTooltip = action.Shortcuts.Length switch {
+			0 => baseTooltip,
+			1 => $"{baseTooltip}\n{shortcut_label}: {ReadableAcceleratorLabel (action.Shortcuts[0])}",
+			_ => $"{baseTooltip}\n{shortcuts_label}:\n" + string.Join ('\n', action.Shortcuts.Select (s => $"- {ReadableAcceleratorLabel (s)}")),
+		};
+
 		Gtk.Button button = new () {
 			ActionName = action.FullName,
-			TooltipText = action.Tooltip ?? action.Label,
+			TooltipText = fullTooltip,
 		};
 
 		if (action.IsImportant && !force_icon_only) {

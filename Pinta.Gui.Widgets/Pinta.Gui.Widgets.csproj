@@ -2,9 +2,9 @@
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="GirCore.GObject-2.0.Integration" />
-  </ItemGroup>
+
+  <Import Project="../properties/ReferenceGirCoreGObject20Integration.props" />
+  
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
   </ItemGroup>

@@ -27,52 +27,74 @@
 
 using System;
 using System.Linq;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class LayersListView : ScrolledWindow
+public sealed class LayersListView : Gtk.ScrolledWindow
 {
-	private readonly ListView view;
-	private readonly Gio.ListStore model;
+	private readonly Gio.ListStore list_model;
 	private readonly Gtk.SingleSelection selection_model;
-	private readonly Gtk.SignalListItemFactory factory;
 	private Document? active_document;
 
 	public LayersListView ()
 	{
-		CanFocus = false;
-		SetSizeRequest (200, 200);
-		SetPolicy (PolicyType.Automatic, PolicyType.Automatic);
+		// --- Control creaton
 
-		model = Gio.ListStore.New (LayersListViewItem.GetGType ());
+		Gio.ListStore listModel = Gio.ListStore.New (LayersListViewItem.GetGType ());
 
-		selection_model = Gtk.SingleSelection.New (model);
-		selection_model.OnSelectionChanged ((o, args) => HandleSelectionChanged (o, args));
+		Gtk.SingleSelection selectionModel = Gtk.SingleSelection.New (listModel);
+		selectionModel.OnSelectionChanged (HandleSelectionChanged);
 
-		factory = Gtk.SignalListItemFactory.New ();
-		factory.OnSetup += (factory, args) => {
-			var item = (Gtk.ListItem) args.Object;
-			item.SetChild (new LayersListViewItemWidget ());
-		};
-		factory.OnBind += (factory, args) => {
-			var list_item = (Gtk.ListItem) args.Object;
-			var model_item = (LayersListViewItem) list_item.GetItem ()!;
-			var widget = (LayersListViewItemWidget) list_item.GetChild ()!;
-			widget.Update (model_item);
-		};
+		Gtk.SignalListItemFactory factory = Gtk.SignalListItemFactory.New ();
+		factory.OnSetup += HandleFactorySetup;
+		factory.OnBind += HandleFactoryBind;
 
-		view = ListView.New (selection_model, factory);
+		Gtk.ListView view = Gtk.ListView.New (selectionModel, factory);
 		view.CanFocus = false;
 		view.OnActivate += HandleRowActivated;
 
+		// --- Initialization (Gtk.Widget)
+
+		CanFocus = false;
+		SetSizeRequest (200, 200);
+
+		// --- Initialization (Gtk.ScrolledWindow)
+
+		SetPolicy (Gtk.PolicyType.Automatic, Gtk.PolicyType.Automatic);
 		SetChild (view);
+
+		// --- References to keep
+
+		list_model = listModel;
+		selection_model = selectionModel;
+
+		// --- Other initialization (TODO: remove references to PintaCore)
 
 		PintaCore.Workspace.ActiveDocumentChanged += HandleActiveDocumentChanged;
 	}
 
-	private void HandleSelectionChanged (object? sender, GtkExtensions.SelectionChangedSignalArgs e)
+	private static void HandleFactorySetup (
+		Gtk.SignalListItemFactory factory,
+		Gtk.SignalListItemFactory.SetupSignalArgs args)
+	{
+		var item = (Gtk.ListItem) args.Object;
+		item.SetChild (new LayersListViewItemWidget ());
+	}
+
+	private static void HandleFactoryBind (
+		Gtk.SignalListItemFactory factory,
+		Gtk.SignalListItemFactory.BindSignalArgs args)
+	{
+		var list_item = (Gtk.ListItem) args.Object;
+		var model_item = (LayersListViewItem) list_item.GetItem ()!;
+		var widget = (LayersListViewItemWidget) list_item.GetChild ()!;
+		widget.Update (model_item);
+	}
+
+	private void HandleSelectionChanged (
+		Gtk.SingleSelection sender,
+		GtkExtensions.SelectionChangedSignalArgs e)
 	{
 		ArgumentNullException.ThrowIfNull (active_document);
 
@@ -83,7 +105,9 @@ public sealed class LayersListView : ScrolledWindow
 			active_document.Layers.SetCurrentUserLayer (doc_idx);
 	}
 
-	private void HandleRowActivated (ListView sender, ListView.ActivateSignalArgs args)
+	private void HandleRowActivated (
+		Gtk.ListView sender,
+		Gtk.ListView.ActivateSignalArgs args)
 	{
 		// Open the layer properties dialog
 		PintaCore.Actions.Layers.Properties.Activate ();
@@ -91,7 +115,10 @@ public sealed class LayersListView : ScrolledWindow
 
 	private void HandleActiveDocumentChanged (object? sender, EventArgs e)
 	{
-		var doc = PintaCore.Workspace.HasOpenDocuments ? PintaCore.Workspace.ActiveDocument : null;
+		Document? doc =
+			PintaCore.Workspace.HasOpenDocuments
+			? PintaCore.Workspace.ActiveDocument
+			: null;
 
 		if (active_document == doc)
 			return;
@@ -107,12 +134,12 @@ public sealed class LayersListView : ScrolledWindow
 		}
 
 		// Clear out old items and rebuild.
-		model.RemoveMultiple (0, model.GetNItems ());
+		list_model.RemoveMultiple (0, list_model.GetNItems ());
 
 		if (doc is not null) {
-			foreach (var layer in doc.Layers.UserLayers.Reverse ()) {
-				model.Append (new LayersListViewItem (doc, layer));
-			}
+
+			foreach (var layer in doc.Layers.UserLayers.Reverse ())
+				list_model.Append (new LayersListViewItem (doc, layer));
 
 			doc.History.HistoryItemAdded += HandleHistoryChanged;
 			doc.History.ActionUndone += HandleHistoryChanged;
@@ -133,10 +160,10 @@ public sealed class LayersListView : ScrolledWindow
 		// Recreate all the widgets.
 		// This update should ideally be done by changing gobject properties instead, but we don't have the ability to add custom properties yet
 		uint selected_idx = selection_model.Selected;
-		for (uint i = 0; i < model.GetNItems (); ++i) {
+		for (uint i = 0; i < list_model.GetNItems (); ++i) {
 			int layer_idx = active_document.Layers.Count () - 1 - (int) i;
-			model.Remove (i);
-			model.Insert (i, new LayersListViewItem (active_document, active_document.Layers[layer_idx]));
+			list_model.Remove (i);
+			list_model.Insert (i, new LayersListViewItem (active_document, active_document.Layers[layer_idx]));
 		}
 
 		// Restore the selection.
@@ -148,7 +175,7 @@ public sealed class LayersListView : ScrolledWindow
 		ArgumentNullException.ThrowIfNull (active_document);
 
 		int index = active_document.Layers.Count () - 1 - e.Index;
-		model.Insert ((uint) index, new LayersListViewItem (active_document, active_document.Layers[e.Index]));
+		list_model.Insert ((uint) index, new LayersListViewItem (active_document, active_document.Layers[e.Index]));
 	}
 
 	private void HandleLayerRemoved (object? sender, IndexEventArgs e)
@@ -156,7 +183,7 @@ public sealed class LayersListView : ScrolledWindow
 		ArgumentNullException.ThrowIfNull (active_document);
 
 		// Note: don't need to subtract 1 because the layer has already been removed from the document.
-		model.Remove ((uint) (active_document.Layers.Count () - e.Index));
+		list_model.Remove ((uint) (active_document.Layers.Count () - e.Index));
 	}
 
 	private void HandleSelectedLayerChanged (object? sender, EventArgs e)

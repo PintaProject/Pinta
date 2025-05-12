@@ -1,12 +1,13 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <GirCoreVersion>0.6.3</GirCoreVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="GirCore.Adw-1" Version="0.6.3" />
-    <PackageVersion Include="GirCore.GObject-2.0.Integration" Version="0.6.3" />
-    <PackageVersion Include="GirCore.Gtk-4.0" Version="0.6.3" />
-    <PackageVersion Include="GirCore.PangoCairo-1.0" Version="0.6.3" />
+    <PackageVersion Include="GirCore.Adw-1" Version="$(GirCoreVersion)" />
+    <PackageVersion Include="GirCore.GObject-2.0.Integration" Version="$(GirCoreVersion)" />
+    <PackageVersion Include="GirCore.Gtk-4.0" Version="$(GirCoreVersion)" />
+    <PackageVersion Include="GirCore.PangoCairo-1.0" Version="$(GirCoreVersion)" />
     <!-- Note: at least 1.4.2-alpha3 is required for fixes to uninstalling addins, from https://github.com/mono/mono-addins/pull/198 -->
     <PackageVersion Include="Mono.Addins" Version="1.4.2-alpha.4" />
     <PackageVersion Include="Mono.Addins.Setup" Version="1.4.2-alpha.4" />

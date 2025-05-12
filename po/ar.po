@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-06 01:45+0000\n"
+"POT-Creation-Date: 2025-05-11 00:28+0000\n"
 "PO-Revision-Date: 2024-12-08 08:00+0000\n"
 "Last-Translator: \"Jadiir M. Aal Jaidaan\" <ashrafquatre@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/pinta/pinta/ar/>\n"
@@ -28,8 +28,8 @@ msgstr " (in user directory)"
 msgid " Selection Mode: "
 msgstr " وضع التحديد: "
 
-#: ../Pinta.Core/Managers/EffectsManager.cs:70
-#: ../Pinta.Core/Managers/EffectsManager.cs:104
+#: ../Pinta.Core/Managers/EffectsManager.cs:95
+#: ../Pinta.Core/Managers/EffectsManager.cs:150
 msgid "..."
 msgstr "..."
 
@@ -49,11 +49,11 @@ msgstr "منطقة بمساحة 7 × 7"
 msgid "9 x 9 Region"
 msgstr "منطقة بمساحة 9 × 9"
 
-#: ../Pinta/MainWindow.cs:387
+#: ../Pinta/MainWindow.cs:395
 msgid "A_dd-ins"
 msgstr "الإضافات"
 
-#: ../Pinta.Core/Actions/AppActions.cs:40
+#: ../Pinta.Core/Actions/AppActions.cs:42
 msgid "About"
 msgstr "عنْ"
 
@@ -61,8 +61,8 @@ msgstr "عنْ"
 msgid "About Pinta"
 msgstr "عنْ بِنْتا"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:371
+#: ../Pinta.Core/Actions/LayerActions.cs:61
+#: ../Pinta.Core/Actions/LayerActions.cs:431
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "أضف طبقة جديدة"
@@ -79,7 +79,7 @@ msgstr "مدير الإضافات..."
 msgid "Added"
 msgstr "اُضيفت"
 
-#: ../Pinta/MainWindow.cs:417
+#: ../Pinta/MainWindow.cs:425
 msgid "Adjustments"
 msgstr ""
 
@@ -92,13 +92,13 @@ msgstr "بعد لقط اللون"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:474
+#: ../Pinta.Core/Actions/EditActions.cs:578
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "كل الملفّات"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:709
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:723
 msgid "Alpha"
 msgstr ""
 
@@ -122,7 +122,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:120
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:145
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:78
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:316
@@ -161,7 +161,7 @@ msgstr ""
 msgid "Auto"
 msgstr "آلي"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:55
+#: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Auto Crop"
 msgstr "اقتصاص آلي"
 
@@ -186,7 +186,7 @@ msgstr "Background Color"
 msgid "Background:"
 msgstr "خلفية"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:93
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:95
 msgid "Based on the work of Paint.NET:"
 msgstr "مبني على العمل القائم بـPaint.NET:"
 
@@ -195,7 +195,7 @@ msgstr "مبني على العمل القائم بـPaint.NET:"
 msgid "Beautiful Italy"
 msgstr "إيطاليا البهية"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:71
+#: ../Pinta.Core/Actions/ViewActions.cs:85
 msgid "Best Fit"
 msgstr "أفضل ملائمة"
 
@@ -215,7 +215,7 @@ msgstr "نمط المزج"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:699
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:700
 msgid "Blue"
 msgstr "أزرق"
 
@@ -232,7 +232,7 @@ msgstr "أزرق "
 msgid "Blurs"
 msgstr "غشاوة"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Bold"
 msgstr "غليظ"
 
@@ -290,9 +290,9 @@ msgstr "بالمقاس المُطلق:"
 msgid "By percentage:"
 msgstr "بالنسبة المئوية"
 
-#: ../Pinta.Core/Actions/EditActions.cs:411
+#: ../Pinta.Core/Actions/EditActions.cs:515
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "إلغاء"
@@ -301,11 +301,11 @@ msgstr "إلغاء"
 msgid "Canvas"
 msgstr "رقعة"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:61
 msgid "Canvas Grid Settings"
 msgstr "إعدادات اللوحة"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:77
+#: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "شبكة اللوحة..."
 
@@ -317,7 +317,7 @@ msgstr "مقاس الخلية"
 msgid "Center"
 msgstr "الوسط"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:228
+#: ../Pinta.Tools/Tools/TextTool.cs:240
 msgid "Center Align"
 msgstr "محاذاة للوسط"
 
@@ -334,11 +334,11 @@ msgstr "انزياح المركز"
 msgid "Center Right"
 msgstr "يمين الوسط"
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:126
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:151
 msgid "Centered"
 msgstr "توسيط"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:145
+#: ../Pinta.Core/Actions/ViewActions.cs:222
 msgid "Centimeters"
 msgstr "سنتيمترات"
 
@@ -360,7 +360,7 @@ msgstr "أزهار الكرز"
 msgid "Choose Color"
 msgstr "اختر لونًا"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:111
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:127
 msgid "Choose Palette Color"
 msgstr "اختر لون لوحة الألوان"
 
@@ -400,11 +400,11 @@ msgstr "انقر واسحب لرسم تحديد حُر."
 msgid "Click and drag to navigate image."
 msgstr "انقر واسحب لتصفّح الصّورة"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
 msgid "Click to reset primary and secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:267
 msgid "Click to select primary color."
 msgstr "انقر لاختيار اللون الأولي"
 
@@ -412,12 +412,12 @@ msgstr "انقر لاختيار اللون الأولي"
 msgid "Click to select region of similar color."
 msgstr "انقر لتحديد مساحة بألوان متقاربة."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:270
 msgid "Click to select secondary color."
 msgstr "انقر لاختيار اللون الثانوي"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:277
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:433
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:273
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 
@@ -432,12 +432,12 @@ msgstr "Clipboard"
 msgid "Clone Stamp"
 msgstr "المستنسخ"
 
-#: ../Pinta.Core/Actions/FileActions.cs:54
+#: ../Pinta.Core/Actions/FileActions.cs:73
 #: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
 msgstr "أغلق"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:46
+#: ../Pinta.Core/Actions/WindowActions.cs:54
 msgid "Close All"
 msgstr "أغلق الكلّ"
 
@@ -491,7 +491,7 @@ msgstr "مدى اللون"
 msgid "Color Saturation"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:170
+#: ../Pinta.Core/Actions/ViewActions.cs:247
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
@@ -516,7 +516,7 @@ msgstr "التلوين"
 msgid "Conical Gradient"
 msgstr "تدرّج مخروطي"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:44
+#: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "Contents"
 msgstr "المحتويات"
 
@@ -529,15 +529,15 @@ msgstr "متّصل"
 msgid "Contrast"
 msgstr "التباين"
 
-#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:91
 msgid "Copy"
 msgstr "انسخ"
 
-#: ../Pinta.Core/Actions/EditActions.cs:72
+#: ../Pinta.Core/Actions/EditActions.cs:98
 msgid "Copy Merged"
 msgstr "انسخ ما دُمج"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:80
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Copyright"
 msgstr "حقوق النشر"
 
@@ -552,7 +552,7 @@ msgstr ""
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:194
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:167
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:445
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:457
 #, csharp-format
@@ -563,8 +563,8 @@ msgstr "لم يستطع فتح الملف: {0}"
 msgid "Coverage"
 msgstr "نطاق التغطية"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:54
-#: ../Pinta.Core/Actions/ImageActions.cs:234
+#: ../Pinta.Core/Actions/ImageActions.cs:56
+#: ../Pinta.Core/Actions/ImageActions.cs:295
 msgid "Crop to Selection"
 msgstr "اقتص وفقًا للتّحديد"
 
@@ -584,13 +584,13 @@ msgstr "منحنيات"
 msgid "Custom"
 msgstr "مخصّص"
 
-#: ../Pinta.Core/Actions/EditActions.cs:70
-#: ../Pinta.Core/Actions/EditActions.cs:263
+#: ../Pinta.Core/Actions/EditActions.cs:84
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Cut"
 msgstr "قُصّ"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:167
+#: ../Pinta.Core/Actions/ViewActions.cs:244
 msgid "Dark"
 msgstr ""
 
@@ -603,12 +603,12 @@ msgid "Dash"
 msgstr "اللوحة"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:163
+#: ../Pinta.Core/Actions/ViewActions.cs:240
 msgid "Default"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:350
+#: ../Pinta.Core/Actions/LayerActions.cs:68
+#: ../Pinta.Core/Actions/LayerActions.cs:410
 msgid "Delete Layer"
 msgstr "احذف الطّبقة"
 
@@ -621,11 +621,11 @@ msgstr "حُذِفَت"
 msgid "Dents"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:278
+#: ../Pinta.Core/Actions/EditActions.cs:382
 msgid "Deselect"
 msgstr "أزل التّحديد"
 
-#: ../Pinta.Core/Actions/EditActions.cs:81
+#: ../Pinta.Core/Actions/EditActions.cs:162
 msgid "Deselect All"
 msgstr "أزل التحديد عن الكل"
 
@@ -638,7 +638,7 @@ msgid "Difference"
 msgstr "طرح"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:137
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:123
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:148
 msgid "Distance"
 msgstr "المسافة"
 
@@ -669,8 +669,8 @@ msgstr "لا تغيّر الأداة"
 msgid "Download size: {0}"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:337
+#: ../Pinta.Core/Actions/LayerActions.cs:75
+#: ../Pinta.Core/Actions/LayerActions.cs:397
 msgid "Duplicate Layer"
 msgstr "كرر الطبقة"
 
@@ -686,11 +686,11 @@ msgstr "سلوك الحافة"
 msgid "Edge Detect"
 msgstr "تحديد الحواف"
 
-#: ../Pinta/MainWindow.cs:383
+#: ../Pinta/MainWindow.cs:391
 msgid "Effe_cts"
 msgstr "تأثيرات"
 
-#: ../Pinta/MainWindow.cs:411
+#: ../Pinta/MainWindow.cs:419
 msgid "Effects"
 msgstr ""
 
@@ -717,8 +717,8 @@ msgstr "تجسيم"
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:76
-#: ../Pinta.Core/Actions/EditActions.cs:264
+#: ../Pinta.Core/Actions/EditActions.cs:127
+#: ../Pinta.Core/Actions/EditActions.cs:368
 msgid "Erase Selection"
 msgstr "امحُ التّحديد"
 
@@ -756,7 +756,7 @@ msgstr "المعامل"
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:300
+#: ../Pinta/MainWindow.cs:306
 msgid "Failed to initialize add-in"
 msgstr ""
 
@@ -785,7 +785,7 @@ msgstr ""
 msgid "Feather Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:46
+#: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
 msgstr "أبلغ عن علّة"
 
@@ -793,7 +793,7 @@ msgstr "أبلغ عن علّة"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:266
+#: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Fill Background"
 msgstr "عبأ الخلفية"
 
@@ -801,8 +801,8 @@ msgstr "عبأ الخلفية"
 msgid "Fill Object Background"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:77
-#: ../Pinta.Core/Actions/EditActions.cs:216
+#: ../Pinta.Core/Actions/EditActions.cs:134
+#: ../Pinta.Core/Actions/EditActions.cs:320
 msgid "Fill Selection"
 msgstr "عبّأ المنطقة المُحددة"
 
@@ -830,8 +830,8 @@ msgstr ""
 msgid "Finish Pixels"
 msgstr "أنهِ البكسلات"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:63
-#: ../Pinta.Core/Actions/ImageActions.cs:160
+#: ../Pinta.Core/Actions/ImageActions.cs:117
+#: ../Pinta.Core/Actions/ImageActions.cs:221
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
 msgid "Flatten"
 msgstr "سطّح"
@@ -840,8 +840,8 @@ msgstr "سطّح"
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr ""
 
-#: ../Pinta.Core/Actions/ImageActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:64
+#: ../Pinta.Core/Actions/ImageActions.cs:84
+#: ../Pinta.Core/Actions/LayerActions.cs:95
 msgid "Flip Horizontal"
 msgstr "اقلب أفقيًّا"
 
@@ -861,8 +861,8 @@ msgstr "اقلب الطبقة أفقيًّا"
 msgid "Flip Layer Vertical"
 msgstr "اقلب الطبقة رأسيًّا"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:65
+#: ../Pinta.Core/Actions/ImageActions.cs:90
+#: ../Pinta.Core/Actions/LayerActions.cs:101
 msgid "Flip Vertical"
 msgstr "اقلب رأسيًّا"
 
@@ -880,7 +880,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:152
+#: ../Pinta.Tools/Tools/TextTool.cs:154
 msgid "Font"
 msgstr "الخطّ"
 
@@ -900,7 +900,7 @@ msgstr "شكل حُر"
 msgid "Frosted Glass"
 msgstr "تأثير الزجاج المثلج"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:83
+#: ../Pinta.Core/Actions/ViewActions.cs:157
 msgid "Fullscreen"
 msgstr "كامل الشاشة"
 
@@ -928,7 +928,7 @@ msgstr "تدرّج"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:690
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:677
 msgid "Green"
 msgstr "أخضر"
 
@@ -940,14 +940,14 @@ msgstr "خطوط شبيكة"
 msgid "Hard Light"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:91
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:170
 msgid "Height:"
 msgstr "الطول:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:623
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:567
 msgid "Hex"
 msgstr ""
 
@@ -981,11 +981,11 @@ msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
 msgid "Hue"
 msgstr "Hue"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:557
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:491
 msgid "Hue & Sat"
 msgstr ""
 
@@ -1001,7 +1001,7 @@ msgstr "ملفات ICO لا يمكن أن تكون أكبر من 255 × 255 بك
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "إذا لم تحفظ، ستضيع جميع التغييرات نهائيًا."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:423
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:431
 msgid "Image"
 msgstr "صورة"
 
@@ -1009,7 +1009,7 @@ msgstr "صورة"
 msgid "Image Editor"
 msgstr "محرر صور"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:75
+#: ../Pinta.Core/Actions/ViewActions.cs:111
 msgid "Image Tabs"
 msgstr ""
 
@@ -1017,7 +1017,7 @@ msgstr ""
 msgid "Image cannot be pasted"
 msgstr "لا يمكن لصق الصورة"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta.Core/Actions/LayerActions.cs:241
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "ملفات الصور"
@@ -1030,15 +1030,15 @@ msgstr "الصورة أكبر من مساحة الرسم"
 msgid "Image too large"
 msgstr "الصورة كبيرة جدًا"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:228
+#: ../Pinta.Core/Actions/LayerActions.cs:288
 msgid "Import From File"
 msgstr "استورد من ملفّ"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:63
+#: ../Pinta.Core/Actions/LayerActions.cs:89
 msgid "Import from File..."
 msgstr "استورد من ملفّ..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:144
+#: ../Pinta.Core/Actions/ViewActions.cs:221
 msgid "Inches"
 msgstr "بوصات"
 
@@ -1096,12 +1096,12 @@ msgstr ""
 msgid "Invert Colors"
 msgstr "اعكس الألوان"
 
-#: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:496
+#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:600
 msgid "Invert Selection"
 msgstr "اعكس التّحديد"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:200
 msgid "Italic"
 msgstr "مائل"
 
@@ -1143,7 +1143,7 @@ msgstr "إعتام الطبقة"
 msgid "Layer Properties"
 msgstr "خصائص الطبقة"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:125
 msgid "Layer Properties..."
 msgstr "خصائص الطّبقة..."
 
@@ -1161,7 +1161,7 @@ msgstr ""
 msgid "Layers"
 msgstr "الطبقات"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:216
+#: ../Pinta.Tools/Tools/TextTool.cs:228
 msgid "Left Align"
 msgstr "محاذاة لليسار"
 
@@ -1253,12 +1253,12 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:268
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "استخدم الزر الأيسر لتعيين اللون الأساسي، والزر الأيمن لتعيين اللون الثانوي."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1285,12 +1285,12 @@ msgstr "المستويات"
 msgid "Levels Adjustment"
 msgstr "ضبط المستويات"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:89
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:91
 msgid "License"
 msgstr "الترخيص"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:242
 msgid "Light"
 msgstr ""
 
@@ -1340,7 +1340,7 @@ msgstr "الإشراق"
 msgid "Magic Wand Select"
 msgstr "عصا التحديد السحرية"
 
-#: ../Pinta/MainWindow.cs:405
+#: ../Pinta/MainWindow.cs:413
 msgid "Main Menu"
 msgstr ""
 
@@ -1362,8 +1362,8 @@ msgstr ""
 msgid "Median"
 msgstr "متوسط"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:303
+#: ../Pinta.Core/Actions/LayerActions.cs:82
+#: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "ادمج الطّبقة مع الطّبقة تحتها"
 
@@ -1383,13 +1383,13 @@ msgstr ""
 msgid "Motion Blur"
 msgstr "غشاوة حركية"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:284
+#: ../Pinta.Core/Actions/LayerActions.cs:119
+#: ../Pinta.Core/Actions/LayerActions.cs:344
 msgid "Move Layer Down"
 msgstr "تحريك الطبقة لأسفل"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:268
+#: ../Pinta.Core/Actions/LayerActions.cs:113
+#: ../Pinta.Core/Actions/LayerActions.cs:328
 msgid "Move Layer Up"
 msgstr "تحريك الطبقة لأعلى"
 
@@ -1413,7 +1413,7 @@ msgstr "الاسم:"
 msgid "Nearest Neighbor"
 msgstr ""
 
-#: ../Pinta.Core/Actions/FileActions.cs:59
+#: ../Pinta.Core/Actions/FileActions.cs:98
 msgid "New"
 msgstr "جديد"
 
@@ -1422,7 +1422,7 @@ msgstr "جديد"
 msgid "New Image"
 msgstr "صورة جديدة"
 
-#: ../Pinta.Core/Actions/FileActions.cs:51
+#: ../Pinta.Core/Actions/FileActions.cs:60
 msgid "New Screenshot..."
 msgstr "لقطة جديدة للشّاشة..."
 
@@ -1430,7 +1430,7 @@ msgstr "لقطة جديدة للشّاشة..."
 msgid "New palette size:"
 msgstr "المقاس الجديد للوحة الألوان:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:50
+#: ../Pinta.Core/Actions/FileActions.cs:53
 msgid "New..."
 msgstr "جديد..."
 
@@ -1446,7 +1446,7 @@ msgstr "ضوضاء"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:263
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:275
 msgid "Normal"
 msgstr "طبيعي"
 
@@ -1454,11 +1454,11 @@ msgstr "طبيعي"
 msgid "Normal Blending"
 msgstr "خلط عاديّ"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:73
+#: ../Pinta.Core/Actions/ViewActions.cs:98
 msgid "Normal Size"
 msgstr "الحجم الطبيعي"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:264
+#: ../Pinta.Tools/Tools/TextTool.cs:276
 msgid "Normal and Outline"
 msgstr "عادي مع حد خارجي"
 
@@ -1470,7 +1470,7 @@ msgstr ""
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:453
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:402
 msgid "OK"
 msgstr ""
 
@@ -1488,7 +1488,7 @@ msgstr ""
 msgid "Offset"
 msgstr "الانزياح"
 
-#: ../Pinta.Core/Actions/EditActions.cs:79
+#: ../Pinta.Core/Actions/EditActions.cs:148
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
@@ -1502,7 +1502,7 @@ msgstr "رسم زيتيّ"
 msgid "Opacity:"
 msgstr "الإعتام:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:60
+#: ../Pinta.Core/Actions/FileActions.cs:99
 msgid "Open"
 msgstr "افتح"
 
@@ -1514,7 +1514,7 @@ msgstr ""
 msgid "Open Image"
 msgstr "افتح صورة"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta.Core/Actions/LayerActions.cs:259
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "فتح ملفّ صورة"
@@ -1523,12 +1523,12 @@ msgstr "فتح ملفّ صورة"
 msgid "Open Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
+#: ../Pinta.Core/Actions/EditActions.cs:494
 msgid "Open Palette File"
 msgstr "افتح ملفّ لوحة ألوان"
 
-#: ../Pinta.Core/Actions/EditActions.cs:83
-#: ../Pinta.Core/Actions/FileActions.cs:52
+#: ../Pinta.Core/Actions/EditActions.cs:169
+#: ../Pinta.Core/Actions/FileActions.cs:66
 msgid "Open..."
 msgstr "افتح..."
 
@@ -1540,7 +1540,7 @@ msgstr "الاتّجاه:"
 msgid "Original"
 msgstr "اصلي"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:265
+#: ../Pinta.Tools/Tools/TextTool.cs:277
 msgid "Outline"
 msgstr "حد خارجي"
 
@@ -1561,7 +1561,7 @@ msgstr ""
 msgid "Outline Shape"
 msgstr "شكل بحدود خارجية فقط"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:279
+#: ../Pinta.Tools/Tools/TextTool.cs:291
 msgid "Outline width"
 msgstr "عرض الحد الخارجي"
 
@@ -1589,12 +1589,12 @@ msgstr "دلو الطلاﺀ"
 msgid "Paintbrush"
 msgstr "فرشاة تلوين"
 
-#: ../Pinta.Core/Actions/EditActions.cs:133
+#: ../Pinta.Core/Actions/EditActions.cs:235
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:138
 msgid "Palette"
 msgstr "لوحة الألوان"
 
-#: ../Pinta.Core/Actions/EditActions.cs:457
+#: ../Pinta.Core/Actions/EditActions.cs:561
 msgid "Palette files"
 msgstr ""
 
@@ -1603,17 +1603,17 @@ msgstr ""
 msgid "Pan"
 msgstr "انتقل"
 
-#: ../Pinta.Core/Actions/EditActions.cs:73
+#: ../Pinta.Core/Actions/EditActions.cs:105
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste"
 msgstr "الصق"
 
-#: ../Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Actions/EditActions.cs:120
 msgid "Paste Into New Image"
 msgstr "الصق في صورة جديدة"
 
-#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:112
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste Into New Layer"
 msgstr "الصق في طبقة جديدة"
@@ -1643,7 +1643,7 @@ msgid "Photo"
 msgstr "صورة"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:59
 msgid "Pinta"
 msgstr ""
 
@@ -1659,7 +1659,7 @@ msgstr ""
 msgid "Pinta Image Editor"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:45
+#: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
 msgstr "موقع البرنامج"
 
@@ -1680,7 +1680,7 @@ msgstr ""
 msgid "Pinta supports the following file formats:"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:195
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:168
 msgid "Pinta supports the following palette formats:"
 msgstr ""
 
@@ -1688,7 +1688,7 @@ msgstr ""
 msgid "Pixelate"
 msgstr "بكسلة"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:220
 msgid "Pixels"
 msgstr "بكسلات"
 
@@ -1748,7 +1748,7 @@ msgstr ""
 msgid "Primary"
 msgstr "Primary"
 
-#: ../Pinta.Core/Actions/FileActions.cs:57
+#: ../Pinta.Core/Actions/FileActions.cs:94
 msgid "Print"
 msgstr "اطبع"
 
@@ -1765,7 +1765,7 @@ msgstr "الجودة"
 msgid "Quality: "
 msgstr "الجودة: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:41
+#: ../Pinta.Core/Actions/AppActions.cs:47
 msgid "Quit"
 msgstr "أنهِ"
 
@@ -1837,7 +1837,7 @@ msgstr "تحديد مستطيل"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:681
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:654
 msgid "Red"
 msgstr "أحمر"
 
@@ -1849,7 +1849,7 @@ msgstr "أحمر  "
 msgid "Red Eye Removal"
 msgstr "إزالة احمرار العين"
 
-#: ../Pinta.Core/Actions/EditActions.cs:69
+#: ../Pinta.Core/Actions/EditActions.cs:77
 msgid "Redo"
 msgstr "كَرِّر"
 
@@ -1865,7 +1865,7 @@ msgstr "انعكاس"
 msgid "Refresh"
 msgstr "حدّث"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:90
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:92
 msgid "Released under the MIT X11 License."
 msgstr ""
 
@@ -1884,7 +1884,7 @@ msgstr "غيّر اسم الطبقة"
 msgid "Render"
 msgstr "صيّر"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:186
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
 msgstr "تأثير التّصيير"
 
@@ -1909,11 +1909,11 @@ msgstr ""
 msgid "Reset"
 msgstr "أعد الضبط"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:392
 msgid "Reset Color"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:85
+#: ../Pinta.Core/Actions/EditActions.cs:181
 msgid "Reset to Default"
 msgstr "أعد إلى الحالة المبدئيّة"
 
@@ -1922,7 +1922,7 @@ msgstr "أعد إلى الحالة المبدئيّة"
 msgid "Resize Canvas"
 msgstr "تغيير مقاس مساحة الرسم"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:57
+#: ../Pinta.Core/Actions/ImageActions.cs:77
 msgid "Resize Canvas..."
 msgstr "غيّر مقاس مساحة الرسم..."
 
@@ -1931,7 +1931,7 @@ msgstr "غيّر مقاس مساحة الرسم..."
 msgid "Resize Image"
 msgstr "تغيير مقاس الصورة"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:56
+#: ../Pinta.Core/Actions/ImageActions.cs:70
 msgid "Resize Image..."
 msgstr "غيّر مقاس الصورة..."
 
@@ -1950,7 +1950,7 @@ msgstr ""
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:240
+#: ../Pinta.Tools/Tools/TextTool.cs:252
 msgid "Right Align"
 msgstr "محاذاة لليمين"
 
@@ -1959,21 +1959,21 @@ msgstr "محاذاة لليمين"
 msgid "Rotate / Zoom Layer"
 msgstr "تدوير/تكبير الطبقة"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:66
+#: ../Pinta.Core/Actions/LayerActions.cs:107
 msgid "Rotate / Zoom Layer..."
 msgstr "تدوير/تكبير الطبقة..."
 
-#: ../Pinta.Core/Actions/ImageActions.cs:62
+#: ../Pinta.Core/Actions/ImageActions.cs:110
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:47
 msgid "Rotate 180°"
 msgstr "دوّر 180 درجة"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:60
+#: ../Pinta.Core/Actions/ImageActions.cs:96
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:59
 msgid "Rotate 90° Clockwise"
 msgstr "دوّر 90 درجة باتّجاه عقارب السّاعة"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:61
+#: ../Pinta.Core/Actions/ImageActions.cs:103
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:63
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "دوّر 90 درجة باتّجاه عكس عقارب السّاعة"
@@ -1995,11 +1995,11 @@ msgstr ""
 msgid "Rounded Rectangle"
 msgstr "مستطيل مستدير الزوايا"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:148
+#: ../Pinta.Core/Actions/ViewActions.cs:225
 msgid "Ruler Units"
 msgstr "وحدات المسطرة"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:80
+#: ../Pinta.Core/Actions/ViewActions.cs:141
 msgid "Rulers"
 msgstr "المساطر"
 
@@ -2007,11 +2007,11 @@ msgstr "المساطر"
 msgid "Sampling"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:608
 msgid "Sat"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:568
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:502
 msgid "Sat & Value"
 msgstr ""
 
@@ -2024,18 +2024,18 @@ msgstr "التشبّع"
 msgid "Saturation Percentage"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:410
-#: ../Pinta.Core/Actions/FileActions.cs:55
+#: ../Pinta.Core/Actions/EditActions.cs:514
+#: ../Pinta.Core/Actions/FileActions.cs:80
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
 msgstr "احفظ"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:45
+#: ../Pinta.Core/Actions/WindowActions.cs:47
 msgid "Save All"
 msgstr "احفظ الكلّ"
 
-#: ../Pinta.Core/Actions/EditActions.cs:84
-#: ../Pinta.Core/Actions/FileActions.cs:56
+#: ../Pinta.Core/Actions/EditActions.cs:175
+#: ../Pinta.Core/Actions/FileActions.cs:87
 msgid "Save As..."
 msgstr "احفظ كـ..."
 
@@ -2043,7 +2043,7 @@ msgstr "احفظ كـ..."
 msgid "Save Image File"
 msgstr "حفظ ملف صورة"
 
-#: ../Pinta.Core/Actions/EditActions.cs:407
+#: ../Pinta.Core/Actions/EditActions.cs:511
 msgid "Save Palette File"
 msgstr "احفظ ملفّ لوحة الألوان"
 
@@ -2064,8 +2064,8 @@ msgstr "شاشة"
 msgid "Secondary"
 msgstr "Secondary"
 
-#: ../Pinta.Core/Actions/EditActions.cs:80
-#: ../Pinta.Core/Actions/EditActions.cs:232
+#: ../Pinta.Core/Actions/EditActions.cs:155
+#: ../Pinta.Core/Actions/EditActions.cs:336
 msgid "Select All"
 msgstr "حدّد الكلّ"
 
@@ -2077,7 +2077,7 @@ msgstr ""
 msgid "Sepia"
 msgstr "تأثير اللّون البنّي الدّاكن"
 
-#: ../Pinta.Core/Actions/EditActions.cs:86
+#: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Set Number of Colors"
 msgstr "عيّن عدد الألوان"
 
@@ -2093,13 +2093,18 @@ msgstr ""
 msgid "Sharpen"
 msgstr "اصقل"
 
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:487
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:434
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
 msgid "Shortcut key"
 msgstr "مفتاح الاختصار"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
+msgid "Shortcut keys"
+msgstr ""
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:19
 msgid "Show Grid"
 msgstr ""
 
@@ -2107,11 +2112,11 @@ msgstr ""
 msgid "Show Layer"
 msgstr "إظهار الطبقة"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:550
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:483
 msgid "Show Value"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:159
+#: ../Pinta.Core/Actions/ViewActions.cs:236
 msgid "Show/Hide"
 msgstr ""
 
@@ -2157,7 +2162,7 @@ msgstr "بخاخ"
 msgid "Squares"
 msgstr "مربعات"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:78
+#: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr ""
 
@@ -2194,12 +2199,12 @@ msgstr "نصّ"
 msgid "Text - Finalize"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:254
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Text Style"
 msgstr "نمط النص"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:297
+#: ../Pinta/MainWindow.cs:303
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
@@ -2298,15 +2303,15 @@ msgstr "السماحية"
 msgid "Tool"
 msgstr "الأداة"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:135
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:76
+#: ../Pinta.Core/Actions/ViewActions.cs:117
 msgid "Tool Windows"
 msgstr "نوافذ الأدوات"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:74
+#: ../Pinta.Core/Actions/ViewActions.cs:105
 msgid "Toolbar"
 msgstr "شريط الأدوات"
 
@@ -2326,7 +2331,7 @@ msgstr ""
 msgid "Transfer Map"
 msgstr "نقل الخريطة"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:47
+#: ../Pinta.Core/Actions/HelpActions.cs:65
 msgid "Translate This Application"
 msgstr "ترجم هذا التّطبيق"
 
@@ -2357,11 +2362,11 @@ msgstr ""
 msgid "Type"
 msgstr "النوع"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:200
+#: ../Pinta.Tools/Tools/TextTool.cs:212
 msgid "Underline"
 msgstr "خط سُفليّ"
 
-#: ../Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Undo"
 msgstr "تراجع"
 
@@ -2393,7 +2398,7 @@ msgstr "صورة لم تُحفَظ {0}"
 msgid "Unsupported file format"
 msgstr "نوع ملفات غير مدعوم"
 
-#: ../Pinta.Core/Classes/Palette.cs:155
+#: ../Pinta.Core/Classes/Palette.cs:154
 msgid "Unsupported palette format"
 msgstr ""
 
@@ -2413,11 +2418,11 @@ msgstr ""
 "استخدم جودة منخفضة للمُصغّرات، والصور الصغيرة، والزوايا الصغيرة. واستخدام جودة "
 "مرتفعة للجودة النهائية، والصور الكبيرة، والزوايا الكبيرة."
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:97
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:99
 msgid "Using some icons from:"
 msgstr "إستخدام بعض الأيقونات من:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:670
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:631
 msgid "Value"
 msgstr ""
 
@@ -2462,15 +2467,15 @@ msgstr ""
 msgid "White"
 msgstr "White"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:41
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:83
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:163
 msgid "Width:"
 msgstr "العرض:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:123
-#: ../Pinta.Core/Actions/ViewActions.cs:306
+#: ../Pinta.Core/Actions/ViewActions.cs:200
+#: ../Pinta.Core/Actions/ViewActions.cs:389
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:377
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:386
 msgid "Window"
@@ -2514,24 +2519,24 @@ msgstr "تكبير/تصغير"
 msgid "Zoom Blur"
 msgstr "غشاوة تقريبيّة"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:69
+#: ../Pinta.Core/Actions/ViewActions.cs:71
 msgid "Zoom In"
 msgstr "كبّر"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:70
+#: ../Pinta.Core/Actions/ViewActions.cs:78
 msgid "Zoom Out"
 msgstr "صغّر"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:92
 msgid "Zoom to Selection"
 msgstr "عدّل الحجم ليناسب التحديد"
 
-#: ../Pinta/MainWindow.cs:379
+#: ../Pinta/MainWindow.cs:387
 msgid "_Adjustments"
 msgstr "ت_عديلات"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:189
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:191
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
@@ -2543,28 +2548,28 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:362
+#: ../Pinta/MainWindow.cs:370
 msgid "_Edit"
 msgstr "ت_حرير"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:366
 msgid "_File"
 msgstr "_ملف"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:403
 msgid "_Help"
 msgstr "م_ساعدة"
 
-#: ../Pinta/MainWindow.cs:371
+#: ../Pinta/MainWindow.cs:379
 msgid "_Image"
 msgstr "الصورة"
 
-#: ../Pinta/MainWindow.cs:375
+#: ../Pinta/MainWindow.cs:383
 msgid "_Layers"
 msgstr "ال_طبقات"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:188
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:192
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
@@ -2574,15 +2579,15 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:374
 msgid "_View"
 msgstr "_عرض"
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:399
 msgid "_Window"
 msgstr "_نافذة"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:81
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:83
 msgid "by Pinta contributors"
 msgstr "بواسطة مساهمين بينتا"
 
@@ -2590,8 +2595,8 @@ msgstr "بواسطة مساهمين بينتا"
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
 #: ../Pinta/Dialogs/NewImageDialog.cs:277
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:106
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
@@ -2628,7 +2633,7 @@ msgstr ""
 msgid "{0} copy"
 msgstr ""
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:118
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:123
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} صورة ({1})"
@@ -2641,7 +2646,7 @@ msgstr ""
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:287
+#: ../Pinta.Core/Actions/ViewActions.cs:370
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

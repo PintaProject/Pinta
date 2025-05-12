@@ -67,15 +67,11 @@ public sealed class DockNotebook : Box
 		Append (tab_view);
 
 		// Emit an event when the current tab is changed.
-		// This requires listening to the selected-page property change.
-		tab_view.OnNotify += (o, e) => {
-			if (e.Pspec.GetName () != "selected-page")
-				return;
-
-			var page = tab_view.SelectedPage;
+		Adw.TabView.SelectedPagePropertyDefinition.Notify (tab_view, (_, _) => {
+			Adw.TabPage? page = tab_view.SelectedPage;
 			IDockNotebookItem? item = FindItemForPage (page);
 			ActiveTabChanged?.Invoke (this, new TabEventArgs (item));
-		};
+		});
 
 		// Prompt the user to save unsaved changes before closing.
 		tab_view.OnClosePage += (o, e) => {

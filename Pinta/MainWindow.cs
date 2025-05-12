@@ -179,7 +179,12 @@ internal sealed class MainWindow
 		var notebook = canvas_pad.Notebook;
 		int selected_index = notebook.ActiveItemIndex;
 
-		CanvasWindow canvas = new (PintaCore.Workspace, doc, PintaCore.CanvasGrid) {
+		CanvasWindow canvas = new (
+			PintaCore.Actions,
+			PintaCore.Chrome,
+			PintaCore.Tools,
+			PintaCore.Workspace,
+			doc, PintaCore.CanvasGrid) {
 			RulersVisible = PintaCore.Actions.View.Rulers.Value,
 			RulerMetric = GetCurrentRulerMetric ()
 		};
@@ -463,10 +468,14 @@ internal sealed class MainWindow
 	{
 		Gtk.Box statusbar = window_shell.CreateStatusBar ("statusbar");
 
-		statusbar.Append (new StatusBarColorPaletteWidget () {
-			Hexpand = true,
-			Halign = Gtk.Align.Fill,
-		});
+		statusbar.Append (
+			new StatusBarColorPaletteWidget (
+				PintaCore.Chrome,
+				PintaCore.Palette) {
+				Hexpand = true,
+				Halign = Gtk.Align.Fill,
+			}
+		);
 
 		PintaCore.Actions.CreateStatusBar (statusbar, PintaCore.Workspace);
 

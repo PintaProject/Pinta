@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Immutable;
 using System.Globalization;
 
 namespace Pinta.Core;
@@ -49,7 +49,7 @@ public sealed class ViewActions
 	public Command Fullscreen { get; }
 
 	public ToolBarComboBox ZoomComboBox { get; }
-	public ReadOnlyCollection<string> ZoomCollection { get; }
+	public ImmutableArray<string> ZoomCollection { get; }
 
 	private string old_zoom_text = "";
 	private bool zoom_to_window_activated = false;
@@ -66,21 +66,98 @@ public sealed class ViewActions
 	private readonly WorkspaceManager workspace;
 	public ViewActions (ChromeManager chrome, WorkspaceManager workspace)
 	{
-		ZoomIn = new Command ("ZoomIn", Translations.GetString ("Zoom In"), null, Resources.StandardIcons.ValueIncrease);
-		ZoomOut = new Command ("ZoomOut", Translations.GetString ("Zoom Out"), null, Resources.StandardIcons.ValueDecrease);
-		ZoomToWindow = new Command ("ZoomToWindow", Translations.GetString ("Best Fit"), null, Resources.StandardIcons.ZoomFitBest);
-		ZoomToSelection = new Command ("ZoomToSelection", Translations.GetString ("Zoom to Selection"), null, Resources.Icons.ViewZoomSelection);
-		ActualSize = new Command ("ActualSize", Translations.GetString ("Normal Size"), null, Resources.StandardIcons.ZoomOriginal);
-		ToolBar = new ToggleCommand ("Toolbar", Translations.GetString ("Toolbar"), null, null);
-		ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
-		ToolWindows = new ToggleCommand ("ToolWindows", Translations.GetString ("Tool Windows"), null, null);
-		EditCanvasGrid = new Command ("EditCanvasGrid", Translations.GetString ("Canvas Grid..."), null, Resources.Icons.ViewGrid);
-		StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
-		ToolBox = new ToggleCommand ("ToolBox", Translations.GetString ("Tool Box"), null, null);
-		Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
-		RulerMetric = Gio.SimpleAction.NewStateful ("rulermetric", GtkExtensions.IntVariantType, GLib.Variant.NewInt32 (0));
-		ColorScheme = Gio.SimpleAction.NewStateful ("colorscheme", GtkExtensions.IntVariantType, GLib.Variant.NewInt32 (0));
-		Fullscreen = new Command ("Fullscreen", Translations.GetString ("Fullscreen"), null, Resources.StandardIcons.DocumentNew);
+		ZoomIn = new Command (
+			"ZoomIn",
+			Translations.GetString ("Zoom In"),
+			null,
+			Resources.StandardIcons.ValueIncrease,
+			shortcuts: ["<Primary>plus", "<Primary>equal", "equal", "<Primary>KP_Add", "KP_Add"]);
+
+		ZoomOut = new Command (
+			"ZoomOut",
+			Translations.GetString ("Zoom Out"),
+			null,
+			Resources.StandardIcons.ValueDecrease,
+			shortcuts: ["<Primary>minus", "<Primary>underscore", "minus", "<Primary>KP_Subtract", "KP_Subtract"]);
+
+		ZoomToWindow = new Command (
+			"ZoomToWindow",
+			Translations.GetString ("Best Fit"),
+			null,
+			Resources.StandardIcons.ZoomFitBest,
+			shortcuts: ["<Primary>B"]);
+
+		ZoomToSelection = new Command (
+			"ZoomToSelection",
+			Translations.GetString ("Zoom to Selection"),
+			null,
+			Resources.Icons.ViewZoomSelection);
+
+		ActualSize = new Command (
+			"ActualSize",
+			Translations.GetString ("Normal Size"),
+			null,
+			Resources.StandardIcons.ZoomOriginal,
+			shortcuts: ["<Primary>0", "<Primary><Shift>A"]);
+
+		ToolBar = new ToggleCommand (
+			"Toolbar",
+			Translations.GetString ("Toolbar"),
+			null,
+			null);
+
+		ImageTabs = new ToggleCommand (
+			"ImageTabs",
+			Translations.GetString ("Image Tabs"),
+			null,
+			null);
+
+		ToolWindows = new ToggleCommand (
+			"ToolWindows",
+			Translations.GetString ("Tool Windows"),
+			null,
+			null);
+
+		EditCanvasGrid = new Command (
+			"EditCanvasGrid",
+			Translations.GetString ("Canvas Grid..."),
+			null,
+			Resources.Icons.ViewGrid);
+
+		StatusBar = new ToggleCommand (
+			"Statusbar",
+			Translations.GetString ("Status Bar"),
+			null,
+			null);
+
+		ToolBox = new ToggleCommand (
+			"ToolBox",
+			Translations.GetString ("Tool Box"),
+			null,
+			null);
+
+		Rulers = new ToggleCommand (
+			"Rulers",
+			Translations.GetString ("Rulers"),
+			null,
+			Resources.Icons.ViewRulers);
+
+		RulerMetric = Gio.SimpleAction.NewStateful ( // TODO: Make `Command`
+			"rulermetric",
+			GtkExtensions.IntVariantType,
+			GLib.Variant.NewInt32 (0));
+
+		ColorScheme = Gio.SimpleAction.NewStateful ( // TODO: Make `Command`
+			"colorscheme",
+			GtkExtensions.IntVariantType,
+			GLib.Variant.NewInt32 (0));
+
+		Fullscreen = new Command (
+			"Fullscreen",
+			Translations.GetString ("Fullscreen"),
+			null,
+			Resources.StandardIcons.DocumentNew,
+			shortcuts: ["F11"]);
 
 		ZoomCollection = default_zoom_levels;
 		ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex (), true, ZoomCollection);
@@ -96,7 +173,7 @@ public sealed class ViewActions
 		this.workspace = workspace;
 	}
 
-	private static readonly ReadOnlyCollection<string> default_zoom_levels = new[] {
+	private static readonly ImmutableArray<string> default_zoom_levels = [
 		ToPercent (36),
 		ToPercent (24),
 		ToPercent (16),
@@ -121,7 +198,7 @@ public sealed class ViewActions
 		ToPercent (0.08),
 		ToPercent (0.05),
 		Translations.GetString ("Window")
-	}.ToReadOnlyCollection ();
+	];
 
 	#region Initialization
 
@@ -169,26 +246,32 @@ public sealed class ViewActions
 		Gio.Menu color_scheme_section = Gio.Menu.New ();
 		color_scheme_section.AppendSubmenu (Translations.GetString ("Color Scheme"), color_scheme_menu);
 
-		app.AddAccelAction (ZoomIn, ["<Primary>plus", "<Primary>equal", "equal", "<Primary>KP_Add", "KP_Add"]);
-		app.AddAccelAction (ZoomOut, ["<Primary>minus", "<Primary>underscore", "minus", "<Primary>KP_Subtract", "KP_Subtract"]);
-		app.AddAccelAction (ActualSize, ["<Primary>0", "<Primary><Shift>A"]);
-		app.AddAccelAction (ZoomToWindow, "<Primary>B");
-		app.AddAccelAction (Fullscreen, "F11");
-		app.AddAction (EditCanvasGrid);
-		app.AddAction (RulerMetric);
-		app.AddAction (Rulers);
-		if (mainToolbarPresent) app.AddAction (ToolBar);
-		app.AddAction (StatusBar);
-		app.AddAction (ToolBox);
-		app.AddAction (ImageTabs);
-		app.AddAction (ToolWindows);
-		app.AddAction (ColorScheme);
-
 		menu.AppendSection (null, zoom_section);
 		menu.AppendSection (null, grid_section);
 		menu.AppendSection (null, metric_section);
 		menu.AppendSection (null, show_hide_section);
 		menu.AppendSection (null, color_scheme_section);
+
+		app.AddCommands ([
+			ZoomIn,
+			ZoomOut,
+			ActualSize,
+			ZoomToWindow,
+			Fullscreen,
+			EditCanvasGrid,
+			Rulers,
+			StatusBar,
+			ToolBox,
+			ImageTabs,
+			ToolWindows,
+		]);
+
+		// TODO: Make `Command`s
+		app.AddAction (RulerMetric);
+		app.AddAction (ColorScheme);
+
+		if (mainToolbarPresent)
+			app.AddCommand (ToolBar);
 	}
 
 	public void CreateStatusBar (Gtk.Box statusbar)

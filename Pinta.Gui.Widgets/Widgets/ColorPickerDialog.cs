@@ -247,8 +247,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 {
 	private readonly Gtk.Box top_box;
 	private readonly Gtk.Box swatch_box;
-
 	private readonly Gtk.Box color_display_box;
+
+	private readonly Gtk.DrawingArea swatch_recent;
+	private readonly Gtk.DrawingArea swatch_palette;
 
 	// palette
 	private int palette_display_size = 50;
@@ -277,23 +279,25 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	// hex + sliders
 	private readonly Gtk.Entry hex_entry;
-
+	private readonly PaletteManager palette;
 	private const int CPS_PADDING_HEIGHT = 10;
 	private const int CPS_PADDING_WIDTH = 14;
-	private int cps_width = 200;
+	private int slider_width = 200;
 	private readonly Gtk.Box sliders_box;
-	private readonly ColorPickerSlider hue_cps;
-	private readonly ColorPickerSlider sat_cps;
-	private readonly ColorPickerSlider val_cps;
+	private readonly ColorPickerSlider hue_slider;
+	private readonly ColorPickerSlider saturation_slider;
+	private readonly ColorPickerSlider value_slider;
 
-	private readonly ColorPickerSlider r_cps;
-	private readonly ColorPickerSlider g_cps;
-	private readonly ColorPickerSlider b_cps;
+	private readonly ColorPickerSlider red_slider;
+	private readonly ColorPickerSlider green_slider;
+	private readonly ColorPickerSlider blue_slider;
 
-	private readonly ColorPickerSlider a_cps;
+	private readonly ColorPickerSlider alpha_slider;
 
 	// common state
 	private int color_index = 0;
+
+	private readonly ImmutableArray<Color> original_colors;
 	public Color[] Colors { get; private set; }
 
 	private Color CurrentColor {
@@ -317,14 +321,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			margins = 6;
 			palette_display_size = 40;
 			picker_surface_radius = 75;
-			cps_width = 150;
+			slider_width = 150;
 			swatch_box.Visible = false;
 		} else {
 			spacing = 6;
 			margins = 12;
 			palette_display_size = 50;
 			picker_surface_radius = 100;
-			cps_width = 200;
+			slider_width = 200;
 			if (show_swatches)
 				swatch_box.Visible = true;
 		}
@@ -349,13 +353,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		else
 			picker_surface_selector_box.SetOrientation (Gtk.Orientation.Horizontal);
 
-		hue_cps.SetSliderWidth (cps_width);
-		sat_cps.SetSliderWidth (cps_width);
-		val_cps.SetSliderWidth (cps_width);
-		r_cps.SetSliderWidth (cps_width);
-		g_cps.SetSliderWidth (cps_width);
-		b_cps.SetSliderWidth (cps_width);
-		a_cps.SetSliderWidth (cps_width);
+		hue_slider.SetSliderWidth (slider_width);
+		saturation_slider.SetSliderWidth (slider_width);
+		value_slider.SetSliderWidth (slider_width);
+
+		red_slider.SetSliderWidth (slider_width);
+		green_slider.SetSliderWidth (slider_width);
+		blue_slider.SetSliderWidth (slider_width);
+		alpha_slider.SetSliderWidth (slider_width);
 
 		sliders_box.Spacing = spacing;
 
@@ -384,57 +389,31 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		ImmutableArray<Color> originalColors = [.. adjustable];
 
-		Colors = [.. originalColors];
-		color_index = currentColorIndex;
-
-		// titlebar of color picker; mainly just contains the reset color button
-		#region Titlebar
-
 		Gtk.Button reset_button = new () { Label = Translations.GetString ("Reset Color") };
-		reset_button.OnClicked += (_, _) => {
-			Colors = [.. originalColors];
-			UpdateView ();
-		};
+		reset_button.OnClicked += OnResetButtonClicked;
 
 		Gtk.Button shrinkButton = new ();
+		shrinkButton.OnClicked += OnShrinkButtonClicked;
 		shrinkButton.SetIconName (
 			small_mode
 			? Resources.StandardIcons.WindowMaximize
 			: Resources.StandardIcons.WindowMinimize);
 
-		shrinkButton.OnClicked += (_, _) => {
-			var contentArea = this.GetContentAreaBox ();
-			//contentArea.RemoveAll ();
-			SetSmallMode (!small_mode);
-			shrinkButton.SetIconName (
-				small_mode
-				? Resources.StandardIcons.WindowMaximize
-				: Resources.StandardIcons.WindowMinimize);
-		};
-
-		Gtk.Button ok_button = new () { Label = Translations.GetString ("OK") };
-		ok_button.OnClicked += (_, _) => {
-			this.Response ((int) Gtk.ResponseType.Ok);
-			this.Close ();
-		};
-		ok_button.AddCssClass (AdwaitaStyles.SuggestedAction);
+		Gtk.Button okButton = new () { Label = Translations.GetString ("OK") };
+		okButton.OnClicked += OnOkButtonClicked;
+		okButton.AddCssClass (AdwaitaStyles.SuggestedAction);
 
 		Gtk.Button cancelButton = new () { Label = Translations.GetString ("Cancel") };
-		cancelButton.OnClicked += (_, _) => {
-			this.Response ((int) Gtk.ResponseType.Ok); // TODO: Is this the right response?
-			this.Close ();
-		};
+		cancelButton.OnClicked += OnCancelButtonClicked;
 
 		Gtk.HeaderBar titleBar = new ();
 		titleBar.PackStart (reset_button);
 		titleBar.PackStart (shrinkButton);
-		titleBar.PackEnd (ok_button);
+		titleBar.PackEnd (okButton);
 		titleBar.PackEnd (cancelButton);
 		titleBar.SetShowTitleButtons (false);
 
 		this.SetTitlebar (titleBar);
-
-		#endregion
 
 		// Active palette contains the primary/secondary colors on the left of the color picker
 		#region Color Display
@@ -443,6 +422,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		colorDisplayBox.SetOrientation (Gtk.Orientation.Vertical);
 
 		Gtk.ListBox colorDisplayList = new ();
+
+		original_colors = originalColors;
+		Colors = [.. originalColors];
+		color_index = currentColorIndex;
 
 		if (Colors.Length > 1) {
 
@@ -574,17 +557,19 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		// Handles the ColorPickerSliders + Hex entry.
 
-		#region SliderAndHex
+		Gtk.Entry hexEntry = new () {
+			Text_ = CurrentColor.ToHex (),
+			MaxWidthChars = 10,
+		};
+		hexEntry.OnChanged (HexEntry_OnChanged);
 
-		Gtk.Entry hexEntry = new Gtk.Entry { Text_ = CurrentColor.ToHex (), MaxWidthChars = 10 };
-		hexEntry.OnChanged ((o, e) => {
-			if ((GetFocus ()?.Parent) != hexEntry) return;
-			CurrentColor = Color.FromHex (hexEntry.GetText ()) ?? CurrentColor;
-			UpdateView ();
-		});
+		Gtk.Label hexLabel = new () {
+			Label_ = Translations.GetString ("Hex"),
+			WidthRequest = 50,
+		};
 
 		Gtk.Box hexBox = new () { Spacing = spacing };
-		hexBox.Append (new Gtk.Label { Label_ = Translations.GetString ("Hex"), WidthRequest = 50 });
+		hexBox.Append (hexLabel);
 		hexBox.Append (hexEntry);
 
 		ColorPickerSlider.Settings cpsArgs = new () {
@@ -592,12 +577,18 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			TopWindow = this,
 			SliderPaddingHeight = CPS_PADDING_HEIGHT,
 			SliderPaddingWidth = CPS_PADDING_WIDTH,
-			SliderWidth = cps_width,
+			SliderWidth = slider_width,
 			MaxWidthChars = 3,
 		};
 
-		hue_cps = new ColorPickerSlider (cpsArgs with { Max = 360, Text = Translations.GetString ("Hue"), InitialValue = CurrentColor.ToHsv ().Hue, });
-		hue_cps.Gradient.SetDrawFunc ((_, c, w, h) => hue_cps.DrawGradient (c, w, h, [
+		ColorPickerSlider hueSlider = new (
+			settings: cpsArgs with {
+				Max = 360,
+				Text = Translations.GetString ("Hue"),
+				InitialValue = CurrentColor.ToHsv ().Hue,
+			}
+		);
+		hueSlider.Gradient.SetDrawFunc ((_, c, w, h) => hueSlider.DrawGradient (c, w, h, [
 			CurrentColor.CopyHsv (hue: 0),
 			CurrentColor.CopyHsv (hue: 60),
 			CurrentColor.CopyHsv (hue: 120),
@@ -606,73 +597,161 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			CurrentColor.CopyHsv (hue: 300),
 			CurrentColor.CopyHsv (hue: 360)
 		]));
-		hue_cps.OnValueChange += (sender, args) => {
+		hueSlider.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor.CopyHsv (hue: args.Value);
 			UpdateView ();
 		};
 
-		sat_cps = new ColorPickerSlider (cpsArgs with { Max = 100, Text = Translations.GetString ("Sat"), InitialValue = CurrentColor.ToHsv ().Sat * 100.0, });
-		sat_cps.Gradient.SetDrawFunc ((_, c, w, h) => sat_cps.DrawGradient (c, w, h, [
-			CurrentColor.CopyHsv (sat: 0), CurrentColor.CopyHsv (sat: 1) ]));
-		sat_cps.OnValueChange += (sender, args) => {
+		ColorPickerSlider saturationSlider = new (
+			settings: cpsArgs with {
+				Max = 100,
+				Text = Translations.GetString ("Sat"),
+				InitialValue = CurrentColor.ToHsv ().Sat * 100.0,
+			}
+		);
+		saturationSlider.Gradient.SetDrawFunc (
+			(_, c, w, h) => saturationSlider.DrawGradient (
+				c,
+				w,
+				h,
+				[
+					CurrentColor.CopyHsv (sat: 0),
+					CurrentColor.CopyHsv (sat: 1),
+				]
+			)
+		);
+		saturationSlider.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor.CopyHsv (sat: args.Value / 100.0);
 			UpdateView ();
 		};
 
-		val_cps = new ColorPickerSlider (cpsArgs with { Max = 100, Text = Translations.GetString ("Value"), InitialValue = CurrentColor.ToHsv ().Val * 100.0 });
-		val_cps.Gradient.SetDrawFunc ((_, c, w, h) => val_cps.DrawGradient (c, w, h, [
-			CurrentColor.CopyHsv (value: 0), CurrentColor.CopyHsv (value: 1) ]));
-		val_cps.OnValueChange += (sender, args) => {
+		ColorPickerSlider valueSlider = new (
+			settings: cpsArgs with {
+				Max = 100,
+				Text = Translations.GetString ("Value"),
+				InitialValue = CurrentColor.ToHsv ().Val * 100.0,
+			}
+		);
+		valueSlider.Gradient.SetDrawFunc (
+			(_, c, w, h) => valueSlider.DrawGradient (
+				c,
+				w,
+				h,
+				[
+					CurrentColor.CopyHsv (value: 0),
+					CurrentColor.CopyHsv (value: 1),
+				]
+			)
+		);
+		valueSlider.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor.CopyHsv (value: args.Value / 100.0);
 			UpdateView ();
 		};
 
-		r_cps = new ColorPickerSlider (cpsArgs with { Max = 255, Text = Translations.GetString ("Red"), InitialValue = CurrentColor.R * 255.0, });
-		r_cps.Gradient.SetDrawFunc ((_, c, w, h) => r_cps.DrawGradient (c, w, h, [
-			CurrentColor with { R = 0 }, CurrentColor with { R = 1 } ]));
-		r_cps.OnValueChange += (sender, args) => {
+		ColorPickerSlider redSlider = new (
+			settings: cpsArgs with {
+				Max = 255,
+				Text = Translations.GetString ("Red"),
+				InitialValue = CurrentColor.R * 255.0,
+			}
+		);
+		redSlider.Gradient.SetDrawFunc (
+			(_, c, w, h) => redSlider.DrawGradient (
+				c,
+				w,
+				h,
+				[
+					CurrentColor with { R = 0 },
+					CurrentColor with { R = 1 },
+				]
+			)
+		);
+		redSlider.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor with { R = args.Value / 255.0 };
 			UpdateView ();
 		};
 
-		g_cps = new ColorPickerSlider (cpsArgs with { Max = 255, Text = Translations.GetString ("Green"), InitialValue = CurrentColor.G * 255.0, });
-		g_cps.Gradient.SetDrawFunc ((_, c, w, h) => g_cps.DrawGradient (c, w, h, [
-			CurrentColor with { G = 0 }, CurrentColor with { G = 1 } ]));
-		g_cps.OnValueChange += (sender, args) => {
+		ColorPickerSlider greenSlider = new (
+			settings: cpsArgs with {
+				Max = 255,
+				Text = Translations.GetString ("Green"),
+				InitialValue = CurrentColor.G * 255.0,
+			}
+		);
+		greenSlider.Gradient.SetDrawFunc (
+			(_, c, w, h) => greenSlider.DrawGradient (
+				c,
+				w,
+				h,
+				[
+					CurrentColor with { G = 0 },
+					CurrentColor with { G = 1 },
+				]
+			)
+		);
+		greenSlider.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor with { G = args.Value / 255.0 };
 			UpdateView ();
 		};
 
-		b_cps = new ColorPickerSlider (cpsArgs with { Max = 255, Text = Translations.GetString ("Blue"), InitialValue = CurrentColor.B * 255.0 });
-		b_cps.Gradient.SetDrawFunc ((_, c, w, h) => b_cps.DrawGradient (c, w, h, [
-			CurrentColor with { B = 0 }, CurrentColor with { B = 1 } ]));
-		b_cps.OnValueChange += (sender, args) => {
+		ColorPickerSlider blueSlider = new (
+			settings: cpsArgs with {
+				Max = 255,
+				Text = Translations.GetString ("Blue"),
+				InitialValue = CurrentColor.B * 255.0,
+			}
+		);
+		blueSlider.Gradient.SetDrawFunc (
+			(_, c, w, h) => blueSlider.DrawGradient (
+				c,
+				w,
+				h,
+				[
+					CurrentColor with { B = 0 },
+					CurrentColor with { B = 1 },
+				]
+			)
+		);
+		blueSlider.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor with { B = args.Value / 255.0 };
 			UpdateView ();
 		};
 
-		a_cps = new ColorPickerSlider (cpsArgs with { Max = 255, Text = Translations.GetString ("Alpha"), InitialValue = CurrentColor.A * 255.0 });
-		a_cps.Gradient.SetDrawFunc ((_, c, w, h) => a_cps.DrawGradient (c, w, h, [
-			CurrentColor with { A = 0 }, CurrentColor with { A = 1 } ]));
-		a_cps.OnValueChange += (sender, args) => {
+		ColorPickerSlider alphaSlider = new (
+			settings: cpsArgs with {
+				Max = 255,
+				Text = Translations.GetString ("Alpha"),
+				InitialValue = CurrentColor.A * 255.0,
+			}
+		);
+		alphaSlider.Gradient.SetDrawFunc (
+			(_, c, w, h) => alphaSlider.DrawGradient (
+				c,
+				w,
+				h,
+				[
+					CurrentColor with { A = 0 },
+					CurrentColor with { A = 1 },
+				]
+			)
+		);
+		alphaSlider.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor with { A = args.Value / 255.0 };
 			UpdateView ();
 		};
 
-		Gtk.Box slidersBox = new Gtk.Box { Spacing = spacing };
+		Gtk.Box slidersBox = new () { Spacing = spacing };
 		slidersBox.SetOrientation (Gtk.Orientation.Vertical);
 		slidersBox.Append (hexBox);
-		slidersBox.Append (hue_cps);
-		slidersBox.Append (sat_cps);
-		slidersBox.Append (val_cps);
+		slidersBox.Append (hueSlider);
+		slidersBox.Append (saturationSlider);
+		slidersBox.Append (valueSlider);
 		slidersBox.Append (new Gtk.Separator ());
-		slidersBox.Append (r_cps);
-		slidersBox.Append (g_cps);
-		slidersBox.Append (b_cps);
+		slidersBox.Append (redSlider);
+		slidersBox.Append (greenSlider);
+		slidersBox.Append (blueSlider);
 		slidersBox.Append (new Gtk.Separator ());
-		slidersBox.Append (a_cps);
-
-		#endregion
+		slidersBox.Append (alphaSlider);
 
 		#region Swatch
 
@@ -681,39 +760,39 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		Gtk.DrawingArea swatchRecent = new () {
 			WidthRequest = 500,
-			HeightRequest = StatusBarColorPaletteWidget.SWATCH_SIZE * StatusBarColorPaletteWidget.PALETTE_ROWS,
+			HeightRequest = PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS,
 		};
 		swatchRecent.SetDrawFunc ((area, g, width, height) => {
 
 			var recent = palette.RecentlyUsedColors;
-			int recent_cols = palette.MaxRecentlyUsedColor / StatusBarColorPaletteWidget.PALETTE_ROWS;
+			int recent_cols = palette.MaxRecentlyUsedColor / PaletteWidget.PALETTE_ROWS;
 
 			RectangleD recent_palette_rect = new (
 				0,
 				0,
-				StatusBarColorPaletteWidget.SWATCH_SIZE * recent_cols,
-				StatusBarColorPaletteWidget.SWATCH_SIZE * StatusBarColorPaletteWidget.PALETTE_ROWS);
+				PaletteWidget.SWATCH_SIZE * recent_cols,
+				PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
 
 			for (int i = 0; i < recent.Count; i++)
-				g.FillRectangle (StatusBarColorPaletteWidget.GetSwatchBounds (i, recent_palette_rect, true), recent.ElementAt (i));
+				g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true), recent.ElementAt (i));
 		});
 
 		Gtk.DrawingArea swatchPalette = new () {
 			WidthRequest = 500,
-			HeightRequest = StatusBarColorPaletteWidget.SWATCH_SIZE * StatusBarColorPaletteWidget.PALETTE_ROWS,
+			HeightRequest = PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS,
 		};
 		swatchPalette.SetDrawFunc ((area, g, width, height) => {
 
 			RectangleD palette_rect = new (
 				0,
 				0,
-				width - StatusBarColorPaletteWidget.PALETTE_MARGIN,
-				StatusBarColorPaletteWidget.SWATCH_SIZE * StatusBarColorPaletteWidget.PALETTE_ROWS);
+				width - PaletteWidget.PALETTE_MARGIN,
+				PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
 
 			Palette currentPalette = palette.CurrentPalette;
 
 			for (int i = 0; i < currentPalette.Count; i++)
-				g.FillRectangle (StatusBarColorPaletteWidget.GetSwatchBounds (i, palette_rect), currentPalette[i]);
+				g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, palette_rect), currentPalette[i]);
 		});
 
 		Gtk.Box swatchBox = new () { Spacing = spacing };
@@ -724,73 +803,21 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		#endregion
 
-		#region Mouse Handler
-
 		Gtk.GestureClick click_gesture = Gtk.GestureClick.New ();
 		click_gesture.SetButton (0); // Listen for all mouse buttons.
-		click_gesture.OnPressed += (_, e) => {
+		click_gesture.OnPressed += ClickGesture_OnPressed;
+		click_gesture.OnReleased += ClickGesture_OnReleased;
 
-			PointD absPos = new (e.X, e.Y);
+		Gtk.EventControllerKey keyboard_gesture = Gtk.EventControllerKey.New ();
+		keyboard_gesture.OnKeyPressed += KeyboardGesture_OnKeyPressed;
 
-			if (pickerSurface.IsMouseInDrawingArea (this, absPos, out PointD rel1)) {
+		Gtk.EventControllerMotion motion_controller = Gtk.EventControllerMotion.New ();
+		motion_controller.OnMotion += MotionController_OnMotion;
 
-				mouse_on_picker_surface = true;
-				SetColorFromPickerSurface (new PointD (e.X, e.Y));
-
-				return;
-			}
-
-			if (swatchBox.Visible && swatchRecent.IsMouseInDrawingArea (this, absPos, out PointD rel2)) {
-
-				int recent_index = StatusBarColorPaletteWidget.GetSwatchAtLocation (rel2, new RectangleD (), true);
-
-				if (recent_index < 0)
-					return;
-
-				CurrentColor = palette.RecentlyUsedColors.ElementAt (recent_index);
-
-				UpdateView ();
-
-				return;
-
-			}
-
-			if (swatchBox.Visible && swatchPalette.IsMouseInDrawingArea (this, absPos, out PointD rel3)) {
-
-				int index = StatusBarColorPaletteWidget.GetSwatchAtLocation (rel3, new RectangleD ());
-
-				if (index < 0)
-					return;
-
-				CurrentColor = palette.CurrentPalette[index];
-				UpdateView ();
-			}
-		};
-
-		click_gesture.OnReleased += (_, e) => {
-			mouse_on_picker_surface = false;
-		};
+		// Mouse and keyboard handlers
 		AddController (click_gesture);
-
-		var keyboard_gesture = Gtk.EventControllerKey.New ();
-		keyboard_gesture.OnKeyPressed += (_, e) => {
-			if (e.GetKey ().Value == Gdk.Constants.KEY_x)
-				CycleColors ();
-			return true;
-		};
 		AddController (keyboard_gesture);
-
-		var motion_controller = Gtk.EventControllerMotion.New ();
-		motion_controller.OnMotion += (_, args) => {
-			if (mouse_on_picker_surface)
-				SetColorFromPickerSurface (new PointD (args.X, args.Y));
-		};
 		AddController (motion_controller);
-
-		#endregion
-
-		Gtk.Box mainVbox = new () { Spacing = spacing };
-		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
 
 		// Top part of the color picker.
 		// Includes palette, color surface, sliders/hex
@@ -800,6 +827,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		topBox.Append (pickerSurfaceBox);
 		topBox.Append (slidersBox);
 
+		Gtk.Box mainVbox = new () { Spacing = spacing };
+		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
 		mainVbox.Append (topBox);
 		if (!small_mode)
 			mainVbox.Append (swatchBox);
@@ -811,37 +840,13 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		DefaultWidth = 1;
 		DefaultHeight = 1;
 
-		var contentArea = this.GetContentAreaBox ();
+		Gtk.Box contentArea = this.GetContentAreaBox ();
 		contentArea.SetAllMargins (margins);
 		contentArea.Append (mainVbox);
-
 
 		// incredibly silly workaround
 		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
 		this.SetOpacity (0.995f);
-
-		// Handles on active / off active
-		// When user clicks off the color picker, we assign the color picker values to the palette
-		// we only do this on off active because otherwise the recent color palette would be spammed
-		// every time the color changes
-		this.OnNotify += (_, args) => {
-
-			if (args.Pspec.GetName () != "is-active" || !livePalette)
-				return;
-
-			if (IsActive) {
-				this.SetOpacity (1f);
-				return;
-			}
-
-			this.SetOpacity (0.85f);
-
-			if (palette.PrimaryColor != Colors[0])
-				palette.PrimaryColor = Colors[0];
-
-			if (palette.SecondaryColor != Colors[1])
-				palette.SecondaryColor = Colors[1];
-		};
 
 		if (livePalette) {
 
@@ -857,12 +862,36 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				UpdateView ();
 			}
 
+			// Handles on active / off active
+			// When user clicks off the color picker, we assign the color picker values to the palette
+			// we only do this on off active because otherwise the recent color palette would be spammed
+			// every time the color changes
+			void ActiveWindowChangeHandler (object? _, GObject.Object.NotifySignalArgs args)
+			{
+				if (IsActive) {
+					this.SetOpacity (1.0f);
+					return;
+				}
+
+				this.SetOpacity (0.85f);
+
+				if (palette.PrimaryColor != Colors[0])
+					palette.PrimaryColor = Colors[0];
+
+				if (palette.SecondaryColor != Colors[1])
+					palette.SecondaryColor = Colors[1];
+			}
+
 			palette.PrimaryColorChanged += PrimaryChangeHandler;
 			palette.SecondaryColorChanged += SecondaryChangeHandler;
+			IsActivePropertyDefinition.Notify (this, ActiveWindowChangeHandler);
 
+			// Remove event handlers on exit (in particular, we don't want to handle the
+			// 'is-active' property changing as the dialog is being closed (bug #1390)).
 			this.OnResponse += (_, _) => {
 				palette.PrimaryColorChanged -= PrimaryChangeHandler;
 				palette.SecondaryColorChanged -= SecondaryChangeHandler;
+				IsActivePropertyDefinition.Unnotify (this, ActiveWindowChangeHandler);
 			};
 		}
 
@@ -870,8 +899,18 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		// --- References to keep
 
+		hue_slider = hueSlider;
+		saturation_slider = saturationSlider;
+		value_slider = valueSlider;
+
+		red_slider = redSlider;
+		green_slider = greenSlider;
+		blue_slider = blueSlider;
+		alpha_slider = alphaSlider;
+
 		color_display_box = colorDisplayBox;
 		hex_entry = hexEntry;
+		this.palette = palette;
 		picker_surface = pickerSurface;
 		picker_surface_box = pickerSurfaceBox;
 		picker_surface_cursor = pickerSurfaceCursor;
@@ -880,7 +919,108 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		show_swatches = showWatches;
 		sliders_box = slidersBox;
 		swatch_box = swatchBox;
+		swatch_recent = swatchRecent;
+		swatch_palette = swatchPalette;
 		top_box = topBox;
+	}
+
+	private void ClickGesture_OnPressed (
+		Gtk.GestureClick _,
+		Gtk.GestureClick.PressedSignalArgs e)
+	{
+		PointD absPos = new (e.X, e.Y);
+
+		if (picker_surface.IsMouseInDrawingArea (this, absPos, out PointD rel1)) {
+
+			mouse_on_picker_surface = true;
+			SetColorFromPickerSurface (new PointD (e.X, e.Y));
+
+			return;
+		}
+
+		if (swatch_box.Visible && swatch_recent.IsMouseInDrawingArea (this, absPos, out PointD rel2)) {
+
+			int recent_index = PaletteWidget.GetSwatchAtLocation (palette, rel2, new RectangleD (), true);
+
+			if (recent_index < 0)
+				return;
+
+			CurrentColor = palette.RecentlyUsedColors.ElementAt (recent_index);
+
+			UpdateView ();
+
+			return;
+
+		}
+
+		if (swatch_box.Visible && swatch_palette.IsMouseInDrawingArea (this, absPos, out PointD rel3)) {
+
+			int index = PaletteWidget.GetSwatchAtLocation (palette, rel3, new RectangleD ());
+
+			if (index < 0)
+				return;
+
+			CurrentColor = palette.CurrentPalette[index];
+			UpdateView ();
+		}
+	}
+
+	private void ClickGesture_OnReleased (
+		Gtk.GestureClick _,
+		Gtk.GestureClick.ReleasedSignalArgs e)
+	{
+		mouse_on_picker_surface = false;
+	}
+
+	private bool KeyboardGesture_OnKeyPressed (
+		Gtk.EventControllerKey _,
+		Gtk.EventControllerKey.KeyPressedSignalArgs e)
+	{
+		if (e.GetKey ().Value == Gdk.Constants.KEY_x)
+			CycleColors ();
+		return true;
+	}
+
+	private void MotionController_OnMotion (
+		Gtk.EventControllerMotion _,
+		Gtk.EventControllerMotion.MotionSignalArgs args)
+	{
+		if (!mouse_on_picker_surface) return;
+		SetColorFromPickerSurface (new PointD (args.X, args.Y));
+	}
+
+	private void HexEntry_OnChanged (Gtk.Entry sender, EventArgs _)
+	{
+		if ((GetFocus ()?.Parent) != sender) return;
+		CurrentColor = Color.FromHex (sender.GetText ()) ?? CurrentColor;
+		UpdateView ();
+	}
+
+	private void OnResetButtonClicked (Gtk.Button button, EventArgs args)
+	{
+		Colors = [.. original_colors];
+		UpdateView ();
+	}
+
+	private void OnShrinkButtonClicked (Gtk.Button button, EventArgs args)
+	{
+		SetSmallMode (!small_mode);
+		button.SetIconName (
+			small_mode
+			? Resources.StandardIcons.WindowMaximize
+			: Resources.StandardIcons.WindowMinimize);
+	}
+
+	private void OnOkButtonClicked (Gtk.Button button, EventArgs args)
+	{
+		this.Response ((int) Gtk.ResponseType.Ok);
+		this.Close ();
+	}
+
+	private void OnCancelButtonClicked (Gtk.Button button, EventArgs args)
+	{
+		this.Response ((int) Gtk.ResponseType.Cancel);
+		this.Close ();
 	}
 
 	private void CycleColors ()
@@ -905,14 +1045,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// Redraw cps
 		var hsv = CurrentColor.ToHsv ();
 
-		hue_cps.SetValue (hsv.Hue);
-		sat_cps.SetValue (hsv.Sat * 100.0);
-		val_cps.SetValue (hsv.Val * 100.0);
+		hue_slider.SetValue (hsv.Hue);
+		saturation_slider.SetValue (hsv.Sat * 100.0);
+		value_slider.SetValue (hsv.Val * 100.0);
 
-		r_cps.SetValue (CurrentColor.R * 255.0);
-		g_cps.SetValue (CurrentColor.G * 255.0);
-		b_cps.SetValue (CurrentColor.B * 255.0);
-		a_cps.SetValue (CurrentColor.A * 255.0);
+		red_slider.SetValue (CurrentColor.R * 255.0);
+		green_slider.SetValue (CurrentColor.G * 255.0);
+		blue_slider.SetValue (CurrentColor.B * 255.0);
+		alpha_slider.SetValue (CurrentColor.A * 255.0);
 
 
 		// Update hex

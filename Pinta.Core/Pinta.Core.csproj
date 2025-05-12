@@ -2,11 +2,13 @@
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <Import Project="../properties/ReferenceGirCoreAdw1.props" />
+  <Import Project="../properties/ReferenceGirCorePangoCairo10.props" />
+
   <ItemGroup>
     <PackageReference Include="NGettext" />
     <PackageReference Include="ParagonClipper" />
-    <PackageReference Include="GirCore.Adw-1" />
-    <PackageReference Include="GirCore.PangoCairo-1.0" />
     <PackageReference Include="Mono.Addins" />
   </ItemGroup>
   <ItemGroup>
