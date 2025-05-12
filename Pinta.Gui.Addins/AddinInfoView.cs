@@ -133,9 +133,9 @@ internal sealed class AddinInfoView : Adw.Bin
 	private Gtk.Switch CreateEnableSwitch ()
 	{
 		Gtk.Switch result = new () { Visible = false };
-		result.OnNotify += (o, e) => {
-			if (e.Pspec.GetName () != "active") return;
+		result.OnStateSet += (_, _) => {
 			HandleEnableSwitched ();
+			return false;
 		};
 		return result;
 	}

@@ -279,6 +279,7 @@ Pinta.Gui.Widgets/Widgets/History/HistoryItemWidget.cs
 Pinta.Gui.Widgets/Widgets/History/HistoryListView.cs
 Pinta.Gui.Widgets/Widgets/Layers/LayersListView.cs
 Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs
+Pinta.Gui.Widgets/Widgets/PaletteWidget.cs
 Pinta.Gui.Widgets/Widgets/PointPickerGraphic.cs
 Pinta.Gui.Widgets/Widgets/PointPickerWidget.cs
 Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs
@@ -287,6 +288,7 @@ Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs
 Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs
 Pinta.Resources/Icons.cs
 Pinta.Resources/ResourceManager.cs
+Pinta.Resources/Styles.cs
 Pinta.Tools/Brushes/CircleBrush.cs
 Pinta.Tools/Brushes/GridBrush.cs
 Pinta.Tools/Brushes/PlainBrush.cs
