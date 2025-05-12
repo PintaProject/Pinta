@@ -171,11 +171,9 @@ public sealed class TextTool : BaseTool
 					Gtk.Settings.GetDefault ()!.GtkFontName!)),
 			};
 			font_button.SetDialog (fontDialog);
-			font_button.OnNotify += (_, args) => {
-				if (args.Pspec.GetName () == "font-desc") {
-					HandleFontChanged ();
-				}
-			};
+			Gtk.FontDialogButton.FontDescPropertyDefinition.Notify (font_button, (_, _) => {
+				HandleFontChanged ();
+			});
 		}
 
 		tb.Append (font_button);

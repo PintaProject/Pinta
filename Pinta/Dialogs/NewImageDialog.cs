@@ -429,11 +429,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 	private void WireUpEvents ()
 	{
 		// Handle preset changes
-		// Gtk.DropDown doesn't have a proper signal for this, so listen to changes in the 'selected' property.
-		preset_dropdown.OnNotify += (o, args) => {
-			if (args.Pspec.GetName () != "selected")
-				return;
-
+		Gtk.DropDown.SelectedPropertyDefinition.Notify (preset_dropdown, (_, _) => {
 			Size new_size = IsValidSize ? NewImageSize : Size.Empty;
 
 			string? preset_text = preset_dropdown_model.GetString (preset_dropdown.Selected);
@@ -455,7 +451,8 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 			UpdateOrientation ();
 			preview_box.Update (NewImageSize);
-		};
+		});
+
 		// Handle width/height entry changes
 		width_entry.OnChanged ((o, e) => {
 			if (suppress_events)
