@@ -791,8 +791,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			Palette currentPalette = palette.CurrentPalette;
 
-			for (int i = 0; i < currentPalette.Count; i++)
-				g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, palette_rect), currentPalette[i]);
+			for (int i = 0; i < currentPalette.Colors.Count; i++)
+				g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, palette_rect), currentPalette.Colors[i]);
 		});
 
 		Gtk.Box swatchBox = new () { Spacing = spacing };
@@ -960,7 +960,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			if (index < 0)
 				return;
 
-			CurrentColor = palette.CurrentPalette[index];
+			CurrentColor = palette.CurrentPalette.Colors[index];
 			UpdateView ();
 		}
 	}
