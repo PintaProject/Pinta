@@ -191,12 +191,6 @@ public sealed class ChromeManager : IChromeService
 			workspace);
 	}
 
-	public bool IsUsingHeaderBar ()
-	{
-		// On macOS we never use a header bar since the global menu should be used.
-		return PintaCore.System.OperatingSystem != OS.Mac;
-	}
-
 	private void OnLastCanvasCursorPointChanged ()
 	{
 		LastCanvasCursorPointChanged?.Invoke (this, EventArgs.Empty);

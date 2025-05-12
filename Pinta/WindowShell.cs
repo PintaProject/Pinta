@@ -42,12 +42,12 @@ public sealed class WindowShell
 		string title,
 		int width,
 		int height,
-		bool useHeaderBar,
+		bool useMenuBar,
 		bool maximize)
 	{
 		var app_layout = Adw.ToolbarView.New ();
 
-		if (useHeaderBar) {
+		if (!useMenuBar) {
 			var adwWindow = Adw.ApplicationWindow.New (app);
 			adwWindow.SetContent (app_layout);
 			app_window = adwWindow;

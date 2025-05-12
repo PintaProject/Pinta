@@ -49,6 +49,8 @@ internal sealed class MainWindow
 	private int main_thread_id = -1;
 	private Gtk.DropTarget drop_target = null!;
 
+	private const string MENUBAR_SHOWN_SETTING = "menubar-shown";
+
 	public MainWindow (Adw.Application app)
 	{
 		this.app = app;
@@ -325,7 +327,6 @@ internal sealed class MainWindow
 		}
 	}
 
-	#region GUI Construction
 	private void CreateWindow ()
 	{
 		// Check for stored window settings
@@ -341,7 +342,7 @@ internal sealed class MainWindow
 			"Pinta",
 			width,
 			height,
-			useHeaderBar: PintaCore.Chrome.IsUsingHeaderBar (),
+			useMenuBar: IsUsingMenuBar (),
 			maximize);
 
 		CreateMainToolBar ();
@@ -355,14 +356,21 @@ internal sealed class MainWindow
 		PintaCore.Chrome.InitializeApplication (app);
 		PintaCore.Chrome.InitializeWindowShell (window_shell.Window);
 	}
-	#endregion
+
+	private bool IsUsingMenuBar ()
+	{
+		// On macOS the global menubar should be used by default.
+		bool use_menubar_default = SystemManager.GetOperatingSystem () == OS.Mac;
+
+		return PintaCore.Settings.GetSetting (MENUBAR_SHOWN_SETTING, use_menubar_default);
+	}
 
 	private void CreateMainMenu ()
 	{
-		bool using_header_bar = PintaCore.Chrome.IsUsingHeaderBar ();
+		bool using_menu_bar = IsUsingMenuBar ();
 		this.menu_bar = Gio.Menu.New ();
 
-		if (!using_header_bar)
+		if (using_menu_bar)
 			app.Menubar = this.menu_bar;
 
 		if (PintaCore.System.OperatingSystem == OS.Mac) {
@@ -386,7 +394,7 @@ internal sealed class MainWindow
 
 		this.image_menu = Gio.Menu.New ();
 		PintaCore.Actions.Image.RegisterActions (app, this.image_menu);
-		if (!using_header_bar)
+		if (using_menu_bar)
 			this.menu_bar.AppendSubmenu (Translations.GetString ("_Image"), this.image_menu);
 
 		var layers_menu = Gio.Menu.New ();
@@ -396,11 +404,11 @@ internal sealed class MainWindow
 		// When using a header bar, the Image, Effects, and Adjustments menus
 		// are shown as menu buttons in the toolbar (see CreateMainToolBar ())
 		var adj_menu = Gio.Menu.New ();
-		if (!using_header_bar)
+		if (using_menu_bar)
 			this.menu_bar.AppendSubmenu (Translations.GetString ("_Adjustments"), adj_menu);
 
 		var effects_menu = Gio.Menu.New ();
-		if (!using_header_bar)
+		if (using_menu_bar)
 			this.menu_bar.AppendSubmenu (Translations.GetString ("Effe_cts"), effects_menu);
 
 		var addins_menu = Gio.Menu.New ();
@@ -538,6 +546,7 @@ internal sealed class MainWindow
 
 		PintaCore.Actions.View.Rulers.Value = PintaCore.Settings.GetSetting ("ruler-shown", false);
 		PintaCore.Actions.View.ToolBar.Value = PintaCore.Settings.GetSetting ("toolbar-shown", true);
+		PintaCore.Actions.View.MenuBar.Value = IsUsingMenuBar ();
 		PintaCore.Actions.View.StatusBar.Value = PintaCore.Settings.GetSetting ("statusbar-shown", true);
 		PintaCore.Actions.View.ToolBox.Value = PintaCore.Settings.GetSetting ("toolbox-shown", true);
 		PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
@@ -570,6 +579,7 @@ internal sealed class MainWindow
 		PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Value);
 		PintaCore.Settings.PutSetting ("tool-windows-shown", PintaCore.Actions.View.ToolWindows.Value);
 		PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Value);
+		PintaCore.Settings.PutSetting (MENUBAR_SHOWN_SETTING, PintaCore.Actions.View.MenuBar.Value);
 		PintaCore.Settings.PutSetting ("statusbar-shown", PintaCore.Actions.View.StatusBar.Value);
 		PintaCore.Settings.PutSetting ("toolbox-shown", PintaCore.Actions.View.ToolBox.Value);
 		PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.LastDialogDirectory?.GetUri () ?? "");
