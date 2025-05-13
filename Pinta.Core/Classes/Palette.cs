@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using Cairo;
@@ -34,28 +35,31 @@ namespace Pinta.Core;
 
 public sealed class Palette
 {
-	public event EventHandler? PaletteChanged;
+	private readonly List<Color> colors;
+	public ReadOnlyCollection<Color> Colors { get; }
+	public Palette ()
+	{
+		List<Color> backing = [];
+		colors = backing;
+		Colors = new ReadOnlyCollection<Color> (backing);
+	}
 
-	private List<Color> colors = [];
+	public event EventHandler? PaletteChanged;
 
 	private void OnPaletteChanged ()
 	{
 		PaletteChanged?.Invoke (this, EventArgs.Empty);
 	}
 
-	public int Count => colors.Count;
-
-	public Color this[int index] {
-		get => colors[index];
-		set {
-			colors[index] = value;
-			OnPaletteChanged ();
-		}
+	public void SetColor (int index, Color value)
+	{
+		colors[index] = value;
+		OnPaletteChanged ();
 	}
 
 	public void Resize (int newSize)
 	{
-		int difference = newSize - Count;
+		int difference = newSize - Colors.Count;
 
 		if (difference > 0) {
 			for (int i = 0; i < difference; i++)
@@ -142,7 +146,8 @@ public sealed class Palette
 	{
 		try {
 			var loadedColors = LoadColors (paletteFormats, file);
-			colors = loadedColors;
+			colors.Clear ();
+			colors.AddRange (loadedColors);
 			colors.TrimExcess ();
 			OnPaletteChanged ();
 		} catch (Exception e) {

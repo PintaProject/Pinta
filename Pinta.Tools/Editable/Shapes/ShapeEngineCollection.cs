@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -33,35 +32,21 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public sealed class ShapeEngineCollection : List<ShapeEngine>
+public static class ShapeEngineCollection
 {
-	/// <summary>
-	/// A partially cloneable ShapeEngine collection.
-	/// </summary>
-	public ShapeEngineCollection ()
-	{
-	}
-
-	/// <summary>
-	/// A partially cloneable ShapeEngine collection. This constructor creates a partial clone of an existing ShapeEngineCollection.
-	/// </summary>
-	/// <param name="passedCEC">An existing ShapeEngineCollection to partially clone.</param>
-	public ShapeEngineCollection (ShapeEngineCollection passedCEC)
-	{
-		for (int n = 0; n < passedCEC.Count; ++n) {
-			Add (passedCEC[n].Clone ());
-		}
-	}
-
 	/// <summary>
 	/// Clone the necessary data in each of the ShapeEngines in the collection.
 	/// </summary>
 	/// <returns>The partially cloned ShapeEngineCollection.</returns>
-	public ShapeEngineCollection PartialClone ()
+	public static List<ShapeEngine> PartialClone (this IReadOnlyList<ShapeEngine> source)
 	{
-		return new ShapeEngineCollection (this);
-	}
+		List<ShapeEngine> result = new (capacity: source.Count);
 
+		for (int i = 0; i < source.Count; i++)
+			result.Add (source[i].Clone ());
+
+		return result;
+	}
 
 	/// <summary>
 	/// Calculate the closest ControlPoint to currentPoint.
@@ -71,8 +56,13 @@ public sealed class ShapeEngineCollection : List<ShapeEngine>
 	/// <param name="closestCPIndex">The index of the closest ControlPoint.</param>
 	/// <param name="closestControlPoint">The closest ControlPoint to currentPoint.</param>
 	/// <param name="closestCPDistance">The closest ControlPoint's distance from currentPoint.</param>
-	public void FindClosestControlPoint (PointD currentPoint,
-		out int closestCPShapeIndex, out int closestCPIndex, out ControlPoint? closestControlPoint, out double closestCPDistance)
+	public static void FindClosestControlPoint (
+		this IReadOnlyList<ShapeEngine> source,
+		PointD currentPoint,
+		out int closestCPShapeIndex,
+		out int closestCPIndex,
+		out ControlPoint? closestControlPoint,
+		out double closestCPDistance)
 	{
 		closestCPShapeIndex = 0;
 		closestCPIndex = 0;
@@ -81,18 +71,20 @@ public sealed class ShapeEngineCollection : List<ShapeEngine>
 
 		double currentDistance;
 
-		for (int shapeIndex = 0; shapeIndex < Count; ++shapeIndex) {
-			List<ControlPoint> controlPoints = this[shapeIndex].ControlPoints;
+		for (int shapeIndex = 0; shapeIndex < source.Count; ++shapeIndex) {
+
+			List<ControlPoint> controlPoints = source[shapeIndex].ControlPoints;
 
 			for (int cPIndex = 0; cPIndex < controlPoints.Count; ++cPIndex) {
+
 				currentDistance = controlPoints[cPIndex].Position.Distance (currentPoint);
 
-				if (currentDistance < closestCPDistance) {
-					closestCPShapeIndex = shapeIndex;
-					closestCPIndex = cPIndex;
-					closestControlPoint = controlPoints[cPIndex];
-					closestCPDistance = currentDistance;
-				}
+				if (currentDistance >= closestCPDistance) continue;
+
+				closestCPShapeIndex = shapeIndex;
+				closestCPIndex = cPIndex;
+				closestControlPoint = controlPoints[cPIndex];
+				closestCPDistance = currentDistance;
 			}
 		}
 	}
