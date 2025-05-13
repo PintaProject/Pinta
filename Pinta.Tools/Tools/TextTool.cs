@@ -106,7 +106,9 @@ public sealed class TextTool : BaseTool
 	private readonly IWorkspaceService workspace;
 	public TextTool (IServiceProvider services) : base (services)
 	{
-		chrome = services.GetService<IChromeService> ();
+		IChromeService chromeService = services.GetService<IChromeService> ();
+
+		chrome = chromeService;
 		palette = services.GetService<IPaletteService> ();
 		workspace = services.GetService<IWorkspaceService> ();
 
@@ -116,7 +118,7 @@ public sealed class TextTool : BaseTool
 		im_context.OnPreeditChanged += OnPreeditChanged;
 		im_context.OnPreeditEnd += OnPreeditEnd;
 
-		layout = new TextLayout ();
+		layout = new TextLayout (chromeService);
 
 		DefaultCursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Text);
 	}
@@ -975,8 +977,11 @@ public sealed class TextTool : BaseTool
 	/// <param name="useTextLayer">Whether or not to use the TextLayer (as opposed to the Userlayer).</param>
 	private void RedrawText (bool showCursor, bool useTextLayer)
 	{
-		RectangleI r = CurrentTextLayout.GetLayoutBounds ();
-		r = r.Inflated (10 + OutlineWidth, 10 + OutlineWidth);
+		RectangleI r =
+			CurrentTextLayout
+			.GetLayoutBounds ()
+			.Inflated (10 + OutlineWidth, 10 + OutlineWidth);
+
 		InflateAndInvalidate (r);
 		CurrentTextBounds = r;
 
