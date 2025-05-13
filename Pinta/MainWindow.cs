@@ -222,7 +222,7 @@ internal sealed class MainWindow
 			canvasHasBeenShown = true;
 		};
 
-		PintaCore.Actions.View.Rulers.Toggled += (active) => { canvas.RulersVisible = active; };
+		PintaCore.Actions.View.Rulers.Toggled += (active, _) => { canvas.RulersVisible = active; };
 		PintaCore.Actions.View.RulerMetric.OnActivate += (o, args) => {
 			PintaCore.Actions.View.RulerMetric.ChangeState (args.Parameter!);
 			canvas.RulerMetric = GetCurrentRulerMetric ();

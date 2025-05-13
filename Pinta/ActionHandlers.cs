@@ -78,6 +78,7 @@ public sealed class ActionHandlers
 			new RotateZoomLayerAction (chrome, actions.Layers, workspace, tools),
 
 			// View
+			new MenuBarToggledAction (actions.View, chrome),
 			new ToolBarToggledAction (actions.View, chrome),
 			new ImageTabsToggledAction (actions.View, chrome),
 			new ToolWindowsToggledAction (actions.View, chrome),
