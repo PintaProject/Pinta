@@ -69,26 +69,29 @@ public sealed class PaletteManager : IPaletteService
 		set => SetColor (false, value, true);
 	}
 
-	public Palette CurrentPalette { get; } = Palette.GetDefault ();
+	public Palette CurrentPalette { get; }
 
-	private readonly SettingsManager settings_manager;
-	private readonly PaletteFormatManager palette_format_manager;
+	private readonly SettingsManager settings;
+	private readonly PaletteFormatManager palette_formats;
 	public PaletteManager (
-		SettingsManager settingsManager,
-		PaletteFormatManager paletteFormatManager)
+		ChromeManager chrome,
+		SettingsManager settings,
+		PaletteFormatManager paletteFormats)
 	{
 		List<Color> recentlyUsed = new (MAX_RECENT_COLORS);
 
 		recently_used = recentlyUsed;
 		RecentlyUsedColors = new ReadOnlyCollection<Color> (recentlyUsed);
 
-		settings_manager = settingsManager;
-		palette_format_manager = paletteFormatManager;
+		this.settings = settings;
+		palette_formats = paletteFormats;
 
-		PopulateSavedPalette (paletteFormatManager);
+		CurrentPalette = Palette.GetDefault (chrome, paletteFormats);
+
+		PopulateSavedPalette (paletteFormats);
 		PopulateRecentlyUsedColors ();
 
-		settingsManager.SaveSettingsBeforeQuit += (_, _) => {
+		settings.SaveSettingsBeforeQuit += (_, _) => {
 			SaveCurrentPalette ();
 			SaveRecentlyUsedColors ();
 		};
@@ -151,7 +154,7 @@ public sealed class PaletteManager : IPaletteService
 
 	private void PopulateSavedPalette (PaletteFormatManager paletteFormats)
 	{
-		string palette_file = System.IO.Path.Combine (settings_manager.GetUserSettingsDirectory (), PALETTE_FILE);
+		string palette_file = System.IO.Path.Combine (settings.GetUserSettingsDirectory (), PALETTE_FILE);
 		if (System.IO.File.Exists (palette_file))
 			CurrentPalette.Load (paletteFormats, Gio.FileHelper.NewForPath (palette_file));
 	}
@@ -159,24 +162,24 @@ public sealed class PaletteManager : IPaletteService
 	private void PopulateRecentlyUsedColors ()
 	{
 		// Primary / Secondary colors
-		string primary_color = settings_manager.GetSetting (PRIMARY_COLOR_SETTINGS_KEY, ColorBgra.Black.ToHexString ());
-		string secondary_color = settings_manager.GetSetting (SECONDARY_COLOR_SETTINGS_KEY, ColorBgra.White.ToHexString ());
+		string primary_color = settings.GetSetting (PRIMARY_COLOR_SETTINGS_KEY, ColorBgra.Black.ToHexString ());
+		string secondary_color = settings.GetSetting (SECONDARY_COLOR_SETTINGS_KEY, ColorBgra.White.ToHexString ());
 
 		SetColor (
 			true,
-			ColorBgra.TryParseHexString (primary_color, out var primary) ? primary.ToCairoColor () : new Color (0, 0, 0),
+			ColorBgra.TryParseHexString (primary_color, out ColorBgra primary) ? primary.ToCairoColor () : new Color (0, 0, 0),
 			false);
 
 		SetColor (
 			false,
-			ColorBgra.TryParseHexString (secondary_color, out var secondary) ? secondary.ToCairoColor () : new Color (1, 0, 0),
+			ColorBgra.TryParseHexString (secondary_color, out ColorBgra secondary) ? secondary.ToCairoColor () : new Color (1, 0, 0),
 			false);
 
 		// Recently used palette
-		string saved_colors = settings_manager.GetSetting (RECENT_COLORS_SETTINGS_KEY, string.Empty);
+		string saved_colors = settings.GetSetting (RECENT_COLORS_SETTINGS_KEY, string.Empty);
 
 		foreach (string hex_color in saved_colors.Split (',')) {
-			if (ColorBgra.TryParseHexString (hex_color, out var color))
+			if (ColorBgra.TryParseHexString (hex_color, out ColorBgra color))
 				recently_used.Add (color.ToCairoColor ());
 		}
 
@@ -189,8 +192,8 @@ public sealed class PaletteManager : IPaletteService
 
 	private void SaveCurrentPalette ()
 	{
-		string palette_file = System.IO.Path.Combine (settings_manager.GetUserSettingsDirectory (), PALETTE_FILE);
-		var palette_saver = palette_format_manager.Formats.FirstOrDefault (p => p.Extensions.Contains ("txt"))?.Saver;
+		string palette_file = System.IO.Path.Combine (settings.GetUserSettingsDirectory (), PALETTE_FILE);
+		var palette_saver = palette_formats.Formats.FirstOrDefault (p => p.Extensions.Contains ("txt"))?.Saver;
 		if (palette_saver is not null)
 			CurrentPalette.Save (Gio.FileHelper.NewForPath (palette_file), palette_saver);
 	}
@@ -198,12 +201,12 @@ public sealed class PaletteManager : IPaletteService
 	private void SaveRecentlyUsedColors ()
 	{
 		// Primary / Secondary colors
-		settings_manager.PutSetting (PRIMARY_COLOR_SETTINGS_KEY, PrimaryColor.ToColorBgra ().ToHexString ());
-		settings_manager.PutSetting (SECONDARY_COLOR_SETTINGS_KEY, SecondaryColor.ToColorBgra ().ToHexString ());
+		settings.PutSetting (PRIMARY_COLOR_SETTINGS_KEY, PrimaryColor.ToColorBgra ().ToHexString ());
+		settings.PutSetting (SECONDARY_COLOR_SETTINGS_KEY, SecondaryColor.ToColorBgra ().ToHexString ());
 
 		// Recently used palette
 		string colors = string.Join (",", recently_used.Select (c => c.ToColorBgra ().ToHexString ()));
-		settings_manager.PutSetting (RECENT_COLORS_SETTINGS_KEY, colors);
+		settings.PutSetting (RECENT_COLORS_SETTINGS_KEY, colors);
 	}
 
 	private void OnPrimaryColorChanged ()

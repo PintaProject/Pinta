@@ -37,11 +37,17 @@ public sealed class Palette
 {
 	private readonly List<Color> colors;
 	public ReadOnlyCollection<Color> Colors { get; }
-	public Palette ()
+	private readonly ChromeManager chrome;
+	private readonly PaletteFormatManager palette_formats;
+	public Palette (ChromeManager chrome, PaletteFormatManager paletteFormats)
 	{
 		List<Color> backing = [];
+
 		colors = backing;
 		Colors = new ReadOnlyCollection<Color> (backing);
+
+		this.chrome = chrome;
+		this.palette_formats = paletteFormats;
 	}
 
 	public event EventHandler? PaletteChanged;
@@ -72,9 +78,9 @@ public sealed class Palette
 		OnPaletteChanged ();
 	}
 
-	public static Palette GetDefault ()
+	public static Palette GetDefault (ChromeManager chrome, PaletteFormatManager paletteFormats)
 	{
-		Palette p = new ();
+		Palette p = new (chrome, paletteFormats);
 		p.LoadDefault ();
 		return p;
 	}
@@ -151,10 +157,10 @@ public sealed class Palette
 			colors.TrimExcess ();
 			OnPaletteChanged ();
 		} catch (Exception e) {
-			var parent = PintaCore.Chrome.MainWindow;
-			PintaCore.Chrome.ShowUnsupportedFormatDialog (
+			var parent = chrome.MainWindow;
+			chrome.ShowUnsupportedFormatDialog (
 				parent,
-				PintaCore.PaletteFormats.Formats,
+				palette_formats.Formats,
 				file.GetParseName (),
 				Translations.GetString ("Unsupported palette format"),
 				e.Message);
