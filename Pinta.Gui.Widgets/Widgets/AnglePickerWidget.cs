@@ -36,7 +36,7 @@ public sealed class AnglePickerWidget : Gtk.Box
 		};
 		anglePickerGraphic.ValueChanged += HandleAnglePickerValueChanged;
 
-		Gtk.SpinButton numericSpin = Gtk.SpinButton.NewWithRange (0, 360, 1);
+		Gtk.SpinButton numericSpin = Gtk.SpinButton.NewWithRange (-360, 360, 1);
 		numericSpin.Configure (numericSpin.GetAdjustment (), 1, 2);
 		numericSpin.CanFocus = true;
 		numericSpin.Numeric = true;
