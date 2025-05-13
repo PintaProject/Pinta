@@ -43,7 +43,7 @@ public static class ShapeEngineCollection
 		List<ShapeEngine> result = new (capacity: source.Count);
 
 		for (int i = 0; i < source.Count; i++)
-			result.Add (source[i]);
+			result.Add (source[i].Clone ());
 
 		return result;
 	}
