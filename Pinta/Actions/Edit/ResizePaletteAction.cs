@@ -62,7 +62,7 @@ internal sealed class ResizePaletteAction : IActionHandler
 			Translations.GetString ("New palette size:"),
 			1,
 			96,
-			palette.CurrentPalette.Count);
+			palette.CurrentPalette.Colors.Count);
 
 		Gtk.ResponseType response = await dialog.RunAsync ();
 

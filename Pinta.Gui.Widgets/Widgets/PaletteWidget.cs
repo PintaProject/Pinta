@@ -18,7 +18,7 @@ internal static class PaletteWidget
 		int max =
 			recentColorPalette
 			? palette.RecentlyUsedColors.Count
-			: palette.CurrentPalette.Count;
+			: palette.CurrentPalette.Colors.Count;
 
 		// This could be more efficient, but is good enough for now
 		for (int i = 0; i < max; i++)

@@ -120,14 +120,14 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 					break;
 
 				if (button == GtkExtensions.MOUSE_RIGHT_BUTTON) {
-					palette.SecondaryColor = palette.CurrentPalette[index];
+					palette.SecondaryColor = palette.CurrentPalette.Colors[index];
 				} else if (button == GtkExtensions.MOUSE_LEFT_BUTTON) {
-					palette.PrimaryColor = palette.CurrentPalette[index];
+					palette.PrimaryColor = palette.CurrentPalette.Colors[index];
 				} else {
-					var colors = await GetUserChosenColor ([palette.CurrentPalette[index]], 0, Translations.GetString ("Choose Palette Color"));
+					var colors = await GetUserChosenColor ([palette.CurrentPalette.Colors[index]], 0, Translations.GetString ("Choose Palette Color"));
 					var color = colors?[0];
 					if (color != null)
-						palette.CurrentPalette[index] = color.Value;
+						palette.CurrentPalette.SetColor (index, color.Value);
 				}
 
 				break;
@@ -181,8 +181,8 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		// Draw color swatches
 		var currentPalette = palette.CurrentPalette;
 
-		for (int i = 0; i < currentPalette.Count; i++)
-			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, palette_rect), currentPalette[i]);
+		for (int i = 0; i < currentPalette.Colors.Count; i++)
+			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, palette_rect), currentPalette.Colors[i]);
 
 		g.Dispose ();
 	}
