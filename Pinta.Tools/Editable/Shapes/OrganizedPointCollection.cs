@@ -120,7 +120,7 @@ public sealed class OrganizedPointCollection
 	/// <param name="closestPoint">The position of the closest point.</param>
 	/// <param name="closestDistance">The closest point's distance away from currentPoint.</param>
 	public static void FindClosestPoint (
-		List<ShapeEngine> SEL,
+		IReadOnlyList<ShapeEngine> SEL,
 		PointD currentPoint,
 		out int closestShapeIndex,
 		out int closestPointIndex,
