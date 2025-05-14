@@ -37,17 +37,12 @@ public sealed class Palette
 {
 	private readonly List<Color> colors;
 	public ReadOnlyCollection<Color> Colors { get; }
-	private readonly ChromeManager chrome;
-	private readonly PaletteFormatManager palette_formats;
-	public Palette (ChromeManager chrome, PaletteFormatManager paletteFormats)
+	public Palette ()
 	{
 		List<Color> backing = [];
 
 		colors = backing;
 		Colors = new ReadOnlyCollection<Color> (backing);
-
-		this.chrome = chrome;
-		this.palette_formats = paletteFormats;
 	}
 
 	public event EventHandler? PaletteChanged;
@@ -78,9 +73,9 @@ public sealed class Palette
 		OnPaletteChanged ();
 	}
 
-	public static Palette GetDefault (ChromeManager chrome, PaletteFormatManager paletteFormats)
+	public static Palette GetDefault ()
 	{
-		Palette p = new (chrome, paletteFormats);
+		Palette p = new ();
 		p.LoadDefault ();
 		return p;
 	}
@@ -157,13 +152,7 @@ public sealed class Palette
 			colors.TrimExcess ();
 			OnPaletteChanged ();
 		} catch (Exception e) {
-			var parent = chrome.MainWindow;
-			chrome.ShowUnsupportedFormatDialog (
-				parent,
-				palette_formats.Formats,
-				file.GetParseName (),
-				Translations.GetString ("Unsupported palette format"),
-				e.Message);
+			throw new PaletteLoadException (file.GetParseName (), e);
 		}
 	}
 

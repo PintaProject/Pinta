@@ -483,26 +483,40 @@ public sealed class EditActions
 
 	private async void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 	{
-		using Gtk.FileFilter palettesFilter = CreatePalettesFilter ();
-		using Gtk.FileFilter catchAllFilter = CreateCatchAllFilter ();
+		try {
+			using Gtk.FileFilter palettesFilter = CreatePalettesFilter ();
+			using Gtk.FileFilter catchAllFilter = CreateCatchAllFilter ();
 
-		using Gio.ListStore filters = Gio.ListStore.New (Gtk.FileFilter.GetGType ());
-		filters.Append (palettesFilter);
-		filters.Append (catchAllFilter);
+			using Gio.ListStore filters = Gio.ListStore.New (Gtk.FileFilter.GetGType ());
+			filters.Append (palettesFilter);
+			filters.Append (catchAllFilter);
 
-		using Gtk.FileDialog fileDialog = Gtk.FileDialog.New ();
-		fileDialog.SetTitle (Translations.GetString ("Open Palette File"));
-		fileDialog.SetFilters (filters);
-		if (last_palette_dir != null)
-			fileDialog.SetInitialFolder (last_palette_dir);
+			using Gtk.FileDialog fileDialog = Gtk.FileDialog.New ();
+			fileDialog.SetTitle (Translations.GetString ("Open Palette File"));
+			fileDialog.SetFilters (filters);
+			if (last_palette_dir != null)
+				fileDialog.SetInitialFolder (last_palette_dir);
 
-		var choice = await fileDialog.OpenFileAsync (chrome.MainWindow);
+			var choice = await fileDialog.OpenFileAsync (chrome.MainWindow);
 
-		if (choice is null)
-			return;
+			if (choice is null)
+				return;
 
-		last_palette_dir = choice.GetParent ();
-		palette.CurrentPalette.Load (palette_formats, choice);
+			last_palette_dir = choice.GetParent ();
+
+			palette.CurrentPalette.Load (palette_formats, choice);
+
+		} catch (PaletteLoadException ex) {
+
+			var parent = chrome.MainWindow;
+
+			await chrome.ShowUnsupportedFormatDialog (
+				parent,
+				palette_formats.Formats,
+				ex.FileName,
+				Translations.GetString ("Unsupported palette format"),
+				(ex.InnerException?.Message) ?? ex.Message);
+		}
 	}
 
 	private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)

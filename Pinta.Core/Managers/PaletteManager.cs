@@ -71,6 +71,7 @@ public sealed class PaletteManager : IPaletteService
 
 	public Palette CurrentPalette { get; }
 
+	private readonly ChromeManager chrome;
 	private readonly SettingsManager settings;
 	private readonly PaletteFormatManager palette_formats;
 	public PaletteManager (
@@ -83,12 +84,17 @@ public sealed class PaletteManager : IPaletteService
 		recently_used = recentlyUsed;
 		RecentlyUsedColors = new ReadOnlyCollection<Color> (recentlyUsed);
 
+		this.chrome = chrome;
 		this.settings = settings;
 		palette_formats = paletteFormats;
 
-		CurrentPalette = Palette.GetDefault (chrome, paletteFormats);
+		CurrentPalette = Palette.GetDefault ();
 
+		// This is an async method.
+		// Furthermore, it depends on `chrome` and `palette_formats` having a value
+		// Can this call be moved out of this constructor?
 		PopulateSavedPalette (paletteFormats);
+
 		PopulateRecentlyUsedColors ();
 
 		settings.SaveSettingsBeforeQuit += (_, _) => {
@@ -152,27 +158,39 @@ public sealed class PaletteManager : IPaletteService
 		OnRecentColorsChanged ();
 	}
 
-	private void PopulateSavedPalette (PaletteFormatManager paletteFormats)
+	private async void PopulateSavedPalette (PaletteFormatManager paletteFormats)
 	{
-		string palette_file = System.IO.Path.Combine (settings.GetUserSettingsDirectory (), PALETTE_FILE);
-		if (System.IO.File.Exists (palette_file))
-			CurrentPalette.Load (paletteFormats, Gio.FileHelper.NewForPath (palette_file));
+		try {
+			string paletteFile = System.IO.Path.Combine (settings.GetUserSettingsDirectory (), PALETTE_FILE);
+			if (!System.IO.File.Exists (paletteFile)) return;
+			CurrentPalette.Load (paletteFormats, Gio.FileHelper.NewForPath (paletteFile));
+		} catch (PaletteLoadException ex) {
+
+			var parent = chrome.MainWindow;
+
+			await chrome.ShowUnsupportedFormatDialog (
+				parent,
+				palette_formats.Formats,
+				ex.FileName,
+				Translations.GetString ("Unsupported palette format"),
+				(ex.InnerException?.Message) ?? ex.Message);
+		}
 	}
 
 	private void PopulateRecentlyUsedColors ()
 	{
 		// Primary / Secondary colors
-		string primary_color = settings.GetSetting (PRIMARY_COLOR_SETTINGS_KEY, ColorBgra.Black.ToHexString ());
-		string secondary_color = settings.GetSetting (SECONDARY_COLOR_SETTINGS_KEY, ColorBgra.White.ToHexString ());
+		string primaryColor = settings.GetSetting (PRIMARY_COLOR_SETTINGS_KEY, ColorBgra.Black.ToHexString ());
+		string secondaryColor = settings.GetSetting (SECONDARY_COLOR_SETTINGS_KEY, ColorBgra.White.ToHexString ());
 
 		SetColor (
 			true,
-			ColorBgra.TryParseHexString (primary_color, out ColorBgra primary) ? primary.ToCairoColor () : new Color (0, 0, 0),
+			ColorBgra.TryParseHexString (primaryColor, out ColorBgra primary) ? primary.ToCairoColor () : new Color (0, 0, 0),
 			false);
 
 		SetColor (
 			false,
-			ColorBgra.TryParseHexString (secondary_color, out ColorBgra secondary) ? secondary.ToCairoColor () : new Color (1, 0, 0),
+			ColorBgra.TryParseHexString (secondaryColor, out ColorBgra secondary) ? secondary.ToCairoColor () : new Color (1, 0, 0),
 			false);
 
 		// Recently used palette
