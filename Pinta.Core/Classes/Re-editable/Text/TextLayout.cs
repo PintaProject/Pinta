@@ -48,9 +48,9 @@ public sealed class TextLayout
 	public Pango.Layout Layout { get; }
 	public int FontHeight => GetCursorLocation ().Height;
 
-	public TextLayout ()
+	public TextLayout (IChromeService chrome)
 	{
-		Layout = Pango.Layout.New (PintaCore.Chrome.MainWindow.GetPangoContext ());
+		Layout = Pango.Layout.New (chrome.MainWindow.GetPangoContext ());
 	}
 
 	public ImmutableArray<RectangleI> GetSelectionRectangles ()
@@ -75,7 +75,7 @@ public sealed class TextLayout
 		int w = PangoExtensions.UnitsToPixels (strong.Width);
 		int h = PangoExtensions.UnitsToPixels (strong.Height);
 
-		return new RectangleI (x, y, w, h);
+		return new (x, y, w, h);
 	}
 
 	public RectangleI GetLayoutBounds ()
@@ -86,8 +86,11 @@ public sealed class TextLayout
 		// GetPixelExtents() doesn't really return a very sensible height.
 		// Instead of doing some hacky arithmetic to correct it, the height will just
 		// be the cursor's height times the number of lines.
-		return new RectangleI (engine.Origin.X, engine.Origin.Y,
-				      ink.Width, cursor.Height * engine.LineCount);
+		return new (
+			engine.Origin.X,
+			engine.Origin.Y,
+			ink.Width,
+			cursor.Height * engine.LineCount);
 	}
 
 	public TextPosition PointToTextPosition (PointI point)
@@ -95,7 +98,7 @@ public sealed class TextLayout
 		int x = PangoExtensions.UnitsFromPixels (point.X - engine.Origin.X);
 		int y = PangoExtensions.UnitsFromPixels (point.Y - engine.Origin.Y);
 
-		Layout.XyToIndex (x, y, out var index, out var trailing);
+		Layout.XyToIndex (x, y, out int index, out int trailing);
 
 		return engine.UTF8IndexToPosition (index + trailing);
 	}
