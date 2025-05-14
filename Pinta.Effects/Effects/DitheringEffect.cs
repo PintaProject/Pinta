@@ -11,7 +11,7 @@ public sealed class DitheringEffect : BaseEffect
 {
 	public override string Name => Translations.GetString ("Dithering");
 	public override bool IsConfigurable => true;
-	// TODO: Icon
+	public override string Icon => Resources.Icons.EffectsColorDithering;
 	public override string EffectMenuCategory => Translations.GetString ("Color");
 	public DitheringData Data => (DitheringData) EffectData!; // NRT - Set in constructor
 
