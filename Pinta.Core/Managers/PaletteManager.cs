@@ -91,7 +91,7 @@ public sealed class PaletteManager : IPaletteService
 		CurrentPalette = Palette.GetDefault ();
 
 		// This is an async method.
-		// Furthermore, it depends on `chrome` and `palette_formats` having a value
+		// Furthermore, it depends on `chrome` and `palette_formats`, and `CurrentPalette` having a value
 		// Can this call be moved out of this constructor?
 		PopulateSavedPalette (paletteFormats);
 
