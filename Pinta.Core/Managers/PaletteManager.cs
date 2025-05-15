@@ -90,8 +90,7 @@ public sealed class PaletteManager : IPaletteService
 
 		CurrentPalette = Palette.GetDefault ();
 
-		// This is an async method.
-		// Furthermore, it depends on `chrome` and `palette_formats`, and `CurrentPalette` having a value
+		// This depends on `chrome` and `palette_formats`, and `CurrentPalette` having a value
 		// Can this call be moved out of this constructor?
 		PopulateSavedPalette (paletteFormats);
 
@@ -158,23 +157,11 @@ public sealed class PaletteManager : IPaletteService
 		OnRecentColorsChanged ();
 	}
 
-	private async void PopulateSavedPalette (PaletteFormatManager paletteFormats)
+	private void PopulateSavedPalette (PaletteFormatManager paletteFormats)
 	{
-		try {
-			string paletteFile = System.IO.Path.Combine (settings.GetUserSettingsDirectory (), PALETTE_FILE);
-			if (!System.IO.File.Exists (paletteFile)) return;
-			CurrentPalette.Load (paletteFormats, Gio.FileHelper.NewForPath (paletteFile));
-		} catch (PaletteLoadException ex) {
-
-			var parent = chrome.MainWindow;
-
-			await chrome.ShowUnsupportedFormatDialog (
-				parent,
-				palette_formats.Formats,
-				ex.FileName,
-				Translations.GetString ("Unsupported palette format"),
-				(ex.InnerException?.Message) ?? ex.Message);
-		}
+		string paletteFile = System.IO.Path.Combine (settings.GetUserSettingsDirectory (), PALETTE_FILE);
+		if (!System.IO.File.Exists (paletteFile)) return;
+		CurrentPalette.Load (paletteFormats, Gio.FileHelper.NewForPath (paletteFile));
 	}
 
 	private void PopulateRecentlyUsedColors ()
