@@ -86,7 +86,7 @@ public sealed class PaletteManager : IPaletteService
 
 		this.chrome = chrome;
 		this.settings = settings;
-		palette_formats = paletteFormats;
+		this.palette_formats = paletteFormats;
 
 		CurrentPalette = Palette.GetDefault ();
 
