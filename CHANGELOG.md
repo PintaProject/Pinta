@@ -11,6 +11,7 @@ Thanks to the following contributors who worked on this release:
 - @UrtsiSantsi
 
 ### Added
+- Added an option (View -> Show/Hide -> Menu Bar) to switch to a menu bar layout instead of a header bar (#781, #1418)
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
 - When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
 - Pinta now configures a compatibility version number for add-ins, to support running add-ins built against older versions such as Pinta 3.0 (#1379, #1389)
