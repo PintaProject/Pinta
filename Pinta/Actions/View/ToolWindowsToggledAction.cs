@@ -24,11 +24,9 @@ internal sealed class ToolWindowsToggledAction : IActionHandler
 		view.ToolWindows.Toggled -= Activated;
 	}
 
-	private void Activated (bool value)
+	private void Activated (bool value, bool interactive)
 	{
 		var dock = (Docking.Dock) chrome.Dock;
 		dock.RightPanel.Visible = value;
-
-		System.Console.WriteLine ($"visible {value}");
 	}
 }
