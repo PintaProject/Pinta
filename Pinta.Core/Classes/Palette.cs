@@ -145,15 +145,11 @@ public sealed class Palette
 
 	public void Load (PaletteFormatManager paletteFormats, Gio.File file)
 	{
-		try {
-			var loadedColors = LoadColors (paletteFormats, file);
-			colors.Clear ();
-			colors.AddRange (loadedColors);
-			colors.TrimExcess ();
-			OnPaletteChanged ();
-		} catch (Exception e) {
-			throw new PaletteLoadException (file.GetParseName (), e);
-		}
+		var loadedColors = LoadColors (paletteFormats, file);
+		colors.Clear ();
+		colors.AddRange (loadedColors);
+		colors.TrimExcess ();
+		OnPaletteChanged ();
 	}
 
 	static List<Color> LoadColors (PaletteFormatManager paletteFormats, Gio.File file)
@@ -179,7 +175,7 @@ public sealed class Palette
 			}
 		}
 
-		throw new Exception (errors.ToString ());
+		throw new PaletteLoadException (file.GetParseName ());
 	}
 
 	public void Save (Gio.File file, IPaletteSaver saver)
