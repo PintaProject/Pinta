@@ -32,11 +32,11 @@ public static class GioExtensions
 
 	static GioExtensions ()
 	{
-		NativeImportResolver.RegisterLibrary (GIO_LIBRARY_NAME,
+		NativeImportResolver.RegisterLibrary (
+			GIO_LIBRARY_NAME,
 			windowsLibraryName: "libgio-2.0-0.dll",
 			linuxLibraryName: "libgio-2.0.so.0",
-			osxLibraryName: "libgio-2.0.0.dylib"
-		);
+			osxLibraryName: "libgio-2.0.0.dylib");
 	}
 
 	/// <summary>
@@ -90,7 +90,10 @@ public static class GioExtensions
 		menu.AppendItem (item);
 	}
 
-	public static void RemoveMultiple (this Gio.ListStore store, uint position, uint n_removals)
+	public static void RemoveMultiple (
+		this Gio.ListStore store,
+		uint position,
+		uint n_removals)
 	{
 		store.Splice (position, n_removals, [], 0);
 	}
