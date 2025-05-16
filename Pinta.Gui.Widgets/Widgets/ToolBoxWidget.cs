@@ -18,31 +18,16 @@ public sealed class ToolBoxWidget : Gtk.FlowBox
 		// --- References to keep
 
 		this.tools = tools;
-
-		// --- Other initialization
-
-		tools.ToolAdded += Tools_ToolAdded;
-		tools.ToolRemoved += Tools_ToolRemoved;
 	}
 
-	private void Tools_ToolRemoved (object? sender, ToolEventArgs e)
+	public void AddItem (BaseTool tool)
 	{
-		RemoveItem (e.Tool.ToolItem);
+		var index = tools.ToList ().IndexOf (tool);
+		Insert (tool.ToolItem, index);
 	}
 
-	private void Tools_ToolAdded (object? sender, ToolEventArgs e)
+	public void RemoveItem (BaseTool tool)
 	{
-		AddItem (e.Tool.ToolItem);
-	}
-
-	public void AddItem (ToolBoxButton item)
-	{
-		var index = tools.ToList ().IndexOf (item.Tool);
-		Insert (item.Tool.ToolItem, index);
-	}
-
-	public void RemoveItem (ToolBoxButton item)
-	{
-		Remove (item);
+		Remove (tool.ToolItem);
 	}
 }

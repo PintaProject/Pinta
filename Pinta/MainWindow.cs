@@ -500,6 +500,9 @@ internal sealed class MainWindow
 	{
 		ToolBoxWidget toolbox = new (PintaCore.Tools);
 
+		PintaCore.Tools.ToolAdded += (_, e) => toolbox.AddItem (e.Tool);
+		PintaCore.Tools.ToolRemoved += (_, e) => toolbox.RemoveItem (e.Tool);
+
 		Gtk.ScrolledWindow toolbox_scroll = new () {
 			Child = toolbox,
 			HscrollbarPolicy = Gtk.PolicyType.Never,
