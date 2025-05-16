@@ -483,6 +483,7 @@ public sealed class EditActions
 
 	private async void HandlerPintaCoreActionsEditLoadPaletteActivated (object sender, EventArgs e)
 	{
+
 		using Gtk.FileFilter palettesFilter = CreatePalettesFilter ();
 		using Gtk.FileFilter catchAllFilter = CreateCatchAllFilter ();
 
@@ -502,7 +503,21 @@ public sealed class EditActions
 			return;
 
 		last_palette_dir = choice.GetParent ();
-		palette.CurrentPalette.Load (palette_formats, choice);
+
+		try {
+			palette.CurrentPalette.Load (palette_formats, choice);
+
+		} catch (PaletteLoadException ex) {
+
+			var parent = chrome.MainWindow;
+
+			await chrome.ShowUnsupportedFormatDialog (
+				parent,
+				palette_formats.Formats,
+				ex.FileName,
+				Translations.GetString ("Unsupported palette format"),
+				ex.Message);
+		}
 	}
 
 	private void HandlerPintaCoreActionsEditSavePaletteActivated (object sender, EventArgs e)
