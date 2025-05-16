@@ -175,7 +175,9 @@ public sealed class Palette
 			}
 		}
 
-		throw new PaletteLoadException (file.GetParseName ());
+		throw new PaletteLoadException (
+			file.GetParseName (),
+			errors.ToString ());
 	}
 
 	public void Save (Gio.File file, IPaletteSaver saver)

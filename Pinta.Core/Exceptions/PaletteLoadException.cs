@@ -5,8 +5,8 @@ namespace Pinta.Core;
 public sealed class PaletteLoadException : Exception
 {
 	public string FileName { get; }
-	internal PaletteLoadException (string fileName)
-		: base ($"File at {fileName} could not load as palette")
+	internal PaletteLoadException (string fileName, string message)
+		: base (message)
 	{
 		FileName = fileName;
 	}
