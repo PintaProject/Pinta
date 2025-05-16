@@ -24,22 +24,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using Gio;
-
 namespace Pinta.Core;
 
 public static class GioExtensions
 {
-	private const string GioLibraryName = "Gio";
+	private const string GIO_LIBRARY_NAME = "Gio";
 
 	static GioExtensions ()
 	{
-		NativeImportResolver.RegisterLibrary (GioLibraryName,
+		NativeImportResolver.RegisterLibrary (
+			GIO_LIBRARY_NAME,
 			windowsLibraryName: "libgio-2.0-0.dll",
 			linuxLibraryName: "libgio-2.0.so.0",
-			osxLibraryName: "libgio-2.0.0.dylib"
-		);
+			osxLibraryName: "libgio-2.0.0.dylib");
 	}
 
 	/// <summary>
@@ -48,7 +45,11 @@ public static class GioExtensions
 	/// </summary>
 	public static string GetDisplayName (this Gio.File file)
 	{
-		var info = file.QueryInfo (Constants.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME, Gio.FileQueryInfoFlags.None, cancellable: null);
+		Gio.FileInfo info = file.QueryInfo (
+			Gio.Constants.FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
+			Gio.FileQueryInfoFlags.None,
+			cancellable: null);
+
 		return info.GetDisplayName ();
 	}
 
@@ -58,36 +59,41 @@ public static class GioExtensions
 	/// </summary>
 	public static Gio.OutputStream Replace (this Gio.File file)
 	{
-		return file.Replace (null, false, Gio.FileCreateFlags.None, null);
+		return file.Replace (
+			etag: null,
+			makeBackup: false,
+			flags: Gio.FileCreateFlags.None,
+			cancellable: null);
 	}
 
 	public static void Remove (this Gio.Menu menu, Command action)
 	{
 		for (int i = 0; i < menu.GetNItems (); ++i) {
-			var name_attr = menu.GetItemAttributeValue (i, "action", GLib.VariantType.String)!.GetString (out var _);
-			if (name_attr == action.FullName) {
-				menu.Remove (i);
-				return;
-			}
+			string name_attr = menu.GetItemAttributeValue (i, "action", GLib.VariantType.String)!.GetString (out nuint _);
+			if (name_attr != action.FullName) continue;
+			menu.Remove (i);
+			return;
 		}
 	}
 
 	public static void AppendMenuItemSorted (this Gio.Menu menu, Gio.MenuItem item)
 	{
-		var new_label = item.GetAttributeValue ("label", GLib.VariantType.String)!.GetString (out var _);
+		string newLabel = item.GetAttributeValue ("label", GLib.VariantType.String)!.GetString (out nuint _);
 
 		for (int i = 0; i < menu.GetNItems (); i++) {
-			var label = menu.GetItemAttributeValue (i, "label", GLib.VariantType.String)!.GetString (out var _);
-			if (string.Compare (label, new_label) > 0) {
-				menu.InsertItem (i, item);
-				return;
-			}
+			string label = menu.GetItemAttributeValue (i, "label", GLib.VariantType.String)!.GetString (out nuint _);
+			if (string.Compare (label, newLabel) <= 0) continue;
+			menu.InsertItem (i, item);
+			return;
 		}
 
 		menu.AppendItem (item);
 	}
 
-	public static void RemoveMultiple (this Gio.ListStore store, uint position, uint n_removals)
+	public static void RemoveMultiple (
+		this Gio.ListStore store,
+		uint position,
+		uint n_removals)
 	{
 		store.Splice (position, n_removals, [], 0);
 	}

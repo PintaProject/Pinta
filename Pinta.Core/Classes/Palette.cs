@@ -40,6 +40,7 @@ public sealed class Palette
 	public Palette ()
 	{
 		List<Color> backing = [];
+
 		colors = backing;
 		Colors = new ReadOnlyCollection<Color> (backing);
 	}
@@ -144,21 +145,11 @@ public sealed class Palette
 
 	public void Load (PaletteFormatManager paletteFormats, Gio.File file)
 	{
-		try {
-			var loadedColors = LoadColors (paletteFormats, file);
-			colors.Clear ();
-			colors.AddRange (loadedColors);
-			colors.TrimExcess ();
-			OnPaletteChanged ();
-		} catch (Exception e) {
-			var parent = PintaCore.Chrome.MainWindow;
-			PintaCore.Chrome.ShowUnsupportedFormatDialog (
-				parent,
-				PintaCore.PaletteFormats.Formats,
-				file.GetParseName (),
-				Translations.GetString ("Unsupported palette format"),
-				e.Message);
-		}
+		var loadedColors = LoadColors (paletteFormats, file);
+		colors.Clear ();
+		colors.AddRange (loadedColors);
+		colors.TrimExcess ();
+		OnPaletteChanged ();
 	}
 
 	static List<Color> LoadColors (PaletteFormatManager paletteFormats, Gio.File file)
@@ -184,7 +175,9 @@ public sealed class Palette
 			}
 		}
 
-		throw new Exception (errors.ToString ());
+		throw new PaletteLoadException (
+			file.GetParseName (),
+			errors.ToString ());
 	}
 
 	public void Save (Gio.File file, IPaletteSaver saver)
