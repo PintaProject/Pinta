@@ -21,8 +21,18 @@ public sealed class ToolBoxWidget : Gtk.FlowBox
 
 		// --- Other initialization
 
-		tools.ToolAdded += (_, e) => AddItem (e.Tool.ToolItem);
-		tools.ToolRemoved += (_, e) => RemoveItem (e.Tool.ToolItem);
+		tools.ToolAdded += Tools_ToolAdded;
+		tools.ToolRemoved += Tools_ToolRemoved;
+	}
+
+	private void Tools_ToolRemoved (object? sender, ToolEventArgs e)
+	{
+		RemoveItem (e.Tool.ToolItem);
+	}
+
+	private void Tools_ToolAdded (object? sender, ToolEventArgs e)
+	{
+		AddItem (e.Tool.ToolItem);
 	}
 
 	public void AddItem (ToolBoxButton item)
