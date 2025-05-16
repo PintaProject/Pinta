@@ -516,7 +516,7 @@ public sealed class EditActions
 				palette_formats.Formats,
 				ex.FileName,
 				Translations.GetString ("Unsupported palette format"),
-				(ex.InnerException?.Message) ?? ex.Message);
+				ex.Message);
 		}
 	}
 
