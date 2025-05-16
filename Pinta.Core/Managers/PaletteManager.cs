@@ -71,11 +71,9 @@ public sealed class PaletteManager : IPaletteService
 
 	public Palette CurrentPalette { get; }
 
-	private readonly ChromeManager chrome;
 	private readonly SettingsManager settings;
 	private readonly PaletteFormatManager palette_formats;
 	public PaletteManager (
-		ChromeManager chrome,
 		SettingsManager settings,
 		PaletteFormatManager paletteFormats)
 	{
@@ -84,13 +82,12 @@ public sealed class PaletteManager : IPaletteService
 		recently_used = recentlyUsed;
 		RecentlyUsedColors = new ReadOnlyCollection<Color> (recentlyUsed);
 
-		this.chrome = chrome;
 		this.settings = settings;
 		this.palette_formats = paletteFormats;
 
 		CurrentPalette = Palette.GetDefault ();
 
-		// This depends on `chrome` and `palette_formats`, and `CurrentPalette` having a value
+		// This depends on `palette_formats` and `CurrentPalette` having a value
 		// Can this call be moved out of this constructor?
 		PopulateSavedPalette (paletteFormats);
 

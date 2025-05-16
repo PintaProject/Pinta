@@ -70,7 +70,7 @@ public static class PintaCore
 		ImageConverterManager imageFormats = new (settings);
 		WorkspaceManager workspace = new (system, chrome, imageFormats);
 		ToolManager tools = new (workspace, chrome);
-		PaletteManager palette = new (chrome, settings, paletteFormats);
+		PaletteManager palette = new (settings, paletteFormats);
 		ActionManager actions = new (chrome, imageFormats, paletteFormats, palette, recentFiles, system, tools, workspace);
 		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
 		EffectsManager effects = new (actions, chrome, livePreview);
