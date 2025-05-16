@@ -498,7 +498,11 @@ internal sealed class MainWindow
 
 	private void CreateDockAndPads (Gtk.Box container)
 	{
-		ToolBoxWidget toolbox = new ();
+		ToolBoxWidget toolbox = new (PintaCore.Tools);
+
+		PintaCore.Tools.ToolAdded += (o, e) => toolbox.AddItem (e.Tool.ToolItem);
+		PintaCore.Tools.ToolRemoved += (o, e) => toolbox.RemoveItem (e.Tool.ToolItem);
+
 		Gtk.ScrolledWindow toolbox_scroll = new () {
 			Child = toolbox,
 			HscrollbarPolicy = Gtk.PolicyType.Never,
