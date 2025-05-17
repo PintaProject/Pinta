@@ -75,8 +75,8 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> dst_data = destination.GetPixelData ();
 
-		for (int i = 0; i < src_data.Length; i++)
-			dst_data[i] = GetPixelColor (settings, src_data[i]);
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
+			dst_data[pixel.memoryOffset] = GetPixelColor (settings, src_data[pixel.memoryOffset]);
 	}
 
 	private ColorBgra GetPixelColor (in BrightnessContrastSettings settings, in ColorBgra originalColor)
