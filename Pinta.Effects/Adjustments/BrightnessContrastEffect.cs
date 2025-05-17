@@ -55,37 +55,43 @@ public sealed class BrightnessContrastEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
+	private readonly record struct BrightnessContrastSettings (
+		Size canvasSize,
+		bool divideIsZero);
+	private BrightnessContrastSettings CreateSettings (ImageSurface destination)
+	{
+		return new (
+			canvasSize: destination.GetSize (),
+			divideIsZero: divide == 0);
+	}
+
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		if (!table_calculated)
 			Calculate ();
 
-		var src_data = source.GetReadOnlyPixelData ();
-		var dst_data = destination.GetPixelData ();
-		int width = source.Width;
+		BrightnessContrastSettings settings = CreateSettings (destination);
 
-		for (int y = roi.Top; y <= roi.Bottom; y++) {
-			var src_row = src_data.Slice (y * width + roi.Left, roi.Width);
-			var dst_row = dst_data.Slice (y * width + roi.Left, roi.Width);
+		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
 
-			if (divide == 0) {
-				for (int i = 0; i < src_row.Length; ++i) {
-					ColorBgra col = src_row[i];
-					uint c = rgb_table![col.GetIntensityByte ()]; // NRT - Set in Calculate
-					dst_row[i] = ColorBgra.FromUInt32 ((col.BGRA & 0xff000000) | c | (c << 8) | (c << 16));
-				}
-			} else {
-				for (int i = 0; i < src_row.Length; ++i) {
-					ColorBgra col = src_row[i];
-					int intensity = col.GetIntensityByte ();
-					int shiftIndex = intensity * 256;
-					dst_row[i] = ColorBgra.FromBgra (
-						b: rgb_table![shiftIndex + col.B],
-						g: rgb_table![shiftIndex + col.G],
-						r: rgb_table![shiftIndex + col.R],
-						a: col.A);
-				}
-			}
+		for (int i = 0; i < src_data.Length; i++)
+			dst_data[i] = GetPixelColor (settings, src_data[i]);
+	}
+
+	private ColorBgra GetPixelColor (in BrightnessContrastSettings settings, in ColorBgra originalColor)
+	{
+		int intensity = originalColor.GetIntensityByte ();
+		if (settings.divideIsZero) {
+			uint c = rgb_table![intensity]; // NRT - Set in Calculate
+			return ColorBgra.FromUInt32 ((originalColor.BGRA & 0xff000000) | c | (c << 8) | (c << 16));
+		} else {
+			int shiftIndex = intensity * 256;
+			return ColorBgra.FromBgra (
+				b: rgb_table![shiftIndex + originalColor.B],
+				g: rgb_table![shiftIndex + originalColor.G],
+				r: rgb_table![shiftIndex + originalColor.R],
+				a: originalColor.A);
 		}
 	}
 
