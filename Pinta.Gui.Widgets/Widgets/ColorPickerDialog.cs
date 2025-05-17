@@ -651,7 +651,13 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			// Remove event handlers on exit (in particular, we don't want to handle the
 			// 'is-active' property changing as the dialog is being closed (bug #1390)).
-			this.OnResponse += (_, _) => {
+			this.OnResponse += (_, e) => {
+				Gtk.ResponseType response = (Gtk.ResponseType) e.ResponseId;
+				// Don't attempt to remove the signals again when the dialog is deleted, which
+				// triggers Gtk.ResponseType.DeleteEvent.
+				if (response != Gtk.ResponseType.Cancel && response != Gtk.ResponseType.Ok)
+					return;
+
 				palette.PrimaryColorChanged -= PrimaryChangeHandler;
 				palette.SecondaryColorChanged -= SecondaryChangeHandler;
 				IsActivePropertyDefinition.Unnotify (this, ActiveWindowChangeHandler);
