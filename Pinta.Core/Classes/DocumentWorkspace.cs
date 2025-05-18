@@ -61,7 +61,7 @@ public sealed class DocumentWorkspace
 	#endregion
 
 	#region Public Properties
-	public Gtk.DrawingArea Canvas { get; set; } = null!; // NRT - This is set soon after creation
+	public Gtk.Widget Canvas { get; set; } = null!; // NRT - This is set soon after creation
 	public Gtk.Widget CanvasWindow { get; set; } = null!; // NRT - This is set soon after creation
 
 	/// <summary>

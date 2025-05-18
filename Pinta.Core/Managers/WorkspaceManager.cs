@@ -88,19 +88,6 @@ public static class WorkspaceServiceExtensions
 		return workspace.ActiveWorkspace.CanvasPointToView (canvas_pos);
 	}
 
-	/// <summary>
-	/// Converts a point from the active document's view coordinates to canvas coordinates.
-	/// </summary>
-	/// <param name='canvas_pos'>
-	/// The position of the view point
-	/// </param>
-	public static PointD ViewPointToCanvas (
-		this IWorkspaceService workspace,
-		PointD view_pos)
-	{
-		return workspace.ActiveWorkspace.ViewPointToCanvas (view_pos);
-	}
-
 	public static void ResizeImage (
 		this IWorkspaceService workspace,
 		Size newSize,

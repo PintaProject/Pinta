@@ -32,7 +32,6 @@ namespace Pinta;
 
 public sealed class CanvasWindow : Gtk.Grid
 {
-	private readonly WorkspaceManager workspace;
 	private readonly Document document;
 
 	private readonly Ruler horizontal_ruler;
@@ -52,10 +51,8 @@ public sealed class CanvasWindow : Gtk.Grid
 	public PintaCanvas Canvas { get; }
 
 	public CanvasWindow (
-		ActionManager actions,
 		ChromeManager chrome,
 		ToolManager tools,
-		WorkspaceManager workspace,
 		Document document,
 		ICanvasGridService canvasGrid)
 	{
@@ -70,10 +67,8 @@ public sealed class CanvasWindow : Gtk.Grid
 		scrollController.OnDecelerate += (_, _) => gestureZoom.IsActive (); // Cancel scroll deceleration when zooming
 
 		PintaCanvas canvas = new (
-			actions,
 			chrome,
 			tools,
-			workspace,
 			this,
 			document,
 			canvasGrid
@@ -130,7 +125,6 @@ public sealed class CanvasWindow : Gtk.Grid
 
 		Canvas = canvas;
 
-		this.workspace = workspace;
 		this.document = document;
 
 		scrolled_window = scrolledWindow;
@@ -148,9 +142,6 @@ public sealed class CanvasWindow : Gtk.Grid
 		Gtk.EventControllerMotion _,
 		Gtk.EventControllerMotion.MotionSignalArgs args)
 	{
-		if (!workspace.HasOpenDocuments)
-			return;
-
 		PointD newPosition = new (args.X, args.Y);
 
 		// These coordinates are relative to our grid widget, so transform into the child image
@@ -158,7 +149,7 @@ public sealed class CanvasWindow : Gtk.Grid
 		this.TranslateCoordinates (Canvas, newPosition, out PointD viewPos);
 
 		current_window_pos = newPosition;
-		current_canvas_pos = workspace.ViewPointToCanvas (viewPos);
+		current_canvas_pos = document.Workspace.ViewPointToCanvas (viewPos);
 		horizontal_ruler.Position = current_canvas_pos.X;
 		vertical_ruler.Position = current_canvas_pos.Y;
 	}
@@ -221,23 +212,21 @@ public sealed class CanvasWindow : Gtk.Grid
 		if (scrolled_window.Hadjustment == null || scrolled_window.Vadjustment == null)
 			return;
 
-		if (workspace.HasOpenDocuments) {
+		DocumentWorkspace workspace = document.Workspace;
+		if (workspace.Offset.X > 0) {
+			lower = lower with { X = -workspace.Offset.X / workspace.Scale };
+			upper = upper with { X = document.ImageSize.Width - lower.X };
+		} else {
+			lower = lower with { X = scrolled_window.Hadjustment.Value / workspace.Scale };
+			upper = upper with { X = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / workspace.Scale };
+		}
 
-			if (workspace.Offset.X > 0) {
-				lower = lower with { X = -workspace.Offset.X / workspace.Scale };
-				upper = upper with { X = workspace.ImageSize.Width - lower.X };
-			} else {
-				lower = lower with { X = scrolled_window.Hadjustment.Value / workspace.Scale };
-				upper = upper with { X = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / workspace.Scale };
-			}
-
-			if (workspace.Offset.Y > 0) {
-				lower = lower with { Y = -workspace.Offset.Y / workspace.Scale };
-				upper = upper with { Y = workspace.ImageSize.Height - lower.Y };
-			} else {
-				lower = lower with { Y = scrolled_window.Vadjustment.Value / workspace.Scale };
-				upper = upper with { Y = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / workspace.Scale };
-			}
+		if (workspace.Offset.Y > 0) {
+			lower = lower with { Y = -workspace.Offset.Y / workspace.Scale };
+			upper = upper with { Y = document.ImageSize.Height - lower.Y };
+		} else {
+			lower = lower with { Y = scrolled_window.Vadjustment.Value / workspace.Scale };
+			upper = upper with { Y = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / workspace.Scale };
 		}
 
 		horizontal_ruler.SetRange (lower.X, upper.X);

@@ -39,17 +39,17 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 
 	public CanvasWindow CanvasWindow { get; }
 
+	private readonly ChromeManager chrome;
 	private readonly ToolManager tools;
 
 	public PintaCanvas (
-		ActionManager actions,
 		ChromeManager chrome,
 		ToolManager tools,
-		WorkspaceManager workspace,
 		CanvasWindow window,
 		Document document,
 		ICanvasGridService canvasGrid)
 	{
+		this.chrome = chrome;
 		this.tools = tools;
 
 		CanvasWindow = window;
@@ -57,105 +57,42 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 
 		cr = new CanvasRenderer (canvasGrid, true);
 
-		// Keep the widget the same size as the canvas
-		document.Workspace.ViewSizeChanged += (_, _) => SetRequisition (document.Workspace.ViewSize);
+		document.Workspace.ViewSizeChanged += OnViewSizeChanged;
+		document.Workspace.CanvasInvalidated += OnCanvasInvalidated;
 
-		// Update the canvas when the image changes
-		document.Workspace.CanvasInvalidated += (_, _) => {
-			// If GTK+ hasn't created the canvas window yet, no need to invalidate it
-			if (!GetRealized ())
-				return;
-
-			// TODO-GTK4 (improvement) - is there a way to invalidate only a rectangle?
-#if false
-			if (e.EntireSurface)
-				Window.Invalidate ();
-			else
-				Window.InvalidateRect (e.Rectangle, false);
-#else
-			QueueDraw ();
-#endif
-		};
-
-		// Give mouse press / release events to the current tool
-		var click_controller = Gtk.GestureClick.New ();
+		// Forward mouse press / release events to the current tool
+		Gtk.GestureClick click_controller = Gtk.GestureClick.New ();
 		click_controller.SetButton (0); // Listen for all mouse buttons.
-
-		click_controller.OnPressed += (_, args) => {
-			// Note we don't call click_controller.SetState (Gtk.EventSequenceState.Claimed) here, so
-			// that the CanvasWindow can also receive motion events to update the root window mouse position.
-
-			// A mouse click on the canvas should grab focus away from any toolbar widgets, etc
-			// Using the root canvas widget works best - if the drawing area is given focus, the scroll
-			// widget jumps back to the origin.
-			CanvasWindow.GrabFocus ();
-
-			// The canvas gets the button press before the tab system, so
-			// if this click is on a canvas that isn't currently the ActiveDocument yet, 
-			// we need to go ahead and make it the active document for the tools
-			// to use it, even though right after this the tab system would have switched it
-			if (workspace.ActiveDocument != document)
-				actions.Window.SetActiveDocument (document);
-
-			PointD window_point = new (args.X, args.Y);
-			PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
-
-			ToolMouseEventArgs tool_args = new () {
-				State = click_controller.GetCurrentEventState (),
-				MouseButton = click_controller.GetCurrentMouseButton (),
-				PointDouble = canvas_point,
-				WindowPoint = window_point,
-				RootPoint = CanvasWindow.WindowMousePosition,
-			};
-
-			tools.DoMouseDown (document, tool_args);
-		};
-
-		click_controller.OnReleased += (_, args) => {
-
-			PointD window_point = new (args.X, args.Y);
-			PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
-
-			ToolMouseEventArgs tool_args = new () {
-				State = click_controller.GetCurrentEventState (),
-				MouseButton = click_controller.GetCurrentMouseButton (),
-				PointDouble = canvas_point,
-				WindowPoint = window_point,
-				RootPoint = CanvasWindow.WindowMousePosition,
-			};
-
-			tools.DoMouseUp (document, tool_args);
-		};
-
+		click_controller.OnPressed += OnMouseDown;
+		click_controller.OnReleased += OnMouseUp;
 		AddController (click_controller);
 
-		// Give mouse move events to the current tool
-		var motion_controller = Gtk.EventControllerMotion.New ();
-		motion_controller.OnMotion += (_, args) => {
-
-			PointD window_point = new (args.X, args.Y);
-			PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
-
-			if (document.Workspace.PointInCanvas (canvas_point))
-				chrome.LastCanvasCursorPoint = canvas_point.ToInt ();
-
-			if (tools.CurrentTool == null)
-				return;
-
-			ToolMouseEventArgs tool_args = new () {
-				State = motion_controller.GetCurrentEventState (),
-				MouseButton = MouseButton.None,
-				PointDouble = canvas_point,
-				WindowPoint = window_point,
-				RootPoint = CanvasWindow.WindowMousePosition,
-			};
-
-			tools.DoMouseMove (document, tool_args);
-		};
-
+		// Forward mouse move events to the current tool
+		Gtk.EventControllerMotion motion_controller = Gtk.EventControllerMotion.New ();
+		motion_controller.OnMotion += OnMouseMove;
 		AddController (motion_controller);
 
 		SetDrawFunc ((area, context, width, height) => Draw (context, width, height));
+	}
+
+	/// <summary>
+	/// Update the canvas when the image changes.
+	/// </summary>
+	private void OnCanvasInvalidated (object? o, System.EventArgs args)
+	{
+		// If GTK+ hasn't created the canvas window yet, no need to invalidate it
+		if (!GetRealized ())
+			return;
+
+		// TODO-GTK4 (improvement) - is there a way to invalidate only a rectangle?
+#if false
+		if (e.EntireSurface)
+			Window.Invalidate ();
+		else
+			Window.InvalidateRect (e.Rectangle, false);
+#else
+		QueueDraw ();
+#endif
 	}
 
 	private void Draw (Cairo.Context context, int width, int height)
@@ -242,12 +179,78 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 			control.Draw (cr);
 	}
 
-	private void SetRequisition (Size size)
+	/// <summary>
+	/// Update the widget's size when the image size has changed, or e.g. zooming in.
+	/// </summary>
+	private void OnViewSizeChanged (object? o, System.EventArgs args)
 	{
-		WidthRequest = size.Width;
-		HeightRequest = size.Height;
+		Size viewSize = document.Workspace.ViewSize;
+		SetSizeRequest (viewSize.Width, viewSize.Height);
+	}
 
-		QueueResize ();
+	private void OnMouseDown (Gtk.GestureClick gesture, Gtk.GestureClick.PressedSignalArgs args)
+	{
+		// Note we don't call gesture.SetState (Gtk.EventSequenceState.Claimed) here, so
+		// that the CanvasWindow can also receive motion events to update the root window mouse position.
+
+		// A mouse click on the canvas should grab focus away from any toolbar widgets, etc
+		// Using the root canvas widget works best - if the drawing area is given focus, the scroll
+		// widget jumps back to the origin.
+		CanvasWindow.GrabFocus ();
+
+		// Note: if we ever regain support for docking multiple canvas
+		// widgets side by side (like Pinta 1.7 could), a mouse click should switch
+		// the active document to this document.
+
+		// Send the mouse press event to the current tool.
+		PointD window_point = new (args.X, args.Y);
+		PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
+
+		ToolMouseEventArgs tool_args = new () {
+			State = gesture.GetCurrentEventState (),
+			MouseButton = gesture.GetCurrentMouseButton (),
+			PointDouble = canvas_point,
+			WindowPoint = window_point,
+			RootPoint = CanvasWindow.WindowMousePosition,
+		};
+
+		tools.DoMouseDown (document, tool_args);
+	}
+
+	private void OnMouseUp (Gtk.GestureClick gesture, Gtk.GestureClick.ReleasedSignalArgs args)
+	{
+		// Send the mouse release event to the current tool.
+		PointD window_point = new (args.X, args.Y);
+		PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
+
+		ToolMouseEventArgs tool_args = new () {
+			State = gesture.GetCurrentEventState (),
+			MouseButton = gesture.GetCurrentMouseButton (),
+			PointDouble = canvas_point,
+			WindowPoint = window_point,
+			RootPoint = CanvasWindow.WindowMousePosition,
+		};
+
+		tools.DoMouseUp (document, tool_args);
+	}
+
+	private void OnMouseMove (Gtk.EventControllerMotion controller, Gtk.EventControllerMotion.MotionSignalArgs args)
+	{
+		PointD window_point = new (args.X, args.Y);
+		PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
+
+		if (document.Workspace.PointInCanvas (canvas_point))
+			chrome.LastCanvasCursorPoint = canvas_point.ToInt ();
+
+		ToolMouseEventArgs tool_args = new () {
+			State = controller.GetCurrentEventState (),
+			MouseButton = MouseButton.None,
+			PointDouble = canvas_point,
+			WindowPoint = window_point,
+			RootPoint = CanvasWindow.WindowMousePosition,
+		};
+
+		tools.DoMouseMove (document, tool_args);
 	}
 
 	public bool DoKeyPressEvent (
