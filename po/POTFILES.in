@@ -107,6 +107,7 @@ Pinta.Core/EventArgs/TextChangedEventArgs.cs
 Pinta.Core/EventArgs/ToolEventArgs.cs
 Pinta.Core/EventArgs/ToolKeyEventArgs.cs
 Pinta.Core/EventArgs/ToolMouseEventArgs.cs
+Pinta.Core/Exceptions/PaletteLoadException.cs
 Pinta.Core/Extensions/AddinUtilities.cs
 Pinta.Core/Extensions/Cairo/CairoExtensions.Blending.cs
 Pinta.Core/Extensions/Cairo/CairoExtensions.Color.cs
@@ -272,6 +273,7 @@ Pinta.Gui.Widgets/Widgets/Canvas/PintaCanvas.cs
 Pinta.Gui.Widgets/Widgets/ColorGradientWidget.cs
 Pinta.Gui.Widgets/Widgets/ColorPanelWidget.cs
 Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs
+Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs
 Pinta.Gui.Widgets/Widgets/ComboBoxWidget.cs
 Pinta.Gui.Widgets/Widgets/HScaleSpinButtonWidget.cs
 Pinta.Gui.Widgets/Widgets/HistogramWidget.cs
@@ -368,6 +370,7 @@ Pinta/Actions/Layers/RotateZoomLayerAction.cs
 Pinta/Actions/View/ColorSchemeChangedAction.cs
 Pinta/Actions/View/EditCanvasGridAction.cs
 Pinta/Actions/View/ImageTabsToggledAction.cs
+Pinta/Actions/View/MenuBarToggledAction.cs
 Pinta/Actions/View/StatusBarToggledAction.cs
 Pinta/Actions/View/ToolBarToggledAction.cs
 Pinta/Actions/View/ToolBoxToggledAction.cs
