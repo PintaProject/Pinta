@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-11 00:28+0000\n"
+"POT-Creation-Date: 2025-05-18 00:29+0000\n"
 "PO-Revision-Date: 2024-03-24 08:01+0000\n"
 "Last-Translator: Rizal Muttaqin <riz_17_oke@yahoo.co.id>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/pinta/pinta/"
@@ -51,7 +51,7 @@ msgstr "Region 7 x 7"
 msgid "9 x 9 Region"
 msgstr "Region 9 x 9"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:416
 msgid "A_dd-ins"
 msgstr "A_dd-in"
 
@@ -77,11 +77,11 @@ msgstr "Tambah derau"
 msgid "Add-in Manager..."
 msgstr "Pengelola Pengaya..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:832
 msgid "Added"
 msgstr "Ditambah"
 
-#: ../Pinta/MainWindow.cs:425
+#: ../Pinta/MainWindow.cs:451
 msgid "Adjustments"
 msgstr "Penyesuaian"
 
@@ -94,13 +94,13 @@ msgstr "Setelah memilih"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:578
+#: ../Pinta.Core/Actions/EditActions.cs:593
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Semua berkas"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:723
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
 msgid "Alpha"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgstr "Berdasarkan karya Paint.NET:"
 msgid "Beautiful Italy"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:85
+#: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Best Fit"
 msgstr "Paling Cocok"
 
@@ -217,7 +217,7 @@ msgstr "Modus Pencampuran"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:700
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:463
 msgid "Blue"
 msgstr "Biru"
 
@@ -255,7 +255,7 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:148
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
 msgstr "Kecerahan"
@@ -268,7 +268,7 @@ msgstr "Kecerahan / Kontras"
 msgid "Brush Size"
 msgstr "Ukuran Kuas"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:270
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:123
 msgid "Brush width"
 msgstr "Lebar kuas"
@@ -292,9 +292,9 @@ msgstr "Per ukuran absolut:"
 msgid "By percentage:"
 msgstr "Per persentasi:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:515
+#: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:169
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Cancel"
@@ -307,7 +307,7 @@ msgstr "Kanvas"
 msgid "Canvas Grid Settings"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:123
+#: ../Pinta.Core/Actions/ViewActions.cs:124
 msgid "Canvas Grid..."
 msgstr ""
 
@@ -340,16 +340,16 @@ msgstr ""
 msgid "Centered"
 msgstr "Ditengahkan"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:222
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Centimeters"
 msgstr "Sentimeter"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:355
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:356
 msgid "Changed Shape Type"
 msgstr "Jenis Bentuk Berubah"
 
@@ -422,15 +422,15 @@ msgstr "Pilih untuk memilih area yang warnanya mirip."
 msgid "Click to select secondary color."
 msgstr "Klik untuk memilih warna sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:433
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:196
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:273
 msgid "Click to switch between primary and secondary color."
 msgstr "Klik untuk berganti antara warna primer dan sekunder."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
 #: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:440
-#: ../Pinta/Dialogs/NewImageDialog.cs:533
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr "Papan Klip"
 
@@ -451,7 +451,7 @@ msgstr "Tutup Semua"
 msgid "Closed Curve Shape"
 msgstr "Bentuk Kurva Tertutup"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 msgid "Closed Line/Curve Series"
 msgstr "Seri Garis/Kurva Tertutup"
 
@@ -497,7 +497,7 @@ msgstr "Kisaran Warna"
 msgid "Color Saturation"
 msgstr "Kepekatan Warna"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:247
+#: ../Pinta.Core/Actions/ViewActions.cs:255
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
@@ -530,7 +530,7 @@ msgstr "Isi"
 msgid "Contiguous"
 msgstr "Bersambungan"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:158
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
 msgstr "Kontras"
@@ -585,8 +585,8 @@ msgstr "Kurva"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
 #: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:442
-#: ../Pinta/Dialogs/NewImageDialog.cs:533
+#: ../Pinta/Dialogs/NewImageDialog.cs:438
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr "Kustom"
 
@@ -596,7 +596,7 @@ msgid "Cut"
 msgstr "Potong"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:244
+#: ../Pinta.Core/Actions/ViewActions.cs:252
 msgid "Dark"
 msgstr ""
 
@@ -609,7 +609,7 @@ msgid "Dash"
 msgstr "Garis"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:240
+#: ../Pinta.Core/Actions/ViewActions.cs:248
 msgid "Default"
 msgstr ""
 
@@ -618,7 +618,7 @@ msgstr ""
 msgid "Delete Layer"
 msgstr "Hapus Lapisan"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:669
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:670
 msgid "Deleted"
 msgstr "Dihapus"
 
@@ -692,11 +692,11 @@ msgstr "Sifat Tepian"
 msgid "Edge Detect"
 msgstr "Deteksi Tepian"
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:412
 msgid "Effe_cts"
 msgstr "Efe_k"
 
-#: ../Pinta/MainWindow.cs:419
+#: ../Pinta/MainWindow.cs:445
 msgid "Effects"
 msgstr ""
 
@@ -705,7 +705,7 @@ msgstr ""
 msgid "Electric"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -762,7 +762,7 @@ msgstr "Faktor"
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Gagal mengakses Portal Desktop XDG"
 
-#: ../Pinta/MainWindow.cs:306
+#: ../Pinta/MainWindow.cs:321
 msgid "Failed to initialize add-in"
 msgstr ""
 
@@ -812,23 +812,23 @@ msgstr ""
 msgid "Fill Selection"
 msgstr "Arsir Pilihan"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
 msgstr "Bentuk Berisi"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
 msgstr "Model isian"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:310
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
 msgstr "Bentuk Berisi dan Bergaris Tepi"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1096
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1380
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1097
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1381
 msgid "Finalized"
 msgstr "Diselesaikan"
 
@@ -886,7 +886,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:154
+#: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
 msgstr "Font"
 
@@ -906,7 +906,7 @@ msgstr "Bentuk Bebas"
 msgid "Frosted Glass"
 msgstr "Kaca Buram"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:164
 msgid "Fullscreen"
 msgstr "Layar Penuh"
 
@@ -934,7 +934,7 @@ msgstr "Gradiasi"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:677
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:440
 msgid "Green"
 msgstr "Hijau"
 
@@ -953,7 +953,7 @@ msgstr "Cahaya Keras"
 msgid "Height:"
 msgstr "Tinggi:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:567
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:330
 msgid "Hex"
 msgstr ""
 
@@ -988,11 +988,11 @@ msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:350
 msgid "Hue"
 msgstr "Hue"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:491
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:254
 msgid "Hue & Sat"
 msgstr ""
 
@@ -1008,7 +1008,7 @@ msgstr "Berkas ICO tidak boleh lebih besar dari 255 x 255 piksel."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Bila Anda tidak simpan, semua perubahan akan hilang."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:431
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:457
 msgid "Image"
 msgstr "Gambar"
 
@@ -1016,7 +1016,7 @@ msgstr "Gambar"
 msgid "Image Editor"
 msgstr "Penyunting Gambar"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:111
+#: ../Pinta.Core/Actions/ViewActions.cs:112
 msgid "Image Tabs"
 msgstr "Label Gambar"
 
@@ -1045,7 +1045,7 @@ msgstr "Impor Dari Berkas"
 msgid "Import from File..."
 msgstr "Impor dari Berkas..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:221
+#: ../Pinta.Core/Actions/ViewActions.cs:228
 msgid "Inches"
 msgstr "Inci"
 
@@ -1104,7 +1104,7 @@ msgid "Invert Colors"
 msgstr "Inversikan Warna"
 
 #: ../Pinta.Core/Actions/EditActions.cs:141
-#: ../Pinta.Core/Actions/EditActions.cs:600
+#: ../Pinta.Core/Actions/EditActions.cs:615
 msgid "Invert Selection"
 msgstr "Inversikan Pilihan"
 
@@ -1335,7 +1335,7 @@ msgid "License"
 msgstr "Lisensi"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:242
+#: ../Pinta.Core/Actions/ViewActions.cs:250
 msgid "Light"
 msgstr ""
 
@@ -1385,7 +1385,7 @@ msgstr "Kecemerlangan"
 msgid "Magic Wand Select"
 msgstr "Pemilih Tongkat Ajaib"
 
-#: ../Pinta/MainWindow.cs:413
+#: ../Pinta/MainWindow.cs:439
 msgid "Main Menu"
 msgstr ""
 
@@ -1407,6 +1407,10 @@ msgstr ""
 msgid "Median"
 msgstr "Median"
 
+#: ../Pinta.Core/Actions/ViewActions.cs:130
+msgid "Menu Bar"
+msgstr ""
+
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
@@ -1416,7 +1420,7 @@ msgstr "Gabungkan Ke Bawahnya"
 msgid "Mode"
 msgstr "Mode"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:913
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:914
 msgid "Modified"
 msgstr "Diubah"
 
@@ -1499,7 +1503,7 @@ msgstr "Normal"
 msgid "Normal Blending"
 msgstr "Pencampuran Normal"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:98
+#: ../Pinta.Core/Actions/ViewActions.cs:99
 msgid "Normal Size"
 msgstr "Ukuran Normal"
 
@@ -1515,7 +1519,7 @@ msgstr ""
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:402
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:165
 msgid "OK"
 msgstr ""
 
@@ -1564,11 +1568,11 @@ msgstr "Buka Citra"
 msgid "Open Image File"
 msgstr "Buka Berkas Citra"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
 msgid "Open Line/Curve Series"
 msgstr "Seri Garis Terbuka/Kurva"
 
-#: ../Pinta.Core/Actions/EditActions.cs:494
+#: ../Pinta.Core/Actions/EditActions.cs:495
 msgid "Open Palette File"
 msgstr "Buka Berkas Palet"
 
@@ -1601,7 +1605,7 @@ msgstr ""
 msgid "Outline Object"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
 msgstr "Bentuk Bergaris Tepi"
@@ -1639,7 +1643,7 @@ msgstr "Kuas Cat"
 msgid "Palette"
 msgstr "Palet"
 
-#: ../Pinta.Core/Actions/EditActions.cs:561
+#: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
 msgstr "Berkas-berkas palet"
 
@@ -1688,7 +1692,7 @@ msgid "Photo"
 msgstr "Foto"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:59
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:63
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1740,7 +1744,7 @@ msgstr "Pinta mendukung format palet berikut:"
 msgid "Pixelate"
 msgstr "Pikselkan"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:220
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Pixels"
 msgstr "Piksel"
 
@@ -1749,12 +1753,16 @@ msgstr "Piksel"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:802
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+msgid "Please restart Pinta for the changes to take effect."
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:600
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Point Added"
 msgstr "Titik Ditambahkan"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:650
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:651
 msgid "Point Deleted"
 msgstr "Titik Dihapus"
 
@@ -1889,7 +1897,7 @@ msgstr "Pemilih Persegi Panjang"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:654
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:417
 msgid "Red"
 msgstr "Merah"
 
@@ -1961,7 +1969,7 @@ msgstr "Umpankan-ulang"
 msgid "Reset"
 msgstr "Atur Ulang"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:392
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:155
 msgid "Reset Color"
 msgstr ""
 
@@ -1990,6 +1998,10 @@ msgstr "Ubah Ukuran Citra..."
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:60
 msgid "Resize Palette"
 msgstr "Ubah Ukuran Palet"
+
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
+msgid "Restart Pinta"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
@@ -2035,7 +2047,7 @@ msgstr "Putar 90° Lawan-Perijam"
 msgid "Rotation"
 msgstr "Putaran"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
 msgid "Rounded Line Series"
 msgstr "Seri Garis Bulat"
 
@@ -2047,11 +2059,11 @@ msgstr "Bentuk Garis Bulat"
 msgid "Rounded Rectangle"
 msgstr "Persegi Panjang Berlengkung"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:225
+#: ../Pinta.Core/Actions/ViewActions.cs:232
 msgid "Ruler Units"
 msgstr "Satuan Penggaris"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:141
+#: ../Pinta.Core/Actions/ViewActions.cs:148
 msgid "Rulers"
 msgstr "Mistar"
 
@@ -2059,11 +2071,11 @@ msgstr "Mistar"
 msgid "Sampling"
 msgstr "Sampling"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:608
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:371
 msgid "Sat"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:502
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:265
 msgid "Sat & Value"
 msgstr ""
 
@@ -2076,7 +2088,7 @@ msgstr "Saturasi"
 msgid "Saturation Percentage"
 msgstr "Persentase Saturasi"
 
-#: ../Pinta.Core/Actions/EditActions.cs:514
+#: ../Pinta.Core/Actions/EditActions.cs:529
 #: ../Pinta.Core/Actions/FileActions.cs:80
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2095,7 +2107,7 @@ msgstr "Simpan Sebagai..."
 msgid "Save Image File"
 msgstr "Simpan Berkas Citra"
 
-#: ../Pinta.Core/Actions/EditActions.cs:511
+#: ../Pinta.Core/Actions/EditActions.cs:526
 msgid "Save Palette File"
 msgstr "Simpan Berkas Palet"
 
@@ -2133,7 +2145,7 @@ msgstr "Sepia"
 msgid "Set Number of Colors"
 msgstr "Tentukan Jumlah Warna"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
 msgid "Shape Type"
 msgstr "Tipe Bentuk"
 
@@ -2147,7 +2159,7 @@ msgstr "Pertajam"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:434
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
 msgid "Shortcut key"
 msgstr "Kunci pintasan"
@@ -2164,11 +2176,11 @@ msgstr ""
 msgid "Show Layer"
 msgstr "Tampilkan Lapisan"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:483
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
 msgid "Show Value"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:236
+#: ../Pinta.Core/Actions/ViewActions.cs:244
 msgid "Show/Hide"
 msgstr "Tampil/Sembunyikan"
 
@@ -2214,7 +2226,7 @@ msgstr "Cipratan"
 msgid "Squares"
 msgstr "Kotak"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:129
+#: ../Pinta.Core/Actions/ViewActions.cs:136
 msgid "Status Bar"
 msgstr "Bilah Status"
 
@@ -2256,7 +2268,7 @@ msgid "Text Style"
 msgstr "Corak Teks"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:318
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
@@ -2355,15 +2367,15 @@ msgstr "Toleransi"
 msgid "Tool"
 msgstr "Alat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:135
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Tool Box"
 msgstr "Kotak Alat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:117
+#: ../Pinta.Core/Actions/ViewActions.cs:118
 msgid "Tool Windows"
 msgstr "Jendela Alat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:105
+#: ../Pinta.Core/Actions/ViewActions.cs:106
 msgid "Toolbar"
 msgstr "Bilah Alat"
 
@@ -2450,7 +2462,7 @@ msgstr "Gambar yang Belum Disimpan {0}"
 msgid "Unsupported file format"
 msgstr "Format berkas tidak didukung"
 
-#: ../Pinta.Core/Classes/Palette.cs:154
+#: ../Pinta.Core/Actions/EditActions.cs:518
 msgid "Unsupported palette format"
 msgstr "Format palet tidak didukung"
 
@@ -2474,7 +2486,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Menggunakan ikon dari:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:631
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:394
 msgid "Value"
 msgstr ""
 
@@ -2526,8 +2538,8 @@ msgstr "Putih"
 msgid "Width:"
 msgstr "Lebar:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:200
-#: ../Pinta.Core/Actions/ViewActions.cs:389
+#: ../Pinta.Core/Actions/ViewActions.cs:207
+#: ../Pinta.Core/Actions/ViewActions.cs:398
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:377
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:386
 msgid "Window"
@@ -2573,19 +2585,19 @@ msgstr "Zum"
 msgid "Zoom Blur"
 msgstr "Pengaburan Zum"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:71
+#: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Zoom In"
 msgstr "Perbesar"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:78
+#: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Zoom Out"
 msgstr "Perkecil"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:92
+#: ../Pinta.Core/Actions/ViewActions.cs:93
 msgid "Zoom to Selection"
 msgstr "Zum ke Pilihan"
 
-#: ../Pinta/MainWindow.cs:387
+#: ../Pinta/MainWindow.cs:408
 msgid "_Adjustments"
 msgstr "_Penyesuaian"
 
@@ -2602,23 +2614,23 @@ msgstr "_Batal"
 msgid "_Discard"
 msgstr "_Abaikan"
 
-#: ../Pinta/MainWindow.cs:370
+#: ../Pinta/MainWindow.cs:389
 msgid "_Edit"
 msgstr "_Sunting"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:385
 msgid "_File"
 msgstr "Be_rkas"
 
-#: ../Pinta/MainWindow.cs:403
+#: ../Pinta/MainWindow.cs:424
 msgid "_Help"
 msgstr "_Bantuan"
 
-#: ../Pinta/MainWindow.cs:379
+#: ../Pinta/MainWindow.cs:398
 msgid "_Image"
 msgstr "_Citra"
 
-#: ../Pinta/MainWindow.cs:383
+#: ../Pinta/MainWindow.cs:402
 msgid "_Layers"
 msgstr "_Lapisan"
 
@@ -2633,11 +2645,11 @@ msgstr "_OK"
 msgid "_Save"
 msgstr "_Simpan"
 
-#: ../Pinta/MainWindow.cs:374
+#: ../Pinta/MainWindow.cs:393
 msgid "_View"
 msgstr "_Tampilan"
 
-#: ../Pinta/MainWindow.cs:399
+#: ../Pinta/MainWindow.cs:420
 msgid "_Window"
 msgstr "_Jendela"
 
@@ -2702,7 +2714,7 @@ msgstr "{0} palet ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:370
+#: ../Pinta.Core/Actions/ViewActions.cs:379
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

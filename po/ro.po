@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-11 00:28+0000\n"
+"POT-Creation-Date: 2025-05-18 00:29+0000\n"
 "PO-Revision-Date: 2023-04-24 16:26+0000\n"
 "Last-Translator: Miron Cristea <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -49,7 +49,7 @@ msgstr "Regiune 7 x 7"
 msgid "9 x 9 Region"
 msgstr "Regiune 9 x 9"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:416
 msgid "A_dd-ins"
 msgstr "E_xtensii"
 
@@ -75,11 +75,11 @@ msgstr "Adaugă zgomot"
 msgid "Add-in Manager..."
 msgstr "Managerul de suplimente"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:832
 msgid "Added"
 msgstr "Adăugat"
 
-#: ../Pinta/MainWindow.cs:425
+#: ../Pinta/MainWindow.cs:451
 msgid "Adjustments"
 msgstr ""
 
@@ -92,13 +92,13 @@ msgstr "După selecţie"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:578
+#: ../Pinta.Core/Actions/EditActions.cs:593
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Toate fişierele"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:723
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
 msgid "Alpha"
 msgstr ""
 
@@ -195,7 +195,7 @@ msgstr "Bazat pe munca la programul Paint.NET:"
 msgid "Beautiful Italy"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:85
+#: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Best Fit"
 msgstr "Cea mai bună încadrare"
 
@@ -215,7 +215,7 @@ msgstr "Mod contopire"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:700
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:463
 msgid "Blue"
 msgstr "Albastru"
 
@@ -253,7 +253,7 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:148
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
 msgstr "Luminozitate"
@@ -266,7 +266,7 @@ msgstr "Luminozitate / contrast"
 msgid "Brush Size"
 msgstr "Mărime pensulă"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:270
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:123
 msgid "Brush width"
 msgstr "Grosime pensulă"
@@ -290,9 +290,9 @@ msgstr "După dimensiune absolută:"
 msgid "By percentage:"
 msgstr "După procentaj:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:515
+#: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:169
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Anulează"
@@ -305,7 +305,7 @@ msgstr "Spațiu de desen"
 msgid "Canvas Grid Settings"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:123
+#: ../Pinta.Core/Actions/ViewActions.cs:124
 msgid "Canvas Grid..."
 msgstr ""
 
@@ -338,16 +338,16 @@ msgstr ""
 msgid "Centered"
 msgstr "Centrat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:222
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Centimeters"
 msgstr "Centimetri"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:355
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:356
 msgid "Changed Shape Type"
 msgstr "Modificare tip formă"
 
@@ -420,7 +420,7 @@ msgstr "Clic pentru a selecta regiunea de culoare similară."
 msgid "Click to select secondary color."
 msgstr "Clic pentru selectarea culorii secundare."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:433
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:196
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:273
 msgid "Click to switch between primary and secondary color."
 msgstr ""
@@ -429,8 +429,8 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
 #: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:440
-#: ../Pinta/Dialogs/NewImageDialog.cs:533
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr "Clipboard"
 
@@ -451,7 +451,7 @@ msgstr "Închide tot"
 msgid "Closed Curve Shape"
 msgstr "Formă curbă închisă"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 msgid "Closed Line/Curve Series"
 msgstr "Serie linii/curbe închise"
 
@@ -497,7 +497,7 @@ msgstr "Interval culoare"
 msgid "Color Saturation"
 msgstr "Saturație culoare"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:247
+#: ../Pinta.Core/Actions/ViewActions.cs:255
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
@@ -530,7 +530,7 @@ msgstr "Conținut"
 msgid "Contiguous"
 msgstr "Continuu"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:158
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
 msgstr "Contrast"
@@ -585,8 +585,8 @@ msgstr "Curbe"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
 #: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:442
-#: ../Pinta/Dialogs/NewImageDialog.cs:533
+#: ../Pinta/Dialogs/NewImageDialog.cs:438
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr "Personalizat"
 
@@ -596,7 +596,7 @@ msgid "Cut"
 msgstr "Taie"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:244
+#: ../Pinta.Core/Actions/ViewActions.cs:252
 msgid "Dark"
 msgstr ""
 
@@ -609,7 +609,7 @@ msgid "Dash"
 msgstr "Liniuţă"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:240
+#: ../Pinta.Core/Actions/ViewActions.cs:248
 msgid "Default"
 msgstr ""
 
@@ -618,7 +618,7 @@ msgstr ""
 msgid "Delete Layer"
 msgstr "Şterge strat"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:669
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:670
 msgid "Deleted"
 msgstr "Şters"
 
@@ -692,11 +692,11 @@ msgstr "Comportament la margine"
 msgid "Edge Detect"
 msgstr "Detectează muchii"
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:412
 msgid "Effe_cts"
 msgstr "Efe_cte"
 
-#: ../Pinta/MainWindow.cs:419
+#: ../Pinta/MainWindow.cs:445
 msgid "Effects"
 msgstr ""
 
@@ -705,7 +705,7 @@ msgstr ""
 msgid "Electric"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -762,7 +762,7 @@ msgstr "Factor"
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Nu s-au putut accesa Portalele Desktop XDG"
 
-#: ../Pinta/MainWindow.cs:306
+#: ../Pinta/MainWindow.cs:321
 msgid "Failed to initialize add-in"
 msgstr ""
 
@@ -812,23 +812,23 @@ msgstr ""
 msgid "Fill Selection"
 msgstr "Umple selecția"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
 msgstr "Umple formă"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
 msgstr "Stil de umplere"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:310
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
 msgstr "Umple și conturează formă"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1096
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1380
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1097
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1381
 msgid "Finalized"
 msgstr "Finalizat"
 
@@ -886,7 +886,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:154
+#: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
 msgstr "Font"
 
@@ -906,7 +906,7 @@ msgstr "Formă liberă"
 msgid "Frosted Glass"
 msgstr "Sticlă înghețată"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:157
+#: ../Pinta.Core/Actions/ViewActions.cs:164
 msgid "Fullscreen"
 msgstr "Afişare pe tot ecranul"
 
@@ -934,7 +934,7 @@ msgstr "Gradient"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:677
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:440
 msgid "Green"
 msgstr "Verde"
 
@@ -953,7 +953,7 @@ msgstr "Lumină aspră"
 msgid "Height:"
 msgstr "Înălțime:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:567
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:330
 msgid "Hex"
 msgstr ""
 
@@ -988,11 +988,11 @@ msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:350
 msgid "Hue"
 msgstr "Nuanță"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:491
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:254
 msgid "Hue & Sat"
 msgstr ""
 
@@ -1008,7 +1008,7 @@ msgstr "Fișierele cu extensia ICO nu pot fi mai mare de 255 x 255 pixeli."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Dacă nu salvați, toate modificările vor fi pierdute definitiv."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:431
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:457
 msgid "Image"
 msgstr "Imagine"
 
@@ -1016,7 +1016,7 @@ msgstr "Imagine"
 msgid "Image Editor"
 msgstr "Editor imagini"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:111
+#: ../Pinta.Core/Actions/ViewActions.cs:112
 msgid "Image Tabs"
 msgstr "File de imagine"
 
@@ -1045,7 +1045,7 @@ msgstr "Importă din fişier"
 msgid "Import from File..."
 msgstr "Importă din fișier..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:221
+#: ../Pinta.Core/Actions/ViewActions.cs:228
 msgid "Inches"
 msgstr "Țoli"
 
@@ -1104,7 +1104,7 @@ msgid "Invert Colors"
 msgstr "Inversează culorile"
 
 #: ../Pinta.Core/Actions/EditActions.cs:141
-#: ../Pinta.Core/Actions/EditActions.cs:600
+#: ../Pinta.Core/Actions/EditActions.cs:615
 msgid "Invert Selection"
 msgstr "Inversează selecția"
 
@@ -1300,7 +1300,7 @@ msgid "License"
 msgstr "Licenţă"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:242
+#: ../Pinta.Core/Actions/ViewActions.cs:250
 msgid "Light"
 msgstr ""
 
@@ -1350,7 +1350,7 @@ msgstr "Luminozitate"
 msgid "Magic Wand Select"
 msgstr "Selectează cu bagheta magică"
 
-#: ../Pinta/MainWindow.cs:413
+#: ../Pinta/MainWindow.cs:439
 msgid "Main Menu"
 msgstr ""
 
@@ -1372,6 +1372,10 @@ msgstr ""
 msgid "Median"
 msgstr "Mediană"
 
+#: ../Pinta.Core/Actions/ViewActions.cs:130
+msgid "Menu Bar"
+msgstr ""
+
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
@@ -1381,7 +1385,7 @@ msgstr "Combină cu stratul inferior"
 msgid "Mode"
 msgstr "Mod"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:913
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:914
 msgid "Modified"
 msgstr "Modificat"
 
@@ -1464,7 +1468,7 @@ msgstr "Normal"
 msgid "Normal Blending"
 msgstr "Contopire normală"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:98
+#: ../Pinta.Core/Actions/ViewActions.cs:99
 msgid "Normal Size"
 msgstr "Mărime normală"
 
@@ -1480,7 +1484,7 @@ msgstr ""
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:402
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:165
 msgid "OK"
 msgstr ""
 
@@ -1529,11 +1533,11 @@ msgstr "Deschide imagine"
 msgid "Open Image File"
 msgstr "Deschide fişier imagine"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
 msgid "Open Line/Curve Series"
 msgstr "Serie linii/curbe deschise"
 
-#: ../Pinta.Core/Actions/EditActions.cs:494
+#: ../Pinta.Core/Actions/EditActions.cs:495
 msgid "Open Palette File"
 msgstr "Deschide fișier paletă"
 
@@ -1566,7 +1570,7 @@ msgstr ""
 msgid "Outline Object"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
 msgstr "Evidiențiere margini formă"
@@ -1604,7 +1608,7 @@ msgstr "Pensulă de pictură"
 msgid "Palette"
 msgstr "Paletă"
 
-#: ../Pinta.Core/Actions/EditActions.cs:561
+#: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
 msgstr "Fisiere de paleta"
 
@@ -1653,7 +1657,7 @@ msgid "Photo"
 msgstr "Fotografie"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:59
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:63
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1703,7 +1707,7 @@ msgstr "Pinta suporta urmatoarele formate de palete"
 msgid "Pixelate"
 msgstr "Pixelează"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:220
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Pixels"
 msgstr "Pixeli"
 
@@ -1712,12 +1716,16 @@ msgstr "Pixeli"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:802
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+msgid "Please restart Pinta for the changes to take effect."
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:600
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Point Added"
 msgstr "Punct adăugat"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:650
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:651
 msgid "Point Deleted"
 msgstr "Punct şters"
 
@@ -1852,7 +1860,7 @@ msgstr "Selecție dreptunghiulară"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:654
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:417
 msgid "Red"
 msgstr "Roșu"
 
@@ -1924,7 +1932,7 @@ msgstr "Reorganizează"
 msgid "Reset"
 msgstr "Resetează"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:392
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:155
 msgid "Reset Color"
 msgstr ""
 
@@ -1953,6 +1961,10 @@ msgstr "Redimensionare imagine..."
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:60
 msgid "Resize Palette"
 msgstr "Redimensionează paleta"
+
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
+msgid "Restart Pinta"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
@@ -1998,7 +2010,7 @@ msgstr "Roteşte 90° contra acelor de ceas"
 msgid "Rotation"
 msgstr "Rotație"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
 msgid "Rounded Line Series"
 msgstr "Serie linii rotunjite"
 
@@ -2010,11 +2022,11 @@ msgstr "Formă linie rotunjtă"
 msgid "Rounded Rectangle"
 msgstr "Dreptunghi rotunjit"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:225
+#: ../Pinta.Core/Actions/ViewActions.cs:232
 msgid "Ruler Units"
 msgstr "Unităţi de măsură riglă"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:141
+#: ../Pinta.Core/Actions/ViewActions.cs:148
 msgid "Rulers"
 msgstr "Rigle"
 
@@ -2022,11 +2034,11 @@ msgstr "Rigle"
 msgid "Sampling"
 msgstr "Prelevare de probe"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:608
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:371
 msgid "Sat"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:502
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:265
 msgid "Sat & Value"
 msgstr ""
 
@@ -2039,7 +2051,7 @@ msgstr "Saturație"
 msgid "Saturation Percentage"
 msgstr "Procent saturaţie"
 
-#: ../Pinta.Core/Actions/EditActions.cs:514
+#: ../Pinta.Core/Actions/EditActions.cs:529
 #: ../Pinta.Core/Actions/FileActions.cs:80
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2058,7 +2070,7 @@ msgstr "Salvează Ca..."
 msgid "Save Image File"
 msgstr "Salvează fișierul imagine"
 
-#: ../Pinta.Core/Actions/EditActions.cs:511
+#: ../Pinta.Core/Actions/EditActions.cs:526
 msgid "Save Palette File"
 msgstr "Salvează fișier paletă"
 
@@ -2096,7 +2108,7 @@ msgstr "Sepia"
 msgid "Set Number of Colors"
 msgstr "Alege numărul de culori"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
 msgid "Shape Type"
 msgstr "Tipul formei"
 
@@ -2110,7 +2122,7 @@ msgstr "Accentuează claritatea"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:434
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
 msgid "Shortcut key"
 msgstr "Combinaţie de taste"
@@ -2127,11 +2139,11 @@ msgstr ""
 msgid "Show Layer"
 msgstr "Arată Strat"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:483
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
 msgid "Show Value"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:236
+#: ../Pinta.Core/Actions/ViewActions.cs:244
 msgid "Show/Hide"
 msgstr "Arată/Ascunde"
 
@@ -2177,7 +2189,7 @@ msgstr "Stropi"
 msgid "Squares"
 msgstr "Pătrate"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:129
+#: ../Pinta.Core/Actions/ViewActions.cs:136
 msgid "Status Bar"
 msgstr "Bara de stare"
 
@@ -2219,7 +2231,7 @@ msgid "Text Style"
 msgstr "Stilul textului"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:303
+#: ../Pinta/MainWindow.cs:318
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
@@ -2322,15 +2334,15 @@ msgstr "Toleranţă"
 msgid "Tool"
 msgstr "Unealtă"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:135
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Tool Box"
 msgstr "Trusă de unelte"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:117
+#: ../Pinta.Core/Actions/ViewActions.cs:118
 msgid "Tool Windows"
 msgstr "Ferestre cu unelte"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:105
+#: ../Pinta.Core/Actions/ViewActions.cs:106
 msgid "Toolbar"
 msgstr "Bară de unelte"
 
@@ -2417,7 +2429,7 @@ msgstr "Imagine nesalvată {0}"
 msgid "Unsupported file format"
 msgstr "Format fișier nerecunoscut"
 
-#: ../Pinta.Core/Classes/Palette.cs:154
+#: ../Pinta.Core/Actions/EditActions.cs:518
 msgid "Unsupported palette format"
 msgstr "Format de paleta nesuportat"
 
@@ -2441,7 +2453,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Sunt utilizate unele pictograme din:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:631
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:394
 msgid "Value"
 msgstr ""
 
@@ -2493,8 +2505,8 @@ msgstr "Alb"
 msgid "Width:"
 msgstr "Lungime:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:200
-#: ../Pinta.Core/Actions/ViewActions.cs:389
+#: ../Pinta.Core/Actions/ViewActions.cs:207
+#: ../Pinta.Core/Actions/ViewActions.cs:398
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:377
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:386
 msgid "Window"
@@ -2538,19 +2550,19 @@ msgstr "Mărire/Micşorare"
 msgid "Zoom Blur"
 msgstr "Efect de estompare de focalizare"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:71
+#: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Zoom In"
 msgstr "Apropie"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:78
+#: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Zoom Out"
 msgstr "Depărtează"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:92
+#: ../Pinta.Core/Actions/ViewActions.cs:93
 msgid "Zoom to Selection"
 msgstr "Panoramează la selecție"
 
-#: ../Pinta/MainWindow.cs:387
+#: ../Pinta/MainWindow.cs:408
 msgid "_Adjustments"
 msgstr "Ajustări"
 
@@ -2567,23 +2579,23 @@ msgstr "_Anulează"
 msgid "_Discard"
 msgstr "_Renunță"
 
-#: ../Pinta/MainWindow.cs:370
+#: ../Pinta/MainWindow.cs:389
 msgid "_Edit"
 msgstr "_Editare"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:385
 msgid "_File"
 msgstr "_Fișier"
 
-#: ../Pinta/MainWindow.cs:403
+#: ../Pinta/MainWindow.cs:424
 msgid "_Help"
 msgstr "_Ajutor"
 
-#: ../Pinta/MainWindow.cs:379
+#: ../Pinta/MainWindow.cs:398
 msgid "_Image"
 msgstr "_Imagine"
 
-#: ../Pinta/MainWindow.cs:383
+#: ../Pinta/MainWindow.cs:402
 msgid "_Layers"
 msgstr "_Straturi"
 
@@ -2598,11 +2610,11 @@ msgstr "_Ok"
 msgid "_Save"
 msgstr "_Salvează"
 
-#: ../Pinta/MainWindow.cs:374
+#: ../Pinta/MainWindow.cs:393
 msgid "_View"
 msgstr "_Vizualizare"
 
-#: ../Pinta/MainWindow.cs:399
+#: ../Pinta/MainWindow.cs:420
 msgid "_Window"
 msgstr "_Fereastră"
 
@@ -2670,7 +2682,7 @@ msgstr "{0} paleta ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:370
+#: ../Pinta.Core/Actions/ViewActions.cs:379
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
