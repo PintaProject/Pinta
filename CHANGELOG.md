@@ -9,6 +9,7 @@ Thanks to the following contributors who worked on this release:
 - @JGCarroll
 - @Lehonti
 - @UrtsiSantsi
+- @pedropaulosuzuki
 
 ### Added
 - Added an option (View -> Show/Hide -> Menu Bar) to switch to a menu bar layout instead of a header bar (#781, #1418)
@@ -21,6 +22,7 @@ Thanks to the following contributors who worked on this release:
 - Improved the sizing of the toolbox icons, particularly for high DPI displays (#1374)
 - The text tool now uses the system's default font rather than being hardcoded to Arial, which may not exist on some systems (#1422, #1421)
 - Removed use of deprecated Gtk.FontButton (#1421)
+- View menu moved from hamburger menu to dedicated button (#1428, #1471)
 
 ### Fixed
 - Fixed an issue where the toolbar's height could change when switching tools (#1370, #1391) 
