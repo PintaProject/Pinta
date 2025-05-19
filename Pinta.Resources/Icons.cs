@@ -238,6 +238,7 @@ public static class Icons
 	public const string ToolZoom = "tool-zoom-symbolic";
 
 	public const string ViewGrid = "view-grid";
+	public const string ViewMenu = "view-reveal-symbolic";
 	public const string ViewRulers = "view-rulers";
 	public const string ViewZoom100 = "view-zoom-100";
 	public const string ViewZoomSelection = "view-zoom-selection";
