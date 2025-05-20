@@ -398,7 +398,6 @@ internal sealed class MainWindow
 
 		// When using a header bar, the View, Image, Effects, and Adjustments menus
 		// are shown as menu buttons in the toolbar (see CreateMainToolBar ())
-
 		this.view_menu = Gio.Menu.New ();
 		PintaCore.Actions.View.RegisterActions (app, this.view_menu);
 		if (using_menu_bar)
