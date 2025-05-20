@@ -73,6 +73,7 @@ public static class StandardIcons
 	public const string ValueIncrease = "value-increase-symbolic";
 	public const string ViewFullscreen = "view-fullscreen-symbolic";
 	public const string ViewRefresh = "view-refresh-symbolic";
+	public const string ViewReveal = "view-reveal-symbolic";
 
 	public const string WindowClose = "window-close-symbolic";
 	public const string WindowMaximize = "window-maximize-symbolic";
@@ -238,7 +239,6 @@ public static class Icons
 	public const string ToolZoom = "tool-zoom-symbolic";
 
 	public const string ViewGrid = "view-grid";
-	public const string ViewMenu = "view-reveal-symbolic";
 	public const string ViewRulers = "view-rulers";
 	public const string ViewZoom100 = "view-zoom-100";
 	public const string ViewZoomSelection = "view-zoom-selection";
