@@ -387,6 +387,11 @@ internal sealed class MainWindow
 		PintaCore.Actions.Edit.RegisterActions (app, edit_menu);
 		this.menu_bar.AppendSubmenu (Translations.GetString ("_Edit"), edit_menu);
 
+		this.view_menu = Gio.Menu.New ();
+		PintaCore.Actions.View.RegisterActions (app, this.view_menu);
+		if (using_menu_bar)
+			this.menu_bar.AppendSubmenu (Translations.GetString ("_View"), this.view_menu);
+
 		this.image_menu = Gio.Menu.New ();
 		PintaCore.Actions.Image.RegisterActions (app, this.image_menu);
 		if (using_menu_bar)
@@ -398,11 +403,6 @@ internal sealed class MainWindow
 
 		// When using a header bar, the View, Image, Effects, and Adjustments menus
 		// are shown as menu buttons in the toolbar (see CreateMainToolBar ())
-		this.view_menu = Gio.Menu.New ();
-		PintaCore.Actions.View.RegisterActions (app, this.view_menu);
-		if (using_menu_bar)
-			this.menu_bar.AppendSubmenu (Translations.GetString ("_View"), this.view_menu);
-		
 		var adj_menu = Gio.Menu.New ();
 		if (using_menu_bar)
 			this.menu_bar.AppendSubmenu (Translations.GetString ("_Adjustments"), adj_menu);
@@ -459,7 +459,7 @@ internal sealed class MainWindow
 
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = this.view_menu,
-				IconName = Resources.Icons.ViewMenu,
+				IconName = Resources.StandardIcons.ViewReveal,
 				TooltipText = Translations.GetString ("View"),
 			});
 
