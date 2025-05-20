@@ -43,6 +43,7 @@ internal sealed class MainWindow
 	Dock dock = null!;
 	Gio.Menu menu_bar = null!;
 	Gio.Menu image_menu = null!;
+	Gio.Menu view_menu = null!;
 
 	CanvasPad canvas_pad = null!;
 
@@ -386,9 +387,10 @@ internal sealed class MainWindow
 		PintaCore.Actions.Edit.RegisterActions (app, edit_menu);
 		this.menu_bar.AppendSubmenu (Translations.GetString ("_Edit"), edit_menu);
 
-		var view_menu = Gio.Menu.New ();
-		PintaCore.Actions.View.RegisterActions (app, view_menu);
-		this.menu_bar.AppendSubmenu (Translations.GetString ("_View"), view_menu);
+		this.view_menu = Gio.Menu.New ();
+		PintaCore.Actions.View.RegisterActions (app, this.view_menu);
+		if (using_menu_bar)
+			this.menu_bar.AppendSubmenu (Translations.GetString ("_View"), this.view_menu);
 
 		this.image_menu = Gio.Menu.New ();
 		PintaCore.Actions.Image.RegisterActions (app, this.image_menu);
@@ -399,7 +401,7 @@ internal sealed class MainWindow
 		PintaCore.Actions.Layers.RegisterActions (app, layers_menu);
 		this.menu_bar.AppendSubmenu (Translations.GetString ("_Layers"), layers_menu);
 
-		// When using a header bar, the Image, Effects, and Adjustments menus
+		// When using a header bar, the View, Image, Effects, and Adjustments menus
 		// are shown as menu buttons in the toolbar (see CreateMainToolBar ())
 		var adj_menu = Gio.Menu.New ();
 		if (using_menu_bar)
@@ -422,7 +424,7 @@ internal sealed class MainWindow
 		this.menu_bar.AppendSubmenu (Translations.GetString ("_Help"), help_menu);
 
 		var pad_section = Gio.Menu.New ();
-		view_menu.AppendSection (null, pad_section);
+		this.view_menu.AppendSection (null, pad_section);
 
 		PintaCore.Chrome.InitializeMainMenu (adj_menu, effects_menu);
 	}
@@ -453,6 +455,12 @@ internal sealed class MainWindow
 				MenuModel = this.image_menu,
 				IconName = Resources.StandardIcons.ImageGeneric,
 				TooltipText = Translations.GetString ("Image"),
+			});
+
+			header_bar.PackEnd (new Gtk.MenuButton () {
+				MenuModel = this.view_menu,
+				IconName = Resources.StandardIcons.ViewReveal,
+				TooltipText = Translations.GetString ("View"),
 			});
 
 			PintaCore.Actions.CreateHeaderToolBar (header_bar);

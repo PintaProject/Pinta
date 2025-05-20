@@ -73,6 +73,7 @@ public static class StandardIcons
 	public const string ValueIncrease = "value-increase-symbolic";
 	public const string ViewFullscreen = "view-fullscreen-symbolic";
 	public const string ViewRefresh = "view-refresh-symbolic";
+	public const string ViewReveal = "view-reveal-symbolic";
 
 	public const string WindowClose = "window-close-symbolic";
 	public const string WindowMaximize = "window-maximize-symbolic";
