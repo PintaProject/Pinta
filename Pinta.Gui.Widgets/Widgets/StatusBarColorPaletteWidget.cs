@@ -85,13 +85,49 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 			case WidgetElement.PrimaryColor:
 
-				RunColorPicker (0);
+				if (color_picker_active)
+					break;
+
+				color_picker_active = true;
+
+				ColorChoices? result1 = await RunColorPicker (0);
+
+				if (!result1.HasValue)
+					break;
+
+				ColorChoices choices1 = result1.Value;
+
+				if (palette.PrimaryColor != choices1.Primary)
+					palette.PrimaryColor = choices1.Primary;
+
+				if (palette.SecondaryColor != choices1.Secondary)
+					palette.SecondaryColor = choices1.Secondary;
+
+				color_picker_active = false;
 
 				break;
 
 			case WidgetElement.SecondaryColor:
 
-				RunColorPicker (1);
+				if (color_picker_active)
+					break;
+
+				color_picker_active = true;
+
+				ColorChoices? result2 = await RunColorPicker (1);
+
+				if (!result2.HasValue)
+					break;
+
+				ColorChoices choices2 = result2.Value;
+
+				if (palette.PrimaryColor != choices2.Primary)
+					palette.PrimaryColor = choices2.Primary;
+
+				if (palette.SecondaryColor != choices2.Secondary)
+					palette.SecondaryColor = choices2.Secondary;
+
+				color_picker_active = false;
 
 				break;
 
@@ -291,15 +327,12 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			QueueDraw ();
 	}
 
-
-	private void RunColorPicker (int paletteIndex)
+	private readonly record struct ColorChoices (
+		Color Primary,
+		Color Secondary);
+	private async Task<ColorChoices?> RunColorPicker (int paletteIndex)
 	{
-		if (color_picker_active)
-			return;
-
-		color_picker_active = true;
-
-		ColorPickerDialog colorPicker = new (
+		using ColorPickerDialog colorPicker = new (
 			chrome,
 			palette,
 			[palette.PrimaryColor, palette.SecondaryColor],
@@ -307,21 +340,14 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			true,
 			Translations.GetString ("Color Picker"));
 
-		colorPicker.Show ();
+		Gtk.ResponseType response = await colorPicker.RunAsync ();
 
-		colorPicker.OnResponse += (sender, args) => {
+		if (response != Gtk.ResponseType.Ok)
+			return null;
 
-			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
-
-				if (palette.PrimaryColor != colorPicker.Colors[0])
-					palette.PrimaryColor = colorPicker.Colors[0];
-
-				if (palette.SecondaryColor != colorPicker.Colors[1])
-					palette.SecondaryColor = colorPicker.Colors[1];
-			}
-
-			color_picker_active = false;
-		};
+		return new (
+			Primary: colorPicker.Colors[0],
+			Secondary: colorPicker.Colors[1]);
 	}
 
 
