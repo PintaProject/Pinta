@@ -34,7 +34,7 @@ namespace Pinta.Gui.Widgets;
 
 public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 {
-	private static ColorPickerDialog? active_color_picker;
+	private static bool color_picker_active = false;
 
 	private readonly RectangleD primary_rect = new (4, 3, 24, 24);
 	private readonly RectangleD secondary_rect = new (17, 16, 24, 24);
@@ -294,28 +294,33 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 	private void RunColorPicker (int paletteIndex)
 	{
-		if (active_color_picker != null)
+		if (color_picker_active)
 			return;
-		active_color_picker = new ColorPickerDialog (
+
+		color_picker_active = true;
+
+		ColorPickerDialog colorPicker = new (
 			chrome,
 			palette,
 			[palette.PrimaryColor, palette.SecondaryColor],
 			paletteIndex,
 			true,
 			Translations.GetString ("Color Picker"));
-		active_color_picker.Show ();
-		active_color_picker.OnResponse += (sender, args) => {
+
+		colorPicker.Show ();
+
+		colorPicker.OnResponse += (sender, args) => {
 
 			if (args.ResponseId == (int) Gtk.ResponseType.Ok) {
 
-				if (palette.PrimaryColor != active_color_picker.Colors[0])
-					palette.PrimaryColor = active_color_picker.Colors[0];
+				if (palette.PrimaryColor != colorPicker.Colors[0])
+					palette.PrimaryColor = colorPicker.Colors[0];
 
-				if (palette.SecondaryColor != active_color_picker.Colors[1])
-					palette.SecondaryColor = active_color_picker.Colors[1];
+				if (palette.SecondaryColor != colorPicker.Colors[1])
+					palette.SecondaryColor = colorPicker.Colors[1];
 			}
 
-			active_color_picker = null;
+			color_picker_active = false;
 		};
 	}
 
