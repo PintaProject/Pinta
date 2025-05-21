@@ -783,13 +783,11 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private void OnOkButtonClicked (Gtk.Button button, EventArgs args)
 	{
 		this.Response ((int) Gtk.ResponseType.Ok);
-		this.Close ();
 	}
 
 	private void OnCancelButtonClicked (Gtk.Button button, EventArgs args)
 	{
 		this.Response ((int) Gtk.ResponseType.Cancel);
-		this.Close ();
 	}
 
 	private void CycleColors ()

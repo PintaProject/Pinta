@@ -340,14 +340,19 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			true,
 			Translations.GetString ("Color Picker"));
 
-		Gtk.ResponseType response = await colorPicker.RunAsync ();
+		try {
+			Gtk.ResponseType response = await colorPicker.RunAsync ();
 
-		if (response != Gtk.ResponseType.Ok)
-			return null;
+			if (response != Gtk.ResponseType.Ok)
+				return null;
 
-		return new (
-			Primary: colorPicker.Colors[0],
-			Secondary: colorPicker.Colors[1]);
+			return new (
+				Primary: colorPicker.Colors[0],
+				Secondary: colorPicker.Colors[1]);
+		} finally {
+			colorPicker.Close ();
+			colorPicker.Destroy ();
+		}
 	}
 
 
@@ -356,7 +361,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		int selectedColorIndex,
 		string title)
 	{
-		using ColorPickerDialog dialog = new (
+		using ColorPickerDialog colorPicker = new (
 			chrome,
 			palette,
 			colors,
@@ -365,15 +370,16 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			title);
 
 		try {
-			Gtk.ResponseType response = await dialog.RunAsync ();
+			Gtk.ResponseType response = await colorPicker.RunAsync ();
 
 			if (response != Gtk.ResponseType.Ok)
 				return null;
 
-			return dialog.Colors;
+			return colorPicker.Colors;
 
 		} finally {
-			dialog.Destroy ();
+			colorPicker.Close ();
+			colorPicker.Destroy ();
 		}
 	}
 
