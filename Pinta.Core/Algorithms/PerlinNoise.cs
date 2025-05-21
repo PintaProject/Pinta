@@ -9,11 +9,10 @@
 
 using System;
 using System.Collections.Immutable;
-using Pinta.Core;
 
-namespace Pinta.Effects;
+namespace Pinta.Core;
 
-internal static class PerlinNoise
+public static class PerlinNoise
 {
 	// Precalculated rotation matrix coefficients
 	private static readonly double rot_11;
