@@ -24,18 +24,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using Gtk;
 
 namespace Pinta.Core;
 
-public sealed class ToolBarComboBox : Box
+public sealed class ToolBarComboBox : Gtk.Box
 {
-	public ComboBoxText ComboBox { get; }
+	public Gtk.ComboBoxText ComboBox { get; }
 
 	public ToolBarComboBox (int width, int activeIndex, bool allowEntry)
-		: this (width, activeIndex, allowEntry, Enumerable.Empty<string> ())
+		: this (width, activeIndex, allowEntry, [])
 	{ }
 
 	public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
@@ -44,47 +43,61 @@ public sealed class ToolBarComboBox : Box
 
 	public ToolBarComboBox (int width, int activeIndex, bool allowEntry, IEnumerable<string> contents)
 	{
-		SetOrientation (Orientation.Horizontal);
-		Spacing = 0;
-		Hexpand = false;
+		Gtk.ComboBoxText comboBox =
+			allowEntry
+			? Gtk.ComboBoxText.NewWithEntry ()
+			: new ();
 
-		if (allowEntry)
-			ComboBox = ComboBoxText.NewWithEntry ();
-		else {
-			ComboBox = new ComboBoxText ();
-			CanFocus = false;
-		}
+		comboBox.CanFocus = allowEntry;
 
 		foreach (string entry in contents)
-			ComboBox.AppendText (entry);
+			comboBox.AppendText (entry);
 
-		ComboBox.WidthRequest = width;
+		comboBox.WidthRequest = width;
 
 		if (activeIndex >= 0)
-			ComboBox.Active = activeIndex;
+			comboBox.Active = activeIndex;
 
-		Append (ComboBox);
+		comboBox.OnChanged += ComboBox_OnChanged;
 
+		// --- Initialization (Gtk.Widget)
+
+		Hexpand = false;
+
+		// --- Initialization (Gtk.Box)
+
+		SetOrientation (Gtk.Orientation.Horizontal);
+		Spacing = 0;
+
+		Append (comboBox);
+
+		// --- References to keep
+
+		ComboBox = comboBox;
+	}
+
+	private void ComboBox_OnChanged (Gtk.ComboBox sender, EventArgs args)
+	{
 		// Return focus to the canvas after selecting a combobox item, which normally focuses the entry widget.
 		// We don't want this if the user is actually typing in the entry, of course.
-		ComboBox.OnChanged += (_, _) => {
-			if (!ComboBox.HasEntry)
-				return;
 
-			Gtk.Widget? entryText = ComboBox.GetEntry ().GetFirstChild ();
-			if (entryText is null) {
-				System.Console.Error.WriteLine ("Failed to find child text widget for Gtk.Entry");
-				return;
-			}
+		if (!sender.HasEntry)
+			return;
 
-			if (!entryText.HasFocus) {
-				GLib.Functions.IdleAdd (0, () => {
-					if (PintaCore.Workspace.HasOpenDocuments)
-						PintaCore.Workspace.ActiveWorkspace.GrabFocusToCanvas ();
+		Gtk.Widget? entryText = sender.GetEntry ().GetFirstChild ();
 
-					return false;
-				});
-			}
-		};
+		if (entryText is null) {
+			Console.Error.WriteLine ("Failed to find child text widget for Gtk.Entry");
+			return;
+		}
+
+		if (!entryText.HasFocus) {
+			GLib.Functions.IdleAdd (0, () => {
+				if (PintaCore.Workspace.HasOpenDocuments)
+					PintaCore.Workspace.ActiveWorkspace.GrabFocusToCanvas ();
+
+				return false;
+			});
+		}
 	}
 }
