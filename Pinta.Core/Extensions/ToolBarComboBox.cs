@@ -76,15 +76,15 @@ public sealed class ToolBarComboBox : Gtk.Box
 		ComboBox = comboBox;
 	}
 
-	private void ComboBox_OnChanged (Gtk.ComboBox sender, EventArgs args)
+	private void ComboBox_OnChanged (Gtk.ComboBox _, EventArgs __)
 	{
 		// Return focus to the canvas after selecting a combobox item, which normally focuses the entry widget.
 		// We don't want this if the user is actually typing in the entry, of course.
 
-		if (!sender.HasEntry)
+		if (!ComboBox.HasEntry)
 			return;
 
-		Gtk.Widget? entryText = sender.GetEntry ().GetFirstChild ();
+		Gtk.Widget? entryText = ComboBox.GetEntry ().GetFirstChild ();
 
 		if (entryText is null) {
 			Console.Error.WriteLine ("Failed to find child text widget for Gtk.Entry");
