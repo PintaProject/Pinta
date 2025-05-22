@@ -54,16 +54,16 @@ public sealed class CanvasGridManager : ICanvasGridService
 
 	public void SaveGridSettings ()
 	{
-		settings.PutSetting ("show-canvas-grid", ShowGrid);
-		settings.PutSetting ("canvas-grid-width", CellWidth);
-		settings.PutSetting ("canvas-grid-height", CellHeight);
+		settings.PutSetting (SettingNames.SHOW_CANVAS_GRID, ShowGrid);
+		settings.PutSetting (SettingNames.CANVAS_GRID_WIDTH, CellWidth);
+		settings.PutSetting (SettingNames.CANVAS_GRID_HEIGHT, CellHeight);
 	}
 
 	public void LoadGridSettings ()
 	{
-		ShowGrid = settings.GetSetting ("show-canvas-grid", false);
-		CellWidth = settings.GetSetting ("canvas-grid-width", 64);
-		CellHeight = settings.GetSetting ("canvas-grid-height", 64);
+		ShowGrid = settings.GetSetting (SettingNames.SHOW_CANVAS_GRID, false);
+		CellWidth = settings.GetSetting (SettingNames.CANVAS_GRID_WIDTH, 64);
+		CellHeight = settings.GetSetting (SettingNames.CANVAS_GRID_HEIGHT, 64);
 	}
 
 	private void SetProperty<T> (ref T field, T value)
