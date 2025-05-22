@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Cairo;
@@ -84,6 +85,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		switch (element) {
 
 			case WidgetElement.PrimaryColor:
+			case WidgetElement.SecondaryColor:
 
 				if (color_picker_active)
 					break;
@@ -91,7 +93,13 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				color_picker_active = true;
 
 				try {
-					ColorChoices? result1 = await RunColorPicker (0);
+					int colorIndex = element switch {
+						WidgetElement.PrimaryColor => 0,
+						WidgetElement.SecondaryColor => 0,
+						_ => throw new UnreachableException ()
+					};
+
+					ColorChoices? result1 = await RunColorPicker (colorIndex);
 
 					if (!result1.HasValue)
 						break;
@@ -103,32 +111,6 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 					if (palette.SecondaryColor != choices1.Secondary)
 						palette.SecondaryColor = choices1.Secondary;
-				} finally {
-					color_picker_active = false;
-				}
-
-				break;
-
-			case WidgetElement.SecondaryColor:
-
-				if (color_picker_active)
-					break;
-
-				color_picker_active = true;
-
-				try {
-					ColorChoices? result2 = await RunColorPicker (1);
-
-					if (!result2.HasValue)
-						break;
-
-					ColorChoices choices2 = result2.Value;
-
-					if (palette.PrimaryColor != choices2.Primary)
-						palette.PrimaryColor = choices2.Primary;
-
-					if (palette.SecondaryColor != choices2.Secondary)
-						palette.SecondaryColor = choices2.Secondary;
 				} finally {
 					color_picker_active = false;
 				}
