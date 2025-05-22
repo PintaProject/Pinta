@@ -2,7 +2,6 @@ using System;
 using System.Collections.Immutable;
 using System.Linq;
 using Cairo;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
@@ -78,7 +77,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	{
 		// incredibly silly workaround
 		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
-		this.SetOpacity (0.995f);
+		SetOpacity (0.995f);
 		small_mode = isSmallMode;
 		if (isSmallMode) {
 			spacing = 2;
@@ -177,7 +176,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		titleBar.PackEnd (cancelButton);
 		titleBar.SetShowTitleButtons (false);
 
-		this.SetTitlebar (titleBar);
+		SetTitlebar (titleBar);
 
 		// Active palette contains the primary/secondary colors on the left of the color picker
 		#region Color Display
@@ -530,20 +529,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			WidthRequest = 500,
 			HeightRequest = PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS,
 		};
-		swatchRecent.SetDrawFunc ((area, g, width, height) => {
-
-			var recent = palette.RecentlyUsedColors;
-			int recent_cols = palette.MaxRecentlyUsedColor / PaletteWidget.PALETTE_ROWS;
-
-			RectangleD recent_palette_rect = new (
-				0,
-				0,
-				PaletteWidget.SWATCH_SIZE * recent_cols,
-				PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
-
-			for (int i = 0; i < recent.Count; i++)
-				g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true), recent.ElementAt (i));
-		});
+		swatchRecent.SetDrawFunc (SwatchRecentDraw);
 
 		Gtk.DrawingArea swatchPalette = new () {
 			WidthRequest = 500,
@@ -645,6 +631,21 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		top_box = topBox;
 	}
 
+	void SwatchRecentDraw (Gtk.DrawingArea area, Context g, int width, int height)
+	{
+		var recent = palette.RecentlyUsedColors;
+		int recent_cols = palette.MaxRecentlyUsedColor / PaletteWidget.PALETTE_ROWS;
+
+		RectangleD recent_palette_rect = new (
+			0,
+			0,
+			PaletteWidget.SWATCH_SIZE * recent_cols,
+			PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
+
+		for (int i = 0; i < recent.Count; i++)
+			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true), recent.ElementAt (i));
+	}
+
 	void SwatchPaletteDraw (Gtk.DrawingArea area, Context g, int width, int height)
 	{
 		RectangleD paletteRect = new (
@@ -685,11 +686,11 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// every time the color changes
 
 		if (IsActive) {
-			this.SetOpacity (1.0f);
+			SetOpacity (1.0f);
 			return;
 		}
 
-		this.SetOpacity (0.85f);
+		SetOpacity (0.85f);
 
 		if (palette.PrimaryColor != Colors[0])
 			palette.PrimaryColor = Colors[0];
@@ -798,14 +799,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	private void OnOkButtonClicked (Gtk.Button button, EventArgs args)
 	{
-		this.Response ((int) Gtk.ResponseType.Ok);
-		this.Close ();
+		Response ((int) Gtk.ResponseType.Ok);
+		Close ();
 	}
 
 	private void OnCancelButtonClicked (Gtk.Button button, EventArgs args)
 	{
-		this.Response ((int) Gtk.ResponseType.Cancel);
-		this.Close ();
+		Response ((int) Gtk.ResponseType.Cancel);
+		Close ();
 	}
 
 	private void CycleColors ()
