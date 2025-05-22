@@ -99,18 +99,18 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 						_ => throw new UnreachableException ()
 					};
 
-					ColorChoices? result1 = await RunColorPicker (colorIndex);
+					ColorChoices? result = await RunColorPicker (colorIndex);
 
-					if (!result1.HasValue)
+					if (!result.HasValue)
 						break;
 
-					ColorChoices choices1 = result1.Value;
+					ColorChoices choices = result.Value;
 
-					if (palette.PrimaryColor != choices1.Primary)
-						palette.PrimaryColor = choices1.Primary;
+					if (palette.PrimaryColor != choices.Primary)
+						palette.PrimaryColor = choices.Primary;
 
-					if (palette.SecondaryColor != choices1.Secondary)
-						palette.SecondaryColor = choices1.Secondary;
+					if (palette.SecondaryColor != choices.Secondary)
+						palette.SecondaryColor = choices.Secondary;
 				} finally {
 					color_picker_active = false;
 				}
