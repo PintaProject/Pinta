@@ -95,7 +95,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				try {
 					int colorIndex = element switch {
 						WidgetElement.PrimaryColor => 0,
-						WidgetElement.SecondaryColor => 0,
+						WidgetElement.SecondaryColor => 1,
 						_ => throw new UnreachableException ()
 					};
 
