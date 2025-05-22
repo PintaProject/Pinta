@@ -87,8 +87,19 @@ public class Command
 
 public sealed class ToggleCommand : Command
 {
-	public ToggleCommand (string name, string label, string? tooltip, string? stock_id)
-		: base (name, label, tooltip, stock_id, GLib.Variant.NewBoolean (false))
+	public ToggleCommand (
+		string name,
+		string label,
+		string? tooltip,
+		string? stock_id
+	)
+		: base (
+			name,
+			label,
+			tooltip,
+			stock_id,
+			GLib.Variant.NewBoolean (false)
+		)
 	{
 		Activated += (_, _) => {
 			bool active = !State.GetBoolean ();
