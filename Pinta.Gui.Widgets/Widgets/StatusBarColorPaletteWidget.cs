@@ -90,20 +90,22 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 				color_picker_active = true;
 
-				ColorChoices? result1 = await RunColorPicker (0);
+				try {
+					ColorChoices? result1 = await RunColorPicker (0);
 
-				if (!result1.HasValue)
-					break;
+					if (!result1.HasValue)
+						break;
 
-				ColorChoices choices1 = result1.Value;
+					ColorChoices choices1 = result1.Value;
 
-				if (palette.PrimaryColor != choices1.Primary)
-					palette.PrimaryColor = choices1.Primary;
+					if (palette.PrimaryColor != choices1.Primary)
+						palette.PrimaryColor = choices1.Primary;
 
-				if (palette.SecondaryColor != choices1.Secondary)
-					palette.SecondaryColor = choices1.Secondary;
-
-				color_picker_active = false;
+					if (palette.SecondaryColor != choices1.Secondary)
+						palette.SecondaryColor = choices1.Secondary;
+				} finally {
+					color_picker_active = false;
+				}
 
 				break;
 
@@ -114,20 +116,22 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 				color_picker_active = true;
 
-				ColorChoices? result2 = await RunColorPicker (1);
+				try {
+					ColorChoices? result2 = await RunColorPicker (1);
 
-				if (!result2.HasValue)
-					break;
+					if (!result2.HasValue)
+						break;
 
-				ColorChoices choices2 = result2.Value;
+					ColorChoices choices2 = result2.Value;
 
-				if (palette.PrimaryColor != choices2.Primary)
-					palette.PrimaryColor = choices2.Primary;
+					if (palette.PrimaryColor != choices2.Primary)
+						palette.PrimaryColor = choices2.Primary;
 
-				if (palette.SecondaryColor != choices2.Secondary)
-					palette.SecondaryColor = choices2.Secondary;
-
-				color_picker_active = false;
+					if (palette.SecondaryColor != choices2.Secondary)
+						palette.SecondaryColor = choices2.Secondary;
+				} finally {
+					color_picker_active = false;
+				}
 
 				break;
 
