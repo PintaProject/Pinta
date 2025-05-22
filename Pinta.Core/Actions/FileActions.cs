@@ -43,9 +43,7 @@ public sealed class FileActions
 
 	private readonly SystemManager system;
 	private readonly AppActions app;
-	public FileActions (
-		SystemManager system,
-		AppActions app)
+	public FileActions (SystemManager system, AppActions app)
 	{
 		New = new Command (
 			"new",
@@ -152,6 +150,9 @@ public sealed class FileActions
 	{
 		ModifyCompressionEventArgs e = new (defaultCompression, parent);
 		ModifyCompression?.Invoke (this, e);
-		return e.Cancel ? -1 : e.Quality;
+		return
+			e.Cancel
+			? -1
+			: e.Quality;
 	}
 }
