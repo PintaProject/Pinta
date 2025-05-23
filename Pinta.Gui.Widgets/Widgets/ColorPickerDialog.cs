@@ -77,7 +77,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	{
 		// incredibly silly workaround
 		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
-		this.SetOpacity (0.995f);
+		SetOpacity (0.995f);
 		small_mode = isSmallMode;
 		if (isSmallMode) {
 			spacing = 2;
@@ -176,7 +176,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		titleBar.PackEnd (cancelButton);
 		titleBar.SetShowTitleButtons (false);
 
-		this.SetTitlebar (titleBar);
+		SetTitlebar (titleBar);
 
 		// Active palette contains the primary/secondary colors on the left of the color picker
 		#region Color Display
@@ -196,8 +196,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			string label = Translations.GetString ("Click to switch between primary and secondary color.");
 			string shortcut_label = Translations.GetString ("Shortcut key");
 
-			Gtk.Button colorDisplaySwap = new ();
-			colorDisplaySwap.TooltipText = $"{label} {shortcut_label}: {"X"}";
+			Gtk.Button colorDisplaySwap = new () { TooltipText = $"{label} {shortcut_label}: {"X"}" };
 			colorDisplaySwap.SetIconName (Resources.StandardIcons.EditSwap);
 			colorDisplaySwap.OnClicked += (sender, args) => CycleColors ();
 			colorDisplayBox.Append (colorDisplaySwap);
@@ -351,15 +350,22 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				InitialValue = CurrentColor.ToHsv ().Hue,
 			}
 		);
-		hueSlider.Gradient.SetDrawFunc ((_, c, w, h) => hueSlider.DrawGradient (c, w, h, [
-			CurrentColor.CopyHsv (hue: 0),
-			CurrentColor.CopyHsv (hue: 60),
-			CurrentColor.CopyHsv (hue: 120),
-			CurrentColor.CopyHsv (hue: 180),
-			CurrentColor.CopyHsv (hue: 240),
-			CurrentColor.CopyHsv (hue: 300),
-			CurrentColor.CopyHsv (hue: 360)
-		]));
+		hueSlider.Gradient.SetDrawFunc (
+			(_, c, w, h) => hueSlider.DrawGradient (
+				c,
+				w,
+				h,
+				[
+					CurrentColor.CopyHsv (hue: 0),
+					CurrentColor.CopyHsv (hue: 60),
+					CurrentColor.CopyHsv (hue: 120),
+					CurrentColor.CopyHsv (hue: 180),
+					CurrentColor.CopyHsv (hue: 240),
+					CurrentColor.CopyHsv (hue: 300),
+					CurrentColor.CopyHsv (hue: 360)
+				]
+			)
+		);
 		hueSlider.OnValueChange += (sender, args) => {
 			CurrentColor = CurrentColor.CopyHsv (hue: args.Value);
 			UpdateView ();
@@ -516,8 +522,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		slidersBox.Append (new Gtk.Separator ());
 		slidersBox.Append (alphaSlider);
 
-		#region Swatch
-
 		// 90% taken from SatusBarColorPaletteWidget
 		// todo: merge both
 
@@ -525,46 +529,19 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			WidthRequest = 500,
 			HeightRequest = PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS,
 		};
-		swatchRecent.SetDrawFunc ((area, g, width, height) => {
-
-			var recent = palette.RecentlyUsedColors;
-			int recent_cols = palette.MaxRecentlyUsedColor / PaletteWidget.PALETTE_ROWS;
-
-			RectangleD recent_palette_rect = new (
-				0,
-				0,
-				PaletteWidget.SWATCH_SIZE * recent_cols,
-				PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
-
-			for (int i = 0; i < recent.Count; i++)
-				g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true), recent.ElementAt (i));
-		});
+		swatchRecent.SetDrawFunc (SwatchRecentDraw);
 
 		Gtk.DrawingArea swatchPalette = new () {
 			WidthRequest = 500,
 			HeightRequest = PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS,
 		};
-		swatchPalette.SetDrawFunc ((area, g, width, height) => {
-
-			RectangleD palette_rect = new (
-				0,
-				0,
-				width - PaletteWidget.PALETTE_MARGIN,
-				PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
-
-			Palette currentPalette = palette.CurrentPalette;
-
-			for (int i = 0; i < currentPalette.Colors.Count; i++)
-				g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, palette_rect), currentPalette.Colors[i]);
-		});
+		swatchPalette.SetDrawFunc (SwatchPaletteDraw);
 
 		Gtk.Box swatchBox = new () { Spacing = spacing };
 		swatchBox.SetOrientation (Gtk.Orientation.Vertical);
 		swatchBox.Append (swatchRecent);
 		swatchBox.Append (swatchPalette);
 		swatchBox.SetVisible (showWatches);
-
-		#endregion
 
 		Gtk.GestureClick click_gesture = Gtk.GestureClick.New ();
 		click_gesture.SetButton (0); // Listen for all mouse buttons.
@@ -576,11 +553,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		Gtk.EventControllerMotion motion_controller = Gtk.EventControllerMotion.New ();
 		motion_controller.OnMotion += MotionController_OnMotion;
-
-		// Mouse and keyboard handlers
-		AddController (click_gesture);
-		AddController (keyboard_gesture);
-		AddController (motion_controller);
 
 		// Top part of the color picker.
 		// Includes palette, color surface, sliders/hex
@@ -596,6 +568,31 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		if (!small_mode)
 			mainVbox.Append (swatchBox);
 
+		Gtk.Box contentArea = this.GetContentAreaBox ();
+		contentArea.SetAllMargins (margins);
+		contentArea.Append (mainVbox);
+
+		if (livePalette) {
+
+			palette.PrimaryColorChanged += PrimaryChangeHandler;
+			palette.SecondaryColorChanged += SecondaryChangeHandler;
+			IsActivePropertyDefinition.Notify (this, ActiveWindowChangeHandler);
+			this.OnResponse += ColorPickerDialog_OnResponse;
+		}
+
+		// --- Initialization (Gtk.Widget)
+
+		// Mouse and keyboard handlers
+		AddController (click_gesture);
+		AddController (keyboard_gesture);
+		AddController (motion_controller);
+
+		// incredibly silly workaround
+		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
+		SetOpacity (0.995f);
+
+		// --- Initialization (Gtk.Window)
+
 		Title = Translations.GetString (windowTitle);
 		TransientFor = chrome.MainWindow;
 		Modal = false;
@@ -603,66 +600,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		DefaultWidth = 1;
 		DefaultHeight = 1;
 
-		Gtk.Box contentArea = this.GetContentAreaBox ();
-		contentArea.SetAllMargins (margins);
-		contentArea.Append (mainVbox);
-
-		// incredibly silly workaround
-		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
-		this.SetOpacity (0.995f);
-
-		if (livePalette) {
-
-			void PrimaryChangeHandler (object? sender, EventArgs _)
-			{
-				Colors[0] = ((PaletteManager) sender!).PrimaryColor;
-				UpdateView ();
-			}
-
-			void SecondaryChangeHandler (object? sender, EventArgs _)
-			{
-				Colors[1] = ((PaletteManager) sender!).SecondaryColor;
-				UpdateView ();
-			}
-
-			// Handles on active / off active
-			// When user clicks off the color picker, we assign the color picker values to the palette
-			// we only do this on off active because otherwise the recent color palette would be spammed
-			// every time the color changes
-			void ActiveWindowChangeHandler (object? _, GObject.Object.NotifySignalArgs args)
-			{
-				if (IsActive) {
-					this.SetOpacity (1.0f);
-					return;
-				}
-
-				this.SetOpacity (0.85f);
-
-				if (palette.PrimaryColor != Colors[0])
-					palette.PrimaryColor = Colors[0];
-
-				if (palette.SecondaryColor != Colors[1])
-					palette.SecondaryColor = Colors[1];
-			}
-
-			palette.PrimaryColorChanged += PrimaryChangeHandler;
-			palette.SecondaryColorChanged += SecondaryChangeHandler;
-			IsActivePropertyDefinition.Notify (this, ActiveWindowChangeHandler);
-
-			// Remove event handlers on exit (in particular, we don't want to handle the
-			// 'is-active' property changing as the dialog is being closed (bug #1390)).
-			this.OnResponse += (_, e) => {
-				Gtk.ResponseType response = (Gtk.ResponseType) e.ResponseId;
-				// Don't attempt to remove the signals again when the dialog is deleted, which
-				// triggers Gtk.ResponseType.DeleteEvent.
-				if (response != Gtk.ResponseType.Cancel && response != Gtk.ResponseType.Ok)
-					return;
-
-				palette.PrimaryColorChanged -= PrimaryChangeHandler;
-				palette.SecondaryColorChanged -= SecondaryChangeHandler;
-				IsActivePropertyDefinition.Unnotify (this, ActiveWindowChangeHandler);
-			};
-		}
+		// --- Initialization (Gtk.Dialog)
 
 		this.SetDefaultResponse (Gtk.ResponseType.Cancel);
 
@@ -693,13 +631,92 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		top_box = topBox;
 	}
 
+	void SwatchRecentDraw (Gtk.DrawingArea area, Context g, int width, int height)
+	{
+		var recent = palette.RecentlyUsedColors;
+		int recent_cols = palette.MaxRecentlyUsedColor / PaletteWidget.PALETTE_ROWS;
+
+		RectangleD recent_palette_rect = new (
+			0,
+			0,
+			PaletteWidget.SWATCH_SIZE * recent_cols,
+			PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
+
+		for (int i = 0; i < recent.Count; i++)
+			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true), recent.ElementAt (i));
+	}
+
+	void SwatchPaletteDraw (Gtk.DrawingArea area, Context g, int width, int height)
+	{
+		RectangleD paletteRect = new (
+			0,
+			0,
+			width - PaletteWidget.PALETTE_MARGIN,
+			PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS);
+
+		Palette currentPalette = palette.CurrentPalette;
+
+		for (int i = 0; i < currentPalette.Colors.Count; i++)
+			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, paletteRect), currentPalette.Colors[i]);
+	}
+
+	void ColorPickerDialog_OnResponse (Gtk.Dialog _, ResponseSignalArgs args)
+	{
+		// Remove event handlers on exit (in particular, we don't want to handle the
+		// 'is-active' property changing as the dialog is being closed (bug #1390)).
+
+		Gtk.ResponseType response = (Gtk.ResponseType) args.ResponseId;
+
+		// Don't attempt to remove the signals again when the dialog is deleted, which
+		// triggers Gtk.ResponseType.DeleteEvent.
+
+		if (response != Gtk.ResponseType.Cancel && response != Gtk.ResponseType.Ok)
+			return;
+
+		palette.PrimaryColorChanged -= PrimaryChangeHandler;
+		palette.SecondaryColorChanged -= SecondaryChangeHandler;
+		IsActivePropertyDefinition.Unnotify (this, ActiveWindowChangeHandler);
+	}
+
+	void ActiveWindowChangeHandler (object? _, NotifySignalArgs __)
+	{
+		// Handles on active / off active
+		// When user clicks off the color picker, we assign the color picker values to the palette
+		// we only do this on off active because otherwise the recent color palette would be spammed
+		// every time the color changes
+
+		if (IsActive) {
+			SetOpacity (1.0f);
+			return;
+		}
+
+		SetOpacity (0.85f);
+
+		if (palette.PrimaryColor != Colors[0])
+			palette.PrimaryColor = Colors[0];
+
+		if (palette.SecondaryColor != Colors[1])
+			palette.SecondaryColor = Colors[1];
+	}
+
+	void PrimaryChangeHandler (object? sender, EventArgs _)
+	{
+		Colors[0] = ((PaletteManager) sender!).PrimaryColor;
+		UpdateView ();
+	}
+
+	void SecondaryChangeHandler (object? sender, EventArgs _)
+	{
+		Colors[1] = ((PaletteManager) sender!).SecondaryColor;
+		UpdateView ();
+	}
+
 	private void ClickGesture_OnPressed (
 		Gtk.GestureClick _,
 		Gtk.GestureClick.PressedSignalArgs e)
 	{
 		PointD absPos = new (e.X, e.Y);
-
-		if (picker_surface.IsMouseInDrawingArea (this, absPos, out PointD rel1)) {
+		if (picker_surface.IsMouseInDrawingArea (this, absPos, out PointD _)) {
 
 			mouse_on_picker_surface = true;
 			SetColorFromPickerSurface (new PointD (e.X, e.Y));
@@ -782,24 +799,24 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	private void OnOkButtonClicked (Gtk.Button button, EventArgs args)
 	{
-		this.Response ((int) Gtk.ResponseType.Ok);
-		this.Close ();
+		Response ((int) Gtk.ResponseType.Ok);
+		Close ();
 	}
 
 	private void OnCancelButtonClicked (Gtk.Button button, EventArgs args)
 	{
-		this.Response ((int) Gtk.ResponseType.Cancel);
-		this.Close ();
+		Response ((int) Gtk.ResponseType.Cancel);
+		Close ();
 	}
 
 	private void CycleColors ()
 	{
-		Color swap = Colors[0];
+		Color originalFirst = Colors[0];
 
 		for (int i = 0; i < Colors.Length - 1; i++)
 			Colors[i] = Colors[i + 1];
 
-		Colors[^1] = swap;
+		Colors[^1] = originalFirst;
 
 		UpdateView ();
 	}
@@ -812,7 +829,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		picker_surface.QueueDraw ();
 
 		// Redraw cps
-		var hsv = CurrentColor.ToHsv ();
+		HsvColor hsv = CurrentColor.ToHsv ();
 
 		hue_slider.SetValue (hsv.Hue);
 		saturation_slider.SetValue (hsv.Sat * 100.0);
@@ -867,61 +884,67 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	private void DrawColorSurface (Context g)
 	{
-		int draw_width = picker_surface_radius * 2;
-		int draw_height = picker_surface_radius * 2;
+		int radius = picker_surface_radius;
+		int diameter = 2 * radius;
+		Size drawSize = new (diameter, diameter);
 
-		ImageSurface img = CairoExtensions.CreateImageSurface (
+		using ImageSurface surface = CairoExtensions.CreateImageSurface (
 			Format.Argb32,
-			draw_width,
-			draw_height);
+			drawSize.Width,
+			drawSize.Height);
 
-		Span<ColorBgra> data = img.GetPixelData ();
+		Span<ColorBgra> data = surface.GetPixelData ();
 
-		if (picker_surface_type == ColorSurfaceType.HueAndSat) {
+		switch (picker_surface_type) {
 
-			int rad = picker_surface_radius;
+			case ColorSurfaceType.HueAndSat:
 
-			PointI center = new (rad, rad);
+				PointI center = new (radius, radius);
 
-			for (int y = 0; y < draw_height; y++) {
-				for (int x = 0; x < draw_width; x++) {
+				for (int y = 0; y < drawSize.Height; y++) {
+					for (int x = 0; x < drawSize.Width; x++) {
 
-					PointI pxl = new (x, y);
-					PointI vec = pxl - center;
+						PointI pixel = new (x, y);
+						PointI vector = pixel - center;
 
-					if (vec.Magnitude () > rad) continue;
+						if (vector.Magnitude () > radius) continue;
 
-					double h = (MathF.Atan2 (vec.Y, -vec.X) + MathF.PI) / (2f * MathF.PI) * 360f;
-					double s = Math.Min (vec.Magnitude () / rad, 1);
-					double v = picker_surface_option_draw_value.Active ? CurrentColor.ToHsv ().Val : 1;
+						double h = (MathF.Atan2 (vector.Y, -vector.X) + MathF.PI) / (2f * MathF.PI) * 360f;
+						double s = Math.Min (vector.Magnitude () / radius, 1);
+						double v = picker_surface_option_draw_value.Active ? CurrentColor.ToHsv ().Val : 1;
 
-					double d = rad - vec.Magnitude ();
-					double a = d < 1 ? d : 1;
+						double d = radius - vector.Magnitude ();
+						double a = d < 1 ? d : 1;
 
-					Color c = Color.FromHsv (h, s, v, a);
+						Color c = Color.FromHsv (h, s, v, a);
 
-					data[draw_width * y + x] = c.ToColorBgra ();
+						data[drawSize.Width * y + x] = c.ToColorBgra ();
+					}
 				}
-			}
 
-			img.MarkDirty ();
-			g.SetSourceSurface (img, picker_surface_padding, picker_surface_padding);
-			g.Paint ();
-		} else if (picker_surface_type == ColorSurfaceType.SatAndVal) {
+				break;
 
-			for (int y = 0; y < draw_height; y++) {
-				double s = 1.0 - (double) y / (draw_height - 1);
-				for (int x = 0; x < draw_width; x++) {
-					double v = (double) x / (draw_width - 1);
-					Color c = Color.FromHsv (CurrentColor.ToHsv ().Hue, s, v);
-					data[draw_width * y + x] = c.ToColorBgra ();
+
+			case ColorSurfaceType.SatAndVal:
+
+				for (int y = 0; y < drawSize.Height; y++) {
+					double s = 1.0 - (double) y / (drawSize.Height - 1);
+					for (int x = 0; x < drawSize.Width; x++) {
+						double v = (double) x / (drawSize.Width - 1);
+						Color c = Color.FromHsv (CurrentColor.ToHsv ().Hue, s, v);
+						data[drawSize.Width * y + x] = c.ToColorBgra ();
+					}
 				}
-			}
 
-			img.MarkDirty ();
-			g.SetSourceSurface (img, picker_surface_padding, picker_surface_padding);
-			g.Paint ();
+				break;
+
+			default:
+				throw new InvalidOperationException ($"{nameof (picker_surface_type)} cannot have a value of {picker_surface_type}");
 		}
+
+		surface.MarkDirty ();
+		g.SetSourceSurface (surface, picker_surface_padding, picker_surface_padding);
+		g.Paint ();
 	}
 
 	// Takes in HSV values as tuple (h,s,v) and returns the position of that color in the picker surface.
@@ -944,7 +967,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 					return new (x - radius, y - radius);
 				}
 			default:
-				return PointD.Zero;
+				throw new InvalidOperationException ($"{nameof (picker_surface_type)} cannot have a value of {picker_surface_type}");
 		}
 	}
 
