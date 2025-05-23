@@ -30,12 +30,12 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class PintaCanvas : Gtk.DrawingArea
+public sealed class PintaCanvas : Gtk.Picture
 {
 	private readonly CanvasRenderer cr;
 	private readonly Document document;
 
-	private Cairo.ImageSurface? canvas;
+	private Cairo.ImageSurface? flattened_surface;
 
 	public CanvasWindow CanvasWindow { get; }
 
@@ -72,111 +72,89 @@ public sealed class PintaCanvas : Gtk.DrawingArea
 		motion_controller.OnMotion += OnMouseMove;
 		AddController (motion_controller);
 
-		SetDrawFunc ((area, context, width, height) => Draw (context, width, height));
+		// If there is additional space available, keep the image centered and prevent stretching.
+		Hexpand = false;
+		Halign = Gtk.Align.Center;
+		Vexpand = false;
+		Valign = Gtk.Align.Center;
 	}
 
 	/// <summary>
 	/// Update the canvas when the image changes.
 	/// </summary>
-	private void OnCanvasInvalidated (object? o, System.EventArgs args)
+	private void OnCanvasInvalidated (object? o, CanvasInvalidatedEventArgs e)
 	{
-		// If GTK+ hasn't created the canvas window yet, no need to invalidate it
-		if (!GetRealized ())
-			return;
+		// Compute the flattened image.
+		if (flattened_surface is null ||
+			flattened_surface.Width != document.ImageSize.Width ||
+			flattened_surface.Height != document.ImageSize.Height) {
 
-		// TODO-GTK4 (improvement) - is there a way to invalidate only a rectangle?
-#if false
-		if (e.EntireSurface)
-			Window.Invalidate ();
-		else
-			Window.InvalidateRect (e.Rectangle, false);
-#else
-		QueueDraw ();
-#endif
-	}
-
-	private void Draw (Cairo.Context context, int width, int height)
-	{
-		double scale = document.Workspace.Scale;
-
-		int x = (int) document.Workspace.Offset.X;
-		int y = (int) document.Workspace.Offset.Y;
-
-		// Translate our expose area for the whole drawingarea to just our canvas
-		RectangleI canvas_bounds = new (
-			x,
-			y,
-			document.Workspace.ViewSize.Width,
-			document.Workspace.ViewSize.Height);
-
-		if (CairoExtensions.GetClipRectangle (context, out RectangleI expose_rect))
-			canvas_bounds = canvas_bounds.Intersect (expose_rect);
-
-		if (canvas_bounds.IsEmpty)
-			return;
-
-		canvas_bounds = canvas_bounds with { X = canvas_bounds.X - x, Y = canvas_bounds.Y - y };
-
-		// Resize our offscreen surface to a surface the size of our drawing area
-		if (canvas == null || canvas.Width != canvas_bounds.Width || canvas.Height != canvas_bounds.Height) {
-			canvas = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
+			flattened_surface?.Dispose ();
+			flattened_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 		}
 
-		cr.Initialize (document.ImageSize, document.Workspace.ViewSize);
+		RenderCanvas (flattened_surface);
 
-		Cairo.Context g = context;
+		// FIXME - Gdk.MemoryTextureBuilder is only available in GTK 4.16+
+		// TODO - if we used cairo_image_surface_create_for_data() to wrap the GLib.Bytes buffer, we might be able to avoid this extra copy
+		// TODO - is there any benefit to caching the texture builder?
+		// TODO - investigate using gdk_memory_texture_builder_set_update_region() for partial canvas updates based on the invalidated area
+		GLib.Bytes bytes = GLib.Bytes.New (flattened_surface.GetData ());
+		Gdk.MemoryTextureBuilder builder = new () {
+			Bytes = bytes,
+			Width = flattened_surface.Width,
+			Height = flattened_surface.Height,
+			Format = Gdk.MemoryFormat.B8g8r8a8Premultiplied
 
-		// Draw our canvas drop shadow
-		g.DrawRectangle (new RectangleD (x - 1, y - 1, document.Workspace.ViewSize.Width + 2, document.Workspace.ViewSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
-		g.DrawRectangle (new RectangleD (x - 2, y - 2, document.Workspace.ViewSize.Width + 4, document.Workspace.ViewSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
-		g.DrawRectangle (new RectangleD (x - 3, y - 3, document.Workspace.ViewSize.Width + 6, document.Workspace.ViewSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
+		};
+		// Workaround for https://github.com/gircore/gir.core/issues/1257 - the Stride property produces an error
+		builder.SetStride ((nuint) flattened_surface.Stride);
 
-		// Set up our clip rectangle
-		g.Rectangle (new RectangleD (x, y, document.Workspace.ViewSize.Width, document.Workspace.ViewSize.Height));
-		g.Clip ();
+		Gdk.Texture texture = builder.Build ();
 
-		g.Translate (x, y);
+		// Scale to fit the view size (when zooming in or out). 
+		Graphene.Rect canvas_bounds = Graphene.Rect.Alloc ();
+		Size view_size = document.Workspace.ViewSize;
+		canvas_bounds.Init (0.0f, 0.0f, (float) view_size.Width, (float) view_size.Height);
 
-		// Render all the layers to a surface
-		var layers = document.Layers.GetLayersToPaint ().ToList ();
+		Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
+		// TODO - should we use linear / trilinear filtering when zoomed out?
+		snapshot.AppendScaledTexture (texture, Gsk.ScalingFilter.Nearest, canvas_bounds);
+
+		// In the future, this would be cleaner to implement as a custom widget once gir.core supports virtual methods
+		// (in particular, zooming might be easier when we have control over the size allocation)
+		// For now, we just use a Gtk.Picture widget with a custom Gdk.Paintable for its contents.
+		Gdk.Paintable? paintable = snapshot.ToPaintable (size: null);
+		if (paintable is not null)
+			Paintable = paintable;
+		else
+			System.Console.WriteLine ("Failed to render snapshot for canvas");
+
+		QueueDraw ();
+	}
+
+	private void RenderCanvas (Cairo.ImageSurface flattened_surface)
+	{
+		// Note we are always rendering without scaling, since the scaling is applied when drawing the texture later.
+		cr.Initialize (document.ImageSize, document.ImageSize);
+
+		// TODO - sort out how to render the pixel grid, drop shadow (CSS?) and screen space handles
+		// The selection border should also likely be drawn in screen space to avoid artifacts when zoomed
+
+		List<Layer> layers = document.Layers.GetLayersToPaint ().ToList ();
 
 		if (layers.Count == 0)
-			canvas.Clear ();
+			flattened_surface.Clear ();
 
-		cr.Render (layers, canvas, canvas_bounds.Location);
-
-		// Paint the surface to our canvas
-		g.SetSourceSurface (canvas, canvas_bounds.X + (int) (0 * scale), canvas_bounds.Y + (int) (0 * scale));
-		g.Paint ();
+		cr.Render (layers, flattened_surface, offset: PointI.Zero);
 
 		// Selection outline
 		if (document.Selection.Visible) {
 			string tool_name = tools.CurrentTool?.GetType ().Name ?? string.Empty;
 			bool fillSelection = tool_name.Contains ("Select") && !tool_name.Contains ("Selected");
-			document.Selection.Draw (g, scale, fillSelection);
+			using Cairo.Context context = new (flattened_surface);
+			document.Selection.Draw (context, scale: 1.0, fillSelection);
 		}
-
-		if (tools.CurrentTool is not null) {
-
-			g.Save ();
-
-			g.ResetClip (); // Don't clip the control at the edge of the image.
-			g.Translate (-x, -y);
-
-			DrawHandles (g, tools.CurrentTool.Handles);
-
-			g.Restore ();
-		}
-
-		// Explicitly dispose the context to avoid memory growth (bug #939).
-		// This can be the last reference to a temporary surface from the GTK widget.
-		context.Dispose ();
-	}
-
-	private static void DrawHandles (Cairo.Context cr, IEnumerable<IToolHandle> controls)
-	{
-		foreach (var control in controls.Where (c => c.Active))
-			control.Draw (cr);
 	}
 
 	/// <summary>

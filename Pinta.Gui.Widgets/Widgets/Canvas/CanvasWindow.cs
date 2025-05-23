@@ -76,8 +76,6 @@ public sealed class CanvasWindow : Gtk.Grid
 			Name = "canvas",
 		};
 
-		canvas.OnResize += UpdateRulerRange;
-
 		Gtk.Viewport viewPort = new ();
 		viewPort.AddController (scrollController);
 		viewPort.Child = canvas;
@@ -87,8 +85,6 @@ public sealed class CanvasWindow : Gtk.Grid
 			Vexpand = true,
 			Child = viewPort,
 		};
-		scrolledWindow.Hadjustment!.OnValueChanged += UpdateRulerRange;
-		scrolledWindow.Vadjustment!.OnValueChanged += UpdateRulerRange;
 
 		Ruler horizontalRuler = new (Gtk.Orientation.Horizontal) {
 			Metric = MetricType.Pixels,
@@ -135,6 +131,18 @@ public sealed class CanvasWindow : Gtk.Grid
 
 		// --- Further initialization
 
+		// Update the ruler when the horizontal or vertical size has changed.
+		// This can happen either from the canvas size changing (e.g. zooming),
+		// or when the window is resized and the scroll area's size changes.
+		scrolledWindow.Hadjustment!.OnChanged += UpdateRulerRange;
+		scrolledWindow.Vadjustment!.OnChanged += UpdateRulerRange;
+
+		// Update the ruler when scrolling around.
+		scrolledWindow.Hadjustment!.OnValueChanged += UpdateRulerRange;
+		scrolledWindow.Vadjustment!.OnValueChanged += UpdateRulerRange;
+
+		// Also update if the view size changed without affecting the size of
+		// the canvas widget (e.g. when zoomed out and no scrollbars are required)
 		document.Workspace.ViewSizeChanged += UpdateRulerRange;
 	}
 
@@ -213,16 +221,23 @@ public sealed class CanvasWindow : Gtk.Grid
 			return;
 
 		DocumentWorkspace workspace = document.Workspace;
-		if (workspace.Offset.X > 0) {
-			lower = lower with { X = -workspace.Offset.X / workspace.Scale };
+
+		Gtk.Widget viewport = scrolled_window.Child!;
+		Size viewSize = workspace.ViewSize;
+		PointD offset = new (
+			(viewport.GetAllocatedWidth () - viewSize.Width) / 2,
+			(viewport.GetAllocatedHeight () - viewSize.Height) / 2);
+
+		if (offset.X > 0) {
+			lower = lower with { X = -offset.X / workspace.Scale };
 			upper = upper with { X = document.ImageSize.Width - lower.X };
 		} else {
 			lower = lower with { X = scrolled_window.Hadjustment.Value / workspace.Scale };
 			upper = upper with { X = (scrolled_window.Hadjustment.Value + scrolled_window.Hadjustment.PageSize) / workspace.Scale };
 		}
 
-		if (workspace.Offset.Y > 0) {
-			lower = lower with { Y = -workspace.Offset.Y / workspace.Scale };
+		if (offset.Y > 0) {
+			lower = lower with { Y = -offset.Y / workspace.Scale };
 			upper = upper with { Y = document.ImageSize.Height - lower.Y };
 		} else {
 			lower = lower with { Y = scrolled_window.Vadjustment.Value / workspace.Scale };

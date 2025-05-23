@@ -209,7 +209,6 @@ public sealed class LivePreviewManager : ILivePreview
 			chrome.ProgressDialog.Progress = progress;
 
 			double scale = workspace.Scale;
-			PointD offset = workspace.Offset;
 
 			// Transform bounds (Image -> Canvas -> Window)
 
@@ -231,10 +230,6 @@ public sealed class LivePreviewManager : ILivePreview
 				//x2 = (bounds.Right+1) * scale;
 				//y2 = (bounds.Bottom+1) * scale;
 			}
-
-			// Calculate window bounds.
-			bounds1 += offset;
-			bounds2 += offset;
 
 			// Convert to integer, carefully not to miss partially covered
 			// pixels by rounding incorrectly.
