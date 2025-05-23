@@ -38,19 +38,22 @@ public class Command
 {
 	public Gio.SimpleAction Action { get; }
 	public string Name => Action.Name!;
-	public SignalHandler<Gio.SimpleAction, Gio.SimpleAction.ActivateSignalArgs>? Activated;
+	public event SignalHandler<Gio.SimpleAction, Gio.SimpleAction.ActivateSignalArgs>? Activated;
 	public void Activate ()
 	{
 		Action.Activate (null);
 	}
 
 	public string Label { get; }
-	public string? ShortLabel { get; set; }
+	public string? ShortLabel { get; init; }
 	public string? Tooltip { get; }
 	public string? IconName { get; }
 	public string FullName => $"app.{Name}";
-	public bool IsImportant { get; set; } = false;
-	public bool Sensitive { get => Action.Enabled; set => Action.Enabled = value; }
+	public bool IsImportant { get; } = false;
+	public bool Sensitive {
+		get => Action.Enabled;
+		set => Action.Enabled = value;
+	}
 	public ImmutableArray<string> Shortcuts { get; }
 
 	public Command (
@@ -74,22 +77,31 @@ public class Command
 
 		Shortcuts =
 			shortcuts is null
-			? ImmutableArray<string>.Empty
-			: shortcuts.ToImmutableArray ();
+			? []
+			: [.. shortcuts];
 	}
 
 	public Gio.MenuItem CreateMenuItem ()
-	{
-		return Gio.MenuItem.New (Label, FullName);
-	}
+		=> Gio.MenuItem.New (Label, FullName);
 }
 
 public sealed class ToggleCommand : Command
 {
-	public ToggleCommand (string name, string label, string? tooltip, string? stock_id)
-	    : base (name, label, tooltip, stock_id, GLib.Variant.NewBoolean (false))
+	public ToggleCommand (
+		string name,
+		string label,
+		string? tooltip,
+		string? stock_id
+	)
+		: base (
+			name,
+			label,
+			tooltip,
+			stock_id,
+			GLib.Variant.NewBoolean (false)
+		)
 	{
-		Activated += (o, args) => {
+		Activated += (_, _) => {
 			bool active = !State.GetBoolean ();
 			Toggled?.Invoke (active, interactive: true);
 			Action.ChangeState (GLib.Variant.NewBoolean (active));
@@ -99,15 +111,14 @@ public sealed class ToggleCommand : Command
 	public bool Value {
 		get => State.GetBoolean ();
 		set {
-			if (value != Value) {
-				Toggled?.Invoke (value, interactive: false);
-				Action.ChangeState (GLib.Variant.NewBoolean (value));
-			}
+			if (value == Value) return;
+			Toggled?.Invoke (value, interactive: false);
+			Action.ChangeState (GLib.Variant.NewBoolean (value));
 		}
 	}
 
 	public delegate void ToggledHandler (bool value, bool interactive);
-	public ToggledHandler? Toggled;
+	public event ToggledHandler? Toggled;
 
 	private GLib.Variant State => Action.GetState () ?? throw new InvalidOperationException ("Action should not be stateless!");
 }
