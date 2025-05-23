@@ -104,14 +104,6 @@ public sealed class DocumentWorkspace
 	}
 
 	/// <summary>
-	/// Offset to center the image view in the canvas widget.
-	/// (When zoomed out, the widget will have a larger allocated size than the image view size).
-	/// </summary>
-	public PointD Offset => new (
-		(Canvas.GetAllocatedWidth () - view_size.Width) / 2,
-		(Canvas.GetAllocatedHeight () - view_size.Height) / 2);
-
-	/// <summary>
 	/// Scale factor for the zoomed image.
 	/// </summary>
 	public double Scale {
@@ -247,7 +239,7 @@ public sealed class DocumentWorkspace
 	public PointD ViewPointToCanvas (PointD viewPoint)
 	{
 		Fraction<int> sf = ScaleFactor.CreateClamped (document.ImageSize.Width, ViewSize.Width);
-		PointD pt = sf.ScalePoint (viewPoint - Offset);
+		PointD pt = sf.ScalePoint (viewPoint);
 		return new (pt.X, pt.Y);
 	}
 
@@ -257,10 +249,7 @@ public sealed class DocumentWorkspace
 	public PointD CanvasPointToView (PointD canvasPoint)
 	{
 		Fraction<int> sf = ScaleFactor.CreateClamped (document.ImageSize.Width, ViewSize.Width);
-		PointD pt = sf.UnscalePoint (canvasPoint);
-		return new (
-			X: pt.X + Offset.X,
-			Y: pt.Y + Offset.Y);
+		return sf.UnscalePoint (canvasPoint);
 	}
 
 	public void ZoomIn ()
@@ -357,8 +346,8 @@ public sealed class DocumentWorkspace
 
 		Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
-		double scroll_offset_x = center_point.X - view.Hadjustment!.Value - Offset.X;
-		double scroll_offset_y = center_point.Y - view.Vadjustment!.Value - Offset.Y;
+		double scroll_offset_x = center_point.X - view.Hadjustment!.Value;
+		double scroll_offset_y = center_point.Y - view.Vadjustment!.Value;
 
 		PointD canvas_point = ViewPointToCanvas (center_point);
 
@@ -416,8 +405,8 @@ public sealed class DocumentWorkspace
 		// Note that the canvas widget might not have resized yet, so using Offset is important for taking
 		// the size difference into account.
 		PointD new_center_point = CanvasPointToView (canvas_point);
-		view.Hadjustment.Value = new_center_point.X - scroll_offset_x - Offset.X;
-		view.Vadjustment.Value = new_center_point.Y - scroll_offset_y - Offset.Y;
+		view.Hadjustment.Value = new_center_point.X - scroll_offset_x;
+		view.Vadjustment.Value = new_center_point.Y - scroll_offset_y;
 
 		actions.View.ResumeZoomUpdate ();
 	}
