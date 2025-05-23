@@ -885,8 +885,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private void DrawColorSurface (Context g)
 	{
 		int radius = picker_surface_radius;
-		int doubleRadius = radius * 2;
-		Size drawSize = new (doubleRadius, doubleRadius);
+		int diameter = 2 * radius;
+		Size drawSize = new (diameter, diameter);
 
 		using ImageSurface surface = CairoExtensions.CreateImageSurface (
 			Format.Argb32,
@@ -902,7 +902,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				PointI center = new (radius, radius);
 
 				for (int y = 0; y < drawSize.Height; y++) {
-					for (int x = 0; x < drawSize.Height; x++) {
+					for (int x = 0; x < drawSize.Width; x++) {
 
 						PointI pixel = new (x, y);
 						PointI vector = pixel - center;
