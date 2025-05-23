@@ -50,8 +50,6 @@ internal sealed class MainWindow
 	private int main_thread_id = -1;
 	private Gtk.DropTarget drop_target = null!;
 
-	private const string MENUBAR_SHOWN_SETTING = "menubar-shown";
-
 	public MainWindow (Adw.Application app)
 	{
 		this.app = app;
@@ -329,9 +327,9 @@ internal sealed class MainWindow
 	private void CreateWindow ()
 	{
 		// Check for stored window settings
-		int width = PintaCore.Settings.GetSetting ("window-size-width", 1100);
-		int height = PintaCore.Settings.GetSetting ("window-size-height", 750);
-		bool maximize = PintaCore.Settings.GetSetting ("window-maximized", false);
+		int width = PintaCore.Settings.GetSetting (SettingNames.WINDOW_SIZE_WIDTH, 1100);
+		int height = PintaCore.Settings.GetSetting (SettingNames.WINDOW_SIZE_HEIGHT, 750);
+		bool maximize = PintaCore.Settings.GetSetting (SettingNames.WINDOW_MAXIMIZED, false);
 
 		ResourceLoader.LoadCssStyles ();
 
@@ -361,7 +359,7 @@ internal sealed class MainWindow
 		// On macOS the global menubar should be used by default.
 		bool use_menubar_default = SystemManager.GetOperatingSystem () == OS.Mac;
 
-		return PintaCore.Settings.GetSetting (MENUBAR_SHOWN_SETTING, use_menubar_default);
+		return PintaCore.Settings.GetSetting (SettingNames.MENUBAR_SHOWN, use_menubar_default);
 	}
 
 	private void CreateMainMenu ()
@@ -543,32 +541,28 @@ internal sealed class MainWindow
 		container.Append (dock);
 	}
 
-	#region User Settings
-	private const string LastDialogDirSettingKey = "last-dialog-directory";
-	private const string LastSelectedToolSettingKey = "last-selected-tool";
-
 	private void LoadUserSettings ()
 	{
 		dock.LoadSettings (PintaCore.Settings);
 
 		// Set selected tool to last selected or default to the PaintBrush
-		PintaCore.Tools.SetCurrentTool (PintaCore.Settings.GetSetting (LastSelectedToolSettingKey, "PaintBrushTool"));
+		PintaCore.Tools.SetCurrentTool (PintaCore.Settings.GetSetting (SettingNames.LAST_SELECTED_TOOL, "PaintBrushTool"));
 
-		PintaCore.Actions.View.Rulers.Value = PintaCore.Settings.GetSetting ("ruler-shown", false);
-		PintaCore.Actions.View.ToolBar.Value = PintaCore.Settings.GetSetting ("toolbar-shown", true);
+		PintaCore.Actions.View.Rulers.Value = PintaCore.Settings.GetSetting (SettingNames.RULER_SHOWN, false);
+		PintaCore.Actions.View.ToolBar.Value = PintaCore.Settings.GetSetting (SettingNames.TOOLBAR_SHOWN, true);
 		PintaCore.Actions.View.MenuBar.Value = IsUsingMenuBar ();
-		PintaCore.Actions.View.StatusBar.Value = PintaCore.Settings.GetSetting ("statusbar-shown", true);
-		PintaCore.Actions.View.ToolBox.Value = PintaCore.Settings.GetSetting ("toolbox-shown", true);
-		PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting ("image-tabs-shown", true);
-		PintaCore.Actions.View.ToolWindows.Value = PintaCore.Settings.GetSetting ("tool-windows-shown", true);
+		PintaCore.Actions.View.StatusBar.Value = PintaCore.Settings.GetSetting (SettingNames.STATUSBAR_SHOWN, true);
+		PintaCore.Actions.View.ToolBox.Value = PintaCore.Settings.GetSetting (SettingNames.TOOLBOX_SHOWN, true);
+		PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting (SettingNames.IMAGE_TABS_SHOWN, true);
+		PintaCore.Actions.View.ToolWindows.Value = PintaCore.Settings.GetSetting (SettingNames.TOOL_WINDOWS_SHOWN, true);
 
-		string dialog_uri = PintaCore.Settings.GetSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.DefaultDialogDirectory?.GetUri () ?? "");
+		string dialog_uri = PintaCore.Settings.GetSetting (SettingNames.LAST_DIALOG_DIRECTORY, PintaCore.RecentFiles.DefaultDialogDirectory?.GetUri () ?? "");
 		PintaCore.RecentFiles.LastDialogDirectory = Gio.FileHelper.NewForUri (dialog_uri);
 
-		MetricType ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
+		MetricType ruler_metric = (MetricType) PintaCore.Settings.GetSetting (SettingNames.RULER_METRIC, (int) MetricType.Pixels);
 		PintaCore.Actions.View.RulerMetric.Activate (GLib.Variant.NewInt32 ((int) ruler_metric));
 
-		int color_scheme = PintaCore.Settings.GetSetting ("color-scheme", 0);
+		int color_scheme = PintaCore.Settings.GetSetting (SettingNames.COLOR_SCHEME, 0);
 		PintaCore.Actions.View.ColorScheme.Activate (GLib.Variant.NewInt32 (color_scheme));
 	}
 
@@ -578,28 +572,27 @@ internal sealed class MainWindow
 
 		// Don't store the maximized height if the window is maximized
 		if (!window_shell.Window.IsMaximized ()) {
-			PintaCore.Settings.PutSetting ("window-size-width", window_shell.Window.GetWidth ());
-			PintaCore.Settings.PutSetting ("window-size-height", window_shell.Window.GetHeight ());
+			PintaCore.Settings.PutSetting (SettingNames.WINDOW_SIZE_WIDTH, window_shell.Window.GetWidth ());
+			PintaCore.Settings.PutSetting (SettingNames.WINDOW_SIZE_HEIGHT, window_shell.Window.GetHeight ());
 		}
 
-		PintaCore.Settings.PutSetting ("ruler-metric", (int) GetCurrentRulerMetric ());
-		PintaCore.Settings.PutSetting ("color-scheme", PintaCore.Actions.View.ColorScheme.GetState ()!.GetInt32 ());
-		PintaCore.Settings.PutSetting ("window-maximized", window_shell.Window.IsMaximized ());
-		PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Value);
-		PintaCore.Settings.PutSetting ("image-tabs-shown", PintaCore.Actions.View.ImageTabs.Value);
-		PintaCore.Settings.PutSetting ("tool-windows-shown", PintaCore.Actions.View.ToolWindows.Value);
-		PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Value);
-		PintaCore.Settings.PutSetting (MENUBAR_SHOWN_SETTING, PintaCore.Actions.View.MenuBar.Value);
-		PintaCore.Settings.PutSetting ("statusbar-shown", PintaCore.Actions.View.StatusBar.Value);
-		PintaCore.Settings.PutSetting ("toolbox-shown", PintaCore.Actions.View.ToolBox.Value);
-		PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.RecentFiles.LastDialogDirectory?.GetUri () ?? "");
+		PintaCore.Settings.PutSetting (SettingNames.RULER_METRIC, (int) GetCurrentRulerMetric ());
+		PintaCore.Settings.PutSetting (SettingNames.COLOR_SCHEME, PintaCore.Actions.View.ColorScheme.GetState ()!.GetInt32 ());
+		PintaCore.Settings.PutSetting (SettingNames.WINDOW_MAXIMIZED, window_shell.Window.IsMaximized ());
+		PintaCore.Settings.PutSetting (SettingNames.RULER_SHOWN, PintaCore.Actions.View.Rulers.Value);
+		PintaCore.Settings.PutSetting (SettingNames.IMAGE_TABS_SHOWN, PintaCore.Actions.View.ImageTabs.Value);
+		PintaCore.Settings.PutSetting (SettingNames.TOOL_WINDOWS_SHOWN, PintaCore.Actions.View.ToolWindows.Value);
+		PintaCore.Settings.PutSetting (SettingNames.TOOLBAR_SHOWN, PintaCore.Actions.View.ToolBar.Value);
+		PintaCore.Settings.PutSetting (SettingNames.MENUBAR_SHOWN, PintaCore.Actions.View.MenuBar.Value);
+		PintaCore.Settings.PutSetting (SettingNames.STATUSBAR_SHOWN, PintaCore.Actions.View.StatusBar.Value);
+		PintaCore.Settings.PutSetting (SettingNames.TOOLBOX_SHOWN, PintaCore.Actions.View.ToolBox.Value);
+		PintaCore.Settings.PutSetting (SettingNames.LAST_DIALOG_DIRECTORY, PintaCore.RecentFiles.LastDialogDirectory?.GetUri () ?? "");
 
 		if (PintaCore.Tools.CurrentTool is BaseTool tool)
-			PintaCore.Settings.PutSetting (LastSelectedToolSettingKey, tool.GetType ().Name);
+			PintaCore.Settings.PutSetting (SettingNames.LAST_SELECTED_TOOL, tool.GetType ().Name);
 
 		PintaCore.Settings.DoSaveSettingsBeforeQuit ();
 	}
-	#endregion
 
 	#region Action Handlers
 	private bool HandleCloseRequest (object o, EventArgs args)

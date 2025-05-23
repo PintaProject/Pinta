@@ -121,7 +121,7 @@ public sealed class ImageConverterManager
 	/// </summary>
 	public void UnregisterFormatByExtension (string extension)
 	{
-		var normalized = NormalizeExtension (extension);
+		string normalized = NormalizeExtension (extension);
 		formats.RemoveAll (f => f.Extensions.Contains (normalized));
 	}
 
@@ -131,7 +131,7 @@ public sealed class ImageConverterManager
 	/// </summary>
 	public FormatDescriptor GetDefaultSaveFormat ()
 	{
-		string extension = settings_manager.GetSetting<string> ("default-image-type", "jpeg");
+		string extension = settings_manager.GetSetting<string> (SettingNames.DEFAULT_IMAGE_TYPE, "jpeg");
 
 		FormatDescriptor? fd = GetFormatByExtension (extension);
 
@@ -184,7 +184,7 @@ public sealed class ImageConverterManager
 	public void SetDefaultFormat (string extension)
 	{
 		string normalized = NormalizeExtension (extension);
-		settings_manager.PutSetting ("default-image-type", normalized);
+		settings_manager.PutSetting (SettingNames.DEFAULT_IMAGE_TYPE, normalized);
 	}
 
 	/// <summary>

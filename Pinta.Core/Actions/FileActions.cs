@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Immutable;
 
 namespace Pinta.Core;
 
@@ -44,16 +43,15 @@ public sealed class FileActions
 
 	private readonly SystemManager system;
 	private readonly AppActions app;
-	public FileActions (
-		SystemManager system,
-		AppActions app)
+	public FileActions (SystemManager system, AppActions app)
 	{
 		New = new Command (
 			"new",
 			Translations.GetString ("New..."),
 			null,
 			Resources.StandardIcons.DocumentNew,
-			shortcuts: ["<Primary>N"]);
+			shortcuts: ["<Primary>N"]
+		) { ShortLabel = Translations.GetString ("New") };
 
 		NewScreenshot = new Command (
 			"NewScreenshot",
@@ -66,7 +64,8 @@ public sealed class FileActions
 			Translations.GetString ("Open..."),
 			null,
 			Resources.StandardIcons.DocumentOpen,
-			shortcuts: ["<Primary>O"]);
+			shortcuts: ["<Primary>O"]
+		) { ShortLabel = Translations.GetString ("Open") };
 
 		Close = new Command (
 			"close",
@@ -94,9 +93,6 @@ public sealed class FileActions
 			Translations.GetString ("Print"),
 			null,
 			Resources.StandardIcons.DocumentPrint);
-
-		New.ShortLabel = Translations.GetString ("New");
-		Open.ShortLabel = Translations.GetString ("Open");
 
 		this.system = system;
 		this.app = app;
@@ -154,6 +150,9 @@ public sealed class FileActions
 	{
 		ModifyCompressionEventArgs e = new (defaultCompression, parent);
 		ModifyCompression?.Invoke (this, e);
-		return e.Cancel ? -1 : e.Quality;
+		return
+			e.Cancel
+			? -1
+			: e.Quality;
 	}
 }

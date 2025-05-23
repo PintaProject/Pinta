@@ -37,8 +37,6 @@ public sealed class SelectionModeHandler
 	private CombineMode selected_mode;
 	private readonly IReadOnlyDictionary<string, CombineMode> combine_modes;
 
-	private const string COMBINE_MODE_SETTING = "selection-combine-mode";
-
 	public SelectionModeHandler (SystemManager system)
 	{
 		combine_modes = new Dictionary<string, CombineMode> () {
@@ -69,7 +67,7 @@ public sealed class SelectionModeHandler
 			foreach (var mode in combine_modes)
 				selection_combo_box.ComboBox.AppendText (mode.Key);
 
-			selection_combo_box.ComboBox.Active = settings.GetSetting (COMBINE_MODE_SETTING, 0);
+			selection_combo_box.ComboBox.Active = settings.GetSetting (SettingNames.SELECTION_COMBINE_MODE, 0);
 		}
 
 		tb.Append (selection_combo_box);
@@ -119,7 +117,7 @@ public sealed class SelectionModeHandler
 
 	private static void PerformSelectionWithMode (Document doc, CombineMode mode, List<List<IntPoint>> polygons)
 	{
-		var resultingPolygons = new List<List<IntPoint>> ();
+		List<List<IntPoint>> resultingPolygons = new ();
 
 		//Specify the Clipper Subject (the previous Polygons) and the Clipper Clip (the new Polygons).
 		//Note: for Union, ignore the Clipper Library instructions - the new polygon(s) should be Clips, not Subjects!
@@ -168,7 +166,7 @@ public sealed class SelectionModeHandler
 	public void OnSaveSettings (ISettingsService settings)
 	{
 		if (selection_combo_box is not null)
-			settings.PutSetting (COMBINE_MODE_SETTING, selection_combo_box.ComboBox.Active);
+			settings.PutSetting (SettingNames.SELECTION_COMBINE_MODE, selection_combo_box.ComboBox.Active);
 	}
 }
 

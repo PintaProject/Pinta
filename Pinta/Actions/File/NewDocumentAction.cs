@@ -73,10 +73,11 @@ internal sealed class NewDocumentAction : IActionHandler
 			// An image was not on the clipboard,
 			// so use saved dimensions from settings
 			imageSize = new (
-				Width: settings.GetSetting<int> ("new-image-width", 800),
-				Height: settings.GetSetting<int> ("new-image-height", 600));
+				Width: settings.GetSetting<int> (SettingNames.NEW_IMAGE_WIDTH, 800),
+				Height: settings.GetSetting<int> (SettingNames.NEW_IMAGE_HEIGHT, 600));
 			bg_type = settings.GetSetting<NewImageDialog.BackgroundType> (
-				"new-image-bg", NewImageDialog.BackgroundType.White);
+				SettingNames.NEW_IMAGE_BACKGROUND,
+				NewImageDialog.BackgroundType.White);
 			using_clipboard = false;
 		} else {
 			imageSize = new (
@@ -104,9 +105,9 @@ internal sealed class NewDocumentAction : IActionHandler
 				dialog.NewImageSize,
 				dialog.NewImageBackground);
 
-			settings.PutSetting ("new-image-width", dialog.NewImageWidth);
-			settings.PutSetting ("new-image-height", dialog.NewImageHeight);
-			settings.PutSetting ("new-image-bg", dialog.NewImageBackgroundType);
+			settings.PutSetting (SettingNames.NEW_IMAGE_WIDTH, dialog.NewImageWidth);
+			settings.PutSetting (SettingNames.NEW_IMAGE_HEIGHT, dialog.NewImageHeight);
+			settings.PutSetting (SettingNames.NEW_IMAGE_BACKGROUND, dialog.NewImageBackgroundType);
 
 		} finally {
 			dialog.Destroy ();

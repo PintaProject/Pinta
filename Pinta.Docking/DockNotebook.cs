@@ -26,68 +26,84 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Docking;
 
-public sealed class TabClosedEventArgs : CancelEventArgs
+public sealed class TabClosedEventArgs (IDockNotebookItem item) : CancelEventArgs
 {
-	public TabClosedEventArgs (IDockNotebookItem item) { Item = item; }
-
-	public IDockNotebookItem Item { get; }
+	public IDockNotebookItem Item { get; } = item;
 }
 
-public sealed class TabEventArgs : EventArgs
+public sealed class TabEventArgs (IDockNotebookItem? item) : EventArgs
 {
-	public TabEventArgs (IDockNotebookItem? item) { Item = item; }
-
-	public IDockNotebookItem? Item { get; }
+	public IDockNotebookItem? Item { get; } = item;
 }
 
-public sealed class DockNotebook : Box
+public sealed class DockNotebook : Gtk.Box
 {
-	private readonly Adw.TabView tab_view = new ();
-	private readonly Adw.TabBar tab_bar = new ();
+	private readonly Adw.TabView tab_view;
+	private readonly Adw.TabBar tab_bar;
 	private readonly HashSet<IDockNotebookItem> items = [];
 
 	public DockNotebook ()
 	{
-		SetOrientation (Orientation.Vertical);
+		Adw.TabView tabView = new () {
+			Vexpand = true,
+			Valign = Gtk.Align.Fill,
+		};
+		tabView.OnClosePage += TabView_OnClosePage;
 
-		tab_bar.SetView (tab_view);
-		tab_bar.Autohide = true;
-		tab_bar.AddCssClass (AdwaitaStyles.Inline);
-		tab_bar.ExpandTabs = true;
+		Adw.TabBar tabBar = new ();
+		tabBar.SetView (tabView);
+		tabBar.Autohide = true;
+		tabBar.AddCssClass (AdwaitaStyles.Inline);
+		tabBar.ExpandTabs = true;
 
-		tab_view.Vexpand = true;
-		tab_view.Valign = Align.Fill;
+		// --- Initialization (Gtk.Box)
 
-		Append (tab_bar);
-		Append (tab_view);
+		SetOrientation (Gtk.Orientation.Vertical);
+
+		Append (tabBar);
+		Append (tabView);
+
+		// --- References to keep
+
+		tab_view = tabView;
+		tab_bar = tabBar;
+
+		// --- Further initialization
 
 		// Emit an event when the current tab is changed.
-		Adw.TabView.SelectedPagePropertyDefinition.Notify (tab_view, (_, _) => {
-			Adw.TabPage? page = tab_view.SelectedPage;
-			IDockNotebookItem? item = FindItemForPage (page);
-			ActiveTabChanged?.Invoke (this, new TabEventArgs (item));
-		});
+		Adw.TabView.SelectedPagePropertyDefinition.Notify (tabView, TabView_TabChanged);
+	}
 
+	private void TabView_TabChanged (GObject.Object _, NotifySignalArgs __)
+	{
+		Adw.TabPage? page = tab_view.SelectedPage;
+		IDockNotebookItem? item = FindItemForPage (page);
+		ActiveTabChanged?.Invoke (this, new TabEventArgs (item));
+	}
+
+	private bool TabView_OnClosePage (Adw.TabView _, Adw.TabView.ClosePageSignalArgs args)
+	{
 		// Prompt the user to save unsaved changes before closing.
-		tab_view.OnClosePage += (o, e) => {
-			var page = e.Page;
-			IDockNotebookItem item = FindItemForPage (page)!;
 
-			var close_args = new TabClosedEventArgs (item);
-			TabClosed?.Invoke (this, close_args);
+		Adw.TabPage page = args.Page;
 
-			tab_view.ClosePageFinish (page, !close_args.Cancel);
-			if (!close_args.Cancel)
-				items.Remove (item);
+		IDockNotebookItem item = FindItemForPage (page)!;
 
-			// Prevent the default close handler from running.
-			return Gdk.Constants.EVENT_STOP;
-		};
+		TabClosedEventArgs close_args = new (item);
+
+		TabClosed?.Invoke (this, close_args);
+
+		tab_view.ClosePageFinish (page, !close_args.Cancel);
+
+		if (!close_args.Cancel)
+			items.Remove (item);
+
+		// Prevent the default close handler from running.
+		return Gdk.Constants.EVENT_STOP;
 	}
 
 	/// <summary>
@@ -146,7 +162,7 @@ public sealed class DockNotebook : Box
 
 	public void RemoveTab (IDockNotebookItem item)
 	{
-		var page = tab_view.GetPage (item.Widget);
+		Adw.TabPage page = tab_view.GetPage (item.Widget);
 		tab_view.ClosePage (page);
 		items.Remove (item);
 	}

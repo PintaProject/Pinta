@@ -49,9 +49,6 @@ public sealed class PaletteManager : IPaletteService
 
 	private const int MAX_RECENT_COLORS = 10;
 	private const string PALETTE_FILE = "palette.txt";
-	private const string PRIMARY_COLOR_SETTINGS_KEY = "primary-color";
-	private const string SECONDARY_COLOR_SETTINGS_KEY = "secondary-color";
-	private const string RECENT_COLORS_SETTINGS_KEY = "recently-used-colors";
 
 	private readonly List<Color> recently_used;
 
@@ -164,8 +161,8 @@ public sealed class PaletteManager : IPaletteService
 	private void PopulateRecentlyUsedColors ()
 	{
 		// Primary / Secondary colors
-		string primaryColor = settings.GetSetting (PRIMARY_COLOR_SETTINGS_KEY, ColorBgra.Black.ToHexString ());
-		string secondaryColor = settings.GetSetting (SECONDARY_COLOR_SETTINGS_KEY, ColorBgra.White.ToHexString ());
+		string primaryColor = settings.GetSetting (SettingNames.PRIMARY_COLOR, ColorBgra.Black.ToHexString ());
+		string secondaryColor = settings.GetSetting (SettingNames.SECONDARY_COLOR, ColorBgra.White.ToHexString ());
 
 		SetColor (
 			true,
@@ -178,7 +175,7 @@ public sealed class PaletteManager : IPaletteService
 			false);
 
 		// Recently used palette
-		string saved_colors = settings.GetSetting (RECENT_COLORS_SETTINGS_KEY, string.Empty);
+		string saved_colors = settings.GetSetting (SettingNames.RECENT_COLORS, string.Empty);
 
 		foreach (string hex_color in saved_colors.Split (',')) {
 			if (ColorBgra.TryParseHexString (hex_color, out ColorBgra color))
@@ -203,12 +200,12 @@ public sealed class PaletteManager : IPaletteService
 	private void SaveRecentlyUsedColors ()
 	{
 		// Primary / Secondary colors
-		settings.PutSetting (PRIMARY_COLOR_SETTINGS_KEY, PrimaryColor.ToColorBgra ().ToHexString ());
-		settings.PutSetting (SECONDARY_COLOR_SETTINGS_KEY, SecondaryColor.ToColorBgra ().ToHexString ());
+		settings.PutSetting (SettingNames.PRIMARY_COLOR, PrimaryColor.ToColorBgra ().ToHexString ());
+		settings.PutSetting (SettingNames.SECONDARY_COLOR, SecondaryColor.ToColorBgra ().ToHexString ());
 
 		// Recently used palette
 		string colors = string.Join (",", recently_used.Select (c => c.ToColorBgra ().ToHexString ()));
-		settings.PutSetting (RECENT_COLORS_SETTINGS_KEY, colors);
+		settings.PutSetting (SettingNames.RECENT_COLORS, colors);
 	}
 
 	private void OnPrimaryColorChanged ()
