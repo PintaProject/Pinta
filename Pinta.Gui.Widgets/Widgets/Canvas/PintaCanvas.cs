@@ -1,21 +1,21 @@
-// 
+//
 // PintaCanvas.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -34,10 +34,9 @@ public sealed class PintaCanvas : Gtk.Picture
 {
 	private readonly CanvasRenderer cr;
 	private readonly Document document;
+	private readonly CanvasWindow canvas_window;
 
 	private Cairo.ImageSurface? flattened_surface;
-
-	public CanvasWindow CanvasWindow { get; }
 
 	private readonly ChromeManager chrome;
 	private readonly ToolManager tools;
@@ -51,11 +50,10 @@ public sealed class PintaCanvas : Gtk.Picture
 	{
 		this.chrome = chrome;
 		this.tools = tools;
-
-		CanvasWindow = window;
+		canvas_window = window;
 		this.document = document;
 
-		cr = new CanvasRenderer (canvasGrid, true);
+		cr = new (canvasGrid, enableLivePreview: true);
 
 		document.Workspace.ViewSizeChanged += OnViewSizeChanged;
 		document.Workspace.CanvasInvalidated += OnCanvasInvalidated;
@@ -86,8 +84,8 @@ public sealed class PintaCanvas : Gtk.Picture
 	{
 		// Compute the flattened image.
 		if (flattened_surface is null ||
-			flattened_surface.Width != document.ImageSize.Width ||
-			flattened_surface.Height != document.ImageSize.Height) {
+		    flattened_surface.Width != document.ImageSize.Width ||
+		    flattened_surface.Height != document.ImageSize.Height) {
 
 			flattened_surface?.Dispose ();
 			flattened_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
@@ -112,14 +110,14 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		Gdk.Texture texture = builder.Build ();
 
-		// Scale to fit the view size (when zooming in or out). 
-		Graphene.Rect canvas_bounds = Graphene.Rect.Alloc ();
-		Size view_size = document.Workspace.ViewSize;
-		canvas_bounds.Init (0.0f, 0.0f, (float) view_size.Width, (float) view_size.Height);
+		// Scale to fit the view size (when zooming in or out).
+		Graphene.Rect canvasBounds = Graphene.Rect.Alloc ();
+		Size viewSize = document.Workspace.ViewSize;
+		canvasBounds.Init (0.0f, 0.0f, (float) viewSize.Width, (float) viewSize.Height);
 
 		Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
 		// TODO - should we use linear / trilinear filtering when zoomed out?
-		snapshot.AppendScaledTexture (texture, Gsk.ScalingFilter.Nearest, canvas_bounds);
+		snapshot.AppendScaledTexture (texture, Gsk.ScalingFilter.Nearest, canvasBounds);
 
 		// In the future, this would be cleaner to implement as a custom widget once gir.core supports virtual methods
 		// (in particular, zooming might be easier when we have control over the size allocation)
@@ -133,7 +131,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		QueueDraw ();
 	}
 
-	private void RenderCanvas (Cairo.ImageSurface flattened_surface)
+	private void RenderCanvas (Cairo.ImageSurface flattenedSurface)
 	{
 		// Note we are always rendering without scaling, since the scaling is applied when drawing the texture later.
 		cr.Initialize (document.ImageSize, document.ImageSize);
@@ -144,15 +142,15 @@ public sealed class PintaCanvas : Gtk.Picture
 		List<Layer> layers = document.Layers.GetLayersToPaint ().ToList ();
 
 		if (layers.Count == 0)
-			flattened_surface.Clear ();
+			flattenedSurface.Clear ();
 
-		cr.Render (layers, flattened_surface, offset: PointI.Zero);
+		cr.Render (layers, flattenedSurface, offset: PointI.Zero);
 
 		// Selection outline
 		if (document.Selection.Visible) {
-			string tool_name = tools.CurrentTool?.GetType ().Name ?? string.Empty;
-			bool fillSelection = tool_name.Contains ("Select") && !tool_name.Contains ("Selected");
-			using Cairo.Context context = new (flattened_surface);
+			string toolName = tools.CurrentTool?.GetType ().Name ?? string.Empty;
+			bool fillSelection = toolName.Contains ("Select") && !toolName.Contains ("Selected");
+			using Cairo.Context context = new (flattenedSurface);
 			document.Selection.Draw (context, scale: 1.0, fillSelection);
 		}
 	}
@@ -174,7 +172,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		// A mouse click on the canvas should grab focus away from any toolbar widgets, etc
 		// Using the root canvas widget works best - if the drawing area is given focus, the scroll
 		// widget jumps back to the origin.
-		CanvasWindow.GrabFocus ();
+		canvas_window.GrabFocus ();
 
 		// Note: if we ever regain support for docking multiple canvas
 		// widgets side by side (like Pinta 1.7 could), a mouse click should switch
@@ -189,7 +187,7 @@ public sealed class PintaCanvas : Gtk.Picture
 			MouseButton = gesture.GetCurrentMouseButton (),
 			PointDouble = canvas_point,
 			WindowPoint = window_point,
-			RootPoint = CanvasWindow.WindowMousePosition,
+			RootPoint = canvas_window.WindowMousePosition,
 		};
 
 		tools.DoMouseDown (document, tool_args);
@@ -206,7 +204,7 @@ public sealed class PintaCanvas : Gtk.Picture
 			MouseButton = gesture.GetCurrentMouseButton (),
 			PointDouble = canvas_point,
 			WindowPoint = window_point,
-			RootPoint = CanvasWindow.WindowMousePosition,
+			RootPoint = canvas_window.WindowMousePosition,
 		};
 
 		tools.DoMouseUp (document, tool_args);
@@ -225,7 +223,7 @@ public sealed class PintaCanvas : Gtk.Picture
 			MouseButton = MouseButton.None,
 			PointDouble = canvas_point,
 			WindowPoint = window_point,
-			RootPoint = CanvasWindow.WindowMousePosition,
+			RootPoint = canvas_window.WindowMousePosition,
 		};
 
 		tools.DoMouseMove (document, tool_args);
