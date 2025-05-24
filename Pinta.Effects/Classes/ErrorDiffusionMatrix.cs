@@ -75,7 +75,7 @@ internal sealed class ErrorDiffusionMatrix
 		public static ErrorDiffusionMatrix TwoRowSierra { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.TwoRowSierra, 2);
 		public static ErrorDiffusionMatrix SierraLite { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.SierraLite, 1);
 		public static ErrorDiffusionMatrix Burkes { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.Burkes, 2);
-		public static ErrorDiffusionMatrix Atkinson { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.Atkinson, 1);
+		public static ErrorDiffusionMatrix Atkinson { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.Atkinson, 1, 8);
 		public static ErrorDiffusionMatrix Stucki { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.Stucki, 2);
 		public static ErrorDiffusionMatrix JarvisJudiceNinke { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.JarvisJudiceNinke, 2);
 		public static ErrorDiffusionMatrix FloydSteinberg { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.FloydSteinberg, 1);
@@ -142,7 +142,7 @@ internal sealed class ErrorDiffusionMatrix
 	public int ColumnsToRight { get; }
 	public int RowsBelow { get; }
 	public int this[int row, int column] => array_2_d[row, column];
-	public ErrorDiffusionMatrix (int[,] array2D, int pixelColumn)
+	public ErrorDiffusionMatrix (int[,] array2D, int pixelColumn, int? totalWeight = null)
 	{
 		var clone = (int[,]) array2D.Clone ();
 		var rows = clone.GetLength (0);
@@ -157,7 +157,7 @@ internal sealed class ErrorDiffusionMatrix
 		if (flattened.Take (pixelColumn).Any (w => w != 0)) throw new ArgumentException ("Pixels previous to target cannot have nonzero weights");
 		ColumnsToLeft = pixelColumn;
 		ColumnsToRight = columns - 1 - pixelColumn;
-		TotalWeight = flattened.Sum ();
+		TotalWeight = totalWeight ?? flattened.Sum ();
 		Columns = columns;
 		Rows = rows;
 		RowsBelow = rows - 1;
