@@ -26,7 +26,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Gsk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
@@ -118,8 +117,10 @@ public sealed class PintaCanvas : Gtk.Picture
 		canvasBounds.Init (0.0f, 0.0f, (float) viewSize.Width, (float) viewSize.Height);
 
 		Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
-		// TODO - should we use linear / trilinear filtering when zoomed out?
-		snapshot.AppendScaledTexture (texture, Gsk.ScalingFilter.Nearest, canvasBounds);
+		Gsk.ScalingFilter scalingFilter = (document.Workspace.Scale >= 1.0) ?
+			Gsk.ScalingFilter.Nearest :
+			Gsk.ScalingFilter.Linear;
+		snapshot.AppendScaledTexture (texture, scalingFilter, canvasBounds);
 
 		DrawSelection (snapshot);
 
@@ -177,7 +178,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		}
 
 		// Draw a white line first so it shows up on dark backgrounds
-		Gsk.Stroke stroke = Stroke.New (lineWidth: 1.0f / scale);
+		Gsk.Stroke stroke = Gsk.Stroke.New (lineWidth: 1.0f / scale);
 		Gdk.RGBA white = new () { Red = 1, Green = 1, Blue = 1, Alpha = 1 };
 		snapshot.AppendStroke (selectionPath, stroke, white);
 
