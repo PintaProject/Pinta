@@ -195,9 +195,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 		set => ActiveWorkspace.ViewSize = value;
 	}
 
-	public PointD Offset
-		=> ActiveWorkspace.Offset;
-
 	public double Scale {
 		get => ActiveWorkspace.Scale;
 		set => ActiveWorkspace.Scale = value;
