@@ -25,17 +25,15 @@
 // THE SOFTWARE.
 
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class HScaleSpinButtonWidget : Box
+public sealed class HScaleSpinButtonWidget : Gtk.Box
 {
-	private readonly Scale hscale;
-	private readonly SpinButton spin;
-	private readonly Button reset_button;
-	private readonly Label title_label;
+	private readonly Gtk.Scale h_scale;
+	private readonly Gtk.SpinButton spin_button;
+	private readonly Gtk.Label title_label;
 
 	private int max_value;
 	private int min_value;
@@ -46,79 +44,65 @@ public sealed class HScaleSpinButtonWidget : Box
 
 	public HScaleSpinButtonWidget (double initialValue)
 	{
-		// Build
+		const int SPACING = 6;
 
-		const int spacing = 6;
-
-		initial_value = initialValue;
-
-		// Section label + line
-		Box labelAndLine = new () { Spacing = spacing };
-		labelAndLine.SetOrientation (Orientation.Horizontal);
-		Label titleLabel = new ();
+		Gtk.Label titleLabel = new ();
 		titleLabel.AddCssClass (AdwaitaStyles.Title4);
+
+		Gtk.Box labelAndLine = new () { Spacing = SPACING };
+		labelAndLine.SetOrientation (Gtk.Orientation.Horizontal);
 		labelAndLine.Append (titleLabel);
 
-		title_label = titleLabel;
+		Gtk.Scale hScale = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 2, 64, 1);
+		hScale.CanFocus = true;
+		hScale.DrawValue = false;
+		hScale.Digits = 0;
+		hScale.ValuePos = Gtk.PositionType.Top;
+		hScale.Hexpand = true;
+		hScale.Halign = Gtk.Align.Fill;
+		hScale.OnValueChanged += HandleHscaleValueChanged;
 
-		// Slider + spinner + reset button
-		hscale = CreateSlider ();
-		spin = CreateSpin ();
-		reset_button = CreateResetButton ();
-		Box valueControls = new () { Spacing = spacing };
-		valueControls.SetOrientation (Orientation.Horizontal);
-		valueControls.Append (hscale);
-		valueControls.Append (spin);
-		valueControls.Append (reset_button);
+		Gtk.SpinButton spinButton = Gtk.SpinButton.NewWithRange (0, 100, 1);
+		spinButton.CanFocus = true;
+		spinButton.ClimbRate = 1;
+		spinButton.Numeric = true;
+		spinButton.Adjustment!.PageIncrement = 10;
+		spinButton.OnValueChanged += HandleSpinValueChanged;
+		spinButton.SetActivatesDefaultImmediate (true);
 
-		// Main layout
-		SetOrientation (Orientation.Vertical);
-		Spacing = spacing;
-		Append (labelAndLine);
-		Append (valueControls);
-
-		// ---------------
-
-		OnRealize += (_, _) => Value = initialValue;
-
-		spin.SetActivatesDefaultImmediate (true);
-	}
-
-	private Scale CreateSlider ()
-	{
-		Scale result = Scale.NewWithRange (Orientation.Horizontal, 2, 64, 1);
-		result.CanFocus = true;
-		result.DrawValue = false;
-		result.Digits = 0;
-		result.ValuePos = PositionType.Top;
-		result.Hexpand = true;
-		result.Halign = Align.Fill;
-		result.OnValueChanged += HandleHscaleValueChanged;
-		return result;
-	}
-
-	private Button CreateResetButton ()
-	{
-		Button result = new () {
+		Gtk.Button resetButton = new () {
 			IconName = Resources.StandardIcons.GoPrevious,
 			WidthRequest = 28,
 			HeightRequest = 24,
 			CanFocus = true,
 			UseUnderline = true,
 		};
-		result.OnClicked += HandleButtonClicked;
-		return result;
-	}
+		resetButton.OnClicked += HandleResetButtonClicked;
 
-	private SpinButton CreateSpin ()
-	{
-		SpinButton result = SpinButton.NewWithRange (0, 100, 1);
-		result.CanFocus = true;
-		result.ClimbRate = 1;
-		result.Numeric = true;
-		result.Adjustment!.PageIncrement = 10;
-		result.OnValueChanged += HandleSpinValueChanged;
-		return result;
+		Gtk.Box valueControls = new () { Spacing = SPACING };
+		valueControls.SetOrientation (Gtk.Orientation.Horizontal);
+		valueControls.Append (hScale);
+		valueControls.Append (spinButton);
+		valueControls.Append (resetButton);
+
+		// --- Initialization (Gtk.Box)
+
+		SetOrientation (Gtk.Orientation.Vertical);
+		Spacing = SPACING;
+		Append (labelAndLine);
+		Append (valueControls);
+
+		// --- Initialization (Gtk.Widget)
+
+		OnRealize += (_, _)
+			=> Value = initialValue;
+
+		// --- References to keep
+
+		initial_value = initialValue;
+		title_label = titleLabel;
+		h_scale = hScale;
+		spin_button = spinButton;
 	}
 
 	public string Label {
@@ -130,8 +114,8 @@ public sealed class HScaleSpinButtonWidget : Box
 		get => max_value;
 		set {
 			max_value = value;
-			hscale.Adjustment!.Upper = value;
-			spin.Adjustment!.Upper = value;
+			h_scale.Adjustment!.Upper = value;
+			spin_button.Adjustment!.Upper = value;
 		}
 	}
 
@@ -139,8 +123,8 @@ public sealed class HScaleSpinButtonWidget : Box
 		get => min_value;
 		set {
 			min_value = value;
-			hscale.Adjustment!.Lower = value;
-			spin.Adjustment!.Lower = value;
+			h_scale.Adjustment!.Lower = value;
+			spin_button.Adjustment!.Lower = value;
 		}
 	}
 
@@ -149,8 +133,8 @@ public sealed class HScaleSpinButtonWidget : Box
 		set {
 			if (value <= 0) return;
 			digits_value = value;
-			hscale.Digits = value;
-			spin.Digits = Convert.ToUInt32 (value);
+			h_scale.Digits = value;
+			spin_button.Digits = Convert.ToUInt32 (value);
 		}
 	}
 
@@ -158,37 +142,37 @@ public sealed class HScaleSpinButtonWidget : Box
 		get => inc_value;
 		set {
 			inc_value = value;
-			hscale.Adjustment!.StepIncrement = value;
-			spin.Adjustment!.StepIncrement = value;
+			h_scale.Adjustment!.StepIncrement = value;
+			spin_button.Adjustment!.StepIncrement = value;
 		}
 	}
 
-	public int ValueAsInt => spin.GetValueAsInt ();
+	public int ValueAsInt => spin_button.GetValueAsInt ();
 
 	public double Value {
-		get => spin.Value;
+		get => spin_button.Value;
 		set {
-			if (spin.Value == value) return;
-			spin.Value = value;
+			if (spin_button.Value == value) return;
+			spin_button.Value = value;
 			OnValueChanged ();
 		}
 	}
 
-	private void HandleHscaleValueChanged (object? sender, EventArgs e)
+	private void HandleHscaleValueChanged (Gtk.Range sender, EventArgs args)
 	{
-		if (spin.Value == hscale.GetValue ()) return;
-		spin.Value = hscale.GetValue ();
+		if (spin_button.Value == h_scale.GetValue ()) return;
+		spin_button.Value = h_scale.GetValue ();
 		OnValueChanged ();
 	}
 
-	private void HandleSpinValueChanged (object? sender, EventArgs e)
+	private void HandleSpinValueChanged (Gtk.SpinButton sender, EventArgs e)
 	{
-		if (hscale.GetValue () == spin.Value) return;
-		hscale.SetValue (spin.Value);
+		if (h_scale.GetValue () == spin_button.Value) return;
+		h_scale.SetValue (spin_button.Value);
 		OnValueChanged ();
 	}
 
-	private void HandleButtonClicked (object? sender, EventArgs e)
+	private void HandleResetButtonClicked (Gtk.Button sender, EventArgs e)
 	{
 		Value = initial_value;
 	}

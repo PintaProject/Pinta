@@ -4,7 +4,7 @@
 // Author:
 //       Cameron White <cameronwhite91@gmail.com>
 //
-// Copyright (c) 2022 
+// Copyright (c) 2022
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -66,8 +66,6 @@ public readonly record struct PointD (double X, double Y)
 	public readonly PointD Rounded () => new (Math.Round (X), Math.Round (Y));
 
 	public readonly PointD Scaled (double factor) => new (X * factor, Y * factor);
-
-	public static PointD operator + (in PointD a, in PointD b) => new (a.X + b.X, a.Y + b.Y);
 
 	public static explicit operator PointD (PointI p) => new (p.X, p.Y);
 
