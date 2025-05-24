@@ -1,4 +1,3 @@
-using GLib.Internal;
 using NUnit.Framework;
 using Pinta.Core;
 
