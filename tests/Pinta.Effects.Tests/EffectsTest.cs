@@ -1,3 +1,4 @@
+using GLib.Internal;
 using NUnit.Framework;
 using Pinta.Core;
 
@@ -150,6 +151,15 @@ internal sealed class EffectsTest
 		effect.Data.PaletteChoice = PredefinedPalettes.OldWindows16;
 		effect.Data.ErrorDiffusionMethod = PredefinedDiffusionMatrices.Stucki;
 		Utilities.TestEffect (effect, "dithering3.png");
+	}
+
+	[Test]
+	public void Dithering4 ()
+	{
+		DitheringEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.PaletteChoice = PredefinedPalettes.OldMsPaint;
+		effect.Data.ErrorDiffusionMethod = PredefinedDiffusionMatrices.Atkinson;
+		Utilities.TestEffect (effect, "dithering4.png");
 	}
 
 	[Test]
