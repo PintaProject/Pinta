@@ -26,6 +26,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Gsk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
@@ -93,10 +94,11 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		RenderCanvas (flattened_surface);
 
-		// FIXME - Gdk.MemoryTextureBuilder is only available in GTK 4.16+
+		// FIXME - Gdk.MemoryTextureBuilder is only available in GTK 4.16+, and Gsk.Path etc require 4.14
 		// TODO - if we used cairo_image_surface_create_for_data() to wrap the GLib.Bytes buffer, we might be able to avoid this extra copy
 		// TODO - is there any benefit to caching the texture builder?
 		// TODO - investigate using gdk_memory_texture_builder_set_update_region() for partial canvas updates based on the invalidated area
+		// TODO - could use gtk_snapshot_push_blend() to avoid flattening each layer on the CPU?
 		GLib.Bytes bytes = GLib.Bytes.New (flattened_surface.GetData ());
 		Gdk.MemoryTextureBuilder builder = new () {
 			Bytes = bytes,
@@ -119,6 +121,8 @@ public sealed class PintaCanvas : Gtk.Picture
 		// TODO - should we use linear / trilinear filtering when zoomed out?
 		snapshot.AppendScaledTexture (texture, Gsk.ScalingFilter.Nearest, canvasBounds);
 
+		DrawSelection (snapshot);
+
 		// In the future, this would be cleaner to implement as a custom widget once gir.core supports virtual methods
 		// (in particular, zooming might be easier when we have control over the size allocation)
 		// For now, we just use a Gtk.Picture widget with a custom Gdk.Paintable for its contents.
@@ -137,7 +141,6 @@ public sealed class PintaCanvas : Gtk.Picture
 		cr.Initialize (document.ImageSize, document.ImageSize);
 
 		// TODO - sort out how to render the pixel grid, drop shadow (CSS?) and screen space handles
-		// The selection border should also likely be drawn in screen space to avoid artifacts when zoomed
 
 		List<Layer> layers = document.Layers.GetLayersToPaint ().ToList ();
 
@@ -145,14 +148,45 @@ public sealed class PintaCanvas : Gtk.Picture
 			flattenedSurface.Clear ();
 
 		cr.Render (layers, flattenedSurface, offset: PointI.Zero);
+	}
 
-		// Selection outline
-		if (document.Selection.Visible) {
-			string toolName = tools.CurrentTool?.GetType ().Name ?? string.Empty;
-			bool fillSelection = toolName.Contains ("Select") && !toolName.Contains ("Selected");
-			using Cairo.Context context = new (flattenedSurface);
-			document.Selection.Draw (context, scale: 1.0, fillSelection);
+	private void DrawSelection (Gtk.Snapshot snapshot)
+	{
+		if (!document.Selection.Visible)
+			return;
+
+		string toolName = tools.CurrentTool?.GetType ().Name ?? string.Empty;
+		// TODO - this should be a property of the tool rather than examining the tool's type name.
+		bool fillSelection = toolName.Contains ("Select") && !toolName.Contains ("Selected");
+
+		// Convert the selection path.
+		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
+		pathBuilder.AddCairoPath (document.Selection.SelectionPath);
+		Gsk.Path selectionPath = pathBuilder.ToPath ();
+
+		snapshot.Save ();
+
+		// Scale the selection path up to the view size.
+		// Note the outline width (below) remains at a constant size.
+		float scale = (float) document.Workspace.Scale;
+		snapshot.Scale (scale, scale);
+
+		if (fillSelection) {
+			Gdk.RGBA fillColor = new () { Red = 0.7f, Green = 0.8f, Blue = 0.9f, Alpha = 0.2f };
+			snapshot.AppendFill (selectionPath, Gsk.FillRule.EvenOdd, fillColor);
 		}
+
+		// Draw a white line first so it shows up on dark backgrounds
+		Gsk.Stroke stroke = Stroke.New (lineWidth: 1.0f / scale);
+		Gdk.RGBA white = new () { Red = 1, Green = 1, Blue = 1, Alpha = 1 };
+		snapshot.AppendStroke (selectionPath, stroke, white);
+
+		// Draw a black dashed line over the white line
+		stroke.SetDash ([2.0f / scale, 4.0f / scale]);
+		Gdk.RGBA black = new () { Red = 0, Green = 0, Blue = 0, Alpha = 1 };
+		snapshot.AppendStroke (selectionPath, stroke, black);
+
+		snapshot.Restore ();
 	}
 
 	/// <summary>
