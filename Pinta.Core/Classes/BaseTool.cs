@@ -106,6 +106,14 @@ public abstract class BaseTool
 		=> false;
 
 	/// <summary>
+	/// Specifies whether the tool manipulates selections.
+	/// This controls whether the selection is drawn with a filled color, rather than only
+	/// showing the selection outline.
+	/// </summary>
+	public virtual bool IsSelectionTool
+		=> false;
+
+	/// <summary>
 	/// Whether or not the tool is an editable ShapeTool.
 	/// </summary>
 	public virtual bool IsEditableShapeTool

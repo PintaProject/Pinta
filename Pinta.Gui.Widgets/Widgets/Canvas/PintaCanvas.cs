@@ -156,9 +156,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		if (!document.Selection.Visible)
 			return;
 
-		string toolName = tools.CurrentTool?.GetType ().Name ?? string.Empty;
-		// TODO - this should be a property of the tool rather than examining the tool's type name.
-		bool fillSelection = toolName.Contains ("Select") && !toolName.Contains ("Selected");
+		bool fillSelection = tools.CurrentTool?.IsSelectionTool ?? false;
 
 		// Convert the selection path.
 		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
