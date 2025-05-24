@@ -22,55 +22,64 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Docking;
 
-public sealed class DockPanel : Box
+public sealed class DockPanel : Gtk.Box
 {
-	private sealed class DockPanelItem
+	internal sealed class DockPanelItem
 	{
+		public DockItem Item { get; }
+		public Gtk.Paned Pane { get; }
+		public Gtk.ToggleButton ReopenButton { get; }
+		private readonly Gtk.Popover popover;
 		public DockPanelItem (DockItem item)
 		{
-			Item = item;
-			Pane = Paned.New (Orientation.Vertical);
+			Gtk.Paned pane = Gtk.Paned.New (Gtk.Orientation.Vertical);
 
-			var icon = Image.NewFromIconName (item.IconName);
-			ReopenButton = ToggleButton.New ();
-			ReopenButton.TooltipText = item.Label;
-			ReopenButton.SetChild (icon);
+			Gtk.Image icon = Gtk.Image.NewFromIconName (item.IconName);
+
+			Gtk.ToggleButton reopenButton = Gtk.ToggleButton.New ();
+			reopenButton.TooltipText = item.Label;
+			reopenButton.SetChild (icon);
+			reopenButton.OnToggled += ReopenButton_OnToggled;
 
 			// Autohide is set to false since it seems to cause the popover to close even when clicking inside it, on macOS at least
 			// Instead, the reopen button is a toggle button to close the popover.
-			popover = new Popover () {
+			Gtk.Popover popover = new () {
 				Autohide = false,
-				Position = PositionType.Left
+				Position = Gtk.PositionType.Left,
 			};
-			popover.SetParent (ReopenButton);
+			popover.SetParent (reopenButton);
 
-			ReopenButton.OnToggled += (o, args) => {
-				if (ReopenButton.Active)
-					popover.Popup ();
-				else
-					popover.Popdown ();
-			};
+			// --- References to keep
+
+			this.popover = popover;
+			Pane = pane;
+			ReopenButton = reopenButton;
+			Item = item;
 		}
 
-		public DockItem Item { get; }
-		public Paned Pane { get; }
-		public ToggleButton ReopenButton { get; }
-		private readonly Popover popover;
+		private void ReopenButton_OnToggled (Gtk.ToggleButton _, EventArgs __)
+		{
+			if (ReopenButton.Active)
+				popover.Popup ();
+			else
+				popover.Popdown ();
+		}
 
-		public bool IsMinimized => popover.Child != null;
+		public bool IsMinimized
+			=> popover.Child is not null;
 
-		public void UpdateOnMaximize (Box dock_bar)
+		public void UpdateOnMaximize (Gtk.Box dockBar)
 		{
 			// Remove the reopen button from the dock bar.
 			// Note that it might not already be in the dock bar, e.g. on startup.
-			dock_bar.RemoveIfChild (ReopenButton);
+			dockBar.RemoveIfChild (ReopenButton);
 
 			popover.Popdown ();
 			popover.Child = null;
@@ -80,7 +89,7 @@ public sealed class DockPanel : Box
 			Pane.ShrinkStartChild = false;
 		}
 
-		public void UpdateOnMinimize (Box dock_bar)
+		public void UpdateOnMinimize (Gtk.Box dock_bar)
 		{
 			Pane.StartChild = null;
 			popover.Child = Item;
@@ -93,7 +102,7 @@ public sealed class DockPanel : Box
 	/// <summary>
 	/// Contains the buttons to re-open any minimized dock items.
 	/// </summary>
-	private readonly Box dock_bar = Box.New (Orientation.Vertical, 0);
+	private readonly Gtk.Box dock_bar = Gtk.Box.New (Gtk.Orientation.Vertical, 0);
 
 	/// <summary>
 	/// List of the items in this panel, which may be minimized or maximized.
@@ -102,39 +111,35 @@ public sealed class DockPanel : Box
 
 	public DockPanel ()
 	{
-		SetOrientation (Orientation.Horizontal);
+		SetOrientation (Gtk.Orientation.Horizontal);
 		Append (dock_bar);
 	}
 
 	public void AddItem (DockItem item)
 	{
-		var panel_item = new DockPanelItem (item);
+		DockPanelItem panelItem = new (item);
 
 		// Connect to the previous pane in the list.
 		if (items.Count > 0) {
-			var pane = items.Last ().Pane;
-			pane.EndChild = panel_item.Pane;
+			Gtk.Paned pane = items.Last ().Pane;
+			pane.EndChild = panelItem.Pane;
 		} else {
-			panel_item.Pane.Hexpand = true;
-			panel_item.Pane.Halign = Align.Fill;
-			Prepend (panel_item.Pane);
+			panelItem.Pane.Hexpand = true;
+			panelItem.Pane.Halign = Gtk.Align.Fill;
+			Prepend (panelItem.Pane);
 		}
 
-		items.Add (panel_item);
-		panel_item.UpdateOnMaximize (dock_bar);
+		items.Add (panelItem);
+		panelItem.UpdateOnMaximize (dock_bar);
 
-		item.MinimizeClicked += (o, args) => {
-			panel_item.UpdateOnMinimize (dock_bar);
-		};
-		item.MaximizeClicked += (o, args) => {
-			panel_item.UpdateOnMaximize (dock_bar);
-		};
+		item.MinimizeClicked += (_, _) => panelItem.UpdateOnMinimize (dock_bar);
+		item.MaximizeClicked += (_, _) => panelItem.UpdateOnMaximize (dock_bar);
 	}
 
 	public void SaveSettings (ISettingsService settings)
 	{
 		foreach (var panel_item in items) {
-			settings.PutSetting (MinimizeKey (panel_item), panel_item.IsMinimized);
+			settings.PutSetting (SettingNames.MinimizeKey (panel_item), panel_item.IsMinimized);
 #if false
 			settings.PutSetting (SplitPosKey (panel_item), panel_item.Pane.Position);
 #endif
@@ -144,7 +149,8 @@ public sealed class DockPanel : Box
 	public void LoadSettings (ISettingsService settings)
 	{
 		foreach (var panel_item in items) {
-			if (settings.GetSetting<bool> (MinimizeKey (panel_item), false)) {
+
+			if (settings.GetSetting<bool> (SettingNames.MinimizeKey (panel_item), false)) {
 				panel_item.Item.Minimize ();
 			}
 
@@ -154,8 +160,4 @@ public sealed class DockPanel : Box
 #endif
 		}
 	}
-
-	private static string BaseSettingKey (DockPanelItem item) => $"dock-{item.Item.UniqueName.ToLower ()}";
-	private static string MinimizeKey (DockPanelItem item) => BaseSettingKey (item) + "-minimized";
-	private static string SplitPosKey (DockPanelItem item) => BaseSettingKey (item) + "-splitpos";
 }
