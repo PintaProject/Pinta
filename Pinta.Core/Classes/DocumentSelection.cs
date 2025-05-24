@@ -1,21 +1,21 @@
-// 
+//
 // DocumentSelection.cs
-//  
+//
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
-// 
+//
 // Copyright (c) 2012 Andrew Davis, GSoC 2012
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -88,36 +88,6 @@ public sealed class DocumentSelection
 		g.AppendPath (SelectionPath);
 		g.FillRule = FillRule.EvenOdd;
 		g.Clip ();
-	}
-
-	public void Draw (
-		Context g,
-		double scale,
-		bool fillSelection)
-	{
-		g.Save ();
-		g.Scale (scale, scale);
-
-		g.AppendPath (SelectionPath);
-
-		if (fillSelection) {
-			g.SetSourceColor (new Cairo.Color (0.7, 0.8, 0.9, 0.2));
-			g.FillRule = Cairo.FillRule.EvenOdd;
-			g.FillPreserve ();
-		}
-
-		g.LineWidth = 1 / scale;
-
-		// Draw a white line first so it shows up on dark backgrounds
-		g.SetSourceColor (new Cairo.Color (1, 1, 1));
-		g.StrokePreserve ();
-
-		// Draw a black dashed line over the white line
-		g.SetDash ([2 / scale, 4 / scale], 0);
-		g.SetSourceColor (new Cairo.Color (0, 0, 0));
-
-		g.Stroke ();
-		g.Restore ();
 	}
 
 	/// <summary>
