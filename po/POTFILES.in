@@ -18,6 +18,7 @@ Pinta.Core/Algorithms/HistogramRGB.cs
 Pinta.Core/Algorithms/Julia.cs
 Pinta.Core/Algorithms/Mandelbrot.cs
 Pinta.Core/Algorithms/Mathematics.cs
+Pinta.Core/Algorithms/PerlinNoise.cs
 Pinta.Core/Algorithms/Utility.cs
 Pinta.Core/Classes/Angle.cs
 Pinta.Core/Classes/AsyncEffectRenderer.cs
@@ -58,6 +59,7 @@ Pinta.Core/Classes/Rectangle.cs
 Pinta.Core/Classes/ScaleFactor.cs
 Pinta.Core/Classes/Scanline.cs
 Pinta.Core/Classes/SelectionModeHandler.cs
+Pinta.Core/Classes/SettingNames.cs
 Pinta.Core/Classes/SplineInterpolator.cs
 Pinta.Core/Classes/SurfaceDiff.cs
 Pinta.Core/Classes/Translations.cs
@@ -192,6 +194,7 @@ Pinta.Docking/DockNotebook.cs
 Pinta.Docking/DockPanel.cs
 Pinta.Docking/DockPlacement.cs
 Pinta.Docking/IDockNotebookItem.cs
+Pinta.Docking/SettingNames.cs
 Pinta.Effects/Adjustments/AutoLevelEffect.cs
 Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs
 Pinta.Effects/Adjustments/BrightnessContrastEffect.cs
@@ -202,7 +205,6 @@ Pinta.Effects/Adjustments/LevelsEffect.cs
 Pinta.Effects/Adjustments/PosterizeEffect.cs
 Pinta.Effects/Adjustments/SepiaEffect.cs
 Pinta.Effects/Algorithms/LocalHistogram.cs
-Pinta.Effects/Algorithms/PerlinNoise.cs
 Pinta.Effects/Algorithms/Warp.cs
 Pinta.Effects/Classes/ColorGradient.cs
 Pinta.Effects/Classes/EdgeBehavior.cs
@@ -400,4 +402,5 @@ Pinta/Pads/CanvasPad.cs
 Pinta/Pads/HistoryPad.cs
 Pinta/Pads/IDockPad.cs
 Pinta/Pads/LayersPad.cs
+Pinta/SettingNames.cs
 Pinta/WindowShell.cs
