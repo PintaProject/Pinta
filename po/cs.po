@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-18 00:29+0000\n"
+"POT-Creation-Date: 2025-05-25 00:30+0000\n"
 "PO-Revision-Date: 2023-12-20 15:51+0000\n"
 "Last-Translator: Miraficus <6325410@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/pinta/pinta/cs/>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid " (in user directory)"
 msgstr " (v uživatelském adresáři)"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
 msgid " Selection Mode: "
 msgstr " Mód výběru: "
 
@@ -48,7 +48,7 @@ msgstr "Oblast 7 x 7"
 msgid "9 x 9 Region"
 msgstr "Oblast 9 x 9"
 
-#: ../Pinta/MainWindow.cs:416
+#: ../Pinta/MainWindow.cs:414
 msgid "A_dd-ins"
 msgstr "D_oplňky"
 
@@ -78,7 +78,7 @@ msgstr "Manažer addonů"
 msgid "Added"
 msgstr "Přidané"
 
-#: ../Pinta/MainWindow.cs:451
+#: ../Pinta/MainWindow.cs:449
 msgid "Adjustments"
 msgstr ""
 
@@ -97,7 +97,7 @@ msgstr ""
 msgid "All files"
 msgstr "Všechny soubory"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:492
 msgid "Alpha"
 msgstr ""
 
@@ -173,7 +173,7 @@ msgstr "Automatická úroveň"
 msgid "Available in repository: {0}"
 msgstr "Dostupné v repozitáři {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:146
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:133
 msgid "Background"
 msgstr "Pozadí"
 
@@ -214,7 +214,7 @@ msgstr "Režim míchání"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:463
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:469
 msgid "Blue"
 msgstr "Modrá"
 
@@ -266,7 +266,7 @@ msgid "Brush Size"
 msgstr "Velikost štětce"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:123
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:122
 msgid "Brush width"
 msgstr "Šířka štětce"
 
@@ -359,7 +359,7 @@ msgstr ""
 msgid "Choose Color"
 msgstr "Vybrat barvu"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:127
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "Vybrat barvu palety"
 
@@ -399,11 +399,11 @@ msgstr "Klikněte a obtáhněte vybranou oblast."
 msgid "Click and drag to navigate image."
 msgstr "Klik a táhnutí posunou obrázek."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:300
 msgid "Click to reset primary and secondary color."
 msgstr "Kliknutím restartujete primární a skundární barvu."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:267
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:289
 msgid "Click to select primary color."
 msgstr "Kliknutím vyberte primární barvu."
 
@@ -411,12 +411,12 @@ msgstr "Kliknutím vyberte primární barvu."
 msgid "Click to select region of similar color."
 msgstr "Klik vybere oblast s podobnou barvou."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:270
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:292
 msgid "Click to select secondary color."
 msgstr "Kliknutím vyberte sekundární barvu."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:196
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:273
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:295
 msgid "Click to switch between primary and secondary color."
 msgstr "Kliknutím přepnete mezi primární a sekundární barvou"
 
@@ -431,7 +431,7 @@ msgstr "Schránka"
 msgid "Clone Stamp"
 msgstr "Klonovací razítko"
 
-#: ../Pinta.Core/Actions/FileActions.cs:73
+#: ../Pinta.Core/Actions/FileActions.cs:72
 #: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
 msgstr "Zavřít"
@@ -477,7 +477,7 @@ msgstr ""
 msgid "Color Mode"
 msgstr "Režim barev"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:305
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:327
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Kapátko"
@@ -552,8 +552,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Nemohli jsme importovat vrstvu \"{0}\" z {1}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:167
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Nelze otevřít soubor: {0}"
@@ -685,11 +685,11 @@ msgstr "Chování hran"
 msgid "Edge Detect"
 msgstr "Detekce hran"
 
-#: ../Pinta/MainWindow.cs:412
+#: ../Pinta/MainWindow.cs:410
 msgid "Effe_cts"
 msgstr "Efe_kty"
 
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:443
 msgid "Effects"
 msgstr ""
 
@@ -733,7 +733,7 @@ msgstr "Chyba"
 msgid "Error Diffusion Method"
 msgstr ""
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Exclude (-) (Right Click)"
 msgstr "Odečíst"
 
@@ -755,7 +755,7 @@ msgstr "Faktor"
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Neschopní přistoupit na XDG Desktop Portals"
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:318
 msgid "Failed to initialize add-in"
 msgstr ""
 
@@ -763,7 +763,7 @@ msgstr ""
 msgid "Failed to load extension package"
 msgstr "Nemohli jsme načíst balíčky s rozšířeními"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:477
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:464
 msgid "Failed to open image"
 msgstr "Obrázek se nepodařilo otevřít"
 
@@ -927,7 +927,7 @@ msgstr "Přechod"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:440
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:446
 msgid "Green"
 msgstr "Zelená"
 
@@ -946,7 +946,7 @@ msgstr "Tvrdé světlo"
 msgid "Height:"
 msgstr "Výška:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:330
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:329
 msgid "Hex"
 msgstr ""
 
@@ -981,11 +981,11 @@ msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:349
 msgid "Hue"
 msgstr "Odstín"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:254
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:253
 msgid "Hue & Sat"
 msgstr ""
 
@@ -1001,7 +1001,7 @@ msgstr "Soubory ICO nesmí být větší než 255 x 255 pixelů"
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Pokud je neuložíte, veškeré změny budou navždy ztraceny."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:457
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:455
 msgid "Image"
 msgstr "Obrázek"
 
@@ -1086,7 +1086,7 @@ msgid "Intensity"
 msgstr "Intenzita"
 
 #. Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
 msgstr ""
@@ -1250,11 +1250,11 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:286
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr "Levý klik nastaví primární barvu, pravý klik nastaví sekundární barvu."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1336,7 +1336,7 @@ msgstr "Světlost"
 msgid "Magic Wand Select"
 msgstr "Výběr kouzelnou hůlkou"
 
-#: ../Pinta/MainWindow.cs:439
+#: ../Pinta/MainWindow.cs:437
 msgid "Main Menu"
 msgstr ""
 
@@ -1413,16 +1413,16 @@ msgstr "Název:"
 msgid "Nearest Neighbor"
 msgstr "Nejbližší soused"
 
-#: ../Pinta.Core/Actions/FileActions.cs:98
+#: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New"
 msgstr "Nový"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:154
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:141
 #: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "Nový obrázek"
 
-#: ../Pinta.Core/Actions/FileActions.cs:60
+#: ../Pinta.Core/Actions/FileActions.cs:58
 msgid "New Screenshot..."
 msgstr "Nový Snímek obrazovky"
 
@@ -1430,7 +1430,7 @@ msgstr "Nový Snímek obrazovky"
 msgid "New palette size:"
 msgstr "Nová velikost palety:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:53
+#: ../Pinta.Core/Actions/FileActions.cs:50
 msgid "New..."
 msgstr "Nový..."
 
@@ -1502,7 +1502,7 @@ msgstr "Olejomalba"
 msgid "Opacity:"
 msgstr "Průhlednost"
 
-#: ../Pinta.Core/Actions/FileActions.cs:99
+#: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Open"
 msgstr "Otevřít"
 
@@ -1510,7 +1510,7 @@ msgstr "Otevřít"
 msgid "Open Curve Shape"
 msgstr "Tvar otevřené křivky"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:358
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
 msgid "Open Image"
 msgstr "Otevřít obrázek"
 
@@ -1528,7 +1528,7 @@ msgid "Open Palette File"
 msgstr "Otevřít sobor s paletou"
 
 #: ../Pinta.Core/Actions/EditActions.cs:169
-#: ../Pinta.Core/Actions/FileActions.cs:66
+#: ../Pinta.Core/Actions/FileActions.cs:64
 msgid "Open..."
 msgstr "Otevřít..."
 
@@ -1643,7 +1643,7 @@ msgid "Photo"
 msgstr "Fotografie"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:63
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:62
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1681,7 +1681,7 @@ msgstr ""
 "můžete použít na své obrázky, a také možnost vytvářet neomezené množství "
 "vrstev, které vám pomohou uspořádat vaši kreativitu."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:458
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta podporuje následující formáty souborů:"
 
@@ -1757,7 +1757,7 @@ msgstr "Náhled"
 msgid "Primary"
 msgstr "Hlavní"
 
-#: ../Pinta.Core/Actions/FileActions.cs:94
+#: ../Pinta.Core/Actions/FileActions.cs:93
 msgid "Print"
 msgstr "Vytisknout"
 
@@ -1846,7 +1846,7 @@ msgstr "Obdélníkový výběr"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:417
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:423
 msgid "Red"
 msgstr "Červená"
 
@@ -1897,7 +1897,7 @@ msgstr "Vykreslit"
 msgid "Rendering Effect"
 msgstr "Vykreslovací efekt"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:43
 msgid "Replace"
 msgstr "Nahradit"
 
@@ -2020,11 +2020,11 @@ msgstr "Pravítka"
 msgid "Sampling"
 msgstr "Vzorkování"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:371
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:377
 msgid "Sat"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:265
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:264
 msgid "Sat & Value"
 msgstr ""
 
@@ -2038,7 +2038,7 @@ msgid "Saturation Percentage"
 msgstr "Procento sytosti"
 
 #: ../Pinta.Core/Actions/EditActions.cs:529
-#: ../Pinta.Core/Actions/FileActions.cs:80
+#: ../Pinta.Core/Actions/FileActions.cs:79
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
 msgstr "Uložit"
@@ -2048,7 +2048,7 @@ msgid "Save All"
 msgstr "Uložit vše"
 
 #: ../Pinta.Core/Actions/EditActions.cs:175
-#: ../Pinta.Core/Actions/FileActions.cs:87
+#: ../Pinta.Core/Actions/FileActions.cs:86
 msgid "Save As..."
 msgstr "Uložit jako..."
 
@@ -2109,7 +2109,7 @@ msgstr "Zaostřit"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Shortcut key"
 msgstr "Klávesová zkratka"
 
@@ -2125,7 +2125,7 @@ msgstr ""
 msgid "Show Layer"
 msgstr "Zobrazit vrstvu"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:245
 msgid "Show Value"
 msgstr ""
 
@@ -2217,7 +2217,7 @@ msgid "Text Style"
 msgstr "Styl textu"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:318
+#: ../Pinta/MainWindow.cs:315
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
@@ -2401,7 +2401,7 @@ msgid "Uninstall..."
 msgstr "Odinstalovat..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
 msgstr ""
@@ -2411,7 +2411,7 @@ msgstr ""
 msgid "Unsaved Image {0}"
 msgstr "Neuložený obrázek {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:353
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:340
 msgid "Unsupported file format"
 msgstr "Nepodporovaný typ souboru"
 
@@ -2439,7 +2439,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Použity některé ikonky z:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:394
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:400
 msgid "Value"
 msgstr ""
 
@@ -2461,6 +2461,10 @@ msgstr ""
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:307
 msgid "Vertical red (R)"
+msgstr ""
+
+#: ../Pinta/MainWindow.cs:461
+msgid "View"
 msgstr ""
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
@@ -2507,13 +2511,13 @@ msgid "Xor"
 msgstr "Xor"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:480
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:467
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Nemáte přístup do '{0}'."
@@ -2549,7 +2553,7 @@ msgstr "Oddálit"
 msgid "Zoom to Selection"
 msgstr "Přiblížit na výběr"
 
-#: ../Pinta/MainWindow.cs:408
+#: ../Pinta/MainWindow.cs:406
 msgid "_Adjustments"
 msgstr "_Přizpůsobení"
 
@@ -2566,23 +2570,23 @@ msgstr "_Zrušit"
 msgid "_Discard"
 msgstr "_Zahodit"
 
-#: ../Pinta/MainWindow.cs:389
+#: ../Pinta/MainWindow.cs:386
 msgid "_Edit"
 msgstr "_Upravit"
 
-#: ../Pinta/MainWindow.cs:385
+#: ../Pinta/MainWindow.cs:382
 msgid "_File"
 msgstr "_Soubor"
 
-#: ../Pinta/MainWindow.cs:424
+#: ../Pinta/MainWindow.cs:422
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:396
 msgid "_Image"
 msgstr "_Obrázek"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:400
 msgid "_Layers"
 msgstr "_Vrstvy"
 
@@ -2597,11 +2601,11 @@ msgstr "_OK"
 msgid "_Save"
 msgstr "_Uložit"
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:391
 msgid "_View"
 msgstr "_Zobrazit"
 
-#: ../Pinta/MainWindow.cs:420
+#: ../Pinta/MainWindow.cs:418
 msgid "_Window"
 msgstr "_Okno"
 
