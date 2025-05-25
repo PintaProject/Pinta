@@ -27,6 +27,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Pinta.Core;
+using Pinta.Resources;
 
 namespace Pinta.Gui.Widgets;
 
@@ -125,6 +126,8 @@ public sealed class PintaCanvas : Gtk.Picture
 		DrawSelection (snapshot);
 		DrawHandles (snapshot);
 
+		// TODO - sort out how to render the pixel grid
+
 		// In the future, this would be cleaner to implement as a custom widget once gir.core supports virtual methods
 		// (in particular, zooming might be easier when we have control over the size allocation)
 		// For now, we just use a Gtk.Picture widget with a custom Gdk.Paintable for its contents.
@@ -141,8 +144,6 @@ public sealed class PintaCanvas : Gtk.Picture
 	{
 		// Note we are always rendering without scaling, since the scaling is applied when drawing the texture later.
 		cr.Initialize (document.ImageSize, document.ImageSize);
-
-		// TODO - sort out how to render the pixel grid, drop shadow (CSS?) and screen space handles
 
 		List<Layer> layers = document.Layers.GetLayersToPaint ().ToList ();
 

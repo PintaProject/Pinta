@@ -73,6 +73,8 @@ public sealed class CanvasWindow : Gtk.Grid
 			document,
 			canvasGrid
 		) {
+			// For CSS: add a drop shadow outline to the canvas to give it a clear border
+			// when the image is close to the background color.
 			Name = "canvas",
 		};
 
