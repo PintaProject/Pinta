@@ -15,11 +15,11 @@ public interface IToolHandle
 	public bool Active { get; }
 
 	/// <summary>
-	/// Draw the handle onto the canvas window.
+	/// Draw the handle onto the canvas widget.
 	/// This is in window space, so CanvasPointToWindow() should be used to transform a canvas position
 	/// into the correct space.
-	/// Use InvalidateWindowRect() to trigger a repaint when the handle's position / size / etc changes.
+	/// Use InvalidateWindowRect() to trigger a repaint when the handle's position / size / etc. changes.
 	/// </summary>
-	public void Draw (Cairo.Context cr);
+	public void Draw (Gtk.Snapshot snapshot);
 }
 

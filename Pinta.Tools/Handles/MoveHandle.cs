@@ -9,10 +9,12 @@ namespace Pinta.Tools;
 /// </summary>
 public sealed class MoveHandle : IToolHandle
 {
-	private static readonly Cairo.Color fill_color = new (0, 0, 1, 1);
-	private static readonly Cairo.Color selection_fill_color = new (1, 0.5, 0, 1);
-	private static readonly Cairo.Color stroke_color = new (1, 1, 1, 0.7);
+	private static readonly Gdk.RGBA fill_color = new () { Red = 0, Green = 0, Blue = 1, Alpha = 1 };
+	private static readonly Gdk.RGBA selection_fill_color = new () { Red = 1, Green = 0.5f, Blue = 0, Alpha = 1 };
+	private static readonly Gdk.RGBA stroke_color = new () { Red = 1, Green = 1, Blue = 1, Alpha = 0.7f };
 	private static readonly Gdk.Cursor default_cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Default);
+
+	private const double RADIUS = 4.5;
 
 	public PointD CanvasPosition { get; set; }
 
@@ -34,18 +36,27 @@ public sealed class MoveHandle : IToolHandle
 	/// </summary>
 	public bool ContainsPoint (PointD window_point)
 	{
-		const int tolerance = 5;
+		const int TOLERANCE = 5;
 
-		var bounds = ComputeWindowRect ().Inflated (tolerance, tolerance);
+		RectangleD bounds = ComputeWindowRect ().Inflated (TOLERANCE, TOLERANCE);
 		return bounds.ContainsPoint (window_point);
 	}
 
 	/// <summary>
 	/// Draw the handle, at a constant window space size (i.e. not depending on the image zoom or resolution)
 	/// </summary>
-	public void Draw (Cairo.Context cr)
+	public void Draw (Gtk.Snapshot snapshot)
 	{
-		cr.FillStrokedEllipse (ComputeWindowRect (), Selected ? selection_fill_color : fill_color, stroke_color, 1);
+		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
+		PointD windowPt = PintaCore.Workspace.CanvasPointToView (CanvasPosition);
+		pathBuilder.AddCircle (windowPt.ToGraphenePoint (), (float) RADIUS);
+		Gsk.Path path = pathBuilder.ToPath ();
+
+		Gdk.RGBA fillColor = Selected ? selection_fill_color : fill_color;
+		snapshot.AppendFill (path, Gsk.FillRule.EvenOdd, fillColor);
+
+		Gsk.Stroke stroke = Gsk.Stroke.New (lineWidth: 1.0f);
+		snapshot.AppendStroke (path, stroke, stroke_color);
 	}
 
 	/// <summary>
@@ -58,11 +69,10 @@ public sealed class MoveHandle : IToolHandle
 	/// </summary>
 	private RectangleD ComputeWindowRect ()
 	{
-		const double radius = 4.5;
-		const double diameter = 2 * radius;
+		const double DIAMETER = 2 * RADIUS;
 
-		var window_pt = PintaCore.Workspace.CanvasPointToView (CanvasPosition);
-		return new RectangleD (window_pt.X - radius, window_pt.Y - radius, diameter, diameter);
+		PointD windowPt = PintaCore.Workspace.CanvasPointToView (CanvasPosition);
+		return new RectangleD (windowPt.X - RADIUS, windowPt.Y - RADIUS, DIAMETER, DIAMETER);
 	}
 
 	/// <summary>

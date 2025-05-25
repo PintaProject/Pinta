@@ -123,6 +123,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		snapshot.AppendScaledTexture (texture, scalingFilter, canvasBounds);
 
 		DrawSelection (snapshot);
+		DrawHandles (snapshot);
 
 		// In the future, this would be cleaner to implement as a custom widget once gir.core supports virtual methods
 		// (in particular, zooming might be easier when we have control over the size allocation)
@@ -186,6 +187,17 @@ public sealed class PintaCanvas : Gtk.Picture
 		snapshot.AppendStroke (selectionPath, stroke, black);
 
 		snapshot.Restore ();
+	}
+
+	private void DrawHandles (Gtk.Snapshot snapshot)
+	{
+		BaseTool? tool = tools.CurrentTool;
+		if (tool is null)
+			return;
+
+		foreach (IToolHandle control in tool.Handles.Where (c => c.Active)) {
+			control.Draw (snapshot);
+		}
 	}
 
 	/// <summary>
