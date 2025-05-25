@@ -90,7 +90,7 @@ public sealed class DitheringEffect : BaseEffect
 
 					int idx = (thisItem.Y * settings.sourceWidth) + thisItem.X;
 
-					double factor = ((double) weight) / settings.diffusionMatrix.TotalWeight;
+					double factor = weight * settings.diffusionMatrix.WeightReductionFactor;
 
 					dst_data[idx] = AddError (dst_data[idx], factor, errorRed, errorGreen, errorBlue);
 				}

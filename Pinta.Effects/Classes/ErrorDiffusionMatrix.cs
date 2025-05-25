@@ -75,7 +75,7 @@ internal sealed class ErrorDiffusionMatrix
 		public static ErrorDiffusionMatrix TwoRowSierra { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.TwoRowSierra, 2);
 		public static ErrorDiffusionMatrix SierraLite { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.SierraLite, 1);
 		public static ErrorDiffusionMatrix Burkes { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.Burkes, 2);
-		public static ErrorDiffusionMatrix Atkinson { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.Atkinson, 1);
+		public static ErrorDiffusionMatrix Atkinson { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.Atkinson, 1, weightReductionFactor: 1.0 / 8.0);
 		public static ErrorDiffusionMatrix Stucki { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.Stucki, 2);
 		public static ErrorDiffusionMatrix JarvisJudiceNinke { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.JarvisJudiceNinke, 2);
 		public static ErrorDiffusionMatrix FloydSteinberg { get; } = new ErrorDiffusionMatrix (DefaultMatrixArrays.FloydSteinberg, 1);
@@ -137,17 +137,17 @@ internal sealed class ErrorDiffusionMatrix
 	private readonly int[,] array_2_d;
 	public int Columns { get; }
 	public int Rows { get; }
-	public int TotalWeight { get; }
+	public double WeightReductionFactor { get; }
 	public int ColumnsToLeft { get; }
 	public int ColumnsToRight { get; }
 	public int RowsBelow { get; }
 	public int this[int row, int column] => array_2_d[row, column];
-	public ErrorDiffusionMatrix (int[,] array2D, int pixelColumn)
+	public ErrorDiffusionMatrix (int[,] array2D, int pixelColumn, double? weightReductionFactor = null)
 	{
 		var clone = (int[,]) array2D.Clone ();
-		var rows = clone.GetLength (0);
+		int rows = clone.GetLength (0);
 		if (rows <= 0) throw new ArgumentException ("Array has to have a strictly positive number of rows", nameof (array2D));
-		var columns = clone.GetLength (1);
+		int columns = clone.GetLength (1);
 		if (columns <= 0) throw new ArgumentException ("Array has to have a strictly positive number of rows", nameof (array2D));
 		if (pixelColumn < 0) throw new ArgumentException ("Argument has to refer to a valid column offset", nameof (pixelColumn));
 		if (pixelColumn >= columns) throw new ArgumentException ("Argument has to refer to a valid column offset", nameof (pixelColumn));
@@ -157,7 +157,7 @@ internal sealed class ErrorDiffusionMatrix
 		if (flattened.Take (pixelColumn).Any (w => w != 0)) throw new ArgumentException ("Pixels previous to target cannot have nonzero weights");
 		ColumnsToLeft = pixelColumn;
 		ColumnsToRight = columns - 1 - pixelColumn;
-		TotalWeight = flattened.Sum ();
+		WeightReductionFactor = weightReductionFactor ?? (1.0 / flattened.Sum ());
 		Columns = columns;
 		Rows = rows;
 		RowsBelow = rows - 1;
