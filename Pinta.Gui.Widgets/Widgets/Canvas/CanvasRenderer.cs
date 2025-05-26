@@ -19,15 +19,17 @@ public sealed class CanvasRenderer
 	private static readonly Cairo.Pattern tranparent_pattern;
 
 	private readonly bool enable_live_preview;
+	private readonly bool enable_background_pattern;
 
 	private Size source_size;
 	private Size destination_size;
 	private Fraction<int> scale_factor;
 	private double scale_ratio;
 
-	public CanvasRenderer (bool enableLivePreview)
+	public CanvasRenderer (bool enableLivePreview, bool enableBackgroundPattern = true)
 	{
 		enable_live_preview = enableLivePreview;
+		enable_background_pattern = enableBackgroundPattern;
 	}
 
 	static CanvasRenderer ()
@@ -61,9 +63,11 @@ public sealed class CanvasRenderer
 
 		using Cairo.Context g = new (dst);
 
-		// Create the transparent checkerboard background
 		g.Translate (-offset.X, -offset.Y);
-		g.FillRectangle (r, tranparent_pattern, new PointD (offset.X, offset.Y));
+
+		// Create the transparent checkerboard background
+		if (enable_background_pattern)
+			g.FillRectangle (r, tranparent_pattern, new PointD (offset.X, offset.Y));
 
 		for (int i = 0; i < layers.Count; i++) {
 

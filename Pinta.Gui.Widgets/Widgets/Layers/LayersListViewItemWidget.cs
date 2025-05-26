@@ -71,7 +71,7 @@ public sealed partial class LayersListViewItem
 			doc.Layers.SelectionLayer,
 		};
 
-		canvas_renderer ??= new CanvasRenderer (enableLivePreview: false);
+		canvas_renderer ??= new CanvasRenderer (enableLivePreview: false, enableBackgroundPattern: true);
 		canvas_renderer.Initialize (doc.ImageSize, new Size (widthRequest, heightRequest));
 		canvas_renderer.Render (layers, surface, PointI.Zero);
 
