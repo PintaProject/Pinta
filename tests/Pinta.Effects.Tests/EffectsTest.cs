@@ -153,6 +153,15 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Dithering4 ()
+	{
+		DitheringEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.PaletteChoice = PredefinedPalettes.OldMsPaint;
+		effect.Data.ErrorDiffusionMethod = PredefinedDiffusionMatrices.Atkinson;
+		Utilities.TestEffect (effect, "dithering4.png");
+	}
+
+	[Test]
 	public void EdgeDetect1 ()
 	{
 		EdgeDetectEffect effect = new (Utilities.CreateMockServices ());

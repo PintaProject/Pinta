@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-18 00:29+0000\n"
+"POT-Creation-Date: 2025-05-25 00:30+0000\n"
 "PO-Revision-Date: 2025-02-28 10:02+0000\n"
 "Last-Translator: Stepan Andriiovych <4fbig9xyb@mozmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/uk/"
@@ -25,7 +25,7 @@ msgstr ""
 msgid " (in user directory)"
 msgstr " (у каталог користувача)"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
 msgid " Selection Mode: "
 msgstr " Режим виділення "
 
@@ -50,7 +50,7 @@ msgstr "Область 7 на 7"
 msgid "9 x 9 Region"
 msgstr "Область 9 на 9"
 
-#: ../Pinta/MainWindow.cs:416
+#: ../Pinta/MainWindow.cs:414
 msgid "A_dd-ins"
 msgstr "Додатки"
 
@@ -80,7 +80,7 @@ msgstr "Менеджер додатків..."
 msgid "Added"
 msgstr "Додано"
 
-#: ../Pinta/MainWindow.cs:451
+#: ../Pinta/MainWindow.cs:449
 msgid "Adjustments"
 msgstr "Коригування"
 
@@ -99,7 +99,7 @@ msgstr "Вирівняти об'єкт"
 msgid "All files"
 msgstr "Всі файли"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:492
 msgid "Alpha"
 msgstr "Альфа"
 
@@ -175,7 +175,7 @@ msgstr "Автокорекція"
 msgid "Available in repository: {0}"
 msgstr "Доступно у репозиторії: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:146
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:133
 msgid "Background"
 msgstr "Фон"
 
@@ -216,7 +216,7 @@ msgstr "Режим змішування"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:463
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:469
 msgid "Blue"
 msgstr "Синій"
 
@@ -268,7 +268,7 @@ msgid "Brush Size"
 msgstr "Розмір пензля"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:123
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:122
 msgid "Brush width"
 msgstr "Товщина пензля"
 
@@ -361,7 +361,7 @@ msgstr "Вишневий цвіт"
 msgid "Choose Color"
 msgstr "Виберіть колір"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:127
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "Оберіть палітру кольорів"
 
@@ -406,11 +406,11 @@ msgstr "За допомогою миші виділіть контур для в
 msgid "Click and drag to navigate image."
 msgstr "Клацніть і перетягуйте для навігації по зображенню."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:300
 msgid "Click to reset primary and secondary color."
 msgstr "Натисніть для скидання первинного і вторинного кольорів."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:267
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:289
 msgid "Click to select primary color."
 msgstr "Клацніть, щоб вибрати основний колір."
 
@@ -418,12 +418,12 @@ msgstr "Клацніть, щоб вибрати основний колір."
 msgid "Click to select region of similar color."
 msgstr "Вибрати регіон з аналогічним кольром."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:270
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:292
 msgid "Click to select secondary color."
 msgstr "Клацніть, щоб вибрати додатковий колір."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:196
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:273
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:295
 msgid "Click to switch between primary and secondary color."
 msgstr "Клацніть, щоб перемкнутися між основним і вторинним кольорами."
 
@@ -438,7 +438,7 @@ msgstr "Буфер обміну"
 msgid "Clone Stamp"
 msgstr "Штамп клонування"
 
-#: ../Pinta.Core/Actions/FileActions.cs:73
+#: ../Pinta.Core/Actions/FileActions.cs:72
 #: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
 msgstr "Закрити"
@@ -484,7 +484,7 @@ msgstr "Градієнт кольору"
 msgid "Color Mode"
 msgstr "Режим кольорів"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:305
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:327
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Вибір кольору"
@@ -559,8 +559,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Не вдалося імпортувати шар \"{0}\" з {1}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:167
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Не можу відкрити файл: {0}"
@@ -692,11 +692,11 @@ msgstr "Поведінка краю"
 msgid "Edge Detect"
 msgstr "Виділення краю"
 
-#: ../Pinta/MainWindow.cs:412
+#: ../Pinta/MainWindow.cs:410
 msgid "Effe_cts"
 msgstr "_Ефекти"
 
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:443
 msgid "Effects"
 msgstr "Ефекти"
 
@@ -741,7 +741,7 @@ msgstr "Помилка"
 msgid "Error Diffusion Method"
 msgstr "Метод дифузії помилок"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Exclude (-) (Right Click)"
 msgstr "Від’єднати (-) (правий клік)"
 
@@ -763,7 +763,7 @@ msgstr "Фактор"
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Не вдалося отримати доступ до порталів робочого столу XDG"
 
-#: ../Pinta/MainWindow.cs:321
+#: ../Pinta/MainWindow.cs:318
 msgid "Failed to initialize add-in"
 msgstr "Не вдалося ініціалізувати надбудову"
 
@@ -771,7 +771,7 @@ msgstr "Не вдалося ініціалізувати надбудову"
 msgid "Failed to load extension package"
 msgstr "Не вдалося завантажити пакет розширення функціоналу"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:477
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:464
 msgid "Failed to open image"
 msgstr "Не вдалося відкрити зображення"
 
@@ -935,7 +935,7 @@ msgstr "Градієнт"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:440
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:446
 msgid "Green"
 msgstr "Зелений"
 
@@ -954,7 +954,7 @@ msgstr "Яскраве світло"
 msgid "Height:"
 msgstr "Висота:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:330
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:329
 msgid "Hex"
 msgstr "Hex (шестигранний)"
 
@@ -989,11 +989,11 @@ msgstr "Горизонтальний червоний (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:349
 msgid "Hue"
 msgstr "Відтінок"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:254
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:253
 msgid "Hue & Sat"
 msgstr "Відтінок і насиченість"
 
@@ -1009,7 +1009,7 @@ msgstr "Файли ICO не можуть бути більші ніж 255х255 �
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Якщо ви не збережете, всі зміни будуть безповоротно втрачені."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:457
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:455
 msgid "Image"
 msgstr "Зображення"
 
@@ -1094,7 +1094,7 @@ msgid "Intensity"
 msgstr "Інтенсивність"
 
 #. Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
 msgstr "Перетнути ({0} + клацання лівою кнопкою)"
@@ -1300,13 +1300,13 @@ msgstr ""
 "Клацніть ліворуч, щоб встановити первинний колір.\n"
 "Клацніть правою кнопкою миші, щоб встановити вторинний колір."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:286
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Клацніть лівою клавішею миші для вибору основного кольору. Клацніть правою "
 "клавішею миші, щоб вибрати додатковий колір."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:260
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1392,7 +1392,7 @@ msgstr "Освітленість"
 msgid "Magic Wand Select"
 msgstr "Виділення чарівною паличкою"
 
-#: ../Pinta/MainWindow.cs:439
+#: ../Pinta/MainWindow.cs:437
 msgid "Main Menu"
 msgstr "Головне меню"
 
@@ -1469,16 +1469,16 @@ msgstr "Ім’я:"
 msgid "Nearest Neighbor"
 msgstr "Найближчий сусід"
 
-#: ../Pinta.Core/Actions/FileActions.cs:98
+#: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New"
 msgstr "Новий"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:154
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:141
 #: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "Нове зображення"
 
-#: ../Pinta.Core/Actions/FileActions.cs:60
+#: ../Pinta.Core/Actions/FileActions.cs:58
 msgid "New Screenshot..."
 msgstr "Новий скріншот..."
 
@@ -1486,7 +1486,7 @@ msgstr "Новий скріншот..."
 msgid "New palette size:"
 msgstr "Новий розмір палітри:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:53
+#: ../Pinta.Core/Actions/FileActions.cs:50
 msgid "New..."
 msgstr "Новий..."
 
@@ -1558,7 +1558,7 @@ msgstr "Олійне малювання"
 msgid "Opacity:"
 msgstr "Непрозорість:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:99
+#: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Open"
 msgstr "Відкрити"
 
@@ -1566,7 +1566,7 @@ msgstr "Відкрити"
 msgid "Open Curve Shape"
 msgstr "Відкрита крива"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:358
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
 msgid "Open Image"
 msgstr "Відкрити зображення"
 
@@ -1584,7 +1584,7 @@ msgid "Open Palette File"
 msgstr "Відкрити палітру"
 
 #: ../Pinta.Core/Actions/EditActions.cs:169
-#: ../Pinta.Core/Actions/FileActions.cs:66
+#: ../Pinta.Core/Actions/FileActions.cs:64
 msgid "Open..."
 msgstr "Відкрити…"
 
@@ -1699,7 +1699,7 @@ msgid "Photo"
 msgstr "Знімок"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:63
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:62
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1737,7 +1737,7 @@ msgstr ""
 "застосувати до ваших зображень понад 35 ефектів, а також створити необмежену "
 "кількість шарів, які допоможуть упорядкувати ваші художні засоби."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:458
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
 msgid "Pinta supports the following file formats:"
 msgstr "У Pinta передбачено підтримку таких форматів файлів:"
 
@@ -1813,7 +1813,7 @@ msgstr "Попередній перегляд"
 msgid "Primary"
 msgstr "Основний"
 
-#: ../Pinta.Core/Actions/FileActions.cs:94
+#: ../Pinta.Core/Actions/FileActions.cs:93
 msgid "Print"
 msgstr "Друк"
 
@@ -1902,7 +1902,7 @@ msgstr "Прямокутне виділення"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:417
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:423
 msgid "Red"
 msgstr "Червоний"
 
@@ -1953,7 +1953,7 @@ msgstr "Обробка"
 msgid "Rendering Effect"
 msgstr "Обробити ефекти"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:43
 msgid "Replace"
 msgstr "Замінити"
 
@@ -2076,11 +2076,11 @@ msgstr "Лінійки"
 msgid "Sampling"
 msgstr "Вибірка"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:371
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:377
 msgid "Sat"
 msgstr "Насиченість"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:265
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:264
 msgid "Sat & Value"
 msgstr "Насиченість і значення"
 
@@ -2094,7 +2094,7 @@ msgid "Saturation Percentage"
 msgstr "Насиченість у відсотках"
 
 #: ../Pinta.Core/Actions/EditActions.cs:529
-#: ../Pinta.Core/Actions/FileActions.cs:80
+#: ../Pinta.Core/Actions/FileActions.cs:79
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
 msgstr "Зберегти"
@@ -2104,7 +2104,7 @@ msgid "Save All"
 msgstr "Зберегти все"
 
 #: ../Pinta.Core/Actions/EditActions.cs:175
-#: ../Pinta.Core/Actions/FileActions.cs:87
+#: ../Pinta.Core/Actions/FileActions.cs:86
 msgid "Save As..."
 msgstr "Зберегти як…"
 
@@ -2165,7 +2165,7 @@ msgstr "Різкість"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Shortcut key"
 msgstr "Гаряча клавіша"
 
@@ -2181,7 +2181,7 @@ msgstr "Відобразити сітку"
 msgid "Show Layer"
 msgstr "Показати шар"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:245
 msgid "Show Value"
 msgstr "Показати значення"
 
@@ -2273,7 +2273,7 @@ msgid "Text Style"
 msgstr "Стиль Тексту"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:318
+#: ../Pinta/MainWindow.cs:315
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "Додаток '{0}' може бути не сумісним з цією версією Pinta"
@@ -2459,7 +2459,7 @@ msgid "Uninstall..."
 msgstr "Видалення..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
 msgstr "Об'єднати (+) ({0} + клацання лівою кнопкою)"
@@ -2469,7 +2469,7 @@ msgstr "Об'єднати (+) ({0} + клацання лівою кнопкою)
 msgid "Unsaved Image {0}"
 msgstr "Незбережених зображень {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:353
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:340
 msgid "Unsupported file format"
 msgstr "Формат файлу не підтримується"
 
@@ -2498,7 +2498,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Використовує деякі іконки з:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:394
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:400
 msgid "Value"
 msgstr "Значення"
 
@@ -2521,6 +2521,10 @@ msgstr "Вертикальний зелений (G)"
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:307
 msgid "Vertical red (R)"
 msgstr "Вертикальний червоний (R)"
+
+#: ../Pinta/MainWindow.cs:461
+msgid "View"
+msgstr ""
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
@@ -2566,13 +2570,13 @@ msgid "Xor"
 msgstr "Xor (логічне виключення)"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
 msgstr "Викл. АБО ({0} + клацання правою кнопкою)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:480
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:467
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "У вас немає прав доступу до «{0}»."
@@ -2609,7 +2613,7 @@ msgstr "Зменшити"
 msgid "Zoom to Selection"
 msgstr "По розміру виділення"
 
-#: ../Pinta/MainWindow.cs:408
+#: ../Pinta/MainWindow.cs:406
 msgid "_Adjustments"
 msgstr "_Кольори"
 
@@ -2626,23 +2630,23 @@ msgstr "_Відмінити"
 msgid "_Discard"
 msgstr "_Відмовитися"
 
-#: ../Pinta/MainWindow.cs:389
+#: ../Pinta/MainWindow.cs:386
 msgid "_Edit"
 msgstr "_Правка"
 
-#: ../Pinta/MainWindow.cs:385
+#: ../Pinta/MainWindow.cs:382
 msgid "_File"
 msgstr "_Файл"
 
-#: ../Pinta/MainWindow.cs:424
+#: ../Pinta/MainWindow.cs:422
 msgid "_Help"
 msgstr "_Допомога"
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:396
 msgid "_Image"
 msgstr "_Малюнок"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:400
 msgid "_Layers"
 msgstr "_Шари"
 
@@ -2657,11 +2661,11 @@ msgstr "_Добре"
 msgid "_Save"
 msgstr "_Зберегти"
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:391
 msgid "_View"
 msgstr "_Вигляд"
 
-#: ../Pinta/MainWindow.cs:420
+#: ../Pinta/MainWindow.cs:418
 msgid "_Window"
 msgstr "_Вікно"
 

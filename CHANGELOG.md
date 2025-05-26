@@ -30,6 +30,8 @@ Thanks to the following contributors who worked on this release:
 - The text tool's "Normal and Outline" mode now draws the outline behind the text to avoid obscuring it (#1423, #1426) 
 - Improved the handling of negative angle values in the Rotate / Zoom Layer dialog (#1142, #1440)
 - Fixed potential crashes when adjusting the brush width (#1340)
+- Fixed incorrect behavior of the Atkinson method in the Dithering effect (#1489)
+- Fixed a bug on Windows where Pinta did not use the system's language for translations (#1473, #1493)
 
 ## [3.0](https://github.com/PintaProject/Pinta/releases/tag/3.0) - 2025/04/11
 
