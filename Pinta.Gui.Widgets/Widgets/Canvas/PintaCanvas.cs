@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Pinta.Core;
@@ -36,6 +37,7 @@ public sealed class PintaCanvas : Gtk.Picture
 	private readonly CanvasRenderer cr;
 	private readonly Document document;
 	private readonly CanvasWindow canvas_window;
+	private readonly ICanvasGridService canvas_grid;
 
 	private Cairo.ImageSurface? flattened_surface;
 
@@ -52,9 +54,10 @@ public sealed class PintaCanvas : Gtk.Picture
 		this.chrome = chrome;
 		this.tools = tools;
 		canvas_window = window;
+		canvas_grid = canvasGrid;
 		this.document = document;
 
-		cr = new (canvasGrid, enableLivePreview: true);
+		cr = new (enableLivePreview: true);
 
 		document.Workspace.ViewSizeChanged += OnViewSizeChanged;
 		document.Workspace.CanvasInvalidated += OnCanvasInvalidated;
@@ -125,8 +128,7 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		DrawSelection (snapshot);
 		DrawHandles (snapshot);
-
-		// TODO - sort out how to render the pixel grid
+		DrawCanvasGrid (snapshot);
 
 		// In the future, this would be cleaner to implement as a custom widget once gir.core supports virtual methods
 		// (in particular, zooming might be easier when we have control over the size allocation)
@@ -199,6 +201,71 @@ public sealed class PintaCanvas : Gtk.Picture
 		foreach (IToolHandle control in tool.Handles.Where (c => c.Active)) {
 			control.Draw (snapshot);
 		}
+	}
+
+	private void DrawCanvasGrid (Gtk.Snapshot snapshot)
+	{
+		if (!ShouldShowCanvasGrid ())
+			return;
+
+		Gsk.Path gridPath = BuildCanvasGridPath ();
+
+		snapshot.Save ();
+
+		// Scale the selection path up to the view size.
+		float scale = (float) document.Workspace.Scale;
+		snapshot.Scale (scale, scale);
+
+		// Draw as a dotted line (every other pixel) to have a more subtle appearance.
+		Gsk.Stroke stroke = Gsk.Stroke.New (lineWidth: 1.0f / scale);
+		stroke.SetDash ([1.0f / scale, 1.0f / scale]);
+
+		Gdk.RGBA color = new () { Red = 0, Green = 0, Blue = 0, Alpha = 1 };
+		snapshot.AppendStroke (gridPath, stroke, color);
+
+		snapshot.Restore ();
+	}
+
+	private Gsk.Path BuildCanvasGridPath ()
+	{
+		int cellHeight = canvas_grid.CellHeight;
+		int cellWidth = canvas_grid.CellWidth;
+		int imageHeight = document.ImageSize.Height;
+		int imageWidth = document.ImageSize.Width;
+
+		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
+		// Add horizontal lines.
+		for (int y = 0; y < imageHeight; y += cellHeight) {
+			pathBuilder.MoveTo (0, y);
+			pathBuilder.LineTo (imageWidth, y);
+		}
+
+		// Add vertical lines.
+		for (int x = 0; x < imageWidth; x += cellWidth) {
+			pathBuilder.MoveTo (x, 0);
+			pathBuilder.LineTo (x, imageHeight);
+		}
+
+		return pathBuilder.ToPath ();
+	}
+
+	/// <summary>
+	/// The grid should be drawn if it is enabled and we're zoomed in far enough.
+	/// </summary>
+	private bool ShouldShowCanvasGrid ()
+	{
+		if (!canvas_grid.ShowGrid)
+			return false;
+
+		const int MIN_GRID_LINE_DISTANCE = 5;
+
+		int cellHeight = canvas_grid.CellHeight;
+		int cellWidth = canvas_grid.CellWidth;
+
+		int minCanvasDistance = Math.Min (cellHeight, cellWidth);
+		int minViewDistance = (int) Math.Ceiling (minCanvasDistance * document.Workspace.Scale);
+
+		return minViewDistance >= MIN_GRID_LINE_DISTANCE;
 	}
 
 	/// <summary>
