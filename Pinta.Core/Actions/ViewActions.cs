@@ -214,8 +214,6 @@ public sealed class ViewActions
 		bool mainToolbarPresent = chrome.MainToolBar is not null;
 
 		Gio.Menu zoom_section = Gio.Menu.New ();
-		zoom_section.AppendItem (ZoomIn.CreateMenuItem ());
-		zoom_section.AppendItem (ZoomOut.CreateMenuItem ());
 		zoom_section.AppendItem (ActualSize.CreateMenuItem ());
 		zoom_section.AppendItem (ZoomToWindow.CreateMenuItem ());
 		zoom_section.AppendItem (Fullscreen.CreateMenuItem ());
