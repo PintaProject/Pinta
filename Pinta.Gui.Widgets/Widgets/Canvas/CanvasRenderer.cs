@@ -53,7 +53,8 @@ public sealed class CanvasRenderer
 	public void Render (
 		IReadOnlyList<Layer> layers,
 		Cairo.ImageSurface dst,
-		PointI offset)
+		PointI offset,
+		RectangleI? clipRect = null)
 	{
 		dst.Flush ();
 
@@ -64,6 +65,11 @@ public sealed class CanvasRenderer
 		using Cairo.Context g = new (dst);
 
 		g.Translate (-offset.X, -offset.Y);
+
+		if (clipRect is not null) {
+			g.Rectangle (clipRect.Value.ToDouble ());
+			g.Clip ();
+		}
 
 		// Create the transparent checkerboard background
 		if (enable_background_pattern)

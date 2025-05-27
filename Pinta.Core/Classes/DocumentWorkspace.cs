@@ -1,21 +1,21 @@
 //
 // DocumentWorkspace.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -155,15 +155,7 @@ public sealed class DocumentWorkspace
 	/// </param>
 	public void Invalidate (RectangleI canvasRect)
 	{
-		PointD canvasTopLeft = new (canvasRect.Left, canvasRect.Top);
-		PointD canvasBtmRight = new (canvasRect.Right + 1, canvasRect.Bottom + 1);
-
-		PointD winTopLeft = CanvasPointToView (canvasTopLeft);
-		PointD winBtmRight = CanvasPointToView (canvasBtmRight);
-
-		RectangleI winRect = CairoExtensions.PointsToRectangle (winTopLeft, winBtmRight).ToInt ();
-
-		OnCanvasInvalidated (new CanvasInvalidatedEventArgs (winRect));
+		OnCanvasInvalidated (new CanvasInvalidatedEventArgs (canvasRect));
 	}
 
 	/// <summary>
@@ -172,7 +164,14 @@ public sealed class DocumentWorkspace
 	/// </summary>
 	public void InvalidateWindowRect (RectangleI windowRect)
 	{
-		OnCanvasInvalidated (new CanvasInvalidatedEventArgs (windowRect));
+		PointD windowTopLeft = new (windowRect.Left, windowRect.Top);
+		PointD windowBtmRight = new (windowRect.Right + 1, windowRect.Bottom + 1);
+
+		PointD canvasTopLeft = ViewPointToCanvas (windowTopLeft);
+		PointD canvasBtmRight = ViewPointToCanvas (windowBtmRight);
+
+		RectangleI canvasRect = CairoExtensions.PointsToRectangle (canvasTopLeft, canvasBtmRight).ToInt ();
+		OnCanvasInvalidated (new CanvasInvalidatedEventArgs (canvasRect));
 	}
 
 	/// <summary>

@@ -38,7 +38,8 @@ public sealed class PintaCanvas : Gtk.Picture
 	private readonly CanvasWindow canvas_window;
 	private readonly ICanvasGridService canvas_grid;
 
-	private Cairo.ImageSurface? flattened_surface;
+	private Cairo.ImageSurface? canvas_surface;
+	private Gdk.Texture? canvas_texture;
 	private static readonly Gdk.Texture transparent_pattern_texture = CreateTransparentPatternTexture ();
 
 	private readonly ChromeManager chrome;
@@ -86,10 +87,17 @@ public sealed class PintaCanvas : Gtk.Picture
 	/// </summary>
 	private void OnCanvasInvalidated (object? o, CanvasInvalidatedEventArgs e)
 	{
+		// TODO - queue an update rather than immediately updating the canvas
+		// There can be multiple consecutive Invalidate() calls before a UI update, e.g.
+		// in the text tool, or undoing multiple history items.
 		Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
 
+		RectangleI modifiedArea = e.EntireSurface
+			? new RectangleI (PointI.Zero, document.ImageSize)
+			: e.Rectangle;
+
 		DrawTransparentBackground (snapshot);
-		DrawCanvas (snapshot);
+		DrawCanvas (snapshot, modifiedArea);
 		DrawSelection (snapshot);
 		DrawHandles (snapshot);
 		DrawCanvasGrid (snapshot);
@@ -106,22 +114,23 @@ public sealed class PintaCanvas : Gtk.Picture
 		QueueDraw ();
 	}
 
-	private static Gdk.Texture CreateTextureFromSurface (Cairo.ImageSurface surface)
+	private static Gdk.Texture CreateTextureFromSurface (
+		Cairo.ImageSurface surface,
+		Gdk.Texture? updateTexture = null,
+		Cairo.Region? updateRegion = null)
 	{
 		// FIXME - Gdk.MemoryTextureBuilder is only available in GTK 4.16+, and Gsk.Path etc require 4.14
-		// TODO - if we used cairo_image_surface_create_for_data() to wrap the GLib.Bytes buffer, we might be able to avoid this extra copy
-		// TODO - is there any benefit to caching the texture builder?
-		// TODO - investigate using gdk_memory_texture_builder_set_update_region() for partial canvas updates based on the invalidated area
-		// TODO - could use gtk_snapshot_push_blend() to avoid flattening each layer on the CPU?
+		// TODO - can we avoid copying the full image into GLib.Bytes?
 		GLib.Bytes bytes = GLib.Bytes.New (surface.GetData ());
 		Gdk.MemoryTextureBuilder builder = new () {
 			Bytes = bytes,
+			Stride = (ulong) surface.Stride,
 			Width = surface.Width,
 			Height = surface.Height,
-			Format = Gdk.MemoryFormat.B8g8r8a8Premultiplied
+			Format = Gdk.MemoryFormat.B8g8r8a8Premultiplied,
+			UpdateTexture = updateTexture,
+			UpdateRegion = updateRegion ?? CairoExtensions.CreateRegion (RectangleI.Zero)
 		};
-		// Workaround for https://github.com/gircore/gir.core/issues/1257 - the Stride property produces an error
-		builder.SetStride ((nuint) surface.Stride);
 
 		return builder.Build ();
 	}
@@ -147,28 +156,36 @@ public sealed class PintaCanvas : Gtk.Picture
 		snapshot.Pop ();
 	}
 
-	private void DrawCanvas (Gtk.Snapshot snapshot)
+	private void DrawCanvas (Gtk.Snapshot snapshot, RectangleI modifiedArea)
 	{
-		// Compute the flattened image.
-		if (flattened_surface is null ||
-		    flattened_surface.Width != document.ImageSize.Width ||
-		    flattened_surface.Height != document.ImageSize.Height) {
+		// Compute the flattened image for the modified region.
+		if (canvas_surface is null ||
+		    canvas_surface.Width != document.ImageSize.Width ||
+		    canvas_surface.Height != document.ImageSize.Height) {
 
-			flattened_surface?.Dispose ();
-			flattened_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
+			canvas_surface?.Dispose ();
+			canvas_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
+
+			canvas_texture?.Dispose ();
+			canvas_texture = null;
 		}
 
 		// Note we are always rendering without scaling, since the scaling is applied when drawing the texture later.
+		// TODO - in the future we could experiment with creating a separate texture per layer and using gtk_snapshot_push_blend() to blend on the GPU
 		cr.Initialize (document.ImageSize, document.ImageSize);
 
 		List<Layer> layers = document.Layers.GetLayersToPaint ().ToList ();
 
 		if (layers.Count == 0)
-			flattened_surface.Clear ();
+			canvas_surface.Clear ();
 
-		cr.Render (layers, flattened_surface, offset: PointI.Zero);
+		cr.Render (layers, canvas_surface, offset: PointI.Zero, clipRect: modifiedArea);
 
-		Gdk.Texture canvasTexture = CreateTextureFromSurface (flattened_surface);
+		Gdk.Texture? updateTexture = canvas_texture;
+		Cairo.Region? updateRegion = (updateTexture is not null)
+			? CairoExtensions.CreateRegion (modifiedArea)
+			: null;
+		canvas_texture = CreateTextureFromSurface (canvas_surface, updateTexture, updateRegion);
 
 		// Scale to fit the view size (when zooming in or out).
 		Graphene.Rect canvasBounds = Graphene.Rect.Alloc ();
@@ -178,7 +195,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		Gsk.ScalingFilter scalingFilter = (document.Workspace.Scale >= 1.0) ?
 			Gsk.ScalingFilter.Nearest :
 			Gsk.ScalingFilter.Linear;
-		snapshot.AppendScaledTexture (canvasTexture, scalingFilter, canvasBounds);
+		snapshot.AppendScaledTexture (canvas_texture, scalingFilter, canvasBounds);
 	}
 
 	private void DrawSelection (Gtk.Snapshot snapshot)
