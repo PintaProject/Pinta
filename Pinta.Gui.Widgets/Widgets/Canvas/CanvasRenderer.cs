@@ -72,8 +72,12 @@ public sealed class CanvasRenderer
 		}
 
 		// Create the transparent checkerboard background
+		// Otherwise, we need to clear the existing surface first before painting
+		// layers that could be transparent.
 		if (enable_background_pattern)
 			g.FillRectangle (r, tranparent_pattern, new PointD (offset.X, offset.Y));
+		else
+			g.Clear (r);
 
 		for (int i = 0; i < layers.Count; i++) {
 

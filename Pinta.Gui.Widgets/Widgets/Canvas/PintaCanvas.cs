@@ -197,10 +197,6 @@ public sealed class PintaCanvas : Gtk.Picture
 		cr.Initialize (document.ImageSize, document.ImageSize);
 
 		List<Layer> layers = document.Layers.GetLayersToPaint ().ToList ();
-
-		if (layers.Count == 0)
-			canvas_surface.Clear ();
-
 		cr.Render (layers, canvas_surface, offset: PointI.Zero, clipRect: modifiedArea);
 
 		Gdk.Texture? updateTexture = canvas_texture;
