@@ -115,12 +115,16 @@ public sealed class PintaCanvas : Gtk.Picture
 		if (!modified_area.HasValue)
 			throw new InvalidOperationException ("No canvas region was modified");
 
+		Graphene.Rect canvasViewBounds = Graphene.Rect.Alloc ();
+		Size viewSize = document.Workspace.ViewSize;
+		canvasViewBounds.Init (0.0f, 0.0f, (float) viewSize.Width, (float) viewSize.Height);
+
 		Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
 
-		DrawTransparentBackground (snapshot);
-		DrawCanvas (snapshot, modified_area.Value);
-		DrawSelection (snapshot);
-		DrawHandles (snapshot);
+		DrawTransparentBackground (snapshot, canvasViewBounds);
+		DrawCanvas (snapshot, modified_area.Value, canvasViewBounds);
+		DrawSelection (snapshot, canvasViewBounds);
+		DrawHandles (snapshot, canvasViewBounds);
 		DrawCanvasGrid (snapshot);
 
 		// In the future, this would be cleaner to implement as a custom widget once gir.core supports virtual methods
@@ -163,13 +167,9 @@ public sealed class PintaCanvas : Gtk.Picture
 	/// <summary>
 	/// Draw the transparent checkboard background by tiling a small pattern.
 	/// </summary>
-	private void DrawTransparentBackground (Gtk.Snapshot snapshot)
+	private void DrawTransparentBackground (Gtk.Snapshot snapshot, Graphene.Rect canvasViewBounds)
 	{
-		Graphene.Rect canvasBounds = Graphene.Rect.Alloc ();
-		Size viewSize = document.Workspace.ViewSize;
-		canvasBounds.Init (0.0f, 0.0f, (float) viewSize.Width, (float) viewSize.Height);
-
-		snapshot.PushRepeat (canvasBounds, childBounds: null);
+		snapshot.PushRepeat (canvasViewBounds, childBounds: null);
 
 		Graphene.Rect patternBounds = Graphene.Rect.Alloc ();
 		patternBounds.Init (0, 0, transparent_pattern_texture.Width, transparent_pattern_texture.Height);
@@ -178,7 +178,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		snapshot.Pop ();
 	}
 
-	private void DrawCanvas (Gtk.Snapshot snapshot, RectangleI modifiedArea)
+	private void DrawCanvas (Gtk.Snapshot snapshot, RectangleI modifiedArea, Graphene.Rect canvasViewBounds)
 	{
 		// Compute the flattened image for the modified region.
 		if (canvas_surface is null ||
@@ -210,17 +210,13 @@ public sealed class PintaCanvas : Gtk.Picture
 		canvas_texture = CreateTextureFromSurface (canvas_surface, updateTexture, updateRegion);
 
 		// Scale to fit the view size (when zooming in or out).
-		Graphene.Rect canvasBounds = Graphene.Rect.Alloc ();
-		Size viewSize = document.Workspace.ViewSize;
-		canvasBounds.Init (0.0f, 0.0f, (float) viewSize.Width, (float) viewSize.Height);
-
 		Gsk.ScalingFilter scalingFilter = (document.Workspace.Scale >= 1.0) ?
 			Gsk.ScalingFilter.Nearest :
 			Gsk.ScalingFilter.Linear;
-		snapshot.AppendScaledTexture (canvas_texture, scalingFilter, canvasBounds);
+		snapshot.AppendScaledTexture (canvas_texture, scalingFilter, canvasViewBounds);
 	}
 
-	private void DrawSelection (Gtk.Snapshot snapshot)
+	private void DrawSelection (Gtk.Snapshot snapshot, Graphene.Rect canvasViewBounds)
 	{
 		if (!document.Selection.Visible)
 			return;
@@ -233,6 +229,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		Gsk.Path selectionPath = pathBuilder.ToPath ();
 
 		snapshot.Save ();
+		snapshot.PushClip (canvasViewBounds);
 
 		// Scale the selection path up to the view size.
 		// Note the outline width (below) remains at a constant size.
@@ -254,18 +251,23 @@ public sealed class PintaCanvas : Gtk.Picture
 		Gdk.RGBA black = new () { Red = 0, Green = 0, Blue = 0, Alpha = 1 };
 		snapshot.AppendStroke (selectionPath, stroke, black);
 
+		snapshot.Pop ();
 		snapshot.Restore ();
 	}
 
-	private void DrawHandles (Gtk.Snapshot snapshot)
+	private void DrawHandles (Gtk.Snapshot snapshot, Graphene.Rect canvasViewBounds)
 	{
 		BaseTool? tool = tools.CurrentTool;
 		if (tool is null)
 			return;
 
+		snapshot.PushClip (canvasViewBounds);
+
 		foreach (IToolHandle control in tool.Handles.Where (c => c.Active)) {
 			control.Draw (snapshot);
 		}
+
+		snapshot.Pop ();
 	}
 
 	private void DrawCanvasGrid (Gtk.Snapshot snapshot)
