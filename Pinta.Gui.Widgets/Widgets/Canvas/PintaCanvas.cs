@@ -41,6 +41,7 @@ public sealed class PintaCanvas : Gtk.Picture
 	private Cairo.ImageSurface? canvas_surface;
 	private Gdk.Texture? canvas_texture;
 	private static readonly Gdk.Texture transparent_pattern_texture = CreateTransparentPatternTexture ();
+	private RectangleI? modified_area;
 
 	private readonly ChromeManager chrome;
 	private readonly ToolManager tools;
@@ -83,21 +84,41 @@ public sealed class PintaCanvas : Gtk.Picture
 	}
 
 	/// <summary>
-	/// Update the canvas when the image changes.
+	/// Queue an update to the canvas.
+	/// There can be multiple consecutive Invalidate() calls before a UI update, e.g.
+	/// in the text tool, or undoing multiple history items.
 	/// </summary>
 	private void OnCanvasInvalidated (object? o, CanvasInvalidatedEventArgs e)
 	{
-		// TODO - queue an update rather than immediately updating the canvas
-		// There can be multiple consecutive Invalidate() calls before a UI update, e.g.
-		// in the text tool, or undoing multiple history items.
-		Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
-
-		RectangleI modifiedArea = e.EntireSurface
+		RectangleI rect = e.EntireSurface
 			? new RectangleI (PointI.Zero, document.ImageSize)
 			: e.Rectangle;
 
+		// If an update is already queued, just extend the region to update.
+		if (modified_area.HasValue) {
+			modified_area = modified_area.Value.Union (rect);
+			return;
+		}
+
+		modified_area = rect;
+		GLib.Functions.IdleAdd (GLib.Constants.PRIORITY_DEFAULT, () => {
+			UpdateCanvas ();
+			return false;
+		});
+	}
+
+	/// <summary>
+	/// Update the canvas after changes to the image.
+	/// </summary>
+	private void UpdateCanvas ()
+	{
+		if (!modified_area.HasValue)
+			throw new InvalidOperationException ("No canvas region was modified");
+
+		Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
+
 		DrawTransparentBackground (snapshot);
-		DrawCanvas (snapshot, modifiedArea);
+		DrawCanvas (snapshot, modified_area.Value);
 		DrawSelection (snapshot);
 		DrawHandles (snapshot);
 		DrawCanvasGrid (snapshot);
@@ -111,6 +132,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		else
 			System.Console.WriteLine ("Failed to render snapshot for canvas");
 
+		modified_area = null;
 		QueueDraw ();
 	}
 
