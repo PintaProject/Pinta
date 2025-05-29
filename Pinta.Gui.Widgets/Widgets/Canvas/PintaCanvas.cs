@@ -145,8 +145,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		Gdk.Texture? updateTexture = null,
 		Cairo.Region? updateRegion = null)
 	{
-		// FIXME - Gdk.MemoryTextureBuilder is only available in GTK 4.16+, and Gsk.Path etc require 4.14
-		// TODO - can we avoid copying the full image into GLib.Bytes?
+		// TODO - can we avoid copying the full image into GLib.Bytes on each update?
 		GLib.Bytes bytes = GLib.Bytes.New (surface.GetData ());
 		Gdk.MemoryTextureBuilder builder = new () {
 			Bytes = bytes,
