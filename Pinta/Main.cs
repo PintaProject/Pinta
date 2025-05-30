@@ -98,6 +98,8 @@ internal sealed class MainClass
 		if (threads > 0)
 			PintaCore.System.RenderThreads = threads;
 
+		app.OnStartup += (_, _) => main_window.Startup ();
+
 		app.OnActivate += (_, _) => {
 			main_window.Activate ();
 			OpenFilesFromCommandLine (files);

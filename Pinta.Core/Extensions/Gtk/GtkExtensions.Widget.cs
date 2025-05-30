@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using Pinta.Resources;
 
 namespace Pinta.Core;
 
@@ -168,6 +169,7 @@ partial class GtkExtensions
 		slider.DrawValue = true;
 		slider.ValuePos = Gtk.PositionType.Left;
 		slider.SetValue (val);
+		slider.SetCssClasses ([Styles.ToolBarScale]);
 		return slider;
 	}
 

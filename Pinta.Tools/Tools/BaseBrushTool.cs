@@ -47,6 +47,8 @@ public abstract class BaseBrushTool : BaseTool
 		Palette = services.GetService<IPaletteService> ();
 
 		BrushWidthSpinButton.TooltipText = Translations.GetString ("Change brush width. Shortcut keys: [ ]");
+		// Change the cursor when the BrushWidth is changed.
+		BrushWidthSpinButton.OnValueChanged += (_, _) => SetCursor (DefaultCursor);
 	}
 
 	protected override bool ShowAntialiasingButton => true;
@@ -65,9 +67,6 @@ public abstract class BaseBrushTool : BaseTool
 
 		tb.Append (BrushWidthLabel);
 		tb.Append (BrushWidthSpinButton);
-
-		// Change the cursor when the BrushWidth is changed.
-		BrushWidthSpinButton.OnValueChanged += (sender, e) => SetCursor (DefaultCursor);
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)

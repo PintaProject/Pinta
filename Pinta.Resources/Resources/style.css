@@ -1,0 +1,8 @@
+.tool-box-button {
+    -gtk-icon-size: 2rem;
+}
+
+.tool-bar-scale {
+    margin-top: -4px;
+    margin-bottom: -5px;
+}

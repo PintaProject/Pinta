@@ -41,6 +41,7 @@ public sealed class ViewActions
 	public ToggleCommand ImageTabs { get; }
 	public ToggleCommand ToolWindows { get; }
 	public Command EditCanvasGrid { get; }
+	public ToggleCommand MenuBar { get; }
 	public ToggleCommand StatusBar { get; }
 	public ToggleCommand ToolBox { get; }
 	public ToggleCommand Rulers { get; }
@@ -75,6 +76,7 @@ public sealed class ViewActions
 		ImageTabs = new ToggleCommand ("ImageTabs", Translations.GetString ("Image Tabs"), null, null);
 		ToolWindows = new ToggleCommand ("ToolWindows", Translations.GetString ("Tool Windows"), null, null);
 		EditCanvasGrid = new Command ("EditCanvasGrid", Translations.GetString ("Canvas Grid..."), null, Resources.Icons.ViewGrid);
+		MenuBar = new ToggleCommand ("MenuBar", Translations.GetString ("Menu Bar"), null, null);
 		StatusBar = new ToggleCommand ("Statusbar", Translations.GetString ("Status Bar"), null, null);
 		ToolBox = new ToggleCommand ("ToolBox", Translations.GetString ("Tool Box"), null, null);
 		Rulers = new ToggleCommand ("Rulers", Translations.GetString ("Rulers"), null, Resources.Icons.ViewRulers);
@@ -149,6 +151,7 @@ public sealed class ViewActions
 
 		Gio.Menu show_hide_menu = Gio.Menu.New ();
 		show_hide_menu.AppendItem (Rulers.CreateMenuItem ());
+		show_hide_menu.AppendItem (MenuBar.CreateMenuItem ());
 		show_hide_menu.AppendItem (StatusBar.CreateMenuItem ());
 		show_hide_menu.AppendItem (ToolBox.CreateMenuItem ());
 		show_hide_menu.AppendItem (ImageTabs.CreateMenuItem ());
@@ -178,6 +181,7 @@ public sealed class ViewActions
 		app.AddAction (RulerMetric);
 		app.AddAction (Rulers);
 		if (mainToolbarPresent) app.AddAction (ToolBar);
+		app.AddAction (MenuBar);
 		app.AddAction (StatusBar);
 		app.AddAction (ToolBox);
 		app.AddAction (ImageTabs);

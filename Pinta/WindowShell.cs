@@ -42,12 +42,12 @@ public sealed class WindowShell
 		string title,
 		int width,
 		int height,
-		bool useHeaderBar,
+		bool useMenuBar,
 		bool maximize)
 	{
 		var app_layout = Adw.ToolbarView.New ();
 
-		if (useHeaderBar) {
+		if (!useMenuBar) {
 			var adwWindow = Adw.ApplicationWindow.New (app);
 			adwWindow.SetContent (app_layout);
 			app_window = adwWindow;
@@ -55,7 +55,11 @@ public sealed class WindowShell
 			header_bar = Adw.HeaderBar.New ();
 			app_layout.AddTopBar (header_bar);
 		} else {
+			// If the header bar isn't being used, we use a regular Gtk.ApplicationWindow
+			// to have a traditional titlebar with the standard close / minimize buttons,
+			// and a menubar in the window unless a global menu is used (e.g. macOS)
 			app_window = Gtk.ApplicationWindow.New (app);
+			app_window.ShowMenubar = true;
 			app_window.SetChild (app_layout);
 		}
 
