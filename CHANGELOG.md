@@ -12,6 +12,7 @@ Thanks to the following contributors who worked on this release:
 - @pedropaulosuzuki
 
 ### Added
+- Rewrote the canvas widget to improve performance and memory usage issues for zoomed-in images (#1020, #1485)
 - Added an option (View -> Show/Hide -> Menu Bar) to switch to a menu bar layout instead of a header bar (#781, #1418)
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
 - When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
@@ -19,6 +20,7 @@ Thanks to the following contributors who worked on this release:
 - Keyboard shortcuts are now displayed on all toolbar button tooltips (#1408, #1432)
 
 ### Changed
+- Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
 - Improved the sizing of the toolbox icons, particularly for high DPI displays (#1374)
 - The text tool now uses the system's default font rather than being hardcoded to Arial, which may not exist on some systems (#1422, #1421)
 - Removed use of deprecated Gtk.FontButton (#1421)
