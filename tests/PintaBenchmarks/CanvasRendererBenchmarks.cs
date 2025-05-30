@@ -20,7 +20,7 @@ public class CanvasRendererBenchmarks
 	private readonly Size dest_size_zoom_out;
 
 	private readonly List<Layer> layers = [];
-	private readonly List<Layer> ten_laters = [];
+	private readonly List<Layer> ten_layers = [];
 
 	public CanvasRendererBenchmarks ()
 	{
@@ -29,7 +29,7 @@ public class CanvasRendererBenchmarks
 		layers.Add (new Layer (surface));
 
 		for (var i = 0; i < 10; i++)
-			ten_laters.Add (new Layer (surface));
+			ten_layers.Add (new Layer (surface));
 
 		dest_surface = new ImageSurface (Format.Argb32, 2000, 2000);
 		dest_surface_zoom_in = new ImageSurface (Format.Argb32, 3500, 3500);
@@ -43,7 +43,7 @@ public class CanvasRendererBenchmarks
 	[Benchmark]
 	public void RenderOneToOne ()
 	{
-		CanvasRenderer renderer = new (null, false);
+		CanvasRenderer renderer = new (false);
 
 		renderer.Initialize (src_size, src_size);
 		renderer.Render (layers, dest_surface, PointI.Zero);
@@ -52,16 +52,16 @@ public class CanvasRendererBenchmarks
 	[Benchmark]
 	public void RenderManyOneToOne ()
 	{
-		CanvasRenderer renderer = new (null, false);
+		CanvasRenderer renderer = new (false);
 
 		renderer.Initialize (src_size, src_size);
-		renderer.Render (ten_laters, dest_surface, PointI.Zero);
+		renderer.Render (ten_layers, dest_surface, PointI.Zero);
 	}
 
 	[Benchmark]
 	public void RenderZoomIn ()
 	{
-		CanvasRenderer renderer = new (null, false);
+		CanvasRenderer renderer = new (false);
 
 		renderer.Initialize (src_size, dest_size_zoom_in);
 		renderer.Render (layers, dest_surface_zoom_in, PointI.Zero);
@@ -70,16 +70,16 @@ public class CanvasRendererBenchmarks
 	[Benchmark]
 	public void RenderManyZoomIn ()
 	{
-		CanvasRenderer renderer = new (null, false);
+		CanvasRenderer renderer = new (false);
 
 		renderer.Initialize (src_size, dest_size_zoom_in);
-		renderer.Render (ten_laters, dest_surface_zoom_in, PointI.Zero);
+		renderer.Render (ten_layers, dest_surface_zoom_in, PointI.Zero);
 	}
 
 	[Benchmark]
 	public void RenderZoomOut ()
 	{
-		CanvasRenderer renderer = new (null, false);
+		CanvasRenderer renderer = new (false);
 
 		renderer.Initialize (src_size, dest_size_zoom_out);
 		renderer.Render (layers, dest_surface_zoom_out, PointI.Zero);
@@ -88,9 +88,9 @@ public class CanvasRendererBenchmarks
 	[Benchmark]
 	public void RenderManyZoomOut ()
 	{
-		CanvasRenderer renderer = new (null, false);
+		CanvasRenderer renderer = new (false);
 
 		renderer.Initialize (src_size, dest_size_zoom_out);
-		renderer.Render (ten_laters, dest_surface_zoom_out, PointI.Zero);
+		renderer.Render (ten_layers, dest_surface_zoom_out, PointI.Zero);
 	}
 }

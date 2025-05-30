@@ -198,11 +198,13 @@ internal sealed class MainWindow
 		// Zoom to window only on first show (if we do it always, it will be called on every resize)
 		// Note: this does seem to allow a small flicker where large images are shown at 100% zoom before
 		// zooming out (Bug 1959673)
+		// If the canvas is turned into a custom Gtk.Widget subclass in the future, this could
+		// perhaps be done on the first measurement request
 
 		bool canvasHasBeenShown = false;
 
-		canvas.Canvas.OnResize += (o, e2) => {
-
+		Gtk.Viewport view = (Gtk.Viewport) doc.Workspace.Canvas.Parent!;
+		view.Hadjustment!.OnChanged += (o, e2) => {
 			if (canvasHasBeenShown)
 				return;
 

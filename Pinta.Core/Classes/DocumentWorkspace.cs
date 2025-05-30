@@ -1,21 +1,21 @@
 //
 // DocumentWorkspace.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -104,14 +104,6 @@ public sealed class DocumentWorkspace
 	}
 
 	/// <summary>
-	/// Offset to center the image view in the canvas widget.
-	/// (When zoomed out, the widget will have a larger allocated size than the image view size).
-	/// </summary>
-	public PointD Offset => new (
-		(Canvas.GetAllocatedWidth () - view_size.Width) / 2,
-		(Canvas.GetAllocatedHeight () - view_size.Height) / 2);
-
-	/// <summary>
 	/// Scale factor for the zoomed image.
 	/// </summary>
 	public double Scale {
@@ -163,15 +155,7 @@ public sealed class DocumentWorkspace
 	/// </param>
 	public void Invalidate (RectangleI canvasRect)
 	{
-		PointD canvasTopLeft = new (canvasRect.Left, canvasRect.Top);
-		PointD canvasBtmRight = new (canvasRect.Right + 1, canvasRect.Bottom + 1);
-
-		PointD winTopLeft = CanvasPointToView (canvasTopLeft);
-		PointD winBtmRight = CanvasPointToView (canvasBtmRight);
-
-		RectangleI winRect = CairoExtensions.PointsToRectangle (winTopLeft, winBtmRight).ToInt ();
-
-		OnCanvasInvalidated (new CanvasInvalidatedEventArgs (winRect));
+		OnCanvasInvalidated (new CanvasInvalidatedEventArgs (canvasRect));
 	}
 
 	/// <summary>
@@ -180,7 +164,14 @@ public sealed class DocumentWorkspace
 	/// </summary>
 	public void InvalidateWindowRect (RectangleI windowRect)
 	{
-		OnCanvasInvalidated (new CanvasInvalidatedEventArgs (windowRect));
+		PointD windowTopLeft = new (windowRect.Left, windowRect.Top);
+		PointD windowBtmRight = new (windowRect.Right + 1, windowRect.Bottom + 1);
+
+		PointD canvasTopLeft = ViewPointToCanvas (windowTopLeft);
+		PointD canvasBtmRight = ViewPointToCanvas (windowBtmRight);
+
+		RectangleI canvasRect = CairoExtensions.PointsToRectangle (canvasTopLeft, canvasBtmRight).ToInt ();
+		OnCanvasInvalidated (new CanvasInvalidatedEventArgs (canvasRect));
 	}
 
 	/// <summary>
@@ -247,7 +238,7 @@ public sealed class DocumentWorkspace
 	public PointD ViewPointToCanvas (PointD viewPoint)
 	{
 		Fraction<int> sf = ScaleFactor.CreateClamped (document.ImageSize.Width, ViewSize.Width);
-		PointD pt = sf.ScalePoint (viewPoint - Offset);
+		PointD pt = sf.ScalePoint (viewPoint);
 		return new (pt.X, pt.Y);
 	}
 
@@ -257,10 +248,7 @@ public sealed class DocumentWorkspace
 	public PointD CanvasPointToView (PointD canvasPoint)
 	{
 		Fraction<int> sf = ScaleFactor.CreateClamped (document.ImageSize.Width, ViewSize.Width);
-		PointD pt = sf.UnscalePoint (canvasPoint);
-		return new (
-			X: pt.X + Offset.X,
-			Y: pt.Y + Offset.Y);
+		return sf.UnscalePoint (canvasPoint);
 	}
 
 	public void ZoomIn ()
@@ -357,8 +345,8 @@ public sealed class DocumentWorkspace
 
 		Gtk.Viewport view = (Gtk.Viewport) Canvas.Parent!;
 
-		double scroll_offset_x = center_point.X - view.Hadjustment!.Value - Offset.X;
-		double scroll_offset_y = center_point.Y - view.Vadjustment!.Value - Offset.Y;
+		double scroll_offset_x = center_point.X - view.Hadjustment!.Value;
+		double scroll_offset_y = center_point.Y - view.Vadjustment!.Value;
 
 		PointD canvas_point = ViewPointToCanvas (center_point);
 
@@ -416,8 +404,8 @@ public sealed class DocumentWorkspace
 		// Note that the canvas widget might not have resized yet, so using Offset is important for taking
 		// the size difference into account.
 		PointD new_center_point = CanvasPointToView (canvas_point);
-		view.Hadjustment.Value = new_center_point.X - scroll_offset_x - Offset.X;
-		view.Vadjustment.Value = new_center_point.Y - scroll_offset_y - Offset.Y;
+		view.Hadjustment.Value = new_center_point.X - scroll_offset_x;
+		view.Vadjustment.Value = new_center_point.Y - scroll_offset_y;
 
 		actions.View.ResumeZoomUpdate ();
 	}
