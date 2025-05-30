@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-06 01:45+0000\n"
+"POT-Creation-Date: 2025-05-25 00:30+0000\n"
 "PO-Revision-Date: 2012-09-09 07:24+0000\n"
 "Last-Translator: Kenan Dervišević <6nm0uygdd@mozmail.com>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -24,12 +24,12 @@ msgstr ""
 msgid " (in user directory)"
 msgstr ""
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
 msgid " Selection Mode: "
 msgstr ""
 
-#: ../Pinta.Core/Managers/EffectsManager.cs:70
-#: ../Pinta.Core/Managers/EffectsManager.cs:104
+#: ../Pinta.Core/Managers/EffectsManager.cs:95
+#: ../Pinta.Core/Managers/EffectsManager.cs:150
 msgid "..."
 msgstr "..."
 
@@ -49,11 +49,11 @@ msgstr ""
 msgid "9 x 9 Region"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:387
+#: ../Pinta/MainWindow.cs:414
 msgid "A_dd-ins"
 msgstr ""
 
-#: ../Pinta.Core/Actions/AppActions.cs:40
+#: ../Pinta.Core/Actions/AppActions.cs:42
 msgid "About"
 msgstr "O"
 
@@ -61,8 +61,8 @@ msgstr "O"
 msgid "About Pinta"
 msgstr "O Pinti"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:371
+#: ../Pinta.Core/Actions/LayerActions.cs:61
+#: ../Pinta.Core/Actions/LayerActions.cs:431
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Dodaj novi sloj"
@@ -75,11 +75,11 @@ msgstr "Dodaj Šum"
 msgid "Add-in Manager..."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:832
 msgid "Added"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:417
+#: ../Pinta/MainWindow.cs:449
 msgid "Adjustments"
 msgstr ""
 
@@ -92,13 +92,13 @@ msgstr "Posle odabira"
 msgid "Align Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:474
+#: ../Pinta.Core/Actions/EditActions.cs:593
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Sve datoteke"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:709
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:492
 msgid "Alpha"
 msgstr ""
 
@@ -122,7 +122,7 @@ msgstr "Sidro:"
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:120
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:145
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:78
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:316
@@ -161,7 +161,7 @@ msgstr ""
 msgid "Auto"
 msgstr "Automatski"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:55
+#: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Auto Crop"
 msgstr "Automatsko izrezivanje"
 
@@ -174,7 +174,7 @@ msgstr "Auto nivoi"
 msgid "Available in repository: {0}"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:146
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:133
 msgid "Background"
 msgstr "Pozadina"
 
@@ -186,7 +186,7 @@ msgstr ""
 msgid "Background:"
 msgstr ""
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:93
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:95
 msgid "Based on the work of Paint.NET:"
 msgstr "Rađeno na osnovi Paint.NET-a:"
 
@@ -195,7 +195,7 @@ msgstr "Rađeno na osnovi Paint.NET-a:"
 msgid "Beautiful Italy"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:71
+#: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Best Fit"
 msgstr "Najbolje uklapanje"
 
@@ -215,7 +215,7 @@ msgstr "Mod mješavine"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:699
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:469
 msgid "Blue"
 msgstr "Plavo"
 
@@ -232,7 +232,7 @@ msgstr "Plavo "
 msgid "Blurs"
 msgstr "Zamućenja"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Bold"
 msgstr "Podebljano"
 
@@ -253,7 +253,7 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:148
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
 msgstr "Svjetlina"
@@ -266,8 +266,8 @@ msgstr "Osvetljenost/kontrast"
 msgid "Brush Size"
 msgstr "Veličina četke"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:270
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:123
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:122
 msgid "Brush width"
 msgstr "Širina četkice"
 
@@ -290,9 +290,9 @@ msgstr "Po apsolutnoj veličini:"
 msgid "By percentage:"
 msgstr "Po procentima:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:411
+#: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:169
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr ""
@@ -301,11 +301,11 @@ msgstr ""
 msgid "Canvas"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:61
 msgid "Canvas Grid Settings"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:77
+#: ../Pinta.Core/Actions/ViewActions.cs:124
 msgid "Canvas Grid..."
 msgstr ""
 
@@ -317,7 +317,7 @@ msgstr "Veličina ćelije"
 msgid "Center"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:228
+#: ../Pinta.Tools/Tools/TextTool.cs:240
 msgid "Center Align"
 msgstr "Postrojiti u centar"
 
@@ -334,20 +334,20 @@ msgstr "Centar pomaka"
 msgid "Center Right"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:126
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:151
 msgid "Centered"
 msgstr "Centrirano"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:145
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Centimeters"
 msgstr "Centimetri"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:355
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:356
 msgid "Changed Shape Type"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgstr ""
 msgid "Choose Color"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:111
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "Odaberi boju palete"
 
@@ -398,11 +398,11 @@ msgstr "Klikni i vuci da nacrtaš okvir za oblast odabira."
 msgid "Click and drag to navigate image."
 msgstr "Klikni i vuci da navigiraš sliku."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:300
 msgid "Click to reset primary and secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:289
 msgid "Click to select primary color."
 msgstr ""
 
@@ -410,19 +410,19 @@ msgstr ""
 msgid "Click to select region of similar color."
 msgstr "Klikni za odabiranje rejona sličnom bojom."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:292
 msgid "Click to select secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:277
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:196
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:295
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
 #: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:440
-#: ../Pinta/Dialogs/NewImageDialog.cs:533
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr ""
 
@@ -430,12 +430,12 @@ msgstr ""
 msgid "Clone Stamp"
 msgstr "Kloniraj pečat"
 
-#: ../Pinta.Core/Actions/FileActions.cs:54
+#: ../Pinta.Core/Actions/FileActions.cs:72
 #: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
 msgstr "Zatvori"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:46
+#: ../Pinta.Core/Actions/WindowActions.cs:54
 msgid "Close All"
 msgstr "Zatvori sve"
 
@@ -443,7 +443,7 @@ msgstr "Zatvori sve"
 msgid "Closed Curve Shape"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 msgid "Closed Line/Curve Series"
 msgstr ""
 
@@ -476,7 +476,7 @@ msgstr ""
 msgid "Color Mode"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:305
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:327
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Birač boja"
@@ -489,7 +489,7 @@ msgstr "Opseg boja"
 msgid "Color Saturation"
 msgstr "Zasićenje boje"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:170
+#: ../Pinta.Core/Actions/ViewActions.cs:255
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
@@ -514,7 +514,7 @@ msgstr "Bojanje"
 msgid "Conical Gradient"
 msgstr "Konusni gradijent"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:44
+#: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "Contents"
 msgstr ""
 
@@ -522,20 +522,20 @@ msgstr ""
 msgid "Contiguous"
 msgstr "Nastavi"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:158
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
 msgstr "Kontrast"
 
-#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:91
 msgid "Copy"
 msgstr "Kopiraj"
 
-#: ../Pinta.Core/Actions/EditActions.cs:72
+#: ../Pinta.Core/Actions/EditActions.cs:98
 msgid "Copy Merged"
 msgstr ""
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:80
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Copyright"
 msgstr "Autorsko pravo"
 
@@ -550,9 +550,9 @@ msgstr ""
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:194
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:167
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Ne moguće otvoriti datoteku: {0}"
@@ -561,8 +561,8 @@ msgstr "Ne moguće otvoriti datoteku: {0}"
 msgid "Coverage"
 msgstr "Podrška"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:54
-#: ../Pinta.Core/Actions/ImageActions.cs:234
+#: ../Pinta.Core/Actions/ImageActions.cs:56
+#: ../Pinta.Core/Actions/ImageActions.cs:295
 msgid "Crop to Selection"
 msgstr "Isjeci selekciju"
 
@@ -577,18 +577,18 @@ msgstr "Krivulje"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
 #: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:442
-#: ../Pinta/Dialogs/NewImageDialog.cs:533
+#: ../Pinta/Dialogs/NewImageDialog.cs:438
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:70
-#: ../Pinta.Core/Actions/EditActions.cs:263
+#: ../Pinta.Core/Actions/EditActions.cs:84
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Cut"
 msgstr "Isijeci"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:167
+#: ../Pinta.Core/Actions/ViewActions.cs:252
 msgid "Dark"
 msgstr ""
 
@@ -601,16 +601,16 @@ msgid "Dash"
 msgstr ""
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:163
+#: ../Pinta.Core/Actions/ViewActions.cs:248
 msgid "Default"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:350
+#: ../Pinta.Core/Actions/LayerActions.cs:68
+#: ../Pinta.Core/Actions/LayerActions.cs:410
 msgid "Delete Layer"
 msgstr "Izbriši sloj"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:669
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:670
 msgid "Deleted"
 msgstr ""
 
@@ -619,11 +619,11 @@ msgstr ""
 msgid "Dents"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:278
+#: ../Pinta.Core/Actions/EditActions.cs:382
 msgid "Deselect"
 msgstr "Poništi izbor"
 
-#: ../Pinta.Core/Actions/EditActions.cs:81
+#: ../Pinta.Core/Actions/EditActions.cs:162
 msgid "Deselect All"
 msgstr "Poništi izbor"
 
@@ -636,7 +636,7 @@ msgid "Difference"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:137
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:123
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:148
 msgid "Distance"
 msgstr "Rastojanje"
 
@@ -667,8 +667,8 @@ msgstr "Ne menjaj alatku"
 msgid "Download size: {0}"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:337
+#: ../Pinta.Core/Actions/LayerActions.cs:75
+#: ../Pinta.Core/Actions/LayerActions.cs:397
 msgid "Duplicate Layer"
 msgstr "Dupliciraj sloj"
 
@@ -684,11 +684,11 @@ msgstr "Ponašanje ivica"
 msgid "Edge Detect"
 msgstr "Otkrivanje ivice"
 
-#: ../Pinta/MainWindow.cs:383
+#: ../Pinta/MainWindow.cs:410
 msgid "Effe_cts"
 msgstr "_Efekti"
 
-#: ../Pinta/MainWindow.cs:411
+#: ../Pinta/MainWindow.cs:443
 msgid "Effects"
 msgstr ""
 
@@ -697,7 +697,7 @@ msgstr ""
 msgid "Electric"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -715,8 +715,8 @@ msgstr "Ugraviraj"
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:76
-#: ../Pinta.Core/Actions/EditActions.cs:264
+#: ../Pinta.Core/Actions/EditActions.cs:127
+#: ../Pinta.Core/Actions/EditActions.cs:368
 msgid "Erase Selection"
 msgstr "Izbriši selekciju"
 
@@ -732,7 +732,7 @@ msgstr "Greška"
 msgid "Error Diffusion Method"
 msgstr ""
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Exclude (-) (Right Click)"
 msgstr ""
 
@@ -754,7 +754,7 @@ msgstr "Faktor"
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:300
+#: ../Pinta/MainWindow.cs:318
 msgid "Failed to initialize add-in"
 msgstr ""
 
@@ -762,7 +762,7 @@ msgstr ""
 msgid "Failed to load extension package"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:477
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:464
 msgid "Failed to open image"
 msgstr ""
 
@@ -783,7 +783,7 @@ msgstr ""
 msgid "Feather Object"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:46
+#: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
 msgstr "Pošalji grešku"
 
@@ -791,7 +791,7 @@ msgstr "Pošalji grešku"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:266
+#: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Fill Background"
 msgstr "Ispuni pozadinu"
 
@@ -799,28 +799,28 @@ msgstr "Ispuni pozadinu"
 msgid "Fill Object Background"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:77
-#: ../Pinta.Core/Actions/EditActions.cs:216
+#: ../Pinta.Core/Actions/EditActions.cs:134
+#: ../Pinta.Core/Actions/EditActions.cs:320
 msgid "Fill Selection"
 msgstr "Popuni odabrano"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
 msgstr "Popuni oblik"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
 msgstr "Stil popune"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:310
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
 msgstr "Popuni i uokviri"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1096
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1380
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1097
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1381
 msgid "Finalized"
 msgstr ""
 
@@ -828,8 +828,8 @@ msgstr ""
 msgid "Finish Pixels"
 msgstr "Završi piksele"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:63
-#: ../Pinta.Core/Actions/ImageActions.cs:160
+#: ../Pinta.Core/Actions/ImageActions.cs:117
+#: ../Pinta.Core/Actions/ImageActions.cs:221
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
 msgid "Flatten"
 msgstr "Spljošti"
@@ -838,8 +838,8 @@ msgstr "Spljošti"
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr ""
 
-#: ../Pinta.Core/Actions/ImageActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:64
+#: ../Pinta.Core/Actions/ImageActions.cs:84
+#: ../Pinta.Core/Actions/LayerActions.cs:95
 msgid "Flip Horizontal"
 msgstr "Prevrni  horizontalno"
 
@@ -859,8 +859,8 @@ msgstr "Obrni sloj horizontalno"
 msgid "Flip Layer Vertical"
 msgstr "Obrni sloj vertikalno"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:65
+#: ../Pinta.Core/Actions/ImageActions.cs:90
+#: ../Pinta.Core/Actions/LayerActions.cs:101
 msgid "Flip Vertical"
 msgstr "Prevrni vertikalno"
 
@@ -878,7 +878,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:152
+#: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
 msgstr "Font"
 
@@ -898,7 +898,7 @@ msgstr "Slobodni oblik"
 msgid "Frosted Glass"
 msgstr "Zamrznuto staklo"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:83
+#: ../Pinta.Core/Actions/ViewActions.cs:164
 msgid "Fullscreen"
 msgstr "Pun ekran"
 
@@ -926,7 +926,7 @@ msgstr "Gradijent"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:690
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:446
 msgid "Green"
 msgstr "Zeleno"
 
@@ -938,14 +938,14 @@ msgstr "Mreža"
 msgid "Hard Light"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:91
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:170
 msgid "Height:"
 msgstr "Visina:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:623
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:329
 msgid "Hex"
 msgstr ""
 
@@ -978,11 +978,11 @@ msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:349
 msgid "Hue"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:557
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:253
 msgid "Hue & Sat"
 msgstr ""
 
@@ -998,7 +998,7 @@ msgstr ""
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Ukoliko ne sačuvate, sve promjene će biti trajno izgubljene"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:423
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:455
 msgid "Image"
 msgstr ""
 
@@ -1006,7 +1006,7 @@ msgstr ""
 msgid "Image Editor"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:75
+#: ../Pinta.Core/Actions/ViewActions.cs:112
 msgid "Image Tabs"
 msgstr ""
 
@@ -1014,7 +1014,7 @@ msgstr ""
 msgid "Image cannot be pasted"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta.Core/Actions/LayerActions.cs:241
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "Datoteka slike"
@@ -1027,15 +1027,15 @@ msgstr ""
 msgid "Image too large"
 msgstr ""
 
-#: ../Pinta.Core/Actions/LayerActions.cs:228
+#: ../Pinta.Core/Actions/LayerActions.cs:288
 msgid "Import From File"
 msgstr "Uvezi iz datoteke"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:63
+#: ../Pinta.Core/Actions/LayerActions.cs:89
 msgid "Import from File..."
 msgstr "Uvezi iz datoteke..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:144
+#: ../Pinta.Core/Actions/ViewActions.cs:228
 msgid "Inches"
 msgstr "Inči"
 
@@ -1083,7 +1083,7 @@ msgid "Intensity"
 msgstr "Intenzitet"
 
 #. Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
 msgstr ""
@@ -1093,12 +1093,12 @@ msgstr ""
 msgid "Invert Colors"
 msgstr "Izvrni boje"
 
-#: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:496
+#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:615
 msgid "Invert Selection"
 msgstr "Obrni izbor"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:200
 msgid "Italic"
 msgstr "Kurziv"
 
@@ -1140,7 +1140,7 @@ msgstr "Prozirnost sloja"
 msgid "Layer Properties"
 msgstr "Svojstva sloja"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:125
 msgid "Layer Properties..."
 msgstr "Svojstva sloja..."
 
@@ -1158,7 +1158,7 @@ msgstr ""
 msgid "Layers"
 msgstr "Slojevi"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:216
+#: ../Pinta.Tools/Tools/TextTool.cs:228
 msgid "Left Align"
 msgstr "Lijevo poravnanje"
 
@@ -1252,12 +1252,12 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:268
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:286
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Levi klik da podesite primarnu boju. Desni klik da postavite sekundarnu boju."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1282,12 +1282,12 @@ msgstr "Nivoi"
 msgid "Levels Adjustment"
 msgstr "Podešavanje nivoa"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:89
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:91
 msgid "License"
 msgstr "Licenca"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:250
 msgid "Light"
 msgstr ""
 
@@ -1337,7 +1337,7 @@ msgstr "Osvjetljenje"
 msgid "Magic Wand Select"
 msgstr "Biranje čarobnim štapićem"
 
-#: ../Pinta/MainWindow.cs:405
+#: ../Pinta/MainWindow.cs:437
 msgid "Main Menu"
 msgstr ""
 
@@ -1359,8 +1359,12 @@ msgstr ""
 msgid "Median"
 msgstr "Medijan"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:303
+#: ../Pinta.Core/Actions/ViewActions.cs:130
+msgid "Menu Bar"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:82
+#: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Spoji sloj sa slojem ispod"
 
@@ -1368,7 +1372,7 @@ msgstr "Spoji sloj sa slojem ispod"
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:913
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:914
 msgid "Modified"
 msgstr ""
 
@@ -1380,13 +1384,13 @@ msgstr ""
 msgid "Motion Blur"
 msgstr "Zamućenje pokreta"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:284
+#: ../Pinta.Core/Actions/LayerActions.cs:119
+#: ../Pinta.Core/Actions/LayerActions.cs:344
 msgid "Move Layer Down"
 msgstr "Pomjeri sloj nadolje"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:268
+#: ../Pinta.Core/Actions/LayerActions.cs:113
+#: ../Pinta.Core/Actions/LayerActions.cs:328
 msgid "Move Layer Up"
 msgstr "Pomjeri sloj nagore"
 
@@ -1410,16 +1414,16 @@ msgstr "Naziv:"
 msgid "Nearest Neighbor"
 msgstr ""
 
-#: ../Pinta.Core/Actions/FileActions.cs:59
+#: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New"
 msgstr "Novo"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:154
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:141
 #: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "Nova slika"
 
-#: ../Pinta.Core/Actions/FileActions.cs:51
+#: ../Pinta.Core/Actions/FileActions.cs:58
 msgid "New Screenshot..."
 msgstr "Nova slika zaslona..."
 
@@ -1443,7 +1447,7 @@ msgstr "Šum"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:263
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:275
 msgid "Normal"
 msgstr "Normalno"
 
@@ -1451,11 +1455,11 @@ msgstr "Normalno"
 msgid "Normal Blending"
 msgstr "Normalno mješanje"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:73
+#: ../Pinta.Core/Actions/ViewActions.cs:99
 msgid "Normal Size"
 msgstr "Normalna Veličina"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:264
+#: ../Pinta.Tools/Tools/TextTool.cs:276
 msgid "Normal and Outline"
 msgstr "Narmalno i skica"
 
@@ -1467,7 +1471,7 @@ msgstr ""
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:453
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:165
 msgid "OK"
 msgstr ""
 
@@ -1485,7 +1489,7 @@ msgstr ""
 msgid "Offset"
 msgstr "Pomak"
 
-#: ../Pinta.Core/Actions/EditActions.cs:79
+#: ../Pinta.Core/Actions/EditActions.cs:148
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
@@ -1499,7 +1503,7 @@ msgstr "Bojiti uljem"
 msgid "Opacity:"
 msgstr "Providnost:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:60
+#: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Open"
 msgstr "Otvori"
 
@@ -1507,25 +1511,25 @@ msgstr "Otvori"
 msgid "Open Curve Shape"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:358
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
 msgid "Open Image"
 msgstr "Otvori sliku"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta.Core/Actions/LayerActions.cs:259
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "Otvori datoteku slike"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
 msgid "Open Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
+#: ../Pinta.Core/Actions/EditActions.cs:495
 msgid "Open Palette File"
 msgstr "Otvori datoteku palete"
 
-#: ../Pinta.Core/Actions/EditActions.cs:83
-#: ../Pinta.Core/Actions/FileActions.cs:52
+#: ../Pinta.Core/Actions/EditActions.cs:169
+#: ../Pinta.Core/Actions/FileActions.cs:64
 msgid "Open..."
 msgstr "Otvori..."
 
@@ -1537,7 +1541,7 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:265
+#: ../Pinta.Tools/Tools/TextTool.cs:277
 msgid "Outline"
 msgstr "Kontura"
 
@@ -1553,12 +1557,12 @@ msgstr ""
 msgid "Outline Object"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
 msgstr "Oblik okvira"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:279
+#: ../Pinta.Tools/Tools/TextTool.cs:291
 msgid "Outline width"
 msgstr "Širina obrisa"
 
@@ -1586,12 +1590,12 @@ msgstr "Kantica sa bojom"
 msgid "Paintbrush"
 msgstr "Četka"
 
-#: ../Pinta.Core/Actions/EditActions.cs:133
+#: ../Pinta.Core/Actions/EditActions.cs:235
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:138
 msgid "Palette"
 msgstr "Paleta"
 
-#: ../Pinta.Core/Actions/EditActions.cs:457
+#: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
 msgstr ""
 
@@ -1600,17 +1604,17 @@ msgstr ""
 msgid "Pan"
 msgstr "Paniraj"
 
-#: ../Pinta.Core/Actions/EditActions.cs:73
+#: ../Pinta.Core/Actions/EditActions.cs:105
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste"
 msgstr "Zalijepi"
 
-#: ../Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Actions/EditActions.cs:120
 msgid "Paste Into New Image"
 msgstr "Nalijepi u novu sliku"
 
-#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:112
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste Into New Layer"
 msgstr "Zalepi u novi sloj"
@@ -1640,7 +1644,7 @@ msgid "Photo"
 msgstr "Fotografija"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:62
 msgid "Pinta"
 msgstr ""
 
@@ -1656,7 +1660,7 @@ msgstr ""
 msgid "Pinta Image Editor"
 msgstr ""
 
-#: ../Pinta.Core/Actions/HelpActions.cs:45
+#: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
 msgstr "Pinta web-stranica"
 
@@ -1673,11 +1677,11 @@ msgid ""
 "help organize your creativity."
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:458
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
 msgid "Pinta supports the following file formats:"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:195
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:168
 msgid "Pinta supports the following palette formats:"
 msgstr ""
 
@@ -1685,7 +1689,7 @@ msgstr ""
 msgid "Pixelate"
 msgstr "Pikselizacija"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Pixels"
 msgstr "Pikseli"
 
@@ -1694,12 +1698,16 @@ msgstr "Pikseli"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:802
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+msgid "Please restart Pinta for the changes to take effect."
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:600
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Point Added"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:650
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:651
 msgid "Point Deleted"
 msgstr ""
 
@@ -1745,7 +1753,7 @@ msgstr ""
 msgid "Primary"
 msgstr ""
 
-#: ../Pinta.Core/Actions/FileActions.cs:57
+#: ../Pinta.Core/Actions/FileActions.cs:93
 msgid "Print"
 msgstr "Štampaj"
 
@@ -1762,7 +1770,7 @@ msgstr "Kvaliteta"
 msgid "Quality: "
 msgstr "Kvaliteta: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:41
+#: ../Pinta.Core/Actions/AppActions.cs:47
 msgid "Quit"
 msgstr "Izađi"
 
@@ -1834,7 +1842,7 @@ msgstr "Izbor kvadrata"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:681
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:423
 msgid "Red"
 msgstr "Crveno"
 
@@ -1846,7 +1854,7 @@ msgstr "Crveno  "
 msgid "Red Eye Removal"
 msgstr "Uklanjanje crvenih očiju"
 
-#: ../Pinta.Core/Actions/EditActions.cs:69
+#: ../Pinta.Core/Actions/EditActions.cs:77
 msgid "Redo"
 msgstr "Ponovi"
 
@@ -1862,7 +1870,7 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:90
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:92
 msgid "Released under the MIT X11 License."
 msgstr "Objavljeno pod MIT X11 Licencom."
 
@@ -1881,11 +1889,11 @@ msgstr "Preimenuj sloj"
 msgid "Render"
 msgstr "Generisanje"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:186
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
 msgstr "Efekat renderovanja"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:43
 msgid "Replace"
 msgstr ""
 
@@ -1906,11 +1914,11 @@ msgstr "Posej ponovo"
 msgid "Reset"
 msgstr "Resetuj"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:155
 msgid "Reset Color"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:85
+#: ../Pinta.Core/Actions/EditActions.cs:181
 msgid "Reset to Default"
 msgstr "Resetuj na podrazumevano"
 
@@ -1919,7 +1927,7 @@ msgstr "Resetuj na podrazumevano"
 msgid "Resize Canvas"
 msgstr "Promjeni veličinu platna"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:57
+#: ../Pinta.Core/Actions/ImageActions.cs:77
 msgid "Resize Canvas..."
 msgstr "Promjeni veličinu platna"
 
@@ -1928,13 +1936,17 @@ msgstr "Promjeni veličinu platna"
 msgid "Resize Image"
 msgstr "Promijeni veličinu slike"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:56
+#: ../Pinta.Core/Actions/ImageActions.cs:70
 msgid "Resize Image..."
 msgstr "Promjeni veličinu slike..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:60
 msgid "Resize Palette"
 msgstr "Promjeni veličinu palete"
+
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
+msgid "Restart Pinta"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
@@ -1947,7 +1959,7 @@ msgstr ""
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:240
+#: ../Pinta.Tools/Tools/TextTool.cs:252
 msgid "Right Align"
 msgstr "Desno poravnanje"
 
@@ -1956,21 +1968,21 @@ msgstr "Desno poravnanje"
 msgid "Rotate / Zoom Layer"
 msgstr "Rotiraj / Uvećaj sloj"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:66
+#: ../Pinta.Core/Actions/LayerActions.cs:107
 msgid "Rotate / Zoom Layer..."
 msgstr "Rotiraj / Uvećaj sloj..."
 
-#: ../Pinta.Core/Actions/ImageActions.cs:62
+#: ../Pinta.Core/Actions/ImageActions.cs:110
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:47
 msgid "Rotate 180°"
 msgstr "Rotiraj 180°"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:60
+#: ../Pinta.Core/Actions/ImageActions.cs:96
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:59
 msgid "Rotate 90° Clockwise"
 msgstr "Rotiraj 90° u pravcu kazaljke na satu"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:61
+#: ../Pinta.Core/Actions/ImageActions.cs:103
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:63
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "Rotiraj 90° suprotno od pravca kazaljke na satu"
@@ -1980,7 +1992,7 @@ msgstr "Rotiraj 90° suprotno od pravca kazaljke na satu"
 msgid "Rotation"
 msgstr "Rotacija"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
 msgid "Rounded Line Series"
 msgstr ""
 
@@ -1992,11 +2004,11 @@ msgstr ""
 msgid "Rounded Rectangle"
 msgstr "Zaobljen pravougaonik"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:148
+#: ../Pinta.Core/Actions/ViewActions.cs:232
 msgid "Ruler Units"
 msgstr "Jedinice lenjira"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:80
+#: ../Pinta.Core/Actions/ViewActions.cs:148
 msgid "Rulers"
 msgstr "Lenjiri"
 
@@ -2004,11 +2016,11 @@ msgstr "Lenjiri"
 msgid "Sampling"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:377
 msgid "Sat"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:568
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:264
 msgid "Sat & Value"
 msgstr ""
 
@@ -2021,18 +2033,18 @@ msgstr ""
 msgid "Saturation Percentage"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:410
-#: ../Pinta.Core/Actions/FileActions.cs:55
+#: ../Pinta.Core/Actions/EditActions.cs:529
+#: ../Pinta.Core/Actions/FileActions.cs:79
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
 msgstr "Sačuvaj"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:45
+#: ../Pinta.Core/Actions/WindowActions.cs:47
 msgid "Save All"
 msgstr "Sačuvaj sve"
 
-#: ../Pinta.Core/Actions/EditActions.cs:84
-#: ../Pinta.Core/Actions/FileActions.cs:56
+#: ../Pinta.Core/Actions/EditActions.cs:175
+#: ../Pinta.Core/Actions/FileActions.cs:86
 msgid "Save As..."
 msgstr "Sačuvaj kao..."
 
@@ -2040,7 +2052,7 @@ msgstr "Sačuvaj kao..."
 msgid "Save Image File"
 msgstr "Sačuvaj datoteku slike"
 
-#: ../Pinta.Core/Actions/EditActions.cs:407
+#: ../Pinta.Core/Actions/EditActions.cs:526
 msgid "Save Palette File"
 msgstr "Sačuvaj Datoteku Palete"
 
@@ -2061,8 +2073,8 @@ msgstr ""
 msgid "Secondary"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:80
-#: ../Pinta.Core/Actions/EditActions.cs:232
+#: ../Pinta.Core/Actions/EditActions.cs:155
+#: ../Pinta.Core/Actions/EditActions.cs:336
 msgid "Select All"
 msgstr "Izaberi sve"
 
@@ -2074,11 +2086,11 @@ msgstr ""
 msgid "Sepia"
 msgstr "Sepia"
 
-#: ../Pinta.Core/Actions/EditActions.cs:86
+#: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Set Number of Colors"
 msgstr "Postavi broj boja"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
 msgid "Shape Type"
 msgstr ""
 
@@ -2090,13 +2102,18 @@ msgstr ""
 msgid "Sharpen"
 msgstr "Izoštri"
 
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:487
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Shortcut key"
 msgstr "Prečica"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
+msgid "Shortcut keys"
+msgstr ""
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:19
 msgid "Show Grid"
 msgstr ""
 
@@ -2104,11 +2121,11 @@ msgstr ""
 msgid "Show Layer"
 msgstr "Prikaži sloj"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:550
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:245
 msgid "Show Value"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:159
+#: ../Pinta.Core/Actions/ViewActions.cs:244
 msgid "Show/Hide"
 msgstr ""
 
@@ -2154,7 +2171,7 @@ msgstr "Nasumično"
 msgid "Squares"
 msgstr "Kvadrati"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:78
+#: ../Pinta.Core/Actions/ViewActions.cs:136
 msgid "Status Bar"
 msgstr ""
 
@@ -2191,12 +2208,12 @@ msgstr "Tekst"
 msgid "Text - Finalize"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:254
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Text Style"
 msgstr "Stil teksta"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:297
+#: ../Pinta/MainWindow.cs:315
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
@@ -2295,15 +2312,15 @@ msgstr "Tolerancija"
 msgid "Tool"
 msgstr "Alat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:76
+#: ../Pinta.Core/Actions/ViewActions.cs:118
 msgid "Tool Windows"
 msgstr "Prozori alatki"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:74
+#: ../Pinta.Core/Actions/ViewActions.cs:106
 msgid "Toolbar"
 msgstr "Alatna traka"
 
@@ -2323,7 +2340,7 @@ msgstr ""
 msgid "Transfer Map"
 msgstr "Mapa prenosa"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:47
+#: ../Pinta.Core/Actions/HelpActions.cs:65
 msgid "Translate This Application"
 msgstr "Prevedi aplikaciju"
 
@@ -2354,11 +2371,11 @@ msgstr ""
 msgid "Type"
 msgstr "Vrsta"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:200
+#: ../Pinta.Tools/Tools/TextTool.cs:212
 msgid "Underline"
 msgstr "Podvučeno"
 
-#: ../Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Undo"
 msgstr "Poništi"
 
@@ -2376,7 +2393,7 @@ msgid "Uninstall..."
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
 msgstr ""
@@ -2386,11 +2403,11 @@ msgstr ""
 msgid "Unsaved Image {0}"
 msgstr "Nesačuvana slika {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:353
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:340
 msgid "Unsupported file format"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Palette.cs:155
+#: ../Pinta.Core/Actions/EditActions.cs:518
 msgid "Unsupported palette format"
 msgstr ""
 
@@ -2410,11 +2427,11 @@ msgstr ""
 "Koristite malu kvalitetu za preglede, male slike i male uglove. Koristite "
 "veliku kvalitetu za finalnu kvalitetu, veće slike i veće uglove."
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:97
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:99
 msgid "Using some icons from:"
 msgstr "Koristi neke ikonice sa:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:670
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:400
 msgid "Value"
 msgstr ""
 
@@ -2438,6 +2455,10 @@ msgstr ""
 msgid "Vertical red (R)"
 msgstr ""
 
+#: ../Pinta/MainWindow.cs:461
+msgid "View"
+msgstr ""
+
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
@@ -2459,15 +2480,15 @@ msgstr "Toplina"
 msgid "White"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:41
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:83
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:163
 msgid "Width:"
 msgstr "Širina:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:123
-#: ../Pinta.Core/Actions/ViewActions.cs:306
+#: ../Pinta.Core/Actions/ViewActions.cs:207
+#: ../Pinta.Core/Actions/ViewActions.cs:398
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:377
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:386
 msgid "Window"
@@ -2482,13 +2503,13 @@ msgid "Xor"
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:480
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:467
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr ""
@@ -2511,24 +2532,24 @@ msgstr "Uvećaj"
 msgid "Zoom Blur"
 msgstr "Zamućenje uveličanja"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:69
+#: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Zoom In"
 msgstr "Uvećaj"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:70
+#: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Zoom Out"
 msgstr "Umanji"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:93
 msgid "Zoom to Selection"
 msgstr "Uvećaj na označeno"
 
-#: ../Pinta/MainWindow.cs:379
+#: ../Pinta/MainWindow.cs:406
 msgid "_Adjustments"
 msgstr "_Postavke"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:189
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:191
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
@@ -2540,28 +2561,28 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:362
+#: ../Pinta/MainWindow.cs:386
 msgid "_Edit"
 msgstr "_Izmijeni..."
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:382
 msgid "_File"
 msgstr "Datoteka"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:422
 msgid "_Help"
 msgstr "_Pomoć"
 
-#: ../Pinta/MainWindow.cs:371
+#: ../Pinta/MainWindow.cs:396
 msgid "_Image"
 msgstr "_Slika"
 
-#: ../Pinta/MainWindow.cs:375
+#: ../Pinta/MainWindow.cs:400
 msgid "_Layers"
 msgstr "_Slojevi"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:188
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:192
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
@@ -2571,15 +2592,15 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:391
 msgid "_View"
 msgstr "_Prikaz"
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:418
 msgid "_Window"
 msgstr "_Prozor"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:81
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:83
 msgid "by Pinta contributors"
 msgstr "od pomagača Pinte"
 
@@ -2587,8 +2608,8 @@ msgstr "od pomagača Pinte"
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
 #: ../Pinta/Dialogs/NewImageDialog.cs:277
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:106
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
@@ -2619,7 +2640,7 @@ msgstr ""
 msgid "{0} copy"
 msgstr ""
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:118
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:123
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} slika ({1})"
@@ -2632,7 +2653,7 @@ msgstr ""
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:287
+#: ../Pinta.Core/Actions/ViewActions.cs:379
 #, csharp-format
 msgid "{0}%"
 msgstr ""

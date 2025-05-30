@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-06 01:45+0000\n"
-"PO-Revision-Date: 2024-06-27 14:09+0000\n"
-"Last-Translator: Istvan Balogh <battlepuli@proton.me>\n"
+"POT-Creation-Date: 2025-05-25 00:30+0000\n"
+"PO-Revision-Date: 2025-04-22 02:13+0000\n"
+"Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/pinta/pinta/hu/"
 ">\n"
 "Language: hu\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.11.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
 msgstr " (a felhasználói könyvtárban)"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
 msgid " Selection Mode: "
-msgstr " Kiválasztási mód: "
+msgstr " Kijelölés módja: "
 
-#: ../Pinta.Core/Managers/EffectsManager.cs:70
-#: ../Pinta.Core/Managers/EffectsManager.cs:104
+#: ../Pinta.Core/Managers/EffectsManager.cs:95
+#: ../Pinta.Core/Managers/EffectsManager.cs:150
 msgid "..."
 msgstr "…"
 
@@ -49,23 +49,23 @@ msgstr "7x7-es terület"
 msgid "9 x 9 Region"
 msgstr "9x9-es terület"
 
-#: ../Pinta/MainWindow.cs:387
+#: ../Pinta/MainWindow.cs:414
 msgid "A_dd-ins"
-msgstr ""
+msgstr "_Bővítmények"
 
-#: ../Pinta.Core/Actions/AppActions.cs:40
+#: ../Pinta.Core/Actions/AppActions.cs:42
 msgid "About"
 msgstr "Névjegy"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:64
 msgid "About Pinta"
-msgstr "Pinta névjegye"
+msgstr "A Pinta névjegye"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:371
+#: ../Pinta.Core/Actions/LayerActions.cs:61
+#: ../Pinta.Core/Actions/LayerActions.cs:431
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
-msgstr "Új réteg létrehozása"
+msgstr "Új réteg hozzáadása"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:25
 msgid "Add Noise"
@@ -73,15 +73,15 @@ msgstr "Zaj hozzáadása"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr "Bővítmény Kezelő..."
+msgstr "Bővítménykezelő…"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:832
 msgid "Added"
-msgstr ""
+msgstr "Hozzáadva"
 
-#: ../Pinta/MainWindow.cs:417
+#: ../Pinta/MainWindow.cs:449
 msgid "Adjustments"
-msgstr ""
+msgstr "Igazítások"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
@@ -90,21 +90,21 @@ msgstr "Kijelölés után"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
 msgid "Align Object"
-msgstr ""
+msgstr "Objektum igazítása"
 
-#: ../Pinta.Core/Actions/EditActions.cs:474
+#: ../Pinta.Core/Actions/EditActions.cs:593
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
-msgstr "Minden fájl"
+msgstr "Összes fájl"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:709
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:492
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:211
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Alfa színátmenet"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:117
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:147
@@ -122,7 +122,7 @@ msgstr "Horgony:"
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:120
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:145
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:78
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:316
@@ -136,15 +136,15 @@ msgstr "Élsimítás"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:358
 msgid "Antialiasing Off"
-msgstr "AA élsímítás ki"
+msgstr "Élsimítás ki"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:357
 msgid "Antialiasing On"
-msgstr "AA élsímítás be"
+msgstr "Élsimítás be"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:268
 msgid "Arrow"
-msgstr ""
+msgstr "Nyíl"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:37
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
@@ -155,53 +155,53 @@ msgstr "Művészi"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:256
 msgid "Auto"
 msgstr "Automatikus"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:55
+#: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Auto Crop"
 msgstr "Automatikus vágás"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:24
 msgid "Auto Level"
-msgstr "Automatikus szintek"
+msgstr "Automatikus szint"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:227
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "Elérhető a tárolóban: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:146
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:133
 msgid "Background"
 msgstr "Háttér"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:127
 msgid "Background Color"
-msgstr ""
+msgstr "Háttérszín"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:307
 msgid "Background:"
-msgstr ""
+msgstr "Háttér:"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:93
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:95
 msgid "Based on the work of Paint.NET:"
-msgstr "Az alkalmazás a Paint.NET projekten alapul:"
+msgstr "A Paint.NET projekt alapján:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Gyönyörű Olaszország"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:71
+#: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Best Fit"
 msgstr "Legjobb illeszkedés"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilineáris"
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
@@ -211,11 +211,11 @@ msgstr "Fekete-fehér"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:82
 msgid "Blend Mode"
-msgstr "Keverék mód"
+msgstr "Keverési mód"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:699
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:469
 msgid "Blue"
 msgstr "Kék"
 
@@ -232,42 +232,42 @@ msgstr "Kék "
 msgid "Blurs"
 msgstr "Elmosások"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Bold"
 msgstr "Félkövér"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
-msgstr ""
+msgstr "Máglya"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "Lent középen"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "Lent balra"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "Lent jobbra"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:148
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
 msgstr "Fényerő"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
-msgstr "Fényerő / Kontraszt"
+msgstr "Fényerő/kontraszt"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:148
 msgid "Brush Size"
 msgstr "Ecsetméret"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:270
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:123
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:122
 msgid "Brush width"
 msgstr "Ecsetvastagság"
 
@@ -278,36 +278,36 @@ msgstr "Kidudorodás"
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Burkes"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:184
 msgid "By absolute size:"
-msgstr "Méret alapján:"
+msgstr "Abszolút méret szerint:"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:67
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:177
 msgid "By percentage:"
-msgstr "Százalékos:"
+msgstr "Százalék szerint:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:411
+#: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:169
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
 #: ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
-msgstr ""
+msgstr "Vászon"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:61
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "Vászonrács beállításai"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:77
+#: ../Pinta.Core/Actions/ViewActions.cs:124
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Vászonrács…"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
@@ -315,15 +315,15 @@ msgstr "Cellaméret"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "Középre"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:228
+#: ../Pinta.Tools/Tools/TextTool.cs:240
 msgid "Center Align"
 msgstr "Középre igazítás"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "Középen balra"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:156
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
@@ -332,121 +332,127 @@ msgstr "Középpont eltolása"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "Középen jobbra"
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:126
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:151
 msgid "Centered"
 msgstr "Középen"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:145
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Centimeters"
 msgstr "Centiméter"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Ecsetvastagság megváltoztatása. Gyorsbillentyű: [ ]"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:355
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:356
 msgid "Changed Shape Type"
-msgstr ""
+msgstr "Alakzattípus megváltoztatva"
 
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:36
 msgid "Cherry Blossom"
-msgstr ""
+msgstr "Cseresznyevirág"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:632
 msgid "Choose Color"
-msgstr ""
+msgstr "Szín kiválasztása"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:111
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
-msgstr "Színpaletta kiválasztása"
+msgstr "Palettaszín kiválasztása"
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:36
 msgid "Circles"
-msgstr "Körecset"
+msgstr "Körök"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
-msgstr ""
+msgstr "Rögzítő"
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:42
 msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
+"Kattintson és húzzon egy téglalap alakú kijelölés rajzolásához.\n"
+"Tartsa lenyomva a Shift billentyűt egy négyzetre való korlátozáshoz."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
 msgstr ""
+"Kattintson és húzzon egy ellipszis alakú kijelölés rajzolásához.\n"
+"Tartsa lenyomva a Shift billentyűt egy körre való korlátozáshoz."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:51
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
 msgstr ""
+"Kattintson és húzzon az elsődleges színből a másodlagos színbe való átmenet "
+"rajzolásához.\n"
+"Kattintson a jobb egérgombbal a megfordításhoz."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
 msgid "Click and drag to draw the outline for a selection area."
-msgstr "Kattintson és húzz az egeret a kijelöléshez."
+msgstr "Kattintson és húzzon egy kijelölési terület körvonalának rajzolásához."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
-msgstr "Kattintson és húzza a kép navigálásához."
+msgstr "Kattintson és húzzon a kép navigálásához."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:300
 msgid "Click to reset primary and secondary color."
-msgstr ""
-"Kattints, hogy az elsődleges és másodlagos színeket alapértékekre állísd"
+msgstr "Kattintson az elsődleges és a másodlagos szín visszaállításához."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:289
 msgid "Click to select primary color."
-msgstr "Elsődleges szín kiválasztása"
+msgstr "Kattintson az elsődleges szín kiválasztásához."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:49
 msgid "Click to select region of similar color."
-msgstr "Kattintson a hasonló színű terület kiválasztásához."
+msgstr "Kattintson a hasonló színű terület kijelöléséhez."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:292
 msgid "Click to select secondary color."
-msgstr "Másodlagos szín kiválasztása"
+msgstr "Kattintson a másodlagos szín kiválasztásához."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:277
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:196
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:295
 msgid "Click to switch between primary and secondary color."
-msgstr ""
+msgstr "Kattintson az elsődleges és a másodlagos szín közötti váltáshoz."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
 #: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:440
-#: ../Pinta/Dialogs/NewImageDialog.cs:533
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
-msgstr ""
+msgstr "Vágólap"
 
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:46
 msgid "Clone Stamp"
 msgstr "Klónozó bélyegző"
 
-#: ../Pinta.Core/Actions/FileActions.cs:54
+#: ../Pinta.Core/Actions/FileActions.cs:72
 #: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
 msgstr "Bezárás"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:46
+#: ../Pinta.Core/Actions/WindowActions.cs:54
 msgid "Close All"
 msgstr "Összes bezárása"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:37
 msgid "Closed Curve Shape"
-msgstr ""
+msgstr "Zárt görbealakzat"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 msgid "Closed Line/Curve Series"
-msgstr ""
+msgstr "Zárt vonal/görbe sorozatok"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:32
 msgid "Clouds"
@@ -459,7 +465,7 @@ msgstr "Durvaság"
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:15
 msgid "Color"
-msgstr ""
+msgstr "Szín"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 msgid "Color Burn"
@@ -471,13 +477,13 @@ msgstr "Színkikerülés"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:214
 msgid "Color Gradient"
-msgstr ""
+msgstr "Színátmenet"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
-msgstr ""
+msgstr "Színmód"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:305
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:327
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Színválasztó"
@@ -490,22 +496,22 @@ msgstr "Színtartomány"
 msgid "Color Saturation"
 msgstr "Színtelítettséget"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:170
+#: ../Pinta.Core/Actions/ViewActions.cs:255
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
 msgid "Color Scheme"
-msgstr ""
+msgstr "Színséma"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
 msgid "Color Scheme Source"
-msgstr ""
+msgstr "Színséma forrása"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:260
 msgid "Color Sorting"
-msgstr ""
+msgstr "Színrendezés"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:160
 msgid "Coloring"
@@ -515,61 +521,61 @@ msgstr "Színezés"
 msgid "Conical Gradient"
 msgstr "Kúpos színátmenet"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:44
+#: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "Contents"
-msgstr ""
+msgstr "Tartalom"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:133
 msgid "Contiguous"
 msgstr "Egybefüggő"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:158
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
 msgstr "Kontraszt"
 
-#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:91
 msgid "Copy"
 msgstr "Másolás"
 
-#: ../Pinta.Core/Actions/EditActions.cs:72
+#: ../Pinta.Core/Actions/EditActions.cs:98
 msgid "Copy Merged"
-msgstr "Másolat beolvasztva"
+msgstr "Másolat egyesítve"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:80
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Copyright"
 msgstr "Szerzői jog"
 
 #. Translators: Gradient with the colors of blue and pink cotton candy
 #: ../Pinta.Effects/Effects/GradientHelper.cs:40
 msgid "Cotton Candy"
-msgstr ""
+msgstr "Vattacukor"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:125
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr ""
+msgstr "Nem sikerült a(z) „{0}” réteg importálása innen: {1}"
 
-#: ../Pinta.Core/Classes/Palette.cs:194
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:167
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "Nem sikerült a fájl megnyitása: {0}"
+msgstr "Nem sikerült megnyitni a fájlt: {0}"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
 msgid "Coverage"
 msgstr "Terjedelem"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:54
-#: ../Pinta.Core/Actions/ImageActions.cs:234
+#: ../Pinta.Core/Actions/ImageActions.cs:56
+#: ../Pinta.Core/Actions/ImageActions.cs:295
 msgid "Crop to Selection"
-msgstr "Kijelölés méretére vágása"
+msgstr "Vágás a kijelölésre"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
-msgstr ""
+msgstr "Görbe"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:138
@@ -578,20 +584,20 @@ msgstr "Görbék"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
 #: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:442
-#: ../Pinta/Dialogs/NewImageDialog.cs:533
+#: ../Pinta/Dialogs/NewImageDialog.cs:438
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
-msgstr ""
+msgstr "Egyéni"
 
-#: ../Pinta.Core/Actions/EditActions.cs:70
-#: ../Pinta.Core/Actions/EditActions.cs:263
+#: ../Pinta.Core/Actions/EditActions.cs:84
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Cut"
 msgstr "Kivágás"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:167
+#: ../Pinta.Core/Actions/ViewActions.cs:252
 msgid "Dark"
-msgstr ""
+msgstr "Sötét"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
@@ -599,34 +605,34 @@ msgstr "Sötétítés"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:59
 msgid "Dash"
-msgstr ""
+msgstr "Mínusz"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:163
+#: ../Pinta.Core/Actions/ViewActions.cs:248
 msgid "Default"
-msgstr ""
+msgstr "Alapértelmezett"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:350
+#: ../Pinta.Core/Actions/LayerActions.cs:68
+#: ../Pinta.Core/Actions/LayerActions.cs:410
 msgid "Delete Layer"
 msgstr "Réteg törlése"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:669
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:670
 msgid "Deleted"
-msgstr ""
+msgstr "Törölve"
 
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:50
 msgid "Dents"
-msgstr ""
+msgstr "Behorpadások"
 
-#: ../Pinta.Core/Actions/EditActions.cs:278
+#: ../Pinta.Core/Actions/EditActions.cs:382
 msgid "Deselect"
 msgstr "Kijelölés megszüntetése"
 
-#: ../Pinta.Core/Actions/EditActions.cs:81
+#: ../Pinta.Core/Actions/EditActions.cs:162
 msgid "Deselect All"
-msgstr "Kijelölés megszüntetése"
+msgstr "Összes kijelölésének megszüntetése"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:66
 msgid "Details"
@@ -637,13 +643,13 @@ msgid "Difference"
 msgstr "Különbség"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:137
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:123
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:148
 msgid "Distance"
 msgstr "Távolság"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:252
 msgid "Distance Metric"
-msgstr ""
+msgstr "Távolságmetrika"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:28
 #: ../Pinta.Effects/Effects/DentsEffect.cs:53
@@ -657,7 +663,7 @@ msgstr "Torzítás"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:12
 msgid "Dithering"
-msgstr ""
+msgstr "Zajmoduláció"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
@@ -666,16 +672,16 @@ msgstr "Ne váltson eszközt"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:221
 #, csharp-format
 msgid "Download size: {0}"
-msgstr ""
+msgstr "Letöltési méret: {0}"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:337
+#: ../Pinta.Core/Actions/LayerActions.cs:75
+#: ../Pinta.Core/Actions/LayerActions.cs:397
 msgid "Duplicate Layer"
-msgstr "Réteg duplikálása"
+msgstr "Réteg kettőzése"
 
 #: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Easily create and edit images"
-msgstr "Készíts és szerkessz képeket könnyedén"
+msgstr "Képek egyszerű létrehozása és szerkesztése"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:238 Polar Inversion dialog
 msgid "Edge Behavior"
@@ -683,22 +689,22 @@ msgstr "Szélek viselkedése"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
 msgid "Edge Detect"
-msgstr "Élek észlelése"
+msgstr "Szélek felismerése"
 
-#: ../Pinta/MainWindow.cs:383
+#: ../Pinta/MainWindow.cs:410
 msgid "Effe_cts"
-msgstr "_Effektusok"
+msgstr "_Hatások"
 
-#: ../Pinta/MainWindow.cs:411
+#: ../Pinta/MainWindow.cs:443
 msgid "Effects"
-msgstr ""
+msgstr "Hatások"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
 msgid "Electric"
-msgstr ""
+msgstr "Elektromos"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -706,7 +712,7 @@ msgstr "Ellipszis"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:39
 msgid "Ellipse Select"
-msgstr "Ellipszis-kijelölés"
+msgstr "Ellipszis kijelölés"
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:27
 msgid "Emboss"
@@ -715,9 +721,10 @@ msgstr "Domborítás"
 #: ../Pinta/Main.cs:65
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
+"További naplózás vagy viselkedésváltozások engedélyezése a hibakereséshez"
 
-#: ../Pinta.Core/Actions/EditActions.cs:76
-#: ../Pinta.Core/Actions/EditActions.cs:264
+#: ../Pinta.Core/Actions/EditActions.cs:127
+#: ../Pinta.Core/Actions/EditActions.cs:368
 msgid "Erase Selection"
 msgstr "Kijelölés törlése"
 
@@ -731,20 +738,20 @@ msgstr "Hiba"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:135
 msgid "Error Diffusion Method"
-msgstr ""
+msgstr "Hibadiffúziós módszer"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Exclude (-) (Right Click)"
-msgstr "Leválaszt (-) (Jobb kattintás)"
+msgstr "Kihagyás (-) (jobb kattintás)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:227
 msgid "Expand"
-msgstr ""
+msgstr "Kinyitás"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
-msgstr ""
+msgstr "Bővítménycsomagok"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
@@ -753,94 +760,94 @@ msgstr "Tényező"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:85
 msgid "Failed to access XDG Desktop Portals"
-msgstr ""
+msgstr "Nem sikerült hozzáférni az XDG asztali portálhoz"
 
-#: ../Pinta/MainWindow.cs:300
+#: ../Pinta/MainWindow.cs:318
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Nem sikerült előkészíteni a bővítményt"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:199
 msgid "Failed to load extension package"
-msgstr ""
+msgstr "Nem sikerült betölteni a bővítménycsomagot"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:477
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:464
 msgid "Failed to open image"
-msgstr ""
+msgstr "Nem sikerült megnyitni a képet"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
 msgid "Failed to save image"
-msgstr ""
+msgstr "Nem sikerült elmenteni a képet"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:84
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:109
 msgid "Failed to take screenshot"
-msgstr ""
+msgstr "Nem sikerült képernyőképet készíteni"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:174
 msgid "Feather Canvas Edge"
-msgstr ""
+msgstr "Tollvászon széle"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:19
 msgid "Feather Object"
-msgstr ""
+msgstr "Tollobjektum"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:46
+#: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
 msgstr "Hibajelentés"
 
 #: ../Pinta/Main.cs:61
 msgid "Files to open"
-msgstr ""
+msgstr "Megnyitandó fájlok"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:266
+#: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Fill Background"
 msgstr "Háttér kitöltése"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:220
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Objektum hátterének kitöltése"
 
-#: ../Pinta.Core/Actions/EditActions.cs:77
-#: ../Pinta.Core/Actions/EditActions.cs:216
+#: ../Pinta.Core/Actions/EditActions.cs:134
+#: ../Pinta.Core/Actions/EditActions.cs:320
 msgid "Fill Selection"
 msgstr "Kijelölés kitöltése"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
 msgstr "Alakzat kitöltése"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
 msgstr "Kitöltési stílus"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:310
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
-msgstr "Alakzat kitöltése és körvonala"
+msgstr "Alakzat kitöltése és körberajzolása"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1096
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1380
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1097
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1381
 msgid "Finalized"
-msgstr ""
+msgstr "Véglegesítve"
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:41
 msgid "Finish Pixels"
 msgstr "Befejező képpontok"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:63
-#: ../Pinta.Core/Actions/ImageActions.cs:160
+#: ../Pinta.Core/Actions/ImageActions.cs:117
+#: ../Pinta.Core/Actions/ImageActions.cs:221
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
 msgid "Flatten"
-msgstr "Rétegek egybeolvasztása"
+msgstr "Lapítás"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:161
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "A kép lapítása az összes réteget egyetlen réteggé egyesíti."
 
-#: ../Pinta.Core/Actions/ImageActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:64
+#: ../Pinta.Core/Actions/ImageActions.cs:84
+#: ../Pinta.Core/Actions/LayerActions.cs:95
 msgid "Flip Horizontal"
 msgstr "Vízszintes tükrözés"
 
@@ -860,28 +867,28 @@ msgstr "Réteg tükrözése vízszintesen"
 msgid "Flip Layer Vertical"
 msgstr "Réteg tükrözése függőlegesen"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:65
+#: ../Pinta.Core/Actions/ImageActions.cs:90
+#: ../Pinta.Core/Actions/LayerActions.cs:101
 msgid "Flip Vertical"
 msgstr "Függőleges tükrözés"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:123
 msgid "Flood Mode"
-msgstr "Elöntés"
+msgstr "Elöntés módja"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "Floyd-Steinberg"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr ""
+msgstr "Egyszerű Floyd-Steinberg"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:152
+#: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
-msgstr "Betűtípus"
+msgstr "Betűkészlet"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:28
 msgid "Fragment"
@@ -893,13 +900,13 @@ msgstr "Töredékek"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:51
 msgid "Freeform Shape"
-msgstr "Szabad alakzat"
+msgstr "Szabad formájú alakzat"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:24
 msgid "Frosted Glass"
 msgstr "Fagyos üveg"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:83
+#: ../Pinta.Core/Actions/ViewActions.cs:164
 msgid "Fullscreen"
 msgstr "Teljes képernyő"
 
@@ -913,7 +920,7 @@ msgstr "Gauss-elmosás"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:134
 msgid "Global"
-msgstr "Általános"
+msgstr "Globális"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:27
 msgid "Glow"
@@ -927,7 +934,7 @@ msgstr "Színátmenet"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:690
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:446
 msgid "Green"
 msgstr "Zöld"
 
@@ -937,18 +944,18 @@ msgstr "Rács"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:41
 msgid "Hard Light"
-msgstr ""
+msgstr "Kemény fény"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:91
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:170
 msgid "Height:"
 msgstr "Magasság:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:623
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:329
 msgid "Hex"
-msgstr ""
+msgstr "Hexadecimális"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Hide Layer"
@@ -956,7 +963,9 @@ msgstr "Réteg elrejtése"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
 msgid "Hint: For best results, first use selection tools to select each eye."
-msgstr "Tipp: A jobb eredményhez jelölje ki a képen található szemeket."
+msgstr ""
+"Tipp: a legjobb eredmény eléréséhez először használja a kijelölő eszközöket "
+"a szemek kijelöléséhez."
 
 #: ../Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -965,41 +974,41 @@ msgstr "Előzmények"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:291
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "Vízszintes kék (K)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:294
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "Vízszintes zöld (Z)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:297
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "Vízszintes piros (P)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:349
 msgid "Hue"
-msgstr ""
+msgstr "Árnyalat"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:557
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:253
 msgid "Hue & Sat"
-msgstr ""
+msgstr "Árnyalat és telítettség"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
-msgstr "Színezet / Telítettség"
+msgstr "Árnyalat/telítettség"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "Az ICO fájlok nem lehetnek nagyobbak 255x255 képpontnál."
+msgstr "Az ICO-fájlok nem lehetnek nagyobbak 255x255 képpontnál."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
-msgstr "Ha nem menti, akkor minden változtatás véglegesen elvész."
+msgstr "Ha nem menti, akkor az összes változtatás véglegesen elvész."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:423
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:455
 msgid "Image"
 msgstr "Kép"
 
@@ -1007,36 +1016,36 @@ msgstr "Kép"
 msgid "Image Editor"
 msgstr "Képszerkesztő"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:75
+#: ../Pinta.Core/Actions/ViewActions.cs:112
 msgid "Image Tabs"
-msgstr ""
+msgstr "Képlapok"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "Image cannot be pasted"
-msgstr "A kép nem illeszthető be"
+msgstr "A képet nem lehet beilleszteni"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta.Core/Actions/LayerActions.cs:241
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "Képfájlok"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid "Image larger than canvas"
-msgstr "A kép nagyobb, mint a vászon"
+msgstr "A kép nagyobb a vászonnál"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
 msgid "Image too large"
 msgstr "A kép túl nagy"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:228
+#: ../Pinta.Core/Actions/LayerActions.cs:288
 msgid "Import From File"
 msgstr "Importálás fájlból"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:63
+#: ../Pinta.Core/Actions/LayerActions.cs:89
 msgid "Import from File..."
 msgstr "Importálás fájlból…"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:144
+#: ../Pinta.Core/Actions/ViewActions.cs:228
 msgid "Inches"
 msgstr "Hüvelyk"
 
@@ -1046,7 +1055,7 @@ msgstr "Tinta körvonala"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
-msgstr "Tinta vázlat"
+msgstr "Tintavázlat"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Input"
@@ -1063,7 +1072,7 @@ msgstr "Telepítés"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Bővítménycsomag telepítése"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
 msgid "Install from file..."
@@ -1084,22 +1093,22 @@ msgid "Intensity"
 msgstr "Intenzitás"
 
 #. Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
-msgstr ""
+msgstr "Metszet ({0} + bal kattintás)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
 msgid "Invert Colors"
-msgstr "Színek invertálása"
+msgstr "Színek megfordítása"
 
-#: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:496
+#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:615
 msgid "Invert Selection"
 msgstr "Kijelölés megfordítása"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:200
 msgid "Italic"
 msgstr "Dőlt"
 
@@ -1110,7 +1119,7 @@ msgstr "JPEG minőség"
 #. Translators: Image dithering matrix named after J. F. Jarvis, C. N. Judice, and W. H. Ninke
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:36
 msgid "Jarvis-Judice-Ninke"
-msgstr ""
+msgstr "Jarvis-Judice-Ninke"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
 msgid "Julia Fractal"
@@ -1118,7 +1127,7 @@ msgstr "Julia-fraktál"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:300
 msgid "Landscape"
-msgstr ""
+msgstr "Fekvő"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:51
 msgid "Lasso Select"
@@ -1130,36 +1139,36 @@ msgstr "Réteg"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
 msgid "Layer Hidden"
-msgstr "Réteg elrejtése"
+msgstr "Réteg elrejtve"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Layer Opacity"
-msgstr "Rétegátlátszóság"
+msgstr "Réteg átlátszatlansága"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:122
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "Réteg tulajdonságai"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:125
 msgid "Layer Properties..."
 msgstr "Réteg tulajdonságai…"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
 msgid "Layer Shown"
-msgstr "Réteg megjelenítése"
+msgstr "Réteg megjelenítve"
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:133
 #, csharp-format
 msgid "Layer {0}"
-msgstr ""
+msgstr "{0}. réteg"
 
 #: ../Pinta/Pads/LayersPad.cs:49
 msgid "Layers"
 msgstr "Rétegek"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:216
+#: ../Pinta.Tools/Tools/TextTool.cs:228
 msgid "Left Align"
 msgstr "Balra igazítás"
 
@@ -1172,6 +1181,14 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"Kattintson a bal egérgombbal és húzza a kijelölést a kijelölt tartalom "
+"áthelyezéséhez.\n"
+"Tartsa nyomva a(z) {0} billentyűt a méretezéshez az áthelyezés helyett.\n"
+"Kattintson a jobb egérgombbal és húzza a kijelölést a kijelölt tartalom "
+"forgatásához.\n"
+"Tartsa nyomva a Shift billentyűt a lépésenkénti forgatáshoz.\n"
+"Használja a nyílbillentyűket a kijelölt tartalom egyetlen képponttal történő "
+"áthelyezéséhez."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:50
 #, csharp-format
@@ -1182,6 +1199,14 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selection outline by a single pixel."
 msgstr ""
+"Kattintson a bal egérgombbal és húzza a kijelölést a kijelölés körvonalának "
+"áthelyezéséhez.\n"
+"Tartsa nyomva a(z) {0} billentyűt a méretezéshez az áthelyezés helyett.\n"
+"Kattintson a jobb egérgombbal és húzza a kijelölést a kijelölés körvonalának "
+"forgatásához.\n"
+"Tartsa nyomva a Shift billentyűt a lépésenkénti forgatáshoz.\n"
+"Használja a nyílbillentyűket a kijelölés körvonalának egyetlen képponttal "
+"történő áthelyezéséhez."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:58
@@ -1202,12 +1227,34 @@ msgid ""
 "exact same position.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Kattintson a bal egérgombbal, hogy az elsődleges színnel rajzoljon "
+"alakzatot.\n"
+"Kattintson a bal egérgombbal egy alakzatra egy vezérlőpont hozzáadásához.\n"
+"Kattintson a bal egérgombbal egy vezérlőpontra, és húzza az áthelyezéshez.\n"
+"Kattintson a jobb egérgombbal egy vezérlőpontra, és húzza el a feszességének "
+"megváltoztatásához.\n"
+"Tartsa nyomva a Shift billentyűt a szögekhez való illesztéshez.\n"
+"Használja a nyílbillentyűket a kijelölt vezérlőpont áthelyezéséhez.\n"
+"Nyomja meg a(z) {0} + balra/jobbra nyilakat a vezérlőpontok sorrendben való "
+"kijelöléséhez.\n"
+"Nyomja meg a Delete billentyűt a kijelölt vezérlőpont törléséhez.\n"
+"Nyomja meg a Szóköz billentyűt, hogy új vezérlőpontot adjon hozzá az egér "
+"pozíciójában.\n"
+"Tartsa nyomva a(z) {0} billentyűt a Szóköz megnyomása közben, hogy a "
+"vezérlőpontot pontosan ugyanabban a pozícióban hozza létre.\n"
+"Tartsa nyomva a(z) {0} billentyűt, miközben egy vezérlőpontra kattint a bal "
+"egérgombbal, hogy új alakzatot hozzon létre pontosan ugyanabban a "
+"pozícióban.\n"
+"Nyomja meg az Enter billentyűt az alakzat véglegesítéséhez."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
+"Kattintson a bal egérgombbal, hogy egy képpont széles, szabad formájú "
+"vonalakat rajzoljon az elsődleges színnel.\n"
+"Kattintson a jobb egérgombbal a másodlagos szín használatához."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
@@ -1215,55 +1262,63 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"Bal egérgomb az elsődleges, jobb egérgomb a másodlagos színnel rajzoláshoz."
+"Kattintson a bal egérgombbal az elsődleges színnel való rajzoláshoz, "
+"kattintson a jobb egérgombbal a másodlagos színnel való rajzoláshoz."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:54
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
-"Bal egérgombbal átlátszóra töröl, jobb egérgombbal a másodlagos színre. "
+"Kattintson a bal egérgombbal az átlátszó színre való törléshez, kattintson a "
+"jobb egérgombbal a másodlagos színre való törléshez. "
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
 "the secondary color."
 msgstr ""
-"Bal egérgombbal a terület kitöltése elsődleges színnel, jobb egérgombbal a "
-"másodlagos színnel."
+"Kattintson a bal egérgombbal a terület elsődleges színnel való kitöltéséhez, "
+"kattintson a jobb egérgombbal a másodlagos színnel való kitöltéshez."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:98
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"Bal kattintásra elhelyezi a kurzort, majd gépelje a kívánt szöveget. A "
-"szöveg színe az elsődleges szín lesz."
+"Kattintson a bal egérgombbal a kurzor elhelyezéséhez, majd gépelje be a "
+"kívánt szöveget. A szöveg színe az elsődleges szín."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:60
 msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
+"Kattintson a bal egérgombbal a másodlagos szín elsődleges színnel való "
+"cseréjéhez.\n"
+"Kattintson a jobb egérgombbal a megfordításhoz."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"Kattintson a bal egérgombbal az elsődleges szín beállításához.\n"
+"Kattintson a jobb egérgombbal a másodlagos szín beállításához."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:268
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:286
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
-"Bal egérgombbal az elsődleges szín beállításához. Jobb egérgombbal a "
-"másodlagos szín beállításához."
+"Kattintson a bal egérgombbal az elsődleges szín beállításához. Kattintson a "
+"jobb egérgombbal a másodlagos szín beállításához."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
-"Bal kattintás az elsődleges színhez. Jobb kattintás a másodlagos színhez, "
-"középső a színskála megjelenítéséhez."
+"Kattintson a bal egérgombbal az elsődleges szín beállításához. Kattintson a "
+"jobb egérgombbal a másodlagos szín beállításához. Kattintson a középső "
+"egérgombbal a palettaszín kiválasztásához."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1271,10 +1326,13 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"Kattintson a bal egérgombbal a nagyításhoz.\n"
+"Kattintson a jobb egérgombbal a kicsinyítéshez.\n"
+"Kattintson és húzzon a kijelölés nagyításához."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:337
 msgid "Length"
-msgstr ""
+msgstr "Hossz"
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
@@ -1282,16 +1340,16 @@ msgstr "Szintek"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:242
 msgid "Levels Adjustment"
-msgstr "Szintbeállítás"
+msgstr "Szintek beállítása"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:89
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:91
 msgid "License"
 msgstr "Licenc"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:250
 msgid "Light"
-msgstr ""
+msgstr "Világos"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1303,16 +1361,16 @@ msgstr "Megvilágítás"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
 msgid "Lightness"
-msgstr ""
+msgstr "Fényerő"
 
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:48
 msgid "Lime Lemon"
-msgstr ""
+msgstr "Lime citrom"
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:43
 msgid "Line/Curve"
-msgstr "Vonal/ív"
+msgstr "Vonal/görbe"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
@@ -1328,7 +1386,7 @@ msgstr "Lineáris tükrözött színátmenet"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:83
 msgid "Linked"
-msgstr "Kapcsolva"
+msgstr "Összekapcsolva"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
@@ -1339,9 +1397,9 @@ msgstr "Fényesség"
 msgid "Magic Wand Select"
 msgstr "Kijelölés varázspálcával"
 
-#: ../Pinta/MainWindow.cs:405
+#: ../Pinta/MainWindow.cs:437
 msgid "Main Menu"
-msgstr ""
+msgstr "Főmenü"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:115
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
@@ -1350,51 +1408,55 @@ msgstr "Méretarány megőrzése"
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
 msgid "Mandelbrot Fractal"
-msgstr "Mandelbrot Fraktál"
+msgstr "Mandelbrot-fraktál"
 
 #. Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
 #: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Martian Lava"
-msgstr ""
+msgstr "Marsi láva"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:24
 msgid "Median"
 msgstr "Medián"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:303
+#: ../Pinta.Core/Actions/ViewActions.cs:130
+msgid "Menu Bar"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:82
+#: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
-msgstr "Réteg beolvasztása az alatta lévőbe"
+msgstr "Réteg egyesítése lefelé"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
-msgstr ""
+msgstr "Mód"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:913
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:914
 msgid "Modified"
-msgstr ""
+msgstr "Módosítva"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:159
 msgid "More Information..."
-msgstr ""
+msgstr "További információk…"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 msgid "Motion Blur"
-msgstr "Bemozdulás"
+msgstr "Mozgási elmosódás"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:284
+#: ../Pinta.Core/Actions/LayerActions.cs:119
+#: ../Pinta.Core/Actions/LayerActions.cs:344
 msgid "Move Layer Down"
 msgstr "Réteg lejjebb mozgatása"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:268
+#: ../Pinta.Core/Actions/LayerActions.cs:113
+#: ../Pinta.Core/Actions/LayerActions.cs:328
 msgid "Move Layer Up"
 msgstr "Réteg feljebb mozgatása"
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
 msgid "Move Selected Pixels"
-msgstr "A kijelölt képpontok mozgatása"
+msgstr "Kijelölt képpontok áthelyezése"
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
 msgid "Move Selection"
@@ -1402,7 +1464,7 @@ msgstr "Kijelölés áthelyezése"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:32
 msgid "Multiply"
-msgstr "Többszörözés"
+msgstr "Szorzás"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:67
 msgid "Name:"
@@ -1410,18 +1472,18 @@ msgstr "Név:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Legközelebbi szomszéd"
 
-#: ../Pinta.Core/Actions/FileActions.cs:59
+#: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New"
 msgstr "Új"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:154
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:141
 #: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "Új kép"
 
-#: ../Pinta.Core/Actions/FileActions.cs:51
+#: ../Pinta.Core/Actions/FileActions.cs:58
 msgid "New Screenshot..."
 msgstr "Új képernyőkép…"
 
@@ -1435,7 +1497,7 @@ msgstr "Új…"
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
-msgstr ""
+msgstr "Nem találhatók elemek"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
@@ -1445,39 +1507,39 @@ msgstr "Zaj"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:263
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:275
 msgid "Normal"
 msgstr "Normál"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Normal Blending"
-msgstr "Normál átfedés"
+msgstr "Normál keverés"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:73
+#: ../Pinta.Core/Actions/ViewActions.cs:99
 msgid "Normal Size"
 msgstr "Normál méret"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:264
+#: ../Pinta.Tools/Tools/TextTool.cs:276
 msgid "Normal and Outline"
 msgstr "Normál és körvonal"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:255
 msgid "Number of Cells"
-msgstr ""
+msgstr "Cellák száma"
 
 #: ../Pinta/Main.cs:55
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "A megjelenítéshez használandó szálak száma"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:453
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:165
 msgid "OK"
-msgstr ""
+msgstr "Rendben"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "Objektum"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:168
@@ -1487,11 +1549,11 @@ msgstr ""
 msgid "Offset"
 msgstr "Eltolás"
 
-#: ../Pinta.Core/Actions/EditActions.cs:79
+#: ../Pinta.Core/Actions/EditActions.cs:148
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
-msgstr ""
+msgstr "Kijelölés eltolása"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
 msgid "Oil Painting"
@@ -1499,70 +1561,70 @@ msgstr "Olajfestmény"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:98
 msgid "Opacity:"
-msgstr "Áttetszőség:"
+msgstr "Átlátszatlanság:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:60
+#: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Open"
 msgstr "Megnyitás"
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:37
 msgid "Open Curve Shape"
-msgstr ""
+msgstr "Nyitott görbealakzat"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:358
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
 msgid "Open Image"
 msgstr "Kép megnyitása"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta.Core/Actions/LayerActions.cs:259
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
-msgstr "Kép megnyitása"
+msgstr "Képfájl megnyitása"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
 msgid "Open Line/Curve Series"
-msgstr ""
+msgstr "Nyitott vonal/görbe sorozatok"
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
+#: ../Pinta.Core/Actions/EditActions.cs:495
 msgid "Open Palette File"
-msgstr "Paletta fájl megnyitása"
+msgstr "Palettafájl megnyitása"
 
-#: ../Pinta.Core/Actions/EditActions.cs:83
-#: ../Pinta.Core/Actions/FileActions.cs:52
+#: ../Pinta.Core/Actions/EditActions.cs:169
+#: ../Pinta.Core/Actions/FileActions.cs:64
 msgid "Open..."
 msgstr "Megnyitás…"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:316
 msgid "Orientation:"
-msgstr ""
+msgstr "Tájolás:"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
-msgstr ""
+msgstr "Eredeti"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:265
+#: ../Pinta.Tools/Tools/TextTool.cs:277
 msgid "Outline"
 msgstr "Körvonal"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:217
 msgid "Outline Border"
-msgstr ""
+msgstr "Körvonal szegélye"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:24
 msgid "Outline Edge"
-msgstr ""
+msgstr "Körvonal széle"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
 msgid "Outline Object"
-msgstr ""
+msgstr "Objektum körberajzolása"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
-msgstr "Alakzat körvonala"
+msgstr "Alakzat körberajzolása"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:279
+#: ../Pinta.Tools/Tools/TextTool.cs:291
 msgid "Outline width"
-msgstr "Körvonal vastagság"
+msgstr "Körvonal vastagsága"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
 msgid "Output"
@@ -1588,34 +1650,34 @@ msgstr "Festékes vödör"
 msgid "Paintbrush"
 msgstr "Ecset"
 
-#: ../Pinta.Core/Actions/EditActions.cs:133
+#: ../Pinta.Core/Actions/EditActions.cs:235
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:138
 msgid "Palette"
 msgstr "Paletta"
 
-#: ../Pinta.Core/Actions/EditActions.cs:457
+#: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
-msgstr ""
+msgstr "Palettafájlok"
 
 #: ../Pinta.Tools/Tools/PanTool.cs:40
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:148
 msgid "Pan"
-msgstr "Kéz eszköz"
+msgstr "Pásztázás"
 
-#: ../Pinta.Core/Actions/EditActions.cs:73
+#: ../Pinta.Core/Actions/EditActions.cs:105
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste"
 msgstr "Beillesztés"
 
-#: ../Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Actions/EditActions.cs:120
 msgid "Paste Into New Image"
 msgstr "Beillesztés új képként"
 
-#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:112
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste Into New Layer"
-msgstr "Beillesztés új rétegre"
+msgstr "Beillesztés új rétegként"
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
@@ -1627,7 +1689,7 @@ msgstr "Ceruzavázlat"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
 msgid "Pencil Tip Size"
-msgstr "Ceruzahegy-méret"
+msgstr "Ceruzahegy mérete"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:63
 msgid "Percentile"
@@ -1642,29 +1704,30 @@ msgid "Photo"
 msgstr "Fénykép"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:62
 msgid "Pinta"
 msgstr "Pinta"
 
 #: ../Pinta/AddinSetupService.cs:52
 msgid "Pinta Community Addins - Cross-Platform"
-msgstr ""
+msgstr "Pinta közösségi bővítmények – keresztplatformos"
 
 #: ../Pinta/AddinSetupService.cs:48
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr ""
+msgstr "Pinta közösségi bővítmények – platformra jellemző"
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Pinta képszerkesztő"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:45
+#: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
-msgstr "Pinta weboldala"
+msgstr "Pinta webhelye"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "Pinta does not support saving images in this file format."
-msgstr "A Pinta nem támogatja ezt a fájlformátumot."
+msgstr ""
+"A Pinta nem támogatja a képek ebben a fájlformátumban történő mentését."
 
 #: ../xdg/pinta.appdata.xml.in.h:1
 msgid ""
@@ -1674,36 +1737,46 @@ msgid ""
 "apply to your images, and also has the ability to create unlimited layers to "
 "help organize your creativity."
 msgstr ""
+"A Pinta egy egyszerű, mégis hatékony felülettel rendelkező képszerkesztő, "
+"rajzoló és festő alkalmazás. A Pinta rajzeszközök széles skálájával "
+"rendelkezik, többek között: szabadkézi, téglalapok, körök és vonalak. Több "
+"mint 35 hatással rendelkezik, amelyeket alkalmazhat a képeire, és korlátlan "
+"számú réteg létrehozására is képes, hogy segítsen a kreativitás "
+"megszervezésében."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:458
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
 msgid "Pinta supports the following file formats:"
-msgstr ""
+msgstr "A Pinta a következő fájlformátumokat támogatja:"
 
-#: ../Pinta.Core/Classes/Palette.cs:195
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:168
 msgid "Pinta supports the following palette formats:"
-msgstr ""
+msgstr "A Pinta a következő palettaformátumokat támogatja:"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:24
 msgid "Pixelate"
-msgstr "Pixelesítés"
+msgstr "Képpontosítás"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Pixels"
 msgstr "Képpontok"
 
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:56
 msgid "Piña Colada"
+msgstr "Piña Colada"
+
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:802
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:600
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Point Added"
-msgstr ""
+msgstr "Pont hozzáadva"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:650
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:651
 msgid "Point Deleted"
-msgstr ""
+msgstr "Pont törölve"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:27
 msgid "Polar Inversion"
@@ -1711,11 +1784,11 @@ msgstr "Poláris inverzió"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
-msgstr ""
+msgstr "Álló"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:130
 msgid "Position"
-msgstr ""
+msgstr "Pozíció"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1729,25 +1802,25 @@ msgstr "Teljesítmény"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:225
 msgid "Preserve"
-msgstr ""
+msgstr "Megőrzés"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
-msgstr ""
+msgstr "Színátmenet előbeállítása"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
-msgstr ""
+msgstr "Előbeállítás:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
-msgstr ""
+msgstr "Előnézet"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
-msgstr ""
+msgstr "Elsődleges"
 
-#: ../Pinta.Core/Actions/FileActions.cs:57
+#: ../Pinta.Core/Actions/FileActions.cs:93
 msgid "Print"
 msgstr "Nyomtatás"
 
@@ -1764,7 +1837,7 @@ msgstr "Minőség"
 msgid "Quality: "
 msgstr "Minőség: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:41
+#: ../Pinta.Core/Actions/AppActions.cs:47
 msgid "Quit"
 msgstr "Kilépés"
 
@@ -1774,7 +1847,7 @@ msgstr "RGB"
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:24
 msgid "Radial Blur"
-msgstr "Körkörös elmosás"
+msgstr "Sugárirányú elmosás"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
@@ -1795,22 +1868,22 @@ msgstr "Sugár"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:143
 msgid "Radius Percentage"
-msgstr ""
+msgstr "Sugár százaléka"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:287
 msgid "Random"
-msgstr ""
+msgstr "Véletlen"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
 msgid "Random Color Scheme Seed"
-msgstr ""
+msgstr "Véletlen színséma kiindulóértéke"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:267
 msgid "Random Colors"
-msgstr ""
+msgstr "Véletlen színek"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:178
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
@@ -1820,11 +1893,11 @@ msgstr "Véletlen zaj"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:270
 msgid "Random Point Locations"
-msgstr ""
+msgstr "Véletlen ponthelyek"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
-msgstr "Átszinező"
+msgstr "Átszínezés"
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:43
 msgid "Rectangle"
@@ -1832,25 +1905,25 @@ msgstr "Téglalap"
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
 msgid "Rectangle Select"
-msgstr "Téglalap-kijelölés"
+msgstr "Téglalap kijelölés"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:681
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:423
 msgid "Red"
-msgstr "Vörös"
+msgstr "Piros"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:89
 msgid "Red  "
-msgstr "Vörös  "
+msgstr "Piros  "
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:24
 msgid "Red Eye Removal"
-msgstr "Vörös szem eltávolítása"
+msgstr "Vörösszem-eltávolítás"
 
-#: ../Pinta.Core/Actions/EditActions.cs:69
+#: ../Pinta.Core/Actions/EditActions.cs:77
 msgid "Redo"
-msgstr "Mégis"
+msgstr "Újra"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:24
 msgid "Reduce Noise"
@@ -1858,19 +1931,19 @@ msgstr "Zaj csökkentése"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
-msgstr "Visszaverődés"
+msgstr "Tükrözés"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
 msgstr "Frissítés"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:90
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:92
 msgid "Released under the MIT X11 License."
 msgstr "Kiadva a MIT X11 licenc alatt."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:41
 msgid "Relief"
-msgstr "Dombormű"
+msgstr "Kiemelkedés"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:112
 msgid "Rename Layer"
@@ -1881,23 +1954,23 @@ msgstr "Réteg átnevezése"
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:28
 msgid "Render"
-msgstr "Renderelés"
+msgstr "Megjelenítés"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:186
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
-msgstr "Effektus renderelése"
+msgstr "Hatás megjelenítése"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:43
 msgid "Replace"
 msgstr "Csere"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
-msgstr ""
+msgstr "Hiba jelentése…"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:89
 msgid "Resampling:"
-msgstr ""
+msgstr "Újramintavételezés:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:62
 msgid "Reseed"
@@ -1908,29 +1981,29 @@ msgstr "Újraelosztás"
 msgid "Reset"
 msgstr "Visszaállítás"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:155
 msgid "Reset Color"
-msgstr ""
+msgstr "Szín visszaállítása"
 
-#: ../Pinta.Core/Actions/EditActions.cs:85
+#: ../Pinta.Core/Actions/EditActions.cs:181
 msgid "Reset to Default"
 msgstr "Visszaállítás alapértelmezettre"
 
 #: ../Pinta.Core/Classes/Document.cs:326
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:181
 msgid "Resize Canvas"
-msgstr "Rajzvászon átméretezése"
+msgstr "Vászon átméretezése"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:57
+#: ../Pinta.Core/Actions/ImageActions.cs:77
 msgid "Resize Canvas..."
-msgstr "Rajzvászon átméretezése…"
+msgstr "Vászon átméretezése…"
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:102
 msgid "Resize Image"
 msgstr "Kép átméretezése"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:56
+#: ../Pinta.Core/Actions/ImageActions.cs:70
 msgid "Resize Image..."
 msgstr "Kép átméretezése…"
 
@@ -1938,18 +2011,22 @@ msgstr "Kép átméretezése…"
 msgid "Resize Palette"
 msgstr "Paletta átméretezése"
 
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
+msgid "Restart Pinta"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
 msgid "Reverse Color Scheme"
-msgstr ""
+msgstr "Színséma megfordítása"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:264
 msgid "Reverse Color Sorting"
-msgstr ""
+msgstr "Színrendezés megfordítása"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:240
+#: ../Pinta.Tools/Tools/TextTool.cs:252
 msgid "Right Align"
 msgstr "Jobbra igazítás"
 
@@ -1958,47 +2035,47 @@ msgstr "Jobbra igazítás"
 msgid "Rotate / Zoom Layer"
 msgstr "Réteg forgatása/nagyítása"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:66
+#: ../Pinta.Core/Actions/LayerActions.cs:107
 msgid "Rotate / Zoom Layer..."
 msgstr "Réteg forgatása/nagyítása…"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:62
+#: ../Pinta.Core/Actions/ImageActions.cs:110
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:47
 msgid "Rotate 180°"
-msgstr "Elforgatás 180°-kal"
+msgstr "Forgatás 180°-kal"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:60
+#: ../Pinta.Core/Actions/ImageActions.cs:96
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:59
 msgid "Rotate 90° Clockwise"
-msgstr "Elforgatás 90°-kal az óramutató irányában"
+msgstr "Forgatás 90°-kal az óramutató irányában"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:61
+#: ../Pinta.Core/Actions/ImageActions.cs:103
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:63
 msgid "Rotate 90° Counter-Clockwise"
-msgstr "Elforgatás 90°-kal az óramutató irányával ellentétesen"
+msgstr "Forgatás 90°-kal az óramutató irányával ellentétesen"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:140
 #: ../Pinta.Effects/Effects/TileEffect.cs:226
 msgid "Rotation"
-msgstr "Elforgatás"
+msgstr "Forgatás"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
 msgid "Rounded Line Series"
-msgstr ""
+msgstr "Lekerekített vonalsorozatok"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:37
 msgid "Rounded Line Shape"
-msgstr ""
+msgstr "Lekerekített vonalalakzat"
 
 #: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
 msgid "Rounded Rectangle"
 msgstr "Lekerekített téglalap"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:148
+#: ../Pinta.Core/Actions/ViewActions.cs:232
 msgid "Ruler Units"
 msgstr "Vonalzó mértékegysége"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:80
+#: ../Pinta.Core/Actions/ViewActions.cs:148
 msgid "Rulers"
 msgstr "Vonalzók"
 
@@ -2006,50 +2083,50 @@ msgstr "Vonalzók"
 msgid "Sampling"
 msgstr "Mintavételezés"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:377
 msgid "Sat"
-msgstr ""
+msgstr "Telítettség"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:568
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:264
 msgid "Sat & Value"
-msgstr ""
+msgstr "Telítettség és érték"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
 msgid "Saturation"
-msgstr ""
+msgstr "Telítettség"
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
 msgid "Saturation Percentage"
-msgstr ""
+msgstr "Telítettség százaléka"
 
-#: ../Pinta.Core/Actions/EditActions.cs:410
-#: ../Pinta.Core/Actions/FileActions.cs:55
+#: ../Pinta.Core/Actions/EditActions.cs:529
+#: ../Pinta.Core/Actions/FileActions.cs:79
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
 msgstr "Mentés"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:45
+#: ../Pinta.Core/Actions/WindowActions.cs:47
 msgid "Save All"
 msgstr "Összes mentése"
 
-#: ../Pinta.Core/Actions/EditActions.cs:84
-#: ../Pinta.Core/Actions/FileActions.cs:56
+#: ../Pinta.Core/Actions/EditActions.cs:175
+#: ../Pinta.Core/Actions/FileActions.cs:86
 msgid "Save As..."
 msgstr "Mentés másként…"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:92
 msgid "Save Image File"
-msgstr "Kép fájl mentése"
+msgstr "Képfájl mentése"
 
-#: ../Pinta.Core/Actions/EditActions.cs:407
+#: ../Pinta.Core/Actions/EditActions.cs:526
 msgid "Save Palette File"
-msgstr "Paletta fájl mentése"
+msgstr "Palettafájl mentése"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr ""
+msgstr "Menti a(z) „{0}” kép változtatásait bezárás előtt?"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:173
 msgid "Scale"
@@ -2061,84 +2138,89 @@ msgstr "Kivetítés"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
-msgstr ""
+msgstr "Másodlagos"
 
-#: ../Pinta.Core/Actions/EditActions.cs:80
-#: ../Pinta.Core/Actions/EditActions.cs:232
+#: ../Pinta.Core/Actions/EditActions.cs:155
+#: ../Pinta.Core/Actions/EditActions.cs:336
 msgid "Select All"
 msgstr "Összes kijelölése"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
-msgstr ""
+msgstr "Kijelölt színek"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
 msgstr "Szépia"
 
-#: ../Pinta.Core/Actions/EditActions.cs:86
+#: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Set Number of Colors"
 msgstr "Színek számának beállítása"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
 msgid "Shape Type"
-msgstr ""
+msgstr "Alakzat típusa"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:245
 msgid "Sharp Edges"
-msgstr ""
+msgstr "Éles szélek"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:24
 msgid "Sharpen"
 msgstr "Élesítés"
 
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:487
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Shortcut key"
-msgstr "Gyorsbillenytű"
+msgstr "Gyorsbillentyű"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
-msgid "Show Grid"
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
+msgid "Shortcut keys"
 msgstr ""
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:19
+msgid "Show Grid"
+msgstr "Rács megjelenítése"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Show Layer"
 msgstr "Réteg megjelenítése"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:550
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:245
 msgid "Show Value"
-msgstr ""
+msgstr "Érték megjelenítése"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:159
+#: ../Pinta.Core/Actions/ViewActions.cs:244
 msgid "Show/Hide"
-msgstr ""
+msgstr "Megjelenítés vagy elrejtés"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
 msgid "Sierra Lite"
-msgstr ""
+msgstr "Egyszerű Sierra"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
 msgid "Single Pixel"
-msgstr "Egy képpont"
+msgstr "Egyetlen képpont"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:295
 msgid "Size"
-msgstr ""
+msgstr "Méret"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:262
 msgid "Smooth"
-msgstr ""
+msgstr "Simítás"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:42
 msgid "Soft Light"
-msgstr ""
+msgstr "Lágy fény"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:55
 msgid "Soften Portrait"
@@ -2150,25 +2232,25 @@ msgstr "Lágyság"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
-msgstr "Folt ecset"
+msgstr "Fröccsentő"
 
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:35
 msgid "Squares"
-msgstr "Négyzetecset"
+msgstr "Négyzetek"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:78
+#: ../Pinta.Core/Actions/ViewActions.cs:136
 msgid "Status Bar"
-msgstr ""
+msgstr "Állapotsáv"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:148
 msgid "Strength"
-msgstr "Szilárdság"
+msgstr "Erősség"
 
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Stucki"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
@@ -2191,17 +2273,18 @@ msgstr "Szöveg"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:86
 msgid "Text - Finalize"
-msgstr ""
+msgstr "Szöveg – befejezés"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:254
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Text Style"
-msgstr "Szöveg stílus"
+msgstr "Szöveg stílusa"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:297
+#: ../Pinta/MainWindow.cs:315
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
+"A(z) „{0}” bővítmény esetleg nem használható együtt a Pinta ezen verziójával"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:208
 msgid "The clipboard does not contain an image."
@@ -2209,11 +2292,11 @@ msgstr "A vágólap nem tartalmaz képet."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:200
 msgid "The file may be an invalid or corrupt extension package"
-msgstr ""
+msgstr "Lehet, hogy a fájl érvénytelen vagy sérült bővítménycsomag"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:79
 msgid "The following dependencies could not be resolved:"
-msgstr "A következő függőségek nem oldhatók fel:"
+msgstr "A következő függőségeket nem sikerült feloldani:"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:72
 msgid "The following packages need to be uninstalled:"
@@ -2232,10 +2315,12 @@ msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
 msgstr ""
+"A beillesztett kép nagyobb a vászonnál. Mit szeretne tenni a vászon "
+"méretével?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:352
 msgid "The installation failed!"
-msgstr "A telepítés meghiúsult!"
+msgstr "A telepítés nem sikerült!"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:353
 msgid "The installation has completed with warnings."
@@ -2246,10 +2331,12 @@ msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
+"A kijelölt bővítménycsomagokat nem lehet telepíteni, mert függőségi "
+"ütközések vannak."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:359
 msgid "The uninstallation failed!"
-msgstr "Az eltávolítás meghiúsult!"
+msgstr "Az eltávolítás nem sikerült!"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:360
 msgid "The uninstallation has completed with warnings."
@@ -2260,6 +2347,8 @@ msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
 msgstr ""
+"Vannak más bővítménycsomagok is, amelyek az előzőektől függenek, és amelyek "
+"szintén eltávolításra kerülnek:"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:134
 msgid "Thickness"
@@ -2267,23 +2356,23 @@ msgstr "Vastagság"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:160
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "Ez a formátum nem támogat rétegeket. Lapítja a képet?"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:29
 msgid "Tile Reflection"
-msgstr "Mozaik tükröződés"
+msgstr "Csempetükröződés"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:229
 msgid "Tile Size"
-msgstr "Csempeméret"
+msgstr "Csempe mérete"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:235
 msgid "Tile Type"
-msgstr ""
+msgstr "Csempe típusa"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
 msgid "Tip: Right-click to remove control points."
-msgstr "Tipp: jobb-klikk a kontrollpontok eltávolításához"
+msgstr "Tipp: kattintson a jobb egérgombbal a vezérlőpontok eltávolításához."
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2297,76 +2386,76 @@ msgstr "Tűrés"
 msgid "Tool"
 msgstr "Eszköz"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Tool Box"
-msgstr ""
+msgstr "Eszközkészlet"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:76
+#: ../Pinta.Core/Actions/ViewActions.cs:118
 msgid "Tool Windows"
 msgstr "Eszközablakok"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:74
+#: ../Pinta.Core/Actions/ViewActions.cs:106
 msgid "Toolbar"
 msgstr "Eszköztár"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
-msgstr ""
+msgstr "Fent középen"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
-msgstr ""
+msgstr "Fent balra"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
-msgstr ""
+msgstr "Fent jobbra"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
 msgstr "Átviteli térkép"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:47
+#: ../Pinta.Core/Actions/HelpActions.cs:65
 msgid "Translate This Application"
 msgstr "Az alkalmazás fordítása"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
-msgstr ""
+msgstr "Átlátszósági mód"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:137
 msgid "Transparent"
-msgstr ""
+msgstr "Átlátszó"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:146
 msgid "Turbulence"
-msgstr ""
+msgstr "Örvénylés"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
-msgstr "Elcsavarás"
+msgstr "Csavarás"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
 msgid "Two-Row Sierra"
-msgstr ""
+msgstr "Kétsoros Sierra"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:258
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
 msgid "Type"
 msgstr "Típus"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:200
+#: ../Pinta.Tools/Tools/TextTool.cs:212
 msgid "Underline"
-msgstr "Aláhúzás"
+msgstr "Aláhúzott"
 
-#: ../Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Undo"
 msgstr "Visszavonás"
 
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:24
 msgid "Unfocus"
-msgstr "Életlenít"
+msgstr "Életlenítés"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
@@ -2375,30 +2464,30 @@ msgstr "Eltávolítás"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:185
 msgid "Uninstall..."
-msgstr ""
+msgstr "Eltávolítás…"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
-msgstr ""
+msgstr "Unió (+) ({0} + bal kattintás)"
 
 #: ../Pinta.Core/Classes/Document.cs:101
 #, csharp-format
 msgid "Unsaved Image {0}"
-msgstr "Nem mentett kép {0}"
+msgstr "Mentetlen kép {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:353
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:340
 msgid "Unsupported file format"
-msgstr ""
+msgstr "Nem támogatott fájlformátum"
 
-#: ../Pinta.Core/Classes/Palette.cs:155
+#: ../Pinta.Core/Actions/EditActions.cs:518
 msgid "Unsupported palette format"
-msgstr ""
+msgstr "Nem támogatott palettaformátum"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
-msgstr ""
+msgstr "Frissítés…"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
@@ -2409,67 +2498,72 @@ msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
-"Használjon alacsony minőséget előnézetekhez, kis méretű képekhez. Használjon "
-"magas minőséget a végeredményhez, nagy méretű képekhez."
+"Használjon alacsony minőséget előnézetekhez, kis méretű képekhez és kis "
+"szögekhez. Használjon magas minőséget a végleges minőséghez, nagy méretű "
+"képekhez és nagy szögekhez."
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:97
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:99
 msgid "Using some icons from:"
-msgstr "Néhány ikon forrása:"
+msgstr "Néhány ikon használata innen:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:670
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:400
 msgid "Value"
-msgstr ""
+msgstr "Érték"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "Verzió: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:301
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Függőleges kék (K)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:304
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Függőleges zöld (Z)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:307
 msgid "Vertical red (R)"
+msgstr "Függőleges piros (P)"
+
+#: ../Pinta/MainWindow.cs:461
+msgid "View"
 msgstr ""
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
-msgstr ""
+msgstr "Vignetta"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
-msgstr "Láthatóság"
+msgstr "Látható"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Voronoi diagram"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:132
 msgid "Warmth"
-msgstr "Fraktál hőfok"
+msgstr "Melegség"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:118
 msgid "White"
-msgstr ""
+msgstr "Fehér"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:41
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:83
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:163
 msgid "Width:"
 msgstr "Szélesség:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:123
-#: ../Pinta.Core/Actions/ViewActions.cs:306
+#: ../Pinta.Core/Actions/ViewActions.cs:207
+#: ../Pinta.Core/Actions/ViewActions.cs:398
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:377
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:386
 msgid "Window"
@@ -2477,23 +2571,23 @@ msgstr "Ablak"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:10
 msgid "Wrap"
-msgstr ""
+msgstr "Tördelés"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:40
 msgid "Xor"
 msgstr "Xor"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr ""
+msgstr "Xor ({0} + jobb kattintás)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:480
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:467
 #, csharp-format
 msgid "You do not have access to '{0}'."
-msgstr ""
+msgstr "Nincs hozzáférése ehhez: „{0}”."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
@@ -2501,96 +2595,98 @@ msgstr ""
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
+"Nincs hozzáférése a(z) „{0}” módosításához. Lehet, hogy a fájl vagy mappa "
+"csak olvasható."
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
-msgstr "Nagyító"
+msgstr "Nagyítás"
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:24
 msgid "Zoom Blur"
-msgstr "Nagyítással elmosás"
+msgstr "Nagyítás elmosása"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:69
+#: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Zoom In"
 msgstr "Nagyítás"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:70
+#: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Zoom Out"
 msgstr "Kicsinyítés"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:93
 msgid "Zoom to Selection"
 msgstr "Nagyítás a kijelölésre"
 
-#: ../Pinta/MainWindow.cs:379
+#: ../Pinta/MainWindow.cs:406
 msgid "_Adjustments"
-msgstr "_Korrekciók"
+msgstr "_Igazítások"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:189
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:191
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
-msgstr ""
+msgstr "_Mégse"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
-msgstr ""
+msgstr "El_dobás"
 
-#: ../Pinta/MainWindow.cs:362
+#: ../Pinta/MainWindow.cs:386
 msgid "_Edit"
-msgstr "_Szerkesztés"
+msgstr "S_zerkesztés"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:382
 msgid "_File"
 msgstr "_Fájl"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:422
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../Pinta/MainWindow.cs:371
+#: ../Pinta/MainWindow.cs:396
 msgid "_Image"
 msgstr "_Kép"
 
-#: ../Pinta/MainWindow.cs:375
+#: ../Pinta/MainWindow.cs:400
 msgid "_Layers"
 msgstr "_Rétegek"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:188
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:192
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr ""
+msgstr "_Mentés"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:391
 msgid "_View"
 msgstr "_Nézet"
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:418
 msgid "_Window"
 msgstr "_Ablak"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:81
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:83
 msgid "by Pinta contributors"
 msgstr "– Pinta közreműködők"
 
 #: ../xdg/pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
-msgstr ""
+msgstr "rajz;rajzolás;festmény;festés;grafika;raszter;2d;"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
 #: ../Pinta/Dialogs/NewImageDialog.cs:277
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:106
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
@@ -2613,6 +2709,7 @@ msgstr ""
 "  Richard Somlói https://launchpad.net/~ricsipontaz\n"
 "  Robert Roth https://launchpad.net/~evfool\n"
 "  Tömő Norbert https://launchpad.net/~tomo-norbert\n"
+"  Úr Balázs https://urbalazs.hu/\n"
 "  Vizion-HUN https://launchpad.net/~vizler-k\n"
 "  zoltanlazar https://launchpad.net/~pupileater"
 
@@ -2621,15 +2718,16 @@ msgstr ""
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr ""
+"{0} + bal kattintás az eredet beállításához, bal kattintás a festéshez."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:207
 #, csharp-format
 msgid "{0} copy"
-msgstr ""
+msgstr "{0} másolata"
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:118
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:123
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} kép ({1})"
@@ -2638,11 +2736,11 @@ msgstr "{0} kép ({1})"
 #: ../Pinta.Core/PaletteFormats/PaletteDescriptor.cs:63
 #, csharp-format
 msgid "{0} palette ({1})"
-msgstr ""
+msgstr "{0} paletta ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:287
+#: ../Pinta.Core/Actions/ViewActions.cs:379
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

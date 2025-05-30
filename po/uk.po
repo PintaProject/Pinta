@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-06 01:45+0000\n"
+"POT-Creation-Date: 2025-05-25 00:30+0000\n"
 "PO-Revision-Date: 2025-02-28 10:02+0000\n"
 "Last-Translator: Stepan Andriiovych <4fbig9xyb@mozmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/uk/"
@@ -25,12 +25,12 @@ msgstr ""
 msgid " (in user directory)"
 msgstr " (у каталог користувача)"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:58
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
 msgid " Selection Mode: "
 msgstr " Режим виділення "
 
-#: ../Pinta.Core/Managers/EffectsManager.cs:70
-#: ../Pinta.Core/Managers/EffectsManager.cs:104
+#: ../Pinta.Core/Managers/EffectsManager.cs:95
+#: ../Pinta.Core/Managers/EffectsManager.cs:150
 msgid "..."
 msgstr "…"
 
@@ -50,11 +50,11 @@ msgstr "Область 7 на 7"
 msgid "9 x 9 Region"
 msgstr "Область 9 на 9"
 
-#: ../Pinta/MainWindow.cs:387
+#: ../Pinta/MainWindow.cs:414
 msgid "A_dd-ins"
 msgstr "Додатки"
 
-#: ../Pinta.Core/Actions/AppActions.cs:40
+#: ../Pinta.Core/Actions/AppActions.cs:42
 msgid "About"
 msgstr "Про програму"
 
@@ -62,8 +62,8 @@ msgstr "Про програму"
 msgid "About Pinta"
 msgstr "Про Pinta"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:371
+#: ../Pinta.Core/Actions/LayerActions.cs:61
+#: ../Pinta.Core/Actions/LayerActions.cs:431
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Додати новий шар"
@@ -76,11 +76,11 @@ msgstr "Додати шум"
 msgid "Add-in Manager..."
 msgstr "Менеджер додатків..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:831
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:832
 msgid "Added"
 msgstr "Додано"
 
-#: ../Pinta/MainWindow.cs:417
+#: ../Pinta/MainWindow.cs:449
 msgid "Adjustments"
 msgstr "Коригування"
 
@@ -93,13 +93,13 @@ msgstr "Після вибору"
 msgid "Align Object"
 msgstr "Вирівняти об'єкт"
 
-#: ../Pinta.Core/Actions/EditActions.cs:474
+#: ../Pinta.Core/Actions/EditActions.cs:593
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
 msgstr "Всі файли"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:709
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:492
 msgid "Alpha"
 msgstr "Альфа"
 
@@ -123,7 +123,7 @@ msgstr "Прив’язка:"
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:120
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:145
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:78
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:316
@@ -162,7 +162,7 @@ msgstr "Еффект Аткінсона"
 msgid "Auto"
 msgstr "Автоматично"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:55
+#: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Auto Crop"
 msgstr "Автоматичне кадрування"
 
@@ -175,7 +175,7 @@ msgstr "Автокорекція"
 msgid "Available in repository: {0}"
 msgstr "Доступно у репозиторії: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:146
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:133
 msgid "Background"
 msgstr "Фон"
 
@@ -187,7 +187,7 @@ msgstr "Колір тла"
 msgid "Background:"
 msgstr "Тло:"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:93
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:95
 msgid "Based on the work of Paint.NET:"
 msgstr "Працює на базі Paint.NET:"
 
@@ -196,7 +196,7 @@ msgstr "Працює на базі Paint.NET:"
 msgid "Beautiful Italy"
 msgstr "Ефект \"Прекрасна Італія\""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:71
+#: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Best Fit"
 msgstr "Найкраще заповнення"
 
@@ -216,7 +216,7 @@ msgstr "Режим змішування"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:699
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:469
 msgid "Blue"
 msgstr "Синій"
 
@@ -233,7 +233,7 @@ msgstr "Синій "
 msgid "Blurs"
 msgstr "Розмитість"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:176
+#: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Bold"
 msgstr "Напівжирний"
 
@@ -254,7 +254,7 @@ msgstr "Знизу ліворуч"
 msgid "Bottom Right"
 msgstr "Знизу праворуч"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:142
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:148
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
 msgstr "Яскравість"
@@ -267,8 +267,8 @@ msgstr "Яскравість / контраст"
 msgid "Brush Size"
 msgstr "Розмір пензля"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:270
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:123
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:122
 msgid "Brush width"
 msgstr "Товщина пензля"
 
@@ -291,9 +291,9 @@ msgstr "За абсолютним розміром:"
 msgid "By percentage:"
 msgstr "У процентному співвідношенні:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:411
+#: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:460
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:169
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Скасувати"
@@ -302,11 +302,11 @@ msgstr "Скасувати"
 msgid "Canvas"
 msgstr "Полотно"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:55
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:61
 msgid "Canvas Grid Settings"
 msgstr "Налаштування сітки полотна"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:77
+#: ../Pinta.Core/Actions/ViewActions.cs:124
 msgid "Canvas Grid..."
 msgstr "Сітка полотна..."
 
@@ -318,7 +318,7 @@ msgstr "Розмір комірки"
 msgid "Center"
 msgstr "По центру"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:228
+#: ../Pinta.Tools/Tools/TextTool.cs:240
 msgid "Center Align"
 msgstr "Вирівнювання по центру"
 
@@ -335,20 +335,20 @@ msgstr "Зміщення центру"
 msgid "Center Right"
 msgstr "По центру праворуч"
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:126
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:151
 msgid "Centered"
 msgstr "Рівняння на середину"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:145
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Centimeters"
 msgstr "Сантиметри"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr "Зміна ширини пензля. Гарячі клавіші: [ ]"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:355
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:356
 msgid "Changed Shape Type"
 msgstr "Змінений тип форми"
 
@@ -361,7 +361,7 @@ msgstr "Вишневий цвіт"
 msgid "Choose Color"
 msgstr "Виберіть колір"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:111
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "Оберіть палітру кольорів"
 
@@ -406,11 +406,11 @@ msgstr "За допомогою миші виділіть контур для в
 msgid "Click and drag to navigate image."
 msgstr "Клацніть і перетягуйте для навігації по зображенню."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:300
 msgid "Click to reset primary and secondary color."
 msgstr "Натисніть для скидання первинного і вторинного кольорів."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:289
 msgid "Click to select primary color."
 msgstr "Клацніть, щоб вибрати основний колір."
 
@@ -418,19 +418,19 @@ msgstr "Клацніть, щоб вибрати основний колір."
 msgid "Click to select region of similar color."
 msgstr "Вибрати регіон з аналогічним кольром."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:274
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:292
 msgid "Click to select secondary color."
 msgstr "Клацніть, щоб вибрати додатковий колір."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:486
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:277
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:196
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:295
 msgid "Click to switch between primary and secondary color."
 msgstr "Клацніть, щоб перемкнутися між основним і вторинним кольорами."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
 #: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:440
-#: ../Pinta/Dialogs/NewImageDialog.cs:533
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr "Буфер обміну"
 
@@ -438,12 +438,12 @@ msgstr "Буфер обміну"
 msgid "Clone Stamp"
 msgstr "Штамп клонування"
 
-#: ../Pinta.Core/Actions/FileActions.cs:54
+#: ../Pinta.Core/Actions/FileActions.cs:72
 #: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
 msgstr "Закрити"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:46
+#: ../Pinta.Core/Actions/WindowActions.cs:54
 msgid "Close All"
 msgstr "Закрити все"
 
@@ -451,7 +451,7 @@ msgstr "Закрити все"
 msgid "Closed Curve Shape"
 msgstr "Закрита крива"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 msgid "Closed Line/Curve Series"
 msgstr "Група закритих геометричних фігур/кривих"
 
@@ -484,7 +484,7 @@ msgstr "Градієнт кольору"
 msgid "Color Mode"
 msgstr "Режим кольорів"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:305
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:327
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Вибір кольору"
@@ -497,7 +497,7 @@ msgstr "Діапазон кольорів"
 msgid "Color Saturation"
 msgstr "Насиченість кольору"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:170
+#: ../Pinta.Core/Actions/ViewActions.cs:255
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
@@ -522,7 +522,7 @@ msgstr "Забарвлення"
 msgid "Conical Gradient"
 msgstr "Конічний градієнт"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:44
+#: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "Contents"
 msgstr "Зміст"
 
@@ -530,20 +530,20 @@ msgstr "Зміст"
 msgid "Contiguous"
 msgstr "Суміжні області"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:152
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:158
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
 msgid "Contrast"
 msgstr "Контрастність"
 
-#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:91
 msgid "Copy"
 msgstr "Копіювати"
 
-#: ../Pinta.Core/Actions/EditActions.cs:72
+#: ../Pinta.Core/Actions/EditActions.cs:98
 msgid "Copy Merged"
 msgstr "Скопіювати виділене"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:80
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Copyright"
 msgstr "Авторські права"
 
@@ -558,9 +558,9 @@ msgstr "Цукрова вата"
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Не вдалося імпортувати шар \"{0}\" з {1}"
 
-#: ../Pinta.Core/Classes/Palette.cs:194
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:167
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Не можу відкрити файл: {0}"
@@ -569,8 +569,8 @@ msgstr "Не можу відкрити файл: {0}"
 msgid "Coverage"
 msgstr "Освітлення"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:54
-#: ../Pinta.Core/Actions/ImageActions.cs:234
+#: ../Pinta.Core/Actions/ImageActions.cs:56
+#: ../Pinta.Core/Actions/ImageActions.cs:295
 msgid "Crop to Selection"
 msgstr "Обрізати по виділеному"
 
@@ -585,18 +585,18 @@ msgstr "Криві"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
 #: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:442
-#: ../Pinta/Dialogs/NewImageDialog.cs:533
+#: ../Pinta/Dialogs/NewImageDialog.cs:438
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr "Власний"
 
-#: ../Pinta.Core/Actions/EditActions.cs:70
-#: ../Pinta.Core/Actions/EditActions.cs:263
+#: ../Pinta.Core/Actions/EditActions.cs:84
+#: ../Pinta.Core/Actions/EditActions.cs:367
 msgid "Cut"
 msgstr "Вирізати"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:167
+#: ../Pinta.Core/Actions/ViewActions.cs:252
 msgid "Dark"
 msgstr "Темний"
 
@@ -609,16 +609,16 @@ msgid "Dash"
 msgstr "Пунктир"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:163
+#: ../Pinta.Core/Actions/ViewActions.cs:248
 msgid "Default"
 msgstr "За замовчанням"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:60
-#: ../Pinta.Core/Actions/LayerActions.cs:350
+#: ../Pinta.Core/Actions/LayerActions.cs:68
+#: ../Pinta.Core/Actions/LayerActions.cs:410
 msgid "Delete Layer"
 msgstr "Видалити шар"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:669
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:670
 msgid "Deleted"
 msgstr "Вилучено"
 
@@ -627,11 +627,11 @@ msgstr "Вилучено"
 msgid "Dents"
 msgstr "Вм'ятини"
 
-#: ../Pinta.Core/Actions/EditActions.cs:278
+#: ../Pinta.Core/Actions/EditActions.cs:382
 msgid "Deselect"
 msgstr "Зняти виділення"
 
-#: ../Pinta.Core/Actions/EditActions.cs:81
+#: ../Pinta.Core/Actions/EditActions.cs:162
 msgid "Deselect All"
 msgstr "Зняти виділення"
 
@@ -644,7 +644,7 @@ msgid "Difference"
 msgstr "Різниця"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:137
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:123
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:148
 msgid "Distance"
 msgstr "Відстань"
 
@@ -675,8 +675,8 @@ msgstr "Не переключайте інструмент"
 msgid "Download size: {0}"
 msgstr "Розмір завантаження: {0}"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:337
+#: ../Pinta.Core/Actions/LayerActions.cs:75
+#: ../Pinta.Core/Actions/LayerActions.cs:397
 msgid "Duplicate Layer"
 msgstr "Копіювати шар"
 
@@ -692,11 +692,11 @@ msgstr "Поведінка краю"
 msgid "Edge Detect"
 msgstr "Виділення краю"
 
-#: ../Pinta/MainWindow.cs:383
+#: ../Pinta/MainWindow.cs:410
 msgid "Effe_cts"
 msgstr "_Ефекти"
 
-#: ../Pinta/MainWindow.cs:411
+#: ../Pinta/MainWindow.cs:443
 msgid "Effects"
 msgstr "Ефекти"
 
@@ -705,7 +705,7 @@ msgstr "Ефекти"
 msgid "Electric"
 msgstr "Електричний"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -724,8 +724,8 @@ msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 "Увімкнути додаткові записи до журналу або зміни поведінки для налагодження"
 
-#: ../Pinta.Core/Actions/EditActions.cs:76
-#: ../Pinta.Core/Actions/EditActions.cs:264
+#: ../Pinta.Core/Actions/EditActions.cs:127
+#: ../Pinta.Core/Actions/EditActions.cs:368
 msgid "Erase Selection"
 msgstr "Видалити виділення"
 
@@ -741,7 +741,7 @@ msgstr "Помилка"
 msgid "Error Diffusion Method"
 msgstr "Метод дифузії помилок"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:46
 msgid "Exclude (-) (Right Click)"
 msgstr "Від’єднати (-) (правий клік)"
 
@@ -763,7 +763,7 @@ msgstr "Фактор"
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Не вдалося отримати доступ до порталів робочого столу XDG"
 
-#: ../Pinta/MainWindow.cs:300
+#: ../Pinta/MainWindow.cs:318
 msgid "Failed to initialize add-in"
 msgstr "Не вдалося ініціалізувати надбудову"
 
@@ -771,7 +771,7 @@ msgstr "Не вдалося ініціалізувати надбудову"
 msgid "Failed to load extension package"
 msgstr "Не вдалося завантажити пакет розширення функціоналу"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:477
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:464
 msgid "Failed to open image"
 msgstr "Не вдалося відкрити зображення"
 
@@ -792,7 +792,7 @@ msgstr "Ефект пір'їни країв полотна"
 msgid "Feather Object"
 msgstr "Об'єкт ефекту пір'їни"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:46
+#: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
 msgstr "Звітувати про помилку"
 
@@ -800,7 +800,7 @@ msgstr "Звітувати про помилку"
 msgid "Files to open"
 msgstr "Файли для відкриття"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:266
+#: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Fill Background"
 msgstr "Залити тло"
 
@@ -808,28 +808,28 @@ msgstr "Залити тло"
 msgid "Fill Object Background"
 msgstr "Заповнити фон об'єкту"
 
-#: ../Pinta.Core/Actions/EditActions.cs:77
-#: ../Pinta.Core/Actions/EditActions.cs:216
+#: ../Pinta.Core/Actions/EditActions.cs:134
+#: ../Pinta.Core/Actions/EditActions.cs:320
 msgid "Fill Selection"
 msgstr "Заповнити виділення"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
 msgstr "Залити фігуру"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
 msgstr "Стиль заповнення"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:310
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
 msgstr "Залити і обвести фігуру"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1096
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1380
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1097
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1381
 msgid "Finalized"
 msgstr "Закінчений"
 
@@ -837,8 +837,8 @@ msgstr "Закінчений"
 msgid "Finish Pixels"
 msgstr "Завершити пікселі"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:63
-#: ../Pinta.Core/Actions/ImageActions.cs:160
+#: ../Pinta.Core/Actions/ImageActions.cs:117
+#: ../Pinta.Core/Actions/ImageActions.cs:221
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
 msgid "Flatten"
 msgstr "Об'єднати"
@@ -847,8 +847,8 @@ msgstr "Об'єднати"
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr "Об'єднання всіх шарів зображення в один шар."
 
-#: ../Pinta.Core/Actions/ImageActions.cs:58
-#: ../Pinta.Core/Actions/LayerActions.cs:64
+#: ../Pinta.Core/Actions/ImageActions.cs:84
+#: ../Pinta.Core/Actions/LayerActions.cs:95
 msgid "Flip Horizontal"
 msgstr "Перевернути по горизонталі"
 
@@ -868,8 +868,8 @@ msgstr "Відобразити шар горизонтально"
 msgid "Flip Layer Vertical"
 msgstr "Відобразити шар вертикально"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:59
-#: ../Pinta.Core/Actions/LayerActions.cs:65
+#: ../Pinta.Core/Actions/ImageActions.cs:90
+#: ../Pinta.Core/Actions/LayerActions.cs:101
 msgid "Flip Vertical"
 msgstr "Перевернути по вертикалі"
 
@@ -887,7 +887,7 @@ msgstr "Алгоритм Флойда-Стейнберга"
 msgid "Floyd-Steinberg Lite"
 msgstr "Алгоритм Флойда-Стейнберга полегшений"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:152
+#: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
 msgstr "Шрифт"
 
@@ -907,7 +907,7 @@ msgstr "Довільна форма"
 msgid "Frosted Glass"
 msgstr "Матове скло"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:83
+#: ../Pinta.Core/Actions/ViewActions.cs:164
 msgid "Fullscreen"
 msgstr "На весь екран"
 
@@ -935,7 +935,7 @@ msgstr "Градієнт"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:690
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:446
 msgid "Green"
 msgstr "Зелений"
 
@@ -947,14 +947,14 @@ msgstr "Сітка"
 msgid "Hard Light"
 msgstr "Яскраве світло"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:91
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:170
 msgid "Height:"
 msgstr "Висота:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:623
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:329
 msgid "Hex"
 msgstr "Hex (шестигранний)"
 
@@ -989,11 +989,11 @@ msgstr "Горизонтальний червоний (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:644
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:349
 msgid "Hue"
 msgstr "Відтінок"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:557
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:253
 msgid "Hue & Sat"
 msgstr "Відтінок і насиченість"
 
@@ -1009,7 +1009,7 @@ msgstr "Файли ICO не можуть бути більші ніж 255х255 �
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Якщо ви не збережете, всі зміни будуть безповоротно втрачені."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:423
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:455
 msgid "Image"
 msgstr "Зображення"
 
@@ -1017,7 +1017,7 @@ msgstr "Зображення"
 msgid "Image Editor"
 msgstr "Редактор зображень"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:75
+#: ../Pinta.Core/Actions/ViewActions.cs:112
 msgid "Image Tabs"
 msgstr "Вкладки зображень"
 
@@ -1025,7 +1025,7 @@ msgstr "Вкладки зображень"
 msgid "Image cannot be pasted"
 msgstr "Зображення не може бути вставлене"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:181
+#: ../Pinta.Core/Actions/LayerActions.cs:241
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "Файли зображень"
@@ -1038,15 +1038,15 @@ msgstr "Зображення більше ніж полотно"
 msgid "Image too large"
 msgstr "Зображення завелике"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:228
+#: ../Pinta.Core/Actions/LayerActions.cs:288
 msgid "Import From File"
 msgstr "Імпортувати з файлу"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:63
+#: ../Pinta.Core/Actions/LayerActions.cs:89
 msgid "Import from File..."
 msgstr "Імпортувати з файлу ..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:144
+#: ../Pinta.Core/Actions/ViewActions.cs:228
 msgid "Inches"
 msgstr "Дюйми"
 
@@ -1094,7 +1094,7 @@ msgid "Intensity"
 msgstr "Інтенсивність"
 
 #. Translators: {0} is 'Alt', or a platform-specific key such as 'Option' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:52
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
 #, csharp-format
 msgid "Intersect ({0} + Left Click)"
 msgstr "Перетнути ({0} + клацання лівою кнопкою)"
@@ -1104,12 +1104,12 @@ msgstr "Перетнути ({0} + клацання лівою кнопкою)"
 msgid "Invert Colors"
 msgstr "Інвертувати кольори"
 
-#: ../Pinta.Core/Actions/EditActions.cs:78
-#: ../Pinta.Core/Actions/EditActions.cs:496
+#: ../Pinta.Core/Actions/EditActions.cs:141
+#: ../Pinta.Core/Actions/EditActions.cs:615
 msgid "Invert Selection"
 msgstr "Інвертувати виділення"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:200
 msgid "Italic"
 msgstr "Курсив"
 
@@ -1151,7 +1151,7 @@ msgstr "Непрозорість шару"
 msgid "Layer Properties"
 msgstr "Властивості шару"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:69
+#: ../Pinta.Core/Actions/LayerActions.cs:125
 msgid "Layer Properties..."
 msgstr "Властивості шару..."
 
@@ -1169,7 +1169,7 @@ msgstr "Шар {0}"
 msgid "Layers"
 msgstr "Шари"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:216
+#: ../Pinta.Tools/Tools/TextTool.cs:228
 msgid "Left Align"
 msgstr "Рівняння ліворуч"
 
@@ -1300,13 +1300,13 @@ msgstr ""
 "Клацніть ліворуч, щоб встановити первинний колір.\n"
 "Клацніть правою кнопкою миші, щоб встановити вторинний колір."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:268
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:286
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Клацніть лівою клавішею миші для вибору основного кольору. Клацніть правою "
 "клавішею миші, щоб вибрати додатковий колір."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:264
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1337,12 +1337,12 @@ msgstr "Рівні"
 msgid "Levels Adjustment"
 msgstr "Корекція рівнів"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:89
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:91
 msgid "License"
 msgstr "Ліцензія"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:250
 msgid "Light"
 msgstr "Світлий"
 
@@ -1392,7 +1392,7 @@ msgstr "Освітленість"
 msgid "Magic Wand Select"
 msgstr "Виділення чарівною паличкою"
 
-#: ../Pinta/MainWindow.cs:405
+#: ../Pinta/MainWindow.cs:437
 msgid "Main Menu"
 msgstr "Головне меню"
 
@@ -1414,8 +1414,12 @@ msgstr "Марсіанська лава"
 msgid "Median"
 msgstr "Медіана"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:62
-#: ../Pinta.Core/Actions/LayerActions.cs:303
+#: ../Pinta.Core/Actions/ViewActions.cs:130
+msgid "Menu Bar"
+msgstr ""
+
+#: ../Pinta.Core/Actions/LayerActions.cs:82
+#: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Обєднати шар з попереднім"
 
@@ -1423,7 +1427,7 @@ msgstr "Обєднати шар з попереднім"
 msgid "Mode"
 msgstr "Режим"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:913
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:914
 msgid "Modified"
 msgstr "Змінений"
 
@@ -1435,13 +1439,13 @@ msgstr "Більше інформації..."
 msgid "Motion Blur"
 msgstr "Розмивання рухом"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:284
+#: ../Pinta.Core/Actions/LayerActions.cs:119
+#: ../Pinta.Core/Actions/LayerActions.cs:344
 msgid "Move Layer Down"
 msgstr "Перемістити шар нижче"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:67
-#: ../Pinta.Core/Actions/LayerActions.cs:268
+#: ../Pinta.Core/Actions/LayerActions.cs:113
+#: ../Pinta.Core/Actions/LayerActions.cs:328
 msgid "Move Layer Up"
 msgstr "Перемістити шар вище"
 
@@ -1465,16 +1469,16 @@ msgstr "Ім’я:"
 msgid "Nearest Neighbor"
 msgstr "Найближчий сусід"
 
-#: ../Pinta.Core/Actions/FileActions.cs:59
+#: ../Pinta.Core/Actions/FileActions.cs:54
 msgid "New"
 msgstr "Новий"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:154
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:141
 #: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "Нове зображення"
 
-#: ../Pinta.Core/Actions/FileActions.cs:51
+#: ../Pinta.Core/Actions/FileActions.cs:58
 msgid "New Screenshot..."
 msgstr "Новий скріншот..."
 
@@ -1498,7 +1502,7 @@ msgstr "Шум"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:263
+#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:275
 msgid "Normal"
 msgstr "Нормальний"
 
@@ -1506,11 +1510,11 @@ msgstr "Нормальний"
 msgid "Normal Blending"
 msgstr "Нормальне змішування"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:73
+#: ../Pinta.Core/Actions/ViewActions.cs:99
 msgid "Normal Size"
 msgstr "Нормальний розмір"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:264
+#: ../Pinta.Tools/Tools/TextTool.cs:276
 msgid "Normal and Outline"
 msgstr "Нормальний та контурний"
 
@@ -1522,7 +1526,7 @@ msgstr "Кількість клітин"
 msgid "Number of threads to use for rendering"
 msgstr "Кількість потоків, щоб використати для візуалізації"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:453
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:165
 msgid "OK"
 msgstr "Добре"
 
@@ -1540,7 +1544,7 @@ msgstr "Об'єкт"
 msgid "Offset"
 msgstr "Зміщення"
 
-#: ../Pinta.Core/Actions/EditActions.cs:79
+#: ../Pinta.Core/Actions/EditActions.cs:148
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
@@ -1554,7 +1558,7 @@ msgstr "Олійне малювання"
 msgid "Opacity:"
 msgstr "Непрозорість:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:60
+#: ../Pinta.Core/Actions/FileActions.cs:68
 msgid "Open"
 msgstr "Відкрити"
 
@@ -1562,25 +1566,25 @@ msgstr "Відкрити"
 msgid "Open Curve Shape"
 msgstr "Відкрита крива"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:358
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
 msgid "Open Image"
 msgstr "Відкрити зображення"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:199
+#: ../Pinta.Core/Actions/LayerActions.cs:259
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "Відкрити файл зображення"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
 msgid "Open Line/Curve Series"
 msgstr "Група відкритих геометричних фігур/кривих"
 
-#: ../Pinta.Core/Actions/EditActions.cs:390
+#: ../Pinta.Core/Actions/EditActions.cs:495
 msgid "Open Palette File"
 msgstr "Відкрити палітру"
 
-#: ../Pinta.Core/Actions/EditActions.cs:83
-#: ../Pinta.Core/Actions/FileActions.cs:52
+#: ../Pinta.Core/Actions/EditActions.cs:169
+#: ../Pinta.Core/Actions/FileActions.cs:64
 msgid "Open..."
 msgstr "Відкрити…"
 
@@ -1592,7 +1596,7 @@ msgstr "Орієнтація:"
 msgid "Original"
 msgstr "Оригінал"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:265
+#: ../Pinta.Tools/Tools/TextTool.cs:277
 msgid "Outline"
 msgstr "Контур"
 
@@ -1608,12 +1612,12 @@ msgstr "Край контура"
 msgid "Outline Object"
 msgstr "Об'єкт контуру"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
 msgstr "Обвести фігуру"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:279
+#: ../Pinta.Tools/Tools/TextTool.cs:291
 msgid "Outline width"
 msgstr "Товщина контуру"
 
@@ -1641,12 +1645,12 @@ msgstr "Заливка"
 msgid "Paintbrush"
 msgstr "Пензлик"
 
-#: ../Pinta.Core/Actions/EditActions.cs:133
+#: ../Pinta.Core/Actions/EditActions.cs:235
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:138
 msgid "Palette"
 msgstr "Палітра"
 
-#: ../Pinta.Core/Actions/EditActions.cs:457
+#: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
 msgstr "файли палітр"
 
@@ -1655,17 +1659,17 @@ msgstr "файли палітр"
 msgid "Pan"
 msgstr "Панорама"
 
-#: ../Pinta.Core/Actions/EditActions.cs:73
+#: ../Pinta.Core/Actions/EditActions.cs:105
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste"
 msgstr "Вставити"
 
-#: ../Pinta.Core/Actions/EditActions.cs:75
+#: ../Pinta.Core/Actions/EditActions.cs:120
 msgid "Paste Into New Image"
 msgstr "Вставити як нове зображення"
 
-#: ../Pinta.Core/Actions/EditActions.cs:74
+#: ../Pinta.Core/Actions/EditActions.cs:112
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste Into New Layer"
 msgstr "Вставити як новий шар"
@@ -1695,7 +1699,7 @@ msgid "Photo"
 msgstr "Знімок"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:58
+#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:62
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1711,7 +1715,7 @@ msgstr "Додатки спільноти Pinta — залежні від опе
 msgid "Pinta Image Editor"
 msgstr "Редактор зображень Pinta"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:45
+#: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
 msgstr "Відвідати сайт Pinta"
 
@@ -1733,11 +1737,11 @@ msgstr ""
 "застосувати до ваших зображень понад 35 ефектів, а також створити необмежену "
 "кількість шарів, які допоможуть упорядкувати ваші художні засоби."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:458
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
 msgid "Pinta supports the following file formats:"
 msgstr "У Pinta передбачено підтримку таких форматів файлів:"
 
-#: ../Pinta.Core/Classes/Palette.cs:195
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:168
 msgid "Pinta supports the following palette formats:"
 msgstr "У Pinta передбачено підтримку таких форматів палітр:"
 
@@ -1745,7 +1749,7 @@ msgstr "У Pinta передбачено підтримку таких форма
 msgid "Pixelate"
 msgstr "Пікселізація"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Pixels"
 msgstr "Пікселів"
 
@@ -1754,12 +1758,16 @@ msgstr "Пікселів"
 msgid "Piña Colada"
 msgstr "Піна Колада"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:599
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:802
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+msgid "Please restart Pinta for the changes to take effect."
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:600
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
 msgid "Point Added"
 msgstr "Точка додана"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:650
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:651
 msgid "Point Deleted"
 msgstr "Точка вилучена"
 
@@ -1805,7 +1813,7 @@ msgstr "Попередній перегляд"
 msgid "Primary"
 msgstr "Основний"
 
-#: ../Pinta.Core/Actions/FileActions.cs:57
+#: ../Pinta.Core/Actions/FileActions.cs:93
 msgid "Print"
 msgstr "Друк"
 
@@ -1822,7 +1830,7 @@ msgstr "Якість"
 msgid "Quality: "
 msgstr "Якість: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:41
+#: ../Pinta.Core/Actions/AppActions.cs:47
 msgid "Quit"
 msgstr "Вихід"
 
@@ -1894,7 +1902,7 @@ msgstr "Прямокутне виділення"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:681
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:423
 msgid "Red"
 msgstr "Червоний"
 
@@ -1906,7 +1914,7 @@ msgstr "Червоний  "
 msgid "Red Eye Removal"
 msgstr "Прибирання ефекту червоних очей"
 
-#: ../Pinta.Core/Actions/EditActions.cs:69
+#: ../Pinta.Core/Actions/EditActions.cs:77
 msgid "Redo"
 msgstr "Відновити"
 
@@ -1922,7 +1930,7 @@ msgstr "Віддзеркалення"
 msgid "Refresh"
 msgstr "Оновити"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:90
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:92
 msgid "Released under the MIT X11 License."
 msgstr "Випущено за підтримки МТІ ліцензія X11."
 
@@ -1941,11 +1949,11 @@ msgstr "Перейменувати шар"
 msgid "Render"
 msgstr "Обробка"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:186
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
 msgstr "Обробити ефекти"
 
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:43
 msgid "Replace"
 msgstr "Замінити"
 
@@ -1966,11 +1974,11 @@ msgstr "Перемішати"
 msgid "Reset"
 msgstr "Скинути"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:155
 msgid "Reset Color"
 msgstr "Скинути налаштування кольору"
 
-#: ../Pinta.Core/Actions/EditActions.cs:85
+#: ../Pinta.Core/Actions/EditActions.cs:181
 msgid "Reset to Default"
 msgstr "Початкові налаштування"
 
@@ -1979,7 +1987,7 @@ msgstr "Початкові налаштування"
 msgid "Resize Canvas"
 msgstr "Зміна розміру полотна"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:57
+#: ../Pinta.Core/Actions/ImageActions.cs:77
 msgid "Resize Canvas..."
 msgstr "Змінити розмір полотна..."
 
@@ -1988,13 +1996,17 @@ msgstr "Змінити розмір полотна..."
 msgid "Resize Image"
 msgstr "Змінити розмір зображення"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:56
+#: ../Pinta.Core/Actions/ImageActions.cs:70
 msgid "Resize Image..."
 msgstr "Змінити розмір зображення..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:60
 msgid "Resize Palette"
 msgstr "Змінити розмір палітри"
+
+#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
+msgid "Restart Pinta"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
@@ -2007,7 +2019,7 @@ msgstr "Зворотна кольорова гама"
 msgid "Reverse Color Sorting"
 msgstr "Зворотнє cортування кольору"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:240
+#: ../Pinta.Tools/Tools/TextTool.cs:252
 msgid "Right Align"
 msgstr "Рівняння праворуч"
 
@@ -2016,21 +2028,21 @@ msgstr "Рівняння праворуч"
 msgid "Rotate / Zoom Layer"
 msgstr "Повернути / Збільшити шар"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:66
+#: ../Pinta.Core/Actions/LayerActions.cs:107
 msgid "Rotate / Zoom Layer..."
 msgstr "Повернути / Збільшити шар..."
 
-#: ../Pinta.Core/Actions/ImageActions.cs:62
+#: ../Pinta.Core/Actions/ImageActions.cs:110
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:47
 msgid "Rotate 180°"
 msgstr "Повернути на 180°"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:60
+#: ../Pinta.Core/Actions/ImageActions.cs:96
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:59
 msgid "Rotate 90° Clockwise"
 msgstr "Повернути на 90° за годинниковою стрілкою"
 
-#: ../Pinta.Core/Actions/ImageActions.cs:61
+#: ../Pinta.Core/Actions/ImageActions.cs:103
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:63
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "Повернути на 90° проти годинникової стрілки"
@@ -2040,7 +2052,7 @@ msgstr "Повернути на 90° проти годинникової стр�
 msgid "Rotation"
 msgstr "Обертання"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
 msgid "Rounded Line Series"
 msgstr "Група закруглених ліній"
 
@@ -2052,11 +2064,11 @@ msgstr "Закруглена лінія"
 msgid "Rounded Rectangle"
 msgstr "Округлений прямокутник"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:148
+#: ../Pinta.Core/Actions/ViewActions.cs:232
 msgid "Ruler Units"
 msgstr "Одиниці виміру"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:80
+#: ../Pinta.Core/Actions/ViewActions.cs:148
 msgid "Rulers"
 msgstr "Лінійки"
 
@@ -2064,11 +2076,11 @@ msgstr "Лінійки"
 msgid "Sampling"
 msgstr "Вибірка"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:661
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:377
 msgid "Sat"
 msgstr "Насиченість"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:568
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:264
 msgid "Sat & Value"
 msgstr "Насиченість і значення"
 
@@ -2081,18 +2093,18 @@ msgstr "Налаштування насиченості"
 msgid "Saturation Percentage"
 msgstr "Насиченість у відсотках"
 
-#: ../Pinta.Core/Actions/EditActions.cs:410
-#: ../Pinta.Core/Actions/FileActions.cs:55
+#: ../Pinta.Core/Actions/EditActions.cs:529
+#: ../Pinta.Core/Actions/FileActions.cs:79
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
 msgstr "Зберегти"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:45
+#: ../Pinta.Core/Actions/WindowActions.cs:47
 msgid "Save All"
 msgstr "Зберегти все"
 
-#: ../Pinta.Core/Actions/EditActions.cs:84
-#: ../Pinta.Core/Actions/FileActions.cs:56
+#: ../Pinta.Core/Actions/EditActions.cs:175
+#: ../Pinta.Core/Actions/FileActions.cs:86
 msgid "Save As..."
 msgstr "Зберегти як…"
 
@@ -2100,7 +2112,7 @@ msgstr "Зберегти як…"
 msgid "Save Image File"
 msgstr "Зберегти зображення"
 
-#: ../Pinta.Core/Actions/EditActions.cs:407
+#: ../Pinta.Core/Actions/EditActions.cs:526
 msgid "Save Palette File"
 msgstr "Зберегти Палітру"
 
@@ -2121,8 +2133,8 @@ msgstr "Екран"
 msgid "Secondary"
 msgstr "Вторинний"
 
-#: ../Pinta.Core/Actions/EditActions.cs:80
-#: ../Pinta.Core/Actions/EditActions.cs:232
+#: ../Pinta.Core/Actions/EditActions.cs:155
+#: ../Pinta.Core/Actions/EditActions.cs:336
 msgid "Select All"
 msgstr "Виділити все"
 
@@ -2134,11 +2146,11 @@ msgstr "Обрані кольори"
 msgid "Sepia"
 msgstr "Сепія"
 
-#: ../Pinta.Core/Actions/EditActions.cs:86
+#: ../Pinta.Core/Actions/EditActions.cs:187
 msgid "Set Number of Colors"
 msgstr "Встановіть число кольорів"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
 msgid "Shape Type"
 msgstr "Форма"
 
@@ -2150,13 +2162,18 @@ msgstr "Гострі краї"
 msgid "Sharpen"
 msgstr "Різкість"
 
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:487
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:278
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Shortcut key"
 msgstr "Гаряча клавіша"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
+msgid "Shortcut keys"
+msgstr ""
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:19
 msgid "Show Grid"
 msgstr "Відобразити сітку"
 
@@ -2164,11 +2181,11 @@ msgstr "Відобразити сітку"
 msgid "Show Layer"
 msgstr "Показати шар"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:550
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:245
 msgid "Show Value"
 msgstr "Показати значення"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:159
+#: ../Pinta.Core/Actions/ViewActions.cs:244
 msgid "Show/Hide"
 msgstr "Показати/Приховати"
 
@@ -2214,7 +2231,7 @@ msgstr "Бризки"
 msgid "Squares"
 msgstr "Квадрати"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:78
+#: ../Pinta.Core/Actions/ViewActions.cs:136
 msgid "Status Bar"
 msgstr "Смужка стану"
 
@@ -2251,12 +2268,12 @@ msgstr "Текст"
 msgid "Text - Finalize"
 msgstr "Текст - Завершити"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:254
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Text Style"
 msgstr "Стиль Тексту"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:297
+#: ../Pinta/MainWindow.cs:315
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "Додаток '{0}' може бути не сумісним з цією версією Pinta"
@@ -2361,15 +2378,15 @@ msgstr "Допустиме відхилення"
 msgid "Tool"
 msgstr "Інструменти"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Tool Box"
 msgstr "Панель інструментів"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:76
+#: ../Pinta.Core/Actions/ViewActions.cs:118
 msgid "Tool Windows"
 msgstr "Вікна інструментів"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:74
+#: ../Pinta.Core/Actions/ViewActions.cs:106
 msgid "Toolbar"
 msgstr "Панель інструментів"
 
@@ -2389,7 +2406,7 @@ msgstr "Вгорі праворуч"
 msgid "Transfer Map"
 msgstr "Карта нормалей"
 
-#: ../Pinta.Core/Actions/HelpActions.cs:47
+#: ../Pinta.Core/Actions/HelpActions.cs:65
 msgid "Translate This Application"
 msgstr "Перекласти цю програму"
 
@@ -2420,11 +2437,11 @@ msgstr "Дворядовий ефект високогір'я"
 msgid "Type"
 msgstr "Тип"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:200
+#: ../Pinta.Tools/Tools/TextTool.cs:212
 msgid "Underline"
 msgstr "Підкреслений"
 
-#: ../Pinta.Core/Actions/EditActions.cs:68
+#: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Undo"
 msgstr "Відмінити"
 
@@ -2442,7 +2459,7 @@ msgid "Uninstall..."
 msgstr "Видалення..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:47
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
 #, csharp-format
 msgid "Union (+) ({0} + Left Click)"
 msgstr "Об'єднати (+) ({0} + клацання лівою кнопкою)"
@@ -2452,11 +2469,11 @@ msgstr "Об'єднати (+) ({0} + клацання лівою кнопкою)
 msgid "Unsaved Image {0}"
 msgstr "Незбережених зображень {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:353
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:340
 msgid "Unsupported file format"
 msgstr "Формат файлу не підтримується"
 
-#: ../Pinta.Core/Classes/Palette.cs:155
+#: ../Pinta.Core/Actions/EditActions.cs:518
 msgid "Unsupported palette format"
 msgstr "Формат палітри не підтримується"
 
@@ -2477,11 +2494,11 @@ msgstr ""
 "і малих кутів. Використовуйте високу якість для остаточного варіанту, "
 "великих зображень і великих кутів."
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:97
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:99
 msgid "Using some icons from:"
 msgstr "Використовує деякі іконки з:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:670
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:400
 msgid "Value"
 msgstr "Значення"
 
@@ -2505,6 +2522,10 @@ msgstr "Вертикальний зелений (G)"
 msgid "Vertical red (R)"
 msgstr "Вертикальний червоний (R)"
 
+#: ../Pinta/MainWindow.cs:461
+msgid "View"
+msgstr ""
+
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
@@ -2526,15 +2547,15 @@ msgstr "Теплота"
 msgid "White"
 msgstr "Білий"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:41
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:83
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:163
 msgid "Width:"
 msgstr "Ширина:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:123
-#: ../Pinta.Core/Actions/ViewActions.cs:306
+#: ../Pinta.Core/Actions/ViewActions.cs:207
+#: ../Pinta.Core/Actions/ViewActions.cs:398
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:377
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:386
 msgid "Window"
@@ -2549,13 +2570,13 @@ msgid "Xor"
 msgstr "Xor (логічне виключення)"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Core/Classes/SelectionModeHandler.cs:50
+#: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
 msgstr "Викл. АБО ({0} + клацання правою кнопкою)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:480
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:467
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "У вас немає прав доступу до «{0}»."
@@ -2580,24 +2601,24 @@ msgstr "Масштабування"
 msgid "Zoom Blur"
 msgstr "Збільшувальне розмивання"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:69
+#: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Zoom In"
 msgstr "Збільшити"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:70
+#: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Zoom Out"
 msgstr "Зменшити"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:93
 msgid "Zoom to Selection"
 msgstr "По розміру виділення"
 
-#: ../Pinta/MainWindow.cs:379
+#: ../Pinta/MainWindow.cs:406
 msgid "_Adjustments"
 msgstr "_Кольори"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:189
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:191
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
@@ -2609,28 +2630,28 @@ msgstr "_Відмінити"
 msgid "_Discard"
 msgstr "_Відмовитися"
 
-#: ../Pinta/MainWindow.cs:362
+#: ../Pinta/MainWindow.cs:386
 msgid "_Edit"
 msgstr "_Правка"
 
-#: ../Pinta/MainWindow.cs:358
+#: ../Pinta/MainWindow.cs:382
 msgid "_File"
 msgstr "_Файл"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:422
 msgid "_Help"
 msgstr "_Допомога"
 
-#: ../Pinta/MainWindow.cs:371
+#: ../Pinta/MainWindow.cs:396
 msgid "_Image"
 msgstr "_Малюнок"
 
-#: ../Pinta/MainWindow.cs:375
+#: ../Pinta/MainWindow.cs:400
 msgid "_Layers"
 msgstr "_Шари"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:188
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:192
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
@@ -2640,15 +2661,15 @@ msgstr "_Добре"
 msgid "_Save"
 msgstr "_Зберегти"
 
-#: ../Pinta/MainWindow.cs:366
+#: ../Pinta/MainWindow.cs:391
 msgid "_View"
 msgstr "_Вигляд"
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:418
 msgid "_Window"
 msgstr "_Вікно"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:81
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:83
 msgid "by Pinta contributors"
 msgstr "розробники Pinta"
 
@@ -2658,8 +2679,8 @@ msgstr ""
 "draw;drawing;paint;painting;graphics;raster;2d;малювати;малювання;пейнт;"
 "графіка;растр;двовимірне;плоске;"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
 #: ../Pinta/Dialogs/NewImageDialog.cs:277
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:106
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
@@ -2701,7 +2722,7 @@ msgstr ""
 msgid "{0} copy"
 msgstr "Копія {0}"
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:118
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:123
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "Зображення {0}_({1})"
@@ -2714,7 +2735,7 @@ msgstr "палітра {0} ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:287
+#: ../Pinta.Core/Actions/ViewActions.cs:379
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
