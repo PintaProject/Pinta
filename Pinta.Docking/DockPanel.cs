@@ -85,7 +85,7 @@ public sealed class DockPanel : Gtk.Box
 			popover.Child = null;
 
 			Pane.StartChild = Item;
-			Pane.ResizeStartChild = true;
+			Pane.ResizeStartChild = false;
 			Pane.ShrinkStartChild = false;
 
 			updateConnections ();
