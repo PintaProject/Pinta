@@ -125,7 +125,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		DrawCanvas (snapshot, modified_area.Value, canvasViewBounds);
 		DrawSelection (snapshot, canvasViewBounds);
 		DrawHandles (snapshot, canvasViewBounds);
-		DrawCanvasGrid (snapshot);
+		DrawCanvasGrid (snapshot, canvasViewBounds);
 
 		// In the future, this would be cleaner to implement as a custom widget once gir.core supports virtual methods
 		// (in particular, zooming might be easier when we have control over the size allocation)
@@ -265,13 +265,14 @@ public sealed class PintaCanvas : Gtk.Picture
 		snapshot.Pop ();
 	}
 
-	private void DrawCanvasGrid (Gtk.Snapshot snapshot)
+	private void DrawCanvasGrid (Gtk.Snapshot snapshot, Graphene.Rect canvasViewBounds)
 	{
 		if (!ShouldShowCanvasGrid ())
 			return;
 
 		Gsk.Path gridPath = BuildCanvasGridPath ();
 
+		snapshot.PushClip (canvasViewBounds);
 		snapshot.Save ();
 
 		// Scale the selection path up to the view size.
@@ -286,6 +287,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		snapshot.AppendStroke (gridPath, stroke, color);
 
 		snapshot.Restore ();
+		snapshot.Pop ();
 	}
 
 	private Gsk.Path BuildCanvasGridPath ()
