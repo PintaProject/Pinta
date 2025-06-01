@@ -17,7 +17,8 @@ public abstract record ColorPick
 public sealed record RegularSingleColorPick (Color Color)
 	: ColorPick
 {
-	public override ColorPickType Type => ColorPickType.RegularSingle;
+	public override ColorPickType Type
+ 		=> ColorPickType.RegularSingle;
 }
 
 public sealed record MainColorsPick (Color Primary, Color Secondary)
