@@ -141,16 +141,16 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private Color GetPrimary () // TODO: This is just the default in place of what was before. Get rid of this
 	{
 		return Colors switch {
-			RegularSingleColorPick regular => regular.Color,
-			MainColorsPick main => main.Primary,
+			SingleColor singleColor => singleColor.Color,
+			PaletteColors paletteColors => paletteColors.Primary,
 			_ => throw new UnreachableException (),
 		};
 	}
 	private Color GetSecondary ()
 	{
 		return Colors switch {
-			MainColorsPick main => main.Primary,
-			RegularSingleColorPick => throw new InvalidOperationException (),
+			PaletteColors paletteColors => paletteColors.Primary,
+			SingleColor => throw new InvalidOperationException (),
 			_ => throw new UnreachableException (),
 		};
 	}
@@ -158,11 +158,11 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private void SetPrimary (Color color)
 	{
 		switch (Colors) {
-			case RegularSingleColorPick regular:
-				Colors = regular with { Color = color };
+			case SingleColor singleColor:
+				Colors = singleColor with { Color = color };
 				break;
-			case MainColorsPick main:
-				Colors = main with { Primary = color };
+			case PaletteColors paletteColors:
+				Colors = paletteColors with { Primary = color };
 				break;
 			default:
 				throw new UnreachableException ();
@@ -172,10 +172,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private void SetSecondary (Color color)
 	{
 		switch (Colors) {
-			case MainColorsPick main:
-				Colors = main with { Secondary = color };
+			case PaletteColors paletteColors:
+				Colors = paletteColors with { Secondary = color };
 				break;
-			case RegularSingleColorPick regular:
+			case SingleColor:
 				throw new InvalidOperationException ();
 			default:
 				throw new UnreachableException ();
@@ -246,7 +246,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		current_color_setter = primarySelected ? SetPrimary : SetSecondary;
 		primary_selected = primarySelected;
 
-		if (Colors is MainColorsPick mainColors) {
+		if (Colors is PaletteColors paletteColors) {
 
 			string label = Translations.GetString ("Click to switch between primary and secondary color.");
 			string shortcut_label = Translations.GetString ("Shortcut key");
@@ -258,8 +258,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		}
 
 		Func<ColorPick, Color>[] colorSelectors = originalColors switch {
-			RegularSingleColorPick r => [c => ((RegularSingleColorPick) Colors).Color],
-			MainColorsPick m => [c => ((MainColorsPick) Colors).Primary, c => ((MainColorsPick) Colors).Secondary],
+			SingleColor s => [c => ((SingleColor) Colors).Color],
+			PaletteColors p => [c => ((PaletteColors) Colors).Primary, c => ((PaletteColors) Colors).Secondary],
 			_ => throw new UnreachableException (),
 		};
 
@@ -757,18 +757,18 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		SetOpacity (0.85f);
 
 		switch (Colors) {
-			case RegularSingleColorPick regularSingle:
+			case SingleColor singleColor:
 
-				if (palette.PrimaryColor != regularSingle.Color)
-					palette.PrimaryColor = regularSingle.Color;
+				if (palette.PrimaryColor != singleColor.Color)
+					palette.PrimaryColor = singleColor.Color;
 
 				break;
-			case MainColorsPick mainColors:
-				if (palette.PrimaryColor != mainColors.Primary)
-					palette.PrimaryColor = mainColors.Primary;
+			case PaletteColors paletteColors:
+				if (palette.PrimaryColor != paletteColors.Primary)
+					palette.PrimaryColor = paletteColors.Primary;
 
-				if (palette.SecondaryColor != mainColors.Secondary)
-					palette.SecondaryColor = mainColors.Secondary;
+				if (palette.SecondaryColor != paletteColors.Secondary)
+					palette.SecondaryColor = paletteColors.Secondary;
 				break;
 			default:
 				throw new UnreachableException ();
@@ -779,8 +779,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	{
 		Color newPrimary = ((PaletteManager) sender!).PrimaryColor;
 		Colors = Colors switch {
-			RegularSingleColorPick regularSingle => regularSingle with { Color = newPrimary },
-			MainColorsPick mainColors => mainColors with { Primary = newPrimary },
+			SingleColor singleColor => singleColor with { Color = newPrimary },
+			PaletteColors paletteColors => paletteColors with { Primary = newPrimary },
 			_ => throw new UnreachableException (),
 		};
 		UpdateView ();
@@ -788,9 +788,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	void SecondaryChangeHandler (object? sender, EventArgs _)
 	{
-		if (Colors is not MainColorsPick mainColors) return;
+		if (Colors is not PaletteColors paletteColors) return;
 		Color newSecondary = ((PaletteManager) sender!).SecondaryColor;
-		Colors = mainColors with { Secondary = newSecondary };
+		Colors = paletteColors with { Secondary = newSecondary };
 		UpdateView ();
 	}
 
@@ -895,8 +895,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private static ColorPick CycledColors (ColorPick colorPick)
 	{
 		return colorPick switch {
-			RegularSingleColorPick regular => regular,
-			MainColorsPick mainColors => mainColors.Swapped (),
+			SingleColor singleColor => singleColor,
+			PaletteColors paletteColors => paletteColors.Swapped (),
 			_ => throw new UnreachableException (),
 		};
 	}

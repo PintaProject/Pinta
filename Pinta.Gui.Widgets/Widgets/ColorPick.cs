@@ -14,19 +14,19 @@ public abstract record ColorPick
 	protected ColorPick () { }
 }
 
-public sealed record RegularSingleColorPick (Color Color)
+public sealed record SingleColor (Color Color)
 	: ColorPick
 {
 	public override ColorPickType Type
  		=> ColorPickType.RegularSingle;
 }
 
-public sealed record MainColorsPick (Color Primary, Color Secondary)
+public sealed record PaletteColors (Color Primary, Color Secondary)
 	: ColorPick
 {
 	public override ColorPickType Type
 		=> ColorPickType.MainColors;
 
-	public MainColorsPick Swapped ()
+	public PaletteColors Swapped ()
 		=> new (Secondary, Primary);
 }

@@ -99,7 +99,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 						_ => throw new UnreachableException ()
 					};
 
-					MainColorsPick? choices = await RunColorPicker (primarySelected);
+					PaletteColors? choices = await RunColorPicker (primarySelected);
 
 					if (choices is null)
 						break;
@@ -144,7 +144,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				} else if (button == GtkExtensions.MOUSE_LEFT_BUTTON) {
 					palette.PrimaryColor = palette.CurrentPalette.Colors[index];
 				} else {
-					RegularSingleColorPick pick = new (palette.CurrentPalette.Colors[index]);
+					SingleColor pick = new (palette.CurrentPalette.Colors[index]);
 					var colors = await GetUserChosenColor (
 						pick,
 						Translations.GetString ("Choose Palette Color"));
@@ -314,12 +314,12 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			QueueDraw ();
 	}
 
-	private async Task<MainColorsPick?> RunColorPicker (bool primarySelected)
+	private async Task<PaletteColors?> RunColorPicker (bool primarySelected)
 	{
 		using ColorPickerDialog colorPicker = new (
 			chrome,
 			palette,
-			new MainColorsPick (palette.PrimaryColor, palette.SecondaryColor),
+			new PaletteColors (palette.PrimaryColor, palette.SecondaryColor),
 			primarySelected,
 			true,
 			Translations.GetString ("Color Picker"));
@@ -329,12 +329,12 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		if (response != Gtk.ResponseType.Ok)
 			return null;
 
-		return (MainColorsPick) colorPicker.Colors;
+		return (PaletteColors) colorPicker.Colors;
 	}
 
 
-	private async Task<RegularSingleColorPick?> GetUserChosenColor (
-		RegularSingleColorPick colors,
+	private async Task<SingleColor?> GetUserChosenColor (
+		SingleColor colors,
 		string title)
 	{
 		using ColorPickerDialog dialog = new (
@@ -351,7 +351,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			if (response != Gtk.ResponseType.Ok)
 				return null;
 
-			return ((RegularSingleColorPick) dialog.Colors);
+			return (SingleColor) dialog.Colors;
 
 		} finally {
 			dialog.Destroy ();
