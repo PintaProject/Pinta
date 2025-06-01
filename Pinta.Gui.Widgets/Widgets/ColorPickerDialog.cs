@@ -744,6 +744,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	void ActiveWindowChangeHandler (object? _, NotifySignalArgs __)
 	{
+		if (Colors is not PaletteColors paletteColors)
+			return;
+
 		// Handles on active / off active
 		// When user clicks off the color picker, we assign the color picker values to the palette
 		// we only do this on off active because otherwise the recent color palette would be spammed
@@ -756,23 +759,11 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		SetOpacity (0.85f);
 
-		switch (Colors) {
-			case SingleColor singleColor:
+		if (palette.PrimaryColor != paletteColors.Primary)
+			palette.PrimaryColor = paletteColors.Primary;
 
-				if (palette.PrimaryColor != singleColor.Color)
-					palette.PrimaryColor = singleColor.Color;
-
-				break;
-			case PaletteColors paletteColors:
-				if (palette.PrimaryColor != paletteColors.Primary)
-					palette.PrimaryColor = paletteColors.Primary;
-
-				if (palette.SecondaryColor != paletteColors.Secondary)
-					palette.SecondaryColor = paletteColors.Secondary;
-				break;
-			default:
-				throw new UnreachableException ();
-		}
+		if (palette.SecondaryColor != paletteColors.Secondary)
+			palette.SecondaryColor = paletteColors.Secondary;
 	}
 
 	void PrimaryChangeHandler (object? sender, EventArgs _)
