@@ -248,7 +248,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		if (Colors is MainColorsPick mainColors) {
 
-			// technically this label would be wrong if you have >2 colors but there is no situation in which there are >2 colors in the palette
 			string label = Translations.GetString ("Click to switch between primary and secondary color.");
 			string shortcut_label = Translations.GetString ("Shortcut key");
 
