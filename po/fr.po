@@ -8,8 +8,9 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-25 00:30+0000\n"
-"PO-Revision-Date: 2025-05-13 15:39+0000\n"
-"Last-Translator: Christophe <cuvillierch@zonesix.fr>\n"
+"PO-Revision-Date: 2025-06-02 11:46+0000\n"
+"Last-Translator: ReadOnlyMAIN <readonlymain@users.noreply.hosted.weblate.org>"
+"\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -510,8 +511,9 @@ msgid "Color Scheme Source"
 msgstr "Source du schéma de couleur"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:260
+#, fuzzy
 msgid "Color Sorting"
-msgstr "Tri de couleur"
+msgstr "Tri des couleurs"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:160
 msgid "Coloring"
@@ -1414,8 +1416,9 @@ msgid "Median"
 msgstr "Médian"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
+#, fuzzy
 msgid "Menu Bar"
-msgstr ""
+msgstr "Barre de Menu"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:363
@@ -1761,8 +1764,9 @@ msgid "Piña Colada"
 msgstr "Piña Colada"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+#, fuzzy
 msgid "Please restart Pinta for the changes to take effect."
-msgstr ""
+msgstr "Veuillez redémarrer Pinta pour appliquer les changements."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:600
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
@@ -2007,8 +2011,9 @@ msgid "Resize Palette"
 msgstr "Redimensionner la palette"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
+#, fuzzy
 msgid "Restart Pinta"
-msgstr ""
+msgstr "Redémarrer Pinta"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
@@ -2526,8 +2531,9 @@ msgid "Vertical red (R)"
 msgstr "Rouge vertical (R)"
 
 #: ../Pinta/MainWindow.cs:461
+#, fuzzy
 msgid "View"
-msgstr ""
+msgstr "Vue"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
