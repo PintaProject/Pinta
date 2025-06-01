@@ -389,15 +389,15 @@ internal sealed class MainWindow
 		Gio.Menu menuBar = Gio.Menu.New ();
 		menuBar.AppendSubmenu (Translations.GetString ("_File"), fileMenu);
 		menuBar.AppendSubmenu (Translations.GetString ("_Edit"), editMenu);
-		if (usingMenuBar)
+		if (usingMenuBar) {
 			menuBar.AppendSubmenu (Translations.GetString ("_View"), viewMenu);
-		if (usingMenuBar)
 			menuBar.AppendSubmenu (Translations.GetString ("_Image"), imageMenu);
+		}
 		menuBar.AppendSubmenu (Translations.GetString ("_Layers"), layersMenu);
-		if (usingMenuBar)
+		if (usingMenuBar) {
 			menuBar.AppendSubmenu (Translations.GetString ("_Adjustments"), adjustmentsMenu);
-		if (usingMenuBar)
 			menuBar.AppendSubmenu (Translations.GetString ("Effe_cts"), effectsMenu);
+		}
 		menuBar.AppendSubmenu (Translations.GetString ("A_dd-ins"), addinsMenu);
 		menuBar.AppendSubmenu (Translations.GetString ("_Window"), windowMenu);
 		menuBar.AppendSubmenu (Translations.GetString ("_Help"), helpMenu);
