@@ -93,18 +93,16 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				color_picker_active = true;
 
 				try {
-					int colorIndex = element switch {
-						WidgetElement.PrimaryColor => 0,
-						WidgetElement.SecondaryColor => 1,
+					bool primarySelected = element switch {
+						WidgetElement.PrimaryColor => true,
+						WidgetElement.SecondaryColor => false,
 						_ => throw new UnreachableException ()
 					};
 
-					ColorChoices? result = await RunColorPicker (colorIndex);
+					MainColorsPick? choices = await RunColorPicker (primarySelected);
 
-					if (!result.HasValue)
+					if (choices is null)
 						break;
-
-					ColorChoices choices = result.Value;
 
 					if (palette.PrimaryColor != choices.Primary)
 						palette.PrimaryColor = choices.Primary;
@@ -146,10 +144,13 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				} else if (button == GtkExtensions.MOUSE_LEFT_BUTTON) {
 					palette.PrimaryColor = palette.CurrentPalette.Colors[index];
 				} else {
-					var colors = await GetUserChosenColor ([palette.CurrentPalette.Colors[index]], 0, Translations.GetString ("Choose Palette Color"));
-					var color = colors?[0];
-					if (color != null)
-						palette.CurrentPalette.SetColor (index, color.Value);
+					RegularSingleColorPick pick = new (palette.CurrentPalette.Colors[index]);
+					var colors = await GetUserChosenColor (
+						pick,
+						Translations.GetString ("Choose Palette Color"));
+
+					if (colors != null)
+						palette.CurrentPalette.SetColor (index, colors.Color);
 				}
 
 				break;
@@ -313,16 +314,13 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			QueueDraw ();
 	}
 
-	private readonly record struct ColorChoices (
-		Color Primary,
-		Color Secondary);
-	private async Task<ColorChoices?> RunColorPicker (int paletteIndex)
+	private async Task<MainColorsPick?> RunColorPicker (bool primarySelected)
 	{
 		using ColorPickerDialog colorPicker = new (
 			chrome,
 			palette,
-			[palette.PrimaryColor, palette.SecondaryColor],
-			paletteIndex,
+			new MainColorsPick (palette.PrimaryColor, palette.SecondaryColor),
+			primarySelected,
 			true,
 			Translations.GetString ("Color Picker"));
 
@@ -331,22 +329,19 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		if (response != Gtk.ResponseType.Ok)
 			return null;
 
-		return new (
-			Primary: colorPicker.Colors[0],
-			Secondary: colorPicker.Colors[1]);
+		return (MainColorsPick) colorPicker.Colors;
 	}
 
 
-	private async Task<Color[]?> GetUserChosenColor (
-		Color[] colors,
-		int selectedColorIndex,
+	private async Task<RegularSingleColorPick?> GetUserChosenColor (
+		RegularSingleColorPick colors,
 		string title)
 	{
 		using ColorPickerDialog dialog = new (
 			chrome,
 			palette,
 			colors,
-			selectedColorIndex,
+			primarySelected: true,
 			false,
 			title);
 
@@ -356,7 +351,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			if (response != Gtk.ResponseType.Ok)
 				return null;
 
-			return dialog.Colors;
+			return ((RegularSingleColorPick) dialog.Colors);
 
 		} finally {
 			dialog.Destroy ();
