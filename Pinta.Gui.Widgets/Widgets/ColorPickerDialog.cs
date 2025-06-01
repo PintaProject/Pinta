@@ -58,16 +58,38 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private readonly ColorPickerSlider alpha_slider;
 
 	// common state
-	private Func<Color> current_color_getter;
-	private Action<Color> current_color_setter;
 	private bool primary_selected; // TODO: Get rid of this
 
 	private readonly ColorPick original_colors;
 	public ColorPick Colors { get; private set; }
 
 	private Color CurrentColor {
-		get => current_color_getter ();
-		set => current_color_setter (value);
+		get => GetTargeted ();
+		set => SetTargeted (value);
+	}
+
+	private Color GetTargeted ()
+	{
+		return Colors switch {
+			SingleColor singleColor => primary_selected ? singleColor.Color : throw new InvalidOperationException (),
+			PaletteColors paletteColors => primary_selected ? paletteColors.Primary : paletteColors.Secondary,
+			_ => throw new UnreachableException (),
+		};
+	}
+
+	private void SetTargeted (Color color)
+	{
+		Colors = Colors switch {
+			SingleColor singleColor =>
+				primary_selected
+				? singleColor with { Color = color }
+				: throw new InvalidOperationException (),
+			PaletteColors paletteColors =>
+				primary_selected
+				? paletteColors with { Primary = color }
+				: paletteColors with { Secondary = color },
+			_ => throw new UnreachableException (),
+		};
 	}
 
 	private int spacing = 6;
@@ -138,50 +160,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private bool IsPrimary (int colorIndex) // TODO: Get rid of this
 		=> colorIndex == 0;
 
-	private Color GetPrimary () // TODO: This is just the default in place of what was before. Get rid of this
-	{
-		return Colors switch {
-			SingleColor singleColor => singleColor.Color,
-			PaletteColors paletteColors => paletteColors.Primary,
-			_ => throw new UnreachableException (),
-		};
-	}
-	private Color GetSecondary ()
-	{
-		return Colors switch {
-			PaletteColors paletteColors => paletteColors.Primary,
-			SingleColor => throw new InvalidOperationException (),
-			_ => throw new UnreachableException (),
-		};
-	}
-
-	private void SetPrimary (Color color)
-	{
-		switch (Colors) {
-			case SingleColor singleColor:
-				Colors = singleColor with { Color = color };
-				break;
-			case PaletteColors paletteColors:
-				Colors = paletteColors with { Primary = color };
-				break;
-			default:
-				throw new UnreachableException ();
-		}
-	}
-
-	private void SetSecondary (Color color)
-	{
-		switch (Colors) {
-			case PaletteColors paletteColors:
-				Colors = paletteColors with { Secondary = color };
-				break;
-			case SingleColor:
-				throw new InvalidOperationException ();
-			default:
-				throw new UnreachableException ();
-		}
-	}
-
 	/// <param name="chrome">Current Chrome Manager.</param>
 	/// <param name="palette">Palette service.</param>
 	/// <param name="adjustable">Palette of adjustable </param>
@@ -197,8 +175,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		bool livePalette,
 		string windowTitle)
 	{
-		current_color_getter = GetPrimary;
-		current_color_setter = SetPrimary;
 		primary_selected = true;
 
 		bool showWatches = !livePalette;
@@ -242,8 +218,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		original_colors = originalColors;
 		Colors = originalColors;
 
-		current_color_getter = primarySelected ? GetPrimary : GetSecondary;
-		current_color_setter = primarySelected ? SetPrimary : SetSecondary;
 		primary_selected = primarySelected;
 
 		if (Colors is PaletteColors paletteColors) {
@@ -286,8 +260,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// Handle on select; index 0 -> primary; index 1 -> secondary
 		colorDisplayList.OnRowSelected += ((sender, args) => {
 			int colorIndex = args.Row?.GetIndex () ?? 0;
-			current_color_getter = IsPrimary (colorIndex) ? GetPrimary : GetSecondary;
-			current_color_setter = IsPrimary (colorIndex) ? SetPrimary : SetSecondary;
 			primary_selected = IsPrimary (colorIndex);
 			UpdateView ();
 		});
