@@ -40,7 +40,7 @@ public sealed class ImageConverterManager
 		settings_manager = settingsManager;
 	}
 
-	private readonly List<FormatDescriptor> formats = GetInitialFormats ().ToList ();
+	private readonly List<FormatDescriptor> formats = [.. GetInitialFormats ()];
 
 	private static IEnumerable<FormatDescriptor> GetInitialFormats ()
 	{
@@ -141,7 +141,7 @@ public sealed class ImageConverterManager
 
 		// Return any format we have
 		foreach (var f in Formats)
-			if (!f.IsReadOnly ())
+			if (f.IsExportAvailable ())
 				return f;
 
 		// We don't have any formats
