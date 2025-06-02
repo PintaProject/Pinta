@@ -51,15 +51,13 @@ internal sealed class MemberReflector
 
 	private static Func<object, object?> CreateGetter (MemberInfo memberInfo)
 	{
-		switch (memberInfo) {
-			case FieldInfo f:
-				return f.GetValue;
-			case PropertyInfo p:
-				MethodInfo getter = p.GetGetMethod () ?? throw new ArgumentException ("Property has no 'get' method", nameof (memberInfo));
-				return o => getter.Invoke (o, []);
-			default:
-				throw new ArgumentException ($"Member type {memberInfo.GetType ()} not supported", nameof (memberInfo));
-		}
+		ParameterExpression selfParam = Expression.Parameter (typeof (object), "self");
+		UnaryExpression selfDowncast = Expression.Convert (selfParam, memberInfo.DeclaringType!);
+		MemberExpression memberAccessParam = Expression.MakeMemberAccess (selfDowncast, memberInfo);
+		UnaryExpression valueOut = Expression.Convert (memberAccessParam, typeof (object));
+		LambdaExpression lambda = Expression.Lambda (valueOut, [selfParam]);
+		Func<object, object?> compiled = (Func<object, object?>) lambda.Compile ();
+		return compiled;
 	}
 
 	private static Type GetTypeForMember (MemberInfo mi) =>
