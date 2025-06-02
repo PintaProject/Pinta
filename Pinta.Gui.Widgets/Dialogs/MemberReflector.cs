@@ -34,6 +34,8 @@ internal sealed class MemberReflector
 
 	private static Action<object, object> CreateSetter (MemberInfo memberInfo)
 	{
+		// (object self, object new_value) => ((EffectDataType) self).Property = ((PropertyType) new_value);
+
 		Type memberType = GetTypeForMember (memberInfo);
 		ParameterExpression selfParam = Expression.Parameter (typeof (object), "self");
 		ParameterExpression valueParam = Expression.Parameter (typeof (object), "new_value");
@@ -51,10 +53,12 @@ internal sealed class MemberReflector
 
 	private static Func<object, object?> CreateGetter (MemberInfo memberInfo)
 	{
+		// (object self) => (object) (((EffectDataType) self).Property);
+
 		ParameterExpression selfParam = Expression.Parameter (typeof (object), "self");
 		UnaryExpression selfDowncast = Expression.Convert (selfParam, memberInfo.DeclaringType!);
 		MemberExpression memberAccessParam = Expression.MakeMemberAccess (selfDowncast, memberInfo);
-		UnaryExpression valueOut = Expression.Convert (memberAccessParam, typeof (object));
+		UnaryExpression valueOut = Expression.Convert (memberAccessParam, typeof (object)); // Boxing to `object`
 		LambdaExpression lambda = Expression.Lambda (valueOut, [selfParam]);
 		Func<object, object?> compiled = (Func<object, object?>) lambda.Compile ();
 		return compiled;
