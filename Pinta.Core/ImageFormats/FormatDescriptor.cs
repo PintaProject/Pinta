@@ -30,8 +30,6 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
-using Gtk;
-
 namespace Pinta.Core;
 
 /// <summary>
@@ -65,7 +63,7 @@ public sealed class FormatDescriptor
 	/// <summary>
 	/// A file filter for use in the file dialog.
 	/// </summary>
-	public FileFilter Filter { get; }
+	public Gtk.FileFilter Filter { get; }
 
 	/// <summary>
 	/// Whether the format supports layers.
@@ -98,10 +96,11 @@ public sealed class FormatDescriptor
 		Exporter = exporter;
 		SupportsLayers = supportsLayers;
 
-		FileFilter ff = FileFilter.New ();
-		StringBuilder formatNames = new StringBuilder ();
+		Gtk.FileFilter ff = Gtk.FileFilter.New ();
+		StringBuilder formatNames = new ();
 
 		foreach (string ext in Extensions) {
+
 			if (formatNames.Length > 0)
 				formatNames.Append (", ");
 
@@ -124,9 +123,9 @@ public sealed class FormatDescriptor
 		Filter = ff;
 	}
 
-	[MemberNotNullWhen (returnValue: false, member: nameof (Exporter))]
-	public bool IsReadOnly () => Exporter == null;
+	[MemberNotNullWhen (returnValue: true, member: nameof (Exporter))]
+	public bool IsExportAvailable () => Exporter is not null;
 
-	[MemberNotNullWhen (returnValue: false, member: nameof (Importer))]
-	public bool IsWriteOnly () => Importer == null;
+	[MemberNotNullWhen (returnValue: true, member: nameof (Importer))]
+	public bool IsImportAvailable () => Importer is not null;
 }
