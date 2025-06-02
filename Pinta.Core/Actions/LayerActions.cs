@@ -224,7 +224,7 @@ public sealed class LayerActions
 	{
 		Gtk.FileFilter imagesFilter = Gtk.FileFilter.New ();
 		foreach (var format in image_formats.Formats) {
-			if (format.IsWriteOnly ()) continue;
+			if (!format.IsImportAvailable ()) continue;
 			foreach (string ext in format.Extensions)
 				imagesFilter.AddPattern ($"*.{ext}");
 		}
