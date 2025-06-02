@@ -112,7 +112,7 @@ internal sealed class OpenDocumentAction : IActionHandler
 
 		foreach (var format in image_formats.Formats) {
 
-			if (format.IsWriteOnly ())
+			if (!format.IsImportAvailable ())
 				continue;
 
 			foreach (var ext in format.Extensions)

@@ -278,7 +278,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 	/// Creates a new Document with a specified image as content.
 	/// Primarily used for Paste Into New Image.
 	/// </summary>
-	public Document NewDocumentFromImage (ActionManager actions, Cairo.ImageSurface image)
+	public Document NewDocumentFromImage (ActionManager actions, ImageSurface image)
 	{
 		Document doc = this.NewDocument (
 			actions,
@@ -314,7 +314,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 				// Unknown extension, so try every loader.
 				StringBuilder errors = new ();
 				bool loaded = false;
-				foreach (var format in image_formats.Formats.Where (f => !f.IsWriteOnly ())) {
+				foreach (var format in image_formats.Formats.Where (f => f.IsImportAvailable ())) {
 					try {
 						Document imported = format.Importer!.Import (file);
 						ActivateDocument (imported, PintaCore.Actions);
@@ -364,9 +364,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 			chrome_manager.MainWindow.Title = "Pinta";
 	}
 
-	public void SetActiveDocument (
-		ActionManager actions,
-		int index)
+	public void SetActiveDocument (ActionManager actions, int index)
 	{
 		if (index >= open_documents.Count)
 			throw new ArgumentOutOfRangeException (
@@ -382,9 +380,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		actions.Window.SetActiveDocument (open_documents[index]);
 	}
 
-	internal void SetActiveDocumentInternal (
-		ToolManager tools,
-		Document document)
+	internal void SetActiveDocumentInternal (ToolManager tools, Document document)
 	{
 		// Work around a case where we closed a document but haven't updated
 		// the active_document_index yet and it points to the closed document

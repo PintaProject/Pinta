@@ -110,7 +110,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		Dictionary<Gtk.FileFilter, FormatDescriptor> filetypes = [];
 		foreach (var format in image_formats.Formats) {
 
-			if (format.IsReadOnly ())
+			if (!format.IsExportAvailable ())
 				continue;
 
 			fcd.AddFilter (format.Filter);
@@ -131,7 +131,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			format_desc = previous_format_desc;
 		}
 
-		if (format_desc == null || format_desc.IsReadOnly ())
+		if (format_desc == null || !format_desc.IsExportAvailable ())
 			format_desc = image_formats.GetDefaultSaveFormat ();
 
 		fcd.Filter = format_desc.Filter;
@@ -160,7 +160,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 				string heading = Translations.GetString ("This format does not support layers. Flatten image?");
 				string body = Translations.GetString ("Flattening the image will merge all layers into a single layer.");
 
-				using var dialog = Adw.MessageDialog.New (chrome.MainWindow, heading, body);
+				using Adw.MessageDialog dialog = Adw.MessageDialog.New (chrome.MainWindow, heading, body);
 				dialog.AddResponse (RESPONSE_CANCEL, Translations.GetString ("_Cancel"));
 				dialog.AddResponse (RESPONSE_FLATTEN, Translations.GetString ("Flatten"));
 				dialog.SetResponseAppearance (RESPONSE_FLATTEN, Adw.ResponseAppearance.Suggested);
@@ -220,7 +220,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			format = image_formats.GetFormatByExtension (document.FileType);
 		}
 
-		if (format == null || format.IsReadOnly ()) {
+		if (format == null || !format.IsExportAvailable ()) {
 
 			chrome.ShowMessageDialog (
 				parent,
@@ -235,20 +235,29 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 		try {
 			format.Exporter.Export (document, file, parent);
+
 		} catch (GLib.GException e) when (e.Message == "Image too large to be saved as ICO") {
+
 			string primary = Translations.GetString ("Image too large");
 			string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
 
 			chrome.ShowMessageDialog (parent, primary, secondary);
+
 			return false;
+
 		} catch (GLib.GException e) when (e.Message.Contains ("Permission denied") && e.Message.Contains ("Failed to open")) {
+
 			string primary = Translations.GetString ("Failed to save image");
+
 			// Translators: {0} is the name of a file that the user does not have write permission for.
 			string secondary = Translations.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only.", file);
 
 			chrome.ShowMessageDialog (parent, primary, secondary);
+
 			return false;
+
 		} catch (OperationCanceledException) {
+
 			return false;
 		}
 
