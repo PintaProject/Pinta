@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Immutable;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Pinta.Gui.Widgets;
@@ -15,10 +16,7 @@ internal sealed class MemberReflector
 
 	public MemberReflector (MemberInfo memberInfo)
 	{
-		ImmutableArray<Attribute> attributes =
-			memberInfo
-			.GetCustomAttributes<Attribute> (false)
-			.ToImmutableArray ();
+		ImmutableArray<Attribute> attributes = [.. memberInfo.GetCustomAttributes<Attribute> (inherit: false)];
 
 		OriginalMemberInfo = memberInfo;
 		MemberType = GetTypeForMember (memberInfo);
@@ -36,28 +34,34 @@ internal sealed class MemberReflector
 
 	private static Action<object, object> CreateSetter (MemberInfo memberInfo)
 	{
-		switch (memberInfo) {
-			case FieldInfo f:
-				return f.SetValue;
-			case PropertyInfo p:
-				MethodInfo setter = p.GetSetMethod () ?? throw new ArgumentException ($"Property {p.Name} has no 'set' method", nameof (memberInfo));
-				return (o, v) => setter.Invoke (o, [v]);
-			default:
-				throw new ArgumentException ($"Member type {memberInfo.GetType ()} not supported", nameof (memberInfo));
-		}
+		// (object self, object new_value) => ((EffectDataType) self).Property = ((PropertyType) new_value);
+
+		Type memberType = GetTypeForMember (memberInfo);
+		ParameterExpression selfParam = Expression.Parameter (typeof (object), "self");
+		ParameterExpression valueParam = Expression.Parameter (typeof (object), "new_value");
+		UnaryExpression selfDowncast = Expression.Convert (selfParam, memberInfo.DeclaringType!);
+		UnaryExpression valueDownCast =
+			memberType.IsValueType
+			? Expression.Unbox (valueParam, memberType)
+			: Expression.Convert (valueParam, memberType);
+		MemberExpression memberAccessParam = Expression.MakeMemberAccess (selfDowncast, memberInfo);
+		BinaryExpression assignExpression = Expression.Assign (memberAccessParam, valueDownCast);
+		LambdaExpression lambda = Expression.Lambda<Action<object, object>> (assignExpression, [selfParam, valueParam]);
+		Action<object, object> compiled = (Action<object, object>) lambda.Compile ();
+		return compiled;
 	}
 
 	private static Func<object, object?> CreateGetter (MemberInfo memberInfo)
 	{
-		switch (memberInfo) {
-			case FieldInfo f:
-				return f.GetValue;
-			case PropertyInfo p:
-				MethodInfo getter = p.GetGetMethod () ?? throw new ArgumentException ("Property has no 'get' method", nameof (memberInfo));
-				return o => getter.Invoke (o, []);
-			default:
-				throw new ArgumentException ($"Member type {memberInfo.GetType ()} not supported", nameof (memberInfo));
-		}
+		// (object self) => (object) (((EffectDataType) self).Property);
+
+		ParameterExpression selfParam = Expression.Parameter (typeof (object), "self");
+		UnaryExpression selfDowncast = Expression.Convert (selfParam, memberInfo.DeclaringType!);
+		MemberExpression memberAccessParam = Expression.MakeMemberAccess (selfDowncast, memberInfo);
+		UnaryExpression valueOut = Expression.Convert (memberAccessParam, typeof (object)); // Boxing to `object`
+		LambdaExpression lambda = Expression.Lambda (valueOut, [selfParam]);
+		Func<object, object?> compiled = (Func<object, object?>) lambda.Compile ();
+		return compiled;
 	}
 
 	private static Type GetTypeForMember (MemberInfo mi) =>
