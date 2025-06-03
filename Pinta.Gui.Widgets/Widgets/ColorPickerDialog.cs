@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using Cairo;
 using Pinta.Core;
@@ -58,14 +58,38 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private readonly ColorPickerSlider alpha_slider;
 
 	// common state
-	private int color_index = 0;
+	private bool primary_selected; // TODO: Get rid of this
 
-	private readonly ImmutableArray<Color> original_colors;
-	public Color[] Colors { get; private set; }
+	private readonly ColorPick original_colors;
+	public ColorPick Colors { get; private set; }
 
 	private Color CurrentColor {
-		get => Colors[color_index];
-		set => Colors[color_index] = value;
+		get => GetTargeted ();
+		set => SetTargeted (value);
+	}
+
+	private Color GetTargeted ()
+	{
+		return Colors switch {
+			SingleColor singleColor => primary_selected ? singleColor.Color : throw new InvalidOperationException (),
+			PaletteColors paletteColors => primary_selected ? paletteColors.Primary : paletteColors.Secondary,
+			_ => throw new UnreachableException (),
+		};
+	}
+
+	private void SetTargeted (Color color)
+	{
+		Colors = Colors switch {
+			SingleColor singleColor =>
+				primary_selected
+				? singleColor with { Color = color }
+				: throw new InvalidOperationException (),
+			PaletteColors paletteColors =>
+				primary_selected
+				? paletteColors with { Primary = color }
+				: paletteColors with { Secondary = color },
+			_ => throw new UnreachableException (),
+		};
 	}
 
 	private int spacing = 6;
@@ -133,24 +157,29 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		DefaultHeight = 1;
 	}
 
+	private bool IsPrimary (int colorIndex) // TODO: Get rid of this
+		=> colorIndex == 0;
+
 	/// <param name="chrome">Current Chrome Manager.</param>
 	/// <param name="palette">Palette service.</param>
 	/// <param name="adjustable">Palette of adjustable </param>
-	/// <param name="currentColorIndex"></param>
+	/// <param name="primarySelected"></param>
 	/// <param name="livePalette">Determines modality of the dialog and live palette behaviour. If true, dialog will not block rest of app and will update
 	/// the current palette as the color is changed.</param>
 	/// <param name="windowTitle">Title of the dialog.</param>
-	public ColorPickerDialog (
+	internal ColorPickerDialog (
 		ChromeManager chrome,
 		PaletteManager palette,
-		Color[] adjustable,
-		int currentColorIndex,
+		ColorPick adjustable,
+		bool primarySelected, // TODO: Get rid of this
 		bool livePalette,
 		string windowTitle)
 	{
+		primary_selected = true;
+
 		bool showWatches = !livePalette;
 
-		ImmutableArray<Color> originalColors = [.. adjustable];
+		ColorPick originalColors = adjustable;
 
 		Gtk.Button reset_button = new () { Label = Translations.GetString ("Reset Color") };
 		reset_button.OnClicked += OnResetButtonClicked;
@@ -187,12 +216,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		Gtk.ListBox colorDisplayList = new ();
 
 		original_colors = originalColors;
-		Colors = [.. originalColors];
-		color_index = currentColorIndex;
+		Colors = originalColors;
 
-		if (Colors.Length > 1) {
+		primary_selected = primarySelected;
 
-			// technically this label would be wrong if you have >2 colors but there is no situation in which there are >2 colors in the palette
+		if (Colors is PaletteColors paletteColors) {
+
 			string label = Translations.GetString ("Click to switch between primary and secondary color.");
 			string shortcut_label = Translations.GetString ("Shortcut key");
 
@@ -202,9 +231,15 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			colorDisplayBox.Append (colorDisplaySwap);
 		}
 
-		color_displays = new Gtk.DrawingArea[originalColors.Length];
+		Func<ColorPick, Color>[] colorSelectors = originalColors switch {
+			SingleColor s => [c => ((SingleColor) Colors).Color],
+			PaletteColors p => [c => ((PaletteColors) Colors).Primary, c => ((PaletteColors) Colors).Secondary],
+			_ => throw new UnreachableException (),
+		};
 
-		for (int i = 0; i < originalColors.Length; i++) {
+		color_displays = new Gtk.DrawingArea[colorSelectors.Length];
+
+		for (int i = 0; i < colorSelectors.Length; i++) {
 
 			// This, unlike `i`, has a fixed value
 			// which is what should be captured by the lambda
@@ -212,7 +247,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			Gtk.DrawingArea display = new ();
 			display.SetSizeRequest (palette_display_size, palette_display_size);
-			display.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, Colors[idx]));
+			display.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, colorSelectors[idx] (Colors)));
 
 			colorDisplayList.Append (display);
 			color_displays[i] = display;
@@ -220,11 +255,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		// Set initial selected row
 		colorDisplayList.SetSelectionMode (Gtk.SelectionMode.Single);
-		colorDisplayList.SelectRow (colorDisplayList.GetRowAtIndex (color_index));
+		colorDisplayList.SelectRow (colorDisplayList.GetRowAtIndex (primary_selected ? 0 : 1));
 
 		// Handle on select; index 0 -> primary; index 1 -> secondary
 		colorDisplayList.OnRowSelected += ((sender, args) => {
-			color_index = args.Row?.GetIndex () ?? 0;
+			int colorIndex = args.Row?.GetIndex () ?? 0;
+			primary_selected = IsPrimary (colorIndex);
 			UpdateView ();
 		});
 
@@ -680,6 +716,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	void ActiveWindowChangeHandler (object? _, NotifySignalArgs __)
 	{
+		if (Colors is not PaletteColors paletteColors)
+			return;
+
 		// Handles on active / off active
 		// When user clicks off the color picker, we assign the color picker values to the palette
 		// we only do this on off active because otherwise the recent color palette would be spammed
@@ -692,22 +731,29 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		SetOpacity (0.85f);
 
-		if (palette.PrimaryColor != Colors[0])
-			palette.PrimaryColor = Colors[0];
+		if (palette.PrimaryColor != paletteColors.Primary)
+			palette.PrimaryColor = paletteColors.Primary;
 
-		if (palette.SecondaryColor != Colors[1])
-			palette.SecondaryColor = Colors[1];
+		if (palette.SecondaryColor != paletteColors.Secondary)
+			palette.SecondaryColor = paletteColors.Secondary;
 	}
 
 	void PrimaryChangeHandler (object? sender, EventArgs _)
 	{
-		Colors[0] = ((PaletteManager) sender!).PrimaryColor;
+		Color newPrimary = ((PaletteManager) sender!).PrimaryColor;
+		Colors = Colors switch {
+			SingleColor singleColor => singleColor with { Color = newPrimary },
+			PaletteColors paletteColors => paletteColors with { Primary = newPrimary },
+			_ => throw new UnreachableException (),
+		};
 		UpdateView ();
 	}
 
 	void SecondaryChangeHandler (object? sender, EventArgs _)
 	{
-		Colors[1] = ((PaletteManager) sender!).SecondaryColor;
+		if (Colors is not PaletteColors paletteColors) return;
+		Color newSecondary = ((PaletteManager) sender!).SecondaryColor;
+		Colors = paletteColors with { Secondary = newSecondary };
 		UpdateView ();
 	}
 
@@ -784,7 +830,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	private void OnResetButtonClicked (Gtk.Button button, EventArgs args)
 	{
-		Colors = [.. original_colors];
+		Colors = original_colors;
 		UpdateView ();
 	}
 
@@ -809,15 +855,18 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		Close ();
 	}
 
+	private static ColorPick CycledColors (ColorPick colorPick)
+	{
+		return colorPick switch {
+			SingleColor singleColor => singleColor,
+			PaletteColors paletteColors => paletteColors.Swapped (),
+			_ => throw new UnreachableException (),
+		};
+	}
+
 	private void CycleColors ()
 	{
-		Color originalFirst = Colors[0];
-
-		for (int i = 0; i < Colors.Length - 1; i++)
-			Colors[i] = Colors[i + 1];
-
-		Colors[^1] = originalFirst;
-
+		Colors = CycledColors (Colors);
 		UpdateView ();
 	}
 
