@@ -4,7 +4,7 @@
 // Author:
 //       Cameron White <cameronwhite91@gmail.com>
 //
-// Copyright (c) 2022 
+// Copyright (c) 2022
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,6 +37,18 @@ public readonly record struct RectangleD (
 	public RectangleD (in PointD point, double width, double height)
 		: this (point.X, point.Y, width, height)
 	{ }
+
+	public static RectangleD FromLTRB (
+		double left,
+		double top,
+		double right,
+		double bottom
+	)
+		=> new (
+			left,
+			top,
+			right - left + 1,
+			bottom - top + 1);
 
 	public static RectangleD Zero { get; } = new (0d, 0d, 0d, 0d);
 
@@ -81,6 +93,15 @@ public readonly record struct RectangleD (
 
 	public readonly PointD GetCenter ()
 		=> new (X + 0.5 * Width, Y + 0.5 * Height);
+
+	public RectangleD Union (in RectangleD b)
+	{
+		double left = Math.Min (Left, b.Left);
+		double right = Math.Max (Right, b.Right);
+		double top = Math.Min (Top, b.Top);
+		double bottom = Math.Max (Bottom, b.Bottom);
+		return FromLTRB (left, top, right, bottom);
+	}
 
 	public readonly RectangleD Inflated (double width, double height)
 	{

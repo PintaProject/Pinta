@@ -30,6 +30,8 @@ internal sealed class RectangleTests
 		Assert.That (built.Top, Is.EqualTo (t));
 		Assert.That (built.Right, Is.EqualTo (r));
 		Assert.That (built.Bottom, Is.EqualTo (b));
+
+		Assert.That (RectangleD.FromLTRB (l, t, r, b), Is.EqualTo (built.ToDouble ()));
 	}
 
 	[TestCaseSource (nameof (not_equal_cases))]
@@ -38,7 +40,10 @@ internal sealed class RectangleTests
 
 	[TestCaseSource (nameof (union_cases))]
 	public void CorrectUnion (RectangleI a, RectangleI b, RectangleI expected)
-		=> Assert.That (a.Union (b), Is.EqualTo (expected));
+	{
+		Assert.That (a.Union (b), Is.EqualTo (expected));
+		Assert.That (a.ToDouble ().Union (b.ToDouble ()), Is.EqualTo (expected.ToDouble ()));
+	}
 
 	[TestCaseSource (nameof (intersect_cases))]
 	public void CorrectIntersection (RectangleI a, RectangleI b, RectangleI expected)

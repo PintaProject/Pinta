@@ -1,21 +1,21 @@
-// 
+//
 // ArrowedEditEngine.cs
-//  
+//
 // Author:
 //	   Andrew Davis <andrew.3.1415@gmail.com>
-// 
+//
 // Copyright (c) 2014 Andrew Davis, GSoC 2014
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -232,7 +232,7 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 	}
 
 
-	protected override void DrawExtras (ref RectangleD? dirty, Context g, ShapeEngine engine)
+	protected override void DrawExtras (ref RectangleD? totalDirty, Context g, ShapeEngine engine)
 	{
 		if (engine is LineCurveSeriesEngine lCSEngine && engine.ControlPoints.Count > 0) {
 
@@ -240,25 +240,25 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 			ReadOnlySpan<GeneratedPoint> genPoints = engine.GeneratedPoints;
 
 			if (lCSEngine.Arrow1.Show && genPoints.Length > 1) {
-				var rect = lCSEngine.Arrow1.Draw (
+				RectangleD dirty = lCSEngine.Arrow1.Draw (
 					g,
 					lCSEngine.OutlineColor,
 					genPoints[0].Position,
 					genPoints[1].Position);
-				dirty = dirty.UnionRectangles (rect);
+				totalDirty = totalDirty?.Union (dirty) ?? dirty;
 			}
 
 			if (lCSEngine.Arrow2.Show && genPoints.Length > 1) {
-				var rect = lCSEngine.Arrow2.Draw (
+				RectangleD dirty = lCSEngine.Arrow2.Draw (
 					g,
 					lCSEngine.OutlineColor,
 					genPoints[^1].Position,
 					genPoints[^2].Position);
-				dirty = dirty.UnionRectangles (rect);
+				totalDirty = totalDirty?.Union (dirty) ?? dirty;
 			}
 		}
 
-		base.DrawExtras (ref dirty, g, engine);
+		base.DrawExtras (ref totalDirty, g, engine);
 	}
 
 	private Gtk.Separator ArrowSeparator
