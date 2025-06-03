@@ -1146,8 +1146,8 @@ public abstract class BaseEditEngine
 			dirty = dirty.Inflated (1, 1);
 
 		//Combine, clamp, and invalidate the dirty Rectangle.
-		if (((RectangleD?) dirty).UnionRectangles (last_dirty) is RectangleD r)
-			dirty = r;
+		if (last_dirty is not null)
+			dirty = dirty.Union (last_dirty.Value);
 
 		dirty = dirty.Clamped ();
 		doc.Workspace.Invalidate (dirty.ToInt ());
@@ -1177,7 +1177,7 @@ public abstract class BaseEditEngine
 
 		g.LineWidth = activeEngine.BrushWidth;
 
-		RectangleD? dirty = null;
+		RectangleD? totalDirty = null;
 
 		//Draw the shape.
 		if (activeEngine.ControlPoints.Count > 0) {
@@ -1189,8 +1189,9 @@ public abstract class BaseEditEngine
 			//Expand the invalidation rectangle as necessary.
 
 			if (FillShape) {
-				Color fill_color = StrokeShape ? activeEngine.FillColor : activeEngine.OutlineColor;
-				dirty = dirty.UnionRectangles (g.FillPolygonal (points.AsSpan (), fill_color));
+				Color fillColor = StrokeShape ? activeEngine.FillColor : activeEngine.OutlineColor;
+				RectangleD dirty = g.FillPolygonal (points.AsSpan (), fillColor);
+				totalDirty = totalDirty?.Union (dirty) ?? dirty;
 			}
 
 			if (StrokeShape) {
@@ -1201,17 +1202,18 @@ public abstract class BaseEditEngine
 					? LineCap.Square
 					: activeEngine.LineCap;
 
-				dirty = dirty.UnionRectangles (g.DrawPolygonal (points.AsSpan (), activeEngine.OutlineColor, lineCap));
+				RectangleD dirty = g.DrawPolygonal (points.AsSpan (), activeEngine.OutlineColor, lineCap);
+				totalDirty = totalDirty?.Union (dirty) ?? dirty;
 			}
 		}
 
 		g.SetDash ([], 0.0);
 
 		//Draw anything extra (that not every shape has), like arrows.
-		DrawExtras (ref dirty, g, engine);
+		DrawExtras (ref totalDirty, g, engine);
 		DrawControlPoints (g, activeEngine, drawCP, drawHoverSelection, ctrl_key);
 
-		return dirty ?? RectangleD.Zero;
+		return totalDirty ?? RectangleD.Zero;
 	}
 
 	private void DrawControlPoints (Context g, ShapeEngine shape, bool draw_controls, bool draw_selection, bool ctrl_key)
@@ -1349,7 +1351,7 @@ public abstract class BaseEditEngine
 
 		int previousSelectedPointIndex = SelectedPointIndex;
 
-		RectangleD? dirty = null;
+		RectangleD? totalDirty = null;
 
 		//Finalize all of the shapes.
 		for (SelectedShapeIndex = 0; SelectedShapeIndex < SEngines.Count; ++SelectedShapeIndex) {
@@ -1371,8 +1373,8 @@ public abstract class BaseEditEngine
 			SEngines[SelectedShapeIndex].DrawingLayer.Layer.Clear ();
 
 			//Draw the current shape with the corresponding tool's EditEngine.
-			dirty = dirty.UnionRectangles ((RectangleD?) correspondingEngine.DrawFinalized (
-				SEngines[SelectedShapeIndex], false, false));
+			RectangleD dirty = correspondingEngine.DrawFinalized (SEngines[SelectedShapeIndex], false, false);
+			totalDirty = totalDirty?.Union (dirty) ?? dirty;
 		}
 
 		//Make sure that the undo surface isn't null.
@@ -1382,8 +1384,8 @@ public abstract class BaseEditEngine
 				undoSurface, doc.Layers.CurrentUserLayer, previousSelectedPointIndex, prev_selected_shape_index, true));
 		}
 
-		if (dirty.HasValue) {
-			InvalidateAfterDraw (dirty.Value);
+		if (totalDirty.HasValue) {
+			InvalidateAfterDraw (totalDirty.Value);
 		}
 
 		//Clear out all of the data.
@@ -1620,7 +1622,7 @@ public abstract class BaseEditEngine
 		controlPoints.ElementAt (SelectedPointIndex).Position = new PointD (current_point.X, current_point.Y);
 	}
 
-	protected virtual void DrawExtras (ref RectangleD? dirty, Context g, ShapeEngine engine)
+	protected virtual void DrawExtras (ref RectangleD? totalDirty, Context g, ShapeEngine engine)
 	{
 
 	}

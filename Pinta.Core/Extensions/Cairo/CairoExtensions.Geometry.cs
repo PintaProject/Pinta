@@ -55,44 +55,6 @@ partial class CairoExtensions
 			y2 - y1);
 	}
 
-	/// <summary>
-	/// Computes and returns the Union (largest possible combination) of two Rectangles.
-	/// The two given Rectangles do not need to intersect.
-	///
-	/// Another way to understand this function is that it computes and returns the
-	/// smallest possible Rectangle that encompasses both given Rectangles.
-	///
-	/// This function works as is intuitively expected with neither, either, or both given Rectangles being null.
-	/// </summary>
-	/// <param name="r1">The first given Rectangle.</param>
-	/// <param name="r2">The second given Rectangle.</param>
-	/// <returns></returns>
-	public static RectangleD? UnionRectangles (
-		this RectangleD? r1,
-		RectangleD? r2)
-	{
-		if (!r1.HasValue) //r2 is the only given Rectangle that could still have a value, and if it's null, return that anyways.
-			return r2;
-
-		if (!r2.HasValue) //Only r1 has a value.
-			return r1;
-
-		// If execution reaches this point, then both r1 and r2 have values.
-
-		//Calculate the left-most and top-most values.
-
-		PointD min = new (
-			X: Math.Min (r1.Value.X, r2.Value.X),
-			Y: Math.Min (r1.Value.Y, r2.Value.Y));
-
-		//Calculate the right-most and bottom-most values and subtract the left-most and top-most values from them to get the width and height.
-		return new (
-			min.X,
-			min.Y,
-			Math.Max (r1.Value.X + r1.Value.Width, r2.Value.X + r2.Value.Width) - min.X,
-			Math.Max (r1.Value.Y + r1.Value.Height, r2.Value.Y + r2.Value.Height) - min.Y);
-	}
-
 	public static RectangleI GetRectangleFromPoints (
 		PointI a,
 		PointI b,
@@ -379,26 +341,6 @@ partial class CairoExtensions
 		double newY = p.Y;
 		m.TransformPoint (ref newX, ref newY);
 		p = new PointD (newX, newY);
-	}
-
-	/// <summary>
-	/// Port of gdk_cairo_get_clip_rectangle from GTK3
-	/// </summary>
-	public static bool GetClipRectangle (
-		Context context,
-		out RectangleI rect)
-	{
-		context.ClipExtents (
-			out double x1,
-			out double y1,
-			out double x2,
-			out double y2);
-
-		bool clip_exists = x1 < x2 && y1 < y2;
-
-		rect = new RectangleD (x1, y1, x2 - x1, y2 - y1).ToInt ();
-
-		return clip_exists;
 	}
 
 	private static void GetRectangle (this Region region, int i, out CairoRectangleInt rect)
