@@ -126,11 +126,11 @@ public sealed class ZoomTool : BaseTool
 
 		if (mouse_down == MouseButton.Left || mouse_down == MouseButton.Right) {
 			if (e.MouseButton == MouseButton.Left) {
-				var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
-				if (shape_origin_window.Distance (e.WindowPoint) <= tolerance) {
+				PointD shapeOriginWindow = document.Workspace.CanvasPointToView (shape_origin);
+				if (shapeOriginWindow.Distance (e.WindowPoint) <= tolerance) {
 					document.Workspace.ZoomInAroundCanvasPoint (e.PointDouble);
 				} else {
-					document.Workspace.ZoomToCanvasRectangle (CairoExtensions.PointsToRectangle (shape_origin, e.PointDouble));
+					document.Workspace.ZoomToCanvasRectangle (RectangleD.FromPoints (shape_origin, e.PointDouble));
 				}
 			} else {
 				document.Workspace.ZoomOutAroundCanvasPoint (e.PointDouble);
@@ -149,7 +149,7 @@ public sealed class ZoomTool : BaseTool
 		if (!is_drawing)
 			return;
 
-		var r = CairoExtensions.PointsToRectangle (shape_origin.Rounded (), point.Rounded ());
+		RectangleD r = RectangleD.FromPoints (shape_origin.Rounded (), point.Rounded ());
 
 		document.Layers.ToolLayer.Clear ();
 		document.Layers.ToolLayer.Hidden = false;

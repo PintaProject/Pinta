@@ -170,7 +170,7 @@ public sealed class DocumentWorkspace
 		PointD canvasTopLeft = ViewPointToCanvas (windowTopLeft);
 		PointD canvasBtmRight = ViewPointToCanvas (windowBtmRight);
 
-		RectangleI canvasRect = CairoExtensions.PointsToRectangle (canvasTopLeft, canvasBtmRight).ToInt ();
+		RectangleI canvasRect = RectangleD.FromPoints (canvasTopLeft, canvasBtmRight).ToInt ();
 		OnCanvasInvalidated (new CanvasInvalidatedEventArgs (canvasRect));
 	}
 

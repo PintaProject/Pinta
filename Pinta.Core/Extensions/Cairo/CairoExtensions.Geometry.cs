@@ -55,25 +55,6 @@ partial class CairoExtensions
 			y2 - y1);
 	}
 
-	/// <summary>
-	/// Create a rectangle with a positive width / height from the provided points.
-	/// </summary>
-	public static RectangleD PointsToRectangle (
-		PointD p1,
-		PointD p2)
-	{
-		double y1 = Math.Min (p1.Y, p2.Y);
-		double y2 = Math.Max (p1.Y, p2.Y);
-		double x1 = Math.Min (p1.X, p2.X);
-		double x2 = Math.Max (p1.X, p2.X);
-
-		return new (
-			x1,
-			y1,
-			x2 - x1,
-			y2 - y1);
-	}
-
 	public static Region CreateRegion (in RectangleI rect)
 	{
 		CairoRectangleInt cairo_rect = new () {
