@@ -152,6 +152,20 @@ public readonly record struct RectangleI (
 			right - left + 1,
 			bottom - top + 1);
 
+	/// <summary>
+	/// Creates a rectangle with positive width & height from the provided points.
+	/// Note that the second point will be the bottom right corner of the rectangle,
+	/// and the pixel is not inside the rectangle itself.
+	/// </summary>
+	public static RectangleI FromPoints (in PointI a, in PointI b)
+	{
+		int x1 = Math.Min (a.X, b.X);
+		int y1 = Math.Min (a.Y, b.Y);
+		int x2 = Math.Max (a.X, b.X);
+		int y2 = Math.Max (a.Y, b.Y);
+		return new (x1, y1, x2 - x1, y2 - y1);
+	}
+
 	public readonly RectangleD ToDouble ()
 		=> new (X, Y, Width, Height);
 
