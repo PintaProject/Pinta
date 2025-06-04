@@ -349,7 +349,7 @@ public abstract class SelectTool : BaseTool
 
 		ShowHandles (true);
 
-		RectangleD rect = CairoExtensions.PointsToRectangle (shape_origin, shape_end);
+		RectangleD rect = RectangleD.FromPoints (shape_origin, shape_end);
 
 		DrawShape (document, rect, document.Layers.SelectionLayer);
 

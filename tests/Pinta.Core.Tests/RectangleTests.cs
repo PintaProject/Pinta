@@ -38,6 +38,7 @@ internal sealed class RectangleTests
 	public void CorrectFromPoints (PointI a, PointI b, RectangleI expected)
 	{
 		Assert.That (RectangleI.FromPoints (a, b), Is.EqualTo (expected));
+		Assert.That (RectangleD.FromPoints (a.ToDouble (), b.ToDouble ()), Is.EqualTo (expected.ToDouble ()));
 	}
 
 	[TestCaseSource (nameof (not_equal_cases))]
