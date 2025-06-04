@@ -55,19 +55,6 @@ partial class CairoExtensions
 			y2 - y1);
 	}
 
-	public static RectangleI GetRectangleFromPoints (
-		PointI a,
-		PointI b,
-		int inflate)
-	{
-		int x1 = Math.Min (a.X, b.X);
-		int y1 = Math.Min (a.Y, b.Y);
-		int x2 = Math.Max (a.X, b.X);
-		int y2 = Math.Max (a.Y, b.Y);
-
-		return new RectangleI (x1, y1, x2 - x1, y2 - y1).Inflated (inflate, inflate);
-	}
-
 	/// <summary>
 	/// Create a rectangle with a positive width / height from the provided points.
 	/// </summary>

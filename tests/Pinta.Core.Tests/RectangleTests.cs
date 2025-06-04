@@ -34,6 +34,12 @@ internal sealed class RectangleTests
 		Assert.That (RectangleD.FromLTRB (l, t, r, b), Is.EqualTo (built.ToDouble ()));
 	}
 
+	[TestCaseSource (nameof (from_points_cases))]
+	public void CorrectFromPoints (PointI a, PointI b, RectangleI expected)
+	{
+		Assert.That (RectangleI.FromPoints (a, b), Is.EqualTo (expected));
+	}
+
 	[TestCaseSource (nameof (not_equal_cases))]
 	public void CorrectNotEqual (RectangleI a, RectangleI b)
 		=> Assert.That (a, Is.Not.EqualTo (b));
@@ -130,5 +136,14 @@ internal sealed class RectangleTests
 		yield return new (
 			RectangleI.FromLTRB (1, 1, 1, 1),
 			RectangleI.FromLTRB (0, 0, 1, 1));
+	}
+
+	private static readonly IReadOnlyList<TestCaseData> from_points_cases = CreateFromPointsCases ().ToArray ();
+	private static IEnumerable<TestCaseData> CreateFromPointsCases ()
+	{
+		yield return new (
+			new PointI (3, 4),
+			new PointI (5, 6),
+			RectangleI.FromLTRB (3, 4, 4, 5));
 	}
 }
