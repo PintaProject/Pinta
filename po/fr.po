@@ -8,9 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-25 00:30+0000\n"
-"PO-Revision-Date: 2025-06-02 11:46+0000\n"
-"Last-Translator: ReadOnlyMAIN <readonlymain@users.noreply.hosted.weblate.org>"
-"\n"
+"PO-Revision-Date: 2025-06-05 21:34+0000\n"
+"Last-Translator: Christophe <cuvillierch@zonesix.fr>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -511,7 +510,6 @@ msgid "Color Scheme Source"
 msgstr "Source du schéma de couleur"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:260
-#, fuzzy
 msgid "Color Sorting"
 msgstr "Tri des couleurs"
 
@@ -1416,7 +1414,6 @@ msgid "Median"
 msgstr "Médian"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
-#, fuzzy
 msgid "Menu Bar"
 msgstr "Barre de Menu"
 
@@ -1764,7 +1761,6 @@ msgid "Piña Colada"
 msgstr "Piña Colada"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
-#, fuzzy
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Veuillez redémarrer Pinta pour appliquer les changements."
 
@@ -1779,7 +1775,7 @@ msgstr "Point supprimé"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:27
 msgid "Polar Inversion"
-msgstr "Transformation symétrique"
+msgstr "Transformation polaire"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
@@ -2011,7 +2007,6 @@ msgid "Resize Palette"
 msgstr "Redimensionner la palette"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
-#, fuzzy
 msgid "Restart Pinta"
 msgstr "Redémarrer Pinta"
 
@@ -2531,7 +2526,6 @@ msgid "Vertical red (R)"
 msgstr "Rouge vertical (R)"
 
 #: ../Pinta/MainWindow.cs:461
-#, fuzzy
 msgid "View"
 msgstr "Vue"
 
