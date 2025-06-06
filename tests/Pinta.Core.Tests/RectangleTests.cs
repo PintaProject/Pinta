@@ -35,10 +35,15 @@ internal sealed class RectangleTests
 	}
 
 	[TestCaseSource (nameof (from_points_cases))]
-	public void CorrectFromPoints (PointI a, PointI b, RectangleI expected)
+	public void CorrectFromPoints (PointI a, PointI b, RectangleI expected, RectangleI expected_no_invert)
 	{
 		Assert.That (RectangleI.FromPoints (a, b), Is.EqualTo (expected));
-		Assert.That (RectangleD.FromPoints (a.ToDouble (), b.ToDouble ()), Is.EqualTo (expected.ToDouble ()));
+		Assert.That (
+			RectangleD.FromPoints (a.ToDouble (), b.ToDouble (), invertIfNegative: true),
+			Is.EqualTo (expected.ToDouble ()));
+		Assert.That (
+			RectangleD.FromPoints (a.ToDouble (), b.ToDouble (), invertIfNegative: false),
+			Is.EqualTo (expected_no_invert.ToDouble ()));
 	}
 
 	[TestCaseSource (nameof (not_equal_cases))]
@@ -143,8 +148,9 @@ internal sealed class RectangleTests
 	private static IEnumerable<TestCaseData> CreateFromPointsCases ()
 	{
 		yield return new (
-			new PointI (3, 4),
 			new PointI (5, 6),
-			RectangleI.FromLTRB (3, 4, 4, 5));
+			new PointI (3, 4),
+			RectangleI.FromLTRB (3, 4, 4, 5),
+			new RectangleI (5, 6, 0, 0));
 	}
 }

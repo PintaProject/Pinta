@@ -51,17 +51,27 @@ public readonly record struct RectangleD (
 			bottom - top + 1);
 
 	/// <summary>
-	/// Creates a rectangle with positive width & height from the provided points.
+	/// Creates a rectangle from the provided points.
 	/// Note that the second point will be the bottom right corner of the rectangle,
 	/// and the pixel is not inside the rectangle itself.
+	/// <param name="invertIfNegative">
+	/// Flips the start and end points if necessary to produce a rectangle with positive width and height.
+	/// Otherwise, a negative width or height is clamped to zero.
+	/// </param>
 	/// </summary>
-	public static RectangleD FromPoints (in PointD a, in PointD b)
+	public static RectangleD FromPoints (in PointD a, in PointD b, bool invertIfNegative = true)
 	{
-		double x1 = Math.Min (a.X, b.X);
-		double y1 = Math.Min (a.Y, b.Y);
-		double x2 = Math.Max (a.X, b.X);
-		double y2 = Math.Max (a.Y, b.Y);
-		return new (x1, y1, x2 - x1, y2 - y1);
+		if (invertIfNegative) {
+			double x1 = Math.Min (a.X, b.X);
+			double y1 = Math.Min (a.Y, b.Y);
+			double x2 = Math.Max (a.X, b.X);
+			double y2 = Math.Max (a.Y, b.Y);
+			return new (x1, y1, x2 - x1, y2 - y1);
+		} else {
+			double width = Math.Max (0.0, b.Y - a.X);
+			double height = Math.Max (0.0, b.Y - a.Y);
+			return new (a.X, a.Y, width, height);
+		}
 	}
 
 	public static RectangleD Zero { get; } = new (0d, 0d, 0d, 0d);
@@ -102,8 +112,17 @@ public readonly record struct RectangleD (
 	public readonly bool ContainsPoint (in PointD point)
 		=> ContainsPoint (point.X, point.Y);
 
+	/// <summary>
+	/// Position of the rectangle's top left corner.
+	/// </summary>
 	public readonly PointD Location ()
 		=> new (X, Y);
+
+	/// <summary>
+	/// Position of the rectangle's bottom right corner.
+	/// </summary>
+	public readonly PointD EndLocation ()
+		=> new (X + Width, Y + Height);
 
 	public readonly PointD GetCenter ()
 		=> new (X + 0.5 * Width, Y + 0.5 * Height);
