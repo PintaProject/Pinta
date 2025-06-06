@@ -1,21 +1,21 @@
-// 
+//
 // BaseTransformTool.cs
-//  
+//
 // Author:
 //       Volodymyr <${AuthorEmail}>
-// 
+//
 // Copyright (c) 2012 Volodymyr
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Cairo;
 using Pinta.Core;
 
@@ -32,6 +33,8 @@ namespace Pinta.Tools;
 
 public abstract class BaseTransformTool : BaseTool
 {
+	private readonly IWorkspaceService workspace;
+
 	private readonly int rotate_steps = 32;
 	private readonly Matrix transform = CairoExtensions.CreateIdentityMatrix ();
 	private RectangleD source_rect;
@@ -41,12 +44,22 @@ public abstract class BaseTransformTool : BaseTool
 	private bool is_scaling = false;
 	private bool using_mouse = false;
 
+	private readonly RectangleHandle rect_handle;
+
 	/// <summary>
 	/// Initializes a new instance of the <see cref="BaseTransformTool"/> class.
 	/// </summary>
 	public BaseTransformTool (IServiceProvider services) : base (services)
 	{
+		workspace = services.GetService<IWorkspaceService> ();
+
+		rect_handle = new (workspace) {
+			InvertIfNegative = false,
+			Active = true
+		};
 	}
+
+	public override IEnumerable<IToolHandle> Handles => [rect_handle];
 
 	protected override void OnMouseDown (
 		Document document,
@@ -62,7 +75,7 @@ public abstract class BaseTransformTool : BaseTool
 
 		if (e.MouseButton == MouseButton.Right)
 			is_rotating = true;
-		else if (e.IsControlPressed)
+		else if (rect_handle.BeginDrag (e.PointDouble, document.ImageSize))
 			is_scaling = true;
 		else
 			is_dragging = true;
@@ -76,46 +89,34 @@ public abstract class BaseTransformTool : BaseTool
 		Document document,
 		ToolMouseEventArgs e)
 	{
-		if (!IsActive || !using_mouse)
+		if (!IsActive || !using_mouse) {
+			UpdateCursor (e.WindowPoint);
 			return;
-
-		bool constrain = e.IsShiftPressed;
-
-		PointD center = source_rect.GetCenter ();
-
-		// The cursor position can be a subpixel value. Round to an integer
-		// so that we only translate by entire pixels.
-		// (Otherwise, blurring / anti-aliasing may be introduced)
-
-		double dx = Math.Floor (e.PointDouble.X - original_point.X);
-		double dy = Math.Floor (e.PointDouble.Y - original_point.Y);
-
-		PointD c1 = original_point - center;
-		PointD c2 = e.PointDouble - center;
-
-		RadiansAngle angle = new (Math.Atan2 (c1.Y, c1.X) - Math.Atan2 (c2.Y, c2.X));
+		}
 
 		transform.InitIdentity ();
 
 		if (is_scaling) {
+			// TODO - the constrain option should preserve the original aspect ratio, rather than creating a square.
+			rect_handle.UpdateDrag (e.PointDouble, e.IsShiftPressed);
 
-			double sx = (c1.X + dx) / c1.X;
-			double sy = (c1.Y + dy) / c1.Y;
+			// Scale the original rectangle to fit the target rectangle.
+			RectangleD targetRect = rect_handle.Rectangle;
+			double sx = (source_rect.Width > 0) ? (targetRect.Width / source_rect.Width) : 0.0;
+			double sy = (source_rect.Height > 0) ? (targetRect.Height / source_rect.Height) : 0.0;
 
-			if (constrain) {
-
-				double max_scale = Math.Max (Math.Abs (sx), Math.Abs (sy));
-
-				sx = max_scale * Math.Sign (sx);
-				sy = max_scale * Math.Sign (sy);
-			}
-
-			transform.Translate (center.X, center.Y);
+			transform.Translate (targetRect.Left, targetRect.Top);
 			transform.Scale (sx, sy);
-			transform.Translate (-center.X, -center.Y);
+			transform.Translate (-source_rect.Left, -source_rect.Top);
 		} else if (is_rotating) {
+			PointD center = source_rect.GetCenter ();
 
-			if (constrain)
+			PointD c1 = original_point - center;
+			PointD c2 = e.PointDouble - center;
+
+			RadiansAngle angle = new (Math.Atan2 (c1.Y, c1.X) - Math.Atan2 (c2.Y, c2.X));
+
+			if (e.IsShiftPressed)
 				angle = Utility.GetNearestStepAngle (angle, rotate_steps);
 
 			transform.Translate (center.X, center.Y);
@@ -123,7 +124,15 @@ public abstract class BaseTransformTool : BaseTool
 			transform.Translate (-center.X, -center.Y);
 
 		} else {
+			// The cursor position can be a subpixel value. Round to an integer
+			// so that we only translate by entire pixels.
+			// (Otherwise, blurring / anti-aliasing may be introduced)
+			double dx = Math.Floor (e.PointDouble.X - original_point.X);
+			double dy = Math.Floor (e.PointDouble.Y - original_point.Y);
 			transform.Translate (dx, dy);
+
+			// Update the rectangle handle.
+			rect_handle.Rectangle = source_rect with { X = source_rect.X + dx, Y = source_rect.Y + dy };
 		}
 
 		OnUpdateTransform (document, transform);
@@ -136,7 +145,11 @@ public abstract class BaseTransformTool : BaseTool
 		if (!IsActive || !using_mouse)
 			return;
 
+		if (is_scaling)
+			rect_handle.EndDrag ();
+
 		OnFinishTransform (document, transform);
+		UpdateCursor (e.WindowPoint);
 	}
 
 	protected override bool OnKeyDown (
@@ -213,5 +226,59 @@ public abstract class BaseTransformTool : BaseTool
 
 	private bool IsActive
 		=> is_dragging || is_rotating || is_scaling;
+
+	protected override void OnActivated (Document? document)
+	{
+		base.OnActivated (document);
+
+		workspace.ActiveDocumentChanged += HandleActiveDocumentChanged;
+
+		if (document is not null)
+			UpdateSourceRectangle (document);
+	}
+
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		base.OnDeactivated (document, newTool);
+
+		workspace.ActiveDocumentChanged -= HandleActiveDocumentChanged;
+	}
+
+	protected override void OnAfterUndo (Document document)
+	{
+		base.OnAfterUndo (document);
+		UpdateSourceRectangle (document);
+	}
+
+	protected override void OnAfterRedo (Document document)
+	{
+		base.OnAfterRedo (document);
+		UpdateSourceRectangle (document);
+	}
+
+	/// <summary>
+	/// Update the handles whenever we switch to a new document.
+	/// </summary>
+	private void HandleActiveDocumentChanged (object? sender, EventArgs args)
+	{
+		if (!PintaCore.Workspace.HasOpenDocuments)
+			return;
+
+		UpdateSourceRectangle (PintaCore.Workspace.ActiveDocument);
+	}
+
+	private void UpdateSourceRectangle (Document document)
+	{
+		rect_handle.Rectangle = GetSourceRectangle (document);
+	}
+
+	private void UpdateCursor (in PointD viewPos)
+	{
+		Gdk.Cursor? cursor = null;
+		if (rect_handle.Active)
+			cursor = rect_handle.GetCursorAtPoint (viewPos);
+
+		SetCursor (cursor ?? DefaultCursor);
+	}
 }
 
