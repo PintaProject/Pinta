@@ -37,37 +37,22 @@ public abstract class SelectTool : BaseTool
 	private readonly IToolService tools;
 	private readonly IWorkspaceService workspace;
 
-	private readonly ImmutableArray<MoveHandle> handles;
-
-	private bool is_drawing = false;
-	private PointD shape_origin = default;
-	private PointD reset_origin = default;
-	private PointD shape_end = default;
 	private RectangleI last_dirty = default;
 	private SelectionHistoryItem? hist = default;
 	private CombineMode combine_mode = default;
-	private int? active_handle = default;
 
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
 	public override bool IsSelectionTool => true;
 	protected override bool ShowAntialiasingButton => false;
-	public override IEnumerable<MoveHandle> Handles => handles;
+	private readonly RectangleHandle handle;
+	public override IEnumerable<IToolHandle> Handles => [handle];
 
 	public SelectTool (IServiceProvider services) : base (services)
 	{
 		tools = services.GetService<IToolService> ();
 		workspace = services.GetService<IWorkspaceService> ();
 
-		handles = [
-			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeNW) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeSW) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeNE) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeSE) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeW) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeN) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeE) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.ResizeS) },
-		];
+		handle = new () { InvertIfNegative = true };
 
 		workspace.SelectionChanged += AfterSelectionChange;
 	}
@@ -83,28 +68,25 @@ public abstract class SelectTool : BaseTool
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
 		// Ignore extra button clicks while drawing
-		if (is_drawing)
+		if (handle.IsDragging)
 			return;
 
 		hist = new SelectionHistoryItem (workspace, Icon, Name);
 		hist.TakeSnapshot ();
 
-		reset_origin = e.WindowPoint;
-		active_handle = FindHandleIndexUnderPoint (e.WindowPoint);
-
-		if (!active_handle.HasValue) {
+		if (!handle.BeginDrag (e.PointDouble, document.ImageSize)) {
+			// Start drawing a new rectangle.
 			combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (e);
 
 			double x = Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
 			double y = Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
-
-			shape_origin = new PointD (x, y);
+			handle.Rectangle = new (x, y, 0.0, 0.0);
 
 			document.PreviousSelection = document.Selection.Clone ();
 			document.Selection.SelectionPolygons.Clear ();
 
-			// The bottom right corner should be selected.
-			active_handle = 3;
+			if (!handle.BeginDrag (new PointD (x, y), document.ImageSize))
+				throw new InvalidOperationException ("Should be able to start drawing a new rectangle!");
 		}
 
 		// Do a full redraw for modes that can wipe existing selections outside the rectangle being drawn.
@@ -112,52 +94,50 @@ public abstract class SelectTool : BaseTool
 			Size size = document.ImageSize;
 			last_dirty = new RectangleI (0, 0, size.Width, size.Height);
 		}
-
-		is_drawing = true;
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 	{
-		if (!is_drawing) {
-			UpdateCursor (document, e.WindowPoint);
+		if (!handle.IsDragging) {
+			UpdateCursor (e.WindowPoint);
 			return;
 		}
 
-		// Should always be true, set in OnMouseDown
-		if (active_handle.HasValue) {
-
-			PointD p = new (
-				X: Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width)),
-				Y: Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height)));
-
-			OnHandleMoved (
-				active_handle.Value,
-				p.X,
-				p.Y,
-				e.IsShiftPressed);
-		}
+		RectangleI handleDirtyRegion = handle.UpdateDrag (e.PointDouble, e.IsShiftPressed);
+		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
 
 		RectangleI dirty = ReDraw (document);
 
-		UpdateHandlePositions ();
-
-		if (document.Selection != null) {
-			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
-			document.Workspace.Invalidate (dirty.Union (last_dirty));
-		}
+		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
+		document.Workspace.Invalidate (dirty.Union (last_dirty));
 
 		last_dirty = dirty;
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		// If the user didn't move the mouse, they want to deselect
-		const int TOLERANCE = 0;
+		if (handle.HasDragged (e.PointDouble)) {
+			RectangleI dirty = ReDraw (document);
 
-		if (Math.Abs (reset_origin.X - e.WindowPoint.X) <= TOLERANCE && Math.Abs (reset_origin.Y - e.WindowPoint.Y) <= TOLERANCE) {
+			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
+
+			document.Selection.Origin = handle.Rectangle.Location ();
+			document.Selection.End = handle.Rectangle.EndLocation ();
+			document.Workspace.Invalidate (last_dirty.Union (dirty));
+			last_dirty = dirty;
+
+			if (hist != null) {
+				document.History.PushNewItem (hist);
+				hist = null;
+			}
+
+			handle.EndDrag ();
+		} else {
+			// If the user didn't move the mouse, they want to deselect
+
 			// Mark as being done interactive drawing before invoking the deselect action.
 			// This will allow AfterSelectionChanged() to clear the selection.
-			is_drawing = false;
+			handle.EndDrag ();
 
 			if (hist != null) {
 				// Roll back any changes made to the selection, e.g. in OnMouseDown().
@@ -167,29 +147,10 @@ public abstract class SelectTool : BaseTool
 			}
 
 			PintaCore.Actions.Edit.Deselect.Activate ();
-
-		} else {
-			RectangleI dirty = ReDraw (document);
-
-			if (document.Selection != null) {
-				SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
-
-				document.Selection.Origin = shape_origin;
-				document.Selection.End = shape_end;
-				document.Workspace.Invalidate (last_dirty.Union (dirty));
-				last_dirty = dirty;
-			}
-			if (hist != null) {
-				document.History.PushNewItem (hist);
-				hist = null;
-			}
 		}
 
-		is_drawing = false;
-		active_handle = null;
-
 		// Update the mouse cursor.
-		UpdateCursor (document, e.WindowPoint);
+		UpdateCursor (e.WindowPoint);
 	}
 
 	protected override void OnActivated (Document? document)
@@ -210,146 +171,13 @@ public abstract class SelectTool : BaseTool
 		workspace.SelectionHandler.OnSaveSettings (settings);
 	}
 
-	private void OnHandleMoved (int handle, double x, double y, bool shift_pressed)
-	{
-		switch (handle) {
-
-			case 0:
-				shape_origin = new (x, y);
-
-				if (!shift_pressed) return;
-
-				shape_origin =
-					(shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-					? (shape_origin with { X = shape_end.X - shape_end.Y + shape_origin.Y })
-					: (shape_origin with { Y = shape_end.Y - shape_end.X + shape_origin.X });
-
-				return;
-
-			case 1:
-				shape_origin = shape_origin with { X = x };
-				shape_end = shape_end with { Y = y };
-
-				if (!shift_pressed) return;
-
-				if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-					shape_origin = shape_origin with { X = shape_end.X - shape_end.Y + shape_origin.Y };
-				else
-					shape_end = shape_end with { Y = shape_origin.Y + shape_end.X - shape_origin.X };
-
-				return;
-
-			case 2:
-				shape_end = shape_end with { X = x };
-				shape_origin = shape_origin with { Y = y };
-
-				if (!shift_pressed) return;
-
-				if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-					shape_end = shape_end with { X = shape_origin.X + shape_end.Y - shape_origin.Y };
-				else
-					shape_origin = shape_origin with { Y = shape_end.Y - shape_end.X + shape_origin.X };
-
-				return;
-
-			case 3:
-				shape_end = new (x, y);
-
-				if (!shift_pressed)
-					return;
-
-				if (shape_end.X - shape_origin.X <= shape_end.Y - shape_origin.Y)
-					shape_end = shape_end with { X = shape_origin.X + shape_end.Y - shape_origin.Y };
-				else
-					shape_end = shape_end with { Y = shape_origin.Y + shape_end.X - shape_origin.X };
-
-				return;
-
-			case 4:
-				shape_origin = shape_origin with { X = x };
-
-				if (!shift_pressed) return;
-
-				double d4 = shape_end.X - shape_origin.X;
-				shape_origin = shape_origin with { Y = (shape_origin.Y + shape_end.Y - d4) / 2 };
-				shape_end = shape_end with { Y = (shape_origin.Y + shape_end.Y + d4) / 2 };
-
-				return;
-
-			case 5:
-				shape_origin = shape_origin with { Y = y };
-
-				if (!shift_pressed) return;
-
-				double d5 = shape_end.Y - shape_origin.Y;
-				shape_origin = shape_origin with { X = (shape_origin.X + shape_end.X - d5) / 2 };
-				shape_end = shape_end with { X = (shape_origin.X + shape_end.X + d5) / 2 };
-
-				return;
-
-			case 6:
-				shape_end = shape_end with { X = x };
-
-				if (!shift_pressed) return;
-
-				double d6 = shape_end.X - shape_origin.X;
-				shape_origin = shape_origin with { Y = (shape_origin.Y + shape_end.Y - d6) / 2 };
-				shape_end = shape_end with { Y = (shape_origin.Y + shape_end.Y + d6) / 2 };
-
-				return;
-
-			case 7:
-				shape_end = shape_end with { Y = y };
-
-				if (!shift_pressed) return;
-
-				double d7 = shape_end.Y - shape_origin.Y;
-				shape_origin = shape_origin with { X = (shape_origin.X + shape_end.X - d7) / 2 };
-				shape_end = shape_end with { X = (shape_origin.X + shape_end.X + d7) / 2 };
-
-				return;
-
-			default:
-				throw new ArgumentOutOfRangeException (nameof (handle));
-		}
-	}
-
-	private void UpdateHandlePositions ()
-	{
-		RectangleI ComputeHandleBounds ()
-		{
-			// When loading a new document, we might get a selection change event
-			// before there is a canvas size / scale.
-			if (PintaCore.Workspace.CanvasSize.IsEmpty)
-				return RectangleI.Zero;
-
-			return MoveHandle.UnionInvalidateRects (handles);
-		}
-
-		RectangleI dirtyArea = ComputeHandleBounds ();
-
-		handles[0].CanvasPosition = new PointD (shape_origin.X, shape_origin.Y);
-		handles[1].CanvasPosition = new PointD (shape_origin.X, shape_end.Y);
-		handles[2].CanvasPosition = new PointD (shape_end.X, shape_origin.Y);
-		handles[3].CanvasPosition = new PointD (shape_end.X, shape_end.Y);
-		handles[4].CanvasPosition = new PointD (shape_origin.X, (shape_origin.Y + shape_end.Y) / 2);
-		handles[5].CanvasPosition = new PointD ((shape_origin.X + shape_end.X) / 2, shape_origin.Y);
-		handles[6].CanvasPosition = new PointD (shape_end.X, (shape_origin.Y + shape_end.Y) / 2);
-		handles[7].CanvasPosition = new PointD ((shape_origin.X + shape_end.X) / 2, shape_end.Y);
-
-		dirtyArea = dirtyArea.Union (ComputeHandleBounds ());
-
-		// Repaint at the old and new handle positions.
-		PintaCore.Workspace.InvalidateWindowRect (dirtyArea);
-	}
-
 	private RectangleI ReDraw (Document document)
 	{
 		document.Selection.Visible = true;
 
 		ShowHandles (true);
 
-		RectangleD rect = RectangleD.FromPoints (shape_origin, shape_end);
+		RectangleD rect = handle.Rectangle;
 
 		DrawShape (document, rect, document.Layers.SelectionLayer);
 
@@ -361,35 +189,16 @@ public abstract class SelectTool : BaseTool
 
 	private void ShowHandles (bool visible)
 	{
-		foreach (var handle in handles)
-			handle.Active = visible;
+		handle.Active = visible;
 	}
 
-	private MoveHandle? FindHandleUnderPoint (PointD window_point)
+	private void UpdateCursor (PointD viewPos)
 	{
-		return handles.FirstOrDefault (c => c.Active && c.ContainsPoint (window_point));
-	}
+		Gdk.Cursor? cursor = handle.Active ?
+			handle.GetCursorAtPoint (viewPos) :
+			null;
 
-	private int? FindHandleIndexUnderPoint (PointD window_point)
-	{
-		MoveHandle? handle = FindHandleUnderPoint (window_point);
-		if (handle is not null)
-			return handles.IndexOf (handle);
-		else
-			return null;
-	}
-
-	private void UpdateCursor (Document document, PointD window_point)
-	{
-		MoveHandle? active_handle = FindHandleUnderPoint (window_point);
-
-		if (active_handle is not null) {
-			SetCursor (active_handle.Cursor);
-			return;
-		}
-
-		if (CurrentCursor != DefaultCursor)
-			SetCursor (DefaultCursor);
+		SetCursor (cursor ?? DefaultCursor);
 	}
 
 	protected override void OnAfterUndo (Document document)
@@ -406,7 +215,7 @@ public abstract class SelectTool : BaseTool
 
 	private void AfterSelectionChange (object? sender, EventArgs event_args)
 	{
-		if (is_drawing || !workspace.HasOpenDocuments)
+		if (handle.IsDragging || !workspace.HasOpenDocuments)
 			return;
 
 		// TODO: Try to remove this ActiveDocument call
@@ -419,16 +228,7 @@ public abstract class SelectTool : BaseTool
 	private void LoadFromDocument (Document document)
 	{
 		DocumentSelection selection = document.Selection;
-
-		shape_origin = selection.Origin;
-		shape_end = selection.End;
-
-		ShowHandles (document.Selection.Visible);
-
-		if (tools.CurrentTool != this) return;
-
-		UpdateHandlePositions ();
-
-		document.Workspace.Invalidate ();
+		handle.Rectangle = RectangleD.FromPoints (selection.Origin, selection.End);
+		ShowHandles (document.Selection.Visible && tools.CurrentTool == this);
 	}
 }
