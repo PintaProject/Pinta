@@ -68,7 +68,7 @@ public readonly record struct RectangleD (
 			double y2 = Math.Max (a.Y, b.Y);
 			return new (x1, y1, x2 - x1, y2 - y1);
 		} else {
-			double width = Math.Max (0.0, b.Y - a.X);
+			double width = Math.Max (0.0, b.X - a.X);
 			double height = Math.Max (0.0, b.Y - a.Y);
 			return new (a.X, a.Y, width, height);
 		}
