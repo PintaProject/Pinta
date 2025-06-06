@@ -74,7 +74,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		Gtk.Label sizeLabel = CreateSizeLabel ();
 
-		Gtk.StringList presetDropdownModel = Gtk.StringList.New (GeneratePresetEntries (hasClipboard).ToArray ());
+		Gtk.StringList presetDropdownModel = Gtk.StringList.New ([.. GeneratePresetEntries (hasClipboard)]);
 		Gtk.DropDown presetDropdown = Gtk.DropDown.New (presetDropdownModel, expression: null);
 
 		Gtk.Label widthLabel = CreateWidthLabel ();
@@ -411,47 +411,53 @@ public sealed class NewImageDialog : Gtk.Dialog
 		}
 	}
 
-	private Size SelectedPresetSize {
-		get {
-			string text = preset_dropdown_model.GetString (preset_dropdown.Selected)!;
+	private Size GetSelectedPresetSize ()
+	{
+		string text = preset_dropdown_model.GetString (preset_dropdown.Selected)!;
+		return ExtractSelectedPresetSize (text);
+	}
 
-			if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
-				return Size.Empty;
+	private static Size ExtractSelectedPresetSize (string text)
+	{
+		if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
+			return Size.Empty;
 
-			string[] textParts = text.Split (' ');
+		string[] textParts = text.Split (' ');
 
-			return new (
-				int.Parse (textParts[0]),
-				int.Parse (textParts[2]));
-		}
+		return new (
+			int.Parse (textParts[0]),
+			int.Parse (textParts[2]));
 	}
 
 	private void WireUpEvents ()
 	{
 		// Handle preset changes
-		Gtk.DropDown.SelectedPropertyDefinition.Notify (preset_dropdown, (_, _) => {
-			Size new_size = IsValidSize ? NewImageSize : Size.Empty;
+		Gtk.DropDown.SelectedPropertyDefinition.Notify (
+			preset_dropdown,
+			(_, _) => {
+				Size new_size = IsValidSize ? NewImageSize : Size.Empty;
 
-			string? preset_text = preset_dropdown_model.GetString (preset_dropdown.Selected);
-			if (has_clipboard && preset_text == Translations.GetString ("Clipboard"))
-				new_size = clipboard_size;
-			else if (preset_text == Translations.GetString ("Custom"))
-				return;
-			else
-				new_size = SelectedPresetSize;
+				string? preset_text = preset_dropdown_model.GetString (preset_dropdown.Selected);
+				if (has_clipboard && preset_text == Translations.GetString ("Clipboard"))
+					new_size = clipboard_size;
+				else if (preset_text == Translations.GetString ("Custom"))
+					return;
+				else
+					new_size = GetSelectedPresetSize ();
 
-			suppress_events = true;
-			width_entry.Buffer!.Text = new_size.Width.ToString ();
-			height_entry.Buffer!.Text = new_size.Height.ToString ();
-			suppress_events = false;
+				suppress_events = true;
+				width_entry.Buffer!.Text = new_size.Width.ToString ();
+				height_entry.Buffer!.Text = new_size.Height.ToString ();
+				suppress_events = false;
 
-			UpdateOkButton ();
-			if (!IsValidSize)
-				return;
+				UpdateOkButton ();
+				if (!IsValidSize)
+					return;
 
-			UpdateOrientation ();
-			preview_box.Update (NewImageSize);
-		});
+				UpdateOrientation ();
+				preview_box.Update (NewImageSize);
+			}
+		);
 
 		// Handle width/height entry changes
 		width_entry.OnChanged ((o, e) => {
@@ -463,7 +469,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			if (!IsValidSize)
 				return;
 
-			if (NewImageSize != SelectedPresetSize)
+			if (NewImageSize != GetSelectedPresetSize ())
 				preset_dropdown.Selected = has_clipboard ? 1u : 0;
 
 			UpdateOrientation ();
@@ -480,7 +486,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			if (!IsValidSize)
 				return;
 
-			if (NewImageSize != SelectedPresetSize)
+			if (NewImageSize != GetSelectedPresetSize ())
 				preset_dropdown.Selected = has_clipboard ? 1u : 0;
 
 			UpdateOrientation ();
@@ -525,16 +531,21 @@ public sealed class NewImageDialog : Gtk.Dialog
 			landscape_radio.Activate ();
 
 		for (uint i = 1, n = preset_dropdown_model.GetNItems (); i < n; i++) {
+
 			string text = preset_dropdown_model.GetString (i)!;
 
 			if (text == Translations.GetString ("Clipboard") || text == Translations.GetString ("Custom"))
 				continue;
 
 			string[] textParts = text.Split ('x');
+
 			int width = int.Parse (textParts[0].Trim ());
 			int height = int.Parse (textParts[1].Trim ());
 
-			Size newSize = new (NewImageWidth < NewImageHeight ? Math.Min (width, height) : Math.Max (width, height), NewImageWidth < NewImageHeight ? Math.Max (width, height) : Math.Min (width, height));
+			Size newSize = new (
+				NewImageWidth < NewImageHeight ? Math.Min (width, height) : Math.Max (width, height),
+				NewImageWidth < NewImageHeight ? Math.Max (width, height) : Math.Min (width, height));
+
 			string newText = $"{newSize.Width} x {newSize.Height}";
 
 			if (newText != text)
@@ -554,6 +565,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 			return;
 
 		string text = $"{NewImageWidth} x {NewImageHeight}";
+
 		if (preset_dropdown_model.FindString (text, out uint index) && preset_dropdown.Selected != index)
 			preset_dropdown.Selected = index;
 	}
