@@ -167,7 +167,8 @@ public abstract class BaseEditEngine
 	/// </summary>
 	public IEnumerable<IToolHandle> Handles =>
 		SEngines.SelectMany (engine => engine.ControlPointHandles).Append (hover_handle);
-	private readonly MoveHandle hover_handle = new ();
+
+	private readonly MoveHandle hover_handle;
 
 	private readonly Gdk.Cursor grab_cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Grab);
 
@@ -234,6 +235,8 @@ public abstract class BaseEditEngine
 		workspace = services.GetService<IWorkspaceService> ();
 
 		owner = passedOwner;
+
+		hover_handle = new (workspace);
 
 		ResetShapes ();
 	}
@@ -765,7 +768,7 @@ public abstract class BaseEditEngine
 		bool clicked_generated_point = false;
 
 		PointD current_window_point = workspace.CanvasPointToView (unclamped_point);
-		MoveHandle test_handle = new ();
+		MoveHandle test_handle = new (workspace);
 
 		// Check if the user is directly clicking on a control point.
 		if (closestControlPoint != null) {
@@ -1235,7 +1238,7 @@ public abstract class BaseEditEngine
 				continue;
 
 			shape.ControlPointHandles.Add (
-				new MoveHandle {
+				new MoveHandle (workspace) {
 					Active = true,
 					CanvasPosition = point.Position,
 					Selected = (point == SelectedPoint) && draw_selection

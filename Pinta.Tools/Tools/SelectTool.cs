@@ -52,7 +52,7 @@ public abstract class SelectTool : BaseTool
 		tools = services.GetService<IToolService> ();
 		workspace = services.GetService<IWorkspaceService> ();
 
-		handle = new () { InvertIfNegative = true };
+		handle = new (workspace) { InvertIfNegative = true };
 
 		workspace.SelectionChanged += AfterSelectionChange;
 	}

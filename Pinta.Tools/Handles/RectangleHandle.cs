@@ -10,6 +10,8 @@ namespace Pinta.Tools;
 /// </summary>
 public class RectangleHandle : IToolHandle
 {
+	private readonly IWorkspaceService workspace;
+
 	private PointD start_pt;
 	private PointD end_pt;
 	private Size image_size;
@@ -17,17 +19,19 @@ public class RectangleHandle : IToolHandle
 	private MoveHandle? active_handle;
 	private PointD? drag_start_pos;
 
-	public RectangleHandle ()
+	public RectangleHandle (IWorkspaceService workspace)
 	{
+		this.workspace = workspace;
+
 		handles = [
-			new (){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNW) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSW) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNE) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSE) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeW) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeN) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeE) },
-			new (){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeS) },
+			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNW) },
+			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSW) },
+			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNE) },
+			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSE) },
+			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeW) },
+			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeN) },
+			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeE) },
+			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeS) },
 		];
 
 		foreach (var handle in handles)
@@ -79,7 +83,7 @@ public class RectangleHandle : IToolHandle
 
 		image_size = imageSize;
 
-		PointD viewPos = PintaCore.Workspace.CanvasPointToView (canvasPos);
+		PointD viewPos = workspace.CanvasPointToView (canvasPos);
 		UpdateHandleUnderPoint (viewPos);
 
 		if (active_handle is null)
@@ -122,7 +126,7 @@ public class RectangleHandle : IToolHandle
 		if (drag_start_pos is null)
 			throw new InvalidOperationException ("Drag operation has not been started!");
 
-		PointD viewPos = PintaCore.Workspace.CanvasPointToView (canvasPos);
+		PointD viewPos = workspace.CanvasPointToView (canvasPos);
 		return drag_start_pos.Value.Distance (viewPos) > 1;
 	}
 

@@ -16,6 +16,13 @@ public sealed class MoveHandle : IToolHandle
 
 	private const double RADIUS = 4.5;
 
+	private readonly IWorkspaceService workspace;
+
+	public MoveHandle (IWorkspaceService workspace)
+	{
+		this.workspace = workspace;
+	}
+
 	public PointD CanvasPosition { get; set; }
 
 	/// <summary>
@@ -48,7 +55,7 @@ public sealed class MoveHandle : IToolHandle
 	public void Draw (Gtk.Snapshot snapshot)
 	{
 		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
-		PointD windowPt = PintaCore.Workspace.CanvasPointToView (CanvasPosition);
+		PointD windowPt = workspace.CanvasPointToView (CanvasPosition);
 		pathBuilder.AddCircle (windowPt.ToGraphenePoint (), (float) RADIUS);
 		Gsk.Path path = pathBuilder.ToPath ();
 
@@ -71,7 +78,7 @@ public sealed class MoveHandle : IToolHandle
 	{
 		const double DIAMETER = 2 * RADIUS;
 
-		PointD windowPt = PintaCore.Workspace.CanvasPointToView (CanvasPosition);
+		PointD windowPt = workspace.CanvasPointToView (CanvasPosition);
 		return new RectangleD (windowPt.X - RADIUS, windowPt.Y - RADIUS, DIAMETER, DIAMETER);
 	}
 
