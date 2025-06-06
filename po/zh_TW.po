@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-25 00:30+0000\n"
-"PO-Revision-Date: 2025-05-21 13:18+0000\n"
+"PO-Revision-Date: 2025-06-05 21:34+0000\n"
 "Last-Translator: taijuin Lee <taijuin@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/pinta/pinta/zh_Hant/>\n"
@@ -2491,7 +2491,7 @@ msgstr "垂直紅色 (R)"
 
 #: ../Pinta/MainWindow.cs:461
 msgid "View"
-msgstr ""
+msgstr "檢視"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
