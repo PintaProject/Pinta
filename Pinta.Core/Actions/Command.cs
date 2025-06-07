@@ -80,7 +80,7 @@ public sealed class ToggleCommand : Command
 	{
 		Activated += (o, args) => {
 			bool active = !State.GetBoolean ();
-			Toggled?.Invoke (active);
+			Toggled?.Invoke (active, interactive: true);
 			Action.ChangeState (GLib.Variant.NewBoolean (active));
 		};
 	}
@@ -89,13 +89,13 @@ public sealed class ToggleCommand : Command
 		get => State.GetBoolean ();
 		set {
 			if (value != Value) {
-				Toggled?.Invoke (value);
+				Toggled?.Invoke (value, interactive: false);
 				Action.ChangeState (GLib.Variant.NewBoolean (value));
 			}
 		}
 	}
 
-	public delegate void ToggledHandler (bool value);
+	public delegate void ToggledHandler (bool value, bool interactive);
 	public ToggledHandler? Toggled;
 
 	private GLib.Variant State => Action.GetState () ?? throw new InvalidOperationException ("Action should not be stateless!");

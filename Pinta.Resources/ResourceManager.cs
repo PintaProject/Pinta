@@ -30,6 +30,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Gdk;
+using GLib;
 using Gtk;
 
 namespace Pinta.Resources;
@@ -56,21 +57,34 @@ public static class ResourceLoader
 		return CreateMissingImage (size);
 	}
 
-	private static bool TryGetIconFromTheme (string name, int size, [NotNullWhen (true)] out Gdk.Texture? image)
+	public static void LoadCssStyles ()
+	{
+		if (TryGetBytesFromAssembly (Assembly.GetExecutingAssembly (), "style.css", out Bytes? bytes)) {
+			var cssProvider = CssProvider.New ();
+			cssProvider.LoadFromBytes (bytes);
+			var display = Display.GetDefault ();
+			if (display != null) {
+				StyleContext.AddProviderForDisplay (display, cssProvider, Gtk.Constants.STYLE_PROVIDER_PRIORITY_APPLICATION);
+			}
+		}
+
+	}
+
+	private static bool TryGetIconFromTheme (string name, int size, [NotNullWhen (true)] out Texture? image)
 	{
 		image = null;
 
 		try {
 			// This will also load any icons added by Gtk.IconFactory.AddDefault() .
-			var icon_theme = Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
-			var icon_paintable = icon_theme.LookupIcon (name, Array.Empty<string> (), size, 1, TextDirection.None, Gtk.IconLookupFlags.Preload);
-			if (icon_paintable == null)
+			var iconTheme = IconTheme.GetForDisplay (Display.GetDefault ()!);
+			var iconPaintable = iconTheme.LookupIcon (name, System.Array.Empty<string> (), size, 1, TextDirection.None, IconLookupFlags.Preload);
+			if (iconPaintable == null)
 				return false;
-			if (name != StandardIcons.ImageMissing && icon_paintable.IconName!.StartsWith ("image-missing", StringComparison.InvariantCulture))
+			if (name != StandardIcons.ImageMissing && iconPaintable.IconName!.StartsWith ("image-missing", StringComparison.InvariantCulture))
 				return false;
 
 			var snapshot = Gtk.Snapshot.New ();
-			icon_paintable.Snapshot (snapshot, size, size);
+			iconPaintable.Snapshot (snapshot, size, size);
 
 			// Render the icon to a texture.
 			var node = snapshot.ToNode ();
@@ -106,21 +120,36 @@ public static class ResourceLoader
 	{
 		image = null;
 
+		if (TryGetBytesFromAssembly (assembly, name, out Bytes? bytes)) {
+			try {
+				image = Texture.NewFromBytes (bytes);
+			} catch (Exception ex) {
+				Console.Error.WriteLine (ex.Message);
+				image = null;
+			}
+		}
+
+		return image != null;
+	}
+
+	private static bool TryGetBytesFromAssembly (Assembly assembly, string name, [NotNullWhen (true)] out Bytes? bytes)
+	{
+		bytes = null;
+
 		try {
 			if (HasResource (assembly, name)) {
 				using var stream = assembly.GetManifestResourceStream (name)!;
 				var buffer = new byte[stream.Length];
 				stream.ReadExactly (buffer);
 
-				var bytes = GLib.Bytes.New (buffer);
-				image = Gdk.Texture.NewFromBytes (bytes);
+				bytes = Bytes.New (buffer);
 			}
 		} catch (Exception ex) {
 			Console.Error.WriteLine (ex.Message);
-			image = null;
+			bytes = null;
 		}
 
-		return image != null;
+		return bytes != null;
 	}
 
 	private static bool HasResource (Assembly asm, string name)
