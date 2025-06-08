@@ -48,6 +48,8 @@
     <GtkFile Include="$(MinGWBinFolder)\liblzo2-2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libnghttp2-14.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libnghttp3-9.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libngtcp2-16.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libngtcp2_crypto_ossl.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libpango-1.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libpangocairo-1.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libpangoft2-1.0-0.dll" />
