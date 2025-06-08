@@ -13,26 +13,41 @@ Thanks to the following contributors who worked on this release:
 
 ### Added
 - Rewrote the canvas widget to improve performance and memory usage issues for zoomed-in images (#1020, #1485)
-- Added an option (View -> Show/Hide -> Menu Bar) to switch to a menu bar layout instead of a header bar (#781, #1418)
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
 - When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
-- Pinta now configures a compatibility version number for add-ins, to support running add-ins built against older versions such as Pinta 3.0 (#1379, #1389)
 - Keyboard shortcuts are now displayed on all toolbar button tooltips (#1408, #1432)
 
 ### Changed
 - Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
-- Improved the sizing of the toolbox icons, particularly for high DPI displays (#1374)
-- The text tool now uses the system's default font rather than being hardcoded to Arial, which may not exist on some systems (#1422, #1421)
 - Removed use of deprecated Gtk.FontButton (#1421)
 - View menu moved from hamburger menu to dedicated button (#1428, #1471)
 
 ### Fixed
-- Fixed an issue where the toolbar's height could change when switching tools (#1370, #1391) 
 - Fixed a bug where cancelling the color picker dialog could still update the palette colors (#1390, #1411)
-- The text tool's "Normal and Outline" mode now draws the outline behind the text to avoid obscuring it (#1423, #1426) 
+- The text tool's "Normal and Outline" mode now draws the outline behind the text to avoid obscuring it (#1423, #1426)
 - Improved the handling of negative angle values in the Rotate / Zoom Layer dialog (#1142, #1440)
-- Fixed potential crashes when adjusting the brush width (#1340)
 - Fixed incorrect behavior of the Atkinson method in the Dithering effect (#1489)
+
+## [3.0.1](https://github.com/PintaProject/Pinta/compare/3.0.1...HEAD) - 2025/06/07
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+- @JGCarroll
+- @Lehonti
+- @UrtsiSantsi
+
+### Added
+- Added an option (View -> Show/Hide -> Menu Bar) to switch to a menu bar layout instead of a header bar (#781, #1418)
+- Pinta now configures a compatibility version number for add-ins, to support running add-ins built against older versions such as Pinta 3.0 (#1379, #1389)
+
+### Changed
+- Improved the sizing of the toolbox icons, particularly for high DPI displays (#1374)
+- The text tool now uses the system's default font rather than being hardcoded to Arial, which may not exist on some systems (#1422, #1421)
+- Updated translations
+
+### Fixed
+- Fixed an issue where the toolbar's height could change when switching tools (#1370, #1391)
+- Fixed potential crashes when adjusting the brush width (#1340)
 - Fixed a bug on Windows where Pinta did not use the system's language for translations (#1473, #1493)
 
 ## [3.0](https://github.com/PintaProject/Pinta/releases/tag/3.0) - 2025/04/11

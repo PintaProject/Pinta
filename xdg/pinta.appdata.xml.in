@@ -38,6 +38,28 @@
     <binary>pinta</binary>
   </provides>
   <releases>
+    <release version="3.0.1" date="2025-06-07">
+      <url>https://github.com/PintaProject/Pinta/releases/tag/3.0.1</url>
+      <description>
+        <p>New Features / Improvements</p>
+        <ul>
+          <li>Added an option (View - Show/Hide - Menu Bar) to switch to a menu bar layout instead of a header bar (#781, #1418)</li>
+          <li>Pinta now configures a compatibility version number for add-ins, to support running add-ins built against older versions such as Pinta 3.0 (#1379, #1389)</li>
+        </ul>
+        <p>Changes</p>
+        <ul>
+          <li>Improved the sizing of the toolbox icons, particularly for high DPI displays (#1374)</li>
+          <li>The text tool now uses the system's default font rather than being hardcoded to Arial, which may not exist on some systems (#1422, #1421)</li>
+          <li>Updated translations</li>
+        </ul>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Fixed an issue where the toolbar's height could change when switching tools (#1370, #1391)</li>
+          <li>Fixed potential crashes when adjusting the brush width (#1340)</li>
+          <li>Fixed a bug on Windows where Pinta did not use the system's language for translations (#1473, #1493)</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.0" date="2025-04-11">
       <url>https://github.com/PintaProject/Pinta/releases/tag/3.0</url>
       <description>
