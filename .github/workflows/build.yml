@@ -202,9 +202,9 @@ jobs:
         path: installer/windows/Pinta.exe
         if-no-files-found: error
 
-    # Only enable signing for tagged releases.
+    # Only enable signing for commits on the release branch.
     - name: Sign Installer
-      if: startsWith( github.ref, 'refs/tags/' )
+      if: github.event_name != 'pull_request'
       uses: signpath/github-action-submit-signing-request@v1
       with:
         api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
@@ -217,7 +217,7 @@ jobs:
         output-artifact-directory: './signed-artifacts'
 
     - name: Upload Signed Installer
-      if: startsWith( github.ref, 'refs/tags/' )
+      if: github.event_name != 'pull_request'
       id: upload-signed-installer
       uses: actions/upload-artifact@v4
       with:
