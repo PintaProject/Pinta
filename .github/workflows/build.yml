@@ -163,7 +163,14 @@ jobs:
         if-no-files-found: error
 
   build-windows:
-    runs-on: windows-2022
+    # Build for both x64 and arm64
+    strategy:
+      matrix:
+        build: [ { dotnet_rid: win-x64, mingw_folder: "${MINGW_PREFIX}/../clang64", mingw_system: clang64, mingw_repo: clang-x86_64, runner: windows-2025 }, { dotnet_rid: win-arm64, mingw_folder: "${MINGW_PREFIX}/../clangarm64", mingw_system: clangarm64, mingw_repo: clang-aarch64, runner: windows-11-arm }]
+
+    name: build-windows (${{matrix.build.dotnet_rid}})
+
+    runs-on: ${{matrix.build.runner}}
     defaults:
       run:
         shell: msys2 {0}
@@ -180,17 +187,18 @@ jobs:
       with:
         path-type: inherit # Inherit the path so that dotnet can be found
         update: true
-        install: mingw-w64-x86_64-libadwaita mingw-w64-x86_64-webp-pixbuf-loader
+        msystem: ${{matrix.build.mingw_system}}
+        install: mingw-w64-${{matrix.build.mingw_repo}}-libadwaita mingw-w64-${{matrix.build.mingw_repo}}-webp-pixbuf-loader
     - name: Build
-      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX}
+      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${{matrix.build.mingw_folder}}
     - name: Test
-      run: dotnet test Pinta.sln -c Release -p:MinGWFolder=${MINGW_PREFIX}
+      run: dotnet test Pinta.sln -c Release -p:MinGWFolder=${{matrix.build.mingw_folder}}
 
     # Note that msgfmt is already available from the Git for Windows installation!
     - name: Build Installer
       run: |
         choco install innosetup -y -v
-        dotnet publish Pinta/Pinta.csproj -p:BuildTranslations=true -p:MinGWFolder=${MINGW_PREFIX} -c Release -r win-x64 --self-contained true -p:PublishDir=../release/bin
+        dotnet publish Pinta/Pinta.csproj -p:BuildTranslations=true -p:MinGWFolder=${{matrix.build.mingw_folder}} -c Release -r ${{matrix.build.dotnet_rid}} --self-contained true -p:PublishDir=../release/bin
         cp -r release/bin/icons release/bin/locale release/share/
         rm -rf release/bin/icons release/bin/locale
         cp installer/macos/hicolor.index.theme release/share/icons/hicolor/index.theme
@@ -200,7 +208,7 @@ jobs:
       id: upload-unsigned-installer
       uses: actions/upload-artifact@v4
       with:
-        name: "Pinta.exe"
+        name: "Pinta-${{matrix.build.dotnet_rid}}.exe"
         path: installer/windows/Pinta.exe
         if-no-files-found: error
 
@@ -223,7 +231,7 @@ jobs:
       id: upload-signed-installer
       uses: actions/upload-artifact@v4
       with:
-        name: "Pinta-signed.exe"
-        path: ./signed-artifacts/Pinta.exe
+        name: "Pinta-signed-${{matrix.build.dotnet_rid}}.exe"
+        path: ./signed-artifacts/Pinta-${{matrix.build.dotnet_rid}}.exe
         if-no-files-found: error
 
