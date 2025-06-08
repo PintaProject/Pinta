@@ -12,6 +12,28 @@ Thanks to the following contributors who worked on this release:
 
 ### Fixed
 
+## [3.0.1](https://github.com/PintaProject/Pinta/compare/3.0.1...HEAD) - 2025/06/07
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+- @JGCarroll
+- @Lehonti
+- @UrtsiSantsi
+
+### Added
+- Added an option (View -> Show/Hide -> Menu Bar) to switch to a menu bar layout instead of a header bar (#781, #1418)
+- Pinta now configures a compatibility version number for add-ins, to support running add-ins built against older versions such as Pinta 3.0 (#1379, #1389)
+
+### Changed
+- Improved the sizing of the toolbox icons, particularly for high DPI displays (#1374)
+- The text tool now uses the system's default font rather than being hardcoded to Arial, which may not exist on some systems (#1422, #1421)
+- Updated translations
+
+### Fixed
+- Fixed an issue where the toolbar's height could change when switching tools (#1370, #1391) 
+- Fixed potential crashes when adjusting the brush width (#1340)
+- Fixed a bug on Windows where Pinta did not use the system's language for translations (#1473, #1493)
+
 ## [3.0](https://github.com/PintaProject/Pinta/releases/tag/3.0) - 2025/04/11
 
 Thanks to the following contributors who worked on this release:
