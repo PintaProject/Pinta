@@ -2,7 +2,7 @@
   <!-- Install GTK library dependencies on Windows, from the MSYS installation. -->
   <PropertyGroup>
     <!-- Note this can be overridden by an environment variable with the same name. -->
-    <MinGWFolder>C:\msys64\mingw64</MinGWFolder>
+    <MinGWFolder>C:\msys64\clang64</MinGWFolder>
     <MinGWBinFolder>$(MinGWFolder)\bin</MinGWBinFolder>
   </PropertyGroup>
 
@@ -17,8 +17,10 @@
     <GtkFile Include="$(MinGWBinFolder)\libcairo-2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libcairo-gobject-2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libcairo-script-interpreter-2.dll" />
-    <GtkFile Include="$(MinGWBinFolder)\libcrypto-3-x64.dll" />
+    <!-- Match against the arch-specific suffix, e.g. libcrypto-3-x64.dll -->
+    <GtkFile Include="$(MinGWBinFolder)\libcrypto-3-*.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libcurl-4.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libc++.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libdatrie-1.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libdeflate.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libepoxy-0.dll" />
@@ -27,7 +29,6 @@
     <GtkFile Include="$(MinGWBinFolder)\libfontconfig-1.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libfreetype-6.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libfribidi-0.dll" />
-    <GtkFile Include="$(MinGWBinFolder)\libgcc_s_seh-1.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libgdk_pixbuf-2.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libgio-2.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libglib-2.0-0.dll" />
@@ -49,7 +50,7 @@
     <GtkFile Include="$(MinGWBinFolder)\libnghttp2-14.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libnghttp3-9.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libngtcp2-16.dll" />
-    <GtkFile Include="$(MinGWBinFolder)\libngtcp2_crypto_ossl.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libngtcp2_crypto_ossl-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libpango-1.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libpangocairo-1.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libpangoft2-1.0-0.dll" />
@@ -60,13 +61,14 @@
     <GtkFile Include="$(MinGWBinFolder)\libpsl-5.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libsharpyuv-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libssh2-1.dll" />
-    <GtkFile Include="$(MinGWBinFolder)\libssl-3-x64.dll" />
-    <GtkFile Include="$(MinGWBinFolder)\libstdc++-6.dll" />
+    <!-- Match against the arch-specific suffix, e.g. libssl-3-x64.dll -->
+    <GtkFile Include="$(MinGWBinFolder)\libssl-3-*.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libthai-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libtiff-6.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libunistring-5.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libunwind.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libwebp-7.dll" />
-    <GtkFile Include="$(MinGWBinFolder)\libwinpthread-1.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libxml2-16.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libxmlb-2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libyaml-0-2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libzstd.dll" />
@@ -75,7 +77,6 @@
     <!-- Additional dependencies for the SVG pixbuf loader. -->
     <GtkFile Include="$(MinGWBinFolder)\libcharset-1.dll" />
     <GtkFile Include="$(MinGWBinFolder)\librsvg-2-2.dll" />
-    <GtkFile Include="$(MinGWBinFolder)\libxml2-2.dll" />
 
     <!-- Additional dependencies for the webp pixbuf loader. -->
     <GtkFile Include="$(MinGWBinFolder)\libwebp-7.dll" />
