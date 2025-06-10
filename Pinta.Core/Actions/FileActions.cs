@@ -48,7 +48,7 @@ public sealed class FileActions
 	/// and
 	/// <see langword="false" /> otherwise
 	/// </remarks>
-	public event AsyncEventHandler<FileActions, DocumentCancelEventArgs>.Returning<bool>? SaveDocument;
+	public event AsyncEventHandler<FileActions, DocumentSaveEventArgs>.Returning<bool>? SaveDocument;
 
 	private readonly SystemManager system;
 	private readonly AppActions app;
@@ -154,7 +154,7 @@ public sealed class FileActions
 		if (SaveDocument == null)
 			throw new InvalidOperationException ("GUI is not handling Workspace.SaveDocument");
 
-		DocumentCancelEventArgs e = new (document, saveAs);
+		DocumentSaveEventArgs e = new (document, saveAs);
 		var results = await SaveDocument.InvokeSequential (this, e);
 		return !results.Any (canceled => canceled);
 	}

@@ -69,7 +69,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		file.SaveDocument -= Activated;
 	}
 
-	private async Task<bool> Activated (FileActions sender, DocumentCancelEventArgs e)
+	private async Task<bool> Activated (FileActions sender, DocumentSaveEventArgs e)
 	{
 		// Prompt for a new filename for "Save As", or a document that hasn't been saved before
 		if (e.SaveAs || !e.Document.HasFile) {
