@@ -64,15 +64,14 @@ public static class AsyncEventHandlerExtensions
 		TSender sender,
 		TArgs args)
 	{
-		var invocationList =
-			handlerBundle
-			.GetInvocationList ()
-			.Cast<AsyncEventHandler<TSender, TArgs>.Returning<TResult>> ()
-			.ToImmutableArray ();
+		var invocationList = handlerBundle.GetInvocationList ();
 
 		var builder = ImmutableArray.CreateBuilder<TResult> (invocationList.Length);
 
-		foreach (var item in invocationList) {
+		foreach (
+			var item
+			in invocationList.Cast<AsyncEventHandler<TSender, TArgs>.Returning<TResult>> ()) {
+
 			TResult itemResult = await item (sender, args);
 			builder.Add (itemResult);
 		}
@@ -97,8 +96,7 @@ public static class AsyncEventHandlerExtensions
 		var invocationList =
 			handlerBundle
 			.GetInvocationList ()
-			.Cast<AsyncEventHandler<TSender, TArgs>.Simple> ()
-			.ToImmutableArray ();
+			.Cast<AsyncEventHandler<TSender, TArgs>.Simple> ();
 
 		foreach (var item in invocationList)
 			await item (sender, args);
