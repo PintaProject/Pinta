@@ -146,8 +146,8 @@ public sealed class FileActions
 	public void RegisterHandlers () { }
 
 	/// <returns>
-	/// <see langword="true"/> if save was canceled,
-	/// <see langword="false"/> otherwise
+	/// <see langword="false"/> if save was canceled,
+	/// <see langword="true"/> otherwise
 	/// </returns>
 	internal async Task<bool> RaiseSaveDocument (Document document, bool saveAs)
 	{
