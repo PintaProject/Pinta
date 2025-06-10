@@ -69,20 +69,19 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		file.SaveDocument -= Activated;
 	}
 
-	private async Task Activated (FileActions sender, DocumentCancelEventArgs e)
+	private async Task<bool> Activated (FileActions sender, DocumentCancelEventArgs e)
 	{
 		// Prompt for a new filename for "Save As", or a document that hasn't been saved before
 		if (e.SaveAs || !e.Document.HasFile) {
-			e.Cancel = !await SaveFileAs (e.Document);
-			return;
+			return !await SaveFileAs (e.Document);
 		}
 
 		// Document hasn't changed, don't re-save it
 		if (!e.Document.IsDirty)
-			return;
+			return false;
 
 		// If the document already has a filename, just re-save it
-		e.Cancel = !await SaveFile (e.Document, null, null, chrome.MainWindow);
+		return !await SaveFile (e.Document, null, null, chrome.MainWindow);
 	}
 
 	// This is actually both for "Save As" and saving a file that never

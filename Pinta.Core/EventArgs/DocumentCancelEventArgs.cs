@@ -24,11 +24,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System.ComponentModel;
-
 namespace Pinta.Core;
 
-public sealed class DocumentCancelEventArgs : CancelEventArgs
+public sealed class DocumentCancelEventArgs
 {
 	public Document Document { get; }
 	public bool SaveAs { get; }
