@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 
 namespace Pinta.Core;
 
@@ -39,7 +40,7 @@ public sealed class FileActions
 	public Command Print { get; }
 
 	public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
-	public event EventHandler<DocumentCancelEventArgs>? SaveDocument;
+	public event AsyncEventHandler<FileActions, DocumentCancelEventArgs>.Simple? SaveDocument;
 
 	private readonly SystemManager system;
 	private readonly AppActions app;
@@ -136,13 +137,13 @@ public sealed class FileActions
 
 	public void RegisterHandlers () { }
 
-	internal bool RaiseSaveDocument (Document document, bool saveAs)
+	internal async Task<bool> RaiseSaveDocument (Document document, bool saveAs)
 	{
 		if (SaveDocument == null)
 			throw new InvalidOperationException ("GUI is not handling Workspace.SaveDocument");
 
 		DocumentCancelEventArgs e = new (document, saveAs);
-		SaveDocument (this, e);
+		await SaveDocument.InvokeSequential (this, e);
 		return !e.Cancel;
 	}
 

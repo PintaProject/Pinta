@@ -51,7 +51,7 @@ internal sealed class SaveAllDocumentsAction : IActionHandler
 		window.SaveAll.Activated -= Activated;
 	}
 
-	private void Activated (object sender, EventArgs e)
+	private async void Activated (object sender, EventArgs e)
 	{
 		foreach (Document doc in workspace.OpenDocuments) {
 
@@ -61,7 +61,7 @@ internal sealed class SaveAllDocumentsAction : IActionHandler
 			window.SetActiveDocument (doc);
 
 			// Loop through all of these until we get a cancel
-			if (!doc.Save (false))
+			if (!await doc.Save (false))
 				break;
 		}
 	}

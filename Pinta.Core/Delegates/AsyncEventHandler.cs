@@ -33,7 +33,7 @@ public static class AsyncEventHandlerExtensions
 		return builder.ToImmutable ();
 	}
 
-	public static async Task InvokeSequential<TSender, TArgs, TResult> (
+	public static async Task InvokeSequential<TSender, TArgs> (
 		this AsyncEventHandler<TSender, TArgs>.Simple handlerBundle,
 		TSender sender,
 		TArgs args)
