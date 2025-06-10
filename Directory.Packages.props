@@ -18,12 +18,12 @@
     <PackageVersion Include="Tmds.DBus" Version="0.21.2" />
 
     <!-- Dependencies used for unit tests -->
-    <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
+    <PackageVersion Include="BenchmarkDotNet" Version="0.15.0" />
     <PackageVersion Include="NUnit" Version="4.3.2" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0" />
 
     <!-- To resolve dependency conflict with GirCore.GObject-2.0.Integration and BenchmarkDotNet -->
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
   </ItemGroup>
 </Project>
