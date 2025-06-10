@@ -44,7 +44,7 @@ public sealed class FileActions
 
 	/// <remarks>
 	/// The returned value is
-	/// <see langword="true" /> if was save was canceled,
+	/// <see langword="true" /> if was save succeeded
 	/// and
 	/// <see langword="false" /> otherwise
 	/// </remarks>
@@ -146,8 +146,8 @@ public sealed class FileActions
 	public void RegisterHandlers () { }
 
 	/// <returns>
-	/// <see langword="false"/> if save was canceled,
-	/// <see langword="true"/> otherwise
+	/// <see langword="true"/> if the save succeeded,
+	/// <see langword="false"/> otherwise (for example, if it was canceled)
 	/// </returns>
 	internal async Task<bool> RaiseSaveDocument (Document document, bool saveAs)
 	{
@@ -156,7 +156,7 @@ public sealed class FileActions
 
 		DocumentSaveEventArgs e = new (document, saveAs);
 		var results = await SaveDocument.InvokeSequential (this, e);
-		return !results.Any (canceled => canceled);
+		return results.All (succeeded => succeeded);
 	}
 
 	internal int RaiseModifyCompression (int defaultCompression, Gtk.Window parent)
