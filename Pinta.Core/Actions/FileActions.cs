@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Pinta.Core;
 
@@ -39,7 +41,14 @@ public sealed class FileActions
 	public Command Print { get; }
 
 	public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
-	public event EventHandler<DocumentCancelEventArgs>? SaveDocument;
+
+	/// <remarks>
+	/// The returned value is
+	/// <see langword="true" /> if was save succeeded
+	/// and
+	/// <see langword="false" /> otherwise
+	/// </remarks>
+	public event AsyncEventHandler<FileActions, DocumentSaveEventArgs>.Returning<bool>? SaveDocument;
 
 	private readonly SystemManager system;
 	private readonly AppActions app;
@@ -136,14 +145,18 @@ public sealed class FileActions
 
 	public void RegisterHandlers () { }
 
-	internal bool RaiseSaveDocument (Document document, bool saveAs)
+	/// <returns>
+	/// <see langword="true"/> if the save succeeded,
+	/// <see langword="false"/> otherwise (for example, if it was canceled)
+	/// </returns>
+	internal async Task<bool> RaiseSaveDocument (Document document, bool saveAs)
 	{
-		if (SaveDocument == null)
+		if (SaveDocument is null)
 			throw new InvalidOperationException ("GUI is not handling Workspace.SaveDocument");
 
-		DocumentCancelEventArgs e = new (document, saveAs);
-		SaveDocument (this, e);
-		return !e.Cancel;
+		DocumentSaveEventArgs e = new (document, saveAs);
+		var results = await SaveDocument.InvokeSequential (this, e);
+		return results.All (succeeded => succeeded);
 	}
 
 	internal int RaiseModifyCompression (int defaultCompression, Gtk.Window parent)

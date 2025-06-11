@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Cairo;
 
 namespace Pinta.Core;
@@ -337,7 +338,7 @@ public sealed class Document
 
 		hist.FinishSnapshotOfImage ();
 
-		if (compoundAction != null)
+		if (compoundAction is not null)
 			compoundAction.Push (hist);
 		else
 			Workspace.History.PushNewItem (hist);
@@ -412,7 +413,7 @@ public sealed class Document
 	}
 
 	// Returns true if successful, false if canceled
-	public bool Save (bool saveAs)
+	public Task<bool> Save (bool saveAs)
 	{
 		return actions.File.RaiseSaveDocument (this, saveAs);
 	}

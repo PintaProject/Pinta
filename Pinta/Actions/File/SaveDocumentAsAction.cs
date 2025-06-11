@@ -51,8 +51,8 @@ internal sealed class SaveDocumentAsAction : IActionHandler
 		file.SaveAs.Activated -= Activated;
 	}
 
-	private void Activated (object sender, EventArgs e)
+	private async void Activated (object sender, EventArgs e)
 	{
-		workspace.ActiveDocument.Save (true);
+		await workspace.ActiveDocument.Save (true);
 	}
 }

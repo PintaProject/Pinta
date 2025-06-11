@@ -106,8 +106,8 @@ partial class GtkExtensions
 	/// </summary>
 	public static Gtk.ResponseType RunBlocking (this Gtk.NativeDialog dialog)
 	{
-		var response = Gtk.ResponseType.None;
-		var loop = GLib.MainLoop.New (null, false);
+		Gtk.ResponseType response = Gtk.ResponseType.None;
+		GLib.MainLoop loop = GLib.MainLoop.New (null, false);
 
 		if (!dialog.Modal)
 			dialog.Modal = true;
@@ -131,8 +131,8 @@ partial class GtkExtensions
 	/// </summary>
 	public static Gtk.ResponseType RunBlocking (this Gtk.Dialog dialog)
 	{
-		var response = Gtk.ResponseType.None;
-		var loop = GLib.MainLoop.New (null, false);
+		Gtk.ResponseType response = Gtk.ResponseType.None;
+		GLib.MainLoop loop = GLib.MainLoop.New (null, false);
 
 		if (!dialog.Modal)
 			dialog.Modal = true;
@@ -149,6 +149,24 @@ partial class GtkExtensions
 		loop.Run ();
 
 		return response;
+	}
+
+	public static Task<Gtk.ResponseType> RunAsync (this Gtk.NativeDialog dialog)
+	{
+		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
+
+		void ResponseCallback (
+			Gtk.NativeDialog sender,
+			Gtk.NativeDialog.ResponseSignalArgs args)
+		{
+			completionSource.SetResult ((Gtk.ResponseType) args.ResponseId);
+			dialog.OnResponse -= ResponseCallback;
+		}
+
+		dialog.OnResponse += ResponseCallback;
+		dialog.Show ();
+
+		return completionSource.Task;
 	}
 
 	// TODO-GTK4 (bindings) - replace with adw_message_dialog_choose() once adwaita 1.3 is available, like in v0.4 of gir.core

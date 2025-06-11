@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta.Actions;
@@ -68,25 +69,24 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		file.SaveDocument -= Activated;
 	}
 
-	private void Activated (object? sender, DocumentCancelEventArgs e)
+	private async Task<bool> Activated (FileActions sender, DocumentSaveEventArgs e)
 	{
 		// Prompt for a new filename for "Save As", or a document that hasn't been saved before
 		if (e.SaveAs || !e.Document.HasFile) {
-			e.Cancel = !SaveFileAs (e.Document);
-			return;
+			return await SaveFileAs (e.Document);
 		}
 
 		// Document hasn't changed, don't re-save it
 		if (!e.Document.IsDirty)
-			return;
+			return true;
 
 		// If the document already has a filename, just re-save it
-		e.Cancel = !SaveFile (e.Document, null, null, chrome.MainWindow);
+		return await SaveFile (e.Document, null, null, chrome.MainWindow);
 	}
 
 	// This is actually both for "Save As" and saving a file that never
 	// been saved before.  Either way, we need to prompt for a filename.
-	private bool SaveFileAs (Document document)
+	private async Task<bool> SaveFileAs (Document document)
 	{
 		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Save Image File"),
@@ -131,12 +131,13 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			format_desc = previous_format_desc;
 		}
 
-		if (format_desc == null || !format_desc.IsExportAvailable ())
+		if (format_desc is null || !format_desc.IsExportAvailable ())
 			format_desc = image_formats.GetDefaultSaveFormat ();
 
 		fcd.Filter = format_desc.Filter;
 
-		while (fcd.RunBlocking () == Gtk.ResponseType.Accept) {
+		while (await fcd.RunAsync () == Gtk.ResponseType.Accept) {
+
 			Gio.File file = fcd.GetFile ()!;
 
 			// Note that we can't use file.GetDisplayName() because the file doesn't exist.
@@ -157,6 +158,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			if (!format.SupportsLayers
 				&& previous_format_desc?.SupportsLayers == true
 				&& document.Layers.Count () > 1) {
+
 				string heading = Translations.GetString ("This format does not support layers. Flatten image?");
 				string body = Translations.GetString ("Flattening the image will merge all layers into a single layer.");
 
@@ -168,7 +170,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 				dialog.CloseResponse = RESPONSE_CANCEL;
 				dialog.DefaultResponse = RESPONSE_FLATTEN;
 
-				string response = dialog.RunBlocking ();
+				string response = await dialog.RunAsync ();
 
 				if (response == RESPONSE_CANCEL)
 					continue;
@@ -178,13 +180,14 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 				image.Flatten.Activate ();
 			}
 
-			var directory = file.GetParent ();
+			Gio.File? directory = file.GetParent ();
+
 			if (directory is not null)
 				recent_files.LastDialogDirectory = directory;
 
 			// If saving the file failed or was cancelled, let the user select
 			// a different file type.
-			if (!SaveFile (document, file, format, chrome.MainWindow)) {
+			if (!await SaveFile (document, file, format, chrome.MainWindow)) {
 				// Re-set the current name and directory
 				fcd.SetCurrentName (displayName);
 				fcd.SetCurrentFolder (directory);
@@ -206,23 +209,24 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		return false;
 	}
 
-	private bool SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Gtk.Window parent)
+	private async Task<bool> SaveFile (Document document, Gio.File? file, FormatDescriptor? format, Gtk.Window parent)
 	{
 		file ??= document.File;
 
 		if (file is null)
 			throw new ArgumentException ("Attempted to save a document with no associated file", nameof (file));
 
-		if (format == null) {
+		if (format is null) {
+
 			if (string.IsNullOrEmpty (document.FileType))
 				throw new ArgumentException ($"{nameof (document.FileType)} must contain value.", nameof (document));
 
 			format = image_formats.GetFormatByExtension (document.FileType);
 		}
 
-		if (format == null || !format.IsExportAvailable ()) {
+		if (format is null || !format.IsExportAvailable ()) {
 
-			chrome.ShowMessageDialog (
+			await chrome.ShowMessageDialog (
 				parent,
 				Translations.GetString ("Pinta does not support saving images in this file format."),
 				file.GetDisplayName ());
@@ -241,7 +245,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			string primary = Translations.GetString ("Image too large");
 			string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
 
-			chrome.ShowMessageDialog (parent, primary, secondary);
+			await chrome.ShowMessageDialog (parent, primary, secondary);
 
 			return false;
 
@@ -252,7 +256,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			// Translators: {0} is the name of a file that the user does not have write permission for.
 			string secondary = Translations.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only.", file);
 
-			chrome.ShowMessageDialog (parent, primary, secondary);
+			await chrome.ShowMessageDialog (parent, primary, secondary);
 
 			return false;
 
