@@ -151,7 +151,7 @@ public sealed class FileActions
 	/// </returns>
 	internal async Task<bool> RaiseSaveDocument (Document document, bool saveAs)
 	{
-		if (SaveDocument == null)
+		if (SaveDocument is null)
 			throw new InvalidOperationException ("GUI is not handling Workspace.SaveDocument");
 
 		DocumentSaveEventArgs e = new (document, saveAs);

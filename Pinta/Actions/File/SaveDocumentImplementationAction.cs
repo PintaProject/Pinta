@@ -131,7 +131,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			format_desc = previous_format_desc;
 		}
 
-		if (format_desc == null || !format_desc.IsExportAvailable ())
+		if (format_desc is null || !format_desc.IsExportAvailable ())
 			format_desc = image_formats.GetDefaultSaveFormat ();
 
 		fcd.Filter = format_desc.Filter;
@@ -216,7 +216,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		if (file is null)
 			throw new ArgumentException ("Attempted to save a document with no associated file", nameof (file));
 
-		if (format == null) {
+		if (format is null) {
 
 			if (string.IsNullOrEmpty (document.FileType))
 				throw new ArgumentException ($"{nameof (document.FileType)} must contain value.", nameof (document));
@@ -224,7 +224,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			format = image_formats.GetFormatByExtension (document.FileType);
 		}
 
-		if (format == null || !format.IsExportAvailable ()) {
+		if (format is null || !format.IsExportAvailable ()) {
 
 			await chrome.ShowMessageDialog (
 				parent,

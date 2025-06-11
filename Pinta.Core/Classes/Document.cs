@@ -338,7 +338,7 @@ public sealed class Document
 
 		hist.FinishSnapshotOfImage ();
 
-		if (compoundAction != null)
+		if (compoundAction is not null)
 			compoundAction.Push (hist);
 		else
 			Workspace.History.PushNewItem (hist);
