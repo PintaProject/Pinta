@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta.Actions;
