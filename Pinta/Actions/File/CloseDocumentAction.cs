@@ -94,12 +94,14 @@ internal sealed class CloseDocumentAction : IActionHandler
 
 		string response = dialog.RunBlocking ();
 		if (response == save_response) {
-			await workspace.ActiveDocument.Save (false);
 
-			// If the image is still dirty, the user
+			bool saved = await workspace.ActiveDocument.Save (false);
+
+			// If saved is false, then the user
 			// must have cancelled the Save dialog
-			if (!workspace.ActiveDocument.IsDirty)
+			if (saved)
 				workspace.CloseActiveDocument (actions);
+
 		} else if (response == discard_response) {
 			workspace.CloseActiveDocument (actions);
 		}
