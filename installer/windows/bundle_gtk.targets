@@ -82,6 +82,9 @@
     <GtkFile Include="$(MinGWBinFolder)\libwebpdemux-2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libwebpmux-3.dll" />
 
+    <!-- Package the Vulkan DLL (https://gitlab.gnome.org/GNOME/gtk/-/issues/7214) -->
+    <GtkFile Include="$(MinGWBinFolder)\vulkan-1.dll" />
+
     <GtkFile Include="$(MinGWBinFolder)\gdbus.exe" />
     <GtkFile Include="$(MinGWBinFolder)\gdk-pixbuf-query-loaders.exe" />
     <GtkFile Include="$(MinGWBinFolder)\gspawn-win64-helper.exe" />
