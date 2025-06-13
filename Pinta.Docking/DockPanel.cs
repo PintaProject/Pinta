@@ -165,35 +165,39 @@ public sealed class DockPanel : Gtk.Box
 		}
 	}
 
-	private void UpdatePaneConnections ()
+	private void UpdatePaneConnections()
 	{
 		// Get all maximized (visible) items
-		var maximizedItems = items.Where (item => !item.IsMinimized).ToArray ();
-
+		var maximizedItems = items.Where(item => !item.IsMinimized).ToArray();
+		
 		// Reset all EndChild connections
-		foreach (var item in items) {
+		foreach (var item in items)
+		{
 			item.Pane.EndChild = null;
 		}
-
+		
 		// Remove all panes from the container
-		var currentChild = GetFirstChild ();
-		while (currentChild != null && currentChild != dock_bar) {
-			var next = currentChild.GetNextSibling ();
-			Remove (currentChild);
+		var currentChild = GetFirstChild();
+		while (currentChild != null && currentChild != dock_bar)
+		{
+			var next = currentChild.GetNextSibling();
+			Remove(currentChild);
 			currentChild = next;
 		}
-
-		if (maximizedItems.Length > 0) {
+		
+		if (maximizedItems.Length > 0)
+		{
 			// Rebuild the chain connecting only maximized panes
-			for (int i = 0; i < maximizedItems.Length - 1; i++) {
+			for (int i = 0; i < maximizedItems.Length - 1; i++)
+			{
 				maximizedItems[i].Pane.EndChild = maximizedItems[i + 1].Pane;
 			}
-
+			
 			// Add the root pane (first maximized pane) back to the container
 			var rootPane = maximizedItems[0].Pane;
 			rootPane.Hexpand = true;
 			rootPane.Halign = Gtk.Align.Fill;
-			Prepend (rootPane);
+			Prepend(rootPane);
 		}
 	}
 }
