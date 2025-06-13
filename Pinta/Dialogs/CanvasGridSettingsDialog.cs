@@ -35,7 +35,7 @@ public sealed class CanvasGridSettingsDialog : Dialog
 		CheckButton showAxonometricGridCheckBox = CheckButton.NewWithLabel (Translations.GetString ("Show Axonometric Grid"));
 		showAxonometricGridCheckBox.Active = initialSettings.ShowAxonometricGrid;
 		showAxonometricGridCheckBox.OnToggled += SettingsChanged;
-		
+
 		SpinButton axonometricWidthSpinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
 		axonometricWidthSpinner.Value = initialSettings.AxonometricWidth;
 		axonometricWidthSpinner.OnValueChanged += SettingsChanged;
