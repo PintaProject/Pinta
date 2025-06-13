@@ -50,7 +50,7 @@ public sealed class CanvasGridManager : ICanvasGridService
 		get => show_axonometric_grid;
 		set => SetProperty (ref show_axonometric_grid, value);
 	}
-	
+
 	public int AxonometricWidth {
 		get => axonometric_width;
 		set => SetProperty (ref axonometric_width, value);
