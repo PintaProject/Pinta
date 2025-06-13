@@ -126,6 +126,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		DrawSelection (snapshot, canvasViewBounds);
 		DrawHandles (snapshot, canvasViewBounds);
 		DrawCanvasGrid (snapshot, canvasViewBounds);
+		DrawCanvasAxonometricGrid (snapshot, canvasViewBounds);
 
 		// In the future, this would be cleaner to implement as a custom widget once gir.core supports virtual methods
 		// (in particular, zooming might be easier when we have control over the size allocation)
@@ -327,6 +328,74 @@ public sealed class PintaCanvas : Gtk.Picture
 		int cellWidth = canvas_grid.CellWidth;
 
 		int minCanvasDistance = Math.Min (cellHeight, cellWidth);
+		int minViewDistance = (int) Math.Ceiling (minCanvasDistance * document.Workspace.Scale);
+
+		return minViewDistance >= MIN_GRID_LINE_DISTANCE;
+	}
+
+	private void DrawCanvasAxonometricGrid (Gtk.Snapshot snapshot, Graphene.Rect canvasViewBounds)
+	{
+		if (!ShouldShowCanvasAxonometricGrid ())
+			return;
+
+		Gsk.Path gridPath = BuildCanvasAxonometricGridPath ();
+
+		snapshot.PushClip (canvasViewBounds);
+		snapshot.Save ();
+
+		// Scale the selection path up to the view size.
+		float scale = (float) document.Workspace.Scale;
+		snapshot.Scale (scale, scale);
+
+		// Draw as a dotted line (every other pixel) to have a more subtle appearance.
+		Gsk.Stroke stroke = Gsk.Stroke.New (lineWidth: 1.0f / scale);
+		stroke.SetDash ([1.0f / scale, 1.0f / scale]);
+
+		Gdk.RGBA color = new () { Red = 0, Green = 0, Blue = 0, Alpha = 1 };
+		snapshot.AppendStroke (gridPath, stroke, color);
+
+		snapshot.Restore ();
+		snapshot.Pop ();
+	}
+	
+	private Gsk.Path BuildCanvasAxonometricGridPath ()
+	{
+		int axonometricWidth = canvas_grid.AxonometricWidth;
+		int imageHeight = document.ImageSize.Height;
+		int imageWidth = document.ImageSize.Width;
+
+		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
+		// Add diagonal lines.
+		for (int i = 0; i < imageWidth + imageHeight; i += 2 * axonometricWidth) {
+			pathBuilder.MoveTo (0, i);
+			pathBuilder.LineTo (i, 0);
+		}
+
+		for (int i = -imageHeight + imageHeight % (2 * axonometricWidth); i < imageWidth; i += 2 * axonometricWidth) {
+			pathBuilder.MoveTo (i, 0);
+			pathBuilder.LineTo (i + imageHeight, imageHeight);
+		}
+
+		// Add vertical lines.
+		for (int i = 0; i < imageWidth; i += axonometricWidth) {
+			pathBuilder.MoveTo (i, 0);
+			pathBuilder.LineTo (i, imageHeight);
+		}
+
+		return pathBuilder.ToPath ();
+	}
+	
+	/// <summary>
+	/// The axonometric grid should be drawn if it is enabled and we're zoomed in far enough.
+	/// </summary>
+	private bool ShouldShowCanvasAxonometricGrid ()
+	{
+		if (!canvas_grid.ShowAxonometricGrid)
+			return false;
+
+		const int MIN_GRID_LINE_DISTANCE = 5;
+
+		int minCanvasDistance = canvas_grid.AxonometricWidth;
 		int minViewDistance = (int) Math.Ceiling (minCanvasDistance * document.Workspace.Scale);
 
 		return minViewDistance >= MIN_GRID_LINE_DISTANCE;
