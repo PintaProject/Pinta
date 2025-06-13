@@ -357,7 +357,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		snapshot.Restore ();
 		snapshot.Pop ();
 	}
-	
+
 	private Gsk.Path BuildCanvasAxonometricGridPath ()
 	{
 		int axonometricWidth = canvas_grid.AxonometricWidth;
@@ -384,7 +384,7 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		return pathBuilder.ToPath ();
 	}
-	
+
 	/// <summary>
 	/// The axonometric grid should be drawn if it is enabled and we're zoomed in far enough.
 	/// </summary>
