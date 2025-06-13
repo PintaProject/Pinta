@@ -142,9 +142,13 @@ public sealed class ActionManager
 
 	public void CreateStatusBar (Gtk.Box statusbar, WorkspaceManager workspaceManager)
 	{
-		// Cursor position widget
+		// Cursor position widget - left aligned with enough space for 12 characters
+		// to display the coordinates.
 		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.CursorPosition));
 		var cursor = Gtk.Label.New ("  0, 0");
+		cursor.Xalign = 0.0f;
+		cursor.Halign = Gtk.Align.Start;
+		cursor.WidthChars = 12;
 		statusbar.Append (cursor);
 
 		chrome.LastCanvasCursorPointChanged += delegate {
@@ -154,9 +158,13 @@ public sealed class ActionManager
 
 		statusbar.Append (GtkExtensions.CreateToolBarSeparator ());
 
-		// Selection size widget
+		// Selection size widget - left aligned with enough space for 12 characters
+		// to display the size.
 		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
 		var selection_size = Gtk.Label.New ("  0, 0");
+		selection_size.Xalign = 0.0f;
+		selection_size.Halign = Gtk.Align.Start;
+		selection_size.WidthChars = 12;
 		statusbar.Append (selection_size);
 
 		workspaceManager.SelectionChanged += delegate {
