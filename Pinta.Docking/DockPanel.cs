@@ -75,7 +75,7 @@ public sealed class DockPanel : Gtk.Box
 		public bool IsMinimized
 			=> popover.Child is not null;
 
-		public void UpdateOnMaximize (Gtk.Box dockBar, Action updateConnections)
+		public void UpdateOnMaximize (Gtk.Box dockBar)
 		{
 			// Remove the reopen button from the dock bar.
 			// Note that it might not already be in the dock bar, e.g. on startup.
@@ -87,19 +87,15 @@ public sealed class DockPanel : Gtk.Box
 			Pane.StartChild = Item;
 			Pane.ResizeStartChild = false;
 			Pane.ShrinkStartChild = false;
-
-			updateConnections ();
 		}
 
-		public void UpdateOnMinimize (Gtk.Box dock_bar, Action updateConnections)
+		public void UpdateOnMinimize (Gtk.Box dock_bar)
 		{
 			Pane.StartChild = null;
 			popover.Child = Item;
 
 			dock_bar.Append (ReopenButton);
 			ReopenButton.Active = false;
-
-			updateConnections ();
 		}
 	}
 
@@ -134,10 +130,10 @@ public sealed class DockPanel : Gtk.Box
 		}
 
 		items.Add (panelItem);
-		panelItem.UpdateOnMaximize (dock_bar, UpdatePaneConnections);
+		panelItem.UpdateOnMaximize (dock_bar);
 
-		item.MinimizeClicked += (_, _) => panelItem.UpdateOnMinimize (dock_bar, UpdatePaneConnections);
-		item.MaximizeClicked += (_, _) => panelItem.UpdateOnMaximize (dock_bar, UpdatePaneConnections);
+		item.MinimizeClicked += (_, _) => panelItem.UpdateOnMinimize (dock_bar);
+		item.MaximizeClicked += (_, _) => panelItem.UpdateOnMaximize (dock_bar);
 	}
 
 	public void SaveSettings (ISettingsService settings)
@@ -162,42 +158,6 @@ public sealed class DockPanel : Gtk.Box
 			panel_item.Pane.Position = settings.GetSetting<int> (
 				SplitPosKey (panel_item), panel_item.Pane.Position);
 #endif
-		}
-	}
-
-	private void UpdatePaneConnections()
-	{
-		// Get all maximized (visible) items
-		var maximizedItems = items.Where(item => !item.IsMinimized).ToArray();
-		
-		// Reset all EndChild connections
-		foreach (var item in items)
-		{
-			item.Pane.EndChild = null;
-		}
-		
-		// Remove all panes from the container
-		var currentChild = GetFirstChild();
-		while (currentChild != null && currentChild != dock_bar)
-		{
-			var next = currentChild.GetNextSibling();
-			Remove(currentChild);
-			currentChild = next;
-		}
-		
-		if (maximizedItems.Length > 0)
-		{
-			// Rebuild the chain connecting only maximized panes
-			for (int i = 0; i < maximizedItems.Length - 1; i++)
-			{
-				maximizedItems[i].Pane.EndChild = maximizedItems[i + 1].Pane;
-			}
-			
-			// Add the root pane (first maximized pane) back to the container
-			var rootPane = maximizedItems[0].Pane;
-			rootPane.Hexpand = true;
-			rootPane.Halign = Gtk.Align.Fill;
-			Prepend(rootPane);
 		}
 	}
 }
