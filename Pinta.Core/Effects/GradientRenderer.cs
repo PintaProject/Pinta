@@ -105,52 +105,19 @@ public abstract class GradientRenderer
 		for (int ri = 0; ri < rois.Length; ++ri) {
 
 			RectangleI rect = rois[ri];
-
-			if (StartPoint.X != EndPoint.X || StartPoint.Y != EndPoint.Y) {
-				RectangleI mainrect = rect;
-				Parallel.ForEach (
-					Enumerable.Range (rect.Top, rect.Height),
-					y => ProcessGradientLine (
-						bounds.StartAlpha,
-						bounds.EndAlpha,
-						y,
-						mainrect,
-						surface.GetPixelData (),
-						src_width)
-				);
-				continue;
-			}
-
-			// Start and End point are the same ... fill with solid color.
-			for (int y = rect.Top; y <= rect.Bottom; ++y) {
-				var row = src_data.Slice (y * src_width, src_width);
-				for (int x = rect.Left; x <= rect.Right; ++x) {
-					ColorBgra originalPixel = row[x];
-					row[x] = GetFinalSolidColor (bounds, originalPixel);
-				}
-			}
+			Parallel.ForEach (
+				Enumerable.Range (rect.Top, rect.Height),
+				y => ProcessGradientLine (
+					bounds.StartAlpha,
+					bounds.EndAlpha,
+					y,
+					rect,
+					surface.GetPixelData (),
+					src_width)
+			);
 		}
 
 		surface.MarkDirty ();
-	}
-
-	private ColorBgra GetFinalSolidColor (
-		AlphaBounds bounds,
-		ColorBgra pixel)
-	{
-		if (AlphaOnly && AlphaBlending) {
-			byte resultAlpha = (byte) Utility.FastDivideShortByByte ((ushort) (pixel.A * bounds.EndAlpha), 255);
-			ColorBgra result = pixel.NewAlpha (resultAlpha);
-			return result;
-		} else if (AlphaOnly && !AlphaBlending) {
-			ColorBgra result = pixel.NewAlpha (bounds.EndAlpha);
-			return result;
-		} else if (!AlphaOnly && AlphaBlending) {
-			return normal_blend_op.Apply (pixel, end_color);
-			//if (!this.alphaOnly && !this.alphaBlending)
-		} else {
-			return end_color;
-		}
 	}
 
 	private bool ProcessGradientLine (
@@ -192,7 +159,6 @@ public abstract class GradientRenderer
 				ColorBgra originalPixel = row[x];
 				row[x] = normal_blend_op.Apply (originalPixel, lerpColor);
 			}
-			//if (!this.alphaOnly && !this.alphaBlending) // or sC.A == 255 && eC.A == 255
 		} else {
 			for (int x = rect.Left; x <= right; ++x) {
 				byte lerpByte = ComputeByteLerp (x, y);
