@@ -71,7 +71,7 @@ public abstract class GradientRenderer
 		for (int i = 0; i < 256; ++i) {
 			byte a = (byte) i;
 			lerp_colors[a] = ColorBgra.Blend (start_color, end_color, a);
-			lerp_alphas[a] = (byte) (bounds.StartAlpha + ((bounds.EndAlpha - bounds.StartAlpha) * a) / 255);
+			lerp_alphas[a] = Mathematics.LerpByte (bounds.StartAlpha, bounds.EndAlpha, a);
 		}
 
 		lerp_cache_is_valid = true;

@@ -38,6 +38,17 @@ internal sealed class MathematicsTests
 		Assert.Throws<ArgumentOutOfRangeException> (() => Mathematics.EuclidGCD (b, a));
 	}
 
+	[TestCase (115, 130, 0, 115)]
+	[TestCase (115, 130, 255, 130)]
+	[TestCase (115, 130, 128, 122)]
+	[TestCase (130, 115, 128, 123)]
+	[TestCase (255, 255, 255, 255)]
+	[TestCase (0, 0, 255, 0)]
+	public void LerpByte (byte a, byte b, byte frac, byte expected)
+	{
+		Assert.That (Mathematics.LerpByte (a, b, frac), Is.EqualTo (expected));
+	}
+
 	[TestCaseSource (nameof (lerp_cases))]
 	public void Lerp_ComputesValues (LerpCase values)
 	{
