@@ -92,7 +92,6 @@ public sealed class DockPanel : Gtk.Box
 		public void UpdateOnMinimize (Gtk.Box dock_bar)
 		{
 			Pane.StartChild = null;
-			Pane.PositionSet = false;
 			popover.Child = Item;
 
 			dock_bar.Append (ReopenButton);
