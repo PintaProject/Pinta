@@ -1,19 +1,19 @@
-//  
+//
 // Author:
 //       Cameron White <cameronwhite91@gmail.com>
-// 
+//
 // Copyright (c) 2020 Cameron White
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -76,7 +76,7 @@ public sealed class DockPanel : Box
 			popover.Child = null;
 
 			Pane.StartChild = Item;
-			Pane.ResizeStartChild = false;
+			Pane.ResizeStartChild = true;
 			Pane.ShrinkStartChild = false;
 		}
 
@@ -123,12 +123,14 @@ public sealed class DockPanel : Box
 		items.Add (panel_item);
 		panel_item.UpdateOnMaximize (dock_bar);
 
-		item.MinimizeClicked += (o, args) => {
+		item.MinimizeClicked += (_, _) => {
 			panel_item.UpdateOnMinimize (dock_bar);
+
+			int index = items.IndexOf (panel_item);
+			if (index > 0)
+				items[index - 1].Pane.PositionSet = false;
 		};
-		item.MaximizeClicked += (o, args) => {
-			panel_item.UpdateOnMaximize (dock_bar);
-		};
+		item.MaximizeClicked += (_, _) => panel_item.UpdateOnMaximize (dock_bar);
 	}
 
 	public void SaveSettings (ISettingsService settings)
