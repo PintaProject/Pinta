@@ -6,6 +6,7 @@ All notable changes to this project (beginning with version 1.7) will be documen
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
 - @badcel
+- @ericksson
 - @JGCarroll
 - @Lehonti
 - @UrtsiSantsi
@@ -27,6 +28,7 @@ Thanks to the following contributors who worked on this release:
 - The text tool's "Normal and Outline" mode now draws the outline behind the text to avoid obscuring it (#1423, #1426)
 - Improved the handling of negative angle values in the Rotate / Zoom Layer dialog (#1142, #1440)
 - Fixed incorrect behavior of the Atkinson method in the Dithering effect (#1489)
+- Fixed an issue where hiding a panel did not cause other panels to expand into the available space (#1472, #1500)
 
 ## [3.0.1](https://github.com/PintaProject/Pinta/compare/3.0.1...HEAD) - 2025/06/07
 
