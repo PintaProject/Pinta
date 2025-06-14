@@ -85,7 +85,7 @@ public sealed class ActionHandlers
 			new StatusBarToggledAction (actions.View, chrome),
 			new ToolBoxToggledAction (actions.View, chrome),
 			new ColorSchemeChangedAction (actions.View),
-			new EditCanvasGridAction(actions.View, chrome, canvasGrid),
+			new EditCanvasGridAction (actions.View, chrome, canvasGrid),
 
 			// Window
 			new CloseAllDocumentsAction (actions, workspace),
