@@ -9,6 +9,9 @@ public interface ICanvasGridService
 	int CellWidth { get; set; }
 	int CellHeight { get; set; }
 
+	bool ShowAxonometricGrid { get; set; }
+	int AxonometricWidth { get; set; }
+
 	public void SaveGridSettings ();
 
 	public void LoadGridSettings ();
@@ -25,6 +28,9 @@ public sealed class CanvasGridManager : ICanvasGridService
 	private int cell_width;
 	private int cell_height;
 
+	private bool show_axonometric_grid;
+	private int axonometric_width;
+
 	public bool ShowGrid {
 		get => show_grid;
 		set => SetProperty (ref show_grid, value);
@@ -38,6 +44,16 @@ public sealed class CanvasGridManager : ICanvasGridService
 	public int CellHeight {
 		get => cell_height;
 		set => SetProperty (ref cell_height, value);
+	}
+
+	public bool ShowAxonometricGrid {
+		get => show_axonometric_grid;
+		set => SetProperty (ref show_axonometric_grid, value);
+	}
+
+	public int AxonometricWidth {
+		get => axonometric_width;
+		set => SetProperty (ref axonometric_width, value);
 	}
 
 	public CanvasGridManager (WorkspaceManager workspace, SettingsManager settings)
@@ -57,6 +73,9 @@ public sealed class CanvasGridManager : ICanvasGridService
 		settings.PutSetting (SettingNames.SHOW_CANVAS_GRID, ShowGrid);
 		settings.PutSetting (SettingNames.CANVAS_GRID_WIDTH, CellWidth);
 		settings.PutSetting (SettingNames.CANVAS_GRID_HEIGHT, CellHeight);
+
+		settings.PutSetting (SettingNames.SHOW_CANVAS_AXONOMETRIC_GRID, ShowAxonometricGrid);
+		settings.PutSetting (SettingNames.CANVAS_AXONOMETRIC_WIDTH, AxonometricWidth);
 	}
 
 	public void LoadGridSettings ()
@@ -64,6 +83,9 @@ public sealed class CanvasGridManager : ICanvasGridService
 		ShowGrid = settings.GetSetting (SettingNames.SHOW_CANVAS_GRID, false);
 		CellWidth = settings.GetSetting (SettingNames.CANVAS_GRID_WIDTH, 64);
 		CellHeight = settings.GetSetting (SettingNames.CANVAS_GRID_HEIGHT, 64);
+
+		ShowAxonometricGrid = settings.GetSetting (SettingNames.SHOW_CANVAS_AXONOMETRIC_GRID, false);
+		AxonometricWidth = settings.GetSetting (SettingNames.CANVAS_AXONOMETRIC_WIDTH, 64);
 	}
 
 	private void SetProperty<T> (ref T field, T value)

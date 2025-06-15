@@ -44,7 +44,7 @@ internal sealed class FileFormatTests
 	static readonly IReadOnlyList<TestCaseData> netpbm_pixmap_text_cases = [
 		new (
 			"sixcolorsinput.gif",
-			new [] { "sixcolorsoutput_lf.ppm" }
+			new[] { "sixcolorsoutput_lf.ppm" }
 		),
 	];
 }
