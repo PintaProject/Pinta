@@ -127,7 +127,6 @@ public static class WorkspaceServiceExtensions
 	{
 		Document doc = new (PintaCore.Actions, PintaCore.Tools, PintaCore.Workspace, imageSize);
 		doc.Workspace.ViewSize = imageSize;
-		workspace.ActivateDocument (doc, actions);
 
 		// Start with an empty white layer
 		Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
@@ -140,6 +139,8 @@ public static class WorkspaceServiceExtensions
 
 		doc.Workspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentNew, Translations.GetString ("New Image")));
 		doc.Workspace.History.SetClean ();
+
+		workspace.ActivateDocument (doc, actions);
 
 		return doc;
 	}
