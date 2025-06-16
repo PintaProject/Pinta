@@ -367,7 +367,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
 
 		// Adds ascending diagonal lines.
-		// '2 * axonometricWidth' garantees the vertical lines will align correctly.
+		// '2 * axonometricWidth' ensures the vertical lines will align correctly.
 		for (int i = 0; i < imageWidth + imageHeight; i += 2 * axonometricWidth) {
 			pathBuilder.MoveTo (0, i);
 			pathBuilder.LineTo (i, 0);
