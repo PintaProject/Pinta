@@ -374,7 +374,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		}
 
 		// Adds descending diagonal lines.
-		// The 'imageHeight % (2 * axonometricWidth)' adjustment is used to garantee our lines will align
+		// The 'imageHeight % (2 * axonometricWidth)' adjustment is used to ensure our lines will align
 		// to the top [0, 0] instead of the bottom [0, imageHeight]
 		for (int i = -imageHeight + imageHeight % (2 * axonometricWidth); i < imageWidth; i += 2 * axonometricWidth) {
 			pathBuilder.MoveTo (i, 0);
