@@ -13,7 +13,7 @@ partial struct ColorBgra
 {
 	/// <summary>
 	/// Smoothly blends between two colors.
-	/// NOTE: this assumes unpremultipled alpha!
+	/// <remarks>This assumes straight alpha!</remarks>
 	/// </summary>
 	public static ColorBgra Blend (ColorBgra ca, ColorBgra cb, byte cbAlpha)
 	{
@@ -37,6 +37,19 @@ partial struct ColorBgra
 
 		return FromBgra ((byte) b, (byte) g, (byte) r, (byte) cbAT);
 	}
+
+	/// <summary>
+	/// Linearly interpolates between two color values with premultiplied alpha.
+	/// </summary>
+	/// <param name="from">The color value that represents 0 on the lerp number line.</param>
+	/// <param name="to">The color value that represents 255 on the lerp number line.</param>
+	/// <param name="frac">A value in the range [0, 255].</param>
+	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, byte frac)
+		=> FromBgra (
+			b: Mathematics.LerpByte (from.B, to.B, frac),
+			g: Mathematics.LerpByte (from.G, to.G, frac),
+			r: Mathematics.LerpByte (from.R, to.R, frac),
+			a: Mathematics.LerpByte (from.A, to.A, frac));
 
 	/// <summary>
 	/// Linearly interpolates between two color values with premultiplied alpha.
@@ -119,6 +132,7 @@ partial struct ColorBgra
 
 	/// <summary>
 	/// Returns a new ColorBgra with the same color values but with a new alpha component value.
+	/// <remarks>This assumes straight alpha!</remarks>
 	/// </summary>
 	public readonly ColorBgra NewAlpha (byte newA) => FromBgra (B, G, R, newA);
 

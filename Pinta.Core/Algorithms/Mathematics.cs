@@ -27,6 +27,14 @@ public static class Mathematics
 	public static TNumber MagnitudeSquared<TNumber> (TNumber x, TNumber y) where TNumber : INumber<TNumber>
 		=> x * x + y * y;
 
+	/// <summary>
+	/// Linear interpolation for byte values, where the blend factor is from 0-255.
+	/// </summary>
+	public static byte LerpByte (byte from, byte to, byte frac)
+	{
+		return (byte) (from + ((to - from) * frac) / 255);
+	}
+
 	/// <summary>Linear interpolation</summary>
 	public static TNumber Lerp<TNumber> (
 		TNumber from,

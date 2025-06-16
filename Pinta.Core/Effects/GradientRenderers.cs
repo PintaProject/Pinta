@@ -55,6 +55,10 @@ public static class GradientRenderers
 
 		public override byte ComputeByteLerp (int x, int y)
 		{
+			// If the start and end point are the same, use the end color everywhere.
+			if (dtdx == 0 && dtdy == 0)
+				return byte.MaxValue;
+
 			int dx = x - start_x;
 			int dy = y - start_y;
 
@@ -89,6 +93,10 @@ public static class GradientRenderers
 
 		public override byte ComputeByteLerp (int x, int y)
 		{
+			// If the start and end point are the same, use the end color everywhere.
+			if (dtdx == 0 && dtdy == 0)
+				return byte.MaxValue;
+
 			double dx = x - StartPoint.X;
 			double dy = y - StartPoint.Y;
 
@@ -105,12 +113,12 @@ public static class GradientRenderers
 	public sealed class Radial : GradientRenderer
 	{
 		private double inv_distance_scale;
+		private int start_x;
+		private int start_y;
 
 		public Radial (bool alphaOnly, BinaryPixelOp normalBlendOp) : base (alphaOnly, normalBlendOp)
 		{
 		}
-
-		int start_x, start_y;
 
 		public override void BeforeRender ()
 		{
@@ -134,7 +142,7 @@ public static class GradientRenderers
 
 			double distance = Math.Sqrt (dx * dx + dy * dy);
 
-			double result = distance * inv_distance_scale;
+			double result = inv_distance_scale == 0 ? 1.0 : distance * inv_distance_scale;
 
 			if (result < 0.0)
 				return 0;

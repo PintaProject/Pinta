@@ -85,7 +85,7 @@ public sealed class DockPanel : Gtk.Box
 			popover.Child = null;
 
 			Pane.StartChild = Item;
-			Pane.ResizeStartChild = false;
+			Pane.ResizeStartChild = true;
 			Pane.ShrinkStartChild = false;
 		}
 
@@ -132,7 +132,13 @@ public sealed class DockPanel : Gtk.Box
 		items.Add (panelItem);
 		panelItem.UpdateOnMaximize (dock_bar);
 
-		item.MinimizeClicked += (_, _) => panelItem.UpdateOnMinimize (dock_bar);
+		item.MinimizeClicked += (_, _) => {
+			panelItem.UpdateOnMinimize (dock_bar);
+
+			int index = items.IndexOf (panelItem);
+			if (index > 0)
+				items[index - 1].Pane.PositionSet = false;
+		};
 		item.MaximizeClicked += (_, _) => panelItem.UpdateOnMaximize (dock_bar);
 	}
 
