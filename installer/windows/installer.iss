@@ -1,5 +1,5 @@
 #define ProductName "Pinta"
-#define ProductVersion "3.0.1"
+#define ProductVersion "3.0.2"
 
 [Setup]
 ; Adds option to skip creating start menu entries
