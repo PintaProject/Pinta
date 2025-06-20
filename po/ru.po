@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-25 00:30+0000\n"
-"PO-Revision-Date: 2025-05-28 16:06+0000\n"
+"PO-Revision-Date: 2025-06-15 02:01+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
 "\n"
@@ -690,7 +690,7 @@ msgstr "Простое создание и редактирование изоб
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:238 Polar Inversion dialog
 msgid "Edge Behavior"
-msgstr "Поведение на границе"
+msgstr "Поведение для краёв"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
 msgid "Edge Detect"
