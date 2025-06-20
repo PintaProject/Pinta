@@ -32,6 +32,8 @@ Thanks to the following contributors who worked on this release:
 - Fixed an issue where hiding a panel did not cause other panels to expand into the available space (#1472, #1500)
 - Fixed an error when loading the add-in repositories (#1547, #1542)
 - Fixed a bug in the Levels dialog where the Red and Blue toggles were reversed (#1551)
+- Fixed incorrect behavior with transparent colors in the Gradient tool (#1552, #1543)
+- The Vulkan DLL is now bundled with the Windows installer, which fixes errors on startup for certain systems (#1497, #1530)
 
 ## [3.0.1](https://github.com/PintaProject/Pinta/compare/3.0.1...HEAD) - 2025/06/07
 
