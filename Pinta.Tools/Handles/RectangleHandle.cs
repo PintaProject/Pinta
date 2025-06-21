@@ -24,14 +24,14 @@ public class RectangleHandle : IToolHandle
 		this.workspace = workspace;
 
 		handles = [
-			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNW) },
-			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSW) },
-			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNE) },
-			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSE) },
-			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeW) },
-			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeN) },
-			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeE) },
-			new (workspace){ Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeS) },
+			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNW) },
+			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSW) },
+			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNE) },
+			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSE) },
+			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeW) },
+			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeN) },
+			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeE) },
+			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeS) },
 		];
 
 		foreach (var handle in handles)

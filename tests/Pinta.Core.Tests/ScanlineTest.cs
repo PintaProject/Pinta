@@ -104,10 +104,10 @@ internal sealed class ScanlineTest
 	}
 
 	static readonly IReadOnlyList<TestCaseData> unequal_types_scanline = [
-		new (new Scanline(1, 1, 1), "This is not a scanline"),
-		new (new Scanline(1, 1, 1), null),
-		new (new Scanline(1, 1, 1), new [] { 1, 1, 1 }),
-		new (new Scanline(1, 1, 1), 111),
+		new (new Scanline (1, 1, 1), "This is not a scanline"),
+		new (new Scanline (1, 1, 1), null),
+		new (new Scanline (1, 1, 1), new[] { 1, 1, 1 }),
+		new (new Scanline (1, 1, 1), 111),
 	];
 
 	static readonly IReadOnlyList<TestCaseData> invalid_constructor_argument_combinations = [
