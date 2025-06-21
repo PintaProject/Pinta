@@ -26,13 +26,13 @@ public sealed class CanvasGridSettingsDialog : Dialog
 		widthSpinner.Value = initialSettings.CellSize.Width;
 		widthSpinner.OnValueChanged += SettingsChanged;
 		widthSpinner.SetActivatesDefaultImmediate (true);
-		showGridCheckBox.BindProperty("active", widthSpinner, "sensitive", 0);
+		showGridCheckBox.BindProperty ("active", widthSpinner, "sensitive", 0);
 
 		SpinButton heightSpinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
 		heightSpinner.Value = initialSettings.CellSize.Height;
 		heightSpinner.OnValueChanged += SettingsChanged;
 		heightSpinner.SetActivatesDefaultImmediate (true);
-		showGridCheckBox.BindProperty("active", heightSpinner, "sensitive", 0);
+		showGridCheckBox.BindProperty ("active", heightSpinner, "sensitive", 0);
 
 		CheckButton showAxonometricGridCheckBox = CheckButton.NewWithLabel (Translations.GetString ("Show Axonometric Grid"));
 		showAxonometricGridCheckBox.Active = initialSettings.ShowAxonometricGrid;
@@ -42,7 +42,7 @@ public sealed class CanvasGridSettingsDialog : Dialog
 		axonometricWidthSpinner.Value = initialSettings.AxonometricWidth;
 		axonometricWidthSpinner.OnValueChanged += SettingsChanged;
 		axonometricWidthSpinner.SetActivatesDefaultImmediate (true);
-		showAxonometricGridCheckBox.BindProperty("active", axonometricWidthSpinner, "sensitive", 0);
+		showAxonometricGridCheckBox.BindProperty ("active", axonometricWidthSpinner, "sensitive", 0);
 
 		Grid grid = new () {
 			RowSpacing = SPACING,
