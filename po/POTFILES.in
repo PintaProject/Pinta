@@ -64,6 +64,7 @@ Pinta.Core/Classes/SplineInterpolator.cs
 Pinta.Core/Classes/SurfaceDiff.cs
 Pinta.Core/Classes/Translations.cs
 Pinta.Core/Classes/UserLayer.cs
+Pinta.Core/Delegates/AsyncEventHandler.cs
 Pinta.Core/Effects/BaseEffect.cs
 Pinta.Core/Effects/BinaryPixelOp.cs
 Pinta.Core/Effects/GradientRenderer.cs
@@ -100,8 +101,8 @@ Pinta.Core/Enumerations/TextAlignment.cs
 Pinta.Core/Enumerations/TextMode.cs
 Pinta.Core/EventArgs/BrushEventArgs.cs
 Pinta.Core/EventArgs/CanvasInvalidatedEventArgs.cs
-Pinta.Core/EventArgs/DocumentCancelEventArgs.cs
 Pinta.Core/EventArgs/DocumentEventArgs.cs
+Pinta.Core/EventArgs/DocumentSaveEventArgs.cs
 Pinta.Core/EventArgs/HistoryItemAddedEventArgs.cs
 Pinta.Core/EventArgs/IndexEventArgs.cs
 Pinta.Core/EventArgs/ModifyCompressionEventArgs.cs
@@ -126,6 +127,8 @@ Pinta.Core/Extensions/GdkKey.cs
 Pinta.Core/Extensions/GdkPixbufExtensions.cs
 Pinta.Core/Extensions/GioExtensions.cs
 Pinta.Core/Extensions/GioStream.cs
+Pinta.Core/Extensions/GrapheneExtensions.cs
+Pinta.Core/Extensions/GskExtensions.cs
 Pinta.Core/Extensions/Gtk/BoxStyle.cs
 Pinta.Core/Extensions/Gtk/GtkExtensions.Application.cs
 Pinta.Core/Extensions/Gtk/GtkExtensions.Data.cs
@@ -274,6 +277,7 @@ Pinta.Gui.Widgets/Widgets/Canvas/CanvasWindow.cs
 Pinta.Gui.Widgets/Widgets/Canvas/PintaCanvas.cs
 Pinta.Gui.Widgets/Widgets/ColorGradientWidget.cs
 Pinta.Gui.Widgets/Widgets/ColorPanelWidget.cs
+Pinta.Gui.Widgets/Widgets/ColorPick.cs
 Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs
 Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs
 Pinta.Gui.Widgets/Widgets/ComboBoxWidget.cs
@@ -315,6 +319,7 @@ Pinta.Tools/Editable/Shapes/OrganizedPointCollection.cs
 Pinta.Tools/Editable/Shapes/RoundedLineEngine.cs
 Pinta.Tools/Editable/Shapes/ShapeEngineCollection.cs
 Pinta.Tools/Handles/MoveHandle.cs
+Pinta.Tools/Handles/RectangleHandle.cs
 Pinta.Tools/HistoryItems/ShapesHistoryItem.cs
 Pinta.Tools/HistoryItems/ShapesModifyHistoryItem.cs
 Pinta.Tools/Tools/BaseBrushTool.cs
