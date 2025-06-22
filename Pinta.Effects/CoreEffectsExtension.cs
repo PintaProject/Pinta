@@ -59,6 +59,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new AddNoiseEffect (services));
 		PintaCore.Effects.RegisterEffect (new AlignObjectEffect (services));
 		PintaCore.Effects.RegisterEffect (new BulgeEffect (services));
+		PintaCore.Effects.RegisterEffect (new CausticsEffect (services));
 		PintaCore.Effects.RegisterEffect (new CloudsEffect (services));
 		PintaCore.Effects.RegisterEffect (new DentsEffect (services));
 		PintaCore.Effects.RegisterEffect (new DitheringEffect (services));
@@ -111,6 +112,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect<AddNoiseEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<AlignObjectEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<BulgeEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<CausticsEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<CloudsEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<DentsEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<DitheringEffect> ();
