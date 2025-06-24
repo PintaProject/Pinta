@@ -269,9 +269,6 @@ internal sealed class SeededPerlinNoise
 			gradient_z[i] *= invLen;
 		}
 	}
-
-	private static double Fade (double t) => t * t * t * (t * (t * 6 - 15) + 10);
-	private static double Lerp (double t, double a, double b) => a + t * (b - a);
 	private double Grad (int hash, double x, double y, double z)
 	{
 		int h = hash & (GRADIENT_SIZE - 1);
@@ -288,9 +285,9 @@ internal sealed class SeededPerlinNoise
 		y -= Math.Floor (y);
 		z -= Math.Floor (z);
 
-		double u = Fade (x);
-		double v = Fade (y);
-		double w = Fade (z);
+		double u = PerlinNoise.Fade (x);
+		double v = PerlinNoise.Fade (y);
+		double w = PerlinNoise.Fade (z);
 
 		int A = permutation[X] + Y;
 		int AA = permutation[A] + Z;
@@ -299,13 +296,51 @@ internal sealed class SeededPerlinNoise
 		int BA = permutation[B] + Z;
 		int BB = permutation[B + 1] + Z;
 
-		return Lerp (w, Lerp (v, Lerp (u, Grad (permutation[AA], x, y, z),
-									   Grad (permutation[BA], x - 1, y, z)),
-							   Lerp (u, Grad (permutation[AB], x, y - 1, z),
-									   Grad (permutation[BB], x - 1, y - 1, z))),
-					   Lerp (v, Lerp (u, Grad (permutation[AA + 1], x, y, z - 1),
-									   Grad (permutation[BA + 1], x - 1, y, z - 1)),
-							   Lerp (u, Grad (permutation[AB + 1], x, y - 1, z - 1),
-									   Grad (permutation[BB + 1], x - 1, y - 1, z - 1))));
+		return Mathematics.Lerp (
+			Mathematics.Lerp (
+				Mathematics.Lerp (
+					Grad (permutation[AA], x, y, z),
+					Grad (permutation[BA], x - 1, y, z),
+					u),
+				Mathematics.Lerp (
+					Grad (
+						permutation[AB],
+						x,
+						y - 1,
+						z),
+					Grad (
+						permutation[BB],
+						x - 1,
+						y - 1,
+						z),
+					u),
+				v),
+			Mathematics.Lerp (
+				Mathematics.Lerp (
+					Grad (
+						permutation[AA + 1],
+						x,
+						y,
+						z - 1),
+					Grad (
+						permutation[BA + 1],
+						x - 1,
+						y,
+						z - 1),
+					u),
+				Mathematics.Lerp (
+					Grad (
+						permutation[AB + 1],
+						x,
+						y - 1,
+						z - 1),
+					Grad (
+						permutation[BB + 1],
+						x - 1,
+						y - 1,
+						z - 1),
+					u),
+				v),
+			w);
 	}
 }
