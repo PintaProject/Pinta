@@ -52,29 +52,35 @@ internal sealed class MainClass
 
 		var threads_option = new Option<int> (
 			name: "--render-threads",
-			description: Translations.GetString ("Number of threads to use for rendering"),
-			getDefaultValue: () => -1);
-		threads_option.AddAlias ("-rt");
+			aliases: "-rt") {
+			Description = Translations.GetString ("Number of threads to use for rendering"),
+			DefaultValueFactory = _ => -1
+		};
 
 		var files_arg = new Argument<string[]> (
-			name: "files",
-			description: Translations.GetString ("Files to open"));
+			name: "files") {
+			Description = Translations.GetString ("Files to open")
+		};
 
 		var debug_option = new Option<bool> (
-			name: "--debug",
-			description: Translations.GetString ("Enable additional logging or behavior changes for debugging"));
+			name: "--debug") {
+			Description = Translations.GetString ("Enable additional logging or behavior changes for debugging")
+		};
 
 		// Note the implicit '--version' argument uses the InformationalVersion from the assembly.
 		var root_command = new RootCommand (Translations.GetString ("Pinta"));
-		root_command.AddOption (threads_option);
-		root_command.AddArgument (files_arg);
-		root_command.AddOption (debug_option);
+		root_command.Options.Add (threads_option);
+		root_command.Arguments.Add (files_arg);
+		root_command.Options.Add (debug_option);
 
-		root_command.SetHandler ((threads, files, debug) => {
-			OpenMainWindow (threads, files, debug);
-		}, threads_option, files_arg, debug_option);
+		root_command.SetAction (parseResult => {
+			OpenMainWindow (
+				parseResult.GetValue (threads_option),
+				parseResult.GetValue (files_arg) ?? [],
+				parseResult.GetValue (debug_option));
+		});
 
-		return root_command.Invoke (args);
+		return root_command.Parse (args).Invoke ();
 	}
 
 	private static void OpenMainWindow (int threads, IEnumerable<string> files, bool debug)
