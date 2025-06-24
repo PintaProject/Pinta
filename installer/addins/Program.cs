@@ -96,15 +96,15 @@ static void LocalizeManifest (FileInfo manifestFile, FileInfo[] resourceFiles)
 }
 
 var manifestFileOption =
-	new Option<FileInfo> (name: "--manifest-file") { IsRequired = true }
-	.ExistingOnly ();
+	new Option<FileInfo> (name: "--manifest-file") { Required = true }
+	.AcceptExistingOnly ();
 
 var resourceFilesOption =
 	new Option<FileInfo[]> (name: "--resource-files") {
-		IsRequired = true,
-		AllowMultipleArgumentsPerToken = true,
+		Required = true,
+		AllowMultipleArgumentsPerToken = true
 	}
-	.ExistingOnly ();
+	.AcceptExistingOnly ();
 
 Command localizeManifestCommand = new (
 	name: "localize-manifest",
@@ -113,8 +113,13 @@ Command localizeManifestCommand = new (
 	manifestFileOption,
 	resourceFilesOption,
 };
-localizeManifestCommand.SetHandler (LocalizeManifest, manifestFileOption, resourceFilesOption);
+localizeManifestCommand.SetAction (result => {
+	LocalizeManifest (
+		result.GetRequiredValue (manifestFileOption),
+		result.GetRequiredValue (resourceFilesOption));
+});
 
 RootCommand rootCommand = new ("Command-line utilities for Pinta add-ins.");
-rootCommand.AddCommand (localizeManifestCommand);
-rootCommand.Invoke (args);
+rootCommand.Subcommands.Add (localizeManifestCommand);
+
+return rootCommand.Parse (args).Invoke ();

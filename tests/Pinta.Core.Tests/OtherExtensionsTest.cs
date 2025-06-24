@@ -15,6 +15,6 @@ internal sealed class OtherExtensionsTest
 	}
 
 	private static readonly IReadOnlyList<TestCaseData> create_polygon_set_arguments_for_empty = [
-		new (new RectangleD(0, 0, 1, 1), new PointI (1, 1)),
+		new (new RectangleD (0, 0, 1, 1), new PointI (1, 1)),
 	];
 }
