@@ -13,6 +13,7 @@ Thanks to the following contributors who worked on this release:
 - @pedropaulosuzuki
 
 ### Added
+- Implemented a new axonometric grid (View > Canvas Grid... > Show Axonometric Grid) (#1438, #1541)
 - Rewrote the canvas widget to improve performance and memory usage issues for zoomed-in images (#1020, #1485)
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
 - When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
