@@ -63,7 +63,7 @@ public static class PerlinNoise
 		rot_22 = Math.Cos (rotationRadians.Radians);
 	}
 
-	public static double Fade (double t)
+	internal static double Fade (double t)
 		=> t * t * t * (t * (t * 6 - 15) + 10);
 
 	/// <returns>

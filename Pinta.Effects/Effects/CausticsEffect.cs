@@ -100,7 +100,7 @@ public sealed class CausticsEffect : BaseEffect
 	{
 		CausticsSettings settings = CreateSettings (dest);
 		Random jitterRand = new (settings.seed.Value);
-		SeededPerlinNoise noiseGenerator = new (settings.seed.Value);
+		ClassicNoise noiseGenerator = new (settings.seed.Value);
 
 		Span<ColorBgra> dest_data = dest.GetPixelData ();
 
@@ -168,7 +168,7 @@ public sealed class CausticsEffect : BaseEffect
 			}
 		}
 	}
-	private static double Evaluate (CausticsSettings settings, SeededPerlinNoise noiseGenerator, double x, double y)
+	private static double Evaluate (CausticsSettings settings, ClassicNoise noiseGenerator, double x, double y)
 	{
 		double xt = s_rad * x + c_rad * settings.time;
 		double tt_eval = c_rad * x - c_rad * settings.time;
@@ -180,7 +180,7 @@ public sealed class CausticsEffect : BaseEffect
 		return f;
 	}
 
-	private static double Turbulence2 (double x, double y, double time, double octaves, SeededPerlinNoise noiseGenerator)
+	private static double Turbulence2 (double x, double y, double time, double octaves, ClassicNoise noiseGenerator)
 	{
 		double value = 0.0;
 		double lacunarity = 2.0;
@@ -231,116 +231,3 @@ public sealed class CausticsEffect : BaseEffect
 	}
 }
 
-internal sealed class SeededPerlinNoise
-{
-	private const int GRADIENT_SIZE = 256;
-
-	private readonly int[] permutation = new int[GRADIENT_SIZE * 2];
-	private readonly double[] gradient_x = new double[GRADIENT_SIZE];
-	private readonly double[] gradient_y = new double[GRADIENT_SIZE];
-	private readonly double[] gradient_z = new double[GRADIENT_SIZE];
-
-	// The constructor now takes a seed to generate a unique, repeatable noise pattern.
-	public SeededPerlinNoise (int seed)
-	{
-		var randomGen = new Random (seed);
-		int[] p = new int[GRADIENT_SIZE];
-
-		for (int i = 0; i < GRADIENT_SIZE; i++)
-			p[i] = i;
-
-		for (int i = 0; i < GRADIENT_SIZE; i++) {
-			int j = randomGen.Next (GRADIENT_SIZE);
-			(p[i], p[j]) = (p[j], p[i]);
-		}
-
-		for (int i = 0; i < GRADIENT_SIZE; i++) {
-			permutation[i] = permutation[i + GRADIENT_SIZE] = p[i];
-			double invLen;
-			do {
-				gradient_x[i] = randomGen.NextDouble () * 2.0 - 1.0;
-				gradient_y[i] = randomGen.NextDouble () * 2.0 - 1.0;
-				gradient_z[i] = randomGen.NextDouble () * 2.0 - 1.0;
-				invLen = gradient_x[i] * gradient_x[i] + gradient_y[i] * gradient_y[i] + gradient_z[i] * gradient_z[i];
-			} while (invLen == 0);
-			invLen = 1.0 / Math.Sqrt (invLen);
-			gradient_x[i] *= invLen;
-			gradient_y[i] *= invLen;
-			gradient_z[i] *= invLen;
-		}
-	}
-	private double Grad (int hash, double x, double y, double z)
-	{
-		int h = hash & (GRADIENT_SIZE - 1);
-		return gradient_x[h] * x + gradient_y[h] * y + gradient_z[h] * z;
-	}
-
-	public double Noise3 (double x, double y, double z)
-	{
-		int X = (int) Math.Floor (x) & (GRADIENT_SIZE - 1);
-		int Y = (int) Math.Floor (y) & (GRADIENT_SIZE - 1);
-		int Z = (int) Math.Floor (z) & (GRADIENT_SIZE - 1);
-
-		x -= Math.Floor (x);
-		y -= Math.Floor (y);
-		z -= Math.Floor (z);
-
-		double u = PerlinNoise.Fade (x);
-		double v = PerlinNoise.Fade (y);
-		double w = PerlinNoise.Fade (z);
-
-		int A = permutation[X] + Y;
-		int AA = permutation[A] + Z;
-		int AB = permutation[A + 1] + Z;
-		int B = permutation[X + 1] + Y;
-		int BA = permutation[B] + Z;
-		int BB = permutation[B + 1] + Z;
-
-		return Mathematics.Lerp (
-			Mathematics.Lerp (
-				Mathematics.Lerp (
-					Grad (permutation[AA], x, y, z),
-					Grad (permutation[BA], x - 1, y, z),
-					u),
-				Mathematics.Lerp (
-					Grad (
-						permutation[AB],
-						x,
-						y - 1,
-						z),
-					Grad (
-						permutation[BB],
-						x - 1,
-						y - 1,
-						z),
-					u),
-				v),
-			Mathematics.Lerp (
-				Mathematics.Lerp (
-					Grad (
-						permutation[AA + 1],
-						x,
-						y,
-						z - 1),
-					Grad (
-						permutation[BA + 1],
-						x - 1,
-						y,
-						z - 1),
-					u),
-				Mathematics.Lerp (
-					Grad (
-						permutation[AB + 1],
-						x,
-						y - 1,
-						z - 1),
-					Grad (
-						permutation[BB + 1],
-						x - 1,
-						y - 1,
-						z - 1),
-					u),
-				v),
-			w);
-	}
-}
