@@ -1,50 +1,61 @@
 using System;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class CanvasGridSettingsDialog : Dialog
+public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 {
 	internal event EventHandler<Settings>? Updated;
 
-	private readonly CheckButton show_grid_checkbox;
-	private readonly SpinButton grid_width_spinner;
-	private readonly SpinButton grid_height_spinner;
-	private readonly CheckButton show_axonometric_grid_checkbox;
-	private readonly SpinButton grid_axonometric_width_spinner;
+	private readonly Gtk.CheckButton show_grid_checkbox;
+	private readonly Gtk.SpinButton grid_width_spinner;
+	private readonly Gtk.SpinButton grid_height_spinner;
+	private readonly Gtk.CheckButton show_axonometric_grid_checkbox;
+	private readonly Gtk.SpinButton grid_axonometric_width_spinner;
 
 	private const int SPACING = 6;
 
 	internal CanvasGridSettingsDialog (ChromeManager chrome, Settings initialSettings)
 	{
-		CheckButton showGridCheckBox = CheckButton.NewWithLabel (Translations.GetString ("Show Grid"));
-		showGridCheckBox.Active = initialSettings.ShowGrid;
-		showGridCheckBox.OnToggled += SettingsChanged;
-
-		SpinButton widthSpinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
 		widthSpinner.Value = initialSettings.CellSize.Width;
 		widthSpinner.OnValueChanged += SettingsChanged;
 		widthSpinner.SetActivatesDefaultImmediate (true);
-		showGridCheckBox.BindProperty ("active", widthSpinner, "sensitive", GObject.BindingFlags.SyncCreate);
 
-		SpinButton heightSpinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
 		heightSpinner.Value = initialSettings.CellSize.Height;
 		heightSpinner.OnValueChanged += SettingsChanged;
 		heightSpinner.SetActivatesDefaultImmediate (true);
-		showGridCheckBox.BindProperty ("active", heightSpinner, "sensitive", GObject.BindingFlags.SyncCreate);
 
-		CheckButton showAxonometricGridCheckBox = CheckButton.NewWithLabel (Translations.GetString ("Show Axonometric Grid"));
-		showAxonometricGridCheckBox.Active = initialSettings.ShowAxonometricGrid;
-		showAxonometricGridCheckBox.OnToggled += SettingsChanged;
+		Gtk.CheckButton showGridCheckBox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Show Grid"));
+		showGridCheckBox.Active = initialSettings.ShowGrid;
+		showGridCheckBox.OnToggled += SettingsChanged;
+		showGridCheckBox.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			widthSpinner,
+			Gtk.SpinButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+		showGridCheckBox.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			heightSpinner,
+			Gtk.SpinButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
 
-		SpinButton axonometricWidthSpinner = SpinButton.NewWithRange (1, int.MaxValue, 1);
+		Gtk.SpinButton axonometricWidthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
 		axonometricWidthSpinner.Value = initialSettings.AxonometricWidth;
 		axonometricWidthSpinner.OnValueChanged += SettingsChanged;
 		axonometricWidthSpinner.SetActivatesDefaultImmediate (true);
-		showAxonometricGridCheckBox.BindProperty ("active", axonometricWidthSpinner, "sensitive", GObject.BindingFlags.SyncCreate);
 
-		Grid grid = new () {
+		Gtk.CheckButton showAxonometricGridCheckBox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Show Axonometric Grid"));
+		showAxonometricGridCheckBox.Active = initialSettings.ShowAxonometricGrid;
+		showAxonometricGridCheckBox.OnToggled += SettingsChanged;
+		showAxonometricGridCheckBox.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			axonometricWidthSpinner,
+			Gtk.SpinButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+
+		Gtk.Grid grid = new () {
 			RowSpacing = SPACING,
 			ColumnSpacing = SPACING,
 			ColumnHomogeneous = false,
@@ -52,27 +63,27 @@ public sealed class CanvasGridSettingsDialog : Dialog
 
 		grid.Attach (showGridCheckBox, 0, 0, 2, 1);
 
-		grid.Attach (CreateLabel (Translations.GetString ("Width:"), Align.End), 0, 1, 1, 1);
+		grid.Attach (CreateLabel (Translations.GetString ("Width:"), Gtk.Align.End), 0, 1, 1, 1);
 		grid.Attach (widthSpinner, 1, 1, 1, 1);
-		grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
+		grid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
 
-		grid.Attach (CreateLabel (Translations.GetString ("Height:"), Align.End), 0, 2, 1, 1);
+		grid.Attach (CreateLabel (Translations.GetString ("Height:"), Gtk.Align.End), 0, 2, 1, 1);
 		grid.Attach (heightSpinner, 1, 2, 1, 1);
-		grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 2, 1, 1);
+		grid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 2, 1, 1);
 
 		grid.Attach (showAxonometricGridCheckBox, 0, 3, 2, 1);
 
-		grid.Attach (CreateLabel (Translations.GetString ("Width:"), Align.End), 0, 4, 1, 1);
+		grid.Attach (CreateLabel (Translations.GetString ("Width:"), Gtk.Align.End), 0, 4, 1, 1);
 		grid.Attach (axonometricWidthSpinner, 1, 4, 1, 1);
-		grid.Attach (Label.New (Translations.GetString ("pixels")), 2, 4, 1, 1);
+		grid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 4, 1, 1);
 
-		Box mainVbox = new () { Spacing = SPACING };
-		mainVbox.SetOrientation (Orientation.Vertical);
+		Gtk.Box mainVbox = new () { Spacing = SPACING };
+		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
 		mainVbox.Append (grid);
 
 		// --- Initialization (Gtk.Box)
 
-		Box contentArea = this.GetContentAreaBox ();
+		Gtk.Box contentArea = this.GetContentAreaBox ();
 		contentArea.SetAllMargins (12);
 		contentArea.Append (mainVbox);
 
@@ -86,7 +97,7 @@ public sealed class CanvasGridSettingsDialog : Dialog
 		// --- Initialization (Gtk.Dialog)
 
 		this.AddCancelOkButtons ();
-		this.SetDefaultResponse (ResponseType.Ok);
+		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
 		// --- References to keep
 
@@ -97,9 +108,9 @@ public sealed class CanvasGridSettingsDialog : Dialog
 		grid_axonometric_width_spinner = axonometricWidthSpinner;
 	}
 
-	private static Label CreateLabel (string text, Align horizontalAlign)
+	private static Gtk.Label CreateLabel (string text, Gtk.Align horizontalAlign)
 	{
-		Label result = Label.New (text);
+		Gtk.Label result = Gtk.Label.New (text);
 		result.Halign = horizontalAlign;
 		return result;
 	}
