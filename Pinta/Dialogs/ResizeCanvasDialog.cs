@@ -31,7 +31,6 @@ namespace Pinta;
 
 public sealed class ResizeCanvasDialog : Gtk.Dialog
 {
-	private readonly Gtk.CheckButton percentage_radio;
 	private readonly Gtk.SpinButton percentage_spinner;
 	private readonly Gtk.SpinButton width_spinner;
 	private readonly Gtk.SpinButton height_spinner;
@@ -220,7 +219,6 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 
 		this.workspace = workspace;
 
-		percentage_radio = percentageRadio;
 		percentage_spinner = percentageSpinner;
 		width_spinner = widthSpinner;
 		height_spinner = heightSpinner;
