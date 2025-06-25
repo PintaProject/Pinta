@@ -64,21 +64,10 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			orientation: Gtk.Orientation.Horizontal,
 			spacing: SPACING);
 
-		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
-		percentageRadio.OnToggled += percentageRadio_Toggled;
-
 		Gtk.SpinButton percentageSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
 		percentageSpinner.Value = 100;
 		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
 		percentageSpinner.SetActivatesDefaultImmediate (true);
-
-		Gtk.Box hboxPercent = GtkExtensions.Box (
-			spacedHorizontal,
-			[
-				percentageRadio,
-				percentageSpinner,
-				Gtk.Label.New ("%")
-			]);
 
 		Gtk.Label widthLabel = Gtk.Label.New (Translations.GetString ("Width:"));
 		widthLabel.Halign = Gtk.Align.End;
@@ -108,12 +97,41 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		hwGrid.Attach (heightSpinner, 1, 1, 1, 1);
 		hwGrid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
 
-		Gtk.CheckButton absoluteRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
-		absoluteRadio.SetGroup (percentageRadio);
-		absoluteRadio.OnToggled += absoluteRadio_Toggled;
-
 		Gtk.CheckButton aspectCheckBox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
 		aspectCheckBox.Active = true;
+
+		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
+		percentageRadio.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			percentageSpinner,
+			Gtk.SpinButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+
+		Gtk.CheckButton absoluteRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
+		absoluteRadio.SetGroup (percentageRadio);
+		absoluteRadio.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			widthSpinner,
+			Gtk.SpinButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+		absoluteRadio.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			heightSpinner,
+			Gtk.SpinButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+		absoluteRadio.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			aspectCheckBox,
+			Gtk.CheckButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+
+		Gtk.Box hboxPercent = GtkExtensions.Box (
+		spacedHorizontal,
+		[
+			percentageRadio,
+			percentageSpinner,
+			Gtk.Label.New ("%")
+		]);
 
 		Gtk.Separator sep = new ();
 		sep.SetOrientation (Gtk.Orientation.Horizontal);
@@ -268,33 +286,6 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 	{
 		width_spinner.Value = (int) (workspace.ImageSize.Width * (percentage_spinner.GetValueAsInt () / 100f));
 		height_spinner.Value = (int) (workspace.ImageSize.Height * (percentage_spinner.GetValueAsInt () / 100f));
-	}
-
-	private void absoluteRadio_Toggled (object? sender, EventArgs e)
-	{
-		RadioToggle ();
-	}
-
-	private void percentageRadio_Toggled (object? sender, EventArgs e)
-	{
-		RadioToggle ();
-	}
-
-	private void RadioToggle ()
-	{
-		if (percentage_radio.Active) {
-			percentage_spinner.Sensitive = true;
-
-			width_spinner.Sensitive = false;
-			height_spinner.Sensitive = false;
-			aspect_checkbox.Sensitive = false;
-		} else {
-			percentage_spinner.Sensitive = false;
-
-			width_spinner.Sensitive = true;
-			height_spinner.Sensitive = true;
-			aspect_checkbox.Sensitive = true;
-		}
 	}
 
 	private void HandleSEButtonClicked (object? sender, EventArgs e)
