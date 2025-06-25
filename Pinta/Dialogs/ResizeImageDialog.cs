@@ -31,7 +31,6 @@ namespace Pinta;
 
 public sealed class ResizeImageDialog : Gtk.Dialog
 {
-	private readonly Gtk.CheckButton percentage_radio;
 	private readonly Gtk.SpinButton percentage_spinner;
 	private readonly Gtk.SpinButton width_spinner;
 	private readonly Gtk.SpinButton height_spinner;
@@ -71,6 +70,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		aspectCheckbox.Active = true;
 
 		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
+		percentageRadio.Active = true;
 		percentageRadio.BindProperty (
 			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
 			percentageSpinner,
@@ -160,17 +160,13 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 
 		// --- References to keep
 
-		percentage_radio = percentageRadio;
 		percentage_spinner = percentageSpinner;
 		width_spinner = widthSpinner;
 		height_spinner = heightSpinner;
 		aspect_checkbox = aspectCheckbox;
 		resampling_combobox = resamplingCombobox;
+
 		this.workspace = workspace;
-
-		// --- Initialization which depends on members (via event handlers).
-
-		percentage_radio.Active = true;
 	}
 
 	private static Gtk.ComboBoxText CreateResamplingCombobox ()
