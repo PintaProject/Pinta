@@ -100,6 +100,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		aspectCheckBox.Active = true;
 
 		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
+		percentageRadio.Active = true;
 		percentageRadio.BindProperty (
 			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
 			percentageSpinner,
@@ -235,7 +236,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		se_button = seButton;
 
 		// Final initialization
-		percentageRadio.Active = true;
+
 		SetAnchor (Anchor.Center);
 	}
 
