@@ -10,17 +10,17 @@ namespace Pinta.Effects;
 /// Helps obtain intermediate colors at a certain position,
 /// based on the start and end colors, and any additional color stops
 /// </summary>
-internal sealed class ColorGradient
+public sealed class ColorGradient<TColor> where TColor : IColor<TColor>
 {
 	/// <summary>
 	/// Color at the initial position in the gradient
 	/// </summary>
-	public ColorBgra StartColor { get; }
+	public TColor StartColor { get; }
 
 	/// <summary>
 	/// Color at the end position in the gradient
 	/// </summary>
-	public ColorBgra EndColor { get; }
+	public TColor EndColor { get; }
 
 	/// <summary>
 	/// Represents initial position in the gradient
@@ -33,14 +33,14 @@ internal sealed class ColorGradient
 	public double EndPosition { get; }
 
 	private readonly ImmutableArray<double> sorted_positions;
-	private readonly ImmutableArray<ColorBgra> sorted_colors;
+	private readonly ImmutableArray<TColor> sorted_colors;
 
 	internal ColorGradient (
-		ColorBgra startColor,
-		ColorBgra endColor,
+		TColor startColor,
+		TColor endColor,
 		double startPosition,
 		double endPosition,
-		IEnumerable<KeyValuePair<double, ColorBgra>> gradientStops)
+		IEnumerable<KeyValuePair<double, TColor>> gradientStops)
 	{
 		CheckBoundsConsistency (startPosition, endPosition);
 
@@ -81,7 +81,7 @@ internal sealed class ColorGradient
 	/// (along with all of its stops) adjusted, proportionally,
 	/// to the provided lower and upper bounds.
 	/// </summary>
-	public ColorGradient Resized (double startPosition, double endPosition)
+	public ColorGradient<TColor> Resized (double startPosition, double endPosition)
 	{
 		if (StartPosition == startPosition && EndPosition == endPosition) return this;
 
@@ -92,7 +92,7 @@ internal sealed class ColorGradient
 		double newProportion = newSpan / currentSpan;
 		double newMinRelativeOffset = startPosition - StartPosition;
 
-		KeyValuePair<double, ColorBgra> ToNewStop (KeyValuePair<double, ColorBgra> stop)
+		KeyValuePair<double, TColor> ToNewStop (KeyValuePair<double, TColor> stop)
 		{
 			double stopToMinOffset = stop.Key - StartPosition;
 			double adjustedOffset = stopToMinOffset * newProportion;
@@ -115,7 +115,7 @@ internal sealed class ColorGradient
 	/// (in the new gradient, the colors are at the same distance
 	/// from the end color as they were from the start color in the original)
 	/// </returns>
-	public ColorGradient Reversed ()
+	public ColorGradient<TColor> Reversed ()
 	{
 		var reversedPosition = sorted_positions.Select (p => EndPosition - p);
 
@@ -123,7 +123,7 @@ internal sealed class ColorGradient
 			reversedPosition
 			.Zip (sorted_colors, KeyValuePair.Create);
 
-		return new ColorGradient (
+		return new ColorGradient<TColor> (
 			startColor: EndColor,
 			endColor: StartColor,
 			startPosition: StartPosition,
@@ -140,7 +140,7 @@ internal sealed class ColorGradient
 	/// the start color will be returned, and if it's higher than
 	/// the end position, the end color will be returned.
 	/// </returns>
-	public ColorBgra GetColor (double position)
+	public TColor GetColor (double position)
 	{
 		if (position <= StartPosition) return StartColor;
 		if (position >= EndPosition) return EndColor;
@@ -148,62 +148,78 @@ internal sealed class ColorGradient
 		return HandleWithStops (position);
 	}
 
-	private ColorBgra HandleNoStops (double position)
+	private TColor HandleNoStops (double position)
 	{
 		double fraction = Mathematics.InvLerp (StartPosition, EndPosition, position);
-		return ColorBgra.Lerp (StartColor, EndColor, fraction);
+		return TColor.Lerp (StartColor, EndColor, fraction);
 	}
 
-	private ColorBgra HandleWithStops (double position)
+	private TColor HandleWithStops (double position)
 	{
 		int matchIndex = sorted_positions.BinarySearch (position);
 		if (matchIndex >= 0) return sorted_colors[matchIndex]; // Exact match
 		int matchComplement = ~matchIndex;
 		if (matchComplement == sorted_positions.Length) // Not found. Using end color
-			return ColorBgra.Lerp (
+			return TColor.Lerp (
 				sorted_colors[^1],
 				EndColor,
 				Mathematics.InvLerp (sorted_positions[^1], EndPosition, position));
 		var immediatelyHigher = KeyValuePair.Create (sorted_positions[matchComplement], sorted_colors[matchComplement]);
 		int immediatelyLowerIndex = matchComplement - 1;
 		if (immediatelyLowerIndex < 0) // No stops before
-			return ColorBgra.Lerp (
+			return TColor.Lerp (
 				StartColor,
 				immediatelyHigher.Value,
 				Mathematics.InvLerp (StartPosition, immediatelyHigher.Key, position));
 		var immediatelyLower = KeyValuePair.Create (sorted_positions[immediatelyLowerIndex], sorted_colors[immediatelyLowerIndex]);
-		return ColorBgra.Lerp ( // Stops exist both before and after
+		return TColor.Lerp ( // Stops exist both before and after
 			immediatelyLower.Value,
 			immediatelyHigher.Value,
 			Mathematics.InvLerp (immediatelyLower.Key, immediatelyHigher.Key, position));
 	}
+}
 
-	private static IEnumerable<KeyValuePair<double, ColorBgra>> EmptyStops ()
+public static class ColorGradient
+{
+	private static IEnumerable<KeyValuePair<double, TColor>> EmptyStops<TColor> ()
 		=> [];
 
 	/// <summary>
 	/// Creates gradient mapping based on start and end color,
 	/// and the provided lower and upper bounds
 	/// </summary>
-	public static ColorGradient Create (ColorBgra startColor, ColorBgra endColor, double startPosition, double endPosition)
-		=> new (
-			startColor,
-			endColor,
-			startPosition,
-			endPosition,
-			EmptyStops ()
-		);
+	public static ColorGradient<TColor> Create<TColor> (
+		TColor startColor,
+		TColor endColor,
+		double startPosition,
+		double endPosition
+	)
+		where TColor : IColor<TColor>
+	=> new (
+		startColor,
+		endColor,
+		startPosition,
+		endPosition,
+		EmptyStops<TColor> ()
+	);
 
 	/// <summary>
 	/// Creates gradient mapping based on start and end color,
 	/// and the provided lower and upper bounds, and color stops
 	/// </summary>
-	public static ColorGradient Create (ColorBgra startColor, ColorBgra endColor, double startPosition, double endPosition, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
-		=> new (
-			startColor,
-			endColor,
-			startPosition,
-			endPosition,
-			stops
-		);
+	public static ColorGradient<TColor> Create<TColor> (
+		TColor startColor,
+		TColor endColor,
+		double startPosition,
+		double endPosition,
+		IEnumerable<KeyValuePair<double, TColor>> stops
+	)
+		where TColor : IColor<TColor>
+	=> new (
+		startColor,
+		endColor,
+		startPosition,
+		endPosition,
+		stops
+	);
 }
