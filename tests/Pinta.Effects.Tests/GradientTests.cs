@@ -76,7 +76,7 @@ internal sealed class GradientTests
 	[TestCaseSource (nameof (stops_color_checks))]
 	public void Gradient_Stop_Colors_Are_Same (double minPosition, double maxPosition, IReadOnlyDictionary<double, ColorBgra> checks)
 	{
-		ColorGradient gradient = ColorGradient.Create (default_start_color, default_end_color, minPosition, maxPosition, checks);
+		var gradient = ColorGradient.Create (default_start_color, default_end_color, minPosition, maxPosition, checks);
 		foreach (var check in checks) {
 			var returned = gradient.GetColor (check.Key);
 			Assert.That (check.Value, Is.EqualTo (returned));
@@ -106,7 +106,7 @@ internal sealed class GradientTests
 	}
 
 	[TestCaseSource (nameof (interpolated_color_checks))]
-	public void Gradient_Interpolated_Colors_Are_Correct (ColorGradient gradient, IReadOnlyDictionary<double, ColorBgra> checks)
+	public void Gradient_Interpolated_Colors_Are_Correct (ColorGradient<ColorBgra> gradient, IReadOnlyDictionary<double, ColorBgra> checks)
 	{
 		foreach (var check in checks) {
 			var interpolated = gradient.GetColor (check.Key);
@@ -120,7 +120,7 @@ internal sealed class GradientTests
 	private static readonly IReadOnlyList<TestCaseData> interpolated_color_checks = CreateInterpolatedColorChecks ().ToArray ();
 	private static IEnumerable<TestCaseData> CreateInterpolatedColorChecks ()
 	{
-		ColorGradient blackToWhite255 = ColorGradient.Create (
+		var blackToWhite255 = ColorGradient.Create (
 			ColorBgra.Black,
 			ColorBgra.White,
 			byte.MinValue,
@@ -135,7 +135,7 @@ internal sealed class GradientTests
 			}
 		);
 
-		ColorGradient blackToWhite1 = ColorGradient.Create (
+		var blackToWhite1 = ColorGradient.Create (
 			ColorBgra.Black,
 			ColorBgra.White,
 			0,

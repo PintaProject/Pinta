@@ -9,7 +9,9 @@ public readonly record struct Color (
 	double R,
 	double G,
 	double B,
-	double A)
+	double A
+)
+	: IColor<Color>
 {
 	public Color (double r, double g, double b)
 		: this (r, g, b, 1.0)
@@ -250,5 +252,14 @@ public readonly record struct Color (
 		// return an RgbColor structure, with values scaled
 		// to be between 0 and 255.
 		return new Color (r, g, b, alpha);
+	}
+
+	public static Color Lerp (in Color from, in Color to, double frac)
+	{
+		return new (
+			R: Mathematics.Lerp (from.R, to.R, frac),
+			G: Mathematics.Lerp (from.G, to.G, frac),
+			B: Mathematics.Lerp (from.B, to.B, frac),
+			A: Mathematics.Lerp (from.A, to.A, frac));
 	}
 }
