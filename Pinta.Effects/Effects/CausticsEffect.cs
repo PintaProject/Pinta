@@ -92,7 +92,7 @@ public sealed class CausticsEffect : BaseEffect
 			focus: 0.1 + Data.Amount,
 			seed: Data.Seed,
 			turbulence: Data.Turbulence,
-			background: palette.PrimaryColor.ToColorBgra (),
+			background: palette.PrimaryColor.ToColorBgra ().ToPremultipliedAlpha (),
 			time: Data.TimeOffset);
 	}
 
@@ -138,14 +138,19 @@ public sealed class CausticsEffect : BaseEffect
 							byte g = pixelColor.G;
 							byte b = pixelColor.B;
 
-							if (channel == 2)
+							if (channel == 2) // Red
 								r = (byte) Math.Min (255, r + settings.v);
-							else if (channel == 1)
+							else if (channel == 1) // Green
 								g = (byte) Math.Min (255, g + settings.v);
-							else
+							else // Blue
 								b = (byte) Math.Min (255, b + settings.v);
 
-							dest_data[dest_offset] = ColorBgra.FromBgra (b, g, r, pixelColor.A);
+							byte a = (byte) Math.Min (255, pixelColor.A + settings.v);
+							b = Math.Min (b, a);
+							g = Math.Min (g, a);
+							r = Math.Min (r, a);
+
+							dest_data[dest_offset] = ColorBgra.FromBgra (b, g, r, a);
 						}
 					}
 				} else // No dispersion
@@ -156,13 +161,16 @@ public sealed class CausticsEffect : BaseEffect
 					if (targetX >= 0 && targetX < settings.canvasSize.Width - 1 &&
 						targetY >= 0 && targetY < settings.canvasSize.Height - 1) {
 						int dest_offset = (int) targetY * settings.canvasSize.Width + (int) targetX;
+
 						ColorBgra pixelColor = dest_data[dest_offset];
 
-						byte r = (byte) Math.Min (255, pixelColor.R + settings.v);
-						byte g = (byte) Math.Min (255, pixelColor.G + settings.v);
-						byte b = (byte) Math.Min (255, pixelColor.B + settings.v);
+						byte a = (byte) Math.Min (255, pixelColor.A + settings.v);
+						byte r = (byte) Math.Min (a, pixelColor.R + settings.v);
+						byte g = (byte) Math.Min (a, pixelColor.G + settings.v);
+						byte b = (byte) Math.Min (a, pixelColor.B + settings.v);
 
-						dest_data[dest_offset] = ColorBgra.FromBgra (b, g, r, pixelColor.A);
+						dest_data[dest_offset] = ColorBgra.FromBgra (b, g, r, a);
+
 					}
 				}
 			}
