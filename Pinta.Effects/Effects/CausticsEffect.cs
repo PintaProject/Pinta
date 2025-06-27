@@ -100,7 +100,7 @@ public sealed class CausticsEffect : BaseEffect
 	{
 		CausticsSettings settings = CreateSettings (dest);
 		Random jitterRand = new (settings.seed.Value);
-		ClassicNoise noiseGenerator = new (settings.seed.Value);
+		PerlinNoise3D noiseGenerator = new (settings.seed.Value);
 
 		Span<ColorBgra> dest_data = dest.GetPixelData ();
 
@@ -168,7 +168,7 @@ public sealed class CausticsEffect : BaseEffect
 			}
 		}
 	}
-	private static double Evaluate (CausticsSettings settings, ClassicNoise noiseGenerator, double x, double y)
+	private static double Evaluate (CausticsSettings settings, PerlinNoise3D noiseGenerator, double x, double y)
 	{
 		double xt = s_rad * x + c_rad * settings.time;
 		double tt_eval = c_rad * x - c_rad * settings.time;
@@ -180,7 +180,7 @@ public sealed class CausticsEffect : BaseEffect
 		return f;
 	}
 
-	private static double Turbulence2 (double x, double y, double time, double octaves, ClassicNoise noiseGenerator)
+	private static double Turbulence2 (double x, double y, double time, double octaves, PerlinNoise3D noiseGenerator)
 	{
 		double value = 0.0;
 		double lacunarity = 2.0;

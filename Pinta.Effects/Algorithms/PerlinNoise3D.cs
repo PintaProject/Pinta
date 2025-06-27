@@ -23,10 +23,11 @@
 // Ported to Pinta by Martin del Rio
 
 using System;
+using Pinta.Core;
 
-namespace Pinta.Core;
+namespace Pinta.Effects;
 
-public sealed class ClassicNoise
+public sealed class PerlinNoise3D
 {
 	private const int GRADIENT_SIZE = 256;
 
@@ -36,7 +37,7 @@ public sealed class ClassicNoise
 	private readonly double[] gradient_z = new double[GRADIENT_SIZE];
 
 	// The constructor now takes a seed to generate a unique, repeatable noise pattern.
-	public ClassicNoise (int seed)
+	public PerlinNoise3D (int seed)
 	{
 		var randomGen = new Random (seed);
 		int[] p = new int[GRADIENT_SIZE];
