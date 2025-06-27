@@ -95,19 +95,6 @@ public sealed class CausticsEffect : BaseEffect
 			background: palette.PrimaryColor.ToColorBgra (),
 			time: Data.TimeOffset);
 	}
-	static ColorBgra AddPremultipliedBrightness (ColorBgra premult, int brightness)
-	{
-		// Convert to straight-alpha (undo premultiplied)
-		var straight = premult.ToStraightAlpha ();
-		// Bump each channel
-		straight = ColorBgra.FromBgraClamped (
-		    straight.B + brightness,
-		    straight.G + brightness,
-		    straight.R + brightness,
-		    straight.A);
-		// Re-premultiply
-		return straight.ToPremultipliedAlpha ();
-	}
 
 	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
 	{
@@ -144,9 +131,30 @@ public sealed class CausticsEffect : BaseEffect
 
 						if (targetX >= 0 && targetX < settings.canvasSize.Width - 1 &&
 							targetY >= 0 && targetY < settings.canvasSize.Height - 1) {
-							int dest_offset = (int) targetY * settings.canvasSize.Width + (int) targetX; int dst = dest_offset;
-							// only one call instead of manual alphaFactor gymnastics:
-							dest_data[dst] = AddPremultipliedBrightness (dest_data[dst], settings.v);
+							int dest_offset = (int) targetY * settings.canvasSize.Width + (int) targetX;
+							ColorBgra pixelColor = dest_data[dest_offset];
+
+							byte a = pixelColor.A;
+
+							double alphaFactor = a / 255.0;
+
+							double r = (a == 0) ? 0 : pixelColor.R / alphaFactor;
+							double g = (a == 0) ? 0 : pixelColor.G / alphaFactor;
+							double b = (a == 0) ? 0 : pixelColor.B / alphaFactor;
+
+							if (channel == 2)
+								r = Math.Min (255, r + settings.v);
+							else if (channel == 1)
+								g = Math.Min (255, g + settings.v);
+							else
+								b = Math.Min (255, b + settings.v);
+
+							// Re-premultiply
+							r = r * alphaFactor;
+							g = g * alphaFactor;
+							b = b * alphaFactor;
+
+							dest_data[dest_offset] = ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, a);
 						}
 					}
 				} else // No dispersion
@@ -157,8 +165,23 @@ public sealed class CausticsEffect : BaseEffect
 					if (targetX >= 0 && targetX < settings.canvasSize.Width - 1 &&
 						targetY >= 0 && targetY < settings.canvasSize.Height - 1) {
 						int dest_offset = (int) targetY * settings.canvasSize.Width + (int) targetX;
-						int dst = dest_offset;
-						dest_data[dst] = AddPremultipliedBrightness (dest_data[dst], settings.v);
+						ColorBgra pixelColor = dest_data[dest_offset];
+						byte a = pixelColor.A;
+						double alphaFactor = a / 255.0;
+
+						double r = (a == 0) ? 0 : pixelColor.R / alphaFactor;
+						double g = (a == 0) ? 0 : pixelColor.G / alphaFactor;
+						double b = (a == 0) ? 0 : pixelColor.B / alphaFactor;
+
+						r = Math.Min (255, r + settings.v);
+						g = Math.Min (255, g + settings.v);
+						b = Math.Min (255, b + settings.v);
+
+						r = r * alphaFactor;
+						g = g * alphaFactor;
+						b = b * alphaFactor;
+
+						dest_data[dest_offset] = ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, a);
 					}
 				}
 			}
