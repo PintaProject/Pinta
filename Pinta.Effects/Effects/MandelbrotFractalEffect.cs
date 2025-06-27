@@ -70,7 +70,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		RadiansAngle angleTheta,
 		int factor,
 		bool invertColors,
-		ColorGradient colorGradient);
+		ColorGradient<ColorBgra> colorGradient);
 	private MandelbrotSettings CreateSettings (ImageSurface dst)
 	{
 		const double ZOOM_FACTOR = 20.0;
@@ -78,7 +78,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double zoom = 1 + ZOOM_FACTOR * Data.Zoom;
 		int count = Data.Quality * Data.Quality + 1;
 
-		ColorGradient baseGradient =
+		var baseGradient =
 			GradientHelper
 			.CreateBaseGradientForEffect (
 				palette,

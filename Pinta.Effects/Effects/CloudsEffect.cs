@@ -62,7 +62,7 @@ public sealed class CloudsEffect : BaseEffect
 		int scale,
 		byte seed,
 		double power,
-		ColorGradient gradient)
+		ColorGradient<ColorBgra> gradient)
 	{
 		int w = surface.Width;
 		int h = surface.Height;
@@ -82,7 +82,7 @@ public sealed class CloudsEffect : BaseEffect
 		int scale,
 		byte seed,
 		double power,
-		ColorGradient gradient,
+		ColorGradient<ColorBgra> gradient,
 		int w,
 		int dy,
 		int x)

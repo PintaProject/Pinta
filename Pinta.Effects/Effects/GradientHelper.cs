@@ -62,7 +62,7 @@ internal static class GradientHelper
 	private const double DefaultStartPosition = 0;
 	private const double DefaultEndPosition = 1;
 
-	public static ColorGradient CreateBaseGradientForEffect (
+	public static ColorGradient<ColorBgra> CreateBaseGradientForEffect (
 		IPaletteService palette,
 		ColorSchemeSource colorSchemeSource,
 		PresetGradients colorScheme,
@@ -112,7 +112,7 @@ internal static class GradientHelper
 		}
 	}
 
-	public static ColorGradient CreateColorGradient (PresetGradients scheme)
+	public static ColorGradient<ColorBgra> CreateColorGradient (PresetGradients scheme)
 	{
 		return scheme switch {
 

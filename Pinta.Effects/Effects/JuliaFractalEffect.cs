@@ -71,7 +71,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 		double invCount,
 		RadiansAngle angleTheta,
 		int factor,
-		ColorGradient colorGradient);
+		ColorGradient<ColorBgra> colorGradient);
 	private JuliaSettings CreateSettings (ImageSurface dst)
 	{
 		Size canvasSize = dst.GetSize ();

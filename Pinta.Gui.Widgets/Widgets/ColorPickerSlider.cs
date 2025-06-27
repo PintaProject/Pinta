@@ -199,7 +199,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 		suppress_event = false;
 	}
 
-	public void DrawGradient (Context context, int width, int height, Color[] colors)
+	public void DrawGradient (Context context, int width, int height, ColorGradient<Color> colors)
 	{
 		context.Antialias = Antialias.None;
 
@@ -248,8 +248,14 @@ public sealed class ColorPickerSlider : Gtk.Box
 			x1: p.X,
 			y1: p.Y);
 
-		for (int i = 0; i < colors.Length; i++)
-			pat.AddColorStop (i / (double) (colors.Length - 1), colors[i]);
+		var normalized = colors.Resized (startPosition: 0, endPosition: 1);
+
+		pat.AddColorStop (normalized.StartPosition, normalized.StartColor);
+
+		for (int i = 0; i < normalized.StopsCount; i++)
+			pat.AddColorStop (normalized.Positions[i], normalized.Colors[i]);
+
+		pat.AddColorStop (normalized.EndPosition, normalized.EndColor);
 
 		context.Rectangle (
 			settings.SliderPaddingWidth,

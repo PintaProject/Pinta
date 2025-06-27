@@ -44,7 +44,7 @@ partial struct ColorBgra
 	/// <param name="from">The color value that represents 0 on the lerp number line.</param>
 	/// <param name="to">The color value that represents 255 on the lerp number line.</param>
 	/// <param name="frac">A value in the range [0, 255].</param>
-	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, byte frac)
+	public static ColorBgra Lerp (in ColorBgra from, in ColorBgra to, byte frac)
 		=> FromBgra (
 			b: Mathematics.LerpByte (from.B, to.B, frac),
 			g: Mathematics.LerpByte (from.G, to.G, frac),
@@ -57,7 +57,7 @@ partial struct ColorBgra
 	/// <param name="from">The color value that represents 0 on the lerp number line.</param>
 	/// <param name="to">The color value that represents 1 on the lerp number line.</param>
 	/// <param name="frac">A value in the range [0, 1].</param>
-	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, float frac)
+	public static ColorBgra Lerp (in ColorBgra from, in ColorBgra to, float frac)
 		=> FromBgra (
 			b: Utility.ClampToByte (Mathematics.Lerp (from.B, to.B, frac)),
 			g: Utility.ClampToByte (Mathematics.Lerp (from.G, to.G, frac)),
@@ -70,7 +70,7 @@ partial struct ColorBgra
 	/// <param name="from">The color value that represents 0 on the lerp number line.</param>
 	/// <param name="to">The color value that represents 1 on the lerp number line.</param>
 	/// <param name="frac">A value in the range [0, 1].</param>
-	public static ColorBgra Lerp (ColorBgra from, ColorBgra to, double frac)
+	public static ColorBgra Lerp (in ColorBgra from, in ColorBgra to, double frac)
 		=> FromBgra (
 			b: Utility.ClampToByte (Mathematics.Lerp (from.B, to.B, frac)),
 			g: Utility.ClampToByte (Mathematics.Lerp (from.G, to.G, frac)),
