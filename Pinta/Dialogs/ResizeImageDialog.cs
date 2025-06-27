@@ -31,7 +31,6 @@ namespace Pinta;
 
 public sealed class ResizeImageDialog : Gtk.Dialog
 {
-	private readonly Gtk.CheckButton percentage_radio;
 	private readonly Gtk.SpinButton percentage_spinner;
 	private readonly Gtk.SpinButton width_spinner;
 	private readonly Gtk.SpinButton height_spinner;
@@ -42,9 +41,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 
 	const int SPACING = 6;
 
-	internal ResizeImageDialog (
-		ChromeManager chrome,
-		WorkspaceManager workspace)
+	internal ResizeImageDialog (ChromeManager chrome, WorkspaceManager workspace)
 	{
 		BoxStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Horizontal,
@@ -54,12 +51,50 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 			orientation: Gtk.Orientation.Vertical,
 			spacing: SPACING);
 
-		Gtk.CheckButton percentageRadio = CreatePercentageRadio ();
-		Gtk.CheckButton absoluteRadio = CreateAbsoluteRadio (percentageRadio);
-		Gtk.SpinButton percentageSpinner = CreatePercentageSpinner ();
-		Gtk.SpinButton widthSpinner = CreateWidthSpinner (workspace.ImageSize.Width);
-		Gtk.SpinButton heightSpinner = CreateHeightSpinner (workspace.ImageSize.Height);
-		Gtk.CheckButton aspectCheckbox = CreateAspectCheckbox ();
+		Gtk.SpinButton percentageSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
+		percentageSpinner.Value = 100;
+		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
+		percentageSpinner.SetActivatesDefaultImmediate (true);
+
+		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
+		widthSpinner.Value = workspace.ImageSize.Width;
+		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
+		widthSpinner.SetActivatesDefaultImmediate (true);
+
+		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
+		heightSpinner.Value = workspace.ImageSize.Height;
+		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
+		heightSpinner.SetActivatesDefaultImmediate (true);
+
+		Gtk.CheckButton aspectCheckbox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
+		aspectCheckbox.Active = true;
+
+		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
+		percentageRadio.Active = true;
+		percentageRadio.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			percentageSpinner,
+			Gtk.SpinButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+
+		Gtk.CheckButton absoluteRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
+		absoluteRadio.SetGroup (percentageRadio);
+		absoluteRadio.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			widthSpinner,
+			Gtk.SpinButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+		absoluteRadio.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			heightSpinner,
+			Gtk.SpinButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+		absoluteRadio.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			aspectCheckbox,
+			Gtk.CheckButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+
 		Gtk.ComboBoxText resamplingCombobox = CreateResamplingCombobox ();
 
 		Gtk.Box hboxPercent = GtkExtensions.Box (
@@ -70,9 +105,11 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 				Gtk.Label.New ("%"),
 			]);
 
-		Gtk.Label widthLabel = CreateWidthLabel ();
+		Gtk.Label widthLabel = Gtk.Label.New (Translations.GetString ("Width:"));
+		widthLabel.Halign = Gtk.Align.End;
 
-		Gtk.Label heightLabel = CreateHeightLabel ();
+		Gtk.Label heightLabel = Gtk.Label.New (Translations.GetString ("Height:"));
+		heightLabel.Halign = Gtk.Align.End;
 
 		Gtk.Grid grid = new () {
 			RowSpacing = SPACING,
@@ -123,24 +160,13 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 
 		// --- References to keep
 
-		percentage_radio = percentageRadio;
 		percentage_spinner = percentageSpinner;
 		width_spinner = widthSpinner;
 		height_spinner = heightSpinner;
 		aspect_checkbox = aspectCheckbox;
 		resampling_combobox = resamplingCombobox;
+
 		this.workspace = workspace;
-
-		// --- Initialization which depends on members (via event handlers).
-
-		percentage_radio.Active = true;
-	}
-
-	private static Gtk.CheckButton CreateAspectCheckbox ()
-	{
-		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
-		result.Active = true;
-		return result;
 	}
 
 	private static Gtk.ComboBoxText CreateResamplingCombobox ()
@@ -155,62 +181,6 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 
 		result.Active = 0;
 
-		return result;
-	}
-
-	private static Gtk.Label CreateWidthLabel ()
-	{
-		Gtk.Label result = Gtk.Label.New (Translations.GetString ("Width:"));
-		result.Halign = Gtk.Align.End;
-		return result;
-	}
-
-	private static Gtk.Label CreateHeightLabel ()
-	{
-		Gtk.Label result = Gtk.Label.New (Translations.GetString ("Height:"));
-		result.Halign = Gtk.Align.End;
-		return result;
-	}
-
-	private Gtk.CheckButton CreatePercentageRadio ()
-	{
-		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
-		result.OnToggled += percentageRadio_Toggled;
-		return result;
-	}
-
-	private Gtk.CheckButton CreateAbsoluteRadio (Gtk.CheckButton percentageRadio)
-	{
-		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By absolute size:"));
-		result.SetGroup (percentageRadio);
-		result.OnToggled += absoluteRadio_Toggled;
-		return result;
-	}
-
-	private Gtk.SpinButton CreatePercentageSpinner ()
-	{
-		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		result.Value = 100;
-		result.OnValueChanged += percentageSpinner_ValueChanged;
-		result.SetActivatesDefaultImmediate (true);
-		return result;
-	}
-
-	private Gtk.SpinButton CreateWidthSpinner (int initialWidth)
-	{
-		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		result.Value = initialWidth;
-		result.OnValueChanged += widthSpinner_ValueChanged;
-		result.SetActivatesDefaultImmediate (true);
-		return result;
-	}
-
-	private Gtk.SpinButton CreateHeightSpinner (int initialHeight)
-	{
-		Gtk.SpinButton result = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		result.Value = initialHeight;
-		result.OnValueChanged += heightSpinner_ValueChanged;
-		result.SetActivatesDefaultImmediate (true);
 		return result;
 	}
 
@@ -256,33 +226,6 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		float proportion = percentage_spinner.GetValueAsInt () / 100f;
 		width_spinner.Value = (int) (workspace.ImageSize.Width * proportion);
 		height_spinner.Value = (int) (workspace.ImageSize.Height * proportion);
-	}
-
-	private void absoluteRadio_Toggled (object? sender, EventArgs e)
-	{
-		RadioToggle ();
-	}
-
-	private void percentageRadio_Toggled (object? sender, EventArgs e)
-	{
-		RadioToggle ();
-	}
-
-	private void RadioToggle ()
-	{
-		if (percentage_radio.Active) {
-			percentage_spinner.Sensitive = true;
-
-			width_spinner.Sensitive = false;
-			height_spinner.Sensitive = false;
-			aspect_checkbox.Sensitive = false;
-		} else {
-			percentage_spinner.Sensitive = false;
-
-			width_spinner.Sensitive = true;
-			height_spinner.Sensitive = true;
-			aspect_checkbox.Sensitive = true;
-		}
 	}
 }
 
