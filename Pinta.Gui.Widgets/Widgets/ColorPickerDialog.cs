@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Cairo;
@@ -391,15 +392,19 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				c,
 				w,
 				h,
-				[
-					CurrentColor.CopyHsv (hue: 0),
-					CurrentColor.CopyHsv (hue: 60),
-					CurrentColor.CopyHsv (hue: 120),
-					CurrentColor.CopyHsv (hue: 180),
-					CurrentColor.CopyHsv (hue: 240),
-					CurrentColor.CopyHsv (hue: 300),
-					CurrentColor.CopyHsv (hue: 360)
-				]
+				ColorGradient.Create (
+					startColor: CurrentColor.CopyHsv (hue: 0),
+					endColor: CurrentColor.CopyHsv (hue: 360),
+					startPosition: 0,
+					endPosition: 360,
+					new Dictionary<double, Color> {
+						[60] = CurrentColor.CopyHsv (hue: 60),
+						[120] = CurrentColor.CopyHsv (hue: 120),
+						[180] = CurrentColor.CopyHsv (hue: 180),
+						[240] = CurrentColor.CopyHsv (hue: 240),
+						[300] = CurrentColor.CopyHsv (hue: 300),
+					}
+				)
 			)
 		);
 		hueSlider.OnValueChange += (sender, args) => {
@@ -419,10 +424,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				c,
 				w,
 				h,
-				[
+				ColorGradient.Create (
 					CurrentColor.CopyHsv (sat: 0),
-					CurrentColor.CopyHsv (sat: 1),
-				]
+					CurrentColor.CopyHsv (sat: 1))
 			)
 		);
 		saturationSlider.OnValueChange += (sender, args) => {
@@ -442,10 +446,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				c,
 				w,
 				h,
-				[
+				ColorGradient.Create (
 					CurrentColor.CopyHsv (value: 0),
-					CurrentColor.CopyHsv (value: 1),
-				]
+					CurrentColor.CopyHsv (value: 1))
 			)
 		);
 		valueSlider.OnValueChange += (sender, args) => {
@@ -465,10 +468,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				c,
 				w,
 				h,
-				[
+				ColorGradient.Create (
 					CurrentColor with { R = 0 },
-					CurrentColor with { R = 1 },
-				]
+					CurrentColor with { R = 1 })
 			)
 		);
 		redSlider.OnValueChange += (sender, args) => {
@@ -488,10 +490,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				c,
 				w,
 				h,
-				[
+				ColorGradient.Create (
 					CurrentColor with { G = 0 },
-					CurrentColor with { G = 1 },
-				]
+					CurrentColor with { G = 1 })
 			)
 		);
 		greenSlider.OnValueChange += (sender, args) => {
@@ -511,10 +512,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				c,
 				w,
 				h,
-				[
+				ColorGradient.Create (
 					CurrentColor with { B = 0 },
-					CurrentColor with { B = 1 },
-				]
+					CurrentColor with { B = 1 })
 			)
 		);
 		blueSlider.OnValueChange += (sender, args) => {
@@ -534,10 +534,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				c,
 				w,
 				h,
-				[
+				ColorGradient.Create (
 					CurrentColor with { A = 0 },
-					CurrentColor with { A = 1 },
-				]
+					CurrentColor with { A = 1 })
 			)
 		);
 		alphaSlider.OnValueChange += (sender, args) => {
