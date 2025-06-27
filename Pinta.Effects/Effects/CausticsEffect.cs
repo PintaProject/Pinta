@@ -93,7 +93,7 @@ public sealed class CausticsEffect : BaseEffect
 			seed: Data.Seed,
 			turbulence: Data.Turbulence,
 			background: palette.PrimaryColor.ToColorBgra (),
-			time: Data.Time);
+			time: Data.TimeOffset);
 	}
 
 	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
@@ -220,8 +220,8 @@ public sealed class CausticsEffect : BaseEffect
 		[Caption ("Dispersion"), MinimumValue (0), MaximumValue (1)]
 		public double Dispersion { get; set; } = 0.0;
 
-		[Caption ("Time (for animation)"), MinimumValue (0), MaximumValue (100)]
-		public double Time { get; set; } = 0.0;
+		[Caption ("Time Offset"), MinimumValue (0), MaximumValue (100)]
+		public double TimeOffset { get; set; } = 0.0;
 
 		[Caption ("Samples"), MinimumValue (1), MaximumValue (10)]
 		public int Samples { get; set; } = 2;

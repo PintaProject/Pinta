@@ -76,7 +76,7 @@ internal sealed class EffectsTest
 	public void Caustics3 ()
 	{
 		CausticsEffect effect = new CausticsEffect (Utilities.CreateMockServices ());
-		effect.Data.Time = 100.0;
+		effect.Data.TimeOffset = 100.0;
 		Utilities.TestEffect (effect, "caustics3.png");
 	}
 
