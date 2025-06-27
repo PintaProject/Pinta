@@ -134,18 +134,27 @@ public sealed class CausticsEffect : BaseEffect
 							int dest_offset = (int) targetY * settings.canvasSize.Width + (int) targetX;
 							ColorBgra pixelColor = dest_data[dest_offset];
 
-							byte r = pixelColor.R;
-							byte g = pixelColor.G;
-							byte b = pixelColor.B;
+							byte a = pixelColor.A;
+
+							double alphaFactor = a / 255.0;
+
+							double r = (a == 0) ? 0 : pixelColor.R / alphaFactor;
+							double g = (a == 0) ? 0 : pixelColor.G / alphaFactor;
+							double b = (a == 0) ? 0 : pixelColor.B / alphaFactor;
 
 							if (channel == 2)
-								r = (byte) Math.Min (255, r + settings.v);
+								r = Math.Min (255, r + settings.v);
 							else if (channel == 1)
-								g = (byte) Math.Min (255, g + settings.v);
+								g = Math.Min (255, g + settings.v);
 							else
-								b = (byte) Math.Min (255, b + settings.v);
+								b = Math.Min (255, b + settings.v);
 
-							dest_data[dest_offset] = ColorBgra.FromBgra (b, g, r, pixelColor.A);
+							// Re-premultiply
+							r = r * alphaFactor;
+							g = g * alphaFactor;
+							b = b * alphaFactor;
+
+							dest_data[dest_offset] = ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, a);
 						}
 					}
 				} else // No dispersion
@@ -157,12 +166,22 @@ public sealed class CausticsEffect : BaseEffect
 						targetY >= 0 && targetY < settings.canvasSize.Height - 1) {
 						int dest_offset = (int) targetY * settings.canvasSize.Width + (int) targetX;
 						ColorBgra pixelColor = dest_data[dest_offset];
+						byte a = pixelColor.A;
+						double alphaFactor = a / 255.0;
 
-						byte r = (byte) Math.Min (255, pixelColor.R + settings.v);
-						byte g = (byte) Math.Min (255, pixelColor.G + settings.v);
-						byte b = (byte) Math.Min (255, pixelColor.B + settings.v);
+						double r = (a == 0) ? 0 : pixelColor.R / alphaFactor;
+						double g = (a == 0) ? 0 : pixelColor.G / alphaFactor;
+						double b = (a == 0) ? 0 : pixelColor.B / alphaFactor;
 
-						dest_data[dest_offset] = ColorBgra.FromBgra (b, g, r, pixelColor.A);
+						r = Math.Min (255, r + settings.v);
+						g = Math.Min (255, g + settings.v);
+						b = Math.Min (255, b + settings.v);
+
+						r = r * alphaFactor;
+						g = g * alphaFactor;
+						b = b * alphaFactor;
+
+						dest_data[dest_offset] = ColorBgra.FromBgra ((byte) b, (byte) g, (byte) r, a);
 					}
 				}
 			}
