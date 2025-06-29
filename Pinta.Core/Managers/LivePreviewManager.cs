@@ -30,7 +30,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Threading;
 using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
@@ -46,6 +45,7 @@ public sealed class LivePreviewManager : ILivePreview
 	private readonly ToolManager tools;
 	private readonly SystemManager system;
 	private readonly ChromeManager chrome;
+
 	internal LivePreviewManager (
 		WorkspaceManager workspaceManager,
 		ToolManager toolManager,
@@ -72,7 +72,6 @@ public sealed class LivePreviewManager : ILivePreview
 		tools.Commit ();
 
 		Document doc = workspace.ActiveDocument;
-
 		DocumentSelection selection = doc.Selection;
 
 		IsEnabled = true;
@@ -87,12 +86,14 @@ public sealed class LivePreviewManager : ILivePreview
 		RenderBounds = (selectionPath != null) ? selectionPath.GetBounds () : LivePreviewSurface.GetBounds ();
 		RenderBounds = workspace.ClampToImageSize (RenderBounds);
 
+		const uint UPDATE_MILLISECONDS = 100;
+
 		AsyncEffectRenderer.Settings settings = new (
 			threadCount: system.RenderThreads,
 			renderBounds: RenderBounds,
-			effectIsTileable: effect.IsTileable,
-			updateMilliseconds: 100);
+			effectIsTileable: effect.IsTileable);
 
+		uint updateTimerId = 0;
 		int handlersInQueue = 0;
 		Layer layer = doc.Layers.CurrentUserLayer;
 
@@ -101,8 +102,7 @@ public sealed class LivePreviewManager : ILivePreview
 		SimpleHistoryItem historyItem = new (effect.Icon, effect.Name);
 		historyItem.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
-		using AsyncEffectRenderer renderer = new (settings);
-		renderer.Updated += OnUpdate;
+		AsyncEffectRenderer renderer = new (settings);
 
 		IProgressDialog dialog = chrome.ProgressDialog;
 		dialog.Title = Translations.GetString ("Rendering Effect");
@@ -125,6 +125,18 @@ public sealed class LivePreviewManager : ILivePreview
 				layer.Surface,
 				LivePreviewSurface);
 
+			updateTimerId = GLib.Functions.TimeoutAdd (0, UPDATE_MILLISECONDS, () => {
+
+				PollForUpdate (renderer);
+
+				if (!renderer.IsRendering) {
+					updateTimerId = 0;
+					return false; // Stop ticking
+				}
+
+				return true; // Keep ticking
+			});
+
 			bool userConfirmed = !effect.IsConfigurable || await effect.LaunchConfiguration ();
 
 			chrome.MainWindowBusy = true;
@@ -136,12 +148,14 @@ public sealed class LivePreviewManager : ILivePreview
 			}
 
 			// The user confirmed, so show progress dialog
-
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "LivePreviewManager.Apply()");
 
 			dialog.Show ();
 
 			var result = await renderer.Finish (cancel: false);
+
+			// Final poll after the renderer finishes to ensure the last-rendered tiles are displayed.
+			PollForUpdate (renderer);
 
 			foreach (var ex in result.Errors)
 				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectName + " exception: " + ex.Message + "\n" + ex.StackTrace);
@@ -153,7 +167,6 @@ public sealed class LivePreviewManager : ILivePreview
 			}
 
 			// Was not canceled, so finally apply
-
 			Debug.WriteLine ("Render completed without the user canceling");
 
 			using Cairo.Context context = new (layer.Surface);
@@ -171,6 +184,11 @@ public sealed class LivePreviewManager : ILivePreview
 			IsEnabled = false;
 			LivePreviewSurface = null!;
 			workspace.Invalidate ();
+
+			if (updateTimerId > 0) {
+				GLib.Source.Remove (updateTimerId);
+				updateTimerId = 0;
+			}
 
 			if (effect.EffectData != null)
 				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
@@ -199,13 +217,15 @@ public sealed class LivePreviewManager : ILivePreview
 			renderer.Start (effect, layer.Surface, LivePreviewSurface);
 		}
 
-		void OnUpdate (
-			double progress,
-			RectangleI updatedBounds)
+		// This method now polls the renderer for its state instead of being a passive event handler.
+		void PollForUpdate (AsyncEffectRenderer renderer)
 		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " LivePreviewManager.OnUpdate() progress: " + progress);
+			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " Polling for update.");
 
-			chrome.ProgressDialog.Progress = progress;
+			chrome.ProgressDialog.Progress = renderer.Progress;
+
+			if (!renderer.TryGetAndResetUpdatedBounds (out RectangleI updatedBounds))
+				return;
 
 			double scale = workspace.Scale;
 
