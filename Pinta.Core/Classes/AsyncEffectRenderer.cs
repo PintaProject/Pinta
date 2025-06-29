@@ -52,14 +52,12 @@ internal sealed class AsyncEffectRenderer : IDisposable
 		internal RectangleI RenderBounds { get; }
 		internal bool EffectIsTileable { get; }
 		internal int UpdateMillis { get; }
-		internal ThreadPriority ThreadPriority { get; }
 
 		internal Settings (
 			int threadCount,
 			RectangleI renderBounds,
 			bool effectIsTileable,
-			int updateMilliseconds,
-			ThreadPriority threadPriority)
+			int updateMilliseconds)
 		{
 			if (renderBounds.Width < 0) throw new ArgumentException ("Width cannot be negative", nameof (renderBounds));
 			if (renderBounds.Height < 0) throw new ArgumentException ("Height cannot be negative", nameof (renderBounds));
@@ -69,7 +67,6 @@ internal sealed class AsyncEffectRenderer : IDisposable
 			EffectIsTileable = effectIsTileable;
 			ThreadCount = threadCount;
 			UpdateMillis = updateMilliseconds;
-			ThreadPriority = threadPriority;
 		}
 	}
 
