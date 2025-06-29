@@ -91,8 +91,7 @@ public sealed class LivePreviewManager : ILivePreview
 			threadCount: system.RenderThreads,
 			renderBounds: RenderBounds,
 			effectIsTileable: effect.IsTileable,
-			updateMilliseconds: 100,
-			threadPriority: ThreadPriority.BelowNormal);
+			updateMilliseconds: 100);
 
 		int handlersInQueue = 0;
 		Layer layer = doc.Layers.CurrentUserLayer;
