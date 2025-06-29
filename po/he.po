@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-25 00:30+0000\n"
+"POT-Creation-Date: 2025-06-29 00:31+0000\n"
 "PO-Revision-Date: 2021-11-03 19:55+0000\n"
 "Last-Translator: Yaron <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -48,7 +48,7 @@ msgstr "אזור של 7 × 7"
 msgid "9 x 9 Region"
 msgstr "אזור של 9 × 9"
 
-#: ../Pinta/MainWindow.cs:414
+#: ../Pinta/MainWindow.cs:401
 msgid "A_dd-ins"
 msgstr "_תוספים"
 
@@ -74,11 +74,11 @@ msgstr "הוספת רעש"
 msgid "Add-in Manager..."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:832
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:835
 msgid "Added"
 msgstr "נוספה"
 
-#: ../Pinta/MainWindow.cs:449
+#: ../Pinta/MainWindow.cs:453
 msgid "Adjustments"
 msgstr ""
 
@@ -97,7 +97,7 @@ msgstr ""
 msgid "All files"
 msgstr "כל הקבצים"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:492
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:528
 msgid "Alpha"
 msgstr ""
 
@@ -113,7 +113,7 @@ msgstr ""
 msgid "Amount"
 msgstr "כמות"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:121
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:139
 msgid "Anchor:"
 msgstr "עוגן:"
 
@@ -133,11 +133,11 @@ msgstr "זווית"
 msgid "Antialias"
 msgstr "החלקת קצוות"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:358
+#: ../Pinta.Core/Classes/BaseTool.cs:366
 msgid "Antialiasing Off"
 msgstr "החלקה כבויה"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:357
+#: ../Pinta.Core/Classes/BaseTool.cs:365
 msgid "Antialiasing On"
 msgstr "החלקה פעילה"
 
@@ -156,7 +156,7 @@ msgstr "אומנותיים"
 msgid "Atkinson"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:256
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
 msgid "Auto"
 msgstr "אוטומטי"
 
@@ -212,9 +212,9 @@ msgstr "שחור ולבן"
 msgid "Blend Mode"
 msgstr "מצב ערבול"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:469
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:506
 msgid "Blue"
 msgstr "כחול"
 
@@ -265,7 +265,7 @@ msgstr "בהירות / ניגודיות"
 msgid "Brush Size"
 msgstr "גודל המברשת"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:274
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:122
 msgid "Brush width"
 msgstr "עובי המברשת"
@@ -279,19 +279,19 @@ msgstr "בליטה"
 msgid "Burkes"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:184
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:80
 msgid "By absolute size:"
 msgstr "בגודל מוחלט:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:67
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:102
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:72
 msgid "By percentage:"
 msgstr "באחוזים:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:169
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr ""
@@ -300,7 +300,7 @@ msgstr ""
 msgid "Canvas"
 msgstr "משטח ציור"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:61
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:92
 msgid "Canvas Grid Settings"
 msgstr ""
 
@@ -337,16 +337,16 @@ msgstr ""
 msgid "Centered"
 msgstr "ממורכז"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:229
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Centimeters"
 msgstr "סנטימטרים"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:283
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:356
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr "סוג הצורה השתנה"
 
@@ -355,11 +355,11 @@ msgstr "סוג הצורה השתנה"
 msgid "Cherry Blossom"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:632
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:633
 msgid "Choose Color"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:150
 msgid "Choose Palette Color"
 msgstr "בחירת ערכת צבעים"
 
@@ -397,11 +397,11 @@ msgstr "יש ללחוץ ולגרור כדי לצייר קו מתאר לאזור 
 msgid "Click and drag to navigate image."
 msgstr "יש ללחוץ ולגרור כדי לנווט ברחבי התמונה."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:300
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:301
 msgid "Click to reset primary and secondary color."
 msgstr "יש ללחוץ כדי לאפס את הצבעים הראשי והמשני."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:289
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:290
 msgid "Click to select primary color."
 msgstr "יש ללחוץ כדי לבחור בצבע עיקרי."
 
@@ -409,19 +409,19 @@ msgstr "יש ללחוץ כדי לבחור בצבע עיקרי."
 msgid "Click to select region of similar color."
 msgstr "יש ללחוץ כדי לבחור אזור בעל אותו הצבע."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:292
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
 msgid "Click to select secondary color."
 msgstr "יש ללחוץ כדי לבחור בצבע משני."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:196
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:295
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Click to switch between primary and secondary color."
 msgstr "לחיצה תחליף בין הצבע העיקרי למשני."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:436
-#: ../Pinta/Dialogs/NewImageDialog.cs:530
+#: ../Pinta/Dialogs/NewImageDialog.cs:422
+#: ../Pinta/Dialogs/NewImageDialog.cs:441
+#: ../Pinta/Dialogs/NewImageDialog.cs:537
 msgid "Clipboard"
 msgstr "לוח גזירות"
 
@@ -429,7 +429,7 @@ msgstr "לוח גזירות"
 msgid "Clone Stamp"
 msgstr "חותמת העתקים"
 
-#: ../Pinta.Core/Actions/FileActions.cs:72
+#: ../Pinta.Core/Actions/FileActions.cs:81
 #: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
 msgstr "סגירה"
@@ -442,7 +442,7 @@ msgstr "לסגור הכול"
 msgid "Closed Curve Shape"
 msgstr "צורת עקומה סגורה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Closed Line/Curve Series"
 msgstr "סדרת קווים/עקומות סגורה"
 
@@ -475,7 +475,7 @@ msgstr ""
 msgid "Color Mode"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:327
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "‏מלקט הצבעים"
@@ -488,7 +488,7 @@ msgstr "טווח צבעים"
 msgid "Color Saturation"
 msgstr "רווית הצבע"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:255
+#: ../Pinta.Core/Actions/ViewActions.cs:253
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
@@ -550,8 +550,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:167
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:437
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "לא ניתן לפתוח את הקובץ: {0}"
@@ -575,9 +575,9 @@ msgid "Curves"
 msgstr "עקומות"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:438
-#: ../Pinta/Dialogs/NewImageDialog.cs:530
+#: ../Pinta/Dialogs/NewImageDialog.cs:422
+#: ../Pinta/Dialogs/NewImageDialog.cs:443
+#: ../Pinta/Dialogs/NewImageDialog.cs:537
 msgid "Custom"
 msgstr "מותאם אישית"
 
@@ -587,7 +587,7 @@ msgid "Cut"
 msgstr "גזירה"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:252
+#: ../Pinta.Core/Actions/ViewActions.cs:250
 msgid "Dark"
 msgstr ""
 
@@ -600,7 +600,7 @@ msgid "Dash"
 msgstr "קווקוו"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:248
+#: ../Pinta.Core/Actions/ViewActions.cs:246
 msgid "Default"
 msgstr ""
 
@@ -609,7 +609,7 @@ msgstr ""
 msgid "Delete Layer"
 msgstr "מחיקת שכבה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:670
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:673
 msgid "Deleted"
 msgstr "נמחקה"
 
@@ -683,11 +683,11 @@ msgstr "התנהגות הקצוות"
 msgid "Edge Detect"
 msgstr "איתור קצוות"
 
-#: ../Pinta/MainWindow.cs:410
+#: ../Pinta/MainWindow.cs:399
 msgid "Effe_cts"
 msgstr "_אפקטים"
 
-#: ../Pinta/MainWindow.cs:443
+#: ../Pinta/MainWindow.cs:447
 msgid "Effects"
 msgstr ""
 
@@ -696,7 +696,7 @@ msgstr ""
 msgid "Electric"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -710,7 +710,7 @@ msgstr "בחירת אליפסה"
 msgid "Emboss"
 msgstr "תבליט"
 
-#: ../Pinta/Main.cs:65
+#: ../Pinta/Main.cs:67
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
@@ -753,7 +753,7 @@ msgstr "מקדם"
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:318
+#: ../Pinta/MainWindow.cs:320
 msgid "Failed to initialize add-in"
 msgstr ""
 
@@ -761,11 +761,11 @@ msgstr ""
 msgid "Failed to load extension package"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:464
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
 msgid "Failed to open image"
 msgstr "פתיחת התמונה נכשלה"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:254
 msgid "Failed to save image"
 msgstr "שמירת התמונה נכשלה"
 
@@ -786,7 +786,7 @@ msgstr ""
 msgid "File a Bug"
 msgstr "דיווח על תקלה"
 
-#: ../Pinta/Main.cs:61
+#: ../Pinta/Main.cs:62
 msgid "Files to open"
 msgstr ""
 
@@ -803,23 +803,23 @@ msgstr ""
 msgid "Fill Selection"
 msgstr "מילוי הבחירה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:312
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
 msgstr "מילוי הצורה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
 msgstr "סגנון המילוי"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:310
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:313
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
 msgstr "מילוי וקו המתאר של הצורה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1097
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1381
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1386
 msgid "Finalized"
 msgstr "מוגמר"
 
@@ -829,11 +829,11 @@ msgstr "גימור הפיקסלים"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:117
 #: ../Pinta.Core/Actions/ImageActions.cs:221
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:167
 msgid "Flatten"
 msgstr "השטחה"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:161
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr ""
 
@@ -923,9 +923,9 @@ msgid "Gradient"
 msgstr "מדרג"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:446
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:484
 msgid "Green"
 msgstr "ירוק"
 
@@ -937,14 +937,14 @@ msgstr "רשת"
 msgid "Hard Light"
 msgstr "אור קשה"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:91
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:79
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:111
 msgid "Height:"
 msgstr "גובה:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:329
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:366
 msgid "Hex"
 msgstr ""
 
@@ -979,11 +979,11 @@ msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:349
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:386
 msgid "Hue"
 msgstr "גוון"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:253
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:290
 msgid "Hue & Sat"
 msgstr ""
 
@@ -991,7 +991,7 @@ msgstr ""
 msgid "Hue / Saturation"
 msgstr "גוון / רוויה"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:246
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "קובצי ICO לא יכולים לחרוג מגודל של 255 × 255"
 
@@ -999,7 +999,7 @@ msgstr "קובצי ICO לא יכולים לחרוג מגודל של 255 × 255"
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "אם השינויים לא ישמרו הם יאבדו לעד."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:455
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:459
 msgid "Image"
 msgstr "תמונה"
 
@@ -1024,7 +1024,7 @@ msgstr "קובצי תמונה"
 msgid "Image larger than canvas"
 msgstr "התמונה גדולה ממשטח הציור"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
 msgid "Image too large"
 msgstr "התמונה גדולה מדי"
 
@@ -1036,7 +1036,7 @@ msgstr "ייבוא מקובץ"
 msgid "Import from File..."
 msgstr "ייבוא מקובץ..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:228
+#: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
 msgstr "אינצ׳ים"
 
@@ -1048,11 +1048,11 @@ msgstr "קווי המתאר בדיו"
 msgid "Ink Sketch"
 msgstr "סקיצת דיו"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
 msgid "Input"
 msgstr "קלט"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:270
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Input Histogram"
 msgstr "היסטוגרמת הקלט"
 
@@ -1250,12 +1250,12 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:287
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "לחיצה בלחצן השמאלי כדי לבחור צבע עיקרי. בימיני כדי להגדיר את הצבע המשני."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:283
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1278,7 +1278,7 @@ msgstr "אורך"
 msgid "Levels"
 msgstr "רמות"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:242
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:243
 msgid "Levels Adjustment"
 msgstr "התאמת הרמות"
 
@@ -1287,7 +1287,7 @@ msgid "License"
 msgstr "רישיון"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:250
+#: ../Pinta.Core/Actions/ViewActions.cs:248
 msgid "Light"
 msgstr ""
 
@@ -1337,12 +1337,12 @@ msgstr "עצמת התאורה"
 msgid "Magic Wand Select"
 msgstr "בחירה עם שרביט קסם"
 
-#: ../Pinta/MainWindow.cs:437
+#: ../Pinta/MainWindow.cs:441
 msgid "Main Menu"
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:115
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:141
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:69
 msgid "Maintain aspect ratio"
 msgstr "שמירה על יחס גובה־רוחב"
 
@@ -1372,7 +1372,7 @@ msgstr "מיזוג השכבה כלפי מטה"
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:914
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:917
 msgid "Modified"
 msgstr "השתנתה"
 
@@ -1414,7 +1414,7 @@ msgstr "שם:"
 msgid "Nearest Neighbor"
 msgstr ""
 
-#: ../Pinta.Core/Actions/FileActions.cs:54
+#: ../Pinta.Core/Actions/FileActions.cs:63
 msgid "New"
 msgstr "חדש"
 
@@ -1423,7 +1423,7 @@ msgstr "חדש"
 msgid "New Image"
 msgstr "תמונה חדשה"
 
-#: ../Pinta.Core/Actions/FileActions.cs:58
+#: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "New Screenshot..."
 msgstr "צילום מסך חדש..."
 
@@ -1431,7 +1431,7 @@ msgstr "צילום מסך חדש..."
 msgid "New palette size:"
 msgstr "גודל ערכת הצבעים החדשה:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:50
+#: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New..."
 msgstr "חדש..."
 
@@ -1447,11 +1447,11 @@ msgstr "רעש"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:275
+#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:275
 msgid "Normal"
 msgstr "רגיל"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:342
+#: ../Pinta.Core/Classes/BaseTool.cs:350
 msgid "Normal Blending"
 msgstr "ערבול רגיל"
 
@@ -1467,11 +1467,11 @@ msgstr "רגיל ומתאר"
 msgid "Number of Cells"
 msgstr ""
 
-#: ../Pinta/Main.cs:55
+#: ../Pinta/Main.cs:56
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:165
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "OK"
 msgstr ""
 
@@ -1503,7 +1503,7 @@ msgstr "ציור שמן"
 msgid "Opacity:"
 msgstr "אטימות:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:68
+#: ../Pinta.Core/Actions/FileActions.cs:77
 msgid "Open"
 msgstr "פתיחה"
 
@@ -1511,7 +1511,7 @@ msgstr "פתיחה"
 msgid "Open Curve Shape"
 msgstr "צורת עקומה פתוחה"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:342
 msgid "Open Image"
 msgstr "פתיחת תמונה"
 
@@ -1520,7 +1520,7 @@ msgstr "פתיחת תמונה"
 msgid "Open Image File"
 msgstr "פתיחת קובץ תמונה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
 msgid "Open Line/Curve Series"
 msgstr "סדרת קווים/עקומות פתוחה"
 
@@ -1529,7 +1529,7 @@ msgid "Open Palette File"
 msgstr "פתיחת קובץ ערכת צבעים"
 
 #: ../Pinta.Core/Actions/EditActions.cs:169
-#: ../Pinta.Core/Actions/FileActions.cs:64
+#: ../Pinta.Core/Actions/FileActions.cs:73
 msgid "Open..."
 msgstr "פתיחה..."
 
@@ -1557,7 +1557,7 @@ msgstr ""
 msgid "Outline Object"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
 msgstr "קו המתאר של הצורה"
@@ -1566,11 +1566,11 @@ msgstr "קו המתאר של הצורה"
 msgid "Outline width"
 msgstr "עובי המתאר"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
 msgid "Output"
 msgstr "פלט"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 msgid "Output Histogram"
 msgstr "היסטוגרמת הפלט"
 
@@ -1578,7 +1578,7 @@ msgstr "היסטוגרמת הפלט"
 msgid "Overlay"
 msgstr "כיסוי"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:343
+#: ../Pinta.Core/Classes/BaseTool.cs:351
 msgid "Overwrite"
 msgstr "דריסה"
 
@@ -1644,15 +1644,15 @@ msgid "Photo"
 msgstr "צילום"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:62
+#: ../Pinta/Main.cs:71 ../Pinta/MainWindow.cs:62
 msgid "Pinta"
 msgstr "פינטה"
 
-#: ../Pinta/AddinSetupService.cs:52
+#: ../Pinta/AddinSetupService.cs:66
 msgid "Pinta Community Addins - Cross-Platform"
 msgstr "תוספות של קהילת Pinta - חוצות פלטפורמות"
 
-#: ../Pinta/AddinSetupService.cs:48
+#: ../Pinta/AddinSetupService.cs:62
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "תוספות של קהילת Pinta - לפלטפורמות מסוימות"
 
@@ -1664,7 +1664,7 @@ msgstr "עורך התמונות פינטה"
 msgid "Pinta Website"
 msgstr "האתר של פינטה"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
 msgid "Pinta does not support saving images in this file format."
 msgstr "ל־Pinta אין תמיכה בשמירת תמונות במבנה קובץ זה."
 
@@ -1681,7 +1681,7 @@ msgstr ""
 "יש לו גם למעלה מ־35 אפקטים להחלה על התמונות שלך ויש לו גם את היכולת ליצור "
 "שכבות אינסופיות כדי לסייע לסדר את היצירתיות שלך."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:438
 msgid "Pinta supports the following file formats:"
 msgstr "ב־Pinta יש תמיכה בסוגי הקבצים הבאים:"
 
@@ -1693,7 +1693,7 @@ msgstr "ב־Pinta יש תמיכה בתצורות ערכות הצבעים הבא�
 msgid "Pixelate"
 msgstr "טשטוש לפיקסלים"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:225
 msgid "Pixels"
 msgstr "פיקסלים"
 
@@ -1706,12 +1706,12 @@ msgstr ""
 msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:600
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:603
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:806
 msgid "Point Added"
 msgstr "נוספה נקודה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:651
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:654
 msgid "Point Deleted"
 msgstr "נקודה נמחקה"
 
@@ -1757,7 +1757,7 @@ msgstr "תצוגה מקדימה"
 msgid "Primary"
 msgstr "ראשי"
 
-#: ../Pinta.Core/Actions/FileActions.cs:93
+#: ../Pinta.Core/Actions/FileActions.cs:102
 msgid "Print"
 msgstr "הדפסה"
 
@@ -1844,9 +1844,9 @@ msgstr "מלבן"
 msgid "Rectangle Select"
 msgstr "בחירה ריבועית"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:423
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:462
 msgid "Red"
 msgstr "אדום"
 
@@ -1905,7 +1905,7 @@ msgstr "החלפה"
 msgid "Report Bug..."
 msgstr ""
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:89
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:126
 msgid "Resampling:"
 msgstr ""
 
@@ -1914,11 +1914,11 @@ msgid "Reseed"
 msgstr "מיקום מחדש"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:259
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
 msgid "Reset"
 msgstr "איפוס"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:155
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:185
 msgid "Reset Color"
 msgstr ""
 
@@ -1926,8 +1926,8 @@ msgstr ""
 msgid "Reset to Default"
 msgstr "שחזור לברירת המחדל"
 
-#: ../Pinta.Core/Classes/Document.cs:326
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:181
+#: ../Pinta.Core/Classes/Document.cs:327
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:199
 msgid "Resize Canvas"
 msgstr "שינוי גודל משטח הציור"
 
@@ -1936,7 +1936,7 @@ msgid "Resize Canvas..."
 msgstr "שינוי גודל משטח הציור..."
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:102
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:139
 msgid "Resize Image"
 msgstr "שינוי גודל התמונה"
 
@@ -1996,7 +1996,7 @@ msgstr "היפוך ב־90° נגד כיוון השעון"
 msgid "Rotation"
 msgstr "סיבוב"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 msgid "Rounded Line Series"
 msgstr "סדרת קווים מעוגלים"
 
@@ -2008,7 +2008,7 @@ msgstr "צורת קו מעוגלת"
 msgid "Rounded Rectangle"
 msgstr "מלבן מעוגל"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:232
+#: ../Pinta.Core/Actions/ViewActions.cs:230
 msgid "Ruler Units"
 msgstr "יחידות הסרגל"
 
@@ -2020,11 +2020,11 @@ msgstr "סרגלים"
 msgid "Sampling"
 msgstr "דגימה"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:377
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:418
 msgid "Sat"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:264
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:301
 msgid "Sat & Value"
 msgstr ""
 
@@ -2038,7 +2038,7 @@ msgid "Saturation Percentage"
 msgstr "אחוזי רוויה"
 
 #: ../Pinta.Core/Actions/EditActions.cs:529
-#: ../Pinta.Core/Actions/FileActions.cs:79
+#: ../Pinta.Core/Actions/FileActions.cs:88
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
 msgstr "שמירה"
@@ -2048,7 +2048,7 @@ msgid "Save All"
 msgstr "לשמור הכול"
 
 #: ../Pinta.Core/Actions/EditActions.cs:175
-#: ../Pinta.Core/Actions/FileActions.cs:86
+#: ../Pinta.Core/Actions/FileActions.cs:95
 msgid "Save As..."
 msgstr "שמירה בשם..."
 
@@ -2094,7 +2094,7 @@ msgstr "ענתיקה"
 msgid "Set Number of Colors"
 msgstr "הגדרת מספר הצבעים"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 msgid "Shape Type"
 msgstr "סוג הצורה"
 
@@ -2108,8 +2108,8 @@ msgstr "חידוד"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:227
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
 msgid "Shortcut key"
 msgstr "מקש קיצור"
 
@@ -2117,7 +2117,11 @@ msgstr "מקש קיצור"
 msgid "Shortcut keys"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:19
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
+msgid "Show Axonometric Grid"
+msgstr ""
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
 msgid "Show Grid"
 msgstr ""
 
@@ -2125,11 +2129,11 @@ msgstr ""
 msgid "Show Layer"
 msgstr "הצגת השכבה"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:245
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:282
 msgid "Show Value"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:244
+#: ../Pinta.Core/Actions/ViewActions.cs:242
 msgid "Show/Hide"
 msgstr ""
 
@@ -2151,7 +2155,7 @@ msgstr "פיקסל בודד"
 msgid "Size"
 msgstr "גודל"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:262
+#: ../Pinta.Tools/Tools/EraserTool.cs:263
 msgid "Smooth"
 msgstr "חלק"
 
@@ -2217,7 +2221,7 @@ msgid "Text Style"
 msgstr "סגנון הטקסט"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:315
+#: ../Pinta/MainWindow.cs:317
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
@@ -2284,7 +2288,7 @@ msgstr ""
 msgid "Thickness"
 msgstr "עובי"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:160
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
 msgid "This format does not support layers. Flatten image?"
 msgstr ""
 
@@ -2308,7 +2312,7 @@ msgstr "עצה: לחצן ימני כדי להסיר נקודות בקרה."
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
-#: ../Pinta.Tools/Tools/RecolorTool.cs:197
+#: ../Pinta.Tools/Tools/RecolorTool.cs:198
 msgid "Tolerance"
 msgstr "טולרנטיות"
 
@@ -2370,7 +2374,7 @@ msgstr "סיבוב"
 msgid "Two-Row Sierra"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:258
+#: ../Pinta.Tools/Tools/EraserTool.cs:259
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
 msgid "Type"
 msgstr "סוג"
@@ -2402,12 +2406,12 @@ msgstr ""
 msgid "Union (+) ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Core/Classes/Document.cs:101
+#: ../Pinta.Core/Classes/Document.cs:102
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "תמונה שלא נשמרה {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:340
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:337
 msgid "Unsupported file format"
 msgstr "סוג קובץ אינו נתמך"
 
@@ -2435,7 +2439,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "נעשה שימוש בכמה סמלים מ־:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:400
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:440
 msgid "Value"
 msgstr ""
 
@@ -2459,7 +2463,7 @@ msgstr ""
 msgid "Vertical red (R)"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:461
+#: ../Pinta/MainWindow.cs:465
 msgid "View"
 msgstr ""
 
@@ -2484,17 +2488,18 @@ msgstr "חום"
 msgid "White"
 msgstr "לבן"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:41
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:66
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:76
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:83
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:163
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:71
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:108
 msgid "Width:"
 msgstr "רוחב:‏"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:207
-#: ../Pinta.Core/Actions/ViewActions.cs:398
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:377
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:386
+#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:365
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:374
 msgid "Window"
 msgstr "חלון"
 
@@ -2513,13 +2518,13 @@ msgid "Xor ({0} + Right Click)"
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:467
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "אין לך גישה אל ‚{0}’"
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:257
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2548,7 +2553,7 @@ msgstr "התרחקות"
 msgid "Zoom to Selection"
 msgstr "תקריב על הבחירה"
 
-#: ../Pinta/MainWindow.cs:406
+#: ../Pinta/MainWindow.cs:398
 msgid "_Adjustments"
 msgstr "הת_אמות"
 
@@ -2556,7 +2561,7 @@ msgstr "הת_אמות"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:166
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
 msgstr ""
@@ -2565,23 +2570,23 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:386
+#: ../Pinta/MainWindow.cs:391
 msgid "_Edit"
 msgstr "ע_ריכה"
 
-#: ../Pinta/MainWindow.cs:382
+#: ../Pinta/MainWindow.cs:390
 msgid "_File"
 msgstr "_קובץ"
 
-#: ../Pinta/MainWindow.cs:422
+#: ../Pinta/MainWindow.cs:403
 msgid "_Help"
 msgstr "ע_זרה"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:394
 msgid "_Image"
 msgstr "ת_מונה"
 
-#: ../Pinta/MainWindow.cs:400
+#: ../Pinta/MainWindow.cs:396
 msgid "_Layers"
 msgstr "שכ_בות"
 
@@ -2596,11 +2601,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:393
 msgid "_View"
 msgstr "ת_צוגה"
 
-#: ../Pinta/MainWindow.cs:418
+#: ../Pinta/MainWindow.cs:402
 msgid "_Window"
 msgstr "_חלון"
 
@@ -2614,13 +2619,14 @@ msgstr ""
 "ציור;איור;צייר;ציורים;צביעה;צבע;גרפיקה;לצבוע;לצייר;דו־ממד;דו-ממד;דו־מימד;"
 "דו-מימד;לאייר;"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:68
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:78
 #: ../Pinta/Dialogs/NewImageDialog.cs:277
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:106
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:84
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:87
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:94
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:121
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:124
 msgid "pixels"
 msgstr "פיקסלים"
 
@@ -2647,7 +2653,7 @@ msgstr ""
 msgid "{0} copy"
 msgstr ""
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:123
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:122
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} תמונה ({1})"
@@ -2660,7 +2666,7 @@ msgstr "ערכת צבעים של {0}‏ ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:379
+#: ../Pinta.Core/Actions/ViewActions.cs:377
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

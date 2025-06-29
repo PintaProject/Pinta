@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-25 00:30+0000\n"
+"POT-Creation-Date: 2025-06-29 00:31+0000\n"
 "PO-Revision-Date: 2025-01-02 21:00+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
@@ -48,7 +48,7 @@ msgstr "περιοχή 7 x 7"
 msgid "9 x 9 Region"
 msgstr "περιοχή 9 x 9"
 
-#: ../Pinta/MainWindow.cs:414
+#: ../Pinta/MainWindow.cs:401
 msgid "A_dd-ins"
 msgstr "Πρόσθετα"
 
@@ -74,11 +74,11 @@ msgstr "Προσθήκη θορύβου"
 msgid "Add-in Manager..."
 msgstr "Διαχείριση προσθέτων..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:832
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:835
 msgid "Added"
 msgstr "Προστέθηκε"
 
-#: ../Pinta/MainWindow.cs:449
+#: ../Pinta/MainWindow.cs:453
 msgid "Adjustments"
 msgstr "Προσαρμογές"
 
@@ -97,7 +97,7 @@ msgstr "Ευθυγράμμιση αντικειμένου"
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:492
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:528
 msgid "Alpha"
 msgstr "Άλφα"
 
@@ -113,7 +113,7 @@ msgstr "Διαβάθμιση άλφα"
 msgid "Amount"
 msgstr "Ποσότητα"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:121
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:139
 msgid "Anchor:"
 msgstr "Αγκύρωση:"
 
@@ -133,11 +133,11 @@ msgstr "Γωνία"
 msgid "Antialias"
 msgstr "Εξομάλυνση"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:358
+#: ../Pinta.Core/Classes/BaseTool.cs:366
 msgid "Antialiasing Off"
 msgstr "Απενεργοποίηση εξομάλυνσης γραφικών"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:357
+#: ../Pinta.Core/Classes/BaseTool.cs:365
 msgid "Antialiasing On"
 msgstr "Ενεργοποίηση εξομάλυνσης γραφικών"
 
@@ -156,7 +156,7 @@ msgstr "Καλλιτεχνικό"
 msgid "Atkinson"
 msgstr "Άτκινσον"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:256
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
 msgid "Auto"
 msgstr "Αυτόματα"
 
@@ -212,9 +212,9 @@ msgstr "Ασπρόμαυρο"
 msgid "Blend Mode"
 msgstr "Λειτουργία ανάμιξης"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:469
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:506
 msgid "Blue"
 msgstr "Μπλε"
 
@@ -265,7 +265,7 @@ msgstr "Φωτεινότητα / αντίθεση"
 msgid "Brush Size"
 msgstr "Μέγεθος πινέλου"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:271
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:274
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:122
 msgid "Brush width"
 msgstr "Πλάτος βούρτσας"
@@ -279,19 +279,19 @@ msgstr "Διόγκωση"
 msgid "Burkes"
 msgstr "Μπέρκ"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:111
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:184
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:80
 msgid "By absolute size:"
 msgstr "Σε απόλυτο μέγεθος:"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:67
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:177
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:102
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:72
 msgid "By percentage:"
 msgstr "Σε ποσοστό:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:169
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Ακύρωση"
@@ -300,7 +300,7 @@ msgstr "Ακύρωση"
 msgid "Canvas"
 msgstr "Καμβάς"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:61
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:92
 msgid "Canvas Grid Settings"
 msgstr "Ρυθμίσεις πλέγματος καμβά"
 
@@ -337,16 +337,16 @@ msgstr "Κέντρο δεξιά"
 msgid "Centered"
 msgstr "Στο κέντρο"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:229
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Centimeters"
 msgstr "Εκατοστά"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:280
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:283
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr "Αλλαγή πλάτους βούρτσας. Πλήκτρα συντόμευσης: []"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:356
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
 msgstr "Τροποποιημένος τύπος σχήματος"
 
@@ -355,11 +355,11 @@ msgstr "Τροποποιημένος τύπος σχήματος"
 msgid "Cherry Blossom"
 msgstr "Αμυγδαλιά"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:632
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:633
 msgid "Choose Color"
 msgstr "Επιλογή χρώματος"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:150
 msgid "Choose Palette Color"
 msgstr "Επιλογή χρώματος παλέττας"
 
@@ -406,11 +406,11 @@ msgstr ""
 msgid "Click and drag to navigate image."
 msgstr "Κλικ και σύρετε για να περιηγηθείτε στην εικόνα."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:300
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:301
 msgid "Click to reset primary and secondary color."
 msgstr "Πατήστε για να αρχικοποιήσετε το πρωτεύον και το δευτερεύον χρώμα."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:289
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:290
 msgid "Click to select primary color."
 msgstr "Πατήστε για να επιλέξετε πρωτεύον χρώμα."
 
@@ -418,19 +418,19 @@ msgstr "Πατήστε για να επιλέξετε πρωτεύον χρώμ�
 msgid "Click to select region of similar color."
 msgstr "Κλικ για επιλογή περιοχής παρόμοιου χρώματος."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:292
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
 msgid "Click to select secondary color."
 msgstr "Πατήστε για να επιλέξετε δευτερεύον χρώμα."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:196
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:295
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Click to switch between primary and secondary color."
 msgstr "Κλικ για εναλλαγή μεταξύ κύριου και δευτερεύοντος χρώματος."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:436
-#: ../Pinta/Dialogs/NewImageDialog.cs:530
+#: ../Pinta/Dialogs/NewImageDialog.cs:422
+#: ../Pinta/Dialogs/NewImageDialog.cs:441
+#: ../Pinta/Dialogs/NewImageDialog.cs:537
 msgid "Clipboard"
 msgstr "Πρόχειρο"
 
@@ -438,7 +438,7 @@ msgstr "Πρόχειρο"
 msgid "Clone Stamp"
 msgstr "Στάμπα κλωνοποίησης"
 
-#: ../Pinta.Core/Actions/FileActions.cs:72
+#: ../Pinta.Core/Actions/FileActions.cs:81
 #: ../Pinta.Gui.Addins/InstallDialog.cs:327
 msgid "Close"
 msgstr "Κλείσιμο"
@@ -451,7 +451,7 @@ msgstr "Κλείσιμο όλων"
 msgid "Closed Curve Shape"
 msgstr "Σχήμα κλειστής καμπύλης"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Closed Line/Curve Series"
 msgstr "Κλείσιμο σειράς Γραμμής/Καμπύλης"
 
@@ -484,7 +484,7 @@ msgstr "Χρώμα διαβάθμισης"
 msgid "Color Mode"
 msgstr "Λειτουργεία χρώματος"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:327
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
 msgid "Color Picker"
 msgstr "Επιλογέας χρώματος"
@@ -497,7 +497,7 @@ msgstr "Εύρος χρώματος"
 msgid "Color Saturation"
 msgstr "Κορεσμός χρώματος"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:255
+#: ../Pinta.Core/Actions/ViewActions.cs:253
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
@@ -559,8 +559,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Δεν ήταν δυνατή η εισαγωγή στρώσης \"{0}\" από {1}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:167
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:432
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:437
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Δεν ήταν δυνατό να ανοιχτεί το αρχείο: {0}"
@@ -584,9 +584,9 @@ msgid "Curves"
 msgstr "Καμπύλες"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:418
-#: ../Pinta/Dialogs/NewImageDialog.cs:438
-#: ../Pinta/Dialogs/NewImageDialog.cs:530
+#: ../Pinta/Dialogs/NewImageDialog.cs:422
+#: ../Pinta/Dialogs/NewImageDialog.cs:443
+#: ../Pinta/Dialogs/NewImageDialog.cs:537
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
@@ -596,7 +596,7 @@ msgid "Cut"
 msgstr "Αποκοπή"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:252
+#: ../Pinta.Core/Actions/ViewActions.cs:250
 msgid "Dark"
 msgstr "Σκοτεινό"
 
@@ -609,7 +609,7 @@ msgid "Dash"
 msgstr "Παύλα"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:248
+#: ../Pinta.Core/Actions/ViewActions.cs:246
 msgid "Default"
 msgstr "Προεπιλεγμένο"
 
@@ -618,7 +618,7 @@ msgstr "Προεπιλεγμένο"
 msgid "Delete Layer"
 msgstr "Διαγραφή επιπέδου"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:670
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:673
 msgid "Deleted"
 msgstr "Διαγράφηκε"
 
@@ -692,11 +692,11 @@ msgstr "Συμπεριφορά άκρων"
 msgid "Edge Detect"
 msgstr "Εντοπισμός άκρων"
 
-#: ../Pinta/MainWindow.cs:410
+#: ../Pinta/MainWindow.cs:399
 msgid "Effe_cts"
 msgstr "Ε_φέ"
 
-#: ../Pinta/MainWindow.cs:443
+#: ../Pinta/MainWindow.cs:447
 msgid "Effects"
 msgstr "Εφφέ"
 
@@ -705,7 +705,7 @@ msgstr "Εφφέ"
 msgid "Electric"
 msgstr "Ηλεκτρικό"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -719,7 +719,7 @@ msgstr "Ελλειψοειδής επιλογή"
 msgid "Emboss"
 msgstr "Εμβάθυνση"
 
-#: ../Pinta/Main.cs:65
+#: ../Pinta/Main.cs:67
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr "Επιλογή εκτενούς αναφοράς ή αλλαγή συμπεριφοράς για debugging"
 
@@ -762,7 +762,7 @@ msgstr "Συντελεστής"
 msgid "Failed to access XDG Desktop Portals"
 msgstr "Σφάλμα πρόσφασης στα XDG Desktop Portals"
 
-#: ../Pinta/MainWindow.cs:318
+#: ../Pinta/MainWindow.cs:320
 msgid "Failed to initialize add-in"
 msgstr "Σφάλμα εκκίνησης προσθέτου"
 
@@ -770,11 +770,11 @@ msgstr "Σφάλμα εκκίνησης προσθέτου"
 msgid "Failed to load extension package"
 msgstr "Σφάλμα φόρτωσης πακέτου προσθέτου"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:464
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
 msgid "Failed to open image"
 msgstr "Αποτυχία ανοίγματος εικόνας"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:254
 msgid "Failed to save image"
 msgstr "Αποτυχία αποθήκευσης της εικόνας"
 
@@ -795,7 +795,7 @@ msgstr "Λείανση αντικειμένου"
 msgid "File a Bug"
 msgstr "Στείλτε αναφορά σφάλματος"
 
-#: ../Pinta/Main.cs:61
+#: ../Pinta/Main.cs:62
 msgid "Files to open"
 msgstr "Αρχεία για άνοιγμα"
 
@@ -812,23 +812,23 @@ msgstr "Γέμισμα φόντου αντικειμένου"
 msgid "Fill Selection"
 msgstr "Γέμισμα επιλογής"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:312
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
 msgstr "Σχήμα γεμίσματος"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:299
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
 msgid "Fill Style"
 msgstr "Στυλ γεμίσματος"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:310
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:313
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
 msgstr "Σχήμα γεμίσματος και περιγράμματος"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1097
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1381
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1386
 msgid "Finalized"
 msgstr "Τελοιοποιήθηκε"
 
@@ -838,11 +838,11 @@ msgstr "τελείωμα εικονοστοιχείων"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:117
 #: ../Pinta.Core/Actions/ImageActions.cs:221
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:165
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:167
 msgid "Flatten"
 msgstr "Ισοπέδωση"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:161
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr "Εξομαλύνοντας την εικόνα θα συγχωνεύσει όλα τα επίπεδα σε ένα."
 
@@ -932,9 +932,9 @@ msgid "Gradient"
 msgstr "Διαβάθμιση χρώματος"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:446
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:484
 msgid "Green"
 msgstr "Πράσινο"
 
@@ -946,14 +946,14 @@ msgstr "Πλέγμα"
 msgid "Hard Light"
 msgstr "Έντονο φως"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:45
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:91
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:170
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:79
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:111
 msgid "Height:"
 msgstr "Ύψος:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:329
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:366
 msgid "Hex"
 msgstr "Δεκαεξαδικό"
 
@@ -988,11 +988,11 @@ msgstr "Οριζόντιο κόκκινο (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:349
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:386
 msgid "Hue"
 msgstr "Απόχρωση"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:253
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:290
 msgid "Hue & Sat"
 msgstr "Απόχρωση & κορεσμός"
 
@@ -1000,7 +1000,7 @@ msgstr "Απόχρωση & κορεσμός"
 msgid "Hue / Saturation"
 msgstr "Απόχρωση / κορεσμός"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:240
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:246
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
 "Αρχεία ICO δεν μπορούν να είναι μεγαλύτερα από 255 x 255 εικονοστοιχεία."
@@ -1009,7 +1009,7 @@ msgstr ""
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Αν δε γίνει αποθήκευση, οι αλλαγές θα χαθούν οριστικά."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:455
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:459
 msgid "Image"
 msgstr "Εικόνα"
 
@@ -1034,7 +1034,7 @@ msgstr "Αρχεία εικόνων"
 msgid "Image larger than canvas"
 msgstr "Η εικόνα είναι μεγαλύτερη από τον καμβά"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:239
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
 msgid "Image too large"
 msgstr "Η εικόνα είναι πολύ μεγάλη"
 
@@ -1046,7 +1046,7 @@ msgstr "Εισαγωγή από αρχείο"
 msgid "Import from File..."
 msgstr "Εισαγωγή από αρχείο..."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:228
+#: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
 msgstr "Ίντσες"
 
@@ -1058,11 +1058,11 @@ msgstr "Περίγραμμα μελανιού"
 msgid "Ink Sketch"
 msgstr "Σκίτσο μελάνης"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
 msgid "Input"
 msgstr "Είσοδος"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:270
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Input Histogram"
 msgstr "Ιστόγραμμα εισόδου"
 
@@ -1295,13 +1295,13 @@ msgstr ""
 "Αριστερό κλικ για επιλογή κυρίως χρώματος.\n"
 "Δεξί κλικ για επιλογή δευτερεύοντος χρώματος."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:286
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:287
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Αριστερό κλικ για να ορίσετε πρωτεύον χρώμα. Δεξί κλικ για να ορίσετε "
 "δευτερεύον χρώμα."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:282
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:283
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1327,7 +1327,7 @@ msgstr "Μήκος"
 msgid "Levels"
 msgstr "Επίπεδα"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:242
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:243
 msgid "Levels Adjustment"
 msgstr "Ρύθμιση επιπέδων"
 
@@ -1336,7 +1336,7 @@ msgid "License"
 msgstr "Άδεια χρήσης"
 
 #. Translators: This refers to using a light variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:250
+#: ../Pinta.Core/Actions/ViewActions.cs:248
 msgid "Light"
 msgstr "Φωτεινό"
 
@@ -1386,12 +1386,12 @@ msgstr "Φωτεινότητα"
 msgid "Magic Wand Select"
 msgstr "Επιλογή με το Μαγικό ραβδί"
 
-#: ../Pinta/MainWindow.cs:437
+#: ../Pinta/MainWindow.cs:441
 msgid "Main Menu"
 msgstr "Κυρίως μενού"
 
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:115
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:141
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:69
 msgid "Maintain aspect ratio"
 msgstr "Διατήρηση αναλογίας διαστάσεων"
 
@@ -1421,7 +1421,7 @@ msgstr "Συγχώνευση επιπέδου προς τα κάτω"
 msgid "Mode"
 msgstr "Λειτουργία"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:914
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:917
 msgid "Modified"
 msgstr "Τροποποιήθηκε"
 
@@ -1463,7 +1463,7 @@ msgstr "Όνομα:"
 msgid "Nearest Neighbor"
 msgstr "Κοντινότερος γείτονας"
 
-#: ../Pinta.Core/Actions/FileActions.cs:54
+#: ../Pinta.Core/Actions/FileActions.cs:63
 msgid "New"
 msgstr "Νέο"
 
@@ -1472,7 +1472,7 @@ msgstr "Νέο"
 msgid "New Image"
 msgstr "Νέα εικόνα"
 
-#: ../Pinta.Core/Actions/FileActions.cs:58
+#: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "New Screenshot..."
 msgstr "Νέο στιγμιότυπο οθόνης..."
 
@@ -1480,7 +1480,7 @@ msgstr "Νέο στιγμιότυπο οθόνης..."
 msgid "New palette size:"
 msgstr "Νέο μέγεθος παλέττας:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:50
+#: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New..."
 msgstr "Νέο..."
 
@@ -1496,11 +1496,11 @@ msgstr "Θόρυβος"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:262 ../Pinta.Tools/Tools/TextTool.cs:275
+#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:275
 msgid "Normal"
 msgstr "Κανονικό"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:342
+#: ../Pinta.Core/Classes/BaseTool.cs:350
 msgid "Normal Blending"
 msgstr "Κανονική ανάμειξη"
 
@@ -1516,11 +1516,11 @@ msgstr "Κανονικό και περίγραμμα"
 msgid "Number of Cells"
 msgstr "Αριθμός κελιών"
 
-#: ../Pinta/Main.cs:55
+#: ../Pinta/Main.cs:56
 msgid "Number of threads to use for rendering"
 msgstr "Αριθμός νημάτων προς απόδοση"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:165
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "OK"
 msgstr "ΟΚ"
 
@@ -1552,7 +1552,7 @@ msgstr "Ζωγραφική λαδομπογιάς"
 msgid "Opacity:"
 msgstr "Αδιαφάνεια:"
 
-#: ../Pinta.Core/Actions/FileActions.cs:68
+#: ../Pinta.Core/Actions/FileActions.cs:77
 msgid "Open"
 msgstr "Άνοιγμα"
 
@@ -1560,7 +1560,7 @@ msgstr "Άνοιγμα"
 msgid "Open Curve Shape"
 msgstr "Σχήμα ανοικτής καμπύλης"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:345
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:342
 msgid "Open Image"
 msgstr "Άνοιγμα εικόνας"
 
@@ -1569,7 +1569,7 @@ msgstr "Άνοιγμα εικόνας"
 msgid "Open Image File"
 msgstr "Άνοιγμα αρχείου εικόνας"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
 msgid "Open Line/Curve Series"
 msgstr "Άνοιγμα σειράς Γραμμής/Καμπύλης"
 
@@ -1578,7 +1578,7 @@ msgid "Open Palette File"
 msgstr "Άνοιγμα αρχείου παλέτας"
 
 #: ../Pinta.Core/Actions/EditActions.cs:169
-#: ../Pinta.Core/Actions/FileActions.cs:64
+#: ../Pinta.Core/Actions/FileActions.cs:73
 msgid "Open..."
 msgstr "Άνοιγμα..."
 
@@ -1606,7 +1606,7 @@ msgstr "Περίγραμμα άκρων"
 msgid "Outline Object"
 msgstr "Περίγραμμα αντικειμένου"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
 msgstr "Σχήμα περιγράμματος"
@@ -1615,11 +1615,11 @@ msgstr "Σχήμα περιγράμματος"
 msgid "Outline width"
 msgstr "Πάχος περιγράμματος"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
 msgid "Output"
 msgstr "Έξοδος"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 msgid "Output Histogram"
 msgstr "Ιστόγραμμα εξόδου"
 
@@ -1627,7 +1627,7 @@ msgstr "Ιστόγραμμα εξόδου"
 msgid "Overlay"
 msgstr "Επικάλυψη"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:343
+#: ../Pinta.Core/Classes/BaseTool.cs:351
 msgid "Overwrite"
 msgstr "Αντικατάσταση"
 
@@ -1693,15 +1693,15 @@ msgid "Photo"
 msgstr "Φωτογραφία"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:68 ../Pinta/MainWindow.cs:62
+#: ../Pinta/Main.cs:71 ../Pinta/MainWindow.cs:62
 msgid "Pinta"
 msgstr "Επεξεργασία εικόνας Pinta"
 
-#: ../Pinta/AddinSetupService.cs:52
+#: ../Pinta/AddinSetupService.cs:66
 msgid "Pinta Community Addins - Cross-Platform"
 msgstr "Πρόσθετα κοινότητας Pinta - Για κάθε πλατφόρμα"
 
-#: ../Pinta/AddinSetupService.cs:48
+#: ../Pinta/AddinSetupService.cs:62
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Πρόσθετα κοινότητας Pinta - Για συγκεκριμένη πλατφόρμα"
 
@@ -1713,7 +1713,7 @@ msgstr "Επεξεργασία εικόνας Pinta"
 msgid "Pinta Website"
 msgstr "Ιστοσελίδα Pinta"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
 msgid "Pinta does not support saving images in this file format."
 msgstr ""
 "Το Pinta δεν υποστηρίζει δυνατότητα αποθήκευσης σε αυτό το φορμά αρχείου."
@@ -1733,7 +1733,7 @@ msgstr ""
 "δυνατότητα να δημιουργεί απεριόριστα επίπεδα για να οργανώσετε τη "
 "δημιουργικότητά σας."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:445
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:438
 msgid "Pinta supports the following file formats:"
 msgstr "Το Pinta υποστηρίζει τις ακόλουθες μορφές αρχείων:"
 
@@ -1745,7 +1745,7 @@ msgstr "Το Pinta υποστηρίζει τις ακόλουθες μορφές
 msgid "Pixelate"
 msgstr "Εικονοστοιχειοποίηση"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:225
 msgid "Pixels"
 msgstr "Εικονοστοιχεία"
 
@@ -1758,12 +1758,12 @@ msgstr "Πίνα Κολάδα"
 msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:600
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:603
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:806
 msgid "Point Added"
 msgstr "Το σημείο προστέθηκε"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:651
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:654
 msgid "Point Deleted"
 msgstr "Το σημείο διαγράφηκε"
 
@@ -1809,7 +1809,7 @@ msgstr "Προεπισκόπηση"
 msgid "Primary"
 msgstr "Πρωτεύον"
 
-#: ../Pinta.Core/Actions/FileActions.cs:93
+#: ../Pinta.Core/Actions/FileActions.cs:102
 msgid "Print"
 msgstr "Εκτύπωση"
 
@@ -1896,9 +1896,9 @@ msgstr "Ορθογώνιο"
 msgid "Rectangle Select"
 msgstr "Ορθογώνια επιλογή"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:105
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:423
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:462
 msgid "Red"
 msgstr "Κόκκινο"
 
@@ -1957,7 +1957,7 @@ msgstr "Αντικατάσταση"
 msgid "Report Bug..."
 msgstr "Αναφορά σφάλματος..."
 
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:89
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:126
 msgid "Resampling:"
 msgstr "Ανασύνθεση:"
 
@@ -1966,11 +1966,11 @@ msgid "Reseed"
 msgstr "Επανατροφοδότηση"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:259
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
 msgid "Reset"
 msgstr "Επαναφορά"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:155
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:185
 msgid "Reset Color"
 msgstr "Επαναφορά χρώματος"
 
@@ -1978,8 +1978,8 @@ msgstr "Επαναφορά χρώματος"
 msgid "Reset to Default"
 msgstr "Επαναφορά στην προεπιλογή"
 
-#: ../Pinta.Core/Classes/Document.cs:326
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:181
+#: ../Pinta.Core/Classes/Document.cs:327
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:199
 msgid "Resize Canvas"
 msgstr "Αλλαγή μεγέθους καμβά"
 
@@ -1988,7 +1988,7 @@ msgid "Resize Canvas..."
 msgstr "Αλλαγή μεγέθους καμβά..."
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:102
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:139
 msgid "Resize Image"
 msgstr "Αλλαγή μεγέθους εικόνας"
 
@@ -2048,7 +2048,7 @@ msgstr "Περιστροφή 90° αριστερόστροφα"
 msgid "Rotation"
 msgstr "Περιστροφή"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 msgid "Rounded Line Series"
 msgstr "Σειρά στρογγυλεμένων γραμμών"
 
@@ -2060,7 +2060,7 @@ msgstr "Σχήμα στρογγυλεμένης γραμμής"
 msgid "Rounded Rectangle"
 msgstr "Στρογγυλεμένο ορθογώνιο"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:232
+#: ../Pinta.Core/Actions/ViewActions.cs:230
 msgid "Ruler Units"
 msgstr "Μονάδες χάρακα"
 
@@ -2072,11 +2072,11 @@ msgstr "Χάρακες"
 msgid "Sampling"
 msgstr "Δειγματοληψία"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:377
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:418
 msgid "Sat"
 msgstr "Κορεσμός"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:264
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:301
 msgid "Sat & Value"
 msgstr "Κορεσμός & τιμή"
 
@@ -2090,7 +2090,7 @@ msgid "Saturation Percentage"
 msgstr "Ποσοστό κορεσμού"
 
 #: ../Pinta.Core/Actions/EditActions.cs:529
-#: ../Pinta.Core/Actions/FileActions.cs:79
+#: ../Pinta.Core/Actions/FileActions.cs:88
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
 msgstr "Αποθήκευση"
@@ -2100,7 +2100,7 @@ msgid "Save All"
 msgstr "Αποθήκευση όλων"
 
 #: ../Pinta.Core/Actions/EditActions.cs:175
-#: ../Pinta.Core/Actions/FileActions.cs:86
+#: ../Pinta.Core/Actions/FileActions.cs:95
 msgid "Save As..."
 msgstr "Αποθήκευση ως…"
 
@@ -2146,7 +2146,7 @@ msgstr "Σέπια"
 msgid "Set Number of Colors"
 msgstr "Καθορισμός αριθμού χρωμάτων"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:323
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 msgid "Shape Type"
 msgstr "Τύπος Σχήματος"
 
@@ -2160,8 +2160,8 @@ msgstr "Όξυνση"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:227
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
 msgid "Shortcut key"
 msgstr "Πλήκτρο συντόμευσης"
 
@@ -2169,7 +2169,11 @@ msgstr "Πλήκτρο συντόμευσης"
 msgid "Shortcut keys"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:19
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
+msgid "Show Axonometric Grid"
+msgstr ""
+
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
 msgid "Show Grid"
 msgstr "Εμφάνιση πλέγματος"
 
@@ -2177,11 +2181,11 @@ msgstr "Εμφάνιση πλέγματος"
 msgid "Show Layer"
 msgstr "Εμφάνισηη επιπέδου"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:245
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:282
 msgid "Show Value"
 msgstr "Εμφάνιση τιμής"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:244
+#: ../Pinta.Core/Actions/ViewActions.cs:242
 msgid "Show/Hide"
 msgstr "Εμφάνιση/Απόκρυψη"
 
@@ -2203,7 +2207,7 @@ msgstr "Μεμονωμένο εικονοστοιχείο"
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:262
+#: ../Pinta.Tools/Tools/EraserTool.cs:263
 msgid "Smooth"
 msgstr "Ομαλό"
 
@@ -2269,7 +2273,7 @@ msgid "Text Style"
 msgstr "Στυλ κειμένου"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:315
+#: ../Pinta/MainWindow.cs:317
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
@@ -2343,7 +2347,7 @@ msgstr ""
 msgid "Thickness"
 msgstr "Πάχος"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:160
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
 msgid "This format does not support layers. Flatten image?"
 msgstr "Αυτός ο τύπος αρχείου δεν υποστηρίζει επίπεδα. Εξομάλυνση εικόνας;"
 
@@ -2367,7 +2371,7 @@ msgstr "Βοήθημα: Πατήστε με δεξί κλικ για να αφα
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
 #: ../Pinta.Tools/Tools/FloodTool.cs:124
-#: ../Pinta.Tools/Tools/RecolorTool.cs:197
+#: ../Pinta.Tools/Tools/RecolorTool.cs:198
 msgid "Tolerance"
 msgstr "Ανοχή"
 
@@ -2429,7 +2433,7 @@ msgstr "Συστροφή"
 msgid "Two-Row Sierra"
 msgstr "Δίγραμμο Σιέρρα"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:258
+#: ../Pinta.Tools/Tools/EraserTool.cs:259
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
 msgid "Type"
 msgstr "Τύπος"
@@ -2461,12 +2465,12 @@ msgstr "Απενεγκατάσταση..."
 msgid "Union (+) ({0} + Left Click)"
 msgstr "Ένωση (+) ({0} + αριστερό κλικ)"
 
-#: ../Pinta.Core/Classes/Document.cs:101
+#: ../Pinta.Core/Classes/Document.cs:102
 #, csharp-format
 msgid "Unsaved Image {0}"
 msgstr "Μη αποθηκευμένη εικόνα {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:340
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:337
 msgid "Unsupported file format"
 msgstr "Μη υποστηριζόμενη μορφή αρχείου"
 
@@ -2495,7 +2499,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Γίνεται χρήση μερικών εικονιδίων από:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:400
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:440
 msgid "Value"
 msgstr "Τιμή"
 
@@ -2519,7 +2523,7 @@ msgstr "Κάθετο πράσινο (G)"
 msgid "Vertical red (R)"
 msgstr "Κάθετο κόκκινο (R)"
 
-#: ../Pinta/MainWindow.cs:461
+#: ../Pinta/MainWindow.cs:465
 msgid "View"
 msgstr ""
 
@@ -2544,17 +2548,18 @@ msgstr "Θερμότητα"
 msgid "White"
 msgstr "Άσπρο"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:41
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:66
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:76
 #: ../Pinta/Dialogs/NewImageDialog.cs:325
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:83
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:163
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:71
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:108
 msgid "Width:"
 msgstr "Πλάτος:"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:207
-#: ../Pinta.Core/Actions/ViewActions.cs:398
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:377
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:386
+#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:365
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:374
 msgid "Window"
 msgstr "Παράθυρο"
 
@@ -2573,13 +2578,13 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + δεξί κλικ)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:467
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Δεν έχετε πρόσβαση στο '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:247
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:257
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2610,7 +2615,7 @@ msgstr "Σμίκρυνση"
 msgid "Zoom to Selection"
 msgstr "Μεγέθυνση στην επιλογή"
 
-#: ../Pinta/MainWindow.cs:406
+#: ../Pinta/MainWindow.cs:398
 msgid "_Adjustments"
 msgstr "_Προσαρμογές"
 
@@ -2618,7 +2623,7 @@ msgstr "_Προσαρμογές"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:164
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:166
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
 msgstr "_Ακύρωση"
@@ -2627,23 +2632,23 @@ msgstr "_Ακύρωση"
 msgid "_Discard"
 msgstr "_Απόρριψη"
 
-#: ../Pinta/MainWindow.cs:386
+#: ../Pinta/MainWindow.cs:391
 msgid "_Edit"
 msgstr "_Επεξεργασία"
 
-#: ../Pinta/MainWindow.cs:382
+#: ../Pinta/MainWindow.cs:390
 msgid "_File"
 msgstr "_Αρχείο"
 
-#: ../Pinta/MainWindow.cs:422
+#: ../Pinta/MainWindow.cs:403
 msgid "_Help"
 msgstr "_Βοήθεια"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:394
 msgid "_Image"
 msgstr "Ει_κόνα"
 
-#: ../Pinta/MainWindow.cs:400
+#: ../Pinta/MainWindow.cs:396
 msgid "_Layers"
 msgstr "Επίπε_δα"
 
@@ -2658,11 +2663,11 @@ msgstr "_ΟΚ"
 msgid "_Save"
 msgstr "_Αποθήκευση"
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:393
 msgid "_View"
 msgstr "_Προβολή"
 
-#: ../Pinta/MainWindow.cs:418
+#: ../Pinta/MainWindow.cs:402
 msgid "_Window"
 msgstr "Παρά_θυρα"
 
@@ -2674,13 +2679,14 @@ msgstr "από τους συντελεστές της Pinta"
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr "ζωγραφίζω;ζωγραφική;βάφω;βαφή;γραφικά;raster;2d;"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:43
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:47
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:68
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:78
 #: ../Pinta/Dialogs/NewImageDialog.cs:277
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:106
-#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:109
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:84
-#: ../Pinta/Dialogs/ResizeImageDialog.cs:87
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:94
+#: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:121
+#: ../Pinta/Dialogs/ResizeImageDialog.cs:124
 msgid "pixels"
 msgstr "εικονοστοιχεία"
 
@@ -2714,7 +2720,7 @@ msgstr "{0} + αριστερό κλικ για ορισμό αρχής, αρισ
 msgid "{0} copy"
 msgstr "{0} αντιγραφή"
 
-#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:123
+#: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:122
 #, csharp-format
 msgid "{0} image ({1})"
 msgstr "{0} εικόνα ({1})"
@@ -2727,7 +2733,7 @@ msgstr "{0} παλέτα ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:379
+#: ../Pinta.Core/Actions/ViewActions.cs:377
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
