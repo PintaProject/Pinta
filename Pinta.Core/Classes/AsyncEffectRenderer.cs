@@ -146,62 +146,47 @@ internal sealed class AsyncEffectRenderer : IDisposable
 
 		Debug.WriteLine ("AsyncEffectRenderer.Start () Render starting."); // TODO: Show some kind of ID, perhaps the address
 
-		// Start slave render threads.
-		var slaves =
-			Enumerable.Range (0, settings.ThreadCount - 1)
-			.Select (_ => StartRenderThread (RenderNextTile))
+		var tasks =
+			Enumerable.Range (0, settings.ThreadCount)
+			.Select (_ => Task.Run (RenderNextTile, cancellationToken))
 			.ToImmutableArray ();
 
-		// Start the master render thread.
-		Thread master = StartRenderThread (
-			new ThreadStart (RenderNextTile) // Do part of the rendering on the master thread.
-			+ new ThreadStart (CoordinateSlaveThreads));
+		// ---------------
+		// === Methods ===
+		// ---------------
+
+		Task.WhenAll (tasks).ContinueWith (
+			_ => {
+				// Change back to the UI thread to notify of completion.
+				GLib.Functions.TimeoutAdd (
+					0,
+					0,
+					() => {
+						HandleTimerTick ();
+
+						if (timer_tick_id > 0)
+							GLib.Source.Remove (timer_tick_id);
+
+						timer_tick_id = 0;
+
+						CompletionInfo completion = new (
+						WasCanceled: cancellationToken.IsCancellationRequested,
+						Errors: [.. renderExceptions]);
+
+						newCompletionSource.SetResult (completion);
+
+						return false; // don't call the timer again
+					}
+				);
+			},
+			TaskScheduler.Default // Continue on a thread-pool thread to schedule the UI work
+		);
 
 		// Start timer used to periodically fire update events on the UI thread.
 		timer_tick_id = GLib.Functions.TimeoutAdd (
 			0,
 			(uint) settings.UpdateMillis,
 			HandleTimerTick);
-
-		// ---------------
-		// === Methods ===
-		// ---------------
-
-		Thread StartRenderThread (ThreadStart callback)
-		{
-			Thread result = new (callback) { Priority = settings.ThreadPriority };
-			result.Start ();
-			return result;
-		}
-
-		void CoordinateSlaveThreads ()
-		{
-			// Wait for slave threads to complete.
-			foreach (var slave in slaves)
-				slave.Join ();
-
-			// Change back to the UI thread to notify of completion.
-			GLib.Functions.TimeoutAdd (
-				0,
-				0,
-				() => {
-					HandleTimerTick ();
-
-					if (timer_tick_id > 0)
-						GLib.Source.Remove (timer_tick_id);
-
-					timer_tick_id = 0;
-
-					CompletionInfo completion = new (
-						WasCanceled: cancellationToken.IsCancellationRequested,
-						Errors: [.. renderExceptions]);
-
-					newCompletionSource.SetResult (completion);
-
-					return false; // don't call the timer again
-				}
-			);
-		}
 
 		// Runs on a background thread.
 		void RenderNextTile ()
