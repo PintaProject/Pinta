@@ -102,6 +102,10 @@ public sealed class WindowActions
 			CloseAll]);
 
 		app.AddAction (active_doc_action);
+
+		// Assign accelerators up to Alt-9 for the active documents.
+		for (int i = 0; i < 9; ++i)
+			app.SetAccelsForAction (BuildActionId (i), [$"<Alt>{i + 1}"]);
 	}
 
 	public void SetActiveDocument (Document doc)
@@ -113,16 +117,14 @@ public sealed class WindowActions
 	private void AddDocumentMenuItem (int idx)
 	{
 		Document doc = workspace.OpenDocuments[idx];
-		string action_id = $"app.{doc_action_id}({idx})";
-		string label = $"{doc.DisplayName}{(doc.IsDirty ? '*' : string.Empty)}";
-		Gio.MenuItem menu_item = Gio.MenuItem.New (label, action_id);
+		string actionId = BuildActionId (idx);
+		string label = $"{doc.DisplayName}{(doc.IsDirty ? "*" : string.Empty)}";
 
-		doc_section.AppendItem (menu_item);
-
-		// We only assign accelerators up to Alt-9
-		if (idx < 9)
-			chrome.Application.SetAccelsForAction (action_id, [$"<Alt>{idx + 1}"]);
+		Gio.MenuItem menuItem = Gio.MenuItem.New (label, actionId);
+		doc_section.AppendItem (menuItem);
 	}
+
+	private static string BuildActionId (int idx) => $"app.{doc_action_id}({idx})";
 
 	private void RebuildDocumentMenu ()
 	{
