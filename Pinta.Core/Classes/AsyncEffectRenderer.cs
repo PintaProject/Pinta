@@ -197,7 +197,7 @@ internal sealed class AsyncEffectRenderer : IDisposable
 					// NRT - These are set in Start () before getting here
 					if (!cancellationToken.IsCancellationRequested) {
 						dest.Flush ();
-						effectClone.Render (source, dest, stackalloc[] { tileBounds });
+						effectClone.Render (source, dest, [tileBounds]);
 						dest.MarkDirty (tileBounds);
 					}
 				} catch (Exception ex) {
