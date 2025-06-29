@@ -31,7 +31,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -110,7 +109,7 @@ internal sealed class AsyncEffectRenderer : IDisposable
 		}
 	}
 
-	internal void Start (
+	internal async void Start (
 		BaseEffect effect,
 		Cairo.ImageSurface source,
 		Cairo.ImageSurface dest)
@@ -145,38 +144,30 @@ internal sealed class AsyncEffectRenderer : IDisposable
 
 		var tasks =
 			Enumerable.Range (0, settings.ThreadCount)
-			.Select (_ => Task.Run (RenderNextTile, cancellationToken))
-			.ToImmutableArray ();
+			.Select (_ => Task.Run (RenderNextTile, cancellationToken));
 
-		// ---------------
-		// === Methods ===
-		// ---------------
+		await Task.WhenAll (tasks);
 
-		Task.WhenAll (tasks).ContinueWith (
-			_ => {
-				// Change back to the UI thread to notify of completion.
-				GLib.Functions.TimeoutAdd (
-					0,
-					0,
-					() => {
-						HandleTimerTick ();
+		// Change back to the UI thread to notify of completion.
+		GLib.Functions.TimeoutAdd (
+			0,
+			0,
+			() => {
+				HandleTimerTick ();
 
-						if (timer_tick_id > 0)
-							GLib.Source.Remove (timer_tick_id);
+				if (timer_tick_id > 0)
+					GLib.Source.Remove (timer_tick_id);
 
-						timer_tick_id = 0;
+				timer_tick_id = 0;
 
-						CompletionInfo completion = new (
-						WasCanceled: cancellationToken.IsCancellationRequested,
-						Errors: [.. renderExceptions]);
+				CompletionInfo completion = new (
+				WasCanceled: cancellationToken.IsCancellationRequested,
+				Errors: [.. renderExceptions]);
 
-						newCompletionSource.SetResult (completion);
+				newCompletionSource.SetResult (completion);
 
-						return false; // don't call the timer again
-					}
-				);
-			},
-			TaskScheduler.Default // Continue on a thread-pool thread to schedule the UI work
+				return false; // don't call the timer again
+			}
 		);
 
 		// Start timer used to periodically fire update events on the UI thread.
@@ -184,6 +175,10 @@ internal sealed class AsyncEffectRenderer : IDisposable
 			0,
 			(uint) settings.UpdateMillis,
 			HandleTimerTick);
+
+		// ---------------
+		// === Methods ===
+		// ---------------
 
 		// Runs on a background thread.
 		void RenderNextTile ()
