@@ -35,12 +35,8 @@ public sealed class WindowActions
 	public Command SaveAll { get; }
 	public Command CloseAll { get; }
 
-	private readonly ChromeManager chrome;
 	private readonly WorkspaceManager workspace;
-	public WindowActions (
-		ChromeManager chrome,
-		ToolManager tools,
-		WorkspaceManager workspace)
+	public WindowActions (WorkspaceManager workspace)
 	{
 		SaveAll = new Command ("SaveAll", Translations.GetString ("Save All"), null, Resources.StandardIcons.DocumentSave);
 		CloseAll = new Command ("CloseAll", Translations.GetString ("Close All"), null, Resources.StandardIcons.WindowClose);
@@ -48,16 +44,8 @@ public sealed class WindowActions
 		active_doc_action = Gio.SimpleAction.NewStateful (doc_action_id, GtkExtensions.IntVariantType, GLib.Variant.NewInt32 (-1));
 
 		active_doc_action.OnActivate += (o, e) => {
-
-			var idx = e.Parameter!.GetInt32 ();
-
-			if (idx >= workspace.OpenDocuments.Count)
-				return;
-
-			workspace.SetActiveDocumentInternal (
-				tools,
-				workspace.OpenDocuments[idx]);
-
+			int idx = e.Parameter!.GetInt32 ();
+			workspace.SetActiveDocument (idx);
 			active_doc_action.ChangeState (e.Parameter);
 		};
 
@@ -66,9 +54,11 @@ public sealed class WindowActions
 			e.Document.IsDirtyChanged += (_, _) => RebuildDocumentMenu ();
 			AddDocumentMenuItem (workspace.OpenDocuments.IndexOf (e.Document));
 		};
+		workspace.ActiveDocumentChanged += (_, _) => {
+			active_doc_action.ChangeState (GLib.Variant.NewInt32 (workspace.ActiveDocumentIndex));
+		};
 		workspace.DocumentClosed += (_, _) => RebuildDocumentMenu ();
 
-		this.chrome = chrome;
 		this.workspace = workspace;
 	}
 
@@ -90,12 +80,6 @@ public sealed class WindowActions
 		// Assign accelerators up to Alt-9 for the active documents.
 		for (int i = 0; i < 9; ++i)
 			app.SetAccelsForAction (BuildActionId (i), [$"<Alt>{i + 1}"]);
-	}
-
-	public void SetActiveDocument (Document doc)
-	{
-		int idx = workspace.OpenDocuments.IndexOf (doc);
-		active_doc_action.Activate (GLib.Variant.NewInt32 (idx));
 	}
 
 	private void AddDocumentMenuItem (int idx)
