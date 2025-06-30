@@ -105,11 +105,9 @@ public static class WorkspaceServiceExtensions
 		workspace.ActiveDocument.ResizeCanvas (newSize, anchor, compoundAction);
 	}
 
-	public static void CloseActiveDocument (
-		this WorkspaceManager workspace,
-		ActionManager actions)
+	public static void CloseActiveDocument (this WorkspaceManager workspace)
 	{
-		workspace.CloseDocument (actions, workspace.ActiveDocument);
+		workspace.CloseDocument (workspace.ActiveDocument);
 	}
 
 	public static RectangleI ClampToImageSize (
@@ -121,13 +119,12 @@ public static class WorkspaceServiceExtensions
 
 	public static Document NewDocument (
 		this WorkspaceManager workspace,
-		ActionManager actions,
 		Size imageSize,
 		Color backgroundColor)
 	{
 		Document doc = new (PintaCore.Actions, PintaCore.Tools, PintaCore.Workspace, imageSize);
 		doc.Workspace.ViewSize = imageSize;
-		workspace.ActivateDocument (doc, actions);
+		workspace.ActivateDocument (doc);
 
 		// Start with an empty white layer
 		Layer background = doc.Layers.AddNewLayer (Translations.GetString ("Background"));
@@ -202,11 +199,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	private readonly List<Document> open_documents;
 	public ReadOnlyCollection<Document> OpenDocuments { get; }
-	public bool HasOpenDocuments => open_documents.Count > 0;
+	public bool HasOpenDocuments => active_document_index >= 0;
 
-	public void ActivateDocument (
-		Document document,
-		ActionManager actions)
+	public void ActivateDocument (Document document)
 	{
 		document.Layers.LayerAdded += Document_LayerAdded;
 		document.Layers.LayerRemoved += Document_LayerRemoved;
@@ -217,7 +212,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		OnDocumentActivated (new DocumentEventArgs (document));
 
-		actions.Window.SetActiveDocument (document);
+		SetActiveDocument (open_documents.Count - 1);
 	}
 
 	private void Document_LayerPropertyChanged (object? sender, PropertyChangedEventArgs e)
@@ -241,28 +236,27 @@ public sealed class WorkspaceManager : IWorkspaceService
 		LayerAdded?.Invoke (sender, e);
 	}
 
-	public void CloseDocument (
-		ActionManager actions,
-		Document document)
+	public void CloseDocument (Document document)
 	{
 		int index = open_documents.IndexOf (document);
 
 		if (index == -1)
 			throw new ArgumentException ("Document was not found in workspace. Did you forget to activate it?", nameof (document));
 
-		open_documents.Remove (document);
-
 		if (index == active_document_index) {
+			PreActiveDocumentChanged?.Invoke (this, EventArgs.Empty);
+			open_documents.Remove (document);
+
 			// If there's other documents open, switch to one of them
-			if (HasOpenDocuments) {
-				if (index > 0)
-					SetActiveDocument (actions, index - 1);
-				else
-					SetActiveDocument (actions, index);
+			if (open_documents.Count > 0) {
+				active_document_index = Math.Max (0, index - 1);
 			} else {
 				active_document_index = -1;
-				OnActiveDocumentChanged (EventArgs.Empty);
 			}
+
+			OnActiveDocumentChanged (EventArgs.Empty);
+		} else {
+			open_documents.Remove (document);
 		}
 
 		document.Layers.LayerAdded -= Document_LayerAdded;
@@ -278,10 +272,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 	/// Creates a new Document with a specified image as content.
 	/// Primarily used for Paste Into New Image.
 	/// </summary>
-	public Document NewDocumentFromImage (ActionManager actions, ImageSurface image)
+	public Document NewDocumentFromImage (ImageSurface image)
 	{
 		Document doc = this.NewDocument (
-			actions,
 			new Size (image.Width, image.Height),
 			new Color (0, 0, 0, 0));
 
@@ -309,7 +302,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 			IImageImporter? importer = image_formats.GetImporterByFile (file.GetDisplayName ());
 			if (importer is not null) {
 				Document imported = importer.Import (file);
-				ActivateDocument (imported, PintaCore.Actions);
+				ActivateDocument (imported);
 			} else {
 				// Unknown extension, so try every loader.
 				StringBuilder errors = new ();
@@ -317,7 +310,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 				foreach (var format in image_formats.Formats.Where (f => f.IsImportAvailable ())) {
 					try {
 						Document imported = format.Importer!.Import (file);
-						ActivateDocument (imported, PintaCore.Actions);
+						ActivateDocument (imported);
 						loaded = true;
 						break;
 					} catch (UnauthorizedAccessException) {
@@ -364,7 +357,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 			chrome_manager.MainWindow.Title = "Pinta";
 	}
 
-	public void SetActiveDocument (ActionManager actions, int index)
+	public void SetActiveDocument (int index)
 	{
 		if (index >= open_documents.Count)
 			throw new ArgumentOutOfRangeException (
@@ -377,17 +370,11 @@ public sealed class WorkspaceManager : IWorkspaceService
 				$"Tried to {nameof (WorkspaceManager)}.{nameof (SetActiveDocument)} less that zero."
 			);
 
-		actions.Window.SetActiveDocument (open_documents[index]);
-	}
+		if (index == active_document_index)
+			return;
 
-	internal void SetActiveDocumentInternal (ToolManager tools, Document document)
-	{
-		// Work around a case where we closed a document but haven't updated
-		// the active_document_index yet and it points to the closed document
-		if (HasOpenDocuments && active_document_index != -1 && open_documents.Count > active_document_index)
-			tools.Commit ();
+		PreActiveDocumentChanged?.Invoke (this, EventArgs.Empty);
 
-		int index = open_documents.IndexOf (document);
 		active_document_index = index;
 
 		OnActiveDocumentChanged (EventArgs.Empty);
@@ -470,6 +457,14 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public event EventHandler<DocumentEventArgs>? DocumentActivated;
 	public event EventHandler<DocumentEventArgs>? DocumentClosed;
 
+	/// <summary>
+	/// Emitted before the active document has changed.
+	/// This can be used to e.g. have tools commit actions before switching documents.
+	/// </summary>
+	public event EventHandler? PreActiveDocumentChanged;
+	/// <summary>
+	/// Emitted after the active document has changed.
+	/// </summary>
 	public event EventHandler? ActiveDocumentChanged;
 	public event EventHandler? SelectionChanged;
 }
