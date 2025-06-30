@@ -67,11 +67,10 @@ public sealed class TwistEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
 	{
-		PointF t1 = new (
-			X: pixel.coordinates.X - (settings.HalfWidth + settings.RenderBounds.Left),
-			Y: pixel.coordinates.Y - (settings.HalfHeight + settings.RenderBounds.Top));
+		float j = pixel.coordinates.Y - (settings.HalfHeight + settings.RenderBounds.Top);
+		float i = pixel.coordinates.X - (settings.HalfWidth + settings.RenderBounds.Left);
 
-		if (Utility.MagnitudeSquared (t1) > (settings.Maxrad + 1) * (settings.Maxrad + 1))
+		if (i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
 			return sourceData[pixel.memoryOffset];
 
 		int b = 0;
@@ -83,10 +82,11 @@ public sealed class TwistEffect : BaseEffect
 
 		for (int p = 0; p < antialiasSamples; ++p) {
 
-			PointF t2 = t1 + settings.AntialiasPoints[p].ToFloat ();
+			float u = i + (float) settings.AntialiasPoints[p].X;
+			float v = j + (float) settings.AntialiasPoints[p].Y;
 
-			double radialDistance = Utility.Magnitude (t2);
-			double originalTheta = Math.Atan2 (t2.Y, t2.X);
+			double radialDistance = Math.Sqrt (u * u + v * v);
+			double originalTheta = Math.Atan2 (v, u);
 			double radialFactor = 1 - radialDistance / settings.Maxrad;
 			double twistAmount = (radialFactor < 0) ? 0 : (radialFactor * radialFactor * radialFactor);
 			double twistedTheta = originalTheta + (twistAmount * settings.Twist / 100);
