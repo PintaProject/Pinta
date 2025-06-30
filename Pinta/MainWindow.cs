@@ -147,10 +147,11 @@ internal sealed class MainWindow
 	{
 		var view = (DocumentViewContent) e.Item;
 
-		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) < 0)
+		int index = PintaCore.Workspace.OpenDocuments.IndexOf (view.Document);
+		if (index < 0)
 			return;
 
-		PintaCore.Actions.Window.SetActiveDocument (view.Document);
+		PintaCore.Workspace.SetActiveDocument (index);
 		PintaCore.Actions.File.Close.Activate ();
 
 		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) < 0)
@@ -169,7 +170,8 @@ internal sealed class MainWindow
 
 		var view = (DocumentViewContent) item;
 
-		PintaCore.Actions.Window.SetActiveDocument (view.Document);
+		int index = PintaCore.Workspace.OpenDocuments.IndexOf (view.Document);
+		PintaCore.Workspace.SetActiveDocument (index);
 		((CanvasWindow) view.Widget).Canvas.Cursor = PintaCore.Tools.CurrentTool?.CurrentCursor;
 	}
 
