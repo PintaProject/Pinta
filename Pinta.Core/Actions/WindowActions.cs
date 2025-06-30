@@ -31,6 +31,7 @@ public sealed class WindowActions
 	private Gio.Menu doc_section = null!; // NRT - Set in RegisterActions
 	private static readonly string doc_action_id = "active_document";
 	private readonly Gio.SimpleAction active_doc_action;
+	private uint deferred_update_event;
 
 	public Command SaveAll { get; }
 	public Command CloseAll { get; }
@@ -54,9 +55,8 @@ public sealed class WindowActions
 			e.Document.IsDirtyChanged += (_, _) => RebuildDocumentMenu ();
 			AddDocumentMenuItem (workspace.OpenDocuments.IndexOf (e.Document));
 		};
-		workspace.ActiveDocumentChanged += (_, _) => {
-			active_doc_action.ChangeState (GLib.Variant.NewInt32 (workspace.ActiveDocumentIndex));
-		};
+
+		workspace.ActiveDocumentChanged += OnActiveDocumentChanged;
 		workspace.DocumentClosed += (_, _) => RebuildDocumentMenu ();
 
 		this.workspace = workspace;
@@ -102,5 +102,19 @@ public sealed class WindowActions
 			AddDocumentMenuItem (i);
 
 		workspace.ResetTitle ();
+	}
+
+	private void OnActiveDocumentChanged (object? o, System.EventArgs eventArgs)
+	{
+		// Updating the action's state can be surprisingly expensive when e.g. opening
+		// many documents (bug #1574), so an update is deferred until we return to the event loop.
+		if (deferred_update_event > 0)
+			return;
+
+		deferred_update_event = GLib.Functions.IdleAdd (GLib.Constants.PRIORITY_DEFAULT, () => {
+			active_doc_action.ChangeState (GLib.Variant.NewInt32 (workspace.ActiveDocumentIndex));
+			deferred_update_event = 0;
+			return false;
+		});
 	}
 }
