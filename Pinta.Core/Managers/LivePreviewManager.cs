@@ -224,7 +224,7 @@ public sealed class LivePreviewManager : ILivePreview
 
 			chrome.ProgressDialog.Progress = renderer.Progress;
 
-			if (!renderer.TryGetAndResetUpdatedBounds (out RectangleI updatedBounds))
+			if (!renderer.TryConsumeBounds (out RectangleI updatedBounds))
 				return;
 
 			double scale = workspace.Scale;

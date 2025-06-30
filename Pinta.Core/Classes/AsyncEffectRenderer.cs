@@ -110,7 +110,7 @@ internal sealed class AsyncEffectRenderer
 	/// <returns>
 	/// True if there was an updated area to retrieve, otherwise false.
 	/// </returns>
-	internal bool TryGetAndResetUpdatedBounds (out RectangleI bounds)
+	internal bool TryConsumeBounds (out RectangleI bounds)
 	{
 		lock (updated_lock) {
 			if (!is_updated) {
