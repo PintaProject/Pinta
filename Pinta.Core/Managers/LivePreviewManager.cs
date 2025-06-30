@@ -110,6 +110,8 @@ public sealed class LivePreviewManager : ILivePreview
 		dialog.Progress = renderer.Progress;
 		dialog.Canceled += HandleProgressDialogCancel;
 
+		bool renderAlive = true;
+
 		try {
 			// Paint the pre-effect layer surface into into the working surface.
 			using Cairo.Context ctx = new (LivePreviewSurface);
@@ -129,7 +131,7 @@ public sealed class LivePreviewManager : ILivePreview
 				0,
 				UPDATE_MILLISECONDS,
 				() => {
-					if (!IsEnabled) return false;
+					if (!renderAlive) return false;
 					PollForUpdate (renderer);
 					return true; // Keep ticking as long as the effect is active.
 				}
@@ -194,6 +196,8 @@ public sealed class LivePreviewManager : ILivePreview
 			dialog.Canceled -= HandleProgressDialogCancel;
 
 			dialog.Hide ();
+
+			renderAlive = false;
 		}
 
 		// === Methods ===
