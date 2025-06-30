@@ -94,7 +94,7 @@ public sealed class BulgeEffect : BaseEffect
 			X: pixel.coordinates.X - settings.halfWidth,
 			Y: pixel.coordinates.Y - settings.halfHeight);
 
-		float r = Utility.Magnitude (translated);
+		float r = Utility.MagnitudeF (translated);
 		float rscale1 = (1f - (r / settings.maxRadius));
 
 		if (rscale1 <= 0)
