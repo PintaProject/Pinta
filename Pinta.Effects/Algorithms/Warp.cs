@@ -9,9 +9,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using Cairo;
-using GLib.Internal;
 using Pinta.Core;
 
 namespace Pinta.Effects;
@@ -85,8 +83,8 @@ public static class Warp
 			TransformData td = transformInverter (settings, initialTd);
 
 			PointF preliminarySample = new (
-				x: (float) (td.X + settings.centerOffset.X),
-				y: (float) (td.Y + settings.centerOffset.Y));
+				X: (float) (td.X + settings.centerOffset.X),
+				Y: (float) (td.Y + settings.centerOffset.Y));
 
 			samples[sampleCount] = GetSample (
 				settings,
