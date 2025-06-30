@@ -90,10 +90,11 @@ public sealed class BulgeEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
 	{
-		float v = pixel.coordinates.Y - settings.halfHeight;
-		float u = pixel.coordinates.X - settings.halfWidth;
+		PointF translated = new (
+			X: pixel.coordinates.X - settings.halfWidth,
+			Y: pixel.coordinates.Y - settings.halfHeight);
 
-		float r = Mathematics.Magnitude (u, v);
+		float r = Utility.Magnitude (translated);
 		float rscale1 = (1f - (r / settings.maxRadius));
 
 		if (rscale1 <= 0)
@@ -101,15 +102,14 @@ public sealed class BulgeEffect : BaseEffect
 
 		float rscale2 = 1 - settings.amount * rscale1 * rscale1;
 
-		float xp = u * rscale2;
-		float yp = v * rscale2;
+		PointF p = translated.Scaled (rscale2);
 
 		return source.GetBilinearSampleClamped (
 			sourceData,
 			settings.sourceWidth,
 			settings.sourceHeight,
-			xp + settings.halfWidth,
-			yp + settings.halfHeight);
+			p.X + settings.halfWidth,
+			p.Y + settings.halfHeight);
 	}
 
 	public sealed class BulgeData : EffectData
