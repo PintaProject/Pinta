@@ -2,17 +2,23 @@ using System;
 
 namespace Pinta.Core;
 
-public readonly struct RadiansAngle
+public interface IAngle<TAngle> where TAngle : IAngle<TAngle>
 {
-	public const double MAX_RADIANS = Math.PI * 2;
-	public readonly double Radians { get; }
+	static abstract double FullTurn { get; }
+	static abstract bool operator == (TAngle a, TAngle b);
+	static abstract bool operator != (TAngle a, TAngle b);
+}
 
+public readonly struct RadiansAngle : IAngle<RadiansAngle>
+{
+	public static double FullTurn => Math.PI * 2;
+	public readonly double Radians { get; }
 	public RadiansAngle (double radians)
 	{
 		Radians = radians switch {
 			0 => 0,
-			>= 0 => radians % MAX_RADIANS,
-			_ => (MAX_RADIANS + (radians % MAX_RADIANS)) % MAX_RADIANS
+			>= 0 => radians % FullTurn,
+			_ => (FullTurn + (radians % FullTurn)) % FullTurn
 		};
 	}
 
@@ -26,8 +32,6 @@ public readonly struct RadiansAngle
 	public static RadiansAngle operator - (RadiansAngle a, RadiansAngle b) => new (a.Radians - b.Radians);
 	public static bool operator == (RadiansAngle a, RadiansAngle b) => a.Equals (b);
 	public static bool operator != (RadiansAngle a, RadiansAngle b) => !a.Equals (b);
-	public static bool operator > (RadiansAngle a, RadiansAngle b) => a.Radians > b.Radians;
-	public static bool operator < (RadiansAngle a, RadiansAngle b) => a.Radians < b.Radians;
 	public override readonly int GetHashCode () => Radians.GetHashCode ();
 	public override readonly bool Equals (object? obj)
 	{
@@ -36,17 +40,16 @@ public readonly struct RadiansAngle
 	}
 }
 
-public readonly struct DegreesAngle
+public readonly struct DegreesAngle : IAngle<DegreesAngle>
 {
-	public const double MAX_DEGREES = 360;
+	public static double FullTurn => 360;
 	public readonly double Degrees { get; }
-
 	public DegreesAngle (double degrees)
 	{
 		Degrees = degrees switch {
 			0 => 0,
-			>= 0 => degrees % MAX_DEGREES,
-			_ => (MAX_DEGREES + (degrees % MAX_DEGREES)) % MAX_DEGREES
+			>= 0 => degrees % FullTurn,
+			_ => (FullTurn + (degrees % FullTurn)) % FullTurn
 		};
 	}
 
@@ -60,8 +63,6 @@ public readonly struct DegreesAngle
 	public static DegreesAngle operator - (DegreesAngle a, DegreesAngle b) => new (a.Degrees - b.Degrees);
 	public static bool operator == (DegreesAngle a, DegreesAngle b) => a.Equals (b);
 	public static bool operator != (DegreesAngle a, DegreesAngle b) => !a.Equals (b);
-	public static bool operator > (DegreesAngle a, DegreesAngle b) => a.Degrees > b.Degrees;
-	public static bool operator < (DegreesAngle a, DegreesAngle b) => a.Degrees < b.Degrees;
 	public override readonly int GetHashCode () => Degrees.GetHashCode ();
 	public override readonly bool Equals (object? obj)
 	{
@@ -70,17 +71,16 @@ public readonly struct DegreesAngle
 	}
 }
 
-public readonly struct RevolutionsAngle
+public readonly struct RevolutionsAngle : IAngle<RevolutionsAngle>
 {
-	public const double MAX_REVOLUTIONS = 1;
+	public static double FullTurn => 1;
 	public readonly double Revolutions { get; }
-
 	public RevolutionsAngle (double revolutions)
 	{
 		Revolutions = revolutions switch {
 			0 => 0,
-			>= 0 => revolutions % MAX_REVOLUTIONS,
-			_ => (MAX_REVOLUTIONS + (revolutions % MAX_REVOLUTIONS)) % MAX_REVOLUTIONS
+			>= 0 => revolutions % FullTurn,
+			_ => (FullTurn + (revolutions % FullTurn)) % FullTurn
 		};
 	}
 
@@ -94,8 +94,6 @@ public readonly struct RevolutionsAngle
 	public static RevolutionsAngle operator - (RevolutionsAngle a, RevolutionsAngle b) => new (a.Revolutions - b.Revolutions);
 	public static bool operator == (RevolutionsAngle a, RevolutionsAngle b) => a.Revolutions == b.Revolutions;
 	public static bool operator != (RevolutionsAngle a, RevolutionsAngle b) => a.Revolutions != b.Revolutions;
-	public static bool operator > (RevolutionsAngle a, RevolutionsAngle b) => a.Revolutions > b.Revolutions;
-	public static bool operator < (RevolutionsAngle a, RevolutionsAngle b) => a.Revolutions < b.Revolutions;
 	public override readonly int GetHashCode () => Revolutions.GetHashCode ();
 	public override readonly bool Equals (object? obj)
 	{

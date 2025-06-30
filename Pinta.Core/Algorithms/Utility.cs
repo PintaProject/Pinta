@@ -418,8 +418,8 @@ public static class Utility
 	{
 		ArgumentOutOfRangeException.ThrowIfLessThan (steps, 1);
 
-		const double FULL_TURN = RadiansAngle.MAX_RADIANS;
-		double stepAngle = FULL_TURN / steps;
+		double fullTurn = RadiansAngle.FullTurn;
+		double stepAngle = fullTurn / steps;
 		double sector = Math.Round (angle.Radians / stepAngle) * stepAngle;
 
 		return new (sector);
