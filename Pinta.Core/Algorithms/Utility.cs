@@ -29,6 +29,9 @@ public static class Utility
 	public static double MagnitudeSquared (PointD p)
 		=> Mathematics.MagnitudeSquared (p.X, p.Y);
 
+	public static float MagnitudeSquared (PointF p)
+		=> Mathematics.MagnitudeSquared (p.X, p.Y);
+
 	public static float Magnitude (this PointF point)
 		=> Mathematics.Magnitude (point.X, point.Y);
 

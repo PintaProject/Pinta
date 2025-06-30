@@ -87,6 +87,7 @@ public readonly record struct PointD (double X, double Y)
 	public override readonly string ToString () => $"{X}, {Y}";
 
 	public readonly PointI ToInt () => new ((int) X, (int) Y);
+	public readonly PointF ToFloat () => new ((float) X, (float) Y);
 
 	/// <summary>
 	/// Returns a new point, rounded to the nearest integer coordinates.
