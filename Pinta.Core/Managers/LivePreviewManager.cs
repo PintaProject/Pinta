@@ -125,17 +125,15 @@ public sealed class LivePreviewManager : ILivePreview
 				layer.Surface,
 				LivePreviewSurface);
 
-			updateTimerId = GLib.Functions.TimeoutAdd (0, UPDATE_MILLISECONDS, () => {
-
-				PollForUpdate (renderer);
-
-				if (!renderer.IsRendering) {
-					updateTimerId = 0;
-					return false; // Stop ticking
+			updateTimerId = GLib.Functions.TimeoutAdd (
+				0,
+				UPDATE_MILLISECONDS,
+				() => {
+					if (!IsEnabled) return false;
+					PollForUpdate (renderer);
+					return true; // Keep ticking as long as the effect is active.
 				}
-
-				return true; // Keep ticking
-			});
+			);
 
 			bool userConfirmed = !effect.IsConfigurable || await effect.LaunchConfiguration ();
 
@@ -185,10 +183,8 @@ public sealed class LivePreviewManager : ILivePreview
 			LivePreviewSurface = null!;
 			workspace.Invalidate ();
 
-			if (updateTimerId > 0) {
+			if (updateTimerId > 0)
 				GLib.Source.Remove (updateTimerId);
-				updateTimerId = 0;
-			}
 
 			if (effect.EffectData != null)
 				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
