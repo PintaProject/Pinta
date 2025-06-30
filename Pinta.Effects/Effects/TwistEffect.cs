@@ -82,6 +82,7 @@ public sealed class TwistEffect : BaseEffect
 
 		for (int p = 0; p < antialiasSamples; ++p) {
 
+			PointF t2 = settings.AntialiasPoints[p].ToFloat ();
 			float u = i + (float) settings.AntialiasPoints[p].X;
 			float v = j + (float) settings.AntialiasPoints[p].Y;
 
