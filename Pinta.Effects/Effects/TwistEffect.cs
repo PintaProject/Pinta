@@ -71,7 +71,7 @@ public sealed class TwistEffect : BaseEffect
 			X: pixel.coordinates.X - (settings.HalfWidth + settings.RenderBounds.Left),
 			Y: pixel.coordinates.Y - (settings.HalfHeight + settings.RenderBounds.Top));
 
-		if (i * i + j * j > (settings.Maxrad + 1) * (settings.Maxrad + 1))
+		if (Utility.MagnitudeSquared (t1) > (settings.Maxrad + 1) * (settings.Maxrad + 1))
 			return sourceData[pixel.memoryOffset];
 
 		int b = 0;
@@ -85,8 +85,8 @@ public sealed class TwistEffect : BaseEffect
 
 			PointF t2 = t1 + settings.AntialiasPoints[p].ToFloat ();
 
-			double radialDistance = Math.Sqrt (u * u + v * v);
-			double originalTheta = Math.Atan2 (v, u);
+			double radialDistance = Utility.Magnitude (t2);
+			double originalTheta = Math.Atan2 (t2.Y, t2.X);
 			double radialFactor = 1 - radialDistance / settings.Maxrad;
 			double twistAmount = (radialFactor < 0) ? 0 : (radialFactor * radialFactor * radialFactor);
 			double twistedTheta = originalTheta + (twistAmount * settings.Twist / 100);
