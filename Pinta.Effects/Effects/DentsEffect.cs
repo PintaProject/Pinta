@@ -110,7 +110,7 @@ public sealed class DentsEffect : BaseEffect
 
 		double scaleR = 400.0 / settings.defaultRadius / dentsData.Scale;
 		double refractionScale = dentsData.Refraction / 100.0 / scaleR;
-		double theta = RadiansAngle.MAX_RADIANS * turbulence / 10.0;
+		double theta = RadiansAngle.FullTurn * turbulence / 10.0;
 		double effectiveRoughness = roughness / 100.0;
 
 		// We don't want the perlin noise frequency components exceeding the nyquist limit, so we will limit 'detail' appropriately

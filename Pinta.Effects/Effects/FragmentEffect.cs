@@ -55,8 +55,8 @@ public sealed class FragmentEffect : BaseEffect
 		RadiansAngle rotation,
 		int distance)
 	{
-		RadiansAngle pointStep = new (RadiansAngle.MAX_RADIANS / fragments);
-		RadiansAngle adjustedRotation = rotation - new RadiansAngle (RadiansAngle.MAX_RADIANS / 4);
+		RadiansAngle pointStep = new (RadiansAngle.FullTurn / fragments);
+		RadiansAngle adjustedRotation = rotation - new RadiansAngle (RadiansAngle.FullTurn / 4);
 		var pointOffsets = ImmutableArray.CreateBuilder<PointI> (fragments);
 		pointOffsets.Count = fragments;
 		for (int i = 0; i < fragments; i++) {
