@@ -12,7 +12,14 @@ public interface IAngle<TAngle> where TAngle : IAngle<TAngle>
 public readonly struct RadiansAngle : IAngle<RadiansAngle>
 {
 	public static double FullTurn => Math.PI * 2;
+
+	/// <remarks>The value can only be in the range [0, <see cref="FullTurn" />)</remarks>
 	public readonly double Radians { get; }
+
+	/// <remarks>
+	/// <paramref name="radians"/> is wrapped around to be within the allowable
+	/// range of the <see cref="Radians"/> property
+	/// </remarks>
 	public RadiansAngle (double radians)
 	{
 		Radians = radians switch {
@@ -43,7 +50,15 @@ public readonly struct RadiansAngle : IAngle<RadiansAngle>
 public readonly struct DegreesAngle : IAngle<DegreesAngle>
 {
 	public static double FullTurn => 360;
+
+
+	/// <remarks>The value can only be in the range [0, <see cref="FullTurn" />)</remarks>
 	public readonly double Degrees { get; }
+
+	/// <remarks>
+	/// <paramref name="degrees"/> is wrapped around to be within the allowable
+	/// range of the <see cref="Degrees"/> property
+	/// </remarks>
 	public DegreesAngle (double degrees)
 	{
 		Degrees = degrees switch {
@@ -74,7 +89,14 @@ public readonly struct DegreesAngle : IAngle<DegreesAngle>
 public readonly struct RevolutionsAngle : IAngle<RevolutionsAngle>
 {
 	public static double FullTurn => 1;
+
+	/// <remarks>The value can only be in the range [0, <see cref="FullTurn" />)</remarks>
 	public readonly double Revolutions { get; }
+
+	/// <remarks>
+	/// <paramref name="revolutions"/> is wrapped around to be within the allowable
+	/// range of the <see cref="Revolutions"/> property
+	/// </remarks>
 	public RevolutionsAngle (double revolutions)
 	{
 		Revolutions = revolutions switch {
