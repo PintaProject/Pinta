@@ -316,7 +316,7 @@ public partial class LevelsDialog : Gtk.Dialog
 		Document doc = workspace.ActiveDocument;
 
 		ImageSurface surface = doc.Layers.CurrentUserLayer.Surface;
-		RectangleI rect = doc.Selection.SelectionPath.GetBounds ();
+		RectangleI rect = doc.Selection.GetBounds ().ToInt ();
 		histogram_input.Histogram.UpdateHistogram (surface, rect);
 		UpdateOutputHistogram ();
 	}
