@@ -34,6 +34,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug in the Levels dialog where the Red and Blue toggles were reversed (#1551)
 - Fixed incorrect behavior with transparent colors in the Gradient tool (#1552, #1543)
 - The Vulkan DLL is now bundled with the Windows installer, which fixes errors on startup for certain systems (#1497, #1530)
+- Fixed performance issues when opening a large number of files (#1574, #1578)
 
 ## [3.0.1](https://github.com/PintaProject/Pinta/releases/tag/3.0.1) - 2025/06/07
 
