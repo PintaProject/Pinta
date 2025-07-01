@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-29 00:31+0000\n"
-"PO-Revision-Date: 2025-06-05 21:34+0000\n"
+"PO-Revision-Date: 2025-06-30 18:04+0000\n"
 "Last-Translator: Christophe <cuvillierch@zonesix.fr>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -2177,7 +2177,7 @@ msgstr "touches de raccourcis"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
 msgid "Show Axonometric Grid"
-msgstr ""
+msgstr "Afficher la grille axonométrique"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
 msgid "Show Grid"
