@@ -31,7 +31,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,7 +39,7 @@ using Debug = System.Diagnostics.Debug;
 namespace Pinta.Core;
 
 // Only call methods on this class from a single thread (The UI thread).
-internal sealed class AsyncEffectRenderer : IDisposable
+internal sealed class AsyncEffectRenderer
 {
 	internal readonly record struct CompletionInfo (
 		bool WasCanceled,
@@ -51,22 +50,18 @@ internal sealed class AsyncEffectRenderer : IDisposable
 		internal int ThreadCount { get; }
 		internal RectangleI RenderBounds { get; }
 		internal bool EffectIsTileable { get; }
-		internal int UpdateMillis { get; }
 
 		internal Settings (
 			int threadCount,
 			RectangleI renderBounds,
-			bool effectIsTileable,
-			int updateMilliseconds)
+			bool effectIsTileable)
 		{
 			if (renderBounds.Width < 0) throw new ArgumentException ("Width cannot be negative", nameof (renderBounds));
 			if (renderBounds.Height < 0) throw new ArgumentException ("Height cannot be negative", nameof (renderBounds));
-			if (updateMilliseconds <= 0) throw new ArgumentOutOfRangeException (nameof (updateMilliseconds), "Strictly positive value expected");
 			if (threadCount < 1) throw new ArgumentOutOfRangeException (nameof (threadCount), "Invalid number of threads");
 			RenderBounds = renderBounds;
 			EffectIsTileable = effectIsTileable;
 			ThreadCount = threadCount;
-			UpdateMillis = updateMilliseconds;
 		}
 	}
 
@@ -75,9 +70,9 @@ internal sealed class AsyncEffectRenderer : IDisposable
 	ConcurrentQueue<RectangleI> queued_tiles;
 	int tiles_count = 0;
 
-	uint timer_tick_id;
-
-	RectangleI updated_area;
+	private readonly object updated_lock = new ();
+	private bool is_updated = false;
+	private RectangleI updated_area;
 
 	private readonly Settings settings;
 
@@ -95,8 +90,6 @@ internal sealed class AsyncEffectRenderer : IDisposable
 		cancellation_source = new ();
 		queued_tiles = new ConcurrentQueue<RectangleI> ();
 
-		timer_tick_id = 0;
-
 		this.settings = settings;
 	}
 
@@ -110,7 +103,28 @@ internal sealed class AsyncEffectRenderer : IDisposable
 		}
 	}
 
-	internal void Start (
+	/// <summary>
+	/// Retrieves the union of all tiles that have finished rendering since the
+	/// last time this method was called, and resets the updated area.
+	/// </summary>
+	/// <returns>
+	/// True if there was an updated area to retrieve, otherwise false.
+	/// </returns>
+	internal bool TryConsumeBounds (out RectangleI bounds)
+	{
+		lock (updated_lock) {
+			if (!is_updated) {
+				bounds = default;
+				return false;
+			}
+
+			bounds = updated_area;
+			is_updated = false;
+			return true;
+		}
+	}
+
+	internal async void Start (
 		BaseEffect effect,
 		Cairo.ImageSurface source,
 		Cairo.ImageSurface dest)
@@ -126,9 +140,6 @@ internal sealed class AsyncEffectRenderer : IDisposable
 		// So a copy is made for the render.
 		BaseEffect effectClone = effect.Clone ();
 
-		object updated_lock = new ();
-		bool is_updated = false;
-
 		ConcurrentQueue<Exception> renderExceptions = new ();
 
 		ConcurrentQueue<RectangleI> targetTiles = new (
@@ -141,49 +152,33 @@ internal sealed class AsyncEffectRenderer : IDisposable
 
 		CancellationToken cancellationToken = ReplaceCancellationSource ();
 
-		Debug.WriteLine ("AsyncEffectRenderer.Start () Render starting."); // TODO: Show some kind of ID, perhaps the address
+		Debug.WriteLine ("AsyncEffectRenderer.Start () Render starting.");
 
 		var tasks =
 			Enumerable.Range (0, settings.ThreadCount)
-			.Select (_ => Task.Run (RenderNextTile, cancellationToken))
-			.ToImmutableArray ();
+			.Select (_ => Task.Run (RenderNextTile));
+
+		await Task.WhenAll (tasks);
+
+		// Change back to the UI thread to notify of completion.
+		GLib.Functions.TimeoutAdd (
+			0,
+			0,
+			() => {
+
+				CompletionInfo completion = new (
+					WasCanceled: cancellationToken.IsCancellationRequested,
+					Errors: [.. renderExceptions]);
+
+				newCompletionSource.SetResult (completion);
+
+				return false; // don't call the timer again
+			}
+		);
 
 		// ---------------
 		// === Methods ===
 		// ---------------
-
-		Task.WhenAll (tasks).ContinueWith (
-			_ => {
-				// Change back to the UI thread to notify of completion.
-				GLib.Functions.TimeoutAdd (
-					0,
-					0,
-					() => {
-						HandleTimerTick ();
-
-						if (timer_tick_id > 0)
-							GLib.Source.Remove (timer_tick_id);
-
-						timer_tick_id = 0;
-
-						CompletionInfo completion = new (
-						WasCanceled: cancellationToken.IsCancellationRequested,
-						Errors: [.. renderExceptions]);
-
-						newCompletionSource.SetResult (completion);
-
-						return false; // don't call the timer again
-					}
-				);
-			},
-			TaskScheduler.Default // Continue on a thread-pool thread to schedule the UI work
-		);
-
-		// Start timer used to periodically fire update events on the UI thread.
-		timer_tick_id = GLib.Functions.TimeoutAdd (
-			0,
-			(uint) settings.UpdateMillis,
-			HandleTimerTick);
 
 		// Runs on a background thread.
 		void RenderNextTile ()
@@ -219,29 +214,6 @@ internal sealed class AsyncEffectRenderer : IDisposable
 				}
 			}
 		}
-
-		// Called on the UI thread.
-		bool HandleTimerTick ()
-		{
-			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " Timer tick.");
-
-			RectangleI bounds;
-
-			lock (updated_lock) {
-
-				if (!is_updated)
-					return true;
-
-				is_updated = false;
-
-				bounds = updated_area;
-			}
-
-			if (IsRendering && !cancellationToken.IsCancellationRequested)
-				Updated?.Invoke (Progress, bounds);
-
-			return true;
-		}
 	}
 
 	internal Task<CompletionInfo> Finish (bool cancel)
@@ -251,20 +223,6 @@ internal sealed class AsyncEffectRenderer : IDisposable
 			cancellation_source.Cancel ();
 		}
 		return completion_source.Task;
-	}
-
-	internal delegate void UpdateHandler (
-		double progress,
-		RectangleI updatedBounds);
-
-	public event UpdateHandler? Updated;
-
-	public void Dispose ()
-	{
-		if (timer_tick_id > 0)
-			GLib.Source.Remove (timer_tick_id);
-
-		timer_tick_id = 0;
 	}
 
 	CancellationToken ReplaceCancellationSource ()

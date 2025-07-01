@@ -17,7 +17,9 @@ namespace Pinta.Core;
 /// </summary>
 [Serializable]
 [StructLayout (LayoutKind.Explicit)]
-public readonly partial struct ColorBgra : IColor<ColorBgra>
+public readonly partial struct ColorBgra :
+	IInterpolableColor<ColorBgra>,
+	IAlphaColor<ColorBgra>
 {
 	[FieldOffset (0)]
 	public readonly byte B;

@@ -9,10 +9,21 @@ public readonly record struct Color (
 	double R,
 	double G,
 	double B,
-	double A
-)
-	: IColor<Color>
+	double A)
+:
+	IInterpolableColor<Color>,
+	IAlphaColor<Color>
 {
+	public static Color Black => new (0, 0, 0);
+	public static Color Red => new (1, 0, 0);
+	public static Color Green => new (0, 1, 0);
+	public static Color Blue => new (0, 0, 1);
+	public static Color Yellow => new (1, 1, 0);
+	public static Color Magenta => new (1, 0, 1);
+	public static Color Cyan => new (0, 1, 1);
+	public static Color White => new (1, 1, 1);
+	public static Color Transparent => new (0, 0, 0, 0);
+
 	public Color (double r, double g, double b)
 		: this (r, g, b, 1.0)
 	{ }
