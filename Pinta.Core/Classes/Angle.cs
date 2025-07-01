@@ -7,6 +7,8 @@ public interface IAngle<TAngle> where TAngle : IAngle<TAngle>
 	static abstract double FullTurn { get; }
 	static abstract bool operator == (TAngle a, TAngle b);
 	static abstract bool operator != (TAngle a, TAngle b);
+	static abstract TAngle operator + (TAngle a, TAngle b);
+	static abstract TAngle operator - (TAngle a, TAngle b);
 }
 
 public readonly struct RadiansAngle : IAngle<RadiansAngle>
