@@ -26,7 +26,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cairo;
 using ClipperLib;
 
@@ -34,10 +33,8 @@ namespace Pinta.Core;
 
 public sealed class DocumentSelection
 {
-	private readonly Document owning_document;
-	internal DocumentSelection (Document owningDocument)
+	internal DocumentSelection ()
 	{
-		this.owning_document = owningDocument;
 	}
 
 	private Path? selection_path;
@@ -62,7 +59,7 @@ public sealed class DocumentSelection
 	public Path SelectionPath {
 		get {
 			if (selection_path == null) {
-				using Context g = new (owning_document.Layers.CurrentUserLayer.Surface);
+				using Context g = CairoExtensions.CreatePathContext ();
 				selection_path = g.CreatePolygonPath (ConvertToPolygonSet (SelectionPolygons));
 			}
 
@@ -95,7 +92,7 @@ public sealed class DocumentSelection
 	/// </summary>
 	public DocumentSelection Clone ()
 	{
-		return new (owning_document) {
+		return new () {
 			SelectionPolygons = [.. SelectionPolygons],
 			Origin = new PointD (Origin.X, Origin.Y),
 			End = new PointD (End.X, End.Y),
@@ -126,7 +123,7 @@ public sealed class DocumentSelection
 	/// </summary>
 	/// <param name="clipperPolygons">A Clipper Polygon collection.</param>
 	/// <returns>A Pinta Polygon set.</returns>
-	public static IReadOnlyList<IReadOnlyList<PointI>> ConvertToPolygonSet (IReadOnlyList<IReadOnlyList<IntPoint>> clipperPolygons)
+	private static IReadOnlyList<IReadOnlyList<PointI>> ConvertToPolygonSet (IReadOnlyList<IReadOnlyList<IntPoint>> clipperPolygons)
 	{
 		var resultingPolygonSet = new PointI[clipperPolygons.Count][];
 
@@ -174,7 +171,7 @@ public sealed class DocumentSelection
 		transform.TransformPoint (ref origin);
 		transform.TransformPoint (ref end);
 
-		return new (owning_document) {
+		return new () {
 			SelectionPolygons = newPolygons,
 			Origin = origin,
 			End = end,
@@ -330,7 +327,7 @@ public sealed class DocumentSelection
 	/// <param name='imageSize'>
 	/// The size of the document.
 	/// </param>
-	public void Invert (Core.Size imageSize)
+	public void Invert (Size imageSize)
 	{
 		List<List<IntPoint>> resultingPolygons = [];
 
@@ -419,8 +416,8 @@ public sealed class DocumentSelection
 		double maxY = double.MinValue;
 
 		// Calculate the minimum rectangular bounds that surround the current selection.
-		foreach (var li in SelectionPolygons) {
-			foreach (var ip in li) {
+		foreach (List<IntPoint> li in SelectionPolygons) {
+			foreach (IntPoint ip in li) {
 				minX = Math.Min (minX, ip.X);
 				minY = Math.Min (minY, ip.Y);
 				maxX = Math.Max (maxX, ip.X);

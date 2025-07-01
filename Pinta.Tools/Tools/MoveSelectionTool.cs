@@ -60,7 +60,7 @@ public sealed class MoveSelectionTool : BaseTransformTool
 	public override bool IsSelectionTool => true;
 
 	protected override RectangleD GetSourceRectangle (Document document)
-		=> document.Selection.SelectionPath.GetBounds ().ToDouble ();
+		=> document.Selection.GetBounds ();
 
 	protected override void OnStartTransform (Document document)
 	{

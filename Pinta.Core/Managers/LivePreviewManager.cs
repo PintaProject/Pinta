@@ -82,8 +82,7 @@ public sealed class LivePreviewManager : ILivePreview
 			workspace.ImageSize.Width,
 			workspace.ImageSize.Height);
 
-		Cairo.Path? selectionPath = selection.Visible ? selection.SelectionPath : null;
-		RenderBounds = (selectionPath != null) ? selectionPath.GetBounds () : LivePreviewSurface.GetBounds ();
+		RenderBounds = selection.Visible ? selection.GetBounds ().ToInt () : LivePreviewSurface.GetBounds ();
 		RenderBounds = workspace.ClampToImageSize (RenderBounds);
 
 		const uint UPDATE_MILLISECONDS = 100;

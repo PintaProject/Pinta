@@ -85,14 +85,6 @@ partial class CairoExtensions
 			y2 - y1);
 	}
 
-	public static RectangleI GetBounds (this Path path)
-	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
-		using Context g = new (doc.Layers.CurrentUserLayer.Surface);
-		g.AppendPath (path);
-		return g.PathExtents ().ToInt ();
-	}
-
 	public static RectangleI GetBounds (this ImageSurface surf)
 		=> new (0, 0, surf.Width, surf.Height);
 

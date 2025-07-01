@@ -57,12 +57,19 @@ partial class CairoExtensions
 		return newsurf;
 	}
 
-	public static Path Clone (this Path path)
+	/// <summary>
+	/// Placeholder surface used for <see cref="CreatePathContext"/>
+	/// Another option would be to use a different surface type, like
+	/// cairo_recording_surface_create(), but an empty image works okay.
+	/// </summary>
+	private static readonly Lazy<ImageSurface> empty_surface = new (() => CreateImageSurface (Format.Argb32, 0, 0));
+
+	/// <summary>
+	/// Creates a Cairo context without a backing image surface, which can only be used for building a Cairo.Path.
+	/// </summary>
+	public static Context CreatePathContext ()
 	{
-		Document doc = PintaCore.Workspace.ActiveDocument;
-		using Context g = new (doc.Layers.CurrentUserLayer.Surface);
-		g.AppendPath (path);
-		return g.CopyPath ();
+		return new Context (empty_surface.Value);
 	}
 
 	/// <summary>
