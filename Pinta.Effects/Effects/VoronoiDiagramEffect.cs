@@ -61,9 +61,12 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		PointD locationOffset = new (0.5, 0.5);
 
-		IEnumerable<PointI> basePoints = CreatePoints (roi, data.NumberOfCells, data.RandomPointLocations);
-		IEnumerable<PointI> pointCorners = SortPoints (basePoints, colorSorting).ToImmutableArray ();
-		ImmutableArray<PointD> controlPoints = pointCorners.Select (p => p.ToDouble () + locationOffset).ToImmutableArray ();
+		IEnumerable<PointI> basePoints = SpatialPartition.CreateControlPoints (
+			roi,
+			Math.Min (data.NumberOfCells, roi.Width * roi.Height),
+			data.RandomPointLocations);
+		IEnumerable<PointI> pointCorners = [.. SortPoints (basePoints, colorSorting)];
+		ImmutableArray<PointD> controlPoints = [.. pointCorners.Select (p => p.ToDouble () + locationOffset)];
 
 		IEnumerable<ColorBgra> baseColors = CreateColors (controlPoints.Length, data.RandomColors);
 		IEnumerable<ColorBgra> positionSortedColors = SortColors (baseColors, colorSorting);
@@ -72,16 +75,13 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		return new (
 			size: dst.GetSize (),
 			controlPoints: controlPoints,
-			samplingLocations: CreateSamplingLocations (data.Quality),
-			colors: reversedSortingColors.ToImmutableArray (),
-			distanceCalculator: GetDistanceCalculator (data.DistanceMetric)
+			samplingLocations: Sampling.CreateSamplingLocations (data.Quality),
+			colors: [.. reversedSortingColors],
+			distanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric)
 		);
 	}
 
-	protected override void Render (
-		ImageSurface src,
-		ImageSurface dst,
-		RectangleI roi)
+	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
 	{
 		VoronoiSettings settings = CreateSettings (dst);
 		Span<ColorBgra> dst_data = dst.GetPixelData ();
@@ -156,57 +156,6 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 				typeof (ColorSorting)),
 		};
 
-	private static Func<PointD, PointD, double> GetDistanceCalculator (DistanceMetric distanceCalculationMethod)
-	{
-		return distanceCalculationMethod switch {
-			DistanceMetric.Euclidean => Euclidean,
-			DistanceMetric.Manhattan => Manhattan,
-			DistanceMetric.Chebyshev => Chebyshev,
-			_ => throw new InvalidEnumArgumentException (
-				nameof (distanceCalculationMethod),
-				(int) distanceCalculationMethod,
-				typeof (DistanceMetric)),
-		};
-
-		static double Euclidean (PointD targetPoint, PointD pixelLocation)
-		{
-			PointD difference = pixelLocation - targetPoint;
-			return difference.Magnitude ();
-		}
-
-		static double Manhattan (PointD targetPoint, PointD pixelLocation)
-		{
-			PointD difference = pixelLocation - targetPoint;
-			return Math.Abs (difference.X) + Math.Abs (difference.Y);
-		}
-
-		static double Chebyshev (PointD targetPoint, PointD pixelLocation)
-		{
-			PointD difference = pixelLocation - targetPoint;
-			return Math.Max (Math.Abs (difference.X), Math.Abs (difference.Y));
-		}
-	}
-
-	private static ImmutableHashSet<PointI> CreatePoints (RectangleI roi, int pointCount, RandomSeed pointLocationsSeed)
-	{
-		int effectivePointCount = Math.Min (pointCount, roi.Width * roi.Height);
-
-		Random randomPositioner = new (pointLocationsSeed.Value);
-		var result = ImmutableHashSet.CreateBuilder<PointI> (); // Ensures points' uniqueness
-
-		while (result.Count < effectivePointCount) {
-
-			PointI point = new (
-				X: randomPositioner.Next (roi.Left, roi.Right + 1),
-				Y: randomPositioner.Next (roi.Top, roi.Bottom + 1)
-			);
-
-			result.Add (point);
-		}
-
-		return result.ToImmutable ();
-	}
-
 	private static IEnumerable<ColorBgra> CreateColors (int colorCount, RandomSeed colorsSeed)
 	{
 		Random randomColorizer = new (colorsSeed.Value);
@@ -217,34 +166,6 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			uniquenessTracker.Add (candidateColor);
 			yield return candidateColor;
 		}
-	}
-
-	/// <returns>
-	/// Offsets, from top left corner of points,
-	/// where samples should be taken.
-	/// </returns>
-	/// <remarks>
-	/// The resulting colors are intended to be blended.
-	/// </remarks>
-	private static ImmutableArray<PointD> CreateSamplingLocations (int quality)
-	{
-		var builder = ImmutableArray.CreateBuilder<PointD> ();
-		builder.Capacity = quality * quality;
-		double sectionSize = 1.0 / quality;
-		double initial = sectionSize / 2;
-
-		for (int h = 0; h < quality; h++) {
-			for (int v = 0; v < quality; v++) {
-				double hOffset = sectionSize * h;
-				double vOffset = sectionSize * v;
-				PointD currentPoint = new (
-					X: initial + hOffset,
-					Y: initial + vOffset);
-				builder.Add (currentPoint);
-			}
-		}
-
-		return builder.MoveToImmutable ();
 	}
 
 	public sealed class VoronoiDiagramData : EffectData
@@ -275,13 +196,6 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		public int Quality { get; set; } = 3;
 	}
 
-	public enum DistanceMetric
-	{
-		Euclidean,
-		Manhattan,
-		Chebyshev,
-	}
-
 	public enum ColorSorting
 	{
 		[Caption ("Random")] Random,
@@ -306,4 +220,5 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		// Translators: Vertical color sorting with red (R) as the leading term
 		[Caption ("Vertical red (R)")] VerticalR,
 	}
+
 }
