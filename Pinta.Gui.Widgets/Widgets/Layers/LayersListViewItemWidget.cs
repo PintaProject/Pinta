@@ -118,19 +118,29 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 
 	public LayersListViewItemWidget ()
 	{
-		Spacing = 6;
+		Gtk.DrawingArea itemThumbnail = CreateItemThumbnail ();
+		Gtk.Label itemLabel = CreateItemLabel ();
+		Gtk.CheckButton visibleButton = CreateVisibleButton ();
+
+		// --- Initialization (Gtk.Widget)
 
 		this.SetAllMargins (2);
 
+		// --- Initialization (Gtk.Box)
+
+		Spacing = 6;
+
 		SetOrientation (Gtk.Orientation.Horizontal);
 
-		item_thumbnail = CreateItemThumbnail ();
-		item_label = CreateItemLabel ();
-		visible_button = CreateVisibleButton ();
+		Append (itemThumbnail);
+		Append (itemLabel);
+		Append (visibleButton);
 
-		Append (item_thumbnail);
-		Append (item_label);
-		Append (visible_button);
+		// --- References to keep
+
+		item_thumbnail = itemThumbnail;
+		item_label = itemLabel;
+		visible_button = visibleButton;
 	}
 
 	private Gtk.CheckButton CreateVisibleButton ()
