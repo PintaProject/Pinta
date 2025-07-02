@@ -36,7 +36,7 @@ public sealed partial class LayersListViewItem
 
 	// NRT - GObject requires a parameterless constructor, and these don't have simple defaults
 	private readonly Document? document;
-	private readonly UserLayer? user_layer;
+	public UserLayer? UserLayer { get; }
 
 	public LayersListViewItem (
 		Document doc,
@@ -45,22 +45,22 @@ public sealed partial class LayersListViewItem
 		: this ()
 	{
 		document = doc;
-		user_layer = userLayer;
+		UserLayer = userLayer;
 	}
 
-	public string Label => user_layer?.Name ?? string.Empty;
-	public bool Visible => !user_layer?.Hidden ?? false;
+	public string Label => UserLayer?.Name ?? string.Empty;
+	public bool Visible => !UserLayer?.Hidden ?? false;
 
 	public ImageSurface BuildThumbnail (
 		int widthRequest,
 		int heightRequest)
 	{
-		if (document is null || user_layer is null)
+		if (document is null || UserLayer is null)
 			throw new InvalidOperationException ($"{nameof (LayersListViewItem)} is not initialized");
 
 		// If this is not the currently selected layer, just directly use the layer's surface.
-		if (user_layer != document.Layers.CurrentUserLayer || !document.Layers.ShowSelectionLayer)
-			return user_layer.Surface;
+		if (UserLayer != document.Layers.CurrentUserLayer || !document.Layers.ShowSelectionLayer)
+			return UserLayer.Surface;
 
 		// If it is, then we may need to draw the
 		// selection layer over it, like when dragging a selection.
@@ -68,7 +68,7 @@ public sealed partial class LayersListViewItem
 
 		var layers = new Layer[]
 		{
-			user_layer,
+			UserLayer,
 			document.Layers.SelectionLayer,
 		};
 
@@ -81,7 +81,7 @@ public sealed partial class LayersListViewItem
 
 	public void HandleVisibilityToggled (bool visible)
 	{
-		if (document is null || user_layer is null)
+		if (document is null || UserLayer is null)
 			throw new InvalidOperationException ($"{nameof (LayersListViewItem)} is not initialized");
 
 		if (Visible == visible)
@@ -89,13 +89,13 @@ public sealed partial class LayersListViewItem
 
 		Document doc = PintaCore.Workspace.ActiveDocument;
 
-		LayerProperties initial = new (user_layer.Name, visible, user_layer.Opacity, user_layer.BlendMode);
-		LayerProperties updated = new (user_layer.Name, !visible, user_layer.Opacity, user_layer.BlendMode);
+		LayerProperties initial = new (UserLayer.Name, visible, UserLayer.Opacity, UserLayer.BlendMode);
+		LayerProperties updated = new (UserLayer.Name, !visible, UserLayer.Opacity, UserLayer.BlendMode);
 
 		UpdateLayerPropertiesHistoryItem historyItem = new (
 			Resources.Icons.LayerProperties,
 			visible ? Translations.GetString ("Layer Shown") : Translations.GetString ("Layer Hidden"),
-			doc.Layers.IndexOf (user_layer),
+			doc.Layers.IndexOf (UserLayer),
 			initial,
 			updated);
 
@@ -133,9 +133,14 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		visibleButton.Hexpand = false;
 		visibleButton.OnToggled += (_, _) => item?.HandleVisibilityToggled (visibleButton.Active);
 
+		Gtk.GestureClick menuGesture = Gtk.GestureClick.New ();
+		menuGesture.SetButton (Gdk.Constants.BUTTON_SECONDARY);
+		menuGesture.OnPressed += MenuGesture_OnPressed;
+
 		// --- Initialization (Gtk.Widget)
 
 		this.SetAllMargins (2);
+		this.AddController (menuGesture);
 
 		// --- Initialization (Gtk.Box)
 
@@ -152,6 +157,42 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		item_thumbnail = itemThumbnail;
 		item_label = itemLabel;
 		visible_button = visibleButton;
+	}
+
+	private void MenuGesture_OnPressed (
+		Gtk.GestureClick _,
+		Gtk.GestureClick.PressedSignalArgs args)
+	{
+		// TODO: Select layer before applying action
+
+		if (item is null || item.UserLayer is null || !PintaCore.Workspace.HasOpenDocuments)
+			return;
+
+		Document doc = PintaCore.Workspace.ActiveDocument;
+		doc.Layers.SetCurrentUserLayer (item.UserLayer);
+
+		LayerActions actions = PintaCore.Actions.Layers;
+
+		Gio.Menu operationsSection = Gio.Menu.New ();
+		operationsSection.AppendItem (actions.DeleteLayer.CreateMenuItem ());
+		operationsSection.AppendItem (actions.DuplicateLayer.CreateMenuItem ());
+		operationsSection.AppendItem (actions.MergeLayerDown.CreateMenuItem ());
+
+		Gio.Menu flipSection = Gio.Menu.New ();
+		flipSection.AppendItem (actions.FlipHorizontal.CreateMenuItem ());
+		flipSection.AppendItem (actions.FlipVertical.CreateMenuItem ());
+
+		Gio.Menu propertiesSection = Gio.Menu.New ();
+		propertiesSection.AppendItem (actions.Properties.CreateMenuItem ());
+
+		Gio.Menu menu = Gio.Menu.New ();
+		menu.AppendSection (null, operationsSection);
+		menu.AppendSection (null, flipSection);
+		menu.AppendSection (null, propertiesSection);
+
+		Gtk.PopoverMenu popover = Gtk.PopoverMenu.NewFromModel (menu);
+		popover.SetParent (this);
+		popover.Popup ();
 	}
 
 	// Set the widget's contents to the provided layer.
