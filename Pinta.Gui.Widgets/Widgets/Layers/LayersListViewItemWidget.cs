@@ -35,44 +35,45 @@ public sealed partial class LayersListViewItem
 	private CanvasRenderer? canvas_renderer;
 
 	// NRT - GObject requires a parameterless constructor, and these don't have simple defaults
-	private readonly Document? doc;
-	private readonly UserLayer? layer;
+	private readonly Document? document;
+	private readonly UserLayer? user_layer;
 
 	public LayersListViewItem (
 		Document doc,
-		UserLayer layer
-	) : this ()
+		UserLayer userLayer
+	)
+		: this ()
 	{
-		this.doc = doc;
-		this.layer = layer;
+		document = doc;
+		user_layer = userLayer;
 	}
 
-	public string Label => layer?.Name ?? string.Empty;
-	public bool Visible => !layer?.Hidden ?? false;
+	public string Label => user_layer?.Name ?? string.Empty;
+	public bool Visible => !user_layer?.Hidden ?? false;
 
-	public Cairo.ImageSurface BuildThumbnail (
+	public ImageSurface BuildThumbnail (
 		int widthRequest,
 		int heightRequest)
 	{
-		if (doc is null || layer is null)
+		if (document is null || user_layer is null)
 			throw new InvalidOperationException ($"{nameof (LayersListViewItem)} is not initialized");
 
 		// If this is not the currently selected layer, just directly use the layer's surface.
-		if (layer != doc.Layers.CurrentUserLayer || !doc.Layers.ShowSelectionLayer)
-			return layer.Surface;
+		if (user_layer != document.Layers.CurrentUserLayer || !document.Layers.ShowSelectionLayer)
+			return user_layer.Surface;
 
 		// If it is, then we may need to draw the
 		// selection layer over it, like when dragging a selection.
-		ImageSurface surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, widthRequest, heightRequest);
+		ImageSurface surface = CairoExtensions.CreateImageSurface (Format.Argb32, widthRequest, heightRequest);
 
 		var layers = new Layer[]
 		{
-			layer,
-			doc.Layers.SelectionLayer,
+			user_layer,
+			document.Layers.SelectionLayer,
 		};
 
 		canvas_renderer ??= new CanvasRenderer (enableLivePreview: false, enableBackgroundPattern: true);
-		canvas_renderer.Initialize (doc.ImageSize, new Size (widthRequest, heightRequest));
+		canvas_renderer.Initialize (document.ImageSize, new Size (widthRequest, heightRequest));
 		canvas_renderer.Render (layers, surface, PointI.Zero);
 
 		return surface;
@@ -80,7 +81,7 @@ public sealed partial class LayersListViewItem
 
 	public void HandleVisibilityToggled (bool visible)
 	{
-		if (this.doc is null || this.layer is null)
+		if (document is null || user_layer is null)
 			throw new InvalidOperationException ($"{nameof (LayersListViewItem)} is not initialized");
 
 		if (Visible == visible)
@@ -88,13 +89,13 @@ public sealed partial class LayersListViewItem
 
 		Document doc = PintaCore.Workspace.ActiveDocument;
 
-		LayerProperties initial = new (layer.Name, visible, layer.Opacity, layer.BlendMode);
-		LayerProperties updated = new (layer.Name, !visible, layer.Opacity, layer.BlendMode);
+		LayerProperties initial = new (user_layer.Name, visible, user_layer.Opacity, user_layer.BlendMode);
+		LayerProperties updated = new (user_layer.Name, !visible, user_layer.Opacity, user_layer.BlendMode);
 
 		UpdateLayerPropertiesHistoryItem historyItem = new (
 			Resources.Icons.LayerProperties,
 			visible ? Translations.GetString ("Layer Shown") : Translations.GetString ("Layer Hidden"),
-			doc.Layers.IndexOf (layer),
+			doc.Layers.IndexOf (user_layer),
 			initial,
 			updated);
 
@@ -106,10 +107,10 @@ public sealed partial class LayersListViewItem
 
 public sealed class LayersListViewItemWidget : Gtk.Box
 {
-	private static readonly Cairo.Pattern transparent_pattern = CairoExtensions.CreateTransparentBackgroundPattern (8);
+	private static readonly Pattern transparent_pattern = CairoExtensions.CreateTransparentBackgroundPattern (8);
 
 	private LayersListViewItem? item;
-	private Cairo.ImageSurface? thumbnail_surface;
+	private ImageSurface? thumbnail_surface;
 
 	private readonly Gtk.DrawingArea item_thumbnail;
 	private readonly Gtk.Label item_label;
@@ -172,7 +173,7 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 	}
 
 	private void DrawThumbnail (
-		Cairo.Context g,
+		Context g,
 		int width,
 		int height)
 	{
@@ -216,7 +217,7 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		g.Restore ();
 
 		// TODO: scale this box correctly to match layer aspect ratio
-		g.SetSourceColor (new Cairo.Color (0.5, 0.5, 0.5));
+		g.SetSourceColor (new Color (0.5, 0.5, 0.5));
 		g.Rectangle (offset.X + 0.5, offset.Y + 0.5, draw_width, draw_height);
 		g.LineWidth = 1;
 
