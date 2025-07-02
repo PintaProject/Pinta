@@ -146,9 +146,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 				X: baseU + i * deltaU,
 				Y: baseV + (i * settings.invQuality % 1) * settings.invH);
 
-			PointD rotatedRel = new (
-				X: rel.X * settings.cosTheta - rel.Y * settings.sinTheta,
-				Y: rel.X * settings.sinTheta + rel.Y * settings.cosTheta);
+			PointD rotatedRel = rel.Rotated (settings.sinTheta, settings.cosTheta);
 
 			double m = fractal.Compute (
 				r: (rotatedRel.X * settings.invZoom) + offset_basis.X,

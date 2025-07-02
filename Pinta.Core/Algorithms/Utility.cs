@@ -44,6 +44,14 @@ public static class Utility
 	public static double Magnitude (this PointD point)
 		=> Mathematics.Magnitude (point.X, point.Y);
 
+	/// <summary>Equivalent to applying a rotation matrix</summary>
+	public static PointD Rotated (this in PointD original, double sinTheta, double cosTheta)
+	{
+		return new (
+			X: original.X * cosTheta - original.Y * sinTheta,
+			Y: original.X * sinTheta + original.Y * cosTheta);
+	}
+
 	public static double Magnitude (this PointI point)
 		=> Mathematics.Magnitude<double> (point.X, point.Y);
 
