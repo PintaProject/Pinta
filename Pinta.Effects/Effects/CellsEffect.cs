@@ -136,10 +136,6 @@ public sealed class CellsEffect : BaseEffect
 		[MinimumValue (4), MaximumValue (100)]
 		public double CellRadius { get; set; } = 32;
 
-		[Caption ("Border Thickness")]
-		[MinimumValue (0), MaximumValue (8)]
-		public double BorderThickness { get; set; } = 0;
-
 		// TODO: Show points
 
 		[Caption ("Color Scheme Source")]
@@ -153,6 +149,8 @@ public sealed class CellsEffect : BaseEffect
 
 		[Caption ("Reverse Color Scheme")]
 		public bool ReverseColorScheme { get; set; } = true;
+
+		// TODO: Gradient EdgeBehavior
 
 		[Caption ("Random Point Locations")]
 		public RandomSeed RandomPointLocations { get; set; } = new (0);
