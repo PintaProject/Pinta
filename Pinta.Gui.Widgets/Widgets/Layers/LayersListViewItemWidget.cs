@@ -118,9 +118,20 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 
 	public LayersListViewItemWidget ()
 	{
-		Gtk.DrawingArea itemThumbnail = CreateItemThumbnail ();
-		Gtk.Label itemLabel = CreateItemLabel ();
-		Gtk.CheckButton visibleButton = CreateVisibleButton ();
+		Gtk.DrawingArea itemThumbnail = Gtk.DrawingArea.New ();
+		itemThumbnail.SetDrawFunc ((area, context, width, height) => DrawThumbnail (context, width, height));
+		itemThumbnail.WidthRequest = 60;
+		itemThumbnail.HeightRequest = 40;
+
+		Gtk.Label itemLabel = Gtk.Label.New (string.Empty);
+		itemLabel.Halign = Gtk.Align.Start;
+		itemLabel.Hexpand = true;
+		itemLabel.Ellipsize = Pango.EllipsizeMode.End;
+
+		Gtk.CheckButton visibleButton = Gtk.CheckButton.New ();
+		visibleButton.Halign = Gtk.Align.End;
+		visibleButton.Hexpand = false;
+		visibleButton.OnToggled += (_, _) => item?.HandleVisibilityToggled (visibleButton.Active);
 
 		// --- Initialization (Gtk.Widget)
 
@@ -141,33 +152,6 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		item_thumbnail = itemThumbnail;
 		item_label = itemLabel;
 		visible_button = visibleButton;
-	}
-
-	private Gtk.CheckButton CreateVisibleButton ()
-	{
-		Gtk.CheckButton result = Gtk.CheckButton.New ();
-		result.Halign = Gtk.Align.End;
-		result.Hexpand = false;
-		result.OnToggled += (_, _) => item?.HandleVisibilityToggled (visible_button.Active);
-		return result;
-	}
-
-	private static Gtk.Label CreateItemLabel ()
-	{
-		Gtk.Label result = Gtk.Label.New (string.Empty);
-		result.Halign = Gtk.Align.Start;
-		result.Hexpand = true;
-		result.Ellipsize = Pango.EllipsizeMode.End;
-		return result;
-	}
-
-	private Gtk.DrawingArea CreateItemThumbnail ()
-	{
-		Gtk.DrawingArea result = Gtk.DrawingArea.New ();
-		result.SetDrawFunc ((area, context, width, height) => DrawThumbnail (context, width, height));
-		result.WidthRequest = 60;
-		result.HeightRequest = 40;
-		return result;
 	}
 
 	// Set the widget's contents to the provided layer.
