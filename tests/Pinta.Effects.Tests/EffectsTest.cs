@@ -65,6 +65,46 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Cells2 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.ColorScheme = PresetGradients.Electric;
+		Utilities.TestEffect (effect, "cells2.png");
+	}
+
+	[Test]
+	public void Cells3 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.DistanceMetric = DistanceMetric.Manhattan;
+		Utilities.TestEffect (effect, "cells3.png");
+	}
+
+	[Test]
+	public void Cells4 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.ReverseColorScheme = false;
+		Utilities.TestEffect (effect, "cells4.png");
+	}
+
+	[Test]
+	public void Cells5 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CellRadius = 16;
+		Utilities.TestEffect (effect, "cells5.png");
+	}
+
+	[Test]
+	public void Cells6 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.NumberOfCells = 50;
+		Utilities.TestEffect (effect, "cells6.png");
+	}
+
+	[Test]
 	public void Clouds1 ()
 	{
 		CloudsEffect effect = new (Utilities.CreateMockServices ());
