@@ -43,7 +43,6 @@ public sealed class CellsEffect : BaseEffect
 	}
 
 	private sealed record CellsSettings (
-		double halfBorderThickness,
 		Size size,
 		ImmutableArray<PointD> controlPoints,
 		ImmutableArray<PointD> samplingLocations,
@@ -73,7 +72,6 @@ public sealed class CellsEffect : BaseEffect
 		ImmutableArray<PointD> controlPoints = [.. basePoints.Select (p => p.ToDouble () + locationOffset)];
 
 		return new (
-			halfBorderThickness: data.BorderThickness / 2.0,
 			size: destination.GetSize (),
 			controlPoints: controlPoints,
 			samplingLocations: Sampling.CreateSamplingLocations (data.Quality),
