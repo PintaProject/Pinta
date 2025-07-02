@@ -58,6 +58,13 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Cells1 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		Utilities.TestEffect (effect, "cells1.png");
+	}
+
+	[Test]
 	public void Clouds1 ()
 	{
 		CloudsEffect effect = new (Utilities.CreateMockServices ());
@@ -654,7 +661,7 @@ internal sealed class EffectsTest
 	public void Voronoi3 ()
 	{
 		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
-		effect.Data.DistanceMetric = VoronoiDiagramEffect.DistanceMetric.Manhattan;
+		effect.Data.DistanceMetric = DistanceMetric.Manhattan;
 		Utilities.TestEffect (effect, "voronoi3.png");
 	}
 
