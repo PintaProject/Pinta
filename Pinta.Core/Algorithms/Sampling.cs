@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Immutable;
 
 namespace Pinta.Core;
@@ -10,6 +11,9 @@ public static class Sampling
 	/// </returns>
 	public static ImmutableArray<PointD> CreateSamplingOffsets (int quality)
 	{
+		if (quality < 1)
+			throw new ArgumentOutOfRangeException (nameof (quality));
+
 		var builder = ImmutableArray.CreateBuilder<PointD> ();
 		builder.Capacity = quality * quality;
 		double sectionSize = 1.0 / quality;
