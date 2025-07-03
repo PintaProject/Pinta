@@ -630,7 +630,7 @@ internal sealed class MainWindow
 
 	private void ZoomToSelection_Activated (object sender, EventArgs e)
 	{
-		PintaCore.Workspace.ActiveWorkspace.ZoomToCanvasRectangle (PintaCore.Workspace.ActiveDocument.Selection.SelectionPath.GetBounds ().ToDouble ());
+		PintaCore.Workspace.ActiveWorkspace.ZoomToCanvasRectangle (PintaCore.Workspace.ActiveDocument.Selection.GetBounds ());
 	}
 
 	private void ZoomToWindow_Activated (object sender, EventArgs e)
