@@ -105,6 +105,33 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Cells7 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CellRadius = 8;
+		effect.Data.ColorSchemeEdgeBehavior = EdgeBehavior.Wrap;
+		Utilities.TestEffect (effect, "cells7.png");
+	}
+
+	[Test]
+	public void Cells8 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CellRadius = 8;
+		effect.Data.ColorSchemeEdgeBehavior = EdgeBehavior.Transparent;
+		Utilities.TestEffect (effect, "cells8.png");
+	}
+
+	[Test]
+	public void Cells9 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CellRadius = 8;
+		effect.Data.ColorSchemeEdgeBehavior = EdgeBehavior.Primary;
+		Utilities.TestEffect (effect, "cells9.png");
+	}
+
+	[Test]
 	public void Clouds1 ()
 	{
 		CloudsEffect effect = new (Utilities.CreateMockServices ());

@@ -47,7 +47,8 @@ public sealed class CellsEffect : BaseEffect
 		ImmutableArray<PointD> controlPoints,
 		ImmutableArray<PointD> samplingLocations,
 		Func<PointD, PointD, double> distanceCalculator,
-		ColorGradient<ColorBgra> colorGradient);
+		ColorGradient<ColorBgra> colorGradient,
+		EdgeBehavior gradientEdgeBehavior);
 
 	private CellsSettings CreateSettings (ImageSurface destination)
 	{
@@ -76,7 +77,8 @@ public sealed class CellsEffect : BaseEffect
 			controlPoints: controlPoints,
 			samplingLocations: Sampling.CreateSamplingLocations (data.Quality),
 			distanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
-			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient);
+			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
+			gradientEdgeBehavior: data.ColorSchemeEdgeBehavior);
 	}
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
@@ -115,9 +117,12 @@ public sealed class CellsEffect : BaseEffect
 				closestIndex = i;
 			}
 			return
-				shortestDistance > settings.colorGradient.EndPosition
-				? settings.colorGradient.EndColor
-				: settings.colorGradient.GetColor (shortestDistance);
+				settings
+				.colorGradient
+				.GetColorExtended (
+					shortestDistance,
+					settings.gradientEdgeBehavior,
+					palette);
 		}
 	}
 
@@ -148,7 +153,8 @@ public sealed class CellsEffect : BaseEffect
 		[Caption ("Reverse Color Scheme")]
 		public bool ReverseColorScheme { get; set; } = true;
 
-		// TODO: Gradient EdgeBehavior
+		[Caption ("Color Scheme Edge Behavior")]
+		public EdgeBehavior ColorSchemeEdgeBehavior { get; set; } = EdgeBehavior.Clamp;
 
 		[Caption ("Random Point Locations")]
 		public RandomSeed RandomPointLocations { get; set; } = new (0);
