@@ -75,7 +75,7 @@ public sealed class CellsEffect : BaseEffect
 		return new (
 			size: destination.GetSize (),
 			controlPoints: controlPoints,
-			samplingLocations: Sampling.CreateSamplingLocations (data.Quality),
+			samplingLocations: Sampling.CreateSamplingOffsets (data.Quality),
 			distanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
 			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
 			gradientEdgeBehavior: data.ColorSchemeEdgeBehavior);

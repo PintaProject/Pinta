@@ -75,7 +75,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		return new (
 			size: dst.GetSize (),
 			controlPoints: controlPoints,
-			samplingLocations: Sampling.CreateSamplingLocations (data.Quality),
+			samplingLocations: Sampling.CreateSamplingOffsets (data.Quality),
 			colors: [.. reversedSortingColors],
 			distanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric)
 		);

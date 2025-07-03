@@ -8,7 +8,7 @@ public static class Sampling
 	/// Offsets, from top left corner of points,
 	/// where samples should be taken.
 	/// </returns>
-	public static ImmutableArray<PointD> CreateSamplingLocations (int quality)
+	public static ImmutableArray<PointD> CreateSamplingOffsets (int quality)
 	{
 		var builder = ImmutableArray.CreateBuilder<PointD> ();
 		builder.Capacity = quality * quality;
