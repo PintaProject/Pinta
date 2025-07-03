@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-29 00:31+0000\n"
-"PO-Revision-Date: 2025-06-24 23:01+0000\n"
+"PO-Revision-Date: 2025-07-06 03:41+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "pinta/pinta/en_GB/>\n"
@@ -2160,7 +2160,7 @@ msgstr "Shortcut keys"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
 msgid "Show Axonometric Grid"
-msgstr ""
+msgstr "Show Axonometric Grid"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
 msgid "Show Grid"
