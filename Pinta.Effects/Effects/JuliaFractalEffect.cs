@@ -69,8 +69,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 		double aspect,
 		int count,
 		double invCount,
-		double cosTheta,
-		double sinTheta,
+		Matrix2D rotation,
 		int factor,
 		ColorGradient<ColorBgra> colorGradient);
 	private JuliaSettings CreateSettings (ImageSurface dst)
@@ -100,8 +99,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 			aspect: canvasSize.Height / (double) canvasSize.Width,
 			count: count,
 			invCount: 1.0 / count,
-			cosTheta: Math.Cos (angleTheta.Radians),
-			sinTheta: Math.Sin (angleTheta.Radians),
+			rotation: Matrix2D.Rotation (data.Angle.ToRadians ()),
 			factor: data.Factor,
 			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
 		);
@@ -126,7 +124,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 				X: (baseTransfX + (i * settings.invCount)) * settings.invH,
 				Y: (baseTransfY + ((i * settings.invQuality) % 1)) * settings.invH);
 
-			PointD p = transformed.Rotated (settings.sinTheta, settings.cosTheta);
+			PointD p = transformed.Transform (settings.rotation);
 
 			PointD jLoc = new (
 				X: (p.X - p.Y * settings.aspect) * settings.invZoom,
