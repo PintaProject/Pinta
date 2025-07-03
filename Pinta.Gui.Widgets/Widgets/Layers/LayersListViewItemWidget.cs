@@ -163,13 +163,11 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		Gtk.GestureClick _,
 		Gtk.GestureClick.PressedSignalArgs args)
 	{
-		// TODO: Select layer before applying action
-
 		if (item is null || item.UserLayer is null || !PintaCore.Workspace.HasOpenDocuments)
 			return;
 
 		Document doc = PintaCore.Workspace.ActiveDocument;
-		doc.Layers.SetCurrentUserLayer (item.UserLayer);
+		doc.Layers.SetCurrentUserLayer (item.UserLayer); // Select layer before applying action
 
 		LayerActions actions = PintaCore.Actions.Layers;
 
