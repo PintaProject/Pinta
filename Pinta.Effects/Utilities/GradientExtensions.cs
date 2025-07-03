@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using Pinta.Core;
 
 namespace Pinta.Effects;
@@ -10,8 +11,12 @@ internal static class GradientExtensions
 		this ColorGradient<ColorBgra> gradient,
 		double position,
 		EdgeBehavior edgeBehavior,
+		ColorBgra original,
 		IPaletteService palette)
 	{
+		if (position >= gradient.StartPosition && position <= gradient.EndPosition)
+			return gradient.GetColor (position);
+
 		switch (edgeBehavior) {
 			case EdgeBehavior.Clamp:
 			case EdgeBehavior.Original:
@@ -21,7 +26,6 @@ internal static class GradientExtensions
 					return gradient.StartColor;
 				break;
 			case EdgeBehavior.Wrap: {
-					if (position >= gradient.StartPosition && position <= gradient.EndPosition) break;
 					double range = gradient.EndPosition - gradient.StartPosition;
 					double positionOffset = position - gradient.StartPosition;
 					double wrappedOffsetBase = positionOffset % range;
@@ -34,7 +38,6 @@ internal static class GradientExtensions
 				}
 
 			case EdgeBehavior.Reflect: {
-					if (position >= gradient.StartPosition && position <= gradient.EndPosition) break;
 					double range = gradient.EndPosition - gradient.StartPosition;
 					double doubleRange = 2 * range;
 					double positionOffset = position - gradient.StartPosition;
@@ -73,6 +76,6 @@ internal static class GradientExtensions
 					(int) edgeBehavior,
 					typeof (EdgeBehavior));
 		}
-		return gradient.GetColor (position);
+		throw new UnreachableException ();
 	}
 }
