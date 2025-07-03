@@ -84,17 +84,21 @@ public sealed class CellsEffect : BaseEffect
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		CellsSettings settings = CreateSettings (destination);
-		Span<ColorBgra> dst_data = destination.GetPixelData ();
-		foreach (var kvp in roi.GeneratePixelOffsets (settings.size).Select (CreateColor))
-			dst_data[kvp.Key] = kvp.Value;
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
+		foreach (var pixel in roi.GeneratePixelOffsets (settings.size)) {
+			ColorBgra original = sourceData[pixel.memoryOffset];
+			var kvp = CreateColor (pixel, original);
+			destinationData[kvp.Key] = kvp.Value;
+		}
 
-		KeyValuePair<int, ColorBgra> CreateColor (PixelOffset pixel)
+		KeyValuePair<int, ColorBgra> CreateColor (PixelOffset pixel, ColorBgra original)
 		{
 			int sampleCount = settings.samplingLocations.Length;
 			Span<ColorBgra> samples = stackalloc ColorBgra[sampleCount];
 			for (int i = 0; i < sampleCount; i++) {
 				PointD sampleLocation = pixel.coordinates.ToDouble () + settings.samplingLocations[i];
-				ColorBgra sample = GetColorForLocation (sampleLocation);
+				ColorBgra sample = GetColorForLocation (sampleLocation, original);
 				samples[i] = sample;
 			}
 			return KeyValuePair.Create (
@@ -102,7 +106,7 @@ public sealed class CellsEffect : BaseEffect
 				ColorBgra.Blend (samples));
 		}
 
-		ColorBgra GetColorForLocation (PointD location)
+		ColorBgra GetColorForLocation (PointD location, ColorBgra original)
 		{
 			double shortestDistance = double.MaxValue;
 			int closestIndex = 0;
@@ -122,6 +126,7 @@ public sealed class CellsEffect : BaseEffect
 				.GetColorExtended (
 					shortestDistance,
 					settings.gradientEdgeBehavior,
+					original,
 					palette);
 		}
 	}

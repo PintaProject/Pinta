@@ -132,6 +132,15 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Cells10 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CellRadius = 8;
+		effect.Data.ColorSchemeEdgeBehavior = EdgeBehavior.Original;
+		Utilities.TestEffect (effect, "cells10.png");
+	}
+
+	[Test]
 	public void Clouds1 ()
 	{
 		CloudsEffect effect = new (Utilities.CreateMockServices ());
