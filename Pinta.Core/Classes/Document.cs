@@ -1,21 +1,21 @@
-// 
+//
 // Document.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -76,8 +76,8 @@ public sealed class Document
 	{
 		// --- Mandatory fields
 
-		PreviousSelection = new (this);
-		Selection = new DocumentSelection (this);
+		PreviousSelection = new ();
+		Selection = new DocumentSelection ();
 
 		Layers = new DocumentLayers (tools, this);
 		Workspace = new DocumentWorkspace (actions, tools, this);
@@ -89,7 +89,7 @@ public sealed class Document
 		this.tools = tools;
 		this.workspace = workspace;
 
-		// --- Post-initialization 
+		// --- Post-initialization
 
 		if (file is not null) {
 
@@ -285,7 +285,7 @@ public sealed class Document
 	/// <param name="canvasOnly">false for the whole selection, true for the part only on our canvas</param>
 	public RectangleI GetSelectedBounds (bool canvasOnly)
 	{
-		RectangleI bounds = Selection.SelectionPath.GetBounds ();
+		RectangleI bounds = Selection.GetBounds ().ToInt ();
 
 		if (canvasOnly)
 			bounds = ClampToImageSize (bounds);
