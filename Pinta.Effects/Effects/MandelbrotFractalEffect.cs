@@ -67,8 +67,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double invQuality,
 		int count,
 		double invCount,
-		double cosTheta,
-		double sinTheta,
+		Matrix2D rotation,
 		int factor,
 		bool invertColors,
 		ColorGradient<ColorBgra> colorGradient);
@@ -83,7 +82,6 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		Size canvasSize = new (dst.Width, dst.Height);
 		double zoom = 1 + ZOOM_FACTOR * data.Zoom;
 		int count = data.Quality * data.Quality + 1;
-		RadiansAngle angleTheta = data.Angle.ToRadians ();
 
 		var baseGradient =
 			GradientHelper
@@ -106,8 +104,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			count: count,
 			invCount: 1.0 / count,
 
-			cosTheta: Math.Cos (angleTheta.Radians),
-			sinTheta: Math.Sin (angleTheta.Radians),
+			rotation: Matrix2D.Rotation (data.Angle.ToRadians ()),
 
 			factor: data.Factor,
 
@@ -146,7 +143,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 				X: baseU + i * deltaU,
 				Y: baseV + (i * settings.invQuality % 1) * settings.invH);
 
-			PointD rotatedRel = rel.Rotated (settings.sinTheta, settings.cosTheta);
+			PointD rotatedRel = rel.Transform (settings.rotation);
 
 			double m = fractal.Compute (
 				r: (rotatedRel.X * settings.invZoom) + offset_basis.X,
