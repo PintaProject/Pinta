@@ -48,7 +48,7 @@ public static class Utility
 	public static PointD Transform (this in PointD original, Matrix2D transform)
 	{
 		return new (
-			X: original.X * transform.A11 - original.Y * transform.A12,
+			X: original.X * transform.A11 + original.Y * transform.A12,
 			Y: original.X * transform.A21 + original.Y * transform.A22);
 	}
 
