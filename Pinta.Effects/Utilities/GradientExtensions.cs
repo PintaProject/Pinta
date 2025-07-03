@@ -19,7 +19,6 @@ internal static class GradientExtensions
 
 		switch (edgeBehavior) {
 			case EdgeBehavior.Clamp:
-			case EdgeBehavior.Original:
 				if (position > gradient.EndPosition)
 					return gradient.EndColor;
 				else if (position < gradient.StartPosition)
@@ -53,23 +52,13 @@ internal static class GradientExtensions
 					return gradient.GetColor (adjustedPosition);
 				}
 			case EdgeBehavior.Primary:
-				if (position > gradient.EndPosition)
-					return palette.PrimaryColor.ToColorBgra ();
-				else if (position < gradient.StartPosition)
-					return palette.PrimaryColor.ToColorBgra ();
-				break;
+				return palette.PrimaryColor.ToColorBgra ();
 			case EdgeBehavior.Secondary:
-				if (position > gradient.EndPosition)
-					return palette.SecondaryColor.ToColorBgra ();
-				else if (position < gradient.StartPosition)
-					return palette.SecondaryColor.ToColorBgra ();
-				break;
+				return palette.SecondaryColor.ToColorBgra ();
 			case EdgeBehavior.Transparent:
-				if (position > gradient.EndPosition)
-					return ColorBgra.Transparent;
-				else if (position < gradient.StartPosition)
-					return ColorBgra.Transparent;
-				break;
+				return ColorBgra.Transparent;
+			case EdgeBehavior.Original:
+				return original;
 			default:
 				throw new InvalidEnumArgumentException (
 					nameof (edgeBehavior),
