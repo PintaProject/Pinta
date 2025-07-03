@@ -2,7 +2,7 @@ using System;
 
 namespace Pinta.Core;
 
-public sealed record Matrix2D (
+public readonly record struct Matrix2D (
 	double A11, double A12,
 	double A21, double A22)
 {
