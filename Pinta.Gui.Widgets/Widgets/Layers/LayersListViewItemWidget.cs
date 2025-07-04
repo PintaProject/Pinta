@@ -35,44 +35,45 @@ public sealed partial class LayersListViewItem
 	private CanvasRenderer? canvas_renderer;
 
 	// NRT - GObject requires a parameterless constructor, and these don't have simple defaults
-	private readonly Document? doc;
-	private readonly UserLayer? layer;
+	private readonly Document? document;
+	public UserLayer? UserLayer { get; }
 
 	public LayersListViewItem (
 		Document doc,
-		UserLayer layer
-	) : this ()
+		UserLayer userLayer
+	)
+		: this ()
 	{
-		this.doc = doc;
-		this.layer = layer;
+		document = doc;
+		UserLayer = userLayer;
 	}
 
-	public string Label => layer?.Name ?? string.Empty;
-	public bool Visible => !layer?.Hidden ?? false;
+	public string Label => UserLayer?.Name ?? string.Empty;
+	public bool Visible => !UserLayer?.Hidden ?? false;
 
-	public Cairo.ImageSurface BuildThumbnail (
+	public ImageSurface BuildThumbnail (
 		int widthRequest,
 		int heightRequest)
 	{
-		if (doc is null || layer is null)
+		if (document is null || UserLayer is null)
 			throw new InvalidOperationException ($"{nameof (LayersListViewItem)} is not initialized");
 
 		// If this is not the currently selected layer, just directly use the layer's surface.
-		if (layer != doc.Layers.CurrentUserLayer || !doc.Layers.ShowSelectionLayer)
-			return layer.Surface;
+		if (UserLayer != document.Layers.CurrentUserLayer || !document.Layers.ShowSelectionLayer)
+			return UserLayer.Surface;
 
 		// If it is, then we may need to draw the
 		// selection layer over it, like when dragging a selection.
-		ImageSurface surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, widthRequest, heightRequest);
+		ImageSurface surface = CairoExtensions.CreateImageSurface (Format.Argb32, widthRequest, heightRequest);
 
 		var layers = new Layer[]
 		{
-			layer,
-			doc.Layers.SelectionLayer,
+			UserLayer,
+			document.Layers.SelectionLayer,
 		};
 
 		canvas_renderer ??= new CanvasRenderer (enableLivePreview: false, enableBackgroundPattern: true);
-		canvas_renderer.Initialize (doc.ImageSize, new Size (widthRequest, heightRequest));
+		canvas_renderer.Initialize (document.ImageSize, new Size (widthRequest, heightRequest));
 		canvas_renderer.Render (layers, surface, PointI.Zero);
 
 		return surface;
@@ -80,7 +81,7 @@ public sealed partial class LayersListViewItem
 
 	public void HandleVisibilityToggled (bool visible)
 	{
-		if (this.doc is null || this.layer is null)
+		if (document is null || UserLayer is null)
 			throw new InvalidOperationException ($"{nameof (LayersListViewItem)} is not initialized");
 
 		if (Visible == visible)
@@ -88,13 +89,13 @@ public sealed partial class LayersListViewItem
 
 		Document doc = PintaCore.Workspace.ActiveDocument;
 
-		LayerProperties initial = new (layer.Name, visible, layer.Opacity, layer.BlendMode);
-		LayerProperties updated = new (layer.Name, !visible, layer.Opacity, layer.BlendMode);
+		LayerProperties initial = new (UserLayer.Name, visible, UserLayer.Opacity, UserLayer.BlendMode);
+		LayerProperties updated = new (UserLayer.Name, !visible, UserLayer.Opacity, UserLayer.BlendMode);
 
 		UpdateLayerPropertiesHistoryItem historyItem = new (
 			Resources.Icons.LayerProperties,
 			visible ? Translations.GetString ("Layer Shown") : Translations.GetString ("Layer Hidden"),
-			doc.Layers.IndexOf (layer),
+			doc.Layers.IndexOf (UserLayer),
 			initial,
 			updated);
 
@@ -106,10 +107,10 @@ public sealed partial class LayersListViewItem
 
 public sealed class LayersListViewItemWidget : Gtk.Box
 {
-	private static readonly Cairo.Pattern transparent_pattern = CairoExtensions.CreateTransparentBackgroundPattern (8);
+	private static readonly Pattern transparent_pattern = CairoExtensions.CreateTransparentBackgroundPattern (8);
 
 	private LayersListViewItem? item;
-	private Cairo.ImageSurface? thumbnail_surface;
+	private ImageSurface? thumbnail_surface;
 
 	private readonly Gtk.DrawingArea item_thumbnail;
 	private readonly Gtk.Label item_label;
@@ -117,46 +118,80 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 
 	public LayersListViewItemWidget ()
 	{
-		Spacing = 6;
+		Gtk.DrawingArea itemThumbnail = Gtk.DrawingArea.New ();
+		itemThumbnail.SetDrawFunc ((area, context, width, height) => DrawThumbnail (context, width, height));
+		itemThumbnail.WidthRequest = 60;
+		itemThumbnail.HeightRequest = 40;
+
+		Gtk.Label itemLabel = Gtk.Label.New (string.Empty);
+		itemLabel.Halign = Gtk.Align.Start;
+		itemLabel.Hexpand = true;
+		itemLabel.Ellipsize = Pango.EllipsizeMode.End;
+
+		Gtk.CheckButton visibleButton = Gtk.CheckButton.New ();
+		visibleButton.Halign = Gtk.Align.End;
+		visibleButton.Hexpand = false;
+		visibleButton.OnToggled += (_, _) => item?.HandleVisibilityToggled (visibleButton.Active);
+
+		Gtk.GestureClick menuGesture = Gtk.GestureClick.New ();
+		menuGesture.SetButton (Gdk.Constants.BUTTON_SECONDARY);
+		menuGesture.OnPressed += MenuGesture_OnPressed;
+
+		// --- Initialization (Gtk.Widget)
 
 		this.SetAllMargins (2);
+		this.AddController (menuGesture);
+
+		// --- Initialization (Gtk.Box)
+
+		Spacing = 6;
 
 		SetOrientation (Gtk.Orientation.Horizontal);
 
-		item_thumbnail = CreateItemThumbnail ();
-		item_label = CreateItemLabel ();
-		visible_button = CreateVisibleButton ();
+		Append (itemThumbnail);
+		Append (itemLabel);
+		Append (visibleButton);
 
-		Append (item_thumbnail);
-		Append (item_label);
-		Append (visible_button);
+		// --- References to keep
+
+		item_thumbnail = itemThumbnail;
+		item_label = itemLabel;
+		visible_button = visibleButton;
 	}
 
-	private Gtk.CheckButton CreateVisibleButton ()
+	private void MenuGesture_OnPressed (
+		Gtk.GestureClick _,
+		Gtk.GestureClick.PressedSignalArgs args)
 	{
-		Gtk.CheckButton result = Gtk.CheckButton.New ();
-		result.Halign = Gtk.Align.End;
-		result.Hexpand = false;
-		result.OnToggled += (_, _) => item?.HandleVisibilityToggled (visible_button.Active);
-		return result;
-	}
+		if (item is null || item.UserLayer is null || !PintaCore.Workspace.HasOpenDocuments)
+			return;
 
-	private static Gtk.Label CreateItemLabel ()
-	{
-		Gtk.Label result = Gtk.Label.New (string.Empty);
-		result.Halign = Gtk.Align.Start;
-		result.Hexpand = true;
-		result.Ellipsize = Pango.EllipsizeMode.End;
-		return result;
-	}
+		Document doc = PintaCore.Workspace.ActiveDocument;
+		doc.Layers.SetCurrentUserLayer (item.UserLayer); // Select layer before applying action
 
-	private Gtk.DrawingArea CreateItemThumbnail ()
-	{
-		Gtk.DrawingArea result = Gtk.DrawingArea.New ();
-		result.SetDrawFunc ((area, context, width, height) => DrawThumbnail (context, width, height));
-		result.WidthRequest = 60;
-		result.HeightRequest = 40;
-		return result;
+		LayerActions actions = PintaCore.Actions.Layers;
+
+		Gio.Menu operationsSection = Gio.Menu.New ();
+		operationsSection.AppendItem (actions.DeleteLayer.CreateMenuItem ());
+		operationsSection.AppendItem (actions.DuplicateLayer.CreateMenuItem ());
+		operationsSection.AppendItem (actions.MergeLayerDown.CreateMenuItem ());
+
+		Gio.Menu flipSection = Gio.Menu.New ();
+		flipSection.AppendItem (actions.FlipHorizontal.CreateMenuItem ());
+		flipSection.AppendItem (actions.FlipVertical.CreateMenuItem ());
+		flipSection.AppendItem (actions.RotateZoom.CreateMenuItem ());
+
+		Gio.Menu propertiesSection = Gio.Menu.New ();
+		propertiesSection.AppendItem (actions.Properties.CreateMenuItem ());
+
+		Gio.Menu menu = Gio.Menu.New ();
+		menu.AppendSection (null, operationsSection);
+		menu.AppendSection (null, flipSection);
+		menu.AppendSection (null, propertiesSection);
+
+		Gtk.PopoverMenu popover = Gtk.PopoverMenu.NewFromModel (menu);
+		popover.SetParent (this);
+		popover.Popup ();
 	}
 
 	// Set the widget's contents to the provided layer.
@@ -172,7 +207,7 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 	}
 
 	private void DrawThumbnail (
-		Cairo.Context g,
+		Context g,
 		int width,
 		int height)
 	{
@@ -216,7 +251,7 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		g.Restore ();
 
 		// TODO: scale this box correctly to match layer aspect ratio
-		g.SetSourceColor (new Cairo.Color (0.5, 0.5, 0.5));
+		g.SetSourceColor (new Color (0.5, 0.5, 0.5));
 		g.Rectangle (offset.X + 0.5, offset.Y + 0.5, draw_width, draw_height);
 		g.LineWidth = 1;
 

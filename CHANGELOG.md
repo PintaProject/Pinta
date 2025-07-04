@@ -11,6 +11,7 @@ Thanks to the following contributors who worked on this release:
 - @Lehonti
 - @UrtsiSantsi
 - @pedropaulosuzuki
+- @bplaat
 
 ### Added
 - Implemented a new axonometric grid (View > Canvas Grid... > Show Axonometric Grid) (#1438, #1541)
@@ -18,11 +19,13 @@ Thanks to the following contributors who worked on this release:
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
 - When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
 - Keyboard shortcuts are now displayed on all toolbar button tooltips (#1408, #1432)
+- Added a right click menu for layers, containing actions that can be applied to the selected layer (#1588) 
 
 ### Changed
 - Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
 - Removed use of deprecated Gtk.FontButton (#1421)
 - View menu moved from hamburger menu to dedicated button (#1428, #1471)
+- Updated the application icon on macOS to better match the platform's icon style guidelines (#1572)
 
 ### Fixed
 - Fixed a bug where cancelling the color picker dialog could still update the palette colors (#1390, #1411)
