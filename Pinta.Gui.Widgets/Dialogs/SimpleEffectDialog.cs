@@ -509,16 +509,16 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		reseedButton.OnClicked += (_, _) => seedInput.Value = random.Next (minSeed, maxSeed);
 
-		Gtk.Box hbox = new () { Spacing = 6 };
-		hbox.SetOrientation (Gtk.Orientation.Horizontal);
-		hbox.Append (seedInput);
-		hbox.Append (reseedButton);
+		Gtk.Box controlsBox = new () { Spacing = 6 };
+		controlsBox.SetOrientation (Gtk.Orientation.Horizontal);
+		controlsBox.Append (seedInput);
+		controlsBox.Append (reseedButton);
 
-		Gtk.Box vbox = Gtk.Box.New (Gtk.Orientation.Vertical, 6);
-		vbox.Append (sectionLabel);
-		vbox.Append (hbox);
+		Gtk.Box combinedWidget = Gtk.Box.New (Gtk.Orientation.Vertical, 6);
+		combinedWidget.Append (sectionLabel);
+		combinedWidget.Append (controlsBox);
 
-		return vbox;
+		return combinedWidget;
 	}
 
 	private void DelayedUpdate (TimeoutHandler handler)
