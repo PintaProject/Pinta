@@ -88,11 +88,10 @@ public sealed class CellsEffect : BaseEffect
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 		foreach (var pixel in roi.GeneratePixelOffsets (settings.size)) {
 			ColorBgra original = sourceData[pixel.memoryOffset];
-			var kvp = CreateColor (pixel, original);
-			destinationData[kvp.Key] = kvp.Value;
+			destinationData[pixel.memoryOffset] = CreateColor (pixel, original);
 		}
 
-		KeyValuePair<int, ColorBgra> CreateColor (PixelOffset pixel, ColorBgra original)
+		ColorBgra CreateColor (PixelOffset pixel, ColorBgra original)
 		{
 			int sampleCount = settings.samplingLocations.Length;
 			Span<ColorBgra> samples = stackalloc ColorBgra[sampleCount];
@@ -101,9 +100,7 @@ public sealed class CellsEffect : BaseEffect
 				ColorBgra sample = GetColorForLocation (sampleLocation, original);
 				samples[i] = sample;
 			}
-			return KeyValuePair.Create (
-				pixel.memoryOffset,
-				ColorBgra.Blend (samples));
+			return ColorBgra.Blend (samples);
 		}
 
 		ColorBgra GetColorForLocation (PointD location, ColorBgra original)
