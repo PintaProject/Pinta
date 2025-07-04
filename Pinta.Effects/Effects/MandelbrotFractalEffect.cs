@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Numerics;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
@@ -143,7 +144,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 				X: baseU + i * deltaU,
 				Y: baseV + (i * settings.invQuality % 1) * settings.invH);
 
-			PointD rotatedRel = rel.Transform (settings.rotation);
+			PointD rotatedRel = rel.Transformed (settings.rotation);
 
 			double m = fractal.Compute (
 				r: (rotatedRel.X * settings.invZoom) + offset_basis.X,

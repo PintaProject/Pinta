@@ -124,7 +124,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 				X: (baseTransfX + (i * settings.invCount)) * settings.invH,
 				Y: (baseTransfY + ((i * settings.invQuality) % 1)) * settings.invH);
 
-			PointD p = transformed.Transform (settings.rotation);
+			PointD p = transformed.Transformed (settings.rotation);
 
 			PointD jLoc = new (
 				X: (p.X - p.Y * settings.aspect) * settings.invZoom,
