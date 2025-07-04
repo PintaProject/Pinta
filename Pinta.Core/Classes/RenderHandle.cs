@@ -9,7 +9,7 @@ internal readonly record struct CompletionInfo (
 	bool WasCanceled,
 	IReadOnlyList<Exception> Errors);
 
-internal sealed class RenderHandle
+internal sealed class RenderHandle : IDisposable
 {
 	internal double Progress
 		=> get_progress ();
@@ -47,4 +47,18 @@ internal sealed class RenderHandle
 	}
 
 	internal delegate bool BoundsConsumer (out RectangleI bounds);
+
+	public void Dispose ()
+	{
+		Dispose (disposing: true);
+	}
+	private void Dispose (bool disposing)
+	{
+		cancellation.Dispose ();
+	}
+
+	~RenderHandle ()
+	{
+		Dispose (disposing: false);
+	}
 }
