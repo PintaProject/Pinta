@@ -140,6 +140,9 @@ public sealed class CellsEffect : BaseEffect
 		[Caption ("Number of Cells"), MinimumValue (1), MaximumValue (1024)]
 		public int NumberOfCells { get; set; } = 100;
 
+		[Caption ("Random Point Locations")]
+		public RandomSeed RandomPointLocations { get; set; } = new (0);
+
 		[Caption ("Cell Radius")]
 		[MinimumValue (4), MaximumValue (100)]
 		public double CellRadius { get; set; } = 32;
@@ -160,9 +163,6 @@ public sealed class CellsEffect : BaseEffect
 
 		[Caption ("Color Scheme Edge Behavior")]
 		public EdgeBehavior ColorSchemeEdgeBehavior { get; set; } = EdgeBehavior.Clamp;
-
-		[Caption ("Random Point Locations")]
-		public RandomSeed RandomPointLocations { get; set; } = new (0);
 
 		[Caption ("Quality")]
 		[MinimumValue (1), MaximumValue (4)]
