@@ -11,8 +11,7 @@ public static class Sampling
 	/// </returns>
 	public static ImmutableArray<PointD> CreateSamplingOffsets (int quality)
 	{
-		if (quality < 1)
-			throw new ArgumentOutOfRangeException (nameof (quality));
+		ArgumentOutOfRangeException.ThrowIfLessThan (quality, 1);
 
 		var builder = ImmutableArray.CreateBuilder<PointD> ();
 		builder.Capacity = quality * quality;
@@ -31,5 +30,26 @@ public static class Sampling
 		}
 
 		return builder.MoveToImmutable ();
+	}
+
+	public static ImmutableHashSet<PointI> CreateCellControlPoints (RectangleI roi, int pointCount, RandomSeed pointLocationsSeed)
+	{
+		if (pointCount > roi.Width * roi.Height)
+			throw new ArgumentException ($"Requested more control points via {nameof (pointCount)} than pixels in {nameof (roi)}");
+
+		Random randomPositioner = new (pointLocationsSeed.Value);
+		var result = ImmutableHashSet.CreateBuilder<PointI> (); // Ensures points' uniqueness
+
+		while (result.Count < pointCount) {
+
+			PointI point = new (
+				X: randomPositioner.Next (roi.Left, roi.Right + 1),
+				Y: randomPositioner.Next (roi.Top, roi.Bottom + 1)
+			);
+
+			result.Add (point);
+		}
+
+		return result.ToImmutable ();
 	}
 }

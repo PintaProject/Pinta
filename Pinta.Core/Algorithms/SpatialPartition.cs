@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Immutable;
 using System.ComponentModel;
 
 namespace Pinta.Core;
@@ -35,26 +34,5 @@ public static class SpatialPartition
 			PointD difference = pixelLocation - targetPoint;
 			return Math.Max (Math.Abs (difference.X), Math.Abs (difference.Y));
 		}
-	}
-
-	public static ImmutableHashSet<PointI> CreateCellControlPoints (RectangleI roi, int pointCount, RandomSeed pointLocationsSeed)
-	{
-		if (pointCount > roi.Width * roi.Height)
-			throw new ArgumentException ($"Requested more control points via {nameof (pointCount)} than pixels in {nameof (roi)}");
-
-		Random randomPositioner = new (pointLocationsSeed.Value);
-		var result = ImmutableHashSet.CreateBuilder<PointI> (); // Ensures points' uniqueness
-
-		while (result.Count < pointCount) {
-
-			PointI point = new (
-				X: randomPositioner.Next (roi.Left, roi.Right + 1),
-				Y: randomPositioner.Next (roi.Top, roi.Bottom + 1)
-			);
-
-			result.Add (point);
-		}
-
-		return result.ToImmutable ();
 	}
 }
