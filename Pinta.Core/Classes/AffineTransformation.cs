@@ -2,12 +2,12 @@ using System;
 
 namespace Pinta.Core;
 
-public readonly record struct Matrix3x2D (
+public readonly record struct AffineTransformation (
 	double A11, double A12,
 	double A21, double A22,
-	double A31, double A32)
+	double dx, double dy)
 {
-	public static Matrix3x2D CreateRotation (RadiansAngle theta)
+	public static AffineTransformation CreateRotation (RadiansAngle theta)
 	{
 		double radians = theta.Radians;
 		double sin = Math.Sin (radians);
