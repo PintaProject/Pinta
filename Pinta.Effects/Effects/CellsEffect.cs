@@ -156,7 +156,7 @@ public sealed class CellsEffect : BaseEffect
 		public RandomSeed ColorSchemeSeed { get; set; } = new (0);
 
 		[Caption ("Reverse Color Scheme")]
-		public bool ReverseColorScheme { get; set; } = true;
+		public bool ReverseColorScheme { get; set; } = false;
 
 		[Caption ("Color Scheme Edge Behavior")]
 		public EdgeBehavior ColorSchemeEdgeBehavior { get; set; } = EdgeBehavior.Clamp;
