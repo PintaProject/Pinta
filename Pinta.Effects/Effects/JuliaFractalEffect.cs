@@ -99,7 +99,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 			aspect: canvasSize.Height / (double) canvasSize.Width,
 			count: count,
 			invCount: 1.0 / count,
-			rotation: Matrix2D.Rotation (data.Angle.ToRadians ()),
+			rotation: Matrix2D.CreateRotation (data.Angle.ToRadians ()),
 			factor: data.Factor,
 			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
 		);
