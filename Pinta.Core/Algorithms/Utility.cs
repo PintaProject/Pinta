@@ -44,7 +44,6 @@ public static class Utility
 	public static double Magnitude (this in PointD point)
 		=> Mathematics.Magnitude (point.X, point.Y);
 
-	/// <summary>Equivalent to applying a rotation matrix</summary>
 	public static PointD Transformed (this in PointD original, in AffineTransformation transform)
 	{
 		return new (
