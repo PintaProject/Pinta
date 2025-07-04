@@ -61,6 +61,7 @@ internal sealed class EffectsTest
 	public void Cells1 ()
 	{
 		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.ReverseColorScheme = false;
 		Utilities.TestEffect (effect, "cells1.png");
 	}
 
@@ -84,7 +85,7 @@ internal sealed class EffectsTest
 	public void Cells4 ()
 	{
 		CellsEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.ReverseColorScheme = false;
+		effect.Data.ReverseColorScheme = true;
 		Utilities.TestEffect (effect, "cells4.png");
 	}
 
