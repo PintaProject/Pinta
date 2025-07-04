@@ -66,7 +66,7 @@ public sealed class CellsEffect : BaseEffect
 				data.ColorSchemeSeed)
 			.Resized (0, data.CellRadius);
 
-		IEnumerable<PointI> basePoints = SpatialPartition.CreateControlPoints (
+		IEnumerable<PointI> basePoints = SpatialPartition.CreateCellControlPoints (
 			roi,
 			Math.Min (data.NumberOfCells, roi.Width * roi.Height),
 			data.RandomPointLocations);

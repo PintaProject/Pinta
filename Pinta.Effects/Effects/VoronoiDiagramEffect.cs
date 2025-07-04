@@ -61,7 +61,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		PointD locationOffset = new (0.5, 0.5);
 
-		IEnumerable<PointI> basePoints = SpatialPartition.CreateControlPoints (
+		IEnumerable<PointI> basePoints = SpatialPartition.CreateCellControlPoints (
 			roi,
 			Math.Min (data.NumberOfCells, roi.Width * roi.Height),
 			data.RandomPointLocations);

@@ -37,7 +37,7 @@ public static class SpatialPartition
 		}
 	}
 
-	public static ImmutableHashSet<PointI> CreateControlPoints (RectangleI roi, int pointCount, RandomSeed pointLocationsSeed)
+	public static ImmutableHashSet<PointI> CreateCellControlPoints (RectangleI roi, int pointCount, RandomSeed pointLocationsSeed)
 	{
 		if (pointCount > roi.Width * roi.Height)
 			throw new ArgumentException ($"Requested more control points via {nameof (pointCount)} than pixels in {nameof (roi)}");
