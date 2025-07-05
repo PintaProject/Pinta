@@ -80,12 +80,9 @@ public sealed class PintaCanvas : DrawingArea
 			// widget jumps back to the origin.
 			CanvasWindow.GrabFocus ();
 
-			// The canvas gets the button press before the tab system, so
-			// if this click is on a canvas that isn't currently the ActiveDocument yet, 
-			// we need to go ahead and make it the active document for the tools
-			// to use it, even though right after this the tab system would have switched it
-			if (PintaCore.Workspace.ActiveDocument != document)
-				PintaCore.Actions.Window.SetActiveDocument (document);
+			// Note: if we ever regain support for docking multiple canvas
+			// widgets side by side (like Pinta 1.7 could), a mouse click should switch
+			// the active document to this document.
 
 			var window_point = new PointD (args.X, args.Y);
 			var canvas_point = document.Workspace.ViewPointToCanvas (window_point);

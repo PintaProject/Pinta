@@ -43,23 +43,24 @@ namespace Pinta.Effects;
 
 public partial class LevelsDialog : Gtk.Dialog
 {
-	private record struct ChannelsMask (bool R, bool G, bool B)
+	private record struct ChannelsMask (bool B, bool G, bool R)
 	{
+		// Note the ordering is required to match the indexing of ColorBgra.
 		public bool this[int index] {
 
 			set {
 				switch (index) {
-					case 0: R = value; break;
+					case 0: B = value; break;
 					case 1: G = value; break;
-					case 2: B = value; break;
+					case 2: R = value; break;
 					default: throw new ArgumentOutOfRangeException (nameof (index));
 				}
 			}
 
 			readonly get => index switch {
-				0 => R,
+				0 => B,
 				1 => G,
-				2 => B,
+				2 => R,
 				_ => throw new ArgumentOutOfRangeException (nameof (index))
 			};
 		}

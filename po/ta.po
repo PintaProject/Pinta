@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-05-25 00:30+0000\n"
-"PO-Revision-Date: 2025-01-28 10:02+0000\n"
+"PO-Revision-Date: 2025-06-17 12:30+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/pinta/pinta/ta/>\n"
 "Language: ta\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.12.1\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
@@ -254,7 +254,7 @@ msgstr "கீழே வலது"
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:148
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
-msgstr "ஒளி"
+msgstr "ஒளிஅளவு"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
 msgid "Brightness / Contrast"
@@ -550,9 +550,9 @@ msgstr "பருத்தி மிட்டாய்"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:125
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr "{1 இருந்து இலிருந்து \"{0}\" அடுக்கை இறக்குமதி செய்ய முடியவில்லை"
+msgstr "{1} இலிருந்து \"{0}\" அடுக்கை இறக்குமதி செய்ய முடியவில்லை"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:167
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:432
@@ -690,7 +690,7 @@ msgstr "விளிம்பு கண்டறிதல்"
 
 #: ../Pinta/MainWindow.cs:410
 msgid "Effe_cts"
-msgstr "Effe_cts"
+msgstr "விளைவுகள்"
 
 #: ../Pinta/MainWindow.cs:443
 msgid "Effects"
@@ -1402,7 +1402,7 @@ msgstr "இடைநடு"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
-msgstr ""
+msgstr "பட்டியல் பட்டி"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:363
@@ -1746,7 +1746,7 @@ msgstr "பினா கோலாடா"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
 msgid "Please restart Pinta for the changes to take effect."
-msgstr ""
+msgstr "மாற்றங்கள் நடைமுறைக்கு வர பிண்டாவை மறுதொடக்கம் செய்யுங்கள்."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:600
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:803
@@ -1992,7 +1992,7 @@ msgstr "மறுஅளவிடுதல் தட்டு"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
 msgid "Restart Pinta"
-msgstr ""
+msgstr "பிண்டாவை மறுதொடக்கம் செய்"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
@@ -2157,7 +2157,7 @@ msgstr "குறுக்குவழி விசை"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
-msgstr ""
+msgstr "குறுக்குவழி விசைகள்"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:19
 msgid "Show Grid"
@@ -2506,7 +2506,7 @@ msgstr "செங்குத்துப் சிவப்பு (ஆர்)"
 
 #: ../Pinta/MainWindow.cs:461
 msgid "View"
-msgstr ""
+msgstr "நோக்கு"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
@@ -2549,7 +2549,7 @@ msgstr "மடக்கு"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:40
 msgid "Xor"
-msgstr "Xor"
+msgstr "அல்லதில்"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
@@ -2597,7 +2597,7 @@ msgstr "தேர்வுக்கு பெரிதாக்கு"
 
 #: ../Pinta/MainWindow.cs:406
 msgid "_Adjustments"
-msgstr "_Adjustments"
+msgstr "_சரிசெய்தல்"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
