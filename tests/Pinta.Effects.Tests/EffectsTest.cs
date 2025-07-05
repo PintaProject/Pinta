@@ -58,6 +58,37 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Caustics1 ()
+	{
+		CausticsEffect effect = new CausticsEffect (Utilities.CreateMockServices ());
+		Utilities.TestEffect (effect, "caustics1.png");
+	}
+
+	[Test]
+	public void Caustics2 ()
+	{
+		CausticsEffect effect = new CausticsEffect (Utilities.CreateMockServices ());
+		effect.Data.Dispersion = 1.0;
+		Utilities.TestEffect (effect, "caustics2.png");
+	}
+
+	[Test]
+	public void Caustics3 ()
+	{
+		CausticsEffect effect = new CausticsEffect (Utilities.CreateMockServices ());
+		effect.Data.TimeOffset = 100.0;
+		Utilities.TestEffect (effect, "caustics3.png");
+	}
+
+	[Test]
+	public void Caustics4 ()
+	{
+		CausticsEffect effect = new CausticsEffect (Utilities.CreateMockServices ());
+		effect.Data.Samples = 10;
+		Utilities.TestEffect (effect, "caustics4.png");
+	}
+
+	[Test]
 	public void Cells1 ()
 	{
 		CellsEffect effect = new (Utilities.CreateMockServices ());
