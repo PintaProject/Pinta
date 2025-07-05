@@ -30,7 +30,6 @@
 
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,12 +38,8 @@ using Debug = System.Diagnostics.Debug;
 namespace Pinta.Core;
 
 // Only call methods on this class from a single thread (The UI thread).
-internal sealed class AsyncEffectRenderer
+internal static class AsyncEffectRenderer
 {
-	internal readonly record struct CompletionInfo (
-		bool WasCanceled,
-		IReadOnlyList<Exception> Errors);
-
 	internal sealed class Settings
 	{
 		internal int ThreadCount { get; }
@@ -65,74 +60,17 @@ internal sealed class AsyncEffectRenderer
 		}
 	}
 
-	TaskCompletionSource<CompletionInfo> completion_source;
-	CancellationTokenSource cancellation_source;
-	ConcurrentQueue<RectangleI> queued_tiles;
-	int tiles_count = 0;
-
-	private readonly object updated_lock = new ();
-	private bool is_updated = false;
-	private RectangleI updated_area;
-
-	private readonly Settings settings;
-
-	internal AsyncEffectRenderer (Settings settings)
-	{
-		TaskCompletionSource<CompletionInfo> initialCompletionSource = new ();
-		initialCompletionSource.SetResult (
-			new (
-				WasCanceled: false,
-				Errors: []
-			)
-		);
-
-		completion_source = initialCompletionSource;
-		cancellation_source = new ();
-		queued_tiles = new ConcurrentQueue<RectangleI> ();
-
-		this.settings = settings;
-	}
-
-	internal bool IsRendering => !completion_source.Task.IsCompleted;
-
-	internal double Progress {
-		get {
-			if (tiles_count == 0) return 0;
-			int dequeued = tiles_count - queued_tiles.Count;
-			return dequeued / (double) tiles_count;
-		}
-	}
-
-	/// <summary>
-	/// Retrieves the union of all tiles that have finished rendering since the
-	/// last time this method was called, and resets the updated area.
-	/// </summary>
-	/// <returns>
-	/// True if there was an updated area to retrieve, otherwise false.
-	/// </returns>
-	internal bool TryConsumeBounds (out RectangleI bounds)
-	{
-		lock (updated_lock) {
-			if (!is_updated) {
-				bounds = default;
-				return false;
-			}
-
-			bounds = updated_area;
-			is_updated = false;
-			return true;
-		}
-	}
-
-	internal async void Start (
+	internal static RenderHandle Start (
+		Settings settings,
 		BaseEffect effect,
 		Cairo.ImageSurface source,
 		Cairo.ImageSurface dest)
 	{
-		if (IsRendering) throw new InvalidOperationException ("Render is in progress");
+		object updatedLock = new ();
+		bool isUpdated = false;
+		RectangleI updatedArea = RectangleI.Zero;
 
-		TaskCompletionSource<CompletionInfo> newCompletionSource = new ();
-		completion_source = newCompletionSource;
+		CancellationTokenSource cts = new ();
 
 		Debug.WriteLine ("AsyncEffectRenderer.Start ()");
 
@@ -142,15 +80,12 @@ internal sealed class AsyncEffectRenderer
 
 		ConcurrentQueue<Exception> renderExceptions = new ();
 
-		ConcurrentQueue<RectangleI> targetTiles = new (
+		ConcurrentQueue<RectangleI> queuedTiles = new (
 			settings.EffectIsTileable
 			? settings.RenderBounds.ToRows () // If effect is tileable, render each row in parallel.
 			: [settings.RenderBounds]); // If the effect isn't tileable, there is a single tile for the entire render bounds
 
-		queued_tiles = targetTiles;
-		tiles_count = targetTiles.Count;
-
-		CancellationToken cancellationToken = ReplaceCancellationSource ();
+		int tilesCount = queuedTiles.Count;
 
 		Debug.WriteLine ("AsyncEffectRenderer.Start () Render starting.");
 
@@ -158,27 +93,47 @@ internal sealed class AsyncEffectRenderer
 			Enumerable.Range (0, settings.ThreadCount)
 			.Select (_ => Task.Run (RenderNextTile));
 
-		await Task.WhenAll (tasks);
+		var aggregateTask =
+			Task
+			.WhenAll (tasks)
+			.ContinueWith (
+				_ => new CompletionInfo (
+					WasCanceled: cts.Token.IsCancellationRequested,
+					Errors: [.. renderExceptions]
+				)
+			);
 
-		// Change back to the UI thread to notify of completion.
-		GLib.Functions.TimeoutAdd (
-			0,
-			0,
-			() => {
-
-				CompletionInfo completion = new (
-					WasCanceled: cancellationToken.IsCancellationRequested,
-					Errors: [.. renderExceptions]);
-
-				newCompletionSource.SetResult (completion);
-
-				return false; // don't call the timer again
-			}
-		);
+		return new (
+			aggregateTask,
+			cts,
+			TryConsumeBounds,
+			GetProgress);
 
 		// ---------------
 		// === Methods ===
 		// ---------------
+
+
+		double GetProgress ()
+		{
+			if (tilesCount == 0) return 0;
+			int dequeued = tilesCount - queuedTiles.Count;
+			return dequeued / (double) tilesCount;
+		}
+
+		bool TryConsumeBounds (out RectangleI bounds)
+		{
+			lock (updatedLock) {
+				if (!isUpdated) {
+					bounds = default;
+					return false;
+				}
+
+				bounds = updatedArea;
+				isUpdated = false;
+				return true;
+			}
+		}
 
 		// Runs on a background thread.
 		void RenderNextTile ()
@@ -186,11 +141,11 @@ internal sealed class AsyncEffectRenderer
 			// Fetch the next tile index and render it.
 			while (true) {
 
-				if (cancellationToken.IsCancellationRequested) return;
-				if (!queued_tiles.TryDequeue (out RectangleI tileBounds)) return;
+				if (cts.Token.IsCancellationRequested) return;
+				if (!queuedTiles.TryDequeue (out RectangleI tileBounds)) return;
 				try {
 					// NRT - These are set in Start () before getting here
-					if (!cancellationToken.IsCancellationRequested) {
+					if (!cts.Token.IsCancellationRequested) {
 						dest.Flush ();
 						effectClone.Render (source, dest, [tileBounds]);
 						dest.MarkDirty (tileBounds);
@@ -199,39 +154,20 @@ internal sealed class AsyncEffectRenderer
 					renderExceptions.Enqueue (ex);
 				}
 
-				// Ignore completions of tiles after a cancel or from a previous render.
-				if (!IsRendering || cancellationToken.IsCancellationRequested)
+				// Ignore completions of tiles after a cancel
+				if (cts.Token.IsCancellationRequested)
 					return;
 
 				// Update bounds to be shown on next expose.
-				lock (updated_lock) {
-					if (is_updated) {
-						updated_area = RectangleI.Union (tileBounds, updated_area);
+				lock (updatedLock) {
+					if (isUpdated) {
+						updatedArea = RectangleI.Union (tileBounds, updatedArea);
 					} else {
-						is_updated = true;
-						updated_area = tileBounds;
+						isUpdated = true;
+						updatedArea = tileBounds;
 					}
 				}
 			}
 		}
-	}
-
-	internal Task<CompletionInfo> Finish (bool cancel)
-	{
-		if (cancel) {
-			Debug.WriteLine ("AsyncEffectRenderer.Cancel ()");
-			cancellation_source.Cancel ();
-		}
-		return completion_source.Task;
-	}
-
-	CancellationToken ReplaceCancellationSource ()
-	{
-		CancellationTokenSource newSource = new ();
-		CancellationTokenSource oldSource = cancellation_source;
-		oldSource.Cancel (); // Safe to call multiple times
-		oldSource.Dispose (); // Not safe to call multiple times, so this is the only place it should be called
-		cancellation_source = newSource;
-		return newSource.Token;
 	}
 }
