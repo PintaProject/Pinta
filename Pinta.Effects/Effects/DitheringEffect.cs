@@ -43,7 +43,8 @@ public sealed class DitheringEffect : BaseEffect
 	{
 		ImmutableArray<ColorBgra> chosenPalette = Data.PaletteSource switch {
 			PaletteSource.PredefinedPalettes => PaletteHelper.GetPredefined (Data.PaletteChoice),
-			PaletteSource.ToolbarPalette => palette.CurrentPalette.Colors.Select (CairoExtensions.ToColorBgra).ToImmutableArray (),
+			PaletteSource.ToolbarPalette => [.. palette.CurrentPalette.Colors.Select (CairoExtensions.ToColorBgra)],
+			PaletteSource.RecentlyUsedColors => [.. palette.RecentlyUsedColors.Select (CairoExtensions.ToColorBgra)],
 			_ => throw new UnreachableException (),
 		};
 
@@ -148,6 +149,9 @@ public sealed class DitheringEffect : BaseEffect
 
 		[Caption ("Toolbar Palette")]
 		ToolbarPalette,
+
+		[Caption ("Recently Used Colors")]
+		RecentlyUsedColors,
 	}
 
 	public sealed class DitheringData : EffectData

@@ -37,6 +37,7 @@ public interface IPaletteService
 	Color PrimaryColor { get; set; }
 	Color SecondaryColor { get; set; }
 	Palette CurrentPalette { get; }
+	ReadOnlyCollection<Color> RecentlyUsedColors { get; }
 	void SetColor (bool setPrimary, Color color, bool addToRecent = true);
 	public event EventHandler? PrimaryColorChanged;
 	public event EventHandler? SecondaryColorChanged;
