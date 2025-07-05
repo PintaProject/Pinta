@@ -134,8 +134,6 @@ public sealed class CausticsEffect : BaseEffect
 							int dest_offset = (int) targetY * settings.canvasSize.Width + (int) targetX;
 							ColorBgra pixelColor = dest_data[dest_offset];
 
-							byte a = pixelColor.A;
-
 							byte r = pixelColor.R;
 							byte g = pixelColor.G;
 							byte b = pixelColor.B;
@@ -147,14 +145,16 @@ public sealed class CausticsEffect : BaseEffect
 							else // Blue
 								b = (byte) Math.Min (255, b + settings.v);
 
-							r = Math.Min (r, a);
-							g = Math.Min (g, a);
+							byte a = (byte) Math.Min (255, pixelColor.A + settings.v);
 							b = Math.Min (b, a);
+							g = Math.Min (g, a);
+							r = Math.Min (r, a);
 
 							dest_data[dest_offset] = ColorBgra.FromBgra (b, g, r, a);
 						}
 					}
-				} else { // No dispersion
+				} else // No dispersion
+				  {
 					double targetX = sx + settings.scale * settings.focus * xDisplacement;
 					double targetY = sy + settings.scale * settings.focus * yDisplacement;
 
@@ -164,15 +164,13 @@ public sealed class CausticsEffect : BaseEffect
 
 						ColorBgra pixelColor = dest_data[dest_offset];
 
-						// Keep the original alpha. Don't add brightness to it.
-						byte a = pixelColor.A;
-
-						// Add brightness to color channels and clamp by alpha to keep color valid
+						byte a = (byte) Math.Min (255, pixelColor.A + settings.v);
 						byte r = (byte) Math.Min (a, pixelColor.R + settings.v);
 						byte g = (byte) Math.Min (a, pixelColor.G + settings.v);
 						byte b = (byte) Math.Min (a, pixelColor.B + settings.v);
 
 						dest_data[dest_offset] = ColorBgra.FromBgra (b, g, r, a);
+
 					}
 				}
 			}
