@@ -4,16 +4,16 @@ namespace Pinta.Core;
 
 public readonly struct GLibTimerWrapper : IDisposable
 {
-	private readonly uint timer_id;
+	public uint TimerID { get; }
 	private GLibTimerWrapper (uint timerId)
 	{
-		timer_id = timerId;
+		TimerID = timerId;
 	}
 
 	public void Dispose ()
 	{
-		if (timer_id == 0) return;
-		GLib.Source.Remove (timer_id);
+		if (TimerID == 0) return;
+		GLib.Source.Remove (TimerID);
 	}
 
 	public static implicit operator GLibTimerWrapper (uint timerId)
