@@ -26,42 +26,45 @@ public static class Utility
 	public static byte ClampToByte (int x)
 		=> (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
-	public static double MagnitudeSquared (PointD p)
+	public static double MagnitudeSquared (this in PointD p)
 		=> Mathematics.MagnitudeSquared (p.X, p.Y);
 
-	public static double MagnitudeSquared (PointF p)
+	public static double MagnitudeSquared (this in PointF p)
 		=> Mathematics.MagnitudeSquared<double> (p.X, p.Y);
 
-	public static double Magnitude (this PointF point)
+	public static double Magnitude (this in PointF point)
 		=> Mathematics.Magnitude<double> (point.X, point.Y);
 
-	public static float MagnitudeSquaredF (PointF p)
+	public static float MagnitudeSquaredF (this in PointF p)
 		=> Mathematics.MagnitudeSquared (p.X, p.Y);
 
-	public static float MagnitudeF (this PointF point)
+	public static float MagnitudeF (this in PointF point)
 		=> Mathematics.Magnitude (point.X, point.Y);
 
-	public static double Magnitude (this PointD point)
+	public static double Magnitude (this in PointD point)
 		=> Mathematics.Magnitude (point.X, point.Y);
+
+	public static PointD Transformed (this in PointD original, in Matrix3x2D transform)
+	{
+		return new (
+			X: (original.X * transform.M11) + (original.Y * transform.M21) + transform.M31,
+			Y: (original.X * transform.M12) + (original.Y * transform.M22) + transform.M32);
+	}
 
 	public static double Magnitude (this PointI point)
 		=> Mathematics.Magnitude<double> (point.X, point.Y);
 
-	public static double Distance (this PointD origin, in PointD dest)
+	public static double Distance (this in PointD origin, in PointD dest)
 		=> Magnitude (origin - dest);
 
-	public static PointD Lerp (
-		PointD from,
-		PointD to,
-		float frac
-	)
-		=> new (
+	public static PointD Lerp (in PointD from, in PointD to, float frac)
+	{
+		return new (
 			X: Mathematics.Lerp (from.X, to.X, frac),
 			Y: Mathematics.Lerp (from.Y, to.Y, frac));
+	}
 
-	public static void Swap<T> (
-		ref T a,
-		ref T b) where T : struct
+	public static void Swap<T> (ref T a, ref T b) where T : struct
 	{
 		T t;
 
@@ -91,7 +94,7 @@ public static class Utility
 		return unionsAggregate;
 	}
 
-	public static int ColorDifferenceSquared (ColorBgra a, ColorBgra b)
+	public static int ColorDifferenceSquared (in ColorBgra a, in ColorBgra b)
 	{
 		int r_diff = a.R - b.R;
 		int g_diff = a.G - b.G;

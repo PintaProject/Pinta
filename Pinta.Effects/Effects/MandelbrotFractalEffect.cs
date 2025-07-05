@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Numerics;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
@@ -67,24 +68,29 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double invQuality,
 		int count,
 		double invCount,
-		RadiansAngle angleTheta,
+		Matrix3x2D rotation,
 		int factor,
 		bool invertColors,
 		ColorGradient<ColorBgra> colorGradient);
 	private MandelbrotSettings CreateSettings (ImageSurface dst)
 	{
 		const double ZOOM_FACTOR = 20.0;
+
+		// Reference to effect data, to prevent repeated casting
+		// TODO: Remove if and when reading the property doesn't require casting
+		var data = Data;
+
 		Size canvasSize = new (dst.Width, dst.Height);
-		double zoom = 1 + ZOOM_FACTOR * Data.Zoom;
-		int count = Data.Quality * Data.Quality + 1;
+		double zoom = 1 + ZOOM_FACTOR * data.Zoom;
+		int count = data.Quality * data.Quality + 1;
 
 		var baseGradient =
 			GradientHelper
 			.CreateBaseGradientForEffect (
 				palette,
-				Data.ColorSchemeSource,
-				Data.ColorScheme,
-				Data.ColorSchemeSeed)
+				data.ColorSchemeSource,
+				data.ColorScheme,
+				data.ColorSchemeSeed)
 			.Resized (0, 1023);
 
 		return new (
@@ -94,17 +100,18 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			invH: 1.0 / canvasSize.Height,
 			invZoom: 1.0 / zoom,
 
-			invQuality: 1.0 / Data.Quality,
+			invQuality: 1.0 / data.Quality,
 
 			count: count,
 			invCount: 1.0 / count,
-			angleTheta: Data.Angle.ToRadians (),
 
-			factor: Data.Factor,
+			rotation: Matrix3x2D.CreateRotation (data.Angle.ToRadians ()),
 
-			invertColors: Data.InvertColors,
+			factor: data.Factor,
 
-			colorGradient: Data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
+			invertColors: data.InvertColors,
+
+			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
 		);
 	}
 
@@ -137,17 +144,11 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 				X: baseU + i * deltaU,
 				Y: baseV + (i * settings.invQuality % 1) * settings.invH);
 
-			double radius = rel.Magnitude ();
-			double theta = Math.Atan2 (rel.Y, rel.X);
-			double thetaP = theta + settings.angleTheta.Radians;
-
-			PointD rotatedR = new (
-				X: radius * Math.Cos (thetaP),
-				Y: radius * Math.Sin (thetaP));
+			PointD rotatedRel = rel.Transformed (settings.rotation);
 
 			double m = fractal.Compute (
-				r: (rotatedR.X * settings.invZoom) + offset_basis.X,
-				i: (rotatedR.Y * settings.invZoom) + offset_basis.Y,
+				r: (rotatedRel.X * settings.invZoom) + offset_basis.X,
+				i: (rotatedRel.Y * settings.invZoom) + offset_basis.Y,
 				factor: settings.factor);
 
 			double c = Math.Clamp (

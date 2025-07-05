@@ -69,34 +69,39 @@ public sealed class JuliaFractalEffect : BaseEffect
 		double aspect,
 		int count,
 		double invCount,
-		RadiansAngle angleTheta,
+		Matrix3x2D rotation,
 		int factor,
 		ColorGradient<ColorBgra> colorGradient);
 	private JuliaSettings CreateSettings (ImageSurface dst)
 	{
+		// Reference to effect data, to prevent repeated casting
+		// TODO: Remove if and when reading the property doesn't require casting
+		var data = Data;
+
 		Size canvasSize = dst.GetSize ();
-		var count = Data.Quality * Data.Quality + 1;
+		var count = data.Quality * data.Quality + 1;
+		RadiansAngle angleTheta = data.Angle.ToRadians ();
 
 		var baseGradient =
 			GradientHelper
 			.CreateBaseGradientForEffect (
 				palette,
-				Data.ColorSchemeSource,
-				Data.ColorScheme,
-				Data.ColorSchemeSeed)
+				data.ColorSchemeSource,
+				data.ColorScheme,
+				data.ColorSchemeSeed)
 			.Resized (0, 1023);
 
 		return new (
 			canvasSize: canvasSize,
 			invH: 1.0 / canvasSize.Height,
-			invZoom: 1.0 / Data.Zoom,
-			invQuality: 1.0 / Data.Quality,
+			invZoom: 1.0 / data.Zoom,
+			invQuality: 1.0 / data.Quality,
 			aspect: canvasSize.Height / (double) canvasSize.Width,
 			count: count,
 			invCount: 1.0 / count,
-			angleTheta: Data.Angle.ToRadians (),
-			factor: Data.Factor,
-			colorGradient: Data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
+			rotation: Matrix3x2D.CreateRotation (data.Angle.ToRadians ()),
+			factor: data.Factor,
+			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
 		);
 	}
 
@@ -110,20 +115,16 @@ public sealed class JuliaFractalEffect : BaseEffect
 		int b = 0;
 		int a = 0;
 
+		double baseTransfX = 2.0 * target.X - settings.canvasSize.Width;
+		double baseTransfY = 2.0 * target.Y - settings.canvasSize.Height;
+
 		for (double i = 0; i < settings.count; i++) {
 
 			PointD transformed = new (
-				X: (2.0 * target.X - settings.canvasSize.Width + (i * settings.invCount)) * settings.invH,
-				Y: (2.0 * target.Y - settings.canvasSize.Height + ((i * settings.invQuality) % 1)) * settings.invH);
+				X: (baseTransfX + (i * settings.invCount)) * settings.invH,
+				Y: (baseTransfY + ((i * settings.invQuality) % 1)) * settings.invH);
 
-			RadiansAngle theta = new (Math.Atan2 (transformed.Y, transformed.X));
-			RadiansAngle thetaP = theta + settings.angleTheta;
-
-			double radius = transformed.Magnitude ();
-
-			PointD p = new (
-				X: radius * Math.Cos (thetaP.Radians),
-				Y: radius * Math.Sin (thetaP.Radians));
+			PointD p = transformed.Transformed (settings.rotation);
 
 			PointD jLoc = new (
 				X: (p.X - p.Y * settings.aspect) * settings.invZoom,
