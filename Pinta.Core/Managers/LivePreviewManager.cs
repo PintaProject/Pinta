@@ -101,12 +101,12 @@ public sealed class LivePreviewManager : ILivePreview
 		SimpleHistoryItem historyItem = new (effect.Icon, effect.Name);
 		historyItem.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
-		AsyncEffectRenderer renderer = new (settings);
+		RenderHandle renderHandle = null!; // NRT: Assigned before first use
 
 		IProgressDialog dialog = chrome.ProgressDialog;
 		dialog.Title = Translations.GetString ("Rendering Effect");
 		dialog.Text = effect.Name;
-		dialog.Progress = renderer.Progress;
+		dialog.Progress = 0;
 		dialog.Canceled += HandleProgressDialogCancel;
 
 		bool renderAlive = true;
@@ -121,7 +121,8 @@ public sealed class LivePreviewManager : ILivePreview
 			if (effect.EffectData != null)
 				effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 
-			renderer.Start (
+			renderHandle = AsyncEffectRenderer.Start (
+				settings,
 				effect,
 				layer.Surface,
 				LivePreviewSurface);
@@ -131,7 +132,7 @@ public sealed class LivePreviewManager : ILivePreview
 				UPDATE_MILLISECONDS,
 				() => {
 					if (!renderAlive) return false;
-					PollForUpdate (renderer);
+					PollForUpdate (renderHandle);
 					return true; // Keep ticking as long as the effect is active.
 				}
 			);
@@ -142,7 +143,8 @@ public sealed class LivePreviewManager : ILivePreview
 
 			if (!userConfirmed) {
 				Debug.WriteLine ("User decided not to proceed with the render");
-				await renderer.Finish (cancel: true);
+				renderHandle.Cancel ();
+				await renderHandle.Task;
 				return;
 			}
 
@@ -151,17 +153,18 @@ public sealed class LivePreviewManager : ILivePreview
 
 			dialog.Show ();
 
-			var result = await renderer.Finish (cancel: false);
+			var result = await renderHandle.Task;
 
 			// Final poll after the renderer finishes to ensure the last-rendered tiles are displayed.
-			PollForUpdate (renderer);
+			PollForUpdate (renderHandle);
 
 			foreach (var ex in result.Errors)
 				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectName + " exception: " + ex.Message + "\n" + ex.StackTrace);
 
 			if (result.WasCanceled) {
 				Debug.WriteLine ("User decided to cancel the render");
-				await renderer.Finish (cancel: true);
+				renderHandle.Cancel ();
+				await renderHandle.Task;
 				return;
 			}
 
@@ -197,33 +200,37 @@ public sealed class LivePreviewManager : ILivePreview
 			dialog.Hide ();
 
 			renderAlive = false;
+
+			renderHandle?.Dispose ();
 		}
 
 		// === Methods ===
 
 		void HandleProgressDialogCancel (object? o, EventArgs e)
 		{
-			renderer.Finish (cancel: true);
+			renderHandle.Cancel ();
 		}
 
 		async void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
 			// TODO: calculate bounds
 			handlersInQueue++;
-			await renderer.Finish (cancel: true);
+			renderHandle.Cancel ();
+			await renderHandle.Task;
+			renderHandle.Dispose ();
 			handlersInQueue--;
 			if (handlersInQueue > 0) return;
-			renderer.Start (effect, layer.Surface, LivePreviewSurface);
+			renderHandle = AsyncEffectRenderer.Start (settings, effect, layer.Surface, LivePreviewSurface);
 		}
 
 		// This method now polls the renderer for its state instead of being a passive event handler.
-		void PollForUpdate (AsyncEffectRenderer renderer)
+		void PollForUpdate (RenderHandle renderTask)
 		{
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + " Polling for update.");
 
-			chrome.ProgressDialog.Progress = renderer.Progress;
+			chrome.ProgressDialog.Progress = renderTask.Progress;
 
-			if (!renderer.TryConsumeBounds (out RectangleI updatedBounds))
+			if (!renderTask.TryConsumeBounds (out RectangleI updatedBounds))
 				return;
 
 			double scale = workspace.Scale;
