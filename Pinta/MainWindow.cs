@@ -210,8 +210,7 @@ internal sealed class MainWindow
 			if (canvasHasBeenShown)
 				return;
 
-			GLib.Functions.TimeoutAdd (
-				0,
+			GLib.Functions.IdleAdd (
 				0,
 				() => {
 					ZoomToWindow_Activated (o, e);
