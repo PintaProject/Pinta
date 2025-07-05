@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
@@ -18,10 +20,12 @@ public sealed class DitheringEffect : BaseEffect
 	public override bool IsTileable => false;
 
 	private readonly IChromeService chrome;
+	private readonly IPaletteService palette;
 	private readonly IWorkspaceService workspace;
 	public DitheringEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
+		palette = services.GetService<IPaletteService> ();
 		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new DitheringData ();
 	}
@@ -31,17 +35,25 @@ public sealed class DitheringEffect : BaseEffect
 
 	private sealed record DitheringSettings (
 		ErrorDiffusionMatrix diffusionMatrix,
-		ImmutableArray<ColorBgra> palette,
+		ImmutableArray<ColorBgra> chosenPalette,
 		int sourceWidth,
 		int sourceHeight);
 
 	private DitheringSettings CreateSettings (ImageSurface src)
-		=> new (
+	{
+		ImmutableArray<ColorBgra> chosenPalette = Data.PaletteSource switch {
+			PaletteSource.PresetPalettes => PaletteHelper.GetPredefined (Data.PaletteChoice),
+			PaletteSource.CurrentPalette => [.. palette.CurrentPalette.Colors.Select (CairoExtensions.ToColorBgra)],
+			PaletteSource.RecentlyUsedColors => [.. palette.RecentlyUsedColors.Select (CairoExtensions.ToColorBgra)],
+			_ => throw new UnreachableException (),
+		};
+
+		return new (
 			diffusionMatrix: ErrorDiffusionMatrix.GetPredefined (Data.ErrorDiffusionMethod),
-			palette: PaletteHelper.GetPredefined (Data.PaletteChoice),
+			chosenPalette: chosenPalette,
 			sourceWidth: src.Width,
-			sourceHeight: src.Height
-		);
+			sourceHeight: src.Height);
+	}
 
 	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
 	{
@@ -60,7 +72,7 @@ public sealed class DitheringEffect : BaseEffect
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, dest.GetSize ())) {
 
 			ColorBgra originalPixel = dst_data[pixel.memoryOffset];
-			ColorBgra closestColor = FindClosestPaletteColor (settings.palette, originalPixel);
+			ColorBgra closestColor = FindClosestPaletteColor (settings.chosenPalette, originalPixel);
 
 			dst_data[pixel.memoryOffset] = closestColor;
 
@@ -130,10 +142,25 @@ public sealed class DitheringEffect : BaseEffect
 		return deltaR * deltaR + deltaG * deltaG + deltaB * deltaB;
 	}
 
+	public enum PaletteSource
+	{
+		[Caption ("Preset Palettes")]
+		PresetPalettes,
+
+		[Caption ("Current Palette")]
+		CurrentPalette,
+
+		[Caption ("Recently Used Colors")]
+		RecentlyUsedColors,
+	}
+
 	public sealed class DitheringData : EffectData
 	{
 		[Caption ("Error Diffusion Method")]
 		public PredefinedDiffusionMatrices ErrorDiffusionMethod { get; set; } = PredefinedDiffusionMatrices.FloydSteinberg;
+
+		[Caption ("Palette Source")]
+		public PaletteSource PaletteSource { get; set; } = PaletteSource.PresetPalettes;
 
 		[Caption ("Palette")]
 		public PredefinedPalettes PaletteChoice { get; set; } = PredefinedPalettes.OldWindows16;
