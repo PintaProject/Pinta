@@ -89,6 +89,90 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Cells1 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.ReverseColorScheme = false;
+		Utilities.TestEffect (effect, "cells1.png");
+	}
+
+	[Test]
+	public void Cells2 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.ColorScheme = PresetGradients.Electric;
+		Utilities.TestEffect (effect, "cells2.png");
+	}
+
+	[Test]
+	public void Cells3 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.DistanceMetric = DistanceMetric.Manhattan;
+		Utilities.TestEffect (effect, "cells3.png");
+	}
+
+	[Test]
+	public void Cells4 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.ReverseColorScheme = true;
+		Utilities.TestEffect (effect, "cells4.png");
+	}
+
+	[Test]
+	public void Cells5 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CellRadius = 16;
+		Utilities.TestEffect (effect, "cells5.png");
+	}
+
+	[Test]
+	public void Cells6 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.NumberOfCells = 50;
+		Utilities.TestEffect (effect, "cells6.png");
+	}
+
+	[Test]
+	public void Cells7 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CellRadius = 8;
+		effect.Data.ColorSchemeEdgeBehavior = EdgeBehavior.Wrap;
+		Utilities.TestEffect (effect, "cells7.png");
+	}
+
+	[Test]
+	public void Cells8 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CellRadius = 8;
+		effect.Data.ColorSchemeEdgeBehavior = EdgeBehavior.Transparent;
+		Utilities.TestEffect (effect, "cells8.png");
+	}
+
+	[Test]
+	public void Cells9 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CellRadius = 8;
+		effect.Data.ColorSchemeEdgeBehavior = EdgeBehavior.Primary;
+		Utilities.TestEffect (effect, "cells9.png");
+	}
+
+	[Test]
+	public void Cells10 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CellRadius = 8;
+		effect.Data.ColorSchemeEdgeBehavior = EdgeBehavior.Original;
+		Utilities.TestEffect (effect, "cells10.png");
+	}
+
+	[Test]
 	public void Clouds1 ()
 	{
 		CloudsEffect effect = new (Utilities.CreateMockServices ());
@@ -685,7 +769,7 @@ internal sealed class EffectsTest
 	public void Voronoi3 ()
 	{
 		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
-		effect.Data.DistanceMetric = VoronoiDiagramEffect.DistanceMetric.Manhattan;
+		effect.Data.DistanceMetric = DistanceMetric.Manhattan;
 		Utilities.TestEffect (effect, "voronoi3.png");
 	}
 

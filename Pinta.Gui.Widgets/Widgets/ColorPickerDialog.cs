@@ -180,10 +180,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		bool showWatches = !livePalette;
 
-		ColorPick originalColors = adjustable;
-
-		Gtk.Button reset_button = new () { Label = Translations.GetString ("Reset Color") };
-		reset_button.OnClicked += OnResetButtonClicked;
+		Gtk.Button resetButton = new () { Label = Translations.GetString ("Reset Color") };
+		resetButton.OnClicked += OnResetButtonClicked;
 
 		Gtk.Button shrinkButton = new ();
 		shrinkButton.OnClicked += OnShrinkButtonClicked;
@@ -200,7 +198,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		cancelButton.OnClicked += OnCancelButtonClicked;
 
 		Gtk.HeaderBar titleBar = new ();
-		titleBar.PackStart (reset_button);
+		titleBar.PackStart (resetButton);
 		titleBar.PackStart (shrinkButton);
 		titleBar.PackEnd (okButton);
 		titleBar.PackEnd (cancelButton);
@@ -211,52 +209,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// Active palette contains the primary/secondary colors on the left of the color picker
 		#region Color Display
 
-		Gtk.Box colorDisplayBox = new () { Spacing = spacing };
-		colorDisplayBox.SetOrientation (Gtk.Orientation.Vertical);
+		Gtk.DrawingArea[] colorDisplays = CreateColorDisplays (adjustable);
 
 		Gtk.ListBox colorDisplayList = new ();
-
-		original_colors = originalColors;
-		Colors = originalColors;
-
-		primary_selected = primarySelected;
-
-		if (Colors is PaletteColors paletteColors) {
-
-			string label = Translations.GetString ("Click to switch between primary and secondary color.");
-			string shortcut_label = Translations.GetString ("Shortcut key");
-
-			Gtk.Button colorDisplaySwap = new () { TooltipText = $"{label} {shortcut_label}: {"X"}" };
-			colorDisplaySwap.SetIconName (Resources.StandardIcons.EditSwap);
-			colorDisplaySwap.OnClicked += (sender, args) => CycleColors ();
-			colorDisplayBox.Append (colorDisplaySwap);
-		}
-
-		Func<ColorPick, Color>[] colorSelectors = originalColors switch {
-			SingleColor s => [c => ((SingleColor) Colors).Color],
-			PaletteColors p => [c => ((PaletteColors) Colors).Primary, c => ((PaletteColors) Colors).Secondary],
-			_ => throw new UnreachableException (),
-		};
-
-		color_displays = new Gtk.DrawingArea[colorSelectors.Length];
-
-		for (int i = 0; i < colorSelectors.Length; i++) {
-
-			// This, unlike `i`, has a fixed value
-			// which is what should be captured by the lambda
-			int idx = i;
-
-			Gtk.DrawingArea display = new ();
-			display.SetSizeRequest (palette_display_size, palette_display_size);
-			display.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, colorSelectors[idx] (Colors)));
-
-			colorDisplayList.Append (display);
-			color_displays[i] = display;
-		}
-
+		foreach (var colorDisplay in colorDisplays)
+			colorDisplayList.Append (colorDisplay);
 		// Set initial selected row
 		colorDisplayList.SetSelectionMode (Gtk.SelectionMode.Single);
-		colorDisplayList.SelectRow (colorDisplayList.GetRowAtIndex (primary_selected ? 0 : 1));
+		colorDisplayList.SelectRow (colorDisplayList.GetRowAtIndex (primarySelected ? 0 : 1));
 
 		// Handle on select; index 0 -> primary; index 1 -> secondary
 		colorDisplayList.OnRowSelected += ((sender, args) => {
@@ -265,6 +225,16 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			UpdateView ();
 		});
 
+		Gtk.Box colorDisplayBox = new () { Spacing = spacing };
+		colorDisplayBox.SetOrientation (Gtk.Orientation.Vertical);
+		if (adjustable is PaletteColors paletteColors) {
+			string label = Translations.GetString ("Click to switch between primary and secondary color.");
+			string shortcut_label = Translations.GetString ("Shortcut key");
+			Gtk.Button colorDisplaySwap = new () { TooltipText = $"{label} {shortcut_label}: {"X"}" };
+			colorDisplaySwap.SetIconName (Resources.StandardIcons.EditSwap);
+			colorDisplaySwap.OnClicked += (sender, args) => CycleColors ();
+			colorDisplayBox.Append (colorDisplaySwap);
+		}
 		colorDisplayBox.Append (colorDisplayList);
 
 		#endregion
@@ -323,6 +293,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		Gtk.DrawingArea pickerSurface = new ();
 		pickerSurface.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
 		pickerSurface.SetDrawFunc ((area, context, width, height) => DrawColorSurface (context));
+
+		Colors = adjustable;
 
 		// Cursor handles the square in the picker surface displaying where your selected color is
 		Gtk.DrawingArea pickerSurfaceCursor = new ();
@@ -641,6 +613,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		// --- References to keep
 
+		primary_selected = primarySelected;
+		original_colors = adjustable;
+
 		hue_slider = hueSlider;
 		saturation_slider = saturationSlider;
 		value_slider = valueSlider;
@@ -650,6 +625,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		blue_slider = blueSlider;
 		alpha_slider = alphaSlider;
 
+		color_displays = colorDisplays;
 		color_display_box = colorDisplayBox;
 		hex_entry = hexEntry;
 		this.palette = palette;
@@ -664,6 +640,34 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		swatch_recent = swatchRecent;
 		swatch_palette = swatchPalette;
 		top_box = topBox;
+	}
+
+	Gtk.DrawingArea[] CreateColorDisplays (ColorPick pick)
+	{
+		switch (pick) {
+
+			case SingleColor singleColors:
+
+				Gtk.DrawingArea singleColorDisplay = new ();
+				singleColorDisplay.SetSizeRequest (palette_display_size, palette_display_size);
+				singleColorDisplay.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, ((SingleColor) Colors).Color));
+
+				return [singleColorDisplay];
+
+			case PaletteColors paletteColors:
+
+				Gtk.DrawingArea primaryColorDisplay = new ();
+				primaryColorDisplay.SetSizeRequest (palette_display_size, palette_display_size);
+				primaryColorDisplay.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, ((PaletteColors) Colors).Primary));
+
+				Gtk.DrawingArea secondaryColorDisplay = new ();
+				secondaryColorDisplay.SetSizeRequest (palette_display_size, palette_display_size);
+				secondaryColorDisplay.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, ((PaletteColors) Colors).Secondary));
+
+				return [primaryColorDisplay, secondaryColorDisplay];
+			default:
+				throw new UnreachableException ();
+		}
 	}
 
 	void SwatchRecentDraw (Gtk.DrawingArea area, Context g, int width, int height)

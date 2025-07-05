@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Pinta.Core;
 
 namespace Pinta.Core;
 
@@ -10,7 +9,7 @@ namespace Pinta.Core;
 /// Helps obtain intermediate colors at a certain position,
 /// based on the start and end colors, and any additional color stops
 /// </summary>
-public sealed class ColorGradient<TColor> where TColor : IColor<TColor>
+public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TColor>
 {
 	/// <summary>
 	/// Color at the initial position in the gradient
@@ -198,7 +197,7 @@ public static class ColorGradient
 		TColor startColor,
 		TColor endColor
 	)
-		where TColor : IColor<TColor>
+		where TColor : IInterpolableColor<TColor>
 	=> new (
 		startColor,
 		endColor,
@@ -217,7 +216,7 @@ public static class ColorGradient
 		double startPosition,
 		double endPosition
 	)
-		where TColor : IColor<TColor>
+		where TColor : IInterpolableColor<TColor>
 	=> new (
 		startColor,
 		endColor,
@@ -237,7 +236,7 @@ public static class ColorGradient
 		double endPosition,
 		IEnumerable<KeyValuePair<double, TColor>> stops
 	)
-		where TColor : IColor<TColor>
+		where TColor : IInterpolableColor<TColor>
 	=> new (
 		startColor,
 		endColor,

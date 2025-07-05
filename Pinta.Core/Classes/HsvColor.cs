@@ -15,11 +15,20 @@ namespace Pinta.Core;
 /// "A Primer on Building a Color Picker User Control with GDI+ in Visual Basic .NET or C#"
 /// http://www.msdnaa.net/Resources/display.aspx?ResID=2460
 /// </summary>
-public readonly struct HsvColor
+public readonly struct HsvColor : IColor<HsvColor>
 {
 	public double Hue { get; init; } // 0-360
 	public double Sat { get; init; } // 0-1
 	public double Val { get; init; } // 0-1
+
+	public static HsvColor Black => new (0, 0, 0);
+	public static HsvColor Red => new (0, 1, 1);
+	public static HsvColor Green => new (120, 1, 1);
+	public static HsvColor Blue => new (240, 1, 1);
+	public static HsvColor Yellow => new (60, 1, 1);
+	public static HsvColor Magenta => new (300, 1, 1);
+	public static HsvColor Cyan => new (180, 1, 1);
+	public static HsvColor White => new (0, 0, 1);
 
 	public HsvColor (double hue, double sat, double val)
 	{

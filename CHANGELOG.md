@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.1...HEAD)
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -11,18 +11,23 @@ Thanks to the following contributors who worked on this release:
 - @Lehonti
 - @UrtsiSantsi
 - @pedropaulosuzuki
+- @bplaat
 
 ### Added
 - Implemented a new axonometric grid (View > Canvas Grid... > Show Axonometric Grid) (#1438, #1541)
 - Rewrote the canvas widget to improve performance and memory usage issues for zoomed-in images (#1020, #1485)
+- Added a new Cells effect (#1589)
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
 - When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
 - Keyboard shortcuts are now displayed on all toolbar button tooltips (#1408, #1432)
+- Added a right click menu for layers, containing actions that can be applied to the selected layer (#1588) 
+- The Dithering effect can now use Pinta's current palette in addition to the effect's preset color palettes (#1594)
 
 ### Changed
 - Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
 - Removed use of deprecated Gtk.FontButton (#1421)
 - View menu moved from hamburger menu to dedicated button (#1428, #1471)
+- Updated the application icon on macOS to better match the platform's icon style guidelines (#1572)
 
 ### Fixed
 - Fixed a bug where cancelling the color picker dialog could still update the palette colors (#1390, #1411)
@@ -34,8 +39,9 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug in the Levels dialog where the Red and Blue toggles were reversed (#1551)
 - Fixed incorrect behavior with transparent colors in the Gradient tool (#1552, #1543)
 - The Vulkan DLL is now bundled with the Windows installer, which fixes errors on startup for certain systems (#1497, #1530)
+- Fixed performance issues when opening a large number of files (#1574, #1578)
 
-## [3.0.1](https://github.com/PintaProject/Pinta/compare/3.0.1...HEAD) - 2025/06/07
+## [3.0.1](https://github.com/PintaProject/Pinta/releases/tag/3.0.1) - 2025/06/07
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
