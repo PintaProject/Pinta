@@ -44,11 +44,11 @@ public static class Utility
 	public static double Magnitude (this in PointD point)
 		=> Mathematics.Magnitude (point.X, point.Y);
 
-	public static PointD Transformed (this in PointD original, in AffineTransformation transform)
+	public static PointD Transformed (this in PointD original, in Matrix3x2D transform)
 	{
 		return new (
-			X: (original.X * transform.A11) + (original.Y * transform.A12) + transform.dx,
-			Y: (original.X * transform.A21) + (original.Y * transform.A22) + transform.dy);
+			X: (original.X * transform.A11) + (original.Y * transform.A12) + transform.A31,
+			Y: (original.X * transform.A21) + (original.Y * transform.A22) + transform.A32);
 	}
 
 	public static double Magnitude (this PointI point)

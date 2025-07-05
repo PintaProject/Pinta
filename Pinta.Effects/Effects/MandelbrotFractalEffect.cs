@@ -68,7 +68,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double invQuality,
 		int count,
 		double invCount,
-		AffineTransformation rotation,
+		Matrix3x2D rotation,
 		int factor,
 		bool invertColors,
 		ColorGradient<ColorBgra> colorGradient);
@@ -105,7 +105,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			count: count,
 			invCount: 1.0 / count,
 
-			rotation: AffineTransformation.CreateRotation (data.Angle.ToRadians ()),
+			rotation: Matrix3x2D.CreateRotation (data.Angle.ToRadians ()),
 
 			factor: data.Factor,
 
