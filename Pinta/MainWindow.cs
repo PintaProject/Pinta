@@ -26,7 +26,6 @@
 
 using System;
 using System.Linq;
-using System.Threading;
 using Mono.Addins;
 using Pinta.Core;
 using Pinta.Docking;
