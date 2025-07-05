@@ -113,8 +113,8 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect<AddNoiseEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<AlignObjectEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<BulgeEffect> ();
-		PintaCore.Effects.UnregisterInstanceOfEffect<CellsEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<CausticsEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<CellsEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<CloudsEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<DentsEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<DitheringEffect> ();
