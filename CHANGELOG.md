@@ -21,6 +21,7 @@ Thanks to the following contributors who worked on this release:
 - When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
 - Keyboard shortcuts are now displayed on all toolbar button tooltips (#1408, #1432)
 - Added a right click menu for layers, containing actions that can be applied to the selected layer (#1588) 
+- The Dithering effect can now use Pinta's current palette in addition to the effect's preset color palettes (#1594)
 
 ### Changed
 - Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
