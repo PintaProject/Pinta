@@ -42,8 +42,8 @@ public sealed class DitheringEffect : BaseEffect
 	private DitheringSettings CreateSettings (ImageSurface src)
 	{
 		ImmutableArray<ColorBgra> chosenPalette = Data.PaletteSource switch {
-			PaletteSource.PredefinedPalettes => PaletteHelper.GetPredefined (Data.PaletteChoice),
-			PaletteSource.ToolbarPalette => [.. palette.CurrentPalette.Colors.Select (CairoExtensions.ToColorBgra)],
+			PaletteSource.PresetPalettes => PaletteHelper.GetPredefined (Data.PaletteChoice),
+			PaletteSource.CurrentPalette => [.. palette.CurrentPalette.Colors.Select (CairoExtensions.ToColorBgra)],
 			PaletteSource.RecentlyUsedColors => [.. palette.RecentlyUsedColors.Select (CairoExtensions.ToColorBgra)],
 			_ => throw new UnreachableException (),
 		};
@@ -144,11 +144,11 @@ public sealed class DitheringEffect : BaseEffect
 
 	public enum PaletteSource
 	{
-		[Caption ("Predefined Palettes")]
-		PredefinedPalettes,
+		[Caption ("Preset Palettes")]
+		PresetPalettes,
 
-		[Caption ("Toolbar Palette")]
-		ToolbarPalette,
+		[Caption ("Current Palette")]
+		CurrentPalette,
 
 		[Caption ("Recently Used Colors")]
 		RecentlyUsedColors,
@@ -160,7 +160,7 @@ public sealed class DitheringEffect : BaseEffect
 		public PredefinedDiffusionMatrices ErrorDiffusionMethod { get; set; } = PredefinedDiffusionMatrices.FloydSteinberg;
 
 		[Caption ("Palette Source")]
-		public PaletteSource PaletteSource { get; set; } = PaletteSource.PredefinedPalettes;
+		public PaletteSource PaletteSource { get; set; } = PaletteSource.PresetPalettes;
 
 		[Caption ("Palette")]
 		public PredefinedPalettes PaletteChoice { get; set; } = PredefinedPalettes.OldWindows16;
