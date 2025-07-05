@@ -47,8 +47,8 @@ public static class Utility
 	public static PointD Transformed (this in PointD original, in Matrix3x2D transform)
 	{
 		return new (
-			X: (original.X * transform.A11) + (original.Y * transform.A12) + transform.A31,
-			Y: (original.X * transform.A21) + (original.Y * transform.A22) + transform.A32);
+			X: (original.X * transform.M11) + (original.Y * transform.M21) + transform.M31,
+			Y: (original.X * transform.M12) + (original.Y * transform.M22) + transform.M32);
 	}
 
 	public static double Magnitude (this PointI point)
