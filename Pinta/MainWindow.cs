@@ -26,7 +26,6 @@
 
 using System;
 using System.Linq;
-using System.Threading;
 using Mono.Addins;
 using Pinta.Core;
 using Pinta.Docking;
@@ -98,7 +97,7 @@ internal sealed class MainWindow
 			setupService.RegisterRepositories (true);
 
 		// Look out for any changes in extensions
-		main_thread_id = Thread.CurrentThread.ManagedThreadId;
+		main_thread_id = Environment.CurrentManagedThreadId;
 		AddinManager.AddExtensionNodeHandler (typeof (IExtension), OnExtensionChanged);
 
 		// Load the user's previous settings
@@ -210,8 +209,7 @@ internal sealed class MainWindow
 			if (canvasHasBeenShown)
 				return;
 
-			GLib.Functions.TimeoutAdd (
-				0,
+			GLib.Functions.IdleAdd (
 				0,
 				() => {
 					ZoomToWindow_Activated (o, e);
@@ -296,7 +294,7 @@ internal sealed class MainWindow
 	{
 		// Run synchronously if invoked from the main thread, e.g. when loading
 		// addins at startup we require them to be immediately loaded.
-		if (Thread.CurrentThread.ManagedThreadId == main_thread_id)
+		if (Environment.CurrentManagedThreadId == main_thread_id)
 			UpdateExtension (args);
 		else {
 			// Otherwise, schedule the addin to be loaded/unloaded from the main thread
