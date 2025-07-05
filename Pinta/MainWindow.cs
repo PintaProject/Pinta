@@ -210,7 +210,7 @@ internal sealed class MainWindow
 			if (canvasHasBeenShown)
 				return;
 
-			GLib.Functions.TimeoutAdd (
+			using GLibTimerWrapper _ = GLib.Functions.TimeoutAdd ( // Executed on UI thread
 				0,
 				0,
 				() => {
