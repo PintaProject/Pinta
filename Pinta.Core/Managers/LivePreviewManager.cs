@@ -126,7 +126,7 @@ public sealed class LivePreviewManager : ILivePreview
 				layer.Surface,
 				LivePreviewSurface);
 
-			using GLibTimerWrapper _ = GLib.Functions.TimeoutAdd (
+			using GLibTimer _ = GLib.Functions.TimeoutAdd (
 				0,
 				UPDATE_MILLISECONDS,
 				() => {

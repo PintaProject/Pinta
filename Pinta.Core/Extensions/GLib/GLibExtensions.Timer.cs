@@ -2,10 +2,10 @@ using System;
 
 namespace Pinta.Core;
 
-public readonly struct GLibTimerWrapper : IDisposable
+public readonly struct GLibTimer : IDisposable
 {
 	public uint TimerID { get; }
-	private GLibTimerWrapper (uint timerId)
+	private GLibTimer (uint timerId)
 	{
 		TimerID = timerId;
 	}
@@ -16,6 +16,6 @@ public readonly struct GLibTimerWrapper : IDisposable
 		GLib.Source.Remove (TimerID);
 	}
 
-	public static implicit operator GLibTimerWrapper (uint timerId)
+	public static implicit operator GLibTimer (uint timerId)
 		=> new (timerId);
 }
