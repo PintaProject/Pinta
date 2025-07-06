@@ -92,7 +92,6 @@ public sealed class LivePreviewManager : ILivePreview
 			renderBounds: RenderBounds,
 			effectIsTileable: effect.IsTileable);
 
-		uint updateTimerId = 0;
 		int handlersInQueue = 0;
 		Layer layer = doc.Layers.CurrentUserLayer;
 
@@ -127,7 +126,7 @@ public sealed class LivePreviewManager : ILivePreview
 				layer.Surface,
 				LivePreviewSurface);
 
-			updateTimerId = GLib.Functions.TimeoutAdd (
+			using GLibTimer _ = GLib.Functions.TimeoutAdd (
 				0,
 				UPDATE_MILLISECONDS,
 				() => {
@@ -186,9 +185,6 @@ public sealed class LivePreviewManager : ILivePreview
 			IsEnabled = false;
 			LivePreviewSurface = null!;
 			workspace.Invalidate ();
-
-			if (updateTimerId > 0)
-				GLib.Source.Remove (updateTimerId);
 
 			if (effect.EffectData != null)
 				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
