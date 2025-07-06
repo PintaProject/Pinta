@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-06 00:30+0000\n"
-"PO-Revision-Date: 2025-07-01 03:11+0000\n"
-"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"PO-Revision-Date: 2025-07-09 17:01+0000\n"
+"Last-Translator: _Nikitamce_ <nikitamce2k16@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -312,7 +312,7 @@ msgstr "Сетка холста..."
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:143
 msgid "Cell Radius"
-msgstr ""
+msgstr "Радиус ячейки"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
@@ -320,7 +320,7 @@ msgstr "Размер ячейки"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:18
 msgid "Cells"
-msgstr ""
+msgstr "Ячейки"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -519,7 +519,7 @@ msgstr "Цветовая схема"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:161
 msgid "Color Scheme Edge Behavior"
-msgstr ""
+msgstr "Поведение краёв цветовой схемы"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:149
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
@@ -594,7 +594,7 @@ msgstr "Кадрировать по выделенному"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:150
 msgid "Current Palette"
-msgstr ""
+msgstr "Текущая палитра"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
@@ -1682,7 +1682,7 @@ msgstr "Палитра"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Palette Source"
-msgstr ""
+msgstr "Источник палитры"
 
 #: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
@@ -1838,7 +1838,7 @@ msgstr "Предустановленный градиент"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:147
 msgid "Preset Palettes"
-msgstr ""
+msgstr "Готовые палитры"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
@@ -1932,7 +1932,7 @@ msgstr "Случайные местоположения точек"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:153
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Недавние цвета"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
