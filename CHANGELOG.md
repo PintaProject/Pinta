@@ -22,6 +22,7 @@ Thanks to the following contributors who worked on this release:
 - Keyboard shortcuts are now displayed on all toolbar button tooltips (#1408, #1432)
 - Added a right click menu for layers, containing actions that can be applied to the selected layer (#1588) 
 - The Dithering effect can now use Pinta's current palette in addition to the effect's preset color palettes (#1594)
+- Random seed values for effects can now be directly controlled, in addition to use the Reseed button (#1592, #1591)
 
 ### Changed
 - Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
