@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.2...HEAD)
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -12,7 +12,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Fixed
 
-## [3.0.2](https://github.com/PintaProject/Pinta/compare/3.0.2...HEAD)
+## [3.0.2](https://github.com/PintaProject/Pinta/release/tag/3.0.2) - 2025/07/06
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -21,8 +21,10 @@ Thanks to the following contributors who worked on this release:
 - Fixed an error when loading the add-in repositories (#1547, #1542)
 - Fixed a bug in the Levels dialog where the Red and Blue toggles were reversed (#1551)
 - The Vulkan DLL is now bundled with the Windows installer, which fixes errors on startup for certain systems (#1497, #1530)
+- Fixed performance issues when opening a large number of files (#1574, #1578)
 
-## [3.0.1](https://github.com/PintaProject/Pinta/compare/3.0.1...HEAD) - 2025/06/07
+
+## [3.0.1](https://github.com/PintaProject/Pinta/releases/tag/3.0.1) - 2025/06/07
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
