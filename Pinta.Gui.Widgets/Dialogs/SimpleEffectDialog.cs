@@ -511,8 +511,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		Gtk.Box controlsBox = new () { Spacing = 6 };
 		controlsBox.SetOrientation (Gtk.Orientation.Horizontal);
-		controlsBox.Append (seedInput);
 		controlsBox.Append (reseedButton);
+		controlsBox.Append (seedInput);
 
 		Gtk.Box combinedWidget = Gtk.Box.New (Gtk.Orientation.Vertical, 6);
 		combinedWidget.Append (sectionLabel);
