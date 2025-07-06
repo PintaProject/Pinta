@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 00:31+0000\n"
+"POT-Creation-Date: 2025-07-06 00:30+0000\n"
 "PO-Revision-Date: 2024-03-24 08:01+0000\n"
 "Last-Translator: Rizal Muttaqin <riz_17_oke@yahoo.co.id>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/pinta/pinta/"
@@ -100,7 +100,7 @@ msgstr ""
 msgid "All files"
 msgstr "Semua berkas"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:528
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:500
 msgid "Alpha"
 msgstr ""
 
@@ -122,8 +122,8 @@ msgstr "Jangkar:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:186
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:145
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:78
@@ -176,7 +176,7 @@ msgstr "Auto-Level"
 msgid "Available in repository: {0}"
 msgstr "Tersedia di lumbung: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:133
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
 msgid "Background"
 msgstr "Latar Belakang"
 
@@ -217,7 +217,7 @@ msgstr "Modus Pencampuran"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:506
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:478
 msgid "Blue"
 msgstr "Biru"
 
@@ -294,7 +294,7 @@ msgstr "Per persentasi:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Cancel"
@@ -311,9 +311,17 @@ msgstr ""
 msgid "Canvas Grid..."
 msgstr ""
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:143
+msgid "Cell Radius"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
 msgstr "Ukuran Sel"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:18
+msgid "Cells"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -422,7 +430,7 @@ msgstr "Pilih untuk memilih area yang warnanya mirip."
 msgid "Click to select secondary color."
 msgstr "Klik untuk memilih warna sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:231
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Click to switch between primary and secondary color."
 msgstr "Klik untuk berganti antara warna primer dan sekunder."
@@ -443,7 +451,7 @@ msgstr "Duplikasi Stempel"
 msgid "Close"
 msgstr "Tutup"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:54
+#: ../Pinta.Core/Actions/WindowActions.cs:51
 msgid "Close All"
 msgstr "Tutup Semua"
 
@@ -464,7 +472,7 @@ msgid "Coarseness"
 msgstr "Kekasaran"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:15
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:17
 msgid "Color"
 msgstr "Warna"
 
@@ -498,19 +506,25 @@ msgid "Color Saturation"
 msgstr "Kepekatan Warna"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Effects/Effects/CellsEffect.cs:152
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
 msgid "Color Scheme"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:161
+msgid "Color Scheme Edge Behavior"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:149
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
 msgid "Color Scheme Source"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:260
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:181
 msgid "Color Sorting"
 msgstr ""
 
@@ -559,8 +573,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Tidak dapat mengimpor lapisan \"{0}\" dari {1}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:167
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:437
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Gagal membuka berkas: {0}"
@@ -573,6 +587,10 @@ msgstr "Cakupan"
 #: ../Pinta.Core/Actions/ImageActions.cs:295
 msgid "Crop to Selection"
 msgstr "Pangkas Pilihan"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:150
+msgid "Current Palette"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
@@ -648,7 +666,8 @@ msgstr "Selisih"
 msgid "Distance"
 msgstr "Jarak"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:252
+#: ../Pinta.Effects/Effects/CellsEffect.cs:134
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:173
 msgid "Distance Metric"
 msgstr ""
 
@@ -662,7 +681,7 @@ msgstr ""
 msgid "Distort"
 msgstr "Distorsi"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:12
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:14
 msgid "Dithering"
 msgstr ""
 
@@ -736,7 +755,7 @@ msgstr "Penghapus"
 msgid "Error"
 msgstr "Kesalahan"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:135
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Error Diffusion Method"
 msgstr ""
 
@@ -753,8 +772,8 @@ msgstr ""
 msgid "Extension packages"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:157
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
 msgid "Factor"
 msgstr "Faktor"
 
@@ -770,7 +789,7 @@ msgstr ""
 msgid "Failed to load extension package"
 msgstr ""
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 msgid "Failed to open image"
 msgstr "Gagal membuka gambar"
 
@@ -934,7 +953,7 @@ msgstr "Gradiasi"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:484
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:456
 msgid "Green"
 msgstr "Hijau"
 
@@ -953,7 +972,7 @@ msgstr "Cahaya Keras"
 msgid "Height:"
 msgstr "Tinggi:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:366
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:338
 msgid "Hex"
 msgstr ""
 
@@ -972,27 +991,27 @@ msgid "History"
 msgstr "Riwayat"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:291
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
 msgid "Horizontal blue (B)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:294
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Horizontal green (G)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:297
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Horizontal red (R)"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:386
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:358
 msgid "Hue"
 msgstr "Hue"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:260
 msgid "Hue & Sat"
 msgstr ""
 
@@ -1099,7 +1118,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Simpangan ({0} + Left Click)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
 msgid "Invert Colors"
 msgstr "Inversikan Warna"
 
@@ -1137,7 +1156,7 @@ msgstr "Pemilih Laso"
 msgid "Layer"
 msgstr "Lapisan"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Hidden"
 msgstr "Lapisan Disembunyikan"
 
@@ -1154,7 +1173,7 @@ msgstr "Properti Lapisan"
 msgid "Layer Properties..."
 msgstr "Properti Lapisan..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Shown"
 msgstr "Lapisan Ditampilkan"
 
@@ -1394,7 +1413,7 @@ msgstr ""
 msgid "Maintain aspect ratio"
 msgstr "Pertahankan rasio panjang-lebar"
 
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:28
 msgid "Mandelbrot Fractal"
 msgstr "Fraktal Mandelbrot"
 
@@ -1466,7 +1485,7 @@ msgstr ""
 msgid "New"
 msgstr "Baru"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:141
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
 #: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "Citra Baru"
@@ -1511,7 +1530,8 @@ msgstr "Ukuran Normal"
 msgid "Normal and Outline"
 msgstr "Normal dan Skema"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:255
+#: ../Pinta.Effects/Effects/CellsEffect.cs:137
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:176
 msgid "Number of Cells"
 msgstr ""
 
@@ -1519,7 +1539,7 @@ msgstr ""
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "OK"
 msgstr ""
 
@@ -1559,7 +1579,7 @@ msgstr "Buka"
 msgid "Open Curve Shape"
 msgstr "Bentuk Kurva Terbuka"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:342
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
 msgid "Open Image"
 msgstr "Buka Citra"
 
@@ -1639,9 +1659,13 @@ msgid "Paintbrush"
 msgstr "Kuas Cat"
 
 #: ../Pinta.Core/Actions/EditActions.cs:235
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:138
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
 msgid "Palette"
 msgstr "Palet"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+msgid "Palette Source"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
@@ -1692,7 +1716,7 @@ msgid "Photo"
 msgstr "Foto"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:71 ../Pinta/MainWindow.cs:62
+#: ../Pinta/Main.cs:71 ../Pinta/MainWindow.cs:61
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1732,7 +1756,7 @@ msgstr ""
 "membuat lapisan (layer) tak terbatas untuk membantu mengatur kreativitas "
 "Anda."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:438
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta mendukung format berkas berikut:"
 
@@ -1796,6 +1820,10 @@ msgstr ""
 msgid "Preset Gradient"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:147
+msgid "Preset Palettes"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
 msgstr "Set Awal:"
@@ -1812,12 +1840,13 @@ msgstr "Primer"
 msgid "Print"
 msgstr "Cetak"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:164
 #: ../Pinta.Effects/Effects/DentsEffect.cs:153
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:179
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:160
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:273
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
 msgid "Quality"
 msgstr "Mutu"
 
@@ -1859,17 +1888,18 @@ msgid "Radius Percentage"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:287
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Random"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:155
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
 msgid "Random Color Scheme Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:267
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:188
 msgid "Random Colors"
 msgstr ""
 
@@ -1879,8 +1909,13 @@ msgstr ""
 msgid "Random Noise"
 msgstr "Derau Acak"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:270
+#: ../Pinta.Effects/Effects/CellsEffect.cs:140
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Random Point Locations"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:153
+msgid "Recently Used Colors"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
@@ -1897,7 +1932,7 @@ msgstr "Pemilih Persegi Panjang"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:462
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:434
 msgid "Red"
 msgstr "Merah"
 
@@ -1937,14 +1972,15 @@ msgstr "Relief"
 msgid "Rename Layer"
 msgstr "Ubah Nama Lapisan"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:24
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:28
 msgid "Render"
 msgstr "Pencitraan"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:107
 msgid "Rendering Effect"
 msgstr "Efek Lukis"
 
@@ -1969,7 +2005,7 @@ msgstr "Umpankan-ulang"
 msgid "Reset"
 msgstr "Atur Ulang"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:185
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:183
 msgid "Reset Color"
 msgstr ""
 
@@ -2003,14 +2039,15 @@ msgstr "Ubah Ukuran Palet"
 msgid "Restart Pinta"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:158
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
 msgid "Reverse Color Scheme"
 msgstr ""
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:264
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:185
 msgid "Reverse Color Sorting"
 msgstr ""
 
@@ -2071,11 +2108,11 @@ msgstr "Mistar"
 msgid "Sampling"
 msgstr "Sampling"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:418
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:390
 msgid "Sat"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "Sat & Value"
 msgstr ""
 
@@ -2094,7 +2131,7 @@ msgstr "Persentase Saturasi"
 msgid "Save"
 msgstr "Simpan"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:47
+#: ../Pinta.Core/Actions/WindowActions.cs:44
 msgid "Save All"
 msgstr "Simpan Semua"
 
@@ -2159,7 +2196,7 @@ msgstr "Pertajam"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:227
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:232
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
 msgid "Shortcut key"
 msgstr "Kunci pintasan"
@@ -2180,7 +2217,7 @@ msgstr ""
 msgid "Show Layer"
 msgstr "Tampilkan Lapisan"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:282
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:252
 msgid "Show Value"
 msgstr ""
 
@@ -2367,7 +2404,7 @@ msgstr "Tip: Klik-kanan untuk menghapus titik kendali."
 msgid "Tolerance"
 msgstr "Toleransi"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:371
+#: ../Pinta.Core/Managers/ToolManager.cs:374
 msgid "Tool"
 msgstr "Alat"
 
@@ -2462,7 +2499,7 @@ msgstr "Satukan (+) ({0} + Klik Kiri)"
 msgid "Unsaved Image {0}"
 msgstr "Gambar yang Belum Disimpan {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:337
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
 msgid "Unsupported file format"
 msgstr "Format berkas tidak didukung"
 
@@ -2490,7 +2527,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Menggunakan ikon dari:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:440
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:412
 msgid "Value"
 msgstr ""
 
@@ -2500,17 +2537,17 @@ msgid "Version: {0}"
 msgstr ""
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:301
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:215
 msgid "Vertical blue (B)"
 msgstr ""
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:304
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:218
 msgid "Vertical green (G)"
 msgstr ""
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:307
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:221
 msgid "Vertical red (R)"
 msgstr ""
 
@@ -2569,7 +2606,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Klik Kanan)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Anda tidak memiliki akses ke '{0}'."
@@ -2583,8 +2620,8 @@ msgstr ""
 "Anda tidak punya akses untuk memodifikasi '{0}'. Berkas atau foldernya "
 "mungkin hanya-baca."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:163
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
