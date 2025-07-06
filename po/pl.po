@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-06 00:30+0000\n"
-"PO-Revision-Date: 2025-06-30 10:02+0000\n"
+"PO-Revision-Date: 2025-07-06 05:21+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -311,7 +311,7 @@ msgstr "Siatka płótna…"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:143
 msgid "Cell Radius"
-msgstr ""
+msgstr "Promień komórki"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
@@ -319,7 +319,7 @@ msgstr "Rozmiar komórki"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:18
 msgid "Cells"
-msgstr ""
+msgstr "Komórki"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -514,7 +514,7 @@ msgstr "Schemat kolorów"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:161
 msgid "Color Scheme Edge Behavior"
-msgstr ""
+msgstr "Zachowanie krawędzi schematu kolorów"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:149
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
@@ -589,7 +589,7 @@ msgstr "Przytnij do zaznaczenia"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:150
 msgid "Current Palette"
-msgstr ""
+msgstr "Bieżąca paleta"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
@@ -1670,7 +1670,7 @@ msgstr "Paleta"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Palette Source"
-msgstr ""
+msgstr "Źródło palety"
 
 #: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
@@ -1821,11 +1821,11 @@ msgstr "Zachowaj"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
-msgstr "Gradient wstępnie ustawiony"
+msgstr "Gradient predefiniowany"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:147
 msgid "Preset Palettes"
-msgstr ""
+msgstr "Palety predefiniowane"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
@@ -1919,7 +1919,7 @@ msgstr "Losowe położenia punktów"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:153
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Ostatnio używane kolory"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
