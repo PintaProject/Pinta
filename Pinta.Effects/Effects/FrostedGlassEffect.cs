@@ -147,7 +147,7 @@ public sealed class FrostedGlassEffect : BaseEffect
 		[Caption ("Amount"), MinimumValue (1), MaximumValue (10)]
 		public int Amount { get; set; } = 1;
 
-		[Caption ("Random Noise")]
+		[Caption ("Random Noise Seed")]
 		public RandomSeed Seed { get; set; } = new (0);
 	}
 }
