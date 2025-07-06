@@ -197,7 +197,7 @@ public sealed class CloudsEffect : BaseEffect
 		[StaticList ("BlendOps")]
 		public string BlendMode { get; set; } = default_blend_op;
 
-		[Caption ("Random Noise")]
+		[Caption ("Random Noise Seed")]
 		public RandomSeed Seed { get; set; } = new (0);
 
 		[Caption ("Color Scheme Source")]
