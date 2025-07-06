@@ -467,7 +467,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		EffectDataChanged?.Invoke (this, new PropertyChangedEventArgs (reflector.OriginalMemberInfo.Name));
 	}
 
-	private ReseedButtonWidget CreateSeed (
+	private Gtk.Widget CreateSeed (
 		string caption,
 		EffectData effectData,
 		MemberSettings settings,
@@ -475,17 +475,50 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	{
 		var attributes = settings.reflector.Attributes;
 
-		int min_value = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (0);
-		int max_value = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (int.MaxValue - 1);
+		int minSeed = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (0);
+		int maxSeed = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (int.MaxValue - 1);
 
-		ReseedButtonWidget widget = new () { Label = caption };
+		RandomSeed initialSeed = (RandomSeed) settings.reflector.GetValue (effectData)!;
+
 		Random random = new ();
-		widget.Clicked += (_, _) => {
-			int seedValue = random.Next (min_value, max_value);
-			RandomSeed seed = new (seedValue);
-			SetAndNotify (settings.reflector, effectData, seed);
+
+		Gtk.Label sectionLabel = new ();
+		sectionLabel.AddCssClass (AdwaitaStyles.Title4);
+		sectionLabel.Hexpand = false;
+		sectionLabel.Halign = Gtk.Align.Start;
+		sectionLabel.SetText (caption);
+
+		Gtk.SpinButton seedInput = Gtk.SpinButton.NewWithRange (minSeed, maxSeed, 1);
+		seedInput.Value = initialSeed.Value;
+		seedInput.Hexpand = true;
+		seedInput.OnValueChanged += (_, _) => {
+			DelayedUpdate (() => {
+				SetAndNotify (settings.reflector, effectData, new RandomSeed ((int) seedInput.Value));
+				return false;
+			});
 		};
-		return widget;
+
+		Gtk.Button reseedButton = new () {
+			WidthRequest = 88,
+			CanFocus = true,
+			UseUnderline = true,
+			Label = Translations.GetString ("Reseed"),
+			Hexpand = false,
+			Halign = Gtk.Align.Start,
+		};
+
+		reseedButton.OnClicked += (_, _) => seedInput.Value = random.Next (minSeed, maxSeed);
+
+		Gtk.Box controlsBox = new () { Spacing = 6 };
+		controlsBox.SetOrientation (Gtk.Orientation.Horizontal);
+		controlsBox.Append (reseedButton);
+		controlsBox.Append (seedInput);
+
+		Gtk.Box combinedWidget = Gtk.Box.New (Gtk.Orientation.Vertical, 6);
+		combinedWidget.Append (sectionLabel);
+		combinedWidget.Append (controlsBox);
+
+		return combinedWidget;
 	}
 
 	private void DelayedUpdate (TimeoutHandler handler)
