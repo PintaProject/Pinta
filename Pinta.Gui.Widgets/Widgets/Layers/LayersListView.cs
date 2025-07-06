@@ -1,22 +1,22 @@
-// 
+//
 // LayersListWidget.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
 //       Greg Lowe <greg@vis.net.nz>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -136,21 +136,24 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 		// Clear out old items and rebuild.
 		list_model.RemoveMultiple (0, list_model.GetNItems ());
 
-		if (doc is not null) {
-
-			foreach (var layer in doc.Layers.UserLayers.Reverse ())
-				list_model.Append (new LayersListViewItem (doc, layer));
-
-			doc.History.HistoryItemAdded += HandleHistoryChanged;
-			doc.History.ActionUndone += HandleHistoryChanged;
-			doc.History.ActionRedone += HandleHistoryChanged;
-			doc.Layers.LayerAdded += HandleLayerAdded;
-			doc.Layers.LayerRemoved += HandleLayerRemoved;
-			doc.Layers.SelectedLayerChanged += HandleSelectedLayerChanged;
-			doc.Layers.LayerPropertyChanged += HandleLayerPropertyChanged;
-		}
-
 		active_document = doc;
+		if (doc is null)
+			return;
+
+		foreach (var layer in doc.Layers.UserLayers.Reverse ())
+			list_model.Append (new LayersListViewItem (doc, layer));
+
+		// Update our selection to match the document's active layer.
+		int currentModelIndex = doc.Layers.Count () - 1 - doc.Layers.CurrentUserLayerIndex;
+		selection_model.SelectItem ((uint) currentModelIndex, unselectRest: true);
+
+		doc.History.HistoryItemAdded += HandleHistoryChanged;
+		doc.History.ActionUndone += HandleHistoryChanged;
+		doc.History.ActionRedone += HandleHistoryChanged;
+		doc.Layers.LayerAdded += HandleLayerAdded;
+		doc.Layers.LayerRemoved += HandleLayerRemoved;
+		doc.Layers.SelectedLayerChanged += HandleSelectedLayerChanged;
+		doc.Layers.LayerPropertyChanged += HandleLayerPropertyChanged;
 	}
 
 	private void HandleHistoryChanged (object? sender, EventArgs e)
