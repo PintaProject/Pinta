@@ -19,6 +19,8 @@ Pinta.Core/Algorithms/Julia.cs
 Pinta.Core/Algorithms/Mandelbrot.cs
 Pinta.Core/Algorithms/Mathematics.cs
 Pinta.Core/Algorithms/PerlinNoise.cs
+Pinta.Core/Algorithms/Sampling.cs
+Pinta.Core/Algorithms/SpatialPartition.cs
 Pinta.Core/Algorithms/Utility.cs
 Pinta.Core/Classes/Angle.cs
 Pinta.Core/Classes/AsyncEffectRenderer.cs
@@ -48,6 +50,7 @@ Pinta.Core/Classes/IExtension.cs
 Pinta.Core/Classes/IToolHandle.cs
 Pinta.Core/Classes/Layer.cs
 Pinta.Core/Classes/LayerProperties.cs
+Pinta.Core/Classes/Matrix3x2D.cs
 Pinta.Core/Classes/ObservableObject.cs
 Pinta.Core/Classes/Palette.cs
 Pinta.Core/Classes/PixelOffset.cs
@@ -58,6 +61,7 @@ Pinta.Core/Classes/Re-editable/Text/TextEngine.cs
 Pinta.Core/Classes/Re-editable/Text/TextLayout.cs
 Pinta.Core/Classes/Re-editable/Text/TextPosition.cs
 Pinta.Core/Classes/Rectangle.cs
+Pinta.Core/Classes/RenderHandle.cs
 Pinta.Core/Classes/ScaleFactor.cs
 Pinta.Core/Classes/Scanline.cs
 Pinta.Core/Classes/SelectionModeHandler.cs
@@ -95,6 +99,7 @@ Pinta.Core/Enumeration/PixelOffsetEnumeration.cs
 Pinta.Core/Enumerations/Anchor.cs
 Pinta.Core/Enumerations/BlendMode.cs
 Pinta.Core/Enumerations/CursorShape.cs
+Pinta.Core/Enumerations/DistanceMetric.cs
 Pinta.Core/Enumerations/EffectAdjustment.cs
 Pinta.Core/Enumerations/GradientColorMode.cs
 Pinta.Core/Enumerations/MouseButton.cs
@@ -221,6 +226,7 @@ Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs
 Pinta.Effects/Effects/AddNoiseEffect.cs
 Pinta.Effects/Effects/AlignObjectEffect.cs
 Pinta.Effects/Effects/BulgeEffect.cs
+Pinta.Effects/Effects/CellsEffect.cs
 Pinta.Effects/Effects/CloudsEffect.cs
 Pinta.Effects/Effects/DentsEffect.cs
 Pinta.Effects/Effects/DitheringEffect.cs
@@ -257,6 +263,7 @@ Pinta.Effects/Effects/VoronoiDiagramEffect.cs
 Pinta.Effects/Effects/ZoomBlurEffect.cs
 Pinta.Effects/FriendAssemblies.cs
 Pinta.Effects/Utilities/EffectHelper.cs
+Pinta.Effects/Utilities/GradientExtensions.cs
 Pinta.Effects/Utilities/PaletteHelper.cs
 Pinta.Effects/Utilities/SrgbUtility.cs
 Pinta.Gui.Addins/AddinInfoView.cs
