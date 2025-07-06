@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.1...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.2...HEAD)
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -36,9 +36,16 @@ Thanks to the following contributors who worked on this release:
 - Improved the handling of negative angle values in the Rotate / Zoom Layer dialog (#1142, #1440)
 - Fixed incorrect behavior of the Atkinson method in the Dithering effect (#1489)
 - Fixed an issue where hiding a panel did not cause other panels to expand into the available space (#1472, #1500)
+- Fixed incorrect behavior with transparent colors in the Gradient tool (#1552, #1543)
+
+## [3.0.2](https://github.com/PintaProject/Pinta/releases/tag/3.0.2) - 2025/07/06
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+
+### Fixed
 - Fixed an error when loading the add-in repositories (#1547, #1542)
 - Fixed a bug in the Levels dialog where the Red and Blue toggles were reversed (#1551)
-- Fixed incorrect behavior with transparent colors in the Gradient tool (#1552, #1543)
 - The Vulkan DLL is now bundled with the Windows installer, which fixes errors on startup for certain systems (#1497, #1530)
 - Fixed performance issues when opening a large number of files (#1574, #1578)
 
