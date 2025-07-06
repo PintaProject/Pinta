@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-06 00:30+0000\n"
-"PO-Revision-Date: 2025-06-30 10:02+0000\n"
+"PO-Revision-Date: 2025-07-06 05:21+0000\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/"
-">\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -311,7 +311,7 @@ msgstr "Arbetsytans stödlinjer..."
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:143
 msgid "Cell Radius"
-msgstr ""
+msgstr "Cellradie"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
@@ -319,7 +319,7 @@ msgstr "Rutstorlek"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:18
 msgid "Cells"
-msgstr ""
+msgstr "Celler"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -513,7 +513,7 @@ msgstr "Färgschema"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:161
 msgid "Color Scheme Edge Behavior"
-msgstr ""
+msgstr "Färgschemats kantuppförande"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:149
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
@@ -588,7 +588,7 @@ msgstr "Beskär till markering"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:150
 msgid "Current Palette"
-msgstr ""
+msgstr "Aktuell palett"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
@@ -1663,7 +1663,7 @@ msgstr "Palett"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Palette Source"
-msgstr ""
+msgstr "Palettkälla"
 
 #: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
@@ -1818,7 +1818,7 @@ msgstr "Förinställd toning"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:147
 msgid "Preset Palettes"
-msgstr ""
+msgstr "Förinställda paletter"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
@@ -1912,7 +1912,7 @@ msgstr "Slumpmässiga punktplatser"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:153
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Nyligen använda färger"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
