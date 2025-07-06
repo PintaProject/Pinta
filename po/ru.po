@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 00:31+0000\n"
+"POT-Creation-Date: 2025-07-06 00:30+0000\n"
 "PO-Revision-Date: 2025-07-01 03:11+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,7 +99,7 @@ msgstr "Выровнять объект"
 msgid "All files"
 msgstr "Все файлы"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:528
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:500
 msgid "Alpha"
 msgstr "Альфа"
 
@@ -121,8 +121,8 @@ msgstr "Якорь:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:186
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:145
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:78
@@ -175,7 +175,7 @@ msgstr "Автокоррекция"
 msgid "Available in repository: {0}"
 msgstr "Доступно в репозитории: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:133
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
 msgid "Background"
 msgstr "Фон"
 
@@ -216,7 +216,7 @@ msgstr "Режим наложения"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:506
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:478
 msgid "Blue"
 msgstr "Синий"
 
@@ -293,7 +293,7 @@ msgstr "В процентах:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Отменить"
@@ -310,9 +310,17 @@ msgstr "Настройки сетки холста"
 msgid "Canvas Grid..."
 msgstr "Сетка холста..."
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:143
+msgid "Cell Radius"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
 msgstr "Размер ячейки"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:18
+msgid "Cells"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -426,7 +434,7 @@ msgstr "Щёлкните, чтобы выделить область с похо
 msgid "Click to select secondary color."
 msgstr "Щёлкните, чтобы выбрать дополнительный цвет."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:231
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Click to switch between primary and secondary color."
 msgstr "Щёлкните, чтобы переключиться между основным и дополнительным цветом."
@@ -447,7 +455,7 @@ msgstr "Штамп клонирования"
 msgid "Close"
 msgstr "Закрыть"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:54
+#: ../Pinta.Core/Actions/WindowActions.cs:51
 msgid "Close All"
 msgstr "Закрыть все"
 
@@ -468,7 +476,7 @@ msgid "Coarseness"
 msgstr "Грубость"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:15
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:17
 msgid "Color"
 msgstr "Цветность"
 
@@ -502,19 +510,25 @@ msgid "Color Saturation"
 msgstr "Насыщенность цвета"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Effects/Effects/CellsEffect.cs:152
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
 msgid "Color Scheme"
 msgstr "Цветовая схема"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:161
+msgid "Color Scheme Edge Behavior"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:149
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
 msgid "Color Scheme Source"
 msgstr "Источник для цветовой схемы"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:260
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:181
 msgid "Color Sorting"
 msgstr "Сортировать цвета"
 
@@ -563,8 +577,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Не удалось импортировать слой «{0}» из {1}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:167
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:437
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Не удалось открыть файл: {0}"
@@ -577,6 +591,10 @@ msgstr "Покрытие"
 #: ../Pinta.Core/Actions/ImageActions.cs:295
 msgid "Crop to Selection"
 msgstr "Кадрировать по выделенному"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:150
+msgid "Current Palette"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
@@ -652,7 +670,8 @@ msgstr "Различие"
 msgid "Distance"
 msgstr "Расстояние"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:252
+#: ../Pinta.Effects/Effects/CellsEffect.cs:134
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:173
 msgid "Distance Metric"
 msgstr "Метрика расстояния"
 
@@ -666,7 +685,7 @@ msgstr "Метрика расстояния"
 msgid "Distort"
 msgstr "Искажения"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:12
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:14
 msgid "Dithering"
 msgstr "Дизеринг"
 
@@ -742,7 +761,7 @@ msgstr "Ластик"
 msgid "Error"
 msgstr "Ошибка"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:135
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Error Diffusion Method"
 msgstr "Метод «Распространения ошибки»"
 
@@ -759,8 +778,8 @@ msgstr "Расширить"
 msgid "Extension packages"
 msgstr "Пакеты расширений"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:157
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
 msgid "Factor"
 msgstr "Фактор"
 
@@ -776,7 +795,7 @@ msgstr "Не удалось инициализировать дополнени�
 msgid "Failed to load extension package"
 msgstr "Не удалось загрузить пакет расширения"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 msgid "Failed to open image"
 msgstr "Не удалось открыть изображение"
 
@@ -940,7 +959,7 @@ msgstr "Градиент"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:484
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:456
 msgid "Green"
 msgstr "Зелёный"
 
@@ -959,7 +978,7 @@ msgstr "Жёсткий свет"
 msgid "Height:"
 msgstr "Высота:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:366
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:338
 msgid "Hex"
 msgstr "Шестнадц."
 
@@ -978,27 +997,27 @@ msgid "History"
 msgstr "История"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:291
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
 msgid "Horizontal blue (B)"
 msgstr "По горизонтали, от синего (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:294
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Horizontal green (G)"
 msgstr "По горизонтали, от зелёного (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:297
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Horizontal red (R)"
 msgstr "По горизонтали, от красного (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:386
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:358
 msgid "Hue"
 msgstr "Тон"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:260
 msgid "Hue & Sat"
 msgstr "Тон & Насыщ."
 
@@ -1105,7 +1124,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Пересечение ({0} + Левая кнопка мыши)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
 msgid "Invert Colors"
 msgstr "Обратить цвета"
 
@@ -1143,7 +1162,7 @@ msgstr "Выделение лассо"
 msgid "Layer"
 msgstr "Слой"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Hidden"
 msgstr "Скрытый слой"
 
@@ -1160,7 +1179,7 @@ msgstr "Свойства слоя"
 msgid "Layer Properties..."
 msgstr "Параметры слоя..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Shown"
 msgstr "Видимый слой"
 
@@ -1411,7 +1430,7 @@ msgstr "Главное меню"
 msgid "Maintain aspect ratio"
 msgstr "Соблюдать соотношение сторон"
 
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:28
 msgid "Mandelbrot Fractal"
 msgstr "Фрактал Мандельброта"
 
@@ -1483,7 +1502,7 @@ msgstr "Ближайший сосед"
 msgid "New"
 msgstr "Создать"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:141
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
 #: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "Новое изображение"
@@ -1528,7 +1547,8 @@ msgstr "Исходный размер"
 msgid "Normal and Outline"
 msgstr "Обычный и контур"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:255
+#: ../Pinta.Effects/Effects/CellsEffect.cs:137
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:176
 msgid "Number of Cells"
 msgstr "Количество локусов"
 
@@ -1536,7 +1556,7 @@ msgstr "Количество локусов"
 msgid "Number of threads to use for rendering"
 msgstr "Количество потоков, используемых для отрисовки"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "OK"
 msgstr "OK"
 
@@ -1576,7 +1596,7 @@ msgstr "Открыть"
 msgid "Open Curve Shape"
 msgstr "Открытая кривая"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:342
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
 msgid "Open Image"
 msgstr "Открыть изображение"
 
@@ -1656,9 +1676,13 @@ msgid "Paintbrush"
 msgstr "Кисть"
 
 #: ../Pinta.Core/Actions/EditActions.cs:235
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:138
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
 msgid "Palette"
 msgstr "Палитра"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+msgid "Palette Source"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
@@ -1709,7 +1733,7 @@ msgid "Photo"
 msgstr "Снимок"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:71 ../Pinta/MainWindow.cs:62
+#: ../Pinta/Main.cs:71 ../Pinta/MainWindow.cs:61
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1748,7 +1772,7 @@ msgstr ""
 "изображениям, а также имеет возможность создавать неограниченное количество "
 "слоев, чтобы помочь организовать ваше творчество."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:438
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta поддерживает следующие форматы файлов:"
 
@@ -1812,6 +1836,10 @@ msgstr "Оставить"
 msgid "Preset Gradient"
 msgstr "Предустановленный градиент"
 
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:147
+msgid "Preset Palettes"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
 msgstr "Предустановка:"
@@ -1828,12 +1856,13 @@ msgstr "Основной"
 msgid "Print"
 msgstr "Печать"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:164
 #: ../Pinta.Effects/Effects/DentsEffect.cs:153
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:179
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:160
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:273
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
 msgid "Quality"
 msgstr "Качество"
 
@@ -1875,17 +1904,18 @@ msgid "Radius Percentage"
 msgstr "Радиус в процентах"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:287
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Random"
 msgstr "Случайный вариант"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:155
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
 msgid "Random Color Scheme Seed"
 msgstr "Случайные значения для цветовой схемы"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:267
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:188
 msgid "Random Colors"
 msgstr "Случайные цвета"
 
@@ -1895,9 +1925,14 @@ msgstr "Случайные цвета"
 msgid "Random Noise"
 msgstr "Случайный шум"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:270
+#: ../Pinta.Effects/Effects/CellsEffect.cs:140
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Random Point Locations"
 msgstr "Случайные местоположения точек"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:153
+msgid "Recently Used Colors"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -1913,7 +1948,7 @@ msgstr "Прямоугольное выделение"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:462
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:434
 msgid "Red"
 msgstr "Красный"
 
@@ -1953,14 +1988,15 @@ msgstr "Рельеф"
 msgid "Rename Layer"
 msgstr "Переименовать слой"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:24
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:28
 msgid "Render"
 msgstr "Рисование"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:107
 msgid "Rendering Effect"
 msgstr "Эффект отрисовки"
 
@@ -1985,7 +2021,7 @@ msgstr "Переделать"
 msgid "Reset"
 msgstr "Сброс"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:185
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:183
 msgid "Reset Color"
 msgstr "Сбросить цвет"
 
@@ -2019,14 +2055,15 @@ msgstr "Изменить размер палитры"
 msgid "Restart Pinta"
 msgstr "Перезапустить Pinta"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:158
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
 msgid "Reverse Color Scheme"
 msgstr "Обратная цветовая схема"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:264
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:185
 msgid "Reverse Color Sorting"
 msgstr "Сортировка цветов в обратном порядке"
 
@@ -2087,11 +2124,11 @@ msgstr "Линейки"
 msgid "Sampling"
 msgstr "Выборка"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:418
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:390
 msgid "Sat"
 msgstr "Насыщ."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "Sat & Value"
 msgstr "Насыщ. & Значение"
 
@@ -2110,7 +2147,7 @@ msgstr "Насыщенность в процентах"
 msgid "Save"
 msgstr "Сохранить"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:47
+#: ../Pinta.Core/Actions/WindowActions.cs:44
 msgid "Save All"
 msgstr "Сохранить все"
 
@@ -2175,7 +2212,7 @@ msgstr "Добавить резкость"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:227
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:232
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
 msgid "Shortcut key"
 msgstr "Горячая клавиша"
@@ -2196,7 +2233,7 @@ msgstr "Показать сетку"
 msgid "Show Layer"
 msgstr "Показать слой"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:282
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:252
 msgid "Show Value"
 msgstr "Показать значение"
 
@@ -2389,7 +2426,7 @@ msgstr "Подсказка: Нажмите правую кнопку мыши, �
 msgid "Tolerance"
 msgstr "Чувствительность"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:371
+#: ../Pinta.Core/Managers/ToolManager.cs:374
 msgid "Tool"
 msgstr "Инструмент"
 
@@ -2484,7 +2521,7 @@ msgstr "Соединить (+) ({0} + Левая кнопка мыши)"
 msgid "Unsaved Image {0}"
 msgstr "Несохранённое изображение {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:337
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
 msgid "Unsupported file format"
 msgstr "Неподдерживаемый формат файла"
 
@@ -2513,7 +2550,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Использованы некоторые значки из:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:440
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:412
 msgid "Value"
 msgstr "Значение"
 
@@ -2523,17 +2560,17 @@ msgid "Version: {0}"
 msgstr "Версия: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:301
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:215
 msgid "Vertical blue (B)"
 msgstr "По вертикали, от синего (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:304
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:218
 msgid "Vertical green (G)"
 msgstr "По вертикали, от зелёного (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:307
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:221
 msgid "Vertical red (R)"
 msgstr "По вертикали, от красного (R)"
 
@@ -2592,7 +2629,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Правая кнопка мыши)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "У вас нет доступа к '{0}'."
@@ -2606,8 +2643,8 @@ msgstr ""
 "У вас нет доступа для изменения '{0}'. Файл или папка могут быть доступны "
 "только для чтения."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:163
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"

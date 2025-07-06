@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 00:31+0000\n"
+"POT-Creation-Date: 2025-07-06 00:30+0000\n"
 "PO-Revision-Date: 2025-04-22 02:13+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/pinta/pinta/hu/"
@@ -98,7 +98,7 @@ msgstr "Objektum igazítása"
 msgid "All files"
 msgstr "Összes fájl"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:528
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:500
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -120,8 +120,8 @@ msgstr "Horgony:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:186
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:145
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:78
@@ -174,7 +174,7 @@ msgstr "Automatikus szint"
 msgid "Available in repository: {0}"
 msgstr "Elérhető a tárolóban: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:133
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
 msgid "Background"
 msgstr "Háttér"
 
@@ -215,7 +215,7 @@ msgstr "Keverési mód"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:506
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:478
 msgid "Blue"
 msgstr "Kék"
 
@@ -292,7 +292,7 @@ msgstr "Százalék szerint:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Mégse"
@@ -309,9 +309,17 @@ msgstr "Vászonrács beállításai"
 msgid "Canvas Grid..."
 msgstr "Vászonrács…"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:143
+msgid "Cell Radius"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
 msgstr "Cellaméret"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:18
+msgid "Cells"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -421,7 +429,7 @@ msgstr "Kattintson a hasonló színű terület kijelöléséhez."
 msgid "Click to select secondary color."
 msgstr "Kattintson a másodlagos szín kiválasztásához."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:231
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Click to switch between primary and secondary color."
 msgstr "Kattintson az elsődleges és a másodlagos szín közötti váltáshoz."
@@ -442,7 +450,7 @@ msgstr "Klónozó bélyegző"
 msgid "Close"
 msgstr "Bezárás"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:54
+#: ../Pinta.Core/Actions/WindowActions.cs:51
 msgid "Close All"
 msgstr "Összes bezárása"
 
@@ -463,7 +471,7 @@ msgid "Coarseness"
 msgstr "Durvaság"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:15
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:17
 msgid "Color"
 msgstr "Szín"
 
@@ -497,19 +505,25 @@ msgid "Color Saturation"
 msgstr "Színtelítettséget"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Effects/Effects/CellsEffect.cs:152
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
 msgid "Color Scheme"
 msgstr "Színséma"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:161
+msgid "Color Scheme Edge Behavior"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:149
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
 msgid "Color Scheme Source"
 msgstr "Színséma forrása"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:260
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:181
 msgid "Color Sorting"
 msgstr "Színrendezés"
 
@@ -558,8 +572,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Nem sikerült a(z) „{0}” réteg importálása innen: {1}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:167
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:437
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Nem sikerült megnyitni a fájlt: {0}"
@@ -572,6 +586,10 @@ msgstr "Terjedelem"
 #: ../Pinta.Core/Actions/ImageActions.cs:295
 msgid "Crop to Selection"
 msgstr "Vágás a kijelölésre"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:150
+msgid "Current Palette"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
@@ -647,7 +665,8 @@ msgstr "Különbség"
 msgid "Distance"
 msgstr "Távolság"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:252
+#: ../Pinta.Effects/Effects/CellsEffect.cs:134
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:173
 msgid "Distance Metric"
 msgstr "Távolságmetrika"
 
@@ -661,7 +680,7 @@ msgstr "Távolságmetrika"
 msgid "Distort"
 msgstr "Torzítás"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:12
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:14
 msgid "Dithering"
 msgstr "Zajmoduláció"
 
@@ -736,7 +755,7 @@ msgstr "Radír"
 msgid "Error"
 msgstr "Hiba"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:135
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Error Diffusion Method"
 msgstr "Hibadiffúziós módszer"
 
@@ -753,8 +772,8 @@ msgstr "Kinyitás"
 msgid "Extension packages"
 msgstr "Bővítménycsomagok"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:157
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
 msgid "Factor"
 msgstr "Tényező"
 
@@ -770,7 +789,7 @@ msgstr "Nem sikerült előkészíteni a bővítményt"
 msgid "Failed to load extension package"
 msgstr "Nem sikerült betölteni a bővítménycsomagot"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 msgid "Failed to open image"
 msgstr "Nem sikerült megnyitni a képet"
 
@@ -934,7 +953,7 @@ msgstr "Színátmenet"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:484
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:456
 msgid "Green"
 msgstr "Zöld"
 
@@ -953,7 +972,7 @@ msgstr "Kemény fény"
 msgid "Height:"
 msgstr "Magasság:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:366
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:338
 msgid "Hex"
 msgstr "Hexadecimális"
 
@@ -972,27 +991,27 @@ msgid "History"
 msgstr "Előzmények"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:291
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
 msgid "Horizontal blue (B)"
 msgstr "Vízszintes kék (K)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:294
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Horizontal green (G)"
 msgstr "Vízszintes zöld (Z)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:297
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Horizontal red (R)"
 msgstr "Vízszintes piros (P)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:386
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:358
 msgid "Hue"
 msgstr "Árnyalat"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:260
 msgid "Hue & Sat"
 msgstr "Árnyalat és telítettség"
 
@@ -1099,7 +1118,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Metszet ({0} + bal kattintás)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
 msgid "Invert Colors"
 msgstr "Színek megfordítása"
 
@@ -1137,7 +1156,7 @@ msgstr "Lasszó kijelölés"
 msgid "Layer"
 msgstr "Réteg"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Hidden"
 msgstr "Réteg elrejtve"
 
@@ -1154,7 +1173,7 @@ msgstr "Réteg tulajdonságai"
 msgid "Layer Properties..."
 msgstr "Réteg tulajdonságai…"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Shown"
 msgstr "Réteg megjelenítve"
 
@@ -1406,7 +1425,7 @@ msgstr "Főmenü"
 msgid "Maintain aspect ratio"
 msgstr "Méretarány megőrzése"
 
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:28
 msgid "Mandelbrot Fractal"
 msgstr "Mandelbrot-fraktál"
 
@@ -1478,7 +1497,7 @@ msgstr "Legközelebbi szomszéd"
 msgid "New"
 msgstr "Új"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:141
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
 #: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "Új kép"
@@ -1523,7 +1542,8 @@ msgstr "Normál méret"
 msgid "Normal and Outline"
 msgstr "Normál és körvonal"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:255
+#: ../Pinta.Effects/Effects/CellsEffect.cs:137
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:176
 msgid "Number of Cells"
 msgstr "Cellák száma"
 
@@ -1531,7 +1551,7 @@ msgstr "Cellák száma"
 msgid "Number of threads to use for rendering"
 msgstr "A megjelenítéshez használandó szálak száma"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "OK"
 msgstr "Rendben"
 
@@ -1571,7 +1591,7 @@ msgstr "Megnyitás"
 msgid "Open Curve Shape"
 msgstr "Nyitott görbealakzat"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:342
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
 msgid "Open Image"
 msgstr "Kép megnyitása"
 
@@ -1651,9 +1671,13 @@ msgid "Paintbrush"
 msgstr "Ecset"
 
 #: ../Pinta.Core/Actions/EditActions.cs:235
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:138
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
 msgid "Palette"
 msgstr "Paletta"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+msgid "Palette Source"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
@@ -1704,7 +1728,7 @@ msgid "Photo"
 msgstr "Fénykép"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:71 ../Pinta/MainWindow.cs:62
+#: ../Pinta/Main.cs:71 ../Pinta/MainWindow.cs:61
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1744,7 +1768,7 @@ msgstr ""
 "számú réteg létrehozására is képes, hogy segítsen a kreativitás "
 "megszervezésében."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:438
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
 msgid "Pinta supports the following file formats:"
 msgstr "A Pinta a következő fájlformátumokat támogatja:"
 
@@ -1808,6 +1832,10 @@ msgstr "Megőrzés"
 msgid "Preset Gradient"
 msgstr "Színátmenet előbeállítása"
 
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:147
+msgid "Preset Palettes"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
 msgstr "Előbeállítás:"
@@ -1824,12 +1852,13 @@ msgstr "Elsődleges"
 msgid "Print"
 msgstr "Nyomtatás"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:164
 #: ../Pinta.Effects/Effects/DentsEffect.cs:153
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:179
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:160
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:273
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
 msgid "Quality"
 msgstr "Minőség"
 
@@ -1871,17 +1900,18 @@ msgid "Radius Percentage"
 msgstr "Sugár százaléka"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:287
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Random"
 msgstr "Véletlen"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:155
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
 msgid "Random Color Scheme Seed"
 msgstr "Véletlen színséma kiindulóértéke"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:267
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:188
 msgid "Random Colors"
 msgstr "Véletlen színek"
 
@@ -1891,9 +1921,14 @@ msgstr "Véletlen színek"
 msgid "Random Noise"
 msgstr "Véletlen zaj"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:270
+#: ../Pinta.Effects/Effects/CellsEffect.cs:140
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Random Point Locations"
 msgstr "Véletlen ponthelyek"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:153
+msgid "Recently Used Colors"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -1909,7 +1944,7 @@ msgstr "Téglalap kijelölés"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:462
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:434
 msgid "Red"
 msgstr "Piros"
 
@@ -1949,14 +1984,15 @@ msgstr "Kiemelkedés"
 msgid "Rename Layer"
 msgstr "Réteg átnevezése"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:24
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:28
 msgid "Render"
 msgstr "Megjelenítés"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:107
 msgid "Rendering Effect"
 msgstr "Hatás megjelenítése"
 
@@ -1981,7 +2017,7 @@ msgstr "Újraelosztás"
 msgid "Reset"
 msgstr "Visszaállítás"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:185
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:183
 msgid "Reset Color"
 msgstr "Szín visszaállítása"
 
@@ -2015,14 +2051,15 @@ msgstr "Paletta átméretezése"
 msgid "Restart Pinta"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:158
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
 msgid "Reverse Color Scheme"
 msgstr "Színséma megfordítása"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:264
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:185
 msgid "Reverse Color Sorting"
 msgstr "Színrendezés megfordítása"
 
@@ -2083,11 +2120,11 @@ msgstr "Vonalzók"
 msgid "Sampling"
 msgstr "Mintavételezés"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:418
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:390
 msgid "Sat"
 msgstr "Telítettség"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "Sat & Value"
 msgstr "Telítettség és érték"
 
@@ -2106,7 +2143,7 @@ msgstr "Telítettség százaléka"
 msgid "Save"
 msgstr "Mentés"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:47
+#: ../Pinta.Core/Actions/WindowActions.cs:44
 msgid "Save All"
 msgstr "Összes mentése"
 
@@ -2171,7 +2208,7 @@ msgstr "Élesítés"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:227
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:232
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
 msgid "Shortcut key"
 msgstr "Gyorsbillentyű"
@@ -2192,7 +2229,7 @@ msgstr "Rács megjelenítése"
 msgid "Show Layer"
 msgstr "Réteg megjelenítése"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:282
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:252
 msgid "Show Value"
 msgstr "Érték megjelenítése"
 
@@ -2386,7 +2423,7 @@ msgstr "Tipp: kattintson a jobb egérgombbal a vezérlőpontok eltávolításáh
 msgid "Tolerance"
 msgstr "Tűrés"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:371
+#: ../Pinta.Core/Managers/ToolManager.cs:374
 msgid "Tool"
 msgstr "Eszköz"
 
@@ -2481,7 +2518,7 @@ msgstr "Unió (+) ({0} + bal kattintás)"
 msgid "Unsaved Image {0}"
 msgstr "Mentetlen kép {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:337
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
 msgid "Unsupported file format"
 msgstr "Nem támogatott fájlformátum"
 
@@ -2510,7 +2547,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Néhány ikon használata innen:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:440
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:412
 msgid "Value"
 msgstr "Érték"
 
@@ -2520,17 +2557,17 @@ msgid "Version: {0}"
 msgstr "Verzió: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:301
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:215
 msgid "Vertical blue (B)"
 msgstr "Függőleges kék (K)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:304
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:218
 msgid "Vertical green (G)"
 msgstr "Függőleges zöld (Z)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:307
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:221
 msgid "Vertical red (R)"
 msgstr "Függőleges piros (P)"
 
@@ -2589,7 +2626,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + jobb kattintás)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Nincs hozzáférése ehhez: „{0}”."
@@ -2603,8 +2640,8 @@ msgstr ""
 "Nincs hozzáférése a(z) „{0}” módosításához. Lehet, hogy a fájl vagy mappa "
 "csak olvasható."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:163
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 00:31+0000\n"
+"POT-Creation-Date: 2025-07-06 00:30+0000\n"
 "PO-Revision-Date: 2025-01-02 21:00+0000\n"
 "Last-Translator: yiannis ioannides <sub@wai.ai>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
@@ -97,7 +97,7 @@ msgstr "Ευθυγράμμιση αντικειμένου"
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:528
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:500
 msgid "Alpha"
 msgstr "Άλφα"
 
@@ -119,8 +119,8 @@ msgstr "Αγκύρωση:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:121
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:177
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:185
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:186
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:145
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:78
@@ -173,7 +173,7 @@ msgstr "Αυτόματο επίπεδο"
 msgid "Available in repository: {0}"
 msgstr "Διαθέσιμο στο αποθετήριο: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:133
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
 msgid "Background"
 msgstr "Παρασκήνιο"
 
@@ -214,7 +214,7 @@ msgstr "Λειτουργία ανάμιξης"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:506
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:478
 msgid "Blue"
 msgstr "Μπλε"
 
@@ -291,7 +291,7 @@ msgstr "Σε ποσοστό:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Ακύρωση"
@@ -308,9 +308,17 @@ msgstr "Ρυθμίσεις πλέγματος καμβά"
 msgid "Canvas Grid..."
 msgstr "Πλέγμα καμβά..."
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:143
+msgid "Cell Radius"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
 msgstr "Μέγεθος κελιού"
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:18
+msgid "Cells"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -422,7 +430,7 @@ msgstr "Κλικ για επιλογή περιοχής παρόμοιου χρ�
 msgid "Click to select secondary color."
 msgstr "Πατήστε για να επιλέξετε δευτερεύον χρώμα."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:226
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:231
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Click to switch between primary and secondary color."
 msgstr "Κλικ για εναλλαγή μεταξύ κύριου και δευτερεύοντος χρώματος."
@@ -443,7 +451,7 @@ msgstr "Στάμπα κλωνοποίησης"
 msgid "Close"
 msgstr "Κλείσιμο"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:54
+#: ../Pinta.Core/Actions/WindowActions.cs:51
 msgid "Close All"
 msgstr "Κλείσιμο όλων"
 
@@ -464,7 +472,7 @@ msgid "Coarseness"
 msgstr "Τραχύτητα"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:15
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:17
 msgid "Color"
 msgstr "Χρώμα"
 
@@ -498,19 +506,25 @@ msgid "Color Saturation"
 msgstr "Κορεσμός χρώματος"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Effects/Effects/CellsEffect.cs:152
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:168
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:191
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
 msgid "Color Scheme"
 msgstr "Συνδυασμός χρωμάτων"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:161
+msgid "Color Scheme Edge Behavior"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:149
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:165
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:188
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
 msgid "Color Scheme Source"
 msgstr "Πηγή συνδυασμού χρωμάτων"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:260
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:181
 msgid "Color Sorting"
 msgstr "Κατανομή χρωμάτων"
 
@@ -559,8 +573,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Δεν ήταν δυνατή η εισαγωγή στρώσης \"{0}\" από {1}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:167
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:437
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Δεν ήταν δυνατό να ανοιχτεί το αρχείο: {0}"
@@ -573,6 +587,10 @@ msgstr "Κάλυψη"
 #: ../Pinta.Core/Actions/ImageActions.cs:295
 msgid "Crop to Selection"
 msgstr "Περικοπή στην επιλογή"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:150
+msgid "Current Palette"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
@@ -648,7 +666,8 @@ msgstr "Διαφορά"
 msgid "Distance"
 msgstr "Απόσταση"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:252
+#: ../Pinta.Effects/Effects/CellsEffect.cs:134
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:173
 msgid "Distance Metric"
 msgstr "Μονάδα απόστασης"
 
@@ -662,7 +681,7 @@ msgstr "Μονάδα απόστασης"
 msgid "Distort"
 msgstr "Παραμόρφωση"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:12
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:14
 msgid "Dithering"
 msgstr "Dithering"
 
@@ -736,7 +755,7 @@ msgstr "Γόμα"
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:135
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Error Diffusion Method"
 msgstr "Σφάλμα μεθόδους diffusion"
 
@@ -753,8 +772,8 @@ msgstr "Επέκταση"
 msgid "Extension packages"
 msgstr "Πακέτα προσθέτων"
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:156
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:176
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:157
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
 msgid "Factor"
 msgstr "Συντελεστής"
 
@@ -770,7 +789,7 @@ msgstr "Σφάλμα εκκίνησης προσθέτου"
 msgid "Failed to load extension package"
 msgstr "Σφάλμα φόρτωσης πακέτου προσθέτου"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:457
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 msgid "Failed to open image"
 msgstr "Αποτυχία ανοίγματος εικόνας"
 
@@ -934,7 +953,7 @@ msgstr "Διαβάθμιση χρώματος"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:484
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:456
 msgid "Green"
 msgstr "Πράσινο"
 
@@ -953,7 +972,7 @@ msgstr "Έντονο φως"
 msgid "Height:"
 msgstr "Ύψος:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:366
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:338
 msgid "Hex"
 msgstr "Δεκαεξαδικό"
 
@@ -972,27 +991,27 @@ msgid "History"
 msgstr "Ιστορικό"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:291
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
 msgid "Horizontal blue (B)"
 msgstr "Οριζόντιο μπλέ (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:294
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Horizontal green (G)"
 msgstr "Οριζόντιο πράσινο (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:297
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Horizontal red (R)"
 msgstr "Οριζόντιο κόκκινο (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:386
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:358
 msgid "Hue"
 msgstr "Απόχρωση"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:260
 msgid "Hue & Sat"
 msgstr "Απόχρωση & κορεσμός"
 
@@ -1100,7 +1119,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr "Διασταύρωση ({0} + δεξί κλικ)"
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:200
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
 msgid "Invert Colors"
 msgstr "Αντιστροφή χρωμάτων"
 
@@ -1138,7 +1157,7 @@ msgstr "Επιλογή με λάσο"
 msgid "Layer"
 msgstr "Επίπεδο"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Hidden"
 msgstr "Επίπεδο σε απόκρυψη"
 
@@ -1155,7 +1174,7 @@ msgstr "Ιδιότητες επιπέδου"
 msgid "Layer Properties..."
 msgstr "Ιδιότητες επιπέδου..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:96
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Shown"
 msgstr "Επίπεδο σε εμφάνιση"
 
@@ -1395,7 +1414,7 @@ msgstr "Κυρίως μενού"
 msgid "Maintain aspect ratio"
 msgstr "Διατήρηση αναλογίας διαστάσεων"
 
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:28
 msgid "Mandelbrot Fractal"
 msgstr "Φράκταλ Μάντελμπροτ"
 
@@ -1467,7 +1486,7 @@ msgstr "Κοντινότερος γείτονας"
 msgid "New"
 msgstr "Νέο"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:141
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
 #: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
 msgstr "Νέα εικόνα"
@@ -1512,7 +1531,8 @@ msgstr "Κανονικό μέγεθος"
 msgid "Normal and Outline"
 msgstr "Κανονικό και περίγραμμα"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:255
+#: ../Pinta.Effects/Effects/CellsEffect.cs:137
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:176
 msgid "Number of Cells"
 msgstr "Αριθμός κελιών"
 
@@ -1520,7 +1540,7 @@ msgstr "Αριθμός κελιών"
 msgid "Number of threads to use for rendering"
 msgstr "Αριθμός νημάτων προς απόδοση"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "OK"
 msgstr "ΟΚ"
 
@@ -1560,7 +1580,7 @@ msgstr "Άνοιγμα"
 msgid "Open Curve Shape"
 msgstr "Σχήμα ανοικτής καμπύλης"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:342
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
 msgid "Open Image"
 msgstr "Άνοιγμα εικόνας"
 
@@ -1640,9 +1660,13 @@ msgid "Paintbrush"
 msgstr "Πινέλο"
 
 #: ../Pinta.Core/Actions/EditActions.cs:235
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:138
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
 msgid "Palette"
 msgstr "Παλέτα"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+msgid "Palette Source"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
@@ -1693,7 +1717,7 @@ msgid "Photo"
 msgstr "Φωτογραφία"
 
 #: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:71 ../Pinta/MainWindow.cs:62
+#: ../Pinta/Main.cs:71 ../Pinta/MainWindow.cs:61
 msgid "Pinta"
 msgstr "Επεξεργασία εικόνας Pinta"
 
@@ -1733,7 +1757,7 @@ msgstr ""
 "δυνατότητα να δημιουργεί απεριόριστα επίπεδα για να οργανώσετε τη "
 "δημιουργικότητά σας."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:438
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
 msgid "Pinta supports the following file formats:"
 msgstr "Το Pinta υποστηρίζει τις ακόλουθες μορφές αρχείων:"
 
@@ -1797,6 +1821,10 @@ msgstr "Διατήρηση"
 msgid "Preset Gradient"
 msgstr "Προκαθορισμένο ντεγκραντέ"
 
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:147
+msgid "Preset Palettes"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
 msgstr "Προκαθορισμένο:"
@@ -1813,12 +1841,13 @@ msgstr "Πρωτεύον"
 msgid "Print"
 msgstr "Εκτύπωση"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:164
 #: ../Pinta.Effects/Effects/DentsEffect.cs:153
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:159
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:179
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:160
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:273
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
 msgid "Quality"
 msgstr "Ποιότητα"
 
@@ -1860,17 +1889,18 @@ msgid "Radius Percentage"
 msgstr "Ποσοστό ακτίνας"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:287
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Random"
 msgstr "Τυχαίο"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:155
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:171
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:194
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
 msgid "Random Color Scheme Seed"
 msgstr "Αριθμός τυχαίου συνδυασμού χρωμάτων"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:267
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:188
 msgid "Random Colors"
 msgstr "Τυχαία χρώματα"
 
@@ -1880,9 +1910,14 @@ msgstr "Τυχαία χρώματα"
 msgid "Random Noise"
 msgstr "Τυχαίος θόρυβος"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:270
+#: ../Pinta.Effects/Effects/CellsEffect.cs:140
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Random Point Locations"
 msgstr "Τυχαία σημεία"
+
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:153
+msgid "Recently Used Colors"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -1898,7 +1933,7 @@ msgstr "Ορθογώνια επιλογή"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:462
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:434
 msgid "Red"
 msgstr "Κόκκινο"
 
@@ -1938,14 +1973,15 @@ msgstr "Ανάγλυφο"
 msgid "Rename Layer"
 msgstr "Μετονομασία επιπέδου"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:24
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:33
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:28
 msgid "Render"
 msgstr "Απόδοση"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:107
 msgid "Rendering Effect"
 msgstr "Απόδοση αποτελέσματος"
 
@@ -1970,7 +2006,7 @@ msgstr "Επανατροφοδότηση"
 msgid "Reset"
 msgstr "Επαναφορά"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:185
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:183
 msgid "Reset Color"
 msgstr "Επαναφορά χρώματος"
 
@@ -2004,14 +2040,15 @@ msgstr "Αλλαγή μεγέθους της παλέτας"
 msgid "Restart Pinta"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:158
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:174
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:197
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
 msgid "Reverse Color Scheme"
 msgstr "Αντιστροφή συνδυασμού χρωμάτων"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:264
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:185
 msgid "Reverse Color Sorting"
 msgstr "Αντιστροφή κατανομής χρωμάτων"
 
@@ -2072,11 +2109,11 @@ msgstr "Χάρακες"
 msgid "Sampling"
 msgstr "Δειγματοληψία"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:418
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:390
 msgid "Sat"
 msgstr "Κορεσμός"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "Sat & Value"
 msgstr "Κορεσμός & τιμή"
 
@@ -2095,7 +2132,7 @@ msgstr "Ποσοστό κορεσμού"
 msgid "Save"
 msgstr "Αποθήκευση"
 
-#: ../Pinta.Core/Actions/WindowActions.cs:47
+#: ../Pinta.Core/Actions/WindowActions.cs:44
 msgid "Save All"
 msgstr "Αποθήκευση όλων"
 
@@ -2160,7 +2197,7 @@ msgstr "Όξυνση"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:227
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:232
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
 msgid "Shortcut key"
 msgstr "Πλήκτρο συντόμευσης"
@@ -2181,7 +2218,7 @@ msgstr "Εμφάνιση πλέγματος"
 msgid "Show Layer"
 msgstr "Εμφάνισηη επιπέδου"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:282
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:252
 msgid "Show Value"
 msgstr "Εμφάνιση τιμής"
 
@@ -2375,7 +2412,7 @@ msgstr "Βοήθημα: Πατήστε με δεξί κλικ για να αφα
 msgid "Tolerance"
 msgstr "Ανοχή"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:371
+#: ../Pinta.Core/Managers/ToolManager.cs:374
 msgid "Tool"
 msgstr "Εργαλείο"
 
@@ -2470,7 +2507,7 @@ msgstr "Ένωση (+) ({0} + αριστερό κλικ)"
 msgid "Unsaved Image {0}"
 msgstr "Μη αποθηκευμένη εικόνα {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:337
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
 msgid "Unsupported file format"
 msgstr "Μη υποστηριζόμενη μορφή αρχείου"
 
@@ -2499,7 +2536,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Γίνεται χρήση μερικών εικονιδίων από:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:440
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:412
 msgid "Value"
 msgstr "Τιμή"
 
@@ -2509,17 +2546,17 @@ msgid "Version: {0}"
 msgstr "Έκδοση: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:301
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:215
 msgid "Vertical blue (B)"
 msgstr "Κάθετο μπλε (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:304
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:218
 msgid "Vertical green (G)"
 msgstr "Κάθετο πράσινο (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:307
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:221
 msgid "Vertical red (R)"
 msgstr "Κάθετο κόκκινο (R)"
 
@@ -2578,7 +2615,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + δεξί κλικ)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Δεν έχετε πρόσβαση στο '{0}'."
@@ -2592,8 +2629,8 @@ msgstr ""
 "Δεν έχετε πρόσβαση για τροποποίηση του '{0}'. Το αρχείο ή ο φάκελος μπορεί "
 "να είναι μόνο για ανάγνωση."
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:163
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
