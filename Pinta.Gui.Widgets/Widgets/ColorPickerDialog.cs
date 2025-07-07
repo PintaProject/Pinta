@@ -19,6 +19,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	const bool DEFAULT_SMALL_MODE = false;
 	const ColorSurfaceType DEFAULT_PICKER_SURFACE_TYPE = ColorSurfaceType.HueAndSat;
 
+	const int DEFAULT_MARGINS = BIG_MARGINS;
+	const int DEFAULT_PALETTE_DISPLAY_SIZE = BIG_PALETTE_DISPLAY_SIZE;
+	const int DEFAULT_PICKER_SURFACE_RADIUS = BIG_PICKER_SURFACE_RADIUS;
+	const int DEFAULT_SLIDER_WIDTH = BIG_SLIDER_WIDTH;
+	const int DEFAULT_SPACING = BIG_SPACING;
+
 	const int BIG_MARGINS = 12;
 	const int BIG_PALETTE_DISPLAY_SIZE = 50;
 	const int BIG_PICKER_SURFACE_RADIUS = 200 / 2;
@@ -42,12 +48,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	// palette
 	const int PALETTE_DISPLAY_BORDER_THICKNESS = 3;
-	private int palette_display_size = BIG_PALETTE_DISPLAY_SIZE;
+	private int palette_display_size = DEFAULT_PALETTE_DISPLAY_SIZE;
 	private readonly ImmutableArray<Gtk.DrawingArea> color_displays;
 
 	// color surface
 	const int PICKER_SURFACE_PADDING = 10;
-	private int picker_surface_radius = BIG_PICKER_SURFACE_RADIUS;
+	private int picker_surface_radius = DEFAULT_PICKER_SURFACE_RADIUS;
 	private readonly Gtk.Box picker_surface_selector_box;
 	private readonly Gtk.Box picker_surface_box;
 	private readonly Gtk.Overlay picker_surface_overlay;
@@ -62,7 +68,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	// hex + sliders
 	private readonly Gtk.Entry hex_entry;
 	private readonly PaletteManager palette;
-	private int slider_width = BIG_SLIDER_WIDTH;
+	private int slider_width = DEFAULT_SLIDER_WIDTH;
 	private readonly Gtk.Box sliders_box;
 	private readonly ColorPickerSlider hue_slider;
 	private readonly ColorPickerSlider saturation_slider;
@@ -109,8 +115,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 	}
 
-	private int spacing = BIG_SPACING;
-	private int margins = BIG_MARGINS;
+	private int spacing = DEFAULT_SPACING;
+	private int margins = DEFAULT_MARGINS;
 	private bool small_mode = DEFAULT_SMALL_MODE;
 	private readonly bool show_swatches = false;
 
@@ -171,7 +177,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		DefaultHeight = 1;
 	}
 
-	private bool IsPrimary (int colorIndex) // TODO: Get rid of this
+	private static bool IsPrimary (int colorIndex) // TODO: Get rid of this
 		=> colorIndex == 0;
 
 	/// <param name="chrome">Current Chrome Manager.</param>
@@ -254,7 +260,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// Also contains picker surface switcher + options
 		#region Picker Surface
 
-		int pickerSurfaceDrawSize = (BIG_PICKER_SURFACE_RADIUS + PICKER_SURFACE_PADDING) * 2;
+		int pickerSurfaceDrawSize = (DEFAULT_PICKER_SURFACE_RADIUS + PICKER_SURFACE_PADDING) * 2;
 
 		// Show Value toggle for hue sat picker surface
 
@@ -590,7 +596,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			mainVbox.Append (swatchBox);
 
 		Gtk.Box contentArea = this.GetContentAreaBox ();
-		contentArea.SetAllMargins (BIG_MARGINS);
+		contentArea.SetAllMargins (DEFAULT_MARGINS);
 		contentArea.Append (mainVbox);
 
 		if (livePalette) {
