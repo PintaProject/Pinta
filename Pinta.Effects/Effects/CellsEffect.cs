@@ -11,6 +11,9 @@ namespace Pinta.Effects;
 
 public sealed class CellsEffect : BaseEffect
 {
+	public override string Icon
+		=> Resources.Icons.EffectsRenderCells;
+
 	public override bool IsTileable
 		=> true;
 

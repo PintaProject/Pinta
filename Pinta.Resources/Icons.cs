@@ -145,6 +145,7 @@ public static class Icons
 	public const string EffectsPhotoSharpen = "effects-photo-sharpen";
 	public const string EffectsPhotoSoftenPortrait = "effects-photo-softenportrait";
 	public const string EffectsPhotoVignette = "effects-photo-vignette";
+	public const string EffectsRenderCells = "effects-render-cells";
 	public const string EffectsRenderClouds = "effects-render-clouds";
 	public const string EffectsRenderJuliaFractal = "effects-render-juliafractal";
 	public const string EffectsRenderMandelbrotFractal = "effects-render-mandelbrotfractal";
