@@ -156,16 +156,16 @@ public class RectangleHandle : IToolHandle
 
 	private void UpdateHandlePositions ()
 	{
-		RectangleD rect = Rectangle;
-		PointD center = rect.GetCenter ();
-		handles[0].CanvasPosition = new PointD (rect.Left, rect.Top);
-		handles[1].CanvasPosition = new PointD (rect.Left, rect.Bottom);
-		handles[2].CanvasPosition = new PointD (rect.Right, rect.Top);
-		handles[3].CanvasPosition = new PointD (rect.Right, rect.Bottom);
-		handles[4].CanvasPosition = new PointD (rect.Left, center.Y);
-		handles[5].CanvasPosition = new PointD (center.X, rect.Top);
-		handles[6].CanvasPosition = new PointD (rect.Right, center.Y);
-		handles[7].CanvasPosition = new PointD (center.X, rect.Bottom);
+		PointD center = Utility.Lerp (start_pt, end_pt, 0.5f);
+
+		handles[0].CanvasPosition = start_pt;
+		handles[1].CanvasPosition = new PointD (start_pt.X, end_pt.Y);
+		handles[2].CanvasPosition = new PointD (end_pt.X, start_pt.Y);
+		handles[3].CanvasPosition = end_pt;
+		handles[4].CanvasPosition = new PointD (start_pt.X, center.Y);
+		handles[5].CanvasPosition = new PointD (center.X, start_pt.Y);
+		handles[6].CanvasPosition = new PointD (end_pt.X, center.Y);
+		handles[7].CanvasPosition = new PointD (center.X, end_pt.Y);
 	}
 
 	private void UpdateHandleUnderPoint (PointD viewPos)
