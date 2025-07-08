@@ -37,6 +37,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed incorrect behavior of the Atkinson method in the Dithering effect (#1489)
 - Fixed an issue where hiding a panel did not cause other panels to expand into the available space (#1472, #1500)
 - Fixed incorrect behavior with transparent colors in the Gradient tool (#1552, #1543)
+- Fixed issues where the layer widget did not show the correct selected layer when switching documents (#1602, #1573)
 
 ## [3.0.2](https://github.com/PintaProject/Pinta/releases/tag/3.0.2) - 2025/07/06
 
