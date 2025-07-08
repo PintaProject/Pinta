@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using Cairo;
@@ -14,6 +15,15 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		HueAndSat,
 		SatAndVal,
 	}
+
+	const bool DEFAULT_SMALL_MODE = false;
+	const ColorSurfaceType DEFAULT_PICKER_SURFACE_TYPE = ColorSurfaceType.HueAndSat;
+
+	const int DEFAULT_MARGINS = BIG_MARGINS;
+	const int DEFAULT_PALETTE_DISPLAY_SIZE = BIG_PALETTE_DISPLAY_SIZE;
+	const int DEFAULT_PICKER_SURFACE_RADIUS = BIG_PICKER_SURFACE_RADIUS;
+	const int DEFAULT_SLIDER_WIDTH = BIG_SLIDER_WIDTH;
+	const int DEFAULT_SPACING = BIG_SPACING;
 
 	const int BIG_MARGINS = 12;
 	const int BIG_PALETTE_DISPLAY_SIZE = 50;
@@ -38,12 +48,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	// palette
 	const int PALETTE_DISPLAY_BORDER_THICKNESS = 3;
-	private int palette_display_size = BIG_PALETTE_DISPLAY_SIZE;
-	private readonly Gtk.DrawingArea[] color_displays;
+	private int palette_display_size = DEFAULT_PALETTE_DISPLAY_SIZE;
+	private readonly ImmutableArray<Gtk.DrawingArea> color_displays;
 
 	// color surface
 	const int PICKER_SURFACE_PADDING = 10;
-	private int picker_surface_radius = BIG_PICKER_SURFACE_RADIUS;
+	private int picker_surface_radius = DEFAULT_PICKER_SURFACE_RADIUS;
 	private readonly Gtk.Box picker_surface_selector_box;
 	private readonly Gtk.Box picker_surface_box;
 	private readonly Gtk.Overlay picker_surface_overlay;
@@ -51,14 +61,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private readonly Gtk.DrawingArea picker_surface_cursor;
 
 	// color surface options
-	private ColorSurfaceType picker_surface_type = ColorSurfaceType.HueAndSat;
+	private ColorSurfaceType picker_surface_type = DEFAULT_PICKER_SURFACE_TYPE;
 	private bool mouse_on_picker_surface = false;
 	private readonly Gtk.CheckButton picker_surface_option_draw_value;
 
 	// hex + sliders
 	private readonly Gtk.Entry hex_entry;
 	private readonly PaletteManager palette;
-	private int slider_width = BIG_SLIDER_WIDTH;
+	private int slider_width = DEFAULT_SLIDER_WIDTH;
 	private readonly Gtk.Box sliders_box;
 	private readonly ColorPickerSlider hue_slider;
 	private readonly ColorPickerSlider saturation_slider;
@@ -105,9 +115,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 	}
 
-	private int spacing = BIG_SPACING;
-	private int margins = BIG_MARGINS;
-	private bool small_mode = false;
+	private int spacing = DEFAULT_SPACING;
+	private int margins = DEFAULT_MARGINS;
+	private bool small_mode = DEFAULT_SMALL_MODE;
 	private readonly bool show_swatches = false;
 
 	private void SetSmallMode (bool isSmallMode)
@@ -148,10 +158,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		picker_surface.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
 		picker_surface_cursor.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
 		picker_surface_overlay.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
-		if (small_mode)
-			picker_surface_selector_box.SetOrientation (Gtk.Orientation.Vertical);
-		else
-			picker_surface_selector_box.SetOrientation (Gtk.Orientation.Horizontal);
+		picker_surface_selector_box.SetOrientation (small_mode ? Gtk.Orientation.Vertical : Gtk.Orientation.Horizontal);
 
 		hue_slider.SetSliderWidth (slider_width);
 		saturation_slider.SetSliderWidth (slider_width);
@@ -170,7 +177,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		DefaultHeight = 1;
 	}
 
-	private bool IsPrimary (int colorIndex) // TODO: Get rid of this
+	private static bool IsPrimary (int colorIndex) // TODO: Get rid of this
 		=> colorIndex == 0;
 
 	/// <param name="chrome">Current Chrome Manager.</param>
@@ -198,7 +205,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		Gtk.Button shrinkButton = new ();
 		shrinkButton.OnClicked += OnShrinkButtonClicked;
 		shrinkButton.SetIconName (
-			small_mode
+			DEFAULT_SMALL_MODE
 			? Resources.StandardIcons.WindowMaximize
 			: Resources.StandardIcons.WindowMinimize);
 
@@ -216,12 +223,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		titleBar.PackEnd (cancelButton);
 		titleBar.SetShowTitleButtons (false);
 
-		SetTitlebar (titleBar);
-
 		// Active palette contains the primary/secondary colors on the left of the color picker
 		#region Color Display
 
-		Gtk.DrawingArea[] colorDisplays = CreateColorDisplays (adjustable);
+		ImmutableArray<Gtk.DrawingArea> colorDisplays = CreateColorDisplays (adjustable);
 
 		Gtk.ListBox colorDisplayList = new ();
 		foreach (var colorDisplay in colorDisplays)
@@ -255,7 +260,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// Also contains picker surface switcher + options
 		#region Picker Surface
 
-		int pickerSurfaceDrawSize = (picker_surface_radius + PICKER_SURFACE_PADDING) * 2;
+		int pickerSurfaceDrawSize = (DEFAULT_PICKER_SURFACE_RADIUS + PICKER_SURFACE_PADDING) * 2;
 
 		// Show Value toggle for hue sat picker surface
 
@@ -263,13 +268,11 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			Active = true,
 			Label = Translations.GetString ("Show Value"),
 		};
+		pickerSurfaceOptionDrawValue.SetVisible (DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.HueAndSat);
 		pickerSurfaceOptionDrawValue.OnToggled += (o, e) => UpdateView ();
 
 		Gtk.ToggleButton pickerSurfaceSatVal = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Sat & Value"));
-
-		if (picker_surface_type == ColorSurfaceType.SatAndVal)
-			pickerSurfaceSatVal.Toggle ();
-
+		pickerSurfaceSatVal.Active = DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.SatAndVal;
 		pickerSurfaceSatVal.OnToggled += (_, _) => {
 			picker_surface_type = ColorSurfaceType.SatAndVal;
 			pickerSurfaceOptionDrawValue.SetVisible (false);
@@ -278,10 +281,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		// When Gir.Core supports it, this should probably be replaced with a toggle group.
 		Gtk.ToggleButton pickerSurfaceHueSat = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Hue & Sat"));
-
-		if (picker_surface_type == ColorSurfaceType.HueAndSat)
-			pickerSurfaceHueSat.Toggle ();
-
+		pickerSurfaceHueSat.Active = DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.HueAndSat;
 		pickerSurfaceHueSat.OnToggled += (_, _) => {
 			picker_surface_type = ColorSurfaceType.HueAndSat;
 			pickerSurfaceOptionDrawValue.SetVisible (true);
@@ -302,19 +302,29 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		pickerSurface.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
 		pickerSurface.SetDrawFunc ((area, context, width, height) => DrawColorSurface (context));
 
-		Colors = adjustable;
-
 		// Cursor handles the square in the picker surface displaying where your selected color is
 		Gtk.DrawingArea pickerSurfaceCursor = new ();
 		pickerSurfaceCursor.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
 		pickerSurfaceCursor.SetDrawFunc ((area, context, width, height) => {
-			context.Antialias = Antialias.None;
-			PointD loc = HsvToPickerLocation (CurrentColor.ToHsv (), picker_surface_radius);
-			loc = new PointD (loc.X + picker_surface_radius + PICKER_SURFACE_PADDING, loc.Y + picker_surface_radius + PICKER_SURFACE_PADDING);
 
-			context.FillRectangle (new RectangleD (loc.X - 5, loc.Y - 5, 10, 10), CurrentColor);
-			context.DrawRectangle (new RectangleD (loc.X - 5, loc.Y - 5, 10, 10), new Color (0, 0, 0), 4);
-			context.DrawRectangle (new RectangleD (loc.X - 5, loc.Y - 5, 10, 10), new Color (1, 1, 1), 1);
+			PointD locBase = HsvToPickerLocation (CurrentColor.ToHsv (), picker_surface_radius);
+			PointD loc = new (locBase.X + picker_surface_radius + PICKER_SURFACE_PADDING, locBase.Y + picker_surface_radius + PICKER_SURFACE_PADDING);
+
+			context.Antialias = Antialias.None;
+
+			context.FillRectangle (
+				new RectangleD (loc.X - 5, loc.Y - 5, 10, 10),
+				CurrentColor);
+
+			context.DrawRectangle (
+				new RectangleD (loc.X - 5, loc.Y - 5, 10, 10),
+				new Color (0, 0, 0),
+				4);
+
+			context.DrawRectangle (
+				new RectangleD (loc.X - 5, loc.Y - 5, 10, 10),
+				new Color (1, 1, 1),
+				1);
 		});
 
 		// Overlays the cursor on top of the surface
@@ -323,7 +333,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		pickerSurfaceOverlay.AddOverlay (pickerSurfaceCursor);
 		pickerSurfaceOverlay.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
 
-		Gtk.Box pickerSurfaceBox = new Gtk.Box {
+		Gtk.Box pickerSurfaceBox = new () {
 			Spacing = spacing,
 			WidthRequest = pickerSurfaceDrawSize,
 		};
@@ -335,6 +345,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		#endregion
 
 		// Handles the ColorPickerSliders + Hex entry.
+
+		Colors = adjustable;
 
 		Gtk.Entry hexEntry = new () {
 			Text_ = CurrentColor.ToHex (),
@@ -580,11 +592,11 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		Gtk.Box mainVbox = new () { Spacing = spacing };
 		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
 		mainVbox.Append (topBox);
-		if (!small_mode)
+		if (!DEFAULT_SMALL_MODE)
 			mainVbox.Append (swatchBox);
 
 		Gtk.Box contentArea = this.GetContentAreaBox ();
-		contentArea.SetAllMargins (margins);
+		contentArea.SetAllMargins (DEFAULT_MARGINS);
 		contentArea.Append (mainVbox);
 
 		if (livePalette) {
@@ -607,6 +619,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		SetOpacity (0.995f);
 
 		// --- Initialization (Gtk.Window)
+
+		SetTitlebar (titleBar);
 
 		Title = Translations.GetString (windowTitle);
 		TransientFor = chrome.MainWindow;
@@ -651,7 +665,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		top_box = topBox;
 	}
 
-	Gtk.DrawingArea[] CreateColorDisplays (ColorPick pick)
+	ImmutableArray<Gtk.DrawingArea> CreateColorDisplays (ColorPick pick)
 	{
 		switch (pick) {
 
