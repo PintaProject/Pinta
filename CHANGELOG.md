@@ -23,6 +23,7 @@ Thanks to the following contributors who worked on this release:
 - Added a right click menu for layers, containing actions that can be applied to the selected layer (#1588) 
 - The Dithering effect can now use Pinta's current palette in addition to the effect's preset color palettes (#1594)
 - Random seed values for effects can now be directly controlled, in addition to use the Reseed button (#1592, #1591)
+- Support for color picking in `SimpleEffectDialog`. Useful for add-in developers (#1611)
 
 ### Changed
 - Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
