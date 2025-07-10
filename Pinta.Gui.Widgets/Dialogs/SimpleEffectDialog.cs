@@ -34,6 +34,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Cairo;
 using Mono.Addins.Localization;
 using Pinta.Core;
 
@@ -242,6 +243,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			return CreatePointPicker;
 		else if (memberType == typeof (CenterOffset<double>))
 			return CreateOffsetPicker;
+		else if (memberType == typeof (Color))
+			return CreateCairoColorPicker;
+		else if (memberType == typeof (ColorBgra))
+			return CreateColorBgraPicker;
 		else if (memberType.IsEnum)
 			return CreateEnumComboBox;
 		else
@@ -253,6 +258,87 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		EffectData effectData,
 		MemberSettings settings,
 		IWorkspaceService workspace);
+
+	private Gtk.Widget CreateColorBgraPicker (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings,
+		IWorkspaceService workspace)
+	{
+		ColorBgra initialColor =
+			(settings.reflector.GetValue (effectData) is ColorBgra c)
+			? c
+			: ColorBgra.FromBgra (0, 0, 0, 255);
+
+		Gdk.RGBA initialColorGdk = new () {
+			Red = initialColor.R / 255f,
+			Green = initialColor.G / 255f,
+			Blue = initialColor.B / 255f,
+			Alpha = initialColor.A / 255f,
+		};
+
+		Gtk.ColorButton colorButton = Gtk.ColorButton.NewWithRgba (initialColorGdk);
+		colorButton.OnColorSet += (_, _) => {
+			Gdk.RGBA newColorGdk = colorButton.Rgba;
+			ColorBgra newColorBgra = ColorBgra.FromBgra (
+				b: (byte) (newColorGdk.Blue * 255),
+				g: (byte) (newColorGdk.Green * 255),
+				r: (byte) (newColorGdk.Red * 255),
+				a: (byte) (newColorGdk.Alpha * 255)
+			);
+			SetAndNotify (settings.reflector, effectData, newColorBgra);
+		};
+
+		Gtk.Label label = Gtk.Label.New (caption);
+		label.Halign = Gtk.Align.Start;
+		label.AddCssClass (AdwaitaStyles.Title4);
+
+		Gtk.Box combinedWidget = Gtk.Box.New (Gtk.Orientation.Vertical, 6);
+		combinedWidget.Append (label);
+		combinedWidget.Append (colorButton);
+
+		return combinedWidget;
+	}
+
+	private Gtk.Widget CreateCairoColorPicker (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings,
+		IWorkspaceService workspace)
+	{
+		Color initialColorCairo =
+			(settings.reflector.GetValue (effectData) is Color c)
+			? c
+			: new Color (0, 0, 0);
+
+		Gdk.RGBA initialColorGdk = new () {
+			Red = (float) initialColorCairo.R,
+			Green = (float) initialColorCairo.G,
+			Blue = (float) initialColorCairo.B,
+			Alpha = (float) initialColorCairo.A,
+		};
+
+		Gtk.ColorButton colorButton = Gtk.ColorButton.NewWithRgba (initialColorGdk);
+		colorButton.OnColorSet += (_, _) => {
+			Gdk.RGBA newColorGdk = colorButton.Rgba;
+			Color newColorCairo = new (
+				R: newColorGdk.Red,
+				G: newColorGdk.Green,
+				B: newColorGdk.Blue,
+				A: newColorGdk.Alpha);
+			SetAndNotify (settings.reflector, effectData, newColorCairo);
+		};
+
+		Gtk.Label label = Gtk.Label.New (caption);
+		label.Halign = Gtk.Align.Start;
+		label.AddCssClass (AdwaitaStyles.Title4);
+
+		Gtk.Box combinedWidget = Gtk.Box.New (Gtk.Orientation.Vertical, 6);
+		combinedWidget.Append (label);
+		combinedWidget.Append (colorButton);
+
+		return combinedWidget;
+	}
 
 	private ComboBoxWidget CreateEnumComboBox (
 		string caption,
