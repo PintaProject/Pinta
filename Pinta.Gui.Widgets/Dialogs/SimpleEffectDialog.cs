@@ -284,6 +284,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		Gtk.ColorDialogButton colorButton = new () {
 			Rgba = initialColorGdk,
 			Dialog = Gtk.ColorDialog.New (),
+
+			Hexpand = false,
+			Halign = Gtk.Align.Start,
+			WidthRequest = 80,
 		};
 		colorButton.OnNotify += (_, _) => {
 			Gdk.RGBA newColorGdk = colorButton.Rgba;
@@ -331,6 +335,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		Gtk.ColorDialogButton colorButton = new () {
 			Rgba = initialColorGdk,
 			Dialog = Gtk.ColorDialog.New (),
+
+			Hexpand = false,
+			Halign = Gtk.Align.Start,
+			WidthRequest = 80,
 		};
 		colorButton.OnNotify += (_, _) => {
 			Gdk.RGBA newColorGdk = colorButton.Rgba;
