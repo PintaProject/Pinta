@@ -23,11 +23,7 @@ public static class Warp
 		EdgeBehavior EdgeBehavior { get; }
 	}
 
-	public readonly record struct TransformData (double X, double Y);
-
-	public delegate TransformData TransformInverter (
-		Settings warpSettings,
-		TransformData transform);
+	public delegate PointD TransformInverter (Settings warpSettings, PointD transform);
 
 	public sealed record Settings (
 		PointD centerOffset,
@@ -72,15 +68,18 @@ public static class Warp
 		PointD relative = new (
 			X: targetPixel.coordinates.X - settings.centerOffset.X,
 			Y: targetPixel.coordinates.Y - settings.centerOffset.Y);
+
 		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasPoints.Count];
+
 		int sampleCount = 0;
+
 		for (int p = 0; p < settings.antiAliasPoints.Count; ++p) {
 
-			TransformData initialTd = new (
+			PointD initialTd = new (
 				X: relative.X + settings.antiAliasPoints[p].X,
 				Y: relative.Y - settings.antiAliasPoints[p].Y);
 
-			TransformData td = transformInverter (settings, initialTd);
+			PointD td = transformInverter (settings, initialTd);
 
 			PointF preliminarySample = new (
 				X: (float) (td.X + settings.centerOffset.X),
