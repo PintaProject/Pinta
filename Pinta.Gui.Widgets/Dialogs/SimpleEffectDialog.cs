@@ -277,8 +277,11 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			Alpha = initialColor.A / 255f,
 		};
 
-		Gtk.ColorButton colorButton = Gtk.ColorButton.NewWithRgba (initialColorGdk);
-		colorButton.OnColorSet += (_, _) => {
+		Gtk.ColorDialogButton colorButton = new () {
+			Rgba = initialColorGdk,
+			Dialog = Gtk.ColorDialog.New (),
+		};
+		colorButton.OnNotify += (_, _) => {
 			Gdk.RGBA newColorGdk = colorButton.Rgba;
 			ColorBgra newColorBgra = ColorBgra.FromBgra (
 				b: (byte) (newColorGdk.Blue * 255),
@@ -318,8 +321,11 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			Alpha = (float) initialColorCairo.A,
 		};
 
-		Gtk.ColorButton colorButton = Gtk.ColorButton.NewWithRgba (initialColorGdk);
-		colorButton.OnColorSet += (_, _) => {
+		Gtk.ColorDialogButton colorButton = new () {
+			Rgba = initialColorGdk,
+			Dialog = Gtk.ColorDialog.New (),
+		};
+		colorButton.OnNotify += (_, _) => {
 			Gdk.RGBA newColorGdk = colorButton.Rgba;
 			Color newColorCairo = new (
 				R: newColorGdk.Red,
