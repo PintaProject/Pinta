@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-06 00:30+0000\n"
-"PO-Revision-Date: 2022-06-15 07:09+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
-"Language-Team: Asturian <ast@li.org>\n"
+"PO-Revision-Date: 2025-07-09 17:01+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Language-Team: Asturian <https://hosted.weblate.org/projects/pinta/pinta/ast/"
+">\n"
 "Language: ast\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
-msgstr " (nel directoriu del usuariu)"
+msgstr " (nel direutoriu del usuariu)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
 msgid " Selection Mode: "
@@ -646,7 +647,7 @@ msgstr "Desesbillar too"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "Detalles"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Difference"
@@ -708,7 +709,7 @@ msgstr ""
 
 #: ../Pinta/MainWindow.cs:447
 msgid "Effects"
-msgstr ""
+msgstr "Efeutos"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
@@ -898,7 +899,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
-msgstr ""
+msgstr "Tipu lletra"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:28
 msgid "Fragment"
@@ -1022,7 +1023,7 @@ msgstr "Imaxe"
 
 #: ../xdg/pinta.desktop.in.h:3
 msgid "Image Editor"
-msgstr "Editor d'imaxes"
+msgstr "Editor d’imáxenes"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:112
 msgid "Image Tabs"
@@ -1051,7 +1052,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:89
 msgid "Import from File..."
-msgstr ""
+msgstr "Importar dende un ficheru..."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
@@ -1071,12 +1072,12 @@ msgstr "Entrada"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Input Histogram"
-msgstr ""
+msgstr "Histograma d’entrada"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:121
 #: ../Pinta.Gui.Addins/InstallDialog.cs:247
 msgid "Install"
-msgstr ""
+msgstr "Instalar"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
@@ -1084,11 +1085,11 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
 msgid "Install from file..."
-msgstr ""
+msgstr "Instalar dende un ficheru..."
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:167
 msgid "Install..."
-msgstr ""
+msgstr "Instalar..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:87
 msgid "Installed"
@@ -1147,24 +1148,24 @@ msgstr "Capa"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Hidden"
-msgstr ""
+msgstr "Capa anubrida"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Layer Opacity"
-msgstr ""
+msgstr "Opacidá de la capa"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:122
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
-msgstr ""
+msgstr "Propiedaes de la capa"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:125
 msgid "Layer Properties..."
-msgstr ""
+msgstr "Propiedaes de la capa..."
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Shown"
-msgstr ""
+msgstr "Capa amosada"
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:133
@@ -1379,7 +1380,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:197
 msgid "Mode"
-msgstr ""
+msgstr "Mou"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:917
 msgid "Modified"
@@ -1417,7 +1418,7 @@ msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:67
 msgid "Name:"
-msgstr ""
+msgstr "Nome:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
@@ -1511,7 +1512,7 @@ msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:98
 msgid "Opacity:"
-msgstr ""
+msgstr "Opacidá:"
 
 #: ../Pinta.Core/Actions/FileActions.cs:77
 msgid "Open"
@@ -1545,11 +1546,11 @@ msgstr "Abrir..."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:316
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientación:"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
-msgstr ""
+msgstr "Orixinal"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:277
 msgid "Outline"
@@ -1672,7 +1673,7 @@ msgstr ""
 
 #: ../xdg/pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
-msgstr "Editor d'imaxes Pinta"
+msgstr "Editor d’imáxenes Pinta"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
@@ -1680,7 +1681,7 @@ msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
 msgid "Pinta does not support saving images in this file format."
-msgstr ""
+msgstr "Pinta nun permite guardar imáxenes nesti formatu de ficheru."
 
 #: ../xdg/pinta.appdata.xml.in.h:1
 msgid ""
@@ -1783,11 +1784,11 @@ msgstr "Imprentar"
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
 msgid "Quality"
-msgstr ""
+msgstr "Calidá"
 
 #: ../Pinta/Dialogs/JpegCompressionDialog.cs:37
 msgid "Quality: "
-msgstr ""
+msgstr "Calidá: "
 
 #: ../Pinta.Core/Actions/AppActions.cs:47
 msgid "Quit"
@@ -1851,7 +1852,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:153
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Colores usaos de recién"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -1938,15 +1939,15 @@ msgstr ""
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
 msgid "Reset"
-msgstr ""
+msgstr "Reafitar"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:183
 msgid "Reset Color"
-msgstr ""
+msgstr "Reafitar color"
 
 #: ../Pinta.Core/Actions/EditActions.cs:181
 msgid "Reset to Default"
-msgstr "Reestablecer a predeterminao"
+msgstr "Reafitar valores predeterminaos"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:199
@@ -2017,7 +2018,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:140
 #: ../Pinta.Effects/Effects/TileEffect.cs:226
 msgid "Rotation"
-msgstr ""
+msgstr "Xiru"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 msgid "Rounded Line Series"

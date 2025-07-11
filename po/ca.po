@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-06 00:30+0000\n"
-"PO-Revision-Date: 2022-02-04 18:28+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
-"Language-Team: Catalan <ca@li.org>\n"
+"PO-Revision-Date: 2025-07-09 17:01+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/pinta/pinta/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
@@ -72,7 +73,7 @@ msgstr "Afegeix soroll"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Gestor de complements..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:835
 msgid "Added"
@@ -80,7 +81,7 @@ msgstr "Afegit"
 
 #: ../Pinta/MainWindow.cs:453
 msgid "Adjustments"
-msgstr ""
+msgstr "Ajustaments"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
 msgid "After select"
@@ -171,7 +172,7 @@ msgstr "Nivell automàtic"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:227
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr ""
+msgstr "Disponible al dipòsit: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:130
 msgid "Background"
@@ -238,7 +239,7 @@ msgstr "Negreta"
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:32
 msgid "Bonfire"
-msgstr ""
+msgstr "Foguera"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -620,7 +621,7 @@ msgstr "Guió"
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:246
 msgid "Default"
-msgstr ""
+msgstr "Per defecte"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:410
@@ -683,7 +684,7 @@ msgstr "No canviïs d'eina"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:221
 #, csharp-format
 msgid "Download size: {0}"
-msgstr ""
+msgstr "Mida de la baixada: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:397
@@ -708,7 +709,7 @@ msgstr "Efec_tes"
 
 #: ../Pinta/MainWindow.cs:447
 msgid "Effects"
-msgstr ""
+msgstr "Efectes"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:44
@@ -807,7 +808,7 @@ msgstr "Informa d'un error"
 
 #: ../Pinta/Main.cs:62
 msgid "Files to open"
-msgstr ""
+msgstr "Fitxers a obrir"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Fill Background"
@@ -898,7 +899,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
-msgstr "Tipus de lletra"
+msgstr "Lletra tipogràfica"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:28
 msgid "Fragment"
@@ -1363,7 +1364,7 @@ msgstr "Vareta màgica"
 
 #: ../Pinta/MainWindow.cs:441
 msgid "Main Menu"
-msgstr ""
+msgstr "Menú principal"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:69
@@ -1385,7 +1386,7 @@ msgstr "Mediana"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
-msgstr ""
+msgstr "Barra de menús"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:363
@@ -1402,7 +1403,7 @@ msgstr "Modificat"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:159
 msgid "More Information..."
-msgstr ""
+msgstr "Més informació..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
 msgid "Motion Blur"
@@ -1411,12 +1412,12 @@ msgstr "Difuminació per moviment"
 #: ../Pinta.Core/Actions/LayerActions.cs:119
 #: ../Pinta.Core/Actions/LayerActions.cs:344
 msgid "Move Layer Down"
-msgstr "Baixa la capa"
+msgstr "Abaixa la capa"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:113
 #: ../Pinta.Core/Actions/LayerActions.cs:328
 msgid "Move Layer Up"
-msgstr "Puja la capa"
+msgstr "Apuja la capa"
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
 msgid "Move Selected Pixels"
@@ -1691,11 +1692,11 @@ msgstr "Editor d’imatges Pinta"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:53
 msgid "Pinta Website"
-msgstr "Lloc web de Pinta"
+msgstr "Lloc web del Pinta"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
 msgid "Pinta does not support saving images in this file format."
-msgstr "El Pinta no permet desar imatges en aquest format."
+msgstr "El Pinta no permet desar imatges en aquest format de fitxer."
 
 #: ../xdg/pinta.appdata.xml.in.h:1
 msgid ""
@@ -1730,7 +1731,7 @@ msgstr "Píxels"
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:56
 msgid "Piña Colada"
-msgstr ""
+msgstr "Pinya colada"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
 msgid "Please restart Pinta for the changes to take effect."
@@ -1755,7 +1756,7 @@ msgstr "Vertical"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:130
 msgid "Position"
-msgstr ""
+msgstr "Posició"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1785,7 +1786,7 @@ msgstr "Valors predefinits:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
-msgstr "Vista prèvia"
+msgstr "Previsualització"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
@@ -1840,7 +1841,7 @@ msgstr "Radi"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:143
 msgid "Radius Percentage"
-msgstr ""
+msgstr "Percentatge del radi"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
@@ -1871,7 +1872,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:153
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Colors usats recentment"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -1962,7 +1963,7 @@ msgstr "Restableix"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:183
 msgid "Reset Color"
-msgstr ""
+msgstr "Reinicialitza el color"
 
 #: ../Pinta.Core/Actions/EditActions.cs:181
 msgid "Reset to Default"
@@ -1992,7 +1993,7 @@ msgstr "Redimensiona la paleta"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
 msgid "Restart Pinta"
-msgstr ""
+msgstr "Reinicia el Pinta"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:158
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
@@ -2106,7 +2107,7 @@ msgstr "Desa el fitxer de paleta"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr "Desar ales canvis a la imatge «{0}» abans de tancar?"
+msgstr "Voleu desar els canvis fets a la imatge «{0}» abans de tancar?"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:173
 msgid "Scale"
@@ -2127,7 +2128,7 @@ msgstr "Selecciona-ho tot"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:14
 msgid "Selected Colors"
-msgstr ""
+msgstr "Colors seleccionats"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
 msgid "Sepia"
@@ -2174,7 +2175,7 @@ msgstr "Mostra la capa"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:252
 msgid "Show Value"
-msgstr ""
+msgstr "Mostra el valor"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:242
 msgid "Show/Hide"
@@ -2406,7 +2407,7 @@ msgstr "Transparent"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:146
 msgid "Turbulence"
-msgstr ""
+msgstr "Turbulència"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
@@ -2441,7 +2442,7 @@ msgstr "Desinstal·la"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:185
 msgid "Uninstall..."
-msgstr ""
+msgstr "Desinstal·la..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
@@ -2464,7 +2465,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
-msgstr ""
+msgstr "Actualitza..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
@@ -2484,27 +2485,27 @@ msgstr "S'han utilitzat algunes icones de:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:412
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "Versió: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:215
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Blau vertical (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:218
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Verd vertical (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:221
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "Vermell vertical (R)"
 
 #: ../Pinta/MainWindow.cs:465
 msgid "View"
@@ -2609,7 +2610,7 @@ msgstr "_Ajustaments"
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:166
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cancel·la"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"

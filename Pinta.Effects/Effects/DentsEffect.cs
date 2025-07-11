@@ -93,9 +93,8 @@ public sealed class DentsEffect : BaseEffect
 	}
 
 	// Algorithm code ported from PDN
-	public Warp.TransformData InverseTransform (
-		Warp.Settings settings,
-		Warp.TransformData data)
+
+	public PointD InverseTransform (Warp.Settings settings, PointD data)
 	{
 		DentsData dentsData = Data;
 
@@ -116,19 +115,18 @@ public sealed class DentsEffect : BaseEffect
 		// We don't want the perlin noise frequency components exceeding the nyquist limit, so we will limit 'detail' appropriately
 		double maxDetail = Math.Floor (Math.Log (scaleR) / Math.Log (0.5));
 
-		double effectiveDetail = (detail3 > maxDetail && maxDetail >= 1.0) ? maxDetail : detail3;
+		double effectiveDetail =
+			(detail3 > maxDetail && maxDetail >= 1.0)
+			? maxDetail
+			: detail3;
 
-		PointD p = new (
-			X: data.X,
-			Y: data.Y);
-
-		PointD i = p.Scaled (scaleR);
+		PointD i = data.Scaled (scaleR);
 
 		RadiansAngle bumpAngle = new (theta * PerlinNoise.Compute (i, effectiveDetail, effectiveRoughness, seed));
 
 		return new (
-			X: p.X + (refractionScale * Math.Sin (-bumpAngle.Radians)),
-			Y: p.Y + (refractionScale * Math.Cos (bumpAngle.Radians)));
+			X: data.X + (refractionScale * Math.Sin (-bumpAngle.Radians)),
+			Y: data.Y + (refractionScale * Math.Cos (bumpAngle.Radians)));
 	}
 }
 

@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-06 00:30+0000\n"
-"PO-Revision-Date: 2025-01-30 13:11+0000\n"
-"Last-Translator: Marcial Machado <marcialmachado0522@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/"
-">\n"
+"PO-Revision-Date: 2025-07-09 17:01+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -73,7 +73,7 @@ msgstr "Adición de ruido"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr "Administrador de complementos..."
+msgstr "Gestor de complementos..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:835
 msgid "Added"
@@ -303,15 +303,15 @@ msgstr "Lienzo"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:92
 msgid "Canvas Grid Settings"
-msgstr "Configuración de la cuadrícula del lienzo"
+msgstr "Configuración de retícula del lienzo"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:124
 msgid "Canvas Grid..."
-msgstr "Cuadrícula del lienzo..."
+msgstr "Retícula del lienzo..."
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:143
 msgid "Cell Radius"
-msgstr ""
+msgstr "Radio de celda"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
@@ -319,7 +319,7 @@ msgstr "Tamaño de la celda"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:18
 msgid "Cells"
-msgstr ""
+msgstr "Celdas"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -353,7 +353,7 @@ msgstr "Centímetros"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:283
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr "Cambiar el ancho del pincel. Teclas de acceso directo: [ ]"
+msgstr "Cambiar la anchura del pincel. Atajos de teclado: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
@@ -419,20 +419,20 @@ msgstr "Pulse para restablecer los colores primario y secundario."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:290
 msgid "Click to select primary color."
-msgstr "Pulse para seleccionar un color primario."
+msgstr "Pulse para seleccionar el color primario."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:49
 msgid "Click to select region of similar color."
-msgstr "Clic para seleccionar la región de un color similar."
+msgstr "Pulse para seleccionar una región de un color similar."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
 msgid "Click to select secondary color."
-msgstr "Clic para seleccionar el color secundario."
+msgstr "Pulse para seleccionar el color secundario."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:231
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Click to switch between primary and secondary color."
-msgstr "Clic para cambiar entre el color primario y el secundario."
+msgstr "Pulse para cambiar entre el color primario y el secundario."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
 #: ../Pinta/Dialogs/NewImageDialog.cs:422
@@ -468,7 +468,7 @@ msgstr "Nubes"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:151
 msgid "Coarseness"
-msgstr "Grosor"
+msgstr "Aspereza"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:17
@@ -521,7 +521,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
 msgid "Color Scheme Source"
-msgstr "Fuente del esquema de color"
+msgstr "Fuente de combinación de colores"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:181
 msgid "Color Sorting"
@@ -558,7 +558,7 @@ msgstr "Copiar combinado"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Copyright"
-msgstr "Copyright"
+msgstr "Derechos de autor"
 
 #. Translators: Gradient with the colors of blue and pink cotton candy
 #: ../Pinta.Effects/Effects/GradientHelper.cs:40
@@ -569,14 +569,14 @@ msgstr "Algodón de azúcar"
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:125
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr "No se ha podido importar la capa \"{0}\" de {1}"
+msgstr "No se pudo importar la capa «{0}» de {1}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:167
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:412
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "No se ha podido abrir el archivo: {0}"
+msgstr "No se pudo abrir el archivo: {0}"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
 msgid "Coverage"
@@ -585,11 +585,11 @@ msgstr "Cobertura"
 #: ../Pinta.Core/Actions/ImageActions.cs:56
 #: ../Pinta.Core/Actions/ImageActions.cs:295
 msgid "Crop to Selection"
-msgstr "Recortar la selección"
+msgstr "Recortar a selección"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:150
 msgid "Current Palette"
-msgstr ""
+msgstr "Paleta actual"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
@@ -628,12 +628,12 @@ msgstr "Trazo"
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:246
 msgid "Default"
-msgstr "Por defecto"
+msgstr "Predeterminada"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:410
 msgid "Delete Layer"
-msgstr "Eliminar la capa"
+msgstr "Eliminar capa"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:673
 msgid "Deleted"
@@ -872,19 +872,19 @@ msgstr "Voltear horizontalmente"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:51
 msgid "Flip Image Horizontal"
-msgstr "Voltear la imagen horizontalmente"
+msgstr "Voltear imagen horizontalmente"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:55
 msgid "Flip Image Vertical"
-msgstr "Voltear la imagen verticalmente"
+msgstr "Voltear imagen verticalmente"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:76
 msgid "Flip Layer Horizontal"
-msgstr "Voltear la capa horizontalmente"
+msgstr "Voltear capa horizontalmente"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:80
 msgid "Flip Layer Vertical"
-msgstr "Voltear la capa verticalmente"
+msgstr "Voltear capa verticalmente"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:90
 #: ../Pinta.Core/Actions/LayerActions.cs:101
@@ -907,7 +907,7 @@ msgstr "Floyd-Steinberg Lite"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:156
 msgid "Font"
-msgstr "Tipografía"
+msgstr "Tipo de letra"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:28
 msgid "Fragment"
@@ -1013,7 +1013,7 @@ msgstr "Matiz"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:260
 msgid "Hue & Sat"
-msgstr ""
+msgstr "Mat. y sat."
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
@@ -1158,24 +1158,24 @@ msgstr "Capa"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Hidden"
-msgstr "Ocultar una capa"
+msgstr "Capa oculta"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Layer Opacity"
-msgstr "Opacidad de la capa"
+msgstr "Opacidad de capa"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:122
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
-msgstr "Propiedades de la capa"
+msgstr "Propiedades de capa"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:125
 msgid "Layer Properties..."
-msgstr "Propiedades de la capa…"
+msgstr "Propiedades de capa…"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
 msgid "Layer Shown"
-msgstr "Mostrar una capa"
+msgstr "Capa mostrada"
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:133
@@ -1342,9 +1342,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
-"Haz clic con el botón izquierdo para acercar la imagen.\n"
-"Haz clic con el botón derecho para alejar la imagen.\n"
-"Haga clic y arrastre para ampliar la selección."
+"Pulse con el botón primario para acercar la imagen.\n"
+"Pulse con el botón secundario para alejar la imagen.\n"
+"Pulse y arrastre para acercar la selección."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:337
 msgid "Length"
@@ -1437,7 +1437,7 @@ msgstr "Mediana"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
-msgstr ""
+msgstr "Barra de menús"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:363
@@ -1550,7 +1550,7 @@ msgstr "Número de hilos a utilizar para el renderizado"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "OK"
-msgstr "OK"
+msgstr "Aceptar"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
@@ -1590,12 +1590,12 @@ msgstr "Curva abierta"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:335
 msgid "Open Image"
-msgstr "Abrir una Imagen"
+msgstr "Abrir imagen"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:259
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
-msgstr "Abrir un archivo de imagen"
+msgstr "Abrir archivo de imagen"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
 msgid "Open Line/Curve Series"
@@ -1674,7 +1674,7 @@ msgstr "Paleta"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Palette Source"
-msgstr ""
+msgstr "Fuente de la paleta"
 
 #: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
@@ -1782,11 +1782,11 @@ msgstr "Píxeles"
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Effects/GradientHelper.cs:56
 msgid "Piña Colada"
-msgstr "Piña Colada"
+msgstr "Piña colada"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
 msgid "Please restart Pinta for the changes to take effect."
-msgstr ""
+msgstr "Reinicie Pinta para que los cambios surtan efecto."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:603
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:806
@@ -1825,15 +1825,15 @@ msgstr "Conservar"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
-msgstr "Degradado preestablecido"
+msgstr "Degradado preconfigurado"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:147
 msgid "Preset Palettes"
-msgstr ""
+msgstr "Paletas preconfiguradas"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
-msgstr "Preajuste:"
+msgstr "Preconfiguración:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -1892,7 +1892,7 @@ msgstr "Radio"
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:143
 msgid "Radius Percentage"
-msgstr "Tamaño del radio"
+msgstr "Porcentaje de radio"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
@@ -1923,7 +1923,7 @@ msgstr "Localización aleatoria de puntos"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:153
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Colores usados recientemente"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -1977,7 +1977,7 @@ msgstr "Relieve"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:112
 msgid "Rename Layer"
-msgstr "Renombrar la capa"
+msgstr "Cambiar nombre de capa"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:24
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
@@ -2014,7 +2014,7 @@ msgstr "Restablecer"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:183
 msgid "Reset Color"
-msgstr "Restaurar Color"
+msgstr "Restablecer color"
 
 #: ../Pinta.Core/Actions/EditActions.cs:181
 msgid "Reset to Default"
@@ -2044,7 +2044,7 @@ msgstr "Redimensionar la paleta"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
 msgid "Restart Pinta"
-msgstr ""
+msgstr "Reiniciar Pinta"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:158
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
@@ -2089,7 +2089,7 @@ msgstr "Girar 90° a la izquierda"
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:140
 #: ../Pinta.Effects/Effects/TileEffect.cs:226
 msgid "Rotation"
-msgstr "Rotación"
+msgstr "Giro"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 msgid "Rounded Line Series"
@@ -2117,11 +2117,11 @@ msgstr "Muestreo"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:390
 msgid "Sat"
-msgstr ""
+msgstr "Sat."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "Sat & Value"
-msgstr ""
+msgstr "Sat. y valor"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
@@ -2149,16 +2149,16 @@ msgstr "Guardar como…"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:92
 msgid "Save Image File"
-msgstr "Guardar el archivo de imagen"
+msgstr "Guardar archivo de imagen"
 
 #: ../Pinta.Core/Actions/EditActions.cs:526
 msgid "Save Palette File"
-msgstr "Guardar la paleta"
+msgstr "Guardar archivo de paleta"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr "¿Guardar los cambios en la imagen «{0}» antes de cerrar?"
+msgstr "¿Quiere guardar los cambios en la imagen «{0}» antes de cerrar?"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:173
 msgid "Scale"
@@ -2210,15 +2210,15 @@ msgstr "Atajo de teclado"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
-msgstr ""
+msgstr "Atajos de teclado"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
 msgid "Show Axonometric Grid"
-msgstr ""
+msgstr "Mostrar retícula axonométrica"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
 msgid "Show Grid"
-msgstr "Mostrar cuadrícula"
+msgstr "Mostrar retícula"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Show Layer"
@@ -2226,7 +2226,7 @@ msgstr "Mostrar la capa"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:252
 msgid "Show Value"
-msgstr ""
+msgstr "Mostrar valor"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:242
 msgid "Show/Hide"
@@ -2319,7 +2319,7 @@ msgstr "Estilo del texto"
 #: ../Pinta/MainWindow.cs:317
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr "El complemento '{0}' puede no ser compatible con esta versión de Pinta"
+msgstr "El complemento «{0}» puede no ser compatible con esta versión de Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:208
 msgid "The clipboard does not contain an image."
@@ -2327,11 +2327,11 @@ msgstr "El portapapeles no contiene ninguna imagen."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:200
 msgid "The file may be an invalid or corrupt extension package"
-msgstr "El archivo puede ser un paquete de extensión no válida o corrupta"
+msgstr "El archivo puede ser un paquete de extensión no válida o dañada"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:79
 msgid "The following dependencies could not be resolved:"
-msgstr "No se han podido resolver las dependencias siguientes:"
+msgstr "No se pudieron resolver las dependencias siguientes:"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:72
 msgid "The following packages need to be uninstalled:"
@@ -2375,7 +2375,7 @@ msgstr "Falló la desinstalación."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:360
 msgid "The uninstallation has completed with warnings."
-msgstr "La desinstalación se ha completado con avisos."
+msgstr "La desinstalación se ha completado con alertas."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:241
 msgid ""
@@ -2391,7 +2391,7 @@ msgstr "Grosor"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
 msgid "This format does not support layers. Flatten image?"
-msgstr "Este formato no admite capas. ¿Aplanar la imagen?"
+msgstr "Este formato no admite capas. ¿Quiere aplanar la imagen?"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:29
 msgid "Tile Reflection"
@@ -2468,12 +2468,12 @@ msgstr "Turbulencia"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:25
 msgid "Twist"
-msgstr "Giro"
+msgstr "Torsión"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
 msgid "Two-Row Sierra"
-msgstr "Two-Row Sierra"
+msgstr "Sierra de dos filas"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:259
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
@@ -2514,11 +2514,11 @@ msgstr "Imagen no guardada {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:330
 msgid "Unsupported file format"
-msgstr "Formato de archivo no compatible"
+msgstr "Formato de archivo no admitido"
 
 #: ../Pinta.Core/Actions/EditActions.cs:518
 msgid "Unsupported palette format"
-msgstr "Formato de paleta no compatible"
+msgstr "Formato de paleta no admitido"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
@@ -2533,8 +2533,9 @@ msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
-"Use la calidad baja para vistas previas, imágenes pequeñas y ángulos "
-"reducidos. Use la calidad alta para imágenes grandes y ángulos amplios."
+"Use la calidad baja para previsualizaciones, imágenes pequeñas y ángulos "
+"reducidos. Use la calidad alta para imágenes finales, grandes y ángulos "
+"amplios."
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:99
 msgid "Using some icons from:"
@@ -2542,7 +2543,7 @@ msgstr "Se usan algunos iconos de:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:412
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
@@ -2638,7 +2639,7 @@ msgstr ""
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
-msgstr "Ampliación"
+msgstr "Zum"
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:24
 msgid "Zoom Blur"
@@ -2646,15 +2647,15 @@ msgstr "Desenfoque por ampliación"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:72
 msgid "Zoom In"
-msgstr "Ampliar"
+msgstr "Acercar"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:79
 msgid "Zoom Out"
-msgstr "Reducir"
+msgstr "Alejar"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:93
 msgid "Zoom to Selection"
-msgstr "Ampliar a la selección"
+msgstr "Zum a selección"
 
 #: ../Pinta/MainWindow.cs:398
 msgid "_Adjustments"
@@ -2698,7 +2699,7 @@ msgstr "_Capas"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr "_De acuerdo"
+msgstr "_Aceptar"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
