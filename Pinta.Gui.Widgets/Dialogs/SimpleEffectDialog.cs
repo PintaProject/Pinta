@@ -265,16 +265,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberSettings settings,
 		IWorkspaceService workspace)
 	{
+		// Gdk.RGBA uses unpremultiplied alpha
+		// unlike `ColorBgra`
+
 		ColorBgra initialColor =
 			(settings.reflector.GetValue (effectData) is ColorBgra c)
 			? c
 			: ColorBgra.FromBgra (0, 0, 0, 255);
 
+		float initialAlpha = initialColor.A / 255f;
 		Gdk.RGBA initialColorGdk = new () {
-			Red = initialColor.R / 255f,
-			Green = initialColor.G / 255f,
-			Blue = initialColor.B / 255f,
-			Alpha = initialColor.A / 255f,
+			Red = (initialAlpha == 0) ? 0 : (initialColor.R / 255f) / initialAlpha,
+			Green = (initialAlpha == 0) ? 0 : (initialColor.G / 255f) / initialAlpha,
+			Blue = (initialAlpha == 0) ? 0 : (initialColor.B / 255f) / initialAlpha,
+			Alpha = initialAlpha,
 		};
 
 		Gtk.ColorDialogButton colorButton = new () {
@@ -284,9 +288,9 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		colorButton.OnNotify += (_, _) => {
 			Gdk.RGBA newColorGdk = colorButton.Rgba;
 			ColorBgra newColorBgra = ColorBgra.FromBgra (
-				b: (byte) (newColorGdk.Blue * 255),
-				g: (byte) (newColorGdk.Green * 255),
-				r: (byte) (newColorGdk.Red * 255),
+				b: (byte) (newColorGdk.Blue * newColorGdk.Alpha * 255),
+				g: (byte) (newColorGdk.Green * newColorGdk.Alpha * 255),
+				r: (byte) (newColorGdk.Red * newColorGdk.Alpha * 255),
 				a: (byte) (newColorGdk.Alpha * 255)
 			);
 			SetAndNotify (settings.reflector, effectData, newColorBgra);
@@ -309,6 +313,9 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberSettings settings,
 		IWorkspaceService workspace)
 	{
+		// Gdk.RGBA uses unpremultiplied alpha,
+		// like cairo colors
+
 		Color initialColorCairo =
 			(settings.reflector.GetValue (effectData) is Color c)
 			? c
