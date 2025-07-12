@@ -43,6 +43,8 @@ namespace Pinta.Gui.Widgets;
 public sealed class SimpleEffectDialog : Gtk.Dialog
 {
 	const uint EVENT_DELAY_MILLIS = 100;
+ 	const int COLOR_BUTTON_WIDTH = 80;
+
 	uint event_delay_timeout_id;
 
 	private delegate bool TimeoutHandler ();
@@ -287,7 +289,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 			Hexpand = false,
 			Halign = Gtk.Align.Start,
-			WidthRequest = 80,
+			WidthRequest = COLOR_BUTTON_WIDTH,
 		};
 		colorButton.OnNotify += (_, _) => {
 			Gdk.RGBA newColorGdk = colorButton.Rgba;
@@ -338,7 +340,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 			Hexpand = false,
 			Halign = Gtk.Align.Start,
-			WidthRequest = 80,
+			WidthRequest = COLOR_BUTTON_WIDTH,
 		};
 		colorButton.OnNotify += (_, _) => {
 			Gdk.RGBA newColorGdk = colorButton.Rgba;
