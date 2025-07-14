@@ -71,22 +71,16 @@ public sealed class PolarInversionEffect : BaseEffect
 				pixel);
 	}
 
-	public Warp.TransformData InverseTransform (
-		Warp.Settings settings,
-		Warp.TransformData transData)
+	public PointD InverseTransform (Warp.Settings settings, PointD transData)
 	{
-		double x = transData.X;
-		double y = transData.Y;
-
 		// NOTE: when x and y are zero, this will divide by zero and return NaN
-		double invertDistance = Mathematics.Lerp (
-			1.0,
-			settings.defaultRadius2 / Mathematics.MagnitudeSquared (x, y),
-			Data.Amount);
 
-		return new (
-			X: x * invertDistance,
-			Y: y * invertDistance);
+		double invertDistance = Mathematics.Lerp (
+			from: 1.0,
+			to: settings.defaultRadius2 / transData.MagnitudeSquared (),
+			frac: Data.Amount);
+
+		return transData.Scaled (invertDistance);
 	}
 }
 
