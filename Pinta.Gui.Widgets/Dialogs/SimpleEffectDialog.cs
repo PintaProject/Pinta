@@ -303,9 +303,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberSettings settings,
 		IWorkspaceService workspace)
 	{
-		// Gdk.RGBA uses unpremultiplied alpha,
-		// like cairo colors
-
 		Color initialColorCairo =
 			(settings.reflector.GetValue (effectData) is Color c)
 			? c
