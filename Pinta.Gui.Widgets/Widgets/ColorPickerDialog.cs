@@ -87,11 +87,11 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	public ColorPick Colors { get; private set; }
 
 	private Color CurrentColor {
-		get => GetTargeted (Colors, primary_selected);
+		get => ExtractTargetedColor (Colors, primary_selected);
 		set => SetTargeted (value);
 	}
 
-	private static Color GetTargeted (ColorPick colors, bool primarySelected)
+	private static Color ExtractTargetedColor (ColorPick colors, bool primarySelected)
 	{
 		return colors switch {
 			SingleColor singleColor => primarySelected ? singleColor.Color : throw new InvalidOperationException (),
@@ -345,7 +345,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// Handles the ColorPickerSliders + Hex entry.
 
 		Gtk.Entry hexEntry = new () {
-			Text_ = GetTargeted (adjustable, true).ToHex (),
+			Text_ = ExtractTargetedColor (adjustable, true).ToHex (),
 			MaxWidthChars = 10,
 		};
 		hexEntry.OnChanged (HexEntry_OnChanged);
@@ -372,7 +372,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			settings: cpsArgs with {
 				Max = 360,
 				Text = Translations.GetString ("Hue"),
-				InitialValue = GetTargeted (adjustable, true).ToHsv ().Hue,
+				InitialValue = ExtractTargetedColor (adjustable, true).ToHsv ().Hue,
 			}
 		);
 		hueSlider.Gradient.SetDrawFunc (
@@ -404,7 +404,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			settings: cpsArgs with {
 				Max = 100,
 				Text = Translations.GetString ("Sat"),
-				InitialValue = GetTargeted (adjustable, true).ToHsv ().Sat * 100.0,
+				InitialValue = ExtractTargetedColor (adjustable, true).ToHsv ().Sat * 100.0,
 			}
 		);
 		saturationSlider.Gradient.SetDrawFunc (
@@ -426,7 +426,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			settings: cpsArgs with {
 				Max = 100,
 				Text = Translations.GetString ("Value"),
-				InitialValue = GetTargeted (adjustable, true).ToHsv ().Val * 100.0,
+				InitialValue = ExtractTargetedColor (adjustable, true).ToHsv ().Val * 100.0,
 			}
 		);
 		valueSlider.Gradient.SetDrawFunc (
@@ -448,7 +448,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			settings: cpsArgs with {
 				Max = 255,
 				Text = Translations.GetString ("Red"),
-				InitialValue = GetTargeted (adjustable, true).R * 255.0,
+				InitialValue = ExtractTargetedColor (adjustable, true).R * 255.0,
 			}
 		);
 		redSlider.Gradient.SetDrawFunc (
@@ -470,7 +470,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			settings: cpsArgs with {
 				Max = 255,
 				Text = Translations.GetString ("Green"),
-				InitialValue = GetTargeted (adjustable, true).G * 255.0,
+				InitialValue = ExtractTargetedColor (adjustable, true).G * 255.0,
 			}
 		);
 		greenSlider.Gradient.SetDrawFunc (
@@ -492,7 +492,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			settings: cpsArgs with {
 				Max = 255,
 				Text = Translations.GetString ("Blue"),
-				InitialValue = GetTargeted (adjustable, true).B * 255.0,
+				InitialValue = ExtractTargetedColor (adjustable, true).B * 255.0,
 			}
 		);
 		blueSlider.Gradient.SetDrawFunc (
@@ -514,7 +514,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			settings: cpsArgs with {
 				Max = 255,
 				Text = Translations.GetString ("Alpha"),
-				InitialValue = GetTargeted (adjustable, true).A * 255.0,
+				InitialValue = ExtractTargetedColor (adjustable, true).A * 255.0,
 			}
 		);
 		alphaSlider.Gradient.SetDrawFunc (
