@@ -317,7 +317,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	private async Task<PaletteColors?> RunColorPicker (bool primarySelected)
 	{
 		using ColorPickerDialog colorPicker = new (
-			chrome,
+			chrome.MainWindow,
 			palette,
 			new PaletteColors (palette.PrimaryColor, palette.SecondaryColor),
 			primarySelected,
@@ -338,7 +338,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		string title)
 	{
 		using ColorPickerDialog dialog = new (
-			chrome,
+			chrome.MainWindow,
 			palette,
 			colors,
 			primarySelected: true,

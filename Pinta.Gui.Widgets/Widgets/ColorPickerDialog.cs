@@ -180,7 +180,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private static bool IsPrimary (int colorIndex) // TODO: Get rid of this
 		=> colorIndex == 0;
 
-	/// <param name="chrome">Current Chrome Manager.</param>
+	/// <param name="parentWindow">The dialog's parent window.</param>
 	/// <param name="palette">Palette service.</param>
 	/// <param name="adjustable">Palette of adjustable </param>
 	/// <param name="primarySelected"></param>
@@ -188,7 +188,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	/// the current palette as the color is changed.</param>
 	/// <param name="windowTitle">Title of the dialog.</param>
 	internal ColorPickerDialog (
-		ChromeManager chrome,
+		Gtk.Window? parentWindow,
 		PaletteManager palette,
 		ColorPick adjustable,
 		bool primarySelected, // TODO: Get rid of this
@@ -623,7 +623,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		SetTitlebar (titleBar);
 
 		Title = Translations.GetString (windowTitle);
-		TransientFor = chrome.MainWindow;
+		TransientFor = parentWindow;
 		Modal = false;
 		IconName = Resources.Icons.ImageResizeCanvas;
 		DefaultWidth = 1;
