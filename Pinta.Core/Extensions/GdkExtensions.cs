@@ -265,4 +265,57 @@ public static class GdkExtensions
 	/// </summary>
 	public static Gdk.Cursor CursorFromName (string name)
 		=> Gdk.Cursor.NewFromName (name, null) ?? throw new ArgumentException ("Cursor does not exist", nameof (name));
+
+	public static Gdk.RGBA ToGdkRGBA (this in ColorBgra colorBgra)
+	{
+		// Gdk.RGBA uses unpremultiplied alpha
+		// unlike `ColorBgra`
+
+		float initialAlpha = colorBgra.A / 255f;
+		Gdk.RGBA initialColorGdk = new () {
+			Red = (initialAlpha == 0) ? 0 : (colorBgra.R / 255f) / initialAlpha,
+			Green = (initialAlpha == 0) ? 0 : (colorBgra.G / 255f) / initialAlpha,
+			Blue = (initialAlpha == 0) ? 0 : (colorBgra.B / 255f) / initialAlpha,
+			Alpha = initialAlpha,
+		};
+		return initialColorGdk;
+	}
+
+	public static ColorBgra ToColorBgra (this Gdk.RGBA rgba)
+	{
+		// Gdk.RGBA uses unpremultiplied alpha
+		// unlike `ColorBgra`
+
+		return ColorBgra.FromBgra (
+			b: (byte) (rgba.Blue * rgba.Alpha * 255),
+			g: (byte) (rgba.Green * rgba.Alpha * 255),
+			r: (byte) (rgba.Red * rgba.Alpha * 255),
+			a: (byte) (rgba.Alpha * 255)
+		);
+	}
+
+	public static Gdk.RGBA ToGdkRGBA (this in Color cairoColor)
+	{
+		// Gdk.RGBA uses unpremultiplied alpha,
+		// just like cairo colors
+
+		return new () {
+			Red = (float) cairoColor.R,
+			Green = (float) cairoColor.G,
+			Blue = (float) cairoColor.B,
+			Alpha = (float) cairoColor.A,
+		};
+	}
+
+	public static Color ToCairoColor (this Gdk.RGBA rgba)
+	{
+		// Gdk.RGBA uses unpremultiplied alpha,
+		// just like cairo colors
+
+		return new (
+			R: rgba.Red,
+			G: rgba.Green,
+			B: rgba.Blue,
+			A: rgba.Alpha);
+	}
 }
