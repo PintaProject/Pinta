@@ -156,8 +156,6 @@ public sealed class ActionManager
 			cursor.SetText ($"  {pt.X}, {pt.Y}");
 		};
 
-		statusbar.Append (GtkExtensions.CreateToolBarSeparator ());
-
 		// Selection size widget - left aligned with enough space for 12 characters
 		// to display the size.
 		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
