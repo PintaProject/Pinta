@@ -162,7 +162,7 @@ public sealed class ActionManager
 		var selection_size = Gtk.Label.New ("  0, 0");
 		selection_size.Xalign = 0.0f;
 		selection_size.Halign = Gtk.Align.Start;
-		selection_size.WidthChars = 12;
+		selection_size.WidthChars = 11;
 		statusbar.Append (selection_size);
 
 		workspaceManager.SelectionChanged += delegate {
