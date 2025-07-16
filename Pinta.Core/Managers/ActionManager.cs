@@ -155,7 +155,7 @@ public sealed class ActionManager
 			cursor.SetText ($"  {pt.X}, {pt.Y}");
 		};
 
-		// Cursor position widget - left aligned with enough space to display coordinates up to tens of thousands (e.g. 10000, 10000).
+		// Selection size widget - left aligned with enough space to display coordinates up to tens of thousands (e.g. 10000, 10000).
 		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
 		var selection_size = Gtk.Label.New ("  0, 0");
 		selection_size.Xalign = 0.0f;
