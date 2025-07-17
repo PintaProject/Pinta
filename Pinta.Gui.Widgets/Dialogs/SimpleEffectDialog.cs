@@ -265,25 +265,48 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberSettings settings,
 		IWorkspaceService workspace)
 	{
-		ColorBgra initialColor =
+		ColorBgra initialColorBgra =
 			(settings.reflector.GetValue (effectData) is ColorBgra c)
 			? c
-			: ColorBgra.FromBgra (0, 0, 0, 255);
+			: ColorBgra.Black;
 
-		Gdk.RGBA initialColorGdk = initialColor.ToGdkRGBA ();
+		Color initialColorCairo = initialColorBgra.ToCairoColor ();
 
-		Gtk.ColorDialogButton colorButton = new () {
-			Rgba = initialColorGdk,
-			Dialog = Gtk.ColorDialog.New (),
-
+		PintaColorButton colorButton = new () {
+			DisplayColor = initialColorCairo,
 			Hexpand = false,
 			Halign = Gtk.Align.Start,
 			WidthRequest = 80,
 		};
-		colorButton.OnNotify += (_, _) => {
-			Gdk.RGBA newColorGdk = colorButton.Rgba;
-			ColorBgra newColorBgra = newColorGdk.ToColorBgra ();
-			SetAndNotify (settings.reflector, effectData, newColorBgra);
+
+		colorButton.OnClicked += async (_, _) => {
+
+			using ColorPickerDialog dialog = new (
+				this,
+				PintaCore.Palette,
+				new SingleColor (initialColorCairo),
+				primarySelected: true,
+				false,
+				Translations.GetString ("Choose Color"));
+
+			try {
+				Gtk.ResponseType response = await dialog.RunAsync ();
+
+				if (response != Gtk.ResponseType.Ok)
+					return;
+
+				var pick = (SingleColor) dialog.Colors;
+
+				Color newColorCairo = pick.Color;
+				ColorBgra newColorBgra = newColorCairo.ToColorBgra ();
+
+				colorButton.DisplayColor = newColorCairo;
+
+				SetAndNotify (settings.reflector, effectData, newColorBgra);
+
+			} finally {
+				dialog.Destroy ();
+			}
 		};
 
 		Gtk.Label label = Gtk.Label.New (caption);
@@ -306,22 +329,41 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		Color initialColorCairo =
 			(settings.reflector.GetValue (effectData) is Color c)
 			? c
-			: new Color (0, 0, 0);
+			: Color.Black;
 
-		Gdk.RGBA initialColorGdk = initialColorCairo.ToGdkRGBA ();
-
-		Gtk.ColorDialogButton colorButton = new () {
-			Rgba = initialColorGdk,
-			Dialog = Gtk.ColorDialog.New (),
-
+		PintaColorButton colorButton = new () {
+			DisplayColor = initialColorCairo,
 			Hexpand = false,
 			Halign = Gtk.Align.Start,
 			WidthRequest = 80,
 		};
-		colorButton.OnNotify += (_, _) => {
-			Gdk.RGBA newColorGdk = colorButton.Rgba;
-			Color newColorCairo = newColorGdk.ToCairoColor ();
-			SetAndNotify (settings.reflector, effectData, newColorCairo);
+
+		colorButton.OnClicked += async (_, _) => {
+
+			using ColorPickerDialog dialog = new (
+				this,
+				PintaCore.Palette,
+				new SingleColor (initialColorCairo),
+				primarySelected: true,
+				false,
+				Translations.GetString ("Choose Color"));
+
+			try {
+				Gtk.ResponseType response = await dialog.RunAsync ();
+
+				if (response != Gtk.ResponseType.Ok)
+					return;
+
+				var pick = (SingleColor) dialog.Colors;
+
+				Color newColorCairo = pick.Color;
+
+				colorButton.DisplayColor = newColorCairo;
+
+				SetAndNotify (settings.reflector, effectData, newColorCairo);
+			} finally {
+				dialog.Destroy ();
+			}
 		};
 
 		Gtk.Label label = Gtk.Label.New (caption);
