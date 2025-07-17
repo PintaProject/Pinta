@@ -265,15 +265,15 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberSettings settings,
 		IWorkspaceService workspace)
 	{
-		ColorBgra initialColorBgra =
+		ColorBgra currentColorBgra =
 			(settings.reflector.GetValue (effectData) is ColorBgra c)
 			? c
 			: ColorBgra.Black;
 
-		Color initialColorCairo = initialColorBgra.ToCairoColor ();
+		Color currentColorCairo = currentColorBgra.ToCairoColor ();
 
 		PintaColorButton colorButton = new () {
-			DisplayColor = initialColorCairo,
+			DisplayColor = currentColorCairo,
 			Hexpand = false,
 			Halign = Gtk.Align.Start,
 			WidthRequest = 80,
@@ -284,7 +284,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			using ColorPickerDialog dialog = new (
 				this,
 				PintaCore.Palette,
-				new SingleColor (initialColorCairo),
+				new SingleColor (currentColorCairo),
 				primarySelected: true,
 				false,
 				Translations.GetString ("Choose Color"));
@@ -301,6 +301,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 				ColorBgra newColorBgra = newColorCairo.ToColorBgra ();
 
 				colorButton.DisplayColor = newColorCairo;
+				currentColorCairo = newColorCairo;
+				currentColorBgra = newColorBgra;
 
 				SetAndNotify (settings.reflector, effectData, newColorBgra);
 
@@ -326,13 +328,13 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberSettings settings,
 		IWorkspaceService workspace)
 	{
-		Color initialColorCairo =
+		Color currentColorCairo =
 			(settings.reflector.GetValue (effectData) is Color c)
 			? c
 			: Color.Black;
 
 		PintaColorButton colorButton = new () {
-			DisplayColor = initialColorCairo,
+			DisplayColor = currentColorCairo,
 			Hexpand = false,
 			Halign = Gtk.Align.Start,
 			WidthRequest = 80,
@@ -343,7 +345,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			using ColorPickerDialog dialog = new (
 				this,
 				PintaCore.Palette,
-				new SingleColor (initialColorCairo),
+				new SingleColor (currentColorCairo),
 				primarySelected: true,
 				false,
 				Translations.GetString ("Choose Color"));
@@ -359,6 +361,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 				Color newColorCairo = pick.Color;
 
 				colorButton.DisplayColor = newColorCairo;
+				currentColorCairo = newColorCairo;
 
 				SetAndNotify (settings.reflector, effectData, newColorCairo);
 			} finally {
