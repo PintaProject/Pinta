@@ -5,6 +5,8 @@ on:
   push:
     paths-ignore:
       - '**.md'
+      - '**.po'
+      - '**.pot'
   pull_request:
   schedule:
     # Run every week just to make sure the CI environment still works.
