@@ -41,11 +41,7 @@ internal sealed class PintaColorButton : Gtk.Button
 		cr.SetSource (checkeredPattern);
 		cr.Paint ();
 
-		cr.SetSourceRgba (
-			display_color.R,
-			display_color.G,
-			display_color.B,
-			display_color.A);
+		cr.SetSourceColor (display_color);
 		cr.Rectangle (0, 0, width, height);
 		cr.Fill ();
 	}
