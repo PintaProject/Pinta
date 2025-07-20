@@ -33,35 +33,10 @@ internal sealed class PintaColorButton : Gtk.Button
 		int width,
 		int height)
 	{
+		const int TILE_SIZE = 16;
 
-		// Draw transparency background
-
-		const int SQUARE_SIZE = 8;
-		const int TILE_SIZE = SQUARE_SIZE * 2;
-
-		ImageSurface tileSurface = new (Format.Rgb24, TILE_SIZE, TILE_SIZE);
-
-		using (Context sc = new (tileSurface)) {
-
-			Color colorLight = Color.White;
-			Color colorDark = new (0.8, 0.8, 0.8);
-
-			// Top-left and bottom-right squares
-			sc.SetSourceColor (colorLight);
-			sc.Rectangle (0, 0, SQUARE_SIZE, SQUARE_SIZE);
-			sc.Rectangle (SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-			sc.Fill ();
-
-			// Top-right and bottom-left squares
-			sc.SetSourceColor (colorDark);
-			sc.Rectangle (SQUARE_SIZE, 0, SQUARE_SIZE, SQUARE_SIZE);
-			sc.Rectangle (0, SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-			sc.Fill ();
-		}
-
-		SurfacePattern checkeredPattern = new (tileSurface) {
-			Extend = Extend.Repeat
-		};
+		using Pattern checkeredPattern =
+			CairoExtensions.CreateTransparentBackgroundPattern (TILE_SIZE);
 
 		cr.SetSource (checkeredPattern);
 		cr.Paint ();
