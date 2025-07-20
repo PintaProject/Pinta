@@ -85,12 +85,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int count = data.Quality * data.Quality + 1;
 
 		var baseGradient =
-			GradientHelper
-			.CreateBaseGradientForEffect (
-				palette,
-				data.ColorSchemeSource,
-				data.ColorScheme,
-				data.ColorSchemeSeed)
+			ColorGradient.Create (
+				data.SomeCairoColor.ToColorBgra (),
+				data.SomeBgraColor)
 			.Resized (0, 1023);
 
 		return new (
@@ -200,5 +197,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 		[Caption ("Invert Colors")]
 		public bool InvertColors { get; set; } = false;
+
+		public Color SomeCairoColor { get; set; } = Color.Green;
+		public ColorBgra SomeBgraColor { get; set; } = ColorBgra.Magenta;
 	}
 }
