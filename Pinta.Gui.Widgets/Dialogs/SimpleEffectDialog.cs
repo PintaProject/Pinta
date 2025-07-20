@@ -270,7 +270,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? c
 			: ColorBgra.Black;
 
-		Color currentColorCairo = currentColorBgra.ToCairoColor ();
+		Color currentColorCairo =
+			currentColorBgra
+			.ToStraightAlpha ()
+			.ToCairoColor ();
 
 		PintaColorButton colorButton = new () {
 			DisplayColor = currentColorCairo,
@@ -298,7 +301,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 				var pick = (SingleColor) dialog.Colors;
 
 				Color newColorCairo = pick.Color;
-				ColorBgra newColorBgra = newColorCairo.ToColorBgra ();
+				ColorBgra newColorBgra =
+					newColorCairo
+					.ToColorBgra ()
+					.ToPremultipliedAlpha ();
 
 				colorButton.DisplayColor = newColorCairo;
 				currentColorCairo = newColorCairo;
