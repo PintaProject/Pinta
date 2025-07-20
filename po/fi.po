@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-06 00:30+0000\n"
+"POT-Creation-Date: 2025-07-20 00:32+0000\n"
 "PO-Revision-Date: 2025-04-16 18:44+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/pinta/pinta/fi/"
@@ -98,7 +98,7 @@ msgstr "Tasaa objekti"
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:500
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
 msgid "Alpha"
 msgstr ""
 
@@ -215,7 +215,7 @@ msgstr "Sekoitustila"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:478
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
 msgid "Blue"
 msgstr "Sininen"
 
@@ -292,7 +292,7 @@ msgstr "Prosentin mukaan:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Peru"
@@ -309,7 +309,7 @@ msgstr "Piirtopohjan ruudukon asetukset"
 msgid "Canvas Grid..."
 msgstr "Piirtopohjan ruudukko..."
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:143
+#: ../Pinta.Effects/Effects/CellsEffect.cs:146
 msgid "Cell Radius"
 msgstr ""
 
@@ -317,7 +317,7 @@ msgstr ""
 msgid "Cell Size"
 msgstr "Solun koko"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:18
+#: ../Pinta.Effects/Effects/CellsEffect.cs:21
 msgid "Cells"
 msgstr ""
 
@@ -333,8 +333,8 @@ msgstr "Keskitä"
 msgid "Center Left"
 msgstr "Keskelle vasemmalle"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:156
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
+#: ../Pinta.Effects/Effects/DentsEffect.cs:154
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:95
 msgid "Center Offset"
 msgstr "Keskusta"
 
@@ -422,7 +422,7 @@ msgstr "Napsauta valitaksesi samanvärisen alueen."
 msgid "Click to select secondary color."
 msgstr "Klikkaa valitaksesi toissijaisen värin."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:231
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Click to switch between primary and secondary color."
 msgstr "Napsauta vaihtaaksesi ensi- ja toissijaisen värin välillä."
@@ -498,18 +498,18 @@ msgid "Color Saturation"
 msgstr "Värikylläisyys"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
-#: ../Pinta.Effects/Effects/CellsEffect.cs:152
+#: ../Pinta.Effects/Effects/CellsEffect.cs:155
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
 msgid "Color Scheme"
 msgstr "Väriteema"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:161
+#: ../Pinta.Effects/Effects/CellsEffect.cs:164
 msgid "Color Scheme Edge Behavior"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:149
+#: ../Pinta.Effects/Effects/CellsEffect.cs:152
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
@@ -658,7 +658,7 @@ msgstr "Erottava"
 msgid "Distance"
 msgstr "Etäisyys"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:134
+#: ../Pinta.Effects/Effects/CellsEffect.cs:137
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:173
 msgid "Distance Metric"
 msgstr ""
@@ -945,7 +945,7 @@ msgstr "Väriliukuma"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:456
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
 msgid "Green"
 msgstr "Vihreä"
 
@@ -964,7 +964,7 @@ msgstr "Kova valo"
 msgid "Height:"
 msgstr "Korkeus:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:338
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:354
 msgid "Hex"
 msgstr ""
 
@@ -999,11 +999,11 @@ msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:358
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
 msgstr "Sävy"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:260
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:281
 msgid "Hue & Sat"
 msgstr ""
 
@@ -1486,7 +1486,7 @@ msgstr "Normaali koko"
 msgid "Normal and Outline"
 msgstr "Normaali ja ääriviiva"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:137
+#: ../Pinta.Effects/Effects/CellsEffect.cs:140
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:176
 msgid "Number of Cells"
 msgstr "Solujen määrä"
@@ -1495,7 +1495,7 @@ msgstr "Solujen määrä"
 msgid "Number of threads to use for rendering"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:210
 msgid "OK"
 msgstr "OK"
 
@@ -1795,11 +1795,11 @@ msgstr "Ensisijainen"
 msgid "Print"
 msgstr "Tulosta"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:164
-#: ../Pinta.Effects/Effects/DentsEffect.cs:153
+#: ../Pinta.Effects/Effects/CellsEffect.cs:167
+#: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:160
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
 msgid "Quality"
@@ -1847,7 +1847,7 @@ msgstr ""
 msgid "Random"
 msgstr "Satunnainen"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:155
+#: ../Pinta.Effects/Effects/CellsEffect.cs:158
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
@@ -1861,10 +1861,10 @@ msgstr "Satunnaiset värit"
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:178
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
-msgid "Random Noise"
-msgstr "Satunnainen kohina"
+msgid "Random Noise Seed"
+msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:140
+#: ../Pinta.Effects/Effects/CellsEffect.cs:143
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Random Point Locations"
 msgstr ""
@@ -1887,7 +1887,7 @@ msgstr "Suorakulmainen valinta"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:434
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
 msgid "Red"
 msgstr "Punainen"
 
@@ -1927,7 +1927,7 @@ msgstr "Reliefi"
 msgid "Rename Layer"
 msgstr "Nimeä taso uudelleen"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:24
+#: ../Pinta.Effects/Effects/CellsEffect.cs:27
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
@@ -1935,7 +1935,7 @@ msgstr "Nimeä taso uudelleen"
 msgid "Render"
 msgstr "Renderointi"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:107
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
 msgid "Rendering Effect"
 msgstr "Renderointi"
 
@@ -1951,7 +1951,7 @@ msgstr "Ilmoita virheestä..."
 msgid "Resampling:"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:62
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:505
 msgid "Reseed"
 msgstr "Uusi siemen"
 
@@ -1960,7 +1960,7 @@ msgstr "Uusi siemen"
 msgid "Reset"
 msgstr "Palauta"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:183
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:200
 msgid "Reset Color"
 msgstr "Nollaa väri"
 
@@ -1994,7 +1994,7 @@ msgstr "Muuta paletin kokoa"
 msgid "Restart Pinta"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:158
+#: ../Pinta.Effects/Effects/CellsEffect.cs:161
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
@@ -2063,11 +2063,11 @@ msgstr "Viivoitin"
 msgid "Sampling"
 msgstr "Näytteistys"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:390
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
 msgid "Sat"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:272
 msgid "Sat & Value"
 msgstr ""
 
@@ -2151,7 +2151,7 @@ msgstr "Terävöitä"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:232
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
 msgid "Shortcut key"
 msgstr "Pikanäppäin"
@@ -2172,7 +2172,7 @@ msgstr "Näytä ruudukko"
 msgid "Show Layer"
 msgstr "Näytä taso"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:252
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
 msgid "Show Value"
 msgstr "Näytä arvo"
 
@@ -2410,7 +2410,7 @@ msgstr "Läpinäkyvyystila"
 msgid "Transparent"
 msgstr "Läpinäkyvä"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:146
+#: ../Pinta.Effects/Effects/DentsEffect.cs:144
 msgid "Turbulence"
 msgstr ""
 
@@ -2488,7 +2488,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Käyttää kuvakkeita kokoelmista:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:412
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
 msgid "Value"
 msgstr "Arvo"
 
@@ -2727,6 +2727,9 @@ msgstr "{0}-paletti ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
+
+#~ msgid "Random Noise"
+#~ msgstr "Satunnainen kohina"
 
 #~ msgid "Choose Primary Color"
 #~ msgstr "Valitse edustaväri"
