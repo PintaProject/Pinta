@@ -36,11 +36,19 @@ internal sealed class ColorTests
 	[TestCase ("#CC33AA99", 0.8, 0.2, 0.6667, 0.6)]
 	[TestCase ("C3A9", 0.8, 0.2, 0.6667, 0.6)]
 	[TestCase ("C3A", 0.8, 0.2, 0.6667, 1)]
-	public void Hex (string hex, double r, double g, double b, double a)
+	public void FromHex (string hex, double r, double g, double b, double a)
 	{
-		var hc = Color.FromHex (hex)!.Value;
-		hc = new (Math.Round (hc.R, 4), Math.Round (hc.G, 4), Math.Round (hc.B, 4));
-		var c = new Color (r, g, b);
-		Assert.That (hc, Is.EqualTo (c));
+		Color hc = Color.FromHex (hex)!.Value;
+		hc = new (Math.Round (hc.R, 4), Math.Round (hc.G, 4), Math.Round (hc.B, 4), Math.Round (hc.A, 4));
+		Color expectedColor = new (r, g, b, a);
+		Assert.That (hc, Is.EqualTo (expectedColor));
+	}
+
+	[TestCase (0.6, 0, 0.3, 1.0, true, "99004CFF")]
+	[TestCase (0.6, 0, 0.3, 1.0, false, "99004C")]
+	public void ToHex (double r, double g, double b, double a, bool alpha, string expected)
+	{
+		Color c = new (r, g, b, a);
+		Assert.That (c.ToHex (alpha), Is.EqualTo (expected));
 	}
 }

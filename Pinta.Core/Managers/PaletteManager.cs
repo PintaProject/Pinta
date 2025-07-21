@@ -1,21 +1,21 @@
-// 
+//
 // PaletteManager.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -162,25 +162,26 @@ public sealed class PaletteManager : IPaletteService
 	private void PopulateRecentlyUsedColors ()
 	{
 		// Primary / Secondary colors
-		string primaryColor = settings.GetSetting (SettingNames.PRIMARY_COLOR, ColorBgra.Black.ToHexString ());
-		string secondaryColor = settings.GetSetting (SettingNames.SECONDARY_COLOR, ColorBgra.White.ToHexString ());
+		string primaryColor = settings.GetSetting (SettingNames.PRIMARY_COLOR, string.Empty);
+		string secondaryColor = settings.GetSetting (SettingNames.SECONDARY_COLOR, string.Empty);
 
 		SetColor (
-			true,
-			ColorBgra.TryParseHexString (primaryColor, out ColorBgra primary) ? primary.ToCairoColor () : new Color (0, 0, 0),
-			false);
+			setPrimary: true,
+			ParseBgraHexString (primaryColor) ?? Color.Black,
+			addToRecent: false);
 
 		SetColor (
-			false,
-			ColorBgra.TryParseHexString (secondaryColor, out ColorBgra secondary) ? secondary.ToCairoColor () : new Color (1, 0, 0),
-			false);
+			setPrimary: false,
+			ParseBgraHexString (secondaryColor) ?? Color.White,
+			addToRecent: false);
 
 		// Recently used palette
-		string saved_colors = settings.GetSetting (SettingNames.RECENT_COLORS, string.Empty);
+		string savedColors = settings.GetSetting (SettingNames.RECENT_COLORS, string.Empty);
 
-		foreach (string hex_color in saved_colors.Split (',')) {
-			if (ColorBgra.TryParseHexString (hex_color, out ColorBgra color))
-				recently_used.Add (color.ToCairoColor ());
+		foreach (string hexColor in savedColors.Split (',')) {
+			Color? color = ParseBgraHexString (hexColor);
+			if (color is not null)
+				recently_used.Add (color.Value);
 		}
 
 		// Fill in with default color if not enough saved
@@ -201,12 +202,36 @@ public sealed class PaletteManager : IPaletteService
 	private void SaveRecentlyUsedColors ()
 	{
 		// Primary / Secondary colors
-		settings.PutSetting (SettingNames.PRIMARY_COLOR, PrimaryColor.ToColorBgra ().ToHexString ());
-		settings.PutSetting (SettingNames.SECONDARY_COLOR, SecondaryColor.ToColorBgra ().ToHexString ());
+		settings.PutSetting (SettingNames.PRIMARY_COLOR, ToBgraHexString (PrimaryColor));
+		settings.PutSetting (SettingNames.SECONDARY_COLOR, ToBgraHexString (SecondaryColor));
 
 		// Recently used palette
-		string colors = string.Join (",", recently_used.Select (c => c.ToColorBgra ().ToHexString ()));
+		string colors = string.Join (",", recently_used.Select (ToBgraHexString));
 		settings.PutSetting (SettingNames.RECENT_COLORS, colors);
+	}
+
+	/// <summary>
+	/// Converts the color to a hex string in the byte order of the ColorBgra struct,
+	/// for backwards compatibility with existing settings.
+	/// </summary>
+	private static string ToBgraHexString (Color color)
+	{
+		Color bgra = new (color.A, color.R, color.G, color.B);
+		return bgra.ToHex (addAlpha: true);
+	}
+
+	/// <summary>
+	/// Parses the color from a hex string in the byte order of the ColorBgra struct,
+	/// for backwards compatibility with existing settings.
+	/// </summary>
+	private static Color? ParseBgraHexString (string hex)
+	{
+		Color? result = Color.FromHex (hex);
+		if (result is null)
+			return null;
+
+		// Inverse of the reordering in ToBgraHexString().
+		return new (result.Value.G, result.Value.B, result.Value.A, result.Value.R);
 	}
 
 	private void OnPrimaryColorChanged ()

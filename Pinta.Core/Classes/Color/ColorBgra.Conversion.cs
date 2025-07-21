@@ -37,37 +37,6 @@ partial struct ColorBgra
 			Utility.ClampToByte (r),
 			Utility.ClampToByte (a));
 
-	public static bool TryParseHexString (string hexString, out ColorBgra color)
-	{
-		try {
-			uint value = Convert.ToUInt32 (hexString, 16);
-			color = FromUInt32 (value);
-			return true;
-		} catch (Exception) {
-			color = Zero;
-			return false;
-		}
-	}
-
-	public readonly string ToHexString ()
-	{
-		int rgbNumber = (R << 16) | (G << 8) | B;
-
-		string colorString = Convert.ToString (rgbNumber, 16);
-
-		while (colorString.Length < 6)
-			colorString = "0" + colorString;
-
-		string alphaString = Convert.ToString (A, 16);
-
-		while (alphaString.Length < 2)
-			alphaString = "0" + alphaString;
-
-		colorString = alphaString + colorString;
-
-		return colorString.ToUpper ();
-	}
-
 	/// <summary>
 	/// Constructs a new ColorBgra instance with the given 32-bit value.
 	/// </summary>
