@@ -245,8 +245,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			return CreateOffsetPicker;
 		else if (memberType == typeof (Color))
 			return CreateCairoColorPicker;
-		else if (memberType == typeof (ColorBgra))
-			return CreateColorBgraPicker;
 		else if (memberType.IsEnum)
 			return CreateEnumComboBox;
 		else
@@ -258,75 +256,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		EffectData effectData,
 		MemberSettings settings,
 		IWorkspaceService workspace);
-
-	private Gtk.Widget CreateColorBgraPicker (
-		string caption,
-		EffectData effectData,
-		MemberSettings settings,
-		IWorkspaceService workspace)
-	{
-		ColorBgra currentColorBgra =
-			(settings.reflector.GetValue (effectData) is ColorBgra c)
-			? c
-			: ColorBgra.Black;
-
-		Color currentColorCairo =
-			currentColorBgra
-			.ToStraightAlpha ()
-			.ToCairoColor ();
-
-		PintaColorButton colorButton = new () {
-			DisplayColor = currentColorCairo,
-			Hexpand = false,
-			Halign = Gtk.Align.Start,
-			WidthRequest = 80,
-		};
-
-		colorButton.OnClicked += async (_, _) => {
-
-			using ColorPickerDialog dialog = new (
-				this,
-				PintaCore.Palette,
-				new SingleColor (currentColorCairo),
-				primarySelected: true,
-				false,
-				Translations.GetString ("Choose Color"));
-
-			try {
-				Gtk.ResponseType response = await dialog.RunAsync ();
-
-				if (response != Gtk.ResponseType.Ok)
-					return;
-
-				var pick = (SingleColor) dialog.Colors;
-
-				Color newColorCairo = pick.Color;
-				ColorBgra newColorBgra =
-					newColorCairo
-					.ToColorBgra ()
-					.ToPremultipliedAlpha ();
-
-				colorButton.DisplayColor = newColorCairo;
-				currentColorCairo = newColorCairo;
-				currentColorBgra = newColorBgra;
-
-				SetAndNotify (settings.reflector, effectData, newColorBgra);
-
-			} finally {
-				dialog.Destroy ();
-			}
-		};
-
-		Gtk.Label label = Gtk.Label.New (caption);
-		label.Halign = Gtk.Align.Start;
-		label.AddCssClass (AdwaitaStyles.Title4);
-
-		Gtk.Box combinedWidget = Gtk.Box.New (Gtk.Orientation.Vertical, 6);
-		combinedWidget.Append (label);
-		combinedWidget.Append (colorButton);
-
-		return combinedWidget;
-	}
 
 	private Gtk.Widget CreateCairoColorPicker (
 		string caption,
