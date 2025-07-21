@@ -129,6 +129,7 @@ Pinta.Core/Extensions/Cairo/CairoExtensions.Geometry.cs
 Pinta.Core/Extensions/Cairo/CairoExtensions.Patterns.cs
 Pinta.Core/Extensions/Cairo/CairoExtensions.Samples.cs
 Pinta.Core/Extensions/Cairo/CairoExtensions.cs
+Pinta.Core/Extensions/GLib/GLibExtensions.Timer.cs
 Pinta.Core/Extensions/GdkExtensions.cs
 Pinta.Core/Extensions/GdkKey.cs
 Pinta.Core/Extensions/GdkPixbufExtensions.cs
@@ -298,7 +299,6 @@ Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs
 Pinta.Gui.Widgets/Widgets/PaletteWidget.cs
 Pinta.Gui.Widgets/Widgets/PointPickerGraphic.cs
 Pinta.Gui.Widgets/Widgets/PointPickerWidget.cs
-Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs
 Pinta.Gui.Widgets/Widgets/Ruler.cs
 Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs
 Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs
