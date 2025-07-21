@@ -283,7 +283,6 @@ public sealed class ViewActions
 
 	public void CreateStatusBar (Gtk.Box statusbar)
 	{
-		statusbar.Append (GtkExtensions.CreateToolBarSeparator ());
 		statusbar.Append (ZoomOut.CreateToolBarItem ());
 		statusbar.Append (ZoomComboBox);
 		statusbar.Append (ZoomIn.CreateToolBarItem ());
