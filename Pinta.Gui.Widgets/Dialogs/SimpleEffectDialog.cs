@@ -34,6 +34,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Cairo;
 using Mono.Addins.Localization;
 using Pinta.Core;
 
@@ -242,6 +243,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			return CreatePointPicker;
 		else if (memberType == typeof (CenterOffset<double>))
 			return CreateOffsetPicker;
+		else if (memberType == typeof (Color))
+			return CreateCairoColorPicker;
 		else if (memberType.IsEnum)
 			return CreateEnumComboBox;
 		else
@@ -253,6 +256,64 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		EffectData effectData,
 		MemberSettings settings,
 		IWorkspaceService workspace);
+
+	private Gtk.Widget CreateCairoColorPicker (
+		string caption,
+		EffectData effectData,
+		MemberSettings settings,
+		IWorkspaceService workspace)
+	{
+		Color currentColorCairo =
+			(settings.reflector.GetValue (effectData) is Color c)
+			? c
+			: Color.Black;
+
+		PintaColorButton colorButton = new () {
+			DisplayColor = currentColorCairo,
+			Hexpand = false,
+			Halign = Gtk.Align.Start,
+			WidthRequest = 80,
+		};
+
+		colorButton.OnClicked += async (_, _) => {
+
+			using ColorPickerDialog dialog = new (
+				this,
+				PintaCore.Palette,
+				new SingleColor (currentColorCairo),
+				primarySelected: true,
+				false,
+				Translations.GetString ("Choose Color"));
+
+			try {
+				Gtk.ResponseType response = await dialog.RunAsync ();
+
+				if (response != Gtk.ResponseType.Ok)
+					return;
+
+				var pick = (SingleColor) dialog.Colors;
+
+				Color newColorCairo = pick.Color;
+
+				colorButton.DisplayColor = newColorCairo;
+				currentColorCairo = newColorCairo;
+
+				SetAndNotify (settings.reflector, effectData, newColorCairo);
+			} finally {
+				dialog.Destroy ();
+			}
+		};
+
+		Gtk.Label label = Gtk.Label.New (caption);
+		label.Halign = Gtk.Align.Start;
+		label.AddCssClass (AdwaitaStyles.Title4);
+
+		Gtk.Box combinedWidget = Gtk.Box.New (Gtk.Orientation.Vertical, 6);
+		combinedWidget.Append (label);
+		combinedWidget.Append (colorButton);
+
+		return combinedWidget;
+	}
 
 	private ComboBoxWidget CreateEnumComboBox (
 		string caption,
