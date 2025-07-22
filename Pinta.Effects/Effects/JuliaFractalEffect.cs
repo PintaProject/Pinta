@@ -53,10 +53,10 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 	private static readonly Julia fractal = new (maxSquared: 10_000);
 
-	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		JuliaSettings settings = CreateSettings (dst);
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		JuliaSettings settings = CreateSettings (destination);
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
 			dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 	}
@@ -72,15 +72,14 @@ public sealed class JuliaFractalEffect : BaseEffect
 		Matrix3x2D rotation,
 		int factor,
 		ColorGradient<ColorBgra> colorGradient);
-	private JuliaSettings CreateSettings (ImageSurface dst)
+	private JuliaSettings CreateSettings (ImageSurface destination)
 	{
 		// Reference to effect data, to prevent repeated casting
 		// TODO: Remove if and when reading the property doesn't require casting
 		var data = Data;
 
-		Size canvasSize = dst.GetSize ();
-		var count = data.Quality * data.Quality + 1;
-		RadiansAngle angleTheta = data.Angle.ToRadians ();
+		Size canvasSize = destination.GetSize ();
+		int count = data.Quality * data.Quality + 1;
 
 		var baseGradient =
 			GradientHelper

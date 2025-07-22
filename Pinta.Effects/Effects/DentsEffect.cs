@@ -74,20 +74,20 @@ public sealed class DentsEffect : BaseEffect
 		EffectData = new DentsData ();
 	}
 
-	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		Warp.Settings settings = Warp.CreateSettings (
 			Data,
 			live_preview.RenderBounds,
 			palette);
 
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, src.GetSize ()))
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ()))
 			dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
 				settings,
 				InverseTransform,
-				src,
+				source,
 				src_data[pixel.memoryOffset],
 				pixel);
 	}
