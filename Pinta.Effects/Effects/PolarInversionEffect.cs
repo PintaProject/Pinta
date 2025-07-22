@@ -86,10 +86,11 @@ public sealed class PolarInversionEffect : BaseEffect
 
 public sealed class PolarInversionData : EffectData, Warp.IEffectData
 {
-	[MinimumValue (-4), MaximumValue (4)]
+	[MinimumValue (-4), MaximumValue (4), IncrementValue (0.1)]
 	public double Amount { get; set; } = 0;
 
-	[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
+	[Caption ("Quality")]
+	[MinimumValue (1), MaximumValue (5)]
 	public int Quality { get; set; } = 2;
 
 	[Caption ("Center Offset")]

@@ -133,18 +133,18 @@ public sealed class CellsEffect : BaseEffect
 
 	public sealed class CellsData : EffectData
 	{
-
 		[Caption ("Distance Metric")]
 		public DistanceMetric DistanceMetric { get; set; } = DistanceMetric.Euclidean;
 
-		[Caption ("Number of Cells"), MinimumValue (1), MaximumValue (1024)]
+		[Caption ("Number of Cells")]
+		[MinimumValue (1), MaximumValue (1024)]
 		public int NumberOfCells { get; set; } = 100;
 
 		[Caption ("Random Point Locations")]
 		public RandomSeed RandomPointLocations { get; set; } = new (0);
 
 		[Caption ("Cell Radius")]
-		[MinimumValue (4), MaximumValue (100)]
+		[MinimumValue (4), MaximumValue (100), IncrementValue (1)]
 		public double CellRadius { get; set; } = 32;
 
 		// TODO: Show points

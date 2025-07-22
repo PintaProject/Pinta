@@ -132,23 +132,24 @@ public sealed class DentsEffect : BaseEffect
 
 public sealed class DentsData : EffectData, Warp.IEffectData
 {
-	[MinimumValue (1), MaximumValue (200)]
+	[MinimumValue (1), MaximumValue (200), IncrementValue (1)]
 	public double Scale { get; set; } = 25;
 
-	[MinimumValue (0), MaximumValue (200)]
+	[MinimumValue (0), MaximumValue (200), IncrementValue (1)]
 	public double Refraction { get; set; } = 50;
 
-	[MinimumValue (0), MaximumValue (100)]
+	[MinimumValue (0), MaximumValue (100), IncrementValue (1)]
 	public double Roughness { get; set; } = 10;
 
 	[Caption ("Turbulence")]
-	[MinimumValue (0), MaximumValue (100)]
+	[MinimumValue (0), MaximumValue (100), IncrementValue (1)]
 	public double Tension { get; set; } = 10;
 
 	[MinimumValue (0), MaximumValue (255)]
 	public RandomSeed Seed { get; set; } = new (0);
 
-	[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
+	[Caption ("Quality")]
+	[MinimumValue (1), MaximumValue (5)]
 	public int Quality { get; set; } = 2;
 
 	[Caption ("Center Offset")]

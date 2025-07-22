@@ -174,13 +174,16 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	public sealed class MandelbrotFractalData : EffectData
 	{
-		[Caption ("Factor"), MinimumValue (1), MaximumValue (10)]
+		[Caption ("Factor")]
+		[MinimumValue (1), MaximumValue (10)]
 		public int Factor { get; set; } = 1;
 
-		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
+		[Caption ("Quality")]
+		[MinimumValue (1), MaximumValue (5)]
 		public int Quality { get; set; } = 2;
 
-		[Caption ("Zoom"), MinimumValue (0), MaximumValue (100)]
+		[Caption ("Zoom")]
+		[MinimumValue (0), MaximumValue (100), IncrementValue (0.5)]
 		public double Zoom { get; set; } = 10;
 
 		[Caption ("Angle")]
