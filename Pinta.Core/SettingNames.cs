@@ -21,12 +21,12 @@ internal static class SettingNames
 	internal const string SECONDARY_COLOR = "secondary-color";
 	internal const string RECENT_COLORS = "recently-used-colors";
 
-	internal static string ToolAntialiasSetting (BaseTool tool)
+	internal static string ToolAntialias (BaseTool tool)
 	{
 		return $"{tool.GetType ().Name.ToLowerInvariant ()}-antialias";
 	}
 
-	internal static string ToolAntiAlphaBlendSetting (BaseTool tool)
+	internal static string ToolAntiAlphaBlend (BaseTool tool)
 	{
 		return $"{tool.GetType ().Name.ToLowerInvariant ()}-alpha-blend";
 	}
