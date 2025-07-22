@@ -43,9 +43,6 @@ public sealed class FreeformShapeTool : BaseBrushTool
 
 	private string dash_pattern = "-";
 
-	private const string FILL_TYPE_SETTING = "freeform-shape-fill-type";
-	private const string DASH_PATTERN_SETTING = "freeform-shape-dash_pattern";
-
 	public FreeformShapeTool (IServiceProvider services) : base (services) { }
 
 	public override string Name => Translations.GetString ("Freeform Shape");
@@ -68,7 +65,7 @@ public sealed class FreeformShapeTool : BaseBrushTool
 		var dash_pattern_box = dash_p_box.SetupToolbar (tb);
 
 		if (dash_pattern_box != null) {
-			dash_pattern_box.GetEntry ().SetText (Settings.GetSetting (DASH_PATTERN_SETTING, "-"));
+			dash_pattern_box.GetEntry ().SetText (Settings.GetSetting (SettingNames.FREEFORM_SHAPE_DASH_PATTERN, "-"));
 
 			dash_pattern_box.OnChanged += (_, _) => {
 				dash_pattern = dash_pattern_box.GetActiveText ()!;
@@ -199,9 +196,9 @@ public sealed class FreeformShapeTool : BaseBrushTool
 		base.OnSaveSettings (settings);
 
 		if (fill_button is not null)
-			settings.PutSetting (FILL_TYPE_SETTING, fill_button.SelectedIndex);
+			settings.PutSetting (SettingNames.FREEFORM_SHAPE_FILL_TYPE, fill_button.SelectedIndex);
 		if (dash_p_box?.ComboBox is not null)
-			settings.PutSetting (DASH_PATTERN_SETTING, dash_p_box.ComboBox.ComboBox.GetActiveText ()!);
+			settings.PutSetting (SettingNames.FREEFORM_SHAPE_DASH_PATTERN, dash_p_box.ComboBox.ComboBox.GetActiveText ()!);
 	}
 
 	private bool StrokeShape => FillDropDown.SelectedItem.GetTagOrDefault (0) % 2 == 0;
@@ -222,7 +219,7 @@ public sealed class FreeformShapeTool : BaseBrushTool
 				fill_button.AddItem (Translations.GetString ("Fill Shape"), Pinta.Resources.Icons.FillStyleFill, 1);
 				fill_button.AddItem (Translations.GetString ("Fill and Outline Shape"), Pinta.Resources.Icons.FillStyleOutlineFill, 2);
 
-				fill_button.SelectedIndex = Settings.GetSetting (FILL_TYPE_SETTING, 0);
+				fill_button.SelectedIndex = Settings.GetSetting (SettingNames.FREEFORM_SHAPE_FILL_TYPE, 0);
 			}
 
 			return fill_button;

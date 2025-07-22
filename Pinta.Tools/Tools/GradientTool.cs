@@ -38,9 +38,6 @@ public sealed class GradientTool : BaseTool
 	private ImageSurface? undo_surface;
 	MouseButton button;
 
-	private const string GRADIENT_TYPE_SETTING = "gradient-type";
-	private const string GRADIENT_COLOR_MODE_SETTING = "gradient-color-mode";
-
 	public GradientTool (IServiceProvider services) : base (services)
 	{
 		palette = services.GetService<IPaletteService> ();
@@ -150,9 +147,9 @@ public sealed class GradientTool : BaseTool
 		base.OnSaveSettings (settings);
 
 		if (gradient_button is not null)
-			settings.PutSetting (GRADIENT_TYPE_SETTING, gradient_button.SelectedIndex);
+			settings.PutSetting (SettingNames.GRADIENT_TYPE, gradient_button.SelectedIndex);
 		if (color_mode_button is not null)
-			settings.PutSetting (GRADIENT_COLOR_MODE_SETTING, color_mode_button.SelectedIndex);
+			settings.PutSetting (SettingNames.GRADIENT_COLOR_MODE, color_mode_button.SelectedIndex);
 	}
 
 	private GradientRenderer CreateGradientRenderer ()
@@ -187,7 +184,7 @@ public sealed class GradientTool : BaseTool
 				gradient_button.AddItem (Translations.GetString ("Radial Gradient"), Pinta.Resources.Icons.GradientRadial, GradientType.Radial);
 				gradient_button.AddItem (Translations.GetString ("Conical Gradient"), Pinta.Resources.Icons.GradientConical, GradientType.Conical);
 
-				gradient_button.SelectedIndex = Settings.GetSetting (GRADIENT_TYPE_SETTING, 0);
+				gradient_button.SelectedIndex = Settings.GetSetting (SettingNames.GRADIENT_TYPE, 0);
 			}
 
 			return gradient_button;
@@ -203,7 +200,7 @@ public sealed class GradientTool : BaseTool
 				color_mode_button.AddItem (Translations.GetString ("Color Mode"), Pinta.Resources.Icons.ColorModeColor, GradientColorMode.Color);
 				color_mode_button.AddItem (Translations.GetString ("Transparency Mode"), Pinta.Resources.Icons.ColorModeTransparency, GradientColorMode.Transparency);
 
-				color_mode_button.SelectedIndex = Settings.GetSetting (GRADIENT_COLOR_MODE_SETTING, 0);
+				color_mode_button.SelectedIndex = Settings.GetSetting (SettingNames.GRADIENT_COLOR_MODE, 0);
 			}
 
 			return color_mode_button;

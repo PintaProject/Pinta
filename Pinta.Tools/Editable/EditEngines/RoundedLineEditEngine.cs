@@ -68,13 +68,11 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 		}
 	}
 
-	private static string RADIUS_SETTING (string prefix) => $"{prefix}-radius";
-
 	public override void OnSaveSettings (ISettingsService settings, string toolPrefix)
 	{
 		base.OnSaveSettings (settings, toolPrefix);
 		if (radius is not null)
-			settings.PutSetting (RADIUS_SETTING (toolPrefix), (int) radius.Value);
+			settings.PutSetting (SettingNames.Radius (toolPrefix), (int) radius.Value);
 	}
 
 	public override void HandleBuildToolBar (
@@ -96,7 +94,7 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 		tb.Append (radius_label);
 
 		if (radius == null) {
-			radius = GtkExtensions.CreateToolBarSpinButton (0, 1e5, 1, settings.GetSetting (RADIUS_SETTING (toolPrefix), 20));
+			radius = GtkExtensions.CreateToolBarSpinButton (0, 1e5, 1, settings.GetSetting (SettingNames.Radius (toolPrefix), 20));
 
 			radius.OnValueChanged += (o, e) => {
 				//Go through the Get/Set routine.

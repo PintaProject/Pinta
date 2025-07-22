@@ -45,8 +45,6 @@ public sealed class EraserTool : BaseBrushTool
 	private const int LUT_Resolution = 256;
 	private readonly Lazy<byte[,]> lazy_lut_factor = new (CreateLookupTable);
 
-	private const string ERASER_TYPE_SETTING = "eraser-erase-type";
-
 	public EraserTool (IServiceProvider services) : base (services) { }
 
 	public override string Name => Translations.GetString ("Eraser");
@@ -122,7 +120,7 @@ public sealed class EraserTool : BaseBrushTool
 		base.OnSaveSettings (settings);
 
 		if (type_combobox is not null)
-			settings.PutSetting (ERASER_TYPE_SETTING, type_combobox.ComboBox.Active);
+			settings.PutSetting (SettingNames.ERASER_ERASE_TYPE, type_combobox.ComboBox.Active);
 	}
 
 	private static byte[,] CreateLookupTable ()
@@ -266,7 +264,7 @@ public sealed class EraserTool : BaseBrushTool
 					eraser_type = (EraserType) type_combobox.ComboBox.Active;
 				};
 
-				type_combobox.ComboBox.Active = Settings.GetSetting (ERASER_TYPE_SETTING, 0);
+				type_combobox.ComboBox.Active = Settings.GetSetting (SettingNames.ERASER_ERASE_TYPE, 0);
 			}
 
 			return type_combobox;

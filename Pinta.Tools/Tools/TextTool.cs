@@ -140,14 +140,6 @@ public sealed class TextTool : BaseTool
 	private Gtk.SpinButton outline_width = null!;
 	private Gtk.Label outline_width_label = null!;
 
-	private const string FONT_SETTING = "text-font";
-	private const string BOLD_SETTING = "text-bold";
-	private const string ITALIC_SETTING = "text-italic";
-	private const string UNDERLINE_SETTING = "text-underline";
-	private const string ALIGNMENT_SETTING = "text-alignment";
-	private const string STYLE_SETTING = "text-style";
-	private const string OUTLINE_WIDTH_SETTING = "text-outline-width";
-
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
 		base.OnBuildToolBar (tb);
@@ -169,7 +161,7 @@ public sealed class TextTool : BaseTool
 				UseFont = true,
 				CanFocus = false,
 				FontDesc = Pango.FontDescription.FromString (
-					Settings.GetSetting (FONT_SETTING,
+					Settings.GetSetting (SettingNames.TEXT_FONT,
 					Gtk.Settings.GetDefault ()!.GtkFontName!)),
 			};
 			font_button.SetDialog (fontDialog);
@@ -187,7 +179,7 @@ public sealed class TextTool : BaseTool
 				IconName = Pinta.Resources.StandardIcons.FormatTextBold,
 				TooltipText = Translations.GetString ("Bold"),
 				CanFocus = false,
-				Active = Settings.GetSetting (BOLD_SETTING, false),
+				Active = Settings.GetSetting (SettingNames.TEXT_BOLD, false),
 			};
 			bold_btn.OnToggled += HandleBoldButtonToggled;
 		}
@@ -199,7 +191,7 @@ public sealed class TextTool : BaseTool
 				IconName = Pinta.Resources.StandardIcons.FormatTextItalic,
 				TooltipText = Translations.GetString ("Italic"),
 				CanFocus = false,
-				Active = Settings.GetSetting (ITALIC_SETTING, false),
+				Active = Settings.GetSetting (SettingNames.TEXT_ITALIC, false),
 			};
 			italic_btn.OnToggled += HandleItalicButtonToggled;
 		}
@@ -211,7 +203,7 @@ public sealed class TextTool : BaseTool
 				IconName = Pinta.Resources.StandardIcons.FormatTextUnderline,
 				TooltipText = Translations.GetString ("Underline"),
 				CanFocus = false,
-				Active = Settings.GetSetting (UNDERLINE_SETTING, false),
+				Active = Settings.GetSetting (SettingNames.TEXT_UNDERLINE, false),
 			};
 			underscore_btn.OnToggled += HandleUnderscoreButtonToggled;
 		}
@@ -220,7 +212,7 @@ public sealed class TextTool : BaseTool
 
 		tb.Append (GtkExtensions.CreateToolBarSeparator ());
 
-		TextAlignment alignment = (TextAlignment) Settings.GetSetting (ALIGNMENT_SETTING, (int) TextAlignment.Left);
+		TextAlignment alignment = (TextAlignment) Settings.GetSetting (SettingNames.TEXT_ALIGNMENT, (int) TextAlignment.Left);
 
 		if (left_alignment_btn == null) {
 			left_alignment_btn = new Gtk.ToggleButton {
@@ -277,7 +269,7 @@ public sealed class TextTool : BaseTool
 			fill_button.AddItem (Translations.GetString ("Outline"), Pinta.Resources.Icons.FillStyleOutline, 2);
 			fill_button.AddItem (Translations.GetString ("Fill Background"), Pinta.Resources.Icons.FillStyleBackground, 3);
 
-			fill_button.SelectedIndex = Settings.GetSetting (STYLE_SETTING, 0);
+			fill_button.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_STYLE, 0);
 			fill_button.SelectedItemChanged += HandleBoldButtonToggled;
 		}
 
@@ -295,7 +287,11 @@ public sealed class TextTool : BaseTool
 		tb.Append (outline_width_label);
 
 		if (outline_width == null) {
-			outline_width = GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, Settings.GetSetting (OUTLINE_WIDTH_SETTING, 2));
+			outline_width = GtkExtensions.CreateToolBarSpinButton (
+				1,
+				1e5,
+				1,
+				Settings.GetSetting (SettingNames.TEXT_OUTLINE_WIDTH, 2));
 			outline_width.OnValueChanged += (_, __) => HandleFontChanged ();
 		}
 
@@ -311,25 +307,25 @@ public sealed class TextTool : BaseTool
 		base.OnSaveSettings (settings);
 
 		if (font_button is not null)
-			settings.PutSetting (FONT_SETTING, font_button.FontDesc!.ToString ()!);
+			settings.PutSetting (SettingNames.TEXT_FONT, font_button.FontDesc!.ToString ()!);
 
 		if (bold_btn is not null)
-			settings.PutSetting (BOLD_SETTING, bold_btn.Active);
+			settings.PutSetting (SettingNames.TEXT_BOLD, bold_btn.Active);
 
 		if (italic_btn is not null)
-			settings.PutSetting (ITALIC_SETTING, italic_btn.Active);
+			settings.PutSetting (SettingNames.TEXT_ITALIC, italic_btn.Active);
 
 		if (underscore_btn is not null)
-			settings.PutSetting (UNDERLINE_SETTING, underscore_btn.Active);
+			settings.PutSetting (SettingNames.TEXT_UNDERLINE, underscore_btn.Active);
 
 		if (left_alignment_btn is not null)
-			settings.PutSetting (ALIGNMENT_SETTING, (int) Alignment);
+			settings.PutSetting (SettingNames.TEXT_ALIGNMENT, (int) Alignment);
 
 		if (fill_button is not null)
-			settings.PutSetting (STYLE_SETTING, fill_button.SelectedIndex);
+			settings.PutSetting (SettingNames.TEXT_STYLE, fill_button.SelectedIndex);
 
 		if (outline_width is not null)
-			settings.PutSetting (OUTLINE_WIDTH_SETTING, outline_width.GetValueAsInt ());
+			settings.PutSetting (SettingNames.TEXT_OUTLINE_WIDTH, outline_width.GetValueAsInt ());
 	}
 
 	private void HandleFontChanged ()

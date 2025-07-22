@@ -241,31 +241,19 @@ public abstract class BaseEditEngine
 		ResetShapes ();
 	}
 
-	private static string BRUSH_WIDTH_SETTING (string prefix)
-		=> $"{prefix}-brush-width";
-
-	private static string FILL_TYPE_SETTING (string prefix)
-		=> $"{prefix}-fill-style";
-
-	private static string SHAPE_TYPE_SETTING (string prefix)
-		=> $"{prefix}-shape-type";
-
-	private static string DASH_PATTERN_SETTING (string prefix)
-		=> $"{prefix}-dash-pattern";
-
 	public virtual void OnSaveSettings (ISettingsService settings, string toolPrefix)
 	{
 		if (brush_width is not null)
-			settings.PutSetting (BRUSH_WIDTH_SETTING (toolPrefix), (int) brush_width.Value);
+			settings.PutSetting (SettingNames.BrushWidth (toolPrefix), (int) brush_width.Value);
 
 		if (fill_button is not null)
-			settings.PutSetting (FILL_TYPE_SETTING (toolPrefix), fill_button.SelectedIndex);
+			settings.PutSetting (SettingNames.FillStyle (toolPrefix), fill_button.SelectedIndex);
 
 		if (shape_type_button is not null)
-			settings.PutSetting (SHAPE_TYPE_SETTING (toolPrefix), shape_type_button.SelectedIndex);
+			settings.PutSetting (SettingNames.ShapeType (toolPrefix), shape_type_button.SelectedIndex);
 
 		if (dash_pattern_box?.ComboBox is not null)
-			settings.PutSetting (DASH_PATTERN_SETTING (toolPrefix), dash_pattern_box.ComboBox.ComboBox.GetActiveText ()!);
+			settings.PutSetting (SettingNames.DashPattern (toolPrefix), dash_pattern_box.ComboBox.ComboBox.GetActiveText ()!);
 	}
 
 	public virtual void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
@@ -279,7 +267,15 @@ public abstract class BaseEditEngine
 
 		if (brush_width == null) {
 
-			brush_width = GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, settings.GetSetting (BRUSH_WIDTH_SETTING (toolPrefix), BaseTool.DEFAULT_BRUSH_WIDTH));
+			brush_width = GtkExtensions.CreateToolBarSpinButton (
+				1,
+				1e5,
+				1,
+				settings.GetSetting (
+					SettingNames.BrushWidth (toolPrefix),
+					BaseTool.DEFAULT_BRUSH_WIDTH
+				)
+			);
 			brush_width.TooltipText = Translations.GetString ("Change brush width. Shortcut keys: [ ]");
 
 			brush_width.OnValueChanged += (o, e) => {
@@ -312,7 +308,9 @@ public abstract class BaseEditEngine
 			fill_button.AddItem (Translations.GetString ("Fill Shape"), Resources.Icons.FillStyleFill, 1);
 			fill_button.AddItem (Translations.GetString ("Fill and Outline Shape"), Resources.Icons.FillStyleOutlineFill, 2);
 
-			fill_button.SelectedIndex = settings.GetSetting (FILL_TYPE_SETTING (toolPrefix), 0);
+			fill_button.SelectedIndex = settings.GetSetting (
+				SettingNames.FillStyle (toolPrefix),
+				0);
 			fill_button.SelectedItemChanged += OnFillStyleChanged;
 		}
 
@@ -337,7 +335,9 @@ public abstract class BaseEditEngine
 			shape_type_button.AddItem (Translations.GetString ("Ellipse"), Resources.Icons.ToolEllipse, 2);
 			shape_type_button.AddItem (Translations.GetString ("Rounded Line Series"), Resources.Icons.ToolRectangleRounded, 3);
 
-			shape_type_button.SelectedIndex = settings.GetSetting (SHAPE_TYPE_SETTING (toolPrefix), 0);
+			shape_type_button.SelectedIndex = settings.GetSetting (
+				SettingNames.ShapeType (toolPrefix),
+				0);
 
 			shape_type_button.SelectedItemChanged += (o, e) => {
 				ShapeTypes newShapeType = ShapeType;
@@ -379,10 +379,14 @@ public abstract class BaseEditEngine
 		if (dpbBox == null)
 			return;
 
-		dpbBox.GetEntry ().SetText (settings.GetSetting (DASH_PATTERN_SETTING (toolPrefix), "-"));
+		dpbBox.GetEntry ().SetText (
+			settings.GetSetting (
+				SettingNames.DashPattern (toolPrefix),
+				"-"
+			)
+		);
 
 		dpbBox.OnChanged += (o, e) => {
-
 			ShapeEngine? selEngine = SelectedShapeEngine;
 			if (selEngine == null) return;
 			selEngine.DashPattern = dpbBox.GetActiveText ()!;
