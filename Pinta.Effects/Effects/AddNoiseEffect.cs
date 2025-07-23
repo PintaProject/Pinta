@@ -102,17 +102,16 @@ public sealed class AddNoiseEffect : BaseEffect
 		int dev,
 		int sat);
 
-	private AddNoiseSettings CreateSettings (ImageSurface src)
+	private AddNoiseSettings CreateSettings (ImageSurface source)
 	{
 		var data = Data;
 		int intensity = data.Intensity;
-		int color_saturation = data.ColorSaturation;
 		return new (
-			size: src.GetSize (),
+			size: source.GetSize (),
 			seed: data.Seed,
 			coverage: 0.01 * data.Coverage,
 			dev: intensity * intensity / 4,
-			sat: color_saturation * 4096 / 100
+			sat: data.ColorSaturation * 4096 / 100
 		);
 	}
 
@@ -166,13 +165,16 @@ public sealed class AddNoiseEffect : BaseEffect
 
 	public sealed class NoiseData : EffectData
 	{
-		[Caption ("Intensity"), MinimumValue (0), MaximumValue (100)]
+		[Caption ("Intensity")]
+		[MinimumValue (0), MaximumValue (100)]
 		public int Intensity { get; set; } = 64;
 
-		[Caption ("Color Saturation"), MinimumValue (0), MaximumValue (400)]
+		[Caption ("Color Saturation")]
+		[MinimumValue (0), MaximumValue (400)]
 		public int ColorSaturation { get; set; } = 100;
 
-		[Caption ("Coverage"), MinimumValue (0), DigitsValue (2), MaximumValue (100)]
+		[Caption ("Coverage")]
+		[MinimumValue (0), MaximumValue (100), DigitsValue (2), IncrementValue (1)]
 		public double Coverage { get; set; } = 100.0;
 
 		[Caption ("Random Noise Seed")]

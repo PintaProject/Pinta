@@ -52,7 +52,7 @@ public sealed class PolarInversionEffect : BaseEffect
 		EffectData = new PolarInversionData ();
 	}
 
-	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI rect)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		Warp.Settings settings = Warp.CreateSettings (
 			Data,
@@ -62,7 +62,7 @@ public sealed class PolarInversionEffect : BaseEffect
 		Span<ColorBgra> dst_data = destination.GetPixelData ();
 		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
 
-		foreach (var pixel in Tiling.GeneratePixelOffsets (rect, source.GetSize ()))
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ()))
 			dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
 				settings,
 				InverseTransform,
@@ -86,10 +86,11 @@ public sealed class PolarInversionEffect : BaseEffect
 
 public sealed class PolarInversionData : EffectData, Warp.IEffectData
 {
-	[MinimumValue (-4), MaximumValue (4)]
+	[MinimumValue (-4), MaximumValue (4), IncrementValue (0.1)]
 	public double Amount { get; set; } = 0;
 
-	[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
+	[Caption ("Quality")]
+	[MinimumValue (1), MaximumValue (5)]
 	public int Quality { get; set; } = 2;
 
 	[Caption ("Center Offset")]
