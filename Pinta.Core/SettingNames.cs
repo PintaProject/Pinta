@@ -26,7 +26,7 @@ internal static class SettingNames
 		return $"{tool.GetType ().Name.ToLowerInvariant ()}-antialias";
 	}
 
-	internal static string ToolAntiAlphaBlend (BaseTool tool)
+	internal static string ToolAlphaBlend (BaseTool tool)
 	{
 		return $"{tool.GetType ().Name.ToLowerInvariant ()}-alpha-blend";
 	}

@@ -301,7 +301,7 @@ public abstract class BaseTool
 	protected virtual void OnSaveSettings (ISettingsService settings)
 	{
 		if (alphablending_button is not null)
-			settings.PutSetting (SettingNames.ToolAntiAlphaBlend (this), alphablending_button.SelectedIndex);
+			settings.PutSetting (SettingNames.ToolAlphaBlend (this), alphablending_button.SelectedIndex);
 
 		if (antialiasing_button is not null)
 			settings.PutSetting (SettingNames.ToolAntialias (this), antialiasing_button.SelectedIndex);
@@ -346,7 +346,7 @@ public abstract class BaseTool
 				alphablending_button.AddItem (Translations.GetString ("Overwrite"), Pinta.Resources.Icons.BlendingOverwrite, false);
 
 				alphablending_button.SelectedIndex = Settings.GetSetting (
-					SettingNames.ToolAntiAlphaBlend (this),
+					SettingNames.ToolAlphaBlend (this),
 					0);
 			}
 
