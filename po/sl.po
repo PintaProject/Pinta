@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-06 00:30+0000\n"
+"POT-Creation-Date: 2025-07-20 00:32+0000\n"
 "PO-Revision-Date: 2024-12-31 03:00+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
@@ -99,7 +99,7 @@ msgstr "Poravnani predmet"
 msgid "All files"
 msgstr "Vse datoteke"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:500
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -216,7 +216,7 @@ msgstr "Način spojitve"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:478
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
 msgid "Blue"
 msgstr "Modra"
 
@@ -293,7 +293,7 @@ msgstr "Po odstotku:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Prekliči"
@@ -310,7 +310,7 @@ msgstr "Nastavitve mreže platna"
 msgid "Canvas Grid..."
 msgstr "Mreža platna..."
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:143
+#: ../Pinta.Effects/Effects/CellsEffect.cs:146
 msgid "Cell Radius"
 msgstr ""
 
@@ -318,7 +318,7 @@ msgstr ""
 msgid "Cell Size"
 msgstr "Velikost celice"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:18
+#: ../Pinta.Effects/Effects/CellsEffect.cs:21
 msgid "Cells"
 msgstr ""
 
@@ -334,8 +334,8 @@ msgstr "Središčna poravnava"
 msgid "Center Left"
 msgstr "Levo v sredini"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:156
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
+#: ../Pinta.Effects/Effects/DentsEffect.cs:154
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:95
 msgid "Center Offset"
 msgstr "Osrediščen odmik"
 
@@ -429,7 +429,7 @@ msgstr "Kliknite za izbiro področja sorodne barve."
 msgid "Click to select secondary color."
 msgstr "Kliknite za izbiro pomožne barve."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:231
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Click to switch between primary and secondary color."
 msgstr "Kliknite za preklop med osnovno in pomožno barvo."
@@ -505,18 +505,18 @@ msgid "Color Saturation"
 msgstr "Barvna nasičenost"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
-#: ../Pinta.Effects/Effects/CellsEffect.cs:152
+#: ../Pinta.Effects/Effects/CellsEffect.cs:155
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
 msgid "Color Scheme"
 msgstr "Barvna shema"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:161
+#: ../Pinta.Effects/Effects/CellsEffect.cs:164
 msgid "Color Scheme Edge Behavior"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:149
+#: ../Pinta.Effects/Effects/CellsEffect.cs:152
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
@@ -665,7 +665,7 @@ msgstr "Razlika"
 msgid "Distance"
 msgstr "Razdalja"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:134
+#: ../Pinta.Effects/Effects/CellsEffect.cs:137
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:173
 msgid "Distance Metric"
 msgstr "Meritev oddaljenosti"
@@ -953,7 +953,7 @@ msgstr "Preliv"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:456
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
 msgid "Green"
 msgstr "Zelena"
 
@@ -972,7 +972,7 @@ msgstr "Trdnejša svetloba"
 msgid "Height:"
 msgstr "Višina:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:338
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:354
 msgid "Hex"
 msgstr "Heksa"
 
@@ -1006,11 +1006,11 @@ msgstr "Nebesno rdeča (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:358
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
 msgstr "Odtenek"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:260
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:281
 msgid "Hue & Sat"
 msgstr "Odtenek & Nas"
 
@@ -1527,7 +1527,7 @@ msgstr "Običajna velikost"
 msgid "Normal and Outline"
 msgstr "Običano in obroba"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:137
+#: ../Pinta.Effects/Effects/CellsEffect.cs:140
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:176
 msgid "Number of Cells"
 msgstr "Število celic"
@@ -1536,7 +1536,7 @@ msgstr "Število celic"
 msgid "Number of threads to use for rendering"
 msgstr "Število niti uporabljene za izvajanje"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:210
 msgid "OK"
 msgstr "V redu"
 
@@ -1835,11 +1835,11 @@ msgstr "Osnovno"
 msgid "Print"
 msgstr "Natisni"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:164
-#: ../Pinta.Effects/Effects/DentsEffect.cs:153
+#: ../Pinta.Effects/Effects/CellsEffect.cs:167
+#: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:160
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
 msgid "Quality"
@@ -1887,7 +1887,7 @@ msgstr "Odstotek polmera"
 msgid "Random"
 msgstr "Naključno"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:155
+#: ../Pinta.Effects/Effects/CellsEffect.cs:158
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
@@ -1901,10 +1901,10 @@ msgstr "Naključne barve"
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:178
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
-msgid "Random Noise"
-msgstr "Naključni šum"
+msgid "Random Noise Seed"
+msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:140
+#: ../Pinta.Effects/Effects/CellsEffect.cs:143
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Random Point Locations"
 msgstr "Naključne lokacije točk"
@@ -1927,7 +1927,7 @@ msgstr "Pravokotni izbor"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:434
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
 msgid "Red"
 msgstr "Rdeča"
 
@@ -1967,7 +1967,7 @@ msgstr "Pridvig"
 msgid "Rename Layer"
 msgstr "Preimenuj plast"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:24
+#: ../Pinta.Effects/Effects/CellsEffect.cs:27
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
@@ -1975,7 +1975,7 @@ msgstr "Preimenuj plast"
 msgid "Render"
 msgstr "Izriši"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:107
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
 msgid "Rendering Effect"
 msgstr "Izrisovalni učinek"
 
@@ -1991,7 +1991,7 @@ msgstr "Poročaj o napaki ..."
 msgid "Resampling:"
 msgstr "Ponovno vzorčenje:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:62
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:505
 msgid "Reseed"
 msgstr "Osemeni"
 
@@ -2000,7 +2000,7 @@ msgstr "Osemeni"
 msgid "Reset"
 msgstr "Ponastavi"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:183
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:200
 msgid "Reset Color"
 msgstr "Ponastavi barvo"
 
@@ -2034,7 +2034,7 @@ msgstr "Prilagodi paleto"
 msgid "Restart Pinta"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:158
+#: ../Pinta.Effects/Effects/CellsEffect.cs:161
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
@@ -2103,11 +2103,11 @@ msgstr "Ravnila"
 msgid "Sampling"
 msgstr "Vzorčenje"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:390
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
 msgid "Sat"
 msgstr "Nas"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:272
 msgid "Sat & Value"
 msgstr "Nas in vrednost"
 
@@ -2191,7 +2191,7 @@ msgstr "Izostri"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:232
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
 msgid "Shortcut key"
 msgstr "Tipka bližnjice"
@@ -2212,7 +2212,7 @@ msgstr "Prikaži mrežo"
 msgid "Show Layer"
 msgstr "Prikaži plast"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:252
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
 msgid "Show Value"
 msgstr "Prikaži vrednost"
 
@@ -2450,7 +2450,7 @@ msgstr "Prozoren način"
 msgid "Transparent"
 msgstr "Prosojno"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:146
+#: ../Pinta.Effects/Effects/DentsEffect.cs:144
 msgid "Turbulence"
 msgstr "Turbolenca"
 
@@ -2528,7 +2528,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Nekatere ikone uporabljene od:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:412
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
 msgid "Value"
 msgstr "Vrednost"
 
@@ -2759,6 +2759,9 @@ msgstr "{0} palet ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
+
+#~ msgid "Random Noise"
+#~ msgstr "Naključni šum"
 
 #~ msgid "Choose Primary Color"
 #~ msgstr "Izberi osnovno barvo"

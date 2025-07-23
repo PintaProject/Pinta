@@ -74,20 +74,20 @@ public sealed class DentsEffect : BaseEffect
 		EffectData = new DentsData ();
 	}
 
-	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		Warp.Settings settings = Warp.CreateSettings (
 			Data,
 			live_preview.RenderBounds,
 			palette);
 
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, src.GetSize ()))
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
+		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ()))
 			dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
 				settings,
 				InverseTransform,
-				src,
+				source,
 				src_data[pixel.memoryOffset],
 				pixel);
 	}
@@ -132,23 +132,24 @@ public sealed class DentsEffect : BaseEffect
 
 public sealed class DentsData : EffectData, Warp.IEffectData
 {
-	[MinimumValue (1), MaximumValue (200)]
+	[MinimumValue (1), MaximumValue (200), IncrementValue (1)]
 	public double Scale { get; set; } = 25;
 
-	[MinimumValue (0), MaximumValue (200)]
+	[MinimumValue (0), MaximumValue (200), IncrementValue (1)]
 	public double Refraction { get; set; } = 50;
 
-	[MinimumValue (0), MaximumValue (100)]
+	[MinimumValue (0), MaximumValue (100), IncrementValue (1)]
 	public double Roughness { get; set; } = 10;
 
 	[Caption ("Turbulence")]
-	[MinimumValue (0), MaximumValue (100)]
+	[MinimumValue (0), MaximumValue (100), IncrementValue (1)]
 	public double Tension { get; set; } = 10;
 
 	[MinimumValue (0), MaximumValue (255)]
 	public RandomSeed Seed { get; set; } = new (0);
 
-	[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
+	[Caption ("Quality")]
+	[MinimumValue (1), MaximumValue (5)]
 	public int Quality { get; set; } = 2;
 
 	[Caption ("Center Offset")]

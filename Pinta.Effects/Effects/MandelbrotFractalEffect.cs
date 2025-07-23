@@ -72,7 +72,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		int factor,
 		bool invertColors,
 		ColorGradient<ColorBgra> colorGradient);
-	private MandelbrotSettings CreateSettings (ImageSurface dst)
+	private MandelbrotSettings CreateSettings (ImageSurface destination)
 	{
 		const double ZOOM_FACTOR = 20.0;
 
@@ -80,7 +80,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		// TODO: Remove if and when reading the property doesn't require casting
 		var data = Data;
 
-		Size canvasSize = new (dst.Width, dst.Height);
+		Size canvasSize = new (destination.Width, destination.Height);
 		double zoom = 1 + ZOOM_FACTOR * data.Zoom;
 		int count = data.Quality * data.Quality + 1;
 
@@ -115,15 +115,15 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		);
 	}
 
-	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		MandelbrotSettings settings = CreateSettings (dst);
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		MandelbrotSettings settings = CreateSettings (destination);
+		Span<ColorBgra> dst_data = destination.GetPixelData ();
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
 			dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 
 		if (settings.invertColors)
-			invert_effect.Render (dst, dst, [roi]);
+			invert_effect.Render (destination, destination, [roi]);
 	}
 
 	private static ColorBgra GetPixelColor (MandelbrotSettings settings, PointI target)
@@ -174,13 +174,16 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	public sealed class MandelbrotFractalData : EffectData
 	{
-		[Caption ("Factor"), MinimumValue (1), MaximumValue (10)]
+		[Caption ("Factor")]
+		[MinimumValue (1), MaximumValue (10)]
 		public int Factor { get; set; } = 1;
 
-		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
+		[Caption ("Quality")]
+		[MinimumValue (1), MaximumValue (5)]
 		public int Quality { get; set; } = 2;
 
-		[Caption ("Zoom"), MinimumValue (0), MaximumValue (100)]
+		[Caption ("Zoom")]
+		[MinimumValue (0), MaximumValue (100), IncrementValue (0.5)]
 		public double Zoom { get; set; } = 10;
 
 		[Caption ("Angle")]
