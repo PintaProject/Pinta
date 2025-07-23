@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-06 00:30+0000\n"
+"POT-Creation-Date: 2025-07-20 00:32+0000\n"
 "PO-Revision-Date: 2025-06-05 21:34+0000\n"
 "Last-Translator: taijuin Lee <taijuin@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
@@ -98,7 +98,7 @@ msgstr "對齊物件"
 msgid "All files"
 msgstr "所有檔案"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:500
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
 msgid "Alpha"
 msgstr "Alpha"
 
@@ -215,7 +215,7 @@ msgstr "混合模式"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:478
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
 msgid "Blue"
 msgstr "藍色"
 
@@ -292,7 +292,7 @@ msgstr "按百分比："
 
 #: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "取消"
@@ -309,7 +309,7 @@ msgstr "畫布網格設定"
 msgid "Canvas Grid..."
 msgstr "畫布網格..."
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:143
+#: ../Pinta.Effects/Effects/CellsEffect.cs:146
 msgid "Cell Radius"
 msgstr ""
 
@@ -317,7 +317,7 @@ msgstr ""
 msgid "Cell Size"
 msgstr "格子大小"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:18
+#: ../Pinta.Effects/Effects/CellsEffect.cs:21
 msgid "Cells"
 msgstr ""
 
@@ -333,8 +333,8 @@ msgstr "置中"
 msgid "Center Left"
 msgstr "中左"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:156
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
+#: ../Pinta.Effects/Effects/DentsEffect.cs:154
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:95
 msgid "Center Offset"
 msgstr "中心偏移"
 
@@ -428,7 +428,7 @@ msgstr "點擊以選取一相同顏色的區域。"
 msgid "Click to select secondary color."
 msgstr "按一下以選取次要顏色。"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:231
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Click to switch between primary and secondary color."
 msgstr "按一下以在主要顏色和次要顏色之間切換。"
@@ -504,18 +504,18 @@ msgid "Color Saturation"
 msgstr "顏色飽和度"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
-#: ../Pinta.Effects/Effects/CellsEffect.cs:152
+#: ../Pinta.Effects/Effects/CellsEffect.cs:155
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
 msgid "Color Scheme"
 msgstr "配色方案"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:161
+#: ../Pinta.Effects/Effects/CellsEffect.cs:164
 msgid "Color Scheme Edge Behavior"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:149
+#: ../Pinta.Effects/Effects/CellsEffect.cs:152
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
@@ -664,7 +664,7 @@ msgstr "差值"
 msgid "Distance"
 msgstr "距離"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:134
+#: ../Pinta.Effects/Effects/CellsEffect.cs:137
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:173
 msgid "Distance Metric"
 msgstr "距離公制"
@@ -951,7 +951,7 @@ msgstr "漸層"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:456
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
 msgid "Green"
 msgstr "綠色"
 
@@ -970,7 +970,7 @@ msgstr "實光"
 msgid "Height:"
 msgstr "高度："
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:338
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:354
 msgid "Hex"
 msgstr "Hex"
 
@@ -1003,11 +1003,11 @@ msgstr "水平紅色 (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:358
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
 msgstr "色調"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:260
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:281
 msgid "Hue & Sat"
 msgstr "色調和飽和度"
 
@@ -1513,7 +1513,7 @@ msgstr "正常大小"
 msgid "Normal and Outline"
 msgstr "一般及邊框"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:137
+#: ../Pinta.Effects/Effects/CellsEffect.cs:140
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:176
 msgid "Number of Cells"
 msgstr "格子數量"
@@ -1522,7 +1522,7 @@ msgstr "格子數量"
 msgid "Number of threads to use for rendering"
 msgstr "用於渲染的執行緒數量"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:210
 msgid "OK"
 msgstr "確定"
 
@@ -1819,11 +1819,11 @@ msgstr "主要"
 msgid "Print"
 msgstr "列印"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:164
-#: ../Pinta.Effects/Effects/DentsEffect.cs:153
+#: ../Pinta.Effects/Effects/CellsEffect.cs:167
+#: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:160
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
 msgid "Quality"
@@ -1871,7 +1871,7 @@ msgstr "半徑百分比"
 msgid "Random"
 msgstr "隨機"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:155
+#: ../Pinta.Effects/Effects/CellsEffect.cs:158
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
@@ -1885,10 +1885,10 @@ msgstr "隨機顏色"
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:178
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
-msgid "Random Noise"
-msgstr "不規則雜訊"
+msgid "Random Noise Seed"
+msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:140
+#: ../Pinta.Effects/Effects/CellsEffect.cs:143
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Random Point Locations"
 msgstr "隨機點位置"
@@ -1911,7 +1911,7 @@ msgstr "矩形選取工具"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:434
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
 msgid "Red"
 msgstr "紅色"
 
@@ -1951,7 +1951,7 @@ msgstr "醒目效果"
 msgid "Rename Layer"
 msgstr "更改圖層名稱"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:24
+#: ../Pinta.Effects/Effects/CellsEffect.cs:27
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
@@ -1959,7 +1959,7 @@ msgstr "更改圖層名稱"
 msgid "Render"
 msgstr "渲染"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:107
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
 msgid "Rendering Effect"
 msgstr "渲染特效"
 
@@ -1975,7 +1975,7 @@ msgstr "回報錯誤..."
 msgid "Resampling:"
 msgstr "重新取樣："
 
-#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:62
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:505
 msgid "Reseed"
 msgstr "變換"
 
@@ -1984,7 +1984,7 @@ msgstr "變換"
 msgid "Reset"
 msgstr "重設"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:183
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:200
 msgid "Reset Color"
 msgstr "重設顏色"
 
@@ -2018,7 +2018,7 @@ msgstr "調整調色盤大小"
 msgid "Restart Pinta"
 msgstr "重啟 Pinta"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:158
+#: ../Pinta.Effects/Effects/CellsEffect.cs:161
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
@@ -2087,11 +2087,11 @@ msgstr "尺規"
 msgid "Sampling"
 msgstr "取樣"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:390
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
 msgid "Sat"
 msgstr "飽和度"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:272
 msgid "Sat & Value"
 msgstr "飽和度與明度"
 
@@ -2175,7 +2175,7 @@ msgstr "銳利化"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:232
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
 msgid "Shortcut key"
 msgstr "快捷鍵"
@@ -2196,7 +2196,7 @@ msgstr "顯示網格"
 msgid "Show Layer"
 msgstr "顯示圖層"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:252
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
 msgid "Show Value"
 msgstr "顯示明度"
 
@@ -2428,7 +2428,7 @@ msgstr "透明模式"
 msgid "Transparent"
 msgstr "透明"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:146
+#: ../Pinta.Effects/Effects/DentsEffect.cs:144
 msgid "Turbulence"
 msgstr "湍流"
 
@@ -2506,7 +2506,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "由此取用一些圖示："
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:412
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
 msgid "Value"
 msgstr "明度"
 
@@ -2738,6 +2738,9 @@ msgstr "{0} 調色盤 ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Random Noise"
+#~ msgstr "不規則雜訊"
 
 #~ msgid "Choose Primary Color"
 #~ msgstr "選擇主要顏色"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-06 00:30+0000\n"
+"POT-Creation-Date: 2025-07-20 00:32+0000\n"
 "PO-Revision-Date: 2025-04-17 08:06+0000\n"
 "Last-Translator: Massimo S <info.max2@tiscali.it>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/pinta/pinta/it/"
@@ -98,7 +98,7 @@ msgstr "Allinea Oggetto"
 msgid "All files"
 msgstr "Tutti i Files"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:500
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -215,7 +215,7 @@ msgstr "Modalità fusione"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:478
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
 msgid "Blue"
 msgstr "Blu"
 
@@ -292,7 +292,7 @@ msgstr "In percentuale:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Annulla"
@@ -309,7 +309,7 @@ msgstr "Impostazioni Griglia Superficie"
 msgid "Canvas Grid..."
 msgstr "Griglia Superficie..."
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:143
+#: ../Pinta.Effects/Effects/CellsEffect.cs:146
 msgid "Cell Radius"
 msgstr ""
 
@@ -317,7 +317,7 @@ msgstr ""
 msgid "Cell Size"
 msgstr "Dimensione cella"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:18
+#: ../Pinta.Effects/Effects/CellsEffect.cs:21
 msgid "Cells"
 msgstr ""
 
@@ -333,8 +333,8 @@ msgstr "Allinea al centro"
 msgid "Center Left"
 msgstr "Sinistra Centro"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:156
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:101
+#: ../Pinta.Effects/Effects/DentsEffect.cs:154
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:95
 msgid "Center Offset"
 msgstr "Centra Offset"
 
@@ -429,7 +429,7 @@ msgstr "Fare click in una regione di colore simile."
 msgid "Click to select secondary color."
 msgstr "Clicca per selezionare il colore secondario."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:231
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
 msgid "Click to switch between primary and secondary color."
 msgstr "Clicca per passare dal colore primario a quello secondario."
@@ -505,18 +505,18 @@ msgid "Color Saturation"
 msgstr "Saturazione colore"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
-#: ../Pinta.Effects/Effects/CellsEffect.cs:152
+#: ../Pinta.Effects/Effects/CellsEffect.cs:155
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:206
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
 msgid "Color Scheme"
 msgstr "Schema di Colori"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:161
+#: ../Pinta.Effects/Effects/CellsEffect.cs:164
 msgid "Color Scheme Edge Behavior"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:149
+#: ../Pinta.Effects/Effects/CellsEffect.cs:152
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
@@ -665,7 +665,7 @@ msgstr "Differenza"
 msgid "Distance"
 msgstr "Distanza"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:134
+#: ../Pinta.Effects/Effects/CellsEffect.cs:137
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:173
 msgid "Distance Metric"
 msgstr "Distanza Metrica"
@@ -953,7 +953,7 @@ msgstr "Sfumatura"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:456
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
 msgid "Green"
 msgstr "Verde"
 
@@ -972,7 +972,7 @@ msgstr "Alte luci"
 msgid "Height:"
 msgstr "Altezza:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:338
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:354
 msgid "Hex"
 msgstr "Esadecimale"
 
@@ -1007,11 +1007,11 @@ msgstr "Rosso Orizzontale (R)"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:358
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
 msgstr "Tinta"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:260
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:281
 msgid "Hue & Sat"
 msgstr "Tonalità e saturazione"
 
@@ -1535,7 +1535,7 @@ msgstr "Dimensione normale"
 msgid "Normal and Outline"
 msgstr "Normale e contornato"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:137
+#: ../Pinta.Effects/Effects/CellsEffect.cs:140
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:176
 msgid "Number of Cells"
 msgstr "Numero delle Celle"
@@ -1544,7 +1544,7 @@ msgstr "Numero delle Celle"
 msgid "Number of threads to use for rendering"
 msgstr "Il numero di thread da usare per il rendering"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:210
 msgid "OK"
 msgstr "OK"
 
@@ -1845,11 +1845,11 @@ msgstr "Primario"
 msgid "Print"
 msgstr "Stampa"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:164
-#: ../Pinta.Effects/Effects/DentsEffect.cs:153
+#: ../Pinta.Effects/Effects/CellsEffect.cs:167
+#: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:160
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:98
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:92
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
 msgid "Quality"
@@ -1897,7 +1897,7 @@ msgstr "Percentuale Raggio"
 msgid "Random"
 msgstr "Casuale"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:155
+#: ../Pinta.Effects/Effects/CellsEffect.cs:158
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
@@ -1911,10 +1911,10 @@ msgstr "Colori Casuali"
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:178
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
-msgid "Random Noise"
-msgstr "Rumore casuale"
+msgid "Random Noise Seed"
+msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:140
+#: ../Pinta.Effects/Effects/CellsEffect.cs:143
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Random Point Locations"
 msgstr "Posizione Casuale dei Punti"
@@ -1937,7 +1937,7 @@ msgstr "Selezione rettangolare"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:434
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
 msgid "Red"
 msgstr "Rosso"
 
@@ -1977,7 +1977,7 @@ msgstr "Rilievo"
 msgid "Rename Layer"
 msgstr "Rinomina livello"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:24
+#: ../Pinta.Effects/Effects/CellsEffect.cs:27
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:38
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
@@ -1985,7 +1985,7 @@ msgstr "Rinomina livello"
 msgid "Render"
 msgstr "Renderizza"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:107
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
 msgid "Rendering Effect"
 msgstr "Effetti di rendering"
 
@@ -2001,7 +2001,7 @@ msgstr "Segnala Bug..."
 msgid "Resampling:"
 msgstr "Ricampionamento:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ReseedButtonWidget.cs:62
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:505
 msgid "Reseed"
 msgstr "Rigenera il seme"
 
@@ -2010,7 +2010,7 @@ msgstr "Rigenera il seme"
 msgid "Reset"
 msgstr "Azzera"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:183
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:200
 msgid "Reset Color"
 msgstr "Ripristina Colore"
 
@@ -2044,7 +2044,7 @@ msgstr "Ridimensiona Tavolozza"
 msgid "Restart Pinta"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:158
+#: ../Pinta.Effects/Effects/CellsEffect.cs:161
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
@@ -2113,11 +2113,11 @@ msgstr "Righelli"
 msgid "Sampling"
 msgstr "Campionamento"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:390
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
 msgid "Sat"
 msgstr "Saturazione"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:272
 msgid "Sat & Value"
 msgstr "Saturazione e luminosità"
 
@@ -2201,7 +2201,7 @@ msgstr "Nitidezza"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:232
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
 msgid "Shortcut key"
 msgstr "Scorciatoia"
@@ -2222,7 +2222,7 @@ msgstr "Mostra Griglia"
 msgid "Show Layer"
 msgstr "Mostra livello"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:252
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
 msgid "Show Value"
 msgstr "Mostra Valore"
 
@@ -2465,7 +2465,7 @@ msgstr "Modalità trasparenza"
 msgid "Transparent"
 msgstr "Trasparente"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:146
+#: ../Pinta.Effects/Effects/DentsEffect.cs:144
 msgid "Turbulence"
 msgstr "Turbolenza"
 
@@ -2544,7 +2544,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Utilizzando delle icone da:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:412
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
 msgid "Value"
 msgstr "Valore"
 
@@ -2803,6 +2803,9 @@ msgstr "{0} tavolozza ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Random Noise"
+#~ msgstr "Rumore casuale"
 
 #~ msgid "Choose Primary Color"
 #~ msgstr "Scegli il Colore Primario"
