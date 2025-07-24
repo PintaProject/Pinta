@@ -1,3 +1,5 @@
+using System.Data;
+
 namespace Pinta.Core;
 
 internal static class SettingNames
@@ -18,4 +20,14 @@ internal static class SettingNames
 	internal const string PRIMARY_COLOR = "primary-color";
 	internal const string SECONDARY_COLOR = "secondary-color";
 	internal const string RECENT_COLORS = "recently-used-colors";
+
+	internal static string ToolAntialias (BaseTool tool)
+	{
+		return $"{tool.GetType ().Name.ToLowerInvariant ()}-antialias";
+	}
+
+	internal static string ToolAlphaBlend (BaseTool tool)
+	{
+		return $"{tool.GetType ().Name.ToLowerInvariant ()}-alpha-blend";
+	}
 }

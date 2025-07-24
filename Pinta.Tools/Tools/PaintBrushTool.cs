@@ -41,8 +41,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 	private BasePaintBrush? active_brush;
 	private PointI? last_point = PointI.Zero;
 
-	private const string BRUSH_SETTING = "paint-brush-brush";
-
 	public PaintBrushTool (IServiceProvider services) : base (services)
 	{
 		brushes = services.GetService<IPaintBrushService> ();
@@ -164,7 +162,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 		base.OnSaveSettings (settings);
 
 		if (brush_combo_box is not null)
-			settings.PutSetting (BRUSH_SETTING, brush_combo_box.ComboBox.Active);
+			settings.PutSetting (SettingNames.PAINT_BRUSH_BRUSH, brush_combo_box.ComboBox.Active);
 	}
 
 	private Label? brush_label;
@@ -185,7 +183,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 				RebuildBrushComboBox ();
 
-				var brush = Settings.GetSetting (BRUSH_SETTING, 0);
+				var brush = Settings.GetSetting (SettingNames.PAINT_BRUSH_BRUSH, 0);
 
 				if (brush < brush_combo_box.ComboBox.Model.IterNChildren (null))
 					brush_combo_box.ComboBox.Active = brush;

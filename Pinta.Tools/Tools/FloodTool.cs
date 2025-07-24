@@ -55,8 +55,6 @@ public abstract class FloodTool : BaseTool
 	protected float Tolerance => (float) (ToleranceSlider.GetValue () / 100);
 	protected virtual bool CalculatePolygonSet => true;
 	protected bool LimitToSelection { get; set; } = true;
-	private string FILL_MODE_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-fill-mode";
-	private string FILL_TOLERANCE_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-fill-tolerance";
 
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
@@ -112,9 +110,9 @@ public abstract class FloodTool : BaseTool
 		base.OnSaveSettings (settings);
 
 		if (mode_button is not null)
-			settings.PutSetting (FILL_MODE_SETTING, mode_button.SelectedIndex);
+			settings.PutSetting (SettingNames.FloodToolFillMode (this), mode_button.SelectedIndex);
 		if (tolerance_slider is not null)
-			settings.PutSetting (FILL_TOLERANCE_SETTING, (int) tolerance_slider.GetValue ());
+			settings.PutSetting (SettingNames.FloodToolFillTolerance (this), (int) tolerance_slider.GetValue ());
 	}
 
 	protected virtual void OnFillRegionComputed (Document document, IReadOnlyList<IReadOnlyList<PointI>> polygonSet) { }
@@ -122,7 +120,7 @@ public abstract class FloodTool : BaseTool
 
 	protected Label ModeLabel => mode_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Flood Mode")));
 	protected Label ToleranceLabel => tolerance_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Tolerance")));
-	protected Scale ToleranceSlider => tolerance_slider ??= GtkExtensions.CreateToolBarSlider (0, 100, 1, Settings.GetSetting (FILL_TOLERANCE_SETTING, 0));
+	protected Scale ToleranceSlider => tolerance_slider ??= GtkExtensions.CreateToolBarSlider (0, 100, 1, Settings.GetSetting (SettingNames.FloodToolFillTolerance (this), 0));
 	protected Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 	protected ToolBarDropDownButton ModeDropDown {
@@ -133,7 +131,7 @@ public abstract class FloodTool : BaseTool
 				mode_button.AddItem (Translations.GetString ("Contiguous"), Pinta.Resources.Icons.ToolFreeformShape, true);
 				mode_button.AddItem (Translations.GetString ("Global"), Pinta.Resources.Icons.HelpWebsite, false);
 
-				mode_button.SelectedIndex = Settings.GetSetting (FILL_MODE_SETTING, 0);
+				mode_button.SelectedIndex = Settings.GetSetting (SettingNames.FloodToolFillMode (this), 0);
 			}
 
 			return mode_button;

@@ -44,12 +44,6 @@ public abstract class BaseTool
 
 	public const int DEFAULT_BRUSH_WIDTH = 2;
 
-	private string ANTIALIAS_SETTING
-		=> $"{GetType ().Name.ToLowerInvariant ()}-antialias";
-
-	private string ALPHABLEND_SETTING
-		=> $"{GetType ().Name.ToLowerInvariant ()}-alpha-blend";
-
 	protected BaseTool (IServiceProvider services)
 	{
 		Resources = services.GetService<IResourceService> ();
@@ -307,9 +301,10 @@ public abstract class BaseTool
 	protected virtual void OnSaveSettings (ISettingsService settings)
 	{
 		if (alphablending_button is not null)
-			settings.PutSetting (ALPHABLEND_SETTING, alphablending_button.SelectedIndex);
+			settings.PutSetting (SettingNames.ToolAlphaBlend (this), alphablending_button.SelectedIndex);
+
 		if (antialiasing_button is not null)
-			settings.PutSetting (ANTIALIAS_SETTING, antialiasing_button.SelectedIndex);
+			settings.PutSetting (SettingNames.ToolAntialias (this), antialiasing_button.SelectedIndex);
 	}
 
 	/// <summary>
@@ -350,7 +345,9 @@ public abstract class BaseTool
 				alphablending_button.AddItem (Translations.GetString ("Normal Blending"), Pinta.Resources.Icons.BlendingNormal, true);
 				alphablending_button.AddItem (Translations.GetString ("Overwrite"), Pinta.Resources.Icons.BlendingOverwrite, false);
 
-				alphablending_button.SelectedIndex = Settings.GetSetting (ALPHABLEND_SETTING, 0);
+				alphablending_button.SelectedIndex = Settings.GetSetting (
+					SettingNames.ToolAlphaBlend (this),
+					0);
 			}
 
 			return alphablending_button;
@@ -365,7 +362,9 @@ public abstract class BaseTool
 				antialiasing_button.AddItem (Translations.GetString ("Antialiasing On"), Pinta.Resources.Icons.AntiAliasingEnabled, true);
 				antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), Pinta.Resources.Icons.AntiAliasingDisabled, false);
 
-				antialiasing_button.SelectedIndex = Settings.GetSetting (ANTIALIAS_SETTING, 0);
+				antialiasing_button.SelectedIndex = Settings.GetSetting (
+					SettingNames.ToolAntialias (this),
+					0);
 
 				antialiasing_button.SelectedItemChanged += (object? sender, EventArgs e) => {
 					OnAntialiasingChanged ();

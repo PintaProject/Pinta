@@ -47,8 +47,6 @@ public class RecolorTool : BaseBrushTool
 	private PointI? last_point = null;
 	private BitMask? stencil;
 
-	private const string TOLERANCE_SETTING = "recolor-tolerance";
-
 	public RecolorTool (IServiceProvider services) : base (services)
 	{
 		workspace = services.GetService<IWorkspaceService> ();
@@ -168,7 +166,7 @@ public class RecolorTool : BaseBrushTool
 		base.OnSaveSettings (settings);
 
 		if (tolerance_slider is not null)
-			settings.PutSetting (TOLERANCE_SETTING, (int) tolerance_slider.GetValue ());
+			settings.PutSetting (SettingNames.RECOLOR_TOLERANCE, (int) tolerance_slider.GetValue ());
 	}
 
 	#region Private PDN Methods
@@ -196,6 +194,6 @@ public class RecolorTool : BaseBrushTool
 	private Separator? separator;
 
 	private Label ToleranceLabel => tolerance_label ??= Label.New (string.Format ("  {0}: ", Translations.GetString ("Tolerance")));
-	private Scale ToleranceSlider => tolerance_slider ??= GtkExtensions.CreateToolBarSlider (0, 100, 1, Settings.GetSetting (TOLERANCE_SETTING, 50));
+	private Scale ToleranceSlider => tolerance_slider ??= GtkExtensions.CreateToolBarSlider (0, 100, 1, Settings.GetSetting (SettingNames.RECOLOR_TOLERANCE, 50));
 	private Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
 }

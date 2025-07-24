@@ -39,10 +39,6 @@ public sealed class ColorPickerTool : BaseTool
 
 	private MouseButton button_down;
 
-	private const string TOOL_SELECTION_SETTING = "color-picker-tool-selection";
-	private const string SAMPLE_SIZE_SETTING = "color-picker-sample-size";
-	private const string SAMPLE_TYPE_SETTING = "color-picker-sample-type";
-
 	public ColorPickerTool (IServiceProvider services) : base (services)
 	{
 		palette = services.GetService<IPaletteService> ();
@@ -138,11 +134,11 @@ public sealed class ColorPickerTool : BaseTool
 		base.OnSaveSettings (settings);
 
 		if (tool_select is not null)
-			settings.PutSetting (TOOL_SELECTION_SETTING, tool_select.SelectedIndex);
+			settings.PutSetting (SettingNames.COLOR_PICKER_TOOL_SELECTION, tool_select.SelectedIndex);
 		if (sample_size is not null)
-			settings.PutSetting (SAMPLE_SIZE_SETTING, sample_size.SelectedIndex);
+			settings.PutSetting (SettingNames.COLOR_PICKER_SAMPLE_SIZE, sample_size.SelectedIndex);
 		if (sample_type is not null)
-			settings.PutSetting (SAMPLE_TYPE_SETTING, sample_type.SelectedIndex);
+			settings.PutSetting (SettingNames.COLOR_PICKER_SAMPLE_TYPE, sample_type.SelectedIndex);
 	}
 
 	private Color GetColorFromPoint (Document document, PointI point)
@@ -204,7 +200,7 @@ public sealed class ColorPickerTool : BaseTool
 				tool_select.AddItem (Translations.GetString ("Switch to previous tool"), Pinta.Resources.Icons.ToolColorPickerPreviousTool, 1);
 				tool_select.AddItem (Translations.GetString ("Switch to Pencil tool"), Pinta.Resources.Icons.ToolPencil, 2);
 
-				tool_select.SelectedIndex = Settings.GetSetting (TOOL_SELECTION_SETTING, 0);
+				tool_select.SelectedIndex = Settings.GetSetting (SettingNames.COLOR_PICKER_TOOL_SELECTION, 0);
 			}
 
 			return tool_select;
@@ -225,7 +221,7 @@ public sealed class ColorPickerTool : BaseTool
 				sample_size.AddItem (Translations.GetString ("7 x 7 Region"), Pinta.Resources.Icons.Sampling7, 7);
 				sample_size.AddItem (Translations.GetString ("9 x 9 Region"), Pinta.Resources.Icons.Sampling9, 9);
 
-				sample_size.SelectedIndex = Settings.GetSetting (SAMPLE_SIZE_SETTING, 0);
+				sample_size.SelectedIndex = Settings.GetSetting (SettingNames.COLOR_PICKER_SAMPLE_SIZE, 0);
 			}
 
 			return sample_size;
@@ -240,7 +236,7 @@ public sealed class ColorPickerTool : BaseTool
 				sample_type.AddItem (Translations.GetString ("Layer"), Pinta.Resources.Icons.LayerMergeDown, true);
 				sample_type.AddItem (Translations.GetString ("Image"), Pinta.Resources.Icons.ResizeCanvasBase, false);
 
-				sample_type.SelectedIndex = Settings.GetSetting (SAMPLE_TYPE_SETTING, 0);
+				sample_type.SelectedIndex = Settings.GetSetting (SettingNames.COLOR_PICKER_SAMPLE_TYPE, 0);
 			}
 
 			return sample_type;

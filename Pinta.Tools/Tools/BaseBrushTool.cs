@@ -40,8 +40,6 @@ public abstract class BaseBrushTool : BaseTool
 	protected bool surface_modified;
 	protected MouseButton mouse_button;
 
-	private string BRUSH_WIDTH_SETTING => $"{GetType ().Name.ToLowerInvariant ()}-brush-width";
-
 	protected BaseBrushTool (IServiceProvider services) : base (services)
 	{
 		Palette = services.GetService<IPaletteService> ();
@@ -112,12 +110,12 @@ public abstract class BaseBrushTool : BaseTool
 		base.OnSaveSettings (settings);
 
 		if (brush_width is not null)
-			settings.PutSetting (BRUSH_WIDTH_SETTING, brush_width.GetValueAsInt ());
+			settings.PutSetting (SettingNames.BrushWidth (this), brush_width.GetValueAsInt ());
 	}
 
 	private SpinButton? brush_width;
 	private Label? brush_width_label;
 
-	protected SpinButton BrushWidthSpinButton => brush_width ??= GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, Settings.GetSetting (BRUSH_WIDTH_SETTING, DEFAULT_BRUSH_WIDTH));
+	protected SpinButton BrushWidthSpinButton => brush_width ??= GtkExtensions.CreateToolBarSpinButton (1, 1e5, 1, Settings.GetSetting (SettingNames.BrushWidth (this), DEFAULT_BRUSH_WIDTH));
 	protected Label BrushWidthLabel => brush_width_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Brush width")));
 }

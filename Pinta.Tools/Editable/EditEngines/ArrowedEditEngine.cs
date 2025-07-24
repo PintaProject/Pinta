@@ -55,12 +55,6 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 	private Gtk.Box toolbar = null!;
 	private bool extra_toolbar_items_added = false;
 
-	private static string ARROW1_SETTING (string prefix) => $"{prefix}-arrow1";
-	private static string ARROW2_SETTING (string prefix) => $"{prefix}-arrow2";
-	private static string ARROW_SIZE_SETTING (string prefix) => $"{prefix}-arrow-size";
-	private static string ARROW_ANGLE_SETTING (string prefix) => $"{prefix}-arrow-angle";
-	private static string ARROW_LENGTH_SETTING (string prefix) => $"{prefix}-arrow-length";
-
 	private bool ArrowOneEnabled => ArrowOneEnabledCheckBox.Active;
 	private bool ArrowTwoEnabled => ArrowTwoEnabledCheckBox.Active;
 
@@ -74,19 +68,19 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 		base.OnSaveSettings (settings, toolPrefix);
 
 		if (show_arrow_one_box is not null)
-			settings.PutSetting (ARROW1_SETTING (toolPrefix), show_arrow_one_box.Active);
+			settings.PutSetting (SettingNames.Arrow1 (toolPrefix), show_arrow_one_box.Active);
 
 		if (show_arrow_two_box is not null)
-			settings.PutSetting (ARROW2_SETTING (toolPrefix), show_arrow_two_box.Active);
+			settings.PutSetting (SettingNames.Arrow2 (toolPrefix), show_arrow_two_box.Active);
 
 		if (arrow_size is not null)
-			settings.PutSetting (ARROW_SIZE_SETTING (toolPrefix), arrow_size.GetValueAsInt ());
+			settings.PutSetting (SettingNames.ArrowSize (toolPrefix), arrow_size.GetValueAsInt ());
 
 		if (arrow_angle_offset is not null)
-			settings.PutSetting (ARROW_ANGLE_SETTING (toolPrefix), arrow_angle_offset.GetValueAsInt ());
+			settings.PutSetting (SettingNames.ArrowAngle (toolPrefix), arrow_angle_offset.GetValueAsInt ());
 
 		if (arrow_length_offset is not null)
-			settings.PutSetting (ARROW_LENGTH_SETTING (toolPrefix), arrow_length_offset.GetValueAsInt ());
+			settings.PutSetting (SettingNames.ArrowLength (toolPrefix), arrow_length_offset.GetValueAsInt ());
 	}
 
 	public override void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
@@ -274,7 +268,7 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 	{
 		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel ("1");
 		result.FocusOnClick = false;
-		result.Active = settings.GetSetting (ARROW1_SETTING (tool_prefix), previous_settings_1.Show);
+		result.Active = settings.GetSetting (SettingNames.Arrow1 (tool_prefix), previous_settings_1.Show);
 		result.OnToggled += (o, e) => ArrowEnabledToggled (true);
 		return result;
 	}
@@ -286,7 +280,7 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 	{
 		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel ("2");
 		result.FocusOnClick = false;
-		result.Active = settings.GetSetting (ARROW2_SETTING (tool_prefix), previous_settings_2.Show);
+		result.Active = settings.GetSetting (SettingNames.Arrow2 (tool_prefix), previous_settings_2.Show);
 		result.OnToggled += (o, e) => ArrowEnabledToggled (false);
 		return result;
 	}
@@ -299,7 +293,7 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 
 	private Gtk.SpinButton CreateArrowSize ()
 	{
-		Gtk.SpinButton result = GtkExtensions.CreateToolBarSpinButton (1, 100, 1, settings.GetSetting (ARROW_SIZE_SETTING (tool_prefix), 10));
+		Gtk.SpinButton result = GtkExtensions.CreateToolBarSpinButton (1, 100, 1, settings.GetSetting (SettingNames.ArrowSize (tool_prefix), 10));
 		result.OnValueChanged += (o, e) => {
 			var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
 			if (activeEngine == null) return;
@@ -320,7 +314,7 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 
 	private Gtk.SpinButton CreateArrowAngleOffset ()
 	{
-		Gtk.SpinButton result = GtkExtensions.CreateToolBarSpinButton (-89, 89, 1, settings.GetSetting (ARROW_ANGLE_SETTING (tool_prefix), 15));
+		Gtk.SpinButton result = GtkExtensions.CreateToolBarSpinButton (-89, 89, 1, settings.GetSetting (SettingNames.ArrowAngle (tool_prefix), 15));
 		result.OnValueChanged += (o, e) => {
 			var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
 			if (activeEngine == null) return;
@@ -341,7 +335,7 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 
 	private Gtk.SpinButton CreateArrowLengthOffset ()
 	{
-		Gtk.SpinButton result = GtkExtensions.CreateToolBarSpinButton (-100, 100, 1, settings.GetSetting (ARROW_LENGTH_SETTING (tool_prefix), 10));
+		Gtk.SpinButton result = GtkExtensions.CreateToolBarSpinButton (-100, 100, 1, settings.GetSetting (SettingNames.ArrowLength (tool_prefix), 10));
 		result.OnValueChanged += (o, e) => {
 			var activeEngine = (LineCurveSeriesEngine?) ActiveShapeEngine;
 			if (activeEngine == null) return;
