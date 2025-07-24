@@ -109,15 +109,12 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 	private static ColorBgra GetPixelColor (JuliaSettings settings, PointI target)
 	{
-		int r = 0;
-		int g = 0;
-		int b = 0;
-		int a = 0;
+		Span<ColorBgra> samples = stackalloc ColorBgra[settings.count];
 
 		double baseTransfX = 2.0 * target.X - settings.canvasSize.Width;
 		double baseTransfY = 2.0 * target.Y - settings.canvasSize.Height;
 
-		for (double i = 0; i < settings.count; i++) {
+		for (int i = 0; i < settings.count; i++) {
 
 			PointD transformed = new (
 				X: (baseTransfX + (i * settings.invCount)) * settings.invH,
@@ -136,19 +133,10 @@ public sealed class JuliaFractalEffect : BaseEffect
 				settings.colorGradient.StartPosition,
 				settings.colorGradient.EndPosition);
 
-			ColorBgra colorAddend = settings.colorGradient.GetColor (c);
-
-			b += colorAddend.B;
-			g += colorAddend.G;
-			r += colorAddend.R;
-			a += colorAddend.A;
+			samples[i] = settings.colorGradient.GetColor (c);
 		}
 
-		return ColorBgra.FromBgra (
-			b: Utility.ClampToByte (b / settings.count),
-			g: Utility.ClampToByte (g / settings.count),
-			r: Utility.ClampToByte (r / settings.count),
-			a: Utility.ClampToByte (a / settings.count));
+		return ColorBgra.Blend (samples);
 	}
 
 	public sealed class JuliaFractalData : EffectData
