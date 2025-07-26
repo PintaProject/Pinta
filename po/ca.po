@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-07-09 17:01+0000\n"
+"PO-Revision-Date: 2025-07-26 14:06+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/pinta/pinta/ca/"
-">\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/pinta/pinta/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
-msgstr " (al directori de l'usuari)"
+msgstr " (al directori de l’usuari)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
 msgid " Selection Mode: "
@@ -100,11 +100,11 @@ msgstr "Tots els fitxers"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:211
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Degradat alfa"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:117
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:147
@@ -155,7 +155,7 @@ msgstr "Artístic"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
 msgid "Auto"
@@ -193,7 +193,7 @@ msgstr "Basat en el treball de Paint.NET:"
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Effects/GradientHelper.cs:24
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Bella Itàlia"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Best Fit"
@@ -278,7 +278,7 @@ msgstr "Abonyega"
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Burkes"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:80
@@ -303,11 +303,11 @@ msgstr "Llenç"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:92
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "Paràmetres de la graella del llenç"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:124
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Graella del llenç..."
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:146
 msgid "Cell Radius"
@@ -319,7 +319,7 @@ msgstr "Mida de la cel·la"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:21
 msgid "Cells"
-msgstr ""
+msgstr "Cel·les"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -416,7 +416,7 @@ msgstr "Feu clic per seleccionar el color primari."
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:49
 msgid "Click to select region of similar color."
-msgstr "Feu clic per triar una regió de color similar"
+msgstr "Feu clic per a seleccionar una regió de color similar."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
 msgid "Click to select secondary color."
@@ -478,7 +478,7 @@ msgstr "Sobreexposa el color"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:214
 msgid "Color Gradient"
-msgstr ""
+msgstr "Degradat de colors"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:203
 msgid "Color Mode"
@@ -551,25 +551,25 @@ msgstr "Copia visible"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "Copyright"
-msgstr "Copyright"
+msgstr "Drets d’autor"
 
 #. Translators: Gradient with the colors of blue and pink cotton candy
 #: ../Pinta.Effects/Effects/GradientHelper.cs:40
 msgid "Cotton Candy"
-msgstr ""
+msgstr "Cotó fluix de sucre"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:125
 #, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr ""
+msgstr "No s’ha pogut importar la capa «{0}» des de: {1}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:167
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:412
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
 msgid "Could not open file: {0}"
-msgstr "No s'ha pogut obrir el fitxer: {0}"
+msgstr "No s’ha pogut obrir el fitxer: {0}"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:175
 msgid "Coverage"
@@ -582,7 +582,7 @@ msgstr "Escapça la selecció"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:150
 msgid "Current Palette"
-msgstr ""
+msgstr "Paleta actual"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
@@ -608,7 +608,7 @@ msgstr "Retalla"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:250
 msgid "Dark"
-msgstr ""
+msgstr "Fosc"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
@@ -626,7 +626,7 @@ msgstr "Per defecte"
 #: ../Pinta.Core/Actions/LayerActions.cs:68
 #: ../Pinta.Core/Actions/LayerActions.cs:410
 msgid "Delete Layer"
-msgstr "Elimina la capa"
+msgstr "Suprimeix la capa"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:673
 msgid "Deleted"
@@ -675,11 +675,11 @@ msgstr "Distorsiona"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:14
 msgid "Dithering"
-msgstr ""
+msgstr "Tramat"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
 msgid "Do not switch tool"
-msgstr "No canviïs d'eina"
+msgstr "No canviïs d’eina"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:221
 #, csharp-format
@@ -762,7 +762,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
-msgstr ""
+msgstr "Paquets d’extensió"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:157
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
@@ -771,7 +771,7 @@ msgstr "Factor"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:85
 msgid "Failed to access XDG Desktop Portals"
-msgstr ""
+msgstr "No s’ha pogut accedir als portals d’escriptori XDG"
 
 #: ../Pinta/MainWindow.cs:320
 msgid "Failed to initialize add-in"
@@ -779,20 +779,20 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:199
 msgid "Failed to load extension package"
-msgstr ""
+msgstr "No s’ha pogut carregar el paquet d’extensió"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 msgid "Failed to open image"
-msgstr "Ha fallat la apertura de la imatge"
+msgstr "No s’ha pogut obrir la imatge"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:254
 msgid "Failed to save image"
-msgstr "Ha fallat en desar la imatge"
+msgstr "No s’ha pogut desar la imatge"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:84
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:109
 msgid "Failed to take screenshot"
-msgstr "No s'ha pogut realitzar la captura de pantalla"
+msgstr "No s’ha pogut fer la captura de pantalla"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:174
 msgid "Feather Canvas Edge"
@@ -816,7 +816,7 @@ msgstr "Omple el fons"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:220
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Omple el fons de l’objecte"
 
 #: ../Pinta.Core/Actions/EditActions.cs:134
 #: ../Pinta.Core/Actions/EditActions.cs:320
@@ -845,7 +845,7 @@ msgstr "Finalitzat"
 
 #: ../Pinta.Core/HistoryItems/FinishPixelsHistoryItem.cs:41
 msgid "Finish Pixels"
-msgstr "Finalitza píxels"
+msgstr "Finalitza els píxels"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:117
 #: ../Pinta.Core/Actions/ImageActions.cs:221
@@ -855,33 +855,33 @@ msgstr "Aplana"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "Aplanar la imatge fusionarà totes les capes en una de sola."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:84
 #: ../Pinta.Core/Actions/LayerActions.cs:95
 msgid "Flip Horizontal"
-msgstr "Inversió horitzontal"
+msgstr "Inverteix horitzontalment"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:51
 msgid "Flip Image Horizontal"
-msgstr "Inversió horitzontal"
+msgstr "Inverteix la imatge horitzontalment"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:55
 msgid "Flip Image Vertical"
-msgstr "Inversió vertical"
+msgstr "Inverteix la imatge verticalment"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:76
 msgid "Flip Layer Horizontal"
-msgstr "Inversió horitzontal de la capa"
+msgstr "Inverteix la capa horitzontalment"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:80
 msgid "Flip Layer Vertical"
-msgstr "Inversió vertical de la capa"
+msgstr "Inverteix la capa verticalment"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:90
 #: ../Pinta.Core/Actions/LayerActions.cs:101
 msgid "Flip Vertical"
-msgstr "Inversió vertical"
+msgstr "Inverteix verticalment"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:123
 msgid "Flood Mode"
@@ -890,7 +890,7 @@ msgstr "Mode Inundació"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "Floyd-Steinberg"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
@@ -1083,7 +1083,7 @@ msgstr "Instal·la"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Instal·la el paquet d’extensió"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
 msgid "Install from file..."
@@ -1272,6 +1272,8 @@ msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"Feu clic esquerre per a definir el color primari.\n"
+"Feu clic dret per a definir el color secundari."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:287
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -1314,7 +1316,7 @@ msgstr "Llicència"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:248
 msgid "Light"
-msgstr ""
+msgstr "Clar"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1378,7 +1380,7 @@ msgstr "Fractal de Mandelbrot"
 #. Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
 #: ../Pinta.Effects/Effects/GradientHelper.cs:52
 msgid "Martian Lava"
-msgstr ""
+msgstr "Lava marciana"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:24
 msgid "Median"
@@ -1437,7 +1439,7 @@ msgstr "Nom:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Veí més proper"
 
 #: ../Pinta.Core/Actions/FileActions.cs:63
 msgid "New"
@@ -1454,7 +1456,7 @@ msgstr "Captura de pantalla nova…"
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:62
 msgid "New palette size:"
-msgstr "Nova mida de paleta:"
+msgstr "Mida nova de la paleta:"
 
 #: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New..."
@@ -1462,7 +1464,7 @@ msgstr "Nou…"
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
-msgstr ""
+msgstr "No s’ha trobat cap element"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
 #: ../Pinta.Effects/Effects/MedianEffect.cs:28
@@ -1491,7 +1493,7 @@ msgstr "Normal i contorn"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:140
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:176
 msgid "Number of Cells"
-msgstr ""
+msgstr "Nombre de cel·les"
 
 #: ../Pinta/Main.cs:56
 msgid "Number of threads to use for rendering"
@@ -1499,13 +1501,13 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:210
 msgid "OK"
-msgstr ""
+msgstr "D’acord"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:23
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
 msgid "Object"
-msgstr ""
+msgstr "Objecte"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:168
@@ -1523,7 +1525,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
 msgid "Oil Painting"
-msgstr "Pintura a l'oli"
+msgstr "Pintura a l’oli"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:98
 msgid "Opacity:"
@@ -1846,7 +1848,7 @@ msgstr "Percentatge del radi"
 #: ../Pinta.Effects/Effects/GradientHelper.cs:17
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Random"
-msgstr ""
+msgstr "A l’atzar"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:158
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:209
@@ -1857,7 +1859,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:188
 msgid "Random Colors"
-msgstr ""
+msgstr "Colors a l’atzar"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:178
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
@@ -2159,15 +2161,15 @@ msgstr "Drecera de teclat"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
-msgstr ""
+msgstr "Dreceres de teclat"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
 msgid "Show Axonometric Grid"
-msgstr ""
+msgstr "Mostra la graella axonomètrica"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
 msgid "Show Grid"
-msgstr ""
+msgstr "Mostra la graella"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Show Layer"
@@ -2184,7 +2186,7 @@ msgstr "Mostra/amaga"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
@@ -2225,7 +2227,7 @@ msgstr "Quadrats"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:136
 msgid "Status Bar"
-msgstr "Barra d'estat"
+msgstr "Barra d’estat"
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:148
@@ -2235,7 +2237,7 @@ msgstr "Força"
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Stucki"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:33
@@ -2268,7 +2270,7 @@ msgstr "Estil del text"
 #: ../Pinta/MainWindow.cs:317
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr ""
+msgstr "El complement «{0}» pot no ser compatible amb aquesta versió del Pinta"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:208
 msgid "The clipboard does not contain an image."
@@ -2302,7 +2304,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:352
 msgid "The installation failed!"
-msgstr "La instal·lació ha fallat"
+msgstr "La instal·lació ha fallat."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:353
 msgid "The installation has completed with warnings."
@@ -2316,7 +2318,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:359
 msgid "The uninstallation failed!"
-msgstr "La desinstal·lació ha fallat"
+msgstr "La desinstal·lació ha fallat."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:360
 msgid "The uninstallation has completed with warnings."
@@ -2350,7 +2352,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
 msgid "Tip: Right-click to remove control points."
-msgstr "Consell: Feu clic amb el botó dret per eliminar punts de control."
+msgstr "Consell: feu clic dret per a eliminar punts de control."
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2457,11 +2459,11 @@ msgstr "Imatge sense desar {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:330
 msgid "Unsupported file format"
-msgstr "El format del fitxer no és compatible"
+msgstr "No s’admet el format del fitxer"
 
 #: ../Pinta.Core/Actions/EditActions.cs:518
 msgid "Unsupported palette format"
-msgstr ""
+msgstr "No s’admet el format de la paleta"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
@@ -2514,7 +2516,7 @@ msgstr ""
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
 msgid "Vignette"
-msgstr ""
+msgstr "Vinyetatge"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
@@ -2522,7 +2524,7 @@ msgstr "Visible"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Diagrama de Voronoi"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:132
 msgid "Warmth"
@@ -2565,7 +2567,7 @@ msgstr "XOR ({0} + clic dret)"
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:447
 #, csharp-format
 msgid "You do not have access to '{0}'."
-msgstr "No té accés a '{0}'."
+msgstr "No teniu accés a «{0}»."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:257
@@ -2573,15 +2575,15 @@ msgstr "No té accés a '{0}'."
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
-"No té accés a modificar '{0}'. El fitxer o la carpeta possiblement siga de "
-"només lectura."
+"No teniu accés per a modificar «{0}». El fitxer o carpeta pot ser de només "
+"lectura."
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:163
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
-msgstr "Zoom"
+msgstr "Escala"
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:24
 msgid "Zoom Blur"
@@ -2614,7 +2616,7 @@ msgstr "_Cancel·la"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
-msgstr ""
+msgstr "_Descarta"
 
 #: ../Pinta/MainWindow.cs:391
 msgid "_Edit"
@@ -2641,11 +2643,11 @@ msgstr "_Capes"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr ""
+msgstr "_D’acord"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr ""
+msgstr "_Desa"
 
 #: ../Pinta/MainWindow.cs:393
 msgid "_View"
