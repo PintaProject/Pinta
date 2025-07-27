@@ -16,9 +16,9 @@ partial struct ColorBgra
 		int diffB = a.B - b.B;
 		int diffA = a.A - b.A;
 
-		int summandR = (1 + diffR * diffR) * a.A / 256;
-		int summandG = (1 + diffG * diffG) * a.A / 256;
-		int summandB = (1 + diffB * diffB) * a.A / 256;
+		int summandR = diffR * diffR;
+		int summandG = diffG * diffG;
+		int summandB = diffB * diffB;
 		int summandA = diffA * diffA;
 
 		int sum = summandR + summandG + summandB + summandA;
