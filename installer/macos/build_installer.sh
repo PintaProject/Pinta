@@ -15,6 +15,8 @@ MAC_APP_BIN_DIR="${MAC_APP_DIR}/Contents/MacOS/"
 MAC_APP_RESOURCE_DIR="${MAC_APP_DIR}/Contents/Resources/"
 MAC_APP_SHARE_DIR="${MAC_APP_RESOURCE_DIR}/share"
 
+GTK_UPDATE_ICON_CACHE="$(brew --prefix gtk4)/bin/gtk4-update-icon-cache -f"
+
 run_codesign()
 {
     file=$1
@@ -43,6 +45,10 @@ echo "Bundling GTK..."
 ./bundle_gtk.py --runtime $runtimeid --resource_dir ${MAC_APP_RESOURCE_DIR}
 # Add the GTK lib dir to the library search path (for dlopen()), as an alternative to $DYLD_LIBRARY_PATH.
 install_name_tool -add_rpath "@executable_path/../Resources/lib" ${MAC_APP_BIN_DIR}/Pinta
+
+# Generate the icon theme cache.
+${GTK_UPDATE_ICON_CACHE} ${MAC_APP_SHARE_DIR}/icons/hicolor
+${GTK_UPDATE_ICON_CACHE} ${MAC_APP_SHARE_DIR}/icons/Adwaita
 
 touch ${MAC_APP_DIR}
 
