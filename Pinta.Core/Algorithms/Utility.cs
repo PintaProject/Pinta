@@ -94,20 +94,6 @@ public static class Utility
 		return unionsAggregate;
 	}
 
-	public static int ColorDifferenceSquared (in ColorBgra a, in ColorBgra b)
-	{
-		int r_diff = a.R - b.R;
-		int g_diff = a.G - b.G;
-		int b_diff = a.B - b.B;
-
-		int diffSq =
-			  (r_diff * r_diff)
-			+ (g_diff * g_diff)
-			+ (b_diff * b_diff);
-
-		return diffSq / 3;
-	}
-
 	public static string GetStaticName (Type type)
 	{
 		var pi = type.GetProperty ("StaticName", BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty);
@@ -423,12 +409,12 @@ public static class Utility
 	];
 
 	/// <summary>Gets the nearest step angle in radians.</summary>
-	/// 
+	///
 	/// <returns>The nearest step angle in radians.</returns>
-	/// 
+	///
 	/// <param name="angle">Angle in radians.</param>
 	/// <param name="steps">Number of steps to divide the circle.</param>
-	/// 
+	///
 	public static RadiansAngle GetNearestStepAngle (RadiansAngle angle, int steps)
 	{
 		ArgumentOutOfRangeException.ThrowIfLessThan (steps, 1);
