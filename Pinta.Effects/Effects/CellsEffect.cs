@@ -51,7 +51,10 @@ public sealed class CellsEffect : BaseEffect
 		ImmutableArray<PointD> samplingLocations,
 		Func<PointD, PointD, double> distanceCalculator,
 		ColorGradient<ColorBgra> colorGradient,
-		EdgeBehavior gradientEdgeBehavior);
+		EdgeBehavior gradientEdgeBehavior,
+		bool showPoints,
+		double pointSize,
+		ColorBgra pointColor);
 
 	private CellsSettings CreateSettings (ImageSurface destination)
 	{
@@ -81,7 +84,11 @@ public sealed class CellsEffect : BaseEffect
 			samplingLocations: Sampling.CreateSamplingOffsets (data.Quality),
 			distanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
 			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
-			gradientEdgeBehavior: data.ColorSchemeEdgeBehavior);
+			gradientEdgeBehavior: data.ColorSchemeEdgeBehavior,
+			showPoints: data.ShowPoints,
+			pointSize: data.PointSize,
+			pointColor: data.PointColor.ToColorBgra ()
+		);
 	}
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
@@ -120,7 +127,7 @@ public sealed class CellsEffect : BaseEffect
 				shortestDistance = distance;
 				closestIndex = i;
 			}
-			return
+			ColorBgra cellColor =
 				settings
 				.colorGradient
 				.GetColorExtended (
@@ -128,6 +135,10 @@ public sealed class CellsEffect : BaseEffect
 					settings.gradientEdgeBehavior,
 					original,
 					palette);
+			if (settings.showPoints && shortestDistance * 2 <= settings.pointSize)
+				return ColorBgra.Blend (cellColor, settings.pointColor, settings.pointColor.A).NewAlpha (255);
+			else
+				return cellColor;
 		}
 	}
 
@@ -136,18 +147,26 @@ public sealed class CellsEffect : BaseEffect
 		[Caption ("Distance Metric")]
 		public DistanceMetric DistanceMetric { get; set; } = DistanceMetric.Euclidean;
 
+		[Caption ("Random Point Locations")]
+		public RandomSeed RandomPointLocations { get; set; } = new (0);
+
+		[Caption ("Show Points")]
+		public bool ShowPoints { get; set; } = false;
+
+		[Caption ("Point Size")]
+		[MinimumValue (1), MaximumValue (16), IncrementValue (1)]
+		public double PointSize { get; set; } = 4;
+
+		[Caption ("Point Color")]
+		public Color PointColor { get; set; } = Color.Black;
+
 		[Caption ("Number of Cells")]
 		[MinimumValue (1), MaximumValue (1024)]
 		public int NumberOfCells { get; set; } = 100;
 
-		[Caption ("Random Point Locations")]
-		public RandomSeed RandomPointLocations { get; set; } = new (0);
-
 		[Caption ("Cell Radius")]
 		[MinimumValue (4), MaximumValue (100), IncrementValue (1)]
 		public double CellRadius { get; set; } = 32;
-
-		// TODO: Show points
 
 		[Caption ("Color Scheme Source")]
 		public ColorSchemeSource ColorSchemeSource { get; set; } = ColorSchemeSource.PresetGradient;

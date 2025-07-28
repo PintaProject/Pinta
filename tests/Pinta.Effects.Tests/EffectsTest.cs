@@ -142,6 +142,14 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Cells11 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.ShowPoints = true;
+		Utilities.TestEffect (effect, "cells11.png");
+	}
+
+	[Test]
 	public void Clouds1 ()
 	{
 		CloudsEffect effect = new (Utilities.CreateMockServices ());
