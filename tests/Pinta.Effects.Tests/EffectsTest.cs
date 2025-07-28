@@ -759,6 +759,14 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Voronoi6 ()
+	{
+		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		effect.Data.ShowPoints = true;
+		Utilities.TestEffect (effect, "voronoi6.png");
+	}
+
+	[Test]
 	public void ZoomBlur1 ()
 	{
 		ZoomBlurEffect effect = new (Utilities.CreateMockServices ());
