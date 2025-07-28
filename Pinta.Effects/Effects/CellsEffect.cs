@@ -54,7 +54,7 @@ public sealed class CellsEffect : BaseEffect
 		EdgeBehavior gradientEdgeBehavior,
 		bool showPoints,
 		double pointSize,
-		ColorBgra pointColor);
+		ColorBgra pointColor); // Blend method expects straight alpha!
 
 	private CellsSettings CreateSettings (ImageSurface destination)
 	{
