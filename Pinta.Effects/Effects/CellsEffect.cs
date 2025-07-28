@@ -127,7 +127,7 @@ public sealed class CellsEffect : BaseEffect
 				shortestDistance = distance;
 				closestIndex = i;
 			}
-			ColorBgra cellColor =
+			ColorBgra locationColor =
 				settings
 				.colorGradient
 				.GetColorExtended (
@@ -136,9 +136,9 @@ public sealed class CellsEffect : BaseEffect
 					original,
 					palette);
 			if (settings.showPoints && shortestDistance * 2 <= settings.pointSize)
-				return ColorBgra.Blend (cellColor, settings.pointColor, settings.pointColor.A).NewAlpha (255);
+				return ColorBgra.Blend (locationColor, settings.pointColor, settings.pointColor.A).NewAlpha (255);
 			else
-				return cellColor;
+				return locationColor;
 		}
 	}
 
