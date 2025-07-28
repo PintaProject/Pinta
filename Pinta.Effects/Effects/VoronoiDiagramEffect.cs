@@ -75,10 +75,6 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		IEnumerable<ColorBgra> positionSortedColors = SortColors (baseColors, colorSorting);
 		IEnumerable<ColorBgra> reversedSortingColors = data.ReverseColorSorting ? positionSortedColors.Reverse () : positionSortedColors;
 
-		bool showPoints = data.ShowPoints;
-		double pointSize = data.PointSize;
-
-
 		return new (
 			size: dst.GetSize (),
 			controlPoints: controlPoints,
