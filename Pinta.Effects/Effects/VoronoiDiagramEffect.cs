@@ -84,7 +84,6 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			showPoints: data.ShowPoints,
 			pointSize: data.PointSize,
 			pointColor: data.PointColor.ToColorBgra ()
-
 		);
 	}
 
