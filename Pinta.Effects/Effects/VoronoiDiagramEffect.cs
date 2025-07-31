@@ -51,8 +51,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		ImmutableArray<ColorBgra> colors,
 		Func<PointD, PointD, double> distanceCalculator,
 		bool showPoints,
-		double pointSize,
-		ColorBgra pointColor); // Blend method assumes straight alpha!
+		double pointSize);
 
 	private VoronoiSettings CreateSettings (ImageSurface dst)
 	{
@@ -82,9 +81,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			colors: [.. reversedSortingColors],
 			distanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
 			showPoints: data.ShowPoints,
-			pointSize: data.PointSize,
-			pointColor: data.PointColor.ToColorBgra ()
-		);
+			pointSize: data.PointSize);
 	}
 
 	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
@@ -124,7 +121,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			}
 			ColorBgra cellColor = settings.colors[closestIndex];
 			if (settings.showPoints && shortestDistance * 2 <= settings.pointSize)
-				return ColorBgra.Blend (cellColor, settings.pointColor, settings.pointColor.A).NewAlpha (255);
+				return ColorBgra.Black;
 			else
 				return cellColor;
 		}
@@ -205,9 +202,6 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		[Caption ("Point Size")]
 		[MinimumValue (1), MaximumValue (16), IncrementValue (1)]
 		public double PointSize { get; set; } = 4;
-
-		[Caption ("Point Color")]
-		public Color PointColor { get; set; } = Color.Black;
 
 		[Caption ("Quality")]
 		[MinimumValue (1), MaximumValue (4)]

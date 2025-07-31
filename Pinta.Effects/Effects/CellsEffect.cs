@@ -53,8 +53,7 @@ public sealed class CellsEffect : BaseEffect
 		ColorGradient<ColorBgra> colorGradient,
 		EdgeBehavior gradientEdgeBehavior,
 		bool showPoints,
-		double pointSize,
-		ColorBgra pointColor); // Blend method expects straight alpha!
+		double pointSize);
 
 	private CellsSettings CreateSettings (ImageSurface destination)
 	{
@@ -86,9 +85,7 @@ public sealed class CellsEffect : BaseEffect
 			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
 			gradientEdgeBehavior: data.ColorSchemeEdgeBehavior,
 			showPoints: data.ShowPoints,
-			pointSize: data.PointSize,
-			pointColor: data.PointColor.ToColorBgra ()
-		);
+			pointSize: data.PointSize);
 	}
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
@@ -136,7 +133,7 @@ public sealed class CellsEffect : BaseEffect
 					original,
 					palette);
 			if (settings.showPoints && shortestDistance * 2 <= settings.pointSize)
-				return ColorBgra.Blend (locationColor, settings.pointColor, settings.pointColor.A).NewAlpha (255);
+				return ColorBgra.Black;
 			else
 				return locationColor;
 		}
@@ -156,9 +153,6 @@ public sealed class CellsEffect : BaseEffect
 		[Caption ("Point Size")]
 		[MinimumValue (1), MaximumValue (16), IncrementValue (1)]
 		public double PointSize { get; set; } = 4;
-
-		[Caption ("Point Color")]
-		public Color PointColor { get; set; } = Color.Black;
 
 		[Caption ("Number of Cells")]
 		[MinimumValue (1), MaximumValue (1024)]
