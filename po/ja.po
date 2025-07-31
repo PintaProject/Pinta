@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-06-17 12:30+0000\n"
-"Last-Translator: mapleshi x <xmapleshi@gmail.com>\n"
-"Language-Team: Japanese <https://hosted.weblate.org/projects/pinta/pinta/ja/"
-">\n"
+"PO-Revision-Date: 2025-07-31 01:04+0000\n"
+"Last-Translator: tamotsu maruyama <tam.mar.3014@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/pinta/pinta/ja/>"
+"\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.1\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -155,7 +155,7 @@ msgstr "アート"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "アトキンソン"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
 msgid "Auto"
