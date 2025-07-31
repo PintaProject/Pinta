@@ -46,30 +46,28 @@ public sealed class ZoomBlurEffect : BaseEffect
 	private sealed record ZoomBlurSettings (
 		RectangleI sourceBounds,
 		Size size,
-		long fc_x,
-		long fc_y,
-		long fz);
+		long fcX,
+		long fcY,
+		long fZ);
 
 	private ZoomBlurSettings CreateSettings (ImageSurface source)
 	{
-		CenterOffset<double> offset = Data.Offset;
+		ZoomBlurData data = Data;
+		CenterOffset<double> offset = data.Offset;
 		Size size = source.GetSize ();
-		long w = source.Width;
-		long h = source.Height;
-		long fo_x = (long) (w * offset.Horizontal * 32768.0);
-		long fo_y = (long) (h * offset.Vertical * 32768.0);
+		long w = size.Width;
+		long h = size.Height;
+		long foX = (long) (w * offset.Horizontal * 32768.0);
+		long foY = (long) (h * offset.Vertical * 32768.0);
 		return new (
 			sourceBounds: source.GetBounds (),
 			size: size,
-			fc_x: fo_x + (w << 15),
-			fc_y: fo_y + (h << 15),
-			fz: Data.Amount);
+			fcX: foX + (w << 15),
+			fcY: foY + (h << 15),
+			fZ: data.Amount);
 	}
 
-	protected override void Render (
-		ImageSurface source,
-		ImageSurface destination,
-		RectangleI roi)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		if (Data.Amount == 0)
 			return; // Copy src to dest
@@ -93,44 +91,41 @@ public sealed class ZoomBlurEffect : BaseEffect
 	{
 		const int N = 64;
 
-		long fx = (pixel.coordinates.X << 16) - settings.fc_x;
-		long fy = (pixel.coordinates.Y << 16) - settings.fc_y;
+		long fx = (pixel.coordinates.X << 16) - settings.fcX;
+		long fy = (pixel.coordinates.Y << 16) - settings.fcY;
 
-		int sr = 0;
-		int sg = 0;
-		int sb = 0;
-		int sa = 0;
-		int sc = 0;
+		ColorBgra sourcePixel = sourceData[pixel.memoryOffset];
 
-		ColorBgra src_pixel = sourceData[pixel.memoryOffset];
-		sr += src_pixel.R;
-		sg += src_pixel.G;
-		sb += src_pixel.B;
-		sa += src_pixel.A;
-		++sc;
+		int sr = sourcePixel.R;
+		int sg = sourcePixel.G;
+		int sb = sourcePixel.B;
+		int sa = sourcePixel.A;
+
+		int sc = 1;
 
 		for (int i = 0; i < N; ++i) {
 
-			fx -= ((fx >> 4) * settings.fz) >> 10;
-			fy -= ((fy >> 4) * settings.fz) >> 10;
+			fx -= ((fx >> 4) * settings.fZ) >> 10;
+			fy -= ((fy >> 4) * settings.fZ) >> 10;
 
 			PointI transformed = new (
-				X: (int) (fx + settings.fc_x + 32768 >> 16),
-				Y: (int) (fy + settings.fc_y + 32768 >> 16));
+				X: (int) (fx + settings.fcX + 32768 >> 16),
+				Y: (int) (fy + settings.fcY + 32768 >> 16));
 
-			if (settings.sourceBounds.Contains (transformed)) {
+			if (!settings.sourceBounds.Contains (transformed))
+				continue;
 
-				ColorBgra src_pixel_2 = src.GetColorBgra (
-					sourceData,
-					settings.size.Width,
-					transformed);
+			ColorBgra src_pixel_2 = src.GetColorBgra (
+				sourceData,
+				settings.size.Width,
+				transformed);
 
-				sr += src_pixel_2.R;
-				sg += src_pixel_2.G;
-				sb += src_pixel_2.B;
-				sa += src_pixel_2.A;
-				++sc;
-			}
+			sr += src_pixel_2.R;
+			sg += src_pixel_2.G;
+			sb += src_pixel_2.B;
+			sa += src_pixel_2.A;
+
+			++sc;
 		}
 
 		return
@@ -145,7 +140,8 @@ public sealed class ZoomBlurEffect : BaseEffect
 
 	public sealed class ZoomBlurData : EffectData
 	{
-		[Caption ("Amount"), MinimumValue (0), MaximumValue (100)]
+		[Caption ("Amount")]
+		[MinimumValue (0), MaximumValue (100)]
 		public int Amount { get; set; } = 10;
 
 		[Caption ("Offset")]
