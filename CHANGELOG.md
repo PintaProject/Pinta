@@ -20,7 +20,7 @@ Thanks to the following contributors who worked on this release:
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
 - When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
 - Keyboard shortcuts are now displayed on all toolbar button tooltips (#1408, #1432)
-- Added a right click menu for layers, containing actions that can be applied to the selected layer (#1588) 
+- Added a right click menu for layers, containing actions that can be applied to the selected layer (#1588)
 - The Dithering effect can now use Pinta's current palette in addition to the effect's preset color palettes (#1594)
 - Random seed values for effects can now be directly controlled, in addition to use the Reseed button (#1592, #1591)
 - Support for color picking in `SimpleEffectDialog`. Useful for add-in developers (#1611)
@@ -39,6 +39,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed an issue where hiding a panel did not cause other panels to expand into the available space (#1472, #1500)
 - Fixed incorrect behavior with transparent colors in the Gradient tool (#1552, #1543)
 - Fixed issues where the layer widget did not show the correct selected layer when switching documents (#1602, #1573)
+- Fixed toolbar layout issues with displaying the cursor position and selection size (#1429, #1540)
 
 ## [3.0.2](https://github.com/PintaProject/Pinta/releases/tag/3.0.2) - 2025/07/06
 
