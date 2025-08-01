@@ -28,16 +28,4 @@ partial struct ColorBgra
 
 	public override readonly string ToString ()
 		=> $"B: {B}, G: {G}, R: {R}, A: {A}";
-
-	/// <summary>
-	/// Casts a ColorBgra to a UInt32.
-	/// </summary>
-	public static explicit operator uint (ColorBgra color)
-		=> color.BGRA;
-
-	/// <summary>
-	/// Casts a UInt32 to a ColorBgra.
-	/// </summary>
-	public static explicit operator ColorBgra (uint uint32)
-		=> FromUInt32 (uint32);
 }

@@ -66,7 +66,7 @@ partial class CairoExtensions
 		float v = y;
 
 		if (u < 0 || v < 0 || u >= srcWidth || v >= srcHeight)
-			return ColorBgra.FromUInt32 (0);
+			return ColorBgra.Transparent;
 
 		unchecked {
 			int iu = (int) Math.Floor (u);

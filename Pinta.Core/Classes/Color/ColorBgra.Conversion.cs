@@ -15,7 +15,7 @@ partial struct ColorBgra
 	/// Creates a new ColorBgra instance with the given color and alpha values.
 	/// </summary>
 	public static ColorBgra FromBgra (byte b, byte g, byte r, byte a)
-		=> new (BgraToUInt32 (b, g, r, a));
+		=> new (b, g, r, a);
 
 	/// <summary>
 	/// Creates a new ColorBgra instance with the given color and alpha values.

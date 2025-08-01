@@ -157,7 +157,7 @@ public sealed class RadialBlurEffect : BaseEffect
 				g: Utility.ClampToByte (sg / sc),
 				r: Utility.ClampToByte (sr / sc),
 				a: Utility.ClampToByte (sa / sc))
-			: ColorBgra.FromUInt32 (0);
+			: ColorBgra.Transparent;
 	}
 
 	public sealed class RadialBlurData : EffectData

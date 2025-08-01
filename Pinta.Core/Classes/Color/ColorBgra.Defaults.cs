@@ -5,7 +5,7 @@ partial struct ColorBgra
 	//// Colors copied from System.Drawing.Color's list
 	///
 	public static ColorBgra Transparent => Zero; // Note pre-multiplied alpha is used.
-	public static ColorBgra Zero => (ColorBgra) 0;
+	public static ColorBgra Zero => FromBgra (0, 0, 0, 0);
 
 	public static ColorBgra Black => FromBgra (0, 0, 0, 255);
 	public static ColorBgra Blue => FromBgra (255, 0, 0, 255);
