@@ -45,7 +45,7 @@ public static class PintaCore
 	public static WorkspaceManager Workspace { get; }
 	public static CanvasGridManager CanvasGrid { get; }
 
-	public const string ApplicationVersion = "3.0.2";
+	public const string ApplicationVersion = "3.0.3";
 	/// <summary>
 	/// The oldest version of Pinta for which add-ins built against it will still
 	/// run in the current version.

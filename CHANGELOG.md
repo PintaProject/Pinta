@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.2...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.3...HEAD)
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -11,6 +11,19 @@ Thanks to the following contributors who worked on this release:
 ### Changed
 
 ### Fixed
+
+## [3.0.3](https://github.com/PintaProject/Pinta/release/tag/3.0.3) - 2025/08/01
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+- @ericksson
+- @Lehonti
+
+### Fixed
+- Fixed a packaging issue for the macOS arm64 build which caused many icons to disappear (#1605)
+- Fixed an issue where hiding a panel did not cause other panels to expand into the available space (#1472, #1500)
+- Fixed incorrect behavior of the Atkinson method in the Dithering effect (#1489)
+
 
 ## [3.0.2](https://github.com/PintaProject/Pinta/release/tag/3.0.2) - 2025/07/06
 
@@ -42,7 +55,7 @@ Thanks to the following contributors who worked on this release:
 - Updated translations
 
 ### Fixed
-- Fixed an issue where the toolbar's height could change when switching tools (#1370, #1391) 
+- Fixed an issue where the toolbar's height could change when switching tools (#1370, #1391)
 - Fixed potential crashes when adjusting the brush width (#1340)
 - Fixed a bug on Windows where Pinta did not use the system's language for translations (#1473, #1493)
 
