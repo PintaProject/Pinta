@@ -49,7 +49,9 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		ImmutableArray<PointD> controlPoints,
 		ImmutableArray<PointD> samplingLocations,
 		ImmutableArray<ColorBgra> colors,
-		Func<PointD, PointD, double> distanceCalculator);
+		Func<PointD, PointD, double> distanceCalculator,
+		bool showPoints,
+		double pointSize);
 
 	private VoronoiSettings CreateSettings (ImageSurface dst)
 	{
@@ -77,8 +79,9 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			controlPoints: controlPoints,
 			samplingLocations: Sampling.CreateSamplingOffsets (data.Quality),
 			colors: [.. reversedSortingColors],
-			distanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric)
-		);
+			distanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
+			showPoints: data.ShowPoints,
+			pointSize: data.PointSize);
 	}
 
 	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
@@ -116,7 +119,11 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 				shortestDistance = distance;
 				closestIndex = i;
 			}
-			return settings.colors[closestIndex];
+			ColorBgra cellColor = settings.colors[closestIndex];
+			if (settings.showPoints && shortestDistance * 2 <= settings.pointSize)
+				return ColorBgra.Black;
+			else
+				return cellColor;
 		}
 	}
 
@@ -176,8 +183,6 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		[Caption ("Number of Cells"), MinimumValue (1), MaximumValue (1024)]
 		public int NumberOfCells { get; set; } = 100;
 
-		// TODO: Show points
-
 		[Caption ("Color Sorting")]
 		public ColorSorting ColorSorting { get; set; } = ColorSorting.Random;
 
@@ -190,6 +195,13 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		[Caption ("Random Point Locations")]
 		public RandomSeed RandomPointLocations { get; set; } = new (0);
+
+		[Caption ("Show Points")]
+		public bool ShowPoints { get; set; } = false;
+
+		[Caption ("Point Size")]
+		[MinimumValue (1), MaximumValue (16), IncrementValue (1)]
+		public double PointSize { get; set; } = 4;
 
 		[Caption ("Quality")]
 		[MinimumValue (1), MaximumValue (4)]

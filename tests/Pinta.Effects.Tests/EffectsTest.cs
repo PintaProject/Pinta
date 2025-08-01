@@ -142,6 +142,14 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Cells11 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.ShowPoints = true;
+		Utilities.TestEffect (effect, "cells11.png");
+	}
+
+	[Test]
 	public void Clouds1 ()
 	{
 		CloudsEffect effect = new (Utilities.CreateMockServices ());
@@ -756,6 +764,14 @@ internal sealed class EffectsTest
 		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
 		effect.Data.ColorSorting = VoronoiDiagramEffect.ColorSorting.VerticalB;
 		Utilities.TestEffect (effect, "voronoi5.png");
+	}
+
+	[Test]
+	public void Voronoi6 ()
+	{
+		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		effect.Data.ShowPoints = true;
+		Utilities.TestEffect (effect, "voronoi6.png");
 	}
 
 	[Test]
