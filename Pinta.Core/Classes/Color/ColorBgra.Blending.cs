@@ -131,10 +131,14 @@ partial struct ColorBgra
 	}
 
 	/// <summary>
-	/// Returns a new ColorBgra with the same color values but with a new alpha component value.
-	/// <remarks>This assumes straight alpha!</remarks>
+	/// Returns a new ColorBgra with an updated alpha component.
+	/// <remarks>The color components are also adjusted since premultiplied alpha is used.</remarks>
 	/// </summary>
-	public readonly ColorBgra NewAlpha (byte newA) => FromBgra (B, G, R, newA);
+	public readonly ColorBgra NewAlpha (byte newA)
+	{
+		ColorBgra sc = ToStraightAlpha ();
+		return new ColorBgra (sc.B, sc.G, sc.R, newA).ToPremultipliedAlpha ();
+	}
 
 	/// <summary>
 	/// Brings the color channels from straight alpha in premultiplied alpha form.

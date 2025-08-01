@@ -148,8 +148,7 @@ public abstract class GradientRenderer
 				byte lerpByte = ComputeByteLerp (x, y);
 				byte lerpAlpha = lerp_alphas[lerpByte];
 				ColorBgra original = row[x];
-				ColorBgra color = original.ToStraightAlpha ().NewAlpha (lerpAlpha);
-				row[x] = color.ToPremultipliedAlpha ();
+				row[x] = original.NewAlpha (lerpAlpha);
 			}
 		} else if (!AlphaOnly && (AlphaBlending && (startAlpha != 255 || endAlpha != 255))) {
 			// If we're doing all color channels, and we're doing alpha blending, and if alpha blending is necessary

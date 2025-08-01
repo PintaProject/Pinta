@@ -47,8 +47,8 @@ public sealed class OutlineObjectEffect : BaseEffect
 		int threads = system.RenderThreads;
 		int tolerance = Data.Tolerance;
 
-		ColorBgra primaryColor = palette.PrimaryColor.ToColorBgra ();
-		ColorBgra secondaryColor = palette.SecondaryColor.ToColorBgra ();
+		ColorBgra primaryColor = palette.PrimaryColor.ToColorBgra ().ToPremultipliedAlpha ();
+		ColorBgra secondaryColor = palette.SecondaryColor.ToColorBgra ().ToPremultipliedAlpha ();
 
 		ConcurrentBag<PointI> borderPixels = [];
 
@@ -186,12 +186,12 @@ public sealed class OutlineObjectEffect : BaseEffect
 					ColorBgra color = primaryColor;
 
 					if (Data.ColorGradient)
-						color = ColorBgra.Blend (secondaryColor, primaryColor, highestAlpha);
+						color = ColorBgra.Lerp (secondaryColor, primaryColor, highestAlpha);
 
 					if (!Data.AlphaGradient && highestAlpha != 0)
 						highestAlpha = 255;
 
-					outlineRow[x] = color.NewAlpha (highestAlpha).ToPremultipliedAlpha ();
+					outlineRow[x] = color.NewAlpha (highestAlpha);
 				}
 				// Performs alpha blending
 				new UserBlendOps.NormalBlendOp ().Apply (outlineRow, destRow);
