@@ -157,7 +157,7 @@ public sealed class FeatherEffect : BaseEffect
 					}
 
 					if (lowestAlpha < dst_data[pixel_index].A)
-						dst_data[pixel_index] = src_data[pixel_index].ToStraightAlpha ().NewAlpha (lowestAlpha).ToPremultipliedAlpha ();
+						dst_data[pixel_index] = src_data[pixel_index].NewAlpha (lowestAlpha);
 				}
 			}
 		);

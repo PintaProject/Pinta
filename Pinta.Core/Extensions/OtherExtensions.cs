@@ -34,12 +34,11 @@ public static class OtherExtensions
 	{
 		Span<byte> colorBytes = stackalloc byte[4];
 		random.NextBytes (colorBytes);
-		uint unsignedInteger = BitConverter.ToUInt32 (colorBytes);
-		ColorBgra baseColor = ColorBgra.FromUInt32 (unsignedInteger);
+		ColorBgra baseColor = ColorBgra.FromBgr (colorBytes[0], colorBytes[1], colorBytes[2]);
 		return
 			includeAlpha
-			? baseColor
-			: baseColor.NewAlpha (255);
+			? baseColor.NewAlpha (colorBytes[3])
+			: baseColor;
 	}
 
 	public static IReadOnlyList<IReadOnlyList<PointI>> CreatePolygonSet (
