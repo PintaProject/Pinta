@@ -38,6 +38,17 @@
     <binary>pinta</binary>
   </provides>
   <releases>
+    <release version="3.0.3" date="2025-08-01">
+      <url>https://github.com/PintaProject/Pinta/releases/tag/3.0.3</url>
+      <description>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Fixed a packaging issue for the macOS arm64 build which caused many icons to disappear (#1605)</li>
+          <li>Fixed an issue where hiding a panel did not cause other panels to expand into the available space (#1472, #1500)</li>
+          <li>Fixed incorrect behavior of the Atkinson method in the Dithering effect (#1489)</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.0.2" date="2025-07-06">
       <url>https://github.com/PintaProject/Pinta/releases/tag/3.0.2</url>
       <description>
