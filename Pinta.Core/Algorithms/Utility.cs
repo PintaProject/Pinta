@@ -429,10 +429,10 @@ public static class Utility
 	/// <summary>
 	/// Checks if all of the pixels in the row match the specified color.
 	/// </summary>
-	private static bool IsConstantRow (ImageSurface surf, Cairo.Color color, RectangleI rect, int y)
+	private static bool IsConstantRow (ImageSurface surf, ColorBgra color, RectangleI rect, int y)
 	{
 		for (int x = rect.Left; x < rect.Right; ++x)
-			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
+			if (surf.GetColorBgra (new (x, y)) != color)
 				return false;
 
 		return true;
@@ -441,10 +441,10 @@ public static class Utility
 	/// <summary>
 	/// Checks if all of the pixels in the column (within the bounds of the rectangle) match the specified color.
 	/// </summary>
-	private static bool IsConstantColumn (ImageSurface surf, Cairo.Color color, RectangleI rect, int x)
+	private static bool IsConstantColumn (ImageSurface surf, ColorBgra color, RectangleI rect, int x)
 	{
 		for (int y = rect.Top; y < rect.Bottom; ++y)
-			if (!color.Equals (surf.GetColorBgra (new (x, y)).ToCairoColor ()))
+			if (surf.GetColorBgra (new (x, y)) != color)
 				return false;
 
 		return true;
@@ -455,7 +455,7 @@ public static class Utility
 		// Use the entire image bounds by default, or restrict to the provided search area.
 		RectangleI rect = searchArea ?? image.GetBounds ();
 		// Get the background color from the top-left pixel of the rectangle
-		Color borderColor = image.GetColorBgra (new PointI (rect.Left, rect.Top)).ToCairoColor ();
+		ColorBgra borderColor = image.GetColorBgra (new PointI (rect.Left, rect.Top));
 
 		// Top down.
 		for (int y = rect.Top; y < rect.Bottom; ++y) {
