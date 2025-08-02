@@ -103,11 +103,11 @@ public sealed class GradientTool : BaseTool
 		var gr = CreateGradientRenderer ();
 
 		if (button == MouseButton.Right) {
-			gr.StartColor = palette.SecondaryColor.ToColorBgra ().ToPremultipliedAlpha ();
-			gr.EndColor = palette.PrimaryColor.ToColorBgra ().ToPremultipliedAlpha ();
+			gr.StartColor = palette.SecondaryColor.ToColorBgra ();
+			gr.EndColor = palette.PrimaryColor.ToColorBgra ();
 		} else {
-			gr.StartColor = palette.PrimaryColor.ToColorBgra ().ToPremultipliedAlpha ();
-			gr.EndColor = palette.SecondaryColor.ToColorBgra ().ToPremultipliedAlpha ();
+			gr.StartColor = palette.PrimaryColor.ToColorBgra ();
+			gr.EndColor = palette.SecondaryColor.ToColorBgra ();
 		}
 
 		gr.StartPoint = startpoint;

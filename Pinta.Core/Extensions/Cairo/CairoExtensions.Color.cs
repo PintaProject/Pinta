@@ -46,19 +46,30 @@ partial class CairoExtensions
 			color.B,
 			color.A);
 
+	/// <summary>
+	/// Convert from Cairo.Color to ColorBgra.
+	/// </summary>
+	/// <remarks>This converts from straight to premultiplied alpha.</remarks>
 	public static ColorBgra ToColorBgra (this Cairo.Color color)
 		=> ColorBgra.FromBgra (
 			b: (byte) (color.B * 255),
 			g: (byte) (color.G * 255),
 			r: (byte) (color.R * 255),
-			a: (byte) (color.A * 255));
+			a: (byte) (color.A * 255)).ToPremultipliedAlpha ();
 
+	/// <summary>
+	/// Convert from ColorBgra to Cairo.Color
+	/// </summary>
+	/// <remarks>This converts from premultiplied to straight alpha.</remarks>
 	public static Cairo.Color ToCairoColor (this ColorBgra color)
-		=> new (
-			R: color.R / 255d,
-			G: color.G / 255d,
-			B: color.B / 255d,
-			A: color.A / 255d);
+	{
+		ColorBgra sc = color.ToStraightAlpha ();
+		return new (
+			R: sc.R / 255d,
+			G: sc.G / 255d,
+			B: sc.B / 255d,
+			A: sc.A / 255d);
+	}
 
 	public static void AddColorStop (
 		this Gradient gradient,

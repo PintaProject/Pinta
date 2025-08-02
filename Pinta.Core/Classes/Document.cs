@@ -268,7 +268,7 @@ public sealed class Document
 
 		foreach (var layer in Layers.GetLayersToPaint ()) {
 
-			Color color = layer.Surface.GetColorBgra (position).ToStraightAlpha ().ToCairoColor ();
+			Color color = layer.Surface.GetColorBgra (position).ToCairoColor ();
 
 			g.SetBlendMode (layer.BlendMode);
 			g.SetSourceColor (color);

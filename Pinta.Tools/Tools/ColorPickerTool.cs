@@ -145,7 +145,7 @@ public sealed class ColorPickerTool : BaseTool
 	{
 		var pixels = GetPixelsFromPoint (document, point);
 		var color = ColorBgra.Blend (pixels.AsSpan ());
-		return color.ToStraightAlpha ().ToCairoColor ();
+		return color.ToCairoColor ();
 	}
 
 	private ImmutableArray<ColorBgra> GetPixelsFromPoint (Document document, PointI point)

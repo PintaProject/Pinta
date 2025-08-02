@@ -47,8 +47,8 @@ public sealed class OutlineObjectEffect : BaseEffect
 		int threads = system.RenderThreads;
 		int tolerance = Data.Tolerance;
 
-		ColorBgra primaryColor = palette.PrimaryColor.ToColorBgra ().ToPremultipliedAlpha ();
-		ColorBgra secondaryColor = palette.SecondaryColor.ToColorBgra ().ToPremultipliedAlpha ();
+		ColorBgra primaryColor = palette.PrimaryColor.ToColorBgra ();
+		ColorBgra secondaryColor = palette.SecondaryColor.ToColorBgra ();
 
 		ConcurrentBag<PointI> borderPixels = [];
 
