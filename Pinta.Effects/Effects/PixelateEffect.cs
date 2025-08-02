@@ -56,18 +56,16 @@ public sealed class PixelateEffect : BaseEffect
 		int bottom = cell.Bottom;
 		int top = cell.Top;
 
-		ColorBgra colorTopLeft = src_data[top * srcBounds.Width + left].ToStraightAlpha ();
-		ColorBgra colorTopRight = src_data[top * srcBounds.Width + right].ToStraightAlpha ();
-		ColorBgra colorBottomLeft = src_data[bottom * srcBounds.Width + left].ToStraightAlpha ();
-		ColorBgra colorBottomRight = src_data[bottom * srcBounds.Width + right].ToStraightAlpha ();
+		ColorBgra colorTopLeft = src_data[top * srcBounds.Width + left];
+		ColorBgra colorTopRight = src_data[top * srcBounds.Width + right];
+		ColorBgra colorBottomLeft = src_data[bottom * srcBounds.Width + left];
+		ColorBgra colorBottomRight = src_data[bottom * srcBounds.Width + right];
 
-		ColorBgra c = ColorBgra.BlendColors4W16IP (
+		return ColorBgra.BlendColors4W16IP (
 			colorTopLeft, 16384,
 			colorTopRight, 16384,
 			colorBottomLeft, 16384,
 			colorBottomRight, 16384);
-
-		return c.ToPremultipliedAlpha ();
 	}
 
 	private static RectangleI GetCellBox (int x, int y, int cellSize)
