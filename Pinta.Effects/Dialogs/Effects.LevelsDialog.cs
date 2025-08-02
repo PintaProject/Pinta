@@ -282,6 +282,7 @@ public partial class LevelsDialog : Gtk.Dialog
 		UpdateInputHistogram ();
 		Reset ();
 		UpdateLevels ();
+		MaskChanged ();
 
 		Gtk.Box CreateLabelledWidget (Gtk.Widget widget, string label)
 		{
@@ -584,17 +585,12 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private void MaskChanged ()
 	{
-		uint maxBgra =
-			ColorBgra.Black.BGRA
-			| (mask.R ? (uint) 0xFF0000 : 0)
-			| (mask.G ? (uint) 0xFF00 : 0)
-			| (mask.B ? (uint) 0xFF : 0);
-
-		ColorBgra max = ColorBgra.FromUInt32 (maxBgra);
-
-		Color maxcolor = max.ToCairoColor ();
-		gradient_input.MaxColor = maxcolor;
-		gradient_output.MaxColor = maxcolor;
+		Color maxColor = new (
+			r: mask.R ? 1 : 0,
+			g: mask.G ? 1 : 0,
+			b: mask.B ? 1 : 0);
+		gradient_input.MaxColor = maxColor;
+		gradient_output.MaxColor = maxColor;
 
 		for (int i = 0; i < 3; i++) {
 			histogram_input.SetSelected (i, mask[i]);
