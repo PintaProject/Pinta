@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.2...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.3...HEAD)
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -35,11 +35,21 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug where cancelling the color picker dialog could still update the palette colors (#1390, #1411)
 - The text tool's "Normal and Outline" mode now draws the outline behind the text to avoid obscuring it (#1423, #1426)
 - Improved the handling of negative angle values in the Rotate / Zoom Layer dialog (#1142, #1440)
-- Fixed incorrect behavior of the Atkinson method in the Dithering effect (#1489)
-- Fixed an issue where hiding a panel did not cause other panels to expand into the available space (#1472, #1500)
 - Fixed incorrect behavior with transparent colors in the Gradient tool (#1552, #1543)
 - Fixed issues where the layer widget did not show the correct selected layer when switching documents (#1602, #1573)
 - Fixed toolbar layout issues with displaying the cursor position and selection size (#1429, #1540)
+
+## [3.0.3](https://github.com/PintaProject/Pinta/release/tag/3.0.3) - 2025/08/01
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+- @ericksson
+- @Lehonti
+
+### Fixed
+- Fixed a packaging issue for the macOS arm64 build which caused many icons to disappear (#1605)
+- Fixed an issue where hiding a panel did not cause other panels to expand into the available space (#1472, #1500)
+- Fixed incorrect behavior of the Atkinson method in the Dithering effect (#1489)
 
 ## [3.0.2](https://github.com/PintaProject/Pinta/releases/tag/3.0.2) - 2025/07/06
 
