@@ -65,7 +65,6 @@ Pinta.Core/Classes/RenderHandle.cs
 Pinta.Core/Classes/ScaleFactor.cs
 Pinta.Core/Classes/Scanline.cs
 Pinta.Core/Classes/SelectionModeHandler.cs
-Pinta.Core/Classes/SettingNames.cs
 Pinta.Core/Classes/SplineInterpolator.cs
 Pinta.Core/Classes/SurfaceDiff.cs
 Pinta.Core/Classes/Translations.cs
@@ -198,6 +197,7 @@ Pinta.Core/PaletteFormats/PaintDotNetPalette.cs
 Pinta.Core/PaletteFormats/PaintShopProPalette.cs
 Pinta.Core/PaletteFormats/PaletteDescriptor.cs
 Pinta.Core/PintaCore.cs
+Pinta.Core/SettingNames.cs
 Pinta.Core/Widgets/ToolBarDropDownButton.cs
 Pinta.Docking/Dock.cs
 Pinta.Docking/DockItem.cs
@@ -238,7 +238,6 @@ Pinta.Effects/Effects/FragmentEffect.cs
 Pinta.Effects/Effects/FrostedGlassEffect.cs
 Pinta.Effects/Effects/GaussianBlurEffect.cs
 Pinta.Effects/Effects/GlowEffect.cs
-Pinta.Effects/Effects/GradientHelper.cs
 Pinta.Effects/Effects/InkSketchEffect.cs
 Pinta.Effects/Effects/JuliaFractalEffect.cs
 Pinta.Effects/Effects/MandelbrotFractalEffect.cs
@@ -265,6 +264,7 @@ Pinta.Effects/Effects/ZoomBlurEffect.cs
 Pinta.Effects/FriendAssemblies.cs
 Pinta.Effects/Utilities/EffectHelper.cs
 Pinta.Effects/Utilities/GradientExtensions.cs
+Pinta.Effects/Utilities/GradientHelper.cs
 Pinta.Effects/Utilities/PaletteHelper.cs
 Pinta.Effects/Utilities/SrgbUtility.cs
 Pinta.Gui.Addins/AddinInfoView.cs
@@ -297,6 +297,7 @@ Pinta.Gui.Widgets/Widgets/History/HistoryListView.cs
 Pinta.Gui.Widgets/Widgets/Layers/LayersListView.cs
 Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs
 Pinta.Gui.Widgets/Widgets/PaletteWidget.cs
+Pinta.Gui.Widgets/Widgets/PintaColorButton.cs
 Pinta.Gui.Widgets/Widgets/PointPickerGraphic.cs
 Pinta.Gui.Widgets/Widgets/PointPickerWidget.cs
 Pinta.Gui.Widgets/Widgets/Ruler.cs
@@ -330,6 +331,7 @@ Pinta.Tools/Handles/MoveHandle.cs
 Pinta.Tools/Handles/RectangleHandle.cs
 Pinta.Tools/HistoryItems/ShapesHistoryItem.cs
 Pinta.Tools/HistoryItems/ShapesModifyHistoryItem.cs
+Pinta.Tools/SettingNames.cs
 Pinta.Tools/Tools/BaseBrushTool.cs
 Pinta.Tools/Tools/BaseTransformTool.cs
 Pinta.Tools/Tools/CloneStampTool.cs
