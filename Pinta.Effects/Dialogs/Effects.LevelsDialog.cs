@@ -616,7 +616,7 @@ public partial class LevelsDialog : Gtk.Dialog
 		MaskChanged ();
 	}
 
-	private void HandleColorPanelButtonPressEvent (
+	private async void HandleColorPanelButtonPressEvent (
 		Gtk.GestureClick controller,
 		Gtk.GestureClick.PressedSignalArgs args)
 	{
@@ -626,13 +626,22 @@ public partial class LevelsDialog : Gtk.Dialog
 		ColorPanelWidget panel = (ColorPanelWidget?) controller.GetWidget () ??
 				throw new Exception ("Controller widget should be non-null");
 
-		var ccd = Gtk.ColorChooserDialog.New (Translations.GetString ("Choose Color"), chrome.MainWindow);
-		ccd.UseAlpha = true;
-		ccd.SetColor (panel.CairoColor);
+		using ColorPickerDialog dialog = new (
+			this,
+			PintaCore.Palette,
+			new SingleColor (panel.CairoColor),
+			primarySelected: true,
+			false,
+			Translations.GetString ("Choose Color"));
 
-		var response = ccd.RunBlocking ();
-		if (response == Gtk.ResponseType.Ok) {
-			ccd.GetColor (out var cairo_color);
+		try {
+			Gtk.ResponseType response = await dialog.RunAsync ();
+
+			if (response != Gtk.ResponseType.Ok)
+				return;
+
+			var pick = (SingleColor) dialog.Colors;
+			Cairo.Color cairo_color = pick.Color;
 			ColorBgra col = cairo_color.ToColorBgra ();
 
 			if (panel == colorpanel_in_low) {
@@ -658,11 +667,11 @@ public partial class LevelsDialog : Gtk.Dialog
 			} else if (panel == colorpanel_out_high) {
 				Levels.ColorOutHigh = col;
 			}
+
+			UpdateFromLevelsOp ();
+			UpdateLevels ();
+		} finally {
+			dialog.Destroy ();
 		}
-
-		ccd.Destroy ();
-
-		UpdateFromLevelsOp ();
-		UpdateLevels ();
 	}
 }
