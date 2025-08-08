@@ -25,10 +25,10 @@ See `license-pdn.txt` for Paint.Net's original license.
 - [Paint.Net 3.0](http://www.getpaint.net/)
 Used under [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
-- [Silk icon set](http://www.famfamfam.com/lab/icons/silk/)
+- [Silk icon set](https://github.com/markjames/famfamfam-silk-icons)
 Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
 
-- [Fugue icon set](http://pinvoke.com/)
+- [Fugue icon set](https://p.yusukekamiyamane.com)
 Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/)
 
 - Pinta contributors, under the same license as the project itself
