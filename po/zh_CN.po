@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-07-09 17:01+0000\n"
-"Last-Translator: 玉堂白鹤 <yjwork@qq.com>\n"
+"PO-Revision-Date: 2025-08-06 11:02+0000\n"
+"Last-Translator: Jingtao Yan <yanjingtao@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/pinta/pinta/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -323,7 +323,7 @@ msgstr "单元格"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "居中"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:240
 msgid "Center Align"
@@ -331,7 +331,7 @@ msgstr "居中对齐"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "左侧居中"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:154
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:95
@@ -340,7 +340,7 @@ msgstr "中心偏移"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "右侧居中"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:151
 msgid "Centered"
