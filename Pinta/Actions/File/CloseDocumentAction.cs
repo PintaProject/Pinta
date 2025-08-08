@@ -57,16 +57,16 @@ internal sealed class CloseDocumentAction : IActionHandler
 		actions.File.Close.Activated -= Activated;
 	}
 
-    private void Activated (object sender, EventArgs e)
-    {
-        // If the document is already clean, close it without committing.
-        if (!workspace.ActiveDocument.IsDirty) {
-            workspace.CloseActiveDocument (actions);
-            return;
-        }
+	private void Activated (object sender, EventArgs e)
+	{
+		// If the document is already clean, close it without committing.
+		if (!workspace.ActiveDocument.IsDirty) {
+			workspace.CloseActiveDocument (actions);
+			return;
+		}
 
-        // Commit any pending changes before prompting to save/discard.
-        tools.Commit ();
+		// Commit any pending changes before prompting to save/discard.
+		tools.Commit ();
 
 		string heading = Translations.GetString (
 			"Save changes to image \"{0}\" before closing?",
