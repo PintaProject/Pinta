@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-08-09 11:00+0000\n"
+"PO-Revision-Date: 2025-08-09 11:07+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -2734,7 +2734,7 @@ msgstr ""
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr ""
-"{0} + linkermuisknop om startpunt in te stellen - linkermuisknop om te "
+"{0} + linkermuisknop om oorsprong in te stellen. Linkermuisknop om te "
 "tekenen."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
