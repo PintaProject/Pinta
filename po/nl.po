@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-08-09 13:41+0000\n"
+"PO-Revision-Date: 2025-08-09 13:43+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -103,7 +103,7 @@ msgstr "Alfa"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:211
 msgid "Alpha Gradient"
-msgstr "Alfa-kleur"
+msgstr "Alfa"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:117
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:147
