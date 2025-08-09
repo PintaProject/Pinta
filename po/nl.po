@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-08-09 13:15+0000\n"
+"PO-Revision-Date: 2025-08-09 13:41+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -103,7 +103,7 @@ msgstr "Alfa"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:211
 msgid "Alpha Gradient"
-msgstr "Alfa-kleurverloop"
+msgstr "Alfa-kleur"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:117
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:147
@@ -532,7 +532,7 @@ msgstr "Inkleuren"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:188
 msgid "Conical Gradient"
-msgstr "Conisch verloop"
+msgstr "Konisch"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "Contents"
@@ -540,7 +540,7 @@ msgstr "Inhoud"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:133
 msgid "Contiguous"
-msgstr "Aangrenzend"
+msgstr "Aaneengesloten"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:158
 #: ../Pinta.Effects/Effects/GlowEffect.cs:84
@@ -645,7 +645,7 @@ msgstr "Deuken"
 
 #: ../Pinta.Core/Actions/EditActions.cs:382
 msgid "Deselect"
-msgstr "Deselecteren"
+msgstr "Selectie opheffen"
 
 #: ../Pinta.Core/Actions/EditActions.cs:162
 msgid "Deselect All"
@@ -690,7 +690,7 @@ msgstr "Gereedschap behouden"
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:221
 #, csharp-format
 msgid "Download size: {0}"
-msgstr "Download grootte: {0}"
+msgstr "Downloadgrootte: {0}"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:397
@@ -730,7 +730,7 @@ msgstr "Ellips"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:39
 msgid "Ellipse Select"
-msgstr "Ellipsselectie"
+msgstr "Ellips selecteren"
 
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:27
 msgid "Emboss"
@@ -770,7 +770,7 @@ msgstr "Uitbreiden"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
-msgstr "Extensies"
+msgstr "Uitbreidingspakketten"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:157
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
@@ -779,7 +779,7 @@ msgstr "Factor"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:85
 msgid "Failed to access XDG Desktop Portals"
-msgstr "Kon XDG Desktop Portals niet bereiken"
+msgstr "Geen toegang tot XDG Desktop Portals"
 
 #: ../Pinta/MainWindow.cs:320
 msgid "Failed to initialize add-in"
@@ -787,20 +787,20 @@ msgstr "Kan uitbreiding niet initiëren"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:199
 msgid "Failed to load extension package"
-msgstr "Kon deze extensie niet laden"
+msgstr "Kan dit uitbreidingspakket niet laden"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 msgid "Failed to open image"
-msgstr "Kon de afbeelding niet openen"
+msgstr "Kan de afbeelding niet openen"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:254
 msgid "Failed to save image"
-msgstr "Kon de afbeelding niet opslaan"
+msgstr "Kan de afbeelding niet opslaan"
 
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:84
 #: ../Pinta/Actions/File/NewScreenshotAction.cs:109
 msgid "Failed to take screenshot"
-msgstr "Kon geen screenshot maken"
+msgstr "Kan geen schermopname maken"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:174
 msgid "Feather Canvas Edge"
@@ -1089,7 +1089,7 @@ msgstr "Installeren"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
-msgstr "Extensie installeren"
+msgstr "Uitbreidingspakket installeren"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
 msgid "Install from file..."
@@ -1148,7 +1148,7 @@ msgstr "Horizontaal"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:51
 msgid "Lasso Select"
-msgstr "Lassoselectie"
+msgstr "Lasso selecteren"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:240
 msgid "Layer"
@@ -1379,15 +1379,15 @@ msgstr "Lijn/Curve"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
-msgstr "Lineair diamantverloop"
+msgstr "Lineair ruitvormig"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
-msgstr "Lineair verloop"
+msgstr "Lineair"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Linear Reflected Gradient"
-msgstr "Lineair gereflecteerd verloop"
+msgstr "Lineair gereflecteerd"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:83
 msgid "Linked"
@@ -1400,7 +1400,7 @@ msgstr "Lichtsterkte"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:47
 msgid "Magic Wand Select"
-msgstr "Toverstafselectie"
+msgstr "Toverstaf"
 
 #: ../Pinta/MainWindow.cs:441
 msgid "Main Menu"
@@ -1559,7 +1559,7 @@ msgstr "Offset"
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
-msgstr "Offset-selectie"
+msgstr "Selectie verschuiven"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
 msgid "Oil Painting"
@@ -1699,7 +1699,7 @@ msgstr "Potloodtekening"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
 msgid "Pencil Tip Size"
-msgstr "Potloodpuntgrootte"
+msgstr "Potloodpunt"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:63
 msgid "Percentile"
@@ -1816,7 +1816,7 @@ msgstr "Behouden"
 
 #: ../Pinta.Effects/Effects/GradientHelper.cs:11
 msgid "Preset Gradient"
-msgstr "Vooringesteld verloop"
+msgstr "Vooringesteld"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:147
 msgid "Preset Palettes"
@@ -1866,7 +1866,7 @@ msgstr "Radiale vervaging"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:187
 msgid "Radial Gradient"
-msgstr "Radiaal verloop"
+msgstr "Radiaal"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:168
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:248
@@ -1926,7 +1926,7 @@ msgstr "Rechthoek"
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
 msgid "Rectangle Select"
-msgstr "Rechthoekselectie"
+msgstr "Rechthoek selecteren"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
@@ -2318,7 +2318,7 @@ msgstr "Het klembord bevat geen afbeelding."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:200
 msgid "The file may be an invalid or corrupt extension package"
-msgstr "Het bestand kan een ongeldig of corrupt extensiepakket zijn"
+msgstr "Het bestand kan een ongeldig of corrupt uitbreidingspakket zijn"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:79
 msgid "The following dependencies could not be resolved:"
@@ -2357,8 +2357,8 @@ msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
 msgstr ""
-"De geselecteerde extensiepakketten kunnen niet worden geïnstalleerd, omdat "
-"er afhankelijkheidsconflicten zijn."
+"De geselecteerde uitbreidingspakketten kunnen niet worden geïnstalleerd, "
+"omdat er afhankelijkheidsconflicten zijn."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:359
 msgid "The uninstallation failed!"
@@ -2373,8 +2373,8 @@ msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
 msgstr ""
-"Er zijn andere extensiepakketten die ervan afhankelijk zijn en ook zullen "
-"worden verwijderd:"
+"Er zijn andere uitbreidingspakketten die ervan afhankelijk zijn en ook "
+"zullen worden verwijderd:"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:134
 msgid "Thickness"
