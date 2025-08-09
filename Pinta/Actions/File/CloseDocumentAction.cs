@@ -59,9 +59,6 @@ internal sealed class CloseDocumentAction : IActionHandler
 
 	private async void Activated (object sender, EventArgs e)
 	{
-		// Commit any pending changes
-		tools.Commit ();
-
 		// If it's not dirty, just close it
 		if (!workspace.ActiveDocument.IsDirty) {
 			workspace.CloseActiveDocument ();
