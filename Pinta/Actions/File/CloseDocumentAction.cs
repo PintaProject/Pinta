@@ -59,14 +59,11 @@ internal sealed class CloseDocumentAction : IActionHandler
 
 	private void Activated (object sender, EventArgs e)
 	{
-		// If the document is already clean, close it without committing.
+		// If it's not dirty, just close it
 		if (!workspace.ActiveDocument.IsDirty) {
 			workspace.CloseActiveDocument (actions);
 			return;
 		}
-
-		// Commit any pending changes before prompting to save/discard.
-		tools.Commit ();
 
 		string heading = Translations.GetString (
 			"Save changes to image \"{0}\" before closing?",
