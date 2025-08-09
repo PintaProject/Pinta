@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-08-09 13:43+0000\n"
+"PO-Revision-Date: 2025-08-09 13:51+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -356,7 +356,7 @@ msgstr "Kwastgrootte wijzigen. Sneltoetsen: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
-msgstr "Het type vorm is veranderd"
+msgstr "Vormtype is veranderd"
 
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:36
@@ -455,7 +455,7 @@ msgstr "Alles sluiten"
 
 #: ../Pinta.Tools/Editable/EditEngines/RectangleEditEngine.cs:37
 msgid "Closed Curve Shape"
-msgstr "Vorm van gesloten curve"
+msgstr "Gesloten vorm"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Closed Line/Curve Series"
@@ -1379,7 +1379,7 @@ msgstr "Lijn/Curve"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Linear Diamond Gradient"
-msgstr "Lineair ruitvormig"
+msgstr "Ruitvormig"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Linear Gradient"
@@ -1518,7 +1518,7 @@ msgstr "Standaard"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:350
 msgid "Normal Blending"
-msgstr "Standaardmenging"
+msgstr "Standaard vermenging"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:99
 msgid "Normal Size"
@@ -1575,7 +1575,7 @@ msgstr "Openen"
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:37
 msgid "Open Curve Shape"
-msgstr "Open curvevorm"
+msgstr "Open vorm"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:335
 msgid "Open Image"
@@ -2084,11 +2084,11 @@ msgstr "Rotatie"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 msgid "Rounded Line Series"
-msgstr "Ronde lijnserie"
+msgstr "Afgeronde lijnenreeks"
 
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:37
 msgid "Rounded Line Shape"
-msgstr "Afgeronde lijnvorm"
+msgstr "Afgeronde lijnenvorm"
 
 #: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
 msgid "Rounded Rectangle"
