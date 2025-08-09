@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-08-09 11:07+0000\n"
+"PO-Revision-Date: 2025-08-09 11:16+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -699,7 +699,7 @@ msgstr "Laag dupliceren"
 
 #: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:70
 msgid "Easily create and edit images"
-msgstr "Maak en bewerk afbeeldingen op eenvoudige wijze"
+msgstr "Eenvoudig afbeeldingen maken en bewerken"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:238 Polar Inversion dialog
 msgid "Edge Behavior"
@@ -2725,7 +2725,7 @@ msgstr "pixels"
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:74
 msgid "translator-credits"
 msgstr ""
-"Bijdragen Nederlandse vertaling:\n"
+"Nederlandse vertaling:\n"
 " Stephan Paternotte\n"
 " Arjan ten Vergert"
 
