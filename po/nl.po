@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-08-09 13:51+0000\n"
+"PO-Revision-Date: 2025-08-09 13:57+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -2446,12 +2446,12 @@ msgstr "Programma vertalen"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:204
 msgid "Transparency Mode"
-msgstr "Doorzichtigheidsmodus"
+msgstr "Transparantiemodus"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:137
 msgid "Transparent"
-msgstr "Doorzichtig"
+msgstr "Transparant"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:144
 msgid "Turbulence"
