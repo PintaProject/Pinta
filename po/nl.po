@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-08-09 11:31+0000\n"
+"PO-Revision-Date: 2025-08-09 11:41+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -844,7 +844,7 @@ msgstr "Opvulstijl"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:313
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
 msgid "Fill and Outline Shape"
-msgstr "Opvullen en omlijnen"
+msgstr "Vorm vullen met contour"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1386
@@ -1068,7 +1068,7 @@ msgstr "Inches"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:157
 msgid "Ink Outline"
-msgstr "Inktomlijning"
+msgstr "Inktcontour"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
 msgid "Ink Sketch"
@@ -1526,7 +1526,7 @@ msgstr "Standaardgrootte"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:276
 msgid "Normal and Outline"
-msgstr "Standaard en omlijnen"
+msgstr "Standaard met contour"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:140
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:176
@@ -1609,7 +1609,7 @@ msgstr "Origineel"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:277
 msgid "Outline"
-msgstr "Omlijnen"
+msgstr "Contour"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:217
 msgid "Outline Border"
@@ -1626,7 +1626,7 @@ msgstr "Contourobject"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
 msgid "Outline Shape"
-msgstr "Contourvorm"
+msgstr "Vormcontour"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:291
 msgid "Outline width"
