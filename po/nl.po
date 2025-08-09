@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-08-09 11:41+0000\n"
+"PO-Revision-Date: 2025-08-09 13:15+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -162,11 +162,11 @@ msgstr "Autom."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Auto Crop"
-msgstr "Autom. bijsnijden"
+msgstr "Automatisch bijsnijden"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:24
 msgid "Auto Level"
-msgstr "Autom. niveaus"
+msgstr "Automatische niveaus"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:227
 #, csharp-format
@@ -622,7 +622,7 @@ msgstr "Donkerder maken"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:59
 msgid "Dash"
-msgstr "Streep"
+msgstr "Streek"
 
 #. Translators: This refers to using the system's default color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:246
@@ -834,7 +834,7 @@ msgstr "Selectie opvullen"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:312
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
 msgid "Fill Shape"
-msgstr "Opvulvorm"
+msgstr "Vorm vullen"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
@@ -1015,7 +1015,7 @@ msgstr "Tint-/Verzadiging"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
 msgid "Hue / Saturation"
-msgstr "Tint-/Verzadiging"
+msgstr "Tint/Verzadiging"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:246
 msgid "ICO files can not be larger than 255 x 255 pixels."
@@ -1366,7 +1366,7 @@ msgstr "Belichting"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
 msgid "Lightness"
-msgstr "Lichtheid"
+msgstr "Helderheid"
 
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Effects/GradientHelper.cs:48
@@ -1396,7 +1396,7 @@ msgstr "Gekoppeld"
 #: ../Pinta.Core/Effects/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
-msgstr "Lichtkracht"
+msgstr "Lichtsterkte"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:47
 msgid "Magic Wand Select"
@@ -1976,11 +1976,11 @@ msgstr "Laagnaam wijzigen"
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:28
 msgid "Render"
-msgstr "Renderen"
+msgstr "Genereren"
 
 #: ../Pinta.Core/Managers/LivePreviewManager.cs:106
 msgid "Rendering Effect"
-msgstr "Rendereffect"
+msgstr "Effect"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:43
 msgid "Replace"
@@ -2023,11 +2023,11 @@ msgstr "Doekgrootte aanpassen…"
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:139
 msgid "Resize Image"
-msgstr "Afbeeldingsgrootte aanpassen"
+msgstr "Afmetingen aanpassen"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:70
 msgid "Resize Image..."
-msgstr "Afbeeldingsgrootte aanpassen…"
+msgstr "Afmetingen aanpassen…"
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:60
 msgid "Resize Palette"
@@ -2065,7 +2065,7 @@ msgstr "Laag roteren/zoomen…"
 #: ../Pinta.Core/Actions/ImageActions.cs:110
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:47
 msgid "Rotate 180°"
-msgstr "180° roteren"
+msgstr "180° draaien"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:96
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:59
@@ -2182,7 +2182,7 @@ msgstr "Aantal kleuren instellen"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
 msgid "Shape Type"
-msgstr "Soort vorm"
+msgstr "Vormtype"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:245
 msgid "Sharp Edges"
