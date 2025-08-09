@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-08-09 11:21+0000\n"
+"PO-Revision-Date: 2025-08-09 11:31+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -268,7 +268,7 @@ msgstr "Kwastgrootte"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:274
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:122
 msgid "Brush width"
-msgstr "Kwastdikte"
+msgstr "Kwastgrootte"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:24
 msgid "Bulge"
@@ -352,7 +352,7 @@ msgstr "Centimeter"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:283
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr "Kwastbreedte wijzigen. Sneltoetsen: [ ]"
+msgstr "Kwastgrootte wijzigen. Sneltoetsen: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
