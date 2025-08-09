@@ -383,18 +383,26 @@ public sealed class WorkspaceManager : IWorkspaceService
 	}
 
 	internal void SetActiveDocumentInternal (
-		ToolManager tools,
-		Document document)
+	    ToolManager tools,
+	    Document document,
+	    bool suppressCommit = false)
 	{
 		// Work around a case where we closed a document but haven't updated
 		// the active_document_index yet and it points to the closed document
-		if (HasOpenDocuments && active_document_index != -1 && open_documents.Count > active_document_index)
+		if (!suppressCommit && HasOpenDocuments && active_document_index != -1 && open_documents.Count > active_document_index)
 			tools.Commit ();
 
 		int index = open_documents.IndexOf (document);
 		active_document_index = index;
 
 		OnActiveDocumentChanged (EventArgs.Empty);
+	}
+
+	public void SetActiveDocumentForClose (Document document)
+	{
+		// Sets the active document in preparation for closing it. This avoids committing
+		// tool state when switching, so canceling the close will not finalize editable shapes, for example.
+		SetActiveDocumentInternal (PintaCore.Tools, document, suppressCommit: true);
 	}
 
 	private void OnActiveDocumentChanged (EventArgs _)

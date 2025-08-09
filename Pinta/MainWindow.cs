@@ -150,7 +150,7 @@ internal sealed class MainWindow
 		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) < 0)
 			return;
 
-		PintaCore.Actions.Window.SetActiveDocument (view.Document);
+		PintaCore.Workspace.SetActiveDocumentForClose (view.Document);
 		PintaCore.Actions.File.Close.Activate ();
 
 		if (PintaCore.Workspace.OpenDocuments.IndexOf (view.Document) < 0)
