@@ -36,6 +36,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 	private readonly Gio.ListStore list_model;
 	private readonly Gtk.SingleSelection selection_model;
 	private Document? active_document;
+	private bool changing_selection = false;
 
 	public LayersListView ()
 	{
@@ -98,11 +99,24 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 	{
 		ArgumentNullException.ThrowIfNull (active_document);
 
-		int model_idx = (int) selection_model.Selected;
-		int doc_idx = active_document.Layers.Count () - 1 - model_idx;
+		// If changing the current layer causes a history item to be added, ensure we
+		// don't end up in an infinite loop when HandleHistoryChanged updates the
+		// selection (see bug #1463)
+		if (changing_selection)
+			return;
 
-		if (active_document.Layers.CurrentUserLayerIndex != doc_idx)
-			active_document.Layers.SetCurrentUserLayer (doc_idx);
+		try {
+			changing_selection = true;
+
+			int model_idx = (int) selection_model.Selected;
+			int doc_idx = active_document.Layers.Count () - 1 - model_idx;
+
+			if (active_document.Layers.CurrentUserLayerIndex != doc_idx) {
+				active_document.Layers.SetCurrentUserLayer (doc_idx);
+			}
+		} finally {
+			changing_selection = false;
+		}
 	}
 
 	private void HandleRowActivated (
