@@ -162,7 +162,10 @@ internal sealed class MainWindow
 
 	private void DockNotebook_ActiveTabChanged (object? sender, EventArgs e)
 	{
-		var item = canvas_pad.Notebook.ActiveItem;
+        if (canvas_pad.Notebook.IsClosingTab)
+            return;
+
+        var item = canvas_pad.Notebook.ActiveItem;
 
 		if (item == null)
 			return;

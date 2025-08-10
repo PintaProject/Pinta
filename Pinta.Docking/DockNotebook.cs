@@ -45,6 +45,7 @@ public sealed class DockNotebook : Gtk.Box
 	private readonly Adw.TabView tab_view;
 	private readonly Adw.TabBar tab_bar;
 	private readonly HashSet<IDockNotebookItem> items = [];
+	public bool IsClosingTab { get; private set; }
 
 	public DockNotebook ()
 	{
@@ -95,12 +96,17 @@ public sealed class DockNotebook : Gtk.Box
 
 		TabClosedEventArgs close_args = new (item);
 
-		TabClosed?.Invoke (this, close_args);
+		IsClosingTab = true;
+		try {
+			TabClosed?.Invoke (this, close_args);
 
-		tab_view.ClosePageFinish (page, !close_args.Cancel);
+			tab_view.ClosePageFinish (page, !close_args.Cancel);
 
-		if (!close_args.Cancel)
-			items.Remove (item);
+			if (!close_args.Cancel)
+				items.Remove (item);
+		} finally {
+			IsClosingTab = false;
+		}
 
 		// Prevent the default close handler from running.
 		return Gdk.Constants.EVENT_STOP;

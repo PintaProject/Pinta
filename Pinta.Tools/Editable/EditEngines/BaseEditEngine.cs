@@ -177,8 +177,39 @@ public abstract class BaseEditEngine
 	//Helps to keep track of the first modification on a shape after the mouse is clicked, to prevent unnecessary history items.
 	protected bool clicked_without_modifying = false;
 
-	//Stores the editable shape data.
+	// Stores editable shape data per document; the static SEngines reference is
+	// rebound on active-document changes to point at the current document's list.
+	private static readonly Dictionary<Document, Collection<ShapeEngine>> shapes_by_document = new ();
+
+	// Stores the editable shape data for the currently active document.
 	public static Collection<ShapeEngine> SEngines = [];
+
+	static BaseEditEngine ()
+	{
+		// Initialize mapping for the current active document if available.
+		if (PintaCore.Workspace.ActiveDocumentOrDefault is Document doc)
+			SEngines = GetShapesForDocument (doc);
+
+		PintaCore.Workspace.ActiveDocumentChanged += (_, __) => {
+			if (PintaCore.Workspace.ActiveDocumentOrDefault is Document active)
+				SEngines = GetShapesForDocument (active);
+		};
+
+		PintaCore.Workspace.DocumentClosed += (_, e) => {
+			// Clean up mapping for closed documents.
+			if (e.Document is Document closed)
+				shapes_by_document.Remove (closed);
+		};
+	}
+
+	private static Collection<ShapeEngine> GetShapesForDocument (Document doc)
+	{
+		if (!shapes_by_document.TryGetValue (doc, out var shapes)) {
+			shapes = [];
+			shapes_by_document[doc] = shapes;
+		}
+		return shapes;
+	}
 
 	#region ToolbarEventHandlers
 
@@ -1455,7 +1486,8 @@ public abstract class BaseEditEngine
 	/// </summary>
 	protected void ResetShapes ()
 	{
-		SEngines = [];
+		// Clear the current document's editable shape data.
+		SEngines.Clear ();
 
 		//The fields are modified instead of the properties here because a redraw call is undesired (for speed/efficiency).
 		SelectedPointIndex = -1;

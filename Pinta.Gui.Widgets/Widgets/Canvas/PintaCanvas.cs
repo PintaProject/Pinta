@@ -256,6 +256,11 @@ public sealed class PintaCanvas : Gtk.Picture
 		if (tool is null)
 			return;
 
+		// Only draw tool handles on the canvas for the active document.
+		// This prevents handles from one document appearing on another tab's canvas.
+		if (!ReferenceEquals (document, PintaCore.Workspace.ActiveDocumentOrDefault))
+			return;
+
 		snapshot.PushClip (canvasViewBounds);
 
 		foreach (IToolHandle control in tool.Handles.Where (c => c.Active)) {
