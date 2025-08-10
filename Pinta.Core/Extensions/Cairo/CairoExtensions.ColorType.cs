@@ -58,25 +58,30 @@ public readonly record struct Color (
 	/// <returns>Resulting color. If null, the method could not parse it.</returns>
 	public static Color? FromHex (string hex)
 	{
-		if (hex.StartsWith ("#"))
-			hex = hex.Remove (0, 1);
+		string hashStripped =
+			hex.StartsWith ('#')
+			? hex[1..]
+			: hex;
 
 		// handle shorthand hex
-		if (hex.Length == 3)
-			hex = $"{hex[0]}{hex[0]}{hex[1]}{hex[1]}{hex[2]}{hex[2]}";
-		if (hex.Length == 4)
-			hex = $"{hex[0]}{hex[0]}{hex[1]}{hex[1]}{hex[2]}{hex[2]}{hex[3]}{hex[3]}";
+		string lengthAdjusted = hashStripped.Length switch {
+			3 => $"{hashStripped[0]}{hashStripped[0]}{hashStripped[1]}{hashStripped[1]}{hashStripped[2]}{hashStripped[2]}",
+			4 => $"{hashStripped[0]}{hashStripped[0]}{hashStripped[1]}{hashStripped[1]}{hashStripped[2]}{hashStripped[2]}{hashStripped[3]}{hashStripped[3]}",
+			_ => hashStripped,
+		};
 
-		if (hex.Length != 6 && hex.Length != 8)
+		if (lengthAdjusted.Length != 6 && lengthAdjusted.Length != 8)
 			return null;
+
 		try {
-			int r = int.Parse (hex.Substring (0, 2), NumberStyles.HexNumber);
-			int g = int.Parse (hex.Substring (2, 2), NumberStyles.HexNumber);
-			int b = int.Parse (hex.Substring (4, 2), NumberStyles.HexNumber);
-			int a = 255;
-			if (hex.Length > 6)
-				a = int.Parse (hex.Substring (6, 2), NumberStyles.HexNumber);
-			return new Color (r / 255.0, g / 255.0, b / 255.0, a / 255.0);
+			int r = int.Parse (lengthAdjusted.Substring (0, 2), NumberStyles.HexNumber);
+			int g = int.Parse (lengthAdjusted.Substring (2, 2), NumberStyles.HexNumber);
+			int b = int.Parse (lengthAdjusted.Substring (4, 2), NumberStyles.HexNumber);
+			int a =
+				(lengthAdjusted.Length > 6)
+				? int.Parse (lengthAdjusted.Substring (6, 2), NumberStyles.HexNumber)
+				: 255;
+			return new (r / 255.0, g / 255.0, b / 255.0, a / 255.0);
 		} catch {
 			return null;
 		}
