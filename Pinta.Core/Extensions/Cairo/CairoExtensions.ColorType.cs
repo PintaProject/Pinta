@@ -181,88 +181,91 @@ public readonly record struct Color (
 	/// <param name="alpha">Alpha component, 0 - 1</param>
 	public static Color FromHsv (double hue, double sat, double value, double alpha = 1)
 	{
-		double h = hue;
-		double s = sat;
-		double v = value;
-
-		// Stupid hack!
-		// If v or s is set to 0, it results in data loss for hue / sat. So we force it to be slightly above zero.
-		if (v == 0)
-			v = 0.0001;
-		if (s == 0)
-			s = 0.0001;
-
 		// HsvColor contains values scaled as in the color wheel.
 		// Scale Hue to be between 0 and 360. Saturation
 		// and value scale to be between 0 and 1.
-		h %= 360.0;
+		double h = hue % 360.0;
 
-		double r = 0;
-		double g = 0;
-		double b = 0;
+		// Stupid hack!
+		// If v or s is set to 0, it results in data loss for hue / sat. So we force it to be slightly above zero.
+		double s =
+			(sat == 0)
+			? 0.0001
+			: sat;
+		double v =
+			(value == 0)
+			? 0.0001
+			: value;
 
-		if (s == 0) {
-			// If s is 0, all colors are the same.
-			// This is some flavor of gray.
-			r = v;
-			g = v;
-			b = v;
-		} else {
-			// The color wheel consists of 6 sectors.
-			// Figure out which sector you're in.
-			double sectorPos = h / 60;
-			int sectorNumber = (int) (Math.Floor (sectorPos));
+		// If s is 0, all colors are the same.
+		// This is some flavor of gray.
+		if (s == 0)
+			return new Color (v, v, v, alpha);
 
-			// get the fractional part of the sector.
-			// That is, how many degrees into the sector
-			// are you?
-			double fractionalSector = sectorPos - sectorNumber;
+		// The color wheel consists of 6 sectors.
+		// Figure out which sector you're in.
+		double sectorPos = h / 60;
+		int sectorNumber = (int) Math.Floor (sectorPos);
 
-			// Calculate values for the three axes
-			// of the color.
-			double p = v * (1 - s);
-			double q = v * (1 - (s * fractionalSector));
-			double t = v * (1 - (s * (1 - fractionalSector)));
+		// get the fractional part of the sector.
+		// That is, how many degrees into the sector
+		// are you?
+		double fractionalSector = sectorPos - sectorNumber;
 
-			// Assign the fractional colors to r, g, and b
-			// based on the sector the angle is in.
-			switch (sectorNumber) {
-				case 0:
-					r = v;
-					g = t;
-					b = p;
-					break;
+		// Calculate values for the three axes
+		// of the color.
+		double p = v * (1 - s);
+		double q = v * (1 - (s * fractionalSector));
+		double t = v * (1 - (s * (1 - fractionalSector)));
 
-				case 1:
-					r = q;
-					g = v;
-					b = p;
-					break;
+		double r;
+		double g;
+		double b;
 
-				case 2:
-					r = p;
-					g = v;
-					b = t;
-					break;
+		// Assign the fractional colors to r, g, and b
+		// based on the sector the angle is in.
+		switch (sectorNumber) {
+			case 0:
+				r = v;
+				g = t;
+				b = p;
+				break;
 
-				case 3:
-					r = p;
-					g = q;
-					b = v;
-					break;
+			case 1:
+				r = q;
+				g = v;
+				b = p;
+				break;
 
-				case 4:
-					r = t;
-					g = p;
-					b = v;
-					break;
+			case 2:
+				r = p;
+				g = v;
+				b = t;
+				break;
 
-				case 5:
-					r = v;
-					g = p;
-					b = q;
-					break;
-			}
+			case 3:
+				r = p;
+				g = q;
+				b = v;
+				break;
+
+			case 4:
+				r = t;
+				g = p;
+				b = v;
+				break;
+
+			case 5:
+				r = v;
+				g = p;
+				b = q;
+				break;
+
+			default:
+				r = 0;
+				g = 0;
+				b = 0;
+				break;
 		}
 
 		// return an RgbColor structure, with values scaled
