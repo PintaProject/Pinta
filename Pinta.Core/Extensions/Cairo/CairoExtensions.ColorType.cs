@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Text;
 using Pinta.Core;
 
 namespace Cairo;
@@ -64,11 +65,7 @@ public readonly record struct Color (
 			: hex;
 
 		// handle shorthand hex
-		string lengthAdjusted = hashStripped.Length switch {
-			3 => $"{hashStripped[0]}{hashStripped[0]}{hashStripped[1]}{hashStripped[1]}{hashStripped[2]}{hashStripped[2]}",
-			4 => $"{hashStripped[0]}{hashStripped[0]}{hashStripped[1]}{hashStripped[1]}{hashStripped[2]}{hashStripped[2]}{hashStripped[3]}{hashStripped[3]}",
-			_ => hashStripped,
-		};
+		string lengthAdjusted = ExpandColorHex (hashStripped);
 
 		if (lengthAdjusted.Length != 6 && lengthAdjusted.Length != 8)
 			return null;
@@ -84,6 +81,24 @@ public readonly record struct Color (
 			return new (r / 255.0, g / 255.0, b / 255.0, a / 255.0);
 		} catch {
 			return null;
+		}
+	}
+
+	/// <param name="hex">
+	/// Hexadecimal color representation without the hash symbol
+	/// </param>
+	static string ExpandColorHex (string hex)
+	{
+		switch (hex.Length) {
+			case 3:
+			case 4:
+				StringBuilder expanded = new (hex.Length * 2);
+				for (int i = 0; i < hex.Length; i++)
+					expanded.Append (hex[i]);
+				return expanded.ToString ();
+
+			default:
+				return hex;
 		}
 	}
 
