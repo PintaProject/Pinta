@@ -65,18 +65,18 @@ public readonly record struct Color (
 			: hex;
 
 		// handle shorthand hex
-		string lengthAdjusted = ExpandColorHex (hashStripped);
+		string expanded = ExpandColorHex (hashStripped);
 
-		if (lengthAdjusted.Length != 6 && lengthAdjusted.Length != 8)
+		if (expanded.Length != 6 && expanded.Length != 8)
 			return null;
 
 		try {
-			int r = int.Parse (lengthAdjusted.Substring (0, 2), NumberStyles.HexNumber);
-			int g = int.Parse (lengthAdjusted.Substring (2, 2), NumberStyles.HexNumber);
-			int b = int.Parse (lengthAdjusted.Substring (4, 2), NumberStyles.HexNumber);
+			int r = int.Parse (expanded.Substring (0, 2), NumberStyles.HexNumber);
+			int g = int.Parse (expanded.Substring (2, 2), NumberStyles.HexNumber);
+			int b = int.Parse (expanded.Substring (4, 2), NumberStyles.HexNumber);
 			int a =
-				(lengthAdjusted.Length > 6)
-				? int.Parse (lengthAdjusted.Substring (6, 2), NumberStyles.HexNumber)
+				(expanded.Length > 6)
+				? int.Parse (expanded.Substring (6, 2), NumberStyles.HexNumber)
 				: 255;
 			return new (r / 255.0, g / 255.0, b / 255.0, a / 255.0);
 		} catch {
