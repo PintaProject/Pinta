@@ -117,8 +117,6 @@ public readonly record struct Color (
 		// HsvColor.Hue will be a value between 0 and 360, and
 		// HsvColor.Saturation and value are between 0 and 1.
 
-		double h, s, v;
-
 		double min = Math.Min (Math.Min (R, G), B);
 		double max = Math.Max (Math.Max (R, G), B);
 
@@ -128,33 +126,27 @@ public readonly record struct Color (
 			// R, G, and B must be 0, or all the same.
 			// In this case, S is 0, and H is undefined.
 			// Using H = 0 is as good as any...
-			s = 0;
-			h = 0;
-			v = max;
-		} else {
-			s = delta / max;
-			if (R == max) {
-				// Between Yellow and Magenta
-				h = (G - B) / delta;
-			} else if (G == max) {
-				// Between Cyan and Yellow
-				h = 2 + (B - R) / delta;
-			} else {
-				// Between Magenta and Cyan
-				h = 4 + (R - G) / delta;
-			}
-
-			v = max;
+			return new HsvColor (hue: 0, sat: 0, val: max);
 		}
+
+		double h;
+		if (R == max) // Between Yellow and Magenta
+			h = (G - B) / delta;
+		else if (G == max) // Between Cyan and Yellow
+			h = 2 + (B - R) / delta;
+		else // Between Magenta and Cyan
+			h = 4 + (R - G) / delta;
 
 		// Scale h to be between 0 and 360.
 		// This may require adding 360, if the value
 		// is negative.
 		h *= 60;
-
-		if (h < 0) {
+		if (h < 0)
 			h += 360;
-		}
+
+		double s = delta / max;
+
+		double v = max;
 
 		// Scale to the requirements of this
 		// application. All values are between 0 and 255.
