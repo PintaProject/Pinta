@@ -93,8 +93,10 @@ public readonly record struct Color (
 			case 3:
 			case 4:
 				StringBuilder expanded = new (hex.Length * 2);
-				for (int i = 0; i < hex.Length; i++)
+				for (int i = 0; i < hex.Length; i++) {
 					expanded.Append (hex[i]);
+					expanded.Append (hex[i]);
+				}
 				return expanded.ToString ();
 
 			default:
