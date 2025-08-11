@@ -19,7 +19,7 @@
 
     <!-- Dependencies used for unit tests -->
     <PackageVersion Include="BenchmarkDotNet" Version="0.15.2" />
-    <PackageVersion Include="NUnit" Version="4.3.2" />
+    <PackageVersion Include="NUnit" Version="4.4.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0" />
 
