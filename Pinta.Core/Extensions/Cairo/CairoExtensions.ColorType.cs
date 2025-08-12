@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Text;
 using Pinta.Core;
 
 namespace Cairo;
@@ -58,27 +59,46 @@ public readonly record struct Color (
 	/// <returns>Resulting color. If null, the method could not parse it.</returns>
 	public static Color? FromHex (string hex)
 	{
-		if (hex.StartsWith ("#"))
-			hex = hex.Remove (0, 1);
+		string hashStripped =
+			hex.StartsWith ('#')
+			? hex[1..]
+			: hex;
 
 		// handle shorthand hex
-		if (hex.Length == 3)
-			hex = $"{hex[0]}{hex[0]}{hex[1]}{hex[1]}{hex[2]}{hex[2]}";
-		if (hex.Length == 4)
-			hex = $"{hex[0]}{hex[0]}{hex[1]}{hex[1]}{hex[2]}{hex[2]}{hex[3]}{hex[3]}";
+		string expanded = ExpandColorHex (hashStripped);
 
-		if (hex.Length != 6 && hex.Length != 8)
+		if (expanded.Length != 6 && expanded.Length != 8)
 			return null;
+
 		try {
-			int r = int.Parse (hex.Substring (0, 2), NumberStyles.HexNumber);
-			int g = int.Parse (hex.Substring (2, 2), NumberStyles.HexNumber);
-			int b = int.Parse (hex.Substring (4, 2), NumberStyles.HexNumber);
-			int a = 255;
-			if (hex.Length > 6)
-				a = int.Parse (hex.Substring (6, 2), NumberStyles.HexNumber);
-			return new Color (r / 255.0, g / 255.0, b / 255.0, a / 255.0);
+			int r = int.Parse (expanded.Substring (0, 2), NumberStyles.HexNumber);
+			int g = int.Parse (expanded.Substring (2, 2), NumberStyles.HexNumber);
+			int b = int.Parse (expanded.Substring (4, 2), NumberStyles.HexNumber);
+			int a =
+				(expanded.Length > 6)
+				? int.Parse (expanded.Substring (6, 2), NumberStyles.HexNumber)
+				: 255;
+			return new (r / 255.0, g / 255.0, b / 255.0, a / 255.0);
 		} catch {
 			return null;
+		}
+	}
+
+	/// <param name="hex">
+	/// Hexadecimal color representation without the hash symbol
+	/// </param>
+	static string ExpandColorHex (string hex)
+	{
+		switch (hex.Length) {
+			case 3:
+			case 4:
+				StringBuilder expanded = new (hex.Length * 2);
+				for (int i = 0; i < hex.Length; i++)
+					expanded.Append (hex[i], 2);
+				return expanded.ToString ();
+
+			default:
+				return hex;
 		}
 	}
 
@@ -97,8 +117,6 @@ public readonly record struct Color (
 		// HsvColor.Hue will be a value between 0 and 360, and
 		// HsvColor.Saturation and value are between 0 and 1.
 
-		double h, s, v;
-
 		double min = Math.Min (Math.Min (R, G), B);
 		double max = Math.Max (Math.Max (R, G), B);
 
@@ -108,33 +126,27 @@ public readonly record struct Color (
 			// R, G, and B must be 0, or all the same.
 			// In this case, S is 0, and H is undefined.
 			// Using H = 0 is as good as any...
-			s = 0;
-			h = 0;
-			v = max;
-		} else {
-			s = delta / max;
-			if (R == max) {
-				// Between Yellow and Magenta
-				h = (G - B) / delta;
-			} else if (G == max) {
-				// Between Cyan and Yellow
-				h = 2 + (B - R) / delta;
-			} else {
-				// Between Magenta and Cyan
-				h = 4 + (R - G) / delta;
-			}
-
-			v = max;
+			return new HsvColor (hue: 0, sat: 0, val: max);
 		}
+
+		double h;
+		if (R == max) // Between Yellow and Magenta
+			h = (G - B) / delta;
+		else if (G == max) // Between Cyan and Yellow
+			h = 2 + (B - R) / delta;
+		else // Between Magenta and Cyan
+			h = 4 + (R - G) / delta;
 
 		// Scale h to be between 0 and 360.
 		// This may require adding 360, if the value
 		// is negative.
 		h *= 60;
-
-		if (h < 0) {
+		if (h < 0)
 			h += 360;
-		}
+
+		double s = delta / max;
+
+		double v = max;
 
 		// Scale to the requirements of this
 		// application. All values are between 0 and 255.
@@ -176,88 +188,91 @@ public readonly record struct Color (
 	/// <param name="alpha">Alpha component, 0 - 1</param>
 	public static Color FromHsv (double hue, double sat, double value, double alpha = 1)
 	{
-		double h = hue;
-		double s = sat;
-		double v = value;
-
-		// Stupid hack!
-		// If v or s is set to 0, it results in data loss for hue / sat. So we force it to be slightly above zero.
-		if (v == 0)
-			v = 0.0001;
-		if (s == 0)
-			s = 0.0001;
-
 		// HsvColor contains values scaled as in the color wheel.
 		// Scale Hue to be between 0 and 360. Saturation
 		// and value scale to be between 0 and 1.
-		h %= 360.0;
+		double h = hue % 360.0;
 
-		double r = 0;
-		double g = 0;
-		double b = 0;
+		// Stupid hack!
+		// If v or s is set to 0, it results in data loss for hue / sat. So we force it to be slightly above zero.
+		double s =
+			(sat == 0)
+			? 0.0001
+			: sat;
+		double v =
+			(value == 0)
+			? 0.0001
+			: value;
 
-		if (s == 0) {
-			// If s is 0, all colors are the same.
-			// This is some flavor of gray.
-			r = v;
-			g = v;
-			b = v;
-		} else {
-			// The color wheel consists of 6 sectors.
-			// Figure out which sector you're in.
-			double sectorPos = h / 60;
-			int sectorNumber = (int) (Math.Floor (sectorPos));
+		// If s is 0, all colors are the same.
+		// This is some flavor of gray.
+		if (s == 0)
+			return new Color (v, v, v, alpha);
 
-			// get the fractional part of the sector.
-			// That is, how many degrees into the sector
-			// are you?
-			double fractionalSector = sectorPos - sectorNumber;
+		// The color wheel consists of 6 sectors.
+		// Figure out which sector you're in.
+		double sectorPos = h / 60;
+		int sectorNumber = (int) Math.Floor (sectorPos);
 
-			// Calculate values for the three axes
-			// of the color.
-			double p = v * (1 - s);
-			double q = v * (1 - (s * fractionalSector));
-			double t = v * (1 - (s * (1 - fractionalSector)));
+		// get the fractional part of the sector.
+		// That is, how many degrees into the sector
+		// are you?
+		double fractionalSector = sectorPos - sectorNumber;
 
-			// Assign the fractional colors to r, g, and b
-			// based on the sector the angle is in.
-			switch (sectorNumber) {
-				case 0:
-					r = v;
-					g = t;
-					b = p;
-					break;
+		// Calculate values for the three axes
+		// of the color.
+		double p = v * (1 - s);
+		double q = v * (1 - (s * fractionalSector));
+		double t = v * (1 - (s * (1 - fractionalSector)));
 
-				case 1:
-					r = q;
-					g = v;
-					b = p;
-					break;
+		double r;
+		double g;
+		double b;
 
-				case 2:
-					r = p;
-					g = v;
-					b = t;
-					break;
+		// Assign the fractional colors to r, g, and b
+		// based on the sector the angle is in.
+		switch (sectorNumber) {
+			case 0:
+				r = v;
+				g = t;
+				b = p;
+				break;
 
-				case 3:
-					r = p;
-					g = q;
-					b = v;
-					break;
+			case 1:
+				r = q;
+				g = v;
+				b = p;
+				break;
 
-				case 4:
-					r = t;
-					g = p;
-					b = v;
-					break;
+			case 2:
+				r = p;
+				g = v;
+				b = t;
+				break;
 
-				case 5:
-					r = v;
-					g = p;
-					b = q;
-					break;
-			}
+			case 3:
+				r = p;
+				g = q;
+				b = v;
+				break;
+
+			case 4:
+				r = t;
+				g = p;
+				b = v;
+				break;
+
+			case 5:
+				r = v;
+				g = p;
+				b = q;
+				break;
+
+			default:
+				r = 0;
+				g = 0;
+				b = 0;
+				break;
 		}
 
 		// return an RgbColor structure, with values scaled
