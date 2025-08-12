@@ -52,6 +52,8 @@ public sealed class PointPickerWidget : Gtk.Box
 
 		const int SPACING = 6;
 
+		Size imageSize = workspace.ImageSize;
+
 		BoxStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Horizontal,
 			spacing: SPACING);
@@ -60,7 +62,7 @@ public sealed class PointPickerWidget : Gtk.Box
 			orientation: Gtk.Orientation.Vertical,
 			spacing: SPACING);
 
-		adjusted_initial_point = AdjustToWidgetSize (workspace.ImageSize, initialPoint);
+		adjusted_initial_point = AdjustToWidgetSize (imageSize, initialPoint);
 
 		// --- Section label + line
 
@@ -81,13 +83,13 @@ public sealed class PointPickerWidget : Gtk.Box
 		// --- X spinner
 
 		Gtk.Label xLabel = Gtk.Label.New ("X:");
-		Gtk.SpinButton spinX = CreateSpinX (workspace.ImageSize);
+		Gtk.SpinButton spinX = CreateSpinX (imageSize);
 		Gtk.Button buttonResetX = CreateResetButton ();
 
 		// --- Y spinner
 
 		Gtk.Label yLabel = Gtk.Label.New ("Y:");
-		Gtk.SpinButton spinY = CreateSpinY (workspace.ImageSize);
+		Gtk.SpinButton spinY = CreateSpinY (imageSize);
 		Gtk.Button buttonResetY = CreateResetButton ();
 
 		// --- Vbox for spinners
@@ -131,7 +133,7 @@ public sealed class PointPickerWidget : Gtk.Box
 
 		// --- References to keep
 
-		image_size = workspace.ImageSize;
+		image_size = imageSize;
 
 		title_label = titleLabel;
 
