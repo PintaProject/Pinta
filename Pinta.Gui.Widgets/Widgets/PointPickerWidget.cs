@@ -46,7 +46,7 @@ public sealed class PointPickerWidget : Gtk.Box
 
 	bool active = true;
 
-	public PointPickerWidget (Size imageSize, PointI initialPoint)
+	public PointPickerWidget (IWorkspaceService workspace, PointI initialPoint)
 	{
 		// --- Build
 
@@ -60,7 +60,7 @@ public sealed class PointPickerWidget : Gtk.Box
 			orientation: Gtk.Orientation.Vertical,
 			spacing: SPACING);
 
-		adjusted_initial_point = AdjustToWidgetSize (imageSize, initialPoint);
+		adjusted_initial_point = AdjustToWidgetSize (workspace.ImageSize, initialPoint);
 
 		// --- Section label + line
 
@@ -73,7 +73,7 @@ public sealed class PointPickerWidget : Gtk.Box
 
 		// --- PointPickerGraphic
 
-		PointPickerGraphic pointPickerGraphic = new (PintaCore.Workspace) {
+		PointPickerGraphic pointPickerGraphic = new (workspace) {
 			Hexpand = true,
 			Halign = Gtk.Align.Center,
 		};
@@ -81,13 +81,13 @@ public sealed class PointPickerWidget : Gtk.Box
 		// --- X spinner
 
 		Gtk.Label xLabel = Gtk.Label.New ("X:");
-		Gtk.SpinButton spinX = CreateSpinX (imageSize);
+		Gtk.SpinButton spinX = CreateSpinX (workspace.ImageSize);
 		Gtk.Button buttonResetX = CreateResetButton ();
 
 		// --- Y spinner
 
 		Gtk.Label yLabel = Gtk.Label.New ("Y:");
-		Gtk.SpinButton spinY = CreateSpinY (imageSize);
+		Gtk.SpinButton spinY = CreateSpinY (workspace.ImageSize);
 		Gtk.Button buttonResetY = CreateResetButton ();
 
 		// --- Vbox for spinners
@@ -131,7 +131,7 @@ public sealed class PointPickerWidget : Gtk.Box
 
 		// --- References to keep
 
-		image_size = imageSize;
+		image_size = workspace.ImageSize;
 
 		title_label = titleLabel;
 
