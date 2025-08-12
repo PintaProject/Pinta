@@ -97,16 +97,9 @@ public sealed class PaletteManager : IPaletteService
 		};
 	}
 
-	public bool DoKeyPress (Gtk.EventControllerKey.KeyPressedSignalArgs args)
+	public void SwapColors ()
 	{
-		if (args.State.HasModifierKey () || args.GetKey ().ToUpper ().Value != Gdk.Constants.KEY_X)
-			return false;
-
-		Color temp = PrimaryColor;
-		PrimaryColor = SecondaryColor;
-		SecondaryColor = temp;
-
-		return true;
+		(SecondaryColor, PrimaryColor) = (PrimaryColor, SecondaryColor);
 	}
 
 	// This allows callers to bypass affecting the recently used list
