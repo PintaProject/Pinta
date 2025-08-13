@@ -150,6 +150,22 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
+	public void Cells12 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.PointArrangement = PointArrangement.Phyllotaxis;
+		Utilities.TestEffect (effect, "cells12.png");
+	}
+
+	[Test]
+	public void Cells13 ()
+	{
+		CellsEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.PointArrangement = PointArrangement.Circle;
+		Utilities.TestEffect (effect, "cells13.png");
+	}
+
+	[Test]
 	public void Clouds1 ()
 	{
 		CloudsEffect effect = new (Utilities.CreateMockServices ());
@@ -730,14 +746,14 @@ internal sealed class EffectsTest
 	[Test]
 	public void Voronoi1 ()
 	{
-		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		VoronoiDiagramEffect effect = new (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "voronoi1.png");
 	}
 
 	[Test]
 	public void Voronoi2 ()
 	{
-		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		VoronoiDiagramEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.NumberOfCells = 200;
 		Utilities.TestEffect (effect, "voronoi2.png");
 	}
@@ -745,7 +761,7 @@ internal sealed class EffectsTest
 	[Test]
 	public void Voronoi3 ()
 	{
-		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		VoronoiDiagramEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.DistanceMetric = DistanceMetric.Manhattan;
 		Utilities.TestEffect (effect, "voronoi3.png");
 	}
@@ -753,7 +769,7 @@ internal sealed class EffectsTest
 	[Test]
 	public void Voronoi4 ()
 	{
-		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		VoronoiDiagramEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.ColorSorting = VoronoiDiagramEffect.ColorSorting.HorizontalB;
 		Utilities.TestEffect (effect, "voronoi4.png");
 	}
@@ -761,7 +777,7 @@ internal sealed class EffectsTest
 	[Test]
 	public void Voronoi5 ()
 	{
-		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		VoronoiDiagramEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.ColorSorting = VoronoiDiagramEffect.ColorSorting.VerticalB;
 		Utilities.TestEffect (effect, "voronoi5.png");
 	}
@@ -769,9 +785,25 @@ internal sealed class EffectsTest
 	[Test]
 	public void Voronoi6 ()
 	{
-		var effect = new VoronoiDiagramEffect (Utilities.CreateMockServices ());
+		VoronoiDiagramEffect effect = new (Utilities.CreateMockServices ());
 		effect.Data.ShowPoints = true;
 		Utilities.TestEffect (effect, "voronoi6.png");
+	}
+
+	[Test]
+	public void Voronoi7 ()
+	{
+		VoronoiDiagramEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.PointArrangement = PointArrangement.Phyllotaxis;
+		Utilities.TestEffect (effect, "voronoi7.png");
+	}
+
+	[Test]
+	public void Voronoi8 ()
+	{
+		VoronoiDiagramEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.PointArrangement = PointArrangement.Circle;
+		Utilities.TestEffect (effect, "voronoi8.png");
 	}
 
 	[Test]
