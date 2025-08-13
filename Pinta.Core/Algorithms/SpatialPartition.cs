@@ -56,7 +56,7 @@ public static class SpatialPartition
 		return pointArrangement switch {
 			PointArrangement.Random => CreateRandomPoints (roi, pointCount, pointLocationsSeed),
 			PointArrangement.Circle => CreateCirclePoints (roi, pointCount),
-			PointArrangement.Phyllotaxis => CreateFibonacciSpiralPoints (roi, pointCount),
+			PointArrangement.Phyllotaxis => CreatePhyllotaxisPoints (roi, pointCount),
 			_ => throw new InvalidEnumArgumentException (nameof (pointArrangement), (int) pointArrangement, typeof (PointArrangement)),
 		};
 	}
@@ -96,7 +96,7 @@ public static class SpatialPartition
 	}
 
 	private static readonly RadiansAngle golden_angle = new (Math.PI * (3.0 - Math.Sqrt (5.0)));
-	private static PointD[] CreateFibonacciSpiralPoints (RectangleI roi, int pointCount)
+	private static PointD[] CreatePhyllotaxisPoints (RectangleI roi, int pointCount)
 	{
 		PointD center = ComputeCenter (roi);
 		double maxRadius = Math.Min (roi.Width, roi.Height) / 2.0;
