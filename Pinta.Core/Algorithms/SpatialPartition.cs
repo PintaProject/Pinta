@@ -66,7 +66,7 @@ public static class SpatialPartition
 	{
 		Random randomPositioner = new (pointLocationsSeed.Value);
 
-		HashSet<PointI> uniquenessTracker = new (pointCount);
+		var uniquenessTracker = ImmutableHashSet.CreateBuilder<PointI> ();
 
 		while (uniquenessTracker.Count < pointCount) {
 
