@@ -66,18 +66,18 @@ public static class SpatialPartition
 	{
 		Random randomPositioner = new (pointLocationsSeed.Value);
 
-		HashSet<PointI> result = new (pointCount); // Ensures points' uniqueness
+		HashSet<PointI> uniquenessTracker = new (pointCount);
 
-		while (result.Count < pointCount) {
+		while (uniquenessTracker.Count < pointCount) {
 
 			PointI point = new (
 				X: randomPositioner.Next (roi.Left, roi.Right + 1),
 				Y: randomPositioner.Next (roi.Top, roi.Bottom + 1));
 
-			result.Add (point);
+			uniquenessTracker.Add (point);
 		}
 
-		return [.. result.Select (p => p.ToDouble () + centering_offset)];
+		return [.. uniquenessTracker.Select (p => p.ToDouble () + centering_offset)];
 	}
 
 	private static PointD[] CreateCirclePoints (RectangleI roi, int pointCount)
