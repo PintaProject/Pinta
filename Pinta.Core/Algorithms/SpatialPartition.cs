@@ -62,7 +62,7 @@ public static class SpatialPartition
 	}
 
 	private static readonly PointD centering_offset = new (0.5, 0.5);
-	private static ImmutableHashSet<PointD> CreateRandomPoints (RectangleI roi, int pointCount, RandomSeed pointLocationsSeed)
+	private static PointD[] CreateRandomPoints (RectangleI roi, int pointCount, RandomSeed pointLocationsSeed)
 	{
 		Random randomPositioner = new (pointLocationsSeed.Value);
 
