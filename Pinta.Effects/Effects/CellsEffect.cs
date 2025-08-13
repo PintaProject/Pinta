@@ -60,7 +60,6 @@ public sealed class CellsEffect : BaseEffect
 		CellsData data = Data;
 
 		RectangleI roi = live_preview.RenderBounds;
-		PointD locationOffset = new (0.5, 0.5);
 
 		var baseGradient =
 			GradientHelper
@@ -77,7 +76,7 @@ public sealed class CellsEffect : BaseEffect
 			data.RandomPointLocations,
 			data.PointArrangement);
 
-		ImmutableArray<PointD> controlPoints = [.. basePoints.Select (p => p + locationOffset)];
+		ImmutableArray<PointD> controlPoints = [.. basePoints];
 
 		return new (
 			size: destination.GetSize (),

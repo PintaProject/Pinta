@@ -61,6 +61,7 @@ public static class SpatialPartition
 		};
 	}
 
+	private static readonly PointD centering_offset = new (0.5, 0.5);
 	private static ImmutableHashSet<PointD> CreateRandomPoints (RectangleI roi, int pointCount, RandomSeed pointLocationsSeed)
 	{
 		Random randomPositioner = new (pointLocationsSeed.Value);
@@ -76,7 +77,7 @@ public static class SpatialPartition
 			result.Add (point);
 		}
 
-		return [.. result.Select (p => p.ToDouble ())];
+		return [.. result.Select (p => p.ToDouble () + centering_offset)];
 	}
 
 	private static PointD[] CreateCirclePoints (RectangleI roi, int pointCount)

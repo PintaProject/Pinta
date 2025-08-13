@@ -61,16 +61,13 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		ColorSorting colorSorting = data.ColorSorting;
 
-		PointD locationOffset = new (0.5, 0.5);
-
 		IEnumerable<PointD> basePoints = SpatialPartition.CreateCellControlPoints (
 			roi,
 			Math.Min (data.NumberOfCells, roi.Width * roi.Height),
 			data.RandomPointLocations,
 			data.PointArrangement);
 
-		IEnumerable<PointD> pointCorners = [.. SortPoints (basePoints, colorSorting)];
-		ImmutableArray<PointD> controlPoints = [.. pointCorners.Select (p => p + locationOffset)];
+		ImmutableArray<PointD> controlPoints = [.. SortPoints (basePoints, colorSorting)];
 
 		IEnumerable<ColorBgra> baseColors = CreateColors (controlPoints.Length, data.RandomColors);
 		IEnumerable<ColorBgra> positionSortedColors = SortColors (baseColors, colorSorting);
