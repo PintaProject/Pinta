@@ -63,12 +63,14 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		PointD locationOffset = new (0.5, 0.5);
 
-		IEnumerable<PointI> basePoints = SpatialPartition.CreateCellControlPoints (
+		IEnumerable<PointD> basePoints = SpatialPartition.CreateCellControlPoints (
 			roi,
 			Math.Min (data.NumberOfCells, roi.Width * roi.Height),
-			data.RandomPointLocations);
-		IEnumerable<PointI> pointCorners = [.. SortPoints (basePoints, colorSorting)];
-		ImmutableArray<PointD> controlPoints = [.. pointCorners.Select (p => p.ToDouble () + locationOffset)];
+			data.RandomPointLocations,
+			data.PointArrangement);
+
+		IEnumerable<PointD> pointCorners = [.. SortPoints (basePoints, colorSorting)];
+		ImmutableArray<PointD> controlPoints = [.. pointCorners.Select (p => p + locationOffset)];
 
 		IEnumerable<ColorBgra> baseColors = CreateColors (controlPoints.Length, data.RandomColors);
 		IEnumerable<ColorBgra> positionSortedColors = SortColors (baseColors, colorSorting);
@@ -143,7 +145,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 				typeof (ColorSorting)),
 		};
 
-	private static IEnumerable<PointI> SortPoints (IEnumerable<PointI> basePoints, ColorSorting colorSorting)
+	private static IEnumerable<PointD> SortPoints (IEnumerable<PointD> basePoints, ColorSorting colorSorting)
 
 		=> colorSorting switch {
 
@@ -192,6 +194,9 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		[Caption ("Random Colors")]
 		public RandomSeed RandomColors { get; set; } = new (0);
+
+		[Caption ("Point Arrangement")]
+		public PointArrangement PointArrangement { get; set; } = PointArrangement.Random;
 
 		[Caption ("Random Point Locations")]
 		public RandomSeed RandomPointLocations { get; set; } = new (0);

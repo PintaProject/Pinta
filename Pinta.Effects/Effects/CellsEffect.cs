@@ -71,11 +71,13 @@ public sealed class CellsEffect : BaseEffect
 				data.ColorSchemeSeed)
 			.Resized (0, data.CellRadius);
 
-		IEnumerable<PointI> basePoints = SpatialPartition.CreateCellControlPoints (
+		IEnumerable<PointD> basePoints = SpatialPartition.CreateCellControlPoints (
 			roi,
 			Math.Min (data.NumberOfCells, roi.Width * roi.Height),
-			data.RandomPointLocations);
-		ImmutableArray<PointD> controlPoints = [.. basePoints.Select (p => p.ToDouble () + locationOffset)];
+			data.RandomPointLocations,
+			data.PointArrangement);
+
+		ImmutableArray<PointD> controlPoints = [.. basePoints.Select (p => p + locationOffset)];
 
 		return new (
 			size: destination.GetSize (),
@@ -143,6 +145,9 @@ public sealed class CellsEffect : BaseEffect
 	{
 		[Caption ("Distance Metric")]
 		public DistanceMetric DistanceMetric { get; set; } = DistanceMetric.Euclidean;
+
+		[Caption ("Point Arrangement")]
+		public PointArrangement PointArrangement { get; set; } = PointArrangement.Random;
 
 		[Caption ("Random Point Locations")]
 		public RandomSeed RandomPointLocations { get; set; } = new (0);
