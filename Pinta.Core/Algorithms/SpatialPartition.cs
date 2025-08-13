@@ -65,18 +65,18 @@ public static class SpatialPartition
 	{
 		Random randomPositioner = new (pointLocationsSeed.Value);
 
-		var result = ImmutableHashSet.CreateBuilder<PointD> (); // Ensures points' uniqueness
+		HashSet<PointI> result = new (pointCount); // Ensures points' uniqueness
 
 		while (result.Count < pointCount) {
 
-			PointD point = new (
+			PointI point = new (
 				X: randomPositioner.Next (roi.Left, roi.Right + 1),
 				Y: randomPositioner.Next (roi.Top, roi.Bottom + 1));
 
 			result.Add (point);
 		}
 
-		return result.ToImmutable ();
+		return [.. result.Select (p => p.ToDouble ())];
 	}
 
 	private static PointD[] CreateCirclePoints (RectangleI roi, int pointCount)
