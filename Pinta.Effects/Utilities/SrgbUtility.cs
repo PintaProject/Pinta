@@ -35,11 +35,20 @@ using System.Collections.Immutable;
 
 namespace Pinta.Effects;
 
+/// <summary>
+/// A static utility class for converting color values between sRGB and linear color spaces.
+/// </summary>
+/// <remarks>
+/// Human eyes don't perceive light linearly. They are more sensitive to changes in dark tones than in bright ones.
+/// sRGB is a color space designed to mimic this non-linear perception.
+/// </remarks>
 internal static class SrgbUtility
 {
-	// pre-calculated array of linear intensity for 8bit values
+	/// <summary>
+	/// Pre-calculated lookup table (LUT) that stores the linear intensity for each possible 8-bit sRGB value (0-255).
+	/// Reading from this array is much faster than performing the complex `ToLinear` calculation every time.
+	/// </summary>
 	private static readonly ImmutableArray<double> linear_intensity = CalculateLinearIntensities ();
-
 	private static ImmutableArray<double> CalculateLinearIntensities ()
 	{
 		var linearIntensity = ImmutableArray.CreateBuilder<double> ();
@@ -51,6 +60,10 @@ internal static class SrgbUtility
 		return linearIntensity.MoveToImmutable ();
 	}
 
+	/// <summary>
+	/// Converts a color channel value from linear RGB to sRGB space.
+	/// </summary>
+	/// <exception cref="ArgumentOutOfRangeException" />
 	public static double ToSrgb (double linearLevel)
 	{
 		if (linearLevel < 0d || linearLevel > 1d)
@@ -63,6 +76,10 @@ internal static class SrgbUtility
 			: (1.055d * Math.Pow (linearLevel, POWER)) - 0.055d;
 	}
 
+	/// <summary>
+	/// A "safe" version of ToSrgb that clamps the input value to the valid 0.0-1.0 range
+	/// instead of throwing an exception.
+	/// </summary>
 	public static double ToSrgbClamped (double linearLevel)
 	{
 		if (linearLevel < 0d) return 0d;
@@ -70,9 +87,15 @@ internal static class SrgbUtility
 		return ToSrgb (linearLevel);
 	}
 
+	/// <summary>
+	/// Converts an 8-bit sRGB color channel value to its linear equivalent using the pre-calculated lookup table.
+	/// </summary>
 	public static double ToLinear (byte srgbLevel)
 		=> linear_intensity[srgbLevel];
 
+	/// <summary>
+	/// Converts a floating-point sRGB color channel value to its linear equivalent.
+	/// </summary>
 	public static double ToLinear (double srgbLevel)
 	{
 		const double FACTOR_1 = 1d / 12.92d;
