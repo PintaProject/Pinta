@@ -53,27 +53,33 @@ internal static class SrgbUtility
 
 	public static double ToSrgb (double linearLevel)
 	{
-		System.Diagnostics.Debug.Assert ((linearLevel >= 0d && linearLevel <= 1d), "level is out of range 0-1");
-		const double power = 1d / 2.4d;
+		if (linearLevel < 0d || linearLevel > 1d)
+			throw new ArgumentOutOfRangeException (nameof (linearLevel));
+
+		const double POWER = 1d / 2.4d;
 		return
 			(linearLevel <= 0.0031308d)
 			? 12.92d * linearLevel
-			: (1.055d * Math.Pow (linearLevel, power)) - 0.055d;
+			: (1.055d * Math.Pow (linearLevel, POWER)) - 0.055d;
 	}
 
 	public static double ToSrgbClamped (double linearLevel)
-		=> (linearLevel < 0d) ? 0d : (linearLevel > 1d) ? 1d : ToSrgb (linearLevel);
+	{
+		if (linearLevel < 0d) return 0d;
+		if (linearLevel > 1d) return 1d;
+		return ToSrgb (linearLevel);
+	}
 
 	public static double ToLinear (byte srgbLevel)
 		=> linear_intensity[srgbLevel];
 
 	public static double ToLinear (double srgbLevel)
 	{
-		const double factor1 = 1d / 12.92d;
-		const double factor2 = 1d / 1.055d;
+		const double FACTOR_1 = 1d / 12.92d;
+		const double FACTOR_2 = 1d / 1.055d;
 		return
 			(srgbLevel <= 0.04045d)
-			? srgbLevel * factor1
-			: Math.Pow ((srgbLevel + 0.055d) * factor2, 2.4d);
+			? srgbLevel * FACTOR_1
+			: Math.Pow ((srgbLevel + 0.055d) * FACTOR_2, 2.4d);
 	}
 }
