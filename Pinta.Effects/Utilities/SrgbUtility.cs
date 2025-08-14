@@ -46,7 +46,6 @@ internal static class SrgbUtility
 {
 	/// <summary>
 	/// Pre-calculated lookup table that stores the linear intensity for each possible 8-bit sRGB value (0-255).
-	/// Reading from this array is much faster than performing the complex `ToLinear` calculation every time.
 	/// </summary>
 	private static readonly ImmutableArray<double> linear_intensity = CalculateLinearIntensities ();
 	private static ImmutableArray<double> CalculateLinearIntensities ()
