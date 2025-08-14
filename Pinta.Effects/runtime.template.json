@@ -1,6 +1,0 @@
-{
-  "configProperties": {
-    "System.Runtime.Intrinsics.X86.Fma.IsSupported": false,
-    "System.Runtime.Intrinsics.Arm.Fma.IsSupported": false
-  }
-}
