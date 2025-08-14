@@ -63,6 +63,7 @@ internal static class SrgbUtility
 	/// <summary>
 	/// Converts a color channel value from linear RGB to sRGB space.
 	/// </summary>
+	/// <param name="linearLevel">Value in linear space, between 0 and 1</param>
 	/// <exception cref="ArgumentOutOfRangeException" />
 	public static double ToSrgb (double linearLevel)
 	{
