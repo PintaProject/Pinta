@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-07-19 18:03+0000\n"
+"PO-Revision-Date: 2025-08-13 15:02+0000\n"
 "Last-Translator: Stepan Andriiovych <4fbig9xyb@mozmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/uk/"
 ">\n"
@@ -1912,7 +1912,7 @@ msgstr "Випадкові кольори"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
-msgstr ""
+msgstr "Додавання довільного шуму"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:143
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191

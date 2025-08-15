@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-20 00:32+0000\n"
-"PO-Revision-Date: 2025-01-02 21:00+0000\n"
-"Last-Translator: yiannis ioannides <sub@wai.ai>\n"
+"PO-Revision-Date: 2025-08-13 15:02+0000\n"
+"Last-Translator: Λευθέρης Τρόμπακας <lefteristrompakas@gmail.com>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -310,7 +310,7 @@ msgstr "Πλέγμα καμβά..."
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:146
 msgid "Cell Radius"
-msgstr ""
+msgstr "Ακτίνα κυψέλης"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:124
 msgid "Cell Size"
@@ -318,7 +318,7 @@ msgstr "Μέγεθος κελιού"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:21
 msgid "Cells"
-msgstr ""
+msgstr "Κύτταρα"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -515,7 +515,7 @@ msgstr "Συνδυασμός χρωμάτων"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:164
 msgid "Color Scheme Edge Behavior"
-msgstr ""
+msgstr "Σχέδιο χρωμάτων Συμπεριφορά άκρων"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:152
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:203
@@ -590,7 +590,7 @@ msgstr "Περικοπή στην επιλογή"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:150
 msgid "Current Palette"
-msgstr ""
+msgstr "Τρέχουσα Παλέτα"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:248
 msgid "Curved"
@@ -1429,7 +1429,7 @@ msgstr "Διάμεση τιμή"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
-msgstr ""
+msgstr "Μενού"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:363
@@ -1666,7 +1666,7 @@ msgstr "Παλέτα"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Palette Source"
-msgstr ""
+msgstr "Πηγή Παλέτας"
 
 #: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
@@ -1781,6 +1781,7 @@ msgstr "Πίνα Κολάδα"
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
 msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
+"Παρακαλούμε επανεκκινήστε το Pinta για τις αλλαγές που πρέπει να εφαρμοστούν."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:603
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:806
@@ -1823,7 +1824,7 @@ msgstr "Προκαθορισμένο ντεγκραντέ"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:147
 msgid "Preset Palettes"
-msgstr ""
+msgstr "Προεπιλεγμένες Παλέτες"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
@@ -1908,7 +1909,7 @@ msgstr "Τυχαία χρώματα"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:200
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
-msgstr ""
+msgstr "Τυχαίος σπόρος θορύβου"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:143
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
@@ -1917,7 +1918,7 @@ msgstr "Τυχαία σημεία"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:153
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Πρόσφατα Χρησιμοποιημένα Χρώματα"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:57
 msgid "Recolor"
@@ -2038,7 +2039,7 @@ msgstr "Αλλαγή μεγέθους της παλέτας"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
 msgid "Restart Pinta"
-msgstr ""
+msgstr "Επανεκκίνηση Pinta"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:161
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:212
@@ -2204,11 +2205,11 @@ msgstr "Πλήκτρο συντόμευσης"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
-msgstr ""
+msgstr "Συντομεύσεις Πληκτρολογίου"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
 msgid "Show Axonometric Grid"
-msgstr ""
+msgstr "Εμφάνιση αξονικού πλέγματος"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
 msgid "Show Grid"
@@ -2562,7 +2563,7 @@ msgstr "Κάθετο κόκκινο (R)"
 
 #: ../Pinta/MainWindow.cs:465
 msgid "View"
-msgstr ""
+msgstr "Προβολή"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:50
@@ -2742,7 +2743,8 @@ msgstr ""
 "  Spiros Anthis https://launchpad.net/~sugaraddicted\n"
 "  Vasilis Kosmidis https://launchpad.net/~vasiliskos\n"
 "  vassilis karamitros https://launchpad.net/~ecatodarcus\n"
-"  Νιάνιος Ρωμανός https://launchpad.net/~romanos-nianios"
+"  Νιάνιος Ρωμανός https://launchpad.net/~romanos-nianios\n"
+"Lefteris Trompakas https://launchpad.net/~androidcreator5"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:49
