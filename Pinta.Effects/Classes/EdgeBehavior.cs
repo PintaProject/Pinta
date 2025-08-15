@@ -1,4 +1,4 @@
-using Pinta.Gui.Widgets;
+using Pinta.Core;
 
 namespace Pinta.Effects;
 
