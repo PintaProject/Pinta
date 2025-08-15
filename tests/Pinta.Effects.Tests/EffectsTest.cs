@@ -392,7 +392,6 @@ internal sealed class EffectsTest
 	}
 
 	[Test]
-	[Ignore ("Produces different results on some platforms for unknown reasons")]
 	public void MandelbrotFractal1 ()
 	{
 		MandelbrotFractalEffect effect = new (Utilities.CreateMockServices ());
