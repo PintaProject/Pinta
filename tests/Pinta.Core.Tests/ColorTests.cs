@@ -51,15 +51,4 @@ internal sealed class ColorTests
 		Color c = new (r, g, b, a);
 		Assert.That (c.ToHex (alpha), Is.EqualTo (expected));
 	}
-
-	[TestCase ("CC33AA99", 0.8, 0.2, 0.6667, 0.6)]
-	public void FromBgraHexString (string bgraHex, double b, double g, double r, double a)
-	{
-#pragma warning disable CS0618 // Type or member is obsolete
-		Color hc = Color.ParseBgraHexString (bgraHex)!.Value;
-#pragma warning restore CS0618
-		Color hc_r = new (Math.Round (hc.R, 4), Math.Round (hc.G, 4), Math.Round (hc.B, 4), Math.Round (hc.A, 4));
-		Color expectedColor = new Color (r, g, b, a);
-		Assert.That (hc_r, Is.EqualTo (expectedColor));
-	}
 }
