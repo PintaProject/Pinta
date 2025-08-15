@@ -158,6 +158,8 @@ public sealed class PaletteManager : IPaletteService
 		string primaryColor = settings.GetSetting (SettingNames.PRIMARY_COLOR, string.Empty);
 		string secondaryColor = settings.GetSetting (SettingNames.SECONDARY_COLOR, string.Empty);
 
+#pragma warning disable CS0618 // Type or member is obsolete
+
 		SetColor (
 			setPrimary: true,
 			Color.ParseBgraHexString (primaryColor) ?? Color.Black,
@@ -177,6 +179,8 @@ public sealed class PaletteManager : IPaletteService
 				recently_used.Add (color.Value);
 		}
 
+#pragma warning restore CS0618
+
 		// Fill in with default color if not enough saved
 		int more_colors = MAX_RECENT_COLORS - recently_used.Count;
 
@@ -194,6 +198,8 @@ public sealed class PaletteManager : IPaletteService
 
 	private void SaveRecentlyUsedColors ()
 	{
+#pragma warning disable CS0618 // Type or member is obsolete
+
 		// Primary / Secondary colors
 		settings.PutSetting (SettingNames.PRIMARY_COLOR, Color.ToBgraHexString (PrimaryColor));
 		settings.PutSetting (SettingNames.SECONDARY_COLOR, Color.ToBgraHexString (SecondaryColor));
@@ -201,6 +207,7 @@ public sealed class PaletteManager : IPaletteService
 		// Recently used palette
 		string colors = string.Join (",", recently_used.Select (Color.ToBgraHexString));
 		settings.PutSetting (SettingNames.RECENT_COLORS, colors);
+#pragma warning restore CS0618
 	}
 
 	private void OnPrimaryColorChanged ()
