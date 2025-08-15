@@ -459,7 +459,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberSettings settings,
 		IWorkspaceService workspace)
 	{
-		PointPickerWidget widget = new (workspace.ImageSize, PointI.Zero) { Label = caption };
+		PointPickerWidget widget = new (workspace, PointI.Zero) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (
 			settings.reflector,
@@ -480,7 +480,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? p
 			: default;
 
-		PointPickerWidget widget = new (workspace.ImageSize, initialPoint) { Label = caption };
+		PointPickerWidget widget = new (workspace, initialPoint) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (
 			settings.reflector,

@@ -35,8 +35,9 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 	private ImageSurface? thumbnail;
 	private PointI position;
 	private PointD drag_start;
+	private readonly IWorkspaceService workspace;
 
-	public PointPickerGraphic ()
+	public PointPickerGraphic (IWorkspaceService workspace)
 	{
 		// TODO-GTK (improvement) - the allocated width should depend on the image aspect ratio. See the old GTK3 implementation
 		HeightRequest = WidthRequest = 65;
@@ -47,38 +48,40 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 		SetDrawFunc ((area, context, width, height) => Draw (context));
 
 		// Handle click + drag.
-		var drag_gesture = Gtk.GestureDrag.New ();
-		drag_gesture.SetButton (GtkExtensions.MOUSE_LEFT_BUTTON);
-
-		drag_gesture.OnDragBegin += (_, args) => {
+		Gtk.GestureDrag dragGesture = Gtk.GestureDrag.New ();
+		dragGesture.SetButton (GtkExtensions.MOUSE_LEFT_BUTTON);
+		dragGesture.OnDragBegin += (_, args) => {
 			drag_start = new PointD (args.StartX, args.StartY);
 			Position = MousePtToPosition (drag_start);
-			drag_gesture.SetState (Gtk.EventSequenceState.Claimed);
+			dragGesture.SetState (Gtk.EventSequenceState.Claimed);
 		};
-		drag_gesture.OnDragUpdate += (_, args) => {
-			var drag_offset = new PointD (args.OffsetX, args.OffsetY);
-			Position = MousePtToPosition (drag_start + drag_offset);
+		dragGesture.OnDragUpdate += (_, args) => {
+			PointD dragOffset = new (args.OffsetX, args.OffsetY);
+			Position = MousePtToPosition (drag_start + dragOffset);
 		};
-		drag_gesture.OnDragEnd += (_, args) => {
-			var drag_offset = new PointD (args.OffsetX, args.OffsetY);
-			Position = MousePtToPosition (drag_start + drag_offset);
+		dragGesture.OnDragEnd += (_, args) => {
+			PointD dragOffset = new (args.OffsetX, args.OffsetY);
+			Position = MousePtToPosition (drag_start + dragOffset);
 		};
 
-		AddController (drag_gesture);
+		AddController (dragGesture);
+
+		this.workspace = workspace;
 	}
 
 	private void UpdateThumbnail ()
 	{
-		var doc = PintaCore.Workspace.ActiveDocument;
+		Document doc = workspace.ActiveDocument;
 
-		var bounds = GetDrawBounds ();
-		var scalex = bounds.Width / (double) PintaCore.Workspace.ImageSize.Width;
-		var scaley = bounds.Height / (double) PintaCore.Workspace.ImageSize.Height;
+		RectangleI bounds = GetDrawBounds ();
+
+		double scaleX = bounds.Width / (double) workspace.ImageSize.Width;
+		double scaleY = bounds.Height / (double) workspace.ImageSize.Height;
 
 		thumbnail = CairoExtensions.CreateImageSurface (Format.Argb32, bounds.Width, bounds.Height);
 
 		using Context g = new (thumbnail);
-		g.Scale (scalex, scaley);
+		g.Scale (scaleX, scaleY);
 
 		foreach (var layer in doc.Layers.GetLayersToPaint ())
 			layer.Draw (g);
@@ -92,10 +95,9 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 	public PointI Position {
 		get => position;
 		set {
-			if (position != value) {
-				position = value;
-				OnPositionChange ();
-			}
+			if (position == value) return;
+			position = value;
+			OnPositionChanged ();
 		}
 	}
 
@@ -114,23 +116,21 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 		ImageSurface imageThumbnail);
 	private PointPickerVisualSettings CreateSettings ()
 	{
-		var rect = GetDrawBounds ();
-		var pos = PositionToClientPt (Position);
-
+		RectangleI drawBounds = GetDrawBounds ();
+		PointD pos = PositionToClientPt (Position);
 		Color black = new (0, 0, 0);
 		Color lightGray = new (.75, .75, .75);
-
 		return new (
 			outerFrameColor: lightGray,
 			innerFrameColor: black,
 			lineColor: black,
 			pointMarkerColor: black,
-			outerFrame: new (rect.X + 1, rect.Y + 1, rect.Width - 1, rect.Height - 1),
-			innerFrame: new (rect.X + 2, rect.Y + 2, rect.Width - 3, rect.Height - 3),
-			verticalLineStart: new (pos.X + 1, rect.Top + 2),
-			verticalLineEnd: new (pos.X + 1, rect.Bottom - 2),
-			horizontalLineStart: new (rect.Left + 2, pos.Y + 1),
-			horizontalLineEnd: new (rect.Right - 2, pos.Y + 1),
+			outerFrame: new (drawBounds.X + 1, drawBounds.Y + 1, drawBounds.Width - 1, drawBounds.Height - 1),
+			innerFrame: new (drawBounds.X + 2, drawBounds.Y + 2, drawBounds.Width - 3, drawBounds.Height - 3),
+			verticalLineStart: new (pos.X + 1, drawBounds.Top + 2),
+			verticalLineEnd: new (pos.X + 1, drawBounds.Bottom - 2),
+			horizontalLineStart: new (drawBounds.Left + 2, pos.Y + 1),
+			horizontalLineEnd: new (drawBounds.Right - 2, pos.Y + 1),
 			pointMarker: new (pos.X - 1, pos.Y - 1, 3, 3),
 			imageThumbnail: thumbnail!
 		);
@@ -164,42 +164,43 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 	{
 		int width = GetAllocatedWidth ();
 		int height = GetAllocatedHeight ();
-		// Always be X pixels tall, but maintain aspect ratio
-		var imagesize = PintaCore.Workspace.ImageSize;
-		width = Math.Min (width, (imagesize.Width * height) / imagesize.Height);
 
-		return new RectangleI (0, 0, width, height);
+		// Always be X pixels tall, but maintain aspect ratio
+		Size imagesize = workspace.ImageSize;
+
+		return new (
+			0,
+			0,
+			Math.Min (width, imagesize.Width * height / imagesize.Height), // Adjusted width
+			height);
 	}
 
-	#region Public Events
 	public event EventHandler? PositionChanged;
-
-	private void OnPositionChange ()
+	private void OnPositionChanged ()
 	{
 		PositionChanged?.Invoke (this, EventArgs.Empty);
 	}
-	#endregion
 
-	#region private methods
 	private PointI MousePtToPosition (PointD clientMousePt)
 	{
-		var rect = GetDrawBounds ();
-		int posX = (int) (clientMousePt.X * (PintaCore.Workspace.ImageSize.Width / rect.Width));
-		int posY = (int) (clientMousePt.Y * (PintaCore.Workspace.ImageSize.Height / rect.Height));
+		RectangleI rect = GetDrawBounds ();
 
-		return new PointI (posX, posY);
+		int posX = (int) (clientMousePt.X * (workspace.ImageSize.Width / rect.Width));
+		int posY = (int) (clientMousePt.Y * (workspace.ImageSize.Height / rect.Height));
+
+		return new (posX, posY);
 	}
 
 	private PointD PositionToClientPt (PointI pos)
 	{
-		var rect = GetDrawBounds ();
-		double halfWidth = PintaCore.Workspace.ImageSize.Width / rect.Width;
-		double halfHeight = PintaCore.Workspace.ImageSize.Height / rect.Height;
+		RectangleI rect = GetDrawBounds ();
+
+		double halfWidth = workspace.ImageSize.Width / rect.Width;
+		double halfHeight = workspace.ImageSize.Height / rect.Height;
 
 		double ptX = pos.X / halfWidth;
 		double ptY = pos.Y / halfHeight;
 
-		return new PointD (ptX, ptY);
+		return new (ptX, ptY);
 	}
-	#endregion
 }

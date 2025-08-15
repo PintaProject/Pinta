@@ -35,11 +35,19 @@ using System.Collections.Immutable;
 
 namespace Pinta.Effects;
 
+/// <summary>
+/// A static utility class for converting color values between sRGB and linear color spaces.
+/// </summary>
+/// <remarks>
+/// Human eyes don't perceive light linearly. They are more sensitive to changes in dark tones than in bright ones.
+/// sRGB is a color space designed to mimic this non-linear perception.
+/// </remarks>
 internal static class SrgbUtility
 {
-	// pre-calculated array of linear intensity for 8bit values
+	/// <summary>
+	/// Pre-calculated lookup table that stores the linear intensity for each possible 8-bit sRGB value (0-255).
+	/// </summary>
 	private static readonly ImmutableArray<double> linear_intensity = CalculateLinearIntensities ();
-
 	private static ImmutableArray<double> CalculateLinearIntensities ()
 	{
 		var linearIntensity = ImmutableArray.CreateBuilder<double> ();
@@ -51,29 +59,50 @@ internal static class SrgbUtility
 		return linearIntensity.MoveToImmutable ();
 	}
 
+	/// <summary>
+	/// Converts a color channel value from linear RGB to sRGB space.
+	/// </summary>
+	/// <param name="linearLevel">Value in linear space, between 0 and 1</param>
+	/// <exception cref="ArgumentOutOfRangeException" />
 	public static double ToSrgb (double linearLevel)
 	{
-		System.Diagnostics.Debug.Assert ((linearLevel >= 0d && linearLevel <= 1d), "level is out of range 0-1");
-		const double power = 1d / 2.4d;
+		if (linearLevel < 0d || linearLevel > 1d)
+			throw new ArgumentOutOfRangeException (nameof (linearLevel));
+
+		const double POWER = 1d / 2.4d;
 		return
 			(linearLevel <= 0.0031308d)
 			? 12.92d * linearLevel
-			: (1.055d * Math.Pow (linearLevel, power)) - 0.055d;
+			: (1.055d * Math.Pow (linearLevel, POWER)) - 0.055d;
 	}
 
+	/// <summary>
+	/// A "safe" version of ToSrgb that clamps the input value to the valid 0.0-1.0 range
+	/// instead of throwing an exception.
+	/// </summary>
 	public static double ToSrgbClamped (double linearLevel)
-		=> (linearLevel < 0d) ? 0d : (linearLevel > 1d) ? 1d : ToSrgb (linearLevel);
+	{
+		if (linearLevel < 0d) return 0d;
+		if (linearLevel > 1d) return 1d;
+		return ToSrgb (linearLevel);
+	}
 
+	/// <summary>
+	/// Converts an 8-bit sRGB color channel value to its linear equivalent using the pre-calculated lookup table.
+	/// </summary>
 	public static double ToLinear (byte srgbLevel)
 		=> linear_intensity[srgbLevel];
 
+	/// <summary>
+	/// Converts a floating-point sRGB color channel value to its linear equivalent.
+	/// </summary>
 	public static double ToLinear (double srgbLevel)
 	{
-		const double factor1 = 1d / 12.92d;
-		const double factor2 = 1d / 1.055d;
+		const double FACTOR_1 = 1d / 12.92d;
+		const double FACTOR_2 = 1d / 1.055d;
 		return
 			(srgbLevel <= 0.04045d)
-			? srgbLevel * factor1
-			: Math.Pow ((srgbLevel + 0.055d) * factor2, 2.4d);
+			? srgbLevel * FACTOR_1
+			: Math.Pow ((srgbLevel + 0.055d) * FACTOR_2, 2.4d);
 	}
 }

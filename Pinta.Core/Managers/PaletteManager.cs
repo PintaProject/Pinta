@@ -83,7 +83,7 @@ public sealed class PaletteManager : IPaletteService
 		this.settings = settings;
 		this.palette_formats = paletteFormats;
 
-		CurrentPalette = Palette.GetDefault ();
+		CurrentPalette = PaletteHelper.CreateDefault ();
 
 		// This depends on `palette_formats` and `CurrentPalette` having a value
 		// Can this call be moved out of this constructor?
