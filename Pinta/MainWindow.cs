@@ -262,7 +262,15 @@ internal sealed class MainWindow
 			return true;
 
 		// Finally, see if the palette widget wants it.
-		return PintaCore.Palette.DoKeyPress (args);
+		bool shouldSwapColors = !args.State.HasModifierKey () && args.GetKey ().ToUpper ().Value == Gdk.Constants.KEY_X;
+
+		if (shouldSwapColors) {
+			PintaCore.Palette.SwapColors ();
+			return true;
+		}
+
+		// We return 'false' to indicate that nobody consumed it
+		return false;
 	}
 
 	private void HandleGlobalKeyRelease (

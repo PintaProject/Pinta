@@ -1,7 +1,5 @@
 using System;
-using Gtk;
 using NUnit.Framework;
-using Pango;
 using Color = Cairo.Color;
 
 namespace Pinta.Core.Tests;
@@ -50,5 +48,26 @@ internal sealed class ColorTests
 	{
 		Color c = new (r, g, b, a);
 		Assert.That (c.ToHex (alpha), Is.EqualTo (expected));
+	}
+
+	[TestCase ("CC33AA99", 0.8, 0.2, 0.6667, 0.6)]
+	public void FromBgraHexString (string bgraHex, double a, double r, double g, double b)
+	{
+#pragma warning disable CS0618 // Type or member is obsolete
+		Color hc = Color.ParseBgraHexString (bgraHex)!.Value;
+#pragma warning restore CS0618
+		hc = new (Math.Round (hc.R, 4), Math.Round (hc.G, 4), Math.Round (hc.B, 4), Math.Round (hc.A, 4));
+		Color expectedColor = new (r, g, b, a);
+		Assert.That (hc, Is.EqualTo (expectedColor));
+	}
+
+	[TestCase (0.6, 0, 0.3, 1.0, "99004CFF")]
+	public void ToBgraHexString (double a, double r, double g, double b, string expected)
+	{
+		Color c = new (r, g, b, a);
+#pragma warning disable CS0618 // Type or member is obsolete
+		string result = Color.ToBgraHexString (c);
+#pragma warning restore CS0618
+		Assert.That (result, Is.EqualTo (expected));
 	}
 }
