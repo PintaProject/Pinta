@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Core;
 

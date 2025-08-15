@@ -13,7 +13,7 @@
 
 using System;
 
-namespace Pinta.Gui.Widgets;
+namespace Pinta.Core;
 
 [AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false)]
 public sealed class SkipAttribute : Attribute
