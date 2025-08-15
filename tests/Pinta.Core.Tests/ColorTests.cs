@@ -1,7 +1,5 @@
 using System;
-using Gtk;
 using NUnit.Framework;
-using Pango;
 using Color = Cairo.Color;
 
 namespace Pinta.Core.Tests;
