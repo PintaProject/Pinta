@@ -62,4 +62,14 @@ internal sealed class ColorTests
 		Color expectedColor = new (r, g, b, a);
 		Assert.That (hc, Is.EqualTo (expectedColor));
 	}
+
+	[TestCase (0.6, 0, 0.3, 1.0, "99004CFF")]
+	public void ToBgraHexString (double a, double r, double g, double b, string expected)
+	{
+		Color c = new (r, g, b, a);
+#pragma warning disable CS0618 // Type or member is obsolete
+		string result = Color.ToBgraHexString (c);
+#pragma warning restore CS0618
+		Assert.That (result, Is.EqualTo (expected));
+	}
 }
