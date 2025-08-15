@@ -106,7 +106,12 @@ public readonly record struct Color (
 	/// Parses the color from a hex string in the byte order of the ColorBgra struct,
 	/// for backwards compatibility with existing settings.
 	/// </summary>
-	public static Color? ParseBgraHexString (string hex)
+	/// <remarks>
+	/// This should only be used for backwards compatibility with existing settings.
+	/// New code should use FromHex()
+	/// </remarks>
+	[Obsolete ("New code uses R-G-B-A arrangement")]
+	internal static Color? ParseBgraHexString (string hex)
 	{
 		Color? result = FromHex (hex);
 
@@ -125,7 +130,12 @@ public readonly record struct Color (
 	/// Converts the color to a hex string in the byte order of the ColorBgra struct,
 	/// for backwards compatibility with existing settings.
 	/// </summary>
-	public static string ToBgraHexString (Color color)
+	/// /// <remarks>
+	/// This should only be used for backwards compatibility with existing settings.
+	/// New code should use ToHex()
+	/// </remarks>
+	[Obsolete ("New code uses R-G-B-A arrangement")]
+	internal static string ToBgraHexString (Color color)
 	{
 		Color bgra = new (color.A, color.R, color.G, color.B);
 		return bgra.ToHex (addAlpha: true);
