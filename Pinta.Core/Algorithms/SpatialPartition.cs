@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
+using Pinta.Gui.Widgets;
 
 namespace Pinta.Core;
 
@@ -55,7 +56,7 @@ public static class SpatialPartition
 
 		return pointArrangement switch {
 			PointArrangement.Random => CreateRandomPoints (roi, pointCount, pointLocationsSeed),
-			PointArrangement.Circle => CreateCirclePoints (roi, pointCount),
+			PointArrangement.Circular => CreateCirclePoints (roi, pointCount),
 			PointArrangement.Phyllotaxis => CreatePhyllotaxisPoints (roi, pointCount),
 			_ => throw new InvalidEnumArgumentException (nameof (pointArrangement), (int) pointArrangement, typeof (PointArrangement)),
 		};
@@ -122,7 +123,14 @@ public static class SpatialPartition
 
 public enum PointArrangement
 {
+	[Caption ("Random")]
 	Random,
-	Circle,
+
+	// Translators: Arrangement of points along a circular path
+	[Caption ("Circular")]
+	Circular,
+
+	// Translators: Arrangement of points similar to how sunflower seeds are arranged
+	[Caption ("Phyllotaxis")]
 	Phyllotaxis,
 }

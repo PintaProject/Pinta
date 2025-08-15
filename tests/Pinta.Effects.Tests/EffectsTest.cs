@@ -161,7 +161,7 @@ internal sealed class EffectsTest
 	public void Cells13 ()
 	{
 		CellsEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.PointArrangement = PointArrangement.Circle;
+		effect.Data.PointArrangement = PointArrangement.Circular;
 		Utilities.TestEffect (effect, "cells13.png");
 	}
 
@@ -802,7 +802,7 @@ internal sealed class EffectsTest
 	public void Voronoi8 ()
 	{
 		VoronoiDiagramEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.PointArrangement = PointArrangement.Circle;
+		effect.Data.PointArrangement = PointArrangement.Circular;
 		Utilities.TestEffect (effect, "voronoi8.png");
 	}
 
