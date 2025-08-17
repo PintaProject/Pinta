@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 

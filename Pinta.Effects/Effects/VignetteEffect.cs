@@ -33,7 +33,6 @@ using System;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
