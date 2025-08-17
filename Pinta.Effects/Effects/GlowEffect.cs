@@ -19,7 +19,7 @@ public sealed class GlowEffect : BaseEffect
 	private readonly UserBlendOps.ScreenBlendOp screen_blend_op;
 	private readonly IServiceProvider services;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsPhotoGlow;
+	public override string Icon => Resources.Icons.EffectsPhotoGlow;
 
 	public sealed override bool IsTileable => true;
 
@@ -74,13 +74,16 @@ public sealed class GlowEffect : BaseEffect
 
 	public sealed class GlowData : EffectData
 	{
-		[Caption ("Radius"), MinimumValue (1), MaximumValue (20)]
+		[Caption ("Radius")]
+		[MinimumValue (1), MaximumValue (20)]
 		public int Radius { get; set; } = 6;
 
-		[Caption ("Brightness"), MinimumValue (-100), MaximumValue (100)]
+		[Caption ("Brightness")]
+		[MinimumValue (-100), MaximumValue (100)]
 		public int Brightness { get; set; } = 10;
 
-		[Caption ("Contrast"), MinimumValue (-100), MaximumValue (100)]
+		[Caption ("Contrast")]
+		[MinimumValue (-100), MaximumValue (100)]
 		public int Contrast { get; set; } = 10;
 	}
 }

@@ -10,7 +10,7 @@ namespace Pinta.Effects;
 
 public sealed class FeatherEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsDefault;
+	public override string Icon => Resources.Icons.EffectsDefault;
 
 	// Takes two passes, so must be multithreaded internally
 	public sealed override bool IsTileable => false;
@@ -164,10 +164,12 @@ public sealed class FeatherEffect : BaseEffect
 
 	public sealed class FeatherData : EffectData
 	{
-		[Caption ("Radius"), MinimumValue (1), MaximumValue (100)]
+		[Caption ("Radius")]
+		[MinimumValue (1), MaximumValue (100)]
 		public int Radius { get; set; } = 6;
 
-		[Caption ("Tolerance"), MinimumValue (0), MaximumValue (255)]
+		[Caption ("Tolerance")]
+		[MinimumValue (0), MaximumValue (255)]
 		public int Tolerance { get; set; } = 20;
 
 		[Caption ("Feather Canvas Edge")]

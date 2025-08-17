@@ -22,7 +22,7 @@ public sealed class PencilSketchEffect : BaseEffect
 	private readonly BrightnessContrastEffect bac_adjustment;
 	private readonly UserBlendOps.ColorDodgeBlendOp color_dodge_op;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsArtisticPencilSketch;
+	public override string Icon => Resources.Icons.EffectsArtisticPencilSketch;
 
 	public sealed override bool IsTileable => true;
 
@@ -82,10 +82,12 @@ public sealed class PencilSketchEffect : BaseEffect
 
 	public sealed class PencilSketchData : EffectData
 	{
-		[Caption ("Pencil Tip Size"), MinimumValue (1), MaximumValue (20)]
+		[Caption ("Pencil Tip Size")]
+		[MinimumValue (1), MaximumValue (20)]
 		public int PencilTipSize { get; set; } = 2;
 
-		[Caption ("Color Range"), MinimumValue (-20), MaximumValue (20)]
+		[Caption ("Color Range")]
+		[MinimumValue (-20), MaximumValue (20)]
 		public int ColorRange { get; set; } = 0;
 	}
 }

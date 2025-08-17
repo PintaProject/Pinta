@@ -113,7 +113,8 @@ public sealed class BulgeEffect : BaseEffect
 
 	public sealed class BulgeData : EffectData
 	{
-		[Caption ("Amount"), MinimumValue (-200), MaximumValue (100)]
+		[Caption ("Amount")]
+		[MinimumValue (-200), MaximumValue (100)]
 		public int Amount { get; set; } = 45;
 
 		[Caption ("Offset")]

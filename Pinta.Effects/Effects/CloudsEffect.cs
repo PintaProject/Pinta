@@ -169,10 +169,12 @@ public sealed class CloudsEffect : BaseEffect
 		[Skip]
 		public override bool IsDefault => Power == 0;
 
-		[Caption ("Scale"), MinimumValue (2), MaximumValue (1000)]
+		[Caption ("Scale")]
+		[MinimumValue (2), MaximumValue (1000)]
 		public int Scale { get; set; } = 250;
 
-		[Caption ("Power"), MinimumValue (0), MaximumValue (100)]
+		[Caption ("Power")]
+		[MinimumValue (0), MaximumValue (100)]
 		public int Power { get; set; } = 50;
 
 		[Skip]

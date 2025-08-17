@@ -17,7 +17,7 @@ namespace Pinta.Effects;
 
 public sealed class GaussianBlurEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsBlursGaussianBlur;
+	public override string Icon => Resources.Icons.EffectsBlursGaussianBlur;
 
 	public sealed override bool IsTileable => true;
 
@@ -244,7 +244,8 @@ public sealed class GaussianBlurEffect : BaseEffect
 
 	public sealed class GaussianBlurData : EffectData
 	{
-		[Caption ("Radius"), MinimumValue (0), MaximumValue (200)]
+		[Caption ("Radius")]
+		[MinimumValue (0), MaximumValue (200)]
 		public int Radius { get; set; } = 2;
 
 		[Skip]

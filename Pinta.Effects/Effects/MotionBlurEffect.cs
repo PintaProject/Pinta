@@ -144,7 +144,8 @@ public sealed class MotionBlurEffect : BaseEffect
 		[Caption ("Angle")]
 		public DegreesAngle Angle { get; set; } = new (25);
 
-		[Caption ("Distance"), MinimumValue (1), MaximumValue (200)]
+		[Caption ("Distance")]
+		[MinimumValue (1), MaximumValue (200)]
 		public int Distance { get; set; } = 10;
 
 		[Caption ("Centered")]

@@ -54,7 +54,8 @@ public sealed class SharpenEffect : BaseEffect
 
 public sealed class SharpenData : EffectData
 {
-	[Caption ("Amount"), MinimumValue (1), MaximumValue (20)]
+	[Caption ("Amount")]
+	[MinimumValue (1), MaximumValue (20)]
 	public int Amount { get; set; } = 2;
 }
 

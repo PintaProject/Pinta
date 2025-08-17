@@ -16,7 +16,7 @@ namespace Pinta.Effects;
 
 public sealed class OutlineEdgeEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
+	public override string Icon => Resources.Icons.EffectsStylizeOutline;
 
 	public sealed override bool IsTileable => true;
 
@@ -130,10 +130,12 @@ public sealed class OutlineEdgeEffect : BaseEffect
 
 	public sealed class OutlineEdgeData : EffectData
 	{
-		[Caption ("Thickness"), MinimumValue (1), MaximumValue (200)]
+		[Caption ("Thickness")]
+		[MinimumValue (1), MaximumValue (200)]
 		public int Thickness { get; set; } = 3;
 
-		[Caption ("Intensity"), MinimumValue (0), MaximumValue (100)]
+		[Caption ("Intensity")]
+		[MinimumValue (0), MaximumValue (100)]
 		public int Intensity { get; set; } = 50;
 
 		[Skip]

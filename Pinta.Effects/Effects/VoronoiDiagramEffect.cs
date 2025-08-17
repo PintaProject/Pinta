@@ -178,7 +178,8 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		[Caption ("Distance Metric")]
 		public DistanceMetric DistanceMetric { get; set; } = DistanceMetric.Euclidean;
 
-		[Caption ("Number of Cells"), MinimumValue (1), MaximumValue (1024)]
+		[Caption ("Number of Cells")]
+		[MinimumValue (1), MaximumValue (1024)]
 		public int NumberOfCells { get; set; } = 100;
 
 		[Caption ("Color Sorting")]

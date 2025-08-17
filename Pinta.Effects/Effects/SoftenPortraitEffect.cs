@@ -47,7 +47,7 @@ public sealed class SoftenPortraitEffect : BaseEffect
 	private readonly UnaryPixelOps.Desaturate desaturate_op;
 	private readonly UserBlendOps.OverlayBlendOp overlay_op;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsPhotoSoftenPortrait;
+	public override string Icon => Resources.Icons.EffectsPhotoSoftenPortrait;
 
 	public sealed override bool IsTileable => true;
 
@@ -122,12 +122,15 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 public sealed class SoftenPortraitData : EffectData
 {
-	[Caption ("Softness"), MinimumValue (0), MaximumValue (10)]
+	[Caption ("Softness")]
+	[MinimumValue (0), MaximumValue (10)]
 	public int Softness { get; set; } = 5;
 
-	[Caption ("Lighting"), MinimumValue (-20), MaximumValue (20)]
+	[Caption ("Lighting")]
+	[MinimumValue (-20), MaximumValue (20)]
 	public int Lighting { get; set; } = 0;
 
-	[Caption ("Warmth"), MinimumValue (0), MaximumValue (20)]
+	[Caption ("Warmth")]
+	[MinimumValue (0), MaximumValue (20)]
 	public int Warmth { get; set; } = 10;
 }

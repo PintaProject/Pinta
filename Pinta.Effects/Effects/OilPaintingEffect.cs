@@ -144,10 +144,12 @@ public sealed class OilPaintingEffect : BaseEffect
 
 	public sealed class OilPaintingData : EffectData
 	{
-		[Caption ("Brush Size"), MinimumValue (1), MaximumValue (8)]
+		[Caption ("Brush Size")]
+		[MinimumValue (1), MaximumValue (8)]
 		public int BrushSize { get; set; } = 3;
 
-		[Caption ("Coarseness"), MinimumValue (3), MaximumValue (255)]
+		[Caption ("Coarseness")]
+		[MinimumValue (3), MaximumValue (255)]
 		public int Coarseness { get; set; } = 50;
 	}
 }

@@ -16,7 +16,7 @@ namespace Pinta.Effects;
 
 public sealed class PixelateEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortPixelate;
+	public override string Icon => Resources.Icons.EffectsDistortPixelate;
 
 	public sealed override bool IsTileable => true;
 
@@ -118,6 +118,7 @@ public sealed class PixelateEffect : BaseEffect
 
 public sealed class PixelateData : EffectData
 {
-	[Caption ("Cell Size"), MinimumValue (1), MaximumValue (100)]
+	[Caption ("Cell Size")]
+	[MinimumValue (1), MaximumValue (100)]
 	public int CellSize { get; set; } = 2;
 }

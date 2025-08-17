@@ -16,7 +16,7 @@ namespace Pinta.Effects;
 
 public sealed class FrostedGlassEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsDistortFrostedGlass;
+	public override string Icon => Resources.Icons.EffectsDistortFrostedGlass;
 
 	public sealed override bool IsTileable => true;
 
@@ -143,7 +143,8 @@ public sealed class FrostedGlassEffect : BaseEffect
 
 	public sealed class FrostedGlassData : EffectData
 	{
-		[Caption ("Amount"), MinimumValue (1), MaximumValue (10)]
+		[Caption ("Amount")]
+		[MinimumValue (1), MaximumValue (10)]
 		public int Amount { get; set; } = 1;
 
 		[Caption ("Random Noise Seed")]
