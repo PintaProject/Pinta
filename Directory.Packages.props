@@ -14,7 +14,7 @@
     <PackageVersion Include="Mono.Addins.CecilReflector" Version="1.4.2-alpha.4" />
     <PackageVersion Include="NGettext" Version="0.6.7" />
     <PackageVersion Include="ParagonClipper" Version="6.4.2" />
-    <PackageVersion Include="System.CommandLine" Version="2.0.0-beta6.25358.103" />
+    <PackageVersion Include="System.CommandLine" Version="2.0.0-beta7.25380.108" />
     <PackageVersion Include="Tmds.DBus" Version="0.21.2" />
 
     <!-- Dependencies used for unit tests -->
