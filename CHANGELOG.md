@@ -26,6 +26,7 @@ Thanks to the following contributors who worked on this release:
 - Support for color picking in `SimpleEffectDialog`. Useful for add-in developers (#1611)
 
 ### Changed
+- Breaking API change: Attributes used for effect configuration properties (`CaptionAttribute`, `MaximumValueAttribute`, ...) are now in the `Pinta.Core` assembly and the `Pinta.Core` namespace
 - Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
 - Removed use of deprecated Gtk.FontButton (#1421)
 - View menu moved from hamburger menu to dedicated button (#1428, #1471)
