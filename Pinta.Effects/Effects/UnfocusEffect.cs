@@ -11,7 +11,6 @@ using System;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
@@ -86,7 +85,8 @@ public sealed class UnfocusEffect : BaseEffect
 
 	public sealed class UnfocusData : EffectData
 	{
-		[Caption ("Radius"), MinimumValue (1), MaximumValue (200)]
+		[Caption ("Radius")]
+		[MinimumValue (1), MaximumValue (200)]
 		public int Radius { get; set; } = 4;
 
 		[Skip]

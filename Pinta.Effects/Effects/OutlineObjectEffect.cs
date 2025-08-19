@@ -5,13 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
 public sealed class OutlineObjectEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsStylizeOutline;
+	public override string Icon => Resources.Icons.EffectsStylizeOutline;
 
 	// Takes two passes, so must be multithreaded internally
 	public sealed override bool IsTileable => false;
@@ -202,10 +201,12 @@ public sealed class OutlineObjectEffect : BaseEffect
 
 	public sealed class OutlineObjectData : EffectData
 	{
-		[Caption ("Radius"), MinimumValue (0), MaximumValue (100)]
+		[Caption ("Radius")]
+		[MinimumValue (0), MaximumValue (100)]
 		public int Radius { get; set; } = 6;
 
-		[Caption ("Tolerance"), MinimumValue (0), MaximumValue (255)]
+		[Caption ("Tolerance")]
+		[MinimumValue (0), MaximumValue (255)]
 		public int Tolerance { get; set; } = 20;
 
 		[Caption ("Alpha Gradient")]

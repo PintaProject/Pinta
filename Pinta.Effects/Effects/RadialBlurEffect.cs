@@ -11,13 +11,12 @@ using System;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
 public sealed class RadialBlurEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsBlursRadialBlur;
+	public override string Icon => Resources.Icons.EffectsBlursRadialBlur;
 
 	public sealed override bool IsTileable => true;
 
@@ -168,8 +167,9 @@ public sealed class RadialBlurEffect : BaseEffect
 		[Caption ("Offset")]
 		public CenterOffset<double> Offset { get; set; } = new (0, 0);
 
-		[Caption ("Quality"), MinimumValue (1), MaximumValue (5)]
+		[Caption ("Quality")]
 		[Hint ("Use low quality for previews, small images, and small angles.  Use high quality for final quality, large images, and large angles.")]
+		[MinimumValue (1), MaximumValue (5)]
 		public int Quality { get; set; } = 2;
 
 		[Skip]

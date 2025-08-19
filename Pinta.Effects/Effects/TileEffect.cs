@@ -13,7 +13,6 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
@@ -223,13 +222,16 @@ public sealed class TileEffect : BaseEffect
 
 	public sealed class TileData : EffectData
 	{
-		[Caption ("Rotation"), MinimumValue (-45), MaximumValue (45)]
+		[Caption ("Rotation")]
+		[MinimumValue (-45), MaximumValue (45)]
 		public DegreesAngle Rotation { get; set; } = new (30);
 
-		[Caption ("Tile Size"), MinimumValue (2), MaximumValue (200)]
+		[Caption ("Tile Size")]
+		[MinimumValue (2), MaximumValue (200)]
 		public int TileSize { get; set; } = 40;
 
-		[Caption ("Intensity"), MinimumValue (-20), MaximumValue (20)]
+		[Caption ("Intensity")]
+		[MinimumValue (-20), MaximumValue (20)]
 		public int Intensity { get; set; } = 8;
 
 		[Caption ("Tile Type")]

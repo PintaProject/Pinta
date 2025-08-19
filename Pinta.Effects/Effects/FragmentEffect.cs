@@ -12,7 +12,6 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
@@ -131,10 +130,12 @@ public sealed class FragmentEffect : BaseEffect
 
 	public sealed class FragmentData : EffectData
 	{
-		[Caption ("Fragments"), MinimumValue (2), MaximumValue (50)]
+		[Caption ("Fragments")]
+		[MinimumValue (2), MaximumValue (50)]
 		public int Fragments { get; set; } = 4;
 
-		[Caption ("Distance"), MinimumValue (0), MaximumValue (100)]
+		[Caption ("Distance")]
+		[MinimumValue (0), MaximumValue (100)]
 		public int Distance { get; set; } = 8;
 
 		[Caption ("Rotation")]

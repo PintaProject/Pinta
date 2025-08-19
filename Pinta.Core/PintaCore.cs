@@ -51,7 +51,7 @@ public static class PintaCore
 	/// run in the current version.
 	/// This should be updated when there are ABI-breaking changes.
 	/// </summary>
-	public const string AddinCompatVersion = "3.0";
+	public const string AddinCompatVersion = "3.1";
 
 	static PintaCore ()
 	{

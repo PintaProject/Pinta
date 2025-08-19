@@ -10,7 +10,6 @@
 using System;
 using System.Threading.Tasks;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 

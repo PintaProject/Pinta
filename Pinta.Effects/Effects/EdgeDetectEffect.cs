@@ -11,14 +11,13 @@ using System;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
 public sealed class EdgeDetectEffect : BaseEffect
 {
 	public override string Icon
-		=> Pinta.Resources.Icons.EffectsStylizeEdgeDetect;
+		=> Resources.Icons.EffectsStylizeEdgeDetect;
 
 	public sealed override bool IsTileable
 		=> true;

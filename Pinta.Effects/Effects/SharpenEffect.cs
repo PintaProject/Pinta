@@ -11,7 +11,6 @@ using System;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
@@ -55,7 +54,8 @@ public sealed class SharpenEffect : BaseEffect
 
 public sealed class SharpenData : EffectData
 {
-	[Caption ("Amount"), MinimumValue (1), MaximumValue (20)]
+	[Caption ("Amount")]
+	[MinimumValue (1), MaximumValue (20)]
 	public int Amount { get; set; } = 2;
 }
 

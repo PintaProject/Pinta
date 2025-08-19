@@ -11,13 +11,12 @@ using System;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
 public sealed class MedianEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsNoiseMedian;
+	public override string Icon => Resources.Icons.EffectsNoiseMedian;
 
 	public sealed override bool IsTileable => true;
 
@@ -57,10 +56,12 @@ public sealed class MedianEffect : BaseEffect
 
 	public sealed class MedianData : EffectData
 	{
-		[Caption ("Radius"), MinimumValue (1), MaximumValue (200)]
+		[Caption ("Radius")]
+		[MinimumValue (1), MaximumValue (200)]
 		public int Radius { get; set; } = 10;
 
-		[Caption ("Percentile"), MinimumValue (0), MaximumValue (100)]
+		[Caption ("Percentile")]
+		[MinimumValue (0), MaximumValue (100)]
 		public int Percentile { get; set; } = 50;
 
 		[Skip]

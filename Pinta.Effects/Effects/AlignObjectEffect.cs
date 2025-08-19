@@ -2,13 +2,12 @@ using System;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
 public sealed class AlignObjectEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsAlignObject;
+	public override string Icon => Resources.Icons.EffectsAlignObject;
 
 	public override string Name => Translations.GetString ("Align Object");
 

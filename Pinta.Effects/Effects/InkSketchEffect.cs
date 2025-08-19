@@ -12,7 +12,6 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
@@ -26,7 +25,7 @@ public sealed class InkSketchEffect : BaseEffect
 	private readonly UnaryPixelOps.Desaturate desaturate_op;
 	private readonly UserBlendOps.DarkenBlendOp darken_op;
 
-	public override string Icon => Pinta.Resources.Icons.EffectsArtisticInkSketch;
+	public override string Icon => Resources.Icons.EffectsArtisticInkSketch;
 
 	public sealed override bool IsTileable => true;
 
@@ -154,10 +153,12 @@ public sealed class InkSketchEffect : BaseEffect
 
 	public sealed class InkSketchData : EffectData
 	{
-		[Caption ("Ink Outline"), MinimumValue (0), MaximumValue (99)]
+		[Caption ("Ink Outline")]
+		[MinimumValue (0), MaximumValue (99)]
 		public int InkOutline { get; set; } = 50;
 
-		[Caption ("Coloring"), MinimumValue (0), MaximumValue (100)]
+		[Caption ("Coloring")]
+		[MinimumValue (0), MaximumValue (100)]
 		public int Coloring { get; set; } = 50;
 	}
 }

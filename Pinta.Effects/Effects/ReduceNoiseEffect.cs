@@ -11,13 +11,12 @@ using System;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
 public sealed class ReduceNoiseEffect : BaseEffect
 {
-	public override string Icon => Pinta.Resources.Icons.EffectsNoiseReduceNoise;
+	public override string Icon => Resources.Icons.EffectsNoiseReduceNoise;
 
 	public sealed override bool IsTileable => true;
 

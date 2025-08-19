@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
@@ -60,7 +58,6 @@ public sealed class CellsEffect : BaseEffect
 		CellsData data = Data;
 
 		RectangleI roi = live_preview.RenderBounds;
-		PointD locationOffset = new (0.5, 0.5);
 
 		var baseGradient =
 			GradientHelper
@@ -71,11 +68,13 @@ public sealed class CellsEffect : BaseEffect
 				data.ColorSchemeSeed)
 			.Resized (0, data.CellRadius);
 
-		IEnumerable<PointI> basePoints = SpatialPartition.CreateCellControlPoints (
+		IEnumerable<PointD> basePoints = SpatialPartition.CreateCellControlPoints (
 			roi,
 			Math.Min (data.NumberOfCells, roi.Width * roi.Height),
-			data.RandomPointLocations);
-		ImmutableArray<PointD> controlPoints = [.. basePoints.Select (p => p.ToDouble () + locationOffset)];
+			data.RandomPointLocations,
+			data.PointArrangement);
+
+		ImmutableArray<PointD> controlPoints = [.. basePoints];
 
 		return new (
 			size: destination.GetSize (),
@@ -143,6 +142,9 @@ public sealed class CellsEffect : BaseEffect
 	{
 		[Caption ("Distance Metric")]
 		public DistanceMetric DistanceMetric { get; set; } = DistanceMetric.Euclidean;
+
+		[Caption ("Point Arrangement")]
+		public PointArrangement PointArrangement { get; set; } = PointArrangement.Random;
 
 		[Caption ("Random Point Locations")]
 		public RandomSeed RandomPointLocations { get; set; } = new (0);
