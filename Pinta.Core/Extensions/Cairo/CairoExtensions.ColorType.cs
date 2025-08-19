@@ -103,6 +103,45 @@ public readonly record struct Color (
 	}
 
 	/// <summary>
+	/// Parses the color from a hex string in the byte order of the ColorBgra struct,
+	/// for backwards compatibility with existing settings.
+	/// </summary>
+	/// <remarks>
+	/// This should only be used for backwards compatibility with existing settings.
+	/// New code should use FromHex()
+	/// </remarks>
+	[Obsolete ("New code uses R-G-B-A arrangement")]
+	internal static Color? ParseBgraHexString (string hex)
+	{
+		Color? result = FromHex (hex);
+
+		if (result is null)
+			return null;
+
+		// Inverse of the reordering in ToBgraHexString().
+		return new (
+			result.Value.G,
+			result.Value.B,
+			result.Value.A,
+			result.Value.R);
+	}
+
+	/// <summary>
+	/// Converts the color to a hex string in the byte order of the ColorBgra struct,
+	/// for backwards compatibility with existing settings.
+	/// </summary>
+	/// /// <remarks>
+	/// This should only be used for backwards compatibility with existing settings.
+	/// New code should use ToHex()
+	/// </remarks>
+	[Obsolete ("New code uses R-G-B-A arrangement")]
+	internal static string ToBgraHexString (Color color)
+	{
+		Color bgra = new (color.A, color.R, color.G, color.B);
+		return bgra.ToHex (addAlpha: true);
+	}
+
+	/// <summary>
 	/// Copied from RgbColor.ToHsv<br/>
 	/// Returns the Cairo color in HSV value.
 	/// </summary>
