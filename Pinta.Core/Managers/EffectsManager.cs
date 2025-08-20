@@ -68,24 +68,7 @@ public sealed class EffectsManager
 			Console.Error.WriteLine ($"Icon {adjustment.Icon} for adjustment {adjustment.Name} not found");
 #endif
 		Type adjustmentType = typeof (T);
-		RegisterAdjustmentInternal (adjustment, adjustmentType);
-	}
 
-	/// <remarks>
-	/// Overload provided for compatibility with older add-ins
-	/// </remarks>
-	public void RegisterAdjustment (BaseEffect adjustment)
-	{
-#if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
-		if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (adjustment.Icon))
-			Console.Error.WriteLine ($"Icon {adjustment.Icon} for adjustment {adjustment.Name} not found");
-#endif
-		Type adjustmentType = adjustment.GetType ();
-		RegisterAdjustmentInternal (adjustment, adjustmentType);
-	}
-
-	private void RegisterAdjustmentInternal (BaseEffect adjustment, Type adjustmentType)
-	{
 		if (adjustments.ContainsKey (adjustmentType))
 			throw new Exception ($"An adjustment of type {adjustmentType} is already registered");
 
@@ -123,24 +106,7 @@ public sealed class EffectsManager
 			Console.Error.WriteLine ($"Icon {effect.Icon} for effect {effect.Name} not found");
 #endif
 		Type effectType = typeof (T);
-		RegisterEffectInternal (effect, effectType);
-	}
 
-	/// <remarks>
-	/// Overload provided for compatibility with older add-ins
-	/// </remarks>
-	public void RegisterEffect (BaseEffect effect)
-	{
-#if false // For testing purposes to detect any missing icons. This implies more disk accesses on startup so we may not want this on by default.
-		if (!GtkExtensions.GetDefaultIconTheme ().HasIcon (effect.Icon))
-			Console.Error.WriteLine ($"Icon {effect.Icon} for effect {effect.Name} not found");
-#endif
-		Type effectType = effect.GetType ();
-		RegisterEffectInternal (effect, effectType);
-	}
-
-	private void RegisterEffectInternal (BaseEffect effect, Type effectType)
-	{
 		if (effects.ContainsKey (effectType))
 			throw new Exception ($"An effect of type {effectType} is already registered");
 
@@ -167,14 +133,7 @@ public sealed class EffectsManager
 	public void UnregisterInstanceOfEffect<T> () where T : BaseEffect
 	{
 		Type effectType = typeof (T);
-		UnregisterInstanceOfEffect (effectType);
-	}
 
-	/// <remarks>
-	/// Overload provided for compatibility with older add-ins
-	/// </remarks>
-	public void UnregisterInstanceOfEffect (Type effectType)
-	{
 		if (!effects.TryGetValue (effectType, out var action))
 			return;
 
@@ -192,14 +151,7 @@ public sealed class EffectsManager
 	public void UnregisterInstanceOfAdjustment<T> () where T : BaseEffect
 	{
 		Type adjustmentType = typeof (T);
-		UnregisterInstamceOfAdjustment (adjustmentType);
-	}
 
-	/// <remarks>
-	/// Overload provided for compatibility with older add-ins
-	/// </remarks>
-	public void UnregisterInstamceOfAdjustment (Type adjustmentType)
-	{
 		if (!adjustments.TryGetValue (adjustmentType, out var action))
 			return;
 
