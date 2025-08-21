@@ -52,7 +52,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		bool showPoints,
 		double pointSize);
 
-	private VoronoiSettings CreateSettings (ImageSurface dst)
+	private VoronoiSettings CreateSettings (ImageSurface destination)
 	{
 		VoronoiDiagramData data = Data;
 
@@ -73,7 +73,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		IEnumerable<ColorBgra> reversedSortingColors = data.ReverseColorSorting ? positionSortedColors.Reverse () : positionSortedColors;
 
 		return new (
-			size: dst.GetSize (),
+			size: destination.GetSize (),
 			controlPoints: controlPoints,
 			samplingLocations: Sampling.CreateSamplingOffsets (data.Quality),
 			colors: [.. reversedSortingColors],
@@ -82,12 +82,12 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			pointSize: data.PointSize);
 	}
 
-	protected override void Render (ImageSurface src, ImageSurface dst, RectangleI roi)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		VoronoiSettings settings = CreateSettings (dst);
-		Span<ColorBgra> dst_data = dst.GetPixelData ();
+		VoronoiSettings settings = CreateSettings (destination);
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 		foreach (var kvp in roi.GeneratePixelOffsets (settings.size).Select (CreateColor))
-			dst_data[kvp.Key] = kvp.Value;
+			destinationData[kvp.Key] = kvp.Value;
 
 		KeyValuePair<int, ColorBgra> CreateColor (PixelOffset pixel)
 		{

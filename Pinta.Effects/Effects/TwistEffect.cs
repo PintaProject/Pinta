@@ -17,17 +17,23 @@ namespace Pinta.Effects;
 
 public sealed class TwistEffect : BaseEffect
 {
-	public override string Icon => Resources.Icons.EffectsDistortTwist;
+	public override string Icon
+		=> Resources.Icons.EffectsDistortTwist;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Twist");
+	public override string Name
+		=> Translations.GetString ("Twist");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Distort");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Distort");
 
-	public TwistData Data => (TwistData) EffectData!;  // NRT - Set in constructor
+	public TwistData Data
+		=> (TwistData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 	private readonly ILivePreview live_preview;
@@ -59,7 +65,7 @@ public sealed class TwistEffect : BaseEffect
 
 	private static ColorBgra GetFinalPixelColor (
 		TwistSettings settings,
-		ImageSurface src,
+		ImageSurface source,
 		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
 	{
@@ -90,7 +96,7 @@ public sealed class TwistEffect : BaseEffect
 				Y: (int) (settings.HalfHeight + settings.RenderBounds.Top + (float) (radialDistance * Math.Sin (twistedTheta)))
 			);
 
-			aggregate += src.GetColorBgra (sourceData, src.Width, samplePosition);
+			aggregate += source.GetColorBgra (sourceData, source.Width, samplePosition);
 		}
 
 		return aggregate.Blend ();

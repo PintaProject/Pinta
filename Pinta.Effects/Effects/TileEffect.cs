@@ -118,10 +118,7 @@ public sealed class TileEffect : BaseEffect
 		return result;
 	}
 
-	protected override void Render (
-		ImageSurface source,
-		ImageSurface destination,
-		RectangleI roi)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		TileSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();

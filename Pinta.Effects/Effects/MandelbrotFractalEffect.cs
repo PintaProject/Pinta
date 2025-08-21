@@ -116,9 +116,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		MandelbrotSettings settings = CreateSettings (destination);
-		Span<ColorBgra> dst_data = destination.GetPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
-			dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
+			destinationData[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 
 		if (settings.invertColors)
 			invert_effect.Render (destination, destination, [roi]);
