@@ -126,7 +126,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 	private static ColorBgra GetPixelColor (MandelbrotSettings settings, PointI target)
 	{
-		Span<ColorBgra> samples = stackalloc ColorBgra[settings.count];
+		ColorBgra.Blender aggregate = new ();
 
 		double baseU = ((2.0 * target.X) - settings.canvasSize.Width) * settings.invH;
 		double baseV = ((2.0 * target.Y) - settings.canvasSize.Height) * settings.invH;
@@ -151,10 +151,10 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 				settings.colorGradient.StartPosition,
 				settings.colorGradient.EndPosition);
 
-			samples[i] = settings.colorGradient.GetColor (c);
+			aggregate += settings.colorGradient.GetColor (c);
 		}
 
-		return ColorBgra.Blend (samples);
+		return aggregate.Blend ();
 	}
 
 	public sealed class MandelbrotFractalData : EffectData

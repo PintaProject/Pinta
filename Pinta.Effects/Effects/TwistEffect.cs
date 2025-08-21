@@ -72,7 +72,7 @@ public sealed class TwistEffect : BaseEffect
 
 		int antialiasSamples = settings.AntialiasPoints.Length;
 
-		Span<ColorBgra> subPixelSamples = stackalloc ColorBgra[antialiasSamples];
+		ColorBgra.Blender aggregate = new ();
 
 		for (int p = 0; p < antialiasSamples; ++p) {
 
@@ -90,10 +90,10 @@ public sealed class TwistEffect : BaseEffect
 				Y: (int) (settings.HalfHeight + settings.RenderBounds.Top + (float) (radialDistance * Math.Sin (twistedTheta)))
 			);
 
-			subPixelSamples[p] = src.GetColorBgra (sourceData, src.Width, samplePosition);
+			aggregate += src.GetColorBgra (sourceData, src.Width, samplePosition);
 		}
 
-		return ColorBgra.Blend (subPixelSamples);
+		return aggregate.Blend ();
 	}
 
 	private sealed record TwistSettings (

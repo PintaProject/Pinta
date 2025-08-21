@@ -92,15 +92,15 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		KeyValuePair<int, ColorBgra> CreateColor (PixelOffset pixel)
 		{
 			int sampleCount = settings.samplingLocations.Length;
-			Span<ColorBgra> samples = stackalloc ColorBgra[sampleCount];
+			ColorBgra.Blender aggregate = new ();
 			for (int i = 0; i < sampleCount; i++) {
 				PointD sampleLocation = pixel.coordinates.ToDouble () + settings.samplingLocations[i];
 				ColorBgra sample = GetColorForLocation (sampleLocation);
-				samples[i] = sample;
+				aggregate += sample;
 			}
 			return KeyValuePair.Create (
 				pixel.memoryOffset,
-				ColorBgra.Blend (samples));
+				aggregate.Blend ());
 		}
 
 		ColorBgra GetColorForLocation (PointD location)

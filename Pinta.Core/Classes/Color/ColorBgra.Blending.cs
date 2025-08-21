@@ -142,4 +142,58 @@ partial struct ColorBgra
 		else
 			return Zero;
 	}
+
+	public readonly struct Blender
+	{
+		public uint B { get; }
+		public uint G { get; }
+		public uint R { get; }
+		public uint A { get; }
+		public uint Count { get; }
+
+		public Blender ()
+		{
+			B = 0;
+			G = 0;
+			R = 0;
+			A = 0;
+			Count = 0;
+		}
+
+		private Blender (
+			uint b,
+			uint g,
+			uint r,
+			uint a,
+			uint count)
+		{
+			B = b;
+			G = g;
+			R = r;
+			A = a;
+			Count = count;
+		}
+
+		public static Blender operator + (in Blender blender, in ColorBgra color)
+		{
+			return new (
+				b: blender.B + color.B,
+				g: blender.G + color.G,
+				r: blender.R + color.R,
+				a: blender.A + color.A,
+				count: blender.Count + 1);
+		}
+
+		public ColorBgra Blend ()
+		{
+			if (Count == 0)
+				throw new InvalidOperationException ("No colors to blend");
+
+			return FromBgra (
+				b: (byte) (B / (ulong) Count),
+				g: (byte) (G / (ulong) Count),
+				r: (byte) (R / (ulong) Count),
+				a: (byte) (A / (ulong) Count));
+		}
+	}
 }

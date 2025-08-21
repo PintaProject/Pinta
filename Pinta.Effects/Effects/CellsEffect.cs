@@ -100,13 +100,13 @@ public sealed class CellsEffect : BaseEffect
 		ColorBgra CreateColor (PixelOffset pixel, ColorBgra original)
 		{
 			int sampleCount = settings.samplingLocations.Length;
-			Span<ColorBgra> samples = stackalloc ColorBgra[sampleCount];
+			ColorBgra.Blender aggregate = new ();
 			for (int i = 0; i < sampleCount; i++) {
 				PointD sampleLocation = pixel.coordinates.ToDouble () + settings.samplingLocations[i];
 				ColorBgra sample = GetColorForLocation (sampleLocation, original);
-				samples[i] = sample;
+				aggregate += sample;
 			}
-			return ColorBgra.Blend (samples);
+			return aggregate.Blend ();
 		}
 
 		ColorBgra GetColorForLocation (PointD location, ColorBgra original)
