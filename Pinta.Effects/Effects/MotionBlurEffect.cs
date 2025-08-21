@@ -133,7 +133,10 @@ public sealed class MotionBlurEffect : BaseEffect
 			++sampleCount;
 		}
 
-		return ColorBgra.Blend (samples[..sampleCount]);
+		if (sampleCount == 0)
+			return ColorBgra.Transparent; // TODO: Check if this scenario is possible, otherwise remove condition
+		else
+			return ColorBgra.Blend (samples[..sampleCount]);
 	}
 
 	public sealed class MotionBlurData : EffectData

@@ -83,7 +83,7 @@ partial struct ColorBgra
 		int count = colors.Length;
 
 		if (count == 0)
-			return Transparent;
+			throw new InvalidOperationException ($"{nameof (colors)} is empty");
 
 		Blender aggregate = new ();
 

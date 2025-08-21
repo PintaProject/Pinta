@@ -93,7 +93,11 @@ public static class Warp
 
 			++sampleCount;
 		}
-		return ColorBgra.Blend (samples[..sampleCount]);
+
+		if (sampleCount == 0)
+			return ColorBgra.Transparent; // TODO: Check if this scenario is possible, otherwise remove condition
+		else
+			return ColorBgra.Blend (samples[..sampleCount]);
 	}
 
 	private static ColorBgra GetSample (

@@ -143,9 +143,11 @@ public sealed class ColorPickerTool : BaseTool
 
 	private Color GetColorFromPoint (Document document, PointI point)
 	{
-		var pixels = GetPixelsFromPoint (document, point);
-		var color = ColorBgra.Blend (pixels.AsSpan ());
-		return color.ToCairoColor ();
+		ImmutableArray<ColorBgra> pixels = GetPixelsFromPoint (document, point);
+		if (pixels.Length == 0)
+			return Color.Transparent; // TODO: Check if this scenario is possible, otherwise remove condition
+		else
+			return ColorBgra.Blend (pixels.AsSpan ()).ToCairoColor ();
 	}
 
 	private ImmutableArray<ColorBgra> GetPixelsFromPoint (Document document, PointI point)
