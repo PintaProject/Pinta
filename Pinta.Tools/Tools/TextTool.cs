@@ -710,7 +710,7 @@ public sealed class TextTool : BaseTool
 
 				switch (e.Key.Value) {
 					case Gdk.Constants.KEY_BackSpace:
-						CurrentTextEngine.PerformBackspace ();
+						CurrentTextEngine.PerformBackspace (e.IsControlPressed);
 						break;
 
 					case Gdk.Constants.KEY_Delete:
@@ -862,7 +862,7 @@ public sealed class TextTool : BaseTool
 	{
 		// Remove the previous preedit string.
 		for (int i = 0; i < preedit_string?.Length; ++i)
-			CurrentTextEngine.PerformBackspace ();
+			CurrentTextEngine.PerformBackspace (false);
 
 		// Insert the new string.
 		preedit_string = updated;
