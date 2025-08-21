@@ -16,17 +16,23 @@ namespace Pinta.Effects;
 
 public sealed class ZoomBlurEffect : BaseEffect
 {
-	public override string Icon => Resources.Icons.EffectsBlursZoomBlur;
+	public override string Icon
+		=> Resources.Icons.EffectsBlursZoomBlur;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Zoom Blur");
+	public override string Name
+		=> Translations.GetString ("Zoom Blur");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Blurs");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Blurs");
 
-	public ZoomBlurData Data => (ZoomBlurData) EffectData!;  // NRT - Set in constructor
+	public ZoomBlurData Data
+		=> (ZoomBlurData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 	private readonly IWorkspaceService workspace;
@@ -83,7 +89,7 @@ public sealed class ZoomBlurEffect : BaseEffect
 	}
 
 	private static ColorBgra GetFinalPixelColor (
-		ImageSurface src,
+		ImageSurface source,
 		ZoomBlurSettings settings,
 		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
@@ -93,14 +99,11 @@ public sealed class ZoomBlurEffect : BaseEffect
 		long fx = (pixel.coordinates.X << 16) - settings.fcX;
 		long fy = (pixel.coordinates.Y << 16) - settings.fcY;
 
-		ColorBgra sourcePixel = sourceData[pixel.memoryOffset];
+		ColorBgra originalColor = sourceData[pixel.memoryOffset];
 
-		int sr = sourcePixel.R;
-		int sg = sourcePixel.G;
-		int sb = sourcePixel.B;
-		int sa = sourcePixel.A;
+		ColorBgra.Blender aggregate = new ();
 
-		int sc = 1;
+		aggregate += originalColor;
 
 		for (int i = 0; i < N; ++i) {
 
@@ -114,27 +117,18 @@ public sealed class ZoomBlurEffect : BaseEffect
 			if (!settings.sourceBounds.Contains (transformed))
 				continue;
 
-			ColorBgra src_pixel_2 = src.GetColorBgra (
+			ColorBgra src_pixel_2 = source.GetColorBgra (
 				sourceData,
 				settings.size.Width,
 				transformed);
 
-			sr += src_pixel_2.R;
-			sg += src_pixel_2.G;
-			sb += src_pixel_2.B;
-			sa += src_pixel_2.A;
-
-			++sc;
+			aggregate += src_pixel_2;
 		}
 
 		return
-			(sa != 0)
-			? ColorBgra.FromBgra (
-				b: Utility.ClampToByte (sb / sc),
-				g: Utility.ClampToByte (sg / sc),
-				r: Utility.ClampToByte (sr / sc),
-				a: Utility.ClampToByte (sa / sc))
-			: ColorBgra.Transparent;
+			(aggregate.Count == 0)
+			? ColorBgra.Transparent
+			: aggregate.Blend ();
 	}
 
 	public sealed class ZoomBlurData : EffectData
