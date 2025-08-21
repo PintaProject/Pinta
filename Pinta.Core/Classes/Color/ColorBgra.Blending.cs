@@ -81,26 +81,16 @@ partial struct ColorBgra
 	public static ColorBgra Blend (ReadOnlySpan<ColorBgra> colors)
 	{
 		int count = colors.Length;
+
 		if (count == 0)
 			return Transparent;
 
-		ulong a_sum = 0;
-		ulong b_sum = 0;
-		ulong g_sum = 0;
-		ulong r_sum = 0;
-		for (int i = 0; i < count; ++i) {
-			a_sum += colors[i].A;
-			b_sum += colors[i].B;
-			g_sum += colors[i].G;
-			r_sum += colors[i].R;
-		}
+		Blender aggregate = new ();
 
-		byte a = (byte) (a_sum / (ulong) count);
-		byte b = (byte) (b_sum / (ulong) count);
-		byte g = (byte) (g_sum / (ulong) count);
-		byte r = (byte) (r_sum / (ulong) count);
+		for (int i = 0; i < count; ++i)
+			aggregate += colors[i];
 
-		return FromBgra (b, g, r, a);
+		return aggregate.Blend ();
 	}
 
 	/// <summary>
