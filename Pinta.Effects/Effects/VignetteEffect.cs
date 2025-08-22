@@ -78,58 +78,53 @@ public sealed class VignetteEffect : BaseEffect
 
 	private VignetteSettings CreateSettings (ImageSurface src)
 	{
+		VignetteData data = Data;
 		Size canvasSize = src.GetSize ();
 		double r1 = Math.Max (canvasSize.Width, canvasSize.Height) * 0.5d;
-		double r2 = r1 * Convert.ToDouble (Data.RadiusPercentage) / 100d;
-		double amount = Data.Amount;
+		double r2 = r1 * Convert.ToDouble (data.RadiusPercentage) / 100d;
+		double amount = data.Amount;
 		return new (
 			canvasSize: canvasSize,
 			radiusR: Math.PI / (8 * (r2 * r2)),
 			amount: amount,
 			amount1: 1d - amount,
-			centerOffset: Data.Offset);
+			centerOffset: data.Offset);
 	}
 
 	// Algorithm code ported from PDN
-	protected override void Render (
-		ImageSurface source,
-		ImageSurface destination,
-		RectangleI roi)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		VignetteSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
-			destinationData[pixel.memoryOffset] = GetFinalPixelColor (settings, sourceData, pixel);
+			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
+				settings,
+				sourceData[pixel.memoryOffset],
+				pixel.coordinates - settings.centerOffset);
 	}
 
-	private static ColorBgra GetFinalPixelColor (
-		VignetteSettings settings,
-		ReadOnlySpan<ColorBgra> sourceData,
-		PixelOffset pixel)
+	private static ColorBgra GetFinalPixelColor (VignetteSettings settings, in ColorBgra originalColor, in PointI fromCenter)
 	{
-		double iy = pixel.coordinates.Y - settings.centerOffset.Y;
-		double iy2 = iy * iy;
-		double ix = pixel.coordinates.X - settings.centerOffset.X;
-		double d = (iy2 + (ix * ix)) * settings.radiusR;
+		double effectiveFactor = GetEffectiveFactor (settings, fromCenter);
+		return ColorBgra.FromBgra (
+			r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.R) * effectiveFactor))),
+			g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.G) * effectiveFactor))),
+			b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.B) * effectiveFactor))),
+			a: originalColor.A);
+	}
+
+	private static double GetEffectiveFactor (VignetteSettings settings, in PointI fromCenter)
+	{
+		double d = fromCenter.MagnitudeSquared () * settings.radiusR;
 		double factor = Math.Cos (d);
-		ColorBgra originalColor = sourceData[pixel.memoryOffset];
-		if (factor <= 0 || d > Math.PI) {
-			return ColorBgra.FromBgra (
-				r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.R) * settings.amount1))),
-				g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.G) * settings.amount1))),
-				b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.B) * settings.amount1))),
-				a: originalColor.A);
-		} else {
-			double factor2 = factor * factor;
-			double factor4 = factor2 * factor2;
-			double effectiveFactor = settings.amount1 + (settings.amount * factor4);
-			return ColorBgra.FromBgra (
-				r: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.R) * effectiveFactor))),
-				g: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.G) * effectiveFactor))),
-				b: (byte) (0.5 + (255 * SrgbUtility.ToSrgbClamped (SrgbUtility.ToLinear (originalColor.B) * effectiveFactor))),
-				a: originalColor.A);
-		}
+
+		if (factor <= 0 || d > Math.PI)
+			return settings.amount1;
+
+		double factor2 = factor * factor;
+		double factor4 = factor2 * factor2;
+		return settings.amount1 + (settings.amount * factor4);
 	}
 }
 

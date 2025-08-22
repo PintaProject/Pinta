@@ -26,6 +26,9 @@ public static class Utility
 	public static byte ClampToByte (int x)
 		=> (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
+	public static int MagnitudeSquared (this in PointI p)
+		=> Mathematics.MagnitudeSquared (p.X, p.Y);
+
 	public static double MagnitudeSquared (this in PointD p)
 		=> Mathematics.MagnitudeSquared (p.X, p.Y);
 
