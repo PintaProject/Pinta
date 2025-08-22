@@ -78,6 +78,18 @@ partial struct ColorBgra
 	/// Smoothly blends the given colors together, assuming equal weighting for each one.
 	/// It is assumed that pre-multiplied alpha is used.
 	/// </summary>
+	public static ColorBgra Blend (ReadOnlySpan<ColorBgra> colors, ColorBgra fallback)
+	{
+		if (colors.Length == 0)
+			return fallback;
+		else
+			return Blend (colors);
+	}
+
+	/// <summary>
+	/// Smoothly blends the given colors together, assuming equal weighting for each one.
+	/// It is assumed that pre-multiplied alpha is used.
+	/// </summary>
 	public static ColorBgra Blend (ReadOnlySpan<ColorBgra> colors)
 	{
 		int count = colors.Length;
