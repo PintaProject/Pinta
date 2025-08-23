@@ -192,7 +192,23 @@ public sealed partial class TextEngine
 		OnModified ();
 	}
 
-	public void PerformBackspace ()
+	private int FindPreviousWordOffset (string currentLine)
+	{
+		return FindWords (currentLine)
+			.Where (i => i < current_pos.Offset)
+			.DefaultIfEmpty (0)
+			.Last ();
+	}
+
+	private int FindNextWordOffset (string currentLine)
+	{
+		return FindWords (currentLine)
+			.Where (i => i > current_pos.Offset)
+			.DefaultIfEmpty (currentLine.Length)
+			.First ();
+	}
+
+	public void PerformBackspace (bool control)
 	{
 		if (HasSelection ()) {
 			DeleteSelection ();
@@ -209,8 +225,18 @@ public sealed partial class TextEngine
 				line: current_pos.Line - 1,
 				offset: prevLength);
 		} else if (current_pos.Offset > 0) {
-			// We're in the middle of a line, delete the previous text element.
-			RemoveNextTextElement (-1);
+			// We're in the middle of a line
+			if (control) {
+				// Delete the previous word.
+				string currentLine = lines[current_pos.Line];
+				int newOffset = FindPreviousWordOffset (currentLine);
+				while (current_pos.Offset > newOffset) {
+					RemoveNextTextElement (-1);
+				}
+			} else {
+				// Delete the previous text element.
+				RemoveNextTextElement (-1);
+			}
 		}
 
 		selection_start = current_pos;
@@ -246,11 +272,7 @@ public sealed partial class TextEngine
 			string currentLine = lines[current_pos.Line];
 			if (control) {
 				// Move to the beginning of the previous word.
-				int newOffset =
-					FindWords (currentLine)
-					.Where (i => i < current_pos.Offset)
-					.DefaultIfEmpty (0)
-					.Last ();
+				int newOffset = FindPreviousWordOffset (currentLine);
 				current_pos = current_pos.WithOffset (newOffset);
 			} else {
 				(var elements, var elementIndex) = FindTextElementIndex (currentLine, current_pos.Offset);
@@ -272,11 +294,7 @@ public sealed partial class TextEngine
 		if (current_pos.Offset < currentLine.Length) {
 			if (control) {
 				// Move to the beginning of the next word.
-				int newOffset =
-					FindWords (currentLine)
-					.Where (i => i > current_pos.Offset)
-					.DefaultIfEmpty (currentLine.Length)
-					.First ();
+				int newOffset = FindNextWordOffset (currentLine);
 				current_pos = current_pos.WithOffset (newOffset);
 			} else {
 				// Move to the next text element.

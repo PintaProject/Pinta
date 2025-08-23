@@ -15,6 +15,6 @@ internal sealed class ColorBgraTests
 
 	static readonly IReadOnlyList<TestCaseData> new_alpha_cases = [
 		new (ColorBgra.FromBgra (255, 0, 128, 255), 128, ColorBgra.FromBgra (128, 0, 64, 128)),
-		new(ColorBgra.Transparent, 255, ColorBgra.Black),
+		new (ColorBgra.Transparent, 255, ColorBgra.Black),
 	];
 }

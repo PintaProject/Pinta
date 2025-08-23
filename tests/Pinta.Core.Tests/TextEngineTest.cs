@@ -66,7 +66,7 @@ internal sealed class TextEngineTest
 	{
 		TextEngine engine = new (["foo", "bar"]);
 		engine.SetCursorPosition (new TextPosition (1, 0), true);
-		engine.PerformBackspace ();
+		engine.PerformBackspace (false);
 
 		Assert.That (engine.LineCount, Is.EqualTo (1));
 		Assert.That (engine.ToString (), Is.EqualTo ("foobar"));
@@ -80,24 +80,51 @@ internal sealed class TextEngineTest
 
 		// End of a line.
 		engine.SetCursorPosition (new TextPosition (0, 6), true);
-		engine.PerformBackspace ();
+		engine.PerformBackspace (false);
 
 		Assert.That (engine.Lines[0], Is.EqualTo ("a\u0304\u0308b"));
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 4)));
 
 		// First character of a line.
 		engine.SetCursorPosition (new TextPosition (1, 2), true);
-		engine.PerformBackspace ();
+		engine.PerformBackspace (false);
 
 		Assert.That (engine.Lines[1], Is.EqualTo ("ba\u0304\u0308"));
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (1, 0)));
 
 		// Middle of a line.
 		engine.SetCursorPosition (new TextPosition (2, 3), true);
-		engine.PerformBackspace ();
+		engine.PerformBackspace (false);
 
 		Assert.That (engine.Lines[2], Is.EqualTo ("ba\u0304\u0308"));
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (2, 1)));
+	}
+
+	[Test]
+	public void ControlBackspace ()
+	{
+		TextEngine engine = new ([string.Join ("  ", test_snippet)]);
+
+		engine.SetCursorPosition (new TextPosition (0, 19), true);
+		engine.PerformBackspace (true);
+
+		Assert.That (engine.Lines[0], Is.EqualTo ("a\u0304\u0308bc\u0327  c\u0327ba\u0304\u0308  a\u0304\u0308"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 16)));
+
+		engine.PerformBackspace (true);
+
+		Assert.That (engine.Lines[0], Is.EqualTo ("a\u0304\u0308bc\u0327  a\u0304\u0308"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 8)));
+
+		engine.PerformBackspace (true);
+
+		Assert.That (engine.Lines[0], Is.EqualTo ("a\u0304\u0308"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 0)));
+
+		engine.PerformBackspace (true);
+
+		Assert.That (engine.Lines[0], Is.EqualTo ("a\u0304\u0308"));
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 0)));
 	}
 
 	[Test]
