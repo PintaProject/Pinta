@@ -12,6 +12,7 @@ Thanks to the following contributors who worked on this release:
 - @UrtsiSantsi
 - @pedropaulosuzuki
 - @bplaat
+- @stefan-dangl
 
 ### Added
 - Implemented a new axonometric grid (View > Canvas Grid... > Show Axonometric Grid) (#1438, #1541)
@@ -24,6 +25,7 @@ Thanks to the following contributors who worked on this release:
 - The Dithering effect can now use Pinta's current palette in addition to the effect's preset color palettes (#1594)
 - Random seed values for effects can now be directly controlled, in addition to use the Reseed button (#1592, #1591)
 - Support for color picking in `SimpleEffectDialog`. Useful for add-in developers (#1611)
+- The text tool now supports using Ctrl+Backspace to delete words (#1680)
 
 ### Changed
 - Breaking API changes:
