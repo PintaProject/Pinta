@@ -79,20 +79,26 @@ public sealed class TwistEffect : BaseEffect
 		int antialiasSamples = settings.AntialiasPoints.Length;
 		ColorBgra.Blender aggregate = new ();
 
-		for (int p = 0; p < antialiasSamples; ++p) {
-			PointF samplingOffset = settings.AntialiasPoints[p];
+		for (int i = 0; i < antialiasSamples; ++i) {
+
+			PointF samplingOffset = settings.AntialiasPoints[i];
 			PointF samplingLocation = offsetFromCenter + samplingOffset;
 			double radialDistance = samplingLocation.Magnitude ();
+
+			// If sample falls outside twist circle, it just samples the original
+			if (radialDistance > settings.Maxrad) {
+				aggregate += source.GetColorBgra (sourceData, source.Width, pixel.coordinates);
+				continue;
+			}
+
 			double originalTheta = Math.Atan2 (samplingLocation.Y, samplingLocation.X);
-			double radialFactor = 1 - radialDistance / settings.Maxrad;
-			double twistAmount =
-				(radialFactor < 0)
-				? 0
-				: (radialFactor * radialFactor * radialFactor);
+			double radialFactor = 1 - radialDistance / settings.Maxrad; // Guaranteed to be > 0 (see previous check)
+			double twistAmount = radialFactor * radialFactor * radialFactor;
 			double twistedTheta = originalTheta + (twistAmount * settings.TwistNormalized);
 			PointI samplePosition = new (
 				X: (int) (settings.Center.X + (float) (radialDistance * Math.Cos (twistedTheta))),
 				Y: (int) (settings.Center.Y + (float) (radialDistance * Math.Sin (twistedTheta))));
+
 			aggregate += source.GetColorBgra (sourceData, source.Width, samplePosition);
 		}
 
@@ -100,7 +106,6 @@ public sealed class TwistEffect : BaseEffect
 	}
 
 	private readonly record struct TwistSettings (
-		RectangleI RenderBounds,
 		PointF Center,
 		float DistanceThreshold,
 		float Maxrad,
@@ -116,7 +121,6 @@ public sealed class TwistEffect : BaseEffect
 		float hh = renderBounds.Height / 2.0f;
 		float maxrad = Math.Min (hw, hh);
 		return new (
-			RenderBounds: renderBounds,
 			Center: new (
 				X: hw + renderBounds.Left,
 				Y: hh + renderBounds.Top),
