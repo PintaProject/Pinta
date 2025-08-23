@@ -78,29 +78,31 @@ partial struct ColorBgra
 	/// Smoothly blends the given colors together, assuming equal weighting for each one.
 	/// It is assumed that pre-multiplied alpha is used.
 	/// </summary>
+	public static ColorBgra Blend (ReadOnlySpan<ColorBgra> colors, ColorBgra fallback)
+	{
+		if (colors.Length == 0)
+			return fallback;
+		else
+			return Blend (colors);
+	}
+
+	/// <summary>
+	/// Smoothly blends the given colors together, assuming equal weighting for each one.
+	/// It is assumed that pre-multiplied alpha is used.
+	/// </summary>
 	public static ColorBgra Blend (ReadOnlySpan<ColorBgra> colors)
 	{
 		int count = colors.Length;
+
 		if (count == 0)
-			return Transparent;
+			throw new InvalidOperationException ($"{nameof (colors)} is empty");
 
-		ulong a_sum = 0;
-		ulong b_sum = 0;
-		ulong g_sum = 0;
-		ulong r_sum = 0;
-		for (int i = 0; i < count; ++i) {
-			a_sum += colors[i].A;
-			b_sum += colors[i].B;
-			g_sum += colors[i].G;
-			r_sum += colors[i].R;
-		}
+		Blender aggregate = new ();
 
-		byte a = (byte) (a_sum / (ulong) count);
-		byte b = (byte) (b_sum / (ulong) count);
-		byte g = (byte) (g_sum / (ulong) count);
-		byte r = (byte) (r_sum / (ulong) count);
+		for (int i = 0; i < count; ++i)
+			aggregate += colors[i];
 
-		return FromBgra (b, g, r, a);
+		return aggregate.Blend ();
 	}
 
 	/// <summary>
@@ -141,5 +143,59 @@ partial struct ColorBgra
 			return FromBgra ((byte) (B * 255 / A), (byte) (G * 255 / A), (byte) (R * 255 / A), A);
 		else
 			return Zero;
+	}
+
+	public readonly struct Blender
+	{
+		public uint B { get; }
+		public uint G { get; }
+		public uint R { get; }
+		public uint A { get; }
+		public uint Count { get; }
+
+		public Blender ()
+		{
+			B = 0;
+			G = 0;
+			R = 0;
+			A = 0;
+			Count = 0;
+		}
+
+		private Blender (
+			uint b,
+			uint g,
+			uint r,
+			uint a,
+			uint count)
+		{
+			B = b;
+			G = g;
+			R = r;
+			A = a;
+			Count = count;
+		}
+
+		public static Blender operator + (in Blender blender, in ColorBgra color)
+		{
+			return new (
+				b: blender.B + color.B,
+				g: blender.G + color.G,
+				r: blender.R + color.R,
+				a: blender.A + color.A,
+				count: blender.Count + 1);
+		}
+
+		public ColorBgra Blend ()
+		{
+			if (Count == 0)
+				throw new InvalidOperationException ("No colors to blend");
+
+			return FromBgra (
+				b: (byte) (B / (ulong) Count),
+				g: (byte) (G / (ulong) Count),
+				r: (byte) (R / (ulong) Count),
+				a: (byte) (A / (ulong) Count));
+		}
 	}
 }

@@ -118,10 +118,7 @@ public sealed class TileEffect : BaseEffect
 		return result;
 	}
 
-	protected override void Render (
-		ImageSurface source,
-		ImageSurface destination,
-		RectangleI roi)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		TileSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
@@ -141,12 +138,12 @@ public sealed class TileEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
 	{
-		Span<ColorBgra> samples = stackalloc ColorBgra[settings.antiAliasPoints.Count];
-
 		ColorBgra original = sourceData[pixel.memoryOffset];
 
 		float i = pixel.coordinates.X - settings.halfWidth;
 		float j = pixel.coordinates.Y - settings.halfHeight;
+
+		ColorBgra.Blender aggregate = new ();
 
 		for (int p = 0; p < settings.antiAliasPoints.Count; ++p) {
 
@@ -176,7 +173,7 @@ public sealed class TileEffect : BaseEffect
 			float preliminaryX = settings.halfWidth + finalU;
 			float preliminaryY = settings.halfHeight + finalV;
 
-			samples[p] = GetSample (
+			aggregate += GetSample (
 				settings,
 				source,
 				sourceData,
@@ -185,7 +182,7 @@ public sealed class TileEffect : BaseEffect
 				preliminaryY);
 		}
 
-		return ColorBgra.Blend (samples);
+		return aggregate.Blend ();
 	}
 
 	private ColorBgra GetSample (

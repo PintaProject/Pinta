@@ -49,10 +49,7 @@ public sealed class FragmentEffect : BaseEffect
 
 	// Algorithm Code Ported From PDN
 
-	private static ImmutableArray<PointI> RecalcPointOffsets (
-		int fragments,
-		RadiansAngle rotation,
-		int distance)
+	private static ImmutableArray<PointI> RecalcPointOffsets (int fragments, RadiansAngle rotation, int distance)
 	{
 		RadiansAngle pointStep = new (RadiansAngle.FullTurn / fragments);
 		RadiansAngle adjustedRotation = rotation - new RadiansAngle (RadiansAngle.FullTurn / 4);
@@ -64,20 +61,16 @@ public sealed class FragmentEffect : BaseEffect
 				X: (int) Math.Round (distance * -Math.Sin (currentAngle.Radians), MidpointRounding.AwayFromZero),
 				Y: (int) Math.Round (distance * -Math.Cos (currentAngle.Radians), MidpointRounding.AwayFromZero));
 		}
-
 		return pointOffsets.MoveToImmutable ();
 	}
 
-	protected override void Render (
-		ImageSurface source,
-		ImageSurface destination,
-		RectangleI roi)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		FragmentSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = destination.GetPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.sourceSize))
-			dst_data[pixel.memoryOffset] = GetFinalPixelColor (
+			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 				settings,
 				source,
 				sourceData,
@@ -89,19 +82,20 @@ public sealed class FragmentEffect : BaseEffect
 		ImmutableArray<PointI> pointOffsets);
 	private FragmentSettings CreateSettings (ImageSurface source)
 	{
+		FragmentData data = Data;
 		return new (
 			sourceSize: source.GetSize (),
 			pointOffsets: RecalcPointOffsets (
-				Data.Fragments,
-				Data.Rotation.ToRadians (),
-				Data.Distance)
+				data.Fragments,
+				data.Rotation.ToRadians (),
+				data.Distance)
 		);
 	}
 
 	private static ColorBgra GetFinalPixelColor (
 		FragmentSettings settings,
 		ImageSurface source,
-		ReadOnlySpan<ColorBgra> src_data,
+		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
 	{
 		Span<ColorBgra> samples = stackalloc ColorBgra[settings.pointOffsets.Length];
@@ -118,14 +112,16 @@ public sealed class FragmentEffect : BaseEffect
 				continue;
 
 			samples[sampleCount] = source.GetColorBgra (
-				src_data,
+				sourceData,
 				settings.sourceSize.Width,
 				relative);
 
 			++sampleCount;
 		}
 
-		return ColorBgra.Blend (samples[..sampleCount]);
+		return ColorBgra.Blend (
+			colors: samples[..sampleCount],
+			fallback: ColorBgra.Transparent);
 	}
 
 	public sealed class FragmentData : EffectData

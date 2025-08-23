@@ -56,9 +56,14 @@ public sealed class ColorPickerTool : BaseTool
 
 	public override Gdk.Cursor DefaultCursor {
 		get {
-			var icon = GdkExtensions.CreateIconWithShape ("Cursor.ColorPicker.png",
-							CursorShape.Rectangle, SampleSize, 7, 27,
-							out var iconOffsetX, out var iconOffsetY);
+			Gdk.Texture icon = GdkExtensions.CreateIconWithShape (
+				"Cursor.ColorPicker.png",
+				CursorShape.Rectangle,
+				SampleSize,
+				7,
+				27,
+				out var iconOffsetX,
+				out var iconOffsetY);
 			return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 		}
 	}
@@ -87,7 +92,7 @@ public sealed class ColorPickerTool : BaseTool
 		if (!document.Workspace.PointInCanvas (e.PointDouble))
 			return;
 
-		var color = GetColorFromPoint (document, e.Point);
+		Color color = GetColorFromPoint (document, e.Point);
 
 		if (button_down == MouseButton.Left)
 			palette.SetColor (true, color, false);
@@ -103,7 +108,7 @@ public sealed class ColorPickerTool : BaseTool
 		if (!document.Workspace.PointInCanvas (e.PointDouble))
 			return;
 
-		var color = GetColorFromPoint (document, e.Point);
+		Color color = GetColorFromPoint (document, e.Point);
 
 		if (button_down == MouseButton.Left)
 			palette.SetColor (true, color, false);
@@ -143,30 +148,32 @@ public sealed class ColorPickerTool : BaseTool
 
 	private Color GetColorFromPoint (Document document, PointI point)
 	{
-		var pixels = GetPixelsFromPoint (document, point);
-		var color = ColorBgra.Blend (pixels.AsSpan ());
-		return color.ToCairoColor ();
+		ImmutableArray<ColorBgra> pixels = GetPixelsFromPoint (document, point);
+		if (pixels.Length == 0)
+			return Color.Transparent;
+		else
+			return ColorBgra.Blend (pixels.AsSpan ()).ToCairoColor ();
 	}
 
 	private ImmutableArray<ColorBgra> GetPixelsFromPoint (Document document, PointI point)
 	{
-		var size = SampleSize;
-		var half = size / 2;
+		int size = SampleSize;
+		int half = size / 2;
 
 		// Short circuit for single pixel
 		if (size == 1)
-			return ImmutableArray.Create (GetPixel (document, point));
+			return [GetPixel (document, point)];
 
 		// Find the pixels we need (clamp to the size of the image)
-		var rect = new RectangleI (point.X - half, point.Y - half, size, size);
-		var intersected = rect.Intersect (new RectangleI (PointI.Zero, document.ImageSize));
+		RectangleI rect = new (point.X - half, point.Y - half, size, size);
+		RectangleI intersected = rect.Intersect (new RectangleI (PointI.Zero, document.ImageSize));
 
-		var totalRectanglePixels = intersected.Size.Width * intersected.Size.Height;
+		int totalRectanglePixels = intersected.Size.Width * intersected.Size.Height;
 
 		var pixels = ImmutableArray.CreateBuilder<ColorBgra> (totalRectanglePixels);
 
-		for (var i = intersected.Left; i <= intersected.Right; i++)
-			for (var j = intersected.Top; j <= intersected.Bottom; j++)
+		for (int i = intersected.Left; i <= intersected.Right; i++)
+			for (int j = intersected.Top; j <= intersected.Bottom; j++)
 				pixels.Add (GetPixel (document, new (i, j)));
 
 		return pixels.MoveToImmutable ();

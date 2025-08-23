@@ -55,9 +55,9 @@ public sealed class JuliaFractalEffect : BaseEffect
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		JuliaSettings settings = CreateSettings (destination);
-		Span<ColorBgra> dst_data = destination.GetPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
-			dst_data[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
+			destinationData[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 	}
 
 	private sealed record JuliaSettings (
@@ -108,10 +108,10 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 	private static ColorBgra GetPixelColor (JuliaSettings settings, PointI target)
 	{
-		Span<ColorBgra> samples = stackalloc ColorBgra[settings.count];
-
 		double baseTransfX = 2.0 * target.X - settings.canvasSize.Width;
 		double baseTransfY = 2.0 * target.Y - settings.canvasSize.Height;
+
+		ColorBgra.Blender aggregate = new ();
 
 		for (int i = 0; i < settings.count; i++) {
 
@@ -132,10 +132,10 @@ public sealed class JuliaFractalEffect : BaseEffect
 				settings.colorGradient.StartPosition,
 				settings.colorGradient.EndPosition);
 
-			samples[i] = settings.colorGradient.GetColor (c);
+			aggregate += settings.colorGradient.GetColor (c);
 		}
 
-		return ColorBgra.Blend (samples);
+		return aggregate.Blend ();
 	}
 
 	public sealed class JuliaFractalData : EffectData

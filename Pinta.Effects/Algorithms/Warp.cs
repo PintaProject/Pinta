@@ -34,8 +34,8 @@ public static class Warp
 		double defaultRadius,
 		double defaultRadius2);
 
-	private static bool IsOnSurface (this ImageSurface src, float u, float v)
-		=> (u >= 0 && u <= (src.Width - 1) && v >= 0 && v <= (src.Height - 1));
+	private static bool IsOnSurface (this ImageSurface source, float u, float v)
+		=> (u >= 0 && u <= (source.Width - 1) && v >= 0 && v <= (source.Height - 1));
 
 	public static Settings CreateSettings (
 		IEffectData warpData,
@@ -61,7 +61,7 @@ public static class Warp
 	public static ColorBgra GetPixelColor (
 		Settings settings,
 		TransformInverter transformInverter,
-		ImageSurface src,
+		ImageSurface source,
 		ColorBgra originalColor,
 		PixelOffset targetPixel)
 	{
@@ -87,28 +87,31 @@ public static class Warp
 
 			samples[sampleCount] = GetSample (
 				settings,
-				src,
+				source,
 				originalColor,
 				preliminarySample);
 
 			++sampleCount;
 		}
-		return ColorBgra.Blend (samples[..sampleCount]);
+
+		return ColorBgra.Blend (
+			colors: samples[..sampleCount],
+			fallback: ColorBgra.Transparent);
 	}
 
 	private static ColorBgra GetSample (
 		Settings settings,
-		ImageSurface src,
+		ImageSurface source,
 		ColorBgra originalColor,
 		PointF preliminarySample)
 	{
-		if (src.IsOnSurface (preliminarySample.X, preliminarySample.Y))
-			return src.GetBilinearSample (preliminarySample.X, preliminarySample.Y);
+		if (source.IsOnSurface (preliminarySample.X, preliminarySample.Y))
+			return source.GetBilinearSample (preliminarySample.X, preliminarySample.Y);
 
 		return settings.edgeBehavior switch {
-			EdgeBehavior.Clamp => src.GetBilinearSampleClamped (preliminarySample.X, preliminarySample.Y),
-			EdgeBehavior.Wrap => src.GetBilinearSampleWrapped (preliminarySample.X, preliminarySample.Y),
-			EdgeBehavior.Reflect => src.GetBilinearSampleReflected (preliminarySample.X, preliminarySample.Y),
+			EdgeBehavior.Clamp => source.GetBilinearSampleClamped (preliminarySample.X, preliminarySample.Y),
+			EdgeBehavior.Wrap => source.GetBilinearSampleWrapped (preliminarySample.X, preliminarySample.Y),
+			EdgeBehavior.Reflect => source.GetBilinearSampleReflected (preliminarySample.X, preliminarySample.Y),
 			EdgeBehavior.Primary => settings.primaryColor,
 			EdgeBehavior.Secondary => settings.secondaryColor,
 			EdgeBehavior.Transparent => ColorBgra.Transparent,
