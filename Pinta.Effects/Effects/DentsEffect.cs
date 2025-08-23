@@ -73,59 +73,60 @@ public sealed class DentsEffect : BaseEffect
 		EffectData = new DentsData ();
 	}
 
-	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
-	{
-		Warp.Settings settings = Warp.CreateSettings (
-			Data,
-			live_preview.RenderBounds,
-			palette);
+	private readonly record struct DentsSettings (
+		double EffectiveDetail,
+		double NormalizedRoughness,
+		double RefractionScale,
+		double ScaleR,
+		byte Seed,
+		double Theta);
 
-		Span<ColorBgra> dst_data = destination.GetPixelData ();
-		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
-		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ()))
-			dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
-				settings,
-				InverseTransform,
-				source,
-				src_data[pixel.memoryOffset],
-				pixel);
+	private DentsSettings CreateSettings (Warp.Settings warpSettings, ImageSurface source)
+	{
+		DentsData data = Data;
+		double scaleR = 400.0 / warpSettings.defaultRadius / data.Scale;
+		double roughness = data.Roughness;
+		double detail = 1.0 + (roughness / 10.0);
+		double maxDetail = Math.Floor (Math.Log (scaleR) / Math.Log (0.5)); // We don't want the perlin noise frequency components exceeding the nyquist limit, so we will limit 'detail' appropriately
+		return new (
+			EffectiveDetail: (detail > maxDetail && maxDetail >= 1.0) ? maxDetail : detail,
+			NormalizedRoughness: roughness / 100.0,
+			RefractionScale: data.Refraction / 100.0 / scaleR,
+			ScaleR: scaleR,
+			Seed: Utility.ClampToByte (data.Seed.Value),
+			Theta: RadiansAngle.FullTurn * data.Tension / 10.0);
 	}
 
 	// Algorithm code ported from PDN
 
-	public PointD InverseTransform (Warp.Settings settings, PointD data)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		DentsData dentsData = Data;
+		Warp.Settings warpSettings = Warp.CreateSettings (
+			Data,
+			live_preview.RenderBounds,
+			palette);
 
-		double detail1 = dentsData.Roughness;
-		double detail2 = detail1;
-		double detail3 = 1.0 + (detail2 / 10.0);
-		double roughness = detail2;
+		DentsSettings dentsSettings = CreateSettings (warpSettings, source);
 
-		double turbulence = dentsData.Tension;
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ()))
+			destinationData[pixel.memoryOffset] = Warp.GetPixelColor (
+				warpSettings,
+				InverseTransform,
+				source,
+				sourceData[pixel.memoryOffset],
+				pixel);
 
-		byte seed = Utility.ClampToByte (dentsData.Seed.Value);
-
-		double scaleR = 400.0 / settings.defaultRadius / dentsData.Scale;
-		double refractionScale = dentsData.Refraction / 100.0 / scaleR;
-		double theta = RadiansAngle.FullTurn * turbulence / 10.0;
-		double effectiveRoughness = roughness / 100.0;
-
-		// We don't want the perlin noise frequency components exceeding the nyquist limit, so we will limit 'detail' appropriately
-		double maxDetail = Math.Floor (Math.Log (scaleR) / Math.Log (0.5));
-
-		double effectiveDetail =
-			(detail3 > maxDetail && maxDetail >= 1.0)
-			? maxDetail
-			: detail3;
-
-		PointD i = data.Scaled (scaleR);
-
-		RadiansAngle bumpAngle = new (theta * PerlinNoise.Compute (i, effectiveDetail, effectiveRoughness, seed));
-
-		return new (
-			X: data.X + (refractionScale * Math.Sin (-bumpAngle.Radians)),
-			Y: data.Y + (refractionScale * Math.Cos (bumpAngle.Radians)));
+		PointD InverseTransform (Warp.Settings settings, PointD data)
+		{
+			PointD scaled = data.Scaled (dentsSettings.ScaleR);
+			double noise = PerlinNoise.Compute (scaled, dentsSettings.EffectiveDetail, dentsSettings.NormalizedRoughness, dentsSettings.Seed);
+			RadiansAngle bumpAngle = new (dentsSettings.Theta * noise);
+			return new (
+				X: data.X + (dentsSettings.RefractionScale * Math.Sin (-bumpAngle.Radians)),
+				Y: data.Y + (dentsSettings.RefractionScale * Math.Cos (bumpAngle.Radians)));
+		}
 	}
 }
 
