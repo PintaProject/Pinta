@@ -91,13 +91,14 @@ public sealed class TwistEffect : BaseEffect
 				continue;
 			}
 
-			double originalTheta = Math.Atan2 (location.Y, location.X);
+			RadiansAngle originalTheta = new (Math.Atan2 (location.Y, location.X));
 			double radialFactor = 1 - radialDistance / settings.Maxrad; // Guaranteed to be > 0 (see previous check)
 			double twistAmount = radialFactor * radialFactor * radialFactor;
-			double twistedTheta = originalTheta + (twistAmount * settings.Twist);
+			RadiansAngle localTwist = new (twistAmount * settings.Twist);
+			RadiansAngle twistedTheta = originalTheta + localTwist;
 			PointI samplePosition = new (
-				X: (int) (settings.Center.X + (float) (radialDistance * Math.Cos (twistedTheta))),
-				Y: (int) (settings.Center.Y + (float) (radialDistance * Math.Sin (twistedTheta))));
+				X: (int) (settings.Center.X + (float) (radialDistance * Math.Cos (twistedTheta.Radians))),
+				Y: (int) (settings.Center.Y + (float) (radialDistance * Math.Sin (twistedTheta.Radians))));
 
 			aggregate += source.GetColorBgra (sourceData, source.Width, samplePosition);
 		}
