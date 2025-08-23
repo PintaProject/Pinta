@@ -64,50 +64,47 @@ public sealed class TwistEffect : BaseEffect
 	}
 
 	private static ColorBgra GetFinalPixelColor (
-		TwistSettings settings,
+		in TwistSettings settings,
 		ImageSurface source,
 		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
 	{
 		PointF offsetFromCenter = new (
-			X: pixel.coordinates.X - (settings.HalfWidth + settings.RenderBounds.Left),
-			Y: pixel.coordinates.Y - (settings.HalfHeight + settings.RenderBounds.Top));
+			X: pixel.coordinates.X - settings.Center.X,
+			Y: pixel.coordinates.Y - settings.Center.Y);
 
-		if (offsetFromCenter.MagnitudeSquaredF () > (settings.Maxrad + 1) * (settings.Maxrad + 1))
+		if (offsetFromCenter.MagnitudeSquaredF () > settings.DistanceThreshold)
 			return sourceData[pixel.memoryOffset];
 
 		int antialiasSamples = settings.AntialiasPoints.Length;
-
 		ColorBgra.Blender aggregate = new ();
 
 		for (int p = 0; p < antialiasSamples; ++p) {
-
 			PointF samplingOffset = settings.AntialiasPoints[p];
 			PointF samplingLocation = offsetFromCenter + samplingOffset;
-
 			double radialDistance = samplingLocation.Magnitude ();
 			double originalTheta = Math.Atan2 (samplingLocation.Y, samplingLocation.X);
 			double radialFactor = 1 - radialDistance / settings.Maxrad;
-			double twistAmount = (radialFactor < 0) ? 0 : (radialFactor * radialFactor * radialFactor);
-			double twistedTheta = originalTheta + (twistAmount * settings.Twist / 100);
-
+			double twistAmount =
+				(radialFactor < 0)
+				? 0
+				: (radialFactor * radialFactor * radialFactor);
+			double twistedTheta = originalTheta + (twistAmount * settings.TwistNormalized);
 			PointI samplePosition = new (
-				X: (int) (settings.HalfWidth + settings.RenderBounds.Left + (float) (radialDistance * Math.Cos (twistedTheta))),
-				Y: (int) (settings.HalfHeight + settings.RenderBounds.Top + (float) (radialDistance * Math.Sin (twistedTheta)))
-			);
-
+				X: (int) (settings.Center.X + (float) (radialDistance * Math.Cos (twistedTheta))),
+				Y: (int) (settings.Center.Y + (float) (radialDistance * Math.Sin (twistedTheta))));
 			aggregate += source.GetColorBgra (sourceData, source.Width, samplePosition);
 		}
 
 		return aggregate.Blend ();
 	}
 
-	private sealed record TwistSettings (
+	private readonly record struct TwistSettings (
 		RectangleI RenderBounds,
-		float HalfWidth,
-		float HalfHeight,
+		PointF Center,
+		float DistanceThreshold,
 		float Maxrad,
-		float Twist,
+		float TwistNormalized,
 		ImmutableArray<PointF> AntialiasPoints);
 
 	private TwistSettings CreateSettings ()
@@ -117,12 +114,15 @@ public sealed class TwistEffect : BaseEffect
 		float preliminaryTwist = -data.Amount;
 		float hw = renderBounds.Width / 2.0f;
 		float hh = renderBounds.Height / 2.0f;
+		float maxrad = Math.Min (hw, hh);
 		return new (
 			RenderBounds: renderBounds,
-			HalfWidth: hw,
-			HalfHeight: hh,
-			Maxrad: Math.Min (hw, hh),
-			Twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist),
+			Center: new (
+				X: hw + renderBounds.Left,
+				Y: hh + renderBounds.Top),
+			DistanceThreshold: (maxrad + 1) * (maxrad + 1),
+			Maxrad: maxrad,
+			TwistNormalized: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist) / 100,
 			AntialiasPoints: InitializeAntialiasPointsF (data.Antialias)
 		);
 	}
