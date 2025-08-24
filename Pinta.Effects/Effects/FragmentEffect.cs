@@ -98,8 +98,6 @@ public sealed class FragmentEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
 	{
-		Span<ColorBgra> samples = stackalloc ColorBgra[settings.pointOffsets.Length];
-
 		ColorBgra.Blender aggregate = new ();
 
 		for (int i = 0; i < settings.pointOffsets.Length; ++i) {
