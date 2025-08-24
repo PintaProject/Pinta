@@ -59,7 +59,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		maxIterations: 1024,
 		maxSquared: 100_000);
 
-	private sealed record MandelbrotSettings (
+	private readonly record struct MandelbrotSettings (
 		ColorGradient<ColorBgra> Gradient,
 		Matrix3x2D Rotation,
 		Size CanvasSize,
@@ -116,7 +116,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			destinationData[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
 	}
 
-	private static ColorBgra GetPixelColor (MandelbrotSettings settings, PointI target)
+	private static ColorBgra GetPixelColor (in MandelbrotSettings settings, PointI target)
 	{
 		ColorBgra.Blender aggregate = new ();
 
