@@ -100,7 +100,7 @@ public sealed class FragmentEffect : BaseEffect
 	{
 		Span<ColorBgra> samples = stackalloc ColorBgra[settings.pointOffsets.Length];
 
-		int sampleCount = 0;
+		ColorBgra.Blender aggregate = new ();
 
 		for (int i = 0; i < settings.pointOffsets.Length; ++i) {
 
@@ -111,17 +111,16 @@ public sealed class FragmentEffect : BaseEffect
 			if (relative.X < 0 || relative.X >= settings.sourceSize.Width || relative.Y < 0 || relative.Y >= settings.sourceSize.Height)
 				continue;
 
-			samples[sampleCount] = source.GetColorBgra (
+			aggregate += source.GetColorBgra (
 				sourceData,
 				settings.sourceSize.Width,
 				relative);
-
-			++sampleCount;
 		}
 
-		return ColorBgra.Blend (
-			colors: samples[..sampleCount],
-			fallback: ColorBgra.Transparent);
+		if (aggregate.Count == 0)
+			return ColorBgra.Transparent;
+		else
+			return aggregate.Blend ();
 	}
 
 	public sealed class FragmentData : EffectData
