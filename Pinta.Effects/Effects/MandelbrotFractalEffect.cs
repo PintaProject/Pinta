@@ -34,6 +34,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	public MandelbrotFractalData Data
 		=> (MandelbrotFractalData) EffectData!;  // NRT - Set in constructor
 
+	private static readonly UnaryPixelOp invert_color = new UnaryPixelOps.Invert ();
+	private static readonly UnaryPixelOp pass_through = new UnaryPixelOps.Identity ();
+
 	private readonly IChromeService chrome;
 	private readonly IPaletteService palette;
 	private readonly IWorkspaceService workspace;
@@ -42,7 +45,6 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		chrome = services.GetService<IChromeService> ();
 		palette = services.GetService<IPaletteService> ();
 		workspace = services.GetService<IWorkspaceService> ();
-		invert_effect = new (services);
 		EffectData = new MandelbrotFractalData ();
 	}
 
@@ -52,8 +54,6 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	// Algorithm Code Ported From PDN
 
 	private static readonly PointD offset_basis = new (X: -0.7, Y: -0.29);
-
-	private readonly InvertColorsEffect invert_effect;
 
 	private static readonly Mandelbrot fractal = new (
 		maxIterations: 1024,
@@ -68,8 +68,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		double invCount,
 		Matrix3x2D rotation,
 		int factor,
-		bool invertColors,
-		ColorGradient<ColorBgra> colorGradient);
+		ColorGradient<ColorBgra> colorGradient,
+		UnaryPixelOp postProcessing);
+
 	private MandelbrotSettings CreateSettings (ImageSurface destination)
 	{
 		const double ZOOM_FACTOR = 20.0;
@@ -107,9 +108,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 			factor: data.Factor,
 
-			invertColors: data.InvertColors,
+			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
 
-			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
+			postProcessing: data.InvertColors ? invert_color : pass_through
 		);
 	}
 
@@ -119,9 +120,6 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.canvasSize))
 			destinationData[pixel.memoryOffset] = GetPixelColor (settings, pixel.coordinates);
-
-		if (settings.invertColors)
-			invert_effect.Render (destination, destination, [roi]);
 	}
 
 	private static ColorBgra GetPixelColor (MandelbrotSettings settings, PointI target)
@@ -154,7 +152,9 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 			aggregate += settings.colorGradient.GetColor (c);
 		}
 
-		return aggregate.Blend ();
+		ColorBgra blended = aggregate.Blend ();
+
+		return settings.postProcessing.Apply (blended);
 	}
 
 	public sealed class MandelbrotFractalData : EffectData
