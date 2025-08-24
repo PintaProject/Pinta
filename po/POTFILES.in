@@ -38,6 +38,7 @@ Pinta.Core/Classes/Color/ColorBgra.Defaults.cs
 Pinta.Core/Classes/Color/ColorBgra.cs
 Pinta.Core/Classes/ColorGradient.cs
 Pinta.Core/Classes/ColorTransferMode.cs
+Pinta.Core/Classes/DialogAttributes.cs
 Pinta.Core/Classes/Document.cs
 Pinta.Core/Classes/DocumentHistory.cs
 Pinta.Core/Classes/DocumentLayers.cs
@@ -65,7 +66,6 @@ Pinta.Core/Classes/RenderHandle.cs
 Pinta.Core/Classes/ScaleFactor.cs
 Pinta.Core/Classes/Scanline.cs
 Pinta.Core/Classes/SelectionModeHandler.cs
-Pinta.Core/Classes/SettingNames.cs
 Pinta.Core/Classes/SplineInterpolator.cs
 Pinta.Core/Classes/SurfaceDiff.cs
 Pinta.Core/Classes/Translations.cs
@@ -147,6 +147,7 @@ Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs
 Pinta.Core/Extensions/Gtk/GtkExtensions.cs
 Pinta.Core/Extensions/NativeImportResolver.cs
 Pinta.Core/Extensions/OtherExtensions.cs
+Pinta.Core/Extensions/PaletteHelper.cs
 Pinta.Core/Extensions/PangoExtensions.cs
 Pinta.Core/Extensions/Tiling.cs
 Pinta.Core/Extensions/ToolBarComboBox.cs
@@ -198,6 +199,7 @@ Pinta.Core/PaletteFormats/PaintDotNetPalette.cs
 Pinta.Core/PaletteFormats/PaintShopProPalette.cs
 Pinta.Core/PaletteFormats/PaletteDescriptor.cs
 Pinta.Core/PintaCore.cs
+Pinta.Core/SettingNames.cs
 Pinta.Core/Widgets/ToolBarDropDownButton.cs
 Pinta.Docking/Dock.cs
 Pinta.Docking/DockItem.cs
@@ -238,7 +240,6 @@ Pinta.Effects/Effects/FragmentEffect.cs
 Pinta.Effects/Effects/FrostedGlassEffect.cs
 Pinta.Effects/Effects/GaussianBlurEffect.cs
 Pinta.Effects/Effects/GlowEffect.cs
-Pinta.Effects/Effects/GradientHelper.cs
 Pinta.Effects/Effects/InkSketchEffect.cs
 Pinta.Effects/Effects/JuliaFractalEffect.cs
 Pinta.Effects/Effects/MandelbrotFractalEffect.cs
@@ -265,6 +266,7 @@ Pinta.Effects/Effects/ZoomBlurEffect.cs
 Pinta.Effects/FriendAssemblies.cs
 Pinta.Effects/Utilities/EffectHelper.cs
 Pinta.Effects/Utilities/GradientExtensions.cs
+Pinta.Effects/Utilities/GradientHelper.cs
 Pinta.Effects/Utilities/PaletteHelper.cs
 Pinta.Effects/Utilities/SrgbUtility.cs
 Pinta.Gui.Addins/AddinInfoView.cs
@@ -274,7 +276,6 @@ Pinta.Gui.Addins/AddinManagerDialog.cs
 Pinta.Gui.Addins/InstallDialog.cs
 Pinta.Gui.Addins/StatusProgressBar.cs
 Pinta.Gui.Addins/Utilities.cs
-Pinta.Gui.Widgets/DialogAttributes.cs
 Pinta.Gui.Widgets/Dialogs/MemberReflector.cs
 Pinta.Gui.Widgets/Dialogs/PintaLocalizer.cs
 Pinta.Gui.Widgets/Dialogs/ReflectionHelper.cs
@@ -297,6 +298,7 @@ Pinta.Gui.Widgets/Widgets/History/HistoryListView.cs
 Pinta.Gui.Widgets/Widgets/Layers/LayersListView.cs
 Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs
 Pinta.Gui.Widgets/Widgets/PaletteWidget.cs
+Pinta.Gui.Widgets/Widgets/PintaColorButton.cs
 Pinta.Gui.Widgets/Widgets/PointPickerGraphic.cs
 Pinta.Gui.Widgets/Widgets/PointPickerWidget.cs
 Pinta.Gui.Widgets/Widgets/Ruler.cs
@@ -330,6 +332,7 @@ Pinta.Tools/Handles/MoveHandle.cs
 Pinta.Tools/Handles/RectangleHandle.cs
 Pinta.Tools/HistoryItems/ShapesHistoryItem.cs
 Pinta.Tools/HistoryItems/ShapesModifyHistoryItem.cs
+Pinta.Tools/SettingNames.cs
 Pinta.Tools/Tools/BaseBrushTool.cs
 Pinta.Tools/Tools/BaseTransformTool.cs
 Pinta.Tools/Tools/CloneStampTool.cs
