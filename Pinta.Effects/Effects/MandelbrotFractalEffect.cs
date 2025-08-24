@@ -60,16 +60,16 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 		maxSquared: 100_000);
 
 	private sealed record MandelbrotSettings (
+		ColorGradient<ColorBgra> Gradient,
+		Matrix3x2D Rotation,
 		Size CanvasSize,
+		UnaryPixelOp PostProcessing,
 		double InverseHeight,
 		double InverseZoom,
 		double InverseQuality,
-		int Count,
 		double InverseCount,
-		Matrix3x2D Rotation,
-		int Factor,
-		ColorGradient<ColorBgra> Gradient,
-		UnaryPixelOp PostProcessing);
+		int Count,
+		int Factor);
 
 	private MandelbrotSettings CreateSettings (ImageSurface destination)
 	{
@@ -94,24 +94,18 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 		return new (
 
+			Gradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
+			Rotation: Matrix3x2D.CreateRotation (data.Angle.ToRadians ()),
 			CanvasSize: canvasSize,
+			PostProcessing: data.InvertColors ? invert_color : pass_through,
 
 			InverseHeight: 1.0 / canvasSize.Height,
 			InverseZoom: 1.0 / zoom,
-
 			InverseQuality: 1.0 / data.Quality,
-
-			Count: count,
 			InverseCount: 1.0 / count,
 
-			Rotation: Matrix3x2D.CreateRotation (data.Angle.ToRadians ()),
-
-			Factor: data.Factor,
-
-			Gradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
-
-			PostProcessing: data.InvertColors ? invert_color : pass_through
-		);
+			Count: count,
+			Factor: data.Factor);
 	}
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
