@@ -52,7 +52,7 @@ public sealed class TwistEffect : BaseEffect
 	// Algorithm Code Ported From PDN
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		TwistSettings settings = CreateSettings ();
+		TwistSettings settings = CreateSettings (destination);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ()))
@@ -87,7 +87,7 @@ public sealed class TwistEffect : BaseEffect
 
 			// If sample falls outside twist circle, it just samples the original
 			if (radialDistance > settings.Maxrad) {
-				aggregate += source.GetColorBgra (sourceData, source.Width, pixel.coordinates);
+				aggregate += source.GetColorBgra (sourceData, settings.Size.Width, pixel.coordinates);
 				continue;
 			}
 
@@ -100,7 +100,7 @@ public sealed class TwistEffect : BaseEffect
 				X: (int) (settings.Center.X + (float) (radialDistance * Math.Cos (twistedTheta.Radians))),
 				Y: (int) (settings.Center.Y + (float) (radialDistance * Math.Sin (twistedTheta.Radians))));
 
-			aggregate += source.GetColorBgra (sourceData, source.Width, samplePosition);
+			aggregate += source.GetColorBgra (sourceData, settings.Size.Width, samplePosition);
 		}
 
 		return aggregate.Blend ();
@@ -108,12 +108,13 @@ public sealed class TwistEffect : BaseEffect
 
 	private readonly record struct TwistSettings (
 		PointF Center,
+		Size Size,
 		float DistanceThreshold,
 		float Maxrad,
 		float Twist,
 		ImmutableArray<PointF> AntialiasPoints);
 
-	private TwistSettings CreateSettings ()
+	private TwistSettings CreateSettings (ImageSurface destination)
 	{
 		TwistData data = Data;
 		RectangleI renderBounds = live_preview.RenderBounds;
@@ -125,6 +126,7 @@ public sealed class TwistEffect : BaseEffect
 			Center: new (
 				X: halfWidth + renderBounds.Left,
 				Y: halfHeight + renderBounds.Top),
+			Size: destination.GetSize (),
 			DistanceThreshold: (maxrad + 1) * (maxrad + 1),
 			Maxrad: maxrad,
 			Twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist) / 100,
