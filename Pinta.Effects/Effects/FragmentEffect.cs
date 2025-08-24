@@ -69,7 +69,7 @@ public sealed class FragmentEffect : BaseEffect
 		FragmentSettings settings = CreateSettings (source);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
-		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.sourceSize))
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.SourceSize))
 			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 				settings,
 				source,
@@ -77,15 +77,15 @@ public sealed class FragmentEffect : BaseEffect
 				pixel);
 	}
 
-	private sealed record FragmentSettings (
-		Size sourceSize,
-		ImmutableArray<PointI> pointOffsets);
+	private readonly record struct FragmentSettings (
+		Size SourceSize,
+		ImmutableArray<PointI> PointOffsets);
 	private FragmentSettings CreateSettings (ImageSurface source)
 	{
 		FragmentData data = Data;
 		return new (
-			sourceSize: source.GetSize (),
-			pointOffsets: RecalcPointOffsets (
+			SourceSize: source.GetSize (),
+			PointOffsets: RecalcPointOffsets (
 				data.Fragments,
 				data.Rotation.ToRadians (),
 				data.Distance)
@@ -93,25 +93,23 @@ public sealed class FragmentEffect : BaseEffect
 	}
 
 	private static ColorBgra GetFinalPixelColor (
-		FragmentSettings settings,
+		in FragmentSettings settings,
 		ImageSurface source,
 		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
 	{
 		ColorBgra.Blender aggregate = new ();
 
-		for (int i = 0; i < settings.pointOffsets.Length; ++i) {
+		for (int i = 0; i < settings.PointOffsets.Length; ++i) {
 
-			PointI relative = new (
-				X: pixel.coordinates.X - settings.pointOffsets[i].X,
-				Y: pixel.coordinates.Y - settings.pointOffsets[i].Y);
+			PointI relative = pixel.coordinates - settings.PointOffsets[i];
 
-			if (relative.X < 0 || relative.X >= settings.sourceSize.Width || relative.Y < 0 || relative.Y >= settings.sourceSize.Height)
+			if (relative.X < 0 || relative.X >= settings.SourceSize.Width || relative.Y < 0 || relative.Y >= settings.SourceSize.Height)
 				continue;
 
 			aggregate += source.GetColorBgra (
 				sourceData,
-				settings.sourceSize.Width,
+				settings.SourceSize.Width,
 				relative);
 		}
 
