@@ -74,7 +74,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 			Hexpand = false,
 		};
 		inputField.SetText (Convert.ToInt32 (settings.InitialValue).ToString ());
-		inputField.OnChanged (OnInputFieldChanged);
+		inputField.OnChanged += OnInputFieldChanged;
 
 		// --- Initialization (Gtk.Box)
 
@@ -143,7 +143,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 		return false;
 	}
 
-	private void OnInputFieldChanged (Gtk.Entry inputField, EventArgs e)
+	private void OnInputFieldChanged (Gtk.Editable inputField, EventArgs e)
 	{
 
 		// see SetValue about suppression
