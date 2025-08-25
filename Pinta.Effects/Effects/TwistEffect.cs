@@ -73,7 +73,7 @@ public sealed class TwistEffect : BaseEffect
 			X: pixel.coordinates.X - settings.Center.X,
 			Y: pixel.coordinates.Y - settings.Center.Y);
 
-		if (fromCenter.MagnitudeSquared () > settings.DistanceThreshold)
+		if (fromCenter.MagnitudeSquared () > settings.DistanceThresholdSquared)
 			return sourceData[pixel.memoryOffset];
 
 		int antialiasSamples = settings.AntialiasPoints.Length;
@@ -123,7 +123,7 @@ public sealed class TwistEffect : BaseEffect
 	private readonly record struct TwistSettings (
 		PointD Center,
 		Size Size,
-		double DistanceThreshold,
+		double DistanceThresholdSquared,
 		double Maxrad,
 		double Twist,
 		ImmutableArray<PointD> AntialiasPoints);
@@ -141,7 +141,7 @@ public sealed class TwistEffect : BaseEffect
 				X: halfWidth + renderBounds.Left,
 				Y: halfHeight + renderBounds.Top),
 			Size: destination.GetSize (),
-			DistanceThreshold: (maxrad + 1) * (maxrad + 1),
+			DistanceThresholdSquared: (maxrad + 1) * (maxrad + 1),
 			Maxrad: maxrad,
 			Twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist) / 100,
 			AntialiasPoints: InitializeAntialiasPointsD (data.Antialias)
