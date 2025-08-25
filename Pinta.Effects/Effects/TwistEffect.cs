@@ -80,44 +80,54 @@ public sealed class TwistEffect : BaseEffect
 		ColorBgra.Blender aggregate = new ();
 
 		for (int i = 0; i < antialiasSamples; ++i) {
-
 			PointD offset = settings.AntialiasPoints[i];
 			PointD location = fromCenter + offset;
-			double radialDistance = location.Magnitude ();
-
-			// Prevent division by zero at center point (which might prevent the rest of the row from rendering)
-			if (radialDistance == 0) {
-				aggregate += source.GetColorBgra (sourceData, source.Width, pixel.coordinates);
-				continue;
-			}
-
-			// If sample falls outside twist circle, it just samples the original
-			if (radialDistance > settings.Maxrad) {
-				aggregate += source.GetColorBgra (sourceData, settings.Size.Width, pixel.coordinates);
-				continue;
-			}
-
-			double radialFactor = 1.0d - radialDistance / settings.Maxrad; // Guaranteed to be > 0 (see previous check)
-			double twistAmount = radialFactor * radialFactor * radialFactor;
-			RadiansAngle localTwist = new (twistAmount * settings.Twist);
-
-			double sinOriginal = location.Y / radialDistance;
-			double cosOriginal = location.X / radialDistance;
-
-			double sinTwist = Math.Sin (localTwist.Radians);
-			double cosTwist = Math.Cos (localTwist.Radians);
-
-			double sinFinal = sinOriginal * cosTwist + cosOriginal * sinTwist;
-			double cosFinal = cosOriginal * cosTwist - sinOriginal * sinTwist;
-
-			PointI samplePosition = new (
-				X: (int) (settings.Center.X + radialDistance * cosFinal),
-				Y: (int) (settings.Center.Y + radialDistance * sinFinal));
-
-			aggregate += source.GetColorBgra (sourceData, settings.Size.Width, samplePosition);
+			aggregate += GetSampleColor (
+				settings,
+				source,
+				sourceData,
+				sourceData[pixel.memoryOffset],
+				location);
 		}
 
 		return aggregate.Blend ();
+	}
+
+	private static ColorBgra GetSampleColor (
+		in TwistSettings settings,
+		ImageSurface source,
+		ReadOnlySpan<ColorBgra> sourceData,
+		ColorBgra original,
+		PointD location)
+	{
+		double radialDistance = location.Magnitude ();
+
+		// Prevent division by zero at center point (which might prevent the rest of the row from rendering)
+		if (radialDistance == 0)
+			return original;
+
+		// If sample falls outside twist circle, it just samples the original
+		if (radialDistance > settings.Maxrad)
+			return original;
+
+		double radialFactor = 1.0d - radialDistance / settings.Maxrad; // Guaranteed to be > 0 (see previous check)
+		double twistAmount = radialFactor * radialFactor * radialFactor;
+		RadiansAngle localTwist = new (twistAmount * settings.Twist);
+
+		double sinOriginal = location.Y / radialDistance;
+		double cosOriginal = location.X / radialDistance;
+
+		double sinTwist = Math.Sin (localTwist.Radians);
+		double cosTwist = Math.Cos (localTwist.Radians);
+
+		double sinFinal = sinOriginal * cosTwist + cosOriginal * sinTwist;
+		double cosFinal = cosOriginal * cosTwist - sinOriginal * sinTwist;
+
+		PointI samplePosition = new (
+			X: (int) (settings.Center.X + radialDistance * cosFinal),
+			Y: (int) (settings.Center.Y + radialDistance * sinFinal));
+
+		return source.GetColorBgra (sourceData, settings.Size.Width, samplePosition);
 	}
 
 	private readonly record struct TwistSettings (
