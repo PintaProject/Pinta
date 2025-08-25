@@ -69,11 +69,11 @@ public sealed class TwistEffect : BaseEffect
 		ReadOnlySpan<ColorBgra> sourceData,
 		PixelOffset pixel)
 	{
-		PointF fromCenter = new (
+		PointD fromCenter = new (
 			X: pixel.coordinates.X - settings.Center.X,
 			Y: pixel.coordinates.Y - settings.Center.Y);
 
-		if (fromCenter.MagnitudeSquaredF () > settings.DistanceThreshold)
+		if (fromCenter.MagnitudeSquared () > settings.DistanceThreshold)
 			return sourceData[pixel.memoryOffset];
 
 		int antialiasSamples = settings.AntialiasPoints.Length;
@@ -81,8 +81,8 @@ public sealed class TwistEffect : BaseEffect
 
 		for (int i = 0; i < antialiasSamples; ++i) {
 
-			PointF offset = settings.AntialiasPoints[i];
-			PointF location = fromCenter + offset;
+			PointD offset = settings.AntialiasPoints[i];
+			PointD location = fromCenter + offset;
 			double radialDistance = location.Magnitude ();
 
 			// If sample falls outside twist circle, it just samples the original
@@ -97,8 +97,8 @@ public sealed class TwistEffect : BaseEffect
 			RadiansAngle localTwist = new (twistAmount * settings.Twist);
 			RadiansAngle twistedTheta = originalTheta + localTwist;
 			PointI samplePosition = new (
-				X: (int) (settings.Center.X + (float) (radialDistance * Math.Cos (twistedTheta.Radians))),
-				Y: (int) (settings.Center.Y + (float) (radialDistance * Math.Sin (twistedTheta.Radians))));
+				X: (int) (settings.Center.X + radialDistance * Math.Cos (twistedTheta.Radians)),
+				Y: (int) (settings.Center.Y + radialDistance * Math.Sin (twistedTheta.Radians)));
 
 			aggregate += source.GetColorBgra (sourceData, settings.Size.Width, samplePosition);
 		}
@@ -107,21 +107,21 @@ public sealed class TwistEffect : BaseEffect
 	}
 
 	private readonly record struct TwistSettings (
-		PointF Center,
+		PointD Center,
 		Size Size,
-		float DistanceThreshold,
-		float Maxrad,
-		float Twist,
-		ImmutableArray<PointF> AntialiasPoints);
+		double DistanceThreshold,
+		double Maxrad,
+		double Twist,
+		ImmutableArray<PointD> AntialiasPoints);
 
 	private TwistSettings CreateSettings (ImageSurface destination)
 	{
 		TwistData data = Data;
 		RectangleI renderBounds = live_preview.RenderBounds;
-		float preliminaryTwist = -data.Amount;
-		float halfWidth = renderBounds.Width / 2.0f;
-		float halfHeight = renderBounds.Height / 2.0f;
-		float maxrad = Math.Min (halfWidth, halfHeight);
+		double preliminaryTwist = -data.Amount;
+		double halfWidth = renderBounds.Width / 2.0d;
+		double halfHeight = renderBounds.Height / 2.0d;
+		double maxrad = Math.Min (halfWidth, halfHeight);
 		return new (
 			Center: new (
 				X: halfWidth + renderBounds.Left,
@@ -130,20 +130,20 @@ public sealed class TwistEffect : BaseEffect
 			DistanceThreshold: (maxrad + 1) * (maxrad + 1),
 			Maxrad: maxrad,
 			Twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist) / 100,
-			AntialiasPoints: InitializeAntialiasPointsF (data.Antialias)
+			AntialiasPoints: InitializeAntialiasPointsD (data.Antialias)
 		);
 	}
 
-	private static ImmutableArray<PointF> InitializeAntialiasPointsF (int antiAliasLevel)
+	private static ImmutableArray<PointD> InitializeAntialiasPointsD (int antiAliasLevel)
 	{
 		int antiAliasSample = antiAliasLevel * antiAliasLevel + 1;
-		var antiAliasPoints = ImmutableArray.CreateBuilder<PointF> (antiAliasSample);
+		var antiAliasPoints = ImmutableArray.CreateBuilder<PointD> (antiAliasSample);
 		antiAliasPoints.Count = antiAliasSample;
 		for (int i = 0; i < antiAliasSample; ++i) {
-			float prePtX = i * antiAliasLevel / (float) antiAliasSample;
+			double prePtX = i * antiAliasLevel / (double) antiAliasSample;
 			antiAliasPoints[i] = new (
 				X: prePtX - ((int) prePtX),
-				Y: i / (float) antiAliasSample);
+				Y: i / (double) antiAliasSample);
 		}
 		return antiAliasPoints.MoveToImmutable ();
 	}
