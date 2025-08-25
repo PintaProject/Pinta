@@ -4,8 +4,8 @@ name: Update translation template
 on:
   workflow_dispatch:
   schedule:
-    # Run every week.
-    - cron: '0 0 * * 0'
+    # Run every other week.
+    - cron: '0 0 1,15 * *'
 
 jobs:
   update:
