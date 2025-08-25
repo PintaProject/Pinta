@@ -114,20 +114,15 @@ public sealed class TwistEffect : BaseEffect
 		double twistAmount = radialFactor * radialFactor * radialFactor;
 		RadiansAngle localTwist = new (twistAmount * settings.Twist);
 
-		double sinOriginal = location.Y / radialDistance;
-		double cosOriginal = location.X / radialDistance;
+		Matrix3x2D rotation = Matrix3x2D.CreateRotation (localTwist);
+		PointD rotatedLocation = location.Transformed (rotation);
 
-		double sinTwist = Math.Sin (localTwist.Radians);
-		double cosTwist = Math.Cos (localTwist.Radians);
+		PointI samplePosition = (settings.Center + rotatedLocation).ToInt ();
 
-		double sinFinal = sinOriginal * cosTwist + cosOriginal * sinTwist;
-		double cosFinal = cosOriginal * cosTwist - sinOriginal * sinTwist;
-
-		PointI samplePosition = new (
-			X: (int) (settings.Center.X + radialDistance * cosFinal),
-			Y: (int) (settings.Center.Y + radialDistance * sinFinal));
-
-		return source.GetColorBgra (sourceData, settings.Size.Width, samplePosition);
+		return source.GetColorBgra (
+			sourceData,
+			settings.Size.Width,
+			samplePosition);
 	}
 
 	private readonly record struct TwistSettings (
