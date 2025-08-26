@@ -102,10 +102,6 @@ public sealed class TwistEffect : BaseEffect
 	{
 		double radialDistance = location.Magnitude ();
 
-		// Prevent division by zero at center point (which might prevent the rest of the row from rendering)
-		if (radialDistance == 0)
-			return original;
-
 		// If sample falls outside twist circle, it just samples the original
 		if (radialDistance > settings.Maxrad)
 			return original;
