@@ -19,8 +19,6 @@ namespace Pinta.Effects;
 
 public sealed class CloudsEffect : BaseEffect
 {
-	private static readonly object render_lock = new ();
-
 	public sealed override bool IsTileable
 		=> true;
 
@@ -53,43 +51,58 @@ public sealed class CloudsEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
-	// Algorithm Code Ported From PDN
+	private readonly record struct CloudsSettings (
+		int Scale,
+		byte Seed,
+		double Power,
+		ColorGradient<ColorBgra> Gradient,
+		RectangleI Roi,
+		Size Size,
+		UserBlendOp Blending);
 
-	private static void RenderClouds (
-		ImageSurface surface,
-		RectangleI rect,
-		int scale,
-		byte seed,
-		double power,
-		ColorGradient<ColorBgra> gradient)
+	private CloudsSettings CreateSettings (ImageSurface destination, RectangleI roi)
 	{
-		int w = surface.Width;
-		int h = surface.Height;
-		int bottom = rect.Bottom;
+		CloudsData data = Data;
 
-		var data = surface.GetPixelData ();
+		var baseGradient =
+			GradientHelper
+			.CreateBaseGradientForEffect (
+				palette,
+				data.ColorSchemeSource,
+				data.ColorScheme,
+				data.ColorSchemeSeed)
+			.Resized (0, 1);
 
-		for (int y = rect.Top; y <= bottom; ++y) {
-			var row = data.Slice ((y - rect.Top) * w, w);
-			int dy = 2 * y - h;
-			for (int x = rect.Left; x <= rect.Right; ++x)
-				row[x - rect.Left] = GetFinalPixelColor (scale, seed, power, gradient, w, dy, x); ;
-		}
+		return new (
+			Scale: data.Scale,
+			Seed: unchecked((byte) data.Seed.Value),
+			Power: data.Power / 100.0,
+			Gradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
+			Roi: roi,
+			Size: destination.GetSize (),
+			Blending: GetBlendOp (data.BlendMode));
 	}
 
-	private static ColorBgra GetFinalPixelColor (
-		int scale,
-		byte seed,
-		double power,
-		ColorGradient<ColorBgra> gradient,
-		int w,
-		int dy,
-		int x)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		int dx = 2 * x - w;
+		CloudsSettings settings = CreateSettings (destination, roi);
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.Size))
+			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
+				settings,
+				sourceData[pixel.memoryOffset],
+				pixel.coordinates);
+	}
+
+	private static ColorBgra GetFinalPixelColor (in CloudsSettings settings, ColorBgra original, PointI coordinates)
+	{
+		int dx = 2 * coordinates.X - settings.Roi.Width;
+		int dy = 2 * coordinates.Y - settings.Roi.Height;
+
 		double val = 0;
 		double mult = 1;
-		int div = scale;
+		int div = settings.Scale;
 
 		for (int i = 0; i < 12 && mult > 0.03 && div > 0; ++i) {
 
@@ -101,68 +114,61 @@ public sealed class CloudsEffect : BaseEffect
 				X: (int) dr.X,
 				Y: (int) dr.Y);
 
-			dr = new (
+			PointD df = new (
 				X: dr.X - dd.X,
 				Y: dr.Y - dd.Y);
 
 			double noise = PerlinNoise.Compute (
 				unchecked((byte) dd.X),
 				unchecked((byte) dd.Y),
-				dr, //(double)dxr / div, (double)dyr / div
-				(byte) (seed ^ i)
+				df,
+				(byte) (settings.Seed ^ i)
 			);
 
 			val += noise * mult;
 			div /= 2;
-			mult *= power;
+			mult *= settings.Power;
 		}
 
-		return gradient.GetColor ((val + 1) / 2);
+		ColorBgra cloudColor = settings.Gradient.GetColor ((val + 1) / 2);
+
+		return settings.Blending.Apply (original, cloudColor);
 	}
 
-	protected override void Render (
-		ImageSurface src,
-		ImageSurface dst,
-		RectangleI roi)
+	private static UserBlendOp GetBlendOp (string blendModeName)
 	{
-		RectangleD r = roi.ToDouble ();
+		// TODO: Implement missing blend ops,
+		// so that one can use UserBlendOps.GetAllBlendModeNames ()
+		// and something like UserBlendOps.GetBlendModeByName ()
 
-		ImageSurface temp = CairoExtensions.CreateImageSurface (Format.Argb32, roi.Width, roi.Height);
+		return blendModeName switch {
 
-		var baseGradient =
-			GradientHelper
-			.CreateBaseGradientForEffect (
-				palette,
-				Data.ColorSchemeSource,
-				Data.ColorScheme,
-				Data.ColorSchemeSeed)
-			.Resized (0, 1);
+			"Multiply" => new UserBlendOps.MultiplyBlendOp (),
+			"Color Burn" => new UserBlendOps.ColorBurnBlendOp (),
+			"Color Dodge" => new UserBlendOps.ColorDodgeBlendOp (),
+			"Overlay" => new UserBlendOps.OverlayBlendOp (),
+			"Difference" => new UserBlendOps.DifferenceBlendOp (),
+			"Lighten" => new UserBlendOps.LightenBlendOp (),
+			"Darken" => new UserBlendOps.DarkenBlendOp (),
+			"Screen" => new UserBlendOps.ScreenBlendOp (),
+			"Xor" => new UserBlendOps.XorBlendOp (), // TODO: Seems to behave differently from previous implementation
 
-		RenderClouds (
-			temp,
-			roi,
-			Data.Scale,
-			unchecked((byte) Data.Seed.Value),
-			Data.Power / 100.0,
-			Data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient
-		);
+			// TODO: Hard Light
+			// TODO: Soft Light
+			// TODO: Color
+			// TODO: Luminosity
+			// TODO: Hue
+			// TODO: Saturation
 
-		temp.MarkDirty ();
+			"Additive" => new UserBlendOps.AdditiveBlendOp (),
+			"Negation" => new UserBlendOps.NegationBlendOp (),
+			"Reflect" => new UserBlendOps.ReflectBlendOp (),
+			"Glow" => new UserBlendOps.GlowBlendOp (),
 
-		// Have to lock because effect renderer is multithreaded
-		lock (render_lock) {
-
-			using Context g = new (dst);
-
-			// - Clear any previous render from the destination
-			// - Copy the source to the destination
-			// - Blend the clouds over the source
-
-			g.Clear (r);
-			g.BlendSurface (src, r);
-			g.BlendSurface (temp, r.Location (), (BlendMode) CloudsData.BlendOps[Data.BlendMode]);
-		}
+			_ => new UserBlendOps.NormalBlendOp (),
+		};
 	}
+
 
 	public sealed class CloudsData : EffectData
 	{
@@ -185,17 +191,32 @@ public sealed class CloudsEffect : BaseEffect
 
 		static CloudsData ()
 		{
+			Dictionary<string, BlendMode> allOps = new () {
+				{ Translations.GetString("Normal"), Core.BlendMode.Normal },
+				{ Translations.GetString("Multiply"), Core.BlendMode.Multiply },
+				{ Translations.GetString("Additive"), (BlendMode) 100},
+				{ Translations.GetString("Color Burn"), Core.BlendMode.ColorBurn },
+				{ Translations.GetString("Color Dodge"), Core.BlendMode.ColorDodge },
+				{ Translations.GetString("Reflect"), (BlendMode) 101 },
+				{ Translations.GetString("Glow"), (BlendMode) 102 },
+				{ Translations.GetString("Overlay"), Core.BlendMode.Overlay },
+				{ Translations.GetString("Difference"), Core.BlendMode.Difference },
+				{ Translations.GetString("Negation"), (BlendMode) 103 },
+				{ Translations.GetString("Lighten"), Core.BlendMode.Lighten },
+				{ Translations.GetString("Darken"), Core.BlendMode.Darken },
+				{ Translations.GetString("Screen"), Core.BlendMode.Screen },
+				{ Translations.GetString("Xor"), Core.BlendMode.Xor },
+			};
+
 			BlendOps =
-				UserBlendOps.GetAllBlendModeNames ()
-				.ToDictionary (
-					o => o,
-					o => (object) UserBlendOps.GetBlendModeByName (o))
+				allOps
+				.ToDictionary (kvp => kvp.Key, kvp => (object) kvp.Value)
 				.AsReadOnly ();
 
-			default_blend_op = UserBlendOps.GetBlendModeName (Pinta.Core.BlendMode.Normal);
+			default_blend_op = UserBlendOps.GetBlendModeName (Core.BlendMode.Normal);
 		}
 
-		[StaticList ("BlendOps")]
+		[StaticList (nameof (BlendOps))]
 		public string BlendMode { get; set; } = default_blend_op;
 
 		[Caption ("Random Noise Seed")]
