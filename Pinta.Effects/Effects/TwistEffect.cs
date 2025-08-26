@@ -145,11 +145,11 @@ public sealed class TwistEffect : BaseEffect
 			DistanceThresholdSquared: (maxrad + 1) * (maxrad + 1),
 			Maxrad: maxrad,
 			Twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist) / 100,
-			AntialiasPoints: InitializeAntialiasPointsD (data.Antialias)
+			AntialiasPoints: InitializeAntialiasPoints (data.Antialias)
 		);
 	}
 
-	private static ImmutableArray<PointD> InitializeAntialiasPointsD (int antiAliasLevel)
+	private static ImmutableArray<PointD> InitializeAntialiasPoints (int antiAliasLevel)
 	{
 		int antiAliasSample = antiAliasLevel * antiAliasLevel + 1;
 		var antiAliasPoints = ImmutableArray.CreateBuilder<PointD> (antiAliasSample);
