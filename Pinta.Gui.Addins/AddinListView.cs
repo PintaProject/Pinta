@@ -27,7 +27,7 @@ internal sealed class AddinListView : Adw.Bin
 		Gio.ListStore listStore = Gio.ListStore.New (AddinListViewItem.GetGType ());
 
 		Gtk.SingleSelection selectionModel = Gtk.SingleSelection.New (listStore);
-		selectionModel.OnSelectionChanged ((_, _) => HandleSelectionChanged ());
+		selectionModel.OnSelectionChanged += (_, _) => HandleSelectionChanged ();
 		selectionModel.Autoselect = true;
 
 		Gtk.SignalListItemFactory itemFactory = Gtk.SignalListItemFactory.New ();

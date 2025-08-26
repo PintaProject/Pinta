@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <GirCoreVersion>0.7.0-preview.1</GirCoreVersion>
+    <GirCoreVersion>0.7.0-preview.2</GirCoreVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="GirCore.Adw-1" Version="$(GirCoreVersion)" />

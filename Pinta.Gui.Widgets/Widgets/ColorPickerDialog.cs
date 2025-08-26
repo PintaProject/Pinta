@@ -348,7 +348,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			Text_ = ExtractTargetedColor (adjustable, true).ToHex (),
 			MaxWidthChars = 10,
 		};
-		hexEntry.OnChanged (HexEntry_OnChanged);
+		hexEntry.OnChanged += HexEntry_OnChanged;
 
 		Gtk.Label hexLabel = new () {
 			Label_ = Translations.GetString ("Hex"),
@@ -845,7 +845,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		SetColorFromPickerSurface (new PointD (args.X, args.Y));
 	}
 
-	private void HexEntry_OnChanged (Gtk.Entry sender, EventArgs _)
+	private void HexEntry_OnChanged (Gtk.Editable sender, EventArgs _)
 	{
 		if ((GetFocus ()?.Parent) != sender) return;
 		CurrentColor = Color.FromHex (sender.GetText ()) ?? CurrentColor;

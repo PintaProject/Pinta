@@ -45,7 +45,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 		Gio.ListStore listModel = Gio.ListStore.New (LayersListViewItem.GetGType ());
 
 		Gtk.SingleSelection selectionModel = Gtk.SingleSelection.New (listModel);
-		selectionModel.OnSelectionChanged (HandleSelectionChanged);
+		selectionModel.OnSelectionChanged += HandleSelectionChanged;
 
 		Gtk.SignalListItemFactory factory = Gtk.SignalListItemFactory.New ();
 		factory.OnSetup += HandleFactorySetup;
@@ -94,8 +94,8 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 	}
 
 	private void HandleSelectionChanged (
-		Gtk.SingleSelection sender,
-		GtkExtensions.SelectionChangedSignalArgs e)
+		Gtk.SelectionModel sender,
+		EventArgs e)
 	{
 		ArgumentNullException.ThrowIfNull (active_document);
 
