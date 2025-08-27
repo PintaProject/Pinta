@@ -53,33 +53,33 @@ public sealed class PolarInversionEffect : BaseEffect
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
+		PolarInversionData data = Data;
+
 		Warp.Settings settings = Warp.CreateSettings (
-			Data,
+			data,
 			live_preview.RenderBounds,
 			palette);
 
-		Span<ColorBgra> dst_data = destination.GetPixelData ();
-		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ()))
-			dst_data[pixel.memoryOffset] = Warp.GetPixelColor (
+			destinationData[pixel.memoryOffset] = Warp.GetPixelColor (
 				settings,
 				InverseTransform,
 				source,
-				src_data[pixel.memoryOffset],
+				sourceData[pixel.memoryOffset],
 				pixel);
-	}
 
-	public PointD InverseTransform (Warp.Settings settings, PointD transData)
-	{
-		// NOTE: when x and y are zero, this will divide by zero and return NaN
-
-		double invertDistance = Mathematics.Lerp (
-			from: 1.0,
-			to: settings.defaultRadius2 / transData.MagnitudeSquared (),
-			frac: Data.Amount);
-
-		return transData.Scaled (invertDistance);
+		PointD InverseTransform (Warp.Settings settings, PointD transformData)
+		{
+			// NOTE: when x and y are zero, this will divide by zero and return NaN
+			double invertDistance = Mathematics.Lerp (
+				from: 1.0,
+				to: settings.defaultRadius2 / transformData.MagnitudeSquared (),
+				frac: data.Amount);
+			return transformData.Scaled (invertDistance);
+		}
 	}
 }
 
