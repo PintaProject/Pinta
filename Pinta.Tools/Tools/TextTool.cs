@@ -781,7 +781,7 @@ public sealed class TextTool : BaseTool
 								UpdateFont ();
 							} else if (e.Key.Value == Gdk.Constants.KEY_a) {
 								// Select all of the text.
-								CurrentTextEngine.PerformHome (false, false);
+								CurrentTextEngine.PerformHome (true, false);
 								CurrentTextEngine.PerformEnd (true, true);
 							} else {
 								//Ignore command shortcut.
