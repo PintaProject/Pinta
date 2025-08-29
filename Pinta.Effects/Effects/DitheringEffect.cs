@@ -10,13 +10,23 @@ namespace Pinta.Effects;
 
 public sealed class DitheringEffect : BaseEffect
 {
-	public override string Name => Translations.GetString ("Dithering");
-	public override bool IsConfigurable => true;
-	public override string Icon => Resources.Icons.EffectsColorDithering;
-	public override string EffectMenuCategory => Translations.GetString ("Color");
-	public DitheringData Data => (DitheringData) EffectData!; // NRT - Set in constructor
+	public override string Name
+		=> Translations.GetString ("Dithering");
 
-	public override bool IsTileable => false;
+	public override bool IsConfigurable
+		=> true;
+
+	public override string Icon
+		=> Resources.Icons.EffectsColorDithering;
+
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Color");
+
+	public DitheringData Data
+		=> (DitheringData) EffectData!; // NRT - Set in constructor
+
+	public override bool IsTileable
+		=> false;
 
 	private readonly IChromeService chrome;
 	private readonly IPaletteService palette;
@@ -26,6 +36,7 @@ public sealed class DitheringEffect : BaseEffect
 		chrome = services.GetService<IChromeService> ();
 		palette = services.GetService<IPaletteService> ();
 		workspace = services.GetService<IWorkspaceService> ();
+
 		EffectData = new DitheringData ();
 	}
 
@@ -33,63 +44,63 @@ public sealed class DitheringEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	private sealed record DitheringSettings (
-		ErrorDiffusionMatrix diffusionMatrix,
-		ImmutableArray<ColorBgra> chosenPalette,
-		int sourceWidth,
-		int sourceHeight);
+		ErrorDiffusionMatrix DiffusionMatrix,
+		ImmutableArray<ColorBgra> ChosenPalette,
+		Size CanvasSize);
 
-	private DitheringSettings CreateSettings (ImageSurface src)
+	private DitheringSettings CreateSettings (ImageSurface source)
 	{
-		ImmutableArray<ColorBgra> chosenPalette = Data.PaletteSource switch {
-			PaletteSource.PresetPalettes => PaletteHelper.GetPredefined (Data.PaletteChoice),
+		DitheringData data = Data;
+
+		ImmutableArray<ColorBgra> chosenPalette = data.PaletteSource switch {
+			PaletteSource.PresetPalettes => PaletteHelper.GetPredefined (data.PaletteChoice),
 			PaletteSource.CurrentPalette => [.. palette.CurrentPalette.Colors.Select (CairoExtensions.ToColorBgra)],
 			PaletteSource.RecentlyUsedColors => [.. palette.RecentlyUsedColors.Select (CairoExtensions.ToColorBgra)],
 			_ => throw new UnreachableException (),
 		};
 
 		return new (
-			diffusionMatrix: ErrorDiffusionMatrix.GetPredefined (Data.ErrorDiffusionMethod),
-			chosenPalette: chosenPalette,
-			sourceWidth: src.Width,
-			sourceHeight: src.Height);
+			DiffusionMatrix: ErrorDiffusionMatrix.GetPredefined (data.ErrorDiffusionMethod),
+			ChosenPalette: chosenPalette,
+			CanvasSize: source.GetSize ());
 	}
 
-	protected override void Render (ImageSurface src, ImageSurface dest, RectangleI roi)
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		DitheringSettings settings = CreateSettings (src);
+		DitheringSettings settings = CreateSettings (source);
 
-		ReadOnlySpan<ColorBgra> src_data = src.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = dest.GetPixelData ();
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
 		for (int y = roi.Top; y <= roi.Bottom; y++) {
 			for (int x = roi.Left; x <= roi.Right; x++) {
-				int currentIndex = y * settings.sourceWidth + x;
-				dst_data[currentIndex] = src_data[currentIndex];
+				int currentIndex = y * settings.CanvasSize.Width + x;
+				destinationData[currentIndex] = sourceData[currentIndex];
 			}
 		}
 
-		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, dest.GetSize ())) {
+		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.CanvasSize)) {
 
-			ColorBgra originalPixel = dst_data[pixel.memoryOffset];
-			ColorBgra closestColor = FindClosestPaletteColor (settings.chosenPalette, originalPixel);
+			ColorBgra originalPixel = destinationData[pixel.memoryOffset];
+			ColorBgra closestColor = FindClosestPaletteColor (settings.ChosenPalette, originalPixel);
 
-			dst_data[pixel.memoryOffset] = closestColor;
+			destinationData[pixel.memoryOffset] = closestColor;
 
 			int errorRed = originalPixel.R - closestColor.R;
 			int errorGreen = originalPixel.G - closestColor.G;
 			int errorBlue = originalPixel.B - closestColor.B;
 
-			for (int r = 0; r < settings.diffusionMatrix.Rows; r++) {
+			for (int r = 0; r < settings.DiffusionMatrix.Rows; r++) {
 
-				for (int c = 0; c < settings.diffusionMatrix.Columns; c++) {
+				for (int c = 0; c < settings.DiffusionMatrix.Columns; c++) {
 
-					var weight = settings.diffusionMatrix[r, c];
+					int weight = settings.DiffusionMatrix[r, c];
 
 					if (weight <= 0)
 						continue;
 
 					PointI thisItem = new (
-						X: pixel.coordinates.X + c - settings.diffusionMatrix.ColumnsToLeft,
+						X: pixel.coordinates.X + c - settings.DiffusionMatrix.ColumnsToLeft,
 						Y: pixel.coordinates.Y + r
 					);
 
@@ -99,11 +110,11 @@ public sealed class DitheringEffect : BaseEffect
 					if (thisItem.Y < roi.Top || thisItem.Y >= roi.Bottom)
 						continue;
 
-					int idx = (thisItem.Y * settings.sourceWidth) + thisItem.X;
+					int idx = (thisItem.Y * settings.CanvasSize.Width) + thisItem.X;
 
-					double factor = weight * settings.diffusionMatrix.WeightReductionFactor;
+					double factor = weight * settings.DiffusionMatrix.WeightReductionFactor;
 
-					dst_data[idx] = AddError (dst_data[idx], factor, errorRed, errorGreen, errorBlue);
+					destinationData[idx] = AddError (destinationData[idx], factor, errorRed, errorGreen, errorBlue);
 				}
 			}
 		}
