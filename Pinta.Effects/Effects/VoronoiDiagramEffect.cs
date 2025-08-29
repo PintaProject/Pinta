@@ -121,7 +121,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			}
 			ColorBgra cellColor = settings.Colors[closestIndex];
 			if (settings.ShowPoints && shortestDistance * 2 <= settings.PointSize)
-				return UserBlendOps.NormalBlendOp.ApplyStatic (cellColor, settings.PointColor);
+				return Blending.Normal (cellColor, settings.PointColor);
 			else
 				return cellColor;
 		}

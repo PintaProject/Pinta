@@ -134,7 +134,7 @@ public sealed class CellsEffect : BaseEffect
 					original,
 					palette);
 			if (settings.ShowPoints && shortestDistance * 2 <= settings.PointSize)
-				return UserBlendOps.NormalBlendOp.ApplyStatic (locationColor, settings.PointColor);
+				return Blending.Normal (locationColor, settings.PointColor);
 			else
 				return locationColor;
 		}
