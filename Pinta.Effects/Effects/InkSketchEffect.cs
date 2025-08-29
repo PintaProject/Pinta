@@ -25,17 +25,23 @@ public sealed class InkSketchEffect : BaseEffect
 	private readonly UnaryPixelOps.Desaturate desaturate_op;
 	private readonly UserBlendOps.DarkenBlendOp darken_op;
 
-	public override string Icon => Resources.Icons.EffectsArtisticInkSketch;
+	public override string Icon
+		=> Resources.Icons.EffectsArtisticInkSketch;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Ink Sketch");
+	public override string Name
+		=> Translations.GetString ("Ink Sketch");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Artistic");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Artistic");
 
-	public InkSketchData Data => (InkSketchData) EffectData!;  // NRT - Set in constructor
+	public InkSketchData Data
+		=> (InkSketchData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 	private readonly IWorkspaceService workspace;
@@ -65,47 +71,49 @@ public sealed class InkSketchEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
-	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	// Algorithm Code Ported From PDN
+
+	public override void Render (ImageSurface source, ImageSurface destination, ReadOnlySpan<RectangleI> rois)
 	{
 		// Glow background 
 		glow_effect.Data.Radius = 6;
 		glow_effect.Data.Brightness = -(Data.Coloring - 50) * 2;
 		glow_effect.Data.Contrast = -(Data.Coloring - 50) * 2;
 
-		glow_effect.Render (src, dest, rois);
+		glow_effect.Render (source, destination, rois);
 
-		var src_data = src.GetReadOnlyPixelData ();
-		int width = src.Width;
-		var dst_data = dest.GetPixelData ();
+		int width = source.Width;
+
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
 		// Create black outlines by finding the edges of objects 
 		foreach (RectangleI roi in rois) {
 			for (int y = roi.Top; y <= roi.Bottom; ++y) {
 
 				int top = Math.Max (y - Radius, 0);
-				int bottom = Math.Min (y + Radius + 1, dest.Height);
+				int bottom = Math.Min (y + Radius + 1, destination.Height);
 
-				var dst_row = dst_data.Slice (y * width, width);
+				Span<ColorBgra> destinationRow = destinationData.Slice (y * width, width);
 
 				for (int x = roi.Left; x <= roi.Right; ++x) {
 
 					int left = Math.Max (x - Radius, 0);
-					int right = Math.Min (x + Radius + 1, dest.Width);
+					int right = Math.Min (x + Radius + 1, destination.Width);
 
 					RectangleI adjustedBounds = RectangleI.FromLTRB (left, top, right, bottom);
-					ColorBgra baseRGB = CreateBaseRGBA (src_data, width, x, y, adjustedBounds);
+					ColorBgra baseRGB = CreateBaseRGBA (sourceData, width, x, y, adjustedBounds);
 					ColorBgra topLayer = CreateTopLayer (baseRGB);
 
 					// Change Blend Mode to Darken
-					ColorBgra originalPixel = dst_row[x];
-					dst_row[x] = darken_op.Apply (topLayer, originalPixel);
+					ColorBgra originalPixel = destinationRow[x];
+					destinationRow[x] = darken_op.Apply (topLayer, originalPixel);
 				}
 			}
 		}
 	}
 
-	private static ColorBgra CreateBaseRGBA (ReadOnlySpan<ColorBgra> src_data, int width, int x, int y, RectangleI adjustedBounds)
+	private static ColorBgra CreateBaseRGBA (ReadOnlySpan<ColorBgra> sourceData, int width, int x, int y, RectangleI adjustedBounds)
 	{
 		int r = 0;
 		int g = 0;
@@ -114,19 +122,20 @@ public sealed class InkSketchEffect : BaseEffect
 
 		for (int v = adjustedBounds.Top; v < adjustedBounds.Bottom; v++) {
 
-			var src_row = src_data.Slice (v * width, width);
+			ReadOnlySpan<ColorBgra> sourceRow = sourceData.Slice (v * width, width);
 			int j = v - y + Radius;
 
 			for (int u = adjustedBounds.Left; u < adjustedBounds.Right; u++) {
+
 				int i1 = u - x + Radius;
 				int w = conv[j][i1];
 
-				ColorBgra src_pixel = src_row[u];
+				ColorBgra sourcePixel = sourceRow[u];
 
-				r += src_pixel.R * w;
-				g += src_pixel.G * w;
-				b += src_pixel.B * w;
-				a += src_pixel.A * w;
+				r += sourcePixel.R * w;
+				g += sourcePixel.G * w;
+				b += sourcePixel.B * w;
+				a += sourcePixel.A * w;
 			}
 		}
 
@@ -149,7 +158,6 @@ public sealed class InkSketchEffect : BaseEffect
 			? ColorBgra.FromBgra (topLayer.A, topLayer.A, topLayer.A, topLayer.A)
 			: ColorBgra.FromBgra (0, 0, 0, topLayer.A);
 	}
-	#endregion
 
 	public sealed class InkSketchData : EffectData
 	{
