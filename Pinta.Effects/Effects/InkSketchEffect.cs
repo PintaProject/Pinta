@@ -115,36 +115,18 @@ public sealed class InkSketchEffect : BaseEffect
 
 	private static ColorBgra CreateBaseRGBA (ReadOnlySpan<ColorBgra> sourceData, int width, int x, int y, RectangleI adjustedBounds)
 	{
-		int r = 0;
-		int g = 0;
-		int b = 0;
-		int a = 0;
-
+		ColorBgra.Aggregate aggregate = new ();
 		for (int v = adjustedBounds.Top; v < adjustedBounds.Bottom; v++) {
-
 			ReadOnlySpan<ColorBgra> sourceRow = sourceData.Slice (v * width, width);
 			int j = v - y + Radius;
-
 			for (int u = adjustedBounds.Left; u < adjustedBounds.Right; u++) {
-
 				int i1 = u - x + Radius;
 				int w = conv[j][i1];
-
 				ColorBgra sourcePixel = sourceRow[u];
-
-				r += sourcePixel.R * w;
-				g += sourcePixel.G * w;
-				b += sourcePixel.B * w;
-				a += sourcePixel.A * w;
+				aggregate = aggregate.ScaledAdd (sourcePixel, w);
 			}
 		}
-
-		return ColorBgra.FromBgra (
-			b: Utility.ClampToByte (b),
-			g: Utility.ClampToByte (g),
-			r: Utility.ClampToByte (r),
-			a: Utility.ClampToByte (a)
-		);
+		return aggregate.Clamp ();
 	}
 
 	private ColorBgra CreateTopLayer (ColorBgra baseRGB)

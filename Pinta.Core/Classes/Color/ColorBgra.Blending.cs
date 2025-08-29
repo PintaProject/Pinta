@@ -178,6 +178,15 @@ partial struct ColorBgra
 				a: A + color.A * scale);
 		}
 
+		public ColorBgra Clamp ()
+		{
+			return FromBgra (
+				b: Utility.ClampToByte (B),
+				g: Utility.ClampToByte (G),
+				r: Utility.ClampToByte (R),
+				a: Utility.ClampToByte (A));
+		}
+
 		public static Aggregate operator + (in Aggregate blender, in ColorBgra color)
 		{
 			return new (
