@@ -21,18 +21,6 @@ partial class UserBlendOps
 		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs)
 			=> ApplyStatic (lhs, rhs);
 
-		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
-		{
-			for (int i = 0; i < src.Length; ++i)
-				dst[i] = ApplyStatic (dst[i], src[i]);
-		}
-
-		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> lhs, ReadOnlySpan<ColorBgra> rhs)
-		{
-			for (int i = 0; i < dst.Length; ++i)
-				dst[i] = ApplyStatic (lhs[i], rhs[i]);
-		}
-
 		public static ColorBgra ApplyStatic (in ColorBgra lhs, in ColorBgra rhs)
 		{
 			int y;
