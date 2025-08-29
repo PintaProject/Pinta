@@ -46,8 +46,8 @@ internal static class Blending
 		if (top.A == 255) return top; // Top layer is fully opaque
 		if (top.A == 0) return bottom; // Top layer is fully transparent
 		int inverseSourceAlpha = 255 - top.A;
-		const bool ROUNDING_ERR_HIGH = true;
-		const int ROUNDING_ADDEND = ROUNDING_ERR_HIGH ? 128 : 127;
+		const bool ROUNDING_ERR_SIDE = true;
+		const int ROUNDING_ADDEND = ROUNDING_ERR_SIDE ? 128 : 127;
 		byte outA = Utility.ClampToByte (top.A + (bottom.A * inverseSourceAlpha + ROUNDING_ADDEND) / 255);
 		byte outR = Utility.ClampToByte ((top.R * 255 + bottom.R * inverseSourceAlpha + ROUNDING_ADDEND) / 255);
 		byte outG = Utility.ClampToByte ((top.G * 255 + bottom.G * inverseSourceAlpha + ROUNDING_ADDEND) / 255);
