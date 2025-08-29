@@ -145,44 +145,60 @@ partial struct ColorBgra
 			return Zero;
 	}
 
-	public readonly struct Blender
+	public readonly struct Aggregate
 	{
 		public uint B { get; }
 		public uint G { get; }
 		public uint R { get; }
 		public uint A { get; }
-		public uint Count { get; }
 
-		public Blender ()
+		public Aggregate ()
 		{
 			B = 0;
 			G = 0;
 			R = 0;
 			A = 0;
-			Count = 0;
 		}
 
-		private Blender (
-			uint b,
-			uint g,
-			uint r,
-			uint a,
-			uint count)
+		private Aggregate (uint b, uint g, uint r, uint a)
 		{
 			B = b;
 			G = g;
 			R = r;
 			A = a;
+		}
+
+		public static Aggregate operator + (in Aggregate blender, in ColorBgra color)
+		{
+			return new (
+				b: blender.B + color.B,
+				g: blender.G + color.G,
+				r: blender.R + color.R,
+				a: blender.A + color.A);
+		}
+	}
+
+	public readonly struct Blender
+	{
+		public Aggregate Aggregate { get; }
+		public uint Count { get; }
+
+		public Blender ()
+		{
+			Aggregate = new ();
+			Count = 0;
+		}
+
+		private Blender (Aggregate aggregate, uint count)
+		{
+			Aggregate = aggregate;
 			Count = count;
 		}
 
 		public static Blender operator + (in Blender blender, in ColorBgra color)
 		{
 			return new (
-				b: blender.B + color.B,
-				g: blender.G + color.G,
-				r: blender.R + color.R,
-				a: blender.A + color.A,
+				aggregate: blender.Aggregate + color,
 				count: blender.Count + 1);
 		}
 
@@ -192,10 +208,10 @@ partial struct ColorBgra
 				throw new InvalidOperationException ("No colors to blend");
 
 			return FromBgra (
-				b: (byte) (B / (ulong) Count),
-				g: (byte) (G / (ulong) Count),
-				r: (byte) (R / (ulong) Count),
-				a: (byte) (A / (ulong) Count));
+				b: (byte) (Aggregate.B / (ulong) Count),
+				g: (byte) (Aggregate.G / (ulong) Count),
+				r: (byte) (Aggregate.R / (ulong) Count),
+				a: (byte) (Aggregate.A / (ulong) Count));
 		}
 	}
 }
