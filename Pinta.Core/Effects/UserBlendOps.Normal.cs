@@ -17,37 +17,45 @@ partial class UserBlendOps
 	public sealed class NormalBlendOp : UserBlendOp
 	{
 		public static string StaticName => "Normal";
-		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = ((rhs).B); }; { fG = ((rhs).G); }; { fR = ((rhs).R); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = mas_table[masIndex]; uint taA = mas_table[masIndex + 1]; uint taS = mas_table[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
-		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
-		{
-			for (int i = 0; i < src.Length; ++i)
-				dst[i] = ApplyStatic (dst[i], src[i]);
-		}
-		public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> lhs, ReadOnlySpan<ColorBgra> rhs)
-		{
-			for (int i = 0; i < dst.Length; ++i)
-				dst[i] = ApplyStatic (lhs[i], rhs[i]);
-		}
-		public static ColorBgra ApplyStatic (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = ((rhs).B); }; { fG = ((rhs).G); }; { fR = ((rhs).R); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = mas_table[masIndex]; uint taA = mas_table[masIndex + 1]; uint taS = mas_table[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
-		public override UserBlendOp CreateWithOpacity (int opacity) { return new NormalBlendOpWithOpacity (opacity); }
 
-		private sealed class NormalBlendOpWithOpacity : UserBlendOp
+		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs)
+			=> ApplyStatic (lhs, rhs);
+
+		public static ColorBgra ApplyStatic (in ColorBgra lhs, in ColorBgra rhs)
 		{
-			private readonly int opacity;
-			private byte ApplyOpacity (byte a) { int r; { r = (a); }; { r = ((r) * (opacity) + 0x80); r = ((((r) >> 8) + (r)) >> 8); }; return (byte) r; }
-			public static string StaticName => "Normal";
-			public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ApplyOpacity ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { fB = ((rhs).B); }; { fG = ((rhs).G); }; { fR = ((rhs).R); }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = mas_table[masIndex]; uint taA = mas_table[masIndex + 1]; uint taS = mas_table[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
-			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> src)
-			{
-				for (int i = 0; i < src.Length; ++i)
-					dst[i] = ApplyStatic (dst[i], src[i]);
-			}
-			public override void Apply (Span<ColorBgra> dst, ReadOnlySpan<ColorBgra> lhs, ReadOnlySpan<ColorBgra> rhs)
-			{
-				for (int i = 0; i < dst.Length; ++i)
-					dst[i] = ApplyStatic (lhs[i], rhs[i]);
-			}
-			public NormalBlendOpWithOpacity (int opacity) { if (this.opacity < 0 || this.opacity > 255) { throw new ArgumentOutOfRangeException (nameof (opacity)); } this.opacity = opacity; }
+			// These are the relevant mathematical formulae:
+			// 
+			// - C_out = C_a + C_b * (1 - A_a)
+			// - A_out = A_a + A_b * (1 - A_a)
+			// 
+			// Where:
+			// 
+			// - C refers to the color channels: R, G, B
+			// - A refers to the alpha channel
+			// - a refers to the color on the top layer
+			// - b refers to the color on the bottom layer
+			// 
+			// Integer arithmetic is used for efficiency.
+			// 
+			// If one reads about the theory behind the blending,
+			// values in the operations usually range from 0 to 1,
+			// but here they range from 0 to 255.
+			// 
+			// That is, the values are scaled by 255
+			// with respect to their "theoretical" counterparts.
+			// 
+			// This 'ROUNDING_ADDEND' mechanism is a neat trick that
+			// forces the truncation operator to function as a rounding operator.
+
+			if (rhs.A == 255) return rhs; // Top layer is fully opaque
+			if (rhs.A == 0) return lhs; // Top layer is fully transparent
+			int inverseSourceAlpha = 255 - rhs.A;
+			const int ROUNDING_ADDEND = 128;
+			byte outA = Utility.ClampToByte (rhs.A + (lhs.A * inverseSourceAlpha + ROUNDING_ADDEND) / 255);
+			byte outR = Utility.ClampToByte ((rhs.R * 255 + lhs.R * inverseSourceAlpha + ROUNDING_ADDEND) / 255);
+			byte outG = Utility.ClampToByte ((rhs.G * 255 + lhs.G * inverseSourceAlpha + ROUNDING_ADDEND) / 255);
+			byte outB = Utility.ClampToByte ((rhs.B * 255 + lhs.B * inverseSourceAlpha + ROUNDING_ADDEND) / 255);
+			return ColorBgra.FromBgra (outB, outG, outR, outA);
 		}
 	}
 }
