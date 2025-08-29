@@ -6,6 +6,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using static Pinta.Core.ColorBgra;
 
 namespace Pinta.Core;
 
@@ -147,10 +148,10 @@ partial struct ColorBgra
 
 	public readonly struct Aggregate
 	{
-		public uint B { get; }
-		public uint G { get; }
-		public uint R { get; }
-		public uint A { get; }
+		public int B { get; }
+		public int G { get; }
+		public int R { get; }
+		public int A { get; }
 
 		public Aggregate ()
 		{
@@ -160,12 +161,21 @@ partial struct ColorBgra
 			A = 0;
 		}
 
-		private Aggregate (uint b, uint g, uint r, uint a)
+		private Aggregate (int b, int g, int r, int a)
 		{
 			B = b;
 			G = g;
 			R = r;
 			A = a;
+		}
+
+		public Aggregate ScaledAdd (in ColorBgra color, int scale)
+		{
+			return new (
+				b: B + color.B * scale,
+				g: G + color.G * scale,
+				r: R + color.R * scale,
+				a: A + color.A * scale);
 		}
 
 		public static Aggregate operator + (in Aggregate blender, in ColorBgra color)
@@ -181,7 +191,7 @@ partial struct ColorBgra
 	public readonly struct Blender
 	{
 		public Aggregate Aggregate { get; }
-		public uint Count { get; }
+		public int Count { get; }
 
 		public Blender ()
 		{
@@ -189,7 +199,7 @@ partial struct ColorBgra
 			Count = 0;
 		}
 
-		private Blender (Aggregate aggregate, uint count)
+		private Blender (Aggregate aggregate, int count)
 		{
 			Aggregate = aggregate;
 			Count = count;
@@ -208,10 +218,10 @@ partial struct ColorBgra
 				throw new InvalidOperationException ("No colors to blend");
 
 			return FromBgra (
-				b: (byte) (Aggregate.B / (ulong) Count),
-				g: (byte) (Aggregate.G / (ulong) Count),
-				r: (byte) (Aggregate.R / (ulong) Count),
-				a: (byte) (Aggregate.A / (ulong) Count));
+				b: Utility.ClampToByte (Aggregate.B / Count),
+				g: Utility.ClampToByte (Aggregate.G / Count),
+				r: Utility.ClampToByte (Aggregate.R / Count),
+				a: Utility.ClampToByte (Aggregate.A / Count));
 		}
 	}
 }
