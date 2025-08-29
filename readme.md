@@ -37,8 +37,9 @@ Used under [Creative Commons Attribution 3.0 License](http://creativecommons.org
 ## Building on Windows
 
 First, install the required GTK-related dependencies:
-- Install MinGW64 via [MSYS2](https://www.msys2.org)
-- From the MinGW64 terminal, run `pacman -S mingw-w64-x86_64-libadwaita mingw-w64-x86_64-webp-pixbuf-loader`.
+- Install [MSYS2](https://www.msys2.org)
+- From the CLANG64 terminal, run `pacman -S mingw-w64-clang-x86_64-libadwaita mingw-w64-clang-x86_64-webp-pixbuf-loader`.
+  - For ARM64 Windows, use the `CLANGARM64` terminal and replace `clang-x86_64` with `clang-aarch64`.
 
 Pinta can then be built by opening `Pinta.sln` in [Visual Studio](https://visualstudio.microsoft.com/).
 Ensure that .NET 8 is installed via the Visual Studio installer.
