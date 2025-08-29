@@ -208,7 +208,7 @@ partial struct ColorBgra
 			Count = 0;
 		}
 
-		private Blender (Aggregate aggregate, int count)
+		private Blender (in Aggregate aggregate, int count)
 		{
 			Aggregate = aggregate;
 			Count = count;
