@@ -8,9 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
@@ -57,8 +54,7 @@ public sealed class CloudsEffect : BaseEffect
 		double Power,
 		ColorGradient<ColorBgra> Gradient,
 		RectangleI Roi,
-		Size Size,
-		UserBlendOp Blending);
+		Size Size);
 
 	private CloudsSettings CreateSettings (ImageSurface destination, RectangleI roi)
 	{
@@ -79,23 +75,20 @@ public sealed class CloudsEffect : BaseEffect
 			Power: data.Power / 100.0,
 			Gradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
 			Roi: roi,
-			Size: destination.GetSize (),
-			Blending: GetBlendOp (data.BlendMode));
+			Size: destination.GetSize ());
 	}
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		CloudsSettings settings = CreateSettings (destination, roi);
-		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.Size))
 			destinationData[pixel.memoryOffset] = GetFinalPixelColor (
 				settings,
-				sourceData[pixel.memoryOffset],
 				pixel.coordinates);
 	}
 
-	private static ColorBgra GetFinalPixelColor (in CloudsSettings settings, ColorBgra original, PointI coordinates)
+	private static ColorBgra GetFinalPixelColor (in CloudsSettings settings, PointI coordinates)
 	{
 		int dx = 2 * coordinates.X - settings.Roi.Width;
 		int dy = 2 * coordinates.Y - settings.Roi.Height;
@@ -130,45 +123,8 @@ public sealed class CloudsEffect : BaseEffect
 			mult *= settings.Power;
 		}
 
-		ColorBgra cloudColor = settings.Gradient.GetColor ((val + 1) / 2);
-
-		return settings.Blending.Apply (original, cloudColor);
+		return settings.Gradient.GetColor ((val + 1) / 2);
 	}
-
-	private static UserBlendOp GetBlendOp (string blendModeName)
-	{
-		// TODO: Implement missing blend ops,
-		// so that one can use UserBlendOps.GetAllBlendModeNames ()
-		// and something like UserBlendOps.GetBlendModeByName ()
-
-		return blendModeName switch {
-
-			"Multiply" => new UserBlendOps.MultiplyBlendOp (),
-			"Color Burn" => new UserBlendOps.ColorBurnBlendOp (),
-			"Color Dodge" => new UserBlendOps.ColorDodgeBlendOp (),
-			"Overlay" => new UserBlendOps.OverlayBlendOp (),
-			"Difference" => new UserBlendOps.DifferenceBlendOp (),
-			"Lighten" => new UserBlendOps.LightenBlendOp (),
-			"Darken" => new UserBlendOps.DarkenBlendOp (),
-			"Screen" => new UserBlendOps.ScreenBlendOp (),
-			"Xor" => new UserBlendOps.XorBlendOp (), // TODO: Seems to behave differently from previous implementation
-
-			// TODO: Hard Light
-			// TODO: Soft Light
-			// TODO: Color
-			// TODO: Luminosity
-			// TODO: Hue
-			// TODO: Saturation
-
-			"Additive" => new UserBlendOps.AdditiveBlendOp (),
-			"Negation" => new UserBlendOps.NegationBlendOp (),
-			"Reflect" => new UserBlendOps.ReflectBlendOp (),
-			"Glow" => new UserBlendOps.GlowBlendOp (),
-
-			_ => new UserBlendOps.NormalBlendOp (),
-		};
-	}
-
 
 	public sealed class CloudsData : EffectData
 	{
@@ -182,42 +138,6 @@ public sealed class CloudsEffect : BaseEffect
 		[Caption ("Power")]
 		[MinimumValue (0), MaximumValue (100)]
 		public int Power { get; set; } = 50;
-
-		[Skip]
-		public static ReadOnlyDictionary<string, object> BlendOps { get; }
-
-		[Skip]
-		private static readonly string default_blend_op;
-
-		static CloudsData ()
-		{
-			Dictionary<string, BlendMode> allOps = new () {
-				{ Translations.GetString("Normal"), Core.BlendMode.Normal },
-				{ Translations.GetString("Multiply"), Core.BlendMode.Multiply },
-				{ Translations.GetString("Additive"), (BlendMode) 100},
-				{ Translations.GetString("Color Burn"), Core.BlendMode.ColorBurn },
-				{ Translations.GetString("Color Dodge"), Core.BlendMode.ColorDodge },
-				{ Translations.GetString("Reflect"), (BlendMode) 101 },
-				{ Translations.GetString("Glow"), (BlendMode) 102 },
-				{ Translations.GetString("Overlay"), Core.BlendMode.Overlay },
-				{ Translations.GetString("Difference"), Core.BlendMode.Difference },
-				{ Translations.GetString("Negation"), (BlendMode) 103 },
-				{ Translations.GetString("Lighten"), Core.BlendMode.Lighten },
-				{ Translations.GetString("Darken"), Core.BlendMode.Darken },
-				{ Translations.GetString("Screen"), Core.BlendMode.Screen },
-				{ Translations.GetString("Xor"), Core.BlendMode.Xor },
-			};
-
-			BlendOps =
-				allOps
-				.ToDictionary (kvp => kvp.Key, kvp => (object) kvp.Value)
-				.AsReadOnly ();
-
-			default_blend_op = UserBlendOps.GetBlendModeName (Core.BlendMode.Normal);
-		}
-
-		[StaticList (nameof (BlendOps))]
-		public string BlendMode { get; set; } = default_blend_op;
 
 		[Caption ("Random Noise Seed")]
 		public RandomSeed Seed { get; set; } = new (0);
