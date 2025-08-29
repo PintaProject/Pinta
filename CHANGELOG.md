@@ -44,6 +44,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed issues where the layer widget did not show the correct selected layer when switching documents (#1602, #1573)
 - Fixed toolbar layout issues with displaying the cursor position and selection size (#1429, #1540)
 - Fixed a potential hang when switching the active layer in a tool with uncommitted edits (#1463, #1660)
+- Fixed a bug in the text tool where Ctrl+A only selected starting from the current line (#1698)
 
 ## [3.0.3](https://github.com/PintaProject/Pinta/release/tag/3.0.3) - 2025/08/01
 
