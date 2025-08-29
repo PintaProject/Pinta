@@ -37,13 +37,18 @@ internal static class Blending
 		// That is, the values are scaled by 255
 		// with respect to their "theoretical" counterparts.
 		// 
+		// This is also why 'ROUNDING_ADDEND' can be either 127 or 128.
 		// This 'ROUNDING_ADDEND' mechanism is a neat trick that
 		// forces the truncation operator to function as a rounding operator.
+		// 
+		// This _addend_ would normally be 0.5,
+		// and if it's scaled by a factor of 255, it's 127.5
 
 		if (top.A == 255) return top; // Top layer is fully opaque
 		if (top.A == 0) return bottom; // Top layer is fully transparent
 		int inverseSourceAlpha = 255 - top.A;
-		const int ROUNDING_ADDEND = 128;
+		const bool ROUNDING_ERR_SIDE = true; // 127.5 would be rounded to 128 anyway
+		const int ROUNDING_ADDEND = ROUNDING_ERR_SIDE ? 128 : 127;
 		byte outA = Utility.ClampToByte (top.A + (bottom.A * inverseSourceAlpha + ROUNDING_ADDEND) / 255);
 		byte outR = Utility.ClampToByte ((top.R * 255 + bottom.R * inverseSourceAlpha + ROUNDING_ADDEND) / 255);
 		byte outG = Utility.ClampToByte ((top.G * 255 + bottom.G * inverseSourceAlpha + ROUNDING_ADDEND) / 255);
