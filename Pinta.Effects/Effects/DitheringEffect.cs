@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Cairo;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Effects;
@@ -44,13 +45,15 @@ public sealed class DitheringEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	private sealed record DitheringSettings (
-		ErrorDiffusionMatrix DiffusionMatrix,
-		ImmutableArray<ColorBgra> ChosenPalette,
-		Size CanvasSize);
+		int ChangedPixelCount,
+		ImmutableArray<PixelOffset> PixelOffsets,
+		ImmutableArray<ColorBgra> ChangedColors);
 
-	private DitheringSettings CreateSettings (ImageSurface source)
+	private DitheringSettings CreateSettings (ImageSurface source, RectangleI roi)
 	{
 		DitheringData data = Data;
+
+		Size canvasSize = source.GetSize ();
 
 		ImmutableArray<ColorBgra> chosenPalette = data.PaletteSource switch {
 			PaletteSource.PresetPalettes => PaletteHelper.GetPredefined (data.PaletteChoice),
@@ -59,50 +62,37 @@ public sealed class DitheringEffect : BaseEffect
 			_ => throw new UnreachableException (),
 		};
 
-		return new (
-			DiffusionMatrix: ErrorDiffusionMatrix.GetPredefined (data.ErrorDiffusionMethod),
-			ChosenPalette: chosenPalette,
-			CanvasSize: source.GetSize ());
-	}
-
-	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
-	{
-		DitheringSettings settings = CreateSettings (source);
+		ErrorDiffusionMatrix diffusionMatrix = ErrorDiffusionMatrix.GetPredefined (data.ErrorDiffusionMethod);
 
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
-		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
-		for (int y = roi.Top; y <= roi.Bottom; y++) {
-			for (int x = roi.Left; x <= roi.Right; x++) {
-				int currentIndex = y * settings.CanvasSize.Width + x;
-				destinationData[currentIndex] = sourceData[currentIndex];
-			}
-		}
+		ColorBgra[] colorBuffer = sourceData.ToArray ();
 
-		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.CanvasSize)) {
+		ImmutableArray<PixelOffset> pixelOffsets = [.. Tiling.GeneratePixelOffsets (roi, canvasSize)];
 
-			ColorBgra originalPixel = destinationData[pixel.memoryOffset];
-			ColorBgra closestColor = FindClosestPaletteColor (settings.ChosenPalette, originalPixel);
+		foreach (var pixel in pixelOffsets) {
 
-			destinationData[pixel.memoryOffset] = closestColor;
+			ColorBgra originalPixel = colorBuffer[pixel.memoryOffset];
+			ColorBgra closestColor = FindClosestPaletteColor (chosenPalette, originalPixel);
+
+			colorBuffer[pixel.memoryOffset] = closestColor;
 
 			int errorRed = originalPixel.R - closestColor.R;
 			int errorGreen = originalPixel.G - closestColor.G;
 			int errorBlue = originalPixel.B - closestColor.B;
 
-			for (int r = 0; r < settings.DiffusionMatrix.Rows; r++) {
+			for (int r = 0; r < diffusionMatrix.Rows; r++) {
 
-				for (int c = 0; c < settings.DiffusionMatrix.Columns; c++) {
+				for (int c = 0; c < diffusionMatrix.Columns; c++) {
 
-					int weight = settings.DiffusionMatrix[r, c];
+					int weight = diffusionMatrix[r, c];
 
 					if (weight <= 0)
 						continue;
 
 					PointI thisItem = new (
-						X: pixel.coordinates.X + c - settings.DiffusionMatrix.ColumnsToLeft,
-						Y: pixel.coordinates.Y + r
-					);
+						X: pixel.coordinates.X + c - diffusionMatrix.ColumnsToLeft,
+						Y: pixel.coordinates.Y + r);
 
 					if (thisItem.X < roi.Left || thisItem.X >= roi.Right)
 						continue;
@@ -110,14 +100,27 @@ public sealed class DitheringEffect : BaseEffect
 					if (thisItem.Y < roi.Top || thisItem.Y >= roi.Bottom)
 						continue;
 
-					int idx = (thisItem.Y * settings.CanvasSize.Width) + thisItem.X;
+					int neighborIndex = (thisItem.Y * canvasSize.Width) + thisItem.X;
 
-					double factor = weight * settings.DiffusionMatrix.WeightReductionFactor;
+					double factor = weight * diffusionMatrix.WeightReductionFactor;
 
-					destinationData[idx] = AddError (destinationData[idx], factor, errorRed, errorGreen, errorBlue);
+					colorBuffer[neighborIndex] = AddError (colorBuffer[neighborIndex], factor, errorRed, errorGreen, errorBlue);
 				}
 			}
 		}
+
+		return new (
+			ChangedPixelCount: canvasSize.Width * canvasSize.Height,
+			PixelOffsets: pixelOffsets,
+			ChangedColors: [.. pixelOffsets.Select (p => colorBuffer[p.memoryOffset])]);
+	}
+
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
+	{
+		DitheringSettings settings = CreateSettings (source, roi);
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
+		for (int i = 0; i < settings.ChangedPixelCount; i++)
+			destinationData[settings.PixelOffsets[i].memoryOffset] = settings.ChangedColors[i];
 	}
 
 	private static ColorBgra AddError (ColorBgra color, double factor, int errorRed, int errorGreen, int errorBlue)
