@@ -110,7 +110,7 @@ public sealed class DitheringEffect : BaseEffect
 		}
 
 		return new (
-			ChangedPixelCount: canvasSize.Width * canvasSize.Height,
+			ChangedPixelCount: roi.Width * roi.Height,
 			PixelOffsets: pixelOffsets,
 			ChangedColors: [.. pixelOffsets.Select (p => colorBuffer[p.memoryOffset])]);
 	}
