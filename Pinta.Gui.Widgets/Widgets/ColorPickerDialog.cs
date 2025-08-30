@@ -958,6 +958,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	private void DrawColorSurface (Context g)
 	{
 		int radius = picker_surface_radius;
+		int radiusSquared = radius * radius;
 		int diameter = 2 * radius;
 		Size drawSize = new (diameter, diameter);
 
@@ -980,13 +981,17 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 						PointI pixel = new (x, y);
 						PointI vector = pixel - center;
 
-						if (vector.Magnitude () > radius) continue;
+						int magnitudeSquared = vector.MagnitudeSquared ();
+
+						if (magnitudeSquared > radiusSquared) continue;
+
+						double magnitude = Math.Sqrt (magnitudeSquared);
 
 						double h = (MathF.Atan2 (vector.Y, -vector.X) + MathF.PI) / (2f * MathF.PI) * 360f;
-						double s = Math.Min (vector.Magnitude () / radius, 1);
+						double s = Math.Min (magnitude / radius, 1);
 						double v = picker_surface_option_draw_value.Active ? CurrentColor.ToHsv ().Val : 1;
 
-						double d = radius - vector.Magnitude ();
+						double d = radius - magnitude;
 						double a = d < 1 ? d : 1;
 
 						Color c = Color.FromHsv (h, s, v, a);
