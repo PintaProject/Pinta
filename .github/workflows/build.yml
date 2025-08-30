@@ -166,7 +166,7 @@ jobs:
     # Build for both x64 and arm64
     strategy:
       matrix:
-        build: [ { dotnet_rid: win-x64, mingw_folder: "${MINGW_PREFIX}/../clang64", mingw_system: clang64, mingw_repo: clang-x86_64, runner: windows-2025 }, { dotnet_rid: win-arm64, mingw_folder: "${MINGW_PREFIX}/../clangarm64", mingw_system: clangarm64, mingw_repo: clang-aarch64, runner: windows-11-arm }]
+        build: [ { dotnet_rid: win-x64, mingw_folder: "${MINGW_PREFIX}/../clang64", mingw_system: clang64, mingw_repo: clang-x86_64, setup_arch: x64os, runner: windows-2025 }, { dotnet_rid: win-arm64, mingw_folder: "${MINGW_PREFIX}/../clangarm64", mingw_system: clangarm64, mingw_repo: clang-aarch64, setup_arch: arm64, runner: windows-11-arm }]
 
     name: build-windows (${{matrix.build.dotnet_rid}})
 
@@ -202,7 +202,7 @@ jobs:
         cp -r release/bin/icons release/bin/locale release/share/
         rm -rf release/bin/icons release/bin/locale
         cp installer/macos/hicolor.index.theme release/share/icons/hicolor/index.theme
-        iscc installer/windows/installer.iss
+        iscc -DProductArch="${{matrix.build.setup_arch}}" installer/windows/installer.iss
 
     - name: Upload Installer
       id: upload-unsigned-installer
