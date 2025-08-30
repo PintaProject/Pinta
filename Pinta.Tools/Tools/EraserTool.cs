@@ -125,11 +125,11 @@ public sealed class EraserTool : BaseBrushTool
 
 	private static byte[,] CreateLookupTable ()
 	{
-		var arrayDimensions = LUT_Resolution + 1;
-		var result = new byte[arrayDimensions, arrayDimensions];
-		for (var dy = 0; dy < arrayDimensions; dy++) {
-			for (var dx = 0; dx < arrayDimensions; dx++) {
-				var d = Math.Sqrt (dx * dx + dy * dy) / LUT_Resolution;
+		int arrayDimensions = LUT_Resolution + 1;
+		byte[,] result = new byte[arrayDimensions, arrayDimensions];
+		for (int dy = 0; dy < arrayDimensions; dy++) {
+			for (int dx = 0; dx < arrayDimensions; dx++) {
+				double d = Mathematics.Magnitude<double> (dx, dy) / LUT_Resolution;
 				result[dy, dx] =
 					d > 1.0
 					? (byte) 255

@@ -41,7 +41,7 @@ public sealed class ZoomTool : BaseTool
 	private bool is_drawing;
 	private PointD shape_origin;
 	private RectangleD last_dirty;
-	private static readonly int tolerance = 10;
+	private static readonly int tolerance_squared = 100;
 
 	public ZoomTool (IServiceProvider services) : base (services)
 	{
@@ -113,7 +113,7 @@ public sealed class ZoomTool : BaseTool
 	private void OnMouseMove_LeftPressed (Document document, ToolMouseEventArgs e)
 	{
 		var shape_origin_window = document.Workspace.CanvasPointToView (shape_origin);
-		if (shape_origin_window.Distance (e.WindowPoint) > tolerance) // if they've moved the mouse more than 10 pixels since they clicked
+		if (shape_origin_window.DistanceSquared (e.WindowPoint) > tolerance_squared) // if they've moved the mouse more than 10 pixels since they clicked
 			is_drawing = true;
 
 		//still draw rectangle after we have draw it one time...
@@ -127,7 +127,7 @@ public sealed class ZoomTool : BaseTool
 		if (mouse_down == MouseButton.Left || mouse_down == MouseButton.Right) {
 			if (e.MouseButton == MouseButton.Left) {
 				PointD shapeOriginWindow = document.Workspace.CanvasPointToView (shape_origin);
-				if (shapeOriginWindow.Distance (e.WindowPoint) <= tolerance) {
+				if (shapeOriginWindow.DistanceSquared (e.WindowPoint) <= tolerance_squared) {
 					document.Workspace.ZoomInAroundCanvasPoint (e.PointDouble);
 				} else {
 					document.Workspace.ZoomToCanvasRectangle (RectangleD.FromPoints (shape_origin, e.PointDouble));
@@ -155,7 +155,8 @@ public sealed class ZoomTool : BaseTool
 		document.Layers.ToolLayer.Hidden = false;
 
 		using Context g = new (document.Layers.ToolLayer.Surface);
-		var dirty = g.FillRectangle (r, new Cairo.Color (0.7, 0.8, 0.9, 0.4));
+
+		RectangleD dirty = g.FillRectangle (r, new Color (0.7, 0.8, 0.9, 0.4));
 
 		document.Workspace.Invalidate (last_dirty.ToInt ());
 		document.Workspace.Invalidate (dirty.ToInt ());

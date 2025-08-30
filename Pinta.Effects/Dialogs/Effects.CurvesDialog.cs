@@ -444,7 +444,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	//cpx, cpyx - control point's x and y coordinates
 	private static bool CheckControlPointProximity (PointI cp, PointI pos)
-		=> Math.Sqrt (Math.Pow (cp.X - pos.X, 2) + Math.Pow (cp.Y - pos.Y, 2)) < RADIUS;
+		=> Mathematics.Magnitude<double> (cp.X - pos.X, cp.Y - pos.Y) < RADIUS;
 
 	private IEnumerator<ControlPointDrawingInfo> GetDrawingInfos ()
 	{
