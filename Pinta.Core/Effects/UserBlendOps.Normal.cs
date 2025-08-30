@@ -38,8 +38,6 @@ partial class UserBlendOps
 			// This 'ROUNDING_ADDEND' mechanism is a neat trick that
 			// forces the truncation operator to function as a rounding operator.
 
-			if (lhs.B > lhs.A || lhs.G > lhs.A || lhs.R > lhs.A) throw new ArgumentException ("Color channel is greater than alpha", nameof (lhs));
-			if (rhs.B > rhs.A || rhs.G > rhs.A || rhs.R > rhs.A) throw new ArgumentException ("Color channel is greater than alpha", nameof (rhs));
 			if (rhs.A == 255) return rhs; // Top layer is fully opaque
 			if (rhs.A == 0) return lhs; // Top layer is fully transparent
 			int inverseSourceAlpha = 255 - rhs.A;
