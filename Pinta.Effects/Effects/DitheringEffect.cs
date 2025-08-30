@@ -2,6 +2,7 @@ using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Cairo;
 using Gtk;
@@ -55,6 +56,12 @@ public sealed class DitheringEffect : BaseEffect
 
 		Size canvasSize = source.GetSize ();
 
+		if (roi.Width == 0 || roi.Height == 0)
+			return new (
+			  ChangedPixelCount: 0,
+			  PixelOffsets: [],
+			  ChangedColors: []);
+
 		ImmutableArray<ColorBgra> chosenPalette = data.PaletteSource switch {
 			PaletteSource.PresetPalettes => PaletteHelper.GetPredefined (data.PaletteChoice),
 			PaletteSource.CurrentPalette => [.. palette.CurrentPalette.Colors.Select (CairoExtensions.ToColorBgra)],
@@ -66,16 +73,29 @@ public sealed class DitheringEffect : BaseEffect
 
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 
-		ColorBgra[] colorBuffer = sourceData.ToArray ();
+		ColorBgra[] colorBuffer = new ColorBgra[roi.Width * roi.Height];
+
+		int canvasWidth = canvasSize.Width;
+		for (int y = 0; y < roi.Height; y++) {
+			int sourceIndexStart = ((roi.Top + y) * canvasWidth) + roi.Left;
+			int bufferIndexStart = y * roi.Width;
+			sourceData.Slice (sourceIndexStart, roi.Width).CopyTo (colorBuffer.AsSpan (bufferIndexStart, roi.Width));
+		}
 
 		ImmutableArray<PixelOffset> pixelOffsets = [.. Tiling.GeneratePixelOffsets (roi, canvasSize)];
 
 		foreach (var pixel in pixelOffsets) {
 
-			ColorBgra originalPixel = colorBuffer[pixel.memoryOffset];
+			PointI roiRelative = new (
+				X: pixel.coordinates.X - roi.Left,
+				Y: pixel.coordinates.Y - roi.Top);
+
+			int bufferIndex = (roiRelative.Y * roi.Width) + roiRelative.X;
+
+			ColorBgra originalPixel = colorBuffer[bufferIndex];
 			ColorBgra closestColor = FindClosestPaletteColor (chosenPalette, originalPixel);
 
-			colorBuffer[pixel.memoryOffset] = closestColor;
+			colorBuffer[bufferIndex] = closestColor;
 
 			int errorRed = originalPixel.R - closestColor.R;
 			int errorGreen = originalPixel.G - closestColor.G;
@@ -90,17 +110,17 @@ public sealed class DitheringEffect : BaseEffect
 					if (weight <= 0)
 						continue;
 
-					PointI thisItem = new (
-						X: pixel.coordinates.X + c - diffusionMatrix.ColumnsToLeft,
-						Y: pixel.coordinates.Y + r);
+					PointI neighbor = new (
+						X: roiRelative.X + c - diffusionMatrix.ColumnsToLeft,
+						Y: roiRelative.Y + r);
 
-					if (thisItem.X < roi.Left || thisItem.X >= roi.Right)
+					if (neighbor.X < 0 || neighbor.X >= roi.Width)
 						continue;
 
-					if (thisItem.Y < roi.Top || thisItem.Y >= roi.Bottom)
+					if (neighbor.Y >= roi.Height)
 						continue;
 
-					int neighborIndex = (thisItem.Y * canvasSize.Width) + thisItem.X;
+					int neighborIndex = (neighbor.Y * roi.Width) + neighbor.X;
 
 					double factor = weight * diffusionMatrix.WeightReductionFactor;
 
@@ -109,10 +129,17 @@ public sealed class DitheringEffect : BaseEffect
 			}
 		}
 
+		ColorBgra[] changedColors = new ColorBgra[pixelOffsets.Length];
+		for (int i = 0; i < pixelOffsets.Length; i++) {
+			PointI coords = pixelOffsets[i].coordinates;
+			int bufferIndex = (coords.Y - roi.Top) * roi.Width + (coords.X - roi.Left);
+			changedColors[i] = colorBuffer[bufferIndex];
+		}
+
 		return new (
-			ChangedPixelCount: roi.Width * roi.Height,
+			ChangedPixelCount: pixelOffsets.Length,
 			PixelOffsets: pixelOffsets,
-			ChangedColors: [.. pixelOffsets.Select (p => colorBuffer[p.memoryOffset])]);
+			ChangedColors: [.. changedColors]);
 	}
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
