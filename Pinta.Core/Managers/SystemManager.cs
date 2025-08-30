@@ -100,7 +100,8 @@ public sealed class SystemManager : ISystemService
 		// On Windows, the installed executable is under Pinta/bin and data is under Pinta/share.
 		if (GetOperatingSystem () == OS.Windows) {
 			string parentDir = Path.Combine (app_dir, "..");
-			bool develMode = Path.Exists (Path.Combine (parentDir, "Pinta.sln"));
+			// For development builds, we have a path like Pinta/build/bin
+			bool develMode = Path.Exists (Path.Combine (parentDir, "..", "Pinta.sln"));
 			if (!develMode)
 				return Path.Combine (parentDir, "share");
 		}
