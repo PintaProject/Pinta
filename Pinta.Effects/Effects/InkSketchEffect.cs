@@ -115,7 +115,7 @@ public sealed class InkSketchEffect : BaseEffect
 
 	private static ColorBgra CreateBaseRGBA (ReadOnlySpan<ColorBgra> sourceData, int width, int x, int y, RectangleI adjustedBounds)
 	{
-		ColorBgra.Aggregate aggregate = new ();
+		ColorBgra.Blender aggregate = new ();
 		for (int v = adjustedBounds.Top; v < adjustedBounds.Bottom; v++) {
 			ReadOnlySpan<ColorBgra> sourceRow = sourceData.Slice (v * width, width);
 			int j = v - y + Radius;
@@ -123,7 +123,7 @@ public sealed class InkSketchEffect : BaseEffect
 				int i1 = u - x + Radius;
 				int w = conv[j][i1];
 				ColorBgra sourcePixel = sourceRow[u];
-				aggregate = aggregate.ScaledAdd (sourcePixel, w);
+				aggregate = aggregate.WeightedAdd (sourcePixel, w);
 			}
 		}
 		return aggregate.Clamp ();

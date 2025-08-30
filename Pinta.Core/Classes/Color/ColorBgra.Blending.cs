@@ -146,85 +146,49 @@ partial struct ColorBgra
 			return Zero;
 	}
 
-	public readonly struct Aggregate
+	public readonly struct Blender
 	{
 		public int B { get; }
 		public int G { get; }
 		public int R { get; }
 		public int A { get; }
+		public int Count { get; }
 
-		public Aggregate ()
+		public Blender ()
 		{
 			B = 0;
 			G = 0;
 			R = 0;
 			A = 0;
+			Count = 0;
 		}
 
-		private Aggregate (int b, int g, int r, int a)
+		private Blender (int b, int g, int r, int a, int count)
 		{
 			B = b;
 			G = g;
 			R = r;
 			A = a;
-		}
-
-		public Aggregate ScaledAdd (in ColorBgra color, int scale)
-		{
-			return new (
-				b: B + color.B * scale,
-				g: G + color.G * scale,
-				r: R + color.R * scale,
-				a: A + color.A * scale);
-		}
-
-		public ColorBgra Clamp ()
-		{
-			return FromBgra (
-				b: Utility.ClampToByte (B),
-				g: Utility.ClampToByte (G),
-				r: Utility.ClampToByte (R),
-				a: Utility.ClampToByte (A));
-		}
-
-		public static Aggregate operator + (in Aggregate blender, in ColorBgra color)
-		{
-			return new (
-				b: blender.B + color.B,
-				g: blender.G + color.G,
-				r: blender.R + color.R,
-				a: blender.A + color.A);
-		}
-	}
-
-	public readonly struct Blender
-	{
-		public Aggregate Aggregate { get; }
-		public int Count { get; }
-
-		public Blender ()
-		{
-			Aggregate = new ();
-			Count = 0;
-		}
-
-		private Blender (in Aggregate aggregate, int count)
-		{
-			Aggregate = aggregate;
 			Count = count;
 		}
 
 		public Blender WeightedAdd (in ColorBgra color, int weight)
 		{
 			return new (
-				aggregate: Aggregate.ScaledAdd (color, weight),
+				b: B + color.B * weight,
+				g: G + color.G * weight,
+				r: R + color.R * weight,
+				a: A + color.A * weight,
 				count: Count + weight);
 		}
 
 		public static Blender operator + (in Blender blender, in ColorBgra color)
 		{
 			return new (
-				aggregate: blender.Aggregate + color,
+				b: blender.B + color.B,
+				g: blender.G + color.G,
+				r: blender.R + color.R,
+				a: blender.A + color.A,
 				count: blender.Count + 1);
 		}
 
@@ -234,10 +198,19 @@ partial struct ColorBgra
 				throw new InvalidOperationException ("No colors to blend");
 
 			return FromBgra (
-				b: Utility.ClampToByte (Aggregate.B / Count),
-				g: Utility.ClampToByte (Aggregate.G / Count),
-				r: Utility.ClampToByte (Aggregate.R / Count),
-				a: Utility.ClampToByte (Aggregate.A / Count));
+				b: Utility.ClampToByte (B / Count),
+				g: Utility.ClampToByte (G / Count),
+				r: Utility.ClampToByte (R / Count),
+				a: Utility.ClampToByte (A / Count));
+		}
+
+		public ColorBgra Clamp ()
+		{
+			return FromBgra (
+				b: Utility.ClampToByte (B),
+				g: Utility.ClampToByte (G),
+				r: Utility.ClampToByte (R),
+				a: Utility.ClampToByte (A));
 		}
 	}
 }
