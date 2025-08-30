@@ -1,6 +1,11 @@
 #define ProductName "Pinta"
 #define ProductVersion "3.1"
 
+; The architecture can be configured on the command line to build the arm64 or x64 installer
+#ifndef ProductArch
+  #define ProductArch "x64os"
+#endif
+
 [Setup]
 ; Adds option to skip creating start menu entries
 AllowNoIcons=yes
@@ -10,8 +15,8 @@ AppPublisher=Pinta Community
 AppPublisherURL=https://www.pinta-project.com/
 AppVerName={#ProductName} {#ProductVersion}
 AppVersion={#ProductVersion}
-ArchitecturesAllowed=x64
-ArchitecturesInstallIn64BitMode=x64
+ArchitecturesAllowed={#ProductArch}
+ArchitecturesInstallIn64BitMode={#ProductArch}
 Compression=lzma2
 DefaultDirName={autopf}\{#ProductName}
 DefaultGroupName={#ProductName}
