@@ -90,7 +90,7 @@ internal sealed class MainClass
 		Gsk.Module.Initialize ();
 		Pango.Module.Initialize ();
 		PangoCairo.Module.Initialize ();
-		var app = Adw.Application.New ("com.github.PintaProject.Pinta", Gio.ApplicationFlags.NonUnique);
+		var app = Adw.Application.New (PintaCore.ApplicationId, Gio.ApplicationFlags.NonUnique);
 
 		// Add our icons to the search path.
 		GtkExtensions.GetDefaultIconTheme ().AddSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");

@@ -53,10 +53,6 @@ internal sealed class MainWindow
 	{
 		this.app = app;
 
-		// This needs to match the name of the .desktop file in order to
-		// show the correct application icon under some environments (e.g.
-		// KDE Wayland). See bug 1967687.
-		GLib.Functions.SetPrgname ("pinta");
 		// Set the human-readable application name, used by e.g. gtk_recent_manager_add_item().
 		GLib.Functions.SetApplicationName (Translations.GetString ("Pinta"));
 	}

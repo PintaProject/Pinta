@@ -45,7 +45,17 @@ public static class PintaCore
 	public static WorkspaceManager Workspace { get; }
 	public static CanvasGridManager CanvasGrid { get; }
 
+	/// <summary>
+	/// Unique identifier for the application.
+	/// This is used for GApplication and also must match the .desktop file.
+	/// </summary>
+	public const string ApplicationId = "com.github.PintaProject.Pinta";
+
+	/// <summary>
+	/// The current version number of Pinta.
+	/// </summary>
 	public const string ApplicationVersion = "3.1";
+
 	/// <summary>
 	/// The oldest version of Pinta for which add-ins built against it will still
 	/// run in the current version.
