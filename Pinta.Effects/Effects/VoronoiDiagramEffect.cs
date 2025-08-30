@@ -48,8 +48,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		ImmutableArray<PointD> ControlPoints,
 		ImmutableArray<PointD> SamplingOffsets,
 		ImmutableArray<ColorBgra> Colors,
-		Func<PointD, PointD, double> ComparisonDistance,
-		Func<PointD, PointD, double> AccurateDistance,
+		Func<PointD, PointD, double> DistanceCalculator,
 		bool ShowPoints,
 		double PointSize,
 		ColorBgra PointColor);
@@ -79,8 +78,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			ControlPoints: controlPoints,
 			SamplingOffsets: Sampling.CreateSamplingOffsets (data.Quality),
 			Colors: [.. reversedSortingColors],
-			ComparisonDistance: SpatialPartition.GetComparisonDistanceCalculator (data.DistanceMetric),
-			AccurateDistance: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
+			DistanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
 			ShowPoints: data.ShowPoints,
 			PointSize: data.PointSize,
 			PointColor: data.PointColor.ToColorBgra ());
@@ -109,20 +107,18 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		ColorBgra GetColorForLocation (PointD location)
 		{
-			double shortestComparisonDistance = double.MaxValue;
+			double shortestDistance = double.MaxValue;
 			int closestIndex = 0;
 			for (var i = 0; i < settings.ControlPoints.Length; i++) {
 				// TODO: Acceleration structure that limits the search
 				//       to a relevant subset of points, for better performance.
 				//       Some ideas to consider: quadtree, spatial hashing
 				PointD controlPoint = settings.ControlPoints[i];
-				double distance = settings.ComparisonDistance (location, controlPoint);
-				if (distance > shortestComparisonDistance) continue;
-				shortestComparisonDistance = distance;
+				double distance = settings.DistanceCalculator (location, controlPoint);
+				if (distance > shortestDistance) continue;
+				shortestDistance = distance;
 				closestIndex = i;
 			}
-			PointD closestPoint = settings.ControlPoints[closestIndex];
-			double shortestDistance = settings.AccurateDistance (location, closestPoint);
 			ColorBgra cellColor = settings.Colors[closestIndex];
 			if (settings.ShowPoints && shortestDistance * 2 <= settings.PointSize)
 				return UserBlendOps.NormalBlendOp.ApplyStatic (cellColor, settings.PointColor);

@@ -47,8 +47,7 @@ public sealed class CellsEffect : BaseEffect
 		Size CanvasSize,
 		ImmutableArray<PointD> ControlPoints,
 		ImmutableArray<PointD> SamplingLocations,
-		Func<PointD, PointD, double> ComparisonDistance,
-		Func<PointD, PointD, double> AccurateDistance,
+		Func<PointD, PointD, double> DistanceCalculator,
 		ColorGradient<ColorBgra> ColorGradient,
 		EdgeBehavior GradientEdgeBehavior,
 		bool ShowPoints,
@@ -82,8 +81,7 @@ public sealed class CellsEffect : BaseEffect
 			CanvasSize: destination.GetSize (),
 			ControlPoints: controlPoints,
 			SamplingLocations: Sampling.CreateSamplingOffsets (data.Quality),
-			ComparisonDistance: SpatialPartition.GetComparisonDistanceCalculator (data.DistanceMetric),
-			AccurateDistance: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
+			DistanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
 			ColorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
 			GradientEdgeBehavior: data.ColorSchemeEdgeBehavior,
 			ShowPoints: data.ShowPoints,
@@ -115,20 +113,18 @@ public sealed class CellsEffect : BaseEffect
 
 		ColorBgra GetColorForLocation (PointD location, ColorBgra original)
 		{
-			double shortestComparisonDistance = double.MaxValue;
+			double shortestDistance = double.MaxValue;
 			int closestIndex = 0;
 			for (var i = 0; i < settings.ControlPoints.Length; i++) {
 				// TODO: Acceleration structure that limits the search
 				//       to a relevant subset of points, for better performance.
 				//       Some ideas to consider: quadtree, spatial hashing
 				PointD controlPoint = settings.ControlPoints[i];
-				double distance = settings.ComparisonDistance (location, controlPoint);
-				if (distance > shortestComparisonDistance) continue;
-				shortestComparisonDistance = distance;
+				double distance = settings.DistanceCalculator (location, controlPoint);
+				if (distance > shortestDistance) continue;
+				shortestDistance = distance;
 				closestIndex = i;
 			}
-			PointD closestPoint = settings.ControlPoints[closestIndex];
-			double shortestDistance = settings.AccurateDistance (location, closestPoint);
 			ColorBgra locationColor =
 				settings
 				.ColorGradient

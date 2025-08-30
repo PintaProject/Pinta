@@ -8,7 +8,6 @@ namespace Pinta.Core;
 
 public static class SpatialPartition
 {
-	/// <remarks>Mathematically accurate distance</remarks>
 	public static Func<PointD, PointD, double> GetDistanceCalculator (DistanceMetric distanceCalculationMethod)
 	{
 		return distanceCalculationMethod switch {
@@ -25,43 +24,6 @@ public static class SpatialPartition
 		{
 			PointD difference = pixelLocation - targetPoint;
 			return difference.Magnitude ();
-		}
-
-		static double Manhattan (PointD targetPoint, PointD pixelLocation)
-		{
-			PointD difference = pixelLocation - targetPoint;
-			return Math.Abs (difference.X) + Math.Abs (difference.Y);
-		}
-
-		static double Chebyshev (PointD targetPoint, PointD pixelLocation)
-		{
-			PointD difference = pixelLocation - targetPoint;
-			return Math.Max (Math.Abs (difference.X), Math.Abs (difference.Y));
-		}
-	}
-
-	/// <remarks>
-	/// Distance calculations optimized for comparison.
-	/// It is not guaranteed to return the real distance,
-	/// but it will return a greater value for a bigger distance,
-	/// and that could be more efficient than calculating the real thing.
-	/// </remarks>
-	public static Func<PointD, PointD, double> GetComparisonDistanceCalculator (DistanceMetric distanceCalculationMethod)
-	{
-		return distanceCalculationMethod switch {
-			DistanceMetric.Euclidean => Euclidean,
-			DistanceMetric.Manhattan => Manhattan,
-			DistanceMetric.Chebyshev => Chebyshev,
-			_ => throw new InvalidEnumArgumentException (
-				nameof (distanceCalculationMethod),
-				(int) distanceCalculationMethod,
-				typeof (DistanceMetric)),
-		};
-
-		static double Euclidean (PointD targetPoint, PointD pixelLocation)
-		{
-			PointD difference = pixelLocation - targetPoint;
-			return difference.MagnitudeSquared ();
 		}
 
 		static double Manhattan (PointD targetPoint, PointD pixelLocation)
