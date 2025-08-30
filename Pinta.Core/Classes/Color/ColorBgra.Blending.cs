@@ -214,6 +214,13 @@ partial struct ColorBgra
 			Count = count;
 		}
 
+		public Blender WeightedAdd (in ColorBgra color, int weight)
+		{
+			return new (
+				aggregate: Aggregate.ScaledAdd (color, weight),
+				count: Count + weight);
+		}
+
 		public static Blender operator + (in Blender blender, in ColorBgra color)
 		{
 			return new (
