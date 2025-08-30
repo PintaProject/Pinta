@@ -44,14 +44,15 @@ public sealed class CellsEffect : BaseEffect
 	}
 
 	private sealed record CellsSettings (
-		Size size,
-		ImmutableArray<PointD> controlPoints,
-		ImmutableArray<PointD> samplingLocations,
-		Func<PointD, PointD, double> distanceCalculator,
-		ColorGradient<ColorBgra> colorGradient,
-		EdgeBehavior gradientEdgeBehavior,
-		bool showPoints,
-		double pointSize);
+		Size CanvasSize,
+		ImmutableArray<PointD> ControlPoints,
+		ImmutableArray<PointD> SamplingLocations,
+		Func<PointD, PointD, double> DistanceCalculator,
+		ColorGradient<ColorBgra> ColorGradient,
+		EdgeBehavior GradientEdgeBehavior,
+		bool ShowPoints,
+		double PointSize,
+		ColorBgra PointColor);
 
 	private CellsSettings CreateSettings (ImageSurface destination)
 	{
@@ -77,14 +78,15 @@ public sealed class CellsEffect : BaseEffect
 		ImmutableArray<PointD> controlPoints = [.. basePoints];
 
 		return new (
-			size: destination.GetSize (),
-			controlPoints: controlPoints,
-			samplingLocations: Sampling.CreateSamplingOffsets (data.Quality),
-			distanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
-			colorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
-			gradientEdgeBehavior: data.ColorSchemeEdgeBehavior,
-			showPoints: data.ShowPoints,
-			pointSize: data.PointSize);
+			CanvasSize: destination.GetSize (),
+			ControlPoints: controlPoints,
+			SamplingLocations: Sampling.CreateSamplingOffsets (data.Quality),
+			DistanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
+			ColorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
+			GradientEdgeBehavior: data.ColorSchemeEdgeBehavior,
+			ShowPoints: data.ShowPoints,
+			PointSize: data.PointSize,
+			PointColor: data.PointColor.ToColorBgra ());
 	}
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
@@ -92,17 +94,17 @@ public sealed class CellsEffect : BaseEffect
 		CellsSettings settings = CreateSettings (destination);
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
-		foreach (var pixel in roi.GeneratePixelOffsets (settings.size)) {
+		foreach (var pixel in roi.GeneratePixelOffsets (settings.CanvasSize)) {
 			ColorBgra original = sourceData[pixel.memoryOffset];
 			destinationData[pixel.memoryOffset] = CreateColor (pixel, original);
 		}
 
 		ColorBgra CreateColor (PixelOffset pixel, ColorBgra original)
 		{
-			int sampleCount = settings.samplingLocations.Length;
+			int sampleCount = settings.SamplingLocations.Length;
 			ColorBgra.Blender aggregate = new ();
 			for (int i = 0; i < sampleCount; i++) {
-				PointD sampleLocation = pixel.coordinates.ToDouble () + settings.samplingLocations[i];
+				PointD sampleLocation = pixel.coordinates.ToDouble () + settings.SamplingLocations[i];
 				ColorBgra sample = GetColorForLocation (sampleLocation, original);
 				aggregate += sample;
 			}
@@ -113,26 +115,26 @@ public sealed class CellsEffect : BaseEffect
 		{
 			double shortestDistance = double.MaxValue;
 			int closestIndex = 0;
-			for (var i = 0; i < settings.controlPoints.Length; i++) {
+			for (var i = 0; i < settings.ControlPoints.Length; i++) {
 				// TODO: Acceleration structure that limits the search
 				//       to a relevant subset of points, for better performance.
 				//       Some ideas to consider: quadtree, spatial hashing
-				PointD controlPoint = settings.controlPoints[i];
-				double distance = settings.distanceCalculator (location, controlPoint);
+				PointD controlPoint = settings.ControlPoints[i];
+				double distance = settings.DistanceCalculator (location, controlPoint);
 				if (distance > shortestDistance) continue;
 				shortestDistance = distance;
 				closestIndex = i;
 			}
 			ColorBgra locationColor =
 				settings
-				.colorGradient
+				.ColorGradient
 				.GetColorExtended (
 					shortestDistance,
-					settings.gradientEdgeBehavior,
+					settings.GradientEdgeBehavior,
 					original,
 					palette);
-			if (settings.showPoints && shortestDistance * 2 <= settings.pointSize)
-				return ColorBgra.Black;
+			if (settings.ShowPoints && shortestDistance * 2 <= settings.PointSize)
+				return UserBlendOps.NormalBlendOp.ApplyStatic (locationColor, settings.PointColor);
 			else
 				return locationColor;
 		}
@@ -155,6 +157,9 @@ public sealed class CellsEffect : BaseEffect
 		[Caption ("Point Size")]
 		[MinimumValue (1), MaximumValue (16), IncrementValue (1)]
 		public double PointSize { get; set; } = 4;
+
+		[Caption ("Point Color")]
+		public Color PointColor { get; set; } = Color.Black;
 
 		[Caption ("Number of Cells")]
 		[MinimumValue (1), MaximumValue (1024)]
