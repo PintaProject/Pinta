@@ -136,22 +136,22 @@ public sealed class DitheringEffect : BaseEffect
 		if (palette.IsDefault) throw new ArgumentException ("Palette not initialized", nameof (palette));
 		if (palette.Length == 0) throw new ArgumentException ("Palette cannot be empty", nameof (palette));
 		if (palette.Length == 1) return palette[0];
-		double minDistance = double.MaxValue;
+		int minimumSquaredDistance = int.MaxValue;
 		ColorBgra closestColor = ColorBgra.FromBgra (0, 0, 0, 1);
 		foreach (var paletteColor in palette) {
-			double distance = CalculateSquaredDistance (original, paletteColor);
-			if (distance >= minDistance) continue;
-			minDistance = distance;
+			int squaredDistance = CalculateSquaredDistance (original, paletteColor);
+			if (squaredDistance >= minimumSquaredDistance) continue;
+			minimumSquaredDistance = squaredDistance;
 			closestColor = paletteColor;
 		}
 		return closestColor;
 	}
 
-	private static double CalculateSquaredDistance (ColorBgra color1, ColorBgra color2)
+	private static int CalculateSquaredDistance (ColorBgra color1, ColorBgra color2)
 	{
-		double deltaR = color1.R - color2.R;
-		double deltaG = color1.G - color2.G;
-		double deltaB = color1.B - color2.B;
+		int deltaR = ((int) color1.R) - ((int) color2.R);
+		int deltaG = ((int) color1.G) - ((int) color2.G);
+		int deltaB = ((int) color1.B) - ((int) color2.B);
 		return deltaR * deltaR + deltaG * deltaG + deltaB * deltaB;
 	}
 
