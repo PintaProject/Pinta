@@ -57,8 +57,11 @@ public static class Utility
 	public static double Magnitude (this PointI point)
 		=> Mathematics.Magnitude<double> (point.X, point.Y);
 
-	public static double Distance (this in PointD origin, in PointD dest)
-		=> Magnitude (origin - dest);
+	public static double Distance (this in PointD origin, in PointD destination)
+		=> Magnitude (origin - destination);
+
+	public static double DistanceSquared (this in PointD origin, in PointD destination)
+		=> MagnitudeSquared (origin - destination);
 
 	public static PointD Lerp (in PointD from, in PointD to, float frac)
 	{

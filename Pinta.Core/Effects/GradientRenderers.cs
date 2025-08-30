@@ -18,12 +18,10 @@ public static class GradientRenderers
 
 		public override void BeforeRender ()
 		{
-			PointD vec = new (EndPoint.X - StartPoint.X, EndPoint.Y - StartPoint.Y);
-			double mag = vec.Magnitude ();
-
-			dtdx = EndPoint.X == StartPoint.X ? 0 : vec.X / (mag * mag);
-			dtdy = EndPoint.Y == StartPoint.Y ? 0 : vec.Y / (mag * mag);
-
+			PointD vector = EndPoint - StartPoint;
+			double magnitudeSquared = vector.MagnitudeSquared ();
+			dtdx = EndPoint.X == StartPoint.X ? 0 : vector.X / magnitudeSquared;
+			dtdy = EndPoint.Y == StartPoint.Y ? 0 : vector.Y / magnitudeSquared;
 			base.BeforeRender ();
 		}
 

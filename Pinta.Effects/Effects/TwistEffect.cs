@@ -100,13 +100,14 @@ public sealed class TwistEffect : BaseEffect
 		ColorBgra original,
 		PointD location)
 	{
-		double radialDistance = location.Magnitude ();
+		double radialDistanceSquared = location.MagnitudeSquared ();
 
 		// If sample falls outside twist circle, it just samples the original
-		if (radialDistance > settings.Maxrad)
+		if (radialDistanceSquared > settings.MaxRadiusSquared)
 			return original;
 
-		double radialFactor = 1.0d - radialDistance / settings.Maxrad; // Guaranteed to be > 0 (see previous check)
+		double radialDistance = Math.Sqrt (radialDistanceSquared); // Guaranteed to be > 0 (see previous check)
+		double radialFactor = 1.0d - radialDistance / settings.MaxRadius;
 		double twistAmount = radialFactor * radialFactor * radialFactor;
 		RadiansAngle localTwist = new (twistAmount * settings.Twist);
 
@@ -125,7 +126,8 @@ public sealed class TwistEffect : BaseEffect
 		PointD Center,
 		Size Size,
 		double DistanceThresholdSquared,
-		double Maxrad,
+		double MaxRadius,
+		double MaxRadiusSquared,
 		double Twist,
 		ImmutableArray<PointD> AntialiasPoints);
 
@@ -136,14 +138,15 @@ public sealed class TwistEffect : BaseEffect
 		double preliminaryTwist = -data.Amount;
 		double halfWidth = renderBounds.Width / 2.0d;
 		double halfHeight = renderBounds.Height / 2.0d;
-		double maxrad = Math.Min (halfWidth, halfHeight);
+		double maxRadius = Math.Min (halfWidth, halfHeight);
 		return new (
 			Center: new (
 				X: halfWidth + renderBounds.Left,
 				Y: halfHeight + renderBounds.Top),
 			Size: destination.GetSize (),
-			DistanceThresholdSquared: (maxrad + 1) * (maxrad + 1),
-			Maxrad: maxrad,
+			DistanceThresholdSquared: (maxRadius + 1) * (maxRadius + 1),
+			MaxRadius: maxRadius,
+			MaxRadiusSquared: maxRadius * maxRadius,
 			Twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist) / 100,
 			AntialiasPoints: InitializeAntialiasPoints (data.Antialias)
 		);
