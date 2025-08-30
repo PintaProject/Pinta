@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Cairo;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Effects;
