@@ -2,10 +2,8 @@ using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Cairo;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Effects;
@@ -58,9 +56,9 @@ public sealed class DitheringEffect : BaseEffect
 
 		if (roi.Width == 0 || roi.Height == 0)
 			return new (
-			  ChangedPixelCount: 0,
-			  PixelOffsets: [],
-			  ChangedColors: []);
+				ChangedPixelCount: 0,
+				PixelOffsets: [],
+				ChangedColors: []);
 
 		ImmutableArray<ColorBgra> chosenPalette = data.PaletteSource switch {
 			PaletteSource.PresetPalettes => PaletteHelper.GetPredefined (data.PaletteChoice),
@@ -124,7 +122,12 @@ public sealed class DitheringEffect : BaseEffect
 
 					double factor = weight * diffusionMatrix.WeightReductionFactor;
 
-					colorBuffer[neighborIndex] = AddError (colorBuffer[neighborIndex], factor, errorRed, errorGreen, errorBlue);
+					colorBuffer[neighborIndex] = AddError (
+						colorBuffer[neighborIndex],
+						factor,
+						errorRed,
+						errorGreen,
+						errorBlue);
 				}
 			}
 		}
