@@ -51,25 +51,25 @@ public static class ShapeEngineCollection
 	/// <summary>
 	/// Calculate the closest ControlPoint to currentPoint.
 	/// </summary>
-	/// <param name="currentPoint">The point to calculate the closest ControlPoint to.</param>
-	/// <param name="closestCPShapeIndex">The index of the shape with the closest ControlPoint.</param>
-	/// <param name="closestCPIndex">The index of the closest ControlPoint.</param>
+	/// <param name="reference">The point to calculate the closest ControlPoint to.</param>
+	/// <param name="closestShapeIndex">The index of the shape with the closest ControlPoint.</param>
+	/// <param name="closestIndex">The index of the closest ControlPoint.</param>
 	/// <param name="closestControlPoint">The closest ControlPoint to currentPoint.</param>
 	/// <param name="closestCPDistance">The closest ControlPoint's distance from currentPoint.</param>
 	public static void FindClosestControlPoint (
 		this IReadOnlyList<ShapeEngine> source,
-		PointD currentPoint,
-		out int closestCPShapeIndex,
-		out int closestCPIndex,
+		PointD reference,
+		out int closestShapeIndex,
+		out int closestIndex,
 		out ControlPoint? closestControlPoint,
-		out double closestCPDistance)
+		out double closestDistanceSquared)
 	{
-		closestCPShapeIndex = 0;
-		closestCPIndex = 0;
+		closestShapeIndex = 0;
+		closestIndex = 0;
 		closestControlPoint = null;
-		closestCPDistance = double.MaxValue;
+		closestDistanceSquared = double.MaxValue;
 
-		double currentDistance;
+		double currentDistanceSquared;
 
 		for (int shapeIndex = 0; shapeIndex < source.Count; ++shapeIndex) {
 
@@ -77,14 +77,14 @@ public static class ShapeEngineCollection
 
 			for (int cPIndex = 0; cPIndex < controlPoints.Count; ++cPIndex) {
 
-				currentDistance = controlPoints[cPIndex].Position.Distance (currentPoint);
+				currentDistanceSquared = controlPoints[cPIndex].Position.DistanceSquared (reference);
 
-				if (currentDistance >= closestCPDistance) continue;
+				if (currentDistanceSquared >= closestDistanceSquared) continue;
 
-				closestCPShapeIndex = shapeIndex;
-				closestCPIndex = cPIndex;
+				closestShapeIndex = shapeIndex;
+				closestIndex = cPIndex;
 				closestControlPoint = controlPoints[cPIndex];
-				closestCPDistance = currentDistance;
+				closestDistanceSquared = currentDistanceSquared;
 			}
 		}
 	}
