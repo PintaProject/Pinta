@@ -76,9 +76,6 @@ public sealed class TextTool : BaseTool
 	//Store the most recent mouse position.
 	private PointI last_mouse_position = new (0, 0);
 
-	//Whether or not the previous TextTool mouse cursor shown was the normal one.
-	private bool previous_mouse_cursor_normal = true;
-
 	public override string Name
 		=> Translations.GetString ("Text");
 
@@ -501,7 +498,7 @@ public sealed class TextTool : BaseTool
 
 		switch (e.MouseButton) {
 			case MouseButton.Right:
-				HandleRightClick (e);
+				HandleRightClick (document, e);
 				break;
 			case MouseButton.Left:
 				HandleLeftClick (document, e);
@@ -589,7 +586,7 @@ public sealed class TextTool : BaseTool
 		}
 	}
 
-	private void HandleRightClick (ToolMouseEventArgs e)
+	private void HandleRightClick (Document document, ToolMouseEventArgs e)
 	{
 		// A right click allows you to move the text around
 
@@ -601,7 +598,7 @@ public sealed class TextTool : BaseTool
 		start_click_point = click_point;
 
 		//Change the cursor to indicate that the text is being dragged.
-		SetCursor (cursor_move);
+		UpdateMouseCursor (document);
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
@@ -638,41 +635,36 @@ public sealed class TextTool : BaseTool
 
 		RedrawText (false, true);
 		tracking = false;
-		SetCursor (null);
+		UpdateMouseCursor (document);
 	}
 
 	private void UpdateMouseCursor (Document document)
 	{
+		if (tracking) {
+			SetCursor (cursor_move);
+			return;
+		}
+
 		//Whether or not to show the normal text cursor.
-		bool showNormalCursor = false;
+		bool showDefaultCursor = false;
 
 		if (ctrl_key && workspace.HasOpenDocuments) {
 			//Go through every UserLayer.
 			foreach (UserLayer ul in document.Layers.UserLayers) {
 				if (!ul.TextBounds.Contains (last_mouse_position)) continue; //Check each UserLayer's editable text boundaries to see if they contain the mouse position.
-				showNormalCursor = true; //The mouse is over editable text.
+				showDefaultCursor = true; //The mouse is over editable text.
 			}
 		} else {
-			showNormalCursor = true;
+			showDefaultCursor = true;
 		}
 
-		if (showNormalCursor) {
-			if (!previous_mouse_cursor_normal) {
+		if (showDefaultCursor != (CurrentCursor == DefaultCursor)) {
+			if (showDefaultCursor) {
 				SetCursor (DefaultCursor);
-
-				previous_mouse_cursor_normal = showNormalCursor;
-
-				if (workspace.HasOpenDocuments)
-					RedrawText (is_editing, true);
-			}
-		} else {
-			if (previous_mouse_cursor_normal) {
+			} else {
 				SetCursor (cursor_invalid);
-
-				previous_mouse_cursor_normal = showNormalCursor;
-
-				RedrawText (is_editing, true);
 			}
+			RedrawText (is_editing, true);
 		}
 	}
 	#endregion
