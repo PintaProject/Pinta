@@ -7,6 +7,6 @@ partial class BlendOpTests
 {
 	private static IEnumerable<TestCaseData> NamingTests (UserBlendOps.NormalBlendOp normalOp)
 	{
-		yield return new (normal_op, "Normal");
+		yield return new (normalOp, "Normal");
 	}
 }
