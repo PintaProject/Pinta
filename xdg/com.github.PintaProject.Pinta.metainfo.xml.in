@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>pinta.desktop</id>
+  <id>com.github.PintaProject.Pinta</id>
+  <replaces>
+    <!-- Old application id for Pinta -->
+    <id>pinta.desktop</id>
+  </replaces>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <name>Pinta</name>
@@ -15,7 +19,7 @@
       ability to create unlimited layers to help organize your creativity.
     </_p>
   </description>
-  <launchable type="desktop-id">pinta.desktop</launchable>
+  <launchable type="desktop-id">com.github.PintaProject.Pinta.desktop</launchable>
   <kudos>
     <kudo>HiDpiIcon</kudo>
     <kudo>HighContrast</kudo>

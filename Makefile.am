@@ -65,8 +65,8 @@ list:
 
 #target: updatepotfiles - update the POTFILES.in file
 updatepotfiles:
-	echo xdg/pinta.desktop.in > po/POTFILES.in
-	echo xdg/pinta.appdata.xml.in >> po/POTFILES.in
+	echo xdg/com.github.PintaProject.Pinta.desktop.in > po/POTFILES.in
+	echo xdg/com.github.PintaProject.Pinta.metainfo.xml.in >> po/POTFILES.in
 	find \
 		Pinta \
 		Pinta.Core \
