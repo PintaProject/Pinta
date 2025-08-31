@@ -47,11 +47,21 @@ public sealed class EraserTool : BaseBrushTool
 
 	public EraserTool (IServiceProvider services) : base (services) { }
 
-	public override string Name => Translations.GetString ("Eraser");
-	public override string Icon => Pinta.Resources.Icons.ToolEraser;
-	public override string StatusBarText => Translations.GetString ("Left click to erase to transparent, right click to erase to secondary color. ");
-	public override bool CursorChangesOnZoom => true;
-	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_E);
+	public override string Name
+		=> Translations.GetString ("Eraser");
+
+	public override string Icon
+		=> Pinta.Resources.Icons.ToolEraser;
+
+	public override string StatusBarText
+		=> Translations.GetString ("Left click to erase to transparent, right click to erase to secondary color. ");
+
+	public override bool CursorChangesOnZoom
+		=> true;
+
+	public override Gdk.Key ShortcutKey
+		=> new (Gdk.Constants.KEY_E);
+
 	public override int Priority => 27;
 
 	public override Gdk.Cursor DefaultCursor {
@@ -62,8 +72,8 @@ public sealed class EraserTool : BaseBrushTool
 				BrushWidth,
 				8,
 				22,
-				out var iconOffsetX,
-				out var iconOffsetY);
+				out int iconOffsetX,
+				out int iconOffsetY);
 
 			return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 		}
@@ -79,8 +89,8 @@ public sealed class EraserTool : BaseBrushTool
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 	{
-		var new_point = e.Point;
-		var new_pointd = e.PointDouble;
+		PointI newPoint = e.Point;
+		PointD newPointD = e.PointDouble;
 
 		if (mouse_button == MouseButton.None) {
 			last_point = null;
@@ -88,31 +98,53 @@ public sealed class EraserTool : BaseBrushTool
 		}
 
 		if (!last_point.HasValue)
-			last_point = new_point;
+			last_point = newPoint;
 
-		if (document.Workspace.PointInCanvas (new_pointd))
+		if (document.Workspace.PointInCanvas (newPointD))
 			surface_modified = true;
 
 		using Context g = document.CreateClippedContext ();
-		var last_pointd = (PointD) last_point.Value;
+
+		PointD lastPointD = (PointD) last_point.Value;
+
 		switch (eraser_type) {
+
 			case EraserType.Normal:
-				EraseNormal (g, last_pointd, new_pointd);
+
+				EraseNormal (
+					g,
+					lastPointD,
+					newPointD);
+
 				break;
+
 			case EraserType.Smooth:
-				EraseSmooth (document.Layers.CurrentUserLayer.Surface, g, last_pointd, new_pointd);
+
+				EraseSmooth (
+					document.Layers.CurrentUserLayer.Surface,
+					g,
+					lastPointD,
+					newPointD);
+
 				break;
 		}
 
 		int dirtyPadding = BrushWidth + 2;
-		RectangleI dirty = RectangleI.FromPoints (last_point.Value, new_point).Inflated (dirtyPadding, dirtyPadding);
+
+		RectangleI dirty =
+			RectangleI.FromPoints (
+				last_point.Value,
+				newPoint)
+			.Inflated (
+				dirtyPadding,
+				dirtyPadding);
 
 		if (document.Workspace.IsPartiallyOffscreen (dirty))
 			document.Workspace.Invalidate ();
 		else
 			document.Workspace.Invalidate (document.ClampToImageSize (dirty));
 
-		last_point = new_point;
+		last_point = newPoint;
 	}
 
 	protected override void OnSaveSettings (ISettingsService settings)
@@ -125,11 +157,11 @@ public sealed class EraserTool : BaseBrushTool
 
 	private static byte[,] CreateLookupTable ()
 	{
-		var arrayDimensions = LUT_Resolution + 1;
-		var result = new byte[arrayDimensions, arrayDimensions];
-		for (var dy = 0; dy < arrayDimensions; dy++) {
-			for (var dx = 0; dx < arrayDimensions; dx++) {
-				var d = Math.Sqrt (dx * dx + dy * dy) / LUT_Resolution;
+		int arrayDimensions = LUT_Resolution + 1;
+		byte[,] result = new byte[arrayDimensions, arrayDimensions];
+		for (int dy = 0; dy < arrayDimensions; dy++) {
+			for (int dx = 0; dx < arrayDimensions; dx++) {
+				double d = Mathematics.Magnitude<double> (dx, dy) / LUT_Resolution;
 				result[dy, dx] =
 					d > 1.0
 					? (byte) 255
@@ -139,27 +171,51 @@ public sealed class EraserTool : BaseBrushTool
 		return result;
 	}
 
-	private static ImageSurface CopySurfacePart (ImageSurface surf, RectangleI dest_rect)
+	private static ImageSurface CopySurfacePart (ImageSurface surface, RectangleI destinationBounds)
 	{
-		var tmp_surface = CairoExtensions.CreateImageSurface (Format.Argb32, dest_rect.Width, dest_rect.Height);
+		ImageSurface temporarySurface = CairoExtensions.CreateImageSurface (
+			Format.Argb32,
+			destinationBounds.Width,
+			destinationBounds.Height);
 
-		using Context g = new (tmp_surface) { Operator = Operator.Source };
+		using Context g = new (temporarySurface) { Operator = Operator.Source };
 
-		g.SetSourceSurface (surf, -dest_rect.Left, -dest_rect.Top);
-		g.Rectangle (new RectangleD (0, 0, dest_rect.Width, dest_rect.Height));
+		g.SetSourceSurface (
+			surface,
+			-destinationBounds.Left,
+			-destinationBounds.Top);
+
+		g.Rectangle (
+			new RectangleD (
+				0,
+				0,
+				destinationBounds.Width,
+				destinationBounds.Height));
+
 		g.Fill ();
 
 		//Flush to make sure all drawing operations are finished
-		tmp_surface.Flush ();
+		temporarySurface.Flush ();
 
-		return tmp_surface;
+		return temporarySurface;
 	}
 
-	private static void PasteSurfacePart (Context g, ImageSurface tmp_surface, RectangleI dest_rect)
+	private static void PasteSurfacePart (Context g, ImageSurface temporarySurface, RectangleI destinationBounds)
 	{
 		g.Operator = Operator.Source;
-		g.SetSourceSurface (tmp_surface, dest_rect.Left, dest_rect.Top);
-		g.Rectangle (new RectangleD (dest_rect.Left, dest_rect.Top, dest_rect.Width, dest_rect.Height));
+
+		g.SetSourceSurface (
+			temporarySurface,
+			destinationBounds.Left,
+			destinationBounds.Top);
+
+		g.Rectangle (
+			new RectangleD (
+				destinationBounds.Left,
+				destinationBounds.Top,
+				destinationBounds.Width,
+				destinationBounds.Height));
+
 		g.Fill ();
 	}
 
@@ -188,55 +244,64 @@ public sealed class EraserTool : BaseBrushTool
 
 	private void EraseSmooth (ImageSurface surf, Context g, PointD start, PointD end)
 	{
-		var rad = (int) (BrushWidth / 2.0) + 1;
+		int rad = (int) (BrushWidth / 2.0) + 1;
 
 		// Premultiply with alpha value
-		var bk_col_a = (byte) (Palette.SecondaryColor.A * 255.0);
-		var bk_col_r = (byte) (Palette.SecondaryColor.R * bk_col_a);
-		var bk_col_g = (byte) (Palette.SecondaryColor.G * bk_col_a);
-		var bk_col_b = (byte) (Palette.SecondaryColor.B * bk_col_a);
-		var num_steps = (int) start.Distance (end) / rad + 1;
+		byte backgroundA = (byte) (Palette.SecondaryColor.A * 255.0);
+		byte backgroundR = (byte) (Palette.SecondaryColor.R * backgroundA);
+		byte backgroundG = (byte) (Palette.SecondaryColor.G * backgroundA);
+		byte backgroundB = (byte) (Palette.SecondaryColor.B * backgroundA);
+
+		int numberOfSteps = (int) start.Distance (end) / rad + 1;
 
 		// Initialize lookup table when first used (to prevent slower startup of the application)
-		var lut_factor = lazy_lut_factor.Value;
+		byte[,] lut_factor = lazy_lut_factor.Value;
 
-		for (var step = 0; step < num_steps; step++) {
-			var pt = Utility.Lerp (start, end, (float) step / num_steps);
-			int x = (int) pt.X, y = (int) pt.Y;
+		for (var step = 0; step < numberOfSteps; step++) {
 
-			var surface_rect = new RectangleI (0, 0, surf.Width, surf.Height);
-			var brush_rect = new RectangleI (x - rad, y - rad, 2 * rad, 2 * rad);
-			var dest_rect = RectangleI.Intersect (surface_rect, brush_rect);
+			PointD pt = Utility.Lerp (
+				start,
+				end,
+				(float) step / numberOfSteps);
 
-			if (dest_rect.Width <= 0 || dest_rect.Height <= 0)
+			int x = (int) pt.X;
+			int y = (int) pt.Y;
+
+			RectangleI surfaceBounds = new (0, 0, surf.Width, surf.Height);
+			RectangleI brushBounds = new (x - rad, y - rad, 2 * rad, 2 * rad);
+			RectangleI destinationBounds = RectangleI.Intersect (surfaceBounds, brushBounds);
+
+			if (destinationBounds.Width <= 0 || destinationBounds.Height <= 0)
 				continue;
 
 			// Allow Clipping through a temporary surface
-			var tmp_surface = CopySurfacePart (surf, dest_rect);
-			var tmp_data = tmp_surface.GetPixelData ();
+			ImageSurface temporarySurface = CopySurfacePart (surf, destinationBounds);
+			Span<ColorBgra> temporaryData = temporarySurface.GetPixelData ();
 
-			for (var iy = dest_rect.Top; iy < dest_rect.Bottom; iy++) {
+			for (int iy = destinationBounds.Top; iy < destinationBounds.Bottom; iy++) {
 
-				var srcRow = tmp_data[(tmp_surface.Width * (iy - dest_rect.Top))..];
-				var dy = Math.Abs ((iy - y) * LUT_Resolution / rad);
+				var srcRow = temporaryData[(temporarySurface.Width * (iy - destinationBounds.Top))..];
+				int dy = Math.Abs ((iy - y) * LUT_Resolution / rad);
 
-				for (var ix = dest_rect.Left; ix < dest_rect.Right; ix++) {
+				for (var ix = destinationBounds.Left; ix < destinationBounds.Right; ix++) {
 
-					var dx = Math.Abs ((ix - x) * LUT_Resolution / rad);
+					int dx = Math.Abs ((ix - x) * LUT_Resolution / rad);
 
-					var force = lut_factor[dy, dx];
+					byte force = lut_factor[dy, dx];
 
 					// Note: premultiplied alpha is used!
-					int idx = ix - dest_rect.Left;
+					int idx = ix - destinationBounds.Left;
 
 					ColorBgra original = srcRow[idx];
 
 					srcRow[idx] = mouse_button switch {
+
 						MouseButton.Right => ColorBgra.FromBgra (
-							b: (byte) ((original.B * force + bk_col_b * (255 - force)) / 255),
-							g: (byte) ((original.G * force + bk_col_g * (255 - force)) / 255),
-							r: (byte) ((original.R * force + bk_col_r * (255 - force)) / 255),
-							a: (byte) ((original.A * force + bk_col_a * (255 - force)) / 255)),
+							b: (byte) ((original.B * force + backgroundB * (255 - force)) / 255),
+							g: (byte) ((original.G * force + backgroundG * (255 - force)) / 255),
+							r: (byte) ((original.R * force + backgroundR * (255 - force)) / 255),
+							a: (byte) ((original.A * force + backgroundA * (255 - force)) / 255)),
+
 						_ => ColorBgra.FromBgra (
 							b: (byte) (original.B * force / 255),
 							g: (byte) (original.G * force / 255),
@@ -247,7 +312,7 @@ public sealed class EraserTool : BaseBrushTool
 			}
 
 			// Draw the final result on the surface
-			PasteSurfacePart (g, tmp_surface, dest_rect);
+			PasteSurfacePart (g, temporarySurface, destinationBounds);
 		}
 	}
 

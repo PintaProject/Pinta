@@ -127,7 +127,7 @@ public class RectangleHandle : IToolHandle
 			throw new InvalidOperationException ("Drag operation has not been started!");
 
 		PointD viewPos = workspace.CanvasPointToView (canvasPos);
-		return drag_start_pos.Value.Distance (viewPos) > 1;
+		return drag_start_pos.Value.DistanceSquared (viewPos) > 1;
 	}
 
 	/// <summary>
