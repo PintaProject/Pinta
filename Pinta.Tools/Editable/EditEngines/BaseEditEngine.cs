@@ -1238,7 +1238,7 @@ public abstract class BaseEditEngine
 		foreach (ControlPoint point in shape.ControlPoints) {
 
 			//Skip drawing the control point if it is being hovered over.
-			if (draw_selection && hover_handle.Active && hover_handle.CanvasPosition.Distance (point.Position) < 1d)
+			if (draw_selection && hover_handle.Active && hover_handle.CanvasPosition.DistanceSquared (point.Position) < 1d)
 				continue;
 
 			shape.ControlPointHandles.Add (
