@@ -120,14 +120,13 @@ public static class GradientRenderers
 
 		public override void BeforeRender ()
 		{
-			double distanceScale = StartPoint.Distance (EndPoint);
+			double distanceScaleSquared = StartPoint.DistanceSquared (EndPoint);
 
 			start_x = (int) StartPoint.X;
 			start_y = (int) StartPoint.Y;
-
-			inv_distance_scale = distanceScale switch {
+			inv_distance_scale = distanceScaleSquared switch {
 				0 => 0,
-				_ => 1f / distanceScale,
+				_ => 1d / Math.Sqrt (distanceScaleSquared),
 			};
 
 			base.BeforeRender ();
@@ -138,14 +137,18 @@ public static class GradientRenderers
 			int dx = x - start_x;
 			int dy = y - start_y;
 
-			double distance = Math.Sqrt (dx * dx + dy * dy);
-
-			double result = inv_distance_scale == 0 ? 1.0 : distance * inv_distance_scale;
+			double result =
+				inv_distance_scale == 0
+				? 1.0
+				: Mathematics.Magnitude<double> (dx, dy) * inv_distance_scale;
 
 			if (result < 0.0)
 				return 0;
 
-			return result > 1.0 ? (byte) 255 : (byte) (result * 255f);
+			return
+				result > 1.0
+				? (byte) 255
+				: (byte) (result * 255f);
 		}
 	}
 

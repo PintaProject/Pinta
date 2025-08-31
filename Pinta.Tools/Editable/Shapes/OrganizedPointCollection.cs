@@ -125,12 +125,12 @@ public sealed class OrganizedPointCollection
 		out int closestShapeIndex,
 		out int closestPointIndex,
 		out PointD? closestPoint,
-		out double closestDistance)
+		out double closestDistanceSquared)
 	{
 		closestShapeIndex = 0;
 		closestPointIndex = 0;
 		closestPoint = null;
-		closestDistance = double.MaxValue;
+		closestDistanceSquared = double.MaxValue;
 
 		for (int n = 0; n < SEL.Count; ++n) {
 			Dictionary<int, Dictionary<int, List<OrganizedPoint>>> oP = SEL[n].OrganizedPoints.collection;
@@ -162,12 +162,13 @@ public sealed class OrganizedPointCollection
 						continue;
 
 					foreach (var p in ySection) {
-						double currentDistance = p.Position.Distance (currentPoint);
 
-						if (currentDistance >= closestDistance)
+						double currentDistanceSquared = p.Position.DistanceSquared (currentPoint);
+
+						if (currentDistanceSquared >= closestDistanceSquared)
 							continue;
 
-						closestDistance = currentDistance;
+						closestDistanceSquared = currentDistanceSquared;
 
 						closestPointIndex = p.Index;
 						closestShapeIndex = n;
