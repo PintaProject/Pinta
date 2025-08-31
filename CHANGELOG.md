@@ -28,10 +28,12 @@ Thanks to the following contributors who worked on this release:
 - The text tool now supports using Ctrl+Backspace to delete words (#1680)
 
 ### Changed
-- Breaking API changes:
+- Packaging changes
+  - Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
+  - Pinta now consistently uses an application ID of `com.github.PintaProject.Pinta`, which previously had been applied in patches for downstream packages (#1706, #1419)
+- Breaking API changes for add-ins will require add-ins to be rebuilt against Pinta 3.1
   - Attributes used for effect configuration properties (`CaptionAttribute`, `MaximumValueAttribute`, ...) are now in the `Pinta.Core` assembly and the `Pinta.Core` namespace
   - Methods `RegisterEffect`, `UnregisterInstanceOfEffect`, `RegisterAdjustment`, and `UnregisterInstanceOfAdjustment` in `EffectsManager` are now generic
-- Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
 - Removed use of deprecated Gtk.FontButton (#1421)
 - View menu moved from hamburger menu to dedicated button (#1428, #1471)
 - Updated the application icon on macOS to better match the platform's icon style guidelines (#1572)
@@ -46,6 +48,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed toolbar layout issues with displaying the cursor position and selection size (#1429, #1540)
 - Fixed a potential hang when switching the active layer in a tool with uncommitted edits (#1463, #1660)
 - Fixed a bug in the text tool where Ctrl+A only selected starting from the current line (#1698)
+- The icon and window title now appear correctly on KDE Wayland sessions (#1419)
 
 ## [3.0.3](https://github.com/PintaProject/Pinta/release/tag/3.0.3) - 2025/08/01
 
