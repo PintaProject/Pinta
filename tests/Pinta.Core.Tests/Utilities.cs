@@ -1,5 +1,6 @@
 using System;
 using Cairo;
+using NUnit.Framework;
 
 namespace Pinta.Core.Tests;
 
@@ -109,5 +110,55 @@ internal static class Utilities
 		} finally {
 			fs.Close (null);
 		}
+	}
+
+	public static void CompareImages (
+		ImageSurface result,
+		ImageSurface expected,
+		int tolerance = 1)
+	{
+		Assert.That (expected.GetSize (), Is.EqualTo (result.GetSize ()));
+
+		var result_pixels = result.GetReadOnlyPixelData ();
+		var expected_pixels = expected.GetReadOnlyPixelData ();
+
+		int diffs = 0;
+		for (int i = 0; i < result_pixels.Length; ++i) {
+
+			if (ColorBgra.ColorsWithinTolerance (result_pixels[i], expected_pixels[i], tolerance))
+				continue;
+
+			++diffs;
+
+			// Display info about the first few failures.
+			if (diffs <= 10)
+				Assert.Warn ($"Difference at pixel {i}, got {result_pixels[i]} vs {expected_pixels[i]}, diff. of {ColorBgra.ColorDifference (result_pixels[i], expected_pixels[i])}");
+		}
+
+		Assert.That (diffs, Is.EqualTo (0));
+	}
+
+	public static void TestBlendOp (
+		UserBlendOp blendOp,
+		string resultImageName,
+		string? saveImageName = null,
+		string sourceA = "visual_a.png",
+		string sourceB = "visual_b.png")
+	{
+		using ImageSurface loadedA = Utilities.LoadImage (sourceA);
+		using ImageSurface loadedB = Utilities.LoadImage (sourceB);
+		using ImageSurface expectedOutput = Utilities.LoadImage (resultImageName);
+		using ImageSurface result = CairoExtensions.CreateImageSurface (Format.Argb32, loadedA.Width, loadedB.Height);
+		blendOp.Apply (result, loadedB, loadedA);
+
+		// For debugging, optionally save out the result to a file.
+		if (saveImageName != null)
+			result.ToPixbuf ().Savev (
+				saveImageName,
+				"png",
+				[],
+				[]);
+
+		Utilities.CompareImages (expectedOutput, result);
 	}
 }
