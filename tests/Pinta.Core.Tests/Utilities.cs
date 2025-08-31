@@ -140,14 +140,17 @@ internal static class Utilities
 
 	public static void TestBlendOp (
 		UserBlendOp blendOp,
-		string resultImageName,
+		string sourceExpected,
 		string? saveImageName = null,
 		string sourceA = "visual_a.png",
 		string sourceB = "visual_b.png")
 	{
-		using ImageSurface loadedA = Utilities.LoadImage (sourceA);
-		using ImageSurface loadedB = Utilities.LoadImage (sourceB);
-		using ImageSurface expectedOutput = Utilities.LoadImage (resultImageName);
+		string pathA = Utilities.GetAssetPath (sourceA);
+		string pathB = Utilities.GetAssetPath (sourceB);
+		string pathExpected = Utilities.GetAssetPath (sourceExpected);
+		using ImageSurface loadedA = Utilities.LoadImage (pathA);
+		using ImageSurface loadedB = Utilities.LoadImage (pathB);
+		using ImageSurface expectedOutput = Utilities.LoadImage (pathExpected);
 		using ImageSurface result = CairoExtensions.CreateImageSurface (Format.Argb32, loadedA.Width, loadedB.Height);
 		blendOp.Apply (result, loadedB, loadedA);
 
