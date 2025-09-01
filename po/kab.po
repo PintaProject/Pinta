@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-20 00:32+0000\n"
+"POT-Creation-Date: 2025-09-01 00:24+0000\n"
 "PO-Revision-Date: 2025-01-21 05:26+0000\n"
 "Last-Translator: Yacine Bouklif <yacinebouklif@gmail.com>\n"
 "Language-Team: Kabyle <https://hosted.weblate.org/projects/pinta/pinta/kab/"
@@ -28,28 +28,28 @@ msgstr " (deg ukaram n useqdac)"
 msgid " Selection Mode: "
 msgstr " Askar n tefrayt : "
 
-#: ../Pinta.Core/Managers/EffectsManager.cs:95
-#: ../Pinta.Core/Managers/EffectsManager.cs:150
+#: ../Pinta.Core/Managers/EffectsManager.cs:78
+#: ../Pinta.Core/Managers/EffectsManager.cs:116
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:223
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "3 x 3 Region"
 msgstr "Tamnaḍt 3 x 3"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:224
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
 msgid "5 x 5 Region"
 msgstr "Tamnaḍt 5 x 5"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
 msgid "7 x 7 Region"
 msgstr "Tamnaḍt 7 x 7"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
 msgid "9 x 9 Region"
 msgstr "Tamnaḍt 9 x 9"
 
-#: ../Pinta/MainWindow.cs:401
+#: ../Pinta/MainWindow.cs:405
 msgid "A_dd-ins"
 msgstr "Isiɣzaf"
 
@@ -67,7 +67,7 @@ msgstr "Awal ɣef Pinta"
 msgid "Add New Layer"
 msgstr "Rnu akalku amaynut"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:25
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:24
 msgid "Add Noise"
 msgstr "Rnu asxerxec"
 
@@ -75,20 +75,20 @@ msgstr "Rnu asxerxec"
 msgid "Add-in Manager..."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:835
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:839
 msgid "Added"
 msgstr "Yettwarenna"
 
-#: ../Pinta/MainWindow.cs:453
+#: ../Pinta/MainWindow.cs:457
 msgid "Adjustments"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:194
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
 msgid "After select"
 msgstr "Mbaɛd tafrayt"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:13
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
 msgid "Align Object"
 msgstr ""
 
@@ -102,15 +102,15 @@ msgstr "Akkw ifuyla"
 msgid "Alpha"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:211
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:212
 msgid "Alpha Gradient"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:117
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:147
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:58
-#: ../Pinta.Effects/Effects/TwistEffect.cs:153
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:148
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:116
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:57
+#: ../Pinta.Effects/Effects/TwistEffect.cs:171
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:136
 msgid "Amount"
 msgstr "Azal"
 
@@ -118,37 +118,37 @@ msgstr "Azal"
 msgid "Anchor:"
 msgstr "Tamdeyt:"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:82
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:121
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:178
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:186
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:145
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:165
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:78
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:316
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:120
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:167
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:77
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 msgid "Angle"
 msgstr "Tiɣmert"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:156
+#: ../Pinta.Effects/Effects/TwistEffect.cs:175
 msgid "Antialias"
 msgstr "Amzay"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:366
+#: ../Pinta.Core/Classes/BaseTool.cs:363
 msgid "Antialiasing Off"
 msgstr "Amzay yexsi"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:365
+#: ../Pinta.Core/Classes/BaseTool.cs:362
 msgid "Antialiasing On"
 msgstr "Amzay yermed"
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:268
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:262
 msgid "Arrow"
 msgstr "Taneccabt"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:37
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:33
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:34
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:32
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Artistic"
 msgstr "Anaẓuran"
 
@@ -186,12 +186,12 @@ msgstr "Ini n ugilal"
 msgid "Background:"
 msgstr "Agilal :"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:95
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:94
 msgid "Based on the work of Paint.NET:"
 msgstr "Yebna ɣef leqdic n Paint.NET :"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
-#: ../Pinta.Effects/Effects/GradientHelper.cs:24
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:23
 msgid "Beautiful Italy"
 msgstr ""
 
@@ -205,7 +205,7 @@ msgstr ""
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
-#: ../Pinta.Effects/Effects/GradientHelper.cs:28
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:27
 msgid "Black and White"
 msgstr "Aberkan aked umlal"
 
@@ -223,21 +223,21 @@ msgstr "Anili"
 msgid "Blue "
 msgstr "Anili "
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:34
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:29
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:34
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:28
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:28
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:28
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:33
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:28
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:33
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:27
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:32
 msgid "Blurs"
 msgstr "Floutage"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:180
 msgid "Bold"
 msgstr "Azuran"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:32
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:31
 msgid "Bonfire"
 msgstr "Times"
 
@@ -253,25 +253,25 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:148
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:147
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
 msgstr "Tifawit"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:29
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
 msgid "Brightness / Contrast"
 msgstr "Tifawit/ Amyeẓli"
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:148
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:147
 msgid "Brush Size"
 msgstr "Tiddi n umfezzu"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:274
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:122
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:262
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:120
 msgid "Brush width"
 msgstr "Tehri n umfezzu"
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:24
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:23
 msgid "Bulge"
 msgstr "Bomber"
 
@@ -309,15 +309,15 @@ msgstr ""
 msgid "Canvas Grid..."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:146
+#: ../Pinta.Effects/Effects/CellsEffect.cs:168
 msgid "Cell Radius"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:124
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
 msgstr "Tiddi n texxamt"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:21
+#: ../Pinta.Effects/Effects/CellsEffect.cs:19
 msgid "Cells"
 msgstr ""
 
@@ -325,7 +325,7 @@ msgstr ""
 msgid "Center"
 msgstr "Talemmast"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:240
+#: ../Pinta.Tools/Tools/TextTool.cs:232
 msgid "Center Align"
 msgstr "Tarigla di telmast"
 
@@ -333,7 +333,7 @@ msgstr "Tarigla di telmast"
 msgid "Center Left"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:154
+#: ../Pinta.Effects/Effects/DentsEffect.cs:155
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:95
 msgid "Center Offset"
 msgstr "Excentration"
@@ -342,7 +342,7 @@ msgstr "Excentration"
 msgid "Center Right"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:151
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:154
 msgid "Centered"
 msgstr "Di telmast"
 
@@ -350,8 +350,8 @@ msgstr "Di telmast"
 msgid "Centimeters"
 msgstr "Isantimitren"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:283
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr ""
 
@@ -360,11 +360,12 @@ msgid "Changed Shape Type"
 msgstr "Annaw n talɣa ibeddel"
 
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:36
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:35
 msgid "Cherry Blossom"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:633
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:629
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:286
 msgid "Choose Color"
 msgstr "Fren ini"
 
@@ -375,6 +376,11 @@ msgstr "Fren tapaliḍt n yiniten"
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:36
 msgid "Circles"
 msgstr "Tiwinas"
+
+#. Translators: Arrangement of points along a circular path
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:129
+msgid "Circular"
+msgstr ""
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -392,7 +398,7 @@ msgid ""
 "Hold Shift to constrain to a circle."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:51
+#: ../Pinta.Tools/Tools/GradientTool.cs:48
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
@@ -451,11 +457,11 @@ msgstr "Mdel kulec"
 msgid "Closed Curve Shape"
 msgstr "Talɣa n uzlig imedlen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
 msgid "Closed Line/Curve Series"
 msgstr "Ineḍfuren n izirigen/izligen imedlen"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:32
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:26
 msgid "Clouds"
 msgstr "Asigna"
 
@@ -464,7 +470,7 @@ msgid "Coarseness"
 msgstr "Rugosité"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:17
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 msgid "Color"
 msgstr "Ini"
 
@@ -476,16 +482,16 @@ msgstr "Taneẓẓi n yini +"
 msgid "Color Dodge"
 msgstr "Taneẓẓi n yini -"
 
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:214
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:215
 msgid "Color Gradient"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:203
+#: ../Pinta.Tools/Tools/GradientTool.cs:200
 msgid "Color Mode"
 msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:52
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
 msgid "Color Picker"
 msgstr "Aleqqaḍ n yini"
 
@@ -493,38 +499,38 @@ msgstr "Aleqqaḍ n yini"
 msgid "Color Range"
 msgstr "Tagrumma n yiniten"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:172
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:171
 msgid "Color Saturation"
 msgstr "Tawant n yiniten"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
-#: ../Pinta.Effects/Effects/CellsEffect.cs:155
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:206
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:169
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:192
+#: ../Pinta.Effects/Effects/CellsEffect.cs:175
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:148
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:174
 msgid "Color Scheme"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:164
+#: ../Pinta.Effects/Effects/CellsEffect.cs:184
 msgid "Color Scheme Edge Behavior"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:152
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:203
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:189
+#: ../Pinta.Effects/Effects/CellsEffect.cs:172
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:145
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:155
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:171
 msgid "Color Scheme Source"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:181
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
 msgid "Color Sorting"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:160
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:150
 msgid "Coloring"
 msgstr "Coloration"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:188
+#: ../Pinta.Tools/Tools/GradientTool.cs:185
 msgid "Conical Gradient"
 msgstr "Dégradé conique"
 
@@ -532,12 +538,12 @@ msgstr "Dégradé conique"
 msgid "Contents"
 msgstr "Igburen"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:133
+#: ../Pinta.Tools/Tools/FloodTool.cs:131
 msgid "Contiguous"
 msgstr "Anarag"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:158
-#: ../Pinta.Effects/Effects/GlowEffect.cs:84
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:157
+#: ../Pinta.Effects/Effects/GlowEffect.cs:85
 msgid "Contrast"
 msgstr "Amyeẓli"
 
@@ -549,12 +555,12 @@ msgstr "Nɣel"
 msgid "Copy Merged"
 msgstr "Tunɣilt tettwazdi"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:81
 msgid "Copyright"
 msgstr "Izerfan n umeskar"
 
 #. Translators: Gradient with the colors of blue and pink cotton candy
-#: ../Pinta.Effects/Effects/GradientHelper.cs:40
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:39
 msgid "Cotton Candy"
 msgstr ""
 
@@ -564,7 +570,7 @@ msgstr ""
 msgid "Could not import layer \"{0}\" from {1}"
 msgstr ""
 
-#: ../Pinta.Core/Extensions/OtherExtensions.cs:167
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:166
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:412
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:424
 #, csharp-format
@@ -580,11 +586,11 @@ msgstr "Taduli"
 msgid "Crop to Selection"
 msgstr "Nǧer tafrayt"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:150
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Current Palette"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:248
+#: ../Pinta.Effects/Effects/TileEffect.cs:247
 msgid "Curved"
 msgstr ""
 
@@ -628,12 +634,12 @@ msgstr ""
 msgid "Delete Layer"
 msgstr "Kkes akalku"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:673
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:677
 msgid "Deleted"
 msgstr "Yettwakkes"
 
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
-#: ../Pinta.Effects/Effects/DentsEffect.cs:50
+#: ../Pinta.Effects/Effects/DentsEffect.cs:49
 msgid "Dents"
 msgstr ""
 
@@ -653,23 +659,23 @@ msgstr "Ifatusen"
 msgid "Difference"
 msgstr "Amgirred"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:137
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:148
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:128
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
 msgid "Distance"
 msgstr "Ameccaq"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:137
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:173
+#: ../Pinta.Effects/Effects/CellsEffect.cs:145
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:180
 msgid "Distance Metric"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/BulgeEffect.cs:28
-#: ../Pinta.Effects/Effects/DentsEffect.cs:53
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:28
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:30
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:33
-#: ../Pinta.Effects/Effects/TileEffect.cs:35
-#: ../Pinta.Effects/Effects/TwistEffect.cs:29
+#: ../Pinta.Effects/Effects/BulgeEffect.cs:27
+#: ../Pinta.Effects/Effects/DentsEffect.cs:52
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:27
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:29
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:32
+#: ../Pinta.Effects/Effects/TileEffect.cs:34
+#: ../Pinta.Effects/Effects/TwistEffect.cs:33
 msgid "Distort"
 msgstr "Azlag"
 
@@ -677,7 +683,7 @@ msgstr "Azlag"
 msgid "Dithering"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:203
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
 msgid "Do not switch tool"
 msgstr "Ur tbeddil ara afecku"
 
@@ -691,32 +697,33 @@ msgstr ""
 msgid "Duplicate Layer"
 msgstr "Sisleg akalku"
 
-#: ../xdg/pinta.desktop.in.h:2 ../Pinta/Actions/Help/AboutDialogAction.cs:70
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:2
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:69
 msgid "Easily create and edit images"
 msgstr "Snulfu-d u ẓreg tugniwin s sshala"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:238 Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:237 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Comportement du bord"
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:27
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:26
 msgid "Edge Detect"
 msgstr "Tifin n yiran"
 
-#: ../Pinta/MainWindow.cs:399
+#: ../Pinta/MainWindow.cs:403
 msgid "Effe_cts"
 msgstr "Isemda"
 
-#: ../Pinta/MainWindow.cs:447
+#: ../Pinta/MainWindow.cs:451
 msgid "Effects"
 msgstr ""
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:44
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:43
 msgid "Electric"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -726,7 +733,7 @@ msgstr "Taglayt"
 msgid "Ellipse Select"
 msgstr "Tafrayt taglayt"
 
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:27
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:26
 msgid "Emboss"
 msgstr "Gaufrer"
 
@@ -739,7 +746,7 @@ msgstr ""
 msgid "Erase Selection"
 msgstr "Kkes tafrayt"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:52
+#: ../Pinta.Tools/Tools/EraserTool.cs:51
 msgid "Eraser"
 msgstr "Taseffaḍt"
 
@@ -747,7 +754,7 @@ msgstr "Taseffaḍt"
 msgid "Error"
 msgstr "Anezri"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Error Diffusion Method"
 msgstr ""
 
@@ -764,8 +771,8 @@ msgstr ""
 msgid "Extension packages"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:157
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:143
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:156
 msgid "Factor"
 msgstr "Amgi"
 
@@ -773,7 +780,7 @@ msgstr "Amgi"
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:320
+#: ../Pinta/MainWindow.cs:324
 msgid "Failed to initialize add-in"
 msgstr ""
 
@@ -794,11 +801,11 @@ msgstr ""
 msgid "Failed to take screenshot"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:174
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:175
 msgid "Feather Canvas Edge"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:19
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:18
 msgid "Feather Object"
 msgstr ""
 
@@ -810,11 +817,11 @@ msgstr "Signaler un bogue"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:278
+#: ../Pinta.Tools/Tools/TextTool.cs:270
 msgid "Fill Background"
 msgstr "Ačar agilal"
 
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:220
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:221
 msgid "Fill Object Background"
 msgstr ""
 
@@ -823,23 +830,23 @@ msgstr ""
 msgid "Fill Selection"
 msgstr "Ačar tafrayt"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:312
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:222
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Shape"
 msgstr "Talɣa n taččart"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:302
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:215
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:212
 msgid "Fill Style"
 msgstr "Aɣanib n taččart"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:313
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:223
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:220
 msgid "Fill and Outline Shape"
 msgstr "Talɣa n taččart aked talɣa tuffiɣt"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1100
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1386
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
 msgid "Finalized"
 msgstr "Ifukk"
 
@@ -883,7 +890,7 @@ msgstr "Tuttya taratakt n ukalku"
 msgid "Flip Vertical"
 msgstr "Tuttya taratakt"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:123
+#: ../Pinta.Tools/Tools/FloodTool.cs:121
 msgid "Flood Mode"
 msgstr "Anaw n tačart"
 
@@ -897,23 +904,23 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:156
+#: ../Pinta.Tools/Tools/TextTool.cs:148
 msgid "Font"
 msgstr "Tasefsit"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:28
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:27
 msgid "Fragment"
 msgstr "Aseftutes"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:134
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:124
 msgid "Fragments"
 msgstr "Iceqfan"
 
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:51
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
 msgstr "Talɣa tilellit"
 
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:24
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:23
 msgid "Frosted Glass"
 msgstr "Verre dépoli"
 
@@ -925,20 +932,20 @@ msgstr "Agdil ačuran"
 msgid "Gallery"
 msgstr "Tagnarit"
 
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:25
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
 msgstr "Flou gaussien"
 
-#: ../Pinta.Tools/Tools/FloodTool.cs:134
+#: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
 msgstr "Amatu"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:27
+#: ../Pinta.Effects/Effects/GlowEffect.cs:26
 msgid "Glow"
 msgstr "Halo"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:49
-#: ../Pinta.Tools/Tools/GradientTool.cs:178
+#: ../Pinta.Tools/Tools/GradientTool.cs:46
+#: ../Pinta.Tools/Tools/GradientTool.cs:175
 msgid "Gradient"
 msgstr "Dégradé"
 
@@ -972,7 +979,7 @@ msgstr ""
 msgid "Hide Layer"
 msgstr "Beqqeḍ akalku"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:59
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
 "Conseil : Pour un meilleur résultat, utilisez d'abord les outils de "
@@ -983,22 +990,22 @@ msgid "History"
 msgstr "Amazray"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:205
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:224
 msgid "Horizontal blue (B)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:227
 msgid "Horizontal green (G)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
 msgid "Horizontal red (R)"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:62
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
 msgstr "Ini"
@@ -1007,7 +1014,7 @@ msgstr "Ini"
 msgid "Hue & Sat"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:24
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
 msgid "Hue / Saturation"
 msgstr "Ini / Tawant"
 
@@ -1019,11 +1026,11 @@ msgstr "Ifuyla ICO ur zmiren ara ad ɛeddin 255 x 255 n ipiksilen."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Ma yella ur teskelseḍ ara, ibeddilen akk ad ṛuḥen."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:241 ../Pinta/MainWindow.cs:459
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:463
 msgid "Image"
 msgstr "Tugna"
 
-#: ../xdg/pinta.desktop.in.h:3
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
 msgid "Image Editor"
 msgstr "Amaẓrag n tugna"
 
@@ -1060,11 +1067,11 @@ msgstr "Kter seg ufaylu..."
 msgid "Inches"
 msgstr "Pouces"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:157
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:146
 msgid "Ink Outline"
 msgstr "Contours à l'encre"
 
-#: ../Pinta.Effects/Effects/InkSketchEffect.cs:33
+#: ../Pinta.Effects/Effects/InkSketchEffect.cs:35
 msgid "Ink Sketch"
 msgstr "Croquis à l'encre"
 
@@ -1097,9 +1104,9 @@ msgstr "Sbedd..."
 msgid "Installed"
 msgstr "Yettusbedd"
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:169
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:137
-#: ../Pinta.Effects/Effects/TileEffect.cs:232
+#: ../Pinta.Effects/Effects/TileEffect.cs:230
 msgid "Intensity"
 msgstr "Teqseḥ"
 
@@ -1110,7 +1117,7 @@ msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:201
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
 msgid "Invert Colors"
 msgstr "Tti initen"
 
@@ -1119,7 +1126,7 @@ msgstr "Tti initen"
 msgid "Invert Selection"
 msgstr "Tti tafrayt"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:200
+#: ../Pinta.Tools/Tools/TextTool.cs:192
 msgid "Italic"
 msgstr "Tira yeknan"
 
@@ -1132,7 +1139,7 @@ msgstr "Qualité JPEG"
 msgid "Jarvis-Judice-Ninke"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:27
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
 msgstr "Fractale de Julia"
 
@@ -1144,7 +1151,7 @@ msgstr "Paysage"
 msgid "Lasso Select"
 msgstr "Sélection lasso"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:240
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
 msgid "Layer"
 msgstr "Akalku"
 
@@ -1179,7 +1186,7 @@ msgstr ""
 msgid "Layers"
 msgstr "Ikalkuten"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:228
+#: ../Pinta.Tools/Tools/TextTool.cs:220
 msgid "Left Align"
 msgstr "Tarigla ɣer zelmaḍ"
 
@@ -1229,8 +1236,8 @@ msgid ""
 "Right click to use the secondary color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:53
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1238,7 +1245,7 @@ msgstr ""
 "Tussda tazelmaḍt iwakken ad tsunɣeḍ s yini azwaran, tussda tayefust i yini "
 "asnay."
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:54
+#: ../Pinta.Tools/Tools/EraserTool.cs:57
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
@@ -1260,13 +1267,13 @@ msgstr ""
 "Tussda tazelmaḍt iwakken ad tserseḍ taḥnaccaḍt, sakin sekcem aḍris i tebɣiɣ. "
 "Ini n uḍris d ini agejdan."
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:60
+#: ../Pinta.Tools/Tools/RecolorTool.cs:58
 msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:54
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:50
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
@@ -1292,7 +1299,7 @@ msgid ""
 "Click and drag to zoom in selection."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:337
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:331
 msgid "Length"
 msgstr "Teɣzi"
 
@@ -1304,7 +1311,7 @@ msgstr "Iswiren"
 msgid "Levels Adjustment"
 msgstr "Aswati n iswiren"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:91
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:90
 msgid "License"
 msgstr "Turagt"
 
@@ -1321,12 +1328,12 @@ msgstr "Ssfaw"
 msgid "Lighting"
 msgstr "Asfaw"
 
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:68
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Lightness"
 msgstr "Tefses"
 
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
-#: ../Pinta.Effects/Effects/GradientHelper.cs:48
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:47
 msgid "Lime Lemon"
 msgstr ""
 
@@ -1334,15 +1341,15 @@ msgstr ""
 msgid "Line/Curve"
 msgstr "Izirig/Azlig"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:186
+#: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
 msgstr "Dégradé linéaire en diamant"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:181
 msgid "Linear Gradient"
 msgstr "Dégradé linéaire"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:182
 msgid "Linear Reflected Gradient"
 msgstr "Dégradé linéaire réfléchi"
 
@@ -1359,7 +1366,7 @@ msgstr "Tifawit"
 msgid "Magic Wand Select"
 msgstr "Tafrayt s tɛekkazt tasḥart"
 
-#: ../Pinta/MainWindow.cs:441
+#: ../Pinta/MainWindow.cs:445
 msgid "Main Menu"
 msgstr ""
 
@@ -1368,16 +1375,16 @@ msgstr ""
 msgid "Maintain aspect ratio"
 msgstr "Eǧǧ assaɣ n tmeẓri"
 
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:28
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
 msgstr "Fractale de Mandelbrot"
 
 #. Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
-#: ../Pinta.Effects/Effects/GradientHelper.cs:52
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:51
 msgid "Martian Lava"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MedianEffect.cs:24
+#: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "Anamas"
 
@@ -1390,11 +1397,11 @@ msgstr ""
 msgid "Merge Layer Down"
 msgstr "Smezdi aked ukalku n wadda"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:197
+#: ../Pinta.Tools/Tools/GradientTool.cs:194
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:917
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:921
 msgid "Modified"
 msgstr "Yettwabeddel"
 
@@ -1402,7 +1409,7 @@ msgstr "Yettwabeddel"
 msgid "More Information..."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:28
+#: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
 msgid "Motion Blur"
 msgstr "Flou de mouvement"
 
@@ -1461,19 +1468,19 @@ msgstr "Amaynut..."
 msgid "No Items Found"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:29
-#: ../Pinta.Effects/Effects/MedianEffect.cs:28
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:28
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
+#: ../Pinta.Effects/Effects/MedianEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
 msgid "Noise"
 msgstr "Asxerxec"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:263 ../Pinta.Tools/Tools/TextTool.cs:275
+#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:267
 msgid "Normal"
 msgstr "Amagnu"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:350
+#: ../Pinta.Core/Classes/BaseTool.cs:345
 msgid "Normal Blending"
 msgstr "Tasuddest  tamagnut"
 
@@ -1481,12 +1488,12 @@ msgstr "Tasuddest  tamagnut"
 msgid "Normal Size"
 msgstr "Tiddi tamagnutt"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:276
+#: ../Pinta.Tools/Tools/TextTool.cs:268
 msgid "Normal and Outline"
 msgstr "D amagnu s yiran"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:140
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:176
+#: ../Pinta.Effects/Effects/CellsEffect.cs:164
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:183
 msgid "Number of Cells"
 msgstr ""
 
@@ -1498,16 +1505,16 @@ msgstr ""
 msgid "OK"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:15
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:23
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:23
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:22
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:22
 msgid "Object"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:168
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:139
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:151
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:167
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:133
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:140
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
 msgid "Offset"
 msgstr "Asekḥer"
@@ -1518,7 +1525,7 @@ msgstr "Asekḥer"
 msgid "Offset Selection"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:27
+#: ../Pinta.Effects/Effects/OilPaintingEffect.cs:26
 msgid "Oil Painting"
 msgstr "Taklut s zzit"
 
@@ -1543,7 +1550,7 @@ msgstr "Ldi tugna"
 msgid "Open Image File"
 msgstr "Ldi afaylu n tugna"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 msgid "Open Line/Curve Series"
 msgstr "Ineḍfuren n izirigen/izligen yeldin"
 
@@ -1564,28 +1571,28 @@ msgstr "Taɣda :"
 msgid "Original"
 msgstr "Amadray"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:277
+#: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Outline"
 msgstr "Tafrayt n yiran"
 
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:217
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:218
 msgid "Outline Border"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:24
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:23
 msgid "Outline Edge"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:19
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:18
 msgid "Outline Object"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:311
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:221
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:218
 msgid "Outline Shape"
 msgstr "Talɣa tuffiɣt"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:291
+#: ../Pinta.Tools/Tools/TextTool.cs:283
 msgid "Outline width"
 msgstr "Tehri n yiri"
 
@@ -1601,7 +1608,7 @@ msgstr "Histogramme de sortie"
 msgid "Overlay"
 msgstr "Recouvrement"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:351
+#: ../Pinta.Core/Classes/BaseTool.cs:346
 msgid "Overwrite"
 msgstr "Sefsex"
 
@@ -1609,16 +1616,16 @@ msgstr "Sefsex"
 msgid "Paint Bucket"
 msgstr "Aqbuc n teklut"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:55
 msgid "Paintbrush"
 msgstr "Amfezwi"
 
 #: ../Pinta.Core/Actions/EditActions.cs:235
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
 msgid "Palette"
 msgstr "Tapaliḍt"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette Source"
 msgstr ""
 
@@ -1650,11 +1657,11 @@ msgstr "Senteḍ deg ukalku amaynut"
 msgid "Pencil"
 msgstr "Akeryun"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:30
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:29
 msgid "Pencil Sketch"
 msgstr "Croquis au crayon"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:85
 msgid "Pencil Tip Size"
 msgstr "Taille de la mine du crayon"
 
@@ -1662,16 +1669,22 @@ msgstr "Taille de la mine du crayon"
 msgid "Percentile"
 msgstr "Afmiḍi"
 
-#: ../Pinta.Effects/Effects/GlowEffect.cs:31
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:28
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:28
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:59
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:53
+#: ../Pinta.Effects/Effects/GlowEffect.cs:30
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:27
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:52
 msgid "Photo"
 msgstr "Tugna"
 
-#: ../xdg/pinta.desktop.in.h:1 ../Pinta/Actions/Help/AboutDialogAction.cs:66
-#: ../Pinta/Main.cs:71 ../Pinta/MainWindow.cs:61
+#. Translators: Arrangement of points similar to how sunflower seeds are arranged
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:133
+msgid "Phyllotaxis"
+msgstr ""
+
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
+#: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
 msgstr "Pinta"
 
@@ -1683,7 +1696,7 @@ msgstr "Tamɣiwent n isiɣzaf Pinta - Tiɣerɣert tusgitt"
 msgid "Pinta Community Addins - Platform-Specific"
 msgstr "Tamɣiwent n isiɣzaf Pinta - Tiɣerɣert tulmist"
 
-#: ../xdg/pinta.desktop.in.h:4
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
 msgstr "Amaẓrag n tugna n Pinta"
 
@@ -1695,7 +1708,7 @@ msgstr "Asmel n web n Pinta"
 msgid "Pinta does not support saving images in this file format."
 msgstr "Pinta ur yedhil ara asekles n tugniwin deg umasal-agi n ufaylu."
 
-#: ../xdg/pinta.appdata.xml.in.h:1
+#: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
 msgid ""
 "Pinta is a image editing, drawing and painting application with a simple yet "
 "powerful interface. Pinta has a wide range of drawing tools, including: "
@@ -1708,11 +1721,11 @@ msgstr ""
 msgid "Pinta supports the following file formats:"
 msgstr ""
 
-#: ../Pinta.Core/Extensions/OtherExtensions.cs:168
+#: ../Pinta.Core/Extensions/OtherExtensions.cs:167
 msgid "Pinta supports the following palette formats:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/PixelateEffect.cs:24
+#: ../Pinta.Effects/Effects/PixelateEffect.cs:23
 msgid "Pixelate"
 msgstr "Eg ipiksilen"
 
@@ -1721,7 +1734,7 @@ msgid "Pixels"
 msgstr "Ipiksilen"
 
 #. Translators: Gradient with different shades of brownish yellow
-#: ../Pinta.Effects/Effects/GradientHelper.cs:56
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:55
 msgid "Piña Colada"
 msgstr ""
 
@@ -1729,16 +1742,31 @@ msgstr ""
 msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:603
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:806
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:607
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
 msgid "Point Added"
 msgstr "Tanqiḍt tettwarenna"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:654
+#: ../Pinta.Effects/Effects/CellsEffect.cs:148
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
+msgid "Point Arrangement"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/CellsEffect.cs:161
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
+msgid "Point Color"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
 msgid "Point Deleted"
 msgstr "Tanqiḍt tettwakkes"
 
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:27
+#: ../Pinta.Effects/Effects/CellsEffect.cs:157
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:206
+msgid "Point Size"
+msgstr ""
+
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
 msgstr "Transformation Symétrique"
 
@@ -1746,7 +1774,7 @@ msgstr "Transformation Symétrique"
 msgid "Portrait"
 msgstr "Portrait"
 
-#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:130
+#: ../Pinta.Effects/Effects/AlignObjectEffect.cs:129
 msgid "Position"
 msgstr ""
 
@@ -1755,7 +1783,7 @@ msgstr ""
 msgid "Posterize"
 msgstr "Postériser"
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:176
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:138
 msgid "Power"
 msgstr "Tazmert"
 
@@ -1764,11 +1792,11 @@ msgstr "Tazmert"
 msgid "Preserve"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/GradientHelper.cs:11
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:10
 msgid "Preset Gradient"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:147
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Preset Palettes"
 msgstr ""
 
@@ -1788,13 +1816,13 @@ msgstr "Azwaran"
 msgid "Print"
 msgstr "Siggez"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:167
+#: ../Pinta.Effects/Effects/CellsEffect.cs:187
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:160
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:92
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:160
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:91
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:213
 msgid "Quality"
 msgstr "Taɣara"
 
@@ -1810,63 +1838,64 @@ msgstr "Ffeɣ"
 msgid "RGB"
 msgstr "RVB"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:23
 msgid "Radial Blur"
 msgstr "Flou radial"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:187
+#: ../Pinta.Tools/Tools/GradientTool.cs:184
 msgid "Radial Gradient"
 msgstr "Dégradé radial"
 
-#: ../Pinta.Effects/Effects/FeatherEffect.cs:168
-#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:248
-#: ../Pinta.Effects/Effects/GlowEffect.cs:78
-#: ../Pinta.Effects/Effects/MedianEffect.cs:60
-#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:205
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:89
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:92
+#: ../Pinta.Effects/Effects/FeatherEffect.cs:167
+#: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
+#: ../Pinta.Effects/Effects/GlowEffect.cs:77
+#: ../Pinta.Effects/Effects/MedianEffect.cs:59
+#: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
 msgid "Radius"
 msgstr "Aqar"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:143
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/GradientHelper.cs:17
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:125
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:220
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:16
 msgid "Random"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:158
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:209
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:172
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:195
+#: ../Pinta.Effects/Effects/CellsEffect.cs:178
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:151
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:161
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
 msgid "Random Color Scheme Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:188
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
 msgid "Random Colors"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:178
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:200
+#: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:142
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:143
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
+#: ../Pinta.Effects/Effects/CellsEffect.cs:151
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
 msgid "Random Point Locations"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:153
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
 msgid "Recently Used Colors"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/RecolorTool.cs:57
+#: ../Pinta.Tools/Tools/RecolorTool.cs:55
 msgid "Recolor"
 msgstr "Ales aseɣmu"
 
@@ -1888,7 +1917,7 @@ msgstr "Azeggaɣ"
 msgid "Red  "
 msgstr "Azeggaɣ  "
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:24
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:23
 msgid "Red Eye Removal"
 msgstr "Kkes tezweɣ n tiḍt"
 
@@ -1896,7 +1925,7 @@ msgstr "Kkes tezweɣ n tiḍt"
 msgid "Redo"
 msgstr "Err-d"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:24
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:23
 msgid "Reduce Noise"
 msgstr "Ssemẓi asxerxec"
 
@@ -1908,11 +1937,11 @@ msgstr "Reflet"
 msgid "Refresh"
 msgstr "Mucceḍ"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:92
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:91
 msgid "Released under the MIT X11 License."
 msgstr "Mis à disposition sous licence MIT X11"
 
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:41
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:40
 msgid "Relief"
 msgstr "Relief"
 
@@ -1920,11 +1949,11 @@ msgstr "Relief"
 msgid "Rename Layer"
 msgstr "Beddel isem n ukalku"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:27
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:38
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:33
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:34
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:28
+#: ../Pinta.Effects/Effects/CellsEffect.cs:25
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:32
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
 msgid "Render"
 msgstr "Eg tiririt"
 
@@ -1944,7 +1973,7 @@ msgstr ""
 msgid "Resampling:"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:505
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:566
 msgid "Reseed"
 msgstr "Regénérer"
 
@@ -1987,19 +2016,19 @@ msgstr "Ales tisekta n tpaliḍt"
 msgid "Restart Pinta"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:161
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:212
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:175
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:198
+#: ../Pinta.Effects/Effects/CellsEffect.cs:181
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:154
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:164
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
 msgid "Reverse Color Scheme"
 msgstr ""
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:185
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:252
+#: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Right Align"
 msgstr "Tarigla ɣer yefus"
 
@@ -2027,12 +2056,12 @@ msgstr "Tuzzya tasragant 90°"
 msgid "Rotate 90° Counter-Clockwise"
 msgstr "Tuzzya mgal asrag 90°"
 
-#: ../Pinta.Effects/Effects/FragmentEffect.cs:140
-#: ../Pinta.Effects/Effects/TileEffect.cs:226
+#: ../Pinta.Effects/Effects/FragmentEffect.cs:132
+#: ../Pinta.Effects/Effects/TileEffect.cs:222
 msgid "Rotation"
 msgstr "Tuzzya"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Rounded Line Series"
 msgstr "Ineḍfuren n izirigen imdewren"
 
@@ -2052,7 +2081,7 @@ msgstr "Tiggtin n teɣda"
 msgid "Rulers"
 msgstr "Taɣdiwin"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:195
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
 msgid "Sampling"
 msgstr "Alemmec"
 
@@ -2065,11 +2094,11 @@ msgid "Sat & Value"
 msgstr ""
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:46
-#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:65
+#: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "Tawant"
 
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:57
 msgid "Saturation Percentage"
 msgstr "Pourcentage de saturation"
 
@@ -2101,7 +2130,7 @@ msgstr "Sekles afaylu n tpaliḍt"
 msgid "Save changes to image \"{0}\" before closing?"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CloudsEffect.cs:173
+#: ../Pinta.Effects/Effects/CloudsEffect.cs:134
 msgid "Scale"
 msgstr "Taskala"
 
@@ -2118,7 +2147,7 @@ msgstr "Asnay"
 msgid "Select All"
 msgstr "Fren kulec"
 
-#: ../Pinta.Effects/Effects/GradientHelper.cs:14
+#: ../Pinta.Effects/Utilities/GradientHelper.cs:13
 msgid "Selected Colors"
 msgstr ""
 
@@ -2130,15 +2159,15 @@ msgstr "Sépia"
 msgid "Set Number of Colors"
 msgstr "Sbadu amḍan n yiniten"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:326
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
 msgid "Shape Type"
 msgstr "Annaw n talɣa"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:245
+#: ../Pinta.Effects/Effects/TileEffect.cs:244
 msgid "Sharp Edges"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/SharpenEffect.cs:24
+#: ../Pinta.Effects/Effects/SharpenEffect.cs:23
 msgid "Sharpen"
 msgstr "Augmenter la netteté"
 
@@ -2165,6 +2194,11 @@ msgstr ""
 msgid "Show Layer"
 msgstr "Beqqeḍ akalku"
 
+#: ../Pinta.Effects/Effects/CellsEffect.cs:154
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:203
+msgid "Show Points"
+msgstr ""
+
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
 msgid "Show Value"
 msgstr ""
@@ -2183,15 +2217,15 @@ msgstr ""
 msgid "Sierra Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:222
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
 msgstr "Apixil asuf"
 
-#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:295
+#: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:289
 msgid "Size"
 msgstr "Tiddi"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:263
+#: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
 msgstr "Alewwaɣ"
 
@@ -2199,11 +2233,11 @@ msgstr "Alewwaɣ"
 msgid "Soft Light"
 msgstr "Tafat taxfifant"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:55
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:54
 msgid "Soften Portrait"
 msgstr "Adoucir le portrait"
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:126
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
 msgid "Softness"
 msgstr "Douceur"
 
@@ -2219,8 +2253,8 @@ msgstr "Imkuẓen"
 msgid "Status Bar"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:91
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:148
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
 msgstr "Force"
 
@@ -2229,18 +2263,18 @@ msgstr "Force"
 msgid "Stucki"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:33
-#: ../Pinta.Effects/Effects/EmbossEffect.cs:33
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:28
-#: ../Pinta.Effects/Effects/ReliefEffect.cs:34
+#: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:32
+#: ../Pinta.Effects/Effects/EmbossEffect.cs:32
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:27
+#: ../Pinta.Effects/Effects/ReliefEffect.cs:33
 msgid "Stylize"
 msgstr "Seɣneb"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:205
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
 msgid "Switch to Pencil tool"
 msgstr "Beddel ɣer ufecku akeryun"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:204
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
 msgid "Switch to previous tool"
 msgstr "Uɣal ɣer ufecku uzwir"
 
@@ -2252,12 +2286,12 @@ msgstr "Aḍris"
 msgid "Text - Finalize"
 msgstr "Aḍris - Fakk"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:266
+#: ../Pinta.Tools/Tools/TextTool.cs:258
 msgid "Text Style"
 msgstr "Aɣanib n uḍris"
 
 #. Translators: {0} is the name of an add-in.
-#: ../Pinta/MainWindow.cs:317
+#: ../Pinta/MainWindow.cs:321
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
@@ -2320,7 +2354,7 @@ msgid ""
 "will also be uninstalled:"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:134
+#: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:133
 msgid "Thickness"
 msgstr "Tuzert"
 
@@ -2328,15 +2362,15 @@ msgstr "Tuzert"
 msgid "This format does not support layers. Flatten image?"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:29
+#: ../Pinta.Effects/Effects/TileEffect.cs:28
 msgid "Tile Reflection"
 msgstr "Réflexion mosaïque"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:229
+#: ../Pinta.Effects/Effects/TileEffect.cs:226
 msgid "Tile Size"
 msgstr "Tiddi n temkuẓin"
 
-#: ../Pinta.Effects/Effects/TileEffect.cs:235
+#: ../Pinta.Effects/Effects/TileEffect.cs:234
 msgid "Tile Type"
 msgstr ""
 
@@ -2346,9 +2380,9 @@ msgstr "Tixidest : tussda tayfust iwakken ad tekkseḍ tinqiḍin n usenqed."
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
-#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:54
-#: ../Pinta.Tools/Tools/FloodTool.cs:124
-#: ../Pinta.Tools/Tools/RecolorTool.cs:198
+#: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:53
+#: ../Pinta.Tools/Tools/FloodTool.cs:122
+#: ../Pinta.Tools/Tools/RecolorTool.cs:196
 msgid "Tolerance"
 msgstr "Tolérance"
 
@@ -2388,7 +2422,7 @@ msgstr "Takarḍa n usiweḍ"
 msgid "Translate This Application"
 msgstr "Suqqel asnas-agi"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:204
+#: ../Pinta.Tools/Tools/GradientTool.cs:201
 msgid "Transparency Mode"
 msgstr ""
 
@@ -2401,7 +2435,7 @@ msgstr "Amseɣseɣ"
 msgid "Turbulence"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:25
+#: ../Pinta.Effects/Effects/TwistEffect.cs:27
 msgid "Twist"
 msgstr "Zleg"
 
@@ -2410,12 +2444,12 @@ msgstr "Zleg"
 msgid "Two-Row Sierra"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:259
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:175
+#: ../Pinta.Tools/Tools/EraserTool.cs:322
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:173
 msgid "Type"
 msgstr "Anaw"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:212
+#: ../Pinta.Tools/Tools/TextTool.cs:204
 msgid "Underline"
 msgstr "Iderrer"
 
@@ -2423,7 +2457,7 @@ msgstr "Iderrer"
 msgid "Undo"
 msgstr "Semmet"
 
-#: ../Pinta.Effects/Effects/UnfocusEffect.cs:24
+#: ../Pinta.Effects/Effects/UnfocusEffect.cs:23
 msgid "Unfocus"
 msgstr "Défocaliser"
 
@@ -2463,7 +2497,7 @@ msgstr ""
 msgid "Updates"
 msgstr "Amucceḍ"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:172
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2472,7 +2506,7 @@ msgstr ""
 "angles faibles. Utilisez une grande qualité pour les visualisations finales, "
 "les grandes images, et les grands angles."
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:99
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
 msgstr "Aseqdec n tikunin si :"
 
@@ -2486,26 +2520,26 @@ msgid "Version: {0}"
 msgstr ""
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:215
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:234
 msgid "Vertical blue (B)"
 msgstr ""
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:218
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:237
 msgid "Vertical green (G)"
 msgstr ""
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:221
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:240
 msgid "Vertical red (R)"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:465
+#: ../Pinta/MainWindow.cs:469
 msgid "View"
 msgstr ""
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
-#: ../Pinta.Effects/Effects/VignetteEffect.cs:50
+#: ../Pinta.Effects/Effects/VignetteEffect.cs:49
 msgid "Vignette"
 msgstr ""
 
@@ -2513,11 +2547,11 @@ msgstr ""
 msgid "Visible"
 msgstr "Visible"
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:22
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:21
 msgid "Voronoi Diagram"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:132
+#: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:133
 msgid "Warmth"
 msgstr "Tazɣelt"
 
@@ -2534,7 +2568,7 @@ msgid "Width:"
 msgstr "Tehri :"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:207
-#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Actions/ViewActions.cs:395
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:365
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:374
 msgid "Window"
@@ -2567,14 +2601,14 @@ msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:163
-#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
+#: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:151
+#: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:164
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
 msgstr "Zoom"
 
-#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:24
+#: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:26
 msgid "Zoom Blur"
 msgstr "Flou d'arrière plan"
 
@@ -2590,7 +2624,7 @@ msgstr "Ssemẓi"
 msgid "Zoom to Selection"
 msgstr "Ssezg tiddi ɣer tefrayt"
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:402
 msgid "_Adjustments"
 msgstr "Iswatiyen"
 
@@ -2607,23 +2641,23 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:391
+#: ../Pinta/MainWindow.cs:395
 msgid "_Edit"
 msgstr "Taẓrigt"
 
-#: ../Pinta/MainWindow.cs:390
+#: ../Pinta/MainWindow.cs:394
 msgid "_File"
 msgstr "Afaylu"
 
-#: ../Pinta/MainWindow.cs:403
+#: ../Pinta/MainWindow.cs:407
 msgid "_Help"
 msgstr "Tallalt"
 
-#: ../Pinta/MainWindow.cs:394
+#: ../Pinta/MainWindow.cs:398
 msgid "_Image"
 msgstr "Tugna"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:400
 msgid "_Layers"
 msgstr "Ikalkuten"
 
@@ -2638,19 +2672,19 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:397
 msgid "_View"
 msgstr "Abeqqeḍ"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:406
 msgid "_Window"
 msgstr "Asfaylu"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:83
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "by Pinta contributors"
 msgstr "par les contributeurs de Pinta"
 
-#: ../xdg/pinta.desktop.in.h:5
+#: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 
@@ -2665,7 +2699,7 @@ msgstr ""
 msgid "pixels"
 msgstr "ipiksilen"
 
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:74
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:73
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -2698,7 +2732,7 @@ msgstr ""
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:377
+#: ../Pinta.Core/Actions/ViewActions.cs:376
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
