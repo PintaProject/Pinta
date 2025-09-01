@@ -27,6 +27,7 @@ Makefile.in
 missing
 obj
 pinta.pc
+Pinta.sln.DotSettings.user
 po/.intltool-merge-cache
 po/Makefile.in.in
 po/POTFILES
