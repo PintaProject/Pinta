@@ -121,8 +121,7 @@ public abstract class SelectTool : BaseTool
 
 			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
 
-			document.Selection.Origin = handle.Rectangle.Location ();
-			document.Selection.End = handle.Rectangle.EndLocation ();
+			document.Selection.HandleBounds = handle.Rectangle;
 			document.Workspace.Invalidate (last_dirty.Union (dirty));
 			last_dirty = dirty;
 
@@ -228,7 +227,7 @@ public abstract class SelectTool : BaseTool
 	private void LoadFromDocument (Document document)
 	{
 		DocumentSelection selection = document.Selection;
-		handle.Rectangle = RectangleD.FromPoints (selection.Origin, selection.End);
+		handle.Rectangle = selection.HandleBounds;
 		ShowHandles (document.Selection.Visible && tools.CurrentTool == this);
 	}
 }
