@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using Cairo;
 using NUnit.Framework;
 
 namespace Pinta.Core.Tests;
@@ -8,17 +7,24 @@ namespace Pinta.Core.Tests;
 internal sealed partial class BlendOpTests
 {
 	private static readonly ImmutableArray<TestCaseData> normal_io_cases;
+	private static readonly ImmutableArray<TestCaseData> multiply_io_cases;
+
 	private static readonly ImmutableArray<TestCaseData> op_name_cases;
 	private static readonly ImmutableArray<TestCaseData> visual_cases;
+
 	static BlendOpTests ()
 	{
 		UserBlendOps.NormalBlendOp normalOp = new ();
+		UserBlendOps.MultiplyBlendOp multiplyOp = new ();
 
 		normal_op = normalOp;
+		multiply_op = multiplyOp;
 
 		normal_io_cases = [.. CreateNormalIOCases (normalOp)];
-		op_name_cases = [.. NamingTests (normalOp)];
-		visual_cases = [.. VisualTests (normalOp)];
+		multiply_io_cases = [.. CreateMultiplyIOCases (multiplyOp)];
+
+		op_name_cases = [.. NamingTests (normalOp, multiplyOp)];
+		visual_cases = [.. VisualTests (normalOp, multiplyOp)];
 	}
 
 	[TestCaseSource (nameof (op_name_cases))]
@@ -28,6 +34,7 @@ internal sealed partial class BlendOpTests
 	}
 
 	[TestCaseSource (nameof (normal_io_cases))]
+	[TestCaseSource (nameof (multiply_io_cases))]
 	public void Output_Is_Expected (UserBlendOp blendOp, ColorBgra bottom, ColorBgra top, ColorBgra expected)
 	{
 		ColorBgra result = blendOp.Apply (bottom, top);
