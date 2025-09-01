@@ -17,7 +17,7 @@ env:
 
 jobs:
   build-ubuntu:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     # Test building with .NET 8 and .NET 9
     strategy:
@@ -71,8 +71,15 @@ jobs:
         path: pinta-3.1.zip
         if-no-files-found: error
 
-  build-macos-x86_64:
-    runs-on: macos-13
+  build-macos:
+    # Build for both intel and arm64
+    strategy:
+      matrix:
+        build: [ { dotnet_rid: osx-arm64, lib_path: "/opt/homebrew/lib", runner: macos-14 }, { dotnet_rid: osx-x64, lib_path: "/usr/local/lib", runner: macos-13 }]
+
+    name: build-macos (${{matrix.build.dotnet_rid}})
+
+    runs-on: ${{matrix.build.runner}}
 
     steps:
     - uses: actions/checkout@v5
@@ -90,7 +97,7 @@ jobs:
     - name: Test
       env:
         # Add libraries from homebrew to the search path so they can be loaded by gir.core
-        DYLD_LIBRARY_PATH: "/usr/local/lib"
+        DYLD_LIBRARY_PATH: ${{matrix.build.lib_path}}
       run: dotnet test Pinta.sln -c Release
 
     - name: Add Cert to Keychain
@@ -106,59 +113,13 @@ jobs:
         MAC_DEV_PASSWORD: ${{ secrets.MAC_DEV_PASSWORD }}
       run: |
         cd installer/macos
-        ./build_installer.sh osx-x64
+        ./build_installer.sh ${{matrix.build.dotnet_rid}}
 
     - name: Upload Installer
       if: github.event_name != 'pull_request'
       uses: actions/upload-artifact@v4
       with:
-        name: "Pinta-x86_64.dmg"
-        path: installer/macos/Pinta.dmg
-        if-no-files-found: error
-
-  build-macos-arm64:
-    # Note the macos-14 runner is arm64, while the macos-13 runner is Intel
-    runs-on: macos-14
-
-    steps:
-    - uses: actions/checkout@v5
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: ${{env.DOTNET_VERSION}}
-    - name: Install Dependencies
-      env:
-        # Work around webp-pixbuf-loader issue: https://github.com/Homebrew/homebrew-core/issues/139497
-        HOMEBREW_NO_INSTALL_FROM_API: 1
-      run: brew install libadwaita adwaita-icon-theme gettext webp-pixbuf-loader
-    - name: Build
-      run: dotnet build Pinta.sln -c Release
-    - name: Test
-      env:
-        # Add libraries from homebrew to the search path so they can be loaded by gir.core
-        DYLD_LIBRARY_PATH: "/opt/homebrew/lib"
-      run: dotnet test Pinta.sln -c Release
-
-    - name: Add Cert to Keychain
-      if: github.event_name != 'pull_request'
-      uses: apple-actions/import-codesign-certs@v5
-      with:
-        p12-file-base64: ${{ secrets.MAC_CERTS_BASE64 }}
-        p12-password: ${{ secrets.MAC_CERTS_PASSWORD }}
-
-    - name: Build Installer
-      if: github.event_name != 'pull_request'
-      env:
-        MAC_DEV_PASSWORD: ${{ secrets.MAC_DEV_PASSWORD }}
-      run: |
-        cd installer/macos
-        ./build_installer.sh osx-arm64
-
-    - name: Upload Installer
-      if: github.event_name != 'pull_request'
-      uses: actions/upload-artifact@v4
-      with:
-        name: "Pinta-arm64.dmg"
+        name: "Pinta-${{matrix.build.dotnet_rid}}.dmg"
         path: installer/macos/Pinta.dmg
         if-no-files-found: error
 
