@@ -42,8 +42,15 @@ public sealed class DocumentSelection
 	public List<List<IntPoint>> SelectionPolygons { get; set; } = [];
 	public Clipper SelectionClipper { get; } = new ();
 
-	public PointD Origin { get; set; }
-	public PointD End { get; set; }
+	/// <summary>
+	/// Bounding rectangle which is used by tools to display interactive
+	/// handles for manipulating the selection.
+	/// <remarks>
+	/// This might not reflect the bounds of the entire selection, for example
+	/// when creating a rectangle selection in "union" mode.
+	/// </remarks>
+	/// </summary>
+	public RectangleD HandleBounds { get; set; }
 
 	private bool visible = true;
 	public bool Visible {
@@ -94,8 +101,7 @@ public sealed class DocumentSelection
 	{
 		return new () {
 			SelectionPolygons = [.. SelectionPolygons],
-			Origin = new PointD (Origin.X, Origin.Y),
-			End = new PointD (End.X, End.Y),
+			HandleBounds = HandleBounds,
 			visible = visible,
 		};
 	}
@@ -166,15 +172,15 @@ public sealed class DocumentSelection
 			newPolygons.Add (newPolygon);
 		}
 
-		var origin = Origin;
-		var end = End;
-		transform.TransformPoint (ref origin);
-		transform.TransformPoint (ref end);
+		// Note this currently doesn't behave well with rotations, since we only
+		// store an axis-aligned bounding rectangle.
+		RectangleD transformedBounds = RectangleD.FromPoints (
+			transform.TransformPoint (HandleBounds.Location ()),
+			transform.TransformPoint (HandleBounds.EndLocation ()));
 
 		return new () {
 			SelectionPolygons = newPolygons,
-			Origin = origin,
-			End = end,
+			HandleBounds = transformedBounds,
 			visible = visible,
 		};
 	}
@@ -315,8 +321,7 @@ public sealed class DocumentSelection
 		SelectionPolygons.Clear ();
 		SelectionPolygons.Add (CreateRectanglePolygon (r));
 
-		Origin = new PointD (r.X, r.Y);
-		End = new PointD (r.Right, r.Bottom);
+		HandleBounds = r;
 
 		MarkDirty ();
 	}
@@ -400,8 +405,7 @@ public sealed class DocumentSelection
 	public void Clear ()
 	{
 		SelectionPolygons.Clear ();
-		Origin = new PointD (0, 0);
-		End = new PointD (0, 0);
+		HandleBounds = RectangleD.Zero;
 		MarkDirty ();
 	}
 

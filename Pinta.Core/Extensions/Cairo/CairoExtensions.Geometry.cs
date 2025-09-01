@@ -293,14 +293,14 @@ partial class CairoExtensions
 		return result;
 	}
 
-	public static void TransformPoint (
+	public static PointD TransformPoint (
 		this Matrix m,
-		ref PointD p)
+		in PointD p)
 	{
 		double newX = p.X;
 		double newY = p.Y;
 		m.TransformPoint (ref newX, ref newY);
-		p = new PointD (newX, newY);
+		return new (newX, newY);
 	}
 
 	private static void GetRectangle (this Region region, int i, out CairoRectangleInt rect)
