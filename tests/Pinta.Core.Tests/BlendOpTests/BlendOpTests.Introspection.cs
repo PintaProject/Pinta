@@ -7,9 +7,11 @@ partial class BlendOpTests
 {
 	private static IEnumerable<TestCaseData> NamingTests (
 		UserBlendOps.NormalBlendOp normalOp,
-		UserBlendOps.MultiplyBlendOp multiplyOp)
+		UserBlendOps.MultiplyBlendOp multiplyOp,
+		UserBlendOps.ScreenBlendOp screenOp)
 	{
 		yield return new (normalOp, "Normal");
 		yield return new (multiplyOp, "Multiply");
+		yield return new (screenOp, "Screen");
 	}
 }
