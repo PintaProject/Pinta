@@ -26,6 +26,7 @@ Thanks to the following contributors who worked on this release:
 - Random seed values for effects can now be directly controlled, in addition to use the Reseed button (#1592, #1591)
 - Support for color picking in `SimpleEffectDialog`. Useful for add-in developers (#1611)
 - The text tool now supports using Ctrl+Backspace to delete words (#1680)
+- Added a Windows ARM64 installer (#1699, #1378)
 
 ### Changed
 - Packaging changes
