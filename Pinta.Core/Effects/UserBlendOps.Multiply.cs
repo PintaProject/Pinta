@@ -44,7 +44,7 @@ partial class UserBlendOps
 			// - C refers to the premultiplied color channels (R, G, B)
 			// - A refers to the alpha channel
 			// - a refers to the top layer color (rhs)
-			// - dst refers to the bottom layer color (lhs)
+			// - b refers to the bottom layer color (lhs)
 			// 
 			// The 'ROUNDING_ADDEND' mechanism is a neat trick that
 			// forces the truncation operator to function as a rounding operator.
