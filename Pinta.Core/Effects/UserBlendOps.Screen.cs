@@ -33,11 +33,16 @@ partial class UserBlendOps
 			// 
 			// The Blend term in this structure must be calculated as:
 			//
+			// This term is derived from the standard W3C compositing model. It applies the
+			// Screen formula (which works on straight, non-premultiplied colors) to the
+			// overlapping area of the layers and converts the result back into the
+			// premultiplied color space, which simplifies to the expression below.
+			// 
 			// Blend(C_a, C_b) = A_a * C_b + A_b * C_a - C_a * C_b
 			// 
 			// Where:
 			// 
-			// - C refers to the non-premultiplied color channels (R, G, B)
+			// - C refers to the premultiplied color channels (R, G, B)
 			// - A refers to the alpha channel
 			// - a refers to the top layer color (rhs)
 			// - b refers to the bottom layer color (lhs)
