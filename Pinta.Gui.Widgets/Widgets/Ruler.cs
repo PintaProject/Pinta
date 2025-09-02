@@ -269,7 +269,7 @@ public sealed class Ruler : Gtk.DrawingArea
 			|| preliminarySize.Width != last_known_size.Value.Width
 			|| preliminarySize.Height != last_known_size.Value.Height
 		) {
-			InvalidateComplete ();
+			InvalidateCache ();
 			last_known_size = new Size (preliminarySize.Width, preliminarySize.Height);
 		}
 
@@ -361,11 +361,9 @@ public sealed class Ruler : Gtk.DrawingArea
 	private static int GetFontSize (Pango.FontDescription font, int scaleFactor)
 	{
 		int fontSize = PangoExtensions.UnitsToPixels (font.GetSize ());
-
-		// Convert from points to device units.
-		if (!font.GetSizeIsAbsolute ())
-			fontSize = (int) (scaleFactor * fontSize / 72.0);
-
-		return fontSize;
+		if (font.GetSizeIsAbsolute ())
+			return fontSize;
+		else
+			return (int) (scaleFactor * fontSize / 72.0);
 	}
 }
