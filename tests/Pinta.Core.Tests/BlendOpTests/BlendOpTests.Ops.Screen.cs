@@ -14,14 +14,14 @@ partial class BlendOpTests
 			screen_op,
 			ColorBgra.FromBgra (0, 0, 100, 255), // Opaque red
 			ColorBgra.FromBgra (0, 100, 0, 128), // 50% transparent green
-			ColorBgra.FromBgra (0, 100, 150, 255));
+			ColorBgra.FromBgra (0, 100, 100, 255));
 
 		// Semi-transparent over semi-transparent
 		yield return new (
 			screen_op,
 			ColorBgra.FromBgra (0, 0, 100, 128), // semi-transparent red
 			ColorBgra.FromBgra (0, 100, 0, 128), // semi-transparent green
-			ColorBgra.FromBgra (0, 150, 150, 192));
+			ColorBgra.FromBgra (0, 100, 100, 192));
 
 		// Opaque gray over opaque gray
 		yield return new (

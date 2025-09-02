@@ -45,14 +45,6 @@ partial class UserBlendOps
 			// - A refers to the alpha channel
 			// - a refers to the top layer color (rhs)
 			// - b refers to the bottom layer color (lhs)
-			//
-			// To implement this using integer arithmetic (0-255 range), the
-			// entire expression is scaled by 255. The 'blend' part for Screen becomes:
-			//
-			// BlendInt(C_a, C_b) = (C_a * 255) + (C_b * 255) - (C_a * C_b)
-			//
-			// The whole calculation is then divided by 255 to scale it back.
-			// The 'ROUNDING_ADDEND' is used to ensure proper rounding instead of truncation.
 
 			if (rhs.A == 0) return lhs;
 			if (lhs.A == 0) return rhs;
@@ -68,9 +60,9 @@ partial class UserBlendOps
 			int bottomContributionG = inverseTopAlpha * lhs.G;
 			int bottomContributionB = inverseTopAlpha * lhs.B;
 
-			int blendR = (rhs.R * 255) + (lhs.R * 255) - (rhs.R * lhs.R);
-			int blendG = (rhs.G * 255) + (lhs.G * 255) - (rhs.G * lhs.G);
-			int blendB = (rhs.B * 255) + (lhs.B * 255) - (rhs.B * lhs.B);
+			int blendR = rhs.A * lhs.R + lhs.A * rhs.R - lhs.R * rhs.R;
+			int blendG = rhs.A * lhs.G + lhs.A * rhs.G - lhs.G * rhs.G;
+			int blendB = rhs.A * lhs.B + lhs.A * rhs.B - lhs.B * rhs.B;
 
 			int preRoundingR = topContributionR + bottomContributionR + blendR;
 			int preRoundingG = topContributionG + bottomContributionG + blendG;
