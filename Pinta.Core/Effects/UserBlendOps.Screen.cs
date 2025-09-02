@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.CompilerServices;
-using static Pinta.Core.BlendOpHelper;
 
 namespace Pinta.Core;
 
@@ -28,17 +27,14 @@ partial class UserBlendOps
 			if (top.A == 0) return bottom;
 			if (bottom.A == 0) return top;
 
-			PremultipliedSeparable values = PrepareValues (bottom, top);
-
-			int blendB = BlendChannel (bottom.B, top.B, bottom.A, top.A);
-			int blendG = BlendChannel (bottom.G, top.G, bottom.A, top.A);
-			int blendR = BlendChannel (bottom.R, top.R, bottom.A, top.A);
-
-			return Combine (values, bottom, top, blendB, blendG, blendR);
+			return BlendOpHelper.ComputePremultiplied<ChannelBlend> (bottom, top);
 		}
 
-		[MethodImpl (MethodImplOptions.AggressiveInlining)]
-		private static int BlendChannel (int Cb, int Ca, int Ab, int Aa)
-			=> Aa * Cb + Ab * Ca - Ca * Cb;
+		private readonly struct ChannelBlend : BlendOpHelper.IChannelBlend
+		{
+			[MethodImpl (MethodImplOptions.AggressiveInlining)]
+			public static int BlendChannel (int Cb, int Ca, int Ab, int Aa)
+				=> Aa * Cb + Ab * Ca - Ca * Cb;
+		}
 	}
 }

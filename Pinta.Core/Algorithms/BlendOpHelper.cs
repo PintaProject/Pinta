@@ -27,33 +27,30 @@ internal static class BlendOpHelper
 	// "theoretical" counterparts, and then scaling everything back (see the `ROUNDING_ADDEND`
 	// constant, which is a neat trick for using the truncation operator for rounding).
 
-	public readonly struct PremultipliedSeparable (in ColorBgra bottom, in ColorBgra top)
+	public interface IChannelBlend
 	{
-		public int InverseTopAlpha { get; } = 255 - top.A;
-		public int InverseBottomAlpha { get; } = 255 - bottom.A;
+		[MethodImpl (MethodImplOptions.AggressiveInlining)]
+		static abstract int BlendChannel (int Cb, int Ca, int Ab, int Aa);
 	}
 
 	[MethodImpl (MethodImplOptions.AggressiveInlining)]
-	public static PremultipliedSeparable PrepareValues (in ColorBgra bottom, in ColorBgra top)
-		=> new (bottom, top);
-
-
-	[MethodImpl (MethodImplOptions.AggressiveInlining)]
-	public static ColorBgra Combine (
-		in PremultipliedSeparable values,
-		in ColorBgra bottom,
-		in ColorBgra top,
-		int blendedB,
-		int blendedG,
-		int blendedR)
+	public static ColorBgra ComputePremultiplied<TChannelBlend> (in ColorBgra bottom, in ColorBgra top)
+		where TChannelBlend : IChannelBlend
 	{
-		int topContributionB = values.InverseBottomAlpha * top.B;
-		int topContributionG = values.InverseBottomAlpha * top.G;
-		int topContributionR = values.InverseBottomAlpha * top.R;
+		int inverseTopAlpha = 255 - top.A;
+		int inverseBottomAlpha = 255 - bottom.A;
 
-		int bottomContributionB = values.InverseTopAlpha * bottom.B;
-		int bottomContributionG = values.InverseTopAlpha * bottom.G;
-		int bottomContributionR = values.InverseTopAlpha * bottom.R;
+		int topContributionB = inverseBottomAlpha * top.B;
+		int topContributionG = inverseBottomAlpha * top.G;
+		int topContributionR = inverseBottomAlpha * top.R;
+
+		int bottomContributionB = inverseTopAlpha * bottom.B;
+		int bottomContributionG = inverseTopAlpha * bottom.G;
+		int bottomContributionR = inverseTopAlpha * bottom.R;
+
+		int blendedB = TChannelBlend.BlendChannel (bottom.B, top.B, bottom.A, top.A);
+		int blendedG = TChannelBlend.BlendChannel (bottom.G, top.G, bottom.A, top.A);
+		int blendedR = TChannelBlend.BlendChannel (bottom.R, top.R, bottom.A, top.A);
 
 		int preRoundingB = topContributionB + bottomContributionB + blendedB;
 		int preRoundingG = topContributionG + bottomContributionG + blendedG;
@@ -65,7 +62,7 @@ internal static class BlendOpHelper
 		byte outG = Utility.ClampToByte ((preRoundingG + ROUNDING_ADDEND) / 255);
 		byte outR = Utility.ClampToByte ((preRoundingR + ROUNDING_ADDEND) / 255);
 
-		byte outA = Utility.ClampToByte (top.A + (bottom.A * values.InverseTopAlpha + ROUNDING_ADDEND) / 255);
+		byte outA = Utility.ClampToByte (top.A + (bottom.A * inverseTopAlpha + ROUNDING_ADDEND) / 255);
 
 		return ColorBgra.FromBgra (outB, outG, outR, outA);
 	}
