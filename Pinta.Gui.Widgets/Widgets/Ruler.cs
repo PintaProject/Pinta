@@ -25,10 +25,9 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using Cairo;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
@@ -44,7 +43,7 @@ public enum MetricType
 /// Replacement for Gtk.Ruler, which was removed in GTK3.
 /// Based on the original GTK2 widget and Inkscape's ruler widget.
 /// </summary>
-public sealed class Ruler : DrawingArea
+public sealed class Ruler : Gtk.DrawingArea
 {
 	private double position = 0;
 	private MetricType metric = MetricType.Pixels;
@@ -55,7 +54,7 @@ public sealed class Ruler : DrawingArea
 	/// <summary>
 	/// Whether the ruler is horizontal or vertical.
 	/// </summary>
-	public Orientation Orientation { get; }
+	public Gtk.Orientation Orientation { get; }
 
 	/// <summary>
 	/// Metric type used for the ruler.
@@ -89,7 +88,7 @@ public sealed class Ruler : DrawingArea
 	/// </summary>
 	public double Upper { get; private set; } = 1;
 
-	public Ruler (Orientation orientation)
+	public Ruler (Gtk.Orientation orientation)
 	{
 		Orientation = orientation;
 
@@ -102,10 +101,10 @@ public sealed class Ruler : DrawingArea
 		int width = 0;
 		int height = 0;
 		switch (Orientation) {
-			case Orientation.Horizontal:
+			case Gtk.Orientation.Horizontal:
 				height = size;
 				break;
-			case Orientation.Vertical:
+			case Gtk.Orientation.Vertical:
 				width = size;
 				break;
 		}
@@ -140,45 +139,45 @@ public sealed class Ruler : DrawingArea
 		cached_surface = null;
 	}
 
-	private static readonly IReadOnlyList<double> pixels_ruler_scale = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
-	private static readonly IReadOnlyList<int> pixels_subdivide = [1, 5, 10, 50, 100];
+	private static readonly ImmutableArray<double> pixels_ruler_scale = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
+	private static readonly ImmutableArray<int> pixels_subdivide = [1, 5, 10, 50, 100];
 
-	private static readonly IReadOnlyList<double> inches_ruler_scale = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512];
-	private static readonly IReadOnlyList<int> inches_subdivide = [1, 2, 4, 8, 16];
+	private static readonly ImmutableArray<double> inches_ruler_scale = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512];
+	private static readonly ImmutableArray<int> inches_subdivide = [1, 2, 4, 8, 16];
 
-	private static readonly IReadOnlyList<double> centimeters_ruler_scale = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
-	private static readonly IReadOnlyList<int> centimeters_subdivide = [1, 5, 10, 50, 100];
+	private static readonly ImmutableArray<double> centimeters_ruler_scale = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
+	private static readonly ImmutableArray<int> centimeters_subdivide = [1, 5, 10, 50, 100];
 
 	private readonly record struct RulerDrawSettings (
-		IReadOnlyList<int> subdivide,
-		double scaled_upper,
-		double scaled_lower,
-		Pango.FontDescription font,
-		int font_size,
-		double increment,
-		int divide_index,
-		double pixels_per_tick,
-		double units_per_tick,
-		int start,
-		int end,
-		double marker_position,
-		RectangleD rulerBottomLine,
-		Size effectiveSize,
-		Color color,
-		Orientation orientation);
+		ImmutableArray<int> SubDivide,
+		double ScaledUpper,
+		double ScaledLower,
+		Pango.FontDescription Font,
+		int FontSize,
+		double Increment,
+		int DivideIndex,
+		double PixelsPerTick,
+		double UnitsPerTick,
+		int Start,
+		int End,
+		double MarkerPosition,
+		RectangleD RulerBottomLine,
+		Size EffectiveSize,
+		Color Color,
+		Gtk.Orientation Orientation);
 	private RulerDrawSettings CreateSettings (Size preliminarySize)
 	{
 		GetStyleContext ().GetColor (out Color color);
 
 		RectangleD rulerBottomLine = Orientation switch {
 
-			Orientation.Vertical => new (
+			Gtk.Orientation.Vertical => new (
 				X: preliminarySize.Width - 1,
 				Y: 0,
 				Width: 1,
 				Height: preliminarySize.Height),
 
-			Orientation.Horizontal => new (
+			Gtk.Orientation.Horizontal => new (
 				X: 0,
 				Y: preliminarySize.Height - 1,
 				Width: preliminarySize.Width,
@@ -188,19 +187,19 @@ public sealed class Ruler : DrawingArea
 		};
 
 		Size effectiveSize = Orientation switch {
-			Orientation.Vertical => new (preliminarySize.Height, preliminarySize.Width),// Swap so that width is the longer dimension (horizontal).
-			Orientation.Horizontal => preliminarySize,
+			Gtk.Orientation.Vertical => new (preliminarySize.Height, preliminarySize.Width),// Swap so that width is the longer dimension (horizontal).
+			Gtk.Orientation.Horizontal => preliminarySize,
 			_ => throw new UnreachableException (),
 		};
 
-		IReadOnlyList<double> rulerScale = Metric switch {
+		ImmutableArray<double> rulerScale = Metric switch {
 			MetricType.Pixels => pixels_ruler_scale,
 			MetricType.Inches => inches_ruler_scale,
 			MetricType.Centimeters => centimeters_ruler_scale,
 			_ => throw new UnreachableException (),
 		};
 
-		IReadOnlyList<int> subdivide = Metric switch {
+		ImmutableArray<int> subdivide = Metric switch {
 			MetricType.Pixels => pixels_subdivide,
 			MetricType.Inches => inches_subdivide,
 			MetricType.Centimeters => centimeters_subdivide,
@@ -229,38 +228,38 @@ public sealed class Ruler : DrawingArea
 
 		// Figure out how to display the ticks.
 		int scaleIndex;
-		for (scaleIndex = 0; scaleIndex < rulerScale.Count - 1; ++scaleIndex) {
+		for (scaleIndex = 0; scaleIndex < rulerScale.Length - 1; ++scaleIndex) {
 			if (rulerScale[scaleIndex] * increment > minSeparation)
 				break;
 		}
 
 		int divideIndex;
-		for (divideIndex = 0; divideIndex < subdivide.Count - 1; ++divideIndex) {
+		for (divideIndex = 0; divideIndex < subdivide.Length - 1; ++divideIndex) {
 			if (rulerScale[scaleIndex] * increment < 5 * subdivide[divideIndex + 1])
 				break;
 		}
 
-		double pixels_per_tick = increment * rulerScale[scaleIndex] / subdivide[divideIndex];
-		double units_per_tick = pixels_per_tick / increment;
-		double ticks_per_unit = 1.0 / units_per_tick;
+		double pixelsPerTick = increment * rulerScale[scaleIndex] / subdivide[divideIndex];
+		double unitsPerTick = pixelsPerTick / increment;
+		double ticksPerUnit = 1.0 / unitsPerTick;
 
 		return new (
-			subdivide: subdivide,
-			scaled_upper: scaledUpper,
-			scaled_lower: scaledLower,
-			font: font,
-			font_size: fontSize,
-			increment: increment,
-			divide_index: divideIndex,
-			pixels_per_tick: pixels_per_tick,
-			units_per_tick: units_per_tick,
-			start: (int) Math.Floor (scaledLower * ticks_per_unit),
-			end: (int) Math.Ceiling (scaledUpper * ticks_per_unit),
-			marker_position: (Position - Lower) * (effectiveSize.Width / (Upper - Lower)),
-			rulerBottomLine: rulerBottomLine,
-			effectiveSize: effectiveSize,
-			color: color,
-			orientation: Orientation);
+			SubDivide: subdivide,
+			ScaledUpper: scaledUpper,
+			ScaledLower: scaledLower,
+			Font: font,
+			FontSize: fontSize,
+			Increment: increment,
+			DivideIndex: divideIndex,
+			PixelsPerTick: pixelsPerTick,
+			UnitsPerTick: unitsPerTick,
+			Start: (int) Math.Floor (scaledLower * ticksPerUnit),
+			End: (int) Math.Ceiling (scaledUpper * ticksPerUnit),
+			MarkerPosition: (Position - Lower) * (effectiveSize.Width / (Upper - Lower)),
+			RulerBottomLine: rulerBottomLine,
+			EffectiveSize: effectiveSize,
+			Color: color,
+			Orientation: Orientation);
 	}
 
 	private void Draw (Context cr, Size preliminarySize)
@@ -281,18 +280,18 @@ public sealed class Ruler : DrawingArea
 		cr.SetSourceSurface (cached_surface, 0, 0);
 		cr.Paint ();
 
-		cr.SetSourceColor (settings.color);
+		cr.SetSourceColor (settings.Color);
 		cr.LineWidth = 1.0;
 
 		// Draw marker
-		switch (settings.orientation) {
-			case Orientation.Horizontal:
-				cr.MoveTo (settings.marker_position, 0);
-				cr.LineTo (settings.marker_position, settings.effectiveSize.Height);
+		switch (settings.Orientation) {
+			case Gtk.Orientation.Horizontal:
+				cr.MoveTo (settings.MarkerPosition, 0);
+				cr.LineTo (settings.MarkerPosition, settings.EffectiveSize.Height);
 				break;
-			case Orientation.Vertical:
-				cr.MoveTo (0, settings.marker_position);
-				cr.LineTo (settings.effectiveSize.Height, settings.marker_position);
+			case Gtk.Orientation.Vertical:
+				cr.MoveTo (0, settings.MarkerPosition);
+				cr.LineTo (settings.EffectiveSize.Height, settings.MarkerPosition);
 				break;
 		}
 
@@ -308,37 +307,37 @@ public sealed class Ruler : DrawingArea
 
 		using Context drawingContext = new (result);
 
-		drawingContext.SetSourceColor (settings.color);
+		drawingContext.SetSourceColor (settings.Color);
 		drawingContext.LineWidth = 1.0;
-		drawingContext.Rectangle (settings.rulerBottomLine);
+		drawingContext.Rectangle (settings.RulerBottomLine);
 		drawingContext.Fill ();
 
-		for (int i = settings.start; i <= settings.end; ++i) {
+		for (int i = settings.Start; i <= settings.End; ++i) {
 
 			// Position of tick (add 0.5 to center tick on pixel).
-			double tickPosition = Math.Floor (i * settings.pixels_per_tick - settings.scaled_lower * settings.increment) + 0.5;
+			double tickPosition = Math.Floor (i * settings.PixelsPerTick - settings.ScaledLower * settings.Increment) + 0.5;
 
 			// Height of tick
-			int tickHeight = settings.effectiveSize.Height;
+			int tickHeight = settings.EffectiveSize.Height;
 
-			for (int j = settings.divide_index; j > 0; --j) {
-				if (i % settings.subdivide[j] == 0) break;
+			for (int j = settings.DivideIndex; j > 0; --j) {
+				if (i % settings.SubDivide[j] == 0) break;
 				tickHeight = tickHeight / 2 + 1;
 			}
 
 			// Draw text for major ticks.
-			if (i % settings.subdivide[settings.divide_index] == 0) {
+			if (i % settings.SubDivide[settings.DivideIndex] == 0) {
 
-				string label = ((int) Math.Round (i * settings.units_per_tick)).ToString ();
+				string label = ((int) Math.Round (i * settings.UnitsPerTick)).ToString ();
 				var layout = CreatePangoLayout (label);
-				layout.SetFontDescription (settings.font);
+				layout.SetFontDescription (settings.Font);
 
-				if (settings.orientation == Orientation.Horizontal) {
+				if (settings.Orientation == Gtk.Orientation.Horizontal) {
 					drawingContext.MoveTo (tickPosition + 2, 0);
 					PangoCairo.Functions.ShowLayout (drawingContext, layout);
 				} else {
 					drawingContext.Save ();
-					drawingContext.MoveTo (settings.font_size * 1.5, tickPosition + settings.font_size / 2);
+					drawingContext.MoveTo (settings.FontSize * 1.5, tickPosition + settings.FontSize / 2);
 					drawingContext.Rotate (0.5 * Math.PI);
 					PangoCairo.Functions.ShowLayout (drawingContext, layout);
 					drawingContext.Restore ();
@@ -346,12 +345,12 @@ public sealed class Ruler : DrawingArea
 			}
 
 			// Draw ticks
-			if (settings.orientation == Orientation.Horizontal) {
-				drawingContext.MoveTo (tickPosition, settings.effectiveSize.Height - tickHeight);
-				drawingContext.LineTo (tickPosition, settings.effectiveSize.Height);
+			if (settings.Orientation == Gtk.Orientation.Horizontal) {
+				drawingContext.MoveTo (tickPosition, settings.EffectiveSize.Height - tickHeight);
+				drawingContext.LineTo (tickPosition, settings.EffectiveSize.Height);
 			} else {
-				drawingContext.MoveTo (settings.effectiveSize.Height - tickHeight, tickPosition);
-				drawingContext.LineTo (settings.effectiveSize.Height, tickPosition);
+				drawingContext.MoveTo (settings.EffectiveSize.Height - tickHeight, tickPosition);
+				drawingContext.LineTo (settings.EffectiveSize.Height, tickPosition);
 			}
 			drawingContext.Stroke ();
 		}
@@ -359,9 +358,7 @@ public sealed class Ruler : DrawingArea
 		return result;
 	}
 
-	private static int GetFontSize (
-		Pango.FontDescription font,
-		int scaleFactor)
+	private static int GetFontSize (Pango.FontDescription font, int scaleFactor)
 	{
 		int fontSize = PangoExtensions.UnitsToPixels (font.GetSize ());
 
