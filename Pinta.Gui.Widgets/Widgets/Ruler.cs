@@ -28,7 +28,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Cairo;
-using Gsk.Internal;
 using Gtk;
 using Pinta.Core;
 
