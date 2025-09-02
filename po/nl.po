@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-01 00:24+0000\n"
-"PO-Revision-Date: 2025-08-09 14:09+0000\n"
+"PO-Revision-Date: 2025-09-05 05:01+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13.1-rc\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -379,7 +379,7 @@ msgstr "Cirkels"
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:129
 msgid "Circular"
-msgstr ""
+msgstr "Circulair"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -1723,7 +1723,7 @@ msgstr "Foto"
 #. Translators: Arrangement of points similar to how sunflower seeds are arranged
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:133
 msgid "Phyllotaxis"
-msgstr ""
+msgstr "Bladstand"
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
@@ -1800,12 +1800,12 @@ msgstr "Punt toegevoegd"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:148
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
 msgid "Point Arrangement"
-msgstr ""
+msgstr "Puntenplaatsing"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:161
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Point Color"
-msgstr ""
+msgstr "Puntkleur"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
 msgid "Point Deleted"
@@ -1814,7 +1814,7 @@ msgstr "Punt verwijderd"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:157
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:206
 msgid "Point Size"
-msgstr ""
+msgstr "Puntgrootte"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
@@ -2247,7 +2247,7 @@ msgstr "Laag tonen"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:154
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:203
 msgid "Show Points"
-msgstr ""
+msgstr "Punten weergeven"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
 msgid "Show Value"
