@@ -18,7 +18,7 @@ public sealed class BitMask
 		ArgumentOutOfRangeException.ThrowIfNegative (height);
 		Width = width;
 		Height = height;
-		array = new BitArray (width * height);
+		array = new BitArray (checked(width * height));
 	}
 
 	private BitMask (BitMask other)
