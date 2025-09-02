@@ -1,4 +1,6 @@
 using System;
+using System.Runtime.CompilerServices;
+using static Pinta.Core.BlendOpHelper;
 
 namespace Pinta.Core;
 
@@ -10,10 +12,10 @@ partial class UserBlendOps
 		public static string StaticName
 			=> "Multiply";
 
-		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs)
-			=> ApplyStatic (lhs, rhs);
+		public override ColorBgra Apply (in ColorBgra bottom, in ColorBgra top)
+			=> ApplyStatic (bottom, top);
 
-		public static ColorBgra ApplyStatic (in ColorBgra lhs, in ColorBgra rhs)
+		public static ColorBgra ApplyStatic (in ColorBgra bottom, in ColorBgra top)
 		{
 			// This blend mode multiplies the color channels of the base and blend layers.
 			// 
@@ -22,64 +24,21 @@ partial class UserBlendOps
 			// - The resulting color is always at least as dark as either of the original colors.
 			// - Multiplying any color with black results in black.
 			// - Multiplying any color with white leaves the original color unchanged.
-			// 
-			// This implementation uses integer arithmetic for efficiency.
-			// It can achieve this by scaling the entire calculation by a factor of 255
-			// 
-			// This is a separable blend mode.
-			// 
-			// A 'separable' blend mode acts on each color channel independently.
-			// The formula for a separable blend mode with premultiplied alpha is:
-			// 
-			// C_out = (1 - A_b) * C_a
-			//       + (1 - A_a) * C_b
-			//       + Blend(C_a, C_b)
-			// 
-			// For the Multiply blend mode:
-			// 
-			// Blend(C_a, C_b) = C_a * C_b.
-			// 
-			// Where:
-			// 
-			// - C refers to the premultiplied color channels (R, G, B)
-			// - A refers to the alpha channel
-			// - a refers to the top layer color (rhs)
-			// - b refers to the bottom layer color (lhs)
-			// 
-			// The 'ROUNDING_ADDEND' mechanism is a neat trick that
-			// forces the truncation operator to function as a rounding operator.
 
-			if (rhs.A == 0) return lhs;
-			if (lhs.A == 0) return rhs;
+			if (top.A == 0) return bottom;
+			if (bottom.A == 0) return top;
 
-			int inverseTopAlpha = 255 - rhs.A;
-			int inverseBottomAlpha = 255 - lhs.A;
+			PremultipliedSeparable values = PrepareValues (bottom, top);
 
-			int topContributionR = inverseBottomAlpha * rhs.R;
-			int topContributionG = inverseBottomAlpha * rhs.G;
-			int topContributionB = inverseBottomAlpha * rhs.B;
+			int blendB = BlendChannel (bottom.B, top.B, bottom.A, top.A);
+			int blendG = BlendChannel (bottom.G, top.G, bottom.A, top.A);
+			int blendR = BlendChannel (bottom.R, top.R, bottom.A, top.A);
 
-			int bottomContributionR = inverseTopAlpha * lhs.R;
-			int bottomContributionG = inverseTopAlpha * lhs.G;
-			int bottomContributionB = inverseTopAlpha * lhs.B;
-
-			int blendR = rhs.R * lhs.R;
-			int blendG = rhs.G * lhs.G;
-			int blendB = rhs.B * lhs.B;
-
-			int preRoundingR = topContributionR + bottomContributionR + blendR;
-			int preRoundingG = topContributionG + bottomContributionG + blendG;
-			int preRoundingB = topContributionB + bottomContributionB + blendB;
-
-			const int ROUNDING_ADDEND = 128;
-
-			byte outR = Utility.ClampToByte ((preRoundingR + ROUNDING_ADDEND) / 255);
-			byte outG = Utility.ClampToByte ((preRoundingG + ROUNDING_ADDEND) / 255);
-			byte outB = Utility.ClampToByte ((preRoundingB + ROUNDING_ADDEND) / 255);
-
-			byte outA = Utility.ClampToByte (rhs.A + (lhs.A * inverseTopAlpha + ROUNDING_ADDEND) / 255);
-
-			return ColorBgra.FromBgra (outB, outG, outR, outA);
+			return Combine (values, bottom, top, blendB, blendG, blendR);
 		}
+
+		[MethodImpl (MethodImplOptions.AggressiveInlining)]
+		private static int BlendChannel (int Cb, int Ca, int Ab, int Aa)
+			=> Ca * Cb;
 	}
 }
