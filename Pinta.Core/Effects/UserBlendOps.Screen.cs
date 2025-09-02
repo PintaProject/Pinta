@@ -22,14 +22,6 @@ partial class UserBlendOps
 			// - Screening any color with black leaves the original color unchanged.
 			// - Screening any color with white results in white.
 			//
-			// The mathematical formula for Screen blending is:
-			//
-			// B(C_a, C_b) = 1 - (1 - C_a) * (1 - C_b)
-			//
-			// which simplifies to:
-			//
-			// B(C_a, C_b) = C_a + C_b - (C_a * C_b)
-			//
 			// This is a 'separable' blend mode, meaning it is applied to each
 			// color channel (R, G, B) independently.
 			//
@@ -37,10 +29,14 @@ partial class UserBlendOps
 			//
 			// C_out = (1 - A_b) * C_a
 			//       + (1 - A_a) * C_b
-			//       + B(C_a, C_b)
+			//       + Blend(C_a, C_b)
+			// 
+			// The Blend term in this structure must be calculated as:
 			//
+			// Blend(C_a, C_b) = A_a * C_b + A_b * C_a - C_a * C_b
+			// 
 			// Where:
-			//
+			// 
 			// - C refers to the non-premultiplied color channels (R, G, B)
 			// - A refers to the alpha channel
 			// - a refers to the top layer color (rhs)
