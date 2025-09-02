@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Cairo;
+using Gsk.Internal;
 using Gtk;
 using Pinta.Core;
 
@@ -49,6 +50,9 @@ public sealed class Ruler : DrawingArea
 	private double position = 0;
 	private MetricType metric = MetricType.Pixels;
 
+	private Surface? cached_surface = null;
+	private Size? last_known_size = null;
+
 	/// <summary>
 	/// Whether the ruler is horizontal or vertical.
 	/// </summary>
@@ -61,7 +65,7 @@ public sealed class Ruler : DrawingArea
 		get => metric;
 		set {
 			metric = value;
-			QueueDraw ();
+			InvalidateComplete ();
 		}
 	}
 
@@ -72,7 +76,7 @@ public sealed class Ruler : DrawingArea
 		get => position;
 		set {
 			position = value;
-			QueueDraw ();
+			InvalidateComplete ();
 		}
 	}
 
@@ -122,7 +126,19 @@ public sealed class Ruler : DrawingArea
 		Lower = lower;
 		Upper = upper;
 
+		InvalidateComplete ();
+	}
+
+	private void InvalidateComplete ()
+	{
+		InvalidateCache ();
 		QueueDraw ();
+	}
+
+	private void InvalidateCache ()
+	{
+		cached_surface?.Dispose ();
+		cached_surface = null;
 	}
 
 	private static readonly IReadOnlyList<double> pixels_ruler_scale = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
@@ -134,7 +150,7 @@ public sealed class Ruler : DrawingArea
 	private static readonly IReadOnlyList<double> centimeters_ruler_scale = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
 	private static readonly IReadOnlyList<int> centimeters_subdivide = [1, 5, 10, 50, 100];
 
-	private sealed record RulerDrawSettings (
+	private readonly record struct RulerDrawSettings (
 		IReadOnlyList<int> subdivide,
 		double scaled_upper,
 		double scaled_lower,
@@ -248,66 +264,26 @@ public sealed class Ruler : DrawingArea
 			orientation: Orientation);
 	}
 
-	private void Draw (
-		Context cr,
-		Size preliminarySize)
+	private void Draw (Context cr, Size preliminarySize)
 	{
+		if (
+			!last_known_size.HasValue
+			|| preliminarySize.Width != last_known_size.Value.Width
+			|| preliminarySize.Height != last_known_size.Value.Height
+		) {
+			InvalidateComplete ();
+			last_known_size = new Size (preliminarySize.Width, preliminarySize.Height);
+		}
+
 		RulerDrawSettings settings = CreateSettings (preliminarySize);
+
+		cached_surface ??= GetDrawnRuler (settings, preliminarySize);
+
+		cr.SetSourceSurface (cached_surface, 0, 0);
+		cr.Paint ();
 
 		cr.SetSourceColor (settings.color);
 		cr.LineWidth = 1.0;
-		cr.Rectangle (settings.rulerBottomLine);
-		cr.Fill ();
-
-		for (int i = settings.start; i <= settings.end; ++i) {
-
-			// Position of tick (add 0.5 to center tick on pixel).
-			double position = Math.Floor (i * settings.pixels_per_tick - settings.scaled_lower * settings.increment) + 0.5;
-
-			// Height of tick
-			int tick_height = settings.effectiveSize.Height;
-			for (int j = settings.divide_index; j > 0; --j) {
-				if (i % settings.subdivide[j] == 0) break;
-				tick_height = tick_height / 2 + 1;
-			}
-
-			// Draw text for major ticks.
-			if (i % settings.subdivide[settings.divide_index] == 0) {
-				int label_value = (int) Math.Round (i * settings.units_per_tick);
-				string label = label_value.ToString ();
-
-				var layout = CreatePangoLayout (label);
-				layout.SetFontDescription (settings.font);
-
-				switch (settings.orientation) {
-					case Orientation.Horizontal:
-						cr.MoveTo (position + 2, 0);
-						PangoCairo.Functions.ShowLayout (cr, layout);
-						break;
-					case Orientation.Vertical:
-						cr.Save ();
-						cr.MoveTo (settings.font_size * 1.5, position + settings.font_size / 2);
-						cr.Rotate (0.5 * Math.PI);
-						PangoCairo.Functions.ShowLayout (cr, layout);
-						cr.Restore ();
-						break;
-				}
-			}
-
-			// Draw ticks
-			switch (settings.orientation) {
-				case Orientation.Horizontal:
-					cr.MoveTo (position, settings.effectiveSize.Height - tick_height);
-					cr.LineTo (position, settings.effectiveSize.Height);
-					break;
-				case Orientation.Vertical:
-					cr.MoveTo (settings.effectiveSize.Height - tick_height, position);
-					cr.LineTo (settings.effectiveSize.Height, position);
-					break;
-			}
-
-			cr.Stroke ();
-		}
 
 		// Draw marker
 		switch (settings.orientation) {
@@ -322,10 +298,66 @@ public sealed class Ruler : DrawingArea
 		}
 
 		cr.Stroke ();
+	}
 
-		// TODO-GTK3 - cache the ticks
+	private ImageSurface GetDrawnRuler (in RulerDrawSettings settings, Size preliminarySize)
+	{
+		ImageSurface result = new (
+			Format.Argb32,
+			preliminarySize.Width,
+			preliminarySize.Height);
 
-		cr.Dispose ();
+		using Context drawingContext = new (result);
+
+		drawingContext.SetSourceColor (settings.color);
+		drawingContext.LineWidth = 1.0;
+		drawingContext.Rectangle (settings.rulerBottomLine);
+		drawingContext.Fill ();
+
+		for (int i = settings.start; i <= settings.end; ++i) {
+
+			// Position of tick (add 0.5 to center tick on pixel).
+			double tickPosition = Math.Floor (i * settings.pixels_per_tick - settings.scaled_lower * settings.increment) + 0.5;
+
+			// Height of tick
+			int tickHeight = settings.effectiveSize.Height;
+
+			for (int j = settings.divide_index; j > 0; --j) {
+				if (i % settings.subdivide[j] == 0) break;
+				tickHeight = tickHeight / 2 + 1;
+			}
+
+			// Draw text for major ticks.
+			if (i % settings.subdivide[settings.divide_index] == 0) {
+
+				string label = ((int) Math.Round (i * settings.units_per_tick)).ToString ();
+				var layout = CreatePangoLayout (label);
+				layout.SetFontDescription (settings.font);
+
+				if (settings.orientation == Orientation.Horizontal) {
+					drawingContext.MoveTo (tickPosition + 2, 0);
+					PangoCairo.Functions.ShowLayout (drawingContext, layout);
+				} else {
+					drawingContext.Save ();
+					drawingContext.MoveTo (settings.font_size * 1.5, tickPosition + settings.font_size / 2);
+					drawingContext.Rotate (0.5 * Math.PI);
+					PangoCairo.Functions.ShowLayout (drawingContext, layout);
+					drawingContext.Restore ();
+				}
+			}
+
+			// Draw ticks
+			if (settings.orientation == Orientation.Horizontal) {
+				drawingContext.MoveTo (tickPosition, settings.effectiveSize.Height - tickHeight);
+				drawingContext.LineTo (tickPosition, settings.effectiveSize.Height);
+			} else {
+				drawingContext.MoveTo (settings.effectiveSize.Height - tickHeight, tickPosition);
+				drawingContext.LineTo (settings.effectiveSize.Height, tickPosition);
+			}
+			drawingContext.Stroke ();
+		}
+
+		return result;
 	}
 
 	private static int GetFontSize (
