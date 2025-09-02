@@ -646,24 +646,20 @@ public sealed class TextTool : BaseTool
 		}
 
 		//Whether or not to show the normal text cursor.
-		bool showDefaultCursor = false;
+		Gdk.Cursor newCursor = cursor_invalid;
 
 		if (ctrl_key && workspace.HasOpenDocuments) {
 			//Go through every UserLayer.
 			foreach (UserLayer ul in document.Layers.UserLayers) {
 				if (!ul.TextBounds.Contains (last_mouse_position)) continue; //Check each UserLayer's editable text boundaries to see if they contain the mouse position.
-				showDefaultCursor = true; //The mouse is over editable text.
+				newCursor = DefaultCursor; //The mouse is over editable text.
 			}
 		} else {
-			showDefaultCursor = true;
+			newCursor = DefaultCursor;
 		}
 
-		if (showDefaultCursor != (CurrentCursor == DefaultCursor)) {
-			if (showDefaultCursor) {
-				SetCursor (DefaultCursor);
-			} else {
-				SetCursor (cursor_invalid);
-			}
+		if (newCursor != CurrentCursor) {
+			SetCursor (newCursor);
 			RedrawText (is_editing, true);
 		}
 	}
