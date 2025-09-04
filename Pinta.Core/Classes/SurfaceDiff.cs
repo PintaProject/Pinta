@@ -120,26 +120,20 @@ public sealed class SurfaceDiff
 			}
 		);
 
-		RectangleI bounds = new (
-			diff_bounds.Left,
-			diff_bounds.Top,
-			diff_bounds.Right - diff_bounds.Left + 1,
-			diff_bounds.Bottom - diff_bounds.Top + 1);
-
 #if DEBUG_DIFF
 		Console.WriteLine ("Truncated surface size: {0}x{1}", bounds.Width, bounds.Height);
 #endif
 
 		// STEP 2 - Create a bitarray of whether each pixel in the bounds has changed, and count
 		// how many changed pixels we need to store.
-		BitArray bitmask = new (bounds.Width * bounds.Height);
+		BitArray bitmask = new (diff_bounds.Width * diff_bounds.Height);
 		int index = 0;
 		int num_changed = 0;
 
-		int bottom = bounds.Bottom;
-		int right = bounds.Right;
-		int bounds_x = bounds.X;
-		int bounds_y = bounds.Y;
+		int bottom = diff_bounds.Bottom;
+		int right = diff_bounds.Right;
+		int bounds_x = diff_bounds.X;
+		int bounds_y = diff_bounds.Y;
 
 		for (int y = bounds_y; y <= bottom; ++y) {
 			int offset = y * orig_width;
@@ -187,7 +181,7 @@ public sealed class SurfaceDiff
 		System.Console.WriteLine ("SurfaceDiff time: " + timer.ElapsedMilliseconds);
 #endif
 
-		return new SurfaceDiff (bitmask, bounds, pixels);
+		return new SurfaceDiff (bitmask, diff_bounds, pixels);
 	}
 	#endregion
 
