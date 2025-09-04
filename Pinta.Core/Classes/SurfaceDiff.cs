@@ -35,40 +35,6 @@ namespace Pinta.Core;
 
 public sealed class SurfaceDiff
 {
-	private readonly struct DiffBounds
-	{
-		public readonly int left;
-		public readonly int right;
-		public readonly int top;
-		public readonly int bottom;
-
-		public DiffBounds (int width, int height)
-		{
-			left = width + 1;
-			right = -1;
-			top = height + 1;
-			bottom = -1;
-		}
-
-		// TODO: It would be better if this were not callable from the outside
-		public DiffBounds (int newLeft, int newRight, int newTop, int newBottom)
-		{
-			left = newLeft;
-			right = newRight;
-			top = newTop;
-			bottom = newBottom;
-		}
-
-		public readonly DiffBounds AsMerged (DiffBounds other)
-		{
-			int newLeft = Math.Min (left, other.left);
-			int newRight = Math.Max (right, other.right);
-			int newTop = Math.Min (top, other.top);
-			int newBottom = Math.Max (bottom, other.bottom);
-			return new (newLeft, newRight, newTop, newBottom);
-		}
-	}
-
 	// If we aren't going to save at least x% from the diff,
 	// don't use it and store the whole surface instead
 	private const int MINIMUM_SAVINGS_PERCENT = 10;
@@ -107,7 +73,7 @@ public sealed class SurfaceDiff
 #endif
 
 		// STEP 1 - Find the bounds of the changed pixels.
-		DiffBounds diff_bounds = new (orig_width, orig_height);
+		RectangleI diff_bounds = RectangleI.FromLTRB (orig_width + 1, orig_height + 1, -1, -1); // TODO: Inverted rectangle! Should refactor
 		object diff_bounds_lock = new ();
 
 		// Split up the work among several threads, each of which processes one row at a time
@@ -117,7 +83,7 @@ public sealed class SurfaceDiff
 		Parallel.For (
 			0,
 			orig_height,
-			() => new DiffBounds (orig_width, orig_height),
+			() => RectangleI.FromLTRB (orig_width + 1, orig_height + 1, -1, -1), // TODO: Inverted rectangle! Should refactor
 			(row, loop, my_bounds) => {
 
 				int offset = row * orig_width;
@@ -125,8 +91,8 @@ public sealed class SurfaceDiff
 				var updated_row = updated_surf.GetPixelData ().Slice (offset, orig_width);
 
 				bool change_in_row = false;
-				int newLeft = my_bounds.left;
-				int newRight = my_bounds.right;
+				int newLeft = my_bounds.Left;
+				int newRight = my_bounds.Right;
 
 				for (int i = 0; i < orig_width; ++i) {
 					if (orig_row[i] == updated_row[i]) continue;
@@ -135,28 +101,30 @@ public sealed class SurfaceDiff
 					newRight = Math.Max (newRight, i);
 				}
 
-				int newTop = change_in_row
-					? Math.Min (my_bounds.top, row)
-					: my_bounds.top;
+				int newTop =
+					change_in_row
+					? Math.Min (my_bounds.Top, row)
+					: my_bounds.Top;
 
-				int newBottom = change_in_row
-					? Math.Max (my_bounds.bottom, row)
-					: my_bounds.bottom;
+				int newBottom =
+					change_in_row
+					? Math.Max (my_bounds.Bottom, row)
+					: my_bounds.Bottom;
 
-				return new DiffBounds (newLeft, newRight, newTop, newBottom);
+				return RectangleI.FromLTRB (newLeft, newTop, newRight, newBottom);
 			},
 			my_bounds => {
 				lock (diff_bounds_lock) {
-					diff_bounds = diff_bounds.AsMerged (my_bounds);
+					diff_bounds = diff_bounds.Union (my_bounds);
 				}
 			}
 		);
 
 		RectangleI bounds = new (
-			diff_bounds.left,
-			diff_bounds.top,
-			diff_bounds.right - diff_bounds.left + 1,
-			diff_bounds.bottom - diff_bounds.top + 1);
+			diff_bounds.Left,
+			diff_bounds.Top,
+			diff_bounds.Right - diff_bounds.Left + 1,
+			diff_bounds.Bottom - diff_bounds.Top + 1);
 
 #if DEBUG_DIFF
 		Console.WriteLine ("Truncated surface size: {0}x{1}", bounds.Width, bounds.Height);
