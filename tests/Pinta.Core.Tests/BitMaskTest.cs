@@ -536,8 +536,24 @@ internal sealed class BitMaskTest
 
 	static readonly IReadOnlyList<TestCaseData> invalid_indexing =
 	[
+		// Negative indexing
+
 		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, -1, 0),
 		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, 0, -1),
 		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, -1, -1),
+
+		// Invalid rows and columns
+
+		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_WIDTH, 0),
+		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, 0, DEFAULT_HEIGHT),
+		new (DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_HEIGHT),
+
+		new (5, 8, 5, 7),
+		new (5, 8, 4, 8),
+		new (5, 8, 5, 8),
+
+		new (5, 8, 6, 7),
+		new (5, 8, 4, 9),
+		new (5, 8, 6, 9),
 	];
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 
 namespace Pinta.Core;
 
@@ -17,7 +18,7 @@ public sealed class BitMask
 		ArgumentOutOfRangeException.ThrowIfNegative (height);
 		Width = width;
 		Height = height;
-		array = new BitArray (width * height);
+		array = new BitArray (checked(width * height));
 	}
 
 	private BitMask (BitMask other)
@@ -77,10 +78,13 @@ public sealed class BitMask
 				Set (x, y, newValue);
 	}
 
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
 	private int GetIndex (int x, int y)
 	{
 		ArgumentOutOfRangeException.ThrowIfNegative (x);
 		ArgumentOutOfRangeException.ThrowIfNegative (y);
+		ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual (x, Width);
+		ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual (y, Height);
 		return (y * Width) + x;
 	}
 
