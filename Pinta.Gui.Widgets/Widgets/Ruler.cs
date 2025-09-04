@@ -63,7 +63,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		get => metric;
 		set {
 			metric = value;
-			InvalidateComplete ();
+			QueueFullRedraw ();
 		}
 	}
 
@@ -74,7 +74,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		get => position;
 		set {
 			position = value;
-			InvalidateComplete ();
+			QueueFullRedraw ();
 		}
 	}
 
@@ -124,10 +124,11 @@ public sealed class Ruler : Gtk.DrawingArea
 		Lower = lower;
 		Upper = upper;
 
-		InvalidateComplete ();
+		QueueFullRedraw ();
 	}
 
-	private void InvalidateComplete ()
+	// Invalidates cache _and_ queues redraw. Like a full refresh
+	private void QueueFullRedraw ()
 	{
 		InvalidateCache ();
 		QueueDraw ();
@@ -264,18 +265,14 @@ public sealed class Ruler : Gtk.DrawingArea
 
 	private void Draw (Context cr, Size preliminarySize)
 	{
-		if (
-			!last_known_size.HasValue
-			|| preliminarySize.Width != last_known_size.Value.Width
-			|| preliminarySize.Height != last_known_size.Value.Height
-		) {
+		if (last_known_size != preliminarySize) {
 			InvalidateCache ();
 			last_known_size = new Size (preliminarySize.Width, preliminarySize.Height);
 		}
 
 		RulerDrawSettings settings = CreateSettings (preliminarySize);
 
-		cached_surface ??= GetDrawnRuler (settings, preliminarySize);
+		cached_surface ??= CreateBaseRuler (settings, preliminarySize);
 
 		cr.SetSourceSurface (cached_surface, 0, 0);
 		cr.Paint ();
@@ -298,7 +295,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		cr.Stroke ();
 	}
 
-	private ImageSurface GetDrawnRuler (in RulerDrawSettings settings, Size preliminarySize)
+	private ImageSurface CreateBaseRuler (in RulerDrawSettings settings, Size preliminarySize)
 	{
 		ImageSurface result = new (
 			Format.Argb32,
