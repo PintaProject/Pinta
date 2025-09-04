@@ -8,10 +8,12 @@ partial class BlendOpTests
 	private static IEnumerable<TestCaseData> VisualTests (
 		UserBlendOps.NormalBlendOp normalOp,
 		UserBlendOps.MultiplyBlendOp multiplyOp,
-		UserBlendOps.ScreenBlendOp screenOp)
+		UserBlendOps.ScreenBlendOp screenOp,
+		UserBlendOps.DarkenBlendOp darkenOp)
 	{
 		yield return new (normalOp, "visual_blended_normal.png");
 		yield return new (multiplyOp, "visual_blended_multiply.png");
 		yield return new (screenOp, "visual_blended_screen.png");
+		yield return new (darkenOp, "visual_blended_darken.png");
 	}
 }
