@@ -10,6 +10,7 @@ internal sealed partial class BlendOpTests
 	private static readonly ImmutableArray<TestCaseData> multiply_io_cases;
 	private static readonly ImmutableArray<TestCaseData> screen_io_cases;
 	private static readonly ImmutableArray<TestCaseData> darken_io_cases;
+	private static readonly ImmutableArray<TestCaseData> lighten_io_cases;
 
 	private static readonly ImmutableArray<TestCaseData> op_name_cases;
 	private static readonly ImmutableArray<TestCaseData> visual_cases;
@@ -20,28 +21,33 @@ internal sealed partial class BlendOpTests
 		UserBlendOps.MultiplyBlendOp multiplyOp = new ();
 		UserBlendOps.ScreenBlendOp screenOp = new ();
 		UserBlendOps.DarkenBlendOp darkenOp = new ();
+		UserBlendOps.LightenBlendOp lightenOp = new ();
 
 		normal_op = normalOp;
 		multiply_op = multiplyOp;
 		screen_op = screenOp;
 		darken_op = darkenOp;
+		lighten_op = lightenOp;
 
 		normal_io_cases = [.. CreateNormalIOCases (normalOp)];
 		multiply_io_cases = [.. CreateMultiplyIOCases (multiplyOp)];
 		screen_io_cases = [.. CreateScreenIOCases (screenOp)];
 		darken_io_cases = [.. CreateDarkenIOCases (darkenOp)];
+		lighten_io_cases = [.. CreateLightenIOCases (lightenOp)];
 
 		op_name_cases = [.. NamingTests (
 			normalOp,
 			multiplyOp,
 			screenOp,
-			darkenOp)];
+			darkenOp,
+			lightenOp)];
 
 		visual_cases = [.. VisualTests (
 			normalOp,
 			multiplyOp,
 			screenOp,
-			darkenOp)];
+			darkenOp,
+			lightenOp)];
 	}
 
 	[TestCaseSource (nameof (op_name_cases))]
@@ -54,6 +60,7 @@ internal sealed partial class BlendOpTests
 	[TestCaseSource (nameof (multiply_io_cases))]
 	[TestCaseSource (nameof (screen_io_cases))]
 	[TestCaseSource (nameof (darken_io_cases))]
+	[TestCaseSource (nameof (lighten_io_cases))]
 	public void Output_Is_Expected (UserBlendOp blendOp, ColorBgra bottom, ColorBgra top, ColorBgra expected)
 	{
 		ColorBgra result = blendOp.Apply (bottom, top);
