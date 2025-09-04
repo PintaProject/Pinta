@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using Cairo;
 using ClipperLib;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -36,12 +37,16 @@ public sealed class LassoSelectTool : BaseTool
 {
 	private readonly IWorkspaceService workspace;
 
-	private bool is_drawing = false;
+	private bool is_dragging = false;
 	private CombineMode combine_mode;
 	private SelectionHistoryItem? hist;
 
 	private Path? path;
 	private readonly List<IntPoint> lasso_polygon = [];
+
+	private Separator? mode_sep;
+	private Label? lasso_mode_label;
+	private ToolBarDropDownButton? lasso_mode_buttom;
 
 	public LassoSelectTool (IServiceProvider services) : base (services)
 	{
@@ -56,94 +61,153 @@ public sealed class LassoSelectTool : BaseTool
 	public override int Priority => 17;
 	public override bool IsSelectionTool => true;
 
+	private bool IsPolygonMode => LassoModeButtom.SelectedItem.GetTagOrDefault (false);
+	private bool IsFreeformMode => !IsPolygonMode;
+
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
 		base.OnBuildToolBar (tb);
 		workspace.SelectionHandler.BuildToolbar (tb, Settings);
+
+		tb.Append (Separator);
+		tb.Append (LassoModeLabel);
+		tb.Append (LassoModeButtom);
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
-		if (is_drawing)
+		if (is_dragging)
 			return;
 
-		hist = new SelectionHistoryItem (workspace, Icon, Name);
-		hist.TakeSnapshot ();
+		is_dragging = true;
 
-		combine_mode = workspace.SelectionHandler.DetermineCombineMode (e);
-		path = null;
-		is_drawing = true;
+		if (lasso_polygon.Count == 0) {
+			hist = new SelectionHistoryItem (workspace, Icon, Name);
+			hist.TakeSnapshot ();
 
-		document.PreviousSelection = document.Selection.Clone ();
+			combine_mode = workspace.SelectionHandler.DetermineCombineMode (e);
+			path = null;
+
+			document.PreviousSelection = document.Selection.Clone ();
+		}
+
+		if (IsPolygonMode) {
+			PointD p = document.ClampToImageSize (e.PointDouble);
+
+			lasso_polygon.Add (new IntPoint ((long) p.X, (long) p.Y));
+
+			ApplySelection (document);
+		}
+
+	}
+
+	private void ApplySelection (Document document)
+	{
+		document.Selection.SelectionPolygons.Clear ();
+		document.Selection.SelectionPolygons.Add ([.. lasso_polygon]);
+
+		SelectionModeHandler.PerformSelectionMode (
+			document,
+			combine_mode,
+			document.Selection.SelectionPolygons);
+
+		document.Workspace.Invalidate ();
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 	{
-		if (!is_drawing)
+		if (!is_dragging)
 			return;
 
 		PointD p = document.ClampToImageSize (e.PointDouble);
 
-		document.Selection.Visible = true;
+		if (IsFreeformMode) {
+			lasso_polygon.Add (new IntPoint ((long) p.X, (long) p.Y));
 
-		ImageSurface surf = document.Layers.SelectionLayer.Surface;
-
-		using Context g = new (surf) { Antialias = Antialias.Subpixel };
-
-		if (path != null) {
-			g.AppendPath (path);
-		} else {
-			g.MoveTo (p.X, p.Y);
+			ApplySelection (document);
+			return;
 		}
 
-		g.LineTo (p.X, p.Y);
-		lasso_polygon.Add (new IntPoint ((long) p.X, (long) p.Y));
+		if (lasso_polygon.Count == 0)
+			return;
 
-		path = g.CopyPath ();
+		lasso_polygon[lasso_polygon.Count -1] = new IntPoint (p.X, p.Y);
 
-		g.FillRule = FillRule.EvenOdd;
-		g.ClosePath ();
-
-		document.Selection.SelectionPolygons.Clear ();
-		document.Selection.SelectionPolygons.Add ([.. lasso_polygon]);
-
-		SelectionModeHandler.PerformSelectionMode (
-			document,
-			combine_mode,
-			document.Selection.SelectionPolygons);
-
-		document.Workspace.Invalidate ();
+		ApplySelection (document);
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		ImageSurface surf = document.Layers.SelectionLayer.Surface;
+		if (IsFreeformMode) {
+			ApplySelection (document);
 
-		using Context g = new (surf);
-		if (path != null) {
-			g.AppendPath (path);
-			path = null;
+			FinalizeShape (document);
 		}
+		is_dragging = false;
+	}
 
-		g.FillRule = FillRule.EvenOdd;
-		g.ClosePath ();
-
-		document.Selection.SelectionPolygons.Clear ();
-		document.Selection.SelectionPolygons.Add ([.. lasso_polygon]);
-
-		SelectionModeHandler.PerformSelectionMode (
-			document,
-			combine_mode,
-			document.Selection.SelectionPolygons);
-
-		document.Workspace.Invalidate ();
-
+	private void FinalizeShape (Document document)
+	{
 		if (hist != null) {
-			document.History.PushNewItem (hist);
+			if (lasso_polygon.Count > 1)
+				document.History.PushNewItem (hist);
 			hist = null;
 		}
-
 		lasso_polygon.Clear ();
-		is_drawing = false;
+	}
+
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		if (document != null)
+			FinalizeShape(document);
+	}
+
+	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
+	{
+		if (IsPolygonMode) {
+			switch (e.Key.Value) {
+				case Gdk.Constants.KEY_Return:
+					FinalizeShape(document);
+					return true;
+				case Gdk.Constants.KEY_BackSpace:
+					Backtrack (document);
+					return true;
+			}
+		}
+
+		return base.OnKeyDown (document, e);
+	}
+
+	private void Backtrack (Document document)
+	{
+		if (lasso_polygon.Count == 0) {
+			return;
+		}
+
+		lasso_polygon.RemoveAt (lasso_polygon.Count -1);
+
+		if (lasso_polygon.Count == 0) {
+			hist?.Undo ();
+			return;
+		}
+
+		ApplySelection (document);
+	}
+
+	private Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
+	private Label LassoModeLabel  => lasso_mode_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Lasso Mode")));
+
+	private ToolBarDropDownButton LassoModeButtom {
+		get {
+			if (lasso_mode_buttom is null) {
+				lasso_mode_buttom = new ToolBarDropDownButton ();
+
+				lasso_mode_buttom.AddItem (Translations.GetString ("Freeform"), Pinta.Resources.Icons.ToolFreeformShape, false);
+				lasso_mode_buttom.AddItem (Translations.GetString ("Polygon"), Pinta.Resources.Icons.LassoPolygon, true);
+
+			}
+
+			return lasso_mode_buttom;
+		}
 	}
 }
