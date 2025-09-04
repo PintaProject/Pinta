@@ -102,11 +102,7 @@ public sealed class RadialBlurEffect : BaseEffect
 			X: (pixel.coordinates.X << 16) - settings.fcx,
 			Y: (pixel.coordinates.Y << 16) - settings.fcy);
 
-		int sr = sourcePixel.R;
-		int sg = sourcePixel.G;
-		int sb = sourcePixel.B;
-		int sa = sourcePixel.A;
-		int sc = 1;
+		ColorBgra.Blender blender = new (sourcePixel);
 
 		PointI o1 = f;
 		PointI o2 = f;
@@ -120,43 +116,21 @@ public sealed class RadialBlurEffect : BaseEffect
 				X: o1.X + settings.fcx + 32768 >> 16,
 				Y: o1.Y + settings.fcy + 32768 >> 16);
 
-			if (p1.X > 0 && p1.Y > 0 && p1.X < settings.canvasSize.Width && p1.Y < settings.canvasSize.Height) {
-
-				ColorBgra sample = sourceData[p1.Y * settings.canvasSize.Width + p1.X];
-
-				sr += sample.R;
-				sg += sample.G;
-				sb += sample.B;
-				sa += sample.A;
-
-				++sc;
-			}
+			if (p1.X > 0 && p1.Y > 0 && p1.X < settings.canvasSize.Width && p1.Y < settings.canvasSize.Height)
+				blender += sourceData[p1.Y * settings.canvasSize.Width + p1.X];
 
 			PointI p2 = new (
 				X: o2.X + settings.fcx + 32768 >> 16,
 				Y: o2.Y + settings.fcy + 32768 >> 16);
 
-			if (p2.X > 0 && p2.Y > 0 && p2.X < settings.canvasSize.Width && p2.Y < settings.canvasSize.Height) {
-
-				ColorBgra sample = sourceData[p2.Y * settings.canvasSize.Width + p2.X];
-
-				sr += sample.R;
-				sg += sample.G;
-				sb += sample.B;
-				sa += sample.A;
-
-				++sc;
-			}
+			if (p2.X > 0 && p2.Y > 0 && p2.X < settings.canvasSize.Width && p2.Y < settings.canvasSize.Height)
+				blender += sourceData[p2.Y * settings.canvasSize.Width + p2.X];
 		}
 
-		return
-			(sa > 0)
-			? ColorBgra.FromBgra (
-				b: Utility.ClampToByte (sb / sc),
-				g: Utility.ClampToByte (sg / sc),
-				r: Utility.ClampToByte (sr / sc),
-				a: Utility.ClampToByte (sa / sc))
-			: ColorBgra.Transparent;
+		if (blender.Aggregate.A > 0)
+			return blender.Blend ();
+		else
+			return ColorBgra.Transparent;
 	}
 
 	public sealed class RadialBlurData : EffectData

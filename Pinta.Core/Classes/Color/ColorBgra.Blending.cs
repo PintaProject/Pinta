@@ -160,6 +160,14 @@ partial struct ColorBgra
 			A = 0;
 		}
 
+		public Aggregate (in ColorBgra initial)
+		{
+			B = initial.B;
+			G = initial.G;
+			R = initial.R;
+			A = initial.A;
+		}
+
 		private Aggregate (int b, int g, int r, int a)
 		{
 			B = b;
@@ -205,6 +213,12 @@ partial struct ColorBgra
 		{
 			Aggregate = new ();
 			Count = 0;
+		}
+
+		public Blender (in ColorBgra initial)
+		{
+			Aggregate = new (initial);
+			Count = 1;
 		}
 
 		private Blender (in Aggregate aggregate, int count)
