@@ -67,7 +67,7 @@ public sealed class TextHistoryItem : BaseHistoryItem
 
 		text_surface_diff = SurfaceDiff.Create (
 			original: passedTextSurface,
-			updated_surf: user_layer.TextLayer.Layer.Surface,
+			updated: user_layer.TextLayer.Layer.Surface,
 			force: true);
 
 		if (text_surface_diff == null) {
@@ -76,7 +76,7 @@ public sealed class TextHistoryItem : BaseHistoryItem
 
 		user_surface_diff = SurfaceDiff.Create (
 			original: passedUserSurface,
-			updated_surf: user_layer.Surface,
+			updated: user_layer.Surface,
 			force: true);
 
 		if (user_surface_diff == null) {

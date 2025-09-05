@@ -51,9 +51,12 @@ public sealed class SurfaceDiff
 		this.pixels = pixels;
 	}
 
-	public static SurfaceDiff? Create (ImageSurface original, ImageSurface updated_surf, bool force = false)
+	public static SurfaceDiff? Create (ImageSurface original, ImageSurface updated, bool force = false)
 	{
-		if (original.GetSize () != updated_surf.GetSize ()) {
+		Size originalSize = original.GetSize ();
+		Size updatedSize = updated.GetSize ();
+
+		if (originalSize != updatedSize) {
 
 			// If the surface changed size, only throw an error if the user forced the use of a diff.
 			if (force)
@@ -62,10 +65,6 @@ public sealed class SurfaceDiff
 			return null;
 		}
 
-		// Cache some pinvokes
-		int orig_width = original.Width;
-		int orig_height = original.Height;
-
 #if DEBUG_DIFF
 		Console.WriteLine ("Original surface size: {0}x{1}", orig_width, orig_height);
 		System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch ();
@@ -73,8 +72,8 @@ public sealed class SurfaceDiff
 #endif
 
 		// STEP 1 - Find the bounds of the changed pixels.
-		RectangleI diff_bounds = RectangleI.FromLTRB (orig_width + 1, orig_height + 1, -1, -1); // TODO: Inverted rectangle! Should refactor
-		object diff_bounds_lock = new ();
+		RectangleI diffBounds = RectangleI.FromLTRB (originalSize.Width + 1, originalSize.Height + 1, -1, -1); // TODO: Inverted rectangle! Should refactor
+		object diffBoundsLock = new ();
 
 		// Split up the work among several threads, each of which processes one row at a time
 		// and updates the bounds of the changed pixels it has seen so far. At the end, the
@@ -82,40 +81,48 @@ public sealed class SurfaceDiff
 		// pixels.
 		Parallel.For (
 			0,
-			orig_height,
-			() => RectangleI.FromLTRB (orig_width + 1, orig_height + 1, -1, -1), // TODO: Inverted rectangle! Should refactor
-			(row, loop, my_bounds) => {
+			originalSize.Height,
+			() => RectangleI.FromLTRB (originalSize.Width + 1, originalSize.Height + 1, -1, -1), // TODO: Inverted rectangle! Should refactor
+			(row, loop, newBounds) => {
 
-				int offset = row * orig_width;
-				var orig_row = original.GetReadOnlyPixelData ().Slice (offset, orig_width);
-				var updated_row = updated_surf.GetPixelData ().Slice (offset, orig_width);
+				int offset = row * originalSize.Width;
 
-				bool change_in_row = false;
-				int newLeft = my_bounds.Left;
-				int newRight = my_bounds.Right;
+				ReadOnlySpan<ColorBgra> originalRow =
+					original
+					.GetReadOnlyPixelData ()
+					.Slice (offset, originalSize.Width);
 
-				for (int i = 0; i < orig_width; ++i) {
-					if (orig_row[i] == updated_row[i]) continue;
-					change_in_row = true;
+				Span<ColorBgra> updatedRow =
+					updated
+					.GetPixelData ()
+					.Slice (offset, originalSize.Width);
+
+				bool changeInRow = false;
+				int newLeft = newBounds.Left;
+				int newRight = newBounds.Right;
+
+				for (int i = 0; i < originalSize.Width; ++i) {
+					if (originalRow[i] == updatedRow[i]) continue;
+					changeInRow = true;
 					newLeft = Math.Min (newLeft, i);
 					newRight = Math.Max (newRight, i);
 				}
 
 				int newTop =
-					change_in_row
-					? Math.Min (my_bounds.Top, row)
-					: my_bounds.Top;
+					changeInRow
+					? Math.Min (newBounds.Top, row)
+					: newBounds.Top;
 
 				int newBottom =
-					change_in_row
-					? Math.Max (my_bounds.Bottom, row)
-					: my_bounds.Bottom;
+					changeInRow
+					? Math.Max (newBounds.Bottom, row)
+					: newBounds.Bottom;
 
 				return RectangleI.FromLTRB (newLeft, newTop, newRight, newBottom);
 			},
 			my_bounds => {
-				lock (diff_bounds_lock) {
-					diff_bounds = diff_bounds.Union (my_bounds);
+				lock (diffBoundsLock) {
+					diffBounds = diffBounds.Union (my_bounds);
 				}
 			}
 		);
@@ -126,30 +133,41 @@ public sealed class SurfaceDiff
 
 		// STEP 2 - Create a bitarray of whether each pixel in the bounds has changed, and count
 		// how many changed pixels we need to store.
-		BitArray bitmask = new (diff_bounds.Width * diff_bounds.Height);
+
+		BitArray bitmask = new (diffBounds.Width * diffBounds.Height);
+
 		int index = 0;
-		int num_changed = 0;
+		int changeCount = 0;
 
-		int bottom = diff_bounds.Bottom;
-		int right = diff_bounds.Right;
-		int bounds_x = diff_bounds.X;
-		int bounds_y = diff_bounds.Y;
+		int bottom = diffBounds.Bottom;
+		int right = diffBounds.Right;
+		int boundsX = diffBounds.X;
+		int boundsY = diffBounds.Y;
 
-		for (int y = bounds_y; y <= bottom; ++y) {
-			int offset = y * orig_width;
-			var orig_row = original.GetReadOnlyPixelData ().Slice (offset, orig_width);
-			var updated_row = updated_surf.GetPixelData ().Slice (offset, orig_width);
+		for (int y = boundsY; y <= bottom; ++y) {
 
-			for (int x = bounds_x; x <= right; ++x) {
-				bool changed = orig_row[x] != updated_row[x];
+			int offset = y * originalSize.Width;
+
+			ReadOnlySpan<ColorBgra> originalRow =
+				original
+				.GetReadOnlyPixelData ()
+				.Slice (offset, originalSize.Width);
+
+			Span<ColorBgra> updatedRow =
+				updated
+				.GetPixelData ()
+				.Slice (offset, originalSize.Width);
+
+			for (int x = boundsX; x <= right; ++x) {
+				bool changed = originalRow[x] != updatedRow[x];
 				bitmask[index++] = changed;
 				if (changed) {
-					num_changed++;
+					changeCount++;
 				}
 			}
 		}
 
-		float savings = 100 - num_changed / (float) (orig_width * orig_height) * 100;
+		float savings = 100 - changeCount / (float) (originalSize.Width * originalSize.Height) * 100;
 #if DEBUG_DIFF
 		Console.WriteLine ("Compressed bitmask: {0}/{1} = {2}%", num_changed, orig_height * orig_width, 100 - savings);
 #endif
@@ -162,16 +180,17 @@ public sealed class SurfaceDiff
 		}
 
 		// Store the old pixels.
-		var pixels = new ColorBgra[num_changed];
-		var orig_data = original.GetPixelData ();
-		int mask_index = 0;
+		ColorBgra[] pixels = new ColorBgra[changeCount];
 
-		int pixels_idx = 0;
-		for (int y = bounds_y; y <= bottom; ++y) {
-			int orig_idx = bounds_x + y * orig_width;
-			for (int x = bounds_x; x <= right; ++x) {
-				if (bitmask[mask_index++]) {
-					pixels[pixels_idx++] = orig_data[y * orig_width + x];
+		ReadOnlySpan<ColorBgra> originalData = original.GetReadOnlyPixelData ();
+		int maskIndex = 0;
+
+		int pixelsIndex = 0;
+		for (int y = boundsY; y <= bottom; ++y) {
+			int originalIndex = boundsX + y * originalSize.Width;
+			for (int x = boundsX; x <= right; ++x) {
+				if (bitmask[maskIndex++]) {
+					pixels[pixelsIndex++] = originalData[y * originalSize.Width + x];
 				}
 			}
 		}
@@ -181,7 +200,7 @@ public sealed class SurfaceDiff
 		System.Console.WriteLine ("SurfaceDiff time: " + timer.ElapsedMilliseconds);
 #endif
 
-		return new SurfaceDiff (bitmask, diff_bounds, pixels);
+		return new SurfaceDiff (bitmask, diffBounds, pixels);
 	}
 	#endregion
 
@@ -197,43 +216,42 @@ public sealed class SurfaceDiff
 	}
 
 	public RectangleI GetBounds ()
-	{
-		return bounds;
-	}
+		=> bounds;
+
 	#endregion
 
 	#region Private Methods
-	private void ApplyAndSwap (ImageSurface dst, bool swap)
+	private void ApplyAndSwap (ImageSurface destination, bool swap)
 	{
-		dst.Flush ();
+		destination.Flush ();
 
-		int dest_width = dst.Width;
-		var dst_data = dst.GetPixelData ();
-		int mask_index = 0;
-		int pixel_idx = 0;
-		ColorBgra swap_pixel;
+		int destinationWidth = destination.Width;
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
+		int maskIndex = 0;
+		int pixelIndex = 0;
+		ColorBgra swapPixel;
 
 		for (int y = bounds.Y; y <= bounds.Bottom; y++) {
-			int dst_idx = bounds.X + y * dest_width;
+			int destinationIndex = bounds.X + y * destinationWidth;
 			for (int x = bounds.X; x <= bounds.Right; x++) {
-				if (bitmask[mask_index++]) {
+				if (bitmask[maskIndex++]) {
 					if (swap) {
-						swap_pixel = dst_data[dst_idx];
-						dst_data[dst_idx] = pixels[pixel_idx];
-						pixels[pixel_idx] = swap_pixel;
+						swapPixel = destinationData[destinationIndex];
+						destinationData[destinationIndex] = pixels[pixelIndex];
+						pixels[pixelIndex] = swapPixel;
 					} else {
-						dst_data[dst_idx] = pixels[pixel_idx];
+						destinationData[destinationIndex] = pixels[pixelIndex];
 					}
 
-					++pixel_idx;
+					++pixelIndex;
 				}
 
-				++dst_idx;
+				++destinationIndex;
 			}
 
 		}
 
-		dst.MarkDirty ();
+		destination.MarkDirty ();
 	}
 	#endregion
 }
