@@ -1,4 +1,6 @@
+using System;
 using Cairo;
+using NGettext.Loaders;
 using NUnit.Framework;
 
 namespace Pinta.Core.Tests;
@@ -15,7 +17,11 @@ internal sealed class SurfaceDifferenceTests
 		using ImageSurface originalA = Utilities.LoadImage (pathA);
 		using ImageSurface originalB = Utilities.LoadImage (pathB);
 
-		using ImageSurface modifiable = originalB.Clone ();
+		// Cloning "B". Can't use the "Clone" extension method because it depends on PintaCore
+		using ImageSurface modifiable = new ImageSurface (Format.Argb32, originalA.Width, originalA.Height);
+		ReadOnlySpan<ColorBgra> originalBData = originalB.GetReadOnlyPixelData ();
+		Span<ColorBgra> modifiableData = modifiable.GetPixelData ();
+		originalBData.CopyTo (modifiableData);
 
 		SurfaceDiff difference = SurfaceDiff.Create (originalA, originalB, force: true)!;
 
