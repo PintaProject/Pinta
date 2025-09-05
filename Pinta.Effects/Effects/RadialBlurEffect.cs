@@ -102,7 +102,8 @@ public sealed class RadialBlurEffect : BaseEffect
 			X: (pixel.coordinates.X << 16) - settings.fcx,
 			Y: (pixel.coordinates.Y << 16) - settings.fcy);
 
-		ColorBgra.Blender blender = new (sourcePixel);
+		ColorBgra.Blender blender = new ();
+		blender += sourcePixel;
 
 		PointI o1 = f;
 		PointI o2 = f;
