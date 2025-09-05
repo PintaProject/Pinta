@@ -153,12 +153,12 @@ public sealed class CanvasWindow : Gtk.Grid
 	{
 		if (document.Selection.Visible) {
 			RectangleD bounds = document.Selection.GetBounds ();
-			horizontal_ruler.SetSelectionRange (bounds.Left, bounds.Right);
-			vertical_ruler.SetSelectionRange (bounds.Top, bounds.Bottom);
+			horizontal_ruler.SetSelectionRange (bounds.Left, bounds.Left + bounds.Width);
+			vertical_ruler.SetSelectionRange (bounds.Top, bounds.Top + bounds.Height);
 		} else {
 			// If there's no selection, clear the highlight
-			horizontal_ruler.SetSelectionRange (0, 0);
-			vertical_ruler.SetSelectionRange (0, 0);
+			horizontal_ruler.SetSelectionRange (null, null);
+			vertical_ruler.SetSelectionRange (null, null);
 		}
 	}
 
