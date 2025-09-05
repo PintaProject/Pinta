@@ -56,9 +56,9 @@ public sealed class LassoSelectTool : BaseTool
 	public override string Name => Translations.GetString ("Lasso Select");
 	public override string Icon => Pinta.Resources.Icons.ToolSelectLasso;
 	public override string StatusBarText => Translations.GetString ("On Freeform mode, click and drag to draw the outline for a selection area." +
-	                                                                "\n\nOn Polygon mode, click and drag to add a new point to the selection." +
-	                                                                "\nPress Enter to finish the selection"+
-	                                                                "\nPress Backspace to delete the last point");
+									"\n\nOn Polygon mode, click and drag to add a new point to the selection." +
+									"\nPress Enter to finish the selection" +
+									"\nPress Backspace to delete the last point");
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18, null);
 	public override int Priority => 17;
@@ -134,7 +134,7 @@ public sealed class LassoSelectTool : BaseTool
 		if (lasso_polygon.Count == 0)
 			return;
 
-		lasso_polygon[lasso_polygon.Count -1] = new IntPoint (p.X, p.Y);
+		lasso_polygon[lasso_polygon.Count - 1] = new IntPoint (p.X, p.Y);
 
 		ApplySelection (document);
 	}
@@ -162,7 +162,7 @@ public sealed class LassoSelectTool : BaseTool
 	protected override void OnDeactivated (Document? document, BaseTool? newTool)
 	{
 		if (document != null)
-			FinalizeShape(document);
+			FinalizeShape (document);
 	}
 
 	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
@@ -170,7 +170,7 @@ public sealed class LassoSelectTool : BaseTool
 		if (IsPolygonMode) {
 			switch (e.Key.Value) {
 				case Gdk.Constants.KEY_Return:
-					FinalizeShape(document);
+					FinalizeShape (document);
 					return true;
 				case Gdk.Constants.KEY_BackSpace:
 					Backtrack (document);
@@ -187,7 +187,7 @@ public sealed class LassoSelectTool : BaseTool
 			return;
 		}
 
-		lasso_polygon.RemoveAt (lasso_polygon.Count -1);
+		lasso_polygon.RemoveAt (lasso_polygon.Count - 1);
 
 		if (lasso_polygon.Count == 0) {
 			hist?.Undo ();
@@ -198,7 +198,7 @@ public sealed class LassoSelectTool : BaseTool
 	}
 
 	private Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
-	private Label LassoModeLabel  => lasso_mode_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Lasso Mode")));
+	private Label LassoModeLabel => lasso_mode_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Lasso Mode")));
 
 	private ToolBarDropDownButton LassoModeButtom {
 		get {
