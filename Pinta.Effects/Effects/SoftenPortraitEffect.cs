@@ -43,7 +43,6 @@ namespace Pinta.Effects;
 public sealed class SoftenPortraitEffect : BaseEffect
 {
 	private readonly GaussianBlurEffect blur_effect;
-	private readonly BrightnessContrastEffect bac_adjustment;
 	private readonly UnaryPixelOps.Desaturate desaturate_op;
 	private readonly UserBlendOps.OverlayBlendOp overlay_op;
 
@@ -69,7 +68,6 @@ public sealed class SoftenPortraitEffect : BaseEffect
 		EffectData = new SoftenPortraitData ();
 
 		blur_effect = new GaussianBlurEffect (services);
-		bac_adjustment = new BrightnessContrastEffect (services);
 		desaturate_op = new UnaryPixelOps.Desaturate ();
 		overlay_op = new UserBlendOps.OverlayBlendOp ();
 	}
@@ -78,44 +76,44 @@ public sealed class SoftenPortraitEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	private sealed record SoftenPortraitSettings (
-		float redAdjust,
-		float blueAdjust,
-		int blurRadius,
-		int brightness,
-		int contrast);
+		BrightnessContrast.PreRender BrightnessContrast,
+		float RedAdjust,
+		float BlueAdjust,
+		int BlurRadius);
 
 	private SoftenPortraitSettings CreateSettings ()
 	{
-		int warmth = Data.Warmth;
+		SoftenPortraitData data = Data;
+		int warmth = data.Warmth;
+		int brightness = data.Lighting;
+		int contrast = -data.Lighting / 2;
 		return new (
-			redAdjust: 1.0f + (warmth / 100.0f),
-			blueAdjust: 1.0f - (warmth / 100.0f),
-			blurRadius: 3 * Data.Softness,
-			brightness: Data.Lighting,
-			contrast: -Data.Lighting / 2);
+			RedAdjust: 1.0f + (warmth / 100.0f),
+			BlueAdjust: 1.0f - (warmth / 100.0f),
+			BlurRadius: 3 * data.Softness,
+			BrightnessContrast: new (brightness, contrast));
 	}
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		SoftenPortraitSettings settings = CreateSettings ();
-		blur_effect.Data.Radius = settings.blurRadius;
-		bac_adjustment.Data.Brightness = settings.brightness;
-		bac_adjustment.Data.Contrast = settings.contrast;
 
+		blur_effect.Data.Radius = settings.BlurRadius;
 		blur_effect.Render (source, destination, [roi]);
-		bac_adjustment.Render (destination, destination, [roi]);
 
-		ReadOnlySpan<ColorBgra> src_data = source.GetReadOnlyPixelData ();
-		Span<ColorBgra> dst_data = destination.GetPixelData ();
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ())) {
-			ColorBgra srcGrey = desaturate_op.Apply (src_data[pixel.memoryOffset]);
+			ColorBgra blurred = destinationData[pixel.memoryOffset];
+			ColorBgra blurredAdjusted = settings.BrightnessContrast.GetPixelColor (blurred);
+			ColorBgra grayOriginal = desaturate_op.Apply (sourceData[pixel.memoryOffset]);
 			ColorBgra effective = ColorBgra.FromBgra (
-				b: Utility.ClampToByte ((int) (srcGrey.B * settings.blueAdjust)),
-				g: srcGrey.G,
-				r: Utility.ClampToByte ((int) (srcGrey.R * settings.redAdjust)),
-				a: srcGrey.A);
-			dst_data[pixel.memoryOffset] = overlay_op.Apply (effective, dst_data[pixel.memoryOffset]);
+				b: Utility.ClampToByte ((int) (grayOriginal.B * settings.BlueAdjust)),
+				g: grayOriginal.G,
+				r: Utility.ClampToByte ((int) (grayOriginal.R * settings.RedAdjust)),
+				a: grayOriginal.A);
+			destinationData[pixel.memoryOffset] = overlay_op.Apply (effective, blurredAdjusted);
 		}
 	}
 }
