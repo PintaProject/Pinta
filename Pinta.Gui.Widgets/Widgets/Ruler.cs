@@ -177,7 +177,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		int Start,
 		int End,
 		double MarkerPosition,
-		RectangleD RulerBottomLine,
+		RectangleD RulerOuterLine,
 		Size EffectiveSize,
 		Color Color,
 		Gtk.Orientation Orientation);
@@ -185,7 +185,7 @@ public sealed class Ruler : Gtk.DrawingArea
 	{
 		GetStyleContext ().GetColor (out Color color);
 
-		RectangleD rulerBottomLine = Orientation switch {
+		RectangleD rulerOuterLine = Orientation switch {
 
 			Gtk.Orientation.Vertical => new (
 				X: preliminarySize.Width - 1,
@@ -272,7 +272,7 @@ public sealed class Ruler : Gtk.DrawingArea
 			Start: (int) Math.Floor (scaledLower * ticksPerUnit),
 			End: (int) Math.Ceiling (scaledUpper * ticksPerUnit),
 			MarkerPosition: (Position - Lower) * (effectiveSize.Width / (Upper - Lower)),
-			RulerBottomLine: rulerBottomLine,
+			RulerOuterLine: rulerOuterLine,
 			EffectiveSize: effectiveSize,
 			Color: color,
 			Orientation: Orientation);
@@ -342,7 +342,7 @@ public sealed class Ruler : Gtk.DrawingArea
 
 		drawingContext.SetSourceColor (settings.Color);
 		drawingContext.LineWidth = 1.0;
-		drawingContext.Rectangle (settings.RulerBottomLine);
+		drawingContext.Rectangle (settings.RulerOuterLine);
 		drawingContext.Fill ();
 
 		for (int i = settings.Start; i <= settings.End; ++i) {
