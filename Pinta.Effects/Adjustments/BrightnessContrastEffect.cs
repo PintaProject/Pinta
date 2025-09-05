@@ -136,7 +136,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 			destinationData[pixel.memoryOffset] = GetPixelColor (settings, sourceData[pixel.memoryOffset]);
 	}
 
-	private ColorBgra GetPixelColor (in BrightnessContrastSettings settings, in ColorBgra originalColor)
+	private static ColorBgra GetPixelColor (in BrightnessContrastSettings settings, in ColorBgra originalColor)
 	{
 		int intensity = originalColor.GetIntensityByte ();
 		if (settings.DivideIsZero) {
