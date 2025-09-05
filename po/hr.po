@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-01 00:24+0000\n"
-"PO-Revision-Date: 2025-09-05 16:52+0000\n"
+"PO-Revision-Date: 2025-09-05 17:28+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/pinta/pinta/hr/>"
 "\n"
@@ -244,7 +244,7 @@ msgstr "Logorska vatra"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr "Sredina dolje"
+msgstr "Dolje sredina"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
@@ -337,7 +337,7 @@ msgstr "Sredina lijevo"
 #: ../Pinta.Effects/Effects/DentsEffect.cs:155
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:95
 msgid "Center Offset"
-msgstr "Centriraj pomak"
+msgstr "Središte pomaka"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
@@ -990,8 +990,7 @@ msgstr "Sakrij sloj"
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:58
 msgid "Hint: For best results, first use selection tools to select each eye."
 msgstr ""
-"Savjet: Za najbolje rezultate najprije odaberi alate za odabir za biranje "
-"svakog oka."
+"Savjet: Za najbolje rezultate najprije odaberi alate za biranje svakog oka."
 
 #: ../Pinta/Pads/HistoryPad.cs:50
 msgid "History"
@@ -2059,7 +2058,7 @@ msgstr "Promjeni veličinu slike..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:60
 msgid "Resize Palette"
-msgstr "Promjeni veličinu paleta"
+msgstr "Promjeni veličinu palete"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
 msgid "Restart Pinta"
@@ -2172,7 +2171,7 @@ msgstr "Spremi datoteku slike"
 
 #: ../Pinta.Core/Actions/EditActions.cs:526
 msgid "Save Palette File"
-msgstr "Spremi datoteku paleta"
+msgstr "Spremi datoteku palete"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #, csharp-format
@@ -2430,7 +2429,7 @@ msgstr "Vrsta pločica"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
 msgid "Tip: Right-click to remove control points."
-msgstr "Savjet: Desni-klik za uklanjanje kontrolnih točaka."
+msgstr "Savjet: Desni klik za uklanjanje kontrolnih točaka."
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
