@@ -31,6 +31,6 @@ internal sealed class SurfaceDifferenceTests
 
 		difference.ApplyAndSwap (modifiable);
 
-		Utilities.CompareImages (modifiable, originalA);
+		Utilities.CompareImages (modifiable, originalB);
 	}
 }
