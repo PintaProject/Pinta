@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Cairo;
 using Pinta.Core;
 
@@ -271,7 +272,7 @@ public sealed class Ruler : Gtk.DrawingArea
 			UnitsPerTick: unitsPerTick,
 			Start: (int) Math.Floor (scaledLower * ticksPerUnit),
 			End: (int) Math.Ceiling (scaledUpper * ticksPerUnit),
-			MarkerPosition: (Position - Lower) * (effectiveSize.Width / (Upper - Lower)),
+			MarkerPosition: GetPositionOnRuler (Position, effectiveSize.Width),
 			RulerOuterLine: rulerOuterLine,
 			EffectiveSize: effectiveSize,
 			Color: color,
@@ -293,8 +294,8 @@ public sealed class Ruler : Gtk.DrawingArea
 		if (selection_start < selection_end) {
 
 			// Convert selection coordinates to ruler widget coordinates
-			double p1 = (selection_start - Lower) * (settings.EffectiveSize.Width / (Upper - Lower));
-			double p2 = (selection_end - Lower) * (settings.EffectiveSize.Width / (Upper - Lower));
+			double p1 = GetPositionOnRuler (selection_start, settings.EffectiveSize.Width);
+			double p2 = GetPositionOnRuler (selection_end, settings.EffectiveSize.Width);
 
 			cr.SetSourceRgba (0.5, 0.7, 1.0, 0.5); // Semi-transparent blue
 
@@ -389,6 +390,15 @@ public sealed class Ruler : Gtk.DrawingArea
 		}
 
 		return result;
+	}
+
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	private double GetPositionOnRuler (double position, double width)
+	{
+		double range = Upper - Lower;
+		double scaledWidth = width / range;
+		double positionFromLower = position - Lower;
+		return positionFromLower * scaledWidth;
 	}
 
 	private static int GetFontSize (Pango.FontDescription font, int scaleFactor)
