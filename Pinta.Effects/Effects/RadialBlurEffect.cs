@@ -127,10 +127,7 @@ public sealed class RadialBlurEffect : BaseEffect
 				blender += sourceData[p2.Y * settings.canvasSize.Width + p2.X];
 		}
 
-		if (blender.Aggregate.A > 0)
-			return blender.Blend ();
-		else
-			return ColorBgra.Transparent;
+		return blender.Blend ();
 	}
 
 	public sealed class RadialBlurData : EffectData
