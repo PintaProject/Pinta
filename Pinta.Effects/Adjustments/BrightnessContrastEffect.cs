@@ -8,67 +8,15 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
+using static Pinta.Effects.BrightnessContrast;
 
 namespace Pinta.Effects;
 
 public sealed class BrightnessContrastEffect : BaseEffect
 {
-	private sealed class PreRender
-	{
-		public int Multiply { get; }
-		public int Divide { get; }
-		public ReadOnlyCollection<byte> RGBTable { get; }
-		public PreRender (int brightness, int contrast)
-		{
-			(int multiply, int divide) = contrast switch {
-				< 0 => (contrast + 100, 100),
-				> 0 => (100, 100 - contrast),
-				_ => (1, 1),
-			};
-
-			(Multiply, Divide) = (multiply, divide);
-			RGBTable = Array.AsReadOnly (CalculateTable (brightness, multiply, divide));
-		}
-
-		private static byte[] CalculateTable (int brightness, int multiply, int divide)
-		{
-			byte[] result = new byte[65536];
-
-			if (divide == 0) {
-				for (int intensity = 0; intensity < 256; intensity++) {
-					if (intensity + brightness < 128)
-						result[intensity] = 0;
-					else
-						result[intensity] = 255;
-				}
-			} else if (divide == 100) {
-				for (int intensity = 0; intensity < 256; intensity++) {
-					int shift = (intensity - 127) * multiply / divide + 127 - intensity + brightness;
-
-					for (int col = 0; col < 256; ++col) {
-						int index = (intensity * 256) + col;
-						result[index] = Utility.ClampToByte (col + shift);
-					}
-				}
-			} else {
-				for (int intensity = 0; intensity < 256; ++intensity) {
-					int shift = (intensity - 127 + brightness) * multiply / divide + 127 - intensity;
-
-					for (int col = 0; col < 256; ++col) {
-						int index = (intensity * 256) + col;
-						result[index] = Utility.ClampToByte (col + shift);
-					}
-				}
-			}
-
-			return result;
-		}
-	}
-
 	private Lazy<PreRender> pre_render = new (() => new (DEFAULT_BRIGHTNESS, DEFAULT_CONTRAST));
 
 	public sealed override bool IsTileable
@@ -113,17 +61,9 @@ public sealed class BrightnessContrastEffect : BaseEffect
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
-	private readonly record struct BrightnessContrastSettings (
-		PreRender PreRender,
-		Size CanvasSize,
-		bool DivideIsZero);
+	private readonly record struct BrightnessContrastSettings (PreRender PreRender, Size CanvasSize);
 	private static BrightnessContrastSettings CreateSettings (ImageSurface destination, PreRender preRender)
-	{
-		return new (
-			PreRender: preRender,
-			CanvasSize: destination.GetSize (),
-			DivideIsZero: preRender.Divide == 0);
-	}
+		=> new (PreRender: preRender, CanvasSize: destination.GetSize ());
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
@@ -133,23 +73,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.CanvasSize))
-			destinationData[pixel.memoryOffset] = GetPixelColor (settings, sourceData[pixel.memoryOffset]);
-	}
-
-	private static ColorBgra GetPixelColor (in BrightnessContrastSettings settings, in ColorBgra originalColor)
-	{
-		int intensity = originalColor.GetIntensityByte ();
-		if (settings.DivideIsZero) {
-			uint c = settings.PreRender.RGBTable[intensity];
-			return ColorBgra.FromUInt32 ((originalColor.BGRA & 0xff000000) | c | (c << 8) | (c << 16));
-		} else {
-			int shiftIndex = intensity * 256;
-			return ColorBgra.FromBgra (
-				b: settings.PreRender.RGBTable[shiftIndex + originalColor.B],
-				g: settings.PreRender.RGBTable[shiftIndex + originalColor.G],
-				r: settings.PreRender.RGBTable[shiftIndex + originalColor.R],
-				a: originalColor.A);
-		}
+			destinationData[pixel.memoryOffset] = settings.PreRender.GetPixelColor (sourceData[pixel.memoryOffset]);
 	}
 
 	const int DEFAULT_BRIGHTNESS = 0;
