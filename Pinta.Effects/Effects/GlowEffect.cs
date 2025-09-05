@@ -68,7 +68,7 @@ public sealed class GlowEffect : BaseEffect
 			foreach (var pixel in Tiling.GeneratePixelOffsets (roi, canvasSize)) {
 				ColorBgra original = sourceData[pixel.memoryOffset];
 				ColorBgra blurred = destinationData[pixel.memoryOffset];
-				ColorBgra blurredAdjusted = brightnessContrast.Value.GetPixelColor (blurred);
+				ColorBgra blurredAdjusted = brightnessContrast.Value.Apply (blurred);
 				destinationData[pixel.memoryOffset] = screen_blend_op.Apply (blurredAdjusted, original);
 			}
 		}

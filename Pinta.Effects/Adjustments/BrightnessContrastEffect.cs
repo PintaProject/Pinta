@@ -73,7 +73,7 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.CanvasSize))
-			destinationData[pixel.memoryOffset] = settings.PreRender.GetPixelColor (sourceData[pixel.memoryOffset]);
+			destinationData[pixel.memoryOffset] = settings.PreRender.Apply (sourceData[pixel.memoryOffset]);
 	}
 
 	const int DEFAULT_BRIGHTNESS = 0;

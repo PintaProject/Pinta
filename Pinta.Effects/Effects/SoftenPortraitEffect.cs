@@ -106,7 +106,7 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ())) {
 			ColorBgra blurred = destinationData[pixel.memoryOffset];
-			ColorBgra blurredAdjusted = settings.BrightnessContrast.GetPixelColor (blurred);
+			ColorBgra blurredAdjusted = settings.BrightnessContrast.Apply (blurred);
 			ColorBgra grayOriginal = desaturate_op.Apply (sourceData[pixel.memoryOffset]);
 			ColorBgra effective = ColorBgra.FromBgra (
 				b: Utility.ClampToByte ((int) (grayOriginal.B * settings.BlueAdjust)),

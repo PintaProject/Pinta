@@ -66,7 +66,7 @@ public sealed class PencilSketchEffect : BaseEffect
 
 		foreach (RectangleI roi in rois)
 			foreach (var pixel in Tiling.GeneratePixelOffsets (roi, canvasSize))
-				destinationData[pixel.memoryOffset] = brightnessContrast.Value.GetPixelColor (sourceData[pixel.memoryOffset]);
+				destinationData[pixel.memoryOffset] = brightnessContrast.Value.Apply (sourceData[pixel.memoryOffset]);
 
 		blur_effect.Data.Radius = Data.PencilTipSize;
 		blur_effect.Render (source, destination, rois);

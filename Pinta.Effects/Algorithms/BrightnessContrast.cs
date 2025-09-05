@@ -58,7 +58,7 @@ internal static class BrightnessContrast
 		}
 	}
 
-	public static ColorBgra GetPixelColor (this PreRender preRender, in ColorBgra originalColor)
+	public static ColorBgra Apply (this PreRender preRender, in ColorBgra originalColor)
 	{
 		int intensity = originalColor.GetIntensityByte ();
 
