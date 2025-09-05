@@ -296,7 +296,7 @@ public sealed class Ruler : Gtk.DrawingArea
 			double p1 = GetPositionOnRuler (selection_start.Value, settings.EffectiveSize.Width);
 			double p2 = GetPositionOnRuler (selection_end.Value, settings.EffectiveSize.Width);
 
-			cr.SetSourceRgba (0.5, 0.7, 1.0, 0.5); // Semi-transparent blue
+			cr.SetSourceRgba (0.7, 0.8, 0.9, 0.2); // Semi-transparent blueish gray
 
 			switch (Orientation) {
 				case Gtk.Orientation.Horizontal:
