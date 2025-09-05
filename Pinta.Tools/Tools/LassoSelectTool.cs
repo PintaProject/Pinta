@@ -55,7 +55,10 @@ public sealed class LassoSelectTool : BaseTool
 
 	public override string Name => Translations.GetString ("Lasso Select");
 	public override string Icon => Pinta.Resources.Icons.ToolSelectLasso;
-	public override string StatusBarText => Translations.GetString ("Click and drag to draw the outline for a selection area.");
+	public override string StatusBarText => Translations.GetString ("On Freeform mode, click and drag to draw the outline for a selection area." +
+	                                                                "\n\nOn Polygon mode, click and drag to add a new point to the selection." +
+	                                                                "\nPress Enter to finish the selection"+
+	                                                                "\nPress Backspace to delete the last point");
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.LassoSelect.png"), 9, 18, null);
 	public override int Priority => 17;
