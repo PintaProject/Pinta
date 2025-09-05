@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Data;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
@@ -46,27 +47,29 @@ public sealed class GlowEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (ImageSurface source, ImageSurface destination, ReadOnlySpan<RectangleI> rois)
 	{
+		GlowData data = Data;
+		int brightness = data.Brightness;
+		int contrast = data.Contrast;
+
 		GaussianBlurEffect blurEffect = new (services);
-		blurEffect.Data.Radius = Data.Radius;
-		blurEffect.Render (src, dest, rois);
+		blurEffect.Data.Radius = data.Radius;
+		blurEffect.Render (source, destination, rois);
 
-		BrightnessContrastEffect contrastEffect = new (services);
-		contrastEffect.Data.Brightness = Data.Brightness;
-		contrastEffect.Data.Contrast = Data.Contrast;
-		contrastEffect.Render (dest, dest, rois);
+		Lazy<BrightnessContrast.PreRender> brightnessContrast = new (() => new (brightness, contrast));
 
-		var dst_data = dest.GetPixelData ();
-		var src_data = src.GetReadOnlyPixelData ();
-		int src_width = src.Width;
-		int dst_width = dest.Width;
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
+
+		Size canvasSize = destination.GetSize ();
 
 		foreach (RectangleI roi in rois) {
-			for (int y = roi.Top; y <= roi.Bottom; ++y) {
-				var dst_row = dst_data.Slice (y * dst_width + roi.Left, roi.Width);
-				var src_row = src_data.Slice (y * src_width + roi.Left, roi.Width);
-				screen_blend_op.Apply (dst_row, src_row, dst_row);
+			foreach (var pixel in Tiling.GeneratePixelOffsets (roi, canvasSize)) {
+				ColorBgra original = sourceData[pixel.memoryOffset];
+				ColorBgra blurred = destinationData[pixel.memoryOffset];
+				ColorBgra blurredAdjusted = brightnessContrast.Value.GetPixelColor (blurred);
+				destinationData[pixel.memoryOffset] = screen_blend_op.Apply (blurredAdjusted, original);
 			}
 		}
 	}
