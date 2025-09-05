@@ -51,6 +51,21 @@ public sealed class Ruler : Gtk.DrawingArea
 	private Surface? cached_surface = null;
 	private Size? last_known_size = null;
 
+	private double selection_start = 0;
+	private double selection_end = 0;
+
+
+	public void SetSelectionRange (double start, double end)
+	{
+		if (selection_start == start && selection_end == end)
+			return;
+
+		selection_start = start;
+		selection_end = end;
+
+		QueueDraw ();
+	}
+
 	/// <summary>
 	/// Whether the ruler is horizontal or vertical.
 	/// </summary>
@@ -273,6 +288,27 @@ public sealed class Ruler : Gtk.DrawingArea
 		RulerDrawSettings settings = CreateSettings (preliminarySize);
 
 		cached_surface ??= CreateBaseRuler (settings, preliminarySize);
+
+		// Draw the selection projection if a selection exists
+		if (selection_start < selection_end) {
+
+			// Convert selection coordinates to ruler widget coordinates
+			double p1 = (selection_start - Lower) * (settings.EffectiveSize.Width / (Upper - Lower));
+			double p2 = (selection_end - Lower) * (settings.EffectiveSize.Width / (Upper - Lower));
+
+			cr.SetSourceRgba (0.5, 0.7, 1.0, 0.5); // Semi-transparent blue
+
+			switch (Orientation) {
+				case Gtk.Orientation.Horizontal:
+					cr.Rectangle (p1, 0, p2 - p1, settings.EffectiveSize.Height);
+					break;
+				default:
+					cr.Rectangle (0, p1, settings.EffectiveSize.Height, p2 - p1);
+					break;
+			}
+
+			cr.Fill ();
+		}
 
 		cr.SetSourceSurface (cached_surface, 0, 0);
 		cr.Paint ();
