@@ -195,6 +195,12 @@ public sealed class LassoSelectTool : BaseTool
 		ApplySelection (document);
 	}
 
+	protected override void OnCommit (Document? document)
+	{
+		if (document != null)
+			FinalizeShape (document);
+	}
+
 	private Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
 	private Label LassoModeLabel => lasso_mode_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Lasso Mode")));
 
