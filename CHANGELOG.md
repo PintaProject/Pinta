@@ -27,14 +27,15 @@ Thanks to the following contributors who worked on this release:
 - Support for color picking in `SimpleEffectDialog`. Useful for add-in developers (#1611)
 - The text tool now supports using Ctrl+Backspace to delete words (#1680)
 - Added a Windows ARM64 installer (#1699, #1378)
+- The selection of an area on the canvas is now being projected and highlighted on the rulers (#1723)
 
 ### Changed
 - Packaging changes
   - Updated dependencies to require GTK 4.18+ and libadwaita 1.7+
   - Pinta now consistently uses an application ID of `com.github.PintaProject.Pinta`, which previously had been applied in patches for downstream packages (#1706, #1419)
 - Breaking API changes for add-ins will require add-ins to be rebuilt against Pinta 3.1
-  - Attributes used for effect configuration properties (`CaptionAttribute`, `MaximumValueAttribute`, ...) are now in the `Pinta.Core` assembly and the `Pinta.Core` namespace
-  - Methods `RegisterEffect`, `UnregisterInstanceOfEffect`, `RegisterAdjustment`, and `UnregisterInstanceOfAdjustment` in `EffectsManager` are now generic
+  - Attributes used for effect configuration properties (`CaptionAttribute`, `MaximumValueAttribute`, ...) are now in the `Pinta.Core` assembly and the `Pinta.Core` namespace (#1665)
+  - Methods `RegisterEffect`, `UnregisterInstanceOfEffect`, `RegisterAdjustment`, and `UnregisterInstanceOfAdjustment` in `EffectsManager` are now generic (#1678)
 - Removed use of deprecated Gtk.FontButton (#1421)
 - View menu moved from hamburger menu to dedicated button (#1428, #1471)
 - Updated the application icon on macOS to better match the platform's icon style guidelines (#1572)
