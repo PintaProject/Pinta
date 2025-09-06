@@ -33,4 +33,13 @@ internal sealed class SurfaceDifferenceTests
 
 		Utilities.CompareImages (modifiable, originalB);
 	}
+
+	[TestCase ("visual_minimal.png")]
+	public void Returning_Null_If_Same_Surfaces (string fileName)
+	{
+		string path = Utilities.GetAssetPath (fileName);
+		using ImageSurface image = Utilities.LoadImage (path);
+		SurfaceDiff? difference = SurfaceDiff.Create (image, image);
+		Assert.That (difference, Is.Null);
+	}
 }
