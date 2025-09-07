@@ -13,9 +13,11 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class InvertColorsEffect (IServiceProvider _) : BaseEffect
+public sealed class InvertColorsEffect : BaseEffect
 {
 	static readonly UnaryPixelOp invert = new UnaryPixelOps.Invert ();
+
+	public InvertColorsEffect (IServiceProvider _) { }
 
 	public sealed override bool IsTileable
 		=> true;

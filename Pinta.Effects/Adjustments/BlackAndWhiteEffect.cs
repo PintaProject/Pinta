@@ -13,9 +13,11 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class BlackAndWhiteEffect (IServiceProvider _) : BaseEffect
+public sealed class BlackAndWhiteEffect : BaseEffect
 {
 	static readonly UnaryPixelOp desaturate = new UnaryPixelOps.Desaturate ();
+
+	public BlackAndWhiteEffect (IServiceProvider _) { }
 
 	public sealed override bool IsTileable
 		=> true;

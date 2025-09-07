@@ -13,7 +13,7 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class SepiaEffect (IServiceProvider _) : BaseEffect
+public sealed class SepiaEffect : BaseEffect
 {
 	static readonly UnaryPixelOp desaturate = new UnaryPixelOps.Desaturate ();
 	static readonly UnaryPixelOp level = new UnaryPixelOps.Level (
@@ -22,6 +22,8 @@ public sealed class SepiaEffect (IServiceProvider _) : BaseEffect
 			[1.2f, 1.0f, 0.8f],
 			ColorBgra.Black,
 			ColorBgra.White);
+
+	public SepiaEffect (IServiceProvider _) { }
 
 	public sealed override bool IsTileable
 		=> true;
