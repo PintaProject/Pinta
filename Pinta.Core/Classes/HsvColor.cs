@@ -49,12 +49,12 @@ public readonly struct HsvColor : IColor<HsvColor>
 	public static HsvColor FromColor (Color c) => c.ToHsv ();
 	public Color ToColor (double alpha = 1) => Color.FromHsv (this, alpha);
 	public static HsvColor FromBgra (ColorBgra c) => c.ToCairoColor ().ToHsv ();
-	public ColorBgra ToBgra () => this.ToColor ().ToColorBgra ();
+	public ColorBgra ToBgra () => ToColor ().ToColorBgra ();
 
 
 	public override readonly string ToString ()
 		=> $"({Hue:F2}, {Sat:F2}, {Val:F2})";
 
 	public override int GetHashCode ()
-		=> ((int) Hue + ((int) Sat << 8) + ((int) Val << 16)).GetHashCode ();
+		=> HashCode.Combine (Hue, Sat, Val);
 }
