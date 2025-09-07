@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Immutable;
+using System.Collections.Generic;
 using System.Linq;
 using Pinta.Core;
 
@@ -27,7 +27,7 @@ public class RectangleHandle : IToolHandle
 	private PointD start_pt;
 	private PointD end_pt;
 	private Size image_size;
-	private readonly ImmutableArray<MoveHandle> handles;
+	private readonly Dictionary<HandlePoint, MoveHandle> handles;
 	private MoveHandle? active_handle;
 	private PointD? drag_start_pos;
 
@@ -35,18 +35,19 @@ public class RectangleHandle : IToolHandle
 	{
 		this.workspace = workspace;
 
-		handles = [
-			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNW) },
-			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSW) },
-			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNE) },
-			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSE) },
-			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeW) },
-			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeN) },
-			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeE) },
-			new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeS) },
-		];
+		handles = new Dictionary<HandlePoint, MoveHandle>
+		{
+			{ HandlePoint.UpperLeft, new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNW) } },
+			{ HandlePoint.LowerLeft, new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSW) } },
+			{ HandlePoint.UpperRight, new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNE) } },
+			{ HandlePoint.LowerRight, new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSE) } },
+			{ HandlePoint.Left, new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeW) } },
+			{ HandlePoint.Up, new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeN) } },
+			{ HandlePoint.Right, new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeE) } },
+			{ HandlePoint.Down, new (workspace) { Cursor = GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeS) } },
+		};
 
-		foreach (var handle in handles)
+		foreach (var handle in handles.Values)
 			handle.Active = true;
 	}
 
@@ -55,7 +56,7 @@ public class RectangleHandle : IToolHandle
 
 	public void Draw (Gtk.Snapshot snapshot)
 	{
-		foreach (MoveHandle handle in handles)
+		foreach (MoveHandle handle in handles.Values)
 			handle.Draw (snapshot);
 	}
 	#endregion
@@ -121,8 +122,8 @@ public class RectangleHandle : IToolHandle
 
 		RectangleI dirty = ComputeInvalidateRect ();
 
-		HandlePoint activeHandleIndex = (HandlePoint) handles.IndexOf (active_handle);
-		MoveActiveHandle (activeHandleIndex, canvasPos.X, canvasPos.Y, shiftPressed);
+		HandlePoint activeHandlePoint = handles.First (kvp => kvp.Value == active_handle).Key;
+		MoveActiveHandle (activeHandlePoint, canvasPos.X, canvasPos.Y, shiftPressed);
 		UpdateHandlePositions ();
 
 		dirty = dirty.Union (ComputeInvalidateRect ());
@@ -164,31 +165,31 @@ public class RectangleHandle : IToolHandle
 	/// The cursor to display, if the cursor is over a corner of the rectangle.
 	/// </summary>
 	public Gdk.Cursor? GetCursorAtPoint (PointD viewPos)
-		=> handles.FirstOrDefault (c => c.ContainsPoint (viewPos))?.Cursor;
+		=> handles.Values.FirstOrDefault (c => c.ContainsPoint (viewPos))?.Cursor;
 
 	private void UpdateHandlePositions ()
 	{
 		PointD center = Utility.Lerp (start_pt, end_pt, 0.5f);
 
-		handles[(int) HandlePoint.UpperLeft].CanvasPosition = start_pt;
-		handles[(int) HandlePoint.LowerLeft].CanvasPosition = new PointD (start_pt.X, end_pt.Y);
-		handles[(int) HandlePoint.UpperRight].CanvasPosition = new PointD (end_pt.X, start_pt.Y);
-		handles[(int) HandlePoint.LowerRight].CanvasPosition = end_pt;
-		handles[(int) HandlePoint.Left].CanvasPosition = new PointD (start_pt.X, center.Y);
-		handles[(int) HandlePoint.Up].CanvasPosition = new PointD (center.X, start_pt.Y);
-		handles[(int) HandlePoint.Right].CanvasPosition = new PointD (end_pt.X, center.Y);
-		handles[(int) HandlePoint.Down].CanvasPosition = new PointD (center.X, end_pt.Y);
+		handles[HandlePoint.UpperLeft].CanvasPosition = start_pt;
+		handles[HandlePoint.LowerLeft].CanvasPosition = new PointD (start_pt.X, end_pt.Y);
+		handles[HandlePoint.UpperRight].CanvasPosition = new PointD (end_pt.X, start_pt.Y);
+		handles[HandlePoint.LowerRight].CanvasPosition = end_pt;
+		handles[HandlePoint.Left].CanvasPosition = new PointD (start_pt.X, center.Y);
+		handles[HandlePoint.Up].CanvasPosition = new PointD (center.X, start_pt.Y);
+		handles[HandlePoint.Right].CanvasPosition = new PointD (end_pt.X, center.Y);
+		handles[HandlePoint.Down].CanvasPosition = new PointD (center.X, end_pt.Y);
 	}
 
 	private void UpdateHandleUnderPoint (PointD viewPos)
 	{
-		active_handle = handles.FirstOrDefault (c => c.ContainsPoint (viewPos));
+		active_handle = handles.Values.FirstOrDefault (c => c.ContainsPoint (viewPos));
 
 		// If the rectangle is empty (e.g. starting a new drag), all the handles are
 		// at the same position so pick the bottom right corner.
 		RectangleD rect = Rectangle;
 		if (active_handle is not null && rect is { Width: 0.0, Height: 0.0 })
-			active_handle = handles[(int) HandlePoint.LowerRight];
+			active_handle = handles[HandlePoint.LowerRight];
 	}
 
 	private bool IsHigherThanWide ()
@@ -307,5 +308,5 @@ public class RectangleHandle : IToolHandle
 	/// Bounding rectangle to use with InvalidateWindowRect() when triggering a redraw.
 	/// </summary>
 	private RectangleI ComputeInvalidateRect ()
-		=> MoveHandle.UnionInvalidateRects (handles);
+		=> MoveHandle.UnionInvalidateRects (handles.Values);
 }
