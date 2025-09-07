@@ -262,5 +262,19 @@ public sealed class BitMask
 	}
 
 	public override int GetHashCode ()
-		=> Width.GetHashCode () ^ Height.GetHashCode ();
+	{
+		HashCode hash = new ();
+
+		hash.Add (Width);
+		hash.Add (Height);
+
+		if (array.Length > 0) {
+			int[] ints = new int[(array.Length + 31) / 32];
+			array.CopyTo (ints, 0);
+			for (int i = 0; i < ints.Length; i++)
+				hash.Add (ints[i]);
+		}
+
+		return hash.ToHashCode ();
+	}
 }
