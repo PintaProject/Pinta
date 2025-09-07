@@ -13,20 +13,22 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class BlackAndWhiteEffect : BaseEffect
+public sealed class BlackAndWhiteEffect (IServiceProvider _) : BaseEffect
 {
-	readonly UnaryPixelOp op = new UnaryPixelOps.Desaturate ();
+	static readonly UnaryPixelOp desaturate = new UnaryPixelOps.Desaturate ();
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsBlackAndWhite;
+	public override string Icon
+		=> Resources.Icons.AdjustmentsBlackAndWhite;
 
-	public override string Name => Translations.GetString ("Black and White");
+	public override string Name
+		=> Translations.GetString ("Black and White");
 
-	public override string AdjustmentMenuKey => "G";
+	public override string AdjustmentMenuKey
+		=> "G";
 
-	public BlackAndWhiteEffect (IServiceProvider _) { }
-
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
-		=> op.Apply (dest, src, rois);
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
+		=> desaturate.Apply (destination, source, roi);
 }

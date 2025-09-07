@@ -13,20 +13,22 @@ using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class InvertColorsEffect : BaseEffect
+public sealed class InvertColorsEffect (IServiceProvider _) : BaseEffect
 {
-	readonly UnaryPixelOp op = new UnaryPixelOps.Invert ();
+	static readonly UnaryPixelOp invert = new UnaryPixelOps.Invert ();
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsInvertColors;
+	public override string Icon
+		=> Resources.Icons.AdjustmentsInvertColors;
 
-	public override string Name => Translations.GetString ("Invert Colors");
+	public override string Name
+		=> Translations.GetString ("Invert Colors");
 
-	public override string AdjustmentMenuKey => "I";
+	public override string AdjustmentMenuKey
+		=> "I";
 
-	public InvertColorsEffect (IServiceProvider _) { }
-
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
-		=> op.Apply (dest, src, rois);
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
+		=> invert.Apply (destination, source, roi);
 }
