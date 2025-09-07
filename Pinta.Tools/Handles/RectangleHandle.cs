@@ -5,6 +5,18 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
+enum HandlePoint
+{
+	UpperLeft = 0,
+	LowerLeft = 1,
+	UpperRight = 2,
+	LowerRight = 3,
+	Left = 4,
+	Up = 5,
+	Right = 6,
+	Down = 7,
+}
+
 /// <summary>
 /// A handle for specifying a rectangular region.
 /// </summary>
@@ -109,7 +121,7 @@ public class RectangleHandle : IToolHandle
 
 		RectangleI dirty = ComputeInvalidateRect ();
 
-		int activeHandleIndex = handles.IndexOf (active_handle);
+		HandlePoint activeHandleIndex = (HandlePoint) handles.IndexOf (active_handle);
 		MoveActiveHandle (activeHandleIndex, canvasPos.X, canvasPos.Y, shiftPressed);
 		UpdateHandlePositions ();
 
@@ -158,14 +170,14 @@ public class RectangleHandle : IToolHandle
 	{
 		PointD center = Utility.Lerp (start_pt, end_pt, 0.5f);
 
-		handles[0].CanvasPosition = start_pt;
-		handles[1].CanvasPosition = new PointD (start_pt.X, end_pt.Y);
-		handles[2].CanvasPosition = new PointD (end_pt.X, start_pt.Y);
-		handles[3].CanvasPosition = end_pt;
-		handles[4].CanvasPosition = new PointD (start_pt.X, center.Y);
-		handles[5].CanvasPosition = new PointD (center.X, start_pt.Y);
-		handles[6].CanvasPosition = new PointD (end_pt.X, center.Y);
-		handles[7].CanvasPosition = new PointD (center.X, end_pt.Y);
+		handles[(int) HandlePoint.UpperLeft].CanvasPosition = start_pt;
+		handles[(int) HandlePoint.LowerLeft].CanvasPosition = new PointD (start_pt.X, end_pt.Y);
+		handles[(int) HandlePoint.UpperRight].CanvasPosition = new PointD (end_pt.X, start_pt.Y);
+		handles[(int) HandlePoint.LowerRight].CanvasPosition = end_pt;
+		handles[(int) HandlePoint.Left].CanvasPosition = new PointD (start_pt.X, center.Y);
+		handles[(int) HandlePoint.Up].CanvasPosition = new PointD (center.X, start_pt.Y);
+		handles[(int) HandlePoint.Right].CanvasPosition = new PointD (end_pt.X, center.Y);
+		handles[(int) HandlePoint.Down].CanvasPosition = new PointD (center.X, end_pt.Y);
 	}
 
 	private void UpdateHandleUnderPoint (PointD viewPos)
@@ -176,106 +188,114 @@ public class RectangleHandle : IToolHandle
 		// at the same position so pick the bottom right corner.
 		RectangleD rect = Rectangle;
 		if (active_handle is not null && rect is { Width: 0.0, Height: 0.0 })
-			active_handle = handles[3];
+			active_handle = handles[(int) HandlePoint.LowerRight];
 	}
 
-	private void MoveActiveHandle (int handle, double x, double y, bool shiftPressed)
+	private bool IsHigherThanWide ()
+	{
+		return end_pt.X - start_pt.X <= end_pt.Y - start_pt.Y;
+	}
+
+	private void ExpandUniformlyX ()
+	{
+		double x_average = (start_pt.X + end_pt.X) / 2;
+		double y_distance = (end_pt.Y - start_pt.Y) / 2;
+
+		start_pt = start_pt with { X = x_average - y_distance };
+		end_pt = end_pt with { X = x_average + y_distance };
+	}
+
+	private void ExpandUniformlyY ()
+	{
+		double y_average = (start_pt.Y + end_pt.Y) / 2;
+		double x_distance = (end_pt.X - start_pt.X) / 2;
+
+		start_pt = start_pt with { Y = y_average - x_distance };
+		end_pt = end_pt with { Y = y_average + x_distance };
+	}
+
+	private void MoveActiveHandle (HandlePoint handle, double x, double y, bool shiftPressed)
 	{
 		// Update the rectangle's size depending on which handle was dragged.
+
 		switch (handle) {
-			case 0:
+			case HandlePoint.UpperLeft:
 				start_pt = new (x, y);
 
-				if (!shiftPressed) return;
-
-				start_pt =
-					(end_pt.X - start_pt.X <= end_pt.Y - start_pt.Y)
-					? (start_pt with { X = end_pt.X - end_pt.Y + start_pt.Y })
-					: (start_pt with { Y = end_pt.Y - end_pt.X + start_pt.X });
-
+				if (shiftPressed) {
+					if (IsHigherThanWide ()) {
+						start_pt = start_pt with { X = end_pt.X - end_pt.Y + start_pt.Y };
+					} else {
+						start_pt = start_pt with { Y = end_pt.Y - end_pt.X + start_pt.X };
+					}
+				}
 				return;
 
-			case 1:
+			case HandlePoint.LowerLeft:
 				start_pt = start_pt with { X = x };
 				end_pt = end_pt with { Y = y };
 
-				if (!shiftPressed) return;
-
-				if (end_pt.X - start_pt.X <= end_pt.Y - start_pt.Y)
-					start_pt = start_pt with { X = end_pt.X - end_pt.Y + start_pt.Y };
-				else
-					end_pt = end_pt with { Y = start_pt.Y + end_pt.X - start_pt.X };
-
+				if (shiftPressed) {
+					if (IsHigherThanWide ())
+						start_pt = start_pt with { X = end_pt.X - end_pt.Y + start_pt.Y };
+					else
+						end_pt = end_pt with { Y = start_pt.Y + end_pt.X - start_pt.X };
+				}
 				return;
 
-			case 2:
+			case HandlePoint.UpperRight:
 				end_pt = end_pt with { X = x };
 				start_pt = start_pt with { Y = y };
 
-				if (!shiftPressed) return;
-
-				if (end_pt.X - start_pt.X <= end_pt.Y - start_pt.Y)
-					end_pt = end_pt with { X = start_pt.X + end_pt.Y - start_pt.Y };
-				else
-					start_pt = start_pt with { Y = end_pt.Y - end_pt.X + start_pt.X };
-
+				if (shiftPressed) {
+					if (IsHigherThanWide ())
+						end_pt = end_pt with { X = start_pt.X + end_pt.Y - start_pt.Y };
+					else
+						start_pt = start_pt with { Y = end_pt.Y - end_pt.X + start_pt.X };
+				}
 				return;
 
-			case 3:
+			case HandlePoint.LowerRight:
 				end_pt = new (x, y);
 
-				if (!shiftPressed)
-					return;
-
-				if (end_pt.X - start_pt.X <= end_pt.Y - start_pt.Y)
-					end_pt = end_pt with { X = start_pt.X + end_pt.Y - start_pt.Y };
-				else
-					end_pt = end_pt with { Y = start_pt.Y + end_pt.X - start_pt.X };
-
+				if (shiftPressed) {
+					if (IsHigherThanWide ())
+						end_pt = end_pt with { X = start_pt.X + end_pt.Y - start_pt.Y };
+					else
+						end_pt = end_pt with { Y = start_pt.Y + end_pt.X - start_pt.X };
+				}
 				return;
 
-			case 4:
+			case HandlePoint.Left:
 				start_pt = start_pt with { X = x };
 
-				if (!shiftPressed) return;
-
-				double d4 = end_pt.X - start_pt.X;
-				start_pt = start_pt with { Y = (start_pt.Y + end_pt.Y - d4) / 2 };
-				end_pt = end_pt with { Y = (start_pt.Y + end_pt.Y + d4) / 2 };
-
+				if (shiftPressed) {
+					ExpandUniformlyY ();
+				}
 				return;
 
-			case 5:
+			case HandlePoint.Up:
 				start_pt = start_pt with { Y = y };
 
-				if (!shiftPressed) return;
-
-				double d5 = end_pt.Y - start_pt.Y;
-				start_pt = start_pt with { X = (start_pt.X + end_pt.X - d5) / 2 };
-				end_pt = end_pt with { X = (start_pt.X + end_pt.X + d5) / 2 };
-
+				if (shiftPressed) {
+					ExpandUniformlyX ();
+				}
 				return;
 
-			case 6:
+			case HandlePoint.Right:
 				end_pt = end_pt with { X = x };
 
-				if (!shiftPressed) return;
-
-				double d6 = end_pt.X - start_pt.X;
-				start_pt = start_pt with { Y = (start_pt.Y + end_pt.Y - d6) / 2 };
-				end_pt = end_pt with { Y = (start_pt.Y + end_pt.Y + d6) / 2 };
-
+				if (shiftPressed) {
+					ExpandUniformlyY ();
+				}
 				return;
 
-			case 7:
+			case HandlePoint.Down:
 				end_pt = end_pt with { Y = y };
 
-				if (!shiftPressed) return;
-
-				double d7 = end_pt.Y - start_pt.Y;
-				start_pt = start_pt with { X = (start_pt.X + end_pt.X - d7) / 2 };
-				end_pt = end_pt with { X = (start_pt.X + end_pt.X + d7) / 2 };
-
+				if (shiftPressed) {
+					ExpandUniformlyX ();
+				}
 				return;
 
 			default:
