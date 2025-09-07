@@ -14,6 +14,7 @@ public readonly struct Scanline
 	public int X { get; }
 	public int Y { get; }
 	public int Length { get; }
+
 	public Scanline (int x, int y, int length)
 	{
 		ArgumentOutOfRangeException.ThrowIfNegative (length);
@@ -22,7 +23,8 @@ public readonly struct Scanline
 		Length = length;
 	}
 
-	public override readonly int GetHashCode () { unchecked { return Length.GetHashCode () + X.GetHashCode () + Y.GetHashCode (); } }
+	public override readonly int GetHashCode ()
+		=> HashCode.Combine (X, Y, Length);
 
 	public override readonly bool Equals (object? obj)
 		=> obj is Scanline rhs && X == rhs.X && Y == rhs.Y && Length == rhs.Length;
