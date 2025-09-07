@@ -15,31 +15,31 @@ namespace Pinta.Effects;
 
 public sealed class SepiaEffect : BaseEffect
 {
-	readonly UnaryPixelOp desat = new UnaryPixelOps.Desaturate ();
-	readonly UnaryPixelOp level = new UnaryPixelOps.Desaturate ();
-
-	public sealed override bool IsTileable => true;
-
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsSepia;
-
-	public override string Name => Translations.GetString ("Sepia");
-
-	public override string AdjustmentMenuKey => "E";
-
-	public SepiaEffect (IServiceProvider _)
-	{
-		desat = new UnaryPixelOps.Desaturate ();
-		level = new UnaryPixelOps.Level (
+	static readonly UnaryPixelOp desaturate = new UnaryPixelOps.Desaturate ();
+	static readonly UnaryPixelOp level = new UnaryPixelOps.Level (
 			ColorBgra.Black,
 			ColorBgra.White,
 			[1.2f, 1.0f, 0.8f],
 			ColorBgra.Black,
 			ColorBgra.White);
-	}
 
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public SepiaEffect (IServiceProvider _) { }
+
+	public sealed override bool IsTileable
+		=> true;
+
+	public override string Icon
+		=> Resources.Icons.AdjustmentsSepia;
+
+	public override string Name
+		=> Translations.GetString ("Sepia");
+
+	public override string AdjustmentMenuKey
+		=> "E";
+
+	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		desat.Apply (dest, src, rois);
-		level.Apply (dest, dest, rois);
+		desaturate.Apply (destination, source, roi);
+		level.Apply (destination, destination, roi);
 	}
 }

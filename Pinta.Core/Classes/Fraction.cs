@@ -51,7 +51,7 @@ public readonly struct Fraction<TInt> where TInt : IBinaryInteger<TInt>
 	}
 
 	public override int GetHashCode ()
-		=> Numerator.GetHashCode () ^ Denominator.GetHashCode ();
+		=> HashCode.Combine (Numerator, Denominator);
 }
 
 public static class FractionExtensions

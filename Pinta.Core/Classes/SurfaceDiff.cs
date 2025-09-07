@@ -43,7 +43,6 @@ public sealed class SurfaceDiff
 	private readonly RectangleI bounds;
 	private readonly ColorBgra[] pixels;
 
-	#region Constructors
 	private SurfaceDiff (BitArray bitmask, RectangleI bounds, ColorBgra[] pixels)
 	{
 		this.bitmask = bitmask;
@@ -72,7 +71,8 @@ public sealed class SurfaceDiff
 #endif
 
 		// STEP 1 - Find the bounds of the changed pixels.
-		RectangleI diffBounds = RectangleI.FromLTRB (originalSize.Width + 1, originalSize.Height + 1, -1, -1); // TODO: Inverted rectangle! Should refactor
+		RectangleI? diffBounds = null;
+
 		object diffBoundsLock = new ();
 
 		// Split up the work among several threads, each of which processes one row at a time
@@ -82,7 +82,7 @@ public sealed class SurfaceDiff
 		Parallel.For (
 			0,
 			originalSize.Height,
-			() => RectangleI.FromLTRB (originalSize.Width + 1, originalSize.Height + 1, -1, -1), // TODO: Inverted rectangle! Should refactor
+			() => (RectangleI?) null,
 			(row, loop, newBounds) => {
 
 				int offset = row * originalSize.Width;
@@ -97,52 +97,68 @@ public sealed class SurfaceDiff
 					.GetPixelData ()
 					.Slice (offset, originalSize.Width);
 
+				// These variables start in an 'inverted' state
+				// (i.e. left > right), but their values are only
+				// used if a change in the updated row was detected,
+				// at which point these values are updated, and
+				// then it becomes left <= right
+				int rowLeft = originalSize.Width;
+				int rowRight = -1;
+
 				bool changeInRow = false;
-				int newLeft = newBounds.Left;
-				int newRight = newBounds.Right;
 
 				for (int i = 0; i < originalSize.Width; ++i) {
 					if (originalRow[i] == updatedRow[i]) continue;
 					changeInRow = true;
-					newLeft = Math.Min (newLeft, i);
-					newRight = Math.Max (newRight, i);
+					rowLeft = Math.Min (rowLeft, i);
+					rowRight = Math.Max (rowRight, i);
 				}
 
-				int newTop =
-					changeInRow
-					? Math.Min (newBounds.Top, row)
-					: newBounds.Top;
+				if (!changeInRow)
+					return newBounds;
 
-				int newBottom =
-					changeInRow
-					? Math.Max (newBounds.Bottom, row)
-					: newBounds.Bottom;
+				RectangleI newRect = RectangleI.FromLTRB (rowLeft, row, rowRight, row);
 
-				return RectangleI.FromLTRB (newLeft, newTop, newRight, newBottom);
+				return
+					newBounds.HasValue
+					? newBounds.Value.Union (newRect)
+					: newRect;
 			},
-			my_bounds => {
+			myBounds => {
+
+				if (!myBounds.HasValue)
+					return;
+
 				lock (diffBoundsLock) {
-					diffBounds = diffBounds.Union (my_bounds);
+					diffBounds =
+						(diffBounds.HasValue)
+						? diffBounds.Value.Union (myBounds.Value)
+						: myBounds;
 				}
 			}
 		);
 
+		// No changes were detected, so the variable was never set
+		if (!diffBounds.HasValue)
+			return null;
 #if DEBUG_DIFF
 		Console.WriteLine ("Truncated surface size: {0}x{1}", bounds.Width, bounds.Height);
 #endif
 
+		RectangleI finalBounds = diffBounds.Value;
+
 		// STEP 2 - Create a bitarray of whether each pixel in the bounds has changed, and count
 		// how many changed pixels we need to store.
 
-		BitArray bitmask = new (diffBounds.Width * diffBounds.Height);
+		BitArray bitmask = new (finalBounds.Width * finalBounds.Height);
 
 		int index = 0;
 		int changeCount = 0;
 
-		int bottom = diffBounds.Bottom;
-		int right = diffBounds.Right;
-		int boundsX = diffBounds.X;
-		int boundsY = diffBounds.Y;
+		int bottom = finalBounds.Bottom;
+		int right = finalBounds.Right;
+		int boundsX = finalBounds.X;
+		int boundsY = finalBounds.Y;
 
 		for (int y = boundsY; y <= bottom; ++y) {
 
@@ -200,11 +216,9 @@ public sealed class SurfaceDiff
 		System.Console.WriteLine ("SurfaceDiff time: " + timer.ElapsedMilliseconds);
 #endif
 
-		return new SurfaceDiff (bitmask, diffBounds, pixels);
+		return new (bitmask, finalBounds, pixels);
 	}
-	#endregion
 
-	#region Public Methods
 	public void Apply (ImageSurface dst)
 	{
 		ApplyAndSwap (dst, false);
@@ -218,9 +232,6 @@ public sealed class SurfaceDiff
 	public RectangleI GetBounds ()
 		=> bounds;
 
-	#endregion
-
-	#region Private Methods
 	private void ApplyAndSwap (ImageSurface destination, bool swap)
 	{
 		destination.Flush ();
@@ -253,5 +264,4 @@ public sealed class SurfaceDiff
 
 		destination.MarkDirty ();
 	}
-	#endregion
 }

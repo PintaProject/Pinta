@@ -85,6 +85,7 @@ public sealed class PolarInversionEffect : BaseEffect
 
 public sealed class PolarInversionData : EffectData, Warp.IEffectData
 {
+	[Caption ("Amount")]
 	[MinimumValue (-4), MaximumValue (4), IncrementValue (0.1)]
 	public double Amount { get; set; } = 0;
 
@@ -95,5 +96,6 @@ public sealed class PolarInversionData : EffectData, Warp.IEffectData
 	[Caption ("Center Offset")]
 	public CenterOffset<double> CenterOffset { get; set; }
 
+	[Caption ("Edge Behavior")]
 	public EdgeBehavior EdgeBehavior { get; set; } = EdgeBehavior.Reflect;
 }

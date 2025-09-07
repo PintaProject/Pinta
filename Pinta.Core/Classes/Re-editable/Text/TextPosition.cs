@@ -11,15 +11,10 @@ using System;
 
 namespace Pinta.Core;
 
-public readonly struct TextPosition : IComparable<TextPosition>
+public readonly struct TextPosition (int line, int offset) : IComparable<TextPosition>
 {
-	public int Line { get; }
-	public int Offset { get; }
-	public TextPosition (int line, int offset)
-	{
-		Line = line;
-		Offset = offset;
-	}
+	public int Line { get; } = line;
+	public int Offset { get; } = offset;
 
 	public TextPosition WithLine (int line)
 		=> new (line, Offset);
@@ -31,7 +26,7 @@ public readonly struct TextPosition : IComparable<TextPosition>
 		=> obj is TextPosition position && this == position;
 
 	public override readonly int GetHashCode ()
-		=> new { Line, Offset }.GetHashCode ();
+		=> HashCode.Combine (Line, Offset);
 
 	public override readonly string ToString ()
 		=> $"({Line}, {Offset})";
