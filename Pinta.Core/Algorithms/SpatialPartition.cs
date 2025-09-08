@@ -8,35 +8,76 @@ namespace Pinta.Core;
 
 public static class SpatialPartition
 {
-	public static Func<PointD, PointD, double> GetDistanceCalculator (DistanceMetric distanceCalculationMethod)
+	public static Func<PointD, PointD, double> GetDistanceCalculator (DistanceMetric distanceMetric)
 	{
-		return distanceCalculationMethod switch {
+		return distanceMetric switch {
 			DistanceMetric.Euclidean => Euclidean,
 			DistanceMetric.Manhattan => Manhattan,
 			DistanceMetric.Chebyshev => Chebyshev,
 			_ => throw new InvalidEnumArgumentException (
-				nameof (distanceCalculationMethod),
-				(int) distanceCalculationMethod,
+				nameof (distanceMetric),
+				(int) distanceMetric,
 				typeof (DistanceMetric)),
 		};
+	}
 
-		static double Euclidean (PointD targetPoint, PointD pixelLocation)
-		{
-			PointD difference = pixelLocation - targetPoint;
-			return difference.Magnitude ();
-		}
+	/// <remarks>
+	/// Suited for comparing the magnitudes of distances, but the returned
+	/// function is not guaranteed to return the actual value of the distance,
+	/// but it returns a bigger value if the distance is bigger.
+	/// </remarks>
+	public static Func<PointD, PointD, double> GetFastDistanceCalculator (DistanceMetric distanceMetric)
+	{
+		return distanceMetric switch {
+			DistanceMetric.Euclidean => EuclideanSquared,
+			DistanceMetric.Manhattan => Manhattan,
+			DistanceMetric.Chebyshev => Chebyshev,
+			_ => throw new InvalidEnumArgumentException (
+				nameof (distanceMetric),
+				(int) distanceMetric,
+				typeof (DistanceMetric)),
+		};
+	}
 
-		static double Manhattan (PointD targetPoint, PointD pixelLocation)
-		{
-			PointD difference = pixelLocation - targetPoint;
-			return Math.Abs (difference.X) + Math.Abs (difference.Y);
-		}
+	/// <summary>
+	/// Adjusts a distance for comparison with the
+	/// values returned by the 'fast' distance calculators
+	/// </summary>
+	public static double AdjustDistanceThresholdFast (double baseThreshold, DistanceMetric distanceMetric)
+	{
+		return distanceMetric switch {
+			DistanceMetric.Euclidean => baseThreshold * baseThreshold,
+			DistanceMetric.Manhattan => baseThreshold,
+			DistanceMetric.Chebyshev => baseThreshold,
+			_ => throw new InvalidEnumArgumentException (
+				nameof (distanceMetric),
+				(int) distanceMetric,
+				typeof (DistanceMetric)),
+		};
+	}
 
-		static double Chebyshev (PointD targetPoint, PointD pixelLocation)
-		{
-			PointD difference = pixelLocation - targetPoint;
-			return Math.Max (Math.Abs (difference.X), Math.Abs (difference.Y));
-		}
+	private static double EuclideanSquared (PointD targetPoint, PointD pixelLocation)
+	{
+		PointD difference = pixelLocation - targetPoint;
+		return difference.MagnitudeSquared ();
+	}
+
+	private static double Euclidean (PointD targetPoint, PointD pixelLocation)
+	{
+		PointD difference = pixelLocation - targetPoint;
+		return difference.Magnitude ();
+	}
+
+	private static double Manhattan (PointD targetPoint, PointD pixelLocation)
+	{
+		PointD difference = pixelLocation - targetPoint;
+		return Math.Abs (difference.X) + Math.Abs (difference.Y);
+	}
+
+	private static double Chebyshev (PointD targetPoint, PointD pixelLocation)
+	{
+		PointD difference = pixelLocation - targetPoint;
+		return Math.Max (Math.Abs (difference.X), Math.Abs (difference.Y));
 	}
 
 	public static IEnumerable<PointD> CreateCellControlPoints (
