@@ -483,7 +483,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		PointPickerWidget widget = new (
 			workspace,
 			initialPoint,
-			adjustToWidgetSize: initialPoint == default
+			adjustToWidgetSize: initialPoint == default // If point is (0,0) assume it's first run
 		) { Label = caption };
 
 		widget.PointPicked += (_, _) => SetAndNotify (
