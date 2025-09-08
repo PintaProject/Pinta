@@ -48,10 +48,11 @@ public sealed class CellsEffect : BaseEffect
 		ImmutableArray<PointD> ControlPoints,
 		ImmutableArray<PointD> SamplingLocations,
 		Func<PointD, PointD, double> DistanceCalculator,
+		Func<PointD, PointD, double> DistanceCalculatorFast,
 		ColorGradient<ColorBgra> ColorGradient,
 		EdgeBehavior GradientEdgeBehavior,
 		bool ShowPoints,
-		double PointSize,
+		double PointRadius,
 		ColorBgra PointColor);
 
 	private CellsSettings CreateSettings (ImageSurface destination)
@@ -82,10 +83,11 @@ public sealed class CellsEffect : BaseEffect
 			ControlPoints: controlPoints,
 			SamplingLocations: Sampling.CreateSamplingOffsets (data.Quality),
 			DistanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
+			DistanceCalculatorFast: SpatialPartition.GetFastDistanceCalculator (data.DistanceMetric),
 			ColorGradient: data.ReverseColorScheme ? baseGradient.Reversed () : baseGradient,
 			GradientEdgeBehavior: data.ColorSchemeEdgeBehavior,
 			ShowPoints: data.ShowPoints,
-			PointSize: data.PointSize,
+			PointRadius: data.PointSize / 2.0,
 			PointColor: data.PointColor.ToColorBgra ());
 	}
 
@@ -113,18 +115,24 @@ public sealed class CellsEffect : BaseEffect
 
 		ColorBgra GetColorForLocation (PointD location, ColorBgra original)
 		{
-			double shortestDistance = double.MaxValue;
+			// A note about the naming ("relative"):
+			// We don't need to know the actual distance,
+			// we just need to know which distances are larger
+			// and which are smaller.
+			double shortestRelativeDistance = double.MaxValue;
 			int closestIndex = 0;
 			for (var i = 0; i < settings.ControlPoints.Length; i++) {
 				// TODO: Acceleration structure that limits the search
 				//       to a relevant subset of points, for better performance.
 				//       Some ideas to consider: quadtree, spatial hashing
 				PointD controlPoint = settings.ControlPoints[i];
-				double distance = settings.DistanceCalculator (location, controlPoint);
-				if (distance > shortestDistance) continue;
-				shortestDistance = distance;
+				double relativeDistance = settings.DistanceCalculatorFast (location, controlPoint);
+				if (relativeDistance > shortestRelativeDistance) continue;
+				shortestRelativeDistance = relativeDistance;
 				closestIndex = i;
 			}
+			PointD closestControlPoint = settings.ControlPoints[closestIndex];
+			double shortestDistance = settings.DistanceCalculator (location, closestControlPoint);
 			ColorBgra locationColor =
 				settings
 				.ColorGradient
@@ -133,7 +141,7 @@ public sealed class CellsEffect : BaseEffect
 					settings.GradientEdgeBehavior,
 					original,
 					palette);
-			if (settings.ShowPoints && shortestDistance * 2 <= settings.PointSize)
+			if (settings.ShowPoints && shortestRelativeDistance <= settings.PointRadius)
 				return UserBlendOps.NormalBlendOp.ApplyStatic (locationColor, settings.PointColor);
 			else
 				return locationColor;
