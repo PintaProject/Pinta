@@ -51,6 +51,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		Func<PointD, PointD, double> DistanceCalculatorFast,
 		bool ShowPoints,
 		double PointSizeFast,
+		double PointRadiusMultiplier,
 		ColorBgra PointColor);
 
 	private VoronoiSettings CreateSettings (ImageSurface destination)
@@ -81,6 +82,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			DistanceCalculatorFast: SpatialPartition.GetFastDistanceCalculator (data.DistanceMetric),
 			ShowPoints: data.ShowPoints,
 			PointSizeFast: SpatialPartition.AdjustDistanceThresholdFast (data.PointSize, data.DistanceMetric),
+			PointRadiusMultiplier: SpatialPartition.AdjustDistanceThresholdFast (2, data.DistanceMetric),
 			PointColor: data.PointColor.ToColorBgra ());
 	}
 
@@ -124,7 +126,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 				closestIndex = i;
 			}
 			ColorBgra cellColor = settings.Colors[closestIndex];
-			if (settings.ShowPoints && shortestRelativeDistance * 2 <= settings.PointSizeFast)
+			if (settings.ShowPoints && shortestRelativeDistance * settings.PointRadiusMultiplier <= settings.PointSizeFast)
 				return UserBlendOps.NormalBlendOp.ApplyStatic (cellColor, settings.PointColor);
 			else
 				return cellColor;
