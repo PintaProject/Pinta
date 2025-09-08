@@ -46,7 +46,7 @@ public sealed class PointPickerWidget : Gtk.Box
 
 	bool active = true;
 
-	public PointPickerWidget (IWorkspaceService workspace, PointI initialPoint)
+	public PointPickerWidget (IWorkspaceService workspace, PointI initialPoint, bool adjustToWidgetSize = true)
 	{
 		// --- Build
 
@@ -62,7 +62,10 @@ public sealed class PointPickerWidget : Gtk.Box
 			orientation: Gtk.Orientation.Vertical,
 			spacing: SPACING);
 
-		adjusted_initial_point = AdjustToWidgetSize (imageSize, initialPoint);
+		adjusted_initial_point =
+			adjustToWidgetSize
+			? AdjustToWidgetSize (imageSize, initialPoint)
+			: initialPoint;
 
 		// --- Section label + line
 
