@@ -141,7 +141,7 @@ public sealed class CellsEffect : BaseEffect
 					settings.GradientEdgeBehavior,
 					original,
 					palette);
-			if (settings.ShowPoints && shortestRelativeDistance <= settings.PointRadius)
+			if (settings.ShowPoints && shortestDistance <= settings.PointRadius)
 				return UserBlendOps.NormalBlendOp.ApplyStatic (locationColor, settings.PointColor);
 			else
 				return locationColor;
