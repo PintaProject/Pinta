@@ -48,9 +48,9 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		ImmutableArray<PointD> ControlPoints,
 		ImmutableArray<PointD> SamplingOffsets,
 		ImmutableArray<ColorBgra> Colors,
-		Func<PointD, PointD, double> DistanceCalculator,
+		Func<PointD, PointD, double> DistanceCalculatorFast,
 		bool ShowPoints,
-		double PointSizeThreshold,
+		double PointSizeFast,
 		ColorBgra PointColor);
 
 	private VoronoiSettings CreateSettings (ImageSurface destination)
@@ -78,9 +78,9 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			ControlPoints: controlPoints,
 			SamplingOffsets: Sampling.CreateSamplingOffsets (data.Quality),
 			Colors: [.. reversedSortingColors],
-			DistanceCalculator: SpatialPartition.GetFastDistanceCalculator (data.DistanceMetric),
+			DistanceCalculatorFast: SpatialPartition.GetFastDistanceCalculator (data.DistanceMetric),
 			ShowPoints: data.ShowPoints,
-			PointSizeThreshold: SpatialPartition.AdjustDistanceThresholdFast (data.PointSize, data.DistanceMetric),
+			PointSizeFast: SpatialPartition.AdjustDistanceThresholdFast (data.PointSize, data.DistanceMetric),
 			PointColor: data.PointColor.ToColorBgra ());
 	}
 
@@ -118,13 +118,13 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 				//       to a relevant subset of points, for better performance.
 				//       Some ideas to consider: quadtree, spatial hashing
 				PointD controlPoint = settings.ControlPoints[i];
-				double relativeDistance = settings.DistanceCalculator (location, controlPoint);
+				double relativeDistance = settings.DistanceCalculatorFast (location, controlPoint);
 				if (relativeDistance > shortestRelativeDistance) continue;
 				shortestRelativeDistance = relativeDistance;
 				closestIndex = i;
 			}
 			ColorBgra cellColor = settings.Colors[closestIndex];
-			if (settings.ShowPoints && shortestRelativeDistance * 2 <= settings.PointSizeThreshold)
+			if (settings.ShowPoints && shortestRelativeDistance * 2 <= settings.PointSizeFast)
 				return UserBlendOps.NormalBlendOp.ApplyStatic (cellColor, settings.PointColor);
 			else
 				return cellColor;
