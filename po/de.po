@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-01 00:24+0000\n"
-"PO-Revision-Date: 2025-03-14 09:36+0000\n"
+"PO-Revision-Date: 2025-09-08 19:55+0000\n"
 "Last-Translator: Janek Ilsen <bananek@ik.me>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/pinta/pinta/de/>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -1809,7 +1809,7 @@ msgstr "Piña Colada"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
 msgid "Please restart Pinta for the changes to take effect."
-msgstr ""
+msgstr "Bitte starte Pinta neu, damit die Änderungen in Kraft treten."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:607
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
@@ -1819,12 +1819,12 @@ msgstr "Punkt hinzugefügt"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:148
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
 msgid "Point Arrangement"
-msgstr ""
+msgstr "Punktanordnung"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:161
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Point Color"
-msgstr ""
+msgstr "Punktfarbe"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
 msgid "Point Deleted"
@@ -1833,7 +1833,7 @@ msgstr "Punkt gelöscht"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:157
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:206
 msgid "Point Size"
-msgstr ""
+msgstr "Punktgröße"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
@@ -1845,7 +1845,7 @@ msgstr "Hochformat"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:129
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1867,7 +1867,7 @@ msgstr "Voreingestellter Farbverlauf"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Preset Palettes"
-msgstr ""
+msgstr "Voreingestellte Paletten"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
