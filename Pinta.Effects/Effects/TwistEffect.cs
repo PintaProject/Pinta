@@ -33,7 +33,7 @@ public sealed class TwistEffect : BaseEffect
 		=> Translations.GetString ("Distort");
 
 	public TwistData Data
-		=> (TwistData) EffectData!;  // NRT - Set in constructor
+		=> (TwistData) EffectData!; // NRT - Set in constructor
 
 	private readonly IChromeService chrome;
 	private readonly ILivePreview live_preview;
@@ -138,7 +138,8 @@ public sealed class TwistEffect : BaseEffect
 		double preliminaryTwist = -data.Amount;
 		double halfWidth = renderBounds.Width / 2.0d;
 		double halfHeight = renderBounds.Height / 2.0d;
-		double maxRadius = Math.Min (halfWidth, halfHeight);
+		double radiusBasis = Math.Min (halfWidth, halfHeight);
+		double maxRadius = radiusBasis * (data.RadiusPercentage / 100.0d);
 		return new (
 			Center: new (
 				X: halfWidth + renderBounds.Left,
@@ -148,8 +149,7 @@ public sealed class TwistEffect : BaseEffect
 			MaxRadius: maxRadius,
 			MaxRadiusSquared: maxRadius * maxRadius,
 			Twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist) / 100,
-			AntialiasPoints: InitializeAntialiasPoints (data.Antialias)
-		);
+			AntialiasPoints: InitializeAntialiasPoints (data.Antialias));
 	}
 
 	private static ImmutableArray<PointD> InitializeAntialiasPoints (int antiAliasLevel)
@@ -171,6 +171,10 @@ public sealed class TwistEffect : BaseEffect
 		[Caption ("Amount")]
 		[MinimumValue (-100), MaximumValue (100)]
 		public int Amount { get; set; } = 30;
+
+		[Caption ("Radius Percentage")]
+		[MinimumValue (0), MaximumValue (100)]
+		public int RadiusPercentage { get; set; } = 100;
 
 		[Caption ("Antialias")]
 		[MinimumValue (0), MaximumValue (5)]
