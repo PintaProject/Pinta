@@ -201,6 +201,14 @@ public sealed class LassoSelectTool : BaseTool
 			FinalizeShape (document);
 	}
 
+	protected override void OnSaveSettings (ISettingsService settings)
+	{
+		base.OnSaveSettings (settings);
+
+		if (lasso_mode_buttom is not null)
+			settings.PutSetting (SettingNames.LASSO_MODE, lasso_mode_buttom.SelectedIndex);
+	}
+
 	private Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
 	private Label LassoModeLabel => lasso_mode_label ??= Label.New (string.Format (" {0}: ", Translations.GetString ("Lasso Mode")));
 
@@ -212,6 +220,7 @@ public sealed class LassoSelectTool : BaseTool
 				lasso_mode_buttom.AddItem (Translations.GetString ("Freeform"), Pinta.Resources.Icons.ToolFreeformShape, false);
 				lasso_mode_buttom.AddItem (Translations.GetString ("Polygon"), Pinta.Resources.Icons.LassoPolygon, true);
 
+				lasso_mode_buttom.SelectedIndex = Settings.GetSetting (SettingNames.LASSO_MODE, 0);
 			}
 
 			return lasso_mode_buttom;
