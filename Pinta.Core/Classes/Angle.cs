@@ -1,4 +1,5 @@
 using System;
+using static Pinta.Core.GradientRenderers;
 
 namespace Pinta.Core;
 
@@ -24,6 +25,9 @@ public readonly struct RadiansAngle : IAngle<RadiansAngle>
 	/// </remarks>
 	public RadiansAngle (double radians)
 	{
+		if (!double.IsFinite (radians))
+			throw new ArgumentOutOfRangeException (nameof (radians), "Angle must be a finite number");
+
 		Radians = radians switch {
 			0 => 0,
 			>= 0 => radians % FullTurn,
@@ -39,8 +43,8 @@ public readonly struct RadiansAngle : IAngle<RadiansAngle>
 
 	public static RadiansAngle operator + (RadiansAngle a, RadiansAngle b) => new (a.Radians + b.Radians);
 	public static RadiansAngle operator - (RadiansAngle a, RadiansAngle b) => new (a.Radians - b.Radians);
-	public static bool operator == (RadiansAngle a, RadiansAngle b) => a.Equals (b);
-	public static bool operator != (RadiansAngle a, RadiansAngle b) => !a.Equals (b);
+	public static bool operator == (RadiansAngle a, RadiansAngle b) => a.Radians == b.Radians;
+	public static bool operator != (RadiansAngle a, RadiansAngle b) => a.Radians != b.Radians;
 	public override readonly int GetHashCode () => Radians.GetHashCode ();
 	public override readonly bool Equals (object? obj)
 	{
@@ -63,6 +67,9 @@ public readonly struct DegreesAngle : IAngle<DegreesAngle>
 	/// </remarks>
 	public DegreesAngle (double degrees)
 	{
+		if (!double.IsFinite (degrees))
+			throw new ArgumentOutOfRangeException (nameof (degrees), "Angle must be a finite number");
+
 		Degrees = degrees switch {
 			0 => 0,
 			>= 0 => degrees % FullTurn,
@@ -78,8 +85,8 @@ public readonly struct DegreesAngle : IAngle<DegreesAngle>
 
 	public static DegreesAngle operator + (DegreesAngle a, DegreesAngle b) => new (a.Degrees + b.Degrees);
 	public static DegreesAngle operator - (DegreesAngle a, DegreesAngle b) => new (a.Degrees - b.Degrees);
-	public static bool operator == (DegreesAngle a, DegreesAngle b) => a.Equals (b);
-	public static bool operator != (DegreesAngle a, DegreesAngle b) => !a.Equals (b);
+	public static bool operator == (DegreesAngle a, DegreesAngle b) => a.Degrees == b.Degrees;
+	public static bool operator != (DegreesAngle a, DegreesAngle b) => a.Degrees != b.Degrees;
 	public override readonly int GetHashCode () => Degrees.GetHashCode ();
 	public override readonly bool Equals (object? obj)
 	{
@@ -101,6 +108,9 @@ public readonly struct RevolutionsAngle : IAngle<RevolutionsAngle>
 	/// </remarks>
 	public RevolutionsAngle (double revolutions)
 	{
+		if (!double.IsFinite (revolutions))
+			throw new ArgumentOutOfRangeException (nameof (revolutions), "Angle must be a finite number");
+
 		Revolutions = revolutions switch {
 			0 => 0,
 			>= 0 => revolutions % FullTurn,
