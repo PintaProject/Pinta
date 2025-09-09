@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-01 00:24+0000\n"
-"PO-Revision-Date: 2025-09-08 19:55+0000\n"
+"PO-Revision-Date: 2025-09-09 03:44+0000\n"
 "Last-Translator: caves_0 <caves_0@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/pinta/pinta/zh_Hans/>\n"
@@ -353,7 +353,7 @@ msgstr "厘米"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "调整笔刷宽度。快捷键：[ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
@@ -361,8 +361,9 @@ msgstr "更改形状类型"
 
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:35
+#, fuzzy
 msgid "Cherry Blossom"
-msgstr ""
+msgstr "樱花"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:629
 #: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:286
@@ -380,32 +381,35 @@ msgstr "圆圈"
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:129
 msgid "Circular"
-msgstr ""
+msgstr "圈画"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
 msgstr "限制范围"
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:42
-#, fuzzy
 msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
-"点击拖出一个矩形选选框\n"
-"按住SHIFT限制为正文形"
+"点击并拖拽绘制一个矩形选区。\n"
+"按住 Shift 键可限制为正方形。"
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
 msgstr ""
+"点击并拖拽绘制一个椭圆形选区。\n"
+"按住 Shift键可限制为圆形。"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:48
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
 msgstr ""
+"点击并拖拽绘制从主色到次主色的渐变。\n"
+"按鼠标右右键反转。"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
 msgid "Click and drag to draw the outline for a selection area."
@@ -487,7 +491,7 @@ msgstr "颜色减淡"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:215
 msgid "Color Gradient"
-msgstr ""
+msgstr "颜色渐变"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:200
 msgid "Color Mode"
@@ -512,7 +516,7 @@ msgstr "色彩饱和度"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:174
 msgid "Color Scheme"
-msgstr ""
+msgstr "调色盘"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:184
 msgid "Color Scheme Edge Behavior"
