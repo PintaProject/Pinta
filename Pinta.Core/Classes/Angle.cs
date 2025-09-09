@@ -11,7 +11,7 @@ public interface IAngle<TAngle> where TAngle : IAngle<TAngle>
 	static abstract TAngle operator - (TAngle a, TAngle b);
 }
 
-public readonly struct RadiansAngle : IAngle<RadiansAngle>
+public readonly struct RadiansAngle : IAngle<RadiansAngle>, IEquatable<RadiansAngle>
 {
 	public static double FullTurn => Math.PI * 2;
 
@@ -42,17 +42,18 @@ public readonly struct RadiansAngle : IAngle<RadiansAngle>
 
 	public static RadiansAngle operator + (RadiansAngle a, RadiansAngle b) => new (a.Radians + b.Radians);
 	public static RadiansAngle operator - (RadiansAngle a, RadiansAngle b) => new (a.Radians - b.Radians);
-	public static bool operator == (RadiansAngle a, RadiansAngle b) => a.Radians == b.Radians;
-	public static bool operator != (RadiansAngle a, RadiansAngle b) => a.Radians != b.Radians;
+	public static bool operator == (RadiansAngle a, RadiansAngle b) => a.Equals (b);
+	public static bool operator != (RadiansAngle a, RadiansAngle b) => !a.Equals (b);
 	public override readonly int GetHashCode () => Radians.GetHashCode ();
-	public override readonly bool Equals (object? obj)
-	{
-		if (obj is not RadiansAngle other) return false;
-		return Radians == other.Radians;
-	}
+
+	public override readonly bool Equals (object? @object)
+		=> @object is RadiansAngle other && Equals (other);
+
+	public readonly bool Equals (RadiansAngle other)
+		=> Radians == other.Radians;
 }
 
-public readonly struct DegreesAngle : IAngle<DegreesAngle>
+public readonly struct DegreesAngle : IAngle<DegreesAngle>, IEquatable<DegreesAngle>
 {
 	public static double FullTurn => 360;
 
@@ -84,17 +85,18 @@ public readonly struct DegreesAngle : IAngle<DegreesAngle>
 
 	public static DegreesAngle operator + (DegreesAngle a, DegreesAngle b) => new (a.Degrees + b.Degrees);
 	public static DegreesAngle operator - (DegreesAngle a, DegreesAngle b) => new (a.Degrees - b.Degrees);
-	public static bool operator == (DegreesAngle a, DegreesAngle b) => a.Degrees == b.Degrees;
-	public static bool operator != (DegreesAngle a, DegreesAngle b) => a.Degrees != b.Degrees;
+	public static bool operator == (DegreesAngle a, DegreesAngle b) => a.Equals (b);
+	public static bool operator != (DegreesAngle a, DegreesAngle b) => !a.Equals (b);
 	public override readonly int GetHashCode () => Degrees.GetHashCode ();
-	public override readonly bool Equals (object? obj)
-	{
-		if (obj is not DegreesAngle other) return false;
-		return Degrees == other.Degrees;
-	}
+
+	public override readonly bool Equals (object? @object)
+		=> @object is DegreesAngle other && Equals (other);
+
+	public readonly bool Equals (DegreesAngle other)
+		=> Degrees == other.Degrees;
 }
 
-public readonly struct RevolutionsAngle : IAngle<RevolutionsAngle>
+public readonly struct RevolutionsAngle : IAngle<RevolutionsAngle>, IEquatable<RevolutionsAngle>
 {
 	public static double FullTurn => 1;
 
@@ -125,12 +127,13 @@ public readonly struct RevolutionsAngle : IAngle<RevolutionsAngle>
 
 	public static RevolutionsAngle operator + (RevolutionsAngle a, RevolutionsAngle b) => new (a.Revolutions + b.Revolutions);
 	public static RevolutionsAngle operator - (RevolutionsAngle a, RevolutionsAngle b) => new (a.Revolutions - b.Revolutions);
-	public static bool operator == (RevolutionsAngle a, RevolutionsAngle b) => a.Revolutions == b.Revolutions;
-	public static bool operator != (RevolutionsAngle a, RevolutionsAngle b) => a.Revolutions != b.Revolutions;
+	public static bool operator == (RevolutionsAngle a, RevolutionsAngle b) => a.Equals (b);
+	public static bool operator != (RevolutionsAngle a, RevolutionsAngle b) => !a.Equals (b);
 	public override readonly int GetHashCode () => Revolutions.GetHashCode ();
-	public override readonly bool Equals (object? obj)
-	{
-		if (obj is not RevolutionsAngle other) return false;
-		return Revolutions == other.Revolutions;
-	}
+
+	public override readonly bool Equals (object? @object)
+		=> @object is RevolutionsAngle other && Equals (other);
+
+	public readonly bool Equals (RevolutionsAngle other)
+		=> Revolutions == other.Revolutions;
 }
