@@ -185,10 +185,12 @@ public sealed class LassoSelectTool : BaseTool
 			return;
 		}
 
+		ArgumentNullException.ThrowIfNull (hist);
+
 		lasso_polygon.RemoveAt (lasso_polygon.Count - 1);
 
 		if (lasso_polygon.Count == 0) {
-			hist?.Undo ();
+			hist.Undo ();
 			return;
 		}
 
