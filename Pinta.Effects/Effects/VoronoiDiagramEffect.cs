@@ -48,9 +48,9 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		ImmutableArray<PointD> ControlPoints,
 		ImmutableArray<PointD> SamplingOffsets,
 		ImmutableArray<ColorBgra> Colors,
-		Func<PointD, PointD, double> DistanceCalculator,
+		Func<PointD, PointD, double> DistanceCalculatorFast,
 		bool ShowPoints,
-		double PointSize,
+		double PointRadiusFast,
 		ColorBgra PointColor);
 
 	private VoronoiSettings CreateSettings (ImageSurface destination)
@@ -78,9 +78,9 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 			ControlPoints: controlPoints,
 			SamplingOffsets: Sampling.CreateSamplingOffsets (data.Quality),
 			Colors: [.. reversedSortingColors],
-			DistanceCalculator: SpatialPartition.GetDistanceCalculator (data.DistanceMetric),
+			DistanceCalculatorFast: SpatialPartition.GetFastDistanceCalculator (data.DistanceMetric),
 			ShowPoints: data.ShowPoints,
-			PointSize: data.PointSize,
+			PointRadiusFast: SpatialPartition.AdjustDistanceThresholdFast (data.PointSize / 2.0, data.DistanceMetric),
 			PointColor: data.PointColor.ToColorBgra ());
 	}
 
@@ -107,20 +107,24 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		ColorBgra GetColorForLocation (PointD location)
 		{
-			double shortestDistance = double.MaxValue;
+			// A note about the naming ("relative"):
+			// We don't need to know the actual distance,
+			// we just need to know which distances are larger
+			// and which are smaller.
+			double shortestRelativeDistance = double.MaxValue;
 			int closestIndex = 0;
 			for (var i = 0; i < settings.ControlPoints.Length; i++) {
 				// TODO: Acceleration structure that limits the search
 				//       to a relevant subset of points, for better performance.
 				//       Some ideas to consider: quadtree, spatial hashing
 				PointD controlPoint = settings.ControlPoints[i];
-				double distance = settings.DistanceCalculator (location, controlPoint);
-				if (distance > shortestDistance) continue;
-				shortestDistance = distance;
+				double relativeDistance = settings.DistanceCalculatorFast (location, controlPoint);
+				if (relativeDistance > shortestRelativeDistance) continue;
+				shortestRelativeDistance = relativeDistance;
 				closestIndex = i;
 			}
 			ColorBgra cellColor = settings.Colors[closestIndex];
-			if (settings.ShowPoints && shortestDistance * 2 <= settings.PointSize)
+			if (settings.ShowPoints && shortestRelativeDistance <= settings.PointRadiusFast)
 				return UserBlendOps.NormalBlendOp.ApplyStatic (cellColor, settings.PointColor);
 			else
 				return cellColor;
