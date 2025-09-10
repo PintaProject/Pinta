@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-01 00:24+0000\n"
-"PO-Revision-Date: 2014-10-04 07:12+0000\n"
-"Last-Translator: Ve4ernik <ve4ernik@gmail.com>\n"
-"Language-Team: Bulgarian <bg@li.org>\n"
+"PO-Revision-Date: 2025-09-09 03:44+0000\n"
+"Last-Translator: caves_0 <caves_0@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Bulgarian <https://hosted.weblate.org/projects/pinta/pinta/bg/"
+">\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
@@ -512,7 +513,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:184
 msgid "Color Scheme Edge Behavior"
-msgstr ""
+msgstr "调色盘边缘优化"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:172
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:145
