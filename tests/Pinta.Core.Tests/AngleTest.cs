@@ -41,6 +41,16 @@ internal sealed class AngleTest
 		Assert.That (expectedPropertyValue, Is.EqualTo (angle.Revolutions));
 	}
 
+	[TestCase (double.NaN)]
+	[TestCase (double.PositiveInfinity)]
+	[TestCase (double.NegativeInfinity)]
+	public void Constructor_Throws_If_Not_Finite (double constructorArgument)
+	{
+		Assert.Throws<ArgumentOutOfRangeException> (() => new DegreesAngle (constructorArgument));
+		Assert.Throws<ArgumentOutOfRangeException> (() => new RadiansAngle (constructorArgument));
+		Assert.Throws<ArgumentOutOfRangeException> (() => new RevolutionsAngle (constructorArgument));
+	}
+
 	[TestCase (1d, 1d, 2d)]
 	[TestCase (Math.PI, Math.PI, 0)]
 	[TestCase (Math.PI * 1.5d, Math.PI * 1.5d, Math.PI)]

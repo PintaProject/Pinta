@@ -146,6 +146,20 @@ public sealed class CanvasWindow : Gtk.Grid
 		// Also update if the view size changed without affecting the size of
 		// the canvas widget (e.g. when zoomed out and no scrollbars are required)
 		document.Workspace.ViewSizeChanged += UpdateRulerRange;
+		document.SelectionChanged += UpdateRulerSelection;
+	}
+
+	private void UpdateRulerSelection (object? sender, EventArgs e)
+	{
+		if (document.Selection.Visible) {
+			RectangleD bounds = document.Selection.GetBounds ();
+			horizontal_ruler.SetSelectionRange (bounds.Left, bounds.Left + bounds.Width);
+			vertical_ruler.SetSelectionRange (bounds.Top, bounds.Top + bounds.Height);
+		} else {
+			// If there's no selection, clear the highlight
+			horizontal_ruler.SetSelectionRange (null, null);
+			vertical_ruler.SetSelectionRange (null, null);
+		}
 	}
 
 	private void HandleMotion (

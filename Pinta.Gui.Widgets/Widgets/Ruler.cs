@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Cairo;
 using Pinta.Core;
 
@@ -50,6 +51,20 @@ public sealed class Ruler : Gtk.DrawingArea
 
 	private Surface? cached_surface = null;
 	private Size? last_known_size = null;
+
+	private double? selection_start = null;
+	private double? selection_end = null;
+
+	public void SetSelectionRange (double? start, double? end)
+	{
+		if (selection_start == start && selection_end == end)
+			return;
+
+		selection_start = start;
+		selection_end = end;
+
+		QueueDraw ();
+	}
 
 	/// <summary>
 	/// Whether the ruler is horizontal or vertical.
@@ -162,7 +177,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		int Start,
 		int End,
 		double MarkerPosition,
-		RectangleD RulerBottomLine,
+		RectangleD RulerOuterLine,
 		Size EffectiveSize,
 		Color Color,
 		Gtk.Orientation Orientation);
@@ -170,7 +185,7 @@ public sealed class Ruler : Gtk.DrawingArea
 	{
 		GetStyleContext ().GetColor (out Color color);
 
-		RectangleD rulerBottomLine = Orientation switch {
+		RectangleD rulerOuterLine = Orientation switch {
 
 			Gtk.Orientation.Vertical => new (
 				X: preliminarySize.Width - 1,
@@ -256,8 +271,8 @@ public sealed class Ruler : Gtk.DrawingArea
 			UnitsPerTick: unitsPerTick,
 			Start: (int) Math.Floor (scaledLower * ticksPerUnit),
 			End: (int) Math.Ceiling (scaledUpper * ticksPerUnit),
-			MarkerPosition: (Position - Lower) * (effectiveSize.Width / (Upper - Lower)),
-			RulerBottomLine: rulerBottomLine,
+			MarkerPosition: GetPositionOnRuler (Position, effectiveSize.Width),
+			RulerOuterLine: rulerOuterLine,
 			EffectiveSize: effectiveSize,
 			Color: color,
 			Orientation: Orientation);
@@ -273,6 +288,31 @@ public sealed class Ruler : Gtk.DrawingArea
 		RulerDrawSettings settings = CreateSettings (preliminarySize);
 
 		cached_surface ??= CreateBaseRuler (settings, preliminarySize);
+
+		// Draw the selection projection if a selection exists
+		if (selection_start.HasValue && selection_end.HasValue) {
+
+			// Convert selection coordinates to ruler widget coordinates
+			double p1 = GetPositionOnRuler (selection_start.Value, settings.EffectiveSize.Width);
+			double p2 = GetPositionOnRuler (selection_end.Value, settings.EffectiveSize.Width);
+
+			cr.SetSourceRgba ( // Semi-transparent blue
+				red: 0.21,
+				green: 0.52,
+				blue: 0.89,
+				alpha: 0.25);
+
+			switch (Orientation) {
+				case Gtk.Orientation.Horizontal:
+					cr.Rectangle (p1, 0, p2 - p1, settings.EffectiveSize.Height);
+					break;
+				default:
+					cr.Rectangle (0, p1, settings.EffectiveSize.Height, p2 - p1);
+					break;
+			}
+
+			cr.Fill ();
+		}
 
 		cr.SetSourceSurface (cached_surface, 0, 0);
 		cr.Paint ();
@@ -306,7 +346,7 @@ public sealed class Ruler : Gtk.DrawingArea
 
 		drawingContext.SetSourceColor (settings.Color);
 		drawingContext.LineWidth = 1.0;
-		drawingContext.Rectangle (settings.RulerBottomLine);
+		drawingContext.Rectangle (settings.RulerOuterLine);
 		drawingContext.Fill ();
 
 		for (int i = settings.Start; i <= settings.End; ++i) {
@@ -353,6 +393,15 @@ public sealed class Ruler : Gtk.DrawingArea
 		}
 
 		return result;
+	}
+
+	[MethodImpl (MethodImplOptions.AggressiveInlining)]
+	private double GetPositionOnRuler (double position, double width)
+	{
+		double range = Upper - Lower;
+		double scaledWidth = width / range;
+		double positionFromLower = position - Lower;
+		return positionFromLower * scaledWidth;
 	}
 
 	private static int GetFontSize (Pango.FontDescription font, int scaleFactor)
