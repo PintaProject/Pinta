@@ -36,7 +36,7 @@ public sealed class OffsetSelectionDialog : Gtk.Dialog
 	public int Offset
 		=> offset_spinbox.ValueAsInt;
 
-	public OffsetSelectionDialog (ChromeManager chrome)
+	public OffsetSelectionDialog (IChromeService chrome)
 	{
 		DefaultWidth = 400;
 		DefaultHeight = 100;

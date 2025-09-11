@@ -25,18 +25,19 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta.Actions;
 
 internal sealed class ResizeCanvasAction : IActionHandler
 {
-	private readonly ChromeManager chrome;
-	private readonly WorkspaceManager workspace;
+	private readonly IChromeService chrome;
+	private readonly IWorkspaceService workspace;
 	private readonly ActionManager actions;
 	internal ResizeCanvasAction (
-		ChromeManager chrome,
-		WorkspaceManager workspace,
+		IChromeService chrome,
+		IWorkspaceService workspace,
 		ActionManager actions)
 	{
 		this.chrome = chrome;
@@ -56,10 +57,21 @@ internal sealed class ResizeCanvasAction : IActionHandler
 
 	private async void Activated (object sender, EventArgs e)
 	{
+		CanvasResizing? response = await PromptResize ();
+		if (!response.HasValue) return;
+		CanvasResizing resizing = response.Value;
+		workspace.ResizeCanvas (resizing.NewSize, resizing.Anchor, resizing.CompoundAction);
+	}
+
+	private async Task<CanvasResizing?> PromptResize ()
+	{
 		using ResizeCanvasDialog dialog = new (chrome, workspace);
-		Gtk.ResponseType response = await dialog.RunAsync ();
-		dialog.Destroy ();
-		if (response != Gtk.ResponseType.Ok) return;
-		dialog.SaveChanges ();
+		try {
+			Gtk.ResponseType response = await dialog.RunAsync ();
+			if (response != Gtk.ResponseType.Ok) return null;
+			return dialog.GetSelection ();
+		} finally {
+			dialog.Destroy ();
+		}
 	}
 }

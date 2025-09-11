@@ -57,43 +57,42 @@ internal sealed class LayerPropertiesAction : IActionHandler
 	private async void Activated (object sender, EventArgs e)
 	{
 		Document active = workspace.ActiveDocument;
-
 		using LayerPropertiesDialog dialog = new (chrome, workspace);
+		try {
+			Gtk.ResponseType response = await dialog.RunAsync ();
 
-		Gtk.ResponseType response = await dialog.RunAsync ();
+			if (response == Gtk.ResponseType.Ok && dialog.AreLayerPropertiesUpdated) {
 
-		dialog.Destroy ();
+				string historyMessage = GetLayerPropertyUpdateMessage (
+					dialog.InitialLayerProperties,
+					dialog.UpdatedLayerProperties);
 
-		if (response == Gtk.ResponseType.Ok && dialog.AreLayerPropertiesUpdated) {
+				UpdateLayerPropertiesHistoryItem historyItem = new (
+					Resources.Icons.LayerProperties,
+					historyMessage,
+					active.Layers.CurrentUserLayerIndex,
+					dialog.InitialLayerProperties,
+					dialog.UpdatedLayerProperties);
 
-			string historyMessage = GetLayerPropertyUpdateMessage (
-				dialog.InitialLayerProperties,
-				dialog.UpdatedLayerProperties);
+				active.History.PushNewItem (historyItem);
 
-			UpdateLayerPropertiesHistoryItem historyItem = new (
-				Resources.Icons.LayerProperties,
-				historyMessage,
-				active.Layers.CurrentUserLayerIndex,
-				dialog.InitialLayerProperties,
-				dialog.UpdatedLayerProperties);
-
-			active.History.PushNewItem (historyItem);
-
-			workspace.ActiveWorkspace.Invalidate ();
-
-		} else {
-
-			Layer layer = active.Layers.CurrentUserLayer;
-			Layer selectionLayer = active.Layers.SelectionLayer;
-			LayerProperties initial = dialog.InitialLayerProperties;
-			initial.SetProperties (layer);
-
-			if (selectionLayer != null)
-				initial.SetProperties (selectionLayer);
-
-			if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
 				workspace.ActiveWorkspace.Invalidate ();
 
+			} else {
+
+				Layer layer = active.Layers.CurrentUserLayer;
+				Layer selectionLayer = active.Layers.SelectionLayer;
+				LayerProperties initial = dialog.InitialLayerProperties;
+				initial.SetProperties (layer);
+
+				if (selectionLayer != null)
+					initial.SetProperties (selectionLayer);
+
+				if ((layer.Opacity != initial.Opacity) || (layer.BlendMode != initial.BlendMode) || (layer.Hidden != initial.Hidden))
+					workspace.ActiveWorkspace.Invalidate ();
+			}
+		} finally {
+			dialog.Destroy ();
 		}
 	}
 

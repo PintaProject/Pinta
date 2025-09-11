@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta.Actions;
@@ -56,6 +57,14 @@ internal sealed class ResizePaletteAction : IActionHandler
 
 	private async void Activated (object sender, EventArgs e)
 	{
+		int? response = await PromptResize ();
+		if (!response.HasValue) return;
+		int newSize = response.Value;
+		palette.CurrentPalette.Resize (newSize);
+	}
+
+	private async Task<int?> PromptResize ()
+	{
 		using SpinButtonEntryDialog dialog = new (
 			Translations.GetString ("Resize Palette"),
 			chrome.MainWindow,
@@ -63,13 +72,12 @@ internal sealed class ResizePaletteAction : IActionHandler
 			1,
 			96,
 			palette.CurrentPalette.Colors.Count);
-
-		Gtk.ResponseType response = await dialog.RunAsync ();
-
-		dialog.Destroy ();
-
-		if (response != Gtk.ResponseType.Ok) return;
-
-		palette.CurrentPalette.Resize (dialog.GetValue ());
+		try {
+			Gtk.ResponseType response = await dialog.RunAsync ();
+			if (response != Gtk.ResponseType.Ok) return null;
+			return dialog.GetValue ();
+		} finally {
+			dialog.Destroy ();
+		}
 	}
 }

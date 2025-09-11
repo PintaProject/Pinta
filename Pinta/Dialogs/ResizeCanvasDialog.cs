@@ -49,9 +49,9 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 	private bool value_changing;
 	private Anchor anchor;
 
-	private readonly WorkspaceManager workspace;
+	private readonly IWorkspaceService workspace;
 
-	public ResizeCanvasDialog (ChromeManager chrome, WorkspaceManager workspace)
+	public ResizeCanvasDialog (IChromeService chrome, IWorkspaceService workspace)
 	{
 		const int SPACING = 6;
 
@@ -246,13 +246,12 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			HeightRequest = 30,
 		};
 
-	public void SaveChanges ()
+	public CanvasResizing GetSelection ()
 	{
 		Size newSize = new (
 			Width: width_spinner.GetValueAsInt (),
 			Height: height_spinner.GetValueAsInt ());
-
-		workspace.ResizeCanvas (newSize, anchor, null);
+		return new (newSize, anchor, null);
 	}
 
 	private void heightSpinner_ValueChanged (object? sender, EventArgs e)

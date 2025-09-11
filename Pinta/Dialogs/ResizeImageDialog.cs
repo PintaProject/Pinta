@@ -36,12 +36,12 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 	private readonly Gtk.SpinButton height_spinner;
 	private readonly Gtk.CheckButton aspect_checkbox;
 	private readonly Gtk.ComboBoxText resampling_combobox;
-	private readonly WorkspaceManager workspace;
+	private readonly IWorkspaceService workspace;
 	private bool value_changing;
 
 	const int SPACING = 6;
 
-	internal ResizeImageDialog (ChromeManager chrome, WorkspaceManager workspace)
+	internal ResizeImageDialog (IChromeService chrome, IWorkspaceService workspace)
 	{
 		BoxStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Horizontal,
@@ -184,15 +184,13 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		return result;
 	}
 
-	public void SaveChanges ()
+	public ImageResizing GetSelection ()
 	{
 		Size newSize = new (
 			Width: width_spinner.GetValueAsInt (),
 			Height: height_spinner.GetValueAsInt ());
-
-		workspace.ResizeImage (
-			newSize,
-			(ResamplingMode) resampling_combobox.Active);
+		ResamplingMode resamplingMode = (ResamplingMode) resampling_combobox.Active;
+		return new (newSize, resamplingMode);
 	}
 
 	private void heightSpinner_ValueChanged (object? sender, EventArgs e)
