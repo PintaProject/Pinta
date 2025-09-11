@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using NUnit.Framework.Legacy;
 using Pinta.Core;
 
 namespace Pinta.Effects.Tests;
@@ -147,8 +146,8 @@ internal sealed class GradientTests
 
 		var reversedTwice = reversedGradient.Reversed ();
 
-		CollectionAssert.AreEqual (gradient.Positions, reversedTwice.Positions);
-		CollectionAssert.AreEqual (gradient.Colors, reversedTwice.Colors);
+		Assert.That (gradient.Positions, Is.EqualTo (reversedTwice.Positions));
+		Assert.That (gradient.Colors, Is.EqualTo (reversedTwice.Colors));
 	}
 
 	private static readonly IReadOnlyList<TestCaseData> reversal_test_cases = CreateReversalTestCases ().ToArray ();
