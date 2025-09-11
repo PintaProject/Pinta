@@ -110,7 +110,8 @@ public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TCol
 			EndColor,
 			startPosition,
 			endPosition,
-			Positions.Zip (Colors, KeyValuePair.Create).Select (ToNewStop));
+			Positions.Zip (Colors, KeyValuePair.Create).Select (ToNewStop)
+		);
 	}
 
 	/// <returns>
@@ -121,12 +122,10 @@ public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TCol
 	/// </returns>
 	public ColorGradient<TColor> Reversed ()
 	{
-		var reversedPositions =
-			Positions
-			.Select (p => EndPosition - p + StartPosition);
+		var reversedPosition = Positions.Select (p => EndPosition - p);
 
 		var reversedStops =
-			reversedPositions
+			reversedPosition
 			.Zip (Colors, KeyValuePair.Create);
 
 		return new ColorGradient<TColor> (
@@ -134,7 +133,8 @@ public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TCol
 			endColor: StartColor,
 			startPosition: StartPosition,
 			endPosition: EndPosition,
-			gradientStops: reversedStops);
+			gradientStops: reversedStops
+		);
 	}
 
 	/// <returns>
