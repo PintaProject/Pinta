@@ -30,6 +30,7 @@ Thanks to the following contributors who worked on this release:
 - The text tool now supports using Ctrl+Backspace to delete words (#1680)
 - Added a Windows ARM64 installer (#1699, #1378)
 - The selection of an area on the canvas is now being projected and highlighted on the rulers (#1723)
+- Added a Radius Percentage parameter to the Twist effect (#1739)
 
 ### Changed
 - Packaging changes
