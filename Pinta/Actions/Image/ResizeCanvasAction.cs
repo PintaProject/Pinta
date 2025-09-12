@@ -57,13 +57,13 @@ internal sealed class ResizeCanvasAction : IActionHandler
 
 	private async void Activated (object sender, EventArgs e)
 	{
-		CanvasResizing? response = await PromptResize ();
+		ResizeCanvasOptions? response = await PromptResize ();
 		if (!response.HasValue) return;
-		CanvasResizing resizing = response.Value;
+		ResizeCanvasOptions resizing = response.Value;
 		workspace.ResizeCanvas (resizing.NewSize, resizing.Anchor, resizing.CompoundAction);
 	}
 
-	private async Task<CanvasResizing?> PromptResize ()
+	private async Task<ResizeCanvasOptions?> PromptResize ()
 	{
 		using ResizeCanvasDialog dialog = new (chrome, workspace);
 		try {

@@ -246,7 +246,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			HeightRequest = 30,
 		};
 
-	public CanvasResizing GetSelection ()
+	public ResizeCanvasOptions GetSelection ()
 	{
 		Size newSize = new (
 			Width: width_spinner.GetValueAsInt (),

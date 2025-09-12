@@ -184,7 +184,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		return result;
 	}
 
-	public ImageResizing GetSelection ()
+	public ResizeImageOptions GetSelection ()
 	{
 		Size newSize = new (
 			Width: width_spinner.GetValueAsInt (),

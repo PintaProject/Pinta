@@ -57,13 +57,13 @@ internal sealed class ResizeImageAction : IActionHandler
 
 	private async void Activated (object sender, EventArgs e)
 	{
-		ImageResizing? response = await PromptResize ();
+		ResizeImageOptions? response = await PromptResize ();
 		if (!response.HasValue) return;
-		ImageResizing resizing = response.Value;
+		ResizeImageOptions resizing = response.Value;
 		workspace.ResizeImage (resizing.NewSize, resizing.ResamplingMode);
 	}
 
-	private async Task<ImageResizing?> PromptResize ()
+	private async Task<ResizeImageOptions?> PromptResize ()
 	{
 		using ResizeImageDialog dialog = new (chrome, workspace);
 		try {
