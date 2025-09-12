@@ -69,7 +69,7 @@ internal sealed class ResizeCanvasAction : IActionHandler
 		try {
 			Gtk.ResponseType response = await dialog.RunAsync ();
 			if (response != Gtk.ResponseType.Ok) return null;
-			return dialog.GetSelection ();
+			return dialog.GetResizeCanvasOptions ();
 		} finally {
 			dialog.Destroy ();
 		}
