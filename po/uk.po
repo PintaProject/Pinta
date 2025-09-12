@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-01 00:24+0000\n"
-"PO-Revision-Date: 2025-08-13 15:02+0000\n"
+"PO-Revision-Date: 2025-09-14 16:01+0000\n"
 "Last-Translator: Stepan Andriiovych <4fbig9xyb@mozmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/uk/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -381,7 +381,7 @@ msgstr "Кола"
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:129
 msgid "Circular"
-msgstr ""
+msgstr "За круговою траекторією"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -1732,7 +1732,7 @@ msgstr "Знімок"
 #. Translators: Arrangement of points similar to how sunflower seeds are arranged
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:133
 msgid "Phyllotaxis"
-msgstr ""
+msgstr "Філотаксис (спірально-симетрично)"
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
@@ -1807,12 +1807,12 @@ msgstr "Точка додана"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:148
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
 msgid "Point Arrangement"
-msgstr ""
+msgstr "Розташування точок"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:161
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Point Color"
-msgstr ""
+msgstr "Колір крапки"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
 msgid "Point Deleted"
@@ -1821,7 +1821,7 @@ msgstr "Точка вилучена"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:157
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:206
 msgid "Point Size"
-msgstr ""
+msgstr "Розмір крапки"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
@@ -2254,7 +2254,7 @@ msgstr "Показати шар"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:154
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:203
 msgid "Show Points"
-msgstr ""
+msgstr "Відобразити крапки"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
 msgid "Show Value"
