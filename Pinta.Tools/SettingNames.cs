@@ -26,6 +26,8 @@ internal static class SettingNames
 	internal const string FREEFORM_SHAPE_FILL_TYPE = "freeform-shape-fill-type";
 	internal const string FREEFORM_SHAPE_DASH_PATTERN = "freeform-shape-dash_pattern";
 
+	internal const string LASSO_MODE = "lasso-mode";
+
 	internal static string Arrow1 (string prefix)
 		=> $"{prefix}-arrow1";
 
