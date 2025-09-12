@@ -115,6 +115,115 @@ internal sealed class GradientTests
 		}
 	}
 
+	[TestCaseSource (nameof (reversal_test_cases))]
+	public void Gradient_Reversal_Is_Correct (
+		double startPosition,
+		double endPosition,
+		IReadOnlyDictionary<double, ColorBgra> originalStops,
+		IReadOnlyDictionary<double, ColorBgra> expectedReversedStops)
+	{
+		var gradient = ColorGradient.Create (
+			default_start_color,
+			default_end_color,
+			startPosition,
+			endPosition,
+			originalStops);
+
+		ColorGradient<ColorBgra> reversedGradient = gradient.Reversed ();
+
+		Assert.That (reversedGradient.StartPosition, Is.EqualTo (startPosition), "Start position did not remain the same after reversing");
+		Assert.That (reversedGradient.EndPosition, Is.EqualTo (endPosition), "End position did not remain the same after reversing");
+
+		Assert.That (reversedGradient.StartColor, Is.EqualTo (gradient.EndColor), "Start color after reversal is not the same as end color before reversal");
+		Assert.That (reversedGradient.EndColor, Is.EqualTo (gradient.StartColor), "End color after reversal is not the same as start color before reversal");
+
+		Assert.That (reversedGradient.StopsCount, Is.EqualTo (expectedReversedStops.Count), "Number of stops is not the same after reversing");
+
+		foreach (var colorStop in expectedReversedStops) {
+			ColorBgra actualColor = reversedGradient.GetColor (colorStop.Key);
+			Assert.That (actualColor, Is.EqualTo (colorStop.Value), $"Color mismatch at reversed position {colorStop.Key}");
+		}
+
+		var reversedTwice = reversedGradient.Reversed ();
+
+		Assert.That (gradient.Positions, Is.EqualTo (reversedTwice.Positions));
+		Assert.That (gradient.Colors, Is.EqualTo (reversedTwice.Colors));
+	}
+
+	private static readonly IReadOnlyList<TestCaseData> reversal_test_cases = CreateReversalTestCases ().ToArray ();
+	private static IEnumerable<TestCaseData> CreateReversalTestCases ()
+	{
+		// Start is 0, end is positive
+		yield return new TestCaseData (
+			0d,
+			100d,
+			new Dictionary<double, ColorBgra> {
+				[20] = ColorBgra.Red,
+				[60] = ColorBgra.Blue,
+			},
+			new Dictionary<double, ColorBgra> {
+				[80] = ColorBgra.Red,
+				[40] = ColorBgra.Blue,
+			}
+		).SetName ("Reversed_0_to_100");
+
+		// Start is positive, end is positive
+		yield return new TestCaseData (
+			100d,
+			200d,
+			new Dictionary<double, ColorBgra> {
+				[110] = ColorBgra.Red,
+				[170] = ColorBgra.Green,
+			},
+			new Dictionary<double, ColorBgra> {
+				[190] = ColorBgra.Red,
+				[130] = ColorBgra.Green,
+			}
+		).SetName ("Reversed_100_to_200");
+
+		// Start is negative, end is positive
+		yield return new TestCaseData (
+			-50d,
+			50d,
+			new Dictionary<double, ColorBgra> {
+				[-30] = ColorBgra.Red,
+				[10] = ColorBgra.Blue,
+			},
+			new Dictionary<double, ColorBgra> {
+				[30] = ColorBgra.Red,
+				[-10] = ColorBgra.Blue,
+			}
+		).SetName ("Reversed_Neg50_to_50");
+
+		// Start is negative, end is negative
+		yield return new TestCaseData (
+			-100d,
+			-50d,
+			new Dictionary<double, ColorBgra> {
+				[-90] = ColorBgra.Red,
+				[-60] = ColorBgra.Blue,
+			},
+			new Dictionary<double, ColorBgra> {
+				[-60] = ColorBgra.Red,
+				[-90] = ColorBgra.Blue,
+			}
+		).SetName ("Reversed_Neg100_to_Neg50");
+
+		// Start is negative, end is 0
+		yield return new TestCaseData (
+			-100d,
+			0d,
+			new Dictionary<double, ColorBgra> {
+				[-90] = ColorBgra.Red,
+				[-60] = ColorBgra.Blue,
+			},
+			new Dictionary<double, ColorBgra> {
+				[-10] = ColorBgra.Red,
+				[-40] = ColorBgra.Blue,
+			}
+		).SetName ("Reversed_Neg100_to_0");
+	}
+
 	// Not adding tolerances nor checking for mappings that could be rounded up to the next byte,
 	// because currently the ColorBgra.Lerp function always rounds down, never up
 	private static readonly IReadOnlyList<TestCaseData> interpolated_color_checks = CreateInterpolatedColorChecks ().ToArray ();
@@ -124,8 +233,7 @@ internal sealed class GradientTests
 			ColorBgra.Black,
 			ColorBgra.White,
 			byte.MinValue,
-			byte.MaxValue
-		);
+			byte.MaxValue);
 
 		yield return new (
 			blackToWhite255,
@@ -139,8 +247,7 @@ internal sealed class GradientTests
 			ColorBgra.Black,
 			ColorBgra.White,
 			0,
-			1
-		);
+			1);
 
 		yield return new (
 			blackToWhite1,

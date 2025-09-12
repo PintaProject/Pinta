@@ -13,11 +13,13 @@ Thanks to the following contributors who worked on this release:
 - @pedropaulosuzuki
 - @bplaat
 - @stefan-dangl
+- @PabloRufianJimenez
 
 ### Added
 - Implemented a new axonometric grid (View > Canvas Grid... > Show Axonometric Grid) (#1438, #1541)
 - Rewrote the canvas widget to improve performance and memory usage issues for zoomed-in images (#1020, #1485)
 - Added a new Cells effect (#1589)
+- Added a polygon selection mode to the Lasso Select tool (#1725, #1096)
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
 - When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
 - Keyboard shortcuts are now displayed on all toolbar button tooltips (#1408, #1432)
@@ -28,6 +30,7 @@ Thanks to the following contributors who worked on this release:
 - The text tool now supports using Ctrl+Backspace to delete words (#1680)
 - Added a Windows ARM64 installer (#1699, #1378)
 - The selection of an area on the canvas is now being projected and highlighted on the rulers (#1723)
+- Added a Radius Percentage parameter to the Twist effect (#1739)
 
 ### Changed
 - Packaging changes
