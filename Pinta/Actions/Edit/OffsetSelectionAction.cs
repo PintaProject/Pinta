@@ -25,21 +25,22 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta.Actions;
 internal sealed class OffsetSelectionAction : IActionHandler
 {
 	private readonly EditActions edit;
-	private readonly ChromeManager chrome;
-	private readonly WorkspaceManager workspace;
-	private readonly ToolManager tools;
+	private readonly IChromeService chrome;
+	private readonly IWorkspaceService workspace;
+	private readonly IToolService tools;
 
 	internal OffsetSelectionAction (
 		EditActions edit,
-		ChromeManager chrome,
-		WorkspaceManager workspace,
-		ToolManager tools)
+		IChromeService chrome,
+		IWorkspaceService workspace,
+		IToolService tools)
 	{
 		this.edit = edit;
 		this.chrome = chrome;
@@ -59,13 +60,11 @@ internal sealed class OffsetSelectionAction : IActionHandler
 
 	private async void Activated (object sender, EventArgs e)
 	{
-		using OffsetSelectionDialog dialog = new (chrome);
+		int? response = await PromptOffsetSelection ();
 
-		Gtk.ResponseType response = await dialog.RunAsync ();
+		if (!response.HasValue) return;
 
-		dialog.Destroy ();
-
-		if (response != Gtk.ResponseType.Ok) return;
+		int newOffset = response.Value;
 
 		tools.Commit ();
 
@@ -77,11 +76,23 @@ internal sealed class OffsetSelectionAction : IActionHandler
 			workspace,
 			Resources.Icons.EditSelectionOffset,
 			Translations.GetString ("Offset Selection"));
+
 		historyItem.TakeSnapshot ();
 
-		document.Selection.Offset (dialog.Offset);
-
+		document.Selection.Offset (newOffset);
 		document.History.PushNewItem (historyItem);
 		document.Workspace.Invalidate ();
+	}
+
+	private async Task<int?> PromptOffsetSelection ()
+	{
+		using OffsetSelectionDialog dialog = new (chrome);
+		try {
+			Gtk.ResponseType response = await dialog.RunAsync ();
+			if (response != Gtk.ResponseType.Ok) return null;
+			return dialog.Offset;
+		} finally {
+			dialog.Destroy ();
+		}
 	}
 }

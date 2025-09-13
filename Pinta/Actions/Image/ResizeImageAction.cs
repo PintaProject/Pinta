@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta.Actions;
@@ -32,12 +33,12 @@ namespace Pinta.Actions;
 internal sealed class ResizeImageAction : IActionHandler
 {
 	private readonly ImageActions image;
-	private readonly ChromeManager chrome;
-	private readonly WorkspaceManager workspace;
+	private readonly IChromeService chrome;
+	private readonly IWorkspaceService workspace;
 	internal ResizeImageAction (
 		ImageActions image,
-		ChromeManager chrome,
-		WorkspaceManager workspace)
+		IChromeService chrome,
+		IWorkspaceService workspace)
 	{
 		this.image = image;
 		this.chrome = chrome;
@@ -56,10 +57,21 @@ internal sealed class ResizeImageAction : IActionHandler
 
 	private async void Activated (object sender, EventArgs e)
 	{
+		ResizeImageOptions? response = await PromptResize ();
+		if (!response.HasValue) return;
+		ResizeImageOptions resizing = response.Value;
+		workspace.ResizeImage (resizing.NewSize, resizing.ResamplingMode);
+	}
+
+	private async Task<ResizeImageOptions?> PromptResize ()
+	{
 		using ResizeImageDialog dialog = new (chrome, workspace);
-		Gtk.ResponseType response = await dialog.RunAsync ();
-		dialog.Destroy ();
-		if (response != Gtk.ResponseType.Ok) return;
-		dialog.SaveChanges ();
+		try {
+			Gtk.ResponseType response = await dialog.RunAsync ();
+			if (response != Gtk.ResponseType.Ok) return null;
+			return dialog.GetResizeImageOptions ();
+		} finally {
+			dialog.Destroy ();
+		}
 	}
 }
