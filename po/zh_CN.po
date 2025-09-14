@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-01 00:24+0000\n"
-"PO-Revision-Date: 2025-09-14 16:01+0000\n"
+"PO-Revision-Date: 2025-09-15 02:21+0000\n"
 "Last-Translator: caves_0 <caves_0@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/pinta/pinta/zh_Hans/>\n"
@@ -997,17 +997,17 @@ msgstr "历史"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:224
 msgid "Horizontal blue (B)"
-msgstr "以蓝色(B)为主导项的水平颜色排序"
+msgstr "以蓝色(B)为主导项颜色水平排序"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:227
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "以绿色为主导项颜色水平排序"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "以红色为主导项颜色水平排序"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
@@ -1017,7 +1017,7 @@ msgstr "色调"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:281
 msgid "Hue & Sat"
-msgstr ""
+msgstr "色相与饱和度"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
 msgid "Hue / Saturation"
