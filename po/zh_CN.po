@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-01 00:24+0000\n"
-"PO-Revision-Date: 2025-09-10 01:04+0000\n"
+"PO-Revision-Date: 2025-09-14 16:01+0000\n"
 "Last-Translator: caves_0 <caves_0@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/pinta/pinta/zh_Hans/>\n"
@@ -776,7 +776,7 @@ msgstr "自动扩展"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
-msgstr ""
+msgstr "扩展文件"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:143
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:156
@@ -789,11 +789,11 @@ msgstr "访问XDG桌面门户失败"
 
 #: ../Pinta/MainWindow.cs:324
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "未启动附加组件"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:199
 msgid "Failed to load extension package"
-msgstr ""
+msgstr "下载扩展包失败"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:444
 msgid "Failed to open image"
@@ -810,11 +810,11 @@ msgstr "截图失败"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:175
 msgid "Feather Canvas Edge"
-msgstr ""
+msgstr "模糊画面边缘"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:18
 msgid "Feather Object"
-msgstr ""
+msgstr "羽化"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -822,7 +822,7 @@ msgstr "报告一个错误"
 
 #: ../Pinta/Main.cs:62
 msgid "Files to open"
-msgstr ""
+msgstr "需要打开的文件"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:270
 msgid "Fill Background"
@@ -830,7 +830,7 @@ msgstr "填充背景"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:221
 msgid "Fill Object Background"
-msgstr ""
+msgstr "填充对象背景"
 
 #: ../Pinta.Core/Actions/EditActions.cs:134
 #: ../Pinta.Core/Actions/EditActions.cs:320
@@ -869,7 +869,7 @@ msgstr "扁平化"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "扁平化此图像将会合并所有图层"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:84
 #: ../Pinta.Core/Actions/LayerActions.cs:95
@@ -904,12 +904,12 @@ msgstr "填充模式"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "抖动去色"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr ""
+msgstr "轻度抖动去色"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:148
 msgid "Font"
@@ -980,7 +980,7 @@ msgstr "高度："
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:354
 msgid "Hex"
-msgstr ""
+msgstr "十六进制"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
 msgid "Hide Layer"
@@ -997,7 +997,7 @@ msgstr "历史"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:224
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "以蓝色(B)为主导项的水平颜色排序"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:227
