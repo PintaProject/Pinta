@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-01 00:24+0000\n"
+"POT-Creation-Date: 2025-09-15 00:21+0000\n"
 "PO-Revision-Date: 2013-05-19 03:17+0000\n"
 "Last-Translator: Jógvan Olsen <jo@jebster.net>\n"
 "Language-Team: Føroyabólkurin\n"
@@ -107,6 +107,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
 #: ../Pinta.Effects/Effects/TwistEffect.cs:171
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:136
@@ -122,14 +123,14 @@ msgstr "Akker:"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:167
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 msgid "Angle"
 msgstr "Vinkul"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:175
+#: ../Pinta.Effects/Effects/TwistEffect.cs:179
 msgid "Antialias"
 msgstr ""
 
@@ -203,7 +204,7 @@ msgid "Bilinear"
 msgstr ""
 
 #. Translators: Simple gradient that goes from black to white
-#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
+#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:29
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:27
 msgid "Black and White"
 msgstr "Svart og hvítt"
@@ -231,7 +232,7 @@ msgstr "Blátt "
 msgid "Blurs"
 msgstr "Kámar"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:180
+#: ../Pinta.Tools/Tools/TextTool.cs:177
 msgid "Bold"
 msgstr "Feitir stavir"
 
@@ -308,7 +309,7 @@ msgstr ""
 msgid "Canvas Grid..."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:168
+#: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
 msgstr ""
 
@@ -324,7 +325,7 @@ msgstr ""
 msgid "Center"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:232
+#: ../Pinta.Tools/Tools/TextTool.cs:229
 msgid "Center Align"
 msgstr "Miðstilla"
 
@@ -332,8 +333,8 @@ msgstr "Miðstilla"
 msgid "Center Left"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:155
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:95
+#: ../Pinta.Effects/Effects/DentsEffect.cs:159
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
 msgid "Center Offset"
 msgstr ""
 
@@ -377,7 +378,7 @@ msgid "Circles"
 msgstr "Sirklar"
 
 #. Translators: Arrangement of points along a circular path
-#: ../Pinta.Core/Algorithms/SpatialPartition.cs:129
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
 msgid "Circular"
 msgstr ""
 
@@ -402,10 +403,6 @@ msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
 msgstr ""
-
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
-msgid "Click and drag to draw the outline for a selection area."
-msgstr "Trýst og drag tað teknaða umhvarvi, aveinum úrvaldum øki."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -503,25 +500,25 @@ msgid "Color Saturation"
 msgstr "Litmettan"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
-#: ../Pinta.Effects/Effects/CellsEffect.cs:175
+#: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:174
 msgid "Color Scheme"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:184
+#: ../Pinta.Effects/Effects/CellsEffect.cs:192
 msgid "Color Scheme Edge Behavior"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:172
+#: ../Pinta.Effects/Effects/CellsEffect.cs:180
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:145
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:155
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:171
 msgid "Color Scheme Source"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Color Sorting"
 msgstr ""
 
@@ -663,8 +660,8 @@ msgstr ""
 msgid "Distance"
 msgstr "Fjarstøða"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:145
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:180
+#: ../Pinta.Effects/Effects/CellsEffect.cs:153
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:184
 msgid "Distance Metric"
 msgstr ""
 
@@ -701,6 +698,8 @@ msgstr "Tvífalda lag"
 msgid "Easily create and edit images"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/DentsEffect.cs:162
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:99
 #: ../Pinta.Effects/Effects/TileEffect.cs:237 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Kantatburður"
@@ -816,7 +815,7 @@ msgstr "Send filufrásøgn"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:270
+#: ../Pinta.Tools/Tools/TextTool.cs:267
 msgid "Fill Background"
 msgstr ""
 
@@ -903,7 +902,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:148
+#: ../Pinta.Tools/Tools/TextTool.cs:145
 msgid "Font"
 msgstr "Stavasnið"
 
@@ -914,6 +913,10 @@ msgstr "Petti"
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:124
 msgid "Fragments"
 msgstr "Petti"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
+msgid "Freeform"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -974,7 +977,7 @@ msgstr "Hædd:"
 msgid "Hex"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
 msgid "Hide Layer"
 msgstr "Fjal lagið"
 
@@ -987,17 +990,17 @@ msgid "History"
 msgstr "Søga"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:224
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:228
 msgid "Horizontal blue (B)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:227
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:231
 msgid "Horizontal green (G)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:234
 msgid "Horizontal red (R)"
 msgstr ""
 
@@ -1060,6 +1063,15 @@ msgstr "Flyt inn úr fílu"
 msgid "Import from File..."
 msgstr "Flyt inn úr fílu..."
 
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:57
+msgid ""
+"In Freeform mode, click and drag to draw the outline for a selection area.\n"
+"\n"
+"In Polygon mode, click and drag to add a new point to the selection.\n"
+"Press Enter to finish the selection.\n"
+"Press Backspace to delete the last point."
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
 msgstr "Tummar"
@@ -1113,7 +1125,7 @@ msgstr "Styrki"
 msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
+#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:29
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
 msgid "Invert Colors"
 msgstr "Speglvenda litir"
@@ -1123,7 +1135,7 @@ msgstr "Speglvenda litir"
 msgid "Invert Selection"
 msgstr "Vend úrval øvugt"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:192
+#: ../Pinta.Tools/Tools/TextTool.cs:189
 msgid "Italic"
 msgstr "Skákskrift"
 
@@ -1144,7 +1156,11 @@ msgstr "Julia brýtil"
 msgid "Landscape"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:51
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
+msgid "Lasso Mode"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
 msgstr "Vel við lasso"
 
@@ -1156,11 +1172,11 @@ msgstr "Lag"
 msgid "Layer Hidden"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
 msgid "Layer Opacity"
 msgstr "Óskygni á lagnum"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:122
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:121
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "Lag eginleikar"
@@ -1183,7 +1199,7 @@ msgstr ""
 msgid "Layers"
 msgstr "Løg"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:220
+#: ../Pinta.Tools/Tools/TextTool.cs:217
 msgid "Left Align"
 msgstr "Vinstrastilla"
 
@@ -1253,7 +1269,7 @@ msgstr ""
 "Vinstraklikkja til at fylla økið við grundlitinum, høgraklikkja til at fylla "
 "við hjálitinum."
 
-#: ../Pinta.Tools/Tools/TextTool.cs:98
+#: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1447,7 +1463,7 @@ msgstr "Nýggj mynd"
 msgid "New Screenshot..."
 msgstr "Nýggj skíggjamynd"
 
-#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:62
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:71
 msgid "New palette size:"
 msgstr "Nýggj palletstødd:"
 
@@ -1467,7 +1483,7 @@ msgstr "Larmur"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:267
+#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
 msgstr "Vanligt"
 
@@ -1479,12 +1495,12 @@ msgstr ""
 msgid "Normal Size"
 msgstr "Vanlig stødd"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:268
+#: ../Pinta.Tools/Tools/TextTool.cs:265
 msgid "Normal and Outline"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:164
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:183
+#: ../Pinta.Effects/Effects/CellsEffect.cs:172
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
 msgid "Number of Cells"
 msgstr ""
 
@@ -1503,7 +1519,7 @@ msgid "Object"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:167
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:139
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:133
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:140
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
@@ -1511,7 +1527,7 @@ msgid "Offset"
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:148
-#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
+#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:78
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
 msgstr ""
@@ -1562,7 +1578,7 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Outline"
 msgstr ""
 
@@ -1583,7 +1599,7 @@ msgstr ""
 msgid "Outline Shape"
 msgstr "Tekna umhvarv av skapi"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:283
+#: ../Pinta.Tools/Tools/TextTool.cs:280
 msgid "Outline width"
 msgstr "Tekna umhvarv av vídd"
 
@@ -1669,7 +1685,7 @@ msgid "Photo"
 msgstr "Mynd"
 
 #. Translators: Arrangement of points similar to how sunflower seeds are arranged
-#: ../Pinta.Core/Algorithms/SpatialPartition.cs:133
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:174
 msgid "Phyllotaxis"
 msgstr ""
 
@@ -1738,13 +1754,13 @@ msgstr ""
 msgid "Point Added"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:148
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
+#: ../Pinta.Effects/Effects/CellsEffect.cs:156
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Point Arrangement"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:161
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
+#: ../Pinta.Effects/Effects/CellsEffect.cs:169
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Point Color"
 msgstr ""
 
@@ -1752,14 +1768,18 @@ msgstr ""
 msgid "Point Deleted"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:157
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:206
+#: ../Pinta.Effects/Effects/CellsEffect.cs:165
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Point Size"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
 msgstr "Póla umbýtan"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
+msgid "Polygon"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
@@ -1807,13 +1827,13 @@ msgstr ""
 msgid "Print"
 msgstr "Prenta"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:187
-#: ../Pinta.Effects/Effects/DentsEffect.cs:151
+#: ../Pinta.Effects/Effects/CellsEffect.cs:195
+#: ../Pinta.Effects/Effects/DentsEffect.cs:155
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:160
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:91
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:213
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:92
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:142
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
 msgid "Quality"
 msgstr "Góðska"
 
@@ -1850,35 +1870,37 @@ msgstr "Radius"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
+#: ../Pinta.Effects/Effects/TwistEffect.cs:175
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
 msgstr ""
 
-#: ../Pinta.Core/Algorithms/SpatialPartition.cs:125
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:220
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:166
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:224
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:16
 msgid "Random"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:178
+#: ../Pinta.Effects/Effects/CellsEffect.cs:186
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:151
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:161
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
 msgid "Random Color Scheme Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:198
 msgid "Random Colors"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:142
+#: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:151
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
+#: ../Pinta.Effects/Effects/CellsEffect.cs:159
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
 msgid "Random Point Locations"
 msgstr ""
 
@@ -1924,6 +1946,10 @@ msgstr "Minka um larm"
 msgid "Reflect"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/DentsEffect.cs:139
+msgid "Refraction"
+msgstr ""
+
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
 msgstr ""
@@ -1936,7 +1962,7 @@ msgstr "Útgivi undir MIT X11 loyvinum."
 msgid "Relief"
 msgstr "Framsker"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:112
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
 msgid "Rename Layer"
 msgstr "Nýnevn lagið"
 
@@ -1964,7 +1990,7 @@ msgstr ""
 msgid "Resampling:"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:566
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:570
 msgid "Reseed"
 msgstr ""
 
@@ -1999,7 +2025,7 @@ msgstr "Broyt støddina á mynd"
 msgid "Resize Image..."
 msgstr ""
 
-#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:60
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr "Broyta palettstødd"
 
@@ -2007,7 +2033,7 @@ msgstr "Broyta palettstødd"
 msgid "Restart Pinta"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:181
+#: ../Pinta.Effects/Effects/CellsEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:154
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:164
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
@@ -2015,11 +2041,11 @@ msgid "Reverse Color Scheme"
 msgstr ""
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:195
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:244
+#: ../Pinta.Tools/Tools/TextTool.cs:241
 msgid "Right Align"
 msgstr "Høgrastilla"
 
@@ -2051,6 +2077,10 @@ msgstr "Snara 90° ímóti urinum"
 #: ../Pinta.Effects/Effects/TileEffect.cs:222
 msgid "Rotation"
 msgstr "Snúningur"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:143
+msgid "Roughness"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Rounded Line Series"
@@ -2122,6 +2152,7 @@ msgid "Save changes to image \"{0}\" before closing?"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:134
+#: ../Pinta.Effects/Effects/DentsEffect.cs:135
 msgid "Scale"
 msgstr "Stigmarka"
 
@@ -2142,7 +2173,7 @@ msgstr "Vel alt"
 msgid "Selected Colors"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:35
 msgid "Sepia"
 msgstr "Brúnlita"
 
@@ -2181,12 +2212,12 @@ msgstr ""
 msgid "Show Grid"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
 msgid "Show Layer"
 msgstr "Sýn lagið"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:154
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:203
+#: ../Pinta.Effects/Effects/CellsEffect.cs:162
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
 msgid "Show Points"
 msgstr ""
 
@@ -2269,15 +2300,15 @@ msgstr "Skift til blýantsamboð"
 msgid "Switch to previous tool"
 msgstr "Skift til fyrra amboðið"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:83
+#: ../Pinta.Tools/Tools/TextTool.cs:80
 msgid "Text"
 msgstr "Tekstur"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:86
+#: ../Pinta.Tools/Tools/TextTool.cs:83
 msgid "Text - Finalize"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:258
+#: ../Pinta.Tools/Tools/TextTool.cs:255
 msgid "Text Style"
 msgstr "Tekstasnið"
 
@@ -2422,7 +2453,7 @@ msgstr ""
 msgid "Transparent"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:144
+#: ../Pinta.Effects/Effects/DentsEffect.cs:147
 msgid "Turbulence"
 msgstr ""
 
@@ -2440,7 +2471,7 @@ msgstr ""
 msgid "Type"
 msgstr "Slag"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:204
+#: ../Pinta.Tools/Tools/TextTool.cs:201
 msgid "Underline"
 msgstr "Undirstrika"
 
@@ -2488,7 +2519,7 @@ msgstr ""
 msgid "Updates"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:143
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2510,17 +2541,17 @@ msgid "Version: {0}"
 msgstr ""
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:234
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
 msgid "Vertical blue (B)"
 msgstr ""
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:237
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
 msgid "Vertical green (G)"
 msgstr ""
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:240
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
 msgid "Vertical red (R)"
 msgstr ""
 
@@ -2729,6 +2760,9 @@ msgstr ""
 #, csharp-format
 msgid "{0}%"
 msgstr ""
+
+#~ msgid "Click and drag to draw the outline for a selection area."
+#~ msgstr "Trýst og drag tað teknaða umhvarvi, aveinum úrvaldum øki."
 
 #~ msgid "Random Noise"
 #~ msgstr "Tilvildarligur larmur"

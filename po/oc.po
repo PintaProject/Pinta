@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-01 00:24+0000\n"
+"POT-Creation-Date: 2025-09-15 00:21+0000\n"
 "PO-Revision-Date: 2023-01-05 12:45+0000\n"
 "Last-Translator: Quentin PAGÈS <Unknown>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -107,6 +107,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
 #: ../Pinta.Effects/Effects/TwistEffect.cs:171
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:136
@@ -122,14 +123,14 @@ msgstr "Ancòra :"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:167
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 msgid "Angle"
 msgstr "Angle de presa de vista"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:175
+#: ../Pinta.Effects/Effects/TwistEffect.cs:179
 msgid "Antialias"
 msgstr ""
 
@@ -203,7 +204,7 @@ msgid "Bilinear"
 msgstr ""
 
 #. Translators: Simple gradient that goes from black to white
-#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
+#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:29
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:27
 msgid "Black and White"
 msgstr "Blanc e negre"
@@ -231,7 +232,7 @@ msgstr "Blau "
 msgid "Blurs"
 msgstr "Fosc"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:180
+#: ../Pinta.Tools/Tools/TextTool.cs:177
 msgid "Bold"
 msgstr "Gras"
 
@@ -308,7 +309,7 @@ msgstr ""
 msgid "Canvas Grid..."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:168
+#: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
 msgstr ""
 
@@ -324,7 +325,7 @@ msgstr ""
 msgid "Center"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:232
+#: ../Pinta.Tools/Tools/TextTool.cs:229
 msgid "Center Align"
 msgstr "Alinhat al centre"
 
@@ -332,8 +333,8 @@ msgstr "Alinhat al centre"
 msgid "Center Left"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:155
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:95
+#: ../Pinta.Effects/Effects/DentsEffect.cs:159
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
 msgid "Center Offset"
 msgstr "Excentracion"
 
@@ -377,7 +378,7 @@ msgid "Circles"
 msgstr "Cèrcles"
 
 #. Translators: Arrangement of points along a circular path
-#: ../Pinta.Core/Algorithms/SpatialPartition.cs:129
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
 msgid "Circular"
 msgstr ""
 
@@ -401,10 +402,6 @@ msgstr ""
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
-msgid "Click and drag to draw the outline for a selection area."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
@@ -503,25 +500,25 @@ msgid "Color Saturation"
 msgstr "Saturacion de las colors"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
-#: ../Pinta.Effects/Effects/CellsEffect.cs:175
+#: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:174
 msgid "Color Scheme"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:184
+#: ../Pinta.Effects/Effects/CellsEffect.cs:192
 msgid "Color Scheme Edge Behavior"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:172
+#: ../Pinta.Effects/Effects/CellsEffect.cs:180
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:145
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:155
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:171
 msgid "Color Scheme Source"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Color Sorting"
 msgstr ""
 
@@ -663,8 +660,8 @@ msgstr "Diferéncia"
 msgid "Distance"
 msgstr "Distància"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:145
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:180
+#: ../Pinta.Effects/Effects/CellsEffect.cs:153
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:184
 msgid "Distance Metric"
 msgstr ""
 
@@ -701,6 +698,8 @@ msgstr "Duplicar lo calc"
 msgid "Easily create and edit images"
 msgstr "Crear e modificar aisidament d'imatges"
 
+#: ../Pinta.Effects/Effects/DentsEffect.cs:162
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:99
 #: ../Pinta.Effects/Effects/TileEffect.cs:237 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Compòrtament del bòrd"
@@ -816,7 +815,7 @@ msgstr "Senhalar una avaria"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:270
+#: ../Pinta.Tools/Tools/TextTool.cs:267
 msgid "Fill Background"
 msgstr ""
 
@@ -903,7 +902,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:148
+#: ../Pinta.Tools/Tools/TextTool.cs:145
 msgid "Font"
 msgstr "Poliça de caractèr"
 
@@ -914,6 +913,10 @@ msgstr "Fragmentacion"
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:124
 msgid "Fragments"
 msgstr "Fragments"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
+msgid "Freeform"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -974,7 +977,7 @@ msgstr "Nautor :"
 msgid "Hex"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
 msgid "Hide Layer"
 msgstr "Amagar lo calc"
 
@@ -987,17 +990,17 @@ msgid "History"
 msgstr "Istoric"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:224
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:228
 msgid "Horizontal blue (B)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:227
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:231
 msgid "Horizontal green (G)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:234
 msgid "Horizontal red (R)"
 msgstr ""
 
@@ -1061,6 +1064,15 @@ msgstr "Importar d’un fichièr"
 msgid "Import from File..."
 msgstr "Importar d’un fichièr..."
 
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:57
+msgid ""
+"In Freeform mode, click and drag to draw the outline for a selection area.\n"
+"\n"
+"In Polygon mode, click and drag to add a new point to the selection.\n"
+"Press Enter to finish the selection.\n"
+"Press Backspace to delete the last point."
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
 msgstr "Poces"
@@ -1114,7 +1126,7 @@ msgstr "Fondut d'intensitat"
 msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
+#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:29
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
 msgid "Invert Colors"
 msgstr "Inversar las colors"
@@ -1124,7 +1136,7 @@ msgstr "Inversar las colors"
 msgid "Invert Selection"
 msgstr "Inversar la seleccion"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:192
+#: ../Pinta.Tools/Tools/TextTool.cs:189
 msgid "Italic"
 msgstr "Italica"
 
@@ -1145,7 +1157,11 @@ msgstr "Fractala de Julia"
 msgid "Landscape"
 msgstr "Païsatge"
 
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:51
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
+msgid "Lasso Mode"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
 msgstr ""
 
@@ -1157,11 +1173,11 @@ msgstr "Calc"
 msgid "Layer Hidden"
 msgstr "Jaç amagat"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
 msgid "Layer Opacity"
 msgstr "Opacitat del calc"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:122
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:121
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "Proprietats del calc"
@@ -1184,7 +1200,7 @@ msgstr "Jaç {0}"
 msgid "Layers"
 msgstr "Calques"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:220
+#: ../Pinta.Tools/Tools/TextTool.cs:217
 msgid "Left Align"
 msgstr "Alinhament a esquèrra"
 
@@ -1252,7 +1268,7 @@ msgid ""
 "the secondary color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:98
+#: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1444,7 +1460,7 @@ msgstr "Imatge nèlov"
 msgid "New Screenshot..."
 msgstr "Captura d'ecran novèla..."
 
-#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:62
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:71
 msgid "New palette size:"
 msgstr ""
 
@@ -1464,7 +1480,7 @@ msgstr "Bruch"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:267
+#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
 msgstr "Normal"
 
@@ -1476,12 +1492,12 @@ msgstr ""
 msgid "Normal Size"
 msgstr "Talha normala"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:268
+#: ../Pinta.Tools/Tools/TextTool.cs:265
 msgid "Normal and Outline"
 msgstr "Normal amb contorns"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:164
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:183
+#: ../Pinta.Effects/Effects/CellsEffect.cs:172
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
 msgid "Number of Cells"
 msgstr ""
 
@@ -1500,7 +1516,7 @@ msgid "Object"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:167
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:139
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:133
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:140
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
@@ -1508,7 +1524,7 @@ msgid "Offset"
 msgstr "Decalatge"
 
 #: ../Pinta.Core/Actions/EditActions.cs:148
-#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
+#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:78
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
 msgstr ""
@@ -1559,7 +1575,7 @@ msgstr "Orientacion :"
 msgid "Original"
 msgstr "Originala"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Outline"
 msgstr "Contorn"
 
@@ -1580,7 +1596,7 @@ msgstr ""
 msgid "Outline Shape"
 msgstr "Forma exteriora"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:283
+#: ../Pinta.Tools/Tools/TextTool.cs:280
 msgid "Outline width"
 msgstr "Largor del contorn"
 
@@ -1666,7 +1682,7 @@ msgid "Photo"
 msgstr "Fòto"
 
 #. Translators: Arrangement of points similar to how sunflower seeds are arranged
-#: ../Pinta.Core/Algorithms/SpatialPartition.cs:133
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:174
 msgid "Phyllotaxis"
 msgstr ""
 
@@ -1735,13 +1751,13 @@ msgstr ""
 msgid "Point Added"
 msgstr "Punt apondut"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:148
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
+#: ../Pinta.Effects/Effects/CellsEffect.cs:156
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Point Arrangement"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:161
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
+#: ../Pinta.Effects/Effects/CellsEffect.cs:169
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Point Color"
 msgstr ""
 
@@ -1749,14 +1765,18 @@ msgstr ""
 msgid "Point Deleted"
 msgstr "Punt suprimit"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:157
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:206
+#: ../Pinta.Effects/Effects/CellsEffect.cs:165
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Point Size"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
 msgstr "Transformacion Simetrica"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
+msgid "Polygon"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
@@ -1804,13 +1824,13 @@ msgstr "Primari"
 msgid "Print"
 msgstr "Estampar"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:187
-#: ../Pinta.Effects/Effects/DentsEffect.cs:151
+#: ../Pinta.Effects/Effects/CellsEffect.cs:195
+#: ../Pinta.Effects/Effects/DentsEffect.cs:155
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:160
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:91
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:213
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:92
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:142
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
 msgid "Quality"
 msgstr "Qualitat"
 
@@ -1847,35 +1867,37 @@ msgstr "Rai"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
+#: ../Pinta.Effects/Effects/TwistEffect.cs:175
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
 msgstr ""
 
-#: ../Pinta.Core/Algorithms/SpatialPartition.cs:125
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:220
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:166
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:224
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:16
 msgid "Random"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:178
+#: ../Pinta.Effects/Effects/CellsEffect.cs:186
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:151
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:161
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
 msgid "Random Color Scheme Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:198
 msgid "Random Colors"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:142
+#: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:151
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
+#: ../Pinta.Effects/Effects/CellsEffect.cs:159
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
 msgid "Random Point Locations"
 msgstr ""
 
@@ -1921,6 +1943,10 @@ msgstr "Reduire lo bruch"
 msgid "Reflect"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/DentsEffect.cs:139
+msgid "Refraction"
+msgstr ""
+
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
 msgstr "Actualizar"
@@ -1933,7 +1959,7 @@ msgstr "Mes a disposicion jos licéncia MIT X11"
 msgid "Relief"
 msgstr "Relèu"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:112
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
 msgid "Rename Layer"
 msgstr "Renomenar lo calc"
 
@@ -1961,7 +1987,7 @@ msgstr ""
 msgid "Resampling:"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:566
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:570
 msgid "Reseed"
 msgstr "regenerar"
 
@@ -1996,7 +2022,7 @@ msgstr "Redimensionar l'imatge"
 msgid "Resize Image..."
 msgstr ""
 
-#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:60
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr ""
 
@@ -2004,7 +2030,7 @@ msgstr ""
 msgid "Restart Pinta"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:181
+#: ../Pinta.Effects/Effects/CellsEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:154
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:164
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
@@ -2012,11 +2038,11 @@ msgid "Reverse Color Scheme"
 msgstr ""
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:195
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:244
+#: ../Pinta.Tools/Tools/TextTool.cs:241
 msgid "Right Align"
 msgstr "Alinhat a drecha"
 
@@ -2048,6 +2074,10 @@ msgstr ""
 #: ../Pinta.Effects/Effects/TileEffect.cs:222
 msgid "Rotation"
 msgstr "Rotacion"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:143
+msgid "Roughness"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Rounded Line Series"
@@ -2119,6 +2149,7 @@ msgid "Save changes to image \"{0}\" before closing?"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:134
+#: ../Pinta.Effects/Effects/DentsEffect.cs:135
 msgid "Scale"
 msgstr "Metre a l'escala"
 
@@ -2139,7 +2170,7 @@ msgstr "Seleccionar tot"
 msgid "Selected Colors"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:35
 msgid "Sepia"
 msgstr "Sèpia"
 
@@ -2178,12 +2209,12 @@ msgstr ""
 msgid "Show Grid"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
 msgid "Show Layer"
 msgstr "Afichar lo calc"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:154
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:203
+#: ../Pinta.Effects/Effects/CellsEffect.cs:162
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
 msgid "Show Points"
 msgstr ""
 
@@ -2266,15 +2297,15 @@ msgstr "Cambiar per l'aisina Gredon"
 msgid "Switch to previous tool"
 msgstr "Cambiar per l'aisina precedenta"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:83
+#: ../Pinta.Tools/Tools/TextTool.cs:80
 msgid "Text"
 msgstr "Tèxte"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:86
+#: ../Pinta.Tools/Tools/TextTool.cs:83
 msgid "Text - Finalize"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:258
+#: ../Pinta.Tools/Tools/TextTool.cs:255
 msgid "Text Style"
 msgstr "Estil del tèxte"
 
@@ -2419,7 +2450,7 @@ msgstr "Mòde de transparéncia"
 msgid "Transparent"
 msgstr "Transparent"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:144
+#: ../Pinta.Effects/Effects/DentsEffect.cs:147
 msgid "Turbulence"
 msgstr ""
 
@@ -2437,7 +2468,7 @@ msgstr ""
 msgid "Type"
 msgstr "Tipe"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:204
+#: ../Pinta.Tools/Tools/TextTool.cs:201
 msgid "Underline"
 msgstr "Soslinhat"
 
@@ -2485,7 +2516,7 @@ msgstr ""
 msgid "Updates"
 msgstr "Mesas a jorn"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:143
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2505,17 +2536,17 @@ msgid "Version: {0}"
 msgstr ""
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:234
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
 msgid "Vertical blue (B)"
 msgstr ""
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:237
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
 msgid "Vertical green (G)"
 msgstr ""
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:240
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
 msgid "Vertical red (R)"
 msgstr ""
 
