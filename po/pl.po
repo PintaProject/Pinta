@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-15 00:21+0000\n"
-"PO-Revision-Date: 2025-09-01 05:24+0000\n"
+"PO-Revision-Date: 2025-09-16 06:22+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13.1-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -925,7 +925,7 @@ msgstr "Fragmenty"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
 msgid "Freeform"
-msgstr ""
+msgstr "Forma dowolna"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -1083,6 +1083,13 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
+"W trybie formy dowolnej kliknij i przeciągnij, aby narysować kontur obszaru "
+"zaznaczenia.\n"
+"\n"
+"W trybie wielokąta kliknij i przeciągnij, aby dodać nowy punkt do "
+"zaznaczenia.\n"
+"Naciśnij Enter, aby zakończyć zaznaczanie.\n"
+"Naciśnij Backspace, aby usunąć ostatni punkt."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
@@ -1170,7 +1177,7 @@ msgstr "Pozioma"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
 msgid "Lasso Mode"
-msgstr ""
+msgstr "Tryb lassa"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
@@ -1843,7 +1850,7 @@ msgstr "Inwersja względem bieguna"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
 msgid "Polygon"
-msgstr ""
+msgstr "Wielokąt"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
@@ -2012,7 +2019,7 @@ msgstr "Odbicie"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:139
 msgid "Refraction"
-msgstr ""
+msgstr "Refrakcja"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
@@ -2144,7 +2151,7 @@ msgstr "Obrót"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:143
 msgid "Roughness"
-msgstr ""
+msgstr "Chropowatość"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Rounded Line Series"

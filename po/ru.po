@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-15 00:21+0000\n"
-"PO-Revision-Date: 2025-09-01 15:29+0000\n"
+"PO-Revision-Date: 2025-09-16 06:22+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13.1-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -929,7 +929,7 @@ msgstr "Фрагменты"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
 msgid "Freeform"
-msgstr ""
+msgstr "Свободное"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -1086,6 +1086,13 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
+"В режиме выделения «Свободное» нажмите левую кнопку мыши и тяните, чтобы "
+"нарисовать контур выбранной области.\n"
+"\n"
+"В режиме «Мноугольник» нажмите левую кнопку мыши и тяните, чтобы добавить "
+"новую точку к выделенной области.\n"
+"Нажмите Enter, чтобы завершить действие.\n"
+"Нажмите Backspace, чтобы удалить последнюю точку."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
@@ -1173,7 +1180,7 @@ msgstr "Альбомная"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
 msgid "Lasso Mode"
-msgstr ""
+msgstr "Режим лассо"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
@@ -1854,7 +1861,7 @@ msgstr "Полярная инверсия"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
 msgid "Polygon"
-msgstr ""
+msgstr "Многоугольник"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
@@ -2023,7 +2030,7 @@ msgstr "Отражение"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:139
 msgid "Refraction"
-msgstr ""
+msgstr "Преломление"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
@@ -2155,7 +2162,7 @@ msgstr "Поворот"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:143
 msgid "Roughness"
-msgstr ""
+msgstr "Шероховатость"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Rounded Line Series"
