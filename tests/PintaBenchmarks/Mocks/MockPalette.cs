@@ -6,8 +6,8 @@ namespace PintaBenchmarks;
 
 internal sealed class MockPalette : IPaletteService
 {
-	public Color PrimaryColor { get; set; } = new (0, 0, 0); // Black
-	public Color SecondaryColor { get; set; } = new (1, 1, 1); // White
+	public Color PrimaryColor { get; set; } = Color.Black;
+	public Color SecondaryColor { get; set; } = Color.White;
 
 	public Palette CurrentPalette
 		=> throw new NotImplementedException ();
