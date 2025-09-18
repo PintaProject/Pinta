@@ -42,15 +42,13 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	private readonly RectangleD swap_rect = new (27, 2, 15, 15);
 	private readonly RectangleD reset_rect = new (2, 27, 15, 15);
 
-	private readonly ChromeManager chrome;
-	private readonly PaletteManager palette;
+	private readonly IChromeService chrome;
+	private readonly IPaletteService palette;
 
 	private RectangleD palette_rect;
 	private RectangleD recent_palette_rect;
 
-	public StatusBarColorPaletteWidget (
-		ChromeManager chrome,
-		PaletteManager palette)
+	public StatusBarColorPaletteWidget (IChromeService chrome, IPaletteService palette)
 	{
 		this.chrome = chrome;
 		this.palette = palette;
