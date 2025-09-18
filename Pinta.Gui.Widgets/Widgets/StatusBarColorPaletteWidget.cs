@@ -196,14 +196,24 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		// Draw recently used color swatches
 		var recent = palette.RecentlyUsedColors;
 
-		for (int i = 0; i < recent.Count; i++)
-			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true), recent.ElementAt (i));
+		const int TILE_SIZE = 16;
+		using Pattern checkeredPattern =
+			CairoExtensions.CreateTransparentBackgroundPattern (TILE_SIZE);
+
+		for (int i = 0; i < recent.Count; i++) {
+			RectangleD swatchBounds = PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true);
+			g.FillRectangle (swatchBounds, checkeredPattern);
+			g.FillRectangle (swatchBounds, recent.ElementAt (i));
+		}
 
 		// Draw color swatches
 		var currentPalette = palette.CurrentPalette;
 
-		for (int i = 0; i < currentPalette.Colors.Count; i++)
-			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, palette_rect), currentPalette.Colors[i]);
+		for (int i = 0; i < currentPalette.Colors.Count; i++) {
+			RectangleD swatchBounds = PaletteWidget.GetSwatchBounds (palette, i, palette_rect);
+			g.FillRectangle (swatchBounds, checkeredPattern);
+			g.FillRectangle (swatchBounds, currentPalette.Colors[i]);
+		}
 
 		g.Dispose ();
 	}
