@@ -193,6 +193,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: "Pinta-signed-${{matrix.build.dotnet_rid}}.exe"
-        path: ./signed-artifacts/Pinta-${{matrix.build.dotnet_rid}}.exe
+        path: ./signed-artifacts/Pinta.exe
         if-no-files-found: error
 
