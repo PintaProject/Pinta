@@ -7,25 +7,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-01 00:24+0000\n"
-"PO-Revision-Date: 2014-03-21 04:13+0000\n"
-"Last-Translator: Seanan <Unknown>\n"
-"Language-Team: Irish <ga@li.org>\n"
+"POT-Creation-Date: 2025-09-15 00:21+0000\n"
+"PO-Revision-Date: 2025-09-16 06:22+0000\n"
+"Last-Translator: Seanán Ó Coistín <seananoc@gmail.com>\n"
+"Language-Team: Irish <https://hosted.weblate.org/projects/pinta/pinta/ga/>\n"
 "Language: ga\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
+"X-Generator: Weblate 5.14-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
-msgstr ""
+msgstr " (i gcomhadlann an úsáideora)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
 msgid " Selection Mode: "
-msgstr ""
+msgstr " Modh Roghnúcháin: "
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:78
 #: ../Pinta.Core/Managers/EffectsManager.cs:116
@@ -34,7 +34,7 @@ msgstr "..."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "3 x 3 Region"
-msgstr ""
+msgstr "Críoch 3 x 3"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
 msgid "5 x 5 Region"
@@ -64,7 +64,7 @@ msgstr "Maidir le Pinta"
 #: ../Pinta.Core/Actions/LayerActions.cs:431
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
-msgstr "Cuir Sraith Nua Leis"
+msgstr "Cuir Ciseal Nua Leis"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:24
 msgid "Add Noise"
@@ -72,15 +72,15 @@ msgstr "Cuir torann leis"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Bainisteoir na mBreiseán..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:839
 msgid "Added"
-msgstr ""
+msgstr "Curtha leis"
 
 #: ../Pinta/MainWindow.cs:457
 msgid "Adjustments"
-msgstr ""
+msgstr "Mionathruithe"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
 msgid "After select"
@@ -89,7 +89,7 @@ msgstr "Tar éis an roghnú"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
 msgid "Align Object"
-msgstr ""
+msgstr "Ailínigh an réad"
 
 #: ../Pinta.Core/Actions/EditActions.cs:593
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -99,14 +99,15 @@ msgstr "Gach comhad"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:212
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Grádán Alfa"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
 #: ../Pinta.Effects/Effects/TwistEffect.cs:171
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:136
@@ -122,16 +123,16 @@ msgstr "Ancaire:"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:167
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:168
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:164
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 msgid "Angle"
 msgstr "Uillinn"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:175
+#: ../Pinta.Effects/Effects/TwistEffect.cs:179
 msgid "Antialias"
-msgstr "Frith-ailias:"
+msgstr "Frith-ailias"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:363
 msgid "Antialiasing Off"
@@ -143,7 +144,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:262
 msgid "Arrow"
-msgstr ""
+msgstr "Saighead"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:32
@@ -154,7 +155,7 @@ msgstr "Ealaíonta"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
 msgid "Auto"
@@ -183,11 +184,11 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:307
 msgid "Background:"
-msgstr ""
+msgstr "Cúlra:"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:94
 msgid "Based on the work of Paint.NET:"
-msgstr "Bunaithe ar an oibre Paint.NET"
+msgstr "Bunaithe ar shaothar Paint.NET:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:23
@@ -196,14 +197,14 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Best Fit"
-msgstr ""
+msgstr "Is Oiriúnaí"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
 msgstr ""
 
 #. Translators: Simple gradient that goes from black to white
-#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:24
+#: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:29
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:27
 msgid "Black and White"
 msgstr "Dubh agus Bán"
@@ -231,14 +232,14 @@ msgstr "Gorm "
 msgid "Blurs"
 msgstr "Geamhú"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:180
+#: ../Pinta.Tools/Tools/TextTool.cs:177
 msgid "Bold"
 msgstr "Cló Trom"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:31
 msgid "Bonfire"
-msgstr ""
+msgstr "Tine cnámh"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -294,7 +295,7 @@ msgstr "De réir céatadán:"
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
-msgstr ""
+msgstr "Cealaigh"
 
 #: ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
@@ -308,7 +309,7 @@ msgstr ""
 msgid "Canvas Grid..."
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:168
+#: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
 msgstr ""
 
@@ -322,9 +323,9 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "Lárnaigh"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:232
+#: ../Pinta.Tools/Tools/TextTool.cs:229
 msgid "Center Align"
 msgstr "Ailínigh sa lár"
 
@@ -332,8 +333,8 @@ msgstr "Ailínigh sa lár"
 msgid "Center Left"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:155
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:95
+#: ../Pinta.Effects/Effects/DentsEffect.cs:159
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
 msgid "Center Offset"
 msgstr ""
 
@@ -377,9 +378,9 @@ msgid "Circles"
 msgstr "Ciorcail"
 
 #. Translators: Arrangement of points along a circular path
-#: ../Pinta.Core/Algorithms/SpatialPartition.cs:129
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
 msgid "Circular"
-msgstr ""
+msgstr "Ciorclach"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -401,10 +402,6 @@ msgstr ""
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse."
-msgstr ""
-
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:53
-msgid "Click and drag to draw the outline for a selection area."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
@@ -471,7 +468,7 @@ msgstr ""
 #: ../Pinta.Core/Effects/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 msgid "Color"
-msgstr ""
+msgstr "Dath"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:33
 msgid "Color Burn"
@@ -503,25 +500,25 @@ msgid "Color Saturation"
 msgstr "Sáithiú na nDathanna"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:253
-#: ../Pinta.Effects/Effects/CellsEffect.cs:175
+#: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:174
 msgid "Color Scheme"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:184
+#: ../Pinta.Effects/Effects/CellsEffect.cs:192
 msgid "Color Scheme Edge Behavior"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:172
+#: ../Pinta.Effects/Effects/CellsEffect.cs:180
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:145
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:155
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:171
 msgid "Color Scheme Source"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
 msgid "Color Sorting"
 msgstr ""
 
@@ -613,11 +610,11 @@ msgstr "Gearr"
 #. Translators: This refers to using a dark variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:250
 msgid "Dark"
-msgstr ""
+msgstr "Dorcha"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:38
 msgid "Darken"
-msgstr ""
+msgstr "Déan dorcha é"
 
 #: ../Pinta.Tools/Dashes/DashPatternBox.cs:59
 msgid "Dash"
@@ -635,7 +632,7 @@ msgstr "Scrios Sraith"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:677
 msgid "Deleted"
-msgstr ""
+msgstr "Scriosta"
 
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:49
@@ -648,23 +645,23 @@ msgstr "Díroghnaigh"
 
 #: ../Pinta.Core/Actions/EditActions.cs:162
 msgid "Deselect All"
-msgstr ""
+msgstr "Díroghnaigh uile"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:66
 msgid "Details"
-msgstr ""
+msgstr "Mionsonraí"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:36
 msgid "Difference"
-msgstr ""
+msgstr "Éagsúlacht"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
 msgid "Distance"
 msgstr "Fad"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:145
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:180
+#: ../Pinta.Effects/Effects/CellsEffect.cs:153
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:184
 msgid "Distance Metric"
 msgstr ""
 
@@ -701,6 +698,8 @@ msgstr "Dúblaigh Sraith"
 msgid "Easily create and edit images"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/DentsEffect.cs:162
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:99
 #: ../Pinta.Effects/Effects/TileEffect.cs:237 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr ""
@@ -816,7 +815,7 @@ msgstr "Fógraigh Fabht"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:270
+#: ../Pinta.Tools/Tools/TextTool.cs:267
 msgid "Fill Background"
 msgstr ""
 
@@ -903,7 +902,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:148
+#: ../Pinta.Tools/Tools/TextTool.cs:145
 msgid "Font"
 msgstr "Clófhoireann"
 
@@ -914,6 +913,10 @@ msgstr "Scoilt"
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:124
 msgid "Fragments"
 msgstr "Bloghanna"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
+msgid "Freeform"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -974,7 +977,7 @@ msgstr "Airde:"
 msgid "Hex"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
 msgid "Hide Layer"
 msgstr "Folaigh Sraith"
 
@@ -987,17 +990,17 @@ msgid "History"
 msgstr "Oireas"
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:224
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:228
 msgid "Horizontal blue (B)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:227
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:231
 msgid "Horizontal green (G)"
 msgstr ""
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:230
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:234
 msgid "Horizontal red (R)"
 msgstr ""
 
@@ -1025,7 +1028,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:463
 msgid "Image"
-msgstr ""
+msgstr "Íomhá"
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:3
 msgid "Image Editor"
@@ -1060,6 +1063,15 @@ msgstr "Tabhair isteach ó chomhad"
 msgid "Import from File..."
 msgstr "Tabhair isteach ó chomhad..."
 
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:57
+msgid ""
+"In Freeform mode, click and drag to draw the outline for a selection area.\n"
+"\n"
+"In Polygon mode, click and drag to add a new point to the selection.\n"
+"Press Enter to finish the selection.\n"
+"Press Backspace to delete the last point."
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
 msgstr "Orlach"
@@ -1083,7 +1095,7 @@ msgstr ""
 #: ../Pinta.Gui.Addins/InstallDialog.cs:121
 #: ../Pinta.Gui.Addins/InstallDialog.cs:247
 msgid "Install"
-msgstr ""
+msgstr "Suiteáil"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
@@ -1091,7 +1103,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
 msgid "Install from file..."
-msgstr ""
+msgstr "Suiteáil ó chomhad é..."
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:167
 msgid "Install..."
@@ -1099,7 +1111,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:87
 msgid "Installed"
-msgstr ""
+msgstr "Suiteáilte"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:167
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:137
@@ -1113,7 +1125,7 @@ msgstr "Déine"
 msgid "Intersect ({0} + Left Click)"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:24
+#: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:29
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
 msgid "Invert Colors"
 msgstr "Aisiompaigh na Dathanna"
@@ -1123,7 +1135,7 @@ msgstr "Aisiompaigh na Dathanna"
 msgid "Invert Selection"
 msgstr "Aisiompaigh an Roghnúchán"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:192
+#: ../Pinta.Tools/Tools/TextTool.cs:189
 msgid "Italic"
 msgstr "Iodálach"
 
@@ -1142,9 +1154,13 @@ msgstr "Frachtal Julia"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:300
 msgid "Landscape"
+msgstr "Tírdhreach"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
+msgid "Lasso Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/LassoSelectTool.cs:51
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
 msgstr ""
 
@@ -1156,11 +1172,11 @@ msgstr "Sraith"
 msgid "Layer Hidden"
 msgstr "An ciseal i bhfolach"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
 msgid "Layer Opacity"
 msgstr "Teimhneacht na Sraithe"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:122
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:121
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "Airíonna na Sraithe"
@@ -1183,7 +1199,7 @@ msgstr ""
 msgid "Layers"
 msgstr "Sraitheanna"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:220
+#: ../Pinta.Tools/Tools/TextTool.cs:217
 msgid "Left Align"
 msgstr "Ailínigh Ar Chlé"
 
@@ -1251,7 +1267,7 @@ msgid ""
 "the secondary color."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:98
+#: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
@@ -1288,7 +1304,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:331
 msgid "Length"
-msgstr ""
+msgstr "Fad"
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
@@ -1305,7 +1321,7 @@ msgstr "Ceadúnas"
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:248
 msgid "Light"
-msgstr ""
+msgstr "Geal"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1326,7 +1342,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:43
 msgid "Line/Curve"
-msgstr ""
+msgstr "Líne/Cuar"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:183
 msgid "Linear Diamond Gradient"
@@ -1355,7 +1371,7 @@ msgstr "Roghnú Fleasc Dhraíochta"
 
 #: ../Pinta/MainWindow.cs:445
 msgid "Main Menu"
-msgstr ""
+msgstr "An príomhroghchlár"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:99
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:69
@@ -1377,7 +1393,7 @@ msgstr "Meánach"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
-msgstr ""
+msgstr "Barra an roghchláir"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:363
@@ -1390,11 +1406,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:921
 msgid "Modified"
-msgstr ""
+msgstr "Athraithe"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:159
 msgid "More Information..."
-msgstr ""
+msgstr "Tuilleadh Eolais..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
 msgid "Motion Blur"
@@ -1420,7 +1436,7 @@ msgstr "Bog Roghnúchán"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:32
 msgid "Multiply"
-msgstr ""
+msgstr "Méadaigh"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:67
 msgid "Name:"
@@ -1428,7 +1444,7 @@ msgstr "Ainm:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "An Comharsan Is Neasa"
 
 #: ../Pinta.Core/Actions/FileActions.cs:63
 msgid "New"
@@ -1443,7 +1459,7 @@ msgstr "Íomhá Nua"
 msgid "New Screenshot..."
 msgstr "Roghbhlúire Nua..."
 
-#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:62
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:71
 msgid "New palette size:"
 msgstr "Méid pháiléid nua:"
 
@@ -1453,7 +1469,7 @@ msgstr "Nua..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
-msgstr ""
+msgstr "Níor Aimsíodh Aon Réad"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
@@ -1463,7 +1479,7 @@ msgstr "Torann"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:267
+#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
 msgstr "Gnáth"
 
@@ -1475,12 +1491,12 @@ msgstr "Gnáthchumasc"
 msgid "Normal Size"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:268
+#: ../Pinta.Tools/Tools/TextTool.cs:265
 msgid "Normal and Outline"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:164
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:183
+#: ../Pinta.Effects/Effects/CellsEffect.cs:172
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
 msgid "Number of Cells"
 msgstr ""
 
@@ -1490,7 +1506,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:210
 msgid "OK"
-msgstr ""
+msgstr "Tá go maith"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:22
@@ -1499,7 +1515,7 @@ msgid "Object"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:167
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:139
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:133
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:140
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:54
@@ -1507,7 +1523,7 @@ msgid "Offset"
 msgstr "Seach-chur"
 
 #: ../Pinta.Core/Actions/EditActions.cs:148
-#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
+#: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:78
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
 msgstr ""
@@ -1552,13 +1568,13 @@ msgstr "Oscail..."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:316
 msgid "Orientation:"
-msgstr ""
+msgstr "Treoshuíomh:"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
-msgstr ""
+msgstr "Bunaidh"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Outline"
 msgstr "Imlínigh"
 
@@ -1579,7 +1595,7 @@ msgstr ""
 msgid "Outline Shape"
 msgstr "Imlínigh an Cruth"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:283
+#: ../Pinta.Tools/Tools/TextTool.cs:280
 msgid "Outline width"
 msgstr ""
 
@@ -1665,7 +1681,7 @@ msgid "Photo"
 msgstr "Grianghraf"
 
 #. Translators: Arrangement of points similar to how sunflower seeds are arranged
-#: ../Pinta.Core/Algorithms/SpatialPartition.cs:133
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:174
 msgid "Phyllotaxis"
 msgstr ""
 
@@ -1673,7 +1689,7 @@ msgstr ""
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
-msgstr ""
+msgstr "Pinta"
 
 #: ../Pinta/AddinSetupService.cs:66
 msgid "Pinta Community Addins - Cross-Platform"
@@ -1723,7 +1739,7 @@ msgstr "Picteilíní"
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:55
 msgid "Piña Colada"
-msgstr ""
+msgstr "Piña Colada"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
 msgid "Please restart Pinta for the changes to take effect."
@@ -1734,13 +1750,13 @@ msgstr ""
 msgid "Point Added"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:148
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:197
+#: ../Pinta.Effects/Effects/CellsEffect.cs:156
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Point Arrangement"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:161
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
+#: ../Pinta.Effects/Effects/CellsEffect.cs:169
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Point Color"
 msgstr ""
 
@@ -1748,14 +1764,18 @@ msgstr ""
 msgid "Point Deleted"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:157
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:206
+#: ../Pinta.Effects/Effects/CellsEffect.cs:165
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Point Size"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
 msgstr "Aisiompú Polach"
+
+#: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
+msgid "Polygon"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
@@ -1789,27 +1809,27 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
-msgstr ""
+msgstr "Réamhshocrú:"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
-msgstr ""
+msgstr "Réamhamharc"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
-msgstr ""
+msgstr "Príomh"
 
 #: ../Pinta.Core/Actions/FileActions.cs:102
 msgid "Print"
 msgstr "Clóbhuail"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:187
-#: ../Pinta.Effects/Effects/DentsEffect.cs:151
+#: ../Pinta.Effects/Effects/CellsEffect.cs:195
+#: ../Pinta.Effects/Effects/DentsEffect.cs:155
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:147
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:160
-#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:91
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:170
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:213
+#: ../Pinta.Effects/Effects/PolarInversionEffect.cs:92
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:142
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:217
 msgid "Quality"
 msgstr "Cáilíocht"
 
@@ -1846,41 +1866,43 @@ msgstr "Ga"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
+#: ../Pinta.Effects/Effects/TwistEffect.cs:175
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
 msgstr ""
 
-#: ../Pinta.Core/Algorithms/SpatialPartition.cs:125
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:220
+#: ../Pinta.Core/Algorithms/SpatialPartition.cs:166
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:224
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:16
 msgid "Random"
-msgstr ""
+msgstr "Fánach"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:178
+#: ../Pinta.Effects/Effects/CellsEffect.cs:186
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:151
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:161
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
 msgid "Random Color Scheme Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:194
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:198
 msgid "Random Colors"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:142
+#: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:151
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:200
+#: ../Pinta.Effects/Effects/CellsEffect.cs:159
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
 msgid "Random Point Locations"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:165
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Dathanna Le Déanaí"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:55
 msgid "Recolor"
@@ -1902,7 +1924,7 @@ msgstr "Dearg"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:89
 msgid "Red  "
-msgstr "Dear  "
+msgstr "Dearg  "
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:23
 msgid "Red Eye Removal"
@@ -1920,9 +1942,13 @@ msgstr "Maolaigh an torann"
 msgid "Reflect"
 msgstr ""
 
+#: ../Pinta.Effects/Effects/DentsEffect.cs:139
+msgid "Refraction"
+msgstr ""
+
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
-msgstr ""
+msgstr "Athnuaigh"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:91
 msgid "Released under the MIT X11 License."
@@ -1932,7 +1958,7 @@ msgstr ""
 msgid "Relief"
 msgstr "Rilíf"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:112
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
 msgid "Rename Layer"
 msgstr "Athainmnigh Sraith"
 
@@ -1950,7 +1976,7 @@ msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:43
 msgid "Replace"
-msgstr ""
+msgstr "Ionadaigh"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
@@ -1960,7 +1986,7 @@ msgstr ""
 msgid "Resampling:"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:566
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:570
 msgid "Reseed"
 msgstr "Athshíolaigh"
 
@@ -1971,7 +1997,7 @@ msgstr "Athshocraigh"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:200
 msgid "Reset Color"
-msgstr ""
+msgstr "Athshocraigh an Dath"
 
 #: ../Pinta.Core/Actions/EditActions.cs:181
 msgid "Reset to Default"
@@ -1995,15 +2021,15 @@ msgstr "Athraigh Méid na hÍomhá"
 msgid "Resize Image..."
 msgstr ""
 
-#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:60
+#: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr ""
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
 msgid "Restart Pinta"
-msgstr ""
+msgstr "Atosaigh Pinta"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:181
+#: ../Pinta.Effects/Effects/CellsEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:154
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:164
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:180
@@ -2011,11 +2037,11 @@ msgid "Reverse Color Scheme"
 msgstr ""
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:191
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:195
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:244
+#: ../Pinta.Tools/Tools/TextTool.cs:241
 msgid "Right Align"
 msgstr "Ailínigh Ar Dheis"
 
@@ -2047,6 +2073,10 @@ msgstr "Rothlaigh 90° Tuathalach"
 #: ../Pinta.Effects/Effects/TileEffect.cs:222
 msgid "Rotation"
 msgstr "Rothlú"
+
+#: ../Pinta.Effects/Effects/DentsEffect.cs:143
+msgid "Roughness"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Rounded Line Series"
@@ -2118,16 +2148,17 @@ msgid "Save changes to image \"{0}\" before closing?"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:134
+#: ../Pinta.Effects/Effects/DentsEffect.cs:135
 msgid "Scale"
 msgstr "Scála"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:39
 msgid "Screen"
-msgstr ""
+msgstr "Scáileán"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
-msgstr ""
+msgstr "Tánaisteach"
 
 #: ../Pinta.Core/Actions/EditActions.cs:155
 #: ../Pinta.Core/Actions/EditActions.cs:336
@@ -2136,9 +2167,9 @@ msgstr "Roghnaigh Uile"
 
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:13
 msgid "Selected Colors"
-msgstr ""
+msgstr "Dathanna Roghnaithe"
 
-#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:25
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:35
 msgid "Sepia"
 msgstr "Sepia"
 
@@ -2177,27 +2208,27 @@ msgstr ""
 msgid "Show Grid"
 msgstr ""
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:117
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
 msgid "Show Layer"
 msgstr "Taispeáin Sraith"
 
-#: ../Pinta.Effects/Effects/CellsEffect.cs:154
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:203
+#: ../Pinta.Effects/Effects/CellsEffect.cs:162
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
 msgid "Show Points"
 msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
 msgid "Show Value"
-msgstr ""
+msgstr "Taispeáin an Luach"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:242
 msgid "Show/Hide"
-msgstr ""
+msgstr "Taispeáin/Folaigh"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
@@ -2210,11 +2241,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:289
 msgid "Size"
-msgstr ""
+msgstr "Méid"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
-msgstr ""
+msgstr "Mín"
 
 #: ../Pinta.Core/Effects/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -2265,15 +2296,15 @@ msgstr "Athraigh chuig uirlis an phinn luaidhe"
 msgid "Switch to previous tool"
 msgstr "Fill ar an n-uirlis roimhe seo"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:83
+#: ../Pinta.Tools/Tools/TextTool.cs:80
 msgid "Text"
 msgstr "Téacs"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:86
+#: ../Pinta.Tools/Tools/TextTool.cs:83
 msgid "Text - Finalize"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:258
+#: ../Pinta.Tools/Tools/TextTool.cs:255
 msgid "Text Style"
 msgstr ""
 
@@ -2379,7 +2410,7 @@ msgstr "Uirlis"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:142
 msgid "Tool Box"
-msgstr ""
+msgstr "Bosca Uirlisí"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:118
 msgid "Tool Windows"
@@ -2416,9 +2447,9 @@ msgstr ""
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:137
 msgid "Transparent"
-msgstr ""
+msgstr "Trédhearcach"
 
-#: ../Pinta.Effects/Effects/DentsEffect.cs:144
+#: ../Pinta.Effects/Effects/DentsEffect.cs:147
 msgid "Turbulence"
 msgstr ""
 
@@ -2436,7 +2467,7 @@ msgstr ""
 msgid "Type"
 msgstr "Cineál"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:204
+#: ../Pinta.Tools/Tools/TextTool.cs:201
 msgid "Underline"
 msgstr "Cuir líne faoi"
 
@@ -2451,11 +2482,11 @@ msgstr ""
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
 msgid "Uninstall"
-msgstr ""
+msgstr "Díshuiteáil"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:185
 msgid "Uninstall..."
-msgstr ""
+msgstr "Díshuiteáil..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
@@ -2478,13 +2509,13 @@ msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
-msgstr ""
+msgstr "Nuashonrú..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
-msgstr ""
+msgstr "Nuashonruithe"
 
-#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:171
+#: ../Pinta.Effects/Effects/RadialBlurEffect.cs:143
 msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
@@ -2496,31 +2527,31 @@ msgstr "Ag baineadh feidhm as deilbhíní as:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
 msgid "Value"
-msgstr ""
+msgstr "Luach"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "Leagan: {0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:234
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:238
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Gorm ingearach (G)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:237
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:241
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Uaine ingearach (U)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
-#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:240
+#: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:244
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "Dearg ingearach (D)"
 
 #: ../Pinta/MainWindow.cs:469
 msgid "View"
-msgstr ""
+msgstr "Amharc"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:49
@@ -2541,7 +2572,7 @@ msgstr "Teas"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:118
 msgid "White"
-msgstr ""
+msgstr "Bán"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:66
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:76
@@ -2576,7 +2607,7 @@ msgstr ""
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:447
 #, csharp-format
 msgid "You do not have access to '{0}'."
-msgstr ""
+msgstr "Níl rochtain agat ar '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:257
@@ -2619,11 +2650,11 @@ msgstr "_Mionathruithe"
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:166
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cealaigh"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
-msgstr ""
+msgstr "_Cuileáil é"
 
 #: ../Pinta/MainWindow.cs:395
 msgid "_Edit"
@@ -2650,11 +2681,11 @@ msgstr "_Sraitheanna"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr ""
+msgstr "_Tá go maith"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr ""
+msgstr "_Taisc"
 
 #: ../Pinta/MainWindow.cs:397
 msgid "_View"
@@ -2703,7 +2734,7 @@ msgstr ""
 #: ../Pinta.Core/Classes/DocumentLayers.cs:207
 #, csharp-format
 msgid "{0} copy"
-msgstr ""
+msgstr "Cóip de {0}"
 
 #: ../Pinta.Core/ImageFormats/FormatDescriptor.cs:122
 #, csharp-format
@@ -2721,7 +2752,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/ViewActions.cs:376
 #, csharp-format
 msgid "{0}%"
-msgstr ""
+msgstr "{0}%"
 
 #~ msgid "Random Noise"
 #~ msgstr "Torann Fánach"

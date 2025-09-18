@@ -12,6 +12,7 @@ Pinta.Core/Actions/ImageActions.cs
 Pinta.Core/Actions/LayerActions.cs
 Pinta.Core/Actions/ViewActions.cs
 Pinta.Core/Actions/WindowActions.cs
+Pinta.Core/Algorithms/BlendOpHelper.cs
 Pinta.Core/Algorithms/ColorDifference.cs
 Pinta.Core/Algorithms/Histogram.cs
 Pinta.Core/Algorithms/HistogramRGB.cs
@@ -414,6 +415,7 @@ Pinta/MacInterop/CoreFoundation.cs
 Pinta/MacInterop/Environment.cs
 Pinta/Main.cs
 Pinta/MainWindow.cs
+Pinta/Messages/ActionOptions.cs
 Pinta/Pads/CanvasPad.cs
 Pinta/Pads/HistoryPad.cs
 Pinta/Pads/IDockPad.cs

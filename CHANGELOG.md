@@ -55,6 +55,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug in the text tool where Ctrl+A only selected starting from the current line (#1698)
 - The icon and window title now appear correctly on KDE Wayland sessions (#1419)
 - Fixed bug where the text tool could incorrectly display a default cursor (#1707)
+- Fixed drifting when holding Shift while expanding a rectangle selection using the vertical or horizontal handles (#1733)
 
 ## [3.0.3](https://github.com/PintaProject/Pinta/release/tag/3.0.3) - 2025/08/01
 
