@@ -91,15 +91,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		}
 	}
 
-	/// <summary>
-	/// Lower limit of the ruler in pixels.
-	/// </summary>
-	public double Lower { get; private set; } = 0;
-
-	/// <summary>
-	/// Upper limit of the ruler in pixels.
-	/// </summary>
-	public double Upper { get; private set; } = 1;
+	public NumberRange<double> RulerRange { get; private set; }
 
 	public Ruler (Gtk.Orientation orientation)
 	{
@@ -129,14 +121,9 @@ public sealed class Ruler : Gtk.DrawingArea
 	/// <summary>
 	/// Update the ruler's range.
 	/// </summary>
-	public void SetRange (double lower, double upper)
+	public void SetRange (in NumberRange<double> rulerRange)
 	{
-		if (lower > upper)
-			throw new ArgumentOutOfRangeException (nameof (lower), "Invalid range");
-
-		Lower = lower;
-		Upper = upper;
-
+		RulerRange = rulerRange;
 		QueueFullRedraw ();
 	}
 
@@ -164,8 +151,7 @@ public sealed class Ruler : Gtk.DrawingArea
 
 	private readonly record struct RulerDrawSettings (
 		ImmutableArray<int> SubDivide,
-		double ScaledUpper,
-		double ScaledLower,
+		NumberRange<double> ScaledRange,
 		Pango.FontDescription Font,
 		int FontSize,
 		double Increment,
@@ -179,6 +165,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		Size EffectiveSize,
 		Color Color,
 		Gtk.Orientation Orientation);
+
 	private RulerDrawSettings CreateSettings (Size preliminarySize)
 	{
 		GetStyleContext ().GetColor (out Color color);
@@ -228,9 +215,12 @@ public sealed class Ruler : Gtk.DrawingArea
 		};
 
 		// Find our scaled range.
-		double scaledUpper = Upper / pixels_per_unit;
-		double scaledLower = Lower / pixels_per_unit;
-		double maxSize = scaledUpper - scaledLower;
+
+		NumberRange<double> scaledRange = new (
+			lower: RulerRange.Start / pixels_per_unit,
+			upper: RulerRange.End / pixels_per_unit);
+
+		double maxSize = scaledRange.End - scaledRange.Start;
 
 		// There must be enough space between the large ticks for the text labels.
 		Pango.FontDescription font = GetPangoContext ().GetFontDescription ()!;
@@ -259,16 +249,15 @@ public sealed class Ruler : Gtk.DrawingArea
 
 		return new (
 			SubDivide: subdivide,
-			ScaledUpper: scaledUpper,
-			ScaledLower: scaledLower,
+			ScaledRange: scaledRange,
 			Font: font,
 			FontSize: fontSize,
 			Increment: increment,
 			DivideIndex: divideIndex,
 			PixelsPerTick: pixelsPerTick,
 			UnitsPerTick: unitsPerTick,
-			Start: (int) Math.Floor (scaledLower * ticksPerUnit),
-			End: (int) Math.Ceiling (scaledUpper * ticksPerUnit),
+			Start: (int) Math.Floor (scaledRange.Start * ticksPerUnit),
+			End: (int) Math.Ceiling (scaledRange.End * ticksPerUnit),
 			MarkerPosition: GetPositionOnRuler (Position, effectiveSize.Width),
 			RulerOuterLine: rulerOuterLine,
 			EffectiveSize: effectiveSize,
@@ -350,7 +339,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		for (int i = settings.Start; i <= settings.End; ++i) {
 
 			// Position of tick (add 0.5 to center tick on pixel).
-			double tickPosition = Math.Floor (i * settings.PixelsPerTick - settings.ScaledLower * settings.Increment) + 0.5;
+			double tickPosition = Math.Floor (i * settings.PixelsPerTick - settings.ScaledRange.Start * settings.Increment) + 0.5;
 
 			// Height of tick
 			int tickHeight = settings.EffectiveSize.Height;
@@ -396,9 +385,9 @@ public sealed class Ruler : Gtk.DrawingArea
 	[MethodImpl (MethodImplOptions.AggressiveInlining)]
 	private double GetPositionOnRuler (double position, double width)
 	{
-		double range = Upper - Lower;
+		double range = RulerRange.End - RulerRange.Start;
 		double scaledWidth = width / range;
-		double positionFromLower = position - Lower;
+		double positionFromLower = position - RulerRange.Start;
 		return positionFromLower * scaledWidth;
 	}
 

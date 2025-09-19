@@ -262,8 +262,8 @@ public sealed class CanvasWindow : Gtk.Grid
 			upper = upper with { Y = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / workspace.Scale };
 		}
 
-		horizontal_ruler.SetRange (lower.X, upper.X);
-		vertical_ruler.SetRange (lower.Y, upper.Y);
+		horizontal_ruler.SetRange (new (lower.X, upper.X));
+		vertical_ruler.SetRange (new (lower.Y, upper.Y));
 	}
 
 	private bool HandleScrollEvent (
