@@ -175,12 +175,24 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 	private void Draw (Context g)
 	{
+		const int TILE_SIZE = 16;
+		using Pattern checkeredPattern =
+			CairoExtensions.CreateTransparentBackgroundPattern (TILE_SIZE);
+
 		// Draw Secondary color swatch
+
+		if (palette.SecondaryColor.A < 1)
+			g.FillRectangle (secondary_rect, checkeredPattern);
+
 		g.FillRectangle (secondary_rect, palette.SecondaryColor);
 		g.DrawRectangle (new RectangleD (secondary_rect.X + 1, secondary_rect.Y + 1, secondary_rect.Width - 2, secondary_rect.Height - 2), new Color (1, 1, 1), 1);
 		g.DrawRectangle (secondary_rect, new Color (0, 0, 0), 1);
 
 		// Draw Primary color swatch
+
+		if (palette.PrimaryColor.A < 1)
+			g.FillRectangle (primary_rect, checkeredPattern);
+
 		g.FillRectangle (primary_rect, palette.PrimaryColor);
 		g.DrawRectangle (new RectangleD (primary_rect.X + 1, primary_rect.Y + 1, primary_rect.Width - 2, primary_rect.Height - 2), new Color (1, 1, 1), 1);
 		g.DrawRectangle (primary_rect, new Color (0, 0, 0), 1);
@@ -196,10 +208,6 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 		// Draw recently used color swatches
 		var recent = palette.RecentlyUsedColors;
-
-		const int TILE_SIZE = 16;
-		using Pattern checkeredPattern =
-			CairoExtensions.CreateTransparentBackgroundPattern (TILE_SIZE);
 
 		for (int i = 0; i < recent.Count; i++) {
 
