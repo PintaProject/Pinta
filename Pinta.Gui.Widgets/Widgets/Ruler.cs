@@ -217,10 +217,10 @@ public sealed class Ruler : Gtk.DrawingArea
 		// Find our scaled range.
 
 		NumberRange<double> scaledRange = new (
-			lower: RulerRange.Start / pixels_per_unit,
-			upper: RulerRange.End / pixels_per_unit);
+			lower: RulerRange.Lower / pixels_per_unit,
+			upper: RulerRange.Upper / pixels_per_unit);
 
-		double maxSize = scaledRange.End - scaledRange.Start;
+		double maxSize = scaledRange.Upper - scaledRange.Lower;
 
 		// There must be enough space between the large ticks for the text labels.
 		Pango.FontDescription font = GetPangoContext ().GetFontDescription ()!;
@@ -256,8 +256,8 @@ public sealed class Ruler : Gtk.DrawingArea
 			DivideIndex: divideIndex,
 			PixelsPerTick: pixelsPerTick,
 			UnitsPerTick: unitsPerTick,
-			Start: (int) Math.Floor (scaledRange.Start * ticksPerUnit),
-			End: (int) Math.Ceiling (scaledRange.End * ticksPerUnit),
+			Start: (int) Math.Floor (scaledRange.Lower * ticksPerUnit),
+			End: (int) Math.Ceiling (scaledRange.Upper * ticksPerUnit),
 			MarkerPosition: GetPositionOnRuler (Position, effectiveSize.Width),
 			RulerOuterLine: rulerOuterLine,
 			EffectiveSize: effectiveSize,
@@ -280,8 +280,8 @@ public sealed class Ruler : Gtk.DrawingArea
 		if (selection_bounds.HasValue) {
 
 			// Convert selection coordinates to ruler widget coordinates
-			double p1 = GetPositionOnRuler (selection_bounds.Value.Start, settings.EffectiveSize.Width);
-			double p2 = GetPositionOnRuler (selection_bounds.Value.End, settings.EffectiveSize.Width);
+			double p1 = GetPositionOnRuler (selection_bounds.Value.Lower, settings.EffectiveSize.Width);
+			double p2 = GetPositionOnRuler (selection_bounds.Value.Upper, settings.EffectiveSize.Width);
 
 			cr.SetSourceRgba ( // Semi-transparent blue
 				red: 0.21,
@@ -339,7 +339,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		for (int i = settings.Start; i <= settings.End; ++i) {
 
 			// Position of tick (add 0.5 to center tick on pixel).
-			double tickPosition = Math.Floor (i * settings.PixelsPerTick - settings.ScaledRange.Start * settings.Increment) + 0.5;
+			double tickPosition = Math.Floor (i * settings.PixelsPerTick - settings.ScaledRange.Lower * settings.Increment) + 0.5;
 
 			// Height of tick
 			int tickHeight = settings.EffectiveSize.Height;
@@ -385,9 +385,9 @@ public sealed class Ruler : Gtk.DrawingArea
 	[MethodImpl (MethodImplOptions.AggressiveInlining)]
 	private double GetPositionOnRuler (double position, double width)
 	{
-		double range = RulerRange.End - RulerRange.Start;
+		double range = RulerRange.Upper - RulerRange.Lower;
 		double scaledWidth = width / range;
-		double positionFromLower = position - RulerRange.Start;
+		double positionFromLower = position - RulerRange.Lower;
 		return positionFromLower * scaledWidth;
 	}
 
