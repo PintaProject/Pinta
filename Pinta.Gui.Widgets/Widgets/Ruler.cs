@@ -52,16 +52,14 @@ public sealed class Ruler : Gtk.DrawingArea
 	private Surface? cached_surface = null;
 	private Size? last_known_size = null;
 
-	private double? selection_start = null;
-	private double? selection_end = null;
+	private NumberRange<double>? selection_bounds = null;
 
-	public void SetSelectionRange (double? start, double? end)
+	public void SetSelectionBounds (in NumberRange<double>? selectionBounds)
 	{
-		if (selection_start == start && selection_end == end)
+		if (selection_bounds == selectionBounds)
 			return;
 
-		selection_start = start;
-		selection_end = end;
+		selection_bounds = selectionBounds;
 
 		QueueDraw ();
 	}
@@ -290,11 +288,11 @@ public sealed class Ruler : Gtk.DrawingArea
 		cached_surface ??= CreateBaseRuler (settings, preliminarySize);
 
 		// Draw the selection projection if a selection exists
-		if (selection_start.HasValue && selection_end.HasValue) {
+		if (selection_bounds.HasValue) {
 
 			// Convert selection coordinates to ruler widget coordinates
-			double p1 = GetPositionOnRuler (selection_start.Value, settings.EffectiveSize.Width);
-			double p2 = GetPositionOnRuler (selection_end.Value, settings.EffectiveSize.Width);
+			double p1 = GetPositionOnRuler (selection_bounds.Value.Start, settings.EffectiveSize.Width);
+			double p2 = GetPositionOnRuler (selection_bounds.Value.End, settings.EffectiveSize.Width);
 
 			cr.SetSourceRgba ( // Semi-transparent blue
 				red: 0.21,
