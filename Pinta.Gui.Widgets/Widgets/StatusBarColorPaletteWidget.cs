@@ -28,6 +28,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Adw;
 using Cairo;
 using Pinta.Core;
 
@@ -201,18 +202,28 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			CairoExtensions.CreateTransparentBackgroundPattern (TILE_SIZE);
 
 		for (int i = 0; i < recent.Count; i++) {
+
 			RectangleD swatchBounds = PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true);
-			g.FillRectangle (swatchBounds, checkeredPattern);
-			g.FillRectangle (swatchBounds, recent.ElementAt (i));
+			Color recentColor = recent.ElementAt (i);
+
+			if (recentColor.A < 1) // Only draw checkered pattern if there is transparency
+				g.FillRectangle (swatchBounds, checkeredPattern);
+
+			g.FillRectangle (swatchBounds, recentColor);
 		}
 
 		// Draw color swatches
 		var currentPalette = palette.CurrentPalette;
 
 		for (int i = 0; i < currentPalette.Colors.Count; i++) {
+
 			RectangleD swatchBounds = PaletteWidget.GetSwatchBounds (palette, i, palette_rect);
-			g.FillRectangle (swatchBounds, checkeredPattern);
-			g.FillRectangle (swatchBounds, currentPalette.Colors[i]);
+			Color paletteColor = currentPalette.Colors[i];
+
+			if (paletteColor.A < 1) // Only draw checkered pattern if there is transparency
+				g.FillRectangle (swatchBounds, checkeredPattern);
+
+			g.FillRectangle (swatchBounds, paletteColor);
 		}
 
 		g.Dispose ();
