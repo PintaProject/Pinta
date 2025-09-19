@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
@@ -23,28 +24,18 @@ public sealed class NumberRangeTests
 	}
 
 	[Test]
-	public void Creation_Throws_On_Inconsistent_Bounds (
-		[ValueSource (nameof (valid_doubles))] double lower,
-		[ValueSource (nameof (valid_doubles))] double upper)
+	[TestCaseSource (nameof (InconsistentBoundsCases))]
+	public void Creation_Throws_On_Inconsistent_Bounds (double lower, double upper)
 	{
-		if (lower <= upper) {
-			Assert.Pass ($"Case does not apply, because {lower} <= {upper}");
-			return;
-		}
 		using var _ = Assert.EnterMultipleScope ();
 		Assert.Throws<ArgumentException> (() => NumberRange.Create (lower, upper));
 		Assert.Throws<ArgumentException> (() => new NumberRange<double> (lower, upper));
 	}
 
 	[Test]
-	public void Creation_Accepts_Consistent_Bounds (
-		[ValueSource (nameof (valid_doubles))] double lower,
-		[ValueSource (nameof (valid_doubles))] double upper)
+	[TestCaseSource (nameof (ConsistentBoundsCases))]
+	public void Creation_Accepts_Consistent_Bounds (double lower, double upper)
 	{
-		if (lower > upper) {
-			Assert.Pass ($"Case does not apply, because {lower} > {upper}");
-			return;
-		}
 		using var _ = Assert.EnterMultipleScope ();
 		Assert.DoesNotThrow (() => NumberRange.Create (lower, upper));
 		Assert.DoesNotThrow (() => new NumberRange<double> (lower, upper));
@@ -99,7 +90,6 @@ public sealed class NumberRangeTests
 		Assert.That (b != a, Is.True);
 	}
 
-
 	private static readonly ImmutableArray<double> valid_doubles = [
 
 		double.MinValue
@@ -124,4 +114,22 @@ public sealed class NumberRangeTests
 
 	private static readonly ImmutableArray<double> invalid_doubles =
 		[double.NegativeInfinity, double.PositiveInfinity, double.NaN];
+
+	private static IEnumerable<TestCaseData> ConsistentBoundsCases {
+		get {
+			foreach (double lower in valid_doubles)
+				foreach (double upper in valid_doubles)
+					if (lower <= upper)
+						yield return new (lower, upper);
+		}
+	}
+
+	private static IEnumerable<TestCaseData> InconsistentBoundsCases {
+		get {
+			foreach (double lower in valid_doubles)
+				foreach (double upper in valid_doubles)
+					if (lower > upper)
+						yield return new (lower, upper);
+		}
+	}
 }
