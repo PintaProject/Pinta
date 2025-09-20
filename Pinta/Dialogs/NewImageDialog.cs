@@ -372,13 +372,6 @@ public sealed class NewImageDialog : Gtk.Dialog
 	public Size NewImageSize
 		=> new (NewImageWidth, NewImageHeight);
 
-	public enum BackgroundType
-	{
-		White,
-		Transparent,
-		SecondaryColor,
-	}
-
 	public BackgroundType NewImageBackgroundType {
 		get {
 			if (white_background_radio.Active)
