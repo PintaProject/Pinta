@@ -43,6 +43,7 @@ Thanks to the following contributors who worked on this release:
 - View menu moved from hamburger menu to dedicated button (#1428, #1471)
 - Updated the application icon on macOS to better match the platform's icon style guidelines (#1572)
 - Removed the blend mode parameter from the Clouds effect. The replacement workflow is to create a new layer and configure the layer's blend mode (#1695)
+- Transparent palette colors are now drawn against a checkerboard pattern for improved visibility (#1759)
 
 ### Fixed
 - Fixed a bug where cancelling the color picker dialog could still update the palette colors (#1390, #1411)
