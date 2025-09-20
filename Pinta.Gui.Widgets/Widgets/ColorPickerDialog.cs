@@ -67,7 +67,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 	// hex + sliders
 	private readonly Gtk.Entry hex_entry;
-	private readonly PaletteManager palette;
+	private readonly IPaletteService palette;
 	private int slider_width = DEFAULT_SLIDER_WIDTH;
 	private readonly Gtk.Box sliders_box;
 	private readonly ColorPickerSlider hue_slider;
@@ -189,7 +189,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	/// <param name="windowTitle">Title of the dialog.</param>
 	internal ColorPickerDialog (
 		Gtk.Window? parentWindow,
-		PaletteManager palette,
+		IPaletteService palette,
 		ColorPick adjustable,
 		bool primarySelected, // TODO: Get rid of this
 		bool livePalette,
