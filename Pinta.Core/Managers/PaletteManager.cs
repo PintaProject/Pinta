@@ -37,10 +37,12 @@ public interface IPaletteService
 	Color PrimaryColor { get; set; }
 	Color SecondaryColor { get; set; }
 	Palette CurrentPalette { get; }
+	int MaxRecentlyUsedColor { get; }
 	ReadOnlyCollection<Color> RecentlyUsedColors { get; }
 	void SetColor (bool setPrimary, Color color, bool addToRecent = true);
-	public event EventHandler? PrimaryColorChanged;
-	public event EventHandler? SecondaryColorChanged;
+	event EventHandler? PrimaryColorChanged;
+	event EventHandler? SecondaryColorChanged;
+	event EventHandler? RecentColorsChanged;
 }
 
 public sealed class PaletteManager : IPaletteService
@@ -69,10 +71,10 @@ public sealed class PaletteManager : IPaletteService
 
 	public Palette CurrentPalette { get; }
 
-	private readonly SettingsManager settings;
+	private readonly ISettingsService settings;
 	private readonly PaletteFormatManager palette_formats;
 	public PaletteManager (
-		SettingsManager settings,
+		ISettingsService settings,
 		PaletteFormatManager paletteFormats)
 	{
 		List<Color> recentlyUsed = new (MAX_RECENT_COLORS);

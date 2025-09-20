@@ -10,7 +10,7 @@ internal static class PaletteWidget
 	internal const int PALETTE_MARGIN = 10;
 
 	public static int GetSwatchAtLocation (
-		PaletteManager palette,
+		IPaletteService palette,
 		PointD point,
 		RectangleD palette_bounds,
 		bool recentColorPalette = false)
@@ -29,7 +29,7 @@ internal static class PaletteWidget
 	}
 
 	public static RectangleD GetSwatchBounds (
-		PaletteManager palette,
+		IPaletteService palette,
 		int index,
 		RectangleD palette_bounds,
 		bool recentColorPalette = false)

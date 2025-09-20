@@ -28,6 +28,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Adw;
 using Cairo;
 using Pinta.Core;
 
@@ -42,15 +43,13 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	private readonly RectangleD swap_rect = new (27, 2, 15, 15);
 	private readonly RectangleD reset_rect = new (2, 27, 15, 15);
 
-	private readonly ChromeManager chrome;
-	private readonly PaletteManager palette;
+	private readonly IChromeService chrome;
+	private readonly IPaletteService palette;
 
 	private RectangleD palette_rect;
 	private RectangleD recent_palette_rect;
 
-	public StatusBarColorPaletteWidget (
-		ChromeManager chrome,
-		PaletteManager palette)
+	public StatusBarColorPaletteWidget (IChromeService chrome, IPaletteService palette)
 	{
 		this.chrome = chrome;
 		this.palette = palette;
@@ -176,12 +175,24 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 	private void Draw (Context g)
 	{
+		const int TILE_SIZE = 16;
+		using Pattern checkeredPattern =
+			CairoExtensions.CreateTransparentBackgroundPattern (TILE_SIZE);
+
 		// Draw Secondary color swatch
+
+		if (palette.SecondaryColor.A < 1)
+			g.FillRectangle (secondary_rect, checkeredPattern);
+
 		g.FillRectangle (secondary_rect, palette.SecondaryColor);
 		g.DrawRectangle (new RectangleD (secondary_rect.X + 1, secondary_rect.Y + 1, secondary_rect.Width - 2, secondary_rect.Height - 2), new Color (1, 1, 1), 1);
 		g.DrawRectangle (secondary_rect, new Color (0, 0, 0), 1);
 
 		// Draw Primary color swatch
+
+		if (palette.PrimaryColor.A < 1)
+			g.FillRectangle (primary_rect, checkeredPattern);
+
 		g.FillRectangle (primary_rect, palette.PrimaryColor);
 		g.DrawRectangle (new RectangleD (primary_rect.X + 1, primary_rect.Y + 1, primary_rect.Width - 2, primary_rect.Height - 2), new Color (1, 1, 1), 1);
 		g.DrawRectangle (primary_rect, new Color (0, 0, 0), 1);
@@ -198,14 +209,30 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		// Draw recently used color swatches
 		var recent = palette.RecentlyUsedColors;
 
-		for (int i = 0; i < recent.Count; i++)
-			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true), recent.ElementAt (i));
+		for (int i = 0; i < recent.Count; i++) {
+
+			RectangleD swatchBounds = PaletteWidget.GetSwatchBounds (palette, i, recent_palette_rect, true);
+			Color recentColor = recent.ElementAt (i);
+
+			if (recentColor.A < 1) // Only draw checkered pattern if there is transparency
+				g.FillRectangle (swatchBounds, checkeredPattern);
+
+			g.FillRectangle (swatchBounds, recentColor);
+		}
 
 		// Draw color swatches
 		var currentPalette = palette.CurrentPalette;
 
-		for (int i = 0; i < currentPalette.Colors.Count; i++)
-			g.FillRectangle (PaletteWidget.GetSwatchBounds (palette, i, palette_rect), currentPalette.Colors[i]);
+		for (int i = 0; i < currentPalette.Colors.Count; i++) {
+
+			RectangleD swatchBounds = PaletteWidget.GetSwatchBounds (palette, i, palette_rect);
+			Color paletteColor = currentPalette.Colors[i];
+
+			if (paletteColor.A < 1) // Only draw checkered pattern if there is transparency
+				g.FillRectangle (swatchBounds, checkeredPattern);
+
+			g.FillRectangle (swatchBounds, paletteColor);
+		}
 
 		g.Dispose ();
 	}
