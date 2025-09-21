@@ -73,6 +73,7 @@ public sealed class Ruler : Gtk.DrawingArea
 	public MetricType Metric {
 		get => metric;
 		set {
+			if (metric == value) return;
 			metric = value;
 			QueueFullRedraw ();
 		}
@@ -84,6 +85,7 @@ public sealed class Ruler : Gtk.DrawingArea
 	public double Position {
 		get => position;
 		set {
+			if (position == value) return;
 			position = value;
 			QueueFullRedraw ();
 		}
@@ -93,6 +95,7 @@ public sealed class Ruler : Gtk.DrawingArea
 	public NumberRange<double> RulerRange {
 		get => ruler_range;
 		set {
+			if (ruler_range == value) return;
 			ruler_range = value;
 			QueueFullRedraw ();
 		}
