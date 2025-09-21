@@ -89,7 +89,14 @@ public sealed class Ruler : Gtk.DrawingArea
 		}
 	}
 
-	public NumberRange<double> RulerRange { get; private set; }
+	private NumberRange<double> ruler_range;
+	public NumberRange<double> RulerRange {
+		get => ruler_range;
+		set {
+			ruler_range = value;
+			QueueFullRedraw ();
+		}
+	}
 
 	public Ruler (Gtk.Orientation orientation)
 	{
@@ -114,15 +121,6 @@ public sealed class Ruler : Gtk.DrawingArea
 
 		WidthRequest = width;
 		HeightRequest = height;
-	}
-
-	/// <summary>
-	/// Update the ruler's range.
-	/// </summary>
-	public void SetRange (in NumberRange<double> rulerRange)
-	{
-		RulerRange = rulerRange;
-		QueueFullRedraw ();
 	}
 
 	// Invalidates cache _and_ queues redraw. Like a full refresh
