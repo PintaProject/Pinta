@@ -53,15 +53,13 @@ public sealed class Ruler : Gtk.DrawingArea
 	private Size? last_known_size = null;
 
 	private NumberRange<double>? selection_bounds = null;
-
-	public void SetSelectionBounds (in NumberRange<double>? selectionBounds)
-	{
-		if (selection_bounds == selectionBounds)
-			return;
-
-		selection_bounds = selectionBounds;
-
-		QueueDraw ();
+	public NumberRange<double>? SelectionBounds {
+		get => selection_bounds;
+		set {
+			if (selection_bounds == value) return;
+			selection_bounds = value;
+			QueueDraw ();
+		}
 	}
 
 	/// <summary>
