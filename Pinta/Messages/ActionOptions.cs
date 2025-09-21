@@ -10,7 +10,7 @@ public enum BackgroundType
 	SecondaryColor,
 }
 
-public readonly record struct ClipboardNewImageOptions (Size Size, BackgroundType Background, bool UsingClipboard);
-public readonly record struct SimpleNewImageOptions (Size NewImageSize, Color NewImageBackground);
+public readonly record struct NewImageDialogOptions (Size Size, BackgroundType Background, bool UsingClipboard);
+public readonly record struct NewImageOptions (Size NewImageSize, Color NewImageBackground);
 public readonly record struct ResizeImageOptions (Size NewSize, ResamplingMode ResamplingMode);
 public readonly record struct ResizeCanvasOptions (Size NewSize, Anchor Anchor, CompoundHistoryItem? CompoundAction);

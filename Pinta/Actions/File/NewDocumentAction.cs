@@ -63,14 +63,14 @@ internal sealed class NewDocumentAction : IActionHandler
 
 	private async void Activated (object sender, EventArgs e)
 	{
-		ClipboardNewImageOptions options = await GetDialogOptions ();
+		NewImageDialogOptions options = await GetDialogOptions ();
 
-		SimpleNewImageOptions? response = await PromptNewImage (options);
+		NewImageOptions? response = await PromptNewImage (options);
 
 		if (response == null)
 			return;
 
-		SimpleNewImageOptions newImageOptions = response.Value;
+		NewImageOptions newImageOptions = response.Value;
 
 		workspace.NewDocument (
 			newImageOptions.NewImageSize,
@@ -81,7 +81,7 @@ internal sealed class NewDocumentAction : IActionHandler
 		settings.PutSetting (SettingNames.NEW_IMAGE_BACKGROUND, newImageOptions.NewImageBackground);
 	}
 
-	private async Task<ClipboardNewImageOptions> GetDialogOptions ()
+	private async Task<NewImageDialogOptions> GetDialogOptions ()
 	{
 		// Try to get the dimensions of an image on the clipboard
 		// for the initial width and height values on the NewImageDialog
@@ -112,7 +112,7 @@ internal sealed class NewDocumentAction : IActionHandler
 			UsingClipboard: false);
 	}
 
-	private async Task<SimpleNewImageOptions?> PromptNewImage (ClipboardNewImageOptions options)
+	private async Task<NewImageOptions?> PromptNewImage (NewImageDialogOptions options)
 	{
 		using NewImageDialog dialog = new (
 			chrome,
