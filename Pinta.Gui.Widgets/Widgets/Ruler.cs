@@ -158,8 +158,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		int DivideIndex,
 		double PixelsPerTick,
 		double UnitsPerTick,
-		int Start,
-		int End,
+		NumberRange<int> Ticks,
 		double MarkerPosition,
 		RectangleD RulerOuterLine,
 		Size EffectiveSize,
@@ -256,8 +255,9 @@ public sealed class Ruler : Gtk.DrawingArea
 			DivideIndex: divideIndex,
 			PixelsPerTick: pixelsPerTick,
 			UnitsPerTick: unitsPerTick,
-			Start: (int) Math.Floor (scaledRange.Lower * ticksPerUnit),
-			End: (int) Math.Ceiling (scaledRange.Upper * ticksPerUnit),
+			Ticks: new (
+				lower: (int) Math.Floor (scaledRange.Lower * ticksPerUnit),
+				upper: (int) Math.Ceiling (scaledRange.Upper * ticksPerUnit)),
 			MarkerPosition: GetPositionOnRuler (Position, effectiveSize.Width),
 			RulerOuterLine: rulerOuterLine,
 			EffectiveSize: effectiveSize,
@@ -336,7 +336,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		drawingContext.Rectangle (settings.RulerOuterLine);
 		drawingContext.Fill ();
 
-		for (int i = settings.Start; i <= settings.End; ++i) {
+		for (int i = settings.Ticks.Lower; i <= settings.Ticks.Upper; ++i) {
 
 			// Position of tick (add 0.5 to center tick on pixel).
 			double tickPosition = Math.Floor (i * settings.PixelsPerTick - settings.ScaledRange.Lower * settings.Increment) + 0.5;
