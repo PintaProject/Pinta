@@ -45,7 +45,8 @@ public static class ResourceLoader
 			return theme_result;
 
 		// Otherwise, get it from our embedded resources.
-		if (TryGetIconFromResources (name, out var resource_result))
+		Gdk.Texture? resource_result = GetIconFromResources (name);
+		if (resource_result is not null)
 			return resource_result;
 
 		// We can't find this image, but we are going to return *some* image rather than null to prevent crashes
@@ -104,34 +105,33 @@ public static class ResourceLoader
 		return image != null;
 	}
 
-	private static bool TryGetIconFromResources (string name, [NotNullWhen (true)] out Gdk.Texture? image)
+	private static Gdk.Texture? GetIconFromResources (string name)
 	{
 		// Check 'Pinta.Resources' for our image
-		if (TryGetIconFromAssembly (Assembly.GetExecutingAssembly (), name, out image))
-			return true;
+		Gdk.Texture? fromExecutingAssembly = GetIconFromAssembly (Assembly.GetExecutingAssembly (), name);
+		if (fromExecutingAssembly is not null)
+			return fromExecutingAssembly;
 
 		// Maybe we can find the icon in the resource of a different assembly (e.g. Plugin)
-		foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies ())
-			if (TryGetIconFromAssembly (assembly, name, out image))
-				return true;
-
-		return false;
-	}
-
-	private static bool TryGetIconFromAssembly (Assembly assembly, string name, [NotNullWhen (true)] out Gdk.Texture? image)
-	{
-		image = null;
-
-		try {
-			Bytes? bytes = GetBytesFromAssembly (assembly, name);
-			if (bytes is null) return false;
-			image = Gdk.Texture.NewFromBytes (bytes);
-		} catch (Exception ex) {
-			Console.Error.WriteLine (ex.Message);
-			image = null;
+		foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies ()) {
+			Gdk.Texture? fromTargetedAssembly = GetIconFromAssembly (assembly, name);
+			if (fromTargetedAssembly is not null)
+				return fromTargetedAssembly;
 		}
 
-		return image != null;
+		return null;
+	}
+
+	private static Gdk.Texture? GetIconFromAssembly (Assembly assembly, string name)
+	{
+		try {
+			Bytes? bytes = GetBytesFromAssembly (assembly, name);
+			if (bytes is null) return null;
+			return Gdk.Texture.NewFromBytes (bytes);
+		} catch (Exception ex) {
+			Console.Error.WriteLine (ex.Message);
+			return null;
+		}
 	}
 
 	private static Bytes? GetBytesFromAssembly (Assembly assembly, string name)
