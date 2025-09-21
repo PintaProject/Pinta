@@ -14,9 +14,6 @@ namespace Pinta.Core;
 
 public static class Utility
 {
-	internal static bool IsNumber (float x)
-		=> x >= float.MinValue && x <= float.MaxValue;
-
 	public static byte ClampToByte (double x)
 		=> (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 

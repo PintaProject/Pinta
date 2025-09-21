@@ -59,7 +59,7 @@ partial class CairoExtensions
 		float x,
 		float y)
 	{
-		if (!Utility.IsNumber (x) || !Utility.IsNumber (y))
+		if (!float.IsFinite (x) || !float.IsFinite (y))
 			return ColorBgra.Transparent;
 
 		float u = x;
@@ -126,7 +126,7 @@ partial class CairoExtensions
 		float x,
 		float y)
 	{
-		if (!Utility.IsNumber (x) || !Utility.IsNumber (y))
+		if (!float.IsFinite (x) || !float.IsFinite (y))
 			return ColorBgra.Transparent;
 
 		float u = Math.Clamp (x, 0, srcWidth - 1);
@@ -190,7 +190,7 @@ partial class CairoExtensions
 		float x,
 		float y)
 	{
-		if (!Utility.IsNumber (x) || !Utility.IsNumber (y))
+		if (!float.IsFinite (x) || !float.IsFinite (y))
 			return ColorBgra.Transparent;
 
 		float u = x;
