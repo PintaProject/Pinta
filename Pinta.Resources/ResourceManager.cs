@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -41,8 +40,12 @@ public static class ResourceLoader
 	public static Gdk.Texture GetIcon (string name, int size)
 	{
 		// First see if it's a built-in gtk icon, like gtk-new.
-		if (TryGetIconFromTheme (name, size, out var theme_result))
-			return theme_result;
+		try {
+			Gdk.Texture? theme_result = GetIconFromTheme (name, size);
+			if (theme_result is not null) return theme_result;
+		} catch (Exception ex) {
+			Console.Error.WriteLine (ex.Message);
+		}
 
 		// Otherwise, get it from our embedded resources.
 		Gdk.Texture? resource_result = GetIconFromResources (name);
@@ -73,36 +76,31 @@ public static class ResourceLoader
 		}
 	}
 
-	private static bool TryGetIconFromTheme (string name, int size, [NotNullWhen (true)] out Gdk.Texture? image)
+	private static Gdk.Texture? GetIconFromTheme (string name, int size)
 	{
-		image = null;
+		// This will also load any icons added by Gtk.IconFactory.AddDefault() .
+		Gtk.IconTheme iconTheme = Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
+		Gtk.IconPaintable iconPaintable = iconTheme.LookupIcon (name, [], size, 1, Gtk.TextDirection.None, Gtk.IconLookupFlags.Preload);
 
+		if (iconPaintable is null) return null;
+
+		if (name != StandardIcons.ImageMissing && iconPaintable.IconName!.StartsWith ("image-missing", StringComparison.InvariantCulture))
+			return null;
+
+		Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
+		iconPaintable.Snapshot (snapshot, size, size);
+
+		// Render the icon to a texture.
+
+		Gsk.RenderNode? node = snapshot.ToNode ();
+		if (node is null) return null;
+		Gsk.CairoRenderer renderer = Gsk.CairoRenderer.New ();
 		try {
-			// This will also load any icons added by Gtk.IconFactory.AddDefault() .
-			Gtk.IconTheme iconTheme = Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
-			Gtk.IconPaintable iconPaintable = iconTheme.LookupIcon (name, [], size, 1, Gtk.TextDirection.None, Gtk.IconLookupFlags.Preload);
-			if (iconPaintable == null)
-				return false;
-			if (name != StandardIcons.ImageMissing && iconPaintable.IconName!.StartsWith ("image-missing", StringComparison.InvariantCulture))
-				return false;
-
-			Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
-			iconPaintable.Snapshot (snapshot, size, size);
-
-			// Render the icon to a texture.
-			var node = snapshot.ToNode ();
-			if (node == null)
-				return false;
-
-			var renderer = Gsk.CairoRenderer.New ();
 			renderer.Realize (null);
-			image = renderer.RenderTexture (node, null);
+			return renderer.RenderTexture (node, null);
+		} finally {
 			renderer.Unrealize ();
-		} catch (Exception ex) {
-			Console.Error.WriteLine (ex.Message);
 		}
-
-		return image != null;
 	}
 
 	private static Gdk.Texture? GetIconFromResources (string name)
