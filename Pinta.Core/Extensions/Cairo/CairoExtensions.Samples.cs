@@ -39,23 +39,23 @@ namespace Pinta.Core;
 partial class CairoExtensions
 {
 	public static ColorBgra GetBilinearSample (
-		this ImageSurface src,
+		this ImageSurface source,
 		float x,
 		float y
 	)
 		=> GetBilinearSample (
-			src,
-			src.GetReadOnlyPixelData (),
-			src.Width,
-			src.Height,
+			source,
+			source.GetReadOnlyPixelData (),
+			source.Width,
+			source.Height,
 			x,
 			y);
 
 	public static ColorBgra GetBilinearSample (
-		this ImageSurface src,
-		ReadOnlySpan<ColorBgra> src_data,
-		int srcWidth,
-		int srcHeight,
+		this ImageSurface source,
+		ReadOnlySpan<ColorBgra> sourceData,
+		int sourceWidth,
+		int sourceHeight,
 		float x,
 		float y)
 	{
@@ -65,7 +65,7 @@ partial class CairoExtensions
 		float u = x;
 		float v = y;
 
-		if (u < 0 || v < 0 || u >= srcWidth || v >= srcHeight)
+		if (u < 0 || v < 0 || u >= sourceWidth || v >= sourceHeight)
 			return ColorBgra.Transparent;
 
 		unchecked {
@@ -86,51 +86,51 @@ partial class CairoExtensions
 			int sy = iv;
 			int sleft = sx;
 			int sright =
-				sleft == (srcWidth - 1)
+				sleft == (sourceWidth - 1)
 				? sleft
 				: sleft + 1;
 
 			int stop = sy;
 			int sbottom =
-				stop == (srcHeight - 1)
+				stop == (sourceHeight - 1)
 				? stop
 				: stop + 1;
 
-			ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
-			ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
-			ColorBgra cll = src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
-			ColorBgra clr = src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
+			ColorBgra cul = source.GetColorBgra (sourceData, sourceWidth, new (sleft, stop));
+			ColorBgra cur = source.GetColorBgra (sourceData, sourceWidth, new (sright, stop));
+			ColorBgra cll = source.GetColorBgra (sourceData, sourceWidth, new (sleft, sbottom));
+			ColorBgra clr = source.GetColorBgra (sourceData, sourceWidth, new (sright, sbottom));
 
 			return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 		}
 	}
 
 	public static ColorBgra GetBilinearSampleClamped (
-		this ImageSurface src,
+		this ImageSurface source,
 		float x,
 		float y
 	)
 		=> GetBilinearSampleClamped (
-			src,
-			src.GetReadOnlyPixelData (),
-			src.Width,
-			src.Height,
+			source,
+			source.GetReadOnlyPixelData (),
+			source.Width,
+			source.Height,
 			x,
 			y);
 
 	public static ColorBgra GetBilinearSampleClamped (
-		this ImageSurface src,
-		ReadOnlySpan<ColorBgra> src_data,
-		int srcWidth,
-		int srcHeight,
+		this ImageSurface source,
+		ReadOnlySpan<ColorBgra> sourceData,
+		int sourceWidth,
+		int sourceHeight,
 		float x,
 		float y)
 	{
 		if (!float.IsFinite (x) || !float.IsFinite (y))
 			return ColorBgra.Transparent;
 
-		float u = Math.Clamp (x, 0, srcWidth - 1);
-		float v = Math.Clamp (y, 0, srcHeight - 1);
+		float u = Math.Clamp (x, 0, sourceWidth - 1);
+		float v = Math.Clamp (y, 0, sourceHeight - 1);
 
 		unchecked {
 			int iu = (int) Math.Floor (u);
@@ -150,43 +150,43 @@ partial class CairoExtensions
 			int sy = iv;
 			int sleft = sx;
 			int sright =
-				sleft == (srcWidth - 1)
+				sleft == (sourceWidth - 1)
 				? sleft
 				: sleft + 1;
 
 			int stop = sy;
 			int sbottom =
-				stop == (srcHeight - 1)
+				stop == (sourceHeight - 1)
 				? stop
 				: stop + 1;
 
-			ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
-			ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
-			ColorBgra cll = src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
-			ColorBgra clr = src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
+			ColorBgra cul = source.GetColorBgra (sourceData, sourceWidth, new (sleft, stop));
+			ColorBgra cur = source.GetColorBgra (sourceData, sourceWidth, new (sright, stop));
+			ColorBgra cll = source.GetColorBgra (sourceData, sourceWidth, new (sleft, sbottom));
+			ColorBgra clr = source.GetColorBgra (sourceData, sourceWidth, new (sright, sbottom));
 
 			return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 		}
 	}
 
 	public static ColorBgra GetBilinearSampleWrapped (
-		this ImageSurface src,
+		this ImageSurface source,
 		float x,
 		float y
 	)
 		=> GetBilinearSampleWrapped (
-			src,
-			src.GetReadOnlyPixelData (),
-			src.Width,
-			src.Height,
+			source,
+			source.GetReadOnlyPixelData (),
+			source.Width,
+			source.Height,
 			x,
 			y);
 
 	public static ColorBgra GetBilinearSampleWrapped (
-		this ImageSurface src,
-		ReadOnlySpan<ColorBgra> src_data,
-		int srcWidth,
-		int srcHeight,
+		this ImageSurface source,
+		ReadOnlySpan<ColorBgra> sourceData,
+		int sourceWidth,
+		int sourceHeight,
 		float x,
 		float y)
 	{
@@ -212,64 +212,64 @@ partial class CairoExtensions
 
 			int sx;
 			if (iu < 0)
-				sx = srcWidth - 1 + ((iu + 1) % srcWidth);
-			else if (iu > (srcWidth - 1))
-				sx = iu % srcWidth;
+				sx = sourceWidth - 1 + ((iu + 1) % sourceWidth);
+			else if (iu > (sourceWidth - 1))
+				sx = iu % sourceWidth;
 			else
 				sx = iu;
 
 
 			int sy;
 			if (iv < 0)
-				sy = srcHeight - 1 + ((iv + 1) % srcHeight);
-			else if (iv > (srcHeight - 1))
-				sy = iv % srcHeight;
+				sy = sourceHeight - 1 + ((iv + 1) % sourceHeight);
+			else if (iv > (sourceHeight - 1))
+				sy = iv % sourceHeight;
 			else
 				sy = iv;
 
 
 			int sleft = sx;
 			int sright =
-				sleft == (srcWidth - 1)
+				sleft == (sourceWidth - 1)
 				? 0
 				: sleft + 1;
 			int stop = sy;
 			int sbottom =
-				stop == (srcHeight - 1)
+				stop == (sourceHeight - 1)
 				? 0
 				: stop + 1;
 
-			ColorBgra cul = src.GetColorBgra (src_data, srcWidth, new (sleft, stop));
-			ColorBgra cur = src.GetColorBgra (src_data, srcWidth, new (sright, stop));
-			ColorBgra cll = src.GetColorBgra (src_data, srcWidth, new (sleft, sbottom));
-			ColorBgra clr = src.GetColorBgra (src_data, srcWidth, new (sright, sbottom));
+			ColorBgra cul = source.GetColorBgra (sourceData, sourceWidth, new (sleft, stop));
+			ColorBgra cur = source.GetColorBgra (sourceData, sourceWidth, new (sright, stop));
+			ColorBgra cll = source.GetColorBgra (sourceData, sourceWidth, new (sleft, sbottom));
+			ColorBgra clr = source.GetColorBgra (sourceData, sourceWidth, new (sright, sbottom));
 
 			return ColorBgra.BlendColors4W16IP (cul, wul, cur, wur, cll, wll, clr, wlr);
 		}
 	}
 
 	public static ColorBgra GetBilinearSampleReflected (
-		this ImageSurface src,
-		ReadOnlySpan<ColorBgra> src_data,
-		int srcWidth,
-		int srcHeight,
+		this ImageSurface source,
+		ReadOnlySpan<ColorBgra> sourceData,
+		int sourceWidth,
+		int sourceHeight,
 		float x,
 		float y
-	) => src.GetBilinearSampleClamped (
-		src_data,
-		srcWidth,
-		srcHeight,
-		ReflectCoord (x, srcWidth),
-		ReflectCoord (y, srcHeight));
+	) => source.GetBilinearSampleClamped (
+		sourceData,
+		sourceWidth,
+		sourceHeight,
+		ReflectCoord (x, sourceWidth),
+		ReflectCoord (y, sourceHeight));
 
 	public static ColorBgra GetBilinearSampleReflected (
-		this ImageSurface src,
+		this ImageSurface source,
 		float x,
 		float y
 	) => GetBilinearSampleClamped (
-		src,
-		ReflectCoord (x, src.Width),
-		ReflectCoord (y, src.Height));
+		source,
+		ReflectCoord (x, source.Width),
+		ReflectCoord (y, source.Height));
 
 	private static float ReflectCoord (float value, int max)
 	{
@@ -295,13 +295,11 @@ partial class CairoExtensions
 	/// Prefer using the variant which takes the surface data and width, for improved performance
 	/// if there are repeated calls in a loop.
 	/// </summary>
-	public static ref readonly ColorBgra GetColorBgra (
-		this ImageSurface surf,
-		PointI position)
+	public static ref readonly ColorBgra GetColorBgra (this ImageSurface surface, PointI position)
 	{
-		return ref surf.GetColorBgra (
-			surf.GetReadOnlyPixelData (),
-			surf.Width,
+		return ref surface.GetColorBgra (
+			surface.GetReadOnlyPixelData (),
+			surface.Width,
 			position);
 	}
 
@@ -310,7 +308,7 @@ partial class CairoExtensions
 	// convention as the uncached version.  If you can use this one
 	// over the other, it is much faster in tight loops (like effects).
 	public static ref readonly ColorBgra GetColorBgra (
-		this ImageSurface surf,
+		this ImageSurface surface,
 		ReadOnlySpan<ColorBgra> data,
 		int width,
 		PointI position)
@@ -331,11 +329,11 @@ partial class CairoExtensions
 		=> MemoryMarshal.Cast<byte, ColorBgra> (surface.GetData ());
 
 
-	public static GdkPixbuf.Pixbuf ToPixbuf (this ImageSurface surfSource)
+	public static GdkPixbuf.Pixbuf ToPixbuf (this ImageSurface sourceSurface)
 		=> Gdk.Functions.PixbufGetFromSurface (
-			surfSource,
+			sourceSurface,
 			0,
 			0,
-			surfSource.Width,
-			surfSource.Height)!;
+			sourceSurface.Width,
+			sourceSurface.Height)!;
 }
