@@ -26,6 +26,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -58,17 +59,17 @@ public static class ResourceLoader
 
 	public static void LoadCssStyles ()
 	{
-		if (!TryGetBytesFromAssembly (Assembly.GetExecutingAssembly (), "style.css", out Bytes? bytes))
-			return;
-
-		Gtk.CssProvider cssProvider = Gtk.CssProvider.New ();
-		cssProvider.LoadFromBytes (bytes);
-		Gdk.Display? display = Gdk.Display.GetDefault ();
-
-		if (display == null)
-			return;
-
-		Gtk.StyleContext.AddProviderForDisplay (display, cssProvider, Gtk.Constants.STYLE_PROVIDER_PRIORITY_APPLICATION);
+		try {
+			Bytes? bytes = GetBytesFromAssembly (Assembly.GetExecutingAssembly (), "style.css");
+			if (bytes is null) return;
+			Gtk.CssProvider cssProvider = Gtk.CssProvider.New ();
+			cssProvider.LoadFromBytes (bytes);
+			Gdk.Display? display = Gdk.Display.GetDefault ();
+			if (display is null) return;
+			Gtk.StyleContext.AddProviderForDisplay (display, cssProvider, Gtk.Constants.STYLE_PROVIDER_PRIORITY_APPLICATION);
+		} catch (Exception ex) {
+			Console.Error.WriteLine (ex.Message);
+		}
 	}
 
 	private static bool TryGetIconFromTheme (string name, int size, [NotNullWhen (true)] out Gdk.Texture? image)
@@ -121,36 +122,28 @@ public static class ResourceLoader
 	{
 		image = null;
 
-		if (TryGetBytesFromAssembly (assembly, name, out Bytes? bytes)) {
-			try {
-				image = Gdk.Texture.NewFromBytes (bytes);
-			} catch (Exception ex) {
-				Console.Error.WriteLine (ex.Message);
-				image = null;
-			}
+		try {
+			Bytes? bytes = GetBytesFromAssembly (assembly, name);
+			if (bytes is null) return false;
+			image = Gdk.Texture.NewFromBytes (bytes);
+		} catch (Exception ex) {
+			Console.Error.WriteLine (ex.Message);
+			image = null;
 		}
 
 		return image != null;
 	}
 
-	private static bool TryGetBytesFromAssembly (Assembly assembly, string name, [NotNullWhen (true)] out Bytes? bytes)
+	private static Bytes? GetBytesFromAssembly (Assembly assembly, string name)
 	{
-		bytes = null;
+		if (!HasResource (assembly, name))
+			return null;
 
-		try {
-			if (HasResource (assembly, name)) {
-				using var stream = assembly.GetManifestResourceStream (name)!;
-				var buffer = new byte[stream.Length];
-				stream.ReadExactly (buffer);
+		using Stream stream = assembly.GetManifestResourceStream (name)!;
+		byte[] buffer = new byte[stream.Length];
+		stream.ReadExactly (buffer);
 
-				bytes = Bytes.New (buffer);
-			}
-		} catch (Exception ex) {
-			Console.Error.WriteLine (ex.Message);
-			bytes = null;
-		}
-
-		return bytes != null;
+		return Bytes.New (buffer);
 	}
 
 	private static bool HasResource (Assembly assembly, string name)
