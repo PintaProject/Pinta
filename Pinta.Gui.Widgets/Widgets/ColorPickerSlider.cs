@@ -248,14 +248,14 @@ public sealed class ColorPickerSlider : Gtk.Box
 			x1: p.X,
 			y1: p.Y);
 
-		var normalized = colors.Resized (startPosition: 0, endPosition: 1);
+		var normalized = colors.Resized (NumberRange.Create<double> (0, 1));
 
-		pat.AddColorStop (normalized.StartPosition, normalized.StartColor);
+		pat.AddColorStop (normalized.Range.Lower, normalized.StartColor);
 
 		for (int i = 0; i < normalized.StopsCount; i++)
 			pat.AddColorStop (normalized.Positions[i], normalized.Colors[i]);
 
-		pat.AddColorStop (normalized.EndPosition, normalized.EndColor);
+		pat.AddColorStop (normalized.Range.Upper, normalized.EndColor);
 
 		context.Rectangle (
 			settings.SliderPaddingWidth,

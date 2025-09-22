@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
-using Pinta.Core;
 
-namespace Pinta.Effects.Tests;
+namespace Pinta.Core.Tests;
 
 [TestFixture]
 internal sealed class GradientTests
@@ -13,77 +11,44 @@ internal sealed class GradientTests
 	private static readonly ColorBgra default_start_color = ColorBgra.Black;
 	private static readonly ColorBgra default_end_color = ColorBgra.White;
 
-	[TestCase (0, 0)]
-	[TestCase (1, 0)]
-	public void Factory_Rejects_Inconsistent_Bounds (double minPosition, double maxPosition)
-	{
-		Assert.Throws<ArgumentException> (() => ColorGradient.Create (default_start_color, default_end_color, minPosition, maxPosition));
-	}
-
-	[TestCase (0, 1)]
-	[TestCase (-1, 0)]
-	[TestCase (-1, 1)]
-	[TestCase (1, 2)]
-	public void Factory_Accepts_Consistent_Bounds (double minPosition, double maxPosition)
-	{
-		Assert.DoesNotThrow (() => ColorGradient.Create (default_start_color, default_end_color, minPosition, maxPosition));
-	}
-
+	[Test]
 	[TestCaseSource (nameof (cases_stops_at_same_position))]
 	public void Factory_Rejects_Stops_At_Same_Position (double minPosition, double maxPosition, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
 	{
-		Assert.Throws<ArgumentException> (
-			() => ColorGradient.Create (
-				default_start_color,
-				default_end_color,
-				minPosition,
-				maxPosition,
-				stops
-			)
-		);
+		NumberRange<double> range = new (minPosition, maxPosition);
+		Assert.Throws<ArgumentException> (() => ColorGradient.Create (default_start_color, default_end_color, range, stops));
 	}
 
+	[Test]
 	[TestCaseSource (nameof (cases_stops_at_different_positions))]
-	public void Factory_Accepts_Stops_At_Different_Positions (double minPosition, double maxPosition, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
+	public void Factory_Accepts_Stops_At_Different_Positions (double minPosition, double maxPosition, IReadOnlyDictionary<double, ColorBgra> stops)
 	{
-		Assert.DoesNotThrow (
-			() => ColorGradient.Create (
-				default_start_color,
-				default_end_color,
-				minPosition,
-				maxPosition,
-				stops
-			)
-		);
+		NumberRange<double> range = new (minPosition, maxPosition);
+		Assert.DoesNotThrow (() => ColorGradient.Create (default_start_color, default_end_color, range, stops));
 	}
 
+	[Test]
 	[TestCaseSource (nameof (cases_stops_out_of_bounds))]
-	public void Factory_Rejects_Stops_Out_Of_Bounds (double minPosition, double maxPosition, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
+	public void Factory_Rejects_Stops_Out_Of_Bounds (double minPosition, double maxPosition, IReadOnlyDictionary<double, ColorBgra> stops)
 	{
-		Assert.Throws<ArgumentException> (
-			() => ColorGradient.Create (
-				default_start_color,
-				default_end_color,
-				minPosition,
-				maxPosition,
-				stops
-			)
-		);
+		NumberRange<double> range = new (minPosition, maxPosition);
+		Assert.Throws<ArgumentException> (() => ColorGradient.Create (default_start_color, default_end_color, range, stops));
 	}
 
-
-
+	[Test]
 	[TestCaseSource (nameof (stops_color_checks))]
 	public void Gradient_Stop_Colors_Are_Same (double minPosition, double maxPosition, IReadOnlyDictionary<double, ColorBgra> checks)
 	{
-		var gradient = ColorGradient.Create (default_start_color, default_end_color, minPosition, maxPosition, checks);
+		NumberRange<double> range = new (minPosition, maxPosition);
+		ColorGradient<ColorBgra> gradient = ColorGradient.Create (default_start_color, default_end_color, range, checks);
+		using var _ = Assert.EnterMultipleScope ();
 		foreach (var check in checks) {
 			var returned = gradient.GetColor (check.Key);
 			Assert.That (check.Value, Is.EqualTo (returned));
 		}
 	}
 
-	static readonly IReadOnlyList<TestCaseData> stops_color_checks = CreateStopsColorChecks ().ToArray ();
+	static readonly IReadOnlyList<TestCaseData> stops_color_checks = [.. CreateStopsColorChecks ()];
 	private static IEnumerable<TestCaseData> CreateStopsColorChecks ()
 	{
 		yield return new (
@@ -105,16 +70,19 @@ internal sealed class GradientTests
 		);
 	}
 
+	[Test]
 	[TestCaseSource (nameof (interpolated_color_checks))]
 	public void Gradient_Interpolated_Colors_Are_Correct (ColorGradient<ColorBgra> gradient, IReadOnlyDictionary<double, ColorBgra> checks)
 	{
+		using var _ = Assert.EnterMultipleScope ();
 		foreach (var check in checks) {
-			var interpolated = gradient.GetColor (check.Key);
-			var expected = check.Value;
+			ColorBgra interpolated = gradient.GetColor (check.Key);
+			ColorBgra expected = check.Value;
 			Assert.That (expected, Is.EqualTo (interpolated));
 		}
 	}
 
+	[Test]
 	[TestCaseSource (nameof (reversal_test_cases))]
 	public void Gradient_Reversal_Is_Correct (
 		double startPosition,
@@ -122,35 +90,33 @@ internal sealed class GradientTests
 		IReadOnlyDictionary<double, ColorBgra> originalStops,
 		IReadOnlyDictionary<double, ColorBgra> expectedReversedStops)
 	{
-		var gradient = ColorGradient.Create (
-			default_start_color,
-			default_end_color,
-			startPosition,
-			endPosition,
-			originalStops);
+		NumberRange<double> range = new (startPosition, endPosition);
 
-		ColorGradient<ColorBgra> reversedGradient = gradient.Reversed ();
+		ColorGradient<ColorBgra> gradient = ColorGradient.Create (default_start_color, default_end_color, range, originalStops);
 
-		Assert.That (reversedGradient.StartPosition, Is.EqualTo (startPosition), "Start position did not remain the same after reversing");
-		Assert.That (reversedGradient.EndPosition, Is.EqualTo (endPosition), "End position did not remain the same after reversing");
+		ColorGradient<ColorBgra> reversedOnce = gradient.Reversed ();
+		ColorGradient<ColorBgra> reversedTwice = reversedOnce.Reversed ();
 
-		Assert.That (reversedGradient.StartColor, Is.EqualTo (gradient.EndColor), "Start color after reversal is not the same as end color before reversal");
-		Assert.That (reversedGradient.EndColor, Is.EqualTo (gradient.StartColor), "End color after reversal is not the same as start color before reversal");
+		using var _ = Assert.EnterMultipleScope ();
 
-		Assert.That (reversedGradient.StopsCount, Is.EqualTo (expectedReversedStops.Count), "Number of stops is not the same after reversing");
+		Assert.That (reversedOnce.Range.Lower, Is.EqualTo (startPosition), "Start position did not remain the same after reversing");
+		Assert.That (reversedOnce.Range.Upper, Is.EqualTo (endPosition), "End position did not remain the same after reversing");
+
+		Assert.That (reversedOnce.StartColor, Is.EqualTo (gradient.EndColor), "Start color after reversal is not the same as end color before reversal");
+		Assert.That (reversedOnce.EndColor, Is.EqualTo (gradient.StartColor), "End color after reversal is not the same as start color before reversal");
+
+		Assert.That (reversedOnce.StopsCount, Is.EqualTo (expectedReversedStops.Count), "Number of stops is not the same after reversing");
 
 		foreach (var colorStop in expectedReversedStops) {
-			ColorBgra actualColor = reversedGradient.GetColor (colorStop.Key);
+			ColorBgra actualColor = reversedOnce.GetColor (colorStop.Key);
 			Assert.That (actualColor, Is.EqualTo (colorStop.Value), $"Color mismatch at reversed position {colorStop.Key}");
 		}
-
-		var reversedTwice = reversedGradient.Reversed ();
 
 		Assert.That (gradient.Positions, Is.EqualTo (reversedTwice.Positions));
 		Assert.That (gradient.Colors, Is.EqualTo (reversedTwice.Colors));
 	}
 
-	private static readonly IReadOnlyList<TestCaseData> reversal_test_cases = CreateReversalTestCases ().ToArray ();
+	private static readonly IReadOnlyList<TestCaseData> reversal_test_cases = [.. CreateReversalTestCases ()];
 	private static IEnumerable<TestCaseData> CreateReversalTestCases ()
 	{
 		// Start is 0, end is positive
@@ -165,7 +131,7 @@ internal sealed class GradientTests
 				[80] = ColorBgra.Red,
 				[40] = ColorBgra.Blue,
 			}
-		).SetName ("Reversed_0_to_100");
+		).SetArgDisplayNames ("Reversed_0_to_100");
 
 		// Start is positive, end is positive
 		yield return new TestCaseData (
@@ -179,7 +145,7 @@ internal sealed class GradientTests
 				[190] = ColorBgra.Red,
 				[130] = ColorBgra.Green,
 			}
-		).SetName ("Reversed_100_to_200");
+		).SetArgDisplayNames ("Reversed_100_to_200");
 
 		// Start is negative, end is positive
 		yield return new TestCaseData (
@@ -193,7 +159,7 @@ internal sealed class GradientTests
 				[30] = ColorBgra.Red,
 				[-10] = ColorBgra.Blue,
 			}
-		).SetName ("Reversed_Neg50_to_50");
+		).SetArgDisplayNames ("Reversed_Neg50_to_50");
 
 		// Start is negative, end is negative
 		yield return new TestCaseData (
@@ -207,7 +173,7 @@ internal sealed class GradientTests
 				[-60] = ColorBgra.Red,
 				[-90] = ColorBgra.Blue,
 			}
-		).SetName ("Reversed_Neg100_to_Neg50");
+		).SetArgDisplayNames ("Reversed_Neg100_to_Neg50");
 
 		// Start is negative, end is 0
 		yield return new TestCaseData (
@@ -221,19 +187,18 @@ internal sealed class GradientTests
 				[-10] = ColorBgra.Red,
 				[-40] = ColorBgra.Blue,
 			}
-		).SetName ("Reversed_Neg100_to_0");
+		).SetArgDisplayNames ("Reversed_Neg100_to_0");
 	}
 
 	// Not adding tolerances nor checking for mappings that could be rounded up to the next byte,
 	// because currently the ColorBgra.Lerp function always rounds down, never up
-	private static readonly IReadOnlyList<TestCaseData> interpolated_color_checks = CreateInterpolatedColorChecks ().ToArray ();
+	private static readonly IReadOnlyList<TestCaseData> interpolated_color_checks = [.. CreateInterpolatedColorChecks ()];
 	private static IEnumerable<TestCaseData> CreateInterpolatedColorChecks ()
 	{
-		var blackToWhite255 = ColorGradient.Create (
+		ColorGradient<ColorBgra> blackToWhite255 = ColorGradient.Create (
 			ColorBgra.Black,
 			ColorBgra.White,
-			byte.MinValue,
-			byte.MaxValue);
+			NumberRange.Create<double> (byte.MinValue, byte.MaxValue));
 
 		yield return new (
 			blackToWhite255,
@@ -243,11 +208,10 @@ internal sealed class GradientTests
 			}
 		);
 
-		var blackToWhite1 = ColorGradient.Create (
+		ColorGradient<ColorBgra> blackToWhite1 = ColorGradient.Create (
 			ColorBgra.Black,
 			ColorBgra.White,
-			0,
-			1);
+			NumberRange.Create<double> (0, 1));
 
 		yield return new (
 			blackToWhite1,
@@ -259,7 +223,7 @@ internal sealed class GradientTests
 		);
 	}
 
-	private static readonly IReadOnlyList<TestCaseData> cases_stops_out_of_bounds = CreateCasesForStopsOutOfBounds ().ToArray ();
+	private static readonly IReadOnlyList<TestCaseData> cases_stops_out_of_bounds = [.. CreateCasesForStopsOutOfBounds ()];
 
 	private static IEnumerable<TestCaseData> CreateCasesForStopsOutOfBounds ()
 	{
@@ -300,7 +264,7 @@ internal sealed class GradientTests
 		);
 	}
 
-	private static readonly IReadOnlyList<TestCaseData> cases_stops_at_different_positions = CreateCasesForStopsAtDifferentPositions ().ToArray ();
+	private static readonly IReadOnlyList<TestCaseData> cases_stops_at_different_positions = [.. CreateCasesForStopsAtDifferentPositions ()];
 	private static IEnumerable<TestCaseData> CreateCasesForStopsAtDifferentPositions ()
 	{
 		yield return new (
@@ -315,7 +279,7 @@ internal sealed class GradientTests
 		);
 	}
 
-	private static readonly IReadOnlyList<TestCaseData> cases_stops_at_same_position = CreateCasesForStopsAtSamePosition ().ToArray ();
+	private static readonly IReadOnlyList<TestCaseData> cases_stops_at_same_position = [.. CreateCasesForStopsAtSamePosition ()];
 	private static IEnumerable<TestCaseData> CreateCasesForStopsAtSamePosition ()
 	{
 		yield return new (
