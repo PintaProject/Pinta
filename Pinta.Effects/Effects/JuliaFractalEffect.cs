@@ -130,7 +130,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 			double c = Math.Clamp (
 				settings.factor * j,
 				settings.colorGradient.Range.Lower,
-				settings.colorGradient.Range.Lower);
+				settings.colorGradient.Range.Upper);
 
 			aggregate += settings.colorGradient.GetColor (c);
 		}
