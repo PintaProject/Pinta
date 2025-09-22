@@ -38,6 +38,8 @@ public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TCol
 		NumberRange<double> range,
 		IEnumerable<KeyValuePair<double, TColor>> gradientStops)
 	{
+		if (range.Lower == range.Upper) throw new ArgumentException ($"Start position has to be lower than end position");
+
 		var sortedStops = gradientStops.OrderBy (stop => stop.Key).ToArray ();
 		var sortedPositions = sortedStops.Select (stop => stop.Key).ToImmutableArray ();
 		var sortedColors = sortedStops.Select (stop => stop.Value).ToImmutableArray ();
