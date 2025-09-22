@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta.Actions;
@@ -62,51 +63,73 @@ internal sealed class NewDocumentAction : IActionHandler
 
 	private async void Activated (object sender, EventArgs e)
 	{
-		Size imageSize;
-		NewImageDialog.BackgroundType bg_type;
-		bool using_clipboard;
+		NewImageDialogOptions options = await GetDialogOptions ();
 
+		NewImageOptions? response = await PromptNewImage (options);
+
+		if (response == null)
+			return;
+
+		NewImageOptions newImageOptions = response.Value;
+
+		workspace.NewDocument (
+			newImageOptions.NewImageSize,
+			newImageOptions.NewImageBackground);
+
+		settings.PutSetting (SettingNames.NEW_IMAGE_WIDTH, newImageOptions.NewImageSize.Width);
+		settings.PutSetting (SettingNames.NEW_IMAGE_HEIGHT, newImageOptions.NewImageSize.Height);
+		settings.PutSetting (SettingNames.NEW_IMAGE_BACKGROUND, newImageOptions.NewImageBackground);
+	}
+
+	private async Task<NewImageDialogOptions> GetDialogOptions ()
+	{
 		// Try to get the dimensions of an image on the clipboard
 		// for the initial width and height values on the NewImageDialog
-		Gdk.Texture? cb_texture = await GdkExtensions.GetDefaultClipboard ().ReadTextureAsync ();
-		if (cb_texture is null) {
-			// An image was not on the clipboard,
-			// so use saved dimensions from settings
-			imageSize = new (
-				Width: settings.GetSetting<int> (SettingNames.NEW_IMAGE_WIDTH, 800),
-				Height: settings.GetSetting<int> (SettingNames.NEW_IMAGE_HEIGHT, 600));
-			bg_type = settings.GetSetting<NewImageDialog.BackgroundType> (
-				SettingNames.NEW_IMAGE_BACKGROUND,
-				NewImageDialog.BackgroundType.White);
-			using_clipboard = false;
-		} else {
-			imageSize = new (
-				Width: cb_texture.Width,
-				Height: cb_texture.Height);
-			bg_type = NewImageDialog.BackgroundType.White;
-			using_clipboard = true;
-		}
 
+		Gdk.Texture? clipboardTexture = await
+			GdkExtensions
+			.GetDefaultClipboard ()
+			.ReadTextureAsync ();
+
+		if (clipboardTexture is not null)
+			return new (
+				Size: new (
+					Width: clipboardTexture.Width,
+					Height: clipboardTexture.Height),
+
+				Background: BackgroundType.White,
+				UsingClipboard: true);
+
+		// An image was not on the clipboard,
+		// so use saved dimensions from settings
+		return new (
+			Size: new (
+				Width: settings.GetSetting<int> (SettingNames.NEW_IMAGE_WIDTH, 800),
+				Height: settings.GetSetting<int> (SettingNames.NEW_IMAGE_HEIGHT, 600)),
+			Background: settings.GetSetting<BackgroundType> (
+				SettingNames.NEW_IMAGE_BACKGROUND,
+				BackgroundType.White),
+			UsingClipboard: false);
+	}
+
+	private async Task<NewImageOptions?> PromptNewImage (NewImageDialogOptions options)
+	{
 		using NewImageDialog dialog = new (
 			chrome,
 			palette,
-			imageSize,
-			bg_type,
-			using_clipboard);
+			options.Size,
+			options.Background,
+			options.UsingClipboard);
 
 		try {
 			Gtk.ResponseType response = await dialog.RunAsync ();
 
 			if (response != Gtk.ResponseType.Ok)
-				return;
+				return null;
 
-			workspace.NewDocument (
+			return new (
 				dialog.NewImageSize,
 				dialog.NewImageBackground);
-
-			settings.PutSetting (SettingNames.NEW_IMAGE_WIDTH, dialog.NewImageWidth);
-			settings.PutSetting (SettingNames.NEW_IMAGE_HEIGHT, dialog.NewImageHeight);
-			settings.PutSetting (SettingNames.NEW_IMAGE_BACKGROUND, dialog.NewImageBackgroundType);
 
 		} finally {
 			dialog.Destroy ();

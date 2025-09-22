@@ -155,12 +155,12 @@ public sealed class CanvasWindow : Gtk.Grid
 			RectangleD bounds = document.Selection.GetBounds ();
 			var horizontalBounds = NumberRange.Create (bounds.Left, bounds.Left + bounds.Width);
 			var verticalBounds = NumberRange.Create (bounds.Top, bounds.Top + bounds.Height);
-			horizontal_ruler.SetSelectionBounds (horizontalBounds);
-			vertical_ruler.SetSelectionBounds (verticalBounds);
+			horizontal_ruler.SelectionBounds = horizontalBounds;
+			vertical_ruler.SelectionBounds = verticalBounds;
 		} else {
 			// If there's no selection, clear the highlight
-			horizontal_ruler.SetSelectionBounds (null);
-			vertical_ruler.SetSelectionBounds (null);
+			horizontal_ruler.SelectionBounds = null;
+			vertical_ruler.SelectionBounds = null;
 		}
 	}
 
@@ -262,8 +262,8 @@ public sealed class CanvasWindow : Gtk.Grid
 			upper = upper with { Y = (scrolled_window.Vadjustment.Value + scrolled_window.Vadjustment.PageSize) / workspace.Scale };
 		}
 
-		horizontal_ruler.SetRange (new (lower.X, upper.X));
-		vertical_ruler.SetRange (new (lower.Y, upper.Y));
+		horizontal_ruler.RulerRange = new (lower.X, upper.X);
+		vertical_ruler.RulerRange = new (lower.Y, upper.Y);
 	}
 
 	private bool HandleScrollEvent (

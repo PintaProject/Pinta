@@ -53,15 +53,13 @@ public sealed class Ruler : Gtk.DrawingArea
 	private Size? last_known_size = null;
 
 	private NumberRange<double>? selection_bounds = null;
-
-	public void SetSelectionBounds (in NumberRange<double>? selectionBounds)
-	{
-		if (selection_bounds == selectionBounds)
-			return;
-
-		selection_bounds = selectionBounds;
-
-		QueueDraw ();
+	public NumberRange<double>? SelectionBounds {
+		get => selection_bounds;
+		set {
+			if (selection_bounds == value) return;
+			selection_bounds = value;
+			QueueDraw ();
+		}
 	}
 
 	/// <summary>
@@ -75,6 +73,7 @@ public sealed class Ruler : Gtk.DrawingArea
 	public MetricType Metric {
 		get => metric;
 		set {
+			if (metric == value) return;
 			metric = value;
 			QueueFullRedraw ();
 		}
@@ -86,12 +85,21 @@ public sealed class Ruler : Gtk.DrawingArea
 	public double Position {
 		get => position;
 		set {
+			if (position == value) return;
 			position = value;
 			QueueFullRedraw ();
 		}
 	}
 
-	public NumberRange<double> RulerRange { get; private set; }
+	private NumberRange<double> ruler_range;
+	public NumberRange<double> RulerRange {
+		get => ruler_range;
+		set {
+			if (ruler_range == value) return;
+			ruler_range = value;
+			QueueFullRedraw ();
+		}
+	}
 
 	public Ruler (Gtk.Orientation orientation)
 	{
@@ -116,15 +124,6 @@ public sealed class Ruler : Gtk.DrawingArea
 
 		WidthRequest = width;
 		HeightRequest = height;
-	}
-
-	/// <summary>
-	/// Update the ruler's range.
-	/// </summary>
-	public void SetRange (in NumberRange<double> rulerRange)
-	{
-		RulerRange = rulerRange;
-		QueueFullRedraw ();
 	}
 
 	// Invalidates cache _and_ queues redraw. Like a full refresh
@@ -158,8 +157,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		int DivideIndex,
 		double PixelsPerTick,
 		double UnitsPerTick,
-		int Start,
-		int End,
+		NumberRange<int> Ticks,
 		double MarkerPosition,
 		RectangleD RulerOuterLine,
 		Size EffectiveSize,
@@ -256,8 +254,9 @@ public sealed class Ruler : Gtk.DrawingArea
 			DivideIndex: divideIndex,
 			PixelsPerTick: pixelsPerTick,
 			UnitsPerTick: unitsPerTick,
-			Start: (int) Math.Floor (scaledRange.Lower * ticksPerUnit),
-			End: (int) Math.Ceiling (scaledRange.Upper * ticksPerUnit),
+			Ticks: new (
+				lower: (int) Math.Floor (scaledRange.Lower * ticksPerUnit),
+				upper: (int) Math.Ceiling (scaledRange.Upper * ticksPerUnit)),
 			MarkerPosition: GetPositionOnRuler (Position, effectiveSize.Width),
 			RulerOuterLine: rulerOuterLine,
 			EffectiveSize: effectiveSize,
@@ -336,7 +335,7 @@ public sealed class Ruler : Gtk.DrawingArea
 		drawingContext.Rectangle (settings.RulerOuterLine);
 		drawingContext.Fill ();
 
-		for (int i = settings.Start; i <= settings.End; ++i) {
+		for (int i = settings.Ticks.Lower; i <= settings.Ticks.Upper; ++i) {
 
 			// Position of tick (add 0.5 to center tick on pixel).
 			double tickPosition = Math.Floor (i * settings.PixelsPerTick - settings.ScaledRange.Lower * settings.Increment) + 0.5;

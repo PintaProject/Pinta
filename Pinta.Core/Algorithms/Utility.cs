@@ -14,9 +14,6 @@ namespace Pinta.Core;
 
 public static class Utility
 {
-	internal static bool IsNumber (float x)
-		=> x >= float.MinValue && x <= float.MaxValue;
-
 	public static byte ClampToByte (double x)
 		=> (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
@@ -26,20 +23,20 @@ public static class Utility
 	public static byte ClampToByte (int x)
 		=> (byte) Math.Clamp (x, byte.MinValue, byte.MaxValue);
 
-	public static int MagnitudeSquared (this in PointI p)
-		=> Mathematics.MagnitudeSquared (p.X, p.Y);
+	public static int MagnitudeSquared (this in PointI point)
+		=> Mathematics.MagnitudeSquared (point.X, point.Y);
 
-	public static double MagnitudeSquared (this in PointD p)
-		=> Mathematics.MagnitudeSquared (p.X, p.Y);
+	public static double MagnitudeSquared (this in PointD point)
+		=> Mathematics.MagnitudeSquared (point.X, point.Y);
 
-	public static double MagnitudeSquared (this in PointF p)
-		=> Mathematics.MagnitudeSquared<double> (p.X, p.Y);
+	public static double MagnitudeSquared (this in PointF point)
+		=> Mathematics.MagnitudeSquared<double> (point.X, point.Y);
 
 	public static double Magnitude (this in PointF point)
 		=> Mathematics.Magnitude<double> (point.X, point.Y);
 
-	public static float MagnitudeSquaredF (this in PointF p)
-		=> Mathematics.MagnitudeSquared (p.X, p.Y);
+	public static float MagnitudeSquaredF (this in PointF point)
+		=> Mathematics.MagnitudeSquared (point.X, point.Y);
 
 	public static float MagnitudeF (this in PointF point)
 		=> Mathematics.Magnitude (point.X, point.Y);
@@ -63,11 +60,11 @@ public static class Utility
 	public static double DistanceSquared (this in PointD origin, in PointD destination)
 		=> MagnitudeSquared (origin - destination);
 
-	public static PointD Lerp (in PointD from, in PointD to, float frac)
+	public static PointD Lerp (in PointD from, in PointD to, float fraction)
 	{
 		return new (
-			X: Mathematics.Lerp (from.X, to.X, frac),
-			Y: Mathematics.Lerp (from.Y, to.Y, frac));
+			X: Mathematics.Lerp (from.X, to.X, fraction),
+			Y: Mathematics.Lerp (from.Y, to.Y, fraction));
 	}
 
 	public static void Swap<T> (ref T a, ref T b) where T : struct
@@ -83,19 +80,19 @@ public static class Utility
 	/// Allows you to find the bounding box for a "region" that is described as an
 	/// array of bounding boxes.
 	/// </summary>
-	/// <param name="rects">The "region" you want to find a bounding box for.</param>
+	/// <param name="rectangles">The "region" you want to find a bounding box for.</param>
 	/// <param name="startIndex">Index of the first rectangle in the array to examine.</param>
 	/// <param name="length">Number of rectangles to examine, beginning at <b>startIndex</b>.</param>
 	/// <returns>A rectangle that surrounds the region.</returns>
-	public static RectangleI GetRegionBounds (ReadOnlySpan<RectangleI> rects, int startIndex, int length)
+	public static RectangleI GetRegionBounds (ReadOnlySpan<RectangleI> rectangles, int startIndex, int length)
 	{
-		if (rects.Length == 0)
+		if (rectangles.Length == 0)
 			return RectangleI.Zero;
 
-		RectangleI unionsAggregate = rects[startIndex];
+		RectangleI unionsAggregate = rectangles[startIndex];
 
 		for (int i = startIndex + 1; i < startIndex + length; ++i)
-			unionsAggregate = unionsAggregate.Union (rects[i]);
+			unionsAggregate = unionsAggregate.Union (rectangles[i]);
 
 		return unionsAggregate;
 	}
@@ -424,21 +421,19 @@ public static class Utility
 	public static RadiansAngle GetNearestStepAngle (RadiansAngle angle, int steps)
 	{
 		ArgumentOutOfRangeException.ThrowIfLessThan (steps, 1);
-
 		double fullTurn = RadiansAngle.FullTurn;
 		double stepAngle = fullTurn / steps;
 		double sector = Math.Round (angle.Radians / stepAngle) * stepAngle;
-
 		return new (sector);
 	}
 
 	/// <summary>
 	/// Checks if all of the pixels in the row match the specified color.
 	/// </summary>
-	private static bool IsConstantRow (ImageSurface surf, ColorBgra color, RectangleI rect, int y)
+	private static bool IsConstantRow (ImageSurface surface, ColorBgra color, RectangleI rectangle, int y)
 	{
-		for (int x = rect.Left; x < rect.Right; ++x)
-			if (surf.GetColorBgra (new (x, y)) != color)
+		for (int x = rectangle.Left; x < rectangle.Right; ++x)
+			if (surface.GetColorBgra (new (x, y)) != color)
 				return false;
 
 		return true;
@@ -447,10 +442,10 @@ public static class Utility
 	/// <summary>
 	/// Checks if all of the pixels in the column (within the bounds of the rectangle) match the specified color.
 	/// </summary>
-	private static bool IsConstantColumn (ImageSurface surf, ColorBgra color, RectangleI rect, int x)
+	private static bool IsConstantColumn (ImageSurface surface, ColorBgra color, RectangleI rectangle, int x)
 	{
-		for (int y = rect.Top; y < rect.Bottom; ++y)
-			if (surf.GetColorBgra (new (x, y)) != color)
+		for (int y = rectangle.Top; y < rectangle.Bottom; ++y)
+			if (surface.GetColorBgra (new (x, y)) != color)
 				return false;
 
 		return true;
@@ -459,42 +454,43 @@ public static class Utility
 	public static RectangleI GetObjectBounds (ImageSurface image, RectangleI? searchArea = null)
 	{
 		// Use the entire image bounds by default, or restrict to the provided search area.
-		RectangleI rect = searchArea ?? image.GetBounds ();
+		RectangleI result = searchArea ?? image.GetBounds ();
+
 		// Get the background color from the top-left pixel of the rectangle
-		ColorBgra borderColor = image.GetColorBgra (new PointI (rect.Left, rect.Top));
+		ColorBgra borderColor = image.GetColorBgra (new PointI (result.Left, result.Top));
 
 		// Top down.
-		for (int y = rect.Top; y < rect.Bottom; ++y) {
-			if (!IsConstantRow (image, borderColor, rect, y))
+		for (int y = result.Top; y < result.Bottom; ++y) {
+			if (!IsConstantRow (image, borderColor, result, y))
 				break;
 
-			rect = rect with { Y = rect.Y + 1, Height = rect.Height - 1 };
+			result = result with { Y = result.Y + 1, Height = result.Height - 1 };
 		}
 
 		// Bottom up.
-		for (int y = rect.Bottom - 1; y >= rect.Top; --y) {
-			if (!IsConstantRow (image, borderColor, rect, y))
+		for (int y = result.Bottom - 1; y >= result.Top; --y) {
+			if (!IsConstantRow (image, borderColor, result, y))
 				break;
 
-			rect = rect with { Height = rect.Height - 1 };
+			result = result with { Height = result.Height - 1 };
 		}
 
 		// Left side.
-		for (int x = rect.Left; x < rect.Right; ++x) {
-			if (!IsConstantColumn (image, borderColor, rect, x))
+		for (int x = result.Left; x < result.Right; ++x) {
+			if (!IsConstantColumn (image, borderColor, result, x))
 				break;
 
-			rect = rect with { X = rect.X + 1, Width = rect.Width - 1 };
+			result = result with { X = result.X + 1, Width = result.Width - 1 };
 		}
 
 		// Right side.
-		for (int x = rect.Right - 1; x >= rect.Left; --x) {
-			if (!IsConstantColumn (image, borderColor, rect, x))
+		for (int x = result.Right - 1; x >= result.Left; --x) {
+			if (!IsConstantColumn (image, borderColor, result, x))
 				break;
 
-			rect = rect with { Width = rect.Width - 1 };
+			result = result with { Width = result.Width - 1 };
 		}
 
-		return rect;
+		return result;
 	}
 }
