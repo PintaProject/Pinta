@@ -12,6 +12,13 @@ internal sealed class GradientTests
 	private static readonly ColorBgra default_end_color = ColorBgra.White;
 
 	[Test]
+	public void Factory_Rejects_Range_Endpoints_At_Same_Position ()
+	{
+		NumberRange<double> tightRange = new (0, 0);
+		Assert.Throws<ArgumentException> (() => ColorGradient.Create (default_start_color, default_end_color, tightRange));
+	}
+
+	[Test]
 	[TestCaseSource (nameof (cases_stops_at_same_position))]
 	public void Factory_Rejects_Stops_At_Same_Position (double minPosition, double maxPosition, IEnumerable<KeyValuePair<double, ColorBgra>> stops)
 	{
