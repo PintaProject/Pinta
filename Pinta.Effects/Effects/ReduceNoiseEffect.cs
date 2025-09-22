@@ -16,17 +16,26 @@ namespace Pinta.Effects;
 
 public sealed class ReduceNoiseEffect : BaseEffect
 {
-	public override string Icon => Resources.Icons.EffectsNoiseReduceNoise;
+	public override string Icon
+		=> Resources.Icons.EffectsNoiseReduceNoise;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable
+		=> true;
 
-	public override string Name => Translations.GetString ("Reduce Noise");
+	public override string Name
+		=> Translations.GetString ("Reduce Noise");
 
-	public override bool IsConfigurable => true;
+	public override bool IsConfigurable
+		=> true;
 
-	public override string EffectMenuCategory => Translations.GetString ("Noise");
+	public override string EffectMenuCategory
+		=> Translations.GetString ("Noise");
 
-	public ReduceNoiseData Data => (ReduceNoiseData) EffectData!;  // NRT - Set in constructor
+	public ReduceNoiseData Data
+		=> (ReduceNoiseData) EffectData!; // NRT - Set in constructor
+
+	public override Task<bool> LaunchConfiguration ()
+		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	private readonly IChromeService chrome;
 	private readonly IWorkspaceService workspace;
@@ -37,34 +46,6 @@ public sealed class ReduceNoiseEffect : BaseEffect
 		EffectData = new ReduceNoiseData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
-
-	// Algorithm Code Ported From PDN
-	private static ColorBgra GetPercentileOfColor (ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
-	{
-		int rc = 0;
-		int gc = 0;
-		int bc = 0;
-
-		ColorBgra straight_color = color.ToStraightAlpha ();
-
-		for (int i = 0; i < straight_color.R; ++i)
-			rc += hr[i];
-
-		for (int i = 0; i < straight_color.G; ++i)
-			gc += hg[i];
-
-		for (int i = 0; i < straight_color.B; ++i)
-			bc += hb[i];
-
-		rc = (rc * 255) / area;
-		gc = (gc * 255) / area;
-		bc = (bc * 255) / area;
-
-		return ColorBgra.FromBgra ((byte) bc, (byte) gc, (byte) rc, straight_color.A).ToPremultipliedAlpha ();
-	}
-
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
 		int radius = Data.Radius;
@@ -72,22 +53,41 @@ public sealed class ReduceNoiseEffect : BaseEffect
 
 		LocalHistogram.RenderRect (Apply, radius, source, destination, roi);
 
-		// === Methods ===
+		// --- Methods ---
 
 		ColorBgra Apply (ColorBgra color, int area, Span<int> hb, Span<int> hg, Span<int> hr, Span<int> ha)
 		{
-			ColorBgra normalized = GetPercentileOfColor (color, area, hb, hg, hr, ha);
+			ColorBgra straightColor = color.ToStraightAlpha ();
+			ColorBgra normalized =
+				ColorBgra.FromBgra (
+					GetPercentileChannel (hb, area, straightColor.B),
+					GetPercentileChannel (hg, area, straightColor.G),
+					GetPercentileChannel (hr, area, straightColor.R),
+					straightColor.A)
+				.ToPremultipliedAlpha ();
 			double lerp = strength * (1 - 0.75 * color.GetIntensity ());
 			return ColorBgra.Lerp (color, normalized, lerp);
 		}
 	}
 
+	private static byte GetPercentileChannel (Span<int> hc, int area, byte straightChannel)
+	{
+		int cc = 0;
+		for (int i = 0; i < straightChannel; i++)
+			cc += hc[i];
+		cc = cc * 255 / area;
+		return (byte) cc;
+	}
+
 	public sealed class ReduceNoiseData : EffectData
 	{
-		[Caption ("Radius"), MinimumValue (1), MaximumValue (200)]
+		[Caption ("Radius")]
+		[MinimumValue (1), MaximumValue (200)]
 		public int Radius { get; set; } = 6;
 
-		[Caption ("Strength"), MinimumValue (0), IncrementValue (0.01), DigitsValue (2), MaximumValue (1)]
+		[Caption ("Strength")]
+		[MinimumValue (0), MaximumValue (1)]
+		[IncrementValue (0.01), DigitsValue (2),]
 		public double Strength { get; set; } = 0.4;
 	}
 }
