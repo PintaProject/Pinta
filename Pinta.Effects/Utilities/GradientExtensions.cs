@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using Pinta.Core;
@@ -14,32 +13,32 @@ internal static class GradientExtensions
 		ColorBgra original,
 		IPaletteService palette)
 	{
-		if (position >= gradient.StartPosition && position <= gradient.EndPosition)
+		if (position >= gradient.Range.Lower && position <= gradient.Range.Upper)
 			return gradient.GetColor (position);
 
 		switch (edgeBehavior) {
 			case EdgeBehavior.Clamp:
-				if (position > gradient.EndPosition)
+				if (position > gradient.Range.Upper)
 					return gradient.EndColor;
-				else if (position < gradient.StartPosition)
+				else if (position < gradient.Range.Lower)
 					return gradient.StartColor;
 				break;
 			case EdgeBehavior.Wrap: {
-					double range = gradient.EndPosition - gradient.StartPosition;
-					double positionOffset = position - gradient.StartPosition;
+					double range = gradient.Range.Upper - gradient.Range.Lower;
+					double positionOffset = position - gradient.Range.Lower;
 					double wrappedOffsetBase = positionOffset % range;
 					double wrappedOffset =
 						wrappedOffsetBase < 0
 						? wrappedOffsetBase + range // Modulo could result in a negative number, so correct it
 						: wrappedOffsetBase;
-					double adjustedPosition = wrappedOffset + gradient.StartPosition;
+					double adjustedPosition = wrappedOffset + gradient.Range.Lower;
 					return gradient.GetColor (adjustedPosition);
 				}
 
 			case EdgeBehavior.Reflect: {
-					double range = gradient.EndPosition - gradient.StartPosition;
+					double range = gradient.Range.Upper - gradient.Range.Lower;
 					double doubleRange = 2 * range;
-					double positionOffset = position - gradient.StartPosition;
+					double positionOffset = position - gradient.Range.Lower;
 					double reflectedOffsetBase = positionOffset % doubleRange;
 					double reflectedOffset =
 						reflectedOffsetBase < 0
@@ -47,8 +46,8 @@ internal static class GradientExtensions
 						: reflectedOffsetBase;
 					double adjustedPosition =
 						(reflectedOffset < range)
-						? gradient.StartPosition + reflectedOffset
-						: gradient.EndPosition - (reflectedOffset - range);
+						? gradient.Range.Lower + reflectedOffset
+						: gradient.Range.Upper - (reflectedOffset - range);
 					return gradient.GetColor (adjustedPosition);
 				}
 			case EdgeBehavior.Primary:

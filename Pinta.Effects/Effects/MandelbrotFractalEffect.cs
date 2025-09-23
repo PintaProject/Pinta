@@ -90,7 +90,7 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 				data.ColorSchemeSource,
 				data.ColorScheme,
 				data.ColorSchemeSeed)
-			.Resized (0, 1023);
+			.Resized (NumberRange.Create<double> (0, 1023));
 
 		return new (
 
@@ -140,8 +140,8 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 
 			double c = Math.Clamp (
 				64 + settings.Factor * m,
-				settings.Gradient.StartPosition,
-				settings.Gradient.EndPosition);
+				settings.Gradient.Range.Lower,
+				settings.Gradient.Range.Upper);
 
 			aggregate += settings.Gradient.GetColor (c);
 		}

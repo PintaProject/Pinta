@@ -67,7 +67,7 @@ public sealed class CloudsEffect : BaseEffect
 				data.ColorSchemeSource,
 				data.ColorScheme,
 				data.ColorSchemeSeed)
-			.Resized (0, 1);
+			.Resized (NumberRange.Create<double> (0, 1));
 
 		return new (
 			Scale: data.Scale,
