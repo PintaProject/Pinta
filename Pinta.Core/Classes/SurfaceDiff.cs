@@ -24,8 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-//#define DEBUG_DIFF
-
 using System;
 using System.Collections;
 using System.Threading.Tasks;
@@ -64,21 +62,12 @@ public sealed class SurfaceDiff
 			return null;
 		}
 
-#if DEBUG_DIFF
-		Console.WriteLine ("Original surface size: {0}x{1}", orig_width, orig_height);
-		System.Diagnostics.Stopwatch timer = new System.Diagnostics.Stopwatch ();
-		timer.Start ();
-#endif
-
 		// STEP 1 - Find the bounds of the changed pixels.
 		RectangleI? differenceBounds = CalculateDifferenceBounds (original, updated, originalSize);
 
 		// No changes were detected, so the variable was never set
 		if (!differenceBounds.HasValue)
 			return null;
-#if DEBUG_DIFF
-		Console.WriteLine ("Truncated surface size: {0}x{1}", bounds.Width, bounds.Height);
-#endif
 
 		RectangleI finalBounds = differenceBounds.Value;
 
@@ -86,18 +75,9 @@ public sealed class SurfaceDiff
 		// how many changed pixels we need to store.
 
 		(int changeCount, BitArray bitmask) = CalculateChanges (original, updated, finalBounds, originalSize);
-
 		float savings = 100 - changeCount / (float) (originalSize.Width * originalSize.Height) * 100;
-#if DEBUG_DIFF
-		Console.WriteLine ("Compressed bitmask: {0}/{1} = {2}%", num_changed, orig_height * orig_width, 100 - savings);
-#endif
-
-		if (!force && savings < MINIMUM_SAVINGS_PERCENT) {
-#if DEBUG_DIFF
-			Console.WriteLine ("Savings too small, returning null");
-#endif
+		if (!force && savings < MINIMUM_SAVINGS_PERCENT)
 			return null;
-		}
 
 		// Store the old pixels.
 		ColorBgra[] pixels = new ColorBgra[changeCount];
@@ -114,11 +94,6 @@ public sealed class SurfaceDiff
 				pixels[pixelsIndex++] = originalData[y * originalSize.Width + x];
 			}
 		}
-
-#if DEBUG_DIFF
-		timer.Stop ();
-		System.Console.WriteLine ("SurfaceDiff time: " + timer.ElapsedMilliseconds);
-#endif
 
 		return new (bitmask, finalBounds, pixels);
 	}

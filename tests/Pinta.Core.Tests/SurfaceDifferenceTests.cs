@@ -1,6 +1,5 @@
 using System;
 using Cairo;
-using NGettext.Loaders;
 using NUnit.Framework;
 
 namespace Pinta.Core.Tests;
@@ -51,6 +50,32 @@ internal sealed class SurfaceDifferenceTests
 		using ImageSurface imageA = Utilities.LoadImage (pathA);
 		using ImageSurface imageB = Utilities.LoadImage (pathB);
 		SurfaceDiff? difference = SurfaceDiff.Create (imageA, imageB);
+		Assert.That (difference, Is.Not.Null);
+	}
+
+	[Test]
+	public void Returning_Null_If_Savings_Too_Small ()
+	{
+		ImageSurface empty = new (Format.Argb32, 16, 16);
+		ImageSurface withChanges = new (Format.Argb32, 16, 16);
+		using Context context = new (withChanges);
+		context.SetSourceColor (Color.Blue);
+		context.Rectangle (0, 0, 16, 15); // Savings are 16, which is ~6.3% of 256
+		context.Fill ();
+		SurfaceDiff? difference = SurfaceDiff.Create (empty, withChanges, force: false);
+		Assert.That (difference, Is.Null);
+	}
+
+	[Test]
+	public void Returning_Non_Null_If_Savings_Big_Enough ()
+	{
+		ImageSurface empty = new (Format.Argb32, 16, 16);
+		ImageSurface withChanges = new (Format.Argb32, 16, 16);
+		using Context context = new (withChanges);
+		context.SetSourceColor (Color.Blue);
+		context.Rectangle (0, 0, 2, 2); // Savings are 252, which is ~98.4% of 256
+		context.Fill ();
+		SurfaceDiff? difference = SurfaceDiff.Create (empty, withChanges, force: false);
 		Assert.That (difference, Is.Not.Null);
 	}
 }
