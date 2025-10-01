@@ -17,7 +17,7 @@ public sealed class CanvasRenderer
 	private static readonly Cairo.Pattern tranparent_pattern;
 
 	private readonly LivePreviewManager live_preview;
-	private readonly WorkspaceManager workspace;
+	private readonly IWorkspaceService workspace;
 	private readonly bool enable_live_preview;
 	private readonly bool enable_background_pattern;
 
@@ -28,7 +28,7 @@ public sealed class CanvasRenderer
 
 	public CanvasRenderer (
 		LivePreviewManager livePreview,
-		WorkspaceManager workspace,
+		IWorkspaceService workspace,
 		bool enableLivePreview,
 		bool enableBackgroundPattern = true)
 	{
