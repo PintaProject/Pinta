@@ -72,7 +72,11 @@ public sealed partial class LayersListViewItem
 			document.Layers.SelectionLayer,
 		};
 
-		canvas_renderer ??= new CanvasRenderer (enableLivePreview: false, enableBackgroundPattern: true);
+		canvas_renderer ??= new CanvasRenderer (
+			PintaCore.LivePreview,
+			PintaCore.Workspace,
+			enableLivePreview: false,
+			enableBackgroundPattern: true);
 		canvas_renderer.Initialize (document.ImageSize, new Size (widthRequest, heightRequest));
 		canvas_renderer.Render (layers, surface, PointI.Zero);
 
