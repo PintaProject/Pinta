@@ -66,11 +66,11 @@ public sealed partial class LayersListViewItem
 		// selection layer over it, like when dragging a selection.
 		ImageSurface surface = CairoExtensions.CreateImageSurface (Format.Argb32, widthRequest, heightRequest);
 
-		var layers = new Layer[]
-		{
+		Layer[] layers =
+		[
 			UserLayer,
 			document.Layers.SelectionLayer,
-		};
+		];
 
 		canvas_renderer ??= new CanvasRenderer (
 			PintaCore.LivePreview,
