@@ -43,8 +43,11 @@ public class CanvasRendererBenchmarks
 	[Benchmark]
 	public void RenderOneToOne ()
 	{
-		CanvasRenderer renderer = new (false);
-
+		IServiceProvider services = Utilities.CreateMockServices ();
+		CanvasRenderer renderer = new (
+			services.GetService<ILivePreview> (),
+			services.GetService<IWorkspaceService> (),
+			false);
 		renderer.Initialize (src_size, src_size);
 		renderer.Render (layers, dest_surface, PointI.Zero);
 	}
@@ -52,8 +55,11 @@ public class CanvasRendererBenchmarks
 	[Benchmark]
 	public void RenderManyOneToOne ()
 	{
-		CanvasRenderer renderer = new (false);
-
+		IServiceProvider services = Utilities.CreateMockServices ();
+		CanvasRenderer renderer = new (
+			services.GetService<ILivePreview> (),
+			services.GetService<IWorkspaceService> (),
+			false);
 		renderer.Initialize (src_size, src_size);
 		renderer.Render (ten_layers, dest_surface, PointI.Zero);
 	}
@@ -61,8 +67,11 @@ public class CanvasRendererBenchmarks
 	[Benchmark]
 	public void RenderZoomIn ()
 	{
-		CanvasRenderer renderer = new (false);
-
+		IServiceProvider services = Utilities.CreateMockServices ();
+		CanvasRenderer renderer = new (
+			services.GetService<ILivePreview> (),
+			services.GetService<IWorkspaceService> (),
+			false);
 		renderer.Initialize (src_size, dest_size_zoom_in);
 		renderer.Render (layers, dest_surface_zoom_in, PointI.Zero);
 	}
@@ -70,8 +79,11 @@ public class CanvasRendererBenchmarks
 	[Benchmark]
 	public void RenderManyZoomIn ()
 	{
-		CanvasRenderer renderer = new (false);
-
+		IServiceProvider services = Utilities.CreateMockServices ();
+		CanvasRenderer renderer = new (
+			services.GetService<ILivePreview> (),
+			services.GetService<IWorkspaceService> (),
+			false);
 		renderer.Initialize (src_size, dest_size_zoom_in);
 		renderer.Render (ten_layers, dest_surface_zoom_in, PointI.Zero);
 	}
@@ -79,8 +91,11 @@ public class CanvasRendererBenchmarks
 	[Benchmark]
 	public void RenderZoomOut ()
 	{
-		CanvasRenderer renderer = new (false);
-
+		IServiceProvider services = Utilities.CreateMockServices ();
+		CanvasRenderer renderer = new (
+			services.GetService<ILivePreview> (),
+			services.GetService<IWorkspaceService> (),
+			false);
 		renderer.Initialize (src_size, dest_size_zoom_out);
 		renderer.Render (layers, dest_surface_zoom_out, PointI.Zero);
 	}
@@ -88,8 +103,11 @@ public class CanvasRendererBenchmarks
 	[Benchmark]
 	public void RenderManyZoomOut ()
 	{
-		CanvasRenderer renderer = new (false);
-
+		IServiceProvider services = Utilities.CreateMockServices ();
+		CanvasRenderer renderer = new (
+			services.GetService<ILivePreview> (),
+			services.GetService<IWorkspaceService> (),
+			false);
 		renderer.Initialize (src_size, dest_size_zoom_out);
 		renderer.Render (ten_layers, dest_surface_zoom_out, PointI.Zero);
 	}
