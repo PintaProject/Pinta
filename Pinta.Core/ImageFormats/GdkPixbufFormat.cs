@@ -33,10 +33,12 @@ namespace Pinta.Core;
 public class GdkPixbufFormat : IImageImporter, IImageExporter
 {
 	private readonly string filetype;
+	private readonly bool supports_alpha;
 
-	public GdkPixbufFormat (string filetype)
+	public GdkPixbufFormat (string filetype, bool supportsAlpha = true)
 	{
 		this.filetype = filetype;
+		this.supports_alpha = supportsAlpha;
 	}
 
 	public Document Import (Gio.File file)
@@ -97,7 +99,10 @@ public class GdkPixbufFormat : IImageImporter, IImageExporter
 		Gtk.Window parent)
 	{
 		using ImageSurface flattenedImage = document.GetFlattenedImage ();
-		using Pixbuf pb = flattenedImage.ToPixbuf ();
+		// Note that some pixbuf formats will throw an error when saving an RGBA pixbuf
+		// if the image format doesn't actually store alpha
+		// (e.g. glycin does this for JPEG - bug #1774)
+		using Pixbuf pb = flattenedImage.ToPixbuf (includeAlpha: supports_alpha);
 		DoSave (pb, file, filetype, parent);
 	}
 }

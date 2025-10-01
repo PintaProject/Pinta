@@ -331,11 +331,21 @@ partial class CairoExtensions
 		=> MemoryMarshal.Cast<byte, ColorBgra> (surface.GetData ());
 
 
-	public static GdkPixbuf.Pixbuf ToPixbuf (this ImageSurface surfSource)
-		=> Gdk.Functions.PixbufGetFromSurface (
-			surfSource,
-			0,
-			0,
-			surfSource.Width,
-			surfSource.Height)!;
+	public static GdkPixbuf.Pixbuf ToPixbuf (this ImageSurface sourceSurface, bool includeAlpha = true)
+	{
+		int width = sourceSurface.Width;
+		int height = sourceSurface.Height;
+
+		if (includeAlpha) {
+			return Gdk.Functions.PixbufGetFromSurface (sourceSurface, 0, 0, width, height)!;
+		}
+
+		// If we need a pixbuf without alpha, it's easiest to convert from a temporary RGB cairo surface.
+		using Cairo.ImageSurface rgbSurface = new (Format.Rgb24, width, height);
+		using Cairo.Context context = new (rgbSurface);
+		context.SetSourceSurface (sourceSurface, 0.0, 0.0);
+		context.Paint ();
+
+		return Gdk.Functions.PixbufGetFromSurface (rgbSurface, 0, 0, width, height)!;
+	}
 }
