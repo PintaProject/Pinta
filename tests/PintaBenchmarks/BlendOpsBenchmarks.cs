@@ -1,7 +1,6 @@
 using BenchmarkDotNet.Attributes;
 using Cairo;
 using Pinta.Core;
-using Pinta.Effects;
 
 namespace PintaBenchmarks;
 
