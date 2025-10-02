@@ -28,9 +28,9 @@
 #undef DEBUG
 #endif
 
-using Cairo;
 using System;
 using System.ComponentModel;
+using Cairo;
 using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
