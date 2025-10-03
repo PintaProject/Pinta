@@ -383,8 +383,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 				ColorGradient.Create (
 					startColor: CurrentColor.CopyHsv (hue: 0),
 					endColor: CurrentColor.CopyHsv (hue: 360),
-					startPosition: 0,
-					endPosition: 360,
+					range: NumberRange.Create<double> (0, 360),
 					new Dictionary<double, Color> {
 						[60] = CurrentColor.CopyHsv (hue: 60),
 						[120] = CurrentColor.CopyHsv (hue: 120),

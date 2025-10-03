@@ -21,15 +21,8 @@ public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TCol
 	/// </summary>
 	public TColor EndColor { get; }
 
-	/// <summary>
-	/// Represents initial position in the gradient
-	/// </summary>
-	public double StartPosition { get; }
-
-	/// <summary>
-	/// Represents end position in the gradient
-	/// </summary>
-	public double EndPosition { get; }
+	/// <summary>Numerical endpoints of gradient</summary>
+	public NumberRange<double> Range { get; }
 
 	public int StopsCount { get; }
 
@@ -42,32 +35,30 @@ public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TCol
 	internal ColorGradient (
 		TColor startColor,
 		TColor endColor,
-		double startPosition,
-		double endPosition,
+		NumberRange<double> range,
 		IEnumerable<KeyValuePair<double, TColor>> gradientStops)
 	{
-		CheckBoundsConsistency (startPosition, endPosition);
+		if (range.Lower == range.Upper) throw new ArgumentException ($"Start position has to be lower than end position");
 
 		var sortedStops = gradientStops.OrderBy (stop => stop.Key).ToArray ();
 		var sortedPositions = sortedStops.Select (stop => stop.Key).ToImmutableArray ();
 		var sortedColors = sortedStops.Select (stop => stop.Value).ToImmutableArray ();
-		CheckStopsBounds (sortedPositions, startPosition, endPosition);
+		CheckStopsBounds (sortedPositions, range);
 		CheckUniqueness (sortedPositions);
 
 		StartColor = startColor;
 		EndColor = endColor;
-		StartPosition = startPosition;
-		EndPosition = endPosition;
+		Range = range;
 		StopsCount = sortedStops.Length;
 		Positions = sortedPositions;
 		Colors = sortedColors;
 	}
 
-	private static void CheckStopsBounds (ImmutableArray<double> sortedPositions, double startPosition, double endPosition)
+	private static void CheckStopsBounds (ImmutableArray<double> sortedPositions, NumberRange<double> range)
 	{
 		if (sortedPositions.Length == 0) return;
-		if (sortedPositions[0] <= startPosition) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (startPosition)}");
-		if (sortedPositions[^1] >= endPosition) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (endPosition)}");
+		if (sortedPositions[0] <= range.Lower) throw new ArgumentException ($"Lowest key in gradient stops has to be greater than {nameof (range.Lower)}");
+		if (sortedPositions[^1] >= range.Upper) throw new ArgumentException ($"Greatest key in gradient stops has to be lower than {nameof (range.Upper)}");
 	}
 
 	private static void CheckUniqueness (ImmutableArray<double> sortedPositions)
@@ -76,40 +67,32 @@ public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TCol
 		if (distinctPositions != sortedPositions.Length) throw new ArgumentException ("Cannot have more than one stop in the same position");
 	}
 
-	private static void CheckBoundsConsistency (double startPosition, double endPosition)
-	{
-		if (startPosition >= endPosition) throw new ArgumentException ($"{nameof (startPosition)} has to be lower than {nameof (endPosition)}");
-	}
-
 	/// <summary>
 	/// Creates new gradient object with the lower and upper bounds
 	/// (along with all of its stops) adjusted, proportionally,
 	/// to the provided lower and upper bounds.
 	/// </summary>
-	public ColorGradient<TColor> Resized (double startPosition, double endPosition)
+	public ColorGradient<TColor> Resized (NumberRange<double> newRange)
 	{
-		if (StartPosition == startPosition && EndPosition == endPosition) return this;
+		if (Range.Lower == newRange.Lower && Range.Upper == newRange.Upper) return this;
 
-		CheckBoundsConsistency (startPosition, endPosition);
-
-		double newSpan = endPosition - startPosition;
-		double currentSpan = EndPosition - StartPosition;
+		double newSpan = newRange.Upper - newRange.Lower;
+		double currentSpan = Range.Upper - Range.Lower;
 		double newProportion = newSpan / currentSpan;
-		double newMinRelativeOffset = startPosition - StartPosition;
+		double newMinRelativeOffset = newRange.Lower - Range.Lower;
 
 		KeyValuePair<double, TColor> ToNewStop (KeyValuePair<double, TColor> stop)
 		{
-			double stopToMinOffset = stop.Key - StartPosition;
+			double stopToMinOffset = stop.Key - Range.Lower;
 			double adjustedOffset = stopToMinOffset * newProportion;
-			double newPosition = startPosition + adjustedOffset;
+			double newPosition = newRange.Lower + adjustedOffset;
 			return KeyValuePair.Create (newPosition, stop.Value);
 		}
 
 		return new (
 			StartColor,
 			EndColor,
-			startPosition,
-			endPosition,
+			newRange,
 			Positions.Zip (Colors, KeyValuePair.Create).Select (ToNewStop));
 	}
 
@@ -123,7 +106,7 @@ public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TCol
 	{
 		var reversedPositions =
 			Positions
-			.Select (p => EndPosition - p + StartPosition);
+			.Select (p => Range.Upper - p + Range.Lower);
 
 		var reversedStops =
 			reversedPositions
@@ -132,8 +115,7 @@ public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TCol
 		return new ColorGradient<TColor> (
 			startColor: EndColor,
 			endColor: StartColor,
-			startPosition: StartPosition,
-			endPosition: EndPosition,
+			range: Range,
 			gradientStops: reversedStops);
 	}
 
@@ -147,15 +129,15 @@ public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TCol
 	/// </returns>
 	public TColor GetColor (double position)
 	{
-		if (position <= StartPosition) return StartColor;
-		if (position >= EndPosition) return EndColor;
+		if (position <= Range.Lower) return StartColor;
+		if (position >= Range.Upper) return EndColor;
 		if (Positions.Length == 0) return HandleNoStops (position);
 		return HandleWithStops (position);
 	}
 
 	private TColor HandleNoStops (double position)
 	{
-		double fraction = Mathematics.InvLerp (StartPosition, EndPosition, position);
+		double fraction = Mathematics.InvLerp (Range.Lower, Range.Upper, position);
 		return TColor.Lerp (StartColor, EndColor, fraction);
 	}
 
@@ -168,14 +150,14 @@ public sealed class ColorGradient<TColor> where TColor : IInterpolableColor<TCol
 			return TColor.Lerp (
 				Colors[^1],
 				EndColor,
-				Mathematics.InvLerp (Positions[^1], EndPosition, position));
+				Mathematics.InvLerp (Positions[^1], Range.Upper, position));
 		var immediatelyHigher = KeyValuePair.Create (Positions[matchComplement], Colors[matchComplement]);
 		int immediatelyLowerIndex = matchComplement - 1;
 		if (immediatelyLowerIndex < 0) // No stops before
 			return TColor.Lerp (
 				StartColor,
 				immediatelyHigher.Value,
-				Mathematics.InvLerp (StartPosition, immediatelyHigher.Key, position));
+				Mathematics.InvLerp (Range.Lower, immediatelyHigher.Key, position));
 		var immediatelyLower = KeyValuePair.Create (Positions[immediatelyLowerIndex], Colors[immediatelyLowerIndex]);
 		return TColor.Lerp ( // Stops exist both before and after
 			immediatelyLower.Value,
@@ -201,8 +183,7 @@ public static class ColorGradient
 	=> new (
 		startColor,
 		endColor,
-		0,
-		1,
+		NumberRange.Create<double> (0, 1),
 		EmptyStops<TColor> ()
 	);
 
@@ -213,15 +194,13 @@ public static class ColorGradient
 	public static ColorGradient<TColor> Create<TColor> (
 		TColor startColor,
 		TColor endColor,
-		double startPosition,
-		double endPosition
+		NumberRange<double> range
 	)
 		where TColor : IInterpolableColor<TColor>
 	=> new (
 		startColor,
 		endColor,
-		startPosition,
-		endPosition,
+		range,
 		EmptyStops<TColor> ()
 	);
 
@@ -232,16 +211,14 @@ public static class ColorGradient
 	public static ColorGradient<TColor> Create<TColor> (
 		TColor startColor,
 		TColor endColor,
-		double startPosition,
-		double endPosition,
+		NumberRange<double> range,
 		IEnumerable<KeyValuePair<double, TColor>> stops
 	)
 		where TColor : IInterpolableColor<TColor>
 	=> new (
 		startColor,
 		endColor,
-		startPosition,
-		endPosition,
+		range,
 		stops
 	);
 }
