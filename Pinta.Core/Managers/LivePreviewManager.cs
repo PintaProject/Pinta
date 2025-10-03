@@ -199,8 +199,6 @@ public sealed class LivePreviewManager : ILivePreview
 			dialog.Hide ();
 
 			renderAlive = false;
-
-			renderHandle?.Dispose ();
 		}
 
 		// === Methods ===
@@ -216,7 +214,6 @@ public sealed class LivePreviewManager : ILivePreview
 			handlersInQueue++;
 			renderHandle.Cancel ();
 			await renderHandle.Task;
-			renderHandle.Dispose ();
 			handlersInQueue--;
 			if (handlersInQueue > 0) return;
 			renderHandle = AsyncEffectRenderer.Start (settings, effect, layer.Surface, LivePreviewSurface);
