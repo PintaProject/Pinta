@@ -87,7 +87,7 @@ public sealed class JuliaFractalEffect : BaseEffect
 				data.ColorSchemeSource,
 				data.ColorScheme,
 				data.ColorSchemeSeed)
-			.Resized (0, 1023);
+			.Resized (NumberRange.Create<double> (0, 1023));
 
 		return new (
 			canvasSize: canvasSize,
@@ -129,8 +129,8 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 			double c = Math.Clamp (
 				settings.factor * j,
-				settings.colorGradient.StartPosition,
-				settings.colorGradient.EndPosition);
+				settings.colorGradient.Range.Lower,
+				settings.colorGradient.Range.Upper);
 
 			aggregate += settings.colorGradient.GetColor (c);
 		}

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-15 00:21+0000\n"
-"PO-Revision-Date: 2024-12-31 03:00+0000\n"
+"PO-Revision-Date: 2025-09-28 08:02+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
 "Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -313,7 +313,7 @@ msgstr "Mreža platna..."
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
-msgstr ""
+msgstr "Polmer celice"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
@@ -321,7 +321,7 @@ msgstr "Velikost celice"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:19
 msgid "Cells"
-msgstr ""
+msgstr "Celice"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -382,7 +382,7 @@ msgstr "Krogi"
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
 msgid "Circular"
-msgstr ""
+msgstr "Prevajalci: Ureditev točk vzdolž krožne poti"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -517,7 +517,7 @@ msgstr "Barvna shema"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:192
 msgid "Color Scheme Edge Behavior"
-msgstr ""
+msgstr "Obnašanje barvne sheme roba"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:180
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:145
@@ -592,7 +592,7 @@ msgstr "Izreži izbor"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Current Palette"
-msgstr ""
+msgstr "Trenutna paleta"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:247
 msgid "Curved"
@@ -882,7 +882,7 @@ msgstr "Vodoravno zrcali sliko"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:55
 msgid "Flip Image Vertical"
-msgstr "Vodoravno zrcali sliko"
+msgstr "Navpično zrcali sliko"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:76
 msgid "Flip Layer Horizontal"
@@ -925,7 +925,7 @@ msgstr "Kosi"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
 msgid "Freeform"
-msgstr ""
+msgstr "Prostoročno"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -1081,6 +1081,12 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
+"V Prostoročnem načinu, kliknite in potegnite, da izrišete okvir izbranega "
+"področja.\n"
+"\n"
+"V Poligon načinu, kliknite in potegnite, da dodate novo točko k izbiri..\n"
+"Pritisnite Enter, da zaključite izbiro.\n"
+"Pritisnite Backspace, da zbrišete zadnjo točko."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
@@ -1168,7 +1174,7 @@ msgstr "Ležeče"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
 msgid "Lasso Mode"
-msgstr ""
+msgstr "Način laso"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
@@ -1448,7 +1454,7 @@ msgstr "Srednja vrednost"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
-msgstr ""
+msgstr "Menijska vrstica"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:363
@@ -1685,7 +1691,7 @@ msgstr "Paleta"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette Source"
-msgstr ""
+msgstr "Izvor palete"
 
 #: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
@@ -1738,7 +1744,7 @@ msgstr "Fotografija"
 #. Translators: Arrangement of points similar to how sunflower seeds are arranged
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:174
 msgid "Phyllotaxis"
-msgstr ""
+msgstr "Filotaksija"
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
@@ -1803,7 +1809,7 @@ msgstr "Rjavkasto rumena"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
 msgid "Please restart Pinta for the changes to take effect."
-msgstr ""
+msgstr "Prosim ponovno zaženite Pinto za uveljavitev sprememb."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:607
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
@@ -1813,12 +1819,12 @@ msgstr "Točka dodana"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:156
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Point Arrangement"
-msgstr ""
+msgstr "Razvrstitev točk"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:169
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Point Color"
-msgstr ""
+msgstr "Barva točke"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
 msgid "Point Deleted"
@@ -1827,7 +1833,7 @@ msgstr "Točka izbrisana"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:165
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Point Size"
-msgstr ""
+msgstr "Velikost točke"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
@@ -1835,7 +1841,7 @@ msgstr "Popolna obrnitev"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
 msgid "Polygon"
-msgstr ""
+msgstr "Poligon"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
@@ -1865,7 +1871,7 @@ msgstr "Prednastavi preliv"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Preset Palettes"
-msgstr ""
+msgstr "Ponastavite palete"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
@@ -1953,7 +1959,7 @@ msgstr "Naključne barve"
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
-msgstr ""
+msgstr "Naključno seme hrupa"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:159
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
@@ -1962,7 +1968,7 @@ msgstr "Naključne lokacije točk"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:165
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Nedavno uporabljene barve"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:55
 msgid "Recolor"
@@ -2004,7 +2010,7 @@ msgstr "Odbij"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:139
 msgid "Refraction"
-msgstr ""
+msgstr "Refrakcija"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
@@ -2087,7 +2093,7 @@ msgstr "Prilagodi paleto"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
 msgid "Restart Pinta"
-msgstr ""
+msgstr "Ponovno zaženite Pinto"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:154
@@ -2136,7 +2142,7 @@ msgstr "Vrtenje"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:143
 msgid "Roughness"
-msgstr ""
+msgstr "Hrapavost"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Rounded Line Series"
@@ -2258,11 +2264,11 @@ msgstr "Tipka bližnjice"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
-msgstr ""
+msgstr "Tipke bližnjic"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
 msgid "Show Axonometric Grid"
-msgstr ""
+msgstr "Pokaži aksonometrično mrežo"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
 msgid "Show Grid"
@@ -2619,12 +2625,12 @@ msgstr "Navpično rdeča (R)"
 
 #: ../Pinta/MainWindow.cs:469
 msgid "View"
-msgstr ""
+msgstr "Pogled"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:49
 msgid "Vignette"
-msgstr "Vignette"
+msgstr "Vinjeta"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
