@@ -30,6 +30,7 @@
 
 using System;
 using System.ComponentModel;
+using Cairo;
 using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
@@ -37,6 +38,8 @@ namespace Pinta.Core;
 public interface ILivePreview
 {
 	RectangleI RenderBounds { get; }
+	bool IsEnabled { get; }
+	ImageSurface LivePreviewSurface { get; }
 }
 
 public sealed class LivePreviewManager : ILivePreview

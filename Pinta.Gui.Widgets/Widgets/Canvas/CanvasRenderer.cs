@@ -7,9 +7,7 @@
 // Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
 /////////////////////////////////////////////////////////////////////////////////
 
-using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
@@ -18,6 +16,8 @@ public sealed class CanvasRenderer
 {
 	private static readonly Cairo.Pattern tranparent_pattern;
 
+	private readonly ILivePreview live_preview;
+	private readonly IWorkspaceService workspace;
 	private readonly bool enable_live_preview;
 	private readonly bool enable_background_pattern;
 
@@ -26,8 +26,14 @@ public sealed class CanvasRenderer
 	private Fraction<int> scale_factor;
 	private double scale_ratio;
 
-	public CanvasRenderer (bool enableLivePreview, bool enableBackgroundPattern = true)
+	public CanvasRenderer (
+		ILivePreview livePreview,
+		IWorkspaceService workspace,
+		bool enableLivePreview,
+		bool enableBackgroundPattern = true)
 	{
+		live_preview = livePreview;
+		this.workspace = workspace;
 		enable_live_preview = enableLivePreview;
 		enable_background_pattern = enableBackgroundPattern;
 	}
@@ -71,21 +77,18 @@ public sealed class CanvasRenderer
 			g.Clip ();
 		}
 
-		// Create the transparent checkerboard background
-		// Otherwise, we need to clear the existing surface first before painting
-		// layers that could be transparent.
-		if (enable_background_pattern)
+		if (enable_background_pattern) // Checkerboard background
 			g.FillRectangle (r, tranparent_pattern, new PointD (offset.X, offset.Y));
-		else
+		else // Clear before painting translucent layers
 			g.Clear (r);
 
 		for (int i = 0; i < layers.Count; i++) {
 
 			Layer layer = layers[i];
 
-			Cairo.ImageSurface surf =
-				(enable_live_preview && layer == PintaCore.Workspace.ActiveDocument.Layers.CurrentUserLayer && PintaCore.LivePreview.IsEnabled)
-				? PintaCore.LivePreview.LivePreviewSurface // If we're in LivePreview, choose preview layer
+			Cairo.ImageSurface surface =
+				(enable_live_preview && layer == workspace.ActiveDocument.Layers.CurrentUserLayer && live_preview.IsEnabled)
+				? live_preview.LivePreviewSurface // If we're in LivePreview, choose preview layer
 				: layer.Surface;
 
 			g.Save ();
@@ -101,7 +104,7 @@ public sealed class CanvasRenderer
 			// Use nearest-neighbor interpolation when zoomed in so that there isn't any smoothing.
 			ResamplingMode filter = (scale_ratio <= 1) ? ResamplingMode.NearestNeighbor : ResamplingMode.Bilinear;
 
-			g.SetSourceSurface (surf, filter);
+			g.SetSourceSurface (surface, filter);
 
 			g.SetBlendMode (layer.BlendMode);
 			g.PaintWithAlpha (layer.Opacity);

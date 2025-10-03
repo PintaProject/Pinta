@@ -59,7 +59,11 @@ public sealed class PintaCanvas : Gtk.Picture
 		canvas_grid = canvasGrid;
 		this.document = document;
 
-		cr = new (enableLivePreview: true, enableBackgroundPattern: false);
+		cr = new (
+			PintaCore.LivePreview,
+			PintaCore.Workspace,
+			enableLivePreview: true,
+			enableBackgroundPattern: false);
 
 		document.Workspace.ViewSizeChanged += OnViewSizeChanged;
 		document.Workspace.CanvasInvalidated += OnCanvasInvalidated;
