@@ -47,14 +47,14 @@ public sealed class GradientTool : BaseTool
 	public MouseButton color_button;
 	MouseButton drag_button;
 
-	public GradientHandle handle;
+	public LineHandle handle;
 
 	public GradientTool (IServiceProvider services) : base (services)
 	{
 		palette = services.GetService<IPaletteService> ();
 		IWorkspaceService workspace = services.GetService<IWorkspaceService> ();
 
-		handle = new GradientHandle (workspace);
+		handle = new LineHandle (workspace);
 	}
 
 	public override string Name => Translations.GetString ("Gradient");
@@ -96,7 +96,7 @@ public sealed class GradientTool : BaseTool
 			return;
 		}
 
-		RectangleI handleDirtyRegion = handle.StartNewGradient (e.PointDouble);
+		RectangleI handleDirtyRegion = handle.StartNewLine (e.PointDouble);
 		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
 		is_newly_created = true;
 		color_button = e.MouseButton;

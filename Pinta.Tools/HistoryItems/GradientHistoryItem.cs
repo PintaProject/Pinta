@@ -62,7 +62,7 @@ public class GradientHistoryItem : BaseHistoryItem
 
 	private static void SwapData (ref GradientData new_data, GradientTool tool)
 	{
-		GradientHandle handle = tool.handle;
+		LineHandle handle = tool.handle;
 
 		GradientData old_data = new GradientData (
 			handle.StartPosition,

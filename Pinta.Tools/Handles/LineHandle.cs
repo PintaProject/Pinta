@@ -5,7 +5,7 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public class GradientHandle : IToolHandle
+public class LineHandle : IToolHandle
 {
 	private readonly IWorkspaceService workspace;
 	private readonly ImmutableArray<MoveHandle> handles;
@@ -24,23 +24,10 @@ public class GradientHandle : IToolHandle
 	public PointD StartPosition => start_position;
 	public PointD EndPosition => end_position;
 
-	public GradientHandle (IWorkspaceService workspace)
+	public LineHandle (IWorkspaceService workspace)
 	{
 		this.workspace = workspace;
 		handles = [new MoveHandle (workspace), new MoveHandle (workspace)];
-	}
-
-	public GradientHandle PartialClone ()
-	{
-		//Copies the necessary states for undo
-		GradientHandle clone = new (workspace);
-		clone.start_position = this.start_position;
-		clone.end_position = this.end_position;
-		clone.Active = this.Active;
-
-		clone.UpdateHandles ();
-
-		return clone;
 	}
 
 	public void Draw (Snapshot snapshot)
@@ -75,7 +62,7 @@ public class GradientHandle : IToolHandle
 		return hover_handle is not null;
 	}
 
-	public RectangleI StartNewGradient (PointD canvasPos)
+	public RectangleI StartNewLine (PointD canvasPos)
 	{
 		start_position = canvasPos;
 		end_position = canvasPos;
