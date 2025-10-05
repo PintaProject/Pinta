@@ -20,6 +20,7 @@ public class GradientHandle : IToolHandle
 
 	private MoveHandle StartHandle => handles[0];
 	private MoveHandle EndHandle => handles[1];
+
 	public PointD StartPosition => start_position;
 	public PointD EndPosition => end_position;
 
@@ -115,5 +116,13 @@ public class GradientHandle : IToolHandle
 
 	private RectangleI ComputeInvalidateRect ()
 		=> MoveHandle.UnionInvalidateRects (handles);
+
+	public void ApplyData (PointD startPosition, PointD endPosition, bool active)
+	{
+		this.start_position = startPosition;
+		this.end_position = endPosition;
+		this.Active = active;
+		UpdateHandles ();
+	}
 
 }

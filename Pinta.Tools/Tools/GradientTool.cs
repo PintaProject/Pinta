@@ -39,12 +39,12 @@ public sealed class GradientTool : BaseTool
 	private readonly IPaletteService palette;
 
 	private ImageSurface? undo_surface;
-	private GradientHandle? undo_handle;
+	private GradientData? undo_data;
 
 	private bool is_newly_created = false;
 
 	//The 'button' variable was split into two so handles can be moved with a different button to the one used when creating the gradient that defines its colors.
-	MouseButton color_button;
+	public MouseButton color_button;
 	MouseButton drag_button;
 
 	public GradientHandle handle;
@@ -87,7 +87,7 @@ public sealed class GradientTool : BaseTool
 		if (handle.IsDragging)
 			return;
 
-		undo_handle = handle.PartialClone ();
+		undo_data = this.Data;
 		undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
 
 		if (handle.BeginDrag (e.PointDouble)) {
@@ -116,7 +116,7 @@ public sealed class GradientTool : BaseTool
 		if (undo_surface != null) {
 			string name = Name + " " + (is_newly_created ? Translations.GetString ("Created") : Translations.GetString ("Modified"));
 			document.History.PushNewItem (new GradientHistoryItem (Icon, name, undo_surface,
-				document.Layers.CurrentUserLayer, undo_handle!, this));
+				document.Layers.CurrentUserLayer, undo_data!, this));
 		}
 
 		is_newly_created = false;
@@ -207,10 +207,10 @@ public sealed class GradientTool : BaseTool
 	private void Finalize (Document? document)
 	{
 		if (document != null) {
-			undo_handle = handle.PartialClone ();
+			undo_data = Data;
 			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
 			document.History.PushNewItem (new GradientHistoryItem (Icon, Name + " " + Translations.GetString ("Finalized"), undo_surface,
-						document.Layers.CurrentUserLayer, undo_handle!, this));
+						document.Layers.CurrentUserLayer, undo_data, this));
 		}
 		handle.Active = false;
 	}
@@ -237,6 +237,26 @@ public sealed class GradientTool : BaseTool
 			GradientType.Conical => new GradientRenderers.Conical (alpha_only, op),
 			_ => throw new InvalidOperationException ("Unknown gradient type."),
 		};
+	}
+
+	public GradientData Data {
+		get {
+			return new GradientData (
+				handle.StartPosition,
+				handle.EndPosition,
+				handle.Active,
+				this.color_button
+			);
+		}
+
+		set {
+			this.color_button = value.ColorButton;
+			handle.ApplyData (
+				value.StartPosition,
+				value.EndPosition,
+				value.Active
+				);
+		}
 	}
 
 	private Gtk.Label? gradient_label;
