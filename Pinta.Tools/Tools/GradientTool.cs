@@ -69,7 +69,6 @@ public sealed class GradientTool : BaseTool
 	private GradientType SelectedGradientType => GradientDropDown.SelectedItem.GetTagOrDefault (GradientType.Linear);
 	private GradientColorMode SelectedGradientColorMode => ColorModeDropDown.SelectedItem.GetTagOrDefault (GradientColorMode.Color);
 	public override IEnumerable<IToolHandle> Handles => [handle];
-	private readonly Gdk.Cursor grab_cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Grab);
 
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
@@ -109,7 +108,7 @@ public sealed class GradientTool : BaseTool
 			return;
 
 		handle.EndDrag ();
-		UpdateCursor (e.PointDouble, document);
+		UpdateCursorAndHandle (e.PointDouble, document);
 
 		document.Layers.ToolLayer.Clear ();
 
@@ -125,7 +124,7 @@ public sealed class GradientTool : BaseTool
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 	{
 		if (!handle.IsDragging) {
-			UpdateCursor (e.PointDouble, document);
+			UpdateCursorAndHandle (e.PointDouble, document);
 			return;
 		}
 
@@ -215,12 +214,10 @@ public sealed class GradientTool : BaseTool
 		handle.Active = false;
 	}
 
-	private void UpdateCursor (PointD canvasPoint, Document document)
+	private void UpdateCursorAndHandle (PointD canvasPoint, Document document)
 	{
-		if (handle.UpdateHoverHandle (canvasPoint, out RectangleI handleDirtyRegion))
-			SetCursor (grab_cursor);
-		else
-			SetCursor (DefaultCursor);
+		Gdk.Cursor? cursor = handle.UpdateHoverHandle (canvasPoint, out RectangleI handleDirtyRegion);
+		SetCursor (cursor ?? DefaultCursor);
 		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
 	}
 

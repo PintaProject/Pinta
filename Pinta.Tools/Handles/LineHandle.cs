@@ -24,6 +24,8 @@ public class LineHandle : IToolHandle
 	public PointD StartPosition => start_position;
 	public PointD EndPosition => end_position;
 
+	private readonly Gdk.Cursor grab_cursor = GdkExtensions.CursorFromName (Pinta.Resources.StandardCursors.Grab);
+
 	public LineHandle (IWorkspaceService workspace)
 	{
 		this.workspace = workspace;
@@ -48,18 +50,18 @@ public class LineHandle : IToolHandle
 		return active_handle is not null;
 	}
 
-	public bool UpdateHoverHandle (PointD canvasPos, out RectangleI dirty)
+	public Gdk.Cursor? UpdateHoverHandle (PointD canvasPos, out RectangleI dirty)
 	{
 		if (!Active) {
 			dirty = RectangleI.Zero;
-			return false;
+			return null;
 		}
 
 		dirty = ComputeInvalidateRect ();
 		PointD viewPos = workspace.CanvasPointToView (canvasPos);
 		hover_handle = handles.FirstOrDefault (c => c.ContainsPoint (viewPos));
 		dirty.Union (ComputeInvalidateRect ());
-		return hover_handle is not null;
+		return hover_handle is not null ? grab_cursor : null;
 	}
 
 	public RectangleI StartNewLine (PointD canvasPos)
@@ -84,6 +86,8 @@ public class LineHandle : IToolHandle
 		dirty.Union (ComputeInvalidateRect ());
 		return dirty;
 	}
+
+
 
 	public RectangleI Drag (PointD canvasPos)
 	{
