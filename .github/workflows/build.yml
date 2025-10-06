@@ -82,9 +82,7 @@ jobs:
       env:
         # Work around webp-pixbuf-loader issue: https://github.com/Homebrew/homebrew-core/issues/139497
         HOMEBREW_NO_INSTALL_FROM_API: 1
-      run: |
-        brew update
-        brew install libadwaita adwaita-icon-theme gettext webp-pixbuf-loader
+      run: brew install libadwaita adwaita-icon-theme gettext webp-pixbuf-loader
     - name: Build
       run: dotnet build Pinta.sln -c Release
     - name: Test
