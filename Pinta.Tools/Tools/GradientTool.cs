@@ -43,8 +43,7 @@ public sealed class GradientTool : BaseTool
 
 	private bool is_newly_created = false;
 
-	//The 'button' variable was split into two so handles can be moved with a different button to the one used when creating the gradient that defines its colors.
-	public MouseButton color_button;
+	public bool is_reversed = false;
 	MouseButton drag_button;
 
 	public LineHandle handle;
@@ -97,8 +96,10 @@ public sealed class GradientTool : BaseTool
 
 		RectangleI handleDirtyRegion = handle.StartNewLine (e.PointDouble);
 		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
+
+		is_reversed = e.MouseButton == MouseButton.Right;
+
 		is_newly_created = true;
-		color_button = e.MouseButton;
 		drag_button = e.MouseButton;
 	}
 
@@ -133,7 +134,7 @@ public sealed class GradientTool : BaseTool
 
 		var gr = CreateGradientRenderer ();
 
-		if (color_button == MouseButton.Right) {
+		if (is_reversed) {
 			gr.StartColor = palette.SecondaryColor.ToColorBgra ();
 			gr.EndColor = palette.PrimaryColor.ToColorBgra ();
 		} else {
@@ -242,12 +243,12 @@ public sealed class GradientTool : BaseTool
 				handle.StartPosition,
 				handle.EndPosition,
 				handle.Active,
-				this.color_button
+				this.is_reversed
 			);
 		}
 
 		set {
-			this.color_button = value.ColorButton;
+			this.is_reversed = value.IsReversed;
 			handle.ApplyData (
 				value.StartPosition,
 				value.EndPosition,

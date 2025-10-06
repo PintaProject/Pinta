@@ -41,21 +41,9 @@ public class GradientHistoryItem : BaseHistoryItem
 
 	private static void SwapData (ref GradientData new_data, GradientTool tool)
 	{
-		LineHandle handle = tool.handle;
+		GradientData old_data = tool.Data;
 
-		GradientData old_data = new GradientData (
-			handle.StartPosition,
-			handle.EndPosition,
-			handle.Active,
-			tool.color_button
-		);
-
-		tool.color_button = new_data.ColorButton;
-		handle.ApplyData (
-			new_data.StartPosition,
-			new_data.EndPosition,
-			new_data.Active
-			);
+		tool.Data = new_data;
 
 		new_data = old_data;
 	}
@@ -66,14 +54,14 @@ public struct GradientData
 	public PointD StartPosition { get; set; }
 	public PointD EndPosition { get; set; }
 	public bool Active { get; set; }
-	public MouseButton ColorButton { get; set; }
+	public bool IsReversed { get; set; }
 
-	public GradientData (PointD startPosition, PointD endPosition, bool active, MouseButton colorButton)
+	public GradientData (PointD startPosition, PointD endPosition, bool active, bool is_reversed)
 	{
 		this.StartPosition = startPosition;
 		this.EndPosition = endPosition;
 		this.Active = active;
-		this.ColorButton = colorButton;
+		this.IsReversed = is_reversed;
 	}
 
 }
