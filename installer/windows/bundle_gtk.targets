@@ -49,7 +49,7 @@
     <GtkFile Include="$(MinGWBinFolder)\libnghttp2-14.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libnghttp3-9.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libngtcp2-16.dll" />
-    <GtkFile Include="$(MinGWBinFolder)\libngtcp2_crypto_ossl.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libngtcp2_crypto_ossl-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libpango-1.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libpangocairo-1.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libpangoft2-1.0-0.dll" />
@@ -67,6 +67,7 @@
     <GtkFile Include="$(MinGWBinFolder)\libunistring-5.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libwebp-7.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libwinpthread-1.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libxml2-16.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libxmlb-2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libyaml-0-2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libzstd.dll" />
@@ -75,7 +76,6 @@
     <!-- Additional dependencies for the SVG pixbuf loader. -->
     <GtkFile Include="$(MinGWBinFolder)\libcharset-1.dll" />
     <GtkFile Include="$(MinGWBinFolder)\librsvg-2-2.dll" />
-    <GtkFile Include="$(MinGWBinFolder)\libxml2-2.dll" />
 
     <!-- Additional dependencies for the webp pixbuf loader. -->
     <GtkFile Include="$(MinGWBinFolder)\libwebp-7.dll" />
