@@ -61,8 +61,7 @@ public class GradientHistoryItem : BaseHistoryItem
 	}
 }
 
-// It's a class instead of a struct so that GradientTool can have a null ref when tool hasn't been used yet and there's no undo data
-public class GradientData
+public struct GradientData
 {
 	public PointD StartPosition { get; set; }
 	public PointD EndPosition { get; set; }
