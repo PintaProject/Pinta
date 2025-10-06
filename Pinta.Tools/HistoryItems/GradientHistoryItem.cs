@@ -7,56 +7,35 @@ public class GradientHistoryItem : BaseHistoryItem
 {
 	private readonly GradientTool tool;
 
-	private readonly UserLayer user_layer;
-
-	private readonly SurfaceDiff? user_surface_diff;
-	private ImageSurface? user_surface;
+	private readonly SimpleHistoryItem surface;
 
 	private GradientData gradient_data;
 
-	public GradientHistoryItem (string icon, string text, ImageSurface passedUserSurface, UserLayer passedUserLayer, GradientData passedData, GradientTool passedTool) : base (icon, text)
+	public GradientHistoryItem (string icon, string text, ImageSurface passedUserSurface, int layerIndex, GradientData passedData, GradientTool passedTool) : base (icon, text)
 	{
 		tool = passedTool;
 
 		gradient_data = passedData;
 
-		user_layer = passedUserLayer;
-		user_surface_diff = SurfaceDiff.Create (passedUserSurface, user_layer.Surface, true);
-		if (user_surface_diff == null) {
-			user_surface = passedUserSurface;
-		}
+		surface = new SimpleHistoryItem (string.Empty, string.Empty, passedUserSurface, layerIndex);
 	}
-
 
 
 	public override void Undo ()
 	{
+		surface.Undo ();
 		Swap ();
 		PintaCore.Tools.SetCurrentTool (tool);
 	}
 
 	public override void Redo ()
 	{
+		surface.Redo ();
 		Swap ();
 	}
 
 	private void Swap ()
 	{
-		ImageSurface surf = user_layer.Surface;
-
-		if (user_surface_diff != null) {
-			user_surface_diff.ApplyAndSwap (surf);
-
-			PintaCore.Workspace.Invalidate (user_surface_diff.GetBounds ());
-		} else {
-
-			user_layer.Surface = user_surface!;
-
-			user_surface = surf;
-
-			PintaCore.Workspace.Invalidate ();
-		}
-
 		SwapData (ref gradient_data, tool);
 	}
 
