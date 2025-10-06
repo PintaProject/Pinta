@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.3...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.4...HEAD)
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -11,6 +11,12 @@ Thanks to the following contributors who worked on this release:
 ### Changed
 
 ### Fixed
+
+## [3.0.4](https://github.com/PintaProject/Pinta/release/tag/3.0.4) - 2025/10/05
+
+### Fixed
+- Fixed errors with saving JPEG files using the glycin pixbuf loader (#1774, #1785)
+- Fixed a few SVG icons which did not display properly in GTK 4.20 (#1797, #1796)
 
 ## [3.0.3](https://github.com/PintaProject/Pinta/release/tag/3.0.3) - 2025/08/01
 
