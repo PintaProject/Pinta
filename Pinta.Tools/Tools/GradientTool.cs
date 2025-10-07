@@ -25,7 +25,11 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using Cairo;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -33,25 +37,37 @@ namespace Pinta.Tools;
 public sealed class GradientTool : BaseTool
 {
 	private readonly IPaletteService palette;
-	PointD startpoint;
-	bool tracking;
+
 	private ImageSurface? undo_surface;
-	MouseButton button;
+	private GradientData? undo_data;
+
+	private bool is_newly_created = false;
+
+	public bool is_reversed = false;
+	MouseButton drag_button;
+
+	public LineHandle handle;
 
 	public GradientTool (IServiceProvider services) : base (services)
 	{
 		palette = services.GetService<IPaletteService> ();
+		IWorkspaceService workspace = services.GetService<IWorkspaceService> ();
+
+		handle = new LineHandle (workspace);
 	}
 
 	public override string Name => Translations.GetString ("Gradient");
 	public override string Icon => Pinta.Resources.Icons.ToolGradient;
-	public override string StatusBarText => Translations.GetString ("Click and drag to draw gradient from primary to secondary color.\nRight click to reverse.");
+	public override string StatusBarText => Translations.GetString ("Click and drag to draw gradient from primary to secondary color." +
+									"\nRight click to reverse." +
+									"\nClick on a control point and drag to move it.");
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_G);
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.Gradient.png"), 9, 18, null);
 	public override int Priority => 31;
 	protected override bool ShowAlphaBlendingButton => true;
 	private GradientType SelectedGradientType => GradientDropDown.SelectedItem.GetTagOrDefault (GradientType.Linear);
 	private GradientColorMode SelectedGradientColorMode => ColorModeDropDown.SelectedItem.GetTagOrDefault (GradientColorMode.Color);
+	public override IEnumerable<IToolHandle> Handles => [handle];
 
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
@@ -66,43 +82,59 @@ public sealed class GradientTool : BaseTool
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
-		// Protect against history corruption
-		if (tracking)
+		if (handle.IsDragging)
 			return;
 
-		startpoint = e.PointDouble;
-
-		if (!document.Workspace.PointInCanvas (e.PointDouble))
-			return;
-
-		tracking = true;
-		button = e.MouseButton;
+		undo_data = this.Data;
 		undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
+
+		if (handle.BeginDrag (e.PointDouble)) {
+			SetCursor (DefaultCursor);
+			drag_button = e.MouseButton;
+			return;
+		}
+
+		RectangleI handleDirtyRegion = handle.StartNewLine (e.PointDouble);
+		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
+
+		is_reversed = e.MouseButton == MouseButton.Right;
+
+		is_newly_created = true;
+		drag_button = e.MouseButton;
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		if (!tracking || e.MouseButton != button)
+		if (!handle.IsDragging || e.MouseButton != drag_button)
 			return;
 
-		tracking = false;
+		handle.EndDrag ();
+		UpdateCursorAndHandle (e.PointDouble, document);
 
-		// Clear the temporary scratch surface, which we don't clear in OnMouseMove
-		// because it's overwritten on subsequent moves
 		document.Layers.ToolLayer.Clear ();
 
-		if (undo_surface != null)
-			document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
+		if (undo_surface != null) {
+			string name = Name + " " + (is_newly_created ? Translations.GetString ("Created") : Translations.GetString ("Modified"));
+			document.History.PushNewItem (new GradientHistoryItem (Icon, name, undo_surface,
+				document.Layers.CurrentUserLayerIndex, undo_data!.Value, this));
+		}
+
+		is_newly_created = false;
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 	{
-		if (!tracking)
+		if (!handle.IsDragging) {
+			UpdateCursorAndHandle (e.PointDouble, document);
 			return;
+		}
+
+		RectangleI handleDirtyRegion = handle.Drag (e.PointDouble);
+		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
 
 		var gr = CreateGradientRenderer ();
 
-		if (button == MouseButton.Right) {
+		if (is_reversed) {
 			gr.StartColor = palette.SecondaryColor.ToColorBgra ();
 			gr.EndColor = palette.PrimaryColor.ToColorBgra ();
 		} else {
@@ -110,8 +142,8 @@ public sealed class GradientTool : BaseTool
 			gr.EndColor = palette.SecondaryColor.ToColorBgra ();
 		}
 
-		gr.StartPoint = startpoint;
-		gr.EndPoint = e.PointDouble;
+		gr.StartPoint = handle.StartPosition;
+		gr.EndPoint = handle.EndPosition;
 		gr.AlphaBlending = UseAlphaBlending;
 
 		gr.BeforeRender ();
@@ -142,6 +174,14 @@ public sealed class GradientTool : BaseTool
 		document.Workspace.Invalidate (selection_bounds);
 	}
 
+	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
+	{
+		if (e.Key.Value == Gdk.Constants.KEY_Return) {
+			Finalize (document);
+		}
+		return base.OnKeyDown (document, e);
+	}
+
 	protected override void OnSaveSettings (ISettingsService settings)
 	{
 		base.OnSaveSettings (settings);
@@ -150,6 +190,36 @@ public sealed class GradientTool : BaseTool
 			settings.PutSetting (SettingNames.GRADIENT_TYPE, gradient_button.SelectedIndex);
 		if (color_mode_button is not null)
 			settings.PutSetting (SettingNames.GRADIENT_COLOR_MODE, color_mode_button.SelectedIndex);
+	}
+
+	protected override void OnCommit (Document? document)
+	{
+		Finalize (document);
+		base.OnCommit (document);
+	}
+
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		Finalize (document);
+		base.OnDeactivated (document, newTool);
+	}
+
+	private void Finalize (Document? document)
+	{
+		if (document != null) {
+			undo_data = Data;
+			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
+			document.History.PushNewItem (new GradientHistoryItem (Icon, Name + " " + Translations.GetString ("Finalized"), undo_surface,
+						document.Layers.CurrentUserLayerIndex, undo_data!.Value, this));
+		}
+		handle.Active = false;
+	}
+
+	private void UpdateCursorAndHandle (PointD canvasPoint, Document document)
+	{
+		Gdk.Cursor? cursor = handle.UpdateHoverHandle (canvasPoint, out RectangleI handleDirtyRegion);
+		SetCursor (cursor ?? DefaultCursor);
+		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
 	}
 
 	private GradientRenderer CreateGradientRenderer ()
@@ -165,6 +235,26 @@ public sealed class GradientTool : BaseTool
 			GradientType.Conical => new GradientRenderers.Conical (alpha_only, op),
 			_ => throw new InvalidOperationException ("Unknown gradient type."),
 		};
+	}
+
+	public GradientData Data {
+		get {
+			return new GradientData (
+				handle.StartPosition,
+				handle.EndPosition,
+				handle.Active,
+				this.is_reversed
+			);
+		}
+
+		set {
+			this.is_reversed = value.IsReversed;
+			handle.ApplyData (
+				value.StartPosition,
+				value.EndPosition,
+				value.Active
+				);
+		}
 	}
 
 	private Gtk.Label? gradient_label;
