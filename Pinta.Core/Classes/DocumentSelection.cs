@@ -129,7 +129,7 @@ public sealed class DocumentSelection
 	/// </summary>
 	/// <param name="clipperPolygons">A Clipper Polygon collection.</param>
 	/// <returns>A Pinta Polygon set.</returns>
-	private static IReadOnlyList<IReadOnlyList<PointI>> ConvertToPolygonSet (IReadOnlyList<IReadOnlyList<IntPoint>> clipperPolygons)
+	public static IReadOnlyList<IReadOnlyList<PointI>> ConvertToPolygonSet (IReadOnlyList<IReadOnlyList<IntPoint>> clipperPolygons)
 	{
 		var resultingPolygonSet = new PointI[clipperPolygons.Count][];
 
@@ -151,6 +151,7 @@ public sealed class DocumentSelection
 
 		return resultingPolygonSet;
 	}
+
 
 	/// <summary>
 	/// Return a transformed copy of the selection.

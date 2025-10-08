@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using ClipperLib;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -108,6 +109,7 @@ public abstract class SelectTool : BaseTool
 
 		RectangleI dirty = ReDraw (document);
 
+
 		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
 		document.Workspace.Invalidate (dirty.Union (last_dirty));
 
@@ -180,6 +182,9 @@ public abstract class SelectTool : BaseTool
 
 		DrawShape (document, rect, document.Layers.SelectionLayer);
 
+
+		applied_selection_polygons = new List<List<IntPoint>> (document.Selection.SelectionPolygons);
+
 		// Figure out a bounding box for everything that was drawn, and add a bit of padding.
 		RectangleI dirty = rect.ToInt ();
 		dirty = dirty.Inflated (2, 2);
@@ -221,6 +226,10 @@ public abstract class SelectTool : BaseTool
 		LoadFromDocument (workspace.ActiveDocument);
 	}
 
+	private List<List<IntPoint>>? applied_selection_polygons = null;
+	public override List<List<IntPoint>>? AppliedSelectionPolygons =>
+		combine_mode != CombineMode.Replace ? applied_selection_polygons : null;
+
 	/// <summary>
 	/// Initialize from the document's selection.
 	/// </summary>
@@ -229,5 +238,8 @@ public abstract class SelectTool : BaseTool
 		DocumentSelection selection = document.Selection;
 		handle.Rectangle = selection.HandleBounds;
 		ShowHandles (document.Selection.Visible && tools.CurrentTool == this);
+		//This is a placeholder solution. Ideally, this should be assigned the new shape of the applied selection according to the new bounds.
+		//However, SelectTool doesn't provide any method that returns the applied selection without modifying the selection.
+		applied_selection_polygons = new List<List<IntPoint>> (selection.SelectionPolygons);
 	}
 }

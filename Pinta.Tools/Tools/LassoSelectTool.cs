@@ -155,6 +155,9 @@ public sealed class LassoSelectTool : BaseTool
 			hist = null;
 		}
 		lasso_polygon.Clear ();
+
+		//To make sure the preview doesn't show anymore
+		document.Workspace.Invalidate ();
 	}
 
 	protected override void OnDeactivated (Document? document, BaseTool? newTool)
@@ -202,6 +205,9 @@ public sealed class LassoSelectTool : BaseTool
 		if (document != null)
 			FinalizeShape (document);
 	}
+
+	public override List<List<IntPoint>>? AppliedSelectionPolygons =>
+		lasso_polygon.Count > 0 && combine_mode != CombineMode.Replace ? [lasso_polygon] : null;
 
 	protected override void OnSaveSettings (ISettingsService settings)
 	{
