@@ -182,7 +182,6 @@ public abstract class SelectTool : BaseTool
 
 		DrawShape (document, rect, document.Layers.SelectionLayer);
 
-
 		applied_selection_polygons = new List<List<IntPoint>> (document.Selection.SelectionPolygons);
 
 		// Figure out a bounding box for everything that was drawn, and add a bit of padding.
@@ -228,7 +227,7 @@ public abstract class SelectTool : BaseTool
 
 	private List<List<IntPoint>>? applied_selection_polygons = null;
 	public override List<List<IntPoint>>? AppliedSelectionPolygons =>
-		combine_mode != CombineMode.Replace ? applied_selection_polygons : null;
+		handle.IsDragging && combine_mode != CombineMode.Replace ? applied_selection_polygons : null;
 
 	/// <summary>
 	/// Initialize from the document's selection.
@@ -238,8 +237,5 @@ public abstract class SelectTool : BaseTool
 		DocumentSelection selection = document.Selection;
 		handle.Rectangle = selection.HandleBounds;
 		ShowHandles (document.Selection.Visible && tools.CurrentTool == this);
-		//This is a placeholder solution. Ideally, this should be assigned the new shape of the applied selection according to the new bounds.
-		//However, SelectTool doesn't provide any method that returns the applied selection without modifying the selection.
-		applied_selection_polygons = new List<List<IntPoint>> (selection.SelectionPolygons);
 	}
 }
