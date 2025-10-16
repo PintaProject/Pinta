@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="48" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
- <g transform="translate(.91021)">
-  <path id="path1055" d="m4.8272 3.3762q1.1 0 1.9 0.8t0.8 1.9q0 1.15-0.8 1.925t-1.9 0.775q-1.15 0-1.925-0.775t-0.775-1.925q0-1.1 0.775-1.9t1.925-0.8z"/>
-  <use transform="translate(9.4)" xlink:href="#path1055"/>
-  <use transform="translate(18.8)" xlink:href="#path1055"/>
-  <use transform="translate(28.2)" xlink:href="#path1055"/>
-  <use transform="translate(37.563)" xlink:href="#path1055"/>
-  <path id="path1055-2" d="m4.9318 12.006q1.1 0 1.9 0.8t0.8 1.9q0 1.15-0.8 1.925t-1.9 0.775q-1.15 0-1.925-0.775t-0.775-1.925q0-1.1 0.775-1.9t1.925-0.8z"/>
-  <use transform="translate(9.4)" xlink:href="#path1055-2"/>
-  <use transform="translate(18.8)" xlink:href="#path1055-2"/>
-  <use transform="translate(28.2)" xlink:href="#path1055-2"/>
-  <use transform="translate(37.458)" xlink:href="#path1055-2"/>
- </g>
- <g transform="translate(.91021)">
-  <path id="path1055-5" d="m4.9318 20.635q1.1 0 1.9 0.8t0.8 1.9q0 1.15-0.8 1.925t-1.9 0.775q-1.15 0-1.925-0.775t-0.775-1.925q0-1.1 0.775-1.9t1.925-0.8z"/>
-  <use transform="translate(9.4)" xlink:href="#path1055-5"/>
-  <use transform="translate(18.8)" xlink:href="#path1055-5"/>
-  <use transform="translate(28.2)" xlink:href="#path1055-5"/>
-  <use transform="translate(37.458)" xlink:href="#path1055-5"/>
-  <use transform="translate(37.458 17.259)" xlink:href="#path1055-5"/>
-  <use transform="translate(-9.4 8.0551)" xlink:href="#path1051"/>
-  <use transform="translate(1e-7 8.0551)" xlink:href="#path1051"/>
-  <use transform="translate(9.4 8.0551)" xlink:href="#path1051"/>
-  <use transform="translate(18.8 8.0551)" xlink:href="#path1051"/>
-  <path id="path1053" d="m33.132 30.639q0.8 0 1.35 0.55t0.55 1.35-0.55 1.35-1.35 0.55-1.35-0.55-0.55-1.35 0.55-1.35 1.35-0.55z"/>
-  <path id="path1051" d="m14.332 31.489q0.45 0 0.75 0.3t0.3 0.75-0.3 0.75-0.75 0.3-0.75-0.3-0.3-0.75 0.3-0.75 0.75-0.3z"/>
-  <use transform="translate(37.458 9.2036)" xlink:href="#path1055-5"/>
-  <use transform="translate(9.4)" xlink:href="#path1051"/>
-  <use transform="translate(-28.2)" xlink:href="#path1053"/>
- </g>
-</svg>
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="48" height="48" version="1.1">
+ <ns0:g transform="translate(.91021)">
+  <ns0:path id="path1055" d="m4.8272 3.3762q1.1 0 1.9 0.8t0.8 1.9q0 1.15-0.8 1.925t-1.9 0.775q-1.15 0-1.925-0.775t-0.775-1.925q0-1.1 0.775-1.9t1.925-0.8z" fill="currentColor" />
+  <ns0:use transform="translate(9.4)" ns1:href="#path1055" />
+  <ns0:use transform="translate(18.8)" ns1:href="#path1055" />
+  <ns0:use transform="translate(28.2)" ns1:href="#path1055" />
+  <ns0:use transform="translate(37.563)" ns1:href="#path1055" />
+  <ns0:path id="path1055-2" d="m4.9318 12.006q1.1 0 1.9 0.8t0.8 1.9q0 1.15-0.8 1.925t-1.9 0.775q-1.15 0-1.925-0.775t-0.775-1.925q0-1.1 0.775-1.9t1.925-0.8z" fill="currentColor" />
+  <ns0:use transform="translate(9.4)" ns1:href="#path1055-2" />
+  <ns0:use transform="translate(18.8)" ns1:href="#path1055-2" />
+  <ns0:use transform="translate(28.2)" ns1:href="#path1055-2" />
+  <ns0:use transform="translate(37.458)" ns1:href="#path1055-2" />
+ </ns0:g>
+ <ns0:g transform="translate(.91021)">
+  <ns0:path id="path1055-5" d="m4.9318 20.635q1.1 0 1.9 0.8t0.8 1.9q0 1.15-0.8 1.925t-1.9 0.775q-1.15 0-1.925-0.775t-0.775-1.925q0-1.1 0.775-1.9t1.925-0.8z" fill="currentColor" />
+  <ns0:use transform="translate(9.4)" ns1:href="#path1055-5" />
+  <ns0:use transform="translate(18.8)" ns1:href="#path1055-5" />
+  <ns0:use transform="translate(28.2)" ns1:href="#path1055-5" />
+  <ns0:use transform="translate(37.458)" ns1:href="#path1055-5" />
+  <ns0:use transform="translate(37.458 17.259)" ns1:href="#path1055-5" />
+  <ns0:use transform="translate(-9.4 8.0551)" ns1:href="#path1051" />
+  <ns0:use transform="translate(1e-7 8.0551)" ns1:href="#path1051" />
+  <ns0:use transform="translate(9.4 8.0551)" ns1:href="#path1051" />
+  <ns0:use transform="translate(18.8 8.0551)" ns1:href="#path1051" />
+  <ns0:path id="path1053" d="m33.132 30.639q0.8 0 1.35 0.55t0.55 1.35-0.55 1.35-1.35 0.55-1.35-0.55-0.55-1.35 0.55-1.35 1.35-0.55z" fill="currentColor" />
+  <ns0:path id="path1051" d="m14.332 31.489q0.45 0 0.75 0.3t0.3 0.75-0.3 0.75-0.75 0.3-0.75-0.3-0.3-0.75 0.3-0.75 0.75-0.3z" fill="currentColor" />
+  <ns0:use transform="translate(37.458 9.2036)" ns1:href="#path1055-5" />
+  <ns0:use transform="translate(9.4)" ns1:href="#path1051" />
+  <ns0:use transform="translate(-28.2)" ns1:href="#path1053" />
+ </ns0:g>
+</ns0:svg>
