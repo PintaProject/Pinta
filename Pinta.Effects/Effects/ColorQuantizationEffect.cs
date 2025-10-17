@@ -199,8 +199,8 @@ public sealed class ColorQuantizationEffect : BaseEffect
 	private static int PickBoxToSplit (List<Box> boxes)
 	{
 		// We just find the box with the largest range for a single channel.
-		// Maybe using euclidian distance could also be a good heuristic, but this works well 
-		// and there doesn't seem to be a commonly agreed-on prefered way to do it anyway.
+		// Maybe using euclidean distance could also be a good heuristic, but this works well 
+		// and there doesn't seem to be a commonly agreed-on preferred way to do it anyway.
 		int best = 0;
 		int bestRange = MaxChannelRange (boxes[0]);
 		for (int i = 1; i < boxes.Count; i++) {
@@ -226,7 +226,7 @@ public sealed class ColorQuantizationEffect : BaseEffect
 		return palette[best];
 	}
 
-	// Simple euclidian distance between 2 colors
+	// Simple euclidean distance between 2 colors
 	private static int ColorDist (ColorBgra a, ColorBgra b)
 	{
 		int dr = a.R - b.R;
