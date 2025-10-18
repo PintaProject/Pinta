@@ -51,10 +51,14 @@ public abstract class BasePaintBrush
 	/// constant factor.
 	/// </summary>
 	public virtual double StrokeAlphaMultiplier => 1;
+	public delegate void RedrawCallback (RectangleI rectangle);
+	public delegate void DisposeContextCallback ();
+	private DisposeContextCallback dispose_context_callback = () => {};
 
 	public void DoMouseUp ()
 	{
 		OnMouseUp ();
+		dispose_context_callback ();
 	}
 
 	public void DoMouseDown ()
@@ -68,6 +72,15 @@ public abstract class BasePaintBrush
 		BrushStrokeArgs strokeArgs)
 	{
 		return OnMouseMove (g, surface, strokeArgs);
+	}
+
+	public virtual void SetRedrawCallback(RedrawCallback redrawCallback)
+	{
+	}
+
+	public virtual void SetDisposeContextCallback(DisposeContextCallback disposeContextCallback)
+	{
+		dispose_context_callback = disposeContextCallback;
 	}
 
 	/// <summary>
