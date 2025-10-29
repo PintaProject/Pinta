@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="48" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg">
- <path d="m4.3398 3.9395-0.85352 0.25586v26.85h11v9.9863h29.23v-27.105h-11v-9.9863zm1.1465 2h25.23v7.9863h-16.229v15.119h-9.002zm11.002 9.9863h14.229v13.119h-14.229zm16.229 0h9v23.105h-25.23v-7.9863h16.231z" color="#000000" style="-inkscape-stroke:none"/>
-</svg>
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="48" height="48" version="1.1">
+ <ns0:path d="m4.3398 3.9395-0.85352 0.25586v26.85h11v9.9863h29.23v-27.105h-11v-9.9863zm1.1465 2h25.23v7.9863h-16.229v15.119h-9.002zm11.002 9.9863h14.229v13.119h-14.229zm16.229 0h9v23.105h-25.23v-7.9863h16.231z" color="#000000" style="-inkscape-stroke:none" fill="currentColor" />
+</ns0:svg>
