@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-15 00:21+0000\n"
-"PO-Revision-Date: 2025-06-30 18:04+0000\n"
-"Last-Translator: Christophe <cuvillierch@zonesix.fr>\n"
+"PO-Revision-Date: 2025-10-23 22:02+0000\n"
+"Last-Translator: Matthieu LAURENT <matthieu.laurent69@proton.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.14.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -312,7 +312,7 @@ msgstr "Grille du canevas…"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
-msgstr ""
+msgstr "Rayon de cellule"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
@@ -320,7 +320,7 @@ msgstr "Taille de cellule"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:19
 msgid "Cells"
-msgstr ""
+msgstr "Cellules"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -381,7 +381,7 @@ msgstr "Cercles"
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
 msgid "Circular"
-msgstr ""
+msgstr "Circulaire"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -517,7 +517,7 @@ msgstr "Schéma de couleur"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:192
 msgid "Color Scheme Edge Behavior"
-msgstr ""
+msgstr "Comportement des bords du schéma de couleurs"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:180
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:145
@@ -592,7 +592,7 @@ msgstr "Rogner"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Current Palette"
-msgstr ""
+msgstr "Palette actuelle"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:247
 msgid "Curved"
@@ -926,7 +926,7 @@ msgstr "Fragments"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
 msgid "Freeform"
-msgstr ""
+msgstr "Forme libre"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -1083,6 +1083,15 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
+"En mode Forme libre, cliquez et faites glisser pour dessiner le contour "
+"d'une zone de sélection.\n"
+"\n"
+"En mode Polygone, cliquez et faites glisser pour ajouter un nouveau point à "
+"la sélection.\n"
+"\n"
+"Appuyez sur Entrée pour terminer la sélection.\n"
+"\n"
+"Appuyez sur Retour arrière pour supprimer le dernier point."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
@@ -1170,7 +1179,7 @@ msgstr "Paysage"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
 msgid "Lasso Mode"
-msgstr ""
+msgstr "Mode Lasso"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
@@ -1847,7 +1856,7 @@ msgstr "Transformation polaire"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
 msgid "Polygon"
-msgstr ""
+msgstr "Polygone"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
