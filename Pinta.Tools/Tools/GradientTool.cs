@@ -114,7 +114,9 @@ public sealed class GradientTool : BaseTool
 		document.Layers.ToolLayer.Clear ();
 
 		if (undo_surface != null) {
-			string name = Name + " " + (is_newly_created ? Translations.GetString ("Created") : Translations.GetString ("Modified"));
+			string name = is_newly_created
+				? Translations.GetString ("Gradient Created")
+				: Translations.GetString ("Gradient Modified");
 			document.History.PushNewItem (new GradientHistoryItem (Icon, name, undo_surface,
 				document.Layers.CurrentUserLayerIndex, undo_data!.Value, this));
 		}
