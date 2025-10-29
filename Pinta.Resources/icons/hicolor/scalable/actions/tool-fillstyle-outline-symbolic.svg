@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="48" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg">
- <path d="m19.729 2.8652c-9.3033 0-16.863 7.56-16.863 16.863s7.56 16.865 16.863 16.865c9.3033 0 16.865-7.562 16.865-16.865s-7.562-16.863-16.865-16.863zm0 1.8047c8.328 0 15.061 6.7306 15.061 15.059s-6.7326 15.061-15.061 15.061c-8.328 0-15.059-6.7326-15.059-15.061s6.7306-15.059 15.059-15.059z" color="#000000" stroke-dashoffset="1.4" style="-inkscape-stroke:none"/>
- <path d="m17.711 19.135v24.373h28.441v-24.373zm2 2h24.441v20.373h-24.441z" color="#000000" stroke-dashoffset="1.4" style="-inkscape-stroke:none"/>
-</svg>
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="48" height="48" version="1.1">
+ <ns0:path d="m19.729 2.8652c-9.3033 0-16.863 7.56-16.863 16.863s7.56 16.865 16.863 16.865c9.3033 0 16.865-7.562 16.865-16.865s-7.562-16.863-16.865-16.863zm0 1.8047c8.328 0 15.061 6.7306 15.061 15.059s-6.7326 15.061-15.061 15.061c-8.328 0-15.059-6.7326-15.059-15.061s6.7306-15.059 15.059-15.059z" color="#000000" style="-inkscape-stroke:none" fill="currentColor" />
+ <ns0:path d="m17.711 19.135v24.373h28.441v-24.373zm2 2h24.441v20.373h-24.441z" color="#000000" style="-inkscape-stroke:none" fill="currentColor" />
+</ns0:svg>
