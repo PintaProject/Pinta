@@ -20,6 +20,7 @@ Thanks to the following contributors who worked on this release:
 - Rewrote the canvas widget to improve performance and memory usage issues for zoomed-in images (#1020, #1485)
 - Added a new Cells effect (#1589)
 - Added a polygon selection mode to the Lasso Select tool (#1725, #1096)
+- The Gradient tool now provides handles for adjusting the gradient length and direction (#1533, #1773)
 - The "About" dialog now includes links to the issue tracker and discussion forum (#1343)
 - When compiling Pinta, the GirCoreSource MSBuild property can be set to easily build Pinta against a local build of gir.core for easy debugging (#1403)
 - Keyboard shortcuts are now displayed on all toolbar button tooltips (#1408, #1432)
@@ -57,6 +58,12 @@ Thanks to the following contributors who worked on this release:
 - The icon and window title now appear correctly on KDE Wayland sessions (#1419)
 - Fixed bug where the text tool could incorrectly display a default cursor (#1707)
 - Fixed drifting when holding Shift while expanding a rectangle selection using the vertical or horizontal handles (#1733)
+
+## [3.0.4](https://github.com/PintaProject/Pinta/release/tag/3.0.4) - 2025/10/05
+
+### Fixed
+- Fixed errors with saving JPEG files using the glycin pixbuf loader (#1774, #1785)
+- Fixed a few SVG icons which did not display properly in GTK 4.20 (#1797, #1796)
 
 ## [3.0.3](https://github.com/PintaProject/Pinta/release/tag/3.0.3) - 2025/08/01
 

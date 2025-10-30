@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="48" height="48" version="1.1" xmlns="http://www.w3.org/2000/svg">
- <rect x="18.712" y="20.136" width="26.441" height="22.373"/>
- <ellipse cx="19.729" cy="19.729" rx="15.962" ry="15.962"/>
-</svg>
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="48" height="48" version="1.1">
+ <ns0:rect x="18.712" y="20.136" width="26.441" height="22.373" fill="currentColor" />
+ <ns0:ellipse cx="19.729" cy="19.729" rx="15.962" ry="15.962" fill="currentColor" />
+</ns0:svg>

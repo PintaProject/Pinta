@@ -1,37 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   width="12.7mm"
-   height="12.7mm"
-   viewBox="0 0 12.7 12.7"
-   version="1.1"
-   id="svg1514"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview1516"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="mm"
-     showgrid="false" />
-  <defs
-     id="defs1511" />
-  <g
-     inkscape:label="Capa 1"
-     inkscape:groupmode="layer"
-     id="layer1">
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.8;stroke-linecap:butt;stroke-dasharray:1.6, 0.8;stroke-dashoffset:0.64"
-       d="M 10.022351,1.4837742 8.1550054,5.8584569 11.107458,6.4879628 7.9035006,8.5946921 8.3010794,11.072129 4.6966397,8.9030806 1.3332014,9.7514264 2.9809421,6.5441662 1.4303617,3.4009451 5.0322057,4.326923 Z"
-       id="path4689"
-       sodipodi:nodetypes="ccccccccccc" />
-  </g>
-</svg>
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:ns2="http://www.inkscape.org/namespaces/inkscape" width="12.7mm" height="12.7mm" viewBox="0 0 12.7 12.7" version="1.1" id="svg1514">
+  <ns1:namedview id="namedview1516" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" ns2:showpageshadow="2" ns2:pageopacity="0.0" ns2:pagecheckerboard="0" ns2:deskcolor="#d1d1d1" ns2:document-units="mm" showgrid="false" />
+  <ns0:defs id="defs1511" />
+  <ns0:g ns2:label="Capa 1" ns2:groupmode="layer" id="layer1">
+    <ns0:path style="fill:none;fill-rule:evenodd" d="M 10.022351,1.4837742 8.1550054,5.8584569 11.107458,6.4879628 7.9035006,8.5946921 8.3010794,11.072129 4.6966397,8.9030806 1.3332014,9.7514264 2.9809421,6.5441662 1.4303617,3.4009451 5.0322057,4.326923 Z" id="path4689" ns1:nodetypes="ccccccccccc" />
+  </ns0:g>
+</ns0:svg>
