@@ -65,7 +65,7 @@ jobs:
     - name: Build Installer
       run: make releasezip
     - name: Upload Installer
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: Pinta-linux-dotnet-${{matrix.dotnet_version}}.zip
         path: pinta-3.1.zip
@@ -117,7 +117,7 @@ jobs:
 
     - name: Upload Installer
       if: github.event_name != 'pull_request'
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: "Pinta-${{matrix.build.dotnet_rid}}.dmg"
         path: installer/macos/Pinta.dmg
@@ -167,7 +167,7 @@ jobs:
 
     - name: Upload Installer
       id: upload-unsigned-installer
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: "Pinta-${{matrix.build.dotnet_rid}}.exe"
         path: installer/windows/Pinta.exe
@@ -176,7 +176,7 @@ jobs:
     # Only enable signing for tagged releases.
     - name: Sign Installer
       if: startsWith( github.ref, 'refs/tags/' )
-      uses: signpath/github-action-submit-signing-request@v1
+      uses: signpath/github-action-submit-signing-request@v2
       with:
         api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
         organization-id: "fb6d32c7-2808-4358-b9eb-f7482eb8c0a5"
@@ -190,7 +190,7 @@ jobs:
     - name: Upload Signed Installer
       if: startsWith( github.ref, 'refs/tags/' )
       id: upload-signed-installer
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: "Pinta-signed-${{matrix.build.dotnet_rid}}.exe"
         path: ./signed-artifacts/Pinta.exe

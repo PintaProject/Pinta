@@ -74,11 +74,11 @@ internal sealed class NewDocumentAction : IActionHandler
 
 		workspace.NewDocument (
 			newImageOptions.NewImageSize,
-			newImageOptions.NewImageBackground);
+			newImageOptions.NewImageBackgroundColor);
 
 		settings.PutSetting (SettingNames.NEW_IMAGE_WIDTH, newImageOptions.NewImageSize.Width);
 		settings.PutSetting (SettingNames.NEW_IMAGE_HEIGHT, newImageOptions.NewImageSize.Height);
-		settings.PutSetting (SettingNames.NEW_IMAGE_BACKGROUND, newImageOptions.NewImageBackground);
+		settings.PutSetting (SettingNames.NEW_IMAGE_BACKGROUND, newImageOptions.NewImageBackgroundType);
 	}
 
 	private async Task<NewImageDialogOptions> GetDialogOptions ()
@@ -129,7 +129,8 @@ internal sealed class NewDocumentAction : IActionHandler
 
 			return new (
 				dialog.NewImageSize,
-				dialog.NewImageBackground);
+				dialog.NewImageBackground,
+				dialog.NewImageBackgroundType);
 
 		} finally {
 			dialog.Destroy ();

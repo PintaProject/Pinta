@@ -42,6 +42,16 @@
     <binary>pinta</binary>
   </provides>
   <releases>
+    <release version="3.0.4" date="2025-10-05">
+      <url>https://github.com/PintaProject/Pinta/releases/tag/3.0.4</url>
+      <description>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Fixed errors with saving JPEG files using the glycin pixbuf loader (#1774, #1785)</li>
+          <li>Fixed a few SVG icons which did not display properly in GTK 4.20 (#1797, #1796)</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.0.3" date="2025-08-01">
       <url>https://github.com/PintaProject/Pinta/releases/tag/3.0.3</url>
       <description>
