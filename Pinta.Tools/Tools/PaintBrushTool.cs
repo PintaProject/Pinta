@@ -122,7 +122,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 			surface_modified = true;
 
 		var surf = document.Layers.ToolLayer.Surface;
-		using Context g = document.CreateClippedToolContext ();
+		Context g = document.CreateClippedToolContext ();
 
 		g.Antialias = UseAntialiasing ? Antialias.Subpixel : Antialias.None;
 		g.LineWidth = BrushWidth;
@@ -132,14 +132,11 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point.Value);
 
+		active_brush.SetRedrawCallback ((rectangle) => RedrawRectangle (document, rectangle));
+		active_brush.SetDisposeContextCallback (() => g.Dispose ());
 		var invalidate_rect = active_brush.DoMouseMove (g, surf, strokeArgs);
 
-		// If we draw partially offscreen, Cairo gives us a bogus
-		// dirty rectangle, so redraw everything.
-		if (document.Workspace.IsPartiallyOffscreen (invalidate_rect))
-			document.Workspace.Invalidate ();
-		else
-			document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
+		RedrawRectangle (document, invalidate_rect);
 
 		last_point = e.Point;
 	}
@@ -206,5 +203,15 @@ public sealed class PaintBrushTool : BaseBrushTool
 			BrushComboBox.ComboBox.AppendText (brush.Name);
 
 		BrushComboBox.ComboBox.Active = 0;
+	}
+
+	private void RedrawRectangle(Document document, RectangleI invalidate_rect)
+	{
+		// If we draw partially offscreen, Cairo gives us a bogus
+		// dirty rectangle, so redraw everything.
+		if (document.Workspace.IsPartiallyOffscreen (invalidate_rect))
+			document.Workspace.Invalidate ();
+		else
+			document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
 	}
 }
