@@ -42,6 +42,8 @@ public sealed class PintaCanvas : Gtk.Picture
 	private Gdk.Texture? canvas_texture;
 	private static readonly Gdk.Texture transparent_pattern_texture = CreateTransparentPatternTexture ();
 	private RectangleI? modified_area;
+	private uint selection_animation_timer_id;
+	private float selection_animation_dash_offset;
 
 	private readonly ChromeManager chrome;
 	private readonly ToolManager tools;
@@ -67,6 +69,9 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		document.Workspace.ViewSizeChanged += OnViewSizeChanged;
 		document.Workspace.CanvasInvalidated += OnCanvasInvalidated;
+
+		// Timer for selection outline animation
+		selection_animation_timer_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, 80, SelectionAnimationTick);
 
 		// Forward mouse press / release events to the current tool
 		Gtk.GestureClick click_controller = Gtk.GestureClick.New ();
@@ -247,7 +252,9 @@ public sealed class PintaCanvas : Gtk.Picture
 		snapshot.AppendStroke (selectionPath, stroke, white);
 
 		// Draw a black dashed line over the white line
+		float dashOffset = selection_animation_dash_offset / scale;
 		stroke.SetDash ([2.0f / scale, 4.0f / scale]);
+		stroke.SetDashOffset (dashOffset);
 		Gdk.RGBA black = new () { Red = 0, Green = 0, Blue = 0, Alpha = 1 };
 		snapshot.AppendStroke (selectionPath, stroke, black);
 
@@ -509,5 +516,71 @@ public sealed class PintaCanvas : Gtk.Picture
 		};
 
 		return tools.DoKeyUp (document, tool_args);
+	}
+
+
+	#region Selection outline animation
+	private bool SelectionAnimationTick ()
+	{
+		if (!document.Selection.Visible)
+			return true;
+
+		selection_animation_dash_offset -= 1f;
+		if (selection_animation_dash_offset < 0f)
+			selection_animation_dash_offset += 6f;
+
+		// invalidate the selection area to make sure the outline is redrawn
+		document.Workspace.Invalidate (GetSelectionInvalidateRect ());
+		return true;
+	}
+
+	/// <summary>
+	/// Compute the smallest rectangle that fits the selection.
+	/// </summary>
+	private RectangleI GetSelectionInvalidateRect ()
+	{
+		const int padding = 2;
+		int minX = int.MaxValue;
+		int minY = int.MaxValue;
+		int maxX = int.MinValue;
+		int maxY = int.MinValue;
+		bool hasPoint = false;
+
+		foreach (var polygon in document.Selection.SelectionPolygons) {
+			foreach (var point in polygon) {
+				hasPoint = true;
+				int x = (int) point.X;
+				int y = (int) point.Y;
+				if (x < minX)
+					minX = x;
+				if (y < minY)
+					minY = y;
+				if (x > maxX)
+					maxX = x;
+				if (y > maxY)
+					maxY = y;
+			}
+		}
+
+		if (!hasPoint)
+			return new RectangleI (PointI.Zero, Size.Empty);
+
+		// clamp the padded rectangle so it stays inside the image bounds
+		int widthLimit = Math.Max (document.ImageSize.Width - 1, 0);
+		int heightLimit = Math.Max (document.ImageSize.Height - 1, 0);
+		int left = Math.Clamp (minX - padding, 0, widthLimit);
+		int top = Math.Clamp (minY - padding, 0, heightLimit);
+		int right = Math.Clamp (maxX + padding, 0, widthLimit);
+		int bottom = Math.Clamp (maxY + padding, 0, heightLimit);
+		return RectangleI.FromLTRB (left, top, right, bottom);
+	}
+	#endregion
+
+	public override void Dispose ()
+	{
+		// Remove the animation event handler to avoid leaks
+		GLib.Source.Remove (selection_animation_timer_id);
+
+		base.Dispose ();
 	}
 }
