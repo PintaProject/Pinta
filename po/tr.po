@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-10-11 09:07+0000\n"
+"PO-Revision-Date: 2025-11-09 21:14+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -409,6 +409,10 @@ msgid ""
 "Right click to reverse.\n"
 "Click on a control point and drag to move it."
 msgstr ""
+"Birincil renkten ikincil renge doğru geçiş çizmek için tıklayın ve "
+"sürükleyin.\n"
+"Tersine çevirmek için sağ tıklayın.\n"
+"Denetim noktasına tıklayın ve sürükleyerek taşıyın."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -963,11 +967,11 @@ msgstr "Renk Geçişi"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:118
 msgid "Gradient Created"
-msgstr ""
+msgstr "Renk Geçişi Oluşturuldu"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:119
 msgid "Gradient Modified"
-msgstr ""
+msgstr "Renk Geçişi Değiştirildi"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
