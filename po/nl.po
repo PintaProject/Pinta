@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-09-16 06:22+0000\n"
+"PO-Revision-Date: 2025-11-09 21:14+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -103,7 +103,7 @@ msgstr "Alfa"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:212
 msgid "Alpha Gradient"
-msgstr "Alfa"
+msgstr "Alfa-verloop"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
@@ -408,6 +408,10 @@ msgid ""
 "Right click to reverse.\n"
 "Click on a control point and drag to move it."
 msgstr ""
+"Klik en sleep om een verloop van de primaire naar de secundaire kleur te "
+"tekenen.\n"
+"Klik met de rechtermuisknop voor het omgekeerde.\n"
+"Klik op een controlepunt en sleep om het te verplaatsen."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -533,7 +537,7 @@ msgstr "Inkleuren"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:277
 msgid "Conical Gradient"
-msgstr "Konisch"
+msgstr "Konisch verloop"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:46
 msgid "Contents"
@@ -961,11 +965,11 @@ msgstr "Kleurverloop"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:118
 msgid "Gradient Created"
-msgstr ""
+msgstr "Verloop aangemaakt"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:119
 msgid "Gradient Modified"
-msgstr ""
+msgstr "Verloop aangepast"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
@@ -1416,15 +1420,15 @@ msgstr "Lijn/Curve"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:275
 msgid "Linear Diamond Gradient"
-msgstr "Ruitvormig"
+msgstr "Lineair ruitvormig verloop"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:273
 msgid "Linear Gradient"
-msgstr "Lineair"
+msgstr "Lineair verloop"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:274
 msgid "Linear Reflected Gradient"
-msgstr "Lineair gereflecteerd"
+msgstr "Lineair gereflecteerd verloop"
 
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:83
 msgid "Linked"
@@ -1878,7 +1882,7 @@ msgstr "Behouden"
 
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:10
 msgid "Preset Gradient"
-msgstr "Vooringesteld"
+msgstr "Vooringesteld verloop"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Preset Palettes"
@@ -1928,7 +1932,7 @@ msgstr "Radiale vervaging"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:276
 msgid "Radial Gradient"
-msgstr "Radiaal"
+msgstr "Radiaal verloop"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:167
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:247
