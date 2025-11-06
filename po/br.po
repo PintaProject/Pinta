@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-15 00:21+0000\n"
+"POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2016-08-19 19:11+0000\n"
 "Last-Translator: Alan <Unknown>\n"
 "Language-Team: Breton <br@li.org>\n"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "All files"
 msgstr "An holl restroù"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:515
 msgid "Alpha"
 msgstr ""
 
@@ -215,7 +215,7 @@ msgstr "Mod kemmeskañ"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
 msgid "Blue"
 msgstr "Glas"
 
@@ -369,7 +369,7 @@ msgstr ""
 msgid "Choose Color"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:150
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "Dibab al livaoueg"
 
@@ -398,21 +398,22 @@ msgid ""
 "Hold Shift to constrain to a circle."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:48
+#: ../Pinta.Tools/Tools/GradientTool.cs:61
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
-"Right click to reverse."
+"Right click to reverse.\n"
+"Click on a control point and drag to move it."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
 msgstr "Klikañ ha riklañ a-benn merdeiñ war ar skeudenn."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
 msgid "Click to reset primary and secondary color."
 msgstr "Klikañ da adderaouekaat al livioù kentael hag eilvedel."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:317
 msgid "Click to select primary color."
 msgstr "Klikañ a-benn diuzañ al liv kentael."
 
@@ -420,19 +421,19 @@ msgstr "Klikañ a-benn diuzañ al liv kentael."
 msgid "Click to select region of similar color."
 msgstr "Klikañ a-benn diuzañ maezioù gant livioù damheñvel"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
 msgid "Click to select secondary color."
 msgstr "Klikañ a-benn diuzañ al liv eilvedel."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:434
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr "Golver"
 
@@ -465,16 +466,16 @@ msgstr "Koumoul"
 msgid "Coarseness"
 msgstr "Diguñvder"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 msgid "Color"
 msgstr "Liv"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:33
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:33
 msgid "Color Burn"
 msgstr "Teñvalaat al livioù"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:34
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:34
 msgid "Color Dodge"
 msgstr "Sklaeraat al livioù"
 
@@ -482,11 +483,11 @@ msgstr "Sklaeraat al livioù"
 msgid "Color Gradient"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:292
 msgid "Color Mode"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
 msgid "Color Picker"
 msgstr "Gwalenn da dapout ul liv"
@@ -526,7 +527,7 @@ msgstr ""
 msgid "Coloring"
 msgstr "Livadur"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:277
 msgid "Conical Gradient"
 msgstr "Ilrezenn kernennek"
 
@@ -596,9 +597,9 @@ msgid "Curves"
 msgstr "Krommennoù"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:443
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr "Personelaat"
 
@@ -612,7 +613,7 @@ msgstr "Troc'hañ"
 msgid "Dark"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:38
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:38
 msgid "Darken"
 msgstr "Teñvalaat"
 
@@ -651,7 +652,7 @@ msgstr "Diziuzañ pep tra"
 msgid "Details"
 msgstr "Munudoù"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:36
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "Diforc'h"
 
@@ -845,6 +846,7 @@ msgstr "Lun leuniañ ha lun an drolinenn"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "Peurlipet"
 
@@ -946,15 +948,23 @@ msgstr "Hollek"
 msgid "Glow"
 msgstr "Skleur"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:46
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:59
+#: ../Pinta.Tools/Tools/GradientTool.cs:267
 msgid "Gradient"
 msgstr "Ilrezenn"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:118
+msgid "Gradient Created"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:119
+msgid "Gradient Modified"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:471
 msgid "Green"
 msgstr "Gwer"
 
@@ -962,7 +972,7 @@ msgstr "Gwer"
 msgid "Grid"
 msgstr "Kael"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:41
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "Goulou kreñv"
 
@@ -1006,7 +1016,7 @@ msgstr ""
 msgid "Horizontal red (R)"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
@@ -1170,7 +1180,7 @@ msgstr "Diuzañ gant al las-bann"
 msgid "Layer"
 msgstr "Treuzfollenn"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Hidden"
 msgstr "Treuzfollenn kuzhet"
 
@@ -1187,7 +1197,7 @@ msgstr "Perzhioù an dreuzfollenn"
 msgid "Layer Properties..."
 msgstr "Perzhioù an dreuzfollenn..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Shown"
 msgstr "Treuzfollenn diskouezet"
 
@@ -1295,13 +1305,13 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Klik kleiz da arventennañ ul liv kentael. Klik dehou da arventennañ al liv "
 "eilvedel."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:283
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1337,7 +1347,7 @@ msgstr "Lañvaz"
 msgid "Light"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:37
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
 msgid "Lighten"
 msgstr "Sklaeraat"
 
@@ -1358,15 +1368,15 @@ msgstr ""
 msgid "Line/Curve"
 msgstr "Linenn/Krommenn"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:275
 msgid "Linear Diamond Gradient"
 msgstr "Ilrezenn linennek e doare diamant"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:273
 msgid "Linear Gradient"
 msgstr "Ilrezenn linennek"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:274
 msgid "Linear Reflected Gradient"
 msgstr "Ilrezenn linennek disvannet"
 
@@ -1374,7 +1384,7 @@ msgstr "Ilrezenn linennek disvannet"
 msgid "Linked"
 msgstr "Ereet"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
 msgstr "Lintr"
@@ -1414,7 +1424,7 @@ msgstr ""
 msgid "Merge Layer Down"
 msgstr "Toueziañ gant an dreuzfollenn a-zindan"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr ""
 
@@ -1448,7 +1458,7 @@ msgstr "Dilec'hiañ ar pikselioù bet diuzet"
 msgid "Move Selection"
 msgstr "Dilec'hiañ an diuzad"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:32
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
 msgid "Multiply"
 msgstr "Liesaat"
 
@@ -1487,11 +1497,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
 msgid "Noise"
 msgstr "Trouz"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:31
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
@@ -1621,7 +1631,7 @@ msgstr "Ec'hankad"
 msgid "Output Histogram"
 msgstr "Tellun ec'hankañ"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:35
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:35
 msgid "Overlay"
 msgstr "Gourloañ"
 
@@ -1863,7 +1873,7 @@ msgstr "RGG"
 msgid "Radial Blur"
 msgstr "Ruzed skinek"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:276
 msgid "Radial Gradient"
 msgstr "Ilrezenn skinek"
 
@@ -1872,7 +1882,7 @@ msgstr "Ilrezenn skinek"
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
 #: ../Pinta.Effects/Effects/MedianEffect.cs:59
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
 msgid "Radius"
@@ -1932,7 +1942,7 @@ msgstr "Diuzañ dre ur reizhkorn"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:449
 msgid "Red"
 msgstr "Ruz"
 
@@ -1948,7 +1958,7 @@ msgstr "Dilamadur an daoulagad ruz"
 msgid "Redo"
 msgstr "Adober"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:23
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
 msgid "Reduce Noise"
 msgstr "Digreskiñ an trouz"
 
@@ -1984,7 +1994,7 @@ msgstr "Adenvel an dreuzfollenn"
 msgid "Render"
 msgstr "Deouez"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
 msgstr "Efed gant an deouez"
 
@@ -2116,7 +2126,7 @@ msgstr "Reolennoù"
 msgid "Sampling"
 msgstr "Standilhonañ"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
 msgid "Sat"
 msgstr ""
 
@@ -2124,7 +2134,7 @@ msgstr ""
 msgid "Sat & Value"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "Peurvec'hiañ"
@@ -2166,7 +2176,7 @@ msgstr ""
 msgid "Scale"
 msgstr "Skeulaat"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:39
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:39
 msgid "Screen"
 msgstr "Skramm"
 
@@ -2206,7 +2216,7 @@ msgstr "Lemmañ"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
 msgid "Shortcut key"
 msgstr "Berradenn glavier"
 
@@ -2261,7 +2271,7 @@ msgstr "Ment"
 msgid "Smooth"
 msgstr "Lenkraat"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:42
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
 msgstr "Sklêrijenn guñv"
 
@@ -2285,7 +2295,7 @@ msgstr "Karrezioù"
 msgid "Status Bar"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
 msgstr "Kreñvder"
@@ -2454,7 +2464,7 @@ msgstr "Kartenn dreuzkas"
 msgid "Translate This Application"
 msgstr "Treiñ an arload-mañ"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:293
 msgid "Transparency Mode"
 msgstr ""
 
@@ -2542,7 +2552,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Arver arlunioù zo digant :"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Value"
 msgstr ""
 
@@ -2610,7 +2620,7 @@ msgstr "Prenestr"
 msgid "Wrap"
 msgstr "Ambakañ"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:40
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:40
 msgid "Xor"
 msgstr "Xor"
 

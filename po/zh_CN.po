@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-15 00:21+0000\n"
+"POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2025-09-15 02:21+0000\n"
 "Last-Translator: caves_0 <caves_0@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -98,7 +98,7 @@ msgstr "对齐对象"
 msgid "All files"
 msgstr "全部文件"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:515
 msgid "Alpha"
 msgstr "Alpha"
 
@@ -216,7 +216,7 @@ msgstr "混合模式"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
 msgid "Blue"
 msgstr "蓝色"
 
@@ -371,7 +371,7 @@ msgstr "樱花"
 msgid "Choose Color"
 msgstr "选取颜色"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:150
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "选取调色板颜色"
 
@@ -404,23 +404,22 @@ msgstr ""
 "点击并拖拽绘制一个椭圆形选区。\n"
 "按住 Shift键可限制为圆形。"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:48
+#: ../Pinta.Tools/Tools/GradientTool.cs:61
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
-"Right click to reverse."
+"Right click to reverse.\n"
+"Click on a control point and drag to move it."
 msgstr ""
-"点击并拖拽绘制从主色到次主色的渐变。\n"
-"按鼠标右右键反转。"
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
 msgstr "点击拖动以操纵图像。"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
 msgid "Click to reset primary and secondary color."
 msgstr "点击重置主副颜色"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:317
 msgid "Click to select primary color."
 msgstr "点击选择主颜色"
 
@@ -428,19 +427,19 @@ msgstr "点击选择主颜色"
 msgid "Click to select region of similar color."
 msgstr "点击选取相似颜色的区域。"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
 msgid "Click to select secondary color."
 msgstr "点击选择副颜色"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
 msgid "Click to switch between primary and secondary color."
 msgstr "单击可在主颜色和副颜色之间切换。"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:434
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr "剪贴板"
 
@@ -473,16 +472,16 @@ msgstr "云"
 msgid "Coarseness"
 msgstr "粗糙度"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 msgid "Color"
 msgstr "颜色"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:33
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:33
 msgid "Color Burn"
 msgstr "颜色加深"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:34
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:34
 msgid "Color Dodge"
 msgstr "颜色减淡"
 
@@ -490,11 +489,11 @@ msgstr "颜色减淡"
 msgid "Color Gradient"
 msgstr "颜色渐变"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:292
 msgid "Color Mode"
 msgstr "色彩模式"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
 msgid "Color Picker"
 msgstr "颜色拾取器"
@@ -534,7 +533,7 @@ msgstr "颜色分类"
 msgid "Coloring"
 msgstr "着色"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:277
 msgid "Conical Gradient"
 msgstr "锥形渐变"
 
@@ -604,9 +603,9 @@ msgid "Curves"
 msgstr "曲线"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:443
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr "自定义"
 
@@ -620,7 +619,7 @@ msgstr "剪切"
 msgid "Dark"
 msgstr "变暗"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:38
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:38
 msgid "Darken"
 msgstr "减暗"
 
@@ -659,7 +658,7 @@ msgstr "全部不选"
 msgid "Details"
 msgstr "详细信息"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:36
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "差别"
 
@@ -853,6 +852,7 @@ msgstr "填充和边框"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "已完成"
 
@@ -954,15 +954,23 @@ msgstr "整个区域"
 msgid "Glow"
 msgstr "发光"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:46
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:59
+#: ../Pinta.Tools/Tools/GradientTool.cs:267
 msgid "Gradient"
 msgstr "渐变"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:118
+msgid "Gradient Created"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:119
+msgid "Gradient Modified"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:471
 msgid "Green"
 msgstr "绿色"
 
@@ -970,7 +978,7 @@ msgstr "绿色"
 msgid "Grid"
 msgstr "网格"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:41
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "强光"
 
@@ -1012,7 +1020,7 @@ msgstr "以绿色为主导项颜色水平排序"
 msgid "Horizontal red (R)"
 msgstr "以红色为主导项颜色水平排序"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
@@ -1176,7 +1184,7 @@ msgstr "套索选择"
 msgid "Layer"
 msgstr "图层"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Hidden"
 msgstr "隐藏图层"
 
@@ -1193,7 +1201,7 @@ msgstr "图层属性"
 msgid "Layer Properties..."
 msgstr "图层属性..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Shown"
 msgstr "显示图层"
 
@@ -1305,11 +1313,11 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr "左击设置主颜色，右击设置副颜色。"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:283
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1343,7 +1351,7 @@ msgstr "许可"
 msgid "Light"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:37
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
 msgid "Lighten"
 msgstr "加亮"
 
@@ -1364,15 +1372,15 @@ msgstr ""
 msgid "Line/Curve"
 msgstr "直线/曲线"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:275
 msgid "Linear Diamond Gradient"
 msgstr "菱形渐变"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:273
 msgid "Linear Gradient"
 msgstr "线性渐变"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:274
 msgid "Linear Reflected Gradient"
 msgstr "双线性渐变"
 
@@ -1380,7 +1388,7 @@ msgstr "双线性渐变"
 msgid "Linked"
 msgstr "已链接"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
 msgstr "发光度"
@@ -1420,7 +1428,7 @@ msgstr ""
 msgid "Merge Layer Down"
 msgstr "向下合并图层"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr "模式"
 
@@ -1454,7 +1462,7 @@ msgstr "移动选择的像素"
 msgid "Move Selection"
 msgstr "移动选区"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:32
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
 msgid "Multiply"
 msgstr "正片叠加"
 
@@ -1493,11 +1501,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
 msgid "Noise"
 msgstr "噪点"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:31
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
@@ -1627,7 +1635,7 @@ msgstr "输入或输出"
 msgid "Output Histogram"
 msgstr "输出直方图"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:35
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:35
 msgid "Overlay"
 msgstr "重叠"
 
@@ -1872,7 +1880,7 @@ msgstr "RGB色彩模式"
 msgid "Radial Blur"
 msgstr "径向模糊"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:276
 msgid "Radial Gradient"
 msgstr "径向渐变"
 
@@ -1881,7 +1889,7 @@ msgstr "径向渐变"
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
 #: ../Pinta.Effects/Effects/MedianEffect.cs:59
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
 msgid "Radius"
@@ -1941,7 +1949,7 @@ msgstr "矩形选择"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:449
 msgid "Red"
 msgstr "红色"
 
@@ -1957,7 +1965,7 @@ msgstr "去除红眼"
 msgid "Redo"
 msgstr "重做"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:23
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
 msgid "Reduce Noise"
 msgstr "减少噪点"
 
@@ -1993,7 +2001,7 @@ msgstr "重命名图层"
 msgid "Render"
 msgstr "渲染"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
 msgstr "渲染效果"
 
@@ -2125,7 +2133,7 @@ msgstr "标尺"
 msgid "Sampling"
 msgstr "取样"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
 msgid "Sat"
 msgstr ""
 
@@ -2133,7 +2141,7 @@ msgstr ""
 msgid "Sat & Value"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "饱和度"
@@ -2175,7 +2183,7 @@ msgstr "在关闭之前保存对图像“{0}”的更改？"
 msgid "Scale"
 msgstr "缩放"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:39
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:39
 msgid "Screen"
 msgstr "屏幕"
 
@@ -2215,7 +2223,7 @@ msgstr "锐化"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
 msgid "Shortcut key"
 msgstr "快捷键"
 
@@ -2270,7 +2278,7 @@ msgstr "尺寸"
 msgid "Smooth"
 msgstr "平滑"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:42
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
 msgstr "柔光"
 
@@ -2294,7 +2302,7 @@ msgstr "方格"
 msgid "Status Bar"
 msgstr "状态栏"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
 msgstr "强度"
@@ -2463,7 +2471,7 @@ msgstr "转换图"
 msgid "Translate This Application"
 msgstr "翻译这个应用程序"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:293
 msgid "Transparency Mode"
 msgstr "透明模式"
 
@@ -2550,7 +2558,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "从此位置使用了一些图标："
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Value"
 msgstr ""
 
@@ -2618,7 +2626,7 @@ msgstr "窗口"
 msgid "Wrap"
 msgstr "循环"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:40
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:40
 msgid "Xor"
 msgstr "异或"
 
@@ -2788,6 +2796,13 @@ msgstr "{0} 调色板 ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid ""
+#~ "Click and drag to draw gradient from primary to secondary color.\n"
+#~ "Right click to reverse."
+#~ msgstr ""
+#~ "点击并拖拽绘制从主色到次主色的渐变。\n"
+#~ "按鼠标右右键反转。"
 
 #~ msgid "Click and drag to draw the outline for a selection area."
 #~ msgstr "点击拖动以绘制选取的轮廓"

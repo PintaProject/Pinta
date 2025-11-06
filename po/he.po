@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-15 00:21+0000\n"
+"POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2025-10-29 01:52+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/pinta/pinta/he/>\n"
@@ -97,7 +97,7 @@ msgstr "יישור עצם"
 msgid "All files"
 msgstr "כל הקבצים"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:515
 msgid "Alpha"
 msgstr "שקיפות"
 
@@ -215,7 +215,7 @@ msgstr "מצב ערבול"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
 msgid "Blue"
 msgstr "כחול"
 
@@ -369,7 +369,7 @@ msgstr "פריחת הדובדבן"
 msgid "Choose Color"
 msgstr "בחירת צבע"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:150
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "בחירת ערכת צבעים"
 
@@ -398,21 +398,22 @@ msgid ""
 "Hold Shift to constrain to a circle."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:48
+#: ../Pinta.Tools/Tools/GradientTool.cs:61
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
-"Right click to reverse."
+"Right click to reverse.\n"
+"Click on a control point and drag to move it."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
 msgstr "יש ללחוץ ולגרור כדי לנווט ברחבי התמונה."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
 msgid "Click to reset primary and secondary color."
 msgstr "יש ללחוץ כדי לאפס את הצבעים הראשי והמשני."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:317
 msgid "Click to select primary color."
 msgstr "יש ללחוץ כדי לבחור בצבע עיקרי."
 
@@ -420,19 +421,19 @@ msgstr "יש ללחוץ כדי לבחור בצבע עיקרי."
 msgid "Click to select region of similar color."
 msgstr "יש ללחוץ כדי לבחור אזור בעל אותו הצבע."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
 msgid "Click to select secondary color."
 msgstr "יש ללחוץ כדי לבחור בצבע משני."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
 msgid "Click to switch between primary and secondary color."
 msgstr "לחיצה תחליף בין הצבע העיקרי למשני."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:434
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr "לוח גזירות"
 
@@ -465,16 +466,16 @@ msgstr "עננים"
 msgid "Coarseness"
 msgstr "חוזק"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 msgid "Color"
 msgstr "צבע"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:33
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:33
 msgid "Color Burn"
 msgstr "צריבת צבע"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:34
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:34
 msgid "Color Dodge"
 msgstr "התחמקות צבע"
 
@@ -482,11 +483,11 @@ msgstr "התחמקות צבע"
 msgid "Color Gradient"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:292
 msgid "Color Mode"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
 msgid "Color Picker"
 msgstr "‏מלקט הצבעים"
@@ -526,7 +527,7 @@ msgstr ""
 msgid "Coloring"
 msgstr "צביעה"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:277
 msgid "Conical Gradient"
 msgstr "מדרג חרוטי"
 
@@ -596,9 +597,9 @@ msgid "Curves"
 msgstr "עקומות"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:443
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr "מותאם אישית"
 
@@ -612,7 +613,7 @@ msgstr "גזירה"
 msgid "Dark"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:38
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:38
 msgid "Darken"
 msgstr "האפלה"
 
@@ -651,7 +652,7 @@ msgstr "ביטול בחירת הכול"
 msgid "Details"
 msgstr "פרטים"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:36
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "הבדל"
 
@@ -845,6 +846,7 @@ msgstr "מילוי וקו המתאר של הצורה"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "מוגמר"
 
@@ -946,15 +948,23 @@ msgstr "גלובלי"
 msgid "Glow"
 msgstr "זריחה"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:46
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:59
+#: ../Pinta.Tools/Tools/GradientTool.cs:267
 msgid "Gradient"
 msgstr "מדרג"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:118
+msgid "Gradient Created"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:119
+msgid "Gradient Modified"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:471
 msgid "Green"
 msgstr "ירוק"
 
@@ -962,7 +972,7 @@ msgstr "ירוק"
 msgid "Grid"
 msgstr "רשת"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:41
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "אור קשה"
 
@@ -1006,7 +1016,7 @@ msgstr ""
 msgid "Horizontal red (R)"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
@@ -1170,7 +1180,7 @@ msgstr "בחירת פלצור"
 msgid "Layer"
 msgstr "שכבה"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Hidden"
 msgstr "שכבה מוסתרת"
 
@@ -1187,7 +1197,7 @@ msgstr "מאפייני השכבה"
 msgid "Layer Properties..."
 msgstr "מאפייני השכבה..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Shown"
 msgstr "שכבה מופיעה"
 
@@ -1292,12 +1302,12 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "לחיצה בלחצן השמאלי כדי לבחור צבע עיקרי. בימיני כדי להגדיר את הצבע המשני."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:283
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1333,7 +1343,7 @@ msgstr "רישיון"
 msgid "Light"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:37
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
 msgid "Lighten"
 msgstr "הבהרה"
 
@@ -1354,15 +1364,15 @@ msgstr ""
 msgid "Line/Curve"
 msgstr "קו/עקומה"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:275
 msgid "Linear Diamond Gradient"
 msgstr "מדרג קווי בצורת מעוין"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:273
 msgid "Linear Gradient"
 msgstr "מדרג קווי"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:274
 msgid "Linear Reflected Gradient"
 msgstr "מדרג קווי משתקף"
 
@@ -1370,7 +1380,7 @@ msgstr "מדרג קווי משתקף"
 msgid "Linked"
 msgstr "מקושר"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
 msgstr "עצמת התאורה"
@@ -1410,7 +1420,7 @@ msgstr ""
 msgid "Merge Layer Down"
 msgstr "מיזוג השכבה כלפי מטה"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr ""
 
@@ -1444,7 +1454,7 @@ msgstr "הזזת הפיקסלים הנבחרים"
 msgid "Move Selection"
 msgstr "הזזת האזור נבחר"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:32
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
 msgid "Multiply"
 msgstr "הכפלה"
 
@@ -1483,11 +1493,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
 msgid "Noise"
 msgstr "רעש"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:31
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
@@ -1617,7 +1627,7 @@ msgstr "פלט"
 msgid "Output Histogram"
 msgstr "היסטוגרמת הפלט"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:35
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:35
 msgid "Overlay"
 msgstr "כיסוי"
 
@@ -1863,7 +1873,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "טשטוש מעגלי"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:276
 msgid "Radial Gradient"
 msgstr "מדרג מעגלי"
 
@@ -1872,7 +1882,7 @@ msgstr "מדרג מעגלי"
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
 #: ../Pinta.Effects/Effects/MedianEffect.cs:59
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
 msgid "Radius"
@@ -1932,7 +1942,7 @@ msgstr "בחירה ריבועית"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:449
 msgid "Red"
 msgstr "אדום"
 
@@ -1948,7 +1958,7 @@ msgstr "הסרת עיניים אדומות"
 msgid "Redo"
 msgstr "ביצוע חוזר"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:23
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
 msgid "Reduce Noise"
 msgstr "הפחתת רעש"
 
@@ -1984,7 +1994,7 @@ msgstr "שינוי שם השכבה"
 msgid "Render"
 msgstr "עיבוד"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
 msgstr "אפקט עיבוד"
 
@@ -2116,7 +2126,7 @@ msgstr "סרגלים"
 msgid "Sampling"
 msgstr "דגימה"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
 msgid "Sat"
 msgstr ""
 
@@ -2124,7 +2134,7 @@ msgstr ""
 msgid "Sat & Value"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "רוויה"
@@ -2166,7 +2176,7 @@ msgstr ""
 msgid "Scale"
 msgstr "קנה מידה"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:39
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:39
 msgid "Screen"
 msgstr "מסך"
 
@@ -2206,7 +2216,7 @@ msgstr "חידוד"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
 msgid "Shortcut key"
 msgstr "מקש קיצור"
 
@@ -2261,7 +2271,7 @@ msgstr "גודל"
 msgid "Smooth"
 msgstr "חלק"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:42
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
 msgstr "אור רך"
 
@@ -2285,7 +2295,7 @@ msgstr "מרובעים"
 msgid "Status Bar"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
 msgstr "עצמה"
@@ -2454,7 +2464,7 @@ msgstr "מרחב צבעים להמרה"
 msgid "Translate This Application"
 msgstr "תרגום יישום זה"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:293
 msgid "Transparency Mode"
 msgstr ""
 
@@ -2541,7 +2551,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "נעשה שימוש בכמה סמלים מ־:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Value"
 msgstr ""
 
@@ -2609,7 +2619,7 @@ msgstr "חלון"
 msgid "Wrap"
 msgstr "גלישה"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:40
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:40
 msgid "Xor"
 msgstr "Xor"
 
@@ -2718,8 +2728,8 @@ msgstr "לתורמי Pinta"
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:5
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
-"ציור;איור;צייר;ציורים;צביעה;צבע;גרפיקה;לצבוע;לצייר;דו־ממד;דו-ממד;דו־מימד;"
-"דו-מימד;לאייר;"
+"ציור;איור;צייר;ציורים;צביעה;צבע;גרפיקה;לצבוע;לצייר;דו־ממד;דו-ממד;דו־מימד;דו-"
+"מימד;לאייר;"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:68
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72

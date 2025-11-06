@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-15 00:21+0000\n"
+"POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2021-12-31 16:38+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "All files"
 msgstr "Semua fail"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:515
 msgid "Alpha"
 msgstr ""
 
@@ -215,7 +215,7 @@ msgstr "Mod Adun"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
 msgid "Blue"
 msgstr "Biru"
 
@@ -369,7 +369,7 @@ msgstr ""
 msgid "Choose Color"
 msgstr "Pilih Warna"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:150
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "Pilih Warna Palet"
 
@@ -398,21 +398,22 @@ msgid ""
 "Hold Shift to constrain to a circle."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:48
+#: ../Pinta.Tools/Tools/GradientTool.cs:61
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
-"Right click to reverse."
+"Right click to reverse.\n"
+"Click on a control point and drag to move it."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
 msgstr "Klik dan seret untuk pandu arah imej."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
 msgid "Click to reset primary and secondary color."
 msgstr "Klik untuk tetap semula warna utama dan sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:317
 msgid "Click to select primary color."
 msgstr "Klik untuk pilih warna utama."
 
@@ -420,19 +421,19 @@ msgstr "Klik untuk pilih warna utama."
 msgid "Click to select region of similar color."
 msgstr "Klik untuk pilih kawasan sama warna."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
 msgid "Click to select secondary color."
 msgstr "Klik untuk pilih warna sekunder."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
 msgid "Click to switch between primary and secondary color."
 msgstr "Klik untuk tukar antara warna utama dengan sekunder."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:434
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr "Papan Keratan"
 
@@ -465,16 +466,16 @@ msgstr "Awan"
 msgid "Coarseness"
 msgstr "Kekasaran"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 msgid "Color"
 msgstr "Warna"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:33
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:33
 msgid "Color Burn"
 msgstr "Bakar Warna"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:34
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:34
 msgid "Color Dodge"
 msgstr "Tokok Tambah Warna"
 
@@ -482,11 +483,11 @@ msgstr "Tokok Tambah Warna"
 msgid "Color Gradient"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:292
 msgid "Color Mode"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
 msgid "Color Picker"
 msgstr "Pemilih Warna"
@@ -526,7 +527,7 @@ msgstr ""
 msgid "Coloring"
 msgstr "Pewarnaan"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:277
 msgid "Conical Gradient"
 msgstr "Gradien Berkon"
 
@@ -596,9 +597,9 @@ msgid "Curves"
 msgstr "Lengkung"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:443
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr "Suai"
 
@@ -612,7 +613,7 @@ msgstr "Potong"
 msgid "Dark"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:38
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:38
 msgid "Darken"
 msgstr "Gelapkan"
 
@@ -651,7 +652,7 @@ msgstr "Nyahpilih Semua"
 msgid "Details"
 msgstr "Perincian"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:36
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "Perbezaan"
 
@@ -845,6 +846,7 @@ msgstr "IBentuk Rangka dan Berisi"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "Dimuktamadkan"
 
@@ -946,15 +948,23 @@ msgstr "Sejagat"
 msgid "Glow"
 msgstr "Teja"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:46
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:59
+#: ../Pinta.Tools/Tools/GradientTool.cs:267
 msgid "Gradient"
 msgstr "Gradien"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:118
+msgid "Gradient Created"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:119
+msgid "Gradient Modified"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:471
 msgid "Green"
 msgstr "Hijau"
 
@@ -962,7 +972,7 @@ msgstr "Hijau"
 msgid "Grid"
 msgstr "Grid"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:41
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "Cahaya Terang"
 
@@ -1006,7 +1016,7 @@ msgstr ""
 msgid "Horizontal red (R)"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
@@ -1170,7 +1180,7 @@ msgstr "Pilih Lasso"
 msgid "Layer"
 msgstr "Lapisan"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Hidden"
 msgstr "Lapisan Disembunyikan"
 
@@ -1187,7 +1197,7 @@ msgstr "Sifat Lapisan"
 msgid "Layer Properties..."
 msgstr "Sifat Lapisan..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Shown"
 msgstr "Lapisan Ditunjukkan"
 
@@ -1293,13 +1303,13 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Klik kiri untuk tetapkan warna utama. Klik kanan untuk tetapkan warna "
 "sekunder."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:283
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1335,7 +1345,7 @@ msgstr "Lesen"
 msgid "Light"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:37
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
 msgid "Lighten"
 msgstr "Cerahkan"
 
@@ -1356,15 +1366,15 @@ msgstr ""
 msgid "Line/Curve"
 msgstr "Garis/Lengkung"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:275
 msgid "Linear Diamond Gradient"
 msgstr "Gradien Intan Linear"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:273
 msgid "Linear Gradient"
 msgstr "Gradien Linear"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:274
 msgid "Linear Reflected Gradient"
 msgstr "Gradien Terpantul Linear"
 
@@ -1372,7 +1382,7 @@ msgstr "Gradien Terpantul Linear"
 msgid "Linked"
 msgstr "Terpaut"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
 msgstr "Kekilauan"
@@ -1412,7 +1422,7 @@ msgstr ""
 msgid "Merge Layer Down"
 msgstr "Gabung Lapisan Bawah"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr ""
 
@@ -1446,7 +1456,7 @@ msgstr "Alih Piksel Terpilih"
 msgid "Move Selection"
 msgstr "Alih Pilihan"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:32
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
 msgid "Multiply"
 msgstr "Ganda"
 
@@ -1485,11 +1495,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
 msgid "Noise"
 msgstr "Hingar"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:31
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
@@ -1619,7 +1629,7 @@ msgstr "Output"
 msgid "Output Histogram"
 msgstr "Histogram Output"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:35
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:35
 msgid "Overlay"
 msgstr "Tindihan Atas"
 
@@ -1867,7 +1877,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Kabur Berjejari"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:276
 msgid "Radial Gradient"
 msgstr "Gradien Jejari"
 
@@ -1876,7 +1886,7 @@ msgstr "Gradien Jejari"
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
 #: ../Pinta.Effects/Effects/MedianEffect.cs:59
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
 msgid "Radius"
@@ -1936,7 +1946,7 @@ msgstr "Pilih Segi Empat Tepat"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:449
 msgid "Red"
 msgstr "Merah"
 
@@ -1952,7 +1962,7 @@ msgstr "Pembuangan Mata Merah"
 msgid "Redo"
 msgstr "Buat semula"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:23
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
 msgid "Reduce Noise"
 msgstr "Kurangkan Hingar"
 
@@ -1988,7 +1998,7 @@ msgstr "Nama Semula Lapisan"
 msgid "Render"
 msgstr "Kemas Gabung"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
 msgstr "Kesan Pengemasgabungan"
 
@@ -2120,7 +2130,7 @@ msgstr "Pembaris"
 msgid "Sampling"
 msgstr "Persampelan"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
 msgid "Sat"
 msgstr ""
 
@@ -2128,7 +2138,7 @@ msgstr ""
 msgid "Sat & Value"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "Ketepuan"
@@ -2170,7 +2180,7 @@ msgstr "Simpan perubahan yang dibuat ke atas imej \"{0}\" sebelum menutup?"
 msgid "Scale"
 msgstr "Skala"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:39
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:39
 msgid "Screen"
 msgstr "Skrin"
 
@@ -2210,7 +2220,7 @@ msgstr "Jelaskan"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
 msgid "Shortcut key"
 msgstr "Kekunci pintasan"
 
@@ -2265,7 +2275,7 @@ msgstr "Saiz"
 msgid "Smooth"
 msgstr "Licin"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:42
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
 msgstr "Cahaya Lembut"
 
@@ -2289,7 +2299,7 @@ msgstr "Segi Empat Sama"
 msgid "Status Bar"
 msgstr "Palang Status"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
 msgstr "Kekuatan"
@@ -2458,7 +2468,7 @@ msgstr "Peta Pindahan"
 msgid "Translate This Application"
 msgstr "Terjemah Aplikasi Ini"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:293
 msgid "Transparency Mode"
 msgstr ""
 
@@ -2545,7 +2555,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Menggunakan beberapa ikon daripada:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Value"
 msgstr ""
 
@@ -2613,7 +2623,7 @@ msgstr "Tetingkap"
 msgid "Wrap"
 msgstr "Lilit"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:40
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:40
 msgid "Xor"
 msgstr "Xor"
 

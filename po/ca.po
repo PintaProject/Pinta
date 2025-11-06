@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-15 00:21+0000\n"
+"POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2025-07-26 14:06+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/pinta/pinta/ca/"
@@ -98,7 +98,7 @@ msgstr ""
 msgid "All files"
 msgstr "Tots els fitxers"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:515
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -216,7 +216,7 @@ msgstr "Mode"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
 msgid "Blue"
 msgstr "Blau"
 
@@ -370,7 +370,7 @@ msgstr ""
 msgid "Choose Color"
 msgstr "Triar color"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:150
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "Tria la paleta de colors"
 
@@ -399,21 +399,22 @@ msgid ""
 "Hold Shift to constrain to a circle."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:48
+#: ../Pinta.Tools/Tools/GradientTool.cs:61
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
-"Right click to reverse."
+"Right click to reverse.\n"
+"Click on a control point and drag to move it."
 msgstr ""
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
 msgstr "Feu clic i arrossegueu per navegar per la imatge."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
 msgid "Click to reset primary and secondary color."
 msgstr "Feu clic per reinicialitzar els colors primari i secundari."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:317
 msgid "Click to select primary color."
 msgstr "Feu clic per seleccionar el color primari."
 
@@ -421,19 +422,19 @@ msgstr "Feu clic per seleccionar el color primari."
 msgid "Click to select region of similar color."
 msgstr "Feu clic per a seleccionar una regió de color similar."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
 msgid "Click to select secondary color."
 msgstr "Feu clic per seleccionar el color secundari."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
 msgid "Click to switch between primary and secondary color."
 msgstr "Faça click per intercanviar entre el color primari i el secundari."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:434
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr "Porta-retalls"
 
@@ -466,16 +467,16 @@ msgstr "Núvols"
 msgid "Coarseness"
 msgstr "Tosquedat"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 msgid "Color"
 msgstr "Color"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:33
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:33
 msgid "Color Burn"
 msgstr "Subexposa el color"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:34
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:34
 msgid "Color Dodge"
 msgstr "Sobreexposa el color"
 
@@ -483,11 +484,11 @@ msgstr "Sobreexposa el color"
 msgid "Color Gradient"
 msgstr "Degradat de colors"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:292
 msgid "Color Mode"
 msgstr "Mode de colors"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
 msgid "Color Picker"
 msgstr "Capturador de color"
@@ -527,7 +528,7 @@ msgstr ""
 msgid "Coloring"
 msgstr "Colorejat"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:277
 msgid "Conical Gradient"
 msgstr "Degradat cònic"
 
@@ -597,9 +598,9 @@ msgid "Curves"
 msgstr "Corbes"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:443
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr "Personalitzat"
 
@@ -613,7 +614,7 @@ msgstr "Retalla"
 msgid "Dark"
 msgstr "Fosc"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:38
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:38
 msgid "Darken"
 msgstr "Enfosqueix"
 
@@ -652,7 +653,7 @@ msgstr "No seleccionis res"
 msgid "Details"
 msgstr "Detalls"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:36
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "Diferència"
 
@@ -846,6 +847,7 @@ msgstr "Omple i perfila la forma"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "Finalitzat"
 
@@ -947,15 +949,23 @@ msgstr "Global"
 msgid "Glow"
 msgstr "Lluentor"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:46
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:59
+#: ../Pinta.Tools/Tools/GradientTool.cs:267
 msgid "Gradient"
 msgstr "Degradat"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:118
+msgid "Gradient Created"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:119
+msgid "Gradient Modified"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:471
 msgid "Green"
 msgstr "Verd"
 
@@ -963,7 +973,7 @@ msgstr "Verd"
 msgid "Grid"
 msgstr "Graella"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:41
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "Llum forta"
 
@@ -1007,7 +1017,7 @@ msgstr ""
 msgid "Horizontal red (R)"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
@@ -1171,7 +1181,7 @@ msgstr "Selecció de llaç"
 msgid "Layer"
 msgstr "Capa"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Hidden"
 msgstr "Capa oculta"
 
@@ -1188,7 +1198,7 @@ msgstr "Propietats de la capa"
 msgid "Layer Properties..."
 msgstr "Propietats de la capa..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Shown"
 msgstr "Capa actual"
 
@@ -1298,13 +1308,13 @@ msgstr ""
 "Feu clic esquerre per a definir el color primari.\n"
 "Feu clic dret per a definir el color secundari."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Feu clic amb el botó esquerre per establir el color primari. Feu clic amb el "
 "botó dret per establir el color secundari."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:283
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1341,7 +1351,7 @@ msgstr "Llicència"
 msgid "Light"
 msgstr "Clar"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:37
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
 msgid "Lighten"
 msgstr "Il·lumina"
 
@@ -1362,15 +1372,15 @@ msgstr ""
 msgid "Line/Curve"
 msgstr "Línia/corba"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:275
 msgid "Linear Diamond Gradient"
 msgstr "Degradat de diamant lineal"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:273
 msgid "Linear Gradient"
 msgstr "Degradat lineal"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:274
 msgid "Linear Reflected Gradient"
 msgstr "Degradat reflectit lineal"
 
@@ -1378,7 +1388,7 @@ msgstr "Degradat reflectit lineal"
 msgid "Linked"
 msgstr "Enllaçat"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
 msgstr "Lluminositat"
@@ -1418,7 +1428,7 @@ msgstr "Barra de menús"
 msgid "Merge Layer Down"
 msgstr "Fusiona amb la capa inferior"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr "Mode"
 
@@ -1452,7 +1462,7 @@ msgstr "Desplaça els píxels seleccionats"
 msgid "Move Selection"
 msgstr "Mou la selecció"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:32
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
 msgid "Multiply"
 msgstr "Multiplica"
 
@@ -1491,11 +1501,11 @@ msgstr "No s’ha trobat cap element"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
 msgid "Noise"
 msgstr "Soroll"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:31
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
@@ -1625,7 +1635,7 @@ msgstr "Sortida"
 msgid "Output Histogram"
 msgstr "Histograma de sortida"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:35
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:35
 msgid "Overlay"
 msgstr "Sobreposa"
 
@@ -1872,7 +1882,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Desenfocament radial"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:276
 msgid "Radial Gradient"
 msgstr "Degradat radial"
 
@@ -1881,7 +1891,7 @@ msgstr "Degradat radial"
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
 #: ../Pinta.Effects/Effects/MedianEffect.cs:59
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
 msgid "Radius"
@@ -1941,7 +1951,7 @@ msgstr "Selecció rectangular"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:449
 msgid "Red"
 msgstr "Vermell"
 
@@ -1957,7 +1967,7 @@ msgstr "Elimina els ulls vermells"
 msgid "Redo"
 msgstr "Refés"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:23
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
 msgid "Reduce Noise"
 msgstr "Redueix el soroll"
 
@@ -1993,7 +2003,7 @@ msgstr "Canvia el nom de la capa"
 msgid "Render"
 msgstr "Renderitza"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
 msgstr "Efecte de renderització"
 
@@ -2125,7 +2135,7 @@ msgstr "Regles"
 msgid "Sampling"
 msgstr "Mostreig"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
 msgid "Sat"
 msgstr ""
 
@@ -2133,7 +2143,7 @@ msgstr ""
 msgid "Sat & Value"
 msgstr ""
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "Saturació"
@@ -2175,7 +2185,7 @@ msgstr "Voleu desar els canvis fets a la imatge «{0}» abans de tancar?"
 msgid "Scale"
 msgstr "Escala"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:39
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:39
 msgid "Screen"
 msgstr "Pantalla"
 
@@ -2215,7 +2225,7 @@ msgstr "Nítid"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
 msgid "Shortcut key"
 msgstr "Drecera de teclat"
 
@@ -2270,7 +2280,7 @@ msgstr "Mida"
 msgid "Smooth"
 msgstr "Suavitza"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:42
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
 msgstr "Llum suau"
 
@@ -2294,7 +2304,7 @@ msgstr "Quadrats"
 msgid "Status Bar"
 msgstr "Barra d’estat"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
 msgstr "Força"
@@ -2463,7 +2473,7 @@ msgstr "Transfereix el mapa"
 msgid "Translate This Application"
 msgstr "Traduïu aquesta aplicació"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:293
 msgid "Transparency Mode"
 msgstr "Mode de transparència"
 
@@ -2550,7 +2560,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "S'han utilitzat algunes icones de:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Value"
 msgstr "Valor"
 
@@ -2618,7 +2628,7 @@ msgstr "Finestra"
 msgid "Wrap"
 msgstr "Ajusta"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:40
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:40
 msgid "Xor"
 msgstr "Xor"
 

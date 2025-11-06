@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-15 00:21+0000\n"
+"POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2025-09-18 15:31+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/pinta/pinta/hr/>"
-"\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/pinta/pinta/hr/"
+">\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,7 +99,7 @@ msgstr "Poravnaj objekt"
 msgid "All files"
 msgstr "Sve datoteke"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:515
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -217,7 +217,7 @@ msgstr "Modus stapanja"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
 msgid "Blue"
 msgstr "Plava"
 
@@ -371,7 +371,7 @@ msgstr "Cvijet trešnje"
 msgid "Choose Color"
 msgstr "Odaberi boju"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:150
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "Odaberi boju palete"
 
@@ -404,23 +404,22 @@ msgstr ""
 "Klikni i povuci za crtanje eliptičnog odabira.\n"
 "Drži tipku Shift za crtanje kruga."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:48
+#: ../Pinta.Tools/Tools/GradientTool.cs:61
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
-"Right click to reverse."
+"Right click to reverse.\n"
+"Click on a control point and drag to move it."
 msgstr ""
-"Klikni i povuci za crtanje gradijenta iz primarne u sekundarnu boju.\n"
-"Desni klik za obratno."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
 msgstr "Klikni i povuci za navigaciju slikom.."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
 msgid "Click to reset primary and secondary color."
 msgstr "Klikni za resetiranje primarne i sekundarne boje."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:317
 msgid "Click to select primary color."
 msgstr "Klikni za biranje primarne boje."
 
@@ -428,19 +427,19 @@ msgstr "Klikni za biranje primarne boje."
 msgid "Click to select region of similar color."
 msgstr "Klikni za biranje područja slične boje."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
 msgid "Click to select secondary color."
 msgstr "Klikni za biranje sekundarne boje."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
 msgid "Click to switch between primary and secondary color."
 msgstr "Klikni za prebacivanje između primarne i sekundarne boje."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:434
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr "Međuspremnik"
 
@@ -473,16 +472,16 @@ msgstr "Oblaci"
 msgid "Coarseness"
 msgstr "Hrapavost"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 msgid "Color"
 msgstr "Boja"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:33
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:33
 msgid "Color Burn"
 msgstr "Užarena boja"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:34
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:34
 msgid "Color Dodge"
 msgstr "Posvijetljena boja"
 
@@ -490,11 +489,11 @@ msgstr "Posvijetljena boja"
 msgid "Color Gradient"
 msgstr "Gradijent boje"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:292
 msgid "Color Mode"
 msgstr "Modus boja"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
 msgid "Color Picker"
 msgstr "Kapaljka"
@@ -534,7 +533,7 @@ msgstr "Razvrstavanje boja"
 msgid "Coloring"
 msgstr "Bojenje"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:277
 msgid "Conical Gradient"
 msgstr "Konusni gradijent"
 
@@ -604,9 +603,9 @@ msgid "Curves"
 msgstr "Krivulje"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:443
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr "Prilagođeno"
 
@@ -620,7 +619,7 @@ msgstr "Izreži"
 msgid "Dark"
 msgstr "Tamno"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:38
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:38
 msgid "Darken"
 msgstr "Zatamni"
 
@@ -659,7 +658,7 @@ msgstr "Odznači sve"
 msgid "Details"
 msgstr "Detalji"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:36
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "Razlika"
 
@@ -854,6 +853,7 @@ msgstr "Oblik ispune i konture"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "Završeno"
 
@@ -955,15 +955,23 @@ msgstr "Globalno"
 msgid "Glow"
 msgstr "Sjaj"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:46
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:59
+#: ../Pinta.Tools/Tools/GradientTool.cs:267
 msgid "Gradient"
 msgstr "Gradijent"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:118
+msgid "Gradient Created"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:119
+msgid "Gradient Modified"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:471
 msgid "Green"
 msgstr "Zelena"
 
@@ -971,7 +979,7 @@ msgstr "Zelena"
 msgid "Grid"
 msgstr "Rešetka"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:41
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "Jako svjetlo"
 
@@ -1014,7 +1022,7 @@ msgstr "Vodoravno zelena (G)"
 msgid "Horizontal red (R)"
 msgstr "Vodoravno crvena (R)"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
@@ -1183,7 +1191,7 @@ msgstr "Odabir pomoću lasoa"
 msgid "Layer"
 msgstr "Sloj"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Hidden"
 msgstr "Skriveni sloj"
 
@@ -1200,7 +1208,7 @@ msgstr "Postavke sloja"
 msgid "Layer Properties..."
 msgstr "Postavke sloja …"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Shown"
 msgstr "Prikazani sloj"
 
@@ -1339,13 +1347,13 @@ msgstr ""
 "Lijevi klik za postavljanje primarne boje.\n"
 "Desni klik za postavljanje sekundarne boje."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Lijevi klik za postavljanje primarne boje. Desni klik za postavljanje "
 "sekundarne boje."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:283
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1384,7 +1392,7 @@ msgstr "Licenca"
 msgid "Light"
 msgstr "Svijetla"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:37
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
 msgid "Lighten"
 msgstr "Posvijetli"
 
@@ -1405,15 +1413,15 @@ msgstr "Limunasta limeta"
 msgid "Line/Curve"
 msgstr "Linija / Krivulja"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:275
 msgid "Linear Diamond Gradient"
 msgstr "Linearni rombičan gradijent"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:273
 msgid "Linear Gradient"
 msgstr "Linearni gradijent"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:274
 msgid "Linear Reflected Gradient"
 msgstr "Linearni odsijevajući gradijent"
 
@@ -1421,7 +1429,7 @@ msgstr "Linearni odsijevajući gradijent"
 msgid "Linked"
 msgstr "Povezano"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
 msgstr "Osvijetljenost"
@@ -1461,7 +1469,7 @@ msgstr "Traka izbornika"
 msgid "Merge Layer Down"
 msgstr "Spoji sloj prema dolje"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr "Modus"
 
@@ -1495,7 +1503,7 @@ msgstr "Pomakni odabrane piksele"
 msgid "Move Selection"
 msgstr "Pomakni odabir"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:32
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
 msgid "Multiply"
 msgstr "Pomnoži"
 
@@ -1534,11 +1542,11 @@ msgstr "Nijedna stavka nije pronađena"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
 msgid "Noise"
 msgstr "Šum"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:31
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
@@ -1668,7 +1676,7 @@ msgstr "Rezultat"
 msgid "Output Histogram"
 msgstr "Histogram rezultata"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:35
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:35
 msgid "Overlay"
 msgstr "Prekriveno"
 
@@ -1915,7 +1923,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Radijalno zamućenje"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:276
 msgid "Radial Gradient"
 msgstr "Radijalni gradijent"
 
@@ -1924,7 +1932,7 @@ msgstr "Radijalni gradijent"
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
 #: ../Pinta.Effects/Effects/MedianEffect.cs:59
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
 msgid "Radius"
@@ -1984,7 +1992,7 @@ msgstr "Pravokutni odabir"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:449
 msgid "Red"
 msgstr "Crvena"
 
@@ -2000,7 +2008,7 @@ msgstr "Uklanjanje crvenih očiju"
 msgid "Redo"
 msgstr "Ponovi"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:23
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
 msgid "Reduce Noise"
 msgstr "Smanji šum"
 
@@ -2036,7 +2044,7 @@ msgstr "Preimenuj sloj"
 msgid "Render"
 msgstr "Iscrtaj"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
 msgstr "Efekt iscrtavanja"
 
@@ -2168,7 +2176,7 @@ msgstr "Ravnala"
 msgid "Sampling"
 msgstr "Uzorkovanje"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
 msgid "Sat"
 msgstr "Zasićenost"
 
@@ -2176,7 +2184,7 @@ msgstr "Zasićenost"
 msgid "Sat & Value"
 msgstr "Zasićenost i vrijednost"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "Zasićenost"
@@ -2218,7 +2226,7 @@ msgstr "Spremiti promjene u slici „{0}“ prije zatvaranja?"
 msgid "Scale"
 msgstr "Promijeni veličinu"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:39
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:39
 msgid "Screen"
 msgstr "Ekran"
 
@@ -2258,7 +2266,7 @@ msgstr "Izoštri"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
 msgid "Shortcut key"
 msgstr "Tipka prečaca"
 
@@ -2313,7 +2321,7 @@ msgstr "Veličina"
 msgid "Smooth"
 msgstr "Zaglađeno"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:42
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
 msgstr "Blago svjetlo"
 
@@ -2337,7 +2345,7 @@ msgstr "Kvadrati"
 msgid "Status Bar"
 msgstr "Traka stanja"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
 msgstr "Jačina"
@@ -2511,7 +2519,7 @@ msgstr "Karta prijenosa"
 msgid "Translate This Application"
 msgstr "Prevedi ovaj program"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:293
 msgid "Transparency Mode"
 msgstr "Modus prozirnosti"
 
@@ -2598,7 +2606,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Koriste se neke ikone od:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Value"
 msgstr "Vrijednost"
 
@@ -2666,7 +2674,7 @@ msgstr "Prozor"
 msgid "Wrap"
 msgstr "Omotaj"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:40
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:40
 msgid "Xor"
 msgstr "XILI"
 
@@ -2831,6 +2839,13 @@ msgstr "{0} paleta ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
+
+#~ msgid ""
+#~ "Click and drag to draw gradient from primary to secondary color.\n"
+#~ "Right click to reverse."
+#~ msgstr ""
+#~ "Klikni i povuci za crtanje gradijenta iz primarne u sekundarnu boju.\n"
+#~ "Desni klik za obratno."
 
 #~ msgid "Click and drag to draw the outline for a selection area."
 #~ msgstr "Klikni i povuci za crtanje konture za područje odabira."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-15 00:21+0000\n"
+"POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2025-11-05 18:51+0000\n"
 "Last-Translator: Matthieu LAURENT <matthieu.laurent69@proton.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
@@ -98,7 +98,7 @@ msgstr "Aligner l’Objet"
 msgid "All files"
 msgstr "Tous les fichiers"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:515
 msgid "Alpha"
 msgstr "Alpha"
 
@@ -216,7 +216,7 @@ msgstr "Mode de mélange"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
 msgid "Blue"
 msgstr "Bleu"
 
@@ -370,7 +370,7 @@ msgstr "Fleur de cerisier"
 msgid "Choose Color"
 msgstr "Choisir une couleur"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:150
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "Choisir la palette de couleurs"
 
@@ -403,24 +403,22 @@ msgstr ""
 "Cliquez et faites glisser pour dessiner une sélection elliptique.\n"
 "Maintenez Maj pour contraindre à un cercle."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:48
+#: ../Pinta.Tools/Tools/GradientTool.cs:61
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
-"Right click to reverse."
+"Right click to reverse.\n"
+"Click on a control point and drag to move it."
 msgstr ""
-"Cliquez et faites glisser pour dessiner un dégradé de la couleur primaire à "
-"la couleur secondaire.\n"
-"Faites un clic droit pour inverser."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
 msgstr "Cliquer et déplacer pour naviguer dans l’image."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
 msgid "Click to reset primary and secondary color."
 msgstr "Cliquer ici pour réinitialiser les couleurs primaire et secondaire."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:317
 msgid "Click to select primary color."
 msgstr "Cliquer pour sélectionner la couleur primaire."
 
@@ -428,19 +426,19 @@ msgstr "Cliquer pour sélectionner la couleur primaire."
 msgid "Click to select region of similar color."
 msgstr "Cliquer pour sélectionner une région de couleur similaire."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
 msgid "Click to select secondary color."
 msgstr "Cliquer pour sélectionner la couleur secondaire."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
 msgid "Click to switch between primary and secondary color."
 msgstr "Cliquez pour passer de la couleur primaire à la couleur secondaire."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:434
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr "Presse-papiers"
 
@@ -473,16 +471,16 @@ msgstr "Nuages"
 msgid "Coarseness"
 msgstr "Rugosité"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 msgid "Color"
 msgstr "Couleur"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:33
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:33
 msgid "Color Burn"
 msgstr "Densité couleur +"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:34
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:34
 msgid "Color Dodge"
 msgstr "Densité couleur -"
 
@@ -490,11 +488,11 @@ msgstr "Densité couleur -"
 msgid "Color Gradient"
 msgstr "Dégradé de couleur"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:292
 msgid "Color Mode"
 msgstr "Mode de couleur"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
 msgid "Color Picker"
 msgstr "Pipette"
@@ -534,7 +532,7 @@ msgstr "Tri des couleurs"
 msgid "Coloring"
 msgstr "Coloration"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:277
 msgid "Conical Gradient"
 msgstr "Dégradé conique"
 
@@ -604,9 +602,9 @@ msgid "Curves"
 msgstr "Courbes"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:443
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr "Personnalisé"
 
@@ -620,7 +618,7 @@ msgstr "Couper"
 msgid "Dark"
 msgstr "Sombre"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:38
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:38
 msgid "Darken"
 msgstr "Assombrir"
 
@@ -659,7 +657,7 @@ msgstr "Tout désélectionner"
 msgid "Details"
 msgstr "Détails"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:36
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "Différence"
 
@@ -855,6 +853,7 @@ msgstr "Forme de remplissage et extérieure"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "Terminé"
 
@@ -956,15 +955,23 @@ msgstr "Global"
 msgid "Glow"
 msgstr "Halo"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:46
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:59
+#: ../Pinta.Tools/Tools/GradientTool.cs:267
 msgid "Gradient"
 msgstr "Dégradé"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:118
+msgid "Gradient Created"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:119
+msgid "Gradient Modified"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:471
 msgid "Green"
 msgstr "Vert"
 
@@ -972,7 +979,7 @@ msgstr "Vert"
 msgid "Grid"
 msgstr "Grille"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:41
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "Lumière dure"
 
@@ -1016,7 +1023,7 @@ msgstr "Vert horizontal (G)"
 msgid "Horizontal red (R)"
 msgstr "Rouge horizontal (R)"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
@@ -1189,7 +1196,7 @@ msgstr "Sélection lasso"
 msgid "Layer"
 msgstr "Calque"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Hidden"
 msgstr "Calque masqué"
 
@@ -1206,7 +1213,7 @@ msgstr "Propriétés du calque"
 msgid "Layer Properties..."
 msgstr "Propriétés du calque…"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Shown"
 msgstr "Calque visible"
 
@@ -1351,13 +1358,13 @@ msgstr ""
 "Cliquez avec le bouton gauche pour définir la couleur primaire.\n"
 "Faites un clic droit pour définir la couleur secondaire."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Clic gauche pour définir la couleur primaire. Clic droit pour définir la "
 "couleur secondaire."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:283
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1396,7 +1403,7 @@ msgstr "Licence"
 msgid "Light"
 msgstr "Clair"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:37
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
 msgid "Lighten"
 msgstr "Éclaircir"
 
@@ -1417,15 +1424,15 @@ msgstr "Citron Vert"
 msgid "Line/Curve"
 msgstr "Ligne/courbe"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:275
 msgid "Linear Diamond Gradient"
 msgstr "Dégradé linéaire en diamant"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:273
 msgid "Linear Gradient"
 msgstr "Dégradé linéaire"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:274
 msgid "Linear Reflected Gradient"
 msgstr "Dégradé linéaire réfléchi"
 
@@ -1433,7 +1440,7 @@ msgstr "Dégradé linéaire réfléchi"
 msgid "Linked"
 msgstr "Lié"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
 msgstr "Luminosité"
@@ -1473,7 +1480,7 @@ msgstr "Barre de Menu"
 msgid "Merge Layer Down"
 msgstr "Fusionner avec le calque inférieur"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr "Mode"
 
@@ -1507,7 +1514,7 @@ msgstr "Déplacer les pixels sélectionnés"
 msgid "Move Selection"
 msgstr "Déplacer la sélection"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:32
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
 msgid "Multiply"
 msgstr "Multiplier"
 
@@ -1546,11 +1553,11 @@ msgstr "Aucun élément trouvé"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
 msgid "Noise"
 msgstr "Bruit"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:31
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
@@ -1680,7 +1687,7 @@ msgstr "Sortie"
 msgid "Output Histogram"
 msgstr "Histogramme de sortie"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:35
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:35
 msgid "Overlay"
 msgstr "Recouvrement"
 
@@ -1930,7 +1937,7 @@ msgstr "RVB"
 msgid "Radial Blur"
 msgstr "Flou radial"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:276
 msgid "Radial Gradient"
 msgstr "Dégradé radial"
 
@@ -1939,7 +1946,7 @@ msgstr "Dégradé radial"
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
 #: ../Pinta.Effects/Effects/MedianEffect.cs:59
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
 msgid "Radius"
@@ -1999,7 +2006,7 @@ msgstr "Sélection rectangulaire"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:449
 msgid "Red"
 msgstr "Rouge"
 
@@ -2015,7 +2022,7 @@ msgstr "Suppression des yeux rouges"
 msgid "Redo"
 msgstr "Rétablir"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:23
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
 msgid "Reduce Noise"
 msgstr "Réduire le bruit"
 
@@ -2051,7 +2058,7 @@ msgstr "Renommer le calque"
 msgid "Render"
 msgstr "Effectuer le rendu"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
 msgstr "Effet de rendu"
 
@@ -2183,7 +2190,7 @@ msgstr "Règles"
 msgid "Sampling"
 msgstr "Échantillonage"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
 msgid "Sat"
 msgstr "Sat."
 
@@ -2191,7 +2198,7 @@ msgstr "Sat."
 msgid "Sat & Value"
 msgstr "Sat. & Valeur"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "Saturation"
@@ -2233,7 +2240,7 @@ msgstr "Enregistrer les modifications de l’image « {0} » avant de fermer�
 msgid "Scale"
 msgstr "Échelle"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:39
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:39
 msgid "Screen"
 msgstr "Écran"
 
@@ -2273,7 +2280,7 @@ msgstr "Augmenter la netteté"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
 msgid "Shortcut key"
 msgstr "Raccourcis clavier"
 
@@ -2328,7 +2335,7 @@ msgstr "Taille"
 msgid "Smooth"
 msgstr "Lisse"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:42
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
 msgstr "Lumière douce"
 
@@ -2352,7 +2359,7 @@ msgstr "Carrés"
 msgid "Status Bar"
 msgstr "Barre d’état"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
 msgstr "Force"
@@ -2528,7 +2535,7 @@ msgstr "Carte de transfert"
 msgid "Translate This Application"
 msgstr "Traduire cette application"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:293
 msgid "Transparency Mode"
 msgstr "Mode de transparence"
 
@@ -2616,7 +2623,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Utilisation d’icônes provenant de :"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Value"
 msgstr "Valeur"
 
@@ -2684,7 +2691,7 @@ msgstr "Fenêtre"
 msgid "Wrap"
 msgstr "Envelopper"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:40
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:40
 msgid "Xor"
 msgstr "Xor"
 
@@ -2870,6 +2877,14 @@ msgstr "Palette {0} ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
+
+#~ msgid ""
+#~ "Click and drag to draw gradient from primary to secondary color.\n"
+#~ "Right click to reverse."
+#~ msgstr ""
+#~ "Cliquez et faites glisser pour dessiner un dégradé de la couleur primaire "
+#~ "à la couleur secondaire.\n"
+#~ "Faites un clic droit pour inverser."
 
 #~ msgid "Click and drag to draw the outline for a selection area."
 #~ msgstr "Cliquer et tirer pour tracer le contour d’une zone de sélection."
