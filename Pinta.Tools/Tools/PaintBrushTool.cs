@@ -26,6 +26,7 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cairo;
 using Gtk;
@@ -40,6 +41,8 @@ public sealed class PaintBrushTool : BaseBrushTool
 	private BasePaintBrush? default_brush;
 	private BasePaintBrush? active_brush;
 	private PointI? last_point = PointI.Zero;
+	private List<RepeatingDraw> open_repeating_draws = [];
+	private Context context_to_dispose_after_repeating_draws;
 
 	public PaintBrushTool (IServiceProvider services) : base (services)
 	{
@@ -129,20 +132,28 @@ public sealed class PaintBrushTool : BaseBrushTool
 		g.LineJoin = LineJoin.Round;
 		g.LineCap = LineCap.Round;
 		g.SetSourceColor (strokeColor);
+		context_to_dispose_after_repeating_draws = g;
 
 		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point.Value);
 
-		active_brush.SetRedrawCallback ((rectangle) => RedrawRectangle (document, rectangle));
-		active_brush.SetDisposeContextCallback (() => g.Dispose ());
+		CancelRepeatingDraws ();
 		var invalidate_rect = active_brush.DoMouseMove (g, surf, strokeArgs);
-
 		RedrawRectangle (document, invalidate_rect);
-
+		if (active_brush.milliseconds_before_redraw != 0) {
+			RepeatingDraw repeatingDraw = new RepeatingDraw (() => {
+				var invalidate_rect = active_brush.DoMouseMove (g, surf, strokeArgs);
+				RedrawRectangle (document, invalidate_rect);
+			});
+			open_repeating_draws.Add (repeatingDraw);
+			GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, active_brush.milliseconds_before_redraw, repeatingDraw.draw);
+		}
 		last_point = e.Point;
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
+		CancelRepeatingDraws ();
+		context_to_dispose_after_repeating_draws?.Dispose ();
 		using Context g = new (document.Layers.CurrentUserLayer.Surface);
 
 		document.Layers.ToolLayer.Draw (g);
@@ -213,5 +224,31 @@ public sealed class PaintBrushTool : BaseBrushTool
 			document.Workspace.Invalidate ();
 		else
 			document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
+	}
+
+	private void CancelRepeatingDraws()
+	{
+		foreach(RepeatingDraw repeatingDraw in open_repeating_draws) {
+			repeatingDraw.cancelled = true;
+		}
+		open_repeating_draws.Clear ();
+	}
+
+	private class RepeatingDraw {
+		public bool cancelled = false;
+		public delegate void RedrawCallback ();
+		public readonly RedrawCallback redraw_callback;
+
+		public RepeatingDraw(RedrawCallback redrawCallback) {
+			redraw_callback = redrawCallback;
+		}
+
+		public bool draw() {
+			if (cancelled) {
+				return false;
+			}
+			redraw_callback ();
+			return true;
+		}
 	}
 }

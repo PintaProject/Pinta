@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using Cairo;
 
@@ -43,26 +42,15 @@ internal sealed class SplatterBrush : BasePaintBrush
 	public override double StrokeAlphaMultiplier
 		=> 0.5;
 
+	public override uint milliseconds_before_redraw => 100;
+
 	private readonly Random random = new ();
-
-	private Context? context;
-	private ImageSurface? surface;
-	private BrushStrokeArgs? strokeArgs;
-	private RedrawCallback? redrawCallback;
-	private List<CancellationTokenSource> continuousSplatterTokenSources = [];
-
-	public override void SetRedrawCallback(RedrawCallback redrawCallback)
-	{
-		this.redrawCallback = redrawCallback;
-	}
-
 
 	protected override RectangleI OnMouseMove (
 		Context g,
 		ImageSurface surface,
 		BrushStrokeArgs strokeArgs)
 	{
-		CancelExistingContinuousSplatterTasks ();
 		int line_width = (int) g.LineWidth;
 
 		// we want a minimum size of 2 for the splatter (except for when the brush width is 1), since a splatter of size 1 is very small
@@ -129,40 +117,7 @@ internal sealed class SplatterBrush : BasePaintBrush
 		g.Fill ();
 		g.Restore ();
 
-		this.context = g;
-		this.surface = surface;
-		this.strokeArgs = strokeArgs;
-
-		CancellationTokenSource cancellationTokenSource = new CancellationTokenSource ();
-		var token = cancellationTokenSource.Token;
-		continuousSplatterTokenSources.Add (cancellationTokenSource);
-
-		Task.Delay (100).ContinueWith (t => {
-			if (t.IsCanceled) {
-				return;
-			}
-			RectangleI continuousSplatterRectangle = OnMouseMove (g, this.surface, this.strokeArgs);
-			if (redrawCallback != null) { // get rid of warning, this should never be null in real life
-				redrawCallback (continuousSplatterRectangle);
-			}
-		}, token);
-
 		return dirty;
 	}
 
-	protected override void OnMouseUp ()
-	{
-		CancelExistingContinuousSplatterTasks ();
-	}
-
-	private void CancelExistingContinuousSplatterTasks() {
-
-		foreach (CancellationTokenSource tokenSource in continuousSplatterTokenSources.ToList ()) {
-			if (!tokenSource.IsCancellationRequested) {
-				tokenSource.Cancel ();
-				tokenSource.Dispose ();
-			}
-		}
-		continuousSplatterTokenSources.Clear ();
-	}
 }
