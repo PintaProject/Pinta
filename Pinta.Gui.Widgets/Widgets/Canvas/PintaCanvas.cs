@@ -522,7 +522,7 @@ public sealed class PintaCanvas : Gtk.Picture
 	#region Selection outline animation
 	private bool SelectionAnimationTick ()
 	{
-		if (!document.Selection.Visible)
+		if (PintaCore.Workspace.ActiveDocument != document || !document.Selection.Visible)
 			return true;
 
 		selection_animation_dash_offset -= 1f;
