@@ -539,40 +539,13 @@ public sealed class PintaCanvas : Gtk.Picture
 	/// </summary>
 	private RectangleI GetSelectionInvalidateRect ()
 	{
-		const int padding = 2;
-		int minX = int.MaxValue;
-		int minY = int.MaxValue;
-		int maxX = int.MinValue;
-		int maxY = int.MinValue;
-		bool hasPoint = false;
+		RectangleI bounds = document.Selection.GetBounds ().ToInt ();
 
-		foreach (var polygon in document.Selection.SelectionPolygons) {
-			foreach (var point in polygon) {
-				hasPoint = true;
-				int x = (int) point.X;
-				int y = (int) point.Y;
-				if (x < minX)
-					minX = x;
-				if (y < minY)
-					minY = y;
-				if (x > maxX)
-					maxX = x;
-				if (y > maxY)
-					maxY = y;
-			}
-		}
-
-		if (!hasPoint)
+		if (bounds.IsEmpty)
 			return new RectangleI (PointI.Zero, Size.Empty);
 
-		// clamp the padded rectangle so it stays inside the image bounds
-		int widthLimit = Math.Max (document.ImageSize.Width - 1, 0);
-		int heightLimit = Math.Max (document.ImageSize.Height - 1, 0);
-		int left = Math.Clamp (minX - padding, 0, widthLimit);
-		int top = Math.Clamp (minY - padding, 0, heightLimit);
-		int right = Math.Clamp (maxX + padding, 0, widthLimit);
-		int bottom = Math.Clamp (maxY + padding, 0, heightLimit);
-		return RectangleI.FromLTRB (left, top, right, bottom);
+		const int padding = 2;
+		return bounds.Inflated (padding, padding);
 	}
 	#endregion
 
