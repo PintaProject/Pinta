@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-10-01 02:55+0000\n"
-"Last-Translator: Jaime Araujo <yagua14@proton.me>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/"
-">\n"
+"PO-Revision-Date: 2025-11-11 11:55+0000\n"
+"Last-Translator: Marcial Machado <marcialmachado0522@gmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -1030,7 +1030,7 @@ msgstr "Matiz"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:281
 msgid "Hue & Sat"
-msgstr "Mat. y sat."
+msgstr "Ton y Sat"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
 msgid "Hue / Saturation"
@@ -2305,7 +2305,7 @@ msgstr "Mostrar los puntos"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
 msgid "Show Value"
-msgstr "Mostrar valor"
+msgstr "Mostrar Valor"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:242
 msgid "Show/Hide"
