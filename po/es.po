@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2025-11-11 11:55+0000\n"
-"Last-Translator: Marcial Machado <marcialmachado0522@gmail.com>\n"
+"Last-Translator: Emilio Baceda <elbaceda@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/>"
 "\n"
 "Language: es\n"
@@ -409,6 +409,9 @@ msgid ""
 "Right click to reverse.\n"
 "Click on a control point and drag to move it."
 msgstr ""
+"Haga clic y arrastre para dibujar gradiente de color primario a secundario.\n"
+"Haga clic derecho para revertir.\n"
+"Haga clic en un punto de control y arrastre para moverlo."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -511,7 +514,7 @@ msgstr "Saturación de color"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:174
 msgid "Color Scheme"
-msgstr "Combinación de colores"
+msgstr "Esquema de color"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:192
 msgid "Color Scheme Edge Behavior"
@@ -961,11 +964,11 @@ msgstr "Degradado"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:118
 msgid "Gradient Created"
-msgstr ""
+msgstr "Gradiente Creado"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:119
 msgid "Gradient Modified"
-msgstr ""
+msgstr "Gradient Modificado"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
@@ -991,7 +994,7 @@ msgstr "Altura:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:354
 msgid "Hex"
-msgstr "Hexa"
+msgstr "Hexadecimal"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
 msgid "Hide Layer"
@@ -1026,15 +1029,15 @@ msgstr "Rojo horizontal (R)"
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
-msgstr "Matiz"
+msgstr "Tono"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:281
 msgid "Hue & Sat"
-msgstr "Ton y Sat"
+msgstr "Tono y saturación"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
 msgid "Hue / Saturation"
-msgstr "Matiz y saturación"
+msgstr "Tono y saturación"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:246
 msgid "ICO files can not be larger than 255 x 255 pixels."
@@ -2190,11 +2193,11 @@ msgstr "Muestreo"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
 msgid "Sat"
-msgstr "Sat."
+msgstr "Saturación"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:272
 msgid "Sat & Value"
-msgstr "Sat. y valor"
+msgstr "Saturación y Valor"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
