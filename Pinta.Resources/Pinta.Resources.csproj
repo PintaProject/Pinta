@@ -5,6 +5,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="GirCore.PangoCairo-1.0" VersionOverride="0.7.0-preview.3" />
     <EmbeddedResource Include="Resources\Cursor.Paintbrush.png">
       <LogicalName>Cursor.Paintbrush.png</LogicalName>
     </EmbeddedResource>
