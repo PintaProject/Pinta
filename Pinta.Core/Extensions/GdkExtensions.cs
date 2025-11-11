@@ -265,4 +265,23 @@ public static class GdkExtensions
 	/// </summary>
 	public static Gdk.Cursor CursorFromName (string name)
 		=> Gdk.Cursor.NewFromName (name, null) ?? throw new ArgumentException ("Cursor does not exist", nameof (name));
+
+	/// <summary>
+	/// Convert from Gdk.RGBA to Cairo.Color.
+	/// </summary>
+	public static Cairo.Color ToCairoColor (this Gdk.RGBA color)
+		=> new (color.Red, color.Green, color.Blue, color.Alpha);
+
+	/// <summary>
+	/// Convert from Cairo.Color to Gdk.RGBA.
+	/// </summary>
+	public static Gdk.RGBA ToGdkRGBA (this Cairo.Color color)
+	{
+		return new Gdk.RGBA {
+			Red = (float) color.R,
+			Blue = (float) color.B,
+			Green = (float) color.G,
+			Alpha = (float) color.A
+		};
+	}
 }

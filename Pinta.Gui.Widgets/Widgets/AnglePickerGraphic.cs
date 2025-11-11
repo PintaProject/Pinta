@@ -94,7 +94,7 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 
 	private AngleGraphicSettings CreateSettings ()
 	{
-		GetStyleContext ().GetColor (out var color);
+		GetStyleContext ().GetColor (out Gdk.RGBA color);
 
 		RectangleD rect = GetDrawBounds ();
 
@@ -118,7 +118,7 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 
 		return new (
 			ellipseOutlineRect: ellipseRect,
-			color: color,
+			color: color.ToCairoColor (),
 			gripEllipseRect: new RectangleD (center.X - gripSize, center.Y - gripSize, gripSize * 2, gripSize * 2),
 			center: center,
 			endPoint: endPoint

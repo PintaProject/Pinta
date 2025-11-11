@@ -166,7 +166,7 @@ public sealed class Ruler : Gtk.DrawingArea
 
 	private RulerDrawSettings CreateSettings (Size preliminarySize)
 	{
-		GetStyleContext ().GetColor (out Color color);
+		GetStyleContext ().GetColor (out Gdk.RGBA color);
 
 		RectangleD rulerOuterLine = Orientation switch {
 
@@ -260,7 +260,7 @@ public sealed class Ruler : Gtk.DrawingArea
 			MarkerPosition: GetPositionOnRuler (Position, effectiveSize.Width),
 			RulerOuterLine: rulerOuterLine,
 			EffectiveSize: effectiveSize,
-			Color: color,
+			Color: color.ToCairoColor (),
 			Orientation: Orientation);
 	}
 
