@@ -295,13 +295,6 @@ partial class GtkExtensions
 		return result;
 	}
 
-	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
-	public static void GetColor (this Gtk.StyleContext context, out Cairo.Color color)
-	{
-		StyleContextGetColor (context.Handle.DangerousGetHandle (), out var gdk_color);
-		color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
-	}
-
 	/// <summary>
 	/// Checks whether the mousePos (which is relative to topwidget) is within the area and returns its relative position to the area.
 	/// </summary>

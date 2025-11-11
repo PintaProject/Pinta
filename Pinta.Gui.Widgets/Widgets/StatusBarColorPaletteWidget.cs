@@ -198,13 +198,14 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		g.DrawRectangle (primary_rect, new Color (0, 0, 0), 1);
 
 		// Draw the swap icon.
-		GetStyleContext ().GetColor (out var fg_color);
-		DrawSwapIcon (g, fg_color);
+		GetStyleContext ().GetColor (out Gdk.RGBA fg_color);
+		Cairo.Color cairo_fg_color = fg_color.ToCairoColor ();
+		DrawSwapIcon (g, cairo_fg_color);
 
 		// Draw the reset icon.
 		double square_size = 0.6 * reset_rect.Width;
-		g.DrawRectangle (new RectangleD (reset_rect.Location (), square_size, square_size), fg_color, 1);
-		g.FillRectangle (new RectangleD (reset_rect.Right - square_size, reset_rect.Bottom - square_size, square_size, square_size), fg_color);
+		g.DrawRectangle (new RectangleD (reset_rect.Location (), square_size, square_size), cairo_fg_color, 1);
+		g.FillRectangle (new RectangleD (reset_rect.Right - square_size, reset_rect.Bottom - square_size, square_size, square_size), cairo_fg_color);
 
 		// Draw recently used color swatches
 		var recent = palette.RecentlyUsedColors;
