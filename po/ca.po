@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-07-26 14:06+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/pinta/pinta/ca/"
-">\n"
+"PO-Revision-Date: 2025-11-11 11:55+0000\n"
+"Last-Translator: Emilio Baceda <elbaceda@gmail.com>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/pinta/pinta/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -90,7 +90,7 @@ msgstr "Després de seleccionar"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
 msgid "Align Object"
-msgstr ""
+msgstr "Alinear l'Objecte"
 
 #: ../Pinta.Core/Actions/EditActions.cs:593
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -202,7 +202,7 @@ msgstr "Millor ajust"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilineal"
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:29
@@ -244,15 +244,15 @@ msgstr "Foguera"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "Part inferior central"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "Part inferior esquerra"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "Part inferior dreta"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:147
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
@@ -312,7 +312,7 @@ msgstr "Graella del llenç..."
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
-msgstr ""
+msgstr "Ràdio de cel·la"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
@@ -324,7 +324,7 @@ msgstr "Cel·les"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "Centre"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:229
 msgid "Center Align"
@@ -332,7 +332,7 @@ msgstr "Alineat al centre"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "Centre esquerra"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:159
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
@@ -341,7 +341,7 @@ msgstr "Desplaçament des del centre"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "Centre dreta"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:154
 msgid "Centered"
@@ -354,7 +354,7 @@ msgstr "Centímetres"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Canviar l'amplada del pinzell. Dreceres de teclat: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
@@ -363,7 +363,7 @@ msgstr "Tipus de forma canviada"
 #. Translators: Gradient that starts out off-white, like cherry blossoms against sunlight, then goes through pink, then light blue (like the sky) and finally transparent, blending with the background
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:35
 msgid "Cherry Blossom"
-msgstr ""
+msgstr "Flor de cirerer"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:629
 #: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:286
@@ -381,7 +381,7 @@ msgstr "Cercles"
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
 msgid "Circular"
-msgstr ""
+msgstr "Distribució de punts en una trajectòria circular"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -392,12 +392,16 @@ msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
+"Feu clic i arrossegeu per dibuixar una selecció rectangular\n"
+"Aguanta la tecla Majús per limitar al quadrat."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
 msgstr ""
+"Feu clic i arrossegeu per dibuixar una selecció circular\n"
+"Aguanta la tecla Majús per limitar al cercle."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:61
 msgid ""
