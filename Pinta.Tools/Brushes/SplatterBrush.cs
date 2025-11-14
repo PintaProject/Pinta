@@ -25,12 +25,9 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using Cairo;
 
 using Pinta.Core;
-using System.Threading;
-using System.Linq;
 
 namespace Pinta.Tools.Brushes;
 
@@ -42,7 +39,7 @@ internal sealed class SplatterBrush : BasePaintBrush
 	public override double StrokeAlphaMultiplier
 		=> 0.5;
 
-	public override uint milliseconds_before_redraw => 100;
+	public override uint MillisecondsBeforeReapply => 100;
 
 	private readonly Random random = new ();
 
