@@ -39,6 +39,8 @@ internal sealed class SplatterBrush : BasePaintBrush
 	public override double StrokeAlphaMultiplier
 		=> 0.5;
 
+	public override uint MillisecondsBeforeReapply => 100;
+
 	private readonly Random random = new ();
 
 	protected override RectangleI OnMouseMove (
@@ -114,4 +116,5 @@ internal sealed class SplatterBrush : BasePaintBrush
 
 		return dirty;
 	}
+
 }

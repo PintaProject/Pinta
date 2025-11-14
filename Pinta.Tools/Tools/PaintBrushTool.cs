@@ -40,6 +40,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 	private BasePaintBrush? default_brush;
 	private BasePaintBrush? active_brush;
 	private PointI? last_point = PointI.Zero;
+	private uint? open_repeating_draw_id;
 
 	public PaintBrushTool (IServiceProvider services) : base (services)
 	{
@@ -132,20 +133,21 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		BrushStrokeArgs strokeArgs = new (strokeColor, e.Point, last_point.Value);
 
+		CancelRepeatingDraw ();
 		var invalidate_rect = active_brush.DoMouseMove (g, surf, strokeArgs);
-
-		// If we draw partially offscreen, Cairo gives us a bogus
-		// dirty rectangle, so redraw everything.
-		if (document.Workspace.IsPartiallyOffscreen (invalidate_rect))
-			document.Workspace.Invalidate ();
-		else
-			document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
-
+		RedrawRectangle (document, invalidate_rect);
+		if (active_brush.MillisecondsBeforeReapply != 0) {
+			open_repeating_draw_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, active_brush.MillisecondsBeforeReapply, () => {
+				OnMouseMove (document, e);
+				return true;
+			});
+		}
 		last_point = e.Point;
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
+		CancelRepeatingDraw ();
 		using Context g = new (document.Layers.CurrentUserLayer.Surface);
 
 		document.Layers.ToolLayer.Draw (g);
@@ -207,4 +209,22 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		BrushComboBox.ComboBox.Active = 0;
 	}
+
+	private void RedrawRectangle(Document document, RectangleI invalidate_rect)
+	{
+		// If we draw partially offscreen, Cairo gives us a bogus
+		// dirty rectangle, so redraw everything.
+		if (document.Workspace.IsPartiallyOffscreen (invalidate_rect))
+			document.Workspace.Invalidate ();
+		else
+			document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
+	}
+
+	private void CancelRepeatingDraw()
+	{
+		if (open_repeating_draw_id != null) {
+			GLib.Functions.SourceRemove ((uint) open_repeating_draw_id!);
+		}
+	}
+
 }
