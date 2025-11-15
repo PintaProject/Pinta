@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2025-11-16 12:13+0000\n"
-"Last-Translator: Matthieu LAURENT <matthieu.laurent69@proton.me>\n"
+"Last-Translator: 7Steeven <cuvillierch@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -965,6 +965,7 @@ msgid "Gradient Created"
 msgstr "Dégradé Créé"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:119
+#, fuzzy
 msgid "Gradient Modified"
 msgstr "Dégradé Modifié"
 
@@ -980,8 +981,9 @@ msgid "Grid"
 msgstr "Grille"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
+#, fuzzy
 msgid "Hard Light"
-msgstr "Lumière dure"
+msgstr "Lumière forte"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
