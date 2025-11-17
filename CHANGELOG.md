@@ -14,6 +14,7 @@ Thanks to the following contributors who worked on this release:
 - @bplaat
 - @stefan-dangl
 - @PabloRufianJimenez
+- @Matthieu-LAURENT39
 
 ### Added
 - Implemented a new axonometric grid (View > Canvas Grid... > Show Axonometric Grid) (#1438, #1541)
@@ -31,6 +32,7 @@ Thanks to the following contributors who worked on this release:
 - The text tool now supports using Ctrl+Backspace to delete words (#1680)
 - Added a Windows ARM64 installer (#1699, #1378)
 - The selection of an area on the canvas is now being projected and highlighted on the rulers (#1723)
+- The selection outline is now animated for improved visibility (#1521, #1829)
 - Added a Radius Percentage parameter to the Twist effect (#1739)
 
 ### Changed
@@ -58,6 +60,7 @@ Thanks to the following contributors who worked on this release:
 - The icon and window title now appear correctly on KDE Wayland sessions (#1419)
 - Fixed bug where the text tool could incorrectly display a default cursor (#1707)
 - Fixed drifting when holding Shift while expanding a rectangle selection using the vertical or horizontal handles (#1733)
+- Fixed issue where icons were missing from the top bar (#1814)
 
 ## [3.0.4](https://github.com/PintaProject/Pinta/release/tag/3.0.4) - 2025/10/05
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-15 00:21+0000\n"
+"POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2025-06-17 12:30+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/pinta/pinta/ta/>\n"
@@ -96,7 +96,7 @@ msgstr "பொருளை சீரமைக்கவும்"
 msgid "All files"
 msgstr "அனைத்து கோப்புகள்"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:516
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:515
 msgid "Alpha"
 msgstr "அகர"
 
@@ -214,7 +214,7 @@ msgstr "கலப்பு பயன்முறை"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:494
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
 msgid "Blue"
 msgstr "நீலம்"
 
@@ -368,7 +368,7 @@ msgstr "செர்ரி மலரும்"
 msgid "Choose Color"
 msgstr "வண்ணத்தைத் தேர்வுசெய்க"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:150
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
 msgstr "தட்டு நிறத்தைத் தேர்வுசெய்க"
 
@@ -401,23 +401,22 @@ msgstr ""
 "நீள்வட்ட தேர்வை வரைய சொடுக்கு செய்து இழுக்கவும்.\n"
 " ஒரு வட்டத்திற்கு கட்டுப்படுத்த மாற்றத்தை வைத்திருங்கள்."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:48
+#: ../Pinta.Tools/Tools/GradientTool.cs:61
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
-"Right click to reverse."
+"Right click to reverse.\n"
+"Click on a control point and drag to move it."
 msgstr ""
-"முதன்மை முதல் இரண்டாம் நிலை வண்ணத்திற்கு சாய்வை வரைய சொடுக்கு செய்து இழுக்கவும்.\n"
-" தலைகீழாக வலது சொடுக்கு செய்யவும்."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
 msgstr "படத்திற்கு செல்ல சொடுக்கு செய்து இழுக்கவும்."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:301
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
 msgid "Click to reset primary and secondary color."
 msgstr "முதன்மை மற்றும் இரண்டாம் நிலை வண்ணத்தை மீட்டமைக்க சொடுக்கு செய்க."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:290
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:317
 msgid "Click to select primary color."
 msgstr "முதன்மை வண்ணத்தைத் தேர்ந்தெடுக்க சொடுக்கு செய்க."
 
@@ -425,19 +424,19 @@ msgstr "முதன்மை வண்ணத்தைத் தேர்ந்�
 msgid "Click to select region of similar color."
 msgstr "ஒத்த வண்ணத்தின் பகுதியைத் தேர்ந்தெடுக்க சொடுக்கு செய்க."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:293
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
 msgid "Click to select secondary color."
 msgstr "இரண்டாம் நிலை வண்ணத்தைத் தேர்ந்தெடுக்க சொடுக்கு செய்க."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:296
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
 msgid "Click to switch between primary and secondary color."
 msgstr "முதன்மை மற்றும் இரண்டாம் நிலை வண்ணத்திற்கு இடையில் மாற சொடுக்கு செய்க."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:441
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:434
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Clipboard"
 msgstr "இடைநிலைப் பலகை"
 
@@ -470,16 +469,16 @@ msgstr "மேகங்கள்"
 msgid "Coarseness"
 msgstr "கரடுமுரடான தன்மை"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:43
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 msgid "Color"
 msgstr "நிறம்"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:33
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:33
 msgid "Color Burn"
 msgstr "வண்ண எரியும்"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:34
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:34
 msgid "Color Dodge"
 msgstr "வண்ண டாட்ச்"
 
@@ -487,11 +486,11 @@ msgstr "வண்ண டாட்ச்"
 msgid "Color Gradient"
 msgstr "வண்ண சாய்வு"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:200
+#: ../Pinta.Tools/Tools/GradientTool.cs:292
 msgid "Color Mode"
 msgstr "வண்ண பயன்முறை"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
 msgid "Color Picker"
 msgstr "வண்ண தேர்வாளர்"
@@ -531,7 +530,7 @@ msgstr "வண்ண வரிசையாக்கம்"
 msgid "Coloring"
 msgstr "வண்ணம்"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:185
+#: ../Pinta.Tools/Tools/GradientTool.cs:277
 msgid "Conical Gradient"
 msgstr "கூம்பு சாய்வு"
 
@@ -601,9 +600,9 @@ msgid "Curves"
 msgstr "வளைவுகள்"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:422
-#: ../Pinta/Dialogs/NewImageDialog.cs:443
-#: ../Pinta/Dialogs/NewImageDialog.cs:537
+#: ../Pinta/Dialogs/NewImageDialog.cs:415
+#: ../Pinta/Dialogs/NewImageDialog.cs:436
+#: ../Pinta/Dialogs/NewImageDialog.cs:530
 msgid "Custom"
 msgstr "தனிப்பயன்"
 
@@ -617,7 +616,7 @@ msgstr "வெட்டு"
 msgid "Dark"
 msgstr "இருண்ட"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:38
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:38
 msgid "Darken"
 msgstr "தட்டவும்"
 
@@ -656,7 +655,7 @@ msgstr "அனைத்தையும் தேர்வு செய்யு�
 msgid "Details"
 msgstr "விவரங்கள்"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:36
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "வேறுபாடு"
 
@@ -850,6 +849,7 @@ msgstr "நிரப்புதல் மற்றும் கோடிட்�
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "இறுதி செய்யப்பட்டது"
 
@@ -951,15 +951,23 @@ msgstr "உலகளாவிய"
 msgid "Glow"
 msgstr "பளபளப்பு"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:46
-#: ../Pinta.Tools/Tools/GradientTool.cs:175
+#: ../Pinta.Tools/Tools/GradientTool.cs:59
+#: ../Pinta.Tools/Tools/GradientTool.cs:267
 msgid "Gradient"
 msgstr "சரிவு"
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:118
+msgid "Gradient Created"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/GradientTool.cs:119
+msgid "Gradient Modified"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:472
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:471
 msgid "Green"
 msgstr "பச்சை"
 
@@ -967,7 +975,7 @@ msgstr "பச்சை"
 msgid "Grid"
 msgstr "வலைவாய்"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:41
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "கடினமான ஒளி"
 
@@ -1011,7 +1019,7 @@ msgstr "கிடைமட்ட பச்சை (சி)"
 msgid "Horizontal red (R)"
 msgstr "கிடைமட்ட சிவப்பு ("
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:45
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
@@ -1175,7 +1183,7 @@ msgstr "லாசோ தேர்ந்தெடுக்கவும்"
 msgid "Layer"
 msgstr "அடுக்கு"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Hidden"
 msgstr "அடுக்கு மறைக்கப்பட்டுள்ளது"
 
@@ -1192,7 +1200,7 @@ msgstr "அடுக்கு பண்புகள்"
 msgid "Layer Properties..."
 msgstr "அடுக்கு பண்புகள் ..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:97
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:101
 msgid "Layer Shown"
 msgstr "அடுக்கு காட்டப்பட்டுள்ளது"
 
@@ -1329,13 +1337,13 @@ msgstr ""
 "முதன்மை வண்ணத்தை அமைக்க இடது சொடுக்கு செய்யவும்.\n"
 " இரண்டாம் நிலை நிறத்தை அமைக்க வலது சொடுக்கு செய்யவும்."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "முதன்மை வண்ணத்தை அமைக்க இடது சொடுக்கு செய்யவும். இரண்டாம் நிலை நிறத்தை அமைக்க வலது "
 "சொடுக்கு செய்யவும்."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:283
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1374,7 +1382,7 @@ msgstr "உரிமம்"
 msgid "Light"
 msgstr "ஒளி"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:37
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
 msgid "Lighten"
 msgstr "ஒளிரச் செய்யுங்கள்"
 
@@ -1395,15 +1403,15 @@ msgstr "சுண்ணாம்பு எலுமிச்சை"
 msgid "Line/Curve"
 msgstr "வரி/வளைவு"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:183
+#: ../Pinta.Tools/Tools/GradientTool.cs:275
 msgid "Linear Diamond Gradient"
 msgstr "நேரியல் வைர சாய்வு"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:181
+#: ../Pinta.Tools/Tools/GradientTool.cs:273
 msgid "Linear Gradient"
 msgstr "நேரியல் சாய்வு"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:182
+#: ../Pinta.Tools/Tools/GradientTool.cs:274
 msgid "Linear Reflected Gradient"
 msgstr "நேரியல் பிரதிபலித்த சாய்வு"
 
@@ -1411,7 +1419,7 @@ msgstr "நேரியல் பிரதிபலித்த சாய்வ�
 msgid "Linked"
 msgstr "இணைக்கப்பட்ட"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:44
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:44
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:177
 msgid "Luminosity"
 msgstr "ஒளிர்வு"
@@ -1451,7 +1459,7 @@ msgstr "பட்டியல் பட்டி"
 msgid "Merge Layer Down"
 msgstr "அடுக்கை ஒன்றிணைக்கவும்"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:194
+#: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr "பயன்முறை"
 
@@ -1485,7 +1493,7 @@ msgstr "தேர்ந்தெடுக்கப்பட்ட பிக்�
 msgid "Move Selection"
 msgstr "தேர்வை நகர்த்தவும்"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:32
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
 msgid "Multiply"
 msgstr "பெருக்கவும்"
 
@@ -1524,11 +1532,11 @@ msgstr "உருப்படிகள் எதுவும் கிடைக�
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:27
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
 msgid "Noise"
 msgstr "இரைச்சல்"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:31
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
@@ -1658,7 +1666,7 @@ msgstr "வெளியீடு"
 msgid "Output Histogram"
 msgstr "வெளியீட்டு இச்டோகிராம்"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:35
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:35
 msgid "Overlay"
 msgstr "மேலடுக்கு"
 
@@ -1905,7 +1913,7 @@ msgstr "ஆர்சிபி"
 msgid "Radial Blur"
 msgstr "ரேடியல் மங்கலானது"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:184
+#: ../Pinta.Tools/Tools/GradientTool.cs:276
 msgid "Radial Gradient"
 msgstr "ரேடியல் சாய்வு"
 
@@ -1914,7 +1922,7 @@ msgstr "ரேடியல் சாய்வு"
 #: ../Pinta.Effects/Effects/GlowEffect.cs:77
 #: ../Pinta.Effects/Effects/MedianEffect.cs:59
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:87
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
 msgid "Radius"
@@ -1974,7 +1982,7 @@ msgstr "செவ்வகம் தேர்ந்தெடுக்கவு�
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:450
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:449
 msgid "Red"
 msgstr "சிவப்பு"
 
@@ -1990,7 +1998,7 @@ msgstr "சிவப்பு கண் அகற்றுதல்"
 msgid "Redo"
 msgstr "மீண்டும்செய்"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:23
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
 msgid "Reduce Noise"
 msgstr "சத்தத்தைக் குறைக்கவும்"
 
@@ -2026,7 +2034,7 @@ msgstr "அடுக்கை மறுபெயரிடுங்கள்"
 msgid "Render"
 msgstr "வழங்கவும்"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:106
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
 msgstr "வழங்குதல் விளைவு"
 
@@ -2158,7 +2166,7 @@ msgstr "ஆட்சியாளர்கள்"
 msgid "Sampling"
 msgstr "மாதிரி எடுத்தல்"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:406
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
 msgid "Sat"
 msgstr "காரி"
 
@@ -2166,7 +2174,7 @@ msgstr "காரி"
 msgid "Sat & Value"
 msgstr "காரி & மதிப்பு"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:46
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
 msgid "Saturation"
 msgstr "தெவிட்டல்"
@@ -2208,7 +2216,7 @@ msgstr "மூடுவதற்கு முன் \"{0}\" படத்தி�
 msgid "Scale"
 msgstr "அளவு"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:39
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:39
 msgid "Screen"
 msgstr "திரை"
 
@@ -2248,7 +2256,7 @@ msgstr "கூர்மைப்படுத்துங்கள்"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:297
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
 msgid "Shortcut key"
 msgstr "குறுக்குவழி விசை"
 
@@ -2303,7 +2311,7 @@ msgstr "அளவு"
 msgid "Smooth"
 msgstr "மென்மையான"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:42
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
 msgstr "மென்மையான ஒளி"
 
@@ -2327,7 +2335,7 @@ msgstr "சதுரங்கள்"
 msgid "Status Bar"
 msgstr "நிலை பட்டி"
 
-#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:90
+#: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
 msgstr "வலிமை"
@@ -2499,7 +2507,7 @@ msgstr "இடமாற்ற வரைபடம்"
 msgid "Translate This Application"
 msgstr "இந்த பயன்பாட்டை மொழிபெயர்க்கவும்"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:201
+#: ../Pinta.Tools/Tools/GradientTool.cs:293
 msgid "Transparency Mode"
 msgstr "வெளிப்படைத்தன்மை பயன்முறை"
 
@@ -2586,7 +2594,7 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "இதிலிருந்து சில சின்னங்களைப் பயன்படுத்துதல்:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:428
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:427
 msgid "Value"
 msgstr "மதிப்பு"
 
@@ -2654,7 +2662,7 @@ msgstr "சாளரம்"
 msgid "Wrap"
 msgstr "மடக்கு"
 
-#: ../Pinta.Core/Effects/UserBlendOps.cs:40
+#: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:40
 msgid "Xor"
 msgstr "அல்லதில்"
 
@@ -2811,6 +2819,13 @@ msgstr "{0} தட்டு ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid ""
+#~ "Click and drag to draw gradient from primary to secondary color.\n"
+#~ "Right click to reverse."
+#~ msgstr ""
+#~ "முதன்மை முதல் இரண்டாம் நிலை வண்ணத்திற்கு சாய்வை வரைய சொடுக்கு செய்து இழுக்கவும்.\n"
+#~ " தலைகீழாக வலது சொடுக்கு செய்யவும்."
 
 #~ msgid "Click and drag to draw the outline for a selection area."
 #~ msgstr "தேர்வு பகுதிக்கான அவுட்லைன் வரைய சொடுக்கு செய்து இழுக்கவும்."

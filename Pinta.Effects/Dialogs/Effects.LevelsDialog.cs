@@ -628,12 +628,12 @@ public partial class LevelsDialog : Gtk.Dialog
 
 		var ccd = Gtk.ColorChooserDialog.New (Translations.GetString ("Choose Color"), chrome.MainWindow);
 		ccd.UseAlpha = true;
-		ccd.SetColor (panel.CairoColor);
+		ccd.SetRgba (panel.CairoColor.ToGdkRGBA ());
 
 		var response = ccd.RunBlocking ();
 		if (response == Gtk.ResponseType.Ok) {
-			ccd.GetColor (out var cairo_color);
-			ColorBgra col = cairo_color.ToColorBgra ();
+			ccd.GetRgba (out Gdk.RGBA rgba);
+			ColorBgra col = rgba.ToCairoColor ().ToColorBgra ();
 
 			if (panel == colorpanel_in_low) {
 				Levels.ColorInLow = col;
