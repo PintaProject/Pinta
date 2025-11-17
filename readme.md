@@ -78,6 +78,10 @@ For building on the command line:
     - Add the `--prefix=<install directory>` argument to install to a directory other than `/usr/local`.
   - `make install`
 
+## Building and Debugging in Docker
+
+Follow the instructions of the corresponding [pinta-virtual-dev-environment](https://github.com/janrothkegel/pinta-virtual-dev-environment) project
+
 ## Getting help / contributing:
 
 - You can get [technical help](https://github.com/PintaProject/Pinta/discussions).

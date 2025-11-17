@@ -229,21 +229,4 @@ partial class GtkExtensions
 		this Gtk.Dialog dialog,
 		Gtk.ResponseType response
 	) => dialog.SetDefaultResponse ((int) response);
-
-	public static void SetColor (this Gtk.ColorChooserDialog dialog, Cairo.Color color)
-	{
-		dialog.SetRgba (new Gdk.RGBA {
-			Red = (float) color.R,
-			Blue = (float) color.B,
-			Green = (float) color.G,
-			Alpha = (float) color.A
-		});
-	}
-
-	// TODO-GTK4 (bindings) - structs are not generated (https://github.com/gircore/gir.core/issues/622)
-	public static void GetColor (this Gtk.ColorChooserDialog dialog, out Cairo.Color color)
-	{
-		ColorChooserGetRgba (dialog.Handle.DangerousGetHandle (), out var gdk_color);
-		color = new Cairo.Color (gdk_color.Red, gdk_color.Green, gdk_color.Blue, gdk_color.Alpha);
-	}
 }
