@@ -135,7 +135,14 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		CancelRepeatingDraw ();
 		var invalidate_rect = active_brush.DoMouseMove (g, surf, strokeArgs);
-		RedrawRectangle (document, invalidate_rect);
+
+		// If we draw partially offscreen, Cairo gives us a bogus
+		// dirty rectangle, so redraw everything.
+		if (document.Workspace.IsPartiallyOffscreen (invalidate_rect))
+			document.Workspace.Invalidate ();
+		else
+			document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
+
 		if (active_brush.MillisecondsBeforeReapply != 0) {
 			open_repeating_draw_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, active_brush.MillisecondsBeforeReapply, () => {
 				OnMouseMove (document, e);
@@ -210,20 +217,11 @@ public sealed class PaintBrushTool : BaseBrushTool
 		BrushComboBox.ComboBox.Active = 0;
 	}
 
-	private void RedrawRectangle(Document document, RectangleI invalidate_rect)
-	{
-		// If we draw partially offscreen, Cairo gives us a bogus
-		// dirty rectangle, so redraw everything.
-		if (document.Workspace.IsPartiallyOffscreen (invalidate_rect))
-			document.Workspace.Invalidate ();
-		else
-			document.Workspace.Invalidate (document.ClampToImageSize (invalidate_rect));
-	}
-
-	private void CancelRepeatingDraw()
+	private void CancelRepeatingDraw ()
 	{
 		if (open_repeating_draw_id != null) {
-			GLib.Functions.SourceRemove ((uint) open_repeating_draw_id!);
+			GLib.Functions.SourceRemove (open_repeating_draw_id.Value);
+			open_repeating_draw_id = null;
 		}
 	}
 
