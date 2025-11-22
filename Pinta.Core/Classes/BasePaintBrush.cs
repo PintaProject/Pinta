@@ -52,6 +52,12 @@ public abstract class BasePaintBrush
 	/// </summary>
 	public virtual double StrokeAlphaMultiplier => 1;
 
+	/// <summary>
+	/// If nonzero, brush will be reapplied after given amount of
+	/// milliseconds.
+	/// </summary>
+	public virtual uint MillisecondsBeforeReapply => 0;
+
 	public void DoMouseUp ()
 	{
 		OnMouseUp ();
