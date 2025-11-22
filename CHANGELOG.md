@@ -15,6 +15,7 @@ Thanks to the following contributors who worked on this release:
 - @stefan-dangl
 - @PabloRufianJimenez
 - @Matthieu-LAURENT39
+- @spaghetti22
 
 ### Added
 - Implemented a new axonometric grid (View > Canvas Grid... > Show Axonometric Grid) (#1438, #1541)
@@ -34,6 +35,7 @@ Thanks to the following contributors who worked on this release:
 - The selection of an area on the canvas is now being projected and highlighted on the rulers (#1723)
 - The selection outline is now animated for improved visibility (#1521, #1829)
 - Added a Radius Percentage parameter to the Twist effect (#1739)
+- The Splatter brush can now repeatedly draw while holding the mouse down (#1817)
 
 ### Changed
 - Packaging changes
