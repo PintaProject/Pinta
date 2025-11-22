@@ -154,30 +154,8 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 					format = image_formats.GetDefaultSaveFormat ();
 			}
 
-			// If the format doesn't support layers but the previous one did, ask to flatten the image
-			if (!format.SupportsLayers
-				&& previous_format_desc?.SupportsLayers == true
-				&& document.Layers.Count () > 1) {
-
-				string heading = Translations.GetString ("This format does not support layers. Flatten image?");
-				string body = Translations.GetString ("Flattening the image will merge all layers into a single layer.");
-
-				using Adw.MessageDialog dialog = Adw.MessageDialog.New (chrome.MainWindow, heading, body);
-				dialog.AddResponse (RESPONSE_CANCEL, Translations.GetString ("_Cancel"));
-				dialog.AddResponse (RESPONSE_FLATTEN, Translations.GetString ("Flatten"));
-				dialog.SetResponseAppearance (RESPONSE_FLATTEN, Adw.ResponseAppearance.Suggested);
-
-				dialog.CloseResponse = RESPONSE_CANCEL;
-				dialog.DefaultResponse = RESPONSE_FLATTEN;
-
-				string response = await dialog.RunAsync ();
-
-				if (response == RESPONSE_CANCEL)
-					continue;
-
-				// Flatten the image
-				tools.Commit ();
-				image.Flatten.Activate ();
+			if (!await ConfirmFlatten (document, format)) {
+				continue;
 			}
 
 			Gio.File? directory = file.GetParent ();
@@ -234,6 +212,10 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			return false;
 		}
 
+		if (!await ConfirmFlatten (document, format)) {
+			return false;
+		}
+
 		// Commit any pending changes
 		tools.Commit ();
 
@@ -277,6 +259,35 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		//Now the Document has been saved to the file it's associated with in this session.
 		document.HasBeenSavedInSession = true;
 
+		return true;
+	}
+
+	private async Task<bool> ConfirmFlatten(Document document, FormatDescriptor format) {
+		// If the format doesn't support layers but there is more than one layer, ask to flatten the image
+		if (!format.SupportsLayers
+			&& document.Layers.Count () > 1) {
+
+			string heading = Translations.GetString ("This format does not support layers. Flatten image?");
+			string body = Translations.GetString ("Flattening the image will merge all layers into a single layer.");
+
+			using Adw.MessageDialog dialog = Adw.MessageDialog.New (chrome.MainWindow, heading, body);
+			dialog.AddResponse (RESPONSE_CANCEL, Translations.GetString ("_Cancel"));
+			dialog.AddResponse (RESPONSE_FLATTEN, Translations.GetString ("Flatten"));
+			dialog.SetResponseAppearance (RESPONSE_FLATTEN, Adw.ResponseAppearance.Suggested);
+
+			dialog.CloseResponse = RESPONSE_CANCEL;
+			dialog.DefaultResponse = RESPONSE_FLATTEN;
+
+			string response = await dialog.RunAsync ();
+
+			if (response == RESPONSE_CANCEL) {
+				return false;
+			}
+
+			// Flatten the image
+			tools.Commit ();
+			image.Flatten.Activate ();
+		}
 		return true;
 	}
 }
