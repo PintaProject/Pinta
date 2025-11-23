@@ -262,7 +262,8 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		return true;
 	}
 
-	private async Task<bool> ConfirmFlatten(Document document, FormatDescriptor format) {
+	private async Task<bool> ConfirmFlatten (Document document, FormatDescriptor format)
+	{
 		// If the format doesn't support layers but there is more than one layer, ask to flatten the image
 		if (!format.SupportsLayers
 			&& document.Layers.Count () > 1) {
