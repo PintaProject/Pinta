@@ -6,6 +6,7 @@
   <Import Project="../properties/ReferenceGirCoreGObject20Integration.props" />
   
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" VersionOverride="5.0.0" />
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
   </ItemGroup>
 </Project>

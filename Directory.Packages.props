@@ -24,6 +24,6 @@
     <PackageVersion Include="NUnit3TestAdapter" Version="5.2.0" />
 
     <!-- To resolve dependency conflict with GirCore.GObject-2.0.Integration and BenchmarkDotNet -->
-    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
   </ItemGroup>
 </Project>
