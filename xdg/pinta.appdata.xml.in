@@ -38,6 +38,15 @@
     <binary>pinta</binary>
   </provides>
   <releases>
+    <release version="3.0.5" date="2025-11-24">
+      <url>https://github.com/PintaProject/Pinta/releases/tag/3.0.5</url>
+      <description>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Fixed several icons which did not display properly with GNOME 49 (#1812, #1814)</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.0.4" date="2025-10-05">
       <url>https://github.com/PintaProject/Pinta/releases/tag/3.0.4</url>
       <description>

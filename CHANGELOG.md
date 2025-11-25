@@ -12,6 +12,11 @@ Thanks to the following contributors who worked on this release:
 
 ### Fixed
 
+## [3.0.5](https://github.com/PintaProject/Pinta/release/tag/3.0.5) - 2025/11/24
+
+### Fixed
+- Fixed several icons which did not display properly with GNOME 49 (#1812, #1814)
+
 ## [3.0.4](https://github.com/PintaProject/Pinta/release/tag/3.0.4) - 2025/10/05
 
 ### Fixed
