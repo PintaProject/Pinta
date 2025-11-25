@@ -64,6 +64,12 @@ Thanks to the following contributors who worked on this release:
 - Fixed drifting when holding Shift while expanding a rectangle selection using the vertical or horizontal handles (#1733)
 - Fixed issue where icons were missing from the top bar (#1814)
 
+## [3.0.5](https://github.com/PintaProject/Pinta/release/tag/3.0.5) - 2025/11/24
+
+### Fixed
+
+- Fixed several icons which did not display properly with GNOME 49 (#1812, #1814)
+
 ## [3.0.4](https://github.com/PintaProject/Pinta/release/tag/3.0.4) - 2025/10/05
 
 ### Fixed
