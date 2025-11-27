@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2025-11-28 03:47+0000\n"
-"Last-Translator: \"Jadiir M. Aal Jaidaan\" <ashrafquatre@gmail.com>\n"
+"Last-Translator: DevIncomin' <bdr123654@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/pinta/pinta/ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -164,7 +164,7 @@ msgstr "آلي"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Auto Crop"
-msgstr "اقتصاص آلي"
+msgstr "اقتصاص تلقائي"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:24
 msgid "Auto Level"
@@ -1399,7 +1399,7 @@ msgstr "الإضاءة"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:67
 msgid "Lightness"
-msgstr "السطوع"
+msgstr "إضاءة"
 
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:47
