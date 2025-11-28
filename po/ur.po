@@ -1,111 +1,107 @@
-# Filipino translation for pinta
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
-# This file is distributed under the same license as the pinta package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: pinta\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-11-25 14:13+0000\n"
-"Last-Translator: IverCoder <ivercoder+github@proton.me>\n"
-"Language-Team: Filipino <https://hosted.weblate.org/projects/pinta/pinta/fil/"
-">\n"
-"Language: fil\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ur\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Weblate 5.15-dev\n"
-"X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
-msgstr " (sa directory ng user)"
+msgstr ""
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
 msgid " Selection Mode: "
-msgstr " Mode ng Pagpili: "
+msgstr ""
 
 #: ../Pinta.Core/Managers/EffectsManager.cs:78
 #: ../Pinta.Core/Managers/EffectsManager.cs:116
 msgid "..."
-msgstr "…"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "3 x 3 Region"
-msgstr "3 × 3 na Bahagi"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
 msgid "5 x 5 Region"
-msgstr "5 × 5 na Bahagi"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
 msgid "7 x 7 Region"
-msgstr "7 × 7 na Bahagi"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
 msgid "9 x 9 Region"
-msgstr "9 × 9 na Bahagi"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:405
 msgid "A_dd-ins"
-msgstr "Mga A_dd-in"
+msgstr ""
 
 #: ../Pinta.Core/Actions/AppActions.cs:42
 msgid "About"
-msgstr "Tungkol sa"
+msgstr ""
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:64
 msgid "About Pinta"
-msgstr "Tungkol sa Pinta"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:431
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
-msgstr "Magdagdag ng Bagong Layer"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:24
 msgid "Add Noise"
-msgstr "Magdagdag ng Noise"
+msgstr ""
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr "Tagapamahala ng mga Add-in..."
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:839
 msgid "Added"
-msgstr "Naidagdag"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:457
 msgid "Adjustments"
-msgstr "Mga Pagsasaayos"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
-#, fuzzy
 msgid "After select"
-msgstr "Pagkatapos piliin"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
 msgid "Align Object"
-msgstr "Ipantay ang Bagay"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:593
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
-msgstr "Lahat ng mga file"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:515
 msgid "Alpha"
-msgstr "Alpha"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:212
 msgid "Alpha Gradient"
-msgstr "Gradient ng Alpha"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
@@ -114,11 +110,11 @@ msgstr "Gradient ng Alpha"
 #: ../Pinta.Effects/Effects/TwistEffect.cs:171
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:136
 msgid "Amount"
-msgstr "Halaga"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:139
 msgid "Anchor:"
-msgstr "Angkla:"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:120
@@ -130,101 +126,100 @@ msgstr "Angkla:"
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 msgid "Angle"
-msgstr "Anggulo"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:179
 msgid "Antialias"
-msgstr "Antialias"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:363
 msgid "Antialiasing Off"
-msgstr "Naka-off ang Antialiasing"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:362
 msgid "Antialiasing On"
-msgstr "Naka-on ang Antialiasing"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:262
 msgid "Arrow"
-msgstr "Arrow"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:41
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:32
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:33
 msgid "Artistic"
-msgstr "Artistiko"
+msgstr ""
 
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr "Atkinson"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
 msgid "Auto"
-msgstr "Awto"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Auto Crop"
-msgstr "Awtong Pag-crop"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:24
 msgid "Auto Level"
-msgstr "Awtong Paglelebel"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:227
 #, csharp-format
 msgid "Available in repository: {0}"
-msgstr "Available sa repositoryo: {0}"
+msgstr ""
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:130
 msgid "Background"
-msgstr "Background"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:127
 msgid "Background Color"
-msgstr "Kulay ng Background"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:307
 msgid "Background:"
-msgstr "Background:"
+msgstr ""
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:94
 msgid "Based on the work of Paint.NET:"
-msgstr "Batay sa trabaho ng Paint.NET:"
+msgstr ""
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:23
 msgid "Beautiful Italy"
-msgstr "Magandang Italya"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
-#, fuzzy
 msgid "Best Fit"
-msgstr "Pinakasukat"
+msgstr ""
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
-msgstr "Bilinear"
+msgstr ""
 
 #. Translators: Simple gradient that goes from black to white
 #: ../Pinta.Effects/Adjustments/BlackAndWhiteEffect.cs:29
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:27
 msgid "Black and White"
-msgstr "Itim at Puti"
+msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:82
 msgid "Blend Mode"
-msgstr "Mode sa Pag-blend"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
 msgid "Blue"
-msgstr "Bughaw"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:91
 msgid "Blue "
-msgstr "Bughaw "
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:33
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:28
@@ -233,85 +228,84 @@ msgstr "Bughaw "
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:27
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:32
 msgid "Blurs"
-msgstr "Blurs"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:177
 msgid "Bold"
-msgstr "Bold"
+msgstr ""
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:31
 msgid "Bonfire"
-msgstr "Bonfire"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr "Ibabang Gitna"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr "Ibabang Kaliwa"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr "Ibabang Kanan"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:147
 #: ../Pinta.Effects/Effects/GlowEffect.cs:81
 msgid "Brightness"
-msgstr "Liwanag"
+msgstr ""
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
 msgid "Brightness / Contrast"
-msgstr "Liwanag / Contrast"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:147
 msgid "Brush Size"
-msgstr "Size ng Brush"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:262
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:120
 msgid "Brush width"
-msgstr "Lapad ng brush"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:23
 msgid "Bulge"
-msgstr "Bulge"
+msgstr ""
 
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr "Burkes"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:80
 msgid "By absolute size:"
-msgstr "Base sa ganap na sukat:"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:102
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:72
 msgid "By percentage:"
-msgstr "Base sa porsyento:"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:530
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
-msgstr "Kanselahin"
+msgstr ""
 
 #: ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
-msgstr "Canvas"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:92
 msgid "Canvas Grid Settings"
-msgstr "Setting ng Grid sa Canvas"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:124
-#, fuzzy
 msgid "Canvas Grid..."
-msgstr "Grid sa Canvas..."
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -319,7 +313,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
-msgstr "Sukat ng Cell"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:19
 msgid "Cells"
@@ -327,38 +321,37 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr "Gitna"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:229
-#, fuzzy
 msgid "Center Align"
-msgstr "Ihanay sa Gitna"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr "Gitnang Kaliwa"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:159
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
 msgid "Center Offset"
-msgstr "Offset sa Gitna"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr "Gitnang Kanan"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:154
 msgid "Centered"
-msgstr "Nakagitna"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Centimeters"
-msgstr "Sentimetro"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr "Palitan ang lapad ng brush. Shortcut key: [ ]"
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
@@ -380,7 +373,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Brushes/CircleBrush.cs:36
 msgid "Circles"
-msgstr "Bilog"
+msgstr ""
 
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
@@ -465,7 +458,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:26
 msgid "Clouds"
-msgstr "Ulap"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:151
 msgid "Coarseness"
@@ -495,7 +488,7 @@ msgstr ""
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
 msgid "Color Picker"
-msgstr "Pampili ng Kulay"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
 msgid "Color Range"
@@ -559,7 +552,7 @@ msgstr ""
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:81
 msgid "Copyright"
-msgstr "Copyright"
+msgstr ""
 
 #. Translators: Gradient with the colors of blue and pink cotton candy
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:39
@@ -752,11 +745,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:51
 msgid "Eraser"
-msgstr "Pambura"
+msgstr ""
 
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:126
 msgid "Error"
-msgstr "Mali"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Error Diffusion Method"
@@ -911,7 +904,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:145
 msgid "Font"
-msgstr "Font"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:27
 msgid "Fragment"
@@ -947,11 +940,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
-msgstr "Pangkalahatan"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:26
 msgid "Glow"
-msgstr "Kinang"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:59
 #: ../Pinta.Tools/Tools/GradientTool.cs:267
@@ -971,11 +964,11 @@ msgstr ""
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:471
 msgid "Green"
-msgstr "Luntian"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/GridBrush.cs:36
 msgid "Grid"
-msgstr "Parilya"
+msgstr ""
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
@@ -986,7 +979,7 @@ msgstr ""
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:79
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:111
 msgid "Height:"
-msgstr "Tangkad"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:354
 msgid "Hex"
@@ -1002,7 +995,7 @@ msgstr ""
 
 #: ../Pinta/Pads/HistoryPad.cs:50
 msgid "History"
-msgstr "Kasaysayan"
+msgstr ""
 
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:228
@@ -1143,7 +1136,7 @@ msgstr ""
 #: ../Pinta.Effects/Adjustments/InvertColorsEffect.cs:29
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:183
 msgid "Invert Colors"
-msgstr "Pagbaligtarin ang mga Kulay"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:141
 #: ../Pinta.Core/Actions/EditActions.cs:615
@@ -1165,7 +1158,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
-msgstr "Julia Fractal"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:300
 msgid "Landscape"
@@ -1216,7 +1209,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:217
 msgid "Left Align"
-msgstr "Ihanay sa Kaliwa"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
 #, csharp-format
@@ -1323,7 +1316,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Adjustments/LevelsEffect.cs:23
 msgid "Levels"
-msgstr "Mga Lebel"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:243
 msgid "Levels Adjustment"
@@ -1331,7 +1324,7 @@ msgstr ""
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:90
 msgid "License"
-msgstr "Lisensya"
+msgstr ""
 
 #. Translators: This refers to using a light variant of the color scheme.
 #: ../Pinta.Core/Actions/ViewActions.cs:248
@@ -1395,7 +1388,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
-msgstr "Mandelbrot Fractal"
+msgstr ""
 
 #. Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:51
@@ -1447,7 +1440,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
 msgid "Move Selection"
-msgstr "Igalaw ang Seleksyon"
+msgstr ""
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
 msgid "Multiply"
@@ -1455,7 +1448,7 @@ msgstr ""
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:67
 msgid "Name:"
-msgstr "Pangalan:"
+msgstr ""
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
@@ -1468,7 +1461,7 @@ msgstr ""
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:138
 #: ../Pinta/Dialogs/NewImageDialog.cs:237
 msgid "New Image"
-msgstr "Bagong Larawan"
+msgstr ""
 
 #: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "New Screenshot..."
@@ -1496,7 +1489,7 @@ msgstr ""
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
 #: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:264
 msgid "Normal"
-msgstr "Karaniwan"
+msgstr ""
 
 #: ../Pinta.Core/Classes/BaseTool.cs:345
 msgid "Normal Blending"
@@ -1660,7 +1653,7 @@ msgstr ""
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste"
-msgstr "Idikit"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:120
 msgid "Paste Into New Image"
@@ -1673,7 +1666,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr "Lapis"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:29
 msgid "Pencil Sketch"
@@ -1693,7 +1686,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:52
 msgid "Photo"
-msgstr "Larawan"
+msgstr ""
 
 #. Translators: Arrangement of points similar to how sunflower seeds are arranged
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:174
@@ -1803,7 +1796,7 @@ msgstr ""
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
 msgid "Posterize"
-msgstr "Posterize"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:138
 msgid "Power"
@@ -1858,7 +1851,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:176
 msgid "RGB"
-msgstr "RGB"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:23
 msgid "Radial Blur"
@@ -1877,7 +1870,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
 #: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
 msgid "Radius"
-msgstr "Radius"
+msgstr ""
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
@@ -1921,25 +1914,25 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:55
 msgid "Recolor"
-msgstr "Kulayan muli"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:43
 msgid "Rectangle"
-msgstr "Parihaba"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/RectangleSelectTool.cs:39
 msgid "Rectangle Select"
-msgstr "Parihabang Pagpili"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:449
 msgid "Red"
-msgstr "Pula"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:89
 msgid "Red  "
-msgstr "Pula  "
+msgstr ""
 
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:23
 msgid "Red Eye Removal"
@@ -2008,7 +2001,7 @@ msgstr ""
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
 msgid "Reset"
-msgstr "I-reset"
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:200
 msgid "Reset Color"
@@ -2058,7 +2051,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 msgid "Right Align"
-msgstr "Ihanay sa Kanan"
+msgstr ""
 
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:70
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:136
@@ -2103,7 +2096,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
 msgid "Rounded Rectangle"
-msgstr "Bilugang Parihaba"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:230
 msgid "Ruler Units"
@@ -2202,7 +2195,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:23
 msgid "Sharpen"
-msgstr "Linawan"
+msgstr ""
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
@@ -2280,7 +2273,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:35
 msgid "Squares"
-msgstr "Parisukat"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:136
 msgid "Status Bar"
@@ -2313,7 +2306,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:80
 msgid "Text"
-msgstr "Sulat"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:83
 msgid "Text - Finalize"
@@ -2480,11 +2473,11 @@ msgstr ""
 #: ../Pinta.Tools/Tools/EraserTool.cs:322
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:173
 msgid "Type"
-msgstr "Uri"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:201
 msgid "Underline"
-msgstr "Salungguhitan"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:70
 msgid "Undo"
@@ -2595,7 +2588,7 @@ msgstr ""
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:71
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:108
 msgid "Width:"
-msgstr "Lapad:"
+msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:207
 #: ../Pinta.Core/Actions/ViewActions.cs:395
@@ -2636,7 +2629,7 @@ msgstr ""
 #: ../Pinta.Tools/Tools/ZoomTool.cs:56
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:151
 msgid "Zoom"
-msgstr "Ilapit"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:26
 msgid "Zoom Blur"
@@ -2673,19 +2666,19 @@ msgstr ""
 
 #: ../Pinta/MainWindow.cs:395
 msgid "_Edit"
-msgstr "_Baguhin"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:394
 msgid "_File"
-msgstr "_File"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:407
 msgid "_Help"
-msgstr "_Gabay"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:398
 msgid "_Image"
-msgstr "_Larawan"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:400
 msgid "_Layers"
@@ -2704,11 +2697,11 @@ msgstr ""
 
 #: ../Pinta/MainWindow.cs:397
 msgid "_View"
-msgstr "_Tingnan"
+msgstr ""
 
 #: ../Pinta/MainWindow.cs:406
 msgid "_Window"
-msgstr "_Window"
+msgstr ""
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:82
 msgid "by Pinta contributors"
@@ -2727,15 +2720,11 @@ msgstr ""
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:121
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:124
 msgid "pixels"
-msgstr "pixels"
+msgstr ""
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:73
 msgid "translator-credits"
 msgstr ""
-"Launchpad Contributions:\n"
-"  Brian Robles https://launchpad.net/~brianrobles204\n"
-"  Cameron White https://launchpad.net/~cameronwhite91\n"
-"  I'M YourOnly.One 🔏 https://launchpad.net/~techmagus"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:49
@@ -2767,21 +2756,3 @@ msgstr ""
 #, csharp-format
 msgid "{0}%"
 msgstr ""
-
-#~ msgid "Choose Primary Color"
-#~ msgstr "Pumili ng Pangunahing Kulay"
-
-#~ msgid "Choose Secondary Color"
-#~ msgstr "Pumili ng Ikalawang Kulay"
-
-#~ msgid "Take Screenshot"
-#~ msgstr "Kumuha ng Screenshot"
-
-#~ msgid "Translated by:"
-#~ msgstr "Isinalin ni:"
-
-#~ msgid "Title"
-#~ msgstr "Pamagat"
-
-#~ msgid "Version"
-#~ msgstr "Bersyon"
