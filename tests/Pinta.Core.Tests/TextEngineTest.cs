@@ -177,7 +177,7 @@ internal sealed class TextEngineTest
 	[Test]
 	public void PerformLeftRight ()
 	{
-		TextEngine engine = new (test_snippet);
+		TextEngine engine = new (test_snippet.Append ("a longer line"));
 
 		engine.SetCursorPosition (new TextPosition (0, 3), true);
 		engine.PerformRight (false, false);
@@ -201,13 +201,18 @@ internal sealed class TextEngineTest
 
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 6)));
 
+		// Test bug #1824, when going from a longer line up to a shorter line
+		engine.SetCursorPosition (new TextPosition (3, 0), true); ;
+		engine.PerformLeft (false, false);
+		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (2, 6)));
+
 		// Should stay at the beginning / end when attempting to advance further.
 		engine.SetCursorPosition (new TextPosition (0, 0), true);
 		engine.PerformLeft (false, false);
 
 		Assert.That (engine.CurrentPosition, Is.EqualTo (new TextPosition (0, 0)));
 
-		TextPosition endPosition = new (test_snippet.Count - 1, test_snippet.Last ().Length);
+		TextPosition endPosition = new (engine.LineCount - 1, engine.Lines.Last ().Length);
 		engine.SetCursorPosition (endPosition, true);
 		engine.PerformRight (false, false);
 
