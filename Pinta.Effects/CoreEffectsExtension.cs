@@ -61,6 +61,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.RegisterEffect (new BulgeEffect (services));
 		PintaCore.Effects.RegisterEffect (new CellsEffect (services));
 		PintaCore.Effects.RegisterEffect (new CloudsEffect (services));
+		PintaCore.Effects.RegisterEffect (new ColorQuantizationEffect (services));
 		PintaCore.Effects.RegisterEffect (new DentsEffect (services));
 		PintaCore.Effects.RegisterEffect (new DitheringEffect (services));
 		PintaCore.Effects.RegisterEffect (new EdgeDetectEffect (services));
@@ -114,6 +115,7 @@ internal sealed class CoreEffectsExtension : IExtension
 		PintaCore.Effects.UnregisterInstanceOfEffect<BulgeEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<CellsEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<CloudsEffect> ();
+		PintaCore.Effects.UnregisterInstanceOfEffect<ColorQuantizationEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<DentsEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<DitheringEffect> ();
 		PintaCore.Effects.UnregisterInstanceOfEffect<EdgeDetectEffect> ();
