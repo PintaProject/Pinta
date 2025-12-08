@@ -102,7 +102,7 @@ jobs:
 
     - name: Add Cert to Keychain
       if: github.event_name != 'pull_request'
-      uses: apple-actions/import-codesign-certs@v5
+      uses: apple-actions/import-codesign-certs@v6
       with:
         p12-file-base64: ${{ secrets.MAC_CERTS_BASE64 }}
         p12-password: ${{ secrets.MAC_CERTS_PASSWORD }}
