@@ -75,7 +75,7 @@ jobs:
     # Build for both intel and arm64
     strategy:
       matrix:
-        build: [ { dotnet_rid: osx-arm64, lib_path: "/opt/homebrew/lib", runner: macos-14 }, { dotnet_rid: osx-x64, lib_path: "/usr/local/lib", runner: macos-13 }]
+        build: [ { dotnet_rid: osx-arm64, lib_path: "/opt/homebrew/lib", runner: macos-14 }, { dotnet_rid: osx-x64, lib_path: "/usr/local/lib", runner: macos-15-intel }]
 
     name: build-macos (${{matrix.build.dotnet_rid}})
 
