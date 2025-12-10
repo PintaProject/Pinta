@@ -124,11 +124,9 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		// If we already have a format, set it to the default.
 		// If not, default to jpeg
 		FormatDescriptor? format_desc = null;
-		FormatDescriptor? previous_format_desc = null;
 
 		if (document.HasFile) {
-			previous_format_desc = image_formats.GetFormatByFile (document.DisplayName);
-			format_desc = previous_format_desc;
+			format_desc = image_formats.GetFormatByFile (document.DisplayName);
 		}
 
 		if (format_desc is null || !format_desc.IsExportAvailable ())
