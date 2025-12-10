@@ -14,13 +14,13 @@
     <PackageVersion Include="Mono.Addins.CecilReflector" Version="1.4.2-alpha.4" />
     <PackageVersion Include="NGettext" Version="0.6.7" />
     <PackageVersion Include="ParagonClipper" Version="6.4.2" />
-    <PackageVersion Include="System.CommandLine" Version="2.0.0-rc.2.25502.107" />
+    <PackageVersion Include="System.CommandLine" Version="2.0.0" />
     <PackageVersion Include="Tmds.DBus" Version="0.21.2" />
 
     <!-- Dependencies used for unit tests -->
-    <PackageVersion Include="BenchmarkDotNet" Version="0.15.6" />
+    <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
     <PackageVersion Include="NUnit" Version="4.3.2" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageVersion Include="NUnit3TestAdapter" Version="5.2.0" />
 
     <!-- To resolve dependency conflict with GirCore.GObject-2.0.Integration and BenchmarkDotNet -->

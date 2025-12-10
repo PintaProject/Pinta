@@ -281,7 +281,7 @@ public sealed partial class TextEngine
 		} else if (current_pos.Offset == 0 && current_pos.Line > 0) {
 			current_pos = new (
 				line: current_pos.Line - 1,
-				offset: lines[current_pos.Line].Length);
+				offset: lines[current_pos.Line - 1].Length);
 		}
 
 		if (!shift)
