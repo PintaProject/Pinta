@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ClipperLib;
 using Gdk;
 using Gtk;
 
@@ -118,6 +119,16 @@ public abstract class BaseTool
 	/// </summary>
 	public virtual IEnumerable<IToolHandle> Handles
 		=> [];
+
+	/// <summary>
+	/// For selection tools, returns the shape of the applied selection, i.e. the selection being combined with the previous selection.
+	/// When this method doesn't return null, a preview of the new selection is shown with the outlines of the previous and applied selection.
+	/// If this is not a selection tool, this should always return null
+	/// If this selection tool is not currently drawing a new selection or is in replace mode, this should return null.
+	/// </summary>
+	public virtual IReadOnlyList<IReadOnlyList<IntPoint>>? AppliedSelectionPolygons {
+		get => null;
+	}
 
 	/// <summary>
 	/// The shortcut key used to activate this tool in the toolbox.

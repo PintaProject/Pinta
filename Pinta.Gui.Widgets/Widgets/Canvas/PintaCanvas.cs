@@ -27,6 +27,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cairo;
+using ClipperLib;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
@@ -229,9 +231,24 @@ public sealed class PintaCanvas : Gtk.Picture
 		bool fillSelection = tools.CurrentTool?.IsSelectionTool ?? false;
 
 		// Convert the selection path.
-		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
-		pathBuilder.AddCairoPath (document.Selection.SelectionPath);
-		Gsk.Path selectionPath = pathBuilder.ToPath ();
+		Gsk.PathBuilder fillPathBuilder = Gsk.PathBuilder.New ();
+		fillPathBuilder.AddCairoPath (document.Selection.SelectionPath);
+		Gsk.Path fillPath = fillPathBuilder.ToPath ();
+
+		Gsk.Path strokePath;
+		IReadOnlyList<IReadOnlyList<IntPoint>>? appliedPolygons = tools.CurrentTool?.AppliedSelectionPolygons;
+		//appliedPolygons not null means the tool wants to show a preview.
+		if (appliedPolygons is not null) {
+			//The preview is composed of the outlines of the previous selection and the applied selection.
+			var previewPolygons = appliedPolygons.Concat (document.PreviousSelection.SelectionPolygons).ToList ();
+			using Context g = CairoExtensions.CreatePathContext ();
+			Path outlinePath = g.CreatePolygonPath (DocumentSelection.ConvertToPolygonSet (previewPolygons));
+
+			Gsk.PathBuilder strokePathBuilder = Gsk.PathBuilder.New ();
+			strokePathBuilder.AddCairoPath (outlinePath);
+			strokePath = strokePathBuilder.ToPath ();
+		} else
+			strokePath = fillPath;
 
 		snapshot.Save ();
 		snapshot.PushClip (canvasViewBounds);
@@ -243,20 +260,20 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		if (fillSelection) {
 			Gdk.RGBA fillColor = new () { Red = 0.7f, Green = 0.8f, Blue = 0.9f, Alpha = 0.2f };
-			snapshot.AppendFill (selectionPath, Gsk.FillRule.EvenOdd, fillColor);
+			snapshot.AppendFill (fillPath, Gsk.FillRule.EvenOdd, fillColor);
 		}
 
 		// Draw a white line first so it shows up on dark backgrounds
 		Gsk.Stroke stroke = Gsk.Stroke.New (lineWidth: 1.0f / scale);
 		Gdk.RGBA white = new () { Red = 1, Green = 1, Blue = 1, Alpha = 1 };
-		snapshot.AppendStroke (selectionPath, stroke, white);
+		snapshot.AppendStroke (strokePath, stroke, white);
 
 		// Draw a black dashed line over the white line
 		float dashOffset = selection_animation_dash_offset / scale;
 		stroke.SetDash ([2.0f / scale, 4.0f / scale]);
 		stroke.SetDashOffset (dashOffset);
 		Gdk.RGBA black = new () { Red = 0, Green = 0, Blue = 0, Alpha = 1 };
-		snapshot.AppendStroke (selectionPath, stroke, black);
+		snapshot.AppendStroke (strokePath, stroke, black);
 
 		snapshot.Pop ();
 		snapshot.Restore ();
