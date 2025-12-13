@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Cairo;
 
 namespace Pinta.Core;
@@ -57,6 +58,12 @@ public abstract class BasePaintBrush
 	/// milliseconds.
 	/// </summary>
 	public virtual uint MillisecondsBeforeReapply => 0;
+
+	/// <summary>
+	/// List of additional brush-specific options which the user
+	/// can set in the UI.
+	/// </summary>
+	public virtual List<PaintBrushOption> options => [];
 
 	public void DoMouseUp ()
 	{
