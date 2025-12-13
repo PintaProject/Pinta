@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Cairo;
 
 using Pinta.Core;
@@ -36,12 +37,17 @@ internal sealed class SplatterBrush : BasePaintBrush
 	public override string Name
 		=> Translations.GetString ("Splatter");
 
-	public override double StrokeAlphaMultiplier
-		=> 0.5;
-
 	public override uint MillisecondsBeforeReapply => 100;
 
 	private readonly Random random = new ();
+
+	private int size_min;
+	private int size_max;
+
+	public override List<PaintBrushOption> options => [
+		new IntegerOption(1, 10000, 5, "Minimum size", r => size_min = (int)r),
+		new IntegerOption(1, 10000, 10, "Maximum size", r => size_max = (int)r),
+	];
 
 	protected override RectangleI OnMouseMove (
 		Context g,
@@ -50,14 +56,16 @@ internal sealed class SplatterBrush : BasePaintBrush
 	{
 		int line_width = (int) g.LineWidth;
 
-		// we want a minimum size of 2 for the splatter (except for when the brush width is 1), since a splatter of size 1 is very small
-		int size = (line_width == 1) ? 1 : random.Next (2, line_width);
+		if (size_min > size_max) {
+			size_min = size_max;
+		}
+		int size = random.Next (size_min, size_max);
 
 		PointI current = strokeArgs.CurrentPosition;
 
 		RectangleD rect = new (
-			X: current.X - random.Next (-15, 15),
-			Y: current.Y - random.Next (-15, 15),
+			X: current.X - random.Next (-line_width / 2, line_width / 2),
+			Y: current.Y - random.Next (-line_width / 2, line_width / 2),
 			Width: size,
 			Height: size);
 
