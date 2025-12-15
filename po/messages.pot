@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-01 00:22+0000\n"
+"POT-Creation-Date: 2025-12-15 00:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -407,11 +407,11 @@ msgstr ""
 msgid "Click and drag to navigate image."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:329
 msgid "Click to reset primary and secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:317
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:318
 msgid "Click to select primary color."
 msgstr ""
 
@@ -419,12 +419,12 @@ msgstr ""
 msgid "Click to select region of similar color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:321
 msgid "Click to select secondary color."
 msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 
@@ -485,7 +485,7 @@ msgstr ""
 msgid "Color Mode"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:353
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
 msgid "Color Picker"
 msgstr ""
@@ -789,7 +789,7 @@ msgstr ""
 msgid "Failed to open image"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:254
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:234
 msgid "Failed to save image"
 msgstr ""
 
@@ -854,11 +854,11 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ImageActions.cs:117
 #: ../Pinta.Core/Actions/ImageActions.cs:221
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:167
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
 msgid "Flatten"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:163
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr ""
 
@@ -1026,7 +1026,7 @@ msgstr ""
 msgid "Hue / Saturation"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:246
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr ""
 
@@ -1059,7 +1059,7 @@ msgstr ""
 msgid "Image larger than canvas"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:245
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:225
 msgid "Image too large"
 msgstr ""
 
@@ -1258,7 +1258,7 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:57
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:58
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1293,11 +1293,11 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:315
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:311
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
@@ -1627,7 +1627,7 @@ msgstr ""
 msgid "Paint Bucket"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:55
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:56
 msgid "Paintbrush"
 msgstr ""
 
@@ -1715,7 +1715,7 @@ msgstr ""
 msgid "Pinta Website"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:207
 msgid "Pinta does not support saving images in this file format."
 msgstr ""
 
@@ -2200,7 +2200,7 @@ msgstr ""
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:324
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:325
 msgid "Shortcut key"
 msgstr ""
 
@@ -2384,7 +2384,7 @@ msgstr ""
 msgid "Thickness"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:162
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
 msgstr ""
 
@@ -2471,7 +2471,7 @@ msgid "Two-Row Sierra"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:322
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:173
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:182
 msgid "Type"
 msgstr ""
 
@@ -2618,7 +2618,7 @@ msgid "You do not have access to '{0}'."
 msgstr ""
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:257
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:237
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2655,7 +2655,7 @@ msgstr ""
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:166
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
 msgstr ""
