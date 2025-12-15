@@ -36,7 +36,7 @@ jobs:
           make updatepotfiles
           make updatepot
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: fix/update-translation-template
           commit-message: Automatic update of translation template
