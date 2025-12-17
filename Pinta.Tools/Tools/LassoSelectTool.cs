@@ -219,7 +219,7 @@ public sealed class LassoSelectTool : BaseTool
 			if (lasso_mode_buttom is null) {
 				lasso_mode_buttom = new ToolBarDropDownButton ();
 
-				lasso_mode_buttom.AddItem (Translations.GetString ("Freeform"), Pinta.Resources.Icons.ToolFreeformShape, false);
+				lasso_mode_buttom.AddItem (Translations.GetString ("Freeform"), Pinta.Resources.Icons.LassoFreeform, false);
 				lasso_mode_buttom.AddItem (Translations.GetString ("Polygon"), Pinta.Resources.Icons.LassoPolygon, true);
 
 				lasso_mode_buttom.SelectedIndex = Settings.GetSetting (SettingNames.LASSO_MODE, 0);
