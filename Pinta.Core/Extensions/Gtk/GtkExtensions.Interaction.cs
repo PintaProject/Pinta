@@ -5,7 +5,7 @@ partial class GtkExtensions
 	/// <summary>
 	/// Convert from GetCurrentButton to the MouseButton enum.
 	/// </summary>
-	public static MouseButton GetCurrentMouseButton (this Gtk.GestureClick gesture)
+	public static MouseButton GetCurrentMouseButton (this Gtk.GestureSingle gesture)
 	{
 		uint button = gesture.GetCurrentButton ();
 		return button switch {

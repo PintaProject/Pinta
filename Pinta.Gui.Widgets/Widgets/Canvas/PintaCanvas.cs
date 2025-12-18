@@ -37,6 +37,7 @@ public sealed class PintaCanvas : Gtk.Picture
 	private readonly Document document;
 	private readonly CanvasWindow canvas_window;
 	private readonly ICanvasGridService canvas_grid;
+	private readonly Gtk.GestureDrag drag_controller;
 
 	private Cairo.ImageSurface? canvas_surface;
 	private Gdk.Texture? canvas_texture;
@@ -73,14 +74,16 @@ public sealed class PintaCanvas : Gtk.Picture
 		// Timer for selection outline animation
 		selection_animation_timer_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, 80, SelectionAnimationTick);
 
-		// Forward mouse press / release events to the current tool
-		Gtk.GestureClick click_controller = Gtk.GestureClick.New ();
-		click_controller.SetButton (0); // Listen for all mouse buttons.
-		click_controller.OnPressed += OnMouseDown;
-		click_controller.OnReleased += OnMouseUp;
-		AddController (click_controller);
+		// Use the drag gesture to forward a sequence of mouse press -> move -> release events to the current tool.
+		// This is more reliable than using just a click gesture in combination with the move controller (see bug #1456)
+		drag_controller = Gtk.GestureDrag.New ();
+		drag_controller.SetButton (0); // Listen for all mouse buttons.
+		drag_controller.OnDragBegin += OnDragBegin;
+		drag_controller.OnDragUpdate += OnDragUpdate;
+		drag_controller.OnDragEnd += OnDragEnd;
+		AddController (drag_controller);
 
-		// Forward mouse move events to the current tool
+		// Forward mouse move events to the current tool when not dragging.
 		Gtk.EventControllerMotion motion_controller = Gtk.EventControllerMotion.New ();
 		motion_controller.OnMotion += OnMouseMove;
 		AddController (motion_controller);
@@ -426,7 +429,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		SetSizeRequest (viewSize.Width, viewSize.Height);
 	}
 
-	private void OnMouseDown (Gtk.GestureClick gesture, Gtk.GestureClick.PressedSignalArgs args)
+	private void OnDragBegin (Gtk.GestureDrag gesture, Gtk.GestureDrag.DragBeginSignalArgs args)
 	{
 		// Note we don't call gesture.SetState (Gtk.EventSequenceState.Claimed) here, so
 		// that the CanvasWindow can also receive motion events to update the root window mouse position.
@@ -441,7 +444,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		// the active document to this document.
 
 		// Send the mouse press event to the current tool.
-		PointD window_point = new (args.X, args.Y);
+		PointD window_point = new (args.StartX, args.StartY);
 		PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
 
 		ToolMouseEventArgs tool_args = new () {
@@ -455,10 +458,29 @@ public sealed class PintaCanvas : Gtk.Picture
 		tools.DoMouseDown (document, tool_args);
 	}
 
-	private void OnMouseUp (Gtk.GestureClick gesture, Gtk.GestureClick.ReleasedSignalArgs args)
+	private void OnDragUpdate (Gtk.GestureDrag gesture, Gtk.GestureDrag.DragUpdateSignalArgs args)
+	{
+		// Send the mouse move event to the current tool.
+		gesture.GetStartPoint (out double startX, out double startY);
+		PointD window_point = new (startX + args.OffsetX, startY + args.OffsetY);
+		PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
+
+		ToolMouseEventArgs tool_args = new () {
+			State = gesture.GetCurrentEventState (),
+			MouseButton = gesture.GetCurrentMouseButton (),
+			PointDouble = canvas_point,
+			WindowPoint = window_point,
+			RootPoint = canvas_window.WindowMousePosition,
+		};
+
+		tools.DoMouseMove (document, tool_args);
+	}
+
+	private void OnDragEnd (Gtk.GestureDrag gesture, Gtk.GestureDrag.DragEndSignalArgs args)
 	{
 		// Send the mouse release event to the current tool.
-		PointD window_point = new (args.X, args.Y);
+		gesture.GetStartPoint (out double startX, out double startY);
+		PointD window_point = new (startX + args.OffsetX, startY + args.OffsetY);
 		PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
 
 		ToolMouseEventArgs tool_args = new () {
@@ -474,6 +496,10 @@ public sealed class PintaCanvas : Gtk.Picture
 
 	private void OnMouseMove (Gtk.EventControllerMotion controller, Gtk.EventControllerMotion.MotionSignalArgs args)
 	{
+		// Don't send duplicate mouse move events while a drag is active.
+		if (drag_controller.GetStartPoint (out _, out _))
+			return;
+
 		PointD window_point = new (args.X, args.Y);
 		PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
 
