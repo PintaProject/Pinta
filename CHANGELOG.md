@@ -65,6 +65,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed drifting when holding Shift while expanding a rectangle selection using the vertical or horizontal handles (#1733)
 - Fixed issue where icons were missing from the top bar (#1814)
 - Fixed a potential error in the text tool when pressing Left at the beginning of a line (#1824)
+- Fixed issues where mouse button releases were not correctly registered in certain situations (#1456, #1891)
 
 ## [3.0.5](https://github.com/PintaProject/Pinta/release/tag/3.0.5) - 2025/11/24
 
