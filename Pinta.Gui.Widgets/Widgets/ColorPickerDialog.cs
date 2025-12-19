@@ -565,16 +565,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		swatchBox.Append (swatchPalette);
 		swatchBox.SetVisible (showWatches);
 
-		Gtk.GestureClick click_gesture = Gtk.GestureClick.New ();
-		click_gesture.SetButton (0); // Listen for all mouse buttons.
-		click_gesture.OnPressed += ClickGesture_OnPressed;
-		click_gesture.OnReleased += ClickGesture_OnReleased;
+		Gtk.GestureDrag dragGesture = Gtk.GestureDrag.New ();
+		dragGesture.SetButton (0); // Listen for all mouse buttons.
+		dragGesture.OnDragBegin += DragGesture_OnDragBegin;
+		dragGesture.OnDragUpdate += DragGesture_OnDragUpdate;
+		dragGesture.OnDragEnd += DragGesture_OnDragEnd;
 
-		Gtk.EventControllerKey keyboard_gesture = Gtk.EventControllerKey.New ();
-		keyboard_gesture.OnKeyPressed += KeyboardGesture_OnKeyPressed;
-
-		Gtk.EventControllerMotion motion_controller = Gtk.EventControllerMotion.New ();
-		motion_controller.OnMotion += MotionController_OnMotion;
+		Gtk.EventControllerKey keyboardGesture = Gtk.EventControllerKey.New ();
+		keyboardGesture.OnKeyPressed += KeyboardGesture_OnKeyPressed;
 
 		// Top part of the color picker.
 		// Includes palette, color surface, sliders/hex
@@ -605,9 +603,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Widget)
 
 		// Mouse and keyboard handlers
-		AddController (click_gesture);
-		AddController (keyboard_gesture);
-		AddController (motion_controller);
+		AddController (dragGesture);
+		AddController (keyboardGesture);
 
 		// incredibly silly workaround
 		// but if this is not done, it seems Wayland will assume the window will never be transparent, and thus opacity will break
@@ -780,36 +777,31 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		UpdateView ();
 	}
 
-	private void ClickGesture_OnPressed (
-		Gtk.GestureClick _,
-		Gtk.GestureClick.PressedSignalArgs e)
+	private void DragGesture_OnDragBegin (
+		Gtk.GestureDrag gesture,
+		Gtk.GestureDrag.DragBeginSignalArgs e)
 	{
-		PointD absPos = new (e.X, e.Y);
+		gesture.GetStartPoint (out double startX, out double startY);
+		PointD absPos = new (startX, startY);
+
 		if (picker_surface.IsMouseInDrawingArea (this, absPos, out PointD _)) {
-
 			mouse_on_picker_surface = true;
-			SetColorFromPickerSurface (new PointD (e.X, e.Y));
-
+			SetColorFromPickerSurface (absPos);
 			return;
 		}
 
 		if (swatch_box.Visible && swatch_recent.IsMouseInDrawingArea (this, absPos, out PointD rel2)) {
-
 			int recent_index = PaletteWidget.GetSwatchAtLocation (palette, rel2, new RectangleD (), true);
 
 			if (recent_index < 0)
 				return;
 
 			CurrentColor = palette.RecentlyUsedColors.ElementAt (recent_index);
-
 			UpdateView ();
-
 			return;
-
 		}
 
 		if (swatch_box.Visible && swatch_palette.IsMouseInDrawingArea (this, absPos, out PointD rel3)) {
-
 			int index = PaletteWidget.GetSwatchAtLocation (palette, rel3, new RectangleD ());
 
 			if (index < 0)
@@ -820,9 +812,21 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		}
 	}
 
-	private void ClickGesture_OnReleased (
-		Gtk.GestureClick _,
-		Gtk.GestureClick.ReleasedSignalArgs e)
+	private void DragGesture_OnDragUpdate (
+		Gtk.GestureDrag gesture,
+		Gtk.GestureDrag.DragUpdateSignalArgs e)
+	{
+		if (!mouse_on_picker_surface)
+			return;
+
+		gesture.GetStartPoint (out double startX, out double startY);
+		PointD absPos = new (startX + e.OffsetX, startY + e.OffsetY);
+		SetColorFromPickerSurface (absPos);
+	}
+
+	private void DragGesture_OnDragEnd (
+		Gtk.GestureDrag gesture,
+		Gtk.GestureDrag.DragEndSignalArgs e)
 	{
 		mouse_on_picker_surface = false;
 	}
@@ -834,14 +838,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		if (e.GetKey ().Value == Gdk.Constants.KEY_x)
 			CycleColors ();
 		return true;
-	}
-
-	private void MotionController_OnMotion (
-		Gtk.EventControllerMotion _,
-		Gtk.EventControllerMotion.MotionSignalArgs args)
-	{
-		if (!mouse_on_picker_surface) return;
-		SetColorFromPickerSurface (new PointD (args.X, args.Y));
 	}
 
 	private void HexEntry_OnChanged (Gtk.Editable sender, EventArgs _)
