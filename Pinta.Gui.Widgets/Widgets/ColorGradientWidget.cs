@@ -50,19 +50,20 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 
 		SetDrawFunc ((_, context, _, _) => Draw (context));
 
-		var motion_controller = Gtk.EventControllerMotion.New ();
-		motion_controller.OnMotion += HandleMotionNotifyEvent;
-		motion_controller.OnLeave += HandleLeaveNotifyEvent;
-		AddController (motion_controller);
+		Gtk.EventControllerMotion motionController = Gtk.EventControllerMotion.New ();
+		motionController.OnMotion += HandleMotionNotifyEvent;
+		motionController.OnLeave += HandleLeaveNotifyEvent;
+		AddController (motionController);
 
-		ClickGesture = Gtk.GestureClick.New ();
-		ClickGesture.SetButton (0); // Handle all buttons
-		ClickGesture.OnPressed += HandleButtonPressEvent;
-		ClickGesture.OnReleased += HandleButtonReleaseEvent;
-		AddController (ClickGesture);
+		DragGesture = Gtk.GestureDrag.New ();
+		DragGesture.SetButton (0); // Handle all buttons
+		DragGesture.OnDragBegin += HandleDragBegin;
+		DragGesture.OnDragUpdate += HandleDragUpdate;
+		DragGesture.OnDragEnd += HandleDragEnd;
+		AddController (DragGesture);
 	}
 
-	public Gtk.GestureClick ClickGesture { get; }
+	public Gtk.GestureDrag DragGesture { get; }
 
 	private RectangleD GradientRectangle {
 		get {
@@ -220,15 +221,6 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		int index = FindValueIndex (p.Y);
 		p = p with { Y = (int) NormalizeY (index, p.Y) };
 
-		if (controller.GetCurrentEventState ().IsLeftMousePressed ()) {
-			if (index != -1) {
-				int y = GetValueFromY (p.Y);
-
-				vals[index] = y;
-				OnValueChanged (index);
-			}
-		}
-
 		last_mouse_pos = p;
 
 		// to avoid unnecessary costly redrawing
@@ -240,25 +232,47 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		Gtk.EventControllerMotion controller,
 		EventArgs args)
 	{
-		if (!controller.GetCurrentEventState ().IsLeftMousePressed ())
+		if (!DragGesture.GetStartPoint (out _, out _))
 			ValueIndex = -1;
 
 		QueueDraw ();
 	}
 
-	private void HandleButtonPressEvent (
-		Gtk.GestureClick controller,
-		Gtk.GestureClick.PressedSignalArgs args)
+	private void HandleDragBegin (
+		Gtk.GestureDrag controller,
+		Gtk.GestureDrag.DragBeginSignalArgs args)
 	{
-		int index = FindValueIndex ((int) args.Y);
+		int index = FindValueIndex ((int) args.StartY);
 
 		if (index != -1)
 			ValueIndex = index;
 	}
 
-	private void HandleButtonReleaseEvent (
-		Gtk.GestureClick controller,
-		Gtk.GestureClick.ReleasedSignalArgs args)
+	private void HandleDragUpdate (
+		Gtk.GestureDrag controller,
+		Gtk.GestureDrag.DragUpdateSignalArgs args)
+	{
+		if (ValueIndex == -1)
+			return;
+
+		controller.GetStartPoint (out double startX, out double startY);
+		PointI p = new (
+			X: (int) (startX + args.OffsetX),
+			Y: (int) (startY + args.OffsetY));
+
+		p = p with { Y = (int) NormalizeY (ValueIndex, p.Y) };
+
+		int y = GetValueFromY (p.Y);
+		vals[ValueIndex] = y;
+		OnValueChanged (ValueIndex);
+
+		last_mouse_pos = p;
+		QueueDraw ();
+	}
+
+	private void HandleDragEnd (
+		Gtk.GestureDrag controller,
+		Gtk.GestureDrag.DragEndSignalArgs args)
 	{
 		ValueIndex = -1;
 	}

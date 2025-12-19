@@ -145,13 +145,13 @@ public partial class LevelsDialog : Gtk.Dialog
 		spinOutGamma.SetActivatesDefaultImmediate (true);
 
 		ColorGradientWidget gradientInput = new (2) { WidthRequest = 40 };
-		gradientInput.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
-		gradientInput.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
+		gradientInput.DragGesture.OnDragBegin += HandleGradientDragBegin;
+		gradientInput.DragGesture.OnDragEnd += HandleGradientDragEnd;
 		gradientInput.ValueChanged += HandleGradientInputValueChanged;
 
 		ColorGradientWidget gradientOutput = new (3) { WidthRequest = 40 };
-		gradientOutput.ClickGesture.OnPressed += HandleGradientButtonPressEvent;
-		gradientOutput.ClickGesture.OnReleased += HandleGradientButtonReleaseEvent;
+		gradientOutput.DragGesture.OnDragBegin += HandleGradientDragBegin;
+		gradientOutput.DragGesture.OnDragEnd += HandleGradientDragEnd;
 		gradientOutput.ValueChanged += HandleGradientOutputValueChanged;
 
 		ColorPanelWidget colorPanelInHigh = new () { HeightRequest = 24 };
@@ -524,16 +524,16 @@ public partial class LevelsDialog : Gtk.Dialog
 		UpdateLivePreview ();
 	}
 
-	private void HandleGradientButtonPressEvent (
-		Gtk.GestureClick controller,
-		Gtk.GestureClick.PressedSignalArgs args)
+	private void HandleGradientDragBegin (
+		Gtk.GestureDrag controller,
+		Gtk.GestureDrag.DragBeginSignalArgs args)
 	{
 		button_down = true;
 	}
 
-	private void HandleGradientButtonReleaseEvent (
-		Gtk.GestureClick controller,
-		Gtk.GestureClick.ReleasedSignalArgs args)
+	private void HandleGradientDragEnd (
+		Gtk.GestureDrag controller,
+		Gtk.GestureDrag.DragEndSignalArgs args)
 	{
 		button_down = false;
 
