@@ -46,7 +46,7 @@ internal sealed class SplatterBrush : BasePaintBrush
 	private const string MinSizeSettingSuffix = "splatter-brush-min-size";
 	private const string MaxSizeSettingSuffix = "splatter-brush-max-size";
 
-	public SplatterBrush()
+	public SplatterBrush ()
 	{
 		Options = [
 			new IntegerOption(MinSizeSettingSuffix, 1, 10000, 5, Translations.GetString("Minimum Size"), sz => size_min = sz),

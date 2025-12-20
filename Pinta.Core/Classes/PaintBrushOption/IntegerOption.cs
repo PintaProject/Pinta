@@ -61,7 +61,8 @@ public class IntegerOption : ToolbarOption
 		valueChangeCallback (initialValue);
 	}
 
-	public string GetUniqueName() {
+	public string GetUniqueName ()
+	{
 		return name;
 	}
 
@@ -75,14 +76,14 @@ public class IntegerOption : ToolbarOption
 		return value;
 	}
 
-	public void SetValue(object value)
+	public void SetValue (object value)
 	{
 		if (value is int v) {
 			this.value = v;
 			spin_button.Value = v;
 			value_change_callback (this.value);
 		} else {
-			Console.WriteLine("Unable to set value " + value.ToString() + " for integer toolbar option " + name + ", cannot be cast to int");
+			Console.WriteLine ("Unable to set value " + value.ToString () + " for integer toolbar option " + name + ", cannot be cast to int");
 		}
 	}
 

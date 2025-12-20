@@ -184,7 +184,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		if (active_brush is not null) {
 			foreach (var option in active_brush.Options) {
-				settings.PutSetting(SettingNames.ToolbarOptionValue(option.GetUniqueName()), option.GetValue());
+				settings.PutSetting (SettingNames.ToolbarOptionValue (option.GetUniqueName ()), option.GetValue ());
 			}
 		}
 	}
@@ -249,12 +249,12 @@ public sealed class PaintBrushTool : BaseBrushTool
 				brush_specific_options_box.Append (option.GetWidget ());
 				// settings are only persisted on app close, so if user has changed options, we don't want to reset to the previously
 				// persisted ones, but to the ones that the user has changed to
-				string key = SettingNames.ToolbarOptionValue(option.GetUniqueName());
-				if (!previously_preloaded_toolbar_values.Contains(key)) {
-					object? previousValue = Settings.GetSetting<object?>(key, null);
+				string key = SettingNames.ToolbarOptionValue (option.GetUniqueName ());
+				if (!previously_preloaded_toolbar_values.Contains (key)) {
+					object? previousValue = Settings.GetSetting<object?> (key, null);
 					if (previousValue is not null) {
-						option.SetValue(previousValue);
-						previously_preloaded_toolbar_values.Add(key);
+						option.SetValue (previousValue);
+						previously_preloaded_toolbar_values.Add (key);
 					}
 				}
 			}

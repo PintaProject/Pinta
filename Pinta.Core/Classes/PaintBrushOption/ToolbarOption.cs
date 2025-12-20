@@ -39,7 +39,7 @@ public interface ToolbarOption
 	/// option.
 	/// </summary>
 	public string GetUniqueName ();
-	
+
 	/// <summary>
 	/// Retrieve the GTK widget drawn by this option.
 	/// </summary>
