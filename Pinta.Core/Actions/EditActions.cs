@@ -1,21 +1,21 @@
-// 
+//
 // EditActions.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cairo;
 
@@ -392,51 +393,42 @@ public sealed class EditActions
 	private void HandlerPintaCoreActionsEditCopyActivated (object sender, EventArgs e)
 	{
 		Document doc = workspace.ActiveDocument;
-
 		Gdk.Clipboard cb = GdkExtensions.GetDefaultClipboard ();
-
 		if (tools.CurrentTool?.DoHandleCopy (doc, cb) == true)
 			return;
 
 		tools.Commit ();
 
-		ImageSurface src = doc.Layers.GetClippedLayer (doc.Layers.CurrentUserLayerIndex);
-
-		RectangleI rect = doc.GetSelectedBounds (true);
-		if (rect.IsEmpty)
-			return;
-
-		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
-
-		using Context g = new (dest);
-
-		g.SetSourceSurface (src, -rect.X, -rect.Y);
-		g.Paint ();
-
-		cb.SetImage (dest);
+		CopyLayersToClipboard (doc, doc.Layers.CurrentUserLayer.GetLayersToPaint (), cb);
 	}
 
 	private void HandlerPintaCoreActionsEditCopyMergedActivated (object sender, EventArgs e)
 	{
-		Gdk.Clipboard cb = GdkExtensions.GetDefaultClipboard ();
-		Document doc = workspace.ActiveDocument;
-
 		tools.Commit ();
 
-		// Get our merged ("flattened") image
-		ImageSurface src = doc.GetFlattenedImage (/* clip_to_selection */ true);
+		Document doc = workspace.ActiveDocument;
+		Gdk.Clipboard cb = GdkExtensions.GetDefaultClipboard ();
+		CopyLayersToClipboard (doc, doc.Layers.GetLayersToPaint (), cb);
+	}
+
+	private static void CopyLayersToClipboard (Document doc, IEnumerable<Layer> layers, Gdk.Clipboard clipboard)
+	{
 		RectangleI rect = doc.GetSelectedBounds (true);
+		if (rect.IsEmpty)
+			return;
 
-		// Copy it to a correctly sized surface 
-		ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
-
+		using ImageSurface dest = CairoExtensions.CreateImageSurface (Format.Argb32, rect.Width, rect.Height);
 		using Context g = new (dest);
 
-		g.SetSourceSurface (src, -rect.X, -rect.Y);
-		g.Paint ();
+		// Move the selected region to the upper left of the target surface, and clip to the original selection.
+		g.Translate (-rect.X, -rect.Y);
+		doc.Selection.Clip (g);
 
-		// Give it to the clipboard
-		cb.SetImage (dest);
+		foreach (Layer layer in layers) {
+			layer.Draw (g);
+		}
+
+		clipboard.SetImage (dest);
 	}
 
 	private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)

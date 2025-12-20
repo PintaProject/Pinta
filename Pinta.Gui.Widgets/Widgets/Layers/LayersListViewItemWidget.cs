@@ -22,6 +22,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Cairo;
 using GObject;
 using Pinta.Core;
@@ -58,19 +60,16 @@ public sealed partial class LayersListViewItem
 		if (document is null || UserLayer is null)
 			throw new InvalidOperationException ($"{nameof (LayersListViewItem)} is not initialized");
 
-		// If this is not the currently selected layer, just directly use the layer's surface.
-		if (UserLayer != document.Layers.CurrentUserLayer || !document.Layers.ShowSelectionLayer)
-			return UserLayer.Surface;
-
-		// If it is, then we may need to draw the
-		// selection layer over it, like when dragging a selection.
 		ImageSurface surface = CairoExtensions.CreateImageSurface (Format.Argb32, widthRequest, heightRequest);
 
-		Layer[] layers =
-		[
-			UserLayer,
-			document.Layers.SelectionLayer,
-		];
+		List<Layer> layers = UserLayer.GetLayersToPaint ().ToList ();
+		// For the current layer, show the selection layer too (e.g. when moving the selection's contents).
+		if (UserLayer == document.Layers.CurrentUserLayer && document.Layers.ShowSelectionLayer)
+			layers.Add (document.Layers.SelectionLayer);
+
+		// Directly use the layer's surface if there isn't any blending required.
+		if (layers.Count == 1)
+			return layers[0].Surface;
 
 		canvas_renderer ??= new CanvasRenderer (
 			PintaCore.LivePreview,
