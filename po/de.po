@@ -1481,7 +1481,7 @@ msgid "Martian Lava"
 msgstr "Mars-Lava"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:49
-msgid "Maximum size"
+msgid "Maximum Size"
 msgstr "Maximale Größe"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
@@ -1498,7 +1498,7 @@ msgid "Merge Layer Down"
 msgstr "Ebene mit darunterliegenden zusammenfassen"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:48
-msgid "Minimum size"
+msgid "Minimum Size"
 msgstr "Minimale Größe"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286

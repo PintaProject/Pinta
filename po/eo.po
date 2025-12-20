@@ -1409,7 +1409,7 @@ msgid "Martian Lava"
 msgstr ""
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:49
-msgid "Maximum size"
+msgid "Maximum Size"
 msgstr "Maksimuma grando"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
@@ -1426,7 +1426,7 @@ msgid "Merge Layer Down"
 msgstr "Kunfandi tavolon malsupre"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:48
-msgid "Minimum size"
+msgid "Minimum Size"
 msgstr "Minimuma grando"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286

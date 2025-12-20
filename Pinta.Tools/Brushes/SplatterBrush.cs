@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using Cairo;
 
 using Pinta.Core;
@@ -44,10 +43,16 @@ internal sealed class SplatterBrush : BasePaintBrush
 	private int size_min;
 	private int size_max;
 
-	public override List<PaintBrushOption> options => [
-		new IntegerOption(1, 10000, 5, "Minimum size", r => size_min = (int)r),
-		new IntegerOption(1, 10000, 10, "Maximum size", r => size_max = (int)r),
-	];
+	private const string MinSizeSettingSuffix = "splatter-brush-min-size";
+	private const string MaxSizeSettingSuffix = "splatter-brush-max-size";
+
+	public SplatterBrush()
+	{
+		Options = [
+			new IntegerOption(MinSizeSettingSuffix, 1, 10000, 5, Translations.GetString("Minimum Size"), sz => size_min = sz),
+			new IntegerOption(MaxSizeSettingSuffix, 1, 10000, 10, Translations.GetString("Maximum Size"), sz => size_max = sz),
+		];
+	}
 
 	protected override RectangleI OnMouseMove (
 		Context g,

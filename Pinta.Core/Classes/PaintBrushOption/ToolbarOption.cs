@@ -29,13 +29,29 @@ using Gtk;
 namespace Pinta.Core;
 
 /// <summary>
-/// Defines a custom, brush-specific option that the user can set.
+/// Defines a custom option that the user can set in the toolbar. Usable e.g. for
+/// custom options on brushes.
 /// </summary>
-public interface PaintBrushOption
+public interface ToolbarOption
 {
+	/// <summary>
+	/// Retrieve an application-wide unique name usable for identifying this
+	/// option.
+	/// </summary>
+	public string GetUniqueName ();
+	
 	/// <summary>
 	/// Retrieve the GTK widget drawn by this option.
 	/// </summary>
 	public Widget GetWidget ();
 
+	/// <summary>
+	/// Retrieve the currently set value of the option.
+	/// </summary>
+	public object GetValue ();
+
+	/// <summary>
+	/// Set a new value.
+	/// </summary>
+	public void SetValue (object value);
 }

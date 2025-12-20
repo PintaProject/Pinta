@@ -63,7 +63,7 @@ public abstract class BasePaintBrush
 	/// List of additional brush-specific options which the user
 	/// can set in the UI.
 	/// </summary>
-	public virtual List<PaintBrushOption> options => [];
+	public virtual List<ToolbarOption> Options {get; protected set;} = [];
 
 	public void DoMouseUp ()
 	{
