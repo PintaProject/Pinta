@@ -37,9 +37,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	const int SMALL_SLIDER_WIDTH = 150;
 	const int SMALL_SPACING = 2;
 
-	const int CPS_PADDING_HEIGHT = 10;
-	const int CPS_PADDING_WIDTH = 14;
-
 	private readonly Gtk.Box top_box;
 	private readonly Gtk.Box swatch_box;
 	private readonly Gtk.Box color_display_box;
@@ -362,10 +359,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		ColorPickerSlider.Settings cpsArgs = new () {
 			Text = string.Empty,
 			TopWindow = this,
-			SliderPaddingHeight = CPS_PADDING_HEIGHT,
-			SliderPaddingWidth = CPS_PADDING_WIDTH,
 			SliderWidth = slider_width,
-			MaxWidthChars = 3,
 		};
 
 		ColorPickerSlider hueSlider = new (

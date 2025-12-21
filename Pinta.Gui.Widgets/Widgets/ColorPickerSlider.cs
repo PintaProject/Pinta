@@ -21,10 +21,10 @@ public sealed class ColorPickerSlider : Gtk.Box
 		string Text, // required
 		double InitialValue,
 		Gtk.Window TopWindow, // required
-		int SliderPaddingWidth,
-		int SliderPaddingHeight,
-		int SliderWidth,
-		int MaxWidthChars);
+		int SliderWidth);
+
+	private const int PADDING_WIDTH = 14;
+	private const int PADDING_HEIGHT = 10;
 
 	private readonly Settings settings;
 	private readonly Gtk.Window top_window;
@@ -67,7 +67,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 		sliderOverlay.AddOverlay (sliderControl);
 
 		Gtk.Entry inputField = new () {
-			MaxWidthChars = settings.MaxWidthChars,
+			MaxWidthChars = 3,
 			WidthRequest = 50,
 			Hexpand = false,
 		};
@@ -102,7 +102,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 	{
 		const int OUTLINE_WIDTH = 2;
 
-		double currentPosition = slider_control.GetValue () / settings.Max * (width - 2 * settings.SliderPaddingWidth) + settings.SliderPaddingWidth;
+		double currentPosition = slider_control.GetValue () / settings.Max * (width - 2 * PADDING_WIDTH) + PADDING_WIDTH;
 
 		ReadOnlySpan<PointD> cursorPoly = [
 			new (currentPosition, height / 2),
@@ -196,21 +196,21 @@ public sealed class ColorPickerSlider : Gtk.Box
 		context.Antialias = Antialias.None;
 
 		Size drawSize = new (
-			Width: width - settings.SliderPaddingWidth * 2,
-			Height: height - settings.SliderPaddingHeight * 2);
+			Width: width - PADDING_WIDTH * 2,
+			Height: height - PADDING_HEIGHT * 2);
 
 		PointI p = new (
-			X: settings.SliderPaddingWidth + drawSize.Width,
-			Y: settings.SliderPaddingHeight + drawSize.Height);
+			X: PADDING_WIDTH + drawSize.Width,
+			Y: PADDING_HEIGHT + drawSize.Height);
 
 		int bsize = drawSize.Height / 2;
 
 		// Draw transparency background
 		context.FillRectangle (
-			new RectangleD (settings.SliderPaddingWidth, settings.SliderPaddingHeight, drawSize.Width, drawSize.Height),
+			new RectangleD (PADDING_WIDTH, PADDING_HEIGHT, drawSize.Width, drawSize.Height),
 			new Color (1, 1, 1));
 
-		for (int x = settings.SliderPaddingWidth; x < p.X; x += bsize * 2) {
+		for (int x = PADDING_WIDTH; x < p.X; x += bsize * 2) {
 
 			int bwidth =
 				(x + bsize > p.X)
@@ -218,11 +218,11 @@ public sealed class ColorPickerSlider : Gtk.Box
 				: bsize;
 
 			context.FillRectangle (
-				new RectangleD (x, settings.SliderPaddingHeight, bwidth, bsize),
+				new RectangleD (x, PADDING_HEIGHT, bwidth, bsize),
 				new Color (.8, .8, .8));
 		}
 
-		for (int x = settings.SliderPaddingWidth + bsize; x < p.X; x += bsize * 2) {
+		for (int x = PADDING_WIDTH + bsize; x < p.X; x += bsize * 2) {
 
 			int bwidth =
 				(x + bsize > p.X)
@@ -230,13 +230,13 @@ public sealed class ColorPickerSlider : Gtk.Box
 				: bsize;
 
 			context.FillRectangle (
-				new RectangleD (x, settings.SliderPaddingHeight + drawSize.Height / 2, bwidth, bsize),
+				new RectangleD (x, PADDING_HEIGHT + drawSize.Height / 2, bwidth, bsize),
 				new Color (.8, .8, .8));
 		}
 
 		LinearGradient pat = new (
-			x0: settings.SliderPaddingWidth,
-			y0: settings.SliderPaddingHeight,
+			x0: PADDING_WIDTH,
+			y0: PADDING_HEIGHT,
 			x1: p.X,
 			y1: p.Y);
 
@@ -250,8 +250,8 @@ public sealed class ColorPickerSlider : Gtk.Box
 		pat.AddColorStop (normalized.Range.Upper, normalized.EndColor);
 
 		context.Rectangle (
-			settings.SliderPaddingWidth,
-			settings.SliderPaddingHeight,
+			PADDING_WIDTH,
+			PADDING_HEIGHT,
 			drawSize.Width,
 			drawSize.Height);
 
