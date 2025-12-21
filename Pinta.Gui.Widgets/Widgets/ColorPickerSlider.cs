@@ -20,14 +20,12 @@ public sealed class ColorPickerSlider : Gtk.Box
 		int Max,
 		string Text, // required
 		double InitialValue,
-		Gtk.Window TopWindow, // required
 		int SliderWidth);
 
 	private const int PADDING_WIDTH = 14;
 	private const int PADDING_HEIGHT = 10;
 
 	private readonly Settings settings;
-	private readonly Gtk.Window top_window;
 	private readonly Gtk.Scale slider_control;
 	private readonly Gtk.Entry input_field;
 	private readonly Gtk.Overlay slider_overlay;
@@ -81,8 +79,6 @@ public sealed class ColorPickerSlider : Gtk.Box
 		Append (inputField);
 
 		// --- References to keep
-
-		top_window = settings.TopWindow;
 
 		cursor_area = cursorArea;
 		slider_control = sliderControl;
@@ -176,11 +172,9 @@ public sealed class ColorPickerSlider : Gtk.Box
 	public void SetValue (double val)
 	{
 		slider_control.SetValue (val);
+
 		// Make sure we do not set the text if we are editing it right now
-		// This is the only reason top_window is passed in as an arg, and despite my best efforts I cannot find a way
-		// to get that info from GTK programmatically.
-		if (top_window.GetFocus ()?.Parent != input_field) {
-			// hackjob
+		if (!input_field.IsEditingText ()) {
 			// prevents OnValueChange from firing when we change the value internally
 			// because OnValueChange eventually calls SetValue so it causes a stack overflow
 			suppress_event = true;

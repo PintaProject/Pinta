@@ -358,7 +358,6 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		ColorPickerSlider.Settings cpsArgs = new () {
 			Text = string.Empty,
-			TopWindow = this,
 			SliderWidth = slider_width,
 		};
 
