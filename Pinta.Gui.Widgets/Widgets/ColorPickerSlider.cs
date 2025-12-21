@@ -137,11 +137,6 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 	private void OnInputFieldChanged (Gtk.Editable inputField, EventArgs e)
 	{
-
-		// see SetValue about suppression
-		if (suppress_event)
-			return;
-
 		string text = inputField.GetText ();
 
 		bool success = double.TryParse (
@@ -168,21 +163,19 @@ public sealed class ColorPickerSlider : Gtk.Box
 		slider_overlay.WidthRequest = sliderWidth;
 	}
 
-	private bool suppress_event = false;
 	public void SetValue (double val)
 	{
 		slider_control.SetValue (val);
 
-		// Make sure we do not set the text if we are editing it right now
 		if (!input_field.IsEditingText ()) {
-			// prevents OnValueChange from firing when we change the value internally
-			// because OnValueChange eventually calls SetValue so it causes a stack overflow
-			suppress_event = true;
-			input_field.SetText (Convert.ToInt32 (val).ToString ());
+			// Ensure we don't get an infinite loop of "value changed" events
+			string newText = Convert.ToInt32 (val).ToString ();
+			if (newText != input_field.GetText ())
+				input_field.SetText (newText);
 		}
+
 		Gradient.QueueDraw ();
 		cursor_area.QueueDraw ();
-		suppress_event = false;
 	}
 
 	public void DrawGradient (Context context, int width, int height, ColorGradient<Color> colors)
