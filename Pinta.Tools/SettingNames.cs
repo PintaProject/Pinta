@@ -66,7 +66,4 @@ internal static class SettingNames
 
 	internal static string Radius (string prefix)
 		=> $"{prefix}-radius";
-
-	internal static string ToolbarOptionValue (string suffix)
-		=> $"toolbar-option-{suffix}";
 }

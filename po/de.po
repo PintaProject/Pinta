@@ -1480,7 +1480,7 @@ msgstr "Mandelbrot-Fraktal"
 msgid "Martian Lava"
 msgstr "Mars-Lava"
 
-#: ../Pinta.Tools/Brushes/SplatterBrush.cs:49
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
 msgid "Maximum Size"
 msgstr "Maximale Größe"
 
@@ -1497,7 +1497,7 @@ msgstr "Menüleiste"
 msgid "Merge Layer Down"
 msgstr "Ebene mit darunterliegenden zusammenfassen"
 
-#: ../Pinta.Tools/Brushes/SplatterBrush.cs:48
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
 msgstr "Minimale Größe"
 

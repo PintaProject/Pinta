@@ -26,7 +26,6 @@
 
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Cairo;
 using Gtk;
@@ -43,7 +42,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 	private PointI? last_point = PointI.Zero;
 	private uint? open_repeating_draw_id;
 	private Box brush_specific_options_box;
-	private List<String> previously_preloaded_toolbar_values = [];
 
 	public PaintBrushTool (IServiceProvider services) : base (services)
 	{
@@ -184,7 +182,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		if (active_brush is not null) {
 			foreach (var option in active_brush.Options) {
-				settings.PutSetting (SettingNames.ToolbarOptionValue (option.GetUniqueName ()), option.GetValue ());
+				settings.PutSetting (option.GetUniqueName (), option.GetValue ());
 			}
 		}
 	}
@@ -246,17 +244,8 @@ public sealed class PaintBrushTool : BaseBrushTool
 		brush_specific_options_box.RemoveAll ();
 		if (active_brush is not null) {
 			foreach (var option in active_brush.Options) {
-				brush_specific_options_box.Append (option.GetWidget ());
-				// settings are only persisted on app close, so if user has changed options, we don't want to reset to the previously
-				// persisted ones, but to the ones that the user has changed to
-				string key = SettingNames.ToolbarOptionValue (option.GetUniqueName ());
-				if (!previously_preloaded_toolbar_values.Contains (key)) {
-					object? previousValue = Settings.GetSetting<object?> (key, null);
-					if (previousValue is not null) {
-						option.SetValue (previousValue);
-						previously_preloaded_toolbar_values.Add (key);
-					}
-				}
+				option.SetSavedValue (Settings);
+				brush_specific_options_box.Append (ToolOptionWidgetService.GetWidgetForOption (option));
 			}
 		}
 	}

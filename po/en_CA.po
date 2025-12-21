@@ -1445,7 +1445,7 @@ msgstr "Mandelbrot Fractal"
 msgid "Martian Lava"
 msgstr ""
 
-#: ../Pinta.Tools/Brushes/SplatterBrush.cs:49
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
 msgid "Maximum Size"
 msgstr "Maximum Size"
 
@@ -1462,7 +1462,7 @@ msgstr ""
 msgid "Merge Layer Down"
 msgstr "Merge Layer Down"
 
-#: ../Pinta.Tools/Brushes/SplatterBrush.cs:48
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
 msgstr "Minimum Size"
 

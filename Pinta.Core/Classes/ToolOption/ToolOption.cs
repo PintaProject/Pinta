@@ -1,5 +1,5 @@
 //
-// PaintBrushOption.cs
+// ToolOption.cs
 //
 // Author:
 //       Paul Korecky <https://github.com/spaghetti22>
@@ -24,34 +24,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using Gtk;
-
 namespace Pinta.Core;
 
 /// <summary>
 /// Defines a custom option that the user can set in the toolbar. Usable e.g. for
 /// custom options on brushes.
 /// </summary>
-public interface ToolbarOption
+public interface ToolOption
 {
 	/// <summary>
 	/// Retrieve an application-wide unique name usable for identifying this
 	/// option.
 	/// </summary>
+	/// <returns>The unique name of the option.</returns>
 	public string GetUniqueName ();
 
 	/// <summary>
-	/// Retrieve the GTK widget drawn by this option.
+	/// Instruct option to set its own value from the provided settings service.
+	/// Implementation should do nothing if the value has already been set previously
+	/// during the same application run in order to not reset the value the user has
+	/// explicitly set; settings are only saved at application close.
 	/// </summary>
-	public Widget GetWidget ();
+	/// <param name="settingsService">Reference to ISettingsService.</param>
+	public void SetSavedValue (ISettingsService settingsService);
 
 	/// <summary>
 	/// Retrieve the currently set value of the option.
 	/// </summary>
+	/// <returns>The present value of the option.</returns>
 	public object GetValue ();
 
 	/// <summary>
 	/// Set a new value.
 	/// </summary>
+	/// <param name="value">The new value.</param>
 	public void SetValue (object value);
 }
