@@ -11,9 +11,8 @@ namespace Pinta.Gui.Widgets;
 // with a drawingarea
 public sealed class ColorPickerSlider : Gtk.Box
 {
-	public sealed class OnChangeValueArgs (string senderName, double value) : EventArgs
+	public sealed class ValueChangedEventArgs (double value) : EventArgs
 	{
-		public string SenderName { get; } = senderName;
 		public double Value { get; } = value;
 	}
 
@@ -29,7 +28,6 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 	private readonly Settings settings;
 	private readonly Gtk.Window top_window;
-	private readonly Gtk.Label slider_label;
 	private readonly Gtk.Scale slider_control;
 	private readonly Gtk.Entry input_field;
 	private readonly Gtk.Overlay slider_overlay;
@@ -37,7 +35,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 	public Gtk.DrawingArea Gradient { get; }
 
-	public event EventHandler<OnChangeValueArgs>? OnValueChange;
+	public event EventHandler<ValueChangedEventArgs>? OnValueChange;
 
 	public ColorPickerSlider (Settings settings)
 	{
@@ -86,7 +84,6 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 		top_window = settings.TopWindow;
 
-		slider_label = sliderLabel;
 		cursor_area = cursorArea;
 		slider_control = sliderControl;
 		slider_overlay = sliderOverlay;
@@ -135,13 +132,9 @@ public sealed class ColorPickerSlider : Gtk.Box
 		// The provided value is from the scroll action, so we need to clamp to the range!
 		double clampedValue = Math.Clamp (args.Value, 0, settings.Max);
 
-		OnChangeValueArgs e = new (
-			senderName: slider_label.GetLabel (),
-			value: clampedValue);
-
 		input_field.SetText (clampedValue.ToString (CultureInfo.InvariantCulture));
 
-		OnValueChange?.Invoke (this, e);
+		OnValueChange?.Invoke (this, new ValueChangedEventArgs (clampedValue));
 
 		return false;
 	}
@@ -168,11 +161,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 		if (!success)
 			return;
 
-		OnChangeValueArgs e2 = new (
-			senderName: slider_label.GetLabel (),
-			value: parsed);
-
-		OnValueChange?.Invoke (this, e2);
+		OnValueChange?.Invoke (this, new ValueChangedEventArgs (parsed));
 	}
 
 	public void SetSliderWidth (int sliderWidth)
