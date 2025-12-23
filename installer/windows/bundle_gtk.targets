@@ -36,6 +36,7 @@
     <GtkFile Include="$(MinGWBinFolder)\libgobject-2.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libgraphene-1.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libgraphite2.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libgst*.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libgtk-4-1.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libharfbuzz-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libharfbuzz-subset-0.dll" />
