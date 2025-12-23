@@ -67,6 +67,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a potential error in the text tool when pressing Left at the beginning of a line (#1824)
 - Fixed issues where mouse button releases were not correctly registered in certain situations (#1456, #1891)
 - Fixed bug where copying did not include unfinalized text (#1666, #1894)
+- Fixed issues with missing translations for libadwaita dialogs on macOS (#1877, #1417)
 
 ## [3.0.5](https://github.com/PintaProject/Pinta/release/tag/3.0.5) - 2025/11/24
 
