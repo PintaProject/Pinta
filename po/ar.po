@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-11-28 03:47+0000\n"
+"PO-Revision-Date: 2025-12-19 13:00+0000\n"
 "Last-Translator: DevIncomin' <bdr123654@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/pinta/pinta/ar/>\n"
 "Language: ar\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -1541,7 +1541,7 @@ msgstr "لم يتم العثور على عناصر"
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
 msgid "Noise"
-msgstr "ضوضاء"
+msgstr "ضجيج"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
@@ -2023,7 +2023,7 @@ msgstr "حدّث"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:91
 msgid "Released under the MIT X11 License."
-msgstr "تم إصدارها بموجب رخصة MIT X11."
+msgstr "أصدرت بموجب رخصة MIT X11."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:40
 msgid "Relief"
@@ -2357,7 +2357,7 @@ msgstr "ستوكي"
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:27
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:33
 msgid "Stylize"
-msgstr "كسوة"
+msgstr "إضفاء طابع"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
 msgid "Switch to Pencil tool"
