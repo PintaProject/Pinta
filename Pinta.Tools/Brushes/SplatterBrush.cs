@@ -46,7 +46,7 @@ internal sealed class SplatterBrush : BasePaintBrush
 	private const string MinSizeSettingName = "splatter-brush-min-size";
 	private const string MaxSizeSettingName = "splatter-brush-max-size";
 
-	public SplatterBrush ()
+	public SplatterBrush (ISettingsService settingsService)
 	{
 		IntegerOption minSizeOption = new IntegerOption (
 			MinSizeSettingName,
@@ -55,7 +55,8 @@ internal sealed class SplatterBrush : BasePaintBrush
 			5,
 			Translations.GetString ("Minimum Size")
 		);
-		minSizeOption.RegisterValueChangeCallback (sz => size_min = sz);
+		minSizeOption.OnValueChanged += sz => size_min = sz;
+		minSizeOption.SetSavedValue (settingsService);
 		IntegerOption maxSizeOption = new IntegerOption (
 			MaxSizeSettingName,
 			1,
@@ -63,7 +64,8 @@ internal sealed class SplatterBrush : BasePaintBrush
 			10,
 			Translations.GetString ("Maximum Size")
 		);
-		maxSizeOption.RegisterValueChangeCallback (sz => size_max = sz);
+		maxSizeOption.OnValueChanged += sz => size_max = sz;
+		maxSizeOption.SetSavedValue (settingsService);
 
 		Options = [minSizeOption, maxSizeOption];
 	}

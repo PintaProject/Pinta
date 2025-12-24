@@ -51,23 +51,21 @@ public static class ToolOptionWidgetService
 	/// </returns>
 	public static Widget GetWidgetForOption (ToolOption toolOption)
 	{
-		Widget widget;
-		if (tool_option_widgets.TryGetValue (toolOption, out widget)) {
+		if (tool_option_widgets.TryGetValue (toolOption, out var widget)) {
 			return widget;
 		}
 		Box box = Box.New (Orientation.Horizontal, 0);
 		if (toolOption is IntegerOption integerOption) {
-			if (integerOption.GetValue () is int optionValue) { // always true, necessary because of type checks
-				SpinButton spin_button = GtkExtensions.CreateToolBarSpinButton (integerOption.Minimum, integerOption.Maximum, 1, optionValue);
-				spin_button.OnValueChanged += (btn, ev) => {
-					integerOption.SetValue ((int) spin_button.Value);
-				};
-				integerOption.RegisterValueChangeCallback (v => spin_button.Value = v);
-				Label label = Label.New (string.Format ("{0}: ", integerOption.LabelText));
-				box.Append (label);
-				box.Append (spin_button);
-				integerOption.SetValue (optionValue); // to force callbacks to be called
-			}
+			int optionValue = integerOption.Value;
+			SpinButton spin_button = GtkExtensions.CreateToolBarSpinButton (integerOption.Minimum, integerOption.Maximum, 1, optionValue);
+			spin_button.OnValueChanged += (btn, ev) => {
+				integerOption.SetValue ((int) spin_button.Value);
+			};
+			integerOption.OnValueChanged += v => spin_button.Value = v;
+			Label label = Label.New (string.Format ("{0}: ", integerOption.LabelText));
+			box.Append (label);
+			box.Append (spin_button);
+			integerOption.SetValue (optionValue); // to force callbacks to be called
 		}
 		tool_option_widgets.Add (toolOption, box);
 		return box;

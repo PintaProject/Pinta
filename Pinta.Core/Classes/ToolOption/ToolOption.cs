@@ -41,18 +41,15 @@ public interface ToolOption
 
 	/// <summary>
 	/// Instruct option to set its own value from the provided settings service.
-	/// Implementation should do nothing if the value has already been set previously
-	/// during the same application run in order to not reset the value the user has
-	/// explicitly set; settings are only saved at application close.
 	/// </summary>
 	/// <param name="settingsService">Reference to ISettingsService.</param>
 	public void SetSavedValue (ISettingsService settingsService);
 
 	/// <summary>
-	/// Retrieve the currently set value of the option.
+	/// Save the current value of the option to the provided settings service.
 	/// </summary>
-	/// <returns>The present value of the option.</returns>
-	public object GetValue ();
+	/// <param name="settingsService">Reference to ISettingsService.</param>
+	public void SaveValueToSettings (ISettingsService settingsService);
 
 	/// <summary>
 	/// Set a new value.

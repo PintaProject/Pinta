@@ -182,7 +182,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		if (active_brush is not null) {
 			foreach (var option in active_brush.Options) {
-				settings.PutSetting (option.GetUniqueName (), option.GetValue ());
+				option.SaveValueToSettings (settings);
 			}
 		}
 	}
@@ -244,7 +244,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 		brush_specific_options_box.RemoveAll ();
 		if (active_brush is not null) {
 			foreach (var option in active_brush.Options) {
-				option.SetSavedValue (Settings);
 				brush_specific_options_box.Append (ToolOptionWidgetService.GetWidgetForOption (option));
 			}
 		}

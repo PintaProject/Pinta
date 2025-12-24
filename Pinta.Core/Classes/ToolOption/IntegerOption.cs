@@ -42,11 +42,10 @@ public class IntegerOption : ToolOption
 	// this is intentionally an "int" and not a "long" because the settings manager
 	// only supports System.Int32 - if a wider type is needed, also extend the 
 	// settings manager so that settings can be saved there
-	private int value;
-	private List<ValueChange> value_change_callbacks;
-	private bool saved_value_already_loaded;
+	public int Value { get; private set; }
 
 	public delegate void ValueChange (int newValue);
+	public event ValueChange? OnValueChanged;
 
 	/// <summary>
 	/// Construct a new integer option.
@@ -76,8 +75,6 @@ public class IntegerOption : ToolOption
 		Minimum = minimum;
 		Maximum = maximum;
 		LabelText = labelText;
-		value_change_callbacks = [];
-		saved_value_already_loaded = false;
 		SetValue (initialValue);
 	}
 
@@ -86,18 +83,11 @@ public class IntegerOption : ToolOption
 		return name;
 	}
 
-	public object GetValue ()
-	{
-		return value;
-	}
-
 	public void SetValue (object value)
 	{
 		if (value is int v) {
-			this.value = v;
-			foreach (var callback in value_change_callbacks) {
-				callback (this.value);
-			}
+			Value = v;
+			OnValueChanged?.Invoke (Value);
 		} else {
 			Console.WriteLine ("Unable to set value " + value.ToString () + " for integer toolbar option " + name + ", cannot be cast to int");
 		}
@@ -105,27 +95,15 @@ public class IntegerOption : ToolOption
 
 	public void SetSavedValue (ISettingsService settingsService)
 	{
-		if (saved_value_already_loaded) {
-			return;
-		}
 		int invalidValue = Minimum - 1;
 		int savedValue = settingsService.GetSetting<int> (name, invalidValue);
 		if (savedValue != invalidValue) {
 			SetValue (savedValue);
 		}
-		saved_value_already_loaded = true;
 	}
 
-	/// <summary>
-	/// Register a method that should be called when the value has changed.
-	/// </summary>
-	/// <param name="valueChangeCallback">
-	/// Method that takes a single integer and returns nothing that will
-	/// afterwards be called whenever the value of the option changes.
-	/// </param>
-	public void RegisterValueChangeCallback (ValueChange valueChangeCallback)
+	public void SaveValueToSettings (ISettingsService settingsService)
 	{
-		value_change_callbacks.Add (valueChangeCallback);
+		settingsService.PutSetting (name, Value);
 	}
-
 }
