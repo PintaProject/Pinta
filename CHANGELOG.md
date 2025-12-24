@@ -1,7 +1,18 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.3...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.1...HEAD)
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+
+### Added
+
+### Changed
+
+### Fixed
+
+## [3.1](https://github.com/PintaProject/Pinta/release/tag/3.1) - 2025/12/23
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
