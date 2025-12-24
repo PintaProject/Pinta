@@ -5,13 +5,13 @@
     <Nullable>enable</Nullable>
 
     <!-- Versioning and assembly info -->
-    <Version>3.1.0.0</Version>
+    <Version>3.2.0.0</Version>
     <!-- User-facing version number, used for the version command line argument -->
-    <InformationalVersion>3.1</InformationalVersion>
+    <InformationalVersion>3.2</InformationalVersion>
     <Authors>PintaProject</Authors>
     <Company />
     <Product />
-    
+
     <!-- Add an absolute path to a local GirCore source directory to use it instead of the NuGet package -->
     <GirCoreSource />
   </PropertyGroup>
