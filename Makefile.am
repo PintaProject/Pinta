@@ -114,7 +114,7 @@ releasezip:
 
 EXTRA_DIST = Pinta Pinta.Core Pinta.Docking Pinta.Effects Pinta.Gui.Addins Pinta.Gui.Widgets Pinta.Resources Pinta.Tools po xdg tests license-mit.txt \
            license-pdn.txt Pinta.sln pinta.pc.in readme.md intltool-extract.in \
-           intltool-merge.in intltool-update.in installer/linux/install.proj Directory.Build.props Directory.Packages.props
+           intltool-merge.in intltool-update.in installer/addins installer/linux/install.proj properties Directory.Build.props Directory.Packages.props
 
 CLEANFILES = intltool-extract \
 	     intltool-update \
