@@ -39,11 +39,16 @@ public sealed class PintaCanvas : Gtk.Picture
 	private readonly ICanvasGridService canvas_grid;
 	private readonly Gtk.GestureDrag drag_controller;
 
+	private uint queued_update_id = 0;
+
+	private static readonly Gdk.Texture transparent_pattern_texture = CreateTransparentPatternTexture ();
+
 	private Cairo.ImageSurface? canvas_surface;
 	private Gdk.Texture? canvas_texture;
-	private static readonly Gdk.Texture transparent_pattern_texture = CreateTransparentPatternTexture ();
 	private RectangleI? modified_area;
-	private uint selection_animation_timer_id;
+
+	private Gsk.Path? selection_path;
+	private readonly uint selection_animation_timer_id;
 	private float selection_animation_dash_offset;
 
 	private readonly ChromeManager chrome;
@@ -70,6 +75,7 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		document.Workspace.ViewSizeChanged += OnViewSizeChanged;
 		document.Workspace.CanvasInvalidated += OnCanvasInvalidated;
+		document.SelectionChanged += (_, _) => QueueSelectionUpdate ();
 
 		// Timer for selection outline animation
 		selection_animation_timer_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, 80, SelectionAnimationTick);
@@ -96,7 +102,7 @@ public sealed class PintaCanvas : Gtk.Picture
 	}
 
 	/// <summary>
-	/// Queue an update to the canvas.
+	/// Queue an update to the canvas texture.
 	/// There can be multiple consecutive Invalidate() calls before a UI update, e.g.
 	/// in the text tool, or undoing multiple history items.
 	/// </summary>
@@ -113,8 +119,36 @@ public sealed class PintaCanvas : Gtk.Picture
 		}
 
 		modified_area = rect;
-		GLib.Functions.IdleAdd (GLib.Constants.PRIORITY_DEFAULT, () => {
+		QueueUpdate ();
+	}
+
+	/// <summary>
+	/// Queue an update after a change to the document's selection.
+	/// </summary>
+	private void QueueSelectionUpdate (bool onlyDisplaySettings = false)
+	{
+		// Clear the cached selection path unless only the display
+		// settings (e.g. the dash offset) have changed.
+		if (!onlyDisplaySettings)
+			selection_path = null;
+
+		QueueUpdate ();
+	}
+
+	/// <summary>
+	/// Queue an update to the widget's contents on the next UI update, e.g. after changes
+	/// to the canvas contents or the selection.
+	/// This is useful to avoid redundant work if there are multiple events that trigger
+	/// changes to the document.
+	/// </summary>
+	private void QueueUpdate ()
+	{
+		if (queued_update_id > 0)
+			return;
+
+		queued_update_id = GLib.Functions.IdleAdd (GLib.Constants.PRIORITY_DEFAULT, () => {
 			UpdateCanvas ();
+			queued_update_id = 0;
 			return false;
 		});
 	}
@@ -124,9 +158,6 @@ public sealed class PintaCanvas : Gtk.Picture
 	/// </summary>
 	private void UpdateCanvas ()
 	{
-		if (!modified_area.HasValue)
-			throw new InvalidOperationException ("No canvas region was modified");
-
 		Graphene.Rect canvasViewBounds = Graphene.Rect.Alloc ();
 		Size viewSize = document.Workspace.ViewSize;
 		canvasViewBounds.Init (0.0f, 0.0f, (float) viewSize.Width, (float) viewSize.Height);
@@ -134,7 +165,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
 
 		DrawTransparentBackground (snapshot, canvasViewBounds);
-		DrawCanvas (snapshot, modified_area.Value, canvasViewBounds);
+		DrawCanvasTexture (snapshot, modified_area, canvasViewBounds);
 		DrawSelection (snapshot, canvasViewBounds);
 		DrawHandles (snapshot, canvasViewBounds);
 		DrawCanvasGrid (snapshot, canvasViewBounds);
@@ -190,32 +221,38 @@ public sealed class PintaCanvas : Gtk.Picture
 		snapshot.Pop ();
 	}
 
-	private void DrawCanvas (Gtk.Snapshot snapshot, RectangleI modifiedArea, Graphene.Rect canvasViewBounds)
+	private void DrawCanvasTexture (Gtk.Snapshot snapshot, RectangleI? modifiedArea, Graphene.Rect canvasViewBounds)
 	{
-		// Compute the flattened image for the modified region.
-		if (canvas_surface is null ||
-		    canvas_surface.Width != document.ImageSize.Width ||
-		    canvas_surface.Height != document.ImageSize.Height) {
+		// Update the texture if the canvas contents have changed.
+		if (modifiedArea.HasValue) {
+			// Compute the flattened image for the modified region.
+			if (canvas_surface is null ||
+			    canvas_surface.Width != document.ImageSize.Width ||
+			    canvas_surface.Height != document.ImageSize.Height) {
 
-			canvas_surface?.Dispose ();
-			canvas_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
+				canvas_surface?.Dispose ();
+				canvas_surface = CairoExtensions.CreateImageSurface (Cairo.Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
 
-			canvas_texture?.Dispose ();
-			canvas_texture = null;
+				canvas_texture?.Dispose ();
+				canvas_texture = null;
+			}
+
+			// Note we are always rendering without scaling, since the scaling is applied when drawing the texture later.
+			// TODO - in the future we could experiment with creating a separate texture per layer and using gtk_snapshot_push_blend() to blend on the GPU
+			cr.Initialize (document.ImageSize, document.ImageSize);
+
+			List<Layer> layers = document.Layers.GetLayersToPaint ().ToList ();
+			cr.Render (layers, canvas_surface, offset: PointI.Zero, clipRect: modifiedArea);
+
+			Gdk.Texture? updateTexture = canvas_texture;
+			Cairo.Region? updateRegion = (updateTexture is not null)
+				? CairoExtensions.CreateRegion (modifiedArea.Value)
+				: null;
+			canvas_texture = CreateTextureFromSurface (canvas_surface, updateTexture, updateRegion);
 		}
 
-		// Note we are always rendering without scaling, since the scaling is applied when drawing the texture later.
-		// TODO - in the future we could experiment with creating a separate texture per layer and using gtk_snapshot_push_blend() to blend on the GPU
-		cr.Initialize (document.ImageSize, document.ImageSize);
-
-		List<Layer> layers = document.Layers.GetLayersToPaint ().ToList ();
-		cr.Render (layers, canvas_surface, offset: PointI.Zero, clipRect: modifiedArea);
-
-		Gdk.Texture? updateTexture = canvas_texture;
-		Cairo.Region? updateRegion = (updateTexture is not null)
-			? CairoExtensions.CreateRegion (modifiedArea)
-			: null;
-		canvas_texture = CreateTextureFromSurface (canvas_surface, updateTexture, updateRegion);
+		if (canvas_texture is null)
+			throw new InvalidOperationException ("Canvas was never invalidated!");
 
 		// Scale to fit the view size (when zooming in or out).
 		Gsk.ScalingFilter scalingFilter = (document.Workspace.Scale >= 1.0) ?
@@ -231,10 +268,12 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		bool fillSelection = tools.CurrentTool?.IsSelectionTool ?? false;
 
-		// Convert the selection path.
-		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
-		pathBuilder.AddCairoPath (document.Selection.SelectionPath);
-		Gsk.Path selectionPath = pathBuilder.ToPath ();
+		// Update the selection path.
+		if (selection_path is null) {
+			Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
+			pathBuilder.AddCairoPath (document.Selection.SelectionPath);
+			selection_path = pathBuilder.ToPath ();
+		}
 
 		snapshot.Save ();
 		snapshot.PushClip (canvasViewBounds);
@@ -246,20 +285,20 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		if (fillSelection) {
 			Gdk.RGBA fillColor = new () { Red = 0.7f, Green = 0.8f, Blue = 0.9f, Alpha = 0.2f };
-			snapshot.AppendFill (selectionPath, Gsk.FillRule.EvenOdd, fillColor);
+			snapshot.AppendFill (selection_path, Gsk.FillRule.EvenOdd, fillColor);
 		}
 
 		// Draw a white line first so it shows up on dark backgrounds
 		Gsk.Stroke stroke = Gsk.Stroke.New (lineWidth: 1.0f / scale);
 		Gdk.RGBA white = new () { Red = 1, Green = 1, Blue = 1, Alpha = 1 };
-		snapshot.AppendStroke (selectionPath, stroke, white);
+		snapshot.AppendStroke (selection_path, stroke, white);
 
 		// Draw a black dashed line over the white line
 		float dashOffset = selection_animation_dash_offset / scale;
 		stroke.SetDash ([2.0f / scale, 4.0f / scale]);
 		stroke.SetDashOffset (dashOffset);
 		Gdk.RGBA black = new () { Red = 0, Green = 0, Blue = 0, Alpha = 1 };
-		snapshot.AppendStroke (selectionPath, stroke, black);
+		snapshot.AppendStroke (selection_path, stroke, black);
 
 		snapshot.Pop ();
 		snapshot.Restore ();
@@ -556,23 +595,8 @@ public sealed class PintaCanvas : Gtk.Picture
 		if (selection_animation_dash_offset < 0f)
 			selection_animation_dash_offset += 6f;
 
-		// invalidate the selection area to make sure the outline is redrawn
-		document.Workspace.Invalidate (GetSelectionInvalidateRect ());
+		QueueSelectionUpdate (onlyDisplaySettings: true);
 		return true;
-	}
-
-	/// <summary>
-	/// Compute the smallest rectangle that fits the selection.
-	/// </summary>
-	private RectangleI GetSelectionInvalidateRect ()
-	{
-		RectangleI bounds = document.Selection.GetBounds ().ToInt ();
-
-		if (bounds.IsEmpty)
-			return new RectangleI (PointI.Zero, Size.Empty);
-
-		const int padding = 2;
-		return bounds.Inflated (padding, padding);
 	}
 	#endregion
 
