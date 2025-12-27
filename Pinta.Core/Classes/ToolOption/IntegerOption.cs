@@ -24,9 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using System.Collections.Generic;
-
 namespace Pinta.Core;
 
 /// <summary>
@@ -35,14 +32,22 @@ namespace Pinta.Core;
 public class IntegerOption : ToolOption
 {
 	private string name;
-	public int Minimum { get; private set; }
-	public int Maximum { get; private set; }
-	public string LabelText { get; private set; }
 
 	// this is intentionally an "int" and not a "long" because the settings manager
 	// only supports System.Int32 - if a wider type is needed, also extend the 
 	// settings manager so that settings can be saved there
-	public int Value { get; private set; }
+	private int value;
+	public int Minimum { get; private set; }
+	public int Maximum { get; private set; }
+	public string LabelText { get; private set; }
+
+	public int Value {
+		get => value;
+		set {
+			this.value = value;
+			OnValueChanged?.Invoke (Value);
+		}
+	}
 
 	public delegate void ValueChange (int newValue);
 	public event ValueChange? OnValueChanged;
@@ -75,7 +80,7 @@ public class IntegerOption : ToolOption
 		Minimum = minimum;
 		Maximum = maximum;
 		LabelText = labelText;
-		SetValue (initialValue);
+		Value = initialValue;
 	}
 
 	public string GetUniqueName ()
@@ -83,22 +88,12 @@ public class IntegerOption : ToolOption
 		return name;
 	}
 
-	public void SetValue (object value)
-	{
-		if (value is int v) {
-			Value = v;
-			OnValueChanged?.Invoke (Value);
-		} else {
-			Console.WriteLine ("Unable to set value " + value.ToString () + " for integer toolbar option " + name + ", cannot be cast to int");
-		}
-	}
-
-	public void SetSavedValue (ISettingsService settingsService)
+	public void LoadValueFromSettings (ISettingsService settingsService)
 	{
 		int invalidValue = Minimum - 1;
 		int savedValue = settingsService.GetSetting<int> (name, invalidValue);
 		if (savedValue != invalidValue) {
-			SetValue (savedValue);
+			Value = savedValue;
 		}
 	}
 

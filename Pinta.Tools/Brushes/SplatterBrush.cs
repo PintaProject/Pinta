@@ -56,7 +56,7 @@ internal sealed class SplatterBrush : BasePaintBrush
 			Translations.GetString ("Minimum Size")
 		);
 		minSizeOption.OnValueChanged += sz => size_min = sz;
-		minSizeOption.SetSavedValue (settingsService);
+		minSizeOption.LoadValueFromSettings (settingsService);
 		IntegerOption maxSizeOption = new IntegerOption (
 			MaxSizeSettingName,
 			1,
@@ -65,7 +65,7 @@ internal sealed class SplatterBrush : BasePaintBrush
 			Translations.GetString ("Maximum Size")
 		);
 		maxSizeOption.OnValueChanged += sz => size_max = sz;
-		maxSizeOption.SetSavedValue (settingsService);
+		maxSizeOption.LoadValueFromSettings (settingsService);
 
 		Options = [minSizeOption, maxSizeOption];
 	}

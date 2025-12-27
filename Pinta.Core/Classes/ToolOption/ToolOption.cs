@@ -43,17 +43,11 @@ public interface ToolOption
 	/// Instruct option to set its own value from the provided settings service.
 	/// </summary>
 	/// <param name="settingsService">Reference to ISettingsService.</param>
-	public void SetSavedValue (ISettingsService settingsService);
+	public void LoadValueFromSettings (ISettingsService settingsService);
 
 	/// <summary>
 	/// Save the current value of the option to the provided settings service.
 	/// </summary>
 	/// <param name="settingsService">Reference to ISettingsService.</param>
 	public void SaveValueToSettings (ISettingsService settingsService);
-
-	/// <summary>
-	/// Set a new value.
-	/// </summary>
-	/// <param name="value">The new value.</param>
-	public void SetValue (object value);
 }
