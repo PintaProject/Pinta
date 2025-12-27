@@ -1444,6 +1444,10 @@ msgstr "曼德勃羅不規則碎片形"
 msgid "Martian Lava"
 msgstr "火星熔岩"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "中間值"
@@ -1456,6 +1460,10 @@ msgstr "選單列"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "將目前所選圖層及其下一層圖層合併"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"

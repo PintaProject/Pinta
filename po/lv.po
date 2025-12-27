@@ -1432,6 +1432,10 @@ msgstr "Mandelbrota fraktālis"
 msgid "Martian Lava"
 msgstr "Marsa lava"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "Mediāna"
@@ -1444,6 +1448,10 @@ msgstr "Izvēlnes Josla"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Apvienot ar zemāko slāni"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"

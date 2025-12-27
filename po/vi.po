@@ -1450,6 +1450,10 @@ msgstr "Fractal kiểu Mandelbrot"
 msgid "Martian Lava"
 msgstr "Dung nham sao Hỏa"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "Trung bình"
@@ -1462,6 +1466,10 @@ msgstr "Thanh thực đơn"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Ghép lớp xuống"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -2380,7 +2388,8 @@ msgstr "Kiểu chữ"
 #: ../Pinta/MainWindow.cs:321
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr "Tiện ích bổ sung '{0}' có thể không tương thích với phiên bản Pinta này"
+msgstr ""
+"Tiện ích bổ sung '{0}' có thể không tương thích với phiên bản Pinta này"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:208
 msgid "The clipboard does not contain an image."

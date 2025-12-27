@@ -1294,8 +1294,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
-"왼쪽을 클릭하면 기본 색상을 사용하여 1픽셀 너비의 자유형 선을 그릴 수 "
-"있습니다.\n"
+"왼쪽을 클릭하면 기본 색상을 사용하여 1픽셀 너비의 자유형 선을 그릴 수 있습니"
+"다.\n"
 "오른쪽을 클릭하면 보조 색상을 사용할 수 있습니다."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
@@ -1304,15 +1304,15 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
-"왼쪽을 클릭하면 기본 색상으로, 오른쪽을 클릭하면 보조 색상으로 그림을 "
-"그립니다."
+"왼쪽을 클릭하면 기본 색상으로, 오른쪽을 클릭하면 보조 색상으로 그림을 그립니"
+"다."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:57
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
-"왼쪽을 클릭하면 투명하게 지워지고, 오른쪽을 클릭하면 보조 색상으로 "
-"지워집니다. "
+"왼쪽을 클릭하면 투명하게 지워지고, 오른쪽을 클릭하면 보조 색상으로 지워집니"
+"다. "
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
 msgid ""
@@ -1327,8 +1327,8 @@ msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"왼쪽을 클릭하여 커서를 놓고 원하는 텍스트를 입력하세요. 텍스트 색상은 기본 "
-"색상입니다."
+"왼쪽을 클릭하여 커서를 놓고 원하는 텍스트를 입력하세요. 텍스트 색상은 기본 색"
+"상입니다."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:58
 msgid ""
@@ -1349,16 +1349,16 @@ msgstr ""
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:314
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
-"왼쪽을 클릭하여 기본 색상을 설정하세요. 오른쪽을 클릭하여 보조 색상을 "
-"설정하세요."
+"왼쪽을 클릭하여 기본 색상을 설정하세요. 오른쪽을 클릭하여 보조 색상을 설정하"
+"세요."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:310
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click to choose palette color."
 msgstr ""
-"왼쪽을 클릭하여 기본 색상을 설정합니다. 오른쪽을 클릭하여 보조 색상을 "
-"설정합니다. 가운데를 클릭하여 팔레트 색상을 선택합니다."
+"왼쪽을 클릭하여 기본 색상을 설정합니다. 오른쪽을 클릭하여 보조 색상을 설정합"
+"니다. 가운데를 클릭하여 팔레트 색상을 선택합니다."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1455,6 +1455,10 @@ msgstr "만델브로트 프랙탈"
 msgid "Martian Lava"
 msgstr "화성 용암"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "중간값"
@@ -1467,6 +1471,10 @@ msgstr "기본 표시줄"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "레이어 아래로 병합"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -1787,10 +1795,10 @@ msgid ""
 "apply to your images, and also has the ability to create unlimited layers to "
 "help organize your creativity."
 msgstr ""
-"Pinta는 간단하면서도 강력한 인터페이스를 갖춘 이미지 편집, 그림 그리기 및 "
-"채색 응용 프로그램입니다. Pinta는 자유형, 사각형, 원, 선 등 다양한 그리기 "
-"도구를 제공합니다. 또한 35가지 이상의 효과를 이미지에 적용할 수 있으며, "
-"무제한 레이어 생성 기능을 통해 창작물을 체계적으로 정리할 수 있습니다."
+"Pinta는 간단하면서도 강력한 인터페이스를 갖춘 이미지 편집, 그림 그리기 및 채"
+"색 응용 프로그램입니다. Pinta는 자유형, 사각형, 원, 선 등 다양한 그리기 도구"
+"를 제공합니다. 또한 35가지 이상의 효과를 이미지에 적용할 수 있으며, 무제한 레"
+"이어 생성 기능을 통해 창작물을 체계적으로 정리할 수 있습니다."
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:425
 msgid "Pinta supports the following file formats:"
@@ -2414,7 +2422,8 @@ msgstr "다음 패키지가 제거됩니다:"
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
-msgstr "붙여넣는 이미지가 캔버스보다 큽니다. 캔버스 크기를 어떻게 하시겠습니까?"
+msgstr ""
+"붙여넣는 이미지가 캔버스보다 큽니다. 캔버스 크기를 어떻게 하시겠습니까?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:352
 msgid "The installation failed!"
@@ -2689,8 +2698,8 @@ msgstr "'{0}'에 액세스할 수 없습니다."
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
 msgstr ""
-"'{0}'을 수정할 수 있는 권한이 없습니다. 파일이나 폴더는 읽기 전용일 수 "
-"있습니다."
+"'{0}'을 수정할 수 있는 권한이 없습니다. 파일이나 폴더는 읽기 전용일 수 있습니"
+"다."
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:151
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:164

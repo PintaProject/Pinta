@@ -10,8 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2025-12-23 00:44+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/pinta/pinta/hr/>"
-"\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/pinta/pinta/hr/"
+">\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1459,6 +1459,10 @@ msgstr "Mandelbrotov fraktal"
 msgid "Martian Lava"
 msgstr "Marsovska lava"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "Medijan"
@@ -1471,6 +1475,10 @@ msgstr "Traka izbornika"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Spoji sloj prema dolje"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
