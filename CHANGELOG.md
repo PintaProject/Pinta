@@ -5,12 +5,15 @@ All notable changes to this project (beginning with version 1.7) will be documen
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
+- @spaghetti22
 
 ### Added
+- The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
 
 ### Changed
 
 ### Fixed
+- Fixed performance regression with the selection tools on large images after the canvas widget rewrite in version 3.1 (#1912, #1909)
 
 ## [3.1](https://github.com/PintaProject/Pinta/release/tag/3.1) - 2025/12/23
 
