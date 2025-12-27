@@ -111,8 +111,6 @@ public sealed class LassoSelectTool : BaseTool
 			document,
 			combine_mode,
 			document.Selection.SelectionPolygons);
-
-		document.Workspace.Invalidate ();
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
