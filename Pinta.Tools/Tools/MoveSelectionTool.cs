@@ -82,8 +82,6 @@ public sealed class MoveSelectionTool : BaseTransformTool
 
 		document.Selection = original_selection.Transform (transform);
 		document.Selection.Visible = true;
-
-		document.Workspace.Invalidate ();
 	}
 
 	protected override void OnFinishTransform (Document document, Matrix transform)

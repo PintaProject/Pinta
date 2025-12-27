@@ -37,7 +37,6 @@ public abstract class SelectTool : BaseTool
 	private readonly IToolService tools;
 	private readonly IWorkspaceService workspace;
 
-	private RectangleI last_dirty = default;
 	private SelectionHistoryItem? hist = default;
 	private CombineMode combine_mode = default;
 
@@ -88,12 +87,6 @@ public abstract class SelectTool : BaseTool
 			if (!handle.BeginDrag (new PointD (x, y), document.ImageSize))
 				throw new InvalidOperationException ("Should be able to start drawing a new rectangle!");
 		}
-
-		// Do a full redraw for modes that can wipe existing selections outside the rectangle being drawn.
-		if (combine_mode == CombineMode.Replace || combine_mode == CombineMode.Intersect) {
-			Size size = document.ImageSize;
-			last_dirty = new RectangleI (0, 0, size.Width, size.Height);
-		}
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
@@ -103,27 +96,21 @@ public abstract class SelectTool : BaseTool
 			return;
 		}
 
-		RectangleI handleDirtyRegion = handle.UpdateDrag (e.PointDouble, e.IsShiftPressed);
-		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
+		handle.UpdateDrag (e.PointDouble, e.IsShiftPressed);
 
-		RectangleI dirty = ReDraw (document);
+		ReDraw (document);
 
 		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
-		document.Workspace.Invalidate (dirty.Union (last_dirty));
-
-		last_dirty = dirty;
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
 		if (handle.HasDragged (e.PointDouble)) {
-			RectangleI dirty = ReDraw (document);
+			ReDraw (document);
 
 			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
 
 			document.Selection.HandleBounds = handle.Rectangle;
-			document.Workspace.Invalidate (last_dirty.Union (dirty));
-			last_dirty = dirty;
 
 			if (hist != null) {
 				document.History.PushNewItem (hist);
@@ -170,20 +157,14 @@ public abstract class SelectTool : BaseTool
 		workspace.SelectionHandler.OnSaveSettings (settings);
 	}
 
-	private RectangleI ReDraw (Document document)
+	private void ReDraw (Document document)
 	{
 		document.Selection.Visible = true;
 
 		ShowHandles (true);
 
 		RectangleD rect = handle.Rectangle;
-
 		DrawShape (document, rect, document.Layers.SelectionLayer);
-
-		// Figure out a bounding box for everything that was drawn, and add a bit of padding.
-		RectangleI dirty = rect.ToInt ();
-		dirty = dirty.Inflated (2, 2);
-		return dirty;
 	}
 
 	private void ShowHandles (bool visible)
