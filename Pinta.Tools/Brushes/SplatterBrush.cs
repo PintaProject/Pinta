@@ -36,12 +36,39 @@ internal sealed class SplatterBrush : BasePaintBrush
 	public override string Name
 		=> Translations.GetString ("Splatter");
 
-	public override double StrokeAlphaMultiplier
-		=> 0.5;
-
 	public override uint MillisecondsBeforeReapply => 100;
 
 	private readonly Random random = new ();
+
+	private int size_min;
+	private int size_max;
+
+	private const string MinSizeSettingName = "splatter-brush-min-size";
+	private const string MaxSizeSettingName = "splatter-brush-max-size";
+
+	public SplatterBrush (ISettingsService settingsService)
+	{
+		IntegerOption minSizeOption = new IntegerOption (
+			MinSizeSettingName,
+			1,
+			10000,
+			5,
+			Translations.GetString ("Minimum Size")
+		);
+		minSizeOption.OnValueChanged += sz => size_min = sz;
+		minSizeOption.LoadValueFromSettings (settingsService);
+		IntegerOption maxSizeOption = new IntegerOption (
+			MaxSizeSettingName,
+			1,
+			10000,
+			10,
+			Translations.GetString ("Maximum Size")
+		);
+		maxSizeOption.OnValueChanged += sz => size_max = sz;
+		maxSizeOption.LoadValueFromSettings (settingsService);
+
+		Options = [minSizeOption, maxSizeOption];
+	}
 
 	protected override RectangleI OnMouseMove (
 		Context g,
@@ -50,14 +77,16 @@ internal sealed class SplatterBrush : BasePaintBrush
 	{
 		int line_width = (int) g.LineWidth;
 
-		// we want a minimum size of 2 for the splatter (except for when the brush width is 1), since a splatter of size 1 is very small
-		int size = (line_width == 1) ? 1 : random.Next (2, line_width);
+		if (size_min > size_max) {
+			size_min = size_max;
+		}
+		int size = random.Next (size_min, size_max);
 
 		PointI current = strokeArgs.CurrentPosition;
 
 		RectangleD rect = new (
-			X: current.X - random.Next (-15, 15),
-			Y: current.Y - random.Next (-15, 15),
+			X: current.X - random.Next (-line_width / 2, line_width / 2),
+			Y: current.Y - random.Next (-line_width / 2, line_width / 2),
 			Width: size,
 			Height: size);
 
