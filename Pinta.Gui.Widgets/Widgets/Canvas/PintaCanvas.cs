@@ -47,6 +47,7 @@ public sealed class PintaCanvas : Gtk.Picture
 	private Gdk.Texture? canvas_texture;
 	private RectangleI? modified_area;
 
+	private Gsk.Path? selection_path;
 	private readonly uint selection_animation_timer_id;
 	private float selection_animation_dash_offset;
 
@@ -124,9 +125,13 @@ public sealed class PintaCanvas : Gtk.Picture
 	/// <summary>
 	/// Queue an update after a change to the document's selection.
 	/// </summary>
-	private void QueueSelectionUpdate ()
+	private void QueueSelectionUpdate (bool onlyDisplaySettings = false)
 	{
-		// For now the selection paintable is always rebuilt, so nothing extra to do here.
+		// Clear the cached selection path unless only the display
+		// settings (e.g. the dash offset) have changed.
+		if (!onlyDisplaySettings)
+			selection_path = null;
+
 		QueueUpdate ();
 	}
 
@@ -263,11 +268,12 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		bool fillSelection = tools.CurrentTool?.IsSelectionTool ?? false;
 
-		// Convert the selection path.
-		// TODO - experiment with caching the path if it hasn't changed (when drawing the animated selection outline)
-		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
-		pathBuilder.AddCairoPath (document.Selection.SelectionPath);
-		Gsk.Path selectionPath = pathBuilder.ToPath ();
+		// Update the selection path.
+		if (selection_path is null) {
+			Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
+			pathBuilder.AddCairoPath (document.Selection.SelectionPath);
+			selection_path = pathBuilder.ToPath ();
+		}
 
 		snapshot.Save ();
 		snapshot.PushClip (canvasViewBounds);
@@ -279,20 +285,20 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		if (fillSelection) {
 			Gdk.RGBA fillColor = new () { Red = 0.7f, Green = 0.8f, Blue = 0.9f, Alpha = 0.2f };
-			snapshot.AppendFill (selectionPath, Gsk.FillRule.EvenOdd, fillColor);
+			snapshot.AppendFill (selection_path, Gsk.FillRule.EvenOdd, fillColor);
 		}
 
 		// Draw a white line first so it shows up on dark backgrounds
 		Gsk.Stroke stroke = Gsk.Stroke.New (lineWidth: 1.0f / scale);
 		Gdk.RGBA white = new () { Red = 1, Green = 1, Blue = 1, Alpha = 1 };
-		snapshot.AppendStroke (selectionPath, stroke, white);
+		snapshot.AppendStroke (selection_path, stroke, white);
 
 		// Draw a black dashed line over the white line
 		float dashOffset = selection_animation_dash_offset / scale;
 		stroke.SetDash ([2.0f / scale, 4.0f / scale]);
 		stroke.SetDashOffset (dashOffset);
 		Gdk.RGBA black = new () { Red = 0, Green = 0, Blue = 0, Alpha = 1 };
-		snapshot.AppendStroke (selectionPath, stroke, black);
+		snapshot.AppendStroke (selection_path, stroke, black);
 
 		snapshot.Pop ();
 		snapshot.Restore ();
@@ -589,7 +595,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		if (selection_animation_dash_offset < 0f)
 			selection_animation_dash_offset += 6f;
 
-		QueueSelectionUpdate ();
+		QueueSelectionUpdate (onlyDisplaySettings: true);
 		return true;
 	}
 	#endregion
