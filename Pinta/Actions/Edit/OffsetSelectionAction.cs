@@ -29,6 +29,7 @@ using System.Threading.Tasks;
 using Pinta.Core;
 
 namespace Pinta.Actions;
+
 internal sealed class OffsetSelectionAction : IActionHandler
 {
 	private readonly EditActions edit;

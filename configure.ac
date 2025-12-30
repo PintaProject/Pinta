@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT([pinta], [3.1])
+AC_INIT([pinta], [3.2])
 AM_INIT_AUTOMAKE([tar-ustar foreign])
 
 AC_PROG_INSTALL
@@ -41,7 +41,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
 
 # Note: also need to update installer/macos/Info.plist when adding a language.
-ALL_LINGUAS="af ar ast az be bg bn br bs ca cs da de dv el en_AU en_CA en_GB eo es et eu fa fi fil fo fr ga gl he hi hr hu hy id ie it ja ka kab kn ko la lt lv ms my nb nl nn oc pl pt pt_BR ro ru si sk sl sq sr sv ta th tr uk vi zh_CN zh_HK zh_TW"
+ALL_LINGUAS="af ar ast az be bg bn br bs ca cs da de dv el en_AU en_CA en_GB eo es et eu fa fi fil fo fr ga gl he hi hr hu hy id ie it ja ka kab kn ko la lt lv ms my nb nl nn oc pl pt pt_BR ro ru si sk sl sq sr sv ta th tr uk ur vi zh_CN zh_HK zh_TW"
 AM_GLIB_GNU_GETTEXT
 
 pintalocaledir='${prefix}/${DATADIRNAME}/locale'

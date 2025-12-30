@@ -81,7 +81,6 @@ public sealed class MagicWandTool : FloodTool
 		SelectionModeHandler.PerformSelectionMode (document, combine_mode, DocumentSelection.ConvertToPolygons (polygonSet));
 
 		document.History.PushNewItem (undoAction);
-		document.Workspace.Invalidate ();
 	}
 
 	protected override void OnSaveSettings (ISettingsService settings)

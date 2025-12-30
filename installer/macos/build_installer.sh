@@ -2,11 +2,25 @@
 set -e
 
 # Parse command line arguments
-runtimeid=$1
+skip_signing=false
+runtimeid=""
+
+for arg in "$@"; do
+    case $arg in
+        --skip-signing)
+            skip_signing=true
+            shift
+            ;;
+        *)
+            runtimeid=$arg
+            shift
+            ;;
+    esac
+done
 
 if [ "$runtimeid" != "osx-x64" ] && [ "$runtimeid" != "osx-arm64" ]; then
     echo "Invalid runtime identifier (should be osx-x64 or osx-arm64)"
-    echo "Usage: ./build_installer.sh runtimeid"
+    echo "Usage: ./build_installer.sh [--skip-signing] runtimeid"
     exit 1
 fi
 
@@ -52,26 +66,32 @@ ${GTK_UPDATE_ICON_CACHE} ${MAC_APP_SHARE_DIR}/icons/Adwaita
 
 touch ${MAC_APP_DIR}
 
-# Sign the GTK binaries.
-echo "Signing..."
-for lib in `find ${MAC_APP_RESOURCE_DIR} -name \*.dylib -or -name \*.so`
-do
-    run_codesign ${lib}
-done
+if [ "$skip_signing" = "false" ]; then
+    # Sign the GTK binaries.
+    echo "Signing..."
+    for lib in `find ${MAC_APP_RESOURCE_DIR} -name \*.dylib -or -name \*.so`
+    do
+        run_codesign ${lib}
+    done
 
-# Sign the main executable and .NET stuff.
-run_codesign ${MAC_APP_DIR}
+    # Sign the main executable and .NET stuff.
+    run_codesign ${MAC_APP_DIR}
+fi
 
-# Create and sign the .dmg image, and include a link to drag the app into /Applications
+# Create the .dmg image, and include a link to drag the app into /Applications
 echo "Creating dmg..."
 ln -s /Applications package/Applications
 hdiutil create -quiet -srcFolder package -volname "Pinta Installer" -o Pinta.dmg
-run_codesign Pinta.dmg
 
-# Notarize
-echo "Notarizing..."
-xcrun notarytool submit --wait --apple-id=cameronwhite91@gmail.com --password ${MAC_DEV_PASSWORD} --team-id D5G6C56TBH Pinta.dmg
+if [ "$skip_signing" = "false" ]; then
+    # Sign the .dmg image
+    run_codesign Pinta.dmg
 
-# Staple the result to the dmg
-echo "Stapling..."
-xcrun stapler staple Pinta.dmg
+    # Notarize
+    echo "Notarizing..."
+    xcrun notarytool submit --wait --apple-id=cameronwhite91@gmail.com --password ${MAC_DEV_PASSWORD} --team-id D5G6C56TBH Pinta.dmg
+
+    # Staple the result to the dmg
+    echo "Stapling..."
+    xcrun stapler staple Pinta.dmg
+fi

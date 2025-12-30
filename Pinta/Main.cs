@@ -77,13 +77,14 @@ internal sealed class MainClass
 			OpenMainWindow (
 				parseResult.GetValue (threads_option),
 				parseResult.GetValue (files_arg) ?? [],
-				parseResult.GetValue (debug_option));
+				parseResult.GetValue (debug_option),
+				locale_dir);
 		});
 
 		return root_command.Parse (args).Invoke ();
 	}
 
-	private static void OpenMainWindow (int threads, IEnumerable<string> files, bool debug)
+	private static void OpenMainWindow (int threads, IEnumerable<string> files, bool debug, string locale_dir)
 	{
 		GLib.UnhandledException.SetHandler (OnUnhandledException);
 
@@ -91,6 +92,13 @@ internal sealed class MainClass
 		Pango.Module.Initialize ();
 		PangoCairo.Module.Initialize ();
 		var app = Adw.Application.New (PintaCore.ApplicationId, Gio.ApplicationFlags.NonUnique);
+
+		// For macOS, use bindtextdomain() to override the location for libadwaita's translations
+		// since the libraries are relocated into the .app package. This can be done for other libraries
+		// in the future as required (see bug #1727)
+		if (SystemManager.GetOperatingSystem () == OS.Mac) {
+			IntlExtensions.BindTextDomain (IntlExtensions.AdwaitaTextDomain, locale_dir);
+		}
 
 		// Add our icons to the search path.
 		GtkExtensions.GetDefaultIconTheme ().AddSearchPath (Pinta.Core.SystemManager.GetDataRootDirectory () + "/icons");

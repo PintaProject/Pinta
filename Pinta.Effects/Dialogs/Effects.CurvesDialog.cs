@@ -96,7 +96,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		Gtk.EventControllerMotion motionController = CreateCurvesMotionController ();
 
-		Gtk.GestureClick clickController = CreateCurvesClickController ();
+		Gtk.GestureDrag dragController = CreateCurvesDragController ();
 
 		BoxStyle horizontalSpaced = new (Gtk.Orientation.Horizontal, SPACING);
 		Gtk.Box boxAbove = GtkExtensions.Box (
@@ -122,7 +122,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 		curvesDrawing.SetAllMargins (8);
 		curvesDrawing.SetDrawFunc ((area, context, width, height) => HandleDrawingDrawnEvent (context));
 		curvesDrawing.AddController (motionController);
-		curvesDrawing.AddController (clickController);
+		curvesDrawing.AddController (dragController);
 
 		Gtk.Box content_area = this.GetContentAreaBox ();
 		content_area.SetAllMargins (12);
@@ -245,19 +245,89 @@ public sealed class CurvesDialog : Gtk.Dialog
 			Gtk.EventControllerMotion controller,
 			Gtk.EventControllerMotion.MotionSignalArgs args)
 		{
-			PointI p = new (
+			last_mouse_pos = new PointI (
 				X: (int) args.X,
 				Y: (int) args.Y);
+
+			InvalidateDrawing ();
+		}
+	}
+
+	private Gtk.GestureDrag CreateCurvesDragController ()
+	{
+		Gtk.GestureDrag result = Gtk.GestureDrag.New ();
+		result.SetButton (0); // Handle all buttons
+		result.OnDragBegin += HandleDrawingDragBegin;
+		result.OnDragUpdate += HandleDrawingDragUpdate;
+		return result;
+
+		// Handlers
+
+		void HandleDrawingDragBegin (
+			Gtk.GestureDrag controller,
+			Gtk.GestureDrag.DragBeginSignalArgs args)
+		{
+			PointI pos = new (
+				X: (int) args.StartX,
+				Y: (int) args.StartY);
+
+			last_mouse_pos = pos;
+
+			if (controller.GetCurrentMouseButton () == MouseButton.Left) {
+				orig_cps.Clear ();
+
+				foreach (var controlPoints in GetActiveControlPoints ())
+					orig_cps.UnionWith (controlPoints.Keys);
+
+				if (SnapToControlPointProximity (GetActiveControlPoints (), ref pos))
+					orig_cps.Remove (pos.X); // Allow dragging the snapped control point.
+
+				AddControlPoint (pos);
+			} else if (controller.GetCurrentMouseButton () == MouseButton.Right) {
+				// Handle right-click removal
+				foreach (var controlPoints in GetActiveControlPoints ()) {
+
+					for (int i = 0; i < controlPoints.Count; i++) {
+
+						PointI cp = new (
+							X: controlPoints.Keys[i],
+							Y: SIZE - 1 - controlPoints.Values[i]);
+
+						//we cannot allow user to remove first or last control point
+
+						if (cp.X == 0 && cp.Y == SIZE - 1)
+							continue;
+
+						if (cp.X == SIZE - 1 && cp.Y == 0)
+							continue;
+
+						if (CheckControlPointProximity (cp, pos)) {
+							controlPoints.RemoveAt (i);
+							break;
+						}
+					}
+				}
+			}
+
+			InvalidateDrawing ();
+		}
+
+		void HandleDrawingDragUpdate (
+			Gtk.GestureDrag controller,
+			Gtk.GestureDrag.DragUpdateSignalArgs args)
+		{
+			if (controller.GetCurrentMouseButton () != MouseButton.Left)
+				return;
+
+			controller.GetStartPoint (out double startX, out double startY);
+			PointI p = new (
+				X: (int) (startX + args.OffsetX),
+				Y: (int) (startY + args.OffsetY));
 
 			last_mouse_pos = p;
 
 			if (p.X < 0 || p.X >= SIZE || p.Y < 0 || p.Y >= SIZE)
 				return;
-
-			if (!controller.GetCurrentEventState ().IsLeftMousePressed ()) {
-				InvalidateDrawing ();
-				return;
-			}
 
 			if (last_cpx is not null) {
 				// The first and last control points cannot be removed, so also forbid dragging them away.
@@ -279,69 +349,6 @@ public sealed class CurvesDialog : Gtk.Dialog
 				AddControlPoint (p);
 			else
 				last_cpx = null;
-
-			InvalidateDrawing ();
-		}
-	}
-
-	private Gtk.GestureClick CreateCurvesClickController ()
-	{
-		Gtk.GestureClick result = Gtk.GestureClick.New ();
-		result.SetButton (0); // Handle all buttons
-		result.OnPressed += HandleDrawingButtonPressEvent;
-		return result;
-
-		// Handlers
-
-		void HandleDrawingButtonPressEvent (
-			Gtk.GestureClick controller,
-			Gtk.GestureClick.PressedSignalArgs args)
-		{
-			PointI pos = new (
-				X: (int) args.X,
-				Y: (int) args.Y);
-
-			if (controller.GetCurrentMouseButton () == MouseButton.Left) {
-
-				orig_cps.Clear ();
-
-				foreach (var controlPoints in GetActiveControlPoints ())
-					orig_cps.UnionWith (controlPoints.Keys);
-
-				if (SnapToControlPointProximity (GetActiveControlPoints (), ref pos))
-					orig_cps.Remove (pos.X); // Allow dragging the snapped control point.
-
-				AddControlPoint (pos);
-			}
-
-			if (controller.GetCurrentMouseButton () != MouseButton.Right) {
-				InvalidateDrawing ();
-				return;
-			}
-
-			// user pressed right button
-			foreach (var controlPoints in GetActiveControlPoints ()) {
-
-				for (int i = 0; i < controlPoints.Count; i++) {
-
-					PointI cp = new (
-						X: controlPoints.Keys[i],
-						Y: SIZE - 1 - controlPoints.Values[i]);
-
-					//we cannot allow user to remove first or last control point
-
-					if (cp.X == 0 && cp.Y == SIZE - 1)
-						continue;
-
-					if (cp.X == SIZE - 1 && cp.Y == 0)
-						continue;
-
-					if (CheckControlPointProximity (cp, pos)) {
-						controlPoints.RemoveAt (i);
-						break;
-					}
-				}
-			}
 
 			InvalidateDrawing ();
 		}

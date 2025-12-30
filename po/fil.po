@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-02-13 14:02+0000\n"
+"PO-Revision-Date: 2025-11-25 14:13+0000\n"
 "Last-Translator: IverCoder <ivercoder+github@proton.me>\n"
 "Language-Team: Filipino <https://hosted.weblate.org/projects/pinta/pinta/fil/"
 ">\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -31,23 +31,23 @@ msgstr " Mode ng Pagpili: "
 #: ../Pinta.Core/Managers/EffectsManager.cs:78
 #: ../Pinta.Core/Managers/EffectsManager.cs:116
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
 msgid "3 x 3 Region"
-msgstr "3 x 3 na Rehiyon"
+msgstr "3 × 3 na Bahagi"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
 msgid "5 x 5 Region"
-msgstr "5 x 5 na Rehiyon"
+msgstr "5 × 5 na Bahagi"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
 msgid "7 x 7 Region"
-msgstr "7 x 7 na Rehiyon"
+msgstr "7 × 7 na Bahagi"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
 msgid "9 x 9 Region"
-msgstr "9 x 9 na Rehiyon"
+msgstr "9 × 9 na Bahagi"
 
 #: ../Pinta/MainWindow.cs:405
 msgid "A_dd-ins"
@@ -55,7 +55,7 @@ msgstr "Mga A_dd-in"
 
 #: ../Pinta.Core/Actions/AppActions.cs:42
 msgid "About"
-msgstr "Tungkol Sa"
+msgstr "Tungkol sa"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:64
 msgid "About Pinta"

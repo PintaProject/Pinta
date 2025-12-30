@@ -132,11 +132,14 @@ public sealed class ColorPickerSlider : Gtk.Box
 		Gtk.Range sender,
 		Gtk.Range.ChangeValueSignalArgs args)
 	{
+		// The provided value is from the scroll action, so we need to clamp to the range!
+		double clampedValue = Math.Clamp (args.Value, 0, settings.Max);
+
 		OnChangeValueArgs e = new (
 			senderName: slider_label.GetLabel (),
-			value: args.Value);
+			value: clampedValue);
 
-		input_field.SetText (e.Value.ToString (CultureInfo.InvariantCulture));
+		input_field.SetText (clampedValue.ToString (CultureInfo.InvariantCulture));
 
 		OnValueChange?.Invoke (this, e);
 

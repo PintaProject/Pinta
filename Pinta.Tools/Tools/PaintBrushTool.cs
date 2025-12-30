@@ -41,6 +41,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 	private BasePaintBrush? active_brush;
 	private PointI? last_point = PointI.Zero;
 	private uint? open_repeating_draw_id;
+	private Box brush_specific_options_box;
 
 	public PaintBrushTool (IServiceProvider services) : base (services)
 	{
@@ -51,6 +52,8 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		brushes.BrushAdded += (_, _) => RebuildBrushComboBox ();
 		brushes.BrushRemoved += (_, _) => RebuildBrushComboBox ();
+
+		brush_specific_options_box = Box.New (Orientation.Horizontal, 10);
 	}
 
 	public override string Name => Translations.GetString ("Paintbrush");
@@ -78,6 +81,10 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		tb.Append (BrushLabel);
 		tb.Append (BrushComboBox);
+
+		RebuildBrushSpecificOptions ();
+		brush_specific_options_box.MarginStart = 10;
+		tb.Append (brush_specific_options_box);
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -172,6 +179,12 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		if (brush_combo_box is not null)
 			settings.PutSetting (SettingNames.PAINT_BRUSH_BRUSH, brush_combo_box.ComboBox.Active);
+
+		if (active_brush is not null) {
+			foreach (var option in active_brush.Options) {
+				option.SaveValueToSettings (settings);
+			}
+		}
 	}
 
 	private Label? brush_label;
@@ -215,6 +228,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 			BrushComboBox.ComboBox.AppendText (brush.Name);
 
 		BrushComboBox.ComboBox.Active = 0;
+		BrushComboBox.ComboBox.OnChanged += (cbx, ev) => RebuildBrushSpecificOptions ();
 	}
 
 	private void CancelRepeatingDraw ()
@@ -225,4 +239,13 @@ public sealed class PaintBrushTool : BaseBrushTool
 		}
 	}
 
+	private void RebuildBrushSpecificOptions ()
+	{
+		brush_specific_options_box.RemoveAll ();
+		if (active_brush is not null) {
+			foreach (var option in active_brush.Options) {
+				brush_specific_options_box.Append (ToolOptionWidgetService.GetWidgetForOption (option));
+			}
+		}
+	}
 }
