@@ -40,12 +40,8 @@ public static class ResourceLoader
 	public static Gdk.Texture GetIcon (string name, int size)
 	{
 		// First see if it's a built-in gtk icon, like gtk-new.
-		try {
-			Gdk.Texture? theme_result = GetIconFromTheme (name, size);
-			if (theme_result is not null) return theme_result;
-		} catch (Exception ex) {
-			Console.Error.WriteLine (ex.Message);
-		}
+		Gdk.Texture? theme_result = GetIconFromTheme (name, size);
+		if (theme_result is not null) return theme_result;
 
 		// Otherwise, get it from our embedded resources.
 		Gdk.Texture? resource_result = GetIconFromResources (name);
