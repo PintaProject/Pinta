@@ -1,7 +1,21 @@
 # Change Log
 All notable changes to this project (beginning with version 1.7) will be documented in this file.
 
-## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.0.3...HEAD)
+## [Unreleased](https://github.com/PintaProject/Pinta/compare/3.1...HEAD)
+
+Thanks to the following contributors who worked on this release:
+- @cameronwhite
+- @spaghetti22
+
+### Added
+- The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
+
+### Changed
+
+### Fixed
+- Fixed performance regression with the selection tools on large images after the canvas widget rewrite in version 3.1 (#1912, #1909)
+
+## [3.1](https://github.com/PintaProject/Pinta/release/tag/3.1) - 2025/12/23
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
@@ -49,6 +63,7 @@ Thanks to the following contributors who worked on this release:
 - Updated the application icon on macOS to better match the platform's icon style guidelines (#1572)
 - Removed the blend mode parameter from the Clouds effect. The replacement workflow is to create a new layer and configure the layer's blend mode (#1695)
 - Transparent palette colors are now drawn against a checkerboard pattern for improved visibility (#1759)
+- Saving an image with multiple layers to a format that does not support layers will now warn the user that the image is being flattened (#1856, #1283)
 
 ### Fixed
 - Fixed a bug where cancelling the color picker dialog could still update the palette colors (#1390, #1411)
@@ -64,6 +79,9 @@ Thanks to the following contributors who worked on this release:
 - Fixed drifting when holding Shift while expanding a rectangle selection using the vertical or horizontal handles (#1733)
 - Fixed issue where icons were missing from the top bar (#1814)
 - Fixed a potential error in the text tool when pressing Left at the beginning of a line (#1824)
+- Fixed issues where mouse button releases were not correctly registered in certain situations (#1456, #1891)
+- Fixed bug where copying did not include unfinalized text (#1666, #1894)
+- Fixed issues with missing translations for libadwaita dialogs on macOS (#1877, #1417)
 
 ## [3.0.5](https://github.com/PintaProject/Pinta/release/tag/3.0.5) - 2025/11/24
 

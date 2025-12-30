@@ -248,22 +248,6 @@ public sealed class DocumentLayers
 	}
 
 	/// <summary>
-	/// Gets a copy of the specified layer, clipped to the current selection.
-	/// </summary>
-	public ImageSurface GetClippedLayer (int index)
-	{
-		ImageSurface surf = CairoExtensions.CreateImageSurface (Format.Argb32, document.ImageSize.Width, document.ImageSize.Height);
-
-		using Context g = new (surf);
-		document.Selection.Clip (g);
-
-		g.SetSourceSurface (user_layers[index].Surface, 0, 0);
-		g.Paint ();
-
-		return surf;
-	}
-
-	/// <summary>
 	/// Returns all layers flattened to a new surface, optionally clipped by the selection.
 	/// </summary>
 	internal ImageSurface GetFlattenedImage (bool clip_to_selection = false)
@@ -290,24 +274,18 @@ public sealed class DocumentLayers
 	/// </summary>
 	public IEnumerable<Layer> GetLayersToPaint (bool includeToolLayer = true)
 	{
-		foreach (var layer in user_layers) {
-			if (!layer.Hidden)
-				yield return layer;
+		foreach (UserLayer userLayer in user_layers) {
+			if (!userLayer.Hidden) {
+				foreach (Layer layer in userLayer.GetLayersToPaint ())
+					yield return layer;
+			}
 
-			if (layer == CurrentUserLayer) {
+			if (userLayer == CurrentUserLayer) {
 				if (includeToolLayer && tool_layer is not null && !ToolLayer.Hidden)
 					yield return ToolLayer;
 
 				if (ShowSelectionLayer && (!SelectionLayer.Hidden))
 					yield return SelectionLayer;
-			}
-
-			if (!layer.Hidden) {
-				foreach (var rel in layer.ReEditableLayers) {
-					//Make sure that each UserLayer's ReEditableLayer is in use before adding it to the List of Layers to Paint.
-					if (rel.IsLayerSetup)
-						yield return rel.Layer;
-				}
 			}
 		}
 	}

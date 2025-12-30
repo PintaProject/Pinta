@@ -164,6 +164,7 @@ public static class Icons
 	public const string FillStyleOutline = "tool-fillstyle-outline-symbolic";
 	public const string FillStyleOutlineFill = "tool-fillstyle-outlinefill-symbolic";
 
+	public const string LassoFreeform = "tool-select-lasso-freeform-symbolic";
 	public const string LassoPolygon = "tool-select-lasso-polygon-symbolic";
 
 	public const string HelpBug = "help-bug";
