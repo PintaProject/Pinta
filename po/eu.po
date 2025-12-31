@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-04-15 17:01+0000\n"
+"PO-Revision-Date: 2025-12-31 18:06+0000\n"
 "Last-Translator: Asier Saratsua Garmendia <asier.sarasua@gmail.com>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/pinta/pinta/eu/>\n"
 "Language: eu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -163,7 +163,7 @@ msgstr "Automatikoa"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:63
 msgid "Auto Crop"
-msgstr "Moztu automatikok"
+msgstr "Moztu automatikoki"
 
 #: ../Pinta.Effects/Adjustments/AutoLevelEffect.cs:24
 msgid "Auto Level"
@@ -311,15 +311,15 @@ msgstr "Oihal-sareta..."
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
-msgstr ""
+msgstr "Gelaxka-erradioa"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
-msgstr "Gelaxkaren tamaina"
+msgstr "Gelaxka-tamaina"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:19
 msgid "Cells"
-msgstr ""
+msgstr "Gelaxkak"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
@@ -380,7 +380,7 @@ msgstr "Zirkuluak"
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
 msgid "Circular"
-msgstr ""
+msgstr "Zirkularra"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -408,6 +408,10 @@ msgid ""
 "Right click to reverse.\n"
 "Click on a control point and drag to move it."
 msgstr ""
+"Egin klik eta arrastatu gradientea kolore nagusitik bigarren mailakora "
+"marrazteko.\n"
+"Eskuineko klik alderantzikatzeko.\n"
+"Egin klik kontrol-puntu batean eta arrastatu hura lekuz aldatzeko."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -514,7 +518,7 @@ msgstr "Kolore-eskema"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:192
 msgid "Color Scheme Edge Behavior"
-msgstr ""
+msgstr "Kolore-eskemaren ertzeko portaera"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:180
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:145
@@ -589,7 +593,7 @@ msgstr "Moztu hautapenera"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Current Palette"
-msgstr ""
+msgstr "Uneko paleta"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:247
 msgid "Curved"
@@ -806,11 +810,11 @@ msgstr "Huts egin du pantaila-argazkiaren kapturak"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:175
 msgid "Feather Canvas Edge"
-msgstr ""
+msgstr "Lausotu oihalaren ertza"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:18
 msgid "Feather Object"
-msgstr ""
+msgstr "Lausotu objektua"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -922,7 +926,7 @@ msgstr "Zatiak"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
 msgid "Freeform"
-msgstr ""
+msgstr "Forma librea"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -959,11 +963,11 @@ msgstr "Gradientea"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:118
 msgid "Gradient Created"
-msgstr ""
+msgstr "Gradientea sortu da"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:119
 msgid "Gradient Modified"
-msgstr ""
+msgstr "Gradientea aldatu da"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
@@ -1087,6 +1091,13 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
+"Forma libreen moduan, egin klik eta arrastatu hautapen-area baten eskema "
+"marrazteko.\n"
+"\n"
+"Poligonoen moduan, egin klik eta arrastatu hautapenari puntu berri bat "
+"gehitzeko.\n"
+"Sakatu Enter hautapena amaitzeko.\n"
+"Sakatu atzerako tekla azken puntua ezabatzeko."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
@@ -1166,7 +1177,7 @@ msgstr "Jarvis-Judice-Ninke"
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
-msgstr "Julia-ren fraktala"
+msgstr "Julia fraktala"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:300
 msgid "Landscape"
@@ -1174,7 +1185,7 @@ msgstr "Horizontala"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
 msgid "Lasso Mode"
-msgstr ""
+msgstr "Lakio-modua"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
@@ -1244,6 +1255,11 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selection outline by a single pixel."
 msgstr ""
+"Ezkerreko klik eta arrastatu hautapena bere eskema lekuz aldatzeko.\n"
+"Eutsi {0} sakatuta eskala aldatzeko.\n"
+"Eskuineko klik eta arrastatu hautapena bere eskema biratzeko.\n"
+"Eutsi Shift sakatuta urratsez urrats biratzeko.\n"
+"Erabili gezi-teklak hautapenaren eskema pixelez pixel mugitzeko."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:58
@@ -1264,6 +1280,21 @@ msgid ""
 "exact same position.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Ezkerreko klik forma bat kolore nagusiarekin marrazteko.\n"
+"Ezkerreko klik forma batean hari kontrol-puntu bat gehitzeko.\n"
+"Ezkerreko klik kontrol-puntu batean eta arrastatu hura lekuz aldatzeko.\n"
+"Eskuineko klik kontrol-puntu batean eta arrastatu bere tentsioa aldatzeko.\n"
+"Eutsi Shift sakatuta angeluei atxikitzeko.\n"
+"Erabili gezi-teklak hautatutako kontrol-puntua lekuz aldatzeko.\n"
+"Sakatu {0} eta ezkerreko/eskuineko teklak kontrol-puntuak ordenan "
+"hautatzeko.\n"
+"Sakatu Delete hautatuta kontrol-puntua ezabatzeko.\n"
+"Sakatu zuriune-barra saguaren kokapenean kontrol-puntu berria gehitzeko.\n"
+"Eutsi {0} sakatuta zuriune-barra sakatu bitartean kontrol-puntua kokapen "
+"zehatzean sortzeko.\n"
+"Eutsi {0} sakatuta kontrol-puntu baten gainean ezkerreko klik egin bitartean "
+"forma berri bat kokapen zehatzean sortzeko.\n"
+"Sakatu Enter forma amaitzeko."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
@@ -1433,7 +1464,7 @@ msgstr "Marteko laba"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
 msgid "Maximum Size"
-msgstr ""
+msgstr "Tamaina maximoa"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
@@ -1441,7 +1472,7 @@ msgstr "Mediana"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
-msgstr ""
+msgstr "Menu-barra"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:363
@@ -1450,7 +1481,7 @@ msgstr "Batu geruza beherantz"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
-msgstr ""
+msgstr "Tamaina minimoa"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -1682,7 +1713,7 @@ msgstr "Paleta"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette Source"
-msgstr ""
+msgstr "Paleta-iturburua"
 
 #: ../Pinta.Core/Actions/EditActions.cs:576
 msgid "Palette files"
@@ -1736,6 +1767,8 @@ msgstr "Argazkia"
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:174
 msgid "Phyllotaxis"
 msgstr ""
+"Itzultzaileak: Ekilore-haziak antolatzen diren moduaren antzeko puntu-"
+"antolamendua"
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
@@ -1801,7 +1834,7 @@ msgstr "Piña Colada"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
 msgid "Please restart Pinta for the changes to take effect."
-msgstr ""
+msgstr "Berrabiarazi Pinta aldaketak aplikatu daitezen."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:607
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
@@ -1811,12 +1844,12 @@ msgstr "Puntua gehitu da"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:156
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Point Arrangement"
-msgstr ""
+msgstr "Puntu-antolamendua"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:169
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
 msgid "Point Color"
-msgstr ""
+msgstr "Puntu-kolorea"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
 msgid "Point Deleted"
@@ -1825,7 +1858,7 @@ msgstr "Puntua ezabatu da"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:165
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:210
 msgid "Point Size"
-msgstr ""
+msgstr "Puntu-tamaina"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
@@ -1833,7 +1866,7 @@ msgstr "Alderantzikatze polarra"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
 msgid "Polygon"
-msgstr ""
+msgstr "Poligonoa"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
@@ -1863,7 +1896,7 @@ msgstr "Aurrezarpen-gradientea"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Preset Palettes"
-msgstr ""
+msgstr "Aurrezarpen-paletak"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
@@ -1951,7 +1984,7 @@ msgstr "Ausazko koloreak"
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
-msgstr ""
+msgstr "Ausazko zarataren hazia"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:159
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
@@ -1960,7 +1993,7 @@ msgstr "Ausazko puntu-kokapenak"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:165
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Erabilitako azken koloreak"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:55
 msgid "Recolor"
@@ -2002,7 +2035,7 @@ msgstr "Islatu"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:139
 msgid "Refraction"
-msgstr ""
+msgstr "Errefrakzioa"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
@@ -2085,7 +2118,7 @@ msgstr "Aldatu paletaren tamaina"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
 msgid "Restart Pinta"
-msgstr ""
+msgstr "Berrabiarazi Pinta"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:189
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:154
@@ -2134,7 +2167,7 @@ msgstr "Biraketa"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:143
 msgid "Roughness"
-msgstr ""
+msgstr "Laztasuna"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Rounded Line Series"
@@ -2256,11 +2289,11 @@ msgstr "Laster-tekla"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
-msgstr ""
+msgstr "Laster-teklak"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
 msgid "Show Axonometric Grid"
-msgstr ""
+msgstr "Erakutsi sareta axonometrikoa"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
 msgid "Show Grid"
@@ -2273,7 +2306,7 @@ msgstr "Erakutsi geruza"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:207
 msgid "Show Points"
-msgstr ""
+msgstr "Erakutsi puntuak"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:267
 msgid "Show Value"
@@ -2618,7 +2651,7 @@ msgstr "Gorri bertikala (R)"
 
 #: ../Pinta/MainWindow.cs:469
 msgid "View"
-msgstr ""
+msgstr "Ikusi"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:49
