@@ -1446,6 +1446,10 @@ msgstr "மாண்டல்பிரோட் ஃப்ராக்டல்"
 msgid "Martian Lava"
 msgstr "செவ்வாய் எரிமலை"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "இடைநடு"
@@ -1458,6 +1462,10 @@ msgstr "பட்டியல் பட்டி"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "அடுக்கை ஒன்றிணைக்கவும்"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
