@@ -11,9 +11,8 @@ namespace Pinta.Gui.Widgets;
 // with a drawingarea
 public sealed class ColorPickerSlider : Gtk.Box
 {
-	public sealed class OnChangeValueArgs (string senderName, double value) : EventArgs
+	public sealed class ValueChangedEventArgs (double value) : EventArgs
 	{
-		public string SenderName { get; } = senderName;
 		public double Value { get; } = value;
 	}
 
@@ -21,15 +20,12 @@ public sealed class ColorPickerSlider : Gtk.Box
 		int Max,
 		string Text, // required
 		double InitialValue,
-		Gtk.Window TopWindow, // required
-		int SliderPaddingWidth,
-		int SliderPaddingHeight,
-		int SliderWidth,
-		int MaxWidthChars);
+		int SliderWidth);
+
+	private const int PADDING_WIDTH = 14;
+	private const int PADDING_HEIGHT = 10;
 
 	private readonly Settings settings;
-	private readonly Gtk.Window top_window;
-	private readonly Gtk.Label slider_label;
 	private readonly Gtk.Scale slider_control;
 	private readonly Gtk.Entry input_field;
 	private readonly Gtk.Overlay slider_overlay;
@@ -37,7 +33,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 	public Gtk.DrawingArea Gradient { get; }
 
-	public event EventHandler<OnChangeValueArgs>? OnValueChange;
+	public event EventHandler<ValueChangedEventArgs>? OnValueChange;
 
 	public ColorPickerSlider (Settings settings)
 	{
@@ -69,7 +65,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 		sliderOverlay.AddOverlay (sliderControl);
 
 		Gtk.Entry inputField = new () {
-			MaxWidthChars = settings.MaxWidthChars,
+			MaxWidthChars = 3,
 			WidthRequest = 50,
 			Hexpand = false,
 		};
@@ -84,9 +80,6 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 		// --- References to keep
 
-		top_window = settings.TopWindow;
-
-		slider_label = sliderLabel;
 		cursor_area = cursorArea;
 		slider_control = sliderControl;
 		slider_overlay = sliderOverlay;
@@ -105,7 +98,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 	{
 		const int OUTLINE_WIDTH = 2;
 
-		double currentPosition = slider_control.GetValue () / settings.Max * (width - 2 * settings.SliderPaddingWidth) + settings.SliderPaddingWidth;
+		double currentPosition = slider_control.GetValue () / settings.Max * (width - 2 * PADDING_WIDTH) + PADDING_WIDTH;
 
 		ReadOnlySpan<PointD> cursorPoly = [
 			new (currentPosition, height / 2),
@@ -135,24 +128,15 @@ public sealed class ColorPickerSlider : Gtk.Box
 		// The provided value is from the scroll action, so we need to clamp to the range!
 		double clampedValue = Math.Clamp (args.Value, 0, settings.Max);
 
-		OnChangeValueArgs e = new (
-			senderName: slider_label.GetLabel (),
-			value: clampedValue);
-
 		input_field.SetText (clampedValue.ToString (CultureInfo.InvariantCulture));
 
-		OnValueChange?.Invoke (this, e);
+		OnValueChange?.Invoke (this, new ValueChangedEventArgs (clampedValue));
 
 		return false;
 	}
 
 	private void OnInputFieldChanged (Gtk.Editable inputField, EventArgs e)
 	{
-
-		// see SetValue about suppression
-		if (suppress_event)
-			return;
-
 		string text = inputField.GetText ();
 
 		bool success = double.TryParse (
@@ -168,11 +152,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 		if (!success)
 			return;
 
-		OnChangeValueArgs e2 = new (
-			senderName: slider_label.GetLabel (),
-			value: parsed);
-
-		OnValueChange?.Invoke (this, e2);
+		OnValueChange?.Invoke (this, new ValueChangedEventArgs (parsed));
 	}
 
 	public void SetSliderWidth (int sliderWidth)
@@ -183,23 +163,19 @@ public sealed class ColorPickerSlider : Gtk.Box
 		slider_overlay.WidthRequest = sliderWidth;
 	}
 
-	private bool suppress_event = false;
 	public void SetValue (double val)
 	{
 		slider_control.SetValue (val);
-		// Make sure we do not set the text if we are editing it right now
-		// This is the only reason top_window is passed in as an arg, and despite my best efforts I cannot find a way
-		// to get that info from GTK programmatically.
-		if (top_window.GetFocus ()?.Parent != input_field) {
-			// hackjob
-			// prevents OnValueChange from firing when we change the value internally
-			// because OnValueChange eventually calls SetValue so it causes a stack overflow
-			suppress_event = true;
-			input_field.SetText (Convert.ToInt32 (val).ToString ());
+
+		if (!input_field.IsEditingText ()) {
+			// Ensure we don't get an infinite loop of "value changed" events
+			string newText = Convert.ToInt32 (val).ToString ();
+			if (newText != input_field.GetText ())
+				input_field.SetText (newText);
 		}
+
 		Gradient.QueueDraw ();
 		cursor_area.QueueDraw ();
-		suppress_event = false;
 	}
 
 	public void DrawGradient (Context context, int width, int height, ColorGradient<Color> colors)
@@ -207,21 +183,21 @@ public sealed class ColorPickerSlider : Gtk.Box
 		context.Antialias = Antialias.None;
 
 		Size drawSize = new (
-			Width: width - settings.SliderPaddingWidth * 2,
-			Height: height - settings.SliderPaddingHeight * 2);
+			Width: width - PADDING_WIDTH * 2,
+			Height: height - PADDING_HEIGHT * 2);
 
 		PointI p = new (
-			X: settings.SliderPaddingWidth + drawSize.Width,
-			Y: settings.SliderPaddingHeight + drawSize.Height);
+			X: PADDING_WIDTH + drawSize.Width,
+			Y: PADDING_HEIGHT + drawSize.Height);
 
 		int bsize = drawSize.Height / 2;
 
 		// Draw transparency background
 		context.FillRectangle (
-			new RectangleD (settings.SliderPaddingWidth, settings.SliderPaddingHeight, drawSize.Width, drawSize.Height),
+			new RectangleD (PADDING_WIDTH, PADDING_HEIGHT, drawSize.Width, drawSize.Height),
 			new Color (1, 1, 1));
 
-		for (int x = settings.SliderPaddingWidth; x < p.X; x += bsize * 2) {
+		for (int x = PADDING_WIDTH; x < p.X; x += bsize * 2) {
 
 			int bwidth =
 				(x + bsize > p.X)
@@ -229,11 +205,11 @@ public sealed class ColorPickerSlider : Gtk.Box
 				: bsize;
 
 			context.FillRectangle (
-				new RectangleD (x, settings.SliderPaddingHeight, bwidth, bsize),
+				new RectangleD (x, PADDING_HEIGHT, bwidth, bsize),
 				new Color (.8, .8, .8));
 		}
 
-		for (int x = settings.SliderPaddingWidth + bsize; x < p.X; x += bsize * 2) {
+		for (int x = PADDING_WIDTH + bsize; x < p.X; x += bsize * 2) {
 
 			int bwidth =
 				(x + bsize > p.X)
@@ -241,13 +217,13 @@ public sealed class ColorPickerSlider : Gtk.Box
 				: bsize;
 
 			context.FillRectangle (
-				new RectangleD (x, settings.SliderPaddingHeight + drawSize.Height / 2, bwidth, bsize),
+				new RectangleD (x, PADDING_HEIGHT + drawSize.Height / 2, bwidth, bsize),
 				new Color (.8, .8, .8));
 		}
 
 		LinearGradient pat = new (
-			x0: settings.SliderPaddingWidth,
-			y0: settings.SliderPaddingHeight,
+			x0: PADDING_WIDTH,
+			y0: PADDING_HEIGHT,
 			x1: p.X,
 			y1: p.Y);
 
@@ -261,8 +237,8 @@ public sealed class ColorPickerSlider : Gtk.Box
 		pat.AddColorStop (normalized.Range.Upper, normalized.EndColor);
 
 		context.Rectangle (
-			settings.SliderPaddingWidth,
-			settings.SliderPaddingHeight,
+			PADDING_WIDTH,
+			PADDING_HEIGHT,
 			drawSize.Width,
 			drawSize.Height);
 

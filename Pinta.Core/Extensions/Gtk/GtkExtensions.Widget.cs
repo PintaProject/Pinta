@@ -238,6 +238,22 @@ partial class GtkExtensions
 	}
 
 	/// <summary>
+	/// Helper function to return whether the text field of a Gtk.Entry has focus (i.e. is
+	/// currently being edited). Gtk.Entry.HasFocus does not match this.
+	/// </summary>
+	public static bool IsEditingText (this Gtk.Entry entry)
+	{
+		Gtk.Widget? entryText = entry.GetFirstChild ();
+
+		if (entryText is null) {
+			Console.Error.WriteLine ("Failed to find child text widget for Gtk.Entry");
+			return false;
+		}
+
+		return entryText.HasFocus;
+	}
+
+	/// <summary>
 	/// Configures a spin button to immediately activate the default widget after pressing Enter,
 	/// by configuring the editable text field.
 	/// In GTK4, Gtk.SpinButton.SetActivateDefault() requires a second Enter to activate.
