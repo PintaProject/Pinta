@@ -91,6 +91,8 @@ Pinta.Core/Classes/Scanline.cs
 Pinta.Core/Classes/SelectionModeHandler.cs
 Pinta.Core/Classes/SplineInterpolator.cs
 Pinta.Core/Classes/SurfaceDiff.cs
+Pinta.Core/Classes/ToolOption/IntegerOption.cs
+Pinta.Core/Classes/ToolOption/ToolOption.cs
 Pinta.Core/Classes/Translations.cs
 Pinta.Core/Classes/UserLayer.cs
 Pinta.Core/Delegates/AsyncEventHandler.cs
@@ -147,6 +149,7 @@ Pinta.Core/Extensions/Gtk/GtkExtensions.External.cs
 Pinta.Core/Extensions/Gtk/GtkExtensions.Interaction.cs
 Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs
 Pinta.Core/Extensions/Gtk/GtkExtensions.cs
+Pinta.Core/Extensions/IntlExtensions.cs
 Pinta.Core/Extensions/NativeImportResolver.cs
 Pinta.Core/Extensions/OtherExtensions.cs
 Pinta.Core/Extensions/PaletteHelper.cs
@@ -363,6 +366,7 @@ Pinta.Tools/Tools/RoundedRectangleTool.cs
 Pinta.Tools/Tools/SelectTool.cs
 Pinta.Tools/Tools/ShapeTool.cs
 Pinta.Tools/Tools/TextTool.cs
+Pinta.Tools/Tools/ToolOptionWidgetService.cs
 Pinta.Tools/Tools/ZoomTool.cs
 Pinta/ActionHandlers.cs
 Pinta/Actions/Addins/AddinManagerAction.cs
