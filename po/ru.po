@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-11-09 21:14+0000\n"
+"PO-Revision-Date: 2026-01-03 14:41+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -1480,7 +1480,7 @@ msgstr "Марсианская лава"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
 msgid "Maximum Size"
-msgstr ""
+msgstr "Максимальный размер"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
@@ -1497,7 +1497,7 @@ msgstr "Объединить с нижележащим"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
-msgstr ""
+msgstr "Минимальный размер"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
