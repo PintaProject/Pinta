@@ -19,6 +19,7 @@ public sealed class PencilSketchEffect : BaseEffect
 	private readonly GaussianBlurEffect blur_effect;
 	private readonly UnaryPixelOps.Desaturate desaturate_op;
 	private readonly InvertColorsEffect invert_effect;
+	private readonly BrightnessContrastEffect bac_adjustment;
 	private readonly UserBlendOps.ColorDodgeBlendOp color_dodge_op;
 
 	public override string Icon => Resources.Icons.EffectsArtisticPencilSketch;
@@ -45,6 +46,7 @@ public sealed class PencilSketchEffect : BaseEffect
 		blur_effect = new GaussianBlurEffect (services);
 		desaturate_op = new UnaryPixelOps.Desaturate ();
 		invert_effect = new InvertColorsEffect (services);
+		bac_adjustment = new BrightnessContrastEffect (services);
 		color_dodge_op = new UserBlendOps.ColorDodgeBlendOp ();
 	}
 
@@ -52,32 +54,27 @@ public sealed class PencilSketchEffect : BaseEffect
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface source, ImageSurface destination, ReadOnlySpan<RectangleI> rois)
+	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		PencilSketchData data = Data;
-		int colorRange = data.ColorRange;
-
-		Size canvasSize = source.GetSize ();
-
-		Lazy<BrightnessContrast.PreRender> brightnessContrast = new (() => new (-colorRange, -colorRange));
-
-		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
-		Span<ColorBgra> destinationData = destination.GetPixelData ();
-
-		foreach (RectangleI roi in rois)
-			foreach (var pixel in Tiling.GeneratePixelOffsets (roi, canvasSize))
-				destinationData[pixel.memoryOffset] = brightnessContrast.Value.Apply (sourceData[pixel.memoryOffset]);
+		bac_adjustment.Data.Brightness = -Data.ColorRange;
+		bac_adjustment.Data.Contrast = -Data.ColorRange;
+		bac_adjustment.Render (src, dest, rois);
 
 		blur_effect.Data.Radius = Data.PencilTipSize;
-		blur_effect.Render (source, destination, rois);
+		blur_effect.Render (src, dest, rois);
 
-		invert_effect.Render (destination, destination, rois);
-		desaturate_op.Apply (destination, destination, rois);
+		invert_effect.Render (dest, dest, rois);
+		desaturate_op.Apply (dest, dest, rois);
+
+		var dst_data = dest.GetPixelData ();
+		var src_data = src.GetReadOnlyPixelData ();
+
+		Size canvasSize = src.GetSize ();
 
 		foreach (RectangleI roi in rois) {
 			foreach (var pixel in Tiling.GeneratePixelOffsets (roi, canvasSize)) {
-				ColorBgra srcGrey = desaturate_op.Apply (sourceData[pixel.memoryOffset]);
-				destinationData[pixel.memoryOffset] = color_dodge_op.Apply (srcGrey, destinationData[pixel.memoryOffset]);
+				ColorBgra srcGrey = desaturate_op.Apply (src_data[pixel.memoryOffset]);
+				dst_data[pixel.memoryOffset] = color_dodge_op.Apply (srcGrey, dst_data[pixel.memoryOffset]);
 			}
 		}
 	}
