@@ -52,10 +52,8 @@ public sealed class GlowEffect : BaseEffect
 		blurEffect.Data.Radius = Data.Radius;
 		blurEffect.Render (src, dest, rois);
 
-		BrightnessContrastEffect contrastEffect = new (services);
-		contrastEffect.Data.Brightness = Data.Brightness;
-		contrastEffect.Data.Contrast = Data.Contrast;
-		contrastEffect.Render (dest, dest, rois);
+		BrightnessContrastPixelOp contrastOp = new (brightness: Data.Brightness, contrast: Data.Contrast);
+		contrastOp.Apply (dest, dest, rois);
 
 		var dst_data = dest.GetPixelData ();
 		var src_data = src.GetReadOnlyPixelData ();
