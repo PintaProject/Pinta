@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-12-02 01:36+0000\n"
+"PO-Revision-Date: 2025-12-31 18:06+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
 "Language-Team: Irish <https://hosted.weblate.org/projects/pinta/pinta/ga/>\n"
 "Language: ga\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -1473,6 +1473,10 @@ msgstr "Fractal Mandelbrot"
 msgid "Martian Lava"
 msgstr "Laibhe Marsach"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr "Uasmhéid Méid"
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "Meánach"
@@ -1485,6 +1489,10 @@ msgstr "Barra an roghchláir"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Cumasc Sraith Síos"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr "Íosmhéid"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"

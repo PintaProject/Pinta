@@ -25,27 +25,27 @@
 // THE SOFTWARE.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Gdk;
+using Cairo;
 using GLib;
-using Gtk;
 
 namespace Pinta.Resources;
 
 public static class ResourceLoader
 {
 	[MethodImpl (MethodImplOptions.NoInlining)]
-	public static Texture GetIcon (string name, int size)
+	public static Gdk.Texture GetIcon (string name, int size)
 	{
 		// First see if it's a built-in gtk icon, like gtk-new.
-		if (TryGetIconFromTheme (name, size, out var theme_result))
-			return theme_result;
+		Gdk.Texture? theme_result = GetIconFromTheme (name, size);
+		if (theme_result is not null) return theme_result;
 
 		// Otherwise, get it from our embedded resources.
-		if (TryGetIconFromResources (name, out var resource_result))
+		Gdk.Texture? resource_result = GetIconFromResources (name);
+		if (resource_result is not null)
 			return resource_result;
 
 		// We can't find this image, but we are going to return *some* image rather than null to prevent crashes
@@ -59,110 +59,102 @@ public static class ResourceLoader
 
 	public static void LoadCssStyles ()
 	{
-		if (TryGetBytesFromAssembly (Assembly.GetExecutingAssembly (), "style.css", out Bytes? bytes)) {
-			var cssProvider = CssProvider.New ();
-			cssProvider.LoadFromBytes (bytes);
-			var display = Display.GetDefault ();
-			if (display != null) {
-				StyleContext.AddProviderForDisplay (display, cssProvider, Gtk.Constants.STYLE_PROVIDER_PRIORITY_APPLICATION);
-			}
-		}
-
-	}
-
-	private static bool TryGetIconFromTheme (string name, int size, [NotNullWhen (true)] out Texture? image)
-	{
-		image = null;
-
 		try {
-			// This will also load any icons added by Gtk.IconFactory.AddDefault() .
-			var iconTheme = IconTheme.GetForDisplay (Display.GetDefault ()!);
-			var iconPaintable = iconTheme.LookupIcon (name, System.Array.Empty<string> (), size, 1, TextDirection.None, IconLookupFlags.Preload);
-			if (iconPaintable == null)
-				return false;
-			if (name != StandardIcons.ImageMissing && iconPaintable.IconName!.StartsWith ("image-missing", StringComparison.InvariantCulture))
-				return false;
-
-			var snapshot = Gtk.Snapshot.New ();
-			iconPaintable.Snapshot (snapshot, size, size);
-
-			// Render the icon to a texture.
-			var node = snapshot.ToNode ();
-			if (node == null)
-				return false;
-
-			var renderer = Gsk.CairoRenderer.New ();
-			renderer.Realize (null);
-			image = renderer.RenderTexture (node, null);
-			renderer.Unrealize ();
+			Bytes? bytes = GetBytesFromAssembly (Assembly.GetExecutingAssembly (), "style.css");
+			if (bytes is null) return;
+			Gtk.CssProvider cssProvider = Gtk.CssProvider.New ();
+			cssProvider.LoadFromBytes (bytes);
+			Gdk.Display? display = Gdk.Display.GetDefault ();
+			if (display is null) return;
+			Gtk.StyleContext.AddProviderForDisplay (display, cssProvider, Gtk.Constants.STYLE_PROVIDER_PRIORITY_APPLICATION);
 		} catch (Exception ex) {
 			Console.Error.WriteLine (ex.Message);
 		}
-
-		return image != null;
 	}
 
-	private static bool TryGetIconFromResources (string name, [NotNullWhen (true)] out Texture? image)
+	private static Gdk.Texture? GetIconFromTheme (string name, int size)
+	{
+		// This will also load any icons added by Gtk.IconFactory.AddDefault() .
+		Gtk.IconTheme iconTheme = Gtk.IconTheme.GetForDisplay (Gdk.Display.GetDefault ()!);
+		Gtk.IconPaintable iconPaintable = iconTheme.LookupIcon (name, [], size, 1, Gtk.TextDirection.None, Gtk.IconLookupFlags.Preload);
+
+		if (iconPaintable is null) return null;
+
+		if (name != StandardIcons.ImageMissing && iconPaintable.IconName!.StartsWith ("image-missing", StringComparison.InvariantCulture))
+			return null;
+
+		Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
+		iconPaintable.Snapshot (snapshot, size, size);
+
+		// Render the icon to a texture.
+
+		Gsk.RenderNode? node = snapshot.ToNode ();
+		if (node is null) return null;
+		Gsk.CairoRenderer renderer = Gsk.CairoRenderer.New ();
+		try {
+			renderer.Realize (null);
+			return renderer.RenderTexture (node, null);
+		} finally {
+			renderer.Unrealize ();
+		}
+	}
+
+	private static Gdk.Texture? GetIconFromResources (string name)
 	{
 		// Check 'Pinta.Resources' for our image
-		if (TryGetIconFromAssembly (Assembly.GetExecutingAssembly (), name, out image))
-			return true;
+		Gdk.Texture? fromExecutingAssembly = GetIconFromAssembly (Assembly.GetExecutingAssembly (), name);
+		if (fromExecutingAssembly is not null)
+			return fromExecutingAssembly;
 
 		// Maybe we can find the icon in the resource of a different assembly (e.g. Plugin)
-		foreach (var asm in AppDomain.CurrentDomain.GetAssemblies ())
-			if (TryGetIconFromAssembly (asm, name, out image))
-				return true;
-
-		return false;
-	}
-
-	private static bool TryGetIconFromAssembly (Assembly assembly, string name, [NotNullWhen (true)] out Texture? image)
-	{
-		image = null;
-
-		if (TryGetBytesFromAssembly (assembly, name, out Bytes? bytes)) {
-			try {
-				image = Texture.NewFromBytes (bytes);
-			} catch (Exception ex) {
-				Console.Error.WriteLine (ex.Message);
-				image = null;
-			}
+		foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies ()) {
+			Gdk.Texture? fromTargetedAssembly = GetIconFromAssembly (assembly, name);
+			if (fromTargetedAssembly is not null)
+				return fromTargetedAssembly;
 		}
 
-		return image != null;
+		return null;
 	}
 
-	private static bool TryGetBytesFromAssembly (Assembly assembly, string name, [NotNullWhen (true)] out Bytes? bytes)
+	private static Gdk.Texture? GetIconFromAssembly (Assembly assembly, string name)
 	{
-		bytes = null;
-
 		try {
-			if (HasResource (assembly, name)) {
-				using var stream = assembly.GetManifestResourceStream (name)!;
-				var buffer = new byte[stream.Length];
-				stream.ReadExactly (buffer);
-
-				bytes = Bytes.New (buffer);
-			}
+			Bytes? bytes = GetBytesFromAssembly (assembly, name);
+			if (bytes is null) return null;
+			return Gdk.Texture.NewFromBytes (bytes);
 		} catch (Exception ex) {
 			Console.Error.WriteLine (ex.Message);
-			bytes = null;
+			return null;
 		}
-
-		return bytes != null;
 	}
 
-	private static bool HasResource (Assembly asm, string name)
+	private static Bytes? GetBytesFromAssembly (Assembly assembly, string name)
 	{
-		return asm.GetManifestResourceNames ().Any (n => n == name);
+		if (!HasResource (assembly, name))
+			return null;
+
+		using Stream stream = assembly.GetManifestResourceStream (name)!;
+		byte[] buffer = new byte[stream.Length];
+		stream.ReadExactly (buffer);
+
+		return Bytes.New (buffer);
+	}
+
+	private static bool HasResource (Assembly assembly, string name)
+	{
+		return
+			assembly
+			.GetManifestResourceNames ()
+			.Any (n => n == name);
 	}
 
 	// From MonoDevelop:
 	// https://github.com/mono/monodevelop/blob/master/main/src/core/MonoDevelop.Ide/gtk-gui/generated.cs
-	private static Texture CreateMissingImage (int size)
+	private static Gdk.Texture CreateMissingImage (int size)
 	{
-		using var surf = new Cairo.ImageSurface (Cairo.Format.Argb32, size, size);
-		using Cairo.Context g = new (surf);
+		using ImageSurface surf = new (Format.Argb32, size, size);
+		using Context g = new (surf);
+
 		g.SetSourceRgb (1, 1, 1);
 		g.Rectangle (0, 0, size, size);
 		g.Fill ();
@@ -172,14 +164,14 @@ public static class ResourceLoader
 		g.Fill ();
 
 		g.LineWidth = 3;
-		g.LineCap = Cairo.LineCap.Round;
-		g.LineJoin = Cairo.LineJoin.Round;
+		g.LineCap = LineCap.Round;
+		g.LineJoin = LineJoin.Round;
 		g.SetSourceRgb (1, 0, 0);
 		g.MoveTo (size / 4, size / 4);
 		g.LineTo ((size - 1) - (size / 4), (size - 1) - (size / 4));
 		g.MoveTo ((size - 1) - (size / 4), size / 4);
 		g.LineTo (size / 4, (size - 1) - (size / 4));
 
-		return Texture.NewForPixbuf (Gdk.Functions.PixbufGetFromSurface (surf, 0, 0, surf.Width, surf.Height)!);
+		return Gdk.Texture.NewForPixbuf (Gdk.Functions.PixbufGetFromSurface (surf, 0, 0, surf.Width, surf.Height)!);
 	}
 }

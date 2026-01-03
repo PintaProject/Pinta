@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-09-14 16:01+0000\n"
+"PO-Revision-Date: 2025-12-31 18:06+0000\n"
 "Last-Translator: Stepan Andriiovych <4fbig9xyb@mozmail.com>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/uk/"
-">\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/"
+"uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -410,6 +410,10 @@ msgid ""
 "Right click to reverse.\n"
 "Click on a control point and drag to move it."
 msgstr ""
+"Клацніть і перетягніть, щоб намалювати градієнт від основного до вторинного "
+"кольору.\n"
+"Клацніть правою кнопкою миші, щоб повернути назад.\n"
+"Натисніть на контрольну точку та перетягніть, щоб перемістити її."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -925,7 +929,7 @@ msgstr "Фрагменти"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:222
 msgid "Freeform"
-msgstr ""
+msgstr "Вільна форма"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -962,11 +966,11 @@ msgstr "Градієнт"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:118
 msgid "Gradient Created"
-msgstr ""
+msgstr "Градієнт Створено"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:119
 msgid "Gradient Modified"
-msgstr ""
+msgstr "Градієнт Змінено"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
@@ -1090,6 +1094,13 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
+"У режимі довільної форми клацніть і перетягніть, щоб намалювати контур для "
+"області виділення.\n"
+"\n"
+"У режимі Polygon клацніть і перетягніть, щоб додати нову точку до "
+"виділення.\n"
+"Натисніть Enter, щоб завершити вибір.\n"
+"Натисніть Backspace, щоб видалити останню точку."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
@@ -1177,7 +1188,7 @@ msgstr "Альбомна"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:215
 msgid "Lasso Mode"
-msgstr ""
+msgstr "Режим Лассо"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
@@ -1459,6 +1470,10 @@ msgstr "Множина Мандельброта"
 msgid "Martian Lava"
 msgstr "Марсіанська лава"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr "Максимальний розмір"
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "Медіана"
@@ -1471,6 +1486,10 @@ msgstr "Рядок меню"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Обєднати шар з попереднім"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr "Мінімальний розмір"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -1852,7 +1871,7 @@ msgstr "Полярна інверсія"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:223
 msgid "Polygon"
-msgstr ""
+msgstr "Полігон"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
@@ -2021,7 +2040,7 @@ msgstr "Віддзеркалення"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:139
 msgid "Refraction"
-msgstr ""
+msgstr "Рефракція (заломлення променів світла)"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
@@ -2153,7 +2172,7 @@ msgstr "Обертання"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:143
 msgid "Roughness"
-msgstr ""
+msgstr "Шорсткість"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 msgid "Rounded Line Series"
@@ -2275,7 +2294,7 @@ msgstr "Гаряча клавіша"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
-msgstr "Комбінації клавіш"
+msgstr "Гарячі клавіші"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
 msgid "Show Axonometric Grid"

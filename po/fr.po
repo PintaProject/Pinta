@@ -1469,6 +1469,10 @@ msgstr "Fractale de Mandelbrot"
 msgid "Martian Lava"
 msgstr "Lave martienne"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "Médian"
@@ -1481,6 +1485,10 @@ msgstr "Barre de Menu"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Fusionner avec le calque inférieur"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"

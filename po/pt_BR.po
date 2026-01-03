@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-12-02 01:36+0000\n"
-"Last-Translator: breakout71fan_1789 <pxhere.viral741@passinbox.com>\n"
+"PO-Revision-Date: 2025-12-27 00:31+0000\n"
+"Last-Translator: Wesley Cosme <wes.p.cosme@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "pinta/pinta/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -519,7 +519,7 @@ msgstr "Esquema de Cores"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:192
 msgid "Color Scheme Edge Behavior"
-msgstr ""
+msgstr "Comportamento das Bordas do Esquema de Cores"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:180
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:145
@@ -1476,6 +1476,10 @@ msgstr "Fractal Mandelbrot"
 msgid "Martian Lava"
 msgstr "Lava Marciana"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "Mediano"
@@ -1488,6 +1492,10 @@ msgstr "Barra de Menu"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Unir à Camada Inferior"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -1846,9 +1854,8 @@ msgstr "Ponto Adicionado"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:156
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
-#, fuzzy
 msgid "Point Arrangement"
-msgstr "Arranjamento dos Pontos"
+msgstr "Arranjo de Pontos"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:169
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:214
@@ -2297,9 +2304,8 @@ msgid "Shortcut keys"
 msgstr "Teclas de atalho"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
-#, fuzzy
 msgid "Show Axonometric Grid"
-msgstr "Mostrar Grade Axonométrica"
+msgstr "Exibir Grade Axonométrica"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
 msgid "Show Grid"
