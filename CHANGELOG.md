@@ -5,6 +5,7 @@ All notable changes to this project (beginning with version 1.7) will be documen
 
 Thanks to the following contributors who worked on this release:
 - @cameronwhite
+- @Lehonti
 - @spaghetti22
 
 ### Added
