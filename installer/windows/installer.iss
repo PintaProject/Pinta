@@ -23,6 +23,8 @@ DefaultGroupName={#ProductName}
 LicenseFile=installer\windows\license.rtf
 OutputBaseFilename={#ProductName}
 OutputDir=installer\windows
+; Allow installing for all users or only the current user
+PrivilegesRequiredOverridesAllowed=dialog
 SetupIconFile=installer\windows\Pinta.ico
 SolidCompression=yes
 SourceDir=..\..\
