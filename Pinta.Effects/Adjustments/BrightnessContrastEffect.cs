@@ -11,13 +11,12 @@ using System;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
-using static Pinta.Effects.BrightnessContrast;
 
 namespace Pinta.Effects;
 
 public sealed class BrightnessContrastEffect : BaseEffect
 {
-	private Lazy<PreRender> pre_render = new (() => new (DEFAULT_BRIGHTNESS, DEFAULT_CONTRAST));
+	private Lazy<BrightnessContrastPixelOp> pixel_op = new (() => new (DEFAULT_BRIGHTNESS, DEFAULT_CONTRAST));
 
 	public sealed override bool IsTileable
 		=> true;
@@ -55,19 +54,19 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		BrightnessContrastData data = Data;
 		int brightness = data.Brightness;
 		int contrast = data.Contrast;
-		pre_render = new Lazy<PreRender> (() => new (brightness, contrast));
+		pixel_op = new Lazy<BrightnessContrastPixelOp> (() => new (brightness, contrast));
 	}
 
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
-	private readonly record struct BrightnessContrastSettings (PreRender PreRender, Size CanvasSize);
-	private static BrightnessContrastSettings CreateSettings (ImageSurface destination, PreRender preRender)
+	private readonly record struct BrightnessContrastSettings (BrightnessContrastPixelOp PreRender, Size CanvasSize);
+	private static BrightnessContrastSettings CreateSettings (ImageSurface destination, BrightnessContrastPixelOp preRender)
 		=> new (PreRender: preRender, CanvasSize: destination.GetSize ());
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		BrightnessContrastSettings settings = CreateSettings (destination, pre_render.Value);
+		BrightnessContrastSettings settings = CreateSettings (destination, pixel_op.Value);
 
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
