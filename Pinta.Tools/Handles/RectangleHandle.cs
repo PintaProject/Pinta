@@ -159,6 +159,7 @@ public class RectangleHandle : IToolHandle
 		RectangleD rect = Rectangle;
 		start_pt = rect.Location ();
 		end_pt = rect.EndLocation ();
+		UpdateHandlePositions ();
 	}
 
 	/// <summary>
