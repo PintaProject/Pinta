@@ -16,6 +16,7 @@ Thanks to the following contributors who worked on this release:
 ### Fixed
 - Fixed packaging issue where the release tarball was missing required files (#1905, #1907)
 - Fixed performance regression with the selection tools on large images after the canvas widget rewrite in version 3.1 (#1912, #1909)
+- Fixed regression from Pinta 3.1 where the selection handles could become inverted in certain scenarios (#1917, #1921)
 
 ## [3.1](https://github.com/PintaProject/Pinta/release/tag/3.1) - 2025/12/23
 
