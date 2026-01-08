@@ -376,13 +376,16 @@ public sealed class CanvasWindow : Gtk.Grid
 
 		// Translate coordinates to the canvas widget.
 		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPoint);
-		PointD canvasPoint = document.Workspace.ViewPointToCanvas (viewPoint);
+
+		current_canvas_pos = document.Workspace.ViewPointToCanvas (viewPoint);
+		if (document.Workspace.PointInCanvas (current_canvas_pos))
+			chrome.LastCanvasCursorPoint = current_canvas_pos.ToInt ();
 
 		// Send the mouse move event to the current tool.
 		ToolMouseEventArgs tool_args = new () {
 			State = gesture.GetCurrentEventState (),
 			MouseButton = gesture.GetCurrentMouseButton (),
-			PointDouble = canvasPoint,
+			PointDouble = current_canvas_pos,
 			WindowPoint = viewPoint,
 			RootPoint = rootPoint,
 		};
