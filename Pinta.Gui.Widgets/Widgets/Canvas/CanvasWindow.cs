@@ -33,14 +33,16 @@ namespace Pinta;
 public sealed class CanvasWindow : Gtk.Grid
 {
 	private readonly Document document;
+	private readonly ChromeManager chrome;
+	private readonly ToolManager tools;
 
 	private readonly Ruler horizontal_ruler;
 	private readonly Ruler vertical_ruler;
 	private readonly Gtk.ScrolledWindow scrolled_window;
 	private readonly Gtk.EventControllerMotion motion_controller;
+	private readonly Gtk.GestureDrag drag_controller;
 	private readonly Gtk.GestureZoom gesture_zoom;
 
-	private PointD current_window_pos = PointD.Zero;
 	private PointD current_canvas_pos = PointD.Zero;
 	private double cumulative_zoom_amount;
 	private double last_scale_delta;
@@ -67,9 +69,7 @@ public sealed class CanvasWindow : Gtk.Grid
 		scrollController.OnDecelerate += (_, _) => gestureZoom.IsActive (); // Cancel scroll deceleration when zooming
 
 		PintaCanvas canvas = new (
-			chrome,
 			tools,
-			this,
 			document,
 			canvasGrid
 		) {
@@ -81,6 +81,15 @@ public sealed class CanvasWindow : Gtk.Grid
 		Gtk.Viewport viewPort = new ();
 		viewPort.AddController (scrollController);
 		viewPort.Child = canvas;
+
+		// Use the drag gesture to forward a sequence of mouse press -> move -> release events to the current tool.
+		// This is more reliable than using just a click gesture in combination with the move controller (see bug #1456)
+		// Note that we attach this to the root canvas widget, not the canvas, so that it can receive drags that start outside the canvas.
+		Gtk.GestureDrag dragController = Gtk.GestureDrag.New ();
+		dragController.SetButton (0); // Listen for all mouse buttons.
+		dragController.OnDragBegin += OnDragBegin;
+		dragController.OnDragUpdate += OnDragUpdate;
+		dragController.OnDragEnd += OnDragEnd;
 
 		Gtk.ScrolledWindow scrolledWindow = new () {
 			Hexpand = true,
@@ -108,6 +117,7 @@ public sealed class CanvasWindow : Gtk.Grid
 		Focusable = true;
 
 		AddController (gestureZoom);
+		AddController (dragController);
 		AddController (motionController);
 
 		// --- Initialization (Gtk.Grid)
@@ -123,6 +133,8 @@ public sealed class CanvasWindow : Gtk.Grid
 
 		Canvas = canvas;
 
+		this.chrome = chrome;
+		this.tools = tools;
 		this.document = document;
 
 		scrolled_window = scrolledWindow;
@@ -130,6 +142,7 @@ public sealed class CanvasWindow : Gtk.Grid
 		horizontal_ruler = horizontalRuler;
 		vertical_ruler = verticalRuler;
 		motion_controller = motionController;
+		drag_controller = dragController;
 
 		// --- Further initialization
 
@@ -165,19 +178,35 @@ public sealed class CanvasWindow : Gtk.Grid
 	}
 
 	private void HandleMotion (
-		Gtk.EventControllerMotion _,
+		Gtk.EventControllerMotion controller,
 		Gtk.EventControllerMotion.MotionSignalArgs args)
 	{
-		PointD newPosition = new (args.X, args.Y);
+		PointD rootPoint = new (args.X, args.Y);
 
 		// These coordinates are relative to our grid widget, so transform into the child image
 		// view's coordinates, and then to the canvas coordinates.
-		this.TranslateCoordinates (Canvas, newPosition, out PointD viewPos);
+		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPos);
 
-		current_window_pos = newPosition;
 		current_canvas_pos = document.Workspace.ViewPointToCanvas (viewPos);
 		horizontal_ruler.Position = current_canvas_pos.X;
 		vertical_ruler.Position = current_canvas_pos.Y;
+
+		// Forward mouse move events to the current tool when not dragging.
+		if (drag_controller.GetStartPoint (out _, out _))
+			return;
+
+		if (document.Workspace.PointInCanvas (current_canvas_pos))
+			chrome.LastCanvasCursorPoint = current_canvas_pos.ToInt ();
+
+		ToolMouseEventArgs tool_args = new () {
+			State = controller.GetCurrentEventState (),
+			MouseButton = MouseButton.None,
+			PointDouble = current_canvas_pos,
+			WindowPoint = viewPos,
+			RootPoint = rootPoint,
+		};
+
+		tools.DoMouseMove (document, tool_args);
 	}
 
 	private void HandleGestureZoomScaleChanged (object? sender, EventArgs e)
@@ -205,9 +234,6 @@ public sealed class CanvasWindow : Gtk.Grid
 		}
 		last_scale_delta = gesture_zoom.GetScaleDelta () - 1;
 	}
-
-	public PointD WindowMousePosition
-		=> current_window_pos;
 
 	public bool IsMouseOnCanvas
 		=> motion_controller.ContainsPointer;
@@ -313,5 +339,102 @@ public sealed class CanvasWindow : Gtk.Grid
 		}
 
 		return true;
+	}
+
+	private void OnDragBegin (Gtk.GestureDrag gesture, Gtk.GestureDrag.DragBeginSignalArgs args)
+	{
+		// A mouse click on the canvas should grab focus away from any toolbar widgets, etc
+		// Using the root canvas widget works best - if the drawing area is given focus, the scroll
+		// widget jumps back to the origin.
+		GrabFocus ();
+
+		// Note: if we ever regain support for docking multiple canvas
+		// widgets side by side (like Pinta 1.7 could), a mouse click should switch
+		// the active document to this document.
+
+		// Send the mouse press event to the current tool.
+		// Translate coordinates to the canvas widget.
+		PointD rootPoint = new (args.StartX, args.StartY);
+		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPoint);
+		PointD canvasPoint = document.Workspace.ViewPointToCanvas (viewPoint);
+
+		ToolMouseEventArgs tool_args = new () {
+			State = gesture.GetCurrentEventState (),
+			MouseButton = gesture.GetCurrentMouseButton (),
+			PointDouble = canvasPoint,
+			WindowPoint = viewPoint,
+			RootPoint = rootPoint,
+		};
+
+		tools.DoMouseDown (document, tool_args);
+	}
+
+	private void OnDragUpdate (Gtk.GestureDrag gesture, Gtk.GestureDrag.DragUpdateSignalArgs args)
+	{
+		gesture.GetStartPoint (out double startX, out double startY);
+		PointD rootPoint = new (startX + args.OffsetX, startY + args.OffsetY);
+
+		// Translate coordinates to the canvas widget.
+		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPoint);
+		PointD canvasPoint = document.Workspace.ViewPointToCanvas (viewPoint);
+
+		// Send the mouse move event to the current tool.
+		ToolMouseEventArgs tool_args = new () {
+			State = gesture.GetCurrentEventState (),
+			MouseButton = gesture.GetCurrentMouseButton (),
+			PointDouble = canvasPoint,
+			WindowPoint = viewPoint,
+			RootPoint = rootPoint,
+		};
+
+		tools.DoMouseMove (document, tool_args);
+	}
+
+	private void OnDragEnd (Gtk.GestureDrag gesture, Gtk.GestureDrag.DragEndSignalArgs args)
+	{
+		gesture.GetStartPoint (out double startX, out double startY);
+		PointD rootPoint = new (startX + args.OffsetX, startY + args.OffsetY);
+
+		// Translate coordinates to the canvas widget.
+		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPoint);
+		PointD canvasPoint = document.Workspace.ViewPointToCanvas (viewPoint);
+
+		// Send the mouse release event to the current tool.
+		ToolMouseEventArgs tool_args = new () {
+			State = gesture.GetCurrentEventState (),
+			MouseButton = gesture.GetCurrentMouseButton (),
+			PointDouble = canvasPoint,
+			WindowPoint = viewPoint,
+			RootPoint = rootPoint,
+		};
+
+		tools.DoMouseUp (document, tool_args);
+	}
+
+	public bool DoKeyPressEvent (
+		Gtk.EventControllerKey controller,
+		Gtk.EventControllerKey.KeyPressedSignalArgs args)
+	{
+		// Give the current tool a chance to handle the key press
+		ToolKeyEventArgs tool_args = new () {
+			Event = controller.GetCurrentEvent (),
+			Key = args.GetKey (),
+			State = args.State,
+		};
+
+		return tools.DoKeyDown (document, tool_args);
+	}
+
+	public bool DoKeyReleaseEvent (
+		Gtk.EventControllerKey controller,
+		Gtk.EventControllerKey.KeyReleasedSignalArgs args)
+	{
+		ToolKeyEventArgs tool_args = new () {
+			Event = controller.GetCurrentEvent (),
+			Key = args.GetKey (),
+			State = args.State,
+		};
+
+		return tools.DoKeyUp (document, tool_args);
 	}
 }
