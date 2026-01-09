@@ -357,16 +357,14 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		hexBox.Append (hexEntry);
 
 		ColorPickerSlider.Settings cpsArgs = new () {
-			Text = string.Empty,
 			SliderWidth = slider_width,
 		};
 
 		ColorPickerSlider hueSlider = new (
 			settings: cpsArgs with {
-				Max = 360,
-				Text = Translations.GetString ("Hue"),
 				InitialValue = ExtractTargetedColor (adjustable, true).ToHsv ().Hue,
-			}
+			},
+			ColorPickerSlider.Component.Hue
 		);
 		hueSlider.Gradient.SetDrawFunc (
 			(_, c, w, h) => hueSlider.DrawGradient (
@@ -394,10 +392,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		ColorPickerSlider saturationSlider = new (
 			settings: cpsArgs with {
-				Max = 100,
-				Text = Translations.GetString ("Sat"),
 				InitialValue = ExtractTargetedColor (adjustable, true).ToHsv ().Sat * 100.0,
-			}
+			},
+			ColorPickerSlider.Component.Saturation
 		);
 		saturationSlider.Gradient.SetDrawFunc (
 			(_, c, w, h) => saturationSlider.DrawGradient (
@@ -416,10 +413,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		ColorPickerSlider valueSlider = new (
 			settings: cpsArgs with {
-				Max = 100,
-				Text = Translations.GetString ("Value"),
 				InitialValue = ExtractTargetedColor (adjustable, true).ToHsv ().Val * 100.0,
-			}
+			},
+			ColorPickerSlider.Component.Value
 		);
 		valueSlider.Gradient.SetDrawFunc (
 			(_, c, w, h) => valueSlider.DrawGradient (
@@ -438,10 +434,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		ColorPickerSlider redSlider = new (
 			settings: cpsArgs with {
-				Max = 255,
-				Text = Translations.GetString ("Red"),
 				InitialValue = ExtractTargetedColor (adjustable, true).R * 255.0,
-			}
+			},
+			ColorPickerSlider.Component.Red
 		);
 		redSlider.Gradient.SetDrawFunc (
 			(_, c, w, h) => redSlider.DrawGradient (
@@ -460,10 +455,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		ColorPickerSlider greenSlider = new (
 			settings: cpsArgs with {
-				Max = 255,
-				Text = Translations.GetString ("Green"),
 				InitialValue = ExtractTargetedColor (adjustable, true).G * 255.0,
-			}
+			},
+			ColorPickerSlider.Component.Green
 		);
 		greenSlider.Gradient.SetDrawFunc (
 			(_, c, w, h) => greenSlider.DrawGradient (
@@ -482,10 +476,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		ColorPickerSlider blueSlider = new (
 			settings: cpsArgs with {
-				Max = 255,
-				Text = Translations.GetString ("Blue"),
 				InitialValue = ExtractTargetedColor (adjustable, true).B * 255.0,
-			}
+			},
+			ColorPickerSlider.Component.Blue
 		);
 		blueSlider.Gradient.SetDrawFunc (
 			(_, c, w, h) => blueSlider.DrawGradient (
@@ -504,10 +497,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		ColorPickerSlider alphaSlider = new (
 			settings: cpsArgs with {
-				Max = 255,
-				Text = Translations.GetString ("Alpha"),
 				InitialValue = ExtractTargetedColor (adjustable, true).A * 255.0,
-			}
+			},
+			ColorPickerSlider.Component.Alpha
 		);
 		alphaSlider.Gradient.SetDrawFunc (
 			(_, c, w, h) => alphaSlider.DrawGradient (
