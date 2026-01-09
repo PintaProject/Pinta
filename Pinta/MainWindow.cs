@@ -248,7 +248,7 @@ internal sealed class MainWindow
 			var canvas_window = (CanvasWindow) PintaCore.Workspace.ActiveWorkspace.CanvasWindow;
 
 			if ((canvas_window.HasFocus || canvas_window.IsMouseOnCanvas) &&
-				 canvas_window.Canvas.DoKeyPressEvent (controller, args)) {
+				 canvas_window.DoKeyPressEvent (controller, args)) {
 				return true;
 			}
 		}
@@ -282,7 +282,7 @@ internal sealed class MainWindow
 		var canvas_window = (CanvasWindow) PintaCore.Workspace.ActiveWorkspace.CanvasWindow;
 
 		if (canvas_window.HasFocus || canvas_window.IsMouseOnCanvas)
-			canvas_window.Canvas.DoKeyReleaseEvent (controller, args);
+			canvas_window.DoKeyReleaseEvent (controller, args);
 	}
 
 	private bool SendToFocusWidget (Gtk.EventControllerKey key_controller)
