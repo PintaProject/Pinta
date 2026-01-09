@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using Cairo;
 using Pinta.Core;
@@ -22,15 +23,6 @@ public sealed class ColorPickerSlider : Gtk.Box
 		Alpha
 	}
 
-	public sealed class ValueChangedEventArgs (double value) : EventArgs
-	{
-		public double Value { get; } = value;
-	}
-
-	public readonly record struct Settings (
-		double InitialValue,
-		int SliderWidth);
-
 	private const int PADDING_WIDTH = 14;
 	private const int PADDING_HEIGHT = 10;
 
@@ -39,34 +31,38 @@ public sealed class ColorPickerSlider : Gtk.Box
 	private readonly Gtk.Entry input_field;
 	private readonly Gtk.Overlay slider_overlay;
 	private readonly Gtk.DrawingArea cursor_area;
+	private Color color;
 
 	public Gtk.DrawingArea Gradient { get; }
 
-	public event EventHandler<ValueChangedEventArgs>? OnValueChange;
+	public event EventHandler? OnColorChanged;
 
-	public ColorPickerSlider (Settings settings, Component component)
+	public ColorPickerSlider (Component component, Color initialColor, int initialWidth)
 	{
 		Gtk.Scale sliderControl = new () {
-			WidthRequest = settings.SliderWidth,
+			WidthRequest = initialWidth,
 			Opacity = 0,
 		};
 		sliderControl.SetOrientation (Gtk.Orientation.Horizontal);
 		sliderControl.SetAdjustment (Gtk.Adjustment.New (0, 0, GetMaxValue (component) + 1, 1, 1, 1));
-		sliderControl.SetValue (settings.InitialValue);
+		sliderControl.SetValue (ExtractValue (initialColor, component));
 		sliderControl.OnChangeValue += OnSliderControlChangeValue;
 
 		Gtk.DrawingArea cursorArea = new ();
-		cursorArea.SetSizeRequest (settings.SliderWidth, this.GetHeight ());
+		cursorArea.SetSizeRequest (initialWidth, this.GetHeight ());
 		cursorArea.SetDrawFunc (CursorAreaDrawingFunction);
 
 		Gtk.DrawingArea gradient = new ();
-		gradient.SetSizeRequest (settings.SliderWidth, this.GetHeight ());
+		gradient.SetSizeRequest (initialWidth, this.GetHeight ());
+		gradient.SetDrawFunc ((area, context, width, height) => {
+			DrawGradient (context, width, height, CreateGradient (color, component));
+		});
 
 		Gtk.Label sliderLabel = new () { WidthRequest = 50 };
 		sliderLabel.SetLabel (GetLabelText (component));
 
 		Gtk.Overlay sliderOverlay = new () {
-			WidthRequest = settings.SliderWidth,
+			WidthRequest = initialWidth,
 			HeightRequest = this.GetHeight (),
 		};
 		sliderOverlay.AddOverlay (gradient);
@@ -78,7 +74,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 			WidthRequest = 50,
 			Hexpand = false,
 		};
-		inputField.SetText (Convert.ToInt32 (settings.InitialValue).ToString ());
+		inputField.SetText (Convert.ToInt32 (ExtractValue (initialColor, component)).ToString ());
 		inputField.OnChanged += OnInputFieldChanged;
 
 		// --- Initialization (Gtk.Box)
@@ -89,6 +85,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 		// --- References to keep
 
+		color = initialColor;
 		cursor_area = cursorArea;
 		slider_control = sliderControl;
 		slider_overlay = sliderOverlay;
@@ -139,7 +136,8 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 		input_field.SetText (clampedValue.ToString (CultureInfo.InvariantCulture));
 
-		OnValueChange?.Invoke (this, new ValueChangedEventArgs (clampedValue));
+		color = UpdateValue (color, component, clampedValue);
+		OnColorChanged?.Invoke (this, new ());
 
 		return false;
 	}
@@ -162,7 +160,8 @@ public sealed class ColorPickerSlider : Gtk.Box
 		if (!success)
 			return;
 
-		OnValueChange?.Invoke (this, new ValueChangedEventArgs (parsed));
+		color = UpdateValue (color, component, parsed);
+		OnColorChanged?.Invoke (this, new ());
 	}
 
 	public void SetSliderWidth (int sliderWidth)
@@ -173,22 +172,26 @@ public sealed class ColorPickerSlider : Gtk.Box
 		slider_overlay.WidthRequest = sliderWidth;
 	}
 
-	public void SetValue (double val)
-	{
-		slider_control.SetValue (val);
+	public Color Color {
+		get => color;
+		set {
+			color = value;
+			double componentValue = ExtractValue (value, component);
+			slider_control.SetValue (componentValue);
 
-		if (!input_field.IsEditingText ()) {
-			// Ensure we don't get an infinite loop of "value changed" events
-			string newText = Convert.ToInt32 (val).ToString ();
-			if (newText != input_field.GetText ())
-				input_field.SetText (newText);
+			if (!input_field.IsEditingText ()) {
+				// Ensure we don't get an infinite loop of "value changed" events
+				string newText = Convert.ToInt32 (componentValue).ToString ();
+				if (newText != input_field.GetText ())
+					input_field.SetText (newText);
+			}
+
+			Gradient.QueueDraw ();
+			cursor_area.QueueDraw ();
 		}
-
-		Gradient.QueueDraw ();
-		cursor_area.QueueDraw ();
 	}
 
-	public void DrawGradient (Context context, int width, int height, ColorGradient<Color> colors)
+	private void DrawGradient (Context context, int width, int height, ColorGradient<Color> colors)
 	{
 		context.Antialias = Antialias.None;
 
@@ -256,12 +259,77 @@ public sealed class ColorPickerSlider : Gtk.Box
 		context.Fill ();
 	}
 
+	private static double ExtractValue (Color color, Component component) => component switch {
+		Component.Hue => color.ToHsv ().Hue,
+		Component.Saturation => color.ToHsv ().Sat * 100.0,
+		Component.Value => color.ToHsv ().Val * 100.0,
+		Component.Red => color.R * 255.0,
+		Component.Green => color.G * 255.0,
+		Component.Blue => color.B * 255.0,
+		Component.Alpha => color.A * 255.0,
+		_ => throw new ArgumentOutOfRangeException (nameof (component), component, null)
+	};
+
+	private static Color UpdateValue (Color color, Component component, double val) => component switch {
+		Component.Hue => color.CopyHsv (hue: val),
+		Component.Saturation => color.CopyHsv (sat: val / 100.0),
+		Component.Value => color.CopyHsv (value: val / 100.0),
+		Component.Red => color with { R = val / 255.0 },
+		Component.Green => color with { G = val / 255.0 },
+		Component.Blue => color with { B = val / 255.0 },
+		Component.Alpha => color with { A = val / 255.0 },
+		_ => throw new ArgumentOutOfRangeException (nameof (component), component, null)
+	};
+
 	private static double GetMaxValue (Component component) => component switch {
 		Component.Hue => 360,
 		Component.Saturation or Component.Value => 100,
 		Component.Red or Component.Green or Component.Blue or Component.Alpha => 255,
 		_ => throw new ArgumentOutOfRangeException ()
 	};
+
+	private static ColorGradient<Color> CreateGradient (Color color, Component component)
+	{
+		return component switch {
+			Component.Hue => ColorGradient.Create (
+				startColor: color.CopyHsv (hue: 0),
+				endColor: color.CopyHsv (hue: 360),
+				range: NumberRange.Create<double> (0, 360),
+				new Dictionary<double, Color> {
+					[60] = color.CopyHsv (hue: 60),
+					[120] = color.CopyHsv (hue: 120),
+					[180] = color.CopyHsv (hue: 180),
+					[240] = color.CopyHsv (hue: 240),
+					[300] = color.CopyHsv (hue: 300),
+				}
+			),
+			Component.Saturation => ColorGradient.Create (
+				color.CopyHsv (sat: 0),
+				color.CopyHsv (sat: 1)
+			),
+			Component.Value => ColorGradient.Create (
+				color.CopyHsv (value: 0),
+				color.CopyHsv (value: 1)
+			),
+			Component.Red => ColorGradient.Create (
+				color with { R = 0 },
+				color with { R = 1 }
+			),
+			Component.Green => ColorGradient.Create (
+				color with { G = 0 },
+				color with { G = 1 }
+			),
+			Component.Blue => ColorGradient.Create (
+				color with { B = 0 },
+				color with { B = 1 }
+			),
+			Component.Alpha => ColorGradient.Create (
+				color with { A = 0 },
+				color with { A = 1 }
+			),
+			_ => throw new ArgumentOutOfRangeException (nameof (component), component, null)
+		};
+	}
 
 	private static string GetLabelText (Component component) => component switch {
 		Component.Hue => Translations.GetString ("Hue"),

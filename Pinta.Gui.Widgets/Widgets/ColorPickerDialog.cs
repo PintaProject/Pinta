@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
@@ -341,8 +340,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		// Handles the ColorPickerSliders + Hex entry.
 
+		Color initialColor = ExtractTargetedColor (adjustable, primarySelected);
+
 		Gtk.Entry hexEntry = new () {
-			Text_ = ExtractTargetedColor (adjustable, true).ToHex (),
+			Text_ = initialColor.ToHex (),
 			MaxWidthChars = 10,
 		};
 		hexEntry.OnChanged += HexEntry_OnChanged;
@@ -356,163 +357,73 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		hexBox.Append (hexLabel);
 		hexBox.Append (hexEntry);
 
-		ColorPickerSlider.Settings cpsArgs = new () {
-			SliderWidth = slider_width,
-		};
-
 		ColorPickerSlider hueSlider = new (
-			settings: cpsArgs with {
-				InitialValue = ExtractTargetedColor (adjustable, true).ToHsv ().Hue,
-			},
-			ColorPickerSlider.Component.Hue
+			ColorPickerSlider.Component.Hue,
+			initialColor,
+			slider_width
 		);
-		hueSlider.Gradient.SetDrawFunc (
-			(_, c, w, h) => hueSlider.DrawGradient (
-				c,
-				w,
-				h,
-				ColorGradient.Create (
-					startColor: CurrentColor.CopyHsv (hue: 0),
-					endColor: CurrentColor.CopyHsv (hue: 360),
-					range: NumberRange.Create<double> (0, 360),
-					new Dictionary<double, Color> {
-						[60] = CurrentColor.CopyHsv (hue: 60),
-						[120] = CurrentColor.CopyHsv (hue: 120),
-						[180] = CurrentColor.CopyHsv (hue: 180),
-						[240] = CurrentColor.CopyHsv (hue: 240),
-						[300] = CurrentColor.CopyHsv (hue: 300),
-					}
-				)
-			)
-		);
-		hueSlider.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor.CopyHsv (hue: args.Value);
+		hueSlider.OnColorChanged += (_, _) => {
+			CurrentColor = hueSlider.Color;
 			UpdateView ();
 		};
 
 		ColorPickerSlider saturationSlider = new (
-			settings: cpsArgs with {
-				InitialValue = ExtractTargetedColor (adjustable, true).ToHsv ().Sat * 100.0,
-			},
-			ColorPickerSlider.Component.Saturation
+			ColorPickerSlider.Component.Saturation,
+			initialColor,
+			slider_width
 		);
-		saturationSlider.Gradient.SetDrawFunc (
-			(_, c, w, h) => saturationSlider.DrawGradient (
-				c,
-				w,
-				h,
-				ColorGradient.Create (
-					CurrentColor.CopyHsv (sat: 0),
-					CurrentColor.CopyHsv (sat: 1))
-			)
-		);
-		saturationSlider.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor.CopyHsv (sat: args.Value / 100.0);
+		saturationSlider.OnColorChanged += (_, _) => {
+			CurrentColor = saturationSlider.Color;
 			UpdateView ();
 		};
 
 		ColorPickerSlider valueSlider = new (
-			settings: cpsArgs with {
-				InitialValue = ExtractTargetedColor (adjustable, true).ToHsv ().Val * 100.0,
-			},
-			ColorPickerSlider.Component.Value
+			ColorPickerSlider.Component.Value,
+			initialColor,
+			slider_width
 		);
-		valueSlider.Gradient.SetDrawFunc (
-			(_, c, w, h) => valueSlider.DrawGradient (
-				c,
-				w,
-				h,
-				ColorGradient.Create (
-					CurrentColor.CopyHsv (value: 0),
-					CurrentColor.CopyHsv (value: 1))
-			)
-		);
-		valueSlider.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor.CopyHsv (value: args.Value / 100.0);
+		valueSlider.OnColorChanged += (_, _) => {
+			CurrentColor = valueSlider.Color;
 			UpdateView ();
 		};
 
 		ColorPickerSlider redSlider = new (
-			settings: cpsArgs with {
-				InitialValue = ExtractTargetedColor (adjustable, true).R * 255.0,
-			},
-			ColorPickerSlider.Component.Red
+			ColorPickerSlider.Component.Red,
+			initialColor,
+			slider_width
 		);
-		redSlider.Gradient.SetDrawFunc (
-			(_, c, w, h) => redSlider.DrawGradient (
-				c,
-				w,
-				h,
-				ColorGradient.Create (
-					CurrentColor with { R = 0 },
-					CurrentColor with { R = 1 })
-			)
-		);
-		redSlider.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor with { R = args.Value / 255.0 };
+		redSlider.OnColorChanged += (_, _) => {
+			CurrentColor = redSlider.Color;
 			UpdateView ();
 		};
 
 		ColorPickerSlider greenSlider = new (
-			settings: cpsArgs with {
-				InitialValue = ExtractTargetedColor (adjustable, true).G * 255.0,
-			},
-			ColorPickerSlider.Component.Green
+			ColorPickerSlider.Component.Green,
+			initialColor,
+			slider_width
 		);
-		greenSlider.Gradient.SetDrawFunc (
-			(_, c, w, h) => greenSlider.DrawGradient (
-				c,
-				w,
-				h,
-				ColorGradient.Create (
-					CurrentColor with { G = 0 },
-					CurrentColor with { G = 1 })
-			)
-		);
-		greenSlider.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor with { G = args.Value / 255.0 };
+		greenSlider.OnColorChanged += (_, _) => {
+			CurrentColor = greenSlider.Color;
 			UpdateView ();
 		};
 
 		ColorPickerSlider blueSlider = new (
-			settings: cpsArgs with {
-				InitialValue = ExtractTargetedColor (adjustable, true).B * 255.0,
-			},
-			ColorPickerSlider.Component.Blue
+			ColorPickerSlider.Component.Blue,
+			initialColor,
+			slider_width
 		);
-		blueSlider.Gradient.SetDrawFunc (
-			(_, c, w, h) => blueSlider.DrawGradient (
-				c,
-				w,
-				h,
-				ColorGradient.Create (
-					CurrentColor with { B = 0 },
-					CurrentColor with { B = 1 })
-			)
-		);
-		blueSlider.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor with { B = args.Value / 255.0 };
+		blueSlider.OnColorChanged += (_, _) => {
+			CurrentColor = blueSlider.Color;
 			UpdateView ();
 		};
 
 		ColorPickerSlider alphaSlider = new (
-			settings: cpsArgs with {
-				InitialValue = ExtractTargetedColor (adjustable, true).A * 255.0,
-			},
-			ColorPickerSlider.Component.Alpha
+			ColorPickerSlider.Component.Alpha,
+			initialColor,
+			slider_width
 		);
-		alphaSlider.Gradient.SetDrawFunc (
-			(_, c, w, h) => alphaSlider.DrawGradient (
-				c,
-				w,
-				h,
-				ColorGradient.Create (
-					CurrentColor with { A = 0 },
-					CurrentColor with { A = 1 })
-			)
-		);
-		alphaSlider.OnValueChange += (sender, args) => {
-			CurrentColor = CurrentColor with { A = args.Value / 255.0 };
+		alphaSlider.OnColorChanged += (_, _) => {
+			CurrentColor = alphaSlider.Color;
 			UpdateView ();
 		};
 
@@ -874,29 +785,26 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		UpdateView ();
 	}
 
-
 	private void UpdateView ()
 	{
 		// Redraw picker surfaces
 		picker_surface_cursor.QueueDraw ();
 		picker_surface.QueueDraw ();
 
-		// Redraw cps
-		HsvColor hsv = CurrentColor.ToHsv ();
-
-		hue_slider.SetValue (hsv.Hue);
-		saturation_slider.SetValue (hsv.Sat * 100.0);
-		value_slider.SetValue (hsv.Val * 100.0);
-
-		red_slider.SetValue (CurrentColor.R * 255.0);
-		green_slider.SetValue (CurrentColor.G * 255.0);
-		blue_slider.SetValue (CurrentColor.B * 255.0);
-		alpha_slider.SetValue (CurrentColor.A * 255.0);
+		// Update sliders with current color
+		Color current = CurrentColor;
+		hue_slider.Color = current;
+		saturation_slider.Color = current;
+		value_slider.Color = current;
+		red_slider.Color = current;
+		green_slider.Color = current;
+		blue_slider.Color = current;
+		alpha_slider.Color = current;
 
 
 		// Update hex
 		if (GetFocus ()?.Parent != hex_entry)
-			hex_entry.SetText (CurrentColor.ToHex ());
+			hex_entry.SetText (current.ToHex ());
 
 		// Redraw palette displays
 		foreach (var display in color_displays)
