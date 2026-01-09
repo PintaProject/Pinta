@@ -11,21 +11,30 @@ namespace Pinta.Gui.Widgets;
 // with a drawingarea
 public sealed class ColorPickerSlider : Gtk.Box
 {
+	public enum Component
+	{
+		Hue,
+		Saturation,
+		Value,
+		Red,
+		Green,
+		Blue,
+		Alpha
+	}
+
 	public sealed class ValueChangedEventArgs (double value) : EventArgs
 	{
 		public double Value { get; } = value;
 	}
 
 	public readonly record struct Settings (
-		int Max,
-		string Text, // required
 		double InitialValue,
 		int SliderWidth);
 
 	private const int PADDING_WIDTH = 14;
 	private const int PADDING_HEIGHT = 10;
 
-	private readonly Settings settings;
+	private readonly Component component;
 	private readonly Gtk.Scale slider_control;
 	private readonly Gtk.Entry input_field;
 	private readonly Gtk.Overlay slider_overlay;
@@ -35,14 +44,14 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 	public event EventHandler<ValueChangedEventArgs>? OnValueChange;
 
-	public ColorPickerSlider (Settings settings)
+	public ColorPickerSlider (Settings settings, Component component)
 	{
 		Gtk.Scale sliderControl = new () {
 			WidthRequest = settings.SliderWidth,
 			Opacity = 0,
 		};
 		sliderControl.SetOrientation (Gtk.Orientation.Horizontal);
-		sliderControl.SetAdjustment (Gtk.Adjustment.New (0, 0, settings.Max + 1, 1, 1, 1));
+		sliderControl.SetAdjustment (Gtk.Adjustment.New (0, 0, GetMaxValue (component) + 1, 1, 1, 1));
 		sliderControl.SetValue (settings.InitialValue);
 		sliderControl.OnChangeValue += OnSliderControlChangeValue;
 
@@ -54,7 +63,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 		gradient.SetSizeRequest (settings.SliderWidth, this.GetHeight ());
 
 		Gtk.Label sliderLabel = new () { WidthRequest = 50 };
-		sliderLabel.SetLabel (settings.Text);
+		sliderLabel.SetLabel (GetLabelText (component));
 
 		Gtk.Overlay sliderOverlay = new () {
 			WidthRequest = settings.SliderWidth,
@@ -87,7 +96,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 		Gradient = gradient;
 
-		this.settings = settings;
+		this.component = component;
 	}
 
 	private void CursorAreaDrawingFunction (
@@ -98,7 +107,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 	{
 		const int OUTLINE_WIDTH = 2;
 
-		double currentPosition = slider_control.GetValue () / settings.Max * (width - 2 * PADDING_WIDTH) + PADDING_WIDTH;
+		double currentPosition = slider_control.GetValue () / GetMaxValue (component) * (width - 2 * PADDING_WIDTH) + PADDING_WIDTH;
 
 		ReadOnlySpan<PointD> cursorPoly = [
 			new (currentPosition, height / 2),
@@ -126,7 +135,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 		Gtk.Range.ChangeValueSignalArgs args)
 	{
 		// The provided value is from the scroll action, so we need to clamp to the range!
-		double clampedValue = Math.Clamp (args.Value, 0, settings.Max);
+		double clampedValue = Math.Clamp (args.Value, 0, GetMaxValue (component));
 
 		input_field.SetText (clampedValue.ToString (CultureInfo.InvariantCulture));
 
@@ -144,8 +153,9 @@ public sealed class ColorPickerSlider : Gtk.Box
 			CultureInfo.InvariantCulture,
 			out double parsed);
 
-		if (parsed > settings.Max) {
-			parsed = settings.Max;
+		double maxValue = GetMaxValue (component);
+		if (parsed > maxValue) {
+			parsed = maxValue;
 			inputField.SetText (Convert.ToInt32 (parsed).ToString ());
 		}
 
@@ -246,4 +256,22 @@ public sealed class ColorPickerSlider : Gtk.Box
 		context.Fill ();
 	}
 
+	private static double GetMaxValue (Component component) => component switch {
+		Component.Hue => 360,
+		Component.Saturation or Component.Value => 100,
+		Component.Red or Component.Green or Component.Blue or Component.Alpha => 255,
+		_ => throw new ArgumentOutOfRangeException ()
+	};
+
+	private static string GetLabelText (Component component) => component switch {
+		Component.Hue => Translations.GetString ("Hue"),
+		// Translators: this is an abbreviation for "Saturation"
+		Component.Saturation => Translations.GetString ("Sat"),
+		Component.Value => Translations.GetString ("Value"),
+		Component.Red => Translations.GetString ("Red"),
+		Component.Green => Translations.GetString ("Green"),
+		Component.Blue => Translations.GetString ("Blue"),
+		Component.Alpha => Translations.GetString ("Alpha"),
+		_ => throw new ArgumentOutOfRangeException (nameof (component), component, null)
+	};
 }
