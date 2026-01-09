@@ -35,9 +35,7 @@ public sealed class PintaCanvas : Gtk.Picture
 {
 	private readonly CanvasRenderer cr;
 	private readonly Document document;
-	private readonly CanvasWindow canvas_window;
 	private readonly ICanvasGridService canvas_grid;
-	private readonly Gtk.GestureDrag drag_controller;
 
 	private uint queued_update_id = 0;
 
@@ -51,19 +49,14 @@ public sealed class PintaCanvas : Gtk.Picture
 	private readonly uint selection_animation_timer_id;
 	private float selection_animation_dash_offset;
 
-	private readonly ChromeManager chrome;
 	private readonly ToolManager tools;
 
 	public PintaCanvas (
-		ChromeManager chrome,
 		ToolManager tools,
-		CanvasWindow window,
 		Document document,
 		ICanvasGridService canvasGrid)
 	{
-		this.chrome = chrome;
 		this.tools = tools;
-		canvas_window = window;
 		canvas_grid = canvasGrid;
 		this.document = document;
 
@@ -79,20 +72,6 @@ public sealed class PintaCanvas : Gtk.Picture
 
 		// Timer for selection outline animation
 		selection_animation_timer_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, 80, SelectionAnimationTick);
-
-		// Use the drag gesture to forward a sequence of mouse press -> move -> release events to the current tool.
-		// This is more reliable than using just a click gesture in combination with the move controller (see bug #1456)
-		drag_controller = Gtk.GestureDrag.New ();
-		drag_controller.SetButton (0); // Listen for all mouse buttons.
-		drag_controller.OnDragBegin += OnDragBegin;
-		drag_controller.OnDragUpdate += OnDragUpdate;
-		drag_controller.OnDragEnd += OnDragEnd;
-		AddController (drag_controller);
-
-		// Forward mouse move events to the current tool when not dragging.
-		Gtk.EventControllerMotion motion_controller = Gtk.EventControllerMotion.New ();
-		motion_controller.OnMotion += OnMouseMove;
-		AddController (motion_controller);
 
 		// If there is additional space available, keep the image centered and prevent stretching.
 		Hexpand = false;
@@ -467,122 +446,6 @@ public sealed class PintaCanvas : Gtk.Picture
 		Size viewSize = document.Workspace.ViewSize;
 		SetSizeRequest (viewSize.Width, viewSize.Height);
 	}
-
-	private void OnDragBegin (Gtk.GestureDrag gesture, Gtk.GestureDrag.DragBeginSignalArgs args)
-	{
-		// Note we don't call gesture.SetState (Gtk.EventSequenceState.Claimed) here, so
-		// that the CanvasWindow can also receive motion events to update the root window mouse position.
-
-		// A mouse click on the canvas should grab focus away from any toolbar widgets, etc
-		// Using the root canvas widget works best - if the drawing area is given focus, the scroll
-		// widget jumps back to the origin.
-		canvas_window.GrabFocus ();
-
-		// Note: if we ever regain support for docking multiple canvas
-		// widgets side by side (like Pinta 1.7 could), a mouse click should switch
-		// the active document to this document.
-
-		// Send the mouse press event to the current tool.
-		PointD window_point = new (args.StartX, args.StartY);
-		PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
-
-		ToolMouseEventArgs tool_args = new () {
-			State = gesture.GetCurrentEventState (),
-			MouseButton = gesture.GetCurrentMouseButton (),
-			PointDouble = canvas_point,
-			WindowPoint = window_point,
-			RootPoint = canvas_window.WindowMousePosition,
-		};
-
-		tools.DoMouseDown (document, tool_args);
-	}
-
-	private void OnDragUpdate (Gtk.GestureDrag gesture, Gtk.GestureDrag.DragUpdateSignalArgs args)
-	{
-		// Send the mouse move event to the current tool.
-		gesture.GetStartPoint (out double startX, out double startY);
-		PointD window_point = new (startX + args.OffsetX, startY + args.OffsetY);
-		PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
-
-		ToolMouseEventArgs tool_args = new () {
-			State = gesture.GetCurrentEventState (),
-			MouseButton = gesture.GetCurrentMouseButton (),
-			PointDouble = canvas_point,
-			WindowPoint = window_point,
-			RootPoint = canvas_window.WindowMousePosition,
-		};
-
-		tools.DoMouseMove (document, tool_args);
-	}
-
-	private void OnDragEnd (Gtk.GestureDrag gesture, Gtk.GestureDrag.DragEndSignalArgs args)
-	{
-		// Send the mouse release event to the current tool.
-		gesture.GetStartPoint (out double startX, out double startY);
-		PointD window_point = new (startX + args.OffsetX, startY + args.OffsetY);
-		PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
-
-		ToolMouseEventArgs tool_args = new () {
-			State = gesture.GetCurrentEventState (),
-			MouseButton = gesture.GetCurrentMouseButton (),
-			PointDouble = canvas_point,
-			WindowPoint = window_point,
-			RootPoint = canvas_window.WindowMousePosition,
-		};
-
-		tools.DoMouseUp (document, tool_args);
-	}
-
-	private void OnMouseMove (Gtk.EventControllerMotion controller, Gtk.EventControllerMotion.MotionSignalArgs args)
-	{
-		// Don't send duplicate mouse move events while a drag is active.
-		if (drag_controller.GetStartPoint (out _, out _))
-			return;
-
-		PointD window_point = new (args.X, args.Y);
-		PointD canvas_point = document.Workspace.ViewPointToCanvas (window_point);
-
-		if (document.Workspace.PointInCanvas (canvas_point))
-			chrome.LastCanvasCursorPoint = canvas_point.ToInt ();
-
-		ToolMouseEventArgs tool_args = new () {
-			State = controller.GetCurrentEventState (),
-			MouseButton = MouseButton.None,
-			PointDouble = canvas_point,
-			WindowPoint = window_point,
-			RootPoint = canvas_window.WindowMousePosition,
-		};
-
-		tools.DoMouseMove (document, tool_args);
-	}
-
-	public bool DoKeyPressEvent (
-		Gtk.EventControllerKey controller,
-		Gtk.EventControllerKey.KeyPressedSignalArgs args)
-	{
-		// Give the current tool a chance to handle the key press
-		ToolKeyEventArgs tool_args = new () {
-			Event = controller.GetCurrentEvent (),
-			Key = args.GetKey (),
-			State = args.State,
-		};
-
-		return tools.DoKeyDown (document, tool_args);
-	}
-
-	public bool DoKeyReleaseEvent (
-		Gtk.EventControllerKey controller,
-		Gtk.EventControllerKey.KeyReleasedSignalArgs args)
-	{
-		ToolKeyEventArgs tool_args = new () {
-			Event = controller.GetCurrentEvent (),
-			Key = args.GetKey (),
-			State = args.State,
-		};
-
-		return tools.DoKeyUp (document, tool_args);
-	}
-
 
 	#region Selection outline animation
 	private bool SelectionAnimationTick ()
