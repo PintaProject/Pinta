@@ -1453,6 +1453,10 @@ msgstr "رمز مندلبروت"
 msgid "Martian Lava"
 msgstr "حمم المريخ"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "متوسط"
@@ -1465,6 +1469,10 @@ msgstr "شريط القوائم"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "ادمج الطّبقة مع ما تحتها"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -1785,8 +1793,8 @@ msgid ""
 "apply to your images, and also has the ability to create unlimited layers to "
 "help organize your creativity."
 msgstr ""
-"بِنْتا هو تطبيق لتحرير الصور والرسم والتلوين بواجهة بسيطة لكنها قوية. يحتوي بِنْ"
-"تا على مجموعة واسعة من أدوات الرسم، بما في ذلك: الرسم اليدوي الحر، "
+"بِنْتا هو تطبيق لتحرير الصور والرسم والتلوين بواجهة بسيطة لكنها قوية. يحتوي "
+"بِنْتا على مجموعة واسعة من أدوات الرسم، بما في ذلك: الرسم اليدوي الحر، "
 "والمستطيلات، والدوائر، والخطوط. كما يحتوي على أكثر من 35 تأثيرًا يمكن تطبيقها "
 "على صورك، بالإضافة إلى إمكانية إنشاء عدد غير محدود من الطبقات للمساعدة في "
 "تنظيم إبداعك."
@@ -2808,7 +2816,8 @@ msgstr ""
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:49
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
-msgstr "{0} + نقرة بالزر الأيسر لتعيين نقطة الأصل، ثم نقرة بالزر الأيسر للطلاء."
+msgstr ""
+"{0} + نقرة بالزر الأيسر لتعيين نقطة الأصل، ثم نقرة بالزر الأيسر للطلاء."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".

@@ -1409,6 +1409,10 @@ msgstr "Fraktál Mandelbrot"
 msgid "Martian Lava"
 msgstr ""
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "Medián"
@@ -1421,6 +1425,10 @@ msgstr ""
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Zlúčiť vrstvy"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"

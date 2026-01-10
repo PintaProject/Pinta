@@ -10,8 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
 "PO-Revision-Date: 2025-11-11 11:55+0000\n"
 "Last-Translator: Emilio Baceda <elbaceda@gmail.com>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/pinta/pinta/ca/>"
-"\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/pinta/pinta/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1419,6 +1419,10 @@ msgstr "Fractal de Mandelbrot"
 msgid "Martian Lava"
 msgstr "Lava marciana"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "Mediana"
@@ -1431,6 +1435,10 @@ msgstr "Barra de menús"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Fusiona amb la capa inferior"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
