@@ -54,7 +54,7 @@ public static class PintaCore
 	/// <summary>
 	/// The current version number of Pinta.
 	/// </summary>
-	public const string ApplicationVersion = "3.1";
+	public const string ApplicationVersion = "3.1.1";
 
 	/// <summary>
 	/// The oldest version of Pinta for which add-ins built against it will still
