@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-12-26 04:54+0000\n"
+"PO-Revision-Date: 2026-01-12 00:13+0000\n"
 "Last-Translator: VenusGirl <VenusGirl@outlook.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/pinta/pinta/ko/>\n"
 "Language: ko\n"
@@ -116,7 +116,7 @@ msgstr "양"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:139
 msgid "Anchor:"
-msgstr "앵커:"
+msgstr "고정:"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:81
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:120
@@ -188,7 +188,7 @@ msgstr "배경:"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:94
 msgid "Based on the work of Paint.NET:"
-msgstr "Paint.NET의 작업을 기반으로:"
+msgstr "Paint.NET의 작업 기반:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:23
@@ -1457,7 +1457,7 @@ msgstr "화성 용암"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
 msgid "Maximum Size"
-msgstr ""
+msgstr "최대 크기"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
@@ -1474,7 +1474,7 @@ msgstr "레이어 아래로 병합"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
-msgstr ""
+msgstr "최소 크기"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -1962,7 +1962,7 @@ msgstr "무작위"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:161
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:177
 msgid "Random Color Scheme Seed"
-msgstr "무작위 색상 구성표 시드"
+msgstr "랜덤 색상 구성표 시드"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:198
 msgid "Random Colors"
@@ -1973,7 +1973,7 @@ msgstr "무작위 색상"
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
-msgstr "무작위 노이즈 시드"
+msgstr "랜덤 노이즈 시드"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:159
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
