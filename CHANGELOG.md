@@ -10,9 +10,15 @@ Thanks to the following contributors who worked on this release:
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
-- The Windows installer now supports a non-administrative install mode (#1915, #1918)
 
 ### Changed
+
+### Fixed
+
+## [3.1.1](https://github.com/PintaProject/Pinta/release/tag/3.1.1) - 2026/01/10
+
+### Added
+- The Windows installer now supports a non-administrative install mode (#1915, #1918)
 
 ### Fixed
 - Fixed packaging issue where the release tarball was missing required files (#1905, #1907)
