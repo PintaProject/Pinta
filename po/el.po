@@ -1451,6 +1451,10 @@ msgstr "Φράκταλ Μάντελμπροτ"
 msgid "Martian Lava"
 msgstr "Λάβα του Άρη"
 
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
+msgid "Maximum Size"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
 msgstr "Διάμεση τιμή"
@@ -1463,6 +1467,10 @@ msgstr "Μενού"
 #: ../Pinta.Core/Actions/LayerActions.cs:363
 msgid "Merge Layer Down"
 msgstr "Συγχώνευση επιπέδου προς τα κάτω"
+
+#: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
+msgid "Minimum Size"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
