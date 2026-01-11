@@ -5,6 +5,7 @@
 
   <Import Project="../properties/ReferenceGirCoreAdw1.props" />
   <Import Project="../properties/ReferenceGirCorePangoCairo10.props" />
+  <Import Project="../properties/ReferenceGirCoreGObject20Integration.props" />
 
   <ItemGroup>
     <PackageReference Include="NGettext" />

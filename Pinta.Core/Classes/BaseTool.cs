@@ -340,7 +340,7 @@ public abstract class BaseTool
 	private ToolBarDropDownButton AlphaBlendingDropDown {
 		get {
 			if (alphablending_button is null) {
-				alphablending_button = new ToolBarDropDownButton ();
+				alphablending_button = ToolBarDropDownButton.New ();
 
 				alphablending_button.AddItem (Translations.GetString ("Normal Blending"), Pinta.Resources.Icons.BlendingNormal, true);
 				alphablending_button.AddItem (Translations.GetString ("Overwrite"), Pinta.Resources.Icons.BlendingOverwrite, false);
@@ -357,7 +357,7 @@ public abstract class BaseTool
 	private ToolBarDropDownButton AntialiasingDropDown {
 		get {
 			if (antialiasing_button is null) {
-				antialiasing_button = new ToolBarDropDownButton ();
+				antialiasing_button = ToolBarDropDownButton.New ();
 
 				antialiasing_button.AddItem (Translations.GetString ("Antialiasing On"), Pinta.Resources.Icons.AntiAliasingEnabled, true);
 				antialiasing_button.AddItem (Translations.GetString ("Antialiasing Off"), Pinta.Resources.Icons.AntiAliasingDisabled, false);

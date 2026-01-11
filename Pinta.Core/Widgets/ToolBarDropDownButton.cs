@@ -1,26 +1,35 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Pinta.Core;
 
-public sealed class ToolBarDropDownButton : Gtk.MenuButton
+[GObject.Subclass<Gtk.MenuButton>]
+public sealed partial class ToolBarDropDownButton
 {
 	private const string ACTION_PREFIX = "tool";
 
-	private readonly bool show_label;
-	private readonly Gio.Menu dropdown;
-	private readonly Gio.SimpleActionGroup action_group;
+	private bool show_label;
+	private Gio.Menu dropdown;
+	private Gio.SimpleActionGroup action_group;
 	private ToolBarItem? selected_item;
 
-	private readonly List<ToolBarItem> items;
-	public ReadOnlyCollection<ToolBarItem> Items { get; }
+	private List<ToolBarItem> items;
+	public ReadOnlyCollection<ToolBarItem> Items { get; private set; }
 
-	public ToolBarDropDownButton (bool showLabel = false)
+	public static ToolBarDropDownButton New(bool showLabel = false)
 	{
-		show_label = showLabel;
+		var obj = NewWithProperties([]);
+		obj.show_label = showLabel;
 
+		return obj;
+	}
+
+	[MemberNotNull(nameof(items), nameof(Items), nameof(action_group), nameof(dropdown))]
+	partial void Initialize()
+	{
 		items = [];
 		Items = new ReadOnlyCollection<ToolBarItem> (items);
 		AlwaysShowArrow = true;
