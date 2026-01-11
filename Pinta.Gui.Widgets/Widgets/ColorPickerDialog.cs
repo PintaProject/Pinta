@@ -510,7 +510,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		SetTitlebar (titleBar);
 
-		Title = Translations.GetString (windowTitle);
+		Title = windowTitle;
 		TransientFor = parentWindow;
 		Modal = false;
 		IconName = Resources.Icons.ImageResizeCanvas;
