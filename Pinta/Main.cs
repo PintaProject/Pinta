@@ -91,7 +91,14 @@ internal sealed class MainClass
 		Gsk.Module.Initialize ();
 		Pango.Module.Initialize ();
 		PangoCairo.Module.Initialize ();
-		var app = Adw.Application.New (PintaCore.ApplicationId, Gio.ApplicationFlags.NonUnique);
+
+		// Check if single-instance mode is enabled
+		var settings = new SettingsManager ();
+		bool singleInstance = settings.GetSetting (SettingNames.SINGLE_INSTANCE_MODE, false);
+
+		// Use appropriate flags based on single-instance preference
+		var flags = singleInstance ? Gio.ApplicationFlags.HandlesOpen : Gio.ApplicationFlags.NonUnique;
+		var app = Adw.Application.New (PintaCore.ApplicationId, flags);
 
 		// For macOS, use bindtextdomain() to override the location for libadwaita's translations
 		// since the libraries are relocated into the .app package. This can be done for other libraries
@@ -128,6 +135,16 @@ internal sealed class MainClass
 				});
 			}
 		};
+
+		// Handle file opening in existing instance when single-instance mode is enabled
+		if (singleInstance) {
+			app.OnOpen += (_, args) => {
+				main_window.Activate ();
+				foreach (var file in args.Files) {
+					PintaCore.Workspace.OpenFile (file);
+				}
+			};
+		}
 
 		// Run with a SynchronizationContext to integrate async methods with GLib.MainLoop.
 		app.RunWithSynchronizationContext (null);
