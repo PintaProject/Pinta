@@ -26,7 +26,6 @@
 
 using System;
 using Cairo;
-
 using Pinta.Core;
 
 namespace Pinta.Tools.Brushes;
@@ -61,45 +60,79 @@ internal sealed class SlashBrush : BasePaintBrush
 	{
 		int line_width = (int) g.LineWidth;
 
-		PointI last_pos = strokeArgs.LastPosition;
-		PointI current_pos = strokeArgs.CurrentPosition;
+		PointD last_pos = strokeArgs.LastPosition.ToDouble();
+		PointD current_pos = strokeArgs.CurrentPosition.ToDouble();
 
-		double offsetX = (line_width / 2) * Math.Sin (Single.DegreesToRadians (angle));
-		double offsetY = (line_width / 2) * Math.Cos (Single.DegreesToRadians (angle));
+		PointD old_top = OffsetPoint(last_pos, -1, line_width / 2, angle);
+		PointD old_bottom = OffsetPoint(last_pos, 1, line_width / 2, angle);
+		PointD new_top = OffsetPoint(current_pos, -1, line_width / 2, angle);
+		PointD new_bottom = OffsetPoint(current_pos, 1, line_width / 2, angle);
 
-		PointD old_top = new (last_pos.X + offsetX, last_pos.Y + offsetY);
-		PointD old_bottom = new (last_pos.X - offsetX, last_pos.Y - offsetY);
-		PointD new_top = new (current_pos.X + offsetX, current_pos.Y + offsetY);
-		PointD new_bottom = new (current_pos.X - offsetX, current_pos.Y - offsetY);
+		/* 
+			We want to avoid situations where no area is drawn because (for
+			example) the user selected an angle of 0 and 180 and moved the
+			mouse straight up or down. This code covers most such cases, but it
+			is currently still possible to create such cases by moving the
+			mouse very fast, so there is still some room for refinement of the
+			present logic...
+		*/
 
-		// ensure the result has nonzero width even if e.g. angle is 0 or 180 and user is moving the mouse exactly up/down
-		if (new_top.X == old_top.X) {
-			old_top = new PointD (old_top.X + 1, old_top.Y);
-			new_top = new PointD (new_top.X - 1, new_top.Y);
-		}
-		if (new_top.Y == old_top.Y) {
-			old_top = new PointD (old_top.X, old_top.Y + 1);
-			new_top = new PointD (new_top.X, new_top.Y - 1);
-		}
-		if (new_bottom.X == old_bottom.X) {
-			old_bottom = new PointD (old_bottom.X + 1, old_bottom.Y);
-			new_bottom = new PointD (new_bottom.X - 1, new_bottom.Y);
-		}
-		if (new_bottom.Y == old_bottom.Y) {
-			old_bottom = new PointD (old_bottom.X, old_bottom.Y + 1);
-			new_bottom = new PointD (new_bottom.X, new_bottom.Y - 1);
+		double area = Math.Abs(0.5 * (old_top.X * new_top.Y - old_top.Y * new_top.X +
+			new_top.X * new_bottom.Y - new_top.Y * new_bottom.X +
+			new_bottom.X * old_bottom.Y - new_bottom.Y * old_bottom.X +
+			old_bottom.X * old_top.Y - old_bottom.Y * old_top.X));
+
+		if (area < 2) {
+			old_top = OffsetPoint(old_top, -1, 1, angle + 90);
+			new_top = OffsetPoint(new_top, -1, 1, angle + 90);
+			old_bottom = OffsetPoint(old_bottom, 1, 1, angle + 90);
+			new_bottom = OffsetPoint(new_bottom, 1, 1, angle + 90);
 		}
 
 		g.MoveTo (old_top.X, old_top.Y);
-		g.LineTo (old_bottom.X, old_bottom.Y);
-		g.LineTo (new_bottom.X, new_bottom.Y);
 		g.LineTo (new_top.X, new_top.Y);
-		g.ClosePath ();
+		g.LineTo (new_bottom.X, new_bottom.Y);
+		g.LineTo (old_bottom.X, old_bottom.Y);
 
-		RectangleI dirty = g.StrokeExtents ().ToInt ();
 		g.Fill ();
 
+		/*
+			Anti-aliasing creates ugly effects because it anti-aliases at all
+			edges of each rectangle, even the ones that are adjacent to the next
+			one in the path, creating gaps in what should be a continuous line.
+			
+			Workaround: If anti-aliasing is enabled, create a non-antialiased
+			stroke at the end to draw over the gap.
+		*/
+
+		if (g.Antialias != Antialias.None) {
+			Antialias previous_antialias = g.Antialias;
+			g.Antialias = Antialias.None;
+			PointD antialias_correction_top = OffsetPoint(new_top, 1, 2, angle);
+			PointD antialias_correction_bottom = OffsetPoint(new_bottom, -1, 2, angle);
+			g.MoveTo(antialias_correction_top.X, antialias_correction_top.Y);
+			g.LineTo(antialias_correction_bottom.X, antialias_correction_bottom.Y);
+			g.LineWidth = 2;
+			g.Stroke();
+			g.Antialias = previous_antialias;
+			g.LineWidth = line_width;
+		}
+
+		RectangleI dirty = g.StrokeExtents ().ToInt ();
+
 		return dirty;
+	}
+
+	private PointD OffsetPoint(PointD point, double multiplier, double offset, float angle_in_degrees)
+	{
+		double offsetX = offset * Math.Sin (Single.DegreesToRadians (angle_in_degrees));
+		double offsetY = offset * Math.Cos (Single.DegreesToRadians (angle_in_degrees));
+		return new (Math.Round(point.X + multiplier * offsetX), Math.Round(point.Y + multiplier * offsetY));
+	}
+
+	private void PrintPoint(PointD point, string explanation)
+	{
+		Console.WriteLine(explanation + " = " + point.X + ", " + point.Y);
 	}
 
 
