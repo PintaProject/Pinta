@@ -7,11 +7,13 @@ Thanks to the following contributors who worked on this release:
 - @cameronwhite
 - @Lehonti
 - @spaghetti22
+- @Matthieu-LAURENT39
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
 
 ### Changed
+- Effect dialogs now hide options that are not currently relevant (#1960)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
