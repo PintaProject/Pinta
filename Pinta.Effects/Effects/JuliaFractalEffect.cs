@@ -156,9 +156,11 @@ public sealed class JuliaFractalEffect : BaseEffect
 		public ColorSchemeSource ColorSchemeSource { get; set; } = ColorSchemeSource.PresetGradient;
 
 		[Caption ("Color Scheme")]
+		[VisibleWhen (nameof (ShowColorScheme))]
 		public PresetGradients ColorScheme { get; set; } = PresetGradients.Bonfire;
 
 		[Caption ("Random Color Scheme Seed")]
+		[VisibleWhen (nameof (ShowColorSchemeSeed))]
 		public RandomSeed ColorSchemeSeed { get; set; } = new (0);
 
 		[Caption ("Reverse Color Scheme")]
@@ -166,5 +168,11 @@ public sealed class JuliaFractalEffect : BaseEffect
 
 		[Caption ("Angle")]
 		public DegreesAngle Angle { get; set; } = new (0);
+
+		[Skip]
+		public bool ShowColorScheme => ColorSchemeSource == ColorSchemeSource.PresetGradient;
+
+		[Skip]
+		public bool ShowColorSchemeSeed => ColorSchemeSource == ColorSchemeSource.Random;
 	}
 }
