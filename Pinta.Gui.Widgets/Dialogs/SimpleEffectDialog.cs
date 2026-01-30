@@ -239,41 +239,18 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	}
 
 	/// <summary>
-	/// Evaluates a condition from a property or method of EffectData.
-	/// </summary>
-	private static bool EvaluateCondition (object effectData, string methodName)
-	{
-		Type type = effectData.GetType ();
-
-		// Try to find a property first
-		PropertyInfo? property = type.GetProperty (methodName, BindingFlags.Public | BindingFlags.Instance);
-		if (property is not null && property.PropertyType == typeof (bool)) {
-			return (bool) property.GetValue (effectData)!;
-		}
-		// If we couldn't find a property, try to find a method
-		MethodInfo? method = type.GetMethod (methodName, BindingFlags.Public | BindingFlags.Instance, null, Type.EmptyTypes, null);
-		if (method is not null && method.ReturnType == typeof (bool)) {
-			return (bool) method.Invoke (effectData, null)!;
-		}
-
-		System.Diagnostics.Debug.WriteLine ($"Warning: Could not find condition property/method '{methodName}' on type '{type.Name}'.");
-		return true; // Fallback to true
-	}
-
-	/// <summary>
 	/// Updates all widgets with conditional attributes.
 	/// </summary>
 	private void UpdateConditionalWidgets (EffectData effectData)
 	{
 		foreach (var widget in conditional_widgets) {
 			if (widget.VisibleWhenMethodName is not null)
-				widget.Widget.Visible = EvaluateCondition (effectData, widget.VisibleWhenMethodName);
+				widget.Widget.Visible = ReflectionHelper.EvaluateCondition (effectData, widget.VisibleWhenMethodName);
 
 			if (widget.EnabledWhenMethodName is not null)
-				widget.Widget.Sensitive = EvaluateCondition (effectData, widget.EnabledWhenMethodName);
+				widget.Widget.Sensitive = ReflectionHelper.EvaluateCondition (effectData, widget.EnabledWhenMethodName);
 		}
 	}
-
 	private IEnumerable<Gtk.Widget> GenerateWidgetsForMember (
 		MemberSettings settings,
 		EffectData effectData,
@@ -290,10 +267,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 				// Apply the initial state
 				if (settings.visibleWhenMethodName is not null)
-					widget.Visible = EvaluateCondition (effectData, settings.visibleWhenMethodName);
+					widget.Visible = ReflectionHelper.EvaluateCondition (effectData, settings.visibleWhenMethodName);
 
 				if (settings.enabledWhenMethodName is not null)
-					widget.Sensitive = EvaluateCondition (effectData, settings.enabledWhenMethodName);
+					widget.Sensitive = ReflectionHelper.EvaluateCondition (effectData, settings.enabledWhenMethodName);
 
 				conditional_widgets.Add (new ConditionalWidget (
 					widget,
@@ -301,7 +278,6 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 					settings.enabledWhenMethodName)
 				);
 			}
-
 			yield return widget;
 		}
 
