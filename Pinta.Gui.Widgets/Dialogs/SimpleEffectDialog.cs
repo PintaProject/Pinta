@@ -54,8 +54,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	// them when the effect data changes
 	private sealed record ConditionalWidget (
 		Gtk.Widget Widget,
-		string? VisibleWhenMethodName,
-		string? EnabledWhenMethodName
+		Func<bool>? VisibleWhenDelegate,
+		Func<bool>? EnabledWhenDelegate
 	);
 	private readonly List<ConditionalWidget> conditional_widgets = new ();
 
@@ -244,11 +244,11 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private void UpdateConditionalWidgets (EffectData effectData)
 	{
 		foreach (var widget in conditional_widgets) {
-			if (widget.VisibleWhenMethodName is not null)
-				widget.Widget.Visible = ReflectionHelper.EvaluateCondition (effectData, widget.VisibleWhenMethodName);
+			if (widget.VisibleWhenDelegate is not null)
+				widget.Widget.Visible = widget.VisibleWhenDelegate ();
 
-			if (widget.EnabledWhenMethodName is not null)
-				widget.Widget.Sensitive = ReflectionHelper.EvaluateCondition (effectData, widget.EnabledWhenMethodName);
+			if (widget.EnabledWhenDelegate is not null)
+				widget.Widget.Sensitive = widget.EnabledWhenDelegate ();
 		}
 	}
 	private IEnumerable<Gtk.Widget> GenerateWidgetsForMember (
@@ -265,17 +265,26 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			// Keep a reference to widget if it has conditional attributes so we can update it later
 			if (settings.visibleWhenMethodName is not null || settings.enabledWhenMethodName is not null) {
 
-				// Apply the initial state
-				if (settings.visibleWhenMethodName is not null)
-					widget.Visible = ReflectionHelper.EvaluateCondition (effectData, settings.visibleWhenMethodName);
+				// Create delegates for condition evaluation (do reflection once, not on every update)
+				Func<bool>? visibleDelegate = settings.visibleWhenMethodName is not null
+					? ReflectionHelper.CreateConditionDelegate (effectData, settings.visibleWhenMethodName)
+					: null;
 
-				if (settings.enabledWhenMethodName is not null)
-					widget.Sensitive = ReflectionHelper.EvaluateCondition (effectData, settings.enabledWhenMethodName);
+				Func<bool>? enabledDelegate = settings.enabledWhenMethodName is not null
+					? ReflectionHelper.CreateConditionDelegate (effectData, settings.enabledWhenMethodName)
+					: null;
+
+				// Apply the initial state
+				if (visibleDelegate is not null)
+					widget.Visible = visibleDelegate ();
+
+				if (enabledDelegate is not null)
+					widget.Sensitive = enabledDelegate ();
 
 				conditional_widgets.Add (new ConditionalWidget (
 					widget,
-					settings.visibleWhenMethodName,
-					settings.enabledWhenMethodName)
+					visibleDelegate,
+					enabledDelegate)
 				);
 			}
 			yield return widget;
