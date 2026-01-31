@@ -358,7 +358,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			new PaletteColors (palette.PrimaryColor, palette.SecondaryColor),
 			primarySelected,
 			true,
-			Translations.GetString ("Color Picker"));
+			Translations.GetString ("Choose Colors"));
 
 		Gtk.ResponseType response = await colorPicker.RunAsync ();
 
