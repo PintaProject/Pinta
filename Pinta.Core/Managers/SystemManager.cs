@@ -32,7 +32,8 @@ namespace Pinta.Core;
 
 public interface ISystemService
 {
-	int RenderThreads { get; set; }
+	int RenderThreads { get; }
+	OS OperatingSystem { get; }
 }
 
 public sealed class SystemManager : ISystemService
