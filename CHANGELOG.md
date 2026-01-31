@@ -15,6 +15,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Changed
 - Effect dialogs now hide options that are not currently relevant (#1960)
+- Fixed several minor UX issues in the color dialog (#1795)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
