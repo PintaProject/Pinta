@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2026-01-31 15:54+0000\n"
+"PO-Revision-Date: 2026-02-01 04:28+0000\n"
 "Last-Translator: antfullstack "
 "<253273528+antfullstack@users.noreply.github.com>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/pinta/pinta/el/>\n"
@@ -473,7 +473,7 @@ msgstr "Σύννεφα"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:151
 msgid "Coarseness"
-msgstr "Τραχύτητα"
+msgstr "Σκληρότητα"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
@@ -2834,7 +2834,7 @@ msgstr ""
 "  Vasilis Kosmidis https://launchpad.net/~vasiliskos\n"
 "  vassilis karamitros https://launchpad.net/~ecatodarcus\n"
 "  Νιάνιος Ρωμανός https://launchpad.net/~romanos-nianios\n"
-"Lefteris Trompakas https://launchpad.net/~androidcreator5"
+"  Lefteris Trompakas https://launchpad.net/~androidcreator"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:49
