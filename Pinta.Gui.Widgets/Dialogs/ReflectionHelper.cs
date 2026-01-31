@@ -44,12 +44,15 @@ internal static class ReflectionHelper
 		// Try to find a property first
 		PropertyInfo? property = type.GetProperty (methodName, BindingFlags.Public | BindingFlags.Instance);
 		if (property is not null && property.PropertyType == typeof (bool)) {
-			return () => (bool) property.GetValue (source)!;
+			MethodInfo? getter = property.GetGetMethod ();
+			if (getter is not null) {
+				return (Func<bool>) getter.CreateDelegate (typeof (Func<bool>), source);
+			}
 		}
 		// If we couldn't find a property, try to find a method
 		MethodInfo? method = type.GetMethod (methodName, BindingFlags.Public | BindingFlags.Instance, null, Type.EmptyTypes, null);
 		if (method is not null && method.ReturnType == typeof (bool)) {
-			return () => (bool) method.Invoke (source, null)!;
+			return (Func<bool>) method.CreateDelegate (typeof (Func<bool>), source);
 		}
 
 		throw new ArgumentException ($"Member \'{methodName}\' is not a boolean property or method");
