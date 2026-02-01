@@ -75,3 +75,28 @@ public sealed class StaticListAttribute : Attribute
 
 	public string DictionaryName { get; set; }
 }
+
+/// <summary>
+/// Attribute for controlling the visibility of a control based on a condition.
+/// The control will be hidden when the condition evaluates to false.
+/// </summary>
+[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+public sealed class VisibleWhenAttribute : Attribute
+{
+	public VisibleWhenAttribute (string conditionMethodName) => ConditionMethodName = conditionMethodName;
+
+	public string ConditionMethodName { get; }
+}
+
+/// <summary>
+/// Attribute for controlling the enabled state of a control based on a condition.
+/// The control will be disabled when the condition evaluates to false.
+/// </summary>
+[AttributeUsage (AttributeTargets.Field | AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+public sealed class EnabledWhenAttribute : Attribute
+{
+	public EnabledWhenAttribute (string conditionMethodName) => ConditionMethodName = conditionMethodName;
+
+	public string ConditionMethodName { get; }
+}
+
