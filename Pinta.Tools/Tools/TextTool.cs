@@ -124,6 +124,7 @@ public sealed class TextTool : BaseTool
 	// NRT - Created by OnBuildToolBar
 	private Gtk.Label font_label = null!;
 	private Gtk.FontDialogButton font_button = null!;
+	private Gtk.SpinButton font_size = null!;
 	private Gtk.ToggleButton bold_btn = null!;
 	private Gtk.ToggleButton italic_btn = null!;
 	private Gtk.ToggleButton underscore_btn = null!;
@@ -157,6 +158,7 @@ public sealed class TextTool : BaseTool
 				UseSize = false,
 				UseFont = true,
 				CanFocus = false,
+				Level = Gtk.FontLevel.Face,
 				FontDesc = Pango.FontDescription.FromString (
 					Settings.GetSetting (SettingNames.TEXT_FONT,
 					Gtk.Settings.GetDefault ()!.GtkFontName!)),
@@ -168,6 +170,25 @@ public sealed class TextTool : BaseTool
 		}
 
 		tb.Append (font_button);
+
+		tb.Append (GtkExtensions.CreateToolBarSeparator ());
+
+		if (font_size == null) {
+			var font_size_adjustment = new Gtk.Adjustment {
+				Lower = 1,
+				Upper = 2000,
+				StepIncrement = 1,
+				Value = PangoExtensions.UnitsToPixels (font_button.FontDesc!.GetSize ()),
+			};
+
+			font_size = new Gtk.SpinButton {
+				Adjustment = font_size_adjustment,
+				TooltipText = Translations.GetString ("Change font size. Shortcut keys: [ ]"),
+			};
+			font_size.OnValueChanged += HandleFontSizeChanged;
+		}
+
+		tb.Append (font_size);
 
 		tb.Append (GtkExtensions.CreateToolBarSeparator ());
 
@@ -299,6 +320,15 @@ public sealed class TextTool : BaseTool
 		UpdateFont ();
 	}
 
+	private void HandleFontSizeChanged (object? sender, EventArgs e)
+	{
+		var font = font_button.FontDesc!.Copy ()!;
+		font.SetSize (PangoExtensions.UnitsFromPixels (font_size.GetValueAsInt ()));
+		font_button.FontDesc = font;
+
+		UpdateFont ();
+	}
+
 	protected override void OnSaveSettings (ISettingsService settings)
 	{
 		base.OnSaveSettings (settings);
@@ -327,6 +357,10 @@ public sealed class TextTool : BaseTool
 
 	private void HandleFontChanged ()
 	{
+		var font = font_button.FontDesc!.Copy ()!;
+		font.SetSize (PangoExtensions.UnitsFromPixels (font_size.GetValueAsInt ()));
+		font_button.FontDesc = font;
+
 		if (workspace.HasOpenDocuments)
 			workspace.ActiveDocument.Workspace.GrabFocusToCanvas ();
 
@@ -786,6 +820,15 @@ public sealed class TextTool : BaseTool
 
 			if (keyHandled)
 				RedrawText (true, true);
+		} else {
+			switch (e.Key.Value) {
+				case Gdk.Constants.KEY_bracketleft:
+					font_size.Adjustment!.Value--;
+					return true;
+				case Gdk.Constants.KEY_bracketright:
+					font_size.Adjustment!.Value++;
+					return true;
+			}
 		}
 
 		return keyHandled;
