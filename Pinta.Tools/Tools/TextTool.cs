@@ -158,7 +158,7 @@ public sealed class TextTool : BaseTool
 				UseSize = false,
 				UseFont = true,
 				CanFocus = false,
-				Level = Gtk.FontLevel.Family,
+				Level = Gtk.FontLevel.Face,
 				FontDesc = Pango.FontDescription.FromString (
 					Settings.GetSetting (SettingNames.TEXT_FONT,
 					Gtk.Settings.GetDefault ()!.GtkFontName!)),
@@ -178,12 +178,12 @@ public sealed class TextTool : BaseTool
 				Lower = 1,
 				Upper = 2000,
 				StepIncrement = 1,
-				Value = font_button.FontDesc!.GetSize () / 1024,
+				Value = PangoExtensions.UnitsToPixels (font_button.FontDesc!.GetSize ()),
 			};
 
 			font_size = new Gtk.SpinButton {
 				Adjustment = font_size_adjustment,
-				Digits = 1,
+				TooltipText = Translations.GetString ("Change font size. Shortcut keys: [ ]"),
 			};
 			font_size.OnValueChanged += HandleFontSizeChanged;
 		}
@@ -323,8 +323,8 @@ public sealed class TextTool : BaseTool
 	private void HandleFontSizeChanged (object? sender, EventArgs e)
 	{
 		var font = font_button.FontDesc!.Copy ()!;
-		font.SetSize (font_size.GetValueAsInt () * 1024);
-		font_button.FontDesc = font; 
+		font.SetSize (PangoExtensions.UnitsFromPixels (font_size.GetValueAsInt ()));
+		font_button.FontDesc = font;
 
 		UpdateFont ();
 	}
@@ -358,7 +358,7 @@ public sealed class TextTool : BaseTool
 	private void HandleFontChanged ()
 	{
 		var font = font_button.FontDesc!.Copy ()!;
-		font.SetSize (font_size.GetValueAsInt () * 1024);
+		font.SetSize (PangoExtensions.UnitsFromPixels (font_size.GetValueAsInt ()));
 		font_button.FontDesc = font;
 
 		if (workspace.HasOpenDocuments)
@@ -820,6 +820,15 @@ public sealed class TextTool : BaseTool
 
 			if (keyHandled)
 				RedrawText (true, true);
+		} else {
+			switch (e.Key.Value) {
+				case Gdk.Constants.KEY_bracketleft:
+					font_size.Adjustment!.Value--;
+					return true;
+				case Gdk.Constants.KEY_bracketright:
+					font_size.Adjustment!.Value++;
+					return true;
+			}
 		}
 
 		return keyHandled;
