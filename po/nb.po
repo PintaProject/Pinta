@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-09-28 08:01+0000\n"
-"Last-Translator: \"mirker smitch :p\" <drnike493@gmail.com>\n"
+"PO-Revision-Date: 2026-02-05 05:47+0000\n"
+"Last-Translator: kobyon <weblate.unretired780@passmail.net>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/pinta/"
 "pinta/nb_NO/>\n"
 "Language: nb\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -156,7 +156,7 @@ msgstr "Kunstnerisk"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
 msgid "Auto"
@@ -279,7 +279,7 @@ msgstr "Buling"
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Burkes"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:80
@@ -312,7 +312,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
-msgstr ""
+msgstr "Celle Radius"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
@@ -353,8 +353,9 @@ msgstr "Centimeter"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
+#, fuzzy
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Endre børstens bredde. Snarvei tast: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
@@ -368,7 +369,7 @@ msgstr ""
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:629
 #: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:286
 msgid "Choose Color"
-msgstr ""
+msgstr "Velg farge"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:149
 msgid "Choose Palette Color"
@@ -381,7 +382,7 @@ msgstr "Sirkler"
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
 msgid "Circular"
-msgstr ""
+msgstr "Sirkulær"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -392,12 +393,16 @@ msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
 msgstr ""
+"Klikk og dra for å tegne et rektangulært utvalg.\n"
+"Hold nede Shift for å begrense til et kvadrat."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
 msgstr ""
+"Klikk og dra for å tegne et elliptisk utvalg.\n"
+"Hold nede Shift for å begrense til et kvadrat."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:61
 msgid ""
