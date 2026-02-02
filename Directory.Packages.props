@@ -15,7 +15,7 @@
     <PackageVersion Include="NGettext" Version="0.6.7" />
     <PackageVersion Include="ParagonClipper" Version="6.4.2" />
     <PackageVersion Include="System.CommandLine" Version="2.0.2" />
-    <PackageVersion Include="Tmds.DBus" Version="0.23.0" />
+    <PackageVersion Include="Tmds.DBus" Version="0.90.0" />
 
     <!-- Dependencies used for unit tests -->
     <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
