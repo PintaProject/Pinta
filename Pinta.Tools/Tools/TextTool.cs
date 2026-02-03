@@ -196,52 +196,52 @@ public sealed class TextTool : BaseTool
 			weight_btn = new ToolBarDropDownButton ();
 
 			weight_btn.AddItem (
-				Translations.GetString ("Thin" + " 100"),
+				Translations.GetString ("Thin") + " 100",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Thin
 			);
 			weight_btn.AddItem (
-				Translations.GetString ("Ultralight" + " 200"),
+				Translations.GetString ("Ultralight") + " 200",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Ultralight
 			);
 			weight_btn.AddItem (
-				Translations.GetString ("Light" + " 300"),
+				Translations.GetString ("Light") + " 300",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Light
 			);
 			weight_btn.AddItem (
-				Translations.GetString ("Semilight" + " 350"),
+				Translations.GetString ("Semilight") + " 350",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Semilight
 			);
 			weight_btn.AddItem (
-				Translations.GetString ("Book" + " 380"),
+				Translations.GetString ("Book") + " 380",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Book
 			);
 			weight_btn.AddItem (
-				Translations.GetString ("Normal" + " 400"),
+				Translations.GetString ("Normal") + " 400",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Normal
 			);
 			weight_btn.AddItem (
-				Translations.GetString ("Medium" + " 500"),
+				Translations.GetString ("Medium") + " 500",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Medium
 			);
 			weight_btn.AddItem (
-				Translations.GetString ("Semibold" + " 600"),
+				Translations.GetString ("Semibold") + " 600",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Semibold
 			);
 			weight_btn.AddItem (
-				Translations.GetString ("Bold" + " 700"),
+				Translations.GetString ("Bold") + " 700",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Bold
 			);
 			weight_btn.AddItem (
-				Translations.GetString ("Ultrabold" + " 800"),
+				Translations.GetString ("Ultrabold") + " 800",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Ultrabold
 			);
