@@ -20,4 +20,5 @@ internal static class SettingNames
 	internal const string TOOLBOX_SHOWN = "toolbox-shown";
 	internal const string LAST_DIALOG_DIRECTORY = "last-dialog-directory";
 	internal const string LAST_SELECTED_TOOL = "last-selected-tool";
+	internal const string SINGLE_INSTANCE_MODE = "single-instance-mode";
 }
