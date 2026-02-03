@@ -516,7 +516,7 @@ public sealed class TextTool : BaseTool
 		if (workspace.HasOpenDocuments) {
 
 			var font = font_button.FontDesc!.Copy ()!; // NRT: Only nullable when nullptr is passed.
-			font.SetWeight ((Pango.Weight) weight_btn.SelectedItem.GetTagOrDefault(Pango.Weight.Normal));
+			font.SetWeight ((Pango.Weight) weight_btn.SelectedItem.GetTagOrDefault (Pango.Weight.Normal));
 			font.SetStyle (italic_btn.Active ? Pango.Style.Italic : Pango.Style.Normal);
 
 			CurrentTextEngine.SetFont (font, Alignment, underscore_btn.Active);
