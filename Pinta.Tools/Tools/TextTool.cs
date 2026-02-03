@@ -256,7 +256,7 @@ public sealed class TextTool : BaseTool
 				Pango.Weight.Ultraheavy
 			);
 
-			weight_btn.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_WEIGHT, 400);
+			weight_btn.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_WEIGHT, Pango.Weight.Normal);
 			weight_btn.SelectedItemChanged += HandleWeightButtonToggled;
 		}
 
@@ -395,7 +395,7 @@ public sealed class TextTool : BaseTool
 			settings.PutSetting (SettingNames.TEXT_FONT, font_button.FontDesc!.ToString ()!);
 
 		if (weight_btn is not null)
-			settings.PutSetting (SettingNames.TEXT_WEIGHT, weight_btn.SelectedItem.GetTagOrDefault(Pango.Weight.Bold));
+			settings.PutSetting (SettingNames.TEXT_WEIGHT, weight_btn.SelectedItem.GetTagOrDefault(Pango.Weight.Normal));
 
 		if (italic_btn is not null)
 			settings.PutSetting (SettingNames.TEXT_ITALIC, italic_btn.Active);
