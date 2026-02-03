@@ -302,7 +302,7 @@ public abstract class BaseEditEngine
 		tb.Append (fill_label);
 
 		if (fill_button == null) {
-			fill_button = new ToolBarDropDownButton ();
+			fill_button = ToolBarDropDownButton.New ();
 
 			fill_button.AddItem (Translations.GetString ("Outline Shape"), Resources.Icons.FillStyleOutline, 0);
 			fill_button.AddItem (Translations.GetString ("Fill Shape"), Resources.Icons.FillStyleFill, 1);
@@ -328,7 +328,7 @@ public abstract class BaseEditEngine
 		tb.Append (shape_type_label);
 
 		if (shape_type_button == null) {
-			shape_type_button = new ToolBarDropDownButton ();
+			shape_type_button = ToolBarDropDownButton.New ();
 
 			shape_type_button.AddItem (Translations.GetString ("Open Line/Curve Series"), Resources.Icons.ToolLine, 0);
 			shape_type_button.AddItem (Translations.GetString ("Closed Line/Curve Series"), Resources.Icons.ToolRectangle, 1);
