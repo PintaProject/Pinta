@@ -859,8 +859,6 @@ public sealed class TextTool : BaseTool
 								italic_btn.Toggle ();
 								UpdateFont ();
 							} else if (e.Key.Value == Gdk.Constants.KEY_b) {
-								// If current font-weight is Bold (8) or bolder, set to Normal (4). Otherwise, set to Bold (8).
-								weight_btn.SelectedIndex = weight_btn.SelectedIndex > 7 ? 4 : 8;
 								UpdateFont ();
 							} else if (e.Key.Value == Gdk.Constants.KEY_u) {
 								underscore_btn.Toggle ();
