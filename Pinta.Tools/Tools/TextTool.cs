@@ -195,61 +195,73 @@ public sealed class TextTool : BaseTool
 		if (weight_btn == null) {
 			weight_btn = new ToolBarDropDownButton ();
 
+			// Translators: 'Thin' (100) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Thin") + " 100",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Thin
 			);
+			// Translators: 'Ultralight' (200) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Ultralight") + " 200",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Ultralight
 			);
+			// Translators: 'Light' (300) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Light") + " 300",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Light
 			);
+			// Translators: 'Semilight' (350) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Semilight") + " 350",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Semilight
 			);
+			// Translators: 'Book' (380) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Book") + " 380",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Book
 			);
+			// Translators: 'Normal' (400) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Normal") + " 400",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Normal
 			);
+			// Translators: 'Medium' (500) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Medium") + " 500",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Medium
 			);
+			// Translators: 'Semibold' (600) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Semibold") + " 600",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Semibold
 			);
+			// Translators: 'Bold' (700) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Bold") + " 700",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Bold
 			);
+			// Translators: 'Ultrabold' (800) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Ultrabold") + " 800",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Ultrabold
 			);
+			// Translators: 'Heavy' (900) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Heavy") + " 900",
 				Pinta.Resources.StandardIcons.FormatTextBold,
 				Pango.Weight.Heavy
 			);
+			// Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Ultraheavy") + " 1000",
 				Pinta.Resources.StandardIcons.FormatTextBold,
@@ -346,7 +358,7 @@ public sealed class TextTool : BaseTool
 			fill_button.AddItem (Translations.GetString ("Fill Background"), Pinta.Resources.Icons.FillStyleBackground, 3);
 
 			fill_button.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_STYLE, 0);
-			fill_button.SelectedItemChanged += HandleBoldButtonToggled;
+			fill_button.SelectedItemChanged += HandleFillButtonToggled;
 		}
 
 		tb.Append (fill_button);
@@ -494,7 +506,7 @@ public sealed class TextTool : BaseTool
 		UpdateFont ();
 	}
 
-	private void HandleBoldButtonToggled (object? sender, EventArgs e)
+	private void HandleFillButtonToggled (object? sender, EventArgs e)
 	{
 		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = StrokeText;
 
