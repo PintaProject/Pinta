@@ -127,6 +127,7 @@ msgstr "Anchor:"
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 msgid "Angle"
 msgstr "Angle"
 
@@ -2275,6 +2276,10 @@ msgstr "Single Pixel"
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:289
 msgid "Size"
 msgstr "Size"
+
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:36
+msgid "Slash"
+msgstr "Slash"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"

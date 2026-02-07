@@ -65,6 +65,12 @@ public abstract class BasePaintBrush
 	/// </summary>
 	public virtual List<ToolOption> Options { get; protected set; } = [];
 
+	public delegate void SetCursorCallback (CursorShape shape, int brush_width, int brush_height, float angle_in_degrees);
+	public delegate void ResetCursorCallback ();
+
+	public SetCursorCallback SetCursor { protected get; set; } = (_, _, _, _) => { };
+	public ResetCursorCallback ResetCursor { protected get; set; } = () => { };
+
 	public void DoMouseUp ()
 	{
 		OnMouseUp ();
@@ -81,6 +87,11 @@ public abstract class BasePaintBrush
 		BrushStrokeArgs strokeArgs)
 	{
 		return OnMouseMove (g, surface, strokeArgs);
+	}
+
+	public virtual void LoadCursor (int lineWidth)
+	{
+		ResetCursor ();
 	}
 
 	/// <summary>

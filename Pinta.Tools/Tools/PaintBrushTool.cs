@@ -46,11 +46,19 @@ public sealed class PaintBrushTool : BaseBrushTool
 	public PaintBrushTool (IServiceProvider services) : base (services)
 	{
 		brushes = services.GetService<IPaintBrushService> ();
+		foreach (BasePaintBrush brush in brushes) {
+			brush.SetCursor = ConfigureCursor;
+			brush.ResetCursor = () => SetCursor (DefaultCursor);
+		}
 
 		default_brush = brushes.FirstOrDefault ();
 		active_brush = default_brush;
 
-		brushes.BrushAdded += (_, _) => RebuildBrushComboBox ();
+		brushes.BrushAdded += (_, a) => {
+			RebuildBrushComboBox ();
+			a.Brush.SetCursor = ConfigureCursor;
+			a.Brush.ResetCursor = () => SetCursor (DefaultCursor);
+		};
 		brushes.BrushRemoved += (_, _) => RebuildBrushComboBox ();
 
 		brush_specific_options_box = Box.New (Orientation.Horizontal, 10);
@@ -73,6 +81,20 @@ public sealed class PaintBrushTool : BaseBrushTool
 		}
 	}
 
+	private void ResetCursorToDefault ()
+	{
+		SetCursor (DefaultCursor);
+	}
+
+	private void ConfigureCursor (CursorShape shape, int brush_width, int brush_height, float angle_in_degrees)
+	{
+		var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
+						shape, brush_width, brush_height, (int) angle_in_degrees, 8, 24,
+						out var iconOffsetX, out var iconOffsetY);
+
+		SetCursor (Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null));
+	}
+
 	protected override void OnBuildToolBar (Box tb)
 	{
 		base.OnBuildToolBar (tb);
@@ -85,6 +107,9 @@ public sealed class PaintBrushTool : BaseBrushTool
 		RebuildBrushSpecificOptions ();
 		brush_specific_options_box.MarginStart = 10;
 		tb.Append (brush_specific_options_box);
+		if (active_brush is not null) {
+			active_brush.LoadCursor (BrushWidth);
+		}
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -187,6 +212,14 @@ public sealed class PaintBrushTool : BaseBrushTool
 		}
 	}
 
+	protected override void OnBrushWidthChanged ()
+	{
+		base.OnBrushWidthChanged ();
+		if (active_brush is not null) {
+			active_brush.LoadCursor (BrushWidth);
+		}
+	}
+
 	private Label? brush_label;
 	private ToolBarComboBox? brush_combo_box;
 	private Gtk.Separator? separator;
@@ -201,6 +234,9 @@ public sealed class PaintBrushTool : BaseBrushTool
 				brush_combo_box.ComboBox.OnChanged += (o, e) => {
 					var brush_name = brush_combo_box.ComboBox.GetActiveText ();
 					active_brush = brushes.SingleOrDefault (brush => brush.Name == brush_name) ?? default_brush;
+					if (active_brush is not null) {
+						active_brush.LoadCursor (BrushWidth);
+					}
 				};
 
 				RebuildBrushComboBox ();
