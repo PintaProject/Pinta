@@ -119,7 +119,7 @@ public sealed class DocumentWorkspace
 
 			if (tools.CurrentTool?.CursorChangesOnZoom == true) {
 				//The current tool's cursor changes when the zoom changes.
-				tools.CurrentTool.SetCursor (tools.CurrentTool.DefaultCursor);
+				tools.CurrentTool.SetCursor (tools.CurrentTool.CurrentCursor);
 			}
 		}
 	}

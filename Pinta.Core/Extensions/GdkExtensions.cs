@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Cairo;
@@ -93,6 +95,25 @@ public static class GdkExtensions
 		out int shapeX,
 		out int shapeY)
 	{
+		int shape_x;
+		int shape_y;
+		Gdk.Texture result = CreateIconWithShape (imgName, shape, shapeWidth, shapeWidth, 0, imgToShapeX, imgToShapeY, out shape_x, out shape_y);
+		shapeX = shape_x;
+		shapeY = shape_y;
+		return result;
+	}
+
+	public static Gdk.Texture CreateIconWithShape (
+		string imgName,
+		CursorShape shape,
+		int shapeWidth,
+		int shapeHeight,
+		int shapeAngle,
+		int imgToShapeX,
+		int imgToShapeY,
+		out int shapeX,
+		out int shapeY)
+	{
 		Gdk.Texture img = PintaCore.Resources.GetIcon (imgName);
 
 		double zoom =
@@ -102,6 +123,8 @@ public static class GdkExtensions
 
 		int clampedWidth = (int) Math.Min (800d, shapeWidth * zoom);
 		int halfOfShapeWidth = clampedWidth / 2;
+		int clampedHeight = (int) Math.Min (800d, shapeHeight * zoom);
+		int halfOfShapeHeight = clampedHeight / 2;
 
 		// Calculate bounding boxes around the both image and shape
 		// relative to the image top-left corner.
@@ -110,9 +133,9 @@ public static class GdkExtensions
 
 		RectangleI initialShapeBBox = new (
 			imgToShapeX - halfOfShapeWidth,
-			imgToShapeY - halfOfShapeWidth,
+			imgToShapeY - halfOfShapeHeight,
 			clampedWidth,
-			clampedWidth);
+			clampedHeight);
 
 		// Inflate shape bounding box to allow for anti-aliasing
 		RectangleI inflatedBBox = initialShapeBBox.Inflated (2, 2);
@@ -138,15 +161,15 @@ public static class GdkExtensions
 		using Context g = new (i);
 
 		// Don't show shape if shapeWidth less than 3,
-		if (clampedWidth > 3) {
+		if (clampedHeight > 3) {
 
 			int diam = Math.Max (1, clampedWidth - 2);
 
 			RectangleD shapeRect = new (
 				shapeX - halfOfShapeWidth,
-				shapeY - halfOfShapeWidth,
+				shapeY - halfOfShapeHeight,
 				diam,
-				diam);
+				clampedHeight);
 
 			Color outerColor = new (255, 255, 255, 0.75);
 			Color innerColor = new (0, 0, 0);
@@ -158,10 +181,19 @@ public static class GdkExtensions
 					g.DrawEllipse (shapeRect, innerColor, 1);
 					break;
 				case CursorShape.Rectangle:
-					g.DrawRectangle (shapeRect, outerColor, 1);
-					shapeRect = shapeRect.Inflated (-1, -1);
-					g.DrawRectangle (shapeRect, innerColor, 1);
-					break;
+					if (shapeAngle == 0) {
+						g.DrawRectangle (shapeRect, outerColor, 1);
+						shapeRect = shapeRect.Inflated (-1, -1);
+						g.DrawRectangle (shapeRect, innerColor, 1);
+						break;
+					} else {
+						PointD[] pointsOfRotatedRectangle = RotateRectangle (shapeRect, shapeAngle);
+						shapeRect = shapeRect.Inflated (-1, -1);
+						PointD[] pointsOfInflatedRotatedRectangle = RotateRectangle (shapeRect, shapeAngle);
+						g.DrawPolygonal (new ReadOnlySpan<PointD> (pointsOfRotatedRectangle), outerColor, LineCap.Butt);
+						g.DrawPolygonal (new ReadOnlySpan<PointD> (pointsOfInflatedRotatedRectangle), innerColor, LineCap.Butt);
+						break;
+					}
 			}
 		}
 
@@ -283,5 +315,34 @@ public static class GdkExtensions
 			Green = (float) color.G,
 			Alpha = (float) color.A
 		};
+	}
+
+	private static PointD[] RotateRectangle (RectangleD rectangle, int angle_in_degrees)
+	{
+		float angle_in_radians = Single.DegreesToRadians (angle_in_degrees);
+		double sin = Math.Sin (angle_in_radians);
+		double cos = Math.Cos (angle_in_radians);
+		RectangleD translatedToOrigin = new RectangleD (
+			rectangle.X - rectangle.GetCenter ().X,
+			rectangle.Y - rectangle.GetCenter ().Y,
+			rectangle.Width,
+			rectangle.Height
+		);
+		List<PointD> pointsOfRotatedRectangle = [
+			RotatePoint(translatedToOrigin.Location(), sin, cos),
+			RotatePoint(new PointD(translatedToOrigin.Location().X, translatedToOrigin.Location().Y + translatedToOrigin.Height), sin, cos),
+			RotatePoint(translatedToOrigin.EndLocation(), sin, cos),
+			RotatePoint(new PointD(translatedToOrigin.Location().X + translatedToOrigin.Width, translatedToOrigin.Location().Y), sin, cos),
+		];
+		PointD[] pointsOfFinalRectangle = pointsOfRotatedRectangle.Select (p => new PointD (p.X + rectangle.GetCenter ().X, p.Y + rectangle.GetCenter ().Y)).ToArray ();
+		return pointsOfFinalRectangle;
+	}
+
+	private static PointD RotatePoint (PointD point, double sin, double cos)
+	{
+		return new PointD (
+			point.X * cos - point.Y * sin,
+			point.X * sin - point.Y * cos
+		);
 	}
 }

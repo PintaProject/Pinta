@@ -127,6 +127,7 @@ msgstr "Ankro:"
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 msgid "Angle"
 msgstr "Angulo"
 
@@ -2271,6 +2272,10 @@ msgstr ""
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:289
 msgid "Size"
 msgstr "Grandeco"
+
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:36
+msgid "Slash"
+msgstr "Oblikvo"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"

@@ -127,6 +127,7 @@ msgstr "Ankerpunkt:"
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 msgid "Angle"
 msgstr "Winkel"
 
@@ -2350,6 +2351,10 @@ msgstr "Einzelnes Pixel"
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:289
 msgid "Size"
 msgstr "Größe"
+
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:36
+msgid "Slash"
+msgstr "Schrägstrich"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"

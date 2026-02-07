@@ -35,6 +35,7 @@ internal sealed class SlashBrush : BasePaintBrush
 	public override string Name
 		=> Translations.GetString ("Slash");
 
+	private int line_width;
 	private int angle;
 
 	private const string AngleSettingName = "slash-brush-angle";
@@ -48,7 +49,10 @@ internal sealed class SlashBrush : BasePaintBrush
 			45,
 			Translations.GetString ("Angle")
 		);
-		angleOption.OnValueChanged += an => angle = an;
+		angleOption.OnValueChanged += an => {
+			angle = an;
+			SetSlashCursor ();
+		};
 		angleOption.LoadValueFromSettings (settingsService);
 		Options = [angleOption];
 	}
@@ -58,15 +62,15 @@ internal sealed class SlashBrush : BasePaintBrush
 		ImageSurface surface,
 		BrushStrokeArgs strokeArgs)
 	{
-		int line_width = (int) g.LineWidth;
+		line_width = (int) g.LineWidth;
 
-		PointD last_pos = strokeArgs.LastPosition.ToDouble();
-		PointD current_pos = strokeArgs.CurrentPosition.ToDouble();
+		PointD last_pos = strokeArgs.LastPosition.ToDouble ();
+		PointD current_pos = strokeArgs.CurrentPosition.ToDouble ();
 
-		PointD old_top = OffsetPoint(last_pos, -1, line_width / 2, angle);
-		PointD old_bottom = OffsetPoint(last_pos, 1, line_width / 2, angle);
-		PointD new_top = OffsetPoint(current_pos, -1, line_width / 2, angle);
-		PointD new_bottom = OffsetPoint(current_pos, 1, line_width / 2, angle);
+		PointD old_top = OffsetPoint (last_pos, -1, line_width / 2, angle);
+		PointD old_bottom = OffsetPoint (last_pos, 1, line_width / 2, angle);
+		PointD new_top = OffsetPoint (current_pos, -1, line_width / 2, angle);
+		PointD new_bottom = OffsetPoint (current_pos, 1, line_width / 2, angle);
 
 		/* 
 			We want to avoid situations where no area is drawn because (for
@@ -77,16 +81,16 @@ internal sealed class SlashBrush : BasePaintBrush
 			present logic...
 		*/
 
-		double area = Math.Abs(0.5 * (old_top.X * new_top.Y - old_top.Y * new_top.X +
+		double area = Math.Abs (0.5 * (old_top.X * new_top.Y - old_top.Y * new_top.X +
 			new_top.X * new_bottom.Y - new_top.Y * new_bottom.X +
 			new_bottom.X * old_bottom.Y - new_bottom.Y * old_bottom.X +
 			old_bottom.X * old_top.Y - old_bottom.Y * old_top.X));
 
 		if (area < 2) {
-			old_top = OffsetPoint(old_top, -1, 1, angle + 90);
-			new_top = OffsetPoint(new_top, -1, 1, angle + 90);
-			old_bottom = OffsetPoint(old_bottom, 1, 1, angle + 90);
-			new_bottom = OffsetPoint(new_bottom, 1, 1, angle + 90);
+			old_top = OffsetPoint (old_top, -1, 1, angle + 90);
+			new_top = OffsetPoint (new_top, -1, 1, angle + 90);
+			old_bottom = OffsetPoint (old_bottom, 1, 1, angle + 90);
+			new_bottom = OffsetPoint (new_bottom, 1, 1, angle + 90);
 		}
 
 		g.MoveTo (old_top.X, old_top.Y);
@@ -108,12 +112,12 @@ internal sealed class SlashBrush : BasePaintBrush
 		if (g.Antialias != Antialias.None) {
 			Antialias previous_antialias = g.Antialias;
 			g.Antialias = Antialias.None;
-			PointD antialias_correction_top = OffsetPoint(new_top, 1, 2, angle);
-			PointD antialias_correction_bottom = OffsetPoint(new_bottom, -1, 2, angle);
-			g.MoveTo(antialias_correction_top.X, antialias_correction_top.Y);
-			g.LineTo(antialias_correction_bottom.X, antialias_correction_bottom.Y);
+			PointD antialias_correction_top = OffsetPoint (new_top, 1, 2, angle);
+			PointD antialias_correction_bottom = OffsetPoint (new_bottom, -1, 2, angle);
+			g.MoveTo (antialias_correction_top.X, antialias_correction_top.Y);
+			g.LineTo (antialias_correction_bottom.X, antialias_correction_bottom.Y);
 			g.LineWidth = 2;
-			g.Stroke();
+			g.Stroke ();
 			g.Antialias = previous_antialias;
 			g.LineWidth = line_width;
 		}
@@ -123,17 +127,22 @@ internal sealed class SlashBrush : BasePaintBrush
 		return dirty;
 	}
 
-	private PointD OffsetPoint(PointD point, double multiplier, double offset, float angle_in_degrees)
+	public override void LoadCursor (int lineWidth)
+	{
+		line_width = lineWidth;
+		SetSlashCursor ();
+	}
+
+	private PointD OffsetPoint (PointD point, double multiplier, double offset, float angle_in_degrees)
 	{
 		double offsetX = offset * Math.Sin (Single.DegreesToRadians (angle_in_degrees));
 		double offsetY = offset * Math.Cos (Single.DegreesToRadians (angle_in_degrees));
-		return new (Math.Round(point.X + multiplier * offsetX), Math.Round(point.Y + multiplier * offsetY));
+		return new (Math.Round (point.X + multiplier * offsetX), Math.Round (point.Y + multiplier * offsetY));
 	}
 
-	private void PrintPoint(PointD point, string explanation)
+	private void SetSlashCursor ()
 	{
-		Console.WriteLine(explanation + " = " + point.X + ", " + point.Y);
+		SetCursor (CursorShape.Rectangle, 2, line_width, angle);
 	}
-
 
 }
