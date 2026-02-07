@@ -34,14 +34,17 @@ internal sealed class ResizeCanvasAction : IActionHandler
 {
 	private readonly IChromeService chrome;
 	private readonly IWorkspaceService workspace;
+	private readonly ISettingsService settings;
 	private readonly ActionManager actions;
 	internal ResizeCanvasAction (
 		IChromeService chrome,
 		IWorkspaceService workspace,
+		ISettingsService settings,
 		ActionManager actions)
 	{
 		this.chrome = chrome;
 		this.workspace = workspace;
+		this.settings = settings;
 		this.actions = actions;
 	}
 
@@ -65,7 +68,7 @@ internal sealed class ResizeCanvasAction : IActionHandler
 
 	private async Task<ResizeCanvasOptions?> PromptResize ()
 	{
-		using ResizeCanvasDialog dialog = new (chrome, workspace);
+		using ResizeCanvasDialog dialog = new (chrome, workspace, settings);
 		try {
 			Gtk.ResponseType response = await dialog.RunAsync ();
 			if (response != Gtk.ResponseType.Ok) return null;
