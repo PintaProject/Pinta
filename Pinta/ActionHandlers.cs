@@ -70,7 +70,7 @@ public sealed class ActionHandlers
 			new AddinManagerAction (actions.Addins, chrome, system),
 
 			// Image
-			new ResizeImageAction (actions.Image, chrome, workspace),
+			new ResizeImageAction (actions.Image, chrome, workspace, settings),
 			new ResizeCanvasAction (chrome, workspace, settings, actions),
 
 			// Layers

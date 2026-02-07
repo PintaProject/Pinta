@@ -35,13 +35,15 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 	private readonly Gtk.SpinButton width_spinner;
 	private readonly Gtk.SpinButton height_spinner;
 	private readonly Gtk.CheckButton aspect_checkbox;
+	private readonly Gtk.CheckButton percentage_radio;
 	private readonly Gtk.ComboBoxText resampling_combobox;
 	private readonly IWorkspaceService workspace;
+	private readonly ISettingsService settings;
 	private bool value_changing;
 
 	const int SPACING = 6;
 
-	internal ResizeImageDialog (IChromeService chrome, IWorkspaceService workspace)
+	internal ResizeImageDialog (IChromeService chrome, IWorkspaceService workspace, ISettingsService settings)
 	{
 		BoxStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Horizontal,
@@ -52,25 +54,32 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 			spacing: SPACING);
 
 		Gtk.SpinButton percentageSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		percentageSpinner.Value = 100;
+		percentageSpinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_PERCENTAGE, 100);
 		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
 		percentageSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		widthSpinner.Value = workspace.ImageSize.Width;
+		widthSpinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_WIDTH, workspace.ImageSize.Width);
 		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
 		widthSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		heightSpinner.Value = workspace.ImageSize.Height;
+		heightSpinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_HEIGHT, workspace.ImageSize.Height);
 		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
 		heightSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.CheckButton aspectCheckbox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
-		aspectCheckbox.Active = true;
+		aspectCheckbox.Active = settings.GetSetting (SettingNames.RESIZE_IMAGE_MAINTAIN_ASPECT, true);
+
+		Gtk.Button resetButton = new () {
+			IconName = Resources.StandardIcons.EditUndo,
+			WidthRequest = 24,
+			HeightRequest = 24,
+			TooltipText = Translations.GetString ("Reset to image size"),
+		};
+		resetButton.OnClicked += OnResetButtonClicked;
 
 		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
-		percentageRadio.Active = true;
 		percentageRadio.BindProperty (
 			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
 			percentageSpinner,
@@ -94,8 +103,14 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 			aspectCheckbox,
 			Gtk.CheckButton.SensitivePropertyDefinition.UnmanagedName,
 			GObject.BindingFlags.SyncCreate);
+		absoluteRadio.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			resetButton,
+			Gtk.Button.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
 
 		Gtk.ComboBoxText resamplingCombobox = CreateResamplingCombobox ();
+		resamplingCombobox.Active = settings.GetSetting (SettingNames.RESIZE_IMAGE_RESAMPLING, 0);
 
 		Gtk.Box hboxPercent = GtkExtensions.Box (
 			spacedHorizontal,
@@ -119,6 +134,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		grid.Attach (widthLabel, 0, 0, 1, 1);
 		grid.Attach (widthSpinner, 1, 0, 1, 1);
 		grid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
+		grid.Attach (resetButton, 3, 0, 1, 1);
 		grid.Attach (heightLabel, 0, 1, 1, 1);
 		grid.Attach (heightSpinner, 1, 1, 1, 1);
 		grid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
@@ -149,6 +165,7 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (Gtk.ResponseType.Ok);
+		OnResponse += OnDialogResponse;
 
 		// --- Initialization
 
@@ -164,9 +181,32 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		width_spinner = widthSpinner;
 		height_spinner = heightSpinner;
 		aspect_checkbox = aspectCheckbox;
+		percentage_radio = percentageRadio;
 		resampling_combobox = resamplingCombobox;
 
 		this.workspace = workspace;
+		this.settings = settings;
+
+		// Final initialization
+
+		if (settings.GetSetting (SettingNames.RESIZE_IMAGE_USE_PERCENTAGE, true))
+			percentageRadio.Active = true;
+		else
+			absoluteRadio.Active = true;
+	}
+
+	private void OnDialogResponse (Gtk.Dialog sender, ResponseSignalArgs args)
+	{
+		if (args.ResponseId != (int) Gtk.ResponseType.Ok)
+			return;
+
+		// Save settings for next time
+		settings.PutSetting (SettingNames.RESIZE_IMAGE_MAINTAIN_ASPECT, aspect_checkbox.Active);
+		settings.PutSetting (SettingNames.RESIZE_IMAGE_USE_PERCENTAGE, percentage_radio.Active);
+		settings.PutSetting (SettingNames.RESIZE_IMAGE_PERCENTAGE, percentage_spinner.GetValueAsInt ());
+		settings.PutSetting (SettingNames.RESIZE_IMAGE_WIDTH, width_spinner.GetValueAsInt ());
+		settings.PutSetting (SettingNames.RESIZE_IMAGE_HEIGHT, height_spinner.GetValueAsInt ());
+		settings.PutSetting (SettingNames.RESIZE_IMAGE_RESAMPLING, resampling_combobox.Active);
 	}
 
 	private static Gtk.ComboBoxText CreateResamplingCombobox ()
@@ -224,6 +264,14 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		float proportion = percentage_spinner.GetValueAsInt () / 100f;
 		width_spinner.Value = (int) (workspace.ImageSize.Width * proportion);
 		height_spinner.Value = (int) (workspace.ImageSize.Height * proportion);
+	}
+
+	void OnResetButtonClicked (Gtk.Button button, EventArgs eventArgs)
+	{
+		value_changing = true;
+		width_spinner.Value = workspace.ImageSize.Width;
+		height_spinner.Value = workspace.ImageSize.Height;
+		value_changing = false;
 	}
 }
 
