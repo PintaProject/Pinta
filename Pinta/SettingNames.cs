@@ -20,4 +20,11 @@ internal static class SettingNames
 	internal const string TOOLBOX_SHOWN = "toolbox-shown";
 	internal const string LAST_DIALOG_DIRECTORY = "last-dialog-directory";
 	internal const string LAST_SELECTED_TOOL = "last-selected-tool";
+
+	internal const string RESIZE_CANVAS_ANCHOR = "resize-canvas-anchor";
+	internal const string RESIZE_CANVAS_MAINTAIN_ASPECT = "resize-canvas-maintain-aspect";
+	internal const string RESIZE_CANVAS_USE_PERCENTAGE = "resize-canvas-use-percentage";
+	internal const string RESIZE_CANVAS_PERCENTAGE = "resize-canvas-percentage";
+	internal const string RESIZE_CANVAS_WIDTH = "resize-canvas-width";
+	internal const string RESIZE_CANVAS_HEIGHT = "resize-canvas-height";
 }
