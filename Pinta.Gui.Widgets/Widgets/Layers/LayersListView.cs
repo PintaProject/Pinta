@@ -90,7 +90,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 		var list_item = (Gtk.ListItem) args.Object;
 		var model_item = (LayersListViewItem) list_item.GetItem ()!;
 		var widget = (LayersListViewItemWidget) list_item.GetChild ()!;
-		widget.Update (model_item);
+		widget.SetItem (model_item);
 	}
 
 	private void HandleSelectionChanged (
@@ -174,17 +174,12 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 	{
 		ArgumentNullException.ThrowIfNull (active_document);
 
-		// Recreate all the widgets.
-		// This update should ideally be done by changing gobject properties instead, but we don't have the ability to add custom properties yet
-		uint selected_idx = selection_model.Selected;
+		// Update the list view items to refresh their corresponding widgets.
+		// This update should ideally be done through gobject property bindings instead, but we don't have the ability to add custom properties yet
 		for (uint i = 0; i < list_model.GetNItems (); ++i) {
-			int layer_idx = active_document.Layers.Count () - 1 - (int) i;
-			list_model.Remove (i);
-			list_model.Insert (i, new LayersListViewItem (active_document, active_document.Layers[layer_idx]));
+			LayersListViewItem item = (LayersListViewItem) list_model.GetObject (i)!;
+			item.NotifyLayerModified ();
 		}
-
-		// Restore the selection.
-		selection_model.Selected = selected_idx;
 	}
 
 	private void HandleLayerAdded (object? sender, IndexEventArgs e)

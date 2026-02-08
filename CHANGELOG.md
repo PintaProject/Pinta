@@ -22,6 +22,7 @@ Thanks to the following contributors who worked on this release:
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
+- Fixed crash when right-clicking on a layer in certain scenarios (#1940)
 
 ## [3.1.1](https://github.com/PintaProject/Pinta/release/tag/3.1.1) - 2026/01/10
 
