@@ -47,8 +47,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 	{
 		brushes = services.GetService<IPaintBrushService> ();
 		foreach (BasePaintBrush brush in brushes) {
-			brush.SetCursor = ConfigureCursor;
-			brush.ResetCursor = () => SetCursor (DefaultCursor);
+			brush.OnCursorChanged = () => SetBrushFromCursor (brush);
 		}
 
 		default_brush = brushes.FirstOrDefault ();
@@ -56,8 +55,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		brushes.BrushAdded += (_, a) => {
 			RebuildBrushComboBox ();
-			a.Brush.SetCursor = ConfigureCursor;
-			a.Brush.ResetCursor = () => SetCursor (DefaultCursor);
+			a.Brush.OnCursorChanged = () => SetBrushFromCursor (a.Brush);
 		};
 		brushes.BrushRemoved += (_, _) => RebuildBrushComboBox ();
 
@@ -81,19 +79,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 		}
 	}
 
-	private void ResetCursorToDefault ()
-	{
-		SetCursor (DefaultCursor);
-	}
-
-	private void ConfigureCursor (CursorShape shape, int brush_width, int brush_height, float angle_in_degrees)
-	{
-		var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
-						shape, brush_width, brush_height, (int) angle_in_degrees, 8, 24,
-						out var iconOffsetX, out var iconOffsetY);
-
-		SetCursor (Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null));
-	}
 
 	protected override void OnBuildToolBar (Box tb)
 	{
@@ -214,8 +199,9 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	protected override void OnBrushWidthChanged ()
 	{
-		base.OnBrushWidthChanged ();
-		if (active_brush is not null) {
+		if (active_brush is null) {
+			base.OnBrushWidthChanged ();
+		} else {
 			active_brush.LoadCursor (BrushWidth);
 		}
 	}
@@ -282,6 +268,16 @@ public sealed class PaintBrushTool : BaseBrushTool
 			foreach (var option in active_brush.Options) {
 				brush_specific_options_box.Append (ToolOptionWidgetService.GetWidgetForOption (option));
 			}
+		}
+	}
+
+	private void SetBrushFromCursor (BasePaintBrush brush)
+	{
+		Gdk.Cursor? brush_cursor = brush.GetCursor ();
+		if (brush_cursor is null) {
+			SetCursor (DefaultCursor);
+		} else {
+			SetCursor (brush_cursor);
 		}
 	}
 }

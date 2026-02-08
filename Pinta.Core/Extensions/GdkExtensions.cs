@@ -185,15 +185,14 @@ public static class GdkExtensions
 						g.DrawRectangle (shapeRect, outerColor, 1);
 						shapeRect = shapeRect.Inflated (-1, -1);
 						g.DrawRectangle (shapeRect, innerColor, 1);
-						break;
 					} else {
 						PointD[] pointsOfRotatedRectangle = RotateRectangle (shapeRect, shapeAngle);
 						shapeRect = shapeRect.Inflated (-1, -1);
 						PointD[] pointsOfInflatedRotatedRectangle = RotateRectangle (shapeRect, shapeAngle);
 						g.DrawPolygonal (new ReadOnlySpan<PointD> (pointsOfRotatedRectangle), outerColor, LineCap.Butt);
 						g.DrawPolygonal (new ReadOnlySpan<PointD> (pointsOfInflatedRotatedRectangle), innerColor, LineCap.Butt);
-						break;
 					}
+					break;
 			}
 		}
 
@@ -319,30 +318,21 @@ public static class GdkExtensions
 
 	private static PointD[] RotateRectangle (RectangleD rectangle, int angle_in_degrees)
 	{
-		float angle_in_radians = Single.DegreesToRadians (angle_in_degrees);
-		double sin = Math.Sin (angle_in_radians);
-		double cos = Math.Cos (angle_in_radians);
+		float angle_in_radians = Single.DegreesToRadians (-angle_in_degrees);
 		RectangleD translatedToOrigin = new RectangleD (
 			rectangle.X - rectangle.GetCenter ().X,
 			rectangle.Y - rectangle.GetCenter ().Y,
 			rectangle.Width,
 			rectangle.Height
 		);
+		Matrix3x2D rotation = Matrix3x2D.CreateRotation (new RadiansAngle (angle_in_radians));
 		List<PointD> pointsOfRotatedRectangle = [
-			RotatePoint(translatedToOrigin.Location(), sin, cos),
-			RotatePoint(new PointD(translatedToOrigin.Location().X, translatedToOrigin.Location().Y + translatedToOrigin.Height), sin, cos),
-			RotatePoint(translatedToOrigin.EndLocation(), sin, cos),
-			RotatePoint(new PointD(translatedToOrigin.Location().X + translatedToOrigin.Width, translatedToOrigin.Location().Y), sin, cos),
+			translatedToOrigin.Location().Transformed(rotation),
+			new PointD(translatedToOrigin.Location().X, translatedToOrigin.Location().Y + translatedToOrigin.Height).Transformed(rotation),
+			translatedToOrigin.EndLocation().Transformed(rotation),
+			new PointD(translatedToOrigin.Location().X + translatedToOrigin.Width, translatedToOrigin.Location().Y).Transformed(rotation)
 		];
 		PointD[] pointsOfFinalRectangle = pointsOfRotatedRectangle.Select (p => new PointD (p.X + rectangle.GetCenter ().X, p.Y + rectangle.GetCenter ().Y)).ToArray ();
 		return pointsOfFinalRectangle;
-	}
-
-	private static PointD RotatePoint (PointD point, double sin, double cos)
-	{
-		return new PointD (
-			point.X * cos - point.Y * sin,
-			point.X * sin - point.Y * cos
-		);
 	}
 }

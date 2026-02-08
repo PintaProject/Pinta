@@ -51,7 +51,7 @@ internal sealed class SlashBrush : BasePaintBrush
 		);
 		angleOption.OnValueChanged += an => {
 			angle = an;
-			SetSlashCursor ();
+			OnCursorChanged ();
 		};
 		angleOption.LoadValueFromSettings (settingsService);
 		Options = [angleOption];
@@ -130,7 +130,22 @@ internal sealed class SlashBrush : BasePaintBrush
 	public override void LoadCursor (int lineWidth)
 	{
 		line_width = lineWidth;
-		SetSlashCursor ();
+		OnCursorChanged ();
+	}
+
+	public override Gdk.Cursor GetCursor ()
+	{
+		/*
+			If we do not override a 0 angle with 180, the logic in GdkExtensions will 
+			step into the "rectangle" path which will look inconsistent (unfilled) to all
+			other angles, so call a 0 angle with 180 for cursor creation so that it looks
+			consistent.
+		*/
+		var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
+						CursorShape.Rectangle, 2, line_width, angle == 0 ? 180 : angle, 8, 24,
+						out var iconOffsetX, out var iconOffsetY);
+
+		return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 	}
 
 	private PointD OffsetPoint (PointD point, double multiplier, double offset, float angle_in_degrees)
@@ -138,11 +153,6 @@ internal sealed class SlashBrush : BasePaintBrush
 		double offsetX = offset * Math.Sin (Single.DegreesToRadians (angle_in_degrees));
 		double offsetY = offset * Math.Cos (Single.DegreesToRadians (angle_in_degrees));
 		return new (Math.Round (point.X + multiplier * offsetX), Math.Round (point.Y + multiplier * offsetY));
-	}
-
-	private void SetSlashCursor ()
-	{
-		SetCursor (CursorShape.Rectangle, 2, line_width, angle);
 	}
 
 }

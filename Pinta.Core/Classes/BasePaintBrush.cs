@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
 using Cairo;
 
@@ -65,11 +64,9 @@ public abstract class BasePaintBrush
 	/// </summary>
 	public virtual List<ToolOption> Options { get; protected set; } = [];
 
-	public delegate void SetCursorCallback (CursorShape shape, int brush_width, int brush_height, float angle_in_degrees);
-	public delegate void ResetCursorCallback ();
+	public delegate void CursorChange ();
 
-	public SetCursorCallback SetCursor { protected get; set; } = (_, _, _, _) => { };
-	public ResetCursorCallback ResetCursor { protected get; set; } = () => { };
+	public CursorChange OnCursorChanged { protected get; set; } = () => { };
 
 	public void DoMouseUp ()
 	{
@@ -91,7 +88,12 @@ public abstract class BasePaintBrush
 
 	public virtual void LoadCursor (int lineWidth)
 	{
-		ResetCursor ();
+		OnCursorChanged ();
+	}
+
+	public virtual Gdk.Cursor? GetCursor ()
+	{
+		return null;
 	}
 
 	/// <summary>
