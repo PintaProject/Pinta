@@ -327,5 +327,19 @@ partial class GtkExtensions
 			return true;
 		return false;
 	}
+
+	/// <summary>
+	/// Helper method for scrolling to the selected item in a list view.
+	/// When a new item is added, immediately scrolling to the end doesn't scroll far enough (likely
+	/// because the widget's size hasn't updated). Performing the scroll after UI events have
+	/// been processed works well.
+	/// </summary>
+	public static void ScrollToSelectedItem (this Gtk.ListView view, Gtk.SingleSelection selection)
+	{
+		GLib.Functions.IdleAdd (GLib.Constants.PRIORITY_LOW, (() => {
+			view.ScrollTo (selection.Selected, Gtk.ListScrollFlags.None, null);
+			return false;
+		}));
+	}
 }
 
