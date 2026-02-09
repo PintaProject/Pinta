@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2025-12-27 00:31+0000\n"
-"Last-Translator: Wesley Cosme <wes.p.cosme@gmail.com>\n"
+"PO-Revision-Date: 2026-02-11 08:51+0000\n"
+"Last-Translator: burns <ahoradocafezinho@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "pinta/pinta/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.16-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -1039,7 +1039,7 @@ msgstr "Hue & Sat"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
 msgid "Hue / Saturation"
-msgstr "Tonalidade"
+msgstr "Tonalidade / Saturação"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:246
 msgid "ICO files can not be larger than 255 x 255 pixels."
@@ -1431,7 +1431,7 @@ msgstr "Lima Limão"
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:43
 msgid "Line/Curve"
-msgstr "Line/Curve"
+msgstr "Linha/Curva"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:275
 msgid "Linear Diamond Gradient"
@@ -1478,7 +1478,7 @@ msgstr "Lava Marciana"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:64
 msgid "Maximum Size"
-msgstr ""
+msgstr "Tamanho máximo"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
@@ -1495,7 +1495,7 @@ msgstr "Unir à Camada Inferior"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
-msgstr ""
+msgstr "Tamanho mínimo"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -1665,11 +1665,11 @@ msgstr "Abrir..."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:316
 msgid "Orientation:"
-msgstr "Orientation:"
+msgstr "Orientação:"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:25
 msgid "Original"
-msgstr "AD_Original_ID"
+msgstr "Original"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Outline"
