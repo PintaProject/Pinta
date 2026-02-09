@@ -35,6 +35,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 {
 	private readonly Gio.ListStore list_model;
 	private readonly Gtk.SingleSelection selection_model;
+	private readonly Gtk.ListView list_view;
 	private Document? active_document;
 	private bool changing_selection = false;
 
@@ -51,9 +52,9 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 		factory.OnSetup += HandleFactorySetup;
 		factory.OnBind += HandleFactoryBind;
 
-		Gtk.ListView view = Gtk.ListView.New (selectionModel, factory);
-		view.CanFocus = false;
-		view.OnActivate += HandleRowActivated;
+		Gtk.ListView listView = Gtk.ListView.New (selectionModel, factory);
+		listView.CanFocus = false;
+		listView.OnActivate += HandleRowActivated;
 
 		// --- Initialization (Gtk.Widget)
 
@@ -63,12 +64,13 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 		// --- Initialization (Gtk.ScrolledWindow)
 
 		SetPolicy (Gtk.PolicyType.Automatic, Gtk.PolicyType.Automatic);
-		SetChild (view);
+		SetChild (listView);
 
 		// --- References to keep
 
 		list_model = listModel;
 		selection_model = selectionModel;
+		list_view = listView;
 
 		// --- Other initialization (TODO: remove references to PintaCore)
 
@@ -90,7 +92,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 		var list_item = (Gtk.ListItem) args.Object;
 		var model_item = (LayersListViewItem) list_item.GetItem ()!;
 		var widget = (LayersListViewItemWidget) list_item.GetChild ()!;
-		widget.Update (model_item);
+		widget.SetItem (model_item);
 	}
 
 	private void HandleSelectionChanged (
@@ -160,6 +162,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 		// Update our selection to match the document's active layer.
 		int currentModelIndex = doc.Layers.Count () - 1 - doc.Layers.CurrentUserLayerIndex;
 		selection_model.SelectItem ((uint) currentModelIndex, unselectRest: true);
+		list_view.ScrollToSelectedItem (selection_model);
 
 		doc.History.HistoryItemAdded += HandleHistoryChanged;
 		doc.History.ActionUndone += HandleHistoryChanged;
@@ -174,17 +177,12 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 	{
 		ArgumentNullException.ThrowIfNull (active_document);
 
-		// Recreate all the widgets.
-		// This update should ideally be done by changing gobject properties instead, but we don't have the ability to add custom properties yet
-		uint selected_idx = selection_model.Selected;
+		// Update the list view items to refresh their corresponding widgets.
+		// This update should ideally be done through gobject property bindings instead, but we don't have the ability to add custom properties yet
 		for (uint i = 0; i < list_model.GetNItems (); ++i) {
-			int layer_idx = active_document.Layers.Count () - 1 - (int) i;
-			list_model.Remove (i);
-			list_model.Insert (i, new LayersListViewItem (active_document, active_document.Layers[layer_idx]));
+			LayersListViewItem item = (LayersListViewItem) list_model.GetObject (i)!;
+			item.NotifyLayerModified ();
 		}
-
-		// Restore the selection.
-		selection_model.Selected = selected_idx;
 	}
 
 	private void HandleLayerAdded (object? sender, IndexEventArgs e)
@@ -193,6 +191,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 
 		int index = active_document.Layers.Count () - 1 - e.Index;
 		list_model.Insert ((uint) index, new LayersListViewItem (active_document, active_document.Layers[e.Index]));
+		list_view.ScrollToSelectedItem (selection_model);
 	}
 
 	private void HandleLayerRemoved (object? sender, IndexEventArgs e)
@@ -201,6 +200,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 
 		// Note: don't need to subtract 1 because the layer has already been removed from the document.
 		list_model.Remove ((uint) (active_document.Layers.Count () - e.Index));
+		list_view.ScrollToSelectedItem (selection_model);
 	}
 
 	private void HandleSelectedLayerChanged (object? sender, EventArgs e)
@@ -209,6 +209,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 
 		int index = active_document.Layers.Count () - 1 - active_document.Layers.CurrentUserLayerIndex;
 		selection_model.SelectItem ((uint) index, unselectRest: true);
+		list_view.ScrollToSelectedItem (selection_model);
 	}
 
 	private void HandleLayerPropertyChanged (object? sender, EventArgs e)
