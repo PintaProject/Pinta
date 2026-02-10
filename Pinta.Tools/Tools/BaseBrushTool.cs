@@ -118,6 +118,7 @@ public abstract class BaseBrushTool : BaseTool
 		SetCursor (DefaultCursor);
 	}
 
+
 	private SpinButton? brush_width;
 	private Label? brush_width_label;
 

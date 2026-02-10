@@ -51,7 +51,7 @@ internal sealed class SlashBrush : BasePaintBrush
 		);
 		angleOption.OnValueChanged += an => {
 			angle = an;
-			OnCursorChanged ();
+			CursorChanged ();
 		};
 		angleOption.LoadValueFromSettings (settingsService);
 		Options = [angleOption];
@@ -130,7 +130,7 @@ internal sealed class SlashBrush : BasePaintBrush
 	public override void LoadCursor (int lineWidth)
 	{
 		line_width = lineWidth;
-		OnCursorChanged ();
+		CursorChanged ();
 	}
 
 	public override Gdk.Cursor GetCursor ()

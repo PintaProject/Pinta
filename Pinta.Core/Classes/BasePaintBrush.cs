@@ -64,9 +64,9 @@ public abstract class BasePaintBrush
 	/// </summary>
 	public virtual List<ToolOption> Options { get; protected set; } = [];
 
-	public delegate void CursorChange ();
+	public delegate void CursorChangeHandler ();
 
-	public CursorChange OnCursorChanged { protected get; set; } = () => { };
+	public event CursorChangeHandler? OnCursorChanged;
 
 	public void DoMouseUp ()
 	{
@@ -88,7 +88,7 @@ public abstract class BasePaintBrush
 
 	public virtual void LoadCursor (int lineWidth)
 	{
-		OnCursorChanged ();
+		OnCursorChanged?.Invoke ();
 	}
 
 	public virtual Gdk.Cursor? GetCursor ()
@@ -122,4 +122,10 @@ public abstract class BasePaintBrush
 		Context g,
 		ImageSurface surface,
 		BrushStrokeArgs strokeArgs);
+
+
+	protected void CursorChanged ()
+	{
+		OnCursorChanged?.Invoke ();
+	}
 }

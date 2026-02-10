@@ -132,8 +132,8 @@ public static class GdkExtensions
 		RectangleI imgBBox = new (0, 0, img.Width, img.Height);
 
 		RectangleI initialShapeBBox = new (
-			imgToShapeX - halfOfShapeWidth,
-			imgToShapeY - halfOfShapeHeight,
+			imgToShapeX - Math.Max (halfOfShapeWidth, halfOfShapeHeight),
+			imgToShapeY - Math.Max (halfOfShapeWidth, halfOfShapeHeight),
 			clampedWidth,
 			clampedHeight);
 
@@ -318,7 +318,7 @@ public static class GdkExtensions
 
 	private static PointD[] RotateRectangle (RectangleD rectangle, int angle_in_degrees)
 	{
-		float angle_in_radians = Single.DegreesToRadians (-angle_in_degrees);
+		float angle_in_radians = float.DegreesToRadians (-angle_in_degrees);
 		RectangleD translatedToOrigin = new RectangleD (
 			rectangle.X - rectangle.GetCenter ().X,
 			rectangle.Y - rectangle.GetCenter ().Y,
@@ -328,11 +328,11 @@ public static class GdkExtensions
 		Matrix3x2D rotation = Matrix3x2D.CreateRotation (new RadiansAngle (angle_in_radians));
 		List<PointD> pointsOfRotatedRectangle = [
 			translatedToOrigin.Location().Transformed(rotation),
-			new PointD(translatedToOrigin.Location().X, translatedToOrigin.Location().Y + translatedToOrigin.Height).Transformed(rotation),
+			new PointD(translatedToOrigin.Location().X, translatedToOrigin.EndLocation().Y).Transformed(rotation),
 			translatedToOrigin.EndLocation().Transformed(rotation),
-			new PointD(translatedToOrigin.Location().X + translatedToOrigin.Width, translatedToOrigin.Location().Y).Transformed(rotation)
+			new PointD(translatedToOrigin.EndLocation().X, translatedToOrigin.Location().Y).Transformed(rotation)
 		];
-		PointD[] pointsOfFinalRectangle = pointsOfRotatedRectangle.Select (p => new PointD (p.X + rectangle.GetCenter ().X, p.Y + rectangle.GetCenter ().Y)).ToArray ();
+		PointD[] pointsOfFinalRectangle = [.. pointsOfRotatedRectangle.Select (p => new PointD (p.X + rectangle.GetCenter ().X, p.Y + rectangle.GetCenter ().Y))];
 		return pointsOfFinalRectangle;
 	}
 }

@@ -47,7 +47,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 	{
 		brushes = services.GetService<IPaintBrushService> ();
 		foreach (BasePaintBrush brush in brushes) {
-			brush.OnCursorChanged = () => SetBrushFromCursor (brush);
+			brush.OnCursorChanged += () => SetCursorFromBrush (brush);
 		}
 
 		default_brush = brushes.FirstOrDefault ();
@@ -55,7 +55,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		brushes.BrushAdded += (_, a) => {
 			RebuildBrushComboBox ();
-			a.Brush.OnCursorChanged = () => SetBrushFromCursor (a.Brush);
+			a.Brush.OnCursorChanged += () => SetCursorFromBrush (a.Brush);
 		};
 		brushes.BrushRemoved += (_, _) => RebuildBrushComboBox ();
 
@@ -271,7 +271,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 		}
 	}
 
-	private void SetBrushFromCursor (BasePaintBrush brush)
+	private void SetCursorFromBrush (BasePaintBrush brush)
 	{
 		Gdk.Cursor? brush_cursor = brush.GetCursor ();
 		if (brush_cursor is null) {
