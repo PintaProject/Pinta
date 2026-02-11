@@ -198,73 +198,73 @@ public sealed class TextTool : BaseTool
 			// Translators: 'Thin' (100) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Thin") + " 100",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextExtraLight,
 				Pango.Weight.Thin
 			);
 			// Translators: 'Ultralight' (200) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Ultralight") + " 200",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextExtraLight,
 				Pango.Weight.Ultralight
 			);
 			// Translators: 'Light' (300) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Light") + " 300",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextLight,
 				Pango.Weight.Light
 			);
 			// Translators: 'Semilight' (350) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Semilight") + " 350",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextLight,
 				Pango.Weight.Semilight
 			);
 			// Translators: 'Book' (380) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Book") + " 380",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextNormal,
 				Pango.Weight.Book
 			);
 			// Translators: 'Normal' (400) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Normal") + " 400",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextNormal,
 				Pango.Weight.Normal
 			);
 			// Translators: 'Medium' (500) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Medium") + " 500",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextNormal,
 				Pango.Weight.Medium
 			);
 			// Translators: 'Semibold' (600) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Semibold") + " 600",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextBold,
 				Pango.Weight.Semibold
 			);
 			// Translators: 'Bold' (700) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Bold") + " 700",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextBold,
 				Pango.Weight.Bold
 			);
 			// Translators: 'Ultrabold' (800) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Ultrabold") + " 800",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextExtraBold,
 				Pango.Weight.Ultrabold
 			);
 			// Translators: 'Heavy' (900) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Heavy") + " 900",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextExtraBold,
 				Pango.Weight.Heavy
 			);
 			// Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 			weight_btn.AddItem (
 				Translations.GetString ("Ultraheavy") + " 1000",
-				Pinta.Resources.StandardIcons.FormatTextBold,
+				Pinta.Resources.Icons.TextExtraBold,
 				Pango.Weight.Ultraheavy
 			);
 
