@@ -42,7 +42,6 @@ public static class StandardIcons
 	public const string FormatJustifyLeft = "format-justify-left-symbolic";
 	public const string FormatJustifyCenter = "format-justify-center-symbolic";
 	public const string FormatJustifyRight = "format-justify-right-symbolic";
-	public const string FormatTextBold = "format-text-bold-symbolic";
 	public const string FormatTextItalic = "format-text-italic-symbolic";
 	public const string FormatTextUnderline = "format-text-underline-symbolic";
 
@@ -214,6 +213,12 @@ public static class Icons
 	public const string Sampling5 = "tool-colorpicker-sampling-5x5-symbolic";
 	public const string Sampling7 = "tool-colorpicker-sampling-7x7-symbolic";
 	public const string Sampling9 = "tool-colorpicker-sampling-9x9-symbolic";
+
+	public const string TextExtraLight = "text-extra-light-symbolic";
+	public const string TextLight = "text-light-symbolic";
+	public const string TextNormal = "text-normal-symbolic";
+	public const string TextBold = "text-bold-symbolic";
+	public const string TextExtraBold = "text-extra-bold-symbolic";
 
 	public const string ToolCloneStamp = "tool-clonestamp-symbolic";
 	public const string ToolColorPicker = "tool-colorpicker-symbolic";
