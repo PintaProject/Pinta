@@ -10,6 +10,7 @@ Thanks to the following contributors who worked on this release:
 - @Matthieu-LAURENT39
 - @jordanbrotherton
 - @pedropaulosuzuki
+- @yioannides
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
