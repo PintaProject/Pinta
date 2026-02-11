@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 00:22+0000\n"
-"PO-Revision-Date: 2026-02-11 08:51+0000\n"
+"PO-Revision-Date: 2026-02-18 09:09+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/pinta/pinta/"
 "id/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Poedit-Country: INDONESIA\n"
 "X-Poedit-Language: Indonesian\n"
@@ -298,7 +298,7 @@ msgstr "Per persentasi:"
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "Batal"
 
 #: ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
@@ -1033,7 +1033,7 @@ msgstr "Merah horizontal (R)"
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:374
 msgid "Hue"
-msgstr "Hue"
+msgstr "Rona"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:281
 msgid "Hue & Sat"
@@ -1795,7 +1795,7 @@ msgstr "Laman Web Pinta"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:231
 msgid "Pinta does not support saving images in this file format."
-msgstr "Pinta tidak dapat menyimpan gambar dalam format ini"
+msgstr "Pinta tidak mendukung penyimpanan gambar dalam format berkas ini."
 
 #: ../xdg/com.github.PintaProject.Pinta.metainfo.xml.in.h:1
 msgid ""
@@ -2103,7 +2103,7 @@ msgstr "Ubah Ukuran Kanvas"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:77
 msgid "Resize Canvas..."
-msgstr "Ubah Ukuran Kanvas"
+msgstr "Ubah Ukuran Kanvas..."
 
 #: ../Pinta.Core/HistoryItems/ResizeHistoryItem.cs:39
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:139
@@ -2193,7 +2193,7 @@ msgstr "Mistar"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
 msgid "Sampling"
-msgstr "Sampling"
+msgstr "Pengambilan Sampel"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:405
 msgid "Sat"
@@ -2832,7 +2832,8 @@ msgstr ""
 "  Trisno Pamuji https://launchpad.net/~tri.snowman\n"
 "  Triwanto Simanjuntak https://launchpad.net/~lu176\n"
 "  Viko Adi Rahmawan https://launchpad.net/~vikoadi\n"
-"  amir_hz https://launchpad.net/~amir-hz"
+"  amir_hz https://launchpad.net/~amir-hz\n"
+"Arif Budiman <arifpedia@gmail.com>v"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:49
