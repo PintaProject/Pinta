@@ -185,6 +185,10 @@ public static class Icons
 	public const string OrientationPortrait = "image-orientation-portrait-symbolic";
 	public const string OrientationLandscape = "image-orientation-landscape-symbolic";
 
+	public const string JoinMiter = "join-miter-symbolic";
+	public const string JoinRound = "join-round-symbolic";
+	public const string JoinBevel = "join-bevel-symbolic";
+
 	public const string LayerDelete = "layers-remove-layer-symbolic";
 	public const string LayerDuplicate = "layers-duplicate-layer-symbolic";
 	public const string LayerFlipHorizontal = ImageFlipHorizontal;
