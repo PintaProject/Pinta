@@ -474,7 +474,7 @@ public sealed class TextTool : BaseTool
 
 		UpdateFont ();
 	}
-	
+
 	private void HandleJoinButtonToggled (object? sender, EventArgs e)
 	{
 		UpdateFont ();
