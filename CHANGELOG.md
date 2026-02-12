@@ -14,6 +14,7 @@ Thanks to the following contributors who worked on this release:
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
 - The status bar color palette now supports Ctrl+clicking to edit a color, in addition to middle clicking (#1436)
 - The Resize Image and Resize Canvas dialogs now remember their settings (#1869, #1972)
+- The Text Tool now allows choosing the join mode between 'Miter Join', 'Round Join' and 'Bevel Join' (#1969, #1983)
 
 ### Changed
 - Effect dialogs now hide options that are not currently relevant (#1960)
