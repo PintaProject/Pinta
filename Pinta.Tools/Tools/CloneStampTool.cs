@@ -82,13 +82,18 @@ public sealed class CloneStampTool : BaseBrushTool
 
 			surface_modified = false;
 			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
+
+			// But we also want to stamp this location.
+			last_point = e.Point;
+			OnMouseMove(document, e);
+
 		} else {
 			origin = e.Point;
 			offset = null;
 		}
 	}
 
-	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
+	protected override void OnMouseMove(Document document, ToolMouseEventArgs e)
 	{
 		if (!painting || !offset.HasValue)
 			return;
@@ -96,29 +101,81 @@ public sealed class CloneStampTool : BaseBrushTool
 		var x = e.Point.X;
 		var y = e.Point.Y;
 
-		if (!last_point.HasValue) {
+		if (!last_point.HasValue)
+		{
 			last_point = e.Point;
 			return;
 		}
 
-		using Cairo.Context g = document.CreateClippedToolContext ();
-		g.Antialias = UseAntialiasing ? Cairo.Antialias.Subpixel : Cairo.Antialias.None;
+		int radius = BrushWidth / 2;
+		float hardness = 0.0f;
+		float softnessFactor = 4.0f;
 
-		g.MoveTo (last_point.Value.X, last_point.Value.Y);
-		g.LineTo (x, y);
+		var toolSurface = document.Layers.ToolLayer.Surface;
+		var sourceSurface = document.Layers.CurrentUserLayer.Surface;
 
-		g.SetSourceSurface (document.Layers.CurrentUserLayer.Surface, offset.Value.X, offset.Value.Y);
-		g.LineWidth = BrushWidth;
-		g.LineCap = Cairo.LineCap.Round;
+		unsafe
+		{
+			Span<byte> toolData = toolSurface.GetData();
+			Span<byte> srcData = sourceSurface.GetData();
+			int toolStride = toolSurface.Stride;
+			int srcStride = sourceSurface.Stride;
 
-		g.Stroke ();
+			fixed (byte* toolBase = toolData)
+				fixed (byte* srcBase = srcData)
+				{
+					for (int dy = -radius; dy <= radius; dy++)
+					{
+						int py = y + dy;
+						if (py < 0 || py >= toolSurface.Height) continue;
 
-		int dirtyPadding = BrushWidth + 2;
-		RectangleI dirtyRect = RectangleI.FromPoints (last_point.Value, e.Point).Inflated (dirtyPadding, dirtyPadding);
+						for (int dx = -radius; dx <= radius; dx++)
+						{
+							int px = x + dx;
+							if (px < 0 || px >= toolSurface.Width) continue;
+
+							int distSq = dx * dx + dy * dy;
+							if (distSq > radius * radius) continue;
+
+							float t = MathF.Sqrt(distSq) / radius;
+							t = Math.Clamp(t, 0f, 1f);
+
+							float alphaMask = MathF.Exp(-softnessFactor * t * t);
+							alphaMask = MathF.Pow(alphaMask, 1f - hardness);
+							alphaMask = Math.Clamp(alphaMask, 0f, 1f);
+
+							int srcX = px - offset.Value.X;
+							int srcY = py - offset.Value.Y;
+							if (srcX < 0 || srcX >= sourceSurface.Width ||
+								srcY < 0 || srcY >= sourceSurface.Height)
+								continue;
+
+							byte* dst = toolBase + py * toolStride + px * 4;
+							byte* src = srcBase + srcY * srcStride + srcX * 4;
+
+							// Correct premultiplied blending (replace, not add)
+							float maskAlpha = (src[3] / 255f) * alphaMask; // 0..1
+							float inv = 1f - maskAlpha;
+
+							dst[0] = (byte)(dst[0] * inv + src[0] * maskAlpha);
+							dst[1] = (byte)(dst[1] * inv + src[1] * maskAlpha);
+							dst[2] = (byte)(dst[2] * inv + src[2] * maskAlpha);
+							dst[3] = (byte)(dst[3] * inv + src[3] * maskAlpha);
+						}
+					}
+
+				toolSurface.MarkDirty();
+			}
+		}
 
 		last_point = e.Point;
 		surface_modified = true;
-		document.Workspace.Invalidate (dirtyRect);
+
+		int dirtyPadding = BrushWidth + 2;
+		RectangleI dirtyRect = RectangleI.FromPoints(last_point.Value, e.Point)
+			.Inflated(dirtyPadding, dirtyPadding);
+
+		document.Workspace.Invalidate(dirtyRect);
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
