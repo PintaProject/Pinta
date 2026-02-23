@@ -3,9 +3,9 @@ using System.Threading;
 
 namespace Pinta.Core;
 
-internal static class DisposableUtilities
+public static class DisposableUtilities
 {
-	internal static IDisposable FromAction (Action action)
+	public static IDisposable FromAction (Action action)
 	{
 		return new ActionDisposable (action);
 	}
