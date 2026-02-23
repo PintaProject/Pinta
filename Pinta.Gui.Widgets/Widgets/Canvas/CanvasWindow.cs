@@ -36,8 +36,8 @@ public sealed class CanvasWindow : Gtk.Grid
 	private readonly ChromeManager chrome;
 	private readonly ToolManager tools;
 
-	private readonly Ruler horizontal_ruler;
-	private readonly Ruler vertical_ruler;
+	private readonly RulerViewModel horizontal_ruler;
+	private readonly RulerViewModel vertical_ruler;
 	private readonly Gtk.ScrolledWindow scrolled_window;
 	private readonly Gtk.EventControllerMotion motion_controller;
 	private readonly Gtk.GestureDrag drag_controller;
@@ -97,13 +97,21 @@ public sealed class CanvasWindow : Gtk.Grid
 			Child = viewPort,
 		};
 
-		Ruler horizontalRuler = new (Gtk.Orientation.Horizontal) {
+		RulerModel horizontalRulerModel = new (Gtk.Orientation.Horizontal) {
 			Metric = MetricType.Pixels,
+		};
+		RulerModel verticalRulerModel = new (Gtk.Orientation.Vertical) {
+			Metric = MetricType.Pixels,
+		};
+
+		RulerViewModel horizontalRulerViewModel = new (horizontalRulerModel);
+		RulerViewModel verticalRulerViewModel = new (verticalRulerModel);
+
+		RulerView horizontalRuler = new (horizontalRulerViewModel) {
 			Visible = false,
 		};
 
-		Ruler verticalRuler = new (Gtk.Orientation.Vertical) {
-			Metric = MetricType.Pixels,
+		RulerView verticalRuler = new (verticalRulerViewModel) {
 			Visible = false,
 		};
 
@@ -139,8 +147,8 @@ public sealed class CanvasWindow : Gtk.Grid
 
 		scrolled_window = scrolledWindow;
 		gesture_zoom = gestureZoom;
-		horizontal_ruler = horizontalRuler;
-		vertical_ruler = verticalRuler;
+		horizontal_ruler = horizontalRulerViewModel;
+		vertical_ruler = verticalRulerViewModel;
 		motion_controller = motionController;
 		drag_controller = dragController;
 
