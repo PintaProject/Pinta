@@ -137,6 +137,8 @@ public sealed class TextTool : BaseTool
 	private Gtk.Separator outline_sep = null!;
 	private Gtk.SpinButton outline_width = null!;
 	private Gtk.Label outline_width_label = null!;
+	private Gtk.Separator join_sep = null!;
+	private ToolBarDropDownButton join_btn = null!;
 
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
@@ -385,7 +387,39 @@ public sealed class TextTool : BaseTool
 
 		tb.Append (outline_width);
 
-		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = StrokeText;
+		join_sep ??= GtkExtensions.CreateToolBarSeparator ();
+
+		tb.Append (join_sep);
+
+		if (join_btn == null) {
+			join_btn = new ToolBarDropDownButton ();
+
+			// Translators: 'Miter Join' refers to the Cairo.LineJoin property
+			join_btn.AddItem (
+				Translations.GetString ("Miter Join"),
+				Pinta.Resources.Icons.JoinMiter,
+				Cairo.LineJoin.Miter
+			);
+			// Translators: 'Round Join' refers to the Cairo.LineJoin property
+			join_btn.AddItem (
+				Translations.GetString ("Round Join"),
+				Pinta.Resources.Icons.JoinRound,
+				Cairo.LineJoin.Round
+			);
+			// Translators: 'Bevel Join' refers to the Cairo.LineJoin property
+			join_btn.AddItem (
+				Translations.GetString ("Bevel Join"),
+				Pinta.Resources.Icons.JoinBevel,
+				Cairo.LineJoin.Bevel
+			);
+
+			join_btn.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_JOIN, 0);
+			join_btn.SelectedItemChanged += HandleJoinButtonToggled;
+		}
+
+		tb.Append (join_btn);
+
+		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = join_btn.Visible = join_sep.Visible = StrokeText;
 
 		UpdateFont ();
 	}
@@ -423,6 +457,9 @@ public sealed class TextTool : BaseTool
 
 		if (outline_width is not null)
 			settings.PutSetting (SettingNames.TEXT_OUTLINE_WIDTH, outline_width.GetValueAsInt ());
+
+		if (join_btn is not null)
+			settings.PutSetting (SettingNames.TEXT_JOIN, join_btn.SelectedIndex);
 	}
 
 	private void HandleFontChanged ()
@@ -508,8 +545,13 @@ public sealed class TextTool : BaseTool
 
 	private void HandleFillButtonToggled (object? sender, EventArgs e)
 	{
-		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = StrokeText;
+		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = join_btn.Visible = join_sep.Visible = StrokeText;
 
+		UpdateFont ();
+	}
+
+	private void HandleJoinButtonToggled (object? sender, EventArgs e)
+	{
 		UpdateFont ();
 	}
 
@@ -1151,6 +1193,7 @@ public sealed class TextTool : BaseTool
 		if (StrokeText) {
 			g.SetSourceColor (FillText ? CurrentTextEngine.SecondaryColor : CurrentTextEngine.PrimaryColor);
 			g.LineWidth = OutlineWidth;
+			g.LineJoin = (Cairo.LineJoin) join_btn.SelectedIndex;
 
 			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
 			g.Stroke ();
