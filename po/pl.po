@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-15 00:30+0000\n"
-"PO-Revision-Date: 2025-12-28 07:23+0000\n"
+"PO-Revision-Date: 2026-02-24 07:12+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -358,7 +358,7 @@ msgstr "Zmień szerokość pędzla. Skróty klawiaturowe: [ ]"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:186
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Zmień rozmiar czcionki. Skróty klawiaturowe: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
@@ -376,7 +376,7 @@ msgstr "Wybierz kolor"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:361
 msgid "Choose Colors"
-msgstr ""
+msgstr "Wybierz kolory"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:153
 msgid "Choose Palette Color"
@@ -700,7 +700,7 @@ msgstr "Rozpikselowanie tonalne"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
 msgid "Do not switch tool"
-msgstr "NIe zmieniaj narzędzia"
+msgstr "Nie zmieniaj narzędzia"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:221
 #, csharp-format
@@ -1055,7 +1055,7 @@ msgstr "Pliki ICO mogą mieć co najwyżej 255 × 255 pikseli."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "Jeśli włączono, komponent Wartość zostanie zastosowany do koła kolorów."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1384,6 +1384,10 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Kliknij lewym przyciskiem myszy, aby ustawić kolor podstawowy. Kliknij "
+"prawym przyciskiem myszy, aby ustawić kolor dodatkowy. Kliknij środkowym "
+"przyciskiem myszy lub naciśnij {0} i kliknij lewym przyciskiem myszy, aby "
+"wybrać kolor palety."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -2109,7 +2113,7 @@ msgstr "Przywróć domyślne"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:93
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:78
 msgid "Reset to image size"
-msgstr ""
+msgstr "Przywróć do rozmiaru obrazu"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:214
