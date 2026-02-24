@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-15 00:30+0000\n"
-"PO-Revision-Date: 2025-12-31 18:06+0000\n"
+"PO-Revision-Date: 2026-02-27 00:47+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
 "Language-Team: Irish <https://hosted.weblate.org/projects/pinta/pinta/ga/>\n"
 "Language: ga\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -357,7 +357,7 @@ msgstr "Athraigh leithead an scuaibe. Eochracha aicearra: [ ]"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:186
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Athraigh méid an chló. Eochracha aicearra: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
@@ -375,7 +375,7 @@ msgstr "Roghnaigh Dath"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:361
 msgid "Choose Colors"
-msgstr ""
+msgstr "Roghnaigh Dathanna"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:153
 msgid "Choose Palette Color"
@@ -1057,6 +1057,8 @@ msgstr "Ní féidir comhaid ICO a bheith níos mó ná 255 x 255 picteilín."
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "If enabled, the Value component is applied to the color wheel."
 msgstr ""
+"Má tá sé cumasaithe, cuirtear an chomhpháirt Luach i bhfeidhm ar an roth "
+"datha."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1390,6 +1392,9 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Cliceáil ar chlé chun an príomhdath a shocrú. Cliceáil ar dheis chun an dath "
+"tánaisteach a shocrú. Cliceáil sa lár nó brúigh {0} agus cliceáil ar chlé "
+"chun dath an phailléid a roghnú."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -2116,7 +2121,7 @@ msgstr "Fill ar Réamhshocruithe"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:93
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:78
 msgid "Reset to image size"
-msgstr ""
+msgstr "Athshocraigh go méid íomhá"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:214
