@@ -9,6 +9,8 @@ Thanks to the following contributors who worked on this release:
 - @spaghetti22
 - @Matthieu-LAURENT39
 - @jordanbrotherton
+- @pedropaulosuzuki
+- @yioannides
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -19,6 +21,7 @@ Thanks to the following contributors who worked on this release:
 - Effect dialogs now hide options that are not currently relevant (#1960)
 - Fixed several minor UX issues in the color dialog (#1795)
 - The text tool now provides a separate adjustment for the font size, which doesn't require opening the font dialog (#1947, #1961)
+- The text tool now allows choosing any font-weight supported by Cairo, not just Normal and Bold (#1965, #1967)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)

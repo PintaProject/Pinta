@@ -125,7 +125,7 @@ public sealed class TextTool : BaseTool
 	private Gtk.Label font_label = null!;
 	private Gtk.FontDialogButton font_button = null!;
 	private Gtk.SpinButton font_size = null!;
-	private Gtk.ToggleButton bold_btn = null!;
+	private ToolBarDropDownButton weight_btn = null!;
 	private Gtk.ToggleButton italic_btn = null!;
 	private Gtk.ToggleButton underscore_btn = null!;
 	private Gtk.ToggleButton left_alignment_btn = null!;
@@ -192,17 +192,87 @@ public sealed class TextTool : BaseTool
 
 		tb.Append (GtkExtensions.CreateToolBarSeparator ());
 
-		if (bold_btn == null) {
-			bold_btn = new Gtk.ToggleButton {
-				IconName = Pinta.Resources.StandardIcons.FormatTextBold,
-				TooltipText = Translations.GetString ("Bold"),
-				CanFocus = false,
-				Active = Settings.GetSetting (SettingNames.TEXT_BOLD, false),
-			};
-			bold_btn.OnToggled += HandleBoldButtonToggled;
+		if (weight_btn == null) {
+			weight_btn = new ToolBarDropDownButton ();
+
+			// Translators: 'Thin' (100) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Thin") + " 100",
+				Pinta.Resources.Icons.TextExtraLight,
+				Pango.Weight.Thin
+			);
+			// Translators: 'Ultralight' (200) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Ultralight") + " 200",
+				Pinta.Resources.Icons.TextExtraLight,
+				Pango.Weight.Ultralight
+			);
+			// Translators: 'Light' (300) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Light") + " 300",
+				Pinta.Resources.Icons.TextLight,
+				Pango.Weight.Light
+			);
+			// Translators: 'Semilight' (350) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Semilight") + " 350",
+				Pinta.Resources.Icons.TextLight,
+				Pango.Weight.Semilight
+			);
+			// Translators: 'Book' (380) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Book") + " 380",
+				Pinta.Resources.Icons.TextNormal,
+				Pango.Weight.Book
+			);
+			// Translators: 'Normal' (400) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Normal") + " 400",
+				Pinta.Resources.Icons.TextNormal,
+				Pango.Weight.Normal
+			);
+			// Translators: 'Medium' (500) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Medium") + " 500",
+				Pinta.Resources.Icons.TextNormal,
+				Pango.Weight.Medium
+			);
+			// Translators: 'Semibold' (600) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Semibold") + " 600",
+				Pinta.Resources.Icons.TextBold,
+				Pango.Weight.Semibold
+			);
+			// Translators: 'Bold' (700) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Bold") + " 700",
+				Pinta.Resources.Icons.TextBold,
+				Pango.Weight.Bold
+			);
+			// Translators: 'Ultrabold' (800) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Ultrabold") + " 800",
+				Pinta.Resources.Icons.TextExtraBold,
+				Pango.Weight.Ultrabold
+			);
+			// Translators: 'Heavy' (900) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Heavy") + " 900",
+				Pinta.Resources.Icons.TextExtraBold,
+				Pango.Weight.Heavy
+			);
+			// Translators: 'Ultraheavy' (1000) refers to the font-weight text property
+			weight_btn.AddItem (
+				Translations.GetString ("Ultraheavy") + " 1000",
+				Pinta.Resources.Icons.TextExtraBold,
+				Pango.Weight.Ultraheavy
+			);
+
+			weight_btn.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_WEIGHT, 5);
+			weight_btn.SelectedItemChanged += HandleWeightButtonToggled;
 		}
 
-		tb.Append (bold_btn);
+		tb.Append (weight_btn);
 
 		if (italic_btn == null) {
 			italic_btn = new Gtk.ToggleButton {
@@ -288,7 +358,7 @@ public sealed class TextTool : BaseTool
 			fill_button.AddItem (Translations.GetString ("Fill Background"), Pinta.Resources.Icons.FillStyleBackground, 3);
 
 			fill_button.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_STYLE, 0);
-			fill_button.SelectedItemChanged += HandleBoldButtonToggled;
+			fill_button.SelectedItemChanged += HandleFillButtonToggled;
 		}
 
 		tb.Append (fill_button);
@@ -336,8 +406,8 @@ public sealed class TextTool : BaseTool
 		if (font_button is not null)
 			settings.PutSetting (SettingNames.TEXT_FONT, font_button.FontDesc!.ToString ()!);
 
-		if (bold_btn is not null)
-			settings.PutSetting (SettingNames.TEXT_BOLD, bold_btn.Active);
+		if (weight_btn is not null)
+			settings.PutSetting (SettingNames.TEXT_WEIGHT, weight_btn.SelectedIndex);
 
 		if (italic_btn is not null)
 			settings.PutSetting (SettingNames.TEXT_ITALIC, italic_btn.Active);
@@ -431,7 +501,12 @@ public sealed class TextTool : BaseTool
 		UpdateFont ();
 	}
 
-	private void HandleBoldButtonToggled (object? sender, EventArgs e)
+	private void HandleWeightButtonToggled (object? sender, EventArgs e)
+	{
+		UpdateFont ();
+	}
+
+	private void HandleFillButtonToggled (object? sender, EventArgs e)
 	{
 		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = StrokeText;
 
@@ -453,7 +528,7 @@ public sealed class TextTool : BaseTool
 		if (workspace.HasOpenDocuments) {
 
 			var font = font_button.FontDesc!.Copy ()!; // NRT: Only nullable when nullptr is passed.
-			font.SetWeight (bold_btn.Active ? Pango.Weight.Bold : Pango.Weight.Normal);
+			font.SetWeight ((Pango.Weight) weight_btn.SelectedItem.GetTagOrDefault (Pango.Weight.Normal));
 			font.SetStyle (italic_btn.Active ? Pango.Style.Italic : Pango.Style.Normal);
 
 			CurrentTextEngine.SetFont (font, Alignment, underscore_btn.Active);
@@ -796,7 +871,8 @@ public sealed class TextTool : BaseTool
 								italic_btn.Toggle ();
 								UpdateFont ();
 							} else if (e.Key.Value == Gdk.Constants.KEY_b) {
-								bold_btn.Toggle ();
+								// If current font-weight is Bold (8) or bolder, set to Normal (5). Otherwise, set to Bold (8).
+								weight_btn.SelectedIndex = weight_btn.SelectedIndex > 7 ? 5 : 8;
 								UpdateFont ();
 							} else if (e.Key.Value == Gdk.Constants.KEY_u) {
 								underscore_btn.Toggle ();
