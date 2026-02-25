@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-15 00:30+0000\n"
-"PO-Revision-Date: 2025-12-31 18:06+0000\n"
+"PO-Revision-Date: 2026-02-27 00:47+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
-">\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -358,7 +358,7 @@ msgstr "Fırça genişliğini değiştir. Kısayol tuşu: []"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:186
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Yazı tipi boyutunu genişliğini değiştir. Kısayol tuşu: []"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
 msgid "Changed Shape Type"
@@ -376,7 +376,7 @@ msgstr "Renk Seçin"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:361
 msgid "Choose Colors"
-msgstr ""
+msgstr "Renkleri Seçin"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:153
 msgid "Choose Palette Color"
@@ -1057,7 +1057,7 @@ msgstr "ICO dosyası 255 x 255 pikselden büyük olamaz."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "Etkinleştirildiğinde, Değer bileşeni renk çarkına uygulanır."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1380,6 +1380,9 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Birincil rengi ayarlamak için sol tıklayın. İkincil rengi ayarlamak için sağ "
+"tıklayın. Palet rengini seçmek için orta tıklayın veya {0} tuşuna basın ve "
+"sol tıklayın."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -2107,7 +2110,7 @@ msgstr "Öntanımlı Değere Sıfırla"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:93
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:78
 msgid "Reset to image size"
-msgstr ""
+msgstr "Görüntü boyutuna sıfırla"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:214
