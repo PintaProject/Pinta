@@ -315,7 +315,7 @@ public static class GdkExtensions
 	private static PointD[] RotateRectangle (RectangleD rectangle, int angle_in_degrees)
 	{
 		float angle_in_radians = float.DegreesToRadians (-angle_in_degrees);
-		Matrix3x2D rotation = Matrix3x2D.CreateRotation (new RadiansAngle (angle_in_radians), rectangle.GetCenter());
+		Matrix3x2D rotation = Matrix3x2D.CreateRotation (new RadiansAngle (angle_in_radians), rectangle.GetCenter ());
 		return [
 			rectangle.Location().Transformed(rotation),
 			new PointD(rectangle.Location().X, rectangle.EndLocation().Y).Transformed(rotation),
