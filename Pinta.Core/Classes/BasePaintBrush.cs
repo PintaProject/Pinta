@@ -86,11 +86,20 @@ public abstract class BasePaintBrush
 		return OnMouseMove (g, surface, strokeArgs);
 	}
 
-	public virtual void LoadCursor (int lineWidth)
+	/// <summary>
+	/// Notify the paint brush that the tool's line width has changed so that it
+	/// can refresh its cursor.
+	/// </summary>
+	/// <param name="lineWidth">New line width set in brush tool</param>
+	public virtual void LineWidthChanged (int lineWidth)
 	{
-		OnCursorChanged?.Invoke ();
+		CursorChanged ();
 	}
 
+	/// <summary>
+	/// Get the cursor appropriate for the brush's current settings.
+	/// </summary>
+	/// <returns>Cursor returned by the brush, or null if the tool should use the default cursor.</returns>
 	public virtual Gdk.Cursor? GetCursor ()
 	{
 		return null;
@@ -124,6 +133,10 @@ public abstract class BasePaintBrush
 		BrushStrokeArgs strokeArgs);
 
 
+	/// <summary>
+	/// Notify listeners that the brush's cursor has been changed (most likely
+	/// in response to the user having changed a setting).
+	/// </summary>
 	protected void CursorChanged ()
 	{
 		OnCursorChanged?.Invoke ();

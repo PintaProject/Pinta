@@ -127,7 +127,7 @@ internal sealed class SlashBrush : BasePaintBrush
 		return dirty;
 	}
 
-	public override void LoadCursor (int lineWidth)
+	public override void LineWidthChanged (int lineWidth)
 	{
 		line_width = lineWidth;
 		CursorChanged ();

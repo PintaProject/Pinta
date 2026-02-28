@@ -93,7 +93,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 		brush_specific_options_box.MarginStart = 10;
 		tb.Append (brush_specific_options_box);
 		if (active_brush is not null) {
-			active_brush.LoadCursor (BrushWidth);
+			active_brush.LineWidthChanged (BrushWidth);
 		}
 	}
 
@@ -202,7 +202,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 		if (active_brush is null) {
 			base.OnBrushWidthChanged ();
 		} else {
-			active_brush.LoadCursor (BrushWidth);
+			active_brush.LineWidthChanged (BrushWidth);
 		}
 	}
 
@@ -221,7 +221,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 					var brush_name = brush_combo_box.ComboBox.GetActiveText ();
 					active_brush = brushes.SingleOrDefault (brush => brush.Name == brush_name) ?? default_brush;
 					if (active_brush is not null) {
-						active_brush.LoadCursor (BrushWidth);
+						active_brush.LineWidthChanged (BrushWidth);
 					}
 				};
 

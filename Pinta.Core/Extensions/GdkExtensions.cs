@@ -95,11 +95,7 @@ public static class GdkExtensions
 		out int shapeX,
 		out int shapeY)
 	{
-		int shape_x;
-		int shape_y;
-		Gdk.Texture result = CreateIconWithShape (imgName, shape, shapeWidth, shapeWidth, 0, imgToShapeX, imgToShapeY, out shape_x, out shape_y);
-		shapeX = shape_x;
-		shapeY = shape_y;
+		Gdk.Texture result = CreateIconWithShape (imgName, shape, shapeWidth, shapeWidth, 0, imgToShapeX, imgToShapeY, out shapeX, out shapeY);
 		return result;
 	}
 
@@ -319,20 +315,12 @@ public static class GdkExtensions
 	private static PointD[] RotateRectangle (RectangleD rectangle, int angle_in_degrees)
 	{
 		float angle_in_radians = float.DegreesToRadians (-angle_in_degrees);
-		RectangleD translatedToOrigin = new RectangleD (
-			rectangle.X - rectangle.GetCenter ().X,
-			rectangle.Y - rectangle.GetCenter ().Y,
-			rectangle.Width,
-			rectangle.Height
-		);
-		Matrix3x2D rotation = Matrix3x2D.CreateRotation (new RadiansAngle (angle_in_radians));
-		List<PointD> pointsOfRotatedRectangle = [
-			translatedToOrigin.Location().Transformed(rotation),
-			new PointD(translatedToOrigin.Location().X, translatedToOrigin.EndLocation().Y).Transformed(rotation),
-			translatedToOrigin.EndLocation().Transformed(rotation),
-			new PointD(translatedToOrigin.EndLocation().X, translatedToOrigin.Location().Y).Transformed(rotation)
+		Matrix3x2D rotation = Matrix3x2D.CreateRotation (new RadiansAngle (angle_in_radians), rectangle.GetCenter());
+		return [
+			rectangle.Location().Transformed(rotation),
+			new PointD(rectangle.Location().X, rectangle.EndLocation().Y).Transformed(rotation),
+			rectangle.EndLocation().Transformed(rotation),
+			new PointD(rectangle.EndLocation().X, rectangle.Location().Y).Transformed(rotation)
 		];
-		PointD[] pointsOfFinalRectangle = [.. pointsOfRotatedRectangle.Select (p => new PointD (p.X + rectangle.GetCenter ().X, p.Y + rectangle.GetCenter ().Y))];
-		return pointsOfFinalRectangle;
 	}
 }
