@@ -48,6 +48,17 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private delegate bool TimeoutHandler ();
 	TimeoutHandler? timeout_func;
 
+	private readonly EffectData effect_data;
+
+	// Track widgets with conditional visibility/enabled, so we can update
+	// them when the effect data changes
+	private sealed record ConditionalWidget (
+		Gtk.Widget Widget,
+		Func<bool>? VisibleWhenDelegate,
+		Func<bool>? EnabledWhenDelegate
+	);
+	private readonly List<ConditionalWidget> conditional_widgets = new ();
+
 	/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 	/// fetched from the appropriate place.
 	/// </param>
@@ -82,6 +93,9 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			contentAreaBox.Append (widget);
 
 		OnClose += (_, _) => HandleClose ();
+
+		// Keep reference to effect data, so it can be used for handling conditional widgets
+		effect_data = effectData;
 	}
 
 	/// <summary>
@@ -132,8 +146,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			.GetMembers ()
 			.Where (IsInstanceFieldOrProperty)
 			.Where (IsCustomProperty)
+			.Where (member => !member.GetCustomAttributes<SkipAttribute> (false).Any ())
 			.Select (CreateSettings)
-			.Where (settings => !settings.skip)
 			.Select (settings => GenerateWidgetsForMember (settings, effectData, localizer, workspace))
 			.SelectMany (widgets => widgets);
 
@@ -160,7 +174,9 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberReflector reflector,
 		string caption,
 		string? hint,
-		bool skip);
+		string? visibleWhenMethodName,
+		string? enabledWhenMethodName
+	);
 
 	private static MemberSettings CreateSettings (MemberInfo memberInfo)
 	{
@@ -172,11 +188,24 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			.Select (h => h.Caption)
 			.FirstOrDefault ();
 
+		string? visibleConditionMethodName =
+			reflector.Attributes
+			.OfType<VisibleWhenAttribute> ()
+			.Select (v => v.ConditionMethodName)
+			.FirstOrDefault ();
+
+		string? enabledConditionMethodName =
+			reflector.Attributes
+			.OfType<EnabledWhenAttribute> ()
+			.Select (e => e.ConditionMethodName)
+			.FirstOrDefault ();
+
 		return new (
 			reflector: reflector,
 			caption: caption ?? MakeCaption (memberInfo.Name),
 			hint: reflector.Attributes.OfType<HintAttribute> ().Select (h => h.Hint).FirstOrDefault (),
-			skip: reflector.Attributes.OfType<SkipAttribute> ().Any ());
+			visibleWhenMethodName: visibleConditionMethodName,
+			enabledWhenMethodName: enabledConditionMethodName);
 	}
 
 	private static string MakeCaption (string name)
@@ -209,6 +238,19 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		}
 	}
 
+	/// <summary>
+	/// Updates all widgets with conditional attributes.
+	/// </summary>
+	private void UpdateConditionalWidgets (EffectData effectData)
+	{
+		foreach (var widget in conditional_widgets) {
+			if (widget.VisibleWhenDelegate is not null)
+				widget.Widget.Visible = widget.VisibleWhenDelegate ();
+
+			if (widget.EnabledWhenDelegate is not null)
+				widget.Widget.Sensitive = widget.EnabledWhenDelegate ();
+		}
+	}
 	private IEnumerable<Gtk.Widget> GenerateWidgetsForMember (
 		MemberSettings settings,
 		EffectData effectData,
@@ -217,8 +259,36 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	{
 		WidgetFactory? widgetFactory = GetWidgetFactory (settings);
 
-		if (widgetFactory is not null)
-			yield return widgetFactory (localizer.GetString (settings.caption), effectData, settings, workspace);
+		if (widgetFactory is not null) {
+			Gtk.Widget widget = widgetFactory (localizer.GetString (settings.caption), effectData, settings, workspace);
+
+			// Keep a reference to widget if it has conditional attributes so we can update it later
+			if (settings.visibleWhenMethodName is not null || settings.enabledWhenMethodName is not null) {
+
+				// Create delegates for condition evaluation (do reflection once, not on every update)
+				Func<bool>? visibleDelegate = settings.visibleWhenMethodName is not null
+					? ReflectionHelper.CreateConditionDelegate (effectData, settings.visibleWhenMethodName)
+					: null;
+
+				Func<bool>? enabledDelegate = settings.enabledWhenMethodName is not null
+					? ReflectionHelper.CreateConditionDelegate (effectData, settings.enabledWhenMethodName)
+					: null;
+
+				// Apply the initial state
+				if (visibleDelegate is not null)
+					widget.Visible = visibleDelegate ();
+
+				if (enabledDelegate is not null)
+					widget.Sensitive = enabledDelegate ();
+
+				conditional_widgets.Add (new ConditionalWidget (
+					widget,
+					visibleDelegate,
+					enabledDelegate)
+				);
+			}
+			yield return widget;
+		}
 
 		if (settings.hint != null)
 			yield return CreateHintLabel (localizer.GetString (settings.hint));
@@ -530,6 +600,9 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	{
 		reflector.SetValue (o, val);
 		EffectDataChanged?.Invoke (this, new PropertyChangedEventArgs (reflector.OriginalMemberInfo.Name));
+
+		// Update conditional widgets when any property changes
+		UpdateConditionalWidgets (effect_data);
 	}
 
 	private Gtk.Widget CreateSeed (

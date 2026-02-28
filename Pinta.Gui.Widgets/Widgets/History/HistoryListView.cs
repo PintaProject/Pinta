@@ -34,6 +34,7 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 {
 	private readonly Gio.ListStore model;
 	private readonly Gtk.SingleSelection selection_model;
+	private readonly Gtk.ListView list_view;
 
 	private Document? active_document;
 
@@ -56,8 +57,8 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 			widget.Update (model_item);
 		};
 
-		Gtk.ListView selectionView = Gtk.ListView.New (selectionModel, signalFactory);
-		selectionView.CanFocus = false;
+		Gtk.ListView listView = Gtk.ListView.New (selectionModel, signalFactory);
+		listView.CanFocus = false;
 
 		// --- Initialization (Gtk.Widget)
 
@@ -67,12 +68,13 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 		// --- Initialization (Gtk.ScrolledWindow)
 
 		SetPolicy (Gtk.PolicyType.Automatic, Gtk.PolicyType.Automatic);
-		SetChild (selectionView);
+		SetChild (listView);
 
 		// --- References to keep
 
 		model = listModel;
 		selection_model = selectionModel;
+		list_view = listView;
 
 		// --- Event handlers for the application
 		// TODO: Move handlers out of this constructor
@@ -121,8 +123,11 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 			model.Append (new HistoryListViewItem (item));
 
 		// Move selection to the document's current history item.
-		if (model.NItems > 0)
-			selection_model.SetSelected ((uint) doc.History.Pointer);
+		if (model.NItems > 0) {
+			uint selectedIdx = (uint) doc.History.Pointer;
+			selection_model.SetSelected (selectedIdx);
+			list_view.ScrollToSelectedItem (selection_model);
+		}
 
 		doc.History.HistoryItemAdded += OnHistoryItemAdded;
 		doc.History.ActionUndone += OnUndoOrRedo;
@@ -140,6 +145,7 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 
 		model.Append (new HistoryListViewItem (args.Item));
 		selection_model.SetSelected (idx);
+		list_view.ScrollToSelectedItem (selection_model);
 	}
 
 	private void OnUndoOrRedo (object? sender, EventArgs args)
@@ -147,7 +153,8 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 		ArgumentNullException.ThrowIfNull (active_document);
 
 		// Update the selected history item.
-		uint selected_idx = (uint) active_document.History.Pointer;
-		selection_model.SetSelected (selected_idx);
+		uint selectedIdx = (uint) active_document.History.Pointer;
+		selection_model.SetSelected (selectedIdx);
+		list_view.ScrollToSelectedItem (selection_model);
 	}
 }

@@ -6,10 +6,6 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-// used in `ColorPickerDialog` for the right hand side sliders
-// uses a label, scale, and entry
-// then hides the scale and draws over it
-// with a drawingarea
 public sealed class ColorPickerSlider : Gtk.Box
 {
 	public enum Component
@@ -27,47 +23,23 @@ public sealed class ColorPickerSlider : Gtk.Box
 	private const int PADDING_HEIGHT = 10;
 
 	private readonly Component component;
-	private readonly Gtk.Scale slider_control;
-	private readonly Gtk.Entry input_field;
-	private readonly Gtk.Overlay slider_overlay;
-	private readonly Gtk.DrawingArea cursor_area;
 	private Color color;
 
-	public Gtk.DrawingArea Gradient { get; }
+	private readonly Gtk.Entry input_field;
+	private readonly Gtk.DrawingArea gradient_slider;
 
 	public event EventHandler? OnColorChanged;
 
 	public ColorPickerSlider (Component component, Color initialColor, int initialWidth)
 	{
-		Gtk.Scale sliderControl = new () {
-			WidthRequest = initialWidth,
-			Opacity = 0,
-		};
-		sliderControl.SetOrientation (Gtk.Orientation.Horizontal);
-		sliderControl.SetAdjustment (Gtk.Adjustment.New (0, 0, GetMaxValue (component) + 1, 1, 1, 1));
-		sliderControl.SetValue (ExtractValue (initialColor, component));
-		sliderControl.OnChangeValue += OnSliderControlChangeValue;
-
-		Gtk.DrawingArea cursorArea = new ();
-		cursorArea.SetSizeRequest (initialWidth, this.GetHeight ());
-		cursorArea.SetDrawFunc (CursorAreaDrawingFunction);
-
-		Gtk.DrawingArea gradient = new ();
-		gradient.SetSizeRequest (initialWidth, this.GetHeight ());
-		gradient.SetDrawFunc ((area, context, width, height) => {
+		Gtk.DrawingArea gradientSlider = new ();
+		gradientSlider.SetSizeRequest (initialWidth, this.GetHeight ());
+		gradientSlider.SetDrawFunc ((_, context, width, height) => {
 			DrawGradient (context, width, height, CreateGradient (color, component));
 		});
 
 		Gtk.Label sliderLabel = new () { WidthRequest = 50 };
 		sliderLabel.SetLabel (GetLabelText (component));
-
-		Gtk.Overlay sliderOverlay = new () {
-			WidthRequest = initialWidth,
-			HeightRequest = this.GetHeight (),
-		};
-		sliderOverlay.AddOverlay (gradient);
-		sliderOverlay.AddOverlay (cursorArea);
-		sliderOverlay.AddOverlay (sliderControl);
 
 		Gtk.Entry inputField = new () {
 			MaxWidthChars = 3,
@@ -77,34 +49,78 @@ public sealed class ColorPickerSlider : Gtk.Box
 		inputField.SetText (Convert.ToInt32 (ExtractValue (initialColor, component)).ToString ());
 		inputField.OnChanged += OnInputFieldChanged;
 
+		Gtk.GestureDrag dragGesture = Gtk.GestureDrag.New ();
+		dragGesture.SetButton (GtkExtensions.MOUSE_LEFT_BUTTON);
+		dragGesture.OnDragBegin += (_, _) => dragGesture.SetState (Gtk.EventSequenceState.Claimed);
+		dragGesture.OnDragUpdate += OnDragUpdate;
+		dragGesture.OnDragEnd += OnDragEnd;
+		gradientSlider.AddController (dragGesture);
+
+		Gtk.EventControllerScroll scrollController = Gtk.EventControllerScroll.New (Gtk.EventControllerScrollFlags.Vertical);
+		scrollController.OnScroll += HandleScrollEvent;
+		gradientSlider.AddController (scrollController);
+
 		// --- Initialization (Gtk.Box)
 
 		Append (sliderLabel);
-		Append (sliderOverlay);
+		Append (gradientSlider);
 		Append (inputField);
 
 		// --- References to keep
 
 		color = initialColor;
-		cursor_area = cursorArea;
-		slider_control = sliderControl;
-		slider_overlay = sliderOverlay;
 		input_field = inputField;
-
-		Gradient = gradient;
+		gradient_slider = gradientSlider;
 
 		this.component = component;
 	}
 
-	private void CursorAreaDrawingFunction (
-		Gtk.DrawingArea area,
-		Context context,
-		int width,
-		int height)
+	private void OnDragUpdate (Gtk.GestureDrag sender, Gtk.GestureDrag.DragUpdateSignalArgs args)
+	{
+		sender.GetStartPoint (out double startX, out _);
+		UpdateColorFromDrag (startX + args.OffsetX);
+	}
+
+	private void OnDragEnd (Gtk.GestureDrag sender, Gtk.GestureDrag.DragEndSignalArgs args)
+	{
+		sender.GetStartPoint (out double startX, out _);
+		UpdateColorFromDrag (startX + args.OffsetX);
+	}
+
+	private void UpdateColorFromDrag (double x)
+	{
+		x -= PADDING_WIDTH;
+		double maxX = gradient_slider.GetWidth () - 2 * PADDING_WIDTH;
+		double value = (x / maxX) * GetMaxValue (component);
+
+		UpdateColorValue (value);
+	}
+
+	private void UpdateColorValue (double value)
+	{
+		double clampedValue = Math.Clamp (Math.Round (value), 0, GetMaxValue (component));
+		input_field.SetText (clampedValue.ToString (CultureInfo.InvariantCulture));
+
+		color = UpdateValue (color, component, clampedValue);
+		gradient_slider.QueueDraw ();
+		OnColorChanged?.Invoke (this, EventArgs.Empty);
+	}
+
+	private bool HandleScrollEvent (
+		Gtk.EventControllerScroll controller,
+		Gtk.EventControllerScroll.ScrollSignalArgs args)
+	{
+		double value = ExtractValue (color, component);
+		UpdateColorValue (value - args.Dy);
+		return true;
+	}
+
+	private void DrawCursor (Context context, int width, int height)
 	{
 		const int OUTLINE_WIDTH = 2;
 
-		double currentPosition = slider_control.GetValue () / GetMaxValue (component) * (width - 2 * PADDING_WIDTH) + PADDING_WIDTH;
+		double value = ExtractValue (color, component);
+		double currentPosition = value / GetMaxValue (component) * (width - 2 * PADDING_WIDTH) + PADDING_WIDTH;
 
 		ReadOnlySpan<PointD> cursorPoly = [
 			new (currentPosition, height / 2),
@@ -125,21 +141,6 @@ public sealed class ColorPickerSlider : Gtk.Box
 		context.FillPolygonal (
 			cursorPoly,
 			new Color (1, 1, 1));
-	}
-
-	private bool OnSliderControlChangeValue (
-		Gtk.Range sender,
-		Gtk.Range.ChangeValueSignalArgs args)
-	{
-		// The provided value is from the scroll action, so we need to clamp to the range!
-		double clampedValue = Math.Clamp (args.Value, 0, GetMaxValue (component));
-
-		input_field.SetText (clampedValue.ToString (CultureInfo.InvariantCulture));
-
-		color = UpdateValue (color, component, clampedValue);
-		OnColorChanged?.Invoke (this, new ());
-
-		return false;
 	}
 
 	private void OnInputFieldChanged (Gtk.Editable inputField, EventArgs e)
@@ -166,10 +167,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 	public void SetSliderWidth (int sliderWidth)
 	{
-		slider_control.WidthRequest = sliderWidth;
-		Gradient.SetSizeRequest (sliderWidth, this.GetHeight ());
-		cursor_area.SetSizeRequest (sliderWidth, this.GetHeight ());
-		slider_overlay.WidthRequest = sliderWidth;
+		gradient_slider.WidthRequest = sliderWidth;
 	}
 
 	public Color Color {
@@ -177,7 +175,6 @@ public sealed class ColorPickerSlider : Gtk.Box
 		set {
 			color = value;
 			double componentValue = ExtractValue (value, component);
-			slider_control.SetValue (componentValue);
 
 			if (!input_field.IsEditingText ()) {
 				// Ensure we don't get an infinite loop of "value changed" events
@@ -186,8 +183,7 @@ public sealed class ColorPickerSlider : Gtk.Box
 					input_field.SetText (newText);
 			}
 
-			Gradient.QueueDraw ();
-			cursor_area.QueueDraw ();
+			gradient_slider.QueueDraw ();
 		}
 	}
 
@@ -257,6 +253,8 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 		context.SetSource (pat);
 		context.Fill ();
+
+		DrawCursor (context, width, height);
 	}
 
 	private static double ExtractValue (Color color, Component component) => component switch {

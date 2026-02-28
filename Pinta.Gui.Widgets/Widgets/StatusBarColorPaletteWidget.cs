@@ -45,14 +45,16 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 	private readonly IChromeService chrome;
 	private readonly IPaletteService palette;
+	private readonly ISystemService system;
 
 	private RectangleD palette_rect;
 	private RectangleD recent_palette_rect;
 
-	public StatusBarColorPaletteWidget (IChromeService chrome, IPaletteService palette)
+	public StatusBarColorPaletteWidget (IChromeService chrome, IPaletteService palette, ISystemService system)
 	{
 		this.chrome = chrome;
 		this.palette = palette;
+		this.system = system;
 
 		HasTooltip = true;
 		OnQueryTooltip += HandleQueryTooltip;
@@ -71,13 +73,13 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		Gtk.GestureClick click_gesture = Gtk.GestureClick.New ();
 		click_gesture.SetButton (0); // Listen for all mouse buttons.
 		click_gesture.OnReleased += (_, e) => {
-			HandleClick (new PointD (e.X, e.Y), click_gesture.GetCurrentButton ());
+			HandleClick (new PointD (e.X, e.Y), click_gesture.GetCurrentButton (), click_gesture.GetCurrentEventState ());
 			click_gesture.SetState (Gtk.EventSequenceState.Claimed);
 		};
 		AddController (click_gesture);
 	}
 
-	private async void HandleClick (PointD point, uint button)
+	private async void HandleClick (PointD point, uint button, Gdk.ModifierType state)
 	{
 		var element = GetElementAtPoint (point);
 
@@ -138,11 +140,13 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 				if (index < 0)
 					break;
 
+				bool isCtrlPressed = state.IsControlPressed ();
 				if (button == GtkExtensions.MOUSE_RIGHT_BUTTON) {
 					palette.SecondaryColor = palette.CurrentPalette.Colors[index];
-				} else if (button == GtkExtensions.MOUSE_LEFT_BUTTON) {
+				} else if (button == GtkExtensions.MOUSE_LEFT_BUTTON && !isCtrlPressed) {
 					palette.PrimaryColor = palette.CurrentPalette.Colors[index];
-				} else {
+				} else if (button == GtkExtensions.MOUSE_MIDDLE_BUTTON ||
+					   (button == GtkExtensions.MOUSE_LEFT_BUTTON && isCtrlPressed)) {
 					SingleColor pick = new (palette.CurrentPalette.Colors[index]);
 					var colors = await GetUserChosenColor (
 						pick,
@@ -307,8 +311,12 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 		switch (GetElementAtPoint (point)) {
 			case WidgetElement.Palette:
-				if (PaletteWidget.GetSwatchAtLocation (palette, point, palette_rect) >= 0)
-					text = Translations.GetString ("Left click to set primary color. Right click to set secondary color. Middle click to choose palette color.");
+				if (PaletteWidget.GetSwatchAtLocation (palette, point, palette_rect) >= 0) {
+					// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
+					text = Translations.GetString ("Left click to set primary color. Right click to set secondary color. Middle click or press {0} and left click to choose palette color.",
+						system.CtrlLabel ());
+				}
+
 				break;
 			case WidgetElement.RecentColorsPalette:
 				if (PaletteWidget.GetSwatchAtLocation (palette, point, recent_palette_rect, true) >= 0)
@@ -350,7 +358,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			new PaletteColors (palette.PrimaryColor, palette.SecondaryColor),
 			primarySelected,
 			true,
-			Translations.GetString ("Color Picker"));
+			Translations.GetString ("Choose Colors"));
 
 		Gtk.ResponseType response = await colorPicker.RunAsync ();
 

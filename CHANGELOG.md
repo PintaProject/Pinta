@@ -7,14 +7,29 @@ Thanks to the following contributors who worked on this release:
 - @cameronwhite
 - @Lehonti
 - @spaghetti22
+- @Matthieu-LAURENT39
+- @jordanbrotherton
+- @pedropaulosuzuki
+- @yioannides
+- @njm25
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
+- The status bar color palette now supports Ctrl+clicking to edit a color, in addition to middle clicking (#1436)
+- The Resize Image and Resize Canvas dialogs now remember their settings (#1869, #1972)
+- The Text Tool now allows choosing the join mode between 'Miter Join', 'Round Join' and 'Bevel Join' (#1969, #1985)
+- The right click menu for layers now includes options to move the layer up or down in the layer stack (#2004, #2007)
 
 ### Changed
+- Effect dialogs now hide options that are not currently relevant (#1960)
+- Fixed several minor UX issues in the color dialog (#1795)
+- The text tool now provides a separate adjustment for the font size, which doesn't require opening the font dialog (#1947, #1961)
+- The text tool now allows choosing any font-weight supported by Cairo, not just Normal and Bold (#1965, #1967)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
+- Fixed crash when right-clicking on a layer in certain scenarios (#1940)
+- The layers and history panels now scroll automatically to the selected item after any updates (#1867, #1828)
 
 ## [3.1.1](https://github.com/PintaProject/Pinta/release/tag/3.1.1) - 2026/01/10
 

@@ -35,14 +35,17 @@ internal sealed class ResizeImageAction : IActionHandler
 	private readonly ImageActions image;
 	private readonly IChromeService chrome;
 	private readonly IWorkspaceService workspace;
+	private readonly ISettingsService settings;
 	internal ResizeImageAction (
 		ImageActions image,
 		IChromeService chrome,
-		IWorkspaceService workspace)
+		IWorkspaceService workspace,
+		ISettingsService settings)
 	{
 		this.image = image;
 		this.chrome = chrome;
 		this.workspace = workspace;
+		this.settings = settings;
 	}
 
 	void IActionHandler.Initialize ()
@@ -65,7 +68,7 @@ internal sealed class ResizeImageAction : IActionHandler
 
 	private async Task<ResizeImageOptions?> PromptResize ()
 	{
-		using ResizeImageDialog dialog = new (chrome, workspace);
+		using ResizeImageDialog dialog = new (chrome, workspace, settings);
 		try {
 			Gtk.ResponseType response = await dialog.RunAsync ();
 			if (response != Gtk.ResponseType.Ok) return null;

@@ -29,6 +29,7 @@
     <GtkFile Include="$(MinGWBinFolder)\libfontconfig-1.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libfreetype-6.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libfribidi-0.dll" />
+    <GtkFile Include="$(MinGWBinFolder)\libfyaml-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libgdk_pixbuf-2.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libgio-2.0-0.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libglib-2.0-0.dll" />
@@ -73,7 +74,6 @@
     <GtkFile Include="$(MinGWBinFolder)\libwebp-7.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libxml2-16.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libxmlb-2.dll" />
-    <GtkFile Include="$(MinGWBinFolder)\libyaml-0-2.dll" />
     <GtkFile Include="$(MinGWBinFolder)\libzstd.dll" />
     <GtkFile Include="$(MinGWBinFolder)\zlib1.dll" />
 

@@ -1,21 +1,21 @@
-// 
+//
 // ResizeCanvasDialog.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -35,6 +35,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 	private readonly Gtk.SpinButton width_spinner;
 	private readonly Gtk.SpinButton height_spinner;
 	private readonly Gtk.CheckButton aspect_checkbox;
+	private readonly Gtk.CheckButton percentage_radio;
 
 	private readonly Gtk.Button nw_button;
 	private readonly Gtk.Button n_button;
@@ -50,8 +51,9 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 	private Anchor anchor;
 
 	private readonly IWorkspaceService workspace;
+	private readonly ISettingsService settings;
 
-	public ResizeCanvasDialog (IChromeService chrome, IWorkspaceService workspace)
+	public ResizeCanvasDialog (IChromeService chrome, IWorkspaceService workspace, ISettingsService settings)
 	{
 		const int SPACING = 6;
 
@@ -64,7 +66,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			spacing: SPACING);
 
 		Gtk.SpinButton percentageSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		percentageSpinner.Value = 100;
+		percentageSpinner.Value = settings.GetSetting (SettingNames.RESIZE_CANVAS_PERCENTAGE, 100);
 		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
 		percentageSpinner.SetActivatesDefaultImmediate (true);
 
@@ -72,7 +74,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		widthLabel.Halign = Gtk.Align.End;
 
 		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		widthSpinner.Value = workspace.ImageSize.Width;
+		widthSpinner.Value = settings.GetSetting (SettingNames.RESIZE_CANVAS_WIDTH, workspace.ImageSize.Width);
 		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
 		widthSpinner.SetActivatesDefaultImmediate (true);
 
@@ -80,9 +82,17 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		heightLabel.Halign = Gtk.Align.End;
 
 		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		heightSpinner.Value = workspace.ImageSize.Height;
+		heightSpinner.Value = settings.GetSetting (SettingNames.RESIZE_CANVAS_HEIGHT, workspace.ImageSize.Height);
 		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
 		heightSpinner.SetActivatesDefaultImmediate (true);
+
+		Gtk.Button resetButton = new () {
+			IconName = Resources.StandardIcons.EditUndo,
+			WidthRequest = 24,
+			HeightRequest = 24,
+			TooltipText = Translations.GetString ("Reset to image size"),
+		};
+		resetButton.OnClicked += OnResetButtonClicked;
 
 		Gtk.Grid hwGrid = new () {
 			RowSpacing = SPACING,
@@ -92,15 +102,15 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		hwGrid.Attach (widthLabel, 0, 0, 1, 1);
 		hwGrid.Attach (widthSpinner, 1, 0, 1, 1);
 		hwGrid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
+		hwGrid.Attach (resetButton, 3, 0, 1, 1);
 		hwGrid.Attach (heightLabel, 0, 1, 1, 1);
 		hwGrid.Attach (heightSpinner, 1, 1, 1, 1);
 		hwGrid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
 
 		Gtk.CheckButton aspectCheckBox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
-		aspectCheckBox.Active = true;
+		aspectCheckBox.Active = settings.GetSetting (SettingNames.RESIZE_CANVAS_MAINTAIN_ASPECT, true);
 
 		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
-		percentageRadio.Active = true;
 		percentageRadio.BindProperty (
 			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
 			percentageSpinner,
@@ -123,6 +133,11 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
 			aspectCheckBox,
 			Gtk.CheckButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+		absoluteRadio.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			resetButton,
+			Gtk.Button.SensitivePropertyDefinition.UnmanagedName,
 			GObject.BindingFlags.SyncCreate);
 
 		Gtk.Box hboxPercent = GtkExtensions.Box (
@@ -207,6 +222,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 
 		this.AddCancelOkButtons ();
 		this.SetDefaultResponse (Gtk.ResponseType.Ok);
+		OnResponse += OnDialogResponse;
 
 		// --- Initialization
 
@@ -219,11 +235,13 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		// --- References to keep
 
 		this.workspace = workspace;
+		this.settings = settings;
 
 		percentage_spinner = percentageSpinner;
 		width_spinner = widthSpinner;
 		height_spinner = heightSpinner;
 		aspect_checkbox = aspectCheckBox;
+		percentage_radio = percentageRadio;
 
 		nw_button = nwButton;
 		n_button = nButton;
@@ -237,7 +255,27 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 
 		// Final initialization
 
-		SetAnchor (Anchor.Center);
+		Anchor savedAnchor = (Anchor) settings.GetSetting (SettingNames.RESIZE_CANVAS_ANCHOR, (int) Anchor.Center);
+		SetAnchor (savedAnchor);
+
+		if (settings.GetSetting (SettingNames.RESIZE_CANVAS_USE_PERCENTAGE, true))
+			percentageRadio.Active = true;
+		else
+			absoluteRadio.Active = true;
+	}
+
+	private void OnDialogResponse (Gtk.Dialog sender, ResponseSignalArgs args)
+	{
+		if (args.ResponseId != (int) Gtk.ResponseType.Ok)
+			return;
+
+		// Save settings for next time
+		settings.PutSetting (SettingNames.RESIZE_CANVAS_ANCHOR, (int) anchor);
+		settings.PutSetting (SettingNames.RESIZE_CANVAS_MAINTAIN_ASPECT, aspect_checkbox.Active);
+		settings.PutSetting (SettingNames.RESIZE_CANVAS_USE_PERCENTAGE, percentage_radio.Active);
+		settings.PutSetting (SettingNames.RESIZE_CANVAS_PERCENTAGE, percentage_spinner.GetValueAsInt ());
+		settings.PutSetting (SettingNames.RESIZE_CANVAS_WIDTH, width_spinner.GetValueAsInt ());
+		settings.PutSetting (SettingNames.RESIZE_CANVAS_HEIGHT, height_spinner.GetValueAsInt ());
 	}
 
 	private static Gtk.Button CreateAnchorButton ()
@@ -284,6 +322,14 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 	{
 		width_spinner.Value = (int) (workspace.ImageSize.Width * (percentage_spinner.GetValueAsInt () / 100f));
 		height_spinner.Value = (int) (workspace.ImageSize.Height * (percentage_spinner.GetValueAsInt () / 100f));
+	}
+
+	void OnResetButtonClicked (Gtk.Button button, EventArgs eventArgs)
+	{
+		value_changing = true;
+		width_spinner.Value = workspace.ImageSize.Width;
+		height_spinner.Value = workspace.ImageSize.Height;
+		value_changing = false;
 	}
 
 	private void HandleSEButtonClicked (object? sender, EventArgs e)

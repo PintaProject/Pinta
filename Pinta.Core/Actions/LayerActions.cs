@@ -166,17 +166,6 @@ public sealed class LayerActions
 			MoveLayerUp]);
 	}
 
-	public void CreateLayerWindowToolBar (Gtk.Box toolbar)
-	{
-		toolbar.Append (AddNewLayer.CreateToolBarItem ());
-		toolbar.Append (DeleteLayer.CreateToolBarItem ());
-		toolbar.Append (DuplicateLayer.CreateToolBarItem ());
-		toolbar.Append (MergeLayerDown.CreateToolBarItem ());
-		toolbar.Append (MoveLayerUp.CreateToolBarItem ());
-		toolbar.Append (MoveLayerDown.CreateToolBarItem ());
-		toolbar.Append (Properties.CreateToolBarItem ());
-	}
-
 	public void RegisterHandlers ()
 	{
 		AddNewLayer.Activated += HandlePintaCoreActionsLayersAddNewLayerActivated;
@@ -192,32 +181,25 @@ public sealed class LayerActions
 		workspace.LayerAdded += EnableOrDisableLayerActions;
 		workspace.LayerRemoved += EnableOrDisableLayerActions;
 		workspace.SelectedLayerChanged += EnableOrDisableLayerActions;
+		workspace.ActiveDocumentChanged += EnableOrDisableLayerActions;
 
 		EnableOrDisableLayerActions (null, EventArgs.Empty);
 	}
 
 	private void EnableOrDisableLayerActions (object? sender, EventArgs e)
 	{
-		if (workspace.HasOpenDocuments && workspace.ActiveDocument.Layers.UserLayers.Count > 1) {
-			DeleteLayer.Sensitive = true;
-			image.Flatten.Sensitive = true;
-		} else {
-			DeleteLayer.Sensitive = false;
-			image.Flatten.Sensitive = false;
-		}
+		Document? activeDoc = workspace.ActiveDocumentOrDefault;
 
-		if (workspace.HasOpenDocuments && workspace.ActiveDocument.Layers.CurrentUserLayerIndex > 0) {
-			MergeLayerDown.Sensitive = true;
-			MoveLayerDown.Sensitive = true;
-		} else {
-			MergeLayerDown.Sensitive = false;
-			MoveLayerDown.Sensitive = false;
-		}
+		bool hasMultipleLayers = activeDoc?.Layers.UserLayers.Count > 1;
+		DeleteLayer.Sensitive = hasMultipleLayers;
+		image.Flatten.Sensitive = hasMultipleLayers;
 
-		if (workspace.HasOpenDocuments && workspace.ActiveDocument.Layers.CurrentUserLayerIndex < workspace.ActiveDocument.Layers.UserLayers.Count - 1)
-			MoveLayerUp.Sensitive = true;
-		else
-			MoveLayerUp.Sensitive = false;
+		bool canMergeDown = activeDoc?.Layers.CurrentUserLayerIndex > 0;
+		MergeLayerDown.Sensitive = canMergeDown;
+		MoveLayerDown.Sensitive = canMergeDown;
+
+		MoveLayerUp.Sensitive = activeDoc != null
+			&& activeDoc.Layers.CurrentUserLayerIndex < activeDoc.Layers.UserLayers.Count - 1;
 	}
 
 	private Gtk.FileFilter CreateImagesFileFilter ()

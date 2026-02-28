@@ -14,12 +14,12 @@
     <PackageVersion Include="Mono.Addins.CecilReflector" Version="1.4.2-alpha.4" />
     <PackageVersion Include="NGettext" Version="0.6.7" />
     <PackageVersion Include="ParagonClipper" Version="6.4.2" />
-    <PackageVersion Include="System.CommandLine" Version="2.0.1" />
-    <PackageVersion Include="Tmds.DBus" Version="0.23.0" />
+    <PackageVersion Include="System.CommandLine" Version="2.0.3" />
+    <PackageVersion Include="Tmds.DBus" Version="0.90.3" />
 
     <!-- Dependencies used for unit tests -->
     <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
-    <PackageVersion Include="NUnit" Version="4.3.2" />
+    <PackageVersion Include="NUnit" Version="4.5.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageVersion Include="NUnit3TestAdapter" Version="6.1.0" />
 

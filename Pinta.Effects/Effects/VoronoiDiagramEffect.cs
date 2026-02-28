@@ -202,6 +202,7 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 		public PointArrangement PointArrangement { get; set; } = PointArrangement.Random;
 
 		[Caption ("Random Point Locations")]
+		[VisibleWhen (nameof (ShowRandomPointLocation))]
 		public RandomSeed RandomPointLocations { get; set; } = new (0);
 
 		[Caption ("Show Points")]
@@ -209,14 +210,22 @@ public sealed class VoronoiDiagramEffect : BaseEffect
 
 		[Caption ("Point Size")]
 		[MinimumValue (1), MaximumValue (16), IncrementValue (1)]
+		[VisibleWhen (nameof (ShowPointConfig))]
 		public double PointSize { get; set; } = 4;
 
 		[Caption ("Point Color")]
+		[VisibleWhen (nameof (ShowPointConfig))]
 		public Color PointColor { get; set; } = Color.Black;
 
 		[Caption ("Quality")]
 		[MinimumValue (1), MaximumValue (4)]
 		public int Quality { get; set; } = 3;
+
+		[Skip]
+		public bool ShowRandomPointLocation => PointArrangement == PointArrangement.Random;
+
+		[Skip]
+		public bool ShowPointConfig => ShowPoints;
 	}
 
 	public enum ColorSorting

@@ -106,6 +106,17 @@ public sealed partial class LayersListViewItem
 
 		doc.History.PushNewItem (historyItem);
 	}
+
+	public event EventHandler? LayerModified;
+
+	/// <summary>
+	/// Signal that the layer has been modified.
+	/// In the future this should be replaced by GObject properties and bindings.
+	/// </summary>
+	public void NotifyLayerModified ()
+	{
+		LayerModified?.Invoke (this, EventArgs.Empty);
+	}
 }
 
 public sealed class LayersListViewItemWidget : Gtk.Box
@@ -170,7 +181,10 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 			return;
 
 		Document doc = PintaCore.Workspace.ActiveDocument;
-		doc.Layers.SetCurrentUserLayer (item.UserLayer); // Select layer before applying action
+		// Ensure this is the current layer before opening the menu, since the menu actions
+		// apply to the current layer.
+		if (doc.Layers.CurrentUserLayer != item.UserLayer)
+			doc.Layers.SetCurrentUserLayer (item.UserLayer);
 
 		LayerActions actions = PintaCore.Actions.Layers;
 
@@ -178,6 +192,8 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		operationsSection.AppendItem (actions.DeleteLayer.CreateMenuItem ());
 		operationsSection.AppendItem (actions.DuplicateLayer.CreateMenuItem ());
 		operationsSection.AppendItem (actions.MergeLayerDown.CreateMenuItem ());
+		operationsSection.AppendItem (actions.MoveLayerUp.CreateMenuItem ());
+		operationsSection.AppendItem (actions.MoveLayerDown.CreateMenuItem ());
 
 		Gio.Menu flipSection = Gio.Menu.New ();
 		flipSection.AppendItem (actions.FlipHorizontal.CreateMenuItem ());
@@ -197,10 +213,34 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		popover.Popup ();
 	}
 
-	// Set the widget's contents to the provided layer.
-	public void Update (LayersListViewItem item)
+	/// <summary>
+	/// Bind the widget to a different LayersListViewItem.
+	/// </summary>
+	public void SetItem (LayersListViewItem newItem)
 	{
-		this.item = item;
+		if (item != null)
+			item.LayerModified -= OnLayerModified;
+
+		item = newItem;
+		item.LayerModified += OnLayerModified;
+		UpdateFromLayer ();
+	}
+
+	/// <summary>
+	/// Event handler for modifications to the item's layer.
+	/// </summary>
+	private void OnLayerModified (object? sender, EventArgs e)
+	{
+		UpdateFromLayer ();
+	}
+
+	/// <summary>
+	/// Update the widget to reflect the current state of the item's layer.
+	/// </summary>
+	private void UpdateFromLayer ()
+	{
+		if (item is null)
+			throw new InvalidOperationException ($"{nameof (item)} is null");
 
 		item_label.SetText (item.Label);
 		visible_button.SetActive (item.Visible);

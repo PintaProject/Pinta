@@ -11,12 +11,13 @@ internal static class SettingNames
 	internal const string PAINT_BRUSH_BRUSH = "paint-brush-brush";
 
 	internal const string TEXT_FONT = "text-font";
-	internal const string TEXT_BOLD = "text-bold";
+	internal const string TEXT_WEIGHT = "text-weight";
 	internal const string TEXT_ITALIC = "text-italic";
 	internal const string TEXT_UNDERLINE = "text-underline";
 	internal const string TEXT_ALIGNMENT = "text-alignment";
 	internal const string TEXT_STYLE = "text-style";
 	internal const string TEXT_OUTLINE_WIDTH = "text-outline-width";
+	internal const string TEXT_JOIN = "text-join";
 
 	internal const string RECOLOR_TOLERANCE = "recolor-tolerance";
 

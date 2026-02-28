@@ -491,7 +491,8 @@ internal sealed class MainWindow
 		statusbar.Append (
 			new StatusBarColorPaletteWidget (
 				PintaCore.Chrome,
-				PintaCore.Palette) {
+				PintaCore.Palette,
+				PintaCore.System) {
 				Hexpand = true,
 				Halign = Gtk.Align.Fill,
 			}
