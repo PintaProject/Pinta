@@ -13,13 +13,17 @@ public readonly record struct Matrix3x2D (
 	double M31, double M32)
 {
 	public static Matrix3x2D CreateRotation (RadiansAngle theta)
+		=> CreateRotation (theta, PointD.Zero);
+
+	public static Matrix3x2D CreateRotation (RadiansAngle theta, PointD pivot)
 	{
 		double radians = theta.Radians;
-		double sin = Math.Sin (radians);
-		double cos = Math.Cos (radians);
+		(double sin, double cos) = Math.SinCos (radians);
+		double x = pivot.X * (1 - cos) + pivot.Y * sin;
+		double y = pivot.Y * (1 - cos) - pivot.X * sin;
 		return new (
 			cos, sin,
 			-sin, cos,
-			0, 0);
+			x, y);
 	}
 }
