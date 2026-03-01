@@ -197,74 +197,74 @@ public sealed class TextTool : BaseTool
 		if (weight_btn == null) {
 			weight_btn = new ToolBarDropDownButton ();
 
-			// Translators: 'Thin' (100) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Thin' (100) refers to the font-weight text property
 				Translations.GetString ("Thin") + " 100",
 				Pinta.Resources.Icons.TextExtraLight,
 				Pango.Weight.Thin
 			);
-			// Translators: 'Ultralight' (200) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Ultralight' (200) refers to the font-weight text property
 				Translations.GetString ("Ultralight") + " 200",
 				Pinta.Resources.Icons.TextExtraLight,
 				Pango.Weight.Ultralight
 			);
-			// Translators: 'Light' (300) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Light' (300) refers to the font-weight text property
 				Translations.GetString ("Light") + " 300",
 				Pinta.Resources.Icons.TextLight,
 				Pango.Weight.Light
 			);
-			// Translators: 'Semilight' (350) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Semilight' (350) refers to the font-weight text property
 				Translations.GetString ("Semilight") + " 350",
 				Pinta.Resources.Icons.TextLight,
 				Pango.Weight.Semilight
 			);
-			// Translators: 'Book' (380) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Book' (380) refers to the font-weight text property
 				Translations.GetString ("Book") + " 380",
 				Pinta.Resources.Icons.TextNormal,
 				Pango.Weight.Book
 			);
-			// Translators: 'Normal' (400) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Normal' (400) refers to the font-weight text property
 				Translations.GetString ("Normal") + " 400",
 				Pinta.Resources.Icons.TextNormal,
 				Pango.Weight.Normal
 			);
-			// Translators: 'Medium' (500) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Medium' (500) refers to the font-weight text property
 				Translations.GetString ("Medium") + " 500",
 				Pinta.Resources.Icons.TextNormal,
 				Pango.Weight.Medium
 			);
-			// Translators: 'Semibold' (600) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Semibold' (600) refers to the font-weight text property
 				Translations.GetString ("Semibold") + " 600",
 				Pinta.Resources.Icons.TextBold,
 				Pango.Weight.Semibold
 			);
-			// Translators: 'Bold' (700) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Bold' (700) refers to the font-weight text property
 				Translations.GetString ("Bold") + " 700",
 				Pinta.Resources.Icons.TextBold,
 				Pango.Weight.Bold
 			);
-			// Translators: 'Ultrabold' (800) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Ultrabold' (800) refers to the font-weight text property
 				Translations.GetString ("Ultrabold") + " 800",
 				Pinta.Resources.Icons.TextExtraBold,
 				Pango.Weight.Ultrabold
 			);
-			// Translators: 'Heavy' (900) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Heavy' (900) refers to the font-weight text property
 				Translations.GetString ("Heavy") + " 900",
 				Pinta.Resources.Icons.TextExtraBold,
 				Pango.Weight.Heavy
 			);
-			// Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 			weight_btn.AddItem (
+				// Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 				Translations.GetString ("Ultraheavy") + " 1000",
 				Pinta.Resources.Icons.TextExtraBold,
 				Pango.Weight.Ultraheavy
@@ -394,20 +394,20 @@ public sealed class TextTool : BaseTool
 		if (join_btn == null) {
 			join_btn = new ToolBarDropDownButton ();
 
-			// Translators: 'Miter Join' refers to the Cairo.LineJoin property
 			join_btn.AddItem (
+				// Translators: 'Miter Join' refers to the Cairo.LineJoin property
 				Translations.GetString ("Miter Join"),
 				Pinta.Resources.Icons.JoinMiter,
 				Cairo.LineJoin.Miter
 			);
-			// Translators: 'Round Join' refers to the Cairo.LineJoin property
 			join_btn.AddItem (
+				// Translators: 'Round Join' refers to the Cairo.LineJoin property
 				Translations.GetString ("Round Join"),
 				Pinta.Resources.Icons.JoinRound,
 				Cairo.LineJoin.Round
 			);
-			// Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 			join_btn.AddItem (
+				// Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 				Translations.GetString ("Bevel Join"),
 				Pinta.Resources.Icons.JoinBevel,
 				Cairo.LineJoin.Bevel
