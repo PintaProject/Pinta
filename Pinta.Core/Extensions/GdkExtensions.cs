@@ -25,6 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Cairo;
@@ -93,6 +95,21 @@ public static class GdkExtensions
 		out int shapeX,
 		out int shapeY)
 	{
+		Gdk.Texture result = CreateIconWithShape (imgName, shape, shapeWidth, shapeWidth, 0, imgToShapeX, imgToShapeY, out shapeX, out shapeY);
+		return result;
+	}
+
+	public static Gdk.Texture CreateIconWithShape (
+		string imgName,
+		CursorShape shape,
+		int shapeWidth,
+		int shapeHeight,
+		int shapeAngle,
+		int imgToShapeX,
+		int imgToShapeY,
+		out int shapeX,
+		out int shapeY)
+	{
 		Gdk.Texture img = PintaCore.Resources.GetIcon (imgName);
 
 		double zoom =
@@ -102,6 +119,8 @@ public static class GdkExtensions
 
 		int clampedWidth = (int) Math.Min (800d, shapeWidth * zoom);
 		int halfOfShapeWidth = clampedWidth / 2;
+		int clampedHeight = (int) Math.Min (800d, shapeHeight * zoom);
+		int halfOfShapeHeight = clampedHeight / 2;
 
 		// Calculate bounding boxes around the both image and shape
 		// relative to the image top-left corner.
@@ -109,10 +128,10 @@ public static class GdkExtensions
 		RectangleI imgBBox = new (0, 0, img.Width, img.Height);
 
 		RectangleI initialShapeBBox = new (
-			imgToShapeX - halfOfShapeWidth,
-			imgToShapeY - halfOfShapeWidth,
+			imgToShapeX - Math.Max (halfOfShapeWidth, halfOfShapeHeight),
+			imgToShapeY - Math.Max (halfOfShapeWidth, halfOfShapeHeight),
 			clampedWidth,
-			clampedWidth);
+			clampedHeight);
 
 		// Inflate shape bounding box to allow for anti-aliasing
 		RectangleI inflatedBBox = initialShapeBBox.Inflated (2, 2);
@@ -138,15 +157,15 @@ public static class GdkExtensions
 		using Context g = new (i);
 
 		// Don't show shape if shapeWidth less than 3,
-		if (clampedWidth > 3) {
+		if (clampedHeight > 3) {
 
 			int diam = Math.Max (1, clampedWidth - 2);
 
 			RectangleD shapeRect = new (
 				shapeX - halfOfShapeWidth,
-				shapeY - halfOfShapeWidth,
+				shapeY - halfOfShapeHeight,
 				diam,
-				diam);
+				clampedHeight);
 
 			Color outerColor = new (255, 255, 255, 0.75);
 			Color innerColor = new (0, 0, 0);
@@ -158,9 +177,17 @@ public static class GdkExtensions
 					g.DrawEllipse (shapeRect, innerColor, 1);
 					break;
 				case CursorShape.Rectangle:
-					g.DrawRectangle (shapeRect, outerColor, 1);
-					shapeRect = shapeRect.Inflated (-1, -1);
-					g.DrawRectangle (shapeRect, innerColor, 1);
+					if (shapeAngle == 0) {
+						g.DrawRectangle (shapeRect, outerColor, 1);
+						shapeRect = shapeRect.Inflated (-1, -1);
+						g.DrawRectangle (shapeRect, innerColor, 1);
+					} else {
+						PointD[] pointsOfRotatedRectangle = RotateRectangle (shapeRect, shapeAngle);
+						shapeRect = shapeRect.Inflated (-1, -1);
+						PointD[] pointsOfInflatedRotatedRectangle = RotateRectangle (shapeRect, shapeAngle);
+						g.DrawPolygonal (new ReadOnlySpan<PointD> (pointsOfRotatedRectangle), outerColor, LineCap.Butt);
+						g.DrawPolygonal (new ReadOnlySpan<PointD> (pointsOfInflatedRotatedRectangle), innerColor, LineCap.Butt);
+					}
 					break;
 			}
 		}
@@ -283,5 +310,17 @@ public static class GdkExtensions
 			Green = (float) color.G,
 			Alpha = (float) color.A
 		};
+	}
+
+	private static PointD[] RotateRectangle (RectangleD rectangle, int angle_in_degrees)
+	{
+		float angle_in_radians = float.DegreesToRadians (-angle_in_degrees);
+		Matrix3x2D rotation = Matrix3x2D.CreateRotation (new RadiansAngle (angle_in_radians), rectangle.GetCenter ());
+		return [
+			rectangle.Location().Transformed(rotation),
+			new PointD(rectangle.Location().X, rectangle.EndLocation().Y).Transformed(rotation),
+			rectangle.EndLocation().Transformed(rotation),
+			new PointD(rectangle.EndLocation().X, rectangle.Location().Y).Transformed(rotation)
+		];
 	}
 }

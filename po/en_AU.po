@@ -2276,6 +2276,10 @@ msgstr "Single Pixel"
 msgid "Size"
 msgstr "Size"
 
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:36
+msgid "Slash"
+msgstr "Slash"
+
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
 msgstr "Smooth"

@@ -2272,6 +2272,10 @@ msgstr ""
 msgid "Size"
 msgstr "Grandeco"
 
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:36
+msgid "Slash"
+msgstr "Oblikvo"
+
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
 msgstr ""

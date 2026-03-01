@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using System.Collections.Generic;
 using Cairo;
 
@@ -65,6 +64,10 @@ public abstract class BasePaintBrush
 	/// </summary>
 	public virtual List<ToolOption> Options { get; protected set; } = [];
 
+	public delegate void CursorChangeHandler ();
+
+	public event CursorChangeHandler? OnCursorChanged;
+
 	public void DoMouseUp ()
 	{
 		OnMouseUp ();
@@ -81,6 +84,25 @@ public abstract class BasePaintBrush
 		BrushStrokeArgs strokeArgs)
 	{
 		return OnMouseMove (g, surface, strokeArgs);
+	}
+
+	/// <summary>
+	/// Notify the paint brush that the tool's line width has changed so that it
+	/// can refresh its cursor.
+	/// </summary>
+	/// <param name="lineWidth">New line width set in brush tool</param>
+	public virtual void LineWidthChanged (int lineWidth)
+	{
+		CursorChanged ();
+	}
+
+	/// <summary>
+	/// Get the cursor appropriate for the brush's current settings.
+	/// </summary>
+	/// <returns>Cursor returned by the brush, or null if the tool should use the default cursor.</returns>
+	public virtual Gdk.Cursor? GetCursor ()
+	{
+		return null;
 	}
 
 	/// <summary>
@@ -109,4 +131,14 @@ public abstract class BasePaintBrush
 		Context g,
 		ImageSurface surface,
 		BrushStrokeArgs strokeArgs);
+
+
+	/// <summary>
+	/// Notify listeners that the brush's cursor has been changed (most likely
+	/// in response to the user having changed a setting).
+	/// </summary>
+	protected void CursorChanged ()
+	{
+		OnCursorChanged?.Invoke ();
+	}
 }
