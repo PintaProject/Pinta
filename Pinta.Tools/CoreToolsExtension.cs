@@ -44,6 +44,7 @@ public sealed class CoreToolsExtension : IExtension
 		IServiceProvider services = PintaCore.Services;
 
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.CircleBrush ());
+		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SmoothBrush ());
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.GridBrush ());
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.PlainBrush (PintaCore.Workspace));
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SplatterBrush (services.GetService<ISettingsService> ()));
