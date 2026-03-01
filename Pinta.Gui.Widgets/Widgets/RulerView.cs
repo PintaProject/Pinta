@@ -33,110 +33,38 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public enum MetricType
-{
-	Pixels,
-	Inches,
-	Centimeters,
-}
-
 /// <summary>
 /// Replacement for Gtk.Ruler, which was removed in GTK3.
 /// Based on the original GTK2 widget and Inkscape's ruler widget.
 /// </summary>
-public sealed class Ruler : Gtk.DrawingArea
+public sealed class RulerView : Gtk.DrawingArea,
+	IObserver<RulerChanged>,
+	IObserver<RulerVisibilityChanged>
 {
-	private double position = 0;
-	private MetricType metric = MetricType.Pixels;
-
 	private Surface? cached_surface = null;
 	private Size? last_known_size = null;
 
-	private NumberRange<double>? selection_bounds = null;
-	public NumberRange<double>? SelectionBounds {
-		get => selection_bounds;
-		set {
-			if (selection_bounds == value) return;
-			selection_bounds = value;
-			QueueDraw ();
-		}
-	}
+	private readonly RulerViewModel view_model;
 
-	/// <summary>
-	/// Whether the ruler is horizontal or vertical.
-	/// </summary>
-	public Gtk.Orientation Orientation { get; }
-
-	/// <summary>
-	/// Metric type used for the ruler.
-	/// </summary>
-	public MetricType Metric {
-		get => metric;
-		set {
-			if (metric == value) return;
-			metric = value;
-			QueueFullRedraw ();
-		}
-	}
-
-	/// <summary>
-	/// The position of the mark along the ruler.
-	/// </summary>
-	public double Position {
-		get => position;
-		set {
-			if (position == value) return;
-			position = value;
-			QueueFullRedraw ();
-		}
-	}
-
-	private NumberRange<double> ruler_range;
-	public NumberRange<double> RulerRange {
-		get => ruler_range;
-		set {
-			if (ruler_range == value) return;
-			ruler_range = value;
-			QueueFullRedraw ();
-		}
-	}
-
-	public Ruler (Gtk.Orientation orientation)
+	public RulerView (RulerViewModel viewModel)
 	{
-		Orientation = orientation;
+		view_model = viewModel;
 
 		SetDrawFunc ((area, context, width, height) => Draw (context, new Size (width, height)));
 
 		// Determine the size request, based on the font size.
 		int font_size = GetFontSize (GetPangoContext ().GetFontDescription ()!, ScaleFactor);
-		int size = 2 + font_size * 2;
+		int measure = 2 + font_size * 2;
+		Size size = viewModel.Orientation switch {
+			Gtk.Orientation.Horizontal => new Size (Width: 0, Height: measure),
+			Gtk.Orientation.Vertical => new Size (Width: measure, Height: 0),
+			_ => throw new UnreachableException (),
+		};
+		WidthRequest = size.Width;
+		HeightRequest = size.Height;
 
-		int width = 0;
-		int height = 0;
-		switch (Orientation) {
-			case Gtk.Orientation.Horizontal:
-				height = size;
-				break;
-			case Gtk.Orientation.Vertical:
-				width = size;
-				break;
-		}
-
-		WidthRequest = width;
-		HeightRequest = height;
-	}
-
-	// Invalidates cache _and_ queues redraw. Like a full refresh
-	private void QueueFullRedraw ()
-	{
-		InvalidateCache ();
-		QueueDraw ();
-	}
-
-	private void InvalidateCache ()
-	{
-		cached_surface?.Dispose ();
-		cached_surface = null;
+		viewModel.Subscribe ((IObserver<RulerChanged>) this);
+		viewModel.Subscribe ((IObserver<RulerVisibilityChanged>) this);
 	}
 
 	private static readonly ImmutableArray<double> pixels_ruler_scale = [1, 2, 5, 10, 25, 50, 100, 250, 500, 1000];
@@ -168,7 +96,7 @@ public sealed class Ruler : Gtk.DrawingArea
 	{
 		GetStyleContext ().GetColor (out Gdk.RGBA color);
 
-		RectangleD rulerOuterLine = Orientation switch {
+		RectangleD rulerOuterLine = view_model.Orientation switch {
 
 			Gtk.Orientation.Vertical => new (
 				X: preliminarySize.Width - 1,
@@ -185,27 +113,27 @@ public sealed class Ruler : Gtk.DrawingArea
 			_ => throw new UnreachableException (),
 		};
 
-		Size effectiveSize = Orientation switch {
+		Size effectiveSize = view_model.Orientation switch {
 			Gtk.Orientation.Vertical => new (preliminarySize.Height, preliminarySize.Width),// Swap so that width is the longer dimension (horizontal).
 			Gtk.Orientation.Horizontal => preliminarySize,
 			_ => throw new UnreachableException (),
 		};
 
-		ImmutableArray<double> rulerScale = Metric switch {
+		ImmutableArray<double> rulerScale = view_model.Metric switch {
 			MetricType.Pixels => pixels_ruler_scale,
 			MetricType.Inches => inches_ruler_scale,
 			MetricType.Centimeters => centimeters_ruler_scale,
 			_ => throw new UnreachableException (),
 		};
 
-		ImmutableArray<int> subdivide = Metric switch {
+		ImmutableArray<int> subdivide = view_model.Metric switch {
 			MetricType.Pixels => pixels_subdivide,
 			MetricType.Inches => inches_subdivide,
 			MetricType.Centimeters => centimeters_subdivide,
 			_ => throw new UnreachableException (),
 		};
 
-		double pixels_per_unit = Metric switch {
+		double pixels_per_unit = view_model.Metric switch {
 			MetricType.Pixels => 1.0,
 			MetricType.Inches => 72,
 			MetricType.Centimeters => 28.35,
@@ -215,8 +143,8 @@ public sealed class Ruler : Gtk.DrawingArea
 		// Find our scaled range.
 
 		NumberRange<double> scaledRange = new (
-			lower: RulerRange.Lower / pixels_per_unit,
-			upper: RulerRange.Upper / pixels_per_unit);
+			lower: view_model.RulerRange.Lower / pixels_per_unit,
+			upper: view_model.RulerRange.Upper / pixels_per_unit);
 
 		double maxSize = scaledRange.Upper - scaledRange.Lower;
 
@@ -257,11 +185,11 @@ public sealed class Ruler : Gtk.DrawingArea
 			Ticks: new (
 				lower: (int) Math.Floor (scaledRange.Lower * ticksPerUnit),
 				upper: (int) Math.Ceiling (scaledRange.Upper * ticksPerUnit)),
-			MarkerPosition: GetPositionOnRuler (Position, effectiveSize.Width),
+			MarkerPosition: GetPositionOnRuler (view_model.Position, effectiveSize.Width),
 			RulerOuterLine: rulerOuterLine,
 			EffectiveSize: effectiveSize,
 			Color: color.ToCairoColor (),
-			Orientation: Orientation);
+			Orientation: view_model.Orientation);
 	}
 
 	private void Draw (Context cr, Size preliminarySize)
@@ -276,11 +204,11 @@ public sealed class Ruler : Gtk.DrawingArea
 		cached_surface ??= CreateBaseRuler (settings, preliminarySize);
 
 		// Draw the selection projection if a selection exists
-		if (selection_bounds.HasValue) {
+		if (view_model.SelectionBounds.HasValue) {
 
 			// Convert selection coordinates to ruler widget coordinates
-			double p1 = GetPositionOnRuler (selection_bounds.Value.Lower, settings.EffectiveSize.Width);
-			double p2 = GetPositionOnRuler (selection_bounds.Value.Upper, settings.EffectiveSize.Width);
+			double p1 = GetPositionOnRuler (view_model.SelectionBounds.Value.Lower, settings.EffectiveSize.Width);
+			double p2 = GetPositionOnRuler (view_model.SelectionBounds.Value.Upper, settings.EffectiveSize.Width);
 
 			cr.SetSourceRgba ( // Semi-transparent blue
 				red: 0.21,
@@ -288,7 +216,7 @@ public sealed class Ruler : Gtk.DrawingArea
 				blue: 0.89,
 				alpha: 0.25);
 
-			switch (Orientation) {
+			switch (view_model.Orientation) {
 				case Gtk.Orientation.Horizontal:
 					cr.Rectangle (p1, 0, p2 - p1, settings.EffectiveSize.Height);
 					break;
@@ -384,9 +312,9 @@ public sealed class Ruler : Gtk.DrawingArea
 	[MethodImpl (MethodImplOptions.AggressiveInlining)]
 	private double GetPositionOnRuler (double position, double width)
 	{
-		double range = RulerRange.Upper - RulerRange.Lower;
+		double range = view_model.RulerRange.Upper - view_model.RulerRange.Lower;
 		double scaledWidth = width / range;
-		double positionFromLower = position - RulerRange.Lower;
+		double positionFromLower = position - view_model.RulerRange.Lower;
 		return positionFromLower * scaledWidth;
 	}
 
@@ -398,4 +326,35 @@ public sealed class Ruler : Gtk.DrawingArea
 		else
 			return (int) (scaleFactor * fontSize / 72.0);
 	}
+
+	private void InvalidateCache ()
+	{
+		cached_surface?.Dispose ();
+		cached_surface = null;
+	}
+
+	private void QueueFullRedraw ()
+	{
+		InvalidateCache ();
+		QueueDraw ();
+	}
+
+	public void OnNext (RulerChanged value)
+	{
+		if (value.Full)
+			QueueFullRedraw ();
+		else
+			QueueDraw ();
+	}
+
+	public void OnNext (RulerVisibilityChanged value)
+	{
+		Visible = value.NewVisibility;
+	}
+
+	void IObserver<RulerChanged>.OnCompleted () { }
+	void IObserver<RulerChanged>.OnError (Exception error) => throw new NotImplementedException ();
+
+	void IObserver<RulerVisibilityChanged>.OnCompleted () { }
+	void IObserver<RulerVisibilityChanged>.OnError (Exception error) => throw new NotImplementedException ();
 }
