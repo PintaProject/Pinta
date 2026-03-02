@@ -91,7 +91,7 @@ public abstract class BasePaintBrush
 	/// can refresh its cursor.
 	/// </summary>
 	/// <param name="lineWidth">New line width set in brush tool</param>
-	public virtual void LineWidthChanged (int lineWidth)
+	public virtual void UpdateLineWidth (int lineWidth)
 	{
 		CursorChanged ();
 	}
