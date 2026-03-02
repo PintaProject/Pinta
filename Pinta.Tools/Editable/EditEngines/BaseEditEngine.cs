@@ -70,15 +70,16 @@ public abstract class BaseEditEngine
 	}
 
 	// NRT - Created by HandleBuildToolBar
-	protected Gtk.SpinButton brush_width = null!;
-	protected Gtk.Label brush_width_label = null!;
+	protected ToolBarDropDownButton shape_type_button = null!;
+	protected Gtk.Label shape_type_label = null!;
+
 	protected Gtk.Label fill_label = null!;
 	protected ToolBarDropDownButton fill_button = null!;
 	protected Gtk.Separator fill_sep = null!;
 
-	protected Gtk.Label shape_type_label = null!;
-	protected ToolBarDropDownButton shape_type_button = null!;
-	protected Gtk.Separator shape_type_sep = null!;
+	protected Gtk.SpinButton outline_width = null!;
+	protected Gtk.Label outline_width_label = null!;
+	protected Gtk.Separator outline_width_sep = null!;
 
 	protected DashPatternBox dash_pattern_box = new ();
 	private string prev_dash_pattern = "-";
@@ -86,14 +87,14 @@ public abstract class BaseEditEngine
 	private bool prev_antialiasing = true;
 
 	public int BrushWidth {
-		get => brush_width?.GetValueAsInt () ?? BaseTool.DEFAULT_BRUSH_WIDTH;
+		get => outline_width?.GetValueAsInt () ?? BaseTool.DEFAULT_BRUSH_WIDTH;
 		set {
-			if (brush_width is not null)
-				brush_width.Value = value;
+			if (outline_width is not null)
+				outline_width.Value = value;
 		}
 	}
 
-	private int prev_brush_width = BaseTool.DEFAULT_BRUSH_WIDTH;
+	private int prev_outline_width = BaseTool.DEFAULT_BRUSH_WIDTH;
 
 	private bool StrokeShape {
 		get {
@@ -215,6 +216,8 @@ public abstract class BaseEditEngine
 
 	private void OnFillStyleChanged (object? sender, EventArgs e)
 	{
+		outline_width.Visible = outline_width_label.Visible = outline_width_sep.Visible = StrokeShape;
+		dash_pattern_box.setVisible (StrokeShape);
 		DrawActiveShape (false, false, true, false, false);
 	}
 
@@ -243,8 +246,8 @@ public abstract class BaseEditEngine
 
 	public virtual void OnSaveSettings (ISettingsService settings, string toolPrefix)
 	{
-		if (brush_width is not null)
-			settings.PutSetting (SettingNames.BrushWidth (toolPrefix), (int) brush_width.Value);
+		if (outline_width is not null)
+			settings.PutSetting (SettingNames.BrushWidth (toolPrefix), (int) outline_width.Value);
 
 		if (fill_button is not null)
 			settings.PutSetting (SettingNames.FillStyle (toolPrefix), fill_button.SelectedIndex);
@@ -258,68 +261,6 @@ public abstract class BaseEditEngine
 
 	public virtual void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
 	{
-		if (brush_width_label == null) {
-			string brushWidthText = Translations.GetString ("Brush width");
-			brush_width_label = Gtk.Label.New ($" {brushWidthText}: ");
-		}
-
-		tb.Append (brush_width_label);
-
-		if (brush_width == null) {
-
-			brush_width = GtkExtensions.CreateToolBarSpinButton (
-				1,
-				1e5,
-				1,
-				settings.GetSetting (
-					SettingNames.BrushWidth (toolPrefix),
-					BaseTool.DEFAULT_BRUSH_WIDTH
-				)
-			);
-			brush_width.TooltipText = Translations.GetString ("Change brush width. Shortcut keys: [ ]");
-
-			brush_width.OnValueChanged += (o, e) => {
-
-				ShapeEngine? selEngine = SelectedShapeEngine;
-				if (selEngine == null) return;
-				selEngine.BrushWidth = BrushWidth;
-				StorePreviousSettings ();
-				DrawActiveShape (false, false, true, false, false);
-			};
-		}
-
-		tb.Append (brush_width);
-
-		fill_sep ??= GtkExtensions.CreateToolBarSeparator ();
-
-		tb.Append (fill_sep);
-
-		if (fill_label == null) {
-			string fillStyleText = Translations.GetString ("Fill Style");
-			fill_label = Gtk.Label.New ($" {fillStyleText}: ");
-		}
-
-		tb.Append (fill_label);
-
-		if (fill_button == null) {
-			fill_button = new ToolBarDropDownButton ();
-
-			fill_button.AddItem (Translations.GetString ("Outline Shape"), Resources.Icons.FillStyleOutline, 0);
-			fill_button.AddItem (Translations.GetString ("Fill Shape"), Resources.Icons.FillStyleFill, 1);
-			fill_button.AddItem (Translations.GetString ("Fill and Outline Shape"), Resources.Icons.FillStyleOutlineFill, 2);
-
-			fill_button.SelectedIndex = settings.GetSetting (
-				SettingNames.FillStyle (toolPrefix),
-				0);
-			fill_button.SelectedItemChanged += OnFillStyleChanged;
-		}
-
-		tb.Append (fill_button);
-
-		shape_type_sep ??= GtkExtensions.CreateToolBarSeparator ();
-
-		tb.Append (shape_type_sep);
-
 		if (shape_type_label == null) {
 			string shapeTypeText = Translations.GetString ("Shape Type");
 			shape_type_label = Gtk.Label.New ($" {shapeTypeText}: ");
@@ -373,8 +314,68 @@ public abstract class BaseEditEngine
 
 		tb.Append (shape_type_button);
 
+		fill_sep ??= GtkExtensions.CreateToolBarSeparator ();
+
+		tb.Append (fill_sep);
+
+		if (fill_label == null) {
+			string fillStyleText = Translations.GetString ("Fill Style");
+			fill_label = Gtk.Label.New ($" {fillStyleText}: ");
+		}
+
+		tb.Append (fill_label);
+
+		if (fill_button == null) {
+			fill_button = new ToolBarDropDownButton ();
+
+			fill_button.AddItem (Translations.GetString ("Outline Shape"), Resources.Icons.FillStyleOutline, 0);
+			fill_button.AddItem (Translations.GetString ("Fill Shape"), Resources.Icons.FillStyleFill, 1);
+			fill_button.AddItem (Translations.GetString ("Fill and Outline Shape"), Resources.Icons.FillStyleOutlineFill, 2);
+
+			fill_button.SelectedIndex = settings.GetSetting (
+				SettingNames.FillStyle (toolPrefix),
+				0);
+			fill_button.SelectedItemChanged += OnFillStyleChanged;
+		}
+
+		tb.Append (fill_button);
+
+		if (outline_width_label == null) {
+			string brushWidthText = Translations.GetString ("Brush width");
+			outline_width_label = Gtk.Label.New ($" {brushWidthText}: ");
+		}
+
+		tb.Append (outline_width_label);
+
+		if (outline_width == null) {
+
+			outline_width = GtkExtensions.CreateToolBarSpinButton (
+				1,
+				1e5,
+				1,
+				settings.GetSetting (
+					SettingNames.BrushWidth (toolPrefix),
+					BaseTool.DEFAULT_BRUSH_WIDTH
+				)
+			);
+			outline_width.TooltipText = Translations.GetString ("Change brush width. Shortcut keys: [ ]");
+
+			outline_width.OnValueChanged += (o, e) => {
+
+				ShapeEngine? selEngine = SelectedShapeEngine;
+				if (selEngine == null) return;
+				selEngine.BrushWidth = BrushWidth;
+				StorePreviousSettings ();
+				DrawActiveShape (false, false, true, false, false);
+			};
+		}
+
+		tb.Append (outline_width);
 
 		Gtk.ComboBoxText? dpbBox = dash_pattern_box.SetupToolbar (tb);
+
+		outline_width.Visible = outline_width_label.Visible = outline_width_sep.Visible = StrokeShape;
+		dash_pattern_box.setVisible (StrokeShape);
 
 		if (dpbBox == null)
 			return;
@@ -1600,7 +1601,7 @@ public abstract class BaseEditEngine
 		dash_pattern_box.ComboBox?.ComboBox.GetEntry ().SetText (prev_dash_pattern);
 
 		owner.UseAntialiasing = prev_antialiasing;
-		BrushWidth = prev_brush_width;
+		BrushWidth = prev_outline_width;
 	}
 
 	/// <summary>
@@ -1612,7 +1613,7 @@ public abstract class BaseEditEngine
 			prev_dash_pattern = dash_pattern_box.ComboBox.ComboBox.GetEntry ().GetText ();
 
 		prev_antialiasing = owner.UseAntialiasing;
-		prev_brush_width = BrushWidth;
+		prev_outline_width = BrushWidth;
 	}
 
 	/// <summary>
