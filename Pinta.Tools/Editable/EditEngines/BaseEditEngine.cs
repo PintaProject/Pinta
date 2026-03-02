@@ -340,9 +340,13 @@ public abstract class BaseEditEngine
 
 		tb.Append (fill_button);
 
+		outline_width_sep ??= GtkExtensions.CreateToolBarSeparator ();
+
+		tb.Append (outline_width_sep);
+
 		if (outline_width_label == null) {
-			string brushWidthText = Translations.GetString ("Brush width");
-			outline_width_label = Gtk.Label.New ($" {brushWidthText}: ");
+			string outlineWidthText = Translations.GetString ("Outline width");
+			outline_width_label = Gtk.Label.New ($" {outlineWidthText}: ");
 		}
 
 		tb.Append (outline_width_label);
