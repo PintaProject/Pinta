@@ -217,7 +217,7 @@ public abstract class BaseEditEngine
 	private void OnFillStyleChanged (object? sender, EventArgs e)
 	{
 		outline_width.Visible = outline_width_label.Visible = outline_width_sep.Visible = StrokeShape;
-		dash_pattern_box.setVisible (StrokeShape);
+		dash_pattern_box.SetVisible (StrokeShape);
 		DrawActiveShape (false, false, true, false, false);
 	}
 
@@ -379,7 +379,7 @@ public abstract class BaseEditEngine
 		Gtk.ComboBoxText? dpbBox = dash_pattern_box.SetupToolbar (tb);
 
 		outline_width.Visible = outline_width_label.Visible = outline_width_sep.Visible = StrokeShape;
-		dash_pattern_box.setVisible (StrokeShape);
+		dash_pattern_box.SetVisible (StrokeShape);
 
 		if (dpbBox == null)
 			return;
