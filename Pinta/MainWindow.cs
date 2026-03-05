@@ -488,17 +488,29 @@ internal sealed class MainWindow
 	{
 		Gtk.Box statusbar = window_shell.CreateStatusBar ("statusbar");
 
-		statusbar.Append (
-			new StatusBarColorPaletteWidget (
-				PintaCore.Chrome,
-				PintaCore.Palette,
-				PintaCore.System) {
-				Hexpand = true,
-				Halign = Gtk.Align.Fill,
-			}
-		);
+		// Use an overlay so the palette renders on top of the info widgets
+		// when the window is too narrow, instead of being squished.
+		var overlay = Gtk.Overlay.New ();
+		overlay.Hexpand = true;
+		statusbar.Append (overlay);
 
-		PintaCore.Actions.CreateStatusBar (statusbar, PintaCore.Workspace);
+		// Info widgets packed right via a leading spacer.
+		var info_box = GtkExtensions.CreateToolBar ();
+		var spacer = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		spacer.Hexpand = true;
+		info_box.Append (spacer);
+		overlay.SetChild (info_box);
+
+		var palette = new StatusBarColorPaletteWidget (
+			PintaCore.Chrome,
+			PintaCore.Palette,
+			PintaCore.System) {
+			Halign = Gtk.Align.Fill,
+		};
+		overlay.AddOverlay (palette);
+		overlay.SetMeasureOverlay (palette, true);
+
+		PintaCore.Actions.CreateStatusBar (info_box, PintaCore.Workspace);
 
 		PintaCore.Chrome.InitializeStatusBar (statusbar);
 	}

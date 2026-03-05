@@ -180,11 +180,11 @@ public sealed class ActionManager
 		};
 
 		// Image dimensions widget
-		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.ImageResize));
+		statusbar.Append (Gtk.Image.NewFromIconName (Resources.StandardIcons.ViewFullscreen));
 		var image_size = Gtk.Label.New ("");
 		image_size.Xalign = 0.0f;
 		image_size.Halign = Gtk.Align.Start;
-		image_size.WidthChars = 24;
+		image_size.WidthChars = 16;
 		statusbar.Append (image_size);
 
 		void UpdateImageSizeLabel ()
@@ -195,7 +195,10 @@ public sealed class ActionManager
 			}
 
 			var size = workspaceManager.ActiveDocument.ImageSize;
-			image_size.SetText ($"{size.Width} \u00d7 {size.Height} \u00b7 {GetAspectRatio (size.Width, size.Height)}");
+			string text = $"{size.Width} \u00d7 {size.Height} \u00b7 {GetAspectRatio (size.Width, size.Height)}";
+			if (text.Length > image_size.WidthChars)
+				image_size.WidthChars = text.Length;
+			image_size.SetText (text);
 		}
 
 		workspaceManager.ActiveDocumentChanged += delegate { UpdateImageSizeLabel (); };
