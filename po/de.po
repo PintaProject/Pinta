@@ -127,6 +127,7 @@ msgstr "Ankerpunkt:"
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 msgid "Angle"
 msgstr "Winkel"
 
@@ -2367,10 +2368,6 @@ msgstr "Einzelnes Pixel"
 msgid "Size"
 msgstr "Größe"
 
-#: ../Pinta.Tools/Brushes/SlashBrush.cs:36
-msgid "Slash"
-msgstr "Schrägstrich"
-
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
 msgstr "Weich"
@@ -2925,6 +2922,9 @@ msgstr "{0} Palette ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
+
+#~ msgid "Slash"
+#~ msgstr "Schrägstrich"
 
 #~ msgid ""
 #~ "Left click to set primary color. Right click to set secondary color. "
