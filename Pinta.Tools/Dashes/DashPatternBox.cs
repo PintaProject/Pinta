@@ -75,4 +75,10 @@ public sealed class DashPatternBox
 			return ComboBox.ComboBox;
 		}
 	}
+
+	public void SetVisible (bool visible)
+	{
+		if (dash_pattern_label == null || dash_pattern_sep == null || ComboBox == null) { return; }
+		dash_pattern_label.Visible = dash_pattern_sep.Visible = ComboBox.Visible = visible;
+	}
 }
