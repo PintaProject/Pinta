@@ -128,6 +128,7 @@ msgstr "Punkt zaczepienia:"
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 msgid "Angle"
 msgstr "Kąt"
 
@@ -1055,7 +1056,8 @@ msgstr "Pliki ICO mogą mieć co najwyżej 255 × 255 pikseli."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr "Jeśli włączono, komponent Wartość zostanie zastosowany do koła kolorów."
+msgstr ""
+"Jeśli włączono, komponent Wartość zostanie zastosowany do koła kolorów."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
