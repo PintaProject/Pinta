@@ -57,7 +57,7 @@ public abstract class BaseTool
 		// Update cursor when active document changes
 		workspace.ActiveDocumentChanged += (_, _) => {
 			if (tools.CurrentTool == this)
-				SetCursor (DefaultCursor);
+				SetCursor (CurrentCursor);
 		};
 
 		// Give tools a chance to save their settings on application quit
