@@ -26,6 +26,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed several minor UX issues in the color dialog (#1795)
 - The text tool now provides a separate adjustment for the font size, which doesn't require opening the font dialog (#1947, #1961)
 - The text tool now allows choosing any font-weight supported by Cairo, not just Normal and Bold (#1965, #1967)
+- Adjusted the layout of the layers panel to avoid issues with overlay scrollbars preventing the visibility toggle from being clicked (#1828, #2021)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
