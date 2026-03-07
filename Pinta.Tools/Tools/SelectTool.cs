@@ -105,7 +105,10 @@ public abstract class SelectTool : BaseTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		if (handle.HasDragged (e.PointDouble)) {
+		double x = Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
+		double y = Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
+		PointD roundedCoordinates = new (x, y);
+		if (handle.HasDragged (roundedCoordinates)) {
 			ReDraw (document);
 
 			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
