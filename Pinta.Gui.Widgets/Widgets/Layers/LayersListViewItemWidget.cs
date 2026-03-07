@@ -162,9 +162,9 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 
 		SetOrientation (Gtk.Orientation.Horizontal);
 
-		Append (itemThumbnail);
-		Append (itemLabel);
 		Append (visibleButton);
+		Append (itemLabel);
+		Append (itemThumbnail);
 
 		// --- References to keep
 
