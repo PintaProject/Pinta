@@ -11,6 +11,7 @@ public interface ICanvasGridService
 
 	bool ShowAxonometricGrid { get; set; }
 	int AxonometricWidth { get; set; }
+	DegreesAngle AxonometricAngle { get; set; }
 
 	public void SaveGridSettings ();
 
@@ -30,6 +31,7 @@ public sealed class CanvasGridManager : ICanvasGridService
 
 	private bool show_axonometric_grid;
 	private int axonometric_width;
+	private DegreesAngle axonometric_angle;
 
 	public bool ShowGrid {
 		get => show_grid;
@@ -56,6 +58,11 @@ public sealed class CanvasGridManager : ICanvasGridService
 		set => SetProperty (ref axonometric_width, value);
 	}
 
+	public DegreesAngle AxonometricAngle {
+		get => axonometric_angle;
+		set => SetProperty (ref axonometric_angle, value);
+	}
+
 	public CanvasGridManager (WorkspaceManager workspace, SettingsManager settings)
 	{
 		this.settings = settings;
@@ -76,6 +83,7 @@ public sealed class CanvasGridManager : ICanvasGridService
 
 		settings.PutSetting (SettingNames.SHOW_CANVAS_AXONOMETRIC_GRID, ShowAxonometricGrid);
 		settings.PutSetting (SettingNames.CANVAS_AXONOMETRIC_WIDTH, AxonometricWidth);
+		settings.PutSetting (SettingNames.CANVAS_AXONOMETRIC_ANGLE, AxonometricAngle.Degrees);
 	}
 
 	public void LoadGridSettings ()
@@ -86,16 +94,12 @@ public sealed class CanvasGridManager : ICanvasGridService
 
 		ShowAxonometricGrid = settings.GetSetting (SettingNames.SHOW_CANVAS_AXONOMETRIC_GRID, false);
 		AxonometricWidth = settings.GetSetting (SettingNames.CANVAS_AXONOMETRIC_WIDTH, 64);
+		AxonometricAngle = new (settings.GetSetting (SettingNames.CANVAS_AXONOMETRIC_ANGLE, 45));
 	}
 
 	private void SetProperty<T> (ref T field, T value)
 	{
-		// If the value hasn't changed, don't do anything
-		if (Equals (field, value)) {
-			return;
-		}
-
-		// Update the field and raise the event
+		if (Equals (field, value)) return;
 		field = value;
 		SettingsChanged?.Invoke (this, EventArgs.Empty);
 	}
