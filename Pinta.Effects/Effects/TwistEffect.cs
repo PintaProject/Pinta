@@ -65,7 +65,7 @@ public sealed class TwistEffect : BaseEffect
 				pixel);
 	}
 
-	private ColorBgra GetFinalPixelColor (
+	private static ColorBgra GetFinalPixelColor (
 		in TwistSettings settings,
 		ImageSurface source,
 		ReadOnlySpan<ColorBgra> sourceData,
@@ -95,7 +95,7 @@ public sealed class TwistEffect : BaseEffect
 		return aggregate.Blend ();
 	}
 
-	private ColorBgra GetSampleColor (
+	private static ColorBgra GetSampleColor (
 		in TwistSettings settings,
 		ImageSurface source,
 		ReadOnlySpan<ColorBgra> sourceData,
@@ -126,9 +126,9 @@ public sealed class TwistEffect : BaseEffect
 		// Cases that don't require calculation of point with offset
 		switch (settings.EdgeBehavior) {
 			case EdgeBehavior.Primary:
-				return palette.PrimaryColor.ToColorBgra ();
+				return settings.PrimaryColor;
 			case EdgeBehavior.Secondary:
-				return palette.SecondaryColor.ToColorBgra ();
+				return settings.SecondaryColor;
 			case EdgeBehavior.Transparent:
 				return ColorBgra.Transparent;
 			case EdgeBehavior.Original:
@@ -165,6 +165,8 @@ public sealed class TwistEffect : BaseEffect
 	private readonly record struct TwistSettings (
 		PointD Center,
 		Size Size,
+		ColorBgra PrimaryColor,
+		ColorBgra SecondaryColor,
 		double DistanceThresholdSquared,
 		double MaxRadius,
 		double MaxRadiusSquared,
@@ -185,6 +187,8 @@ public sealed class TwistEffect : BaseEffect
 			Center: new (
 				X: halfWidth + renderBounds.Left + (data.CenterOffset.Horizontal * halfWidth),
 				Y: halfHeight + renderBounds.Top + (data.CenterOffset.Vertical * halfHeight)),
+			PrimaryColor: palette.PrimaryColor.ToColorBgra (),
+			SecondaryColor: palette.SecondaryColor.ToColorBgra (),
 			Size: destination.GetSize (),
 			DistanceThresholdSquared: (maxRadius + 1) * (maxRadius + 1),
 			MaxRadius: maxRadius,
