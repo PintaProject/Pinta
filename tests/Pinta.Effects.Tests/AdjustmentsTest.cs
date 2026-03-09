@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Newtonsoft.Json.Bson;
 using NUnit.Framework;
 using Pinta.Core;
 
