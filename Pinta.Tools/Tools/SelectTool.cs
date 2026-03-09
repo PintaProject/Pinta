@@ -64,6 +64,13 @@ public abstract class SelectTool : BaseTool
 		workspace.SelectionHandler.BuildToolbar (tb, Settings);
 	}
 
+	private static PointD AdjustMousePosition (Document document, in PointD position)
+	{
+		double x = Math.Round (Math.Clamp (position.X, 0, document.ImageSize.Width));
+		double y = Math.Round (Math.Clamp (position.Y, 0, document.ImageSize.Height));
+		return new (x, y);
+	}
+
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
 		// Ignore extra button clicks while drawing
@@ -73,20 +80,20 @@ public abstract class SelectTool : BaseTool
 		hist = new SelectionHistoryItem (workspace, Icon, Name);
 		hist.TakeSnapshot ();
 
-		if (!handle.BeginDrag (e.PointDouble, document.ImageSize)) {
-			// Start drawing a new rectangle.
-			combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (e);
+		if (handle.BeginDrag (e.PointDouble, document.ImageSize))
+			return;
 
-			double x = Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
-			double y = Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
-			handle.Rectangle = new (x, y, 0.0, 0.0);
+		// Start drawing a new rectangle.
+		combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (e);
 
-			document.PreviousSelection = document.Selection.Clone ();
-			document.Selection.SelectionPolygons.Clear ();
+		PointD adjusted = AdjustMousePosition (document, e.PointDouble);
+		handle.Rectangle = new (adjusted.X, adjusted.Y, 0.0, 0.0);
 
-			if (!handle.BeginDrag (new PointD (x, y), document.ImageSize))
-				throw new InvalidOperationException ("Should be able to start drawing a new rectangle!");
-		}
+		document.PreviousSelection = document.Selection.Clone ();
+		document.Selection.SelectionPolygons.Clear ();
+
+		if (!handle.BeginDrag (adjusted, document.ImageSize))
+			throw new InvalidOperationException ("Should be able to start drawing a new rectangle!");
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
@@ -96,7 +103,8 @@ public abstract class SelectTool : BaseTool
 			return;
 		}
 
-		handle.UpdateDrag (e.PointDouble, e.IsShiftPressed);
+		PointD adjusted = AdjustMousePosition (document, e.PointDouble);
+		handle.UpdateDrag (adjusted, e.IsShiftPressed);
 
 		ReDraw (document);
 
@@ -105,10 +113,8 @@ public abstract class SelectTool : BaseTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		double x = Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
-		double y = Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
-		PointD roundedCoordinates = new (x, y);
-		if (handle.HasDragged (roundedCoordinates)) {
+		PointD adjusted = AdjustMousePosition (document, e.PointDouble);
+		if (handle.HasDragged (adjusted)) {
 			ReDraw (document);
 
 			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
