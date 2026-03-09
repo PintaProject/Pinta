@@ -58,8 +58,8 @@ public sealed class SepiaEffect : BaseEffect
 	{
 		desaturate.Apply (destination, source, roi);
 		level.Apply (destination, destination, roi);
-		float strength = Data.Strength / 100f;
-		if (strength == 1) return;
+		double strength = Data.Strength / 100d;
+		if (strength == 1d) return;
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, source.GetSize ()))
