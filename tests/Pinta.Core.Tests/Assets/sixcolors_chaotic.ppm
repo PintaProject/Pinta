@@ -9,6 +9,8 @@ P3
 # 1 1 1 # This should not be read
 # Look at the trailing space below
 	0 1  	0 0 0 1              
+
+
 1 1   0   1 1 1    0   0   0
 # The following data goes beyond what was specified in the header,
 # and it should be ignored. In fact, let's add an out-of-range value
