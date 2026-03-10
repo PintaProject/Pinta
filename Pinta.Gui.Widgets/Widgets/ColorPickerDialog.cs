@@ -183,7 +183,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	/// <param name="livePalette">Determines modality of the dialog and live palette behaviour. If true, dialog will not block rest of app and will update
 	/// the current palette as the color is changed.</param>
 	/// <param name="windowTitle">Title of the dialog.</param>
-	internal ColorPickerDialog (
+	public ColorPickerDialog (
 		Gtk.Window? parentWindow,
 		IPaletteService palette,
 		ColorPick adjustable,

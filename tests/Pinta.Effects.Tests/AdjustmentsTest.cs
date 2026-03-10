@@ -102,9 +102,17 @@ internal sealed class AdjustmentsTest
 	}
 
 	[Test]
-	public void Sepia ()
+	public void Sepia1 ()
 	{
 		SepiaEffect effect = new (Utilities.CreateMockServices ());
 		Utilities.TestEffect (effect, "sepia1.png");
+	}
+
+	[Test]
+	public void Sepia2 ()
+	{
+		SepiaEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.Strength = 50;
+		Utilities.TestEffect (effect, "sepia2.png");
 	}
 }
