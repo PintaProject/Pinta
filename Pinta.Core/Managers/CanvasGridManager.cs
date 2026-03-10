@@ -94,7 +94,7 @@ public sealed class CanvasGridManager : ICanvasGridService
 
 		ShowAxonometricGrid = settings.GetSetting (SettingNames.SHOW_CANVAS_AXONOMETRIC_GRID, false);
 		AxonometricWidth = settings.GetSetting (SettingNames.CANVAS_AXONOMETRIC_WIDTH, 64);
-		AxonometricAngle = new (settings.GetSetting (SettingNames.CANVAS_AXONOMETRIC_ANGLE, 45));
+		AxonometricAngle = new (settings.GetSetting (SettingNames.CANVAS_AXONOMETRIC_ANGLE, 30));
 	}
 
 	private void SetProperty<T> (ref T field, T value)
