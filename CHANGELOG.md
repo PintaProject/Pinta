@@ -20,6 +20,8 @@ Thanks to the following contributors who worked on this release:
 - The Resize Image and Resize Canvas dialogs now remember their settings (#1869, #1972)
 - The Text Tool now allows choosing the join mode between 'Miter Join', 'Round Join' and 'Bevel Join' (#1969, #1985)
 - The right click menu for layers now includes options to move the layer up or down in the layer stack (#2004, #2007)
+- Added new `Center Offset` parameter for the Twist effect (#1210, #2026)
+- Added new `Strength` parameter for the Sepia adjustment (#2025)
 
 ### Changed
 - Effect dialogs now hide options that are not currently relevant (#1960)
