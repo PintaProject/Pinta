@@ -37,11 +37,13 @@ public sealed class TwistEffect : BaseEffect
 
 	private readonly IChromeService chrome;
 	private readonly ILivePreview live_preview;
+	private readonly IPaletteService palette;
 	private readonly IWorkspaceService workspace;
 	public TwistEffect (IServiceProvider services)
 	{
 		chrome = services.GetService<IChromeService> ();
 		live_preview = services.GetService<ILivePreview> ();
+		palette = services.GetService<IPaletteService> ();
 		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new TwistData ();
 	}
@@ -116,19 +118,60 @@ public sealed class TwistEffect : BaseEffect
 
 		PointI samplePosition = (settings.Center + rotatedLocation).ToInt ();
 
-		return source.GetColorBgra (
-			sourceData,
-			settings.Size.Width,
-			samplePosition);
+		if (
+			samplePosition.X >= 0 && samplePosition.X < settings.Size.Width
+			&& samplePosition.Y >= 0 && samplePosition.Y < settings.Size.Height
+		) return source.GetColorBgra (sourceData, settings.Size.Width, samplePosition);
+
+		// Cases that don't require calculation of point with offset
+		switch (settings.EdgeBehavior) {
+			case EdgeBehavior.Primary:
+				return settings.PrimaryColor;
+			case EdgeBehavior.Secondary:
+				return settings.SecondaryColor;
+			case EdgeBehavior.Transparent:
+				return ColorBgra.Transparent;
+			case EdgeBehavior.Original:
+				return original;
+		}
+
+		// Remaining cases
+		PointF rotatedLocationWithOffset = new (
+			(float) (settings.Center.X + rotatedLocation.X),
+			(float) (settings.Center.Y + rotatedLocation.Y));
+		return settings.EdgeBehavior switch {
+			EdgeBehavior.Clamp => source.GetBilinearSampleClamped (
+				sourceData,
+				settings.Size.Width,
+				settings.Size.Height,
+				rotatedLocationWithOffset.X,
+				rotatedLocationWithOffset.Y),
+			EdgeBehavior.Wrap => source.GetBilinearSampleWrapped (
+				sourceData,
+				settings.Size.Width,
+				settings.Size.Height,
+				rotatedLocationWithOffset.X,
+				rotatedLocationWithOffset.Y),
+			EdgeBehavior.Reflect => source.GetBilinearSampleReflected (
+				sourceData,
+				settings.Size.Width,
+				settings.Size.Height,
+				rotatedLocationWithOffset.X,
+				rotatedLocationWithOffset.Y),
+			_ => original,
+		};
 	}
 
 	private readonly record struct TwistSettings (
 		PointD Center,
 		Size Size,
+		ColorBgra PrimaryColor,
+		ColorBgra SecondaryColor,
 		double DistanceThresholdSquared,
 		double MaxRadius,
 		double MaxRadiusSquared,
 		double Twist,
+		EdgeBehavior EdgeBehavior,
 		ImmutableArray<PointD> AntialiasPoints);
 
 	private TwistSettings CreateSettings (ImageSurface destination)
@@ -142,13 +185,16 @@ public sealed class TwistEffect : BaseEffect
 		double maxRadius = radiusBasis * (data.RadiusPercentage / 100.0d);
 		return new (
 			Center: new (
-				X: halfWidth + renderBounds.Left,
-				Y: halfHeight + renderBounds.Top),
+				X: halfWidth + renderBounds.Left + (data.CenterOffset.Horizontal * halfWidth),
+				Y: halfHeight + renderBounds.Top + (data.CenterOffset.Vertical * halfHeight)),
+			PrimaryColor: palette.PrimaryColor.ToColorBgra (),
+			SecondaryColor: palette.SecondaryColor.ToColorBgra (),
 			Size: destination.GetSize (),
 			DistanceThresholdSquared: (maxRadius + 1) * (maxRadius + 1),
 			MaxRadius: maxRadius,
 			MaxRadiusSquared: maxRadius * maxRadius,
 			Twist: preliminaryTwist * preliminaryTwist * Math.Sign (preliminaryTwist) / 100,
+			EdgeBehavior: data.EdgeBehavior,
 			AntialiasPoints: InitializeAntialiasPoints (data.Antialias));
 	}
 
@@ -179,5 +225,11 @@ public sealed class TwistEffect : BaseEffect
 		[Caption ("Antialias")]
 		[MinimumValue (0), MaximumValue (5)]
 		public int Antialias { get; set; } = 2;
+
+		[Caption ("Center Offset")]
+		public CenterOffset<double> CenterOffset { get; set; }
+
+		[Caption ("Edge Behavior")]
+		public EdgeBehavior EdgeBehavior { get; set; } = EdgeBehavior.Clamp;
 	}
 }
