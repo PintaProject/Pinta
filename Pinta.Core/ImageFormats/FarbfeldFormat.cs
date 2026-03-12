@@ -1,5 +1,6 @@
 using System;
 using System.Buffers.Binary;
+using System.IO;
 using System.Text;
 using Cairo;
 
@@ -26,6 +27,11 @@ public sealed class FarbfeldFormat : IImageExporter
 	{
 		using ImageSurface flattenedImage = document.GetFlattenedImage ();
 		using GioStream outputStream = new (file.Replace ());
+		Export (flattenedImage, outputStream);
+	}
+
+	public static void Export (ImageSurface flattenedImage, Stream outputStream)
+	{
 		uint width = AdjustEndianness (Convert.ToUInt32 (flattenedImage.Width));
 		uint height = AdjustEndianness (Convert.ToUInt32 (flattenedImage.Height));
 		ReadOnlySpan<ColorBgra> pixels = flattenedImage.GetReadOnlyPixelData ();
