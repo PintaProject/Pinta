@@ -76,23 +76,21 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 	public Document Import (Gio.File file)
 	{
 		using GioStream stream = new (file.Read (cancellable: null));
-		using BinaryReader reader = new (stream);
 
 		Span<byte> signatureBytes = stackalloc byte[8];
 
-		int readSignatureBytes = reader.Read (signatureBytes);
-		if (readSignatureBytes != 8) throw new FormatException ("Unexpected end of file while reading signature");
+		stream.ReadExactly (signatureBytes);
+
 		string signatureString = ASCIIEncoding.ASCII.GetString (signatureBytes);
-		if (signatureString != farbfeld_signature) throw new FormatException ($"Signature is not correct. It should be '{farbfeld_signature}'");
+
+		if (signatureString != farbfeld_signature)
+			throw new FormatException ($"Signature is not correct. It should be '{farbfeld_signature}'");
 
 		Span<byte> widthBytes = stackalloc byte[4];
 		Span<byte> heightBytes = stackalloc byte[4];
 
-		int readWidthBytes = reader.Read (widthBytes);
-		int readHeightBytes = reader.Read (heightBytes);
-
-		if (readWidthBytes != 4) throw new FormatException ("Unexpected end of file while reading width");
-		if (readHeightBytes != 4) throw new FormatException ("Unexpected end of file while reading height");
+		stream.ReadExactly (widthBytes);
+		stream.ReadExactly (heightBytes);
 
 		int width = (int) AdjustEndianness (BitConverter.ToUInt32 (widthBytes));
 		int height = (int) AdjustEndianness (BitConverter.ToUInt32 (heightBytes));
@@ -120,13 +118,10 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 
 		for (int i = 0; i < pixelCount; i++) {
 
-			int readR = reader.Read (rBytes);
-			int readG = reader.Read (gBytes);
-			int readB = reader.Read (bBytes);
-			int readA = reader.Read (aBytes);
-
-			if (readR != 2 || readG != 2 || readB != 2 || readA != 2)
-				throw new FormatException ("Unexpected end of file");
+			stream.ReadExactly (rBytes);
+			stream.ReadExactly (gBytes);
+			stream.ReadExactly (bBytes);
+			stream.ReadExactly (aBytes);
 
 			FarbfeldPixel farbfeldPixel = new (
 				r: BitConverter.ToUInt16 (rBytes),
