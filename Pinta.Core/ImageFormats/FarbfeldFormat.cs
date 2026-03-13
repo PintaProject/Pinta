@@ -8,20 +8,11 @@ namespace Pinta.Core;
 
 public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 {
-	private static readonly Func<uint, uint> adjust_endianness_32;
-	private static readonly Func<ushort, ushort> adjust_endianness_16;
-	static FarbfeldFormat ()
-	{
-		bool shouldReverse = BitConverter.IsLittleEndian; // Farbfeld is big-endian
-		adjust_endianness_16 = shouldReverse ? BinaryPrimitives.ReverseEndianness : n => n;
-		adjust_endianness_32 = shouldReverse ? BinaryPrimitives.ReverseEndianness : n => n;
-	}
-
 	private static uint AdjustEndianness (uint value)
-		=> adjust_endianness_32 (value);
+		=> BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness (value) : value;
 
 	private static ushort AdjustEndianness (ushort value)
-		=> adjust_endianness_16 (value);
+		=> BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness (value) : value;
 
 	public void Export (Document document, Gio.File file, Gtk.Window parent)
 	{
