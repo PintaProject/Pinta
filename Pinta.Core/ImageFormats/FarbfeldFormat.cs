@@ -20,48 +20,14 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 
 	public static void Export (ImageSurface flattenedImage, Stream outputStream)
 	{
-		uint width = Convert.ToUInt32 (flattenedImage.Width);
-		uint height = Convert.ToUInt32 (flattenedImage.Height);
+		FarbfeldWriter writer = new (outputStream);
+		writer.WriteSignature ();
+		writer.WriteSize (flattenedImage.GetSize ());
 		ReadOnlySpan<ColorBgra> pixels = flattenedImage.GetReadOnlyPixelData ();
-		outputStream.Write (farbfeld_signature_bytes);
-		Span<byte> widthBytes = stackalloc byte[4];
-		Span<byte> heightBytes = stackalloc byte[4];
-		BinaryPrimitives.WriteUInt32BigEndian (widthBytes, width);
-		BinaryPrimitives.WriteUInt32BigEndian (heightBytes, height);
-		outputStream.Write (widthBytes);
-		outputStream.Write (heightBytes);
-		Span<byte> bytesR = stackalloc byte[2];
-		Span<byte> bytesG = stackalloc byte[2];
-		Span<byte> bytesB = stackalloc byte[2];
-		Span<byte> bytesA = stackalloc byte[2];
 		foreach (var pixel in pixels) {
 			FarbfeldPixel farbfeldPixel = ToFarbfeldPixel (in pixel);
-			BinaryPrimitives.WriteUInt16BigEndian (bytesR, farbfeldPixel.R);
-			BinaryPrimitives.WriteUInt16BigEndian (bytesG, farbfeldPixel.G);
-			BinaryPrimitives.WriteUInt16BigEndian (bytesB, farbfeldPixel.B);
-			BinaryPrimitives.WriteUInt16BigEndian (bytesA, farbfeldPixel.A);
-			outputStream.Write (bytesR);
-			outputStream.Write (bytesG);
-			outputStream.Write (bytesB);
-			outputStream.Write (bytesA);
+			writer.WritePixel (in farbfeldPixel);
 		}
-	}
-
-	private static FarbfeldPixel ToFarbfeldPixel (in ColorBgra pixel)
-	{
-		if (pixel.A == 0) return new (0, 0, 0, 0);
-
-		// Un-premultiply
-		ushort r = (ushort) (pixel.R * 65535 / pixel.A);
-		ushort g = (ushort) (pixel.G * 65535 / pixel.A);
-		ushort b = (ushort) (pixel.B * 65535 / pixel.A);
-		ushort a = (ushort) (pixel.A * 256u);
-
-		return new (
-			r: r,
-			g: g,
-			b: b,
-			a: a);
 	}
 
 	public Document Import (Gio.File file)
@@ -95,6 +61,71 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 		layer.Surface.MarkDirty ();
 
 		return newDocument;
+	}
+
+	private static FarbfeldPixel ToFarbfeldPixel (in ColorBgra pixel)
+	{
+		if (pixel.A == 0) return new (0, 0, 0, 0);
+
+		// Un-premultiply
+		ushort r = (ushort) (pixel.R * 65535 / pixel.A);
+		ushort g = (ushort) (pixel.G * 65535 / pixel.A);
+		ushort b = (ushort) (pixel.B * 65535 / pixel.A);
+		ushort a = (ushort) (pixel.A * 256u);
+
+		return new (
+			r: r,
+			g: g,
+			b: b,
+			a: a);
+	}
+
+	private static ColorBgra ToColorBgra (in FarbfeldPixel pixel)
+	{
+		byte a8 = (byte) (pixel.A / 256);
+
+		if (a8 == 0) return ColorBgra.Transparent;
+
+		return ColorBgra.FromBgra (
+			b: (byte) ((pixel.B * a8 + 32767) / 65535),
+			g: (byte) ((pixel.G * a8 + 32767) / 65535),
+			r: (byte) ((pixel.R * a8 + 32767) / 65535),
+			a: a8);
+	}
+
+	private readonly ref struct FarbfeldWriter (Stream outputStream)
+	{
+		public void WriteSignature ()
+		{
+			outputStream.Write (farbfeld_signature_bytes);
+		}
+
+		public void WriteSize (Size size)
+		{
+			uint width = Convert.ToUInt32 (size.Width);
+			uint height = Convert.ToUInt32 (size.Height);
+			Span<byte> widthBytes = stackalloc byte[4];
+			Span<byte> heightBytes = stackalloc byte[4];
+			BinaryPrimitives.WriteUInt32BigEndian (widthBytes, width);
+			BinaryPrimitives.WriteUInt32BigEndian (heightBytes, height);
+			outputStream.Write (widthBytes);
+			outputStream.Write (heightBytes);
+		}
+		public void WritePixel (in FarbfeldPixel pixel)
+		{
+			Span<byte> rBytes = stackalloc byte[2];
+			Span<byte> gBytes = stackalloc byte[2];
+			Span<byte> bBytes = stackalloc byte[2];
+			Span<byte> aBytes = stackalloc byte[2];
+			BinaryPrimitives.WriteUInt16BigEndian (rBytes, pixel.R);
+			BinaryPrimitives.WriteUInt16BigEndian (gBytes, pixel.G);
+			BinaryPrimitives.WriteUInt16BigEndian (bBytes, pixel.B);
+			BinaryPrimitives.WriteUInt16BigEndian (aBytes, pixel.A);
+			outputStream.Write (rBytes);
+			outputStream.Write (gBytes);
+			outputStream.Write (bBytes);
+			outputStream.Write (aBytes);
+		}
 	}
 
 	private readonly ref struct FarbfeldReader (Stream stream)
@@ -135,19 +166,6 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 				b: BinaryPrimitives.ReadUInt16BigEndian (bBytes),
 				a: BinaryPrimitives.ReadUInt16BigEndian (aBytes));
 		}
-	}
-
-	private static ColorBgra ToColorBgra (in FarbfeldPixel pixel)
-	{
-		byte a8 = (byte) (pixel.A / 256);
-
-		if (a8 == 0) return ColorBgra.Transparent;
-
-		return ColorBgra.FromBgra (
-			b: (byte) ((pixel.B * a8 + 32767) / 65535),
-			g: (byte) ((pixel.G * a8 + 32767) / 65535),
-			r: (byte) ((pixel.R * a8 + 32767) / 65535),
-			a: a8);
 	}
 
 	private readonly ref struct FarbfeldPixel (
