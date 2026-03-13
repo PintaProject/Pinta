@@ -77,25 +77,10 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 	{
 		using GioStream stream = new (file.Read (cancellable: null));
 
-		Span<byte> signatureBytes = stackalloc byte[8];
+		FarbfeldReader reader = new (stream);
 
-		stream.ReadExactly (signatureBytes);
-
-		string signatureString = ASCIIEncoding.ASCII.GetString (signatureBytes);
-
-		if (signatureString != farbfeld_signature)
-			throw new FormatException ($"Signature is not correct. It should be '{farbfeld_signature}'");
-
-		Span<byte> widthBytes = stackalloc byte[4];
-		Span<byte> heightBytes = stackalloc byte[4];
-
-		stream.ReadExactly (widthBytes);
-		stream.ReadExactly (heightBytes);
-
-		int width = (int) AdjustEndianness (BitConverter.ToUInt32 (widthBytes));
-		int height = (int) AdjustEndianness (BitConverter.ToUInt32 (heightBytes));
-
-		Size imageSize = new (width, height);
+		reader.ReadSignature ();
+		Size imageSize = reader.ReadSize ();
 
 		Document newDocument = new (
 			PintaCore.Actions,
@@ -109,32 +94,56 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 
 		layer.Surface.Flush ();
 
-		int pixelCount = checked(width * height);
-
-		Span<byte> rBytes = stackalloc byte[2];
-		Span<byte> gBytes = stackalloc byte[2];
-		Span<byte> bBytes = stackalloc byte[2];
-		Span<byte> aBytes = stackalloc byte[2];
+		int pixelCount = checked(imageSize.Width * imageSize.Height);
 
 		for (int i = 0; i < pixelCount; i++) {
-
-			stream.ReadExactly (rBytes);
-			stream.ReadExactly (gBytes);
-			stream.ReadExactly (bBytes);
-			stream.ReadExactly (aBytes);
-
-			FarbfeldPixel farbfeldPixel = new (
-				r: BitConverter.ToUInt16 (rBytes),
-				g: BitConverter.ToUInt16 (gBytes),
-				b: BitConverter.ToUInt16 (bBytes),
-				a: BitConverter.ToUInt16 (aBytes));
-
+			FarbfeldPixel farbfeldPixel = reader.ReadPixel ();
 			pixels[i] = ToColorBgra (in farbfeldPixel);
 		}
 
 		layer.Surface.MarkDirty ();
 
 		return newDocument;
+	}
+
+	private readonly ref struct FarbfeldReader (Stream stream)
+	{
+		public void ReadSignature ()
+		{
+			Span<byte> signatureBytes = stackalloc byte[8];
+			stream.ReadExactly (signatureBytes);
+			string signatureString = ASCIIEncoding.ASCII.GetString (signatureBytes);
+			if (signatureString != farbfeld_signature)
+				throw new FormatException ($"Signature is not correct. It should be '{farbfeld_signature}'");
+		}
+
+		public Size ReadSize ()
+		{
+			Span<byte> widthBytes = stackalloc byte[4];
+			Span<byte> heightBytes = stackalloc byte[4];
+			stream.ReadExactly (widthBytes);
+			stream.ReadExactly (heightBytes);
+			int width = (int) AdjustEndianness (BitConverter.ToUInt32 (widthBytes));
+			int height = (int) AdjustEndianness (BitConverter.ToUInt32 (heightBytes));
+			return new (width, height);
+		}
+
+		public FarbfeldPixel ReadPixel ()
+		{
+			Span<byte> rBytes = stackalloc byte[2];
+			Span<byte> gBytes = stackalloc byte[2];
+			Span<byte> bBytes = stackalloc byte[2];
+			Span<byte> aBytes = stackalloc byte[2];
+			stream.ReadExactly (rBytes);
+			stream.ReadExactly (gBytes);
+			stream.ReadExactly (bBytes);
+			stream.ReadExactly (aBytes);
+			return new (
+				r: BitConverter.ToUInt16 (rBytes),
+				g: BitConverter.ToUInt16 (gBytes),
+				b: BitConverter.ToUInt16 (bBytes),
+				a: BitConverter.ToUInt16 (aBytes));
+		}
 	}
 
 	private static ColorBgra ToColorBgra (in FarbfeldPixel pixel)
