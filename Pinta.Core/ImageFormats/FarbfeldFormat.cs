@@ -1,6 +1,7 @@
 using System;
 using System.Buffers.Binary;
 using System.IO;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using Cairo;
 
@@ -24,10 +25,8 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 		writer.WriteSignature ();
 		writer.WriteSize (flattenedImage.GetSize ());
 		ReadOnlySpan<ColorBgra> pixels = flattenedImage.GetReadOnlyPixelData ();
-		foreach (var pixel in pixels) {
-			FarbfeldPixel farbfeldPixel = ToFarbfeldPixel (in pixel);
-			writer.WritePixel (in farbfeldPixel);
-		}
+		foreach (var pixel in pixels)
+			writer.WritePixel (in pixel);
 	}
 
 	public Document Import (Gio.File file)
@@ -53,10 +52,8 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 
 		int pixelCount = checked(imageSize.Width * imageSize.Height);
 
-		for (int i = 0; i < pixelCount; i++) {
-			FarbfeldPixel farbfeldPixel = reader.ReadPixel ();
-			pixels[i] = ToColorBgra (in farbfeldPixel);
-		}
+		for (int i = 0; i < pixelCount; i++)
+			pixels[i] = reader.ReadPixel ();
 
 		layer.Surface.MarkDirty ();
 
@@ -111,7 +108,14 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 			outputStream.Write (widthBytes);
 			outputStream.Write (heightBytes);
 		}
-		public void WritePixel (in FarbfeldPixel pixel)
+
+		public void WritePixel (in ColorBgra pixel)
+		{
+			FarbfeldPixel farbfeldPixel = ToFarbfeldPixel (in pixel);
+			WriteFarbfeldPixel (in farbfeldPixel);
+		}
+
+		private void WriteFarbfeldPixel (in FarbfeldPixel pixel)
 		{
 			Span<byte> rBytes = stackalloc byte[2];
 			Span<byte> gBytes = stackalloc byte[2];
@@ -150,7 +154,13 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 			return new (width, height);
 		}
 
-		public FarbfeldPixel ReadPixel ()
+		public ColorBgra ReadPixel ()
+		{
+			FarbfeldPixel farbfeldPixel = ReadFarbfeldPixel ();
+			return ToColorBgra (in farbfeldPixel);
+		}
+
+		private FarbfeldPixel ReadFarbfeldPixel ()
 		{
 			Span<byte> rBytes = stackalloc byte[2];
 			Span<byte> gBytes = stackalloc byte[2];
