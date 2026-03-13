@@ -8,12 +8,6 @@ namespace Pinta.Core;
 
 public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 {
-	private static uint AdjustEndianness (uint value)
-		=> BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness (value) : value;
-
-	private static ushort AdjustEndianness (ushort value)
-		=> BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness (value) : value;
-
 	public void Export (Document document, Gio.File file, Gtk.Window parent)
 	{
 		using ImageSurface flattenedImage = document.GetFlattenedImage ();
@@ -26,18 +20,30 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 
 	public static void Export (ImageSurface flattenedImage, Stream outputStream)
 	{
-		uint width = AdjustEndianness (Convert.ToUInt32 (flattenedImage.Width));
-		uint height = AdjustEndianness (Convert.ToUInt32 (flattenedImage.Height));
+		uint width = Convert.ToUInt32 (flattenedImage.Width);
+		uint height = Convert.ToUInt32 (flattenedImage.Height);
 		ReadOnlySpan<ColorBgra> pixels = flattenedImage.GetReadOnlyPixelData ();
 		outputStream.Write (farbfeld_signature_bytes);
-		outputStream.Write (BitConverter.GetBytes (width));
-		outputStream.Write (BitConverter.GetBytes (height));
+		Span<byte> widthBytes = stackalloc byte[4];
+		Span<byte> heightBytes = stackalloc byte[4];
+		BinaryPrimitives.WriteUInt32BigEndian (widthBytes, width);
+		BinaryPrimitives.WriteUInt32BigEndian (heightBytes, height);
+		outputStream.Write (widthBytes);
+		outputStream.Write (heightBytes);
+		Span<byte> bytesR = stackalloc byte[2];
+		Span<byte> bytesG = stackalloc byte[2];
+		Span<byte> bytesB = stackalloc byte[2];
+		Span<byte> bytesA = stackalloc byte[2];
 		foreach (var pixel in pixels) {
 			FarbfeldPixel farbfeldPixel = ToFarbfeldPixel (in pixel);
-			outputStream.Write (BitConverter.GetBytes (farbfeldPixel.R));
-			outputStream.Write (BitConverter.GetBytes (farbfeldPixel.G));
-			outputStream.Write (BitConverter.GetBytes (farbfeldPixel.B));
-			outputStream.Write (BitConverter.GetBytes (farbfeldPixel.A));
+			BinaryPrimitives.WriteUInt16BigEndian (bytesR, farbfeldPixel.R);
+			BinaryPrimitives.WriteUInt16BigEndian (bytesG, farbfeldPixel.G);
+			BinaryPrimitives.WriteUInt16BigEndian (bytesB, farbfeldPixel.B);
+			BinaryPrimitives.WriteUInt16BigEndian (bytesA, farbfeldPixel.A);
+			outputStream.Write (bytesR);
+			outputStream.Write (bytesG);
+			outputStream.Write (bytesB);
+			outputStream.Write (bytesA);
 		}
 	}
 
@@ -46,22 +52,16 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 		if (pixel.A == 0) return new (0, 0, 0, 0);
 
 		// Un-premultiply
-		ushort baseR = (ushort) (pixel.R * 65535 / pixel.A);
-		ushort baseG = (ushort) (pixel.G * 65535 / pixel.A);
-		ushort baseB = (ushort) (pixel.B * 65535 / pixel.A);
-		ushort baseA = (ushort) (pixel.A * 256u);
-
-		// Adjust endianness
-		ushort adjustedR = AdjustEndianness (baseR);
-		ushort adjustedG = AdjustEndianness (baseG);
-		ushort adjustedB = AdjustEndianness (baseB);
-		ushort adjustedA = AdjustEndianness (baseA);
+		ushort r = (ushort) (pixel.R * 65535 / pixel.A);
+		ushort g = (ushort) (pixel.G * 65535 / pixel.A);
+		ushort b = (ushort) (pixel.B * 65535 / pixel.A);
+		ushort a = (ushort) (pixel.A * 256u);
 
 		return new (
-			r: adjustedR,
-			g: adjustedG,
-			b: adjustedB,
-			a: adjustedA);
+			r: r,
+			g: g,
+			b: b,
+			a: a);
 	}
 
 	public Document Import (Gio.File file)
@@ -114,8 +114,8 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 			Span<byte> heightBytes = stackalloc byte[4];
 			stream.ReadExactly (widthBytes);
 			stream.ReadExactly (heightBytes);
-			int width = (int) AdjustEndianness (BitConverter.ToUInt32 (widthBytes));
-			int height = (int) AdjustEndianness (BitConverter.ToUInt32 (heightBytes));
+			int width = (int) BinaryPrimitives.ReadUInt32BigEndian (widthBytes);
+			int height = (int) BinaryPrimitives.ReadUInt32BigEndian (heightBytes);
 			return new (width, height);
 		}
 
@@ -130,28 +130,23 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 			stream.ReadExactly (bBytes);
 			stream.ReadExactly (aBytes);
 			return new (
-				r: BitConverter.ToUInt16 (rBytes),
-				g: BitConverter.ToUInt16 (gBytes),
-				b: BitConverter.ToUInt16 (bBytes),
-				a: BitConverter.ToUInt16 (aBytes));
+				r: BinaryPrimitives.ReadUInt16BigEndian (rBytes),
+				g: BinaryPrimitives.ReadUInt16BigEndian (gBytes),
+				b: BinaryPrimitives.ReadUInt16BigEndian (bBytes),
+				a: BinaryPrimitives.ReadUInt16BigEndian (aBytes));
 		}
 	}
 
 	private static ColorBgra ToColorBgra (in FarbfeldPixel pixel)
 	{
-		ushort r16 = AdjustEndianness (pixel.R);
-		ushort g16 = AdjustEndianness (pixel.G);
-		ushort b16 = AdjustEndianness (pixel.B);
-		ushort a16 = AdjustEndianness (pixel.A);
-
-		byte a8 = (byte) (a16 / 256);
+		byte a8 = (byte) (pixel.A / 256);
 
 		if (a8 == 0) return ColorBgra.Transparent;
 
 		return ColorBgra.FromBgra (
-			b: (byte) ((b16 * a8 + 32767) / 65535),
-			g: (byte) ((g16 * a8 + 32767) / 65535),
-			r: (byte) ((r16 * a8 + 32767) / 65535),
+			b: (byte) ((pixel.B * a8 + 32767) / 65535),
+			g: (byte) ((pixel.G * a8 + 32767) / 65535),
+			r: (byte) ((pixel.R * a8 + 32767) / 65535),
 			a: a8);
 	}
 
