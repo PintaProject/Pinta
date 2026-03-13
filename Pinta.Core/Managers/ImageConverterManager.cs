@@ -76,7 +76,7 @@ public sealed class ImageConverterManager
 			displayPrefix: "Farbfeld",
 			extensions: ["ff", "FF"],
 			mimes: ["image/farbfeld", "image/x-farbfeld"],
-			importer: null,
+			importer: farbfeldFormat,
 			exporter: farbfeldFormat,
 			supportsLayers: false);
 		yield return farbfeldFormatDescriptor;
