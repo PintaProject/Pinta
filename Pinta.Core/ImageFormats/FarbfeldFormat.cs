@@ -111,7 +111,7 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 
 		layer.Surface.Flush ();
 
-		int pixelCount = width * height;
+		int pixelCount = checked(width * height);
 
 		Span<byte> rBytes = stackalloc byte[2];
 		Span<byte> gBytes = stackalloc byte[2];
