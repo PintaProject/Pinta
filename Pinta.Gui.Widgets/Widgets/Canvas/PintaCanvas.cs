@@ -404,9 +404,9 @@ public sealed class PintaCanvas : Gtk.Picture
 		double verticalSpacing = 2 * axonometricWidth * tanAngle;
 		double maxStartY = imageWidth * tanAngle + imageHeight;
 		for (double s = 0; s < maxStartY; s += verticalSpacing) {
-			double xEnd = s / tanAngle;
+			float xEnd = (float) (s / tanAngle);
 			pathBuilder.MoveTo (0, (float) s);
-			pathBuilder.LineTo ((float) xEnd, 0);
+			pathBuilder.LineTo (xEnd, 0);
 		}
 
 		// Descending diagonal lines
