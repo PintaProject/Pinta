@@ -131,7 +131,7 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 		{
 			Span<byte> signatureBytes = stackalloc byte[8];
 			stream.ReadExactly (signatureBytes);
-			string signatureString = ASCIIEncoding.ASCII.GetString (signatureBytes);
+			string signatureString = Encoding.ASCII.GetString (signatureBytes);
 			if (signatureString != FARBFELD_SIGNATURE)
 				throw new FormatException ($"Signature is not correct. It should be '{FARBFELD_SIGNATURE}'");
 		}
