@@ -16,8 +16,8 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 		Export (flattenedImage, bufferedStream);
 	}
 
-	private static readonly string farbfeld_signature = "farbfeld";
-	private static readonly byte[] farbfeld_signature_bytes = Encoding.ASCII.GetBytes (farbfeld_signature);
+	private const string FARBFELD_SIGNATURE = "farbfeld";
+	private static readonly byte[] farbfeld_signature_bytes = Encoding.ASCII.GetBytes (FARBFELD_SIGNATURE);
 
 	public static void Export (ImageSurface flattenedImage, Stream outputStream)
 	{
@@ -132,8 +132,8 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 			Span<byte> signatureBytes = stackalloc byte[8];
 			stream.ReadExactly (signatureBytes);
 			string signatureString = ASCIIEncoding.ASCII.GetString (signatureBytes);
-			if (signatureString != farbfeld_signature)
-				throw new FormatException ($"Signature is not correct. It should be '{farbfeld_signature}'");
+			if (signatureString != FARBFELD_SIGNATURE)
+				throw new FormatException ($"Signature is not correct. It should be '{FARBFELD_SIGNATURE}'");
 		}
 
 		public Size ReadSize ()
