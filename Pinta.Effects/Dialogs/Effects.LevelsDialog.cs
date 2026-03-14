@@ -462,6 +462,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private void UpdateGammaByMask (float val)
 	{
+		val = Math.Clamp(val, 0.1f, 10.0f);
 		if (!(mask.R || mask.G || mask.B))
 			return;
 
