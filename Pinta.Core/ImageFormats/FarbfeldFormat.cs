@@ -137,10 +137,10 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 
 		public Size ReadSize ()
 		{
-			Span<byte> widthBytes = stackalloc byte[4];
-			Span<byte> heightBytes = stackalloc byte[4];
-			stream.ReadExactly (widthBytes);
-			stream.ReadExactly (heightBytes);
+			Span<byte> sizeBytes = stackalloc byte[8];
+			stream.ReadExactly (sizeBytes);
+			Span<byte> widthBytes = sizeBytes.Slice (0, 4);
+			Span<byte> heightBytes = sizeBytes.Slice (4, 4);
 			int width = checked((int) BinaryPrimitives.ReadUInt32BigEndian (widthBytes));
 			int height = checked((int) BinaryPrimitives.ReadUInt32BigEndian (heightBytes));
 			return new (width, height);
@@ -154,14 +154,12 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 
 		private FarbfeldPixel ReadFarbfeldPixel ()
 		{
-			Span<byte> rBytes = stackalloc byte[2];
-			Span<byte> gBytes = stackalloc byte[2];
-			Span<byte> bBytes = stackalloc byte[2];
-			Span<byte> aBytes = stackalloc byte[2];
-			stream.ReadExactly (rBytes);
-			stream.ReadExactly (gBytes);
-			stream.ReadExactly (bBytes);
-			stream.ReadExactly (aBytes);
+			Span<byte> colorBytes = stackalloc byte[8];
+			stream.ReadExactly (colorBytes);
+			Span<byte> rBytes = colorBytes.Slice (0, 2);
+			Span<byte> gBytes = colorBytes.Slice (2, 2);
+			Span<byte> bBytes = colorBytes.Slice (4, 2);
+			Span<byte> aBytes = colorBytes.Slice (6, 2);
 			return new (
 				r: BinaryPrimitives.ReadUInt16BigEndian (rBytes),
 				g: BinaryPrimitives.ReadUInt16BigEndian (gBytes),
