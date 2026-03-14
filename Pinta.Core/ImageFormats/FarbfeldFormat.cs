@@ -71,7 +71,7 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 
 	private static ColorBgra ToColorBgra (in FarbfeldPixel pixel)
 	{
-		byte a8 = (byte) (pixel.A / 256);
+		byte a8 = (byte) ((pixel.A + 128) / 257);
 		if (a8 == 0) return ColorBgra.Transparent;
 		byte b8 = (byte) ((pixel.B + 128) / 257);
 		byte g8 = (byte) ((pixel.G + 128) / 257);
