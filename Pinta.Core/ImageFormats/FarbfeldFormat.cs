@@ -99,8 +99,7 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 			Span<byte> heightBytes = sizeBytes.Slice (4, 4);
 			BinaryPrimitives.WriteUInt32BigEndian (widthBytes, width);
 			BinaryPrimitives.WriteUInt32BigEndian (heightBytes, height);
-			outputStream.Write (widthBytes);
-			outputStream.Write (heightBytes);
+			outputStream.Write (sizeBytes);
 		}
 
 		public void WritePixel (in ColorBgra pixel)
