@@ -67,7 +67,7 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 		ushort r = (ushort) (pixel.R * 65535 / pixel.A);
 		ushort g = (ushort) (pixel.G * 65535 / pixel.A);
 		ushort b = (ushort) (pixel.B * 65535 / pixel.A);
-		ushort a = (ushort) (pixel.A * 256u);
+		ushort a = (ushort) (pixel.A * 257u); // 255 * 257 = 65535, so this maps 0-255 to 0-65535
 
 		return new (
 			r: r,
