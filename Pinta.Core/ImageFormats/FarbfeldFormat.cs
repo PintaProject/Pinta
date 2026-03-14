@@ -31,8 +31,9 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 
 	public Document Import (Gio.File file)
 	{
-		using GioStream stream = new (file.Read (cancellable: null));
-		FarbfeldReader reader = new (stream);
+		using GioStream inputStream = new (file.Read (cancellable: null));
+		using BufferedStream bufferedStream = new (inputStream);
+		FarbfeldReader reader = new (bufferedStream);
 		reader.ReadSignature ();
 		Size imageSize = reader.ReadSize ();
 		Document newDocument = new (
