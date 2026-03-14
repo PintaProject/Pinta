@@ -62,6 +62,7 @@ public sealed class FreeformShapeTool : BaseBrushTool
 		// TODO: This could be cleaner.
 		// This will only return an item on the first setup so we only add the handler once.
 		var dash_pattern_box = dash_p_box.SetupToolbar (tb);
+		BrushWidthLabel.Visible = BrushWidthSpinButton.Visible = StrokeShape;
 		dash_p_box.SetVisible (StrokeShape);
 
 		if (dash_pattern_box != null) {
@@ -75,6 +76,7 @@ public sealed class FreeformShapeTool : BaseBrushTool
 
 	private void OnFillStyleChanged (object? sender, EventArgs e)
 	{
+		BrushWidthLabel.Visible = BrushWidthSpinButton.Visible = StrokeShape;
 		dash_p_box.SetVisible (StrokeShape);
 	}
 
