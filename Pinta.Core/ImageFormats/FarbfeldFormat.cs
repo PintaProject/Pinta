@@ -94,8 +94,9 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 		{
 			uint width = Convert.ToUInt32 (size.Width);
 			uint height = Convert.ToUInt32 (size.Height);
-			Span<byte> widthBytes = stackalloc byte[4];
-			Span<byte> heightBytes = stackalloc byte[4];
+			Span<byte> sizeBytes = stackalloc byte[8];
+			Span<byte> widthBytes = sizeBytes.Slice (0, 4);
+			Span<byte> heightBytes = sizeBytes.Slice (4, 4);
 			BinaryPrimitives.WriteUInt32BigEndian (widthBytes, width);
 			BinaryPrimitives.WriteUInt32BigEndian (heightBytes, height);
 			outputStream.Write (widthBytes);
@@ -110,18 +111,16 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 
 		private void WriteFarbfeldPixel (in FarbfeldPixel pixel)
 		{
-			Span<byte> rBytes = stackalloc byte[2];
-			Span<byte> gBytes = stackalloc byte[2];
-			Span<byte> bBytes = stackalloc byte[2];
-			Span<byte> aBytes = stackalloc byte[2];
+			Span<byte> colorBytes = stackalloc byte[8];
+			Span<byte> rBytes = colorBytes.Slice (0, 2);
+			Span<byte> gBytes = colorBytes.Slice (2, 2);
+			Span<byte> bBytes = colorBytes.Slice (4, 2);
+			Span<byte> aBytes = colorBytes.Slice (6, 2);
 			BinaryPrimitives.WriteUInt16BigEndian (rBytes, pixel.R);
 			BinaryPrimitives.WriteUInt16BigEndian (gBytes, pixel.G);
 			BinaryPrimitives.WriteUInt16BigEndian (bBytes, pixel.B);
 			BinaryPrimitives.WriteUInt16BigEndian (aBytes, pixel.A);
-			outputStream.Write (rBytes);
-			outputStream.Write (gBytes);
-			outputStream.Write (bBytes);
-			outputStream.Write (aBytes);
+			outputStream.Write (colorBytes);
 		}
 	}
 
