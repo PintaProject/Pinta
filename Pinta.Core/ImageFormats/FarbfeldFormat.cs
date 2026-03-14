@@ -12,7 +12,8 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 	{
 		using ImageSurface flattenedImage = document.GetFlattenedImage ();
 		using GioStream outputStream = new (file.Replace ());
-		Export (flattenedImage, outputStream);
+		using BufferedStream bufferedStream = new (outputStream);
+		Export (flattenedImage, bufferedStream);
 	}
 
 	private static readonly string farbfeld_signature = "farbfeld";
@@ -31,12 +32,9 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 	public Document Import (Gio.File file)
 	{
 		using GioStream stream = new (file.Read (cancellable: null));
-
 		FarbfeldReader reader = new (stream);
-
 		reader.ReadSignature ();
 		Size imageSize = reader.ReadSize ();
-
 		Document newDocument = new (
 			PintaCore.Actions,
 			PintaCore.Tools,
@@ -45,17 +43,11 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 			file,
 			"ff");
 		Layer layer = newDocument.Layers.AddNewLayer (file.GetDisplayName ());
-		Span<ColorBgra> pixels = layer.Surface.GetPixelData ();
-
 		layer.Surface.Flush ();
-
+		Span<ColorBgra> pixels = layer.Surface.GetPixelData ();
 		int pixelCount = checked(imageSize.Width * imageSize.Height);
-
-		for (int i = 0; i < pixelCount; i++)
-			pixels[i] = reader.ReadPixel ();
-
+		for (int i = 0; i < pixelCount; i++) pixels[i] = reader.ReadPixel ();
 		layer.Surface.MarkDirty ();
-
 		return newDocument;
 	}
 
@@ -64,9 +56,9 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 		if (pixel.A == 0) return new (0, 0, 0, 0);
 
 		// Un-premultiply
-		ushort r = (ushort) (pixel.R * 65535 / pixel.A);
-		ushort g = (ushort) (pixel.G * 65535 / pixel.A);
-		ushort b = (ushort) (pixel.B * 65535 / pixel.A);
+		ushort r = (ushort) Math.Min (pixel.R * 65535 / pixel.A, 65535);
+		ushort g = (ushort) Math.Min (pixel.G * 65535 / pixel.A, 65535);
+		ushort b = (ushort) Math.Min (pixel.B * 65535 / pixel.A, 65535);
 		ushort a = (ushort) (pixel.A * 257u); // 255 * 257 = 65535, so this maps 0-255 to 0-65535
 
 		return new (
@@ -79,13 +71,14 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 	private static ColorBgra ToColorBgra (in FarbfeldPixel pixel)
 	{
 		byte a8 = (byte) (pixel.A / 256);
-
 		if (a8 == 0) return ColorBgra.Transparent;
-
+		byte b8 = (byte) ((pixel.B + 128) / 257);
+		byte g8 = (byte) ((pixel.G + 128) / 257);
+		byte r8 = (byte) ((pixel.R + 128) / 257);
 		return ColorBgra.FromBgra (
-			b: (byte) ((pixel.B * a8 + 32767) / 65535),
-			g: (byte) ((pixel.G * a8 + 32767) / 65535),
-			r: (byte) ((pixel.R * a8 + 32767) / 65535),
+			b: (byte) (b8 * a8 / 255),
+			g: (byte) (g8 * a8 / 255),
+			r: (byte) (r8 * a8 / 255),
 			a: a8);
 	}
 
@@ -148,8 +141,8 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 			Span<byte> heightBytes = stackalloc byte[4];
 			stream.ReadExactly (widthBytes);
 			stream.ReadExactly (heightBytes);
-			int width = (int) BinaryPrimitives.ReadUInt32BigEndian (widthBytes);
-			int height = (int) BinaryPrimitives.ReadUInt32BigEndian (heightBytes);
+			int width = checked((int) BinaryPrimitives.ReadUInt32BigEndian (widthBytes));
+			int height = checked((int) BinaryPrimitives.ReadUInt32BigEndian (heightBytes));
 			return new (width, height);
 		}
 
