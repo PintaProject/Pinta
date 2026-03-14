@@ -56,9 +56,9 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 		if (pixel.A == 0) return new (0, 0, 0, 0);
 
 		// Un-premultiply
-		ushort r = (ushort) Math.Min (pixel.R * 65535 / pixel.A, 65535);
-		ushort g = (ushort) Math.Min (pixel.G * 65535 / pixel.A, 65535);
-		ushort b = (ushort) Math.Min (pixel.B * 65535 / pixel.A, 65535);
+		ushort r = (ushort) Math.Min ((pixel.R * 65535 + pixel.A / 2) / pixel.A, 65535);
+		ushort g = (ushort) Math.Min ((pixel.G * 65535 + pixel.A / 2) / pixel.A, 65535);
+		ushort b = (ushort) Math.Min ((pixel.B * 65535 + pixel.A / 2) / pixel.A, 65535);
 		ushort a = (ushort) (pixel.A * 257u); // 255 * 257 = 65535, so this maps 0-255 to 0-65535
 
 		return new (
@@ -76,9 +76,9 @@ public sealed class FarbfeldFormat : IImageExporter, IImageImporter
 		byte g8 = (byte) ((pixel.G + 128) / 257);
 		byte r8 = (byte) ((pixel.R + 128) / 257);
 		return ColorBgra.FromBgra (
-			b: (byte) (b8 * a8 / 255),
-			g: (byte) (g8 * a8 / 255),
-			r: (byte) (r8 * a8 / 255),
+			b: (byte) ((b8 * a8 + 127) / 255),
+			g: (byte) ((g8 * a8 + 127) / 255),
+			r: (byte) ((r8 * a8 + 127) / 255),
 			a: a8);
 	}
 
