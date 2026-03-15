@@ -213,11 +213,12 @@ public sealed class PaintBrushTool : BaseBrushTool
 	private Gtk.Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
 	private Label BrushLabel => brush_label ??= Label.New (string.Format (" {0}:  ", Translations.GetString ("Type")));
 
-	public override void OnCanvasZoom() {
+	public override void OnCanvasZoom ()
+	{
 		if (active_brush is null) {
-			base.OnCanvasZoom();
+			base.OnCanvasZoom ();
 		} else {
-			SetCursorFromBrush(active_brush);
+			SetCursorFromBrush (active_brush);
 		}
 	}
 

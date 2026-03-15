@@ -170,7 +170,8 @@ public abstract class BaseTool
 		}
 	}
 
-	public virtual void OnCanvasZoom() {
+	public virtual void OnCanvasZoom ()
+	{
 		if (CursorChangesOnZoom) {
 			//The current tool's cursor changes when the zoom changes.
 			SetCursor (DefaultCursor);

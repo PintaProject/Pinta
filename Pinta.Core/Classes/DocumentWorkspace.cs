@@ -116,7 +116,7 @@ public sealed class DocumentWorkspace
 			ViewSize = GetNewViewSize (document.ImageSize, value);
 
 			Invalidate ();
-			tools.CurrentTool?.OnCanvasZoom();
+			tools.CurrentTool?.OnCanvasZoom ();
 		}
 	}
 
