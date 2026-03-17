@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-15 00:30+0000\n"
+"POT-Creation-Date: 2026-03-15 00:33+0000\n"
 "PO-Revision-Date: 2025-12-31 18:06+0000\n"
 "Last-Translator: Stepan Andriiovych <4fbig9xyb@mozmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/uk/"
@@ -76,7 +76,7 @@ msgstr "Додати шум"
 msgid "Add-in Manager..."
 msgstr "Менеджер додатків..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:839
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Added"
 msgstr "Додано"
 
@@ -111,7 +111,7 @@ msgstr "Альфа градієнт"
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
-#: ../Pinta.Effects/Effects/TwistEffect.cs:171
+#: ../Pinta.Effects/Effects/TwistEffect.cs:217
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:136
 msgid "Amount"
 msgstr "Кількість"
@@ -127,13 +127,13 @@ msgstr "Прив’язка:"
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
-#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 msgid "Angle"
 msgstr "Кут"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:179
+#: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
 msgstr "Згладжування"
 
@@ -160,7 +160,7 @@ msgstr "Художній"
 msgid "Atkinson"
 msgstr "Еффект Аткінсона"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
 msgid "Auto"
 msgstr "Автоматично"
 
@@ -202,6 +202,11 @@ msgstr "Ефект \"Прекрасна Італія\""
 msgid "Best Fit"
 msgstr "Найкраще заповнення"
 
+#. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:411
+msgid "Bevel Join"
+msgstr ""
+
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
 msgstr "Білінійність"
@@ -216,7 +221,7 @@ msgstr "Чорно-біле"
 msgid "Blend Mode"
 msgstr "Режим змішування"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:114
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:339
 msgid "Blue"
@@ -235,7 +240,8 @@ msgstr "Синій "
 msgid "Blurs"
 msgstr "Розмитість"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:198
+#. Translators: 'Bold' (700) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Bold"
 msgstr "Напівжирний"
 
@@ -243,6 +249,11 @@ msgstr "Напівжирний"
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:31
 msgid "Bonfire"
 msgstr "Багаття"
+
+#. Translators: 'Book' (380) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:226
+msgid "Book"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -269,8 +280,7 @@ msgstr "Яскравість / контраст"
 msgid "Brush Size"
 msgstr "Розмір пензля"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:262
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:120
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:126
 msgid "Brush width"
 msgstr "Товщина пензля"
 
@@ -328,7 +338,7 @@ msgstr "Комірки"
 msgid "Center"
 msgstr "По центру"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:250
+#: ../Pinta.Tools/Tools/TextTool.cs:322
 msgid "Center Align"
 msgstr "Вирівнювання по центру"
 
@@ -338,6 +348,7 @@ msgstr "По центру ліворуч"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:159
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
+#: ../Pinta.Effects/Effects/TwistEffect.cs:229
 msgid "Center Offset"
 msgstr "Зміщення центру"
 
@@ -353,16 +364,16 @@ msgstr "Рівняння на середину"
 msgid "Centimeters"
 msgstr "Сантиметри"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:365
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr "Зміна ширини пензля. Гарячі клавіші: [ ]"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:186
+#: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Change font size. Shortcut keys: [ ]"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
 msgstr "Змінений тип форми"
 
@@ -371,7 +382,7 @@ msgstr "Змінений тип форми"
 msgid "Cherry Blossom"
 msgstr "Вишневий цвіт"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:629
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:638
 #: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:356
 msgid "Choose Color"
 msgstr "Виберіть колір"
@@ -475,7 +486,7 @@ msgstr "Закрити все"
 msgid "Closed Curve Shape"
 msgstr "Закрита крива"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:275
 msgid "Closed Line/Curve Series"
 msgstr "Група закритих геометричних фігур/кривих"
 
@@ -651,7 +662,7 @@ msgstr "За замовчанням"
 msgid "Delete Layer"
 msgstr "Видалити шар"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:677
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:682
 msgid "Deleted"
 msgstr "Вилучено"
 
@@ -721,7 +732,8 @@ msgstr "Проста програма для створення та редаг�
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:162
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:99
-#: ../Pinta.Effects/Effects/TileEffect.cs:237 Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:237
+#: ../Pinta.Effects/Effects/TwistEffect.cs:232 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Поведінка краю"
 
@@ -742,7 +754,7 @@ msgstr "Ефекти"
 msgid "Electric"
 msgstr "Електричний"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:276
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -837,7 +849,7 @@ msgstr "Звітувати про помилку"
 msgid "Files to open"
 msgstr "Файли для відкриття"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:288
+#: ../Pinta.Tools/Tools/TextTool.cs:360
 msgid "Fill Background"
 msgstr "Залити тло"
 
@@ -850,23 +862,23 @@ msgstr "Заповнити фон об'єкту"
 msgid "Fill Selection"
 msgstr "Заповнити виділення"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Shape"
 msgstr "Залити фігуру"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:212
 msgid "Fill Style"
 msgstr "Стиль заповнення"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:220
 msgid "Fill and Outline Shape"
 msgstr "Залити і обвести фігуру"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1109
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1395
 #: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "Закінчений"
@@ -925,7 +937,7 @@ msgstr "Алгоритм Флойда-Стейнберга"
 msgid "Floyd-Steinberg Lite"
 msgstr "Алгоритм Флойда-Стейнберга полегшений"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:146
+#: ../Pinta.Tools/Tools/TextTool.cs:148
 msgid "Font"
 msgstr "Шрифт"
 
@@ -983,7 +995,7 @@ msgid "Gradient Modified"
 msgstr "Градієнт Змінено"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:338
 msgid "Green"
@@ -996,6 +1008,11 @@ msgstr "Сітка"
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "Яскраве світло"
+
+#. Translators: 'Heavy' (900) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:262
+msgid "Heavy"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
@@ -1128,11 +1145,11 @@ msgstr "Обводка чорнилом"
 msgid "Ink Sketch"
 msgstr "Ескіз чорнилами"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:275
 msgid "Input"
 msgstr "Вхід"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 msgid "Input Histogram"
 msgstr "Вхідна гістограма"
 
@@ -1179,7 +1196,7 @@ msgstr "Інвертувати кольори"
 msgid "Invert Selection"
 msgstr "Інвертувати виділення"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:210
+#: ../Pinta.Tools/Tools/TextTool.cs:282
 msgid "Italic"
 msgstr "Курсив"
 
@@ -1243,7 +1260,7 @@ msgstr "Шар {0}"
 msgid "Layers"
 msgstr "Шари"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:238
+#: ../Pinta.Tools/Tools/TextTool.cs:310
 msgid "Left Align"
 msgstr "Рівняння ліворуч"
 
@@ -1329,7 +1346,7 @@ msgstr ""
 "Клацніть правою кнопкою миші, щоб використовувати вторинний колір."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:61
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:67
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1406,7 +1423,7 @@ msgstr "Довжина"
 msgid "Levels"
 msgstr "Рівні"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:243
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:245
 msgid "Levels Adjustment"
 msgstr "Корекція рівнів"
 
@@ -1415,7 +1432,9 @@ msgid "License"
 msgstr "Ліцензія"
 
 #. Translators: This refers to using a light variant of the color scheme.
+#. Translators: 'Light' (300) refers to the font-weight text property
 #: ../Pinta.Core/Actions/ViewActions.cs:248
+#: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Light"
 msgstr "Світлий"
 
@@ -1491,6 +1510,11 @@ msgstr "Максимальний розмір"
 msgid "Median"
 msgstr "Медіана"
 
+#. Translators: 'Medium' (500) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:238
+msgid "Medium"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
 msgstr "Рядок меню"
@@ -1504,11 +1528,16 @@ msgstr "Обєднати шар з попереднім"
 msgid "Minimum Size"
 msgstr "Мінімальний розмір"
 
+#. Translators: 'Miter Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:399
+msgid "Miter Join"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr "Режим"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:921
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:926
 msgid "Modified"
 msgstr "Змінений"
 
@@ -1581,9 +1610,11 @@ msgstr "Не знайдено жодного елемента"
 msgid "Noise"
 msgstr "Шум"
 
+#. Translators: 'Normal' (400) refers to the font-weight text property
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:285
+#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:232
+#: ../Pinta.Tools/Tools/TextTool.cs:357
 msgid "Normal"
 msgstr "Нормальний"
 
@@ -1595,7 +1626,7 @@ msgstr "Нормальне змішування"
 msgid "Normal Size"
 msgstr "Нормальний розмір"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:286
+#: ../Pinta.Tools/Tools/TextTool.cs:358
 msgid "Normal and Outline"
 msgstr "Нормальний та контурний"
 
@@ -1657,7 +1688,7 @@ msgstr "Відкрити зображення"
 msgid "Open Image File"
 msgstr "Відкрити файл зображення"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:274
 msgid "Open Line/Curve Series"
 msgstr "Група відкритих геометричних фігур/кривих"
 
@@ -1678,7 +1709,7 @@ msgstr "Орієнтація:"
 msgid "Original"
 msgstr "Оригінал"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:287
+#: ../Pinta.Tools/Tools/TextTool.cs:359
 msgid "Outline"
 msgstr "Контур"
 
@@ -1694,20 +1725,21 @@ msgstr "Край контура"
 msgid "Outline Object"
 msgstr "Об'єкт контуру"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:218
 msgid "Outline Shape"
 msgstr "Обвести фігуру"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:301
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
+#: ../Pinta.Tools/Tools/TextTool.cs:373
 msgid "Outline width"
 msgstr "Товщина контуру"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:276
 msgid "Output"
 msgstr "Вихід"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:277
 msgid "Output Histogram"
 msgstr "Вихідна гістограма"
 
@@ -1723,7 +1755,7 @@ msgstr "Перезаписати"
 msgid "Paint Bucket"
 msgstr "Заливка"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:65
 msgid "Paintbrush"
 msgstr "Пензлик"
 
@@ -1854,8 +1886,8 @@ msgstr "Піна Колада"
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Перезапустіть додаток Pinta, щоб зміни вступили в силу."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:607
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
 msgid "Point Added"
 msgstr "Точка додана"
 
@@ -1869,7 +1901,7 @@ msgstr "Розташування точок"
 msgid "Point Color"
 msgstr "Колір крапки"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
 msgid "Point Deleted"
 msgstr "Точка вилучена"
 
@@ -1975,7 +2007,7 @@ msgstr "Радіус"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
-#: ../Pinta.Effects/Effects/TwistEffect.cs:175
+#: ../Pinta.Effects/Effects/TwistEffect.cs:221
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
 msgstr "Відсотки радіуса"
@@ -2025,7 +2057,7 @@ msgstr "Прямокутник"
 msgid "Rectangle Select"
 msgstr "Прямокутне виділення"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:337
 msgid "Red"
@@ -2100,7 +2132,7 @@ msgid "Reseed"
 msgstr "Перемішати"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
 msgid "Reset"
 msgstr "Скинути"
@@ -2152,7 +2184,7 @@ msgstr "Зворотна кольорова гама"
 msgid "Reverse Color Sorting"
 msgstr "Зворотнє cортування кольору"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:262
+#: ../Pinta.Tools/Tools/TextTool.cs:334
 msgid "Right Align"
 msgstr "Рівняння праворуч"
 
@@ -2189,7 +2221,12 @@ msgstr "Обертання"
 msgid "Roughness"
 msgstr "Шорсткість"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
+#. Translators: 'Round Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:405
+msgid "Round Join"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
 msgstr "Група закруглених ліній"
 
@@ -2281,7 +2318,17 @@ msgstr "Виділити все"
 msgid "Selected Colors"
 msgstr "Обрані кольори"
 
-#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:35
+#. Translators: 'Semibold' (600) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:244
+msgid "Semibold"
+msgstr ""
+
+#. Translators: 'Semilight' (350) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:220
+msgid "Semilight"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
 msgstr "Сепія"
 
@@ -2289,7 +2336,7 @@ msgstr "Сепія"
 msgid "Set Number of Colors"
 msgstr "Встановіть число кольорів"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:265
 msgid "Shape Type"
 msgstr "Форма"
 
@@ -2355,6 +2402,10 @@ msgstr "Одиночний піксель"
 msgid "Size"
 msgstr "Розмір"
 
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:36
+msgid "Slash"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
 msgstr "Згладжування"
@@ -2416,7 +2467,7 @@ msgstr "Текст"
 msgid "Text - Finalize"
 msgstr "Текст - Завершити"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:276
+#: ../Pinta.Tools/Tools/TextTool.cs:348
 msgid "Text Style"
 msgstr "Стиль Тексту"
 
@@ -2493,6 +2544,11 @@ msgstr ""
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:133
 msgid "Thickness"
 msgstr "Товщина"
+
+#. Translators: 'Thin' (100) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:202
+msgid "Thin"
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
@@ -2581,11 +2637,26 @@ msgid "Two-Row Sierra"
 msgstr "Дворядовий ефект високогір'я"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:322
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:195
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:214
 msgid "Type"
 msgstr "Тип"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:222
+#. Translators: 'Ultrabold' (800) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:256
+msgid "Ultrabold"
+msgstr ""
+
+#. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:268
+msgid "Ultraheavy"
+msgstr ""
+
+#. Translators: 'Ultralight' (200) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:208
+msgid "Ultralight"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:294
 msgid "Underline"
 msgstr "Підкреслений"
 
