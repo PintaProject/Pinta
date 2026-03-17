@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-15 00:33+0000\n"
-"PO-Revision-Date: 2026-02-24 07:12+0000\n"
+"PO-Revision-Date: 2026-03-17 08:33+0000\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/"
-">\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16.1-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -204,7 +204,7 @@ msgstr "Bästa passning"
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:411
 msgid "Bevel Join"
-msgstr ""
+msgstr "Bevel Join"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
@@ -252,7 +252,7 @@ msgstr "Brasa"
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Book"
-msgstr ""
+msgstr "Book"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -1009,7 +1009,7 @@ msgstr "Skarpt ljus"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:262
 msgid "Heavy"
-msgstr ""
+msgstr "Tung"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
@@ -1506,7 +1506,7 @@ msgstr "Median"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:238
 msgid "Medium"
-msgstr ""
+msgstr "Medium"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
@@ -1524,7 +1524,7 @@ msgstr "Minsta storlek"
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:399
 msgid "Miter Join"
-msgstr ""
+msgstr "Miter Join"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -2217,7 +2217,7 @@ msgstr "Ruggighet"
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:405
 msgid "Round Join"
-msgstr ""
+msgstr "Round Join"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
@@ -2314,12 +2314,12 @@ msgstr "Valda färger"
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Semibold"
-msgstr ""
+msgstr "Halvfet"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:220
 msgid "Semilight"
-msgstr ""
+msgstr "Halvlätt"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
@@ -2397,7 +2397,7 @@ msgstr "Storlek"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr ""
+msgstr "Slash"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
@@ -2542,7 +2542,7 @@ msgstr "Tjocklek"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Thin"
-msgstr ""
+msgstr "Tunn"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
@@ -2638,17 +2638,17 @@ msgstr "Typ"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:256
 msgid "Ultrabold"
-msgstr ""
+msgstr "Ultrafet"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:268
 msgid "Ultraheavy"
-msgstr ""
+msgstr "Ultratung"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "Ultralight"
-msgstr ""
+msgstr "Ultralätt"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:294
 msgid "Underline"
