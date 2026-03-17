@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-15 00:33+0000\n"
-"PO-Revision-Date: 2026-02-18 09:09+0000\n"
+"PO-Revision-Date: 2026-03-18 00:23+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/pinta/pinta/"
 "id/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.16.1-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Poedit-Country: INDONESIA\n"
 "X-Poedit-Language: Indonesian\n"
@@ -206,7 +206,7 @@ msgstr "Paling Cocok"
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:411
 msgid "Bevel Join"
-msgstr ""
+msgstr "Sambungan Bevel"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
@@ -254,7 +254,7 @@ msgstr "Api Unggun"
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Book"
-msgstr ""
+msgstr "Buku"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -372,7 +372,7 @@ msgstr "Ubah lebar kuas. Tombol pintasan: [ ]"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Ubah ukuran font. Tombol pintasan: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -390,7 +390,7 @@ msgstr "Pilih Warna"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:361
 msgid "Choose Colors"
-msgstr ""
+msgstr "Pilih Warna"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:153
 msgid "Choose Palette Color"
@@ -1015,7 +1015,7 @@ msgstr "Cahaya Keras"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:262
 msgid "Heavy"
-msgstr ""
+msgstr "Tebal Sekali"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
@@ -1077,7 +1077,7 @@ msgstr "Berkas ICO tidak boleh lebih besar dari 255 x 255 piksel."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "Jika diaktifkan, komponen Nilai diterapkan pada roda warna."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1401,6 +1401,8 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Klik kiri untuk mengatur warna primer. Klik kanan untuk mengatur warna "
+"sekunder. Klik tengah atau tekan {0} dan klik kiri untuk memilih warna palet."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1510,7 +1512,7 @@ msgstr "Median"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:238
 msgid "Medium"
-msgstr ""
+msgstr "Sedang"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
@@ -1528,7 +1530,7 @@ msgstr "Ukuran Minimum"
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:399
 msgid "Miter Join"
-msgstr ""
+msgstr "Sambungan Miter"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -2143,7 +2145,7 @@ msgstr "Setel ulang ke Bawaan"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:93
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:78
 msgid "Reset to image size"
-msgstr ""
+msgstr "Setel ulang ke ukuran gambar"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:214
@@ -2223,7 +2225,7 @@ msgstr "Kekasaran"
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:405
 msgid "Round Join"
-msgstr ""
+msgstr "Sambungan Bulat"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
@@ -2320,12 +2322,12 @@ msgstr "Warna yang Dipilih"
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Semibold"
-msgstr ""
+msgstr "Semitebal"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:220
 msgid "Semilight"
-msgstr ""
+msgstr "Semiringan"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
@@ -2403,7 +2405,7 @@ msgstr "Ukuran"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr ""
+msgstr "Garis Miring"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
@@ -2547,7 +2549,7 @@ msgstr "Ketebalan"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Thin"
-msgstr ""
+msgstr "Tipis"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
@@ -2643,17 +2645,17 @@ msgstr "Jenis"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:256
 msgid "Ultrabold"
-msgstr ""
+msgstr "Sangat Tebal"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:268
 msgid "Ultraheavy"
-msgstr ""
+msgstr "Sangat Tebal Sekali"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "Ultralight"
-msgstr ""
+msgstr "Sangat Ringan"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:294
 msgid "Underline"
