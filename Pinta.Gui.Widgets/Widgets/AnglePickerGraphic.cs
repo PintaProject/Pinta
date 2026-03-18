@@ -17,6 +17,7 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 {
 	private PointD drag_start;
 	private DegreesAngle angle_value;
+	private NumberRange<int>? allowed_range;
 
 	public AnglePickerGraphic ()
 	{
@@ -46,9 +47,24 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 	public DegreesAngle Value {
 		get => angle_value;
 		set {
-			if (angle_value == value) return;
-			angle_value = value;
+			DegreesAngle clamped = ClampToAllowedRange (value);
+			if (angle_value == clamped) return;
+			angle_value = clamped;
 			OnValueChanged ();
+		}
+	}
+
+	public NumberRange<int>? AllowedRange {
+		get => allowed_range;
+		set {
+			if (value is NumberRange<int> range) {
+				if (range.Lower < 0 || range.Upper > 360)
+					throw new ArgumentOutOfRangeException (nameof (value), "Range must be within [0, 360]");
+			}
+			if (allowed_range == value) return;
+			allowed_range = value;
+			Value = ClampToAllowedRange (angle_value);
+			QueueDraw ();
 		}
 	}
 
@@ -72,10 +88,10 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 		RadiansAngle theta = new (Math.Atan2 (-delta.Y, delta.X));
 		DegreesAngle newAngle = theta.ToDegrees ();
 
-		if (!constrainAngle)
-			return newAngle;
-		else
-			return GetConstrainedAngle (newAngle);
+		if (constrainAngle)
+			newAngle = GetConstrainedAngle (newAngle);
+
+		return ClampToAllowedRange (newAngle);
 
 		static DegreesAngle GetConstrainedAngle (DegreesAngle baseAngle)
 		{
@@ -83,6 +99,27 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 			double multiple = Math.Round (baseAngle.Degrees / constraint_angle);
 			return new (multiple * constraint_angle);
 		}
+	}
+
+	private DegreesAngle ClampToAllowedRange (DegreesAngle angle)
+	{
+		if (allowed_range is not NumberRange<int> range)
+			return angle;
+
+		double degrees = angle.Degrees;
+		if (degrees >= range.Lower && degrees <= range.Upper)
+			return angle;
+
+		double distToLower = AngularDistance (degrees, range.Lower);
+		double distToUpper = AngularDistance (degrees, range.Upper);
+
+		return new DegreesAngle (distToLower <= distToUpper ? range.Lower : range.Upper);
+	}
+
+	private static double AngularDistance (double from, double to)
+	{
+		double diff = ((to - from) % 360 + 360) % 360;
+		return Math.Min (diff, 360 - diff);
 	}
 
 	private readonly record struct AngleGraphicSettings (
@@ -128,11 +165,37 @@ public sealed class AnglePickerGraphic : Gtk.DrawingArea
 	private void Draw (Context g)
 	{
 		AngleGraphicSettings settings = CreateSettings ();
+
+		if (allowed_range is NumberRange<int> range && range.Upper - range.Lower < 360)
+			DrawUnavailableSector (g, settings, range);
+
 		g.DrawEllipse (settings.ellipseOutlineRect, settings.color, 1);
 		g.FillEllipse (settings.gripEllipseRect, settings.color);
 		g.DrawLine (settings.center, settings.endPoint, settings.color, 1);
 
 		g.Dispose ();
+	}
+
+	private static void DrawUnavailableSector (Context g, AngleGraphicSettings settings, NumberRange<int> range)
+	{
+		double radius = settings.ellipseOutlineRect.Width / 2.0;
+		PointD center = settings.center;
+
+		double upperRad = range.Upper * Math.PI / 180.0;
+		double lowerRad = range.Lower * Math.PI / 180.0;
+
+		g.MoveTo (center.X, center.Y);
+		g.LineTo (
+			center.X + radius * Math.Cos (upperRad),
+			center.Y - radius * Math.Sin (upperRad));
+
+		// Arc through the unavailable region (from Upper to Lower the "long way")
+		g.ArcNegative (center.X, center.Y, radius, -upperRad, -lowerRad);
+		g.ClosePath ();
+
+		Color fillColor = new (settings.color.R, settings.color.G, settings.color.B, 0.15);
+		g.SetSourceColor (fillColor);
+		g.Fill ();
 	}
 
 	public event EventHandler? ValueChanged;

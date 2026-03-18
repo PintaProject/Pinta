@@ -86,6 +86,20 @@ public sealed class AnglePickerWidget : Gtk.Box
 		set => widget_label.SetText (value);
 	}
 
+	public NumberRange<int>? AllowedRange {
+		get => angle_picker_graphic.AllowedRange;
+		set {
+			if (value is NumberRange<int> range) {
+				if (range.Lower < 0 || range.Upper > 360)
+					throw new ArgumentOutOfRangeException (nameof (value), "Range must be within [0, 360]");
+				numeric_spin.SetRange (range.Lower, range.Upper);
+			} else {
+				numeric_spin.SetRange (-360, 360);
+			}
+			angle_picker_graphic.AllowedRange = value;
+		}
+	}
+
 	public DegreesAngle Value {
 		get => angle_picker_graphic.Value;
 		set {
