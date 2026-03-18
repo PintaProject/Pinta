@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-15 00:33+0000\n"
-"PO-Revision-Date: 2023-12-20 15:51+0000\n"
-"Last-Translator: Miraficus <6325410@seznam.cz>\n"
+"PO-Revision-Date: 2026-03-19 00:13+0000\n"
+"Last-Translator: Elviska <vonelviska@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/pinta/pinta/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.3\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -72,7 +72,7 @@ msgstr "Přidat šum"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr "Manažer addonů"
+msgstr "Manažer Pluginů"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Added"
@@ -156,7 +156,7 @@ msgstr "Umělecké"
 #. Translators: Image dithering matrix named after Bill Atkinson
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:28
 msgid "Atkinson"
-msgstr ""
+msgstr "Atkinson Dithering"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
 msgid "Auto"
@@ -189,12 +189,12 @@ msgstr "Pozadí:"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:94
 msgid "Based on the work of Paint.NET:"
-msgstr "Na základě práce Paint.NET"
+msgstr "Na základě práce Paint.NET:"
 
 #. Translators: Gradient with the colors of the flag of Italy: red, white, and green
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:23
 msgid "Beautiful Italy"
-msgstr ""
+msgstr "Přechod pomocí barev Itálie"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:86
 msgid "Best Fit"
@@ -246,7 +246,7 @@ msgstr "Tučně"
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:31
 msgid "Bonfire"
-msgstr ""
+msgstr "Přechod pomocí barev ohně"
 
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:226
@@ -255,15 +255,15 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "Vprostřed Dole"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "Vlevo Dole"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "Vpravo Dole"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
@@ -289,7 +289,7 @@ msgstr "Vyboulit"
 #. Translators: Image dithering matrix named after Daniel Burkes
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:24
 msgid "Burkes"
-msgstr ""
+msgstr "Dithering dle Burkes"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:120
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:89
@@ -314,15 +314,15 @@ msgstr "Plátno"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:92
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "Nastavení Mřížky Plátna"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:124
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Mřížka Plátna..."
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
-msgstr ""
+msgstr "Okolí Buňky"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
@@ -330,11 +330,11 @@ msgstr "Velikost buňky"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:19
 msgid "Cells"
-msgstr ""
+msgstr "Buňky"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "Střed"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:322
 msgid "Center Align"
@@ -342,21 +342,21 @@ msgstr "Zarovnat na střed"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "Vlevo Uprostřed"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:159
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
 #: ../Pinta.Effects/Effects/TwistEffect.cs:229
 msgid "Center Offset"
-msgstr "Středové odsazení"
+msgstr "Středové Odsazení"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "Vpravo Uprostřed"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:154
 msgid "Centered"
-msgstr "Vystředěné"
+msgstr "V Prostředku"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Centimeters"
@@ -400,7 +400,7 @@ msgstr "Kruhy"
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
 msgid "Circular"
-msgstr ""
+msgstr "Kruhový"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -410,13 +410,17 @@ msgstr "Svorka"
 msgid ""
 "Click and drag to draw a rectangular selection.\n"
 "Hold Shift to constrain to a square."
-msgstr "Klikněte a tahejte, abyste vytvořili obdélníkový výběr"
+msgstr ""
+"Klikněte a tahejte, abyste nakreslili obdélníkový výběr.\n"
+"Držte Shift pro omezení na čtverec."
 
 #: ../Pinta.Tools/Tools/EllipseSelectTool.cs:41
 msgid ""
 "Click and drag to draw an elliptical selection.\n"
 "Hold Shift to constrain to a circle."
-msgstr "Klikněte a tahejte, abyste vytvořili eliptický výběr"
+msgstr ""
+"Klikněte a tahejte, abyste nakreslili eliptický výběr.\n"
+"Držte Shift pro omezení na kruh."
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:61
 msgid ""
@@ -424,6 +428,10 @@ msgid ""
 "Right click to reverse.\n"
 "Click on a control point and drag to move it."
 msgstr ""
+"Klikněte a tahejte, abyste nakreslili přechod z primární na sekundární "
+"barvu.\n"
+"Pravé kliknutí na otočení.\n"
+"Klikněte na kontrolní bod a tahejte pro jeho přesun."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -450,7 +458,7 @@ msgstr "Kliknutím vyberte sekundární barvu."
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:332
 msgid "Click to switch between primary and secondary color."
-msgstr "Kliknutím přepnete mezi primární a sekundární barvou"
+msgstr "Kliknutím přepnete mezi primární a sekundární barvou."
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:358
 #: ../Pinta/Dialogs/NewImageDialog.cs:415
@@ -503,7 +511,7 @@ msgstr "Nepromísení barev"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:215
 msgid "Color Gradient"
-msgstr ""
+msgstr "Přechod"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:292
 msgid "Color Mode"
@@ -606,7 +614,7 @@ msgstr "Vystřihnout do výběru"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Current Palette"
-msgstr ""
+msgstr "Současná Paleta"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:247
 msgid "Curved"
@@ -667,7 +675,7 @@ msgstr "Zrušit výběr"
 
 #: ../Pinta.Core/Actions/EditActions.cs:163
 msgid "Deselect All"
-msgstr "Zrušit výběr"
+msgstr "Zrušit výběr všeho"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:66
 msgid "Details"
@@ -699,7 +707,7 @@ msgstr "Pokřivit"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:14
 msgid "Dithering"
-msgstr ""
+msgstr "Dithering"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
 msgid "Do not switch tool"
@@ -737,12 +745,12 @@ msgstr "Efe_kty"
 
 #: ../Pinta/MainWindow.cs:451
 msgid "Effects"
-msgstr ""
+msgstr "Efekty"
 
 #. Translators: Gradient that starts out white, like the the inner part of a spark, and goes through progressively dark shades of blue until it reaches black, and finally transparent, blending with the background
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:43
 msgid "Electric"
-msgstr ""
+msgstr "Elektrický Přechod"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:276
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
@@ -786,7 +794,7 @@ msgstr "Odečíst"
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:227
 msgid "Expand"
-msgstr ""
+msgstr "Rozšířit"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:277
 msgid "Extension packages"
@@ -803,7 +811,7 @@ msgstr "Neschopní přistoupit na XDG Desktop Portals"
 
 #: ../Pinta/MainWindow.cs:324
 msgid "Failed to initialize add-in"
-msgstr ""
+msgstr "Selhala inicializace pluginu"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:199
 msgid "Failed to load extension package"
@@ -836,30 +844,30 @@ msgstr "Nahlásit chybu"
 
 #: ../Pinta/Main.cs:62
 msgid "Files to open"
-msgstr ""
+msgstr "Soubory na otevření"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:360
 msgid "Fill Background"
-msgstr "Vyplnit pozadí"
+msgstr "Vyplnit Pozadí"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:221
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Vyplnit Objektové Pozadí"
 
 #: ../Pinta.Core/Actions/EditActions.cs:135
 #: ../Pinta.Core/Actions/EditActions.cs:321
 msgid "Fill Selection"
-msgstr "Vyplnit výběr"
+msgstr "Vyplnit Výběr"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Shape"
-msgstr "Vyplnit tvar"
+msgstr "Vyplnit Tvar"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:212
 msgid "Fill Style"
-msgstr "Styl výpně"
+msgstr "Styl Výplně"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:220
@@ -884,12 +892,12 @@ msgstr "Zploštit"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "Zploštění obrázku spojí všechny jeho vrstvy do jedné."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:84
 #: ../Pinta.Core/Actions/LayerActions.cs:95
 msgid "Flip Horizontal"
-msgstr "Převrátit horizontálně"
+msgstr "Převrátit Horizontálně"
 
 #: ../Pinta.Core/HistoryItems/InvertHistoryItem.cs:51
 msgid "Flip Image Horizontal"
@@ -910,7 +918,7 @@ msgstr "Překlopit vrstvu vertikálně"
 #: ../Pinta.Core/Actions/ImageActions.cs:90
 #: ../Pinta.Core/Actions/LayerActions.cs:101
 msgid "Flip Vertical"
-msgstr "Převrátit vertikálně"
+msgstr "Převrátit Vertikálně"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:121
 msgid "Flood Mode"
@@ -919,12 +927,12 @@ msgstr "Záplavový režim"
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:40
 msgid "Floyd-Steinberg"
-msgstr ""
+msgstr "Dithering dle Floyd-Steinberg"
 
 #. Translators: Image dithering matrix named after Robert W. Floyd and Louis Steinberg. Some software may use it and call it Floyd-Steinberg, but it's not the actual Floyd-Steinberg matrix
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:44
 msgid "Floyd-Steinberg Lite"
-msgstr ""
+msgstr "Dithering dle Floyd-Steinberg Lite"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:148
 msgid "Font"
@@ -932,7 +940,7 @@ msgstr "Písmo"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:27
 msgid "Fragment"
-msgstr "Fragment"
+msgstr "Úlomek"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:124
 msgid "Fragments"
@@ -940,11 +948,11 @@ msgstr "Úlomky"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:220
 msgid "Freeform"
-msgstr ""
+msgstr "Volná Forma"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
-msgstr "Volný tvar"
+msgstr "Volný Tvar"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:23
 msgid "Frosted Glass"
@@ -977,11 +985,11 @@ msgstr "Přechod"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:118
 msgid "Gradient Created"
-msgstr ""
+msgstr "Přechod Vytvořen"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:119
 msgid "Gradient Modified"
-msgstr ""
+msgstr "Přechod Upraven"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
@@ -1001,7 +1009,7 @@ msgstr "Tvrdé světlo"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:262
 msgid "Heavy"
-msgstr ""
+msgstr "Těžké"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
@@ -1031,17 +1039,17 @@ msgstr "Historie"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:237
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "Horizontální modrá (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:240
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "Horizontální zelená (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "Horizontální červená (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
@@ -1051,7 +1059,7 @@ msgstr "Odstín"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:287
 msgid "Hue & Sat"
-msgstr ""
+msgstr "Odstín a Sytost"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
 msgid "Hue / Saturation"
@@ -1059,11 +1067,11 @@ msgstr "Odstín / Sytost"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "Soubory ICO nesmí být větší než 255 x 255 pixelů"
+msgstr "Soubory ICO nesmí být větší než 255 x 255 pixelů."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "Pokud zapnuta tak se hodnota aplikuje na výběr barev."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1201,7 +1209,7 @@ msgstr "Na šířku"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
-msgstr ""
+msgstr "Mód Lasa"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
@@ -1324,16 +1332,22 @@ msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
+"Levé kliknutí na záměnu sekundární barvy za primární.\n"
+"Pravé kliknutí opačně."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:50
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"Levé kliknutí na nastavení primární barvy.\n"
+"Pravé kliknutí na nastavení sekundární barvy."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
 msgid "Left click to set primary color. Right click to set secondary color."
-msgstr "Levý klik nastaví primární barvu, pravý klik nastaví sekundární barvu."
+msgstr ""
+"Levý kliknutí na nastaví primární barvu, pravé kliknutí nastaví sekundární "
+"barvu."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:316
@@ -1342,6 +1356,9 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Levé kliknutí nastaví primární barvu. Pravé kliknutí nastaví sekundární "
+"barvu. Prostřední kliknutí nebo {0} a levé kliknutí na vybírání z palety "
+"barev."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1349,6 +1366,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"Levé kliknutí na přiblížení\n"
+"Pravé kliknutí na oddálení.\n"
+"Kliknutí a posouvání na přiblížení k výběru."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:331
 msgid "Length"
@@ -1388,7 +1408,7 @@ msgstr "Světlost"
 #. Translators: Gradient with a citrusy vibe that starts out white, goes through light yellow, several shades of green, and then transparent, blending with the background
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:47
 msgid "Lime Lemon"
-msgstr ""
+msgstr "Citrusový Přechod"
 
 #: ../Pinta.Tools/Tools/LineCurveTool.cs:43
 msgid "Line/Curve"
@@ -1421,7 +1441,7 @@ msgstr "Výběr kouzelnou hůlkou"
 
 #: ../Pinta/MainWindow.cs:445
 msgid "Main Menu"
-msgstr ""
+msgstr "Hlavní Nabídka"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:71
@@ -1439,7 +1459,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
-msgstr ""
+msgstr "Maximální Velikost"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
@@ -1452,7 +1472,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
-msgstr ""
+msgstr "Menu Výběru"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:345
@@ -1461,7 +1481,7 @@ msgstr "Spojit vrstvy"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
-msgstr ""
+msgstr "Minimální Velikost"
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:399
@@ -1525,7 +1545,7 @@ msgstr "Nový obrázek"
 
 #: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "New Screenshot..."
-msgstr "Nový Snímek obrazovky"
+msgstr "Nový Snímek obrazovky..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:71
 msgid "New palette size:"
@@ -1568,21 +1588,21 @@ msgstr "Normální a ohraničený"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:172
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
 msgid "Number of Cells"
-msgstr ""
+msgstr "Počet Buněk"
 
 #: ../Pinta/Main.cs:56
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "Počet vláken použito při vykreslování"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
 msgid "OK"
-msgstr ""
+msgstr "Dobře"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:22
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:22
 msgid "Object"
-msgstr ""
+msgstr "Objekt"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:139
@@ -1596,7 +1616,7 @@ msgstr "Odstup"
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
-msgstr ""
+msgstr "Výběr Odstupu"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:26
 msgid "Oil Painting"
@@ -1604,7 +1624,7 @@ msgstr "Olejomalba"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:98
 msgid "Opacity:"
-msgstr "Průhlednost"
+msgstr "Průhlednost:"
 
 #: ../Pinta.Core/Actions/FileActions.cs:77
 msgid "Open"
@@ -1646,29 +1666,29 @@ msgstr "Původní"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:359
 msgid "Outline"
-msgstr "Obtáhnout"
+msgstr "Ohraničení"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:218
 msgid "Outline Border"
-msgstr ""
+msgstr "Okraj Ohraničení"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:23
 msgid "Outline Edge"
-msgstr ""
+msgstr "Hrana Ohraničení"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:18
 msgid "Outline Object"
-msgstr ""
+msgstr "Ohraničení Objektu"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:218
 msgid "Outline Shape"
-msgstr "Obtáhnout tvar"
+msgstr "Ohraničení Tvaru"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
 #: ../Pinta.Tools/Tools/TextTool.cs:373
 msgid "Outline width"
-msgstr "Šířka ohraničení"
+msgstr "Šířka Ohraničení"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:276
 msgid "Output"
@@ -1701,11 +1721,11 @@ msgstr "Paleta"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette Source"
-msgstr ""
+msgstr "Zdroj Palety"
 
 #: ../Pinta.Core/Actions/EditActions.cs:568
 msgid "Palette files"
-msgstr "Soubory palet"
+msgstr "Soubory Palet"
 
 #: ../Pinta.Tools/Tools/PanTool.cs:40
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:148
@@ -1815,26 +1835,26 @@ msgstr "Pixely"
 #. Translators: Gradient with different shades of brownish yellow
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:55
 msgid "Piña Colada"
-msgstr ""
+msgstr "Přechod Žluto-hnědý"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
 msgid "Please restart Pinta for the changes to take effect."
-msgstr ""
+msgstr "Restartujte Pinta aby se změny projevily."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
 msgid "Point Added"
-msgstr "Bod přidán"
+msgstr "Bod Přidán"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:156
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Point Arrangement"
-msgstr ""
+msgstr "Rozložení Bodů"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:169
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:216
 msgid "Point Color"
-msgstr ""
+msgstr "Barva Bodu"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
 msgid "Point Deleted"
@@ -1843,15 +1863,15 @@ msgstr "Bod odstraněn"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:165
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Point Size"
-msgstr ""
+msgstr "Velikost Bodu"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
-msgstr "Převrácení pólů"
+msgstr "Převrácení Pólů"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:221
 msgid "Polygon"
-msgstr ""
+msgstr "Mnohoúhelník"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:296
 msgid "Portrait"
@@ -1859,7 +1879,7 @@ msgstr "Na výšku"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:129
 msgid "Position"
-msgstr ""
+msgstr "Pozice"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1877,11 +1897,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:10
 msgid "Preset Gradient"
-msgstr ""
+msgstr "Přednastavený Přechod"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Preset Palettes"
-msgstr ""
+msgstr "Přednastavené Palety"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:341
 msgid "Preset:"
@@ -1951,34 +1971,34 @@ msgstr ""
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:16
 msgid "Random"
-msgstr ""
+msgstr "Náhoda"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:187
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:152
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:162
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:178
 msgid "Random Color Scheme Seed"
-msgstr ""
+msgstr "Náhodné Semínko Barevného Schématu"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:198
 msgid "Random Colors"
-msgstr ""
+msgstr "Náhodné Barvy"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:142
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
-msgstr ""
+msgstr "Náhodný Šum Semínek"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:159
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
 msgid "Random Point Locations"
-msgstr ""
+msgstr "Náhodná Bodová Lokace"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:165
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Naposledy Použité Barvy"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:55
 msgid "Recolor"
@@ -2028,7 +2048,7 @@ msgstr "Obnovit"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:91
 msgid "Released under the MIT X11 License."
-msgstr "Vydáno pod licencí MIT X11"
+msgstr "Vydáno pod licencí MIT X11."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:40
 msgid "Relief"
@@ -2079,7 +2099,7 @@ msgstr "Nastavit na výchozí"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:93
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:78
 msgid "Reset to image size"
-msgstr ""
+msgstr "Obnovit velikost obrázku"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:214
@@ -2105,19 +2125,19 @@ msgstr "Velikost Palety"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
 msgid "Restart Pinta"
-msgstr ""
+msgstr "Restartovat Pintu"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 msgid "Reverse Color Scheme"
-msgstr ""
+msgstr "Obrátit Barevné Schéma"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:195
 msgid "Reverse Color Sorting"
-msgstr ""
+msgstr "Obrátit Řazení Barev"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:334
 msgid "Right Align"
@@ -2188,11 +2208,11 @@ msgstr "Vzorkování"
 #. Translators: this is an abbreviation for "Saturation"
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:335
 msgid "Sat"
-msgstr ""
+msgstr "Sytost"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:277
 msgid "Sat & Value"
-msgstr ""
+msgstr "Sytost a Hodnota"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
@@ -2251,7 +2271,7 @@ msgstr "Vybrat vše"
 
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:13
 msgid "Selected Colors"
-msgstr ""
+msgstr "Vybrané Barvy"
 
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:244
@@ -2277,7 +2297,7 @@ msgstr "Typ tvarování"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:244
 msgid "Sharp Edges"
-msgstr ""
+msgstr "Ostré Hrany"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:23
 msgid "Sharpen"
@@ -2292,28 +2312,28 @@ msgstr "Klávesová zkratka"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
-msgstr ""
+msgstr "Klávesové zkratky"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
 msgid "Show Axonometric Grid"
-msgstr ""
+msgstr "Zobrazit Axonometrickou Mřížku"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
 msgid "Show Grid"
-msgstr ""
+msgstr "Zobrazit Mřížku"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
 msgid "Show Layer"
-msgstr "Zobrazit vrstvu"
+msgstr "Zobrazit Vrstvu"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Show Points"
-msgstr ""
+msgstr "Zobrazit Body"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:270
 msgid "Show Value"
-msgstr ""
+msgstr "Zobrazit Hodnoty"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:242
 msgid "Show/Hide"
@@ -2322,16 +2342,16 @@ msgstr "Zobrazit/Skrýt"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Dithering dle Sierra"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
 msgid "Sierra Lite"
-msgstr ""
+msgstr "Dithering dle Frankie Sierra"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
 msgid "Single Pixel"
-msgstr "Jednotlivý pixel"
+msgstr "Jeden Pixel"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:289
 msgid "Size"
@@ -2339,7 +2359,7 @@ msgstr "Velikost"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr ""
+msgstr "Řez"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
@@ -2377,7 +2397,7 @@ msgstr "Síla"
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Dithering dle Stucki"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:32
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:32
@@ -2410,11 +2430,11 @@ msgstr "Styl textu"
 #: ../Pinta/MainWindow.cs:321
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr ""
+msgstr "Plugin \"{0}\" nemusí být kompatibilní s touto verzí Pinty"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:208
 msgid "The clipboard does not contain an image."
-msgstr "Schránka neobsahuje žádný obrázek"
+msgstr "Schránka neobsahuje žádný obrázek."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:200
 msgid "The file may be an invalid or corrupt extension package"
@@ -2440,7 +2460,7 @@ msgstr "Následující balíčky budou odebrány:"
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
-msgstr ""
+msgstr "Vkládaný Obrázek je větší než plátno. Co se má stát s velikostí plátna?"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:352
 msgid "The installation failed!"
@@ -2485,7 +2505,7 @@ msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "Tento formát nepodporuje vrstvy. Zarovnat obrázek?"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:28
 msgid "Tile Reflection"
@@ -2497,11 +2517,11 @@ msgstr "Velikost dlaždic"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:234
 msgid "Tile Type"
-msgstr ""
+msgstr "Typ Dlaždic"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
 msgid "Tip: Right-click to remove control points."
-msgstr "Tip: Pravým kliknutím odstraníte ovládací body"
+msgstr "Tip: Pravým kliknutím odstraníte ovládací body."
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2529,15 +2549,15 @@ msgstr "Panel nástrojů"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
-msgstr ""
+msgstr "Nahoře Uprostřed"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
-msgstr ""
+msgstr "Nahoře Vlevo"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
-msgstr ""
+msgstr "Nahoře Vpravo"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
@@ -2567,7 +2587,7 @@ msgstr "Zkroutit"
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:16
 msgid "Two-Row Sierra"
-msgstr ""
+msgstr "Dithering pomocí dvou řad"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:322
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:214
@@ -2631,7 +2651,7 @@ msgstr "Nepodporovaný formát palety"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
-msgstr ""
+msgstr "Aktualizace..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
@@ -2651,7 +2671,7 @@ msgstr "Použity některé ikonky z:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:336
 msgid "Value"
-msgstr ""
+msgstr "Hodnota"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
@@ -2661,21 +2681,21 @@ msgstr "Verze: {0}"
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
 msgid "Vertical blue (B)"
-msgstr ""
+msgstr "Vertikální Modrá (B)"
 
 #. Translators: Vertical color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:250
 msgid "Vertical green (G)"
-msgstr ""
+msgstr "Vertikální Zelená (G)"
 
 #. Translators: Vertical color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:253
 msgid "Vertical red (R)"
-msgstr ""
+msgstr "Vertikální červená (R)"
 
 #: ../Pinta/MainWindow.cs:469
 msgid "View"
-msgstr ""
+msgstr "Pohled"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:49
@@ -2688,7 +2708,7 @@ msgstr "Viditelná"
 
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:21
 msgid "Voronoi Diagram"
-msgstr ""
+msgstr "Voroného Diagram"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:133
 msgid "Warmth"
@@ -2725,7 +2745,7 @@ msgstr "Xor"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr ""
+msgstr "Xor ({0} + Pravé Kliknutí)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:447
