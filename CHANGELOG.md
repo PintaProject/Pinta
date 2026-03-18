@@ -23,6 +23,7 @@ Thanks to the following contributors who worked on this release:
 - The right click menu for layers now includes options to move the layer up or down in the layer stack (#2004, #2007)
 - Added new `Center Offset` parameter for the Twist effect (#1210, #2026)
 - Added new `Strength` parameter for the Sepia adjustment (#2025)
+- The axonometric canvas grid now supports configuring the angle (#1438, #2028)
 
 ### Changed
 - Effect dialogs now hide options that are not currently relevant (#1960)
