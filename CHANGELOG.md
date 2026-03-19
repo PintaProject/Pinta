@@ -28,7 +28,7 @@ Thanks to the following contributors who worked on this release:
 ### Changed
 - Effect dialogs now hide options that are not currently relevant (#1960)
 - Fixed several minor UX issues in the color dialog (#1795)
-- The text tool now provides a separate adjustment for the font size, which doesn't require opening the font dialog (#1947, #1961)
+- The text tool now provides a separate adjustment for the font size and font variant, which doesn't require opening the font dialog (#1947, #1961, #2043, #1965)
 - The text tool now allows choosing any font-weight supported by Cairo, not just Normal and Bold (#1965, #1967)
 - Adjusted the layout of the layers panel to avoid issues with overlay scrollbars preventing the visibility toggle from being clicked (#1828, #2021)
 
