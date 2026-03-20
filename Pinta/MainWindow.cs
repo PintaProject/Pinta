@@ -395,8 +395,6 @@ internal sealed class MainWindow
 		if (usingMenuBar) {
 			menuBar.AppendSubmenu (Translations.GetString ("_View"), viewMenu);
 			menuBar.AppendSubmenu (Translations.GetString ("_Image"), imageMenu);
-		}
-		if (usingMenuBar) {
 			menuBar.AppendSubmenu (Translations.GetString ("_Adjustments"), adjustmentsMenu);
 			menuBar.AppendSubmenu (Translations.GetString ("Effe_cts"), effectsMenu);
 		}
