@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-15 00:33+0000\n"
-"PO-Revision-Date: 2026-02-28 04:43+0000\n"
+"PO-Revision-Date: 2026-03-20 13:36+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.16.1-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -205,7 +205,7 @@ msgstr "Уместить в окне"
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:411
 msgid "Bevel Join"
-msgstr ""
+msgstr "Скошенное соединение"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
@@ -253,7 +253,7 @@ msgstr "Костёр"
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Book"
-msgstr ""
+msgstr "Книжный"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -1015,7 +1015,7 @@ msgstr "Жёсткий свет"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:262
 msgid "Heavy"
-msgstr ""
+msgstr "Тяжёлый"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
@@ -1526,7 +1526,7 @@ msgstr "Медиана"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:238
 msgid "Medium"
-msgstr ""
+msgstr "Умеренный"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
@@ -1544,7 +1544,7 @@ msgstr "Минимальный размер"
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:399
 msgid "Miter Join"
-msgstr ""
+msgstr "Угловое соединение"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -2238,7 +2238,7 @@ msgstr "Шероховатость"
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:405
 msgid "Round Join"
-msgstr ""
+msgstr "Скруглённое соединение"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
@@ -2335,12 +2335,12 @@ msgstr "Выбранные цвета"
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Semibold"
-msgstr ""
+msgstr "Полужирный"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:220
 msgid "Semilight"
-msgstr ""
+msgstr "Полулёгкий"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
@@ -2418,7 +2418,7 @@ msgstr "Размер"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr ""
+msgstr "Косая черта"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
@@ -2562,7 +2562,7 @@ msgstr "Толщина"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Thin"
-msgstr ""
+msgstr "Тонкий"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
@@ -2658,17 +2658,17 @@ msgstr "Тип"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:256
 msgid "Ultrabold"
-msgstr ""
+msgstr "Ультражирный"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:268
 msgid "Ultraheavy"
-msgstr ""
+msgstr "Ультратяжёлый"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "Ultralight"
-msgstr ""
+msgstr "Сверхлёгкий"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:294
 msgid "Underline"
