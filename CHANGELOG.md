@@ -24,6 +24,7 @@ Thanks to the following contributors who worked on this release:
 - Added new `Center Offset` parameter for the Twist effect (#1210, #2026)
 - Added new `Strength` parameter for the Sepia adjustment (#2025)
 - The axonometric canvas grid now supports configuring the angle (#1438, #2028)
+- Added support for importing `.ppm` files (#2031)
 
 ### Changed
 - Effect dialogs now hide options that are not currently relevant (#1960)
