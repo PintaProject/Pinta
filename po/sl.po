@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-15 00:30+0000\n"
-"PO-Revision-Date: 2026-01-03 14:41+0000\n"
+"POT-Creation-Date: 2026-03-15 00:33+0000\n"
+"PO-Revision-Date: 2026-03-18 00:23+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
-"Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
-">\n"
+"Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/"
+"sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -76,7 +76,7 @@ msgstr "Dodaj šum"
 msgid "Add-in Manager..."
 msgstr "Upravljalec vstavkov..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:839
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Added"
 msgstr "Dodano"
 
@@ -111,7 +111,7 @@ msgstr "Alfa preliv"
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
-#: ../Pinta.Effects/Effects/TwistEffect.cs:171
+#: ../Pinta.Effects/Effects/TwistEffect.cs:217
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:136
 msgid "Amount"
 msgstr "Količina"
@@ -127,13 +127,13 @@ msgstr "Sidro:"
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
-#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 msgid "Angle"
 msgstr "Kot"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:179
+#: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
 msgstr "Glajenje robov"
 
@@ -160,7 +160,7 @@ msgstr "Umetniški"
 msgid "Atkinson"
 msgstr "Atkinson"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
 msgid "Auto"
 msgstr "Samodejno"
 
@@ -202,6 +202,11 @@ msgstr "Prečudovita Italija"
 msgid "Best Fit"
 msgstr "Prilagojeno zaslonu"
 
+#. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:411
+msgid "Bevel Join"
+msgstr "Poševni spoj"
+
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
 msgstr "Obojestransko vzporeden"
@@ -216,7 +221,7 @@ msgstr "Črno in belo"
 msgid "Blend Mode"
 msgstr "Način spojitve"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:114
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:339
 msgid "Blue"
@@ -235,7 +240,8 @@ msgstr "Modra "
 msgid "Blurs"
 msgstr "Zabrisanost"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:198
+#. Translators: 'Bold' (700) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Bold"
 msgstr "Krepko"
 
@@ -243,6 +249,11 @@ msgstr "Krepko"
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:31
 msgid "Bonfire"
 msgstr "Kres"
+
+#. Translators: 'Book' (380) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:226
+msgid "Book"
+msgstr "Knjiga"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -269,8 +280,7 @@ msgstr "Svetlost / Kontrast"
 msgid "Brush Size"
 msgstr "Velikost čopiča"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:262
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:120
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:126
 msgid "Brush width"
 msgstr "Širina čopiča"
 
@@ -328,7 +338,7 @@ msgstr "Celice"
 msgid "Center"
 msgstr "V sredini"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:250
+#: ../Pinta.Tools/Tools/TextTool.cs:322
 msgid "Center Align"
 msgstr "Središčna poravnava"
 
@@ -338,6 +348,7 @@ msgstr "Levo v sredini"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:159
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
+#: ../Pinta.Effects/Effects/TwistEffect.cs:229
 msgid "Center Offset"
 msgstr "Osrediščen odmik"
 
@@ -353,16 +364,16 @@ msgstr "Središčeno"
 msgid "Centimeters"
 msgstr "Centimetri"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:365
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr "Spremeni širino čopiča. Bližnjica: [ ]"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:186
+#: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Spremeni velikost pisave. Tipkovne bližnjice: [ ]"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
 msgstr "Spremenjena vrsta oblike"
 
@@ -371,14 +382,14 @@ msgstr "Spremenjena vrsta oblike"
 msgid "Cherry Blossom"
 msgstr "Češnjev cvet"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:629
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:638
 #: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:356
 msgid "Choose Color"
 msgstr "Izbor barve"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:361
 msgid "Choose Colors"
-msgstr ""
+msgstr "Izberi barve"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:153
 msgid "Choose Palette Color"
@@ -474,7 +485,7 @@ msgstr "Zapri vse"
 msgid "Closed Curve Shape"
 msgstr "Oblika zaprte krivine"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:275
 msgid "Closed Line/Curve Series"
 msgstr "Zaporedje zaprtihg črt/krivin"
 
@@ -650,7 +661,7 @@ msgstr "Privzeto"
 msgid "Delete Layer"
 msgstr "Izbriši plast"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:677
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:682
 msgid "Deleted"
 msgstr "Izbrisano"
 
@@ -720,7 +731,8 @@ msgstr "Enostavno ustvarjanje in urejanje slik"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:162
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:99
-#: ../Pinta.Effects/Effects/TileEffect.cs:237 Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:237
+#: ../Pinta.Effects/Effects/TwistEffect.cs:232 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Vedenje robov"
 
@@ -741,7 +753,7 @@ msgstr "Učinki"
 msgid "Electric"
 msgstr "Električen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:276
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -836,7 +848,7 @@ msgstr "Prijavi napako v programu"
 msgid "Files to open"
 msgstr "Datoteke, ki jih želimo odpreti"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:288
+#: ../Pinta.Tools/Tools/TextTool.cs:360
 msgid "Fill Background"
 msgstr "Zapolni ozadje"
 
@@ -849,23 +861,23 @@ msgstr "Zapolni ozadje predmeta"
 msgid "Fill Selection"
 msgstr "Zapolni izbor"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Shape"
 msgstr "Polnilo orisa"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:212
 msgid "Fill Style"
 msgstr "Polnilni slog"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:220
 msgid "Fill and Outline Shape"
 msgstr "Polnilo in oris oblike"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1109
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1395
 #: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "Dokončano"
@@ -924,7 +936,7 @@ msgstr "Floyd-Steinberg"
 msgid "Floyd-Steinberg Lite"
 msgstr "Floyd-Steinberg lahkotnejša"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:146
+#: ../Pinta.Tools/Tools/TextTool.cs:148
 msgid "Font"
 msgstr "Pisava"
 
@@ -982,7 +994,7 @@ msgid "Gradient Modified"
 msgstr "Preliv je spremenjen"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:338
 msgid "Green"
@@ -995,6 +1007,11 @@ msgstr "Mreža"
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "Trdnejša svetloba"
+
+#. Translators: 'Heavy' (900) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:262
+msgid "Heavy"
+msgstr "Težak"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
@@ -1055,7 +1072,7 @@ msgstr "Datoteke ICO ne morejo biti večje od 255 x 255 točk."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "Če je omogočeno, potem je Vrednost nastavljena za barvo kolesca."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1125,11 +1142,11 @@ msgstr "Oris črnila"
 msgid "Ink Sketch"
 msgstr "Črnilo skice"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:275
 msgid "Input"
 msgstr "Vhod"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 msgid "Input Histogram"
 msgstr "Vhodni histogram"
 
@@ -1176,7 +1193,7 @@ msgstr "Obrni barve"
 msgid "Invert Selection"
 msgstr "Obrni izbor"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:210
+#: ../Pinta.Tools/Tools/TextTool.cs:282
 msgid "Italic"
 msgstr "Ležeče"
 
@@ -1240,7 +1257,7 @@ msgstr "Plast {0}"
 msgid "Layers"
 msgstr "Plasti"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:238
+#: ../Pinta.Tools/Tools/TextTool.cs:310
 msgid "Left Align"
 msgstr "Poravnaj levo"
 
@@ -1319,7 +1336,7 @@ msgstr ""
 "Desni klik za pomožno barvo."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:61
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:67
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1377,6 +1394,8 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Levi klik za nastavitev osnovne barve. Desni klik za nastavitev pomožne "
+"barve. Sredinski klik ali pritisk {0} in levi klik za izbiro barvne palete."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1396,7 +1415,7 @@ msgstr "Dolžina"
 msgid "Levels"
 msgstr "Ravni"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:243
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:245
 msgid "Levels Adjustment"
 msgstr "Prilagoditev ravni"
 
@@ -1405,7 +1424,9 @@ msgid "License"
 msgstr "Dovoljenje"
 
 #. Translators: This refers to using a light variant of the color scheme.
+#. Translators: 'Light' (300) refers to the font-weight text property
 #: ../Pinta.Core/Actions/ViewActions.cs:248
+#: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Light"
 msgstr "Svetlo"
 
@@ -1481,6 +1502,11 @@ msgstr "Največja velikost"
 msgid "Median"
 msgstr "Srednja vrednost"
 
+#. Translators: 'Medium' (500) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:238
+msgid "Medium"
+msgstr "Srednje"
+
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
 msgstr "Menijska vrstica"
@@ -1494,11 +1520,16 @@ msgstr "Združi plast navzdol"
 msgid "Minimum Size"
 msgstr "Najmanjša velikost"
 
+#. Translators: 'Miter Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:399
+msgid "Miter Join"
+msgstr "Miter spoj"
+
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr "Način"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:921
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:926
 msgid "Modified"
 msgstr "Spremenjeno"
 
@@ -1571,9 +1602,11 @@ msgstr "Nobena postavka ni bila najdena"
 msgid "Noise"
 msgstr "Šum"
 
+#. Translators: 'Normal' (400) refers to the font-weight text property
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:285
+#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:232
+#: ../Pinta.Tools/Tools/TextTool.cs:357
 msgid "Normal"
 msgstr "Običajno"
 
@@ -1585,7 +1618,7 @@ msgstr "Običajna spojitev"
 msgid "Normal Size"
 msgstr "Običajna velikost"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:286
+#: ../Pinta.Tools/Tools/TextTool.cs:358
 msgid "Normal and Outline"
 msgstr "Običano in obroba"
 
@@ -1647,7 +1680,7 @@ msgstr "Odpri sliko"
 msgid "Open Image File"
 msgstr "Odpri slikovno datoteko"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:274
 msgid "Open Line/Curve Series"
 msgstr "Zaporednje odprtih črt/krivin"
 
@@ -1668,7 +1701,7 @@ msgstr "Usmerjenost:"
 msgid "Original"
 msgstr "Izvirnik"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:287
+#: ../Pinta.Tools/Tools/TextTool.cs:359
 msgid "Outline"
 msgstr "Obroba"
 
@@ -1684,20 +1717,21 @@ msgstr "Očrtaj rob"
 msgid "Outline Object"
 msgstr "Očrtaj predmet"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:218
 msgid "Outline Shape"
 msgstr "Oblika orisa"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:301
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
+#: ../Pinta.Tools/Tools/TextTool.cs:373
 msgid "Outline width"
 msgstr "Širina obrobe"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:276
 msgid "Output"
 msgstr "Izhod"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:277
 msgid "Output Histogram"
 msgstr "Izhodni histogram"
 
@@ -1713,7 +1747,7 @@ msgstr "Prepiši"
 msgid "Paint Bucket"
 msgstr "Vedro z barvo"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:65
 msgid "Paintbrush"
 msgstr "Slikarski čopič"
 
@@ -1844,8 +1878,8 @@ msgstr "Rjavkasto rumena"
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Prosim ponovno zaženite Pinto za uveljavitev sprememb."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:607
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
 msgid "Point Added"
 msgstr "Točka dodana"
 
@@ -1859,7 +1893,7 @@ msgstr "Razvrstitev točk"
 msgid "Point Color"
 msgstr "Barva točke"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
 msgid "Point Deleted"
 msgstr "Točka izbrisana"
 
@@ -1965,7 +1999,7 @@ msgstr "Polmer"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
-#: ../Pinta.Effects/Effects/TwistEffect.cs:175
+#: ../Pinta.Effects/Effects/TwistEffect.cs:221
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
 msgstr "Odstotek polmera"
@@ -2015,7 +2049,7 @@ msgstr "Pravokotnik"
 msgid "Rectangle Select"
 msgstr "Pravokotni izbor"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:337
 msgid "Red"
@@ -2090,7 +2124,7 @@ msgid "Reseed"
 msgstr "Osemeni"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
 msgid "Reset"
 msgstr "Ponastavi"
@@ -2102,7 +2136,7 @@ msgstr "Ponastavi na privzeto"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:93
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:78
 msgid "Reset to image size"
-msgstr ""
+msgstr "Ponastavi na velikost slike"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:214
@@ -2142,7 +2176,7 @@ msgstr "Obrni barvno shemo"
 msgid "Reverse Color Sorting"
 msgstr "Nasprotno razvrščanje barv"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:262
+#: ../Pinta.Tools/Tools/TextTool.cs:334
 msgid "Right Align"
 msgstr "Poravnaj desno"
 
@@ -2179,7 +2213,12 @@ msgstr "Vrtenje"
 msgid "Roughness"
 msgstr "Hrapavost"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
+#. Translators: 'Round Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:405
+msgid "Round Join"
+msgstr "Okrogli spoj"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
 msgstr "Zaporedje zaoblenih črt"
 
@@ -2271,7 +2310,17 @@ msgstr "Izberi vse"
 msgid "Selected Colors"
 msgstr "Izbrane barve"
 
-#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:35
+#. Translators: 'Semibold' (600) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:244
+msgid "Semibold"
+msgstr "Polkrepko"
+
+#. Translators: 'Semilight' (350) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:220
+msgid "Semilight"
+msgstr "Pollahek"
+
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
 msgstr "Sepija"
 
@@ -2279,7 +2328,7 @@ msgstr "Sepija"
 msgid "Set Number of Colors"
 msgstr "Nastavi število barv"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:265
 msgid "Shape Type"
 msgstr "Vrsta oblike"
 
@@ -2345,6 +2394,10 @@ msgstr "Enojna točka"
 msgid "Size"
 msgstr "Velikost"
 
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:36
+msgid "Slash"
+msgstr "Poševnica"
+
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
 msgstr "Tekoč"
@@ -2406,7 +2459,7 @@ msgstr "Besedilo"
 msgid "Text - Finalize"
 msgstr "Besedilo - Zaključi"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:276
+#: ../Pinta.Tools/Tools/TextTool.cs:348
 msgid "Text Style"
 msgstr "Slog besedila"
 
@@ -2483,6 +2536,11 @@ msgstr ""
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:133
 msgid "Thickness"
 msgstr "Debelina"
+
+#. Translators: 'Thin' (100) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:202
+msgid "Thin"
+msgstr "Tanek"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
@@ -2571,11 +2629,26 @@ msgid "Two-Row Sierra"
 msgstr "Dvovrstična Sierra"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:322
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:195
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:214
 msgid "Type"
 msgstr "Vrsta"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:222
+#. Translators: 'Ultrabold' (800) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:256
+msgid "Ultrabold"
+msgstr "Močno krepko"
+
+#. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:268
+msgid "Ultraheavy"
+msgstr "Močno težko"
+
+#. Translators: 'Ultralight' (200) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:208
+msgid "Ultralight"
+msgstr "Močno lahko"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:294
 msgid "Underline"
 msgstr "Podčrtano"
 

@@ -462,6 +462,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private void UpdateGammaByMask (float val)
 	{
+		val = Math.Clamp (val, UnaryPixelOps.Level.MinGamma, UnaryPixelOps.Level.MaxGamma);
 		if (!(mask.R || mask.G || mask.B))
 			return;
 

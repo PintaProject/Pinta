@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-15 00:30+0000\n"
+"POT-Creation-Date: 2026-03-15 00:33+0000\n"
 "PO-Revision-Date: 2025-10-29 01:52+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/pinta/pinta/he/>\n"
@@ -74,7 +74,7 @@ msgstr "הוספת רעש"
 msgid "Add-in Manager..."
 msgstr "מנהל תוספים…"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:839
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Added"
 msgstr "נוספה"
 
@@ -109,7 +109,7 @@ msgstr "מדרג שקיפות"
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
-#: ../Pinta.Effects/Effects/TwistEffect.cs:171
+#: ../Pinta.Effects/Effects/TwistEffect.cs:217
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:136
 msgid "Amount"
 msgstr "כמות"
@@ -125,13 +125,13 @@ msgstr "עוגן:"
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
-#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 msgid "Angle"
 msgstr "זווית"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:179
+#: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
 msgstr "החלקת קצוות"
 
@@ -158,7 +158,7 @@ msgstr "אומנותיים"
 msgid "Atkinson"
 msgstr "אטקינסון"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
 msgid "Auto"
 msgstr "אוטומטי"
 
@@ -200,6 +200,11 @@ msgstr "איטליה היפה"
 msgid "Best Fit"
 msgstr "ההתאמה הטובה ביותר"
 
+#. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:411
+msgid "Bevel Join"
+msgstr ""
+
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
 msgstr "בילינארי"
@@ -214,7 +219,7 @@ msgstr "שחור ולבן"
 msgid "Blend Mode"
 msgstr "מצב ערבול"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:114
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:339
 msgid "Blue"
@@ -233,7 +238,8 @@ msgstr "כחול "
 msgid "Blurs"
 msgstr "טשטושים"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:198
+#. Translators: 'Bold' (700) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Bold"
 msgstr "מודגש"
 
@@ -241,6 +247,11 @@ msgstr "מודגש"
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:31
 msgid "Bonfire"
 msgstr "מדורה"
+
+#. Translators: 'Book' (380) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:226
+msgid "Book"
+msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -267,8 +278,7 @@ msgstr "בהירות / ניגודיות"
 msgid "Brush Size"
 msgstr "גודל המברשת"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:262
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:120
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:126
 msgid "Brush width"
 msgstr "עובי המברשת"
 
@@ -326,7 +336,7 @@ msgstr "תאים"
 msgid "Center"
 msgstr "מרכז"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:250
+#: ../Pinta.Tools/Tools/TextTool.cs:322
 msgid "Center Align"
 msgstr "יישור למרכז"
 
@@ -336,6 +346,7 @@ msgstr "מרכז שמאל"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:159
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
+#: ../Pinta.Effects/Effects/TwistEffect.cs:229
 msgid "Center Offset"
 msgstr "היסט מהמרכז"
 
@@ -351,16 +362,16 @@ msgstr "ממורכז"
 msgid "Centimeters"
 msgstr "סנטימטרים"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:365
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr "החלפת עובי המברשת. מקשי קיצור: [ ]"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:186
+#: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Change font size. Shortcut keys: [ ]"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
 msgstr "סוג הצורה השתנה"
 
@@ -369,7 +380,7 @@ msgstr "סוג הצורה השתנה"
 msgid "Cherry Blossom"
 msgstr "פריחת הדובדבן"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:629
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:638
 #: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:356
 msgid "Choose Color"
 msgstr "בחירת צבע"
@@ -465,7 +476,7 @@ msgstr "לסגור הכול"
 msgid "Closed Curve Shape"
 msgstr "צורת עקומה סגורה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:275
 msgid "Closed Line/Curve Series"
 msgstr "סדרת קווים/עקומות סגורה"
 
@@ -641,7 +652,7 @@ msgstr ""
 msgid "Delete Layer"
 msgstr "מחיקת שכבה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:677
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:682
 msgid "Deleted"
 msgstr "נמחקה"
 
@@ -711,7 +722,8 @@ msgstr "ליצור ולערוך תמונות בקלות"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:162
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:99
-#: ../Pinta.Effects/Effects/TileEffect.cs:237 Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:237
+#: ../Pinta.Effects/Effects/TwistEffect.cs:232 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "התנהגות הקצוות"
 
@@ -732,7 +744,7 @@ msgstr ""
 msgid "Electric"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:276
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -826,7 +838,7 @@ msgstr "דיווח על תקלה"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:288
+#: ../Pinta.Tools/Tools/TextTool.cs:360
 msgid "Fill Background"
 msgstr "מילוי הרקע"
 
@@ -839,23 +851,23 @@ msgstr ""
 msgid "Fill Selection"
 msgstr "מילוי הבחירה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Shape"
 msgstr "מילוי הצורה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:212
 msgid "Fill Style"
 msgstr "סגנון המילוי"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:220
 msgid "Fill and Outline Shape"
 msgstr "מילוי וקו המתאר של הצורה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1109
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1395
 #: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "מוגמר"
@@ -914,7 +926,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:146
+#: ../Pinta.Tools/Tools/TextTool.cs:148
 msgid "Font"
 msgstr "גופן"
 
@@ -972,7 +984,7 @@ msgid "Gradient Modified"
 msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:338
 msgid "Green"
@@ -985,6 +997,11 @@ msgstr "רשת"
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "אור קשה"
+
+#. Translators: 'Heavy' (900) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:262
+msgid "Heavy"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
@@ -1110,11 +1127,11 @@ msgstr "קווי המתאר בדיו"
 msgid "Ink Sketch"
 msgstr "סקיצת דיו"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:275
 msgid "Input"
 msgstr "קלט"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 msgid "Input Histogram"
 msgstr "היסטוגרמת הקלט"
 
@@ -1161,7 +1178,7 @@ msgstr "היפוך צבעים"
 msgid "Invert Selection"
 msgstr "היפוך הבחירה"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:210
+#: ../Pinta.Tools/Tools/TextTool.cs:282
 msgid "Italic"
 msgstr "נטוי"
 
@@ -1225,7 +1242,7 @@ msgstr ""
 msgid "Layers"
 msgstr "שכבות"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:238
+#: ../Pinta.Tools/Tools/TextTool.cs:310
 msgid "Left Align"
 msgstr "יישור לשמאל"
 
@@ -1276,7 +1293,7 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:61
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:67
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1344,7 +1361,7 @@ msgstr "אורך"
 msgid "Levels"
 msgstr "רמות"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:243
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:245
 msgid "Levels Adjustment"
 msgstr "התאמת הרמות"
 
@@ -1353,7 +1370,9 @@ msgid "License"
 msgstr "רישיון"
 
 #. Translators: This refers to using a light variant of the color scheme.
+#. Translators: 'Light' (300) refers to the font-weight text property
 #: ../Pinta.Core/Actions/ViewActions.cs:248
+#: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Light"
 msgstr ""
 
@@ -1429,6 +1448,11 @@ msgstr ""
 msgid "Median"
 msgstr "חציוני"
 
+#. Translators: 'Medium' (500) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:238
+msgid "Medium"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
 msgstr ""
@@ -1442,11 +1466,16 @@ msgstr "מיזוג השכבה כלפי מטה"
 msgid "Minimum Size"
 msgstr ""
 
+#. Translators: 'Miter Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:399
+msgid "Miter Join"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:921
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:926
 msgid "Modified"
 msgstr "השתנתה"
 
@@ -1519,9 +1548,11 @@ msgstr ""
 msgid "Noise"
 msgstr "רעש"
 
+#. Translators: 'Normal' (400) refers to the font-weight text property
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:285
+#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:232
+#: ../Pinta.Tools/Tools/TextTool.cs:357
 msgid "Normal"
 msgstr "רגיל"
 
@@ -1533,7 +1564,7 @@ msgstr "ערבול רגיל"
 msgid "Normal Size"
 msgstr "גודל רגיל"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:286
+#: ../Pinta.Tools/Tools/TextTool.cs:358
 msgid "Normal and Outline"
 msgstr "רגיל ומתאר"
 
@@ -1595,7 +1626,7 @@ msgstr "פתיחת תמונה"
 msgid "Open Image File"
 msgstr "פתיחת קובץ תמונה"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:274
 msgid "Open Line/Curve Series"
 msgstr "סדרת קווים/עקומות פתוחה"
 
@@ -1616,7 +1647,7 @@ msgstr "כיוון:"
 msgid "Original"
 msgstr "מקורי"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:287
+#: ../Pinta.Tools/Tools/TextTool.cs:359
 msgid "Outline"
 msgstr "קו מתאר"
 
@@ -1632,20 +1663,21 @@ msgstr ""
 msgid "Outline Object"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:218
 msgid "Outline Shape"
 msgstr "קו המתאר של הצורה"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:301
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
+#: ../Pinta.Tools/Tools/TextTool.cs:373
 msgid "Outline width"
 msgstr "עובי המתאר"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:276
 msgid "Output"
 msgstr "פלט"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:277
 msgid "Output Histogram"
 msgstr "היסטוגרמת הפלט"
 
@@ -1661,7 +1693,7 @@ msgstr "דריסה"
 msgid "Paint Bucket"
 msgstr "דלי צבע"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:65
 msgid "Paintbrush"
 msgstr "מברשת"
 
@@ -1791,8 +1823,8 @@ msgstr ""
 msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:607
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
 msgid "Point Added"
 msgstr "נוספה נקודה"
 
@@ -1806,7 +1838,7 @@ msgstr ""
 msgid "Point Color"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
 msgid "Point Deleted"
 msgstr "נקודה נמחקה"
 
@@ -1912,7 +1944,7 @@ msgstr "רדיוס"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
-#: ../Pinta.Effects/Effects/TwistEffect.cs:175
+#: ../Pinta.Effects/Effects/TwistEffect.cs:221
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
 msgstr ""
@@ -1962,7 +1994,7 @@ msgstr "מלבן"
 msgid "Rectangle Select"
 msgstr "בחירה ריבועית"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:337
 msgid "Red"
@@ -2037,7 +2069,7 @@ msgid "Reseed"
 msgstr "מיקום מחדש"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
 msgid "Reset"
 msgstr "איפוס"
@@ -2089,7 +2121,7 @@ msgstr ""
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:262
+#: ../Pinta.Tools/Tools/TextTool.cs:334
 msgid "Right Align"
 msgstr "יישור לימין"
 
@@ -2126,7 +2158,12 @@ msgstr "סיבוב"
 msgid "Roughness"
 msgstr ""
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
+#. Translators: 'Round Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:405
+msgid "Round Join"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
 msgstr "סדרת קווים מעוגלים"
 
@@ -2218,7 +2255,17 @@ msgstr "לבחור הכול"
 msgid "Selected Colors"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:35
+#. Translators: 'Semibold' (600) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:244
+msgid "Semibold"
+msgstr ""
+
+#. Translators: 'Semilight' (350) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:220
+msgid "Semilight"
+msgstr ""
+
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
 msgstr "ענתיקה"
 
@@ -2226,7 +2273,7 @@ msgstr "ענתיקה"
 msgid "Set Number of Colors"
 msgstr "הגדרת מספר הצבעים"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:265
 msgid "Shape Type"
 msgstr "סוג הצורה"
 
@@ -2292,6 +2339,10 @@ msgstr "פיקסל בודד"
 msgid "Size"
 msgstr "גודל"
 
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:36
+msgid "Slash"
+msgstr ""
+
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
 msgstr "חלק"
@@ -2353,7 +2404,7 @@ msgstr "טקסט"
 msgid "Text - Finalize"
 msgstr "טקסט - גימור"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:276
+#: ../Pinta.Tools/Tools/TextTool.cs:348
 msgid "Text Style"
 msgstr "סגנון הטקסט"
 
@@ -2424,6 +2475,11 @@ msgstr ""
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:133
 msgid "Thickness"
 msgstr "עובי"
+
+#. Translators: 'Thin' (100) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:202
+msgid "Thin"
+msgstr ""
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
@@ -2512,11 +2568,26 @@ msgid "Two-Row Sierra"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:322
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:195
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:214
 msgid "Type"
 msgstr "סוג"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:222
+#. Translators: 'Ultrabold' (800) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:256
+msgid "Ultrabold"
+msgstr ""
+
+#. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:268
+msgid "Ultraheavy"
+msgstr ""
+
+#. Translators: 'Ultralight' (200) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:208
+msgid "Ultralight"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:294
 msgid "Underline"
 msgstr "קו תחתי"
 

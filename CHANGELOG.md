@@ -12,6 +12,7 @@ Thanks to the following contributors who worked on this release:
 - @pedropaulosuzuki
 - @yioannides
 - @njm25
+- @levanel
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -22,11 +23,13 @@ Thanks to the following contributors who worked on this release:
 - The right click menu for layers now includes options to move the layer up or down in the layer stack (#2004, #2007)
 - Added new `Center Offset` parameter for the Twist effect (#1210, #2026)
 - Added new `Strength` parameter for the Sepia adjustment (#2025)
+- The axonometric canvas grid now supports configuring the angle (#1438, #2028)
+- Added support for importing `.ppm` files (#2031)
 
 ### Changed
 - Effect dialogs now hide options that are not currently relevant (#1960)
 - Fixed several minor UX issues in the color dialog (#1795)
-- The text tool now provides a separate adjustment for the font size, which doesn't require opening the font dialog (#1947, #1961)
+- The text tool now provides a separate adjustment for the font size and font variant, which doesn't require opening the font dialog (#1947, #1961, #2043, #1965)
 - The text tool now allows choosing any font-weight supported by Cairo, not just Normal and Bold (#1965, #1967)
 - Adjusted the layout of the layers panel to avoid issues with overlay scrollbars preventing the visibility toggle from being clicked (#1828, #2021)
 
@@ -34,6 +37,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
 - Fixed crash when right-clicking on a layer in certain scenarios (#1940)
 - The layers and history panels now scroll automatically to the selected item after any updates (#1867, #1828)
+- Fixed crash when setting gamma to zero in the Levels dialog (#2035, #2041)
 
 ## [3.1.1](https://github.com/PintaProject/Pinta/release/tag/3.1.1) - 2026/01/10
 

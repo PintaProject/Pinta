@@ -14,3 +14,4 @@
 - hicolor/scalable/actions/text-extra-light-symbolic.svg
 - hicolor/scalable/actions/text-light-symbolic.svg
 - hicolor/scalable/actions/text-normal-symbolic.svg
+- hicolor/scalable/actions/text-variant-*.svg
