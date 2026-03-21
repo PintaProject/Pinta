@@ -393,27 +393,32 @@ public sealed class PintaCanvas : Gtk.Picture
 	private Gsk.Path BuildCanvasAxonometricGridPath ()
 	{
 		int axonometricWidth = canvas_grid.AxonometricWidth;
+		double angleRadians = canvas_grid.AxonometricAngle.ToRadians ().Radians;
+		double tanAngle = Math.Tan (angleRadians);
 		int imageHeight = document.ImageSize.Height;
 		int imageWidth = document.ImageSize.Width;
 
 		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
 
-		// Adds ascending diagonal lines.
-		// '2 * axonometricWidth' ensures the vertical lines will align correctly.
-		for (int i = 0; i < imageWidth + imageHeight; i += 2 * axonometricWidth) {
-			pathBuilder.MoveTo (0, i);
-			pathBuilder.LineTo (i, 0);
+		// Ascending diagonal lines
+		double verticalSpacing = 2 * axonometricWidth * tanAngle;
+		double maxStartY = imageWidth * tanAngle + imageHeight;
+		for (double s = 0; s < maxStartY; s += verticalSpacing) {
+			float xEnd = (float) (s / tanAngle);
+			pathBuilder.MoveTo (0, (float) s);
+			pathBuilder.LineTo (xEnd, 0);
 		}
 
-		// Adds descending diagonal lines.
-		// The 'imageHeight % (2 * axonometricWidth)' adjustment is used to ensure our lines will align
-		// to the top [0, 0] instead of the bottom [0, imageHeight]
-		for (int i = -imageHeight + imageHeight % (2 * axonometricWidth); i < imageWidth; i += 2 * axonometricWidth) {
-			pathBuilder.MoveTo (i, 0);
-			pathBuilder.LineTo (i + imageHeight, imageHeight);
+		// Descending diagonal lines
+		int horizontalSpacing = 2 * axonometricWidth;
+		double horizontalExtent = imageHeight / tanAngle;
+		double startX = -Math.Ceiling (horizontalExtent / horizontalSpacing) * horizontalSpacing;
+		for (double x = startX; x < imageWidth; x += horizontalSpacing) {
+			pathBuilder.MoveTo ((float) x, 0);
+			pathBuilder.LineTo ((float) (x + imageHeight / tanAngle), imageHeight);
 		}
 
-		// Add vertical lines.
+		// Vertical lines.
 		for (int i = 0; i < imageWidth; i += axonometricWidth) {
 			pathBuilder.MoveTo (i, 0);
 			pathBuilder.LineTo (i, imageHeight);
@@ -428,6 +433,12 @@ public sealed class PintaCanvas : Gtk.Picture
 	private bool ShouldShowCanvasAxonometricGrid ()
 	{
 		if (!canvas_grid.ShowAxonometricGrid)
+			return false;
+
+		if (canvas_grid.AxonometricAngle.Degrees <= 0)
+			return false;
+
+		if (canvas_grid.AxonometricAngle.Degrees >= 90)
 			return false;
 
 		const int MIN_GRID_LINE_DISTANCE = 5;

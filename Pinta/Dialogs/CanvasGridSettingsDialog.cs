@@ -1,5 +1,6 @@
 using System;
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 namespace Pinta;
 
@@ -12,6 +13,7 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 	private readonly Gtk.SpinButton grid_height_spinner;
 	private readonly Gtk.CheckButton show_axonometric_grid_checkbox;
 	private readonly Gtk.SpinButton grid_axonometric_width_spinner;
+	private readonly AnglePickerWidget grid_axonometric_angle_picker;
 
 	private const int SPACING = 6;
 
@@ -46,6 +48,11 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 		axonometricWidthSpinner.OnValueChanged += SettingsChanged;
 		axonometricWidthSpinner.SetActivatesDefaultImmediate (true);
 
+		AnglePickerWidget axonometricAnglePicker = new (initialSettings.AxonometricAngle) {
+			Label = Translations.GetString ("Angle"),
+		};
+		axonometricAnglePicker.ValueChanged += SettingsChanged;
+
 		Gtk.CheckButton showAxonometricGridCheckBox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Show Axonometric Grid"));
 		showAxonometricGridCheckBox.Active = initialSettings.ShowAxonometricGrid;
 		showAxonometricGridCheckBox.OnToggled += SettingsChanged;
@@ -53,6 +60,11 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
 			axonometricWidthSpinner,
 			Gtk.SpinButton.SensitivePropertyDefinition.UnmanagedName,
+			GObject.BindingFlags.SyncCreate);
+		showAxonometricGridCheckBox.BindProperty (
+			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
+			axonometricAnglePicker,
+			Gtk.Widget.SensitivePropertyDefinition.UnmanagedName,
 			GObject.BindingFlags.SyncCreate);
 
 		Gtk.Grid grid = new () {
@@ -76,6 +88,8 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 		grid.Attach (CreateLabel (Translations.GetString ("Width:"), Gtk.Align.End), 0, 4, 1, 1);
 		grid.Attach (axonometricWidthSpinner, 1, 4, 1, 1);
 		grid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 4, 1, 1);
+
+		grid.Attach (axonometricAnglePicker, 0, 5, 3, 1);
 
 		Gtk.Box mainVbox = new () { Spacing = SPACING };
 		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
@@ -106,6 +120,7 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 		grid_height_spinner = heightSpinner;
 		show_axonometric_grid_checkbox = showAxonometricGridCheckBox;
 		grid_axonometric_width_spinner = axonometricWidthSpinner;
+		grid_axonometric_angle_picker = axonometricAnglePicker;
 	}
 
 	private static Gtk.Label CreateLabel (string text, Gtk.Align horizontalAlign)
@@ -123,11 +138,18 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 			new (
 				grid_width_spinner.GetValueAsInt (),
 				grid_height_spinner.GetValueAsInt ()
-			), grid_axonometric_width_spinner.GetValueAsInt ());
+			),
+			grid_axonometric_width_spinner.GetValueAsInt (),
+			grid_axonometric_angle_picker.Value);
 
 		Updated?.Invoke (this, newSettings);
 	}
 
-	internal record struct Settings (bool ShowGrid, bool ShowAxonometricGrid, Size CellSize, int AxonometricWidth);
+	internal record struct Settings (
+		bool ShowGrid,
+		bool ShowAxonometricGrid,
+		Size CellSize,
+		int AxonometricWidth,
+		DegreesAngle AxonometricAngle);
 }
 

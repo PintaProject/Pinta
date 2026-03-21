@@ -224,6 +224,14 @@ public static class Icons
 	public const string TextBold = "text-bold-symbolic";
 	public const string TextExtraBold = "text-extra-bold-symbolic";
 
+	public const string TextVariantNormal = "text-variant-normal-symbolic";
+	public const string TextVariantSmallCaps = "text-variant-small-caps-symbolic";
+	public const string TextVariantAllSmallCaps = "text-variant-all-small-caps-symbolic";
+	public const string TextVariantPetiteCaps = "text-variant-petite-caps-symbolic";
+	public const string TextVariantAllPetiteCaps = "text-variant-all-petite-caps-symbolic";
+	public const string TextVariantUnicase = "text-variant-unicase-symbolic";
+	public const string TextVariantTitleCaps = "text-variant-title-caps-symbolic";
+
 	public const string ToolCloneStamp = "tool-clonestamp-symbolic";
 	public const string ToolColorPicker = "tool-colorpicker-symbolic";
 	public const string ToolColorPickerPreviousTool = "go-previous-symbolic";
