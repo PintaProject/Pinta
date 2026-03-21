@@ -1,0 +1,17 @@
+P3
+3 2 # A comment just because we can
+# Another comment, lol				
+1   # Max is nonstandard
+	# Indented comment for more fun
+# Look how inconsistent the spacing :)
+1 0 # This comment splits the first two channels from the third
+0
+# 1 1 1 # This should not be read
+# Look at the trailing space below
+	0 1  	0 0 0 1              
+
+
+1 1   0   1 1 1    0   0   0
+# The following data goes beyond what was specified in the header,
+# and it should be ignored. In fact, let's add an out-of-range value
+1 0 1 65535

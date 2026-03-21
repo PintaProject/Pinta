@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-15 00:30+0000\n"
-"PO-Revision-Date: 2026-02-27 00:47+0000\n"
+"POT-Creation-Date: 2026-03-15 00:33+0000\n"
+"PO-Revision-Date: 2026-03-19 00:13+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
 "Language-Team: Irish <https://hosted.weblate.org/projects/pinta/pinta/ga/>\n"
 "Language: ga\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
-"X-Generator: Weblate 5.16.1-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -74,7 +74,7 @@ msgstr "Cuir torann leis"
 msgid "Add-in Manager..."
 msgstr "Bainisteoir na mBreiseán..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:839
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Added"
 msgstr "Curtha leis"
 
@@ -109,7 +109,7 @@ msgstr "Grádán Alfa"
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
-#: ../Pinta.Effects/Effects/TwistEffect.cs:171
+#: ../Pinta.Effects/Effects/TwistEffect.cs:217
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:136
 msgid "Amount"
 msgstr "Méid"
@@ -125,13 +125,13 @@ msgstr "Ancaire:"
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
-#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 msgid "Angle"
 msgstr "Uillinn"
 
-#: ../Pinta.Effects/Effects/TwistEffect.cs:179
+#: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
 msgstr "Frith-ailias"
 
@@ -158,7 +158,7 @@ msgstr "Ealaíonta"
 msgid "Atkinson"
 msgstr "Atkinson"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:257
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
 msgid "Auto"
 msgstr "Uathoibríoch"
 
@@ -200,6 +200,11 @@ msgstr "An Iodáil álainn"
 msgid "Best Fit"
 msgstr "Is Oiriúnaí"
 
+#. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:411
+msgid "Bevel Join"
+msgstr "Ceangal Bevel"
+
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
 msgstr "Délíneach"
@@ -214,7 +219,7 @@ msgstr "Dubh agus Bán"
 msgid "Blend Mode"
 msgstr "Mód Cumaisc"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:112
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:114
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:339
 msgid "Blue"
@@ -233,7 +238,8 @@ msgstr "Gorm "
 msgid "Blurs"
 msgstr "Geamhú"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:198
+#. Translators: 'Bold' (700) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:250
 msgid "Bold"
 msgstr "Cló Trom"
 
@@ -241,6 +247,11 @@ msgstr "Cló Trom"
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:31
 msgid "Bonfire"
 msgstr "Tine cnámh"
+
+#. Translators: 'Book' (380) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:226
+msgid "Book"
+msgstr "Leabhar"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -267,8 +278,7 @@ msgstr "Gile / Codarsnacht"
 msgid "Brush Size"
 msgstr "Méid na Scuaibe"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:262
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:120
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:126
 msgid "Brush width"
 msgstr "Leithead na scuaibe"
 
@@ -326,7 +336,7 @@ msgstr "Cealla"
 msgid "Center"
 msgstr "Lárnaigh"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:250
+#: ../Pinta.Tools/Tools/TextTool.cs:322
 msgid "Center Align"
 msgstr "Ailínigh sa lár"
 
@@ -336,6 +346,7 @@ msgstr "Lár Chlé"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:159
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
+#: ../Pinta.Effects/Effects/TwistEffect.cs:229
 msgid "Center Offset"
 msgstr "Fritháireamh Lárnach"
 
@@ -351,16 +362,16 @@ msgstr "Láraithe"
 msgid "Centimeters"
 msgstr "Ceintiméadar"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:279
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:365
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr "Athraigh leithead an scuaibe. Eochracha aicearra: [ ]"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:186
+#: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Change font size. Shortcut keys: [ ]"
 msgstr "Athraigh méid an chló. Eochracha aicearra: [ ]"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:359
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
 msgstr "Cineál Cruth Athraithe"
 
@@ -369,7 +380,7 @@ msgstr "Cineál Cruth Athraithe"
 msgid "Cherry Blossom"
 msgstr "Bláth Silíní"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:629
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:638
 #: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:356
 msgid "Choose Color"
 msgstr "Roghnaigh Dath"
@@ -473,7 +484,7 @@ msgstr "Dún Uile"
 msgid "Closed Curve Shape"
 msgstr "Cruth Cuar Dúnta"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:334
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:275
 msgid "Closed Line/Curve Series"
 msgstr "Sraith Líne/Cuar Dúnta"
 
@@ -649,7 +660,7 @@ msgstr "Réamhshocrú"
 msgid "Delete Layer"
 msgstr "Scrios Sraith"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:677
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:682
 msgid "Deleted"
 msgstr "Scriosta"
 
@@ -719,7 +730,8 @@ msgstr "Cruthaigh agus cuir in eagar íomhánna go héasca"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:162
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:99
-#: ../Pinta.Effects/Effects/TileEffect.cs:237 Polar Inversion dialog
+#: ../Pinta.Effects/Effects/TileEffect.cs:237
+#: ../Pinta.Effects/Effects/TwistEffect.cs:232 Polar Inversion dialog
 msgid "Edge Behavior"
 msgstr "Iompar Imeall"
 
@@ -740,7 +752,7 @@ msgstr "Éifeachtaí"
 msgid "Electric"
 msgstr "Leictreach"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:335
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:276
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
 #: ../Pinta.Tools/Tools/EllipseTool.cs:45
 msgid "Ellipse"
@@ -835,7 +847,7 @@ msgstr "Fógraigh Fabht"
 msgid "Files to open"
 msgstr "Comhaid le hoscailt"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:288
+#: ../Pinta.Tools/Tools/TextTool.cs:360
 msgid "Fill Background"
 msgstr "Líon an Cúlra"
 
@@ -848,23 +860,23 @@ msgstr "Líon Cúlra an Réada"
 msgid "Fill Selection"
 msgstr "Líon an Roghnúchán"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:308
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Shape"
 msgstr "Líon an Cruth"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:298
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:212
 msgid "Fill Style"
 msgstr "Stíl Líonadh"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:309
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:220
 msgid "Fill and Outline Shape"
 msgstr "Líon agus Imlínigh Cruth"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1104
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1390
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1109
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1395
 #: ../Pinta.Tools/Tools/GradientTool.cs:214
 msgid "Finalized"
 msgstr "Críochnaithe"
@@ -925,7 +937,7 @@ msgstr "Floyd-Steinberg"
 msgid "Floyd-Steinberg Lite"
 msgstr "Floyd-Steinberg Éadrom"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:146
+#: ../Pinta.Tools/Tools/TextTool.cs:148
 msgid "Font"
 msgstr "Clófhoireann"
 
@@ -983,7 +995,7 @@ msgid "Gradient Modified"
 msgstr "Grádán Modhnaithe"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:109
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:61
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:338
 msgid "Green"
@@ -996,6 +1008,11 @@ msgstr "Eangach"
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
 msgid "Hard Light"
 msgstr "Solas Crua"
+
+#. Translators: 'Heavy' (900) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:262
+msgid "Heavy"
+msgstr "Trom"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
@@ -1130,11 +1147,11 @@ msgstr "Imlíne Dhúigh"
 msgid "Ink Sketch"
 msgstr "Dúchléaráid"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:275
 msgid "Input"
 msgstr "Ionchur"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 msgid "Input Histogram"
 msgstr "Histogram Ionchuir"
 
@@ -1181,7 +1198,7 @@ msgstr "Aisiompaigh na Dathanna"
 msgid "Invert Selection"
 msgstr "Aisiompaigh an Roghnúchán"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:210
+#: ../Pinta.Tools/Tools/TextTool.cs:282
 msgid "Italic"
 msgstr "Iodálach"
 
@@ -1245,7 +1262,7 @@ msgstr "Sraith {0}"
 msgid "Layers"
 msgstr "Sraitheanna"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:238
+#: ../Pinta.Tools/Tools/TextTool.cs:310
 msgid "Left Align"
 msgstr "Ailínigh Ar Chlé"
 
@@ -1332,7 +1349,7 @@ msgstr ""
 "Cliceáil ar dheis chun an tánaisteach-dath a úsáid."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:61
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:67
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1415,7 +1432,7 @@ msgstr "Fad"
 msgid "Levels"
 msgstr "Airde"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:243
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:245
 msgid "Levels Adjustment"
 msgstr "Coigeartú Leibhéil"
 
@@ -1424,7 +1441,9 @@ msgid "License"
 msgstr "Ceadúnas"
 
 #. Translators: This refers to using a light variant of the color scheme.
+#. Translators: 'Light' (300) refers to the font-weight text property
 #: ../Pinta.Core/Actions/ViewActions.cs:248
+#: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Light"
 msgstr "Geal"
 
@@ -1498,6 +1517,11 @@ msgstr "Uasmhéid Méid"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
+msgstr "Airmheán"
+
+#. Translators: 'Medium' (500) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:238
+msgid "Medium"
 msgstr "Meánach"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
@@ -1513,11 +1537,16 @@ msgstr "Cumasc Sraith Síos"
 msgid "Minimum Size"
 msgstr "Íosmhéid"
 
+#. Translators: 'Miter Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:399
+msgid "Miter Join"
+msgstr "Miter Join"
+
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
 msgstr "Mód"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:921
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:926
 msgid "Modified"
 msgstr "Athraithe"
 
@@ -1590,9 +1619,11 @@ msgstr "Níor Aimsíodh Aon Réad"
 msgid "Noise"
 msgstr "Torann"
 
+#. Translators: 'Normal' (400) refers to the font-weight text property
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:285
+#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:232
+#: ../Pinta.Tools/Tools/TextTool.cs:357
 msgid "Normal"
 msgstr "Gnáth"
 
@@ -1604,7 +1635,7 @@ msgstr "Gnáthchumasc"
 msgid "Normal Size"
 msgstr "Gnáthmhéid"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:286
+#: ../Pinta.Tools/Tools/TextTool.cs:358
 msgid "Normal and Outline"
 msgstr "Gnáth agus Imlíne"
 
@@ -1666,7 +1697,7 @@ msgstr "Oscail Íomhá"
 msgid "Open Image File"
 msgstr "Oscail Comhad Íomhá"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:274
 msgid "Open Line/Curve Series"
 msgstr "Sraith Líne/Cuar Oscailte"
 
@@ -1687,7 +1718,7 @@ msgstr "Treoshuíomh:"
 msgid "Original"
 msgstr "Bunaidh"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:287
+#: ../Pinta.Tools/Tools/TextTool.cs:359
 msgid "Outline"
 msgstr "Imlínigh"
 
@@ -1703,20 +1734,21 @@ msgstr "Imlíníocht Imeall"
 msgid "Outline Object"
 msgstr "Réada Imlíne"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:307
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:218
 msgid "Outline Shape"
 msgstr "Imlínigh an Cruth"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:301
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
+#: ../Pinta.Tools/Tools/TextTool.cs:373
 msgid "Outline width"
 msgstr "Leithead imlíne"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:273
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:276
 msgid "Output"
 msgstr "Aschur"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:277
 msgid "Output Histogram"
 msgstr "Histogram Aschuir"
 
@@ -1732,7 +1764,7 @@ msgstr "Forscríobh"
 msgid "Paint Bucket"
 msgstr "Buicéad Péinte"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:59
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:65
 msgid "Paintbrush"
 msgstr "scuab phéinte"
 
@@ -1864,8 +1896,8 @@ msgstr "Piña Colada"
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Atosaigh Pinta le go dtiocfaidh na hathruithe i bhfeidhm."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:607
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:810
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
 msgid "Point Added"
 msgstr "Pointe Curtha Leis"
 
@@ -1879,7 +1911,7 @@ msgstr "Socrú Pointe"
 msgid "Point Color"
 msgstr "Dath Pointe"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:658
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
 msgid "Point Deleted"
 msgstr "Pointe Scriosta"
 
@@ -1985,7 +2017,7 @@ msgstr "Ga"
 
 #. Translators: This refers to how big the radius is as a percentage of the image's dimensions
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:124
-#: ../Pinta.Effects/Effects/TwistEffect.cs:175
+#: ../Pinta.Effects/Effects/TwistEffect.cs:221
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
 msgstr "Céatadán Ga"
@@ -2035,7 +2067,7 @@ msgstr "Dronuilleog"
 msgid "Rectangle Select"
 msgstr "Roghnú Dronuilleog"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:106
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:108
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:60
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:337
 msgid "Red"
@@ -2110,7 +2142,7 @@ msgid "Reseed"
 msgstr "Athshíolaigh"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:260
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
 msgid "Reset"
 msgstr "Athshocraigh"
@@ -2162,7 +2194,7 @@ msgstr "Scéim Dathanna Droim ar Ais"
 msgid "Reverse Color Sorting"
 msgstr "Sórtáil Dathanna Droim ar Ais"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:262
+#: ../Pinta.Tools/Tools/TextTool.cs:334
 msgid "Right Align"
 msgstr "Ailínigh Ar Dheis"
 
@@ -2199,7 +2231,12 @@ msgstr "Rothlú"
 msgid "Roughness"
 msgstr "Garbhacht"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
+#. Translators: 'Round Join' refers to the Cairo.LineJoin property
+#: ../Pinta.Tools/Tools/TextTool.cs:405
+msgid "Round Join"
+msgstr "Babhta Ceangal"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
 msgstr "Sraith Líne Babhta"
 
@@ -2291,7 +2328,17 @@ msgstr "Roghnaigh Uile"
 msgid "Selected Colors"
 msgstr "Dathanna Roghnaithe"
 
-#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:35
+#. Translators: 'Semibold' (600) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:244
+msgid "Semibold"
+msgstr "Leathchló trom"
+
+#. Translators: 'Semilight' (350) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:220
+msgid "Semilight"
+msgstr "Leathéadrom"
+
+#: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
 msgstr "Sepia"
 
@@ -2299,7 +2346,7 @@ msgstr "Sepia"
 msgid "Set Number of Colors"
 msgstr "Socraigh Líon na nDathanna"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:324
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:265
 msgid "Shape Type"
 msgstr "Cineál Cruth"
 
@@ -2365,6 +2412,10 @@ msgstr "Picteilín Aonair"
 msgid "Size"
 msgstr "Méid"
 
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:36
+msgid "Slash"
+msgstr "Slais"
+
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
 msgstr "Mín"
@@ -2426,7 +2477,7 @@ msgstr "Téacs"
 msgid "Text - Finalize"
 msgstr "Téacs - Críochnaigh"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:276
+#: ../Pinta.Tools/Tools/TextTool.cs:348
 msgid "Text Style"
 msgstr "Stíl Téacs"
 
@@ -2506,6 +2557,11 @@ msgstr ""
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:133
 msgid "Thickness"
 msgstr "Tiús"
+
+#. Translators: 'Thin' (100) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:202
+msgid "Thin"
+msgstr "Tanaí"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
@@ -2595,11 +2651,26 @@ msgid "Two-Row Sierra"
 msgstr "Sierra Dhá Shraith"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:322
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:195
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:214
 msgid "Type"
 msgstr "Cineál"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:222
+#. Translators: 'Ultrabold' (800) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:256
+msgid "Ultrabold"
+msgstr "An-dána"
+
+#. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:268
+msgid "Ultraheavy"
+msgstr "An-trom"
+
+#. Translators: 'Ultralight' (200) refers to the font-weight text property
+#: ../Pinta.Tools/Tools/TextTool.cs:208
+msgid "Ultralight"
+msgstr "Ultraéadrom"
+
+#: ../Pinta.Tools/Tools/TextTool.cs:294
 msgid "Underline"
 msgstr "Cuir líne faoi"
 
