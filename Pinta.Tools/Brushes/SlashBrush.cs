@@ -86,7 +86,7 @@ internal sealed class SlashBrush : BasePaintBrush
 			new_bottom.X * old_bottom.Y - new_bottom.Y * old_bottom.X +
 			old_bottom.X * old_top.Y - old_bottom.Y * old_top.X));
 
-		if (area < 2) {
+		if (area < 2 && (last_pos.X != current_pos.X || last_pos.Y != current_pos.Y)) {
 			old_top = OffsetPoint (old_top, -1, 1, angle + 90);
 			new_top = OffsetPoint (new_top, -1, 1, angle + 90);
 			old_bottom = OffsetPoint (old_bottom, 1, 1, angle + 90);

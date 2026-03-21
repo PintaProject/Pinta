@@ -56,9 +56,6 @@ public sealed class EraserTool : BaseBrushTool
 	public override string StatusBarText
 		=> Translations.GetString ("Left click to erase to transparent, right click to erase to secondary color. ");
 
-	public override bool CursorChangesOnZoom
-		=> true;
-
 	public override Gdk.Key ShortcutKey
 		=> new (Gdk.Constants.KEY_E);
 

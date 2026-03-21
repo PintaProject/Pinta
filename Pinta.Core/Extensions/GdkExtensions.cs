@@ -130,8 +130,8 @@ public static class GdkExtensions
 		RectangleI initialShapeBBox = new (
 			imgToShapeX - Math.Max (halfOfShapeWidth, halfOfShapeHeight),
 			imgToShapeY - Math.Max (halfOfShapeWidth, halfOfShapeHeight),
-			clampedWidth,
-			clampedHeight);
+			Math.Max (clampedWidth, clampedHeight),
+			Math.Max (clampedWidth, clampedHeight));
 
 		// Inflate shape bounding box to allow for anti-aliasing
 		RectangleI inflatedBBox = initialShapeBBox.Inflated (2, 2);
@@ -186,7 +186,7 @@ public static class GdkExtensions
 						shapeRect = shapeRect.Inflated (-1, -1);
 						PointD[] pointsOfInflatedRotatedRectangle = RotateRectangle (shapeRect, shapeAngle);
 						g.DrawPolygonal (new ReadOnlySpan<PointD> (pointsOfRotatedRectangle), outerColor, LineCap.Butt);
-						g.DrawPolygonal (new ReadOnlySpan<PointD> (pointsOfInflatedRotatedRectangle), innerColor, LineCap.Butt);
+						g.DrawPolygonal (new ReadOnlySpan<PointD> ([.. pointsOfInflatedRotatedRectangle, pointsOfInflatedRotatedRectangle[0]]), innerColor, LineCap.Butt);
 					}
 					break;
 			}

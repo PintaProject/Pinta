@@ -33,7 +33,6 @@ public sealed class DocumentWorkspace
 	private readonly Document document;
 
 	private readonly ActionManager actions;
-	private readonly ToolManager tools;
 
 	private enum ZoomType
 	{
@@ -44,11 +43,9 @@ public sealed class DocumentWorkspace
 
 	internal DocumentWorkspace (
 		ActionManager actions,
-		ToolManager tools,
 		Document document)
 	{
 		this.actions = actions;
-		this.tools = tools;
 
 		this.document = document;
 
@@ -116,7 +113,6 @@ public sealed class DocumentWorkspace
 			ViewSize = GetNewViewSize (document.ImageSize, value);
 
 			Invalidate ();
-			tools.CurrentTool?.OnCanvasZoom ();
 		}
 	}
 

@@ -33,13 +33,11 @@ namespace Pinta.Tools;
 
 public sealed class MagicWandTool : FloodTool
 {
-	private readonly IWorkspaceService workspace;
 
 	private CombineMode combine_mode;
 
 	public MagicWandTool (IServiceProvider services) : base (services)
 	{
-		workspace = services.GetService<IWorkspaceService> ();
 		LimitToSelection = false;
 	}
 

@@ -65,7 +65,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 	public override string Name => Translations.GetString ("Paintbrush");
 	public override string Icon => Pinta.Resources.Icons.ToolPaintBrush;
 	public override string StatusBarText => Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color.");
-	public override bool CursorChangesOnZoom => true;
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_B);
 	public override int Priority => 21;
 
@@ -206,6 +205,15 @@ public sealed class PaintBrushTool : BaseBrushTool
 		}
 	}
 
+	protected override void RefreshCursor ()
+	{
+		if (active_brush is null) {
+			base.RefreshCursor ();
+		} else {
+			SetCursorFromBrush (active_brush);
+		}
+	}
+
 	private Label? brush_label;
 	private ToolBarComboBox? brush_combo_box;
 	private Gtk.Separator? separator;
@@ -213,14 +221,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 	private Gtk.Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
 	private Label BrushLabel => brush_label ??= Label.New (string.Format (" {0}:  ", Translations.GetString ("Type")));
 
-	public override void OnCanvasZoom ()
-	{
-		if (active_brush is null) {
-			base.OnCanvasZoom ();
-		} else {
-			SetCursorFromBrush (active_brush);
-		}
-	}
 
 	private ToolBarComboBox BrushComboBox {
 		get {

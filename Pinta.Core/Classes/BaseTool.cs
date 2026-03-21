@@ -37,7 +37,7 @@ namespace Pinta.Core;
 public abstract class BaseTool
 {
 	private readonly IToolService tools;
-	private readonly IWorkspaceService workspace;
+	protected readonly IWorkspaceService workspace;
 
 	protected IResourceService Resources { get; }
 	protected ISettingsService Settings { get; }
@@ -55,11 +55,9 @@ public abstract class BaseTool
 		CurrentCursor = DefaultCursor;
 
 		// Update cursor when active document changes
-		workspace.ActiveDocumentChanged += (_, _) => {
-			if (tools.CurrentTool == this)
-				SetCursor (CurrentCursor);
-		};
-
+		workspace.ActiveDocumentChanged += (_, _) => RefreshCursorIfActive ();
+		// Update cursor on zoom
+		workspace.ViewSizeChanged += (_, _) => RefreshCursorIfActive ();
 		// Give tools a chance to save their settings on application quit
 		Settings.SaveSettingsBeforeQuit += (_, _)
 			=> OnSaveSettings (Settings);
@@ -92,12 +90,6 @@ public abstract class BaseTool
 	/// </summary>
 	public Cursor? CurrentCursor { get; private set; }
 
-	/// <summary>
-	/// Specifies whether this application needs to update this tool's
-	/// cursor after a zoom operation.
-	/// </summary>
-	public virtual bool CursorChangesOnZoom
-		=> false;
 
 	/// <summary>
 	/// Specifies whether the tool manipulates selections.
@@ -167,14 +159,6 @@ public abstract class BaseTool
 				return;
 
 			AlphaBlendingDropDown.SelectedItem = AlphaBlendingDropDown.Items.First (i => i.Tag is bool b && b == value);
-		}
-	}
-
-	public virtual void OnCanvasZoom ()
-	{
-		if (CursorChangesOnZoom) {
-			//The current tool's cursor changes when the zoom changes.
-			SetCursor (DefaultCursor);
 		}
 	}
 
@@ -333,6 +317,18 @@ public abstract class BaseTool
 
 		if (workspace.HasOpenDocuments)
 			workspace.ActiveWorkspace.Canvas.Cursor = cursor;
+	}
+
+	private void RefreshCursorIfActive ()
+	{
+		if (tools.CurrentTool == this) {
+			RefreshCursor ();
+		}
+	}
+
+	protected virtual void RefreshCursor ()
+	{
+		SetCursor (DefaultCursor);
 	}
 
 	#region Toolbar

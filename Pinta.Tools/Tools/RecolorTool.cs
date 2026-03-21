@@ -40,17 +40,11 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public class RecolorTool : BaseBrushTool
+public class RecolorTool (IServiceProvider services) : BaseBrushTool (services)
 {
-	private readonly IWorkspaceService workspace;
 
 	private PointI? last_point = null;
 	private BitMask? stencil;
-
-	public RecolorTool (IServiceProvider services) : base (services)
-	{
-		workspace = services.GetService<IWorkspaceService> ();
-	}
 
 	public override string Name => Translations.GetString ("Recolor");
 	public override string Icon => Pinta.Resources.Icons.ToolRecolor;

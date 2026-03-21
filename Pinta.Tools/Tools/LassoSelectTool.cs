@@ -33,10 +33,8 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public sealed class LassoSelectTool : BaseTool
+public sealed class LassoSelectTool (IServiceProvider services) : BaseTool (services)
 {
-	private readonly IWorkspaceService workspace;
-
 	private bool is_dragging = false;
 	private CombineMode combine_mode;
 	private SelectionHistoryItem? hist;
@@ -46,11 +44,6 @@ public sealed class LassoSelectTool : BaseTool
 	private Separator? mode_sep;
 	private Label? lasso_mode_label;
 	private ToolBarDropDownButton? lasso_mode_buttom;
-
-	public LassoSelectTool (IServiceProvider services) : base (services)
-	{
-		workspace = services.GetService<IWorkspaceService> ();
-	}
 
 	public override string Name => Translations.GetString ("Lasso Select");
 	public override string Icon => Pinta.Resources.Icons.ToolSelectLasso;
