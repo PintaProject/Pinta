@@ -162,9 +162,9 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 
 		SetOrientation (Gtk.Orientation.Horizontal);
 
-		Append (itemThumbnail);
-		Append (itemLabel);
 		Append (visibleButton);
+		Append (itemLabel);
+		Append (itemThumbnail);
 
 		// --- References to keep
 
@@ -192,6 +192,8 @@ public sealed class LayersListViewItemWidget : Gtk.Box
 		operationsSection.AppendItem (actions.DeleteLayer.CreateMenuItem ());
 		operationsSection.AppendItem (actions.DuplicateLayer.CreateMenuItem ());
 		operationsSection.AppendItem (actions.MergeLayerDown.CreateMenuItem ());
+		operationsSection.AppendItem (actions.MoveLayerUp.CreateMenuItem ());
+		operationsSection.AppendItem (actions.MoveLayerDown.CreateMenuItem ());
 
 		Gio.Menu flipSection = Gio.Menu.New ();
 		flipSection.AppendItem (actions.FlipHorizontal.CreateMenuItem ());

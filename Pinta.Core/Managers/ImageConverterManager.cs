@@ -65,7 +65,7 @@ public sealed class ImageConverterManager
 			displayPrefix: "Netpbm Portable Pixmap",
 			extensions: ["ppm", "PPM"],
 			mimes: ["image/x-portable-pixmap"], // Not official, but conventional
-			importer: null,
+			importer: netpbmPortablePixmap,
 			exporter: netpbmPortablePixmap,
 			supportsLayers: false
 		);

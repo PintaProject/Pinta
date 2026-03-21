@@ -36,6 +36,7 @@ internal sealed class EditCanvasGridAction : IActionHandler
 		canvas_grid.CellHeight = eventArgs.CellSize.Height;
 		canvas_grid.ShowAxonometricGrid = eventArgs.ShowAxonometricGrid;
 		canvas_grid.AxonometricWidth = eventArgs.AxonometricWidth;
+		canvas_grid.AxonometricAngle = eventArgs.AxonometricAngle;
 	}
 
 	private async void Activated (object sender, EventArgs e)
@@ -46,7 +47,8 @@ internal sealed class EditCanvasGridAction : IActionHandler
 			new (
 				canvas_grid.CellWidth,
 				canvas_grid.CellHeight),
-			canvas_grid.AxonometricWidth);
+			canvas_grid.AxonometricWidth,
+			canvas_grid.AxonometricAngle);
 
 		using CanvasGridSettingsDialog dialog = new (chrome, initialSettings);
 
@@ -64,6 +66,7 @@ internal sealed class EditCanvasGridAction : IActionHandler
 
 				canvas_grid.ShowAxonometricGrid = initialSettings.ShowAxonometricGrid;
 				canvas_grid.AxonometricWidth = initialSettings.AxonometricWidth;
+				canvas_grid.AxonometricAngle = initialSettings.AxonometricAngle;
 			}
 
 		} finally {

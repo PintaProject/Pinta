@@ -89,12 +89,14 @@ public partial class LevelsDialog : Gtk.Dialog
 	private readonly HistogramWidget histogram_input;
 	private readonly HistogramWidget histogram_output;
 	private readonly IChromeService chrome;
+	private readonly IPaletteService palette;
 	private readonly IWorkspaceService workspace;
 
 	public LevelsData EffectData { get; }
 
 	public LevelsDialog (
 		IChromeService chrome,
+		IPaletteService palette,
 		IWorkspaceService workspace,
 		LevelsData effectData)
 	{
@@ -248,6 +250,7 @@ public partial class LevelsDialog : Gtk.Dialog
 		// --- Initialization (LevelsDialog)
 
 		this.chrome = chrome;
+		this.palette = palette;
 		this.workspace = workspace;
 
 		EffectData = effectData;
@@ -459,6 +462,7 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private void UpdateGammaByMask (float val)
 	{
+		val = Math.Clamp (val, UnaryPixelOps.Level.MinGamma, UnaryPixelOps.Level.MaxGamma);
 		if (!(mask.R || mask.G || mask.B))
 			return;
 
@@ -616,7 +620,7 @@ public partial class LevelsDialog : Gtk.Dialog
 		MaskChanged ();
 	}
 
-	private void HandleColorPanelButtonPressEvent (
+	private async void HandleColorPanelButtonPressEvent (
 		Gtk.GestureClick controller,
 		Gtk.GestureClick.PressedSignalArgs args)
 	{
@@ -626,41 +630,39 @@ public partial class LevelsDialog : Gtk.Dialog
 		ColorPanelWidget panel = (ColorPanelWidget?) controller.GetWidget () ??
 				throw new Exception ("Controller widget should be non-null");
 
-		var ccd = Gtk.ColorChooserDialog.New (Translations.GetString ("Choose Color"), chrome.MainWindow);
-		ccd.UseAlpha = true;
-		ccd.SetRgba (panel.CairoColor.ToGdkRGBA ());
+		using ColorPickerDialog ccd = new (
+			chrome.MainWindow,
+			palette,
+			new SingleColor (panel.CairoColor),
+			primarySelected: true,
+			livePalette: false,
+			windowTitle: Translations.GetString ("Choose Color")
+		) {
+			Modal = true
+		};
 
-		var response = ccd.RunBlocking ();
-		if (response == Gtk.ResponseType.Ok) {
-			ccd.GetRgba (out Gdk.RGBA rgba);
-			ColorBgra col = rgba.ToCairoColor ().ToColorBgra ();
+		try {
+			Gtk.ResponseType response = await ccd.RunAsync ();
 
-			if (panel == colorpanel_in_low) {
+			if (response != Gtk.ResponseType.Ok)
+				return;
+
+			ColorBgra col = ((SingleColor) ccd.Colors).Color.ToColorBgra ();
+
+			if (panel == colorpanel_in_low)
 				Levels.ColorInLow = col;
-			} else if (panel == colorpanel_in_high) {
+			else if (panel == colorpanel_in_high)
 				Levels.ColorInHigh = col;
-			} else if (panel == colorpanel_out_low) {
+			else if (panel == colorpanel_out_low)
 				Levels.ColorOutLow = col;
-				//                } else if (panel == colorpanelOutMid) {
-				//                    ColorBgra lo = Levels.ColorInLow;
-				//                    ColorBgra md = histogramInput.Histogram.GetMeanColor();
-				//                    ColorBgra hi = Levels.ColorInHigh;
-				//                    ColorBgra out_lo = Levels.ColorOutLow;
-				//                    ColorBgra out_hi = Levels.ColorOutHigh;
-				//
-				//                    for (int i = 0; i < 3; i++) {
-				//                        double logA = (col[i] - out_lo[i]) / (out_hi[i] - out_lo[i]);
-				//                        double logBase = (md[i] - lo[i]) / (hi[i] - lo[i]);
-				//                        double logVal = (logBase == 1.0) ? 0.0 : Math.Log (logA, logBase);
-				//
-				//                        Levels.SetGamma(i, (float)Utility.Clamp (logVal, 0.1, 10.0));
-				//                    }
-			} else if (panel == colorpanel_out_high) {
+			else if (panel == colorpanel_out_high)
 				Levels.ColorOutHigh = col;
-			}
-		}
 
-		ccd.Destroy ();
+			UpdateFromLevelsOp ();
+			UpdateLevels ();
+		} finally {
+			ccd.Destroy ();
+		}
 
 		UpdateFromLevelsOp ();
 		UpdateLevels ();

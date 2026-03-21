@@ -124,8 +124,9 @@ public sealed class TextTool : BaseTool
 	// NRT - Created by OnBuildToolBar
 	private Gtk.Label font_label = null!;
 	private Gtk.FontDialogButton font_button = null!;
+	private ToolBarDropDownButton variant_btn = null!;
 	private Gtk.SpinButton font_size = null!;
-	private Gtk.ToggleButton bold_btn = null!;
+	private ToolBarDropDownButton weight_btn = null!;
 	private Gtk.ToggleButton italic_btn = null!;
 	private Gtk.ToggleButton underscore_btn = null!;
 	private Gtk.ToggleButton left_alignment_btn = null!;
@@ -137,6 +138,8 @@ public sealed class TextTool : BaseTool
 	private Gtk.Separator outline_sep = null!;
 	private Gtk.SpinButton outline_width = null!;
 	private Gtk.Label outline_width_label = null!;
+	private Gtk.Separator join_sep = null!;
+	private ToolBarDropDownButton join_btn = null!;
 
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
@@ -158,7 +161,7 @@ public sealed class TextTool : BaseTool
 				UseSize = false,
 				UseFont = true,
 				CanFocus = false,
-				Level = Gtk.FontLevel.Face,
+				Level = Gtk.FontLevel.Family,
 				FontDesc = Pango.FontDescription.FromString (
 					Settings.GetSetting (SettingNames.TEXT_FONT,
 					Gtk.Settings.GetDefault ()!.GtkFontName!)),
@@ -170,6 +173,60 @@ public sealed class TextTool : BaseTool
 		}
 
 		tb.Append (font_button);
+
+		tb.Append (GtkExtensions.CreateToolBarSeparator ());
+
+		if (variant_btn == null) {
+			variant_btn = new ToolBarDropDownButton ();
+
+			variant_btn.AddItem (
+				// Translators: 'Normal' refers to the font-variant text property
+				Translations.GetString ("Normal"),
+				Pinta.Resources.Icons.TextVariantNormal,
+				Pango.Variant.Normal
+			);
+			variant_btn.AddItem (
+				// Translators: 'Small Caps' refers to the font-variant text property
+				Translations.GetString ("Small Caps"),
+				Pinta.Resources.Icons.TextVariantSmallCaps,
+				Pango.Variant.SmallCaps
+			);
+			variant_btn.AddItem (
+				// Translators: 'All Small Caps' refers to the font-variant text property
+				Translations.GetString ("All Small Caps"),
+				Pinta.Resources.Icons.TextVariantAllSmallCaps,
+				Pango.Variant.AllSmallCaps
+			);
+			variant_btn.AddItem (
+				// Translators: 'Petite Caps' refers to the font-variant text property
+				Translations.GetString ("Petite Caps"),
+				Pinta.Resources.Icons.TextVariantPetiteCaps,
+				Pango.Variant.PetiteCaps
+			);
+			variant_btn.AddItem (
+				// Translators: 'All Petite Caps' refers to the font-variant text property
+				Translations.GetString ("All Petite Caps"),
+				Pinta.Resources.Icons.TextVariantAllPetiteCaps,
+				Pango.Variant.AllPetiteCaps
+			);
+			variant_btn.AddItem (
+				// Translators: 'Unicase' refers to the font-variant text property
+				Translations.GetString ("Unicase"),
+				Pinta.Resources.Icons.TextVariantUnicase,
+				Pango.Variant.Unicase
+			);
+			variant_btn.AddItem (
+				// Translators: 'Title Caps' refers to the font-variant text property
+				Translations.GetString ("Title Caps"),
+				Pinta.Resources.Icons.TextVariantTitleCaps,
+				Pango.Variant.Normal
+			);
+
+			variant_btn.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_VARIANT, 0);
+			variant_btn.SelectedItemChanged += HandleVariantButtonChanged;
+		}
+
+		tb.Append (variant_btn);
 
 		tb.Append (GtkExtensions.CreateToolBarSeparator ());
 
@@ -192,17 +249,87 @@ public sealed class TextTool : BaseTool
 
 		tb.Append (GtkExtensions.CreateToolBarSeparator ());
 
-		if (bold_btn == null) {
-			bold_btn = new Gtk.ToggleButton {
-				IconName = Pinta.Resources.StandardIcons.FormatTextBold,
-				TooltipText = Translations.GetString ("Bold"),
-				CanFocus = false,
-				Active = Settings.GetSetting (SettingNames.TEXT_BOLD, false),
-			};
-			bold_btn.OnToggled += HandleBoldButtonToggled;
+		if (weight_btn == null) {
+			weight_btn = new ToolBarDropDownButton ();
+
+			weight_btn.AddItem (
+				// Translators: 'Thin' (100) refers to the font-weight text property
+				Translations.GetString ("Thin") + " 100",
+				Pinta.Resources.Icons.TextExtraLight,
+				Pango.Weight.Thin
+			);
+			weight_btn.AddItem (
+				// Translators: 'Ultralight' (200) refers to the font-weight text property
+				Translations.GetString ("Ultralight") + " 200",
+				Pinta.Resources.Icons.TextExtraLight,
+				Pango.Weight.Ultralight
+			);
+			weight_btn.AddItem (
+				// Translators: 'Light' (300) refers to the font-weight text property
+				Translations.GetString ("Light") + " 300",
+				Pinta.Resources.Icons.TextLight,
+				Pango.Weight.Light
+			);
+			weight_btn.AddItem (
+				// Translators: 'Semilight' (350) refers to the font-weight text property
+				Translations.GetString ("Semilight") + " 350",
+				Pinta.Resources.Icons.TextLight,
+				Pango.Weight.Semilight
+			);
+			weight_btn.AddItem (
+				// Translators: 'Book' (380) refers to the font-weight text property
+				Translations.GetString ("Book") + " 380",
+				Pinta.Resources.Icons.TextNormal,
+				Pango.Weight.Book
+			);
+			weight_btn.AddItem (
+				// Translators: 'Normal' (400) refers to the font-weight text property
+				Translations.GetString ("Normal") + " 400",
+				Pinta.Resources.Icons.TextNormal,
+				Pango.Weight.Normal
+			);
+			weight_btn.AddItem (
+				// Translators: 'Medium' (500) refers to the font-weight text property
+				Translations.GetString ("Medium") + " 500",
+				Pinta.Resources.Icons.TextNormal,
+				Pango.Weight.Medium
+			);
+			weight_btn.AddItem (
+				// Translators: 'Semibold' (600) refers to the font-weight text property
+				Translations.GetString ("Semibold") + " 600",
+				Pinta.Resources.Icons.TextBold,
+				Pango.Weight.Semibold
+			);
+			weight_btn.AddItem (
+				// Translators: 'Bold' (700) refers to the font-weight text property
+				Translations.GetString ("Bold") + " 700",
+				Pinta.Resources.Icons.TextBold,
+				Pango.Weight.Bold
+			);
+			weight_btn.AddItem (
+				// Translators: 'Ultrabold' (800) refers to the font-weight text property
+				Translations.GetString ("Ultrabold") + " 800",
+				Pinta.Resources.Icons.TextExtraBold,
+				Pango.Weight.Ultrabold
+			);
+			weight_btn.AddItem (
+				// Translators: 'Heavy' (900) refers to the font-weight text property
+				Translations.GetString ("Heavy") + " 900",
+				Pinta.Resources.Icons.TextExtraBold,
+				Pango.Weight.Heavy
+			);
+			weight_btn.AddItem (
+				// Translators: 'Ultraheavy' (1000) refers to the font-weight text property
+				Translations.GetString ("Ultraheavy") + " 1000",
+				Pinta.Resources.Icons.TextExtraBold,
+				Pango.Weight.Ultraheavy
+			);
+
+			weight_btn.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_WEIGHT, 5);
+			weight_btn.SelectedItemChanged += HandleWeightButtonToggled;
 		}
 
-		tb.Append (bold_btn);
+		tb.Append (weight_btn);
 
 		if (italic_btn == null) {
 			italic_btn = new Gtk.ToggleButton {
@@ -288,7 +415,7 @@ public sealed class TextTool : BaseTool
 			fill_button.AddItem (Translations.GetString ("Fill Background"), Pinta.Resources.Icons.FillStyleBackground, 3);
 
 			fill_button.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_STYLE, 0);
-			fill_button.SelectedItemChanged += HandleBoldButtonToggled;
+			fill_button.SelectedItemChanged += HandleFillButtonToggled;
 		}
 
 		tb.Append (fill_button);
@@ -315,7 +442,39 @@ public sealed class TextTool : BaseTool
 
 		tb.Append (outline_width);
 
-		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = StrokeText;
+		join_sep ??= GtkExtensions.CreateToolBarSeparator ();
+
+		tb.Append (join_sep);
+
+		if (join_btn == null) {
+			join_btn = new ToolBarDropDownButton ();
+
+			join_btn.AddItem (
+				// Translators: 'Miter Join' refers to the Cairo.LineJoin property
+				Translations.GetString ("Miter Join"),
+				Pinta.Resources.Icons.JoinMiter,
+				Cairo.LineJoin.Miter
+			);
+			join_btn.AddItem (
+				// Translators: 'Round Join' refers to the Cairo.LineJoin property
+				Translations.GetString ("Round Join"),
+				Pinta.Resources.Icons.JoinRound,
+				Cairo.LineJoin.Round
+			);
+			join_btn.AddItem (
+				// Translators: 'Bevel Join' refers to the Cairo.LineJoin property
+				Translations.GetString ("Bevel Join"),
+				Pinta.Resources.Icons.JoinBevel,
+				Cairo.LineJoin.Bevel
+			);
+
+			join_btn.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_JOIN, 0);
+			join_btn.SelectedItemChanged += HandleJoinButtonToggled;
+		}
+
+		tb.Append (join_btn);
+
+		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = join_btn.Visible = join_sep.Visible = StrokeText;
 
 		UpdateFont ();
 	}
@@ -336,8 +495,11 @@ public sealed class TextTool : BaseTool
 		if (font_button is not null)
 			settings.PutSetting (SettingNames.TEXT_FONT, font_button.FontDesc!.ToString ()!);
 
-		if (bold_btn is not null)
-			settings.PutSetting (SettingNames.TEXT_BOLD, bold_btn.Active);
+		if (variant_btn is not null)
+			settings.PutSetting (SettingNames.TEXT_VARIANT, variant_btn.SelectedIndex);
+
+		if (weight_btn is not null)
+			settings.PutSetting (SettingNames.TEXT_WEIGHT, weight_btn.SelectedIndex);
 
 		if (italic_btn is not null)
 			settings.PutSetting (SettingNames.TEXT_ITALIC, italic_btn.Active);
@@ -353,6 +515,9 @@ public sealed class TextTool : BaseTool
 
 		if (outline_width is not null)
 			settings.PutSetting (SettingNames.TEXT_OUTLINE_WIDTH, outline_width.GetValueAsInt ());
+
+		if (join_btn is not null)
+			settings.PutSetting (SettingNames.TEXT_JOIN, join_btn.SelectedIndex);
 	}
 
 	private void HandleFontChanged ()
@@ -364,6 +529,11 @@ public sealed class TextTool : BaseTool
 		if (workspace.HasOpenDocuments)
 			workspace.ActiveDocument.Workspace.GrabFocusToCanvas ();
 
+		UpdateFont ();
+	}
+
+	private void HandleVariantButtonChanged (object? sender, EventArgs e)
+	{
 		UpdateFont ();
 	}
 
@@ -431,10 +601,20 @@ public sealed class TextTool : BaseTool
 		UpdateFont ();
 	}
 
-	private void HandleBoldButtonToggled (object? sender, EventArgs e)
+	private void HandleWeightButtonToggled (object? sender, EventArgs e)
 	{
-		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = StrokeText;
+		UpdateFont ();
+	}
 
+	private void HandleFillButtonToggled (object? sender, EventArgs e)
+	{
+		outline_width.Visible = outline_width_label.Visible = outline_sep.Visible = join_btn.Visible = join_sep.Visible = StrokeText;
+
+		UpdateFont ();
+	}
+
+	private void HandleJoinButtonToggled (object? sender, EventArgs e)
+	{
 		UpdateFont ();
 	}
 
@@ -453,7 +633,8 @@ public sealed class TextTool : BaseTool
 		if (workspace.HasOpenDocuments) {
 
 			var font = font_button.FontDesc!.Copy ()!; // NRT: Only nullable when nullptr is passed.
-			font.SetWeight (bold_btn.Active ? Pango.Weight.Bold : Pango.Weight.Normal);
+			font.SetVariant ((Pango.Variant) variant_btn.SelectedItem.GetTagOrDefault (Pango.Variant.Normal));
+			font.SetWeight ((Pango.Weight) weight_btn.SelectedItem.GetTagOrDefault (Pango.Weight.Normal));
 			font.SetStyle (italic_btn.Active ? Pango.Style.Italic : Pango.Style.Normal);
 
 			CurrentTextEngine.SetFont (font, Alignment, underscore_btn.Active);
@@ -796,7 +977,8 @@ public sealed class TextTool : BaseTool
 								italic_btn.Toggle ();
 								UpdateFont ();
 							} else if (e.Key.Value == Gdk.Constants.KEY_b) {
-								bold_btn.Toggle ();
+								// If current font-weight is Bold (8) or bolder, set to Normal (5). Otherwise, set to Bold (8).
+								weight_btn.SelectedIndex = weight_btn.SelectedIndex > 7 ? 5 : 8;
 								UpdateFont ();
 							} else if (e.Key.Value == Gdk.Constants.KEY_u) {
 								underscore_btn.Toggle ();
@@ -1075,6 +1257,7 @@ public sealed class TextTool : BaseTool
 		if (StrokeText) {
 			g.SetSourceColor (FillText ? CurrentTextEngine.SecondaryColor : CurrentTextEngine.PrimaryColor);
 			g.LineWidth = OutlineWidth;
+			g.LineJoin = (Cairo.LineJoin) join_btn.SelectedIndex;
 
 			PangoCairo.Functions.LayoutPath (g, CurrentTextLayout.Layout);
 			g.Stroke ();

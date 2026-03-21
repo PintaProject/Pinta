@@ -234,4 +234,29 @@ partial class EffectsTest
 		effect.Data.Antialias = 4;
 		Utilities.TestEffect (effect, "twist2.png");
 	}
+
+	[Test]
+	public void Twist3 ()
+	{
+		TwistEffect effect = new (Utilities.CreateMockServices ());
+		Utilities.TestEffect (effect, "twist3.png");
+	}
+
+	[Test]
+	public void Twist4 ()
+	{
+		TwistEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CenterOffset = new CenterOffset<double> (-0.6, -0.6);
+		effect.Data.EdgeBehavior = EdgeBehavior.Clamp;
+		Utilities.TestEffect (effect, "twist4.png");
+	}
+
+	[Test]
+	public void Twist5 ()
+	{
+		TwistEffect effect = new (Utilities.CreateMockServices ());
+		effect.Data.CenterOffset = new CenterOffset<double> (-0.6, -0.6);
+		effect.Data.EdgeBehavior = EdgeBehavior.Primary;
+		Utilities.TestEffect (effect, "twist5.png");
+	}
 }
