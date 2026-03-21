@@ -316,6 +316,7 @@ Pinta.Resources/Styles.cs
 Pinta.Tools/Brushes/CircleBrush.cs
 Pinta.Tools/Brushes/GridBrush.cs
 Pinta.Tools/Brushes/PlainBrush.cs
+Pinta.Tools/Brushes/SlashBrush.cs
 Pinta.Tools/Brushes/SplatterBrush.cs
 Pinta.Tools/Brushes/SquaresBrush.cs
 Pinta.Tools/CoreToolsExtension.cs
