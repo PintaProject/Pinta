@@ -32,9 +32,7 @@ po/.intltool-merge-cache
 po/Makefile.in.in
 po/POTFILES
 po/stamp-it
-publish
 release
-xdg
 xdg/pinta.desktop
 xdg/pinta.appdata.xml
 .vs
