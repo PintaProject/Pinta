@@ -206,7 +206,7 @@ public sealed class GradientTool : BaseTool
 			_ => throw new InvalidOperationException ("Unknown gradient type."),
 		};
 	}
-	
+
 	private void RenderGradient ()
 	{
 		Document document = workspace.ActiveDocument;
@@ -304,7 +304,7 @@ public sealed class GradientTool : BaseTool
 			RenderGradient ();
 		}
 	}
-	
+
 	void HandlePintaCorePalettePrimaryColorChanged (object? sender, EventArgs e)
 	{
 		if (handle.Active) {
