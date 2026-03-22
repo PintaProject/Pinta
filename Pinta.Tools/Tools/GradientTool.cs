@@ -176,6 +176,8 @@ public sealed class GradientTool : BaseTool
 
 	private void Finalize (Document? document)
 	{
+		if (!handle.Active) { return; }
+
 		if (document != null) {
 			undo_data = Data;
 			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
