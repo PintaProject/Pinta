@@ -61,6 +61,9 @@ public static class StandardIcons
 	public const string ImageGeneric = "image-x-generic-symbolic";
 	public const string ImageMissing = "image-missing-symbolic";
 
+	public const string LayerMoveUp = "pan-up-symbolic";
+	public const string LayerMoveDown = "pan-down-symbolic";
+
 	public const string OpenMenu = "open-menu-symbolic";
 
 	public const string ApplicationAddon = "application-x-addon-symbolic";
