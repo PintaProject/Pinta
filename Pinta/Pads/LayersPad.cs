@@ -70,16 +70,17 @@ internal sealed class LayersPad : IDockPad
 
 		hamburger_button.Direction = Gtk.ArrowType.Up;
 
+		Gtk.Box toolbar_buttons = new Gtk.Box ();
+		toolbar_buttons.Append (layer_actions.AddNewLayer.CreateDockToolBarItem ());
+		toolbar_buttons.Append (layer_actions.DeleteLayer.CreateDockToolBarItem ());
+		toolbar_buttons.Append (layer_actions.DuplicateLayer.CreateDockToolBarItem ());
+		toolbar_buttons.Append (layer_actions.MergeLayerDown.CreateDockToolBarItem ());
+		toolbar_buttons.Append (layer_actions.MoveLayerUp.CreateDockToolBarItem ());
+		toolbar_buttons.Append (layer_actions.MoveLayerDown.CreateDockToolBarItem ());
+		toolbar_buttons.Append (hamburger_button);
+
 		Gtk.Box layers_tb = layers_item.AddToolBar ();
-		layers_tb.AppendMultiple ([
-			layer_actions.AddNewLayer.CreateDockToolBarItem (),
-			layer_actions.DeleteLayer.CreateDockToolBarItem (),
-			layer_actions.DuplicateLayer.CreateDockToolBarItem (),
-			layer_actions.MergeLayerDown.CreateDockToolBarItem (),
-			layer_actions.MoveLayerUp.CreateDockToolBarItem (),
-			layer_actions.MoveLayerDown.CreateDockToolBarItem (),
-			hamburger_button
-		]);
+		layers_tb.Append (toolbar_buttons);
 
 		workspace.AddItem (layers_item, DockPlacement.Right);
 	}
