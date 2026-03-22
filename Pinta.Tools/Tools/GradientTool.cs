@@ -207,7 +207,8 @@ public sealed class GradientTool : BaseTool
 		};
 	}
 	
-	private void RenderGradient () {
+	private void RenderGradient ()
+	{
 		Document document = workspace.ActiveDocument;
 
 		var gr = CreateGradientRenderer ();
