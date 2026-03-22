@@ -103,6 +103,9 @@ public sealed class GradientTool : BaseTool
 		is_newly_created = true;
 		drag_button = e.MouseButton;
 
+		palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
+		palette.SecondaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
+
 		palette.PrimaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
 		palette.SecondaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
 	}
