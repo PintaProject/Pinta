@@ -194,7 +194,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	public double Scale {
 		get => ActiveWorkspace.Scale;
-		set => ActiveWorkspace.Scale = value;
+		set => ActiveWorkspace.SetScale (value, PintaCore.Tools);
 	}
 
 	private readonly List<Document> open_documents;

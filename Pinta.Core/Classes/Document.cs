@@ -80,7 +80,7 @@ public sealed class Document
 		Selection = new DocumentSelection ();
 
 		Layers = new DocumentLayers (tools, this);
-		Workspace = new DocumentWorkspace (actions, tools, this);
+		Workspace = new DocumentWorkspace (actions, this);
 		IsDirty = false;
 		HasBeenSavedInSession = false;
 		ImageSize = size;
@@ -345,7 +345,7 @@ public sealed class Document
 
 		ResetSelectionPaths ();
 
-		Workspace.Scale = scale;
+		Workspace.SetScale (scale, tools);
 	}
 
 	public void ResizeImage (
@@ -374,7 +374,7 @@ public sealed class Document
 
 		ResetSelectionPaths ();
 
-		Workspace.Scale = scale;
+		Workspace.SetScale (scale, tools);
 		actions.View.UpdateCanvasScale ();
 	}
 
