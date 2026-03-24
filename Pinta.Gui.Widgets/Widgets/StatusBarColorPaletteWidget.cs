@@ -313,7 +313,8 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			case WidgetElement.Palette:
 				int paletteIndex = PaletteWidget.GetSwatchAtLocation (palette, point, palette_rect);
 				if (paletteIndex >= 0) {
-					text = Translations.GetString ("Color") + $": #{palette.CurrentPalette.Colors[paletteIndex].ToHex ()}\n\n" +
+					text = Translations.GetString ("Color") +
+					$": #{palette.CurrentPalette.Colors[paletteIndex].ToHex ()}\n\n" +
 					// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 					Translations.GetString ("Left click to set primary color. Right click to set secondary color. Middle click or press {0} and left click to choose palette color.",
 						system.CtrlLabel ());
@@ -322,16 +323,19 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			case WidgetElement.RecentColorsPalette:
 				int recentColorsIndex = PaletteWidget.GetSwatchAtLocation (palette, point, recent_palette_rect, true);
 				if (recentColorsIndex >= 0) {
-					text = Translations.GetString ("Color") + $": #{palette.RecentlyUsedColors[recentColorsIndex].ToHex ()}\n\n" +
+					text = Translations.GetString ("Color") +
+					$": #{palette.RecentlyUsedColors[recentColorsIndex].ToHex ()}\n\n" +
 					Translations.GetString ("Left click to set primary color. Right click to set secondary color.");
 				}
 				break;
 			case WidgetElement.PrimaryColor:
-				text = Translations.GetString ("Color") + $": #{palette.PrimaryColor.ToHex ()}\n\n" +
+				text = Translations.GetString ("Color") +
+				$": #{palette.PrimaryColor.ToHex ()}\n\n" +
 				Translations.GetString ("Click to select primary color.");
 				break;
 			case WidgetElement.SecondaryColor:
-				text = Translations.GetString ("Color") + $": #{palette.SecondaryColor.ToHex ()}\n\n" +
+				text = Translations.GetString ("Color") +
+				$": #{palette.SecondaryColor.ToHex ()}\n\n" +
 				Translations.GetString ("Click to select secondary color.");
 				break;
 			case WidgetElement.SwapColors:
