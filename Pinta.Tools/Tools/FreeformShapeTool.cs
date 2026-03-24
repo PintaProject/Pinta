@@ -189,8 +189,16 @@ public sealed class FreeformShapeTool : BaseBrushTool
 			g.Stroke ();
 		}
 
-		if (surface_modified && undo_surface != null)
-			document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
+		if (surface_modified && undo_surface != null) {
+			document.History.PushNewItem (
+				new SimpleHistoryItem (
+					Icon,
+					Name,
+					undo_surface,
+					document.Layers.CurrentUserLayerIndex),
+				PintaCore.Actions.Edit
+			);
+		}
 
 		undo_surface = null;
 		surface_modified = false;

@@ -44,7 +44,7 @@ public sealed class DocumentWorkspace
 	{
 		this.actions = actions;
 		this.document = document;
-		History = new DocumentHistory (actions.Edit, document);
+		History = new DocumentHistory (document);
 	}
 
 	#region Public Events

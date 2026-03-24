@@ -44,11 +44,13 @@ public sealed class ImageActions
 
 	private readonly ToolManager tools;
 	private readonly WorkspaceManager workspace;
+	private readonly EditActions edit;
 	private readonly ViewActions view;
 
 	public ImageActions (
 		ToolManager tools,
 		WorkspaceManager workspace,
+		EditActions edit,
 		ViewActions view)
 	{
 		CropToSelection = new Command (
@@ -121,6 +123,7 @@ public sealed class ImageActions
 
 		this.tools = tools;
 		this.workspace = workspace;
+		this.edit = edit;
 		this.view = view;
 	}
 
@@ -191,7 +194,7 @@ public sealed class ImageActions
 		tools.Commit ();
 
 		doc.RotateImageCCW ();
-		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW));
+		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CCW), edit);
 	}
 
 	private void HandlePintaCoreActionsImageRotateCWActivated (object sender, EventArgs e)
@@ -201,7 +204,7 @@ public sealed class ImageActions
 		tools.Commit ();
 
 		doc.RotateImageCW ();
-		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW));
+		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate90CW), edit);
 	}
 
 	private void HandlePintaCoreActionsImageFlattenActivated (object sender, EventArgs e)
@@ -227,7 +230,7 @@ public sealed class ImageActions
 
 		hist.Push (new SimpleHistoryItem (string.Empty, string.Empty, oldBottomSurface, 0));
 
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, edit);
 	}
 
 	private void HandlePintaCoreActionsImageRotate180Activated (object sender, EventArgs e)
@@ -237,7 +240,7 @@ public sealed class ImageActions
 		tools.Commit ();
 
 		doc.RotateImage180 ();
-		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180));
+		doc.History.PushNewItem (new InvertHistoryItem (InvertType.Rotate180), edit);
 	}
 
 	private void HandlePintaCoreActionsImageFlipVerticalActivated (object sender, EventArgs e)
@@ -247,7 +250,7 @@ public sealed class ImageActions
 		tools.Commit ();
 
 		doc.FlipImageVertical ();
-		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipVertical));
+		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipVertical), edit);
 	}
 
 	private void HandlePintaCoreActionsImageFlipHorizontalActivated (object sender, EventArgs e)
@@ -257,7 +260,7 @@ public sealed class ImageActions
 		tools.Commit ();
 
 		doc.FlipImageHorizontal ();
-		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
+		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal), edit);
 	}
 
 	private void HandlePintaCoreActionsImageCropToSelectionActivated (object sender, EventArgs e)
@@ -309,7 +312,7 @@ public sealed class ImageActions
 
 		hist.FinishSnapshotOfImage ();
 
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, edit);
 		doc.ResetSelectionPaths ();
 
 		doc.Workspace.Invalidate ();

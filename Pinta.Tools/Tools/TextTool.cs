@@ -970,7 +970,7 @@ public sealed class TextTool : BaseTool
 								OnHandleUndo (document);
 
 								if (workspace.ActiveDocument.History.CanUndo)
-									workspace.ActiveDocument.History.Undo ();
+									workspace.ActiveDocument.History.Undo (PintaCore.Actions.Edit);
 
 								return true;
 							} else if (e.Key.Value == Gdk.Constants.KEY_i) {
@@ -1147,8 +1147,8 @@ public sealed class TextTool : BaseTool
 					text_undo_surface.Clone (),
 					user_undo_surface.Clone (),
 					undo_engine!.Clone (), // NRT - Set in StartEditing
-					doc.Layers.CurrentUserLayer
-				)
+					doc.Layers.CurrentUserLayer),
+				PintaCore.Actions.Edit
 			);
 
 			//Stop ignoring any Surface.Clone calls from this point on.
@@ -1366,7 +1366,7 @@ public sealed class TextTool : BaseTool
 			doc.Layers.CurrentUserLayer);
 
 		//Add the new TextHistoryItem.
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, PintaCore.Actions.Edit);
 
 		//Stop ignoring any Surface.Clone calls from this point on.
 		ignore_clone_finalizations = false;

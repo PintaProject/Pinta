@@ -81,7 +81,7 @@ internal sealed class OffsetSelectionAction : IActionHandler
 		historyItem.TakeSnapshot ();
 
 		document.Selection.Offset (newOffset);
-		document.History.PushNewItem (historyItem);
+		document.History.PushNewItem (historyItem, edit);
 		document.Workspace.Invalidate ();
 	}
 

@@ -38,7 +38,9 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 
 	private Document? active_document;
 
-	public HistoryListView ()
+	private readonly EditActions edit;
+
+	public HistoryListView (EditActions edit)
 	{
 		Gio.ListStore listModel = Gio.ListStore.New (HistoryListViewItem.GetGType ());
 
@@ -79,6 +81,8 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 		// --- Event handlers for the application
 		// TODO: Move handlers out of this constructor
 
+		this.edit = edit;
+
 		PintaCore.Workspace.ActiveDocumentChanged += OnActiveDocumentChanged;
 	}
 
@@ -89,10 +93,10 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 		int index = (int) selection_model.Selected;
 
 		while (active_document.History.Pointer < index)
-			active_document.History.Redo ();
+			active_document.History.Redo (edit);
 
 		while (active_document.History.Pointer > index)
-			active_document.History.Undo ();
+			active_document.History.Undo (edit);
 	}
 
 	private void OnActiveDocumentChanged (object? sender, EventArgs e)

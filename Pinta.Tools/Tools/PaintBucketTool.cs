@@ -97,7 +97,7 @@ public sealed class PaintBucketTool : FloodTool
 		layer_ctx.Paint ();
 
 		document.Layers.ToolLayer.Clear ();
-		document.History.PushNewItem (hist);
+		document.History.PushNewItem (hist, PintaCore.Actions.Edit);
 		document.Workspace.Invalidate ();
 	}
 }
