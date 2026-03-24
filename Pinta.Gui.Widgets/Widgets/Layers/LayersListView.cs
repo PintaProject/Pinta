@@ -157,7 +157,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 			return;
 
 		foreach (var layer in doc.Layers.UserLayers.Reverse ())
-			list_model.Append (new LayersListViewItem (doc, layer));
+			list_model.Append (LayersListViewItem.New (doc, layer));
 
 		// Update our selection to match the document's active layer.
 		int currentModelIndex = doc.Layers.Count () - 1 - doc.Layers.CurrentUserLayerIndex;
@@ -190,7 +190,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 		ArgumentNullException.ThrowIfNull (active_document);
 
 		int index = active_document.Layers.Count () - 1 - e.Index;
-		list_model.Insert ((uint) index, new LayersListViewItem (active_document, active_document.Layers[e.Index]));
+		list_model.Insert ((uint) index, LayersListViewItem.New (active_document, active_document.Layers[e.Index]));
 		list_view.ScrollToSelectedItem (selection_model);
 	}
 

@@ -31,23 +31,21 @@ using Pinta.Core;
 namespace Pinta.Gui.Widgets;
 
 // GObject subclass for use with Gio.ListStore
-[Subclass<GObject.Object>]
+[GObject.Subclass<GObject.Object>]
 public sealed partial class LayersListViewItem
 {
 	private CanvasRenderer? canvas_renderer;
 
 	// NRT - GObject requires a parameterless constructor, and these don't have simple defaults
-	private readonly Document? document;
-	public UserLayer? UserLayer { get; }
+	private Document? document;
+	public UserLayer? UserLayer { get; private set; }
 
-	public LayersListViewItem (
-		Document doc,
-		UserLayer userLayer
-	)
-		: this ()
+	public static LayersListViewItem New (Document doc, UserLayer userLayer)
 	{
-		document = doc;
-		UserLayer = userLayer;
+		LayersListViewItem item = NewWithProperties ([]);
+		item.document = doc;
+		item.UserLayer = userLayer;
+		return item;
 	}
 
 	public string Label => UserLayer?.Name ?? string.Empty;
