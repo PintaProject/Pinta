@@ -120,7 +120,7 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 			return;
 
 		foreach (BaseHistoryItem item in doc.History.Items)
-			model.Append (new HistoryListViewItem (item));
+			model.Append (HistoryListViewItem.New (item));
 
 		// Move selection to the document's current history item.
 		if (model.NItems > 0) {
@@ -143,7 +143,7 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 		// Remove any stale (previously undone) items before adding the new item.
 		model.RemoveMultiple (idx, model.GetNItems () - idx);
 
-		model.Append (new HistoryListViewItem (args.Item));
+		model.Append (HistoryListViewItem.New (args.Item));
 		selection_model.SetSelected (idx);
 		list_view.ScrollToSelectedItem (selection_model);
 	}
