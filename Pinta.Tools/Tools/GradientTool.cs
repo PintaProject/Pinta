@@ -327,6 +327,7 @@ public sealed class GradientTool : BaseTool
 				color_mode_button.AddItem (Translations.GetString ("Transparency Mode"), Pinta.Resources.Icons.ColorModeTransparency, GradientColorMode.Transparency);
 
 				color_mode_button.SelectedIndex = Settings.GetSetting (SettingNames.GRADIENT_COLOR_MODE, 0);
+				color_mode_button.SelectedItemChanged += HandleGradientTypeChanged;
 			}
 
 			return color_mode_button;
