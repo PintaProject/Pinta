@@ -6,47 +6,49 @@ using Pinta.Core;
 namespace Pinta.Gui.Addins;
 
 // GObject subclass for use with Gio.ListStore
-[Subclass<GObject.Object>]
+[GObject.Subclass<GObject.Object>]
 internal sealed partial class AddinListViewItem
 {
-	private readonly SetupService service = new ();
-	private readonly AddinHeader info = new AddinInfo ();
-	private readonly AddinStatus status;
-	private readonly Addin? installed_addin;
-	private readonly AddinRepositoryEntry? available_addin;
+	private SetupService service = new ();
+	private AddinHeader info = new AddinInfo ();
+	private AddinStatus status;
+	private Addin? installed_addin;
+	private AddinRepositoryEntry? available_addin;
 
 	/// <summary>
 	/// Constructor for the list of installed addins.
 	/// </summary>
-	public AddinListViewItem (
+	public static AddinListViewItem NewForInstalledAddin (
 		SetupService service,
 		AddinHeader info,
-		Addin installed_addin,
+		Addin installedAddin,
 		AddinStatus status)
-	: this ()
 	{
-		this.service = service;
-		this.info = info;
-		this.installed_addin = installed_addin;
-		this.status = status;
+		AddinListViewItem item = NewWithProperties ([]);
+		item.service = service;
+		item.info = info;
+		item.installed_addin = installedAddin;
+		item.status = status;
+		return item;
 	}
 
 	/// <summary>
 	/// Constructor for the gallery view of available add-ins, some of which may already be installed.
 	/// </summary>
-	public AddinListViewItem (
+	public static AddinListViewItem NewForAvailableAddin (
 		SetupService service,
 		AddinHeader info,
-		AddinRepositoryEntry available_addin,
+		AddinRepositoryEntry availableAddin,
 		AddinStatus status)
-	: this ()
 	{
-		this.service = service;
-		this.info = info;
-		this.available_addin = available_addin;
-		this.status = status;
+		AddinListViewItem item = NewWithProperties ([]);
+		item.service = service;
+		item.info = info;
+		item.available_addin = availableAddin;
+		item.status = status;
+		item.installed_addin = AddinManager.Registry.GetAddin (Addin.GetIdName (info.Id));
 
-		installed_addin = AddinManager.Registry.GetAddin (Addin.GetIdName (info.Id));
+		return item;
 	}
 
 	public SetupService Service => service;

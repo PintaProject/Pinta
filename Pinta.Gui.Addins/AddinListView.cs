@@ -100,7 +100,7 @@ internal sealed class AddinListView : Adw.Bin
 	{
 		list_view_stack.VisibleChild = list_view_scroll;
 
-		model.Append (new AddinListViewItem (service, info, addin, status));
+		model.Append (AddinListViewItem.NewForInstalledAddin (service, info, addin, status));
 
 		// Adding items may not cause a selection-changed signal, as mentioned in the SelectionModel docs
 		if (model.NItems == 1)
@@ -115,7 +115,7 @@ internal sealed class AddinListView : Adw.Bin
 	{
 		list_view_stack.VisibleChild = list_view_scroll;
 
-		model.Append (new AddinListViewItem (service, info, addin, status));
+		model.Append (AddinListViewItem.NewForAvailableAddin (service, info, addin, status));
 
 		// Adding items may not cause a selection-changed signal, as mentioned in the SelectionModel docs
 		if (model.NItems == 1)
