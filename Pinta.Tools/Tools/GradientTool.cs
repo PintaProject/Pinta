@@ -79,6 +79,8 @@ public sealed class GradientTool : BaseTool
 		tb.Append (GtkExtensions.CreateToolBarSeparator ());
 		tb.Append (ModeLabel);
 		tb.Append (ColorModeDropDown);
+
+		AlphaBlendingDropDown.SelectedItemChanged += HandleGradientTypeChanged;
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
