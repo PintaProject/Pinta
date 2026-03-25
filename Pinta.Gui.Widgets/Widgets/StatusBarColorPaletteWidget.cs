@@ -309,34 +309,32 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		string? text = null;
 		PointD point = new (args.X, args.Y);
 
+		Func<string, string, string> hex_tooltip = (hex, tooltip) => Translations.GetString ("Color") + $": #{hex}\n\n" + tooltip;
+
 		switch (GetElementAtPoint (point)) {
 			case WidgetElement.Palette:
 				int paletteIndex = PaletteWidget.GetSwatchAtLocation (palette, point, palette_rect);
 				if (paletteIndex >= 0) {
-					text = Translations.GetString ("Color") +
-					$": #{palette.CurrentPalette.Colors[paletteIndex].ToHex ()}\n\n" +
+					text = hex_tooltip (palette.CurrentPalette.Colors[paletteIndex].ToHex (),
 					// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 					Translations.GetString ("Left click to set primary color. Right click to set secondary color. Middle click or press {0} and left click to choose palette color.",
-						system.CtrlLabel ());
+						system.CtrlLabel ()));
 				}
 				break;
 			case WidgetElement.RecentColorsPalette:
 				int recentColorsIndex = PaletteWidget.GetSwatchAtLocation (palette, point, recent_palette_rect, true);
 				if (recentColorsIndex >= 0) {
-					text = Translations.GetString ("Color") +
-					$": #{palette.RecentlyUsedColors[recentColorsIndex].ToHex ()}\n\n" +
-					Translations.GetString ("Left click to set primary color. Right click to set secondary color.");
+					text = hex_tooltip (palette.RecentlyUsedColors[recentColorsIndex].ToHex (),
+					Translations.GetString ("Left click to set primary color. Right click to set secondary color."));
 				}
 				break;
 			case WidgetElement.PrimaryColor:
-				text = Translations.GetString ("Color") +
-				$": #{palette.PrimaryColor.ToHex ()}\n\n" +
-				Translations.GetString ("Click to select primary color.");
+				text = hex_tooltip (palette.PrimaryColor.ToHex (),
+				Translations.GetString ("Click to select primary color."));
 				break;
 			case WidgetElement.SecondaryColor:
-				text = Translations.GetString ("Color") +
-				$": #{palette.SecondaryColor.ToHex ()}\n\n" +
-				Translations.GetString ("Click to select secondary color.");
+				text = hex_tooltip (palette.SecondaryColor.ToHex (),
+				Translations.GetString ("Click to select secondary color."));
 				break;
 			case WidgetElement.SwapColors:
 				string label = Translations.GetString ("Click to switch between primary and secondary color.");
