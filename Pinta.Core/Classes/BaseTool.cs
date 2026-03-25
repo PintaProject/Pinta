@@ -337,7 +337,7 @@ public abstract class BaseTool
 
 	private Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
 
-	private ToolBarDropDownButton AlphaBlendingDropDown {
+	protected ToolBarDropDownButton AlphaBlendingDropDown {
 		get {
 			if (alphablending_button is null) {
 				alphablending_button = new ToolBarDropDownButton ();
