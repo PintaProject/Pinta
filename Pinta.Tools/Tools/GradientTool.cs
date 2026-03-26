@@ -37,6 +37,7 @@ namespace Pinta.Tools;
 public sealed class GradientTool : BaseTool
 {
 	private readonly IPaletteService palette;
+	private readonly IWorkspaceService workspace;
 
 	private ImageSurface? undo_surface;
 	private GradientData? undo_data;
@@ -51,7 +52,7 @@ public sealed class GradientTool : BaseTool
 	public GradientTool (IServiceProvider services) : base (services)
 	{
 		palette = services.GetService<IPaletteService> ();
-		IWorkspaceService workspace = services.GetService<IWorkspaceService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 
 		handle = new LineHandle (workspace);
 	}
@@ -78,6 +79,8 @@ public sealed class GradientTool : BaseTool
 		tb.Append (GtkExtensions.CreateToolBarSeparator ());
 		tb.Append (ModeLabel);
 		tb.Append (ColorModeDropDown);
+
+		AlphaBlendingDropDown.SelectedItemChanged += HandleGradientTypeChanged;
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -101,6 +104,12 @@ public sealed class GradientTool : BaseTool
 
 		is_newly_created = true;
 		drag_button = e.MouseButton;
+
+		palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
+		palette.SecondaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
+
+		palette.PrimaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
+		palette.SecondaryColorChanged += HandlePintaCorePalettePrimaryColorChanged;
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
@@ -144,6 +153,89 @@ public sealed class GradientTool : BaseTool
 		RectangleI handleDirtyRegion = handle.Drag (e.PointDouble);
 		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
 
+		RenderGradient ();
+	}
+
+	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
+	{
+		if (e.Key.Value == Gdk.Constants.KEY_Return) {
+			Finalize (document);
+		}
+		return base.OnKeyDown (document, e);
+	}
+
+	protected override void OnSaveSettings (ISettingsService settings)
+	{
+		base.OnSaveSettings (settings);
+
+		if (gradient_button is not null)
+			settings.PutSetting (SettingNames.GRADIENT_TYPE, gradient_button.SelectedIndex);
+		if (color_mode_button is not null)
+			settings.PutSetting (SettingNames.GRADIENT_COLOR_MODE, color_mode_button.SelectedIndex);
+	}
+
+	protected override void OnCommit (Document? document)
+	{
+		Finalize (document);
+		base.OnCommit (document);
+	}
+
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		Finalize (document);
+		base.OnDeactivated (document, newTool);
+	}
+
+	private void Finalize (Document? document)
+	{
+		if (!handle.Active) { return; }
+
+		if (document != null) {
+			undo_data = Data;
+			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
+			document.History.PushNewItem (
+				new GradientHistoryItem (
+					Icon,
+					Name + " " + Translations.GetString ("Finalized"),
+					undo_surface,
+					document.Layers.CurrentUserLayerIndex,
+					undo_data!.Value,
+					this),
+				PintaCore.Actions.Edit
+			);
+		}
+		handle.Active = false;
+
+		palette.PrimaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
+		palette.SecondaryColorChanged -= HandlePintaCorePalettePrimaryColorChanged;
+	}
+
+	private void UpdateCursorAndHandle (PointD canvasPoint, Document document)
+	{
+		Gdk.Cursor? cursor = handle.UpdateHoverHandle (canvasPoint, out RectangleI handleDirtyRegion);
+		SetCursor (cursor ?? DefaultCursor);
+		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
+	}
+
+	private GradientRenderer CreateGradientRenderer ()
+	{
+		var op = new UserBlendOps.NormalBlendOp ();
+		bool alpha_only = SelectedGradientColorMode == GradientColorMode.Transparency;
+
+		return SelectedGradientType switch {
+			GradientType.Linear => new GradientRenderers.LinearClamped (alpha_only, op),
+			GradientType.LinearReflected => new GradientRenderers.LinearReflected (alpha_only, op),
+			GradientType.Radial => new GradientRenderers.Radial (alpha_only, op),
+			GradientType.Diamond => new GradientRenderers.LinearDiamond (alpha_only, op),
+			GradientType.Conical => new GradientRenderers.Conical (alpha_only, op),
+			_ => throw new InvalidOperationException ("Unknown gradient type."),
+		};
+	}
+
+	private void RenderGradient ()
+	{
+		Document document = workspace.ActiveDocument;
+
 		var gr = CreateGradientRenderer ();
 
 		if (is_reversed) {
@@ -186,77 +278,6 @@ public sealed class GradientTool : BaseTool
 		document.Workspace.Invalidate (selection_bounds);
 	}
 
-	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
-	{
-		if (e.Key.Value == Gdk.Constants.KEY_Return) {
-			Finalize (document);
-		}
-		return base.OnKeyDown (document, e);
-	}
-
-	protected override void OnSaveSettings (ISettingsService settings)
-	{
-		base.OnSaveSettings (settings);
-
-		if (gradient_button is not null)
-			settings.PutSetting (SettingNames.GRADIENT_TYPE, gradient_button.SelectedIndex);
-		if (color_mode_button is not null)
-			settings.PutSetting (SettingNames.GRADIENT_COLOR_MODE, color_mode_button.SelectedIndex);
-	}
-
-	protected override void OnCommit (Document? document)
-	{
-		Finalize (document);
-		base.OnCommit (document);
-	}
-
-	protected override void OnDeactivated (Document? document, BaseTool? newTool)
-	{
-		Finalize (document);
-		base.OnDeactivated (document, newTool);
-	}
-
-	private void Finalize (Document? document)
-	{
-		if (document != null) {
-			undo_data = Data;
-			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
-			document.History.PushNewItem (
-				new GradientHistoryItem (
-					Icon,
-					Name + " " + Translations.GetString ("Finalized"),
-					undo_surface,
-					document.Layers.CurrentUserLayerIndex,
-					undo_data!.Value,
-					this),
-				PintaCore.Actions.Edit
-			);
-		}
-		handle.Active = false;
-	}
-
-	private void UpdateCursorAndHandle (PointD canvasPoint, Document document)
-	{
-		Gdk.Cursor? cursor = handle.UpdateHoverHandle (canvasPoint, out RectangleI handleDirtyRegion);
-		SetCursor (cursor ?? DefaultCursor);
-		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
-	}
-
-	private GradientRenderer CreateGradientRenderer ()
-	{
-		var op = new UserBlendOps.NormalBlendOp ();
-		bool alpha_only = SelectedGradientColorMode == GradientColorMode.Transparency;
-
-		return SelectedGradientType switch {
-			GradientType.Linear => new GradientRenderers.LinearClamped (alpha_only, op),
-			GradientType.LinearReflected => new GradientRenderers.LinearReflected (alpha_only, op),
-			GradientType.Radial => new GradientRenderers.Radial (alpha_only, op),
-			GradientType.Diamond => new GradientRenderers.LinearDiamond (alpha_only, op),
-			GradientType.Conical => new GradientRenderers.Conical (alpha_only, op),
-			_ => throw new InvalidOperationException ("Unknown gradient type."),
-		};
-	}
-
 	public GradientData Data {
 		get {
 			return new GradientData (
@@ -295,9 +316,24 @@ public sealed class GradientTool : BaseTool
 				gradient_button.AddItem (Translations.GetString ("Conical Gradient"), Pinta.Resources.Icons.GradientConical, GradientType.Conical);
 
 				gradient_button.SelectedIndex = Settings.GetSetting (SettingNames.GRADIENT_TYPE, 0);
+				gradient_button.SelectedItemChanged += HandleGradientTypeChanged;
 			}
 
 			return gradient_button;
+		}
+	}
+
+	void HandleGradientTypeChanged (object? sender, EventArgs e)
+	{
+		if (handle.Active) {
+			RenderGradient ();
+		}
+	}
+
+	void HandlePintaCorePalettePrimaryColorChanged (object? sender, EventArgs e)
+	{
+		if (handle.Active) {
+			RenderGradient ();
 		}
 	}
 
@@ -311,6 +347,7 @@ public sealed class GradientTool : BaseTool
 				color_mode_button.AddItem (Translations.GetString ("Transparency Mode"), Pinta.Resources.Icons.ColorModeTransparency, GradientColorMode.Transparency);
 
 				color_mode_button.SelectedIndex = Settings.GetSetting (SettingNames.GRADIENT_COLOR_MODE, 0);
+				color_mode_button.SelectedItemChanged += HandleGradientTypeChanged;
 			}
 
 			return color_mode_button;
