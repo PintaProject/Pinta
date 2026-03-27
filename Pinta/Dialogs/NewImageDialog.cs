@@ -160,11 +160,10 @@ public sealed class NewImageDialog : Gtk.Dialog
 		backgroundVbox.MarginTop = 4;
 
 		// Layout table for preset, width, and height
-		Gtk.Grid layoutGrid = new () {
-			RowSpacing = 5,
-			ColumnSpacing = 6,
-			MarginBottom = 3,
-		};
+		Gtk.Grid layoutGrid = Gtk.Grid.New ();
+		layoutGrid.RowSpacing = 5;
+		layoutGrid.ColumnSpacing = 6;
+		layoutGrid.MarginBottom = 3;
 		layoutGrid.Attach (sizeLabel, 0, 0, 1, 1);
 		layoutGrid.Attach (presetDropdown, 1, 0, 1, 1);
 		layoutGrid.Attach (widthLabel, 0, 1, 1, 1);
@@ -275,17 +274,21 @@ public sealed class NewImageDialog : Gtk.Dialog
 	}
 
 	private static Gtk.Image CreateOrientationIcon (string iconName)
-		=> new () {
-			IconName = iconName,
-			PixelSize = 16,
-			MarginEnd = 7,
-		};
+	{
+		Gtk.Image image = Gtk.Image.New ();
+		image.IconName = iconName;
+		image.PixelSize = 16;
+		image.MarginEnd = 7;
+		return image;
+	}
 
 	private static Gtk.Entry CreateLengthEntry ()
-		=> new () {
-			WidthRequest = 50,
-			ActivatesDefault = true,
-		};
+	{
+		Gtk.Entry entry = Gtk.Entry.New ();
+		entry.WidthRequest = 50;
+		entry.ActivatesDefault = true;
+		return entry;
+	}
 
 	private static Gtk.CheckButton CreatePortraitRadio ()
 		=> Gtk.CheckButton.NewWithLabel (Translations.GetString ("Portrait"));
