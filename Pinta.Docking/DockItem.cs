@@ -76,7 +76,7 @@ public sealed class DockItem : Gtk.Box
 		Gtk.Button minimizeButton = CreateMinimizeButton (locked);
 		Gtk.Button maximizeButton = CreateMaximizeButton (locked);
 
-		Gtk.Stack buttonStack = new ();
+		Gtk.Stack buttonStack = Gtk.Stack.New ();
 		buttonStack.AddChild (minimizeButton);
 		buttonStack.AddChild (maximizeButton);
 
@@ -141,11 +141,11 @@ public sealed class DockItem : Gtk.Box
 	private static Gtk.Label CreateLabelWidget (bool locked)
 	{
 		if (locked)
-			return new ();
+			return Gtk.Label.New (null);
 
 		const int padding = 8;
 
-		Gtk.Label result = new ();
+		Gtk.Label result = Gtk.Label.New (null);
 		result.MarginStart = result.MarginEnd = padding;
 		result.Hexpand = true;
 		result.Halign = Gtk.Align.Start;
