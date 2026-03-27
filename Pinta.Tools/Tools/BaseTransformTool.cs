@@ -148,19 +148,20 @@ public abstract class BaseTransformTool : BaseTool
 
 		double dx = 0.0;
 		double dy = 0.0;
+		double coeff = e.IsControlPressed ? 10.0 : 1.0;
 
 		switch (e.Key.Value) {
 			case Gdk.Constants.KEY_Left:
-				dx = -1;
+				dx = -coeff;
 				break;
 			case Gdk.Constants.KEY_Right:
-				dx = 1;
+				dx = coeff;
 				break;
 			case Gdk.Constants.KEY_Up:
-				dy = -1;
+				dy = -coeff;
 				break;
 			case Gdk.Constants.KEY_Down:
-				dy = 1;
+				dy = coeff;
 				break;
 			default:
 				// Otherwise, let the key be handled elsewhere.
