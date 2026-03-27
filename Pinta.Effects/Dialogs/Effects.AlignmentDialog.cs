@@ -35,16 +35,15 @@ public sealed class AlignmentDialog : Gtk.Dialog
 		Gtk.ToggleButton bottomCenterToggle = CreateIconButton (Translations.GetString ("Bottom Center"), Resources.Icons.ResizeCanvasDown, AlignPosition.BottomCenter);
 		Gtk.ToggleButton bottomRightToggle = CreateIconButton (Translations.GetString ("Bottom Right"), Resources.Icons.ResizeCanvasSE, AlignPosition.BottomRight);
 
-		Gtk.Grid grid = new () {
-			RowSpacing = spacing,
-			ColumnSpacing = spacing,
-			RowHomogeneous = true,
-			ColumnHomogeneous = true,
-			MarginStart = 12,
-			MarginEnd = 12,
-			MarginTop = 12,
-			MarginBottom = 12,
-		};
+		Gtk.Grid grid = Gtk.Grid.New ();
+		grid.RowSpacing = spacing;
+		grid.ColumnSpacing = spacing;
+		grid.RowHomogeneous = true;
+		grid.ColumnHomogeneous = true;
+		grid.MarginStart = 12;
+		grid.MarginEnd = 12;
+		grid.MarginTop = 12;
+		grid.MarginBottom = 12;
 		grid.Attach (topLeftToggle, 0, 0, 1, 1);
 		grid.Attach (topCenterToggle, 1, 0, 1, 1);
 		grid.Attach (topRightToggle, 2, 0, 1, 1);
@@ -96,7 +95,7 @@ public sealed class AlignmentDialog : Gtk.Dialog
 		string iconName,
 		AlignPosition position)
 	{
-		Gtk.ToggleButton button = new ();
+		Gtk.ToggleButton button = Gtk.ToggleButton.New ();
 
 		button.SetIconName (iconName);
 
