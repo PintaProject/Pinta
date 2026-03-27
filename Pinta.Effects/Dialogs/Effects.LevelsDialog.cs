@@ -105,13 +105,16 @@ public partial class LevelsDialog : Gtk.Dialog
 		BoxStyle horizontalSpaced = new (Gtk.Orientation.Horizontal, SPACING);
 		BoxStyle verticalSpaced = new (Gtk.Orientation.Vertical, SPACING);
 
-		Gtk.CheckButton checkRed = new () { Label = Translations.GetString ("Red"), Active = true };
+		Gtk.CheckButton checkRed = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Red"));
+		checkRed.Active = true;
 		checkRed.OnToggled += HandleCheckRedToggled;
 
-		Gtk.CheckButton checkGreen = new () { Label = Translations.GetString ("Green"), Active = true };
+		Gtk.CheckButton checkGreen = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Green"));
+		checkGreen.Active = true;
 		checkGreen.OnToggled += HandleCheckGreenToggled;
 
-		Gtk.CheckButton checkBlue = new () { Label = Translations.GetString ("Blue"), Active = true };
+		Gtk.CheckButton checkBlue = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Blue"));
+		checkBlue.Active = true;
 		checkBlue.OnToggled += HandleCheckBlueToggled;
 
 		Gtk.Box hboxChecks = GtkExtensions.Box (
