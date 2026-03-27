@@ -39,7 +39,7 @@ internal sealed class InstallDialog : Adw.Window
 
 	public InstallDialog (Gtk.Window parent, SetupService service)
 	{
-		Adw.WindowTitle windowTitle = new ();
+		Adw.WindowTitle windowTitle = Adw.WindowTitle.New ("", "");
 
 		BoxStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Horizontal,
@@ -52,34 +52,34 @@ internal sealed class InstallDialog : Adw.Window
 		Gtk.Label errorHeadingLabel = Gtk.Label.New (Translations.GetString ("The selected extension packages can't be installed because there are dependency conflicts."));
 		errorHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Label errorLabel = new ();
+		Gtk.Label errorLabel = Gtk.Label.New (null);
 		errorLabel.AddCssClass (AdwaitaStyles.Body);
 		errorLabel.AddCssClass (AdwaitaStyles.Error);
 
-		Gtk.Label warningHeadingLabel = new ();
+		Gtk.Label warningHeadingLabel = Gtk.Label.New (null);
 		warningHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Label warningLabel = new ();
+		Gtk.Label warningLabel = Gtk.Label.New (null);
 		warningLabel.AddCssClass (AdwaitaStyles.Body);
 		warningLabel.AddCssClass (AdwaitaStyles.Warning);
 
 		Gtk.Label installHeadingLabel = Gtk.Label.New (Translations.GetString ("The following packages will be installed:"));
 		installHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Label installLabel = new ();
+		Gtk.Label installLabel = Gtk.Label.New (null);
 		installLabel.AddCssClass (AdwaitaStyles.Body);
 
 		Gtk.Label uninstallHeadingLabel = Gtk.Label.New (Translations.GetString ("The following packages need to be uninstalled:"));
 		uninstallHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Label uninstallLabel = new ();
+		Gtk.Label uninstallLabel = Gtk.Label.New (null);
 		uninstallLabel.AddCssClass (AdwaitaStyles.Body);
 		uninstallLabel.AddCssClass (AdwaitaStyles.Warning);
 
 		Gtk.Label dependenciesHeadingLabel = Gtk.Label.New (Translations.GetString ("The following dependencies could not be resolved:"));
 		dependenciesHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Label dependenciesLabel = new ();
+		Gtk.Label dependenciesLabel = Gtk.Label.New (null);
 		dependenciesLabel.AddCssClass (AdwaitaStyles.Body);
 		dependenciesLabel.AddCssClass (AdwaitaStyles.Error);
 
@@ -138,10 +138,13 @@ internal sealed class InstallDialog : Adw.Window
 
 		// --- Initialization (Adw.Window)
 
+		Adw.HeaderBar headerBar = Adw.HeaderBar.New ();
+		headerBar.TitleWidget = windowTitle;
+
 		Content = GtkExtensions.Box (
 			spacedVertical,
 			[
-				new Adw.HeaderBar { TitleWidget = windowTitle },
+				headerBar,
 				progressBar,
 				buttons,
 			]);

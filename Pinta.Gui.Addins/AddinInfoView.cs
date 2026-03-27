@@ -38,21 +38,25 @@ internal sealed class AddinInfoView : Adw.Bin
 	{
 		// --- Control creation
 
-		Gtk.Label titleLabel = new () { Halign = Gtk.Align.Start };
+		Gtk.Label titleLabel = Gtk.Label.New (null);
+		titleLabel.Halign = Gtk.Align.Start;
 		titleLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Label versionLabel = new () { Halign = Gtk.Align.Start };
+		Gtk.Label versionLabel = Gtk.Label.New (null);
+		versionLabel.Halign = Gtk.Align.Start;
 		versionLabel.AddCssClass (AdwaitaStyles.Heading);
 
-		Gtk.Label sizeLabel = new () { Halign = Gtk.Align.Start };
+		Gtk.Label sizeLabel = Gtk.Label.New (null);
+		sizeLabel.Halign = Gtk.Align.Start;
 		sizeLabel.AddCssClass (AdwaitaStyles.Heading);
 
-		Gtk.Label repoLabel = new () { Halign = Gtk.Align.Start };
+		Gtk.Label repoLabel = Gtk.Label.New (null);
+		repoLabel.Halign = Gtk.Align.Start;
 		repoLabel.AddCssClass (AdwaitaStyles.Heading);
 
 		Gtk.Label descriptionLabel = CreateDescriptionLabel ();
 
-		Adw.Bin emptyPage = new ();
+		Adw.Bin emptyPage = Adw.Bin.New ();
 
 		Gtk.Button infoButton = CreateInfoButton ();
 		Gtk.Button installButton = CreateInstallButton ();
@@ -132,7 +136,8 @@ internal sealed class AddinInfoView : Adw.Bin
 
 	private Gtk.Switch CreateEnableSwitch ()
 	{
-		Gtk.Switch result = new () { Visible = false };
+		Gtk.Switch result = Gtk.Switch.New ();
+		result.Visible = false;
 		result.OnStateSet += (_, _) => {
 			HandleEnableSwitched ();
 			return false;
@@ -142,14 +147,13 @@ internal sealed class AddinInfoView : Adw.Bin
 
 	private static Gtk.Label CreateDescriptionLabel ()
 	{
-		Gtk.Label result = new () {
-			Halign = Gtk.Align.Start,
-			Hexpand = true,
-			Valign = Gtk.Align.Start,
-			Vexpand = true,
-			Xalign = 0,
-			Wrap = true,
-		};
+		Gtk.Label result = Gtk.Label.New (null);
+		result.Halign = Gtk.Align.Start;
+		result.Hexpand = true;
+		result.Valign = Gtk.Align.Start;
+		result.Vexpand = true;
+		result.Xalign = 0;
+		result.Wrap = true;
 		result.AddCssClass (AdwaitaStyles.Body);
 		return result;
 	}
