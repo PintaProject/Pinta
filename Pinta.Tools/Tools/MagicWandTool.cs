@@ -46,7 +46,7 @@ public sealed class MagicWandTool : FloodTool
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
 	public override string Name => Translations.GetString ("Magic Wand Select");
 	public override string Icon => Pinta.Resources.Icons.ToolSelectMagicWand;
-	public override string StatusBarText =>	Translations.GetString (
+	public override string StatusBarText => Translations.GetString (
 		"Click to select region of similar color." +
 		"\nHold shift to use Global mode."
 	);
