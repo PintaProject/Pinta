@@ -14,6 +14,7 @@ Thanks to the following contributors who worked on this release:
 - @njm25
 - @levanel
 - @Aryezz
+- @IArnaut2
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -27,6 +28,7 @@ Thanks to the following contributors who worked on this release:
 - The axonometric canvas grid now supports configuring the angle (#1438, #2028)
 - Added support for importing `.ppm` files (#2031)
 - The flood tools now support holding the Shift key to switch to Global mode (#2075)
+- The transform tools now support holding the Ctrl key to translate the selection by larger increments when using the arrow keys (#2072, #1559)
 
 ### Changed
 - Effect dialogs now hide options that are not currently relevant (#1960)
