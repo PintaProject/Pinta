@@ -91,17 +91,15 @@ internal sealed class AddinListViewItemWidget : Gtk.Box
 
 	public AddinListViewItemWidget ()
 	{
-		Gtk.Label nameLabel = new () {
-			Halign = Gtk.Align.Start,
-			Hexpand = true,
-			Ellipsize = Pango.EllipsizeMode.End,
-		};
+		Gtk.Label nameLabel = Gtk.Label.New (null);
+		nameLabel.Halign = Gtk.Align.Start;
+		nameLabel.Hexpand = true;
+		nameLabel.Ellipsize = Pango.EllipsizeMode.End;
 
-		Gtk.Label descriptionLabel = new () {
-			Halign = Gtk.Align.Start,
-			Hexpand = true,
-			Ellipsize = Pango.EllipsizeMode.End,
-		};
+		Gtk.Label descriptionLabel = Gtk.Label.New (null);
+		descriptionLabel.Halign = Gtk.Align.Start;
+		descriptionLabel.Hexpand = true;
+		descriptionLabel.Ellipsize = Pango.EllipsizeMode.End;
 		descriptionLabel.AddCssClass (AdwaitaStyles.Body);
 		descriptionLabel.AddCssClass (AdwaitaStyles.DimLabel);
 

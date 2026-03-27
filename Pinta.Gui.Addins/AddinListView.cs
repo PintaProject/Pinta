@@ -50,10 +50,9 @@ internal sealed class AddinListView : Adw.Bin
 		listViewScroll.SetSizeRequest (300, 400);
 		listViewScroll.SetPolicy (Gtk.PolicyType.Automatic, Gtk.PolicyType.Automatic);
 
-		Adw.StatusPage emptyListPage = new () {
-			IconName = StandardIcons.SystemSearch,
-			Title = Translations.GetString ("No Items Found"),
-		};
+		Adw.StatusPage emptyListPage = Adw.StatusPage.New ();
+		emptyListPage.IconName = StandardIcons.SystemSearch;
+		emptyListPage.Title = Translations.GetString ("No Items Found");
 		emptyListPage.AddCssClass (AdwaitaStyles.Compact);
 
 		Adw.ViewStack listViewStack = Adw.ViewStack.New ();
