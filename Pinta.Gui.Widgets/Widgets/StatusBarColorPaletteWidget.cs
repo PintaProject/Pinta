@@ -309,13 +309,13 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		string? text = null;
 		PointD point = new (args.X, args.Y);
 
-		Func<string, string, string> hex_tooltip = (hex, tooltip) => Translations.GetString ("Color") + $": #{hex}\n\n" + tooltip;
+		Func<Color, string, string> BuildColorTooltip = (color, tooltip) => Translations.GetString ("Color") + $": #{color.ToHex ()}\n\n" + tooltip;
 
 		switch (GetElementAtPoint (point)) {
 			case WidgetElement.Palette:
 				int paletteIndex = PaletteWidget.GetSwatchAtLocation (palette, point, palette_rect);
 				if (paletteIndex >= 0) {
-					text = hex_tooltip (palette.CurrentPalette.Colors[paletteIndex].ToHex (),
+					text = BuildColorTooltip (palette.CurrentPalette.Colors[paletteIndex],
 					// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 					Translations.GetString ("Left click to set primary color. Right click to set secondary color. Middle click or press {0} and left click to choose palette color.",
 						system.CtrlLabel ()));
@@ -324,16 +324,16 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			case WidgetElement.RecentColorsPalette:
 				int recentColorsIndex = PaletteWidget.GetSwatchAtLocation (palette, point, recent_palette_rect, true);
 				if (recentColorsIndex >= 0) {
-					text = hex_tooltip (palette.RecentlyUsedColors[recentColorsIndex].ToHex (),
+					text = BuildColorTooltip (palette.RecentlyUsedColors[recentColorsIndex],
 					Translations.GetString ("Left click to set primary color. Right click to set secondary color."));
 				}
 				break;
 			case WidgetElement.PrimaryColor:
-				text = hex_tooltip (palette.PrimaryColor.ToHex (),
+				text = BuildColorTooltip (palette.PrimaryColor,
 				Translations.GetString ("Click to select primary color."));
 				break;
 			case WidgetElement.SecondaryColor:
-				text = hex_tooltip (palette.SecondaryColor.ToHex (),
+				text = BuildColorTooltip (palette.SecondaryColor,
 				Translations.GetString ("Click to select secondary color."));
 				break;
 			case WidgetElement.SwapColors:
