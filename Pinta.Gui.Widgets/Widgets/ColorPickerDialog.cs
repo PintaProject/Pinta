@@ -193,28 +193,27 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 	{
 		bool showWatches = !livePalette;
 
-		Gtk.Button resetButton = new () {
-			Label = Translations.GetString ("Reset"),
-			FocusOnClick = false
-		};
+		Gtk.Button resetButton = Gtk.Button.NewWithLabel (Translations.GetString ("Reset"));
+		resetButton.FocusOnClick = false;
 		resetButton.OnClicked += OnResetButtonClicked;
 
-		Gtk.Button shrinkButton = new () { FocusOnClick = false };
+		Gtk.Button shrinkButton = Gtk.Button.New ();
+		shrinkButton.FocusOnClick = false;
 		shrinkButton.OnClicked += OnShrinkButtonClicked;
 		shrinkButton.SetIconName (
 			DEFAULT_SMALL_MODE
 			? Resources.StandardIcons.WindowMaximize
 			: Resources.StandardIcons.WindowMinimize);
 
-		Gtk.Button okButton = new () { Label = Translations.GetString ("OK") };
+		Gtk.Button okButton = Gtk.Button.NewWithLabel (Translations.GetString ("OK"));
 		okButton.ReceivesDefault = true;
 		okButton.OnClicked += OnOkButtonClicked;
 		okButton.AddCssClass (AdwaitaStyles.SuggestedAction);
 
-		Gtk.Button cancelButton = new () { Label = Translations.GetString ("Cancel") };
+		Gtk.Button cancelButton = Gtk.Button.NewWithLabel (Translations.GetString ("Cancel"));
 		cancelButton.OnClicked += OnCancelButtonClicked;
 
-		Gtk.HeaderBar titleBar = new ();
+		Gtk.HeaderBar titleBar = Gtk.HeaderBar.New ();
 		titleBar.PackStart (resetButton);
 		titleBar.PackStart (shrinkButton);
 		titleBar.PackEnd (okButton);
@@ -226,7 +225,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		ImmutableArray<Gtk.DrawingArea> colorDisplays = CreateColorDisplays (adjustable);
 
-		Gtk.ListBox colorDisplayList = new ();
+		Gtk.ListBox colorDisplayList = Gtk.ListBox.New ();
 		foreach (var colorDisplay in colorDisplays)
 			colorDisplayList.Append (colorDisplay);
 		// Set initial selected row
@@ -240,16 +239,13 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			UpdateView ();
 		});
 
-		Gtk.Box colorDisplayBox = new () { Spacing = spacing };
-		colorDisplayBox.SetOrientation (Gtk.Orientation.Vertical);
+		Gtk.Box colorDisplayBox = Gtk.Box.New (Gtk.Orientation.Vertical, spacing);
 		if (adjustable is PaletteColors paletteColors) {
 			string label = Translations.GetString ("Click to switch between primary and secondary color.");
 			string shortcutLabel = Translations.GetString ("Shortcut key");
-			Gtk.Button colorDisplaySwap = new () {
-				TooltipText = $"{label} {shortcutLabel}: {"X"}",
-				FocusOnClick = false
-			};
-			colorDisplaySwap.SetIconName (Resources.StandardIcons.EditSwap);
+			Gtk.Button colorDisplaySwap = Gtk.Button.NewFromIconName (Resources.StandardIcons.EditSwap);
+			colorDisplaySwap.TooltipText = $"{label} {shortcutLabel}: {"X"}";
+			colorDisplaySwap.FocusOnClick = false;
 			colorDisplaySwap.OnClicked += (sender, args) => CycleColors ();
 			colorDisplayBox.Append (colorDisplaySwap);
 		}
@@ -265,12 +261,10 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		// Show Value toggle for hue sat picker surface
 
-		Gtk.CheckButton pickerSurfaceOptionDrawValue = new () {
-			Active = true,
-			Label = Translations.GetString ("Show Value"),
-			TooltipText = Translations.GetString ("If enabled, the Value component is applied to the color wheel."),
-			FocusOnClick = false
-		};
+		Gtk.CheckButton pickerSurfaceOptionDrawValue = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Show Value"));
+		pickerSurfaceOptionDrawValue.Active = true;
+		pickerSurfaceOptionDrawValue.TooltipText = Translations.GetString ("If enabled, the Value component is applied to the color wheel.");
+		pickerSurfaceOptionDrawValue.FocusOnClick = false;
 		pickerSurfaceOptionDrawValue.SetVisible (DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.HueAndSat);
 		pickerSurfaceOptionDrawValue.OnToggled += (o, e) => UpdateView ();
 
@@ -294,21 +288,19 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		};
 		pickerSurfaceHueSat.SetGroup (pickerSurfaceSatVal);
 
-		Gtk.Box pickerSurfaceSelectorBox = new Gtk.Box {
-			Spacing = spacing,
-			WidthRequest = pickerSurfaceDrawSize,
-			Homogeneous = true,
-			Halign = Gtk.Align.Center,
-		};
+		Gtk.Box pickerSurfaceSelectorBox = Gtk.Box.New (Gtk.Orientation.Horizontal, spacing);
+		pickerSurfaceSelectorBox.WidthRequest = pickerSurfaceDrawSize;
+		pickerSurfaceSelectorBox.Homogeneous = true;
+		pickerSurfaceSelectorBox.Halign = Gtk.Align.Center;
 		pickerSurfaceSelectorBox.Append (pickerSurfaceHueSat);
 		pickerSurfaceSelectorBox.Append (pickerSurfaceSatVal);
 
-		Gtk.DrawingArea pickerSurface = new ();
+		Gtk.DrawingArea pickerSurface = Gtk.DrawingArea.New ();
 		pickerSurface.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
 		pickerSurface.SetDrawFunc ((area, context, width, height) => DrawColorSurface (context));
 
 		// Cursor handles the square in the picker surface displaying where your selected color is
-		Gtk.DrawingArea pickerSurfaceCursor = new ();
+		Gtk.DrawingArea pickerSurfaceCursor = Gtk.DrawingArea.New ();
 		pickerSurfaceCursor.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
 		pickerSurfaceCursor.SetDrawFunc ((area, context, width, height) => {
 
@@ -333,16 +325,13 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		});
 
 		// Overlays the cursor on top of the surface
-		Gtk.Overlay pickerSurfaceOverlay = new ();
+		Gtk.Overlay pickerSurfaceOverlay = Gtk.Overlay.New ();
 		pickerSurfaceOverlay.AddOverlay (pickerSurface);
 		pickerSurfaceOverlay.AddOverlay (pickerSurfaceCursor);
 		pickerSurfaceOverlay.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
 
-		Gtk.Box pickerSurfaceBox = new () {
-			Spacing = spacing,
-			WidthRequest = pickerSurfaceDrawSize,
-		};
-		pickerSurfaceBox.SetOrientation (Gtk.Orientation.Vertical);
+		Gtk.Box pickerSurfaceBox = Gtk.Box.New (Gtk.Orientation.Vertical, spacing);
+		pickerSurfaceBox.WidthRequest = pickerSurfaceDrawSize;
 		pickerSurfaceBox.Append (pickerSurfaceSelectorBox);
 		pickerSurfaceBox.Append (pickerSurfaceOverlay);
 		pickerSurfaceBox.Append (pickerSurfaceOptionDrawValue);
@@ -353,18 +342,15 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		Color initialColor = ExtractTargetedColor (adjustable, primarySelected);
 
-		Gtk.Entry hexEntry = new () {
-			Text_ = initialColor.ToHex (),
-			MaxWidthChars = 10,
-		};
+		Gtk.Entry hexEntry = Gtk.Entry.New ();
+		hexEntry.Text_ = initialColor.ToHex ();
+		hexEntry.MaxWidthChars = 10;
 		hexEntry.OnChanged += HexEntry_OnChanged;
 
-		Gtk.Label hexLabel = new () {
-			Label_ = Translations.GetString ("Hex"),
-			WidthRequest = 50,
-		};
+		Gtk.Label hexLabel = Gtk.Label.New (Translations.GetString ("Hex"));
+		hexLabel.WidthRequest = 50;
 
-		Gtk.Box hexBox = new () { Spacing = spacing };
+		Gtk.Box hexBox = Gtk.Box.New (Gtk.Orientation.Horizontal, spacing);
 		hexBox.Append (hexLabel);
 		hexBox.Append (hexEntry);
 
@@ -438,36 +424,32 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 			UpdateView ();
 		};
 
-		Gtk.Box slidersBox = new () { Spacing = spacing };
-		slidersBox.SetOrientation (Gtk.Orientation.Vertical);
+		Gtk.Box slidersBox = Gtk.Box.New (Gtk.Orientation.Vertical, spacing);
 		slidersBox.Append (hexBox);
 		slidersBox.Append (hueSlider);
 		slidersBox.Append (saturationSlider);
 		slidersBox.Append (valueSlider);
-		slidersBox.Append (new Gtk.Separator ());
+		slidersBox.Append (Gtk.Separator.New (Gtk.Orientation.Horizontal));
 		slidersBox.Append (redSlider);
 		slidersBox.Append (greenSlider);
 		slidersBox.Append (blueSlider);
-		slidersBox.Append (new Gtk.Separator ());
+		slidersBox.Append (Gtk.Separator.New (Gtk.Orientation.Horizontal));
 		slidersBox.Append (alphaSlider);
 
 		// 90% taken from SatusBarColorPaletteWidget
 		// todo: merge both
 
-		Gtk.DrawingArea swatchRecent = new () {
-			WidthRequest = 500,
-			HeightRequest = PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS,
-		};
+		Gtk.DrawingArea swatchRecent = Gtk.DrawingArea.New ();
+		swatchRecent.WidthRequest = 500;
+		swatchRecent.HeightRequest = PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS;
 		swatchRecent.SetDrawFunc (SwatchRecentDraw);
 
-		Gtk.DrawingArea swatchPalette = new () {
-			WidthRequest = 500,
-			HeightRequest = PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS,
-		};
+		Gtk.DrawingArea swatchPalette = Gtk.DrawingArea.New ();
+		swatchPalette.WidthRequest = 500;
+		swatchPalette.HeightRequest = PaletteWidget.SWATCH_SIZE * PaletteWidget.PALETTE_ROWS;
 		swatchPalette.SetDrawFunc (SwatchPaletteDraw);
 
-		Gtk.Box swatchBox = new () { Spacing = spacing };
-		swatchBox.SetOrientation (Gtk.Orientation.Vertical);
+		Gtk.Box swatchBox = Gtk.Box.New (Gtk.Orientation.Vertical, spacing);
 		swatchBox.Append (swatchRecent);
 		swatchBox.Append (swatchPalette);
 		swatchBox.SetVisible (showWatches);
@@ -484,13 +466,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// Top part of the color picker.
 		// Includes palette, color surface, sliders/hex
 		// Basically, the not-swatches
-		Gtk.Box topBox = new () { Spacing = spacing };
+		Gtk.Box topBox = Gtk.Box.New (Gtk.Orientation.Horizontal, spacing);
 		topBox.Append (colorDisplayBox);
 		topBox.Append (pickerSurfaceBox);
 		topBox.Append (slidersBox);
 
-		Gtk.Box mainVbox = new () { Spacing = spacing };
-		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
+		Gtk.Box mainVbox = Gtk.Box.New (Gtk.Orientation.Vertical, spacing);
 		mainVbox.Append (topBox);
 		if (!DEFAULT_SMALL_MODE)
 			mainVbox.Append (swatchBox);
@@ -573,7 +554,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			case SingleColor singleColors:
 
-				Gtk.DrawingArea singleColorDisplay = new ();
+				Gtk.DrawingArea singleColorDisplay = Gtk.DrawingArea.New ();
 				singleColorDisplay.SetSizeRequest (palette_display_size, palette_display_size);
 				singleColorDisplay.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, ((SingleColor) Colors).Color));
 
@@ -581,12 +562,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 			case PaletteColors paletteColors:
 
-				Gtk.DrawingArea primaryColorDisplay = new ();
+				Gtk.DrawingArea primaryColorDisplay = Gtk.DrawingArea.New ();
 				primaryColorDisplay.SetSizeRequest (palette_display_size, palette_display_size);
 				primaryColorDisplay.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, ((PaletteColors) Colors).Primary));
 				primaryColorDisplay.SetTooltipText (Translations.GetString ("Click to select primary color."));
 
-				Gtk.DrawingArea secondaryColorDisplay = new ();
+				Gtk.DrawingArea secondaryColorDisplay = Gtk.DrawingArea.New ();
 				secondaryColorDisplay.SetSizeRequest (palette_display_size, palette_display_size);
 				secondaryColorDisplay.SetDrawFunc ((area, context, width, height) => DrawPaletteDisplay (context, ((PaletteColors) Colors).Secondary));
 				secondaryColorDisplay.SetTooltipText (Translations.GetString ("Click to select secondary color."));
