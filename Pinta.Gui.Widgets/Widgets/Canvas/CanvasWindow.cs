@@ -81,7 +81,7 @@ public sealed class CanvasWindow : Gtk.Grid
 			Name = "canvas",
 		};
 
-		Gtk.Viewport viewPort = new ();
+		Gtk.Viewport viewPort = Gtk.Viewport.New (null, null);
 		viewPort.AddController (scrollController);
 		viewPort.Child = canvas;
 
@@ -94,11 +94,10 @@ public sealed class CanvasWindow : Gtk.Grid
 		dragController.OnDragUpdate += OnDragUpdate;
 		dragController.OnDragEnd += OnDragEnd;
 
-		Gtk.ScrolledWindow scrolledWindow = new () {
-			Hexpand = true,
-			Vexpand = true,
-			Child = viewPort,
-		};
+		Gtk.ScrolledWindow scrolledWindow = Gtk.ScrolledWindow.New ();
+		scrolledWindow.Hexpand = true;
+		scrolledWindow.Vexpand = true;
+		scrolledWindow.Child = viewPort;
 
 		Ruler horizontalRuler = new (Gtk.Orientation.Horizontal) {
 			Metric = MetricType.Pixels,

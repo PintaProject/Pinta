@@ -513,7 +513,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberSettings settings,
 		IWorkspaceService workspace)
 	{
-		Gtk.CheckButton widget = new () { Label = caption };
+		Gtk.CheckButton widget = Gtk.CheckButton.NewWithLabel (caption);
 
 		if (settings.reflector.GetValue (effectData) is bool b)
 			widget.Active = b;
@@ -620,7 +620,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		Random random = new ();
 
-		Gtk.Label sectionLabel = new ();
+		Gtk.Label sectionLabel = Gtk.Label.New (null);
 		sectionLabel.AddCssClass (AdwaitaStyles.Title4);
 		sectionLabel.Hexpand = false;
 		sectionLabel.Halign = Gtk.Align.Start;
@@ -636,23 +636,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			});
 		};
 
-		Gtk.Button reseedButton = new () {
-			WidthRequest = 88,
-			CanFocus = true,
-			UseUnderline = true,
-			Label = Translations.GetString ("Reseed"),
-			Hexpand = false,
-			Halign = Gtk.Align.Start,
-		};
+		Gtk.Button reseedButton = Gtk.Button.NewWithLabel (Translations.GetString ("Reseed"));
+		reseedButton.WidthRequest = 88;
+		reseedButton.CanFocus = true;
+		reseedButton.UseUnderline = true;
+		reseedButton.Hexpand = false;
+		reseedButton.Halign = Gtk.Align.Start;
 
 		reseedButton.OnClicked += (_, _) => seedInput.Value = random.Next (minSeed, maxSeed);
 
-		Gtk.Box controlsBox = new () { Spacing = 6 };
-		controlsBox.SetOrientation (Gtk.Orientation.Horizontal);
+		Gtk.Box controlsBox = Gtk.Box.New (Gtk.Orientation.Horizontal, spacing: 6);
 		controlsBox.Append (reseedButton);
 		controlsBox.Append (seedInput);
 
-		Gtk.Box combinedWidget = Gtk.Box.New (Gtk.Orientation.Vertical, 6);
+		Gtk.Box combinedWidget = Gtk.Box.New (Gtk.Orientation.Vertical, spacing: 6);
 		combinedWidget.Append (sectionLabel);
 		combinedWidget.Append (controlsBox);
 

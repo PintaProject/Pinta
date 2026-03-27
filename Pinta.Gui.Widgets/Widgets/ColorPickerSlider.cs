@@ -32,20 +32,19 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 	public ColorPickerSlider (Component component, Color initialColor, int initialWidth)
 	{
-		Gtk.DrawingArea gradientSlider = new ();
+		Gtk.DrawingArea gradientSlider = Gtk.DrawingArea.New ();
 		gradientSlider.SetSizeRequest (initialWidth, this.GetHeight ());
 		gradientSlider.SetDrawFunc ((_, context, width, height) => {
 			DrawGradient (context, width, height, CreateGradient (color, component));
 		});
 
-		Gtk.Label sliderLabel = new () { WidthRequest = 50 };
-		sliderLabel.SetLabel (GetLabelText (component));
+		Gtk.Label sliderLabel = Gtk.Label.New (GetLabelText (component));
+		sliderLabel.WidthRequest = 50;
 
-		Gtk.Entry inputField = new () {
-			MaxWidthChars = 3,
-			WidthRequest = 50,
-			Hexpand = false,
-		};
+		Gtk.Entry inputField = Gtk.Entry.New ();
+		inputField.MaxWidthChars = 3;
+		inputField.WidthRequest = 50;
+		inputField.Hexpand = false;
 		inputField.SetText (Convert.ToInt32 (ExtractValue (initialColor, component)).ToString ());
 		inputField.OnChanged += OnInputFieldChanged;
 
