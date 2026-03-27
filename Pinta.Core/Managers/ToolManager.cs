@@ -372,19 +372,25 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 	private Gtk.ScrolledWindow? tool_widgets_scroll;
 
 	private Gtk.Label ToolLabel => tool_label ??= Gtk.Label.New (string.Format (" {0}:  ", Translations.GetString ("Tool")));
-	private Gtk.Image ToolImage => tool_image ??= new Gtk.Image ();
+	private Gtk.Image ToolImage => tool_image ??= Gtk.Image.New ();
 	private Gtk.Separator ToolSeparator => tool_sep ??= GtkExtensions.CreateToolBarSeparator ();
 	private Gtk.Box ToolWidgetsBox => tool_widgets_box ??= Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
 	// Scroll the toolbar contents if they are very long (e.g. the line/curve tool).
-	private Gtk.ScrolledWindow ToolWidgetsScroll
-		=> tool_widgets_scroll ??= new Gtk.ScrolledWindow () {
-			Child = ToolWidgetsBox,
-			HscrollbarPolicy = Gtk.PolicyType.Automatic,
-			VscrollbarPolicy = Gtk.PolicyType.Never,
-			HasFrame = false,
-			OverlayScrolling = true,
-			WindowPlacement = Gtk.CornerType.BottomRight,
-			Hexpand = true,
-			Halign = Gtk.Align.Fill,
-		};
+	private Gtk.ScrolledWindow ToolWidgetsScroll {
+		get {
+			if (tool_widgets_scroll == null) {
+				tool_widgets_scroll = Gtk.ScrolledWindow.New ();
+				tool_widgets_scroll.Child = ToolWidgetsBox;
+				tool_widgets_scroll.HscrollbarPolicy = Gtk.PolicyType.Automatic;
+				tool_widgets_scroll.VscrollbarPolicy = Gtk.PolicyType.Never;
+				tool_widgets_scroll.HasFrame = false;
+				tool_widgets_scroll.OverlayScrolling = true;
+				tool_widgets_scroll.WindowPlacement = Gtk.CornerType.BottomRight;
+				tool_widgets_scroll.Hexpand = true;
+				tool_widgets_scroll.Halign = Gtk.Align.Fill;
+			}
+
+			return tool_widgets_scroll;
+		}
+	}
 }
