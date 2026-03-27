@@ -1,21 +1,21 @@
-// 
+//
 // ResizeImageDialog.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -71,12 +71,10 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		Gtk.CheckButton aspectCheckbox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
 		aspectCheckbox.Active = settings.GetSetting (SettingNames.RESIZE_IMAGE_MAINTAIN_ASPECT, true);
 
-		Gtk.Button resetButton = new () {
-			IconName = Resources.StandardIcons.EditUndo,
-			WidthRequest = 24,
-			HeightRequest = 24,
-			TooltipText = Translations.GetString ("Reset to image size"),
-		};
+		Gtk.Button resetButton = Gtk.Button.NewFromIconName (Resources.StandardIcons.EditUndo);
+		resetButton.WidthRequest = 24;
+		resetButton.HeightRequest = 24;
+		resetButton.TooltipText = Translations.GetString ("Reset to image size");
 		resetButton.OnClicked += OnResetButtonClicked;
 
 		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
@@ -126,11 +124,10 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		Gtk.Label heightLabel = Gtk.Label.New (Translations.GetString ("Height:"));
 		heightLabel.Halign = Gtk.Align.End;
 
-		Gtk.Grid grid = new () {
-			RowSpacing = SPACING,
-			ColumnSpacing = SPACING,
-			ColumnHomogeneous = false,
-		};
+		Gtk.Grid grid = Gtk.Grid.New ();
+		grid.RowSpacing = SPACING;
+		grid.ColumnSpacing = SPACING;
+		grid.ColumnHomogeneous = false;
 		grid.Attach (widthLabel, 0, 0, 1, 1);
 		grid.Attach (widthSpinner, 1, 0, 1, 1);
 		grid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
@@ -211,10 +208,9 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 
 	private static Gtk.ComboBoxText CreateResamplingCombobox ()
 	{
-		Gtk.ComboBoxText result = new () {
-			Hexpand = true,
-			Halign = Gtk.Align.Fill,
-		};
+		Gtk.ComboBoxText result = Gtk.ComboBoxText.New ();
+		result.Hexpand = true;
+		result.Halign = Gtk.Align.Fill;
 
 		foreach (ResamplingMode mode in Enum.GetValues (typeof (ResamplingMode)))
 			result.AppendText (mode.GetLabel ());

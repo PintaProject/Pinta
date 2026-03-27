@@ -67,10 +67,9 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		Gtk.Label nameLabel = Gtk.Label.New (Translations.GetString ("Name:"));
 		nameLabel.Halign = Gtk.Align.End;
 
-		Gtk.Entry layerNameEntry = new () {
-			Hexpand = true,
-			Halign = Gtk.Align.Fill,
-		};
+		Gtk.Entry layerNameEntry = Gtk.Entry.New ();
+		layerNameEntry.Hexpand = true;
+		layerNameEntry.Halign = Gtk.Align.Fill;
 		layerNameEntry.SetText (initialProperties.Name);
 		layerNameEntry.OnChanged += OnLayerNameChanged;
 		layerNameEntry.SetActivatesDefault (true);
@@ -85,7 +84,7 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		var allBlendmodes = UserBlendOps.GetAllBlendModeNames ().ToImmutableArray ();
 		var index = allBlendmodes.IndexOf (UserBlendOps.GetBlendModeName (currentLayerBlendMode));
 
-		Gtk.ComboBoxText blendComboBox = new ();
+		Gtk.ComboBoxText blendComboBox = Gtk.ComboBoxText.New ();
 
 		foreach (string name in UserBlendOps.GetAllBlendModeNames ())
 			blendComboBox.AppendText (name);
@@ -113,16 +112,14 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		opacitySlider.SetValue (Math.Round (initialProperties.Opacity * 100));
 		opacitySlider.OnValueChanged += OnOpacitySliderChanged;
 
-		Gtk.Box opacityBox = new () { Spacing = spacing };
-		opacityBox.SetOrientation (Gtk.Orientation.Horizontal);
+		Gtk.Box opacityBox = Gtk.Box.New (Gtk.Orientation.Horizontal, spacing);
 		opacityBox.Append (opacitySpinner);
 		opacityBox.Append (opacitySlider);
 
-		Gtk.Grid grid = new () {
-			RowSpacing = spacing,
-			ColumnSpacing = spacing,
-			ColumnHomogeneous = false,
-		};
+		Gtk.Grid grid = Gtk.Grid.New ();
+		grid.RowSpacing = spacing;
+		grid.ColumnSpacing = spacing;
+		grid.ColumnHomogeneous = false;
 		grid.Attach (nameLabel, 0, 0, 1, 1);
 		grid.Attach (layerNameEntry, 1, 0, 1, 1);
 		grid.Attach (visibilityCheckbox, 1, 1, 1, 1);

@@ -504,14 +504,14 @@ internal sealed class MainWindow
 	{
 		ToolBoxWidget toolbox = new (PintaCore.Tools);
 
-		Gtk.ScrolledWindow toolbox_scroll = new () {
-			Child = toolbox,
-			HscrollbarPolicy = Gtk.PolicyType.Never,
-			VscrollbarPolicy = Gtk.PolicyType.Never,
-			HasFrame = false,
-			OverlayScrolling = true,
-			WindowPlacement = Gtk.CornerType.BottomRight,
-		};
+		Gtk.ScrolledWindow toolbox_scroll = Gtk.ScrolledWindow.New ();
+		toolbox_scroll.Child = toolbox;
+		toolbox_scroll.HscrollbarPolicy = Gtk.PolicyType.Never;
+		toolbox_scroll.VscrollbarPolicy = Gtk.PolicyType.Never;
+		toolbox_scroll.HasFrame = false;
+		toolbox_scroll.OverlayScrolling = true;
+		toolbox_scroll.WindowPlacement = Gtk.CornerType.BottomRight;
+
 		container.Append (toolbox_scroll);
 		PintaCore.Chrome.InitializeToolBox (toolbox);
 
