@@ -46,7 +46,7 @@ public sealed class ToolBarComboBox : Gtk.Box
 		Gtk.ComboBoxText comboBox =
 			allowEntry
 			? Gtk.ComboBoxText.NewWithEntry ()
-			: new ();
+			: Gtk.ComboBoxText.New ();
 
 		comboBox.CanFocus = allowEntry;
 

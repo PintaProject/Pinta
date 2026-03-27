@@ -66,13 +66,9 @@ partial class GtkExtensions
 		BoxStyle style,
 		ReadOnlySpan<Gtk.Widget> children) // TODO: Add 'params' keyword when updated to C#13
 	{
-		Gtk.Box stack = new ();
-
-		// --- Mandatory
-		stack.SetOrientation (style.Orientation);
+		Gtk.Box stack = Gtk.Box.New (style.Orientation, style.Spacing ?? 0);
 
 		// --- Optional
-		if (style.Spacing.HasValue) stack.Spacing = style.Spacing.Value;
 		if (style.CssClass is not null) stack.AddCssClass (style.CssClass);
 
 		stack.AppendMultiple (children);
@@ -93,8 +89,7 @@ partial class GtkExtensions
 	/// </summary>
 	public static Gtk.Box CreateToolBar ()
 	{
-		Gtk.Box toolbar = new () { Spacing = 0 };
-		toolbar.SetOrientation (Gtk.Orientation.Horizontal);
+		Gtk.Box toolbar = Gtk.Box.New (Gtk.Orientation.Horizontal, spacing: 0);
 		toolbar.AddCssClass (AdwaitaStyles.Toolbar);
 		return toolbar;
 	}
@@ -123,16 +118,15 @@ partial class GtkExtensions
 			_ => $"{baseTooltip}\n{shortcuts_label}:\n" + string.Join ('\n', action.Shortcuts.Select (s => $"- {ReadableAcceleratorLabel (s)}")),
 		};
 
-		Gtk.Button button = new () {
-			ActionName = action.FullName,
-			TooltipText = fullTooltip,
-		};
+		Gtk.Button button = Gtk.Button.New ();
+		button.ActionName = action.FullName;
+		button.TooltipText = fullTooltip;
 
 		if (action.IsImportant && !force_icon_only) {
-			button.Child = new Adw.ButtonContent () {
-				IconName = action.IconName,
-				Label = label
-			};
+			Adw.ButtonContent buttonContent = Adw.ButtonContent.New ();
+			buttonContent.IconName = action.IconName;
+			buttonContent.Label = label;
+			button.Child = buttonContent;
 		} else {
 			button.Label = label;
 			button.IconName = action.IconName;
@@ -148,7 +142,7 @@ partial class GtkExtensions
 
 	public static Gtk.Separator CreateToolBarSeparator ()
 	{
-		Gtk.Separator sep = new ();
+		Gtk.Separator sep = Gtk.Separator.New (Gtk.Orientation.Vertical);
 		sep.AddCssClass (AdwaitaStyles.Spacer);
 		return sep;
 	}
