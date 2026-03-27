@@ -50,10 +50,9 @@ public sealed class DockPanel : Gtk.Box
 
 			// Autohide is set to false since it seems to cause the popover to close even when clicking inside it, on macOS at least
 			// Instead, the reopen button is a toggle button to close the popover.
-			Gtk.Popover popover = new () {
-				Autohide = false,
-				Position = Gtk.PositionType.Left,
-			};
+			Gtk.Popover popover = Gtk.Popover.New ();
+			popover.Autohide = false;
+			popover.Position = Gtk.PositionType.Left;
 			popover.SetParent (reopenButton);
 
 			// --- References to keep
