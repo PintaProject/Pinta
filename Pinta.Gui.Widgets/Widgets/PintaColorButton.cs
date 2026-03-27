@@ -18,10 +18,9 @@ internal sealed class PintaColorButton : Gtk.Button
 	private readonly Gtk.DrawingArea color_drawing_area;
 	internal PintaColorButton ()
 	{
-		Gtk.DrawingArea colorDrawingArea = new () {
-			Hexpand = true,
-			Vexpand = true,
-		};
+		Gtk.DrawingArea colorDrawingArea = Gtk.DrawingArea.New ();
+		colorDrawingArea.Hexpand = true;
+		colorDrawingArea.Vexpand = true;
 		colorDrawingArea.SetDrawFunc (OnDraw);
 		SetChild (colorDrawingArea);
 		color_drawing_area = colorDrawingArea;

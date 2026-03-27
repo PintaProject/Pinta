@@ -23,11 +23,10 @@ public sealed class AnglePickerWidget : Gtk.Box
 	{
 		const int SPACING = 6;
 
-		Gtk.Label widgetLabel = new ();
+		Gtk.Label widgetLabel = Gtk.Label.New (null);
 		widgetLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Box labelBox = new () { Spacing = SPACING };
-		labelBox.SetOrientation (Gtk.Orientation.Horizontal);
+		Gtk.Box labelBox = Gtk.Box.New (Gtk.Orientation.Horizontal, SPACING);
 		labelBox.Append (widgetLabel);
 
 		AnglePickerGraphic anglePickerGraphic = new () {
@@ -46,18 +45,15 @@ public sealed class AnglePickerWidget : Gtk.Box
 		numericSpin.OnValueChanged += HandleSpinValueChanged;
 		numericSpin.SetActivatesDefaultImmediate (true);
 
-		Gtk.Button resetButton = new () {
-			IconName = Resources.StandardIcons.GoPrevious,
-			WidthRequest = 28,
-			HeightRequest = 24,
-			CanFocus = true,
-			UseUnderline = true,
-			Valign = Gtk.Align.Start,
-		};
+		Gtk.Button resetButton = Gtk.Button.NewFromIconName (Resources.StandardIcons.GoPrevious);
+		resetButton.WidthRequest = 28;
+		resetButton.HeightRequest = 24;
+		resetButton.CanFocus = true;
+		resetButton.UseUnderline = true;
+		resetButton.Valign = Gtk.Align.Start;
 		resetButton.OnClicked += HandleButtonClicked;
 
-		Gtk.Box controlsBox = new () { Spacing = SPACING };
-		controlsBox.SetOrientation (Gtk.Orientation.Horizontal);
+		Gtk.Box controlsBox = Gtk.Box.New (Gtk.Orientation.Horizontal, SPACING);
 		controlsBox.Append (anglePickerGraphic);
 		controlsBox.Append (numericSpin);
 		controlsBox.Append (resetButton);
