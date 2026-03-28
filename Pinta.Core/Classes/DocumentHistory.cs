@@ -31,8 +31,6 @@ namespace Pinta.Core;
 
 public sealed class DocumentHistory
 {
-	private readonly EditActions edit;
-
 	private readonly Document document;
 
 	private readonly List<BaseHistoryItem> history = [];
@@ -42,11 +40,8 @@ public sealed class DocumentHistory
 	public event EventHandler? ActionUndone;
 	public event EventHandler? ActionRedone;
 
-	internal DocumentHistory (
-		EditActions edit,
-		Document document)
+	internal DocumentHistory (Document document)
 	{
-		this.edit = edit;
 		this.document = document;
 	}
 
@@ -63,7 +58,7 @@ public sealed class DocumentHistory
 
 	public IEnumerable<BaseHistoryItem> Items => history;
 
-	public void PushNewItem (BaseHistoryItem newItem)
+	public void PushNewItem (BaseHistoryItem newItem, EditActions edit)
 	{
 		// Remove all old redos starting from the end of the list
 		for (var i = history.Count - 1; i >= 0; i--) {
@@ -89,7 +84,7 @@ public sealed class DocumentHistory
 		HistoryItemAdded?.Invoke (this, new HistoryItemAddedEventArgs (newItem));
 	}
 
-	public void Undo ()
+	public void Undo (EditActions edit)
 	{
 		if (Pointer < 0)
 			throw new InvalidOperationException ("Undo stack is empty");
@@ -114,7 +109,7 @@ public sealed class DocumentHistory
 		ActionUndone?.Invoke (this, EventArgs.Empty);
 	}
 
-	public void Redo ()
+	public void Redo (EditActions edit)
 	{
 		if (Pointer >= history.Count - 1)
 			throw new InvalidOperationException ("Redo stack is empty");
@@ -160,7 +155,7 @@ public sealed class DocumentHistory
 		document.IsDirty = true;
 	}
 
-	public void Clear ()
+	public void Clear (EditActions edit)
 	{
 		history.Clear ();
 		Pointer = -1;

@@ -82,7 +82,7 @@ public static class PintaCore
 		ToolManager tools = new (workspace, chrome);
 		PaletteManager palette = new (settings, paletteFormats);
 		ActionManager actions = new (chrome, imageFormats, paletteFormats, palette, recentFiles, system, tools, workspace);
-		LivePreviewManager livePreview = new (workspace, tools, system, chrome);
+		LivePreviewManager livePreview = new (actions, workspace, tools, system, chrome);
 		EffectsManager effects = new (actions, chrome, livePreview);
 		CanvasGridManager canvasGrid = new (workspace, settings);
 

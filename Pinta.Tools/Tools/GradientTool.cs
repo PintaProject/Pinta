@@ -123,11 +123,21 @@ public sealed class GradientTool : BaseTool
 		document.Layers.ToolLayer.Clear ();
 
 		if (undo_surface != null) {
+
 			string name = is_newly_created
 				? Translations.GetString ("Gradient Created")
 				: Translations.GetString ("Gradient Modified");
-			document.History.PushNewItem (new GradientHistoryItem (Icon, name, undo_surface,
-				document.Layers.CurrentUserLayerIndex, undo_data!.Value, this));
+
+			document.History.PushNewItem (
+				new GradientHistoryItem (
+					Icon,
+					name,
+					undo_surface,
+					document.Layers.CurrentUserLayerIndex,
+					undo_data!.Value,
+					this),
+				PintaCore.Actions.Edit
+			);
 		}
 
 		is_newly_created = false;
@@ -183,8 +193,16 @@ public sealed class GradientTool : BaseTool
 		if (document != null) {
 			undo_data = Data;
 			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
-			document.History.PushNewItem (new GradientHistoryItem (Icon, Name + " " + Translations.GetString ("Finalized"), undo_surface,
-						document.Layers.CurrentUserLayerIndex, undo_data!.Value, this));
+			document.History.PushNewItem (
+				new GradientHistoryItem (
+					Icon,
+					Name + " " + Translations.GetString ("Finalized"),
+					undo_surface,
+					document.Layers.CurrentUserLayerIndex,
+					undo_data!.Value,
+					this),
+				PintaCore.Actions.Edit
+			);
 		}
 		handle.Active = false;
 
