@@ -309,10 +309,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		string? text = null;
 		PointD point = new (args.X, args.Y);
 
-		static string BuildColorTooltip (Color color, string tooltip)
-		{
-			return Translations.GetString ("Color") + $": #{color.ToHex ()}\n\n" + tooltip;
-		}
+		static string BuildColorTooltip (Color color, string tooltip) => Translations.GetString ("Color") + $": #{color.ToHex ()}\n\n" + tooltip;
 
 		switch (GetElementAtPoint (point)) {
 			case WidgetElement.Palette:
