@@ -13,6 +13,8 @@ Thanks to the following contributors who worked on this release:
 - @yioannides
 - @njm25
 - @levanel
+- @Aryezz
+- @IArnaut2
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -25,6 +27,9 @@ Thanks to the following contributors who worked on this release:
 - Added new `Strength` parameter for the Sepia adjustment (#2025)
 - The axonometric canvas grid now supports configuring the angle (#1438, #2028)
 - Added support for importing `.ppm` files (#2031)
+- The flood tools now support holding the Shift key to switch to Global mode (#2075)
+- The transform tools now support holding the Ctrl key to translate the selection by larger increments when using the arrow keys (#2072, #1559)
+- The palette widget now shows the color's hex code in the tooltip (#2068, #2074)
 
 ### Changed
 - Effect dialogs now hide options that are not currently relevant (#1960)
