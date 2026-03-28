@@ -317,10 +317,10 @@ public static class GdkExtensions
 		float angle_in_radians = float.DegreesToRadians (-angle_in_degrees);
 		Matrix3x2D rotation = Matrix3x2D.CreateRotation (new RadiansAngle (angle_in_radians), rectangle.GetCenter ());
 		return [
-			rectangle.Location().Transformed(rotation),
-			new PointD(rectangle.Location().X, rectangle.EndLocation().Y).Transformed(rotation),
-			rectangle.EndLocation().Transformed(rotation),
-			new PointD(rectangle.EndLocation().X, rectangle.Location().Y).Transformed(rotation)
+			rectangle.Location ().Transformed (rotation),
+			new PointD (rectangle.Location ().X, rectangle.EndLocation ().Y).Transformed (rotation),
+			rectangle.EndLocation ().Transformed (rotation),
+			new PointD (rectangle.EndLocation ().X, rectangle.Location ().Y).Transformed (rotation)
 		];
 	}
 }
