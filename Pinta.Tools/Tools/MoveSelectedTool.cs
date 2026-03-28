@@ -37,11 +37,9 @@ public sealed class MoveSelectedTool : BaseTransformTool
 	private readonly Matrix original_transform = CairoExtensions.CreateIdentityMatrix ();
 
 	private readonly SystemManager system_manager;
-	private readonly IWorkspaceService workspace;
 	public MoveSelectedTool (IServiceProvider services) : base (services)
 	{
 		system_manager = services.GetService<SystemManager> ();
-		workspace = services.GetService<IWorkspaceService> ();
 	}
 
 	public override string Name => Translations.GetString ("Move Selected Pixels");

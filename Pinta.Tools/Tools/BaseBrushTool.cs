@@ -35,14 +35,12 @@ namespace Pinta.Tools;
 public abstract class BaseBrushTool : BaseTool
 {
 	protected IPaletteService Palette { get; }
-	private readonly IWorkspaceService workspace;
 	protected ImageSurface? undo_surface;
 	protected bool surface_modified;
 	protected MouseButton mouse_button;
 
 	protected BaseBrushTool (IServiceProvider services) : base (services)
 	{
-		workspace = services.GetService<IWorkspaceService> ();
 		Palette = services.GetService<IPaletteService> ();
 
 		BrushWidthSpinButton.TooltipText = Translations.GetString ("Change brush width. Shortcut keys: [ ]");

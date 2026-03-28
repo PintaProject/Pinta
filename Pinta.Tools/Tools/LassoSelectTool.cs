@@ -33,9 +33,9 @@ using Pinta.Core;
 
 namespace Pinta.Tools;
 
-public sealed class LassoSelectTool (IServiceProvider services) : BaseTool (services)
+public sealed class LassoSelectTool : BaseTool
 {
-	private readonly IWorkspaceService workspace = services.GetService<IWorkspaceService> ();
+	private readonly IWorkspaceService workspace;
 	private bool is_dragging = false;
 	private CombineMode combine_mode;
 	private SelectionHistoryItem? hist;
@@ -59,6 +59,11 @@ public sealed class LassoSelectTool (IServiceProvider services) : BaseTool (serv
 
 	private bool IsPolygonMode => LassoModeButtom.SelectedItem.GetTagOrDefault (false);
 	private bool IsFreeformMode => !IsPolygonMode;
+
+	public LassoSelectTool (IServiceProvider services) : base (services)
+	{
+		workspace = services.GetService<IWorkspaceService> ();
+	}
 
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
