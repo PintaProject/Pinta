@@ -43,6 +43,7 @@ namespace Pinta.Tools;
 public class RecolorTool : BaseBrushTool
 {
 	private readonly IWorkspaceService workspace;
+
 	private PointI? last_point = null;
 	private BitMask? stencil;
 
