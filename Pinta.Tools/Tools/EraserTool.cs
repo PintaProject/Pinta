@@ -44,8 +44,19 @@ public sealed class EraserTool : BaseBrushTool
 
 	private const int LUT_Resolution = 256;
 	private readonly Lazy<byte[,]> lazy_lut_factor = new (CreateLookupTable);
+	private readonly IWorkspaceService workspace;
 
-	public EraserTool (IServiceProvider services) : base (services) { }
+	public EraserTool (IServiceProvider services) : base (services)
+	{
+		workspace = services.GetService<IWorkspaceService> ();
+
+		// Update cursor on zoom
+		workspace.ViewSizeChanged += (_, _) => {
+			if (IsActiveTool ()) {
+				SetCursor (DefaultCursor);
+			}
+		};
+	}
 
 	public override string Name
 		=> Translations.GetString ("Eraser");
@@ -63,9 +74,14 @@ public sealed class EraserTool : BaseBrushTool
 
 	public override Gdk.Cursor DefaultCursor {
 		get {
+			double scale = 1;
+			if (workspace is not null && workspace.HasOpenDocuments) {
+				scale = workspace.ActiveDocument.Workspace.Scale;
+			}
 			var icon = GdkExtensions.CreateIconWithShape (
 				"Cursor.Eraser.png",
 				CursorShape.Ellipse,
+				scale,
 				BrushWidth,
 				8,
 				22,

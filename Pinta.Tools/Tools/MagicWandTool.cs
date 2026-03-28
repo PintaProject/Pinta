@@ -33,12 +33,21 @@ namespace Pinta.Tools;
 
 public sealed class MagicWandTool : FloodTool
 {
+	private readonly IWorkspaceService workspace;
 
 	private CombineMode combine_mode;
 
 	public MagicWandTool (IServiceProvider services) : base (services)
 	{
+		workspace = services.GetService<IWorkspaceService> ();
 		LimitToSelection = false;
+
+		// Update cursor on zoom
+		workspace.ViewSizeChanged += (_, _) => {
+			if (IsActiveTool ()) {
+				SetCursor (DefaultCursor);
+			}
+		};
 	}
 
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);

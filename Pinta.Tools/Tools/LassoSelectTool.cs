@@ -35,6 +35,7 @@ namespace Pinta.Tools;
 
 public sealed class LassoSelectTool (IServiceProvider services) : BaseTool (services)
 {
+	private readonly IWorkspaceService workspace = services.GetService<IWorkspaceService> ();
 	private bool is_dragging = false;
 	private CombineMode combine_mode;
 	private SelectionHistoryItem? hist;

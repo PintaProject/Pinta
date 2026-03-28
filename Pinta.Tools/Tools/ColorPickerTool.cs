@@ -36,13 +36,22 @@ public sealed class ColorPickerTool : BaseTool
 {
 	private readonly IPaletteService palette;
 	private readonly IToolService tools;
+	private readonly IWorkspaceService workspace;
 
 	private MouseButton button_down;
 
 	public ColorPickerTool (IServiceProvider services) : base (services)
 	{
+		workspace = services.GetService<IWorkspaceService> ();
 		palette = services.GetService<IPaletteService> ();
 		tools = services.GetService<IToolService> ();
+
+		// Update cursor on zoom
+		workspace.ViewSizeChanged += (_, _) => {
+			if (IsActiveTool ()) {
+				SetCursor (DefaultCursor);
+			}
+		};
 	}
 
 	public override string Name => Translations.GetString ("Color Picker");
@@ -55,9 +64,14 @@ public sealed class ColorPickerTool : BaseTool
 
 	public override Gdk.Cursor DefaultCursor {
 		get {
+			double scale = 1;
+			if (workspace is not null && workspace.HasOpenDocuments) {
+				scale = workspace.ActiveDocument.Workspace.Scale;
+			}
 			Gdk.Texture icon = GdkExtensions.CreateIconWithShape (
 				"Cursor.ColorPicker.png",
 				CursorShape.Rectangle,
+				scale,
 				SampleSize,
 				7,
 				27,

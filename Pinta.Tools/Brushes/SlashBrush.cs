@@ -38,10 +38,13 @@ internal sealed class SlashBrush : BasePaintBrush
 	private int line_width;
 	private int angle;
 
+	private readonly IWorkspaceService workspace;
+
 	private const string AngleSettingName = "slash-brush-angle";
 
-	public SlashBrush (ISettingsService settingsService)
+	public SlashBrush (ISettingsService settingsService, IWorkspaceService workspace)
 	{
+		this.workspace = workspace;
 		IntegerOption angleOption = new IntegerOption (
 			AngleSettingName,
 			0,
@@ -135,6 +138,10 @@ internal sealed class SlashBrush : BasePaintBrush
 
 	public override Gdk.Cursor GetCursor ()
 	{
+		double scale = 1;
+		if (workspace is not null && workspace.HasOpenDocuments) {
+			scale = workspace.ActiveDocument.Workspace.Scale;
+		}
 		/*
 			If we do not override a 0 angle with 180, the logic in GdkExtensions will 
 			step into the "rectangle" path which will look inconsistent (unfilled) to all
@@ -142,7 +149,7 @@ internal sealed class SlashBrush : BasePaintBrush
 			consistent.
 		*/
 		var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
-						CursorShape.Rectangle, 2, line_width, angle == 0 ? 180 : angle, 8, 24,
+						CursorShape.Rectangle, scale, 2, line_width, angle == 0 ? 180 : angle, 8, 24,
 						out var iconOffsetX, out var iconOffsetY);
 
 		return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);

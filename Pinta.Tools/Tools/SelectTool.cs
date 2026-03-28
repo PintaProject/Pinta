@@ -35,6 +35,7 @@ namespace Pinta.Tools;
 public abstract class SelectTool : BaseTool
 {
 	private readonly IToolService tools;
+	private readonly IWorkspaceService workspace;
 
 	private SelectionHistoryItem? hist = default;
 	private CombineMode combine_mode = default;
@@ -48,6 +49,7 @@ public abstract class SelectTool : BaseTool
 	public SelectTool (IServiceProvider services) : base (services)
 	{
 		tools = services.GetService<IToolService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 
 		handle = new (workspace) { InvertIfNegative = true };
 

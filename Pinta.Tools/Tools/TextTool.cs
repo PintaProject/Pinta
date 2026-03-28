@@ -100,12 +100,14 @@ public sealed class TextTool : BaseTool
 
 	private readonly IChromeService chrome;
 	private readonly IPaletteService palette;
+	private readonly IWorkspaceService workspace;
 	public TextTool (IServiceProvider services) : base (services)
 	{
 		IChromeService chromeService = services.GetService<IChromeService> ();
 
 		chrome = chromeService;
 		palette = services.GetService<IPaletteService> ();
+		workspace = services.GetService<IWorkspaceService> ();
 
 		im_context = Gtk.IMMulticontext.New ();
 		im_context.OnCommit += OnIMCommit;

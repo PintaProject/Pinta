@@ -37,7 +37,7 @@ namespace Pinta.Core;
 public abstract class BaseTool
 {
 	private readonly IToolService tools;
-	protected readonly IWorkspaceService workspace;
+	private readonly IWorkspaceService workspace;
 
 	protected IResourceService Resources { get; }
 	protected ISettingsService Settings { get; }
@@ -55,9 +55,11 @@ public abstract class BaseTool
 		CurrentCursor = DefaultCursor;
 
 		// Update cursor when active document changes
-		workspace.ActiveDocumentChanged += (_, _) => RefreshCursorIfActive ();
-		// Update cursor on zoom
-		workspace.ViewSizeChanged += (_, _) => RefreshCursorIfActive ();
+		workspace.ActiveDocumentChanged += (_, _) => {
+			if (IsActiveTool ()) {
+				SetCursor (DefaultCursor);
+			}
+		};
 		// Give tools a chance to save their settings on application quit
 		Settings.SaveSettingsBeforeQuit += (_, _)
 			=> OnSaveSettings (Settings);
@@ -319,16 +321,9 @@ public abstract class BaseTool
 			workspace.ActiveWorkspace.Canvas.Cursor = cursor;
 	}
 
-	private void RefreshCursorIfActive ()
+	protected bool IsActiveTool ()
 	{
-		if (tools.CurrentTool == this) {
-			RefreshCursor ();
-		}
-	}
-
-	protected virtual void RefreshCursor ()
-	{
-		SetCursor (DefaultCursor);
+		return tools.CurrentTool == this;
 	}
 
 	#region Toolbar
