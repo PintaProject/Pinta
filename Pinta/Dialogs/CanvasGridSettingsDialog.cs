@@ -67,11 +67,10 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 			Gtk.Widget.SensitivePropertyDefinition.UnmanagedName,
 			GObject.BindingFlags.SyncCreate);
 
-		Gtk.Grid grid = new () {
-			RowSpacing = SPACING,
-			ColumnSpacing = SPACING,
-			ColumnHomogeneous = false,
-		};
+		Gtk.Grid grid = Gtk.Grid.New ();
+		grid.RowSpacing = SPACING;
+		grid.ColumnSpacing = SPACING;
+		grid.ColumnHomogeneous = false;
 
 		grid.Attach (showGridCheckBox, 0, 0, 2, 1);
 
@@ -91,8 +90,7 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 
 		grid.Attach (axonometricAnglePicker, 0, 5, 3, 1);
 
-		Gtk.Box mainVbox = new () { Spacing = SPACING };
-		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
+		Gtk.Box mainVbox = Gtk.Box.New (Gtk.Orientation.Vertical, SPACING);
 		mainVbox.Append (grid);
 
 		// --- Initialization (Gtk.Box)

@@ -39,11 +39,10 @@ public sealed class ComboBoxWidget : Gtk.Box
 	{
 		const int SPACING = 6;
 
-		Gtk.Label titleLabel = new ();
+		Gtk.Label titleLabel = Gtk.Label.New (null);
 		titleLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Box labelAndLine = new () { Spacing = SPACING };
-		labelAndLine.SetOrientation (Gtk.Orientation.Horizontal);
+		Gtk.Box labelAndLine = Gtk.Box.New (Gtk.Orientation.Horizontal, SPACING);
 		labelAndLine.Append (titleLabel);
 
 		Gtk.ComboBoxText comboBox = CreateComboBox (entries);
@@ -64,7 +63,7 @@ public sealed class ComboBoxWidget : Gtk.Box
 
 	private Gtk.ComboBoxText CreateComboBox (IEnumerable<string> entries)
 	{
-		Gtk.ComboBoxText result = new ();
+		Gtk.ComboBoxText result = Gtk.ComboBoxText.New ();
 
 		foreach (var s in entries)
 			result.AppendText (s);

@@ -439,35 +439,36 @@ internal sealed class MainWindow
 	{
 		if (window_shell.HeaderBar is not null) {
 			var header_bar = window_shell.HeaderBar;
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = this.menu_bar,
-				IconName = Resources.StandardIcons.OpenMenu,
-				TooltipText = Translations.GetString ("Main Menu"),
-			});
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = PintaCore.Chrome.EffectsMenu,
-				IconName = Resources.Icons.EffectsDefault,
-				TooltipText = Translations.GetString ("Effects"),
-			});
+			Gtk.MenuButton mainMenuButton = Gtk.MenuButton.New ();
+			mainMenuButton.MenuModel = this.menu_bar;
+			mainMenuButton.IconName = Resources.StandardIcons.OpenMenu;
+			mainMenuButton.TooltipText = Translations.GetString ("Main Menu");
+			header_bar.PackEnd (mainMenuButton);
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = PintaCore.Chrome.AdjustmentsMenu,
-				IconName = Resources.Icons.AdjustmentsBrightnessContrast,
-				TooltipText = Translations.GetString ("Adjustments"),
-			});
+			Gtk.MenuButton effectsMenuButton = Gtk.MenuButton.New ();
+			effectsMenuButton.MenuModel = PintaCore.Chrome.EffectsMenu;
+			effectsMenuButton.IconName = Resources.Icons.EffectsDefault;
+			effectsMenuButton.TooltipText = Translations.GetString ("Effects");
+			header_bar.PackEnd (effectsMenuButton);
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = this.image_menu,
-				IconName = Resources.StandardIcons.ImageGeneric,
-				TooltipText = Translations.GetString ("Image"),
-			});
+			Gtk.MenuButton adjustmentsMenuButton = Gtk.MenuButton.New ();
+			adjustmentsMenuButton.MenuModel = PintaCore.Chrome.AdjustmentsMenu;
+			adjustmentsMenuButton.IconName = Resources.Icons.AdjustmentsBrightnessContrast;
+			adjustmentsMenuButton.TooltipText = Translations.GetString ("Adjustments");
+			header_bar.PackEnd (adjustmentsMenuButton);
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = this.view_menu,
-				IconName = Resources.StandardIcons.ViewReveal,
-				TooltipText = Translations.GetString ("View"),
-			});
+			Gtk.MenuButton imageMenuButton = Gtk.MenuButton.New ();
+			imageMenuButton.MenuModel = this.image_menu;
+			imageMenuButton.IconName = Resources.StandardIcons.ImageGeneric;
+			imageMenuButton.TooltipText = Translations.GetString ("Image");
+			header_bar.PackEnd (imageMenuButton);
+
+			Gtk.MenuButton viewMenuButton = Gtk.MenuButton.New ();
+			viewMenuButton.MenuModel = this.view_menu;
+			viewMenuButton.IconName = Resources.StandardIcons.ViewReveal;
+			viewMenuButton.TooltipText = Translations.GetString ("View");
+			header_bar.PackEnd (viewMenuButton);
 
 			PintaCore.Actions.CreateHeaderToolBar (header_bar);
 		} else {
@@ -516,14 +517,13 @@ internal sealed class MainWindow
 		PintaCore.Tools.ToolAdded += (_, e) => toolbox.AddItem (e.Tool);
 		PintaCore.Tools.ToolRemoved += (_, e) => toolbox.RemoveItem (e.Tool);
 
-		Gtk.ScrolledWindow toolbox_scroll = new () {
-			Child = toolbox,
-			HscrollbarPolicy = Gtk.PolicyType.Never,
-			VscrollbarPolicy = Gtk.PolicyType.Never,
-			HasFrame = false,
-			OverlayScrolling = true,
-			WindowPlacement = Gtk.CornerType.BottomRight,
-		};
+		Gtk.ScrolledWindow toolbox_scroll = Gtk.ScrolledWindow.New ();
+		toolbox_scroll.Child = toolbox;
+		toolbox_scroll.HscrollbarPolicy = Gtk.PolicyType.Never;
+		toolbox_scroll.VscrollbarPolicy = Gtk.PolicyType.Never;
+		toolbox_scroll.HasFrame = false;
+		toolbox_scroll.OverlayScrolling = true;
+		toolbox_scroll.WindowPlacement = Gtk.CornerType.BottomRight;
 		container.Append (toolbox_scroll);
 		PintaCore.Chrome.InitializeToolBox (toolbox);
 
