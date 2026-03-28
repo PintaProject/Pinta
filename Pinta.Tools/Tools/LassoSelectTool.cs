@@ -66,8 +66,6 @@ public sealed class LassoSelectTool : BaseTool
 	private bool IsPolygonMode => LassoModeButtom.SelectedItem.GetTagOrDefault (false);
 	private bool IsFreeformMode => !IsPolygonMode;
 
-
-
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
 		base.OnBuildToolBar (tb);
