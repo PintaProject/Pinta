@@ -44,6 +44,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed crash when right-clicking on a layer in certain scenarios (#1940)
 - The layers and history panels now scroll automatically to the selected item after any updates (#1867, #1828)
 - Fixed crash when setting gamma to zero in the Levels dialog (#2035, #2041)
+- Fixed issues with some icons failing to load under certain GTK versions (#2078, #1950)
 
 ## [3.1.1](https://github.com/PintaProject/Pinta/release/tag/3.1.1) - 2026/01/10
 
