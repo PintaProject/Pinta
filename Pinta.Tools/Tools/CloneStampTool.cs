@@ -38,24 +38,36 @@ public sealed class CloneStampTool : BaseBrushTool
 	private PointI? last_point = null;
 
 	private readonly SystemManager system_manager;
+	private readonly IWorkspaceService workspace;
 	public CloneStampTool (IServiceProvider services) : base (services)
 	{
 		system_manager = services.GetService<SystemManager> ();
+		workspace = services.GetService<IWorkspaceService> ();
+
+		// Update cursor on zoom
+		workspace.ViewSizeChanged += (_, _) => {
+			if (IsActiveTool ()) {
+				SetCursor (DefaultCursor);
+			}
+		};
 	}
 
 	public override string Name => Translations.GetString ("Clone Stamp");
 	public override string Icon => Pinta.Resources.Icons.ToolCloneStamp;
 	// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 	public override string StatusBarText => Translations.GetString ("{0} + left click to set origin, left click to paint.", system_manager.CtrlLabel ());
-	public override bool CursorChangesOnZoom => true;
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_L);
 	public override int Priority => 47;
 	protected override bool ShowAntialiasingButton => true;
 
 	public override Cursor DefaultCursor {
 		get {
+			double scale = 1;
+			if (workspace is not null && workspace.HasOpenDocuments) {
+				scale = workspace.ActiveDocument.Workspace.Scale;
+			}
 			var icon = GdkExtensions.CreateIconWithShape ("Cursor.CloneStamp.png",
-							CursorShape.Ellipse, BrushWidth, 16, 26,
+							CursorShape.Ellipse, scale, BrushWidth, 16, 26,
 							out var iconOffsetX, out var iconOffsetY);
 			return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
 		}

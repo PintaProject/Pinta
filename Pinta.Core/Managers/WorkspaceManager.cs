@@ -50,6 +50,7 @@ public interface IWorkspaceService
 	public event EventHandler? LayerAdded;
 	public event EventHandler? LayerRemoved;
 	public event EventHandler? SelectedLayerChanged;
+	public event EventHandler? ViewSizeChanged;
 	public event PropertyChangedEventHandler? LayerPropertyChanged;
 }
 
@@ -207,6 +208,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		document.Layers.LayerRemoved += Document_LayerRemoved;
 		document.Layers.SelectedLayerChanged += Document_SelectedLayerChanged;
 		document.Layers.LayerPropertyChanged += Document_LayerPropertyChanged;
+		document.Workspace.ViewSizeChanged += Document_ViewSizeChanged;
 
 		open_documents.Add (document);
 
@@ -236,6 +238,11 @@ public sealed class WorkspaceManager : IWorkspaceService
 		LayerAdded?.Invoke (sender, e);
 	}
 
+	private void Document_ViewSizeChanged (object? sender, EventArgs ev)
+	{
+		ViewSizeChanged?.Invoke (sender, ev);
+	}
+
 	public void CloseDocument (Document document)
 	{
 		int index = open_documents.IndexOf (document);
@@ -263,6 +270,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 		document.Layers.LayerRemoved -= Document_LayerRemoved;
 		document.Layers.SelectedLayerChanged -= Document_SelectedLayerChanged;
 		document.Layers.LayerPropertyChanged -= Document_LayerPropertyChanged;
+		document.Workspace.ViewSizeChanged -= Document_ViewSizeChanged;
 		document.Close ();
 
 		OnDocumentClosed (new DocumentEventArgs (document));
@@ -453,6 +461,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public event EventHandler? LayerRemoved;
 	public event EventHandler? SelectedLayerChanged;
 	public event PropertyChangedEventHandler? LayerPropertyChanged;
+	public event EventHandler? ViewSizeChanged;
 
 	public event EventHandler<DocumentEventArgs>? DocumentActivated;
 	public event EventHandler<DocumentEventArgs>? DocumentClosed;
