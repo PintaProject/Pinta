@@ -12,6 +12,13 @@ Thanks to the following contributors who worked on this release:
 
 ### Fixed
 
+## [3.1.2](https://github.com/PintaProject/Pinta/release/tag/3.1.2) - 2026/03/29
+
+### Fixed
+- Fixed issues with some icons failing to load under certain GTK versions (#2078, #1950)
+- Fixed crash when right-clicking on a layer in certain scenarios (#1940)
+- Fixed bug with the gradient tool creating unnecessary history items (#2060, #2059)
+
 ## [3.1.1](https://github.com/PintaProject/Pinta/release/tag/3.1.1) - 2026/01/10
 
 ### Added
