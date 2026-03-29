@@ -42,6 +42,19 @@
     <binary>pinta</binary>
   </provides>
   <releases>
+    <release version="3.1.2" date="2026-03-29">
+      <url>https://github.com/PintaProject/Pinta/releases/tag/3.1.2</url>
+      <description>
+        <p>Bug Fixes</p>
+        <ul>
+          <li>Fixed issues with some icons failing to load under certain GTK versions (#2078, #1950)</li>
+          <li>Fixed crash when right-clicking on a layer in certain scenarios (#1940)</li>
+          <li>Fixed bug with the gradient tool creating unnecessary history items (#2060, #2059)</li>
+          <li>Fixed crash when setting gamma to zero in the Levels dialog (#2035, #2041)</li>
+          <li>The right click menu for layers now includes options to move the layer up or down in the layer stack (#2004, #2007)</li>
+        </ul>
+      </description>
+    </release>
     <release version="3.1.1" date="2026-01-10">
       <url>https://github.com/PintaProject/Pinta/releases/tag/3.1.1</url>
       <description>
