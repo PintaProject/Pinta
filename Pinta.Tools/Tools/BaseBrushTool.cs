@@ -35,6 +35,7 @@ namespace Pinta.Tools;
 public abstract class BaseBrushTool : BaseTool
 {
 	protected IPaletteService Palette { get; }
+
 	protected ImageSurface? undo_surface;
 	protected bool surface_modified;
 	protected MouseButton mouse_button;
