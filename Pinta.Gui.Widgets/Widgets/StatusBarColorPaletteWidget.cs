@@ -69,11 +69,16 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		OnResize += (_, e) => HandleSizeAllocated (e);
 		SetDrawFunc ((area, context, width, height) => Draw (context));
 
-		// Handle mouse clicks.
+		// Handle mouse clicks. Only claim clicks on palette elements so that
+		// clicks on empty areas pass through to widgets underneath (the palette
+		// is rendered as a Gtk.Overlay child on top of the status bar info widgets).
 		Gtk.GestureClick click_gesture = Gtk.GestureClick.New ();
 		click_gesture.SetButton (0); // Listen for all mouse buttons.
 		click_gesture.OnReleased += (_, e) => {
-			HandleClick (new PointD (e.X, e.Y), click_gesture.GetCurrentButton (), click_gesture.GetCurrentEventState ());
+			var point = new PointD (e.X, e.Y);
+			if (GetElementAtPoint (point) == WidgetElement.Nothing)
+				return;
+			HandleClick (point, click_gesture.GetCurrentButton (), click_gesture.GetCurrentEventState ());
 			click_gesture.SetState (Gtk.EventSequenceState.Claimed);
 		};
 		AddController (click_gesture);
