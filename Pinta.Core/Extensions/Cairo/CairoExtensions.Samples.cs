@@ -346,4 +346,26 @@ partial class CairoExtensions
 
 		return Gdk.Functions.PixbufGetFromSurface (rgbSurface, 0, 0, width, height)!;
 	}
+
+	/// <summary>
+	/// Convert a Cairo surface to a Gdk.Texture.
+	/// This can optionally be configured to act as an update to a region of an existing texture.
+	/// </summary>
+	public static Gdk.Texture ToTexture (this Cairo.ImageSurface surface, Gdk.Texture? updateTexture = null, Cairo.Region? updateRegion = null)
+	{
+		GLib.Bytes bytes = GLib.Bytes.New (surface.GetData ());
+
+		Gdk.MemoryTextureBuilder builder = new () {
+			Bytes = bytes,
+			Stride = (ulong) surface.Stride,
+			Width = surface.Width,
+			Height = surface.Height,
+			Format = Gdk.MemoryFormat.B8g8r8a8Premultiplied,
+			UpdateTexture = updateTexture,
+			UpdateRegion = updateRegion ?? CairoExtensions.CreateRegion (RectangleI.Zero)
+
+		};
+
+		return builder.Build ();
+	}
 }
