@@ -32,6 +32,7 @@ Thanks to the following contributors who worked on this release:
 - The palette widget now shows the color's hex code in the tooltip (#2068, #2074)
 
 ### Changed
+- Upgraded the minimum required .NET version to 10.0 (#2081)
 - Effect dialogs now hide options that are not currently relevant (#1960)
 - Fixed several minor UX issues in the color dialog (#1795)
 - The text tool now provides a separate adjustment for the font size and font variant, which doesn't require opening the font dialog (#1947, #1961, #2043, #1965)
