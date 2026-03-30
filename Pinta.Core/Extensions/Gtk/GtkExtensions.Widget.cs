@@ -341,5 +341,19 @@ partial class GtkExtensions
 			return false;
 		}));
 	}
+
+	/// <summary>
+	/// Helper method for displaying a repeated tiling texture.
+	/// </summary>
+	public static void AppendRepeatingTexture (this Gtk.Snapshot snapshot, Gdk.Texture texture, Graphene.Rect bounds)
+	{
+		snapshot.PushRepeat (bounds, childBounds: null);
+
+		Graphene.Rect patternBounds = Graphene.Rect.Alloc ();
+		patternBounds.Init (0, 0, texture.Width, texture.Height);
+		snapshot.AppendTexture (texture, patternBounds);
+
+		snapshot.Pop ();
+	}
 }
 
