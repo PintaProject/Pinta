@@ -61,6 +61,9 @@ public static class StandardIcons
 	public const string ImageGeneric = "image-x-generic-symbolic";
 	public const string ImageMissing = "image-missing-symbolic";
 
+	public const string LayerMoveUp = "pan-up-symbolic";
+	public const string LayerMoveDown = "pan-down-symbolic";
+
 	public const string OpenMenu = "open-menu-symbolic";
 
 	public const string ApplicationAddon = "application-x-addon-symbolic";
@@ -194,8 +197,6 @@ public static class Icons
 	public const string LayerFlipVertical = ImageFlipVertical;
 	public const string LayerImport = "layer-import";
 	public const string LayerMergeDown = "layers-merge-down-symbolic";
-	public const string LayerMoveDown = "layers-move-layer-down-symbolic";
-	public const string LayerMoveUp = "layers-move-layer-up-symbolic";
 	public const string LayerNew = "layers-add-layer-symbolic";
 	public const string LayerProperties = "document-properties-symbolic";
 	public const string LayerRotateZoom = "layers-rotate-zoom-symbolic";
