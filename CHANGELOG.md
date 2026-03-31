@@ -39,6 +39,7 @@ Thanks to the following contributors who worked on this release:
 - The text tool now allows choosing any font-weight supported by Cairo, not just Normal and Bold (#1965, #1967)
 - Adjusted the layout of the layers panel to avoid issues with overlay scrollbars preventing the visibility toggle from being clicked (#1828, #2021)
 - Gradient types and colors can now be changed before finalizing the gradient (#2058, #2059)
+- Moved the Layers menu out of the main menu. The actions are available from a menu button in the Layers panel, or from right-clicking on layers (#1386, #2056)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
