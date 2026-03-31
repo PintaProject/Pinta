@@ -32,18 +32,21 @@ Thanks to the following contributors who worked on this release:
 - The palette widget now shows the color's hex code in the tooltip (#2068, #2074)
 
 ### Changed
+- Upgraded the minimum required .NET version to 10.0 (#2081)
 - Effect dialogs now hide options that are not currently relevant (#1960)
 - Fixed several minor UX issues in the color dialog (#1795)
 - The text tool now provides a separate adjustment for the font size and font variant, which doesn't require opening the font dialog (#1947, #1961, #2043, #1965)
 - The text tool now allows choosing any font-weight supported by Cairo, not just Normal and Bold (#1965, #1967)
 - Adjusted the layout of the layers panel to avoid issues with overlay scrollbars preventing the visibility toggle from being clicked (#1828, #2021)
 - Gradient types and colors can now be changed before finalizing the gradient (#2058, #2059)
+- Moved the Layers menu out of the main menu. The actions are available from a menu button in the Layers panel, or from right-clicking on layers (#1386, #2056)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
 - Fixed crash when right-clicking on a layer in certain scenarios (#1940)
 - The layers and history panels now scroll automatically to the selected item after any updates (#1867, #1828)
 - Fixed crash when setting gamma to zero in the Levels dialog (#2035, #2041)
+- Fixed issues with some icons failing to load under certain GTK versions (#2078, #1950)
 
 ## [3.1.1](https://github.com/PintaProject/Pinta/release/tag/3.1.1) - 2026/01/10
 
