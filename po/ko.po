@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-15 00:33+0000\n"
-"PO-Revision-Date: 2026-01-12 00:13+0000\n"
+"PO-Revision-Date: 2026-04-07 03:55+0000\n"
 "Last-Translator: VenusGirl <VenusGirl@outlook.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/pinta/pinta/ko/>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -203,7 +203,7 @@ msgstr "최적 맞춤"
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:411
 msgid "Bevel Join"
-msgstr ""
+msgstr "비너스걸"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
@@ -251,7 +251,7 @@ msgstr "모닥불"
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:226
 msgid "Book"
-msgstr ""
+msgstr "책"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -369,7 +369,7 @@ msgstr "브러시 너비를 변경합니다. 단축키: [ ]"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "글꼴 크기 변경. 바로 가기 키: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -387,7 +387,7 @@ msgstr "색상 선택"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:361
 msgid "Choose Colors"
-msgstr ""
+msgstr "색상 선택"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:153
 msgid "Choose Palette Color"
@@ -1008,7 +1008,7 @@ msgstr "강렬한 빛"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:262
 msgid "Heavy"
-msgstr ""
+msgstr "무거운"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
 #: ../Pinta/Dialogs/NewImageDialog.cs:333
@@ -1069,7 +1069,7 @@ msgstr "ICO 파일은 255 x 255 픽셀을 초과할 수 없습니다."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "활성화되면 가치 구성 요소가 컬러 휠에 적용됩니다."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1390,6 +1390,9 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"왼쪽 클릭하여 기본 색상을 설정합니다. 오른쪽 클릭하여 보조 색상을 "
+"설정합니다. 가운데 클릭하거나 {0}을 누른 다음 왼쪽 클릭하여 팔레트 색상을 "
+"선택합니다."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1499,11 +1502,11 @@ msgstr "중간값"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:238
 msgid "Medium"
-msgstr ""
+msgstr "중간"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
-msgstr "기본 표시줄"
+msgstr "메뉴 표시줄"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:345
@@ -1517,7 +1520,7 @@ msgstr "최소 크기"
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:399
 msgid "Miter Join"
-msgstr ""
+msgstr "사각 결합"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:286
 msgid "Mode"
@@ -2129,7 +2132,7 @@ msgstr "기본값으로 재설정"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:93
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:78
 msgid "Reset to image size"
-msgstr ""
+msgstr "이미지 크기로 재설정"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:214
@@ -2209,7 +2212,7 @@ msgstr "거칠기"
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:405
 msgid "Round Join"
-msgstr ""
+msgstr "원형 결합"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
@@ -2306,12 +2309,12 @@ msgstr "선택된 색상"
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Semibold"
-msgstr ""
+msgstr "중간 굵게"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:220
 msgid "Semilight"
-msgstr ""
+msgstr "중간 밝게"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
@@ -2389,7 +2392,7 @@ msgstr "크기"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr ""
+msgstr "슬래시"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
@@ -2528,7 +2531,7 @@ msgstr "두께"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Thin"
-msgstr ""
+msgstr "얇은"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
@@ -2624,17 +2627,17 @@ msgstr "형식"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:256
 msgid "Ultrabold"
-msgstr ""
+msgstr "초굵게"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:268
 msgid "Ultraheavy"
-msgstr ""
+msgstr "초무거운"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "Ultralight"
-msgstr ""
+msgstr "초경량"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:294
 msgid "Underline"
@@ -2889,16 +2892,7 @@ msgstr "픽셀"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:73
 msgid "translator-credits"
-msgstr ""
-"번역 크레딧 - 한국어: 비너스걸\n"
-"  Cameron White https://launchpad.net/~cameronwhite91\n"
-"  Choi gyu ho https://launchpad.net/~cgh48\n"
-"  Jeongkyu Kim https://launchpad.net/~jeongkyu-kim\n"
-"  Jongwon Kim https://launchpad.net/~nanpa777-y\n"
-"  Litty https://launchpad.net/~litty\n"
-"  Mike Sierra https://launchpad.net/~ubuntuda\n"
-"  SCRS https://launchpad.net/~secondroms\n"
-"  Softblow https://launchpad.net/~sftblw"
+msgstr "비너스걸: https://venusgirls.tistory.com/"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:49
