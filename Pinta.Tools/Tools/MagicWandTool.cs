@@ -83,7 +83,7 @@ public sealed class MagicWandTool : FloodTool
 		document.Selection.SelectionPolygons.Clear ();
 		SelectionModeHandler.PerformSelectionMode (document, combine_mode, DocumentSelection.ConvertToPolygons (polygonSet));
 
-		document.History.PushNewItem (undoAction);
+		document.History.PushNewItem (undoAction, PintaCore.Actions.Edit);
 	}
 
 	protected override void OnSaveSettings (ISettingsService settings)

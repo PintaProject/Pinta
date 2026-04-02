@@ -47,6 +47,7 @@ public sealed class LayerActions
 	private readonly RecentFileManager recent_files;
 	private readonly ToolManager tools;
 	private readonly WorkspaceManager workspace;
+	private readonly EditActions edit;
 	private readonly ImageActions image;
 	public LayerActions (
 		ChromeManager chrome,
@@ -54,6 +55,7 @@ public sealed class LayerActions
 		RecentFileManager recentFiles,
 		ToolManager tools,
 		WorkspaceManager workspace,
+		EditActions edit,
 		ImageActions image)
 	{
 		AddNewLayer = new Command (
@@ -132,6 +134,7 @@ public sealed class LayerActions
 		recent_files = recentFiles;
 		this.tools = tools;
 		this.workspace = workspace;
+		this.edit = edit;
 		this.image = image;
 	}
 
@@ -261,7 +264,7 @@ public sealed class LayerActions
 		// --- Changes to document go after everything else is completed successfully
 
 		doc.Layers.SetCurrentUserLayer (layer);
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, edit);
 		doc.Workspace.Invalidate ();
 	}
 
@@ -273,7 +276,7 @@ public sealed class LayerActions
 
 		doc.Layers.CurrentUserLayer.FlipVertical ();
 		doc.Workspace.Invalidate ();
-		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerVertical, doc.Layers.CurrentUserLayerIndex));
+		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerVertical, doc.Layers.CurrentUserLayerIndex), edit);
 	}
 
 	private void HandlePintaCoreActionsLayersFlipHorizontalActivated (object sender, EventArgs e)
@@ -284,7 +287,7 @@ public sealed class LayerActions
 
 		doc.Layers.CurrentUserLayer.FlipHorizontal ();
 		doc.Workspace.Invalidate ();
-		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerHorizontal, doc.Layers.CurrentUserLayerIndex));
+		doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipLayerHorizontal, doc.Layers.CurrentUserLayerIndex), edit);
 	}
 
 	private void HandlePintaCoreActionsLayersMoveLayerUpActivated (object sender, EventArgs e)
@@ -300,7 +303,7 @@ public sealed class LayerActions
 			doc.Layers.CurrentUserLayerIndex + 1);
 
 		doc.Layers.MoveCurrentLayerUp ();
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, edit);
 	}
 
 	private void HandlePintaCoreActionsLayersMoveLayerDownActivated (object sender, EventArgs e)
@@ -316,7 +319,7 @@ public sealed class LayerActions
 			doc.Layers.CurrentUserLayerIndex - 1);
 
 		doc.Layers.MoveCurrentLayerDown ();
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, edit);
 	}
 
 	private void HandlePintaCoreActionsLayersMergeLayerDownActivated (object sender, EventArgs e)
@@ -348,7 +351,7 @@ public sealed class LayerActions
 		hist.Push (h1);
 		hist.Push (h2);
 
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, edit);
 	}
 
 	private void HandlePintaCoreActionsLayersDuplicateLayerActivated (object sender, EventArgs e)
@@ -366,7 +369,7 @@ public sealed class LayerActions
 			Resources.Icons.LayerDuplicate,
 			Translations.GetString ("Duplicate Layer"),
 			doc.Layers.IndexOf (l));
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, edit);
 	}
 
 	private void HandlePintaCoreActionsLayersDeleteLayerActivated (object sender, EventArgs e)
@@ -383,7 +386,7 @@ public sealed class LayerActions
 
 		doc.Layers.DeleteLayer (doc.Layers.CurrentUserLayerIndex);
 
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, edit);
 	}
 
 	private void HandlePintaCoreActionsLayersAddNewLayerActivated (object sender, EventArgs e)
@@ -400,6 +403,6 @@ public sealed class LayerActions
 			Resources.Icons.LayerNew,
 			Translations.GetString ("Add New Layer"),
 			doc.Layers.IndexOf (l));
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, edit);
 	}
 }
