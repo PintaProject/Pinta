@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class NewImageDialog : Gtk.Dialog
+public sealed partial class NewImageDialog : Gtk.Dialog
 {
 	private readonly bool has_clipboard;
 	private bool suppress_events;
@@ -188,7 +188,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		Gtk.Label previewLabel = Gtk.Label.New (Translations.GetString ("Preview"));
 
-		PreviewArea previewBox = new ();
+		PreviewArea previewBox = PreviewArea.New ();
 
 		Gtk.Box previewVbox = GtkExtensions.BoxVertical ([
 			previewLabel,
@@ -561,9 +561,10 @@ public sealed class NewImageDialog : Gtk.Dialog
 			preset_dropdown.Selected = index;
 	}
 
-	private sealed class PreviewArea : Gtk.Box
+	[GObject.Subclass<Gtk.Box>]
+	internal sealed partial class PreviewArea
 	{
-		private Gtk.Picture picture;
+		private Gtk.Picture picture = Gtk.Picture.New ();
 		private Size size;
 		private Cairo.Color color;
 
@@ -572,7 +573,10 @@ public sealed class NewImageDialog : Gtk.Dialog
 		private static readonly Gdk.Texture transparent_pattern_texture =
 			CairoExtensions.CreateTransparentBackgroundSurface (16).ToTexture ();
 
-		public PreviewArea ()
+		public static PreviewArea New ()
+			=> NewWithProperties ([]);
+
+		partial void Initialize ()
 		{
 			WidthRequest = 300;
 			Vexpand = true;
@@ -582,7 +586,6 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 			// Center the paintable in an expanding box so that CSS can be used to draw
 			// the drop shadow around only the canvas area.
-			picture = Gtk.Picture.New ();
 			picture.Name = "new-image-preview";
 			picture.ContentFit = Gtk.ContentFit.ScaleDown;
 			picture.Hexpand = true;
