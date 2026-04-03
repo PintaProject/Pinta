@@ -74,7 +74,6 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	{
 		Gtk.ListItem item = (Gtk.ListItem) args.Object;
 		if (item is null) { return; }
-		System.Console.WriteLine (item.Position);
 		if (item.Position > 10000) { return; }
 
 		ToolBarItem toolbar_item = items[(int) item.Position];
