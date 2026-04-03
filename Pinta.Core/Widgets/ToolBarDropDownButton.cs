@@ -151,7 +151,7 @@ public sealed class ToolBarItem
 		ImageId = imageId;
 		Action = Gio.SimpleAction.New (actionName, null);
 		Tag = tag;
-		
+
 		Box = new ();
 		Image = new ();
 		Label = new ();
