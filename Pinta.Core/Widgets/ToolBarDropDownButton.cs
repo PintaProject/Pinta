@@ -74,7 +74,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	{
 		Gtk.ListItem item = (Gtk.ListItem) args.Object;
 		if (item is null) { return; }
-	        Gtk.Box box = new ();
+		Gtk.Box box = new ();
 
 		Gtk.Image image = new ();
 		Gtk.Label label = new ();
@@ -88,7 +88,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		box.Append (label);
 		box.Append (selected_icon);
 
-	        item.SetChild (box);
+		item.SetChild (box);
 	}
 
 	private void OnBindListItem (Gtk.SignalListItemFactory sender, Gtk.SignalListItemFactory.BindSignalArgs args)
