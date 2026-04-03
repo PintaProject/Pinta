@@ -13,12 +13,16 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class AnglePickerGraphic : Gtk.DrawingArea
+[GObject.Subclass<Gtk.DrawingArea>]
+public sealed partial class AnglePickerGraphic
 {
 	private PointD drag_start;
 	private DegreesAngle angle_value;
 
-	public AnglePickerGraphic ()
+	public static new AnglePickerGraphic New ()
+		=> NewWithProperties ([]);
+
+	partial void Initialize ()
 	{
 		HeightRequest = WidthRequest = 50;
 
