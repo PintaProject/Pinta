@@ -575,7 +575,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? d
 			: default;
 
-		AnglePickerWidget widget = new (initialAngle) { Label = caption };
+		AnglePickerWidget widget = AnglePickerWidget.NewWithAngle (initialAngle);
+		widget.Label = caption;
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
