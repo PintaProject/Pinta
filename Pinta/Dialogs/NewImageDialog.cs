@@ -31,7 +31,7 @@ using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class NewImageDialog : Gtk.Dialog
+public sealed partial class NewImageDialog : Gtk.Dialog
 {
 	private readonly bool has_clipboard;
 	private bool suppress_events;
@@ -160,11 +160,10 @@ public sealed class NewImageDialog : Gtk.Dialog
 		backgroundVbox.MarginTop = 4;
 
 		// Layout table for preset, width, and height
-		Gtk.Grid layoutGrid = new () {
-			RowSpacing = 5,
-			ColumnSpacing = 6,
-			MarginBottom = 3,
-		};
+		Gtk.Grid layoutGrid = Gtk.Grid.New ();
+		layoutGrid.RowSpacing = 5;
+		layoutGrid.ColumnSpacing = 6;
+		layoutGrid.MarginBottom = 3;
 		layoutGrid.Attach (sizeLabel, 0, 0, 1, 1);
 		layoutGrid.Attach (presetDropdown, 1, 0, 1, 1);
 		layoutGrid.Attach (widthLabel, 0, 1, 1, 1);
@@ -189,7 +188,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		Gtk.Label previewLabel = Gtk.Label.New (Translations.GetString ("Preview"));
 
-		PreviewArea previewBox = new ();
+		PreviewArea previewBox = PreviewArea.New ();
 
 		Gtk.Box previewVbox = GtkExtensions.BoxVertical ([
 			previewLabel,
@@ -275,17 +274,21 @@ public sealed class NewImageDialog : Gtk.Dialog
 	}
 
 	private static Gtk.Image CreateOrientationIcon (string iconName)
-		=> new () {
-			IconName = iconName,
-			PixelSize = 16,
-			MarginEnd = 7,
-		};
+	{
+		Gtk.Image image = Gtk.Image.New ();
+		image.IconName = iconName;
+		image.PixelSize = 16;
+		image.MarginEnd = 7;
+		return image;
+	}
 
 	private static Gtk.Entry CreateLengthEntry ()
-		=> new () {
-			WidthRequest = 50,
-			ActivatesDefault = true,
-		};
+	{
+		Gtk.Entry entry = Gtk.Entry.New ();
+		entry.WidthRequest = 50;
+		entry.ActivatesDefault = true;
+		return entry;
+	}
 
 	private static Gtk.CheckButton CreatePortraitRadio ()
 		=> Gtk.CheckButton.NewWithLabel (Translations.GetString ("Portrait"));
@@ -558,9 +561,10 @@ public sealed class NewImageDialog : Gtk.Dialog
 			preset_dropdown.Selected = index;
 	}
 
-	private sealed class PreviewArea : Gtk.Box
+	[GObject.Subclass<Gtk.Box>]
+	internal sealed partial class PreviewArea
 	{
-		private Gtk.Picture picture;
+		private Gtk.Picture picture = Gtk.Picture.New ();
 		private Size size;
 		private Cairo.Color color;
 
@@ -569,7 +573,10 @@ public sealed class NewImageDialog : Gtk.Dialog
 		private static readonly Gdk.Texture transparent_pattern_texture =
 			CairoExtensions.CreateTransparentBackgroundSurface (16).ToTexture ();
 
-		public PreviewArea ()
+		public static PreviewArea New ()
+			=> NewWithProperties ([]);
+
+		partial void Initialize ()
 		{
 			WidthRequest = 300;
 			Vexpand = true;
@@ -579,7 +586,6 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 			// Center the paintable in an expanding box so that CSS can be used to draw
 			// the drop shadow around only the canvas area.
-			picture = Gtk.Picture.New ();
 			picture.Name = "new-image-preview";
 			picture.ContentFit = Gtk.ContentFit.ScaleDown;
 			picture.Hexpand = true;

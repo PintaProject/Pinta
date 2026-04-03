@@ -50,10 +50,9 @@ internal sealed class AddinListView : Adw.Bin
 		listViewScroll.SetSizeRequest (300, 400);
 		listViewScroll.SetPolicy (Gtk.PolicyType.Automatic, Gtk.PolicyType.Automatic);
 
-		Adw.StatusPage emptyListPage = new () {
-			IconName = StandardIcons.SystemSearch,
-			Title = Translations.GetString ("No Items Found"),
-		};
+		Adw.StatusPage emptyListPage = Adw.StatusPage.New ();
+		emptyListPage.IconName = StandardIcons.SystemSearch;
+		emptyListPage.Title = Translations.GetString ("No Items Found");
 		emptyListPage.AddCssClass (AdwaitaStyles.Compact);
 
 		Adw.ViewStack listViewStack = Adw.ViewStack.New ();
@@ -100,7 +99,7 @@ internal sealed class AddinListView : Adw.Bin
 	{
 		list_view_stack.VisibleChild = list_view_scroll;
 
-		model.Append (new AddinListViewItem (service, info, addin, status));
+		model.Append (AddinListViewItem.NewForInstalledAddin (service, info, addin, status));
 
 		// Adding items may not cause a selection-changed signal, as mentioned in the SelectionModel docs
 		if (model.NItems == 1)
@@ -115,7 +114,7 @@ internal sealed class AddinListView : Adw.Bin
 	{
 		list_view_stack.VisibleChild = list_view_scroll;
 
-		model.Append (new AddinListViewItem (service, info, addin, status));
+		model.Append (AddinListViewItem.NewForAvailableAddin (service, info, addin, status));
 
 		// Adding items may not cause a selection-changed signal, as mentioned in the SelectionModel docs
 		if (model.NItems == 1)

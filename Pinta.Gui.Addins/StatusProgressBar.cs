@@ -17,7 +17,7 @@ internal interface IErrorReporter
 /// </summary>
 internal sealed class StatusProgressBar : Adw.Bin, IProgressStatus
 {
-	private readonly Gtk.Overlay progress_overlay = new ();
+	private readonly Gtk.Overlay progress_overlay = Gtk.Overlay.New ();
 	private readonly Gtk.ProgressBar progress_bar;
 	private readonly IErrorReporter error_reporter;
 
@@ -25,11 +25,10 @@ internal sealed class StatusProgressBar : Adw.Bin, IProgressStatus
 	{
 		this.error_reporter = error_reporter;
 
-		progress_bar = new Gtk.ProgressBar () {
-			Fraction = 0.5,
-			ShowText = true,
-			Valign = Gtk.Align.End
-		};
+		progress_bar = Gtk.ProgressBar.New ();
+		progress_bar.Fraction = 0.5;
+		progress_bar.ShowText = true;
+		progress_bar.Valign = Gtk.Align.End;
 		progress_bar.AddCssClass (Pinta.Core.AdwaitaStyles.Osd);
 
 		progress_overlay.Child = primary_widget;
