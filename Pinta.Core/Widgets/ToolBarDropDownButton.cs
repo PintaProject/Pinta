@@ -173,7 +173,8 @@ public sealed class ToolBarItem
 	private static string AdjustName (string baseName)
 		=> string.Concat (baseName.Where (c => !char.IsWhiteSpace (c)));
 
-	public void SetSelected (bool selected) {
+	public void SetSelected (bool selected)
+	{
 		SelectedIcon.Visible = selected;
 	}
 
