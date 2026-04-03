@@ -16,6 +16,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 	private Gtk.StringList stringList;
 	private ToolBarItem? selected_item;
+	private int previous_index = 0;
 
 	private readonly List<ToolBarItem> items;
 	public ReadOnlyCollection<ToolBarItem> Items { get; }
@@ -41,7 +42,6 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		SetFactory (selectedFactory);
 
 		Gtk.SignalListItemFactory listFactory = new ();
-		listFactory.OnSetup += OnSetupListItem;
 		listFactory.OnBind += OnBindListItem;
 		SetListFactory (listFactory);
 	}
@@ -57,60 +57,28 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	{
 		Gtk.ListItem item = (Gtk.ListItem) args.Object;
 		if (item is null) { return; }
+		if (item.Position > 10000) { return; }
 
-		var string_object = (Gtk.StringObject) item.GetItem ();
-		if (string_object is null) { return; }
+		ToolBarItem toolbar_item = items[(int) item.Position];
 
-		System.String[] strings = string_object.String.Split ("|");
-		if (strings[1] is null) { return; }
+		dropdown_icon.SetFromIconName (toolbar_item.ImageId);
+		if (show_label) { dropdown_label.SetText (toolbar_item.Text); }
 
-		dropdown_icon.SetFromIconName (strings[1]);
-		if (show_label) { dropdown_label.SetText (strings[0]); }
-
+		items[previous_index].SetSelected (false);
+		previous_index = (int) Selected;
+		items[previous_index].SetSelected (true);
 		SelectedIndex = (int) Selected;
-	}
-
-	private void OnSetupListItem (Gtk.SignalListItemFactory sender, Gtk.SignalListItemFactory.SetupSignalArgs args)
-	{
-		Gtk.ListItem item = (Gtk.ListItem) args.Object;
-		if (item is null) { return; }
-		Gtk.Box box = new ();
-
-		Gtk.Image image = new ();
-		Gtk.Label label = new ();
-		Gtk.Image selected_icon = new ();
-		selected_icon.SetFromIconName ("object-select-symbolic");
-		item.BindProperty (Gtk.ListItem.SelectedPropertyDefinition.UnmanagedName, selected_icon, Gtk.Image.VisiblePropertyDefinition.UnmanagedName, GObject.BindingFlags.SyncCreate);
-		selected_icon.Hexpand = true;
-		selected_icon.Halign = Gtk.Align.End;
-
-		box.Append (image);
-		box.Append (label);
-		box.Append (selected_icon);
-
-		item.SetChild (box);
 	}
 
 	private void OnBindListItem (Gtk.SignalListItemFactory sender, Gtk.SignalListItemFactory.BindSignalArgs args)
 	{
 		Gtk.ListItem item = (Gtk.ListItem) args.Object;
 		if (item is null) { return; }
-		Gtk.Box box = (Gtk.Box) item.GetChild ();
-		if (box is null) { return; }
+		System.Console.WriteLine (item.Position);
+		if (item.Position > 10000) { return; }
 
-		Gtk.StringObject string_object = (Gtk.StringObject) item.GetItem ();
-		if (string_object is null) { return; }
-
-		System.String[] strings = string_object.String.Split ("|");
-		if (strings[1] is null) { return; }
-
-		Gtk.Image image = (Gtk.Image) box.GetFirstChild ();
-		if (image is null) { return; }
-		image.SetFromIconName (strings[1]);
-
-		Gtk.Label label = (Gtk.Label) image.GetNextSibling ();
-		if (label is null) { return; }
-		label.SetText (strings[0]);
+		ToolBarItem toolbar_item = items[(int) item.Position];
+		item.SetChild (toolbar_item.Box);
 	}
 
 	public ToolBarItem AddItem (string text, string imageId)
@@ -121,7 +89,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	public ToolBarItem AddItem (string text, string imageId, object? tag)
 	{
 		ToolBarItem item = new ToolBarItem (text, imageId, tag);
-		stringList.Append (text + "|" + imageId + "|" + $"{ACTION_PREFIX}.{item.Action.Name}");
+		stringList.Append ("");
 
 		items.Add (item);
 
@@ -183,15 +151,41 @@ public sealed class ToolBarItem
 		ImageId = imageId;
 		Action = Gio.SimpleAction.New (actionName, null);
 		Tag = tag;
+		
+		Box = new ();
+		Image = new ();
+		Label = new ();
+		SelectedIcon = new ();
+		SelectedIcon.SetFromIconName ("object-select-symbolic");
+		SelectedIcon.Visible = false;
+
+		SelectedIcon.Hexpand = true;
+		SelectedIcon.Halign = Gtk.Align.End;
+
+		Box.Append (Image);
+		Box.Append (Label);
+		Box.Append (SelectedIcon);
+
+		Image.SetFromIconName (imageId);
+		Label.SetText (text);
 	}
 
 	private static string AdjustName (string baseName)
 		=> string.Concat (baseName.Where (c => !char.IsWhiteSpace (c)));
 
+	public void SetSelected (bool selected) {
+		SelectedIcon.Visible = selected;
+	}
+
 	public string ImageId { get; }
 	public object? Tag { get; }
 	public string Text { get; }
 	public Gio.SimpleAction Action { get; }
+	public Gtk.Box Box { get; }
+
+	private Gtk.Image Image;
+	private Gtk.Label Label;
+	private Gtk.Image SelectedIcon;
 
 	public T GetTagOrDefault<T> (T defaultValue)
 		=> Tag is T value ? value : defaultValue;
