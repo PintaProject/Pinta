@@ -5,13 +5,16 @@ using System.Linq;
 
 namespace Pinta.Core;
 
-public sealed class ToolBarDropDownButton : Gtk.MenuButton
+public sealed class ToolBarDropDownButton : Gtk.DropDown
 {
 	private const string ACTION_PREFIX = "tool";
-
 	private readonly bool show_label;
-	private readonly Gio.Menu dropdown;
-	private readonly Gio.SimpleActionGroup action_group;
+
+	private Gtk.Box selected_box;
+	private Gtk.Image dropdown_icon;
+	private Gtk.Label dropdown_label;
+
+	private Gtk.StringList stringList;
 	private ToolBarItem? selected_item;
 
 	private readonly List<ToolBarItem> items;
@@ -19,17 +22,95 @@ public sealed class ToolBarDropDownButton : Gtk.MenuButton
 
 	public ToolBarDropDownButton (bool showLabel = false)
 	{
-		show_label = showLabel;
+		selected_box = new ();
+		dropdown_icon = new ();
+		dropdown_label = new ();
+		selected_box.Append (dropdown_icon);
+		selected_box.Append (dropdown_label);
 
 		items = [];
 		Items = new ReadOnlyCollection<ToolBarItem> (items);
-		AlwaysShowArrow = true;
+		show_label = showLabel;
 
-		dropdown = Gio.Menu.New ();
-		MenuModel = dropdown;
+		stringList = new Gtk.StringList ();
+		SetModel (stringList);
 
-		action_group = Gio.SimpleActionGroup.New ();
-		InsertActionGroup (ACTION_PREFIX, action_group);
+		Gtk.SignalListItemFactory selectedFactory = new ();
+		selectedFactory.OnSetup += OnSetupSelectedItem;
+		selectedFactory.OnBind += OnBindSelectedItem;
+		SetFactory (selectedFactory);
+
+		Gtk.SignalListItemFactory listFactory = new ();
+		listFactory.OnSetup += OnSetupListItem;
+		listFactory.OnBind += OnBindListItem;
+		SetListFactory (listFactory);
+	}
+
+	private void OnSetupSelectedItem (Gtk.SignalListItemFactory factory, Gtk.SignalListItemFactory.SetupSignalArgs args)
+	{
+		Gtk.ListItem item = (Gtk.ListItem) args.Object;
+		if (item is null) { return; }
+		item.SetChild (selected_box);
+	}
+
+	private void OnBindSelectedItem (Gtk.SignalListItemFactory sender, Gtk.SignalListItemFactory.BindSignalArgs args)
+	{
+		Gtk.ListItem item = (Gtk.ListItem) args.Object;
+		if (item is null) { return; }
+
+		var string_object = (Gtk.StringObject) item.GetItem ();
+		if (string_object is null) { return; }
+
+		System.String[] strings = string_object.String.Split ("|");
+		if (strings[1] is null) { return; }
+
+		dropdown_icon.SetFromIconName (strings[1]);
+		if (show_label) { dropdown_label.SetText (strings[0]); }
+
+		SelectedIndex = (int) Selected;
+	}
+
+	private void OnSetupListItem (Gtk.SignalListItemFactory sender, Gtk.SignalListItemFactory.SetupSignalArgs args)
+	{
+		Gtk.ListItem item = (Gtk.ListItem) args.Object;
+		if (item is null) { return; }
+	        Gtk.Box box = new ();
+
+		Gtk.Image image = new ();
+		Gtk.Label label = new ();
+		Gtk.Image selected_icon = new ();
+		selected_icon.SetFromIconName ("object-select-symbolic");
+		item.BindProperty (Gtk.ListItem.SelectedPropertyDefinition.UnmanagedName, selected_icon, Gtk.Image.VisiblePropertyDefinition.UnmanagedName, GObject.BindingFlags.SyncCreate);
+		selected_icon.Hexpand = true;
+		selected_icon.Halign = Gtk.Align.End;
+
+		box.Append (image);
+		box.Append (label);
+		box.Append (selected_icon);
+
+	        item.SetChild (box);
+	}
+
+	private void OnBindListItem (Gtk.SignalListItemFactory sender, Gtk.SignalListItemFactory.BindSignalArgs args)
+	{
+		Gtk.ListItem item = (Gtk.ListItem) args.Object;
+		if (item is null) { return; }
+		Gtk.Box box = (Gtk.Box) item.GetChild ();
+		if (box is null) { return; }
+
+		Gtk.StringObject string_object = (Gtk.StringObject) item.GetItem ();
+		if (string_object is null) { return; }
+
+		System.String[] strings = string_object.String.Split ("|");
+		if (strings[1] is null) { return; }
+
+		Gtk.Image image = (Gtk.Image) box.GetFirstChild ();
+		if (image is null) { return; }
+		image.SetFromIconName (strings[1]);
+
+		Gtk.Label label = (Gtk.Label) image.GetNextSibling ();
+		if (label is null) { return; }
+		label.SetText (strings[0]);
 	}
 
 	public ToolBarItem AddItem (string text, string imageId)
@@ -40,11 +121,9 @@ public sealed class ToolBarDropDownButton : Gtk.MenuButton
 	public ToolBarItem AddItem (string text, string imageId, object? tag)
 	{
 		ToolBarItem item = new ToolBarItem (text, imageId, tag);
-		action_group.AddAction (item.Action);
-		dropdown.AppendItem (Gio.MenuItem.New (text, $"{ACTION_PREFIX}.{item.Action.Name}"));
+		stringList.Append (text + "|" + imageId + "|" + $"{ACTION_PREFIX}.{item.Action.Name}");
 
 		items.Add (item);
-		item.Action.OnActivate += delegate { SetSelectedItem (item); };
 
 		if (selected_item == null)
 			SetSelectedItem (item);
@@ -78,15 +157,10 @@ public sealed class ToolBarDropDownButton : Gtk.MenuButton
 
 	private void SetSelectedItem (ToolBarItem item)
 	{
-		IconName = item.ImageId;
-
 		selected_item = item;
 		TooltipText = item.Text;
 
-		if (show_label)
-			Label = item.Text;
-
-		OnSelectedItemChanged ();
+		// OnSelectedItemChanged ();
 	}
 
 	private void OnSelectedItemChanged ()
