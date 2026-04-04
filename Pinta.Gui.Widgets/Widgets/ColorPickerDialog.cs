@@ -185,6 +185,67 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		return slider;
 	}
 
+	private readonly record struct SlidersBundle (
+		Gtk.Box Box,
+		Gtk.Entry Hex,
+		ColorPickerSlider Hue,
+		ColorPickerSlider Saturation,
+		ColorPickerSlider Value,
+		ColorPickerSlider Red,
+		ColorPickerSlider Green,
+		ColorPickerSlider Blue,
+		ColorPickerSlider Alpha);
+
+	private SlidersBundle BuildColorSliders (Color initialColor)
+	{
+		Gtk.Entry hexEntry = new () {
+			Text_ = initialColor.ToHex (),
+			MaxWidthChars = 10,
+		};
+		hexEntry.OnChanged += HexEntry_OnChanged;
+
+		Gtk.Label hexLabel = new () {
+			Label_ = Translations.GetString ("Hex"),
+			WidthRequest = 50,
+		};
+
+		Gtk.Box hexBox = new () { Spacing = spacing };
+		hexBox.Append (hexLabel);
+		hexBox.Append (hexEntry);
+
+		ColorPickerSlider hueSlider = CreateSlider (ColorPickerSlider.Component.Hue, initialColor);
+		ColorPickerSlider saturationSlider = CreateSlider (ColorPickerSlider.Component.Saturation, initialColor);
+		ColorPickerSlider valueSlider = CreateSlider (ColorPickerSlider.Component.Value, initialColor);
+		ColorPickerSlider redSlider = CreateSlider (ColorPickerSlider.Component.Red, initialColor);
+		ColorPickerSlider greenSlider = CreateSlider (ColorPickerSlider.Component.Green, initialColor);
+		ColorPickerSlider blueSlider = CreateSlider (ColorPickerSlider.Component.Blue, initialColor);
+		ColorPickerSlider alphaSlider = CreateSlider (ColorPickerSlider.Component.Alpha, initialColor);
+
+		Gtk.Box slidersBox = new () { Spacing = spacing };
+		slidersBox.SetOrientation (Gtk.Orientation.Vertical);
+		slidersBox.Append (hexBox);
+		slidersBox.Append (hueSlider);
+		slidersBox.Append (saturationSlider);
+		slidersBox.Append (valueSlider);
+		slidersBox.Append (new Gtk.Separator ());
+		slidersBox.Append (redSlider);
+		slidersBox.Append (greenSlider);
+		slidersBox.Append (blueSlider);
+		slidersBox.Append (new Gtk.Separator ());
+		slidersBox.Append (alphaSlider);
+
+		return new (
+			Box: slidersBox,
+			Hex: hexEntry,
+			Hue: hueSlider,
+			Saturation: saturationSlider,
+			Value: valueSlider,
+			Red: redSlider,
+			Green: greenSlider,
+			Blue: blueSlider,
+			Alpha: alphaSlider);
+	}
+
 	private static bool IsPrimary (int colorIndex) // TODO: Get rid of this
 		=> colorIndex == 0;
 
@@ -365,41 +426,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		Color initialColor = ExtractTargetedColor (adjustable, primarySelected);
 
-		Gtk.Entry hexEntry = new () {
-			Text_ = initialColor.ToHex (),
-			MaxWidthChars = 10,
-		};
-		hexEntry.OnChanged += HexEntry_OnChanged;
-
-		Gtk.Label hexLabel = new () {
-			Label_ = Translations.GetString ("Hex"),
-			WidthRequest = 50,
-		};
-
-		Gtk.Box hexBox = new () { Spacing = spacing };
-		hexBox.Append (hexLabel);
-		hexBox.Append (hexEntry);
-
-		ColorPickerSlider hueSlider = CreateSlider (ColorPickerSlider.Component.Hue, initialColor);
-		ColorPickerSlider saturationSlider = CreateSlider (ColorPickerSlider.Component.Saturation, initialColor);
-		ColorPickerSlider valueSlider = CreateSlider (ColorPickerSlider.Component.Value, initialColor);
-		ColorPickerSlider redSlider = CreateSlider (ColorPickerSlider.Component.Red, initialColor);
-		ColorPickerSlider greenSlider = CreateSlider (ColorPickerSlider.Component.Green, initialColor);
-		ColorPickerSlider blueSlider = CreateSlider (ColorPickerSlider.Component.Blue, initialColor);
-		ColorPickerSlider alphaSlider = CreateSlider (ColorPickerSlider.Component.Alpha, initialColor);
-
-		Gtk.Box slidersBox = new () { Spacing = spacing };
-		slidersBox.SetOrientation (Gtk.Orientation.Vertical);
-		slidersBox.Append (hexBox);
-		slidersBox.Append (hueSlider);
-		slidersBox.Append (saturationSlider);
-		slidersBox.Append (valueSlider);
-		slidersBox.Append (new Gtk.Separator ());
-		slidersBox.Append (redSlider);
-		slidersBox.Append (greenSlider);
-		slidersBox.Append (blueSlider);
-		slidersBox.Append (new Gtk.Separator ());
-		slidersBox.Append (alphaSlider);
+		var colorSliders = BuildColorSliders (initialColor);
 
 		// 90% taken from SatusBarColorPaletteWidget
 		// todo: merge both
@@ -437,7 +464,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		Gtk.Box topBox = new () { Spacing = spacing };
 		topBox.Append (colorDisplayBox);
 		topBox.Append (pickerSurfaceBox);
-		topBox.Append (slidersBox);
+		topBox.Append (colorSliders.Box);
 
 		Gtk.Box mainVbox = new () { Spacing = spacing };
 		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
@@ -490,18 +517,18 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		primary_selected = primarySelected;
 		original_colors = adjustable;
 
-		hue_slider = hueSlider;
-		saturation_slider = saturationSlider;
-		value_slider = valueSlider;
+		hue_slider = colorSliders.Hue;
+		saturation_slider = colorSliders.Saturation;
+		value_slider = colorSliders.Value;
 
-		red_slider = redSlider;
-		green_slider = greenSlider;
-		blue_slider = blueSlider;
-		alpha_slider = alphaSlider;
+		red_slider = colorSliders.Red;
+		green_slider = colorSliders.Green;
+		blue_slider = colorSliders.Blue;
+		alpha_slider = colorSliders.Alpha;
 
 		color_displays = colorDisplays;
 		color_display_box = colorDisplayBox;
-		hex_entry = hexEntry;
+		hex_entry = colorSliders.Hex;
 		this.palette = palette;
 		picker_surface = pickerSurface;
 		picker_surface_box = pickerSurfaceBox;
@@ -510,7 +537,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		picker_surface_selector_box = pickerSurfaceSelectorBox;
 		picker_surface_option_draw_value = pickerSurfaceOptionDrawValue;
 		show_swatches = showWatches;
-		sliders_box = slidersBox;
+		sliders_box = colorSliders.Box;
 		swatch_box = swatchBox;
 		swatch_recent = swatchRecent;
 		swatch_palette = swatchPalette;
