@@ -47,7 +47,7 @@ public sealed class CoreToolsExtension : IExtension
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.GridBrush ());
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.PlainBrush (PintaCore.Workspace));
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SplatterBrush (services.GetService<ISettingsService> ()));
-		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SlashBrush (services.GetService<ISettingsService> ()));
+		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SlashBrush (services.GetService<ISettingsService> (), services.GetService<IWorkspaceService> ()));
 		PintaCore.PaintBrushes.AddPaintBrush (new Brushes.SquaresBrush ());
 
 		PintaCore.Tools.AddTool (new MoveSelectedTool (services));
