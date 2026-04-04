@@ -64,8 +64,8 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 		int current_index = (int) Selected;
 		if (previous_index != current_index) {
-			items[previous_index]..SetSelectedIconVisible (false);
-			items[current_index]..SetSelectedIconVisible (true);
+			items[previous_index].SetSelectedIconVisible (false);
+			items[current_index].SetSelectedIconVisible (true);
 			previous_index = current_index;
 			SelectedIndex = current_index;
 		}
