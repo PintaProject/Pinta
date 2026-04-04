@@ -173,6 +173,18 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		DefaultHeight = 1;
 	}
 
+	private ColorPickerSlider CreateSlider (
+		ColorPickerSlider.Component component,
+		Color initialColor)
+	{
+		ColorPickerSlider slider = new (component, initialColor, slider_width);
+		slider.OnColorChanged += (_, _) => {
+			CurrentColor = slider.Color;
+			UpdateView ();
+		};
+		return slider;
+	}
+
 	private static bool IsPrimary (int colorIndex) // TODO: Get rid of this
 		=> colorIndex == 0;
 
@@ -368,75 +380,13 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		hexBox.Append (hexLabel);
 		hexBox.Append (hexEntry);
 
-		ColorPickerSlider hueSlider = new (
-			ColorPickerSlider.Component.Hue,
-			initialColor,
-			slider_width
-		);
-		hueSlider.OnColorChanged += (_, _) => {
-			CurrentColor = hueSlider.Color;
-			UpdateView ();
-		};
-
-		ColorPickerSlider saturationSlider = new (
-			ColorPickerSlider.Component.Saturation,
-			initialColor,
-			slider_width
-		);
-		saturationSlider.OnColorChanged += (_, _) => {
-			CurrentColor = saturationSlider.Color;
-			UpdateView ();
-		};
-
-		ColorPickerSlider valueSlider = new (
-			ColorPickerSlider.Component.Value,
-			initialColor,
-			slider_width
-		);
-		valueSlider.OnColorChanged += (_, _) => {
-			CurrentColor = valueSlider.Color;
-			UpdateView ();
-		};
-
-		ColorPickerSlider redSlider = new (
-			ColorPickerSlider.Component.Red,
-			initialColor,
-			slider_width
-		);
-		redSlider.OnColorChanged += (_, _) => {
-			CurrentColor = redSlider.Color;
-			UpdateView ();
-		};
-
-		ColorPickerSlider greenSlider = new (
-			ColorPickerSlider.Component.Green,
-			initialColor,
-			slider_width
-		);
-		greenSlider.OnColorChanged += (_, _) => {
-			CurrentColor = greenSlider.Color;
-			UpdateView ();
-		};
-
-		ColorPickerSlider blueSlider = new (
-			ColorPickerSlider.Component.Blue,
-			initialColor,
-			slider_width
-		);
-		blueSlider.OnColorChanged += (_, _) => {
-			CurrentColor = blueSlider.Color;
-			UpdateView ();
-		};
-
-		ColorPickerSlider alphaSlider = new (
-			ColorPickerSlider.Component.Alpha,
-			initialColor,
-			slider_width
-		);
-		alphaSlider.OnColorChanged += (_, _) => {
-			CurrentColor = alphaSlider.Color;
-			UpdateView ();
-		};
+		ColorPickerSlider hueSlider = CreateSlider (ColorPickerSlider.Component.Hue, initialColor);
+		ColorPickerSlider saturationSlider = CreateSlider (ColorPickerSlider.Component.Saturation, initialColor);
+		ColorPickerSlider valueSlider = CreateSlider (ColorPickerSlider.Component.Value, initialColor);
+		ColorPickerSlider redSlider = CreateSlider (ColorPickerSlider.Component.Red, initialColor);
+		ColorPickerSlider greenSlider = CreateSlider (ColorPickerSlider.Component.Green, initialColor);
+		ColorPickerSlider blueSlider = CreateSlider (ColorPickerSlider.Component.Blue, initialColor);
+		ColorPickerSlider alphaSlider = CreateSlider (ColorPickerSlider.Component.Alpha, initialColor);
 
 		Gtk.Box slidersBox = new () { Spacing = spacing };
 		slidersBox.SetOrientation (Gtk.Orientation.Vertical);
