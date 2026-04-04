@@ -7,7 +7,6 @@ namespace Pinta.Core;
 
 public sealed class ToolBarDropDownButton : Gtk.DropDown
 {
-	private const string ACTION_PREFIX = "tool";
 	private readonly bool show_label;
 
 	private Gtk.Box selected_box;
@@ -57,7 +56,6 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	{
 		Gtk.ListItem item = (Gtk.ListItem) args.Object;
 		if (item is null) { return; }
-		if (item.Position > 10000) { return; }
 
 		ToolBarItem toolbar_item = items[(int) item.Position];
 
@@ -66,8 +64,8 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 		int current_index = (int) Selected;
 		if (previous_index != current_index) {
-			items[previous_index].SetSelected (false);
-			items[current_index].SetSelected (true);
+			items[previous_index]..SetSelectedIconVisible (false);
+			items[current_index]..SetSelectedIconVisible (true);
 			previous_index = current_index;
 			SelectedIndex = current_index;
 		}
@@ -77,7 +75,6 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	{
 		Gtk.ListItem item = (Gtk.ListItem) args.Object;
 		if (item is null) { return; }
-		if (item.Position > 10000) { return; }
 
 		ToolBarItem toolbar_item = items[(int) item.Position];
 		item.SetChild (toolbar_item.Box);
@@ -93,6 +90,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		ToolBarItem item = new ToolBarItem (text, imageId, tag);
 		stringList.Append ("");
 
+		if (items.Count == 0 && previous_index == 0) { item.SetSelectedIconVisible (true); }
 		items.Add (item);
 
 		if (selected_item == null)
@@ -129,6 +127,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	{
 		selected_item = item;
 		TooltipText = item.Text;
+		Selected = (uint) items.IndexOf (selected_item);
 
 		OnSelectedItemChanged ();
 	}
@@ -147,11 +146,8 @@ public sealed class ToolBarItem
 
 	public ToolBarItem (string text, string imageId, object? tag)
 	{
-		var actionName = AdjustName (text);
-
 		Text = text;
 		ImageId = imageId;
-		Action = Gio.SimpleAction.New (actionName, null);
 		Tag = tag;
 
 		Box = new ();
@@ -172,18 +168,14 @@ public sealed class ToolBarItem
 		Label.SetText (text);
 	}
 
-	private static string AdjustName (string baseName)
-		=> string.Concat (baseName.Where (c => !char.IsWhiteSpace (c)));
-
-	public void SetSelected (bool selected)
+	public void SetSelectedIconVisible (bool visible)
 	{
-		SelectedIcon.Visible = selected;
+		SelectedIcon.Visible = visible;
 	}
 
 	public string ImageId { get; }
 	public object? Tag { get; }
 	public string Text { get; }
-	public Gio.SimpleAction Action { get; }
 	public Gtk.Box Box { get; }
 
 	private Gtk.Image Image;
