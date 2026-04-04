@@ -173,6 +173,111 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		DefaultHeight = 1;
 	}
 
+	private readonly record struct PickerSurfaceBundle (
+		Gtk.Box Box,
+		Gtk.Box SelectorBox,
+		Gtk.Overlay Overlay,
+		Gtk.DrawingArea Surface,
+		Gtk.DrawingArea Cursor,
+		Gtk.CheckButton DrawValueOption);
+
+	private PickerSurfaceBundle BuildPickerSurface ()
+	{
+		int pickerSurfaceDrawSize = (DEFAULT_PICKER_SURFACE_RADIUS + PICKER_SURFACE_PADDING) * 2;
+
+		// Show Value toggle for hue sat picker surface
+
+		Gtk.CheckButton pickerSurfaceOptionDrawValue = new () {
+			Active = true,
+			Label = Translations.GetString ("Show Value"),
+			TooltipText = Translations.GetString ("If enabled, the Value component is applied to the color wheel."),
+			FocusOnClick = false
+		};
+		pickerSurfaceOptionDrawValue.SetVisible (DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.HueAndSat);
+		pickerSurfaceOptionDrawValue.OnToggled += (o, e) => UpdateView ();
+
+		Gtk.ToggleButton pickerSurfaceSatVal = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Sat & Value"));
+		pickerSurfaceSatVal.FocusOnClick = false;
+		pickerSurfaceSatVal.Active = DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.SatAndVal;
+		pickerSurfaceSatVal.OnToggled += (_, _) => {
+			picker_surface_type = ColorSurfaceType.SatAndVal;
+			pickerSurfaceOptionDrawValue.SetVisible (false);
+			UpdateView ();
+		};
+
+		// When Gir.Core supports it, this should probably be replaced with a toggle group.
+		Gtk.ToggleButton pickerSurfaceHueSat = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Hue & Sat"));
+		pickerSurfaceHueSat.FocusOnClick = false;
+		pickerSurfaceHueSat.Active = DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.HueAndSat;
+		pickerSurfaceHueSat.OnToggled += (_, _) => {
+			picker_surface_type = ColorSurfaceType.HueAndSat;
+			pickerSurfaceOptionDrawValue.SetVisible (true);
+			UpdateView ();
+		};
+		pickerSurfaceHueSat.SetGroup (pickerSurfaceSatVal);
+
+		Gtk.Box pickerSurfaceSelectorBox = new Gtk.Box {
+			Spacing = spacing,
+			WidthRequest = pickerSurfaceDrawSize,
+			Homogeneous = true,
+			Halign = Gtk.Align.Center,
+		};
+		pickerSurfaceSelectorBox.Append (pickerSurfaceHueSat);
+		pickerSurfaceSelectorBox.Append (pickerSurfaceSatVal);
+
+		Gtk.DrawingArea pickerSurface = new ();
+		pickerSurface.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
+		pickerSurface.SetDrawFunc ((area, context, width, height) => DrawColorSurface (context));
+
+		// Cursor handles the square in the picker surface displaying where your selected color is
+		Gtk.DrawingArea pickerSurfaceCursor = new ();
+		pickerSurfaceCursor.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
+		pickerSurfaceCursor.SetDrawFunc ((area, context, width, height) => {
+
+			PointD locBase = HsvToPickerLocation (CurrentColor.ToHsv (), picker_surface_radius);
+			PointD loc = new (locBase.X + picker_surface_radius + PICKER_SURFACE_PADDING, locBase.Y + picker_surface_radius + PICKER_SURFACE_PADDING);
+
+			context.Antialias = Antialias.None;
+
+			context.FillRectangle (
+				new RectangleD (loc.X - 5, loc.Y - 5, 10, 10),
+				CurrentColor);
+
+			context.DrawRectangle (
+				new RectangleD (loc.X - 5, loc.Y - 5, 10, 10),
+				new Color (0, 0, 0),
+				4);
+
+			context.DrawRectangle (
+				new RectangleD (loc.X - 5, loc.Y - 5, 10, 10),
+				new Color (1, 1, 1),
+				1);
+		});
+
+		// Overlays the cursor on top of the surface
+		Gtk.Overlay pickerSurfaceOverlay = new ();
+		pickerSurfaceOverlay.AddOverlay (pickerSurface);
+		pickerSurfaceOverlay.AddOverlay (pickerSurfaceCursor);
+		pickerSurfaceOverlay.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
+
+		Gtk.Box pickerSurfaceBox = new () {
+			Spacing = spacing,
+			WidthRequest = pickerSurfaceDrawSize,
+		};
+		pickerSurfaceBox.SetOrientation (Gtk.Orientation.Vertical);
+		pickerSurfaceBox.Append (pickerSurfaceSelectorBox);
+		pickerSurfaceBox.Append (pickerSurfaceOverlay);
+		pickerSurfaceBox.Append (pickerSurfaceOptionDrawValue);
+
+		return new PickerSurfaceBundle (
+			Box: pickerSurfaceBox,
+			SelectorBox: pickerSurfaceSelectorBox,
+			Overlay: pickerSurfaceOverlay,
+			Surface: pickerSurface,
+			Cursor: pickerSurfaceCursor,
+			DrawValueOption: pickerSurfaceOptionDrawValue);
+	}
+
 	private ColorPickerSlider CreateSlider (
 		ColorPickerSlider.Component component,
 		Color initialColor)
@@ -332,95 +437,8 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 
 		// Picker surface; either is Hue & Sat (Color circle) or Sat & Val (Square)
 		// Also contains picker surface switcher + options
-		#region Picker Surface
 
-		int pickerSurfaceDrawSize = (DEFAULT_PICKER_SURFACE_RADIUS + PICKER_SURFACE_PADDING) * 2;
-
-		// Show Value toggle for hue sat picker surface
-
-		Gtk.CheckButton pickerSurfaceOptionDrawValue = new () {
-			Active = true,
-			Label = Translations.GetString ("Show Value"),
-			TooltipText = Translations.GetString ("If enabled, the Value component is applied to the color wheel."),
-			FocusOnClick = false
-		};
-		pickerSurfaceOptionDrawValue.SetVisible (DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.HueAndSat);
-		pickerSurfaceOptionDrawValue.OnToggled += (o, e) => UpdateView ();
-
-		Gtk.ToggleButton pickerSurfaceSatVal = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Sat & Value"));
-		pickerSurfaceSatVal.FocusOnClick = false;
-		pickerSurfaceSatVal.Active = DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.SatAndVal;
-		pickerSurfaceSatVal.OnToggled += (_, _) => {
-			picker_surface_type = ColorSurfaceType.SatAndVal;
-			pickerSurfaceOptionDrawValue.SetVisible (false);
-			UpdateView ();
-		};
-
-		// When Gir.Core supports it, this should probably be replaced with a toggle group.
-		Gtk.ToggleButton pickerSurfaceHueSat = Gtk.ToggleButton.NewWithLabel (Translations.GetString ("Hue & Sat"));
-		pickerSurfaceHueSat.FocusOnClick = false;
-		pickerSurfaceHueSat.Active = DEFAULT_PICKER_SURFACE_TYPE == ColorSurfaceType.HueAndSat;
-		pickerSurfaceHueSat.OnToggled += (_, _) => {
-			picker_surface_type = ColorSurfaceType.HueAndSat;
-			pickerSurfaceOptionDrawValue.SetVisible (true);
-			UpdateView ();
-		};
-		pickerSurfaceHueSat.SetGroup (pickerSurfaceSatVal);
-
-		Gtk.Box pickerSurfaceSelectorBox = new Gtk.Box {
-			Spacing = spacing,
-			WidthRequest = pickerSurfaceDrawSize,
-			Homogeneous = true,
-			Halign = Gtk.Align.Center,
-		};
-		pickerSurfaceSelectorBox.Append (pickerSurfaceHueSat);
-		pickerSurfaceSelectorBox.Append (pickerSurfaceSatVal);
-
-		Gtk.DrawingArea pickerSurface = new ();
-		pickerSurface.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
-		pickerSurface.SetDrawFunc ((area, context, width, height) => DrawColorSurface (context));
-
-		// Cursor handles the square in the picker surface displaying where your selected color is
-		Gtk.DrawingArea pickerSurfaceCursor = new ();
-		pickerSurfaceCursor.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
-		pickerSurfaceCursor.SetDrawFunc ((area, context, width, height) => {
-
-			PointD locBase = HsvToPickerLocation (CurrentColor.ToHsv (), picker_surface_radius);
-			PointD loc = new (locBase.X + picker_surface_radius + PICKER_SURFACE_PADDING, locBase.Y + picker_surface_radius + PICKER_SURFACE_PADDING);
-
-			context.Antialias = Antialias.None;
-
-			context.FillRectangle (
-				new RectangleD (loc.X - 5, loc.Y - 5, 10, 10),
-				CurrentColor);
-
-			context.DrawRectangle (
-				new RectangleD (loc.X - 5, loc.Y - 5, 10, 10),
-				new Color (0, 0, 0),
-				4);
-
-			context.DrawRectangle (
-				new RectangleD (loc.X - 5, loc.Y - 5, 10, 10),
-				new Color (1, 1, 1),
-				1);
-		});
-
-		// Overlays the cursor on top of the surface
-		Gtk.Overlay pickerSurfaceOverlay = new ();
-		pickerSurfaceOverlay.AddOverlay (pickerSurface);
-		pickerSurfaceOverlay.AddOverlay (pickerSurfaceCursor);
-		pickerSurfaceOverlay.SetSizeRequest (pickerSurfaceDrawSize, pickerSurfaceDrawSize);
-
-		Gtk.Box pickerSurfaceBox = new () {
-			Spacing = spacing,
-			WidthRequest = pickerSurfaceDrawSize,
-		};
-		pickerSurfaceBox.SetOrientation (Gtk.Orientation.Vertical);
-		pickerSurfaceBox.Append (pickerSurfaceSelectorBox);
-		pickerSurfaceBox.Append (pickerSurfaceOverlay);
-		pickerSurfaceBox.Append (pickerSurfaceOptionDrawValue);
-
-		#endregion
+		var pickerSurfaceControls = BuildPickerSurface ();
 
 		// Handles the ColorPickerSliders + Hex entry.
 
@@ -463,7 +481,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		// Basically, the not-swatches
 		Gtk.Box topBox = new () { Spacing = spacing };
 		topBox.Append (colorDisplayBox);
-		topBox.Append (pickerSurfaceBox);
+		topBox.Append (pickerSurfaceControls.Box);
 		topBox.Append (colorSliders.Box);
 
 		Gtk.Box mainVbox = new () { Spacing = spacing };
@@ -530,12 +548,12 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		color_display_box = colorDisplayBox;
 		hex_entry = colorSliders.Hex;
 		this.palette = palette;
-		picker_surface = pickerSurface;
-		picker_surface_box = pickerSurfaceBox;
-		picker_surface_cursor = pickerSurfaceCursor;
-		picker_surface_overlay = pickerSurfaceOverlay;
-		picker_surface_selector_box = pickerSurfaceSelectorBox;
-		picker_surface_option_draw_value = pickerSurfaceOptionDrawValue;
+		picker_surface = pickerSurfaceControls.Surface;
+		picker_surface_box = pickerSurfaceControls.Box;
+		picker_surface_cursor = pickerSurfaceControls.Cursor;
+		picker_surface_overlay = pickerSurfaceControls.Overlay;
+		picker_surface_selector_box = pickerSurfaceControls.SelectorBox;
+		picker_surface_option_draw_value = pickerSurfaceControls.DrawValueOption;
 		show_swatches = showWatches;
 		sliders_box = colorSliders.Box;
 		swatch_box = swatchBox;
