@@ -29,10 +29,10 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		selected_box.Append (dropdown_label);
 
 		items = [];
-		Items = new ReadOnlyCollection<ToolBarItem> (items);
+		Items = new (items);
 		show_label = showLabel;
 
-		stringList = new Gtk.StringList ();
+		stringList = new ();
 		SetModel (stringList);
 
 		Gtk.SignalListItemFactory selectedFactory = new ();
@@ -87,7 +87,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 	public ToolBarItem AddItem (string text, string imageId, object? tag)
 	{
-		ToolBarItem item = new ToolBarItem (text, imageId, tag);
+		ToolBarItem item = new (text, imageId, tag);
 		stringList.Append ("");
 
 		if (items.Count == 0 && previous_index == 0) { item.SetSelectedIconVisible (true); }
