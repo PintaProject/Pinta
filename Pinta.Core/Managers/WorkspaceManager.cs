@@ -141,6 +141,14 @@ public static class WorkspaceServiceExtensions
 
 		return doc;
 	}
+
+	public static double GetScale (this IWorkspaceService workspace)
+	{
+		if (workspace is null || !workspace.HasOpenDocuments) {
+			return 1;
+		}
+		return workspace.ActiveDocument.Workspace.Scale;
+	}
 }
 
 public sealed class WorkspaceManager : IWorkspaceService

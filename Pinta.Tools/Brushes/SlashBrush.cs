@@ -138,10 +138,7 @@ internal sealed class SlashBrush : BasePaintBrush
 
 	public override Gdk.Cursor GetCursor ()
 	{
-		double scale = 1;
-		if (workspace is not null && workspace.HasOpenDocuments) {
-			scale = workspace.ActiveDocument.Workspace.Scale;
-		}
+		double scale = workspace.GetScale ();
 		/*
 			If we do not override a 0 angle with 180, the logic in GdkExtensions will 
 			step into the "rectangle" path which will look inconsistent (unfilled) to all

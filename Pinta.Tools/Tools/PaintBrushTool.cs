@@ -84,10 +84,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	public override Gdk.Cursor DefaultCursor {
 		get {
-			double scale = 1;
-			if (workspace is not null && workspace.HasOpenDocuments) {
-				scale = workspace.ActiveDocument.Workspace.Scale;
-			}
+			double scale = workspace.GetScale ();
 			var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
 							CursorShape.Ellipse, scale, BrushWidth, 8, 24,
 							out var iconOffsetX, out var iconOffsetY);

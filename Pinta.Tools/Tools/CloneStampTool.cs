@@ -62,10 +62,7 @@ public sealed class CloneStampTool : BaseBrushTool
 
 	public override Cursor DefaultCursor {
 		get {
-			double scale = 1;
-			if (workspace is not null && workspace.HasOpenDocuments) {
-				scale = workspace.ActiveDocument.Workspace.Scale;
-			}
+			double scale = workspace.GetScale ();
 			var icon = GdkExtensions.CreateIconWithShape ("Cursor.CloneStamp.png",
 							CursorShape.Ellipse, scale, BrushWidth, 16, 26,
 							out var iconOffsetX, out var iconOffsetY);
