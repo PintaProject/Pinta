@@ -64,10 +64,13 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		dropdown_icon.SetFromIconName (toolbar_item.ImageId);
 		if (show_label) { dropdown_label.SetText (toolbar_item.Text); }
 
-		items[previous_index].SetSelected (false);
-		previous_index = (int) Selected;
-		items[previous_index].SetSelected (true);
-		SelectedIndex = (int) Selected;
+		int current_index = (int) Selected;
+		if (previous_index != current_index) {
+			items[previous_index].SetSelected (false);
+			items[current_index].SetSelected (true);
+			previous_index = current_index;
+			SelectedIndex = current_index;
+		}
 	}
 
 	private void OnBindListItem (Gtk.SignalListItemFactory sender, Gtk.SignalListItemFactory.BindSignalArgs args)
@@ -127,7 +130,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		selected_item = item;
 		TooltipText = item.Text;
 
-		// OnSelectedItemChanged ();
+		OnSelectedItemChanged ();
 	}
 
 	private void OnSelectedItemChanged ()
