@@ -43,7 +43,7 @@ public sealed class JpegCompressionDialog : Gtk.Dialog
 
 		// --- Initialization (Gtk.Window)
 
-		Title = Translations.GetString ("JPEG Quality");
+		Title = Translations.GetString ("Image Quality");
 		TransientFor = parent;
 		Modal = true;
 
