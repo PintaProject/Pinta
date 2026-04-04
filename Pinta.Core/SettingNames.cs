@@ -6,6 +6,8 @@ internal static class SettingNames
 
 	internal const string JPG_QUALITY = "jpg-quality";
 
+	internal const string WEBP_QUALITY = "webp-quality";
+
 	internal const string SELECTION_COMBINE_MODE = "selection-combine-mode";
 
 	internal const string SHOW_CANVAS_GRID = "show-canvas-grid";

@@ -87,6 +87,8 @@ public sealed class ImageConverterManager
 		IImageExporter? exporter;
 		if (formatName == "jpeg")
 			exporter = importer = new JpegFormat ();
+		else if (formatName == "webp")
+			exporter = importer = new WebPFormat ();
 		else if (formatName == "tga")
 			exporter = new TgaExporter ();
 		else if (format.IsWritable ())
