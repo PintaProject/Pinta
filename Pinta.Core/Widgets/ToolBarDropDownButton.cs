@@ -101,7 +101,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		return item;
 	}
 
-	public ToolBarItem SelectedItem {
+	public new ToolBarItem SelectedItem {
 		get =>
 			selected_item is not null
 			? selected_item
