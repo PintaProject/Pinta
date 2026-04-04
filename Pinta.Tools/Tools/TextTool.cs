@@ -124,6 +124,7 @@ public sealed class TextTool : BaseTool
 	// NRT - Created by OnBuildToolBar
 	private Gtk.Label font_label = null!;
 	private Gtk.FontDialogButton font_button = null!;
+	private ToolBarDropDownButton variant_btn = null!;
 	private Gtk.SpinButton font_size = null!;
 	private ToolBarDropDownButton weight_btn = null!;
 	private Gtk.ToggleButton italic_btn = null!;
@@ -160,7 +161,7 @@ public sealed class TextTool : BaseTool
 				UseSize = false,
 				UseFont = true,
 				CanFocus = false,
-				Level = Gtk.FontLevel.Face,
+				Level = Gtk.FontLevel.Family,
 				FontDesc = Pango.FontDescription.FromString (
 					Settings.GetSetting (SettingNames.TEXT_FONT,
 					Gtk.Settings.GetDefault ()!.GtkFontName!)),
@@ -172,6 +173,60 @@ public sealed class TextTool : BaseTool
 		}
 
 		tb.Append (font_button);
+
+		tb.Append (GtkExtensions.CreateToolBarSeparator ());
+
+		if (variant_btn == null) {
+			variant_btn = new ToolBarDropDownButton ();
+
+			variant_btn.AddItem (
+				// Translators: 'Normal' refers to the font-variant text property
+				Translations.GetString ("Normal"),
+				Pinta.Resources.Icons.TextVariantNormal,
+				Pango.Variant.Normal
+			);
+			variant_btn.AddItem (
+				// Translators: 'Small Caps' refers to the font-variant text property
+				Translations.GetString ("Small Caps"),
+				Pinta.Resources.Icons.TextVariantSmallCaps,
+				Pango.Variant.SmallCaps
+			);
+			variant_btn.AddItem (
+				// Translators: 'All Small Caps' refers to the font-variant text property
+				Translations.GetString ("All Small Caps"),
+				Pinta.Resources.Icons.TextVariantAllSmallCaps,
+				Pango.Variant.AllSmallCaps
+			);
+			variant_btn.AddItem (
+				// Translators: 'Petite Caps' refers to the font-variant text property
+				Translations.GetString ("Petite Caps"),
+				Pinta.Resources.Icons.TextVariantPetiteCaps,
+				Pango.Variant.PetiteCaps
+			);
+			variant_btn.AddItem (
+				// Translators: 'All Petite Caps' refers to the font-variant text property
+				Translations.GetString ("All Petite Caps"),
+				Pinta.Resources.Icons.TextVariantAllPetiteCaps,
+				Pango.Variant.AllPetiteCaps
+			);
+			variant_btn.AddItem (
+				// Translators: 'Unicase' refers to the font-variant text property
+				Translations.GetString ("Unicase"),
+				Pinta.Resources.Icons.TextVariantUnicase,
+				Pango.Variant.Unicase
+			);
+			variant_btn.AddItem (
+				// Translators: 'Title Caps' refers to the font-variant text property
+				Translations.GetString ("Title Caps"),
+				Pinta.Resources.Icons.TextVariantTitleCaps,
+				Pango.Variant.Normal
+			);
+
+			variant_btn.SelectedIndex = Settings.GetSetting (SettingNames.TEXT_VARIANT, 0);
+			variant_btn.SelectedItemChanged += HandleVariantButtonChanged;
+		}
+
+		tb.Append (variant_btn);
 
 		tb.Append (GtkExtensions.CreateToolBarSeparator ());
 
@@ -440,6 +495,9 @@ public sealed class TextTool : BaseTool
 		if (font_button is not null)
 			settings.PutSetting (SettingNames.TEXT_FONT, font_button.FontDesc!.ToString ()!);
 
+		if (variant_btn is not null)
+			settings.PutSetting (SettingNames.TEXT_VARIANT, variant_btn.SelectedIndex);
+
 		if (weight_btn is not null)
 			settings.PutSetting (SettingNames.TEXT_WEIGHT, weight_btn.SelectedIndex);
 
@@ -471,6 +529,11 @@ public sealed class TextTool : BaseTool
 		if (workspace.HasOpenDocuments)
 			workspace.ActiveDocument.Workspace.GrabFocusToCanvas ();
 
+		UpdateFont ();
+	}
+
+	private void HandleVariantButtonChanged (object? sender, EventArgs e)
+	{
 		UpdateFont ();
 	}
 
@@ -570,6 +633,7 @@ public sealed class TextTool : BaseTool
 		if (workspace.HasOpenDocuments) {
 
 			var font = font_button.FontDesc!.Copy ()!; // NRT: Only nullable when nullptr is passed.
+			font.SetVariant ((Pango.Variant) variant_btn.SelectedItem.GetTagOrDefault (Pango.Variant.Normal));
 			font.SetWeight ((Pango.Weight) weight_btn.SelectedItem.GetTagOrDefault (Pango.Weight.Normal));
 			font.SetStyle (italic_btn.Active ? Pango.Style.Italic : Pango.Style.Normal);
 

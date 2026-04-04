@@ -12,6 +12,9 @@ Thanks to the following contributors who worked on this release:
 - @pedropaulosuzuki
 - @yioannides
 - @njm25
+- @levanel
+- @Aryezz
+- @IArnaut2
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -19,21 +22,36 @@ Thanks to the following contributors who worked on this release:
 - The status bar color palette now supports Ctrl+clicking to edit a color, in addition to middle clicking (#1436)
 - The Resize Image and Resize Canvas dialogs now remember their settings (#1869, #1972)
 - The Text Tool now allows choosing the join mode between 'Miter Join', 'Round Join' and 'Bevel Join' (#1969, #1985)
-- The right click menu for layers now includes options to move the layer up or down in the layer stack (#2004, #2007)
 - Added new `Center Offset` parameter for the Twist effect (#1210, #2026)
 - Added new `Strength` parameter for the Sepia adjustment (#2025)
+- The axonometric canvas grid now supports configuring the angle (#1438, #2028)
+- Added support for importing `.ppm` files (#2031)
+- The flood tools now support holding the Shift key to switch to Global mode (#2075)
+- The transform tools now support holding the Ctrl key to translate the selection by larger increments when using the arrow keys (#2072, #1559)
+- The palette widget now shows the color's hex code in the tooltip (#2068, #2074)
 
 ### Changed
+- Upgraded the minimum required .NET version to 10.0 (#2081)
 - Effect dialogs now hide options that are not currently relevant (#1960)
 - Fixed several minor UX issues in the color dialog (#1795)
-- The text tool now provides a separate adjustment for the font size, which doesn't require opening the font dialog (#1947, #1961)
+- The text tool now provides a separate adjustment for the font size and font variant, which doesn't require opening the font dialog (#1947, #1961, #2043, #1965)
 - The text tool now allows choosing any font-weight supported by Cairo, not just Normal and Bold (#1965, #1967)
 - Adjusted the layout of the layers panel to avoid issues with overlay scrollbars preventing the visibility toggle from being clicked (#1828, #2021)
+- Gradient types and colors can now be changed before finalizing the gradient (#2058, #2059)
+- Moved the Layers menu out of the main menu. The actions are available from a menu button in the Layers panel, or from right-clicking on layers (#1386, #2056)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
-- Fixed crash when right-clicking on a layer in certain scenarios (#1940)
 - The layers and history panels now scroll automatically to the selected item after any updates (#1867, #1828)
+
+## [3.1.2](https://github.com/PintaProject/Pinta/release/tag/3.1.2) - 2026/03/29
+
+### Fixed
+- Fixed issues with some icons failing to load under certain GTK versions (#2078, #1950)
+- Fixed crash when right-clicking on a layer in certain scenarios (#1940)
+- Fixed bug with the gradient tool creating unnecessary history items (#2060, #2059)
+- Fixed crash when setting gamma to zero in the Levels dialog (#2035, #2041)
+- The right click menu for layers now includes options to move the layer up or down in the layer stack (#2004, #2007)
 
 ## [3.1.1](https://github.com/PintaProject/Pinta/release/tag/3.1.1) - 2026/01/10
 

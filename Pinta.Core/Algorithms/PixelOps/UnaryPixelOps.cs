@@ -297,6 +297,8 @@ public static class UnaryPixelOps
 	[Serializable]
 	public sealed class Level : ChannelCurve, ICloneable
 	{
+		public const float MinGamma = 0.1f;
+		public const float MaxGamma = 10.0f;
 		private ColorBgra color_in_low;
 		public ColorBgra ColorInLow {
 			get => color_in_low;
@@ -382,7 +384,7 @@ public static class UnaryPixelOps
 			if (index < 0 || index >= 3)
 				throw new ArgumentOutOfRangeException (nameof (index), index, "Index must be between 0 and 2");
 
-			gamma[index] = Math.Clamp (val, 0.1f, 10.0f);
+			gamma[index] = Math.Clamp (val, MinGamma, MaxGamma);
 			UpdateLookupTable ();
 		}
 
@@ -396,8 +398,8 @@ public static class UnaryPixelOps
 					(lo[i] < md[i] && md[i] < hi[i])
 					? Math.Clamp (
 						MathF.Log (0.5f, (md[i] - lo[i]) / (float) (hi[i] - lo[i])),
-						0.1f,
-						10.0f)
+						MinGamma,
+						MaxGamma)
 					: 1.0f;
 			}
 			return new Level (lo, hi, gamma, ColorBgra.Black, ColorBgra.White);

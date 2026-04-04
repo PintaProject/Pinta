@@ -163,41 +163,15 @@ public sealed class PintaCanvas : Gtk.Picture
 		QueueDraw ();
 	}
 
-	private static Gdk.Texture CreateTextureFromSurface (
-		Cairo.ImageSurface surface,
-		Gdk.Texture? updateTexture = null,
-		Cairo.Region? updateRegion = null)
-	{
-		// TODO - can we avoid copying the full image into GLib.Bytes on each update?
-		GLib.Bytes bytes = GLib.Bytes.New (surface.GetData ());
-		Gdk.MemoryTextureBuilder builder = new () {
-			Bytes = bytes,
-			Stride = (ulong) surface.Stride,
-			Width = surface.Width,
-			Height = surface.Height,
-			Format = Gdk.MemoryFormat.B8g8r8a8Premultiplied,
-			UpdateTexture = updateTexture,
-			UpdateRegion = updateRegion ?? CairoExtensions.CreateRegion (RectangleI.Zero)
-		};
-
-		return builder.Build ();
-	}
-
 	private static Gdk.Texture CreateTransparentPatternTexture () =>
-		CreateTextureFromSurface (CairoExtensions.CreateTransparentBackgroundSurface (size: 16));
+		CairoExtensions.CreateTransparentBackgroundSurface (size: 16).ToTexture ();
 
 	/// <summary>
-	/// Draw the transparent checkboard background by tiling a small pattern.
+	/// Draw the transparent checkerboard background by tiling a small pattern.
 	/// </summary>
 	private void DrawTransparentBackground (Gtk.Snapshot snapshot, Graphene.Rect canvasViewBounds)
 	{
-		snapshot.PushRepeat (canvasViewBounds, childBounds: null);
-
-		Graphene.Rect patternBounds = Graphene.Rect.Alloc ();
-		patternBounds.Init (0, 0, transparent_pattern_texture.Width, transparent_pattern_texture.Height);
-		snapshot.AppendTexture (transparent_pattern_texture, patternBounds);
-
-		snapshot.Pop ();
+		snapshot.AppendRepeatingTexture (transparent_pattern_texture, canvasViewBounds);
 	}
 
 	private void DrawCanvasTexture (Gtk.Snapshot snapshot, RectangleI? modifiedArea, Graphene.Rect canvasViewBounds)
@@ -227,7 +201,7 @@ public sealed class PintaCanvas : Gtk.Picture
 			Cairo.Region? updateRegion = (updateTexture is not null)
 				? CairoExtensions.CreateRegion (modifiedArea.Value)
 				: null;
-			canvas_texture = CreateTextureFromSurface (canvas_surface, updateTexture, updateRegion);
+			canvas_texture = canvas_surface.ToTexture (updateTexture, updateRegion);
 		}
 
 		if (canvas_texture is null)
@@ -393,27 +367,32 @@ public sealed class PintaCanvas : Gtk.Picture
 	private Gsk.Path BuildCanvasAxonometricGridPath ()
 	{
 		int axonometricWidth = canvas_grid.AxonometricWidth;
+		double angleRadians = canvas_grid.AxonometricAngle.ToRadians ().Radians;
+		double tanAngle = Math.Tan (angleRadians);
 		int imageHeight = document.ImageSize.Height;
 		int imageWidth = document.ImageSize.Width;
 
 		Gsk.PathBuilder pathBuilder = Gsk.PathBuilder.New ();
 
-		// Adds ascending diagonal lines.
-		// '2 * axonometricWidth' ensures the vertical lines will align correctly.
-		for (int i = 0; i < imageWidth + imageHeight; i += 2 * axonometricWidth) {
-			pathBuilder.MoveTo (0, i);
-			pathBuilder.LineTo (i, 0);
+		// Ascending diagonal lines
+		double verticalSpacing = 2 * axonometricWidth * tanAngle;
+		double maxStartY = imageWidth * tanAngle + imageHeight;
+		for (double s = 0; s < maxStartY; s += verticalSpacing) {
+			float xEnd = (float) (s / tanAngle);
+			pathBuilder.MoveTo (0, (float) s);
+			pathBuilder.LineTo (xEnd, 0);
 		}
 
-		// Adds descending diagonal lines.
-		// The 'imageHeight % (2 * axonometricWidth)' adjustment is used to ensure our lines will align
-		// to the top [0, 0] instead of the bottom [0, imageHeight]
-		for (int i = -imageHeight + imageHeight % (2 * axonometricWidth); i < imageWidth; i += 2 * axonometricWidth) {
-			pathBuilder.MoveTo (i, 0);
-			pathBuilder.LineTo (i + imageHeight, imageHeight);
+		// Descending diagonal lines
+		int horizontalSpacing = 2 * axonometricWidth;
+		double horizontalExtent = imageHeight / tanAngle;
+		double startX = -Math.Ceiling (horizontalExtent / horizontalSpacing) * horizontalSpacing;
+		for (double x = startX; x < imageWidth; x += horizontalSpacing) {
+			pathBuilder.MoveTo ((float) x, 0);
+			pathBuilder.LineTo ((float) (x + imageHeight / tanAngle), imageHeight);
 		}
 
-		// Add vertical lines.
+		// Vertical lines.
 		for (int i = 0; i < imageWidth; i += axonometricWidth) {
 			pathBuilder.MoveTo (i, 0);
 			pathBuilder.LineTo (i, imageHeight);
@@ -428,6 +407,12 @@ public sealed class PintaCanvas : Gtk.Picture
 	private bool ShouldShowCanvasAxonometricGrid ()
 	{
 		if (!canvas_grid.ShowAxonometricGrid)
+			return false;
+
+		if (canvas_grid.AxonometricAngle.Degrees <= 0)
+			return false;
+
+		if (canvas_grid.AxonometricAngle.Degrees >= 90)
 			return false;
 
 		const int MIN_GRID_LINE_DISTANCE = 5;

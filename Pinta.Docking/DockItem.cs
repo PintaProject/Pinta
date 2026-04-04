@@ -159,6 +159,7 @@ public sealed class DockItem : Gtk.Box
 	public Gtk.Box AddToolBar ()
 	{
 		Gtk.Box toolbar = GtkExtensions.CreateToolBar ();
+		toolbar.Spacing = -4;
 		Append (toolbar);
 		return toolbar;
 	}

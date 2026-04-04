@@ -8,24 +8,24 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 // Additional code:
-// 
+//
 // FloodTool.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -51,7 +51,7 @@ public abstract class FloodTool : BaseTool
 
 	public FloodTool (IServiceProvider services) : base (services) { }
 
-	protected bool IsContinguousMode => ModeDropDown.SelectedItem.GetTagOrDefault (true);
+	protected bool IsGlobalMode => ModeDropDown.SelectedItem.GetTagOrDefault (false);
 	protected float Tolerance => (float) (ToleranceSlider.GetValue () / 100);
 	protected virtual bool CalculatePolygonSet => true;
 	protected bool LimitToSelection { get; set; } = true;
@@ -90,10 +90,10 @@ public abstract class FloodTool : BaseTool
 
 		RectangleD boundingBox;
 
-		if (IsContinguousMode)
-			CairoExtensions.FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, LimitToSelection);
-		else
+		if (IsGlobalMode || e.IsShiftPressed)
 			CairoExtensions.FillStencilByColor (surface, stencilBuffer, surface.GetColorBgra (pos), tol, out boundingBox, currentRegion, LimitToSelection);
+		else
+			CairoExtensions.FillStencilFromPoint (surface, stencilBuffer, pos, tol, out boundingBox, currentRegion, LimitToSelection);
 
 		OnFillRegionComputed (document, stencilBuffer);
 
@@ -128,8 +128,8 @@ public abstract class FloodTool : BaseTool
 			if (mode_button is null) {
 				mode_button = new ToolBarDropDownButton ();
 
-				mode_button.AddItem (Translations.GetString ("Contiguous"), Pinta.Resources.Icons.ToolFreeformShape, true);
-				mode_button.AddItem (Translations.GetString ("Global"), Pinta.Resources.Icons.HelpWebsite, false);
+				mode_button.AddItem (Translations.GetString ("Contiguous"), Pinta.Resources.Icons.ToolFreeformShape, false);
+				mode_button.AddItem (Translations.GetString ("Global"), Pinta.Resources.Icons.HelpWebsite, true);
 
 				mode_button.SelectedIndex = Settings.GetSetting (SettingNames.FloodToolFillMode (this), 0);
 			}

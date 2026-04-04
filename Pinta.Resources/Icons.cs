@@ -61,6 +61,9 @@ public static class StandardIcons
 	public const string ImageGeneric = "image-x-generic-symbolic";
 	public const string ImageMissing = "image-missing-symbolic";
 
+	public const string LayerMoveUp = "pan-up-symbolic";
+	public const string LayerMoveDown = "pan-down-symbolic";
+
 	public const string OpenMenu = "open-menu-symbolic";
 
 	public const string ApplicationAddon = "application-x-addon-symbolic";
@@ -194,8 +197,6 @@ public static class Icons
 	public const string LayerFlipVertical = ImageFlipVertical;
 	public const string LayerImport = "layer-import";
 	public const string LayerMergeDown = "layers-merge-down-symbolic";
-	public const string LayerMoveDown = "layers-move-layer-down-symbolic";
-	public const string LayerMoveUp = "layers-move-layer-up-symbolic";
 	public const string LayerNew = "layers-add-layer-symbolic";
 	public const string LayerProperties = "document-properties-symbolic";
 	public const string LayerRotateZoom = "layers-rotate-zoom-symbolic";
@@ -223,6 +224,14 @@ public static class Icons
 	public const string TextNormal = "text-normal-symbolic";
 	public const string TextBold = "text-bold-symbolic";
 	public const string TextExtraBold = "text-extra-bold-symbolic";
+
+	public const string TextVariantNormal = "text-variant-normal-symbolic";
+	public const string TextVariantSmallCaps = "text-variant-small-caps-symbolic";
+	public const string TextVariantAllSmallCaps = "text-variant-all-small-caps-symbolic";
+	public const string TextVariantPetiteCaps = "text-variant-petite-caps-symbolic";
+	public const string TextVariantAllPetiteCaps = "text-variant-all-petite-caps-symbolic";
+	public const string TextVariantUnicase = "text-variant-unicase-symbolic";
+	public const string TextVariantTitleCaps = "text-variant-title-caps-symbolic";
 
 	public const string ToolCloneStamp = "tool-clonestamp-symbolic";
 	public const string ToolColorPicker = "tool-colorpicker-symbolic";

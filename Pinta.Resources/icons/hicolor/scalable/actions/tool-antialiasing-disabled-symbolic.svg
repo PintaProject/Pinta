@@ -1,163 +1,278 @@
-<?xml version='1.0' encoding='utf-8'?>
-<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" width="48" height="48" version="1.1">
- <ns0:g stroke-width="4.4">
-  <ns0:g fill-opacity="0">
-   <ns0:path d="m46 46h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m41.6 46h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m37.2 46h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m32.8 46h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m28.4 46h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m24 46h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m19.6 46h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m15.2 46h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m10.8 46h4.4v4.4h-4.4" fill="currentColor" />
-  </ns0:g>
-  <ns0:path d="m6.4 46h4.4v4.4h-4.4" fill-opacity=".35686" fill="currentColor" />
-  <ns0:path d="m2 46h4.4v4.4h-4.4" fill-opacity=".67059" fill="currentColor" />
-  <ns0:path d="m-2.4 46h4.4v4.4h-4.4" fill-opacity=".32549" fill="currentColor" />
-  <ns0:g fill-opacity="0">
-   <ns0:path d="m46 41.6h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m41.6 41.6h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m37.2 41.6h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m32.8 41.6h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m28.4 41.6h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m24 41.6h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m19.6 41.6h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m15.2 41.6h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m10.8 41.6h4.4v4.4h-4.4" fill="currentColor" />
-  </ns0:g>
-  <ns0:path d="m6.4 41.6h4.4v4.4h-4.4" fill-opacity=".58039" fill="currentColor" />
-  <ns0:path d="m2 41.6h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m-2.4 41.6h4.4v4.4h-4.4" fill-opacity=".43922" fill="currentColor" />
-  <ns0:g fill-opacity="0">
-   <ns0:path d="m46 37.2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m41.6 37.2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m37.2 37.2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m32.8 37.2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m28.4 37.2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m24 37.2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m19.6 37.2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m15.2 37.2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m10.8 37.2h4.4v4.4h-4.4" fill="currentColor" />
-  </ns0:g>
-  <ns0:path d="m6.4 37.2h4.4v4.4h-4.4" fill-opacity=".72157" fill="currentColor" />
-  <ns0:path d="m2 37.2h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m-2.4 37.2h4.4v4.4h-4.4" fill-opacity=".29804" fill="currentColor" />
-  <ns0:path d="m46 32.8h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m41.6 32.8h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m37.2 32.8h4.4v4.4h-4.4" fill-opacity=".039216" fill="currentColor" />
-  <ns0:path d="m32.8 32.8h4.4v4.4h-4.4" fill-opacity=".59216" fill="currentColor" />
-  <ns0:path d="m28.4 32.8h4.4v4.4h-4.4" fill-opacity=".95294" fill="currentColor" />
-  <ns0:path d="m24 32.8h4.4v4.4h-4.4" fill-opacity=".77255" fill="currentColor" />
-  <ns0:path d="m19.6 32.8h4.4v4.4h-4.4" fill-opacity=".12941" fill="currentColor" />
-  <ns0:path d="m15.2 32.8h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m10.8 32.8h4.4v4.4h-4.4" fill-opacity=".0039216" fill="currentColor" />
-  <ns0:path d="m6.4 32.8h4.4v4.4h-4.4" fill-opacity=".9098" fill="currentColor" />
-  <ns0:path d="m2 32.8h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m-2.4 32.8h4.4v4.4h-4.4" fill-opacity=".13333" fill="currentColor" />
-  <ns0:path d="m46 28.4h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m41.6 28.4h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m37.2 28.4h4.4v4.4h-4.4" fill-opacity=".61961" fill="currentColor" />
-  <ns0:path d="m32.8 28.4h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m28.4 28.4h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m24 28.4h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m19.6 28.4h4.4v4.4h-4.4" fill-opacity=".83137" fill="currentColor" />
-  <ns0:path d="m15.2 28.4h4.4v4.4h-4.4" fill-opacity=".05098" fill="currentColor" />
-  <ns0:path d="m10.8 28.4h4.4v4.4h-4.4" fill-opacity=".19608" fill="currentColor" />
-  <ns0:path d="m6.4 28.4h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m2 28.4h4.4v4.4h-4.4" fill-opacity=".87059" fill="currentColor" />
-  <ns0:path d="m-2.4 28.4h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m46 24h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m41.6 24h4.4v4.4h-4.4" fill-opacity=".19608" fill="currentColor" />
-  <ns0:path d="m37.2 24h4.4v4.4h-4.4" fill-opacity=".99608" fill="currentColor" />
-  <ns0:path d="m32.8 24h4.4v4.4h-4.4" fill-opacity=".95686" fill="currentColor" />
-  <ns0:path d="m28.4 24h4.4v4.4h-4.4" fill-opacity=".20784" fill="currentColor" />
-  <ns0:path d="m24 24h4.4v4.4h-4.4" fill-opacity=".81961" fill="currentColor" />
-  <ns0:path d="m19.6 24h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m15.2 24h4.4v4.4h-4.4" fill-opacity=".6902" fill="currentColor" />
-  <ns0:path d="m10.8 24h4.4v4.4h-4.4" fill-opacity=".56863" fill="currentColor" />
-  <ns0:path d="m6.4 24h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m2 24h4.4v4.4h-4.4" fill-opacity=".58431" fill="currentColor" />
-  <ns0:path d="m-2.4 24h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m46 19.6h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m41.6 19.6h4.4v4.4h-4.4" fill-opacity=".63137" fill="currentColor" />
-  <ns0:path d="m37.2 19.6h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m32.8 19.6h4.4v4.4h-4.4" fill-opacity=".54118" fill="currentColor" />
-  <ns0:path d="m28.4 19.6h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m24 19.6h4.4v4.4h-4.4" fill-opacity=".12941" fill="currentColor" />
-  <ns0:path d="m19.6 19.6h4.4v4.4h-4.4" fill-opacity=".91765" fill="currentColor" />
-  <ns0:path d="m15.2 19.6h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m10.8 19.6h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m6.4 19.6h4.4v4.4h-4.4" fill-opacity=".98431" fill="currentColor" />
-  <ns0:path d="m2 19.6h4.4v4.4h-4.4" fill-opacity=".18039" fill="currentColor" />
-  <ns0:path d="m-2.4 19.6h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m46 15.2h4.4v4.4h-4.4" fill-opacity=".035294" fill="currentColor" />
-  <ns0:path d="m41.6 15.2h4.4v4.4h-4.4" fill-opacity=".95686" fill="currentColor" />
-  <ns0:path d="m37.2 15.2h4.4v4.4h-4.4" fill-opacity=".99608" fill="currentColor" />
-  <ns0:path d="m32.8 15.2h4.4v4.4h-4.4" fill-opacity=".13333" fill="currentColor" />
-  <ns0:path d="m28.4 15.2h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m24 15.2h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m19.6 15.2h4.4v4.4h-4.4" fill-opacity=".20784" fill="currentColor" />
-  <ns0:path d="m15.2 15.2h4.4v4.4h-4.4" fill-opacity=".79216" fill="currentColor" />
-  <ns0:path d="m10.8 15.2h4.4v4.4h-4.4" fill-opacity=".84314" fill="currentColor" />
-  <ns0:path d="m6.4 15.2h4.4v4.4h-4.4" fill-opacity=".33333" fill="currentColor" />
-  <ns0:path d="m2 15.2h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m-2.4 15.2h4.4v4.4h-4.4" fill-opacity="0" fill="currentColor" />
-  <ns0:path d="m46 10.8h4.4v4.4h-4.4" fill-opacity=".27059" fill="currentColor" />
-  <ns0:path d="m41.6 10.8h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m37.2 10.8h4.4v4.4h-4.4" fill-opacity=".8" fill="currentColor" />
-  <ns0:g fill-opacity="0">
-   <ns0:path d="m32.8 10.8h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m28.4 10.8h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m24 10.8h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m19.6 10.8h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m15.2 10.8h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m10.8 10.8h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m6.4 10.8h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m2 10.8h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m-2.4 10.8h4.4v4.4h-4.4" fill="currentColor" />
-  </ns0:g>
-  <ns0:path d="m46 6.4h4.4v4.4h-4.4" fill-opacity=".54118" fill="currentColor" />
-  <ns0:path d="m41.6 6.4h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m37.2 6.4h4.4v4.4h-4.4" fill-opacity=".52941" fill="currentColor" />
-  <ns0:g fill-opacity="0">
-   <ns0:path d="m32.8 6.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m28.4 6.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m24 6.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m19.6 6.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m15.2 6.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m10.8 6.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m6.4 6.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m2 6.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m-2.4 6.4h4.4v4.4h-4.4" fill="currentColor" />
-  </ns0:g>
-  <ns0:path d="m46 2h4.4v4.4h-4.4" fill-opacity=".78039" fill="currentColor" />
-  <ns0:path d="m41.6 2h4.4v4.4h-4.4" fill="currentColor" />
-  <ns0:path d="m37.2 2h4.4v4.4h-4.4" fill-opacity=".26667" fill="currentColor" />
-  <ns0:g fill-opacity="0">
-   <ns0:path d="m32.8 2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m28.4 2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m24 2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m19.6 2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m15.2 2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m10.8 2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m6.4 2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m2 2h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m-2.4 2h4.4v4.4h-4.4" fill="currentColor" />
-  </ns0:g>
-  <ns0:path d="m46-2.4h4.4v4.4h-4.4" fill-opacity=".10196" fill="currentColor" />
-  <ns0:path d="m41.6-2.4h4.4v4.4h-4.4" fill-opacity=".27843" fill="currentColor" />
-  <ns0:path d="m37.2-2.4h4.4v4.4h-4.4" fill-opacity=".047059" fill="currentColor" />
-  <ns0:g fill-opacity="0">
-   <ns0:path d="m32.8-2.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m28.4-2.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m24-2.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m19.6-2.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m15.2-2.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m10.8-2.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m6.4-2.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m2-2.4h4.4v4.4h-4.4" fill="currentColor" />
-   <ns0:path d="m-2.4-2.4h4.4v4.4h-4.4" fill="currentColor" />
-  </ns0:g>
- </ns0:g>
-</ns0:svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="56"
+   height="56"
+   version="1.1"
+   id="svg145"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs145" />
+  <path
+     d="m 6,50 c 1.4666667,0 2.9333333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.4666667,0 -2.9333333,0 -4.4,0"
+     fill-opacity="0.67059"
+     fill="currentColor"
+     id="path11"
+     style="stroke-width:4.4" />
+  <path
+     d="m 10.4,45.6 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.58039"
+     fill="currentColor"
+     id="path22"
+     style="stroke-width:4.4" />
+  <path
+     d="m 6,45.6 c 1.4666667,0 2.9333333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.4666667,0 -2.9333333,0 -4.4,0"
+     fill="currentColor"
+     id="path23"
+     style="stroke-width:4.4" />
+  <path
+     d="m 1.6,45.6 c 1.4666667,0 2.9333333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.4666667,0 -2.9333333,0 -4.4,0"
+     fill-opacity="0.43922"
+     fill="currentColor"
+     id="path24"
+     style="stroke-width:4.4" />
+  <path
+     d="m 10.4,41.2 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.72157"
+     fill="currentColor"
+     id="path34"
+     style="stroke-width:4.4" />
+  <path
+     d="m 6,41.2 c 1.4666667,0 2.9333333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.4666667,0 -2.9333333,0 -4.4,0"
+     fill="currentColor"
+     id="path35"
+     style="stroke-width:4.4" />
+  <path
+     d="m 1.6,41.2 c 1.4666667,0 2.9333333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.4666667,0 -2.9333333,0 -4.4,0"
+     fill-opacity="0.29804"
+     fill="currentColor"
+     id="path36"
+     style="stroke-width:4.4" />
+  <path
+     d="m 36.8,36.8 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.59216"
+     fill="currentColor"
+     id="path40"
+     style="stroke-width:4.4" />
+  <path
+     d="m 32.4,36.8 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.95294"
+     fill="currentColor"
+     id="path41"
+     style="stroke-width:4.4" />
+  <path
+     d="m 28,36.8 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.77255"
+     fill="currentColor"
+     id="path42"
+     style="stroke-width:4.4" />
+  <path
+     d="m 10.4,36.8 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.9098"
+     fill="currentColor"
+     id="path46"
+     style="stroke-width:4.4" />
+  <path
+     d="m 6,36.8 c 1.4666667,0 2.9333333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.4666667,0 -2.9333333,0 -4.4,0"
+     fill="currentColor"
+     id="path47"
+     style="stroke-width:4.4" />
+  <path
+     d="m 41.2,32.4 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.61961"
+     fill="currentColor"
+     id="path51"
+     style="stroke-width:4.4" />
+  <path
+     d="m 36.8,32.4 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path52"
+     style="stroke-width:4.4" />
+  <path
+     d="m 32.4,32.4 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path53"
+     style="stroke-width:4.4" />
+  <path
+     d="m 28,32.4 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path54"
+     style="stroke-width:4.4" />
+  <path
+     d="m 23.6,32.4 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.83137"
+     fill="currentColor"
+     id="path55"
+     style="stroke-width:4.4" />
+  <path
+     d="m 10.4,32.4 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path58"
+     style="stroke-width:4.4" />
+  <path
+     d="m 6,32.4 c 1.4666667,0 2.9333333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.4666667,0 -2.9333333,0 -4.4,0"
+     fill-opacity="0.87059"
+     fill="currentColor"
+     id="path59"
+     style="stroke-width:4.4" />
+  <path
+     d="m 41.2,28 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.99608"
+     fill="currentColor"
+     id="path63"
+     style="stroke-width:4.4" />
+  <path
+     d="m 36.8,28 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.95686"
+     fill="currentColor"
+     id="path64"
+     style="stroke-width:4.4" />
+  <path
+     d="m 28,28 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.81961"
+     fill="currentColor"
+     id="path66"
+     style="stroke-width:4.4" />
+  <path
+     d="m 23.6,28 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path67"
+     style="stroke-width:4.4" />
+  <path
+     d="m 19.2,28 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.6902"
+     fill="currentColor"
+     id="path68"
+     style="stroke-width:4.4" />
+  <path
+     d="m 14.8,28 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.56863"
+     fill="currentColor"
+     id="path69"
+     style="stroke-width:4.4" />
+  <path
+     d="m 10.4,28 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path70"
+     style="stroke-width:4.4" />
+  <path
+     d="m 6,28 c 1.4666667,0 2.9333333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.4666667,0 -2.9333333,0 -4.4,0"
+     fill-opacity="0.58431"
+     fill="currentColor"
+     id="path71"
+     style="stroke-width:4.4" />
+  <path
+     d="m 45.6,23.6 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.63137"
+     fill="currentColor"
+     id="path74"
+     style="stroke-width:4.4" />
+  <path
+     d="m 41.2,23.6 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path75"
+     style="stroke-width:4.4" />
+  <path
+     d="m 36.8,23.6 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.54118"
+     fill="currentColor"
+     id="path76"
+     style="stroke-width:4.4" />
+  <path
+     d="m 23.6,23.6 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.91765"
+     fill="currentColor"
+     id="path79"
+     style="stroke-width:4.4" />
+  <path
+     d="m 19.2,23.6 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path80"
+     style="stroke-width:4.4" />
+  <path
+     d="m 14.8,23.6 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path81"
+     style="stroke-width:4.4" />
+  <path
+     d="m 10.4,23.6 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.98431"
+     fill="currentColor"
+     id="path82"
+     style="stroke-width:4.4" />
+  <path
+     d="m 45.6,19.2 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.95686"
+     fill="currentColor"
+     id="path86"
+     style="stroke-width:4.4" />
+  <path
+     d="m 41.2,19.2 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.99608"
+     fill="currentColor"
+     id="path87"
+     style="stroke-width:4.4" />
+  <path
+     d="m 14.8,19.2 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.84314"
+     fill="currentColor"
+     id="path93"
+     style="stroke-width:4.4" />
+  <path
+     d="m 10.4,19.2 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.33333"
+     fill="currentColor"
+     id="path94"
+     style="stroke-width:4.4" />
+  <path
+     d="m 45.6,14.8 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path98"
+     style="stroke-width:4.4" />
+  <path
+     d="m 41.2,14.8 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.8"
+     fill="currentColor"
+     id="path99"
+     style="stroke-width:4.4" />
+  <path
+     d="m 50,10.4 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.54118"
+     fill="currentColor"
+     id="path109"
+     style="stroke-width:4.4" />
+  <path
+     d="m 45.6,10.4 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path110"
+     style="stroke-width:4.4" />
+  <path
+     d="m 41.2,10.4 c 1.466667,0 2.933333,0 4.4,0 0,1.466667 0,2.933333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.52941"
+     fill="currentColor"
+     id="path111"
+     style="stroke-width:4.4" />
+  <path
+     d="m 50,6 c 1.466667,0 2.933333,0 4.4,0 0,1.4666667 0,2.9333333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.78039"
+     fill="currentColor"
+     id="path121"
+     style="stroke-width:4.4" />
+  <path
+     d="m 45.6,6 c 1.466667,0 2.933333,0 4.4,0 0,1.4666667 0,2.9333333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill="currentColor"
+     id="path122"
+     style="stroke-width:4.4" />
+  <path
+     d="m 41.2,6 c 1.466667,0 2.933333,0 4.4,0 0,1.4666667 0,2.9333333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.26667"
+     fill="currentColor"
+     id="path123"
+     style="stroke-width:4.4" />
+  <path
+     d="m 45.6,1.6 c 1.466667,0 2.933333,0 4.4,0 0,1.4666667 0,2.9333333 0,4.4 -1.466667,0 -2.933333,0 -4.4,0"
+     fill-opacity="0.27843"
+     fill="currentColor"
+     id="path134"
+     style="stroke-width:4.4" />
+</svg>

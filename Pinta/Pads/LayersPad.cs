@@ -49,6 +49,27 @@ internal sealed class LayersPad : IDockPad
 			Label = Translations.GetString ("Layers"),
 		};
 
+		Gio.Menu hamburger_menu = Gio.Menu.New ();
+
+		Gio.Menu flip_section = Gio.Menu.New ();
+		flip_section.AppendItem (layer_actions.FlipHorizontal.CreateMenuItem ());
+		flip_section.AppendItem (layer_actions.FlipVertical.CreateMenuItem ());
+		flip_section.AppendItem (layer_actions.RotateZoom.CreateMenuItem ());
+
+		Gio.Menu prop_section = Gio.Menu.New ();
+		prop_section.AppendItem (layer_actions.Properties.CreateMenuItem ());
+
+		hamburger_menu.AppendItem (layer_actions.ImportFromFile.CreateMenuItem ());
+		hamburger_menu.AppendSection (null, flip_section);
+		hamburger_menu.AppendSection (null, prop_section);
+
+		Gtk.MenuButton hamburger_button = new Gtk.MenuButton () {
+			MenuModel = hamburger_menu,
+			IconName = Resources.StandardIcons.OpenMenu
+		};
+
+		hamburger_button.Direction = Gtk.ArrowType.Up;
+
 		Gtk.Box layers_tb = layers_item.AddToolBar ();
 		layers_tb.AppendMultiple ([
 			layer_actions.AddNewLayer.CreateDockToolBarItem (),
@@ -57,6 +78,7 @@ internal sealed class LayersPad : IDockPad
 			layer_actions.MergeLayerDown.CreateDockToolBarItem (),
 			layer_actions.MoveLayerUp.CreateDockToolBarItem (),
 			layer_actions.MoveLayerDown.CreateDockToolBarItem (),
+			hamburger_button
 		]);
 
 		workspace.AddItem (layers_item, DockPlacement.Right);

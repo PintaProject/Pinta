@@ -54,15 +54,16 @@ public sealed class FreeformShapeTool : BaseBrushTool
 
 	protected override void OnBuildToolBar (Box tb)
 	{
-		base.OnBuildToolBar (tb);
-
 		tb.Append (Separator);
 		tb.Append (FillLabel);
 		tb.Append (FillDropDown);
+		base.OnBuildToolBar (tb);
 
 		// TODO: This could be cleaner.
 		// This will only return an item on the first setup so we only add the handler once.
 		var dash_pattern_box = dash_p_box.SetupToolbar (tb);
+		BrushWidthLabel.Visible = BrushWidthSpinButton.Visible = StrokeShape;
+		dash_p_box.SetVisible (StrokeShape);
 
 		if (dash_pattern_box != null) {
 			dash_pattern_box.GetEntry ().SetText (Settings.GetSetting (SettingNames.FREEFORM_SHAPE_DASH_PATTERN, "-"));
@@ -71,6 +72,12 @@ public sealed class FreeformShapeTool : BaseBrushTool
 				dash_pattern = dash_pattern_box.GetActiveText ()!;
 			};
 		}
+	}
+
+	private void OnFillStyleChanged (object? sender, EventArgs e)
+	{
+		BrushWidthLabel.Visible = BrushWidthSpinButton.Visible = StrokeShape;
+		dash_p_box.SetVisible (StrokeShape);
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -220,6 +227,7 @@ public sealed class FreeformShapeTool : BaseBrushTool
 				fill_button.AddItem (Translations.GetString ("Fill and Outline Shape"), Pinta.Resources.Icons.FillStyleOutlineFill, 2);
 
 				fill_button.SelectedIndex = Settings.GetSetting (SettingNames.FREEFORM_SHAPE_FILL_TYPE, 0);
+				fill_button.SelectedItemChanged += OnFillStyleChanged;
 			}
 
 			return fill_button;
