@@ -1,21 +1,21 @@
-// 
+//
 // ShapeTool.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,19 +32,11 @@ namespace Pinta.Tools;
 
 public abstract class ShapeTool : BaseTool
 {
-	// TODO:
-	// This is `Lazy<T>` because the services used by derived classes
-	// are not initialized when the constructor of `ShapeTool` is called.
-	// Ideally we shouldn't have to call a virtual method in a constructor,
-	// so let's get rid of this at some point.
-	private readonly Lazy<BaseEditEngine> lazy_edit_engine;
-	public BaseEditEngine EditEngine
-		=> lazy_edit_engine.Value;
+	public BaseEditEngine edit_engine;
 
 	private readonly SystemManager system_manager;
 	public ShapeTool (IServiceProvider services) : base (services)
 	{
-		lazy_edit_engine = new (CreateEditEngine);
 		system_manager = services.GetService<SystemManager> ();
 	}
 
@@ -74,55 +66,55 @@ public abstract class ShapeTool : BaseTool
 	{
 		base.OnBuildToolBar (tb);
 
-		EditEngine.HandleBuildToolBar (tb, Settings, GetType ().Name.ToLowerInvariant ());
+		edit_engine.HandleBuildToolBar (tb, Settings, GetType ().Name.ToLowerInvariant ());
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
-		EditEngine.HandleMouseDown (document, e);
+		edit_engine.HandleMouseDown (document, e);
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		EditEngine.HandleMouseUp (document, e);
+		edit_engine.HandleMouseUp (document, e);
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 	{
-		EditEngine.HandleMouseMove (document, e);
+		edit_engine.HandleMouseMove (document, e);
 	}
 
 	protected override void OnActivated (Document? document)
 	{
-		EditEngine.HandleActivated ();
+		edit_engine.HandleActivated ();
 
 		base.OnActivated (document);
 	}
 
 	protected override void OnDeactivated (Document? document, BaseTool? newTool)
 	{
-		EditEngine.HandleDeactivated (newTool);
+		edit_engine.HandleDeactivated (newTool);
 
 		base.OnDeactivated (document, newTool);
 	}
 
 	protected override void OnAfterSave (Document document)
 	{
-		EditEngine.HandleAfterSave ();
+		edit_engine.HandleAfterSave ();
 
 		base.OnAfterSave (document);
 	}
 
 	protected override void OnCommit (Document? document)
 	{
-		EditEngine.HandleCommit ();
+		edit_engine.HandleCommit ();
 
 		base.OnCommit (document);
 	}
 
 	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
 	{
-		if (EditEngine.HandleKeyDown (document, e))
+		if (edit_engine.HandleKeyDown (document, e))
 			return true;
 
 		return base.OnKeyDown (document, e);
@@ -130,7 +122,7 @@ public abstract class ShapeTool : BaseTool
 
 	protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
 	{
-		if (EditEngine.HandleKeyUp (document, e))
+		if (edit_engine.HandleKeyUp (document, e))
 			return true;
 
 		return base.OnKeyUp (document, e);
@@ -138,7 +130,7 @@ public abstract class ShapeTool : BaseTool
 
 	protected override bool OnHandleUndo (Document document)
 	{
-		if (!EditEngine.HandleBeforeUndo ())
+		if (!edit_engine.HandleBeforeUndo ())
 			return base.OnHandleUndo (document);
 		else
 			return true;
@@ -146,7 +138,7 @@ public abstract class ShapeTool : BaseTool
 
 	protected override bool OnHandleRedo (Document document)
 	{
-		if (!EditEngine.HandleBeforeRedo ())
+		if (!edit_engine.HandleBeforeRedo ())
 			return base.OnHandleRedo (document);
 		else
 			return true;
@@ -154,14 +146,14 @@ public abstract class ShapeTool : BaseTool
 
 	protected override void OnAfterUndo (Document document)
 	{
-		EditEngine.HandleAfterUndo ();
+		edit_engine.HandleAfterUndo ();
 
 		base.OnAfterUndo (document);
 	}
 
 	protected override void OnAfterRedo (Document document)
 	{
-		EditEngine.HandleAfterRedo ();
+		edit_engine.HandleAfterRedo ();
 
 		base.OnAfterRedo (document);
 	}
@@ -170,8 +162,8 @@ public abstract class ShapeTool : BaseTool
 	{
 		base.OnSaveSettings (settings);
 
-		EditEngine.OnSaveSettings (settings, GetType ().Name.ToLowerInvariant ());
+		edit_engine.OnSaveSettings (settings, GetType ().Name.ToLowerInvariant ());
 	}
 
-	public override IEnumerable<IToolHandle> Handles => EditEngine.Handles;
+	public override IEnumerable<IToolHandle> Handles => edit_engine.Handles;
 }

@@ -61,7 +61,7 @@ public sealed class LineCurveEditEngine : ArrowedEditEngine
 			false,
 			BaseEditEngine.OutlineColor,
 			BaseEditEngine.FillColor,
-			owner.EditEngine.BrushWidth,
+			owner.edit_engine.BrushWidth,
 			LineCap.Square);
 
 		AddLinePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);

@@ -1022,7 +1022,7 @@ public abstract class BaseEditEngine
 		if (oldTool != null) {
 			//The tool has switched, so call DrawActiveShape again but inside that tool.
 			if (tools.CurrentTool is ShapeTool tool)
-				tool.EditEngine.DrawActiveShape (
+				tool.edit_engine.DrawActiveShape (
 				calculateOrganizedPoints, finalize, drawHoverSelection, shiftKey, preventSwitchBack);
 
 			//Afterwards, switch back to the old tool, unless specified otherwise.
@@ -1375,7 +1375,7 @@ public abstract class BaseEditEngine
 
 			//Finalize the now active shape using its corresponding tool's EditEngine.
 
-			BaseEditEngine correspondingEngine = correspondingTool.EditEngine;
+			BaseEditEngine correspondingEngine = correspondingTool.edit_engine;
 
 			correspondingEngine.SelectedShapeIndex = SelectedShapeIndex;
 
@@ -1522,8 +1522,8 @@ public abstract class BaseEditEngine
 		int oldToolSSI = -1;
 		//SetCurrentTool sets oldTool's SelectedPointIndex and SelectedShapeIndex to -1 so their value has to be saved before this happens.
 		if (oldTool != null && oldTool.IsEditableShapeTool && permanentSwitch) {
-			oldToolSPI = oldTool.EditEngine.SelectedPointIndex;
-			oldToolSSI = oldTool.EditEngine.SelectedShapeIndex;
+			oldToolSPI = oldTool.edit_engine.SelectedPointIndex;
+			oldToolSSI = oldTool.edit_engine.SelectedShapeIndex;
 		}
 
 		//The active tool needs to be switched to the corresponding tool.
@@ -1539,23 +1539,23 @@ public abstract class BaseEditEngine
 
 			if (permanentSwitch) {
 				//Set the new tool's active shape and point to the old shape and point.
-				newTool.EditEngine.SelectedPointIndex = oldToolSPI;
-				newTool.EditEngine.SelectedShapeIndex = oldToolSSI;
+				newTool.edit_engine.SelectedPointIndex = oldToolSPI;
+				newTool.edit_engine.SelectedShapeIndex = oldToolSSI;
 
 				//Make sure neither tool thinks it is drawing anything.
-				newTool.EditEngine.is_drawing = false;
-				oldTool.EditEngine.is_drawing = false;
+				newTool.edit_engine.is_drawing = false;
+				oldTool.edit_engine.is_drawing = false;
 			}
 
-			ShapeEngine? activeEngine = newTool.EditEngine.ActiveShapeEngine;
+			ShapeEngine? activeEngine = newTool.edit_engine.ActiveShapeEngine;
 
 			if (activeEngine != null)
-				newTool.EditEngine.UpdateToolbarSettings (activeEngine);
+				newTool.edit_engine.UpdateToolbarSettings (activeEngine);
 
 		} else {
 			if (permanentSwitch) {
 				//Make sure that the new tool doesn't think it is drawing anything.
-				newTool.EditEngine.is_drawing = false;
+				newTool.edit_engine.is_drawing = false;
 			}
 		}
 
