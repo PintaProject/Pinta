@@ -1,6 +1,6 @@
-// 
-// JpegCompressionDialog.cs
-//  
+//
+// QualityDialog.cs
+//
 // Author:
 //       Maia Kozheva <sikon@ubuntu.com>
 // 
@@ -28,11 +28,11 @@ using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class JpegCompressionDialog : Gtk.Dialog
+public sealed class QualityDialog : Gtk.Dialog
 {
 	private readonly Gtk.Scale compression_level;
 
-	public JpegCompressionDialog (int defaultQuality, Gtk.Window parent)
+	public QualityDialog (int defaultQuality, Gtk.Window parent)
 	{
 		Gtk.Label qualityLabel = Gtk.Label.New (Translations.GetString ("Quality: "));
 		qualityLabel.Xalign = 0;
