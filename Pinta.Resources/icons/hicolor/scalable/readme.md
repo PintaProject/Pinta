@@ -8,13 +8,17 @@
 
 Some icons are from the following sets:
 
-### Google Material Icons
+### Google Material Icons:
 https://github.com/google/material-design-icons
 
-Provided under the Apache License Version 2.0.
+Provided under the Apache License Version 2.0
 
-### Microsoft Fluent UI System Icons
+### Microsoft Fluent UI System Icons:
 https://github.com/microsoft/fluentui-system-icons
 
-Provided available under the MIT License.
+Provided available under the MIT License
 
+### GIMP icons:
+https://gitlab.gnome.org/GNOME/gimp-data
+
+Provided available under the Creative Commons Attribution 4.0 International license
