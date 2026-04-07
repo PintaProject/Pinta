@@ -77,7 +77,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		if (item is null) { return; }
 
 		ToolBarItem toolbar_item = items[(int) item.Position];
-		item.SetChild (toolbar_item.Box);
+		item.SetChild (toolbar_item);
 	}
 
 	public ToolBarItem AddItem (string text, string imageId)
@@ -140,7 +140,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	public event EventHandler? SelectedItemChanged;
 }
 
-public sealed class ToolBarItem
+public sealed class ToolBarItem : Gtk.Box
 {
 	public ToolBarItem (string text, string imageId) : this (text, imageId, null) { }
 
@@ -150,7 +150,6 @@ public sealed class ToolBarItem
 		ImageId = imageId;
 		Tag = tag;
 
-		Box = new ();
 		Image = new ();
 		Label = new ();
 		SelectedIcon = new ();
@@ -160,9 +159,9 @@ public sealed class ToolBarItem
 		SelectedIcon.Hexpand = true;
 		SelectedIcon.Halign = Gtk.Align.End;
 
-		Box.Append (Image);
-		Box.Append (Label);
-		Box.Append (SelectedIcon);
+		Append (Image);
+		Append (Label);
+		Append (SelectedIcon);
 
 		Image.SetFromIconName (imageId);
 		Label.SetText (text);
@@ -176,7 +175,6 @@ public sealed class ToolBarItem
 	public string ImageId { get; }
 	public object? Tag { get; }
 	public string Text { get; }
-	public Gtk.Box Box { get; }
 
 	private Gtk.Image Image;
 	private Gtk.Label Label;
