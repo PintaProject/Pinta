@@ -150,8 +150,14 @@ public sealed class ToolBarItem : Gtk.Box
 		ImageId = imageId;
 		Tag = tag;
 
-		Image = new ();
-		Label = new ();
+		Gtk.Image image = new ();
+		image.SetFromIconName (imageId);
+		Gtk.Label label = new ();
+		label.SetText (text);
+
+		Append (image);
+		Append (label);
+
 		SelectedIcon = new ();
 		SelectedIcon.SetFromIconName ("object-select-symbolic");
 		SelectedIcon.Visible = false;
@@ -159,12 +165,7 @@ public sealed class ToolBarItem : Gtk.Box
 		SelectedIcon.Hexpand = true;
 		SelectedIcon.Halign = Gtk.Align.End;
 
-		Append (Image);
-		Append (Label);
 		Append (SelectedIcon);
-
-		Image.SetFromIconName (imageId);
-		Label.SetText (text);
 	}
 
 	public void SetSelectedIconVisible (bool visible)
@@ -176,8 +177,6 @@ public sealed class ToolBarItem : Gtk.Box
 	public object? Tag { get; }
 	public string Text { get; }
 
-	private Gtk.Image Image;
-	private Gtk.Label Label;
 	private Gtk.Image SelectedIcon;
 
 	public T GetTagOrDefault<T> (T defaultValue)
