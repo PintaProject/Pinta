@@ -113,7 +113,7 @@ internal sealed class LayerPropertiesAction : IActionHandler
 		}
 
 		if (updated.Hidden != initial.Hidden) {
-			ret = (updated.Hidden) ? Translations.GetString ("Hide Layer") : Translations.GetString ("Show Layer");
+			ret = (updated.Hidden) ? Translations.GetString ("Layer Hidden") : Translations.GetString ("Layer Shown");
 			count++;
 		}
 
