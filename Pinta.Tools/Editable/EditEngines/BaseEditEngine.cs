@@ -314,6 +314,8 @@ public abstract class BaseEditEngine
 
 		tb.Append (shape_type_button);
 
+		BuildToolSpecificToolbar (tb, settings, toolPrefix);
+
 		fill_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (fill_sep);
@@ -399,6 +401,8 @@ public abstract class BaseEditEngine
 			DrawActiveShape (false, false, true, false, false);
 		};
 	}
+
+	protected virtual void BuildToolSpecificToolbar (Gtk.Box tb, ISettingsService settings, string toolPrefix) {}
 
 	public virtual void HandleActivated ()
 	{
