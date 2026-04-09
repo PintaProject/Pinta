@@ -139,7 +139,7 @@ public static class Icons
 	public const string EffectsDistortPolarInversion = "effects-distort-polarinversion";
 	public const string EffectsDistortTile = "effects-distort-tile";
 	public const string EffectsDistortTwist = "effects-distort-twist";
-	public const string EffectsObjectFeatherObject = "effects-object-featherobject"
+	public const string EffectsObjectFeatherObject = "effects-object-featherobject";
 	public const string EffectsNoiseAddNoise = "effects-noise-addnoise";
 	public const string EffectsNoiseMedian = "effects-noise-median";
 	public const string EffectsNoiseReduceNoise = "effects-noise-reducenoise";
