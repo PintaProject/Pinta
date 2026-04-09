@@ -402,7 +402,7 @@ public abstract class BaseEditEngine
 		};
 	}
 
-	protected virtual void BuildToolSpecificToolbar (Gtk.Box tb, ISettingsService settings, string toolPrefix) {}
+	protected virtual void BuildToolSpecificToolbar (Gtk.Box tb, ISettingsService settings, string toolPrefix) { }
 
 	public virtual void HandleActivated ()
 	{
