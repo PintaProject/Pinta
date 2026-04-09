@@ -92,10 +92,10 @@ public static class Icons
 {
 	public const string AddinsManage = "addins-manage";
 
-	public const string AdjustmentsDefault = "adjustments-default-symbolic";
+	public const string AdjustmentsDefault = "adjustments-default";
 	public const string AdjustmentsAutoLevel = "adjustments-autolevel";
 	public const string AdjustmentsBlackAndWhite = "adjustments-blackandwhite";
-	public const string AdjustmentsBrightnessContrast = "adjustments-brightnesscontrast-symbolic";
+	public const string AdjustmentsBrightnessContrast = "adjustments-brightnesscontrast";
 	public const string AdjustmentsCurves = "adjustments-curves";
 	public const string AdjustmentsHueSaturation = "adjustments-huesaturation";
 	public const string AdjustmentsInvertColors = "adjustments-invertcolors";
