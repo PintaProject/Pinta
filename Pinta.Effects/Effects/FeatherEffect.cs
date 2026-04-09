@@ -10,7 +10,7 @@ namespace Pinta.Effects;
 
 public sealed class FeatherEffect : BaseEffect
 {
-	public override string Icon => Resources.Icons.EffectObjectFeatherObject;
+	public override string Icon => Resources.Icons.EffectsObjectFeatherObject;
 
 	// Takes two passes, so must be multithreaded internally
 	public sealed override bool IsTileable => false;
