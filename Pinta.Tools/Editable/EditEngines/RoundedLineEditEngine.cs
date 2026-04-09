@@ -75,13 +75,11 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 			settings.PutSetting (SettingNames.Radius (toolPrefix), (int) radius.Value);
 	}
 
-	public override void HandleBuildToolBar (
+	protected override void BuildToolSpecificToolbar (
 		Gtk.Box tb,
 		ISettingsService settings,
 		string toolPrefix)
 	{
-		base.HandleBuildToolBar (tb, settings, toolPrefix);
-
 		radius_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (radius_sep);
