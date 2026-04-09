@@ -44,12 +44,14 @@ public interface ILivePreview
 
 public sealed class LivePreviewManager : ILivePreview
 {
+	private readonly ActionManager actions;
 	private readonly WorkspaceManager workspace;
 	private readonly ToolManager tools;
 	private readonly SystemManager system;
 	private readonly ChromeManager chrome;
 
 	internal LivePreviewManager (
+		ActionManager actions,
 		WorkspaceManager workspaceManager,
 		ToolManager toolManager,
 		SystemManager systemManager,
@@ -57,6 +59,7 @@ public sealed class LivePreviewManager : ILivePreview
 	{
 		IsEnabled = false;
 
+		this.actions = actions;
 		workspace = workspaceManager;
 		tools = toolManager;
 		system = systemManager;
@@ -181,7 +184,7 @@ public sealed class LivePreviewManager : ILivePreview
 			layer.DrawWithOperator (context, LivePreviewSurface, Cairo.Operator.Source);
 			context.Restore ();
 
-			workspace.ActiveDocument.History.PushNewItem (historyItem);
+			workspace.ActiveDocument.History.PushNewItem (historyItem, actions.Edit);
 
 		} finally {
 
