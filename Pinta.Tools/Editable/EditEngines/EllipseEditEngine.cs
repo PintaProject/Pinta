@@ -51,7 +51,7 @@ public sealed class EllipseEditEngine : BaseEditEngine
 			owner.UseAntialiasing,
 			BaseEditEngine.OutlineColor,
 			BaseEditEngine.FillColor,
-			owner.edit_engine.BrushWidth,
+			owner.EditEngine.BrushWidth,
 			LineCap.Butt);
 
 		AddRectanglePoints (ctrlKey, clickedOnControlPoint, newEngine, prevSelPoint);

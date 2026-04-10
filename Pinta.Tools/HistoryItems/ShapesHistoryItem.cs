@@ -1,21 +1,21 @@
-//
+// 
 // ShapesHistoryItem.cs
-//
+//  
 // Author:
 //       Andrew Davis <andrew.3.1415@gmail.com>
-//
+// 
 // Copyright (c) 2013 Andrew Davis, GSoC 2013 & 2014
-//
+// 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -144,7 +144,7 @@ public sealed class ShapesHistoryItem : BaseHistoryItem
 			//The currently active tool now matches the shape's corresponding tool.
 
 			if (redraw) {
-				((ShapeTool?) PintaCore.Tools.CurrentTool)?.edit_engine.DrawAllShapes ();
+				((ShapeTool?) PintaCore.Tools.CurrentTool)?.EditEngine.DrawAllShapes ();
 			}
 		}
 	}
