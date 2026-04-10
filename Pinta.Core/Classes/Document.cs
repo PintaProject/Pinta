@@ -149,7 +149,15 @@ public sealed class Document
 
 	public DocumentHistory History => Workspace.History;
 
-	public Size ImageSize { get; set; }
+	private Size image_size;
+	public Size ImageSize {
+		get => image_size;
+		set {
+			if (image_size == value) return;
+			image_size = value;
+			OnImageSizeChanged ();
+		}
+	}
 
 	public bool IsDirty {
 		get => is_dirty;
@@ -426,6 +434,11 @@ public sealed class Document
 		LayerCloned?.Invoke ();
 	}
 
+	private void OnImageSizeChanged ()
+	{
+		ImageSizeChanged?.Invoke (this, EventArgs.Empty);
+	}
+
 	private void OnIsDirtyChanged ()
 	{
 		IsDirtyChanged?.Invoke (this, EventArgs.Empty);
@@ -441,6 +454,7 @@ public sealed class Document
 		SelectionChanged?.Invoke (this, EventArgs.Empty);
 	}
 
+	public event EventHandler? ImageSizeChanged;
 	public event EventHandler? IsDirtyChanged;
 	public event EventHandler? Renamed;
 	public event LayerCloneEvent? LayerCloned;
