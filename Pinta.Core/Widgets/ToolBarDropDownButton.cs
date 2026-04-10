@@ -18,6 +18,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	private int previous_index = 0;
 
 	private readonly List<ToolBarItem> items;
+	private readonly List<ToolBarItemWidget> toolbar_item_widgets;
 	public ReadOnlyCollection<ToolBarItem> Items { get; }
 
 	public ToolBarDropDownButton (bool showLabel = false)
@@ -30,9 +31,10 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 		items = [];
 		Items = new (items);
+		toolbar_item_widgets = [];
 		show_label = showLabel;
 
-		widgetList = Gio.ListStore.New (ToolBarItem.GetGType ());
+		widgetList = Gio.ListStore.New (ToolBarItemWidget.GetGType ());
 		SetModel (widgetList);
 
 		Gtk.SignalListItemFactory selectedFactory = new ();
@@ -54,18 +56,15 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 	private void OnBindSelectedItem (Gtk.SignalListItemFactory sender, Gtk.SignalListItemFactory.BindSignalArgs args)
 	{
-		Gtk.ListItem item = (Gtk.ListItem) args.Object;
-		if (item is null) { return; }
-
-		ToolBarItem toolbar_item = items[(int) item.Position];
+		ToolBarItem toolbar_item = items[(int) Selected];
 
 		dropdown_icon.SetFromIconName (toolbar_item.ImageId);
 		if (show_label) { dropdown_label.SetText (toolbar_item.Text); }
 
 		int current_index = (int) Selected;
 		if (previous_index != current_index) {
-			items[previous_index].SetSelectedIconVisible (false);
-			items[current_index].SetSelectedIconVisible (true);
+			toolbar_item_widgets[previous_index].SetSelectedIconVisible (false);
+			toolbar_item_widgets[current_index].SetSelectedIconVisible (true);
 			previous_index = current_index;
 			SelectedIndex = current_index;
 		}
@@ -76,7 +75,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		Gtk.ListItem item = (Gtk.ListItem) args.Object;
 		if (item is null) { return; }
 
-		ToolBarItem toolbar_item = items[(int) item.Position];
+		ToolBarItemWidget toolbar_item = toolbar_item_widgets[(int) item.Position];
 		item.SetChild (toolbar_item);
 	}
 
@@ -87,10 +86,12 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 	public ToolBarItem AddItem (string text, string imageId, object? tag)
 	{
-		ToolBarItem item = new (text, imageId, tag);
-		widgetList.Append (item);
+		ToolBarItemWidget widget = new (text, imageId);
+		toolbar_item_widgets.Add (widget);
+		widgetList.Append (widget);
 
-		if (items.Count == 0 && previous_index == 0) { item.SetSelectedIconVisible (true); }
+		ToolBarItem item = new (text, imageId, tag);
+		if (items.Count == 0 && previous_index == 0) { widget.SetSelectedIconVisible (true); }
 		items.Add (item);
 
 		if (selected_item == null)
@@ -140,7 +141,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	public event EventHandler? SelectedItemChanged;
 }
 
-public sealed class ToolBarItem : Gtk.Box
+public sealed class ToolBarItem
 {
 	public ToolBarItem (string text, string imageId) : this (text, imageId, null) { }
 
@@ -149,7 +150,20 @@ public sealed class ToolBarItem : Gtk.Box
 		Text = text;
 		ImageId = imageId;
 		Tag = tag;
+	}
 
+	public string ImageId { get; }
+	public object? Tag { get; }
+	public string Text { get; }
+
+	public T GetTagOrDefault<T> (T defaultValue)
+		=> Tag is T value ? value : defaultValue;
+}
+
+public sealed class ToolBarItemWidget : Gtk.Box
+{
+	public ToolBarItemWidget (string text, string imageId)
+	{
 		Gtk.Image image = new ();
 		image.SetFromIconName (imageId);
 		Gtk.Label label = new ();
@@ -172,12 +186,5 @@ public sealed class ToolBarItem : Gtk.Box
 		SelectedIcon.Visible = visible;
 	}
 
-	public string ImageId { get; }
-	public object? Tag { get; }
-	public string Text { get; }
-
 	private Gtk.Image SelectedIcon;
-
-	public T GetTagOrDefault<T> (T defaultValue)
-		=> Tag is T value ? value : defaultValue;
 }
