@@ -113,7 +113,7 @@ internal sealed class InstallDialog : Adw.Window
 
 		InstallErrorReporter errorReporter = new ();
 
-		StatusProgressBar progressBar = new (scroll, errorReporter);
+		StatusProgressBar progressBar = StatusProgressBar.New (scroll, errorReporter);
 
 		Gtk.Button cancelButton = Gtk.Button.NewWithLabel (Translations.GetString ("Cancel"));
 		cancelButton.OnClicked += (_, _) => Close ();

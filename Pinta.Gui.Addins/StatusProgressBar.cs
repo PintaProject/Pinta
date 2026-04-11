@@ -15,23 +15,28 @@ internal interface IErrorReporter
 /// Since the add-in queries may happen from a background thread, any UI updates are
 /// invoked on the UI thread.
 /// </summary>
-internal sealed class StatusProgressBar : Adw.Bin, IProgressStatus
+[GObject.Subclass<Adw.Bin>]
+internal sealed partial class StatusProgressBar : IProgressStatus
 {
 	private readonly Gtk.Overlay progress_overlay = Gtk.Overlay.New ();
-	private readonly Gtk.ProgressBar progress_bar;
-	private readonly IErrorReporter error_reporter;
+	private readonly Gtk.ProgressBar progress_bar = Gtk.ProgressBar.New ();
+	private IErrorReporter? error_reporter;
 
-	public StatusProgressBar (Gtk.Widget primary_widget, IErrorReporter error_reporter)
+	public static StatusProgressBar New (Gtk.Widget primaryWidget, IErrorReporter errorReporter)
 	{
-		this.error_reporter = error_reporter;
+		StatusProgressBar widget = NewWithProperties ([]);
+		widget.progress_overlay.Child = primaryWidget;
+		widget.error_reporter = errorReporter;
+		return widget;
+	}
 
-		progress_bar = Gtk.ProgressBar.New ();
+	partial void Initialize ()
+	{
 		progress_bar.Fraction = 0.5;
 		progress_bar.ShowText = true;
 		progress_bar.Valign = Gtk.Align.End;
 		progress_bar.AddCssClass (Pinta.Core.AdwaitaStyles.Osd);
 
-		progress_overlay.Child = primary_widget;
 		Child = progress_overlay;
 	}
 
@@ -61,9 +66,9 @@ internal sealed class StatusProgressBar : Adw.Bin, IProgressStatus
 		Console.WriteLine ("Info: {0}", msg);
 	}
 
-	public void ReportError (string message, Exception exception) => error_reporter.ReportError (message, exception);
+	public void ReportError (string message, Exception exception) => error_reporter?.ReportError (message, exception);
 
-	public void ReportWarning (string message) => error_reporter.ReportWarning (message);
+	public void ReportWarning (string message) => error_reporter?.ReportWarning (message);
 
 	public void SetMessage (string msg)
 	{
