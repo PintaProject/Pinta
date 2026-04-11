@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-01 00:35+0000\n"
-"PO-Revision-Date: 2024-04-22 13:07+0000\n"
+"PO-Revision-Date: 2026-04-12 18:25+0000\n"
 "Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
 "Language-Team: English (Canada) <https://hosted.weblate.org/projects/pinta/"
 "pinta/en_CA/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -90,17 +90,17 @@ msgstr "After select"
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:72
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
 msgid "Align Object"
-msgstr ""
+msgstr "Align Object"
 
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "All Petite Caps"
-msgstr ""
+msgstr "All Petite Caps"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:196
 msgid "All Small Caps"
-msgstr ""
+msgstr "All Small Caps"
 
 #: ../Pinta.Core/Actions/EditActions.cs:585
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -110,11 +110,11 @@ msgstr "All files"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:340
 msgid "Alpha"
-msgstr ""
+msgstr "Alpha"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:212
 msgid "Alpha Gradient"
-msgstr ""
+msgstr "Alpha Gradient"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
@@ -215,7 +215,7 @@ msgstr "Best Fit"
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:466
 msgid "Bevel Join"
-msgstr ""
+msgstr "Bevel Join"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
@@ -263,19 +263,19 @@ msgstr "Bonfire"
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:281
 msgid "Book"
-msgstr ""
+msgstr "Book"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
-msgstr ""
+msgstr "Bottom Centre"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Bottom Left"
-msgstr ""
+msgstr "Bottom Left"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:36
 msgid "Bottom Right"
-msgstr ""
+msgstr "Bottom Right"
 
 #: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
@@ -326,15 +326,15 @@ msgstr "Canvas"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:106
 msgid "Canvas Grid Settings"
-msgstr ""
+msgstr "Canvas Grid Settings"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:124
 msgid "Canvas Grid..."
-msgstr ""
+msgstr "Canvas Grid..."
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
-msgstr ""
+msgstr "Cell Radius"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
@@ -342,11 +342,11 @@ msgstr "Cell Size"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:19
 msgid "Cells"
-msgstr ""
+msgstr "Cells"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:32
 msgid "Center"
-msgstr ""
+msgstr "Center"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:377
 msgid "Center Align"
@@ -354,7 +354,7 @@ msgstr "Center Align"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
-msgstr ""
+msgstr "Centre Left"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:159
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:96
@@ -364,7 +364,7 @@ msgstr "Center Offset"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:33
 msgid "Center Right"
-msgstr ""
+msgstr "Centre Right"
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:154
 msgid "Centered"
@@ -377,11 +377,11 @@ msgstr "Centimeters"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:365
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Change brush width. Shortcut keys: [ ]"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Change font size. Shortcut keys: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -399,7 +399,7 @@ msgstr "Choose Colour"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:369
 msgid "Choose Colors"
-msgstr ""
+msgstr "Choose Colours"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:153
 msgid "Choose Palette Color"
@@ -412,7 +412,7 @@ msgstr "Circles"
 #. Translators: Arrangement of points along a circular path
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:170
 msgid "Circular"
-msgstr ""
+msgstr "Circular"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:7
 msgid "Clamp"
@@ -440,6 +440,9 @@ msgid ""
 "Right click to reverse.\n"
 "Click on a control point and drag to move it."
 msgstr ""
+"Click and drag to draw gradient from primary to secondary colour.\n"
+"Right click to reverse.\n"
+"Click on a control point and drag to move it."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -459,6 +462,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"Click to select region of similar colour.\n"
+"Hold shift to use Global mode."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
@@ -522,7 +527,7 @@ msgstr "Colour Dodge"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:215
 msgid "Color Gradient"
-msgstr ""
+msgstr "Colour Gradient"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:328
 msgid "Color Mode"
@@ -550,7 +555,7 @@ msgstr "Colour Scheme"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:194
 msgid "Color Scheme Edge Behavior"
-msgstr ""
+msgstr "Colour Scheme Edge Behaviour"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:180
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:145
@@ -625,11 +630,11 @@ msgstr "Crop to Selection"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Current Palette"
-msgstr ""
+msgstr "Current Palette"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:247
 msgid "Curved"
-msgstr ""
+msgstr "Curved"
 
 #: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:138
@@ -678,7 +683,7 @@ msgstr "Deleted"
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:49
 msgid "Dents"
-msgstr ""
+msgstr "Dents"
 
 #: ../Pinta.Core/Actions/EditActions.cs:383
 msgid "Deselect"
@@ -843,11 +848,11 @@ msgstr "Failed to take screenshot"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:175
 msgid "Feather Canvas Edge"
-msgstr ""
+msgstr "Feather Canvas Edge"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:18
 msgid "Feather Object"
-msgstr ""
+msgstr "Feather Object"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -863,7 +868,7 @@ msgstr "Fill Background"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:221
 msgid "Fill Object Background"
-msgstr ""
+msgstr "Fill Object Background"
 
 #: ../Pinta.Core/Actions/EditActions.cs:135
 #: ../Pinta.Core/Actions/EditActions.cs:321
@@ -903,7 +908,7 @@ msgstr "Flatten"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr ""
+msgstr "Flattening the image will merge all layers into a single layer."
 
 #: ../Pinta.Core/Actions/ImageActions.cs:84
 #: ../Pinta.Core/Actions/LayerActions.cs:95
@@ -959,7 +964,7 @@ msgstr "Fragments"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:220
 msgid "Freeform"
-msgstr ""
+msgstr "Freeform"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -996,11 +1001,11 @@ msgstr "Gradient"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:127
 msgid "Gradient Created"
-msgstr ""
+msgstr "Gradient Created"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:128
 msgid "Gradient Modified"
-msgstr ""
+msgstr "Gradient Modified"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
@@ -1020,7 +1025,7 @@ msgstr "Hard Light"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:317
 msgid "Heavy"
-msgstr ""
+msgstr "Heavy"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:82
 #: ../Pinta/Dialogs/NewImageDialog.cs:328
@@ -1031,7 +1036,7 @@ msgstr "Height:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:363
 msgid "Hex"
-msgstr ""
+msgstr "Hex"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
 msgid "Hide Layer"
@@ -1068,7 +1073,7 @@ msgstr "Hue"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:287
 msgid "Hue & Sat"
-msgstr ""
+msgstr "Hue & Sat"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
 msgid "Hue / Saturation"
@@ -1080,7 +1085,7 @@ msgstr "ICO files can not be larger than 255 x 255 pixels."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "If enabled, the Value component is applied to the colour wheel."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1131,6 +1136,11 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
+"In Freeform mode, click and drag to draw the outline for a selection area.\n"
+"\n"
+"In Polygon mode, click and drag to add a new point to the selection.\n"
+"Press Enter to finish the selection.\n"
+"Press Backspace to delete the last point."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Inches"
@@ -1218,7 +1228,7 @@ msgstr "Landscape"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
-msgstr ""
+msgstr "Lasso Mode"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
@@ -1357,6 +1367,9 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Left click to fill a region with the primary colour, right click to fill "
+"with the secondary colour.\n"
+"Hold Shift to use Global mode."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1393,6 +1406,8 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Left click to set primary colour. Right click to set secondary colour. "
+"Middle click or press {0} and left click to choose palette colour."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1489,7 +1504,7 @@ msgstr "Mandelbrot Fractal"
 #. Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:51
 msgid "Martian Lava"
-msgstr ""
+msgstr "Martian Lava"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
@@ -1502,11 +1517,11 @@ msgstr "Median"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:293
 msgid "Medium"
-msgstr ""
+msgstr "Medium"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
-msgstr ""
+msgstr "Menu Bar"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:333
@@ -1520,7 +1535,7 @@ msgstr "Minimum Size"
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:454
 msgid "Miter Join"
-msgstr ""
+msgstr "Miter Join"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:322
 msgid "Mode"
@@ -1631,13 +1646,13 @@ msgstr "Number of threads to use for rendering"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:22
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:22
 msgid "Object"
-msgstr ""
+msgstr "Object"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:139
@@ -1705,15 +1720,15 @@ msgstr "Outline"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:218
 msgid "Outline Border"
-msgstr ""
+msgstr "Outline Border"
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:23
 msgid "Outline Edge"
-msgstr ""
+msgstr "Outline Edge"
 
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:18
 msgid "Outline Object"
-msgstr ""
+msgstr "Outline Object"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:225
@@ -1756,7 +1771,7 @@ msgstr "Palette"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette Source"
-msgstr ""
+msgstr "Palette Source"
 
 #: ../Pinta.Core/Actions/EditActions.cs:568
 msgid "Palette files"
@@ -1801,7 +1816,7 @@ msgstr "Percentile"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Petite Caps"
-msgstr ""
+msgstr "Petite Caps"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -1814,7 +1829,7 @@ msgstr "Photo"
 #. Translators: Arrangement of points similar to how sunflower seeds are arranged
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:174
 msgid "Phyllotaxis"
-msgstr ""
+msgstr "Phyllotaxis"
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
@@ -1879,7 +1894,7 @@ msgstr "Piña Colada"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
 msgid "Please restart Pinta for the changes to take effect."
-msgstr ""
+msgstr "Please restart Pinta for the changes to take effect."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
@@ -1889,12 +1904,12 @@ msgstr "Point Added"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:156
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Point Arrangement"
-msgstr ""
+msgstr "Point Arrangement"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:169
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:216
 msgid "Point Color"
-msgstr ""
+msgstr "Point Colour"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
 msgid "Point Deleted"
@@ -1903,7 +1918,7 @@ msgstr "Point Deleted"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:165
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Point Size"
-msgstr ""
+msgstr "Point Size"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
@@ -1911,7 +1926,7 @@ msgstr "Polar Inversion"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:221
 msgid "Polygon"
-msgstr ""
+msgstr "Polygon"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:291
 msgid "Portrait"
@@ -1919,7 +1934,7 @@ msgstr "Portrait"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:129
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #: ../Pinta.Effects/Adjustments/PosterizeEffect.cs:25
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:51
@@ -1941,7 +1956,7 @@ msgstr "Preset Gradient"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Preset Palettes"
-msgstr ""
+msgstr "Preset Palettes"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:336
 msgid "Preset:"
@@ -2005,7 +2020,7 @@ msgstr "Radius"
 #: ../Pinta.Effects/Effects/TwistEffect.cs:221
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:137
 msgid "Radius Percentage"
-msgstr ""
+msgstr "Radius Percentage"
 
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:166
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:233
@@ -2029,7 +2044,7 @@ msgstr "Random Colours"
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
-msgstr ""
+msgstr "Random Noise Seed"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:159
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
@@ -2038,7 +2053,7 @@ msgstr "Random Point Locations"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:165
 msgid "Recently Used Colors"
-msgstr ""
+msgstr "Recently Used Colours"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:55
 msgid "Recolor"
@@ -2080,7 +2095,7 @@ msgstr "Reflect"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:139
 msgid "Refraction"
-msgstr ""
+msgstr "Refraction"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:102
 msgid "Refresh"
@@ -2139,7 +2154,7 @@ msgstr "Reset to Default"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:93
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:78
 msgid "Reset to image size"
-msgstr ""
+msgstr "Reset to image size"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:214
@@ -2165,7 +2180,7 @@ msgstr "Resize Palette"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
 msgid "Restart Pinta"
-msgstr ""
+msgstr "Restart Pinta"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
@@ -2214,12 +2229,12 @@ msgstr "Rotation"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:143
 msgid "Roughness"
-msgstr ""
+msgstr "Roughness"
 
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:460
 msgid "Round Join"
-msgstr ""
+msgstr "Round Join"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
@@ -2248,11 +2263,11 @@ msgstr "Sampling"
 #. Translators: this is an abbreviation for "Saturation"
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:335
 msgid "Sat"
-msgstr ""
+msgstr "Sat"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:277
 msgid "Sat & Value"
-msgstr ""
+msgstr "Sat & Value"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
@@ -2316,12 +2331,12 @@ msgstr "Selected Colours"
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:299
 msgid "Semibold"
-msgstr ""
+msgstr "Semibold"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:275
 msgid "Semilight"
-msgstr ""
+msgstr "Semilight"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
@@ -2337,7 +2352,7 @@ msgstr "Shape Type"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:244
 msgid "Sharp Edges"
-msgstr ""
+msgstr "Sharp Edges"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:23
 msgid "Sharpen"
@@ -2352,15 +2367,15 @@ msgstr "Shortcut key"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
-msgstr ""
+msgstr "Shortcut keys"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
-msgstr ""
+msgstr "Show Axonometric Grid"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:32
 msgid "Show Grid"
-msgstr ""
+msgstr "Show Grid"
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
 msgid "Show Layer"
@@ -2373,7 +2388,7 @@ msgstr "Show Points"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:270
 msgid "Show Value"
-msgstr ""
+msgstr "Show Value"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:242
 msgid "Show/Hide"
@@ -2395,7 +2410,7 @@ msgstr "Single Pixel"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:289
 msgid "Size"
-msgstr "Window Size"
+msgstr "Size"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
@@ -2404,7 +2419,7 @@ msgstr "Slash"
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:190
 msgid "Small Caps"
-msgstr ""
+msgstr "Small Caps"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
@@ -2548,11 +2563,11 @@ msgstr "Thickness"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:257
 msgid "Thin"
-msgstr ""
+msgstr "Thin"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "This format does not support layers. Flatten image?"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:28
 msgid "Tile Reflection"
@@ -2564,7 +2579,7 @@ msgstr "Tile Size"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:234
 msgid "Tile Type"
-msgstr ""
+msgstr "Tile Type"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
 msgid "Tip: Right-click to remove control points."
@@ -2573,7 +2588,7 @@ msgstr "Tip: Right-click to remove control points."
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:220
 msgid "Title Caps"
-msgstr ""
+msgstr "Title Caps"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2601,15 +2616,15 @@ msgstr "Toolbar"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
-msgstr ""
+msgstr "Top Centre"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
-msgstr ""
+msgstr "Top Left"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
-msgstr ""
+msgstr "Top Right"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
@@ -2630,7 +2645,7 @@ msgstr "Transparent"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:147
 msgid "Turbulence"
-msgstr ""
+msgstr "Turbulence"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:27
 msgid "Twist"
@@ -2649,17 +2664,17 @@ msgstr "Type"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:311
 msgid "Ultrabold"
-msgstr ""
+msgstr "Ultrabold"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:323
 msgid "Ultraheavy"
-msgstr ""
+msgstr "Ultraheavy"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:263
 msgid "Ultralight"
-msgstr ""
+msgstr "Ultralight"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:349
 msgid "Underline"
@@ -2676,7 +2691,7 @@ msgstr "Unfocus"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Unicase"
-msgstr ""
+msgstr "Unicase"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
@@ -2728,7 +2743,7 @@ msgstr "Using some icons from:"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:336
 msgid "Value"
-msgstr ""
+msgstr "Value"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
@@ -2752,12 +2767,12 @@ msgstr "Vertical red (R)"
 
 #: ../Pinta/MainWindow.cs:465
 msgid "View"
-msgstr ""
+msgstr "View"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:49
 msgid "Vignette"
-msgstr ""
+msgstr "Vignette"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:78
 msgid "Visible"
