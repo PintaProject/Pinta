@@ -149,36 +149,44 @@ public partial class LevelsDialog : Gtk.Dialog
 		spinOutGamma.OnValueChanged += HandleSpinOutGammaValueChanged;
 		spinOutGamma.SetActivatesDefaultImmediate (true);
 
-		ColorGradientWidget gradientInput = new (2) { WidthRequest = 40 };
+		ColorGradientWidget gradientInput = ColorGradientWidget.New (2);
+		gradientInput.WidthRequest = 40;
 		gradientInput.DragGesture.OnDragBegin += HandleGradientDragBegin;
 		gradientInput.DragGesture.OnDragEnd += HandleGradientDragEnd;
 		gradientInput.ValueChanged += HandleGradientInputValueChanged;
 
-		ColorGradientWidget gradientOutput = new (3) { WidthRequest = 40 };
+		ColorGradientWidget gradientOutput = ColorGradientWidget.New (3);
+		gradientOutput.WidthRequest = 40;
 		gradientOutput.DragGesture.OnDragBegin += HandleGradientDragBegin;
 		gradientOutput.DragGesture.OnDragEnd += HandleGradientDragEnd;
 		gradientOutput.ValueChanged += HandleGradientOutputValueChanged;
 
-		ColorPanelWidget colorPanelInHigh = new () { HeightRequest = 24 };
+		ColorPanelWidget colorPanelInHigh = ColorPanelWidget.New ();
+		colorPanelInHigh.HeightRequest = 24;
 		colorPanelInHigh.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
 
-		ColorPanelWidget colorPanelInLow = new () {
-			HeightRequest = 24,
-			Valign = Gtk.Align.End,
-			Vexpand = true
-		};
+		ColorPanelWidget colorPanelInLow = ColorPanelWidget.New ();
+		colorPanelInLow.HeightRequest = 24;
+		colorPanelInLow.Valign = Gtk.Align.End;
+		colorPanelInLow.Vexpand = true;
 		colorPanelInLow.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
 
-		ColorPanelWidget colorPanelOutLow = new () { HeightRequest = 24 };
+		ColorPanelWidget colorPanelOutLow = ColorPanelWidget.New ();
+		colorPanelOutLow.HeightRequest = 24;
 		colorPanelOutLow.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
 
-		ColorPanelWidget colorPanelOutMid = new () { HeightRequest = 24 };
+		ColorPanelWidget colorPanelOutMid = ColorPanelWidget.New ();
+		colorPanelOutMid.HeightRequest = 24;
 
-		ColorPanelWidget colorPanelOutHigh = new () { HeightRequest = 24 };
+		ColorPanelWidget colorPanelOutHigh = ColorPanelWidget.New ();
+		colorPanelOutHigh.HeightRequest = 24;
 		colorPanelOutHigh.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
 
-		HistogramWidget histogramInput = new () { WidthRequest = 130, FlipHorizontal = true };
-		HistogramWidget histogramOutput = new () { WidthRequest = 130 };
+		HistogramWidget histogramInput = HistogramWidget.New ();
+		histogramInput.WidthRequest = 130;
+		histogramInput.FlipHorizontal = true;
+		HistogramWidget histogramOutput = HistogramWidget.New ();
+		histogramOutput.WidthRequest = 130;
 
 		Gtk.Box vboxInput = GtkExtensions.Box (
 			verticalSpaced,
