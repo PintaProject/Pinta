@@ -33,7 +33,8 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class ColorGradientWidget : Gtk.DrawingArea
+[GObject.Subclass<Gtk.DrawingArea>]
+public sealed partial class ColorGradientWidget
 {
 	private const double X_pad = 0.15; // gradient horizontal padding
 	private const double Y_pad = 0.03; // gradient vertical padding
@@ -41,10 +42,16 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 	private double[] vals;
 	private PointI last_mouse_pos = new (0, 0);
 
-	public ColorGradientWidget (int count)
+	public static ColorGradientWidget New (int count)
+	{
+		ColorGradientWidget widget = NewWithProperties ([]);
+		widget.Count = count;
+		return widget;
+	}
+
+	partial void Initialize ()
 	{
 		CanFocus = true;
-		Count = count;
 
 		ValueIndex = -1;
 
@@ -55,7 +62,6 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		motionController.OnLeave += HandleLeaveNotifyEvent;
 		AddController (motionController);
 
-		DragGesture = Gtk.GestureDrag.New ();
 		DragGesture.SetButton (0); // Handle all buttons
 		DragGesture.OnDragBegin += HandleDragBegin;
 		DragGesture.OnDragUpdate += HandleDragUpdate;
@@ -63,7 +69,7 @@ public sealed class ColorGradientWidget : Gtk.DrawingArea
 		AddController (DragGesture);
 	}
 
-	public Gtk.GestureDrag DragGesture { get; }
+	public Gtk.GestureDrag DragGesture { get; } = Gtk.GestureDrag.New ();
 
 	private RectangleD GradientRectangle {
 		get {
