@@ -40,7 +40,7 @@ public sealed class AddinManagerDialog : Adw.Window
 		Adw.ViewStack viewStack = CreateViewStack (galleryList, installedList, updatesList);
 
 		Adw.ToastOverlay toastOverlay = Adw.ToastOverlay.New ();
-		StatusProgressBar progressBar = new (viewStack, new ToastErrorReporter (toastOverlay));
+		StatusProgressBar progressBar = StatusProgressBar.New (viewStack, new ToastErrorReporter (toastOverlay));
 		toastOverlay.Child = progressBar;
 
 		Adw.ViewSwitcherTitle viewSwitcherTitle = Adw.ViewSwitcherTitle.New ();
