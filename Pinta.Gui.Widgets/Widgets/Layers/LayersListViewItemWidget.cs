@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Cairo;
 using GObject;
@@ -117,18 +118,25 @@ public sealed partial class LayersListViewItem
 	}
 }
 
-public sealed class LayersListViewItemWidget : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+public sealed partial class LayersListViewItemWidget
 {
 	private static readonly Pattern transparent_pattern = CairoExtensions.CreateTransparentBackgroundPattern (8);
 
 	private LayersListViewItem? item;
 	private ImageSurface? thumbnail_surface;
 
-	private readonly Gtk.DrawingArea item_thumbnail;
-	private readonly Gtk.Label item_label;
-	private readonly Gtk.CheckButton visible_button;
+	private Gtk.DrawingArea item_thumbnail;
+	private Gtk.Label item_label;
+	private Gtk.CheckButton visible_button;
 
-	public LayersListViewItemWidget ()
+	public static LayersListViewItemWidget New ()
+		=> NewWithProperties ([]);
+
+	[MemberNotNull (nameof (item_thumbnail))]
+	[MemberNotNull (nameof (item_label))]
+	[MemberNotNull (nameof (visible_button))]
+	partial void Initialize ()
 	{
 		Gtk.DrawingArea itemThumbnail = Gtk.DrawingArea.New ();
 		itemThumbnail.SetDrawFunc ((area, context, width, height) => DrawThumbnail (context, width, height));

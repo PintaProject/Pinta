@@ -40,7 +40,7 @@ internal sealed class LayersPad : IDockPad
 
 	public void Initialize (Dock workspace)
 	{
-		LayersListView layers = new ();
+		LayersListView layers = LayersListView.New ();
 		DockItem layers_item = new (
 			child: layers,
 			uniqueName: "Layers",
