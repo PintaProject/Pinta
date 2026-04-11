@@ -75,10 +75,7 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 			settings.PutSetting (SettingNames.Radius (toolPrefix), (int) radius.Value);
 	}
 
-	protected override void BuildToolSpecificToolbar (
-		Gtk.Box tb,
-		ISettingsService settings,
-		string toolPrefix)
+	protected override void BuildShapeToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
 	{
 		radius_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
@@ -86,7 +83,7 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 
 		if (radius_label == null) {
 			var radiusText = Translations.GetString ("Radius");
-			radius_label = Gtk.Label.New ($"  {radiusText}: ");
+			radius_label = Gtk.Label.New ($"{radiusText}: ");
 		}
 
 		tb.Append (radius_label);
@@ -101,6 +98,8 @@ public sealed class RoundedLineEditEngine : BaseEditEngine
 		}
 
 		tb.Append (radius);
+
+		base.BuildShapeToolBar (tb, settings, toolPrefix);
 	}
 
 	private readonly IWorkspaceService workspace;
