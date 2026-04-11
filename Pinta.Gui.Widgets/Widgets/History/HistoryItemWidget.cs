@@ -51,12 +51,16 @@ public sealed partial class HistoryListViewItem
 	public bool Active => item.State == HistoryItemState.Undo;
 }
 
-public sealed class HistoryItemWidget : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+public sealed partial class HistoryItemWidget
 {
-	private readonly Gtk.Image image;
-	private readonly Gtk.Label label;
+	private readonly Gtk.Image image = Gtk.Image.New ();
+	private readonly Gtk.Label label = Gtk.Label.New (string.Empty);
 
-	public HistoryItemWidget ()
+	public static HistoryItemWidget New ()
+		=> NewWithProperties ([]);
+
+	partial void Initialize ()
 	{
 		Spacing = 6;
 
@@ -64,9 +68,6 @@ public sealed class HistoryItemWidget : Gtk.Box
 
 		SetOrientation (Gtk.Orientation.Horizontal);
 
-		image = Gtk.Image.New ();
-
-		label = Gtk.Label.New (string.Empty);
 		label.Halign = Gtk.Align.Start;
 
 		Append (image);
