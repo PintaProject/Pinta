@@ -36,19 +36,27 @@ public sealed class ColorPickerTool : BaseTool
 {
 	private readonly IPaletteService palette;
 	private readonly IToolService tools;
+	private readonly IWorkspaceService workspace;
 
 	private MouseButton button_down;
 
 	public ColorPickerTool (IServiceProvider services) : base (services)
 	{
+		workspace = services.GetService<IWorkspaceService> ();
 		palette = services.GetService<IPaletteService> ();
 		tools = services.GetService<IToolService> ();
+
+		// Update cursor on zoom
+		workspace.ViewSizeChanged += (_, _) => {
+			if (IsActiveTool ()) {
+				SetCursor (DefaultCursor);
+			}
+		};
 	}
 
 	public override string Name => Translations.GetString ("Color Picker");
 	public override string Icon => Pinta.Resources.Icons.ToolColorPicker;
 	public override string StatusBarText => Translations.GetString ("Left click to set primary color.\nRight click to set secondary color.");
-	public override bool CursorChangesOnZoom => true;
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_K);
 	public override int Priority => 33;
 	private int SampleSize => SampleSizeDropDown.SelectedItem.GetTagOrDefault (1);
@@ -56,9 +64,11 @@ public sealed class ColorPickerTool : BaseTool
 
 	public override Gdk.Cursor DefaultCursor {
 		get {
+			double scale = workspace.GetScale ();
 			Gdk.Texture icon = GdkExtensions.CreateIconWithShape (
 				"Cursor.ColorPicker.png",
 				CursorShape.Rectangle,
+				scale,
 				SampleSize,
 				7,
 				27,

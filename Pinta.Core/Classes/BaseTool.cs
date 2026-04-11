@@ -56,10 +56,10 @@ public abstract class BaseTool
 
 		// Update cursor when active document changes
 		workspace.ActiveDocumentChanged += (_, _) => {
-			if (tools.CurrentTool == this)
-				SetCursor (CurrentCursor);
+			if (IsActiveTool ()) {
+				SetCursor (DefaultCursor);
+			}
 		};
-
 		// Give tools a chance to save their settings on application quit
 		Settings.SaveSettingsBeforeQuit += (_, _)
 			=> OnSaveSettings (Settings);
@@ -92,12 +92,6 @@ public abstract class BaseTool
 	/// </summary>
 	public Cursor? CurrentCursor { get; private set; }
 
-	/// <summary>
-	/// Specifies whether this application needs to update this tool's
-	/// cursor after a zoom operation.
-	/// </summary>
-	public virtual bool CursorChangesOnZoom
-		=> false;
 
 	/// <summary>
 	/// Specifies whether the tool manipulates selections.
@@ -325,6 +319,11 @@ public abstract class BaseTool
 
 		if (workspace.HasOpenDocuments)
 			workspace.ActiveWorkspace.Canvas.Cursor = cursor;
+	}
+
+	protected bool IsActiveTool ()
+	{
+		return tools.CurrentTool == this;
 	}
 
 	#region Toolbar
