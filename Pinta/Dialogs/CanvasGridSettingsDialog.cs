@@ -1,36 +1,57 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta;
 
-public sealed class CanvasGridSettingsDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class CanvasGridSettingsDialog
 {
 	internal event EventHandler<Settings>? Updated;
 
-	private readonly Gtk.CheckButton show_grid_checkbox;
-	private readonly Gtk.SpinButton grid_width_spinner;
-	private readonly Gtk.SpinButton grid_height_spinner;
-	private readonly Gtk.CheckButton show_axonometric_grid_checkbox;
-	private readonly Gtk.SpinButton grid_axonometric_width_spinner;
-	private readonly AnglePickerWidget grid_axonometric_angle_picker;
+	private Gtk.CheckButton show_grid_checkbox;
+	private Gtk.SpinButton grid_width_spinner;
+	private Gtk.SpinButton grid_height_spinner;
+	private Gtk.CheckButton show_axonometric_grid_checkbox;
+	private Gtk.SpinButton grid_axonometric_width_spinner;
+	private AnglePickerWidget grid_axonometric_angle_picker;
 
 	private const int SPACING = 6;
 
-	internal CanvasGridSettingsDialog (ChromeManager chrome, Settings initialSettings)
+	internal static CanvasGridSettingsDialog New (ChromeManager chrome, Settings initialSettings)
+	{
+		// TODO - this seems to incorrectly load the settings
+		CanvasGridSettingsDialog dialog = NewWithProperties ([]);
+		dialog.show_grid_checkbox.Active = initialSettings.ShowGrid;
+		dialog.grid_width_spinner.Value = initialSettings.CellSize.Width;
+		dialog.grid_height_spinner.Value = initialSettings.CellSize.Height;
+		dialog.show_axonometric_grid_checkbox.Active = initialSettings.ShowAxonometricGrid;
+		dialog.grid_axonometric_angle_picker.Value = initialSettings.AxonometricAngle;
+		dialog.grid_axonometric_width_spinner.Value = initialSettings.AxonometricWidth;
+
+		dialog.TransientFor = chrome.MainWindow;
+
+		return dialog;
+	}
+
+	[MemberNotNull (nameof (show_grid_checkbox))]
+	[MemberNotNull (nameof (grid_width_spinner))]
+	[MemberNotNull (nameof (grid_height_spinner))]
+	[MemberNotNull (nameof (show_axonometric_grid_checkbox))]
+	[MemberNotNull (nameof (grid_axonometric_width_spinner))]
+	[MemberNotNull (nameof (grid_axonometric_angle_picker))]
+	partial void Initialize ()
 	{
 		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		widthSpinner.Value = initialSettings.CellSize.Width;
 		widthSpinner.OnValueChanged += SettingsChanged;
 		widthSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		heightSpinner.Value = initialSettings.CellSize.Height;
 		heightSpinner.OnValueChanged += SettingsChanged;
 		heightSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.CheckButton showGridCheckBox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Show Grid"));
-		showGridCheckBox.Active = initialSettings.ShowGrid;
 		showGridCheckBox.OnToggled += SettingsChanged;
 		showGridCheckBox.BindProperty (
 			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
@@ -44,17 +65,14 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 			GObject.BindingFlags.SyncCreate);
 
 		Gtk.SpinButton axonometricWidthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		axonometricWidthSpinner.Value = initialSettings.AxonometricWidth;
 		axonometricWidthSpinner.OnValueChanged += SettingsChanged;
 		axonometricWidthSpinner.SetActivatesDefaultImmediate (true);
 
-		AnglePickerWidget axonometricAnglePicker = new (initialSettings.AxonometricAngle) {
-			Label = Translations.GetString ("Angle"),
-		};
+		AnglePickerWidget axonometricAnglePicker = AnglePickerWidget.NewWithAngle (new (0));
+		axonometricAnglePicker.Label = Translations.GetString ("Angle");
 		axonometricAnglePicker.ValueChanged += SettingsChanged;
 
 		Gtk.CheckButton showAxonometricGridCheckBox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Show Axonometric Grid"));
-		showAxonometricGridCheckBox.Active = initialSettings.ShowAxonometricGrid;
 		showAxonometricGridCheckBox.OnToggled += SettingsChanged;
 		showAxonometricGridCheckBox.BindProperty (
 			Gtk.CheckButton.ActivePropertyDefinition.UnmanagedName,
@@ -67,11 +85,10 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 			Gtk.Widget.SensitivePropertyDefinition.UnmanagedName,
 			GObject.BindingFlags.SyncCreate);
 
-		Gtk.Grid grid = new () {
-			RowSpacing = SPACING,
-			ColumnSpacing = SPACING,
-			ColumnHomogeneous = false,
-		};
+		Gtk.Grid grid = Gtk.Grid.New ();
+		grid.RowSpacing = SPACING;
+		grid.ColumnSpacing = SPACING;
+		grid.ColumnHomogeneous = false;
 
 		grid.Attach (showGridCheckBox, 0, 0, 2, 1);
 
@@ -91,8 +108,7 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 
 		grid.Attach (axonometricAnglePicker, 0, 5, 3, 1);
 
-		Gtk.Box mainVbox = new () { Spacing = SPACING };
-		mainVbox.SetOrientation (Gtk.Orientation.Vertical);
+		Gtk.Box mainVbox = Gtk.Box.New (Gtk.Orientation.Vertical, SPACING);
 		mainVbox.Append (grid);
 
 		// --- Initialization (Gtk.Box)
@@ -104,7 +120,6 @@ public sealed class CanvasGridSettingsDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Canvas Grid Settings");
-		TransientFor = chrome.MainWindow;
 		Modal = true;
 		IconName = Resources.Icons.ViewGrid;
 

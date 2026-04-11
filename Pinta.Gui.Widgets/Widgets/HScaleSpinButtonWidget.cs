@@ -1,21 +1,21 @@
-// 
+//
 // HScaleSpinButtonWidget.cs
-//  
+//
 // Author:
 //       Krzysztof Marecki
-// 
+//
 // Copyright (c) 2010 Krzysztof Marecki <marecki.krzysztof@gmail.com>
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -46,11 +46,10 @@ public sealed class HScaleSpinButtonWidget : Gtk.Box
 	{
 		const int SPACING = 6;
 
-		Gtk.Label titleLabel = new ();
+		Gtk.Label titleLabel = Gtk.Label.New (null);
 		titleLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Box labelAndLine = new () { Spacing = SPACING };
-		labelAndLine.SetOrientation (Gtk.Orientation.Horizontal);
+		Gtk.Box labelAndLine = Gtk.Box.New (Gtk.Orientation.Horizontal, SPACING);
 		labelAndLine.Append (titleLabel);
 
 		Gtk.Scale hScale = Gtk.Scale.NewWithRange (Gtk.Orientation.Horizontal, 2, 64, 1);
@@ -70,17 +69,14 @@ public sealed class HScaleSpinButtonWidget : Gtk.Box
 		spinButton.OnValueChanged += HandleSpinValueChanged;
 		spinButton.SetActivatesDefaultImmediate (true);
 
-		Gtk.Button resetButton = new () {
-			IconName = Resources.StandardIcons.GoPrevious,
-			WidthRequest = 28,
-			HeightRequest = 24,
-			CanFocus = true,
-			UseUnderline = true,
-		};
+		Gtk.Button resetButton = Gtk.Button.NewFromIconName (Resources.StandardIcons.GoPrevious);
+		resetButton.WidthRequest = 28;
+		resetButton.HeightRequest = 24;
+		resetButton.CanFocus = true;
+		resetButton.UseUnderline = true;
 		resetButton.OnClicked += HandleResetButtonClicked;
 
-		Gtk.Box valueControls = new () { Spacing = SPACING };
-		valueControls.SetOrientation (Gtk.Orientation.Horizontal);
+		Gtk.Box valueControls = Gtk.Box.New (Gtk.Orientation.Horizontal, SPACING);
 		valueControls.Append (hScale);
 		valueControls.Append (spinButton);
 		valueControls.Append (resetButton);
