@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-15 00:33+0000\n"
+"POT-Creation-Date: 2026-04-01 00:35+0000\n"
 "PO-Revision-Date: 2026-02-05 05:47+0000\n"
 "Last-Translator: kobyon <weblate.unretired780@passmail.net>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/pinta/"
@@ -49,7 +49,7 @@ msgstr "7x7-region"
 msgid "9 x 9 Region"
 msgstr "9x9-region"
 
-#: ../Pinta/MainWindow.cs:405
+#: ../Pinta/MainWindow.cs:401
 msgid "A_dd-ins"
 msgstr "A_dd-ins"
 
@@ -62,7 +62,7 @@ msgid "About Pinta"
 msgstr "Om Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:413
+#: ../Pinta.Core/Actions/LayerActions.cs:401
 #: ../Pinta/Actions/Edit/PasteAction.cs:174
 msgid "Add New Layer"
 msgstr "Legg til et nytt lag"
@@ -79,7 +79,7 @@ msgstr "Tilleggsbehandler..."
 msgid "Added"
 msgstr "Lagt til"
 
-#: ../Pinta/MainWindow.cs:457
+#: ../Pinta/MainWindow.cs:453
 msgid "Adjustments"
 msgstr "Forberedelser"
 
@@ -91,6 +91,16 @@ msgstr "Etter utvalg"
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:12
 msgid "Align Object"
 msgstr "Tilføy objekt"
+
+#. Translators: 'All Petite Caps' refers to the font-variant text property
+#: ../Pinta.Tools/Tools/TextTool.cs:208
+msgid "All Petite Caps"
+msgstr ""
+
+#. Translators: 'All Small Caps' refers to the font-variant text property
+#: ../Pinta.Tools/Tools/TextTool.cs:196
+msgid "All Small Caps"
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:585
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -129,6 +139,7 @@ msgstr "Anker:"
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:50
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:52
 msgid "Angle"
 msgstr "Vinkel"
 
@@ -184,7 +195,7 @@ msgstr "Bakgrunn"
 msgid "Background Color"
 msgstr "Bakgrunnsfarge"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:307
+#: ../Pinta/Dialogs/NewImageDialog.cs:302
 msgid "Background:"
 msgstr "Bakgrunn:"
 
@@ -202,7 +213,7 @@ msgid "Best Fit"
 msgstr "Beste tilpasning"
 
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:411
+#: ../Pinta.Tools/Tools/TextTool.cs:466
 msgid "Bevel Join"
 msgstr ""
 
@@ -240,7 +251,7 @@ msgid "Blurs"
 msgstr "Utydeliggjør"
 
 #. Translators: 'Bold' (700) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:250
+#: ../Pinta.Tools/Tools/TextTool.cs:305
 msgid "Bold"
 msgstr "Fet"
 
@@ -250,7 +261,7 @@ msgid "Bonfire"
 msgstr ""
 
 #. Translators: 'Book' (380) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:226
+#: ../Pinta.Tools/Tools/TextTool.cs:281
 msgid "Book"
 msgstr ""
 
@@ -313,7 +324,7 @@ msgstr "Avbryt"
 msgid "Canvas"
 msgstr "Lerret"
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:92
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:106
 msgid "Canvas Grid Settings"
 msgstr ""
 
@@ -337,7 +348,7 @@ msgstr "Celler"
 msgid "Center"
 msgstr "Midten"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:322
+#: ../Pinta.Tools/Tools/TextTool.cs:377
 msgid "Center Align"
 msgstr "Senterjuster"
 
@@ -369,7 +380,7 @@ msgstr "Centimeter"
 msgid "Change brush width. Shortcut keys: [ ]"
 msgstr "Endre børstens bredde. Snarvei tast: [ ]"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:188
+#: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Change font size. Shortcut keys: [ ]"
 msgstr ""
 
@@ -382,12 +393,12 @@ msgstr ""
 msgid "Cherry Blossom"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:638
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:639
 #: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:356
 msgid "Choose Color"
 msgstr "Velg farge"
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:361
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:369
 msgid "Choose Colors"
 msgstr ""
 
@@ -424,7 +435,7 @@ msgstr ""
 "Klikk og dra for å tegne et elliptisk utvalg.\n"
 "Hold nede Shift for å begrense til et kvadrat."
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:61
+#: ../Pinta.Tools/Tools/GradientTool.cs:62
 msgid ""
 "Click and drag to draw gradient from primary to secondary color.\n"
 "Right click to reverse.\n"
@@ -435,33 +446,35 @@ msgstr ""
 msgid "Click and drag to navigate image."
 msgstr "Klikk og dra for å navigere i bildet."
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:345
 msgid "Click to reset primary and secondary color."
 msgstr "Klikk for å tilbakestille primær- og sekundærfarge."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:326
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:333
 msgid "Click to select primary color."
 msgstr "Klikk for å velge primærfarge."
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:49
-msgid "Click to select region of similar color."
-msgstr "Klikk for å velge utvalg av samme farge."
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:50
+msgid ""
+"Click to select region of similar color.\n"
+"Hold shift to use Global mode."
+msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:329
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
 msgid "Click to select secondary color."
 msgstr "Klikk for å velge sekundærfarge."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:332
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:340
 msgid "Click to switch between primary and secondary color."
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:358
-#: ../Pinta/Dialogs/NewImageDialog.cs:415
-#: ../Pinta/Dialogs/NewImageDialog.cs:434
-#: ../Pinta/Dialogs/NewImageDialog.cs:530
+#: ../Pinta/Dialogs/NewImageDialog.cs:353
+#: ../Pinta/Dialogs/NewImageDialog.cs:410
+#: ../Pinta/Dialogs/NewImageDialog.cs:429
+#: ../Pinta/Dialogs/NewImageDialog.cs:525
 msgid "Clipboard"
 msgstr ""
 
@@ -496,6 +509,7 @@ msgstr "Grovhet"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:312
 msgid "Color"
 msgstr ""
 
@@ -511,7 +525,7 @@ msgstr ""
 msgid "Color Gradient"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:292
+#: ../Pinta.Tools/Tools/GradientTool.cs:328
 msgid "Color Mode"
 msgstr ""
 
@@ -554,7 +568,7 @@ msgstr ""
 msgid "Coloring"
 msgstr "Fargelegging"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:277
+#: ../Pinta.Tools/Tools/GradientTool.cs:298
 msgid "Conical Gradient"
 msgstr "Kjegleformet gradient"
 
@@ -623,10 +637,10 @@ msgstr ""
 msgid "Curves"
 msgstr "Kurver"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:360
-#: ../Pinta/Dialogs/NewImageDialog.cs:415
-#: ../Pinta/Dialogs/NewImageDialog.cs:436
-#: ../Pinta/Dialogs/NewImageDialog.cs:530
+#: ../Pinta/Dialogs/NewImageDialog.cs:355
+#: ../Pinta/Dialogs/NewImageDialog.cs:410
+#: ../Pinta/Dialogs/NewImageDialog.cs:431
+#: ../Pinta/Dialogs/NewImageDialog.cs:525
 msgid "Custom"
 msgstr ""
 
@@ -654,7 +668,7 @@ msgid "Default"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:68
-#: ../Pinta.Core/Actions/LayerActions.cs:392
+#: ../Pinta.Core/Actions/LayerActions.cs:380
 msgid "Delete Layer"
 msgstr "Slett lag"
 
@@ -717,7 +731,7 @@ msgid "Download size: {0}"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
-#: ../Pinta.Core/Actions/LayerActions.cs:379
+#: ../Pinta.Core/Actions/LayerActions.cs:367
 msgid "Duplicate Layer"
 msgstr "Dupliser lag"
 
@@ -737,11 +751,11 @@ msgstr "Kanthåndtering"
 msgid "Edge Detect"
 msgstr "Oppdag kanter"
 
-#: ../Pinta/MainWindow.cs:403
+#: ../Pinta/MainWindow.cs:399
 msgid "Effe_cts"
 msgstr "_Effekter"
 
-#: ../Pinta/MainWindow.cs:451
+#: ../Pinta/MainWindow.cs:447
 msgid "Effects"
 msgstr ""
 
@@ -844,7 +858,7 @@ msgstr "Rapporter en feil"
 msgid "Files to open"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:360
+#: ../Pinta.Tools/Tools/TextTool.cs:415
 msgid "Fill Background"
 msgstr "Fylt bakgrunn"
 
@@ -858,23 +872,23 @@ msgid "Fill Selection"
 msgstr "Fyll utvalget"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:226
 msgid "Fill Shape"
 msgstr "Fyll formen"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:212
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Style"
 msgstr "Fyllstil"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:220
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:227
 msgid "Fill and Outline Shape"
 msgstr "Lag omriss og fyll formen"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1109
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1395
-#: ../Pinta.Tools/Tools/GradientTool.cs:214
+#: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Finalized"
 msgstr ""
 
@@ -932,7 +946,7 @@ msgstr ""
 msgid "Floyd-Steinberg Lite"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:148
+#: ../Pinta.Tools/Tools/TextTool.cs:149
 msgid "Font"
 msgstr "Skrifttype"
 
@@ -976,16 +990,16 @@ msgstr "Global"
 msgid "Glow"
 msgstr "Glød"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:59
-#: ../Pinta.Tools/Tools/GradientTool.cs:267
+#: ../Pinta.Tools/Tools/GradientTool.cs:60
+#: ../Pinta.Tools/Tools/GradientTool.cs:288
 msgid "Gradient"
 msgstr "Gradient"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:118
+#: ../Pinta.Tools/Tools/GradientTool.cs:127
 msgid "Gradient Created"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:119
+#: ../Pinta.Tools/Tools/GradientTool.cs:128
 msgid "Gradient Modified"
 msgstr ""
 
@@ -1005,12 +1019,12 @@ msgid "Hard Light"
 msgstr ""
 
 #. Translators: 'Heavy' (900) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:262
+#: ../Pinta.Tools/Tools/TextTool.cs:317
 msgid "Heavy"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:70
-#: ../Pinta/Dialogs/NewImageDialog.cs:333
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:82
+#: ../Pinta/Dialogs/NewImageDialog.cs:328
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:81
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:126
 msgid "Height:"
@@ -1075,7 +1089,7 @@ msgstr ""
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Hvis du ikke lagrer vil alle endringer gå tapt."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:463
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:459
 msgid "Image"
 msgstr "Bilde"
 
@@ -1091,7 +1105,7 @@ msgstr ""
 msgid "Image cannot be pasted"
 msgstr "Bildet kan ikke limes inn"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:223
+#: ../Pinta.Core/Actions/LayerActions.cs:211
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:111
 msgid "Image files"
 msgstr "Bildefiler"
@@ -1104,7 +1118,7 @@ msgstr "Bildet er større enn lerretet"
 msgid "Image too large"
 msgstr "Bildet er for stort"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:270
+#: ../Pinta.Core/Actions/LayerActions.cs:258
 msgid "Import From File"
 msgstr "Importer fra fil"
 
@@ -1184,7 +1198,7 @@ msgstr "Snu om farger"
 msgid "Invert Selection"
 msgstr "Inverter utvalg"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:282
+#: ../Pinta.Tools/Tools/TextTool.cs:337
 msgid "Italic"
 msgstr "Kursiv"
 
@@ -1201,7 +1215,7 @@ msgstr ""
 msgid "Julia Fractal"
 msgstr "Julia-fraktal"
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:300
+#: ../Pinta/Dialogs/NewImageDialog.cs:295
 msgid "Landscape"
 msgstr ""
 
@@ -1248,7 +1262,7 @@ msgstr ""
 msgid "Layers"
 msgstr "Lag"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:310
+#: ../Pinta.Tools/Tools/TextTool.cs:365
 msgid "Left Align"
 msgstr "Venstrejuster"
 
@@ -1314,13 +1328,12 @@ msgstr ""
 "Venstreklikk for å viske til gjennomsiktighet, høyreklikk for å viske til "
 "sekundærfarge. "
 
-#: ../Pinta.Tools/Tools/PaintBucketTool.cs:46
+#: ../Pinta.Tools/Tools/PaintBucketTool.cs:47
 msgid ""
 "Left click to fill a region with the primary color, right click to fill with "
-"the secondary color."
+"the secondary color.\n"
+"Hold Shift to use Global mode."
 msgstr ""
-"Venstreklikk for å fylle et område med primærfargen, høyreklikk for å fylle "
-"med sekundærfargen."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1342,13 +1355,13 @@ msgid ""
 "Right click to set secondary color."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
 "Venstreklikk for å sette primærfarge. Høyreklikk for å sette sekundærfarge."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:316
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:320
 #, csharp-format
 msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
@@ -1381,7 +1394,7 @@ msgstr "Lisensavtale"
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
 #: ../Pinta.Core/Actions/ViewActions.cs:248
-#: ../Pinta.Tools/Tools/TextTool.cs:214
+#: ../Pinta.Tools/Tools/TextTool.cs:269
 msgid "Light"
 msgstr ""
 
@@ -1406,15 +1419,15 @@ msgstr ""
 msgid "Line/Curve"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:275
+#: ../Pinta.Tools/Tools/GradientTool.cs:296
 msgid "Linear Diamond Gradient"
 msgstr "Diamantformet gradient"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:273
+#: ../Pinta.Tools/Tools/GradientTool.cs:294
 msgid "Linear Gradient"
 msgstr "Lineær gradient"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:274
+#: ../Pinta.Tools/Tools/GradientTool.cs:295
 msgid "Linear Reflected Gradient"
 msgstr "Lineær gradient med refleksjon"
 
@@ -1431,7 +1444,7 @@ msgstr "Lysstyrke"
 msgid "Magic Wand Select"
 msgstr "Magisk utvalgsstav"
 
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:441
 msgid "Main Menu"
 msgstr ""
 
@@ -1458,7 +1471,7 @@ msgid "Median"
 msgstr "Median"
 
 #. Translators: 'Medium' (500) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:238
+#: ../Pinta.Tools/Tools/TextTool.cs:293
 msgid "Medium"
 msgstr ""
 
@@ -1467,7 +1480,7 @@ msgid "Menu Bar"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
-#: ../Pinta.Core/Actions/LayerActions.cs:345
+#: ../Pinta.Core/Actions/LayerActions.cs:333
 msgid "Merge Layer Down"
 msgstr "Flett lag nedover"
 
@@ -1476,11 +1489,11 @@ msgid "Minimum Size"
 msgstr ""
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:399
+#: ../Pinta.Tools/Tools/TextTool.cs:454
 msgid "Miter Join"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:286
+#: ../Pinta.Tools/Tools/GradientTool.cs:322
 msgid "Mode"
 msgstr ""
 
@@ -1497,12 +1510,12 @@ msgid "Motion Blur"
 msgstr "Bevegelsesslør"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:119
-#: ../Pinta.Core/Actions/LayerActions.cs:326
+#: ../Pinta.Core/Actions/LayerActions.cs:314
 msgid "Move Layer Down"
 msgstr "Flytt lag ned"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:113
-#: ../Pinta.Core/Actions/LayerActions.cs:310
+#: ../Pinta.Core/Actions/LayerActions.cs:298
 msgid "Move Layer Up"
 msgstr "Flytt lag opp"
 
@@ -1531,7 +1544,7 @@ msgid "New"
 msgstr "Ny"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:138
-#: ../Pinta/Dialogs/NewImageDialog.cs:237
+#: ../Pinta/Dialogs/NewImageDialog.cs:232
 msgid "New Image"
 msgstr "Nytt bilde"
 
@@ -1557,11 +1570,12 @@ msgstr ""
 msgid "Noise"
 msgstr "Støy"
 
+#. Translators: 'Normal' refers to the font-variant text property
 #. Translators: 'Normal' (400) refers to the font-weight text property
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:232
-#: ../Pinta.Tools/Tools/TextTool.cs:357
+#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:184
+#: ../Pinta.Tools/Tools/TextTool.cs:287 ../Pinta.Tools/Tools/TextTool.cs:412
 msgid "Normal"
 msgstr "Normal"
 
@@ -1573,7 +1587,7 @@ msgstr "Normal blending"
 msgid "Normal Size"
 msgstr "Normal størrelse"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:358
+#: ../Pinta.Tools/Tools/TextTool.cs:413
 msgid "Normal and Outline"
 msgstr "Normal og uthevet"
 
@@ -1630,7 +1644,7 @@ msgstr ""
 msgid "Open Image"
 msgstr "Åpne bilde"
 
-#: ../Pinta.Core/Actions/LayerActions.cs:241
+#: ../Pinta.Core/Actions/LayerActions.cs:229
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:73
 msgid "Open Image File"
 msgstr "Åpne bildefil"
@@ -1648,7 +1662,7 @@ msgstr "Åpne palett-fil"
 msgid "Open..."
 msgstr "Åpne..."
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:316
+#: ../Pinta/Dialogs/NewImageDialog.cs:311
 msgid "Orientation:"
 msgstr ""
 
@@ -1656,7 +1670,7 @@ msgstr ""
 msgid "Original"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:359
+#: ../Pinta.Tools/Tools/TextTool.cs:414
 msgid "Outline"
 msgstr "Omriss"
 
@@ -1673,12 +1687,12 @@ msgid "Outline Object"
 msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
-#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:218
+#: ../Pinta.Tools/Tools/FreeformShapeTool.cs:225
 msgid "Outline Shape"
 msgstr "Lag omriss av formen"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
-#: ../Pinta.Tools/Tools/TextTool.cs:373
+#: ../Pinta.Tools/Tools/TextTool.cs:428
 msgid "Outline width"
 msgstr "Uthevelsesbredde"
 
@@ -1754,6 +1768,11 @@ msgstr "Blyanttykkelse"
 #: ../Pinta.Effects/Effects/MedianEffect.cs:63
 msgid "Percentile"
 msgstr "Prosentil"
+
+#. Translators: 'Petite Caps' refers to the font-variant text property
+#: ../Pinta.Tools/Tools/TextTool.cs:202
+msgid "Petite Caps"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -1860,7 +1879,7 @@ msgstr "Polar invertering"
 msgid "Polygon"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:296
+#: ../Pinta/Dialogs/NewImageDialog.cs:291
 msgid "Portrait"
 msgstr ""
 
@@ -1890,7 +1909,7 @@ msgstr ""
 msgid "Preset Palettes"
 msgstr ""
 
-#: ../Pinta/Dialogs/NewImageDialog.cs:341
+#: ../Pinta/Dialogs/NewImageDialog.cs:336
 msgid "Preset:"
 msgstr ""
 
@@ -1932,7 +1951,7 @@ msgstr "RGB"
 msgid "Radial Blur"
 msgstr "Radial blur"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:276
+#: ../Pinta.Tools/Tools/GradientTool.cs:297
 msgid "Radial Gradient"
 msgstr "Radial gradient"
 
@@ -2126,7 +2145,7 @@ msgstr ""
 msgid "Reverse Color Sorting"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:334
+#: ../Pinta.Tools/Tools/TextTool.cs:389
 msgid "Right Align"
 msgstr "Høyrejuster"
 
@@ -2164,7 +2183,7 @@ msgid "Roughness"
 msgstr ""
 
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:405
+#: ../Pinta.Tools/Tools/TextTool.cs:460
 msgid "Round Join"
 msgstr ""
 
@@ -2261,12 +2280,12 @@ msgid "Selected Colors"
 msgstr ""
 
 #. Translators: 'Semibold' (600) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:244
+#: ../Pinta.Tools/Tools/TextTool.cs:299
 msgid "Semibold"
 msgstr ""
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:220
+#: ../Pinta.Tools/Tools/TextTool.cs:275
 msgid "Semilight"
 msgstr ""
 
@@ -2293,7 +2312,7 @@ msgstr "Gjør skarpere"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
 #: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
-#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:333
+#: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:341
 msgid "Shortcut key"
 msgstr "Hurtigtast"
 
@@ -2301,11 +2320,11 @@ msgstr "Hurtigtast"
 msgid "Shortcut keys"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:49
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:30
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:32
 msgid "Show Grid"
 msgstr ""
 
@@ -2346,6 +2365,11 @@ msgstr ""
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
+msgstr ""
+
+#. Translators: 'Small Caps' refers to the font-variant text property
+#: ../Pinta.Tools/Tools/TextTool.cs:190
+msgid "Small Caps"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
@@ -2409,7 +2433,7 @@ msgstr "Tekst"
 msgid "Text - Finalize"
 msgstr "Tekstfullføring"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:348
+#: ../Pinta.Tools/Tools/TextTool.cs:403
 msgid "Text Style"
 msgstr "Tekststil"
 
@@ -2482,7 +2506,7 @@ msgid "Thickness"
 msgstr "Tykkelse"
 
 #. Translators: 'Thin' (100) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:202
+#: ../Pinta.Tools/Tools/TextTool.cs:257
 msgid "Thin"
 msgstr ""
 
@@ -2505,6 +2529,11 @@ msgstr ""
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
 msgid "Tip: Right-click to remove control points."
 msgstr "Tips: Høyreklikk for å fjerne kontrollpunkter"
+
+#. Translators: 'Title Caps' refers to the font-variant text property
+#: ../Pinta.Tools/Tools/TextTool.cs:220
+msgid "Title Caps"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2550,7 +2579,7 @@ msgstr "Overføringskart"
 msgid "Translate This Application"
 msgstr "Oversett dette programmet"
 
-#: ../Pinta.Tools/Tools/GradientTool.cs:293
+#: ../Pinta.Tools/Tools/GradientTool.cs:329
 msgid "Transparency Mode"
 msgstr ""
 
@@ -2578,21 +2607,21 @@ msgid "Type"
 msgstr "Type"
 
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:256
+#: ../Pinta.Tools/Tools/TextTool.cs:311
 msgid "Ultrabold"
 msgstr ""
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:268
+#: ../Pinta.Tools/Tools/TextTool.cs:323
 msgid "Ultraheavy"
 msgstr ""
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:208
+#: ../Pinta.Tools/Tools/TextTool.cs:263
 msgid "Ultralight"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:294
+#: ../Pinta.Tools/Tools/TextTool.cs:349
 msgid "Underline"
 msgstr "Understreket"
 
@@ -2603,6 +2632,11 @@ msgstr "Angre"
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:23
 msgid "Unfocus"
 msgstr "Defokusér"
+
+#. Translators: 'Unicase' refers to the font-variant text property
+#: ../Pinta.Tools/Tools/TextTool.cs:214
+msgid "Unicase"
+msgstr ""
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
@@ -2676,7 +2710,7 @@ msgstr ""
 msgid "Vertical red (R)"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:469
+#: ../Pinta/MainWindow.cs:465
 msgid "View"
 msgstr ""
 
@@ -2701,9 +2735,9 @@ msgstr "Varme"
 msgid "White"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:66
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:76
-#: ../Pinta/Dialogs/NewImageDialog.cs:325
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:78
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:88
+#: ../Pinta/Dialogs/NewImageDialog.cs:320
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:73
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:123
 msgid "Width:"
@@ -2766,7 +2800,7 @@ msgstr "Forminsk"
 msgid "Zoom to Selection"
 msgstr "Forstørr til utvalget"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:398
 msgid "_Adjustments"
 msgstr "Justeringer"
 
@@ -2783,25 +2817,21 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:394
 msgid "_Edit"
 msgstr "R_ediger"
 
-#: ../Pinta/MainWindow.cs:394
+#: ../Pinta/MainWindow.cs:393
 msgid "_File"
 msgstr "_Fil"
 
-#: ../Pinta/MainWindow.cs:407
+#: ../Pinta/MainWindow.cs:403
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:397
 msgid "_Image"
 msgstr "_Bilde"
-
-#: ../Pinta/MainWindow.cs:400
-msgid "_Layers"
-msgstr "_Lag"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
@@ -2814,11 +2844,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:396
 msgid "_View"
 msgstr "_Vis"
 
-#: ../Pinta/MainWindow.cs:406
+#: ../Pinta/MainWindow.cs:402
 msgid "_Window"
 msgstr "_Vindu"
 
@@ -2830,10 +2860,10 @@ msgstr "av Pintas bidragsytere"
 msgid "draw;drawing;paint;painting;graphics;raster;2d;"
 msgstr ""
 
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:68
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
-#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:78
-#: ../Pinta/Dialogs/NewImageDialog.cs:277
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:80
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:84
+#: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:90
+#: ../Pinta/Dialogs/NewImageDialog.cs:272
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:104
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:108
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:136
@@ -2883,6 +2913,19 @@ msgstr ""
 #, csharp-format
 msgid "{0}%"
 msgstr ""
+
+#~ msgid "Click to select region of similar color."
+#~ msgstr "Klikk for å velge utvalg av samme farge."
+
+#~ msgid ""
+#~ "Left click to fill a region with the primary color, right click to fill "
+#~ "with the secondary color."
+#~ msgstr ""
+#~ "Venstreklikk for å fylle et område med primærfargen, høyreklikk for å "
+#~ "fylle med sekundærfargen."
+
+#~ msgid "_Layers"
+#~ msgstr "_Lag"
 
 #~ msgid ""
 #~ "Left click to set primary color. Right click to set secondary color. "

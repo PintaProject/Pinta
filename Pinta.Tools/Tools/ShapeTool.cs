@@ -1,21 +1,21 @@
-// 
+//
 // ShapeTool.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,19 +32,11 @@ namespace Pinta.Tools;
 
 public abstract class ShapeTool : BaseTool
 {
-	// TODO:
-	// This is `Lazy<T>` because the services used by derived classes
-	// are not initialized when the constructor of `ShapeTool` is called.
-	// Ideally we shouldn't have to call a virtual method in a constructor,
-	// so let's get rid of this at some point.
-	private readonly Lazy<BaseEditEngine> lazy_edit_engine;
-	public BaseEditEngine EditEngine
-		=> lazy_edit_engine.Value;
+	public abstract BaseEditEngine EditEngine { get; }
 
 	private readonly SystemManager system_manager;
 	public ShapeTool (IServiceProvider services) : base (services)
 	{
-		lazy_edit_engine = new (CreateEditEngine);
 		system_manager = services.GetService<SystemManager> ();
 	}
 
@@ -67,8 +59,6 @@ public abstract class ShapeTool : BaseTool
 			    "\nHold {0} while pressing Space to create the control point at the exact same position." +
 			    "\nHold {0} while left clicking on a control point to create a new shape at the exact same position." +
 			    "\nPress Enter to finalize the shape.", system_manager.CtrlLabel ());
-
-	protected abstract BaseEditEngine CreateEditEngine ();
 
 	protected override void OnBuildToolBar (Gtk.Box tb)
 	{
