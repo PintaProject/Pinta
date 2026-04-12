@@ -259,7 +259,7 @@ public abstract class BaseEditEngine
 			settings.PutSetting (SettingNames.DashPattern (toolPrefix), dash_pattern_box.ComboBox.ComboBox.GetActiveText ()!);
 	}
 
-	public virtual void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
+	public void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
 	{
 		if (shape_type_label == null) {
 			string shapeTypeText = Translations.GetString ("Shape Type");
@@ -314,6 +314,11 @@ public abstract class BaseEditEngine
 
 		tb.Append (shape_type_button);
 
+		BuildShapeToolBar (tb, settings, toolPrefix);
+	}
+
+	protected virtual void BuildShapeToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
+	{
 		fill_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (fill_sep);
