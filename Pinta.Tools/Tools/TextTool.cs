@@ -240,7 +240,10 @@ public sealed class TextTool : BaseTool
 
 			font_size = new Gtk.SpinButton {
 				Adjustment = font_size_adjustment,
-				TooltipText = Translations.GetString ("Change font size. Shortcut keys: [ ]"),
+				TooltipText = Translations.GetString ("Change font size.") + "\n"
+					+ "\n" + Translations.GetString ("Shortcut keys:")
+					+ "\n" + Translations.GetString ("Press \"[\" to decrease font size")
+					+ "\n" + Translations.GetString ("Press \"]\" to increase font size")
 			};
 			font_size.OnValueChanged += HandleFontSizeChanged;
 		}
