@@ -83,9 +83,9 @@ public abstract class ArrowedEditEngine : BaseEditEngine
 			settings.PutSetting (SettingNames.ArrowLength (toolPrefix), arrow_length_offset.GetValueAsInt ());
 	}
 
-	public override void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
+	protected override void BuildShapeToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
 	{
-		base.HandleBuildToolBar (tb, settings, toolPrefix);
+		base.BuildShapeToolBar (tb, settings, toolPrefix);
 
 		this.settings = settings;
 		tool_prefix = toolPrefix;

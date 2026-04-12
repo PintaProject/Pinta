@@ -39,11 +39,13 @@ Thanks to the following contributors who worked on this release:
 - Adjusted the layout of the layers panel to avoid issues with overlay scrollbars preventing the visibility toggle from being clicked (#1828, #2021)
 - Gradient types and colors can now be changed before finalizing the gradient (#2058, #2059)
 - Moved the Layers menu out of the main menu. The actions are available from a menu button in the Layers panel, or from right-clicking on layers (#1386, #2056)
+- Adjusted layout of toolbar options in the shape tools to improve usability (#2012, #2019, #2039, #2107)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
 - The layers and history panels now scroll automatically to the selected item after any updates (#1867, #1828)
 - Fixed a bug where toolbox buttons other than the active tool could be highlighted in certain situations (#1369, #2099)
+- Fixed a bug with switching between shape tools that could cause unfinalized shapes to be stuck (#1420, #2096)
 
 ## [3.1.2](https://github.com/PintaProject/Pinta/release/tag/3.1.2) - 2026/03/29
 
