@@ -155,17 +155,20 @@ public sealed class ActionManager
 			cursor.SetText ($"{pt.X}, {pt.Y}");
 		};
 
-		// Selection size widget - left aligned with enough space to display coordinates up to tens of thousands (e.g. 10000, 10000).
+		// Selection size widget - shows top-left corner coordinates and dimensions.
 		statusbar.Append (Gtk.Image.NewFromIconName (Resources.Icons.ToolSelectRectangle));
-		var selection_size = Gtk.Label.New ("0, 0");
+		var selection_size = Gtk.Label.New ("");
 		selection_size.Xalign = 0.0f;
 		selection_size.Halign = Gtk.Align.Start;
-		selection_size.WidthChars = 11;
+		selection_size.WidthChars = 25;
 		statusbar.Append (selection_size);
 
 		workspaceManager.SelectionChanged += delegate {
 			var bounds = workspaceManager.HasOpenDocuments ? workspaceManager.ActiveDocument.Selection.GetBounds () : new RectangleD ();
-			selection_size.SetText ($"{bounds.Width}, {bounds.Height}");
+			if (bounds.Width == 0 && bounds.Height == 0)
+				selection_size.SetText ("");
+			else
+				selection_size.SetText ($"{bounds.X}, {bounds.Y}  |  {bounds.Width} \u00d7 {bounds.Height}");
 		};
 
 		// Document zoom widget
