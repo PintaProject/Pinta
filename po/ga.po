@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-01 00:35+0000\n"
-"PO-Revision-Date: 2026-03-19 00:13+0000\n"
+"PO-Revision-Date: 2026-04-12 18:25+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
 "Language-Team: Irish <https://hosted.weblate.org/projects/pinta/pinta/ga/>\n"
 "Language: ga\n"
@@ -94,12 +94,12 @@ msgstr "Ailínigh an réad"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "All Petite Caps"
-msgstr ""
+msgstr "Gach Caipín Beag"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:196
 msgid "All Small Caps"
-msgstr ""
+msgstr "Gach Litir Bheag"
 
 #: ../Pinta.Core/Actions/EditActions.cs:585
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -462,6 +462,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"Cliceáil chun réigiún den dath céanna a roghnú.\n"
+"Coinnigh síos an cnaipe Shift chun an mód Domhanda a úsáid."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
@@ -1384,6 +1386,9 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Cliceáil ar chlé chun réigiún a líonadh leis an bpríomhdath, cliceáil ar "
+"dheis chun é a líonadh leis an dath tánaisteach.\n"
+"Coinnigh síos Shift chun an mód domhanda a úsáid."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1834,7 +1839,7 @@ msgstr "Ceintíl"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Petite Caps"
-msgstr ""
+msgstr "Caipíní Beaga"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -2438,7 +2443,7 @@ msgstr "Slais"
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:190
 msgid "Small Caps"
-msgstr ""
+msgstr "Caipitil Bheaga"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
@@ -2611,7 +2616,7 @@ msgstr "Leid: Cliceáil ar dheis chun pointí rialaithe a bhaint."
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:220
 msgid "Title Caps"
-msgstr ""
+msgstr "Caipíní Teidil"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2714,7 +2719,7 @@ msgstr "Dífhócas"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Unicase"
-msgstr ""
+msgstr "Aonchás"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
