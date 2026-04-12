@@ -39,6 +39,7 @@ Thanks to the following contributors who worked on this release:
 - Adjusted the layout of the layers panel to avoid issues with overlay scrollbars preventing the visibility toggle from being clicked (#1828, #2021)
 - Gradient types and colors can now be changed before finalizing the gradient (#2058, #2059)
 - Moved the Layers menu out of the main menu. The actions are available from a menu button in the Layers panel, or from right-clicking on layers (#1386, #2056)
+- Dropdowns in the toolbar now show the icons of each option and highlight the currently selected item when opened (#1977, #2092)
 - Adjusted layout of toolbar options in the shape tools to improve usability (#2012, #2019, #2039, #2107)
 
 ### Fixed
