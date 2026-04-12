@@ -92,9 +92,10 @@ public static class Icons
 {
 	public const string AddinsManage = "addins-manage";
 
+	public const string AdjustmentsDefault = "adjustments-default";
 	public const string AdjustmentsAutoLevel = "adjustments-autolevel";
 	public const string AdjustmentsBlackAndWhite = "adjustments-blackandwhite";
-	public const string AdjustmentsBrightnessContrast = "adjustments-brightnesscontrast-symbolic";
+	public const string AdjustmentsBrightnessContrast = "adjustments-brightnesscontrast";
 	public const string AdjustmentsCurves = "adjustments-curves";
 	public const string AdjustmentsHueSaturation = "adjustments-huesaturation";
 	public const string AdjustmentsInvertColors = "adjustments-invertcolors";
@@ -130,7 +131,7 @@ public static class Icons
 	public const string EffectsBlursUnfocus = "effects-blurs-unfocus";
 	public const string EffectsBlursZoomBlur = "effects-blurs-zoomblur";
 	public const string EffectsColorDithering = "effects-color-dithering";
-	public const string EffectsDefault = "effects-default-symbolic";
+	public const string EffectsDefault = "effects-default";
 	public const string EffectsDistortBulge = "effects-distort-bulge";
 	public const string EffectsDistortDents = "effects-distort-dents";
 	public const string EffectsDistortFrostedGlass = "effects-distort-frostedglass";
@@ -138,6 +139,7 @@ public static class Icons
 	public const string EffectsDistortPolarInversion = "effects-distort-polarinversion";
 	public const string EffectsDistortTile = "effects-distort-tile";
 	public const string EffectsDistortTwist = "effects-distort-twist";
+	public const string EffectsObjectFeatherObject = "effects-object-featherobject";
 	public const string EffectsNoiseAddNoise = "effects-noise-addnoise";
 	public const string EffectsNoiseMedian = "effects-noise-median";
 	public const string EffectsNoiseReduceNoise = "effects-noise-reducenoise";

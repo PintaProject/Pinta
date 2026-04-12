@@ -449,7 +449,7 @@ internal sealed class MainWindow
 
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = PintaCore.Chrome.AdjustmentsMenu,
-				IconName = Resources.Icons.AdjustmentsBrightnessContrast,
+				IconName = Resources.Icons.AdjustmentsDefault,
 				TooltipText = Translations.GetString ("Adjustments"),
 			});
 
