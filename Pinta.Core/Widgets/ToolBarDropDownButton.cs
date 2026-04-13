@@ -88,7 +88,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	{
 		ToolBarItemWidget widget = new (text, imageId);
 		toolbar_item_widgets.Add (widget);
-		widgetList.Append (widget);
+		widget_list.Append (widget);
 
 		ToolBarItem item = new (text, imageId, tag);
 		if (items.Count == 0 && previous_index == 0) { widget.SetSelectedIconVisible (true); }
