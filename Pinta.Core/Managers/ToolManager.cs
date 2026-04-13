@@ -102,6 +102,7 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 
 	public event EventHandler<ToolEventArgs>? ToolAdded;
 	public event EventHandler<ToolEventArgs>? ToolRemoved;
+	public event EventHandler<ToolEventArgs>? ToolActivated;
 
 	public BaseTool? CurrentTool { get; private set; }
 
@@ -109,8 +110,6 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 
 	public void AddTool (BaseTool tool)
 	{
-		tool.ToolItem.OnClicked += HandleToolBoxToolItemClicked;
-
 		if (!tools.Add (tool))
 			throw new Exception ("Attempted to add a duplicate tool");
 
@@ -128,10 +127,6 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 
 		if (tool is null)
 			return;
-
-		tool.ToolItem.OnClicked -= HandleToolBoxToolItemClicked;
-		tool.ToolItem.Active = false;
-		tool.ToolItem.Sensitive = false;
 
 		if (!tools.Remove (tool))
 			throw new Exception ("Attempted to remove a tool that wasn't registered");
@@ -152,24 +147,6 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 		}
 
 		ToolRemoved?.Invoke (this, new ToolEventArgs (tool));
-	}
-
-	private void HandleToolBoxToolItemClicked (object? sender, EventArgs e)
-	{
-		if (sender is not ToolBoxButton tb)
-			return;
-
-		BaseTool new_tool = tb.Tool;
-
-		// Don't let the user unselect the current tool
-		if (CurrentTool != null && new_tool.GetType ().Name == CurrentTool.GetType ().Name) {
-			if (PreviousTool != CurrentTool)
-				tb.Active = true;
-
-			return;
-		}
-
-		SetCurrentTool (new_tool);
 	}
 
 	private BaseTool? FindTool (string name)
@@ -197,7 +174,6 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 		// Load new tool
 		CurrentTool = tool;
 
-		tool.ToolItem.Active = true;
 		tool.DoActivated (workspace_manager.ActiveDocumentOrDefault);
 
 		ToolImage.SetFromIconName (tool.Icon);
@@ -211,6 +187,8 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 
 		workspace_manager.Invalidate ();
 		chrome_manager.SetStatusBarText ($" {tool.Name}: {tool.StatusBarText}");
+
+		ToolActivated?.Invoke (this, new ToolEventArgs (tool));
 	}
 
 	public bool SetCurrentTool (string tool)
@@ -263,7 +241,6 @@ public sealed class ToolManager : IEnumerable<BaseTool>, IToolService
 		chrome_manager.ToolToolBar.RemoveAll ();
 
 		tool.DoDeactivated (workspace_manager.ActiveDocumentOrDefault, newTool);
-		tool.ToolItem.Active = false;
 	}
 
 	public void DoMouseDown (Document document, ToolMouseEventArgs args)
