@@ -65,6 +65,7 @@ public static class StandardIcons
 	public const string LayerMoveDown = "pan-down-symbolic";
 
 	public const string OpenMenu = "open-menu-symbolic";
+	public const string ObjectSelect = "object-select-symbolic";
 
 	public const string ApplicationAddon = "application-x-addon-symbolic";
 	public const string SystemSearch = "system-search-symbolic";
