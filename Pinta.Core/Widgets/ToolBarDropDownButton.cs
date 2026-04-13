@@ -173,7 +173,7 @@ public sealed class ToolBarItemWidget : Gtk.Box
 		Append (label);
 
 		selected_icon = new ();
-		selected_icon.SetFromIconName ("object-select-symbolic");
+		selected_icon.SetFromIconName (Resources.StandardIcons.ObjectSelect);
 		selected_icon.Visible = false;
 		selected_icon.Hexpand = true;
 		selected_icon.Halign = Gtk.Align.End;
