@@ -39,15 +39,16 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class HistogramWidget : Gtk.DrawingArea
+[GObject.Subclass<Gtk.DrawingArea>]
+public sealed partial class HistogramWidget
 {
-	private readonly bool[] selected;
+	private readonly bool[] selected = [true, true, true];
 
-	public HistogramWidget ()
+	public static new HistogramWidget New ()
+		=> NewWithProperties ([]);
+
+	partial void Initialize ()
 	{
-		Histogram = new HistogramRgb ();
-		selected = [true, true, true];
-
 		SetDrawFunc ((_, context, _, _) => Draw (context));
 	}
 
@@ -55,7 +56,7 @@ public sealed class HistogramWidget : Gtk.DrawingArea
 
 	public bool FlipVertical { get; set; }
 
-	public HistogramRgb Histogram { get; private set; }
+	public HistogramRgb Histogram { get; private set; } = new ();
 
 	public void ResetHistogram ()
 	{

@@ -38,8 +38,8 @@ public sealed class ProgressDialog : Gtk.Dialog, IProgressDialog
 
 	public ProgressDialog (ChromeManager chrome)
 	{
-		Gtk.Label textLabel = new ();
-		Gtk.ProgressBar progressBar = new ();
+		Gtk.Label textLabel = Gtk.Label.New ("");
+		Gtk.ProgressBar progressBar = Gtk.ProgressBar.New ();
 
 		// --- References to keep
 

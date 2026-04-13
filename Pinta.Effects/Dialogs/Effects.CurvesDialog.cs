@@ -114,11 +114,10 @@ public sealed class CurvesDialog : Gtk.Dialog
 			checkBlue,
 			buttonReset]);
 
-		Gtk.DrawingArea curvesDrawing = new () {
-			WidthRequest = 256,
-			HeightRequest = 256,
-			CanFocus = true,
-		};
+		Gtk.DrawingArea curvesDrawing = Gtk.DrawingArea.New ();
+		curvesDrawing.WidthRequest = 256;
+		curvesDrawing.HeightRequest = 256;
+		curvesDrawing.CanFocus = true;
 		curvesDrawing.SetAllMargins (8);
 		curvesDrawing.SetDrawFunc ((area, context, width, height) => HandleDrawingDrawnEvent (context));
 		curvesDrawing.AddController (motionController);
@@ -172,7 +171,7 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	private Gtk.ComboBoxText CreateComboMap ()
 	{
-		Gtk.ComboBoxText result = new ();
+		Gtk.ComboBoxText result = Gtk.ComboBoxText.New ();
 		result.AppendText (Translations.GetString ("RGB"));
 		result.AppendText (Translations.GetString ("Luminosity"));
 		result.Active = 1;
@@ -205,13 +204,11 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	private Gtk.Button CreateResetButton ()
 	{
-		Gtk.Button result = new () {
-			WidthRequest = 81,
-			HeightRequest = 30,
-			Label = Translations.GetString ("Reset"),
-			Halign = Gtk.Align.End,
-			Hexpand = true,
-		};
+		Gtk.Button result = Gtk.Button.NewWithLabel (Translations.GetString ("Reset"));
+		result.WidthRequest = 81;
+		result.HeightRequest = 30;
+		result.Halign = Gtk.Align.End;
+		result.Hexpand = true;
 		result.OnClicked += HandleButtonResetClicked;
 		return result;
 
@@ -226,7 +223,8 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	private Gtk.CheckButton CreateColorCheck (string label)
 	{
-		Gtk.CheckButton result = new () { Label = label, Active = true };
+		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel (label);
+		result.Active = true;
 		result.Hide ();
 		result.OnToggled += (_, _) => InvalidateDrawing ();
 		return result;

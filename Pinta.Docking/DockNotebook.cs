@@ -48,13 +48,12 @@ public sealed class DockNotebook : Gtk.Box
 
 	public DockNotebook ()
 	{
-		Adw.TabView tabView = new () {
-			Vexpand = true,
-			Valign = Gtk.Align.Fill,
-		};
+		Adw.TabView tabView = Adw.TabView.New ();
+		tabView.Vexpand = true;
+		tabView.Valign = Gtk.Align.Fill;
 		tabView.OnClosePage += TabView_OnClosePage;
 
-		Adw.TabBar tabBar = new ();
+		Adw.TabBar tabBar = Adw.TabBar.New ();
 		tabBar.SetView (tabView);
 		tabBar.Autohide = true;
 		tabBar.AddCssClass (AdwaitaStyles.Inline);

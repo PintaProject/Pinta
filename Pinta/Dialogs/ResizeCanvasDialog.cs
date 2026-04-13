@@ -86,19 +86,16 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
 		heightSpinner.SetActivatesDefaultImmediate (true);
 
-		Gtk.Button resetButton = new () {
-			IconName = Resources.StandardIcons.EditUndo,
-			WidthRequest = 24,
-			HeightRequest = 24,
-			TooltipText = Translations.GetString ("Reset to image size"),
-		};
+		Gtk.Button resetButton = Gtk.Button.NewFromIconName (Resources.StandardIcons.EditUndo);
+		resetButton.WidthRequest = 24;
+		resetButton.HeightRequest = 24;
+		resetButton.TooltipText = Translations.GetString ("Reset to image size");
 		resetButton.OnClicked += OnResetButtonClicked;
 
-		Gtk.Grid hwGrid = new () {
-			RowSpacing = SPACING,
-			ColumnSpacing = SPACING,
-			ColumnHomogeneous = false,
-		};
+		Gtk.Grid hwGrid = Gtk.Grid.New ();
+		hwGrid.RowSpacing = SPACING;
+		hwGrid.ColumnSpacing = SPACING;
+		hwGrid.ColumnHomogeneous = false;
 		hwGrid.Attach (widthLabel, 0, 0, 1, 1);
 		hwGrid.Attach (widthSpinner, 1, 0, 1, 1);
 		hwGrid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
@@ -148,8 +145,7 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			Gtk.Label.New ("%")
 		]);
 
-		Gtk.Separator sep = new ();
-		sep.SetOrientation (Gtk.Orientation.Horizontal);
+		Gtk.Separator sep = Gtk.Separator.New (Gtk.Orientation.Horizontal);
 
 		Gtk.Label alignLabel = Gtk.Label.New (Translations.GetString ("Anchor:"));
 		alignLabel.Xalign = 0;
@@ -181,12 +177,11 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		Gtk.Button seButton = CreateAnchorButton ();
 		seButton.OnClicked += HandleSEButtonClicked;
 
-		Gtk.Grid grid = new () {
-			RowSpacing = SPACING,
-			ColumnSpacing = SPACING,
-			Halign = Gtk.Align.Center,
-			Valign = Gtk.Align.Center,
-		};
+		Gtk.Grid grid = Gtk.Grid.New ();
+		grid.RowSpacing = SPACING;
+		grid.ColumnSpacing = SPACING;
+		grid.Halign = Gtk.Align.Center;
+		grid.Valign = Gtk.Align.Center;
 		grid.Attach (nwButton, 0, 0, 1, 1);
 		grid.Attach (nButton, 1, 0, 1, 1);
 		grid.Attach (neButton, 2, 0, 1, 1);
@@ -279,10 +274,12 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 	}
 
 	private static Gtk.Button CreateAnchorButton ()
-		=> new () {
-			WidthRequest = 30,
-			HeightRequest = 30,
-		};
+	{
+		Gtk.Button button = Gtk.Button.New ();
+		button.WidthRequest = 30;
+		button.HeightRequest = 30;
+		return button;
+	}
 
 	public ResizeCanvasOptions GetResizeCanvasOptions ()
 	{

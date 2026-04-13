@@ -153,20 +153,18 @@ public sealed class TextTool : BaseTool
 		tb.Append (font_label);
 
 		if (font_button == null) {
-			Gtk.FontDialog fontDialog = new () {
-				Modal = true,
-			};
+			Gtk.FontDialog fontDialog = Gtk.FontDialog.New ();
+			fontDialog.Modal = true;
 
-			font_button = new () {
-				UseSize = false,
-				UseFont = true,
-				CanFocus = false,
-				Level = Gtk.FontLevel.Family,
-				FontDesc = Pango.FontDescription.FromString (
-					Settings.GetSetting (SettingNames.TEXT_FONT,
-					Gtk.Settings.GetDefault ()!.GtkFontName!)),
-			};
-			font_button.SetDialog (fontDialog);
+			font_button = Gtk.FontDialogButton.New (fontDialog);
+			font_button.UseSize = false;
+			font_button.UseFont = true;
+			font_button.CanFocus = false;
+			font_button.Level = Gtk.FontLevel.Family;
+			font_button.FontDesc = Pango.FontDescription.FromString (
+				Settings.GetSetting (SettingNames.TEXT_FONT,
+					Gtk.Settings.GetDefault ()!.GtkFontName!));
+
 			Gtk.FontDialogButton.FontDescPropertyDefinition.Notify (font_button, (_, _) => {
 				HandleFontChanged ();
 			});
@@ -231,17 +229,12 @@ public sealed class TextTool : BaseTool
 		tb.Append (GtkExtensions.CreateToolBarSeparator ());
 
 		if (font_size == null) {
-			var font_size_adjustment = new Gtk.Adjustment {
-				Lower = 1,
-				Upper = 2000,
-				StepIncrement = 1,
-				Value = PangoExtensions.UnitsToPixels (font_button.FontDesc!.GetSize ()),
-			};
+			Gtk.Adjustment fontSizeAdjustment = Gtk.Adjustment.New (
+				value: PangoExtensions.UnitsToPixels (font_button.FontDesc!.GetSize ()),
+				lower: 1, upper: 2000, stepIncrement: 1, pageIncrement: 0, pageSize: 0);
 
-			font_size = new Gtk.SpinButton {
-				Adjustment = font_size_adjustment,
-				TooltipText = Translations.GetString ("Change font size. Shortcut keys: [ ]"),
-			};
+			font_size = Gtk.SpinButton.New (fontSizeAdjustment, climbRate: 0.0, digits: 0);
+			font_size.TooltipText = Translations.GetString ("Change font size. Shortcut keys: [ ]");
 			font_size.OnValueChanged += HandleFontSizeChanged;
 		}
 
@@ -332,24 +325,22 @@ public sealed class TextTool : BaseTool
 		tb.Append (weight_btn);
 
 		if (italic_btn == null) {
-			italic_btn = new Gtk.ToggleButton {
-				IconName = Pinta.Resources.StandardIcons.FormatTextItalic,
-				TooltipText = Translations.GetString ("Italic"),
-				CanFocus = false,
-				Active = Settings.GetSetting (SettingNames.TEXT_ITALIC, false),
-			};
+			italic_btn = Gtk.ToggleButton.New ();
+			italic_btn.IconName = Pinta.Resources.StandardIcons.FormatTextItalic;
+			italic_btn.TooltipText = Translations.GetString ("Italic");
+			italic_btn.CanFocus = false;
+			italic_btn.Active = Settings.GetSetting (SettingNames.TEXT_ITALIC, false);
 			italic_btn.OnToggled += HandleItalicButtonToggled;
 		}
 
 		tb.Append (italic_btn);
 
 		if (underscore_btn == null) {
-			underscore_btn = new Gtk.ToggleButton {
-				IconName = Pinta.Resources.StandardIcons.FormatTextUnderline,
-				TooltipText = Translations.GetString ("Underline"),
-				CanFocus = false,
-				Active = Settings.GetSetting (SettingNames.TEXT_UNDERLINE, false),
-			};
+			underscore_btn = Gtk.ToggleButton.New ();
+			underscore_btn.IconName = Pinta.Resources.StandardIcons.FormatTextUnderline;
+			underscore_btn.TooltipText = Translations.GetString ("Underline");
+			underscore_btn.CanFocus = false;
+			underscore_btn.Active = Settings.GetSetting (SettingNames.TEXT_UNDERLINE, false);
 			underscore_btn.OnToggled += HandleUnderscoreButtonToggled;
 		}
 
@@ -360,36 +351,33 @@ public sealed class TextTool : BaseTool
 		TextAlignment alignment = (TextAlignment) Settings.GetSetting (SettingNames.TEXT_ALIGNMENT, (int) TextAlignment.Left);
 
 		if (left_alignment_btn == null) {
-			left_alignment_btn = new Gtk.ToggleButton {
-				IconName = Pinta.Resources.StandardIcons.FormatJustifyLeft,
-				TooltipText = Translations.GetString ("Left Align"),
-				CanFocus = false,
-				Active = alignment == TextAlignment.Left,
-			};
+			left_alignment_btn = Gtk.ToggleButton.New ();
+			left_alignment_btn.IconName = Pinta.Resources.StandardIcons.FormatJustifyLeft;
+			left_alignment_btn.TooltipText = Translations.GetString ("Left Align");
+			left_alignment_btn.CanFocus = false;
+			left_alignment_btn.Active = alignment == TextAlignment.Left;
 			left_alignment_btn.OnToggled += HandleLeftAlignmentButtonToggled;
 		}
 
 		tb.Append (left_alignment_btn);
 
 		if (center_alignment_btn == null) {
-			center_alignment_btn = new Gtk.ToggleButton {
-				IconName = Pinta.Resources.StandardIcons.FormatJustifyCenter,
-				TooltipText = Translations.GetString ("Center Align"),
-				CanFocus = false,
-				Active = alignment == TextAlignment.Center,
-			};
+			center_alignment_btn = Gtk.ToggleButton.New ();
+			center_alignment_btn.IconName = Pinta.Resources.StandardIcons.FormatJustifyCenter;
+			center_alignment_btn.TooltipText = Translations.GetString ("Center Align");
+			center_alignment_btn.CanFocus = false;
+			center_alignment_btn.Active = alignment == TextAlignment.Center;
 			center_alignment_btn.OnToggled += HandleCenterAlignmentButtonToggled;
 		}
 
 		tb.Append (center_alignment_btn);
 
 		if (right_alignment_btn == null) {
-			right_alignment_btn = new Gtk.ToggleButton {
-				IconName = Pinta.Resources.StandardIcons.FormatJustifyRight,
-				TooltipText = Translations.GetString ("Right Align"),
-				CanFocus = false,
-				Active = alignment == TextAlignment.Right,
-			};
+			right_alignment_btn = Gtk.ToggleButton.New ();
+			right_alignment_btn.IconName = Pinta.Resources.StandardIcons.FormatJustifyRight;
+			right_alignment_btn.TooltipText = Translations.GetString ("Right Align");
+			right_alignment_btn.CanFocus = false;
+			right_alignment_btn.Active = alignment == TextAlignment.Right;
 			right_alignment_btn.OnToggled += HandleRightAlignmentButtonToggled;
 		}
 
