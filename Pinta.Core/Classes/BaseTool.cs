@@ -327,12 +327,9 @@ public abstract class BaseTool
 	}
 
 	#region Toolbar
-	private ToolBoxButton? tool_item;
 	private ToolBarDropDownButton? antialiasing_button;
 	private ToolBarDropDownButton? alphablending_button;
 	private Separator? separator;
-
-	public virtual ToolBoxButton ToolItem => tool_item ??= CreateToolButton ();
 
 	private Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
 
@@ -373,9 +370,6 @@ public abstract class BaseTool
 			return antialiasing_button;
 		}
 	}
-
-	private ToolBoxButton CreateToolButton ()
-		=> new (this);
 
 	#endregion
 
