@@ -13,7 +13,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	private Gtk.Image dropdown_icon;
 	private Gtk.Label dropdown_label;
 
-	private Gio.ListStore widgetList;
+	private Gio.ListStore widget_list;
 	private ToolBarItem? selected_item;
 	private int previous_index = 0;
 
@@ -34,8 +34,8 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		toolbar_item_widgets = [];
 		show_label = showLabel;
 
-		widgetList = Gio.ListStore.New (ToolBarItemWidget.GetGType ());
-		SetModel (widgetList);
+		widget_list = Gio.ListStore.New (ToolBarItemWidget.GetGType ());
+		SetModel (widget_list);
 
 		Gtk.SignalListItemFactory selectedFactory = new ();
 		selectedFactory.OnSetup += OnSetupSelectedItem;
@@ -172,19 +172,19 @@ public sealed class ToolBarItemWidget : Gtk.Box
 		Append (image);
 		Append (label);
 
-		SelectedIcon = new ();
-		SelectedIcon.SetFromIconName ("object-select-symbolic");
-		SelectedIcon.Visible = false;
-		SelectedIcon.Hexpand = true;
-		SelectedIcon.Halign = Gtk.Align.End;
+		selected_icon = new ();
+		selected_icon.SetFromIconName ("object-select-symbolic");
+		selected_icon.Visible = false;
+		selected_icon.Hexpand = true;
+		selected_icon.Halign = Gtk.Align.End;
 
-		Append (SelectedIcon);
+		Append (selected_icon);
 	}
 
 	public void SetSelectedIconVisible (bool visible)
 	{
-		SelectedIcon.Visible = visible;
+		selected_icon.Visible = visible;
 	}
 
-	private Gtk.Image SelectedIcon;
+	private Gtk.Image selected_icon;
 }
