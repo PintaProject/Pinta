@@ -22,3 +22,4 @@ Provided available under the MIT License
 https://gitlab.gnome.org/GNOME/gimp-data
 
 Provided available under the Creative Commons Attribution 4.0 International license
+
