@@ -449,7 +449,7 @@ internal sealed class MainWindow
 
 			header_bar.PackEnd (new Gtk.MenuButton () {
 				MenuModel = PintaCore.Chrome.AdjustmentsMenu,
-				IconName = Resources.Icons.AdjustmentsBrightnessContrast,
+				IconName = Resources.Icons.AdjustmentsDefault,
 				TooltipText = Translations.GetString ("Adjustments"),
 			});
 
@@ -508,9 +508,6 @@ internal sealed class MainWindow
 	private void CreateDockAndPads (Gtk.Box container)
 	{
 		ToolBoxWidget toolbox = new (PintaCore.Tools);
-
-		PintaCore.Tools.ToolAdded += (_, e) => toolbox.AddItem (e.Tool);
-		PintaCore.Tools.ToolRemoved += (_, e) => toolbox.RemoveItem (e.Tool);
 
 		Gtk.ScrolledWindow toolbox_scroll = new () {
 			Child = toolbox,

@@ -93,6 +93,7 @@ public static class Icons
 {
 	public const string AddinsManage = "addins-manage";
 
+	public const string AdjustmentsDefault = "adjustments-default-symbolic";
 	public const string AdjustmentsAutoLevel = "adjustments-autolevel";
 	public const string AdjustmentsBlackAndWhite = "adjustments-blackandwhite";
 	public const string AdjustmentsBrightnessContrast = "adjustments-brightnesscontrast-symbolic";
@@ -139,6 +140,7 @@ public static class Icons
 	public const string EffectsDistortPolarInversion = "effects-distort-polarinversion";
 	public const string EffectsDistortTile = "effects-distort-tile";
 	public const string EffectsDistortTwist = "effects-distort-twist";
+	public const string EffectsObjectFeatherObject = "effects-object-featherobject-symbolic";
 	public const string EffectsNoiseAddNoise = "effects-noise-addnoise";
 	public const string EffectsNoiseMedian = "effects-noise-median";
 	public const string EffectsNoiseReduceNoise = "effects-noise-reducenoise";

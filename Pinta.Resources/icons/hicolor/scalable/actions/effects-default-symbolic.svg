@@ -1,17 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-        xmlns='http://www.w3.org/2000/svg'
-        xmlns:svg='http://www.w3.org/2000/svg'
-        id='svg1'
-        width='24'
-        height='24'
-        viewBox='0 0 24 24'>
-  <path
-          id='path1'
-          fill='url(#gpa:foreground) rgb(0,0,0)'
-          fill-opacity='1'
-          fill-rule='nonzero'
-          stroke-width='0.0250567'
-          d='M 9.99545 23.0248 C 9.99545 22.3566, 9.99545 21.6884, 9.99545 21.0203 C 8.2574 21.0142, 6.5188 21.0322, 4.78109 21.0112 C 3.63676 20.9321, 2.82996 19.7763, 2.97955 18.674 C 2.98555 14.0431, 2.96735 9.41165, 2.98855 4.78109 C 3.06775 3.63676, 4.22354 2.82996, 5.32577 2.97955 C 6.88226 2.97955, 8.43876 2.97955, 9.99525 2.97955 C 9.99525 2.31136, 9.99525 1.64318, 9.99525 0.975 C 10.6634 0.975, 11.3316 0.975, 11.9998 0.975 C 11.9998 8.325, 11.9998 15.675, 11.9998 23.025 C 11.3316 23.025, 10.6634 23.025, 9.99525 23.025 Z M 4.98409 18.0134 C 6.65455 18.0134, 8.325 18.0134, 9.99545 18.0134 C 9.99545 16.0089, 9.99545 14.0043, 9.99545 11.9998 C 8.325 14.0043, 6.65455 16.0089, 4.98409 18.0134 Z M 14.0045 21.0203 C 14.0045 18.0134, 14.0045 15.0066, 14.0045 11.9998 C 15.675 14.0043, 17.3454 16.0089, 19.0159 18.0134 C 19.0159 13.6702, 19.0159 9.32707, 19.0159 4.98389 C 17.3454 4.98389, 15.675 4.98389, 14.0045 4.98389 C 14.0045 4.31571, 14.0045 3.64753, 14.0045 2.97935 C 15.7426 2.98535, 17.4812 2.96735, 19.2189 2.98835 C 20.3632 3.06755, 21.17 4.22334, 21.0205 5.32557 C 21.0145 9.95648, 21.0326 14.5879, 21.0114 19.2185 C 20.9322 20.3628, 19.7765 21.1696, 18.6742 21.0201 C 17.1177 21.0201, 15.5612 21.0201, 14.0048 21.0201 Z'
-          class='foreground foreground-fill'>
-  </path>
-</svg>
+   id="svg1"
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
+   version="1.1"
+   xml:space="preserve"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+     id="defs1" /><path
+     d="m 13.391113,10.787519 c -0.517235,0.522459 -0.517235,1.368842 0.0052,1.891302 l 5.34998,5.339532 c 0.52246,0.52246 1.368843,0.52246 1.891302,0 0.522459,-0.522459 0.522459,-1.368843 -0.0052,-1.891302 l -5.349981,-5.339532 c -0.522459,-0.52246 -1.368844,-0.52246 -1.891301,0 z m 0,0"
+     id="path8"
+     style="display:inline;fill:#000000;fill-opacity:1;stroke-width:1.3375" /><path
+     d="m 20.632243,10.786867 c -0.522459,-0.522459 -1.368844,-0.522459 -1.891302,0.0052 l -5.349981,5.386554 c -0.52246,0.522459 -0.517235,1.368843 0.0052,1.891302 0.527683,0.522459 1.374067,0.517235 1.891301,-0.0052 l 5.349981,-5.386554 c 0.522454,-0.527691 0.51723,-1.374074 -0.0052,-1.891309 z m 0,0"
+     id="path9"
+     style="fill:#000000;fill-opacity:1;stroke-width:1.3375" /><path
+     d="m 9.6599949,4.644444 c -1.7842189,0 -3.042802,1.0860463 -3.5376753,2.0731179 C 5.8229591,7.320454 5.6586439,7.9813667 5.6408212,8.6542552 v 0.00535 l 0.0321,6.6714268 c 0,0 -0.0214,0.390549 -0.2006243,0.743648 -0.1805619,0.354436 -0.2715116,0.607223 -1.163621,0.607223 H 2.9711804 v 2.67499 h 1.3374954 c 1.7842189,0 3.0441395,-1.084708 3.5443628,-2.069105 0.5028983,-0.984397 0.4948733,-1.931343 0.4948733,-1.931343 v -0.0094 L 8.3171495,8.6596052 c 0,0 0.020062,-0.3892111 0.1952743,-0.7396349 C 8.6889732,7.5695465 8.766548,7.3180973 9.6599949,7.3180973 H 10.99749 V 4.6431065 Z"
+     style="color:#000000;font-weight:400;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#000000;fill-opacity:1;stroke-width:1.3375"
+     overflow="visible"
+     id="path1-6" /><path
+     d="M 4.3100133,9.9944256 V 12.669416 H 10.99749 V 9.9944256 H 5.6475087 Z"
+     style="color:#000000;font-weight:400;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal;fill:#000000;fill-opacity:1;stroke-width:1.3375"
+     overflow="visible"
+     id="path2-3" /></svg>
