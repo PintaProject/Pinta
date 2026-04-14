@@ -40,6 +40,7 @@ Thanks to the following contributors who worked on this release:
 - Gradient types and colors can now be changed before finalizing the gradient (#2058, #2059)
 - Moved the Layers menu out of the main menu. The actions are available from a menu button in the Layers panel, or from right-clicking on layers (#1386, #2056)
 - Adjusted layout of toolbar options in the shape tools to improve usability (#2012, #2019, #2039, #2107)
+- Added new icons for several effects and menu buttons (#2102)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
