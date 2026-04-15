@@ -62,14 +62,7 @@ internal sealed class LayerPropertiesAction : IActionHandler
 			Gtk.ResponseType response = await dialog.RunAsync ();
 
 			if (response == Gtk.ResponseType.Ok && dialog.AreLayerPropertiesUpdated) {
-
-				string historyMessage = GetLayerPropertyUpdateMessage (
-					dialog.InitialLayerProperties,
-					dialog.UpdatedLayerProperties);
-
-				UpdateLayerPropertiesHistoryItem historyItem = new (
-					Resources.Icons.LayerProperties,
-					historyMessage,
+				UpdateLayerPropertiesHistoryItem historyItem = GetLayerUpdateHistoryItem (
 					active.Layers.CurrentUserLayerIndex,
 					dialog.InitialLayerProperties,
 					dialog.UpdatedLayerProperties);
@@ -77,9 +70,7 @@ internal sealed class LayerPropertiesAction : IActionHandler
 				active.History.PushNewItem (historyItem);
 
 				workspace.ActiveWorkspace.Invalidate ();
-
 			} else {
-
 				Layer layer = active.Layers.CurrentUserLayer;
 				Layer selectionLayer = active.Layers.SelectionLayer;
 				LayerProperties initial = dialog.InitialLayerProperties;
@@ -96,30 +87,39 @@ internal sealed class LayerPropertiesAction : IActionHandler
 		}
 	}
 
-	private static string GetLayerPropertyUpdateMessage (LayerProperties initial, LayerProperties updated)
+	private static UpdateLayerPropertiesHistoryItem GetLayerUpdateHistoryItem (
+		int layer,
+		LayerProperties initial,
+		LayerProperties updated)
 	{
 
-		string? ret = null;
+		string? message = null;
+		string icon = Resources.Icons.LayerProperties;
 		int count = 0;
 
 		if (updated.Opacity != initial.Opacity) {
-			ret = Translations.GetString ("Layer Opacity");
+			message = Translations.GetString ("Layer Opacity");
+			icon = Resources.Icons.LayerProperties;
 			count++;
 		}
 
 		if (updated.Name != initial.Name) {
-			ret = Translations.GetString ("Rename Layer");
+			message = Translations.GetString ("Rename Layer");
+			icon = Resources.Icons.LayerProperties;
 			count++;
 		}
 
 		if (updated.Hidden != initial.Hidden) {
-			ret = (updated.Hidden) ? Translations.GetString ("Hide Layer") : Translations.GetString ("Show Layer");
+			message = initial.Hidden ? Translations.GetString ("Show Layer") : Translations.GetString ("Hide Layer");
+			icon = initial.Hidden ? Resources.StandardIcons.ViewReveal : Resources.StandardIcons.ViewConceal;
 			count++;
 		}
 
-		if (ret == null || count > 1)
-			ret = Translations.GetString ("Layer Properties");
+		if (message == null || count > 1) {
+			message = Translations.GetString ("Layer Properties");
+			icon = Resources.Icons.LayerProperties;
+		}
 
-		return ret;
+		return new UpdateLayerPropertiesHistoryItem (icon, message, layer, initial, updated);
 	}
 }
