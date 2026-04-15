@@ -369,8 +369,8 @@ public abstract class BaseEditEngine
 			);
 			outline_width.TooltipText = Translations.GetString ("Change brush width.") + "\n"
 				+ "\n" + Translations.GetString ("Shortcut keys:")
-				+ "\n" + Translations.GetString ("Press {0} to decrease font size", "\"[\"")
-				+ "\n" + Translations.GetString ("Press {0} to increase font size", "\"]\"");
+				+ "\n" + Translations.GetString ("Press {0} to decrease brush size", "\"[\"")
+				+ "\n" + Translations.GetString ("Press {0} to increase brush size", "\"]\"");
 
 			outline_width.OnValueChanged += (o, e) => {
 
