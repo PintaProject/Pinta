@@ -49,7 +49,6 @@ public abstract class BaseBrushTool : BaseTool
 			+ "\n" + Translations.GetString ("Press {0} to decrease font size", "\"[\"")
 			+ "\n" + Translations.GetString ("Press {0} to increase font size", "\"]\"");
 		BrushWidthSpinButton.OnValueChanged += (_, _) => OnBrushWidthChanged ();
-		BrushWidthSpinButton.OnValueChanged += (_, _) => OnBrushWidthChanged ();
 	}
 
 	protected override bool ShowAntialiasingButton => true;
