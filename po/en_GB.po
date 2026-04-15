@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-01 00:35+0000\n"
-"PO-Revision-Date: 2026-04-12 18:25+0000\n"
-"Last-Translator: Cameron White <cameronwhite91@gmail.com>\n"
+"PO-Revision-Date: 2026-04-20 17:09+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "pinta/pinta/en_GB/>\n"
 "Language: en_GB\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -95,12 +95,12 @@ msgstr "Align Object"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "All Petite Caps"
-msgstr ""
+msgstr "All Petite Caps"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:196
 msgid "All Small Caps"
-msgstr ""
+msgstr "All Small Caps"
 
 #: ../Pinta.Core/Actions/EditActions.cs:585
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -462,6 +462,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"Click to select region of similar colour.\n"
+"Hold shift to use Global mode."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
@@ -1365,6 +1367,9 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Left click to fill a region with the primary colour, right click to fill "
+"with the secondary colour.\n"
+"Hold Shift to use Global mode."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1811,7 +1816,7 @@ msgstr "Percentile"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Petite Caps"
-msgstr ""
+msgstr "Petite Caps"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -2414,7 +2419,7 @@ msgstr "Slash"
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:190
 msgid "Small Caps"
-msgstr ""
+msgstr "Small Caps"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
@@ -2583,7 +2588,7 @@ msgstr "Tip: Right-click to remove control points."
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:220
 msgid "Title Caps"
-msgstr ""
+msgstr "Title Caps"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2686,7 +2691,7 @@ msgstr "Unfocus"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Unicase"
-msgstr ""
+msgstr "Unicase"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
