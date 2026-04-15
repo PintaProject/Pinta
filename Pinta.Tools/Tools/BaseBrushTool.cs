@@ -46,8 +46,8 @@ public abstract class BaseBrushTool : BaseTool
 
 		BrushWidthSpinButton.TooltipText = Translations.GetString ("Change brush width.") + "\n"
 			+ "\n" + Translations.GetString ("Shortcut keys:")
-			+ "\n" + Translations.GetString ("Press {0} to decrease font size", "\"[\"")
-			+ "\n" + Translations.GetString ("Press {0} to increase font size", "\"]\"");
+			+ "\n" + Translations.GetString ("Press {0} to decrease brush size", "\"[\"")
+			+ "\n" + Translations.GetString ("Press {0} to increase brush size", "\"]\"");
 		BrushWidthSpinButton.OnValueChanged += (_, _) => OnBrushWidthChanged ();
 	}
 
