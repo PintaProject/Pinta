@@ -38,7 +38,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		show_label = showLabel;
 
 		string_list = new ();
-		SetModel (widget_list);
+		SetModel (string_list);
 
 		Gtk.SignalListItemFactory selectedFactory = new ();
 		selectedFactory.OnSetup += OnSetupSelectedItem;
