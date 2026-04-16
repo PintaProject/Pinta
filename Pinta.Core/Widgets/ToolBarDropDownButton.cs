@@ -23,6 +23,9 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 	public ToolBarDropDownButton (bool showLabel = false)
 	{
+		// We create the widgets inside the dropdown to avoid having to create yet another custom widget
+		// for the selectedFactory. Also, we can reference them directly when updated, avoiding
+		// .nextSibling hacks.
 		selected_box = new ();
 		dropdown_icon = new ();
 		dropdown_label = new ();
@@ -61,6 +64,9 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		dropdown_icon.SetFromIconName (toolbar_item.ImageId);
 		if (show_label) { dropdown_label.SetText (toolbar_item.Text); }
 
+		// We store the index of the previous selection to avoid having to iterate through all items on the list.
+		// Also we check if the index changed because OnBindSelectedItem gets called both when the selected item changes
+		// and on the widget initialization/setup.
 		int current_index = (int) Selected;
 		if (previous_index != current_index) {
 			toolbar_item_widgets[previous_index].SetSelectedIconVisible (false);
@@ -91,6 +97,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		widget_list.Append (widget);
 
 		ToolBarItem item = new (text, imageId, tag);
+		// This is done to ensure the first item has a checkmark if it was selected.
 		if (items.Count == 0 && previous_index == 0) { widget.SetSelectedIconVisible (true); }
 		items.Add (item);
 
