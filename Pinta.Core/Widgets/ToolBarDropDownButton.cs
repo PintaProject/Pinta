@@ -13,7 +13,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	private Gtk.Image dropdown_icon;
 	private Gtk.Label dropdown_label;
 
-	private Gio.ListStore widget_list;
+	private Gtk.StringList string_list;
 	private ToolBarItem? selected_item;
 	private int previous_index = 0;
 
@@ -37,7 +37,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		toolbar_item_widgets = [];
 		show_label = showLabel;
 
-		widget_list = Gio.ListStore.New (ToolBarItemWidget.GetGType ());
+		string_list = new ();
 		SetModel (widget_list);
 
 		Gtk.SignalListItemFactory selectedFactory = new ();
@@ -94,7 +94,11 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	{
 		ToolBarItemWidget widget = new (text, imageId);
 		toolbar_item_widgets.Add (widget);
-		widget_list.Append (widget);
+		// We append an empty string because we only need the list's index.
+		// Otherwise, we'd need to make ToolBarItem inherit from GObject, which is undesired.
+		// Also, we'd need the indexes anyway to update the previous selection, so
+		// storing anything else is not required.
+		string_list.Append ("");
 
 		ToolBarItem item = new (text, imageId, tag);
 		// This is done to ensure the first item has a checkmark if it was selected.
