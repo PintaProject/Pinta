@@ -117,7 +117,8 @@ public sealed class ViewActions
 			"ToolWindows",
 			Translations.GetString ("Tool Windows"),
 			null,
-			null);
+			null,
+			shortcuts: ["F12"]);
 
 		EditCanvasGrid = new Command (
 			"EditCanvasGrid",
