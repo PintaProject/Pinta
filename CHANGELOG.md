@@ -29,6 +29,7 @@ Thanks to the following contributors who worked on this release:
 - The flood tools now support holding the Shift key to switch to Global mode (#2075)
 - The transform tools now support holding the Ctrl key to translate the selection by larger increments when using the arrow keys (#2072, #1559)
 - The palette widget now shows the color's hex code in the tooltip (#2068, #2074)
+- The side panels can now be hidden using the F12 shortcut in addition to the existing menu item (#2119)
 
 ### Changed
 - Upgraded the minimum required .NET version to 10.0 (#2081)
