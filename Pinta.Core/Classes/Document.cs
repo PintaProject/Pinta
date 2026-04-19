@@ -228,7 +228,7 @@ public sealed class Document
 
 		using Context g = new (Layers.CurrentUserLayer.Surface);
 		selection.Clip (g);
-		layer.DrawWithOperator (g, Operator.Source, opacity: 1.0, transform: true);
+		layer.DrawWithOperator (g, Operator.Over, opacity: 1.0, transform: true);
 
 		Layers.DestroySelectionLayer ();
 		Workspace.Invalidate ();
