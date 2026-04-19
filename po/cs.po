@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-01 00:35+0000\n"
-"PO-Revision-Date: 2026-03-31 23:09+0000\n"
+"PO-Revision-Date: 2026-04-20 17:09+0000\n"
 "Last-Translator: Elviska <vonelviska@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/pinta/pinta/cs/>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -94,12 +94,12 @@ msgstr "Zarovnat Objekt"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "All Petite Caps"
-msgstr ""
+msgstr "Všechny hezké písmena"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:196
 msgid "All Small Caps"
-msgstr ""
+msgstr "Všechny malé písmena"
 
 #: ../Pinta.Core/Actions/EditActions.cs:585
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -462,6 +462,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"Klikněte a vyberte region stejné barvy.\n"
+"Držte shift pro použití globálního módu."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
@@ -1365,6 +1367,9 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Levé kliknutí zaplní region primární barvou, pravé kliknutí zaplní s "
+"sekundární barvou.\n"
+"Držte shift pro globální mód."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1813,7 +1818,7 @@ msgstr "Percentil"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Petite Caps"
-msgstr ""
+msgstr "Hezké písmena"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -2416,7 +2421,7 @@ msgstr "Řez"
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:190
 msgid "Small Caps"
-msgstr ""
+msgstr "Malá písmena"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:326
 msgid "Smooth"
@@ -2584,7 +2589,7 @@ msgstr "Tip: Pravým kliknutím odstraníte ovládací body."
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:220
 msgid "Title Caps"
-msgstr ""
+msgstr "Titulární písmena"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2687,7 +2692,7 @@ msgstr "Rozostření"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Unicase"
-msgstr ""
+msgstr "Velká i malá písmena"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
