@@ -1,6 +1,18 @@
-<?xml version='1.0' encoding='utf-8'?>
-<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:ns2="http://www.inkscape.org/namespaces/inkscape" height="24" viewBox="0 0 24 24" width="24" version="1.1" id="svg974" ns1:docname="tool-move-cursor-symbolic.svg" ns2:version="1.1.1 (3bf5ae0d25, 2021-09-20)">
-  <ns0:defs id="defs978" />
-  <ns1:namedview id="namedview976" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" ns2:pageshadow="2" ns2:pageopacity="0.0" ns2:pagecheckerboard="0" showgrid="false" ns2:zoom="35.458333" ns2:cx="11.224442" ns2:cy="9.4477087" ns2:window-width="1920" ns2:window-height="1023" ns2:window-x="0" ns2:window-y="20" ns2:window-maximized="1" ns2:current-layer="svg974" />
-  <ns0:path id="path972" style="paint-order:markers fill stroke" d="M 12 1 L 7 6 L 10 6 L 10 9 L 14 9 L 14 6 L 17 6 L 12 1 z M 6 7 L 1 12 L 6 17 L 6 14 L 9 14 L 9 10 L 6 10 L 6 7 z M 18 7 L 18 10 L 15 10 L 15 14 L 18 14 L 18 17 L 23 12 L 18 7 z M 10 15 L 10 18 L 7 18 L 12 23 L 17 18 L 14 18 L 14 15 L 10 15 z " fill="currentColor" />
-</ns0:svg>
+<svg
+        xmlns='http://www.w3.org/2000/svg'
+        xmlns:svg='http://www.w3.org/2000/svg'
+        id='svg974'
+        width='24'
+        height='24'
+        viewBox='0 0 24 24'>
+  <path
+          id='path972'
+          opacity='0.95'
+          fill='url(#gpa:foreground) rgb(0,0,0)'
+          fill-opacity='1'
+          fill-rule='nonzero'
+          paint-order='markers fill stroke'
+          d='M 12 1 C 10.3333 2.66667, 8.66667 4.33333, 7 6 C 8 6, 9 6, 10 6 C 10 7, 10 8, 10 9 C 11.3333 9, 12.6667 9, 14 9 C 14 8, 14 7, 14 6 C 15 6, 16 6, 17 6 C 15.3333 4.33333, 13.6667 2.66667, 12 1 Z M 6 7 C 4.33333 8.66667, 2.66667 10.3333, 1 12 C 2.66667 13.6667, 4.33333 15.3333, 6 17 C 6 16, 6 15, 6 14 C 7 14, 8 14, 9 14 C 9 12.6667, 9 11.3333, 9 10 C 8 10, 7 10, 6 10 C 6 9, 6 8, 6 7 Z M 18 7 C 18 8, 18 9, 18 10 C 17 10, 16 10, 15 10 C 15 11.3333, 15 12.6667, 15 14 C 16 14, 17 14, 18 14 C 18 15, 18 16, 18 17 C 19.6667 15.3333, 21.3333 13.6667, 23 12 C 21.3333 10.3333, 19.6667 8.66667, 18 7 Z M 10 15 C 10 16, 10 17, 10 18 C 9 18, 8 18, 7 18 C 8.66667 19.6667, 10.3333 21.3333, 12 23 C 13.6667 21.3333, 15.3333 19.6667, 17 18 C 16 18, 15 18, 14 18 C 14 17, 14 16, 14 15 C 12.6667 15, 11.3333 15, 10 15 Z'
+          class='foreground foreground-fill'>
+  </path>
+</svg>

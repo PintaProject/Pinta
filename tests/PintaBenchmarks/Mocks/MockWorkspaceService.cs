@@ -24,6 +24,7 @@ internal sealed class MockWorkspaceService (Size imageSize) : IWorkspaceService
 	public event EventHandler? LayerRemoved;
 	public event EventHandler? SelectedLayerChanged;
 	public event PropertyChangedEventHandler? LayerPropertyChanged;
+	public event EventHandler? ViewSizeChanged;
 
 #pragma warning restore CS0067
 }
