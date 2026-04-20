@@ -61,6 +61,9 @@ public static class StandardIcons
 	public const string ImageGeneric = "image-x-generic-symbolic";
 	public const string ImageMissing = "image-missing-symbolic";
 
+	public const string LayerMoveUp = "pan-up-symbolic";
+	public const string LayerMoveDown = "pan-down-symbolic";
+
 	public const string OpenMenu = "open-menu-symbolic";
 
 	public const string ApplicationAddon = "application-x-addon-symbolic";
@@ -72,6 +75,7 @@ public static class StandardIcons
 	public const string ValueIncrease = "value-increase-symbolic";
 	public const string ViewFullscreen = "view-fullscreen-symbolic";
 	public const string ViewRefresh = "view-refresh-symbolic";
+	public const string ViewConceal = "view-conceal-symbolic";
 	public const string ViewReveal = "view-reveal-symbolic";
 
 	public const string WindowClose = "window-close-symbolic";
@@ -88,6 +92,7 @@ public static class Icons
 {
 	public const string AddinsManage = "addins-manage";
 
+	public const string AdjustmentsDefault = "adjustments-default-symbolic";
 	public const string AdjustmentsAutoLevel = "adjustments-autolevel";
 	public const string AdjustmentsBlackAndWhite = "adjustments-blackandwhite";
 	public const string AdjustmentsBrightnessContrast = "adjustments-brightnesscontrast-symbolic";
@@ -134,6 +139,7 @@ public static class Icons
 	public const string EffectsDistortPolarInversion = "effects-distort-polarinversion";
 	public const string EffectsDistortTile = "effects-distort-tile";
 	public const string EffectsDistortTwist = "effects-distort-twist";
+	public const string EffectsObjectFeatherObject = "effects-object-featherobject-symbolic";
 	public const string EffectsNoiseAddNoise = "effects-noise-addnoise";
 	public const string EffectsNoiseMedian = "effects-noise-median";
 	public const string EffectsNoiseReduceNoise = "effects-noise-reducenoise";
@@ -194,8 +200,6 @@ public static class Icons
 	public const string LayerFlipVertical = ImageFlipVertical;
 	public const string LayerImport = "layer-import";
 	public const string LayerMergeDown = "layers-merge-down-symbolic";
-	public const string LayerMoveDown = "layers-move-layer-down-symbolic";
-	public const string LayerMoveUp = "layers-move-layer-up-symbolic";
 	public const string LayerNew = "layers-add-layer-symbolic";
 	public const string LayerProperties = "document-properties-symbolic";
 	public const string LayerRotateZoom = "layers-rotate-zoom-symbolic";

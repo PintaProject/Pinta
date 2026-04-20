@@ -1,32 +1,152 @@
-<?xml version='1.0' encoding='utf-8'?>
-<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="48" height="48" version="1.1">
- <ns0:g transform="translate(.91021)">
-  <ns0:path id="path1055" d="m4.8272 3.3762q1.1 0 1.9 0.8t0.8 1.9q0 1.15-0.8 1.925t-1.9 0.775q-1.15 0-1.925-0.775t-0.775-1.925q0-1.1 0.775-1.9t1.925-0.8z" fill="currentColor" />
-  <ns0:use transform="translate(9.4)" ns1:href="#path1055" />
-  <ns0:use transform="translate(18.8)" ns1:href="#path1055" />
-  <ns0:use transform="translate(28.2)" ns1:href="#path1055" />
-  <ns0:use transform="translate(37.563)" ns1:href="#path1055" />
-  <ns0:path id="path1055-2" d="m4.9318 12.006q1.1 0 1.9 0.8t0.8 1.9q0 1.15-0.8 1.925t-1.9 0.775q-1.15 0-1.925-0.775t-0.775-1.925q0-1.1 0.775-1.9t1.925-0.8z" fill="currentColor" />
-  <ns0:use transform="translate(9.4)" ns1:href="#path1055-2" />
-  <ns0:use transform="translate(18.8)" ns1:href="#path1055-2" />
-  <ns0:use transform="translate(28.2)" ns1:href="#path1055-2" />
-  <ns0:use transform="translate(37.458)" ns1:href="#path1055-2" />
- </ns0:g>
- <ns0:g transform="translate(.91021)">
-  <ns0:path id="path1055-5" d="m4.9318 20.635q1.1 0 1.9 0.8t0.8 1.9q0 1.15-0.8 1.925t-1.9 0.775q-1.15 0-1.925-0.775t-0.775-1.925q0-1.1 0.775-1.9t1.925-0.8z" fill="currentColor" />
-  <ns0:use transform="translate(9.4)" ns1:href="#path1055-5" />
-  <ns0:use transform="translate(18.8)" ns1:href="#path1055-5" />
-  <ns0:use transform="translate(28.2)" ns1:href="#path1055-5" />
-  <ns0:use transform="translate(37.458)" ns1:href="#path1055-5" />
-  <ns0:use transform="translate(37.458 17.259)" ns1:href="#path1055-5" />
-  <ns0:use transform="translate(-9.4 8.0551)" ns1:href="#path1051" />
-  <ns0:use transform="translate(1e-7 8.0551)" ns1:href="#path1051" />
-  <ns0:use transform="translate(9.4 8.0551)" ns1:href="#path1051" />
-  <ns0:use transform="translate(18.8 8.0551)" ns1:href="#path1051" />
-  <ns0:path id="path1053" d="m33.132 30.639q0.8 0 1.35 0.55t0.55 1.35-0.55 1.35-1.35 0.55-1.35-0.55-0.55-1.35 0.55-1.35 1.35-0.55z" fill="currentColor" />
-  <ns0:path id="path1051" d="m14.332 31.489q0.45 0 0.75 0.3t0.3 0.75-0.3 0.75-0.75 0.3-0.75-0.3-0.3-0.75 0.3-0.75 0.75-0.3z" fill="currentColor" />
-  <ns0:use transform="translate(37.458 9.2036)" ns1:href="#path1055-5" />
-  <ns0:use transform="translate(9.4)" ns1:href="#path1051" />
-  <ns0:use transform="translate(-28.2)" ns1:href="#path1053" />
- </ns0:g>
-</ns0:svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="48"
+   height="48"
+   version="1.1"
+   id="svg20"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs20" />
+  <path
+     id="path1055"
+     d="m 5.73741,3.3762 c 2.3056984,-0.120548 3.652783,3.0935212 1.9,4.625 C 6.1732404,9.6014342 3.1213972,8.562846 3.0495194,6.3578406 2.8466178,4.8214093 4.175324,3.309623 5.73741,3.3762 Z"
+     fill="currentColor" />
+  <use
+     transform="translate(9.4)"
+     xlink:href="#path1055"
+     id="use1"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(18.8)"
+     xlink:href="#path1055"
+     id="use2"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(28.2)"
+     xlink:href="#path1055"
+     id="use3"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(37.563)"
+     xlink:href="#path1055"
+     id="use4"
+     x="0"
+     y="0" />
+  <path
+     id="path1055-2"
+     d="m 5.84201,12.006 c 2.3056984,-0.120548 3.652783,3.093521 1.9,4.625 C 6.2778404,18.231234 3.2259972,17.192646 3.1541194,14.987641 2.9512178,13.451209 4.279924,11.939423 5.84201,12.006 Z"
+     fill="currentColor" />
+  <use
+     transform="translate(9.4)"
+     xlink:href="#path1055-2"
+     id="use5"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(18.8)"
+     xlink:href="#path1055-2"
+     id="use6"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(28.2)"
+     xlink:href="#path1055-2"
+     id="use7"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(37.458)"
+     xlink:href="#path1055-2"
+     id="use8"
+     x="0"
+     y="0" />
+  <path
+     id="path1055-5"
+     d="m 5.84201,20.635 c 2.3056984,-0.120548 3.652783,3.093521 1.9,4.625 C 6.2778404,26.860234 3.2259972,25.821646 3.1541194,23.616641 2.9512178,22.080209 4.279924,20.568423 5.84201,20.635 Z"
+     fill="currentColor" />
+  <use
+     transform="translate(9.4)"
+     xlink:href="#path1055-5"
+     id="use9"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(18.8)"
+     xlink:href="#path1055-5"
+     id="use10"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(28.2)"
+     xlink:href="#path1055-5"
+     id="use11"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(37.458)"
+     xlink:href="#path1055-5"
+     id="use12"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(37.458,17.259)"
+     xlink:href="#path1055-5"
+     id="use13"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(-9.4,8.0551)"
+     xlink:href="#path1051"
+     id="use14"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(1e-7,8.0551)"
+     xlink:href="#path1051"
+     id="use15"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(9.4,8.0551)"
+     xlink:href="#path1051"
+     id="use16"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(18.8,8.0551)"
+     xlink:href="#path1051"
+     id="use17"
+     x="0"
+     y="0" />
+  <path
+     id="path1053"
+     d="m 34.04221,30.639 c 3.259528,-0.02315 1.664451,5.304137 -1.059375,3.490625 C 31.426572,33.177887 32.197578,30.542397 34.04221,30.639 Z"
+     fill="currentColor" />
+  <path
+     id="path1051"
+     d="m 15.24221,31.489 c 2.320466,0.175573 0.108186,3.528994 -0.975,1.4625 -0.289952,-0.665625 0.226634,-1.506204 0.975,-1.4625 z"
+     fill="currentColor" />
+  <use
+     transform="translate(37.458,9.2036)"
+     xlink:href="#path1055-5"
+     id="use18"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(9.4)"
+     xlink:href="#path1051"
+     id="use19"
+     x="0"
+     y="0" />
+  <use
+     transform="translate(-28.2)"
+     xlink:href="#path1053"
+     id="use20"
+     x="0"
+     y="0" />
+</svg>

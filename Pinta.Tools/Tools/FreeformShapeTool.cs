@@ -54,9 +54,9 @@ public sealed class FreeformShapeTool : BaseBrushTool
 
 	protected override void OnBuildToolBar (Box tb)
 	{
-		tb.Append (Separator);
 		tb.Append (FillLabel);
 		tb.Append (FillDropDown);
+		tb.Append (Separator);
 		base.OnBuildToolBar (tb);
 
 		// TODO: This could be cleaner.

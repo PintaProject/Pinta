@@ -38,10 +38,13 @@ internal sealed class SlashBrush : BasePaintBrush
 	private int line_width;
 	private int angle;
 
+	private readonly IWorkspaceService workspace;
+
 	private const string AngleSettingName = "slash-brush-angle";
 
-	public SlashBrush (ISettingsService settingsService)
+	public SlashBrush (ISettingsService settingsService, IWorkspaceService workspace)
 	{
+		this.workspace = workspace;
 		IntegerOption angleOption = new IntegerOption (
 			AngleSettingName,
 			0,
@@ -86,7 +89,7 @@ internal sealed class SlashBrush : BasePaintBrush
 			new_bottom.X * old_bottom.Y - new_bottom.Y * old_bottom.X +
 			old_bottom.X * old_top.Y - old_bottom.Y * old_top.X));
 
-		if (area < 2) {
+		if (area < 2 && (last_pos.X != current_pos.X || last_pos.Y != current_pos.Y)) {
 			old_top = OffsetPoint (old_top, -1, 1, angle + 90);
 			new_top = OffsetPoint (new_top, -1, 1, angle + 90);
 			old_bottom = OffsetPoint (old_bottom, 1, 1, angle + 90);
@@ -135,6 +138,7 @@ internal sealed class SlashBrush : BasePaintBrush
 
 	public override Gdk.Cursor GetCursor ()
 	{
+		double scale = workspace.GetScale ();
 		/*
 			If we do not override a 0 angle with 180, the logic in GdkExtensions will 
 			step into the "rectangle" path which will look inconsistent (unfilled) to all
@@ -142,7 +146,7 @@ internal sealed class SlashBrush : BasePaintBrush
 			consistent.
 		*/
 		var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
-						CursorShape.Rectangle, 2, line_width, angle == 0 ? 180 : angle, 8, 24,
+						CursorShape.Rectangle, scale, 2, line_width, angle == 0 ? 180 : angle, 8, 24,
 						out var iconOffsetX, out var iconOffsetY);
 
 		return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
