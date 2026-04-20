@@ -110,11 +110,6 @@ public sealed class DocumentWorkspace
 		ViewSize = GetNewViewSize (document.ImageSize, value);
 
 		Invalidate ();
-
-		if (tools.CurrentTool?.CursorChangesOnZoom == true) {
-			//The current tool's cursor changes when the zoom changes.
-			tools.CurrentTool.SetCursor (tools.CurrentTool.CurrentCursor);
-		}
 	}
 
 	/// <summary>
