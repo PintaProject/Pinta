@@ -259,7 +259,7 @@ public abstract class BaseEditEngine
 			settings.PutSetting (SettingNames.DashPattern (toolPrefix), dash_pattern_box.ComboBox.ComboBox.GetActiveText ()!);
 	}
 
-	public virtual void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
+	public void HandleBuildToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
 	{
 		if (shape_type_label == null) {
 			string shapeTypeText = Translations.GetString ("Shape Type");
@@ -318,6 +318,11 @@ public abstract class BaseEditEngine
 
 		tb.Append (shape_type_button);
 
+		BuildShapeToolBar (tb, settings, toolPrefix);
+	}
+
+	protected virtual void BuildShapeToolBar (Gtk.Box tb, ISettingsService settings, string toolPrefix)
+	{
 		fill_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 		tb.Append (fill_sep);
@@ -366,7 +371,10 @@ public abstract class BaseEditEngine
 					BaseTool.DEFAULT_BRUSH_WIDTH
 				)
 			);
-			outline_width.TooltipText = Translations.GetString ("Change brush width. Shortcut keys: [ ]");
+			outline_width.TooltipText = Translations.GetString ("Change outline width.") + "\n"
+				+ "\n" + Translations.GetString ("Shortcut keys:")
+				+ "\n" + Translations.GetString ("Press {0} to decrease outline size", "\"[\"")
+				+ "\n" + Translations.GetString ("Press {0} to increase outline size", "\"]\"");
 
 			outline_width.OnValueChanged += (o, e) => {
 

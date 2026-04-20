@@ -89,19 +89,21 @@ public static class GdkExtensions
 	public static Gdk.Texture CreateIconWithShape (
 		string imgName,
 		CursorShape shape,
+		double scale,
 		int shapeWidth,
 		int imgToShapeX,
 		int imgToShapeY,
 		out int shapeX,
 		out int shapeY)
 	{
-		Gdk.Texture result = CreateIconWithShape (imgName, shape, shapeWidth, shapeWidth, 0, imgToShapeX, imgToShapeY, out shapeX, out shapeY);
+		Gdk.Texture result = CreateIconWithShape (imgName, shape, scale, shapeWidth, shapeWidth, 0, imgToShapeX, imgToShapeY, out shapeX, out shapeY);
 		return result;
 	}
 
 	public static Gdk.Texture CreateIconWithShape (
 		string imgName,
 		CursorShape shape,
+		double scale,
 		int shapeWidth,
 		int shapeHeight,
 		int shapeAngle,
@@ -114,7 +116,7 @@ public static class GdkExtensions
 
 		double zoom =
 			(PintaCore.Workspace.HasOpenDocuments)
-			? Math.Min (30d, PintaCore.Workspace.ActiveDocument.Workspace.Scale)
+			? Math.Min (30d, scale)
 			: 1d;
 
 		int clampedWidth = (int) Math.Min (800d, shapeWidth * zoom);
@@ -130,8 +132,8 @@ public static class GdkExtensions
 		RectangleI initialShapeBBox = new (
 			imgToShapeX - Math.Max (halfOfShapeWidth, halfOfShapeHeight),
 			imgToShapeY - Math.Max (halfOfShapeWidth, halfOfShapeHeight),
-			clampedWidth,
-			clampedHeight);
+			Math.Max (clampedWidth, clampedHeight),
+			Math.Max (clampedWidth, clampedHeight));
 
 		// Inflate shape bounding box to allow for anti-aliasing
 		RectangleI inflatedBBox = initialShapeBBox.Inflated (2, 2);
@@ -186,7 +188,7 @@ public static class GdkExtensions
 						shapeRect = shapeRect.Inflated (-1, -1);
 						PointD[] pointsOfInflatedRotatedRectangle = RotateRectangle (shapeRect, shapeAngle);
 						g.DrawPolygonal (new ReadOnlySpan<PointD> (pointsOfRotatedRectangle), outerColor, LineCap.Butt);
-						g.DrawPolygonal (new ReadOnlySpan<PointD> (pointsOfInflatedRotatedRectangle), innerColor, LineCap.Butt);
+						g.DrawPolygonal (new ReadOnlySpan<PointD> ([.. pointsOfInflatedRotatedRectangle, pointsOfInflatedRotatedRectangle[0]]), innerColor, LineCap.Butt);
 					}
 					break;
 			}

@@ -36,6 +36,7 @@ namespace Pinta.Tools;
 public sealed class PaintBrushTool : BaseBrushTool
 {
 	private readonly IPaintBrushService brushes;
+	private readonly IWorkspaceService workspace;
 
 	private BasePaintBrush? default_brush;
 	private BasePaintBrush? active_brush;
@@ -60,19 +61,32 @@ public sealed class PaintBrushTool : BaseBrushTool
 		brushes.BrushRemoved += (_, _) => RebuildBrushComboBox ();
 
 		brush_specific_options_box = Box.New (Orientation.Horizontal, 10);
+
+		workspace = services.GetService<IWorkspaceService> ();
+
+		// Update cursor on zoom
+		workspace.ViewSizeChanged += (_, _) => {
+			if (IsActiveTool ()) {
+				if (active_brush is null) {
+					SetCursor (DefaultCursor);
+				} else {
+					SetCursorFromBrush (active_brush);
+				}
+			}
+		};
 	}
 
 	public override string Name => Translations.GetString ("Paintbrush");
 	public override string Icon => Pinta.Resources.Icons.ToolPaintBrush;
 	public override string StatusBarText => Translations.GetString ("Left click to draw with primary color, right click to draw with secondary color.");
-	public override bool CursorChangesOnZoom => true;
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_B);
 	public override int Priority => 21;
 
 	public override Gdk.Cursor DefaultCursor {
 		get {
+			double scale = workspace.GetScale ();
 			var icon = GdkExtensions.CreateIconWithShape ("Cursor.Paintbrush.png",
-							CursorShape.Ellipse, BrushWidth, 8, 24,
+							CursorShape.Ellipse, scale, BrushWidth, 8, 24,
 							out var iconOffsetX, out var iconOffsetY);
 
 			return Gdk.Cursor.NewFromTexture (icon, iconOffsetX, iconOffsetY, null);
@@ -212,6 +226,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 	private Gtk.Separator Separator => separator ??= GtkExtensions.CreateToolBarSeparator ();
 	private Label BrushLabel => brush_label ??= Label.New (string.Format (" {0}:  ", Translations.GetString ("Type")));
+
 
 	private ToolBarComboBox BrushComboBox {
 		get {
