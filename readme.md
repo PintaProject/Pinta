@@ -42,10 +42,10 @@ First, install the required GTK-related dependencies:
   - For ARM64 Windows, use the `CLANGARM64` terminal and replace `clang-x86_64` with `clang-aarch64`.
 
 Pinta can then be built by opening `Pinta.sln` in [Visual Studio](https://visualstudio.microsoft.com/).
-Ensure that .NET 8 is installed via the Visual Studio installer.
+Ensure that .NET 10 is installed via the Visual Studio installer.
 
 For building on the command line:
-- [Install the .NET 8 SDK](https://dotnet.microsoft.com/).
+- [Install the .NET 10 SDK](https://dotnet.microsoft.com/).
 - Build:
   - `dotnet build`
 - Run:
@@ -53,10 +53,10 @@ For building on the command line:
 
 ## Building on macOS
 
-- Install .NET 8 and GTK4
+- Install .NET 10 and GTK4
   - `brew install dotnet-sdk libadwaita adwaita-icon-theme gettext webp-pixbuf-loader`
   - For Apple Silicon, set `DYLD_LIBRARY_PATH=/opt/homebrew/lib` in the environment so that Pinta can load the GTK libraries
-  - For Intel, you may need to set `DYLD_LIBRARY_PATH=/usr/local/lib` when using .NET 9 or higher
+  - For Intel, set `DYLD_LIBRARY_PATH=/usr/local/lib` in the environment so that Pinta can load the GTK libraries
 - Build:
   - `dotnet build`
 - Run:
@@ -64,7 +64,7 @@ For building on the command line:
 
 ## Building on Linux
 
-- Install [.NET 8](https://dotnet.microsoft.com/) following the instructions for your Linux distribution.
+- Install [.NET 10](https://dotnet.microsoft.com/) following the instructions for your Linux distribution.
 - Install other dependencies (instructions are for Ubuntu 22.10, but should be similar for other distros):
   - `sudo apt install autotools-dev autoconf-archive gettext intltool libadwaita-1-dev`
   - Minimum library versions: `gtk` >= 4.18 and `libadwaita` >= 1.7

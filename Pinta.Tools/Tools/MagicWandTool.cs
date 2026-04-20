@@ -41,12 +41,22 @@ public sealed class MagicWandTool : FloodTool
 	{
 		workspace = services.GetService<IWorkspaceService> ();
 		LimitToSelection = false;
+
+		// Update cursor on zoom
+		workspace.ViewSizeChanged += (_, _) => {
+			if (IsActiveTool ()) {
+				SetCursor (DefaultCursor);
+			}
+		};
 	}
 
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
 	public override string Name => Translations.GetString ("Magic Wand Select");
 	public override string Icon => Pinta.Resources.Icons.ToolSelectMagicWand;
-	public override string StatusBarText => Translations.GetString ("Click to select region of similar color.");
+	public override string StatusBarText => Translations.GetString (
+		"Click to select region of similar color." +
+		"\nHold shift to use Global mode."
+	);
 	public override Gdk.Cursor DefaultCursor => Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.MagicWand.png"), 21, 10, null);
 	public override int Priority => 19;
 	public override bool IsSelectionTool => true;

@@ -96,8 +96,8 @@ public sealed partial class LayersListViewItem
 		LayerProperties updated = new (UserLayer.Name, !visible, UserLayer.Opacity, UserLayer.BlendMode);
 
 		UpdateLayerPropertiesHistoryItem historyItem = new (
-			Resources.Icons.LayerProperties,
-			visible ? Translations.GetString ("Layer Shown") : Translations.GetString ("Layer Hidden"),
+			visible ? Resources.StandardIcons.ViewReveal : Resources.StandardIcons.ViewConceal,
+			visible ? Translations.GetString ("Show Layer") : Translations.GetString ("Hide Layer"),
 			doc.Layers.IndexOf (UserLayer),
 			initial,
 			updated);

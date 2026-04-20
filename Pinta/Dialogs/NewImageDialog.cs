@@ -189,12 +189,7 @@ public sealed class NewImageDialog : Gtk.Dialog
 
 		Gtk.Label previewLabel = Gtk.Label.New (Translations.GetString ("Preview"));
 
-		PreviewArea previewBox = new () {
-			Vexpand = true,
-			Valign = Gtk.Align.Fill,
-			Hexpand = true,
-			Halign = Gtk.Align.Fill,
-		};
+		PreviewArea previewBox = new ();
 
 		Gtk.Box previewVbox = GtkExtensions.BoxVertical ([
 			previewLabel,
@@ -563,66 +558,73 @@ public sealed class NewImageDialog : Gtk.Dialog
 			preset_dropdown.Selected = index;
 	}
 
-	private sealed class PreviewArea : Gtk.DrawingArea
+	private sealed class PreviewArea : Gtk.Box
 	{
+		private Gtk.Picture picture;
 		private Size size;
 		private Cairo.Color color;
 
 		private const int MAX_SIZE = 250;
 
+		private static readonly Gdk.Texture transparent_pattern_texture =
+			CairoExtensions.CreateTransparentBackgroundSurface (16).ToTexture ();
+
 		public PreviewArea ()
 		{
 			WidthRequest = 300;
-			SetDrawFunc ((area, context, width, height) => Draw (context, width, height));
+			Vexpand = true;
+			Valign = Gtk.Align.Fill;
+			Hexpand = true;
+			Halign = Gtk.Align.Fill;
+
+			// Center the paintable in an expanding box so that CSS can be used to draw
+			// the drop shadow around only the canvas area.
+			picture = Gtk.Picture.New ();
+			picture.Name = "new-image-preview";
+			picture.ContentFit = Gtk.ContentFit.ScaleDown;
+			picture.Hexpand = true;
+			picture.Vexpand = true;
+			picture.Halign = Gtk.Align.Center;
+			picture.Valign = Gtk.Align.Center;
+
+			Append (picture);
 		}
 
-		public void Update (Size size)
-		{
-			this.size = size;
-			QueueDraw ();
-		}
+		public void Update (Size newSize)
+			=> Update (newSize, color);
 
-		public void Update (Cairo.Color color)
-		{
-			this.color = color;
-			QueueDraw ();
-		}
+		public void Update (Cairo.Color newColor)
+			=> Update (size, newColor);
 
-		public void Update (Size size, Cairo.Color color)
+		public void Update (Size newSize, Cairo.Color newColor)
 		{
-			this.size = size;
-			this.color = color;
-			QueueDraw ();
-		}
+			size = newSize;
+			color = newColor;
 
-		private void Draw (Cairo.Context cr, int widget_width, int widget_height)
-		{
-			Size preview_size = GetPreviewSizeForDraw ();
+			Size previewSize = GetPreviewSizeForDraw (size);
 
-			RectangleD r = new (
-				(widget_width - preview_size.Width) / 2,
-				(widget_height - preview_size.Height) / 2,
-				preview_size.Width,
-				preview_size.Height);
+			Graphene.Rect bounds = Graphene.Rect.Alloc ();
+			bounds.Init (0, 0, previewSize.Width, previewSize.Height);
+
+			Gtk.Snapshot snapshot = Gtk.Snapshot.New ();
 
 			if (color.A == 0) {
 				// Fill with transparent checkerboard pattern
-				Cairo.Pattern pattern = CairoExtensions.CreateTransparentBackgroundPattern (16);
-				cr.FillRectangle (r, pattern);
+				snapshot.AppendRepeatingTexture (transparent_pattern_texture, bounds);
 			} else {
 				// Fill with selected color
-				cr.FillRectangle (r, color);
+				snapshot.AppendColor (color.ToGdkRGBA (), bounds);
 			}
 
-			// Draw our canvas drop shadow
-			cr.DrawRectangle (new RectangleD (r.X - 1, r.Y - 1, r.Width + 2, r.Height + 2), new Cairo.Color (.5, .5, .5), 1);
-			cr.DrawRectangle (new RectangleD (r.X - 2, r.Y - 2, r.Width + 4, r.Height + 4), new Cairo.Color (.8, .8, .8), 1);
-			cr.DrawRectangle (new RectangleD (r.X - 3, r.Y - 3, r.Width + 6, r.Height + 6), new Cairo.Color (.9, .9, .9), 1);
-
-			cr.Dispose ();
+			Gdk.Paintable? paintable = snapshot.ToPaintable (size: null);
+			if (paintable is not null)
+				picture.Paintable = paintable;
 		}
 
-		private Size GetPreviewSizeForDraw () // Figure out the dimensions of the preview to draw
+		/// <summary>
+		/// Figure out the dimensions of the preview to draw
+		/// </summary>
+		private static Size GetPreviewSizeForDraw (Size size)
 		{
 			if (size.Width <= MAX_SIZE && size.Height <= MAX_SIZE)
 				return size;
