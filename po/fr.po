@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-01 00:35+0000\n"
-"PO-Revision-Date: 2025-12-09 04:29+0000\n"
-"Last-Translator: Matthieu LAURENT <matthieu.laurent69@proton.me>\n"
+"PO-Revision-Date: 2026-04-20 17:09+0000\n"
+"Last-Translator: 7Steeven <cuvillierch@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -95,12 +95,12 @@ msgstr "Aligner l’Objet"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "All Petite Caps"
-msgstr ""
+msgstr "Petites capitale"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:196
 msgid "All Small Caps"
-msgstr ""
+msgstr "Petites capitales"
 
 #: ../Pinta.Core/Actions/EditActions.cs:585
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -215,7 +215,7 @@ msgstr "Meilleur ajustement"
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:466
 msgid "Bevel Join"
-msgstr ""
+msgstr "Biseauter"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
@@ -381,7 +381,7 @@ msgstr "Changer la largeur de la brosse. Clés de raccourcis : [ ]"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Changer la taille de police. Touche de raccourci : [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -399,7 +399,7 @@ msgstr "Choisir une couleur"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:369
 msgid "Choose Colors"
-msgstr ""
+msgstr "Choisissez les couleurs"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:153
 msgid "Choose Palette Color"
@@ -440,6 +440,10 @@ msgid ""
 "Right click to reverse.\n"
 "Click on a control point and drag to move it."
 msgstr ""
+"Cliquez et faites glisser pour dessiner la zone de transition de la couleur "
+"primaire vers secondaire.\n"
+"Clic droit pour annuler.\n"
+"Clic sur un point de contrôle pour déplacer."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -459,6 +463,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"Clic pour sélectionner une zone de couleur similaire.\n"
+"Maintenir shift pour le mode global."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
@@ -1001,7 +1007,6 @@ msgid "Gradient Created"
 msgstr "Dégradé Créé"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:128
-#, fuzzy
 msgid "Gradient Modified"
 msgstr "Dégradé Modifié"
 
@@ -1017,14 +1022,13 @@ msgid "Grid"
 msgstr "Grille"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:41
-#, fuzzy
 msgid "Hard Light"
 msgstr "Lumière forte"
 
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:317
 msgid "Heavy"
-msgstr ""
+msgstr "Lourd"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:82
 #: ../Pinta/Dialogs/NewImageDialog.cs:328
@@ -1086,7 +1090,7 @@ msgstr "Les fichiers ICO ne peuvent dépasser 255 x 255 pixels."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "Si autorisé, la valeur est appliquée à la palette de couleurs."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1142,9 +1146,7 @@ msgstr ""
 "\n"
 "En mode Polygone, cliquez et faites glisser pour ajouter un nouveau point à "
 "la sélection.\n"
-"\n"
 "Appuyez sur Entrée pour terminer la sélection.\n"
-"\n"
 "Appuyez sur Retour arrière pour supprimer le dernier point."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:226
@@ -1379,6 +1381,9 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Clic gauche pour remplir la zone avec la couleur principale, clic droit pour "
+"la couleur secondaire.\n"
+"Maintenir shift pour le mode global."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1417,6 +1422,8 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Clic gauche pour choisir la couleur principale, clic droit pour la couleur "
+"secondaire. Clic milieu ou {0} et clic gauche pour la palette de couleurs."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1517,7 +1524,7 @@ msgstr "Lave martienne"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
-msgstr ""
+msgstr "Taille maximale"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
@@ -1526,7 +1533,7 @@ msgstr "Médian"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:293
 msgid "Medium"
-msgstr ""
+msgstr "Moyen"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:130
 msgid "Menu Bar"
@@ -1539,12 +1546,12 @@ msgstr "Fusionner avec le calque inférieur"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
-msgstr ""
+msgstr "Taille mini"
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:454
 msgid "Miter Join"
-msgstr ""
+msgstr "Chanfreiner"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:322
 msgid "Mode"
@@ -1825,7 +1832,7 @@ msgstr "Pourcentage"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Petite Caps"
-msgstr ""
+msgstr "Petites capitales"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -1916,12 +1923,12 @@ msgstr "Point ajouté"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:156
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:201
 msgid "Point Arrangement"
-msgstr ""
+msgstr "Disposition des points"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:169
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:216
 msgid "Point Color"
-msgstr ""
+msgstr "Couleur du/des point(s)"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
 msgid "Point Deleted"
@@ -1930,7 +1937,7 @@ msgstr "Point supprimé"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:165
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Point Size"
-msgstr ""
+msgstr "Taille de point"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
@@ -1968,7 +1975,7 @@ msgstr "Dégradé par défaut"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Preset Palettes"
-msgstr ""
+msgstr "Préréglages palettes"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:336
 msgid "Preset:"
@@ -2056,7 +2063,7 @@ msgstr "Couleurs aléatoires"
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
 msgid "Random Noise Seed"
-msgstr ""
+msgstr "Bruit aléatoire"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:159
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:204
@@ -2241,12 +2248,12 @@ msgstr "Rotation"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:143
 msgid "Roughness"
-msgstr ""
+msgstr "Rugosité"
 
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:460
 msgid "Round Join"
-msgstr ""
+msgstr "Arrondi"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
@@ -2704,7 +2711,7 @@ msgstr "Défocaliser"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Unicase"
-msgstr ""
+msgstr "Sans casse"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
@@ -2747,8 +2754,8 @@ msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
-"Utilisez une faible qualité pour les aperçus, les petites images et les "
-"angles faibles. Utilisez une grande qualité pour les visualisations finales, "
+"Utilisez une qualité basse pour les aperçus, les petites images et les "
+"angles faibles. Utilisez une qualité élevée pour les visualisations finales, "
 "les grandes images et les grands angles."
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
@@ -2825,13 +2832,13 @@ msgstr "Envelopper"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:40
 msgid "Xor"
-msgstr "Xor"
+msgstr "Ou exclusif"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr "XOR (+) ({0} + Clic Gauche)"
+msgstr "Xor ({0} + Clic droit)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:447
