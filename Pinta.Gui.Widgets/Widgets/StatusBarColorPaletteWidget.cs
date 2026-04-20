@@ -309,24 +309,32 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		string? text = null;
 		PointD point = new (args.X, args.Y);
 
+		static string BuildColorTooltip (Color color, string tooltip) => Translations.GetString ("Color") + $": #{color.ToHex ()}\n\n" + tooltip;
+
 		switch (GetElementAtPoint (point)) {
 			case WidgetElement.Palette:
-				if (PaletteWidget.GetSwatchAtLocation (palette, point, palette_rect) >= 0) {
+				int paletteIndex = PaletteWidget.GetSwatchAtLocation (palette, point, palette_rect);
+				if (paletteIndex >= 0) {
+					text = BuildColorTooltip (palette.CurrentPalette.Colors[paletteIndex],
 					// Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-					text = Translations.GetString ("Left click to set primary color. Right click to set secondary color. Middle click or press {0} and left click to choose palette color.",
-						system.CtrlLabel ());
+					Translations.GetString ("Left click to set primary color. Right click to set secondary color. Middle click or press {0} and left click to choose palette color.",
+						system.CtrlLabel ()));
 				}
-
 				break;
 			case WidgetElement.RecentColorsPalette:
-				if (PaletteWidget.GetSwatchAtLocation (palette, point, recent_palette_rect, true) >= 0)
-					text = Translations.GetString ("Left click to set primary color. Right click to set secondary color.");
+				int recentColorsIndex = PaletteWidget.GetSwatchAtLocation (palette, point, recent_palette_rect, true);
+				if (recentColorsIndex >= 0) {
+					text = BuildColorTooltip (palette.RecentlyUsedColors[recentColorsIndex],
+					Translations.GetString ("Left click to set primary color. Right click to set secondary color."));
+				}
 				break;
 			case WidgetElement.PrimaryColor:
-				text = Translations.GetString ("Click to select primary color.");
+				text = BuildColorTooltip (palette.PrimaryColor,
+				Translations.GetString ("Click to select primary color."));
 				break;
 			case WidgetElement.SecondaryColor:
-				text = Translations.GetString ("Click to select secondary color.");
+				text = BuildColorTooltip (palette.SecondaryColor,
+				Translations.GetString ("Click to select secondary color."));
 				break;
 			case WidgetElement.SwapColors:
 				string label = Translations.GetString ("Click to switch between primary and secondary color.");

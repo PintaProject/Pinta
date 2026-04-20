@@ -112,13 +112,13 @@ public sealed class LayerActions
 			"movelayerup",
 			Translations.GetString ("Move Layer Up"),
 			null,
-			Resources.Icons.LayerMoveUp);
+			Resources.StandardIcons.LayerMoveUp);
 
 		MoveLayerDown = new Command (
 			"movelayerdown",
 			Translations.GetString ("Move Layer Down"),
 			null,
-			Resources.Icons.LayerMoveDown);
+			Resources.StandardIcons.LayerMoveDown);
 
 		Properties = new Command (
 			"properties",
@@ -135,20 +135,8 @@ public sealed class LayerActions
 		this.image = image;
 	}
 
-	public void RegisterActions (Gtk.Application app, Gio.Menu menu)
+	public void RegisterActions (Gtk.Application app)
 	{
-		Gio.Menu flip_section = Gio.Menu.New ();
-		flip_section.AppendItem (FlipHorizontal.CreateMenuItem ());
-		flip_section.AppendItem (FlipVertical.CreateMenuItem ());
-		flip_section.AppendItem (RotateZoom.CreateMenuItem ());
-
-		Gio.Menu prop_section = Gio.Menu.New ();
-		prop_section.AppendItem (Properties.CreateMenuItem ());
-
-		menu.AppendItem (ImportFromFile.CreateMenuItem ());
-		menu.AppendSection (null, flip_section);
-		menu.AppendSection (null, prop_section);
-
 		app.AddCommands ([
 			AddNewLayer,
 			DeleteLayer,
@@ -306,7 +294,7 @@ public sealed class LayerActions
 		tools.Commit ();
 
 		SwapLayersHistoryItem hist = new (
-			Resources.Icons.LayerMoveUp,
+			Resources.StandardIcons.LayerMoveUp,
 			Translations.GetString ("Move Layer Up"),
 			doc.Layers.CurrentUserLayerIndex,
 			doc.Layers.CurrentUserLayerIndex + 1);
@@ -322,7 +310,7 @@ public sealed class LayerActions
 		tools.Commit ();
 
 		SwapLayersHistoryItem hist = new (
-			Resources.Icons.LayerMoveDown,
+			Resources.StandardIcons.LayerMoveDown,
 			Translations.GetString ("Move Layer Down"),
 			doc.Layers.CurrentUserLayerIndex,
 			doc.Layers.CurrentUserLayerIndex - 1);

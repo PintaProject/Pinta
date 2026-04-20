@@ -163,41 +163,15 @@ public sealed class PintaCanvas : Gtk.Picture
 		QueueDraw ();
 	}
 
-	private static Gdk.Texture CreateTextureFromSurface (
-		Cairo.ImageSurface surface,
-		Gdk.Texture? updateTexture = null,
-		Cairo.Region? updateRegion = null)
-	{
-		// TODO - can we avoid copying the full image into GLib.Bytes on each update?
-		GLib.Bytes bytes = GLib.Bytes.New (surface.GetData ());
-		Gdk.MemoryTextureBuilder builder = new () {
-			Bytes = bytes,
-			Stride = (ulong) surface.Stride,
-			Width = surface.Width,
-			Height = surface.Height,
-			Format = Gdk.MemoryFormat.B8g8r8a8Premultiplied,
-			UpdateTexture = updateTexture,
-			UpdateRegion = updateRegion ?? CairoExtensions.CreateRegion (RectangleI.Zero)
-		};
-
-		return builder.Build ();
-	}
-
 	private static Gdk.Texture CreateTransparentPatternTexture () =>
-		CreateTextureFromSurface (CairoExtensions.CreateTransparentBackgroundSurface (size: 16));
+		CairoExtensions.CreateTransparentBackgroundSurface (size: 16).ToTexture ();
 
 	/// <summary>
-	/// Draw the transparent checkboard background by tiling a small pattern.
+	/// Draw the transparent checkerboard background by tiling a small pattern.
 	/// </summary>
 	private void DrawTransparentBackground (Gtk.Snapshot snapshot, Graphene.Rect canvasViewBounds)
 	{
-		snapshot.PushRepeat (canvasViewBounds, childBounds: null);
-
-		Graphene.Rect patternBounds = Graphene.Rect.Alloc ();
-		patternBounds.Init (0, 0, transparent_pattern_texture.Width, transparent_pattern_texture.Height);
-		snapshot.AppendTexture (transparent_pattern_texture, patternBounds);
-
-		snapshot.Pop ();
+		snapshot.AppendRepeatingTexture (transparent_pattern_texture, canvasViewBounds);
 	}
 
 	private void DrawCanvasTexture (Gtk.Snapshot snapshot, RectangleI? modifiedArea, Graphene.Rect canvasViewBounds)
@@ -227,7 +201,7 @@ public sealed class PintaCanvas : Gtk.Picture
 			Cairo.Region? updateRegion = (updateTexture is not null)
 				? CairoExtensions.CreateRegion (modifiedArea.Value)
 				: null;
-			canvas_texture = CreateTextureFromSurface (canvas_surface, updateTexture, updateRegion);
+			canvas_texture = canvas_surface.ToTexture (updateTexture, updateRegion);
 		}
 
 		if (canvas_texture is null)
