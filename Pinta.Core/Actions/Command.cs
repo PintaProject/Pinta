@@ -91,14 +91,16 @@ public sealed class ToggleCommand : Command
 		string name,
 		string label,
 		string? tooltip,
-		string? stock_id
+		string? stock_id,
+		IReadOnlyList<string>? shortcuts = null
 	)
 		: base (
 			name,
 			label,
 			tooltip,
 			stock_id,
-			GLib.Variant.NewBoolean (false)
+			GLib.Variant.NewBoolean (false),
+			shortcuts
 		)
 	{
 		Activated += (_, _) => {
