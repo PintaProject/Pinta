@@ -112,7 +112,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 	public int SelectedIndex {
 		get => items.Count == 0 ? -1 : previous_index;
-		set { SetSelectedIndex(value); }
+		set { SetSelectedIndex (value); }
 	}
 
 	private void SetSelectedIndex (int index)
