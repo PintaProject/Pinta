@@ -96,7 +96,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 		ToolBarItem item = new (text, imageId, tag);
 		// This is done to ensure the first item has a checkmark if it was selected.
-		if (items.Count == 0 && previous_index == 0) { widget.SetCheckmarkVisible (true); }
+		if (items.Count == 0) { widget.SetCheckmarkVisible (true); }
 		items.Add (item);
 
 		return item;
