@@ -13,9 +13,9 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	private Gtk.Image dropdown_icon;
 	private Gtk.Label dropdown_label;
 
-	private Gtk.StringList string_list;
-	private ToolBarItem? selected_item;
+	// We store the index of the previous selection to avoid having to iterate through all items on the list.
 	private int previous_index = 0;
+	private Gtk.StringList string_list;
 
 	private readonly List<ToolBarItem> items;
 	private readonly List<ToolBarItemWidget> toolbar_item_widgets;
@@ -64,16 +64,11 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		dropdown_icon.SetFromIconName (toolbar_item.ImageId);
 		if (show_label) { dropdown_label.SetText (toolbar_item.Text); }
 
-		// We store the index of the previous selection to avoid having to iterate through all items on the list.
-		// Also we check if the index changed because OnBindSelectedItem gets called both when the selected item changes
-		// and on the widget initialization/setup.
-		int current_index = (int) Selected;
-		if (previous_index != current_index) {
-			toolbar_item_widgets[previous_index].SetSelectedIconVisible (false);
-			toolbar_item_widgets[current_index].SetSelectedIconVisible (true);
-			previous_index = current_index;
-			SelectedIndex = current_index;
-		}
+		
+		// SetSelectedIndex checks if the index changed, so we don't need to check here again. This check
+		// is important because OnBindSelectedItem gets called both when the selected item changes and on
+		// widget initialization/setup.
+		SetSelectedIndex ((int) Selected);
 	}
 
 	private void OnBindListItem (Gtk.SignalListItemFactory sender, Gtk.SignalListItemFactory.BindSignalArgs args)
@@ -105,42 +100,33 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		if (items.Count == 0 && previous_index == 0) { widget.SetSelectedIconVisible (true); }
 		items.Add (item);
 
-		if (selected_item == null)
-			SetSelectedItem (item);
-
 		return item;
 	}
 
 	public new ToolBarItem SelectedItem {
-		get =>
-			selected_item is not null
-			? selected_item
-			: throw new InvalidOperationException ("Attempted to get SelectedItem from a drop down with no items.");
-		set {
-			if (selected_item != value)
-				SetSelectedItem (value);
-		}
+		get => items.Count == 0
+			? throw new InvalidOperationException ("Attempted to get SelectedItem from a drop down with no items.")
+			: items[previous_index];
+		set { SetSelectedIndex (items.IndexOf (value)); }
 	}
 
 	public int SelectedIndex {
-		get => selected_item is null ? -1 : items.IndexOf (selected_item);
-		set {
-			if (value < 0 || value >= items.Count)
-				return;
-
-			var item = items[value];
-
-			if (item != selected_item)
-				SetSelectedItem (item);
-		}
+		get => items.Count == 0 ? -1 : previous_index;
+		set { SetSelectedIndex(value); }
 	}
 
-	private void SetSelectedItem (ToolBarItem item)
+	private void SetSelectedIndex (int index)
 	{
-		selected_item = item;
-		TooltipText = item.Text;
-		Selected = (uint) items.IndexOf (selected_item);
+		if (index < 0 || index > items.Count || index == previous_index) {
+			return;
+		}
 
+		toolbar_item_widgets[previous_index].SetSelectedIconVisible (false);
+		toolbar_item_widgets[index].SetSelectedIconVisible (true);
+
+		TooltipText = items[index].Text;
+		Selected = (uint) index;
+		previous_index = index;
 		OnSelectedItemChanged ();
 	}
 
