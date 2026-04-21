@@ -96,7 +96,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 		ToolBarItem item = new (text, imageId, tag);
 		// This is done to ensure the first item has a checkmark if it was selected.
-		if (items.Count == 0 && previous_index == 0) { widget.SetSelectedIconVisible (true); }
+		if (items.Count == 0 && previous_index == 0) { widget.SetCheckmarkVisible (true); }
 		items.Add (item);
 
 		return item;
@@ -120,8 +120,8 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 			return;
 		}
 
-		toolbar_item_widgets[previous_index].SetSelectedIconVisible (false);
-		toolbar_item_widgets[index].SetSelectedIconVisible (true);
+		toolbar_item_widgets[previous_index].SetCheckmarkVisible (false);
+		toolbar_item_widgets[index].SetCheckmarkVisible (true);
 
 		TooltipText = items[index].Text;
 		Selected = (uint) index;
@@ -177,7 +177,7 @@ public sealed class ToolBarItemWidget : Gtk.Box
 		Append (selected_icon);
 	}
 
-	public void SetSelectedIconVisible (bool visible)
+	public void SetCheckmarkVisible (bool visible)
 	{
 		selected_icon.Visible = visible;
 	}
