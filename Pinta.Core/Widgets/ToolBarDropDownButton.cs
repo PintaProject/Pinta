@@ -64,7 +64,6 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		dropdown_icon.SetFromIconName (toolbar_item.ImageId);
 		if (show_label) { dropdown_label.SetText (toolbar_item.Text); }
 
-		
 		// SetSelectedIndex checks if the index changed, so we don't need to check here again. This check
 		// is important because OnBindSelectedItem gets called both when the selected item changes and on
 		// widget initialization/setup.
