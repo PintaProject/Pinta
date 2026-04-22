@@ -116,7 +116,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 	private void SetSelectedIndex (int index)
 	{
-		if (index < 0 || index > items.Count || index == previous_index) {
+		if (index < 0 || index >= items.Count || index == previous_index) {
 			return;
 		}
 
