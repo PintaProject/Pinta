@@ -53,7 +53,6 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	private void OnSetupSelectedItem (Gtk.SignalListItemFactory factory, Gtk.SignalListItemFactory.SetupSignalArgs args)
 	{
 		Gtk.ListItem item = (Gtk.ListItem) args.Object;
-		if (item is null) { return; }
 		item.SetChild (selected_box);
 	}
 
@@ -73,7 +72,6 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 	private void OnBindListItem (Gtk.SignalListItemFactory sender, Gtk.SignalListItemFactory.BindSignalArgs args)
 	{
 		Gtk.ListItem item = (Gtk.ListItem) args.Object;
-		if (item is null) { return; }
 
 		ToolBarItemWidget toolbar_item = toolbar_item_widgets[(int) item.Position];
 		item.SetChild (toolbar_item);
