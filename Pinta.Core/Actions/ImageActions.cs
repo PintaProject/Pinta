@@ -303,7 +303,7 @@ public sealed class ImageActions
 		double original_scale = doc.Workspace.Scale;
 		doc.ImageSize = rect.Size;
 		doc.Workspace.ViewSize = rect.Size;
-		doc.Workspace.SetScale (original_scale, tools);
+		doc.Workspace.SetScale (original_scale);
 
 		view.UpdateCanvasScale ();
 

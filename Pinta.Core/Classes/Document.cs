@@ -345,7 +345,7 @@ public sealed class Document
 
 		ResetSelectionPaths ();
 
-		Workspace.SetScale (scale, tools);
+		Workspace.SetScale (scale);
 	}
 
 	public void ResizeImage (
@@ -374,7 +374,7 @@ public sealed class Document
 
 		ResetSelectionPaths ();
 
-		Workspace.SetScale (scale, tools);
+		Workspace.SetScale (scale);
 		actions.View.UpdateCanvasScale ();
 	}
 

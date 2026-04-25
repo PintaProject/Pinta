@@ -101,7 +101,7 @@ public sealed class DocumentWorkspace
 	public double Scale
 		=> ViewSize.Width / (double) document.ImageSize.Width;
 
-	public void SetScale (double value, ToolManager tools)
+	public void SetScale (double value)
 	{
 		if (value == ViewSize.Width / (double) document.ImageSize.Width && value == ViewSize.Height / (double) document.ImageSize.Height)
 			return;
