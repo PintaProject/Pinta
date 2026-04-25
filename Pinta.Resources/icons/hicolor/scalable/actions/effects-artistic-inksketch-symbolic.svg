@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="16px"
+   viewBox="0 0 16 16"
+   width="16px"
+   version="1.1"
+   id="svg15572"
+   sodipodi:docname="effects-artistic-inksketch-symbolic.svg"
+   inkscape:export-filename="/mnt/external/cloud/design/gnome/image.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showborder="false"
+     inkscape:zoom="37.375"
+     inkscape:cx="0.12040134"
+     inkscape:cy="3.3712375"
+     inkscape:window-width="2560"
+     inkscape:window-height="1403"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg15572" />
+  <defs
+     id="defs15576">
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect11"
+       is_visible="true"
+       lpeversion="1.3"
+       threshold="5000.000000"
+       steps="1"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect10"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,3.054436,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1 @ F,0,0,1,0,0,0,1"
+       radius="0"
+       unit="px"
+       method="auto"
+       mode="F"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect11-5"
+       is_visible="true"
+       lpeversion="1.3"
+       threshold="5000"
+       steps="1"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect11-5-2"
+       is_visible="true"
+       lpeversion="1.3"
+       threshold="5000"
+       steps="1"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+  </defs>
+  <inkscape:templateinfo>
+    <inkscape:name>morewaita-symbolic</inkscape:name>
+    <inkscape:date>2025-09-24</inkscape:date>
+  </inkscape:templateinfo>
+  <path
+     d="M 13.334344,10.127467 H 12.90625 l -1.66871,0.878331 C 9.7447784,11.791518 8.083221,10.867883 6.6301457,10.485954 5.8204337,10.273128 4.6840676,10.130544 3.09375,10.127467 H 2.6656564 v 3.259641 c 0,0.259075 0.1677563,0.426832 0.4268324,0.426832 h 9.8150222 c 0.259075,0 0.426833,-0.167759 0.426833,-0.426832 z"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.861377;stroke-linecap:round;stroke-linejoin:round"
+     id="path8"
+     sodipodi:nodetypes="cccccssssc"
+     inkscape:path-effect="#path-effect10"
+     inkscape:original-d="M 13.334344,10.127467 H 12.90625 L 8.5346559,12.42847 c 0,0 0.9828183,-2.288573 -5.4409059,-2.301003 H 2.6656564 v 3.259641 c 0,0.259075 0.1677563,0.426832 0.4268324,0.426832 h 9.8150222 c 0.259075,0 0.426833,-0.167759 0.426833,-0.426832 z"
+     transform="matrix(1.1119707,0,0,1.1119707,-0.89576581,-1.0596289)" />
+  <path
+     id="path10"
+     style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;stroke-width:1.11197;stroke-linecap:round;stroke-linejoin:round;enable-background:accumulate;stop-color:#000000"
+     d="m 2.980929,5.6230545 c -1.2619603,0 -2.299955,1.0379948 -2.299955,2.299955 V 13.700045 C 0.68097411,14.962004 1.7189685,16 2.980929,16 h 10.038142 c 1.26196,0 2.299955,-1.037997 2.299955,-2.299955 V 7.9230095 c 0,-1.2619605 -1.037996,-2.299955 -2.299955,-2.299955 z m 0,1.8634197 h 10.038142 c 0.264964,0 0.436536,0.1715712 0.436536,0.4365353 v 2.4432955 3.33374 c 0,0.264962 -0.171572,0.436536 -0.436536,0.436536 H 2.980929 c -0.2649655,0 -0.4365353,-0.171571 -0.4365353,-0.436536 v -3.33374 -2.4432955 c 0,-0.2649653 0.1715701,-0.4365353 0.4365353,-0.4365353 z" />
+  <path
+     style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;stroke-width:1.11197;stroke-linecap:round;stroke-linejoin:round;enable-background:accumulate;stop-color:#000000"
+     d="M 5.304774,0 C 4.265785,0 3.410949,0.8548359 3.410949,1.893825 v 1.3986507 c 0,1.0389891 0.8537404,1.895997 1.893825,1.895997 h 5.390451 c 1.040086,0 1.893826,-0.8570081 1.893826,-1.895997 V 1.893825 C 12.589051,0.85483612 11.734216,0 10.695225,0 Z m 0.052124,1.9459487 h 5.286204 V 3.2425238 H 5.3568977 Z"
+     id="path6" />
+  <rect
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.664023;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+     id="rect3"
+     width="4.4627585"
+     height="1.9333975"
+     x="5.76862"
+     y="4.2217741"
+     ry="0" />
+  <path
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+     d="m 6.3190278,2.7029287 c 0,0.2242859 0,1.0016297 0,1.1660156"
+     id="path11"
+     inkscape:path-effect="#path-effect11"
+     inkscape:original-d="M 6.3190278,2.7029287 V 3.8689443"
+     transform="matrix(1.1119707,0,0,1.1119707,-0.54716573,-1.0596289)" />
+  <path
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+     d="m 6.3190278,2.7029287 c 0,0.2242859 0,1.0016297 0,1.1660156"
+     id="path11-6"
+     inkscape:path-effect="#path-effect11-5"
+     inkscape:original-d="M 6.3190278,2.7029287 V 3.8689443"
+     transform="matrix(1.1119707,0,0,1.1119707,0.97342608,-1.0596289)" />
+  <path
+     style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+     d="m 6.3190278,2.7029287 c 0,0.2242859 0,1.0016297 0,1.1660156"
+     id="path11-6-2"
+     inkscape:path-effect="#path-effect11-5-2"
+     inkscape:original-d="M 6.3190278,2.7029287 V 3.8689443"
+     transform="matrix(1.1119707,0,0,1.1119707,2.4940179,-1.0596289)" />
+</svg>
