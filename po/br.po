@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-01 00:35+0000\n"
-"PO-Revision-Date: 2016-08-19 19:11+0000\n"
-"Last-Translator: Alan <Unknown>\n"
-"Language-Team: Breton <br@li.org>\n"
+"PO-Revision-Date: 2026-04-27 13:20+0000\n"
+"Last-Translator: Pierre Wani Alan Morvan <per.morvan.bzh29@gmail.com>\n"
+"Language-Team: Breton <https://hosted.weblate.org/projects/pinta/pinta/br/>\n"
 "Language: br\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
-"X-Generator: Launchpad (build e1eeab5b20e19239bd7d5f36676f7a52988db88b)\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
 msgid " (in user directory)"
@@ -72,7 +72,7 @@ msgstr "Ouzhpennañ trouz"
 
 #: ../Pinta.Core/Actions/AddinActions.cs:40
 msgid "Add-in Manager..."
-msgstr ""
+msgstr "Merer an astennoù..."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
 msgid "Added"
