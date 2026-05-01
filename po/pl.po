@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-01 00:45+0000\n"
-"PO-Revision-Date: 2026-04-08 03:25+0000\n"
+"PO-Revision-Date: 2026-05-01 10:25+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -376,15 +376,15 @@ msgstr "Centymetry"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width."
-msgstr ""
+msgstr "Zmień szerokość pędzla."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Change font size."
-msgstr ""
+msgstr "Zmień rozmiar czcionki."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
-msgstr ""
+msgstr "Zmień szerokość konturu."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -1978,32 +1978,32 @@ msgstr "Ustawienie:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush size"
-msgstr ""
+msgstr "Naciśnij {0}, aby zmniejszyć rozmiar pędzla"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr ""
+msgstr "Naciśnij {0}, aby zmniejszyć rozmiar czcionki"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline size"
-msgstr ""
+msgstr "Naciśnij {0}, aby zmniejszyć rozmiar konturu"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush size"
-msgstr ""
+msgstr "Naciśnij {0}, aby zwiększyć rozmiar pędzla"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
 msgid "Press {0} to increase font size"
-msgstr ""
+msgstr "Naciśnij {0}, aby zwiększyć rozmiar czcionki"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline size"
-msgstr ""
+msgstr "Naciśnij {0}, aby zwiększyć rozmiar konturu"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2416,7 +2416,7 @@ msgstr "Skróty klawiaturowe"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
 #: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Shortcut keys:"
-msgstr ""
+msgstr "Klawisze skrótu:"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
