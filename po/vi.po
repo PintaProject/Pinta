@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-01 00:35+0000\n"
+"POT-Creation-Date: 2026-05-01 00:45+0000\n"
 "PO-Revision-Date: 2026-04-08 03:25+0000\n"
 "Last-Translator: Loc Huynh <huynhloc.contact@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/pinta/pinta/"
@@ -33,19 +33,19 @@ msgstr " Chế độ lựa chọn: "
 msgid "..."
 msgstr "…"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:236
 msgid "3 x 3 Region"
 msgstr "Vùng 3 x 3"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:237
 msgid "5 x 5 Region"
 msgstr "Vùng 5 x 5"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:238
 msgid "7 x 7 Region"
 msgstr "Vùng 7 x 7"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "9 x 9 Region"
 msgstr "Vùng 9 x 9"
 
@@ -75,15 +75,15 @@ msgstr "Thêm nhiễu"
 msgid "Add-in Manager..."
 msgstr "Trình quản lý bổ trợ..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:852
 msgid "Added"
 msgstr "Được thêm vào"
 
-#: ../Pinta/MainWindow.cs:453
+#: ../Pinta/MainWindow.cs:451
 msgid "Adjustments"
 msgstr "Điều chỉnh"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
 msgid "After select"
 msgstr "Sau khi chọn"
 
@@ -136,7 +136,7 @@ msgstr "Neo:"
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
-#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:53
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:52
@@ -147,11 +147,11 @@ msgstr "Góc"
 msgid "Antialias"
 msgstr "Khử nhiễu"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:363
+#: ../Pinta.Core/Classes/BaseTool.cs:359
 msgid "Antialiasing Off"
 msgstr "Tắt Khử nhiễu"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:362
+#: ../Pinta.Core/Classes/BaseTool.cs:358
 msgid "Antialiasing On"
 msgstr "Bật Khử nhiễu"
 
@@ -187,7 +187,7 @@ msgstr "Tự định mức"
 msgid "Available in repository: {0}"
 msgstr "Có sẵn trong kho: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "Nền"
 
@@ -213,7 +213,7 @@ msgid "Best Fit"
 msgstr "Vừa nhất"
 
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:466
+#: ../Pinta.Tools/Tools/TextTool.cs:469
 msgid "Bevel Join"
 msgstr ""
 
@@ -251,7 +251,7 @@ msgid "Blurs"
 msgstr "Làm nhòe"
 
 #. Translators: 'Bold' (700) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:305
+#: ../Pinta.Tools/Tools/TextTool.cs:308
 msgid "Bold"
 msgstr "Đậm"
 
@@ -261,7 +261,7 @@ msgid "Bonfire"
 msgstr "Lửa trại"
 
 #. Translators: 'Book' (380) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:281
+#: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Book"
 msgstr ""
 
@@ -290,7 +290,7 @@ msgstr "Độ sáng / Độ tương phản"
 msgid "Brush Size"
 msgstr "Cỡ chổi"
 
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:126
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:129
 msgid "Brush width"
 msgstr "Bề rộng nét chổi vẽ"
 
@@ -315,7 +315,7 @@ msgstr "Theo phần trăm:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:522
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:392
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Hủy"
@@ -328,7 +328,7 @@ msgstr "Nền vẽ"
 msgid "Canvas Grid Settings"
 msgstr "Cài đặt lưới canvas"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:124
+#: ../Pinta.Core/Actions/ViewActions.cs:125
 msgid "Canvas Grid..."
 msgstr "Lưới vải..."
 
@@ -348,7 +348,7 @@ msgstr "Ô"
 msgid "Center"
 msgstr "Trung tâm"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:377
+#: ../Pinta.Tools/Tools/TextTool.cs:380
 msgid "Center Align"
 msgstr "Căn giữa"
 
@@ -370,17 +370,20 @@ msgstr "Giữa bên phải"
 msgid "Centered"
 msgstr "Cân giữa"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:228
 msgid "Centimeters"
 msgstr "Xăng-ti-mét"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:365
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
-msgid "Change brush width. Shortcut keys: [ ]"
-msgstr "Thay đổi chiều rộng bàn chải. Phím tắt: [ ]"
+msgid "Change brush width."
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
-msgid "Change font size. Shortcut keys: [ ]"
+msgid "Change font size."
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+msgid "Change outline width."
 msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
@@ -452,23 +455,23 @@ msgstr "Nhấn chuột và kéo để dò hình."
 msgid "Click to reset primary and secondary color."
 msgstr "Kích chuột để đặt lại màu chính và màu phụ."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:582
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:333
 msgid "Click to select primary color."
 msgstr "Kích chuột để chọn màu chính."
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:50
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
 msgid "Click to select secondary color."
 msgstr "Kích chuột để chọn màu phụ."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:424
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:340
 msgid "Click to switch between primary and secondary color."
 msgstr "Nhấp để chuyển đổi giữa màu chính và màu phụ."
@@ -480,7 +483,7 @@ msgstr "Nhấp để chuyển đổi giữa màu chính và màu phụ."
 msgid "Clipboard"
 msgstr "Bộ nhớ tạm"
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:55
 msgid "Clone Stamp"
 msgstr "Nhân bản nhãn"
 
@@ -531,7 +534,7 @@ msgstr "Độ dốc màu"
 msgid "Color Mode"
 msgstr "Chế độ màu"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:57
 msgid "Color Picker"
 msgstr "Chọn màu"
 
@@ -543,7 +546,7 @@ msgstr "Khoảng màu"
 msgid "Color Saturation"
 msgstr "Độ bão hòa màu"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Core/Actions/ViewActions.cs:254
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -611,8 +614,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Không thể nhập lớp \"{0}\" từ {1}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:166
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:428
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:440
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Không mở được tệp: {0}"
@@ -652,7 +655,7 @@ msgid "Cut"
 msgstr "Cắt"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:250
+#: ../Pinta.Core/Actions/ViewActions.cs:251
 msgid "Dark"
 msgstr "Tối"
 
@@ -665,7 +668,7 @@ msgid "Dash"
 msgstr "Nét"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:246
+#: ../Pinta.Core/Actions/ViewActions.cs:247
 msgid "Default"
 msgstr "Mặc định"
 
@@ -674,7 +677,7 @@ msgstr "Mặc định"
 msgid "Delete Layer"
 msgstr "Xoá bỏ lớp"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:682
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:690
 msgid "Deleted"
 msgstr "Bị xóa"
 
@@ -723,7 +726,7 @@ msgstr "Làm biến dạng"
 msgid "Dithering"
 msgstr "Phối màu"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:216
 msgid "Do not switch tool"
 msgstr "Không đổi công cụ"
 
@@ -757,7 +760,7 @@ msgstr "Nhận biết gờ"
 msgid "Effe_cts"
 msgstr "_Hiệu ứng"
 
-#: ../Pinta/MainWindow.cs:447
+#: ../Pinta/MainWindow.cs:446
 msgid "Effects"
 msgstr "Các hiệu ứng"
 
@@ -768,7 +771,7 @@ msgstr "Điện"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:276
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
-#: ../Pinta.Tools/Tools/EllipseTool.cs:45
+#: ../Pinta.Tools/Tools/EllipseTool.cs:43
 msgid "Ellipse"
 msgstr "Elip"
 
@@ -789,7 +792,7 @@ msgstr "Bật ghi nhật ký bổ sung hoặc thay đổi hành vi để gỡ l�
 msgid "Erase Selection"
 msgstr "Xóa vùng chọn"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:51
+#: ../Pinta.Tools/Tools/EraserTool.cs:62
 msgid "Eraser"
 msgstr "Tẩy"
 
@@ -831,7 +834,7 @@ msgstr "Không thể khởi tạo phần bổ trợ"
 msgid "Failed to load extension package"
 msgstr "Không tải được gói tiện ích mở rộng"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
 msgid "Failed to open image"
 msgstr "Không mở được hình ảnh"
 
@@ -860,7 +863,7 @@ msgstr "Báo một Lỗi"
 msgid "Files to open"
 msgstr "Tập tin để mở"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:415
+#: ../Pinta.Tools/Tools/TextTool.cs:418
 msgid "Fill Background"
 msgstr "Tô nền"
 
@@ -873,23 +876,23 @@ msgstr "Tô nền đối tượng"
 msgid "Fill Selection"
 msgstr "Đổ màu vùng chọn"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:226
 msgid "Fill Shape"
 msgstr "Tô đầy hình"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:327
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Style"
 msgstr "Cách thức tô đầy"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:227
 msgid "Fill and Outline Shape"
 msgstr "Tô đầy và vẽ biên ngoài của hình"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1109
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1395
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1117
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1403
 #: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Finalized"
 msgstr "Được hoàn thiện"
@@ -972,7 +975,7 @@ msgstr "Khối có dạng tự do"
 msgid "Frosted Glass"
 msgstr "Kính đóng băng"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:164
+#: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Fullscreen"
 msgstr "Toàn màn hình"
 
@@ -1021,7 +1024,7 @@ msgid "Hard Light"
 msgstr "Ánh sáng cứng"
 
 #. Translators: 'Heavy' (900) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:317
+#: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Heavy"
 msgstr ""
 
@@ -1032,11 +1035,12 @@ msgstr ""
 msgid "Height:"
 msgstr "Độ cao:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:363
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:313
 msgid "Hex"
 msgstr "Lục giác"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Hide Layer"
 msgstr "Ẩn lớp"
 
@@ -1070,7 +1074,7 @@ msgstr "Màu đỏ ngang (R)"
 msgid "Hue"
 msgstr "Sắc độ"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
 msgid "Hue & Sat"
 msgstr "Huế & Thứ Bảy"
 
@@ -1082,7 +1086,7 @@ msgstr "Sắc độ / Độ bão hòa"
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "Tệp ICO không thể lớn hơn 255 x 255 pixel."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "If enabled, the Value component is applied to the color wheel."
 msgstr ""
 
@@ -1090,7 +1094,7 @@ msgstr ""
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Nếu bạn không lưu lại, tất cả những thay đổi sẽ vĩnh viễn mất."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:459
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:254 ../Pinta/MainWindow.cs:456
 msgid "Image"
 msgstr "Hình ảnh"
 
@@ -1141,7 +1145,7 @@ msgstr ""
 "Nhấn Enter để kết thúc việc lựa chọn.\n"
 "Nhấn Backspace để xóa điểm cuối cùng."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Inches"
 msgstr "Inch"
 
@@ -1204,7 +1208,7 @@ msgstr "Đảo màu"
 msgid "Invert Selection"
 msgstr "Đảo vùng chọn"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:337
+#: ../Pinta.Tools/Tools/TextTool.cs:340
 msgid "Italic"
 msgstr "Nghiêng"
 
@@ -1233,19 +1237,15 @@ msgstr "Chế độ Lasso"
 msgid "Lasso Select"
 msgstr "Chọn theo chế độ thòng lọng"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:253
 msgid "Layer"
 msgstr "Lớp"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Hidden"
-msgstr "Lớp được ẩn"
-
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:101
 msgid "Layer Opacity"
 msgstr "Độ chắn sáng của lớp"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:121
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "Các thuộc tính lớp"
@@ -1253,10 +1253,6 @@ msgstr "Các thuộc tính lớp"
 #: ../Pinta.Core/Actions/LayerActions.cs:125
 msgid "Layer Properties..."
 msgstr "Thuộc tính của lớp..."
-
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Shown"
-msgstr "Lớp được hiện"
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:133
@@ -1268,7 +1264,7 @@ msgstr "Lớp {0}"
 msgid "Layers"
 msgstr "Lớp"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:365
+#: ../Pinta.Tools/Tools/TextTool.cs:368
 msgid "Left Align"
 msgstr "Căn lề trái"
 
@@ -1303,7 +1299,7 @@ msgstr ""
 "Sử dụng các phím mũi tên để di chuyển đường viền lựa chọn theo một pixel."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:58
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1344,14 +1340,14 @@ msgstr ""
 "Nhấp chuột phải để sử dụng màu phụ."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:67
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
 "Kích chuột trái để vẽ với màu chính, kích chuột phải để vẽ với màu phụ."
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:57
+#: ../Pinta.Tools/Tools/EraserTool.cs:68
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr "Kích chuột trái để tẩy về trong s, kích chuột phải để tẩy về màu phụ. "
@@ -1379,7 +1375,7 @@ msgstr ""
 "Nhấp chuột trái để thay thế màu phụ bằng màu chính.\n"
 "Nhấp chuột phải để đảo ngược."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:50
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:59
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
@@ -1427,8 +1423,8 @@ msgstr "Giấy phép"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:248
-#: ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Light"
 msgstr "Sáng"
 
@@ -1449,7 +1445,7 @@ msgstr "Độ nhạt"
 msgid "Lime Lemon"
 msgstr "Chanh"
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:43
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:42
 msgid "Line/Curve"
 msgstr "Đường thẳng/cong"
 
@@ -1474,7 +1470,7 @@ msgstr "Kết nối"
 msgid "Luminosity"
 msgstr "Độ tỏa sáng"
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:47
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Magic Wand Select"
 msgstr "Chọn bằng đùa thần"
 
@@ -1505,11 +1501,11 @@ msgid "Median"
 msgstr "Trung bình"
 
 #. Translators: 'Medium' (500) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:293
+#: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Medium"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:130
+#: ../Pinta.Core/Actions/ViewActions.cs:131
 msgid "Menu Bar"
 msgstr "Thanh thực đơn"
 
@@ -1523,7 +1519,7 @@ msgid "Minimum Size"
 msgstr "Kích thước tối thiểu"
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:454
+#: ../Pinta.Tools/Tools/TextTool.cs:457
 msgid "Miter Join"
 msgstr ""
 
@@ -1531,7 +1527,7 @@ msgstr ""
 msgid "Mode"
 msgstr "Chế độ"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:926
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:934
 msgid "Modified"
 msgstr "Được sửa đổi"
 
@@ -1577,7 +1573,7 @@ msgstr "Hàng xóm gần nhất"
 msgid "New"
 msgstr "Mới"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:139
 #: ../Pinta/Dialogs/NewImageDialog.cs:232
 msgid "New Image"
 msgstr "Hình mới"
@@ -1608,12 +1604,12 @@ msgstr "Độ nhiễu"
 #. Translators: 'Normal' (400) refers to the font-weight text property
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:184
-#: ../Pinta.Tools/Tools/TextTool.cs:287 ../Pinta.Tools/Tools/TextTool.cs:412
+#: ../Pinta.Tools/Tools/EraserTool.cs:336 ../Pinta.Tools/Tools/TextTool.cs:184
+#: ../Pinta.Tools/Tools/TextTool.cs:290 ../Pinta.Tools/Tools/TextTool.cs:415
 msgid "Normal"
 msgstr "Bình thường"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:341
 msgid "Normal Blending"
 msgstr "Pha trộn thông thường"
 
@@ -1621,7 +1617,7 @@ msgstr "Pha trộn thông thường"
 msgid "Normal Size"
 msgstr "Cỡ bình thường"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:413
+#: ../Pinta.Tools/Tools/TextTool.cs:416
 msgid "Normal and Outline"
 msgstr "Thông thường và Viền"
 
@@ -1634,7 +1630,7 @@ msgstr "Số lượng tế bào"
 msgid "Number of threads to use for rendering"
 msgstr "Số lượng chủ đề được sử dụng để hiển thị"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:387
 msgid "OK"
 msgstr "Đồng ý"
 
@@ -1674,7 +1670,7 @@ msgstr "Mở"
 msgid "Open Curve Shape"
 msgstr "Kiểu đường cong mở"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:351
 msgid "Open Image"
 msgstr "Mở hình ảnh"
 
@@ -1704,7 +1700,7 @@ msgstr "Định hướng:"
 msgid "Original"
 msgstr "Nguyên bản"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:414
+#: ../Pinta.Tools/Tools/TextTool.cs:417
 msgid "Outline"
 msgstr "Viền"
 
@@ -1720,13 +1716,13 @@ msgstr "Viền phác thảo"
 msgid "Outline Object"
 msgstr "Đối tượng phác thảo"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:225
 msgid "Outline Shape"
 msgstr "Vẽ biên ngoài của hình"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
-#: ../Pinta.Tools/Tools/TextTool.cs:428
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:353
+#: ../Pinta.Tools/Tools/TextTool.cs:431
 msgid "Outline width"
 msgstr "Độ rộng của viền ngoài"
 
@@ -1742,7 +1738,7 @@ msgstr "Biểu đồ cột đầu ra"
 msgid "Overlay"
 msgstr "Lớp phủ"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Overwrite"
 msgstr "Ghi đè"
 
@@ -1750,7 +1746,7 @@ msgstr "Ghi đè"
 msgid "Paint Bucket"
 msgstr "Xô sơn"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:65
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
 msgid "Paintbrush"
 msgstr "Bút vẽ"
 
@@ -1861,7 +1857,7 @@ msgstr ""
 "hình ảnh của bạn và cũng có khả năng tạo các lớp không giới hạn để giúp bạn "
 "sắp xếp khả năng sáng tạo."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:441
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta hỗ trợ các định dạng tệp sau:"
 
@@ -1873,7 +1869,7 @@ msgstr "Pinta hỗ trợ các định dạng bảng màu sau:"
 msgid "Pixelate"
 msgstr "Điểm ảnh hóa"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:225
+#: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Pixels"
 msgstr "Điểm ảnh"
 
@@ -1886,8 +1882,8 @@ msgstr "Piña Colada"
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Vui lòng khởi động lại Pinta để những thay đổi có hiệu lực."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:620
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:823
 msgid "Point Added"
 msgstr "Điểm được thêm vào"
 
@@ -1901,7 +1897,7 @@ msgstr "Sắp xếp điểm"
 msgid "Point Color"
 msgstr "Màu điểm"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:671
 msgid "Point Deleted"
 msgstr "Điểm được xóa"
 
@@ -1952,6 +1948,36 @@ msgstr "Bảng màu cài sẵn"
 msgid "Preset:"
 msgstr "Chỉnh sẵn:"
 
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+#, csharp-format
+msgid "Press {0} to decrease brush size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:245
+#, csharp-format
+msgid "Press {0} to decrease font size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
+#, csharp-format
+msgid "Press {0} to decrease outline size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
+#, csharp-format
+msgid "Press {0} to increase brush size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:246
+#, csharp-format
+msgid "Press {0} to increase font size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
+#, csharp-format
+msgid "Press {0} to increase outline size"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
 msgstr "Xem trước"
@@ -2001,7 +2027,7 @@ msgstr "Dải màu đối xứng"
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:85
 msgid "Radius"
 msgstr "Bán kính"
 
@@ -2049,7 +2075,7 @@ msgstr "Màu sắc được sử dụng gần đây"
 msgid "Recolor"
 msgstr "Tô màu lại"
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+#: ../Pinta.Tools/Tools/RectangleTool.cs:42
 msgid "Rectangle"
 msgstr "Hình chữ nhật"
 
@@ -2099,7 +2125,7 @@ msgstr "Phát hành theo giấy phép MIT X11."
 msgid "Relief"
 msgstr "Vát cạnh"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Rename Layer"
 msgstr "Đổi tên lớp"
 
@@ -2133,7 +2159,7 @@ msgstr "Gieo hạt lại"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:375
 msgid "Reset"
 msgstr "Đặt lại"
 
@@ -2184,7 +2210,7 @@ msgstr "Phối màu ngược"
 msgid "Reverse Color Sorting"
 msgstr "Sắp xếp màu đảo ngược"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:389
+#: ../Pinta.Tools/Tools/TextTool.cs:392
 msgid "Right Align"
 msgstr "Căn lề phải"
 
@@ -2222,7 +2248,7 @@ msgid "Roughness"
 msgstr "Độ nhám"
 
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:460
+#: ../Pinta.Tools/Tools/TextTool.cs:463
 msgid "Round Join"
 msgstr ""
 
@@ -2234,19 +2260,19 @@ msgstr "Loạt đường uốn góc"
 msgid "Rounded Line Shape"
 msgstr "Kiểu đường uốn góc"
 
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
 msgstr "Hình chữ nhật góc tròn"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:230
+#: ../Pinta.Core/Actions/ViewActions.cs:231
 msgid "Ruler Units"
 msgstr "Đơn vị thước đo"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:148
+#: ../Pinta.Core/Actions/ViewActions.cs:149
 msgid "Rulers"
 msgstr "Thước kẻ"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
 msgid "Sampling"
 msgstr "Lấy mẫu"
 
@@ -2255,7 +2281,7 @@ msgstr "Lấy mẫu"
 msgid "Sat"
 msgstr "Độ bão hoà"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:277
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
 msgid "Sat & Value"
 msgstr "Độ bão hoà & Giá trị"
 
@@ -2319,12 +2345,12 @@ msgid "Selected Colors"
 msgstr "Màu đã chọn"
 
 #. Translators: 'Semibold' (600) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:299
+#: ../Pinta.Tools/Tools/TextTool.cs:302
 msgid "Semibold"
 msgstr ""
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:275
+#: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Semilight"
 msgstr ""
 
@@ -2349,15 +2375,21 @@ msgid "Sharpen"
 msgstr "Làm sắc nét"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:425
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:341
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:44
 msgid "Shortcut key"
 msgstr "Phím tắt"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
 msgstr "Phím tắt"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
+#: ../Pinta.Tools/Tools/TextTool.cs:244
+msgid "Shortcut keys:"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
@@ -2367,7 +2399,8 @@ msgstr "Hiển thị lưới trục đo"
 msgid "Show Grid"
 msgstr "Hiển thị lưới"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Show Layer"
 msgstr "Hiện lớp"
 
@@ -2376,11 +2409,11 @@ msgstr "Hiện lớp"
 msgid "Show Points"
 msgstr "Hiển thị điểm"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:270
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:192
 msgid "Show Value"
 msgstr "Hiển thị giá trị"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:242
+#: ../Pinta.Core/Actions/ViewActions.cs:243
 msgid "Show/Hide"
 msgstr "Hiển thị/Ẩn"
 
@@ -2394,7 +2427,7 @@ msgstr "Sierra"
 msgid "Sierra Lite"
 msgstr "Sierra Lite"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:235
 msgid "Single Pixel"
 msgstr "Một điểm ảnh"
 
@@ -2411,7 +2444,7 @@ msgstr ""
 msgid "Small Caps"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:326
+#: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
 msgstr "Trơn tru"
 
@@ -2435,7 +2468,7 @@ msgstr "Vẩy mực"
 msgid "Squares"
 msgstr "Hình vuông"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:136
+#: ../Pinta.Core/Actions/ViewActions.cs:137
 msgid "Status Bar"
 msgstr "Thanh trạng thái"
 
@@ -2456,11 +2489,11 @@ msgstr "Bị mắc kẹt"
 msgid "Stylize"
 msgstr "Tạo kiểu"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:218
 msgid "Switch to Pencil tool"
 msgstr "Chuyển về công cụ bút chì"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:217
 msgid "Switch to previous tool"
 msgstr "Chuyển về công cụ trước đó"
 
@@ -2472,7 +2505,7 @@ msgstr "Văn bản"
 msgid "Text - Finalize"
 msgstr "Nhập chữ - Hoàn thành"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:403
+#: ../Pinta.Tools/Tools/TextTool.cs:406
 msgid "Text Style"
 msgstr "Kiểu chữ"
 
@@ -2550,7 +2583,7 @@ msgid "Thickness"
 msgstr "Độ dày"
 
 #. Translators: 'Thin' (100) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:257
+#: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Thin"
 msgstr ""
 
@@ -2587,11 +2620,11 @@ msgstr ""
 msgid "Tolerance"
 msgstr "Sai số"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:374
+#: ../Pinta.Core/Managers/ToolManager.cs:351
 msgid "Tool"
 msgstr "Công cụ"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:142
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Tool Box"
 msgstr "Hộp công cụ"
 
@@ -2645,27 +2678,27 @@ msgstr "Xoắn"
 msgid "Two-Row Sierra"
 msgstr "Sierra hai hàng"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:322
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:214
+#: ../Pinta.Tools/Tools/EraserTool.cs:332
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
 msgid "Type"
 msgstr "Loại"
 
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:311
+#: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Ultrabold"
 msgstr ""
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:323
+#: ../Pinta.Tools/Tools/TextTool.cs:326
 msgid "Ultraheavy"
 msgstr ""
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:263
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Ultralight"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:349
+#: ../Pinta.Tools/Tools/TextTool.cs:352
 msgid "Underline"
 msgstr "Gạch dưới"
 
@@ -2702,7 +2735,7 @@ msgstr "Liên (+) ({0} + Click chuột trái)"
 msgid "Unsaved Image {0}"
 msgstr "Chưa lưu hình ảnh {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:346
 msgid "Unsupported file format"
 msgstr "Đinh dạng tệp không được hỗ trợ"
 
@@ -2754,7 +2787,7 @@ msgstr "Dọc màu xanh lá cây (G)"
 msgid "Vertical red (R)"
 msgstr "Dọc đỏ (R)"
 
-#: ../Pinta/MainWindow.cs:465
+#: ../Pinta/MainWindow.cs:461
 msgid "View"
 msgstr "Xem"
 
@@ -2787,10 +2820,10 @@ msgstr "Trắng"
 msgid "Width:"
 msgstr "Bề rộng:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:207
-#: ../Pinta.Core/Actions/ViewActions.cs:395
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:365
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:374
+#: ../Pinta.Core/Actions/ViewActions.cs:208
+#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Cửa sổ"
 
@@ -2809,7 +2842,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Nhấp chuột phải)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:463
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Bạn không có quyền truy cập vào '{0}'."
@@ -2850,8 +2883,8 @@ msgstr "Zoom vào phần lựa chọn"
 msgid "_Adjustments"
 msgstr "_Chỉnh sửa"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
@@ -2879,8 +2912,8 @@ msgstr "_Trợ giúp"
 msgid "_Image"
 msgstr "Ả_nh"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:219
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:223
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
@@ -2927,7 +2960,7 @@ msgstr ""
 "Loc Huynh <https://github.com/hthienloc>"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:49
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:58
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr "{0} + nhấp chuột trái để đặt điểm gốc, nhấp chuột trái để vẽ."
@@ -2952,10 +2985,19 @@ msgstr "{0} bảng màu ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:376
+#: ../Pinta.Core/Actions/ViewActions.cs:377
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Change brush width. Shortcut keys: [ ]"
+#~ msgstr "Thay đổi chiều rộng bàn chải. Phím tắt: [ ]"
+
+#~ msgid "Layer Hidden"
+#~ msgstr "Lớp được ẩn"
+
+#~ msgid "Layer Shown"
+#~ msgstr "Lớp được hiện"
 
 #~ msgid "Click to select region of similar color."
 #~ msgstr "Kích chuột để chọn một vùng có màu sắc tương tự."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-01 00:35+0000\n"
+"POT-Creation-Date: 2026-05-01 00:45+0000\n"
 "PO-Revision-Date: 2026-05-01 03:28+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/pinta/pinta/de/>\n"
@@ -32,19 +32,19 @@ msgstr " Auswahlmodus: "
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:236
 msgid "3 x 3 Region"
 msgstr "3 × 3-Bereich"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:237
 msgid "5 x 5 Region"
 msgstr "5 × 5-Bereich"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:238
 msgid "7 x 7 Region"
 msgstr "7 × 7-Bereich"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "9 x 9 Region"
 msgstr "9 × 9-Bereich"
 
@@ -74,15 +74,15 @@ msgstr "Rauschen hinzufügen"
 msgid "Add-in Manager..."
 msgstr "Add-In-Manager..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:852
 msgid "Added"
 msgstr "Hinzugefügt"
 
-#: ../Pinta/MainWindow.cs:453
+#: ../Pinta/MainWindow.cs:451
 msgid "Adjustments"
 msgstr "Anpassungen"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
 msgid "After select"
 msgstr "Nach Auswahl"
 
@@ -135,7 +135,7 @@ msgstr "Ankerpunkt:"
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
-#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:53
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:52
@@ -146,11 +146,11 @@ msgstr "Winkel"
 msgid "Antialias"
 msgstr "Kantenglättung"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:363
+#: ../Pinta.Core/Classes/BaseTool.cs:359
 msgid "Antialiasing Off"
 msgstr "Kantenglättung aus"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:362
+#: ../Pinta.Core/Classes/BaseTool.cs:358
 msgid "Antialiasing On"
 msgstr "Kantenglättung an"
 
@@ -186,7 +186,7 @@ msgstr "Automatische Tonwertkorrektur"
 msgid "Available in repository: {0}"
 msgstr "Verfügbar im Repository: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "Hintergrund"
 
@@ -212,7 +212,7 @@ msgid "Best Fit"
 msgstr "Einpassen"
 
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:466
+#: ../Pinta.Tools/Tools/TextTool.cs:469
 msgid "Bevel Join"
 msgstr ""
 
@@ -250,7 +250,7 @@ msgid "Blurs"
 msgstr "Unschärfen"
 
 #. Translators: 'Bold' (700) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:305
+#: ../Pinta.Tools/Tools/TextTool.cs:308
 msgid "Bold"
 msgstr "Fett"
 
@@ -260,7 +260,7 @@ msgid "Bonfire"
 msgstr "Lagerfeuer"
 
 #. Translators: 'Book' (380) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:281
+#: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Book"
 msgstr "Buch"
 
@@ -289,7 +289,7 @@ msgstr "Helligkeit/Kontrast"
 msgid "Brush Size"
 msgstr "Pinselgröße"
 
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:126
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:129
 msgid "Brush width"
 msgstr "Pinselbreite"
 
@@ -314,7 +314,7 @@ msgstr "Prozentual:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:522
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:392
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -327,7 +327,7 @@ msgstr "Zeichenfläche"
 msgid "Canvas Grid Settings"
 msgstr "Leinwandrastereinstellungen"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:124
+#: ../Pinta.Core/Actions/ViewActions.cs:125
 msgid "Canvas Grid..."
 msgstr "Leinwandraster..."
 
@@ -347,7 +347,7 @@ msgstr "Zellen"
 msgid "Center"
 msgstr "Mitte"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:377
+#: ../Pinta.Tools/Tools/TextTool.cs:380
 msgid "Center Align"
 msgstr "Zentriert"
 
@@ -369,18 +369,21 @@ msgstr "Mittig rechts"
 msgid "Centered"
 msgstr "Zentriert"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:228
 msgid "Centimeters"
 msgstr "Zentimeter"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:365
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
-msgid "Change brush width. Shortcut keys: [ ]"
-msgstr "Pinselbreite ändern. Tastaturkürzel: [ ]"
+msgid "Change brush width."
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
-msgid "Change font size. Shortcut keys: [ ]"
-msgstr "Schriftgröße ändern. Tastenkombination: [ ]"
+msgid "Change font size."
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+msgid "Change outline width."
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -453,23 +456,23 @@ msgid "Click to reset primary and secondary color."
 msgstr ""
 "Hier klicken, um die Vordergrundfarbe und Hintergrundfarbe zurückzusetzen."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:582
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:333
 msgid "Click to select primary color."
 msgstr "Anklicken, um die Vordergrundfarbe festzulegen."
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:50
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
 msgid "Click to select secondary color."
 msgstr "Anklicken, um die Hintergrundfarbe festzulegen."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:424
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:340
 msgid "Click to switch between primary and secondary color."
 msgstr "Klicken um zwischen primärer und sekundärer Farbe zu wechseln."
@@ -481,7 +484,7 @@ msgstr "Klicken um zwischen primärer und sekundärer Farbe zu wechseln."
 msgid "Clipboard"
 msgstr "Zwischenablage"
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:55
 msgid "Clone Stamp"
 msgstr "Stempel klonen"
 
@@ -532,7 +535,7 @@ msgstr "Farbverlauf"
 msgid "Color Mode"
 msgstr "Farbmodus"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:57
 msgid "Color Picker"
 msgstr "Farbpipette"
 
@@ -544,7 +547,7 @@ msgstr "Farbbereich"
 msgid "Color Saturation"
 msgstr "Farbsättigung"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Core/Actions/ViewActions.cs:254
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -612,8 +615,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Konnte die Ebene \"{0}\" nicht aus {1} importieren"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:166
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:428
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:440
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Datei konnte nicht geöffnet werden: {0}"
@@ -653,7 +656,7 @@ msgid "Cut"
 msgstr "Ausschneiden"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:250
+#: ../Pinta.Core/Actions/ViewActions.cs:251
 msgid "Dark"
 msgstr "Dunkel"
 
@@ -666,7 +669,7 @@ msgid "Dash"
 msgstr "Strich"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:246
+#: ../Pinta.Core/Actions/ViewActions.cs:247
 msgid "Default"
 msgstr "Standard"
 
@@ -675,7 +678,7 @@ msgstr "Standard"
 msgid "Delete Layer"
 msgstr "Ebene löschen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:682
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:690
 msgid "Deleted"
 msgstr "Gelöscht"
 
@@ -724,7 +727,7 @@ msgstr "Verzerren"
 msgid "Dithering"
 msgstr "Fehlerdiffusion"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:216
 msgid "Do not switch tool"
 msgstr "Werkzeug nicht wechseln"
 
@@ -758,7 +761,7 @@ msgstr "Kanten erkennen"
 msgid "Effe_cts"
 msgstr "Effe_kte"
 
-#: ../Pinta/MainWindow.cs:447
+#: ../Pinta/MainWindow.cs:446
 msgid "Effects"
 msgstr "Effekte"
 
@@ -769,7 +772,7 @@ msgstr "Elektrisch"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:276
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
-#: ../Pinta.Tools/Tools/EllipseTool.cs:45
+#: ../Pinta.Tools/Tools/EllipseTool.cs:43
 msgid "Ellipse"
 msgstr "Ellipse"
 
@@ -792,7 +795,7 @@ msgstr ""
 msgid "Erase Selection"
 msgstr "Auswahl entfernen"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:51
+#: ../Pinta.Tools/Tools/EraserTool.cs:62
 msgid "Eraser"
 msgstr "Radiergummi"
 
@@ -834,7 +837,7 @@ msgstr "Add-in konnte nicht initialisiert werden"
 msgid "Failed to load extension package"
 msgstr "Fehler beim Laden des Erweiterungspakets"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
 msgid "Failed to open image"
 msgstr "Öffnen des Bildes fehlgeschlagen"
 
@@ -863,7 +866,7 @@ msgstr "Fehler melden"
 msgid "Files to open"
 msgstr "Zu öffnende Dateien"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:415
+#: ../Pinta.Tools/Tools/TextTool.cs:418
 msgid "Fill Background"
 msgstr "Hintergrund ausfüllen"
 
@@ -876,23 +879,23 @@ msgstr "Objekthintergrund füllen"
 msgid "Fill Selection"
 msgstr "Auswahl füllen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:226
 msgid "Fill Shape"
 msgstr "Nur Füllung"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:327
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Style"
 msgstr "Füllstil"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:227
 msgid "Fill and Outline Shape"
 msgstr "Umrandung und Füllung"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1109
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1395
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1117
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1403
 #: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Finalized"
 msgstr "Abgeschlossen"
@@ -977,7 +980,7 @@ msgstr "Freihandform"
 msgid "Frosted Glass"
 msgstr "Gefrorenes Glas"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:164
+#: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Fullscreen"
 msgstr "Vollbild"
 
@@ -1026,7 +1029,7 @@ msgid "Hard Light"
 msgstr "Grelles Licht"
 
 #. Translators: 'Heavy' (900) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:317
+#: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Heavy"
 msgstr "Schwer"
 
@@ -1037,11 +1040,12 @@ msgstr "Schwer"
 msgid "Height:"
 msgstr "Höhe:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:363
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:313
 msgid "Hex"
 msgstr "Hex"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Hide Layer"
 msgstr "Ebene verbergen"
 
@@ -1076,7 +1080,7 @@ msgstr "Horizontales Rot (R)"
 msgid "Hue"
 msgstr "Farbton"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
 msgid "Hue & Sat"
 msgstr "Farbton und Sättigung"
 
@@ -1088,7 +1092,7 @@ msgstr "Farbton/Sättigung"
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO-Dateien können nicht größer als 255 × 255 Pixel sein."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "If enabled, the Value component is applied to the color wheel."
 msgstr "Wenn aktiviert, wird die Wertkomponente auf das Farbrad aufgebracht."
 
@@ -1096,7 +1100,7 @@ msgstr "Wenn aktiviert, wird die Wertkomponente auf das Farbrad aufgebracht."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Wenn Sie nicht speichern, gehen alle Änderungen dauerhaft verloren."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:459
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:254 ../Pinta/MainWindow.cs:456
 msgid "Image"
 msgstr "Bild"
 
@@ -1149,7 +1153,7 @@ msgstr ""
 "Eingabetaste drücken, um die Auswahl abzuschließen.\n"
 "Rücktaste drücken, um den letzten Punkt zu löschen."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Inches"
 msgstr "Zoll"
 
@@ -1212,7 +1216,7 @@ msgstr "Farben umkehren"
 msgid "Invert Selection"
 msgstr "Auswahl umkehren"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:337
+#: ../Pinta.Tools/Tools/TextTool.cs:340
 msgid "Italic"
 msgstr "Kursiv"
 
@@ -1241,19 +1245,15 @@ msgstr "Lasso-Modus"
 msgid "Lasso Select"
 msgstr "Freie Auswahl"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:253
 msgid "Layer"
 msgstr "Ebene"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Hidden"
-msgstr "Ebene ist versteckt"
-
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:101
 msgid "Layer Opacity"
 msgstr "Ebenendeckkraft"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:121
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "Ebeneneigenschaften"
@@ -1261,10 +1261,6 @@ msgstr "Ebeneneigenschaften"
 #: ../Pinta.Core/Actions/LayerActions.cs:125
 msgid "Layer Properties..."
 msgstr "Ebeneneigenschaften …"
-
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Shown"
-msgstr "Ebene wird angezeigt"
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:133
@@ -1276,7 +1272,7 @@ msgstr "Ebene {0}"
 msgid "Layers"
 msgstr "Ebenen"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:365
+#: ../Pinta.Tools/Tools/TextTool.cs:368
 msgid "Left Align"
 msgstr "Linksbündig"
 
@@ -1317,7 +1313,7 @@ msgstr ""
 "Pixel zu verschieben."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:58
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1368,7 +1364,7 @@ msgstr ""
 "Klicken Sie mit der rechten Maustaste, um die Sekundärfarbe zu verwenden."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:67
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1376,7 +1372,7 @@ msgstr ""
 "Linksklick, um mit der Vordergrundfarbe zu zeichnen. Rechtsklick, um mit der "
 "Hintergrundfarbe zu zeichnen."
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:57
+#: ../Pinta.Tools/Tools/EraserTool.cs:68
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
@@ -1407,7 +1403,7 @@ msgstr ""
 "Primärfarbe zu ersetzen.\n"
 "Klicken Sie mit der rechten Maustaste, um die Farbe umzukehren."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:50
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:59
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
@@ -1460,8 +1456,8 @@ msgstr "Lizenz"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:248
-#: ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Light"
 msgstr "Hell"
 
@@ -1482,7 +1478,7 @@ msgstr "Helligkeit"
 msgid "Lime Lemon"
 msgstr "Limette-Zitrone"
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:43
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:42
 msgid "Line/Curve"
 msgstr "Linie/Kurve"
 
@@ -1507,7 +1503,7 @@ msgstr "Verknüpft"
 msgid "Luminosity"
 msgstr "Leuchtkraft"
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:47
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Magic Wand Select"
 msgstr "Zauberstab"
 
@@ -1538,11 +1534,11 @@ msgid "Median"
 msgstr "Median"
 
 #. Translators: 'Medium' (500) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:293
+#: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Medium"
 msgstr "Mittel"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:130
+#: ../Pinta.Core/Actions/ViewActions.cs:131
 msgid "Menu Bar"
 msgstr "Menüleiste"
 
@@ -1556,7 +1552,7 @@ msgid "Minimum Size"
 msgstr "Minimale Größe"
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:454
+#: ../Pinta.Tools/Tools/TextTool.cs:457
 msgid "Miter Join"
 msgstr ""
 
@@ -1564,7 +1560,7 @@ msgstr ""
 msgid "Mode"
 msgstr "Modus"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:926
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:934
 msgid "Modified"
 msgstr "Geändert"
 
@@ -1610,7 +1606,7 @@ msgstr "Nächster Nachbar"
 msgid "New"
 msgstr "Neu"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:139
 #: ../Pinta/Dialogs/NewImageDialog.cs:232
 msgid "New Image"
 msgstr "Neues Bild"
@@ -1641,12 +1637,12 @@ msgstr "Rauschen"
 #. Translators: 'Normal' (400) refers to the font-weight text property
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:184
-#: ../Pinta.Tools/Tools/TextTool.cs:287 ../Pinta.Tools/Tools/TextTool.cs:412
+#: ../Pinta.Tools/Tools/EraserTool.cs:336 ../Pinta.Tools/Tools/TextTool.cs:184
+#: ../Pinta.Tools/Tools/TextTool.cs:290 ../Pinta.Tools/Tools/TextTool.cs:415
 msgid "Normal"
 msgstr "Normal"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:341
 msgid "Normal Blending"
 msgstr "Normaler Übergang"
 
@@ -1654,7 +1650,7 @@ msgstr "Normaler Übergang"
 msgid "Normal Size"
 msgstr "Normale Größe"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:413
+#: ../Pinta.Tools/Tools/TextTool.cs:416
 msgid "Normal and Outline"
 msgstr "Normal und Kontur"
 
@@ -1667,7 +1663,7 @@ msgstr "Anzahl der Zellen"
 msgid "Number of threads to use for rendering"
 msgstr "Anzahl der für das Rendering zu verwendenden Threads"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:387
 msgid "OK"
 msgstr "OK"
 
@@ -1707,7 +1703,7 @@ msgstr "Öffnen"
 msgid "Open Curve Shape"
 msgstr "Offene Kurvenform"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:351
 msgid "Open Image"
 msgstr "Bild öffnen"
 
@@ -1737,7 +1733,7 @@ msgstr "Ausrichtung:"
 msgid "Original"
 msgstr "Original"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:414
+#: ../Pinta.Tools/Tools/TextTool.cs:417
 msgid "Outline"
 msgstr "Kontur"
 
@@ -1753,13 +1749,13 @@ msgstr "Konturkante"
 msgid "Outline Object"
 msgstr "Objektkontur"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:225
 msgid "Outline Shape"
 msgstr "Konturform"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
-#: ../Pinta.Tools/Tools/TextTool.cs:428
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:353
+#: ../Pinta.Tools/Tools/TextTool.cs:431
 msgid "Outline width"
 msgstr "Konturbreite"
 
@@ -1775,7 +1771,7 @@ msgstr "Ausgabe-Histogramm"
 msgid "Overlay"
 msgstr "Überlagern"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Overwrite"
 msgstr "Überschreiben"
 
@@ -1783,7 +1779,7 @@ msgstr "Überschreiben"
 msgid "Paint Bucket"
 msgstr "Farbeimer"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:65
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
 msgid "Paintbrush"
 msgstr "Pinsel"
 
@@ -1896,7 +1892,7 @@ msgstr ""
 "Fähigkeit, unbegrenzt Ebenen einzufügen, um die eigene Kreativität zu "
 "organisieren."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:441
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta unterstützt die folgenden Dateiformate:"
 
@@ -1908,7 +1904,7 @@ msgstr "Pinta unterstützt die folgenden Palettenformate:"
 msgid "Pixelate"
 msgstr "Verpixeln"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:225
+#: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Pixels"
 msgstr "Pixel"
 
@@ -1921,8 +1917,8 @@ msgstr "Piña Colada"
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Bitte starte Pinta neu, damit die Änderungen in Kraft treten."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:620
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:823
 msgid "Point Added"
 msgstr "Punkt hinzugefügt"
 
@@ -1936,7 +1932,7 @@ msgstr "Punktanordnung"
 msgid "Point Color"
 msgstr "Punktfarbe"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:671
 msgid "Point Deleted"
 msgstr "Punkt gelöscht"
 
@@ -1987,6 +1983,36 @@ msgstr "Voreingestellte Paletten"
 msgid "Preset:"
 msgstr "Voreinstellung:"
 
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+#, csharp-format
+msgid "Press {0} to decrease brush size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:245
+#, csharp-format
+msgid "Press {0} to decrease font size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
+#, csharp-format
+msgid "Press {0} to decrease outline size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
+#, csharp-format
+msgid "Press {0} to increase brush size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:246
+#, csharp-format
+msgid "Press {0} to increase font size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
+#, csharp-format
+msgid "Press {0} to increase outline size"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
 msgstr "Vorschau"
@@ -2036,7 +2062,7 @@ msgstr "Radialer Verlauf"
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:85
 msgid "Radius"
 msgstr "Radius"
 
@@ -2084,7 +2110,7 @@ msgstr "Zuletzt verwendete Farben"
 msgid "Recolor"
 msgstr "Einfärben"
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+#: ../Pinta.Tools/Tools/RectangleTool.cs:42
 msgid "Rectangle"
 msgstr "Rechteck"
 
@@ -2134,7 +2160,7 @@ msgstr "Veröffentlicht unter der MIT X11-Lizenz."
 msgid "Relief"
 msgstr "Relief"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Rename Layer"
 msgstr "Ebene umbenennen"
 
@@ -2168,7 +2194,7 @@ msgstr "Startwert neu erzeugen"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:375
 msgid "Reset"
 msgstr "Zurücksetzen"
 
@@ -2219,7 +2245,7 @@ msgstr "Farbschema umkehren"
 msgid "Reverse Color Sorting"
 msgstr "Farbsortierung umkehren"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:389
+#: ../Pinta.Tools/Tools/TextTool.cs:392
 msgid "Right Align"
 msgstr "Rechtsbündig"
 
@@ -2257,7 +2283,7 @@ msgid "Roughness"
 msgstr "Rauheit"
 
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:460
+#: ../Pinta.Tools/Tools/TextTool.cs:463
 msgid "Round Join"
 msgstr ""
 
@@ -2269,19 +2295,19 @@ msgstr "Abgerundete Linienserie"
 msgid "Rounded Line Shape"
 msgstr "Abgerundete Linienform"
 
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
 msgstr "Abgerundetes Rechteck"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:230
+#: ../Pinta.Core/Actions/ViewActions.cs:231
 msgid "Ruler Units"
 msgstr "Maßeinheiten"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:148
+#: ../Pinta.Core/Actions/ViewActions.cs:149
 msgid "Rulers"
 msgstr "Lineale"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
 msgid "Sampling"
 msgstr "Abtastgröße"
 
@@ -2290,7 +2316,7 @@ msgstr "Abtastgröße"
 msgid "Sat"
 msgstr "Sättigung"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:277
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
 msgid "Sat & Value"
 msgstr "Sättigung und Wert"
 
@@ -2354,12 +2380,12 @@ msgid "Selected Colors"
 msgstr "Ausgewählte Farben"
 
 #. Translators: 'Semibold' (600) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:299
+#: ../Pinta.Tools/Tools/TextTool.cs:302
 msgid "Semibold"
 msgstr "Halbfett"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:275
+#: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Semilight"
 msgstr "Halbleicht"
 
@@ -2384,15 +2410,21 @@ msgid "Sharpen"
 msgstr "Schärfen"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:425
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:341
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:44
 msgid "Shortcut key"
 msgstr "Tastenkürzel"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
 msgstr "Tastenkürzel"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
+#: ../Pinta.Tools/Tools/TextTool.cs:244
+msgid "Shortcut keys:"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
@@ -2402,7 +2434,8 @@ msgstr "Axonometrisches Raster anzeigen"
 msgid "Show Grid"
 msgstr "Raster anzeigen"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Show Layer"
 msgstr "Ebene anzeigen"
 
@@ -2411,11 +2444,11 @@ msgstr "Ebene anzeigen"
 msgid "Show Points"
 msgstr "Punkte anzeigen"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:270
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:192
 msgid "Show Value"
 msgstr "Wert anzeigen"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:242
+#: ../Pinta.Core/Actions/ViewActions.cs:243
 msgid "Show/Hide"
 msgstr "Anzeigen/ausblenden"
 
@@ -2429,7 +2462,7 @@ msgstr "Sierra"
 msgid "Sierra Lite"
 msgstr "Sierra Leicht"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:235
 msgid "Single Pixel"
 msgstr "Einzelnes Pixel"
 
@@ -2446,7 +2479,7 @@ msgstr "Schrägstrich"
 msgid "Small Caps"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:326
+#: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
 msgstr "Weich"
 
@@ -2470,7 +2503,7 @@ msgstr "Spritzer"
 msgid "Squares"
 msgstr "Quadrate"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:136
+#: ../Pinta.Core/Actions/ViewActions.cs:137
 msgid "Status Bar"
 msgstr "Statusleiste"
 
@@ -2491,11 +2524,11 @@ msgstr "Stucki"
 msgid "Stylize"
 msgstr "Stilisieren"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:218
 msgid "Switch to Pencil tool"
 msgstr "Zum Stift wechseln"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:217
 msgid "Switch to previous tool"
 msgstr "Zum vorherigen Werkzeug wechseln"
 
@@ -2507,7 +2540,7 @@ msgstr "Text"
 msgid "Text - Finalize"
 msgstr "Text - Finalisieren"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:403
+#: ../Pinta.Tools/Tools/TextTool.cs:406
 msgid "Text Style"
 msgstr "Textstil"
 
@@ -2590,7 +2623,7 @@ msgid "Thickness"
 msgstr "Dicke"
 
 #. Translators: 'Thin' (100) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:257
+#: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Thin"
 msgstr "Dünn"
 
@@ -2627,11 +2660,11 @@ msgstr ""
 msgid "Tolerance"
 msgstr "Fehlergrenze"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:374
+#: ../Pinta.Core/Managers/ToolManager.cs:351
 msgid "Tool"
 msgstr "Werkzeug"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:142
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Tool Box"
 msgstr "Werkzeugkasten"
 
@@ -2685,27 +2718,27 @@ msgstr "Verdrehen"
 msgid "Two-Row Sierra"
 msgstr "Zweireihiges Sierra"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:322
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:214
+#: ../Pinta.Tools/Tools/EraserTool.cs:332
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
 msgid "Type"
 msgstr "Typ"
 
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:311
+#: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Ultrabold"
 msgstr "Ultrafett"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:323
+#: ../Pinta.Tools/Tools/TextTool.cs:326
 msgid "Ultraheavy"
 msgstr "Ultraschwer"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:263
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Ultralight"
 msgstr "Ultramager"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:349
+#: ../Pinta.Tools/Tools/TextTool.cs:352
 msgid "Underline"
 msgstr "Unterstrichen"
 
@@ -2742,7 +2775,7 @@ msgstr "Vereinigen (+) ({0} + Linksklick)"
 msgid "Unsaved Image {0}"
 msgstr "Nicht gespeichertes Bild {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:346
 msgid "Unsupported file format"
 msgstr "Nicht unterstütztes Dateiformat"
 
@@ -2795,7 +2828,7 @@ msgstr "Vertikales Grün (G)"
 msgid "Vertical red (R)"
 msgstr "Vertikales Rot (R)"
 
-#: ../Pinta/MainWindow.cs:465
+#: ../Pinta/MainWindow.cs:461
 msgid "View"
 msgstr "Ansicht"
 
@@ -2828,10 +2861,10 @@ msgstr "Weiß"
 msgid "Width:"
 msgstr "Breite:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:207
-#: ../Pinta.Core/Actions/ViewActions.cs:395
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:365
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:374
+#: ../Pinta.Core/Actions/ViewActions.cs:208
+#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Fenster"
 
@@ -2850,7 +2883,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Rechtsklick)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:463
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Sie haben keinen Zugriff auf \"{0}\"."
@@ -2891,8 +2924,8 @@ msgstr "Größe an Auswahl anpassen"
 msgid "_Adjustments"
 msgstr "A_npassungen"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
@@ -2920,8 +2953,8 @@ msgstr "_Hilfe"
 msgid "_Image"
 msgstr "_Bild"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:219
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:223
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
@@ -2997,7 +3030,7 @@ msgstr ""
 " Janek Ilsen"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:49
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:58
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr "{0} + Linksklick zur Wahl der Quelle, Linksklick zum Malen."
@@ -3022,10 +3055,22 @@ msgstr "{0} Palette ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:376
+#: ../Pinta.Core/Actions/ViewActions.cs:377
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
+
+#~ msgid "Change brush width. Shortcut keys: [ ]"
+#~ msgstr "Pinselbreite ändern. Tastaturkürzel: [ ]"
+
+#~ msgid "Change font size. Shortcut keys: [ ]"
+#~ msgstr "Schriftgröße ändern. Tastenkombination: [ ]"
+
+#~ msgid "Layer Hidden"
+#~ msgstr "Ebene ist versteckt"
+
+#~ msgid "Layer Shown"
+#~ msgstr "Ebene wird angezeigt"
 
 #~ msgid "Click to select region of similar color."
 #~ msgstr "Nach Farbe auswählen."

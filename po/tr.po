@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-01 00:35+0000\n"
+"POT-Creation-Date: 2026-05-01 00:45+0000\n"
 "PO-Revision-Date: 2026-02-27 00:47+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
@@ -33,19 +33,19 @@ msgstr " Seçim Kipi: "
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:236
 msgid "3 x 3 Region"
 msgstr "Bölge"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:237
 msgid "5 x 5 Region"
 msgstr "5 x 5 Bölge"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:238
 msgid "7 x 7 Region"
 msgstr "7 x7 Bölge"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "9 x 9 Region"
 msgstr "9 x9 Bölge"
 
@@ -75,15 +75,15 @@ msgstr "Parazit Ekle"
 msgid "Add-in Manager..."
 msgstr "Eklenti Yöneticisi..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:852
 msgid "Added"
 msgstr "Eklendi"
 
-#: ../Pinta/MainWindow.cs:453
+#: ../Pinta/MainWindow.cs:451
 msgid "Adjustments"
 msgstr "Ayarlamalar"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
 msgid "After select"
 msgstr "Seçimden sonra"
 
@@ -136,7 +136,7 @@ msgstr "Çapa:"
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
-#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:53
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:52
@@ -147,11 +147,11 @@ msgstr "Açı"
 msgid "Antialias"
 msgstr "Örtüşme Önle"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:363
+#: ../Pinta.Core/Classes/BaseTool.cs:359
 msgid "Antialiasing Off"
 msgstr "Kenar Keskinleştirme Kapalı"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:362
+#: ../Pinta.Core/Classes/BaseTool.cs:358
 msgid "Antialiasing On"
 msgstr "Kenar Keskinleştirme Açık"
 
@@ -187,7 +187,7 @@ msgstr "Otomatik Seviye"
 msgid "Available in repository: {0}"
 msgstr "Şu depoda mevcut: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "Arkaplan"
 
@@ -213,7 +213,7 @@ msgid "Best Fit"
 msgstr "En Uygun Görünüm"
 
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:466
+#: ../Pinta.Tools/Tools/TextTool.cs:469
 msgid "Bevel Join"
 msgstr ""
 
@@ -251,7 +251,7 @@ msgid "Blurs"
 msgstr "Bulanıklıklar"
 
 #. Translators: 'Bold' (700) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:305
+#: ../Pinta.Tools/Tools/TextTool.cs:308
 msgid "Bold"
 msgstr "Kalın"
 
@@ -261,7 +261,7 @@ msgid "Bonfire"
 msgstr "Şenlik Ateşi"
 
 #. Translators: 'Book' (380) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:281
+#: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Book"
 msgstr ""
 
@@ -290,7 +290,7 @@ msgstr "Parlaklık / Kontrast"
 msgid "Brush Size"
 msgstr "Fırça Boyutu"
 
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:126
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:129
 msgid "Brush width"
 msgstr "Fırça boyutu"
 
@@ -315,7 +315,7 @@ msgstr "Yüzde :"
 
 #: ../Pinta.Core/Actions/EditActions.cs:522
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:392
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "İptal"
@@ -328,7 +328,7 @@ msgstr "Tuval"
 msgid "Canvas Grid Settings"
 msgstr "Tuval Izgarası Ayarları"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:124
+#: ../Pinta.Core/Actions/ViewActions.cs:125
 msgid "Canvas Grid..."
 msgstr "Tuval Izgarası..."
 
@@ -348,7 +348,7 @@ msgstr "Hücreler"
 msgid "Center"
 msgstr "Orta"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:377
+#: ../Pinta.Tools/Tools/TextTool.cs:380
 msgid "Center Align"
 msgstr "Ortala"
 
@@ -370,18 +370,21 @@ msgstr "Sağ Orta"
 msgid "Centered"
 msgstr "Ortalanmış"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:228
 msgid "Centimeters"
 msgstr "Santimetre"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:365
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
-msgid "Change brush width. Shortcut keys: [ ]"
-msgstr "Fırça genişliğini değiştir. Kısayol tuşu: []"
+msgid "Change brush width."
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
-msgid "Change font size. Shortcut keys: [ ]"
-msgstr "Yazı tipi boyutunu genişliğini değiştir. Kısayol tuşu: []"
+msgid "Change font size."
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+msgid "Change outline width."
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -453,23 +456,23 @@ msgstr "Görüntüyü hareket ettirmek için tıklayın ve sürükleyin."
 msgid "Click to reset primary and secondary color."
 msgstr "Birincil ve ikincil rengi sıfırlamak için tıklayın."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:582
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:333
 msgid "Click to select primary color."
 msgstr "Birincil renk seçmek için tıklayın."
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:50
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
 msgid "Click to select secondary color."
 msgstr "İkincil renk seçmek için tıklayın."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:424
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:340
 msgid "Click to switch between primary and secondary color."
 msgstr "Birincil ve ikincil renk arasında geçiş yapmak için tıklayın."
@@ -481,7 +484,7 @@ msgstr "Birincil ve ikincil renk arasında geçiş yapmak için tıklayın."
 msgid "Clipboard"
 msgstr "Pano"
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:55
 msgid "Clone Stamp"
 msgstr "Klonlama Aracı"
 
@@ -532,7 +535,7 @@ msgstr "Renkli Renk Geçişi"
 msgid "Color Mode"
 msgstr "Renk Modu"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:57
 msgid "Color Picker"
 msgstr "Renk Seçici"
 
@@ -544,7 +547,7 @@ msgstr "Renk Dizisi"
 msgid "Color Saturation"
 msgstr "Renk Doygunluğu"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Core/Actions/ViewActions.cs:254
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -612,8 +615,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "{1}'den \"{0}\" katmanı aktarılamadı"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:166
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:428
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:440
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Dosya açılamadı: {0}"
@@ -653,7 +656,7 @@ msgid "Cut"
 msgstr "Kes"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:250
+#: ../Pinta.Core/Actions/ViewActions.cs:251
 msgid "Dark"
 msgstr "Koyu"
 
@@ -666,7 +669,7 @@ msgid "Dash"
 msgstr "Seçke"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:246
+#: ../Pinta.Core/Actions/ViewActions.cs:247
 msgid "Default"
 msgstr "Öntanımlı"
 
@@ -675,7 +678,7 @@ msgstr "Öntanımlı"
 msgid "Delete Layer"
 msgstr "Katmanı Sil"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:682
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:690
 msgid "Deleted"
 msgstr "Silindi"
 
@@ -724,7 +727,7 @@ msgstr "Boz"
 msgid "Dithering"
 msgstr "Titreme"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:216
 msgid "Do not switch tool"
 msgstr "Aracı değiştirme"
 
@@ -758,7 +761,7 @@ msgstr "Kenar Saptama"
 msgid "Effe_cts"
 msgstr "_Efektler"
 
-#: ../Pinta/MainWindow.cs:447
+#: ../Pinta/MainWindow.cs:446
 msgid "Effects"
 msgstr "Efektler"
 
@@ -769,7 +772,7 @@ msgstr "Elektrik"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:276
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
-#: ../Pinta.Tools/Tools/EllipseTool.cs:45
+#: ../Pinta.Tools/Tools/EllipseTool.cs:43
 msgid "Ellipse"
 msgstr "Elips"
 
@@ -791,7 +794,7 @@ msgstr ""
 msgid "Erase Selection"
 msgstr "Seçimi Sil"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:51
+#: ../Pinta.Tools/Tools/EraserTool.cs:62
 msgid "Eraser"
 msgstr "Silgi"
 
@@ -833,7 +836,7 @@ msgstr "Eklenti başlatılamadı"
 msgid "Failed to load extension package"
 msgstr "Uzantı paketi yüklenemedi"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
 msgid "Failed to open image"
 msgstr "Görüntü açılamadı"
 
@@ -862,7 +865,7 @@ msgstr "Hata Bildir"
 msgid "Files to open"
 msgstr "Açılacak dosyalar"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:415
+#: ../Pinta.Tools/Tools/TextTool.cs:418
 msgid "Fill Background"
 msgstr "Arkaplanı Doldur"
 
@@ -875,23 +878,23 @@ msgstr "Nesne Arka Planını Doldur"
 msgid "Fill Selection"
 msgstr "Seçimi Doldur"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:226
 msgid "Fill Shape"
 msgstr "Şekli Doldur"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:327
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Style"
 msgstr "Stili Doldur"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:227
 msgid "Fill and Outline Shape"
 msgstr "Dolgu ve Anahat Şekli"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1109
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1395
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1117
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1403
 #: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Finalized"
 msgstr "Sonlandırıldı"
@@ -976,7 +979,7 @@ msgstr "Serbest Biçimli Şekil"
 msgid "Frosted Glass"
 msgstr "Buzlu Cam"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:164
+#: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Fullscreen"
 msgstr "Tam Ekran"
 
@@ -1025,7 +1028,7 @@ msgid "Hard Light"
 msgstr "Şiddetli Işık"
 
 #. Translators: 'Heavy' (900) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:317
+#: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Heavy"
 msgstr ""
 
@@ -1036,11 +1039,12 @@ msgstr ""
 msgid "Height:"
 msgstr "Yükseklik:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:363
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:313
 msgid "Hex"
 msgstr "Onaltılık"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Hide Layer"
 msgstr "Katmanı Gizle"
 
@@ -1075,7 +1079,7 @@ msgstr "Yatay kırmızı (K)"
 msgid "Hue"
 msgstr "Ton"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
 msgid "Hue & Sat"
 msgstr "Renk Tonu & Doygunluk"
 
@@ -1087,7 +1091,7 @@ msgstr "Ton / Doygunluk"
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO dosyası 255 x 255 pikselden büyük olamaz."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "If enabled, the Value component is applied to the color wheel."
 msgstr "Etkinleştirildiğinde, Değer bileşeni renk çarkına uygulanır."
 
@@ -1095,7 +1099,7 @@ msgstr "Etkinleştirildiğinde, Değer bileşeni renk çarkına uygulanır."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Kaydetmezseniz tüm değişiklikler kalıcı olarak kaybolacak."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:459
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:254 ../Pinta/MainWindow.cs:456
 msgid "Image"
 msgstr "Görüntü"
 
@@ -1147,7 +1151,7 @@ msgstr ""
 "Seçimi tamamlamak için Enter tuşuna basın.\n"
 "Son noktayı silmek için Backspace tuşuna basın."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Inches"
 msgstr "İnç"
 
@@ -1210,7 +1214,7 @@ msgstr "Renkleri Ters Çevir"
 msgid "Invert Selection"
 msgstr "Seçimi Tersine Çevir"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:337
+#: ../Pinta.Tools/Tools/TextTool.cs:340
 msgid "Italic"
 msgstr "İtalik"
 
@@ -1239,19 +1243,15 @@ msgstr "Kement Modu"
 msgid "Lasso Select"
 msgstr "Kement Seçim"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:253
 msgid "Layer"
 msgstr "Katman"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Hidden"
-msgstr "Tabakayı Gizle"
-
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:101
 msgid "Layer Opacity"
 msgstr "Katman Saydamlığı"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:121
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "Katman Özellikleri"
@@ -1259,10 +1259,6 @@ msgstr "Katman Özellikleri"
 #: ../Pinta.Core/Actions/LayerActions.cs:125
 msgid "Layer Properties..."
 msgstr "Katman Özellikleri..."
-
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Shown"
-msgstr "Tabakayı Göster"
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:133
@@ -1274,7 +1270,7 @@ msgstr "Katman {0}"
 msgid "Layers"
 msgstr "Katmanlar"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:365
+#: ../Pinta.Tools/Tools/TextTool.cs:368
 msgid "Left Align"
 msgstr "Sola Hizalı"
 
@@ -1309,7 +1305,7 @@ msgstr ""
 "Seçim anahattını tek bir piksel taşımak için ok tuşlarını kullanın."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:58
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1353,14 +1349,14 @@ msgstr ""
 "İkincil rengi kullanmak için Sağ tıkı kullanın."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:67
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
 "Birincil renkle çizmek için sol, ikincil renkle çizmek için sağ tıklayın."
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:57
+#: ../Pinta.Tools/Tools/EraserTool.cs:68
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
@@ -1390,7 +1386,7 @@ msgstr ""
 "İkincil rengi birincil renk ile değiştirmek için Sol tıkı kullanın.\n"
 "Sağ tık ile tersine çevirin."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:50
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:59
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
@@ -1443,8 +1439,8 @@ msgstr "Lisans"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:248
-#: ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Light"
 msgstr "Açık"
 
@@ -1465,7 +1461,7 @@ msgstr "Aydınlık"
 msgid "Lime Lemon"
 msgstr "Misket Limonu"
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:43
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:42
 msgid "Line/Curve"
 msgstr "Çizgi/Eğri"
 
@@ -1490,7 +1486,7 @@ msgstr "Bağlı"
 msgid "Luminosity"
 msgstr "Parlaklık"
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:47
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Magic Wand Select"
 msgstr "Sihirli Değnek Seçimi"
 
@@ -1521,11 +1517,11 @@ msgid "Median"
 msgstr "Ortalama"
 
 #. Translators: 'Medium' (500) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:293
+#: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Medium"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:130
+#: ../Pinta.Core/Actions/ViewActions.cs:131
 msgid "Menu Bar"
 msgstr "Menü Çubuğu"
 
@@ -1539,7 +1535,7 @@ msgid "Minimum Size"
 msgstr "En Küçük Boyut"
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:454
+#: ../Pinta.Tools/Tools/TextTool.cs:457
 msgid "Miter Join"
 msgstr ""
 
@@ -1547,7 +1543,7 @@ msgstr ""
 msgid "Mode"
 msgstr "Mod"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:926
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:934
 msgid "Modified"
 msgstr "Değiştirildi"
 
@@ -1593,7 +1589,7 @@ msgstr "En Yakın Komşu"
 msgid "New"
 msgstr "Yeni"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:139
 #: ../Pinta/Dialogs/NewImageDialog.cs:232
 msgid "New Image"
 msgstr "Yeni Görüntü"
@@ -1624,12 +1620,12 @@ msgstr "Parazit"
 #. Translators: 'Normal' (400) refers to the font-weight text property
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:184
-#: ../Pinta.Tools/Tools/TextTool.cs:287 ../Pinta.Tools/Tools/TextTool.cs:412
+#: ../Pinta.Tools/Tools/EraserTool.cs:336 ../Pinta.Tools/Tools/TextTool.cs:184
+#: ../Pinta.Tools/Tools/TextTool.cs:290 ../Pinta.Tools/Tools/TextTool.cs:415
 msgid "Normal"
 msgstr "Normal"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:341
 msgid "Normal Blending"
 msgstr "Normal Harmanlama"
 
@@ -1637,7 +1633,7 @@ msgstr "Normal Harmanlama"
 msgid "Normal Size"
 msgstr "Normal Boyut"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:413
+#: ../Pinta.Tools/Tools/TextTool.cs:416
 msgid "Normal and Outline"
 msgstr "Normal Anahat"
 
@@ -1650,7 +1646,7 @@ msgstr "Hücre Sayısı"
 msgid "Number of threads to use for rendering"
 msgstr "Görselleştirme için kullanılacak iş parçacığı sayısı"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:387
 msgid "OK"
 msgstr "TAMAM"
 
@@ -1690,7 +1686,7 @@ msgstr "Aç"
 msgid "Open Curve Shape"
 msgstr "Açık Eğri Şekli"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:351
 msgid "Open Image"
 msgstr "Görüntüyü Aç"
 
@@ -1720,7 +1716,7 @@ msgstr "Yönelim:"
 msgid "Original"
 msgstr "Özgün"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:414
+#: ../Pinta.Tools/Tools/TextTool.cs:417
 msgid "Outline"
 msgstr "Anahat"
 
@@ -1736,13 +1732,13 @@ msgstr "Kenar Anahattı"
 msgid "Outline Object"
 msgstr "Nesne Anahattı"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:225
 msgid "Outline Shape"
 msgstr "Anahat Şekli"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
-#: ../Pinta.Tools/Tools/TextTool.cs:428
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:353
+#: ../Pinta.Tools/Tools/TextTool.cs:431
 msgid "Outline width"
 msgstr "Anahat genişliği"
 
@@ -1758,7 +1754,7 @@ msgstr "Çkış Histogram"
 msgid "Overlay"
 msgstr "Kaplama"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Overwrite"
 msgstr "Üzerine yaz"
 
@@ -1766,7 +1762,7 @@ msgstr "Üzerine yaz"
 msgid "Paint Bucket"
 msgstr "Boya Kovası"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:65
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
 msgid "Paintbrush"
 msgstr "Boya fırçası"
 
@@ -1878,7 +1874,7 @@ msgstr ""
 "düzenlemenize yardımcı olacak sınırsız katmanlar oluşturma yeteneğine de "
 "sahiptir."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:441
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta aşağıdaki dosya biçimlerini destekler:"
 
@@ -1890,7 +1886,7 @@ msgstr "Pinta aşağıdaki palet biçimlerini destekler:"
 msgid "Pixelate"
 msgstr "Pikselleştir"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:225
+#: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Pixels"
 msgstr "Piksel"
 
@@ -1904,8 +1900,8 @@ msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 "Değişikliklerin etkili olabilmesi için lütfen Pinta'yı yeniden başlatın."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:620
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:823
 msgid "Point Added"
 msgstr "Nokta Eklendi"
 
@@ -1919,7 +1915,7 @@ msgstr "Nokta Düzeni"
 msgid "Point Color"
 msgstr "Nokta Rengi"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:671
 msgid "Point Deleted"
 msgstr "Nokta Silindi"
 
@@ -1970,6 +1966,36 @@ msgstr "Ön Ayar Paletleri"
 msgid "Preset:"
 msgstr "Öndeğer:"
 
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+#, csharp-format
+msgid "Press {0} to decrease brush size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:245
+#, csharp-format
+msgid "Press {0} to decrease font size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
+#, csharp-format
+msgid "Press {0} to decrease outline size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
+#, csharp-format
+msgid "Press {0} to increase brush size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:246
+#, csharp-format
+msgid "Press {0} to increase font size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
+#, csharp-format
+msgid "Press {0} to increase outline size"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
 msgstr "Önizleme"
@@ -2019,7 +2045,7 @@ msgstr "Işınsal Renk Geçişi"
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:85
 msgid "Radius"
 msgstr "Yarıçap"
 
@@ -2067,7 +2093,7 @@ msgstr "En Son Kullanılan Renkler"
 msgid "Recolor"
 msgstr "Tekrar renklendir"
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+#: ../Pinta.Tools/Tools/RectangleTool.cs:42
 msgid "Rectangle"
 msgstr "Dikdörtgen"
 
@@ -2117,7 +2143,7 @@ msgstr "MIT X11 Lisansı altında dağıtılmaktadır."
 msgid "Relief"
 msgstr "Kabartma"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Rename Layer"
 msgstr "Katmanı Yeniden Adlandır"
 
@@ -2151,7 +2177,7 @@ msgstr "Yeniden Tohumla"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:375
 msgid "Reset"
 msgstr "Sıfırla"
 
@@ -2202,7 +2228,7 @@ msgstr "Renk Düzenini Tersine Çevir"
 msgid "Reverse Color Sorting"
 msgstr "Renk Sıralamasını Tersine Çevir"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:389
+#: ../Pinta.Tools/Tools/TextTool.cs:392
 msgid "Right Align"
 msgstr "Sağa Hizalı"
 
@@ -2240,7 +2266,7 @@ msgid "Roughness"
 msgstr "Pürüzlülük"
 
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:460
+#: ../Pinta.Tools/Tools/TextTool.cs:463
 msgid "Round Join"
 msgstr ""
 
@@ -2252,19 +2278,19 @@ msgstr "Yuvarlanmış Çizgi Serileri"
 msgid "Rounded Line Shape"
 msgstr "Yuvarlatılmış Çizgi Şekli"
 
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
 msgstr "Dairesel Dikdörtgen"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:230
+#: ../Pinta.Core/Actions/ViewActions.cs:231
 msgid "Ruler Units"
 msgstr "Cetvel Birimi"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:148
+#: ../Pinta.Core/Actions/ViewActions.cs:149
 msgid "Rulers"
 msgstr "Cetvel"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
 msgid "Sampling"
 msgstr "Örnekliyor"
 
@@ -2273,7 +2299,7 @@ msgstr "Örnekliyor"
 msgid "Sat"
 msgstr "Doygunluk"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:277
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
 msgid "Sat & Value"
 msgstr "Doygunluk & Değer"
 
@@ -2339,12 +2365,12 @@ msgid "Selected Colors"
 msgstr "Seçilen Renkler"
 
 #. Translators: 'Semibold' (600) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:299
+#: ../Pinta.Tools/Tools/TextTool.cs:302
 msgid "Semibold"
 msgstr ""
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:275
+#: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Semilight"
 msgstr ""
 
@@ -2369,15 +2395,21 @@ msgid "Sharpen"
 msgstr "Keskinleştir"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:425
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:341
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:44
 msgid "Shortcut key"
 msgstr "Kısayol tuşu"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
 msgstr "Kısayol tuşları"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
+#: ../Pinta.Tools/Tools/TextTool.cs:244
+msgid "Shortcut keys:"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
@@ -2387,7 +2419,8 @@ msgstr "Aksonometrik Izgarayı Göster"
 msgid "Show Grid"
 msgstr "Izgarayı Göster"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Show Layer"
 msgstr "Katmanı Göster"
 
@@ -2396,11 +2429,11 @@ msgstr "Katmanı Göster"
 msgid "Show Points"
 msgstr "Noktaları Göster"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:270
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:192
 msgid "Show Value"
 msgstr "Değeri Göster"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:242
+#: ../Pinta.Core/Actions/ViewActions.cs:243
 msgid "Show/Hide"
 msgstr "Göster/Gizle"
 
@@ -2414,7 +2447,7 @@ msgstr "Sierra"
 msgid "Sierra Lite"
 msgstr "Sierra Lite"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:235
 msgid "Single Pixel"
 msgstr "Tek Piksel"
 
@@ -2431,7 +2464,7 @@ msgstr ""
 msgid "Small Caps"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:326
+#: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
 msgstr "Pürüzsüz"
 
@@ -2455,7 +2488,7 @@ msgstr "Sıçrat"
 msgid "Squares"
 msgstr "Kareler"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:136
+#: ../Pinta.Core/Actions/ViewActions.cs:137
 msgid "Status Bar"
 msgstr "Durum Çubuğu"
 
@@ -2476,11 +2509,11 @@ msgstr "Stucki"
 msgid "Stylize"
 msgstr "Stilize et"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:218
 msgid "Switch to Pencil tool"
 msgstr "Kalem aracına geçin"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:217
 msgid "Switch to previous tool"
 msgstr "Önceki araca geç"
 
@@ -2492,7 +2525,7 @@ msgstr "Metin"
 msgid "Text - Finalize"
 msgstr "Metin - Sonlandır"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:403
+#: ../Pinta.Tools/Tools/TextTool.cs:406
 msgid "Text Style"
 msgstr "Yazı Stili"
 
@@ -2570,7 +2603,7 @@ msgid "Thickness"
 msgstr "Kalınlık"
 
 #. Translators: 'Thin' (100) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:257
+#: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Thin"
 msgstr ""
 
@@ -2607,11 +2640,11 @@ msgstr ""
 msgid "Tolerance"
 msgstr "Tolerans"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:374
+#: ../Pinta.Core/Managers/ToolManager.cs:351
 msgid "Tool"
 msgstr "Araç"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:142
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Tool Box"
 msgstr "Araç Kutusu"
 
@@ -2665,27 +2698,27 @@ msgstr "Bükme"
 msgid "Two-Row Sierra"
 msgstr "İki Sıralı Sierra"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:322
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:214
+#: ../Pinta.Tools/Tools/EraserTool.cs:332
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
 msgid "Type"
 msgstr "Tür"
 
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:311
+#: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Ultrabold"
 msgstr ""
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:323
+#: ../Pinta.Tools/Tools/TextTool.cs:326
 msgid "Ultraheavy"
 msgstr ""
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:263
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Ultralight"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:349
+#: ../Pinta.Tools/Tools/TextTool.cs:352
 msgid "Underline"
 msgstr "Altı çizili"
 
@@ -2722,7 +2755,7 @@ msgstr "Birleşim (+) ({0} + Sol Tıklama)"
 msgid "Unsaved Image {0}"
 msgstr "Kaydedilmemiş Görüntü {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:346
 msgid "Unsupported file format"
 msgstr "Desteklenmeyen dosya biçimi"
 
@@ -2774,7 +2807,7 @@ msgstr "Dikey yeşil (Y)"
 msgid "Vertical red (R)"
 msgstr "Dikey kırmızı (K)"
 
-#: ../Pinta/MainWindow.cs:465
+#: ../Pinta/MainWindow.cs:461
 msgid "View"
 msgstr "Görünüm"
 
@@ -2807,10 +2840,10 @@ msgstr "Beyaz"
 msgid "Width:"
 msgstr "Genişlik:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:207
-#: ../Pinta.Core/Actions/ViewActions.cs:395
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:365
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:374
+#: ../Pinta.Core/Actions/ViewActions.cs:208
+#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Pencere"
 
@@ -2829,7 +2862,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Sağ Tık)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:463
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "'{0}' öğesine erişiminiz yok."
@@ -2870,8 +2903,8 @@ msgstr "Seçime Büyüt"
 msgid "_Adjustments"
 msgstr "_Ayarlar"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
@@ -2899,8 +2932,8 @@ msgstr "_Yardım"
 msgid "_Image"
 msgstr "_Görüntü"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:219
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:223
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
@@ -2955,7 +2988,7 @@ msgstr ""
 "Oğuz Ersen"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:49
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:58
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr "merkezini ayarlamak için {0} + sol tık , boyamak için sol tık."
@@ -2980,10 +3013,22 @@ msgstr "{0} paleti ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:376
+#: ../Pinta.Core/Actions/ViewActions.cs:377
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Change brush width. Shortcut keys: [ ]"
+#~ msgstr "Fırça genişliğini değiştir. Kısayol tuşu: []"
+
+#~ msgid "Change font size. Shortcut keys: [ ]"
+#~ msgstr "Yazı tipi boyutunu genişliğini değiştir. Kısayol tuşu: []"
+
+#~ msgid "Layer Hidden"
+#~ msgstr "Tabakayı Gizle"
+
+#~ msgid "Layer Shown"
+#~ msgstr "Tabakayı Göster"
 
 #~ msgid "Click to select region of similar color."
 #~ msgstr "Benzer renkli bir bölge seçmek için tıklayın."

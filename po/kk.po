@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-01 00:35+0000\n"
+"POT-Creation-Date: 2026-05-01 00:45+0000\n"
 "PO-Revision-Date: 2026-03-18 00:23+0000\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <https://hosted.weblate.org/projects/pinta/pinta/kk/>\n"
@@ -31,19 +31,19 @@ msgstr " Ерекшелеу режимі: "
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:236
 msgid "3 x 3 Region"
 msgstr "3 x 3 аумағы"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:237
 msgid "5 x 5 Region"
 msgstr "5 x 5 аумағы"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:238
 msgid "7 x 7 Region"
 msgstr "7 x 7 аумағы"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "9 x 9 Region"
 msgstr "9 x 9 аумағы"
 
@@ -73,15 +73,15 @@ msgstr "Шу қосу"
 msgid "Add-in Manager..."
 msgstr "Қосымшалар менеджері..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:852
 msgid "Added"
 msgstr "Қосылды"
 
-#: ../Pinta/MainWindow.cs:453
+#: ../Pinta/MainWindow.cs:451
 msgid "Adjustments"
 msgstr "Түзетулер"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
 msgid "After select"
 msgstr "Таңдаудан кейін"
 
@@ -134,7 +134,7 @@ msgstr "Зәкір:"
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
-#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:53
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:52
@@ -145,11 +145,11 @@ msgstr "Бұрыш"
 msgid "Antialias"
 msgstr "Тегістеу"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:363
+#: ../Pinta.Core/Classes/BaseTool.cs:359
 msgid "Antialiasing Off"
 msgstr "Тегістеу сөндірулі"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:362
+#: ../Pinta.Core/Classes/BaseTool.cs:358
 msgid "Antialiasing On"
 msgstr "Тегістеу іске қосылған"
 
@@ -185,7 +185,7 @@ msgstr "Авто деңгей"
 msgid "Available in repository: {0}"
 msgstr "Репозиторийде қолжетімді: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "Фон"
 
@@ -211,7 +211,7 @@ msgid "Best Fit"
 msgstr "Ең қолайлы өлшем"
 
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:466
+#: ../Pinta.Tools/Tools/TextTool.cs:469
 msgid "Bevel Join"
 msgstr "Қиғаш бірігу"
 
@@ -249,7 +249,7 @@ msgid "Blurs"
 msgstr "Бұлыңғырлау"
 
 #. Translators: 'Bold' (700) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:305
+#: ../Pinta.Tools/Tools/TextTool.cs:308
 msgid "Bold"
 msgstr "Жуан"
 
@@ -259,7 +259,7 @@ msgid "Bonfire"
 msgstr "Гүлзар"
 
 #. Translators: 'Book' (380) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:281
+#: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Book"
 msgstr "Кітап"
 
@@ -288,7 +288,7 @@ msgstr "Жарықтылық / Контраст"
 msgid "Brush Size"
 msgstr "Қылқалам өлшемі"
 
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:126
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:129
 msgid "Brush width"
 msgstr "Қылқалам ені"
 
@@ -313,7 +313,7 @@ msgstr "Пайыз бойынша:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:522
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:392
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Бас тарту"
@@ -326,7 +326,7 @@ msgstr "Кенеп"
 msgid "Canvas Grid Settings"
 msgstr "Кенеп торының баптаулары"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:124
+#: ../Pinta.Core/Actions/ViewActions.cs:125
 msgid "Canvas Grid..."
 msgstr "Кенеп торы..."
 
@@ -346,7 +346,7 @@ msgstr "Ұяшықтар"
 msgid "Center"
 msgstr "Ортасы"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:377
+#: ../Pinta.Tools/Tools/TextTool.cs:380
 msgid "Center Align"
 msgstr "Ортасына туралау"
 
@@ -368,18 +368,21 @@ msgstr "Ортаңғы оң жақ"
 msgid "Centered"
 msgstr "Ортасына келтірілген"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:228
 msgid "Centimeters"
 msgstr "Сантиметрлер"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:365
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
-msgid "Change brush width. Shortcut keys: [ ]"
-msgstr "Қылқалам енін өзгерту. Жарлық пернелері: [ ]"
+msgid "Change brush width."
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
-msgid "Change font size. Shortcut keys: [ ]"
-msgstr "Қаріп өлшемін өзгерту. Жарлық пернелері: [ ]"
+msgid "Change font size."
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+msgid "Change outline width."
+msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -450,23 +453,23 @@ msgstr "Сурет бойынша шарлау үшін шертіп, тарты
 msgid "Click to reset primary and secondary color."
 msgstr "Негізгі және қосымша түсті бастапқы күйге қайтару үшін шертіңіз."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:582
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:333
 msgid "Click to select primary color."
 msgstr "Негізгі түсті таңдау үшін шертіңіз."
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:50
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
 msgid "Click to select secondary color."
 msgstr "Қосымша түсті таңдау үшін шертіңіз."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:424
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:340
 msgid "Click to switch between primary and secondary color."
 msgstr "Негізгі және қосымша түстер арасында ауысу үшін шертіңіз."
@@ -478,7 +481,7 @@ msgstr "Негізгі және қосымша түстер арасында а�
 msgid "Clipboard"
 msgstr "Алмасу буфері"
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:55
 msgid "Clone Stamp"
 msgstr "Клондық мөртабан"
 
@@ -529,7 +532,7 @@ msgstr "Түрлі-түсті градиент"
 msgid "Color Mode"
 msgstr "Түс режимі"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:57
 msgid "Color Picker"
 msgstr "Түс таңдау"
 
@@ -541,7 +544,7 @@ msgstr "Түстер ауқымы"
 msgid "Color Saturation"
 msgstr "Түс қанықтылығы"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Core/Actions/ViewActions.cs:254
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -609,8 +612,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "\"{0}\" қабатын {1} ішінен импорттау мүмкін емес"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:166
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:428
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:440
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Файлды ашу мүмкін емес: {0}"
@@ -650,7 +653,7 @@ msgid "Cut"
 msgstr "Қиып алу"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:250
+#: ../Pinta.Core/Actions/ViewActions.cs:251
 msgid "Dark"
 msgstr "Қараңғы"
 
@@ -663,7 +666,7 @@ msgid "Dash"
 msgstr "Штрих"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:246
+#: ../Pinta.Core/Actions/ViewActions.cs:247
 msgid "Default"
 msgstr "Бастапқы"
 
@@ -672,7 +675,7 @@ msgstr "Бастапқы"
 msgid "Delete Layer"
 msgstr "Қабатты өшіру"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:682
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:690
 msgid "Deleted"
 msgstr "Өшірілді"
 
@@ -721,7 +724,7 @@ msgstr "Бұрмалау"
 msgid "Dithering"
 msgstr "Түстерді жақындату"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:216
 msgid "Do not switch tool"
 msgstr "Сайманды ауыстырмау"
 
@@ -755,7 +758,7 @@ msgstr "Жиектерді анықтау"
 msgid "Effe_cts"
 msgstr "Әс_ерлер"
 
-#: ../Pinta/MainWindow.cs:447
+#: ../Pinta/MainWindow.cs:446
 msgid "Effects"
 msgstr "Әсерлер"
 
@@ -766,7 +769,7 @@ msgstr "Электрлік"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:276
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
-#: ../Pinta.Tools/Tools/EllipseTool.cs:45
+#: ../Pinta.Tools/Tools/EllipseTool.cs:43
 msgid "Ellipse"
 msgstr "Эллипс"
 
@@ -789,7 +792,7 @@ msgstr ""
 msgid "Erase Selection"
 msgstr "Ерекшелеуді өшіру"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:51
+#: ../Pinta.Tools/Tools/EraserTool.cs:62
 msgid "Eraser"
 msgstr "Өшіргіш"
 
@@ -831,7 +834,7 @@ msgstr "Қосымшаны инициализациялау сәтсіз аяқ�
 msgid "Failed to load extension package"
 msgstr "Кеңейту дестесін жүктеу сәтсіз аяқталды"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
 msgid "Failed to open image"
 msgstr "Суретті ашу сәтсіз аяқталды"
 
@@ -860,7 +863,7 @@ msgstr "Қате туралы хабарлау"
 msgid "Files to open"
 msgstr "Ашылатын файлдар"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:415
+#: ../Pinta.Tools/Tools/TextTool.cs:418
 msgid "Fill Background"
 msgstr "Фонды бояу"
 
@@ -873,23 +876,23 @@ msgstr "Объект фонын бояу"
 msgid "Fill Selection"
 msgstr "Ерекшелеуді бояу"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:226
 msgid "Fill Shape"
 msgstr "Пішінді бояу"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:327
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Style"
 msgstr "Бояу стилі"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:227
 msgid "Fill and Outline Shape"
 msgstr "Пішінді бояу және контурын сызу"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1109
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1395
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1117
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1403
 #: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Finalized"
 msgstr "Аяқталды"
@@ -972,7 +975,7 @@ msgstr "Еркін пішін"
 msgid "Frosted Glass"
 msgstr "Күңгірт шыны"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:164
+#: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Fullscreen"
 msgstr "Толық экран"
 
@@ -1021,7 +1024,7 @@ msgid "Hard Light"
 msgstr "Қатты жарық"
 
 #. Translators: 'Heavy' (900) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:317
+#: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Heavy"
 msgstr "Ауыр"
 
@@ -1032,11 +1035,12 @@ msgstr "Ауыр"
 msgid "Height:"
 msgstr "Биіктігі:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:363
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:313
 msgid "Hex"
 msgstr "Hex"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Hide Layer"
 msgstr "Қабатты жасыру"
 
@@ -1071,7 +1075,7 @@ msgstr "Горизонталды қызыл (R)"
 msgid "Hue"
 msgstr "Түс реңі"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
 msgid "Hue & Sat"
 msgstr "Рең және қанықтылық"
 
@@ -1083,7 +1087,7 @@ msgstr "Түс реңі / Қанықтылық"
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO файлдары 255 x 255 пиксельден аспауы керек."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "If enabled, the Value component is applied to the color wheel."
 msgstr "Егер қосылса, Мән компоненті түстер дөңгелегіне қолданылады."
 
@@ -1091,7 +1095,7 @@ msgstr "Егер қосылса, Мән компоненті түстер дөң
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Сақтамасаңыз, барлық өзгерістер біржола жоғалады."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:459
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:254 ../Pinta/MainWindow.cs:456
 msgid "Image"
 msgstr "Сурет"
 
@@ -1142,7 +1146,7 @@ msgstr ""
 "Ерекшелеуді аяқтау үшін Enter басыңыз.\n"
 "Соңғы нүктені өшіру үшін Backspace басыңыз."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Inches"
 msgstr "Дюймдер"
 
@@ -1205,7 +1209,7 @@ msgstr "Түстерді инверсиялау"
 msgid "Invert Selection"
 msgstr "Ерекшелеуді инверсиялау"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:337
+#: ../Pinta.Tools/Tools/TextTool.cs:340
 msgid "Italic"
 msgstr "Көлбеу"
 
@@ -1234,19 +1238,15 @@ msgstr "Лассо режимі"
 msgid "Lasso Select"
 msgstr "Лассомен ерекшелеу"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:253
 msgid "Layer"
 msgstr "Қабат"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Hidden"
-msgstr "Қабат жасырылған"
-
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:101
 msgid "Layer Opacity"
 msgstr "Қабат мөлдірсіздігі"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:121
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "Қабат қасиеттері"
@@ -1254,10 +1254,6 @@ msgstr "Қабат қасиеттері"
 #: ../Pinta.Core/Actions/LayerActions.cs:125
 msgid "Layer Properties..."
 msgstr "Қабат қасиеттері..."
-
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Shown"
-msgstr "Қабат көрсетілген"
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:133
@@ -1269,7 +1265,7 @@ msgstr "Қабат {0}"
 msgid "Layers"
 msgstr "Қабаттар"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:365
+#: ../Pinta.Tools/Tools/TextTool.cs:368
 msgid "Left Align"
 msgstr "Сол жаққа туралау"
 
@@ -1306,7 +1302,7 @@ msgstr ""
 "пайдаланыңыз."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:58
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1349,7 +1345,7 @@ msgstr ""
 "Қосымша түсті пайдалану үшін оң жақпен шертіңіз."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:67
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1357,7 +1353,7 @@ msgstr ""
 "Негізгі түспен салу үшін сол жақпен, қосымша түспен салу үшін оң жақпен "
 "шертіңіз."
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:57
+#: ../Pinta.Tools/Tools/EraserTool.cs:68
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
@@ -1387,7 +1383,7 @@ msgstr ""
 "Қосымша түсті негізгі түспен алмастыру үшін сол жақпен шертіңіз.\n"
 "Керісінше орындау үшін оң жақпен шертіңіз."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:50
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:59
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
@@ -1440,8 +1436,8 @@ msgstr "Лицензия"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:248
-#: ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Light"
 msgstr "Жеңіл"
 
@@ -1462,7 +1458,7 @@ msgstr "Ақшылдық"
 msgid "Lime Lemon"
 msgstr "Лайм лимон"
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:43
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:42
 msgid "Line/Curve"
 msgstr "Сызық/Қисық"
 
@@ -1487,7 +1483,7 @@ msgstr "Байланыстырылған"
 msgid "Luminosity"
 msgstr "Жарықтылық"
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:47
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Magic Wand Select"
 msgstr "Сиқырлы таяқшамен ерекшелеу"
 
@@ -1518,11 +1514,11 @@ msgid "Median"
 msgstr "Медиана"
 
 #. Translators: 'Medium' (500) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:293
+#: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Medium"
 msgstr "Орташа"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:130
+#: ../Pinta.Core/Actions/ViewActions.cs:131
 msgid "Menu Bar"
 msgstr "Мәзір жолағы"
 
@@ -1536,7 +1532,7 @@ msgid "Minimum Size"
 msgstr "Минималды өлшем"
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:454
+#: ../Pinta.Tools/Tools/TextTool.cs:457
 msgid "Miter Join"
 msgstr "Бұрыштық бірігу"
 
@@ -1544,7 +1540,7 @@ msgstr "Бұрыштық бірігу"
 msgid "Mode"
 msgstr "Режим"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:926
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:934
 msgid "Modified"
 msgstr "Өзгертілді"
 
@@ -1590,7 +1586,7 @@ msgstr "Ең жақын көрші"
 msgid "New"
 msgstr "Жаңа"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:139
 #: ../Pinta/Dialogs/NewImageDialog.cs:232
 msgid "New Image"
 msgstr "Жаңа сурет"
@@ -1621,12 +1617,12 @@ msgstr "Шу"
 #. Translators: 'Normal' (400) refers to the font-weight text property
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:184
-#: ../Pinta.Tools/Tools/TextTool.cs:287 ../Pinta.Tools/Tools/TextTool.cs:412
+#: ../Pinta.Tools/Tools/EraserTool.cs:336 ../Pinta.Tools/Tools/TextTool.cs:184
+#: ../Pinta.Tools/Tools/TextTool.cs:290 ../Pinta.Tools/Tools/TextTool.cs:415
 msgid "Normal"
 msgstr "Қалыпты"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:341
 msgid "Normal Blending"
 msgstr "Қалыпты араластыру"
 
@@ -1634,7 +1630,7 @@ msgstr "Қалыпты араластыру"
 msgid "Normal Size"
 msgstr "Қалыпты өлшем"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:413
+#: ../Pinta.Tools/Tools/TextTool.cs:416
 msgid "Normal and Outline"
 msgstr "Қалыпты және контур"
 
@@ -1647,7 +1643,7 @@ msgstr "Ұяшықтар саны"
 msgid "Number of threads to use for rendering"
 msgstr "Рендеринг үшін пайдаланылатын ағындар саны"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:387
 msgid "OK"
 msgstr "ОК"
 
@@ -1687,7 +1683,7 @@ msgstr "Ашу"
 msgid "Open Curve Shape"
 msgstr "Ашық қисық пішін"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:351
 msgid "Open Image"
 msgstr "Суретті ашу"
 
@@ -1717,7 +1713,7 @@ msgstr "Бағыты:"
 msgid "Original"
 msgstr "Бастапқы"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:414
+#: ../Pinta.Tools/Tools/TextTool.cs:417
 msgid "Outline"
 msgstr "Контур"
 
@@ -1733,13 +1729,13 @@ msgstr "Жиек контуры"
 msgid "Outline Object"
 msgstr "Объект контуры"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:225
 msgid "Outline Shape"
 msgstr "Пішін контуры"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
-#: ../Pinta.Tools/Tools/TextTool.cs:428
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:353
+#: ../Pinta.Tools/Tools/TextTool.cs:431
 msgid "Outline width"
 msgstr "Контур ені"
 
@@ -1755,7 +1751,7 @@ msgstr "Шығыс гистограммасы"
 msgid "Overlay"
 msgstr "Қабаттау"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Overwrite"
 msgstr "Үстінен жазу"
 
@@ -1763,7 +1759,7 @@ msgstr "Үстінен жазу"
 msgid "Paint Bucket"
 msgstr "Бояу құтысы"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:65
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
 msgid "Paintbrush"
 msgstr "Қылқалам"
 
@@ -1875,7 +1871,7 @@ msgstr ""
 "және шығармашылығыңызды ұйымдастыруға көмектесетін шектеусіз қабаттар жасау "
 "мүмкіндігі бар."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:441
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta келесі файл пішімдерін қолдайды:"
 
@@ -1887,7 +1883,7 @@ msgstr "Pinta келесі палитра пішімдерін қолдайды:
 msgid "Pixelate"
 msgstr "Пикселизациялау"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:225
+#: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Pixels"
 msgstr "Пиксельдер"
 
@@ -1900,8 +1896,8 @@ msgstr "Пинья Колада"
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Өзгерістер іске асуы үшін Pinta қолданбасын қайта іске қосыңыз."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:620
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:823
 msgid "Point Added"
 msgstr "Нүкте қосылды"
 
@@ -1915,7 +1911,7 @@ msgstr "Нүктелердің орналасуы"
 msgid "Point Color"
 msgstr "Нүкте түсі"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:671
 msgid "Point Deleted"
 msgstr "Нүкте өшірілді"
 
@@ -1966,6 +1962,36 @@ msgstr "Дайын палитралар"
 msgid "Preset:"
 msgstr "Дайын жиынтық:"
 
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+#, csharp-format
+msgid "Press {0} to decrease brush size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:245
+#, csharp-format
+msgid "Press {0} to decrease font size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
+#, csharp-format
+msgid "Press {0} to decrease outline size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
+#, csharp-format
+msgid "Press {0} to increase brush size"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:246
+#, csharp-format
+msgid "Press {0} to increase font size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
+#, csharp-format
+msgid "Press {0} to increase outline size"
+msgstr ""
+
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
 msgstr "Алдын ала қарау"
@@ -2015,7 +2041,7 @@ msgstr "Радиалды градиент"
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:85
 msgid "Radius"
 msgstr "Радиус"
 
@@ -2063,7 +2089,7 @@ msgstr "Жақында пайдаланылған түстер"
 msgid "Recolor"
 msgstr "Түсті алмастыру"
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+#: ../Pinta.Tools/Tools/RectangleTool.cs:42
 msgid "Rectangle"
 msgstr "Тіктөртбұрыш"
 
@@ -2113,7 +2139,7 @@ msgstr "MIT X11 лицензиясы бойынша шығарылған."
 msgid "Relief"
 msgstr "Бедер"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Rename Layer"
 msgstr "Қабаттың атын өзгерту"
 
@@ -2147,7 +2173,7 @@ msgstr "Қайта жасау"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:375
 msgid "Reset"
 msgstr "Тастау"
 
@@ -2198,7 +2224,7 @@ msgstr "Кері түс схемасы"
 msgid "Reverse Color Sorting"
 msgstr "Кері түс сұрыптауы"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:389
+#: ../Pinta.Tools/Tools/TextTool.cs:392
 msgid "Right Align"
 msgstr "Оң жаққа туралау"
 
@@ -2236,7 +2262,7 @@ msgid "Roughness"
 msgstr "Бұдырлық"
 
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:460
+#: ../Pinta.Tools/Tools/TextTool.cs:463
 msgid "Round Join"
 msgstr "Дөңгелек бірігу"
 
@@ -2248,19 +2274,19 @@ msgstr "Дөңгеленген сызықтар сериясы"
 msgid "Rounded Line Shape"
 msgstr "Дөңгеленген сызық пішіні"
 
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
 msgstr "Дөңгеленген тіктөртбұрыш"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:230
+#: ../Pinta.Core/Actions/ViewActions.cs:231
 msgid "Ruler Units"
 msgstr "Сызғыш бірліктері"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:148
+#: ../Pinta.Core/Actions/ViewActions.cs:149
 msgid "Rulers"
 msgstr "Сызғыштар"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
 msgid "Sampling"
 msgstr "Дискретизация"
 
@@ -2269,7 +2295,7 @@ msgstr "Дискретизация"
 msgid "Sat"
 msgstr "Қанықт."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:277
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
 msgid "Sat & Value"
 msgstr "Қанықтылық және Мән"
 
@@ -2333,12 +2359,12 @@ msgid "Selected Colors"
 msgstr "Таңдалған түстер"
 
 #. Translators: 'Semibold' (600) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:299
+#: ../Pinta.Tools/Tools/TextTool.cs:302
 msgid "Semibold"
 msgstr "Жартылай жуан"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:275
+#: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Semilight"
 msgstr "Жартылай жеңіл"
 
@@ -2363,15 +2389,21 @@ msgid "Sharpen"
 msgstr "Өткірлік"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:425
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:341
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:44
 msgid "Shortcut key"
 msgstr "Жарлық пернесі"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
 msgstr "Жарлық пернелері"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
+#: ../Pinta.Tools/Tools/TextTool.cs:244
+msgid "Shortcut keys:"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
@@ -2381,7 +2413,8 @@ msgstr "Аксонометриялық торды көрсету"
 msgid "Show Grid"
 msgstr "Торды көрсету"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Show Layer"
 msgstr "Қабатты көрсету"
 
@@ -2390,11 +2423,11 @@ msgstr "Қабатты көрсету"
 msgid "Show Points"
 msgstr "Нүктелерді көрсету"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:270
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:192
 msgid "Show Value"
 msgstr "Мәнді көрсету"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:242
+#: ../Pinta.Core/Actions/ViewActions.cs:243
 msgid "Show/Hide"
 msgstr "Көрсету/Жасыру"
 
@@ -2408,7 +2441,7 @@ msgstr "Сьерра"
 msgid "Sierra Lite"
 msgstr "Сьерра (жеңіл)"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:235
 msgid "Single Pixel"
 msgstr "Жалғыз пиксель"
 
@@ -2425,7 +2458,7 @@ msgstr "Қиғаш сызық"
 msgid "Small Caps"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:326
+#: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
 msgstr "Жұмсақ"
 
@@ -2449,7 +2482,7 @@ msgstr "Шашырату"
 msgid "Squares"
 msgstr "Шаршылар"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:136
+#: ../Pinta.Core/Actions/ViewActions.cs:137
 msgid "Status Bar"
 msgstr "Қалып-күй жолағы"
 
@@ -2470,11 +2503,11 @@ msgstr "Штуки"
 msgid "Stylize"
 msgstr "Стилизациялау"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:218
 msgid "Switch to Pencil tool"
 msgstr "Қарындаш сайманына ауысу"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:217
 msgid "Switch to previous tool"
 msgstr "Алдыңғы сайманға ауысу"
 
@@ -2486,7 +2519,7 @@ msgstr "Мәтін"
 msgid "Text - Finalize"
 msgstr "Мәтін - Аяқтау"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:403
+#: ../Pinta.Tools/Tools/TextTool.cs:406
 msgid "Text Style"
 msgstr "Мәтін стилі"
 
@@ -2563,7 +2596,7 @@ msgid "Thickness"
 msgstr "Қалыңдығы"
 
 #. Translators: 'Thin' (100) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:257
+#: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Thin"
 msgstr "Жұқа"
 
@@ -2600,11 +2633,11 @@ msgstr ""
 msgid "Tolerance"
 msgstr "Шыдамдылық"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:374
+#: ../Pinta.Core/Managers/ToolManager.cs:351
 msgid "Tool"
 msgstr "Сайман"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:142
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Tool Box"
 msgstr "Саймандар қорабы"
 
@@ -2658,27 +2691,27 @@ msgstr "Бұрау"
 msgid "Two-Row Sierra"
 msgstr "Екі жолды Сьерра"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:322
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:214
+#: ../Pinta.Tools/Tools/EraserTool.cs:332
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
 msgid "Type"
 msgstr "Түрі"
 
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:311
+#: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Ultrabold"
 msgstr "Өте жуан"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:323
+#: ../Pinta.Tools/Tools/TextTool.cs:326
 msgid "Ultraheavy"
 msgstr "Өте ауыр"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:263
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Ultralight"
 msgstr "Өте жеңіл"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:349
+#: ../Pinta.Tools/Tools/TextTool.cs:352
 msgid "Underline"
 msgstr "Асты сызылған"
 
@@ -2715,7 +2748,7 @@ msgstr "Бірігу (+) ({0} + Сол жақ шерту)"
 msgid "Unsaved Image {0}"
 msgstr "Сақталмаған сурет {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:346
 msgid "Unsupported file format"
 msgstr "Қолдау көрсетілмейтін файл пішімі"
 
@@ -2768,7 +2801,7 @@ msgstr "Вертикалды жасыл (G)"
 msgid "Vertical red (R)"
 msgstr "Вертикалды қызыл (R)"
 
-#: ../Pinta/MainWindow.cs:465
+#: ../Pinta/MainWindow.cs:461
 msgid "View"
 msgstr "Көрініс"
 
@@ -2801,10 +2834,10 @@ msgstr "Ақ"
 msgid "Width:"
 msgstr "Ені:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:207
-#: ../Pinta.Core/Actions/ViewActions.cs:395
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:365
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:374
+#: ../Pinta.Core/Actions/ViewActions.cs:208
+#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Терезе"
 
@@ -2823,7 +2856,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + Оң жақ шерту)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:463
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "«{0}» нысанына қол жеткізу мүмкіндігіңіз жоқ."
@@ -2864,8 +2897,8 @@ msgstr "Ерекшелеуге дейін үлкейту"
 msgid "_Adjustments"
 msgstr "_Түзетулер"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
 #: ../Pinta/Actions/Edit/PasteAction.cs:223
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
@@ -2893,8 +2926,8 @@ msgstr "_Көмек"
 msgid "_Image"
 msgstr "_Сурет"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:219
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:223
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
@@ -2936,7 +2969,7 @@ msgid "translator-credits"
 msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:49
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:58
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr "{0} + сол жақ шерту — бастапқы нүктені орнату, сол жақ шерту — бояу."
@@ -2961,10 +2994,22 @@ msgstr "{0} палитрасы ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:376
+#: ../Pinta.Core/Actions/ViewActions.cs:377
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Change brush width. Shortcut keys: [ ]"
+#~ msgstr "Қылқалам енін өзгерту. Жарлық пернелері: [ ]"
+
+#~ msgid "Change font size. Shortcut keys: [ ]"
+#~ msgstr "Қаріп өлшемін өзгерту. Жарлық пернелері: [ ]"
+
+#~ msgid "Layer Hidden"
+#~ msgstr "Қабат жасырылған"
+
+#~ msgid "Layer Shown"
+#~ msgstr "Қабат көрсетілген"
 
 #~ msgid "Click to select region of similar color."
 #~ msgstr "Ұқсас түсті аймақты таңдау үшін шертіңіз."
