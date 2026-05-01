@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-01 00:45+0000\n"
-"PO-Revision-Date: 2025-11-11 11:55+0000\n"
-"Last-Translator: Emilio Baceda <elbaceda@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/"
-">\n"
+"PO-Revision-Date: 2026-05-01 10:25+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -95,12 +95,12 @@ msgstr "Alinear objeto"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "All Petite Caps"
-msgstr ""
+msgstr "Todas miniversales"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:196
 msgid "All Small Caps"
-msgstr ""
+msgstr "Todas versalitas"
 
 #: ../Pinta.Core/Actions/EditActions.cs:585
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -263,7 +263,7 @@ msgstr "Hoguera"
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Book"
-msgstr ""
+msgstr "Libro"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -376,7 +376,7 @@ msgstr "Centímetros"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width."
-msgstr ""
+msgstr "Cambiar la anchura del pincel."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Change font size."
@@ -552,7 +552,7 @@ msgstr "Saturación de color"
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:174
 msgid "Color Scheme"
-msgstr "Esquema de color"
+msgstr "Combinación de colores"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:194
 msgid "Color Scheme Edge Behavior"
@@ -1003,11 +1003,11 @@ msgstr "Degradado"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:127
 msgid "Gradient Created"
-msgstr "Gradiente Creado"
+msgstr "Degradado creado"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:128
 msgid "Gradient Modified"
-msgstr "Gradient Modificado"
+msgstr "Degradado modificado"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
@@ -1514,7 +1514,7 @@ msgstr "Lava marciana"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
-msgstr ""
+msgstr "Tamaño máximo"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
@@ -1523,7 +1523,7 @@ msgstr "Mediana"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Medium"
-msgstr ""
+msgstr "Medio"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:131
 msgid "Menu Bar"
@@ -1536,7 +1536,7 @@ msgstr "Combinar con la capa inferior"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
-msgstr ""
+msgstr "Tamaño mínimo"
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:457
@@ -1672,7 +1672,7 @@ msgstr "Desplazamiento"
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
-msgstr "Selección de offset"
+msgstr "Selección de desplazamiento"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:26
 msgid "Oil Painting"
@@ -1822,7 +1822,7 @@ msgstr "Percentil"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Petite Caps"
-msgstr ""
+msgstr "Miniversales"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -1915,7 +1915,7 @@ msgstr "Distribución de puntos"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:169
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:216
 msgid "Point Color"
-msgstr "Color del puntero"
+msgstr "Color de punto"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:671
 msgid "Point Deleted"
@@ -1924,7 +1924,7 @@ msgstr "Punto eliminado"
 #: ../Pinta.Effects/Effects/CellsEffect.cs:165
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:211
 msgid "Point Size"
-msgstr "Tamaño del puntero"
+msgstr "Tamaño de punto"
 
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:26
 msgid "Polar Inversion"
@@ -2367,12 +2367,12 @@ msgstr "Colores seleccionados"
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:302
 msgid "Semibold"
-msgstr ""
+msgstr "Seminegrita"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Semilight"
-msgstr ""
+msgstr "Semiclara"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
@@ -2409,7 +2409,7 @@ msgstr "Atajos de teclado"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
 #: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Shortcut keys:"
-msgstr ""
+msgstr "Atajos de teclado:"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
@@ -2431,7 +2431,7 @@ msgstr "Mostrar los puntos"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:192
 msgid "Show Value"
-msgstr "Mostrar Valor"
+msgstr "Mostrar valor"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:243
 msgid "Show/Hide"
@@ -2462,7 +2462,7 @@ msgstr ""
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:190
 msgid "Small Caps"
-msgstr ""
+msgstr "Versalitas"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
@@ -2606,7 +2606,7 @@ msgstr "Grosor"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Thin"
-msgstr ""
+msgstr "Fina"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
@@ -2707,7 +2707,7 @@ msgstr "Tipo"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Ultrabold"
-msgstr ""
+msgstr "Ultranegrita"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:326
@@ -2717,7 +2717,7 @@ msgstr ""
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Ultralight"
-msgstr ""
+msgstr "Ultraclara"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:352
 msgid "Underline"
