@@ -434,38 +434,33 @@ internal sealed class MainWindow
 	private void CreateMainToolBar ()
 	{
 		if (window_shell.HeaderBar is not null) {
-			var header_bar = window_shell.HeaderBar;
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = this.menu_bar,
-				IconName = Resources.StandardIcons.OpenMenu,
-				TooltipText = Translations.GetString ("Main Menu"),
-			});
+			var headerBar = window_shell.HeaderBar;
+			headerBar.PackEnd (GtkExtensions.CreateMenuButton (
+				this.menu_bar,
+				Resources.StandardIcons.OpenMenu,
+				Translations.GetString ("Main Menu")));
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = PintaCore.Chrome.EffectsMenu,
-				IconName = Resources.Icons.EffectsDefault,
-				TooltipText = Translations.GetString ("Effects"),
-			});
+			headerBar.PackEnd (GtkExtensions.CreateMenuButton (
+				PintaCore.Chrome.EffectsMenu,
+				Resources.Icons.EffectsDefault,
+				Translations.GetString ("Effects")));
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = PintaCore.Chrome.AdjustmentsMenu,
-				IconName = Resources.Icons.AdjustmentsDefault,
-				TooltipText = Translations.GetString ("Adjustments"),
-			});
+			headerBar.PackEnd (GtkExtensions.CreateMenuButton (
+				PintaCore.Chrome.AdjustmentsMenu,
+				Resources.Icons.AdjustmentsDefault,
+				Translations.GetString ("Adjustments")));
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = this.image_menu,
-				IconName = Resources.StandardIcons.ImageGeneric,
-				TooltipText = Translations.GetString ("Image"),
-			});
+			headerBar.PackEnd (GtkExtensions.CreateMenuButton (
+				this.image_menu,
+				Resources.StandardIcons.ImageGeneric,
+				Translations.GetString ("Image")));
 
-			header_bar.PackEnd (new Gtk.MenuButton () {
-				MenuModel = this.view_menu,
-				IconName = Resources.StandardIcons.ViewReveal,
-				TooltipText = Translations.GetString ("View"),
-			});
+			headerBar.PackEnd (GtkExtensions.CreateMenuButton (
+				this.view_menu,
+				Resources.StandardIcons.ViewReveal,
+				Translations.GetString ("View")));
 
-			PintaCore.Actions.CreateHeaderToolBar (header_bar);
+			PintaCore.Actions.CreateHeaderToolBar (headerBar);
 		} else {
 			var main_toolbar = window_shell.CreateToolBar ("main_toolbar");
 			PintaCore.Actions.CreateToolBar (main_toolbar);
