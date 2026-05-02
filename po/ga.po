@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-01 00:45+0000\n"
-"PO-Revision-Date: 2026-04-12 18:25+0000\n"
+"PO-Revision-Date: 2026-05-03 21:23+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
 "Language-Team: Irish <https://hosted.weblate.org/projects/pinta/pinta/ga/>\n"
 "Language: ga\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -375,15 +375,15 @@ msgstr "Ceintiméadar"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width."
-msgstr ""
+msgstr "Athraigh leithead an scuaibe."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Change font size."
-msgstr ""
+msgstr "Athraigh méid an chló."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
-msgstr ""
+msgstr "Athraigh leithead an imlíne."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -1985,32 +1985,32 @@ msgstr "Réamhshocrú:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush size"
-msgstr ""
+msgstr "Brúigh {0} chun méid na scuaibe a laghdú"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr ""
+msgstr "Brúigh {0} chun méid an chló a laghdú"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline size"
-msgstr ""
+msgstr "Brúigh {0} chun méid an imlíne a laghdú"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush size"
-msgstr ""
+msgstr "Brúigh {0} chun méid na scuaibe a mhéadú"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
 msgid "Press {0} to increase font size"
-msgstr ""
+msgstr "Brúigh {0} chun méid an chló a mhéadú"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline size"
-msgstr ""
+msgstr "Brúigh {0} chun méid an imlíne a mhéadú"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2423,7 +2423,7 @@ msgstr "Eochracha aicearra"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
 #: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Shortcut keys:"
-msgstr ""
+msgstr "Eochracha aicearra:"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
