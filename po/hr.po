@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-01 00:45+0000\n"
-"PO-Revision-Date: 2025-12-31 18:06+0000\n"
+"PO-Revision-Date: 2026-05-03 21:23+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/pinta/pinta/hr/"
-">\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/pinta/pinta/hr/>"
+"\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.17.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -96,12 +96,12 @@ msgstr "Poravnaj objekt"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "All Petite Caps"
-msgstr ""
+msgstr "Sve u male kapitalke"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:196
 msgid "All Small Caps"
-msgstr ""
+msgstr "Sve u kapitalke"
 
 #: ../Pinta.Core/Actions/EditActions.cs:585
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -216,7 +216,7 @@ msgstr "Najbolja prilagodba"
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:469
 msgid "Bevel Join"
-msgstr ""
+msgstr "Bevel spoj"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
@@ -254,7 +254,7 @@ msgstr "Zamučenja"
 #. Translators: 'Bold' (700) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:308
 msgid "Bold"
-msgstr "Podebljano"
+msgstr "Debeli (700)"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:31
@@ -264,7 +264,7 @@ msgstr "Logorska vatra"
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Book"
-msgstr ""
+msgstr "Knjižni (380)"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -351,7 +351,7 @@ msgstr "Sredina"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:380
 msgid "Center Align"
-msgstr "Poravnaj u sredinu"
+msgstr "Poravnaj centrirano"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:31
 msgid "Center Left"
@@ -377,15 +377,15 @@ msgstr "Centimetri"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width."
-msgstr ""
+msgstr "Promijeni širinu kista."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Change font size."
-msgstr ""
+msgstr "Promijeni veličinu fonta."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
-msgstr ""
+msgstr "Promijeni širinu konture."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -403,7 +403,7 @@ msgstr "Odaberi boju"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:369
 msgid "Choose Colors"
-msgstr ""
+msgstr "Odaberi boje"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:153
 msgid "Choose Palette Color"
@@ -466,6 +466,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"Klikni za biranje područja slične boje.\n"
+"Drži tipku Shift pritisnutom za korištenje globalnog modusa."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
@@ -1028,7 +1030,7 @@ msgstr "Jako svjetlo"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Heavy"
-msgstr ""
+msgstr "Tamni (900)"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:82
 #: ../Pinta/Dialogs/NewImageDialog.cs:328
@@ -1091,6 +1093,7 @@ msgstr "ICO datoteke ne mogu biti veće od 255 x 255 piksela."
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "If enabled, the Value component is applied to the color wheel."
 msgstr ""
+"Ako je aktivirano, komponenta „vrijednost” se primjenjuje na kotač boja."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1357,7 +1360,8 @@ msgstr ""
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
-"LIjevi klik za prozirno brisanje, desni klik za brisanje sekundardnom bojom. "
+"Lijevi klik za brisanje do prozirnosti, desni klik za brisanje do "
+"sekundardne boje. "
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:47
 msgid ""
@@ -1365,13 +1369,16 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Lijevim klikom popuni područje primarnom bojom, desnim klikom popuni "
+"sekundarnom bojom.\n"
+"Drži pritisnutu tipku Shift za korištenje globalnog modusa."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
-"LIjevi klik za namještavanje kursora, zatim upišite tekst. Boja teksta je "
+"Lijevi klik za smještanje kursora, zatim upiši tekst. Boja teksta je "
 "primarna."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:58
@@ -1403,6 +1410,9 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Lijevi klik za postavljanje primarne boje. Desni klik za postavljanje "
+"sekundarne boje. Srednji klik ili pritisni {0} i lijevi klik za biranje "
+"palete boja."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1435,7 +1445,7 @@ msgstr "Licenca"
 #: ../Pinta.Core/Actions/ViewActions.cs:249
 #: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Light"
-msgstr "Svijetla"
+msgstr "Svijetli (300)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1512,7 +1522,7 @@ msgstr "Medijan"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Medium"
-msgstr ""
+msgstr "Srednji (500)"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:131
 msgid "Menu Bar"
@@ -1530,7 +1540,7 @@ msgstr "Minimalna veličina"
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:457
 msgid "Miter Join"
-msgstr ""
+msgstr "Miter spoj"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:322
 msgid "Mode"
@@ -1616,7 +1626,7 @@ msgstr "Šum"
 #: ../Pinta.Tools/Tools/EraserTool.cs:336 ../Pinta.Tools/Tools/TextTool.cs:184
 #: ../Pinta.Tools/Tools/TextTool.cs:290 ../Pinta.Tools/Tools/TextTool.cs:415
 msgid "Normal"
-msgstr "Normalno"
+msgstr "Normalni (400)"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:341
 msgid "Normal Blending"
@@ -1811,7 +1821,7 @@ msgstr "Postotak"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Petite Caps"
-msgstr ""
+msgstr "Male kapitalke"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -1960,32 +1970,32 @@ msgstr "Unaprijed postavljeno:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush size"
-msgstr ""
+msgstr "Pritisni {0} za smanjivanje veličine kista"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr ""
+msgstr "Pritisni {0} za smanjivanje veličine fonta"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline size"
-msgstr ""
+msgstr "Pritisni {0} za smanjivanje veličine konture"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush size"
-msgstr ""
+msgstr "Pritisni {0} za povećavanje veličine kista"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
 msgid "Press {0} to increase font size"
-msgstr ""
+msgstr "Pritisni {0} za povećavanje veličine fonta"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline size"
-msgstr ""
+msgstr "Pritisni {0} za povećavanje veličine konture"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2179,7 +2189,7 @@ msgstr "Resetiraj na zadane vrijednosti"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:93
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:78
 msgid "Reset to image size"
-msgstr ""
+msgstr "Resetiraj na veličinu slike"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:214
@@ -2259,7 +2269,7 @@ msgstr "Grubost"
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:463
 msgid "Round Join"
-msgstr ""
+msgstr "Zaobljeni spoj"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
@@ -2356,12 +2366,12 @@ msgstr "Odabrane boje"
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:302
 msgid "Semibold"
-msgstr ""
+msgstr "Poludebeli (600)"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Semilight"
-msgstr ""
+msgstr "Polusvijelti (350)"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
@@ -2398,7 +2408,7 @@ msgstr "Tipke prečaca"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
 #: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Shortcut keys:"
-msgstr ""
+msgstr "Tipke prečaca:"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
@@ -2446,12 +2456,12 @@ msgstr "Veličina"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr ""
+msgstr "Kosa crta"
 
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:190
 msgid "Small Caps"
-msgstr ""
+msgstr "Kapitalke"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
@@ -2594,7 +2604,7 @@ msgstr "Debljina"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Thin"
-msgstr ""
+msgstr "Tanki (100)"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
@@ -2619,7 +2629,7 @@ msgstr "Savjet: Desni klik za uklanjanje kontrolnih točaka."
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:220
 msgid "Title Caps"
-msgstr ""
+msgstr "Naslovni verzali"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2695,17 +2705,17 @@ msgstr "Vrsta"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Ultrabold"
-msgstr ""
+msgstr "Ultra-debeli (800)"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:326
 msgid "Ultraheavy"
-msgstr ""
+msgstr "Ultra-teški (1000)"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Ultralight"
-msgstr ""
+msgstr "Ultra-svijetli (200)"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:352
 msgid "Underline"
@@ -2722,7 +2732,7 @@ msgstr "Smanji oštrinu"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Unicase"
-msgstr ""
+msgstr "Unicase"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
