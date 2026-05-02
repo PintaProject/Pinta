@@ -171,6 +171,22 @@ partial class GtkExtensions
 		return spin;
 	}
 
+	/// <summary>
+	/// Creates a Gtk.MenuButton with the popover configured to show regular nested
+	/// menus rather than sliding menus.
+	/// </summary>
+	public static Gtk.MenuButton CreateMenuButton (Gio.MenuModel model, string iconName, string? tooltip = null)
+	{
+		Gtk.PopoverMenu popover = Gtk.PopoverMenu.NewFromModelFull (model, Gtk.PopoverMenuFlags.Nested);
+
+		Gtk.MenuButton menu = Gtk.MenuButton.New ();
+		menu.Popover = popover;
+		menu.IconName = iconName;
+		menu.TooltipText = tooltip;
+
+		return menu;
+	}
+
 	public static Gtk.Scale CreateToolBarSlider (
 		int min,
 		int max,

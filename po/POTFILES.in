@@ -156,7 +156,6 @@ Pinta.Core/Extensions/PaletteHelper.cs
 Pinta.Core/Extensions/PangoExtensions.cs
 Pinta.Core/Extensions/Tiling.cs
 Pinta.Core/Extensions/ToolBarComboBox.cs
-Pinta.Core/Extensions/ToolBoxButton.cs
 Pinta.Core/FriendAssemblies.cs
 Pinta.Core/HistoryItems/AddLayerHistoryItem.cs
 Pinta.Core/HistoryItems/BaseHistoryItem.cs
