@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-01 00:45+0000\n"
-"PO-Revision-Date: 2026-05-01 03:28+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2026-05-03 21:23+0000\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/pinta/pinta/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -379,7 +379,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Change font size."
-msgstr ""
+msgstr "Srchiftgröße ändern."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
@@ -1459,7 +1459,7 @@ msgstr "Lizenz"
 #: ../Pinta.Core/Actions/ViewActions.cs:249
 #: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Light"
-msgstr "Hell"
+msgstr "Leicht"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:37
 msgid "Lighten"
@@ -1991,7 +1991,7 @@ msgstr ""
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr ""
+msgstr "{0} drücken für kleinere Schriftrgöße"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
@@ -2006,7 +2006,7 @@ msgstr ""
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
 msgid "Press {0} to increase font size"
-msgstr ""
+msgstr "{0} drücken für größere Schriftrgöße"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
@@ -2355,7 +2355,7 @@ msgstr "Farbpalette speichern"
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:72
 #, csharp-format
 msgid "Save changes to image \"{0}\" before closing?"
-msgstr "Vor dem Schließen Änderungen an BIld \"{0}\" speichern?"
+msgstr "Vor dem Schließen Änderungen an Bild \"{0}\" speichern?"
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:134
 #: ../Pinta.Effects/Effects/DentsEffect.cs:135
@@ -2736,7 +2736,7 @@ msgstr "Ultraschwer"
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Ultralight"
-msgstr "Ultramager"
+msgstr "Ultraleicht"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:352
 msgid "Underline"
