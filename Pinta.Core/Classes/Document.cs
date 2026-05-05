@@ -197,7 +197,7 @@ public sealed class Document
 	public void Close ()
 	{
 		Layers.Close ();
-		Workspace.History.Clear ();
+		Workspace.History.Clear (actions.Edit);
 	}
 
 	public Context CreateClippedContext ()
@@ -233,7 +233,7 @@ public sealed class Document
 		Layers.DestroySelectionLayer ();
 		Workspace.Invalidate ();
 
-		Workspace.History.PushNewItem (hist);
+		Workspace.History.PushNewItem (hist, actions.Edit);
 	}
 
 	// Flip image horizontally
@@ -341,11 +341,11 @@ public sealed class Document
 		if (compoundAction is not null)
 			compoundAction.Push (hist);
 		else
-			Workspace.History.PushNewItem (hist);
+			Workspace.History.PushNewItem (hist, actions.Edit);
 
 		ResetSelectionPaths ();
 
-		Workspace.Scale = scale;
+		Workspace.SetScale (scale);
 	}
 
 	public void ResizeImage (
@@ -370,11 +370,11 @@ public sealed class Document
 
 		hist.FinishSnapshotOfImage ();
 
-		Workspace.History.PushNewItem (hist);
+		Workspace.History.PushNewItem (hist, actions.Edit);
 
 		ResetSelectionPaths ();
 
-		Workspace.Scale = scale;
+		Workspace.SetScale (scale);
 		actions.View.UpdateCanvasScale ();
 	}
 

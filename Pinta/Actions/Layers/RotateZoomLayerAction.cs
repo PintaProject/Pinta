@@ -135,8 +135,8 @@ public sealed class RotateZoomLayerAction : IActionHandler
 				Resources.Icons.LayerRotateZoom,
 				Translations.GetString ("Rotate / Zoom Layer"),
 				old_surf,
-				doc.Layers.CurrentUserLayerIndex
-			)
+				doc.Layers.CurrentUserLayerIndex),
+			PintaCore.Actions.Edit
 		);
 	}
 

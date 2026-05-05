@@ -149,7 +149,7 @@ public sealed class LassoSelectTool : BaseTool
 	{
 		if (hist != null) {
 			if (lasso_polygon.Count > 1)
-				document.History.PushNewItem (hist);
+				document.History.PushNewItem (hist, PintaCore.Actions.Edit);
 			hist = null;
 		}
 		lasso_polygon.Clear ();

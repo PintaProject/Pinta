@@ -104,7 +104,7 @@ public sealed partial class LayersListViewItem
 
 		historyItem.Redo ();
 
-		doc.History.PushNewItem (historyItem);
+		doc.History.PushNewItem (historyItem, PintaCore.Actions.Edit);
 	}
 
 	public event EventHandler? LayerModified;

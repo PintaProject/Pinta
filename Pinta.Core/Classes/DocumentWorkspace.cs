@@ -30,9 +30,8 @@ namespace Pinta.Core;
 
 public sealed class DocumentWorkspace
 {
-	private readonly Document document;
-
 	private readonly ActionManager actions;
+	private readonly Document document;
 
 	private enum ZoomType
 	{
@@ -41,15 +40,11 @@ public sealed class DocumentWorkspace
 		ZoomManually,
 	}
 
-	internal DocumentWorkspace (
-		ActionManager actions,
-		Document document)
+	internal DocumentWorkspace (ActionManager actions, Document document)
 	{
 		this.actions = actions;
-
 		this.document = document;
-
-		History = new DocumentHistory (actions.Edit, document);
+		History = new DocumentHistory (document);
 	}
 
 	#region Public Events
@@ -103,17 +98,18 @@ public sealed class DocumentWorkspace
 	/// <summary>
 	/// Scale factor for the zoomed image.
 	/// </summary>
-	public double Scale {
-		get => ViewSize.Width / (double) document.ImageSize.Width;
-		set {
-			if (value == ViewSize.Width / (double) document.ImageSize.Width && value == ViewSize.Height / (double) document.ImageSize.Height)
-				return;
+	public double Scale
+		=> ViewSize.Width / (double) document.ImageSize.Width;
 
-			document.ImageSize = CoercedToPositive (document.ImageSize);
-			ViewSize = GetNewViewSize (document.ImageSize, value);
+	public void SetScale (double value)
+	{
+		if (value == ViewSize.Width / (double) document.ImageSize.Width && value == ViewSize.Height / (double) document.ImageSize.Height)
+			return;
 
-			Invalidate ();
-		}
+		document.ImageSize = CoercedToPositive (document.ImageSize);
+		ViewSize = GetNewViewSize (document.ImageSize, value);
+
+		Invalidate ();
 	}
 
 	/// <summary>

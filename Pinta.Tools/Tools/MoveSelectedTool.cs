@@ -126,7 +126,7 @@ public sealed class MoveSelectedTool : BaseTransformTool
 		document.PreviousSelection = prev_selection.Transform (transform);
 
 		if (hist != null)
-			document.History.PushNewItem (hist);
+			document.History.PushNewItem (hist, PintaCore.Actions.Edit);
 
 		hist = null;
 		original_selection = null;

@@ -40,7 +40,7 @@ internal sealed class HistoryPad : IDockPad
 
 	public void Initialize (Dock workspace)
 	{
-		HistoryListView history = new ();
+		HistoryListView history = new (edit);
 
 		DockItem history_item = new (
 			child: history,

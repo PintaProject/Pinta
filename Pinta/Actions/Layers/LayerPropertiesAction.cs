@@ -67,7 +67,7 @@ internal sealed class LayerPropertiesAction : IActionHandler
 					dialog.InitialLayerProperties,
 					dialog.UpdatedLayerProperties);
 
-				active.History.PushNewItem (historyItem);
+				active.History.PushNewItem (historyItem, PintaCore.Actions.Edit);
 
 				workspace.ActiveWorkspace.Invalidate ();
 			} else {

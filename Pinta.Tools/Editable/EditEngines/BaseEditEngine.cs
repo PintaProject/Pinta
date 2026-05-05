@@ -296,8 +296,12 @@ public abstract class BaseEditEngine
 				//if shape is selected it will be converted to new shape and shape type will be changed, otherwise only shape type will be changed.
 
 				//Create a new ShapesModifyHistoryItem so that the changing of the shape type can be undone.
-				workspace.ActiveDocument.History.PushNewItem (new ShapesModifyHistoryItem (
-					this, owner.Icon, Translations.GetString ("Changed Shape Type")));
+				workspace.ActiveDocument.History.PushNewItem (
+					new ShapesModifyHistoryItem (
+						this,
+						owner.Icon,
+						Translations.GetString ("Changed Shape Type")),
+					actions.Edit);
 
 				//Clone the old shape; it should be automatically garbage-collected. newShapeType already has the updated value.
 				selEngine = selEngine.Convert (newShapeType, SelectedShapeIndex);
@@ -617,8 +621,8 @@ public abstract class BaseEditEngine
 			new ShapesModifyHistoryItem (
 				this,
 				owner.Icon,
-				ShapeName + " " + Translations.GetString ("Point Added")
-			)
+				ShapeName + " " + Translations.GetString ("Point Added")),
+			actions.Edit
 		);
 
 		bool shiftKey = e.IsShiftPressed;
@@ -668,8 +672,8 @@ public abstract class BaseEditEngine
 				new ShapesModifyHistoryItem (
 					this,
 					owner.Icon,
-					ShapeName + " " + Translations.GetString ("Point Deleted")
-				)
+					ShapeName + " " + Translations.GetString ("Point Deleted")),
+				actions.Edit
 			);
 
 			//Delete the selected point from the shape.
@@ -692,8 +696,8 @@ public abstract class BaseEditEngine
 					doc.Layers.CurrentUserLayer,
 					SelectedPointIndex,
 					SelectedShapeIndex,
-					false
-				)
+					false),
+				actions.Edit
 			);
 
 
@@ -820,7 +824,13 @@ public abstract class BaseEditEngine
 			//Only create a new shape if the user isn't holding the control key down.
 			if (!ctrlKey) {
 				//Create a new ShapesModifyHistoryItem so that the adding of a control point can be undone.
-				doc.History.PushNewItem (new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Point Added")));
+				doc.History.PushNewItem (
+					new ShapesModifyHistoryItem (
+						this,
+						owner.Icon,
+						ShapeName + " " + Translations.GetString ("Point Added")),
+					actions.Edit
+				);
 
 				SEngines[closestShapeIndex].ControlPoints.Insert (closestPointIndex,
 					new ControlPoint (new PointD (current_point.X, current_point.Y), DefaultMidPointTension));
@@ -849,8 +859,17 @@ public abstract class BaseEditEngine
 			}
 
 			//Create a new ShapesHistoryItem so that the creation of a new shape can be undone.
-			doc.History.PushNewItem (new ShapesHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Added"),
-				doc.Layers.CurrentUserLayer.Surface.Clone (), doc.Layers.CurrentUserLayer, SelectedPointIndex, SelectedShapeIndex, false));
+			doc.History.PushNewItem (
+				new ShapesHistoryItem (
+					this,
+					owner.Icon,
+					ShapeName + " " + Translations.GetString ("Added"),
+					doc.Layers.CurrentUserLayer.Surface.Clone (),
+					doc.Layers.CurrentUserLayer,
+					SelectedPointIndex,
+					SelectedShapeIndex,
+					false),
+				actions.Edit);
 
 			//Create the shape, add its starting points, and add it to SEngines.
 			SEngines.Add (CreateShape (ctrlKey, clicked_control_point, prevSelPoint));
@@ -929,9 +948,15 @@ public abstract class BaseEditEngine
 		}
 
 		if (clicked_without_modifying) {
-			//Create a new ShapesModifyHistoryItem so that the modification of the shape can be undone.
+
+			// Create a new ShapesModifyHistoryItem so that the modification of the shape can be undone.
 			doc.History.PushNewItem (
-							new ShapesModifyHistoryItem (this, owner.Icon, ShapeName + " " + Translations.GetString ("Modified")));
+				new ShapesModifyHistoryItem (
+					this,
+					owner.Icon,
+					ShapeName + " " + Translations.GetString ("Modified")),
+				actions.Edit
+			);
 
 			clicked_without_modifying = false;
 		}
@@ -1119,8 +1144,8 @@ public abstract class BaseEditEngine
 					doc.Layers.CurrentUserLayer,
 					SelectedPointIndex,
 					SelectedShapeIndex,
-					false
-				)
+					false),
+				actions.Edit
 			);
 		}
 
@@ -1400,8 +1425,18 @@ public abstract class BaseEditEngine
 		//Make sure that the undo surface isn't null.
 		if (undoSurface != null) {
 			//Create a new ShapesHistoryItem so that the finalization of the shapes can be undone.
-			doc.History.PushNewItem (new ShapesHistoryItem (this, owner.Icon, Translations.GetString ("Finalized"),
-				undoSurface, doc.Layers.CurrentUserLayer, previousSelectedPointIndex, prev_selected_shape_index, true));
+			doc.History.PushNewItem (
+				new ShapesHistoryItem (
+					this,
+					owner.Icon,
+					Translations.GetString ("Finalized"),
+					undoSurface,
+					doc.Layers.CurrentUserLayer,
+					previousSelectedPointIndex,
+					prev_selected_shape_index,
+					true),
+				actions.Edit
+			);
 		}
 
 		if (totalDirty.HasValue) {

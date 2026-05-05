@@ -103,8 +103,16 @@ public sealed class PencilTool : BaseTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		if (undo_surface != null && surface_modified)
-			document.History.PushNewItem (new SimpleHistoryItem (Icon, Name, undo_surface, document.Layers.CurrentUserLayerIndex));
+		if (undo_surface != null && surface_modified) {
+			document.History.PushNewItem (
+				new SimpleHistoryItem (
+					Icon,
+					Name,
+					undo_surface,
+					document.Layers.CurrentUserLayerIndex),
+				PintaCore.Actions.Edit
+			);
+		}
 
 		surface_modified = false;
 		undo_surface = null;

@@ -321,7 +321,8 @@ public sealed class EditActions
 				Translations.GetString ("Fill Selection"),
 				old,
 				doc.Layers.CurrentUserLayerIndex
-			)
+			),
+			this
 		);
 	}
 
@@ -341,7 +342,7 @@ public sealed class EditActions
 		doc.ResetSelectionPaths ();
 		doc.Selection.Visible = true;
 
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, this);
 		doc.Workspace.Invalidate ();
 	}
 
@@ -367,7 +368,8 @@ public sealed class EditActions
 			sender switch {
 				string and "Cut" => new SimpleHistoryItem (Resources.StandardIcons.EditCut, Translations.GetString ("Cut"), old, doc.Layers.CurrentUserLayerIndex),
 				_ => new SimpleHistoryItem (Resources.Icons.EditSelectionErase, Translations.GetString ("Erase Selection"), old, doc.Layers.CurrentUserLayerIndex),
-			}
+			},
+			this
 		);
 	}
 
@@ -386,7 +388,7 @@ public sealed class EditActions
 
 		doc.ResetSelectionPaths ();
 
-		doc.History.PushNewItem (hist);
+		doc.History.PushNewItem (hist, this);
 		doc.Workspace.Invalidate ();
 	}
 
@@ -456,7 +458,7 @@ public sealed class EditActions
 		if (tools.CurrentTool?.DoHandleUndo (doc) == true)
 			return;
 
-		doc.History.Undo ();
+		doc.History.Undo (this);
 
 		tools.CurrentTool?.DoAfterUndo (doc);
 	}
@@ -468,7 +470,7 @@ public sealed class EditActions
 		if (tools.CurrentTool?.DoHandleRedo (doc) == true)
 			return;
 
-		doc.History.Redo ();
+		doc.History.Redo (this);
 
 		tools.CurrentTool?.DoAfterRedo (doc);
 	}
@@ -610,7 +612,7 @@ public sealed class EditActions
 
 		doc.Selection.Invert (doc.ImageSize);
 
-		doc.History.PushNewItem (historyItem);
+		doc.History.PushNewItem (historyItem, this);
 		doc.Workspace.Invalidate ();
 	}
 

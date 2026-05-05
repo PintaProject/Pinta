@@ -199,7 +199,7 @@ internal sealed class PasteAction : IActionHandler
 		doc.Workspace.Invalidate ();
 
 		paste_action.Push (new PasteHistoryItem (cb_image, old_selection));
-		doc.History.PushNewItem (paste_action);
+		doc.History.PushNewItem (paste_action, actions.Edit);
 	}
 
 	public static Task ShowClipboardEmptyDialog (ChromeManager chrome)

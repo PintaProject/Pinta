@@ -136,7 +136,7 @@ public static class WorkspaceServiceExtensions
 			g.Paint ();
 		}
 
-		doc.Workspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentNew, Translations.GetString ("New Image")));
+		doc.Workspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentNew, Translations.GetString ("New Image")), PintaCore.Actions.Edit);
 		doc.Workspace.History.SetClean ();
 
 		return doc;
@@ -203,7 +203,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 	public double Scale {
 		get => ActiveWorkspace.Scale;
-		set => ActiveWorkspace.Scale = value;
+		set => ActiveWorkspace.SetScale (value);
 	}
 
 	private readonly List<Document> open_documents;
@@ -348,7 +348,7 @@ public sealed class WorkspaceManager : IWorkspaceService
 				}
 			}
 
-			ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentOpen, Translations.GetString ("Open Image")));
+			ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Resources.StandardIcons.DocumentOpen, Translations.GetString ("Open Image")), PintaCore.Actions.Edit);
 			ActiveDocument.History.SetClean ();
 
 			return true;

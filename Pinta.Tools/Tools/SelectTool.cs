@@ -113,7 +113,7 @@ public abstract class SelectTool : BaseTool
 			document.Selection.HandleBounds = handle.Rectangle;
 
 			if (hist != null) {
-				document.History.PushNewItem (hist);
+				document.History.PushNewItem (hist, PintaCore.Actions.Edit);
 				hist = null;
 			}
 
