@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-01 00:45+0000\n"
-"PO-Revision-Date: 2026-05-03 21:23+0000\n"
+"PO-Revision-Date: 2026-05-10 20:22+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/pinta/pinta/hr/>"
 "\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17.1\n"
+"X-Generator: Weblate 2026.5-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -1611,7 +1611,7 @@ msgstr "Nova…"
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
-msgstr "Nijedna stavka nije pronađena"
+msgstr "Ništa nije pronađeno"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
@@ -2775,7 +2775,7 @@ msgid ""
 "Use low quality for previews, small images, and small angles.  Use high "
 "quality for final quality, large images, and large angles."
 msgstr ""
-"Koristi nisku kvalitetu za preglede, make slike i male kutove. Koristi "
+"Koristi nisku kvalitetu za preglede, male slike i male kutove. Koristi "
 "visoku kvalitetu za konačnu kvalitetu, velike slike i velike kutove."
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
