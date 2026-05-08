@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-01 00:45+0000\n"
-"PO-Revision-Date: 2026-01-22 00:01+0000\n"
-"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"PO-Revision-Date: 2026-05-10 20:23+0000\n"
+"Last-Translator: tomasteixeira07 <tomasteixeira93@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/pinta/pinta/"
 "pt/>\n"
 "Language: pt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 2026.5-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -96,12 +96,12 @@ msgstr "Alinhar Objeto"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:208
 msgid "All Petite Caps"
-msgstr ""
+msgstr "Versaletes pequenas"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:196
 msgid "All Small Caps"
-msgstr ""
+msgstr "All Small Caps (versaletes)"
 
 #: ../Pinta.Core/Actions/EditActions.cs:585
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
@@ -216,7 +216,7 @@ msgstr "Melhor ajuste"
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:469
 msgid "Bevel Join"
-msgstr ""
+msgstr "Junção chanfrada"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
@@ -264,7 +264,7 @@ msgstr "Fogueira"
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Book"
-msgstr ""
+msgstr "Book"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -377,15 +377,15 @@ msgstr "Centímetros"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width."
-msgstr ""
+msgstr "Mudar a largura do pincel."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Change font size."
-msgstr ""
+msgstr "Mudar tamanho da fonte."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
-msgstr ""
+msgstr "Mudar a largura do contorno."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -403,7 +403,7 @@ msgstr "Escolher a Cor"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:369
 msgid "Choose Colors"
-msgstr ""
+msgstr "Escolher Cores"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:153
 msgid "Choose Palette Color"
@@ -467,6 +467,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"Clique para selecionar região de cor semelhante.\n"
+"Mantenha a mudança para usar o modo Global."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
@@ -1028,7 +1030,7 @@ msgstr "Luz Dura"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Heavy"
-msgstr ""
+msgstr "Heavy"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:82
 #: ../Pinta/Dialogs/NewImageDialog.cs:328
@@ -1091,7 +1093,7 @@ msgstr "Os ficheiros ICO não podem ser maiores do que 255x255 pixéis."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "Se ativado, o componente Valor é aplicado à roda de cores."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1375,6 +1377,9 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Clique com o botão esquerdo para preencher uma região com a cor primária, "
+"com o botão direito para preencher com a cor secundária.\n"
+"Segure o botão de Shift para usar o modo Global."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1414,6 +1419,9 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Clique com o botão esquerdo para definir a cor primária. Clique com o botão "
+"direito para definir a cor secundária. Clique no meio ou pressione {0} e "
+"clique esquerdo para escolher a cor da paleta."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1523,7 +1531,7 @@ msgstr "Mediana"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Medium"
-msgstr ""
+msgstr "Medium"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:131
 msgid "Menu Bar"
@@ -1541,7 +1549,7 @@ msgstr "Tamanho mínimo"
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:457
 msgid "Miter Join"
-msgstr ""
+msgstr "Junção em bico"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:322
 msgid "Mode"
@@ -1822,7 +1830,7 @@ msgstr "Percentil"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:202
 msgid "Petite Caps"
-msgstr ""
+msgstr "Petite Caps (versaletes pequenas)"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -1849,7 +1857,7 @@ msgstr "Extras da comunidade Pinta - Multi-plataforma"
 
 #: ../Pinta/AddinSetupService.cs:62
 msgid "Pinta Community Addins - Platform-Specific"
-msgstr "Extras da comunidade Pinta - Específicos do SO"
+msgstr "Extras da comunidade do Pinta - Específicos do Sistema Operativo"
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:4
 msgid "Pinta Image Editor"
@@ -1971,32 +1979,32 @@ msgstr "Pré-ajuste:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush size"
-msgstr ""
+msgstr "Pressione {0} para diminuir o tamanho do pincel"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr ""
+msgstr "Pressione {0} para diminuir o tamanho da fonte"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline size"
-msgstr ""
+msgstr "Pressione {0} para diminuir o tamanho do contorno"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush size"
-msgstr ""
+msgstr "Pressione {0} para aumentar o tamanho do pincel"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
 msgid "Press {0} to increase font size"
-msgstr ""
+msgstr "Pressione {0} para aumentar o tamanho da fonte"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline size"
-msgstr ""
+msgstr "Pressione {0} para aumentar o tamanho do contorno"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2190,7 +2198,7 @@ msgstr "Repor para Predefinição"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:93
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:78
 msgid "Reset to image size"
-msgstr ""
+msgstr "Reiniciar o tamanho da imagem"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:214
@@ -2270,7 +2278,7 @@ msgstr "Rugosidade"
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:463
 msgid "Round Join"
-msgstr ""
+msgstr "Junção arredondada"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
@@ -2367,12 +2375,12 @@ msgstr "Cor Selecionada"
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:302
 msgid "Semibold"
-msgstr ""
+msgstr "Semibold"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Semilight"
-msgstr ""
+msgstr "Semilight"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
@@ -2409,7 +2417,7 @@ msgstr "Teclas de atalho"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
 #: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Shortcut keys:"
-msgstr ""
+msgstr "Teclas de atalho:"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
@@ -2457,12 +2465,12 @@ msgstr "Tamanho"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr ""
+msgstr "Traço oblíquo"
 
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:190
 msgid "Small Caps"
-msgstr ""
+msgstr "Small Caps (versaletes)"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
@@ -2607,7 +2615,7 @@ msgstr "Espessura"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Thin"
-msgstr ""
+msgstr "thin"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
@@ -2632,7 +2640,7 @@ msgstr "Dica: botão direito do rato para remover pontos de controle."
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:220
 msgid "Title Caps"
-msgstr ""
+msgstr "Maiúsculas Iniciais"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2708,17 +2716,17 @@ msgstr "Tipo"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Ultrabold"
-msgstr ""
+msgstr "Ultrabold"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:326
 msgid "Ultraheavy"
-msgstr ""
+msgstr "Ultraheavy"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Ultralight"
-msgstr ""
+msgstr "Ultralight"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:352
 msgid "Underline"
@@ -2735,7 +2743,7 @@ msgstr "Desfocar"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:214
 msgid "Unicase"
-msgstr ""
+msgstr "Unicase"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 #: ../Pinta.Gui.Addins/InstallDialog.cs:217
