@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-01 00:45+0000\n"
-"PO-Revision-Date: 2025-11-09 21:14+0000\n"
-"Last-Translator: yangyangdaji <1504305527@qq.com>\n"
+"PO-Revision-Date: 2026-05-10 20:22+0000\n"
+"Last-Translator: jywondf <99643089+JoyWonderful@users.noreply.github.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/pinta/pinta/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 2026.5-dev\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -253,7 +253,7 @@ msgstr "模糊"
 #. Translators: 'Bold' (700) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:308
 msgid "Bold"
-msgstr "粗体"
+msgstr "粗"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:31
@@ -263,7 +263,7 @@ msgstr "篝火"
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Book"
-msgstr ""
+msgstr "书籍标准"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -288,7 +288,7 @@ msgstr "亮度 / 对比度"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:147
 msgid "Brush Size"
-msgstr "笔刷尺寸"
+msgstr "笔刷粗细"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:129
 msgid "Brush width"
@@ -376,15 +376,15 @@ msgstr "厘米"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width."
-msgstr ""
+msgstr "更改笔刷粗细。"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Change font size."
-msgstr ""
+msgstr "更改字体大小。"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
-msgstr ""
+msgstr "更改轮廓粗细。"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -402,7 +402,7 @@ msgstr "选取颜色"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:369
 msgid "Choose Colors"
-msgstr ""
+msgstr "选择颜色"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:153
 msgid "Choose Palette Color"
@@ -435,7 +435,7 @@ msgid ""
 "Hold Shift to constrain to a circle."
 msgstr ""
 "点击并拖拽绘制一个椭圆形选区。\n"
-"按住 Shift键可限制为圆形。"
+"按住 Shift 键可限制为圆形。"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:62
 msgid ""
@@ -443,6 +443,9 @@ msgid ""
 "Right click to reverse.\n"
 "Click on a control point and drag to move it."
 msgstr ""
+"点击并拖拽以绘制从主颜色到副颜色的渐变区域。\n"
+"右键点击以反转颜色。\n"
+"单击控制点并拖动以移动它。"
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -450,23 +453,25 @@ msgstr "点击拖动以操纵图像。"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:345
 msgid "Click to reset primary and secondary color."
-msgstr "点击重置主副颜色"
+msgstr "点击重置主副颜色。"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:582
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:333
 msgid "Click to select primary color."
-msgstr "点击选择主颜色"
+msgstr "点击选择主颜色。"
 
 #: ../Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"点击选取颜色相近的区域。\n"
+"按住 Shift 键使用全局模式。"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
 msgid "Click to select secondary color."
-msgstr "点击选择副颜色"
+msgstr "点击选择副颜色。"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:424
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:340
@@ -606,9 +611,9 @@ msgstr "棉花糖渐变"
 
 #. Translators: {0} is the name of a layer, and {1} is the path to a .ora file.
 #: ../Pinta.Core/ImageFormats/OraFormat.cs:125
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Could not import layer \"{0}\" from {1}"
-msgstr "图层1无法导入图层0"
+msgstr "图层 {1} 无法导入图层 {0}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:166
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:428
@@ -906,7 +911,7 @@ msgstr "扁平化"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
 msgid "Flattening the image will merge all layers into a single layer."
-msgstr "扁平化此图像将会合并所有图层"
+msgstr "扁平化此图像将会合并所有图层。"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:84
 #: ../Pinta.Core/Actions/LayerActions.cs:95
@@ -962,7 +967,7 @@ msgstr "重叠虚影"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:220
 msgid "Freeform"
-msgstr ""
+msgstr "自由形状"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:48
 msgid "Freeform Shape"
@@ -999,11 +1004,11 @@ msgstr "渐变"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:127
 msgid "Gradient Created"
-msgstr ""
+msgstr "渐变已创建"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:128
 msgid "Gradient Modified"
-msgstr ""
+msgstr "渐变已修改"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:111
@@ -1023,7 +1028,7 @@ msgstr "强光"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Heavy"
-msgstr ""
+msgstr "重"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:82
 #: ../Pinta/Dialogs/NewImageDialog.cs:328
@@ -1084,7 +1089,7 @@ msgstr "ICO文件不能大于255 x 255像素。"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "如果启用，“亮度”数值将被应用到色轮上。"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1135,6 +1140,11 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
+"在自由形状模式下，点击并拖拽以绘制选择区域的轮廓。\n"
+"\n"
+"在多边形模式下，点击并拖拽以添加新的顶点。\n"
+"按 Enter 键完成选择。\n"
+"按 Backspace 键删除最后一个顶点。"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Inches"
@@ -1163,7 +1173,7 @@ msgstr "安装"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:251
 msgid "Install Extension Package"
-msgstr ""
+msgstr "安装扩展包"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:110
 msgid "Install from file..."
@@ -1222,7 +1232,7 @@ msgstr "横向（景观）"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
-msgstr ""
+msgstr "套索模式"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
@@ -1268,6 +1278,11 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"左键单击并拖动选择区域，以移动已选择的内容。\n"
+"按住 {0} 以缩放，而不是移动。\n"
+"右键单击并拖动选择区域，以旋转已选择的内容。\n"
+"按住 Shift 以逐级旋转。\n"
+"使用方向键将已选择的内容移动一像素。"
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:50
 #, csharp-format
@@ -1278,6 +1293,11 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selection outline by a single pixel."
 msgstr ""
+"左键单击并拖动以移动选择区域的轮廓。\n"
+"按住 {0} 以缩放而不是移动。\n"
+"右键单击并拖动以旋转选择区域的轮廓。\n"
+"按住 Shift 以逐级旋转。\n"
+"使用方向键以移动选择区域的轮廓一像素。"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/ShapeTool.cs:50
@@ -1303,12 +1323,12 @@ msgstr ""
 "左键单击控制点并拖动以控制形状。\n"
 "右键单击控制点并拖动以更改其张力。\n"
 "按住 Shift 键可绘制正圆。\n"
-"使用方向键（键盘上的↑↓←→）移动选定的控制点。\n"
-"按 {0} + 向左/向右箭头按顺序选择控制点。\n"
+"使用方向键移动选定的控制点。\n"
+"按 {0} + 向左/向右方向键按顺序选择控制点。\n"
 "按 Delete 键删除所选控制点。\n"
 "按空格键在鼠标位置添加新的控制点。\n"
 "按住 {0} 的同时按空格键可在完全相同的位置创建控制点。\n"
-"按住{0}同时左键单击控制点，以在完全相同的位置创建新形状。\n"
+"按住 {0} 同时左键单击控制点，以在完全相同的位置创建新形状。\n"
 "按 Enter 键完成形状。"
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:51
@@ -1316,6 +1336,8 @@ msgid ""
 "Left click to draw freeform one-pixel wide lines with the primary color.\n"
 "Right click to use the secondary color."
 msgstr ""
+"左键单击并拖动以使用主颜色绘制一像素宽的自由线条。\n"
+"右键单击并拖动则使用次要颜色。"
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
@@ -1335,6 +1357,8 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"左键单击用主颜色填充一个区域，右键单击则用副颜色。\n"
+"按住 Shift 键使用全局模式。"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1347,12 +1371,16 @@ msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
+"左键单击将主颜色替换为副颜色。\n"
+"右键单击将副颜色替换为主颜色。"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:59
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"左键单击以设定主颜色。\n"
+"右键单击以设定次颜色。"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:328
 msgid "Left click to set primary color. Right click to set secondary color."
@@ -1365,6 +1393,8 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"左键单击设置主颜色。右键单击设置副颜色。使用鼠标中键或按住 {0} 再点击以选择调"
+"色盘颜色。"
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1372,6 +1402,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"左键单击以放大。\n"
+"右键单击以缩小。\n"
+"点击并拖拽以缩放至该范围。"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:331
 msgid "Length"
@@ -1444,7 +1477,7 @@ msgstr "魔术棒选择"
 
 #: ../Pinta/MainWindow.cs:441
 msgid "Main Menu"
-msgstr ""
+msgstr "主菜单"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:110
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:71
@@ -1462,7 +1495,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
-msgstr ""
+msgstr "最大尺寸"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
 msgid "Median"
@@ -1471,11 +1504,11 @@ msgstr "中值"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Medium"
-msgstr ""
+msgstr "中等"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:131
 msgid "Menu Bar"
-msgstr ""
+msgstr "彩蛋栏"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:333
@@ -1484,7 +1517,7 @@ msgstr "向下合并图层"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
-msgstr ""
+msgstr "最小尺寸"
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:457
@@ -1501,7 +1534,7 @@ msgstr "已修改"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:159
 msgid "More Information..."
-msgstr ""
+msgstr "更多信息..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
 msgid "Motion Blur"
@@ -1535,7 +1568,7 @@ msgstr "名称："
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "最近邻"
 
 #: ../Pinta.Core/Actions/FileActions.cs:63
 msgid "New"
@@ -1560,7 +1593,7 @@ msgstr "新建..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:55
 msgid "No Items Found"
-msgstr ""
+msgstr "未找到任何项目"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
@@ -1587,7 +1620,7 @@ msgstr "普通大小"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:416
 msgid "Normal and Outline"
-msgstr "正常与大纲"
+msgstr "一般及边框"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:172
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
@@ -1596,11 +1629,11 @@ msgstr ""
 
 #: ../Pinta/Main.cs:56
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "用于渲染的线程数量"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:387
 msgid "OK"
-msgstr ""
+msgstr "确定"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:22
@@ -1620,7 +1653,7 @@ msgstr "偏移量"
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
-msgstr ""
+msgstr "偏移选区"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:26
 msgid "Oil Painting"
@@ -1846,7 +1879,7 @@ msgstr ""
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
 msgid "Please restart Pinta for the changes to take effect."
-msgstr ""
+msgstr "请重新启动 Pinta 以应用更改。"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:620
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:823
@@ -1878,7 +1911,7 @@ msgstr "极性反转"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:221
 msgid "Polygon"
-msgstr ""
+msgstr "多边形"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:291
 msgid "Portrait"
@@ -1900,7 +1933,7 @@ msgstr "强度"
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:225
 msgid "Preserve"
-msgstr ""
+msgstr "维持原状"
 
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:10
 msgid "Preset Gradient"
@@ -1917,32 +1950,32 @@ msgstr "预设："
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush size"
-msgstr ""
+msgstr "按 {0} 让笔刷更细"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr ""
+msgstr "按 {0} 减小字体大小"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline size"
-msgstr ""
+msgstr "按 {0} 减小轮廓宽度"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush size"
-msgstr ""
+msgstr "按 {0} 让笔刷更粗"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
 msgid "Press {0} to increase font size"
-msgstr ""
+msgstr "按 {0} 增加字体大小"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline size"
-msgstr ""
+msgstr "按 {0} 增加轮廓宽度"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2085,7 +2118,7 @@ msgstr "刷新"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:91
 msgid "Released under the MIT X11 License."
-msgstr "以 MIT X11 许可证发行"
+msgstr "以 MIT X11 许可证发行。"
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:40
 msgid "Relief"
@@ -2113,11 +2146,11 @@ msgstr "替换"
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
-msgstr ""
+msgstr "报告错误..."
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:142
 msgid "Resampling:"
-msgstr ""
+msgstr "重采样："
 
 #: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:643
 msgid "Reseed"
@@ -2162,7 +2195,7 @@ msgstr "调整调色板大小"
 
 #: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
 msgid "Restart Pinta"
-msgstr ""
+msgstr "重启 Pinta"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
@@ -2228,7 +2261,7 @@ msgstr "圆角直线形状"
 
 #: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
-msgstr "圆角矩形。"
+msgstr "圆角矩形"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:231
 msgid "Ruler Units"
@@ -2245,11 +2278,11 @@ msgstr "取样"
 #. Translators: this is an abbreviation for "Saturation"
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:335
 msgid "Sat"
-msgstr ""
+msgstr "饱和度"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
 msgid "Sat & Value"
-msgstr ""
+msgstr "饱和度与亮度"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:46
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:64
@@ -2313,12 +2346,12 @@ msgstr ""
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:302
 msgid "Semibold"
-msgstr ""
+msgstr "次粗"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Semilight"
-msgstr ""
+msgstr "次细"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
@@ -2349,21 +2382,21 @@ msgstr "快捷键"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
-msgstr ""
+msgstr "快捷键"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
 #: ../Pinta.Tools/Tools/TextTool.cs:244
 msgid "Shortcut keys:"
-msgstr ""
+msgstr "快捷键："
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
-msgstr ""
+msgstr "显示轴测网格"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:32
 msgid "Show Grid"
-msgstr ""
+msgstr "显示网格"
 
 #: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
@@ -2377,7 +2410,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:192
 msgid "Show Value"
-msgstr ""
+msgstr "显示亮度"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:243
 msgid "Show/Hide"
@@ -2479,15 +2512,15 @@ msgstr "文本样式"
 #: ../Pinta/MainWindow.cs:321
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr ""
+msgstr "附加组件“{0}”可能与此版本的 Pinta 不兼容"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:208
 msgid "The clipboard does not contain an image."
-msgstr "剪切板中没有图像"
+msgstr "剪切板中没有图像。"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:200
 msgid "The file may be an invalid or corrupt extension package"
-msgstr ""
+msgstr "文件可能是无效或损坏的扩展包"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:79
 msgid "The following dependencies could not be resolved:"
@@ -2509,7 +2542,7 @@ msgstr "下列软件包将被卸载："
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
-msgstr ""
+msgstr "粘贴的图像比画布大。您想如何调整画布大小？"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:352
 msgid "The installation failed!"
@@ -2523,7 +2556,7 @@ msgstr "安装完成但有警告信息。"
 msgid ""
 "The selected extension packages can't be installed because there are "
 "dependency conflicts."
-msgstr ""
+msgstr "由于存在依赖冲突，无法安装选择的扩展包。"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:359
 msgid "The uninstallation failed!"
@@ -2537,7 +2570,7 @@ msgstr "卸载完成但有警告信息。"
 msgid ""
 "There are other extension packages that depend on the previous ones which "
 "will also be uninstalled:"
-msgstr ""
+msgstr "有其他依赖于先前的扩展包的扩展包也将被卸载："
 
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:133
 msgid "Thickness"
@@ -2546,11 +2579,11 @@ msgstr "线宽"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Thin"
-msgstr ""
+msgstr "极细"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:269
 msgid "This format does not support layers. Flatten image?"
-msgstr ""
+msgstr "此格式不支持图层。要扁平化图像吗？"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:28
 msgid "Tile Reflection"
@@ -2603,11 +2636,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:28
 msgid "Top Left"
-msgstr ""
+msgstr "左上方"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:30
 msgid "Top Right"
-msgstr ""
+msgstr "右上方"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:105
 msgid "Transfer Map"
@@ -2647,17 +2680,17 @@ msgstr "类型"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Ultrabold"
-msgstr ""
+msgstr "超粗"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:326
 msgid "Ultraheavy"
-msgstr ""
+msgstr "超重"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Ultralight"
-msgstr ""
+msgstr "超细"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:352
 msgid "Underline"
@@ -2683,7 +2716,7 @@ msgstr "卸载"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:185
 msgid "Uninstall..."
-msgstr ""
+msgstr "卸载..."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:45
@@ -2702,11 +2735,11 @@ msgstr "不支持的文件格式"
 
 #: ../Pinta.Core/Actions/EditActions.cs:510
 msgid "Unsupported palette format"
-msgstr ""
+msgstr "不支持的调色盘格式"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:176
 msgid "Update..."
-msgstr ""
+msgstr "更新..."
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:88
 msgid "Updates"
@@ -2726,12 +2759,12 @@ msgstr "从此位置使用了一些图标："
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:336
 msgid "Value"
-msgstr ""
+msgstr "亮度"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:214
 #, csharp-format
 msgid "Version: {0}"
-msgstr ""
+msgstr "版本：{0}"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -2750,7 +2783,7 @@ msgstr ""
 
 #: ../Pinta/MainWindow.cs:461
 msgid "View"
-msgstr ""
+msgstr "视图"
 
 #. Translators: The vignette effect darkens the outer edges of an image, which fade into an unchanged circular area in the center (or at some other point chosen by the user), similar to what is seen during the closing scene in old cartoons
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:49
@@ -2849,11 +2882,11 @@ msgstr "调整"
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
 msgid "_Cancel"
-msgstr ""
+msgstr "取消(_C)"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:84
 msgid "_Discard"
-msgstr ""
+msgstr "丢弃(_D)"
 
 #: ../Pinta/MainWindow.cs:394
 msgid "_Edit"
@@ -2876,11 +2909,11 @@ msgstr "图像"
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
-msgstr ""
+msgstr "确定(_O)"
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:85
 msgid "_Save"
-msgstr ""
+msgstr "保存(_S)"
 
 #: ../Pinta/MainWindow.cs:396
 msgid "_View"
