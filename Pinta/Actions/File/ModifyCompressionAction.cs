@@ -48,7 +48,7 @@ internal sealed class ModifyCompressionAction : IActionHandler
 
 	private void Activated (object? sender, ModifyCompressionEventArgs e)
 	{
-		JpegCompressionDialog dlg = new (e.Quality, e.ParentWindow);
+		QualityDialog dlg = new (e.Quality, e.ParentWindow);
 
 		if (dlg.RunBlocking () == Gtk.ResponseType.Ok)
 			e.Quality = dlg.CompressionLevel;
