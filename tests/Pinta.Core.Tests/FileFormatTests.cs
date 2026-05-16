@@ -62,4 +62,24 @@ internal sealed class FileFormatTests
 			new[] { "sixcolors_standard_lf.ppm" }
 		),
 	];
+
+	[TestCase ("sixcolorsinput.gif", "sixcolors_farbfeld.ff")]
+	public void Export_Farbfeld (string input, string output)
+	{
+		string inputFilePath = Utilities.GetAssetPath (input);
+		ImageSurface loaded = Utilities.LoadImage (inputFilePath);
+		FarbfeldFormat exporter = new ();
+		Gio.MemoryOutputStream memoryOutput = Gio.MemoryOutputStream.NewResizable ();
+		using GioStream outputStream = new (memoryOutput);
+		FarbfeldFormat.Export (loaded, outputStream);
+		outputStream.Close ();
+		memoryOutput.Close (null);
+		var exportedBytes = memoryOutput.StealAsBytes ();
+		var bytesStream = Gio.MemoryInputStream.NewFromBytes (exportedBytes);
+		var bytesReader = Gio.DataInputStream.New (bytesStream);
+		string filePath = Utilities.GetAssetPath (output);
+		using var context = Utilities.OpenFile (filePath);
+		bool filesAreEqual = Utilities.AreFilesEqual (bytesReader, context.DataStream);
+		Assert.That (filesAreEqual);
+	}
 }
