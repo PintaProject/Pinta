@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:45+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2026-03-18 00:23+0000\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <https://hosted.weblate.org/projects/pinta/pinta/kk/>\n"
@@ -60,8 +60,8 @@ msgid "About Pinta"
 msgstr "Pinta туралы"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "Жаңа қабатты қосу"
 
@@ -809,7 +809,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Алып тастау (-) (Оң жақ шерту)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr "Жайып жіберу"
 
@@ -1107,7 +1107,7 @@ msgstr "Сурет редакторы"
 msgid "Image Tabs"
 msgstr "Сурет беттері"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "Суретті кірістіру мүмкін емес"
 
@@ -1116,7 +1116,7 @@ msgstr "Суретті кірістіру мүмкін емес"
 msgid "Image files"
 msgstr "Сурет файлдары"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "Сурет кенептен үлкен"
 
@@ -1256,7 +1256,7 @@ msgid "Layer Properties..."
 msgstr "Қабат қасиеттері..."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "Қабат {0}"
@@ -1946,7 +1946,7 @@ msgid "Power"
 msgstr "Қуат"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr "Сақтау"
 
@@ -1964,7 +1964,7 @@ msgstr "Дайын жиынтық:"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
-msgid "Press {0} to decrease brush size"
+msgid "Press {0} to decrease brush width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
@@ -1974,12 +1974,12 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
-msgid "Press {0} to decrease outline size"
+msgid "Press {0} to decrease outline width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
-msgid "Press {0} to increase brush size"
+msgid "Press {0} to increase brush width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
@@ -1989,7 +1989,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
-msgid "Press {0} to increase outline size"
+msgid "Press {0} to increase outline width"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
@@ -2529,7 +2529,7 @@ msgstr "Мәтін стилі"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "«{0}» қосымшасы Pinta-ның бұл нұсқасымен үйлесімді болмауы мүмкін"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "Алмасу буферінде сурет жоқ."
 
@@ -2553,7 +2553,7 @@ msgstr "Келесі дестелер орнатылады:"
 msgid "The following packages will be uninstalled:"
 msgstr "Келесі дестелер өшіріледі:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2899,7 +2899,7 @@ msgstr "_Түзетулер"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -2976,7 +2976,7 @@ msgstr "{0} + сол жақ шерту — бастапқы нүктені ор�
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0} көшірмесі"

@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:45+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2026-05-01 10:25+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
-"Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/"
-"sl/>\n"
+"Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
+">\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,8 +63,8 @@ msgid "About Pinta"
 msgstr "O programu Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "Dodaj novo plast"
 
@@ -813,7 +813,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Izločitev (-) (desni klik)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr "Razširi"
 
@@ -1110,7 +1110,7 @@ msgstr "Urejevalnik slik"
 msgid "Image Tabs"
 msgstr "Zavihki slik"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "Slike ni mogoče prilepiti"
 
@@ -1119,7 +1119,7 @@ msgstr "Slike ni mogoče prilepiti"
 msgid "Image files"
 msgstr "Datoteke slik"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "Slika je večja od platna"
 
@@ -1260,7 +1260,7 @@ msgid "Layer Properties..."
 msgstr "Lastnosti plasti..."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "Plast {0}"
@@ -1948,7 +1948,7 @@ msgid "Power"
 msgstr "Moč"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr "Ohrani"
 
@@ -1966,8 +1966,8 @@ msgstr "Prednastavitev:"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
-msgid "Press {0} to decrease brush size"
-msgstr "Pritisni {0} za zmanjšanje širine čopiča"
+msgid "Press {0} to decrease brush width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
@@ -1976,13 +1976,13 @@ msgstr "Pritisni {0} za zmanjšanje velikosti pisave"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
-msgid "Press {0} to decrease outline size"
-msgstr "Pritisni {0} za zmanjšanje velikosti okvira"
+msgid "Press {0} to decrease outline width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
-msgid "Press {0} to increase brush size"
-msgstr "Pritisni {0} za povečanje velikosti čopiča"
+msgid "Press {0} to increase brush width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
@@ -1991,8 +1991,8 @@ msgstr "Pritisni {0} za povečanje velikosti pisave"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
-msgid "Press {0} to increase outline size"
-msgstr "Pritisni {0} za povečanje velikosti okvirja"
+msgid "Press {0} to increase outline width"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2531,7 +2531,7 @@ msgstr "Slog besedila"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "Vtičnik '{0}' morda ni združljiv s trenutno različico Pinte"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "Odložišče ne vsebuje slike."
 
@@ -2555,7 +2555,7 @@ msgstr "Nameščeni bodo sledeči paketi:"
 msgid "The following packages will be uninstalled:"
 msgstr "Sledeči paketi bodo odstranjeni:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2902,7 +2902,7 @@ msgstr "_Prilagoditve"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -2985,7 +2985,7 @@ msgstr "{0} + levi klik za določitev izvora, levi klik za slikanje."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0} kopija"
@@ -3007,6 +3007,22 @@ msgstr "{0} palet ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease brush size"
+#~ msgstr "Pritisni {0} za zmanjšanje širine čopiča"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease outline size"
+#~ msgstr "Pritisni {0} za zmanjšanje velikosti okvira"
+
+#, csharp-format
+#~ msgid "Press {0} to increase brush size"
+#~ msgstr "Pritisni {0} za povečanje velikosti čopiča"
+
+#, csharp-format
+#~ msgid "Press {0} to increase outline size"
+#~ msgstr "Pritisni {0} za povečanje velikosti okvirja"
 
 #~ msgid "Change brush width. Shortcut keys: [ ]"
 #~ msgstr "Spremeni širino čopiča. Bližnjica: [ ]"

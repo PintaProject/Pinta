@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:45+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2026-05-10 20:22+0000\n"
 "Last-Translator: jywondf <99643089+JoyWonderful@users.noreply.github.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -62,8 +62,8 @@ msgid "About Pinta"
 msgstr "关于 Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "添加新图层"
 
@@ -811,7 +811,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "排除 (-) (右键)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr "自动扩展"
 
@@ -1107,7 +1107,7 @@ msgstr "图像编辑器"
 msgid "Image Tabs"
 msgstr "图像标签"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "无法粘贴图像"
 
@@ -1116,7 +1116,7 @@ msgstr "无法粘贴图像"
 msgid "Image files"
 msgstr "图像文件"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "图像比画布大"
 
@@ -1256,7 +1256,7 @@ msgid "Layer Properties..."
 msgstr "图层属性..."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "第 {0} 图层"
@@ -1931,7 +1931,7 @@ msgid "Power"
 msgstr "强度"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr "维持原状"
 
@@ -1949,8 +1949,8 @@ msgstr "预设："
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
-msgid "Press {0} to decrease brush size"
-msgstr "按 {0} 让笔刷更细"
+msgid "Press {0} to decrease brush width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
@@ -1959,13 +1959,13 @@ msgstr "按 {0} 减小字体大小"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
-msgid "Press {0} to decrease outline size"
-msgstr "按 {0} 减小轮廓宽度"
+msgid "Press {0} to decrease outline width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
-msgid "Press {0} to increase brush size"
-msgstr "按 {0} 让笔刷更粗"
+msgid "Press {0} to increase brush width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
@@ -1974,8 +1974,8 @@ msgstr "按 {0} 增加字体大小"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
-msgid "Press {0} to increase outline size"
-msgstr "按 {0} 增加轮廓宽度"
+msgid "Press {0} to increase outline width"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2514,7 +2514,7 @@ msgstr "文本样式"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "附加组件“{0}”可能与此版本的 Pinta 不兼容"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "剪切板中没有图像。"
 
@@ -2538,7 +2538,7 @@ msgstr "下列软件包将被安装："
 msgid "The following packages will be uninstalled:"
 msgstr "下列软件包将被卸载："
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2877,7 +2877,7 @@ msgstr "调整"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -2969,7 +2969,7 @@ msgstr "{0}+左键点击设置原点，左键点击画。"
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0}副本"
@@ -2991,6 +2991,22 @@ msgstr "{0} 调色板 ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease brush size"
+#~ msgstr "按 {0} 让笔刷更细"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease outline size"
+#~ msgstr "按 {0} 减小轮廓宽度"
+
+#, csharp-format
+#~ msgid "Press {0} to increase brush size"
+#~ msgstr "按 {0} 让笔刷更粗"
+
+#, csharp-format
+#~ msgid "Press {0} to increase outline size"
+#~ msgstr "按 {0} 增加轮廓宽度"
 
 #~ msgid "Change brush width. Shortcut keys: [ ]"
 #~ msgstr "调整笔刷宽度。快捷键：[ ]"

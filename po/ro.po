@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:45+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2023-04-24 16:26+0000\n"
 "Last-Translator: Miron Cristea <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
@@ -62,8 +62,8 @@ msgid "About Pinta"
 msgstr "Despre Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "Adaugă strat nou"
 
@@ -808,7 +808,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Exclude (-) (Click dreapta)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr ""
 
@@ -1106,7 +1106,7 @@ msgstr "Editor imagini"
 msgid "Image Tabs"
 msgstr "File de imagine"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "Imaginea nu poate fi lipită"
 
@@ -1115,7 +1115,7 @@ msgstr "Imaginea nu poate fi lipită"
 msgid "Image files"
 msgstr "Fișiere imagine"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "Imagine mai mare decât canvas"
 
@@ -1250,7 +1250,7 @@ msgid "Layer Properties..."
 msgstr "Proprietăţile stratului..."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "Stratul {0}"
@@ -1900,7 +1900,7 @@ msgid "Power"
 msgstr "Putere"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr ""
 
@@ -1918,7 +1918,7 @@ msgstr "Prestabilit:"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
-msgid "Press {0} to decrease brush size"
+msgid "Press {0} to decrease brush width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
@@ -1928,12 +1928,12 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
-msgid "Press {0} to decrease outline size"
+msgid "Press {0} to decrease outline width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
-msgid "Press {0} to increase brush size"
+msgid "Press {0} to increase brush width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
@@ -1943,7 +1943,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
-msgid "Press {0} to increase outline size"
+msgid "Press {0} to increase outline width"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
@@ -2483,7 +2483,7 @@ msgstr "Stilul textului"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "Nu există nici o imagine în Clipboard"
 
@@ -2507,7 +2507,7 @@ msgstr "Următoarele pachete vor fi instalate:"
 msgid "The following packages will be uninstalled:"
 msgstr "Următoarele pachete vor fi dezinstalate:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2850,7 +2850,7 @@ msgstr "Ajustări"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -2943,7 +2943,7 @@ msgstr ""
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "copiaza {0}"

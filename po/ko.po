@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:45+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2026-04-07 03:55+0000\n"
 "Last-Translator: VenusGirl <VenusGirl@outlook.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/pinta/pinta/ko/>\n"
@@ -61,8 +61,8 @@ msgid "About Pinta"
 msgstr "Pinta 정보"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "새 레이어 추가"
 
@@ -808,7 +808,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "제외 (-) (오른쪽 클릭)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr "확장"
 
@@ -1105,7 +1105,7 @@ msgstr "이미지 편집기"
 msgid "Image Tabs"
 msgstr "이미지 탭"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "이미지를 붙여넣을 수 없습니다"
 
@@ -1114,7 +1114,7 @@ msgstr "이미지를 붙여넣을 수 없습니다"
 msgid "Image files"
 msgstr "이미지 파일"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "캔버스보다 큰 이미지"
 
@@ -1254,7 +1254,7 @@ msgid "Layer Properties..."
 msgstr "레이어 속성.."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "레이어 {0}"
@@ -1938,7 +1938,7 @@ msgid "Power"
 msgstr "힘"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr "보존"
 
@@ -1956,7 +1956,7 @@ msgstr "사전 설정:"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
-msgid "Press {0} to decrease brush size"
+msgid "Press {0} to decrease brush width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
@@ -1966,12 +1966,12 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
-msgid "Press {0} to decrease outline size"
+msgid "Press {0} to decrease outline width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
-msgid "Press {0} to increase brush size"
+msgid "Press {0} to increase brush width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
@@ -1981,7 +1981,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
-msgid "Press {0} to increase outline size"
+msgid "Press {0} to increase outline width"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
@@ -2521,7 +2521,7 @@ msgstr "글꼴 스타일"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "'{0}' 추가 기능이 이 버전의 Pinta와 호환되지 않을 수 있습니다"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "클립보드에 이미지가 없습니다."
 
@@ -2545,7 +2545,7 @@ msgstr "다음 패키지가 설치됩니다:"
 msgid "The following packages will be uninstalled:"
 msgstr "다음 패키지가 제거됩니다:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2887,7 +2887,7 @@ msgstr "조정(_A)"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -2964,7 +2964,7 @@ msgstr "{0} + 왼쪽 클릭으로 원점을 설정하고, 왼쪽 클릭으로 �
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0} 복사"

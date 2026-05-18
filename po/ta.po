@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:45+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2025-06-17 12:30+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/pinta/pinta/ta/>\n"
@@ -60,8 +60,8 @@ msgid "About Pinta"
 msgstr "பிண்டா பற்றி"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "புதிய அடுக்கைச் சேர்க்கவும்"
 
@@ -804,7 +804,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "விலக்கு (-) (வலது கிளிக்)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr "விரிவாக்கு"
 
@@ -1102,7 +1102,7 @@ msgstr "பட ஆசிரியர்"
 msgid "Image Tabs"
 msgstr "பட தாவல்கள்"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "படத்தை ஒட்ட முடியாது"
 
@@ -1111,7 +1111,7 @@ msgstr "படத்தை ஒட்ட முடியாது"
 msgid "Image files"
 msgstr "படக் கோப்புகள்"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "கேன்வாசை விட பெரிய படம்"
 
@@ -1246,7 +1246,7 @@ msgid "Layer Properties..."
 msgstr "அடுக்கு பண்புகள் ..."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "அடுக்கு {0}"
@@ -1928,7 +1928,7 @@ msgid "Power"
 msgstr "விசை"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr "பாதுகாக்கவும்"
 
@@ -1946,7 +1946,7 @@ msgstr "முன்னமைவு:"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
-msgid "Press {0} to decrease brush size"
+msgid "Press {0} to decrease brush width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
@@ -1956,12 +1956,12 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
-msgid "Press {0} to decrease outline size"
+msgid "Press {0} to decrease outline width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
-msgid "Press {0} to increase brush size"
+msgid "Press {0} to increase brush width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
@@ -1971,7 +1971,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
-msgid "Press {0} to increase outline size"
+msgid "Press {0} to increase outline width"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
@@ -2511,7 +2511,7 @@ msgstr "உரை நடை"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "பிண்டாவின் இந்த பதிப்போடு '{0}' சேர்க்கை பொருந்தாது"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "கிளிப்போர்டில் ஒரு படம் இல்லை."
 
@@ -2535,7 +2535,7 @@ msgstr "பின்வரும் தொகுப்புகள் நிற�
 msgid "The following packages will be uninstalled:"
 msgstr "பின்வரும் தொகுப்புகள் நிறுவல் நீக்கப்படும்:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2879,7 +2879,7 @@ msgstr "_சரிசெய்தல்"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -2956,7 +2956,7 @@ msgstr "{0} + இடது சொடுக்கு தோற்றத்தை 
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0} நகல்"

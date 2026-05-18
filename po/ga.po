@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:45+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2026-05-03 21:23+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
 "Language-Team: Irish <https://hosted.weblate.org/projects/pinta/pinta/ga/>\n"
@@ -61,8 +61,8 @@ msgid "About Pinta"
 msgstr "Maidir le Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "Cuir Ciseal Nua Leis"
 
@@ -812,7 +812,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Eisiamh (-) (Cliceáil ar Dheis)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr "Leathnaigh"
 
@@ -1114,7 +1114,7 @@ msgstr "Eagarthóir Íomhá"
 msgid "Image Tabs"
 msgstr "Cluaisíní Íomhá"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "Ní féidir an íomhá a ghreamú"
 
@@ -1123,7 +1123,7 @@ msgstr "Ní féidir an íomhá a ghreamú"
 msgid "Image files"
 msgstr "Comhaid íomhánna"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "Íomhá níos mó ná an chanbhás"
 
@@ -1265,7 +1265,7 @@ msgid "Layer Properties..."
 msgstr "Airíonna na Sraithe..."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "Sraith {0}"
@@ -1966,7 +1966,7 @@ msgid "Power"
 msgstr "Cumhacht"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr "Caomhnaigh"
 
@@ -1984,8 +1984,8 @@ msgstr "Réamhshocrú:"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
-msgid "Press {0} to decrease brush size"
-msgstr "Brúigh {0} chun méid na scuaibe a laghdú"
+msgid "Press {0} to decrease brush width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
@@ -1994,13 +1994,13 @@ msgstr "Brúigh {0} chun méid an chló a laghdú"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
-msgid "Press {0} to decrease outline size"
-msgstr "Brúigh {0} chun méid an imlíne a laghdú"
+msgid "Press {0} to decrease outline width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
-msgid "Press {0} to increase brush size"
-msgstr "Brúigh {0} chun méid na scuaibe a mhéadú"
+msgid "Press {0} to increase brush width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
@@ -2009,8 +2009,8 @@ msgstr "Brúigh {0} chun méid an chló a mhéadú"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
-msgid "Press {0} to increase outline size"
-msgstr "Brúigh {0} chun méid an imlíne a mhéadú"
+msgid "Press {0} to increase outline width"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2551,7 +2551,7 @@ msgstr ""
 "B’fhéidir nach bhfuil an breiseán '{0}' comhoiriúnach leis an leagan seo de "
 "Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "Níl íomhá ar an ngearrthaisce."
 
@@ -2576,7 +2576,7 @@ msgstr "Suiteálfar na pacáistí seo a leanas:"
 msgid "The following packages will be uninstalled:"
 msgstr "Díshuiteálfar na pacáistí seo a leanas:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2925,7 +2925,7 @@ msgstr "_Mionathruithe"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -3004,7 +3004,7 @@ msgstr ""
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "Cóip de {0}"
@@ -3026,6 +3026,22 @@ msgstr "pailéad {0} ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease brush size"
+#~ msgstr "Brúigh {0} chun méid na scuaibe a laghdú"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease outline size"
+#~ msgstr "Brúigh {0} chun méid an imlíne a laghdú"
+
+#, csharp-format
+#~ msgid "Press {0} to increase brush size"
+#~ msgstr "Brúigh {0} chun méid na scuaibe a mhéadú"
+
+#, csharp-format
+#~ msgid "Press {0} to increase outline size"
+#~ msgstr "Brúigh {0} chun méid an imlíne a mhéadú"
 
 #~ msgid "Change brush width. Shortcut keys: [ ]"
 #~ msgstr "Athraigh leithead an scuaibe. Eochracha aicearra: [ ]"

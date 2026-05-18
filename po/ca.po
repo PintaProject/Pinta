@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:45+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2025-11-11 11:55+0000\n"
 "Last-Translator: Emilio Baceda <elbaceda@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/pinta/pinta/ca/"
@@ -62,8 +62,8 @@ msgid "About Pinta"
 msgstr "Quant al Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "Afegeix una capa nova"
 
@@ -806,7 +806,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Exclou (-) (Clic dret)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr ""
 
@@ -1104,7 +1104,7 @@ msgstr "Editor d’imatges"
 msgid "Image Tabs"
 msgstr "Pestanyes d’imatges"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "No s’ha pogut enganxar la imatge"
 
@@ -1113,7 +1113,7 @@ msgstr "No s’ha pogut enganxar la imatge"
 msgid "Image files"
 msgstr "Fitxers d'imatge"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "La imatge és més gran que el llenç"
 
@@ -1248,7 +1248,7 @@ msgid "Layer Properties..."
 msgstr "Propietats de la capa..."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "Capa {0}"
@@ -1900,7 +1900,7 @@ msgid "Power"
 msgstr "Força"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr ""
 
@@ -1918,7 +1918,7 @@ msgstr "Valors predefinits:"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
-msgid "Press {0} to decrease brush size"
+msgid "Press {0} to decrease brush width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
@@ -1928,12 +1928,12 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
-msgid "Press {0} to decrease outline size"
+msgid "Press {0} to decrease outline width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
-msgid "Press {0} to increase brush size"
+msgid "Press {0} to increase brush width"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
@@ -1943,7 +1943,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
-msgid "Press {0} to increase outline size"
+msgid "Press {0} to increase outline width"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
@@ -2483,7 +2483,7 @@ msgstr "Estil del text"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "El complement «{0}» pot no ser compatible amb aquesta versió del Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "El porta-retalls no conté cap imatge."
 
@@ -2507,7 +2507,7 @@ msgstr "S'instal·laran els paquets següents:"
 msgid "The following packages will be uninstalled:"
 msgstr "Es desintal·laran els paquets següents:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2848,7 +2848,7 @@ msgstr "_Ajustaments"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -2937,7 +2937,7 @@ msgstr "{0} + clic esquerre per fixar l'origen. Clic esquerre per pintar."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0} còpia"

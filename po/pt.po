@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:45+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2026-05-10 20:23+0000\n"
 "Last-Translator: tomasteixeira07 <tomasteixeira93@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/pinta/pinta/"
@@ -63,8 +63,8 @@ msgid "About Pinta"
 msgstr "Acerca do Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "Adicionar nova camada"
 
@@ -813,7 +813,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Exclusão (-) (Botão direito do rato)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr "Expandir"
 
@@ -1111,7 +1111,7 @@ msgstr "Editor de imagens"
 msgid "Image Tabs"
 msgstr "Separadores de imagem"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "A imagem não pode ser colada"
 
@@ -1120,7 +1120,7 @@ msgstr "A imagem não pode ser colada"
 msgid "Image files"
 msgstr "Imagens"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "Imagem maior do que a tela"
 
@@ -1261,7 +1261,7 @@ msgid "Layer Properties..."
 msgstr "Propriedades da camada..."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "Camada {0}"
@@ -1960,7 +1960,7 @@ msgid "Power"
 msgstr "Energia"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr "Manter"
 
@@ -1978,8 +1978,8 @@ msgstr "Pré-ajuste:"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
-msgid "Press {0} to decrease brush size"
-msgstr "Pressione {0} para diminuir o tamanho do pincel"
+msgid "Press {0} to decrease brush width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
@@ -1988,13 +1988,13 @@ msgstr "Pressione {0} para diminuir o tamanho da fonte"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
-msgid "Press {0} to decrease outline size"
-msgstr "Pressione {0} para diminuir o tamanho do contorno"
+msgid "Press {0} to decrease outline width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
-msgid "Press {0} to increase brush size"
-msgstr "Pressione {0} para aumentar o tamanho do pincel"
+msgid "Press {0} to increase brush width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
@@ -2003,8 +2003,8 @@ msgstr "Pressione {0} para aumentar o tamanho da fonte"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
-msgid "Press {0} to increase outline size"
-msgstr "Pressione {0} para aumentar o tamanho do contorno"
+msgid "Press {0} to increase outline width"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2544,7 +2544,7 @@ msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
 "O complemento '{0}' talvez não seja compatível com esta versão do Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "A área de transferência não tem imagens."
 
@@ -2568,7 +2568,7 @@ msgstr "Serão instalados os seguintes pacotes:"
 msgid "The following packages will be uninstalled:"
 msgstr "Os pacotes seguintes serão removidos:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2915,7 +2915,7 @@ msgstr "_Ajustes"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -3013,7 +3013,7 @@ msgstr ""
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0} copiar"
@@ -3035,6 +3035,22 @@ msgstr "{0} paleta ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease brush size"
+#~ msgstr "Pressione {0} para diminuir o tamanho do pincel"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease outline size"
+#~ msgstr "Pressione {0} para diminuir o tamanho do contorno"
+
+#, csharp-format
+#~ msgid "Press {0} to increase brush size"
+#~ msgstr "Pressione {0} para aumentar o tamanho do pincel"
+
+#, csharp-format
+#~ msgid "Press {0} to increase outline size"
+#~ msgstr "Pressione {0} para aumentar o tamanho do contorno"
 
 #~ msgid "Change brush width. Shortcut keys: [ ]"
 #~ msgstr "Alterar largura do pincel. Teclas de atalho: [ ]"

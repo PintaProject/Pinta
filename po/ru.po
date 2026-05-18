@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-01 00:45+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2026-05-10 20:22+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,8 +63,8 @@ msgid "About Pinta"
 msgstr "О приложении Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "Добавить слой"
 
@@ -817,7 +817,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Отсоединить (-) (Правая кнопка мыши)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr "Расширить"
 
@@ -1117,7 +1117,7 @@ msgstr "Графический редактор"
 msgid "Image Tabs"
 msgstr "Вкладки"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "Изображение не может быть вставлено"
 
@@ -1126,7 +1126,7 @@ msgstr "Изображение не может быть вставлено"
 msgid "Image files"
 msgstr "Файлы изображений"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "Изображение больше, чем размер холста"
 
@@ -1268,7 +1268,7 @@ msgid "Layer Properties..."
 msgstr "Параметры слоя..."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "Слой {0}"
@@ -1970,7 +1970,7 @@ msgid "Power"
 msgstr "Мощность"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr "Оставить"
 
@@ -1988,8 +1988,8 @@ msgstr "Предустановка:"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
-msgid "Press {0} to decrease brush size"
-msgstr "Нажмите {0}, чтобы уменьшить размер кисти"
+msgid "Press {0} to decrease brush width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
@@ -1998,13 +1998,13 @@ msgstr "Нажмите {0}, чтобы уменьшить размер шриф�
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
-msgid "Press {0} to decrease outline size"
-msgstr "Нажмите {0}, чтобы уменьшить размер контура"
+msgid "Press {0} to decrease outline width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
-msgid "Press {0} to increase brush size"
-msgstr "Нажмите {0}, чтобы увеличить размер кисти"
+msgid "Press {0} to increase brush width"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
@@ -2013,8 +2013,8 @@ msgstr "Нажмите {0}, чтобы увеличить размер шриф�
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
-msgid "Press {0} to increase outline size"
-msgstr "Нажмите {0}, чтобы увеличить размер контура"
+msgid "Press {0} to increase outline width"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2553,7 +2553,7 @@ msgstr "Стиль текста"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "Дополнение «{0}» может быть несовместимо с данной версией Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "Буфер обмена не содержит изображение."
 
@@ -2577,7 +2577,7 @@ msgstr "Будут установлены следующие пакеты:"
 msgid "The following packages will be uninstalled:"
 msgstr "Следующие пакеты будут удалены:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2925,7 +2925,7 @@ msgstr "_Коррекция"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -3036,7 +3036,7 @@ msgstr ""
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0} копия"
@@ -3058,6 +3058,22 @@ msgstr "{0} палитра ({1})"
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease brush size"
+#~ msgstr "Нажмите {0}, чтобы уменьшить размер кисти"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease outline size"
+#~ msgstr "Нажмите {0}, чтобы уменьшить размер контура"
+
+#, csharp-format
+#~ msgid "Press {0} to increase brush size"
+#~ msgstr "Нажмите {0}, чтобы увеличить размер кисти"
+
+#, csharp-format
+#~ msgid "Press {0} to increase outline size"
+#~ msgstr "Нажмите {0}, чтобы увеличить размер контура"
 
 #~ msgid "Change brush width. Shortcut keys: [ ]"
 #~ msgstr "Изменить размер кисти. Комбинация клавиш: [ ]"
