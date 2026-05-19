@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-01 00:35+0000\n"
-"PO-Revision-Date: 2026-04-09 02:44+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
+"PO-Revision-Date: 2026-05-03 21:23+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -32,19 +32,19 @@ msgstr " Selectiemodus: "
 msgid "..."
 msgstr "…"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:236
 msgid "3 x 3 Region"
 msgstr "3 x 3-gebied"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:237
 msgid "5 x 5 Region"
 msgstr "5 x 5-gebied"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:238
 msgid "7 x 7 Region"
 msgstr "7 x 7-gebied"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "9 x 9 Region"
 msgstr "9 x 9-gebied"
 
@@ -61,8 +61,8 @@ msgid "About Pinta"
 msgstr "Over Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "Laag toevoegen"
 
@@ -74,15 +74,15 @@ msgstr "Ruis toevoegen"
 msgid "Add-in Manager..."
 msgstr "Uitbreidingenbeheer…"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:852
 msgid "Added"
 msgstr "Toegevoegd"
 
-#: ../Pinta/MainWindow.cs:453
+#: ../Pinta/MainWindow.cs:451
 msgid "Adjustments"
 msgstr "Aanpassingen"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
 msgid "After select"
 msgstr "Na selectie"
 
@@ -135,7 +135,7 @@ msgstr "Referentiepunt:"
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
-#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:53
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:52
@@ -146,11 +146,11 @@ msgstr "Hoek"
 msgid "Antialias"
 msgstr "Anti-aliasing"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:363
+#: ../Pinta.Core/Classes/BaseTool.cs:359
 msgid "Antialiasing Off"
 msgstr "Anti-aliasing uit"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:362
+#: ../Pinta.Core/Classes/BaseTool.cs:358
 msgid "Antialiasing On"
 msgstr "Anti-aliasing aan"
 
@@ -186,7 +186,7 @@ msgstr "Automatische niveaus"
 msgid "Available in repository: {0}"
 msgstr "Beschikbaar in repository: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "Achtergrond"
 
@@ -212,7 +212,7 @@ msgid "Best Fit"
 msgstr "Inpassen"
 
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:466
+#: ../Pinta.Tools/Tools/TextTool.cs:469
 msgid "Bevel Join"
 msgstr "Afgeschuinde verbinding"
 
@@ -250,7 +250,7 @@ msgid "Blurs"
 msgstr "Vervagingen"
 
 #. Translators: 'Bold' (700) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:305
+#: ../Pinta.Tools/Tools/TextTool.cs:308
 msgid "Bold"
 msgstr "Vet"
 
@@ -260,7 +260,7 @@ msgid "Bonfire"
 msgstr "Vreugdevuur"
 
 #. Translators: 'Book' (380) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:281
+#: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Book"
 msgstr "Boek"
 
@@ -289,7 +289,7 @@ msgstr "Helderheid/Contrast"
 msgid "Brush Size"
 msgstr "Kwastgrootte"
 
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:126
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:129
 msgid "Brush width"
 msgstr "Kwastgrootte"
 
@@ -314,7 +314,7 @@ msgstr "Procentueel:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:522
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:392
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Annuleren"
@@ -327,7 +327,7 @@ msgstr "Doek"
 msgid "Canvas Grid Settings"
 msgstr "Doekraster-instellingen"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:124
+#: ../Pinta.Core/Actions/ViewActions.cs:125
 msgid "Canvas Grid..."
 msgstr "Doekraster…"
 
@@ -347,7 +347,7 @@ msgstr "Cellen"
 msgid "Center"
 msgstr "Midden"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:377
+#: ../Pinta.Tools/Tools/TextTool.cs:380
 msgid "Center Align"
 msgstr "Centreren"
 
@@ -369,18 +369,21 @@ msgstr "Rechts uitlijnen"
 msgid "Centered"
 msgstr "Gecentreerd"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:228
 msgid "Centimeters"
 msgstr "Centimeter"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:365
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
-msgid "Change brush width. Shortcut keys: [ ]"
-msgstr "Kwastgrootte wijzigen. Sneltoetsen: [ ]"
+msgid "Change brush width."
+msgstr "Kwastgrootte aanpassen."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
-msgid "Change font size. Shortcut keys: [ ]"
-msgstr "Lettergrootte wijzigen. Sneltoetsen: [ ]"
+msgid "Change font size."
+msgstr "Lettergrootte aanpassen."
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+msgid "Change outline width."
+msgstr "Contourdikte aanpassen."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -452,12 +455,12 @@ msgstr "Klik en sleep om de afbeelding te verplaatsen."
 msgid "Click to reset primary and secondary color."
 msgstr "Klik om de primaire en secondaire kleur opnieuw in te stellen."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:582
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:333
 msgid "Click to select primary color."
 msgstr "Klik om de primaire kleur te selecteren."
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:50
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
@@ -465,12 +468,12 @@ msgstr ""
 "Klik om gebied van vergelijkbare kleur te selecteren.\n"
 "Houd Shift ingedrukt voor Globale modus."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
 msgid "Click to select secondary color."
 msgstr "Klik om de secundaire kleur te selecteren."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:424
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:340
 msgid "Click to switch between primary and secondary color."
 msgstr "Klik om te wisselen tussen primaire en secundaire kleur."
@@ -482,7 +485,7 @@ msgstr "Klik om te wisselen tussen primaire en secundaire kleur."
 msgid "Clipboard"
 msgstr "Klembord"
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:55
 msgid "Clone Stamp"
 msgstr "Kloonstempel"
 
@@ -533,7 +536,7 @@ msgstr "Kleurverloop"
 msgid "Color Mode"
 msgstr "Kleurmodus"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:57
 msgid "Color Picker"
 msgstr "Pipet"
 
@@ -545,7 +548,7 @@ msgstr "Kleurbereik"
 msgid "Color Saturation"
 msgstr "Kleurverzadiging"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Core/Actions/ViewActions.cs:254
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -613,8 +616,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Kon laag '{0}' van {1} niet importeren"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:166
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:428
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:440
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Bestand kon niet worden geopend: {0}"
@@ -654,7 +657,7 @@ msgid "Cut"
 msgstr "Knippen"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:250
+#: ../Pinta.Core/Actions/ViewActions.cs:251
 msgid "Dark"
 msgstr "Donker"
 
@@ -667,7 +670,7 @@ msgid "Dash"
 msgstr "Streek"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:246
+#: ../Pinta.Core/Actions/ViewActions.cs:247
 msgid "Default"
 msgstr "Systeemstandaard"
 
@@ -676,7 +679,7 @@ msgstr "Systeemstandaard"
 msgid "Delete Layer"
 msgstr "Laag verwijderen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:682
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:690
 msgid "Deleted"
 msgstr "Verwijderd"
 
@@ -725,7 +728,7 @@ msgstr "Vervormen"
 msgid "Dithering"
 msgstr "Dithering"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:216
 msgid "Do not switch tool"
 msgstr "Gereedschap behouden"
 
@@ -759,7 +762,7 @@ msgstr "Randen detecteren"
 msgid "Effe_cts"
 msgstr "Effe_cten"
 
-#: ../Pinta/MainWindow.cs:447
+#: ../Pinta/MainWindow.cs:446
 msgid "Effects"
 msgstr "Effecten"
 
@@ -770,7 +773,7 @@ msgstr "Elektrisch"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:276
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
-#: ../Pinta.Tools/Tools/EllipseTool.cs:45
+#: ../Pinta.Tools/Tools/EllipseTool.cs:43
 msgid "Ellipse"
 msgstr "Ellips"
 
@@ -793,7 +796,7 @@ msgstr ""
 msgid "Erase Selection"
 msgstr "Selectie wissen"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:51
+#: ../Pinta.Tools/Tools/EraserTool.cs:62
 msgid "Eraser"
 msgstr "Gum"
 
@@ -810,7 +813,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Uitsluiten (-) (rechtermuisknop)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr "Uitbreiden"
 
@@ -835,7 +838,7 @@ msgstr "Kan uitbreiding niet initiëren"
 msgid "Failed to load extension package"
 msgstr "Kan dit uitbreidingspakket niet laden"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
 msgid "Failed to open image"
 msgstr "Kan de afbeelding niet openen"
 
@@ -864,7 +867,7 @@ msgstr "Bug melden"
 msgid "Files to open"
 msgstr "Te openen bestanden"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:415
+#: ../Pinta.Tools/Tools/TextTool.cs:418
 msgid "Fill Background"
 msgstr "Achtergrond opvullen"
 
@@ -877,23 +880,23 @@ msgstr "Achtergrond van object opvullen"
 msgid "Fill Selection"
 msgstr "Selectie opvullen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:226
 msgid "Fill Shape"
 msgstr "Vorm vullen"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:327
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Style"
 msgstr "Opvulstijl"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:227
 msgid "Fill and Outline Shape"
 msgstr "Vorm vullen met contour"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1109
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1395
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1117
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1403
 #: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Finalized"
 msgstr "Afgewerkt"
@@ -976,7 +979,7 @@ msgstr "Vrije vorm"
 msgid "Frosted Glass"
 msgstr "Matglas"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:164
+#: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Fullscreen"
 msgstr "Beeldvullend"
 
@@ -1025,7 +1028,7 @@ msgid "Hard Light"
 msgstr "Hard licht"
 
 #. Translators: 'Heavy' (900) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:317
+#: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Heavy"
 msgstr "Heavy"
 
@@ -1036,11 +1039,12 @@ msgstr "Heavy"
 msgid "Height:"
 msgstr "Hoogte:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:363
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:313
 msgid "Hex"
 msgstr "Hex"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Hide Layer"
 msgstr "Laag verbergen"
 
@@ -1073,7 +1077,7 @@ msgstr "Horizontaal rood (R)"
 msgid "Hue"
 msgstr "Tint"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
 msgid "Hue & Sat"
 msgstr "Tint-/Verzadiging"
 
@@ -1085,7 +1089,7 @@ msgstr "Tint/Verzadiging"
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO-bestanden mogen niet groter zijn dan 255 × 255 pixels."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "If enabled, the Value component is applied to the color wheel."
 msgstr "Indien ingeschakeld, wordt de waarde op het kleurenwiel toegepast."
 
@@ -1093,7 +1097,7 @@ msgstr "Indien ingeschakeld, wordt de waarde op het kleurenwiel toegepast."
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Als u het bestand niet opslaat, gaan alle aanpassingen verlopen."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:459
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:254 ../Pinta/MainWindow.cs:456
 msgid "Image"
 msgstr "Afbeelding"
 
@@ -1105,7 +1109,7 @@ msgstr "Afbeeldingsbewerker"
 msgid "Image Tabs"
 msgstr "Afbeeldingstabbladen"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "De afbeelding kan niet worden geplakt"
 
@@ -1114,7 +1118,7 @@ msgstr "De afbeelding kan niet worden geplakt"
 msgid "Image files"
 msgstr "Afbeeldingsbestanden"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "Afbeelding groter dan doek"
 
@@ -1146,7 +1150,7 @@ msgstr ""
 "Druk op Enter om de selectie af te maken.\n"
 "Druk op Backspace om het laatste punt te verwijderen."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Inches"
 msgstr "Inches"
 
@@ -1209,7 +1213,7 @@ msgstr "Kleuren omkeren"
 msgid "Invert Selection"
 msgstr "Selectie omkeren"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:337
+#: ../Pinta.Tools/Tools/TextTool.cs:340
 msgid "Italic"
 msgstr "Cursief"
 
@@ -1238,19 +1242,15 @@ msgstr "Lasso-modus"
 msgid "Lasso Select"
 msgstr "Lasso selecteren"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:253
 msgid "Layer"
 msgstr "Laag"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Hidden"
-msgstr "De laag is verborgen"
-
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:101
 msgid "Layer Opacity"
 msgstr "Laagdekking"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:121
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "Laageigenschappen"
@@ -1259,12 +1259,8 @@ msgstr "Laageigenschappen"
 msgid "Layer Properties..."
 msgstr "Laageigenschappen…"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Shown"
-msgstr "De laag is zichtbaar"
-
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "Laag {0}"
@@ -1273,7 +1269,7 @@ msgstr "Laag {0}"
 msgid "Layers"
 msgstr "Lagen"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:365
+#: ../Pinta.Tools/Tools/TextTool.cs:368
 msgid "Left Align"
 msgstr "Links uitlijnen"
 
@@ -1308,7 +1304,7 @@ msgstr ""
 "Gebruik pijltjestoetsen om de selectiecontour met 1 pixel te verplaatsen."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:58
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1352,7 +1348,7 @@ msgstr ""
 "Rechtermuisknop voor de secudaire kleur."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:67
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1360,7 +1356,7 @@ msgstr ""
 "Linkermuisknop om te tekeken met de primaire kleur. Rechtermuisknop voor de "
 "secundaire kleur."
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:57
+#: ../Pinta.Tools/Tools/EraserTool.cs:68
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
@@ -1393,7 +1389,7 @@ msgstr ""
 "Linkermuisknop om de secundaire kleur te vervangen door de primaire kleur.\n"
 "Rechtermuisknop voor het omgekeerde."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:50
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:59
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
@@ -1446,8 +1442,8 @@ msgstr "Licentie"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:248
-#: ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Light"
 msgstr "Licht"
 
@@ -1468,7 +1464,7 @@ msgstr "Helderheid"
 msgid "Lime Lemon"
 msgstr "Limoen-Citroen"
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:43
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:42
 msgid "Line/Curve"
 msgstr "Lijn/Curve"
 
@@ -1493,7 +1489,7 @@ msgstr "Gekoppeld"
 msgid "Luminosity"
 msgstr "Lichtsterkte"
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:47
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Magic Wand Select"
 msgstr "Toverstaf"
 
@@ -1524,11 +1520,11 @@ msgid "Median"
 msgstr "Mediaan"
 
 #. Translators: 'Medium' (500) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:293
+#: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Medium"
 msgstr "Medium"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:130
+#: ../Pinta.Core/Actions/ViewActions.cs:131
 msgid "Menu Bar"
 msgstr "Menubalk"
 
@@ -1542,7 +1538,7 @@ msgid "Minimum Size"
 msgstr "Minimale grootte"
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:454
+#: ../Pinta.Tools/Tools/TextTool.cs:457
 msgid "Miter Join"
 msgstr "Verstekverbinding"
 
@@ -1550,7 +1546,7 @@ msgstr "Verstekverbinding"
 msgid "Mode"
 msgstr "Modus"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:926
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:934
 msgid "Modified"
 msgstr "Bewerkt"
 
@@ -1596,7 +1592,7 @@ msgstr "Naaste buur"
 msgid "New"
 msgstr "Nieuw"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:139
 #: ../Pinta/Dialogs/NewImageDialog.cs:232
 msgid "New Image"
 msgstr "Nieuwe afbeelding"
@@ -1627,12 +1623,12 @@ msgstr "Ruis"
 #. Translators: 'Normal' (400) refers to the font-weight text property
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:184
-#: ../Pinta.Tools/Tools/TextTool.cs:287 ../Pinta.Tools/Tools/TextTool.cs:412
+#: ../Pinta.Tools/Tools/EraserTool.cs:336 ../Pinta.Tools/Tools/TextTool.cs:184
+#: ../Pinta.Tools/Tools/TextTool.cs:290 ../Pinta.Tools/Tools/TextTool.cs:415
 msgid "Normal"
 msgstr "Standaard"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:341
 msgid "Normal Blending"
 msgstr "Standaard vermenging"
 
@@ -1640,7 +1636,7 @@ msgstr "Standaard vermenging"
 msgid "Normal Size"
 msgstr "Standaardgrootte"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:413
+#: ../Pinta.Tools/Tools/TextTool.cs:416
 msgid "Normal and Outline"
 msgstr "Standaard met contour"
 
@@ -1653,7 +1649,7 @@ msgstr "Aantal cellen"
 msgid "Number of threads to use for rendering"
 msgstr "Aantal threads dat mag worden gebruikt voor weergave"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:387
 msgid "OK"
 msgstr "Oké"
 
@@ -1693,7 +1689,7 @@ msgstr "Openen"
 msgid "Open Curve Shape"
 msgstr "Open vorm"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:351
 msgid "Open Image"
 msgstr "Afbeelding openen"
 
@@ -1723,7 +1719,7 @@ msgstr "Oriëntatie:"
 msgid "Original"
 msgstr "Origineel"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:414
+#: ../Pinta.Tools/Tools/TextTool.cs:417
 msgid "Outline"
 msgstr "Contour"
 
@@ -1739,13 +1735,13 @@ msgstr "Countourgrens"
 msgid "Outline Object"
 msgstr "Contourobject"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:225
 msgid "Outline Shape"
 msgstr "Vormcontour"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
-#: ../Pinta.Tools/Tools/TextTool.cs:428
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:353
+#: ../Pinta.Tools/Tools/TextTool.cs:431
 msgid "Outline width"
 msgstr "Contourdikte"
 
@@ -1761,7 +1757,7 @@ msgstr "Uitvoerhistogram"
 msgid "Overlay"
 msgstr "Bovenop"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Overwrite"
 msgstr "Overschrijven"
 
@@ -1769,7 +1765,7 @@ msgstr "Overschrijven"
 msgid "Paint Bucket"
 msgstr "Opvullen"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:65
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
 msgid "Paintbrush"
 msgstr "Kwast"
 
@@ -1882,7 +1878,7 @@ msgstr ""
 "afbeeldingseffecten en de mogelijkheid om te werken met een onbeperkt aantal "
 "lagen."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:441
 msgid "Pinta supports the following file formats:"
 msgstr "Pinta ondersteunt de volgende bestandsformaten:"
 
@@ -1894,7 +1890,7 @@ msgstr "Pinta ondersteunt de volgende paletformaten:"
 msgid "Pixelate"
 msgstr "Pixelvorming"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:225
+#: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Pixels"
 msgstr "Pixels"
 
@@ -1907,8 +1903,8 @@ msgstr "Piña Colada"
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Start Pinta opnieuw op om de wijzigingen door te voeren."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:620
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:823
 msgid "Point Added"
 msgstr "Punt toegevoegd"
 
@@ -1922,7 +1918,7 @@ msgstr "Puntenplaatsing"
 msgid "Point Color"
 msgstr "Puntkleur"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:671
 msgid "Point Deleted"
 msgstr "Punt verwijderd"
 
@@ -1957,7 +1953,7 @@ msgid "Power"
 msgstr "Kracht"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr "Behouden"
 
@@ -1972,6 +1968,36 @@ msgstr "Vooringestelde paletten"
 #: ../Pinta/Dialogs/NewImageDialog.cs:336
 msgid "Preset:"
 msgstr "Voorinstelling:"
+
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+#, csharp-format
+msgid "Press {0} to decrease brush width"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:245
+#, csharp-format
+msgid "Press {0} to decrease font size"
+msgstr "Druk op {0} om de lettergrootte te verkleinen"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
+#, csharp-format
+msgid "Press {0} to decrease outline width"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
+#, csharp-format
+msgid "Press {0} to increase brush width"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:246
+#, csharp-format
+msgid "Press {0} to increase font size"
+msgstr "Druk op {0} om de lettergrootte te vergroten"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
+#, csharp-format
+msgid "Press {0} to increase outline width"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2022,7 +2048,7 @@ msgstr "Radiaal verloop"
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:85
 msgid "Radius"
 msgstr "Radius"
 
@@ -2070,7 +2096,7 @@ msgstr "Recent gebruikte kleuren"
 msgid "Recolor"
 msgstr "Verkleuren"
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+#: ../Pinta.Tools/Tools/RectangleTool.cs:42
 msgid "Rectangle"
 msgstr "Rechthoek"
 
@@ -2120,7 +2146,7 @@ msgstr "Uitgebracht onder de MIT X11-licentie."
 msgid "Relief"
 msgstr "Verlichten"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Rename Layer"
 msgstr "Laagnaam wijzigen"
 
@@ -2154,7 +2180,7 @@ msgstr "Opnieuw genereren"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:375
 msgid "Reset"
 msgstr "Herstellen"
 
@@ -2205,7 +2231,7 @@ msgstr "Kleurenschema omkeren"
 msgid "Reverse Color Sorting"
 msgstr "Kleurensortering omkeren"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:389
+#: ../Pinta.Tools/Tools/TextTool.cs:392
 msgid "Right Align"
 msgstr "Rechts uitlijnen"
 
@@ -2243,7 +2269,7 @@ msgid "Roughness"
 msgstr "Ruwheid"
 
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:460
+#: ../Pinta.Tools/Tools/TextTool.cs:463
 msgid "Round Join"
 msgstr "Ronde verbinding"
 
@@ -2255,19 +2281,19 @@ msgstr "Afgeronde lijnenreeks"
 msgid "Rounded Line Shape"
 msgstr "Afgeronde lijnenvorm"
 
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
 msgstr "Afgeronde rechthoek"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:230
+#: ../Pinta.Core/Actions/ViewActions.cs:231
 msgid "Ruler Units"
 msgstr "Liniaaleenheden"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:148
+#: ../Pinta.Core/Actions/ViewActions.cs:149
 msgid "Rulers"
 msgstr "Linialen"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
 msgid "Sampling"
 msgstr "Bemonstering"
 
@@ -2276,7 +2302,7 @@ msgstr "Bemonstering"
 msgid "Sat"
 msgstr "Verzadiging"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:277
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
 msgid "Sat & Value"
 msgstr "Verzadiging & waarde"
 
@@ -2340,12 +2366,12 @@ msgid "Selected Colors"
 msgstr "Geselecteerde kleuren"
 
 #. Translators: 'Semibold' (600) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:299
+#: ../Pinta.Tools/Tools/TextTool.cs:302
 msgid "Semibold"
 msgstr "Half-vet"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:275
+#: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Semilight"
 msgstr "Semilight"
 
@@ -2370,15 +2396,21 @@ msgid "Sharpen"
 msgstr "Verscherpen"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:425
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:341
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:44
 msgid "Shortcut key"
 msgstr "Sneltoets"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
 msgstr "Sneltoetsen"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
+#: ../Pinta.Tools/Tools/TextTool.cs:244
+msgid "Shortcut keys:"
+msgstr "Sneltoetsen:"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
@@ -2388,7 +2420,8 @@ msgstr "Axonometrisch raster tonen"
 msgid "Show Grid"
 msgstr "Raster tonen"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Show Layer"
 msgstr "Laag tonen"
 
@@ -2397,11 +2430,11 @@ msgstr "Laag tonen"
 msgid "Show Points"
 msgstr "Punten weergeven"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:270
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:192
 msgid "Show Value"
 msgstr "Waarde tonen"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:242
+#: ../Pinta.Core/Actions/ViewActions.cs:243
 msgid "Show/Hide"
 msgstr "Tonen/Verbergen"
 
@@ -2415,7 +2448,7 @@ msgstr "Sierra"
 msgid "Sierra Lite"
 msgstr "Sierra Lite"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:235
 msgid "Single Pixel"
 msgstr "Enkele pixel"
 
@@ -2432,7 +2465,7 @@ msgstr "Schuine streep"
 msgid "Small Caps"
 msgstr "Small Caps"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:326
+#: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
 msgstr "Vloeiend"
 
@@ -2456,7 +2489,7 @@ msgstr "Spetteren"
 msgid "Squares"
 msgstr "Vierkanten"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:136
+#: ../Pinta.Core/Actions/ViewActions.cs:137
 msgid "Status Bar"
 msgstr "Statusbalk"
 
@@ -2477,11 +2510,11 @@ msgstr "Stucki"
 msgid "Stylize"
 msgstr "Stileren"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:218
 msgid "Switch to Pencil tool"
 msgstr "Potlood gebruiken"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:217
 msgid "Switch to previous tool"
 msgstr "Vorig gereedschap gebruiken"
 
@@ -2493,7 +2526,7 @@ msgstr "Tekst"
 msgid "Text - Finalize"
 msgstr "Tekst - Afwerken"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:403
+#: ../Pinta.Tools/Tools/TextTool.cs:406
 msgid "Text Style"
 msgstr "Tekststijl"
 
@@ -2504,7 +2537,7 @@ msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
 "Uitbreiding ‘{0}’ is mogelijk niet compatibel met deze versie van Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "Het klembord bevat geen afbeelding."
 
@@ -2528,7 +2561,7 @@ msgstr "De volgende pakketten worden geïnstalleerd:"
 msgid "The following packages will be uninstalled:"
 msgstr "De volgende pakketten worden verwijderd:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2573,7 +2606,7 @@ msgid "Thickness"
 msgstr "Dikte"
 
 #. Translators: 'Thin' (100) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:257
+#: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Thin"
 msgstr "Thin"
 
@@ -2610,11 +2643,11 @@ msgstr "Title Caps"
 msgid "Tolerance"
 msgstr "Tolerantie"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:374
+#: ../Pinta.Core/Managers/ToolManager.cs:351
 msgid "Tool"
 msgstr "Gereedschap"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:142
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Tool Box"
 msgstr "Gereedschapskist"
 
@@ -2668,27 +2701,27 @@ msgstr "Spiraal"
 msgid "Two-Row Sierra"
 msgstr "Sierra dubbel"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:322
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:214
+#: ../Pinta.Tools/Tools/EraserTool.cs:332
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
 msgid "Type"
 msgstr "Soort"
 
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:311
+#: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Ultrabold"
 msgstr "Ultra-vet"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:323
+#: ../Pinta.Tools/Tools/TextTool.cs:326
 msgid "Ultraheavy"
 msgstr "Ultraheavy"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:263
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Ultralight"
 msgstr "Ultralight"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:349
+#: ../Pinta.Tools/Tools/TextTool.cs:352
 msgid "Underline"
 msgstr "Onderstrepen"
 
@@ -2725,7 +2758,7 @@ msgstr "Samenvoegen (+) ({0} + linkermuisknop)"
 msgid "Unsaved Image {0}"
 msgstr "Niet-opgeslagen bestand: ‘{0}’"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:346
 msgid "Unsupported file format"
 msgstr "Niet-ondersteund bestandstype"
 
@@ -2777,7 +2810,7 @@ msgstr "Verticaal groen (G)"
 msgid "Vertical red (R)"
 msgstr "Verticaal rood (R)"
 
-#: ../Pinta/MainWindow.cs:465
+#: ../Pinta/MainWindow.cs:461
 msgid "View"
 msgstr "Beeld"
 
@@ -2810,10 +2843,10 @@ msgstr "Wit"
 msgid "Width:"
 msgstr "Breedte:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:207
-#: ../Pinta.Core/Actions/ViewActions.cs:395
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:365
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:374
+#: ../Pinta.Core/Actions/ViewActions.cs:208
+#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Venster"
 
@@ -2832,7 +2865,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + rechtermuisknop)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:463
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "U heeft geen toegang tot ‘{0}’."
@@ -2873,9 +2906,9 @@ msgstr "Zoomen tot selectie"
 msgid "_Adjustments"
 msgstr "_Aanpassingen"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -2902,8 +2935,8 @@ msgstr "_Hulp"
 msgid "_Image"
 msgstr "Afbeeld_ing"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:219
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:223
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
@@ -2948,7 +2981,7 @@ msgstr ""
 " Arjan ten Vergert"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:49
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:58
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr ""
@@ -2957,7 +2990,7 @@ msgstr ""
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0} (kopie)"
@@ -2975,10 +3008,38 @@ msgstr "{0}-palet ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:376
+#: ../Pinta.Core/Actions/ViewActions.cs:377
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease brush size"
+#~ msgstr "Druk op {0} om de kwast te verkleinen"
+
+#, csharp-format
+#~ msgid "Press {0} to decrease outline size"
+#~ msgstr "Druk op {0} om de contourdikte te verkleinen"
+
+#, csharp-format
+#~ msgid "Press {0} to increase brush size"
+#~ msgstr "Druk op {0} om de kwast te vergroten"
+
+#, csharp-format
+#~ msgid "Press {0} to increase outline size"
+#~ msgstr "Druk op {0} om de contourdikte te vergroten"
+
+#~ msgid "Change brush width. Shortcut keys: [ ]"
+#~ msgstr "Kwastgrootte wijzigen. Sneltoetsen: [ ]"
+
+#~ msgid "Change font size. Shortcut keys: [ ]"
+#~ msgstr "Lettergrootte wijzigen. Sneltoetsen: [ ]"
+
+#~ msgid "Layer Hidden"
+#~ msgstr "De laag is verborgen"
+
+#~ msgid "Layer Shown"
+#~ msgstr "De laag is zichtbaar"
 
 #~ msgid "Click to select region of similar color."
 #~ msgstr "Klik om een gebied met overeenkomstige kleuren te selecteren."
