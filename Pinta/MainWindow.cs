@@ -605,7 +605,17 @@ internal sealed class MainWindow
 		if (args.Value.GetBoxed (Gdk.FileList.GetGType ()) is not Gdk.FileList file_list)
 			return false;
 
-		foreach (Gio.File file in file_list.GetFilesHelper ()) {
+		foreach (Gio.File file_dropped in file_list.GetFilesHelper ()) {
+			Gio.File file = file_dropped;
+
+			// On macOS, GTK4 pasteboard currently provides malformed URIs where the scheme is URL-encoded
+			// (e.g., "file%3A///" instead of "file:///"). Because of this, GIO fails to recognize it as a local file.
+			string parseName = file_dropped.GetParseName ();
+			if (parseName.StartsWith ("file%3A///", StringComparison.OrdinalIgnoreCase)) {
+				string decodedUri = Uri.UnescapeDataString (parseName);
+				file = Gio.FileHelper.NewForUri (decodedUri);
+			}
+
 			PintaCore.Workspace.OpenFile (file);
 
 			if (file.GetUriScheme () is string scheme &&
