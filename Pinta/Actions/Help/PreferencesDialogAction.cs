@@ -50,6 +50,18 @@ internal sealed class PreferencesDialogAction : IActionHandler
 		shortcutsPage.Title = Translations.GetString ("Keyboard Shortcuts");
 		shortcutsPage.IconName = "keyboard-shortcuts-symbolic";
 
+		// Helper to format the shortcut string for the current OS
+		string FormatShortcut (string shortcut)
+		{
+			bool isMac = SystemManager.GetOperatingSystem () == OS.Mac;
+
+			// 1. Map <Primary> to the main modifier (Cmd on Mac, Ctrl on Win/Lin)
+			// 2. Normalize <Ctrl> to <Control> for GTK consistency
+			return shortcut
+				.Replace ("<Primary>", isMac ? "<Meta>" : "<Control>")
+				.Replace ("<Ctrl>", "<Control>");
+		}
+
 		// Helper to create and populate a group
 		void AddGroup (string title, IEnumerable<Command> commands)
 		{
@@ -72,7 +84,8 @@ internal sealed class PreferencesDialogAction : IActionHandler
 					row.IconName = cmd.IconName;
 				}
 
-				Gtk.ShortcutLabel shortcutLabel = Gtk.ShortcutLabel.New (cmd.Shortcuts[0]);
+				string formattedShortcut = FormatShortcut (cmd.Shortcuts[0]);
+				Gtk.ShortcutLabel shortcutLabel = Gtk.ShortcutLabel.New (formattedShortcut);
 				row.AddSuffix (shortcutLabel);
 				group.Add (row);
 			}
