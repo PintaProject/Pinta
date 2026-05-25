@@ -60,7 +60,6 @@ internal sealed class PreferencesDialogAction : IActionHandler
 		allCommands.AddRange (GetCommands (actions.Edit));
 		allCommands.AddRange (GetCommands (actions.View));
 		allCommands.AddRange (GetCommands (actions.Image));
-		allCommands.AddRange (GetCommands (actions.Layers));
 		allCommands.AddRange (GetCommands (actions.Window));
 		allCommands.AddRange (GetCommands (actions.Help));
 		allCommands.AddRange (GetCommands (actions.Addins));
@@ -83,7 +82,29 @@ internal sealed class PreferencesDialogAction : IActionHandler
 		}
 		shortcutsPage.Add (menuShortcutsGroup);
 
-		// --- 2. Tool Shortcuts ---
+		// --- 2. Layer Shortcuts ---
+		Adw.PreferencesGroup layerShortcutsGroup = Adw.PreferencesGroup.New ();
+		layerShortcutsGroup.Title = Translations.GetString ("Layer Commands");
+
+		var layerCommands = GetCommands (actions.Layers)
+			.Where (c => c.Shortcuts.Length > 0 && !string.IsNullOrEmpty(c.Label))
+			.OrderBy (c => c.Label);
+
+		foreach (var cmd in layerCommands) {
+			Adw.ActionRow row = Adw.ActionRow.New ();
+			row.Title = cmd.Label.Replace ("_", "");
+
+			if (cmd.IconName != null) {
+				row.IconName = cmd.IconName;
+			}
+
+			Gtk.ShortcutLabel shortcutLabel = Gtk.ShortcutLabel.New (cmd.Shortcuts[0]);
+			row.AddSuffix (shortcutLabel);
+			layerShortcutsGroup.Add (row);
+		}
+		shortcutsPage.Add (layerShortcutsGroup);
+
+		// --- 3. Tool Shortcuts ---
 		Adw.PreferencesGroup toolShortcutsGroup = Adw.PreferencesGroup.New ();
 		toolShortcutsGroup.Title = Translations.GetString ("Tools");
 
