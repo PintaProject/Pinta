@@ -14,15 +14,18 @@ internal sealed class PreferencesDialogAction : IActionHandler
 	private readonly AppActions app;
 	private readonly ActionManager actions;
 	private readonly ChromeManager chrome;
+	private readonly ToolManager tools;
 
 	internal PreferencesDialogAction (
 		AppActions app,
 		ActionManager actions,
-		ChromeManager chrome)
+		ChromeManager chrome,
+		ToolManager tools)
 	{
 		this.app = app;
 		this.actions = actions;
 		this.chrome = chrome;
+		this.tools = tools;
 	}
 
 	void IActionHandler.Initialize ()
@@ -47,10 +50,10 @@ internal sealed class PreferencesDialogAction : IActionHandler
 		shortcutsPage.Title = Translations.GetString ("Keyboard Shortcuts");
 		shortcutsPage.IconName = "keyboard-shortcuts-symbolic";
 
-		Adw.PreferencesGroup shortcutsGroup = Adw.PreferencesGroup.New ();
-		shortcutsGroup.Title = Translations.GetString ("Application Shortcuts");
+		// --- 1. Menu & Action Shortcuts ---
+		Adw.PreferencesGroup menuShortcutsGroup = Adw.PreferencesGroup.New ();
+		menuShortcutsGroup.Title = Translations.GetString ("Application Commands");
 
-		// Gather all commands from Pinta's action manager
 		var allCommands = new List<Command> ();
 		allCommands.AddRange (GetCommands (actions.App));
 		allCommands.AddRange (GetCommands (actions.File));
@@ -62,27 +65,46 @@ internal sealed class PreferencesDialogAction : IActionHandler
 		allCommands.AddRange (GetCommands (actions.Help));
 		allCommands.AddRange (GetCommands (actions.Addins));
 
-		// Sort alphabetically by label and filter out commands without shortcuts
 		var commandsWithShortcuts = allCommands
 			.Where (c => c.Shortcuts.Length > 0 && !string.IsNullOrEmpty(c.Label))
 			.OrderBy (c => c.Label);
 
 		foreach (var cmd in commandsWithShortcuts) {
 			Adw.ActionRow row = Adw.ActionRow.New ();
-			row.Title = cmd.Label.Replace ("_", ""); // Remove GTK mnemonic underscores
+			row.Title = cmd.Label.Replace ("_", "");
 
 			if (cmd.IconName != null) {
 				row.IconName = cmd.IconName;
 			}
 
-			// Use a Gtk.ShortcutLabel to display the keys nicely
 			Gtk.ShortcutLabel shortcutLabel = Gtk.ShortcutLabel.New (cmd.Shortcuts[0]);
 			row.AddSuffix (shortcutLabel);
-
-			shortcutsGroup.Add (row);
+			menuShortcutsGroup.Add (row);
 		}
+		shortcutsPage.Add (menuShortcutsGroup);
 
-		shortcutsPage.Add (shortcutsGroup);
+		// --- 2. Tool Shortcuts ---
+		Adw.PreferencesGroup toolShortcutsGroup = Adw.PreferencesGroup.New ();
+		toolShortcutsGroup.Title = Translations.GetString ("Tools");
+
+		// tool.ShortcutKey returns a Gdk.Key. We filter out the 'invalid/void' keys.
+		var toolsWithShortcuts = tools
+			.Where (t => t.ShortcutKey.Value != 0 && t.ShortcutKey.Value != Gdk.Constants.KEY_VoidSymbol)
+			.OrderBy (t => t.Name);
+
+		foreach (var tool in toolsWithShortcuts) {
+			Adw.ActionRow row = Adw.ActionRow.New ();
+			row.Title = tool.Name;
+			row.IconName = tool.Icon;
+
+			// Gtk.ShortcutLabel natively understands strings like "B" or "M"
+			string keyName = ((char)tool.ShortcutKey.Value).ToString ().ToUpperInvariant ();
+			Gtk.ShortcutLabel shortcutLabel = Gtk.ShortcutLabel.New (keyName);
+			row.AddSuffix (shortcutLabel);
+			toolShortcutsGroup.Add (row);
+		}
+		shortcutsPage.Add (toolShortcutsGroup);
+
 		dialog.Add (shortcutsPage);
 
 		await dialog.PresentAsync ();
@@ -90,7 +112,6 @@ internal sealed class PreferencesDialogAction : IActionHandler
 
 	private static IEnumerable<Command> GetCommands(object actionCollection)
 	{
-		// Simple reflection to grab all 'Command' properties from the action classes (FileActions, EditActions, etc.)
 		return actionCollection.GetType()
 			.GetProperties()
 			.Where(p => p.PropertyType == typeof(Command))
