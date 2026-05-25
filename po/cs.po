@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-15 00:45+0000\n"
-"PO-Revision-Date: 2026-05-18 15:11+0000\n"
+"PO-Revision-Date: 2026-05-26 05:11+0000\n"
 "Last-Translator: Elviska <vonelviska@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/pinta/pinta/cs/>\n"
 "Language: cs\n"
@@ -1963,7 +1963,7 @@ msgstr "Předvolba:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush width"
-msgstr ""
+msgstr "Pro zmenšení šířky štětce zmáčkněte {0}"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
@@ -1973,12 +1973,12 @@ msgstr "Pro zmenšení fontu zmáčkněte {0}"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline width"
-msgstr ""
+msgstr "Pro zmenšení šířky obrysu zmáčkněte {0}"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush width"
-msgstr ""
+msgstr "Pro zvětšení šířky štětce zmáčkněte {0}"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
@@ -1988,7 +1988,7 @@ msgstr "Pro zvětšení fontu zmáčkněte {0}"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline width"
-msgstr ""
+msgstr "Pro zvětšení šířky obrysu zmáčkněte {0}"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
