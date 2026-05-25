@@ -50,61 +50,37 @@ internal sealed class PreferencesDialogAction : IActionHandler
 		shortcutsPage.Title = Translations.GetString ("Keyboard Shortcuts");
 		shortcutsPage.IconName = "keyboard-shortcuts-symbolic";
 
-		// --- 1. Menu & Action Shortcuts ---
-		Adw.PreferencesGroup menuShortcutsGroup = Adw.PreferencesGroup.New ();
-		menuShortcutsGroup.Title = Translations.GetString ("Application Commands");
+		// Helper to create and populate a group
+		void AddGroup (string title, IEnumerable<Command> commands)
+		{
+			var validCommands = commands
+				.Where (c => c.Shortcuts.Length > 0 && !string.IsNullOrEmpty(c.Label))
+				.OrderBy (c => c.Label)
+				.ToList ();
 
-		var allCommands = new List<Command> ();
-		allCommands.AddRange (GetCommands (actions.App));
-		allCommands.AddRange (GetCommands (actions.File));
-		allCommands.AddRange (GetCommands (actions.Edit));
-		allCommands.AddRange (GetCommands (actions.View));
-		allCommands.AddRange (GetCommands (actions.Image));
-		allCommands.AddRange (GetCommands (actions.Window));
-		allCommands.AddRange (GetCommands (actions.Help));
-		allCommands.AddRange (GetCommands (actions.Addins));
+			if (validCommands.Count == 0)
+				return;
 
-		var commandsWithShortcuts = allCommands
-			.Where (c => c.Shortcuts.Length > 0 && !string.IsNullOrEmpty(c.Label))
-			.OrderBy (c => c.Label);
+			Adw.PreferencesGroup group = Adw.PreferencesGroup.New ();
+			group.Title = Translations.GetString (title);
 
-		foreach (var cmd in commandsWithShortcuts) {
-			Adw.ActionRow row = Adw.ActionRow.New ();
-			row.Title = cmd.Label.Replace ("_", "");
+			foreach (var cmd in validCommands) {
+				Adw.ActionRow row = Adw.ActionRow.New ();
+				row.Title = cmd.Label.Replace ("_", "");
 
-			if (cmd.IconName != null) {
-				row.IconName = cmd.IconName;
+				if (cmd.IconName != null) {
+					row.IconName = cmd.IconName;
+				}
+
+				Gtk.ShortcutLabel shortcutLabel = Gtk.ShortcutLabel.New (cmd.Shortcuts[0]);
+				row.AddSuffix (shortcutLabel);
+				group.Add (row);
 			}
 
-			Gtk.ShortcutLabel shortcutLabel = Gtk.ShortcutLabel.New (cmd.Shortcuts[0]);
-			row.AddSuffix (shortcutLabel);
-			menuShortcutsGroup.Add (row);
+			shortcutsPage.Add (group);
 		}
-		shortcutsPage.Add (menuShortcutsGroup);
 
-		// --- 2. Layer Shortcuts ---
-		Adw.PreferencesGroup layerShortcutsGroup = Adw.PreferencesGroup.New ();
-		layerShortcutsGroup.Title = Translations.GetString ("Layer Commands");
-
-		var layerCommands = GetCommands (actions.Layers)
-			.Where (c => c.Shortcuts.Length > 0 && !string.IsNullOrEmpty(c.Label))
-			.OrderBy (c => c.Label);
-
-		foreach (var cmd in layerCommands) {
-			Adw.ActionRow row = Adw.ActionRow.New ();
-			row.Title = cmd.Label.Replace ("_", "");
-
-			if (cmd.IconName != null) {
-				row.IconName = cmd.IconName;
-			}
-
-			Gtk.ShortcutLabel shortcutLabel = Gtk.ShortcutLabel.New (cmd.Shortcuts[0]);
-			row.AddSuffix (shortcutLabel);
-			layerShortcutsGroup.Add (row);
-		}
-		shortcutsPage.Add (layerShortcutsGroup);
-
-		// --- 3. Tool Shortcuts ---
+		// 1. Tool Shortcuts
 		Adw.PreferencesGroup toolShortcutsGroup = Adw.PreferencesGroup.New ();
 		toolShortcutsGroup.Title = Translations.GetString ("Tools");
 
@@ -118,13 +94,26 @@ internal sealed class PreferencesDialogAction : IActionHandler
 			row.Title = tool.Name;
 			row.IconName = tool.Icon;
 
-			// Gtk.ShortcutLabel natively understands strings like "B" or "M"
 			string keyName = ((char)tool.ShortcutKey.Value).ToString ().ToUpperInvariant ();
 			Gtk.ShortcutLabel shortcutLabel = Gtk.ShortcutLabel.New (keyName);
 			row.AddSuffix (shortcutLabel);
 			toolShortcutsGroup.Add (row);
 		}
+
 		shortcutsPage.Add (toolShortcutsGroup);
+
+		// 2. Layer Commands
+		AddGroup ("Layers", GetCommands (actions.Layers));
+
+		// 3. Menu Commands
+		AddGroup ("File", GetCommands (actions.File));
+		AddGroup ("Edit", GetCommands (actions.Edit));
+		AddGroup ("View", GetCommands (actions.View));
+		AddGroup ("Image", GetCommands (actions.Image));
+		AddGroup ("Adjustments", actions.Adjustments.Actions);
+		AddGroup ("Effects", actions.Effects.Actions);
+		AddGroup ("Window", GetCommands (actions.Window));
+		AddGroup ("Help", GetCommands (actions.Help));
 
 		dialog.Add (shortcutsPage);
 
