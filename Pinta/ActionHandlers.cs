@@ -93,8 +93,8 @@ public sealed class ActionHandlers
 
 			// Help
 			new AboutDialogAction (actions.App, chrome, applicationVersion),
+			new PreferencesDialogAction (actions.App, actions, chrome),
 		];
-
 		// Initialize each action handler
 		foreach (var action in action_handlers)
 			action.Initialize ();

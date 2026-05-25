@@ -31,6 +31,7 @@ namespace Pinta.Core;
 public sealed class AppActions
 {
 	public Command About { get; }
+	public Command Preferences { get; }
 	public Command Exit { get; }
 
 	public event EventHandler? BeforeQuit;
@@ -42,6 +43,12 @@ public sealed class AppActions
 			Translations.GetString ("About"),
 			null,
 			Resources.StandardIcons.HelpAbout);
+		Preferences = new Command (
+			"preferences",
+			Translations.GetString ("Preferences"),
+			null,
+			"preferences-system-symbolic",
+			shortcuts: ["<Primary>comma"]);
 		Exit = new Command (
 			"quit",
 			Translations.GetString ("Quit"),
@@ -54,6 +61,7 @@ public sealed class AppActions
 	{
 		app.AddCommands ([
 			About,
+			Preferences,
 			Exit]);
 	}
 
