@@ -42,7 +42,7 @@ internal sealed class PreferencesDialogAction : IActionHandler
 	{
 		using Adw.PreferencesWindow dialog = Adw.PreferencesWindow.New ();
 		dialog.TransientFor = chrome.MainWindow;
-		dialog.Title = Translations.GetString ("Preferences");
+		dialog.Title = Translations.GetString ("Keyboard Shortcuts");
 		dialog.DefaultWidth = 600;
 		dialog.DefaultHeight = 800;
 

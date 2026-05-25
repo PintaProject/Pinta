@@ -44,11 +44,11 @@ public sealed class AppActions
 			null,
 			Resources.StandardIcons.HelpAbout);
 		Preferences = new Command (
-			"preferences",
-			Translations.GetString ("Preferences"),
-			null,
-			"preferences-system-symbolic",
-			shortcuts: ["<Primary>comma"]);
+		        "preferences",
+		        Translations.GetString ("Keyboard Shortcuts"),
+		        null,
+		        "preferences-system-symbolic",
+		        shortcuts: ["<Primary>comma"]);
 		Exit = new Command (
 			"quit",
 			Translations.GetString ("Quit"),
