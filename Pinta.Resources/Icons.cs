@@ -94,15 +94,15 @@ public static class Icons
 	public const string AddinsManage = "addins-manage";
 
 	public const string AdjustmentsDefault = "adjustments-default-symbolic";
-	public const string AdjustmentsAutoLevel = "adjustments-autolevel";
-	public const string AdjustmentsBlackAndWhite = "adjustments-blackandwhite";
+	public const string AdjustmentsAutoLevel = "adjustments-autolevel-symbolic";
+	public const string AdjustmentsBlackAndWhite = "adjustments-blackandwhite-symbolic";
 	public const string AdjustmentsBrightnessContrast = "adjustments-brightnesscontrast-symbolic";
-	public const string AdjustmentsCurves = "adjustments-curves";
-	public const string AdjustmentsHueSaturation = "adjustments-huesaturation";
-	public const string AdjustmentsInvertColors = "adjustments-invertcolors";
-	public const string AdjustmentsLevels = "adjustments-levels";
-	public const string AdjustmentsPosterize = "adjustments-posterize";
-	public const string AdjustmentsSepia = "adjustments-sepia";
+	public const string AdjustmentsCurves = "adjustments-curves-symbolic";
+	public const string AdjustmentsHueSaturation = "adjustments-huesaturation-symbolic";
+	public const string AdjustmentsInvertColors = "adjustments-invertcolors-symbolic";
+	public const string AdjustmentsLevels = "adjustments-levels-symbolic";
+	public const string AdjustmentsPosterize = "adjustments-posterize-symbolic";
+	public const string AdjustmentsSepia = "adjustments-sepia-symbolic";
 
 	public const string AntiAliasingEnabled = "tool-antialiasing-enabled-symbolic";
 	public const string AntiAliasingDisabled = "tool-antialiasing-disabled-symbolic";
@@ -115,10 +115,10 @@ public static class Icons
 
 	public const string CursorPosition = "ui-cursor-location-symbolic";
 
-	public const string EditSelectionErase = "edit-selection-erase";
-	public const string EditSelectionFill = "edit-selection-fill";
-	public const string EditSelectionInvert = "edit-selection-invert";
-	public const string EditSelectionOffset = "edit-selection-offset";
+	public const string EditSelectionErase = "edit-selection-erase-symbolic";
+	public const string EditSelectionFill = "edit-selection-fill-symbolic";
+	public const string EditSelectionInvert = "edit-selection-invert-symbolic";
+	public const string EditSelectionOffset = "edit-selection-offset-symbolic";
 	public const string EditSelectionNone = "ui-deselect-symbolic";
 
 	public const string EffectsAlignObject = "tool-move-symbolic";
@@ -133,29 +133,29 @@ public static class Icons
 	public const string EffectsBlursZoomBlur = "effects-blurs-zoomblur-symbolic";
 	public const string EffectsColorDithering = "effects-color-dithering";
 	public const string EffectsDefault = "effects-default-symbolic";
-	public const string EffectsDistortBulge = "effects-distort-bulge";
-	public const string EffectsDistortDents = "effects-distort-dents";
+	public const string EffectsDistortBulge = "effects-distort-bulge-symbolic";
+	public const string EffectsDistortDents = "effects-distort-dents-symbolic";
 	public const string EffectsDistortFrostedGlass = "effects-distort-frostedglass-symbolic";
-	public const string EffectsDistortPixelate = "effects-distort-pixelate";
-	public const string EffectsDistortPolarInversion = "effects-distort-polarinversion";
-	public const string EffectsDistortTile = "effects-distort-tile";
-	public const string EffectsDistortTwist = "effects-distort-twist";
+	public const string EffectsDistortPixelate = "effects-distort-pixelate-symbolic";
+	public const string EffectsDistortPolarInversion = "effects-distort-polarinversion-symbolic";
+	public const string EffectsDistortTile = "effects-distort-tile-symbolic";
+	public const string EffectsDistortTwist = "effects-distort-twist-symbolic";
 	public const string EffectsObjectFeatherObject = "effects-object-featherobject-symbolic";
 	public const string EffectsNoiseAddNoise = "effects-noise-addnoise-symbolic";
-	public const string EffectsNoiseMedian = "effects-noise-median";
+	public const string EffectsNoiseMedian = "effects-noise-median-symbolic";
 	public const string EffectsNoiseReduceNoise = "effects-noise-reducenoise-symbolic";
-	public const string EffectsPhotoGlow = "effects-photo-glow";
+	public const string EffectsPhotoGlow = "effects-photo-glow-symbolic";
 	public const string EffectsPhotoRedEyeRemove = "effects-photo-redeyeremove-symbolic";
 	public const string EffectsPhotoSharpen = "effects-photo-sharpen-symbolic";
-	public const string EffectsPhotoSoftenPortrait = "effects-photo-softenportrait";
-	public const string EffectsPhotoVignette = "effects-photo-vignette";
-	public const string EffectsRenderCells = "effects-render-cells";
-	public const string EffectsRenderClouds = "effects-render-clouds";
-	public const string EffectsRenderJuliaFractal = "effects-render-juliafractal";
-	public const string EffectsRenderMandelbrotFractal = "effects-render-mandelbrotfractal";
-	public const string EffectsRenderVoronoiDiagram = "effects-render-voronoidiagram";
+	public const string EffectsPhotoSoftenPortrait = "effects-photo-softenportrait-symbolic";
+	public const string EffectsPhotoVignette = "effects-photo-vignette-symbolic";
+	public const string EffectsRenderCells = "effects-render-cells-symbolic";
+	public const string EffectsRenderClouds = "effects-render-clouds-symbolic";
+	public const string EffectsRenderJuliaFractal = "effects-render-juliafractal-symbolic";
+	public const string EffectsRenderMandelbrotFractal = "effects-render-mandelbrotfractal-symbolic";
+	public const string EffectsRenderVoronoiDiagram = "effects-render-voronoidiagram-symbolic";
 	public const string EffectsStylizeEdgeDetect = "effects-stylize-edgedetect-symbolic";
-	public const string EffectsStylizeEmboss = "effects-stylize-emboss";
+	public const string EffectsStylizeEmboss = "effects-stylize-emboss-symbolic";
 	public const string EffectsStylizeOutline = "effects-stylize-outline";
 	public const string EffectsStylizeRelief = "effects-stylize-relief-symbolic";
 
@@ -180,14 +180,14 @@ public static class Icons
 	public const string HistoryList = "ui-historylist-symbolic";
 
 	public const string ImageCrop = "ui-crop-to-selection-symbolic";
-	public const string ImageResize = "image-resize";
-	public const string ImageResizeCanvas = "image-resize-canvas";
+	public const string ImageResize = "image-resize-symbolic";
+	public const string ImageResizeCanvas = "image-resize-canvas-symbolic";
 	public const string ImageFlipHorizontal = "image-flip-horizontal-symbolic";
 	public const string ImageFlipVertical = "image-flip-vertical-symbolic";
 	public const string ImageRotate90CW = "image-rotate-90cw-symbolic";
 	public const string ImageRotate90CCW = "image-rotate-90ccw-symbolic";
 	public const string ImageRotate180 = "image-rotate-180-symbolic";
-	public const string ImageFlatten = "image-flatten";
+	public const string ImageFlatten = "image-flatten-symbolic";
 	public const string OrientationPortrait = "image-orientation-portrait-symbolic";
 	public const string OrientationLandscape = "image-orientation-landscape-symbolic";
 
@@ -199,7 +199,7 @@ public static class Icons
 	public const string LayerDuplicate = "layers-duplicate-layer-symbolic";
 	public const string LayerFlipHorizontal = ImageFlipHorizontal;
 	public const string LayerFlipVertical = ImageFlipVertical;
-	public const string LayerImport = "layer-import";
+	public const string LayerImport = "layer-import-symbolic";
 	public const string LayerMergeDown = "layers-merge-down-symbolic";
 	public const string LayerNew = "layers-add-layer-symbolic";
 	public const string LayerProperties = "document-properties-symbolic";
