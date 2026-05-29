@@ -131,7 +131,7 @@ public static class Icons
 	public const string EffectsBlursRadialBlur = "effects-blurs-radialblur-symbolic";
 	public const string EffectsBlursUnfocus = "effects-blurs-unfocus-symbolic";
 	public const string EffectsBlursZoomBlur = "effects-blurs-zoomblur-symbolic";
-	public const string EffectsColorDithering = "effects-color-dithering";
+	public const string EffectsColorDithering = "effects-color-dithering-symbolic";
 	public const string EffectsDefault = "effects-default-symbolic";
 	public const string EffectsDistortBulge = "effects-distort-bulge-symbolic";
 	public const string EffectsDistortDents = "effects-distort-dents-symbolic";
@@ -156,7 +156,7 @@ public static class Icons
 	public const string EffectsRenderVoronoiDiagram = "effects-render-voronoidiagram-symbolic";
 	public const string EffectsStylizeEdgeDetect = "effects-stylize-edgedetect-symbolic";
 	public const string EffectsStylizeEmboss = "effects-stylize-emboss-symbolic";
-	public const string EffectsStylizeOutline = "effects-stylize-outline";
+	public const string EffectsStylizeOutline = "effects-stylize-outline-symbolic";
 	public const string EffectsStylizeRelief = "effects-stylize-relief-symbolic";
 
 	public const string GradientConical = "tool-gradient-conical-symbolic";
