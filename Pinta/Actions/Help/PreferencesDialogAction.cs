@@ -58,7 +58,7 @@ internal sealed class PreferencesDialogAction : IActionHandler
 		void AddSection (string title, IEnumerable<Command> commands)
 		{
 			var validCommands = commands
-				.Where (c => c.Shortcuts.Length > 0 && !string.IsNullOrEmpty(c.Label))
+				.Where (c => c.Shortcuts.Length > 0 && !string.IsNullOrEmpty (c.Label))
 				.OrderBy (c => c.Label)
 				.ToList ();
 
@@ -91,7 +91,7 @@ internal sealed class PreferencesDialogAction : IActionHandler
 			Adw.ShortcutsItem item = new ();
 			item.Title = tool.Name;
 
-			string keyName = ((char)tool.ShortcutKey.Value).ToString ().ToUpperInvariant ();
+			string keyName = ((char) tool.ShortcutKey.Value).ToString ().ToUpperInvariant ();
 			item.Accelerator = keyName;
 			toolShortcutsSection.Add (item);
 		}
@@ -114,12 +114,12 @@ internal sealed class PreferencesDialogAction : IActionHandler
 		dialog.Present (chrome.MainWindow);
 	}
 
-	private static IEnumerable<Command> GetCommands(object actionCollection)
+	private static IEnumerable<Command> GetCommands (object actionCollection)
 	{
-		return actionCollection.GetType()
-			.GetProperties()
-			.Where(p => p.PropertyType == typeof(Command))
-			.Select(p => (Command)p.GetValue(actionCollection)!)
-			.Where(c => c != null);
+		return actionCollection.GetType ()
+			.GetProperties ()
+			.Where (p => p.PropertyType == typeof (Command))
+			.Select (p => (Command) p.GetValue (actionCollection)!)
+			.Where (c => c != null);
 	}
 }
