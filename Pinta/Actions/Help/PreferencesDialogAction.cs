@@ -38,17 +38,9 @@ internal sealed class PreferencesDialogAction : IActionHandler
 		app.Preferences.Activated -= Activated;
 	}
 
-	private async void Activated (object sender, EventArgs e)
+	private void Activated (object sender, EventArgs e)
 	{
-		using Adw.PreferencesWindow dialog = Adw.PreferencesWindow.New ();
-		dialog.TransientFor = chrome.MainWindow;
-		dialog.Title = Translations.GetString ("Keyboard Shortcuts");
-		dialog.DefaultWidth = 600;
-		dialog.DefaultHeight = 800;
-
-		Adw.PreferencesPage shortcutsPage = Adw.PreferencesPage.New ();
-		shortcutsPage.Title = Translations.GetString ("Keyboard Shortcuts");
-		shortcutsPage.IconName = "keyboard-shortcuts-symbolic";
+		using Adw.ShortcutsDialog dialog = new ();
 
 		// Helper to format the shortcut string for the current OS
 		string FormatShortcut (string shortcut)
@@ -62,8 +54,8 @@ internal sealed class PreferencesDialogAction : IActionHandler
 				.Replace ("<Ctrl>", "<Control>");
 		}
 
-		// Helper to create and populate a group
-		void AddGroup (string title, IEnumerable<Command> commands)
+		// Helper to create and populate a section and add it to the dialog
+		void AddSection (string title, IEnumerable<Command> commands)
 		{
 			var validCommands = commands
 				.Where (c => c.Shortcuts.Length > 0 && !string.IsNullOrEmpty(c.Label))
@@ -73,29 +65,22 @@ internal sealed class PreferencesDialogAction : IActionHandler
 			if (validCommands.Count == 0)
 				return;
 
-			Adw.PreferencesGroup group = Adw.PreferencesGroup.New ();
-			group.Title = Translations.GetString (title);
+			Adw.ShortcutsSection section = new ();
+			section.Title = Translations.GetString (title);
 
 			foreach (var cmd in validCommands) {
-				Adw.ActionRow row = Adw.ActionRow.New ();
-				row.Title = cmd.Label.Replace ("_", "");
-
-				if (cmd.IconName != null) {
-					row.IconName = cmd.IconName;
-				}
-
-				string formattedShortcut = FormatShortcut (cmd.Shortcuts[0]);
-				Gtk.ShortcutLabel shortcutLabel = Gtk.ShortcutLabel.New (formattedShortcut);
-				row.AddSuffix (shortcutLabel);
-				group.Add (row);
+				Adw.ShortcutsItem item = new ();
+				item.Title = cmd.Label.Replace ("_", "");
+				item.Accelerator = FormatShortcut (cmd.Shortcuts[0]);
+				section.Add (item);
 			}
 
-			shortcutsPage.Add (group);
+			dialog.Add (section);
 		}
 
 		// 1. Tool Shortcuts
-		Adw.PreferencesGroup toolShortcutsGroup = Adw.PreferencesGroup.New ();
-		toolShortcutsGroup.Title = Translations.GetString ("Tools");
+		Adw.ShortcutsSection toolShortcutsSection = new ();
+		toolShortcutsSection.Title = Translations.GetString ("Tools");
 
 		// tool.ShortcutKey returns a Gdk.Key. We filter out the 'invalid/void' keys.
 		var toolsWithShortcuts = tools
@@ -103,34 +88,30 @@ internal sealed class PreferencesDialogAction : IActionHandler
 			.OrderBy (t => t.Name);
 
 		foreach (var tool in toolsWithShortcuts) {
-			Adw.ActionRow row = Adw.ActionRow.New ();
-			row.Title = tool.Name;
-			row.IconName = tool.Icon;
+			Adw.ShortcutsItem item = new ();
+			item.Title = tool.Name;
 
 			string keyName = ((char)tool.ShortcutKey.Value).ToString ().ToUpperInvariant ();
-			Gtk.ShortcutLabel shortcutLabel = Gtk.ShortcutLabel.New (keyName);
-			row.AddSuffix (shortcutLabel);
-			toolShortcutsGroup.Add (row);
+			item.Accelerator = keyName;
+			toolShortcutsSection.Add (item);
 		}
 
-		shortcutsPage.Add (toolShortcutsGroup);
+		dialog.Add (toolShortcutsSection);
 
 		// 2. Layer Commands
-		AddGroup ("Layers", GetCommands (actions.Layers));
+		AddSection ("Layers", GetCommands (actions.Layers));
 
 		// 3. Menu Commands
-		AddGroup ("File", GetCommands (actions.File));
-		AddGroup ("Edit", GetCommands (actions.Edit));
-		AddGroup ("View", GetCommands (actions.View));
-		AddGroup ("Image", GetCommands (actions.Image));
-		AddGroup ("Adjustments", actions.Adjustments.Actions);
-		AddGroup ("Effects", actions.Effects.Actions);
-		AddGroup ("Window", GetCommands (actions.Window));
-		AddGroup ("Help", GetCommands (actions.Help));
+		AddSection ("File", GetCommands (actions.File));
+		AddSection ("Edit", GetCommands (actions.Edit));
+		AddSection ("View", GetCommands (actions.View));
+		AddSection ("Image", GetCommands (actions.Image));
+		AddSection ("Adjustments", actions.Adjustments.Actions);
+		AddSection ("Effects", actions.Effects.Actions);
+		AddSection ("Window", GetCommands (actions.Window));
+		AddSection ("Help", GetCommands (actions.Help));
 
-		dialog.Add (shortcutsPage);
-
-		await dialog.PresentAsync ();
+		dialog.Present (chrome.MainWindow);
 	}
 
 	private static IEnumerable<Command> GetCommands(object actionCollection)
