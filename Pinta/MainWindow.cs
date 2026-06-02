@@ -610,6 +610,7 @@ internal sealed class MainWindow
 
 			// On macOS, GTK4 pasteboard currently provides malformed URIs where the scheme is URL-encoded
 			// (e.g., "file%3A///" instead of "file:///"). Because of this, GIO fails to recognize it as a local file.
+			// This was fixed in GTK 4.23.1, so this workaround can be removed once Pinta requires GTK >= 4.23.1.
 			string parseName = file_dropped.GetParseName ();
 			if (parseName.StartsWith ("file%3A///", StringComparison.OrdinalIgnoreCase)) {
 				string decodedUri = Uri.UnescapeDataString (parseName);
