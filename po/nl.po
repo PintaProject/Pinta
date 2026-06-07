@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-15 00:45+0000\n"
-"PO-Revision-Date: 2026-05-03 21:23+0000\n"
+"PO-Revision-Date: 2026-05-26 05:11+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17.1\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:268
@@ -1972,7 +1972,7 @@ msgstr "Voorinstelling:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush width"
-msgstr ""
+msgstr "Druk {0} om kwastgrootte te verkleinen"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
@@ -1982,12 +1982,12 @@ msgstr "Druk op {0} om de lettergrootte te verkleinen"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline width"
-msgstr ""
+msgstr "Druk {0} om contourdikte te verkleinen"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush width"
-msgstr ""
+msgstr "Druk {0} om kwastgrootte te vergroten"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:246
 #, csharp-format
@@ -1997,7 +1997,7 @@ msgstr "Druk op {0} om de lettergrootte te vergroten"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline width"
-msgstr ""
+msgstr "Druk {0} om contourdikte te vergroten"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
