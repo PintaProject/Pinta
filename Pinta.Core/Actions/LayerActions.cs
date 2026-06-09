@@ -393,9 +393,6 @@ public sealed class LayerActions
 
 		UserLayer l = doc.Layers.AddNewLayer (string.Empty);
 
-		// Make new layer the current layer
-		doc.Layers.SetCurrentUserLayer (l);
-
 		AddLayerHistoryItem hist = new (
 			Resources.Icons.LayerNew,
 			Translations.GetString ("Add New Layer"),

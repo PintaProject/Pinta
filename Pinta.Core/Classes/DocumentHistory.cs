@@ -1,21 +1,21 @@
-// 
+//
 // DocumentHistory.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -31,8 +31,6 @@ namespace Pinta.Core;
 
 public sealed class DocumentHistory
 {
-	private readonly EditActions edit;
-
 	private readonly Document document;
 
 	private readonly List<BaseHistoryItem> history = [];
@@ -42,11 +40,8 @@ public sealed class DocumentHistory
 	public event EventHandler? ActionUndone;
 	public event EventHandler? ActionRedone;
 
-	internal DocumentHistory (
-		EditActions edit,
-		Document document)
+	internal DocumentHistory (Document document)
 	{
-		this.edit = edit;
 		this.document = document;
 	}
 
@@ -81,11 +76,6 @@ public sealed class DocumentHistory
 		if (newItem.CausesDirty)
 			document.IsDirty = true;
 
-		if (history.Count > 1)
-			edit.Undo.Sensitive = true;
-
-		edit.Redo.Sensitive = false;
-
 		HistoryItemAdded?.Invoke (this, new HistoryItemAddedEventArgs (newItem));
 	}
 
@@ -106,11 +96,6 @@ public sealed class DocumentHistory
 		if (Pointer == clean_pointer)
 			document.IsDirty = false;
 
-		if (Pointer == 0)
-			edit.Undo.Sensitive = false;
-
-		edit.Redo.Sensitive = true;
-
 		ActionUndone?.Invoke (this, EventArgs.Empty);
 	}
 
@@ -125,16 +110,10 @@ public sealed class DocumentHistory
 		item.Redo ();
 		item.State = HistoryItemState.Undo;
 
-		if (Pointer == history.Count - 1)
-			edit.Redo.Sensitive = false;
-
 		if (Pointer == clean_pointer)
 			document.IsDirty = false;
 		else if (item.CausesDirty)
 			document.IsDirty = true;
-
-		if (history.Count > 1)
-			edit.Undo.Sensitive = true;
 
 		ActionRedone?.Invoke (this, EventArgs.Empty);
 	}
@@ -167,8 +146,5 @@ public sealed class DocumentHistory
 		clean_pointer = -1;
 
 		document.IsDirty = false;
-
-		edit.Redo.Sensitive = false;
-		edit.Undo.Sensitive = false;
 	}
 }
