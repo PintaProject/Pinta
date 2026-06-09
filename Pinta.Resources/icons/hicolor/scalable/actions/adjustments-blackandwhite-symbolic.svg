@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="16px"
+   viewBox="0 0 16 16"
+   width="16px"
+   version="1.1"
+   id="svg15572"
+   sodipodi:docname="adjustments-blackandwhite.svg"
+   inkscape:export-filename="/mnt/external/cloud/design/gnome/image.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showborder="false"
+     inkscape:zoom="13.214058"
+     inkscape:cx="-8.5893372"
+     inkscape:cy="23.459864"
+     inkscape:window-width="2560"
+     inkscape:window-height="1403"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg15572" />
+  <defs
+     id="defs15576" />
+  <inkscape:templateinfo>
+    <inkscape:name>morewaita-symbolic</inkscape:name>
+    <inkscape:date>2025-09-24</inkscape:date>
+  </inkscape:templateinfo>
+  <path
+     id="rect1"
+     style="baseline-shift:baseline;display:inline;overflow:visible;opacity:1;vector-effect:none;stroke-width:0.888889;stroke-linejoin:round;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+     d="M 0.88867188 0 A 0.88897778 0.88897778 0 0 0 0 0.88867188 L 0 15.111328 A 0.88897778 0.88897778 0 0 0 0.88867188 16 L 15.111328 16 A 0.88897778 0.88897778 0 0 0 16 15.111328 L 16 0.88867188 A 0.88897778 0.88897778 0 0 0 15.111328 0 L 0.88867188 0 z M 1.7773438 1.7773438 L 8 1.7773438 L 8 14.222656 L 1.7773438 14.222656 L 1.7773438 1.7773438 z " />
+</svg>
