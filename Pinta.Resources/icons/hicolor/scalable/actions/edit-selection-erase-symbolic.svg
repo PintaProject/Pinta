@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="16px"
+   viewBox="0 0 16 16"
+   width="16px"
+   version="1.1"
+   id="svg15572"
+   sodipodi:docname="edit-selection-erase-symbolic.svg"
+   inkscape:export-filename="/mnt/external/cloud/design/gnome/image.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showborder="false"
+     inkscape:zoom="18.6875"
+     inkscape:cx="20.361204"
+     inkscape:cy="1.4448161"
+     inkscape:window-width="2560"
+     inkscape:window-height="1403"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg15572" />
+  <defs
+     id="defs15576" />
+  <inkscape:templateinfo>
+    <inkscape:name>morewaita-symbolic</inkscape:name>
+    <inkscape:date>2025-09-24</inkscape:date>
+  </inkscape:templateinfo>
+  <path
+     d="M 0,9.7734375 H 1.6210937 V 6.2265625 H 0 Z"
+     style="stroke-width:1.53459;stroke-linejoin:round;stroke-dasharray:5.61224, 1.40306"
+     id="path11" />
+  <path
+     d="M 4.0332031,16 V 14.378906 H 1.6210937 V 11.966797 H 0 v 2.935547 C 0,15.510257 0.48974305,16 1.0976562,16 Z"
+     style="stroke-width:1.53459;stroke-linejoin:round;stroke-dasharray:5.61224, 1.40306"
+     id="path10" />
+  <path
+     d="M 6.2265625,14.378906 V 16 h 3.546875 v -1.621094 z"
+     style="stroke-width:1.53459;stroke-linejoin:round;stroke-dasharray:5.61224, 1.40306"
+     id="path9" />
+  <path
+     d="M 11.966797,14.378906 V 16 h 2.935547 C 15.510257,16 16,15.510257 16,14.902344 v -2.935547 h -1.621094 v 2.412109 z"
+     style="stroke-width:1.53459;stroke-linejoin:round;stroke-dasharray:5.61224, 1.40306"
+     id="path8" />
+  <path
+     d="M 14.378906,9.7734375 H 16 V 7.077 h -1.621094 z"
+     style="stroke-width:1.53459;stroke-linejoin:round;stroke-dasharray:5.61224, 1.40306"
+     id="path7"
+     sodipodi:nodetypes="ccccc" />
+  <path
+     d="M 6.2265625,0 V 1.6210937 H 8.923 V 0 Z"
+     style="stroke-width:1.53459;stroke-linejoin:round;stroke-dasharray:5.61224, 1.40306"
+     id="path5"
+     sodipodi:nodetypes="ccccc" />
+  <path
+     d="M 0,4.0332031 H 1.6210937 V 1.6210937 H 4.0332031 V 0 H 1.0976562 C 0.48974305,0 0,0.48974305 0,1.0976562 Z"
+     style="stroke-width:1.53459;stroke-linejoin:round;stroke-dasharray:5.61224, 1.40306"
+     id="path4" />
+  <path
+     id="rect1"
+     style="fill:#ed333b;fill-opacity:1;stroke-width:2.11256;stroke-linejoin:round;stroke-dasharray:7.72594, 1.93148"
+     d="m 11.764822,0 -1.346723,1.3467224 1.443081,1.4430811 -1.443081,1.445375 1.346723,1.3467216 1.445375,-1.4430808 1.44308,1.4430813 L 16,4.2351782 14.554624,2.7898029 16,1.3467218 14.653279,0 13.210197,1.4453753 Z" />
+</svg>
