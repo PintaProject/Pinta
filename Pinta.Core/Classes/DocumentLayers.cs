@@ -82,7 +82,7 @@ public sealed class DocumentLayers
 
 	/// <summary>
 	/// Creates a new layer and adds it to the Layer collection after the
-	/// currently selected layer.
+	/// currently selected layer, making it the new selected layer.
 	/// </summary>
 	public UserLayer AddNewLayer (string name)
 	{
@@ -91,14 +91,12 @@ public sealed class DocumentLayers
 			? CreateLayer ()
 			: CreateLayer (name);
 
-		user_layers.Insert (CurrentUserLayerIndex + 1, layer);
-
-		if (user_layers.Count == 1)
-			CurrentUserLayerIndex = 0;
+		user_layers.Insert (++CurrentUserLayerIndex, layer);
 
 		layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
-		LayerAdded?.Invoke (this, new IndexEventArgs (user_layers.Count - 1));
+		LayerAdded?.Invoke (this, new IndexEventArgs (CurrentUserLayerIndex));
+		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
 
 		return layer;
 	}
@@ -218,6 +216,7 @@ public sealed class DocumentLayers
 		layer.PropertyChanged += RaiseLayerPropertyChangedEvent;
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (CurrentUserLayerIndex));
+		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
 
 		return layer;
 	}

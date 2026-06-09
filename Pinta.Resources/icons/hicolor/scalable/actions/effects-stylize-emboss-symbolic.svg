@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="16px"
+   viewBox="0 0 16 16"
+   width="16px"
+   version="1.1"
+   id="svg15572"
+   sodipodi:docname="effects-stylize-emboss-symbolic.svg"
+   inkscape:export-filename="/mnt/external/cloud/design/gnome/image.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showborder="false"
+     inkscape:zoom="16"
+     inkscape:cx="6.96875"
+     inkscape:cy="-4.5"
+     inkscape:window-width="2560"
+     inkscape:window-height="1403"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg15572" />
+  <defs
+     id="defs15576" />
+  <inkscape:templateinfo>
+    <inkscape:name>morewaita-symbolic</inkscape:name>
+    <inkscape:date>2025-09-24</inkscape:date>
+  </inkscape:templateinfo>
+  <path
+     d="m 0,0 v 2.1328125 c 0.5916672,0 1.0664062,0.4789065 1.0664062,1.0664063 0,0.5916671 -0.474739,1.0683593 -1.0664062,1.0683593 v 1.0664063 c 0.5916672,0 1.0664062,0.4789065 1.0664062,1.0664062 0,0.5916672 -0.474739,1.0664063 -1.0664062,1.0664063 v 1.0664062 c 0.5916672,0 1.0664062,0.4789066 1.0664062,1.0664063 0,0.5916666 -0.474739,1.0664066 -1.0664062,1.0664066 v 1.066406 c 0.5916672,0 1.0664062,0.480859 1.0664062,1.068359 0,0.591667 -0.474739,1.066406 -1.0664062,1.066407 V 16 h 2.1328125 c 0,-0.5875 0.4789065,-1.066406 1.0664063,-1.066406 0.5916671,0 1.0683593,0.478906 1.0683593,1.066406 h 1.0664063 c 0,-0.5875 0.4789065,-1.066406 1.0664062,-1.066406 0.5916672,0 1.0664063,0.478906 1.0664063,1.066406 h 1.0664062 c 0,-0.5875 0.4789066,-1.066406 1.0664063,-1.066406 0.5916666,0 1.0664066,0.478906 1.0664066,1.066406 h 1.066406 c 0,-0.5875 0.480859,-1.066406 1.068359,-1.066406 0.591667,0 1.066406,0.478906 1.066407,1.066406 H 16 v -2.132812 c -0.5875,0 -1.066406,-0.47474 -1.066406,-1.066407 0,-0.5875 0.478906,-1.068359 1.066406,-1.068359 v -1.066406 c -0.5875,0 -1.066406,-0.47474 -1.066406,-1.0664066 C 14.933594,9.0121097 15.4125,8.5332031 16,8.5332031 V 7.4667969 c -0.5875,0 -1.066406,-0.4747391 -1.066406,-1.0664063 C 14.933594,5.8128909 15.4125,5.3339844 16,5.3339844 V 4.2675781 c -0.5875,0 -1.066406,-0.4766922 -1.066406,-1.0683593 C 14.933594,2.6117191 15.4125,2.1328125 16,2.1328125 V 0 h -2.132812 c 0,0.5916672 -0.47474,1.0664062 -1.066407,1.0664062 -0.5875,0 -1.068359,-0.474739 -1.068359,-1.0664062 h -1.066406 c 0,0.5916672 -0.47474,1.0664062 -1.0664066,1.0664062 C 9.0121097,1.0664062 8.5332031,0.5916672 8.5332031,0 H 7.4667969 c 0,0.5916672 -0.4747391,1.0664062 -1.0664063,1.0664062 C 5.8128909,1.0664062 5.3339844,0.5916672 5.3339844,0 H 4.2675781 c 0,0.5916672 -0.4766922,1.0664062 -1.0683593,1.0664062 C 2.6117191,1.0664062 2.1328125,0.5916672 2.1328125,0 Z M 2.1328125,2.1328125 H 13.867188 V 13.867188 h -1.066407 -9.7617185 -0.90625 z"
+     style="stroke-width:1.06667"
+     id="path20" />
+  <rect
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+     id="rect20"
+     width="9.75"
+     height="9.75"
+     x="3.125"
+     y="3.125" />
+</svg>

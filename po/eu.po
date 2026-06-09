@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-01 00:35+0000\n"
+"POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2025-12-31 18:06+0000\n"
 "Last-Translator: Asier Saratsua Garmendia <asier.sarasua@gmail.com>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/pinta/pinta/eu/>\n"
@@ -32,19 +32,19 @@ msgstr " Hautatze-modua: "
 msgid "..."
 msgstr "..."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:226
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:236
 msgid "3 x 3 Region"
 msgstr "3 x 3 eskualdea"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:227
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:237
 msgid "5 x 5 Region"
 msgstr "5 x 5 eskualdea"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:228
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:238
 msgid "7 x 7 Region"
 msgstr "7 x 7 eskualdea"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:229
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:239
 msgid "9 x 9 Region"
 msgstr "9 x 9 eskualdea"
 
@@ -61,8 +61,8 @@ msgid "About Pinta"
 msgstr "Pintari buruz"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
-#: ../Pinta.Core/Actions/LayerActions.cs:401
-#: ../Pinta/Actions/Edit/PasteAction.cs:174
+#: ../Pinta.Core/Actions/LayerActions.cs:398
+#: ../Pinta/Actions/Edit/PasteAction.cs:173
 msgid "Add New Layer"
 msgstr "Gehitu geruza berria"
 
@@ -74,15 +74,15 @@ msgstr "Gehitu zarata"
 msgid "Add-in Manager..."
 msgstr "Gehigarrien kudeatzailea..."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:844
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:852
 msgid "Added"
 msgstr "Gehitua"
 
-#: ../Pinta/MainWindow.cs:453
+#: ../Pinta/MainWindow.cs:451
 msgid "Adjustments"
 msgstr "Doikuntzak"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:197
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
 msgid "After select"
 msgstr "Hautaketaren ondoren"
 
@@ -135,7 +135,7 @@ msgstr "Ainguratzea:"
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:147
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:136
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:77
-#: ../Pinta.Tools/Brushes/SlashBrush.cs:50
+#: ../Pinta.Tools/Brushes/SlashBrush.cs:53
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:310
 #: ../Pinta/Actions/Layers/RotateZoomLayerAction.cs:145
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:52
@@ -146,11 +146,11 @@ msgstr "Angelua"
 msgid "Antialias"
 msgstr "Antialias-a"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:363
+#: ../Pinta.Core/Classes/BaseTool.cs:359
 msgid "Antialiasing Off"
 msgstr "Antialiasing-a desaktibatua"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:362
+#: ../Pinta.Core/Classes/BaseTool.cs:358
 msgid "Antialiasing On"
 msgstr "Antialiasing-a aktibatua"
 
@@ -186,7 +186,7 @@ msgstr "Maila automatikoa"
 msgid "Available in repository: {0}"
 msgstr "Eskuragarri biltegian: {0}"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:130
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "Atzeko planoa"
 
@@ -212,7 +212,7 @@ msgid "Best Fit"
 msgstr "Egokiena"
 
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:466
+#: ../Pinta.Tools/Tools/TextTool.cs:469
 msgid "Bevel Join"
 msgstr ""
 
@@ -250,7 +250,7 @@ msgid "Blurs"
 msgstr "Lausotzeak"
 
 #. Translators: 'Bold' (700) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:305
+#: ../Pinta.Tools/Tools/TextTool.cs:308
 msgid "Bold"
 msgstr "Lodia"
 
@@ -260,7 +260,7 @@ msgid "Bonfire"
 msgstr "Sutzarra"
 
 #. Translators: 'Book' (380) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:281
+#: ../Pinta.Tools/Tools/TextTool.cs:284
 msgid "Book"
 msgstr ""
 
@@ -289,7 +289,7 @@ msgstr "Distira / kontrastea"
 msgid "Brush Size"
 msgstr "Brotxaren tamaina"
 
-#: ../Pinta.Tools/Tools/BaseBrushTool.cs:126
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:129
 msgid "Brush width"
 msgstr "Brotxaren zabalera"
 
@@ -314,7 +314,7 @@ msgstr "Ehunekoetan:"
 
 #: ../Pinta.Core/Actions/EditActions.cs:522
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:214
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:392
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Utzi"
@@ -327,7 +327,7 @@ msgstr "Oihala"
 msgid "Canvas Grid Settings"
 msgstr "Oihal-saretaren ezarpenak"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:124
+#: ../Pinta.Core/Actions/ViewActions.cs:125
 msgid "Canvas Grid..."
 msgstr "Oihal-sareta..."
 
@@ -347,7 +347,7 @@ msgstr "Gelaxkak"
 msgid "Center"
 msgstr "Erdian"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:377
+#: ../Pinta.Tools/Tools/TextTool.cs:380
 msgid "Center Align"
 msgstr "Erdian lerrokatua"
 
@@ -369,17 +369,20 @@ msgstr "Erdian eskuinean"
 msgid "Centered"
 msgstr "Zentratua"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:228
 msgid "Centimeters"
 msgstr "Zentimetroak"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:365
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
-msgid "Change brush width. Shortcut keys: [ ]"
-msgstr "Aldatu brotxa-zabalera. Laster-teklak: [ ]"
+msgid "Change brush width."
+msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
-msgid "Change font size. Shortcut keys: [ ]"
+msgid "Change font size."
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+msgid "Change outline width."
 msgstr ""
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
@@ -452,23 +455,23 @@ msgstr "Egin klik eta arrastatu irudian mugitzeko."
 msgid "Click to reset primary and secondary color."
 msgstr "Egin klik kolore nagusia eta bigarren mailako berrezartzeko."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:582
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:333
 msgid "Click to select primary color."
 msgstr "Egin klik kolore nagusia hautatzeko."
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:50
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:57
 msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:592
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:587
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:337
 msgid "Click to select secondary color."
 msgstr "Egin klik bigarren mailako kolorea hautatzeko."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:246
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:424
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:340
 msgid "Click to switch between primary and secondary color."
 msgstr "Egin klik kolore nagusia eta bigarren mailako kolorea txandakatzeko."
@@ -480,7 +483,7 @@ msgstr "Egin klik kolore nagusia eta bigarren mailako kolorea txandakatzeko."
 msgid "Clipboard"
 msgstr "Arbela"
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:46
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:55
 msgid "Clone Stamp"
 msgstr "Klonatze-zigilua"
 
@@ -531,7 +534,7 @@ msgstr "Kolore-gradientea"
 msgid "Color Mode"
 msgstr "Kolore-modua"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:48
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:57
 msgid "Color Picker"
 msgstr "Kolore-hautatzailea"
 
@@ -543,7 +546,7 @@ msgstr "Kolore-barrutia"
 msgid "Color Saturation"
 msgstr "Kolore-asetasuna"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:253
+#: ../Pinta.Core/Actions/ViewActions.cs:254
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -611,8 +614,8 @@ msgid "Could not import layer \"{0}\" from {1}"
 msgstr "Ezin da \"{0}\" geruza inportatu hemendik: {1}"
 
 #: ../Pinta.Core/Extensions/OtherExtensions.cs:166
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:412
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:424
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:428
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:440
 #, csharp-format
 msgid "Could not open file: {0}"
 msgstr "Ezin izan da fitxategia ireki: {0}"
@@ -652,7 +655,7 @@ msgid "Cut"
 msgstr "Moztu"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:250
+#: ../Pinta.Core/Actions/ViewActions.cs:251
 msgid "Dark"
 msgstr "Iluna"
 
@@ -665,7 +668,7 @@ msgid "Dash"
 msgstr "Marra"
 
 #. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:246
+#: ../Pinta.Core/Actions/ViewActions.cs:247
 msgid "Default"
 msgstr "Lehenetsia"
 
@@ -674,7 +677,7 @@ msgstr "Lehenetsia"
 msgid "Delete Layer"
 msgstr "Ezabatu geruza"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:682
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:690
 msgid "Deleted"
 msgstr "Ezabatua"
 
@@ -723,7 +726,7 @@ msgstr "Distortsioa"
 msgid "Dithering"
 msgstr "Bilbatzea"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:206
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:216
 msgid "Do not switch tool"
 msgstr "Ez aldatu tresnaz"
 
@@ -757,7 +760,7 @@ msgstr "Ertz-detekzioa"
 msgid "Effe_cts"
 msgstr "Efe_ktuak"
 
-#: ../Pinta/MainWindow.cs:447
+#: ../Pinta/MainWindow.cs:446
 msgid "Effects"
 msgstr "Efektuak"
 
@@ -768,7 +771,7 @@ msgstr "Elektrikoa"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:276
 #: ../Pinta.Tools/Editable/EditEngines/EllipseEditEngine.cs:36
-#: ../Pinta.Tools/Tools/EllipseTool.cs:45
+#: ../Pinta.Tools/Tools/EllipseTool.cs:43
 msgid "Ellipse"
 msgstr "Elipsea"
 
@@ -789,7 +792,7 @@ msgstr "Gaitu erregistro gehigarria edo portaera-aldaketak arazketarako"
 msgid "Erase Selection"
 msgstr "Ezabatu hautapena"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:51
+#: ../Pinta.Tools/Tools/EraserTool.cs:62
 msgid "Eraser"
 msgstr "Borragoma"
 
@@ -806,7 +809,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Kenketa (-) (eskuineko klik)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:227
+#: ../Pinta/Actions/Edit/PasteAction.cs:226
 msgid "Expand"
 msgstr "Hedatu"
 
@@ -831,7 +834,7 @@ msgstr "Huts egin du gehigarria hasieratzeak"
 msgid "Failed to load extension package"
 msgstr "Huts egin du hedapen-paketea kargatzeak"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:444
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:460
 msgid "Failed to open image"
 msgstr "Huts egin du irudia irekitzeak"
 
@@ -860,7 +863,7 @@ msgstr "Jakinarazi akatsa"
 msgid "Files to open"
 msgstr "Irekitzeko fitxategiak"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:415
+#: ../Pinta.Tools/Tools/TextTool.cs:418
 msgid "Fill Background"
 msgstr "Bete atzeko planoa"
 
@@ -873,23 +876,23 @@ msgstr "Bete objektuaren atzeko planoa"
 msgid "Fill Selection"
 msgstr "Bete hautapena"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:332
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:337
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:226
 msgid "Fill Shape"
 msgstr "Betegarria"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:322
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:327
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:219
 msgid "Fill Style"
 msgstr "Betegarriaren estiloa"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:333
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:338
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:227
 msgid "Fill and Outline Shape"
 msgstr "Betegarria eta ingerada"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1109
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1395
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1117
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:1403
 #: ../Pinta.Tools/Tools/GradientTool.cs:186
 msgid "Finalized"
 msgstr "Amaitua"
@@ -972,7 +975,7 @@ msgstr "Forma librea"
 msgid "Frosted Glass"
 msgstr "Beira izoztua"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:164
+#: ../Pinta.Core/Actions/ViewActions.cs:165
 msgid "Fullscreen"
 msgstr "Pantaila osoa"
 
@@ -1021,7 +1024,7 @@ msgid "Hard Light"
 msgstr "Argi distiratsua"
 
 #. Translators: 'Heavy' (900) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:317
+#: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Heavy"
 msgstr ""
 
@@ -1032,11 +1035,12 @@ msgstr ""
 msgid "Height:"
 msgstr "Altuera:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:363
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:313
 msgid "Hex"
 msgstr "Hex"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Hide Layer"
 msgstr "Ezkutatu geruza"
 
@@ -1071,7 +1075,7 @@ msgstr "Gorri horizontala (R)"
 msgid "Hue"
 msgstr "Ñabardura"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:287
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
 msgid "Hue & Sat"
 msgstr "Ñabardura eta saturazioa"
 
@@ -1083,7 +1087,7 @@ msgstr "Ñabardura / asetasuna"
 msgid "ICO files can not be larger than 255 x 255 pixels."
 msgstr "ICO fitxategiek ezin dute 255 x 255 pixel baino handiagoak izan."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:271
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "If enabled, the Value component is applied to the color wheel."
 msgstr ""
 
@@ -1091,7 +1095,7 @@ msgstr ""
 msgid "If you don't save, all changes will be permanently lost."
 msgstr "Gordetzen ez baduzu, aldaketa guztiak betiko galduko dira."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:244 ../Pinta/MainWindow.cs:459
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:254 ../Pinta/MainWindow.cs:456
 msgid "Image"
 msgstr "Irudia"
 
@@ -1103,7 +1107,7 @@ msgstr "Image Editor"
 msgid "Image Tabs"
 msgstr "Irudi-fitxak"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
 msgstr "Irudia ezin izan da itsatsi"
 
@@ -1112,7 +1116,7 @@ msgstr "Irudia ezin izan da itsatsi"
 msgid "Image files"
 msgstr "Irudi-fitxategiak"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
 msgstr "Irudia mihisea baino handiagoa da"
 
@@ -1144,7 +1148,7 @@ msgstr ""
 "Sakatu Enter hautapena amaitzeko.\n"
 "Sakatu atzerako tekla azken puntua ezabatzeko."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Inches"
 msgstr "Hazbeteak"
 
@@ -1207,7 +1211,7 @@ msgstr "Alderantzikatu koloreak"
 msgid "Invert Selection"
 msgstr "Alderantzikatu hautapena"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:337
+#: ../Pinta.Tools/Tools/TextTool.cs:340
 msgid "Italic"
 msgstr "Etzana"
 
@@ -1236,19 +1240,15 @@ msgstr "Lakio-modua"
 msgid "Lasso Select"
 msgstr "Lakio bidezko hautapena"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:243
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:253
 msgid "Layer"
 msgstr "Geruza"
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Hidden"
-msgstr "Ezkutuko geruza"
-
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:106
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:101
 msgid "Layer Opacity"
 msgstr "Geruzaren opakutasuna"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:121
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:119
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:136
 msgid "Layer Properties"
 msgstr "Geruza-propietateak"
@@ -1257,12 +1257,8 @@ msgstr "Geruza-propietateak"
 msgid "Layer Properties..."
 msgstr "Geruzaren propietateak..."
 
-#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
-msgid "Layer Shown"
-msgstr "Erakutsitako geruza"
-
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:133
+#: ../Pinta.Core/Classes/DocumentLayers.cs:131
 #, csharp-format
 msgid "Layer {0}"
 msgstr "{0} geruza"
@@ -1271,7 +1267,7 @@ msgstr "{0} geruza"
 msgid "Layers"
 msgstr "Geruzak"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:365
+#: ../Pinta.Tools/Tools/TextTool.cs:368
 msgid "Left Align"
 msgstr "Ezkerrean lerrokatua"
 
@@ -1307,7 +1303,7 @@ msgstr ""
 "Erabili gezi-teklak hautapenaren eskema pixelez pixel mugitzeko."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/ShapeTool.cs:58
+#: ../Pinta.Tools/Tools/ShapeTool.cs:50
 #, csharp-format
 msgid ""
 "Left click to draw a shape with the primary color.\n"
@@ -1351,7 +1347,7 @@ msgstr ""
 "Eskuineko klik bigarren mailako kolorea erabiltzeko."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:67
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1359,7 +1355,7 @@ msgstr ""
 "Ezkerreko klik kolore nagusiarekin marrazteko, eskuineko klik bigarren "
 "mailako kolorearekin marrazteko."
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:57
+#: ../Pinta.Tools/Tools/EraserTool.cs:68
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
@@ -1389,7 +1385,7 @@ msgstr ""
 "Ezkerreko klik bigarren mailako kolorea kolore nagusiarekin ordezteko.\n"
 "Eskuineko klik alderantzikatzeko."
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:50
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:59
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
@@ -1439,8 +1435,8 @@ msgstr "Lizentzia"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:248
-#: ../Pinta.Tools/Tools/TextTool.cs:269
+#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Light"
 msgstr "Argia"
 
@@ -1461,7 +1457,7 @@ msgstr "Argitasuna"
 msgid "Lime Lemon"
 msgstr "Lima"
 
-#: ../Pinta.Tools/Tools/LineCurveTool.cs:43
+#: ../Pinta.Tools/Tools/LineCurveTool.cs:42
 msgid "Line/Curve"
 msgstr "Lerroa/kurba"
 
@@ -1486,7 +1482,7 @@ msgstr "Lotuta"
 msgid "Luminosity"
 msgstr "Argitasuna"
 
-#: ../Pinta.Tools/Tools/MagicWandTool.cs:47
+#: ../Pinta.Tools/Tools/MagicWandTool.cs:54
 msgid "Magic Wand Select"
 msgstr "Makila magikoaren bidezko hautapena"
 
@@ -1517,11 +1513,11 @@ msgid "Median"
 msgstr "Mediana"
 
 #. Translators: 'Medium' (500) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:293
+#: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Medium"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:130
+#: ../Pinta.Core/Actions/ViewActions.cs:131
 msgid "Menu Bar"
 msgstr "Menu-barra"
 
@@ -1535,7 +1531,7 @@ msgid "Minimum Size"
 msgstr "Tamaina minimoa"
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:454
+#: ../Pinta.Tools/Tools/TextTool.cs:457
 msgid "Miter Join"
 msgstr ""
 
@@ -1543,7 +1539,7 @@ msgstr ""
 msgid "Mode"
 msgstr "Modua"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:926
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:934
 msgid "Modified"
 msgstr "Aldatua"
 
@@ -1589,7 +1585,7 @@ msgstr "Aldameneko hurbilena"
 msgid "New"
 msgstr "Berria"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:138
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:139
 #: ../Pinta/Dialogs/NewImageDialog.cs:232
 msgid "New Image"
 msgstr "Irudi berria"
@@ -1620,12 +1616,12 @@ msgstr "Zarata"
 #. Translators: 'Normal' (400) refers to the font-weight text property
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:31
 #: ../Pinta.Tools/Brushes/PlainBrush.cs:41
-#: ../Pinta.Tools/Tools/EraserTool.cs:326 ../Pinta.Tools/Tools/TextTool.cs:184
-#: ../Pinta.Tools/Tools/TextTool.cs:287 ../Pinta.Tools/Tools/TextTool.cs:412
+#: ../Pinta.Tools/Tools/EraserTool.cs:336 ../Pinta.Tools/Tools/TextTool.cs:184
+#: ../Pinta.Tools/Tools/TextTool.cs:290 ../Pinta.Tools/Tools/TextTool.cs:415
 msgid "Normal"
 msgstr "Normala"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:345
+#: ../Pinta.Core/Classes/BaseTool.cs:341
 msgid "Normal Blending"
 msgstr "Nahaste normala"
 
@@ -1633,7 +1629,7 @@ msgstr "Nahaste normala"
 msgid "Normal Size"
 msgstr "Tamaina normala"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:413
+#: ../Pinta.Tools/Tools/TextTool.cs:416
 msgid "Normal and Outline"
 msgstr "Normala eta ingerada"
 
@@ -1646,7 +1642,7 @@ msgstr "Gelaxka kopurua"
 msgid "Number of threads to use for rendering"
 msgstr "Errendatzeko erabiliko den hari kopurua"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:209
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:387
 msgid "OK"
 msgstr "Ados"
 
@@ -1686,7 +1682,7 @@ msgstr "Ireki"
 msgid "Open Curve Shape"
 msgstr "Kurba-forma irekia"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:335
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:351
 msgid "Open Image"
 msgstr "Ireki irudia"
 
@@ -1716,7 +1712,7 @@ msgstr "Orientazioa:"
 msgid "Original"
 msgstr "Jatorrizkoa"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:414
+#: ../Pinta.Tools/Tools/TextTool.cs:417
 msgid "Outline"
 msgstr "Eskema sortu"
 
@@ -1732,13 +1728,13 @@ msgstr "Ertzaren eskema"
 msgid "Outline Object"
 msgstr "Objektuaren eskema"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:331
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:336
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:225
 msgid "Outline Shape"
 msgstr "Formaren eskema"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:348
-#: ../Pinta.Tools/Tools/TextTool.cs:428
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:353
+#: ../Pinta.Tools/Tools/TextTool.cs:431
 msgid "Outline width"
 msgstr "Eskema-zabalera"
 
@@ -1754,7 +1750,7 @@ msgstr "Irteerako histograma"
 msgid "Overlay"
 msgstr "Gainezarri"
 
-#: ../Pinta.Core/Classes/BaseTool.cs:346
+#: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Overwrite"
 msgstr "Gainidatzi"
 
@@ -1762,7 +1758,7 @@ msgstr "Gainidatzi"
 msgid "Paint Bucket"
 msgstr "Margo-ontzia"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:65
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
 msgid "Paintbrush"
 msgstr "Pintzela"
 
@@ -1876,7 +1872,7 @@ msgstr ""
 "eskaintzen ditu irudiak eraldatzeko. Gainera nahi beste geruzatan antolatu "
 "daitezke irudiak sorkuntzari laguntzeko."
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:425
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:441
 msgid "Pinta supports the following file formats:"
 msgstr "Pintak honako fitxategi-formatuak onartzen ditu:"
 
@@ -1888,7 +1884,7 @@ msgstr "Pintak honako paleta-formatuak onartzen ditu:"
 msgid "Pixelate"
 msgstr "Pixelatu"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:225
+#: ../Pinta.Core/Actions/ViewActions.cs:226
 msgid "Pixels"
 msgstr "Pixelak"
 
@@ -1901,8 +1897,8 @@ msgstr "Piña Colada"
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Berrabiarazi Pinta aldaketak aplikatu daitezen."
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:612
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:815
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:620
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:823
 msgid "Point Added"
 msgstr "Puntua gehitu da"
 
@@ -1916,7 +1912,7 @@ msgstr "Puntu-antolamendua"
 msgid "Point Color"
 msgstr "Puntu-kolorea"
 
-#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:663
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:671
 msgid "Point Deleted"
 msgstr "Puntua ezabatu da"
 
@@ -1951,7 +1947,7 @@ msgid "Power"
 msgstr "Energia"
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:225
+#: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
 msgstr "Mantendu"
 
@@ -1966,6 +1962,36 @@ msgstr "Aurrezarpen-paletak"
 #: ../Pinta/Dialogs/NewImageDialog.cs:336
 msgid "Preset:"
 msgstr "Aurrezarpena:"
+
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
+#, csharp-format
+msgid "Press {0} to decrease brush width"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:245
+#, csharp-format
+msgid "Press {0} to decrease font size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
+#, csharp-format
+msgid "Press {0} to decrease outline width"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
+#, csharp-format
+msgid "Press {0} to increase brush width"
+msgstr ""
+
+#: ../Pinta.Tools/Tools/TextTool.cs:246
+#, csharp-format
+msgid "Press {0} to increase font size"
+msgstr ""
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
+#, csharp-format
+msgid "Press {0} to increase outline width"
+msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:190
 msgid "Preview"
@@ -2016,7 +2042,7 @@ msgstr "Gradiente erradiala"
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:204
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:84
 #: ../Pinta.Effects/Effects/UnfocusEffect.cs:88
-#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:90
+#: ../Pinta.Tools/Editable/EditEngines/RoundedLineEditEngine.cs:85
 msgid "Radius"
 msgstr "Erradioa"
 
@@ -2064,7 +2090,7 @@ msgstr "Erabilitako azken koloreak"
 msgid "Recolor"
 msgstr "Koloreztatu berriro"
 
-#: ../Pinta.Tools/Tools/RectangleTool.cs:43
+#: ../Pinta.Tools/Tools/RectangleTool.cs:42
 msgid "Rectangle"
 msgstr "Laukizuzena"
 
@@ -2114,7 +2140,7 @@ msgstr "MIT X11 lizentziapean argitaratua."
 msgid "Relief"
 msgstr "Erliebea"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:111
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Rename Layer"
 msgstr "Aldatu geruzaren izena"
 
@@ -2148,7 +2174,7 @@ msgstr "Hazi berria eman"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:211
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:197
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:375
 msgid "Reset"
 msgstr "Berrezarri"
 
@@ -2199,7 +2225,7 @@ msgstr "Alderantzikatu kolore-eskema"
 msgid "Reverse Color Sorting"
 msgstr "Alderantzikatu kolore-ordena"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:389
+#: ../Pinta.Tools/Tools/TextTool.cs:392
 msgid "Right Align"
 msgstr "Eskuinean lerrokatua"
 
@@ -2237,7 +2263,7 @@ msgid "Roughness"
 msgstr "Laztasuna"
 
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
-#: ../Pinta.Tools/Tools/TextTool.cs:460
+#: ../Pinta.Tools/Tools/TextTool.cs:463
 msgid "Round Join"
 msgstr ""
 
@@ -2249,19 +2275,19 @@ msgstr "Lerro biribilduen seriea"
 msgid "Rounded Line Shape"
 msgstr "Lerro-forma borobildua"
 
-#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:44
+#: ../Pinta.Tools/Tools/RoundedRectangleTool.cs:43
 msgid "Rounded Rectangle"
 msgstr "Laukizuzen biribildua"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:230
+#: ../Pinta.Core/Actions/ViewActions.cs:231
 msgid "Ruler Units"
 msgstr "Erregelen unitateak"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:148
+#: ../Pinta.Core/Actions/ViewActions.cs:149
 msgid "Rulers"
 msgstr "Erregelak"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:198
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
 msgid "Sampling"
 msgstr "Lagintzea"
 
@@ -2270,7 +2296,7 @@ msgstr "Lagintzea"
 msgid "Sat"
 msgstr "Sat"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:277
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:199
 msgid "Sat & Value"
 msgstr "Sat eta balioa"
 
@@ -2334,12 +2360,12 @@ msgid "Selected Colors"
 msgstr "Hautatutako koloreak"
 
 #. Translators: 'Semibold' (600) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:299
+#: ../Pinta.Tools/Tools/TextTool.cs:302
 msgid "Semibold"
 msgstr ""
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:275
+#: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Semilight"
 msgstr ""
 
@@ -2364,15 +2390,21 @@ msgid "Sharpen"
 msgstr "Zorroztu"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:111
-#: ../Pinta.Core/Extensions/ToolBoxButton.cs:51
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:247
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:425
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:341
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:44
 msgid "Shortcut key"
 msgstr "Laster-tekla"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:112
 msgid "Shortcut keys"
 msgstr "Laster-teklak"
+
+#: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
+#: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
+#: ../Pinta.Tools/Tools/TextTool.cs:244
+msgid "Shortcut keys:"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:56
 msgid "Show Axonometric Grid"
@@ -2382,7 +2414,8 @@ msgstr "Erakutsi sareta axonometrikoa"
 msgid "Show Grid"
 msgstr "Erakutsi sareta"
 
-#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:116
+#: ../Pinta.Gui.Widgets/Widgets/Layers/LayersListViewItemWidget.cs:100
+#: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:113
 msgid "Show Layer"
 msgstr "Erakutsi geruza"
 
@@ -2391,11 +2424,11 @@ msgstr "Erakutsi geruza"
 msgid "Show Points"
 msgstr "Erakutsi puntuak"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:270
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:192
 msgid "Show Value"
 msgstr "Erakutsi balioa"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:242
+#: ../Pinta.Core/Actions/ViewActions.cs:243
 msgid "Show/Hide"
 msgstr "Erakutsi/Ezkutatu"
 
@@ -2409,7 +2442,7 @@ msgstr "Sierra"
 msgid "Sierra Lite"
 msgstr "Sierra Lite"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:225
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:235
 msgid "Single Pixel"
 msgstr "Pixel bakarra"
 
@@ -2426,7 +2459,7 @@ msgstr ""
 msgid "Small Caps"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:326
+#: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
 msgstr "Leuna"
 
@@ -2450,7 +2483,7 @@ msgstr "Zipriztinak"
 msgid "Squares"
 msgstr "Laukiak"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:136
+#: ../Pinta.Core/Actions/ViewActions.cs:137
 msgid "Status Bar"
 msgstr "Egoera-barra"
 
@@ -2471,11 +2504,11 @@ msgstr "Stucki"
 msgid "Stylize"
 msgstr "Estilizatu"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:208
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:218
 msgid "Switch to Pencil tool"
 msgstr "Aldatu Arkatza tresnara"
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:207
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:217
 msgid "Switch to previous tool"
 msgstr "Aldatu aurreko tresnara"
 
@@ -2487,7 +2520,7 @@ msgstr "Testua"
 msgid "Text - Finalize"
 msgstr "Testua - Amaitu"
 
-#: ../Pinta.Tools/Tools/TextTool.cs:403
+#: ../Pinta.Tools/Tools/TextTool.cs:406
 msgid "Text Style"
 msgstr "Testu-estiloa"
 
@@ -2497,7 +2530,7 @@ msgstr "Testu-estiloa"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "'{0}' gehigarria agian ez da bateragarria Pintaren bertsio honekin"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:208
+#: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
 msgstr "Arbelak ez dauka irudirik."
 
@@ -2521,7 +2554,7 @@ msgstr "Honako paketeak instalatuko dira:"
 msgid "The following packages will be uninstalled:"
 msgstr "Honako paketeak desinstalatuko dira:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:215
+#: ../Pinta/Actions/Edit/PasteAction.cs:214
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2566,7 +2599,7 @@ msgid "Thickness"
 msgstr "Lodiera"
 
 #. Translators: 'Thin' (100) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:257
+#: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Thin"
 msgstr ""
 
@@ -2603,11 +2636,11 @@ msgstr ""
 msgid "Tolerance"
 msgstr "Tolerantzia"
 
-#: ../Pinta.Core/Managers/ToolManager.cs:374
+#: ../Pinta.Core/Managers/ToolManager.cs:351
 msgid "Tool"
 msgstr "Tresna"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:142
+#: ../Pinta.Core/Actions/ViewActions.cs:143
 msgid "Tool Box"
 msgstr "Tresna-koadroa"
 
@@ -2661,27 +2694,27 @@ msgstr "Bihurritu"
 msgid "Two-Row Sierra"
 msgstr "Bi errenkadako Sierra"
 
-#: ../Pinta.Tools/Tools/EraserTool.cs:322
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:214
+#: ../Pinta.Tools/Tools/EraserTool.cs:332
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
 msgid "Type"
 msgstr "Mota"
 
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:311
+#: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Ultrabold"
 msgstr ""
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:323
+#: ../Pinta.Tools/Tools/TextTool.cs:326
 msgid "Ultraheavy"
 msgstr ""
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
-#: ../Pinta.Tools/Tools/TextTool.cs:263
+#: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Ultralight"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/TextTool.cs:349
+#: ../Pinta.Tools/Tools/TextTool.cs:352
 msgid "Underline"
 msgstr "Azpimarratua"
 
@@ -2718,7 +2751,7 @@ msgstr "Batuketa (+) ({0} + ezkerreko klik)"
 msgid "Unsaved Image {0}"
 msgstr "Gorde gabeko irudia ({0})"
 
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:330
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:346
 msgid "Unsupported file format"
 msgstr "Fitxategi-formatua ez da onartzen"
 
@@ -2771,7 +2804,7 @@ msgstr "Berde bertikala (G)"
 msgid "Vertical red (R)"
 msgstr "Gorri bertikala (R)"
 
-#: ../Pinta/MainWindow.cs:465
+#: ../Pinta/MainWindow.cs:461
 msgid "View"
 msgstr "Ikusi"
 
@@ -2804,10 +2837,10 @@ msgstr "Zuria"
 msgid "Width:"
 msgstr "Zabalera:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:207
-#: ../Pinta.Core/Actions/ViewActions.cs:395
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:365
-#: ../Pinta.Core/Classes/DocumentWorkspace.cs:374
+#: ../Pinta.Core/Actions/ViewActions.cs:208
+#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
+#: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 msgid "Window"
 msgstr "Leihoa"
 
@@ -2826,7 +2859,7 @@ msgid "Xor ({0} + Right Click)"
 msgstr "Xor ({0} + eskuineko klik)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
-#: ../Pinta.Core/Managers/WorkspaceManager.cs:447
+#: ../Pinta.Core/Managers/WorkspaceManager.cs:463
 #, csharp-format
 msgid "You do not have access to '{0}'."
 msgstr "Ezin da '{0}' atzitu."
@@ -2866,9 +2899,9 @@ msgstr "Zooma hautapenera"
 msgid "_Adjustments"
 msgstr "_Doikuntzak"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:204
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:206
-#: ../Pinta/Actions/Edit/PasteAction.cs:223
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:220
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:222
+#: ../Pinta/Actions/Edit/PasteAction.cs:222
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:273
 #: ../Pinta/Dialogs/ProgressDialog.cs:68
@@ -2895,8 +2928,8 @@ msgstr "_Laguntza"
 msgid "_Image"
 msgstr "I_rudia"
 
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:203
-#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:207
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:219
+#: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:223
 #: ../Pinta.Gui.Addins/InstallDialog.cs:204 ../Pinta/Dialogs/ErrorDialog.cs:44
 #: ../Pinta/Dialogs/ErrorDialog.cs:73
 msgid "_OK"
@@ -2946,14 +2979,14 @@ msgstr ""
 "  gorkaazk https://launchpad.net/~gorkaazkarate"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:49
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:58
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr "{0} + ezkerreko klik jatorria ezartzeko, ezkerreko klik margotzeko."
 
 #. Translators: this is the auto-generated name for a duplicated layer.
 #. {0} is the name of the source layer. Example: "Layer 3 copy".
-#: ../Pinta.Core/Classes/DocumentLayers.cs:207
+#: ../Pinta.Core/Classes/DocumentLayers.cs:205
 #, csharp-format
 msgid "{0} copy"
 msgstr "{0} geruzaren kopia"
@@ -2971,10 +3004,19 @@ msgstr "{0} paleta ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:376
+#: ../Pinta.Core/Actions/ViewActions.cs:377
 #, csharp-format
 msgid "{0}%"
 msgstr "% {0}"
+
+#~ msgid "Change brush width. Shortcut keys: [ ]"
+#~ msgstr "Aldatu brotxa-zabalera. Laster-teklak: [ ]"
+
+#~ msgid "Layer Hidden"
+#~ msgstr "Ezkutuko geruza"
+
+#~ msgid "Layer Shown"
+#~ msgstr "Erakutsitako geruza"
 
 #~ msgid "Click to select region of similar color."
 #~ msgstr "Egin klik antzeko kolorea duen eskualdea hautatzeko"

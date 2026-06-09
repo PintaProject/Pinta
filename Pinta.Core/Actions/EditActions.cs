@@ -53,6 +53,7 @@ public sealed class EditActions
 	public Command ResizePalette { get; }
 
 	private Gio.File? last_palette_dir = null;
+	private Document? active_document = null;
 
 	private readonly ChromeManager chrome;
 	private readonly PaletteFormatManager palette_formats;
@@ -616,14 +617,41 @@ public sealed class EditActions
 
 	private void WorkspaceActiveDocumentChanged (object? sender, EventArgs e)
 	{
-		if (!workspace.HasOpenDocuments) {
-			Undo.Sensitive = false;
-			Redo.Sensitive = false;
-			return;
+		if (active_document != null) {
+			active_document.History.HistoryItemAdded -= OnDocumentHistoryChanged;
+			active_document.History.ActionRedone -= OnDocumentHistoryChanged;
+			active_document.History.ActionUndone -= OnDocumentHistoryChanged;
 		}
 
-		Redo.Sensitive = workspace.ActiveWorkspace.History.CanRedo;
-		Undo.Sensitive = workspace.ActiveWorkspace.History.CanUndo;
+		active_document = workspace.ActiveDocumentOrDefault;
+
+		// Register event handlers for the new document to update the undo/redo state.
+		if (active_document != null) {
+			active_document.History.HistoryItemAdded += OnDocumentHistoryChanged;
+			active_document.History.ActionRedone += OnDocumentHistoryChanged;
+			active_document.History.ActionUndone += OnDocumentHistoryChanged;
+		}
+
+		// Force an update of the undo/redo state after switching documents.
+		UpdateUndoRedoActions ();
 	}
+
+	private void OnDocumentHistoryChanged (object? sender, EventArgs e)
+	{
+		UpdateUndoRedoActions ();
+	}
+
+	private void UpdateUndoRedoActions ()
+	{
+		if (active_document != null) {
+			Redo.Sensitive = active_document.Workspace.History.CanRedo;
+			Undo.Sensitive = active_document.Workspace.History.CanUndo;
+		} else {
+			Redo.Sensitive = false;
+			Undo.Sensitive = false;
+		}
+
+	}
+
 	#endregion
 }
