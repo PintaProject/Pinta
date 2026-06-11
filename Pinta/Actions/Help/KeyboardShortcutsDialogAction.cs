@@ -30,12 +30,12 @@ internal sealed class KeyboardShortcutsDialogAction : IActionHandler
 
 	void IActionHandler.Initialize ()
 	{
-		app.Preferences.Activated += Activated;
+		app.KeyboardShortcuts.Activated += Activated;
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		app.Preferences.Activated -= Activated;
+		app.KeyboardShortcuts.Activated -= Activated;
 	}
 
 	private void Activated (object sender, EventArgs e)

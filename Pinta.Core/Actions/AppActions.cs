@@ -31,7 +31,7 @@ namespace Pinta.Core;
 public sealed class AppActions
 {
 	public Command About { get; }
-	public Command Preferences { get; }
+	public Command KeyboardShortcuts { get; }
 	public Command Exit { get; }
 
 	public event EventHandler? BeforeQuit;
@@ -43,7 +43,7 @@ public sealed class AppActions
 			Translations.GetString ("About"),
 			null,
 			Resources.StandardIcons.HelpAbout);
-		Preferences = new Command (
+		KeyboardShortcuts = new Command (
 			"preferences",
 			Translations.GetString ("Keyboard Shortcuts"),
 			null,
@@ -61,7 +61,7 @@ public sealed class AppActions
 	{
 		app.AddCommands ([
 			About,
-			Preferences,
+			KeyboardShortcuts,
 			Exit]);
 	}
 
