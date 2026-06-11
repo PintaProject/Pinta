@@ -47,7 +47,7 @@ public sealed class AppActions
 			"preferences",
 			Translations.GetString ("Keyboard Shortcuts"),
 			null,
-			"preferences-system-symbolic",
+			Resources.StandardIcons.KeyboardShortcuts,
 			shortcuts: ["<Primary>comma"]);
 		Exit = new Command (
 			"quit",

@@ -61,6 +61,8 @@ public static class StandardIcons
 	public const string ImageGeneric = "image-x-generic-symbolic";
 	public const string ImageMissing = "image-missing-symbolic";
 
+	public const string KeyboardShortcuts = "preferences-system-symbolic";
+
 	public const string LayerMoveUp = "pan-up-symbolic";
 	public const string LayerMoveDown = "pan-down-symbolic";
 
