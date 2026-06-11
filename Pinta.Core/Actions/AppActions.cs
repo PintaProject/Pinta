@@ -44,7 +44,7 @@ public sealed class AppActions
 			null,
 			Resources.StandardIcons.HelpAbout);
 		KeyboardShortcuts = new Command (
-			"preferences",
+			"keyboardshortcuts",
 			Translations.GetString ("Keyboard Shortcuts"),
 			null,
 			Resources.StandardIcons.KeyboardShortcuts,
