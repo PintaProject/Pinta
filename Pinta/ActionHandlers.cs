@@ -95,6 +95,7 @@ public sealed class ActionHandlers
 			new AboutDialogAction (actions.App, chrome, applicationVersion),
 			new KeyboardShortcutsDialogAction (actions.App, actions, chrome, tools),
 		];
+
 		// Initialize each action handler
 		foreach (var action in action_handlers)
 			action.Initialize ();
