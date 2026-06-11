@@ -1,5 +1,5 @@
 //
-// PreferencesDialogAction.cs
+// KeyboardShortcutsDialogAction.cs
 //
 
 using System;
@@ -9,14 +9,14 @@ using Pinta.Core;
 
 namespace Pinta.Actions;
 
-internal sealed class PreferencesDialogAction : IActionHandler
+internal sealed class KeyboardShortcutsDialogAction : IActionHandler
 {
 	private readonly AppActions app;
 	private readonly ActionManager actions;
 	private readonly ChromeManager chrome;
 	private readonly ToolManager tools;
 
-	internal PreferencesDialogAction (
+	internal KeyboardShortcutsDialogAction (
 		AppActions app,
 		ActionManager actions,
 		ChromeManager chrome,
