@@ -66,7 +66,7 @@ internal sealed class PreferencesDialogAction : IActionHandler
 				return;
 
 			Adw.ShortcutsSection section = new ();
-			section.Title = Translations.GetString (title);
+			section.Title = title;
 
 			foreach (var cmd in validCommands) {
 				Adw.ShortcutsItem item = new ();
@@ -99,17 +99,17 @@ internal sealed class PreferencesDialogAction : IActionHandler
 		dialog.Add (toolShortcutsSection);
 
 		// 2. Layer Commands
-		AddSection ("Layers", GetCommands (actions.Layers));
+		AddSection (Translations.GetString ("Layers"), GetCommands (actions.Layers));
 
 		// 3. Menu Commands
-		AddSection ("File", GetCommands (actions.File));
-		AddSection ("Edit", GetCommands (actions.Edit));
-		AddSection ("View", GetCommands (actions.View));
-		AddSection ("Image", GetCommands (actions.Image));
-		AddSection ("Adjustments", actions.Adjustments.Actions);
-		AddSection ("Effects", actions.Effects.Actions);
-		AddSection ("Window", GetCommands (actions.Window));
-		AddSection ("Help", GetCommands (actions.Help));
+		AddSection (Translations.GetString ("File"), GetCommands (actions.File));
+		AddSection (Translations.GetString ("Edit"), GetCommands (actions.Edit));
+		AddSection (Translations.GetString ("View"), GetCommands (actions.View));
+		AddSection (Translations.GetString ("Image"), GetCommands (actions.Image));
+		AddSection (Translations.GetString ("Adjustments"), actions.Adjustments.Actions);
+		AddSection (Translations.GetString ("Effects"), actions.Effects.Actions);
+		AddSection (Translations.GetString ("Window"), GetCommands (actions.Window));
+		AddSection (Translations.GetString ("Help"), GetCommands (actions.Help));
 
 		dialog.Present (chrome.MainWindow);
 	}
