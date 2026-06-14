@@ -38,8 +38,11 @@ public class BrushHandle : IToolHandle
             ? Math.Min (30d, workspace.GetScale ())
             : 1d;
 
-
         int clampedWidth = (int) Math.Min (800d, brush_width * zoom);
+
+        if(clampedWidth < 3)
+            return;
+
         int halfOfShapeWidth = clampedWidth / 2;
         int twiceShapeWidth = clampedWidth * 2;
 

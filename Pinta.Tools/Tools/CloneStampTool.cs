@@ -40,13 +40,14 @@ public sealed class CloneStampTool : BaseBrushTool
 
 	private readonly SystemManager system_manager;
 	private readonly IWorkspaceService workspace;
-	private BrushHandle handle;
+	private readonly BrushHandle handle;
+	private bool move_second_cursor = true;
 	public CloneStampTool (IServiceProvider services) : base (services)
 	{
 		system_manager = services.GetService<SystemManager> ();
 		workspace = services.GetService<IWorkspaceService> ();
 
-		handle = new BrushHandle(workspace, this);
+		handle = new BrushHandle (workspace, this);
 
 		// Update cursor on zoom
 		workspace.ViewSizeChanged += (_, _) => {
@@ -99,24 +100,19 @@ public sealed class CloneStampTool : BaseBrushTool
 		} else {
 			origin = e.Point;
 			offset = null;
-
-			handle.CanvasPosition = new(origin.Value.X, origin.Value.Y);
-			handle.BrushWidth = BrushWidth;
-			handle.Active = true;
+			UpdateSecondCursor(document, origin.Value.X, origin.Value.Y, false);
 		}
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 	{
-		if(!offset.HasValue)
+		if (!offset.HasValue)
 			return;
 
 		var x = e.Point.X;
 		var y = e.Point.Y;
 
-		handle.CanvasPosition = new(x - offset.Value.X, y - offset.Value.Y);
-		handle.BrushWidth = BrushWidth;
-		document.Workspace.Invalidate(handle.InvalidateRect);
+		UpdateSecondCursor (document, x - offset.Value.X, y - offset.Value.Y, true);
 
 		if (!painting)
 			return;
@@ -150,6 +146,9 @@ public sealed class CloneStampTool : BaseBrushTool
 	{
 		painting = false;
 
+		if (e.IsControlPressed)
+			handle.Active = true;
+
 		using Cairo.Context g = new (document.Layers.CurrentUserLayer.Surface);
 		g.SetSourceSurface (document.Layers.ToolLayer.Surface, 0, 0);
 		g.Paint ();
@@ -168,7 +167,8 @@ public sealed class CloneStampTool : BaseBrushTool
 	{
 		// Note that this WON'T work if user presses control key and THEN selects the tool!
 		if (e.Key.IsControlKey ()) {
-			SetCursor (Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.CloneStampSetSource.png"), 0, 0, null));
+			move_second_cursor = false;
+			SetCursor (Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.CloneStampSetSource.png"), 16, 26, null));
 		}
 
 		return false;
@@ -176,8 +176,10 @@ public sealed class CloneStampTool : BaseBrushTool
 
 	protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
 	{
-		if (e.Key.IsControlKey ())
+		if (e.Key.IsControlKey ()) {
+			move_second_cursor = true;
 			SetCursor (DefaultCursor);
+		}
 
 		return false;
 	}
@@ -186,5 +188,13 @@ public sealed class CloneStampTool : BaseBrushTool
 	{
 		origin = null;
 		handle.Active = false;
+	}
+
+	private void UpdateSecondCursor (Document document, int x, int y, bool move_event)
+	{
+		if (move_second_cursor || (!move_event))
+			handle.CanvasPosition = new (x, y);
+		handle.BrushWidth = BrushWidth;
+		document.Workspace.Invalidate (handle.InvalidateRect);
 	}
 }
