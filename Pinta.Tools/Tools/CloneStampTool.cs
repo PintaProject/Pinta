@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Gdk;
 using Pinta.Core;
 
@@ -39,10 +40,13 @@ public sealed class CloneStampTool : BaseBrushTool
 
 	private readonly SystemManager system_manager;
 	private readonly IWorkspaceService workspace;
+	private BrushHandle handle;
 	public CloneStampTool (IServiceProvider services) : base (services)
 	{
 		system_manager = services.GetService<SystemManager> ();
 		workspace = services.GetService<IWorkspaceService> ();
+
+		handle = new BrushHandle(workspace, this);
 
 		// Update cursor on zoom
 		workspace.ViewSizeChanged += (_, _) => {
@@ -59,6 +63,7 @@ public sealed class CloneStampTool : BaseBrushTool
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_L);
 	public override int Priority => 47;
 	protected override bool ShowAntialiasingButton => true;
+	public override IEnumerable<IToolHandle> Handles => [handle];
 
 	public override Cursor DefaultCursor {
 		get {
@@ -94,16 +99,27 @@ public sealed class CloneStampTool : BaseBrushTool
 		} else {
 			origin = e.Point;
 			offset = null;
+
+			handle.CanvasPosition = new(origin.Value.X, origin.Value.Y);
+			handle.BrushWidth = BrushWidth;
+			handle.Active = true;
 		}
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 	{
-		if (!painting || !offset.HasValue)
+		if(!offset.HasValue)
 			return;
 
 		var x = e.Point.X;
 		var y = e.Point.Y;
+
+		handle.CanvasPosition = new(x - offset.Value.X, y - offset.Value.Y);
+		handle.BrushWidth = BrushWidth;
+		document.Workspace.Invalidate(handle.InvalidateRect);
+
+		if (!painting)
+			return;
 
 		if (!last_point.HasValue) {
 			last_point = e.Point;
@@ -152,7 +168,7 @@ public sealed class CloneStampTool : BaseBrushTool
 	{
 		// Note that this WON'T work if user presses control key and THEN selects the tool!
 		if (e.Key.IsControlKey ()) {
-			SetCursor (Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.CloneStampSetSource.png"), 16, 26, null));
+			SetCursor (Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.CloneStampSetSource.png"), 0, 0, null));
 		}
 
 		return false;
@@ -169,5 +185,6 @@ public sealed class CloneStampTool : BaseBrushTool
 	protected override void OnDeactivated (Document? document, BaseTool? newTool)
 	{
 		origin = null;
+		handle.Active = false;
 	}
 }
