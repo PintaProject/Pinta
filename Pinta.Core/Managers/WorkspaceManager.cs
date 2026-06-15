@@ -508,6 +508,9 @@ public sealed class WorkspaceManager : IWorkspaceService
 			DumpLastHistorySteps(doc);
 			doc.IsAutosaveDirty = false;
 		}
+		if ( autosave_history != 0 ) {
+			Console.WriteLine($"Date: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+		}
 
 		return true;
 	}
@@ -544,7 +547,6 @@ public sealed class WorkspaceManager : IWorkspaceService
 				Console.WriteLine($"[{i}] {item.Text}");
 			}
 
-			Console.WriteLine($"Date: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
 			Console.WriteLine("==========================");
 		}
 	}
