@@ -29,8 +29,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Pinta.Core;
+using Requests.DBus;
 using ScreenshotPortal.DBus;
-using Tmds.DBus;
+using Tmds.DBus.Protocol;
 
 namespace Pinta.Actions;
 
@@ -77,7 +78,7 @@ internal sealed class NewScreenshotAction : IActionHandler
 			else
 				HandleDefault ();
 
-		} catch (DBusException e) {
+		} catch (DBusExceptionBase e) {
 
 			await chrome.ShowErrorDialog (
 				chrome.MainWindow,
@@ -131,14 +132,11 @@ internal sealed class NewScreenshotAction : IActionHandler
 
 		// It's important that the portal interactions are synchronised with the main thread
 		// Otherwise the use of the portals will cause massive instability and crash Pinta
-		Connection systemConnection = new (
-			new ClientConnectionOptions (Address.Session) {
-				AutoConnect = true,
-				SynchronizationContext = System.Threading.SynchronizationContext.Current,
-			}
-		);
+		using DBusConnection connection = new (DBusAddress.Session!);
 
-		var portal = systemConnection.CreateProxy<IScreenshot> (
+		await connection.ConnectAsync();
+
+		var portal = new Screenshot(connection,
 			"org.freedesktop.portal.Desktop",
 			"/org/freedesktop/portal/desktop");
 
@@ -148,31 +146,64 @@ internal sealed class NewScreenshotAction : IActionHandler
 		// https://flatpak.github.io/xdg-desktop-portal/#parent_window
 		var rootWindowID = "";
 
+		// https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Request.html
+		string sender = (connection.UniqueName ?? "").TrimStart(':').Replace(".", "_");
+		string token = "Pinta_" + Stopwatch.GetTimestamp().ToString();
+		ObjectPath expectedPath = $"/org/freedesktop/portal/desktop/request/{sender}/{token}";
+
 		// Enables options such as delay, specific windows, etc.
-		Dictionary<string, object> portalOptions = new () {
+		Dictionary<string, VariantValue> portalOptions = new () {
 			["modal"] = true,
 			["interactive"] = true,
+			["handle_token"] = token,
 		};
 
-		Requests.DBus.IRequest handle = await portal.ScreenshotAsync (rootWindowID, portalOptions);
-		await handle.WatchResponseAsync (
-			reply => {
-				// response 0 == success, 1 == undefined error, 2 == user cancelled (not an error)
-				// However the response 1 can occur when the user presses "Cancel" on the second stage of the UI
-				// As a result, it's not reliable to throw error messages when the retval == 1
-				if (reply.response != 0)
-					return;
+		Request request = new Request (connection, "org.freedesktop.portal.Desktop", expectedPath);
+		TaskCompletionSource requestCompletion = new ();
+		using var _ = await request.WatchResponseAsync (
+			(Notification<(uint Response, Dictionary<string, VariantValue> Results)> notification) =>
+			{
+				if (notification.IsCompletion)
+				{
+					requestCompletion.TrySetException (notification.Exception);
+				}
+				else
+				{
+					var reply = notification.Value;
+					try
+					{
+						if (reply.Response != 0)
+							return;
 
-				string? uri = reply.results["uri"].ToString ();
+						string? uri = null;
+						if (reply.Results.TryGetValue ("uri", out VariantValue vv) && vv.Type == VariantValueType.String)
+							uri = vv.GetString ();
 
-				if (uri is null || !workspace.OpenFile (Gio.FileHelper.NewForUri (uri)))
-					return;
+						if (uri is null || !workspace.OpenFile (Gio.FileHelper.NewForUri (uri)))
+							return;
 
-				// Mark as not having a file, so that the user doesn't unintentionally
-				// save using the temp file.
-				workspace.ActiveDocument.ClearFileReference ();
-			}
-		);
+						// Mark as not having a file, so that the user doesn't unintentionally
+						// save using the temp file.
+						workspace.ActiveDocument.ClearFileReference ();
+					}
+					catch (Exception ex)
+					{
+						requestCompletion.TrySetException (ex);
+					}
+					finally
+					{
+						requestCompletion.TrySetResult ();
+					}
+				}
+			}, ObserverFlags.EmitAll);
+		ObjectPath actualPath = await portal.ScreenshotAsync (rootWindowID, portalOptions);
+
+		if (actualPath != expectedPath)
+		{
+			throw new DBusUnexpectedValueException ("Request did not get the expected path.");
+		}
+
+		await requestCompletion.Task;
 	}
 
 	private async Task HandleWindows ()
