@@ -15,6 +15,11 @@ public interface IToolHandle
 	public bool Active { get; }
 
 	/// <summary>
+	/// Tests whether the window point is inside the handle's area.
+	/// </summary>
+	public bool ContainsPoint (PointD windowPoint);
+
+	/// <summary>
 	/// Draw the handle onto the canvas widget.
 	/// This is in window space, so CanvasPointToWindow() should be used to transform a canvas position
 	/// into the correct space.
