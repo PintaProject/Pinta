@@ -100,7 +100,7 @@ public sealed class CloneStampTool : BaseBrushTool
 		} else {
 			origin = e.Point;
 			offset = null;
-			UpdateSecondCursor(document, origin.Value.X, origin.Value.Y, false);
+			UpdateSecondCursor (document, origin.Value.X, origin.Value.Y, false);
 		}
 	}
 
