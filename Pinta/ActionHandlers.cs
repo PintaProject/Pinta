@@ -93,6 +93,7 @@ public sealed class ActionHandlers
 
 			// Help
 			new AboutDialogAction (actions.App, chrome, applicationVersion),
+			new KeyboardShortcutsDialogAction (actions.App, actions, chrome, tools),
 		];
 
 		// Initialize each action handler
