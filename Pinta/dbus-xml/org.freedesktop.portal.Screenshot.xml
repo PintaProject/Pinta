@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Screenshot.html#org-freedesktop-portal-screenshot-screenshot -->
+<node>
+  <interface name="org.freedesktop.portal.Screenshot">
+    <method name="Screenshot">
+      <arg type="s" name="parent_window" direction="in"/>
+      <arg type="a{sv}" name="options" direction="in"/>
+      <arg type="o" name="handle" direction="out"/>
+    </method>
+  </interface>
+</node>
