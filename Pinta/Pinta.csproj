@@ -13,11 +13,17 @@
   <Import Project="../properties/ReferenceGirCoreAdw1.props" />
 
   <ItemGroup>
-    <PackageReference Include="Tmds.DBus" />
+    <PackageReference Include="Tmds.DBus.Protocol" />
+    <PackageReference Include="Tmds.DBus.Generator" />
     <PackageReference Include="Mono.Addins" />
     <PackageReference Include="Mono.Addins.Setup" />
     <PackageReference Include="Mono.Addins.CecilReflector" />
     <PackageReference Include="System.CommandLine" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="dbus-xml/org.freedesktop.portal.Request.xml" Namespace="Requests.DBus" DBusGeneratorMode="Proxy" />
+    <AdditionalFiles Include="dbus-xml/org.freedesktop.portal.Screenshot.xml" Namespace="ScreenshotPortal.DBus" DBusGeneratorMode="Proxy" />
   </ItemGroup>
 
   <ItemGroup>
