@@ -41,13 +41,13 @@ public sealed class CloneStampTool : BaseBrushTool
 	private readonly SystemManager system_manager;
 	private readonly IWorkspaceService workspace;
 	private readonly BrushHandle handle;
-	private bool move_second_cursor = true;
+	private bool move_origin_handle = true;
 	public CloneStampTool (IServiceProvider services) : base (services)
 	{
 		system_manager = services.GetService<SystemManager> ();
 		workspace = services.GetService<IWorkspaceService> ();
 
-		handle = new BrushHandle (workspace, this);
+		handle = new BrushHandle (workspace);
 
 		// Update cursor on zoom
 		workspace.ViewSizeChanged += (_, _) => {
@@ -100,7 +100,7 @@ public sealed class CloneStampTool : BaseBrushTool
 		} else {
 			origin = e.Point;
 			offset = null;
-			UpdateSecondCursor (document, origin.Value.X, origin.Value.Y, false);
+			UpdateOriginHandle (document, origin.Value.X, origin.Value.Y, false);
 		}
 	}
 
@@ -112,7 +112,7 @@ public sealed class CloneStampTool : BaseBrushTool
 		var x = e.Point.X;
 		var y = e.Point.Y;
 
-		UpdateSecondCursor (document, x - offset.Value.X, y - offset.Value.Y, true);
+		UpdateOriginHandle (document, x - offset.Value.X, y - offset.Value.Y, true);
 
 		if (!painting)
 			return;
@@ -167,7 +167,7 @@ public sealed class CloneStampTool : BaseBrushTool
 	{
 		// Note that this WON'T work if user presses control key and THEN selects the tool!
 		if (e.Key.IsControlKey ()) {
-			move_second_cursor = false;
+			move_origin_handle = false;
 			SetCursor (Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.CloneStampSetSource.png"), 16, 26, null));
 		}
 
@@ -177,7 +177,7 @@ public sealed class CloneStampTool : BaseBrushTool
 	protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
 	{
 		if (e.Key.IsControlKey ()) {
-			move_second_cursor = true;
+			move_origin_handle = true;
 			SetCursor (DefaultCursor);
 		}
 
@@ -190,9 +190,9 @@ public sealed class CloneStampTool : BaseBrushTool
 		handle.Active = false;
 	}
 
-	private void UpdateSecondCursor (Document document, int x, int y, bool move_event)
+	private void UpdateOriginHandle (Document document, int x, int y, bool move_event)
 	{
-		if (move_second_cursor || (!move_event))
+		if (move_origin_handle || (!move_event))
 			handle.CanvasPosition = new (x, y);
 		handle.BrushWidth = BrushWidth;
 		document.Workspace.Invalidate (handle.InvalidateRect);

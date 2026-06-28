@@ -1,5 +1,8 @@
 using System;
+using System.Drawing;
 using Cairo;
+// using Gdk;
+using Gsk;
 using Gtk;
 using Pinta.Core;
 
@@ -18,13 +21,11 @@ public class BrushHandle : IToolHandle
 	}
 	public bool Active { get; set; }
 	public PointD CanvasPosition { get; set; }
-	private readonly BaseBrushTool tool;
 	private readonly IWorkspaceService workspace;
 
-	public BrushHandle (IWorkspaceService workspace, BaseBrushTool tool)
+	public BrushHandle (IWorkspaceService workspace)
 	{
 		this.workspace = workspace;
-		this.tool = tool;
 	}
 
 
@@ -37,40 +38,44 @@ public class BrushHandle : IToolHandle
 		    (PintaCore.Workspace.HasOpenDocuments)
 		    ? Math.Min (30d, workspace.GetScale ())
 		    : 1d;
-
 		int clampedWidth = (int) Math.Min (800d, brush_width * zoom);
 
 		if (clampedWidth < 3)
 			return;
 
 		int halfOfShapeWidth = clampedWidth / 2;
-		int twiceShapeWidth = clampedWidth * 2;
 
-		RectangleD shapeRect = new () {
-			X = halfOfShapeWidth,
-			Y = halfOfShapeWidth,
+		RectangleF shapeRect = new () {
+			X = (float) (CanvasPosition.X * zoom),
+			Y = (float) (CanvasPosition.Y * zoom),
 			Width = clampedWidth,
 			Height = clampedWidth
 		};
 
-		var bounds = new Graphene.Rect ();
-		bounds.Init ((float) (CanvasPosition.X * zoom) - clampedWidth, (float) (CanvasPosition.Y * zoom) - clampedWidth, twiceShapeWidth, twiceShapeWidth);
+		Gdk.RGBA outerColor = new () {
+			Red = 1.0f,
+			Green = 1.0f,
+			Blue = 1.0f,
+			Alpha = .75f
+		};
+		Gdk.RGBA innerColor = new () {
+			Red = 0,
+			Green = 0,
+			Blue = 0,
+			Alpha = 1.0f
+		};
 
-		ImageSurface imageSurface = CairoExtensions.CreateImageSurface (
-		    Format.Argb32,
-		    (int) bounds.GetWidth (),
-		    (int) bounds.GetHeight ()
-		);
+		PathBuilder pathBuilder = PathBuilder.New ();
+		var originPosition = new Graphene.Point ();
+		originPosition.Init (shapeRect.X, shapeRect.Y);
+		pathBuilder.AddCircle (originPosition, halfOfShapeWidth);
+		Stroke stroke = Stroke.New (2);
+		snapshot.AppendStroke (pathBuilder.ToPath (), stroke, outerColor);
 
-		Color outerColor = new (255, 255, 255, 0.75);
-		Color innerColor = new (0, 0, 0);
-
-		using Context g = new Context (imageSurface);
-		g.DrawEllipse (shapeRect, outerColor, 2);
-		shapeRect = shapeRect.Inflated (-1, -1);
-		g.DrawEllipse (shapeRect, innerColor, 1);
-
-		snapshot.AppendTexture (Gdk.Texture.NewForPixbuf (imageSurface.ToPixbuf ()), bounds);
+		shapeRect.Inflate (-1, -1);
+		pathBuilder.AddCircle (originPosition, halfOfShapeWidth);
+		stroke.SetLineWidth (1);
+		snapshot.AppendStroke (pathBuilder.ToPath (), stroke, innerColor);
 	}
 
 	public RectangleI InvalidateRect => ComputeWindowRect ().Inflated (2, 2).ToInt ();
