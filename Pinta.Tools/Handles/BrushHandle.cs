@@ -1,7 +1,5 @@
 using System;
 using System.Drawing;
-using Cairo;
-// using Gdk;
 using Gsk;
 using Gtk;
 using Pinta.Core;
