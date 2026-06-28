@@ -37,7 +37,7 @@ jobs:
     steps:
     - name: Set environment variables
       run: echo "BUILD_DIR=${{runner.temp}}/pinta-${{env.PINTA_VERSION}}" >> $GITHUB_ENV
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
       with:
@@ -90,7 +90,7 @@ jobs:
     runs-on: ${{matrix.build.runner}}
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
       with:
@@ -145,7 +145,7 @@ jobs:
         shell: msys2 {0}
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - uses: microsoft/setup-msbuild@v3.0.0
     - name: Setup .NET
       uses: actions/setup-dotnet@v5

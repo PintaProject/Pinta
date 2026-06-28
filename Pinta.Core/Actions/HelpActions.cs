@@ -72,6 +72,12 @@ public sealed class HelpActions
 	public void RegisterActions (Gtk.Application application, Gio.Menu menu)
 	{
 		menu.AppendItem (Contents.CreateMenuItem ());
+
+		if (system.OperatingSystem != OS.Mac) {
+			application.AddCommand (app.KeyboardShortcuts);
+		}
+		menu.AppendItem (app.KeyboardShortcuts.CreateMenuItem ());
+
 		menu.AppendItem (Website.CreateMenuItem ());
 		menu.AppendItem (Bugs.CreateMenuItem ());
 		menu.AppendItem (Translate.CreateMenuItem ());
