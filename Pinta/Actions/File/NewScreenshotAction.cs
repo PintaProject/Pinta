@@ -134,9 +134,9 @@ internal sealed class NewScreenshotAction : IActionHandler
 		// Otherwise the use of the portals will cause massive instability and crash Pinta
 		using DBusConnection connection = new (DBusAddress.Session!);
 
-		await connection.ConnectAsync();
+		await connection.ConnectAsync ();
 
-		var portal = new Screenshot(connection,
+		var portal = new Screenshot (connection,
 			"org.freedesktop.portal.Desktop",
 			"/org/freedesktop/portal/desktop");
 
@@ -147,8 +147,8 @@ internal sealed class NewScreenshotAction : IActionHandler
 		var rootWindowID = "";
 
 		// https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Request.html
-		string sender = (connection.UniqueName ?? "").TrimStart(':').Replace(".", "_");
-		string token = "Pinta_" + Stopwatch.GetTimestamp().ToString();
+		string sender = (connection.UniqueName ?? "").TrimStart (':').Replace (".", "_");
+		string token = "Pinta_" + Stopwatch.GetTimestamp ().ToString ();
 		ObjectPath expectedPath = $"/org/freedesktop/portal/desktop/request/{sender}/{token}";
 
 		// Enables options such as delay, specific windows, etc.
@@ -161,17 +161,12 @@ internal sealed class NewScreenshotAction : IActionHandler
 		Request request = new Request (connection, "org.freedesktop.portal.Desktop", expectedPath);
 		TaskCompletionSource requestCompletion = new ();
 		using var _ = await request.WatchResponseAsync (
-			(Notification<(uint Response, Dictionary<string, VariantValue> Results)> notification) =>
-			{
-				if (notification.IsCompletion)
-				{
+			(Notification<(uint Response, Dictionary<string, VariantValue> Results)> notification) => {
+				if (notification.IsCompletion) {
 					requestCompletion.TrySetException (notification.Exception);
-				}
-				else
-				{
+				} else {
 					var reply = notification.Value;
-					try
-					{
+					try {
 						if (reply.Response != 0)
 							return;
 
@@ -185,21 +180,16 @@ internal sealed class NewScreenshotAction : IActionHandler
 						// Mark as not having a file, so that the user doesn't unintentionally
 						// save using the temp file.
 						workspace.ActiveDocument.ClearFileReference ();
-					}
-					catch (Exception ex)
-					{
+					} catch (Exception ex) {
 						requestCompletion.TrySetException (ex);
-					}
-					finally
-					{
+					} finally {
 						requestCompletion.TrySetResult ();
 					}
 				}
 			}, ObserverFlags.EmitAll);
 		ObjectPath actualPath = await portal.ScreenshotAsync (rootWindowID, portalOptions);
 
-		if (actualPath != expectedPath)
-		{
+		if (actualPath != expectedPath) {
 			throw new DBusUnexpectedValueException ("Request did not get the expected path.");
 		}
 
