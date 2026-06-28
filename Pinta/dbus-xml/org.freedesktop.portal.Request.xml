@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.Request.html#signals -->
+<node>
+  <interface name="org.freedesktop.portal.Request">
+    <signal name="Response">
+      <arg type="u" name="response"/>
+      <arg type="a{sv}" name="results"/>
+    </signal>
+  </interface>
+</node>
