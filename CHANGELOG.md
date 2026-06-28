@@ -31,9 +31,11 @@ Thanks to the following contributors who worked on this release:
 - The transform tools now support holding the Ctrl key to translate the selection by larger increments when using the arrow keys (#2072, #1559)
 - The palette widget now shows the color's hex code in the tooltip (#2068, #2074)
 - The side panels can now be hidden using the F12 shortcut in addition to the existing menu item (#2119)
+- Added a keyboard shortcuts dialog (#2172, #1434)
 
 ### Changed
 - Upgraded the minimum required .NET version to 10.0 (#2081)
+- Updated dependencies to require libadwaita 1.8+
 - Effect dialogs now hide options that are not currently relevant (#1960)
 - Fixed several minor UX issues in the color dialog (#1795)
 - The text tool now provides a separate adjustment for the font size and font variant, which doesn't require opening the font dialog (#1947, #1961, #2043, #1965)

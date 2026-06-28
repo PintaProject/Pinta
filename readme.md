@@ -67,7 +67,7 @@ For building on the command line:
 - Install [.NET 10](https://dotnet.microsoft.com/) following the instructions for your Linux distribution.
 - Install other dependencies (instructions are for Ubuntu 22.10, but should be similar for other distros):
   - `sudo apt install autotools-dev autoconf-archive gettext intltool libadwaita-1-dev`
-  - Minimum library versions: `gtk` >= 4.18 and `libadwaita` >= 1.7
+  - Minimum library versions: `gtk` >= 4.18 and `libadwaita` >= 1.8
   - Optional dependencies: `webp-pixbuf-loader`
 - Build (option 1, for development and testing):
   - `dotnet build`
