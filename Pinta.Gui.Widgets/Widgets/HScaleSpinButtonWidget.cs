@@ -62,13 +62,17 @@ public sealed class HScaleSpinButtonWidget : Gtk.Box
 		hScale.Halign = Gtk.Align.Fill;
 		hScale.OnValueChanged += HandleHscaleValueChanged;
 
+		Gtk.EventControllerKey spinButtonKeyController = new ();
+		spinButtonKeyController.OnKeyReleased += SpinButtonKeyRelease;
+
 		Gtk.SpinButton spinButton = Gtk.SpinButton.NewWithRange (0, 100, 1);
 		spinButton.CanFocus = true;
 		spinButton.ClimbRate = 1;
 		spinButton.Numeric = true;
 		spinButton.Adjustment!.PageIncrement = 10;
 		spinButton.OnValueChanged += HandleSpinValueChanged;
-		spinButton.SetActivatesDefaultImmediate (true);
+		spinButton.SetActivatesDefault (true);
+		spinButton.AddController (spinButtonKeyController);
 
 		Gtk.Button resetButton = new () {
 			IconName = Resources.StandardIcons.GoPrevious,
@@ -103,6 +107,14 @@ public sealed class HScaleSpinButtonWidget : Gtk.Box
 		title_label = titleLabel;
 		h_scale = hScale;
 		spin_button = spinButton;
+	}
+
+	private void SpinButtonKeyRelease (Gtk.EventControllerKey sender, Gtk.EventControllerKey.KeyReleasedSignalArgs args)
+	{
+		if (!double.TryParse (spin_button.GetText (), out double parsed)) return;
+		double adjusted = Math.Clamp (parsed, spin_button.Adjustment!.Lower, spin_button.Adjustment.Upper);
+		if (spin_button.Value == adjusted) return;
+		spin_button.Value = adjusted;
 	}
 
 	public string Label {
