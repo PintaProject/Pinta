@@ -142,7 +142,7 @@ partial class GtkExtensions
 
 	public static Gtk.Separator CreateToolBarSeparator ()
 	{
-		Gtk.Separator sep = Gtk.Separator.New (Gtk.Orientation.Vertical);
+		Gtk.Separator sep = Gtk.Separator.New (Gtk.Orientation.Horizontal);
 		sep.AddCssClass (AdwaitaStyles.Spacer);
 		return sep;
 	}
