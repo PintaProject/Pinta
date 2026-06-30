@@ -18,6 +18,7 @@ Thanks to the following contributors who worked on this release:
 - @robertoffmoura
 - @tmds
 - @AoMas17
+- @Pashockerr
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -34,6 +35,7 @@ Thanks to the following contributors who worked on this release:
 - The palette widget now shows the color's hex code in the tooltip (#2068, #2074)
 - The side panels can now be hidden using the F12 shortcut in addition to the existing menu item (#2119)
 - Added a keyboard shortcuts dialog (#2172, #1434)
+- The Clone Stamp tool now visualizes the position of the clone origin (#1923, #2190)
 
 ### Changed
 - Upgraded the minimum required .NET version to 10.0 (#2081)
