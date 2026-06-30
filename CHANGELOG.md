@@ -17,6 +17,7 @@ Thanks to the following contributors who worked on this release:
 - @IArnaut2
 - @robertoffmoura
 - @tmds
+- @AoMas17
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -57,6 +58,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a bug with switching between shape tools that could cause unfinalized shapes to be stuck (#1420, #2096)
 - Fixed multiple bugs when adding a new layer when the topmost layer was not selected (#2150, #2129)
 - Fixed errors when dragging and dropping files on macOS (#2170, #2124)
+- Fixed issues with overlay scrollbars intercepting clicks on selection handles (#2200, #2201)
 
 ## [3.1.2](https://github.com/PintaProject/Pinta/release/tag/3.1.2) - 2026/03/29
 
