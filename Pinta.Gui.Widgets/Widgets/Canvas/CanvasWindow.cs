@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Linq;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
@@ -39,6 +40,8 @@ public sealed class CanvasWindow : Gtk.Grid
 	private readonly Ruler horizontal_ruler;
 	private readonly Ruler vertical_ruler;
 	private readonly Gtk.ScrolledWindow scrolled_window;
+	private readonly Gtk.Widget? horizontal_scrollbar;
+	private readonly Gtk.Widget? vertical_scrollbar;
 	private readonly Gtk.EventControllerMotion motion_controller;
 	private readonly Gtk.GestureDrag drag_controller;
 	private readonly Gtk.GestureZoom gesture_zoom;
@@ -143,6 +146,8 @@ public sealed class CanvasWindow : Gtk.Grid
 		vertical_ruler = verticalRuler;
 		motion_controller = motionController;
 		drag_controller = dragController;
+		horizontal_scrollbar = scrolledWindow.GetHscrollbar ();
+		vertical_scrollbar = scrolledWindow.GetVscrollbar ();
 
 		// --- Further initialization
 
@@ -190,6 +195,7 @@ public sealed class CanvasWindow : Gtk.Grid
 		current_canvas_pos = document.Workspace.ViewPointToCanvas (viewPos);
 		horizontal_ruler.Position = current_canvas_pos.X;
 		vertical_ruler.Position = current_canvas_pos.Y;
+		UpdateScrollbarTargeting (viewPos);
 
 		// Forward mouse move events to the current tool when not dragging.
 		if (drag_controller.GetStartPoint (out _, out _))
@@ -439,5 +445,17 @@ public sealed class CanvasWindow : Gtk.Grid
 		};
 
 		return tools.DoKeyUp (document, tool_args);
+	}
+
+	private void UpdateScrollbarTargeting (PointD? viewPos = null)
+	{
+		bool canTarget = viewPos is null
+			|| tools.CurrentTool?.Handles.Any (h => h.Active && h.ContainsPoint (viewPos.Value)) != true;
+
+		if (horizontal_scrollbar is not null)
+			horizontal_scrollbar.CanTarget = canTarget;
+
+		if (vertical_scrollbar is not null)
+			vertical_scrollbar.CanTarget = canTarget;
 	}
 }
