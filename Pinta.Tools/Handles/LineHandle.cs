@@ -32,6 +32,9 @@ public class LineHandle : IToolHandle
 		handles = [new MoveHandle (workspace), new MoveHandle (workspace)];
 	}
 
+	public bool ContainsPoint (PointD windowPoint)
+		=> handles.Any (c => c.ContainsPoint (windowPoint));
+
 	public void Draw (Snapshot snapshot)
 	{
 		foreach (MoveHandle handle in handles) {
