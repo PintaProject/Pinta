@@ -26,6 +26,8 @@ public class BrushHandle : IToolHandle
 		this.workspace = workspace;
 	}
 
+	public bool ContainsPoint (PointD windowPoint)
+		=> ComputeWindowRect ().ContainsPoint (windowPoint);
 
 	/// <summary>
 	/// Drawing shape like in GdkExtensions.CreateIconWithShape
