@@ -26,9 +26,9 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		// We create the widgets inside the dropdown to avoid having to create yet another custom widget
 		// for the selectedFactory. Also, we can reference them directly when updated, avoiding
 		// .nextSibling hacks.
-		selected_box = new ();
-		dropdown_icon = new ();
-		dropdown_label = new ();
+		selected_box = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+		dropdown_icon = Gtk.Image.New ();
+		dropdown_label = Gtk.Label.New (str: null);
 		selected_box.Append (dropdown_icon);
 		selected_box.Append (dropdown_label);
 
@@ -37,15 +37,15 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		toolbar_item_widgets = [];
 		show_label = showLabel;
 
-		string_list = new ();
+		string_list = Gtk.StringList.New (strings: null);
 		SetModel (string_list);
 
-		Gtk.SignalListItemFactory selectedFactory = new ();
+		Gtk.SignalListItemFactory selectedFactory = Gtk.SignalListItemFactory.New ();
 		selectedFactory.OnSetup += OnSetupSelectedItem;
 		selectedFactory.OnBind += OnBindSelectedItem;
 		SetFactory (selectedFactory);
 
-		Gtk.SignalListItemFactory listFactory = new ();
+		Gtk.SignalListItemFactory listFactory = Gtk.SignalListItemFactory.New ();
 		listFactory.OnBind += OnBindListItem;
 		SetListFactory (listFactory);
 	}
@@ -158,16 +158,13 @@ public sealed class ToolBarItemWidget : Gtk.Box
 {
 	public ToolBarItemWidget (string text, string imageId)
 	{
-		Gtk.Image image = new ();
-		image.SetFromIconName (imageId);
-		Gtk.Label label = new ();
-		label.SetText (text);
+		Gtk.Image image = Gtk.Image.NewFromIconName (imageId);
+		Gtk.Label label = Gtk.Label.New (text);
 
 		Append (image);
 		Append (label);
 
-		selected_icon = new ();
-		selected_icon.SetFromIconName (Resources.StandardIcons.ObjectSelect);
+		selected_icon = Gtk.Image.NewFromIconName (Resources.StandardIcons.ObjectSelect);
 		selected_icon.Visible = false;
 		selected_icon.Hexpand = true;
 		selected_icon.Halign = Gtk.Align.End;

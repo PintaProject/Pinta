@@ -409,10 +409,9 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		if (adjustable is PaletteColors paletteColors) {
 			string label = Translations.GetString ("Click to switch between primary and secondary color.");
 			string shortcutLabel = Translations.GetString ("Shortcut key");
-			Gtk.Button colorDisplaySwap = new () {
-				TooltipText = $"{label} {shortcutLabel}: {"X"}",
-				FocusOnClick = false
-			};
+			Gtk.Button colorDisplaySwap = Gtk.Button.NewFromIconName (Resources.StandardIcons.EditSwap);
+			colorDisplaySwap.TooltipText = $"{label} {shortcutLabel}: {"X"}";
+			colorDisplaySwap.FocusOnClick = false;
 			colorDisplaySwap.SetIconName (Resources.StandardIcons.EditSwap);
 			colorDisplaySwap.OnClicked += (sender, args) => CycleColors ();
 			colorDisplayBox.Append (colorDisplaySwap);
