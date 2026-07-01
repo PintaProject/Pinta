@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 00:45+0000\n"
+"POT-Creation-Date: 2026-07-01 00:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid "A_dd-ins"
 msgstr ""
 
-#: ../Pinta.Core/Actions/AppActions.cs:42
+#: ../Pinta.Core/Actions/AppActions.cs:43
 msgid "About"
 msgstr ""
 
@@ -76,6 +76,7 @@ msgstr ""
 msgid "Added"
 msgstr ""
 
+#: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:109
 #: ../Pinta/MainWindow.cs:451
 msgid "Adjustments"
 msgstr ""
@@ -99,7 +100,7 @@ msgstr ""
 msgid "All Small Caps"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:585
+#: ../Pinta.Core/Actions/EditActions.cs:586
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:285
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
@@ -310,7 +311,7 @@ msgstr ""
 msgid "By percentage:"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:522
+#: ../Pinta.Core/Actions/EditActions.cs:523
 #: ../Pinta.Gui.Addins/InstallDialog.cs:118
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:392
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
@@ -473,7 +474,7 @@ msgstr ""
 msgid "Clipboard"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:55
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:60
 msgid "Clone Stamp"
 msgstr ""
 
@@ -580,11 +581,11 @@ msgstr ""
 msgid "Contrast"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:92
+#: ../Pinta.Core/Actions/EditActions.cs:93
 msgid "Copy"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:99
+#: ../Pinta.Core/Actions/EditActions.cs:100
 msgid "Copy Merged"
 msgstr ""
 
@@ -639,8 +640,8 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:85
-#: ../Pinta.Core/Actions/EditActions.cs:368
+#: ../Pinta.Core/Actions/EditActions.cs:86
+#: ../Pinta.Core/Actions/EditActions.cs:369
 msgid "Cut"
 msgstr ""
 
@@ -676,11 +677,11 @@ msgstr ""
 msgid "Dents"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:383
+#: ../Pinta.Core/Actions/EditActions.cs:384
 msgid "Deselect"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:163
+#: ../Pinta.Core/Actions/EditActions.cs:164
 msgid "Deselect All"
 msgstr ""
 
@@ -746,10 +747,15 @@ msgstr ""
 msgid "Edge Detect"
 msgstr ""
 
+#: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:106
+msgid "Edit"
+msgstr ""
+
 #: ../Pinta/MainWindow.cs:399
 msgid "Effe_cts"
 msgstr ""
 
+#: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:110
 #: ../Pinta/MainWindow.cs:446
 msgid "Effects"
 msgstr ""
@@ -777,8 +783,8 @@ msgstr ""
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:128
-#: ../Pinta.Core/Actions/EditActions.cs:369
+#: ../Pinta.Core/Actions/EditActions.cs:129
+#: ../Pinta.Core/Actions/EditActions.cs:370
 msgid "Erase Selection"
 msgstr ""
 
@@ -812,7 +818,7 @@ msgstr ""
 msgid "Factor"
 msgstr ""
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:85
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:86
 msgid "Failed to access XDG Desktop Portals"
 msgstr ""
 
@@ -832,8 +838,8 @@ msgstr ""
 msgid "Failed to save image"
 msgstr ""
 
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:84
-#: ../Pinta/Actions/File/NewScreenshotAction.cs:109
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:85
+#: ../Pinta/Actions/File/NewScreenshotAction.cs:110
 msgid "Failed to take screenshot"
 msgstr ""
 
@@ -843,6 +849,10 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:18
 msgid "Feather Object"
+msgstr ""
+
+#: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:105
+msgid "File"
 msgstr ""
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
@@ -861,8 +871,8 @@ msgstr ""
 msgid "Fill Object Background"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:135
-#: ../Pinta.Core/Actions/EditActions.cs:321
+#: ../Pinta.Core/Actions/EditActions.cs:136
+#: ../Pinta.Core/Actions/EditActions.cs:322
 msgid "Fill Selection"
 msgstr ""
 
@@ -1025,6 +1035,10 @@ msgstr ""
 msgid "Height:"
 msgstr ""
 
+#: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:112
+msgid "Help"
+msgstr ""
+
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:313
 msgid "Hex"
 msgstr ""
@@ -1083,7 +1097,9 @@ msgstr ""
 msgid "If you don't save, all changes will be permanently lost."
 msgstr ""
 
-#: ../Pinta.Tools/Tools/ColorPickerTool.cs:254 ../Pinta/MainWindow.cs:456
+#: ../Pinta.Tools/Tools/ColorPickerTool.cs:254
+#: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:108
+#: ../Pinta/MainWindow.cs:456
 msgid "Image"
 msgstr ""
 
@@ -1187,8 +1203,8 @@ msgstr ""
 msgid "Invert Colors"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:142
-#: ../Pinta.Core/Actions/EditActions.cs:607
+#: ../Pinta.Core/Actions/EditActions.cs:143
+#: ../Pinta.Core/Actions/EditActions.cs:608
 msgid "Invert Selection"
 msgstr ""
 
@@ -1207,6 +1223,10 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:26
 msgid "Julia Fractal"
+msgstr ""
+
+#: ../Pinta.Core/Actions/AppActions.cs:48
+msgid "Keyboard Shortcuts"
 msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:295
@@ -1244,6 +1264,7 @@ msgstr ""
 msgid "Layer {0}"
 msgstr ""
 
+#: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:102
 #: ../Pinta/Pads/LayersPad.cs:49
 msgid "Layers"
 msgstr ""
@@ -1597,7 +1618,7 @@ msgstr ""
 msgid "Offset"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:149
+#: ../Pinta.Core/Actions/EditActions.cs:150
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:44
 msgid "Offset Selection"
@@ -1632,11 +1653,11 @@ msgstr ""
 msgid "Open Line/Curve Series"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:487
+#: ../Pinta.Core/Actions/EditActions.cs:488
 msgid "Open Palette File"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:170
+#: ../Pinta.Core/Actions/EditActions.cs:171
 #: ../Pinta.Core/Actions/FileActions.cs:73
 msgid "Open..."
 msgstr ""
@@ -1699,7 +1720,7 @@ msgstr ""
 msgid "Paintbrush"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:236
+#: ../Pinta.Core/Actions/EditActions.cs:237
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:177
 msgid "Palette"
 msgstr ""
@@ -1708,7 +1729,7 @@ msgstr ""
 msgid "Palette Source"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:568
+#: ../Pinta.Core/Actions/EditActions.cs:569
 msgid "Palette files"
 msgstr ""
 
@@ -1717,17 +1738,17 @@ msgstr ""
 msgid "Pan"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:106
+#: ../Pinta.Core/Actions/EditActions.cs:107
 #: ../Pinta.Core/HistoryItems/PasteHistoryItem.cs:38
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:121
+#: ../Pinta.Core/Actions/EditActions.cs:122
 msgid "Paste Into New Image"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:113
+#: ../Pinta.Core/Actions/EditActions.cs:114
 #: ../Pinta/Actions/Edit/PasteAction.cs:118
 msgid "Paste Into New Layer"
 msgstr ""
@@ -1948,7 +1969,7 @@ msgstr ""
 msgid "Quality: "
 msgstr ""
 
-#: ../Pinta.Core/Actions/AppActions.cs:47
+#: ../Pinta.Core/Actions/AppActions.cs:54
 msgid "Quit"
 msgstr ""
 
@@ -2041,7 +2062,7 @@ msgstr ""
 msgid "Red Eye Removal"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:78
+#: ../Pinta.Core/Actions/EditActions.cs:79
 msgid "Redo"
 msgstr ""
 
@@ -2107,7 +2128,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:182
+#: ../Pinta.Core/Actions/EditActions.cs:183
 msgid "Reset to Default"
 msgstr ""
 
@@ -2238,7 +2259,7 @@ msgstr ""
 msgid "Saturation Percentage"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:521
+#: ../Pinta.Core/Actions/EditActions.cs:522
 #: ../Pinta.Core/Actions/FileActions.cs:88
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2248,7 +2269,7 @@ msgstr ""
 msgid "Save All"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:176
+#: ../Pinta.Core/Actions/EditActions.cs:177
 #: ../Pinta.Core/Actions/FileActions.cs:95
 msgid "Save As..."
 msgstr ""
@@ -2257,7 +2278,7 @@ msgstr ""
 msgid "Save Image File"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:518
+#: ../Pinta.Core/Actions/EditActions.cs:519
 msgid "Save Palette File"
 msgstr ""
 
@@ -2279,8 +2300,8 @@ msgstr ""
 msgid "Secondary"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:156
-#: ../Pinta.Core/Actions/EditActions.cs:337
+#: ../Pinta.Core/Actions/EditActions.cs:157
+#: ../Pinta.Core/Actions/EditActions.cs:338
 msgid "Select All"
 msgstr ""
 
@@ -2302,7 +2323,7 @@ msgstr ""
 msgid "Sepia"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:188
+#: ../Pinta.Core/Actions/EditActions.cs:189
 msgid "Set Number of Colors"
 msgstr ""
 
@@ -2575,6 +2596,10 @@ msgstr ""
 msgid "Toolbar"
 msgstr ""
 
+#: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:83
+msgid "Tools"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:29
 msgid "Top Center"
 msgstr ""
@@ -2641,7 +2666,7 @@ msgstr ""
 msgid "Underline"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:71
+#: ../Pinta.Core/Actions/EditActions.cs:72
 msgid "Undo"
 msgstr ""
 
@@ -2678,7 +2703,7 @@ msgstr ""
 msgid "Unsupported file format"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:510
+#: ../Pinta.Core/Actions/EditActions.cs:511
 msgid "Unsupported palette format"
 msgstr ""
 
@@ -2724,6 +2749,7 @@ msgstr ""
 msgid "Vertical red (R)"
 msgstr ""
 
+#: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 #: ../Pinta/MainWindow.cs:461
 msgid "View"
 msgstr ""
@@ -2761,6 +2787,7 @@ msgstr ""
 #: ../Pinta.Core/Actions/ViewActions.cs:396
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
+#: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:111
 msgid "Window"
 msgstr ""
 
@@ -2890,7 +2917,7 @@ msgid "translator-credits"
 msgstr ""
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
-#: ../Pinta.Tools/Tools/CloneStampTool.cs:58
+#: ../Pinta.Tools/Tools/CloneStampTool.cs:63
 #, csharp-format
 msgid "{0} + left click to set origin, left click to paint."
 msgstr ""
