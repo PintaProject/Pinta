@@ -71,7 +71,7 @@ public sealed class PintaCanvas : Gtk.Picture
 		document.SelectionChanged += (_, _) => QueueSelectionUpdate ();
 
 		// Timer for selection outline animation
-		bool selectionAnimation = PintaCore.Settings.GetSetting ( "selection-animation", true);
+		bool selectionAnimation = PintaCore.Settings.GetSetting ( SettingNames.SELECTION_ANIMATION, true);
 		if (selectionAnimation)
 			selection_animation_timer_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, 80, SelectionAnimationTick);
 

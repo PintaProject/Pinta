@@ -25,4 +25,6 @@ internal static class SettingNames
 
 	internal static string ToolAlphaBlend (BaseTool tool)
 		=> $"{tool.GetType ().Name.ToLowerInvariant ()}-alpha-blend";
+
+	internal const string SELECTION_ANIMATION = "selection-animation";
 }
