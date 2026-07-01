@@ -289,7 +289,7 @@ public sealed class GradientTool : BaseTool
 	private ToolBarDropDownButton GradientDropDown {
 		get {
 			if (gradient_button == null) {
-				gradient_button = new ToolBarDropDownButton ();
+				gradient_button = ToolBarDropDownButton.New ();
 
 				gradient_button.AddItem (Translations.GetString ("Linear Gradient"), Pinta.Resources.Icons.GradientLinear, GradientType.Linear);
 				gradient_button.AddItem (Translations.GetString ("Linear Reflected Gradient"), Pinta.Resources.Icons.GradientLinearReflected, GradientType.LinearReflected);
@@ -323,7 +323,7 @@ public sealed class GradientTool : BaseTool
 	private ToolBarDropDownButton ColorModeDropDown {
 		get {
 			if (color_mode_button == null) {
-				color_mode_button = new ToolBarDropDownButton ();
+				color_mode_button = ToolBarDropDownButton.New ();
 
 				color_mode_button.AddItem (Translations.GetString ("Color Mode"), Pinta.Resources.Icons.ColorModeColor, GradientColorMode.Color);
 				color_mode_button.AddItem (Translations.GetString ("Transparency Mode"), Pinta.Resources.Icons.ColorModeTransparency, GradientColorMode.Transparency);

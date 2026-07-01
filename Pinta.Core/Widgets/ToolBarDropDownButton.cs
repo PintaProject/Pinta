@@ -1,43 +1,39 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Pinta.Core;
 
-public sealed class ToolBarDropDownButton : Gtk.DropDown
+[GObject.Subclass<Gtk.DropDown>]
+public sealed partial class ToolBarDropDownButton
 {
-	private readonly bool show_label;
+	private bool show_label = false;
 
-	private Gtk.Box selected_box;
-	private Gtk.Image dropdown_icon;
-	private Gtk.Label dropdown_label;
+	private readonly Gtk.Box selected_box = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
+	private readonly Gtk.Image dropdown_icon = Gtk.Image.New ();
+	private readonly Gtk.Label dropdown_label = Gtk.Label.New (null);
 
 	// We store the index of the previous selection to avoid having to iterate through all items on the list.
 	private int previous_index = 0;
-	private Gtk.StringList string_list;
+	private readonly Gtk.StringList string_list = Gtk.StringList.New (null);
 
-	private readonly List<ToolBarItem> items;
-	private readonly List<ToolBarItemWidget> toolbar_item_widgets;
-	public ReadOnlyCollection<ToolBarItem> Items { get; }
+	private readonly List<ToolBarItem> items = [];
+	private readonly List<ToolBarItemWidget> toolbar_item_widgets = [];
+	public ReadOnlyCollection<ToolBarItem> Items { get; private set; }
 
-	public ToolBarDropDownButton (bool showLabel = false)
+	[MemberNotNull (nameof (Items))]
+	partial void Initialize ()
 	{
 		// We create the widgets inside the dropdown to avoid having to create yet another custom widget
 		// for the selectedFactory. Also, we can reference them directly when updated, avoiding
 		// .nextSibling hacks.
-		selected_box = Gtk.Box.New (Gtk.Orientation.Horizontal, 0);
-		dropdown_icon = Gtk.Image.New ();
-		dropdown_label = Gtk.Label.New (str: null);
 		selected_box.Append (dropdown_icon);
 		selected_box.Append (dropdown_label);
 
-		items = [];
 		Items = new (items);
-		toolbar_item_widgets = [];
-		show_label = showLabel;
 
-		string_list = Gtk.StringList.New (strings: null);
 		SetModel (string_list);
 
 		Gtk.SignalListItemFactory selectedFactory = Gtk.SignalListItemFactory.New ();
@@ -48,6 +44,13 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 		Gtk.SignalListItemFactory listFactory = Gtk.SignalListItemFactory.New ();
 		listFactory.OnBind += OnBindListItem;
 		SetListFactory (listFactory);
+	}
+
+	public static ToolBarDropDownButton New (bool showLabel = false)
+	{
+		ToolBarDropDownButton button = NewWithProperties ([]);
+		button.show_label = showLabel;
+		return button;
 	}
 
 	private void OnSetupSelectedItem (Gtk.SignalListItemFactory factory, Gtk.SignalListItemFactory.SetupSignalArgs args)
@@ -84,7 +87,7 @@ public sealed class ToolBarDropDownButton : Gtk.DropDown
 
 	public ToolBarItem AddItem (string text, string imageId, object? tag)
 	{
-		ToolBarItemWidget widget = new (text, imageId);
+		ToolBarItemWidget widget = ToolBarItemWidget.New (text, imageId);
 		toolbar_item_widgets.Add (widget);
 		// We append an empty string because we only need the list's index.
 		// Otherwise, we'd need to make ToolBarItem inherit from GObject, which is undesired.
@@ -154,28 +157,35 @@ public sealed class ToolBarItem
 		=> Tag is T value ? value : defaultValue;
 }
 
-public sealed class ToolBarItemWidget : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+internal sealed partial class ToolBarItemWidget
 {
-	public ToolBarItemWidget (string text, string imageId)
+	private readonly Gtk.Image image = Gtk.Image.New ();
+	private readonly Gtk.Label label = Gtk.Label.New (null);
+	private readonly Gtk.Image selected_icon = Gtk.Image.NewFromIconName (Resources.StandardIcons.ObjectSelect);
+
+	partial void Initialize ()
 	{
-		Gtk.Image image = Gtk.Image.NewFromIconName (imageId);
-		Gtk.Label label = Gtk.Label.New (text);
-
-		Append (image);
-		Append (label);
-
-		selected_icon = Gtk.Image.NewFromIconName (Resources.StandardIcons.ObjectSelect);
 		selected_icon.Visible = false;
 		selected_icon.Hexpand = true;
 		selected_icon.Halign = Gtk.Align.End;
 
+		Append (image);
+		Append (label);
 		Append (selected_icon);
+	}
+
+	public static ToolBarItemWidget New (string text, string imageId)
+	{
+		ToolBarItemWidget widget = NewWithProperties ([]);
+		widget.image.IconName = imageId;
+		widget.label.SetLabel (text);
+
+		return widget;
 	}
 
 	public void SetCheckmarkVisible (bool visible)
 	{
 		selected_icon.Visible = visible;
 	}
-
-	private Gtk.Image selected_icon;
 }

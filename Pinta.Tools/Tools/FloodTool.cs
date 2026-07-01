@@ -126,7 +126,7 @@ public abstract class FloodTool : BaseTool
 	protected ToolBarDropDownButton ModeDropDown {
 		get {
 			if (mode_button is null) {
-				mode_button = new ToolBarDropDownButton ();
+				mode_button = ToolBarDropDownButton.New ();
 
 				mode_button.AddItem (Translations.GetString ("Contiguous"), Pinta.Resources.Icons.ToolFreeformShape, false);
 				mode_button.AddItem (Translations.GetString ("Global"), Pinta.Resources.Icons.HelpWebsite, true);
