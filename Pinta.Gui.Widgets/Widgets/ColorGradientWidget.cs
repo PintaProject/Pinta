@@ -39,7 +39,7 @@ public sealed partial class ColorGradientWidget
 	private const double X_pad = 0.15; // gradient horizontal padding
 	private const double Y_pad = 0.03; // gradient vertical padding
 
-	private double[] vals;
+	private double[] vals = [];
 	private PointI last_mouse_pos = new (0, 0);
 
 	public static ColorGradientWidget New (int count)
