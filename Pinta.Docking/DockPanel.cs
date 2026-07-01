@@ -1,19 +1,19 @@
-//  
+//
 // Author:
 //       Cameron White <cameronwhite91@gmail.com>
-// 
+//
 // Copyright (c) 2020 Cameron White
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,7 +29,8 @@ using Pinta.Core;
 
 namespace Pinta.Docking;
 
-public sealed class DockPanel : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+public sealed partial class DockPanel
 {
 	internal sealed class DockPanelItem
 	{
@@ -108,11 +109,13 @@ public sealed class DockPanel : Gtk.Box
 	/// </summary>
 	private readonly List<DockPanelItem> items = [];
 
-	public DockPanel ()
+	partial void Initialize ()
 	{
 		SetOrientation (Gtk.Orientation.Horizontal);
 		Append (dock_bar);
 	}
+
+	public static DockPanel New () => NewWithProperties ([]);
 
 	public void AddItem (DockItem item)
 	{

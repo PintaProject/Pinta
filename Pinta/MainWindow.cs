@@ -516,10 +516,9 @@ internal sealed class MainWindow
 		PintaCore.Chrome.InitializeToolBox (toolbox);
 
 		// Dock widget
-		dock = new Dock {
-			Hexpand = true,
-			Halign = Gtk.Align.Fill,
-		};
+		dock = Dock.New ();
+		dock.Hexpand = true;
+		dock.Halign = Gtk.Align.Fill;
 		PintaCore.Chrome.InitializeDock (dock);
 
 		// Canvas pad

@@ -42,13 +42,11 @@ internal sealed class HistoryPad : IDockPad
 	{
 		HistoryListView history = HistoryListView.New ();
 
-		DockItem history_item = new (
+		DockItem history_item = DockItem.New (
 			child: history,
 			uniqueName: "History",
-			iconName: Resources.Icons.HistoryList
-		) {
-			Label = Translations.GetString ("History"),
-		};
+			iconName: Resources.Icons.HistoryList);
+		history_item.Label = Translations.GetString ("History");
 
 		Gtk.Box history_tb = history_item.AddToolBar ();
 		history_tb.AppendMultiple ([

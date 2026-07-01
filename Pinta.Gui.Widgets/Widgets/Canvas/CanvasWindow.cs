@@ -71,15 +71,10 @@ public sealed class CanvasWindow : Gtk.Grid
 		scrollController.OnScroll += HandleScrollEvent;
 		scrollController.OnDecelerate += (_, _) => gestureZoom.IsActive (); // Cancel scroll deceleration when zooming
 
-		PintaCanvas canvas = new (
-			tools,
-			document,
-			canvasGrid
-		) {
-			// For CSS: add a drop shadow outline to the canvas to give it a clear border
-			// when the image is close to the background color.
-			Name = "canvas",
-		};
+		PintaCanvas canvas = PintaCanvas.New (tools, document, canvasGrid);
+		// For CSS: add a drop shadow outline to the canvas to give it a clear border
+		// when the image is close to the background color.
+		canvas.Name = "canvas";
 
 		Gtk.Viewport viewPort = Gtk.Viewport.New (null, null);
 		viewPort.AddController (scrollController);

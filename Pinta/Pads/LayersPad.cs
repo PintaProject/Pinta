@@ -41,13 +41,12 @@ internal sealed class LayersPad : IDockPad
 	public void Initialize (Dock workspace)
 	{
 		LayersListView layers = LayersListView.New ();
-		DockItem layers_item = new (
+		DockItem layers_item = DockItem.New (
 			child: layers,
 			uniqueName: "Layers",
 			iconName: Resources.Icons.LayerDuplicate
-		) {
-			Label = Translations.GetString ("Layers"),
-		};
+		);
+		layers_item.Label = Translations.GetString ("Layers");
 
 		Gio.Menu hamburger_menu = Gio.Menu.New ();
 
