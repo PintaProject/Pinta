@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-15 00:45+0000\n"
-"PO-Revision-Date: 2026-05-10 20:22+0000\n"
-"Last-Translator: Matthieu LAURENT <matthieu.laurent69@proton.me>\n"
+"PO-Revision-Date: 2026-07-09 15:01+0000\n"
+"Last-Translator: Lucas Bittoun <lucasbittoun907@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2026.5-dev\n"
+"X-Generator: Weblate 2026.7.1.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -262,8 +262,9 @@ msgstr "Feu"
 
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:284
+#, fuzzy
 msgid "Book"
-msgstr ""
+msgstr "Livre"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:35
 msgid "Bottom Center"
@@ -380,11 +381,12 @@ msgstr "Changer la largeur du pinceau."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:243
 msgid "Change font size."
-msgstr ""
+msgstr "Changez la taille de la police."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
+#, fuzzy
 msgid "Change outline width."
-msgstr ""
+msgstr "Changez la largeur de la marge."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -1980,17 +1982,17 @@ msgstr "Préconfiguration :"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush width"
-msgstr ""
+msgstr "Appuyez sur {0} pour réduire la largeur du pinceau"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:245
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr ""
+msgstr "Appuyez sur {0} pour diminuer la taille de la Police"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline width"
-msgstr ""
+msgstr "Appuyez sur {0} pour diminuer la largeur du contour"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
