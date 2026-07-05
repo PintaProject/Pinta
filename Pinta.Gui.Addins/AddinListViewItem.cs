@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using GObject;
 using Mono.Addins;
 using Mono.Addins.Setup;
@@ -84,12 +85,15 @@ internal sealed partial class AddinListViewItem
 		!string.IsNullOrEmpty (available_addin.RepositoryName) ? available_addin.RepositoryName : available_addin.RepositoryUrl;
 }
 
-internal sealed class AddinListViewItemWidget : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+internal sealed partial class AddinListViewItemWidget
 {
-	private readonly Gtk.Label name_label;
-	private readonly Gtk.Label description_label;
+	private Gtk.Label name_label;
+	private Gtk.Label description_label;
 
-	public AddinListViewItemWidget ()
+	[MemberNotNull (nameof (name_label))]
+	[MemberNotNull (nameof (description_label))]
+	partial void Initialize ()
 	{
 		Gtk.Label nameLabel = Gtk.Label.New (null);
 		nameLabel.Halign = Gtk.Align.Start;
@@ -119,6 +123,8 @@ internal sealed class AddinListViewItemWidget : Gtk.Box
 		Append (nameLabel);
 		Append (descriptionLabel);
 	}
+
+	public static AddinListViewItemWidget New () => NewWithProperties ([]);
 
 	// Set the widget's contents to the provided item.
 	public void Update (AddinListViewItem item)

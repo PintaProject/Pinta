@@ -1,29 +1,31 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Mono.Addins;
 using Pinta.Core;
 
 namespace Pinta.Gui.Addins;
 
-internal sealed class AddinInfoView : Adw.Bin
+[GObject.Subclass<Adw.Bin>]
+internal sealed partial class AddinInfoView
 {
-	private readonly Gtk.Label title_label;
-	private readonly Gtk.Label version_label;
-	private readonly Gtk.Label size_label;
-	private readonly Gtk.Label repo_label;
-	private readonly Gtk.Label description_label;
+	private Gtk.Label title_label;
+	private Gtk.Label version_label;
+	private Gtk.Label size_label;
+	private Gtk.Label repo_label;
+	private Gtk.Label description_label;
 
-	private readonly Gtk.Button info_button;
-	private readonly Gtk.Button install_button;
-	private readonly Gtk.Button update_button;
-	private readonly Gtk.Button uninstall_button;
+	private Gtk.Button info_button;
+	private Gtk.Button install_button;
+	private Gtk.Button update_button;
+	private Gtk.Button uninstall_button;
 
-	private readonly Gtk.Switch enable_switch;
+	private Gtk.Switch enable_switch;
 
-	private readonly Gtk.Box content_box;
+	private Gtk.Box content_box;
 
-	private readonly Adw.Bin empty_page;
+	private Adw.Bin empty_page;
 
-	private readonly Adw.ViewStack view_stack;
+	private Adw.ViewStack view_stack;
 	private AddinListViewItem? current_item;
 
 	/// <summary>
@@ -31,10 +33,23 @@ internal sealed class AddinInfoView : Adw.Bin
 	/// </summary>
 	public event EventHandler? OnAddinChanged;
 
-	private readonly SystemManager system;
-	private readonly IChromeService chrome;
+	private SystemManager system = null!; // NRT - set by factory method.
+	private IChromeService chrome = null!;
 
-	public AddinInfoView (SystemManager system, IChromeService chrome)
+	[MemberNotNull (nameof (title_label))]
+	[MemberNotNull (nameof (version_label))]
+	[MemberNotNull (nameof (size_label))]
+	[MemberNotNull (nameof (repo_label))]
+	[MemberNotNull (nameof (description_label))]
+	[MemberNotNull (nameof (info_button))]
+	[MemberNotNull (nameof (install_button))]
+	[MemberNotNull (nameof (update_button))]
+	[MemberNotNull (nameof (uninstall_button))]
+	[MemberNotNull (nameof (enable_switch))]
+	[MemberNotNull (nameof (content_box))]
+	[MemberNotNull (nameof (empty_page))]
+	[MemberNotNull (nameof (view_stack))]
+	partial void Initialize ()
 	{
 		// --- Control creation
 
@@ -129,10 +144,15 @@ internal sealed class AddinInfoView : Adw.Bin
 		empty_page = emptyPage;
 
 		view_stack = viewStack;
+	}
 
+	internal void Configure (SystemManager system, IChromeService chrome)
+	{
 		this.system = system;
 		this.chrome = chrome;
 	}
+
+	public static new AddinInfoView New () => NewWithProperties ([]);
 
 	private Gtk.Switch CreateEnableSwitch ()
 	{
@@ -259,7 +279,7 @@ internal sealed class AddinInfoView : Adw.Bin
 		if (current_item.RepositoryEntry is null)
 			throw new InvalidOperationException ("The install button should not be available unless there is a repository entry");
 
-		InstallDialog dialog = new (chrome.MainWindow, current_item.Service);
+		InstallDialog dialog = InstallDialog.New (chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
 		dialog.InitForInstall ([current_item.RepositoryEntry]);
 		dialog.Show ();
@@ -273,7 +293,7 @@ internal sealed class AddinInfoView : Adw.Bin
 		if (current_item.RepositoryEntry is null)
 			throw new InvalidOperationException ("The update button should not be available unless there is a repository entry");
 
-		InstallDialog dialog = new (chrome.MainWindow, current_item.Service);
+		InstallDialog dialog = InstallDialog.New (chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
 		dialog.InitForInstall ([current_item.RepositoryEntry]);
 		dialog.Show ();
@@ -287,7 +307,7 @@ internal sealed class AddinInfoView : Adw.Bin
 		if (current_item.Addin is null)
 			throw new InvalidOperationException ("The uninstall button should not be available unless there is an installed addin");
 
-		InstallDialog dialog = new (chrome.MainWindow, current_item.Service);
+		InstallDialog dialog = InstallDialog.New (chrome.MainWindow, current_item.Service);
 		dialog.OnSuccess += (_, _) => OnAddinChanged?.Invoke (this, EventArgs.Empty);
 		dialog.InitForUninstall ([current_item.Addin]);
 		dialog.Show ();
