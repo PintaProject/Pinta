@@ -76,7 +76,7 @@ internal sealed class MainWindow
 		// Initialize interface things
 		_ = new ActionHandlers ();
 
-		PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog (PintaCore.Chrome));
+		PintaCore.Chrome.InitializeProgessDialog (ProgressDialog.New (PintaCore.Chrome));
 		PintaCore.Chrome.InitializeErrorDialogHandler (ErrorDialog.ShowError);
 		PintaCore.Chrome.InitializeMessageDialog (ErrorDialog.ShowMessage);
 		PintaCore.Chrome.InitializeSimpleEffectDialog (SimpleEffectDialog.Launch);
@@ -502,7 +502,7 @@ internal sealed class MainWindow
 
 	private void CreateDockAndPads (Gtk.Box container)
 	{
-		ToolBoxWidget toolbox = new (PintaCore.Tools);
+		ToolBoxWidget toolbox = ToolBoxWidget.New (PintaCore.Tools);
 
 		Gtk.ScrolledWindow toolbox_scroll = Gtk.ScrolledWindow.New ();
 		toolbox_scroll.Child = toolbox;

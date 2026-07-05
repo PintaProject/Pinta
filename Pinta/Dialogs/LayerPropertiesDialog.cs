@@ -26,43 +26,37 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class LayerPropertiesDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class LayerPropertiesDialog
 {
-	private readonly LayerProperties initial_properties;
+	private LayerProperties initial_properties = new (string.Empty, false, 0.0, BlendMode.Normal);
 
 	private double current_layer_opacity;
 	private bool current_layer_hidden;
-	private string current_layer_name;
+	private string current_layer_name = string.Empty;
 	private BlendMode current_layer_blend_mode;
 
-	private readonly Gtk.Entry layer_name_entry;
-	private readonly Gtk.CheckButton visibility_checkbox;
-	private readonly Gtk.SpinButton opacity_spinner;
-	private readonly Gtk.Scale opacity_slider;
-	private readonly Gtk.ComboBoxText blend_combo_box;
+	private Gtk.Entry layer_name_entry;
+	private Gtk.CheckButton visibility_checkbox;
+	private Gtk.SpinButton opacity_spinner;
+	private Gtk.Scale opacity_slider;
+	private Gtk.ComboBoxText blend_combo_box;
 
-	private readonly WorkspaceManager workspace;
+	private WorkspaceManager workspace = null!; // NRT - set by factory method
 
-	public LayerPropertiesDialog (ChromeManager chrome, WorkspaceManager workspace)
+	[MemberNotNull (nameof (layer_name_entry))]
+	[MemberNotNull (nameof (visibility_checkbox))]
+	[MemberNotNull (nameof (opacity_slider))]
+	[MemberNotNull (nameof (opacity_spinner))]
+	[MemberNotNull (nameof (blend_combo_box))]
+	partial void Initialize ()
 	{
 		const int spacing = 6;
-
-		Document doc = workspace.ActiveDocument;
-
-		string currentLayerName = doc.Layers.CurrentUserLayer.Name;
-		bool currentLayerHidden = doc.Layers.CurrentUserLayer.Hidden;
-		double currentLayerOpacity = doc.Layers.CurrentUserLayer.Opacity;
-		BlendMode currentLayerBlendMode = doc.Layers.CurrentUserLayer.BlendMode;
-
-		LayerProperties initialProperties = new (
-			currentLayerName,
-			currentLayerHidden,
-			currentLayerOpacity,
-			currentLayerBlendMode);
 
 		Gtk.Label nameLabel = Gtk.Label.New (Translations.GetString ("Name:"));
 		nameLabel.Halign = Gtk.Align.End;
@@ -70,19 +64,14 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		Gtk.Entry layerNameEntry = Gtk.Entry.New ();
 		layerNameEntry.Hexpand = true;
 		layerNameEntry.Halign = Gtk.Align.Fill;
-		layerNameEntry.SetText (initialProperties.Name);
 		layerNameEntry.OnChanged += OnLayerNameChanged;
 		layerNameEntry.SetActivatesDefault (true);
 
 		Gtk.CheckButton visibilityCheckbox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Visible"));
-		visibilityCheckbox.Active = !initialProperties.Hidden;
 		visibilityCheckbox.OnToggled += OnVisibilityToggled;
 
 		Gtk.Label blendLabel = Gtk.Label.New (Translations.GetString ("Blend Mode") + ":");
 		blendLabel.Halign = Gtk.Align.End;
-
-		var allBlendmodes = UserBlendOps.GetAllBlendModeNames ().ToImmutableArray ();
-		var index = allBlendmodes.IndexOf (UserBlendOps.GetBlendModeName (currentLayerBlendMode));
 
 		Gtk.ComboBoxText blendComboBox = Gtk.ComboBoxText.New ();
 
@@ -91,7 +80,6 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 
 		blendComboBox.Hexpand = true;
 		blendComboBox.Halign = Gtk.Align.Fill;
-		blendComboBox.Active = index;
 		blendComboBox.OnChanged += OnBlendModeChanged;
 
 		Gtk.Label opacityLabel = Gtk.Label.New (Translations.GetString ("Opacity:"));
@@ -100,7 +88,6 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		Gtk.SpinButton opacitySpinner = Gtk.SpinButton.NewWithRange (0, 100, 1);
 		opacitySpinner.Adjustment!.PageIncrement = 10;
 		opacitySpinner.ClimbRate = 1;
-		opacitySpinner.Value = Math.Round (initialProperties.Opacity * 100);
 		opacitySpinner.OnValueChanged += OnOpacitySpinnerChanged;
 		opacitySpinner.SetActivatesDefaultImmediate (true);
 
@@ -109,7 +96,6 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		opacitySlider.Adjustment!.PageIncrement = 10;
 		opacitySlider.Hexpand = true;
 		opacitySlider.Halign = Gtk.Align.Fill;
-		opacitySlider.SetValue (Math.Round (initialProperties.Opacity * 100));
 		opacitySlider.OnValueChanged += OnOpacitySliderChanged;
 
 		Gtk.Box opacityBox = Gtk.Box.New (Gtk.Orientation.Horizontal, spacing);
@@ -131,7 +117,6 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Layer Properties");
-		TransientFor = chrome.MainWindow;
 		Modal = true;
 		DefaultWidth = 349;
 		DefaultHeight = 224;
@@ -156,6 +141,41 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		blend_combo_box = blendComboBox;
 		opacity_spinner = opacitySpinner;
 		opacity_slider = opacitySlider;
+	}
+
+	public static LayerPropertiesDialog New (IChromeService chrome, WorkspaceManager workspace)
+	{
+		LayerPropertiesDialog dialog = NewWithProperties ([]);
+		dialog.Configure (chrome, workspace);
+		return dialog;
+	}
+
+	private void Configure (IChromeService chrome, WorkspaceManager workspace)
+	{
+		this.workspace = workspace;
+		TransientFor = chrome.MainWindow;
+
+		Document doc = workspace.ActiveDocument;
+
+		string currentLayerName = doc.Layers.CurrentUserLayer.Name;
+		bool currentLayerHidden = doc.Layers.CurrentUserLayer.Hidden;
+		double currentLayerOpacity = doc.Layers.CurrentUserLayer.Opacity;
+		BlendMode currentLayerBlendMode = doc.Layers.CurrentUserLayer.BlendMode;
+
+		LayerProperties initialProperties = new (
+			currentLayerName,
+			currentLayerHidden,
+			currentLayerOpacity,
+			currentLayerBlendMode);
+
+		layer_name_entry.SetText (initialProperties.Name);
+		visibility_checkbox.Active = !initialProperties.Hidden;
+		opacity_spinner.Value = Math.Round (initialProperties.Opacity * 100);
+		opacity_slider.SetValue (Math.Round (initialProperties.Opacity * 100));
+
+		var allBlendmodes = UserBlendOps.GetAllBlendModeNames ().ToImmutableArray ();
+		var index = allBlendmodes.IndexOf (UserBlendOps.GetBlendModeName (currentLayerBlendMode));
+		blend_combo_box.Active = index;
 
 		current_layer_name = currentLayerName;
 		current_layer_hidden = currentLayerHidden;
@@ -163,8 +183,6 @@ public sealed class LayerPropertiesDialog : Gtk.Dialog
 		current_layer_blend_mode = currentLayerBlendMode;
 
 		initial_properties = initialProperties;
-
-		this.workspace = workspace;
 	}
 
 	public bool AreLayerPropertiesUpdated =>
