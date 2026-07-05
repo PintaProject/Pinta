@@ -338,12 +338,11 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? c
 			: Color.Black;
 
-		PintaColorButton colorButton = new () {
-			DisplayColor = currentColorCairo,
-			Hexpand = false,
-			Halign = Gtk.Align.Start,
-			WidthRequest = 80,
-		};
+		PintaColorButton colorButton = PintaColorButton.New ();
+		colorButton.DisplayColor = currentColorCairo;
+		colorButton.Hexpand = false;
+		colorButton.Halign = Gtk.Align.Start;
+		colorButton.WidthRequest = 80;
 
 		colorButton.OnClicked += async (_, _) => {
 

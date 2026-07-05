@@ -94,15 +94,13 @@ public sealed class CanvasWindow : Gtk.Grid
 		scrolledWindow.Vexpand = true;
 		scrolledWindow.Child = viewPort;
 
-		Ruler horizontalRuler = new (Gtk.Orientation.Horizontal) {
-			Metric = MetricType.Pixels,
-			Visible = false,
-		};
+		Ruler horizontalRuler = Ruler.New (Gtk.Orientation.Horizontal);
+		horizontalRuler.Metric = MetricType.Pixels;
+		horizontalRuler.Visible = false;
 
-		Ruler verticalRuler = new (Gtk.Orientation.Vertical) {
-			Metric = MetricType.Pixels,
-			Visible = false,
-		};
+		Ruler verticalRuler = Ruler.New (Gtk.Orientation.Vertical);
+		verticalRuler.Metric = MetricType.Pixels;
+		verticalRuler.Visible = false;
 
 		Gtk.EventControllerMotion motionController = Gtk.EventControllerMotion.New ();
 		motionController.OnMotion += HandleMotion;
