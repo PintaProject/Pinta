@@ -407,7 +407,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			labels.Add (kvp.Key);
 		}
 
-		ComboBoxWidget widget = new (labels) { Label = caption };
+		ComboBoxWidget widget = ComboBoxWidget.New (labels);
+		widget.Label = caption;
 
 		if (settings.reflector.GetValue (effectData) is object obj)
 			widget.Active = Array.IndexOf (memberNames, obj.ToString ());
@@ -434,7 +435,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? []
 			: dict.Keys.ToImmutableArray ();
 
-		ComboBoxWidget widget = new (entries) { Label = caption };
+		ComboBoxWidget widget = ComboBoxWidget.New (entries);
+		widget.Label = caption;
 
 		if (settings.reflector.GetValue (effectData) is string s)
 			widget.Active = entries.IndexOf (s);
@@ -457,13 +459,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		var attributes = settings.reflector.Attributes;
 
-		HScaleSpinButtonWidget widget = new (initialValue) {
-			Label = caption,
-			MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100),
-			MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100),
-			IncrementValue = attributes.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (0.01),
-			DigitsValue = attributes.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (2),
-		};
+		HScaleSpinButtonWidget widget = HScaleSpinButtonWidget.New (initialValue);
+		widget.Label = caption;
+		widget.MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100);
+		widget.MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100);
+		widget.IncrementValue = attributes.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (0.01);
+		widget.DigitsValue = attributes.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (2);
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
@@ -488,13 +489,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		var attributes = settings.reflector.Attributes;
 
-		HScaleSpinButtonWidget widget = new (initialValue) {
-			Label = caption,
-			MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100),
-			MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100),
-			IncrementValue = attributes.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (1.0),
-			DigitsValue = attributes.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (0),
-		};
+		HScaleSpinButtonWidget widget = HScaleSpinButtonWidget.New (initialValue);
+		widget.Label = caption;
+		widget.MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100);
+		widget.MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100);
+		widget.IncrementValue = attributes.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (1.0);
+		widget.DigitsValue = attributes.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (0);
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {

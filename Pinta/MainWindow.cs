@@ -479,15 +479,11 @@ internal sealed class MainWindow
 	{
 		Gtk.Box statusbar = window_shell.CreateStatusBar ("statusbar");
 
-		statusbar.Append (
-			new StatusBarColorPaletteWidget (
-				PintaCore.Chrome,
-				PintaCore.Palette,
-				PintaCore.System) {
-				Hexpand = true,
-				Halign = Gtk.Align.Fill,
-			}
-		);
+		StatusBarColorPaletteWidget widget = StatusBarColorPaletteWidget.New (PintaCore.Chrome, PintaCore.Palette, PintaCore.System);
+		widget.Hexpand = true;
+		widget.Halign = Gtk.Align.Fill;
+
+		statusbar.Append (widget);
 
 		PintaCore.Actions.CreateStatusBar (statusbar, PintaCore.Workspace);
 

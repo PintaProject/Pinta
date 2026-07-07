@@ -1,21 +1,21 @@
-// 
+//
 // ComboBoxWidget.cs
-//  
+//
 // Author:
 //       Olivier Dufour <olivier.duff@gmail.com>
-// 
+//
 // Copyright (c) 2010 Olivier Dufour
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,16 +26,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class ComboBoxWidget : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+public sealed partial class ComboBoxWidget
 {
-	private readonly Gtk.Label title_label;
-	private readonly Gtk.ComboBoxText combo_box;
+	private Gtk.Label title_label;
+	private Gtk.ComboBoxText combo_box;
 
-	public ComboBoxWidget (IEnumerable<string> entries)
+	[MemberNotNull (nameof (title_label), nameof (combo_box))]
+	partial void Initialize ()
 	{
 		const int SPACING = 6;
 
@@ -45,7 +48,7 @@ public sealed class ComboBoxWidget : Gtk.Box
 		Gtk.Box labelAndLine = Gtk.Box.New (Gtk.Orientation.Horizontal, SPACING);
 		labelAndLine.Append (titleLabel);
 
-		Gtk.ComboBoxText comboBox = CreateComboBox (entries);
+		Gtk.ComboBoxText comboBox = Gtk.ComboBoxText.New ();
 
 		// --- Initialization (Gtk.Box)
 
@@ -61,16 +64,19 @@ public sealed class ComboBoxWidget : Gtk.Box
 		combo_box = comboBox;
 	}
 
-	private Gtk.ComboBoxText CreateComboBox (IEnumerable<string> entries)
+	private void Configure (IEnumerable<string> entries)
 	{
-		Gtk.ComboBoxText result = Gtk.ComboBoxText.New ();
-
 		foreach (var s in entries)
-			result.AppendText (s);
+			combo_box.AppendText (s);
 
-		result.OnChanged += (_, _) => Changed?.Invoke (this, EventArgs.Empty);
+		combo_box.OnChanged += (_, _) => Changed?.Invoke (this, EventArgs.Empty);
+	}
 
-		return result;
+	public static ComboBoxWidget New (IEnumerable<string> entries)
+	{
+		ComboBoxWidget widget = NewWithProperties ([]);
+		widget.Configure (entries);
+		return widget;
 	}
 
 	public string Label {

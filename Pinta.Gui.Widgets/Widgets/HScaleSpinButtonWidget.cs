@@ -25,24 +25,27 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class HScaleSpinButtonWidget : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+public sealed partial class HScaleSpinButtonWidget
 {
-	private readonly Gtk.Scale h_scale;
-	private readonly Gtk.SpinButton spin_button;
-	private readonly Gtk.Label title_label;
+	private Gtk.Scale h_scale;
+	private Gtk.SpinButton spin_button;
+	private Gtk.Label title_label;
 
 	private int max_value;
 	private int min_value;
 	private int digits_value;
 	private double inc_value;
 
-	private readonly double initial_value;
+	private double initial_value;
 
-	public HScaleSpinButtonWidget (double initialValue)
+	[MemberNotNull (nameof (h_scale), nameof (spin_button), nameof (title_label))]
+	partial void Initialize ()
 	{
 		const int SPACING = 6;
 
@@ -88,17 +91,19 @@ public sealed class HScaleSpinButtonWidget : Gtk.Box
 		Append (labelAndLine);
 		Append (valueControls);
 
-		// --- Initialization (Gtk.Widget)
-
-		OnRealize += (_, _)
-			=> Value = initialValue;
-
 		// --- References to keep
 
-		initial_value = initialValue;
 		title_label = titleLabel;
 		h_scale = hScale;
 		spin_button = spinButton;
+	}
+
+	public static HScaleSpinButtonWidget New (double initialValue)
+	{
+		HScaleSpinButtonWidget widget = NewWithProperties ([]);
+		widget.OnRealize += (_, _) => widget.Value = initialValue;
+		widget.initial_value = initialValue;
+		return widget;
 	}
 
 	public string Label {

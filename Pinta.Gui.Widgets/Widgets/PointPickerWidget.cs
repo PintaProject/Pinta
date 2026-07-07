@@ -78,10 +78,9 @@ public sealed class PointPickerWidget : Gtk.Box
 
 		// --- PointPickerGraphic
 
-		PointPickerGraphic pointPickerGraphic = new (workspace) {
-			Hexpand = true,
-			Halign = Gtk.Align.Center,
-		};
+		PointPickerGraphic pointPickerGraphic = PointPickerGraphic.New (workspace);
+		pointPickerGraphic.Hexpand = true;
+		pointPickerGraphic.Halign = Gtk.Align.Center;
 
 		// --- X spinner
 

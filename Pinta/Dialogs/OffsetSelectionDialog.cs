@@ -32,7 +32,7 @@ namespace Pinta;
 [GObject.Subclass<Gtk.Dialog>]
 public sealed partial class OffsetSelectionDialog
 {
-	private readonly HScaleSpinButtonWidget offset_spinbox = new (initialValue: 0);
+	private readonly HScaleSpinButtonWidget offset_spinbox = HScaleSpinButtonWidget.New (initialValue: 0);
 
 	public int Offset
 		=> offset_spinbox.ValueAsInt;
