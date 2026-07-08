@@ -33,7 +33,7 @@ using Pinta.Core;
 namespace Pinta.Gui.Widgets;
 
 [GObject.Subclass<Gtk.Picture>]
-public sealed partial class PintaCanvas
+internal sealed partial class PintaCanvas
 {
 	private CanvasRenderer cr = null!; // NRT - set by factory method
 	private Document document = null!;
@@ -72,14 +72,16 @@ public sealed partial class PintaCanvas
 		Valign = Gtk.Align.Center;
 	}
 
-	public static PintaCanvas New (IToolService tools, Document document, ICanvasGridService canvasGrid)
+	/// <summary>
+	/// NOTE: must call Configure() for dependency injection.
+	/// </summary>
+	public static new PintaCanvas New ()
 	{
 		PintaCanvas canvas = NewWithProperties ([]);
-		canvas.Configure (tools, document, canvasGrid);
 		return canvas;
 	}
 
-	private void Configure (IToolService tools, Document document, ICanvasGridService canvasGrid)
+	internal void Configure (IToolService tools, Document document, ICanvasGridService canvasGrid)
 	{
 		this.tools = tools;
 		canvas_grid = canvasGrid;

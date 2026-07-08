@@ -25,26 +25,29 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta;
 
-public sealed class CanvasWindow : Gtk.Grid
+[GObject.Subclass<Gtk.Grid>]
+public sealed partial class CanvasWindow
 {
-	private readonly Document document;
-	private readonly ChromeManager chrome;
-	private readonly ToolManager tools;
+	private Document document = null!; // NRT - set by factory method.
+	private ChromeManager chrome = null!;
+	private ToolManager tools = null!;
 
-	private readonly Ruler horizontal_ruler;
-	private readonly Ruler vertical_ruler;
-	private readonly Gtk.ScrolledWindow scrolled_window;
-	private readonly Gtk.Widget? horizontal_scrollbar;
-	private readonly Gtk.Widget? vertical_scrollbar;
-	private readonly Gtk.EventControllerMotion motion_controller;
-	private readonly Gtk.GestureDrag drag_controller;
-	private readonly Gtk.GestureZoom gesture_zoom;
+	private PintaCanvas canvas;
+	private Ruler horizontal_ruler;
+	private Ruler vertical_ruler;
+	private Gtk.ScrolledWindow scrolled_window;
+	private Gtk.Widget? horizontal_scrollbar;
+	private Gtk.Widget? vertical_scrollbar;
+	private Gtk.EventControllerMotion motion_controller;
+	private Gtk.GestureDrag drag_controller;
+	private Gtk.GestureZoom gesture_zoom;
 
 	private PointD current_canvas_pos = PointD.Zero;
 	private double cumulative_zoom_amount;
@@ -53,13 +56,13 @@ public sealed class CanvasWindow : Gtk.Grid
 	private const double ZOOM_THRESHOLD_SCROLL = 1.25;
 	private const double ZOOM_THRESHOLD_PINCH = 0.15;
 
-	public PintaCanvas Canvas { get; }
+	public Gtk.Widget Canvas { get { return canvas; } }
 
-	public CanvasWindow (
-		ChromeManager chrome,
-		ToolManager tools,
-		Document document,
-		ICanvasGridService canvasGrid)
+	[MemberNotNull (nameof (canvas))]
+	[MemberNotNull (nameof (horizontal_ruler), nameof (vertical_ruler))]
+	[MemberNotNull (nameof (scrolled_window), nameof (horizontal_scrollbar), nameof (vertical_scrollbar))]
+	[MemberNotNull (nameof (motion_controller), nameof (drag_controller), nameof (gesture_zoom))]
+	partial void Initialize ()
 	{
 		Gtk.GestureZoom gestureZoom = Gtk.GestureZoom.New ();
 		gestureZoom.SetPropagationPhase (Gtk.PropagationPhase.Bubble);
@@ -71,7 +74,7 @@ public sealed class CanvasWindow : Gtk.Grid
 		scrollController.OnScroll += HandleScrollEvent;
 		scrollController.OnDecelerate += (_, _) => gestureZoom.IsActive (); // Cancel scroll deceleration when zooming
 
-		PintaCanvas canvas = PintaCanvas.New (tools, document, canvasGrid);
+		PintaCanvas canvas = PintaCanvas.New ();
 		// For CSS: add a drop shadow outline to the canvas to give it a clear border
 		// when the image is close to the background color.
 		canvas.Name = "canvas";
@@ -126,11 +129,7 @@ public sealed class CanvasWindow : Gtk.Grid
 
 		// --- References to keep
 
-		Canvas = canvas;
-
-		this.chrome = chrome;
-		this.tools = tools;
-		this.document = document;
+		this.canvas = canvas;
 
 		scrolled_window = scrolledWindow;
 		gesture_zoom = gestureZoom;
@@ -152,11 +151,35 @@ public sealed class CanvasWindow : Gtk.Grid
 		// Update the ruler when scrolling around.
 		scrolledWindow.Hadjustment!.OnValueChanged += UpdateRulerRange;
 		scrolledWindow.Vadjustment!.OnValueChanged += UpdateRulerRange;
+	}
+
+	private void Configure (
+		ChromeManager chrome,
+		ToolManager tools,
+		Document document,
+		ICanvasGridService canvasGrid)
+	{
+		canvas.Configure (tools, document, canvasGrid);
 
 		// Also update if the view size changed without affecting the size of
 		// the canvas widget (e.g. when zoomed out and no scrollbars are required)
 		document.Workspace.ViewSizeChanged += UpdateRulerRange;
 		document.SelectionChanged += UpdateRulerSelection;
+
+		this.chrome = chrome;
+		this.tools = tools;
+		this.document = document;
+	}
+
+	public static CanvasWindow New (
+		ChromeManager chrome,
+		ToolManager tools,
+		Document document,
+		ICanvasGridService canvasGrid)
+	{
+		CanvasWindow window = NewWithProperties ([]);
+		window.Configure (chrome, tools, document, canvasGrid);
+		return window;
 	}
 
 	private void UpdateRulerSelection (object? sender, EventArgs e)

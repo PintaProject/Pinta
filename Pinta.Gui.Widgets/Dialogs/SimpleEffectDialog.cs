@@ -40,7 +40,8 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class SimpleEffectDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class SimpleEffectDialog
 {
 	const uint EVENT_DELAY_MILLIS = 100;
 	uint event_delay_timeout_id;
@@ -48,7 +49,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private delegate bool TimeoutHandler ();
 	TimeoutHandler? timeout_func;
 
-	private readonly EffectData effect_data;
+	private EffectData effect_data = null!; // NRT - set by factory method
 
 	// Track widgets with conditional visibility/enabled, so we can update
 	// them when the effect data changes
@@ -61,21 +62,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 	/// fetched from the appropriate place.
-	/// </param>
-	public SimpleEffectDialog (
-		Gtk.Window parent,
-		string title,
-		string iconName,
-		EffectData effectData,
-		IAddinLocalizer localizer,
-		IWorkspaceService workspace)
+	partial void Initialize ()
 	{
 		// --- Initialization (Gtk.Window)
-
-		Title = title;
-		TransientFor = parent;
 		Modal = true;
-		IconName = iconName;
 		WidthRequest = 400;
 		Resizable = false;
 
@@ -89,13 +79,31 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		Gtk.Box contentAreaBox = this.GetContentAreaBox ();
 		contentAreaBox.Spacing = 12;
 		contentAreaBox.SetAllMargins (6);
-		foreach (var widget in GenerateDialogWidgets (effectData, localizer, workspace))
-			contentAreaBox.Append (widget);
 
 		OnClose += (_, _) => HandleClose ();
+	}
+
+	public static SimpleEffectDialog New (
+		Gtk.Window parent,
+		string title,
+		string iconName,
+		EffectData effectData,
+		IAddinLocalizer localizer,
+		IWorkspaceService workspace)
+	{
+		SimpleEffectDialog dialog = NewWithProperties ([]);
+		dialog.TransientFor = parent;
+		dialog.Title = title;
+		dialog.IconName = iconName;
+
+		Gtk.Box contentAreaBox = dialog.GetContentAreaBox ();
+		foreach (var widget in dialog.GenerateDialogWidgets (effectData, localizer, workspace))
+			contentAreaBox.Append (widget);
 
 		// Keep reference to effect data, so it can be used for handling conditional widgets
-		effect_data = effectData;
+		dialog.effect_data = effectData;
+
+		return dialog;
 	}
 
 	/// <summary>
@@ -112,7 +120,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		if (effect.EffectData == null)
 			throw new ArgumentException ($"{effect.EffectData} should not be null", nameof (effect));
 
-		using SimpleEffectDialog dialog = new (
+		using SimpleEffectDialog dialog = SimpleEffectDialog.New (
 			parent,
 			effect.Name,
 			effect.Icon,
@@ -528,7 +536,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberSettings settings,
 		IWorkspaceService workspace)
 	{
-		PointPickerWidget widget = new (workspace, PointI.Zero) { Label = caption };
+		PointPickerWidget widget = PointPickerWidget.New (workspace, PointI.Zero);
+		widget.Label = caption;
 
 		widget.PointPicked += (_, _) => SetAndNotify (
 			settings.reflector,
@@ -549,11 +558,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? p
 			: default;
 
-		PointPickerWidget widget = new (
+		PointPickerWidget widget = PointPickerWidget.New (
 			workspace,
 			initialPoint,
 			adjustToWidgetSize: initialPoint == default // If point is (0,0) assume it's first run
-		) { Label = caption };
+		);
+		widget.Label = caption;
 
 		widget.PointPicked += (_, _) => SetAndNotify (
 			settings.reflector,

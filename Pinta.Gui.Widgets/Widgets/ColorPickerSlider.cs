@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Cairo;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class ColorPickerSlider : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+public sealed partial class ColorPickerSlider
 {
 	public enum Component
 	{
@@ -22,30 +24,27 @@ public sealed class ColorPickerSlider : Gtk.Box
 	private const int PADDING_WIDTH = 14;
 	private const int PADDING_HEIGHT = 10;
 
-	private readonly Component component;
+	private Component component;
 	private Color color;
 
-	private readonly Gtk.Entry input_field;
-	private readonly Gtk.DrawingArea gradient_slider;
+	private Gtk.Entry input_field;
+	private Gtk.Label slider_label;
+	private Gtk.DrawingArea gradient_slider;
 
 	public event EventHandler? OnColorChanged;
 
-	public ColorPickerSlider (Component component, Color initialColor, int initialWidth)
+	[MemberNotNull (nameof (input_field), nameof (slider_label), nameof (gradient_slider))]
+	partial void Initialize ()
 	{
 		Gtk.DrawingArea gradientSlider = Gtk.DrawingArea.New ();
-		gradientSlider.SetSizeRequest (initialWidth, this.GetHeight ());
-		gradientSlider.SetDrawFunc ((_, context, width, height) => {
-			DrawGradient (context, width, height, CreateGradient (color, component));
-		});
 
-		Gtk.Label sliderLabel = Gtk.Label.New (GetLabelText (component));
+		Gtk.Label sliderLabel = Gtk.Label.New (null);
 		sliderLabel.WidthRequest = 50;
 
 		Gtk.Entry inputField = Gtk.Entry.New ();
 		inputField.MaxWidthChars = 3;
 		inputField.WidthRequest = 50;
 		inputField.Hexpand = false;
-		inputField.SetText (Convert.ToInt32 (ExtractValue (initialColor, component)).ToString ());
 		inputField.OnChanged += OnInputFieldChanged;
 
 		Gtk.GestureDrag dragGesture = Gtk.GestureDrag.New ();
@@ -67,11 +66,30 @@ public sealed class ColorPickerSlider : Gtk.Box
 
 		// --- References to keep
 
-		color = initialColor;
 		input_field = inputField;
 		gradient_slider = gradientSlider;
+		slider_label = sliderLabel;
+	}
 
+	private void Configure (Component component, Color initialColor, int initialWidth)
+	{
+		gradient_slider.SetSizeRequest (initialWidth, this.GetHeight ());
+		gradient_slider.SetDrawFunc ((_, context, width, height) => {
+			DrawGradient (context, width, height, CreateGradient (color, component));
+		});
+
+		slider_label.SetText (GetLabelText (component));
+		input_field.SetText (Convert.ToInt32 (ExtractValue (initialColor, component)).ToString ());
+
+		color = initialColor;
 		this.component = component;
+	}
+
+	public static ColorPickerSlider New (Component component, Color initialColor, int initialWidth)
+	{
+		ColorPickerSlider slider = NewWithProperties ([]);
+		slider.Configure (component, initialColor, initialWidth);
+		return slider;
 	}
 
 	private void OnDragUpdate (Gtk.GestureDrag sender, Gtk.GestureDrag.DragUpdateSignalArgs args)

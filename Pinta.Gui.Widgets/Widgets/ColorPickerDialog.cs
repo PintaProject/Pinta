@@ -275,7 +275,7 @@ public sealed class ColorPickerDialog : Gtk.Dialog
 		ColorPickerSlider.Component component,
 		Color initialColor)
 	{
-		ColorPickerSlider slider = new (component, initialColor, slider_width);
+		ColorPickerSlider slider = ColorPickerSlider.New (component, initialColor, slider_width);
 		slider.OnColorChanged += (_, _) => {
 			CurrentColor = slider.Color;
 			UpdateView ();

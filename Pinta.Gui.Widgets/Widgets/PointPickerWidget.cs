@@ -25,34 +25,36 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class PointPickerWidget : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+public sealed partial class PointPickerWidget
 {
-	private readonly Size image_size;
-	private readonly Gtk.Label title_label;
+	private Size image_size;
+	private Gtk.Label title_label;
 
-	private readonly Gtk.Button button_reset_x;
-	private readonly Gtk.Button button_reset_y;
+	private Gtk.Button button_reset_x;
+	private Gtk.Button button_reset_y;
 
-	private readonly Gtk.SpinButton spin_x;
-	private readonly Gtk.SpinButton spin_y;
+	private Gtk.SpinButton spin_x;
+	private Gtk.SpinButton spin_y;
 
-	private readonly PointPickerGraphic point_picker_graphic;
+	private PointPickerGraphic point_picker_graphic;
 
-	private readonly PointI adjusted_initial_point;
+	private PointI adjusted_initial_point;
 
 	bool active = true;
 
-	public PointPickerWidget (IWorkspaceService workspace, PointI initialPoint, bool adjustToWidgetSize = true)
+	[MemberNotNull (nameof (title_label), nameof (button_reset_x), nameof (button_reset_y))]
+	[MemberNotNull (nameof (spin_x), nameof (spin_y), nameof (point_picker_graphic))]
+	partial void Initialize ()
 	{
 		// --- Build
 
 		const int SPACING = 6;
-
-		Size imageSize = workspace.ImageSize;
 
 		BoxStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Horizontal,
@@ -61,11 +63,6 @@ public sealed class PointPickerWidget : Gtk.Box
 		BoxStyle spacedVertical = new (
 			orientation: Gtk.Orientation.Vertical,
 			spacing: SPACING);
-
-		adjusted_initial_point =
-			adjustToWidgetSize
-			? AdjustToWidgetSize (imageSize, initialPoint)
-			: initialPoint;
 
 		// --- Section label + line
 
@@ -78,20 +75,20 @@ public sealed class PointPickerWidget : Gtk.Box
 
 		// --- PointPickerGraphic
 
-		PointPickerGraphic pointPickerGraphic = PointPickerGraphic.New (workspace);
+		PointPickerGraphic pointPickerGraphic = PointPickerGraphic.New ();
 		pointPickerGraphic.Hexpand = true;
 		pointPickerGraphic.Halign = Gtk.Align.Center;
 
 		// --- X spinner
 
 		Gtk.Label xLabel = Gtk.Label.New ("X:");
-		Gtk.SpinButton spinX = CreateSpinX (imageSize);
+		Gtk.SpinButton spinX = CreateSpinButton ();
 		Gtk.Button buttonResetX = CreateResetButton ();
 
 		// --- Y spinner
 
 		Gtk.Label yLabel = Gtk.Label.New ("Y:");
-		Gtk.SpinButton spinY = CreateSpinY (imageSize);
+		Gtk.SpinButton spinY = CreateSpinButton ();
 		Gtk.Button buttonResetY = CreateResetButton ();
 
 		// --- Vbox for spinners
@@ -135,8 +132,6 @@ public sealed class PointPickerWidget : Gtk.Box
 
 		// --- References to keep
 
-		image_size = imageSize;
-
 		title_label = titleLabel;
 
 		point_picker_graphic = pointPickerGraphic;
@@ -150,6 +145,30 @@ public sealed class PointPickerWidget : Gtk.Box
 		OnRealize += (_, _) => HandleShown ();
 	}
 
+	private void Configure (IWorkspaceService workspace, PointI initialPoint, bool adjustToWidgetSize)
+	{
+		point_picker_graphic.Configure (workspace);
+
+		Size imageSize = workspace.ImageSize;
+
+		adjusted_initial_point =
+			adjustToWidgetSize
+				? AdjustToWidgetSize (imageSize, initialPoint)
+				: initialPoint;
+
+		spin_x.Adjustment!.Upper = imageSize.Width;
+		spin_y.Adjustment!.Upper = imageSize.Height;
+
+		image_size = imageSize;
+	}
+
+	public static PointPickerWidget New (IWorkspaceService workspace, PointI initialPoint, bool adjustToWidgetSize = true)
+	{
+		PointPickerWidget widget = NewWithProperties ([]);
+		widget.Configure (workspace, initialPoint, adjustToWidgetSize);
+		return widget;
+	}
+
 	private static Gtk.Button CreateResetButton ()
 	{
 		Gtk.Button button = Gtk.Button.NewFromIconName (Resources.StandardIcons.GoPrevious);
@@ -161,7 +180,7 @@ public sealed class PointPickerWidget : Gtk.Box
 		return button;
 	}
 
-	private static Gtk.SpinButton CreateSpinX (Size imageSize)
+	private static Gtk.SpinButton CreateSpinButton ()
 	{
 		Gtk.SpinButton spinX = Gtk.SpinButton.NewWithRange (0, 100, 1);
 		spinX.CanFocus = true;
@@ -169,24 +188,10 @@ public sealed class PointPickerWidget : Gtk.Box
 		spinX.Numeric = true;
 		spinX.Adjustment!.PageIncrement = 10;
 		spinX.Valign = Gtk.Align.Start;
-		spinX.Adjustment!.Upper = imageSize.Width;
+		spinX.Adjustment!.Upper = 0;
 		spinX.Adjustment!.Lower = 0;
 		spinX.SetActivatesDefaultImmediate (true);
 		return spinX;
-	}
-
-	private static Gtk.SpinButton CreateSpinY (Size imageSize)
-	{
-		Gtk.SpinButton spinY = Gtk.SpinButton.NewWithRange (0, 100, 1);
-		spinY.CanFocus = true;
-		spinY.ClimbRate = 1;
-		spinY.Numeric = true;
-		spinY.Adjustment!.PageIncrement = 10;
-		spinY.Valign = Gtk.Align.Start;
-		spinY.Adjustment!.Upper = imageSize.Height;
-		spinY.Adjustment!.Lower = 0;
-		spinY.SetActivatesDefaultImmediate (true);
-		return spinY;
 	}
 
 	private static PointI AdjustToWidgetSize (

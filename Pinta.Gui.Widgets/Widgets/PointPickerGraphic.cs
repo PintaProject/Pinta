@@ -68,15 +68,17 @@ public sealed partial class PointPickerGraphic
 		AddController (dragGesture);
 	}
 
-	private void Configure (IWorkspaceService workspace)
+	public void Configure (IWorkspaceService workspace)
 	{
 		this.workspace = workspace;
 	}
 
-	public static PointPickerGraphic New (IWorkspaceService workspace)
+	/// <summary>
+	/// NOTE: must call Configure() for dependency injection
+	/// </summary>
+	public static new PointPickerGraphic New ()
 	{
 		PointPickerGraphic widget = NewWithProperties ([]);
-		widget.Configure (workspace);
 		return widget;
 	}
 
