@@ -26,21 +26,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Cairo;
 using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class CurvesDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class CurvesDialog
 {
-	private readonly Gtk.ComboBoxText combo_map;
-	private readonly Gtk.Label label_point;
-	private readonly Gtk.DrawingArea curves_drawing;
-	private readonly Gtk.CheckButton check_red;
-	private readonly Gtk.CheckButton check_green;
-	private readonly Gtk.CheckButton check_blue;
-	private readonly Gtk.Button button_reset;
-	private readonly Gtk.Label label_tip;
+	private Gtk.ComboBoxText combo_map;
+	private Gtk.Label label_point;
+	private Gtk.DrawingArea curves_drawing;
+	private Gtk.CheckButton check_red;
+	private Gtk.CheckButton check_green;
+	private Gtk.CheckButton check_blue;
 
 	private sealed record ControlPointDrawingInfo (
 		Color Color,
@@ -74,11 +74,11 @@ public sealed class CurvesDialog : Gtk.Dialog
 		? ColorTransferMode.Rgb
 		: ColorTransferMode.Luminosity;
 
-	public CurvesData EffectData { get; }
+	public CurvesData EffectData { get; private set; } = new ();
 
-	public CurvesDialog (
-		IChromeService chrome,
-		CurvesData effectData)
+	[MemberNotNull (nameof (combo_map), nameof (label_point), nameof (curves_drawing))]
+	[MemberNotNull (nameof (check_red), nameof (check_green), nameof (check_blue))]
+	partial void Initialize ()
 	{
 		const int SPACING = 6;
 
@@ -136,8 +136,6 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 		Title = Translations.GetString ("Curves");
 
-		TransientFor = chrome.MainWindow;
-
 		Modal = true;
 
 		Resizable = false;
@@ -158,15 +156,15 @@ public sealed class CurvesDialog : Gtk.Dialog
 		check_red = checkRed;
 		check_green = checkGreen;
 		check_blue = checkBlue;
+	}
 
-		button_reset = buttonReset;
-
-		label_tip = labelTip;
-
-		// --- Initialization
-
-		EffectData = effectData;
-		ResetControlPoints ();
+	public static CurvesDialog New (IChromeService chrome, CurvesData effectData)
+	{
+		CurvesDialog dialog = NewWithProperties ([]);
+		dialog.TransientFor = chrome.MainWindow;
+		dialog.EffectData = effectData;
+		dialog.ResetControlPoints ();
+		return dialog;
 	}
 
 	private Gtk.ComboBoxText CreateComboMap ()

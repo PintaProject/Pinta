@@ -1,25 +1,30 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class AlignmentDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class AlignmentDialog
 {
-	private readonly Gtk.ToggleButton top_left;
-	private readonly Gtk.ToggleButton top_center;
-	private readonly Gtk.ToggleButton top_right;
-	private readonly Gtk.ToggleButton center_left;
-	private readonly Gtk.ToggleButton center;
-	private readonly Gtk.ToggleButton center_right;
-	private readonly Gtk.ToggleButton bottom_left;
-	private readonly Gtk.ToggleButton bottom_center;
-	private readonly Gtk.ToggleButton bottom_right;
+	private Gtk.ToggleButton top_left;
+	private Gtk.ToggleButton top_center;
+	private Gtk.ToggleButton top_right;
+	private Gtk.ToggleButton center_left;
+	private Gtk.ToggleButton center;
+	private Gtk.ToggleButton center_right;
+	private Gtk.ToggleButton bottom_left;
+	private Gtk.ToggleButton bottom_center;
+	private Gtk.ToggleButton bottom_right;
 
 	public AlignPosition SelectedPosition { get; private set; }
 
 	public event EventHandler? PositionChanged;
 
-	public AlignmentDialog (IChromeService chrome)
+	[MemberNotNull (nameof (top_left), nameof (top_center), nameof (top_right))]
+	[MemberNotNull (nameof (center_left), nameof (center), nameof (center_right))]
+	[MemberNotNull (nameof (bottom_left), nameof (bottom_center), nameof (bottom_right))]
+	partial void Initialize ()
 	{
 		const int spacing = 6;
 
@@ -69,7 +74,6 @@ public sealed class AlignmentDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Align Object");
-		TransientFor = chrome.MainWindow;
 		Modal = true;
 		Resizable = false;
 
@@ -84,10 +88,13 @@ public sealed class AlignmentDialog : Gtk.Dialog
 		// --- Initialization (AlignmentDialog)
 
 		SetSelectedPosition (AlignPosition.Center); // Set the default selection
+	}
 
-		// --- Initial behavior execution
-
-		Show ();
+	public static AlignmentDialog New (IChromeService chrome)
+	{
+		AlignmentDialog dialog = NewWithProperties ([]);
+		dialog.TransientFor = chrome.MainWindow;
+		return dialog;
 	}
 
 	private Gtk.ToggleButton CreateIconButton (

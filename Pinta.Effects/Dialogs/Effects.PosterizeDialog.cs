@@ -25,17 +25,19 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public sealed class PosterizeDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class PosterizeDialog
 {
-	private readonly HScaleSpinButtonWidget red_spinbox;
-	private readonly HScaleSpinButtonWidget green_spinbox;
-	private readonly HScaleSpinButtonWidget blue_spinbox;
-	private readonly Gtk.CheckButton link_button;
+	private HScaleSpinButtonWidget red_spinbox;
+	private HScaleSpinButtonWidget green_spinbox;
+	private HScaleSpinButtonWidget blue_spinbox;
+	private Gtk.CheckButton link_button;
 
 	public int Red => red_spinbox.ValueAsInt;
 	public int Green => green_spinbox.ValueAsInt;
@@ -43,13 +45,13 @@ public sealed class PosterizeDialog : Gtk.Dialog
 
 	public PosterizeData? EffectData { get; set; }
 
-	public PosterizeDialog (IChromeService chrome)
+	[MemberNotNull (nameof (red_spinbox), nameof (green_spinbox), nameof (blue_spinbox), nameof (link_button))]
+	partial void Initialize ()
 	{
 		DefaultWidth = 400;
 		DefaultHeight = 300;
 
 		Title = Translations.GetString ("Posterize");
-		TransientFor = chrome.MainWindow;
 		Modal = true;
 
 		Resizable = false;
@@ -76,6 +78,13 @@ public sealed class PosterizeDialog : Gtk.Dialog
 			greenSpinbox,
 			blueSpinbox,
 			linkButton]);
+	}
+
+	public static PosterizeDialog New (IChromeService chrome)
+	{
+		PosterizeDialog dialog = NewWithProperties ([]);
+		dialog.TransientFor = chrome.MainWindow;
+		return dialog;
 	}
 
 	private static Gtk.CheckButton CreateLinkButton ()

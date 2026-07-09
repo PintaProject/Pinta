@@ -41,11 +41,10 @@ public sealed class PosterizeEffect : BaseEffect
 
 	public override async Task<bool> LaunchConfiguration ()
 	{
-		using PosterizeDialog dialog = new (chrome) {
-			Title = Name,
-			IconName = Icon,
-			EffectData = Data, // TODO: Delegate `EffectData` changes to event handlers or similar
-		};
+		using PosterizeDialog dialog = PosterizeDialog.New (chrome);
+		dialog.Title = Name;
+		dialog.IconName = Icon;
+		dialog.EffectData = Data; // TODO: Delegate `EffectData` changes to event handlers or similar
 
 		Gtk.ResponseType response = await dialog.RunAsync ();
 
