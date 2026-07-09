@@ -655,16 +655,15 @@ public sealed partial class LevelsDialog
 		ColorPanelWidget panel = (ColorPanelWidget?) controller.GetWidget () ??
 				throw new Exception ("Controller widget should be non-null");
 
-		using ColorPickerDialog ccd = new (
+		using ColorPickerDialog ccd = ColorPickerDialog.New (
 			chrome.MainWindow,
 			palette,
 			new SingleColor (panel.CairoColor),
 			primarySelected: true,
 			livePalette: false,
 			windowTitle: Translations.GetString ("Choose Color")
-		) {
-			Modal = true
-		};
+		);
+		ccd.Modal = true;
 
 		try {
 			Gtk.ResponseType response = await ccd.RunAsync ();

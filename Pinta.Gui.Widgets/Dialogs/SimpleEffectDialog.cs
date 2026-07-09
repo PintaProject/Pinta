@@ -354,7 +354,7 @@ public sealed partial class SimpleEffectDialog
 
 		colorButton.OnClicked += async (_, _) => {
 
-			using ColorPickerDialog dialog = new (
+			using ColorPickerDialog dialog = ColorPickerDialog.New (
 				this,
 				PintaCore.Palette,
 				new SingleColor (currentColorCairo),

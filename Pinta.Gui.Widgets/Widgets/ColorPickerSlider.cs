@@ -71,7 +71,7 @@ public sealed partial class ColorPickerSlider
 		slider_label = sliderLabel;
 	}
 
-	private void Configure (Component component, Color initialColor, int initialWidth)
+	private void Configure (Component component, int initialWidth)
 	{
 		gradient_slider.SetSizeRequest (initialWidth, this.GetHeight ());
 		gradient_slider.SetDrawFunc ((_, context, width, height) => {
@@ -79,16 +79,14 @@ public sealed partial class ColorPickerSlider
 		});
 
 		slider_label.SetText (GetLabelText (component));
-		input_field.SetText (Convert.ToInt32 (ExtractValue (initialColor, component)).ToString ());
 
-		color = initialColor;
 		this.component = component;
 	}
 
-	public static ColorPickerSlider New (Component component, Color initialColor, int initialWidth)
+	public static ColorPickerSlider New (Component component, int initialWidth)
 	{
 		ColorPickerSlider slider = NewWithProperties ([]);
-		slider.Configure (component, initialColor, initialWidth);
+		slider.Configure (component, initialWidth);
 		return slider;
 	}
 
