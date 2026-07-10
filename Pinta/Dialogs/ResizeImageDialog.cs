@@ -25,25 +25,32 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class ResizeImageDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class ResizeImageDialog
 {
-	private readonly Gtk.SpinButton percentage_spinner;
-	private readonly Gtk.SpinButton width_spinner;
-	private readonly Gtk.SpinButton height_spinner;
-	private readonly Gtk.CheckButton aspect_checkbox;
-	private readonly Gtk.CheckButton percentage_radio;
-	private readonly Gtk.ComboBoxText resampling_combobox;
-	private readonly IWorkspaceService workspace;
-	private readonly ISettingsService settings;
+	private Gtk.SpinButton percentage_spinner;
+	private Gtk.SpinButton width_spinner;
+	private Gtk.SpinButton height_spinner;
+	private Gtk.CheckButton aspect_checkbox;
+	private Gtk.CheckButton percentage_radio;
+	private Gtk.CheckButton absolute_radio;
+	private Gtk.ComboBoxText resampling_combobox;
+
+	private IWorkspaceService workspace = null!; // NRT - set by factory method
+	private ISettingsService settings = null!;
+
 	private bool value_changing;
 
 	const int SPACING = 6;
 
-	internal ResizeImageDialog (IChromeService chrome, IWorkspaceService workspace, ISettingsService settings)
+	[MemberNotNull (nameof (percentage_spinner), nameof (width_spinner), nameof (height_spinner))]
+	[MemberNotNull (nameof (aspect_checkbox), nameof (absolute_radio), nameof (percentage_radio), nameof (resampling_combobox))]
+	partial void Initialize ()
 	{
 		BoxStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Horizontal,
@@ -54,22 +61,18 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 			spacing: SPACING);
 
 		Gtk.SpinButton percentageSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		percentageSpinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_PERCENTAGE, 100);
 		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
 		percentageSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		widthSpinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_WIDTH, workspace.ImageSize.Width);
 		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
 		widthSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		heightSpinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_HEIGHT, workspace.ImageSize.Height);
 		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
 		heightSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.CheckButton aspectCheckbox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
-		aspectCheckbox.Active = settings.GetSetting (SettingNames.RESIZE_IMAGE_MAINTAIN_ASPECT, true);
 
 		Gtk.Button resetButton = Gtk.Button.NewFromIconName (Resources.StandardIcons.EditUndo);
 		resetButton.WidthRequest = 24;
@@ -108,7 +111,6 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 			GObject.BindingFlags.SyncCreate);
 
 		Gtk.ComboBoxText resamplingCombobox = CreateResamplingCombobox ();
-		resamplingCombobox.Active = settings.GetSetting (SettingNames.RESIZE_IMAGE_RESAMPLING, 0);
 
 		Gtk.Box hboxPercent = GtkExtensions.Box (
 			spacedHorizontal,
@@ -150,7 +152,6 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Resize Image");
-		TransientFor = chrome.MainWindow;
 		Modal = true;
 
 		IconName = Resources.Icons.ImageResize;
@@ -170,26 +171,43 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		contentArea.SetAllMargins (12);
 		contentArea.Append (mainVbox);
 
-		percentageSpinner.GrabFocus ();
-
 		// --- References to keep
 
 		percentage_spinner = percentageSpinner;
 		width_spinner = widthSpinner;
 		height_spinner = heightSpinner;
 		aspect_checkbox = aspectCheckbox;
+		absolute_radio = absoluteRadio;
 		percentage_radio = percentageRadio;
 		resampling_combobox = resamplingCombobox;
+	}
 
+	private void Configure (IChromeService chrome, IWorkspaceService workspace, ISettingsService settings)
+	{
+		TransientFor = chrome.MainWindow;
 		this.workspace = workspace;
 		this.settings = settings;
 
-		// Final initialization
+		width_spinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_WIDTH, workspace.ImageSize.Width);
+		height_spinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_HEIGHT, workspace.ImageSize.Height);
+		percentage_spinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_PERCENTAGE, 100);
+		aspect_checkbox.Active = settings.GetSetting (SettingNames.RESIZE_IMAGE_MAINTAIN_ASPECT, true);
+		resampling_combobox.Active = settings.GetSetting (SettingNames.RESIZE_IMAGE_RESAMPLING, 0);
 
+		// Final initialization
 		if (settings.GetSetting (SettingNames.RESIZE_IMAGE_USE_PERCENTAGE, true))
-			percentageRadio.Active = true;
+			percentage_radio.Active = true;
 		else
-			absoluteRadio.Active = true;
+			absolute_radio.Active = true;
+
+		percentage_spinner.GrabFocus ();
+	}
+
+	internal static ResizeImageDialog New (IChromeService chrome, IWorkspaceService workspace, ISettingsService settings)
+	{
+		ResizeImageDialog dialog = NewWithProperties ([]);
+		dialog.Configure (chrome, workspace, settings);
+		return dialog;
 	}
 
 	private void OnDialogResponse (Gtk.Dialog sender, ResponseSignalArgs args)

@@ -25,35 +25,43 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class ResizeCanvasDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class ResizeCanvasDialog
 {
-	private readonly Gtk.SpinButton percentage_spinner;
-	private readonly Gtk.SpinButton width_spinner;
-	private readonly Gtk.SpinButton height_spinner;
-	private readonly Gtk.CheckButton aspect_checkbox;
-	private readonly Gtk.CheckButton percentage_radio;
+	private Gtk.SpinButton percentage_spinner;
+	private Gtk.SpinButton width_spinner;
+	private Gtk.SpinButton height_spinner;
+	private Gtk.CheckButton aspect_checkbox;
+	private Gtk.CheckButton percentage_radio;
+	private Gtk.CheckButton absolute_radio;
 
-	private readonly Gtk.Button nw_button;
-	private readonly Gtk.Button n_button;
-	private readonly Gtk.Button ne_button;
-	private readonly Gtk.Button w_button;
-	private readonly Gtk.Button e_button;
-	private readonly Gtk.Button center_button;
-	private readonly Gtk.Button sw_button;
-	private readonly Gtk.Button s_button;
-	private readonly Gtk.Button se_button;
+	private Gtk.Button nw_button;
+	private Gtk.Button n_button;
+	private Gtk.Button ne_button;
+	private Gtk.Button w_button;
+	private Gtk.Button e_button;
+	private Gtk.Button center_button;
+	private Gtk.Button sw_button;
+	private Gtk.Button s_button;
+	private Gtk.Button se_button;
 
 	private bool value_changing;
 	private Anchor anchor;
 
-	private readonly IWorkspaceService workspace;
-	private readonly ISettingsService settings;
+	private IWorkspaceService workspace = null!; // NRT - set by factory method
+	private ISettingsService settings = null!;
 
-	public ResizeCanvasDialog (IChromeService chrome, IWorkspaceService workspace, ISettingsService settings)
+	[MemberNotNull (nameof (percentage_spinner), nameof (width_spinner), nameof (height_spinner))]
+	[MemberNotNull (nameof (aspect_checkbox), nameof (percentage_radio), nameof (absolute_radio))]
+	[MemberNotNull (nameof (nw_button), nameof (n_button), nameof (ne_button))]
+	[MemberNotNull (nameof (w_button), nameof (e_button), nameof (center_button))]
+	[MemberNotNull (nameof (sw_button), nameof (s_button), nameof (se_button))]
+	partial void Initialize ()
 	{
 		const int SPACING = 6;
 
@@ -66,7 +74,6 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 			spacing: SPACING);
 
 		Gtk.SpinButton percentageSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		percentageSpinner.Value = settings.GetSetting (SettingNames.RESIZE_CANVAS_PERCENTAGE, 100);
 		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
 		percentageSpinner.SetActivatesDefaultImmediate (true);
 
@@ -74,7 +81,6 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		widthLabel.Halign = Gtk.Align.End;
 
 		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		widthSpinner.Value = settings.GetSetting (SettingNames.RESIZE_CANVAS_WIDTH, workspace.ImageSize.Width);
 		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
 		widthSpinner.SetActivatesDefaultImmediate (true);
 
@@ -82,7 +88,6 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		heightLabel.Halign = Gtk.Align.End;
 
 		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		heightSpinner.Value = settings.GetSetting (SettingNames.RESIZE_CANVAS_HEIGHT, workspace.ImageSize.Height);
 		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
 		heightSpinner.SetActivatesDefaultImmediate (true);
 
@@ -105,7 +110,6 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		hwGrid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 1, 1, 1);
 
 		Gtk.CheckButton aspectCheckBox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
-		aspectCheckBox.Active = settings.GetSetting (SettingNames.RESIZE_CANVAS_MAINTAIN_ASPECT, true);
 
 		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
 		percentageRadio.BindProperty (
@@ -207,7 +211,6 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Resize Canvas");
-		TransientFor = chrome.MainWindow;
 		Modal = true;
 		IconName = Resources.Icons.ImageResizeCanvas;
 		DefaultWidth = 300;
@@ -225,18 +228,14 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		contentArea.SetAllMargins (12);
 		contentArea.Append (mainVbox);
 
-		percentageSpinner.GrabFocus ();
-
 		// --- References to keep
-
-		this.workspace = workspace;
-		this.settings = settings;
 
 		percentage_spinner = percentageSpinner;
 		width_spinner = widthSpinner;
 		height_spinner = heightSpinner;
 		aspect_checkbox = aspectCheckBox;
 		percentage_radio = percentageRadio;
+		absolute_radio = absoluteRadio;
 
 		nw_button = nwButton;
 		n_button = nButton;
@@ -247,6 +246,18 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		sw_button = swButton;
 		s_button = sButton;
 		se_button = seButton;
+	}
+
+	private void Configure (IChromeService chrome, IWorkspaceService workspace, ISettingsService settings)
+	{
+		TransientFor = chrome.MainWindow;
+		this.workspace = workspace;
+		this.settings = settings;
+
+		percentage_spinner.Value = settings.GetSetting (SettingNames.RESIZE_CANVAS_PERCENTAGE, 100);
+		width_spinner.Value = settings.GetSetting (SettingNames.RESIZE_CANVAS_WIDTH, workspace.ImageSize.Width);
+		height_spinner.Value = settings.GetSetting (SettingNames.RESIZE_CANVAS_HEIGHT, workspace.ImageSize.Height);
+		aspect_checkbox.Active = settings.GetSetting (SettingNames.RESIZE_CANVAS_MAINTAIN_ASPECT, true);
 
 		// Final initialization
 
@@ -254,9 +265,18 @@ public sealed class ResizeCanvasDialog : Gtk.Dialog
 		SetAnchor (savedAnchor);
 
 		if (settings.GetSetting (SettingNames.RESIZE_CANVAS_USE_PERCENTAGE, true))
-			percentageRadio.Active = true;
+			percentage_radio.Active = true;
 		else
-			absoluteRadio.Active = true;
+			absolute_radio.Active = true;
+
+		percentage_spinner.GrabFocus ();
+	}
+
+	public static ResizeCanvasDialog New (IChromeService chrome, IWorkspaceService workspace, ISettingsService settings)
+	{
+		ResizeCanvasDialog dialog = NewWithProperties ([]);
+		dialog.Configure (chrome, workspace, settings);
+		return dialog;
 	}
 
 	private void OnDialogResponse (Gtk.Dialog sender, ResponseSignalArgs args)

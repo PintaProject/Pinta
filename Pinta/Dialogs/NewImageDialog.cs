@@ -26,55 +26,46 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed partial class NewImageDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class NewImageDialog
 {
-	private readonly bool has_clipboard;
+	private bool has_clipboard;
 	private bool suppress_events;
-	private readonly PaletteManager palette;
-	private readonly Size clipboard_size;
+	private IPaletteService palette = null!; // NRT - set by factory method.
+	private Size clipboard_size;
 
-	private readonly PreviewArea preview_box;
+	private Gtk.Box hbox_background;
+	private Gtk.Image image_background;
+	private PreviewArea preview_box;
 
-	private readonly Gtk.StringList preset_dropdown_model;
-	private readonly Gtk.DropDown preset_dropdown;
-	private readonly Gtk.Entry width_entry;
-	private readonly Gtk.Entry height_entry;
+	private Gtk.StringList preset_dropdown_model;
+	private Gtk.DropDown preset_dropdown;
+	private Gtk.Entry width_entry;
+	private Gtk.Entry height_entry;
 
-	private readonly Gtk.CheckButton portrait_radio;
-	private readonly Gtk.CheckButton landscape_radio;
+	private Gtk.CheckButton portrait_radio;
+	private Gtk.CheckButton landscape_radio;
 
-	private readonly Gtk.CheckButton white_background_radio;
-	private readonly Gtk.CheckButton secondary_background_radio;
-	private readonly Gtk.CheckButton transparent_background_radio;
+	private Gtk.CheckButton white_background_radio;
+	private Gtk.CheckButton secondary_background_radio;
+	private Gtk.CheckButton transparent_background_radio;
 
-	/// <summary>
-	/// Configures and builds a NewImageDialog object.
-	/// </summary>
-	/// <param name="imgWidth">Initial value of the width entry.</param>
-	/// <param name="imgHeight">Initial value of the height entry.</param>
-	/// <param name="isClipboardSize">Indicates if there is an image on the clipboard (and the size parameters represent the clipboard image size).</param>
-	public NewImageDialog (
-		ChromeManager chrome,
-		PaletteManager palette,
-		Size initialSize,
-		BackgroundType initialBackgroundType,
-		bool isClipboardSize)
+	[MemberNotNull (nameof (hbox_background), nameof (image_background), nameof (preview_box))]
+	[MemberNotNull (nameof (preset_dropdown_model), nameof (preset_dropdown), nameof (width_entry), nameof (height_entry))]
+	[MemberNotNull (nameof (portrait_radio), nameof (landscape_radio))]
+	[MemberNotNull (nameof (white_background_radio), nameof (secondary_background_radio), nameof (transparent_background_radio))]
+	partial void Initialize ()
 	{
 		// --- Control creation
-
-		// We don't show the background color option if it's the same as "White"
-		bool allowBackgroundColor = palette.SecondaryColor.ToColorBgra () != ColorBgra.White;
-
-		bool hasClipboard = isClipboardSize;
-
 		Gtk.Label sizeLabel = CreateSizeLabel ();
 
-		Gtk.StringList presetDropdownModel = Gtk.StringList.New ([.. GeneratePresetEntries (hasClipboard)]);
+		Gtk.StringList presetDropdownModel = Gtk.StringList.New ([]);
 		Gtk.DropDown presetDropdown = Gtk.DropDown.New (presetDropdownModel, expression: null);
 
 		Gtk.Label widthLabel = CreateWidthLabel ();
@@ -127,7 +118,7 @@ public sealed partial class NewImageDialog : Gtk.Dialog
 		Gtk.CheckButton secondaryBackgroundRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Background Color"));
 		secondaryBackgroundRadio.SetGroup (whiteBackgroundRadio);
 
-		Gtk.Image imageBackground = Gtk.Image.NewFromPixbuf (CairoExtensions.CreateColorSwatch (16, palette.SecondaryColor).ToPixbuf ());
+		Gtk.Image imageBackground = Gtk.Image.New ();
 		imageBackground.MarginEnd = 7;
 
 		Gtk.Box hboxBackground = GtkExtensions.BoxHorizontal ([
@@ -144,19 +135,8 @@ public sealed partial class NewImageDialog : Gtk.Dialog
 			imageTransparent,
 			transparentBackgroundRadio]);
 
-		IEnumerable<Gtk.Widget> GenerateBackgroundBoxItems ()
-		{
-			yield return backgroundLabel;
-			yield return hboxWhite;
-
-			if (allowBackgroundColor)
-				yield return hboxBackground;
-
-			yield return hboxTransparent;
-		}
-
-		var backgroundBoxItems = GenerateBackgroundBoxItems ().ToArray ();
-		Gtk.Box backgroundVbox = GtkExtensions.BoxVertical (backgroundBoxItems);
+		Gtk.Box backgroundVbox = GtkExtensions.BoxVertical ([
+			backgroundLabel, hboxWhite, hboxBackground, hboxTransparent]);
 		backgroundVbox.MarginTop = 4;
 
 		// Layout table for preset, width, and height
@@ -209,27 +189,9 @@ public sealed partial class NewImageDialog : Gtk.Dialog
 		contentArea.SetAllMargins (8);
 		contentArea.Append (mainHbox);
 
-		// --- Sub-component post-initialization
-
-		if (initialBackgroundType == BackgroundType.SecondaryColor && allowBackgroundColor)
-			secondaryBackgroundRadio.Active = true;
-
-		if (initialBackgroundType == BackgroundType.Transparent)
-			transparentBackgroundRadio.Active = true;
-
-		if (initialBackgroundType == BackgroundType.White)
-			whiteBackgroundRadio.Active = true;
-
-		heightEntry.Buffer!.Text = initialSize.Height.ToString ();
-
-		widthEntry.Buffer!.Text = initialSize.Width.ToString ();
-		widthEntry.GrabFocus ();
-		widthEntry.SelectRegion (0, (int) widthEntry.TextLength);
-
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("New Image");
-		TransientFor = chrome.MainWindow;
 		Modal = true;
 		Resizable = false;
 		IconName = Resources.StandardIcons.DocumentNew;
@@ -240,10 +202,6 @@ public sealed partial class NewImageDialog : Gtk.Dialog
 		this.SetDefaultResponse (Gtk.ResponseType.Ok);
 
 		// --- References to keep
-
-		has_clipboard = hasClipboard;
-		this.palette = palette;
-		clipboard_size = initialSize;
 		preset_dropdown_model = presetDropdownModel;
 		preset_dropdown = presetDropdown;
 		width_entry = widthEntry;
@@ -253,7 +211,48 @@ public sealed partial class NewImageDialog : Gtk.Dialog
 		white_background_radio = whiteBackgroundRadio;
 		secondary_background_radio = secondaryBackgroundRadio;
 		transparent_background_radio = transparentBackgroundRadio;
+		hbox_background = hboxBackground;
+		image_background = imageBackground;
 		preview_box = previewBox;
+	}
+
+	private void Configure (
+		IChromeService chrome,
+		IPaletteService palette,
+		Size initialSize,
+		BackgroundType initialBackgroundType,
+		bool isClipboardSize)
+	{
+		TransientFor = chrome.MainWindow;
+		this.palette = palette;
+
+		// We don't show the background color option if it's the same as "White"
+		bool allowBackgroundColor = palette.SecondaryColor.ToColorBgra () != ColorBgra.White;
+		bool hasClipboard = isClipboardSize;
+
+		foreach (string preset in GeneratePresetEntries (hasClipboard))
+			preset_dropdown_model.Append (preset);
+
+		hbox_background.Visible = allowBackgroundColor;
+		image_background.SetFromPixbuf (CairoExtensions.CreateColorSwatch (16, palette.SecondaryColor).ToPixbuf ());
+
+		if (initialBackgroundType == BackgroundType.SecondaryColor && allowBackgroundColor)
+			secondary_background_radio.Active = true;
+
+		if (initialBackgroundType == BackgroundType.Transparent)
+			transparent_background_radio.Active = true;
+
+		if (initialBackgroundType == BackgroundType.White)
+			white_background_radio.Active = true;
+
+		height_entry.Buffer!.Text = initialSize.Height.ToString ();
+
+		width_entry.Buffer!.Text = initialSize.Width.ToString ();
+		width_entry.GrabFocus ();
+		width_entry.SelectRegion (0, (int) width_entry.TextLength);
+
+		has_clipboard = hasClipboard;
+		clipboard_size = initialSize;
 
 		// --- TODO: Refactor this post-initialization
 
@@ -263,7 +262,25 @@ public sealed partial class NewImageDialog : Gtk.Dialog
 
 		UpdatePresetSelection ();
 
-		previewBox.Update (NewImageSize, NewImageBackground);
+		preview_box.Update (NewImageSize, NewImageBackground);
+	}
+
+	/// <summary>
+	/// Configures and builds a NewImageDialog object.
+	/// </summary>
+	/// <param name="imgWidth">Initial value of the width entry.</param>
+	/// <param name="imgHeight">Initial value of the height entry.</param>
+	/// <param name="isClipboardSize">Indicates if there is an image on the clipboard (and the size parameters represent the clipboard image size).</param>
+	public static NewImageDialog New (
+		IChromeService chrome,
+		IPaletteService palette,
+		Size initialSize,
+		BackgroundType initialBackgroundType,
+		bool isClipboardSize)
+	{
+		NewImageDialog dialog = NewWithProperties ([]);
+		dialog.Configure (chrome, palette, initialSize, initialBackgroundType, isClipboardSize);
+		return dialog;
 	}
 
 	private static Gtk.Label CreateUnitsLabel ()
