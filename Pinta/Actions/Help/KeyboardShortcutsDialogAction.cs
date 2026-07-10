@@ -40,7 +40,7 @@ internal sealed class KeyboardShortcutsDialogAction : IActionHandler
 
 	private void Activated (object sender, EventArgs e)
 	{
-		using Adw.ShortcutsDialog dialog = new ();
+		using Adw.ShortcutsDialog dialog = Adw.ShortcutsDialog.New ();
 
 		// Helper to format the shortcut string for the current OS
 		string FormatShortcut (string shortcut)
@@ -55,7 +55,7 @@ internal sealed class KeyboardShortcutsDialogAction : IActionHandler
 		}
 
 		// Helper to create and populate a section and add it to the dialog
-		void AddSection (string title, IEnumerable<Command> commands)
+		void AddSection (string sectionTitle, IEnumerable<Command> commands)
 		{
 			var validCommands = commands
 				.Where (c => c.Shortcuts.Length > 0 && !string.IsNullOrEmpty (c.Label))
@@ -65,13 +65,12 @@ internal sealed class KeyboardShortcutsDialogAction : IActionHandler
 			if (validCommands.Count == 0)
 				return;
 
-			Adw.ShortcutsSection section = new ();
-			section.Title = title;
+			Adw.ShortcutsSection section = Adw.ShortcutsSection.New (sectionTitle);
 
 			foreach (var cmd in validCommands) {
-				Adw.ShortcutsItem item = new ();
-				item.Title = cmd.Label.Replace ("_", "");
-				item.Accelerator = FormatShortcut (cmd.Shortcuts[0]);
+				string title = cmd.Label.Replace ("_", "");
+				string accel = FormatShortcut (cmd.Shortcuts[0]);
+				Adw.ShortcutsItem item = Adw.ShortcutsItem.New (title, accel);
 				section.Add (item);
 			}
 
@@ -79,8 +78,7 @@ internal sealed class KeyboardShortcutsDialogAction : IActionHandler
 		}
 
 		// 1. Tool Shortcuts
-		Adw.ShortcutsSection toolShortcutsSection = new ();
-		toolShortcutsSection.Title = Translations.GetString ("Tools");
+		var toolShortcutsSection = Adw.ShortcutsSection.New (Translations.GetString ("Tools"));
 
 		// tool.ShortcutKey returns a Gdk.Key. We filter out the 'invalid/void' keys.
 		var toolsWithShortcuts = tools
@@ -88,11 +86,8 @@ internal sealed class KeyboardShortcutsDialogAction : IActionHandler
 			.OrderBy (t => t.Name);
 
 		foreach (var tool in toolsWithShortcuts) {
-			Adw.ShortcutsItem item = new ();
-			item.Title = tool.Name;
-
 			string keyName = ((char) tool.ShortcutKey.Value).ToString ().ToUpperInvariant ();
-			item.Accelerator = keyName;
+			Adw.ShortcutsItem item = Adw.ShortcutsItem.New (tool.Name, keyName);
 			toolShortcutsSection.Add (item);
 		}
 

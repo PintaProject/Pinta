@@ -44,7 +44,8 @@ public enum MetricType
 /// Replacement for Gtk.Ruler, which was removed in GTK3.
 /// Based on the original GTK2 widget and Inkscape's ruler widget.
 /// </summary>
-public sealed class Ruler : Gtk.DrawingArea
+[GObject.Subclass<Gtk.DrawingArea>]
+public sealed partial class Ruler
 {
 	private double position = 0;
 	private MetricType metric = MetricType.Pixels;
@@ -65,7 +66,7 @@ public sealed class Ruler : Gtk.DrawingArea
 	/// <summary>
 	/// Whether the ruler is horizontal or vertical.
 	/// </summary>
-	public Gtk.Orientation Orientation { get; }
+	public Gtk.Orientation Orientation { get; private set; }
 
 	/// <summary>
 	/// Metric type used for the ruler.
@@ -101,11 +102,14 @@ public sealed class Ruler : Gtk.DrawingArea
 		}
 	}
 
-	public Ruler (Gtk.Orientation orientation)
+	partial void Initialize ()
+	{
+		SetDrawFunc ((area, context, width, height) => Draw (context, new Size (width, height)));
+	}
+
+	private void SetOrientation (Gtk.Orientation orientation)
 	{
 		Orientation = orientation;
-
-		SetDrawFunc ((area, context, width, height) => Draw (context, new Size (width, height)));
 
 		// Determine the size request, based on the font size.
 		int font_size = GetFontSize (GetPangoContext ().GetFontDescription ()!, ScaleFactor);
@@ -124,6 +128,13 @@ public sealed class Ruler : Gtk.DrawingArea
 
 		WidthRequest = width;
 		HeightRequest = height;
+	}
+
+	public static Ruler New (Gtk.Orientation orientation)
+	{
+		Ruler ruler = NewWithProperties ([]);
+		ruler.SetOrientation (orientation);
+		return ruler;
 	}
 
 	// Invalidates cache _and_ queues redraw. Like a full refresh

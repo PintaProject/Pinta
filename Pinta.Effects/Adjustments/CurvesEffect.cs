@@ -44,10 +44,9 @@ public sealed class CurvesEffect : BaseEffect
 	public override async Task<bool> LaunchConfiguration ()
 	{
 		// TODO: Delegate `EffectData` changes to event handlers or similar
-		using CurvesDialog dialog = new (chrome, Data) {
-			Title = Name,
-			IconName = Icon,
-		};
+		using CurvesDialog dialog = CurvesDialog.New (chrome, Data);
+		dialog.Title = Name;
+		dialog.IconName = Icon;
 
 		Gtk.ResponseType response = await dialog.RunAsync ();
 
@@ -127,7 +126,7 @@ public sealed class CurvesData : EffectData
 	{
 		// Not sure if we have to copy contents of ControlPoints
 		// var controlPoints = new SortedList<int, int> [ControlPoints.Length];
-		// 
+		//
 		// for (int i = 0; i < ControlPoints.Length; i++)
 		//     controlPoints[i] = new SortedList<int, int> (ControlPoints[i]);
 

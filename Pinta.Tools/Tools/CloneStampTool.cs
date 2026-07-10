@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using Gdk;
 using Pinta.Core;
 
@@ -39,10 +40,14 @@ public sealed class CloneStampTool : BaseBrushTool
 
 	private readonly SystemManager system_manager;
 	private readonly IWorkspaceService workspace;
+	private readonly BrushHandle handle;
+	private bool move_origin_handle = true;
 	public CloneStampTool (IServiceProvider services) : base (services)
 	{
 		system_manager = services.GetService<SystemManager> ();
 		workspace = services.GetService<IWorkspaceService> ();
+
+		handle = new BrushHandle (workspace);
 
 		// Update cursor on zoom
 		workspace.ViewSizeChanged += (_, _) => {
@@ -59,6 +64,7 @@ public sealed class CloneStampTool : BaseBrushTool
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_L);
 	public override int Priority => 47;
 	protected override bool ShowAntialiasingButton => true;
+	public override IEnumerable<IToolHandle> Handles => [handle];
 
 	public override Cursor DefaultCursor {
 		get {
@@ -94,16 +100,22 @@ public sealed class CloneStampTool : BaseBrushTool
 		} else {
 			origin = e.Point;
 			offset = null;
+			UpdateOriginHandle (document, origin.Value.X, origin.Value.Y, false);
 		}
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
 	{
-		if (!painting || !offset.HasValue)
+		if (!offset.HasValue)
 			return;
 
 		var x = e.Point.X;
 		var y = e.Point.Y;
+
+		UpdateOriginHandle (document, x - offset.Value.X, y - offset.Value.Y, true);
+
+		if (!painting)
+			return;
 
 		if (!last_point.HasValue) {
 			last_point = e.Point;
@@ -134,6 +146,9 @@ public sealed class CloneStampTool : BaseBrushTool
 	{
 		painting = false;
 
+		if (e.IsControlPressed)
+			handle.Active = true;
+
 		using Cairo.Context g = new (document.Layers.CurrentUserLayer.Surface);
 		g.SetSourceSurface (document.Layers.ToolLayer.Surface, 0, 0);
 		g.Paint ();
@@ -152,6 +167,7 @@ public sealed class CloneStampTool : BaseBrushTool
 	{
 		// Note that this WON'T work if user presses control key and THEN selects the tool!
 		if (e.Key.IsControlKey ()) {
+			move_origin_handle = false;
 			SetCursor (Gdk.Cursor.NewFromTexture (Resources.GetIcon ("Cursor.CloneStampSetSource.png"), 16, 26, null));
 		}
 
@@ -160,8 +176,10 @@ public sealed class CloneStampTool : BaseBrushTool
 
 	protected override bool OnKeyUp (Document document, ToolKeyEventArgs e)
 	{
-		if (e.Key.IsControlKey ())
+		if (e.Key.IsControlKey ()) {
+			move_origin_handle = true;
 			SetCursor (DefaultCursor);
+		}
 
 		return false;
 	}
@@ -169,5 +187,14 @@ public sealed class CloneStampTool : BaseBrushTool
 	protected override void OnDeactivated (Document? document, BaseTool? newTool)
 	{
 		origin = null;
+		handle.Active = false;
+	}
+
+	private void UpdateOriginHandle (Document document, int x, int y, bool move_event)
+	{
+		if (move_origin_handle || (!move_event))
+			handle.CanvasPosition = new (x, y);
+		handle.BrushWidth = BrushWidth;
+		document.Workspace.Invalidate (handle.InvalidateRect);
 	}
 }

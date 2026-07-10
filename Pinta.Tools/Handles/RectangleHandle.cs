@@ -54,6 +54,9 @@ public class RectangleHandle : IToolHandle
 	#region IToolHandle Implementation
 	public bool Active { get; set; }
 
+	public bool ContainsPoint (PointD windowPoint)
+		=> handles.Values.Any (c => c.ContainsPoint (windowPoint));
+
 	public void Draw (Gtk.Snapshot snapshot)
 	{
 		foreach (MoveHandle handle in handles.Values)

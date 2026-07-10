@@ -34,7 +34,8 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
+[GObject.Subclass<Gtk.DrawingArea>]
+public sealed partial class StatusBarColorPaletteWidget
 {
 	private static bool color_picker_active = false;
 
@@ -43,26 +44,17 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 	private readonly RectangleD swap_rect = new (27, 2, 15, 15);
 	private readonly RectangleD reset_rect = new (2, 27, 15, 15);
 
-	private readonly IChromeService chrome;
-	private readonly IPaletteService palette;
-	private readonly ISystemService system;
+	private IChromeService chrome = null!; // NRT - set by factory method
+	private IPaletteService palette = null!;
+	private ISystemService system = null!;
 
 	private RectangleD palette_rect;
 	private RectangleD recent_palette_rect;
 
-	public StatusBarColorPaletteWidget (IChromeService chrome, IPaletteService palette, ISystemService system)
+	partial void Initialize ()
 	{
-		this.chrome = chrome;
-		this.palette = palette;
-		this.system = system;
-
 		HasTooltip = true;
 		OnQueryTooltip += HandleQueryTooltip;
-
-		palette.PrimaryColorChanged += new EventHandler (Palette_ColorChanged);
-		palette.SecondaryColorChanged += new EventHandler (Palette_ColorChanged);
-		palette.RecentColorsChanged += new EventHandler (Palette_ColorChanged);
-		palette.CurrentPalette.PaletteChanged += new EventHandler (Palette_ColorChanged);
 
 		HeightRequest = PaletteWidget.WIDGET_HEIGHT;
 
@@ -77,6 +69,25 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 			click_gesture.SetState (Gtk.EventSequenceState.Claimed);
 		};
 		AddController (click_gesture);
+	}
+
+	private void Configure (IChromeService chrome, IPaletteService palette, ISystemService system)
+	{
+		this.chrome = chrome;
+		this.palette = palette;
+		this.system = system;
+
+		palette.PrimaryColorChanged += new EventHandler (Palette_ColorChanged);
+		palette.SecondaryColorChanged += new EventHandler (Palette_ColorChanged);
+		palette.RecentColorsChanged += new EventHandler (Palette_ColorChanged);
+		palette.CurrentPalette.PaletteChanged += new EventHandler (Palette_ColorChanged);
+	}
+
+	public static StatusBarColorPaletteWidget New (IChromeService chrome, IPaletteService palette, ISystemService system)
+	{
+		StatusBarColorPaletteWidget widget = NewWithProperties ([]);
+		widget.Configure (chrome, palette, system);
+		return widget;
 	}
 
 	private async void HandleClick (PointD point, uint button, Gdk.ModifierType state)
@@ -360,7 +371,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 
 	private async Task<PaletteColors?> RunColorPicker (bool primarySelected)
 	{
-		using ColorPickerDialog colorPicker = new (
+		using ColorPickerDialog colorPicker = ColorPickerDialog.New (
 			chrome.MainWindow,
 			palette,
 			new PaletteColors (palette.PrimaryColor, palette.SecondaryColor),
@@ -381,7 +392,7 @@ public sealed class StatusBarColorPaletteWidget : Gtk.DrawingArea
 		SingleColor colors,
 		string title)
 	{
-		using ColorPickerDialog dialog = new (
+		using ColorPickerDialog dialog = ColorPickerDialog.New (
 			chrome.MainWindow,
 			palette,
 			colors,

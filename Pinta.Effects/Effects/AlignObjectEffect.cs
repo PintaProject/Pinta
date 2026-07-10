@@ -28,7 +28,7 @@ public sealed class AlignObjectEffect : BaseEffect
 	}
 	public override async Task<bool> LaunchConfiguration ()
 	{
-		using AlignmentDialog dialog = new (chrome);
+		using AlignmentDialog dialog = AlignmentDialog.New (chrome);
 
 		// Align to the default position
 		Data.Position = dialog.SelectedPosition;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Mono.Addins;
@@ -9,21 +10,20 @@ using Pinta.Resources;
 
 namespace Pinta.Gui.Addins;
 
-public sealed class AddinManagerDialog : Adw.Window
+[GObject.Subclass<Adw.Window>]
+public sealed partial class AddinManagerDialog
 {
-	private readonly SetupService setup_service;
+	private SetupService setup_service = null!; // NRT - set by factory method
 
-	private readonly AddinListView installed_list;
-	private readonly AddinListView updates_list;
-	private readonly AddinListView gallery_list;
+	private AddinListView installed_list;
+	private AddinListView updates_list;
+	private AddinListView gallery_list;
 
-	private readonly StatusProgressBar progress_bar;
+	private StatusProgressBar progress_bar;
 
-	public AddinManagerDialog (
-		Gtk.Window parent,
-		SetupService service,
-		SystemManager system,
-		IChromeService chrome)
+	[MemberNotNull (nameof (installed_list), nameof (updates_list), nameof (gallery_list))]
+	[MemberNotNull (nameof (progress_bar))]
+	partial void Initialize ()
 	{
 		// TODO - add a dialog for managing the list of repositories.
 		// TODO - support searching through the gallery
@@ -33,14 +33,14 @@ public sealed class AddinManagerDialog : Adw.Window
 		Gtk.Button installFileButton = CreateInstallFileButton ();
 		Gtk.Button refreshButton = CreateRefreshButton ();
 
-		AddinListView galleryList = CreateAddinList (system, chrome);
-		AddinListView installedList = CreateAddinList (system, chrome);
-		AddinListView updatesList = CreateAddinList (system, chrome);
+		AddinListView galleryList = CreateAddinList ();
+		AddinListView installedList = CreateAddinList ();
+		AddinListView updatesList = CreateAddinList ();
 
 		Adw.ViewStack viewStack = CreateViewStack (galleryList, installedList, updatesList);
 
-		Adw.ToastOverlay toastOverlay = new ();
-		StatusProgressBar progressBar = new (viewStack, new ToastErrorReporter (toastOverlay));
+		Adw.ToastOverlay toastOverlay = Adw.ToastOverlay.New ();
+		StatusProgressBar progressBar = StatusProgressBar.New (viewStack, new ToastErrorReporter (toastOverlay));
 		toastOverlay.Child = progressBar;
 
 		Adw.ViewSwitcherTitle viewSwitcherTitle = Adw.ViewSwitcherTitle.New ();
@@ -52,10 +52,6 @@ public sealed class AddinManagerDialog : Adw.Window
 		headerBar.PackStart (installFileButton);
 		headerBar.PackStart (refreshButton);
 
-		// --- Property assignment (GTK window)
-
-		TransientFor = parent;
-
 		// --- Property assignment (Adwaita window)
 
 		Content = GtkExtensions.BoxVertical ([
@@ -64,17 +60,38 @@ public sealed class AddinManagerDialog : Adw.Window
 
 		// --- References to keep
 
-		this.setup_service = service;
-
 		progress_bar = progressBar;
 
 		gallery_list = galleryList;
 		installed_list = installedList;
 		updates_list = updatesList;
+	}
+
+	private void Configure (
+		Gtk.Window parent,
+		SetupService service,
+		SystemManager system,
+		IChromeService chrome)
+	{
+		TransientFor = parent;
+		this.setup_service = service;
+		installed_list.Configure (system, chrome);
+		updates_list.Configure (system, chrome);
+		gallery_list.Configure (system, chrome);
 
 		// --- Post-initialization
-
 		LoadAll ();
+	}
+
+	public static AddinManagerDialog New (
+		Gtk.Window parent,
+		SetupService service,
+		SystemManager system,
+		IChromeService chrome)
+	{
+		AddinManagerDialog dialog = NewWithProperties ([]);
+		dialog.Configure (parent, service, system, chrome);
+		return dialog;
 	}
 
 	private static Adw.ViewStack CreateViewStack (
@@ -89,9 +106,9 @@ public sealed class AddinManagerDialog : Adw.Window
 		return result;
 	}
 
-	private AddinListView CreateAddinList (SystemManager system, IChromeService chrome)
+	private AddinListView CreateAddinList ()
 	{
-		AddinListView result = new (system, chrome);
+		AddinListView result = AddinListView.New ();
 		result.OnAddinChanged += (_, _) => LoadAll ();
 		return result;
 	}
@@ -262,7 +279,7 @@ public sealed class AddinManagerDialog : Adw.Window
 			.Where (f => !string.IsNullOrEmpty (f))
 			.ToArray ();
 
-		InstallDialog install_dialog = new (this, setup_service); // TODO: dispose properly after making async
+		InstallDialog install_dialog = InstallDialog.New (this, setup_service); // TODO: dispose properly after making async
 		if (install_dialog.InitForInstall (files)) {
 			install_dialog.OnSuccess += (_, _) => LoadAll ();
 			install_dialog.Show ();

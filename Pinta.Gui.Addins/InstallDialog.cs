@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,35 +12,44 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Addins;
 
-internal sealed class InstallDialog : Adw.Window
+[GObject.Subclass<Adw.Window>]
+internal sealed partial class InstallDialog
 {
-	private readonly SetupService service;
+	private SetupService service = null!; // NRT - set in factory method
 	private readonly PackageCollection packages_to_install = [];
 	private IReadOnlyList<string> addins_to_remove = [];
-	private readonly InstallErrorReporter error_reporter;
+	private readonly InstallErrorReporter error_reporter = new ();
 
-	private readonly Adw.WindowTitle window_title;
-	private readonly StatusProgressBar progress_bar;
+	private Adw.WindowTitle window_title;
+	private StatusProgressBar progress_bar;
 
-	private readonly Gtk.Label error_heading_label;
-	private readonly Gtk.Label error_label;
-	private readonly Gtk.Label warning_heading_label;
-	private readonly Gtk.Label warning_label;
-	private readonly Gtk.Label install_heading_label;
-	private readonly Gtk.Label install_label;
-	private readonly Gtk.Label uninstall_heading_label;
-	private readonly Gtk.Label uninstall_label;
-	private readonly Gtk.Label dependencies_heading_label;
-	private readonly Gtk.Label dependencies_label;
+	private Gtk.Label error_heading_label;
+	private Gtk.Label error_label;
+	private Gtk.Label warning_heading_label;
+	private Gtk.Label warning_label;
+	private Gtk.Label install_heading_label;
+	private Gtk.Label install_label;
+	private Gtk.Label uninstall_heading_label;
+	private Gtk.Label uninstall_label;
+	private Gtk.Label dependencies_heading_label;
+	private Gtk.Label dependencies_label;
 
-	private readonly Gtk.Button install_button;
-	private readonly Gtk.Button cancel_button;
+	private Gtk.Button install_button;
+	private Gtk.Button cancel_button;
 
 	public event EventHandler? OnSuccess;
 
-	public InstallDialog (Gtk.Window parent, SetupService service)
+	[MemberNotNull (nameof (window_title))]
+	[MemberNotNull (nameof (progress_bar))]
+	[MemberNotNull (nameof (error_heading_label), nameof (error_label))]
+	[MemberNotNull (nameof (warning_heading_label), nameof (warning_label))]
+	[MemberNotNull (nameof (install_heading_label), nameof (install_label))]
+	[MemberNotNull (nameof (uninstall_heading_label), nameof (uninstall_label))]
+	[MemberNotNull (nameof (dependencies_heading_label), nameof (dependencies_label))]
+	[MemberNotNull (nameof (install_button), nameof (cancel_button))]
+	partial void Initialize ()
 	{
-		Adw.WindowTitle windowTitle = new ();
+		Adw.WindowTitle windowTitle = Adw.WindowTitle.New ("", "");
 
 		BoxStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Horizontal,
@@ -52,34 +62,34 @@ internal sealed class InstallDialog : Adw.Window
 		Gtk.Label errorHeadingLabel = Gtk.Label.New (Translations.GetString ("The selected extension packages can't be installed because there are dependency conflicts."));
 		errorHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Label errorLabel = new ();
+		Gtk.Label errorLabel = Gtk.Label.New (null);
 		errorLabel.AddCssClass (AdwaitaStyles.Body);
 		errorLabel.AddCssClass (AdwaitaStyles.Error);
 
-		Gtk.Label warningHeadingLabel = new ();
+		Gtk.Label warningHeadingLabel = Gtk.Label.New (null);
 		warningHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Label warningLabel = new ();
+		Gtk.Label warningLabel = Gtk.Label.New (null);
 		warningLabel.AddCssClass (AdwaitaStyles.Body);
 		warningLabel.AddCssClass (AdwaitaStyles.Warning);
 
 		Gtk.Label installHeadingLabel = Gtk.Label.New (Translations.GetString ("The following packages will be installed:"));
 		installHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Label installLabel = new ();
+		Gtk.Label installLabel = Gtk.Label.New (null);
 		installLabel.AddCssClass (AdwaitaStyles.Body);
 
 		Gtk.Label uninstallHeadingLabel = Gtk.Label.New (Translations.GetString ("The following packages need to be uninstalled:"));
 		uninstallHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Label uninstallLabel = new ();
+		Gtk.Label uninstallLabel = Gtk.Label.New (null);
 		uninstallLabel.AddCssClass (AdwaitaStyles.Body);
 		uninstallLabel.AddCssClass (AdwaitaStyles.Warning);
 
 		Gtk.Label dependenciesHeadingLabel = Gtk.Label.New (Translations.GetString ("The following dependencies could not be resolved:"));
 		dependenciesHeadingLabel.AddCssClass (AdwaitaStyles.Title4);
 
-		Gtk.Label dependenciesLabel = new ();
+		Gtk.Label dependenciesLabel = Gtk.Label.New (null);
 		dependenciesLabel.AddCssClass (AdwaitaStyles.Body);
 		dependenciesLabel.AddCssClass (AdwaitaStyles.Error);
 
@@ -111,9 +121,7 @@ internal sealed class InstallDialog : Adw.Window
 		scroll.HscrollbarPolicy = Gtk.PolicyType.Never;
 		scroll.Vexpand = true;
 
-		InstallErrorReporter errorReporter = new ();
-
-		StatusProgressBar progressBar = new (scroll, errorReporter);
+		StatusProgressBar progressBar = StatusProgressBar.New (scroll, error_reporter);
 
 		Gtk.Button cancelButton = Gtk.Button.NewWithLabel (Translations.GetString ("Cancel"));
 		cancelButton.OnClicked += (_, _) => Close ();
@@ -132,23 +140,20 @@ internal sealed class InstallDialog : Adw.Window
 		WidthRequest = 500;
 		HeightRequest = 250;
 
-		// --- Initialization (Gtk.Window)
-
-		TransientFor = parent;
-
 		// --- Initialization (Adw.Window)
+
+		Adw.HeaderBar headerBar = Adw.HeaderBar.New ();
+		headerBar.TitleWidget = windowTitle;
 
 		Content = GtkExtensions.Box (
 			spacedVertical,
 			[
-				new Adw.HeaderBar { TitleWidget = windowTitle },
+				headerBar,
 				progressBar,
 				buttons,
 			]);
 
 		// --- References to keep
-
-		this.service = service;
 
 		window_title = windowTitle;
 
@@ -171,8 +176,19 @@ internal sealed class InstallDialog : Adw.Window
 
 		cancel_button = cancelButton;
 		install_button = installButton;
+	}
 
-		error_reporter = errorReporter;
+	private void Configure (Gtk.Window parent, SetupService service)
+	{
+		TransientFor = parent;
+		this.service = service;
+	}
+
+	public static InstallDialog New (Gtk.Window parent, SetupService service)
+	{
+		InstallDialog dialog = NewWithProperties ([]);
+		dialog.Configure (parent, service);
+		return dialog;
 	}
 
 	public void InitForInstall (AddinRepositoryEntry[] addins_to_install)
