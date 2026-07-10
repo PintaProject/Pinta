@@ -35,13 +35,15 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Cairo;
 using Pinta.Core;
 using Pinta.Gui.Widgets;
 
 namespace Pinta.Effects;
 
-public partial class LevelsDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class LevelsDialog
 {
 	private record struct ChannelsMask (bool B, bool G, bool R)
 	{
@@ -68,50 +70,56 @@ public partial class LevelsDialog : Gtk.Dialog
 
 	private ChannelsMask mask = new (R: true, G: true, B: true);
 
-	private readonly Gtk.CheckButton check_red;
-	private readonly Gtk.CheckButton check_green;
-	private readonly Gtk.CheckButton check_blue;
-	private readonly Gtk.Button button_auto;
-	private readonly Gtk.Button button_reset;
-	private readonly Gtk.SpinButton spin_in_low;
-	private readonly Gtk.SpinButton spin_in_high;
-	private readonly Gtk.SpinButton spin_out_low;
-	private readonly Gtk.SpinButton spin_out_high;
-	private readonly Gtk.SpinButton spin_out_gamma;
+	private Gtk.CheckButton check_red;
+	private Gtk.CheckButton check_green;
+	private Gtk.CheckButton check_blue;
+	private Gtk.Button button_auto;
+	private Gtk.Button button_reset;
+	private Gtk.SpinButton spin_in_low;
+	private Gtk.SpinButton spin_in_high;
+	private Gtk.SpinButton spin_out_low;
+	private Gtk.SpinButton spin_out_high;
+	private Gtk.SpinButton spin_out_gamma;
 
-	private readonly ColorGradientWidget gradient_input;
-	private readonly ColorGradientWidget gradient_output;
-	private readonly ColorPanelWidget colorpanel_in_high;
-	private readonly ColorPanelWidget colorpanel_in_low;
-	private readonly ColorPanelWidget colorpanel_out_high;
-	private readonly ColorPanelWidget colorpanel_out_mid;
-	private readonly ColorPanelWidget colorpanel_out_low;
-	private readonly HistogramWidget histogram_input;
-	private readonly HistogramWidget histogram_output;
-	private readonly IChromeService chrome;
-	private readonly IPaletteService palette;
-	private readonly IWorkspaceService workspace;
+	private ColorGradientWidget gradient_input;
+	private ColorGradientWidget gradient_output;
+	private ColorPanelWidget colorpanel_in_high;
+	private ColorPanelWidget colorpanel_in_low;
+	private ColorPanelWidget colorpanel_out_high;
+	private ColorPanelWidget colorpanel_out_mid;
+	private ColorPanelWidget colorpanel_out_low;
+	private HistogramWidget histogram_input;
+	private HistogramWidget histogram_output;
 
-	public LevelsData EffectData { get; }
+	private IChromeService chrome = null!; // NRT - set via factory method
+	private IPaletteService palette = null!;
+	private IWorkspaceService workspace = null!;
 
-	public LevelsDialog (
-		IChromeService chrome,
-		IPaletteService palette,
-		IWorkspaceService workspace,
-		LevelsData effectData)
+	public LevelsData EffectData { get; private set; } = new ();
+
+	[MemberNotNull (nameof (check_red), nameof (check_green), nameof (check_blue))]
+	[MemberNotNull (nameof (button_auto), nameof (button_reset))]
+	[MemberNotNull (nameof (spin_in_low), nameof (spin_in_high), nameof (spin_out_low), nameof (spin_out_high), nameof (spin_out_gamma))]
+	[MemberNotNull (nameof (gradient_input), nameof (gradient_output))]
+	[MemberNotNull (nameof (colorpanel_in_high), nameof (colorpanel_in_low), nameof (colorpanel_out_high), nameof (colorpanel_out_mid), nameof (colorpanel_out_low))]
+	[MemberNotNull (nameof (histogram_input), nameof (histogram_output))]
+	partial void Initialize ()
 	{
 		const int SPACING = 6;
 
 		BoxStyle horizontalSpaced = new (Gtk.Orientation.Horizontal, SPACING);
 		BoxStyle verticalSpaced = new (Gtk.Orientation.Vertical, SPACING);
 
-		Gtk.CheckButton checkRed = new () { Label = Translations.GetString ("Red"), Active = true };
+		Gtk.CheckButton checkRed = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Red"));
+		checkRed.Active = true;
 		checkRed.OnToggled += HandleCheckRedToggled;
 
-		Gtk.CheckButton checkGreen = new () { Label = Translations.GetString ("Green"), Active = true };
+		Gtk.CheckButton checkGreen = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Green"));
+		checkGreen.Active = true;
 		checkGreen.OnToggled += HandleCheckGreenToggled;
 
-		Gtk.CheckButton checkBlue = new () { Label = Translations.GetString ("Blue"), Active = true };
+		Gtk.CheckButton checkBlue = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Blue"));
+		checkBlue.Active = true;
 		checkBlue.OnToggled += HandleCheckBlueToggled;
 
 		Gtk.Box hboxChecks = GtkExtensions.Box (
@@ -146,36 +154,44 @@ public partial class LevelsDialog : Gtk.Dialog
 		spinOutGamma.OnValueChanged += HandleSpinOutGammaValueChanged;
 		spinOutGamma.SetActivatesDefaultImmediate (true);
 
-		ColorGradientWidget gradientInput = new (2) { WidthRequest = 40 };
+		ColorGradientWidget gradientInput = ColorGradientWidget.New (2);
+		gradientInput.WidthRequest = 40;
 		gradientInput.DragGesture.OnDragBegin += HandleGradientDragBegin;
 		gradientInput.DragGesture.OnDragEnd += HandleGradientDragEnd;
 		gradientInput.ValueChanged += HandleGradientInputValueChanged;
 
-		ColorGradientWidget gradientOutput = new (3) { WidthRequest = 40 };
+		ColorGradientWidget gradientOutput = ColorGradientWidget.New (3);
+		gradientOutput.WidthRequest = 40;
 		gradientOutput.DragGesture.OnDragBegin += HandleGradientDragBegin;
 		gradientOutput.DragGesture.OnDragEnd += HandleGradientDragEnd;
 		gradientOutput.ValueChanged += HandleGradientOutputValueChanged;
 
-		ColorPanelWidget colorPanelInHigh = new () { HeightRequest = 24 };
+		ColorPanelWidget colorPanelInHigh = ColorPanelWidget.New ();
+		colorPanelInHigh.HeightRequest = 24;
 		colorPanelInHigh.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
 
-		ColorPanelWidget colorPanelInLow = new () {
-			HeightRequest = 24,
-			Valign = Gtk.Align.End,
-			Vexpand = true
-		};
+		ColorPanelWidget colorPanelInLow = ColorPanelWidget.New ();
+		colorPanelInLow.HeightRequest = 24;
+		colorPanelInLow.Valign = Gtk.Align.End;
+		colorPanelInLow.Vexpand = true;
 		colorPanelInLow.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
 
-		ColorPanelWidget colorPanelOutLow = new () { HeightRequest = 24 };
+		ColorPanelWidget colorPanelOutLow = ColorPanelWidget.New ();
+		colorPanelOutLow.HeightRequest = 24;
 		colorPanelOutLow.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
 
-		ColorPanelWidget colorPanelOutMid = new () { HeightRequest = 24 };
+		ColorPanelWidget colorPanelOutMid = ColorPanelWidget.New ();
+		colorPanelOutMid.HeightRequest = 24;
 
-		ColorPanelWidget colorPanelOutHigh = new () { HeightRequest = 24 };
+		ColorPanelWidget colorPanelOutHigh = ColorPanelWidget.New ();
+		colorPanelOutHigh.HeightRequest = 24;
 		colorPanelOutHigh.ClickGesture.OnPressed += HandleColorPanelButtonPressEvent;
 
-		HistogramWidget histogramInput = new () { WidthRequest = 130, FlipHorizontal = true };
-		HistogramWidget histogramOutput = new () { WidthRequest = 130 };
+		HistogramWidget histogramInput = HistogramWidget.New ();
+		histogramInput.WidthRequest = 130;
+		histogramInput.FlipHorizontal = true;
+		HistogramWidget histogramOutput = HistogramWidget.New ();
+		histogramOutput.WidthRequest = 130;
 
 		Gtk.Box vboxInput = GtkExtensions.Box (
 			verticalSpaced,
@@ -243,17 +259,10 @@ public partial class LevelsDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Levels Adjustment");
-		TransientFor = chrome.MainWindow;
 		Modal = true;
 		Resizable = false;
 
 		// --- Initialization (LevelsDialog)
-
-		this.chrome = chrome;
-		this.palette = palette;
-		this.workspace = workspace;
-
-		EffectData = effectData;
 
 		// --- TODO: Refactor
 
@@ -282,11 +291,6 @@ public partial class LevelsDialog : Gtk.Dialog
 		Gtk.Box contentArea = this.GetContentAreaBox ();
 		contentArea.Append (hboxLayout);
 
-		UpdateInputHistogram ();
-		Reset ();
-		UpdateLevels ();
-		MaskChanged ();
-
 		Gtk.Box CreateLabelledWidget (Gtk.Widget widget, string label)
 		{
 			widget.Vexpand = true;
@@ -305,6 +309,27 @@ public partial class LevelsDialog : Gtk.Dialog
 
 			return vbox;
 		}
+	}
+
+	public static LevelsDialog New (
+		IChromeService chrome,
+		IPaletteService palette,
+		IWorkspaceService workspace,
+		LevelsData effectData)
+	{
+		LevelsDialog dialog = NewWithProperties ([]);
+		dialog.TransientFor = chrome.MainWindow;
+		dialog.chrome = chrome;
+		dialog.palette = palette;
+		dialog.workspace = workspace;
+		dialog.EffectData = effectData;
+
+		dialog.UpdateInputHistogram ();
+		dialog.Reset ();
+		dialog.UpdateLevels ();
+		dialog.MaskChanged ();
+
+		return dialog;
 	}
 
 	private UnaryPixelOps.Level Levels {
@@ -630,16 +655,15 @@ public partial class LevelsDialog : Gtk.Dialog
 		ColorPanelWidget panel = (ColorPanelWidget?) controller.GetWidget () ??
 				throw new Exception ("Controller widget should be non-null");
 
-		using ColorPickerDialog ccd = new (
+		using ColorPickerDialog ccd = ColorPickerDialog.New (
 			chrome.MainWindow,
 			palette,
 			new SingleColor (panel.CairoColor),
 			primarySelected: true,
 			livePalette: false,
 			windowTitle: Translations.GetString ("Choose Color")
-		) {
-			Modal = true
-		};
+		);
+		ccd.Modal = true;
 
 		try {
 			Gtk.ResponseType response = await ccd.RunAsync ();

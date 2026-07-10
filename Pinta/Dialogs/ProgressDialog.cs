@@ -25,21 +25,25 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class ProgressDialog : Gtk.Dialog, IProgressDialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class ProgressDialog : IProgressDialog
 {
-	private readonly Gtk.Label text_label;
-	private readonly Gtk.ProgressBar progress_bar;
+	private Gtk.Label text_label;
+	private Gtk.ProgressBar progress_bar;
 
 	public event EventHandler? Canceled;
 
-	public ProgressDialog (ChromeManager chrome)
+	[MemberNotNull (nameof (text_label))]
+	[MemberNotNull (nameof (progress_bar))]
+	partial void Initialize ()
 	{
-		Gtk.Label textLabel = new ();
-		Gtk.ProgressBar progressBar = new ();
+		Gtk.Label textLabel = Gtk.Label.New ("");
+		Gtk.ProgressBar progressBar = Gtk.ProgressBar.New ();
 
 		// --- References to keep
 
@@ -52,7 +56,6 @@ public sealed class ProgressDialog : Gtk.Dialog, IProgressDialog
 
 		// --- Initialization (Gtk.Window)
 
-		TransientFor = chrome.MainWindow;
 		Modal = true;
 		DefaultWidth = 400;
 		DefaultHeight = 114;
@@ -68,6 +71,13 @@ public sealed class ProgressDialog : Gtk.Dialog, IProgressDialog
 		AddButton (Translations.GetString ("_Cancel"), (int) Gtk.ResponseType.Cancel);
 
 		OnResponse += (_, args) => Canceled?.Invoke (this, EventArgs.Empty);
+	}
+
+	public static ProgressDialog New (IChromeService chrome)
+	{
+		ProgressDialog dialog = NewWithProperties ([]);
+		dialog.TransientFor = chrome.MainWindow;
+		return dialog;
 	}
 
 	public new string Title {

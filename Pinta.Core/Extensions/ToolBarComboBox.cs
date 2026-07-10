@@ -29,24 +29,23 @@ using System.Collections.Generic;
 
 namespace Pinta.Core;
 
-public sealed class ToolBarComboBox : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+public sealed partial class ToolBarComboBox
 {
-	public Gtk.ComboBoxText ComboBox { get; }
+	public Gtk.ComboBoxText ComboBox { get; private set; } = null!; // NRT - set in factory method
 
-	public ToolBarComboBox (int width, int activeIndex, bool allowEntry)
-		: this (width, activeIndex, allowEntry, [])
-	{ }
+	public static ToolBarComboBox New (int width, int activeIndex, bool allowEntry)
+		=> New (width, activeIndex, allowEntry, []);
 
-	public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
-		: this (width, activeIndex, allowEntry, (IEnumerable<string>) contents)
-	{ }
+	public static ToolBarComboBox New (int width, int activeIndex, bool allowEntry, params string[] contents)
+		=> New (width, activeIndex, allowEntry, (IEnumerable<string>) contents);
 
-	public ToolBarComboBox (int width, int activeIndex, bool allowEntry, IEnumerable<string> contents)
+	public static ToolBarComboBox New (int width, int activeIndex, bool allowEntry, IEnumerable<string> contents)
 	{
 		Gtk.ComboBoxText comboBox =
 			allowEntry
 			? Gtk.ComboBoxText.NewWithEntry ()
-			: new ();
+			: Gtk.ComboBoxText.New ();
 
 		comboBox.CanFocus = allowEntry;
 
@@ -58,33 +57,34 @@ public sealed class ToolBarComboBox : Gtk.Box
 		if (activeIndex >= 0)
 			comboBox.Active = activeIndex;
 
-		comboBox.OnChanged += ComboBox_OnChanged;
+		comboBox.OnChanged += OnComboBoxChanged;
 
-		// --- Initialization (Gtk.Widget)
+		ToolBarComboBox widget = NewWithProperties ([]);
+		widget.Append (comboBox);
+		widget.ComboBox = comboBox;
+		return widget;
+	}
 
+	partial void Initialize ()
+	{
 		Hexpand = false;
-
-		// --- Initialization (Gtk.Box)
-
 		SetOrientation (Gtk.Orientation.Horizontal);
 		Spacing = 0;
 
-		Append (comboBox);
-
-		// --- References to keep
-
-		ComboBox = comboBox;
+		// The combobox is inserted by the factory methods.
+		// TODO - replace deprecated Gtk.ComboBox with a wrapper around Gtk.Dropdown,
+		// and create a separate class for editable dropdowns.
 	}
 
-	private void ComboBox_OnChanged (Gtk.ComboBox _, EventArgs __)
+	private static void OnComboBoxChanged (Gtk.ComboBox comboBox, EventArgs __)
 	{
 		// Return focus to the canvas after selecting a combobox item, which normally focuses the entry widget.
 		// We don't want this if the user is actually typing in the entry, of course.
 
-		if (!ComboBox.HasEntry)
+		if (!comboBox.HasEntry)
 			return;
 
-		if (!ComboBox.GetEntry ().IsEditingText ()) {
+		if (!comboBox.GetEntry ().IsEditingText ()) {
 			GLib.Functions.IdleAdd (0, () => {
 				if (PintaCore.Workspace.HasOpenDocuments)
 					PintaCore.Workspace.ActiveWorkspace.GrabFocusToCanvas ();

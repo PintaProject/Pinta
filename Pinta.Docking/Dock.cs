@@ -1,19 +1,19 @@
-//  
+//
 // Author:
 //       Cameron White <cameronwhite91@gmail.com>
-// 
+//
 // Copyright (c) 2020 Cameron White
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,6 +22,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 
 namespace Pinta.Docking;
@@ -29,15 +30,17 @@ namespace Pinta.Docking;
 /// <summary>
 /// The root widget, containing all dock items underneath it.
 /// </summary>
-public sealed class Dock : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+public sealed partial class Dock
 {
-	private readonly Gtk.Paned pane;
+	private Gtk.Paned pane;
 
-	public DockPanel RightPanel { get; } = new ();
+	public DockPanel RightPanel { get; } = DockPanel.New ();
 
-	public Dock ()
+	[MemberNotNull (nameof (pane))]
+	partial void Initialize ()
 	{
-		Gtk.Paned pane = Gtk.Paned.New (Gtk.Orientation.Horizontal);
+		pane = Gtk.Paned.New (Gtk.Orientation.Horizontal);
 		pane.EndChild = RightPanel;
 		pane.ResizeEndChild = false;
 		pane.ShrinkEndChild = false;
@@ -46,11 +49,9 @@ public sealed class Dock : Gtk.Box
 
 		SetOrientation (Gtk.Orientation.Horizontal);
 		Append (pane);
-
-		// --- References to keep
-
-		this.pane = pane;
 	}
+
+	public static Dock New () => NewWithProperties ([]);
 
 	public void AddItem (DockItem item, DockPlacement placement)
 	{
