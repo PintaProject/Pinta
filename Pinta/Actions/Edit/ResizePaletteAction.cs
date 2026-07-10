@@ -1,21 +1,21 @@
-// 
+//
 // ResizePaletteAction.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -65,17 +65,17 @@ internal sealed class ResizePaletteAction : IActionHandler
 
 	private async Task<int?> PromptResize ()
 	{
-		using SpinButtonEntryDialog dialog = new (
-			Translations.GetString ("Resize Palette"),
-			chrome.MainWindow,
-			Translations.GetString ("New palette size:"),
-			1,
-			96,
-			palette.CurrentPalette.Colors.Count);
+		using SpinButtonEntryDialog dialog = SpinButtonEntryDialog.New ();
+		dialog.Title = Translations.GetString ("Resize Palette");
+		dialog.TransientFor = chrome.MainWindow;
+		dialog.LabelText = Translations.GetString ("New palette size:");
+		dialog.SetRange (1, 96);
+		dialog.Value = palette.CurrentPalette.Colors.Count;
+
 		try {
 			Gtk.ResponseType response = await dialog.RunAsync ();
 			if (response != Gtk.ResponseType.Ok) return null;
-			return dialog.GetValue ();
+			return dialog.Value;
 		} finally {
 			dialog.Destroy ();
 		}
