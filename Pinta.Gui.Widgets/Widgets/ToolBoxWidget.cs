@@ -4,28 +4,35 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class ToolBoxWidget : Gtk.FlowBox
+[GObject.Subclass<Gtk.FlowBox>]
+public sealed partial class ToolBoxWidget
 {
-	private readonly ToolManager tools;
-	// Stores the button corresponding to each tool.
+	private ToolManager tools = null!; // NRT - set in factory method
+					   // Stores the button corresponding to each tool.
 	private readonly Dictionary<BaseTool, Gtk.ToggleButton> tool_buttons = new ();
 	// Dummy ToggleButton to use for grouping together the tools' buttons.
 	private readonly Gtk.ToggleButton toggle_group = Gtk.ToggleButton.New ();
 
-	public ToolBoxWidget (ToolManager tools)
+	partial void Initialize ()
 	{
-		tools.ToolAdded += (_, e) => HandleToolAdded (e.Tool);
-		tools.ToolRemoved += (_, e) => HandleToolRemoved (e.Tool);
-		tools.ToolActivated += (_, e) => HandleToolActivated (e.Tool);
-
-		// --- Initialization (Gtk.FlowBox)
-
 		SetOrientation (Gtk.Orientation.Vertical);
 		MinChildrenPerLine = 8; // Pinta 3 has 22 default tools, meaning a max of 3 columns regardless of size, smaller values don't lead to better use of visual space.
 		MaxChildrenPerLine = 1024; // Allow for single column if there's sufficient space to do so.
 		SelectionMode = Gtk.SelectionMode.None; // Don't allow the buttons to be selected.
+	}
 
-		// --- References to keep
+	public static ToolBoxWidget New (ToolManager tools)
+	{
+		ToolBoxWidget widget = NewWithProperties ([]);
+		widget.Configure (tools);
+		return widget;
+	}
+
+	private void Configure (ToolManager tools)
+	{
+		tools.ToolAdded += (_, e) => HandleToolAdded (e.Tool);
+		tools.ToolRemoved += (_, e) => HandleToolRemoved (e.Tool);
+		tools.ToolActivated += (_, e) => HandleToolActivated (e.Tool);
 
 		this.tools = tools;
 	}

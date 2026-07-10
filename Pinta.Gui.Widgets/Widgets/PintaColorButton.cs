@@ -3,7 +3,8 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-internal sealed class PintaColorButton : Gtk.Button
+[GObject.Subclass<Gtk.Button>]
+internal sealed partial class PintaColorButton
 {
 	private Color display_color = Color.Black;
 	public Color DisplayColor {
@@ -15,17 +16,17 @@ internal sealed class PintaColorButton : Gtk.Button
 		}
 	}
 
-	private readonly Gtk.DrawingArea color_drawing_area;
-	internal PintaColorButton ()
+	private readonly Gtk.DrawingArea color_drawing_area = Gtk.DrawingArea.New ();
+
+	partial void Initialize ()
 	{
-		Gtk.DrawingArea colorDrawingArea = new () {
-			Hexpand = true,
-			Vexpand = true,
-		};
-		colorDrawingArea.SetDrawFunc (OnDraw);
-		SetChild (colorDrawingArea);
-		color_drawing_area = colorDrawingArea;
+		color_drawing_area.Hexpand = true;
+		color_drawing_area.Vexpand = true;
+		color_drawing_area.SetDrawFunc (OnDraw);
+		SetChild (color_drawing_area);
 	}
+
+	public static new PintaColorButton New () => NewWithProperties ([]);
 
 	private void OnDraw (
 		Gtk.DrawingArea drawingArea,

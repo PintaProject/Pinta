@@ -26,20 +26,28 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class LayersListView : Gtk.ScrolledWindow
+[GObject.Subclass<Gtk.ScrolledWindow>]
+public sealed partial class LayersListView
 {
-	private readonly Gio.ListStore list_model;
-	private readonly Gtk.SingleSelection selection_model;
-	private readonly Gtk.ListView list_view;
+	private Gio.ListStore list_model;
+	private Gtk.SingleSelection selection_model;
+	private Gtk.ListView list_view;
 	private Document? active_document;
 	private bool changing_selection = false;
 
-	public LayersListView ()
+	public static new LayersListView New ()
+		=> NewWithProperties ([]);
+
+	[MemberNotNull (nameof (list_model))]
+	[MemberNotNull (nameof (selection_model))]
+	[MemberNotNull (nameof (list_view))]
+	partial void Initialize ()
 	{
 		// --- Control creaton
 
@@ -82,7 +90,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 		Gtk.SignalListItemFactory.SetupSignalArgs args)
 	{
 		var item = (Gtk.ListItem) args.Object;
-		item.SetChild (new LayersListViewItemWidget ());
+		item.SetChild (LayersListViewItemWidget.New ());
 	}
 
 	private static void HandleFactoryBind (
@@ -157,7 +165,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 			return;
 
 		foreach (var layer in doc.Layers.UserLayers.Reverse ())
-			list_model.Append (new LayersListViewItem (doc, layer));
+			list_model.Append (LayersListViewItem.New (doc, layer));
 
 		// Update our selection to match the document's active layer.
 		int currentModelIndex = doc.Layers.Count () - 1 - doc.Layers.CurrentUserLayerIndex;
@@ -190,7 +198,7 @@ public sealed class LayersListView : Gtk.ScrolledWindow
 		ArgumentNullException.ThrowIfNull (active_document);
 
 		int index = active_document.Layers.Count () - 1 - e.Index;
-		list_model.Insert ((uint) index, new LayersListViewItem (active_document, active_document.Layers[e.Index]));
+		list_model.Insert ((uint) index, LayersListViewItem.New (active_document, active_document.Layers[e.Index]));
 		list_view.ScrollToSelectedItem (selection_model);
 	}
 

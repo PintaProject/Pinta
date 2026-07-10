@@ -40,7 +40,8 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class SimpleEffectDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class SimpleEffectDialog
 {
 	const uint EVENT_DELAY_MILLIS = 100;
 	uint event_delay_timeout_id;
@@ -48,7 +49,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 	private delegate bool TimeoutHandler ();
 	TimeoutHandler? timeout_func;
 
-	private readonly EffectData effect_data;
+	private EffectData effect_data = null!; // NRT - set by factory method
 
 	// Track widgets with conditional visibility/enabled, so we can update
 	// them when the effect data changes
@@ -61,21 +62,10 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 	/// Since this dialog is used by add-ins, the IAddinLocalizer allows for translations to be
 	/// fetched from the appropriate place.
-	/// </param>
-	public SimpleEffectDialog (
-		Gtk.Window parent,
-		string title,
-		string iconName,
-		EffectData effectData,
-		IAddinLocalizer localizer,
-		IWorkspaceService workspace)
+	partial void Initialize ()
 	{
 		// --- Initialization (Gtk.Window)
-
-		Title = title;
-		TransientFor = parent;
 		Modal = true;
-		IconName = iconName;
 		WidthRequest = 400;
 		Resizable = false;
 
@@ -89,13 +79,31 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		Gtk.Box contentAreaBox = this.GetContentAreaBox ();
 		contentAreaBox.Spacing = 12;
 		contentAreaBox.SetAllMargins (6);
-		foreach (var widget in GenerateDialogWidgets (effectData, localizer, workspace))
-			contentAreaBox.Append (widget);
 
 		OnClose += (_, _) => HandleClose ();
+	}
+
+	public static SimpleEffectDialog New (
+		Gtk.Window parent,
+		string title,
+		string iconName,
+		EffectData effectData,
+		IAddinLocalizer localizer,
+		IWorkspaceService workspace)
+	{
+		SimpleEffectDialog dialog = NewWithProperties ([]);
+		dialog.TransientFor = parent;
+		dialog.Title = title;
+		dialog.IconName = iconName;
+
+		Gtk.Box contentAreaBox = dialog.GetContentAreaBox ();
+		foreach (var widget in dialog.GenerateDialogWidgets (effectData, localizer, workspace))
+			contentAreaBox.Append (widget);
 
 		// Keep reference to effect data, so it can be used for handling conditional widgets
-		effect_data = effectData;
+		dialog.effect_data = effectData;
+
+		return dialog;
 	}
 
 	/// <summary>
@@ -112,7 +120,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		if (effect.EffectData == null)
 			throw new ArgumentException ($"{effect.EffectData} should not be null", nameof (effect));
 
-		using SimpleEffectDialog dialog = new (
+		using SimpleEffectDialog dialog = SimpleEffectDialog.New (
 			parent,
 			effect.Name,
 			effect.Icon,
@@ -338,16 +346,15 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? c
 			: Color.Black;
 
-		PintaColorButton colorButton = new () {
-			DisplayColor = currentColorCairo,
-			Hexpand = false,
-			Halign = Gtk.Align.Start,
-			WidthRequest = 80,
-		};
+		PintaColorButton colorButton = PintaColorButton.New ();
+		colorButton.DisplayColor = currentColorCairo;
+		colorButton.Hexpand = false;
+		colorButton.Halign = Gtk.Align.Start;
+		colorButton.WidthRequest = 80;
 
 		colorButton.OnClicked += async (_, _) => {
 
-			using ColorPickerDialog dialog = new (
+			using ColorPickerDialog dialog = ColorPickerDialog.New (
 				this,
 				PintaCore.Palette,
 				new SingleColor (currentColorCairo),
@@ -408,7 +415,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			labels.Add (kvp.Key);
 		}
 
-		ComboBoxWidget widget = new (labels) { Label = caption };
+		ComboBoxWidget widget = ComboBoxWidget.New (labels);
+		widget.Label = caption;
 
 		if (settings.reflector.GetValue (effectData) is object obj)
 			widget.Active = Array.IndexOf (memberNames, obj.ToString ());
@@ -435,7 +443,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? []
 			: dict.Keys.ToImmutableArray ();
 
-		ComboBoxWidget widget = new (entries) { Label = caption };
+		ComboBoxWidget widget = ComboBoxWidget.New (entries);
+		widget.Label = caption;
 
 		if (settings.reflector.GetValue (effectData) is string s)
 			widget.Active = entries.IndexOf (s);
@@ -458,13 +467,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		var attributes = settings.reflector.Attributes;
 
-		HScaleSpinButtonWidget widget = new (initialValue) {
-			Label = caption,
-			MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100),
-			MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100),
-			IncrementValue = attributes.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (0.01),
-			DigitsValue = attributes.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (2),
-		};
+		HScaleSpinButtonWidget widget = HScaleSpinButtonWidget.New (initialValue);
+		widget.Label = caption;
+		widget.MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100);
+		widget.MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100);
+		widget.IncrementValue = attributes.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (0.01);
+		widget.DigitsValue = attributes.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (2);
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
@@ -489,13 +497,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		var attributes = settings.reflector.Attributes;
 
-		HScaleSpinButtonWidget widget = new (initialValue) {
-			Label = caption,
-			MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100),
-			MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100),
-			IncrementValue = attributes.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (1.0),
-			DigitsValue = attributes.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (0),
-		};
+		HScaleSpinButtonWidget widget = HScaleSpinButtonWidget.New (initialValue);
+		widget.Label = caption;
+		widget.MinimumValue = attributes.OfType<MinimumValueAttribute> ().Select (m => m.Value).FirstOrDefault (-100);
+		widget.MaximumValue = attributes.OfType<MaximumValueAttribute> ().Select (m => m.Value).FirstOrDefault (100);
+		widget.IncrementValue = attributes.OfType<IncrementValueAttribute> ().Select (i => i.Value).FirstOrDefault (1.0);
+		widget.DigitsValue = attributes.OfType<DigitsValueAttribute> ().Select (d => d.Value).FirstOrDefault (0);
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
@@ -513,7 +520,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberSettings settings,
 		IWorkspaceService workspace)
 	{
-		Gtk.CheckButton widget = new () { Label = caption };
+		Gtk.CheckButton widget = Gtk.CheckButton.NewWithLabel (caption);
 
 		if (settings.reflector.GetValue (effectData) is bool b)
 			widget.Active = b;
@@ -529,7 +536,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 		MemberSettings settings,
 		IWorkspaceService workspace)
 	{
-		PointPickerWidget widget = new (workspace, PointI.Zero) { Label = caption };
+		PointPickerWidget widget = PointPickerWidget.New (workspace, PointI.Zero);
+		widget.Label = caption;
 
 		widget.PointPicked += (_, _) => SetAndNotify (
 			settings.reflector,
@@ -550,11 +558,12 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? p
 			: default;
 
-		PointPickerWidget widget = new (
+		PointPickerWidget widget = PointPickerWidget.New (
 			workspace,
 			initialPoint,
 			adjustToWidgetSize: initialPoint == default // If point is (0,0) assume it's first run
-		) { Label = caption };
+		);
+		widget.Label = caption;
 
 		widget.PointPicked += (_, _) => SetAndNotify (
 			settings.reflector,
@@ -575,7 +584,8 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			? d
 			: default;
 
-		AnglePickerWidget widget = new (initialAngle) { Label = caption };
+		AnglePickerWidget widget = AnglePickerWidget.NewWithAngle (initialAngle);
+		widget.Label = caption;
 
 		widget.ValueChanged += (_, _) => {
 			DelayedUpdate (() => {
@@ -620,7 +630,7 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 
 		Random random = new ();
 
-		Gtk.Label sectionLabel = new ();
+		Gtk.Label sectionLabel = Gtk.Label.New (null);
 		sectionLabel.AddCssClass (AdwaitaStyles.Title4);
 		sectionLabel.Hexpand = false;
 		sectionLabel.Halign = Gtk.Align.Start;
@@ -636,23 +646,20 @@ public sealed class SimpleEffectDialog : Gtk.Dialog
 			});
 		};
 
-		Gtk.Button reseedButton = new () {
-			WidthRequest = 88,
-			CanFocus = true,
-			UseUnderline = true,
-			Label = Translations.GetString ("Reseed"),
-			Hexpand = false,
-			Halign = Gtk.Align.Start,
-		};
+		Gtk.Button reseedButton = Gtk.Button.NewWithLabel (Translations.GetString ("Reseed"));
+		reseedButton.WidthRequest = 88;
+		reseedButton.CanFocus = true;
+		reseedButton.UseUnderline = true;
+		reseedButton.Hexpand = false;
+		reseedButton.Halign = Gtk.Align.Start;
 
 		reseedButton.OnClicked += (_, _) => seedInput.Value = random.Next (minSeed, maxSeed);
 
-		Gtk.Box controlsBox = new () { Spacing = 6 };
-		controlsBox.SetOrientation (Gtk.Orientation.Horizontal);
+		Gtk.Box controlsBox = Gtk.Box.New (Gtk.Orientation.Horizontal, spacing: 6);
 		controlsBox.Append (reseedButton);
 		controlsBox.Append (seedInput);
 
-		Gtk.Box combinedWidget = Gtk.Box.New (Gtk.Orientation.Vertical, 6);
+		Gtk.Box combinedWidget = Gtk.Box.New (Gtk.Orientation.Vertical, spacing: 6);
 		combinedWidget.Append (sectionLabel);
 		combinedWidget.Append (controlsBox);
 

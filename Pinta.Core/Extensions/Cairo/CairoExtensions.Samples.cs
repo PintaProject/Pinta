@@ -355,16 +355,14 @@ partial class CairoExtensions
 	{
 		GLib.Bytes bytes = GLib.Bytes.New (surface.GetData ());
 
-		Gdk.MemoryTextureBuilder builder = new () {
-			Bytes = bytes,
-			Stride = (ulong) surface.Stride,
-			Width = surface.Width,
-			Height = surface.Height,
-			Format = Gdk.MemoryFormat.B8g8r8a8Premultiplied,
-			UpdateTexture = updateTexture,
-			UpdateRegion = updateRegion ?? CairoExtensions.CreateRegion (RectangleI.Zero)
-
-		};
+		Gdk.MemoryTextureBuilder builder = Gdk.MemoryTextureBuilder.New ();
+		builder.Bytes = bytes;
+		builder.Stride = (ulong) surface.Stride;
+		builder.Width = surface.Width;
+		builder.Height = surface.Height;
+		builder.Format = Gdk.MemoryFormat.B8g8r8a8Premultiplied;
+		builder.UpdateTexture = updateTexture;
+		builder.UpdateRegion = updateRegion ?? CairoExtensions.CreateRegion (RectangleI.Zero);
 
 		return builder.Build ();
 	}

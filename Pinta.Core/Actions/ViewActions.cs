@@ -168,7 +168,7 @@ public sealed class ViewActions
 			shortcuts: ["F11"]);
 
 		ZoomCollection = default_zoom_levels;
-		ZoomComboBox = new ToolBarComboBox (90, DefaultZoomIndex (), true, ZoomCollection);
+		ZoomComboBox = ToolBarComboBox.New (90, DefaultZoomIndex (), true, ZoomCollection);
 
 		// The toolbar is shown by default.
 		ToolBar.Value = true;
