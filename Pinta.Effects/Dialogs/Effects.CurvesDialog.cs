@@ -26,21 +26,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Cairo;
 using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class CurvesDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class CurvesDialog
 {
-	private readonly Gtk.ComboBoxText combo_map;
-	private readonly Gtk.Label label_point;
-	private readonly Gtk.DrawingArea curves_drawing;
-	private readonly Gtk.CheckButton check_red;
-	private readonly Gtk.CheckButton check_green;
-	private readonly Gtk.CheckButton check_blue;
-	private readonly Gtk.Button button_reset;
-	private readonly Gtk.Label label_tip;
+	private Gtk.ComboBoxText combo_map;
+	private Gtk.Label label_point;
+	private Gtk.DrawingArea curves_drawing;
+	private Gtk.CheckButton check_red;
+	private Gtk.CheckButton check_green;
+	private Gtk.CheckButton check_blue;
 
 	private sealed record ControlPointDrawingInfo (
 		Color Color,
@@ -74,11 +74,11 @@ public sealed class CurvesDialog : Gtk.Dialog
 		? ColorTransferMode.Rgb
 		: ColorTransferMode.Luminosity;
 
-	public CurvesData EffectData { get; }
+	public CurvesData EffectData { get; private set; } = new ();
 
-	public CurvesDialog (
-		IChromeService chrome,
-		CurvesData effectData)
+	[MemberNotNull (nameof (combo_map), nameof (label_point), nameof (curves_drawing))]
+	[MemberNotNull (nameof (check_red), nameof (check_green), nameof (check_blue))]
+	partial void Initialize ()
 	{
 		const int SPACING = 6;
 
@@ -114,11 +114,10 @@ public sealed class CurvesDialog : Gtk.Dialog
 			checkBlue,
 			buttonReset]);
 
-		Gtk.DrawingArea curvesDrawing = new () {
-			WidthRequest = 256,
-			HeightRequest = 256,
-			CanFocus = true,
-		};
+		Gtk.DrawingArea curvesDrawing = Gtk.DrawingArea.New ();
+		curvesDrawing.WidthRequest = 256;
+		curvesDrawing.HeightRequest = 256;
+		curvesDrawing.CanFocus = true;
 		curvesDrawing.SetAllMargins (8);
 		curvesDrawing.SetDrawFunc ((area, context, width, height) => HandleDrawingDrawnEvent (context));
 		curvesDrawing.AddController (motionController);
@@ -136,8 +135,6 @@ public sealed class CurvesDialog : Gtk.Dialog
 		// --- Gtk.Window initialization
 
 		Title = Translations.GetString ("Curves");
-
-		TransientFor = chrome.MainWindow;
 
 		Modal = true;
 
@@ -159,20 +156,20 @@ public sealed class CurvesDialog : Gtk.Dialog
 		check_red = checkRed;
 		check_green = checkGreen;
 		check_blue = checkBlue;
+	}
 
-		button_reset = buttonReset;
-
-		label_tip = labelTip;
-
-		// --- Initialization
-
-		EffectData = effectData;
-		ResetControlPoints ();
+	public static CurvesDialog New (IChromeService chrome, CurvesData effectData)
+	{
+		CurvesDialog dialog = NewWithProperties ([]);
+		dialog.TransientFor = chrome.MainWindow;
+		dialog.EffectData = effectData;
+		dialog.ResetControlPoints ();
+		return dialog;
 	}
 
 	private Gtk.ComboBoxText CreateComboMap ()
 	{
-		Gtk.ComboBoxText result = new ();
+		Gtk.ComboBoxText result = Gtk.ComboBoxText.New ();
 		result.AppendText (Translations.GetString ("RGB"));
 		result.AppendText (Translations.GetString ("Luminosity"));
 		result.Active = 1;
@@ -205,13 +202,11 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	private Gtk.Button CreateResetButton ()
 	{
-		Gtk.Button result = new () {
-			WidthRequest = 81,
-			HeightRequest = 30,
-			Label = Translations.GetString ("Reset"),
-			Halign = Gtk.Align.End,
-			Hexpand = true,
-		};
+		Gtk.Button result = Gtk.Button.NewWithLabel (Translations.GetString ("Reset"));
+		result.WidthRequest = 81;
+		result.HeightRequest = 30;
+		result.Halign = Gtk.Align.End;
+		result.Hexpand = true;
 		result.OnClicked += HandleButtonResetClicked;
 		return result;
 
@@ -226,7 +221,8 @@ public sealed class CurvesDialog : Gtk.Dialog
 
 	private Gtk.CheckButton CreateColorCheck (string label)
 	{
-		Gtk.CheckButton result = new () { Label = label, Active = true };
+		Gtk.CheckButton result = Gtk.CheckButton.NewWithLabel (label);
+		result.Active = true;
 		result.Hide ();
 		result.OnToggled += (_, _) => InvalidateDrawing ();
 		return result;

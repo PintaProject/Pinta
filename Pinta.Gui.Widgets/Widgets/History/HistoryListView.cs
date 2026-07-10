@@ -26,19 +26,27 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class HistoryListView : Gtk.ScrolledWindow
+[GObject.Subclass<Gtk.ScrolledWindow>]
+public sealed partial class HistoryListView
 {
-	private readonly Gio.ListStore model;
-	private readonly Gtk.SingleSelection selection_model;
-	private readonly Gtk.ListView list_view;
+	private Gio.ListStore model;
+	private Gtk.SingleSelection selection_model;
+	private Gtk.ListView list_view;
 
 	private Document? active_document;
 
-	public HistoryListView ()
+	public static new HistoryListView New ()
+		=> NewWithProperties ([]);
+
+	[MemberNotNull (nameof (model))]
+	[MemberNotNull (nameof (selection_model))]
+	[MemberNotNull (nameof (list_view))]
+	partial void Initialize ()
 	{
 		Gio.ListStore listModel = Gio.ListStore.New (HistoryListViewItem.GetGType ());
 
@@ -48,7 +56,7 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 		Gtk.SignalListItemFactory signalFactory = Gtk.SignalListItemFactory.New ();
 		signalFactory.OnSetup += (factory, args) => {
 			var item = (Gtk.ListItem) args.Object;
-			item.SetChild (new HistoryItemWidget ());
+			item.SetChild (HistoryItemWidget.New ());
 		};
 		signalFactory.OnBind += (factory, args) => {
 			var list_item = (Gtk.ListItem) args.Object;
@@ -120,7 +128,7 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 			return;
 
 		foreach (BaseHistoryItem item in doc.History.Items)
-			model.Append (new HistoryListViewItem (item));
+			model.Append (HistoryListViewItem.New (item));
 
 		// Move selection to the document's current history item.
 		if (model.NItems > 0) {
@@ -143,7 +151,7 @@ public sealed class HistoryListView : Gtk.ScrolledWindow
 		// Remove any stale (previously undone) items before adding the new item.
 		model.RemoveMultiple (idx, model.GetNItems () - idx);
 
-		model.Append (new HistoryListViewItem (args.Item));
+		model.Append (HistoryListViewItem.New (args.Item));
 		selection_model.SetSelected (idx);
 		list_view.ScrollToSelectedItem (selection_model);
 	}

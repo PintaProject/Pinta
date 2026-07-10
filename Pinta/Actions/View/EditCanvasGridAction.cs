@@ -50,7 +50,7 @@ internal sealed class EditCanvasGridAction : IActionHandler
 			canvas_grid.AxonometricWidth,
 			canvas_grid.AxonometricAngle);
 
-		using CanvasGridSettingsDialog dialog = new (chrome, initialSettings);
+		using CanvasGridSettingsDialog dialog = CanvasGridSettingsDialog.New (chrome, initialSettings);
 
 		try {
 			dialog.Updated += HandleDialogUpdate;

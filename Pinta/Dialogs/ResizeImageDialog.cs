@@ -1,21 +1,21 @@
-// 
+//
 // ResizeImageDialog.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,25 +25,32 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Pinta.Core;
 
 namespace Pinta;
 
-public sealed class ResizeImageDialog : Gtk.Dialog
+[GObject.Subclass<Gtk.Dialog>]
+public sealed partial class ResizeImageDialog
 {
-	private readonly Gtk.SpinButton percentage_spinner;
-	private readonly Gtk.SpinButton width_spinner;
-	private readonly Gtk.SpinButton height_spinner;
-	private readonly Gtk.CheckButton aspect_checkbox;
-	private readonly Gtk.CheckButton percentage_radio;
-	private readonly Gtk.ComboBoxText resampling_combobox;
-	private readonly IWorkspaceService workspace;
-	private readonly ISettingsService settings;
+	private Gtk.SpinButton percentage_spinner;
+	private Gtk.SpinButton width_spinner;
+	private Gtk.SpinButton height_spinner;
+	private Gtk.CheckButton aspect_checkbox;
+	private Gtk.CheckButton percentage_radio;
+	private Gtk.CheckButton absolute_radio;
+	private Gtk.ComboBoxText resampling_combobox;
+
+	private IWorkspaceService workspace = null!; // NRT - set by factory method
+	private ISettingsService settings = null!;
+
 	private bool value_changing;
 
 	const int SPACING = 6;
 
-	internal ResizeImageDialog (IChromeService chrome, IWorkspaceService workspace, ISettingsService settings)
+	[MemberNotNull (nameof (percentage_spinner), nameof (width_spinner), nameof (height_spinner))]
+	[MemberNotNull (nameof (aspect_checkbox), nameof (absolute_radio), nameof (percentage_radio), nameof (resampling_combobox))]
+	partial void Initialize ()
 	{
 		BoxStyle spacedHorizontal = new (
 			orientation: Gtk.Orientation.Horizontal,
@@ -54,29 +61,23 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 			spacing: SPACING);
 
 		Gtk.SpinButton percentageSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		percentageSpinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_PERCENTAGE, 100);
 		percentageSpinner.OnValueChanged += percentageSpinner_ValueChanged;
 		percentageSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.SpinButton widthSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		widthSpinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_WIDTH, workspace.ImageSize.Width);
 		widthSpinner.OnValueChanged += widthSpinner_ValueChanged;
 		widthSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.SpinButton heightSpinner = Gtk.SpinButton.NewWithRange (1, int.MaxValue, 1);
-		heightSpinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_HEIGHT, workspace.ImageSize.Height);
 		heightSpinner.OnValueChanged += heightSpinner_ValueChanged;
 		heightSpinner.SetActivatesDefaultImmediate (true);
 
 		Gtk.CheckButton aspectCheckbox = Gtk.CheckButton.NewWithLabel (Translations.GetString ("Maintain aspect ratio"));
-		aspectCheckbox.Active = settings.GetSetting (SettingNames.RESIZE_IMAGE_MAINTAIN_ASPECT, true);
 
-		Gtk.Button resetButton = new () {
-			IconName = Resources.StandardIcons.EditUndo,
-			WidthRequest = 24,
-			HeightRequest = 24,
-			TooltipText = Translations.GetString ("Reset to image size"),
-		};
+		Gtk.Button resetButton = Gtk.Button.NewFromIconName (Resources.StandardIcons.EditUndo);
+		resetButton.WidthRequest = 24;
+		resetButton.HeightRequest = 24;
+		resetButton.TooltipText = Translations.GetString ("Reset to image size");
 		resetButton.OnClicked += OnResetButtonClicked;
 
 		Gtk.CheckButton percentageRadio = Gtk.CheckButton.NewWithLabel (Translations.GetString ("By percentage:"));
@@ -110,7 +111,6 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 			GObject.BindingFlags.SyncCreate);
 
 		Gtk.ComboBoxText resamplingCombobox = CreateResamplingCombobox ();
-		resamplingCombobox.Active = settings.GetSetting (SettingNames.RESIZE_IMAGE_RESAMPLING, 0);
 
 		Gtk.Box hboxPercent = GtkExtensions.Box (
 			spacedHorizontal,
@@ -126,11 +126,10 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		Gtk.Label heightLabel = Gtk.Label.New (Translations.GetString ("Height:"));
 		heightLabel.Halign = Gtk.Align.End;
 
-		Gtk.Grid grid = new () {
-			RowSpacing = SPACING,
-			ColumnSpacing = SPACING,
-			ColumnHomogeneous = false,
-		};
+		Gtk.Grid grid = Gtk.Grid.New ();
+		grid.RowSpacing = SPACING;
+		grid.ColumnSpacing = SPACING;
+		grid.ColumnHomogeneous = false;
 		grid.Attach (widthLabel, 0, 0, 1, 1);
 		grid.Attach (widthSpinner, 1, 0, 1, 1);
 		grid.Attach (Gtk.Label.New (Translations.GetString ("pixels")), 2, 0, 1, 1);
@@ -153,7 +152,6 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Resize Image");
-		TransientFor = chrome.MainWindow;
 		Modal = true;
 
 		IconName = Resources.Icons.ImageResize;
@@ -173,26 +171,43 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 		contentArea.SetAllMargins (12);
 		contentArea.Append (mainVbox);
 
-		percentageSpinner.GrabFocus ();
-
 		// --- References to keep
 
 		percentage_spinner = percentageSpinner;
 		width_spinner = widthSpinner;
 		height_spinner = heightSpinner;
 		aspect_checkbox = aspectCheckbox;
+		absolute_radio = absoluteRadio;
 		percentage_radio = percentageRadio;
 		resampling_combobox = resamplingCombobox;
+	}
 
+	private void Configure (IChromeService chrome, IWorkspaceService workspace, ISettingsService settings)
+	{
+		TransientFor = chrome.MainWindow;
 		this.workspace = workspace;
 		this.settings = settings;
 
-		// Final initialization
+		width_spinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_WIDTH, workspace.ImageSize.Width);
+		height_spinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_HEIGHT, workspace.ImageSize.Height);
+		percentage_spinner.Value = settings.GetSetting (SettingNames.RESIZE_IMAGE_PERCENTAGE, 100);
+		aspect_checkbox.Active = settings.GetSetting (SettingNames.RESIZE_IMAGE_MAINTAIN_ASPECT, true);
+		resampling_combobox.Active = settings.GetSetting (SettingNames.RESIZE_IMAGE_RESAMPLING, 0);
 
+		// Final initialization
 		if (settings.GetSetting (SettingNames.RESIZE_IMAGE_USE_PERCENTAGE, true))
-			percentageRadio.Active = true;
+			percentage_radio.Active = true;
 		else
-			absoluteRadio.Active = true;
+			absolute_radio.Active = true;
+
+		percentage_spinner.GrabFocus ();
+	}
+
+	internal static ResizeImageDialog New (IChromeService chrome, IWorkspaceService workspace, ISettingsService settings)
+	{
+		ResizeImageDialog dialog = NewWithProperties ([]);
+		dialog.Configure (chrome, workspace, settings);
+		return dialog;
 	}
 
 	private void OnDialogResponse (Gtk.Dialog sender, ResponseSignalArgs args)
@@ -211,10 +226,9 @@ public sealed class ResizeImageDialog : Gtk.Dialog
 
 	private static Gtk.ComboBoxText CreateResamplingCombobox ()
 	{
-		Gtk.ComboBoxText result = new () {
-			Hexpand = true,
-			Halign = Gtk.Align.Fill,
-		};
+		Gtk.ComboBoxText result = Gtk.ComboBoxText.New ();
+		result.Hexpand = true;
+		result.Halign = Gtk.Align.Fill;
 
 		foreach (ResamplingMode mode in Enum.GetValues (typeof (ResamplingMode)))
 			result.AppendText (mode.GetLabel ());

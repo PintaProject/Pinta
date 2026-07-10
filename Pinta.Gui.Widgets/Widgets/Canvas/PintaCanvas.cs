@@ -26,16 +26,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class PintaCanvas : Gtk.Picture
+[GObject.Subclass<Gtk.Picture>]
+internal sealed partial class PintaCanvas
 {
-	private readonly CanvasRenderer cr;
-	private readonly Document document;
-	private readonly ICanvasGridService canvas_grid;
+	private CanvasRenderer cr = null!; // NRT - set by factory method
+	private Document document = null!;
+	private ICanvasGridService canvas_grid = null!;
+	private IToolService tools = null!;
 
 	private uint queued_update_id = 0;
 
@@ -46,29 +49,18 @@ public sealed class PintaCanvas : Gtk.Picture
 	private RectangleI? modified_area;
 
 	private Gsk.Path? selection_path;
-	private readonly uint selection_animation_timer_id;
+	private uint selection_animation_timer_id;
 	private float selection_animation_dash_offset;
 
-	private readonly ToolManager tools;
-
-	public PintaCanvas (
-		ToolManager tools,
-		Document document,
-		ICanvasGridService canvasGrid)
+	[MemberNotNull (nameof (cr))]
+	[MemberNotNull (nameof (selection_animation_timer_id))]
+	partial void Initialize ()
 	{
-		this.tools = tools;
-		canvas_grid = canvasGrid;
-		this.document = document;
-
 		cr = new (
 			PintaCore.LivePreview,
 			PintaCore.Workspace,
 			enableLivePreview: true,
 			enableBackgroundPattern: false);
-
-		document.Workspace.ViewSizeChanged += OnViewSizeChanged;
-		document.Workspace.CanvasInvalidated += OnCanvasInvalidated;
-		document.SelectionChanged += (_, _) => QueueSelectionUpdate ();
 
 		// Timer for selection outline animation
 		selection_animation_timer_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, 80, SelectionAnimationTick);
@@ -78,6 +70,26 @@ public sealed class PintaCanvas : Gtk.Picture
 		Halign = Gtk.Align.Center;
 		Vexpand = false;
 		Valign = Gtk.Align.Center;
+	}
+
+	/// <summary>
+	/// NOTE: must call Configure() for dependency injection.
+	/// </summary>
+	public static new PintaCanvas New ()
+	{
+		PintaCanvas canvas = NewWithProperties ([]);
+		return canvas;
+	}
+
+	internal void Configure (IToolService tools, Document document, ICanvasGridService canvasGrid)
+	{
+		this.tools = tools;
+		canvas_grid = canvasGrid;
+		this.document = document;
+
+		document.Workspace.ViewSizeChanged += OnViewSizeChanged;
+		document.Workspace.CanvasInvalidated += OnCanvasInvalidated;
+		document.SelectionChanged += (_, _) => QueueSelectionUpdate ();
 	}
 
 	/// <summary>

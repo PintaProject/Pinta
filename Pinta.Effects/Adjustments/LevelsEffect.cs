@@ -46,10 +46,9 @@ public sealed class LevelsEffect : BaseEffect
 	public override async Task<bool> LaunchConfiguration ()
 	{
 		// TODO: Delegate `EffectData` changes to event handlers or similar
-		using LevelsDialog dialog = new (chrome, palette, workspace, Data) {
-			Title = Name,
-			IconName = Icon,
-		};
+		using LevelsDialog dialog = LevelsDialog.New (chrome, palette, workspace, Data);
+		dialog.Title = Name;
+		dialog.IconName = Icon;
 
 		Gtk.ResponseType response = await dialog.RunAsync ();
 

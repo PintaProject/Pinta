@@ -1,21 +1,21 @@
-// 
+//
 // PointPickerGraphic.cs
-//  
+//
 // Author:
 //       Olivier Dufour <olivier.duff@gmail.com>
-// 
+//
 // Copyright (c) 2010 Olivier Dufour
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,14 +30,15 @@ using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-public sealed class PointPickerGraphic : Gtk.DrawingArea
+[GObject.Subclass<Gtk.DrawingArea>]
+public sealed partial class PointPickerGraphic
 {
 	private ImageSurface? thumbnail;
 	private PointI position;
 	private PointD drag_start;
-	private readonly IWorkspaceService workspace;
+	private IWorkspaceService workspace = null!; // NRT - set by factory method
 
-	public PointPickerGraphic (IWorkspaceService workspace)
+	partial void Initialize ()
 	{
 		// TODO-GTK (improvement) - the allocated width should depend on the image aspect ratio. See the old GTK3 implementation
 		HeightRequest = WidthRequest = 65;
@@ -65,8 +66,20 @@ public sealed class PointPickerGraphic : Gtk.DrawingArea
 		};
 
 		AddController (dragGesture);
+	}
 
+	public void Configure (IWorkspaceService workspace)
+	{
 		this.workspace = workspace;
+	}
+
+	/// <summary>
+	/// NOTE: must call Configure() for dependency injection
+	/// </summary>
+	public static new PointPickerGraphic New ()
+	{
+		PointPickerGraphic widget = NewWithProperties ([]);
+		return widget;
 	}
 
 	private void UpdateThumbnail ()

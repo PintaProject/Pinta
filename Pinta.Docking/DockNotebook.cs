@@ -1,19 +1,19 @@
-//  
+//
 // Author:
 //       Cameron White <cameronwhite91@gmail.com>
-// 
+//
 // Copyright (c) 2020 Cameron White
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,6 +25,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Pinta.Core;
 
@@ -40,21 +41,23 @@ public sealed class TabEventArgs (IDockNotebookItem? item) : EventArgs
 	public IDockNotebookItem? Item { get; } = item;
 }
 
-public sealed class DockNotebook : Gtk.Box
+[GObject.Subclass<Gtk.Box>]
+public sealed partial class DockNotebook
 {
-	private readonly Adw.TabView tab_view;
-	private readonly Adw.TabBar tab_bar;
+	private Adw.TabView tab_view;
+	private Adw.TabBar tab_bar;
 	private readonly HashSet<IDockNotebookItem> items = [];
 
-	public DockNotebook ()
+	[MemberNotNull (nameof (tab_view))]
+	[MemberNotNull (nameof (tab_bar))]
+	partial void Initialize ()
 	{
-		Adw.TabView tabView = new () {
-			Vexpand = true,
-			Valign = Gtk.Align.Fill,
-		};
+		Adw.TabView tabView = Adw.TabView.New ();
+		tabView.Vexpand = true;
+		tabView.Valign = Gtk.Align.Fill;
 		tabView.OnClosePage += TabView_OnClosePage;
 
-		Adw.TabBar tabBar = new ();
+		Adw.TabBar tabBar = Adw.TabBar.New ();
 		tabBar.SetView (tabView);
 		tabBar.Autohide = true;
 		tabBar.AddCssClass (AdwaitaStyles.Inline);
@@ -77,6 +80,8 @@ public sealed class DockNotebook : Gtk.Box
 		// Emit an event when the current tab is changed.
 		Adw.TabView.SelectedPagePropertyDefinition.Notify (tabView, TabView_TabChanged);
 	}
+
+	public static DockNotebook New () => NewWithProperties ([]);
 
 	private void TabView_TabChanged (GObject.Object _, NotifySignalArgs __)
 	{

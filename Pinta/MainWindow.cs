@@ -76,7 +76,7 @@ internal sealed class MainWindow
 		// Initialize interface things
 		_ = new ActionHandlers ();
 
-		PintaCore.Chrome.InitializeProgessDialog (new ProgressDialog (PintaCore.Chrome));
+		PintaCore.Chrome.InitializeProgessDialog (ProgressDialog.New (PintaCore.Chrome));
 		PintaCore.Chrome.InitializeErrorDialogHandler (ErrorDialog.ShowError);
 		PintaCore.Chrome.InitializeMessageDialog (ErrorDialog.ShowMessage);
 		PintaCore.Chrome.InitializeSimpleEffectDialog (SimpleEffectDialog.Launch);
@@ -177,13 +177,12 @@ internal sealed class MainWindow
 		var notebook = canvas_pad.Notebook;
 		int selected_index = notebook.ActiveItemIndex;
 
-		CanvasWindow canvas = new (
+		CanvasWindow canvas = CanvasWindow.New (
 			PintaCore.Chrome,
 			PintaCore.Tools,
-			doc, PintaCore.CanvasGrid) {
-			RulersVisible = PintaCore.Actions.View.Rulers.Value,
-			RulerMetric = GetCurrentRulerMetric ()
-		};
+			doc, PintaCore.CanvasGrid);
+		canvas.RulersVisible = PintaCore.Actions.View.Rulers.Value;
+		canvas.RulerMetric = GetCurrentRulerMetric ();
 		doc.Workspace.CanvasWindow = canvas;
 		doc.Workspace.Canvas = canvas.Canvas;
 
@@ -479,15 +478,11 @@ internal sealed class MainWindow
 	{
 		Gtk.Box statusbar = window_shell.CreateStatusBar ("statusbar");
 
-		statusbar.Append (
-			new StatusBarColorPaletteWidget (
-				PintaCore.Chrome,
-				PintaCore.Palette,
-				PintaCore.System) {
-				Hexpand = true,
-				Halign = Gtk.Align.Fill,
-			}
-		);
+		StatusBarColorPaletteWidget widget = StatusBarColorPaletteWidget.New (PintaCore.Chrome, PintaCore.Palette, PintaCore.System);
+		widget.Hexpand = true;
+		widget.Halign = Gtk.Align.Fill;
+
+		statusbar.Append (widget);
 
 		PintaCore.Actions.CreateStatusBar (statusbar, PintaCore.Workspace);
 
@@ -502,24 +497,23 @@ internal sealed class MainWindow
 
 	private void CreateDockAndPads (Gtk.Box container)
 	{
-		ToolBoxWidget toolbox = new (PintaCore.Tools);
+		ToolBoxWidget toolbox = ToolBoxWidget.New (PintaCore.Tools);
 
-		Gtk.ScrolledWindow toolbox_scroll = new () {
-			Child = toolbox,
-			HscrollbarPolicy = Gtk.PolicyType.Never,
-			VscrollbarPolicy = Gtk.PolicyType.Never,
-			HasFrame = false,
-			OverlayScrolling = true,
-			WindowPlacement = Gtk.CornerType.BottomRight,
-		};
+		Gtk.ScrolledWindow toolbox_scroll = Gtk.ScrolledWindow.New ();
+		toolbox_scroll.Child = toolbox;
+		toolbox_scroll.HscrollbarPolicy = Gtk.PolicyType.Never;
+		toolbox_scroll.VscrollbarPolicy = Gtk.PolicyType.Never;
+		toolbox_scroll.HasFrame = false;
+		toolbox_scroll.OverlayScrolling = true;
+		toolbox_scroll.WindowPlacement = Gtk.CornerType.BottomRight;
+
 		container.Append (toolbox_scroll);
 		PintaCore.Chrome.InitializeToolBox (toolbox);
 
 		// Dock widget
-		dock = new Dock {
-			Hexpand = true,
-			Halign = Gtk.Align.Fill,
-		};
+		dock = Dock.New ();
+		dock.Hexpand = true;
+		dock.Halign = Gtk.Align.Fill;
 		PintaCore.Chrome.InitializeDock (dock);
 
 		// Canvas pad

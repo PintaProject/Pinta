@@ -114,7 +114,7 @@ internal sealed class NewDocumentAction : IActionHandler
 
 	private async Task<NewImageOptions?> PromptNewImage (NewImageDialogOptions options)
 	{
-		using NewImageDialog dialog = new (
+		using NewImageDialog dialog = NewImageDialog.New (
 			chrome,
 			palette,
 			options.Size,
