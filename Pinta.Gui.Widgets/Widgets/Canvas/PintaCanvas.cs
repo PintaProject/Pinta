@@ -63,7 +63,9 @@ internal sealed partial class PintaCanvas
 			enableBackgroundPattern: false);
 
 		// Timer for selection outline animation
-		selection_animation_timer_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, 80, SelectionAnimationTick);
+		bool selectionAnimation = PintaCore.Settings.GetSetting ( SettingNames.SELECTION_ANIMATION, true);
+		if (selectionAnimation)
+			selection_animation_timer_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, 80, SelectionAnimationTick);
 
 		// If there is additional space available, keep the image centered and prevent stretching.
 		Hexpand = false;
