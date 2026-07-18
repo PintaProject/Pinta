@@ -31,6 +31,15 @@ namespace Pinta.Core;
 
 partial class GtkExtensions
 {
+	private static void DisableFullscreenDialogOnMac (Gtk.Window window)
+	{
+		if (SystemManager.GetOperatingSystem () != OS.Mac)
+			return;
+
+		if (window.TransientFor?.IsFullscreen () == true)
+			window.Unfullscreen ();
+	}
+
 	public static async Task<Gio.File?> OpenFileAsync (
 		this Gtk.FileDialog fileDialog,
 		Gtk.Window parent)
@@ -84,6 +93,9 @@ partial class GtkExtensions
 		string response = "";
 		var loop = GLib.MainLoop.New (null, false);
 
+		if (dialog is Gtk.Window window)
+			DisableFullscreenDialogOnMac (window);
+
 		if (!dialog.Modal)
 			dialog.Modal = true;
 
@@ -134,6 +146,8 @@ partial class GtkExtensions
 		Gtk.ResponseType response = Gtk.ResponseType.None;
 		GLib.MainLoop loop = GLib.MainLoop.New (null, false);
 
+		DisableFullscreenDialogOnMac (dialog);
+
 		if (!dialog.Modal)
 			dialog.Modal = true;
 
@@ -174,6 +188,9 @@ partial class GtkExtensions
 	{
 		TaskCompletionSource<string> completionSource = new ();
 
+		if (dialog is Gtk.Window window)
+			DisableFullscreenDialogOnMac (window);
+
 		void ResponseCallback (
 			Adw.MessageDialog sender,
 			Adw.MessageDialog.ResponseSignalArgs args)
@@ -192,6 +209,8 @@ partial class GtkExtensions
 	{
 		TaskCompletionSource<Gtk.ResponseType> completionSource = new ();
 
+		DisableFullscreenDialogOnMac (dialog);
+
 		void ResponseCallback (
 			Gtk.Dialog sender,
 			Gtk.Dialog.ResponseSignalArgs args)
@@ -209,6 +228,7 @@ partial class GtkExtensions
 	public static Task PresentAsync (this Gtk.Window window)
 	{
 		TaskCompletionSource completionSource = new ();
+		DisableFullscreenDialogOnMac (window);
 
 		bool CloseRequestCallback (
 			Gtk.Window sender,
