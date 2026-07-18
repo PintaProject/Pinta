@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Cairo;
 
@@ -140,6 +141,7 @@ public sealed class Document
 	/// <summary>
 	/// Whether the document is associated with a file on disk.
 	/// </summary>
+	[MemberNotNullWhen(true, nameof(File))]
 	public bool HasFile => file is not null;
 
 	/// Whether or not the document has been saved to the file that it is currently associated with in the
@@ -445,4 +447,15 @@ public sealed class Document
 	public event EventHandler? Renamed;
 	public event LayerCloneEvent? LayerCloned;
 	public event EventHandler? SelectionChanged;
+
+	private bool is_autosave_dirty;
+	public bool IsAutosaveDirty {
+		get => is_autosave_dirty;
+		set => is_autosave_dirty = value;
+	}
+	private uint autosave_files_index;
+	public uint AutosaveFilesIndex {
+		get => autosave_files_index;
+		set => autosave_files_index = value;
+	}
 }
