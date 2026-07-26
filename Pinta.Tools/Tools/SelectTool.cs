@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -39,6 +40,9 @@ public abstract class SelectTool : BaseTool
 
 	private SelectionHistoryItem? hist = default;
 	private CombineMode combine_mode = default;
+	private Separator? mode_sep;
+	private Label? movable_view_label;
+	private CheckButton? movable_view;
 
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
 	public override bool IsSelectionTool => true;
@@ -62,6 +66,12 @@ public abstract class SelectTool : BaseTool
 	{
 		base.OnBuildToolBar (tb);
 		workspace.SelectionHandler.BuildToolbar (tb, Settings);
+
+		tb.Append (Separator);
+
+		tb.Append (MovableViewLabel);
+		tb.Append (MovableView);
+		MovableView.Active = true;
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -101,6 +111,29 @@ public abstract class SelectTool : BaseTool
 		ReDraw (document);
 
 		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
+
+		if (!MovableView.Active)
+			return;
+
+		var view = (Gtk.Viewport) document.Workspace.Canvas.Parent!;
+		var h_adjust = view.GetHadjustment ()!.PageSize;
+		var v_adjust = view.GetVadjustment ()!.PageSize;
+
+		//step of 10 pixels or of 2% of visible area, whichever is greater
+		int canvasStep = (int)Math.Max (10, h_adjust * 0.02);
+
+		PointI direction = default;
+		if (e.RootPoint.X < 0)
+			direction = new PointI (-canvasStep, 0); //move left
+		if (e.RootPoint.Y < 0)
+			direction = new PointI (0, -canvasStep); //move up
+		if (e.RootPoint.X > h_adjust)
+			direction = new PointI (canvasStep, 0); //move right
+		if (e.RootPoint.Y > v_adjust)
+			direction = new PointI (0, canvasStep); //move down
+
+		if (direction != default)
+			document.Workspace.ScrollCanvas (direction);
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
@@ -211,4 +244,8 @@ public abstract class SelectTool : BaseTool
 		handle.Rectangle = selection.HandleBounds;
 		ShowHandles (document.Selection.Visible && tools.CurrentTool == this);
 	}
+
+	private Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
+	private Label MovableViewLabel => movable_view_label ??= Label.New ((string.Format (" {0}: ", Translations.GetString ("Movable view"))));
+	private CheckButton MovableView => movable_view ??= CheckButton.New ();
 }
