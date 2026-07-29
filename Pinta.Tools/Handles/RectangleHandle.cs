@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cairo;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -31,6 +32,10 @@ public class RectangleHandle : IToolHandle
 	private MoveHandle? active_handle;
 	private PointD? drag_start_pos;
 
+	// Resize cursors ordered by screen-space octant [E, SE, S, SW, W, NW, N, NE],
+	// so a direction vector can pick the glyph that matches an oriented grip (issue #4).
+	private readonly Gdk.Cursor[] direction_cursors;
+
 	public RectangleHandle (IWorkspaceService workspace)
 	{
 		this.workspace = workspace;
@@ -49,6 +54,47 @@ public class RectangleHandle : IToolHandle
 
 		foreach (var handle in handles.Values)
 			handle.Active = true;
+
+		direction_cursors = [
+			GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeE),
+			GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSE),
+			GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeS),
+			GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeSW),
+			GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeW),
+			GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNW),
+			GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeN),
+			GdkExtensions.CursorFromName (Resources.StandardCursors.ResizeNE),
+		];
+	}
+
+	// Each grip's cursor octant when axis-aligned, in the [E,SE,S,SW,W,NW,N,NE]
+	// order of direction_cursors. Corners sit on odd (diagonal) octants, edges on
+	// even (straight) ones — a grip keeps its family as the content rotates.
+	private static readonly Dictionary<HandlePoint, int> base_octant = new () {
+		{ HandlePoint.Right, 0 },
+		{ HandlePoint.LowerRight, 1 },
+		{ HandlePoint.Down, 2 },
+		{ HandlePoint.LowerLeft, 3 },
+		{ HandlePoint.Left, 4 },
+		{ HandlePoint.UpperLeft, 5 },
+		{ HandlePoint.Up, 6 },
+		{ HandlePoint.UpperRight, 7 },
+	};
+
+	/// <summary>
+	/// Picks the resize cursor for a grip rotated by <paramref name="thetaDeg"/>
+	/// from its axis-aligned <paramref name="baseOct"/>. Snaps within the grip's
+	/// own family (90° apart) so a corner always shows a diagonal glyph and an
+	/// edge a straight one, each pointing along the rotated content. Glyphs are
+	/// 180°-symmetric, so flips resolve too.
+	/// </summary>
+	private Gdk.Cursor DirectionCursor (int baseOct, double thetaDeg)
+	{
+		int parity = baseOct & 1; // 0 = straight/edge, 1 = diagonal/corner
+		double rotatedDeg = baseOct * 45.0 + thetaDeg;
+		int k = (int) Math.Round ((rotatedDeg - parity * 45.0) / 90.0);
+		int oct = ((parity + 2 * k) % 8 + 8) % 8;
+		return direction_cursors[oct];
 	}
 
 	#region IToolHandle Implementation
@@ -72,9 +118,34 @@ public class RectangleHandle : IToolHandle
 	public bool InvertIfNegative { get; init; }
 
 	/// <summary>
+	/// Optional transform applied to the handle positions so the grips can
+	/// follow rotated / oriented content instead of an axis-aligned box
+	/// (issue #4). Null = axis-aligned. Draw and hit-testing both use the
+	/// resulting oriented <see cref="MoveHandle.CanvasPosition"/>s.
+	/// </summary>
+	public Matrix? Orientation { get; set; }
+
+	/// <summary>
+	/// Set the reference rectangle and its orientation in one step, so the
+	/// handle positions are recomputed once with the orientation applied.
+	/// </summary>
+	public void SetOriented (RectangleD rect, Matrix? orientation)
+	{
+		Orientation = orientation;
+		Rectangle = rect; // triggers UpdateHandlePositions with the orientation applied
+	}
+
+	/// <summary>
 	/// Whether the user is currently dragging a corner of the rectangle.
 	/// </summary>
 	public bool IsDragging => drag_start_pos is not null;
+
+	/// <summary>
+	/// Which handle is currently being dragged, if any. Lets the transform
+	/// tools apply their own aspect-ratio / center-anchored scaling.
+	/// </summary>
+	internal HandlePoint? ActiveHandlePoint
+		=> active_handle is null ? null : handles.First (kvp => kvp.Value == active_handle).Key;
 
 	/// <summary>
 	/// The rectangle selected by the user.
@@ -183,6 +254,17 @@ public class RectangleHandle : IToolHandle
 		handles[HandlePoint.Up].CanvasPosition = new PointD (center.X, start_pt.Y);
 		handles[HandlePoint.Right].CanvasPosition = new PointD (end_pt.X, center.Y);
 		handles[HandlePoint.Down].CanvasPosition = new PointD (center.X, end_pt.Y);
+
+		if (Orientation is not null) {
+			// Screen-space rotation of the content = angle of the transformed X axis.
+			PointD o0 = Orientation.TransformPoint (new PointD (0, 0));
+			PointD o1 = Orientation.TransformPoint (new PointD (1, 0));
+			double thetaDeg = Math.Atan2 (o1.Y - o0.Y, o1.X - o0.X) * 180.0 / Math.PI;
+			foreach ((HandlePoint point, MoveHandle handle) in handles) {
+				handle.CanvasPosition = Orientation.TransformPoint (handle.CanvasPosition);
+				handle.Cursor = DirectionCursor (base_octant[point], thetaDeg);
+			}
+		}
 	}
 
 	private void UpdateHandleUnderPoint (PointD viewPos)

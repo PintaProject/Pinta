@@ -35,7 +35,7 @@ public sealed class MoveHandle : IToolHandle
 	/// </summary>
 	public bool Selected { get; set; } = false;
 
-	public Gdk.Cursor Cursor { get; init; } = default_cursor;
+	public Gdk.Cursor Cursor { get; set; } = default_cursor;
 
 	/// <summary>
 	/// Tests whether the window point is inside the handle's area.

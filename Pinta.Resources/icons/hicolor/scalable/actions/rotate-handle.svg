@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="24" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- white halo for contrast against any background - non-symbolic keeps colors -->
+  <g stroke="#ffffff" stroke-width="4.2">
+   <path d="M18.13 6.86 A 8 8 0 1 1 18.13 17.14"/>
+   <path d="M15.6 6.0 L18.13 6.86 L19.4 9.1"/>
+   <path d="M15.6 18.0 L18.13 17.14 L19.4 14.9"/>
+  </g>
+  <!-- dark rotation arc with arrowheads on both ends -->
+  <g stroke="#1a1a1a" stroke-width="2.4">
+   <path d="M18.13 6.86 A 8 8 0 1 1 18.13 17.14"/>
+   <path d="M15.6 6.0 L18.13 6.86 L19.4 9.1"/>
+   <path d="M15.6 18.0 L18.13 17.14 L19.4 14.9"/>
+  </g>
+ </g>
+</svg>

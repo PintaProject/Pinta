@@ -206,6 +206,9 @@ public static class Icons
 	public const string LayerNew = "layers-add-layer-symbolic";
 	public const string LayerProperties = "document-properties-symbolic";
 	public const string LayerRotateZoom = "layers-rotate-zoom-symbolic";
+	// Bidirectional rotate cursor for the transform tools' Alt-drag rotation.
+	// Non-symbolic so the white halo + dark stroke survive (symbolic recolors to a single color).
+	public const string RotateHandle = "rotate-handle";
 
 	public const string Pinta = "com.github.PintaProject.Pinta";
 
