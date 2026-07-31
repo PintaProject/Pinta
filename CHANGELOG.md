@@ -38,6 +38,7 @@ Thanks to the following contributors who worked on this release:
 - The Clone Stamp tool now visualizes the position of the clone origin (#1923, #2190)
 
 ### Changed
+- Effect dialogs no longer dim the canvas during live previews (#1334, reported by @prokoudine)
 - Upgraded the minimum required .NET version to 10.0 (#2081)
 - Updated dependencies to require libadwaita 1.8+
 - Migrated to the Tmds.DBus.Protocol library for compile-time code generation (#2199)

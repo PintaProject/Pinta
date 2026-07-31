@@ -74,7 +74,7 @@ public sealed partial class AlignmentDialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Align Object");
-		Modal = true;
+		Modal = false;
 		Resizable = false;
 
 		// --- Initialization (Gtk.Dialog)

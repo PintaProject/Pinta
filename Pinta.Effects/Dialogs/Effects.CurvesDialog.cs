@@ -136,7 +136,7 @@ public sealed partial class CurvesDialog
 
 		Title = Translations.GetString ("Curves");
 
-		Modal = true;
+		Modal = false;
 
 		Resizable = false;
 

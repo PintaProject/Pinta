@@ -52,7 +52,7 @@ public sealed partial class PosterizeDialog
 		DefaultHeight = 300;
 
 		Title = Translations.GetString ("Posterize");
-		Modal = true;
+		Modal = false;
 
 		Resizable = false;
 

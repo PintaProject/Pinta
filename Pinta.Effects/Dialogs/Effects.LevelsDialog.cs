@@ -259,7 +259,7 @@ public sealed partial class LevelsDialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Levels Adjustment");
-		Modal = true;
+		Modal = false;
 		Resizable = false;
 
 		// --- Initialization (LevelsDialog)

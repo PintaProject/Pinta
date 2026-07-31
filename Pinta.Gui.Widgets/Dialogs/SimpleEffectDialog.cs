@@ -65,7 +65,7 @@ public sealed partial class SimpleEffectDialog
 	partial void Initialize ()
 	{
 		// --- Initialization (Gtk.Window)
-		Modal = true;
+		Modal = false;
 		WidthRequest = 400;
 		Resizable = false;
 
