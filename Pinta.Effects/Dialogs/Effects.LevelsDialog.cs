@@ -259,7 +259,9 @@ public sealed partial class LevelsDialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Levels Adjustment");
-		Modal = true;
+		// Issue #1334 (reported by @prokoudine): do not dim the canvas while
+		// adjusting a live effect preview.
+		Modal = false;
 		Resizable = false;
 
 		// --- Initialization (LevelsDialog)

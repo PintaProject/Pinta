@@ -65,7 +65,10 @@ public sealed partial class SimpleEffectDialog
 	partial void Initialize ()
 	{
 		// --- Initialization (Gtk.Window)
-		Modal = true;
+		// Issue #1334 (reported by @prokoudine): modal effect dialogs dim the
+		// canvas on some desktop environments, changing the apparent colors
+		// while the live preview is being evaluated.
+		Modal = false;
 		WidthRequest = 400;
 		Resizable = false;
 

@@ -52,7 +52,9 @@ public sealed partial class PosterizeDialog
 		DefaultHeight = 300;
 
 		Title = Translations.GetString ("Posterize");
-		Modal = true;
+		// Issue #1334 (reported by @prokoudine): do not dim the canvas while
+		// adjusting a live effect preview.
+		Modal = false;
 
 		Resizable = false;
 

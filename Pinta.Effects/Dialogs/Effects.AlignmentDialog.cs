@@ -74,7 +74,9 @@ public sealed partial class AlignmentDialog
 		// --- Initialization (Gtk.Window)
 
 		Title = Translations.GetString ("Align Object");
-		Modal = true;
+		// Issue #1334 (reported by @prokoudine): do not dim the canvas while
+		// adjusting a live effect preview.
+		Modal = false;
 		Resizable = false;
 
 		// --- Initialization (Gtk.Dialog)
