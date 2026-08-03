@@ -145,12 +145,13 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
 			// to assume they just didn't update the dropdown and really want png
 			FormatDescriptor? format = image_formats.GetFormatByFile (displayName);
-			if (format is null) {
+			if (format is null && format.IsExportAvailable ()) {
 				if (fcd.Filter is not null)
 					format = filetypes[fcd.Filter];
 				else // Somehow, no file filter was selected...
 					format = image_formats.GetDefaultSaveFormat ();
 			}
+
 
 			if (!await ConfirmFlatten (document, format)) {
 				continue;
