@@ -152,7 +152,6 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 					format = image_formats.GetDefaultSaveFormat ();
 			}
 
-
 			if (!await ConfirmFlatten (document, format)) {
 				continue;
 			}
