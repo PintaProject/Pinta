@@ -2,4 +2,4 @@
 
 ### Checklist
 
-[ ] This pull request follows the project's [contribution guidelines](https://github.com/PintaProject/Pinta/blob/master/patch-guidelines.md)
+- [ ] This pull request follows the project's [contribution guidelines](https://github.com/PintaProject/Pinta/blob/master/patch-guidelines.md)
