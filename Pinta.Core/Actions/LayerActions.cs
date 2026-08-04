@@ -104,7 +104,6 @@ public sealed class LayerActions
 			Resources.Icons.LayerFlipVertical,
 			shortcuts: ["<Shift>F"]);
 
-
 		RotateZoom = new Command (
 			"RotateZoom",
 			Translations.GetString ("Rotate / Zoom Layer..."),
