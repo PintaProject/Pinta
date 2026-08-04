@@ -145,11 +145,21 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
 			// to assume they just didn't update the dropdown and really want png
 			FormatDescriptor? format = image_formats.GetFormatByFile (displayName);
-			if (format is null && format.IsExportAvailable ()) {
+			if (format is null) {
 				if (fcd.Filter is not null)
 					format = filetypes[fcd.Filter];
 				else // Somehow, no file filter was selected...
 					format = image_formats.GetDefaultSaveFormat ();
+			}
+			
+			if (!format.IsExportAvailable ()) {
+
+				await chrome.ShowMessageDialog (
+				chrome.MainWindow,
+				Translations.GetString ("Pinta does not support saving images in this file format."),
+				displayName);
+
+				return false;
 			}
 
 			if (!await ConfirmFlatten (document, format)) {
