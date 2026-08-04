@@ -95,14 +95,14 @@ public sealed class LayerActions
 			Translations.GetString ("Flip Horizontal"),
 			null,
 			Resources.Icons.LayerFlipHorizontal,
-			shortcuts: ["<Shift>H"]);
+			shortcuts: ["<Primary>F"]);
 
 		FlipVertical = new Command (
 			"fliplayervertical",
 			Translations.GetString ("Flip Vertical"),
 			null,
 			Resources.Icons.LayerFlipVertical,
-			shortcuts: ["<Shift>V"]);
+			shortcuts: ["<Shift>F"]);
 
 
 		RotateZoom = new Command (
