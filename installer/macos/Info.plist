@@ -120,7 +120,7 @@
 	<key>CFBundleIconFile</key>
 	<string>pinta.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ximian.pinta</string>
+	<string>com.github.PintaProject.Pinta</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
