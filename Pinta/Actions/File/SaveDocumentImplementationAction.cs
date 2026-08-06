@@ -205,7 +205,8 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			await chrome.ShowMessageDialog (
 				parent,
 				Translations.GetString ("Pinta does not support saving images in this file format."),
-				file.GetDisplayName ());
+				//Use this instead of file.GetDisplayName() in case file was not created
+				file.GetParent ()!.GetRelativePath (file)!);
 
 			return false;
 		}
