@@ -42,6 +42,7 @@ Thanks to the following contributors who worked on this release:
 ### Changed
 - Upgraded the minimum required .NET version to 10.0 (#2081)
 - Updated dependencies to require libadwaita 1.8+
+- The macOS app is now sandboxed (#1018, #2249)
 - Migrated to the Tmds.DBus.Protocol library for compile-time code generation (#2199)
 - Effect dialogs now hide options that are not currently relevant (#1960)
 - Fixed several minor UX issues in the color dialog (#1795)
