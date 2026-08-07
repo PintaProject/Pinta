@@ -224,7 +224,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		} catch (GLib.GException e) when (e.Message == "Image too large to be saved as ICO") {
 
 			string primary = Translations.GetString ("Image too large");
-			string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
+			string secondary = Translations.GetString ("ICO files can not be larger than 256 x 256 pixels.");
 
 			await chrome.ShowMessageDialog (parent, primary, secondary);
 
