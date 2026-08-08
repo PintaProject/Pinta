@@ -254,8 +254,8 @@ public abstract class SelectTool : BaseTool
 			if (auto_scroll_button is null) {
 				auto_scroll_button ??= ToolBarDropDownButton.New ();
 
-				auto_scroll_button.AddItem (Translations.GetString ("AutoScroll on"), Pinta.Resources.Icons.EffectsBlursZoomBlur, true);
-				auto_scroll_button.AddItem (Translations.GetString ("AutoScroll off"), Pinta.Resources.Icons.EffectsBlursUnfocus, false);
+				auto_scroll_button.AddItem (Translations.GetString ("Autoscroll On"), Pinta.Resources.Icons.EffectsBlursZoomBlur, true);
+				auto_scroll_button.AddItem (Translations.GetString ("Autoscroll Off"), Pinta.Resources.Icons.EffectsBlursUnfocus, false);
 
 				auto_scroll_button.SelectedIndex = Settings.GetSetting (SettingNames.SELECTION_MODE, 0);
 			}
