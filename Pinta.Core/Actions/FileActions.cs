@@ -38,6 +38,7 @@ public sealed class FileActions
 	public Command Close { get; }
 	public Command Save { get; }
 	public Command SaveAs { get; }
+	public Command SelectionSettings { get; }
 	public Command Print { get; }
 
 	public event EventHandler<ModifyCompressionEventArgs>? ModifyCompression;
@@ -97,6 +98,12 @@ public sealed class FileActions
 			Resources.StandardIcons.DocumentSaveAs,
 			shortcuts: ["<Primary><Shift>S"]);
 
+		SelectionSettings = new Command (
+			"selectionSettings",
+			Translations.GetString ("Selection Settings..."),
+			null,
+			null);
+
 		Print = new Command (
 			"print",
 			Translations.GetString ("Print"),
@@ -115,6 +122,9 @@ public sealed class FileActions
 		save_section.AppendItem (Save.CreateMenuItem ());
 		save_section.AppendItem (SaveAs.CreateMenuItem ());
 
+		var selection_settings_section = Gio.Menu.New ();
+		selection_settings_section.AppendItem (SelectionSettings.CreateMenuItem ());
+
 		Gio.Menu close_section = Gio.Menu.New ();
 		close_section.AppendItem (Close.CreateMenuItem ());
 		if (!isMac) close_section.AppendItem (app.Exit.CreateMenuItem ()); // This is part of the application menu on macOS
@@ -123,6 +133,7 @@ public sealed class FileActions
 		menu.AppendItem (NewScreenshot.CreateMenuItem ());
 		menu.AppendItem (Open.CreateMenuItem ());
 		menu.AppendSection (null, save_section);
+		menu.AppendSection (null, selection_settings_section);
 		menu.AppendSection (null, close_section);
 #if false
 		// Printing is disabled for now until it is fully functional.
@@ -136,6 +147,8 @@ public sealed class FileActions
 
 			Save,
 			SaveAs,
+
+			SelectionSettings,
 
 			Close]);
 

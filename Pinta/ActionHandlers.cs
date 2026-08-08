@@ -26,6 +26,7 @@
 
 using System.Collections.Generic;
 using Pinta.Actions;
+using Pinta.Actions.File;
 using Pinta.Core;
 
 namespace Pinta;
@@ -58,6 +59,7 @@ public sealed class ActionHandlers
 			new SaveDocumentImplmentationAction (actions.File, actions.Image, chrome, imageFormats, recentFiles, tools),
 			new ModifyCompressionAction (actions.File),
 			//new PrintDocumentAction ();
+			new SelectionSettingsAction (chrome),
 			new CloseDocumentAction (actions, chrome, workspace, tools),
 			new ExitProgramAction (actions, chrome, workspace),
 
