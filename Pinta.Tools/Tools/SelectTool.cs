@@ -41,12 +41,12 @@ public abstract class SelectTool : BaseTool
 	private SelectionHistoryItem? hist = default;
 	private CombineMode combine_mode = default;
 	private Separator? mode_sep;
-	private Label? movable_view_label;
-	private CheckButton? movable_view;
+	private ToolBarDropDownButton? auto_scroll_button;
 
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
 	public override bool IsSelectionTool => true;
 	protected override bool ShowAntialiasingButton => false;
+	private bool IsAutoScroll => AutoScrollButton.SelectedItem.GetTagOrDefault (true);
 	private readonly RectangleHandle handle;
 	public override IEnumerable<IToolHandle> Handles => [handle];
 
@@ -69,9 +69,7 @@ public abstract class SelectTool : BaseTool
 
 		tb.Append (Separator);
 
-		tb.Append (MovableViewLabel);
-		tb.Append (MovableView);
-		MovableView.Active = true;
+		tb.Append (AutoScrollButton);
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -112,15 +110,15 @@ public abstract class SelectTool : BaseTool
 
 		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
 
-		if (!MovableView.Active)
+		if (!IsAutoScroll)
 			return;
 
 		var view = (Gtk.Viewport) document.Workspace.Canvas.Parent!;
 		var h_adjust = view.GetHadjustment ()!.PageSize;
 		var v_adjust = view.GetVadjustment ()!.PageSize;
 
-		//step of 10 pixels or of 2% of visible area, whichever is greater
-		int canvasStep = (int)Math.Max (10, h_adjust * 0.02);
+		//step of 10 pixels or of 1% of visible area, whichever is greater
+		int canvasStep = (int) Math.Max (10, h_adjust * 0.01);
 
 		PointI direction = default;
 		if (e.RootPoint.X < 0)
@@ -188,6 +186,10 @@ public abstract class SelectTool : BaseTool
 		base.OnSaveSettings (settings);
 
 		workspace.SelectionHandler.OnSaveSettings (settings);
+
+		if (auto_scroll_button is not null) {
+			settings.PutSetting (SettingNames.SELECTION_MODE, auto_scroll_button.SelectedIndex);
+		}
 	}
 
 	private void ReDraw (Document document)
@@ -246,6 +248,20 @@ public abstract class SelectTool : BaseTool
 	}
 
 	private Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
-	private Label MovableViewLabel => movable_view_label ??= Label.New ((string.Format (" {0}: ", Translations.GetString ("Movable view"))));
-	private CheckButton MovableView => movable_view ??= CheckButton.New ();
+
+	private ToolBarDropDownButton AutoScrollButton {
+		get {
+			if (auto_scroll_button is null) {
+				auto_scroll_button ??= ToolBarDropDownButton.New ();
+
+				auto_scroll_button.AddItem (Translations.GetString ("AutoScroll on"), Pinta.Resources.Icons.EffectsBlursZoomBlur, true);
+				auto_scroll_button.AddItem (Translations.GetString ("AutoScroll off"), Pinta.Resources.Icons.EffectsBlursUnfocus, false);
+
+				auto_scroll_button.SelectedIndex = Settings.GetSetting (SettingNames.SELECTION_MODE, 0);
+			}
+
+			return auto_scroll_button;
+		}
+
+	}
 }
