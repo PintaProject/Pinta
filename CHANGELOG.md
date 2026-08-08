@@ -19,6 +19,7 @@ Thanks to the following contributors who worked on this release:
 - @tmds
 - @AoMas17
 - @Pashockerr
+- @Neclusive
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -36,10 +37,12 @@ Thanks to the following contributors who worked on this release:
 - The side panels can now be hidden using the F12 shortcut in addition to the existing menu item (#2119)
 - Added a keyboard shortcuts dialog (#2172, #1434)
 - The Clone Stamp tool now visualizes the position of the clone origin (#1923, #2190)
+- Added shortcuts Ctrl+F and Shift+F for flipping layers horizontally or vertically (#2243, #2235)
 
 ### Changed
 - Upgraded the minimum required .NET version to 10.0 (#2081)
 - Updated dependencies to require libadwaita 1.8+
+- The macOS app is now sandboxed (#1018, #2249)
 - Migrated to the Tmds.DBus.Protocol library for compile-time code generation (#2199)
 - Effect dialogs now hide options that are not currently relevant (#1960)
 - Fixed several minor UX issues in the color dialog (#1795)
@@ -62,6 +65,8 @@ Thanks to the following contributors who worked on this release:
 - Fixed errors when dragging and dropping files on macOS (#2170, #2124)
 - Fixed issues with overlay scrollbars intercepting clicks on selection handles (#2200, #2201)
 - Fixed occasional errors after reordering layers and later undoing (#2214, #2139)
+- Added webp file association for the Linux .desktop file (#2245, #2185)
+- Fixed a potential error when attempting to save as a file type which does not support export (#2176, #2248)
 
 ## [3.1.2](https://github.com/PintaProject/Pinta/release/tag/3.1.2) - 2026/03/29
 

@@ -1,3 +1,13 @@
+### Contribution Policy
+
+- Code must be authored by a human contributor, and must be compatible with the MIT license and not violate copyright.
+  - This implies: no autonomous AI agent use, and no use of AI to generate substantial pieces of code
+- No AI-generated text in human-to-human communication
+  - When our maintainers volunteer their time to review your issue, PR, or proposal, they do not want to talk to a machine. This is a basic principle of respect.
+  - Machine translations are acceptable as long as the original content was written by a human
+
+### Contributing a Patch
+
 If you are interested in contributing to the core of Pinta, like to fix
 a bug or tweak existing code, you'll want to make your changes available
 as pull requests on GitHub. Using Git is an important part of
@@ -8,8 +18,8 @@ deeper understanding read [Pro Git](http://progit.org/book/).
 
 #### Claiming a bug to work on
 
-If you plan to work on a bug that has been registered on our [Launchpad
-page](https://bugs.launchpad.net/pinta/+bugs), then go to the relevant
+If you plan to work on a bug that has been registered on our [bug
+tracker](https://github.com/PintaProject/Pinta/issues), then go to the relevant
 bug and make sure no one else is already working on it, then leave
 comment saying that you are working on it.
 

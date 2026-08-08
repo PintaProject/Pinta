@@ -205,7 +205,8 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			await chrome.ShowMessageDialog (
 				parent,
 				Translations.GetString ("Pinta does not support saving images in this file format."),
-				file.GetDisplayName ());
+				//Use this instead of file.GetDisplayName() in case file was not created
+				file.GetParent ()!.GetRelativePath (file)!);
 
 			return false;
 		}
@@ -223,7 +224,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		} catch (GLib.GException e) when (e.Message == "Image too large to be saved as ICO") {
 
 			string primary = Translations.GetString ("Image too large");
-			string secondary = Translations.GetString ("ICO files can not be larger than 255 x 255 pixels.");
+			string secondary = Translations.GetString ("ICO files can not be larger than 256 x 256 pixels.");
 
 			await chrome.ShowMessageDialog (parent, primary, secondary);
 
