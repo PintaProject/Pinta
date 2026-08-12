@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-15 00:45+0000\n"
 "PO-Revision-Date: 2026-08-14 06:51+0000\n"
-"Last-Translator: Alexey S <oz84@rambler.ru>\n"
+"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
 "\n"
 "Language: ru\n"
@@ -1093,7 +1093,7 @@ msgstr "Тон / Насыщенность"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
 msgid "ICO files can not be larger than 255 x 255 pixels."
-msgstr "Изображение в файле ICO не может быть более 256x256 пикселей."
+msgstr "Изображение в файле ICO не может быть больше, чем 255x255 пикселей."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:193
 msgid "If enabled, the Value component is applied to the color wheel."
