@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-15 00:13+0000\n"
-"PO-Revision-Date: 2026-04-07 03:55+0000\n"
+"PO-Revision-Date: 2026-08-23 15:20+0000\n"
 "Last-Translator: VenusGirl <VenusGirl@outlook.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/pinta/pinta/ko/>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -95,12 +95,12 @@ msgstr "객체 정렬"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:206
 msgid "All Petite Caps"
-msgstr ""
+msgstr "모두 작은 대문자"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:194
 msgid "All Small Caps"
-msgstr ""
+msgstr "모든 작은 소문자"
 
 #: ../Pinta.Core/Actions/EditActions.cs:586
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:302
@@ -184,11 +184,11 @@ msgstr "자동 레벨"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:258
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "자동 스크롤 끄기"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:257
 msgid "Autoscroll On"
-msgstr ""
+msgstr "자동 스크롤 켜기"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:251
 #, csharp-format
@@ -384,11 +384,11 @@ msgstr "센티미터"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width."
-msgstr ""
+msgstr "브러시 너비를 변경하세요."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:238
 msgid "Change font size."
-msgstr ""
+msgstr "글꼴 크기를 변경하세요."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:237
 msgid "Change font size. Shortcut keys: [ ]"
@@ -396,7 +396,7 @@ msgstr "글꼴 크기 변경. 바로 가기 키: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
-msgstr ""
+msgstr "윤곽선 두께를 변경하세요."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -477,6 +477,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"비슷한 색상의 영역을 선택하려면 클릭하세요.\n"
+"전역 모드를 사용하려면 Shift 키를 누르세요."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:606
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:348
@@ -770,7 +772,7 @@ msgstr "엣지 감지"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
 msgid "Edit"
-msgstr ""
+msgstr "편집"
 
 #: ../Pinta/MainWindow.cs:398
 msgid "Effe_cts"
@@ -874,7 +876,7 @@ msgstr "깃털 객체"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
 msgid "File"
-msgstr ""
+msgstr "파일"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -1058,7 +1060,7 @@ msgstr "높이:"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 msgid "Help"
-msgstr ""
+msgstr "도움말"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1109,7 +1111,7 @@ msgstr "색조 / 채도"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "ICO 파일은 256 x 256 픽셀보다 클 수 없습니다."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
@@ -1178,7 +1180,7 @@ msgstr "인치"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:146
 msgid "Ink Outline"
-msgstr "잉크 외곽선"
+msgstr "잉크 윤곽선"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:35
 msgid "Ink Sketch"
@@ -1254,7 +1256,7 @@ msgstr "줄리아 프랙탈"
 
 #: ../Pinta.Core/Actions/AppActions.cs:48
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "키보드 단축키"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
@@ -1394,6 +1396,9 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"왼쪽 클릭하면 해당 영역을 기본 색상으로 채우고, 오른쪽 클릭하면 보조 "
+"색상으로 채웁니다.\n"
+"전역 모드를 사용하려면 Shift 키를 누르세요."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1764,7 +1769,7 @@ msgstr "윤곽선 모양"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:353
 #: ../Pinta.Tools/Tools/TextTool.cs:420
 msgid "Outline width"
-msgstr "외곽선 너비"
+msgstr "윤곽선 너비"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
 msgid "Output"
@@ -1842,7 +1847,7 @@ msgstr "백분위수"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:200
 msgid "Petite Caps"
-msgstr ""
+msgstr "작은 대문자"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -1990,32 +1995,32 @@ msgstr "사전 설정:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush width"
-msgstr ""
+msgstr "브러시 너비를 줄이려면 {0}을 누르세요"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:240
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr ""
+msgstr "글꼴 크기를 줄이려면 {0}을 누르세요"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline width"
-msgstr ""
+msgstr "윤곽선 너비를 줄이려면 {0}을 누르세요"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush width"
-msgstr ""
+msgstr "브러시 너비를 늘리려면 {0}을 누르세요"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 #, csharp-format
 msgid "Press {0} to increase font size"
-msgstr ""
+msgstr "글꼴 크기를 늘리려면 {0}을 누르세요"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline width"
-msgstr ""
+msgstr "윤곽선 너비를 늘리려면 {0}을 누르세요"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:169
 msgid "Preview"
@@ -2428,7 +2433,7 @@ msgstr "단축키"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
 #: ../Pinta.Tools/Tools/TextTool.cs:239
 msgid "Shortcut keys:"
-msgstr ""
+msgstr "단축키:"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:75
 msgid "Show Axonometric Grid"
@@ -2481,7 +2486,7 @@ msgstr "슬래시"
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Small Caps"
-msgstr ""
+msgstr "소문자 대문자"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
@@ -2645,7 +2650,7 @@ msgstr "팁: 제어점을 제거하려면 마우스 오른쪽 버튼을 클릭�
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:218
 msgid "Title Caps"
-msgstr ""
+msgstr "제목 대문자"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2673,7 +2678,7 @@ msgstr "도구 모음"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:81
 msgid "Tools"
-msgstr ""
+msgstr "도구"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Top Center"
@@ -2752,7 +2757,7 @@ msgstr "초점 해제"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:212
 msgid "Unicase"
-msgstr ""
+msgstr "대소문자 구분 없음"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:232
 #: ../Pinta.Gui.Addins/InstallDialog.cs:233
