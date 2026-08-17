@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-15 00:13+0000\n"
-"PO-Revision-Date: 2026-08-14 06:51+0000\n"
+"PO-Revision-Date: 2026-08-23 15:20+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -186,11 +186,11 @@ msgstr "Автокоррекция"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:258
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "Автопрокрутка отключена"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:257
 msgid "Autoscroll On"
-msgstr ""
+msgstr "Автопрокрутка включена"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:251
 #, csharp-format
@@ -777,7 +777,7 @@ msgstr "Определение краёв"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
 msgid "Edit"
-msgstr ""
+msgstr "Правка"
 
 #: ../Pinta/MainWindow.cs:398
 msgid "Effe_cts"
@@ -883,7 +883,7 @@ msgstr "Растушёвка объекта"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -1067,7 +1067,7 @@ msgstr "Высота:"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 msgid "Help"
-msgstr ""
+msgstr "Справка"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1119,7 +1119,7 @@ msgstr "Тон / Насыщенность"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "Размер ICO-файлов не должен превышать 256 x 256 пикселей."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
@@ -1268,7 +1268,7 @@ msgstr "Фрактал Жюлиа"
 
 #: ../Pinta.Core/Actions/AppActions.cs:48
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Комбинации клавиш"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
