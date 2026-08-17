@@ -30,6 +30,8 @@ internal static class SettingNames
 
 	internal const string LASSO_MODE = "lasso-mode";
 
+	internal const string SELECTION_MODE = "selection-mode";
+
 	internal static string Arrow1 (string prefix)
 		=> $"{prefix}-arrow1";
 
