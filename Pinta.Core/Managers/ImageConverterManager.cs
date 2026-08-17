@@ -70,6 +70,16 @@ public sealed class ImageConverterManager
 			supportsLayers: false
 		);
 		yield return netpbmPortablePixmapDescriptor;
+
+		FarbfeldFormat farbfeldFormat = new ();
+		FormatDescriptor farbfeldFormatDescriptor = new (
+			displayPrefix: "Farbfeld",
+			extensions: ["ff", "FF"],
+			mimes: ["image/farbfeld", "image/x-farbfeld"],
+			importer: farbfeldFormat,
+			exporter: farbfeldFormat,
+			supportsLayers: false);
+		yield return farbfeldFormatDescriptor;
 	}
 
 	private static FormatDescriptor CreateFormatDescriptor (PixbufFormat format)
