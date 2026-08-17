@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -39,10 +40,13 @@ public abstract class SelectTool : BaseTool
 
 	private SelectionHistoryItem? hist = default;
 	private CombineMode combine_mode = default;
+	private Separator? mode_sep;
+	private ToolBarDropDownButton? auto_scroll_button;
 
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
 	public override bool IsSelectionTool => true;
 	protected override bool ShowAntialiasingButton => false;
+	private bool IsAutoScroll => AutoScrollButton.SelectedItem.GetTagOrDefault (true);
 	private readonly RectangleHandle handle;
 	public override IEnumerable<IToolHandle> Handles => [handle];
 
@@ -62,6 +66,10 @@ public abstract class SelectTool : BaseTool
 	{
 		base.OnBuildToolBar (tb);
 		workspace.SelectionHandler.BuildToolbar (tb, Settings);
+
+		tb.Append (Separator);
+
+		tb.Append (AutoScrollButton);
 	}
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
@@ -101,6 +109,29 @@ public abstract class SelectTool : BaseTool
 		ReDraw (document);
 
 		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
+
+		if (!IsAutoScroll)
+			return;
+
+		var view = (Gtk.Viewport) document.Workspace.Canvas.Parent!;
+		var h_adjust = view.GetHadjustment ()!.PageSize;
+		var v_adjust = view.GetVadjustment ()!.PageSize;
+
+		//step of 10 pixels or of 1% of visible area, whichever is greater
+		int canvasStep = (int) Math.Max (10, h_adjust * 0.01);
+
+		PointI direction = default;
+		if (e.RootPoint.X < 0)
+			direction = new PointI (-canvasStep, 0); //move left
+		if (e.RootPoint.Y < 0)
+			direction = new PointI (0, -canvasStep); //move up
+		if (e.RootPoint.X > h_adjust)
+			direction = new PointI (canvasStep, 0); //move right
+		if (e.RootPoint.Y > v_adjust)
+			direction = new PointI (0, canvasStep); //move down
+
+		if (direction != default)
+			document.Workspace.ScrollCanvas (direction);
 	}
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
@@ -155,6 +186,10 @@ public abstract class SelectTool : BaseTool
 		base.OnSaveSettings (settings);
 
 		workspace.SelectionHandler.OnSaveSettings (settings);
+
+		if (auto_scroll_button is not null) {
+			settings.PutSetting (SettingNames.SELECTION_MODE, auto_scroll_button.SelectedIndex);
+		}
 	}
 
 	private void ReDraw (Document document)
@@ -210,5 +245,23 @@ public abstract class SelectTool : BaseTool
 		DocumentSelection selection = document.Selection;
 		handle.Rectangle = selection.HandleBounds;
 		ShowHandles (document.Selection.Visible && tools.CurrentTool == this);
+	}
+
+	private Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
+
+	private ToolBarDropDownButton AutoScrollButton {
+		get {
+			if (auto_scroll_button is null) {
+				auto_scroll_button ??= ToolBarDropDownButton.New ();
+
+				auto_scroll_button.AddItem (Translations.GetString ("Autoscroll On"), Pinta.Resources.Icons.EffectsBlursZoomBlur, true);
+				auto_scroll_button.AddItem (Translations.GetString ("Autoscroll Off"), Pinta.Resources.Icons.EffectsBlursUnfocus, false);
+
+				auto_scroll_button.SelectedIndex = Settings.GetSetting (SettingNames.SELECTION_MODE, 0);
+			}
+
+			return auto_scroll_button;
+		}
+
 	}
 }
