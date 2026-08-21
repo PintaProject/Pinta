@@ -46,7 +46,6 @@ public sealed class ViewActions
 	public ToggleCommand ToolBox { get; }
 	public ToggleCommand Rulers { get; }
 	public Gio.SimpleAction RulerMetric { get; }
-	public Gio.SimpleAction ColorScheme { get; }
 	public Command Fullscreen { get; }
 
 	public ToolBarComboBox ZoomComboBox { get; }
@@ -155,11 +154,6 @@ public sealed class ViewActions
 			GtkExtensions.IntVariantType,
 			GLib.Variant.NewInt32 (0));
 
-		ColorScheme = Gio.SimpleAction.NewStateful ( // TODO: Make `Command`
-			"colorscheme",
-			GtkExtensions.IntVariantType,
-			GLib.Variant.NewInt32 (0));
-
 		Fullscreen = new Command (
 			"Fullscreen",
 			Translations.GetString ("Fullscreen"),
@@ -242,22 +236,10 @@ public sealed class ViewActions
 		Gio.Menu show_hide_section = Gio.Menu.New ();
 		show_hide_section.AppendSubmenu (Translations.GetString ("Show/Hide"), show_hide_menu);
 
-		Gio.Menu color_scheme_menu = Gio.Menu.New ();
-		// Translators: This refers to using the system's default color scheme.
-		color_scheme_menu.Append (Translations.GetString ("Default"), $"app.{ColorScheme.Name}(0)");
-		// Translators: This refers to using a light variant of the color scheme.
-		color_scheme_menu.Append (Translations.GetString ("Light"), $"app.{ColorScheme.Name}(1)");
-		// Translators: This refers to using a dark variant of the color scheme.
-		color_scheme_menu.Append (Translations.GetString ("Dark"), $"app.{ColorScheme.Name}(2)");
-
-		Gio.Menu color_scheme_section = Gio.Menu.New ();
-		color_scheme_section.AppendSubmenu (Translations.GetString ("Color Scheme"), color_scheme_menu);
-
 		menu.AppendSection (null, zoom_section);
 		menu.AppendSection (null, grid_section);
 		menu.AppendSection (null, metric_section);
 		menu.AppendSection (null, show_hide_section);
-		menu.AppendSection (null, color_scheme_section);
 
 		app.AddCommands ([
 			ZoomIn,
@@ -276,7 +258,6 @@ public sealed class ViewActions
 
 		// TODO: Make `Command`s
 		app.AddAction (RulerMetric);
-		app.AddAction (ColorScheme);
 
 		if (mainToolbarPresent)
 			app.AddCommand (ToolBar);
