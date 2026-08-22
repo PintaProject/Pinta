@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-15 00:13+0000\n"
-"PO-Revision-Date: 2026-06-15 07:01+0000\n"
+"PO-Revision-Date: 2026-08-23 15:20+0000\n"
 "Last-Translator: grof <grofaty@hotmail.com>\n"
-"Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/sl/"
-">\n"
+"Language-Team: Slovenian <https://hosted.weblate.org/projects/pinta/pinta/"
+"sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Generator: Weblate 2026.7.dev0\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -186,11 +186,11 @@ msgstr "Samodejna raven"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:258
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "Izključeno samodejno drsenje"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:257
 msgid "Autoscroll On"
-msgstr ""
+msgstr "Vključeno samodejno drsenje"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:251
 #, csharp-format
@@ -774,7 +774,7 @@ msgstr "Zaznaj rob"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
 msgid "Edit"
-msgstr ""
+msgstr "Uredi"
 
 #: ../Pinta/MainWindow.cs:398
 msgid "Effe_cts"
@@ -879,7 +879,7 @@ msgstr "Peresni predmet"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
 msgid "File"
-msgstr ""
+msgstr "Datoteka"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -1063,7 +1063,7 @@ msgstr "Višina:"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 msgid "Help"
-msgstr ""
+msgstr "Pomoč"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1114,7 +1114,7 @@ msgstr "Odtenek / Nasičenost"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "Datoteke tipa ICO ne morejo biti večje kot 256 x 256 točk."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
@@ -1260,7 +1260,7 @@ msgstr "Fraktal julije"
 
 #: ../Pinta.Core/Actions/AppActions.cs:48
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Tipkovne bližnjice"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
