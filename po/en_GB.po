@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-15 00:13+0000\n"
-"PO-Revision-Date: 2026-05-26 05:11+0000\n"
+"PO-Revision-Date: 2026-08-23 15:20+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "pinta/pinta/en_GB/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.6.dev0\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -185,11 +185,11 @@ msgstr "Auto Level"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:258
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "Autoscroll Off"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:257
 msgid "Autoscroll On"
-msgstr ""
+msgstr "Autoscroll On"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:251
 #, csharp-format
@@ -773,7 +773,7 @@ msgstr "Edge Detect"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
 msgid "Edit"
-msgstr ""
+msgstr "Edit"
 
 #: ../Pinta/MainWindow.cs:398
 msgid "Effe_cts"
@@ -877,7 +877,7 @@ msgstr "Feather Object"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -1061,7 +1061,7 @@ msgstr "Height:"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1111,7 +1111,7 @@ msgstr "Hue / Saturation"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "ICO files can not be larger than 256 x 256 pixels."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
@@ -1256,7 +1256,7 @@ msgstr "Julia Fractal"
 
 #: ../Pinta.Core/Actions/AppActions.cs:48
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Keyboard Shortcuts"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
