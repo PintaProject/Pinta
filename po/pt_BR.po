@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-15 00:13+0000\n"
 "PO-Revision-Date: 2026-08-26 05:18+0000\n"
-"Last-Translator: Ritpop <aqueledavidcamara@gmail.com>\n"
+"Last-Translator: Kleber Valentim <kleber.turques@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "pinta/pinta/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -1294,7 +1294,7 @@ msgstr "Propriedades da Camada"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:127
 msgid "Layer Properties..."
-msgstr "Propiedades da Camada..."
+msgstr "Propriedades da Camada..."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:131
