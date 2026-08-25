@@ -40,7 +40,7 @@ public sealed partial class ToolBoxWidget
 		Gtk.ToggleButton button = Gtk.ToggleButton.New ();
 		button.IconName = tool.Icon;
 		button.Name = tool.Name;
-		button.CanFocus = false;
+		button.FocusOnClick = false;
 
 		button.SetCssClasses ([Resources.Styles.ToolBoxButton, AdwaitaStyles.Flat]);
 
