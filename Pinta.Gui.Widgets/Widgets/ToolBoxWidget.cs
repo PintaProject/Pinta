@@ -62,7 +62,15 @@ public sealed partial class ToolBoxWidget
 		toolButton.OnClicked += (_, _) => HandleToolButtonClicked (tool);
 		tool_buttons[tool] = toolButton;
 
-		Append (toolButton);
+		List<BaseTool> toolList = tools.ToList ();
+		int prevIndex = toolList.IndexOf (tool) - 1;
+		if (prevIndex >= 0) {
+			BaseTool prevTool = toolList[prevIndex];
+			Widget? prevSibling = tool_buttons[prevTool];
+			InsertChildAfter (toolButton, prevSibling);	
+		} else {
+			Prepend (toolButton);
+		}
 	}
 
 	private void HandleToolButtonClicked (BaseTool tool)
