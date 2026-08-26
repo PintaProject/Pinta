@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-15 00:13+0000\n"
-"PO-Revision-Date: 2026-08-26 05:18+0000\n"
-"Last-Translator: Kleber Valentim <kleber.turques@gmail.com>\n"
+"PO-Revision-Date: 2026-08-29 02:38+0000\n"
+"Last-Translator: Ritpop <aqueledavidcamara@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "pinta/pinta/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -96,7 +96,7 @@ msgstr "Alinhar Objeto"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:206
 msgid "All Petite Caps"
-msgstr "Todas em miniversalete"
+msgstr "Todas em Versaletes Minúsculos"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:194
@@ -185,11 +185,11 @@ msgstr "Níveis Automáticos"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:258
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "Rolagem automática desativada"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:257
 msgid "Autoscroll On"
-msgstr ""
+msgstr "Rolagem automática ativada"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:251
 #, csharp-format
@@ -385,7 +385,7 @@ msgstr "Centímetros"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width."
-msgstr "Alterar a largura do pincel."
+msgstr "Alterar a espessura do pincel."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:238
 msgid "Change font size."
@@ -393,11 +393,11 @@ msgstr "Alterar o tamanho da fonte."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:237
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Alterar tamanho da fonte. Teclas de atalho: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
-msgstr "Alterar a largura do contorno."
+msgstr "Alterar a espessura do contorno."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -479,8 +479,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
-"Clique para selecionar uma área de cor semelhante.\n"
-"Segure Shift para usar o modo Global."
+"Clique para selecionar região de cores similares.\n"
+"Pressione shift para usar o modo Global."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:606
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:348
@@ -774,7 +774,7 @@ msgstr "Detectar de Borda"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: ../Pinta/MainWindow.cs:398
 msgid "Effe_cts"
@@ -879,7 +879,7 @@ msgstr "Objeto de Pena"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
 msgid "File"
-msgstr ""
+msgstr "Arquivo"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -990,7 +990,6 @@ msgid "Fragments"
 msgstr "Fragmentos"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:220
-#, fuzzy
 msgid "Freeform"
 msgstr "Forma Livre"
 
@@ -1064,7 +1063,7 @@ msgstr "Altura:"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 msgid "Help"
-msgstr ""
+msgstr "Ajuda"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1108,7 +1107,7 @@ msgstr "Tonalidade"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:210
 msgid "Hue & Sat"
-msgstr "Hue & Sat"
+msgstr "Matiz e Saturação"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
 msgid "Hue / Saturation"
@@ -1116,7 +1115,7 @@ msgstr "Tonalidade / Saturação"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "Arquivos ICO não podem ser maiores que 256 x 256 pixels."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
@@ -1167,7 +1166,6 @@ msgid "Import from File..."
 msgstr "Importar do arquivo..."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:57
-#, fuzzy
 msgid ""
 "In Freeform mode, click and drag to draw the outline for a selection area.\n"
 "\n"
@@ -1175,13 +1173,12 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
-"No modo Forma Livre, clique e arraste para desenhar o contorno da área de "
-"seleção.\n"
+"No modo Forma Livre, clique e arraste para desenhar o contorno de uma área "
+"de seleção.\n"
 "\n"
-"No modo Polígono, clique e arraste para adicionar um novo ponto para a "
-"seleção.\n"
-"Pressione Enter para terminar a seleção.\n"
-"Pressione Backspace para apagar o último ponto."
+"No modo Polígono, clique e arraste para adicionar um novo ponto à seleção.\n"
+"Pressione Enter para finalizar a seleção.\n"
+"Pressione Backspace para excluir o último ponto."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:227
 msgid "Inches"
@@ -1265,7 +1262,7 @@ msgstr "Fractal Julia"
 
 #: ../Pinta.Core/Actions/AppActions.cs:48
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Atalhos do Teclado"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
@@ -1415,8 +1412,8 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
-"Clique com o botão esquerdo para preencher uma região com a cor primária ou "
-"com o botão direito para preencher com a cor secundária.\n"
+"Clique com o botão esquerdo para preencher uma região com a cor primária, "
+"clique com o botão direito para preencher com a cor secundária.\n"
 "Segure Shift para usar o modo Global."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
@@ -2007,9 +2004,8 @@ msgid "Preset Gradient"
 msgstr "Gradiente Predefinido"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:159
-#, fuzzy
 msgid "Preset Palettes"
-msgstr "Paletas Pré-definidas"
+msgstr "Paletas predefinidas"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:356
 msgid "Preset:"
@@ -2018,7 +2014,7 @@ msgstr "Predefinição:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush width"
-msgstr "Pressione {0} para diminuir a largura do pincel"
+msgstr "Pressione {0} para diminuir a espessura do pincel"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:240
 #, csharp-format
@@ -2028,12 +2024,12 @@ msgstr "Pressione {0} para diminuir o tamanho da fonte"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline width"
-msgstr "Pressione {0} para diminuir a largura do contorno"
+msgstr "Pressione {0} para diminuir a espessura do contorno"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush width"
-msgstr "Pressione {0} para aumentar a largura do pincel"
+msgstr "Pressione {0} para aumentar a espessura do pincel"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 #, csharp-format
@@ -2043,7 +2039,7 @@ msgstr "Pressione {0} para aumentar o tamanho da fonte"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline width"
-msgstr "Pressione {0} para aumentar a largura do contorno"
+msgstr "Pressione {0} para aumentar a espessura do contorno"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:169
 msgid "Preview"
@@ -2237,7 +2233,7 @@ msgstr "Retornar ao Padrão"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:80
 msgid "Reset to image size"
-msgstr "Redefinir para o tamanho da imagem"
+msgstr "Resetar para o tamanho da imagem"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:213
@@ -2504,7 +2500,7 @@ msgstr "Tamanho"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr "Barra"
+msgstr "Inclinado"
 
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:188
@@ -2653,7 +2649,7 @@ msgstr "Espessura"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:254
 msgid "Thin"
-msgstr "Fina"
+msgstr "Fino"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
 msgid "This format does not support layers. Flatten image?"
@@ -2758,17 +2754,17 @@ msgstr "Tipo"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:308
 msgid "Ultrabold"
-msgstr "Extranegrito"
+msgstr "Ultranegrito"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Ultraheavy"
-msgstr "Extrapesada"
+msgstr "Ultrapesado"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Ultralight"
-msgstr "Extraleve"
+msgstr "Ultraleve"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:345
 msgid "Underline"
@@ -2862,7 +2858,6 @@ msgstr "Vermelho vertical (R)"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:102
 #: ../Pinta/MainWindow.cs:460
-#, fuzzy
 msgid "View"
 msgstr "Visualizar"
 
@@ -3030,35 +3025,35 @@ msgstr "pixels"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Adolfo Jayme Barrientos https://launchpad.net/~fitojb\n"
-"  André Gondim https://launchpad.net/~andregondim\n"
-"  Cameron White https://launchpad.net/~cameronwhite91\n"
-"  Celso H. L. S. Junior https://launchpad.net/~celsojunior\n"
-"  Christian Marques https://launchpad.net/~csmchristian\n"
-"  Eliton Miranda da Silva https://launchpad.net/~tudoembrulhado\n"
-"  Felipe Amaral https://launchpad.net/~felpi-flick\n"
-"  Igor Belchior https://launchpad.net/~igorbelchior86\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  José Humberto Alvarenga Melo https://launchpad.net/~josehumberto-melo\n"
-"  Julio Tomaschitz https://launchpad.net/~blaziushw\n"
-"  Julius Miranda https://launchpad.net/~juliusmiranda\n"
-"  Kristian Gomes https://launchpad.net/~kristiang\n"
-"  Luis Henrique Soler https://launchpad.net/~blamoo\n"
-"  Luiz Fernando Palacios https://launchpad.net/~sapo-mano\n"
-"  Matheus Reich https://launchpad.net/~matheusr98\n"
-"  Neliton Pereira Jr. https://launchpad.net/~nelitonpjr\n"
-"  Paulo N. Júnior https://launchpad.net/~naves-junior\n"
-"  Rafael Neri https://launchpad.net/~rafepel\n"
-"  Robson Cassiano https://launchpad.net/~randintn\n"
-"  Rockworld https://launchpad.net/~rockrock2222222\n"
-"  Rodrigo Henrique https://launchpad.net/~krascovict-deactivatedaccount\n"
-"  Victor Westmann https://launchpad.net/~victor.westmann\n"
-"  Vitor da Silva Gonçalves https://launchpad.net/~vitorsgoncalves\n"
-"  juliocbm https://launchpad.net/~emaildojulio\n"
-"  lucca https://launchpad.net/~lbpprado\n"
-"  maxwell souza https://launchpad.net/~maxjf1\n"
-"  rwsilva32 https://launchpad.net/~rwsilva32\n"
-"  Tiago Lucas Flach https://github.com/tiagoFlach"
+" Adolfo Jayme Barrientos https://launchpad.net/~fitojb\n"
+" André Gondim https://launchpad.net/~andregondim\n"
+" Cameron White https://launchpad.net/~cameronwhite91\n"
+" Celso H. L. S. Junior https://launchpad.net/~celsojunior\n"
+" Christian Marques https://launchpad.net/~csmchristian\n"
+" Eliton Miranda da Silva https://launchpad.net/~tudoembrulhado\n"
+" Felipe Amaral https://launchpad.net/~felpi-flick\n"
+" Igor Belchior https://launchpad.net/~igorbelchior86\n"
+" Jonathan Pobst https://launchpad.net/~jpobst\n"
+" José Humberto Alvarenga Melo https://launchpad.net/~josehumberto-melo\n"
+" Julio Tomaschitz https://launchpad.net/~blaziushw\n"
+" Julius Miranda https://launchpad.net/~juliusmiranda\n"
+" Kristian Gomes https://launchpad.net/~kristiang\n"
+" Luis Henrique Soler https://launchpad.net/~blamoo\n"
+" Luiz Fernando Palacios https://launchpad.net/~sapo-mano\n"
+" Matheus Reich https://launchpad.net/~matheusr98\n"
+" Neliton Pereira Jr. https://launchpad.net/~nelitonpjr\n"
+" Paulo N. Júnior https://launchpad.net/~naves-junior\n"
+" Rafael Neri https://launchpad.net/~rafepel\n"
+" Robson Cassiano https://launchpad.net/~randintn\n"
+" Rockworld https://launchpad.net/~rockrock2222222\n"
+" Rodrigo Henrique https://launchpad.net/~krascovict-deactivatedaccount\n"
+" Victor Westmann https://launchpad.net/~victor.westmann\n"
+" Vitor da Silva Gonçalves https://launchpad.net/~vitorsgoncalves\n"
+" juliocbm https://launchpad.net/~emaildojulio\n"
+" lucca https://launchpad.net/~lbpprado\n"
+" maxwell souza https://launchpad.net/~maxjf1\n"
+" rwsilva32 https://launchpad.net/~rwsilva32\n"
+" Tiago Lucas Flach https://github.com/tiagoFlach"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:63
