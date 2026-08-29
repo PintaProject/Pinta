@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-15 00:13+0000\n"
-"PO-Revision-Date: 2026-06-22 17:01+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/"
-">\n"
+"PO-Revision-Date: 2026-08-29 23:06+0000\n"
+"Last-Translator: lebxr <abcxrty@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.7.dev0\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -185,11 +185,11 @@ msgstr "Nivel automático"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:258
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "Desplazamiento Automático Desactivado"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:257
 msgid "Autoscroll On"
-msgstr ""
+msgstr "Desplazamiento Automático Activado"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:251
 #, csharp-format
@@ -224,7 +224,7 @@ msgstr "Ajuste óptimo"
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:458
 msgid "Bevel Join"
-msgstr ""
+msgstr "Unión biselada"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
@@ -393,11 +393,11 @@ msgstr "Cambiar tamaño de fuente."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:237
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Cambiar tamaño de fuente. Atajo de teclado: []"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
-msgstr ""
+msgstr "Cambiar el ancho del contorno."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -773,7 +773,7 @@ msgstr "Detección de bordes"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: ../Pinta/MainWindow.cs:398
 msgid "Effe_cts"
@@ -878,7 +878,7 @@ msgstr "Pluma"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -1051,7 +1051,7 @@ msgstr "Luz fuerte"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Heavy"
-msgstr ""
+msgstr "Negro"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
@@ -1062,7 +1062,7 @@ msgstr "Altura:"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 msgid "Help"
-msgstr ""
+msgstr "Ayuda"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1114,11 +1114,11 @@ msgstr "Tono y saturación"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "Los archivos ICO no pueden set mayores de 256 x 256 píxeles."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "Si está activado, el componente Valor se aplica a la rueda de colores."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1261,7 +1261,7 @@ msgstr "Fractal de Julia"
 
 #: ../Pinta.Core/Actions/AppActions.cs:48
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Atajos de teclado"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
@@ -1410,6 +1410,10 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Haga clic con el botón izquierdo para rellenar una región con el color "
+"primario, haga clic con el botón derecho para rellenarla con el color "
+"secundario.\n"
+"Mantenga presionada la tecla Mayús para utilizar el modo Global."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1449,6 +1453,10 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Haga clic con el botón izquierdo para poner el color primario. Haga clic con "
+"el botón derecho para establecer el color secundario. Haga clic con el botón "
+"central o presione {0} y haga clic con el botón izquierdo para seleccionar "
+"el color de la paleta."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1576,7 +1584,7 @@ msgstr "Tamaño mínimo"
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:446
 msgid "Miter Join"
-msgstr ""
+msgstr "Unión a inglete"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:322
 msgid "Mode"
@@ -2016,12 +2024,12 @@ msgstr "Presione {0} para reducir el tamaño de fuente"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline width"
-msgstr ""
+msgstr "Presione {0} para reducir el ancho de contorno"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush width"
-msgstr ""
+msgstr "Presione {0} para aumentar el tamaño de pincel"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 #, csharp-format
@@ -2031,7 +2039,7 @@ msgstr "Presione {0} para aumentar el tamaño de fuente"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline width"
-msgstr ""
+msgstr "Presione {0} para aumentar el ancho de contorno"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:169
 msgid "Preview"
@@ -2305,7 +2313,7 @@ msgstr "Rugosidad"
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:452
 msgid "Round Join"
-msgstr ""
+msgstr "Unión redonda"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
@@ -2492,7 +2500,7 @@ msgstr "Tamaño"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr ""
+msgstr "Barra diagonal"
 
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:188
@@ -2666,7 +2674,7 @@ msgstr "Consejo: pulse con el botón secundario para quitar puntos de control."
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:218
 msgid "Title Caps"
-msgstr ""
+msgstr "Versales de título"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2751,7 +2759,7 @@ msgstr "Ultranegrita"
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Ultraheavy"
-msgstr ""
+msgstr "Ultra negro"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:260
@@ -2773,7 +2781,7 @@ msgstr "Desenfoque"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:212
 msgid "Unicase"
-msgstr ""
+msgstr "Unicase"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:232
 #: ../Pinta.Gui.Addins/InstallDialog.cs:233
