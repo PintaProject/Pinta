@@ -24,6 +24,12 @@
                 </property>
               </object>
             </child>
+            <child>
+              <object class="AdwSwitchRow" id="menubar_switchrow">
+                <property name="title" translatable="yes">Show Menu Bar</property>
+                <property name="subtitle" translatable="yes">Replaces the header bar with a separate menu bar and tool bar.</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>
