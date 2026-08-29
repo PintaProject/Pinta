@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Gui.Widgets;
 
-[GObject.Subclass<Gtk.FlowBox>]
+[GObject.Subclass<Adw.WrapBox>]
 public sealed partial class ToolBoxWidget
 {
 	private ToolManager tools = null!; // NRT - set in factory method
@@ -16,9 +17,6 @@ public sealed partial class ToolBoxWidget
 	partial void Initialize ()
 	{
 		SetOrientation (Gtk.Orientation.Vertical);
-		MinChildrenPerLine = 8; // Pinta 3 has 22 default tools, meaning a max of 3 columns regardless of size, smaller values don't lead to better use of visual space.
-		MaxChildrenPerLine = 1024; // Allow for single column if there's sufficient space to do so.
-		SelectionMode = Gtk.SelectionMode.None; // Don't allow the buttons to be selected.
 	}
 
 	public static ToolBoxWidget New (ToolManager tools)
@@ -42,7 +40,7 @@ public sealed partial class ToolBoxWidget
 		Gtk.ToggleButton button = Gtk.ToggleButton.New ();
 		button.IconName = tool.Icon;
 		button.Name = tool.Name;
-		button.CanFocus = false;
+		button.FocusOnClick = false;
 
 		button.SetCssClasses ([Resources.Styles.ToolBoxButton, AdwaitaStyles.Flat]);
 
@@ -64,8 +62,15 @@ public sealed partial class ToolBoxWidget
 		toolButton.OnClicked += (_, _) => HandleToolButtonClicked (tool);
 		tool_buttons[tool] = toolButton;
 
-		int index = tools.ToList ().IndexOf (tool);
-		Insert (toolButton, index);
+		List<BaseTool> toolList = tools.ToList ();
+		int prevIndex = toolList.IndexOf (tool) - 1;
+		if (prevIndex >= 0) {
+			BaseTool prevTool = toolList[prevIndex];
+			Widget? prevSibling = tool_buttons[prevTool];
+			InsertChildAfter (toolButton, prevSibling);	
+		} else {
+			Prepend (toolButton);
+		}
 	}
 
 	private void HandleToolButtonClicked (BaseTool tool)
