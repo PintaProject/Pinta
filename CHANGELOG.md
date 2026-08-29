@@ -46,6 +46,7 @@ Thanks to the following contributors who worked on this release:
 - Updated dependencies to require libadwaita 1.8+
 - The macOS app is now sandboxed (#1018, #2249)
 - Migrated to the Tmds.DBus.Protocol library for compile-time code generation (#2199)
+- Removed dependency on the NGettext library. Instead, bindings to the native gettext library are now used (#2263)
 - Effect dialogs now hide options that are not currently relevant (#1960)
 - Fixed several minor UX issues in the color dialog (#1795)
 - The text tool now provides a separate adjustment for the font size and font variant, which doesn't require opening the font dialog (#1947, #1961, #2043, #1965)
