@@ -21,6 +21,7 @@ Thanks to the following contributors who worked on this release:
 - @Pashockerr
 - @Neclusive
 - @thekolian1996
+- @Tech-Tac
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -55,6 +56,7 @@ Thanks to the following contributors who worked on this release:
 - Moved the Layers menu out of the main menu. The actions are available from a menu button in the Layers panel, or from right-clicking on layers (#1386, #2056)
 - Dropdowns in the toolbar now show the icons of each option and highlight the currently selected item when opened (#1977, #2092)
 - Adjusted layout of toolbar options in the shape tools to improve usability (#2012, #2019, #2039, #2107)
+- More compact layout for the toolbox widget (#2266)
 - Added new icons for several effects and menu buttons (#2102)
 - Menu buttons now display popout nested menus instead of sliding menus (#2131)
 
