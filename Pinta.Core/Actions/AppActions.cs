@@ -1,21 +1,21 @@
-// 
+//
 // AppActions.cs
-//  
+//
 // Author:
 //       Jonathan Pobst <monkey@jpobst.com>
-// 
+//
 // Copyright (c) 2010 Jonathan Pobst
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -31,6 +31,7 @@ namespace Pinta.Core;
 public sealed class AppActions
 {
 	public Command About { get; }
+	public Command Preferences { get; }
 	public Command KeyboardShortcuts { get; }
 	public Command Exit { get; }
 
@@ -43,12 +44,17 @@ public sealed class AppActions
 			Translations.GetString ("About"),
 			null,
 			Resources.StandardIcons.HelpAbout);
+		Preferences = new Command (
+			"preferences",
+			Translations.GetString ("Preferences..."),
+			null,
+			Resources.StandardIcons.Preferences,
+			shortcuts: ["<Primary>comma"]);
 		KeyboardShortcuts = new Command (
 			"keyboardshortcuts",
 			Translations.GetString ("Keyboard Shortcuts"),
-			null,
-			Resources.StandardIcons.KeyboardShortcuts,
-			shortcuts: ["<Primary>comma"]);
+			null, null,
+			shortcuts: ["<Primary>question"]);
 		Exit = new Command (
 			"quit",
 			Translations.GetString ("Quit"),
@@ -61,6 +67,7 @@ public sealed class AppActions
 	{
 		app.AddCommands ([
 			About,
+			Preferences,
 			KeyboardShortcuts,
 			Exit]);
 	}

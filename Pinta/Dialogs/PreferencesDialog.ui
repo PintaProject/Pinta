@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="PreferencesDialog" parent="AdwPreferencesDialog">
+    <property name="search-enabled">True</property>
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="icon_name">preferences-window-layout-symbolic</property>
+        <property name="title" translatable="yes">General</property>
+        <property name="use-underline">True</property>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">User Interface</property>
+            <child>
+              <object class="AdwComboRow" id="color_scheme_comborow">
+                <property name="title" translatable="yes">Color Scheme</property>
+                <property name="model">
+                  <object class="GtkStringList">
+                    <items>
+                      <item translatable="yes" comments="This refers to using the system's default color scheme.">Default</item>
+                      <item translatable="yes" comments="This refers to using a light variant of the color scheme.">Light</item>
+                      <item translatable="yes" comments="This refers to using a dark variant of the color scheme.">Dark</item>
+                    </items>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

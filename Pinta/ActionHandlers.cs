@@ -68,6 +68,7 @@ public sealed class ActionHandlers
 			new PasteIntoNewImageAction (actions, chrome, workspace),
 			new ResizePaletteAction (actions.Edit, chrome, palette),
 			new AddinManagerAction (actions.Addins, chrome, system),
+			new PreferencesDialogAction(actions.App, chrome, settings),
 
 			// Image
 			new ResizeImageAction (actions.Image, chrome, workspace, settings),
@@ -84,7 +85,7 @@ public sealed class ActionHandlers
 			new ToolWindowsToggledAction (actions.View, chrome),
 			new StatusBarToggledAction (actions.View, chrome),
 			new ToolBoxToggledAction (actions.View, chrome),
-			new ColorSchemeChangedAction (actions.View),
+			new ColorSchemeChangedAction (settings),
 			new EditCanvasGridAction (actions.View, chrome, canvasGrid),
 
 			// Window
