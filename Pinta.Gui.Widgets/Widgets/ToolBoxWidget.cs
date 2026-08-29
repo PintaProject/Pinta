@@ -67,7 +67,7 @@ public sealed partial class ToolBoxWidget
 		if (prevIndex >= 0) {
 			BaseTool prevTool = toolList[prevIndex];
 			Widget? prevSibling = tool_buttons[prevTool];
-			InsertChildAfter (toolButton, prevSibling);	
+			InsertChildAfter (toolButton, prevSibling);
 		} else {
 			Prepend (toolButton);
 		}
