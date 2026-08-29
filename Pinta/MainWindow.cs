@@ -361,10 +361,7 @@ internal sealed class MainWindow
 
 	private bool IsUsingMenuBar ()
 	{
-		// On macOS the global menubar should be used by default.
-		bool use_menubar_default = SystemManager.GetOperatingSystem () == OS.Mac;
-
-		return PintaCore.Settings.GetSetting (SettingNames.MENUBAR_SHOWN, use_menubar_default);
+		return PintaCore.Settings.GetSetting (SettingNames.MENUBAR_SHOWN, SettingDefaults.MenuBarShown ());
 	}
 
 	private void CreateMainMenu ()
@@ -554,7 +551,6 @@ internal sealed class MainWindow
 
 		PintaCore.Actions.View.Rulers.Value = PintaCore.Settings.GetSetting (SettingNames.RULER_SHOWN, false);
 		PintaCore.Actions.View.ToolBar.Value = PintaCore.Settings.GetSetting (SettingNames.TOOLBAR_SHOWN, true);
-		PintaCore.Actions.View.MenuBar.Value = IsUsingMenuBar ();
 		PintaCore.Actions.View.StatusBar.Value = PintaCore.Settings.GetSetting (SettingNames.STATUSBAR_SHOWN, true);
 		PintaCore.Actions.View.ToolBox.Value = PintaCore.Settings.GetSetting (SettingNames.TOOLBOX_SHOWN, true);
 		PintaCore.Actions.View.ImageTabs.Value = PintaCore.Settings.GetSetting (SettingNames.IMAGE_TABS_SHOWN, true);
@@ -583,7 +579,6 @@ internal sealed class MainWindow
 		PintaCore.Settings.PutSetting (SettingNames.IMAGE_TABS_SHOWN, PintaCore.Actions.View.ImageTabs.Value);
 		PintaCore.Settings.PutSetting (SettingNames.TOOL_WINDOWS_SHOWN, PintaCore.Actions.View.ToolWindows.Value);
 		PintaCore.Settings.PutSetting (SettingNames.TOOLBAR_SHOWN, PintaCore.Actions.View.ToolBar.Value);
-		PintaCore.Settings.PutSetting (SettingNames.MENUBAR_SHOWN, PintaCore.Actions.View.MenuBar.Value);
 		PintaCore.Settings.PutSetting (SettingNames.STATUSBAR_SHOWN, PintaCore.Actions.View.StatusBar.Value);
 		PintaCore.Settings.PutSetting (SettingNames.TOOLBOX_SHOWN, PintaCore.Actions.View.ToolBox.Value);
 		PintaCore.Settings.PutSetting (SettingNames.LAST_DIALOG_DIRECTORY, PintaCore.RecentFiles.LastDialogDirectory?.GetUri () ?? "");
