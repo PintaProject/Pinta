@@ -16,6 +16,9 @@ internal sealed partial class PreferencesDialog
 	[Gtk.Connect ("menubar_switchrow")]
 	private Adw.SwitchRow menubar_row;
 
+	[Gtk.Connect ("selection_anim_switchrow")]
+	private Adw.SwitchRow selection_anim_row;
+
 	public static PreferencesDialog New (ISettingsService settings)
 	{
 		PreferencesDialog dialog = NewWithProperties ([]);
@@ -26,8 +29,8 @@ internal sealed partial class PreferencesDialog
 	partial void Initialize ()
 	{
 		Adw.ComboRow.SelectedPropertyDefinition.Notify (color_scheme_row, OnColorSchemeChanged);
-
 		Adw.SwitchRow.ActivePropertyDefinition.Notify (menubar_row, OnMenuBarChanged);
+		Adw.SwitchRow.ActivePropertyDefinition.Notify (selection_anim_row, OnSelectionAnimChanged);
 	}
 
 	/// <summary>
@@ -42,6 +45,11 @@ internal sealed partial class PreferencesDialog
 
 		bool menuBarShown = settings.GetSetting (SettingNames.MENUBAR_SHOWN, SettingDefaults.MenuBarShown ());
 		menubar_row.Active = menuBarShown;
+
+		bool selectionAnimated = settings.GetSetting (
+			Pinta.Core.SettingNames.CANVAS_SELECTION_ANIMATED,
+			Pinta.Core.SettingDefaults.CANVAS_SELECTION_ANIMATED);
+		selection_anim_row.Active = selectionAnimated;
 	}
 
 	private void OnColorSchemeChanged (Object sender, NotifySignalArgs args)
@@ -61,6 +69,11 @@ internal sealed partial class PreferencesDialog
 		// Changing the setting requires a restart since the application window is
 		// constructed differently (see WindowShell).
 		ShowRestartMessage ();
+	}
+
+	private void OnSelectionAnimChanged (Object sender, NotifySignalArgs args)
+	{
+		settings.PutSetting (Pinta.Core.SettingNames.CANVAS_SELECTION_ANIMATED, selection_anim_row.Active);
 	}
 
 	private void ShowRestartMessage ()

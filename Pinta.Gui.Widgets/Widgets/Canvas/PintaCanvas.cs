@@ -39,6 +39,7 @@ internal sealed partial class PintaCanvas
 	private Document document = null!;
 	private ICanvasGridService canvas_grid = null!;
 	private IToolService tools = null!;
+	private ISettingsService settings = null!;
 
 	private uint queued_update_id = 0;
 
@@ -53,7 +54,6 @@ internal sealed partial class PintaCanvas
 	private float selection_animation_dash_offset;
 
 	[MemberNotNull (nameof (cr))]
-	[MemberNotNull (nameof (selection_animation_timer_id))]
 	partial void Initialize ()
 	{
 		cr = new (
@@ -61,9 +61,6 @@ internal sealed partial class PintaCanvas
 			PintaCore.Workspace,
 			enableLivePreview: true,
 			enableBackgroundPattern: false);
-
-		// Timer for selection outline animation
-		selection_animation_timer_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, 80, SelectionAnimationTick);
 
 		// If there is additional space available, keep the image centered and prevent stretching.
 		Hexpand = false;
@@ -81,15 +78,19 @@ internal sealed partial class PintaCanvas
 		return canvas;
 	}
 
-	internal void Configure (IToolService tools, Document document, ICanvasGridService canvasGrid)
+	internal void Configure (IToolService tools, Document document, ICanvasGridService canvasGrid, ISettingsService settings)
 	{
 		this.tools = tools;
 		canvas_grid = canvasGrid;
 		this.document = document;
+		this.settings = settings;
 
 		document.Workspace.ViewSizeChanged += OnViewSizeChanged;
 		document.Workspace.CanvasInvalidated += OnCanvasInvalidated;
 		document.SelectionChanged += (_, _) => QueueSelectionUpdate ();
+		settings.SettingChanged += OnSettingChanged;
+
+		UpdateSelectionAnimation ();
 	}
 
 	/// <summary>
@@ -457,6 +458,29 @@ internal sealed partial class PintaCanvas
 
 		QueueSelectionUpdate (onlyDisplaySettings: true);
 		return true;
+	}
+
+	private void OnSettingChanged (object? sender, SettingChangedEventArgs e)
+	{
+		if (e.Key != SettingNames.CANVAS_SELECTION_ANIMATED)
+			return;
+
+		UpdateSelectionAnimation ();
+	}
+
+	/// <summary>
+	/// Enable or disable the selection outline animation callback based on the user's preference.
+	/// </summary>
+	private void UpdateSelectionAnimation ()
+	{
+		bool enable = settings.GetSetting (SettingNames.CANVAS_SELECTION_ANIMATED, SettingDefaults.CANVAS_SELECTION_ANIMATED);
+
+		if (enable && selection_animation_timer_id == 0) {
+			selection_animation_timer_id = GLib.Functions.TimeoutAdd (GLib.Constants.PRIORITY_DEFAULT, 80, SelectionAnimationTick);
+		} else if (!enable && selection_animation_timer_id > 0) {
+			GLib.Source.Remove (selection_animation_timer_id);
+			selection_animation_timer_id = 0;
+		}
 	}
 	#endregion
 
