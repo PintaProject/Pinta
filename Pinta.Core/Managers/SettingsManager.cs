@@ -34,6 +34,11 @@ using System.Xml.Linq;
 
 namespace Pinta.Core;
 
+public sealed class SettingChangedEventArgs (string key) : EventArgs
+{
+	public string Key { get; } = key;
+}
+
 public interface ISettingsService
 {
 	/// <summary>
@@ -57,6 +62,11 @@ public interface ISettingsService
 	/// a chance to call PutSetting to store setting.
 	/// </summary>
 	event EventHandler? SaveSettingsBeforeQuit;
+
+	/// <summary>
+	/// An event that is fired when a setting has been changed.
+	/// </summary>
+	event EventHandler<SettingChangedEventArgs>? SettingChanged;
 }
 
 public sealed class SettingsManager : ISettingsService
@@ -70,6 +80,8 @@ public sealed class SettingsManager : ISettingsService
 	/// when the user is closing the application.
 	/// </summary>
 	public event EventHandler? SaveSettingsBeforeQuit;
+
+	public event EventHandler<SettingChangedEventArgs>? SettingChanged;
 
 	public SettingsManager ()
 	{
@@ -142,6 +154,8 @@ public sealed class SettingsManager : ISettingsService
 	public void PutSetting (string key, object value)
 	{
 		settings[key] = value;
+
+		SettingChanged?.Invoke (this, new (key));
 	}
 
 	public void DoSaveSettingsBeforeQuit ()

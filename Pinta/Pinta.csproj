@@ -27,6 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Dialogs/*.ui">
+      <LogicalName>%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
     <ProjectReference Include="..\Pinta.Docking\Pinta.Docking.csproj" />
     <ProjectReference Include="..\Pinta.Gui.Addins\Pinta.Gui.Addins.csproj" />
