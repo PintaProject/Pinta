@@ -1,3 +1,5 @@
+using Pinta.Core;
+
 namespace Pinta;
 
 internal static class SettingNames
@@ -34,4 +36,10 @@ internal static class SettingNames
 	internal const string RESIZE_IMAGE_WIDTH = "resize-image-width";
 	internal const string RESIZE_IMAGE_HEIGHT = "resize-image-height";
 	internal const string RESIZE_IMAGE_RESAMPLING = "resize-image-resampling";
+}
+
+internal static class SettingDefaults
+{
+	// On macOS the global menubar should be used by default.
+	internal static bool MenuBarShown () => SystemManager.GetOperatingSystem () == OS.Mac;
 }

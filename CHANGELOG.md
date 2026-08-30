@@ -21,6 +21,8 @@ Thanks to the following contributors who worked on this release:
 - @Pashockerr
 - @Neclusive
 - @thekolian1996
+- @Tech-Tac
+- @colin-i
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -40,12 +42,16 @@ Thanks to the following contributors who worked on this release:
 - The Clone Stamp tool now visualizes the position of the clone origin (#1923, #2190)
 - Added shortcuts Ctrl+F and Shift+F for flipping layers horizontally or vertically (#2243, #2235)
 - Added option to the selection tools (enabled by default) to scroll when dragging past the visible area (#2173, #2233)
+- Added a preferences dialog which contains general preferences for the application (#2261)
+  - Moved the color scheme and menubar options from the View menu into the preferences dialog (#2261, #2272)
+  - Added a preference for enabling the selection outline animation (#2187, #2272)
 
 ### Changed
 - Upgraded the minimum required .NET version to 10.0 (#2081)
 - Updated dependencies to require libadwaita 1.8+
 - The macOS app is now sandboxed (#1018, #2249)
 - Migrated to the Tmds.DBus.Protocol library for compile-time code generation (#2199)
+- Removed dependency on the NGettext library. Instead, bindings to the native gettext library are now used (#2263)
 - Effect dialogs now hide options that are not currently relevant (#1960)
 - Fixed several minor UX issues in the color dialog (#1795)
 - The text tool now provides a separate adjustment for the font size and font variant, which doesn't require opening the font dialog (#1947, #1961, #2043, #1965)
@@ -55,6 +61,7 @@ Thanks to the following contributors who worked on this release:
 - Moved the Layers menu out of the main menu. The actions are available from a menu button in the Layers panel, or from right-clicking on layers (#1386, #2056)
 - Dropdowns in the toolbar now show the icons of each option and highlight the currently selected item when opened (#1977, #2092)
 - Adjusted layout of toolbar options in the shape tools to improve usability (#2012, #2019, #2039, #2107)
+- More compact layout for the toolbox widget (#2266)
 - Added new icons for several effects and menu buttons (#2102)
 - Menu buttons now display popout nested menus instead of sliding menus (#2131)
 
