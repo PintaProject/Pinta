@@ -24,37 +24,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Globalization;
-using NGettext;
 
 namespace Pinta.Core;
 
 public static class Translations
 {
-	private static ICatalog? catalog;
+	private const string PintaTextDomain = "pinta";
 
-	public static void Init (string domain, string locale_dir)
+	public static void Init (string localeDir)
 	{
 		CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
-		catalog = new Catalog (domain, locale_dir, cultureInfo);
+		string lang = cultureInfo.Name.Replace ('-', '_'); // convert names like en-CA to en_CA
 
-		// The dotnet UI culture controls which translations are loaded for Pinta above.
-		// The GTK / libadwaita libraries use the native version of gettext for their translations
-		// (e.g. the About dialog), so here we set the LANG environment variable to be consistent.
+		// Follow the dotnet UI culture to choose which language is used by default.
+		// Pinta (along with GTK / libadwaita) use the native version of gettext for translations
+		// so here we set the LANG environment variable to make these consistent.
 		// Note we need to initialize the GLib module since this is called very early in startup,
 		// before GTK is initialized.
 		GLib.Module.Initialize ();
-		string lang = cultureInfo.Name.Replace ('-', '_'); // convert names like en-CA to en_CA
 		GLib.Functions.Setenv ("LANG", lang, overwrite: true);
+
+		// Initialize gettext for Pinta's translations.
+		IntlExtensions.BindTextDomain (PintaTextDomain, localeDir);
+		IntlExtensions.BindTextDomainCodeset (PintaTextDomain, "UTF-8");
+		IntlExtensions.TextDomain (PintaTextDomain);
 	}
 
 	public static string GetString (string text)
 	{
-		return catalog?.GetString (text) ?? text;
+		// Just use glib'c gettext wrapper for convenience instead of adding our own binding.
+		return GLib.Functions.Dgettext (PintaTextDomain, text);
 	}
 
 	public static string GetString (string text, params object[] args)
 	{
-		return catalog?.GetString (text, args) ?? text;
+		return string.Format (GetString (text), args);
 	}
 }

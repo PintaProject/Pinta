@@ -157,9 +157,10 @@ public sealed partial class CanvasWindow
 		ChromeManager chrome,
 		ToolManager tools,
 		Document document,
-		ICanvasGridService canvasGrid)
+		ICanvasGridService canvasGrid,
+		ISettingsService settings)
 	{
-		canvas.Configure (tools, document, canvasGrid);
+		canvas.Configure (tools, document, canvasGrid, settings);
 
 		// Also update if the view size changed without affecting the size of
 		// the canvas widget (e.g. when zoomed out and no scrollbars are required)
@@ -175,10 +176,11 @@ public sealed partial class CanvasWindow
 		ChromeManager chrome,
 		ToolManager tools,
 		Document document,
-		ICanvasGridService canvasGrid)
+		ICanvasGridService canvasGrid,
+		ISettingsService settings)
 	{
 		CanvasWindow window = NewWithProperties ([]);
-		window.Configure (chrome, tools, document, canvasGrid);
+		window.Configure (chrome, tools, document, canvasGrid, settings);
 		return window;
 	}
 

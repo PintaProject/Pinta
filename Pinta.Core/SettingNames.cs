@@ -1,6 +1,6 @@
 namespace Pinta.Core;
 
-internal static class SettingNames
+public static class SettingNames
 {
 	internal const string DEFAULT_IMAGE_TYPE = "default-image-type";
 
@@ -16,6 +16,8 @@ internal static class SettingNames
 	internal const string CANVAS_AXONOMETRIC_WIDTH = "canvas-axonometric-grid-width";
 	internal const string CANVAS_AXONOMETRIC_ANGLE = "canvas-axonometric-grid-angle";
 
+	public const string CANVAS_SELECTION_ANIMATED = "canvas-selection-animated";
+
 	internal const string PRIMARY_COLOR = "primary-color";
 	internal const string SECONDARY_COLOR = "secondary-color";
 	internal const string RECENT_COLORS = "recently-used-colors";
@@ -25,4 +27,9 @@ internal static class SettingNames
 
 	internal static string ToolAlphaBlend (BaseTool tool)
 		=> $"{tool.GetType ().Name.ToLowerInvariant ()}-alpha-blend";
+}
+
+public static class SettingDefaults
+{
+	public const bool CANVAS_SELECTION_ANIMATED = true;
 }
