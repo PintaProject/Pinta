@@ -22,6 +22,7 @@ Thanks to the following contributors who worked on this release:
 - @Neclusive
 - @thekolian1996
 - @Tech-Tac
+- @colin-i
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -41,6 +42,9 @@ Thanks to the following contributors who worked on this release:
 - The Clone Stamp tool now visualizes the position of the clone origin (#1923, #2190)
 - Added shortcuts Ctrl+F and Shift+F for flipping layers horizontally or vertically (#2243, #2235)
 - Added option to the selection tools (enabled by default) to scroll when dragging past the visible area (#2173, #2233)
+- Added a preferences dialog which contains general preferences for the application (#2261)
+  - Moved the color scheme and menubar options from the View menu into the preferences dialog (#2261, #2272)
+  - Added a preference for enabling the selection outline animation (#2187, #2272)
 
 ### Changed
 - Upgraded the minimum required .NET version to 10.0 (#2081)
