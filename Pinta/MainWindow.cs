@@ -180,7 +180,7 @@ internal sealed class MainWindow
 		CanvasWindow canvas = CanvasWindow.New (
 			PintaCore.Chrome,
 			PintaCore.Tools,
-			doc, PintaCore.CanvasGrid);
+			doc, PintaCore.CanvasGrid, PintaCore.Settings);
 		canvas.RulersVisible = PintaCore.Actions.View.Rulers.Value;
 		canvas.RulerMetric = GetCurrentRulerMetric ();
 		doc.Workspace.CanvasWindow = canvas;

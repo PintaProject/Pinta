@@ -32,6 +32,17 @@
             </child>
           </object>
         </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Canvas</property>
+            <child>
+              <object class="AdwSwitchRow" id="selection_anim_switchrow">
+                <property name="title" translatable="yes">Animate Selection Outline</property>
+                <property name="subtitle" translatable="yes">Enables a "marching ants" effect to improve the selection's visibility. Disable to reduce CPU usage.</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </template>
