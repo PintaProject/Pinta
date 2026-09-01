@@ -40,7 +40,7 @@ public static class Translations
 		GLib.Module.Initialize ();
 
 		// Follow the dotnet UI culture to choose which language is used by default, since this
-		// correctly picks up system langauge settings on macOS, for example.
+		// correctly picks up system language settings on macOS, for example.
 		// Pinta (along with GTK / libadwaita) use the native version of gettext for translations
 		// so here we set the LANGUAGE environment variable to make these consistent.
 		if (GLib.Functions.Getenv ("LANGUAGE") is null) {
