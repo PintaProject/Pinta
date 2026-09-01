@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-01 03:52+0000\n"
-"PO-Revision-Date: 2026-08-16 19:28+0000\n"
+"PO-Revision-Date: 2026-09-01 10:54+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -146,7 +146,7 @@ msgstr "Kąt"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
 msgid "Animate Selection Outline"
-msgstr ""
+msgstr "Animuj kontur zaznaczenia"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -818,6 +818,8 @@ msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
 msgstr ""
+"Włącza efekt „maszerujących mrówek”, aby poprawić widoczność zaznaczenia. "
+"Wyłącz, aby zmniejszyć obciążenie procesora."
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -1025,7 +1027,7 @@ msgstr "Rozmycie Gaussa"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
 msgid "General"
-msgstr ""
+msgstr "Ogólne"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -2003,7 +2005,7 @@ msgstr "Moc"
 
 #: ../Pinta.Core/Actions/AppActions.cs:49
 msgid "Preferences..."
-msgstr ""
+msgstr "Preferencje..."
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -2221,7 +2223,7 @@ msgstr "Zastąp"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Replaces the header bar with a separate menu bar and tool bar."
-msgstr ""
+msgstr "Zastępuje pasek nagłówka oddzielnym paskiem menu i paskiem narzędzi."
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
@@ -2480,7 +2482,7 @@ msgstr "Pokaż warstwę"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
 msgid "Show Menu Bar"
-msgstr ""
+msgstr "Pokaż pasek menu"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
@@ -2844,7 +2846,7 @@ msgstr ""
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
 msgid "User Interface"
-msgstr ""
+msgstr "Interfejs użytkownika"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
