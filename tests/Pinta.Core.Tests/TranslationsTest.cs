@@ -25,7 +25,7 @@ internal sealed class TranslationsTest
 	}
 
 	[Test]
-	[Description("Test that a string can be translated. If this test fails, make sure you built with -p:BuildTranslations=true.")]
+	[Description ("Test that a string can be translated. If this test fails, make sure you built with -p:BuildTranslations=true.")]
 	public void SimpleTranslation ()
 	{
 		Assert.That (Translations.GetString ("Color"), Is.EqualTo ("Couleur"));
