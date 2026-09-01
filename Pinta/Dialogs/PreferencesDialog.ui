@@ -16,9 +16,9 @@
                 <property name="model">
                   <object class="GtkStringList">
                     <items>
-                      <item translatable="yes" comments="This refers to using the system's default color scheme.">Default</item>
-                      <item translatable="yes" comments="This refers to using a light variant of the color scheme.">Light</item>
-                      <item translatable="yes" comments="This refers to using a dark variant of the color scheme.">Dark</item>
+                      <item translatable="yes" comments="Translators: This refers to using the system default color scheme.">Default</item>
+                      <item translatable="yes" comments="Translators: This refers to using a light variant of the color scheme.">Light</item>
+                      <item translatable="yes" comments="Translators: This refers to using a dark variant of the color scheme.">Dark</item>
                     </items>
                   </object>
                 </property>
