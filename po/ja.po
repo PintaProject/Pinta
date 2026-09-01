@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 00:13+0000\n"
+"POT-Creation-Date: 2026-09-01 03:52+0000\n"
 "PO-Revision-Date: 2025-07-31 01:04+0000\n"
 "Last-Translator: tamotsu maruyama <tam.mar.3014@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/pinta/pinta/ja/"
@@ -49,11 +49,11 @@ msgstr "7 x 7 範囲"
 msgid "9 x 9 Region"
 msgstr "9 x 9 範囲"
 
-#: ../Pinta/MainWindow.cs:400
+#: ../Pinta/MainWindow.cs:397
 msgid "A_dd-ins"
 msgstr "アドイン(_d)"
 
-#: ../Pinta.Core/Actions/AppActions.cs:43
+#: ../Pinta.Core/Actions/AppActions.cs:44
 msgid "About"
 msgstr "このソフトウェアについて"
 
@@ -80,7 +80,7 @@ msgid "Added"
 msgstr "追加しました"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:104
-#: ../Pinta/MainWindow.cs:450
+#: ../Pinta/MainWindow.cs:460
 msgid "Adjustments"
 msgstr ""
 
@@ -143,6 +143,10 @@ msgstr "アンカー:"
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
 msgid "Angle"
 msgstr "角度"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+msgid "Animate Selection Outline"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -217,7 +221,7 @@ msgstr "Paint.NET プロジェクト:"
 msgid "Beautiful Italy"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:86
+#: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Best Fit"
 msgstr "最適なサイズ"
 
@@ -329,7 +333,7 @@ msgstr "パーセント指定:"
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "キャンバス"
 
@@ -337,7 +341,7 @@ msgstr "キャンバス"
 msgid "Canvas Grid Settings"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:125
+#: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr ""
 
@@ -379,7 +383,7 @@ msgstr ""
 msgid "Centered"
 msgstr "中央揃え"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:228
+#: ../Pinta.Core/Actions/ViewActions.cs:215
 msgid "Centimeters"
 msgstr "センチメートル"
 
@@ -552,7 +556,7 @@ msgstr "色の範囲"
 msgid "Color Saturation"
 msgstr "彩度"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:254
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -661,7 +665,7 @@ msgid "Cut"
 msgstr "切り取り"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:251
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
 msgid "Dark"
 msgstr ""
 
@@ -673,8 +677,8 @@ msgstr "比較(暗)"
 msgid "Dash"
 msgstr "線種"
 
-#. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:247
+#. Translators: This refers to using the system default color scheme.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:5
 msgid "Default"
 msgstr ""
 
@@ -766,12 +770,12 @@ msgstr "エッジの強調"
 msgid "Edit"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
 msgstr "効果(_C)"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:105
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:455
 msgid "Effects"
 msgstr ""
 
@@ -796,6 +800,12 @@ msgstr "エンボス"
 
 #: ../Pinta/Main.cs:67
 msgid "Enable additional logging or behavior changes for debugging"
+msgstr ""
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+msgid ""
+"Enables a \"marching ants\" effect to improve the selection's visibility. "
+"Disable to reduce CPU usage."
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
@@ -990,7 +1000,7 @@ msgstr "フリーフォーム"
 msgid "Frosted Glass"
 msgstr "すりガラス"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:152
 msgid "Fullscreen"
 msgstr "全画面表示"
 
@@ -1001,6 +1011,10 @@ msgstr "ギャラリー"
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
 msgstr "ガウシアンぼかし"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
+msgid "General"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1114,7 +1128,7 @@ msgstr "保存しない場合、すべての変更が失われます。"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:254
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:103
-#: ../Pinta/MainWindow.cs:455
+#: ../Pinta/MainWindow.cs:465
 msgid "Image"
 msgstr "画像"
 
@@ -1122,7 +1136,7 @@ msgstr "画像"
 msgid "Image Editor"
 msgstr "画像エディター"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:112
+#: ../Pinta.Core/Actions/ViewActions.cs:110
 msgid "Image Tabs"
 msgstr "画像タブ"
 
@@ -1160,7 +1174,7 @@ msgid ""
 "Press Backspace to delete the last point."
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:214
 msgid "Inches"
 msgstr "インチ"
 
@@ -1240,7 +1254,7 @@ msgstr ""
 msgid "Julia Fractal"
 msgstr "フラクタル (Julia)"
 
-#: ../Pinta.Core/Actions/AppActions.cs:48
+#: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
 msgstr ""
 
@@ -1410,7 +1424,7 @@ msgstr "ライセンス"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr ""
@@ -1461,7 +1475,7 @@ msgstr "明度"
 msgid "Magic Wand Select"
 msgstr "自動選択"
 
-#: ../Pinta/MainWindow.cs:440
+#: ../Pinta/MainWindow.cs:450
 msgid "Main Menu"
 msgstr ""
 
@@ -1490,10 +1504,6 @@ msgstr "中央値"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:290
 msgid "Medium"
-msgstr ""
-
-#: ../Pinta.Core/Actions/ViewActions.cs:131
-msgid "Menu Bar"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
@@ -1600,7 +1610,7 @@ msgstr "通常"
 msgid "Normal Blending"
 msgstr "ノーマルブレンド"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:99
+#: ../Pinta.Core/Actions/ViewActions.cs:97
 msgid "Normal Size"
 msgstr "標準のサイズ"
 
@@ -1855,7 +1865,7 @@ msgstr "Pinta は次のパレット形式をサポートしています:"
 msgid "Pixelate"
 msgstr "モザイク"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:213
 msgid "Pixels"
 msgstr "ピクセル"
 
@@ -1864,7 +1874,7 @@ msgstr "ピクセル"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+#: ../Pinta/Dialogs/PreferencesDialog.cs:81
 msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 
@@ -1916,6 +1926,10 @@ msgstr "ポスタリゼーション"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:138
 msgid "Power"
 msgstr "強さ"
+
+#: ../Pinta.Core/Actions/AppActions.cs:49
+msgid "Preferences..."
+msgstr ""
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -1990,7 +2004,7 @@ msgstr "品質"
 msgid "Quality: "
 msgstr "画質 "
 
-#: ../Pinta.Core/Actions/AppActions.cs:54
+#: ../Pinta.Core/Actions/AppActions.cs:60
 msgid "Quit"
 msgstr "終了"
 
@@ -2131,6 +2145,10 @@ msgstr "効果のレンダリング"
 msgid "Replace"
 msgstr "Replace"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+msgid "Replaces the header bar with a separate menu bar and tool bar."
+msgstr ""
+
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr ""
@@ -2179,10 +2197,6 @@ msgstr "画像サイズの変更..."
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr "パレットサイズの変更"
-
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
-msgid "Restart Pinta"
-msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
@@ -2250,11 +2264,11 @@ msgstr "円形"
 msgid "Rounded Rectangle"
 msgstr "角丸四角形"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:231
+#: ../Pinta.Core/Actions/ViewActions.cs:218
 msgid "Ruler Units"
 msgstr "ルーラーの単位"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:141
 msgid "Rulers"
 msgstr "ルーラー"
 
@@ -2363,7 +2377,7 @@ msgstr "シャープ化"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:106
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:368
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
-#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:51
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:49
 msgid "Shortcut key"
 msgstr "ショートカット"
 
@@ -2390,6 +2404,10 @@ msgstr ""
 msgid "Show Layer"
 msgstr "レイヤーを表示"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+msgid "Show Menu Bar"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Show Points"
@@ -2399,7 +2417,7 @@ msgstr ""
 msgid "Show Value"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:243
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Show/Hide"
 msgstr "表示/非表示"
 
@@ -2454,7 +2472,7 @@ msgstr "スプラッター"
 msgid "Squares"
 msgstr "四角形"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:137
+#: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr "ステータスバー"
 
@@ -2605,15 +2623,15 @@ msgstr "許容範囲"
 msgid "Tool"
 msgstr "ツール"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:135
 msgid "Tool Box"
 msgstr "ツールボックス"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:118
+#: ../Pinta.Core/Actions/ViewActions.cs:116
 msgid "Tool Windows"
 msgstr "ツールウィンドウ"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:106
+#: ../Pinta.Core/Actions/ViewActions.cs:104
 msgid "Toolbar"
 msgstr "ツールバー"
 
@@ -2744,6 +2762,10 @@ msgstr ""
 "プレビューには低品質（小さい画像、小さい角度）を使用し、確定時には高品質（大"
 "きな画像、大きな角度）を使用します。"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
+msgid "User Interface"
+msgstr ""
+
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
 msgstr "一部のアイコン:"
@@ -2773,7 +2795,7 @@ msgid "Vertical red (R)"
 msgstr ""
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:102
-#: ../Pinta/MainWindow.cs:460
+#: ../Pinta/MainWindow.cs:470
 msgid "View"
 msgstr ""
 
@@ -2806,8 +2828,8 @@ msgstr "白"
 msgid "Width:"
 msgstr "幅:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:208
-#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Actions/ViewActions.cs:195
+#: ../Pinta.Core/Actions/ViewActions.cs:368
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:106
@@ -2854,19 +2876,19 @@ msgstr "ズーム"
 msgid "Zoom Blur"
 msgstr "ズームぼかし"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom In"
 msgstr "拡大"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom Out"
 msgstr "縮小"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:93
+#: ../Pinta.Core/Actions/ViewActions.cs:91
 msgid "Zoom to Selection"
 msgstr "選択範囲に合わせる"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:394
 msgid "_Adjustments"
 msgstr "調整(_A)"
 
@@ -2883,19 +2905,19 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:390
 msgid "_Edit"
 msgstr "編集(_E)"
 
-#: ../Pinta/MainWindow.cs:392
+#: ../Pinta/MainWindow.cs:389
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:399
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:393
 msgid "_Image"
 msgstr "画像(_I)"
 
@@ -2910,11 +2932,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:392
 msgid "_View"
 msgstr "表示(_V)"
 
-#: ../Pinta/MainWindow.cs:401
+#: ../Pinta/MainWindow.cs:398
 msgid "_Window"
 msgstr "ウィンドウ(_W)"
 
@@ -2978,7 +3000,7 @@ msgstr "{0} パレット ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:377
+#: ../Pinta.Core/Actions/ViewActions.cs:349
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

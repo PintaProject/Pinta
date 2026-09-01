@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 00:13+0000\n"
+"POT-Creation-Date: 2026-09-01 03:52+0000\n"
 "PO-Revision-Date: 2025-10-29 01:52+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/pinta/pinta/he/>\n"
@@ -48,11 +48,11 @@ msgstr "אזור של 7 × 7"
 msgid "9 x 9 Region"
 msgstr "אזור של 9 × 9"
 
-#: ../Pinta/MainWindow.cs:400
+#: ../Pinta/MainWindow.cs:397
 msgid "A_dd-ins"
 msgstr "_תוספים"
 
-#: ../Pinta.Core/Actions/AppActions.cs:43
+#: ../Pinta.Core/Actions/AppActions.cs:44
 msgid "About"
 msgstr "על אודות"
 
@@ -79,7 +79,7 @@ msgid "Added"
 msgstr "נוספה"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:104
-#: ../Pinta/MainWindow.cs:450
+#: ../Pinta/MainWindow.cs:460
 msgid "Adjustments"
 msgstr "כוונונים"
 
@@ -142,6 +142,10 @@ msgstr "עוגן:"
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
 msgid "Angle"
 msgstr "זווית"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+msgid "Animate Selection Outline"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -216,7 +220,7 @@ msgstr "מבוסס על העבודה של Paint.NET:"
 msgid "Beautiful Italy"
 msgstr "איטליה היפה"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:86
+#: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Best Fit"
 msgstr "ההתאמה הטובה ביותר"
 
@@ -328,7 +332,7 @@ msgstr "באחוזים:"
 msgid "Cancel"
 msgstr "ביטול"
 
-#: ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "משטח ציור"
 
@@ -336,7 +340,7 @@ msgstr "משטח ציור"
 msgid "Canvas Grid Settings"
 msgstr "הגדרות רשת משטח ציור"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:125
+#: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "רשת משטח ציור…"
 
@@ -378,7 +382,7 @@ msgstr "מרכז ימין"
 msgid "Centered"
 msgstr "ממורכז"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:228
+#: ../Pinta.Core/Actions/ViewActions.cs:215
 msgid "Centimeters"
 msgstr "סנטימטרים"
 
@@ -551,7 +555,7 @@ msgstr "טווח צבעים"
 msgid "Color Saturation"
 msgstr "רווית הצבע"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:254
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -660,7 +664,7 @@ msgid "Cut"
 msgstr "גזירה"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:251
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
 msgid "Dark"
 msgstr ""
 
@@ -672,8 +676,8 @@ msgstr "האפלה"
 msgid "Dash"
 msgstr "קווקוו"
 
-#. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:247
+#. Translators: This refers to using the system default color scheme.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:5
 msgid "Default"
 msgstr ""
 
@@ -765,12 +769,12 @@ msgstr "איתור קצוות"
 msgid "Edit"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
 msgstr "_אפקטים"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:105
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:455
 msgid "Effects"
 msgstr ""
 
@@ -795,6 +799,12 @@ msgstr "תבליט"
 
 #: ../Pinta/Main.cs:67
 msgid "Enable additional logging or behavior changes for debugging"
+msgstr ""
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+msgid ""
+"Enables a \"marching ants\" effect to improve the selection's visibility. "
+"Disable to reduce CPU usage."
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
@@ -989,7 +999,7 @@ msgstr "צורה ביד חופשית"
 msgid "Frosted Glass"
 msgstr "זכוכית קפואה"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:152
 msgid "Fullscreen"
 msgstr "מסך מלא"
 
@@ -1000,6 +1010,10 @@ msgstr "גלריה"
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
 msgstr "טשטוש גאוסי"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
+msgid "General"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1115,7 +1129,7 @@ msgstr "אם השינויים לא ישמרו הם יאבדו לעד."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:254
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:103
-#: ../Pinta/MainWindow.cs:455
+#: ../Pinta/MainWindow.cs:465
 msgid "Image"
 msgstr "תמונה"
 
@@ -1123,7 +1137,7 @@ msgstr "תמונה"
 msgid "Image Editor"
 msgstr "עורך תמונות"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:112
+#: ../Pinta.Core/Actions/ViewActions.cs:110
 msgid "Image Tabs"
 msgstr "לשוניות תמונות"
 
@@ -1161,7 +1175,7 @@ msgid ""
 "Press Backspace to delete the last point."
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:214
 msgid "Inches"
 msgstr "אינצ׳ים"
 
@@ -1241,7 +1255,7 @@ msgstr ""
 msgid "Julia Fractal"
 msgstr "פרקטל יוליה"
 
-#: ../Pinta.Core/Actions/AppActions.cs:48
+#: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
 msgstr ""
 
@@ -1414,7 +1428,7 @@ msgstr "רישיון"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr ""
@@ -1465,7 +1479,7 @@ msgstr "עצמת התאורה"
 msgid "Magic Wand Select"
 msgstr "בחירה עם שרביט קסם"
 
-#: ../Pinta/MainWindow.cs:440
+#: ../Pinta/MainWindow.cs:450
 msgid "Main Menu"
 msgstr ""
 
@@ -1494,10 +1508,6 @@ msgstr "חציוני"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:290
 msgid "Medium"
-msgstr ""
-
-#: ../Pinta.Core/Actions/ViewActions.cs:131
-msgid "Menu Bar"
 msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
@@ -1604,7 +1614,7 @@ msgstr "רגיל"
 msgid "Normal Blending"
 msgstr "ערבול רגיל"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:99
+#: ../Pinta.Core/Actions/ViewActions.cs:97
 msgid "Normal Size"
 msgstr "גודל רגיל"
 
@@ -1859,7 +1869,7 @@ msgstr "ב־Pinta יש תמיכה בתצורות ערכות הצבעים הבא�
 msgid "Pixelate"
 msgstr "טשטוש לפיקסלים"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:213
 msgid "Pixels"
 msgstr "פיקסלים"
 
@@ -1868,7 +1878,7 @@ msgstr "פיקסלים"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+#: ../Pinta/Dialogs/PreferencesDialog.cs:81
 msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 
@@ -1920,6 +1930,10 @@ msgstr "הפחתת כמות הצבעים"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:138
 msgid "Power"
 msgstr "חוזק"
+
+#: ../Pinta.Core/Actions/AppActions.cs:49
+msgid "Preferences..."
+msgstr ""
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -1994,7 +2008,7 @@ msgstr "איכות"
 msgid "Quality: "
 msgstr "איכות: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:54
+#: ../Pinta.Core/Actions/AppActions.cs:60
 msgid "Quit"
 msgstr "יציאה"
 
@@ -2135,6 +2149,10 @@ msgstr "אפקט עיבוד"
 msgid "Replace"
 msgstr "החלפה"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+msgid "Replaces the header bar with a separate menu bar and tool bar."
+msgstr ""
+
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr ""
@@ -2183,10 +2201,6 @@ msgstr "שינוי גודל התמונה..."
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr "שינוי גודל ערכת הצבעים"
-
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
-msgid "Restart Pinta"
-msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
@@ -2254,11 +2268,11 @@ msgstr "צורת קו מעוגלת"
 msgid "Rounded Rectangle"
 msgstr "מלבן מעוגל"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:231
+#: ../Pinta.Core/Actions/ViewActions.cs:218
 msgid "Ruler Units"
 msgstr "יחידות הסרגל"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:141
 msgid "Rulers"
 msgstr "סרגלים"
 
@@ -2367,7 +2381,7 @@ msgstr "חידוד"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:106
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:368
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
-#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:51
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:49
 msgid "Shortcut key"
 msgstr "מקש קיצור"
 
@@ -2394,6 +2408,10 @@ msgstr ""
 msgid "Show Layer"
 msgstr "הצגת השכבה"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+msgid "Show Menu Bar"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Show Points"
@@ -2403,7 +2421,7 @@ msgstr ""
 msgid "Show Value"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:243
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Show/Hide"
 msgstr ""
 
@@ -2458,7 +2476,7 @@ msgstr "פיזור"
 msgid "Squares"
 msgstr "מרובעים"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:137
+#: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr ""
 
@@ -2609,15 +2627,15 @@ msgstr "טולרנטיות"
 msgid "Tool"
 msgstr "כלי"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:135
 msgid "Tool Box"
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:118
+#: ../Pinta.Core/Actions/ViewActions.cs:116
 msgid "Tool Windows"
 msgstr "חלונות כלים"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:106
+#: ../Pinta.Core/Actions/ViewActions.cs:104
 msgid "Toolbar"
 msgstr "סרגל כלים"
 
@@ -2748,6 +2766,10 @@ msgstr ""
 "כדאי להשתמש באיכות נמוכה עבור תצוגות מקדימות, תמונות קטנות וזוויות קטנות. "
 "באיכות גבוהה כדאי להשתמש לאיכות גימור, תמונות גדולות וזוויות גדולות."
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
+msgid "User Interface"
+msgstr ""
+
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
 msgstr "נעשה שימוש בכמה סמלים מ־:"
@@ -2777,7 +2799,7 @@ msgid "Vertical red (R)"
 msgstr ""
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:102
-#: ../Pinta/MainWindow.cs:460
+#: ../Pinta/MainWindow.cs:470
 msgid "View"
 msgstr ""
 
@@ -2810,8 +2832,8 @@ msgstr "לבן"
 msgid "Width:"
 msgstr "רוחב:‏"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:208
-#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Actions/ViewActions.cs:195
+#: ../Pinta.Core/Actions/ViewActions.cs:368
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:106
@@ -2856,19 +2878,19 @@ msgstr "תקריב"
 msgid "Zoom Blur"
 msgstr "טשטוש מרחק"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom In"
 msgstr "התקרבות"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom Out"
 msgstr "התרחקות"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:93
+#: ../Pinta.Core/Actions/ViewActions.cs:91
 msgid "Zoom to Selection"
 msgstr "תקריב על הבחירה"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:394
 msgid "_Adjustments"
 msgstr "הת_אמות"
 
@@ -2885,19 +2907,19 @@ msgstr ""
 msgid "_Discard"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:390
 msgid "_Edit"
 msgstr "ע_ריכה"
 
-#: ../Pinta/MainWindow.cs:392
+#: ../Pinta/MainWindow.cs:389
 msgid "_File"
 msgstr "_קובץ"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:399
 msgid "_Help"
 msgstr "ע_זרה"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:393
 msgid "_Image"
 msgstr "ת_מונה"
 
@@ -2912,11 +2934,11 @@ msgstr ""
 msgid "_Save"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:392
 msgid "_View"
 msgstr "ת_צוגה"
 
-#: ../Pinta/MainWindow.cs:401
+#: ../Pinta/MainWindow.cs:398
 msgid "_Window"
 msgstr "_חלון"
 
@@ -2977,7 +2999,7 @@ msgstr "ערכת צבעים של {0}‏ ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:377
+#: ../Pinta.Core/Actions/ViewActions.cs:349
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"

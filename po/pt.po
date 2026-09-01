@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 00:13+0000\n"
+"POT-Creation-Date: 2026-09-01 03:52+0000\n"
 "PO-Revision-Date: 2026-05-10 20:23+0000\n"
 "Last-Translator: tomasteixeira07 <tomasteixeira93@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/pinta/pinta/"
@@ -50,11 +50,11 @@ msgstr "Área 7x7"
 msgid "9 x 9 Region"
 msgstr "Área 9x9"
 
-#: ../Pinta/MainWindow.cs:400
+#: ../Pinta/MainWindow.cs:397
 msgid "A_dd-ins"
 msgstr "E_xtras"
 
-#: ../Pinta.Core/Actions/AppActions.cs:43
+#: ../Pinta.Core/Actions/AppActions.cs:44
 msgid "About"
 msgstr "Acerca"
 
@@ -81,7 +81,7 @@ msgid "Added"
 msgstr "Adicionado"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:104
-#: ../Pinta/MainWindow.cs:450
+#: ../Pinta/MainWindow.cs:460
 msgid "Adjustments"
 msgstr "Ajustes"
 
@@ -144,6 +144,10 @@ msgstr "Âncora:"
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
 msgid "Angle"
 msgstr "Ângulo"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+msgid "Animate Selection Outline"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -218,7 +222,7 @@ msgstr "Inspirado no Paint.NET:"
 msgid "Beautiful Italy"
 msgstr "Bela Itália"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:86
+#: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Best Fit"
 msgstr "Melhor ajuste"
 
@@ -330,7 +334,7 @@ msgstr "Em percentagem:"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "Tela"
 
@@ -338,7 +342,7 @@ msgstr "Tela"
 msgid "Canvas Grid Settings"
 msgstr "Configurações da Grade da Tela"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:125
+#: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Grade de Tela..."
 
@@ -380,7 +384,7 @@ msgstr "Centro Direito"
 msgid "Centered"
 msgstr "Centrado"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:228
+#: ../Pinta.Core/Actions/ViewActions.cs:215
 msgid "Centimeters"
 msgstr "Centímetros"
 
@@ -563,7 +567,7 @@ msgstr "Intervalo de cor"
 msgid "Color Saturation"
 msgstr "Saturação da cor"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:254
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -672,7 +676,7 @@ msgid "Cut"
 msgstr "Cortar"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:251
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
 msgid "Dark"
 msgstr "Escuro"
 
@@ -684,8 +688,8 @@ msgstr "Escurecer"
 msgid "Dash"
 msgstr "Painel"
 
-#. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:247
+#. Translators: This refers to using the system default color scheme.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:5
 msgid "Default"
 msgstr "Padrão"
 
@@ -777,12 +781,12 @@ msgstr "Detecção de contornos"
 msgid "Edit"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
 msgstr "Efeito_s"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:105
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:455
 msgid "Effects"
 msgstr "Efeitos"
 
@@ -808,6 +812,12 @@ msgstr "Gravar em relevo"
 #: ../Pinta/Main.cs:67
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr "Ativar registro adicional ou mudanças de comportamento para depuração"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+msgid ""
+"Enables a \"marching ants\" effect to improve the selection's visibility. "
+"Disable to reduce CPU usage."
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -1001,7 +1011,7 @@ msgstr "Forma Freeform"
 msgid "Frosted Glass"
 msgstr "Vidro fosco"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:152
 msgid "Fullscreen"
 msgstr "Tela inteira"
 
@@ -1012,6 +1022,10 @@ msgstr "Galeria"
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
 msgstr "Mancha Gaussiana"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
+msgid "General"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1127,7 +1141,7 @@ msgstr "Se não gravar o trabalho, todas as alterações serão perdidas."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:254
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:103
-#: ../Pinta/MainWindow.cs:455
+#: ../Pinta/MainWindow.cs:465
 msgid "Image"
 msgstr "Imagem"
 
@@ -1135,7 +1149,7 @@ msgstr "Imagem"
 msgid "Image Editor"
 msgstr "Editor de imagens"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:112
+#: ../Pinta.Core/Actions/ViewActions.cs:110
 msgid "Image Tabs"
 msgstr "Separadores de imagem"
 
@@ -1179,7 +1193,7 @@ msgstr ""
 "Prima Enter para concluir a seleção.\n"
 "Prima Backspace para eliminar o último ponto."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:214
 msgid "Inches"
 msgstr "Polegadas"
 
@@ -1259,7 +1273,7 @@ msgstr "Jarvis-Judice-Ninke"
 msgid "Julia Fractal"
 msgstr "Fractal Julia"
 
-#: ../Pinta.Core/Actions/AppActions.cs:48
+#: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
 msgstr ""
 
@@ -1484,7 +1498,7 @@ msgstr "Licença"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "Claro"
@@ -1535,7 +1549,7 @@ msgstr "Luminosidade"
 msgid "Magic Wand Select"
 msgstr "Seleção varinha mágica"
 
-#: ../Pinta/MainWindow.cs:440
+#: ../Pinta/MainWindow.cs:450
 msgid "Main Menu"
 msgstr "Menu Principal"
 
@@ -1565,10 +1579,6 @@ msgstr "Mediana"
 #: ../Pinta.Tools/Tools/TextTool.cs:290
 msgid "Medium"
 msgstr "Medium"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:131
-msgid "Menu Bar"
-msgstr "Barra do Menu"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:335
@@ -1674,7 +1684,7 @@ msgstr "Normal"
 msgid "Normal Blending"
 msgstr "Mistura normal"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:99
+#: ../Pinta.Core/Actions/ViewActions.cs:97
 msgid "Normal Size"
 msgstr "Normal"
 
@@ -1930,7 +1940,7 @@ msgstr "O Pinta suporta os seguintes formatos de paleta:"
 msgid "Pixelate"
 msgstr "Pixelizar"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:213
 msgid "Pixels"
 msgstr "Pixéis"
 
@@ -1939,7 +1949,7 @@ msgstr "Pixéis"
 msgid "Piña Colada"
 msgstr "Pina Colada"
 
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+#: ../Pinta/Dialogs/PreferencesDialog.cs:81
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Por favor, reinicie o Pinta para aplicar as alterações."
 
@@ -1991,6 +2001,10 @@ msgstr "Aplicar gradação"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:138
 msgid "Power"
 msgstr "Energia"
+
+#: ../Pinta.Core/Actions/AppActions.cs:49
+msgid "Preferences..."
+msgstr ""
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -2065,7 +2079,7 @@ msgstr "Qualidade"
 msgid "Quality: "
 msgstr "Qualidade: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:54
+#: ../Pinta.Core/Actions/AppActions.cs:60
 msgid "Quit"
 msgstr "Sair"
 
@@ -2206,6 +2220,10 @@ msgstr "Efeito de processamento"
 msgid "Replace"
 msgstr "Substituir"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+msgid "Replaces the header bar with a separate menu bar and tool bar."
+msgstr ""
+
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Reportar Erro..."
@@ -2254,10 +2272,6 @@ msgstr "Redimensionar imagem..."
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr "Ajustar paleta"
-
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
-msgid "Restart Pinta"
-msgstr "Reiniciar Pinta"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
@@ -2325,11 +2339,11 @@ msgstr "Forma da linha arredondada"
 msgid "Rounded Rectangle"
 msgstr "Retângulo arredondado"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:231
+#: ../Pinta.Core/Actions/ViewActions.cs:218
 msgid "Ruler Units"
 msgstr "Unidades da Régua"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:141
 msgid "Rulers"
 msgstr "Réguas"
 
@@ -2438,7 +2452,7 @@ msgstr "Precisão"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:106
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:368
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
-#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:51
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:49
 msgid "Shortcut key"
 msgstr "Tecla de atalho"
 
@@ -2465,6 +2479,10 @@ msgstr "Mostrar Grade"
 msgid "Show Layer"
 msgstr "Mostrar camada"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+msgid "Show Menu Bar"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Show Points"
@@ -2474,7 +2492,7 @@ msgstr "Mostrar Pontos"
 msgid "Show Value"
 msgstr "Mostrar Valor"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:243
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Show/Hide"
 msgstr "Mostrar/Ocultar"
 
@@ -2529,7 +2547,7 @@ msgstr "Salpico"
 msgid "Squares"
 msgstr "Quadrados"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:137
+#: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr "Barra de Estado"
 
@@ -2687,15 +2705,15 @@ msgstr "Tolerância"
 msgid "Tool"
 msgstr "Ferramenta"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:135
 msgid "Tool Box"
 msgstr "Caixa de Ferramentas"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:118
+#: ../Pinta.Core/Actions/ViewActions.cs:116
 msgid "Tool Windows"
 msgstr "Janelas de ferramentas"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:106
+#: ../Pinta.Core/Actions/ViewActions.cs:104
 msgid "Toolbar"
 msgstr "Barra de ferramentas"
 
@@ -2826,6 +2844,10 @@ msgstr ""
 "Utilize uma qualidade baixa para antevisões, imagens e ângulos pequenos. "
 "Utilize uma qualidade alta para trabalho final, imagens e ângulos grandes."
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
+msgid "User Interface"
+msgstr ""
+
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
 msgstr "Utiliza alguns ícones de:"
@@ -2855,7 +2877,7 @@ msgid "Vertical red (R)"
 msgstr "Vermelho Vertical (B)"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:102
-#: ../Pinta/MainWindow.cs:460
+#: ../Pinta/MainWindow.cs:470
 msgid "View"
 msgstr "Ver"
 
@@ -2888,8 +2910,8 @@ msgstr "Branco"
 msgid "Width:"
 msgstr "Largura:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:208
-#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Actions/ViewActions.cs:195
+#: ../Pinta.Core/Actions/ViewActions.cs:368
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:106
@@ -2936,19 +2958,19 @@ msgstr "Ampliação"
 msgid "Zoom Blur"
 msgstr "Mancha ampliada"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom In"
 msgstr "Ampliar"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom Out"
 msgstr "Reduzir"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:93
+#: ../Pinta.Core/Actions/ViewActions.cs:91
 msgid "Zoom to Selection"
 msgstr "Ajustar à seleção"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:394
 msgid "_Adjustments"
 msgstr "_Ajustes"
 
@@ -2965,19 +2987,19 @@ msgstr "_Cancelar"
 msgid "_Discard"
 msgstr "_Descartar"
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:390
 msgid "_Edit"
 msgstr "_Editar"
 
-#: ../Pinta/MainWindow.cs:392
+#: ../Pinta/MainWindow.cs:389
 msgid "_File"
 msgstr "_Ficheiro"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:399
 msgid "_Help"
 msgstr "Aj_uda"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:393
 msgid "_Image"
 msgstr "_Imagem"
 
@@ -2992,11 +3014,11 @@ msgstr "_OK"
 msgid "_Save"
 msgstr "_Salvar"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:392
 msgid "_View"
 msgstr "_Ver"
 
-#: ../Pinta/MainWindow.cs:401
+#: ../Pinta/MainWindow.cs:398
 msgid "_Window"
 msgstr "_Janela"
 
@@ -3070,10 +3092,16 @@ msgstr "{0} paleta ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:377
+#: ../Pinta.Core/Actions/ViewActions.cs:349
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Menu Bar"
+#~ msgstr "Barra do Menu"
+
+#~ msgid "Restart Pinta"
+#~ msgstr "Reiniciar Pinta"
 
 #~ msgid "ICO files can not be larger than 255 x 255 pixels."
 #~ msgstr "Os ficheiros ICO não podem ser maiores do que 255x255 pixéis."
