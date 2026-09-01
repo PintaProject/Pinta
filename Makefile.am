@@ -64,9 +64,11 @@ list:
 	fi
 
 #target: updatepotfiles - update the POTFILES.in file
+# Note that intltool needs the [type:] prefix to correctly handle .ui files
 updatepotfiles:
 	echo xdg/com.github.PintaProject.Pinta.desktop.in > po/POTFILES.in
 	echo xdg/com.github.PintaProject.Pinta.metainfo.xml.in >> po/POTFILES.in
+	find . -name \*.ui | sort | sed 's/^/[type: gettext\/glade]/' >> po/POTFILES.in
 	find \
 		Pinta \
 		Pinta.Core \
