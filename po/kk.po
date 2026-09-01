@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 00:13+0000\n"
+"POT-Creation-Date: 2026-09-01 03:52+0000\n"
 "PO-Revision-Date: 2026-03-18 00:23+0000\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <https://hosted.weblate.org/projects/pinta/pinta/kk/>\n"
@@ -47,11 +47,11 @@ msgstr "7 x 7 аумағы"
 msgid "9 x 9 Region"
 msgstr "9 x 9 аумағы"
 
-#: ../Pinta/MainWindow.cs:400
+#: ../Pinta/MainWindow.cs:397
 msgid "A_dd-ins"
 msgstr "Қосы_мшалар"
 
-#: ../Pinta.Core/Actions/AppActions.cs:43
+#: ../Pinta.Core/Actions/AppActions.cs:44
 msgid "About"
 msgstr "Осы туралы"
 
@@ -78,7 +78,7 @@ msgid "Added"
 msgstr "Қосылды"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:104
-#: ../Pinta/MainWindow.cs:450
+#: ../Pinta/MainWindow.cs:460
 msgid "Adjustments"
 msgstr "Түзетулер"
 
@@ -141,6 +141,10 @@ msgstr "Зәкір:"
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
 msgid "Angle"
 msgstr "Бұрыш"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+msgid "Animate Selection Outline"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -215,7 +219,7 @@ msgstr "Paint.NET жұмысына негізделген:"
 msgid "Beautiful Italy"
 msgstr "Әдемі Италия"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:86
+#: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Best Fit"
 msgstr "Ең қолайлы өлшем"
 
@@ -327,7 +331,7 @@ msgstr "Пайыз бойынша:"
 msgid "Cancel"
 msgstr "Бас тарту"
 
-#: ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "Кенеп"
 
@@ -335,7 +339,7 @@ msgstr "Кенеп"
 msgid "Canvas Grid Settings"
 msgstr "Кенеп торының баптаулары"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:125
+#: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Кенеп торы..."
 
@@ -377,7 +381,7 @@ msgstr "Ортаңғы оң жақ"
 msgid "Centered"
 msgstr "Ортасына келтірілген"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:228
+#: ../Pinta.Core/Actions/ViewActions.cs:215
 msgid "Centimeters"
 msgstr "Сантиметрлер"
 
@@ -557,7 +561,7 @@ msgstr "Түстер ауқымы"
 msgid "Color Saturation"
 msgstr "Түс қанықтылығы"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:254
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -666,7 +670,7 @@ msgid "Cut"
 msgstr "Қиып алу"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:251
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
 msgid "Dark"
 msgstr "Қараңғы"
 
@@ -678,8 +682,8 @@ msgstr "Қараңғылату"
 msgid "Dash"
 msgstr "Штрих"
 
-#. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:247
+#. Translators: This refers to using the system default color scheme.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:5
 msgid "Default"
 msgstr "Бастапқы"
 
@@ -771,12 +775,12 @@ msgstr "Жиектерді анықтау"
 msgid "Edit"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
 msgstr "Әс_ерлер"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:105
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:455
 msgid "Effects"
 msgstr "Әсерлер"
 
@@ -804,6 +808,12 @@ msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 "Мәселелерді шешу үшін қосымша логтауды немесе мінез-құлық өзгерістерін іске "
 "қосу"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+msgid ""
+"Enables a \"marching ants\" effect to improve the selection's visibility. "
+"Disable to reduce CPU usage."
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -997,7 +1007,7 @@ msgstr "Еркін пішін"
 msgid "Frosted Glass"
 msgstr "Күңгірт шыны"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:152
 msgid "Fullscreen"
 msgstr "Толық экран"
 
@@ -1008,6 +1018,10 @@ msgstr "Галерея"
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
 msgstr "Гаусс бұлыңғырлауы"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
+msgid "General"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1123,7 +1137,7 @@ msgstr "Сақтамасаңыз, барлық өзгерістер біржол
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:254
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:103
-#: ../Pinta/MainWindow.cs:455
+#: ../Pinta/MainWindow.cs:465
 msgid "Image"
 msgstr "Сурет"
 
@@ -1131,7 +1145,7 @@ msgstr "Сурет"
 msgid "Image Editor"
 msgstr "Сурет редакторы"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:112
+#: ../Pinta.Core/Actions/ViewActions.cs:110
 msgid "Image Tabs"
 msgstr "Сурет беттері"
 
@@ -1174,7 +1188,7 @@ msgstr ""
 "Ерекшелеуді аяқтау үшін Enter басыңыз.\n"
 "Соңғы нүктені өшіру үшін Backspace басыңыз."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:214
 msgid "Inches"
 msgstr "Дюймдер"
 
@@ -1254,7 +1268,7 @@ msgstr "Джарвис-Джудис-Нинке"
 msgid "Julia Fractal"
 msgstr "Жюлиа фракталы"
 
-#: ../Pinta.Core/Actions/AppActions.cs:48
+#: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
 msgstr ""
 
@@ -1469,7 +1483,7 @@ msgstr "Лицензия"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "Жеңіл"
@@ -1520,7 +1534,7 @@ msgstr "Жарықтылық"
 msgid "Magic Wand Select"
 msgstr "Сиқырлы таяқшамен ерекшелеу"
 
-#: ../Pinta/MainWindow.cs:440
+#: ../Pinta/MainWindow.cs:450
 msgid "Main Menu"
 msgstr "Бас мәзір"
 
@@ -1550,10 +1564,6 @@ msgstr "Медиана"
 #: ../Pinta.Tools/Tools/TextTool.cs:290
 msgid "Medium"
 msgstr "Орташа"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:131
-msgid "Menu Bar"
-msgstr "Мәзір жолағы"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:335
@@ -1659,7 +1669,7 @@ msgstr "Қалыпты"
 msgid "Normal Blending"
 msgstr "Қалыпты араластыру"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:99
+#: ../Pinta.Core/Actions/ViewActions.cs:97
 msgid "Normal Size"
 msgstr "Қалыпты өлшем"
 
@@ -1916,7 +1926,7 @@ msgstr "Pinta келесі палитра пішімдерін қолдайды:
 msgid "Pixelate"
 msgstr "Пикселизациялау"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:213
 msgid "Pixels"
 msgstr "Пиксельдер"
 
@@ -1925,7 +1935,7 @@ msgstr "Пиксельдер"
 msgid "Piña Colada"
 msgstr "Пинья Колада"
 
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+#: ../Pinta/Dialogs/PreferencesDialog.cs:81
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Өзгерістер іске асуы үшін Pinta қолданбасын қайта іске қосыңыз."
 
@@ -1977,6 +1987,10 @@ msgstr "Постеризация"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:138
 msgid "Power"
 msgstr "Қуат"
+
+#: ../Pinta.Core/Actions/AppActions.cs:49
+msgid "Preferences..."
+msgstr ""
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -2051,7 +2065,7 @@ msgstr "Сапасы"
 msgid "Quality: "
 msgstr "Сапасы: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:54
+#: ../Pinta.Core/Actions/AppActions.cs:60
 msgid "Quit"
 msgstr "Шығу"
 
@@ -2192,6 +2206,10 @@ msgstr "Әсерді рендерингтеу"
 msgid "Replace"
 msgstr "Алмастыру"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+msgid "Replaces the header bar with a separate menu bar and tool bar."
+msgstr ""
+
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Қате туралы хабарлау..."
@@ -2240,10 +2258,6 @@ msgstr "Сурет өлшемін өзгерту..."
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr "Палитра өлшемін өзгерту"
-
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
-msgid "Restart Pinta"
-msgstr "Pinta қолданбасын қайта іске қосу"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
@@ -2311,11 +2325,11 @@ msgstr "Дөңгеленген сызық пішіні"
 msgid "Rounded Rectangle"
 msgstr "Дөңгеленген тіктөртбұрыш"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:231
+#: ../Pinta.Core/Actions/ViewActions.cs:218
 msgid "Ruler Units"
 msgstr "Сызғыш бірліктері"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:141
 msgid "Rulers"
 msgstr "Сызғыштар"
 
@@ -2424,7 +2438,7 @@ msgstr "Өткірлік"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:106
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:368
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
-#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:51
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:49
 msgid "Shortcut key"
 msgstr "Жарлық пернесі"
 
@@ -2451,6 +2465,10 @@ msgstr "Торды көрсету"
 msgid "Show Layer"
 msgstr "Қабатты көрсету"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+msgid "Show Menu Bar"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Show Points"
@@ -2460,7 +2478,7 @@ msgstr "Нүктелерді көрсету"
 msgid "Show Value"
 msgstr "Мәнді көрсету"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:243
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Show/Hide"
 msgstr "Көрсету/Жасыру"
 
@@ -2515,7 +2533,7 @@ msgstr "Шашырату"
 msgid "Squares"
 msgstr "Шаршылар"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:137
+#: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr "Қалып-күй жолағы"
 
@@ -2670,15 +2688,15 @@ msgstr "Шыдамдылық"
 msgid "Tool"
 msgstr "Сайман"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:135
 msgid "Tool Box"
 msgstr "Саймандар қорабы"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:118
+#: ../Pinta.Core/Actions/ViewActions.cs:116
 msgid "Tool Windows"
 msgstr "Сайман терезелері"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:106
+#: ../Pinta.Core/Actions/ViewActions.cs:104
 msgid "Toolbar"
 msgstr "Саймандар панелі"
 
@@ -2810,6 +2828,10 @@ msgstr ""
 "пайдаланыңыз. Соңғы сапа, үлкен суреттер мен үлкен бұрыштар үшін жоғары "
 "сапаны пайдаланыңыз."
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
+msgid "User Interface"
+msgstr ""
+
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
 msgstr "Кейбір таңбашалар алынған жер:"
@@ -2839,7 +2861,7 @@ msgid "Vertical red (R)"
 msgstr "Вертикалды қызыл (R)"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:102
-#: ../Pinta/MainWindow.cs:460
+#: ../Pinta/MainWindow.cs:470
 msgid "View"
 msgstr "Көрініс"
 
@@ -2872,8 +2894,8 @@ msgstr "Ақ"
 msgid "Width:"
 msgstr "Ені:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:208
-#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Actions/ViewActions.cs:195
+#: ../Pinta.Core/Actions/ViewActions.cs:368
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:106
@@ -2920,19 +2942,19 @@ msgstr "Масштаб"
 msgid "Zoom Blur"
 msgstr "Масштабтық бұлыңғырлау"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom In"
 msgstr "Үлкейту"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom Out"
 msgstr "Кішірейту"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:93
+#: ../Pinta.Core/Actions/ViewActions.cs:91
 msgid "Zoom to Selection"
 msgstr "Ерекшелеуге дейін үлкейту"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:394
 msgid "_Adjustments"
 msgstr "_Түзетулер"
 
@@ -2949,19 +2971,19 @@ msgstr "_Бас тарту"
 msgid "_Discard"
 msgstr "_Елемеу"
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:390
 msgid "_Edit"
 msgstr "Түз_ету"
 
-#: ../Pinta/MainWindow.cs:392
+#: ../Pinta/MainWindow.cs:389
 msgid "_File"
 msgstr "_Файл"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:399
 msgid "_Help"
 msgstr "_Көмек"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:393
 msgid "_Image"
 msgstr "_Сурет"
 
@@ -2976,11 +2998,11 @@ msgstr "_ОК"
 msgid "_Save"
 msgstr "_Сақтау"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:392
 msgid "_View"
 msgstr "Көр_ініс"
 
-#: ../Pinta/MainWindow.cs:401
+#: ../Pinta/MainWindow.cs:398
 msgid "_Window"
 msgstr "_Терезе"
 
@@ -3033,10 +3055,16 @@ msgstr "{0} палитрасы ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:377
+#: ../Pinta.Core/Actions/ViewActions.cs:349
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Menu Bar"
+#~ msgstr "Мәзір жолағы"
+
+#~ msgid "Restart Pinta"
+#~ msgstr "Pinta қолданбасын қайта іске қосу"
 
 #~ msgid "ICO files can not be larger than 255 x 255 pixels."
 #~ msgstr "ICO файлдары 255 x 255 пиксельден аспауы керек."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 00:13+0000\n"
+"POT-Creation-Date: 2026-09-01 03:52+0000\n"
 "PO-Revision-Date: 2025-06-17 12:30+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/pinta/pinta/ta/>\n"
@@ -47,11 +47,11 @@ msgstr "7 ஃச் 7 பகுதி"
 msgid "9 x 9 Region"
 msgstr "9 ஃச் 9 Region"
 
-#: ../Pinta/MainWindow.cs:400
+#: ../Pinta/MainWindow.cs:397
 msgid "A_dd-ins"
 msgstr "A_dd-ins"
 
-#: ../Pinta.Core/Actions/AppActions.cs:43
+#: ../Pinta.Core/Actions/AppActions.cs:44
 msgid "About"
 msgstr "பற்றி"
 
@@ -78,7 +78,7 @@ msgid "Added"
 msgstr "சேர்க்கப்பட்டது"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:104
-#: ../Pinta/MainWindow.cs:450
+#: ../Pinta/MainWindow.cs:460
 msgid "Adjustments"
 msgstr "சரிசெய்தல்"
 
@@ -141,6 +141,10 @@ msgstr "நங்கூரம்:"
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
 msgid "Angle"
 msgstr "கோணம்"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+msgid "Animate Selection Outline"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -215,7 +219,7 @@ msgstr "பெயிண்ட்.நெட் வேலையின் அடி
 msgid "Beautiful Italy"
 msgstr "அழகான இத்தாலி"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:86
+#: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Best Fit"
 msgstr "சிறந்த பொருத்தம்"
 
@@ -327,7 +331,7 @@ msgstr "விழுக்காடு மூலம்:"
 msgid "Cancel"
 msgstr "ரத்துசெய்"
 
-#: ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "கேன்வாச்"
 
@@ -335,7 +339,7 @@ msgstr "கேன்வாச்"
 msgid "Canvas Grid Settings"
 msgstr "கேன்வாச் கட்டம் அமைப்புகள்"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:125
+#: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "கேன்வாச் கட்டம் ..."
 
@@ -377,7 +381,7 @@ msgstr "நடுவண் சரியானது"
 msgid "Centered"
 msgstr "மையப்படுத்தப்பட்ட"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:228
+#: ../Pinta.Core/Actions/ViewActions.cs:215
 msgid "Centimeters"
 msgstr "சென்டிமீட்டர்"
 
@@ -554,7 +558,7 @@ msgstr "வண்ண வரம்பு"
 msgid "Color Saturation"
 msgstr "வண்ண செறிவு"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:254
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -663,7 +667,7 @@ msgid "Cut"
 msgstr "வெட்டு"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:251
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
 msgid "Dark"
 msgstr "இருண்ட"
 
@@ -675,8 +679,8 @@ msgstr "தட்டவும்"
 msgid "Dash"
 msgstr "கோடு"
 
-#. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:247
+#. Translators: This refers to using the system default color scheme.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:5
 msgid "Default"
 msgstr "இயல்புநிலை"
 
@@ -768,12 +772,12 @@ msgstr "விளிம்பு கண்டறிதல்"
 msgid "Edit"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
 msgstr "விளைவுகள்"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:105
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:455
 msgid "Effects"
 msgstr "விளைவுகள்"
 
@@ -799,6 +803,12 @@ msgstr "புடைப்பு"
 #: ../Pinta/Main.cs:67
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr "பிழைத்திருத்தத்திற்கான கூடுதல் பதிவு அல்லது நடத்தை மாற்றங்களை இயக்கவும்"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+msgid ""
+"Enables a \"marching ants\" effect to improve the selection's visibility. "
+"Disable to reduce CPU usage."
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -992,7 +1002,7 @@ msgstr "ஃப்ரீஃபார்ம் வடிவம்"
 msgid "Frosted Glass"
 msgstr "உறைந்த கண்ணாடி"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:152
 msgid "Fullscreen"
 msgstr "முழு திரை"
 
@@ -1003,6 +1013,10 @@ msgstr "கேலரி"
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
 msgstr "காசியன் மங்கலானது"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
+msgid "General"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1118,7 +1132,7 @@ msgstr "நீங்கள் சேமிக்கவில்லை என்�
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:254
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:103
-#: ../Pinta/MainWindow.cs:455
+#: ../Pinta/MainWindow.cs:465
 msgid "Image"
 msgstr "படம்"
 
@@ -1126,7 +1140,7 @@ msgstr "படம்"
 msgid "Image Editor"
 msgstr "பட ஆசிரியர்"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:112
+#: ../Pinta.Core/Actions/ViewActions.cs:110
 msgid "Image Tabs"
 msgstr "பட தாவல்கள்"
 
@@ -1164,7 +1178,7 @@ msgid ""
 "Press Backspace to delete the last point."
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:214
 msgid "Inches"
 msgstr "அங்குலங்கள்"
 
@@ -1244,7 +1258,7 @@ msgstr "சார்விச்-சூனிச் மடிந்தது"
 msgid "Julia Fractal"
 msgstr "சூலியா ஃப்ராக்டல்"
 
-#: ../Pinta.Core/Actions/AppActions.cs:48
+#: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
 msgstr ""
 
@@ -1452,7 +1466,7 @@ msgstr "உரிமம்"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "ஒளி"
@@ -1503,7 +1517,7 @@ msgstr "ஒளிர்வு"
 msgid "Magic Wand Select"
 msgstr "மேசிக் வாண்ட் தேர்ந்தெடுக்கவும்"
 
-#: ../Pinta/MainWindow.cs:440
+#: ../Pinta/MainWindow.cs:450
 msgid "Main Menu"
 msgstr "பட்டியல் விளையாடுங்கள்"
 
@@ -1533,10 +1547,6 @@ msgstr "இடைநடு"
 #: ../Pinta.Tools/Tools/TextTool.cs:290
 msgid "Medium"
 msgstr ""
-
-#: ../Pinta.Core/Actions/ViewActions.cs:131
-msgid "Menu Bar"
-msgstr "பட்டியல் பட்டி"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:335
@@ -1642,7 +1652,7 @@ msgstr "சாதாரண"
 msgid "Normal Blending"
 msgstr "சாதாரண கலவை"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:99
+#: ../Pinta.Core/Actions/ViewActions.cs:97
 msgid "Normal Size"
 msgstr "சாதாரண அளவு"
 
@@ -1898,7 +1908,7 @@ msgstr "பிந்தா பின்வரும் தட்டு வடி
 msgid "Pixelate"
 msgstr "பிக்சலேட்"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:213
 msgid "Pixels"
 msgstr "படப்புள்ளிகள்"
 
@@ -1907,7 +1917,7 @@ msgstr "படப்புள்ளிகள்"
 msgid "Piña Colada"
 msgstr "பினா கோலாடா"
 
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+#: ../Pinta/Dialogs/PreferencesDialog.cs:81
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "மாற்றங்கள் நடைமுறைக்கு வர பிண்டாவை மறுதொடக்கம் செய்யுங்கள்."
 
@@ -1959,6 +1969,10 @@ msgstr "சுவரொட்டி"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:138
 msgid "Power"
 msgstr "விசை"
+
+#: ../Pinta.Core/Actions/AppActions.cs:49
+msgid "Preferences..."
+msgstr ""
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -2033,7 +2047,7 @@ msgstr "தகுதி"
 msgid "Quality: "
 msgstr "தரம்: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:54
+#: ../Pinta.Core/Actions/AppActions.cs:60
 msgid "Quit"
 msgstr "வெளியேறு"
 
@@ -2174,6 +2188,10 @@ msgstr "வழங்குதல் விளைவு"
 msgid "Replace"
 msgstr "மாற்றவும்"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+msgid "Replaces the header bar with a separate menu bar and tool bar."
+msgstr ""
+
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "பிழையைப் புகாரளிக்கவும் ..."
@@ -2222,10 +2240,6 @@ msgstr "மறுஅளவிடுதல் படம் ..."
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr "மறுஅளவிடுதல் தட்டு"
-
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
-msgid "Restart Pinta"
-msgstr "பிண்டாவை மறுதொடக்கம் செய்"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
@@ -2293,11 +2307,11 @@ msgstr "வட்டமான வரி வடிவம்"
 msgid "Rounded Rectangle"
 msgstr "வட்டமான செவ்வகம்"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:231
+#: ../Pinta.Core/Actions/ViewActions.cs:218
 msgid "Ruler Units"
 msgstr "ஆட்சியாளர் அலகுகள்"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:141
 msgid "Rulers"
 msgstr "ஆட்சியாளர்கள்"
 
@@ -2406,7 +2420,7 @@ msgstr "கூர்மைப்படுத்துங்கள்"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:106
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:368
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
-#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:51
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:49
 msgid "Shortcut key"
 msgstr "குறுக்குவழி விசை"
 
@@ -2433,6 +2447,10 @@ msgstr "கட்டத்தைக் காட்டு"
 msgid "Show Layer"
 msgstr "அடுக்கு காட்டு"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+msgid "Show Menu Bar"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Show Points"
@@ -2442,7 +2460,7 @@ msgstr ""
 msgid "Show Value"
 msgstr "மதிப்பைக் காட்டு"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:243
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Show/Hide"
 msgstr "காட்டு/மறைக்க"
 
@@ -2497,7 +2515,7 @@ msgstr "சிதறல்"
 msgid "Squares"
 msgstr "சதுரங்கள்"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:137
+#: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr "நிலை பட்டி"
 
@@ -2651,15 +2669,15 @@ msgstr "பொறுமை"
 msgid "Tool"
 msgstr "கருவி"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:135
 msgid "Tool Box"
 msgstr "கருவி பெட்டி"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:118
+#: ../Pinta.Core/Actions/ViewActions.cs:116
 msgid "Tool Windows"
 msgstr "கருவி சாளரங்கள்"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:106
+#: ../Pinta.Core/Actions/ViewActions.cs:104
 msgid "Toolbar"
 msgstr "கருவிப்பட்டி"
 
@@ -2790,6 +2808,10 @@ msgstr ""
 "முன்னோட்டங்கள், சிறிய படங்கள் மற்றும் சிறிய கோணங்களுக்கு குறைந்த தரத்தைப் பயன்படுத்தவும். "
 "இறுதி தகுதி, பெரிய படங்கள் மற்றும் பெரிய கோணங்களுக்கு உயர் தரத்தைப் பயன்படுத்துங்கள்."
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
+msgid "User Interface"
+msgstr ""
+
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
 msgstr "இதிலிருந்து சில சின்னங்களைப் பயன்படுத்துதல்:"
@@ -2819,7 +2841,7 @@ msgid "Vertical red (R)"
 msgstr "செங்குத்துப் சிவப்பு (ஆர்)"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:102
-#: ../Pinta/MainWindow.cs:460
+#: ../Pinta/MainWindow.cs:470
 msgid "View"
 msgstr "நோக்கு"
 
@@ -2852,8 +2874,8 @@ msgstr "வெள்ளை"
 msgid "Width:"
 msgstr "அகலம்:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:208
-#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Actions/ViewActions.cs:195
+#: ../Pinta.Core/Actions/ViewActions.cs:368
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:106
@@ -2900,19 +2922,19 @@ msgstr "பெரிதாக்கு"
 msgid "Zoom Blur"
 msgstr "சூம் மங்கலானது"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom In"
 msgstr "பெரிதாக்கு"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom Out"
 msgstr "சிறிதாக்கு"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:93
+#: ../Pinta.Core/Actions/ViewActions.cs:91
 msgid "Zoom to Selection"
 msgstr "தேர்வுக்கு பெரிதாக்கு"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:394
 msgid "_Adjustments"
 msgstr "_சரிசெய்தல்"
 
@@ -2929,19 +2951,19 @@ msgstr "_CANCEL"
 msgid "_Discard"
 msgstr "_ டிச்கார்ட்"
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:390
 msgid "_Edit"
 msgstr "தொகு (_E)"
 
-#: ../Pinta/MainWindow.cs:392
+#: ../Pinta/MainWindow.cs:389
 msgid "_File"
 msgstr "கோப்பு (_F)"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:399
 msgid "_Help"
 msgstr "உதவி (_H)"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:393
 msgid "_Image"
 msgstr "_Image"
 
@@ -2956,11 +2978,11 @@ msgstr "_Ok"
 msgid "_Save"
 msgstr "_சேவ்"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:392
 msgid "_View"
 msgstr "காட்சி (_V)"
 
-#: ../Pinta/MainWindow.cs:401
+#: ../Pinta/MainWindow.cs:398
 msgid "_Window"
 msgstr "_ சாளரம்"
 
@@ -3013,10 +3035,16 @@ msgstr "{0} தட்டு ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:377
+#: ../Pinta.Core/Actions/ViewActions.cs:349
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Menu Bar"
+#~ msgstr "பட்டியல் பட்டி"
+
+#~ msgid "Restart Pinta"
+#~ msgstr "பிண்டாவை மறுதொடக்கம் செய்"
 
 #~ msgid "ICO files can not be larger than 255 x 255 pixels."
 #~ msgstr "ஐ.சி.ஓ கோப்புகள் 255 ஃச் 255 பிக்சல்களை விட பெரியதாக இருக்காது."

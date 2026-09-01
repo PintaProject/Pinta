@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 00:13+0000\n"
+"POT-Creation-Date: 2026-09-01 03:52+0000\n"
 "PO-Revision-Date: 2026-07-09 15:01+0000\n"
 "Last-Translator: Kieli Puoli <kielipuoli@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/pinta/pinta/fi/"
@@ -49,11 +49,11 @@ msgstr "7 x 7 -alue"
 msgid "9 x 9 Region"
 msgstr "9 x 9 -alue"
 
-#: ../Pinta/MainWindow.cs:400
+#: ../Pinta/MainWindow.cs:397
 msgid "A_dd-ins"
 msgstr "A_dd-ins"
 
-#: ../Pinta.Core/Actions/AppActions.cs:43
+#: ../Pinta.Core/Actions/AppActions.cs:44
 msgid "About"
 msgstr "Tietoja"
 
@@ -80,7 +80,7 @@ msgid "Added"
 msgstr "Lisätty"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:104
-#: ../Pinta/MainWindow.cs:450
+#: ../Pinta/MainWindow.cs:460
 msgid "Adjustments"
 msgstr "Säädöt"
 
@@ -143,6 +143,10 @@ msgstr "Ankkuri:"
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
 msgid "Angle"
 msgstr "Kulma"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+msgid "Animate Selection Outline"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -217,7 +221,7 @@ msgstr "Perustuu ohjelmaan Paint.NET:"
 msgid "Beautiful Italy"
 msgstr "Kaunis Italia"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:86
+#: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Best Fit"
 msgstr "Paras koko"
 
@@ -329,7 +333,7 @@ msgstr "Prosentin mukaan:"
 msgid "Cancel"
 msgstr "Peru"
 
-#: ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "Piirtopohja"
 
@@ -337,7 +341,7 @@ msgstr "Piirtopohja"
 msgid "Canvas Grid Settings"
 msgstr "Piirtopohjan ruudukon asetukset"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:125
+#: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Piirtopohjan ruudukko..."
 
@@ -379,7 +383,7 @@ msgstr "Keskelle oikealle"
 msgid "Centered"
 msgstr "Keskitetty"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:228
+#: ../Pinta.Core/Actions/ViewActions.cs:215
 msgid "Centimeters"
 msgstr "Senttimetriä"
 
@@ -560,7 +564,7 @@ msgstr "Värialue"
 msgid "Color Saturation"
 msgstr "Värikylläisyys"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:254
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -669,7 +673,7 @@ msgid "Cut"
 msgstr "Leikkaa"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:251
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
 msgid "Dark"
 msgstr "Tumma"
 
@@ -681,8 +685,8 @@ msgstr "Tummenna"
 msgid "Dash"
 msgstr "Katkoviiva"
 
-#. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:247
+#. Translators: This refers to using the system default color scheme.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:5
 msgid "Default"
 msgstr "Oletus"
 
@@ -774,12 +778,12 @@ msgstr "Reunan tunnistus"
 msgid "Edit"
 msgstr ""
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
 msgstr "T_ehosteet"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:105
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:455
 msgid "Effects"
 msgstr "Tehosteet"
 
@@ -804,6 +808,12 @@ msgstr "Korkokuva"
 
 #: ../Pinta/Main.cs:67
 msgid "Enable additional logging or behavior changes for debugging"
+msgstr ""
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+msgid ""
+"Enables a \"marching ants\" effect to improve the selection's visibility. "
+"Disable to reduce CPU usage."
 msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
@@ -998,7 +1008,7 @@ msgstr "Vapaa muoto"
 msgid "Frosted Glass"
 msgstr "Jäätynyt lasi"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:152
 msgid "Fullscreen"
 msgstr "Koko näyttö"
 
@@ -1009,6 +1019,10 @@ msgstr "Kokoelma"
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
 msgstr "Gauss-sumennus"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
+msgid "General"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1124,7 +1138,7 @@ msgstr "Jos tallennusta ei tehdä, kaikki muutokset häviävät lopullisesti."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:254
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:103
-#: ../Pinta/MainWindow.cs:455
+#: ../Pinta/MainWindow.cs:465
 msgid "Image"
 msgstr "Kuva"
 
@@ -1132,7 +1146,7 @@ msgstr "Kuva"
 msgid "Image Editor"
 msgstr "Kuvankäsittely"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:112
+#: ../Pinta.Core/Actions/ViewActions.cs:110
 msgid "Image Tabs"
 msgstr "Kuvavälilehdet"
 
@@ -1170,7 +1184,7 @@ msgid ""
 "Press Backspace to delete the last point."
 msgstr ""
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:214
 msgid "Inches"
 msgstr "Tuumaa"
 
@@ -1250,7 +1264,7 @@ msgstr "Jarvis-Judice-Ninke"
 msgid "Julia Fractal"
 msgstr "Julian joukko"
 
-#: ../Pinta.Core/Actions/AppActions.cs:48
+#: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
 msgstr ""
 
@@ -1430,7 +1444,7 @@ msgstr "Lisenssi"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "Vaalea"
@@ -1481,7 +1495,7 @@ msgstr "Värin kirkkaus"
 msgid "Magic Wand Select"
 msgstr "Taikasauva"
 
-#: ../Pinta/MainWindow.cs:440
+#: ../Pinta/MainWindow.cs:450
 msgid "Main Menu"
 msgstr "Päävalikko"
 
@@ -1511,10 +1525,6 @@ msgstr "Mediaani"
 #: ../Pinta.Tools/Tools/TextTool.cs:290
 msgid "Medium"
 msgstr ""
-
-#: ../Pinta.Core/Actions/ViewActions.cs:131
-msgid "Menu Bar"
-msgstr "Valikkopalkki"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:335
@@ -1620,7 +1630,7 @@ msgstr "Normaali"
 msgid "Normal Blending"
 msgstr "Normaali sekoitus"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:99
+#: ../Pinta.Core/Actions/ViewActions.cs:97
 msgid "Normal Size"
 msgstr "Normaali koko"
 
@@ -1877,7 +1887,7 @@ msgstr "Pinta tukee seuraavia palettimuotoja:"
 msgid "Pixelate"
 msgstr "Pikselöi"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:213
 msgid "Pixels"
 msgstr "Pikseliä"
 
@@ -1886,7 +1896,7 @@ msgstr "Pikseliä"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+#: ../Pinta/Dialogs/PreferencesDialog.cs:81
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Käynnistä Pinta uudelleen, jotta muutokset tulevat voimaan."
 
@@ -1938,6 +1948,10 @@ msgstr "Porrasta"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:138
 msgid "Power"
 msgstr "Voima"
+
+#: ../Pinta.Core/Actions/AppActions.cs:49
+msgid "Preferences..."
+msgstr ""
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -2012,7 +2026,7 @@ msgstr "Laatu"
 msgid "Quality: "
 msgstr "Laatu: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:54
+#: ../Pinta.Core/Actions/AppActions.cs:60
 msgid "Quit"
 msgstr "Lopeta"
 
@@ -2153,6 +2167,10 @@ msgstr "Renderointi"
 msgid "Replace"
 msgstr "Korvaa"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+msgid "Replaces the header bar with a separate menu bar and tool bar."
+msgstr ""
+
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Ilmoita virheestä..."
@@ -2201,10 +2219,6 @@ msgstr "Muuta kokoa..."
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr "Muuta paletin kokoa"
-
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
-msgid "Restart Pinta"
-msgstr "Käynnistä Pinta uudelleen"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
@@ -2272,11 +2286,11 @@ msgstr "Pyöristetty viiva"
 msgid "Rounded Rectangle"
 msgstr "Pyöristetty suorakulmio"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:231
+#: ../Pinta.Core/Actions/ViewActions.cs:218
 msgid "Ruler Units"
 msgstr "Mitta-asteikko"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:141
 msgid "Rulers"
 msgstr "Viivoitin"
 
@@ -2385,7 +2399,7 @@ msgstr "Terävöitä"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:106
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:368
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
-#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:51
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:49
 msgid "Shortcut key"
 msgstr "Pikanäppäin"
 
@@ -2412,6 +2426,10 @@ msgstr "Näytä ruudukko"
 msgid "Show Layer"
 msgstr "Näytä taso"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+msgid "Show Menu Bar"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Show Points"
@@ -2421,7 +2439,7 @@ msgstr "Näytä pisteet"
 msgid "Show Value"
 msgstr "Näytä arvo"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:243
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Show/Hide"
 msgstr "Näytä/piilota"
 
@@ -2476,7 +2494,7 @@ msgstr "Roiske"
 msgid "Squares"
 msgstr "Neliöt"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:137
+#: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr "Tilapalkki"
 
@@ -2633,15 +2651,15 @@ msgstr "Toleranssi"
 msgid "Tool"
 msgstr "Työkalu"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:135
 msgid "Tool Box"
 msgstr "Työkalupalkki"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:118
+#: ../Pinta.Core/Actions/ViewActions.cs:116
 msgid "Tool Windows"
 msgstr "Työkaluikkunat"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:106
+#: ../Pinta.Core/Actions/ViewActions.cs:104
 msgid "Toolbar"
 msgstr "Työkalupalkki"
 
@@ -2772,6 +2790,10 @@ msgstr ""
 "Käytä pientä laatua tarkastamiseen, pieniin kuviin ja pieniin kulmiin. Käytä "
 "suurta laatua lopullisiin kuviin, isoihin kuviin ja suuriin kulmiin."
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
+msgid "User Interface"
+msgstr ""
+
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
 msgstr "Käyttää kuvakkeita kokoelmista:"
@@ -2801,7 +2823,7 @@ msgid "Vertical red (R)"
 msgstr ""
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:102
-#: ../Pinta/MainWindow.cs:460
+#: ../Pinta/MainWindow.cs:470
 msgid "View"
 msgstr "Näytä"
 
@@ -2834,8 +2856,8 @@ msgstr "Valkoinen"
 msgid "Width:"
 msgstr "Leveys:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:208
-#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Actions/ViewActions.cs:195
+#: ../Pinta.Core/Actions/ViewActions.cs:368
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:106
@@ -2882,19 +2904,19 @@ msgstr "Zoomaus"
 msgid "Zoom Blur"
 msgstr "Zoom-sumennus"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom In"
 msgstr "Suurenna"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom Out"
 msgstr "Pienennä"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:93
+#: ../Pinta.Core/Actions/ViewActions.cs:91
 msgid "Zoom to Selection"
 msgstr "Tarkenna valintaan"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:394
 msgid "_Adjustments"
 msgstr "_Säädöt"
 
@@ -2911,19 +2933,19 @@ msgstr "_Peru"
 msgid "_Discard"
 msgstr "_Hylkää"
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:390
 msgid "_Edit"
 msgstr "_Muokkaa"
 
-#: ../Pinta/MainWindow.cs:392
+#: ../Pinta/MainWindow.cs:389
 msgid "_File"
 msgstr "_Tiedosto"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:399
 msgid "_Help"
 msgstr "_Ohje"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:393
 msgid "_Image"
 msgstr "_Kuva"
 
@@ -2938,11 +2960,11 @@ msgstr "_OK"
 msgid "_Save"
 msgstr "_Tallenna"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:392
 msgid "_View"
 msgstr "_Näytä"
 
-#: ../Pinta/MainWindow.cs:401
+#: ../Pinta/MainWindow.cs:398
 msgid "_Window"
 msgstr "_Ikkuna"
 
@@ -3007,10 +3029,16 @@ msgstr "{0}-paletti ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:377
+#: ../Pinta.Core/Actions/ViewActions.cs:349
 #, csharp-format
 msgid "{0}%"
 msgstr "{0} %"
+
+#~ msgid "Menu Bar"
+#~ msgstr "Valikkopalkki"
+
+#~ msgid "Restart Pinta"
+#~ msgstr "Käynnistä Pinta uudelleen"
 
 #~ msgid "ICO files can not be larger than 255 x 255 pixels."
 #~ msgstr "ICO-tiedostot voivat olla korkeintaan 255x255 pikselin kokoisia"
