@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-01 03:52+0000\n"
-"PO-Revision-Date: 2026-08-16 19:28+0000\n"
+"PO-Revision-Date: 2026-09-01 10:54+0000\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/"
-">\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -146,7 +146,7 @@ msgstr "Vinkel"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
 msgid "Animate Selection Outline"
-msgstr ""
+msgstr "Animera markeringskontur"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -816,6 +816,8 @@ msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
 msgstr ""
+"Aktiverar en \"marscherande myror-effekt\" för att göra markeringen mer "
+"synlig. Stäng av för att minska CPU-användningen."
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -1023,7 +1025,7 @@ msgstr "Gaussisk oskärpa"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
 msgid "General"
-msgstr ""
+msgstr "Allmänt"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1993,7 +1995,7 @@ msgstr "Styrka"
 
 #: ../Pinta.Core/Actions/AppActions.cs:49
 msgid "Preferences..."
-msgstr ""
+msgstr "Inställningar..."
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -2211,7 +2213,7 @@ msgstr "Ersätt"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Replaces the header bar with a separate menu bar and tool bar."
-msgstr ""
+msgstr "Byter ut rubrikfältet mot en separat menyrad och verktygsrad."
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
@@ -2470,7 +2472,7 @@ msgstr "Visa lager"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
 msgid "Show Menu Bar"
-msgstr ""
+msgstr "Visa menyfält"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
@@ -2835,7 +2837,7 @@ msgstr ""
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
 msgid "User Interface"
-msgstr ""
+msgstr "Användargränssnitt"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
