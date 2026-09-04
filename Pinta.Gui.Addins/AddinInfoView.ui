@@ -39,6 +39,24 @@
             </child>
 
             <child>
+              <object class="GtkLabel" id="category_label">
+                <property name="halign">start</property>
+                <style>
+                  <class name="heading"/>
+                </style>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="author_label">
+                <property name="halign">start</property>
+                <style>
+                  <class name="heading"/>
+                </style>
+              </object>
+            </child>
+
+            <child>
               <object class="GtkLabel" id="size_label">
                 <property name="halign">start</property>
                 <style>
@@ -121,7 +139,7 @@
             </child>
           </object>
         </child>
-        
+
       </object>
     </child>
   </template>

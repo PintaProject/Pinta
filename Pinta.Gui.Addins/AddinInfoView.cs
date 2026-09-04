@@ -11,6 +11,10 @@ internal sealed partial class AddinInfoView
 {
 	[Gtk.Connect (nameof (title_label))]
 	private Gtk.Label title_label;
+	[Gtk.Connect (nameof (category_label))]
+	private Gtk.Label category_label;
+	[Gtk.Connect (nameof (author_label))]
+	private Gtk.Label author_label;
 	[Gtk.Connect (nameof (version_label))]
 	private Gtk.Label version_label;
 	[Gtk.Connect (nameof (size_label))]
@@ -93,6 +97,8 @@ internal sealed partial class AddinInfoView
 
 		title_label.SetLabel (item.Name);
 		version_label.SetLabel (Translations.GetString ("Version: {0}", item.Version));
+		category_label.SetLabel (Translations.GetString ("Category: {0}", item.Category));
+		author_label.SetLabel (Translations.GetString ("Author: {0}", item.Author));
 		description_label.SetLabel (item.Description);
 
 		string? download_size = item.DownloadSize;
