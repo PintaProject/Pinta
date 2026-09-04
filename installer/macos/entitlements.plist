@@ -27,5 +27,8 @@
       <true/>
     <key>com.apple.security.files.downloads.read-write</key>
       <true/>
+    <!-- Network access is needed for installing add-ins. -->
+    <key>com.apple.security.network.client</key>
+      <true/>
   </dict>
 </plist>
