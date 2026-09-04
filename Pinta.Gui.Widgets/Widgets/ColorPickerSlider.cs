@@ -24,6 +24,8 @@ public sealed partial class ColorPickerSlider
 	private const int PADDING_WIDTH = 14;
 	private const int PADDING_HEIGHT = 10;
 
+	private bool suppress_input_events;
+
 	private Component component;
 	private Color color;
 
@@ -114,7 +116,13 @@ public sealed partial class ColorPickerSlider
 	private void UpdateColorValue (double value)
 	{
 		double clampedValue = Math.Clamp (Math.Round (value), 0, GetMaxValue (component));
-		input_field.SetText (clampedValue.ToString (CultureInfo.InvariantCulture));
+		
+		suppress_input_events = true;
+		try {
+			input_field.SetText (clampedValue.ToString (CultureInfo.InvariantCulture));
+		} finally {
+			suppress_input_events = false;
+		}
 
 		color = UpdateValue (color, component, clampedValue);
 		gradient_slider.QueueDraw ();
@@ -160,6 +168,9 @@ public sealed partial class ColorPickerSlider
 
 	private void OnInputFieldChanged (Gtk.Editable inputField, EventArgs e)
 	{
+		if (suppress_input_events)
+			return;
+
 		string text = inputField.GetText ();
 
 		bool success = double.TryParse (
@@ -192,10 +203,15 @@ public sealed partial class ColorPickerSlider
 			double componentValue = ExtractValue (value, component);
 
 			if (!input_field.IsEditingText ()) {
-				// Ensure we don't get an infinite loop of "value changed" events
 				string newText = Convert.ToInt32 (componentValue).ToString ();
-				if (newText != input_field.GetText ())
-					input_field.SetText (newText);
+				if (newText != input_field.GetText ()) {
+					suppress_input_events = true;
+					try {
+						input_field.SetText (newText);
+					} finally {
+						suppress_input_events = false;
+					}
+				}
 			}
 
 			gradient_slider.QueueDraw ();
