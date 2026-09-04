@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-01 03:52+0000\n"
-"PO-Revision-Date: 2026-08-29 23:06+0000\n"
-"Last-Translator: lebxr <abcxrty@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/"
-">\n"
+"PO-Revision-Date: 2026-09-11 17:51+0000\n"
+"Last-Translator: lebxr <elbaceda@gmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -146,7 +146,7 @@ msgstr "Ángulo"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
 msgid "Animate Selection Outline"
-msgstr ""
+msgstr "Animar contorno de selección"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -817,6 +817,8 @@ msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
 msgstr ""
+"Activa un efecto de \"hormigas marchando\" para mejorar la visibilidad de la "
+"selección. Desactívalo para reducir el uso de la CPU."
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -1024,7 +1026,7 @@ msgstr "Desenfoque gaussiano"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -2006,7 +2008,7 @@ msgstr "Potencia"
 
 #: ../Pinta.Core/Actions/AppActions.cs:49
 msgid "Preferences..."
-msgstr ""
+msgstr "Preferencias..."
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -2223,8 +2225,11 @@ msgid "Replace"
 msgstr "Reemplazar"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+#, fuzzy
 msgid "Replaces the header bar with a separate menu bar and tool bar."
 msgstr ""
+"Reemplaza la barra de encabezado por una barra de menú y una barra de "
+"herramientas independientes."
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
@@ -2483,7 +2488,7 @@ msgstr "Mostrar la capa"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
 msgid "Show Menu Bar"
-msgstr ""
+msgstr "Mostrar barra de menú"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
@@ -2848,7 +2853,7 @@ msgstr ""
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
 msgid "User Interface"
-msgstr ""
+msgstr "Interfaz de Usuario"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
