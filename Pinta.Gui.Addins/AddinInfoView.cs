@@ -11,16 +11,16 @@ internal sealed partial class AddinInfoView
 {
 	[Gtk.Connect (nameof (title_label))]
 	private Gtk.Label title_label;
-	[Gtk.Connect (nameof (category_label))]
-	private Gtk.Label category_label;
-	[Gtk.Connect (nameof (author_label))]
-	private Gtk.Label author_label;
-	[Gtk.Connect (nameof (version_label))]
-	private Gtk.Label version_label;
-	[Gtk.Connect (nameof (size_label))]
-	private Gtk.Label size_label;
-	[Gtk.Connect (nameof (repo_label))]
-	private Gtk.Label repo_label;
+	[Gtk.Connect (nameof (category_row))]
+	private Adw.ActionRow category_row;
+	[Gtk.Connect (nameof (version_row))]
+	private Adw.ActionRow version_row;
+	[Gtk.Connect (nameof (author_row))]
+	private Adw.ActionRow author_row;
+	[Gtk.Connect (nameof (size_row))]
+	private Adw.ActionRow size_row;
+	[Gtk.Connect (nameof (repo_row))]
+	private Adw.ActionRow repo_row;
 	[Gtk.Connect (nameof (description_label))]
 	private Gtk.Label description_label;
 
@@ -96,22 +96,16 @@ internal sealed partial class AddinInfoView
 		view_stack.SetVisibleChild (content_box);
 
 		title_label.SetLabel (item.Name);
-		version_label.SetLabel (Translations.GetString ("Version: {0}", item.Version));
-		category_label.SetLabel (Translations.GetString ("Category: {0}", item.Category));
-		author_label.SetLabel (Translations.GetString ("Author: {0}", item.Author));
+		category_row.Subtitle = item.Category;
+		version_row.Subtitle = item.Version;
+		author_row.Subtitle = item.Author;
 		description_label.SetLabel (item.Description);
 
-		string? download_size = item.DownloadSize;
-		size_label.Visible = download_size != null;
+		size_row.Visible = item.DownloadSize != null;
+		size_row.Subtitle = item.DownloadSize ?? string.Empty;
 
-		if (download_size is not null)
-			size_label.SetLabel (Translations.GetString ("Download size: {0}", download_size));
-
-		string? repo_name = item.RepositoryName;
-		repo_label.Visible = repo_name != null;
-
-		if (repo_name is not null)
-			repo_label.SetLabel (Translations.GetString ("Available in repository: {0}", repo_name));
+		repo_row.Visible = item.RepositoryName != null;
+		repo_row.Subtitle = item.RepositoryName ?? string.Empty;
 
 		info_button.Visible = !string.IsNullOrEmpty (item.Url);
 		install_button.Visible = !item.Installed;

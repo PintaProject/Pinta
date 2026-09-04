@@ -24,52 +24,7 @@
               <object class="GtkLabel" id="title_label">
                 <property name="halign">start</property>
                 <style>
-                  <class name="title-4"/>
-                </style>
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkLabel" id="version_label">
-                <property name="halign">start</property>
-                <style>
-                  <class name="heading"/>
-                </style>
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkLabel" id="category_label">
-                <property name="halign">start</property>
-                <style>
-                  <class name="heading"/>
-                </style>
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkLabel" id="author_label">
-                <property name="halign">start</property>
-                <style>
-                  <class name="heading"/>
-                </style>
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkLabel" id="size_label">
-                <property name="halign">start</property>
-                <style>
-                  <class name="heading"/>
-                </style>
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkLabel" id="repo_label">
-                <property name="halign">start</property>
-                <style>
-                  <class name="heading"/>
+                  <class name="title-2"/>
                 </style>
               </object>
             </child>
@@ -78,13 +33,68 @@
               <object class="GtkLabel" id="description_label">
                 <property name="halign">start</property>
                 <property name="hexpand">true</property>
-                <property name="valign">start</property>
-                <property name="vexpand">true</property>
                 <property name="xalign">0</property>
                 <property name="wrap">true</property>
                 <style>
                   <class name="body"/>
                 </style>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkListBox">
+                <property name="selection-mode">none</property>
+                <property name="valign">start</property>
+                <property name="vexpand">true</property>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
+
+                <child>
+                  <object class="AdwActionRow" id="category_row">
+                    <property name="title" translatable="yes">Category</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwActionRow" id="version_row">
+                    <property name="title" translatable="yes">Version</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwActionRow" id="author_row">
+                    <property name="title" translatable="yes">Author</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwActionRow" id="size_row">
+                    <property name="title" translatable="yes">Download size</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwActionRow" id="repo_row">
+                    <property name="title" translatable="yes">Repository</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+
               </object>
             </child>
 
