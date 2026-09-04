@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 00:13+0000\n"
-"PO-Revision-Date: 2026-08-16 19:28+0000\n"
+"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"PO-Revision-Date: 2026-09-04 02:48+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
 "Language-Team: Irish <https://hosted.weblate.org/projects/pinta/pinta/ga/>\n"
 "Language: ga\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.9\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -48,11 +48,11 @@ msgstr "Réigiún 7 x 7"
 msgid "9 x 9 Region"
 msgstr "Réigiún 9 x 9"
 
-#: ../Pinta/MainWindow.cs:400
+#: ../Pinta/MainWindow.cs:397
 msgid "A_dd-ins"
 msgstr "B_reiseáin"
 
-#: ../Pinta.Core/Actions/AppActions.cs:43
+#: ../Pinta.Core/Actions/AppActions.cs:44
 msgid "About"
 msgstr "Maidir Leis"
 
@@ -79,7 +79,7 @@ msgid "Added"
 msgstr "Curtha leis"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:104
-#: ../Pinta/MainWindow.cs:450
+#: ../Pinta/MainWindow.cs:460
 msgid "Adjustments"
 msgstr "Mionathruithe"
 
@@ -142,6 +142,10 @@ msgstr "Ancaire:"
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
 msgid "Angle"
 msgstr "Uillinn"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+msgid "Animate Selection Outline"
+msgstr "Beochan Imlíne Roghnúcháin"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -216,7 +220,7 @@ msgstr "Bunaithe ar shaothar Paint.NET:"
 msgid "Beautiful Italy"
 msgstr "An Iodáil álainn"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:86
+#: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Best Fit"
 msgstr "Is Oiriúnaí"
 
@@ -328,7 +332,7 @@ msgstr "De réir céatadán:"
 msgid "Cancel"
 msgstr "Cealaigh"
 
-#: ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "Canbhás"
 
@@ -336,7 +340,7 @@ msgstr "Canbhás"
 msgid "Canvas Grid Settings"
 msgstr "Socruithe Eangach Canbháis"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:125
+#: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Eangach Canbháis..."
 
@@ -378,7 +382,7 @@ msgstr "Lár ar Dheis"
 msgid "Centered"
 msgstr "Láraithe"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:228
+#: ../Pinta.Core/Actions/ViewActions.cs:215
 msgid "Centimeters"
 msgstr "Ceintiméadar"
 
@@ -561,7 +565,7 @@ msgstr "Raon na nDathanna"
 msgid "Color Saturation"
 msgstr "Sáithiú na nDathanna"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:254
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -670,7 +674,7 @@ msgid "Cut"
 msgstr "Gearr"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:251
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
 msgid "Dark"
 msgstr "Dorcha"
 
@@ -682,8 +686,8 @@ msgstr "Déan dorcha é"
 msgid "Dash"
 msgstr "Dais"
 
-#. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:247
+#. Translators: This refers to using the system default color scheme.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:5
 msgid "Default"
 msgstr "Réamhshocrú"
 
@@ -775,12 +779,12 @@ msgstr "Brath Imeall"
 msgid "Edit"
 msgstr "Cuir in Eagar"
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
 msgstr "Tionchair"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:105
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:455
 msgid "Effects"
 msgstr "Éifeachtaí"
 
@@ -807,6 +811,14 @@ msgstr "Cabhraíocht"
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 "Cumasaigh logáil bhreise nó athruithe iompraíochta le haghaidh dífhabhtaithe"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+msgid ""
+"Enables a \"marching ants\" effect to improve the selection's visibility. "
+"Disable to reduce CPU usage."
+msgstr ""
+"Cumasaíonn sé éifeacht \"seangáin mháirseála\" chun infheictheacht an "
+"roghnúcháin a fheabhsú. Díchumasaigh chun úsáid LAP a laghdú."
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -1002,7 +1014,7 @@ msgstr "Cruth Saor"
 msgid "Frosted Glass"
 msgstr "Gloine Shioctha"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:152
 msgid "Fullscreen"
 msgstr "Lánscáileán"
 
@@ -1013,6 +1025,10 @@ msgstr "Gailearaí"
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
 msgstr "Geamhú Gaussach"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
+msgid "General"
+msgstr "Ginearálta"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1130,7 +1146,7 @@ msgstr "Mura sábhálann tú, caillfear na hathruithe go léir go buan."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:254
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:103
-#: ../Pinta/MainWindow.cs:455
+#: ../Pinta/MainWindow.cs:465
 msgid "Image"
 msgstr "Íomhá"
 
@@ -1138,7 +1154,7 @@ msgstr "Íomhá"
 msgid "Image Editor"
 msgstr "Eagarthóir Íomhá"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:112
+#: ../Pinta.Core/Actions/ViewActions.cs:110
 msgid "Image Tabs"
 msgstr "Cluaisíní Íomhá"
 
@@ -1183,7 +1199,7 @@ msgstr ""
 "Brúigh Iontráil chun an roghnú a chríochnú.\n"
 "Brúigh Cúlspás chun an pointe deireanach a scriosadh."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:214
 msgid "Inches"
 msgstr "Orlach"
 
@@ -1263,7 +1279,7 @@ msgstr "Jarvis-Judice-Ninke"
 msgid "Julia Fractal"
 msgstr "Frachtal Julia"
 
-#: ../Pinta.Core/Actions/AppActions.cs:48
+#: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
 msgstr "Aicearraí Méarchláir"
 
@@ -1489,7 +1505,7 @@ msgstr "Ceadúnas"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "Geal"
@@ -1540,7 +1556,7 @@ msgstr "Lonrachas"
 msgid "Magic Wand Select"
 msgstr "Roghnú Fleasc Dhraíochta"
 
-#: ../Pinta/MainWindow.cs:440
+#: ../Pinta/MainWindow.cs:450
 msgid "Main Menu"
 msgstr "An príomhroghchlár"
 
@@ -1570,10 +1586,6 @@ msgstr "Airmheán"
 #: ../Pinta.Tools/Tools/TextTool.cs:290
 msgid "Medium"
 msgstr "Meánach"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:131
-msgid "Menu Bar"
-msgstr "Barra an roghchláir"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:335
@@ -1679,7 +1691,7 @@ msgstr "Gnáth"
 msgid "Normal Blending"
 msgstr "Gnáthchumasc"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:99
+#: ../Pinta.Core/Actions/ViewActions.cs:97
 msgid "Normal Size"
 msgstr "Gnáthmhéid"
 
@@ -1936,7 +1948,7 @@ msgstr "Tacaíonn Pinta leis na formáidí pailéid seo a leanas:"
 msgid "Pixelate"
 msgstr "Picteilín"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:213
 msgid "Pixels"
 msgstr "Picteilíní"
 
@@ -1945,7 +1957,7 @@ msgstr "Picteilíní"
 msgid "Piña Colada"
 msgstr "Piña Colada"
 
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+#: ../Pinta/Dialogs/PreferencesDialog.cs:81
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Atosaigh Pinta le go dtiocfaidh na hathruithe i bhfeidhm."
 
@@ -1997,6 +2009,10 @@ msgstr "Déan póstaer de"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:138
 msgid "Power"
 msgstr "Cumhacht"
+
+#: ../Pinta.Core/Actions/AppActions.cs:49
+msgid "Preferences..."
+msgstr "Roghanna..."
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -2071,7 +2087,7 @@ msgstr "Cáilíocht"
 msgid "Quality: "
 msgstr "Cáilíocht: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:54
+#: ../Pinta.Core/Actions/AppActions.cs:60
 msgid "Quit"
 msgstr "Scoir"
 
@@ -2212,6 +2228,12 @@ msgstr "Éifeacht Rindreála"
 msgid "Replace"
 msgstr "Ionadaigh"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+msgid "Replaces the header bar with a separate menu bar and tool bar."
+msgstr ""
+"Cuireann sé barra roghchláir agus barra uirlisí ar leithligh in ionad an "
+"bharra ceanntásca."
+
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Tuairiscigh Fabht..."
@@ -2260,10 +2282,6 @@ msgstr "Athraigh méid na hÍomhá..."
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr "Athraigh Méid an Phailléid"
-
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
-msgid "Restart Pinta"
-msgstr "Atosaigh Pinta"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
@@ -2331,11 +2349,11 @@ msgstr "Cruth Líne Babhta"
 msgid "Rounded Rectangle"
 msgstr "Dronuilleog Cruinn"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:231
+#: ../Pinta.Core/Actions/ViewActions.cs:218
 msgid "Ruler Units"
 msgstr "Aonaid an Rialóra"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:141
 msgid "Rulers"
 msgstr "Rialtóirí"
 
@@ -2444,7 +2462,7 @@ msgstr "Géaraigh"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:106
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:368
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
-#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:51
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:49
 msgid "Shortcut key"
 msgstr "Aicearra"
 
@@ -2471,6 +2489,10 @@ msgstr "Taispeáin an Eangach"
 msgid "Show Layer"
 msgstr "Taispeáin Sraith"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+msgid "Show Menu Bar"
+msgstr "Taispeáin Barra Roghchláir"
+
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Show Points"
@@ -2480,7 +2502,7 @@ msgstr "Taispeáin Pointí"
 msgid "Show Value"
 msgstr "Taispeáin an Luach"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:243
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Show/Hide"
 msgstr "Taispeáin/Folaigh"
 
@@ -2535,7 +2557,7 @@ msgstr "Doirt"
 msgid "Squares"
 msgstr "Cearnóga"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:137
+#: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr "Barra Stádais"
 
@@ -2696,15 +2718,15 @@ msgstr "Lamháltas"
 msgid "Tool"
 msgstr "Uirlis"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:135
 msgid "Tool Box"
 msgstr "Bosca Uirlisí"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:118
+#: ../Pinta.Core/Actions/ViewActions.cs:116
 msgid "Tool Windows"
 msgstr "Fuinneoga na nUirlisí"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:106
+#: ../Pinta.Core/Actions/ViewActions.cs:104
 msgid "Toolbar"
 msgstr "Barra Uirlisí"
 
@@ -2836,6 +2858,10 @@ msgstr ""
 "uillinneacha beaga. Bain úsáid as caighdeán ard le haghaidh caighdeán "
 "deiridh, íomhánna móra, agus uillinneacha móra."
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
+msgid "User Interface"
+msgstr "Comhéadan Úsáideora"
+
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
 msgstr "Ag baineadh feidhm as deilbhíní as:"
@@ -2865,7 +2891,7 @@ msgid "Vertical red (R)"
 msgstr "Dearg ingearach (D)"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:102
-#: ../Pinta/MainWindow.cs:460
+#: ../Pinta/MainWindow.cs:470
 msgid "View"
 msgstr "Amharc"
 
@@ -2898,8 +2924,8 @@ msgstr "Bán"
 msgid "Width:"
 msgstr "Leithead:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:208
-#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Actions/ViewActions.cs:195
+#: ../Pinta.Core/Actions/ViewActions.cs:368
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:106
@@ -2946,19 +2972,19 @@ msgstr "Formhéadaigh"
 msgid "Zoom Blur"
 msgstr "Doiléiriú Súmáil"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom In"
 msgstr "Formhéadaigh Isteach"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom Out"
 msgstr "Formhéadaigh Amach"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:93
+#: ../Pinta.Core/Actions/ViewActions.cs:91
 msgid "Zoom to Selection"
 msgstr "Formhéadaigh go dtí an Roghnúchán"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:394
 msgid "_Adjustments"
 msgstr "_Mionathruithe"
 
@@ -2975,19 +3001,19 @@ msgstr "_Cealaigh"
 msgid "_Discard"
 msgstr "_Cuileáil é"
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:390
 msgid "_Edit"
 msgstr "Cuir in _Eagar"
 
-#: ../Pinta/MainWindow.cs:392
+#: ../Pinta/MainWindow.cs:389
 msgid "_File"
 msgstr "_Comhad"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:399
 msgid "_Help"
 msgstr "_Cabhair"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:393
 msgid "_Image"
 msgstr "_Íomhá"
 
@@ -3002,11 +3028,11 @@ msgstr "_Tá go maith"
 msgid "_Save"
 msgstr "_Taisc"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:392
 msgid "_View"
 msgstr "_Amharc"
 
-#: ../Pinta/MainWindow.cs:401
+#: ../Pinta/MainWindow.cs:398
 msgid "_Window"
 msgstr "_Fuinneog"
 
@@ -3061,10 +3087,16 @@ msgstr "pailéad {0} ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:377
+#: ../Pinta.Core/Actions/ViewActions.cs:349
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Menu Bar"
+#~ msgstr "Barra an roghchláir"
+
+#~ msgid "Restart Pinta"
+#~ msgstr "Atosaigh Pinta"
 
 #~ msgid "ICO files can not be larger than 255 x 255 pixels."
 #~ msgstr "Ní féidir comhaid ICO a bheith níos mó ná 255 x 255 picteilín."
