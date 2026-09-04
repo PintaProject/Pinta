@@ -42,10 +42,10 @@ internal sealed class MainClass
 			MacInterop.Environment.Init ();
 		}
 
-		string locale_dir = Path.Combine (SystemManager.GetDataRootDirectory (), "locale");
+		string localeDir = Path.Combine (SystemManager.GetDataRootDirectory (), "locale");
 
 		try {
-			Translations.Init ("pinta", locale_dir);
+			Translations.Init (localeDir);
 		} catch (Exception ex) {
 			Console.WriteLine (ex);
 		}
@@ -78,7 +78,7 @@ internal sealed class MainClass
 				parseResult.GetValue (threads_option),
 				parseResult.GetValue (files_arg) ?? [],
 				parseResult.GetValue (debug_option),
-				locale_dir);
+				localeDir);
 		});
 
 		return root_command.Parse (args).Invoke ();

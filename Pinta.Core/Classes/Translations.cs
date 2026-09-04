@@ -24,37 +24,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using System;
 using System.Globalization;
-using NGettext;
 
 namespace Pinta.Core;
 
 public static class Translations
 {
-	private static ICatalog? catalog;
+	private const string PintaTextDomain = "pinta";
 
-	public static void Init (string domain, string locale_dir)
+	public static void Init (string localeDir)
 	{
-		CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
-		catalog = new Catalog (domain, locale_dir, cultureInfo);
-
-		// The dotnet UI culture controls which translations are loaded for Pinta above.
-		// The GTK / libadwaita libraries use the native version of gettext for their translations
-		// (e.g. the About dialog), so here we set the LANG environment variable to be consistent.
 		// Note we need to initialize the GLib module since this is called very early in startup,
 		// before GTK is initialized.
 		GLib.Module.Initialize ();
-		string lang = cultureInfo.Name.Replace ('-', '_'); // convert names like en-CA to en_CA
-		GLib.Functions.Setenv ("LANG", lang, overwrite: true);
+
+		// Follow the dotnet UI culture to choose which language is used by default, since this
+		// correctly picks up system language settings on macOS, for example.
+		// Pinta (along with GTK / libadwaita) use the native version of gettext for translations
+		// so here we set the LANGUAGE environment variable to make these consistent.
+		if (GLib.Functions.Getenv ("LANGUAGE") is null) {
+			CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
+			string lang = cultureInfo.Name.Replace ('-', '_'); // convert names like en-CA to en_CA
+
+			GLib.Functions.Setenv ("LANGUAGE", lang, overwrite: true);
+		}
+
+		// Initialize gettext for Pinta's translations.
+		IntlExtensions.BindTextDomain (PintaTextDomain, localeDir);
+		IntlExtensions.BindTextDomainCodeset (PintaTextDomain, "UTF-8");
+		IntlExtensions.TextDomain (PintaTextDomain);
 	}
 
 	public static string GetString (string text)
 	{
-		return catalog?.GetString (text) ?? text;
+		// Just use glib'c gettext wrapper for convenience instead of adding our own binding.
+		return GLib.Functions.Dgettext (PintaTextDomain, text);
 	}
 
 	public static string GetString (string text, params object[] args)
 	{
-		return catalog?.GetString (text, args) ?? text;
+		return string.Format (GetString (text), args);
 	}
 }

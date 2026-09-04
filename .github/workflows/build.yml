@@ -39,7 +39,7 @@ jobs:
       run: echo "BUILD_DIR=${{runner.temp}}/pinta-${{env.PINTA_VERSION}}" >> $GITHUB_ENV
     - uses: actions/checkout@v7
     - name: Setup .NET
-      uses: actions/setup-dotnet@v5
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: ${{matrix.dotnet_version}}
     - name: Install Apt Dependencies
@@ -92,7 +92,7 @@ jobs:
     steps:
     - uses: actions/checkout@v7
     - name: Setup .NET
-      uses: actions/setup-dotnet@v5
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
     - name: Install Dependencies
@@ -101,7 +101,7 @@ jobs:
         HOMEBREW_NO_INSTALL_FROM_API: 1
       run: brew install libadwaita adwaita-icon-theme gettext webp-pixbuf-loader
     - name: Build
-      run: dotnet build Pinta.sln -c Release
+      run: dotnet build Pinta.sln -c Release -p:BuildTranslations=true
     - name: Test
       env:
         # Add libraries from homebrew to the search path so they can be loaded by gir.core
@@ -148,7 +148,7 @@ jobs:
     - uses: actions/checkout@v7
     - uses: microsoft/setup-msbuild@v3.0.0
     - name: Setup .NET
-      uses: actions/setup-dotnet@v5
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: ${{env.DOTNET_VERSION}}
     - name: Install dependencies
@@ -159,7 +159,7 @@ jobs:
         msystem: ${{matrix.build.mingw_system}}
         install: mingw-w64-${{matrix.build.mingw_repo}}-libadwaita mingw-w64-${{matrix.build.mingw_repo}}-webp-pixbuf-loader
     - name: Build
-      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${{matrix.build.mingw_folder}}
+      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${{matrix.build.mingw_folder}} -p:BuildTranslations=true
     - name: Test
       run: dotnet test Pinta.sln -c Release -p:MinGWFolder=${{matrix.build.mingw_folder}}
 

@@ -5,27 +5,32 @@ namespace Pinta.Actions;
 
 internal sealed class ColorSchemeChangedAction : IActionHandler
 {
-	private readonly ViewActions view;
-	internal ColorSchemeChangedAction (ViewActions view)
+	private readonly ISettingsService settings;
+	internal ColorSchemeChangedAction (ISettingsService settings)
 	{
-		this.view = view;
+		this.settings = settings;
 	}
 
 	void IActionHandler.Initialize ()
 	{
-		view.ColorScheme.OnActivate += Activated;
+		settings.SettingChanged += OnSettingChanged;
+
+		// Load the initial color scheme setting.
+		OnSettingChanged (null, new (SettingNames.COLOR_SCHEME));
 	}
 
 	void IActionHandler.Uninitialize ()
 	{
-		view.ColorScheme.OnActivate -= Activated;
+		settings.SettingChanged -= OnSettingChanged;
 	}
 
-	private void Activated (SimpleAction action, SimpleAction.ActivateSignalArgs args)
+	private void OnSettingChanged (object? sender, SettingChangedEventArgs e)
 	{
-		action.ChangeState (args.Parameter!);
+		if (e.Key != SettingNames.COLOR_SCHEME)
+			return;
 
-		Adw.ColorScheme scheme = args.Parameter!.GetInt32 () switch {
+		int schemeIndex = PintaCore.Settings.GetSetting (SettingNames.COLOR_SCHEME, 0);
+		Adw.ColorScheme scheme = schemeIndex switch {
 			1 => Adw.ColorScheme.ForceLight,
 			2 => Adw.ColorScheme.ForceDark,
 			_ => Adw.ColorScheme.Default,

@@ -17,7 +17,8 @@ public static partial class IntlExtensions
 		NativeImportResolver.RegisterLibrary (
 			IntlLibraryName,
 			windowsLibraryName: "libintl-8.dll",
-			linuxLibraryName: "libintl.so.8",
+			// On Linux, glibc has the gettext functions.
+			linuxLibraryName: "libc",
 			osxLibraryName: "libintl.8.dylib");
 	}
 
@@ -31,5 +32,27 @@ public static partial class IntlExtensions
 		InternalBindTextDomain (
 			GLib.Internal.NonNullablePlatformStringUnownedHandle.Create (domain),
 			GLib.Internal.NonNullablePlatformStringUnownedHandle.Create (dir));
+	}
+
+	[LibraryImport (IntlLibraryName, EntryPoint = "bind_textdomain_codeset")]
+	private static partial IntPtr InternalBindTextDomainCodeset (
+		GLib.Internal.NonNullablePlatformStringHandle domain,
+		GLib.Internal.NonNullablePlatformStringHandle codeset);
+
+	public static void BindTextDomainCodeset (string domain, string codeset)
+	{
+		InternalBindTextDomainCodeset (
+			GLib.Internal.NonNullablePlatformStringUnownedHandle.Create (domain),
+			GLib.Internal.NonNullablePlatformStringUnownedHandle.Create (codeset));
+	}
+
+	[LibraryImport (IntlLibraryName, EntryPoint = "textdomain")]
+	private static partial IntPtr InternalTextDomain (
+		GLib.Internal.NonNullablePlatformStringHandle domain);
+
+	public static void TextDomain (string domain)
+	{
+		InternalTextDomain (
+			GLib.Internal.NonNullablePlatformStringUnownedHandle.Create (domain));
 	}
 }

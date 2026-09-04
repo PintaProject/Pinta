@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="PreferencesDialog" parent="AdwPreferencesDialog">
+    <property name="search-enabled">True</property>
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="icon_name">preferences-window-layout-symbolic</property>
+        <property name="title" translatable="yes">General</property>
+        <property name="use-underline">True</property>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">User Interface</property>
+            <child>
+              <object class="AdwComboRow" id="color_scheme_comborow">
+                <property name="title" translatable="yes">Color Scheme</property>
+                <property name="model">
+                  <object class="GtkStringList">
+                    <items>
+                      <item translatable="yes" comments="Translators: This refers to using the system default color scheme.">Default</item>
+                      <item translatable="yes" comments="Translators: This refers to using a light variant of the color scheme.">Light</item>
+                      <item translatable="yes" comments="Translators: This refers to using a dark variant of the color scheme.">Dark</item>
+                    </items>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSwitchRow" id="menubar_switchrow">
+                <property name="title" translatable="yes">Show Menu Bar</property>
+                <property name="subtitle" translatable="yes">Replaces the header bar with a separate menu bar and tool bar.</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Canvas</property>
+            <child>
+              <object class="AdwSwitchRow" id="selection_anim_switchrow">
+                <property name="title" translatable="yes">Animate Selection Outline</property>
+                <property name="subtitle" translatable="yes">Enables a "marching ants" effect to improve the selection's visibility. Disable to reduce CPU usage.</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

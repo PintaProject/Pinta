@@ -58,6 +58,8 @@ internal sealed partial class AddinListViewItem
 	public string Description => info.Description;
 	public string Version => info.Version;
 	public string Url => info.Url;
+	public string Author => info.Author;
+	public string Category => info.Category;
 
 	public bool Installed => installed_addin is not null;
 	public Addin? Addin => installed_addin;

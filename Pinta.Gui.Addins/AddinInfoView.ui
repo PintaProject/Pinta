@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="AddinInfoView" parent="AdwBin">
+    <property name="width-request">300</property>
+    <child>
+      <object class="AdwViewStack" id="view_stack">
+
+        <!-- Empty page -->
+        <child>
+          <object class="AdwBin" id="empty_page"/>
+        </child>
+
+        <!-- Main content -->
+        <child>
+          <object class="GtkBox" id="content_box">
+            <property name="orientation">vertical</property>
+            <property name="spacing">10</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+
+            <child>
+              <object class="GtkLabel" id="title_label">
+                <property name="halign">start</property>
+                <style>
+                  <class name="title-2"/>
+                </style>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="description_label">
+                <property name="halign">start</property>
+                <property name="hexpand">true</property>
+                <property name="xalign">0</property>
+                <property name="wrap">true</property>
+                <style>
+                  <class name="body"/>
+                </style>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkListBox">
+                <property name="selection-mode">none</property>
+                <property name="valign">start</property>
+                <property name="vexpand">true</property>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
+
+                <child>
+                  <object class="AdwActionRow" id="category_row">
+                    <property name="title" translatable="yes">Category</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwActionRow" id="version_row">
+                    <property name="title" translatable="yes">Version</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwActionRow" id="author_row">
+                    <property name="title" translatable="yes">Author</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwActionRow" id="size_row">
+                    <property name="title" translatable="yes">Download size</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwActionRow" id="repo_row">
+                    <property name="title" translatable="yes">Repository</property>
+                    <style>
+                      <class name="property"/>
+                    </style>
+                  </object>
+                </child>
+
+              </object>
+            </child>
+
+            <!-- Bottom button row -->
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">6</property>
+                <style>
+                  <class name="toolbar"/>
+                </style>
+
+                <child>
+                  <object class="GtkSwitch" id="enable_switch" />
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="install_button">
+                    <property name="label" translatable="yes">Install...</property>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="update_button">
+                    <property name="label" translatable="yes">Update...</property>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="info_button">
+                    <property name="label" translatable="yes">More Information...</property>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="uninstall_button">
+                    <property name="label" translatable="yes">Uninstall...</property>
+                    <property name="hexpand">true</property>
+                    <property name="halign">end</property>
+                    <style>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+
+      </object>
+    </child>
+  </template>
+</interface>
