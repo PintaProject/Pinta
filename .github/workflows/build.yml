@@ -101,7 +101,7 @@ jobs:
         HOMEBREW_NO_INSTALL_FROM_API: 1
       run: brew install libadwaita adwaita-icon-theme gettext webp-pixbuf-loader
     - name: Build
-      run: dotnet build Pinta.sln -c Release
+      run: dotnet build Pinta.sln -c Release -p:BuildTranslations=true
     - name: Test
       env:
         # Add libraries from homebrew to the search path so they can be loaded by gir.core
@@ -159,7 +159,7 @@ jobs:
         msystem: ${{matrix.build.mingw_system}}
         install: mingw-w64-${{matrix.build.mingw_repo}}-libadwaita mingw-w64-${{matrix.build.mingw_repo}}-webp-pixbuf-loader
     - name: Build
-      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${{matrix.build.mingw_folder}}
+      run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${{matrix.build.mingw_folder}} -p:BuildTranslations=true
     - name: Test
       run: dotnet test Pinta.sln -c Release -p:MinGWFolder=${{matrix.build.mingw_folder}}
 

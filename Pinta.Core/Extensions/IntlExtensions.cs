@@ -17,7 +17,8 @@ public static partial class IntlExtensions
 		NativeImportResolver.RegisterLibrary (
 			IntlLibraryName,
 			windowsLibraryName: "libintl-8.dll",
-			linuxLibraryName: "libintl.so.8",
+			// On Linux, glibc has the gettext functions.
+			linuxLibraryName: "libc",
 			osxLibraryName: "libintl.8.dylib");
 	}
 

@@ -35,16 +35,20 @@ public static class Translations
 
 	public static void Init (string localeDir)
 	{
-		CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
-		string lang = cultureInfo.Name.Replace ('-', '_'); // convert names like en-CA to en_CA
-
-		// Follow the dotnet UI culture to choose which language is used by default.
-		// Pinta (along with GTK / libadwaita) use the native version of gettext for translations
-		// so here we set the LANG environment variable to make these consistent.
 		// Note we need to initialize the GLib module since this is called very early in startup,
 		// before GTK is initialized.
 		GLib.Module.Initialize ();
-		GLib.Functions.Setenv ("LANG", lang, overwrite: true);
+
+		// Follow the dotnet UI culture to choose which language is used by default, since this
+		// correctly picks up system language settings on macOS, for example.
+		// Pinta (along with GTK / libadwaita) use the native version of gettext for translations
+		// so here we set the LANGUAGE environment variable to make these consistent.
+		if (GLib.Functions.Getenv ("LANGUAGE") is null) {
+			CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
+			string lang = cultureInfo.Name.Replace ('-', '_'); // convert names like en-CA to en_CA
+
+			GLib.Functions.Setenv ("LANGUAGE", lang, overwrite: true);
+		}
 
 		// Initialize gettext for Pinta's translations.
 		IntlExtensions.BindTextDomain (PintaTextDomain, localeDir);
