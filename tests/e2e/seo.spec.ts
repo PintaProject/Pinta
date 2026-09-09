@@ -349,6 +349,40 @@ test.describe('search and sharing metadata', () => {
     }
   });
 
+  test('keeps page discovery and editor language links in static footers', async ({ browser, request }) => {
+    const routes = [...localePages.map(({ about }) => about), '/promo/', '/user-guide/'];
+    const editorLanguages = localePages.map(({ editor }) => editor);
+    const noJavaScript = await browser.newContext({ javaScriptEnabled: false });
+    const staticPage = await noJavaScript.newPage();
+
+    try {
+      for (const route of routes) {
+        const response = await request.get(route);
+        expect(response.ok()).toBe(true);
+        const source = await response.text();
+        expect(source).toContain('class="footer-languages"');
+        expect(source).toContain('href="/he/"');
+
+        await staticPage.goto(route);
+        const footer = staticPage.locator('footer');
+        const pageNavigation = footer.locator(':scope > nav[aria-label="Footer navigation"]');
+        const expectedAbout = localePages.find(({ about }) => about === route)?.about ?? '/about/';
+
+        await expect(pageNavigation.locator('a[href="/promo/"]')).toHaveCount(1);
+        await expect(pageNavigation.locator('a[href="/user-guide/"]')).toHaveCount(1);
+        await expect(pageNavigation.locator(`a[href="${expectedAbout}"]`)).toHaveCount(1);
+
+        const languageLinks = footer.locator('.footer-languages nav a');
+        await expect(languageLinks).toHaveCount(editorLanguages.length);
+        expect(await languageLinks.evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual(
+          editorLanguages,
+        );
+      }
+    } finally {
+      await noJavaScript.close();
+    }
+  });
+
   test('serves a searchable visual Pinta Online user guide and routes F1 to it', async ({ page, request }) => {
     const response = await page.goto('/user-guide/');
     expect(response?.status()).toBe(200);

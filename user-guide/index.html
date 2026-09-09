@@ -539,7 +539,17 @@
     <footer class="guide-footer">
       <div><a class="brand" href="/"><img src="/apps/com.github.PintaProject.Pinta.svg" width="34" height="34" alt="" /><span><strong>Pinta</strong> Online</span></a><p>A browser-native image editor based on the open-source Pinta project.</p></div>
       <p>Guide adapted from the <a href="https://www.pinta-project.com/user-guide/">Pinta User Guide</a>. Pinta Online was ported to the web by <a href="https://github.com/evgenyvinnik/pinta-online">Evgeny Vinnik</a>.</p>
-      <nav><a href="/">Editor</a><a href="/about/">About</a><a href="https://github.com/evgenyvinnik/pinta-online">Source</a><a href="https://github.com/evgenyvinnik/pinta-online/issues/new?template=bug.md">Report an issue</a></nav>
+      <nav aria-label="Footer navigation"><a href="/">Editor</a><a href="/about/">About</a><a href="/promo/">Quick designs</a><a href="/user-guide/" aria-current="page">User Guide</a><a href="https://github.com/evgenyvinnik/pinta-online">Source</a><a href="https://github.com/evgenyvinnik/pinta-online/issues/new?template=bug.md">Report an issue</a></nav>
+      <div class="footer-languages">
+        <span>Editor language</span>
+        <nav aria-label="Editor language">
+          <a href="/" lang="en" dir="ltr" hreflang="en" aria-current="true">English</a>
+          <a href="/fr/" lang="fr" dir="ltr" hreflang="fr">Français</a>
+          <a href="/de/" lang="de" dir="ltr" hreflang="de">Deutsch</a>
+          <a href="/ar/" lang="ar" dir="rtl" hreflang="ar">العربية</a>
+          <a href="/he/" lang="he" dir="rtl" hreflang="he">עברית</a>
+        </nav>
+      </div>
     </footer>
 
     <script type="module" src="./user-guide.js"></script>

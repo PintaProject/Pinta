@@ -941,6 +941,32 @@ kbd {
   font-size: 11px;
   text-decoration: none;
 }
+.guide-footer .footer-languages {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 9px 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.guide-footer .footer-languages > span {
+  color: #858290;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.guide-footer .footer-languages nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 18px;
+}
+.guide-footer .footer-languages a[aria-current] {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
 @media (max-width: 1180px) {
   .guide-hero {

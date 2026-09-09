@@ -953,6 +953,15 @@ ${allCodes.map((code) => `          <a href="${pathFor(code)}" lang="${code}" di
       </details>`;
 }
 
+function footerLanguageLinks(locale, label) {
+  return `<div class="footer-languages">
+        <span>${escapeHtml(label)}</span>
+        <nav aria-label="${escapeHtml(label)}">
+${allCodes.map((code) => `          <a href="${editorPath(code)}" lang="${code}" dir="${localeMeta[code].direction}" hreflang="${code}"${code === locale ? ' aria-current="true"' : ''}>${escapeHtml(localeMeta[code].name)}</a>`).join('\n')}
+        </nav>
+      </div>`;
+}
+
 function aboutPage(locale, text) {
   const canonical = `${origin}${aboutPath(locale)}`;
   const editorUrl = `${origin}${editorPath(locale)}`;
@@ -1131,7 +1140,7 @@ ${jsonLd(graph)}
       <section class="final-cta" aria-labelledby="cta-title"><img src="/apps/com.github.PintaProject.Pinta.svg" width="96" height="96" alt="" /><p class="eyebrow"><span></span>${escapeHtml(text.final.eyebrow)}</p><h2 id="cta-title">${escapeHtml(text.final.title)}</h2><p>${escapeHtml(text.final.lead)}</p><a class="button button-primary" href="${editorPath(locale)}">${escapeHtml(text.final.button)} <span aria-hidden="true">→</span></a></section>
     </main>
 
-    <footer class="site-footer"><a class="brand" href="${editorPath(locale)}"><img src="/apps/com.github.PintaProject.Pinta.svg" width="34" height="34" alt="" /><span><strong>Pinta</strong> Online</span></a><p>${escapeHtml(text.footer.description)} ${escapeHtml(text.footer.portedBy)} <a href="https://github.com/evgenyvinnik/pinta-online">Evgeny Vinnik</a>.</p><nav><a href="${editorPath(locale)}">${escapeHtml(text.footer.editor)}</a><a href="/user-guide/">User Guide</a><a href="https://github.com/evgenyvinnik/pinta-online">${escapeHtml(text.footer.source)}</a><a href="https://www.pinta-project.com">${escapeHtml(text.footer.project)}</a><a href="https://github.com/evgenyvinnik/pinta-online/issues/new?template=bug.md">${escapeHtml(text.footer.issue)}</a></nav><small><span>Pinta Online <strong data-app-version>__PINTA_ONLINE_VERSION__</strong></span><span>${escapeHtml(text.footer.copyright)}</span></small></footer>
+    <footer class="site-footer"><a class="brand" href="${editorPath(locale)}"><img src="/apps/com.github.PintaProject.Pinta.svg" width="34" height="34" alt="" /><span><strong>Pinta</strong> Online</span></a><p>${escapeHtml(text.footer.description)} ${escapeHtml(text.footer.portedBy)} <a href="https://github.com/evgenyvinnik/pinta-online">Evgeny Vinnik</a>.</p><nav aria-label="Footer navigation"><a href="${editorPath(locale)}">${escapeHtml(text.footer.editor)}</a><a href="${aboutPath(locale)}" aria-current="page">${escapeHtml(text.nav[0])}</a><a href="/promo/">Quick designs</a><a href="/user-guide/">User Guide</a><a href="https://github.com/evgenyvinnik/pinta-online">${escapeHtml(text.footer.source)}</a><a href="https://www.pinta-project.com">${escapeHtml(text.footer.project)}</a><a href="https://github.com/evgenyvinnik/pinta-online/issues/new?template=bug.md">${escapeHtml(text.footer.issue)}</a></nav>${footerLanguageLinks(locale, text.languageLabel)}<small><span>Pinta Online <strong data-app-version>__PINTA_ONLINE_VERSION__</strong></span><span>${escapeHtml(text.footer.copyright)}</span></small></footer>
   </body>
 </html>
 `;

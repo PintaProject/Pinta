@@ -609,6 +609,31 @@ main {
   gap: 6px 18px;
 }
 
+.site-footer .footer-languages {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 7px 16px;
+  width: min(100%, 760px);
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.site-footer .footer-languages > span {
+  color: rgba(170, 170, 186, 0.72);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.site-footer .footer-languages a[aria-current] {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .site-footer small {
   display: grid;
   gap: 4px;
