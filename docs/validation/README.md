@@ -71,6 +71,11 @@ The complete release-facing local matrix was rerun against `a1e16b297bd6e7abf674
 - Browser behavior passed in Chromium (**124/124**), Firefox (**123 passed, one expected clipboard
   skip**) and WebKit (**123 passed, one WebKit-only report-interaction skip**). The separate touch
   suite passed **8/8**, and all eight LTR/RTL desktop/constrained dialog-layout sweeps passed.
+- A follow-up iPad Safari menu audit reproduced right-edge popup clipping and Greek/Italian menu-bar
+  overflow. After the responsive fix, a dedicated WebKit suite passed **33/33** checks: every
+  top-level popup in iPad Mini portrait and landscape, all 30 locales at 768- and 694-pixel tablet
+  widths, and complete Effects/Main Menu scrolling at a 507-pixel split-view width. The existing
+  touch suite remained **8/8**, and **11/11** canonical desktop menu screenshots still matched.
 - The canonical Linux/Chromium visual run matched all **189/189** checked-in screenshot tests;
   approved baselines were not updated. This includes tools, menus, dialogs, effects and all five
   bundled add-in sample groups.

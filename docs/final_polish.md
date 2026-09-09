@@ -28,7 +28,7 @@ replacement for desktop Pinta.
 | Localization | 30 selectable UI locales and 98 web-only strings in each; French, German, Arabic, and Hebrew are reviewed, while the other 25 overrides are labelled machine translations |
 | SEO and PWA | Implemented: localized pages, sitemap, hreflang, analytics, manifest, icons, and offline worker |
 | Browser coverage | Chromium, Firefox, WebKit, and touch all pass; desktop behavior uses fresh-process shards and the exhaustive dialog-layout tests each receive a new Chromium process |
-| Mobile and touch | Eight real touch-emulation tests cover drawing, long-press secondary colour, panning, responsive controls, toolbar reachability, and dialog fit; engine-specific pinch paths are covered separately |
+| Mobile and touch | Eight real touch-emulation tests cover drawing, long-press secondary colour, panning, responsive controls, toolbar reachability, and dialog fit; 33 WebKit iPad checks cover portrait, landscape, split view, popup scrolling, and every locale at two tablet widths; engine-specific pinch paths are covered separately |
 | Performance | Six production-build budgets cover drawing, selection dragging, effects, tab switching, restoration, heap growth, and stored bytes |
 | Architecture | Considerably improved, but the largest React hook remains difficult to maintain |
 

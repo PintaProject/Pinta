@@ -160,6 +160,7 @@ button {
 .macos-menu-popover {
   top: calc(100% + 3px);
   min-width: 245px;
+  max-width: calc(100vw - 8px);
   max-height: calc(100dvh - 36px);
   overflow-y: auto;
   padding: 5px;
@@ -5670,6 +5671,43 @@ button {
 }
 
 @media (max-width: 860px) {
+  /* Keep every desktop-style menu reachable on tablets, including longer translated labels.
+     The Pinta icon remains as the application-menu affordance while the redundant wordmark is
+     hidden; narrower split views switch to the header menu at 640px. */
+  .macos-menu-bar {
+    padding-inline: 3px;
+    font-size: 11.5px;
+  }
+
+  .macos-menu-button {
+    padding-inline: 6px;
+  }
+
+  .application-menu-button {
+    padding-left: 4px;
+  }
+
+  .application-menu-button span {
+    display: none;
+  }
+
+  /* Menus near a viewport edge must open back toward the document. This matters on iPad, where
+     the full menu bar still fits but a left-aligned Help popup would extend beyond Safari. */
+  .macos-menu-anchor:nth-of-type(n + 8) .macos-menu-popover {
+    right: 0;
+    left: auto;
+  }
+
+  [dir='rtl'] .macos-menu-anchor:nth-of-type(n + 8) .macos-menu-popover {
+    right: auto;
+    left: 0;
+  }
+
+  [dir='rtl'] .macos-menu-anchor:nth-of-type(-n + 3) .macos-menu-popover {
+    right: 0;
+    left: auto;
+  }
+
   .header-cluster-end .menu-anchor:nth-of-type(1),
   .header-cluster-end .menu-anchor:nth-of-type(2) {
     display: none;
@@ -5721,19 +5759,6 @@ button {
 }
 
 @media (max-width: 680px) {
-  .macos-menu-bar {
-    padding-inline: 3px;
-    font-size: 11.5px;
-  }
-
-  .macos-menu-button {
-    padding-inline: 6px;
-  }
-
-  .application-menu-button {
-    padding-left: 4px;
-  }
-
   .shortcuts-layout {
     grid-template-columns: 1fr;
   }
