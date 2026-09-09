@@ -62,6 +62,35 @@ Local HTML reports: `playwright-report-e2e/index.html` (Chromium),
 `playwright-report/localization-firefox/index.html`. Generate and serve the reports with
 Playwright's report viewer if direct opening is blocked by the browser.
 
+### Verification recorded 9 September
+
+The complete release-facing local matrix was rerun against `a1e16b297bd6e7abf6745e30d5b7bb599081bed4`:
+
+- **291/291 unit tests** passed, together with application and E2E TypeScript, ESLint, Prettier,
+  localization, SEO, release, version, icon, codec, OpenRaster and effect verifiers.
+- Browser behavior passed in Chromium (**124/124**), Firefox (**123 passed, one expected clipboard
+  skip**) and WebKit (**123 passed, one WebKit-only report-interaction skip**). The separate touch
+  suite passed **8/8**, and all eight LTR/RTL desktop/constrained dialog-layout sweeps passed.
+- The canonical Linux/Chromium visual run matched all **189/189** checked-in screenshot tests;
+  approved baselines were not updated. This includes tools, menus, dialogs, effects and all five
+  bundled add-in sample groups.
+- All **6/6 performance budgets** passed. Long-history restore measured 93.65 ms against a 600 ms
+  budget, and effect preview measured 31.14 ms against a 150 ms budget on this machine.
+- All **8 native effect fixtures** reproduced exactly from the C# implementations in `original/`.
+- GitHub reports Build, Codespell, Browser breadth, Web visual regression and Pages deployment as
+  successful for the same master commit. `paint.rip` is the configured Pages domain and HTTPS is
+  enforced; the editor, About page and User Guide respond at their canonical URLs.
+
+The translation-review generator was also changed to consume the already-verified generated locale
+manifest instead of reparsing all 73 upstream `.po` files. Its focused test had exceeded Vitest's
+five-second default under load; after the change the complete unit suite passes under concurrent
+verification. This is a test-infrastructure reliability fix, not a change to translated wording.
+
+These automated results do **not** convert the pending physical iPhone/iPad cases or the 25 locale
+queues into passes. Those still require a person operating the hardware and fluent speakers filing
+revision-bound review exports. The 15-pair native visual findings also remain open product work;
+matching the current web baselines proves regression stability, not native-Pinta identity.
+
 ## Fluent translation review
 
 The queue is `cs`, `el`, `en-CA`, `en-GB`, `es`, `eu`, `ga`, `hr`, `id`, `it`, `kk`, `ko`,

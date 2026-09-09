@@ -10,6 +10,12 @@ iPhone/iPad Safari testing, fluent-review sheets for 25 locales, and a new 15-pa
 That inspection found capture-state mismatches and visible control/layout differences; the older
 completion checklist below must not be read as a blanket native-parity sign-off.
 
+**9 September verification:** the complete automated matrix is green, including 291 unit tests,
+Chromium/Firefox/WebKit behavior, touch and dialog-layout sweeps, all 189 canonical screenshots,
+six performance budgets, and eight native C# effect fixtures. The [recorded evidence and exact
+counts](validation/README.md#verification-recorded-9-september) do not replace the pending physical
+device, fluent-language, or broader native-visual reviews.
+
 Pinta Online is a substantial, high-fidelity browser port, but it is not yet an identical
 replacement for desktop Pinta.
 

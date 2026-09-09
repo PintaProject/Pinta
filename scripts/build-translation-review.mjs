@@ -2,7 +2,6 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
-import { loadLocaleInventory } from './i18n-config.mjs';
 import { webOverrides } from './i18n-web-overrides.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -28,7 +27,11 @@ function contextFor(key, catalog) {
 }
 
 await mkdir(output, { recursive: true });
-const locales = loadLocaleInventory(root).locales.filter(({ code }) => !previouslyReviewed.has(code));
+// The generated manifest is already checked against every upstream gettext catalog by
+// `npm run verify:i18n`. Re-parsing all 73 .po files here made this human-review helper take
+// tens of seconds on a loaded machine and caused its unit test to time out.
+const localeInventory = JSON.parse(await readFile(path.join(root, 'src/i18n/locales.generated.json'), 'utf8'));
+const locales = localeInventory.locales.filter(({ code }) => !previouslyReviewed.has(code));
 const manifest = [];
 for (const locale of locales) {
   const strings = webOverrides[locale.code];
