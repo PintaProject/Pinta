@@ -210,6 +210,7 @@ public sealed class DocumentLayers
 
 		layer.Hidden = source.Hidden;
 		layer.Opacity = source.Opacity;
+		layer.BlendMode = source.BlendMode;
 
 		user_layers.Insert (++CurrentUserLayerIndex, layer);
 
