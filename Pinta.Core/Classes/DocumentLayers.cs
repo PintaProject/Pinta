@@ -219,6 +219,8 @@ public sealed class DocumentLayers
 		LayerAdded?.Invoke (this, new IndexEventArgs (CurrentUserLayerIndex));
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
 
+		document.Workspace.Invalidate ();
+
 		return layer;
 	}
 
