@@ -116,7 +116,7 @@ public sealed partial class ColorPickerSlider
 	private void UpdateColorValue (double value)
 	{
 		double clampedValue = Math.Clamp (Math.Round (value), 0, GetMaxValue (component));
-		
+
 		suppress_input_events = true;
 		try {
 			input_field.SetText (clampedValue.ToString (CultureInfo.InvariantCulture));
