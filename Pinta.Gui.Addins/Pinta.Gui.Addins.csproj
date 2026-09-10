@@ -13,4 +13,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="*.ui">
+      <LogicalName>%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
