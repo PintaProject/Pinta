@@ -26,9 +26,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -40,7 +37,7 @@ public abstract class SelectTool : BaseTool
 
 	private SelectionHistoryItem? hist = default;
 	private CombineMode combine_mode = default;
-	private Separator? mode_sep;
+	private Gtk.Separator? mode_sep;
 	private ToolBarDropDownButton? auto_scroll_button;
 
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
@@ -145,7 +142,7 @@ public abstract class SelectTool : BaseTool
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
 		PointD adjusted = AdjustMousePosition (document, e.PointDouble);
-		if (handle.HasDragged (adjusted)) {
+		if (handle.HasDragged (adjusted) && handle.Rectangle.Width > 0 && handle.Rectangle.Height > 0) {
 			ReDraw (document);
 
 			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
@@ -256,7 +253,7 @@ public abstract class SelectTool : BaseTool
 		ShowHandles (document.Selection.Visible && tools.CurrentTool == this);
 	}
 
-	private Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
+	private Gtk.Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 	private ToolBarDropDownButton AutoScrollButton {
 		get {
