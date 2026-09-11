@@ -108,9 +108,9 @@ public sealed partial class HScaleSpinButtonWidget
 	{
 		if (!double.TryParse (spin_button.GetText (), out double parsed)) return;
 		Gtk.Adjustment adjustment = spin_button.Adjustment!;
-		double adjusted = Math.Clamp (parsed, adjustment.Lower, adjustment.Upper);
-		if (spin_button.Value == adjusted) return;
-		spin_button.Value = adjusted;
+		if (parsed < adjustment.Lower || parsed > adjustment.Upper) return;
+		if (spin_button.Value == parsed) return;
+		spin_button.Value = parsed;
 	}
 
 	public static HScaleSpinButtonWidget New (double initialValue)
