@@ -80,6 +80,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed a potential error when attempting to save as a file type which does not support export (#2176, #2248)
 - Duplicating a layer now copies the blend mode, and correctly redraws the canvas (#2293, #2291)
 - Fixed a rare hang in the color picker (#2288)
+- Fixed issue with spin button parameters not immediately updating for effects (#1565, #2294)
 
 ## [3.1.2](https://github.com/PintaProject/Pinta/release/tag/3.1.2) - 2026/03/29
 
