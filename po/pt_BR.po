@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 00:13+0000\n"
-"PO-Revision-Date: 2026-02-11 08:51+0000\n"
-"Last-Translator: burns <ahoradocafezinho@gmail.com>\n"
+"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"PO-Revision-Date: 2026-08-29 02:38+0000\n"
+"Last-Translator: Ritpop <aqueledavidcamara@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "pinta/pinta/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -49,11 +49,11 @@ msgstr "Região 7 × 7"
 msgid "9 x 9 Region"
 msgstr "Região 9 × 9"
 
-#: ../Pinta/MainWindow.cs:400
+#: ../Pinta/MainWindow.cs:397
 msgid "A_dd-ins"
 msgstr "A_dd-ins"
 
-#: ../Pinta.Core/Actions/AppActions.cs:43
+#: ../Pinta.Core/Actions/AppActions.cs:44
 msgid "About"
 msgstr "Sobre"
 
@@ -80,7 +80,7 @@ msgid "Added"
 msgstr "Incluído"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:104
-#: ../Pinta/MainWindow.cs:450
+#: ../Pinta/MainWindow.cs:460
 msgid "Adjustments"
 msgstr "Ajustes"
 
@@ -96,12 +96,12 @@ msgstr "Alinhar Objeto"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:206
 msgid "All Petite Caps"
-msgstr ""
+msgstr "Todas em Versaletes Minúsculos"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:194
 msgid "All Small Caps"
-msgstr ""
+msgstr "Todas em versalete"
 
 #: ../Pinta.Core/Actions/EditActions.cs:586
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:302
@@ -144,6 +144,10 @@ msgstr "Âncora:"
 msgid "Angle"
 msgstr "Ângulo"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+msgid "Animate Selection Outline"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
 msgstr "Suavizar"
@@ -185,11 +189,11 @@ msgstr "Níveis Automáticos"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:258
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "Rolagem automática desativada"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:257
 msgid "Autoscroll On"
-msgstr ""
+msgstr "Rolagem automática ativada"
 
 #: ../Pinta.Gui.Addins/AddinInfoView.cs:251
 #, csharp-format
@@ -217,14 +221,14 @@ msgstr "Inspirado no trabalho do Paint.NET:"
 msgid "Beautiful Italy"
 msgstr "Bela Itália"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:86
+#: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Best Fit"
 msgstr "Melhor Ajuste"
 
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:458
 msgid "Bevel Join"
-msgstr ""
+msgstr "Junção chanfrada"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
@@ -272,7 +276,7 @@ msgstr "Fogueira"
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Book"
-msgstr ""
+msgstr "Livro"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:40
 msgid "Bottom Center"
@@ -329,7 +333,7 @@ msgstr "Por percentagem:"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "Canvas"
 
@@ -337,7 +341,7 @@ msgstr "Canvas"
 msgid "Canvas Grid Settings"
 msgstr "Configurações da Grade da Tela"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:125
+#: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Grade de Tela..."
 
@@ -379,25 +383,25 @@ msgstr "Centro Direito"
 msgid "Centered"
 msgstr "Centralizado"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:228
+#: ../Pinta.Core/Actions/ViewActions.cs:215
 msgid "Centimeters"
 msgstr "Centímetros"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width."
-msgstr ""
+msgstr "Alterar a espessura do pincel."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:238
 msgid "Change font size."
-msgstr ""
+msgstr "Alterar o tamanho da fonte."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:237
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Alterar tamanho da fonte. Teclas de atalho: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
-msgstr ""
+msgstr "Alterar a espessura do contorno."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -415,7 +419,7 @@ msgstr "Escolher cor"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:380
 msgid "Choose Colors"
-msgstr ""
+msgstr "Escolher Cores"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:164
 msgid "Choose Palette Color"
@@ -479,6 +483,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"Clique para selecionar região de cores similares.\n"
+"Pressione shift para usar o modo Global."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:606
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:348
@@ -560,7 +566,7 @@ msgstr "Intervalo de Cor"
 msgid "Color Saturation"
 msgstr "Saturação da Cor"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:254
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -669,7 +675,7 @@ msgid "Cut"
 msgstr "Cortar"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:251
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
 msgid "Dark"
 msgstr "Escuro"
 
@@ -681,8 +687,8 @@ msgstr "Escurecer"
 msgid "Dash"
 msgstr "Dash"
 
-#. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:247
+#. Translators: This refers to using the system default color scheme.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:5
 msgid "Default"
 msgstr "Padrão"
 
@@ -772,14 +778,14 @@ msgstr "Detectar de Borda"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
 msgstr "Efeito_s"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:105
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:455
 msgid "Effects"
 msgstr "Efeitos"
 
@@ -806,6 +812,12 @@ msgstr "Realçar"
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 "Habilitar registro adicional ou alterações de comportamento para depuração"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+msgid ""
+"Enables a \"marching ants\" effect to improve the selection's visibility. "
+"Disable to reduce CPU usage."
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -877,7 +889,7 @@ msgstr "Objeto de Pena"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
 msgid "File"
-msgstr ""
+msgstr "Arquivo"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -988,7 +1000,6 @@ msgid "Fragments"
 msgstr "Fragmentos"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:220
-#, fuzzy
 msgid "Freeform"
 msgstr "Forma Livre"
 
@@ -1000,7 +1011,7 @@ msgstr "Forma livre"
 msgid "Frosted Glass"
 msgstr "Vidro Fosco"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:152
 msgid "Fullscreen"
 msgstr "Tela cheia"
 
@@ -1011,6 +1022,10 @@ msgstr "Galeria"
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
 msgstr "Desfoque Gaussiano"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
+msgid "General"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1051,7 +1066,7 @@ msgstr "Luz dura"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Heavy"
-msgstr ""
+msgstr "Pesado"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
@@ -1062,7 +1077,7 @@ msgstr "Altura:"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 msgid "Help"
-msgstr ""
+msgstr "Ajuda"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1106,7 +1121,7 @@ msgstr "Tonalidade"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:210
 msgid "Hue & Sat"
-msgstr "Hue & Sat"
+msgstr "Matiz e Saturação"
 
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:23
 msgid "Hue / Saturation"
@@ -1114,11 +1129,11 @@ msgstr "Tonalidade / Saturação"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "Arquivos ICO não podem ser maiores que 256 x 256 pixels."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
-msgstr ""
+msgstr "Se habilitado, o componente Valor é aplicado ao círculo cromático."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1127,7 +1142,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:254
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:103
-#: ../Pinta/MainWindow.cs:455
+#: ../Pinta/MainWindow.cs:465
 msgid "Image"
 msgstr "Imagem"
 
@@ -1135,7 +1150,7 @@ msgstr "Imagem"
 msgid "Image Editor"
 msgstr "Editor de imagem"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:112
+#: ../Pinta.Core/Actions/ViewActions.cs:110
 msgid "Image Tabs"
 msgstr "Aba de Imagens"
 
@@ -1165,7 +1180,6 @@ msgid "Import from File..."
 msgstr "Importar do arquivo..."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:57
-#, fuzzy
 msgid ""
 "In Freeform mode, click and drag to draw the outline for a selection area.\n"
 "\n"
@@ -1173,15 +1187,14 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
-"No modo Forma Livre, clique e arraste para desenhar o contorno da área de "
-"seleção.\n"
+"No modo Forma Livre, clique e arraste para desenhar o contorno de uma área "
+"de seleção.\n"
 "\n"
-"No modo Polígono, clique e arraste para adicionar um novo ponto para a "
-"seleção.\n"
-"Pressione Enter para terminar a seleção.\n"
-"Pressione Backspace para apagar o último ponto."
+"No modo Polígono, clique e arraste para adicionar um novo ponto à seleção.\n"
+"Pressione Enter para finalizar a seleção.\n"
+"Pressione Backspace para excluir o último ponto."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:214
 msgid "Inches"
 msgstr "Polegadas"
 
@@ -1261,9 +1274,9 @@ msgstr "Jarvis-Judice-Ninke"
 msgid "Julia Fractal"
 msgstr "Fractal Julia"
 
-#: ../Pinta.Core/Actions/AppActions.cs:48
+#: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Atalhos do Teclado"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
@@ -1292,7 +1305,7 @@ msgstr "Propriedades da Camada"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:127
 msgid "Layer Properties..."
-msgstr "Propiedades da Camada..."
+msgstr "Propriedades da Camada..."
 
 #. Translators: {0} is a unique id for new layers, e.g. "Layer 2".
 #: ../Pinta.Core/Classes/DocumentLayers.cs:131
@@ -1413,6 +1426,9 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Clique com o botão esquerdo para preencher uma região com a cor primária, "
+"clique com o botão direito para preencher com a cor secundária.\n"
+"Segure Shift para usar o modo Global."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1452,6 +1468,9 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Clique com o botão esquerdo para definir a cor primária. Clique com o botão "
+"direito para definir a cor secundária. Clique com o botão do meio ou "
+"pressione {0} e clique com o botão esquerdo para escolher a cor da paleta."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1481,7 +1500,7 @@ msgstr "Licença"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "Claro"
@@ -1532,7 +1551,7 @@ msgstr "Luminosidade"
 msgid "Magic Wand Select"
 msgstr "Varinha Mágica de Seleção"
 
-#: ../Pinta/MainWindow.cs:440
+#: ../Pinta/MainWindow.cs:450
 msgid "Main Menu"
 msgstr "Menu Principal"
 
@@ -1561,11 +1580,7 @@ msgstr "Mediano"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:290
 msgid "Medium"
-msgstr ""
-
-#: ../Pinta.Core/Actions/ViewActions.cs:131
-msgid "Menu Bar"
-msgstr "Barra de Menu"
+msgstr "Médio"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:335
@@ -1579,7 +1594,7 @@ msgstr "Tamanho mínimo"
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:446
 msgid "Miter Join"
-msgstr ""
+msgstr "Junção em esquadria"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:322
 msgid "Mode"
@@ -1671,7 +1686,7 @@ msgstr "Normal"
 msgid "Normal Blending"
 msgstr "Mistura Normal"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:99
+#: ../Pinta.Core/Actions/ViewActions.cs:97
 msgid "Normal Size"
 msgstr "Tamanho Normal"
 
@@ -1860,7 +1875,7 @@ msgstr "Percentil"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:200
 msgid "Petite Caps"
-msgstr ""
+msgstr "Miniversalete"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -1927,7 +1942,7 @@ msgstr "O Pinta suporta os seguintes arquivos de paleta:"
 msgid "Pixelate"
 msgstr "Pincelada"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:213
 msgid "Pixels"
 msgstr "Pontos"
 
@@ -1936,7 +1951,7 @@ msgstr "Pontos"
 msgid "Piña Colada"
 msgstr "Piña Colada"
 
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+#: ../Pinta/Dialogs/PreferencesDialog.cs:81
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Por favor, reinicie o Pinta para aplicar as alterações."
 
@@ -1989,6 +2004,10 @@ msgstr "Posterizar"
 msgid "Power"
 msgstr "Ligar/Desligar"
 
+#: ../Pinta.Core/Actions/AppActions.cs:49
+msgid "Preferences..."
+msgstr ""
+
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
 msgid "Preserve"
@@ -1999,9 +2018,8 @@ msgid "Preset Gradient"
 msgstr "Gradiente Predefinido"
 
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:159
-#, fuzzy
 msgid "Preset Palettes"
-msgstr "Paletas Pré-definidas"
+msgstr "Paletas predefinidas"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:356
 msgid "Preset:"
@@ -2010,32 +2028,32 @@ msgstr "Predefinição:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush width"
-msgstr ""
+msgstr "Pressione {0} para diminuir a espessura do pincel"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:240
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr ""
+msgstr "Pressione {0} para diminuir o tamanho da fonte"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline width"
-msgstr ""
+msgstr "Pressione {0} para diminuir a espessura do contorno"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush width"
-msgstr ""
+msgstr "Pressione {0} para aumentar a espessura do pincel"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 #, csharp-format
 msgid "Press {0} to increase font size"
-msgstr ""
+msgstr "Pressione {0} para aumentar o tamanho da fonte"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline width"
-msgstr ""
+msgstr "Pressione {0} para aumentar a espessura do contorno"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:169
 msgid "Preview"
@@ -2063,7 +2081,7 @@ msgstr "Qualidade"
 msgid "Quality: "
 msgstr "Qualidade: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:54
+#: ../Pinta.Core/Actions/AppActions.cs:60
 msgid "Quit"
 msgstr "Fechar Programa"
 
@@ -2204,6 +2222,10 @@ msgstr "Efeito de Renderização"
 msgid "Replace"
 msgstr "Substituir"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+msgid "Replaces the header bar with a separate menu bar and tool bar."
+msgstr ""
+
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Reportar Erro..."
@@ -2229,7 +2251,7 @@ msgstr "Retornar ao Padrão"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:80
 msgid "Reset to image size"
-msgstr ""
+msgstr "Resetar para o tamanho da imagem"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:213
@@ -2252,10 +2274,6 @@ msgstr "Redimensionar Imagem..."
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr "Ajustar tamanho do pálete"
-
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
-msgid "Restart Pinta"
-msgstr "Reiniciar Pinta"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
@@ -2309,7 +2327,7 @@ msgstr "Rugosidade"
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:452
 msgid "Round Join"
-msgstr ""
+msgstr "Junção arredondada"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
@@ -2323,11 +2341,11 @@ msgstr "Forma de Linha Arredondada"
 msgid "Rounded Rectangle"
 msgstr "Retângulo Arredondado"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:231
+#: ../Pinta.Core/Actions/ViewActions.cs:218
 msgid "Ruler Units"
 msgstr "Unidades de medida"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:141
 msgid "Rulers"
 msgstr "Réguas"
 
@@ -2406,12 +2424,12 @@ msgstr "Cores Selecionadas"
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Semibold"
-msgstr ""
+msgstr "Seminegrito"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Semilight"
-msgstr ""
+msgstr "Semileve"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
@@ -2436,7 +2454,7 @@ msgstr "Nitidez"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:106
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:368
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
-#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:51
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:49
 msgid "Shortcut key"
 msgstr "Tecla de atalho"
 
@@ -2448,7 +2466,7 @@ msgstr "Teclas de atalho"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
 #: ../Pinta.Tools/Tools/TextTool.cs:239
 msgid "Shortcut keys:"
-msgstr ""
+msgstr "Teclas de atalho:"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:75
 msgid "Show Axonometric Grid"
@@ -2463,6 +2481,10 @@ msgstr "Mostrar Grade"
 msgid "Show Layer"
 msgstr "Exibir Camada"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+msgid "Show Menu Bar"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Show Points"
@@ -2472,7 +2494,7 @@ msgstr "Mostrar Pontos"
 msgid "Show Value"
 msgstr "Mostrar Valor"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:243
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Show/Hide"
 msgstr "Mostrar/Ocultar"
 
@@ -2496,12 +2518,12 @@ msgstr "Tamanho"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr ""
+msgstr "Inclinado"
 
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Small Caps"
-msgstr ""
+msgstr "Versalete"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
@@ -2527,7 +2549,7 @@ msgstr "Espátula"
 msgid "Squares"
 msgstr "Quadrados"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:137
+#: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr "Barra de Status"
 
@@ -2645,7 +2667,7 @@ msgstr "Espessura"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:254
 msgid "Thin"
-msgstr ""
+msgstr "Fino"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
 msgid "This format does not support layers. Flatten image?"
@@ -2670,7 +2692,7 @@ msgstr "Dica: Dê um clique direito para remover os pontos de controle."
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:218
 msgid "Title Caps"
-msgstr ""
+msgstr "Maiúsculas para títulos"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2684,15 +2706,15 @@ msgstr "Tolerância"
 msgid "Tool"
 msgstr "Ferramenta"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:135
 msgid "Tool Box"
 msgstr "Caixa de Ferramentas"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:118
+#: ../Pinta.Core/Actions/ViewActions.cs:116
 msgid "Tool Windows"
 msgstr "Janela de Ferramentas"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:106
+#: ../Pinta.Core/Actions/ViewActions.cs:104
 msgid "Toolbar"
 msgstr "Barra de Ferramentas"
 
@@ -2750,17 +2772,17 @@ msgstr "Tipo"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:308
 msgid "Ultrabold"
-msgstr ""
+msgstr "Ultranegrito"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Ultraheavy"
-msgstr ""
+msgstr "Ultrapesado"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Ultralight"
-msgstr ""
+msgstr "Ultraleve"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:345
 msgid "Underline"
@@ -2777,7 +2799,7 @@ msgstr "Desfocar"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:212
 msgid "Unicase"
-msgstr ""
+msgstr "Caixa única"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:232
 #: ../Pinta.Gui.Addins/InstallDialog.cs:233
@@ -2824,6 +2846,10 @@ msgstr ""
 "pequenos. Use alta qualidade para finalizações, imagens grandes, e ângulos "
 "grandes."
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
+msgid "User Interface"
+msgstr ""
+
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
 msgstr "Usando alguns ícones de:"
@@ -2853,8 +2879,7 @@ msgid "Vertical red (R)"
 msgstr "Vermelho vertical (R)"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:102
-#: ../Pinta/MainWindow.cs:460
-#, fuzzy
+#: ../Pinta/MainWindow.cs:470
 msgid "View"
 msgstr "Visualizar"
 
@@ -2887,8 +2912,8 @@ msgstr "Branco"
 msgid "Width:"
 msgstr "Largura:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:208
-#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Actions/ViewActions.cs:195
+#: ../Pinta.Core/Actions/ViewActions.cs:368
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:106
@@ -2935,19 +2960,19 @@ msgstr "Ampliar"
 msgid "Zoom Blur"
 msgstr "Borrão por ampliação"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom In"
 msgstr "Aproximar"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom Out"
 msgstr "Afastar"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:93
+#: ../Pinta.Core/Actions/ViewActions.cs:91
 msgid "Zoom to Selection"
 msgstr "Ampliar para Seleção"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:394
 msgid "_Adjustments"
 msgstr "_Ajustes"
 
@@ -2964,19 +2989,19 @@ msgstr "_Cancelar"
 msgid "_Discard"
 msgstr "_Descartar"
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:390
 msgid "_Edit"
 msgstr "_Editar"
 
-#: ../Pinta/MainWindow.cs:392
+#: ../Pinta/MainWindow.cs:389
 msgid "_File"
 msgstr "_Arquivo"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:399
 msgid "_Help"
 msgstr "_Ajuda"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:393
 msgid "_Image"
 msgstr "_Imagem"
 
@@ -2991,11 +3016,11 @@ msgstr "_OK"
 msgid "_Save"
 msgstr "_Salvar"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:392
 msgid "_View"
 msgstr "_Exibir"
 
-#: ../Pinta/MainWindow.cs:401
+#: ../Pinta/MainWindow.cs:398
 msgid "_Window"
 msgstr "_Janela"
 
@@ -3022,35 +3047,35 @@ msgstr "pixels"
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
-"  Adolfo Jayme Barrientos https://launchpad.net/~fitojb\n"
-"  André Gondim https://launchpad.net/~andregondim\n"
-"  Cameron White https://launchpad.net/~cameronwhite91\n"
-"  Celso H. L. S. Junior https://launchpad.net/~celsojunior\n"
-"  Christian Marques https://launchpad.net/~csmchristian\n"
-"  Eliton Miranda da Silva https://launchpad.net/~tudoembrulhado\n"
-"  Felipe Amaral https://launchpad.net/~felpi-flick\n"
-"  Igor Belchior https://launchpad.net/~igorbelchior86\n"
-"  Jonathan Pobst https://launchpad.net/~jpobst\n"
-"  José Humberto Alvarenga Melo https://launchpad.net/~josehumberto-melo\n"
-"  Julio Tomaschitz https://launchpad.net/~blaziushw\n"
-"  Julius Miranda https://launchpad.net/~juliusmiranda\n"
-"  Kristian Gomes https://launchpad.net/~kristiang\n"
-"  Luis Henrique Soler https://launchpad.net/~blamoo\n"
-"  Luiz Fernando Palacios https://launchpad.net/~sapo-mano\n"
-"  Matheus Reich https://launchpad.net/~matheusr98\n"
-"  Neliton Pereira Jr. https://launchpad.net/~nelitonpjr\n"
-"  Paulo N. Júnior https://launchpad.net/~naves-junior\n"
-"  Rafael Neri https://launchpad.net/~rafepel\n"
-"  Robson Cassiano https://launchpad.net/~randintn\n"
-"  Rockworld https://launchpad.net/~rockrock2222222\n"
-"  Rodrigo Henrique https://launchpad.net/~krascovict-deactivatedaccount\n"
-"  Victor Westmann https://launchpad.net/~victor.westmann\n"
-"  Vitor da Silva Gonçalves https://launchpad.net/~vitorsgoncalves\n"
-"  juliocbm https://launchpad.net/~emaildojulio\n"
-"  lucca https://launchpad.net/~lbpprado\n"
-"  maxwell souza https://launchpad.net/~maxjf1\n"
-"  rwsilva32 https://launchpad.net/~rwsilva32\n"
-"  Tiago Lucas Flach https://github.com/tiagoFlach"
+" Adolfo Jayme Barrientos https://launchpad.net/~fitojb\n"
+" André Gondim https://launchpad.net/~andregondim\n"
+" Cameron White https://launchpad.net/~cameronwhite91\n"
+" Celso H. L. S. Junior https://launchpad.net/~celsojunior\n"
+" Christian Marques https://launchpad.net/~csmchristian\n"
+" Eliton Miranda da Silva https://launchpad.net/~tudoembrulhado\n"
+" Felipe Amaral https://launchpad.net/~felpi-flick\n"
+" Igor Belchior https://launchpad.net/~igorbelchior86\n"
+" Jonathan Pobst https://launchpad.net/~jpobst\n"
+" José Humberto Alvarenga Melo https://launchpad.net/~josehumberto-melo\n"
+" Julio Tomaschitz https://launchpad.net/~blaziushw\n"
+" Julius Miranda https://launchpad.net/~juliusmiranda\n"
+" Kristian Gomes https://launchpad.net/~kristiang\n"
+" Luis Henrique Soler https://launchpad.net/~blamoo\n"
+" Luiz Fernando Palacios https://launchpad.net/~sapo-mano\n"
+" Matheus Reich https://launchpad.net/~matheusr98\n"
+" Neliton Pereira Jr. https://launchpad.net/~nelitonpjr\n"
+" Paulo N. Júnior https://launchpad.net/~naves-junior\n"
+" Rafael Neri https://launchpad.net/~rafepel\n"
+" Robson Cassiano https://launchpad.net/~randintn\n"
+" Rockworld https://launchpad.net/~rockrock2222222\n"
+" Rodrigo Henrique https://launchpad.net/~krascovict-deactivatedaccount\n"
+" Victor Westmann https://launchpad.net/~victor.westmann\n"
+" Vitor da Silva Gonçalves https://launchpad.net/~vitorsgoncalves\n"
+" juliocbm https://launchpad.net/~emaildojulio\n"
+" lucca https://launchpad.net/~lbpprado\n"
+" maxwell souza https://launchpad.net/~maxjf1\n"
+" rwsilva32 https://launchpad.net/~rwsilva32\n"
+" Tiago Lucas Flach https://github.com/tiagoFlach"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:63
@@ -3079,10 +3104,16 @@ msgstr "{0} paleta ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:377
+#: ../Pinta.Core/Actions/ViewActions.cs:349
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Menu Bar"
+#~ msgstr "Barra de Menu"
+
+#~ msgid "Restart Pinta"
+#~ msgstr "Reiniciar Pinta"
 
 #~ msgid "ICO files can not be larger than 255 x 255 pixels."
 #~ msgstr "Arquivos ICO não podem ser maiores que 255 x 255 pixels."
