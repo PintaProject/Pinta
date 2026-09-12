@@ -16,7 +16,19 @@ namespace Pinta.Effects;
 
 public sealed class BrightnessContrastEffect : BaseEffect
 {
-	private Lazy<BrightnessContrastPixelOp> pixel_op = new (() => new (DEFAULT_BRIGHTNESS, DEFAULT_CONTRAST));
+	const int DEFAULT_BRIGHTNESS = 0;
+	const int DEFAULT_CONTRAST = 0;
+
+	// If effect data changed, we recalculate rgb table
+	private sealed record CachedOp ( // Why a record? Swaps are atomic
+		int brightness,
+		int contrast,
+		BrightnessContrastPixelOp pixelOp);
+
+	private CachedOp cached_op = new (
+		DEFAULT_BRIGHTNESS,
+		DEFAULT_CONTRAST,
+		new (DEFAULT_BRIGHTNESS, DEFAULT_CONTRAST));
 
 	public sealed override bool IsTileable
 		=> true;
@@ -43,30 +55,29 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		chrome = services.GetService<IChromeService> ();
 		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new BrightnessContrastData ();
-		EffectData.PropertyChanged += HandleEffectDataPropertyChanged;
-	}
-
-	/// <summary>
-	/// If any of the effect data was changed, we need to recalculate the rgb table before rendering
-	/// </summary>
-	void HandleEffectDataPropertyChanged (object? sender, System.ComponentModel.PropertyChangedEventArgs e)
-	{
-		BrightnessContrastData data = Data;
-		int brightness = data.Brightness;
-		int contrast = data.Contrast;
-		pixel_op = new Lazy<BrightnessContrastPixelOp> (() => new (brightness, contrast));
 	}
 
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
 	private readonly record struct BrightnessContrastSettings (BrightnessContrastPixelOp PreRender, Size CanvasSize);
-	private static BrightnessContrastSettings CreateSettings (ImageSurface destination, BrightnessContrastPixelOp preRender)
-		=> new (PreRender: preRender, CanvasSize: destination.GetSize ());
+	private static BrightnessContrastSettings CreateSettings (ImageSurface destination, BrightnessContrastPixelOp pixelOp)
+		=> new (
+			PreRender: pixelOp,
+			CanvasSize: destination.GetSize ());
 
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)
 	{
-		BrightnessContrastSettings settings = CreateSettings (destination, pixel_op.Value);
+		BrightnessContrastData data = Data;
+
+		if (data.Brightness != cached_op.brightness || data.Contrast != cached_op.contrast) {
+			cached_op = new (
+				data.Brightness,
+				data.Contrast,
+				new BrightnessContrastPixelOp (data.Brightness, data.Contrast));
+		}
+
+		BrightnessContrastSettings settings = CreateSettings (destination, cached_op.pixelOp);
 
 		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
 		Span<ColorBgra> destinationData = destination.GetPixelData ();
@@ -74,9 +85,6 @@ public sealed class BrightnessContrastEffect : BaseEffect
 		foreach (var pixel in Tiling.GeneratePixelOffsets (roi, settings.CanvasSize))
 			destinationData[pixel.memoryOffset] = settings.PreRender.Apply (sourceData[pixel.memoryOffset]);
 	}
-
-	const int DEFAULT_BRIGHTNESS = 0;
-	const int DEFAULT_CONTRAST = 0;
 
 	public sealed class BrightnessContrastData : EffectData
 	{
