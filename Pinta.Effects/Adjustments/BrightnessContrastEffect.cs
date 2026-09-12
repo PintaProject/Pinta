@@ -88,30 +88,14 @@ public sealed class BrightnessContrastEffect : BaseEffect
 
 	public sealed class BrightnessContrastData : EffectData
 	{
-		private int brightness = DEFAULT_BRIGHTNESS;
-		private int contrast = DEFAULT_CONTRAST;
-
 		[Caption ("Brightness")]
-		public int Brightness {
-			get => brightness;
-			set {
-				if (value == brightness) return;
-				brightness = value;
-				FirePropertyChanged (nameof (Brightness));
-			}
-		}
+		public int Brightness { get; set; } = DEFAULT_BRIGHTNESS;
 
 		[Caption ("Contrast")]
-		public int Contrast {
-			get => contrast;
-			set {
-				if (value == contrast) return;
-				contrast = value;
-				FirePropertyChanged (nameof (Contrast));
-			}
-		}
+		public int Contrast { get; set; } = DEFAULT_CONTRAST;
 
 		[Skip]
-		public override bool IsDefault => Brightness == DEFAULT_BRIGHTNESS && Contrast == DEFAULT_CONTRAST;
+		public override bool IsDefault
+			=> Brightness == DEFAULT_BRIGHTNESS && Contrast == DEFAULT_CONTRAST;
 	}
 }
