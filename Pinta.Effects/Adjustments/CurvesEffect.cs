@@ -10,6 +10,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
@@ -122,17 +123,17 @@ public sealed class CurvesData : EffectData
 	public SortedList<int, int>[]? ControlPoints { get; set; }
 	public ColorTransferMode Mode { get; set; }
 
+	private SortedList<int, int>[]? CloneControlPoints ()
+	{
+		if (ControlPoints is null) return null;
+		return [.. ControlPoints.Select (list => new SortedList<int, int> (list))];
+	}
+
 	public override CurvesData Clone ()
 	{
-		// Not sure if we have to copy contents of ControlPoints
-		// var controlPoints = new SortedList<int, int> [ControlPoints.Length];
-		//
-		// for (int i = 0; i < ControlPoints.Length; i++)
-		//     controlPoints[i] = new SortedList<int, int> (ControlPoints[i]);
-
 		return new () {
 			Mode = Mode,
-			ControlPoints = ControlPoints,
+			ControlPoints = CloneControlPoints (), // Dialog modifies them
 		};
 	}
 }
