@@ -26,9 +26,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using Gtk;
 using Pinta.Core;
 
 namespace Pinta.Tools;
@@ -40,7 +37,7 @@ public abstract class SelectTool : BaseTool
 
 	private SelectionHistoryItem? hist = default;
 	private CombineMode combine_mode = default;
-	private Separator? mode_sep;
+	private Gtk.Separator? mode_sep;
 	private ToolBarDropDownButton? auto_scroll_button;
 
 	public override Gdk.Key ShortcutKey => new (Gdk.Constants.KEY_S);
@@ -72,6 +69,13 @@ public abstract class SelectTool : BaseTool
 		tb.Append (AutoScrollButton);
 	}
 
+	private static PointD AdjustMousePosition (Document document, in PointD position)
+	{
+		double x = Math.Round (Math.Clamp (position.X, 0, document.ImageSize.Width));
+		double y = Math.Round (Math.Clamp (position.Y, 0, document.ImageSize.Height));
+		return new (x, y);
+	}
+
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
 		// Ignore extra button clicks while drawing
@@ -81,20 +85,20 @@ public abstract class SelectTool : BaseTool
 		hist = new SelectionHistoryItem (workspace, Icon, Name);
 		hist.TakeSnapshot ();
 
-		if (!handle.BeginDrag (e.PointDouble, document.ImageSize)) {
-			// Start drawing a new rectangle.
-			combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (e);
+		if (handle.BeginDrag (e.PointDouble, document.ImageSize))
+			return;
 
-			double x = Math.Round (Math.Clamp (e.PointDouble.X, 0, document.ImageSize.Width));
-			double y = Math.Round (Math.Clamp (e.PointDouble.Y, 0, document.ImageSize.Height));
-			handle.Rectangle = new (x, y, 0.0, 0.0);
+		// Start drawing a new rectangle.
+		combine_mode = PintaCore.Workspace.SelectionHandler.DetermineCombineMode (e);
 
-			document.PreviousSelection = document.Selection.Clone ();
-			document.Selection.SelectionPolygons.Clear ();
+		PointD adjusted = AdjustMousePosition (document, e.PointDouble);
+		handle.Rectangle = new (adjusted.X, adjusted.Y, 0.0, 0.0);
 
-			if (!handle.BeginDrag (new PointD (x, y), document.ImageSize))
-				throw new InvalidOperationException ("Should be able to start drawing a new rectangle!");
-		}
+		document.PreviousSelection = document.Selection.Clone ();
+		document.Selection.SelectionPolygons.Clear ();
+
+		if (!handle.BeginDrag (adjusted, document.ImageSize))
+			throw new InvalidOperationException ("Should be able to start drawing a new rectangle!");
 	}
 
 	protected override void OnMouseMove (Document document, ToolMouseEventArgs e)
@@ -104,7 +108,8 @@ public abstract class SelectTool : BaseTool
 			return;
 		}
 
-		handle.UpdateDrag (e.PointDouble, e.IsShiftPressed);
+		PointD adjusted = AdjustMousePosition (document, e.PointDouble);
+		handle.UpdateDrag (adjusted, e.IsShiftPressed);
 
 		ReDraw (document);
 
@@ -136,7 +141,8 @@ public abstract class SelectTool : BaseTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		if (handle.HasDragged (e.PointDouble)) {
+		PointD adjusted = AdjustMousePosition (document, e.PointDouble);
+		if (handle.HasDragged (adjusted) && handle.Rectangle.Width > 0 && handle.Rectangle.Height > 0) {
 			ReDraw (document);
 
 			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
@@ -247,7 +253,7 @@ public abstract class SelectTool : BaseTool
 		ShowHandles (document.Selection.Visible && tools.CurrentTool == this);
 	}
 
-	private Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
+	private Gtk.Separator Separator => mode_sep ??= GtkExtensions.CreateToolBarSeparator ();
 
 	private ToolBarDropDownButton AutoScrollButton {
 		get {

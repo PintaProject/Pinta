@@ -20,7 +20,7 @@ enum HandlePoint
 /// <summary>
 /// A handle for specifying a rectangular region.
 /// </summary>
-public class RectangleHandle : IToolHandle
+public sealed class RectangleHandle : IToolHandle
 {
 	private readonly IWorkspaceService workspace;
 
