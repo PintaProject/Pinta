@@ -151,9 +151,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 		if (!last_point.HasValue)
 			last_point = e.Point;
 
-		if (document.Workspace.PointInCanvas (e.PointDouble))
-			surface_modified = true;
-
 		var surf = document.Layers.ToolLayer.Surface;
 		using Context g = document.CreateClippedToolContext ();
 
@@ -171,6 +168,9 @@ public sealed class PaintBrushTool : BaseBrushTool
 			stroke_dirty_rect = invalidate_rect;
 		else
 			stroke_dirty_rect = stroke_dirty_rect.Value.Union (invalidate_rect);
+
+		if (!document.ClampToImageSize (invalidate_rect).IsEmpty)
+			surface_modified = true;
 
 		// If we draw partially offscreen, Cairo gives us a bogus
 		// dirty rectangle, so redraw everything.
