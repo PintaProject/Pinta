@@ -93,10 +93,7 @@ public sealed class DitheringEffect : BaseEffect
 						X: pixel.coordinates.X + c - diffusionMatrix.ColumnsToLeft,
 						Y: pixel.coordinates.Y + r);
 
-					if (thisItem.X < roi.Left || thisItem.X >= roi.Right)
-						continue;
-
-					if (thisItem.Y < roi.Top || thisItem.Y >= roi.Bottom)
+					if (!roi.Contains (thisItem))
 						continue;
 
 					int neighborIndex = (thisItem.Y * canvasSize.Width) + thisItem.X;

@@ -210,6 +210,7 @@ public sealed class DocumentLayers
 
 		layer.Hidden = source.Hidden;
 		layer.Opacity = source.Opacity;
+		layer.BlendMode = source.BlendMode;
 
 		user_layers.Insert (++CurrentUserLayerIndex, layer);
 
@@ -217,6 +218,8 @@ public sealed class DocumentLayers
 
 		LayerAdded?.Invoke (this, new IndexEventArgs (CurrentUserLayerIndex));
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
+
+		document.Workspace.Invalidate ();
 
 		return layer;
 	}

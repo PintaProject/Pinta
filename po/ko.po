@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-15 00:13+0000\n"
+"POT-Creation-Date: 2026-09-01 03:52+0000\n"
 "PO-Revision-Date: 2026-08-23 15:20+0000\n"
 "Last-Translator: VenusGirl <VenusGirl@outlook.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/pinta/pinta/ko/>\n"
@@ -48,11 +48,11 @@ msgstr "7 x 7 영역"
 msgid "9 x 9 Region"
 msgstr "9 x 9 영역"
 
-#: ../Pinta/MainWindow.cs:400
+#: ../Pinta/MainWindow.cs:397
 msgid "A_dd-ins"
 msgstr "애드인(_D)"
 
-#: ../Pinta.Core/Actions/AppActions.cs:43
+#: ../Pinta.Core/Actions/AppActions.cs:44
 msgid "About"
 msgstr "정보"
 
@@ -79,7 +79,7 @@ msgid "Added"
 msgstr "추가됨"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:104
-#: ../Pinta/MainWindow.cs:450
+#: ../Pinta/MainWindow.cs:460
 msgid "Adjustments"
 msgstr "조정"
 
@@ -142,6 +142,10 @@ msgstr "고정:"
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:72
 msgid "Angle"
 msgstr "각도"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+msgid "Animate Selection Outline"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -216,7 +220,7 @@ msgstr "Paint.NET의 작업 기반:"
 msgid "Beautiful Italy"
 msgstr "아름다운 비너스걸"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:86
+#: ../Pinta.Core/Actions/ViewActions.cs:84
 msgid "Best Fit"
 msgstr "최적 맞춤"
 
@@ -328,7 +332,7 @@ msgstr "백분율 기준:"
 msgid "Cancel"
 msgstr "취소"
 
-#: ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "캔버스"
 
@@ -336,7 +340,7 @@ msgstr "캔버스"
 msgid "Canvas Grid Settings"
 msgstr "캔버스 격자 설정"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:125
+#: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "캔버스 격자..."
 
@@ -378,7 +382,7 @@ msgstr "가운데 오른쪽"
 msgid "Centered"
 msgstr "가운데"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:228
+#: ../Pinta.Core/Actions/ViewActions.cs:215
 msgid "Centimeters"
 msgstr "센티미터"
 
@@ -560,7 +564,7 @@ msgstr "색상 범위"
 msgid "Color Saturation"
 msgstr "색상 채도"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:254
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -669,7 +673,7 @@ msgid "Cut"
 msgstr "잘라내기"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:251
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
 msgid "Dark"
 msgstr "어두운"
 
@@ -681,8 +685,8 @@ msgstr "어둡게"
 msgid "Dash"
 msgstr "대시"
 
-#. Translators: This refers to using the system's default color scheme.
-#: ../Pinta.Core/Actions/ViewActions.cs:247
+#. Translators: This refers to using the system default color scheme.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:5
 msgid "Default"
 msgstr "기본값"
 
@@ -774,12 +778,12 @@ msgstr "엣지 감지"
 msgid "Edit"
 msgstr "편집"
 
-#: ../Pinta/MainWindow.cs:398
+#: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
 msgstr "효과(_C)"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:105
-#: ../Pinta/MainWindow.cs:445
+#: ../Pinta/MainWindow.cs:455
 msgid "Effects"
 msgstr "효과"
 
@@ -805,6 +809,12 @@ msgstr "엠보싱"
 #: ../Pinta/Main.cs:67
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr "디버깅을 위해 추가 로깅 또는 동작 변경 활성화"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+msgid ""
+"Enables a \"marching ants\" effect to improve the selection's visibility. "
+"Disable to reduce CPU usage."
+msgstr ""
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -998,7 +1008,7 @@ msgstr "자유형 모양"
 msgid "Frosted Glass"
 msgstr "젖빛 유리"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:165
+#: ../Pinta.Core/Actions/ViewActions.cs:152
 msgid "Fullscreen"
 msgstr "전체 화면"
 
@@ -1009,6 +1019,10 @@ msgstr "갤러리"
 #: ../Pinta.Effects/Effects/GaussianBlurEffect.cs:24
 msgid "Gaussian Blur"
 msgstr "가우시안 흐림"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
+msgid "General"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1123,7 +1137,7 @@ msgstr "저장하지 않으면 모든 변경 사항이 영구적으로 사라집
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:254
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:103
-#: ../Pinta/MainWindow.cs:455
+#: ../Pinta/MainWindow.cs:465
 msgid "Image"
 msgstr "이미지"
 
@@ -1131,7 +1145,7 @@ msgstr "이미지"
 msgid "Image Editor"
 msgstr "이미지 편집기"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:112
+#: ../Pinta.Core/Actions/ViewActions.cs:110
 msgid "Image Tabs"
 msgstr "이미지 탭"
 
@@ -1174,7 +1188,7 @@ msgstr ""
 "Enter 키를 눌러 선택을 완료합니다.\n"
 "백스페이스를 눌러 마지막 지점을 삭제합니다."
 
-#: ../Pinta.Core/Actions/ViewActions.cs:227
+#: ../Pinta.Core/Actions/ViewActions.cs:214
 msgid "Inches"
 msgstr "인치"
 
@@ -1254,7 +1268,7 @@ msgstr "자비스-주디스-닌케"
 msgid "Julia Fractal"
 msgstr "줄리아 프랙탈"
 
-#: ../Pinta.Core/Actions/AppActions.cs:48
+#: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
 msgstr "키보드 단축키"
 
@@ -1396,8 +1410,8 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
-"왼쪽 클릭하면 해당 영역을 기본 색상으로 채우고, 오른쪽 클릭하면 보조 "
-"색상으로 채웁니다.\n"
+"왼쪽 클릭하면 해당 영역을 기본 색상으로 채우고, 오른쪽 클릭하면 보조 색상으"
+"로 채웁니다.\n"
 "전역 모드를 사용하려면 Shift 키를 누르세요."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
@@ -1468,7 +1482,7 @@ msgstr "라이선스"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: ../Pinta.Core/Actions/ViewActions.cs:249
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "밝은"
@@ -1519,7 +1533,7 @@ msgstr "밝기"
 msgid "Magic Wand Select"
 msgstr "요술봉 선택"
 
-#: ../Pinta/MainWindow.cs:440
+#: ../Pinta/MainWindow.cs:450
 msgid "Main Menu"
 msgstr "기본 메뉴"
 
@@ -1549,10 +1563,6 @@ msgstr "중간값"
 #: ../Pinta.Tools/Tools/TextTool.cs:290
 msgid "Medium"
 msgstr "중간"
-
-#: ../Pinta.Core/Actions/ViewActions.cs:131
-msgid "Menu Bar"
-msgstr "메뉴 표시줄"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:335
@@ -1658,7 +1668,7 @@ msgstr "일반"
 msgid "Normal Blending"
 msgstr "일반 혼합"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:99
+#: ../Pinta.Core/Actions/ViewActions.cs:97
 msgid "Normal Size"
 msgstr "일반 크기"
 
@@ -1913,7 +1923,7 @@ msgstr "Pinta는 다음 팔레트 형식을 지원합니다:"
 msgid "Pixelate"
 msgstr "픽셀화"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:226
+#: ../Pinta.Core/Actions/ViewActions.cs:213
 msgid "Pixels"
 msgstr "픽셀"
 
@@ -1922,7 +1932,7 @@ msgstr "픽셀"
 msgid "Piña Colada"
 msgstr "피냐 콜라다"
 
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:40
+#: ../Pinta/Dialogs/PreferencesDialog.cs:81
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "변경 사항을 적용하려면 Pinta를 재시작해 주세요."
 
@@ -1974,6 +1984,10 @@ msgstr "포스터화"
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:138
 msgid "Power"
 msgstr "힘"
+
+#: ../Pinta.Core/Actions/AppActions.cs:49
+msgid "Preferences..."
+msgstr ""
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -2048,7 +2062,7 @@ msgstr "품질"
 msgid "Quality: "
 msgstr "폼질: "
 
-#: ../Pinta.Core/Actions/AppActions.cs:54
+#: ../Pinta.Core/Actions/AppActions.cs:60
 msgid "Quit"
 msgstr "종료"
 
@@ -2189,6 +2203,10 @@ msgstr "렌더링 효과"
 msgid "Replace"
 msgstr "바꾸기"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+msgid "Replaces the header bar with a separate menu bar and tool bar."
+msgstr ""
+
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "버그 신고..."
@@ -2237,10 +2255,6 @@ msgstr "이미지 크기 조정..."
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:69
 msgid "Resize Palette"
 msgstr "팔레트 크기 조정"
-
-#: ../Pinta/Actions/View/MenuBarToggledAction.cs:39
-msgid "Restart Pinta"
-msgstr "Pinta 다시 시작"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:191
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:156
@@ -2308,11 +2322,11 @@ msgstr "둥근 선 모양"
 msgid "Rounded Rectangle"
 msgstr "둥근 사각형"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:231
+#: ../Pinta.Core/Actions/ViewActions.cs:218
 msgid "Ruler Units"
 msgstr "눈금 단위"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:149
+#: ../Pinta.Core/Actions/ViewActions.cs:141
 msgid "Rulers"
 msgstr "눈금자"
 
@@ -2421,7 +2435,7 @@ msgstr "선명하게"
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:106
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:368
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:352
-#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:51
+#: ../Pinta.Gui.Widgets/Widgets/ToolBoxWidget.cs:49
 msgid "Shortcut key"
 msgstr "단축키"
 
@@ -2448,6 +2462,10 @@ msgstr "격자 표시"
 msgid "Show Layer"
 msgstr "레이어 표시"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+msgid "Show Menu Bar"
+msgstr ""
+
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
 msgid "Show Points"
@@ -2457,7 +2475,7 @@ msgstr "포인트 표시"
 msgid "Show Value"
 msgstr "값 표시"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:243
+#: ../Pinta.Core/Actions/ViewActions.cs:229
 msgid "Show/Hide"
 msgstr "표시/숨기기"
 
@@ -2512,7 +2530,7 @@ msgstr "흩뿌리기"
 msgid "Squares"
 msgstr "사각형"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:137
+#: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr "상태 표시줄"
 
@@ -2664,15 +2682,15 @@ msgstr "허용 오차"
 msgid "Tool"
 msgstr "도구"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:143
+#: ../Pinta.Core/Actions/ViewActions.cs:135
 msgid "Tool Box"
 msgstr "도구 상자"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:118
+#: ../Pinta.Core/Actions/ViewActions.cs:116
 msgid "Tool Windows"
 msgstr "도구 창"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:106
+#: ../Pinta.Core/Actions/ViewActions.cs:104
 msgid "Toolbar"
 msgstr "도구 모음"
 
@@ -2803,6 +2821,10 @@ msgstr ""
 "미리보기, 작은 이미지 및 작은 각도에는 낮은 품질을 사용하세요. 최종 품질, 큰 "
 "이미지, 큰 각도에는 높은 품질을 사용하세요."
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
+msgid "User Interface"
+msgstr ""
+
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
 msgstr "일부 아이콘 사용 출처:"
@@ -2832,7 +2854,7 @@ msgid "Vertical red (R)"
 msgstr "세로 빨간색 (R)"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:102
-#: ../Pinta/MainWindow.cs:460
+#: ../Pinta/MainWindow.cs:470
 msgid "View"
 msgstr "보기"
 
@@ -2865,8 +2887,8 @@ msgstr "흰색"
 msgid "Width:"
 msgstr "너비:"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:208
-#: ../Pinta.Core/Actions/ViewActions.cs:396
+#: ../Pinta.Core/Actions/ViewActions.cs:195
+#: ../Pinta.Core/Actions/ViewActions.cs:368
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:357
 #: ../Pinta.Core/Classes/DocumentWorkspace.cs:366
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:106
@@ -2913,19 +2935,19 @@ msgstr "확대↔축소"
 msgid "Zoom Blur"
 msgstr "확대 흐림"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:72
+#: ../Pinta.Core/Actions/ViewActions.cs:70
 msgid "Zoom In"
 msgstr "확대"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:79
+#: ../Pinta.Core/Actions/ViewActions.cs:77
 msgid "Zoom Out"
 msgstr "축소"
 
-#: ../Pinta.Core/Actions/ViewActions.cs:93
+#: ../Pinta.Core/Actions/ViewActions.cs:91
 msgid "Zoom to Selection"
 msgstr "선택 영역 확대↔축소"
 
-#: ../Pinta/MainWindow.cs:397
+#: ../Pinta/MainWindow.cs:394
 msgid "_Adjustments"
 msgstr "조정(_A)"
 
@@ -2942,19 +2964,19 @@ msgstr "취소(_C)"
 msgid "_Discard"
 msgstr "버리기(_D)"
 
-#: ../Pinta/MainWindow.cs:393
+#: ../Pinta/MainWindow.cs:390
 msgid "_Edit"
 msgstr "편집(_E)"
 
-#: ../Pinta/MainWindow.cs:392
+#: ../Pinta/MainWindow.cs:389
 msgid "_File"
 msgstr "파일(_F)"
 
-#: ../Pinta/MainWindow.cs:402
+#: ../Pinta/MainWindow.cs:399
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: ../Pinta/MainWindow.cs:396
+#: ../Pinta/MainWindow.cs:393
 msgid "_Image"
 msgstr "이미지(_I)"
 
@@ -2969,11 +2991,11 @@ msgstr "확인(_O)"
 msgid "_Save"
 msgstr "저장(_S)"
 
-#: ../Pinta/MainWindow.cs:395
+#: ../Pinta/MainWindow.cs:392
 msgid "_View"
 msgstr "보기(_V)"
 
-#: ../Pinta/MainWindow.cs:401
+#: ../Pinta/MainWindow.cs:398
 msgid "_Window"
 msgstr "창(_W)"
 
@@ -3026,10 +3048,16 @@ msgstr "{0} 팔레트 ({1})"
 
 #. Translators: This specifies the format of the zoom percentage choices
 #. in the toolbar.
-#: ../Pinta.Core/Actions/ViewActions.cs:377
+#: ../Pinta.Core/Actions/ViewActions.cs:349
 #, csharp-format
 msgid "{0}%"
 msgstr "{0}%"
+
+#~ msgid "Menu Bar"
+#~ msgstr "메뉴 표시줄"
+
+#~ msgid "Restart Pinta"
+#~ msgstr "Pinta 다시 시작"
 
 #~ msgid "ICO files can not be larger than 255 x 255 pixels."
 #~ msgstr "ICO 파일은 255 x 255 픽셀을 초과할 수 없습니다."
