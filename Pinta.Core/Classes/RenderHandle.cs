@@ -24,7 +24,7 @@ internal sealed class RenderHandle
 	internal bool TryConsumeBounds (out RectangleI bounds)
 		=> bounds_consumer (out bounds);
 
-	internal Task<CompletionInfo> Task { get; }
+	internal Task<CompletionInfo> Completion { get; }
 	internal void Cancel ()
 	{
 		cancellation.Cancel ();
@@ -40,7 +40,7 @@ internal sealed class RenderHandle
 		BoundsConsumer boundsConsumer,
 		Func<double> getProgress)
 	{
-		Task = task;
+		Completion = task;
 		cancellation = cts;
 		bounds_consumer = boundsConsumer;
 		get_progress = getProgress;
