@@ -63,7 +63,7 @@ public sealed class LivePreviewManager : ILivePreview
 		chrome = chromeManager;
 	}
 
-	public Cairo.ImageSurface LivePreviewSurface { get; private set; } = null!;
+	public ImageSurface LivePreviewSurface { get; private set; } = null!;
 	public RectangleI RenderBounds { get; private set; }
 	public bool IsEnabled { get; private set; }
 
@@ -81,7 +81,7 @@ public sealed class LivePreviewManager : ILivePreview
 
 		//TODO Use the current tool layer instead.
 		LivePreviewSurface = CairoExtensions.CreateImageSurface (
-			Cairo.Format.Argb32,
+			Format.Argb32,
 			workspace.ImageSize.Width,
 			workspace.ImageSize.Height);
 
@@ -115,7 +115,7 @@ public sealed class LivePreviewManager : ILivePreview
 
 		try {
 			// Paint the pre-effect layer surface into into the working surface.
-			using Cairo.Context ctx = new (LivePreviewSurface);
+			using Context ctx = new (LivePreviewSurface);
 			layer.Draw (ctx, layer.Surface, 1);
 
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
@@ -173,12 +173,12 @@ public sealed class LivePreviewManager : ILivePreview
 			// Was not canceled, so finally apply
 			Debug.WriteLine ("Render completed without the user canceling");
 
-			using Cairo.Context context = new (layer.Surface);
+			using Context context = new (layer.Surface);
 
 			context.Save ();
 			workspace.ActiveDocument.Selection.Clip (context);
 
-			layer.DrawWithOperator (context, LivePreviewSurface, Cairo.Operator.Source);
+			layer.DrawWithOperator (context, LivePreviewSurface, Operator.Source);
 			context.Restore ();
 
 			workspace.ActiveDocument.History.PushNewItem (historyItem);
