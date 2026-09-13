@@ -292,14 +292,6 @@ public sealed class LivePreviewManager : ILivePreview
 			restart = RestartAsync (); // New render clones effect, so it sees the changes
 		}
 
-		private async Task RestartAsync () // Ensures no two renders overlap in time
-		{
-			CurrentRender.Cancel ();
-			await CurrentRender.Task;
-			if (IsActive)
-				CurrentRender = start_render ();
-		}
-
 		internal async Task<CompletionInfo> WaitForCompletionAsync ()
 		{
 			await restart;
@@ -317,6 +309,14 @@ public sealed class LivePreviewManager : ILivePreview
 			Cancel (); // Sets IsActive to false. Keep this in mind
 			await restart; // Ends without starting new render: IsActive is false
 			await CurrentRender.Task;
+		}
+
+		private async Task RestartAsync () // Ensures no two renders overlap in time
+		{
+			CurrentRender.Cancel ();
+			await CurrentRender.Task;
+			if (IsActive)
+				CurrentRender = start_render ();
 		}
 	}
 }
