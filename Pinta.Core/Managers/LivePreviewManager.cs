@@ -30,6 +30,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Cairo;
 using Debug = System.Diagnostics.Debug;
 
@@ -95,7 +96,6 @@ public sealed class LivePreviewManager : ILivePreview
 			renderBounds: RenderBounds,
 			effectIsTileable: effect.IsTileable);
 
-		int handlersInQueue = 0;
 		Layer layer = doc.Layers.CurrentUserLayer;
 
 		string effectName = effect.Name;
@@ -103,7 +103,15 @@ public sealed class LivePreviewManager : ILivePreview
 		SimpleHistoryItem historyItem = new (effect.Icon, effect.Name);
 		historyItem.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
-		RenderHandle renderHandle = null!; // NRT: Assigned before first use
+		RenderSession session = new (
+			() => AsyncEffectRenderer.Start (
+				settings,
+				effect,
+				layer.Surface,
+				LivePreviewSurface
+			)
+		);
+
 
 		IProgressDialog dialog = chrome.ProgressDialog;
 		dialog.Title = Translations.GetString ("Rendering Effect");
@@ -124,30 +132,29 @@ public sealed class LivePreviewManager : ILivePreview
 			if (effect.EffectData != null)
 				effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
 
-			renderHandle = AsyncEffectRenderer.Start (
-				settings,
-				effect,
-				layer.Surface,
-				LivePreviewSurface);
+			session.Start ();
 
 			using GLibTimer _ = GLib.Functions.TimeoutAdd (
 				0,
 				UPDATE_MILLISECONDS,
 				() => {
 					if (!renderAlive) return false;
-					PollForUpdate (renderHandle);
+					PollForUpdate (session.CurrentRender);
 					return true; // Keep ticking as long as the effect is active.
 				}
 			);
 
 			bool userConfirmed = !effect.IsConfigurable || await effect.LaunchConfiguration ();
 
+			// Dialog closed, so configuration is final. Unsubscribing...
+			if (effect.EffectData != null)
+				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
+
 			chrome.MainWindowBusy = true;
 
 			if (!userConfirmed) {
 				Debug.WriteLine ("User decided not to proceed with the render");
-				renderHandle.Cancel ();
-				await renderHandle.Task;
+				await session.StopAsync ();
 				return;
 			}
 
@@ -156,17 +163,10 @@ public sealed class LivePreviewManager : ILivePreview
 
 			dialog.Show ();
 
-			CompletionInfo result = await renderHandle.Task;
-
-			if (result.WasCanceled && !userCanceled) {
-				// Render not canceled by user, but by property change or dialog closing
-				// Here the object referenced by 'renderHandle' might have been swapped
-				// (see EffectData_PropertyChanged)
-				result = await renderHandle.Task;
-			}
+			CompletionInfo result = await session.WaitForCompletionAsync ();
 
 			// Final poll after the renderer finishes to ensure the last-rendered tiles are displayed.
-			PollForUpdate (renderHandle);
+			PollForUpdate (session.CurrentRender);
 
 			foreach (var ex in result.Errors)
 				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectName + " exception: " + ex.Message + "\n" + ex.StackTrace);
@@ -211,18 +211,13 @@ public sealed class LivePreviewManager : ILivePreview
 		void HandleProgressDialogCancel (object? o, EventArgs e)
 		{
 			userCanceled = true;
-			renderHandle.Cancel ();
+			session.Cancel ();
 		}
 
-		async void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
+		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
 		{
 			// TODO: calculate bounds
-			handlersInQueue++;
-			renderHandle.Cancel ();
-			await renderHandle.Task;
-			handlersInQueue--;
-			if (handlersInQueue > 0) return;
-			renderHandle = AsyncEffectRenderer.Start (settings, effect, layer.Surface, LivePreviewSurface);
+			session.NotifyChanged ();
 		}
 
 		// This method now polls the renderer for its state instead of being a passive event handler.
@@ -270,6 +265,58 @@ public sealed class LivePreviewManager : ILivePreview
 
 			// Tell GTK to expose the drawing area.
 			workspace.ActiveWorkspace.InvalidateWindowRect (areaToInvalidate);
+		}
+	}
+
+	private sealed class RenderSession
+	{
+		private readonly Func<RenderHandle> start_render;
+		private Task restart = Task.CompletedTask;
+		internal RenderHandle CurrentRender { get; private set; } = null!; // NRT: assigned in Start()
+		internal bool IsActive { get; private set; } // False once canceled, no more restarts
+
+		internal RenderSession (Func<RenderHandle> startRender)
+		{
+			start_render = startRender;
+		}
+
+		internal void Start ()
+		{
+			IsActive = true;
+			CurrentRender = start_render ();
+		}
+
+		internal void NotifyChanged ()
+		{
+			if (!IsActive || !restart.IsCompleted) return;
+			restart = RestartAsync (); // New render clones effect, so it sees the changes
+		}
+
+		private async Task RestartAsync () // Ensures no two renders overlap in time
+		{
+			CurrentRender.Cancel ();
+			await CurrentRender.Task;
+			if (IsActive)
+				CurrentRender = start_render ();
+		}
+
+		internal async Task<CompletionInfo> WaitForCompletionAsync ()
+		{
+			await restart;
+			return await CurrentRender.Task;
+		}
+
+		internal void Cancel ()
+		{
+			IsActive = false;
+			CurrentRender.Cancel ();
+		}
+
+		internal async Task StopAsync ()
+		{
+			Cancel (); // Sets IsActive to false. Keep this in mind
+			await restart; // Ends without starting new render: IsActive is false
+			await CurrentRender.Task;
 		}
 	}
 }
