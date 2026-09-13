@@ -112,6 +112,7 @@ public sealed class LivePreviewManager : ILivePreview
 		dialog.Canceled += HandleProgressDialogCancel;
 
 		bool renderAlive = true;
+		bool userCanceled = false;
 
 		try {
 			// Paint the pre-effect layer surface into into the working surface.
@@ -155,7 +156,14 @@ public sealed class LivePreviewManager : ILivePreview
 
 			dialog.Show ();
 
-			var result = await renderHandle.Task;
+			CompletionInfo result = await renderHandle.Task;
+
+			if (result.WasCanceled && !userCanceled) {
+				// Render not canceled by user, but by property change or dialog closing
+				// Here the object referenced by 'renderHandle' might have been swapped
+				// (see EffectData_PropertyChanged)
+				result = await renderHandle.Task;
+			}
 
 			// Final poll after the renderer finishes to ensure the last-rendered tiles are displayed.
 			PollForUpdate (renderHandle);
@@ -163,14 +171,11 @@ public sealed class LivePreviewManager : ILivePreview
 			foreach (var ex in result.Errors)
 				Debug.WriteLine ("AsyncEffectRenderer Error while rendering effect: " + effectName + " exception: " + ex.Message + "\n" + ex.StackTrace);
 
-			if (result.WasCanceled) {
-				Debug.WriteLine ("User decided to cancel the render");
-				renderHandle.Cancel ();
-				await renderHandle.Task;
+			if (userCanceled) {
+				Debug.WriteLine ("*User* decided to cancel the render");
 				return;
 			}
 
-			// Was not canceled, so finally apply
 			Debug.WriteLine ("Render completed without the user canceling");
 
 			using Context context = new (layer.Surface);
@@ -205,6 +210,7 @@ public sealed class LivePreviewManager : ILivePreview
 
 		void HandleProgressDialogCancel (object? o, EventArgs e)
 		{
+			userCanceled = true;
 			renderHandle.Cancel ();
 		}
 
