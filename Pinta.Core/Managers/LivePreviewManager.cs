@@ -295,7 +295,7 @@ public sealed class LivePreviewManager : ILivePreview
 		internal async Task<CompletionInfo> WaitForCompletionAsync ()
 		{
 			await restart;
-			return await CurrentRender.Task;
+			return await CurrentRender.Completion;
 		}
 
 		internal void Cancel ()
@@ -308,13 +308,13 @@ public sealed class LivePreviewManager : ILivePreview
 		{
 			Cancel (); // Sets IsActive to false. Keep this in mind
 			await restart; // Ends without starting new render: IsActive is false
-			await CurrentRender.Task;
+			await CurrentRender.Completion;
 		}
 
 		private async Task RestartAsync () // Ensures no two renders overlap in time
 		{
 			CurrentRender.Cancel ();
-			await CurrentRender.Task;
+			await CurrentRender.Completion;
 			if (IsActive)
 				CurrentRender = start_render ();
 		}
