@@ -36,11 +36,13 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 {
 	const string RESPONSE_CANCEL = "cancel";
 	const string RESPONSE_FLATTEN = "flatten";
+	const string RESPONSE_CONVERT = "convert";
 
 	private enum FormatConflictResult
 	{
 		Proceed, // Proceed with saving (no conflict, or user agreed to flatten)
-		Cancel // User cancelled the save operation
+		Cancel, // User cancelled the save operation
+		Convert // User chose to convert the image to a compatible format
 	}
 
 	private readonly FileActions file;
@@ -279,20 +281,26 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			using Adw.MessageDialog dialog = Adw.MessageDialog.New (chrome.MainWindow, heading, body);
 			dialog.AddResponse (RESPONSE_CANCEL, Translations.GetString ("_Cancel"));
 			dialog.AddResponse (RESPONSE_FLATTEN, Translations.GetString ("Flatten"));
-			dialog.SetResponseAppearance (RESPONSE_FLATTEN, Adw.ResponseAppearance.Suggested);
+			dialog.AddResponse (RESPONSE_CONVERT, Translations.GetString ("Convert"));
+			dialog.SetResponseAppearance (RESPONSE_CONVERT, Adw.ResponseAppearance.Suggested);
+			dialog.SetResponseAppearance (RESPONSE_FLATTEN, Adw.ResponseAppearance.Destructive);
 
 			dialog.CloseResponse = RESPONSE_CANCEL;
-			dialog.DefaultResponse = RESPONSE_FLATTEN;
+			dialog.DefaultResponse = RESPONSE_CONVERT;
 
 			string response = await dialog.RunAsync ();
 
-			if (response == RESPONSE_CANCEL) {
-				return FormatConflictResult.Cancel;
-			}
-
-			// Flatten the image
-			tools.Commit ();
-			image.Flatten.Activate ();
+			switch (response) {
+				case RESPONSE_CANCEL:
+					return FormatConflictResult.Cancel;
+				case RESPONSE_CONVERT:
+					return FormatConflictResult.Convert;
+				default:
+					// Flatten the image
+					tools.Commit ();
+					image.Flatten.Activate ();
+					break;
+			}			
 		}
 		return FormatConflictResult.Proceed;
 	}
