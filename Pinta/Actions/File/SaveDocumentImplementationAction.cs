@@ -37,6 +37,12 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 	const string RESPONSE_CANCEL = "cancel";
 	const string RESPONSE_FLATTEN = "flatten";
 
+	private enum FormatConflictResult
+	{
+		Proceed, // Proceed with saving (no conflict, or user agreed to flatten)
+		Cancel // User cancelled the save operation
+	}
+
 	private readonly FileActions file;
 	private readonly ImageActions image;
 	private readonly ChromeManager chrome;
@@ -152,7 +158,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 					format = image_formats.GetDefaultSaveFormat ();
 			}
 
-			if (!await ConfirmFlatten (document, format)) {
+			if (await ResolveFormatConflict (document, format) == FormatConflictResult.Cancel) {
 				continue;
 			}
 
@@ -211,7 +217,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			return false;
 		}
 
-		if (!await ConfirmFlatten (document, format)) {
+		if (await ResolveFormatConflict (document, format) == FormatConflictResult.Cancel) {
 			return false;
 		}
 
@@ -261,7 +267,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		return true;
 	}
 
-	private async Task<bool> ConfirmFlatten (Document document, FormatDescriptor format)
+	private async Task<FormatConflictResult> ResolveFormatConflict (Document document, FormatDescriptor format)
 	{
 		// If the format doesn't support layers but there is more than one layer, ask to flatten the image
 		if (!format.SupportsLayers
@@ -281,13 +287,13 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			string response = await dialog.RunAsync ();
 
 			if (response == RESPONSE_CANCEL) {
-				return false;
+				return FormatConflictResult.Cancel;
 			}
 
 			// Flatten the image
 			tools.Commit ();
 			image.Flatten.Activate ();
 		}
-		return true;
+		return FormatConflictResult.Proceed;
 	}
 }
