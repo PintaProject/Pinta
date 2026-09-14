@@ -300,8 +300,9 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 					tools.Commit ();
 					image.Flatten.Activate ();
 					break;
-			}			
+			}
 		}
 		return FormatConflictResult.Proceed;
 	}
 }
+// re
