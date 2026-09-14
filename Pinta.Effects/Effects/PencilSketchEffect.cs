@@ -56,14 +56,17 @@ public sealed class PencilSketchEffect : BaseEffect
 	#region Algorithm Code Ported From PDN
 	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
 	{
-		bac_adjustment.Data.Brightness = -Data.ColorRange;
-		bac_adjustment.Data.Contrast = -Data.ColorRange;
-		bac_adjustment.Render (src, dest, rois);
+		PencilSketchData data = Data;
 
-		blur_effect.Data.Radius = Data.PencilTipSize;
+		blur_effect.Data.Radius = data.PencilTipSize;
 		blur_effect.Render (src, dest, rois);
 
+		bac_adjustment.Data.Brightness = data.ColorRange;
+		bac_adjustment.Data.Contrast = -data.ColorRange;
+		bac_adjustment.Render (dest, dest, rois);
+
 		invert_effect.Render (dest, dest, rois);
+
 		desaturate_op.Apply (dest, dest, rois);
 
 		var dst_data = dest.GetPixelData ();
