@@ -193,6 +193,18 @@ public class Layer : ObservableObject
 		Surface = dest;
 	}
 
+	public void Rotate (DegreesAngle angle, Size oldSize, Size newSize)
+	{
+		RadiansAngle radians = angle.ToRadians ();
+
+		Matrix xform = CairoExtensions.CreateIdentityMatrix ();
+		xform.Translate (newSize.Width / 2.0, newSize.Height / 2.0);
+		xform.Rotate (radians.Radians);
+		xform.Translate (-oldSize.Width / 2.0, -oldSize.Height / 2.0);
+
+		ApplyTransform (xform, oldSize, newSize);
+	}
+
 	public static Size RotateDimensions (Size originalSize, DegreesAngle angle)
 	{
 		RadiansAngle radians = angle.ToRadians ();
