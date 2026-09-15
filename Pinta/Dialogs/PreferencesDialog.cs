@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using GObject;
 
 namespace Pinta;
@@ -9,6 +12,9 @@ using Pinta.Core;
 internal sealed partial class PreferencesDialog
 {
 	private ISettingsService settings = null!; // NRT - set by factory method
+
+	[Gtk.Connect ("language_comborow")]
+	private Adw.ComboRow language_row;
 
 	[Gtk.Connect ("color_scheme_comborow")]
 	private Adw.ComboRow color_scheme_row;
@@ -28,6 +34,16 @@ internal sealed partial class PreferencesDialog
 
 	partial void Initialize ()
 	{
+		// Build a map from language label to language code.
+		Dictionary<string, string> langMap = Translations.GetAvailableLanguages ()
+			.ToDictionary (Translations.GetLanguageDisplayName, lang => lang);
+		langMap.Add (Translations.GetString ("Default"), string.Empty);
+
+		// Add the available languages to the combobox.
+		Gtk.StringList langModel = (Gtk.StringList) language_row.Model;
+		foreach (string lang in langMap.Keys.Order ())
+			langModel.Append (lang);
+
 		Adw.ComboRow.SelectedPropertyDefinition.Notify (color_scheme_row, OnColorSchemeChanged);
 		Adw.SwitchRow.ActivePropertyDefinition.Notify (menubar_row, OnMenuBarChanged);
 		Adw.SwitchRow.ActivePropertyDefinition.Notify (selection_anim_row, OnSelectionAnimChanged);
