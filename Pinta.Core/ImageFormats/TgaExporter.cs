@@ -86,14 +86,16 @@ public sealed class TgaExporter : IImageExporter
 
 	// For now, we only export in uncompressed ARGB32 format. If someone requests this functionality,
 	// we can always add more through an export dialog.
-	public void Export (
-		Document document,
-		Gio.File file,
-		Gtk.Window parent)
+	public void Export (Document document, Gio.File file, Gtk.Window parent)
 	{
 		using ImageSurface flattenedImage = document.GetFlattenedImage (); // Assumes the surface is in ARGB32 format
 		using GioStream file_stream = new (file.Replace ());
-		using BinaryWriter writer = new (file_stream);
+		Export (flattenedImage, file_stream);
+	}
+
+	private static void Export (ImageSurface flattenedImage, Stream outputStream)
+	{
+		using BinaryWriter writer = new (outputStream);
 
 		TgaHeader header = new (
 			idLength: (byte) (ImageIdField.Length + 1),
@@ -113,12 +115,18 @@ public sealed class TgaExporter : IImageExporter
 
 		writer.Write (ImageIdField);
 
-		Span<byte> data = flattenedImage.GetData ();
+		ReadOnlySpan<ColorBgra> pixels = flattenedImage.GetReadOnlyPixelData ();
+		int width = flattenedImage.Width;
 
-		// It just so happens that the Cairo ARGB32 internal representation matches
-		// the TGA format, except vertically-flipped. In little-endian, of course.
-		for (int y = flattenedImage.Height - 1; y >= 0; y--)
-			writer.Write (data.Slice (flattenedImage.Stride * y, flattenedImage.Stride));
-
+		for (int y = flattenedImage.Height - 1; y >= 0; y--) {
+			ReadOnlySpan<ColorBgra> sourceRow = pixels.Slice (y * width, width);
+			foreach (ColorBgra premultiplied in sourceRow) {
+				ColorBgra color = premultiplied.ToStraightAlpha ();
+				writer.Write (color.B);
+				writer.Write (color.G);
+				writer.Write (color.R);
+				writer.Write (color.A);
+			}
+		}
 	}
 }
