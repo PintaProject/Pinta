@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-15 00:31+0000\n"
-"PO-Revision-Date: 2026-09-01 10:54+0000\n"
+"PO-Revision-Date: 2026-09-15 06:55+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -177,7 +177,7 @@ msgstr "Atkinsona"
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
@@ -346,7 +346,7 @@ msgstr "Siatka płótna…"
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
 msgid "Category"
-msgstr ""
+msgstr "Kategoria"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -2233,7 +2233,7 @@ msgstr "Zgłoś błąd..."
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
 msgid "Repository"
-msgstr ""
+msgstr "Repozytorium"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
