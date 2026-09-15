@@ -1,13 +1,5 @@
-/////////////////////////////////////////////////////////////////////////////////
-// Paint.NET                                                                   //
-// Copyright (C) dotPDN LLC, Rick Brewster, Tom Jackson, and contributors.     //
-// Portions Copyright (C) Microsoft Corporation. All Rights Reserved.          //
-// See license-pdn.txt for full licensing and attribution details.             //
-//                                                                             //
-// Ported to Pinta by: Jonathan Pobst <monkey@jpobst.com>                      //
-/////////////////////////////////////////////////////////////////////////////////
-
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Pinta.Core;
 
@@ -16,8 +8,37 @@ partial class UserBlendOps
 	[Serializable]
 	public sealed class ColorDodgeBlendOp : UserBlendOp
 	{
-		public static string StaticName => "ColorDodge";
-		public override ColorBgra Apply (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((rhs).B) == 255) { fB = 255; } else { { int i = ((255 - ((rhs).B))) * 3; uint M = mas_table[i]; uint A = mas_table[i + 1]; uint S = mas_table[i + 2]; fB = (int) ((((((lhs).B) * 255) * M) + A) >> (int) S); }; fB = Math.Min (255, fB); } }; { if (((rhs).G) == 255) { fG = 255; } else { { int i = ((255 - ((rhs).G))) * 3; uint M = mas_table[i]; uint A = mas_table[i + 1]; uint S = mas_table[i + 2]; fG = (int) ((((((lhs).G) * 255) * M) + A) >> (int) S); }; fG = Math.Min (255, fG); } }; { if (((rhs).R) == 255) { fR = 255; } else { { int i = ((255 - ((rhs).R))) * 3; uint M = mas_table[i]; uint A = mas_table[i + 1]; uint S = mas_table[i + 2]; fR = (int) ((((((lhs).R) * 255) * M) + A) >> (int) S); }; fR = Math.Min (255, fR); } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = mas_table[masIndex]; uint taA = mas_table[masIndex + 1]; uint taS = mas_table[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
-		public static ColorBgra ApplyStatic (in ColorBgra lhs, in ColorBgra rhs) { int lhsA; { lhsA = ((lhs).A); }; int rhsA; { rhsA = ((rhs).A); }; int y; { y = ((lhsA) * (255 - rhsA) + 0x80); y = ((((y) >> 8) + (y)) >> 8); }; int totalA = y + rhsA; uint ret; if (totalA == 0) { ret = 0; } else { int fB; int fG; int fR; { if (((rhs).B) == 255) { fB = 255; } else { { int i = ((255 - ((rhs).B))) * 3; uint M = mas_table[i]; uint A = mas_table[i + 1]; uint S = mas_table[i + 2]; fB = (int) ((((((lhs).B) * 255) * M) + A) >> (int) S); }; fB = Math.Min (255, fB); } }; { if (((rhs).G) == 255) { fG = 255; } else { { int i = ((255 - ((rhs).G))) * 3; uint M = mas_table[i]; uint A = mas_table[i + 1]; uint S = mas_table[i + 2]; fG = (int) ((((((lhs).G) * 255) * M) + A) >> (int) S); }; fG = Math.Min (255, fG); } }; { if (((rhs).R) == 255) { fR = 255; } else { { int i = ((255 - ((rhs).R))) * 3; uint M = mas_table[i]; uint A = mas_table[i + 1]; uint S = mas_table[i + 2]; fR = (int) ((((((lhs).R) * 255) * M) + A) >> (int) S); }; fR = Math.Min (255, fR); } }; int x; { x = ((lhsA) * (rhsA) + 0x80); x = ((((x) >> 8) + (x)) >> 8); }; int z = rhsA - x; int masIndex = totalA * 3; uint taM = mas_table[masIndex]; uint taA = mas_table[masIndex + 1]; uint taS = mas_table[masIndex + 2]; uint b = (uint) (((((long) ((((lhs).B * y) + ((rhs).B * z) + (fB * x)))) * taM) + taA) >> (int) taS); uint g = (uint) (((((long) ((((lhs).G * y) + ((rhs).G * z) + (fG * x)))) * taM) + taA) >> (int) taS); uint r = (uint) (((((long) ((((lhs).R * y) + ((rhs).R * z) + (fR * x)))) * taM) + taA) >> (int) taS); int a; { { a = ((lhsA) * (255 - (rhsA)) + 0x80); a = ((((a) >> 8) + (a)) >> 8); }; a += (rhsA); }; ret = b + (g << 8) + (r << 16) + ((uint) a << 24); }; return ColorBgra.FromUInt32 (ret); }
+		public static string StaticName
+			=> "ColorDodge";
+
+		public override ColorBgra Apply (in ColorBgra bottom, in ColorBgra top)
+			=> ApplyStatic (bottom, top);
+
+		public static ColorBgra ApplyStatic (in ColorBgra bottom, in ColorBgra top)
+		{
+			// The color dodge blend mode brightens the bottom to reflect the top
+			//
+			// - The resulting color is never darker than the bottom color,
+			//   each channel can only stay the same or become brighter.
+			//   It can be darker than the top.
+			// - Blending with black leaves the original color unchanged
+			// - Blending with white results in white (if the bottom isn't black)
+
+			if (top.A == 0) return bottom;
+			if (bottom.A == 0) return top;
+
+			return BlendOpHelper.ComputePremultiplied<ChannelBlend> (bottom, top);
+		}
+
+		private readonly struct ChannelBlend : BlendOpHelper.IChannelBlend
+		{
+			[MethodImpl (MethodImplOptions.AggressiveInlining)]
+			public static int BlendChannel (int Cb, int Ca, int Ab, int Aa)
+			{
+				if (Cb == 0) return 0;
+				if (Ca >= Aa) return Aa * Ab; // top is white
+				return Math.Min (Aa * Ab, Cb * Aa * Aa / (Aa - Ca));
+			}
+		}
 	}
 }
