@@ -41,6 +41,7 @@ public sealed class PaintBrushTool : BaseBrushTool
 	private BasePaintBrush? default_brush;
 	private BasePaintBrush? active_brush;
 	private PointI? last_point = PointI.Zero;
+	private RectangleI? stroke_dirty_rect;
 	private uint? open_repeating_draw_id;
 	private Box brush_specific_options_box;
 
@@ -150,9 +151,6 @@ public sealed class PaintBrushTool : BaseBrushTool
 		if (!last_point.HasValue)
 			last_point = e.Point;
 
-		if (document.Workspace.PointInCanvas (e.PointDouble))
-			surface_modified = true;
-
 		var surf = document.Layers.ToolLayer.Surface;
 		using Context g = document.CreateClippedToolContext ();
 
@@ -166,6 +164,13 @@ public sealed class PaintBrushTool : BaseBrushTool
 
 		CancelRepeatingDraw ();
 		var invalidate_rect = active_brush.DoMouseMove (g, surf, strokeArgs);
+		if (stroke_dirty_rect is null)
+			stroke_dirty_rect = invalidate_rect;
+		else
+			stroke_dirty_rect = stroke_dirty_rect.Value.Union (invalidate_rect);
+
+		if (!document.ClampToImageSize (invalidate_rect).IsEmpty)
+			surface_modified = true;
 
 		// If we draw partially offscreen, Cairo gives us a bogus
 		// dirty rectangle, so redraw everything.
@@ -195,6 +200,15 @@ public sealed class PaintBrushTool : BaseBrushTool
 		base.OnMouseUp (document, e);
 
 		active_brush?.DoMouseUp ();
+
+		if (stroke_dirty_rect != null) {
+			if (document.Workspace.IsPartiallyOffscreen (stroke_dirty_rect.Value))
+				document.Workspace.Invalidate ();
+			else
+				document.Workspace.Invalidate (document.ClampToImageSize (stroke_dirty_rect.Value));
+
+			stroke_dirty_rect = null;
+		}
 	}
 
 	protected override void OnSaveSettings (ISettingsService settings)
