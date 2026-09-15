@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
-"PO-Revision-Date: 2026-08-16 19:28+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
+"PO-Revision-Date: 2026-09-15 01:51+0000\n"
 "Last-Translator: Elviska <vonelviska@seznam.cz>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/pinta/pinta/cs/>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -108,7 +108,7 @@ msgstr "Všechny malé písmena"
 msgid "All files"
 msgstr "Všechny soubory"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -145,7 +145,7 @@ msgstr "Úhel"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
 msgid "Animate Selection Outline"
-msgstr ""
+msgstr "Animovat Obrys Výběru"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -174,6 +174,10 @@ msgstr "Umělecké"
 msgid "Atkinson"
 msgstr "Dithering dle Atkinson"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Automaticky"
@@ -186,18 +190,13 @@ msgstr "Automaticky oříznout"
 msgid "Auto Level"
 msgstr "Automatická úroveň"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr "Automatické rolování vypnuto"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr "Automatické rolování zapnuto"
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Dostupné v repozitáři {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -245,7 +244,7 @@ msgstr "Režim míchání"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Modrá"
 
@@ -289,12 +288,12 @@ msgstr "Vlevo Dole"
 msgid "Bottom Right"
 msgstr "Vpravo Dole"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Jas"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Jas / Kontrast"
 
@@ -343,6 +342,10 @@ msgstr "Nastavení Mřížky Plátna"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Mřížka Plátna..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -604,7 +607,7 @@ msgstr "Obsahuje"
 msgid "Contiguous"
 msgstr "Spojité"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Kontrast"
@@ -648,7 +651,7 @@ msgstr "Pokrytí"
 msgid "Crop to Selection"
 msgstr "Vystřihnout do výběru"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "Současná Paleta"
 
@@ -656,7 +659,7 @@ msgstr "Současná Paleta"
 msgid "Curved"
 msgstr "Zakřivený"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Křivky"
@@ -749,10 +752,9 @@ msgstr "Dithering"
 msgid "Do not switch tool"
 msgstr "Nepřepínat nástroj"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "Velikost stahováných dat: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "Velikost ke stažení"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -816,6 +818,8 @@ msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
 msgstr ""
+"Zapne efekt \"pochodujících mravenců\" pro zlepšení viditelnosti vybrání. "
+"Vypněte pro redukci využití CPU."
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -830,7 +834,7 @@ msgstr "Guma"
 msgid "Error"
 msgstr "Chyba"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "Metoda Rozdělení Chyby"
 
@@ -1023,7 +1027,7 @@ msgstr "Gaussovo rozmazání"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
 msgid "General"
-msgstr ""
+msgstr "Hlavní"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1049,7 +1053,7 @@ msgstr "Přechod Upraven"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Zelená"
 
@@ -1113,7 +1117,7 @@ msgstr "Horizontální červená (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Odstín"
 
@@ -1223,7 +1227,7 @@ msgstr "Nainstalovat balíček s rozšířeními"
 msgid "Install from file..."
 msgstr "Instalovat ze souboru..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Instalovat..."
 
@@ -1393,7 +1397,7 @@ msgstr ""
 "Pravé kliknutí pro použití sekundární barvy."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1586,7 +1590,7 @@ msgstr "Režim"
 msgid "Modified"
 msgstr "Změněno"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "Více informací..."
 
@@ -1801,16 +1805,16 @@ msgstr "Přepsat"
 msgid "Paint Bucket"
 msgstr "Plechovka barvy"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "Štětec"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Paleta"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "Zdroj Palety"
 
@@ -1988,7 +1992,7 @@ msgstr "Síla"
 
 #: ../Pinta.Core/Actions/AppActions.cs:49
 msgid "Preferences..."
-msgstr ""
+msgstr "Preference..."
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -1999,7 +2003,7 @@ msgstr "Zachovat"
 msgid "Preset Gradient"
 msgstr "Přednastavený Přechod"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "Přednastavené Palety"
 
@@ -2126,7 +2130,7 @@ msgstr "Náhodný Šum Semínek"
 msgid "Random Point Locations"
 msgstr "Náhodná Bodová Lokace"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "Naposledy Použité Barvy"
 
@@ -2144,7 +2148,7 @@ msgstr "Obdélníkový výběr"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Červená"
 
@@ -2206,11 +2210,15 @@ msgstr "Nahradit"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Replaces the header bar with a separate menu bar and tool bar."
-msgstr ""
+msgstr "Zamění vrchní menu za separátní lištu nastavení a lištu nástrojů."
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Nahlásit chybu..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2336,7 +2344,7 @@ msgid "Sampling"
 msgstr "Vzorkování"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "Sytost"
 
@@ -2465,7 +2473,7 @@ msgstr "Zobrazit Vrstvu"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
 msgid "Show Menu Bar"
-msgstr ""
+msgstr "Ukázat Lištu Nastavení"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
@@ -2746,7 +2754,7 @@ msgid "Two-Row Sierra"
 msgstr "Dithering dle dvou řad Sierra"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Typ"
 
@@ -2787,7 +2795,7 @@ msgstr "Velká i malá písmena"
 msgid "Uninstall"
 msgstr "Odebrat"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "Odinstalovat..."
 
@@ -2810,7 +2818,7 @@ msgstr "Nepodporovaný typ souboru"
 msgid "Unsupported palette format"
 msgstr "Nepodporovaný formát palety"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "Aktualizace..."
 
@@ -2828,20 +2836,19 @@ msgstr ""
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
 msgid "User Interface"
-msgstr ""
+msgstr "Uživatelské Rozhraní"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
 msgstr "Použity některé ikonky z:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "Hodnota"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "Verze: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Verze"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3070,6 +3077,18 @@ msgstr "{0} paleta ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Dostupné v repozitáři {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "Velikost stahováných dat: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "Verze: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "Menu Výběru"
 
@@ -3162,9 +3181,6 @@ msgstr "{0}%"
 
 #~ msgid "Title"
 #~ msgstr "Název"
-
-#~ msgid "Version"
-#~ msgstr "Verze"
 
 #~ msgid "Version Info"
 #~ msgstr "Informace o verzi"
@@ -3266,9 +3282,6 @@ msgstr "{0}%"
 
 #~ msgid "Repository version"
 #~ msgstr "Verze z repozitáře"
-
-#~ msgid "Download size"
-#~ msgstr "Velikost ke stažení"
 
 #~ msgid "Add-in packages"
 #~ msgstr "Balíčky s doplňky"

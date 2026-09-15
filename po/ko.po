@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
 "PO-Revision-Date: 2026-08-23 15:20+0000\n"
 "Last-Translator: VenusGirl <VenusGirl@outlook.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/pinta/pinta/ko/>\n"
@@ -108,7 +108,7 @@ msgstr "모든 작은 소문자"
 msgid "All files"
 msgstr "모든 파일"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "알파"
 
@@ -174,6 +174,10 @@ msgstr "예술"
 msgid "Atkinson"
 msgstr "앳킨슨"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "자동"
@@ -186,18 +190,13 @@ msgstr "자동 자르기"
 msgid "Auto Level"
 msgstr "자동 레벨"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr "자동 스크롤 끄기"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr "자동 스크롤 켜기"
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "저장소에서 사용 가능: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -245,7 +244,7 @@ msgstr "혼합 모드"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "파랑"
 
@@ -289,12 +288,12 @@ msgstr "하단 왼쪽"
 msgid "Bottom Right"
 msgstr "하단 오른쪽"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "밝기"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "밝기 / 대비"
 
@@ -343,6 +342,10 @@ msgstr "캔버스 격자 설정"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "캔버스 격자..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -603,7 +606,7 @@ msgstr "내용"
 msgid "Contiguous"
 msgstr "연속"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "대비"
@@ -647,7 +650,7 @@ msgstr "범위"
 msgid "Crop to Selection"
 msgstr "선택 영역으로 자르기"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "현재 팔레트"
 
@@ -655,7 +658,7 @@ msgstr "현재 팔레트"
 msgid "Curved"
 msgstr "곡선 모양"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "곡선"
@@ -748,10 +751,9 @@ msgstr "디더링"
 msgid "Do not switch tool"
 msgstr "도구를 전환하지 않음"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "다운로드 크기: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "다운로드 크기"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -829,7 +831,7 @@ msgstr "지우개"
 msgid "Error"
 msgstr "오류"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "오류 확산 방법"
 
@@ -1048,7 +1050,7 @@ msgstr "그라디언트 수정됨"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "녹색"
 
@@ -1111,7 +1113,7 @@ msgstr "가로 빨간색 (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "색조"
 
@@ -1221,7 +1223,7 @@ msgstr "확장 패키지 설치"
 msgid "Install from file..."
 msgstr "파일에서 설치..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "설치..."
 
@@ -1389,7 +1391,7 @@ msgstr ""
 "오른쪽을 클릭하면 보조 색상을 사용할 수 있습니다."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1586,7 +1588,7 @@ msgstr "모드"
 msgid "Modified"
 msgstr "수정 날짜"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "더 많은 정보..."
 
@@ -1801,16 +1803,16 @@ msgstr "덮어쓰기"
 msgid "Paint Bucket"
 msgstr "색칠"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "페인트브러시"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "팔레트"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "팔레트 소스"
 
@@ -1998,7 +2000,7 @@ msgstr "보존"
 msgid "Preset Gradient"
 msgstr "사전 설정 그라디언트"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "사전 설정 팔레트"
 
@@ -2125,7 +2127,7 @@ msgstr "랜덤 노이즈 시드"
 msgid "Random Point Locations"
 msgstr "무작위 포인트 위치"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "최근 사용한 색상"
 
@@ -2143,7 +2145,7 @@ msgstr "사각형 선택"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "빨강"
 
@@ -2210,6 +2212,10 @@ msgstr ""
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "버그 신고..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2335,7 +2341,7 @@ msgid "Sampling"
 msgstr "샘플링"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "채도"
 
@@ -2741,7 +2747,7 @@ msgid "Two-Row Sierra"
 msgstr "2열 시에라"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "형식"
 
@@ -2782,7 +2788,7 @@ msgstr "대소문자 구분 없음"
 msgid "Uninstall"
 msgstr "설치 제거"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "설치 제거..."
 
@@ -2805,7 +2811,7 @@ msgstr "지원하지 않는 파일 형식"
 msgid "Unsupported palette format"
 msgstr "지원되지 않는 팔레트 형식"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "업데이트..."
 
@@ -2829,14 +2835,13 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "일부 아이콘 사용 출처:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "값"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "버전: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "판 번호:"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3053,6 +3058,18 @@ msgstr "{0} 팔레트 ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "저장소에서 사용 가능: {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "다운로드 크기: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "버전: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "메뉴 표시줄"
 
@@ -3162,9 +3179,6 @@ msgstr "{0}%"
 #~ msgid "Uninstalling Add-ins"
 #~ msgstr "추가기능 제거 중"
 
-#~ msgid "Download size"
-#~ msgstr "다운로드 크기"
-
 #~ msgid "This add-in can't be loaded due to missing dependencies"
 #~ msgstr "이 추가기능은"
 
@@ -3205,9 +3219,6 @@ msgstr "{0}%"
 
 #~ msgid "Translated by:"
 #~ msgstr "번역자:"
-
-#~ msgid "Version"
-#~ msgstr "판 번호:"
 
 #~ msgid "Path"
 #~ msgstr "파일 경로"

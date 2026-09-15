@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
-"PO-Revision-Date: 2026-09-01 10:54+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
+"PO-Revision-Date: 2026-09-15 06:55+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -109,7 +109,7 @@ msgstr "Wszystkie kapitaliki"
 msgid "All files"
 msgstr "Wszystkie pliki"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -175,6 +175,10 @@ msgstr "Artystyczne"
 msgid "Atkinson"
 msgstr "Atkinsona"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr "Autor"
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Automatycznie"
@@ -187,18 +191,13 @@ msgstr "Przycięcie automatyczne"
 msgid "Auto Level"
 msgstr "Korekcja automatyczna"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr "Automatyczne przewijanie wyłączone"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr "Automatyczne przewijanie włączone"
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Dostępne w repozytorium: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -246,7 +245,7 @@ msgstr "Tryb mieszania"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Niebieski"
 
@@ -290,12 +289,12 @@ msgstr "Dolna lewa"
 msgid "Bottom Right"
 msgstr "Dolna prawa"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Jasność"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Jasność / kontrast"
 
@@ -344,6 +343,10 @@ msgstr "Ustawienia siatki płótna"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Siatka płótna…"
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr "Kategoria"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -605,7 +608,7 @@ msgstr "Spis treści"
 msgid "Contiguous"
 msgstr "Przylegające"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Kontrast"
@@ -649,7 +652,7 @@ msgstr "Pokrycie"
 msgid "Crop to Selection"
 msgstr "Przytnij do zaznaczenia"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "Bieżąca paleta"
 
@@ -657,7 +660,7 @@ msgstr "Bieżąca paleta"
 msgid "Curved"
 msgstr "Zakrzywienie"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Krzywe"
@@ -750,10 +753,9 @@ msgstr "Rozpikselowanie tonalne"
 msgid "Do not switch tool"
 msgstr "Nie zmieniaj narzędzia"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "Rozmiar pobieranego pakietu: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "Rozmiar pobieranego pakietu"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -834,7 +836,7 @@ msgstr "Gumka"
 msgid "Error"
 msgstr "Błąd"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "Metoda rozpraszania błędów"
 
@@ -1053,7 +1055,7 @@ msgstr "Zmodyfikowano gradient"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Zielony"
 
@@ -1117,7 +1119,7 @@ msgstr "Poziome od czerwonego (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Odcień"
 
@@ -1231,7 +1233,7 @@ msgstr "Zainstaluj pakiet rozszerzeń"
 msgid "Install from file..."
 msgstr "Instaluj z pliku…"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Zainstaluj…"
 
@@ -1403,7 +1405,7 @@ msgstr ""
 "Użyj koloru dodatkowego naciskając dodatkowy przycisk myszy."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1603,7 +1605,7 @@ msgstr "Tryb"
 msgid "Modified"
 msgstr "Zmieniono"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "Więcej informacji..."
 
@@ -1818,16 +1820,16 @@ msgstr "Zastąp"
 msgid "Paint Bucket"
 msgstr "Wypełnienie"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "Pędzel"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Paleta"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "Źródło palety"
 
@@ -2016,7 +2018,7 @@ msgstr "Zachowaj"
 msgid "Preset Gradient"
 msgstr "Gradient predefiniowany"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "Palety predefiniowane"
 
@@ -2143,7 +2145,7 @@ msgstr "Ziarno losowego szumu"
 msgid "Random Point Locations"
 msgstr "Losowe położenia punktów"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "Ostatnio używane kolory"
 
@@ -2161,7 +2163,7 @@ msgstr "Zaznaczenie prostokątne"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Czerwony"
 
@@ -2228,6 +2230,10 @@ msgstr "Zastępuje pasek nagłówka oddzielnym paskiem menu i paskiem narzędzi.
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Zgłoś błąd..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr "Repozytorium"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2353,7 +2359,7 @@ msgid "Sampling"
 msgstr "Próbkowanie"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "Nasycenie"
 
@@ -2763,7 +2769,7 @@ msgid "Two-Row Sierra"
 msgstr "Dwurzędowy Sierry"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Typ"
 
@@ -2804,7 +2810,7 @@ msgstr "Jednolite"
 msgid "Uninstall"
 msgstr "Odinstaluj"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "Odinstaluj…"
 
@@ -2827,7 +2833,7 @@ msgstr "Nieobsługiwany format pliku"
 msgid "Unsupported palette format"
 msgstr "Nieobsługiwany format palety"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "Aktualizuj..."
 
@@ -2852,14 +2858,13 @@ msgstr "Interfejs użytkownika"
 msgid "Using some icons from:"
 msgstr "Wykorzystano ikony z:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "Wartość"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "Wersja: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Wersja"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3105,6 +3110,18 @@ msgstr "Paleta {0} ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Dostępne w repozytorium: {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "Rozmiar pobieranego pakietu: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "Wersja: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "Pasek menu"
 
@@ -3205,9 +3222,6 @@ msgstr "{0}%"
 #~ msgid "Title"
 #~ msgstr "Tytuł"
 
-#~ msgid "Version"
-#~ msgstr "Wersja"
-
 #~ msgid "Path"
 #~ msgstr "Ścieżka"
 
@@ -3234,9 +3248,6 @@ msgstr "{0}%"
 
 #~ msgid "Available in repository:"
 #~ msgstr "Dostępne w repozytorium"
-
-#~ msgid "Download size"
-#~ msgstr "Rozmiar pobieranego pakietu"
 
 #~ msgid "Installation cancelled"
 #~ msgstr "Instalacja anulowana"

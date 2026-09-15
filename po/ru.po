@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
 "PO-Revision-Date: 2026-09-11 17:51+0000\n"
 "Last-Translator: Сергей <asvmail.as@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
-"\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -110,7 +110,7 @@ msgstr "Все малые заглавные"
 msgid "All files"
 msgstr "Все файлы"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "Альфа"
 
@@ -176,6 +176,10 @@ msgstr "Художественные"
 msgid "Atkinson"
 msgstr "Аткинсона"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Автоматически"
@@ -188,18 +192,13 @@ msgstr "Автокадрирование"
 msgid "Auto Level"
 msgstr "Автокоррекция"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr "Автопрокрутка отключена"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr "Автопрокрутка включена"
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Доступно в репозитории: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -247,7 +246,7 @@ msgstr "Режим наложения"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Синий"
 
@@ -291,12 +290,12 @@ msgstr "По нижнему краю влево"
 msgid "Bottom Right"
 msgstr "По нижнему краю вправо"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Яркость"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Яркость / Контраст"
 
@@ -345,6 +344,10 @@ msgstr "Настройки сетки холста"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Сетка холста..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -608,7 +611,7 @@ msgstr "Содержание"
 msgid "Contiguous"
 msgstr "Смежные области"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Контраст"
@@ -652,7 +655,7 @@ msgstr "Покрытие"
 msgid "Crop to Selection"
 msgstr "Кадрировать по выделенному"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "Текущая палитра"
 
@@ -660,7 +663,7 @@ msgstr "Текущая палитра"
 msgid "Curved"
 msgstr "Искривление"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Кривые"
@@ -753,10 +756,9 @@ msgstr "Дизеринг"
 msgid "Do not switch tool"
 msgstr "Не переключайте инструмент"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "Размер загрузки: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "Размер загрузки"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -838,7 +840,7 @@ msgstr "Ластик"
 msgid "Error"
 msgstr "Ошибка"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "Метод «Распространения ошибки»"
 
@@ -1057,7 +1059,7 @@ msgstr "Градиент изменён"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Зелёный"
 
@@ -1121,7 +1123,7 @@ msgstr "По горизонтали, от красного (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Тон"
 
@@ -1235,7 +1237,7 @@ msgstr "Установить расширение"
 msgid "Install from file..."
 msgstr "Установить из файла..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Установка..."
 
@@ -1414,7 +1416,7 @@ msgstr ""
 "Нажмите правую кнопку мыши для использования дополнительного цвета."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1613,7 +1615,7 @@ msgstr "Режим"
 msgid "Modified"
 msgstr "Изменён"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "Дополнительные сведения..."
 
@@ -1828,16 +1830,16 @@ msgstr "Перезаписать"
 msgid "Paint Bucket"
 msgstr "Заливка"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "Кисть"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Палитра"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "Источник палитры"
 
@@ -2027,7 +2029,7 @@ msgstr "Оставить"
 msgid "Preset Gradient"
 msgstr "Предустановленный градиент"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "Готовые палитры"
 
@@ -2154,7 +2156,7 @@ msgstr "Начальный уровень случайного шума"
 msgid "Random Point Locations"
 msgstr "Случайные местоположения точек"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "Недавние цвета"
 
@@ -2172,7 +2174,7 @@ msgstr "Прямоугольное выделение"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Красный"
 
@@ -2239,6 +2241,10 @@ msgstr "Заменяет заголовок окна отдельной пане
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Сообщить об ошибке..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2364,7 +2370,7 @@ msgid "Sampling"
 msgstr "Выборка"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "Насыщ."
 
@@ -2775,7 +2781,7 @@ msgid "Two-Row Sierra"
 msgstr "Двухрядный алгоритм Сьерры"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Тип"
 
@@ -2816,7 +2822,7 @@ msgstr "С унифицированной высотой букв"
 msgid "Uninstall"
 msgstr "Удаление"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "Удалить..."
 
@@ -2839,7 +2845,7 @@ msgstr "Неподдерживаемый формат файла"
 msgid "Unsupported palette format"
 msgstr "Неподдерживаемый формат палитры"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "Обновить..."
 
@@ -2864,14 +2870,13 @@ msgstr "Пользовательский интерфейс"
 msgid "Using some icons from:"
 msgstr "Использованы некоторые значки из:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "Значение"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "Версия: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Версия"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3122,6 +3127,18 @@ msgstr "{0} палитра ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Доступно в репозитории: {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "Размер загрузки: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "Версия: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "Панель меню"
 
@@ -3220,9 +3237,6 @@ msgstr "{0}%"
 #~ msgstr ""
 #~ "Размер вставленного изображения больше размера холста. Что нужно сделать?"
 
-#~ msgid "Version"
-#~ msgstr "Версия"
-
 #~ msgid "Path"
 #~ msgstr "Путь"
 
@@ -3302,9 +3316,6 @@ msgstr "{0}%"
 
 #~ msgid "Installed version"
 #~ msgstr "Установленная версия"
-
-#~ msgid "Download size"
-#~ msgstr "Размер загрузки"
 
 #~ msgid "Manage Repositories..."
 #~ msgstr "Управление репозиториями..."
