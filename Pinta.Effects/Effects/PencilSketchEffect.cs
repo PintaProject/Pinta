@@ -16,11 +16,11 @@ namespace Pinta.Effects;
 
 public sealed class PencilSketchEffect : BaseEffect
 {
-	private readonly GaussianBlurEffect blur_effect;
-	private readonly UnaryPixelOps.Desaturate desaturate_op;
-	private readonly InvertColorsEffect invert_effect;
-	private readonly BrightnessContrastEffect bac_adjustment;
-	private readonly UserBlendOps.ColorDodgeBlendOp color_dodge_op;
+	private readonly GaussianBlurEffect gaussian_blur;
+	private readonly UnaryPixelOps.Desaturate desaturate;
+	private readonly InvertColorsEffect invert;
+	private readonly BrightnessContrastEffect brightness_contrast;
+	private readonly UserBlendOps.ColorDodgeBlendOp color_dodge;
 
 	public override string Icon => Resources.Icons.EffectsArtisticPencilSketch;
 
@@ -43,42 +43,43 @@ public sealed class PencilSketchEffect : BaseEffect
 
 		EffectData = new PencilSketchData ();
 
-		blur_effect = new GaussianBlurEffect (services);
-		desaturate_op = new UnaryPixelOps.Desaturate ();
-		invert_effect = new InvertColorsEffect (services);
-		bac_adjustment = new BrightnessContrastEffect (services);
-		color_dodge_op = new UserBlendOps.ColorDodgeBlendOp ();
+		gaussian_blur = new GaussianBlurEffect (services);
+		desaturate = new UnaryPixelOps.Desaturate ();
+		invert = new InvertColorsEffect (services);
+		brightness_contrast = new BrightnessContrastEffect (services);
+		color_dodge = new UserBlendOps.ColorDodgeBlendOp ();
 	}
 
 	public override Task<bool> LaunchConfiguration ()
 		=> chrome.LaunchSimpleEffectDialog (this, workspace);
 
-	#region Algorithm Code Ported From PDN
-	public override void Render (ImageSurface src, ImageSurface dest, ReadOnlySpan<RectangleI> rois)
+	public override void Render (ImageSurface source, ImageSurface destination, ReadOnlySpan<RectangleI> rois)
 	{
-		bac_adjustment.Data.Brightness = -Data.ColorRange;
-		bac_adjustment.Data.Contrast = -Data.ColorRange;
-		bac_adjustment.Render (src, dest, rois);
+		PencilSketchData data = Data;
 
-		blur_effect.Data.Radius = Data.PencilTipSize;
-		blur_effect.Render (src, dest, rois);
+		gaussian_blur.Data.Radius = data.PencilTipSize;
+		gaussian_blur.Render (source, destination, rois);
 
-		invert_effect.Render (dest, dest, rois);
-		desaturate_op.Apply (dest, dest, rois);
+		brightness_contrast.Data.Brightness = data.ColorRange;
+		brightness_contrast.Data.Contrast = -data.ColorRange;
+		brightness_contrast.Render (destination, destination, rois);
 
-		var dst_data = dest.GetPixelData ();
-		var src_data = src.GetReadOnlyPixelData ();
+		invert.Render (destination, destination, rois);
 
-		Size canvasSize = src.GetSize ();
+		desaturate.Apply (destination, destination, rois);
+
+		ReadOnlySpan<ColorBgra> sourceData = source.GetReadOnlyPixelData ();
+		Span<ColorBgra> destinationData = destination.GetPixelData ();
+
+		Size canvasSize = source.GetSize ();
 
 		foreach (RectangleI roi in rois) {
 			foreach (var pixel in Tiling.GeneratePixelOffsets (roi, canvasSize)) {
-				ColorBgra srcGrey = desaturate_op.Apply (src_data[pixel.memoryOffset]);
-				dst_data[pixel.memoryOffset] = color_dodge_op.Apply (srcGrey, dst_data[pixel.memoryOffset]);
+				ColorBgra desaturatedSource = desaturate.Apply (sourceData[pixel.memoryOffset]);
+				destinationData[pixel.memoryOffset] = color_dodge.Apply (desaturatedSource, destinationData[pixel.memoryOffset]);
 			}
 		}
 	}
-	#endregion
 
 	public sealed class PencilSketchData : EffectData
 	{
