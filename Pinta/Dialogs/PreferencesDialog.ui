@@ -11,6 +11,18 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">User Interface</property>
             <child>
+              <object class="AdwComboRow" id="language_comborow">
+                <property name="title" translatable="yes">Language</property>
+                <property name="model">
+                  <object class="GtkStringList">
+                    <items>
+                      <item translatable="yes" comments="This refers to using the system's default language.">Default</item>
+                    </items>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
               <object class="AdwComboRow" id="color_scheme_comborow">
                 <property name="title" translatable="yes">Color Scheme</property>
                 <property name="model">
