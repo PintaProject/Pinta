@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
 "PO-Revision-Date: 2026-02-19 19:07+0000\n"
 "Last-Translator: o p <dexterd2023@duck.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/pinta/pinta/it/"
@@ -109,7 +109,7 @@ msgstr ""
 msgid "All files"
 msgstr "Tutti i Files"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -175,6 +175,10 @@ msgstr "Artistici"
 msgid "Atkinson"
 msgstr "Atkinson"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Auto"
@@ -187,18 +191,13 @@ msgstr "Autoritaglio"
 msgid "Auto Level"
 msgstr "Livelli automatici"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr ""
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Disponibile nella repository: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -246,7 +245,7 @@ msgstr "Modalità fusione"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Blu"
 
@@ -290,12 +289,12 @@ msgstr "Sinistra in basso"
 msgid "Bottom Right"
 msgstr "Destra in basso"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Luminosità"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Luminosità / Contrasto"
 
@@ -344,6 +343,10 @@ msgstr "Impostazioni Griglia Superficie"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Griglia Superficie..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -603,7 +606,7 @@ msgstr "Contenuti"
 msgid "Contiguous"
 msgstr "Contiguo"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Contrasto"
@@ -647,7 +650,7 @@ msgstr "Copertura"
 msgid "Crop to Selection"
 msgstr "Ritaglia la selezione"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "Tavolozza corrente"
 
@@ -655,7 +658,7 @@ msgstr "Tavolozza corrente"
 msgid "Curved"
 msgstr "Curvato"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Curve"
@@ -748,10 +751,9 @@ msgstr "Dithering"
 msgid "Do not switch tool"
 msgstr "Non cambiare strumento"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "Dimensione del download: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "Dimensione del download"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -830,7 +832,7 @@ msgstr "Gomma"
 msgid "Error"
 msgstr "Errore"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "Metodo di Diffusione degli Errori"
 
@@ -1049,7 +1051,7 @@ msgstr "Gradiente modificato"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Verde"
 
@@ -1113,7 +1115,7 @@ msgstr "Rosso Orizzontale (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Tinta"
 
@@ -1225,7 +1227,7 @@ msgstr "Installa Pacchetto di Estensione"
 msgid "Install from file..."
 msgstr "Installa da file..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Installa..."
 
@@ -1400,7 +1402,7 @@ msgstr ""
 "Click destro per utilizzare il colore secondario."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1592,7 +1594,7 @@ msgstr "Modalità"
 msgid "Modified"
 msgstr "Modificato"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "Più Informazioni..."
 
@@ -1807,16 +1809,16 @@ msgstr "Sovrascrivi"
 msgid "Paint Bucket"
 msgstr "Secchiello"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "Pennello"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Tavolozza"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "Origine della tavolozza"
 
@@ -2007,7 +2009,7 @@ msgstr "Preserva"
 msgid "Preset Gradient"
 msgstr "Gradiente Predefinito"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "Tavolozze predefinite"
 
@@ -2134,7 +2136,7 @@ msgstr "Seme casuale"
 msgid "Random Point Locations"
 msgstr "Posizione Casuale dei Punti"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "Colori usati recentemente"
 
@@ -2152,7 +2154,7 @@ msgstr "Selezione rettangolare"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Rosso"
 
@@ -2219,6 +2221,10 @@ msgstr ""
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Segnala Bug..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2344,7 +2350,7 @@ msgid "Sampling"
 msgstr "Campionamento"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "Saturazione"
 
@@ -2760,7 +2766,7 @@ msgid "Two-Row Sierra"
 msgstr "Sierra a Due Vie"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Tipo"
 
@@ -2801,7 +2807,7 @@ msgstr ""
 msgid "Uninstall"
 msgstr "Disinstalla"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "Disinstalla..."
 
@@ -2824,7 +2830,7 @@ msgstr "Formato del file non supportato"
 msgid "Unsupported palette format"
 msgstr "Formato di palette non supportato"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "Aggiorna..."
 
@@ -2849,14 +2855,13 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Utilizzando delle icone da:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "Valore"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "Versione: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Versione"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3107,6 +3112,18 @@ msgstr "{0} tavolozza ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Disponibile nella repository: {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "Dimensione del download: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "Versione: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "Barra dei menù"
 
@@ -3184,9 +3201,6 @@ msgstr "{0}%"
 #~ "like to do?"
 #~ msgstr ""
 #~ "L'immagine da incollare è più larga della superficie. Cosa vorresti fare?"
-
-#~ msgid "Version"
-#~ msgstr "Versione"
 
 #~ msgid "Translated by:"
 #~ msgstr "Tradotto da:"
@@ -3280,9 +3294,6 @@ msgstr "{0}%"
 #, csharp-format
 #~ msgid "Required: {0} v{1}, found v{2}"
 #~ msgstr "Richiesto: {0} v{1}, trovato v{2}"
-
-#~ msgid "Download size"
-#~ msgstr "Dimensione del download"
 
 #~ msgid "Installed version"
 #~ msgstr "Versione installata"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
 "PO-Revision-Date: 2026-05-03 21:23+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/pinta/pinta/"
@@ -111,7 +111,7 @@ msgstr "Semua Huruf Kapital Kecil"
 msgid "All files"
 msgstr "Semua berkas"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -177,6 +177,10 @@ msgstr "Artistik"
 msgid "Atkinson"
 msgstr "Atkinson"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Auto"
@@ -189,18 +193,13 @@ msgstr "Potong Otomatis"
 msgid "Auto Level"
 msgstr "Auto-Level"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr ""
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Tersedia di lumbung: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -248,7 +247,7 @@ msgstr "Modus Pencampuran"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Biru"
 
@@ -292,12 +291,12 @@ msgstr "Bawah Kiri"
 msgid "Bottom Right"
 msgstr "Bawah Kanan"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Kecerahan"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Kecerahan / Kontras"
 
@@ -346,6 +345,10 @@ msgstr "Pengaturan Kisi Kanvas"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Kisi Kanvas..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -607,7 +610,7 @@ msgstr "Isi"
 msgid "Contiguous"
 msgstr "Bersambungan"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Kontras"
@@ -651,7 +654,7 @@ msgstr "Cakupan"
 msgid "Crop to Selection"
 msgstr "Pangkas Pilihan"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "Palet Saat Ini"
 
@@ -659,7 +662,7 @@ msgstr "Palet Saat Ini"
 msgid "Curved"
 msgstr "Melengkung"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Kurva"
@@ -752,10 +755,9 @@ msgstr "Dithering"
 msgid "Do not switch tool"
 msgstr "Jangan ganti alat"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "Ukuran unduhan: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "Ukuran unduhan"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -835,7 +837,7 @@ msgstr "Penghapus"
 msgid "Error"
 msgstr "Kesalahan"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "Metode Difusi Galat"
 
@@ -1055,7 +1057,7 @@ msgstr "Gradien Diubah"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Hijau"
 
@@ -1119,7 +1121,7 @@ msgstr "Merah horizontal (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Rona"
 
@@ -1230,7 +1232,7 @@ msgstr "Instal Paket Ekstensi"
 msgid "Install from file..."
 msgstr "Instal dari berkas..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Instal..."
 
@@ -1401,7 +1403,7 @@ msgstr ""
 "Klik kanan untuk menggunakan warna sekunder."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1597,7 +1599,7 @@ msgstr "Mode"
 msgid "Modified"
 msgstr "Diubah"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "Informasi Selengkapnya..."
 
@@ -1812,16 +1814,16 @@ msgstr "Timpa"
 msgid "Paint Bucket"
 msgstr "Ember Cat"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "Kuas Cat"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Palet"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "Sumber Palet"
 
@@ -2012,7 +2014,7 @@ msgstr "Pertahankan"
 msgid "Preset Gradient"
 msgstr "Gradien Prasetel"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "Palet Prasetel"
 
@@ -2139,7 +2141,7 @@ msgstr "Seed Noise Acak"
 msgid "Random Point Locations"
 msgstr "Lokasi Titik Acak"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "Warna yang Baru Digunakan"
 
@@ -2157,7 +2159,7 @@ msgstr "Pemilih Persegi Panjang"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Merah"
 
@@ -2224,6 +2226,10 @@ msgstr ""
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Laporkan Kutu..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2349,7 +2355,7 @@ msgid "Sampling"
 msgstr "Pengambilan Sampel"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "Sat"
 
@@ -2760,7 +2766,7 @@ msgid "Two-Row Sierra"
 msgstr "Sierra Dua Baris"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Jenis"
 
@@ -2801,7 +2807,7 @@ msgstr "Unikasus"
 msgid "Uninstall"
 msgstr "Uninstal"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "Hapus Instalasi..."
 
@@ -2824,7 +2830,7 @@ msgstr "Format berkas tidak didukung"
 msgid "Unsupported palette format"
 msgstr "Format palet tidak didukung"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "Perbarui..."
 
@@ -2848,14 +2854,13 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Menggunakan ikon dari:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "Nilai"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "Versi: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Versi"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3086,6 +3091,18 @@ msgstr "{0} palet ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Tersedia di lumbung: {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "Ukuran unduhan: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "Versi: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "Bilah Menu"
 
@@ -3186,9 +3203,6 @@ msgstr "{0}%"
 
 #~ msgid "Title"
 #~ msgstr "Judul"
-
-#~ msgid "Version"
-#~ msgstr "Versi"
 
 #~ msgid "Path"
 #~ msgstr "Jalur"
@@ -3396,9 +3410,6 @@ msgstr "{0}%"
 
 #~ msgid "This add-in can't be loaded due to missing dependencies"
 #~ msgstr "Add-in ini tidak dapat dimuat karena dependensi yang hilang"
-
-#~ msgid "Download size"
-#~ msgstr "Ukuran unduhan"
 
 #~ msgid "No selection"
 #~ msgstr "Tidak ada pilihan"

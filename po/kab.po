@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
 "PO-Revision-Date: 2025-01-21 05:26+0000\n"
 "Last-Translator: Yacine Bouklif <yacinebouklif@gmail.com>\n"
 "Language-Team: Kabyle <https://hosted.weblate.org/projects/pinta/pinta/kab/"
@@ -109,7 +109,7 @@ msgstr ""
 msgid "All files"
 msgstr "Akkw ifuyla"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr ""
 
@@ -175,6 +175,10 @@ msgstr "Anaẓuran"
 msgid "Atkinson"
 msgstr ""
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Awurman"
@@ -187,18 +191,13 @@ msgstr "Anǧar awurman"
 msgid "Auto Level"
 msgstr "Aswir aymani"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr ""
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Yella deg ukaram: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -246,7 +245,7 @@ msgstr "Mode de mélange"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Anili"
 
@@ -290,12 +289,12 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Tifawit"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Tifawit/ Amyeẓli"
 
@@ -343,6 +342,10 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
+msgstr ""
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
 msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
@@ -595,7 +598,7 @@ msgstr "Igburen"
 msgid "Contiguous"
 msgstr "Anarag"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Amyeẓli"
@@ -639,7 +642,7 @@ msgstr "Taduli"
 msgid "Crop to Selection"
 msgstr "Nǧer tafrayt"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr ""
 
@@ -647,7 +650,7 @@ msgstr ""
 msgid "Curved"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Izligen"
@@ -740,10 +743,9 @@ msgstr ""
 msgid "Do not switch tool"
 msgstr "Ur tbeddil ara afecku"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr ""
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "Tiddi n wezdam"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -821,7 +823,7 @@ msgstr "Taseffaḍt"
 msgid "Error"
 msgstr "Anezri"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr ""
 
@@ -1040,7 +1042,7 @@ msgstr ""
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Azegzaw"
 
@@ -1104,7 +1106,7 @@ msgstr ""
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Ini"
 
@@ -1209,7 +1211,7 @@ msgstr ""
 msgid "Install from file..."
 msgstr "Sbedd seg ufaylu..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Sbedd..."
 
@@ -1351,7 +1353,7 @@ msgid ""
 msgstr ""
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1534,7 +1536,7 @@ msgstr ""
 msgid "Modified"
 msgstr "Yettwabeddel"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr ""
 
@@ -1749,16 +1751,16 @@ msgstr "Sefsex"
 msgid "Paint Bucket"
 msgstr "Aqbuc n teklut"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "Amfezwi"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Tapaliḍt"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr ""
 
@@ -1942,7 +1944,7 @@ msgstr ""
 msgid "Preset Gradient"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr ""
 
@@ -2069,7 +2071,7 @@ msgstr ""
 msgid "Random Point Locations"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr ""
 
@@ -2087,7 +2089,7 @@ msgstr "Tafrayt s usrem"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Azeggaɣ"
 
@@ -2153,6 +2155,10 @@ msgstr ""
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
+msgstr ""
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
 msgstr ""
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
@@ -2279,7 +2285,7 @@ msgid "Sampling"
 msgstr "Alemmec"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr ""
 
@@ -2684,7 +2690,7 @@ msgid "Two-Row Sierra"
 msgstr ""
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Anaw"
 
@@ -2725,7 +2731,7 @@ msgstr ""
 msgid "Uninstall"
 msgstr "Kkes"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr ""
 
@@ -2748,7 +2754,7 @@ msgstr "Amasal n ufaylu ur yettwadhel ara"
 msgid "Unsupported palette format"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr ""
 
@@ -2773,14 +2779,13 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Aseqdec n tikunin si :"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr ""
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr ""
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Lqem"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -2998,6 +3003,10 @@ msgstr ""
 msgid "{0}%"
 msgstr "{0} %"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Yella deg ukaram: {0}"
+
 #~ msgid "ICO files can not be larger than 255 x 255 pixels."
 #~ msgstr "Ifuyla ICO ur zmiren ara ad ɛeddin 255 x 255 n ipiksilen."
 
@@ -3061,9 +3070,6 @@ msgstr "{0} %"
 
 #~ msgid "Take Screenshot"
 #~ msgstr "Eg tuṭṭfa n ugdil"
-
-#~ msgid "Version"
-#~ msgstr "Lqem"
 
 #~ msgid "Version Info"
 #~ msgstr "Isalen n lqem"
@@ -3250,9 +3256,6 @@ msgstr "{0} %"
 
 #~ msgid "Repository version"
 #~ msgstr "version du référentiel"
-
-#~ msgid "Download size"
-#~ msgstr "Tiddi n wezdam"
 
 #~ msgid "The following depedencies required by this add-in are not available:"
 #~ msgstr "Timkarḍiwin-agi laqent i wesiɣzef-agi, maca ulac-itent :"

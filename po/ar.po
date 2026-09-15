@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
 "PO-Revision-Date: 2026-06-07 13:48+0000\n"
 "Last-Translator: Ahmed <ahmedmajidalkalbani@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/pinta/pinta/ar/>\n"
@@ -109,7 +109,7 @@ msgstr ""
 msgid "All files"
 msgstr "كل الملفّات"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "شفافية"
 
@@ -175,6 +175,10 @@ msgstr "فنّي"
 msgid "Atkinson"
 msgstr "أتكينسون"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "آلي"
@@ -187,18 +191,13 @@ msgstr "اقتصاص تلقائي"
 msgid "Auto Level"
 msgstr "ضبط المستوى تلقائياً"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr ""
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "متاح في المخزن:{0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -246,7 +245,7 @@ msgstr "نمط المزج"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "أزرق"
 
@@ -290,12 +289,12 @@ msgstr "يسار الأسفل"
 msgid "Bottom Right"
 msgstr "يمين الأسفل"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "السطوع"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "السطوع / التباين"
 
@@ -344,6 +343,10 @@ msgstr "إعدادات شبكة الرقعة"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "شبكة الرقعة..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -604,7 +607,7 @@ msgstr "المحتويات"
 msgid "Contiguous"
 msgstr "متّصل"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "التباين"
@@ -648,7 +651,7 @@ msgstr "نطاق التغطية"
 msgid "Crop to Selection"
 msgstr "اقتص وفقًا للتّحديد"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "لوحة الألوان الحالية"
 
@@ -656,7 +659,7 @@ msgstr "لوحة الألوان الحالية"
 msgid "Curved"
 msgstr "منحني"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "منحنيات"
@@ -749,10 +752,9 @@ msgstr "تدرج نقطي"
 msgid "Do not switch tool"
 msgstr "لا تغيّر الأداة"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "حجم التنزيل: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -830,7 +832,7 @@ msgstr "ممحاة"
 msgid "Error"
 msgstr "خطأ"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "أسلوب نشر الخطأ"
 
@@ -1049,7 +1051,7 @@ msgstr "تم تعديل التدرج"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "أخضر"
 
@@ -1112,7 +1114,7 @@ msgstr "أحمر أفقي (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "درجة اللون"
 
@@ -1222,7 +1224,7 @@ msgstr "تثبيت حزمة الإضافة"
 msgid "Install from file..."
 msgstr "ثبّت من ملف..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "تثبيت..."
 
@@ -1390,7 +1392,7 @@ msgstr ""
 "انقر بزر الفأرة الأيمن لاستخدام اللون الثانوي."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1585,7 +1587,7 @@ msgstr "وضع"
 msgid "Modified"
 msgstr "مُعدّل"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "المزيد من المعلومات..."
 
@@ -1800,16 +1802,16 @@ msgstr "الكتابة فوق"
 msgid "Paint Bucket"
 msgstr "دلو الطلاﺀ"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "فرشاة تلوين"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "لوحة الألوان"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "مصدر لوحة الألوان"
 
@@ -1998,7 +2000,7 @@ msgstr "حفظ"
 msgid "Preset Gradient"
 msgstr "تدرج مُعد مسبقًا"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "لوحات ألوان مُعدة مسبقًا"
 
@@ -2125,7 +2127,7 @@ msgstr "بذرة ضوضاء عشوائية"
 msgid "Random Point Locations"
 msgstr "موضع النقاط العشوائية"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "الألوان المستخدمة مؤخرًا"
 
@@ -2143,7 +2145,7 @@ msgstr "تحديد مستطيل"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "أحمر"
 
@@ -2210,6 +2212,10 @@ msgstr ""
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "الإبلاغ عن خلل..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2335,7 +2341,7 @@ msgid "Sampling"
 msgstr "أخذ العينات"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "تشبّع"
 
@@ -2741,7 +2747,7 @@ msgid "Two-Row Sierra"
 msgstr "سييرا ثنائي الصفوف"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "النوع"
 
@@ -2782,7 +2788,7 @@ msgstr ""
 msgid "Uninstall"
 msgstr "إزالة التثبيت"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "إلغاء التثبيت..."
 
@@ -2805,7 +2811,7 @@ msgstr "نوع ملفات غير مدعوم"
 msgid "Unsupported palette format"
 msgstr "تنسيق لوحة الألوان غير مدعوم"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "تحديث..."
 
@@ -2829,14 +2835,13 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "إستخدام بعض الأيقونات من:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "القيمة"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "الإصدار: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "الإصدار"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3064,6 +3069,18 @@ msgstr "لوحة الألوان {0} ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "متاح في المخزن:{0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "حجم التنزيل: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "الإصدار: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "شريط القوائم"
 
@@ -3139,9 +3156,6 @@ msgstr "{0}%"
 
 #~ msgid "Title"
 #~ msgstr "العنوان"
-
-#~ msgid "Version"
-#~ msgstr "الإصدار"
 
 #~ msgid "Path"
 #~ msgstr "المسار"
