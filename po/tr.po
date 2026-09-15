@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
 "PO-Revision-Date: 2026-09-01 10:54+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/>"
-"\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/pinta/pinta/tr/"
+">\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,7 +109,7 @@ msgstr "Tümü Küçük Baş Harf"
 msgid "All files"
 msgstr "Tüm dosyalar"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -175,6 +175,10 @@ msgstr "Sanatsal"
 msgid "Atkinson"
 msgstr "Atkinson"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Otomatik"
@@ -187,18 +191,13 @@ msgstr "Otomatik Kırp"
 msgid "Auto Level"
 msgstr "Otomatik Seviye"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr "Otomatik Kaydırma Kapalı"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr "Otomatik Kaydırma Açık"
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Şu depoda mevcut: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -246,7 +245,7 @@ msgstr "Karıştırma Kipi"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Mavi"
 
@@ -290,12 +289,12 @@ msgstr "Sol Alt"
 msgid "Bottom Right"
 msgstr "Sağ Alt"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Parlaklık"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Parlaklık / Kontrast"
 
@@ -344,6 +343,10 @@ msgstr "Tuval Izgarası Ayarları"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Tuval Izgarası..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -605,7 +608,7 @@ msgstr "İçerik"
 msgid "Contiguous"
 msgstr "Sürekli"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Kontrast"
@@ -649,7 +652,7 @@ msgstr "Kapsam"
 msgid "Crop to Selection"
 msgstr "Seçime Kırp"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "Renk Paleti"
 
@@ -657,7 +660,7 @@ msgstr "Renk Paleti"
 msgid "Curved"
 msgstr "Kavisli"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Eğriler"
@@ -750,10 +753,9 @@ msgstr "Titreme"
 msgid "Do not switch tool"
 msgstr "Aracı değiştirme"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "İndirme boyutu: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "İndirme boyutu"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -834,7 +836,7 @@ msgstr "Silgi"
 msgid "Error"
 msgstr "Hata"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "Hata Yayılım Yöntemi"
 
@@ -1055,7 +1057,7 @@ msgstr "Renk Geçişi Değiştirildi"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Yeşil"
 
@@ -1119,7 +1121,7 @@ msgstr "Yatay kırmızı (K)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Ton"
 
@@ -1230,7 +1232,7 @@ msgstr "Uzantı Paketini Kur"
 msgid "Install from file..."
 msgstr "Dosyadan yükle..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Kur..."
 
@@ -1400,7 +1402,7 @@ msgstr ""
 "İkincil rengi kullanmak için Sağ tıkı kullanın."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1597,7 +1599,7 @@ msgstr "Mod"
 msgid "Modified"
 msgstr "Değiştirildi"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "Daha Fazla Bilgi..."
 
@@ -1812,16 +1814,16 @@ msgstr "Üzerine yaz"
 msgid "Paint Bucket"
 msgstr "Boya Kovası"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "Boya fırçası"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Palet"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "Palet Kaynağı"
 
@@ -2012,7 +2014,7 @@ msgstr "Koru"
 msgid "Preset Gradient"
 msgstr "Öndeğer Renk Geçişi"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "Ön Ayar Paletleri"
 
@@ -2139,7 +2141,7 @@ msgstr "Rastgele Gürültü Beslemesi"
 msgid "Random Point Locations"
 msgstr "Rastgele Nokta Konumları"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "En Son Kullanılan Renkler"
 
@@ -2157,7 +2159,7 @@ msgstr "Dikdörtgen Seçim"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Kırmızı"
 
@@ -2224,6 +2226,10 @@ msgstr "Başlık çubuğunu ayrı bir menü çubuğu ve araç çubuğu ile deği
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Hata Bildir..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2349,7 +2355,7 @@ msgid "Sampling"
 msgstr "Örnekliyor"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "Doygunluk"
 
@@ -2761,7 +2767,7 @@ msgid "Two-Row Sierra"
 msgstr "İki Sıralı Sierra"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Tür"
 
@@ -2802,7 +2808,7 @@ msgstr "Tek Büyük Harf"
 msgid "Uninstall"
 msgstr "Kaldır"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "Yüklemesini kaldır..."
 
@@ -2825,7 +2831,7 @@ msgstr "Desteklenmeyen dosya biçimi"
 msgid "Unsupported palette format"
 msgstr "Desteklenmeyen paket formatı"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "Güncelle..."
 
@@ -2849,14 +2855,13 @@ msgstr "Kullanıcı Arayüzü"
 msgid "Using some icons from:"
 msgstr "Bazı simgeler şuradan alınmıştır:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "Değer"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "Versiyon: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Sürüm"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3086,6 +3091,18 @@ msgstr "{0} paleti ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Şu depoda mevcut: {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "İndirme boyutu: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "Versiyon: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "Menü Çubuğu"
 
@@ -3173,9 +3190,6 @@ msgstr "{0}%"
 
 #~ msgid "Title"
 #~ msgstr "Başlık"
-
-#~ msgid "Version"
-#~ msgstr "Sürüm"
 
 #~ msgid "Path"
 #~ msgstr "Konum"
@@ -3279,9 +3293,6 @@ msgstr "{0}%"
 
 #~ msgid "Repository version"
 #~ msgstr "Depo sürümü"
-
-#~ msgid "Download size"
-#~ msgstr "İndirme boyutu"
 
 #~ msgid "The following depedencies required by this add-in are not available:"
 #~ msgstr "Bu eklenti için aşağıdaki bağımlılıklar mevcut değildir:"

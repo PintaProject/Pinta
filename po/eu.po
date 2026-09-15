@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
 "PO-Revision-Date: 2026-06-22 17:01+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/pinta/pinta/eu/>\n"
@@ -108,7 +108,7 @@ msgstr ""
 msgid "All files"
 msgstr "Fitxategi guztiak"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -174,6 +174,10 @@ msgstr "Artistikoa"
 msgid "Atkinson"
 msgstr "Atkinson"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Automatikoa"
@@ -186,18 +190,13 @@ msgstr "Moztu automatikoki"
 msgid "Auto Level"
 msgstr "Maila automatikoa"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr ""
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Eskuragarri biltegian: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -245,7 +244,7 @@ msgstr "Nahaste-modua"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Urdina"
 
@@ -289,12 +288,12 @@ msgstr "Behean ezkerrean"
 msgid "Bottom Right"
 msgstr "Behean eskuinean"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Distira"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Distira / kontrastea"
 
@@ -343,6 +342,10 @@ msgstr "Oihal-saretaren ezarpenak"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Oihal-sareta..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -602,7 +605,7 @@ msgstr "Edukia"
 msgid "Contiguous"
 msgstr "Albokoa"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Kontrastea"
@@ -646,7 +649,7 @@ msgstr "Estaldura"
 msgid "Crop to Selection"
 msgstr "Moztu hautapenera"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "Uneko paleta"
 
@@ -654,7 +657,7 @@ msgstr "Uneko paleta"
 msgid "Curved"
 msgstr "Kurbatua"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Kurbak"
@@ -747,10 +750,9 @@ msgstr "Bilbatzea"
 msgid "Do not switch tool"
 msgstr "Ez aldatu tresnaz"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "Deskarga-tamaina: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "Deskarga-tamaina"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -828,7 +830,7 @@ msgstr "Borragoma"
 msgid "Error"
 msgstr "Errorea"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "Errore-barreiatzearen metodoa"
 
@@ -1047,7 +1049,7 @@ msgstr "Gradientea aldatu da"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Berdea"
 
@@ -1111,7 +1113,7 @@ msgstr "Gorri horizontala (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Ñabardura"
 
@@ -1223,7 +1225,7 @@ msgstr "Instalatu hedapen-paketea"
 msgid "Install from file..."
 msgstr "Instalatu fitxategitik ..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Instalatu..."
 
@@ -1394,7 +1396,7 @@ msgstr ""
 "Eskuineko klik bigarren mailako kolorea erabiltzeko."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1586,7 +1588,7 @@ msgstr "Modua"
 msgid "Modified"
 msgstr "Aldatua"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "Informazio gehiago..."
 
@@ -1801,16 +1803,16 @@ msgstr "Gainidatzi"
 msgid "Paint Bucket"
 msgstr "Margo-ontzia"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "Pintzela"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Paleta"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "Paleta-iturburua"
 
@@ -2000,7 +2002,7 @@ msgstr "Mantendu"
 msgid "Preset Gradient"
 msgstr "Aurrezarpen-gradientea"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "Aurrezarpen-paletak"
 
@@ -2127,7 +2129,7 @@ msgstr "Ausazko zarataren hazia"
 msgid "Random Point Locations"
 msgstr "Ausazko puntu-kokapenak"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "Erabilitako azken koloreak"
 
@@ -2145,7 +2147,7 @@ msgstr "Laukizuzen bidezko hautapena"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Gorria"
 
@@ -2212,6 +2214,10 @@ msgstr ""
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Jakinarazi akatsa..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2337,7 +2343,7 @@ msgid "Sampling"
 msgstr "Lagintzea"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "Sat"
 
@@ -2748,7 +2754,7 @@ msgid "Two-Row Sierra"
 msgstr "Bi errenkadako Sierra"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Mota"
 
@@ -2789,7 +2795,7 @@ msgstr ""
 msgid "Uninstall"
 msgstr "Desinstalatu"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "Desinstalatu..."
 
@@ -2812,7 +2818,7 @@ msgstr "Fitxategi-formatua ez da onartzen"
 msgid "Unsupported palette format"
 msgstr "Onartzen ez den paleta-formatua"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "Eguneratu..."
 
@@ -2837,14 +2843,13 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Zenbait ikono hemendik datoz:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "Balioa"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "Bertsioa: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Bertsioa"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3068,6 +3073,18 @@ msgstr "{0} paleta ({1})"
 msgid "{0}%"
 msgstr "% {0}"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Eskuragarri biltegian: {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "Deskarga-tamaina: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "Bertsioa: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "Menu-barra"
 
@@ -3194,9 +3211,6 @@ msgstr "% {0}"
 #~ msgid "Title"
 #~ msgstr "Izenburua"
 
-#~ msgid "Version"
-#~ msgstr "Bertsioa"
-
 #~ msgid "Path"
 #~ msgstr "Bidea"
 
@@ -3235,9 +3249,6 @@ msgstr "% {0}"
 
 #~ msgid "Repository version"
 #~ msgstr "Biltegiko bertsioa"
-
-#~ msgid "Download size"
-#~ msgstr "Deskarga-tamaina"
 
 #~ msgid "Add-in packages"
 #~ msgstr "Gehigarrien paketeak"
