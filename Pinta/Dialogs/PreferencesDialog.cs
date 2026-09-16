@@ -12,6 +12,7 @@ using Pinta.Core;
 internal sealed partial class PreferencesDialog
 {
 	private ISettingsService settings = null!; // NRT - set by factory method
+	private List<string> language_codes = [];
 
 	[Gtk.Connect ("language_comborow")]
 	private Adw.ComboRow language_row;
@@ -34,16 +35,20 @@ internal sealed partial class PreferencesDialog
 
 	partial void Initialize ()
 	{
+		language_codes.Add (string.Empty); // For 'Default'.
+
 		// Build a map from language label to language code.
 		Dictionary<string, string> langMap = Translations.GetAvailableLanguages ()
 			.ToDictionary (Translations.GetLanguageDisplayName, lang => lang);
-		langMap.Add (Translations.GetString ("Default"), string.Empty);
 
-		// Add the available languages to the combobox.
+		// Add the available languages to the combobox, ordered by label.
 		Gtk.StringList langModel = (Gtk.StringList) language_row.Model;
-		foreach (string lang in langMap.Keys.Order ())
+		foreach (string lang in langMap.Keys.Order ()) {
 			langModel.Append (lang);
+			language_codes.Add (langMap[lang]);
+		}
 
+		Adw.ComboRow.SelectedPropertyDefinition.Notify (language_row, OnLanguageChanged);
 		Adw.ComboRow.SelectedPropertyDefinition.Notify (color_scheme_row, OnColorSchemeChanged);
 		Adw.SwitchRow.ActivePropertyDefinition.Notify (menubar_row, OnMenuBarChanged);
 		Adw.SwitchRow.ActivePropertyDefinition.Notify (selection_anim_row, OnSelectionAnimChanged);
@@ -56,6 +61,10 @@ internal sealed partial class PreferencesDialog
 	{
 		settings = settingsService;
 
+		int langIndex = language_codes.IndexOf (settings.GetSetting (SettingNames.LANGUAGE, SettingDefaults.LANGUAGE));
+		if (langIndex >= 0 && langIndex < language_codes.Count)
+			language_row.SetSelected ((uint) langIndex);
+
 		int schemeIndex = settings.GetSetting (SettingNames.COLOR_SCHEME, 0);
 		color_scheme_row.SetSelected ((uint) schemeIndex);
 
@@ -66,6 +75,22 @@ internal sealed partial class PreferencesDialog
 			Pinta.Core.SettingNames.CANVAS_SELECTION_ANIMATED,
 			Pinta.Core.SettingDefaults.CANVAS_SELECTION_ANIMATED);
 		selection_anim_row.Active = selectionAnimated;
+	}
+
+	private void OnLanguageChanged (Object sender, NotifySignalArgs args)
+	{
+		int langIndex = (int) language_row.Selected;
+		string langCode = language_codes[langIndex];
+
+		// Don't trigger the restart message when the setting is loaded on startup.
+		string currentLang = settings.GetSetting (SettingNames.LANGUAGE, SettingDefaults.LANGUAGE);
+		if (langCode == currentLang)
+			return;
+
+		settings.PutSetting (SettingNames.LANGUAGE, langCode);
+
+		// Changing the language requires restarting Pinta.
+		ShowRestartMessage ();
 	}
 
 	private void OnColorSchemeChanged (Object sender, NotifySignalArgs args)
