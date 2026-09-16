@@ -47,6 +47,7 @@ Thanks to the following contributors who worked on this release:
 - Added a preferences dialog which contains general preferences for the application (#2261)
   - Moved the color scheme and menubar options from the View menu into the preferences dialog (#2261, #2272)
   - Added a preference for enabling the selection outline animation (#2187, #2272)
+  - Added a preference for changing the language (#2317, #1417)
 
 ### Changed
 - Upgraded the minimum required .NET version to 10.0 (#2081)
