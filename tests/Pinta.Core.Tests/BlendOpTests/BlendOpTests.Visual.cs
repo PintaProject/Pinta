@@ -11,7 +11,8 @@ partial class BlendOpTests
 		UserBlendOps.ScreenBlendOp screenOp,
 		UserBlendOps.DarkenBlendOp darkenOp,
 		UserBlendOps.LightenBlendOp lightenOp,
-		UserBlendOps.DifferenceBlendOp differenceOp)
+		UserBlendOps.DifferenceBlendOp differenceOp,
+		UserBlendOps.ColorDodgeBlendOp colorDodgeOp)
 	{
 		yield return new (normalOp, "visual_blended_normal.png");
 		yield return new (multiplyOp, "visual_blended_multiply.png");
@@ -19,5 +20,6 @@ partial class BlendOpTests
 		yield return new (darkenOp, "visual_blended_darken.png");
 		yield return new (lightenOp, "visual_blended_lighten.png");
 		yield return new (differenceOp, "visual_blended_difference.png");
+		yield return new (colorDodgeOp, "visual_blended_colordodge.png");
 	}
 }

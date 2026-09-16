@@ -78,21 +78,6 @@ public sealed class UserLayer : Layer
 		}
 	}
 
-	public void Rotate (
-		DegreesAngle angle,
-		Size old_size,
-		Size new_size)
-	{
-		RadiansAngle radians = angle.ToRadians ();
-
-		Matrix xform = CairoExtensions.CreateIdentityMatrix ();
-		xform.Translate (new_size.Width / 2.0, new_size.Height / 2.0);
-		xform.Rotate (radians.Radians);
-		xform.Translate (-old_size.Width / 2.0, -old_size.Height / 2.0);
-
-		ApplyTransform (xform, old_size, new_size);
-	}
-
 	public override void Crop (RectangleI rect, Path? selection)
 	{
 		base.Crop (rect, selection);

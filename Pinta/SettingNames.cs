@@ -4,6 +4,8 @@ namespace Pinta;
 
 internal static class SettingNames
 {
+	internal const string LANGUAGE = "language";
+
 	internal const string NEW_IMAGE_WIDTH = "new-image-width";
 	internal const string NEW_IMAGE_HEIGHT = "new-image-height";
 	internal const string NEW_IMAGE_BACKGROUND = "new-image-bg";
@@ -40,6 +42,8 @@ internal static class SettingNames
 
 internal static class SettingDefaults
 {
+	public const string LANGUAGE = "";
+
 	// On macOS the global menubar should be used by default.
 	internal static bool MenuBarShown () => SystemManager.GetOperatingSystem () == OS.Mac;
 }
