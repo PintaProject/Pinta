@@ -42,10 +42,14 @@ internal sealed class MainClass
 			MacInterop.Environment.Init ();
 		}
 
+		// Note we use a temporary settings manager here to avoid constructing
+		// the global PintaCore (and initializing GTK etc) before the translation setup occurs.
+		string langPref = new SettingsManager ().GetSetting (SettingNames.LANGUAGE, SettingDefaults.LANGUAGE);
+
 		string localeDir = Path.Combine (SystemManager.GetDataRootDirectory (), "locale");
 
 		try {
-			Translations.Init (localeDir);
+			Translations.Init (localeDir, langPref);
 		} catch (Exception ex) {
 			Console.WriteLine (ex);
 		}

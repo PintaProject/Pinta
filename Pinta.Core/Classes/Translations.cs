@@ -37,7 +37,7 @@ public static class Translations
 	private const string PintaTextDomain = "pinta";
 	private static string locale_dir = "";
 
-	public static void Init (string localeDir)
+	public static void Init (string localeDir, string langPref)
 	{
 		locale_dir = localeDir;
 
@@ -45,16 +45,22 @@ public static class Translations
 		// before GTK is initialized.
 		GLib.Module.Initialize ();
 
-		// Follow the dotnet UI culture to choose which language is used by default, since this
-		// correctly picks up system language settings on macOS, for example.
+		// If the user has a non-default language preference selected, this overrides any language
+		// setting from the environment.
+		// Otherwise, the default is to follow the dotnet UI culture in the absence of any env vars,
+		// since this correctly picks up system language settings on macOS, for example.
 		// Pinta (along with GTK / libadwaita) use the native version of gettext for translations
-		// so here we set the LANGUAGE environment variable to make these consistent.
-		if (GLib.Functions.Getenv ("LANGUAGE") is null) {
+		// so we set the LANGUAGE environment variable to make these consistent.
+		string? langOverride = null;
+		if (!string.IsNullOrEmpty (langPref)) {
+			langOverride = langPref;
+		} else if (GLib.Functions.Getenv ("LANGUAGE") is null) {
 			CultureInfo cultureInfo = CultureInfo.CurrentUICulture;
-			string lang = cultureInfo.Name.Replace ('-', '_'); // convert names like en-CA to en_CA
-
-			GLib.Functions.Setenv ("LANGUAGE", lang, overwrite: true);
+			langOverride = cultureInfo.Name.Replace ('-', '_'); // convert names like en-CA to en_CA
 		}
+
+		if (!string.IsNullOrEmpty (langOverride))
+			GLib.Functions.Setenv ("LANGUAGE", langOverride, overwrite: true);
 
 		// Initialize gettext for Pinta's translations.
 		IntlExtensions.BindTextDomain (PintaTextDomain, localeDir);
