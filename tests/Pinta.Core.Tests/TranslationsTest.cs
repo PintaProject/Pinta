@@ -15,7 +15,7 @@ internal sealed class TranslationsTest
 		// The test runs from a path like Pinta/tests/Pinta.Core.Tests/bin/Debug/net10.0,
 		// so we need the relative path to the translation folder (Pinta/build/bin/locale).
 		string localeDir = "../../../../../build/bin/locale";
-		Translations.Init (localeDir);
+		Translations.Init (localeDir, langPref: string.Empty);
 	}
 
 	[OneTimeTearDown]
