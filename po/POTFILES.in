@@ -1,5 +1,6 @@
 xdg/com.github.PintaProject.Pinta.desktop.in
 xdg/com.github.PintaProject.Pinta.metainfo.xml.in
+[type: gettext/glade]./Pinta.Gui.Addins/AddinInfoView.ui
 [type: gettext/glade]./Pinta/Dialogs/PreferencesDialog.ui
 Pinta.Core/Actions/AddinActions.cs
 Pinta.Core/Actions/AdjustmentsActions.cs

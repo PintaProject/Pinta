@@ -47,6 +47,7 @@ Thanks to the following contributors who worked on this release:
 - Added a preferences dialog which contains general preferences for the application (#2261)
   - Moved the color scheme and menubar options from the View menu into the preferences dialog (#2261, #2272)
   - Added a preference for enabling the selection outline animation (#2187, #2272)
+  - Added a preference for changing the language (#2317, #1417)
 
 ### Changed
 - Upgraded the minimum required .NET version to 10.0 (#2081)
@@ -83,6 +84,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed issue with spin button parameters not immediately updating for effects (#1565, #2294)
 - Fixed bug where a zero-sized selection could sometimes be created when single clicking, instead of deselecting (#2022, #2009)
 - Fixed issue with the canvas not redrawing properly after certain brush movements (#2302, #2292)
+- Fixed alpha handling in the TGA exporter (#2318, #2315)
 
 ## [3.1.2](https://github.com/PintaProject/Pinta/release/tag/3.1.2) - 2026/03/29
 

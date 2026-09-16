@@ -11,7 +11,8 @@ partial class BlendOpTests
 		UserBlendOps.ScreenBlendOp screenOp,
 		UserBlendOps.DarkenBlendOp darkenOp,
 		UserBlendOps.LightenBlendOp lightenOp,
-		UserBlendOps.DifferenceBlendOp differenceOp)
+		UserBlendOps.DifferenceBlendOp differenceOp,
+		UserBlendOps.ColorDodgeBlendOp colorDodgeOp)
 	{
 		yield return new (normalOp, "Normal");
 		yield return new (multiplyOp, "Multiply");
@@ -19,5 +20,6 @@ partial class BlendOpTests
 		yield return new (darkenOp, "Darken");
 		yield return new (lightenOp, "Lighten");
 		yield return new (differenceOp, "Difference");
+		yield return new (colorDodgeOp, "ColorDodge");
 	}
 }
