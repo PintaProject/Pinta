@@ -66,7 +66,7 @@ is genuine application output; nothing is mocked or painted in afterwards.
 | It's lightweight | `new-image`, `palette`, then `step-backdrop` → `step-circle` → `step-shapes` → `step-headline`, the campaign gaining an editable layer in each frame |
 | Full layer support | `file-drop`, `layer-menu`, `layer-properties`, `layer-rotate-zoom` — UI crops, still taken from the visual suite |
 | An impressive toolkit | `select-rectangle`, `select-ellipse`, `select-magic-wand`, `draw-line`, `draw-freeform`, `gradient-radial` — every one over the finished artwork |
-| A real image editor | `adjustments-menu`, `adjust-hue-saturation`, `effect-oil-painting`, `effect-motion-blur`, `effect-pencil-sketch`, `effects-menu` |
+| A real photo editor | `adjustments-menu`, `adjust-hue-saturation`, `effect-oil-painting`, `effect-motion-blur`, `effect-pencil-sketch`, `effects-menu` |
 | Cross-platform | `save-as`, `workspace-light`, `workspace-narrow` |
 
 Three decisions in that script worth keeping:
@@ -94,15 +94,17 @@ in the HTML to match, or the e2e dimension check fails.
 
 | Field | Value |
 | --- | --- |
-| Title | `Free Online Paint App for Quick Designs \| Pinta Online` |
+| Title | `Free Online Paint & Photo Editor for Quick Designs \| Pinta Online` |
 | Canonical | `https://paint.rip/promo/` |
 | Structured data | `WebPage`, `ImageObject`, `BreadcrumbList`, `WebSite`, `SoftwareApplication`, `FAQPage` |
 | OG type | `article` (the editor and about pages use `website`) |
 
-`FAQPage` is the piece `/about/` does not have. Its six questions are eligible for FAQ rich
-results, and each answer in the JSON-LD is a verbatim match for a rendered `<summary>` — Google
-penalizes markup that describes content the page does not actually show, and the e2e test now
-enforces the match.
+`FAQPage` is the piece `/about/` does not have. Do not expect FAQ rich results from it: since
+2023 Google shows those only for well-known government and health sites. The markup still
+describes the page accurately, and each answer in the JSON-LD is a verbatim match for a rendered
+`<summary>` — Google penalizes markup that describes content the page does not actually show, and
+the e2e test enforces the match. The visible questions are what earn rankings for question-style
+queries.
 
 ### Keyword targets
 
@@ -116,6 +118,11 @@ the two pages do not compete for the same results:
 | Comparison | paint.net alternative online, MS Paint alternative browser, free Photoshop alternative online |
 | Platform | image editor for Chromebook, paint app for Linux, online editor that works offline |
 | Capability | online image editor with layers, free editor with curves adjustment |
+| Generic editor | edit images online, paint online photo editor, online image paint, online painting editor |
+
+`/about/` owns the Pinta-branded queries instead: pinta online, pinta editor, pinta image
+editor, pinta photo, pinta blur, pinta website. See [`search-queries.md`](search-queries.md) for
+the Search Console audit behind both lists.
 
 ### The duplicate-content risk, stated plainly
 

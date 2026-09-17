@@ -217,13 +217,15 @@ test.describe('search and sharing metadata', () => {
   test('serves a crawlable visual feature page at its canonical URL', async ({ page, request }) => {
     const response = await page.goto('/about/');
     expect(response?.status()).toBe(200);
-    await expect(page).toHaveTitle('Pinta Online Features – Free Web Image Editor | Paint.rip');
+    await expect(page).toHaveTitle('Pinta Online Features – Free Pinta Image & Photo Editor | Paint.rip');
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://paint.rip/about/');
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
       'content',
-      /drawing tools, layers, selections, text, 55 built-in and optional effects/i,
+      /free Pinta image and photo editor in your browser/i,
     );
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('ready in your browser');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(
+      /The Pinta image editor,\s*ready in your browser/,
+    );
     await expect(page.getByRole('link', { name: /start painting now/i })).toHaveAttribute('href', '/');
 
     const screenshots = page.locator('main img[src^="/about/assets/"]');
@@ -257,13 +259,15 @@ test.describe('search and sharing metadata', () => {
   test('serves a crawlable promo landing page with FAQ structured data', async ({ page, request }) => {
     const response = await page.goto('/promo/');
     expect(response?.status()).toBe(200);
-    await expect(page).toHaveTitle('Free Online Paint App for Quick Designs | Pinta Online');
+    await expect(page).toHaveTitle('Free Online Paint & Photo Editor for Quick Designs | Pinta Online');
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://paint.rip/promo/');
     await expect(page.locator('meta[name="description"]')).toHaveAttribute(
       'content',
-      /layers, selections, shapes, gradients, curves, and 55 effects/i,
+      /edit images online in a free, open-source paint and photo editor/i,
     );
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('when a design has to be done now');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(
+      /The online paint app I\s+open\s*when a design has to be done now/,
+    );
     await expect(page.getByRole('link', { name: /open the editor/i })).toHaveAttribute('href', '/');
     // The promo page is only worth publishing if it feeds the editor and the deeper pages.
     await expect(page.locator('main a[href="/about/"]')).toHaveCount(1);
