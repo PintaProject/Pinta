@@ -138,8 +138,8 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 			Gio.File file = fcd.GetFile ()!;
 
-			// Note that we can't use file.GetDisplayName() because the file doesn't exist.
-			string displayName = file.GetParent ()!.GetRelativePath (file)!;
+			// Use this instead of file.GetDisplayName() in case file was not created
+			string displayName = file.GetSafeDisplayName ();
 
 			// Always follow the extension rather than the file type drop down
 			// ie: if the user chooses to save a "jpeg" as "foo.png", we are going
@@ -205,8 +205,8 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			await chrome.ShowMessageDialog (
 				parent,
 				Translations.GetString ("Pinta does not support saving images in this file format."),
-				//Use this instead of file.GetDisplayName() in case file was not created
-				file.GetParent ()!.GetRelativePath (file)!);
+				// Use this instead of file.GetDisplayName() in case file was not created
+				file.GetSafeDisplayName ());
 
 			return false;
 		}
@@ -222,6 +222,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			format.Exporter.Export (document, file, parent);
 
 		} catch (GLib.GException e) when (e.Message == "Image too large to be saved as ICO") {
+			// This has a generic error code of GDK_PIXBUF_ERROR_BAD_OPTION so we need to check the message text.
 
 			string primary = Translations.GetString ("Image too large");
 			string secondary = Translations.GetString ("ICO files can not be larger than 256 x 256 pixels.");
@@ -230,12 +231,15 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 			return false;
 
-		} catch (GLib.GException e) when (e.Message.Contains ("Permission denied") && e.Message.Contains ("Failed to open")) {
+		} catch (GLib.GException e) when (e.Matches (Gio.IOErrorEnum.PermissionDenied) || e.Matches (Gio.IOErrorEnum.ReadOnly)) {
 
 			string primary = Translations.GetString ("Failed to save image");
 
+			// Use this instead of file.GetDisplayName() in case file was not created
+			string fileName = file.GetSafeDisplayName ();
+
 			// Translators: {0} is the name of a file that the user does not have write permission for.
-			string secondary = Translations.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only.", file);
+			string secondary = Translations.GetString ("You do not have access to modify '{0}'. The file or folder may be read-only.", fileName);
 
 			await chrome.ShowMessageDialog (parent, primary, secondary);
 
