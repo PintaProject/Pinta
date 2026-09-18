@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-15 00:31+0000\n"
-"PO-Revision-Date: 2026-09-17 02:41+0000\n"
+"PO-Revision-Date: 2026-09-19 00:01+0000\n"
 "Last-Translator: lebxr <elbaceda@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/pinta/pinta/es/>"
 "\n"
@@ -2238,7 +2238,7 @@ msgstr "Informar de un error..."
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
 msgid "Repository"
-msgstr ""
+msgstr "Repositorio"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
