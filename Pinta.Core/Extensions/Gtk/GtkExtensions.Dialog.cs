@@ -38,10 +38,9 @@ partial class GtkExtensions
 		Gio.File? choice;
 		try {
 			choice = await fileDialog.OpenAsync (parent);
-		} catch (GLib.GException) {
+		} catch (GLib.GException e) when (e.Matches (Gtk.DialogError.Dismissed)) {
+			// An error is thrown if the user dismisses the dialog.
 			// Docs: https://docs.gtk.org/gtk4/method.FileDialog.open_finish.html
-			// According to the documentation, an error is set if the user cancels
-			// TODO: filter by error code once gir.core allows for that
 			return null;
 		}
 
@@ -55,10 +54,9 @@ partial class GtkExtensions
 		Gio.ListModel? selection;
 		try {
 			selection = await fileDialog.OpenMultipleAsync (parent);
-		} catch (GLib.GException) {
+		} catch (GLib.GException e) when (e.Matches (Gtk.DialogError.Dismissed)) {
+			// An error is thrown if the user dismisses the dialog.
 			// Docs: https://docs.gtk.org/gtk4/method.FileDialog.open_multiple_finish.html
-			// According to the documentation, an error is set if the user cancels
-			// TODO: filter by error code once gir.core allows for that
 			return null;
 		}
 

@@ -54,6 +54,20 @@ public static class GioExtensions
 	}
 
 	/// <summary>
+	/// GetDisplayName() throws errors if e.g. the file doesn't exist.
+	/// In such cases, this version attempts to produce a string that might at least
+	/// be useful for displaying an error message.
+	/// </summary>
+	public static string GetSafeDisplayName (this Gio.File file)
+	{
+		try {
+			return file.GetDisplayName ();
+		} catch (GLib.GException) {
+			return file.GetParent ()?.GetRelativePath (file) ?? string.Empty;
+		}
+	}
+
+	/// <summary>
 	/// Returns an output stream for creating or overwriting the file.
 	/// NOTE: if you don't wrap this in a GLib.GioStream, you must call Close() !
 	/// </summary>

@@ -402,7 +402,7 @@ public sealed partial class TextEngine
 		string? txt;
 		try {
 			txt = await clipboard.ReadTextAsync ();
-		} catch (GLib.GException) {
+		} catch (GLib.GException e) when (e.Matches (Gio.IOErrorEnum.NotSupported)) {
 			// The clipboard probably contained an image.
 			return false;
 		}
