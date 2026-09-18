@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-15 00:31+0000\n"
-"PO-Revision-Date: 2026-09-15 01:51+0000\n"
+"PO-Revision-Date: 2026-09-19 00:02+0000\n"
 "Last-Translator: Aivaz Latypov <mr.aivazlatypov@yandex.ru>\n"
 "Language-Team: Tatar <https://hosted.weblate.org/projects/pinta/pinta/tt/>\n"
 "Language: tt\n"
@@ -1171,19 +1171,19 @@ msgstr ""
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:213
 msgid "Image larger than canvas"
-msgstr ""
+msgstr "Сүрәт холстка караганда зуррак"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
 msgid "Image too large"
-msgstr ""
+msgstr "Сүрәт бик зур"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:260
 msgid "Import From File"
-msgstr ""
+msgstr "Файлдан импортлау"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:89
 msgid "Import from File..."
-msgstr ""
+msgstr "Файлдан импортлау..."
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:57
 msgid ""
@@ -1193,35 +1193,40 @@ msgid ""
 "Press Enter to finish the selection.\n"
 "Press Backspace to delete the last point."
 msgstr ""
+"Ирекле форма режимында сайлау мәйданы контурын сызу өчен басыгыз да сөртеп "
+"тартыгыз.\n"
+"Полигон режимында сайлауга яңа нокта өстәр өчен басыгыз да сөртеп тартыгыз.\n"
+"Сайлауны тәмамлау өчен Enter басыгыз.\n"
+"Соңгы ноктаны бетерү өчен Backspace басыгыз."
 
 #: ../Pinta.Core/Actions/ViewActions.cs:214
 msgid "Inches"
-msgstr ""
+msgstr "Дюймнар"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:146
 msgid "Ink Outline"
-msgstr ""
+msgstr "Сия контуры"
 
 #: ../Pinta.Effects/Effects/InkSketchEffect.cs:35
 msgid "Ink Sketch"
-msgstr ""
+msgstr "Сия белән эскиз"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:284
 msgid "Input"
-msgstr ""
+msgstr "Керү"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:283
 msgid "Input Histogram"
-msgstr ""
+msgstr "Кертелгән гистограмма"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:129
 #: ../Pinta.Gui.Addins/InstallDialog.cs:263
 msgid "Install"
-msgstr ""
+msgstr "Урнаштыру"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:268
 msgid "Install Extension Package"
-msgstr ""
+msgstr "Киңәйтүне билгеләргә"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:127
 msgid "Install from file..."
@@ -1279,12 +1284,13 @@ msgid "Keyboard Shortcuts"
 msgstr "Клавиатура кыска юллары"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
+#, fuzzy
 msgid "Landscape"
-msgstr ""
+msgstr "Альбомлык"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
-msgstr ""
+msgstr "Лассо режимы"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:55
 msgid "Lasso Select"
@@ -1495,7 +1501,7 @@ msgstr ""
 
 #: ../Pinta/MainWindow.cs:450
 msgid "Main Menu"
-msgstr ""
+msgstr "Төп меню"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:112
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:75
