@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-15 00:31+0000\n"
-"PO-Revision-Date: 2026-09-19 00:02+0000\n"
+"PO-Revision-Date: 2026-09-19 15:16+0000\n"
 "Last-Translator: Aivaz Latypov <mr.aivazlatypov@yandex.ru>\n"
 "Language-Team: Tatar <https://hosted.weblate.org/projects/pinta/pinta/tt/>\n"
 "Language: tt\n"
@@ -1506,7 +1506,7 @@ msgstr "Төп меню"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:112
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:75
 msgid "Maintain aspect ratio"
-msgstr ""
+msgstr "Пропорцияны саклау"
 
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:26
 msgid "Mandelbrot Fractal"
@@ -1515,29 +1515,31 @@ msgstr ""
 #. Translators: Gradient with bright, high-energy, and otherworldly tones of blue, purple, and yellow, along with a dark red that gives off the appearance of burning
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:51
 msgid "Martian Lava"
-msgstr ""
+msgstr "Марс лавасы"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
-msgstr ""
+msgstr "Иң зур зурлык"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
+#, fuzzy
 msgid "Median"
-msgstr ""
+msgstr "Уртача"
 
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:290
+#, fuzzy
 msgid "Medium"
-msgstr ""
+msgstr "Уртача"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:335
 msgid "Merge Layer Down"
-msgstr ""
+msgstr "Түбәндәге белән берләштеру"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
-msgstr ""
+msgstr "Минималь зурлык"
 
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:446
@@ -1546,15 +1548,15 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:322
 msgid "Mode"
-msgstr ""
+msgstr "Режим"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:934
 msgid "Modified"
-msgstr ""
+msgstr "Үзгәртелгән"
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
-msgstr ""
+msgstr "Тагын мәгълүмат..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
 msgid "Motion Blur"
@@ -1563,63 +1565,63 @@ msgstr ""
 #: ../Pinta.Core/Actions/LayerActions.cs:121
 #: ../Pinta.Core/Actions/LayerActions.cs:316
 msgid "Move Layer Down"
-msgstr ""
+msgstr "Катламны аска күчерге"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:115
 #: ../Pinta.Core/Actions/LayerActions.cs:300
 msgid "Move Layer Up"
-msgstr ""
+msgstr "Катламны өскә күчерү"
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:45
 msgid "Move Selected Pixels"
-msgstr ""
+msgstr "Сайланган пиксельләрне күчерге"
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:46
 msgid "Move Selection"
-msgstr ""
+msgstr "Сайлауны күчерге"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:32
 msgid "Multiply"
-msgstr ""
+msgstr "Күбәйт"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:61
 msgid "Name:"
-msgstr ""
+msgstr "Исем:"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:23
 msgid "Nearest Neighbor"
-msgstr ""
+msgstr "Иң якын күрше"
 
 #: ../Pinta.Core/Actions/FileActions.cs:63
 msgid "New"
-msgstr ""
+msgstr "Яңа"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:139
 #: ../Pinta/Dialogs/NewImageDialog.cs:194
 msgid "New Image"
-msgstr ""
+msgstr "Яңа сурәт"
 
 #: ../Pinta.Core/Actions/FileActions.cs:67
 msgid "New Screenshot..."
-msgstr ""
+msgstr "Яңа скриншот..."
 
 #: ../Pinta/Actions/Edit/ResizePaletteAction.cs:71
 msgid "New palette size:"
-msgstr ""
+msgstr "Яңа палитра зурлыгы:"
 
 #: ../Pinta.Core/Actions/FileActions.cs:59
 msgid "New..."
-msgstr ""
+msgstr "Яңа..."
 
 #: ../Pinta.Gui.Addins/AddinListView.cs:60
 msgid "No Items Found"
-msgstr ""
+msgstr "Берни табылмады"
 
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:28
 #: ../Pinta.Effects/Effects/MedianEffect.cs:27
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:32
 msgid "Noise"
-msgstr ""
+msgstr "Тавыш"
 
 #. Translators: 'Normal' refers to the font-variant text property
 #. Translators: 'Normal' (400) refers to the font-weight text property
@@ -1628,38 +1630,38 @@ msgstr ""
 #: ../Pinta.Tools/Tools/EraserTool.cs:336 ../Pinta.Tools/Tools/TextTool.cs:182
 #: ../Pinta.Tools/Tools/TextTool.cs:284 ../Pinta.Tools/Tools/TextTool.cs:404
 msgid "Normal"
-msgstr ""
+msgstr "Гадәти"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:341
 msgid "Normal Blending"
-msgstr ""
+msgstr "Гадәти каплау"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:97
 msgid "Normal Size"
-msgstr ""
+msgstr "Гадәти зурлык"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:405
 msgid "Normal and Outline"
-msgstr ""
+msgstr "Гадәти һәм контур"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:172
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:187
 msgid "Number of Cells"
-msgstr ""
+msgstr "Күзәнәкләр саны"
 
 #: ../Pinta/Main.cs:56
 msgid "Number of threads to use for rendering"
-msgstr ""
+msgstr "Рендерлау өчен кулланыла торган җепләр саны"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:493
 msgid "OK"
-msgstr ""
+msgstr "ОК"
 
 #: ../Pinta.Effects/Effects/AlignObjectEffect.cs:14
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:22
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:22
 msgid "Object"
-msgstr ""
+msgstr "Объект"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:120
 #: ../Pinta.Effects/Effects/RadialBlurEffect.cs:139
@@ -1667,25 +1669,25 @@ msgstr ""
 #: ../Pinta.Effects/Effects/ZoomBlurEffect.cs:140
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:60
 msgid "Offset"
-msgstr ""
+msgstr "Кучерелү"
 
 #: ../Pinta.Core/Actions/EditActions.cs:150
 #: ../Pinta/Actions/Edit/OffsetSelectionAction.cs:79
 #: ../Pinta/Dialogs/OffsetSelectionDialog.cs:52
 msgid "Offset Selection"
-msgstr ""
+msgstr "Кучерелү сайлау"
 
 #: ../Pinta.Effects/Effects/OilPaintingEffect.cs:26
 msgid "Oil Painting"
-msgstr ""
+msgstr "Майлы буяулар"
 
 #: ../Pinta/Dialogs/LayerPropertiesDialog.cs:85
 msgid "Opacity:"
-msgstr ""
+msgstr "Ачыклык җитмәү:"
 
 #: ../Pinta.Core/Actions/FileActions.cs:77
 msgid "Open"
-msgstr ""
+msgstr "Ачу"
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:37
 msgid "Open Curve Shape"
@@ -2123,23 +2125,23 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:26
 msgid "Reduce Noise"
-msgstr ""
+msgstr "Тавышны киметеге"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:13
 msgid "Reflect"
-msgstr ""
+msgstr "Чагылдыру"
 
 #: ../Pinta.Effects/Effects/DentsEffect.cs:139
 msgid "Refraction"
-msgstr ""
+msgstr "Сындыру"
 
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:119
 msgid "Refresh"
-msgstr ""
+msgstr "Яңарту"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:91
 msgid "Released under the MIT X11 License."
-msgstr ""
+msgstr "MIT X11 лицензиясе астында чыгарылган."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:40
 msgid "Relief"
@@ -2147,7 +2149,7 @@ msgstr ""
 
 #: ../Pinta/Actions/Layers/LayerPropertiesAction.cs:107
 msgid "Rename Layer"
-msgstr ""
+msgstr "Катламга яңа исем биреге"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:25
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:32
@@ -2155,7 +2157,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:32
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:27
 msgid "Render"
-msgstr ""
+msgstr "Сурәт ясау"
 
 #: ../Pinta.Core/Managers/LivePreviewManager.cs:109
 msgid "Rendering Effect"
@@ -2981,7 +2983,7 @@ msgstr ""
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:135
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:139
 msgid "pixels"
-msgstr ""
+msgstr "пиксельләр"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:73
 msgid "translator-credits"
