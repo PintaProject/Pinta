@@ -67,6 +67,8 @@ Thanks to the following contributors who worked on this release:
 - More compact layout for the toolbox widget (#2266)
 - Added new icons for several effects and menu buttons (#2102)
 - Menu buttons now display popout nested menus instead of sliding menus (#2131)
+- Changes for add-in authors
+  - Add-ins should use `Pinta.Core.Translations.GetString()` to use Pinta's translations for strings such as standard effect categories (#1933, #1935)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
