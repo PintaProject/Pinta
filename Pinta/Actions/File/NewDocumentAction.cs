@@ -78,7 +78,7 @@ internal sealed class NewDocumentAction : IActionHandler
 
 		settings.PutSetting (SettingNames.NEW_IMAGE_WIDTH, newImageOptions.NewImageSize.Width);
 		settings.PutSetting (SettingNames.NEW_IMAGE_HEIGHT, newImageOptions.NewImageSize.Height);
-		settings.PutSetting (SettingNames.NEW_IMAGE_BACKGROUND, newImageOptions.NewImageBackgroundType);
+		settings.PutSetting (SettingNames.NEW_IMAGE_BACKGROUND, (int) newImageOptions.NewImageBackgroundType);
 	}
 
 	private async Task<NewImageDialogOptions> GetDialogOptions ()
@@ -106,9 +106,9 @@ internal sealed class NewDocumentAction : IActionHandler
 			Size: new (
 				Width: settings.GetSetting<int> (SettingNames.NEW_IMAGE_WIDTH, 800),
 				Height: settings.GetSetting<int> (SettingNames.NEW_IMAGE_HEIGHT, 600)),
-			Background: settings.GetSetting<BackgroundType> (
+			Background: (BackgroundType) settings.GetSetting<int> (
 				SettingNames.NEW_IMAGE_BACKGROUND,
-				BackgroundType.White),
+				(int) BackgroundType.White),
 			UsingClipboard: false);
 	}
 
