@@ -522,11 +522,9 @@ public sealed partial class ColorPickerDialog
 		bool showSwatches = !livePalette;
 		swatch_box.SetVisible (showSwatches);
 
-		// Set initial selected row
 		ImmutableArray<Gtk.DrawingArea> colorDisplays = CreateColorDisplays (adjustable);
 		foreach (var colorDisplay in colorDisplays)
 			color_display_list.Append (colorDisplay);
-		color_display_list.SelectRow (color_display_list.GetRowAtIndex (primarySelected ? 0 : 1));
 
 		if (adjustable is PaletteColors paletteColors)
 			color_display_swap.SetVisible (true);
@@ -557,6 +555,9 @@ public sealed partial class ColorPickerDialog
 		green_slider.Color = initialColor;
 		blue_slider.Color = initialColor;
 		alpha_slider.Color = initialColor;
+
+		// Set initially selected row at the end since this triggers events.
+		color_display_list.SelectRow (color_display_list.GetRowAtIndex (primarySelected ? 0 : 1));
 
 		CreateTitleBar ();
 	}
