@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
-"PO-Revision-Date: 2026-09-04 02:48+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
+"PO-Revision-Date: 2026-09-17 02:41+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
 "Language-Team: Irish <https://hosted.weblate.org/projects/pinta/pinta/ga/>\n"
 "Language: ga\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
-"X-Generator: Weblate 2026.9\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -108,7 +108,7 @@ msgstr "Gach Litir Bheag"
 msgid "All files"
 msgstr "Gach comhad"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -174,6 +174,10 @@ msgstr "Ealaíonta"
 msgid "Atkinson"
 msgstr "Atkinson"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr "Údar"
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Uathoibríoch"
@@ -186,18 +190,13 @@ msgstr "Bearradh Uathoibríoch"
 msgid "Auto Level"
 msgstr "Leibhéal Uathoibríoch"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr "Scrollaigh Uathoibríoch Múchta"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr "Scrollaigh Uathoibríoch Ar Siúl"
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Ar fáil sa stórlann: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -245,7 +244,7 @@ msgstr "Mód Cumaisc"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Gorm"
 
@@ -289,12 +288,12 @@ msgstr "Bun ar Chlé"
 msgid "Bottom Right"
 msgstr "Bun ar Dheis"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Gile"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Gile / Codarsnacht"
 
@@ -343,6 +342,10 @@ msgstr "Socruithe Eangach Canbháis"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Eangach Canbháis..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr "Catagóir"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -604,7 +607,7 @@ msgstr "Ábhar"
 msgid "Contiguous"
 msgstr "Comhtheagmhálach"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Codarsnacht"
@@ -648,7 +651,7 @@ msgstr "Clúdú"
 msgid "Crop to Selection"
 msgstr "Crap go Roghnúchán"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "Pailéad Reatha"
 
@@ -656,7 +659,7 @@ msgstr "Pailéad Reatha"
 msgid "Curved"
 msgstr "Cuartha"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Cuair"
@@ -749,10 +752,9 @@ msgstr "Díthráil"
 msgid "Do not switch tool"
 msgstr "Ná athraigh an uirlis"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "Méid íoslódála: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "Méid an íoslódála"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -833,7 +835,7 @@ msgstr "Scriosán"
 msgid "Error"
 msgstr "Botún"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "Modh Scaipthe Earráide"
 
@@ -1054,7 +1056,7 @@ msgstr "Grádán Modhnaithe"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Uaine"
 
@@ -1118,7 +1120,7 @@ msgstr "Dearg cothrománach (D)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Lí"
 
@@ -1232,7 +1234,7 @@ msgstr "Suiteáil Pacáiste Síneadh"
 msgid "Install from file..."
 msgstr "Suiteáil ó chomhad é..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Suiteáil..."
 
@@ -1410,7 +1412,7 @@ msgstr ""
 "Cliceáil ar dheis chun an tánaisteach-dath a úsáid."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1609,7 +1611,7 @@ msgstr "Mód"
 msgid "Modified"
 msgstr "Athraithe"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "Tuilleadh Eolais..."
 
@@ -1824,16 +1826,16 @@ msgstr "Forscríobh"
 msgid "Paint Bucket"
 msgstr "Buicéad Péinte"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "scuab phéinte"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Pailéad"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "Foinse Pailéid"
 
@@ -2023,7 +2025,7 @@ msgstr "Caomhnaigh"
 msgid "Preset Gradient"
 msgstr "Grádán Réamhshocraithe"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "Pailéid Réamhshocraithe"
 
@@ -2150,7 +2152,7 @@ msgstr "Síol Torainn Randamach"
 msgid "Random Point Locations"
 msgstr "Suíomhanna Pointe Randamacha"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "Dathanna Le Déanaí"
 
@@ -2168,7 +2170,7 @@ msgstr "Roghnú Dronuilleog"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Dearg"
 
@@ -2237,6 +2239,10 @@ msgstr ""
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Tuairiscigh Fabht..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr "Stórlann"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2362,7 +2368,7 @@ msgid "Sampling"
 msgstr "Sampláil"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "Satharn"
 
@@ -2777,7 +2783,7 @@ msgid "Two-Row Sierra"
 msgstr "Sierra Dhá Shraith"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Cineál"
 
@@ -2818,7 +2824,7 @@ msgstr "Aonchás"
 msgid "Uninstall"
 msgstr "Díshuiteáil"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "Díshuiteáil..."
 
@@ -2841,7 +2847,7 @@ msgstr "Formáid comhaid nach dtacaítear léi"
 msgid "Unsupported palette format"
 msgstr "Formáid pailéid nach dtacaítear léi"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "Nuashonrú..."
 
@@ -2866,14 +2872,13 @@ msgstr "Comhéadan Úsáideora"
 msgid "Using some icons from:"
 msgstr "Ag baineadh feidhm as deilbhíní as:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "Luach"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "Leagan: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Leagan"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3092,6 +3097,18 @@ msgstr "pailéad {0} ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Ar fáil sa stórlann: {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "Méid íoslódála: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "Leagan: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "Barra an roghchláir"
 
@@ -3164,9 +3181,6 @@ msgstr "{0}%"
 
 #~ msgid "Translated by:"
 #~ msgstr "Aistrithe ag:"
-
-#~ msgid "Version"
-#~ msgstr "Leagan"
 
 #~ msgid "Delay before taking a screenshot (seconds):"
 #~ msgstr "Moill roimh gabháil scáileáin a thógáil (soicindí):"

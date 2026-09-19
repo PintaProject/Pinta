@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
-"PO-Revision-Date: 2026-09-01 10:54+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
+"PO-Revision-Date: 2026-09-15 06:55+0000\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/pinta/pinta/sv/>"
 "\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -109,7 +109,7 @@ msgstr "Alla små versaler"
 msgid "All files"
 msgstr "Alla filer"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -175,6 +175,10 @@ msgstr "Konstnärlig"
 msgid "Atkinson"
 msgstr "Atkinson"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr "Utvecklare"
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Auto"
@@ -187,18 +191,13 @@ msgstr "Beskär automatiskt"
 msgid "Auto Level"
 msgstr "Autonivå"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr "Autorullning av"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr "Autorullning på"
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Tillgänglig i förråd: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -246,7 +245,7 @@ msgstr "Blandningsläge"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Blå"
 
@@ -290,12 +289,12 @@ msgstr "Vänster underkant"
 msgid "Bottom Right"
 msgstr "Höger underkant"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Ljusstyrka"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Ljus / Kontrast"
 
@@ -344,6 +343,10 @@ msgstr "Inställningar för arbetsytans stödlinjer"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Arbetsytans stödlinjer..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr "Kategori"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -604,7 +607,7 @@ msgstr "Innehåll"
 msgid "Contiguous"
 msgstr "Sammanhängande"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Kontrast"
@@ -648,7 +651,7 @@ msgstr "Täckning"
 msgid "Crop to Selection"
 msgstr "Beskär till markering"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "Aktuell palett"
 
@@ -656,7 +659,7 @@ msgstr "Aktuell palett"
 msgid "Curved"
 msgstr "Böjd"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Kurvor"
@@ -749,10 +752,9 @@ msgstr "Gitter"
 msgid "Do not switch tool"
 msgstr "Växla inte verktyg"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "Nerladdningsstorlek: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "Nedladdningsstorlek"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -832,7 +834,7 @@ msgstr "Suddgummi"
 msgid "Error"
 msgstr "Fel"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "Metod för feldiffusion"
 
@@ -1051,7 +1053,7 @@ msgstr "Toning ändrad"
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Grön"
 
@@ -1115,7 +1117,7 @@ msgstr "Horisontell röd (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Nyans"
 
@@ -1226,7 +1228,7 @@ msgstr "Installera tilläggspaket"
 msgid "Install from file..."
 msgstr "Installera från fil..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Installera..."
 
@@ -1396,7 +1398,7 @@ msgstr ""
 "Högerklicka för att använda den sekundära färgen."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1593,7 +1595,7 @@ msgstr "Läge"
 msgid "Modified"
 msgstr "Ändrad"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "Mer information..."
 
@@ -1808,16 +1810,16 @@ msgstr "Skriv över"
 msgid "Paint Bucket"
 msgstr "Färghink"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "Pensel"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Palett"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "Palettkälla"
 
@@ -2006,7 +2008,7 @@ msgstr "Bevara"
 msgid "Preset Gradient"
 msgstr "Förinställd toning"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "Förinställda paletter"
 
@@ -2133,7 +2135,7 @@ msgstr "Slumpmässigt brus"
 msgid "Random Point Locations"
 msgstr "Slumpmässiga punktplatser"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "Nyligen använda färger"
 
@@ -2151,7 +2153,7 @@ msgstr "Rektangelmarkering"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Röd"
 
@@ -2218,6 +2220,10 @@ msgstr "Byter ut rubrikfältet mot en separat menyrad och verktygsrad."
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Rapportera fel..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr "Kodförråd"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2343,7 +2349,7 @@ msgid "Sampling"
 msgstr "Provtagning"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "Mättnad"
 
@@ -2755,7 +2761,7 @@ msgid "Two-Row Sierra"
 msgstr "Two-Row Sierra"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Typ"
 
@@ -2796,7 +2802,7 @@ msgstr "Unicase"
 msgid "Uninstall"
 msgstr "Avinstallera"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "Avinstallera..."
 
@@ -2819,7 +2825,7 @@ msgstr "Filformatet saknar stöd"
 msgid "Unsupported palette format"
 msgstr "Palettformatet stöds ej"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "Uppdatera..."
 
@@ -2843,14 +2849,13 @@ msgstr "Användargränssnitt"
 msgid "Using some icons from:"
 msgstr "Använder en del ikoner från:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "Värde"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "Version: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Version"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3078,6 +3083,18 @@ msgstr "{0} palett ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Tillgänglig i förråd: {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "Nerladdningsstorlek: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "Version: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "Menyfält"
 
@@ -3178,9 +3195,6 @@ msgstr "{0}%"
 #~ msgid "Title"
 #~ msgstr "Titel"
 
-#~ msgid "Version"
-#~ msgstr "Version"
-
 #~ msgid "number of threads to use for rendering"
 #~ msgstr "antal trådar att använda för rendering"
 
@@ -3255,9 +3269,6 @@ msgstr "{0}%"
 
 #~ msgid "Installed version"
 #~ msgstr "Installerad version"
-
-#~ msgid "Download size"
-#~ msgstr "Nedladdningsstorlek"
 
 #~ msgid "Add-in packages"
 #~ msgstr "Tilläggspaket"

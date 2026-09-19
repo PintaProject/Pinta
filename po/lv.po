@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
 "PO-Revision-Date: 2025-06-15 02:01+0000\n"
 "Last-Translator: Kaspars <kasixlv@gmail.com>\n"
 "Language-Team: Latvian <https://hosted.weblate.org/projects/pinta/pinta/lv/"
@@ -109,7 +109,7 @@ msgstr ""
 msgid "All files"
 msgstr "Visi faili"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "Alfa"
 
@@ -175,6 +175,10 @@ msgstr "Māksliniecisks"
 msgid "Atkinson"
 msgstr "Atkinsona matrikss"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Automātiski"
@@ -187,18 +191,13 @@ msgstr "Automātiskā Apgriešana"
 msgid "Auto Level"
 msgstr "Automātiskie Līmeņi"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr ""
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Pieejams glabātuvē: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -246,7 +245,7 @@ msgstr "Jaukšana"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Zils"
 
@@ -290,12 +289,12 @@ msgstr "Apakšējais kreisais"
 msgid "Bottom Right"
 msgstr "Apakšējais Labais"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Spilgtums"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Gaišums / Kontrasts"
 
@@ -344,6 +343,10 @@ msgstr "Molberta Režģa Iestatījumi"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Molberta Rāmis..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -599,7 +602,7 @@ msgstr "Saturs"
 msgid "Contiguous"
 msgstr "Nepārtraukts"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Kontrasts"
@@ -643,7 +646,7 @@ msgstr "Pārklājums"
 msgid "Crop to Selection"
 msgstr "Apcirst līdz iezīmējumam"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr ""
 
@@ -651,7 +654,7 @@ msgstr ""
 msgid "Curved"
 msgstr "Ieliekts"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Līknes"
@@ -744,10 +747,9 @@ msgstr "Svārstīgums"
 msgid "Do not switch tool"
 msgstr "Nepārslēgt rīkus"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "Lejupielādes izmērs: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr ""
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -825,7 +827,7 @@ msgstr "Dzēšgumija"
 msgid "Error"
 msgstr "Kļūda"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "Kļūdas Difūzijas Metode"
 
@@ -1044,7 +1046,7 @@ msgstr ""
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Zaļš"
 
@@ -1108,7 +1110,7 @@ msgstr "Horizontālā sarkanā krāsa (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Nianse"
 
@@ -1213,7 +1215,7 @@ msgstr "Uzstādīt Paplašinājuma Paku"
 msgid "Install from file..."
 msgstr "Uzstādīt no datnes..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Uzstādīt..."
 
@@ -1368,7 +1370,7 @@ msgstr ""
 "Noklikšķināt ar labo taustiņu lai uzzīmētu figūru sekundārajā krāsā."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1556,7 +1558,7 @@ msgstr "Režīms"
 msgid "Modified"
 msgstr "Izmainīts"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "Vairāk Informācijas..."
 
@@ -1771,16 +1773,16 @@ msgstr "Pārrakstīt"
 msgid "Paint Bucket"
 msgstr "Krāsas Spainis"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "Ota"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Palete"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr ""
 
@@ -1969,7 +1971,7 @@ msgstr "Pasargāšana"
 msgid "Preset Gradient"
 msgstr ""
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr ""
 
@@ -2096,7 +2098,7 @@ msgstr ""
 msgid "Random Point Locations"
 msgstr "Jauktas Punktu Pozīcijas"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr ""
 
@@ -2114,7 +2116,7 @@ msgstr "Taisnstūrveida iezīmējums"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Sarkans"
 
@@ -2181,6 +2183,10 @@ msgstr ""
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Paziņot Par Kļūdu..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 #, fuzzy
@@ -2307,7 +2313,7 @@ msgid "Sampling"
 msgstr "Paraugu Ņemšana"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "Piesātinājums"
 
@@ -2718,7 +2724,7 @@ msgid "Two-Row Sierra"
 msgstr "Divu Rindu Sierra Matrica"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Tips"
 
@@ -2759,7 +2765,7 @@ msgstr ""
 msgid "Uninstall"
 msgstr "Atinstalēt"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "Atinstalēt..."
 
@@ -2782,7 +2788,7 @@ msgstr "Neatbalstīts datnes formāts"
 msgid "Unsupported palette format"
 msgstr "Neatbalstīts paletes formāts"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "Atjaunot..."
 
@@ -2807,14 +2813,13 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Lietot dažas ikonas no:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "Vērtība"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "Versija: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Versija"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3039,6 +3044,18 @@ msgstr "{0} palete ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Pieejams glabātuvē: {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "Lejupielādes izmērs: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "Versija: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "Izvēlnes Josla"
 
@@ -3118,9 +3135,6 @@ msgstr "{0}%"
 
 #~ msgid "Translated by:"
 #~ msgstr "Tulkoja:"
-
-#~ msgid "Version"
-#~ msgstr "Versija"
 
 #~ msgid "Path"
 #~ msgstr "Ceļš"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-01 03:52+0000\n"
+"POT-Creation-Date: 2026-09-15 00:31+0000\n"
 "PO-Revision-Date: 2026-02-01 04:28+0000\n"
 "Last-Translator: antfullstack "
 "<253273528+antfullstack@users.noreply.github.com>\n"
@@ -109,7 +109,7 @@ msgstr ""
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:355
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:371
 msgid "Alpha"
 msgstr "Άλφα"
 
@@ -175,6 +175,10 @@ msgstr "Καλλιτεχνικό"
 msgid "Atkinson"
 msgstr "Άτκινσον"
 
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
+msgid "Author"
+msgstr ""
+
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
 msgstr "Αυτόματα"
@@ -187,18 +191,13 @@ msgstr "Αυτόματη περικοπή"
 msgid "Auto Level"
 msgstr "Αυτόματο επίπεδο"
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:258
+#: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
 msgstr ""
 
-#: ../Pinta.Tools/Tools/SelectTool.cs:257
+#: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
 msgstr ""
-
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:251
-#, csharp-format
-msgid "Available in repository: {0}"
-msgstr "Διαθέσιμο στο αποθετήριο: {0}"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -246,7 +245,7 @@ msgstr "Λειτουργία ανάμιξης"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:121
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:64
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:354
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:370
 msgid "Blue"
 msgstr "Μπλε"
 
@@ -290,12 +289,12 @@ msgstr "Κάτω αριστερά"
 msgid "Bottom Right"
 msgstr "Κάτω δεξιά"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:86
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Φωτεινότητα"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:28
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:40
 msgid "Brightness / Contrast"
 msgstr "Φωτεινότητα / αντίθεση"
 
@@ -344,6 +343,10 @@ msgstr "Ρυθμίσεις πλέγματος καμβά"
 #: ../Pinta.Core/Actions/ViewActions.cs:123
 msgid "Canvas Grid..."
 msgstr "Πλέγμα καμβά..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
+msgid "Category"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -603,7 +606,7 @@ msgstr "Περιεχόμενα"
 msgid "Contiguous"
 msgstr "Συνεχόμενη"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:96
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Αντίθεση"
@@ -647,7 +650,7 @@ msgstr "Κάλυψη"
 msgid "Crop to Selection"
 msgstr "Περικοπή στην επιλογή"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
 msgid "Current Palette"
 msgstr "Τρέχουσα Παλέτα"
 
@@ -655,7 +658,7 @@ msgstr "Τρέχουσα Παλέτα"
 msgid "Curved"
 msgstr "Κυρτό"
 
-#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:27
+#: ../Pinta.Effects/Adjustments/CurvesEffect.cs:28
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:137
 msgid "Curves"
 msgstr "Καμπύλες"
@@ -748,10 +751,9 @@ msgstr "Dithering"
 msgid "Do not switch tool"
 msgstr "Μην αλλάξετε εργαλείο"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:245
-#, csharp-format
-msgid "Download size: {0}"
-msgstr "Μέγεθος λήψης: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
+msgid "Download size"
+msgstr "Μέγεθος λήψης"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -829,7 +831,7 @@ msgstr "Γόμα"
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:168
 msgid "Error Diffusion Method"
 msgstr "Σφάλμα μεθόδους diffusion"
 
@@ -1048,7 +1050,7 @@ msgstr "Έγινε επεξεργασία της διαβάθμισης χρωμ
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:90
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:117
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:63
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:353
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:369
 msgid "Green"
 msgstr "Πράσινο"
 
@@ -1112,7 +1114,7 @@ msgstr "Οριζόντιο κόκκινο (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:348
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:364
 msgid "Hue"
 msgstr "Απόχρωση"
 
@@ -1224,7 +1226,7 @@ msgstr "Εγκατάσταση πακέτου προσθέτου"
 msgid "Install from file..."
 msgstr "Εγκατάσταση από αρχείο..."
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:191
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:6
 msgid "Install..."
 msgstr "Εγκατάσταση..."
 
@@ -1393,7 +1395,7 @@ msgstr ""
 "Δεξί κλικ για τη χρήση του δευτερεύον χρώματος."
 
 #: ../Pinta.Tools/Tools/FreeformShapeTool.cs:50
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:81
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:82
 msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
@@ -1586,7 +1588,7 @@ msgstr "Λειτουργία"
 msgid "Modified"
 msgstr "Τροποποιήθηκε"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:183
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:8
 msgid "More Information..."
 msgstr "Περισσότερες πληροφορίες..."
 
@@ -1801,16 +1803,16 @@ msgstr "Αντικατάσταση"
 msgid "Paint Bucket"
 msgstr "Κουβάς χρώματος"
 
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:79
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
 msgstr "Πινέλο"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:177
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
 msgid "Palette"
 msgstr "Παλέτα"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:174
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:171
 msgid "Palette Source"
 msgstr "Πηγή Παλέτας"
 
@@ -2002,7 +2004,7 @@ msgstr "Διατήρηση"
 msgid "Preset Gradient"
 msgstr "Προκαθορισμένο ντεγκραντέ"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:159
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:156
 msgid "Preset Palettes"
 msgstr "Προεπιλεγμένες Παλέτες"
 
@@ -2129,7 +2131,7 @@ msgstr "Τυχαίος σπόρος θορύβου"
 msgid "Random Point Locations"
 msgstr "Τυχαία σημεία"
 
-#: ../Pinta.Effects/Effects/DitheringEffect.cs:165
+#: ../Pinta.Effects/Effects/DitheringEffect.cs:162
 msgid "Recently Used Colors"
 msgstr "Πρόσφατα Χρησιμοποιημένα Χρώματα"
 
@@ -2147,7 +2149,7 @@ msgstr "Ορθογώνια επιλογή"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:113
 #: ../Pinta.Effects/Dialogs/Effects.PosterizeDialog.cs:62
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:352
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:368
 msgid "Red"
 msgstr "Κόκκινο"
 
@@ -2214,6 +2216,10 @@ msgstr ""
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
 msgstr "Αναφορά σφάλματος..."
+
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
+msgid "Repository"
+msgstr ""
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2339,7 +2345,7 @@ msgid "Sampling"
 msgstr "Δειγματοληψία"
 
 #. Translators: this is an abbreviation for "Saturation"
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:350
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:366
 msgid "Sat"
 msgstr "Κορεσμός"
 
@@ -2751,7 +2757,7 @@ msgid "Two-Row Sierra"
 msgstr "Δίγραμμο Σιέρρα"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:332
-#: ../Pinta.Tools/Tools/PaintBrushTool.cs:228
+#: ../Pinta.Tools/Tools/PaintBrushTool.cs:242
 msgid "Type"
 msgstr "Τύπος"
 
@@ -2792,7 +2798,7 @@ msgstr ""
 msgid "Uninstall"
 msgstr "Απεγκατάσταση"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:209
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:9
 msgid "Uninstall..."
 msgstr "Απενεγκατάσταση..."
 
@@ -2815,7 +2821,7 @@ msgstr "Μη υποστηριζόμενη μορφή αρχείου"
 msgid "Unsupported palette format"
 msgstr "Μη υποστηριζόμενος τύπος παλέττας"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:200
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:7
 msgid "Update..."
 msgstr "Ενημέρωση..."
 
@@ -2840,14 +2846,13 @@ msgstr ""
 msgid "Using some icons from:"
 msgstr "Γίνεται χρήση μερικών εικονιδίων από:"
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:351
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerSlider.cs:367
 msgid "Value"
 msgstr "Τιμή"
 
-#: ../Pinta.Gui.Addins/AddinInfoView.cs:238
-#, csharp-format
-msgid "Version: {0}"
-msgstr "Έκδοση: {0}"
+#: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
+msgid "Version"
+msgstr "Έκδοση"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
@@ -3078,6 +3083,18 @@ msgstr "{0} παλέτα ({1})"
 msgid "{0}%"
 msgstr "{0}%"
 
+#, csharp-format
+#~ msgid "Available in repository: {0}"
+#~ msgstr "Διαθέσιμο στο αποθετήριο: {0}"
+
+#, csharp-format
+#~ msgid "Download size: {0}"
+#~ msgstr "Μέγεθος λήψης: {0}"
+
+#, csharp-format
+#~ msgid "Version: {0}"
+#~ msgstr "Έκδοση: {0}"
+
 #~ msgid "Menu Bar"
 #~ msgstr "Μενού"
 
@@ -3164,9 +3181,6 @@ msgstr "{0}%"
 #~ msgid "Title"
 #~ msgstr "Τίτλος"
 
-#~ msgid "Version"
-#~ msgstr "Έκδοση"
-
 #~ msgid "Path"
 #~ msgstr "Διαδρομή"
 
@@ -3216,9 +3230,6 @@ msgstr "{0}%"
 #~ msgstr ""
 #~ "Πολλαπλή επιλογή:\n"
 #~ "\n"
-
-#~ msgid "Download size"
-#~ msgstr "Μέγεθος λήψης"
 
 #~ msgid "This add-in can't be loaded due to missing dependencies"
 #~ msgstr ""
