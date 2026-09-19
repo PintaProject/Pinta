@@ -99,9 +99,12 @@ partial class EffectsTest
 	public void FrostedGlass ()
 	{
 		FrostedGlassEffect effect = new (Utilities.CreateMockServices ());
-		effect.Data.Amount = 7;
+		effect.Data.MaxScatterRadius = 7;
+		effect.Data.MinScatterRadius = 0;
+		effect.Data.Smoothness = 2;
+		effect.Data.Diffusion = 0.7;
 		effect.Data.Seed = new (42);
-		Utilities.TestEffect (effect, "frostedglass1.png");
+		Utilities.TestEffect (effect, "frostedglass1.png", save_image_name: "new.png");
 	}
 
 	[Test]

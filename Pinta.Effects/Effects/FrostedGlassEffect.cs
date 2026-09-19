@@ -43,7 +43,10 @@ public sealed class FrostedGlassEffect : BaseEffect
 	// Algorithm Code Ported From PDN
 
 	private sealed record FrostedGlassSettings (
-		int amount,
+		double min_radius,
+		double radius_offset,
+		double bias,
+		int num_samples,
 		int src_width,
 		int src_height,
 		RandomSeed seed);
@@ -52,7 +55,10 @@ public sealed class FrostedGlassEffect : BaseEffect
 	{
 		var data = Data;
 		return new (
-			amount: data.Amount,
+			min_radius: Math.Min (data.MinScatterRadius, data.MaxScatterRadius),
+			radius_offset: Math.Max (data.MaxScatterRadius - data.MinScatterRadius, 0),
+			bias: data.Diffusion,
+			num_samples: data.Smoothness,
 			src_width: src.Width,
 			src_height: src.Height,
 			seed: data.Seed
@@ -72,80 +78,62 @@ public sealed class FrostedGlassEffect : BaseEffect
 
 			var dst_row = dst_data.Slice (y * settings.src_width, settings.src_width);
 
-			int top = Math.Max (y - settings.amount, 0);
-			int bottom = Math.Min (y + settings.amount + 1, settings.src_height);
-
 			for (int x = roi.Left; x <= roi.Right; ++x)
-				dst_row[x] = GetFinalPixelColor (settings, random, src_data, top, bottom, x);
+				dst_row[x] = GetFinalPixelColor (settings, random, source, src_data, x, y);
 		}
 	}
 
-	private static ColorBgra GetFinalPixelColor (FrostedGlassSettings settings, Random random, ReadOnlySpan<ColorBgra> src_data, int top, int bottom, int x)
+	private static ColorBgra GetFinalPixelColor (FrostedGlassSettings settings, Random random, ImageSurface src, ReadOnlySpan<ColorBgra> src_data, int x, int y)
 	{
-		int intensityChoicesIndex = 0;
+		Span<ColorBgra> samples = stackalloc ColorBgra[settings.num_samples];
 
-		Span<int> intensityCount = stackalloc int[256];
-		Span<uint> avgRed = stackalloc uint[256];
-		Span<uint> avgGreen = stackalloc uint[256];
-		Span<uint> avgBlue = stackalloc uint[256];
-		Span<uint> avgAlpha = stackalloc uint[256];
-		Span<byte> intensityChoices = stackalloc byte[(1 + (settings.amount * 2)) * (1 + (settings.amount * 2))];
+		// Blend together several samples between the min & max radius.
+		// Increasing "diffusion" biases the distance offset toward the max radius.
+		for (int sampleIndex = 0; sampleIndex < settings.num_samples; ++sampleIndex) {
+			double angle = random.NextDouble () * Math.PI * 2;
+			double t = random.NextDouble ();
+			double offset = Bias (t, settings.bias) * settings.radius_offset;
+			double distance = settings.min_radius + offset;
 
-		intensityCount.Clear ();
-		avgRed.Clear ();
-		avgGreen.Clear ();
-		avgBlue.Clear ();
-		avgAlpha.Clear ();
-		intensityChoices.Clear ();
+			(double sin, double cos) = Math.SinCos (angle);
+			double sampleX = x + distance * cos;
+			double sampleY = y + distance * sin;
 
-		int left = x - settings.amount;
-		int right = x + settings.amount + 1;
-
-		if (left < 0)
-			left = 0;
-
-		if (right > settings.src_width)
-			right = settings.src_width;
-
-		for (int j = top; j < bottom; ++j) {
-
-			if (j < 0 || j >= settings.src_height)
-				continue;
-
-			var src_row = src_data.Slice (j * settings.src_width, settings.src_width);
-
-			for (int i = left; i < right; ++i) {
-				ColorBgra src_pixel = src_row[i];
-				byte intensity = src_pixel.GetIntensityByte ();
-
-				intensityChoices[intensityChoicesIndex] = intensity;
-				++intensityChoicesIndex;
-
-				++intensityCount[intensity];
-
-				avgRed[intensity] += src_pixel.R;
-				avgGreen[intensity] += src_pixel.G;
-				avgBlue[intensity] += src_pixel.B;
-				avgAlpha[intensity] += src_pixel.A;
-			}
+			samples[sampleIndex] = src.GetBilinearSampleReflected (
+				src_data, settings.src_width, settings.src_height,
+				(float) sampleX, (float) sampleY);
 		}
 
-		int randNum = random.Next (intensityChoicesIndex);
-		byte chosenIntensity = intensityChoices[randNum];
+		return ColorBgra.Blend (samples, ColorBgra.Transparent);
+	}
 
-		return ColorBgra.FromBgra (
-			b: (byte) (avgBlue[chosenIntensity] / intensityCount[chosenIntensity]),
-			g: (byte) (avgGreen[chosenIntensity] / intensityCount[chosenIntensity]),
-			r: (byte) (avgRed[chosenIntensity] / intensityCount[chosenIntensity]),
-			a: (byte) (avgAlpha[chosenIntensity] / intensityCount[chosenIntensity])
-		);
+	/// <summary>
+	/// Shlick's bias function.
+	/// This is used to bias the random samples toward the min or max radius.
+	/// A value of 0.5 (default) is linear, so the samples are spread out evenly.
+	/// </summary>
+	private static double Bias (double x, double bias)
+	{
+		return x / ((1.0 / bias - 2.0) * (1.0 - x) + 1.0);
 	}
 
 	public sealed class FrostedGlassData : EffectData
 	{
-		[Caption ("Amount")]
-		[MinimumValue (1), MaximumValue (10)]
-		public int Amount { get; set; } = 1;
+		[Caption ("Maximum Scatter Radius")]
+		[MinimumValue (0), MaximumValue (200)]
+		public int MaxScatterRadius { get; set; } = 3;
+
+		[Caption ("Minimum Scatter Radius")]
+		[MinimumValue (0), MaximumValue (200)]
+		public int MinScatterRadius { get; set; } = 0;
+
+		[Caption ("Diffusion")]
+		[MinimumValue (0), MaximumValue (1)]
+		public double Diffusion { get; set; } = 0.5;
+
+		[Caption ("Smoothness")]
+		[MinimumValue (1), MaximumValue (16)]
+		public int Smoothness { get; set; } = 2;
 
 		[Caption ("Random Noise Seed")]
 		public RandomSeed Seed { get; set; } = new (0);
