@@ -429,7 +429,37 @@ public sealed class EditActions
 			layer.Draw (g);
 		}
 
-		clipboard.SetImage (dest);
+		CopyImageToClipboard (clipboard, dest, new PointI (rect.X, rect.Y));
+	}
+
+	/// <summary>
+	/// Copy an image to the clipboard.
+	/// This records two content providers: one with the image (equivalent to Clipboard.SetTexture()), and
+	/// one storing additional custom data that Pinta can check for when pasting.
+	/// </summary>
+	private static void CopyImageToClipboard (Gdk.Clipboard clipboard, ImageSurface image, PointI srcPos)
+	{
+		Gdk.Texture texture = image.ToTexture ();
+
+		// Store the original position so we can later paste at the same location,
+		// e.g. to cut and paste into a different layer.
+		ClipboardImageMetadata customImageMetadata = ClipboardImageMetadata.NewWithProperties ([]);
+		customImageMetadata.Position = srcPos;
+
+		// This is equivalent to gdk_clipboard_set_texture(), and will copy the image to the clipboard
+		// with suitable MIME types etc.
+		GObject.Value textureValue = new (Gdk.Texture.GetGType ());
+		textureValue.SetObject (texture);
+		Gdk.ContentProvider textureProvider = Gdk.ContentProvider.NewForValue (textureValue);
+
+		// Wrap our custom data in a content provider.
+		GObject.Value customDataValue = new (ClipboardImageMetadata.GetGType ());
+		customDataValue.SetObject (customImageMetadata);
+		Gdk.ContentProvider customProvider = Gdk.ContentProvider.NewForValue (customDataValue);
+
+		// Combine the two providers and add it to the clipboard.
+		clipboard.SetContent (
+			GdkExtensions.CreateContentProviderUnion ([textureProvider, customProvider]));
 	}
 
 	private void HandlerPintaCoreActionsEditCutActivated (object sender, EventArgs e)

@@ -200,7 +200,7 @@ public static class GdkExtensions
 		g.SetSourceSurface (img_surf, imgX, imgY);
 		g.Paint ();
 
-		return Gdk.Texture.NewForPixbuf (i.ToPixbuf ());
+		return i.ToTexture ();
 	}
 
 	// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard
@@ -231,11 +231,35 @@ public static class GdkExtensions
 		return tcs.Task;
 	}
 
+	// TODO-GTK4 (bindings, unsubmitted) - need gir.core async bindings for Gdk.Clipboard
 	/// <summary>
-	/// Helper function to set the clipboard's contents to an image.
+	/// Async wrapper to obtain a GObject.Value of the specified type from the clipboard.
 	/// </summary>
-	public static void SetImage (this Gdk.Clipboard clipboard, Cairo.ImageSurface surf)
-		=> clipboard.SetTexture (Gdk.Texture.NewForPixbuf (surf.ToPixbuf ()));
+	public static Task<GObject.Value> ReadValueAsync (this Gdk.Clipboard clipboard, GObject.Type type, int io_priority)
+	{
+		TaskCompletionSource<GObject.Value> tcs = new ();
+
+		Gdk.Internal.Clipboard.ReadValueAsync (
+			clipboard.Handle.DangerousGetHandle (),
+			type, io_priority,
+			IntPtr.Zero,
+			new Gio.Internal.AsyncReadyCallbackAsyncHandler ((_, args, _) => {
+
+				GObject.Internal.ValueUnownedHandle result = Gdk.Internal.Clipboard.ReadValueFinish (
+					clipboard.Handle.DangerousGetHandle (),
+					args.Handle.DangerousGetHandle (),
+					out var error);
+
+				if (!error.IsInvalid)
+					tcs.SetException (new GLib.GException (error));
+				else
+					tcs.SetResult (new GObject.Value (result.OwnedCopy ()));
+
+			}).NativeCallback,
+			IntPtr.Zero);
+
+		return tcs.Task;
+	}
 
 	/// <summary>
 	/// Helper function to return the clipboard for the default display.
@@ -324,5 +348,23 @@ public static class GdkExtensions
 			rectangle.EndLocation ().Transformed (rotation),
 			new PointD (rectangle.EndLocation ().X, rectangle.Location ().Y).Transformed (rotation)
 		];
+	}
+
+	// TODO-GTK4 (bindings) - gdk_content_provider_new_union isn't generated currently.
+	/// <summary>
+	/// Manual wrapper for gdk_content_provider_new_union() to combine Gdk.ContentProvider's.
+	/// </summary>
+	public static Gdk.ContentProvider CreateContentProviderUnion (Gdk.ContentProvider[] providers)
+	{
+		IntPtr[] providerHandles = new IntPtr[providers.Length];
+		for (int i = 0; i < providers.Length; i++) {
+			providerHandles[i] = providers[i].Handle.DangerousGetHandle ();
+			// Add ref since native code will take ownership, but our managed ref still exists.
+			GObject.Internal.Object.Ref (providerHandles[i]);
+		}
+
+		IntPtr result = Gdk.Internal.ContentProvider.NewUnion (providerHandles, (nuint) providers.Length);
+
+		return (Gdk.ContentProvider) GObject.Internal.InstanceWrapper.WrapHandle<Gdk.ContentProvider> (result, ownedRef: true);
 	}
 }
