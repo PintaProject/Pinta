@@ -130,6 +130,15 @@ internal sealed class PasteAction : IActionHandler
 		// Commit any unfinished tool actions
 		tools.Commit ();
 
+		// If the image was copied from Pinta, look for our extra metadata.
+		ClipboardImageMetadata? metadata = null;
+		try {
+			GObject.Value metadataValue = await cb.ReadValueAsync (ClipboardImageMetadata.GetGType (), 0);
+			metadata = (ClipboardImageMetadata?) metadataValue.GetObject ();
+		} catch (GLib.GException e) when (e.Matches (Gio.IOErrorEnum.NotSupported)) {
+			// If the clipboard didn't have this data, continue on.
+		}
+
 		Gdk.Texture? cb_texture = await cb.ReadTextureAsync ();
 		if (cb_texture is null) {
 			await ShowClipboardEmptyDialog (chrome);
@@ -157,6 +166,11 @@ internal sealed class PasteAction : IActionHandler
 
 			} else if (response != Gtk.ResponseType.Reject) // cancelled
 				return;
+		}
+
+		// If we copied the image from Pinta, default to pasting at that same location
+		if (metadata != null) {
+			pastePosition = metadata.Position;
 		}
 
 		// If the pasted image would fall off bottom- or right-
