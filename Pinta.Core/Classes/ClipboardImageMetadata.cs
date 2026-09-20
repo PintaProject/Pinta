@@ -11,4 +11,9 @@ public partial class ClipboardImageMetadata
 	/// Position that the data was copied from in the source image.
 	/// </summary>
 	public PointI Position { get; set; } = PointI.Zero;
+
+	/// <summary>
+	/// The original selection when the image was copied.
+	/// </summary>
+	public DocumentSelection Selection { get; set; } = new ();
 }

@@ -429,7 +429,7 @@ public sealed class EditActions
 			layer.Draw (g);
 		}
 
-		CopyImageToClipboard (clipboard, dest, new PointI (rect.X, rect.Y));
+		CopyImageToClipboard (clipboard, dest, new PointI (rect.X, rect.Y), doc.Selection);
 	}
 
 	/// <summary>
@@ -437,14 +437,17 @@ public sealed class EditActions
 	/// This records two content providers: one with the image (equivalent to Clipboard.SetTexture()), and
 	/// one storing additional custom data that Pinta can check for when pasting.
 	/// </summary>
-	private static void CopyImageToClipboard (Gdk.Clipboard clipboard, ImageSurface image, PointI srcPos)
+	private static void CopyImageToClipboard (Gdk.Clipboard clipboard, ImageSurface image, PointI srcPos, DocumentSelection selection)
 	{
 		Gdk.Texture texture = image.ToTexture ();
 
+		ClipboardImageMetadata customImageMetadata = ClipboardImageMetadata.NewWithProperties ([]);
 		// Store the original position so we can later paste at the same location,
 		// e.g. to cut and paste into a different layer.
-		ClipboardImageMetadata customImageMetadata = ClipboardImageMetadata.NewWithProperties ([]);
 		customImageMetadata.Position = srcPos;
+		// Store the original selection so we can paste with the correct mask, e.g. if an ellipse
+		// selection was used.
+		customImageMetadata.Selection = selection.Clone ();
 
 		// This is equivalent to gdk_clipboard_set_texture(), and will copy the image to the clipboard
 		// with suitable MIME types etc.

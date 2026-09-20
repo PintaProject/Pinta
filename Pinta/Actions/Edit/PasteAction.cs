@@ -206,7 +206,23 @@ internal sealed class PasteAction : IActionHandler
 
 		var old_selection = doc.Selection.Clone ();
 
-		doc.Selection.CreateRectangleSelection (new RectangleD ((PointD) pastePosition, cb_image.Width, cb_image.Height));
+		if (metadata is not null) {
+			// If the image was copied from Pinta, load the previous selection.
+			// We might need to offset the selection if the paste location changed.
+			if (pastePosition != metadata.Position) {
+				Cairo.Matrix transform = CairoExtensions.CreateIdentityMatrix ();
+				transform.Translate (
+					pastePosition.X - metadata.Position.X,
+					pastePosition.Y - metadata.Position.Y);
+				doc.Selection = metadata.Selection.Transform (transform);
+			} else {
+				doc.Selection = metadata.Selection.Clone ();
+			}
+		} else {
+			// Otherwise, just select the whole pasted image.
+			doc.Selection.CreateRectangleSelection (new RectangleD ((PointD) pastePosition, cb_image.Width, cb_image.Height));
+		}
+
 		doc.Selection.Visible = true;
 
 		doc.Workspace.Invalidate ();
