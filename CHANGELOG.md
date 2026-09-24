@@ -69,6 +69,7 @@ Thanks to the following contributors who worked on this release:
 - Menu buttons now display popout nested menus instead of sliding menus (#2131)
 - Changes for add-in authors
   - Add-ins should use `Pinta.Core.Translations.GetString()` to use Pinta's translations for strings such as standard effect categories (#1933, #1935)
+- Copying and pasting now places the image at the location it was originally copied from (#2325, #2130)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
@@ -88,6 +89,7 @@ Thanks to the following contributors who worked on this release:
 - Fixed issue with the canvas not redrawing properly after certain brush movements (#2302, #2292)
 - Fixed alpha handling in the TGA exporter (#2318, #2315)
 - Corrected the Pencil Sketch effect's behavior (#2307)
+- Fixed issues with copying and pasting with non-rectangular selections (#2325, #1562, #1385)
 
 ## [3.1.2](https://github.com/PintaProject/Pinta/release/tag/3.1.2) - 2026/03/29
 
