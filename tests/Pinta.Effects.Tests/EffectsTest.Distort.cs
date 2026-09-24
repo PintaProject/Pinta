@@ -104,7 +104,7 @@ partial class EffectsTest
 		effect.Data.Smoothness = 2;
 		effect.Data.Diffusion = 0.7;
 		effect.Data.Seed = new (42);
-		Utilities.TestEffect (effect, "frostedglass1.png", save_image_name: "new.png");
+		Utilities.TestEffect (effect, "frostedglass1.png");
 	}
 
 	[Test]
