@@ -29,7 +29,6 @@
 #endif
 
 using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using Cairo;
 using Debug = System.Diagnostics.Debug;
@@ -129,9 +128,6 @@ public sealed class LivePreviewManager : ILivePreview
 
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
-			if (effect.EffectData != null)
-				effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
-
 			session.Start ();
 
 			using GLibTimer _ = GLib.Functions.TimeoutAdd (
@@ -144,11 +140,7 @@ public sealed class LivePreviewManager : ILivePreview
 				}
 			);
 
-			bool userConfirmed = !effect.IsConfigurable || await effect.LaunchConfiguration ();
-
-			// Dialog closed, so configuration is final. Unsubscribing...
-			if (effect.EffectData != null)
-				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
+			bool userConfirmed = !effect.IsConfigurable || await effect.LaunchConfiguration (session);
 
 			chrome.MainWindowBusy = true;
 
@@ -194,9 +186,6 @@ public sealed class LivePreviewManager : ILivePreview
 			LivePreviewSurface = null!;
 			workspace.Invalidate ();
 
-			if (effect.EffectData != null)
-				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
-
 			chrome.MainWindowBusy = false;
 
 			dialog.Canceled -= HandleProgressDialogCancel;
@@ -212,12 +201,6 @@ public sealed class LivePreviewManager : ILivePreview
 		{
 			userCanceled = true;
 			session.Cancel ();
-		}
-
-		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
-		{
-			// TODO: calculate bounds
-			session.NotifyChanged ();
 		}
 
 		// This method now polls the renderer for its state instead of being a passive event handler.
@@ -268,7 +251,7 @@ public sealed class LivePreviewManager : ILivePreview
 		}
 	}
 
-	private sealed class RenderSession
+	private sealed class RenderSession : ILivePreviewSession
 	{
 		private readonly Func<RenderHandle> start_render;
 		private Task restart = Task.CompletedTask;
@@ -286,7 +269,7 @@ public sealed class LivePreviewManager : ILivePreview
 			CurrentRender = start_render ();
 		}
 
-		internal void NotifyChanged ()
+		public void NotifyChanged ()
 		{
 			if (!IsActive || !restart.IsCompleted) return;
 			restart = RestartAsync (); // New render clones effect, so it sees the changes

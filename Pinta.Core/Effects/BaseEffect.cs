@@ -25,10 +25,9 @@
 // THE SOFTWARE.
 
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Cairo;
-using Mono.Addins;
-using Mono.Addins.Localization;
 
 namespace Pinta.Core;
 
@@ -91,6 +90,25 @@ public abstract class BaseEffect
 			throw new NotImplementedException ($"{GetType ()} is marked as configurable, but has not implemented LaunchConfiguration");
 
 		return Task.FromResult (true); // Placeholder
+	}
+
+	public virtual async Task<bool> LaunchConfiguration (ILivePreviewSession session)
+	{
+		EffectData? data = EffectData;
+
+		if (data is null)
+			return await LaunchConfiguration ();
+
+		data.PropertyChanged += OnDataChanged;
+
+		try {
+			return await LaunchConfiguration ();
+		} finally {
+			data.PropertyChanged -= OnDataChanged;
+		}
+
+		void OnDataChanged (object? o, PropertyChangedEventArgs e) =>
+			session.NotifyChanged ();
 	}
 
 	#region Overridable Render Methods
