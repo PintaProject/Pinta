@@ -38,7 +38,28 @@ public interface IChromeService
 		Gtk.Window parent,
 		BaseEffect effect,
 		IAddinLocalizer localizer,
-		IWorkspaceService workspace);
+		IWorkspaceService workspace,
+		Action<string?> onChanged);
+}
+
+public static class ChromeExtensions
+{
+	/// <remarks>Notifies of property changes, so not equivalent to an empty handler</remarks>
+	[Obsolete ("Use overload with onChanged parameter instead")]
+	public static Task<bool> LaunchSimpleEffectDialog (
+		this IChromeService chrome,
+		Gtk.Window parent,
+		BaseEffect effect,
+		IAddinLocalizer localizer,
+		IWorkspaceService workspace)
+	{
+		return chrome.LaunchSimpleEffectDialog (
+			parent,
+			effect,
+			localizer,
+			workspace,
+			onChanged: p => effect.EffectData?.FirePropertyChanged (p));
+	}
 }
 
 public sealed class ChromeManager : IChromeService
@@ -182,13 +203,16 @@ public sealed class ChromeManager : IChromeService
 		Gtk.Window parent,
 		BaseEffect effect,
 		IAddinLocalizer localizer,
-		IWorkspaceService workspace)
+		IWorkspaceService workspace,
+		Action<string?> onChanged)
+
 	{
 		return simple_effect_dialog_handler (
 			parent,
 			effect,
 			localizer,
-			workspace);
+			workspace,
+			onChanged);
 	}
 
 	private void OnLastCanvasCursorPointChanged ()
@@ -217,4 +241,9 @@ public interface IProgressDialog
 
 public delegate Task<ErrorDialogResponse> ErrorDialogHandler (Gtk.Window parent, string message, string body, string details);
 public delegate Task MessageDialogHandler (Gtk.Window parent, string message, string body);
-public delegate Task<bool> SimpleEffectDialogHandler (Gtk.Window parent, BaseEffect effect, IAddinLocalizer localizer, IWorkspaceService workspace);
+public delegate Task<bool> SimpleEffectDialogHandler (
+	Gtk.Window parent,
+	BaseEffect effect,
+	IAddinLocalizer localizer,
+	IWorkspaceService workspace,
+	Action<string?> onChanged);

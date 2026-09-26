@@ -106,16 +106,13 @@ public sealed partial class SimpleEffectDialog
 		return dialog;
 	}
 
-	/// <summary>
-	/// Helper function for launching the dialog and connecting its signals.
-	/// The IAddinLocalizer provides a generic way to get translated strings both for
-	/// Pinta's effects and for effect add-ins.
-	/// </summary>
+	/// <summary>Helper for launching the dialog and connecting custom signal</summary>
 	public static async Task<bool> Launch (
 		Gtk.Window parent,
 		BaseEffect effect,
 		IAddinLocalizer localizer,
-		IWorkspaceService workspace)
+		IWorkspaceService workspace,
+		Action<string?> onChanged)
 	{
 		if (effect.EffectData == null)
 			throw new ArgumentException ($"{effect.EffectData} should not be null", nameof (effect));
@@ -128,8 +125,7 @@ public sealed partial class SimpleEffectDialog
 			localizer,
 			workspace);
 
-		// Hookup event handling for live preview.
-		dialog.EffectDataChanged += (o, e) => effect.EffectData.FirePropertyChanged (e.PropertyName);
+		dialog.EffectDataChanged += (o, e) => onChanged (e.PropertyName);
 
 		Gtk.ResponseType response = await dialog.RunAsync ();
 

@@ -29,9 +29,9 @@
 #endif
 
 using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using Cairo;
+using Mono.Addins.Localization;
 using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
@@ -104,6 +104,9 @@ public sealed class LivePreviewManager : ILivePreview
 		historyItem.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
 		RenderSession session = new (
+			chrome,
+			workspace,
+			effect,
 			() => AsyncEffectRenderer.Start (
 				settings,
 				effect,
@@ -129,9 +132,6 @@ public sealed class LivePreviewManager : ILivePreview
 
 			Debug.WriteLine (DateTime.Now.ToString ("HH:mm:ss:ffff") + "Start Live preview.");
 
-			if (effect.EffectData != null)
-				effect.EffectData.PropertyChanged += EffectData_PropertyChanged;
-
 			session.Start ();
 
 			using GLibTimer _ = GLib.Functions.TimeoutAdd (
@@ -144,11 +144,7 @@ public sealed class LivePreviewManager : ILivePreview
 				}
 			);
 
-			bool userConfirmed = !effect.IsConfigurable || await effect.LaunchConfiguration ();
-
-			// Dialog closed, so configuration is final. Unsubscribing...
-			if (effect.EffectData != null)
-				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
+			bool userConfirmed = !effect.IsConfigurable || await effect.LaunchConfiguration (session);
 
 			chrome.MainWindowBusy = true;
 
@@ -194,9 +190,6 @@ public sealed class LivePreviewManager : ILivePreview
 			LivePreviewSurface = null!;
 			workspace.Invalidate ();
 
-			if (effect.EffectData != null)
-				effect.EffectData.PropertyChanged -= EffectData_PropertyChanged;
-
 			chrome.MainWindowBusy = false;
 
 			dialog.Canceled -= HandleProgressDialogCancel;
@@ -212,12 +205,6 @@ public sealed class LivePreviewManager : ILivePreview
 		{
 			userCanceled = true;
 			session.Cancel ();
-		}
-
-		void EffectData_PropertyChanged (object? sender, PropertyChangedEventArgs e)
-		{
-			// TODO: calculate bounds
-			session.NotifyChanged ();
 		}
 
 		// This method now polls the renderer for its state instead of being a passive event handler.
@@ -268,16 +255,36 @@ public sealed class LivePreviewManager : ILivePreview
 		}
 	}
 
-	private sealed class RenderSession
+	private sealed class RenderSession : ILivePreviewSession
 	{
+		private readonly IChromeService chrome;
+		private readonly IWorkspaceService workspace;
+		private readonly BaseEffect effect;
 		private readonly Func<RenderHandle> start_render;
 		private Task restart = Task.CompletedTask;
 		internal RenderHandle CurrentRender { get; private set; } = null!; // NRT: assigned in Start()
 		internal bool IsActive { get; private set; } // False once canceled, no more restarts
 
-		internal RenderSession (Func<RenderHandle> startRender)
+		internal RenderSession (
+			IChromeService chrome,
+			IWorkspaceService workspace,
+			BaseEffect effect,
+			Func<RenderHandle> startRender)
 		{
+			this.chrome = chrome;
+			this.workspace = workspace;
+			this.effect = effect;
 			start_render = startRender;
+		}
+
+		public Task<bool> LaunchSimpleEffectDialog (IAddinLocalizer? localizer = null)
+		{
+			return chrome.LaunchSimpleEffectDialog (
+				chrome.MainWindow,
+				effect,
+				localizer ?? new TemporaryLocalizer (),
+				workspace,
+				onChanged: _ => NotifyChanged ());
 		}
 
 		internal void Start ()
@@ -286,7 +293,7 @@ public sealed class LivePreviewManager : ILivePreview
 			CurrentRender = start_render ();
 		}
 
-		internal void NotifyChanged ()
+		public void NotifyChanged ()
 		{
 			if (!IsActive || !restart.IsCompleted) return;
 			restart = RestartAsync (); // New render clones effect, so it sees the changes
@@ -311,7 +318,8 @@ public sealed class LivePreviewManager : ILivePreview
 			await CurrentRender.Completion;
 		}
 
-		private async Task RestartAsync () // Ensures no two renders overlap in time
+		private async Task RestartAsync () // Ensures no
+						   // two renders overlap in time
 		{
 			CurrentRender.Cancel ();
 			await CurrentRender.Completion;
