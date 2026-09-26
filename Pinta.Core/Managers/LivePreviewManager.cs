@@ -31,6 +31,7 @@
 using System;
 using System.Threading.Tasks;
 using Cairo;
+using Mono.Addins.Localization;
 using Debug = System.Diagnostics.Debug;
 
 namespace Pinta.Core;
@@ -103,6 +104,9 @@ public sealed class LivePreviewManager : ILivePreview
 		historyItem.TakeSnapshotOfLayer (doc.Layers.CurrentUserLayerIndex);
 
 		RenderSession session = new (
+			chrome,
+			workspace,
+			effect,
 			() => AsyncEffectRenderer.Start (
 				settings,
 				effect,
@@ -253,14 +257,34 @@ public sealed class LivePreviewManager : ILivePreview
 
 	private sealed class RenderSession : ILivePreviewSession
 	{
+		private readonly IChromeService chrome;
+		private readonly IWorkspaceService workspace;
+		private readonly BaseEffect effect;
 		private readonly Func<RenderHandle> start_render;
 		private Task restart = Task.CompletedTask;
 		internal RenderHandle CurrentRender { get; private set; } = null!; // NRT: assigned in Start()
 		internal bool IsActive { get; private set; } // False once canceled, no more restarts
 
-		internal RenderSession (Func<RenderHandle> startRender)
+		internal RenderSession (
+			IChromeService chrome,
+			IWorkspaceService workspace,
+			BaseEffect effect,
+			Func<RenderHandle> startRender)
 		{
+			this.chrome = chrome;
+			this.workspace = workspace;
+			this.effect = effect;
 			start_render = startRender;
+		}
+
+		public Task<bool> LaunchSimpleEffectDialog (IAddinLocalizer? localizer = null)
+		{
+			return chrome.LaunchSimpleEffectDialog (
+				chrome.MainWindow,
+				effect,
+				localizer ?? new TemporaryLocalizer (),
+				workspace,
+				onChanged: _ => NotifyChanged ());
 		}
 
 		internal void Start ()
@@ -294,7 +318,8 @@ public sealed class LivePreviewManager : ILivePreview
 			await CurrentRender.Completion;
 		}
 
-		private async Task RestartAsync () // Ensures no two renders overlap in time
+		private async Task RestartAsync () // Ensures no
+						   // two renders overlap in time
 		{
 			CurrentRender.Cancel ();
 			await CurrentRender.Completion;
