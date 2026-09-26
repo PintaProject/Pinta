@@ -152,9 +152,15 @@ internal sealed class MainClass
 			}
 		} else {
 			// Create a blank document
+			int width = PintaCore.Settings.GetSetting<int> (SettingNames.STARTUP_IMAGE_WIDTH, 800);
+			int height = PintaCore.Settings.GetSetting<int> (SettingNames.STARTUP_IMAGE_HEIGHT, 600);
+			BackgroundType background = (BackgroundType) PintaCore.Settings.GetSetting<int> (
+				SettingNames.STARTUP_IMAGE_BACKGROUND,
+				(int) BackgroundType.White);
+
 			PintaCore.Workspace.NewDocument (
-				new Core.Size (800, 600),
-				new Cairo.Color (1, 1, 1));
+				new Core.Size (width, height),
+				background == BackgroundType.Transparent ? Cairo.Color.Transparent : Cairo.Color.White);
 		}
 	}
 

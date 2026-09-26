@@ -55,6 +55,52 @@
             </child>
           </object>
         </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Startup Image</property>
+            <child>
+              <object class="AdwSpinRow" id="startup_width_spinrow">
+                <property name="title" translatable="yes">Width</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">1</property>
+                    <property name="upper">2147483647</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                    <property name="value">800</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSpinRow" id="startup_height_spinrow">
+                <property name="title" translatable="yes">Height</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">1</property>
+                    <property name="upper">2147483647</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                    <property name="value">600</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwComboRow" id="startup_background_comborow">
+                <property name="title" translatable="yes">Background</property>
+                <property name="model">
+                  <object class="GtkStringList">
+                    <items>
+                      <item translatable="yes" comments="Translators: Background option for the image created at startup.">White</item>
+                      <item translatable="yes" comments="Translators: Background option for the image created at startup.">Transparent</item>
+                    </items>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </template>
