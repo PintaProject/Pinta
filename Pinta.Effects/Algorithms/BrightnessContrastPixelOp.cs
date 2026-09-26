@@ -8,7 +8,7 @@ internal sealed class BrightnessContrastPixelOp : UnaryPixelOp
 {
 	public int Multiply { get; }
 	public int Divide { get; }
-	public ReadOnlyCollection<byte> RGBTable { get; }
+	public ReadOnlyCollection<byte> RGBTable { get; } // For straight alpha
 	public BrightnessContrastPixelOp (int brightness, int contrast)
 	{
 		(int multiply, int divide) = contrast switch {
@@ -21,7 +21,7 @@ internal sealed class BrightnessContrastPixelOp : UnaryPixelOp
 		RGBTable = Array.AsReadOnly (CalculateTable (brightness, multiply, divide));
 	}
 
-	private static byte[] CalculateTable (int brightness, int multiply, int divide)
+	private static byte[] CalculateTable (int brightness, int multiply, int divide) // For straight alpha
 	{
 		byte[] result = new byte[65536];
 
@@ -57,18 +57,34 @@ internal sealed class BrightnessContrastPixelOp : UnaryPixelOp
 
 	public override ColorBgra Apply (in ColorBgra originalColor)
 	{
-		int intensity = originalColor.GetIntensityByte ();
+		if (originalColor.A == 0)
+			return originalColor;
+
+		if (originalColor.A == 255)
+			return ApplyStraight (originalColor);
+
+		ColorBgra straight = originalColor.ToStraightAlpha ();
+		ColorBgra straightModified = ApplyStraight (straight);
+		ColorBgra convertedBack = straightModified.ToPremultipliedAlpha ();
+
+		return convertedBack;
+	}
+
+	private ColorBgra ApplyStraight (in ColorBgra color)
+	{
+		int intensity = color.GetIntensityByte ();
 
 		if (Divide == 0) {
 			uint c = RGBTable[intensity];
-			return ColorBgra.FromUInt32 ((originalColor.BGRA & 0xff000000) | c | (c << 8) | (c << 16));
+			return ColorBgra.FromUInt32 ((color.BGRA & 0xff000000) | c | (c << 8) | (c << 16));
 		}
 
 		int shiftIndex = intensity * 256;
+
 		return ColorBgra.FromBgra (
-			b: RGBTable[shiftIndex + originalColor.B],
-			g: RGBTable[shiftIndex + originalColor.G],
-			r: RGBTable[shiftIndex + originalColor.R],
-			a: originalColor.A);
+			b: RGBTable[shiftIndex + color.B],
+			g: RGBTable[shiftIndex + color.G],
+			r: RGBTable[shiftIndex + color.R],
+			a: color.A);
 	}
 }
