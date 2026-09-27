@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-15 00:31+0000\n"
-"PO-Revision-Date: 2026-03-18 00:23+0000\n"
+"PO-Revision-Date: 2026-09-28 18:51+0000\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <https://hosted.weblate.org/projects/pinta/pinta/kk/>\n"
 "Language: kk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
 msgid " (in user directory)"
@@ -94,12 +94,12 @@ msgstr "Объектіні туралау"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:206
 msgid "All Petite Caps"
-msgstr ""
+msgstr "Барлық кішірек бас әріптер"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:194
 msgid "All Small Caps"
-msgstr ""
+msgstr "Барлық кіші бас әріптер"
 
 #: ../Pinta.Core/Actions/EditActions.cs:586
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:302
@@ -144,7 +144,7 @@ msgstr "Бұрыш"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
 msgid "Animate Selection Outline"
-msgstr ""
+msgstr "Таңдау құрылымын анимациялау"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -175,7 +175,7 @@ msgstr "Аткинсон"
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
 msgid "Author"
-msgstr ""
+msgstr "Авторы"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
@@ -191,11 +191,11 @@ msgstr "Авто деңгей"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "Автоайналдыру сөндірулі"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
-msgstr ""
+msgstr "Автоайналдыру іске қосулы"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -344,7 +344,7 @@ msgstr "Кенеп торы..."
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
 msgid "Category"
-msgstr ""
+msgstr "Санат"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -390,11 +390,11 @@ msgstr "Сантиметрлер"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width."
-msgstr ""
+msgstr "Қылқалам енін өзгерту."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:238
 msgid "Change font size."
-msgstr ""
+msgstr "Қаріп өлшемін өзгерту."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:237
 msgid "Change font size. Shortcut keys: [ ]"
@@ -402,7 +402,7 @@ msgstr "Қаріп өлшемін өзгерту. Жарлық пернелер�
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
-msgstr ""
+msgstr "Құрылым енін өзгерту."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -483,6 +483,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"Ұқсас түсті аймақты таңдау үшін шертіңіз.\n"
+"Глобалды режимді пайдалану үшін Shift пернесін басып тұрыңыз."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:606
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:348
@@ -750,7 +752,7 @@ msgstr "Сайманды ауыстырмау"
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:4
 msgid "Download size"
-msgstr ""
+msgstr "Жүктеп алу өлшемі"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:75
 #: ../Pinta.Core/Actions/LayerActions.cs:369
@@ -775,7 +777,7 @@ msgstr "Жиектерді анықтау"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
 msgid "Edit"
-msgstr ""
+msgstr "Түзету"
 
 #: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
@@ -816,6 +818,8 @@ msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
 msgstr ""
+"Таңдаудың көрінуін жақсарту үшін «жүгіретін құмырсқалар» эффектісін іске "
+"қосады. CPU пайдалануын азайту үшін сөндіріңіз."
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -887,7 +891,7 @@ msgstr "Объектіні жұмсарту"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -1023,7 +1027,7 @@ msgstr "Гаусс бұлыңғырлауы"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
 msgid "General"
-msgstr ""
+msgstr "Жалпы"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1075,7 +1079,7 @@ msgstr "Биіктігі:"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 msgid "Help"
-msgstr ""
+msgstr "Көмек"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1127,7 +1131,7 @@ msgstr "Түс реңі / Қанықтылық"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "ICO файлдары 256 x 256 пиксельден үлкен болмауы керек."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
@@ -1272,7 +1276,7 @@ msgstr "Жюлиа фракталы"
 
 #: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Пернетақта жарлықтары"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
@@ -1415,6 +1419,9 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Аймақты негізгі түспен толтыру үшін сол жақпен, ал қосымша түспен толтыру "
+"үшін оң жақпен шертіңіз.\n"
+"Глобалды режимді пайдалану үшін Shift пернесін басып тұрыңыз."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1860,7 +1867,7 @@ msgstr "Проценттиль"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:200
 msgid "Petite Caps"
-msgstr ""
+msgstr "Кішірек бас әріптер"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -1992,7 +1999,7 @@ msgstr "Қуат"
 
 #: ../Pinta.Core/Actions/AppActions.cs:49
 msgid "Preferences..."
-msgstr ""
+msgstr "Баптаулар..."
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:224
@@ -2014,32 +2021,32 @@ msgstr "Дайын жиынтық:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush width"
-msgstr ""
+msgstr "Қылқалам енін кішірейту үшін {0} басыңыз"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:240
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr ""
+msgstr "Қаріп өлшемін кішірейту үшін {0} басыңыз"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline width"
-msgstr ""
+msgstr "Құрылым енін кішірейту үшін {0} басыңыз"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush width"
-msgstr ""
+msgstr "Қылқалам енін арттыру үшін {0} басыңыз"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 #, csharp-format
 msgid "Press {0} to increase font size"
-msgstr ""
+msgstr "Қаріп өлшемін арттыру үшін {0} басыңыз"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline width"
-msgstr ""
+msgstr "Құрылым енін арттыру үшін {0} басыңыз"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:169
 msgid "Preview"
@@ -2211,6 +2218,8 @@ msgstr "Алмастыру"
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Replaces the header bar with a separate menu bar and tool bar."
 msgstr ""
+"Жоғарғы тақырыптама панелін бөлек мәзір панелімен және саймандар панелімен "
+"алмастырады."
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
@@ -2218,7 +2227,7 @@ msgstr "Қате туралы хабарлау..."
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
 msgid "Repository"
-msgstr ""
+msgstr "Репозиторий"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2456,7 +2465,7 @@ msgstr "Жарлық пернелері"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
 #: ../Pinta.Tools/Tools/TextTool.cs:239
 msgid "Shortcut keys:"
-msgstr ""
+msgstr "Жарлық пернелері:"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:75
 msgid "Show Axonometric Grid"
@@ -2473,7 +2482,7 @@ msgstr "Қабатты көрсету"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
 msgid "Show Menu Bar"
-msgstr ""
+msgstr "Мәзір панелін көрсету"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
@@ -2513,7 +2522,7 @@ msgstr "Қиғаш сызық"
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Small Caps"
-msgstr ""
+msgstr "Кіші бас әріптер"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
@@ -2680,7 +2689,7 @@ msgstr "Кеңес: Басқару нүктелерін өшіру үшін оң
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:218
 msgid "Title Caps"
-msgstr ""
+msgstr "Атаулық бас әріптер"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2708,7 +2717,7 @@ msgstr "Саймандар панелі"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:81
 msgid "Tools"
-msgstr ""
+msgstr "Саймандар"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:34
 msgid "Top Center"
@@ -2787,7 +2796,7 @@ msgstr "Фокусты алып тастау"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:212
 msgid "Unicase"
-msgstr ""
+msgstr "Unicase"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:232
 #: ../Pinta.Gui.Addins/InstallDialog.cs:233
@@ -2836,7 +2845,7 @@ msgstr ""
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
 msgid "User Interface"
-msgstr ""
+msgstr "Пайдаланушы интерфейсі"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
@@ -2848,7 +2857,7 @@ msgstr "Мән"
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:2
 msgid "Version"
-msgstr ""
+msgstr "Нұсқа"
 
 #. Translators: Vertical color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:247
