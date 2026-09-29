@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-15 00:31+0000\n"
-"PO-Revision-Date: 2026-09-28 18:51+0000\n"
+"PO-Revision-Date: 2026-10-02 02:08+0000\n"
 "Last-Translator: Aivaz Latypov <mr.aivazlatypov@yandex.ru>\n"
 "Language-Team: Tatar <https://hosted.weblate.org/projects/pinta/pinta/tt/>\n"
 "Language: tt\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.10\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
 msgid " (in user directory)"
@@ -344,11 +344,11 @@ msgstr ""
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
 msgid "Category"
-msgstr ""
+msgstr "Категория"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
-msgstr ""
+msgstr "Күзәнәк радиусы"
 
 #: ../Pinta.Effects/Effects/PixelateEffect.cs:121
 msgid "Cell Size"
@@ -398,7 +398,7 @@ msgstr "Шрифт зурлыгын үзгәртеге."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:237
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Шрифт зурлыгын үзгәртергә. Кыскача төймәләр: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
@@ -705,7 +705,7 @@ msgstr "Бетерелде"
 #. Translators: This refers to an image distortion that creates small, random warps or distortions in the image, like tiny dents, bumps, or waves
 #: ../Pinta.Effects/Effects/DentsEffect.cs:49
 msgid "Dents"
-msgstr ""
+msgstr "Яньчекләр"
 
 #: ../Pinta.Core/Actions/EditActions.cs:384
 msgid "Deselect"
@@ -1104,17 +1104,17 @@ msgstr "Тарих"
 #. Translators: Horizontal color sorting with blue (B) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:237
 msgid "Horizontal blue (B)"
-msgstr ""
+msgstr "Горизонталь зәңгәр (B)"
 
 #. Translators: Horizontal color sorting with green (G) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:240
 msgid "Horizontal green (G)"
-msgstr ""
+msgstr "Горизонталь яшел (G)"
 
 #. Translators: Horizontal color sorting with red (R) as the leading term
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:243
 msgid "Horizontal red (R)"
-msgstr ""
+msgstr "Горизонталь кызыл (R)"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:45
 #: ../Pinta.Effects/Adjustments/HueSaturationEffect.cs:61
@@ -1154,7 +1154,7 @@ msgstr "Рәсем редакторы"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:110
 msgid "Image Tabs"
-msgstr ""
+msgstr "Рәсем битләр"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:206
 msgid "Image cannot be pasted"
@@ -1280,7 +1280,6 @@ msgid "Keyboard Shortcuts"
 msgstr "Клавиатура кыска юллары"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
-#, fuzzy
 msgid "Landscape"
 msgstr "Альбомлык"
 
@@ -1322,7 +1321,7 @@ msgstr "Катламнар"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:360
 msgid "Left Align"
-msgstr ""
+msgstr "Сулга тигезләү"
 
 #: ../Pinta.Tools/Tools/MoveSelectedTool.cs:49
 #, csharp-format
@@ -1333,6 +1332,13 @@ msgid ""
 "Hold Shift to rotate in steps.\n"
 "Use arrow keys to move selected content by a single pixel."
 msgstr ""
+"Сайланган өлкә эчтәлеген күчерү өчен, аны басып тотып тартыгыз.\n"
+"Күчерү урынына зурайту/киметү өчен {0} төймәсен басып тотыгыз.\n"
+"Сул төймә урынына уң төймәне басып, сайланган өлкә эчтәлеген әйләндерү өчен "
+"аны сузып тартыгыз.\n"
+"Shift төймәсен тотып, 1 градус адымнары белән әйләндерегез.\n"
+"Сайланган өлкә эчтәлеген бер пиксельгә күчерү өчен укалар төймәләрен "
+"кулланыгыз."
 
 #: ../Pinta.Tools/Tools/MoveSelectionTool.cs:50
 #, csharp-format
@@ -1368,6 +1374,22 @@ msgid ""
 "exact same position.\n"
 "Press Enter to finalize the shape."
 msgstr ""
+"Төп төстә форма сызу өчен сул төймә белән басыгыз.\n"
+"Формага контроль нокта өстәү өчен сул төймә белән басыгыз.\n"
+"Контроль ноктаны күчерү өчен сул төймә белән басып, тартыгыз.\n"
+"Контроль ноктасын уң төймә белән басып, аны тартыгыз һәм аның киеренкелеген "
+"үзгәртегез.\n"
+"Почмакларга төгәл туры килдерү өчен Shift төймәсен басып тотыгыз.\n"
+"Сайланган контроль ноктаны күчерү өчен уку төймәләрен кулланыгыз.\n"
+"Чираттагы контроль ноктага күчү өчен {0} + сул/уң уку төймәләрен басыгыз.\n"
+"Сайланган контроль ноктасын бетерү өчен Delete төймәсенә басыгыз.\n"
+"Курсор урнашкан урында яңа контроль ноктасын өстәр өчен пробел төймәсенә "
+"басыгыз.\n"
+"{0} төймәсен тотып торганда, шул ук урында контроль ноктасын булдыру өчен "
+"пробел төймәсенә басыгыз.\n"
+"{0} төймәсен тотып торганда, контроль ноктасына сул төймә белән басып, шул "
+"ук урында яңа форма ясагыз.\n"
+"Форманы тәмамлау өчен Enter төймәсенә басыгыз."
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:51
 msgid ""
@@ -1384,11 +1406,15 @@ msgid ""
 "Left click to draw with primary color, right click to draw with secondary "
 "color."
 msgstr ""
+"Төп төс белән сызу өчен тышкы төймәсен сул яктан басыгыз, ә икенче төс белән "
+"сызу өчен уң яктан басыгыз."
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:68
 msgid ""
 "Left click to erase to transparent, right click to erase to secondary color. "
 msgstr ""
+"Сул төймәсенә басу астыдагы төсләрне үтә күренмәле фонга кадәр бетерә, ә уң "
+"төймәсенә басу бу урынны өстәмә төс белән тутыра. "
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:47
 msgid ""
@@ -1396,28 +1422,39 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Сул төймәсенә басканда мәйдан төп төс белән тутырыла, ә уң төймәсенә "
+"басканда ул икенчел төс белән тутырыла.\n"
+"Глобаль режимны куллану өчен Shift төймәсен басып тотыгыз."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
 "Left click to place cursor, then type desired text. Text color is primary "
 "color."
 msgstr ""
+"Курсорны урнаштыру өчен сул төймәгә басыгыз, аннары теләгән текстыгызны "
+"языгыз. Текст төп төстә ассызыкланачак."
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:58
 msgid ""
 "Left click to replace the secondary color with the primary color.\n"
 "Right click to reverse."
 msgstr ""
+"Икенчел һәм төп төсләрне алыштыру өчен сул төймәгә басыгыз.\n"
+"Баштагы тәртипкә кайту өчен уң төймәгә басыгыз."
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:59
 msgid ""
 "Left click to set primary color.\n"
 "Right click to set secondary color."
 msgstr ""
+"Төп төсне билгеләү өчен сул төймәгә басыгыз.\n"
+"Икенчел төсне билгеләү өчен уң төймәгә басыгыз."
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:339
 msgid "Left click to set primary color. Right click to set secondary color."
 msgstr ""
+"Төп төсне билгеләү өчен сул төймәгә басыгыз. Икенчел төсне билгеләү өчен уң "
+"төймәгә басыгыз."
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:331
@@ -1426,6 +1463,9 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Төп төсне билгеләү өчен сул төймәгә басыгыз. Икенчел төсне билгеләү өчен уң "
+"төймәгә басыгыз.  Палитрадан төс сайлау өчен урта төймәгә басыгыз яки {0} "
+"төймәсен тотып торып, сул төймәгә басыгыз."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1433,6 +1473,9 @@ msgid ""
 "Right click to zoom out.\n"
 "Click and drag to zoom in selection."
 msgstr ""
+"Зурайту өчен сул төймәгә басыгыз.\n"
+"Кечерәйтү өчен уң төймәгә басыгыз.\n"
+"Сайланган өлкә буйлап зурайту өчен сул төймәгә басып, тартыгыз."
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:331
 msgid "Length"
@@ -1527,13 +1570,11 @@ msgid "Maximum Size"
 msgstr "Иң зур зурлык"
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:23
-#, fuzzy
 msgid "Median"
 msgstr "Уртача"
 
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:290
-#, fuzzy
 msgid "Medium"
 msgstr "Уртача"
 
@@ -1565,7 +1606,7 @@ msgstr "Тагын мәгълүмат..."
 
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:27
 msgid "Motion Blur"
-msgstr ""
+msgstr "Блюр хәрәкәт"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:121
 #: ../Pinta.Core/Actions/LayerActions.cs:316
@@ -2477,36 +2518,36 @@ msgstr ""
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr ""
+msgstr "Слэш"
 
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Small Caps"
-msgstr ""
+msgstr "Кечкенә баш хәрефләр"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
-msgstr ""
+msgstr "Йомшак"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
-msgstr ""
+msgstr "Йомшак ут"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:54
 msgid "Soften Portrait"
-msgstr ""
+msgstr "Портретны йомшарту"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
 msgid "Softness"
-msgstr ""
+msgstr "Йомшаклык"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
-msgstr ""
+msgstr "Чәчрәүләр"
 
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:35
 msgid "Squares"
-msgstr ""
+msgstr "Квадратлар"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
@@ -2515,35 +2556,35 @@ msgstr ""
 #: ../Pinta.Effects/Effects/ReduceNoiseEffect.cs:88
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:142
 msgid "Strength"
-msgstr ""
+msgstr "Көч"
 
 #. Translators: Image dithering matrix named after Peter Stucki
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:32
 msgid "Stucki"
-msgstr ""
+msgstr "Штуки"
 
 #: ../Pinta.Effects/Effects/EdgeDetectEffect.cs:32
 #: ../Pinta.Effects/Effects/EmbossEffect.cs:32
 #: ../Pinta.Effects/Effects/OutlineEdgeEffect.cs:27
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:33
 msgid "Stylize"
-msgstr ""
+msgstr "Стильләү"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:218
 msgid "Switch to Pencil tool"
-msgstr ""
+msgstr "Каләм коралына күчәргә"
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:217
 msgid "Switch to previous tool"
-msgstr ""
+msgstr "Алдагы коралга күчү"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:80
 msgid "Text"
-msgstr ""
+msgstr "Текст"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:83
 msgid "Text - Finalize"
-msgstr ""
+msgstr "Текст - тәмам"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:395
 msgid "Text Style"
@@ -2553,15 +2594,15 @@ msgstr "Текст стиле"
 #: ../Pinta/MainWindow.cs:320
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr ""
+msgstr "'{0}' өстәмәсе Pinta'ның бу версиясе белән туры килмәскә мөмкин"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:207
 msgid "The clipboard does not contain an image."
-msgstr ""
+msgstr "Алмашу буферында рәсем юк."
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:216
 msgid "The file may be an invalid or corrupt extension package"
-msgstr ""
+msgstr "Бу файл дөрес булмаган яки бозылган киңәйтмә пакеты булырга мөмкин"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:89
 msgid "The following dependencies could not be resolved:"
@@ -2625,7 +2666,7 @@ msgstr "Калынлык"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:254
 msgid "Thin"
-msgstr ""
+msgstr "Нәзек"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
 msgid "This format does not support layers. Flatten image?"
