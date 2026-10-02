@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-01 00:37+0000\n"
-"PO-Revision-Date: 2026-09-15 06:55+0000\n"
+"PO-Revision-Date: 2026-10-03 01:01+0000\n"
 "Last-Translator: Matthaiks <kitynska@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.10\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -726,7 +726,7 @@ msgstr "Różnica"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:130
 msgid "Diffusion"
-msgstr ""
+msgstr "Rozpraszanie"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
@@ -1293,7 +1293,7 @@ msgstr "Pozioma"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 msgid "Language"
-msgstr ""
+msgstr "Język"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
@@ -1579,7 +1579,7 @@ msgstr "Lawa marsjańska"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:122
 msgid "Maximum Scatter Radius"
-msgstr ""
+msgstr "Maksymalny promień rozrzutu"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
@@ -1601,7 +1601,7 @@ msgstr "Scal warstwę w dół"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:126
 msgid "Minimum Scatter Radius"
-msgstr ""
+msgstr "Minimalny promień rozrzutu"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
@@ -2551,7 +2551,7 @@ msgstr "Wygładzanie"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
 msgid "Smoothness"
-msgstr ""
+msgstr "Gładkość"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
