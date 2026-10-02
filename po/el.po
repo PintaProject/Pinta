@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 00:31+0000\n"
+"POT-Creation-Date: 2026-10-01 00:37+0000\n"
 "PO-Revision-Date: 2026-02-01 04:28+0000\n"
 "Last-Translator: antfullstack "
 "<253273528+antfullstack@users.noreply.github.com>\n"
@@ -63,7 +63,7 @@ msgstr "Σχετικά με το Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:400
-#: ../Pinta/Actions/Edit/PasteAction.cs:173
+#: ../Pinta/Actions/Edit/PasteAction.cs:187
 msgid "Add New Layer"
 msgstr "Προσθήκη νέου επιπέδου"
 
@@ -103,7 +103,7 @@ msgstr ""
 msgid "All Small Caps"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:586
+#: ../Pinta.Core/Actions/EditActions.cs:619
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:302
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
@@ -118,7 +118,6 @@ msgid "Alpha Gradient"
 msgstr "Διαβάθμιση άλφα"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
 #: ../Pinta.Effects/Effects/TwistEffect.cs:217
@@ -144,7 +143,7 @@ msgstr "Αγκύρωση:"
 msgid "Angle"
 msgstr "Γωνία"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
 msgid "Animate Selection Outline"
 msgstr ""
 
@@ -325,14 +324,14 @@ msgstr "Σε απόλυτο μέγεθος:"
 msgid "By percentage:"
 msgstr "Σε ποσοστό:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:523
+#: ../Pinta.Core/Actions/EditActions.cs:556
 #: ../Pinta.Gui.Addins/InstallDialog.cs:126
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:498
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "Καμβάς"
 
@@ -476,7 +475,7 @@ msgstr "Κλικ και σύρετε για να περιηγηθείτε στη
 msgid "Click to reset primary and secondary color."
 msgstr "Πατήστε για να αρχικοποιήσετε το πρωτεύον και το δευτερεύον χρώμα."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:601
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:602
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:344
 msgid "Click to select primary color."
 msgstr "Πατήστε για να επιλέξετε πρωτεύον χρώμα."
@@ -487,7 +486,7 @@ msgid ""
 "Hold shift to use Global mode."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:606
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:348
 msgid "Click to select secondary color."
 msgstr "Πατήστε για να επιλέξετε δευτερεύον χρώμα."
@@ -559,7 +558,7 @@ msgstr "Λειτουργεία χρώματος"
 msgid "Color Picker"
 msgstr "Επιλογέας χρώματος"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:90
 msgid "Color Range"
 msgstr "Εύρος χρώματος"
 
@@ -567,7 +566,7 @@ msgstr "Εύρος χρώματος"
 msgid "Color Saturation"
 msgstr "Κορεσμός χρώματος"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:6
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -676,7 +675,7 @@ msgid "Cut"
 msgstr "Αποκοπή"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
 msgid "Dark"
 msgstr "Σκοτεινό"
 
@@ -722,6 +721,10 @@ msgstr "Λεπτομέρειες"
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "Διαφορά"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:130
+msgid "Diffusion"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
@@ -808,11 +811,11 @@ msgstr "Ελλειψοειδής επιλογή"
 msgid "Emboss"
 msgstr "Εμβάθυνση"
 
-#: ../Pinta/Main.cs:67
+#: ../Pinta/Main.cs:71
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr "Επιλογή εκτενούς αναφοράς ή αλλαγή συμπεριφοράς για debugging"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:15
 msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
@@ -840,7 +843,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Αποκλεισμός (-) (δεξί κλικ)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:226
+#: ../Pinta/Actions/Edit/PasteAction.cs:256
 msgid "Expand"
 msgstr "Επέκταση"
 
@@ -869,7 +872,7 @@ msgstr "Σφάλμα φόρτωσης πακέτου προσθέτου"
 msgid "Failed to open image"
 msgstr "Αποτυχία ανοίγματος εικόνας"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:235
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:236
 msgid "Failed to save image"
 msgstr "Αποτυχία αποθήκευσης της εικόνας"
 
@@ -894,7 +897,7 @@ msgstr ""
 msgid "File a Bug"
 msgstr "Στείλτε αναφορά σφάλματος"
 
-#: ../Pinta/Main.cs:62
+#: ../Pinta/Main.cs:66
 msgid "Files to open"
 msgstr "Αρχεία για άνοιγμα"
 
@@ -938,11 +941,11 @@ msgstr "τελείωμα εικονοστοιχείων"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:117
 #: ../Pinta.Core/Actions/ImageActions.cs:221
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:275
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:279
 msgid "Flatten"
 msgstr "Ισοπέδωση"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:271
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:275
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr "Εξομαλύνοντας την εικόνα θα συγχωνεύσει όλα τα επίπεδα σε ένα."
 
@@ -1126,7 +1129,7 @@ msgstr "Απόχρωση & κορεσμός"
 msgid "Hue / Saturation"
 msgstr "Απόχρωση / κορεσμός"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:228
 msgid "ICO files can not be larger than 256 x 256 pixels."
 msgstr ""
 
@@ -1152,7 +1155,7 @@ msgstr "Επεξεργασία εικόνας"
 msgid "Image Tabs"
 msgstr "Καρτέλες εικόνας"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:206
+#: ../Pinta/Actions/Edit/PasteAction.cs:236
 msgid "Image cannot be pasted"
 msgstr "Η εικόνα δεν μπορεί να επικολληθεί"
 
@@ -1161,11 +1164,11 @@ msgstr "Η εικόνα δεν μπορεί να επικολληθεί"
 msgid "Image files"
 msgstr "Αρχεία εικόνων"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:213
+#: ../Pinta/Actions/Edit/PasteAction.cs:243
 msgid "Image larger than canvas"
 msgstr "Η εικόνα είναι μεγαλύτερη από τον καμβά"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "Image too large"
 msgstr "Η εικόνα είναι πολύ μεγάλη"
 
@@ -1252,7 +1255,7 @@ msgid "Invert Colors"
 msgstr "Αντιστροφή χρωμάτων"
 
 #: ../Pinta.Core/Actions/EditActions.cs:143
-#: ../Pinta.Core/Actions/EditActions.cs:608
+#: ../Pinta.Core/Actions/EditActions.cs:641
 msgid "Invert Selection"
 msgstr "Αντιστροφή επιλογής"
 
@@ -1280,6 +1283,10 @@ msgstr ""
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
 msgstr "Τοπίο"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
+msgid "Language"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
@@ -1484,7 +1491,7 @@ msgstr "Άδεια χρήσης"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:8
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "Φωτεινό"
@@ -1553,6 +1560,10 @@ msgstr "Φράκταλ Μάντελμπροτ"
 msgid "Martian Lava"
 msgstr "Λάβα του Άρη"
 
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:122
+msgid "Maximum Scatter Radius"
+msgstr ""
+
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
 msgstr "Μέγιστο Μέγεθος"
@@ -1570,6 +1581,10 @@ msgstr ""
 #: ../Pinta.Core/Actions/LayerActions.cs:335
 msgid "Merge Layer Down"
 msgstr "Συγχώνευση επιπέδου προς τα κάτω"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:126
+msgid "Minimum Scatter Radius"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
@@ -1683,7 +1698,7 @@ msgstr "Κανονικό και περίγραμμα"
 msgid "Number of Cells"
 msgstr "Αριθμός κελιών"
 
-#: ../Pinta/Main.cs:56
+#: ../Pinta/Main.cs:60
 msgid "Number of threads to use for rendering"
 msgstr "Αριθμός νημάτων προς απόδοση"
 
@@ -1740,7 +1755,7 @@ msgstr "Άνοιγμα αρχείου εικόνας"
 msgid "Open Line/Curve Series"
 msgstr "Άνοιγμα σειράς Γραμμής/Καμπύλης"
 
-#: ../Pinta.Core/Actions/EditActions.cs:488
+#: ../Pinta.Core/Actions/EditActions.cs:521
 msgid "Open Palette File"
 msgstr "Άνοιγμα αρχείου παλέτας"
 
@@ -1816,7 +1831,7 @@ msgstr "Παλέτα"
 msgid "Palette Source"
 msgstr "Πηγή Παλέτας"
 
-#: ../Pinta.Core/Actions/EditActions.cs:569
+#: ../Pinta.Core/Actions/EditActions.cs:602
 msgid "Palette files"
 msgstr "Αρχεία παλέτας"
 
@@ -1848,7 +1863,7 @@ msgstr "Μολύβι"
 msgid "Pencil Sketch"
 msgstr "Σκίτσο με μολύβι"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:85
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
 msgid "Pencil Tip Size"
 msgstr "Μέγεθος μύτης μολυβιού"
 
@@ -1875,7 +1890,7 @@ msgid "Phyllotaxis"
 msgstr "Φυλλοτάξη"
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:75
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
 msgstr "Επεξεργασία εικόνας Pinta"
@@ -1937,7 +1952,7 @@ msgstr "Εικονοστοιχεία"
 msgid "Piña Colada"
 msgstr "Πίνα Κολάδα"
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:81
+#: ../Pinta/Dialogs/PreferencesDialog.cs:122
 msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 "Παρακαλούμε επανεκκινήστε το Pinta για τις αλλαγές που πρέπει να εφαρμοστούν."
@@ -1996,7 +2011,7 @@ msgid "Preferences..."
 msgstr ""
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:224
+#: ../Pinta/Actions/Edit/PasteAction.cs:254
 msgid "Preserve"
 msgstr "Διατήρηση"
 
@@ -2122,7 +2137,7 @@ msgstr "Τυχαία χρώματα"
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:142
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:138
 msgid "Random Noise Seed"
 msgstr "Τυχαίος σπόρος θορύβου"
 
@@ -2201,7 +2216,7 @@ msgstr "Μετονομασία επιπέδου"
 msgid "Render"
 msgstr "Απόδοση"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
 msgid "Rendering Effect"
 msgstr "Απόδοση αποτελέσματος"
 
@@ -2209,7 +2224,7 @@ msgstr "Απόδοση αποτελέσματος"
 msgid "Replace"
 msgstr "Αντικατάσταση"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12
 msgid "Replaces the header bar with a separate menu bar and tool bar."
 msgstr ""
 
@@ -2362,7 +2377,7 @@ msgstr "Κορεσμός"
 msgid "Saturation Percentage"
 msgstr "Ποσοστό κορεσμού"
 
-#: ../Pinta.Core/Actions/EditActions.cs:522
+#: ../Pinta.Core/Actions/EditActions.cs:555
 #: ../Pinta.Core/Actions/FileActions.cs:88
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2381,7 +2396,7 @@ msgstr "Αποθήκευση ως…"
 msgid "Save Image File"
 msgstr "Αποθήκευση αρχείου εικόνας"
 
-#: ../Pinta.Core/Actions/EditActions.cs:519
+#: ../Pinta.Core/Actions/EditActions.cs:552
 msgid "Save Palette File"
 msgstr "Αποθήκευση Αρχείου Παλέτας"
 
@@ -2472,7 +2487,7 @@ msgstr "Εμφάνιση πλέγματος"
 msgid "Show Layer"
 msgstr "Εμφάνισηη επιπέδου"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Show Menu Bar"
 msgstr ""
 
@@ -2519,6 +2534,10 @@ msgstr ""
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
 msgstr "Ομαλό"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
+msgid "Smoothness"
+msgstr ""
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -2588,7 +2607,7 @@ msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
 "Το πρόσθετο '{0}' μπορεί να μην είναι συμβατό με αυτήν την έκδοση του Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:237
 msgid "The clipboard does not contain an image."
 msgstr "Το πρόχειρο δεν περιέχει εικόνα."
 
@@ -2612,7 +2631,7 @@ msgstr "Τα ακόλουθα πακέτα θα εγκατασταθούν:"
 msgid "The following packages will be uninstalled:"
 msgstr "Τα ακόλουθα πακέτα θα απεγκατασταθούν:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:244
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2661,7 +2680,7 @@ msgstr "Πάχος"
 msgid "Thin"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
 msgid "This format does not support layers. Flatten image?"
 msgstr "Αυτός ο τύπος αρχείου δεν υποστηρίζει επίπεδα. Εξομάλυνση εικόνας;"
 
@@ -2817,7 +2836,7 @@ msgstr "Μη αποθηκευμένη εικόνα {0}"
 msgid "Unsupported file format"
 msgstr "Μη υποστηριζόμενη μορφή αρχείου"
 
-#: ../Pinta.Core/Actions/EditActions.cs:511
+#: ../Pinta.Core/Actions/EditActions.cs:544
 msgid "Unsupported palette format"
 msgstr "Μη υποστηριζόμενος τύπος παλέττας"
 
@@ -2932,7 +2951,7 @@ msgid "You do not have access to '{0}'."
 msgstr "Δεν έχετε πρόσβαση στο '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2969,9 +2988,9 @@ msgstr "_Προσαρμογές"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:214
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:216
-#: ../Pinta/Actions/Edit/PasteAction.cs:222
+#: ../Pinta/Actions/Edit/PasteAction.cs:252
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:278
 #: ../Pinta/Dialogs/ProgressDialog.cs:71
 msgid "_Cancel"
 msgstr "_Ακύρωση"
