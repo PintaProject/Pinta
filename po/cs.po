@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 00:31+0000\n"
+"POT-Creation-Date: 2026-10-01 00:37+0000\n"
 "PO-Revision-Date: 2026-09-28 18:51+0000\n"
 "Last-Translator: AsciiWolf <mail@asciiwolf.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/pinta/pinta/cs/>\n"
@@ -62,7 +62,7 @@ msgstr "O Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:400
-#: ../Pinta/Actions/Edit/PasteAction.cs:173
+#: ../Pinta/Actions/Edit/PasteAction.cs:187
 msgid "Add New Layer"
 msgstr "Přidat novou vrstvu"
 
@@ -102,7 +102,7 @@ msgstr "Všechny hezké písmena"
 msgid "All Small Caps"
 msgstr "Všechny malé písmena"
 
-#: ../Pinta.Core/Actions/EditActions.cs:586
+#: ../Pinta.Core/Actions/EditActions.cs:619
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:302
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
@@ -117,7 +117,6 @@ msgid "Alpha Gradient"
 msgstr "Alfa Přechod"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
 #: ../Pinta.Effects/Effects/TwistEffect.cs:217
@@ -143,7 +142,7 @@ msgstr "Kotva:"
 msgid "Angle"
 msgstr "Úhel"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
 msgid "Animate Selection Outline"
 msgstr "Animovat Obrys Výběru"
 
@@ -324,14 +323,14 @@ msgstr "Na velikost:"
 msgid "By percentage:"
 msgstr "Procentuelně:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:523
+#: ../Pinta.Core/Actions/EditActions.cs:556
 #: ../Pinta.Gui.Addins/InstallDialog.cs:126
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:498
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "Plátno"
 
@@ -475,7 +474,7 @@ msgstr "Klik a táhnutí posunou obrázek."
 msgid "Click to reset primary and secondary color."
 msgstr "Kliknutím restartujete primární a skundární barvu."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:601
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:602
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:344
 msgid "Click to select primary color."
 msgstr "Kliknutím vyberte primární barvu."
@@ -488,7 +487,7 @@ msgstr ""
 "Klikněte a vyberte region stejné barvy.\n"
 "Držte shift pro použití globálního módu."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:606
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:348
 msgid "Click to select secondary color."
 msgstr "Kliknutím vyberte sekundární barvu."
@@ -560,7 +559,7 @@ msgstr "Režim barev"
 msgid "Color Picker"
 msgstr "Kapátko"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:90
 msgid "Color Range"
 msgstr "Rozsah barev"
 
@@ -568,7 +567,7 @@ msgstr "Rozsah barev"
 msgid "Color Saturation"
 msgstr "Sytost Barvy"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:6
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -677,7 +676,7 @@ msgid "Cut"
 msgstr "Vyjmout"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
 msgid "Dark"
 msgstr "Tmavé"
 
@@ -723,6 +722,10 @@ msgstr "Podrobnosti"
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "Rozdíl"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:130
+msgid "Diffusion"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
@@ -809,11 +812,11 @@ msgstr "Elipsový výběr"
 msgid "Emboss"
 msgstr "Otisk"
 
-#: ../Pinta/Main.cs:67
+#: ../Pinta/Main.cs:71
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr "Zapnout přídavné záznamy nebo změny chování pro ladění"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:15
 msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
@@ -843,7 +846,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Vyloučit (-) (Pravé Kliknutí)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:226
+#: ../Pinta/Actions/Edit/PasteAction.cs:256
 msgid "Expand"
 msgstr "Rozšířit"
 
@@ -872,7 +875,7 @@ msgstr "Nemohli jsme načíst balíčky s rozšířeními"
 msgid "Failed to open image"
 msgstr "Obrázek se nepodařilo otevřít"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:235
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:236
 msgid "Failed to save image"
 msgstr "Obrázek se nepodařilo uložit"
 
@@ -897,7 +900,7 @@ msgstr "Soubor"
 msgid "File a Bug"
 msgstr "Nahlásit chybu"
 
-#: ../Pinta/Main.cs:62
+#: ../Pinta/Main.cs:66
 msgid "Files to open"
 msgstr "Soubory na otevření"
 
@@ -941,11 +944,11 @@ msgstr "Dokončit pixely"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:117
 #: ../Pinta.Core/Actions/ImageActions.cs:221
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:275
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:279
 msgid "Flatten"
 msgstr "Zploštit"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:271
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:275
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr "Zploštění obrázku spojí všechny jeho vrstvy do jedné."
 
@@ -1129,7 +1132,7 @@ msgstr "Odstín a Sytost"
 msgid "Hue / Saturation"
 msgstr "Odstín / Sytost"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:228
 msgid "ICO files can not be larger than 256 x 256 pixels."
 msgstr "ICO soubory nemohou být větší než 256 x 256 pixelů."
 
@@ -1155,7 +1158,7 @@ msgstr "Editor obrázků"
 msgid "Image Tabs"
 msgstr "Panely obrázků"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:206
+#: ../Pinta/Actions/Edit/PasteAction.cs:236
 msgid "Image cannot be pasted"
 msgstr "Nelze vložit obrázek"
 
@@ -1164,11 +1167,11 @@ msgstr "Nelze vložit obrázek"
 msgid "Image files"
 msgstr "Soubory obrázků"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:213
+#: ../Pinta/Actions/Edit/PasteAction.cs:243
 msgid "Image larger than canvas"
 msgstr "Obrázek větší než plátno"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "Image too large"
 msgstr "Obrázek je příliš velký"
 
@@ -1253,7 +1256,7 @@ msgid "Invert Colors"
 msgstr "Invertovat barvy"
 
 #: ../Pinta.Core/Actions/EditActions.cs:143
-#: ../Pinta.Core/Actions/EditActions.cs:608
+#: ../Pinta.Core/Actions/EditActions.cs:641
 msgid "Invert Selection"
 msgstr "Obrátit výběr"
 
@@ -1281,6 +1284,10 @@ msgstr "Zkratky Klávesnice"
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
 msgstr "Na šířku"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
+msgid "Language"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
@@ -1486,7 +1493,7 @@ msgstr "Licence"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:8
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "Světlé"
@@ -1555,6 +1562,10 @@ msgstr "Mandelbrotův fraktál"
 msgid "Martian Lava"
 msgstr "Lávový Přechod"
 
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:122
+msgid "Maximum Scatter Radius"
+msgstr ""
+
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
 msgstr "Maximální Velikost"
@@ -1572,6 +1583,10 @@ msgstr "Střední"
 #: ../Pinta.Core/Actions/LayerActions.cs:335
 msgid "Merge Layer Down"
 msgstr "Spojit vrstvy"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:126
+msgid "Minimum Scatter Radius"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
@@ -1685,7 +1700,7 @@ msgstr "Normální a ohraničený"
 msgid "Number of Cells"
 msgstr "Počet Buněk"
 
-#: ../Pinta/Main.cs:56
+#: ../Pinta/Main.cs:60
 msgid "Number of threads to use for rendering"
 msgstr "Počet vláken použito při vykreslování"
 
@@ -1742,7 +1757,7 @@ msgstr "Otevřít obrázek"
 msgid "Open Line/Curve Series"
 msgstr "Otevřít sadu čar/křivek"
 
-#: ../Pinta.Core/Actions/EditActions.cs:488
+#: ../Pinta.Core/Actions/EditActions.cs:521
 msgid "Open Palette File"
 msgstr "Otevřít sobor s paletou"
 
@@ -1818,7 +1833,7 @@ msgstr "Paleta"
 msgid "Palette Source"
 msgstr "Zdroj Palety"
 
-#: ../Pinta.Core/Actions/EditActions.cs:569
+#: ../Pinta.Core/Actions/EditActions.cs:602
 msgid "Palette files"
 msgstr "Soubory Palet"
 
@@ -1850,7 +1865,7 @@ msgstr "Tužka"
 msgid "Pencil Sketch"
 msgstr "Náčrt tužkou"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:85
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
 msgid "Pencil Tip Size"
 msgstr "Velikost hrotu tužky"
 
@@ -1877,7 +1892,7 @@ msgid "Phyllotaxis"
 msgstr "Rozložení semínek"
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:75
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
 msgstr "Pinta"
@@ -1937,7 +1952,7 @@ msgstr "Pixely"
 msgid "Piña Colada"
 msgstr "Přechod Žluto-hnědý"
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:81
+#: ../Pinta/Dialogs/PreferencesDialog.cs:122
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Restartujte Pinta aby se změny projevily."
 
@@ -1995,7 +2010,7 @@ msgid "Preferences..."
 msgstr "Preference..."
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:224
+#: ../Pinta/Actions/Edit/PasteAction.cs:254
 msgid "Preserve"
 msgstr "Zachovat"
 
@@ -2121,7 +2136,7 @@ msgstr "Náhodné Barvy"
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:142
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:138
 msgid "Random Noise Seed"
 msgstr "Náhodný Šum Semínek"
 
@@ -2200,7 +2215,7 @@ msgstr "Přejmenovat vrstvu"
 msgid "Render"
 msgstr "Vykreslit"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
 msgid "Rendering Effect"
 msgstr "Vykreslovací efekt"
 
@@ -2208,7 +2223,7 @@ msgstr "Vykreslovací efekt"
 msgid "Replace"
 msgstr "Nahradit"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12
 msgid "Replaces the header bar with a separate menu bar and tool bar."
 msgstr "Zamění vrchní menu za separátní lištu nastavení a lištu nástrojů."
 
@@ -2361,7 +2376,7 @@ msgstr "Sytost"
 msgid "Saturation Percentage"
 msgstr "Procento sytosti"
 
-#: ../Pinta.Core/Actions/EditActions.cs:522
+#: ../Pinta.Core/Actions/EditActions.cs:555
 #: ../Pinta.Core/Actions/FileActions.cs:88
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2380,7 +2395,7 @@ msgstr "Uložit jako..."
 msgid "Save Image File"
 msgstr "Uložení obrázku"
 
-#: ../Pinta.Core/Actions/EditActions.cs:519
+#: ../Pinta.Core/Actions/EditActions.cs:552
 msgid "Save Palette File"
 msgstr "Uložit soubor palety"
 
@@ -2471,7 +2486,7 @@ msgstr "Zobrazit Mřížku"
 msgid "Show Layer"
 msgstr "Zobrazit Vrstvu"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Show Menu Bar"
 msgstr "Ukázat Lištu Nastavení"
 
@@ -2518,6 +2533,10 @@ msgstr "Malá písmena"
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
 msgstr "Plynulé"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
+msgid "Smoothness"
+msgstr ""
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -2586,7 +2605,7 @@ msgstr "Styl textu"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "Plugin \"{0}\" nemusí být kompatibilní s touto verzí Pinty"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:237
 msgid "The clipboard does not contain an image."
 msgstr "Schránka neobsahuje žádný obrázek."
 
@@ -2610,7 +2629,7 @@ msgstr "Následující balíčky budou nainstalovány:"
 msgid "The following packages will be uninstalled:"
 msgstr "Následující balíčky budou odebrány:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:244
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2658,7 +2677,7 @@ msgstr "Tloušťka"
 msgid "Thin"
 msgstr "Tenký"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
 msgid "This format does not support layers. Flatten image?"
 msgstr "Tento formát nepodporuje vrstvy. Zarovnat obrázek?"
 
@@ -2814,7 +2833,7 @@ msgstr "Neuložený obrázek {0}"
 msgid "Unsupported file format"
 msgstr "Nepodporovaný typ souboru"
 
-#: ../Pinta.Core/Actions/EditActions.cs:511
+#: ../Pinta.Core/Actions/EditActions.cs:544
 msgid "Unsupported palette format"
 msgstr "Nepodporovaný formát palety"
 
@@ -2928,7 +2947,7 @@ msgid "You do not have access to '{0}'."
 msgstr "Nemáte přístup do '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2964,9 +2983,9 @@ msgstr "_Přizpůsobení"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:214
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:216
-#: ../Pinta/Actions/Edit/PasteAction.cs:222
+#: ../Pinta/Actions/Edit/PasteAction.cs:252
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:278
 #: ../Pinta/Dialogs/ProgressDialog.cs:71
 msgid "_Cancel"
 msgstr "_Zrušit"
