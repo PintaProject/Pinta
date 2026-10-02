@@ -97,7 +97,7 @@ public sealed class GradientTool : BaseTool
 			return;
 		}
 
-		RectangleI handleDirtyRegion = handle.StartNewLine (e.PointDouble);
+		RectangleI handleDirtyRegion = handle.StartNewLine (e.PointDouble.Rounded ());
 		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
 
 		is_reversed = e.MouseButton == MouseButton.Right;
@@ -140,7 +140,7 @@ public sealed class GradientTool : BaseTool
 			return;
 		}
 
-		RectangleI handleDirtyRegion = handle.Drag (e.PointDouble);
+		RectangleI handleDirtyRegion = handle.Drag (e.PointDouble.Rounded ());
 		document.Workspace.InvalidateWindowRect (handleDirtyRegion);
 
 		RenderGradient ();
