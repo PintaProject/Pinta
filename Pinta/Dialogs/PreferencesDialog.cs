@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using GObject;
 
 namespace Pinta;
 
 using Pinta.Core;
+using Pinta.Gui.Widgets;
 
 [GObject.Subclass<Adw.PreferencesDialog> (qualifiedName: nameof (PreferencesDialog))]
 [Gtk.Template<Gtk.AssemblyResource> ("PreferencesDialog.ui")]
@@ -34,6 +36,11 @@ internal sealed partial class PreferencesDialog
 
 	[Gtk.Connect ("startup_background_comborow")]
 	private Adw.ComboRow startup_background_row;
+
+	[Gtk.Connect ("startup_color_row")]
+	private Adw.ActionRow startup_color_row;
+
+	private PintaColorButton startup_color_button = null!;
 
 	public static PreferencesDialog New (ISettingsService settings)
 	{
@@ -64,6 +71,14 @@ internal sealed partial class PreferencesDialog
 		Adw.SpinRow.ValuePropertyDefinition.Notify (startup_width_row, OnStartupWidthChanged);
 		Adw.SpinRow.ValuePropertyDefinition.Notify (startup_height_row, OnStartupHeightChanged);
 		Adw.ComboRow.SelectedPropertyDefinition.Notify (startup_background_row, OnStartupBackgroundChanged);
+
+		startup_color_button = PintaColorButton.New ();
+		startup_color_button.Valign = Gtk.Align.Center;
+		startup_color_button.Hexpand = false;
+		startup_color_button.WidthRequest = 80;
+		startup_color_button.OnClicked += async (_, _) => await ChooseStartupColor ();
+		startup_color_row.AddSuffix (startup_color_button);
+		startup_color_row.ActivatableWidget = startup_color_button;
 	}
 
 	/// <summary>
@@ -91,6 +106,10 @@ internal sealed partial class PreferencesDialog
 		startup_width_row.Value = settings.GetSetting (SettingNames.STARTUP_IMAGE_WIDTH, 800);
 		startup_height_row.Value = settings.GetSetting (SettingNames.STARTUP_IMAGE_HEIGHT, 600);
 		startup_background_row.SetSelected ((uint) settings.GetSetting (SettingNames.STARTUP_IMAGE_BACKGROUND, (int) BackgroundType.White));
+
+		string colorHex = settings.GetSetting (SettingNames.STARTUP_IMAGE_BACKGROUND_COLOR, Cairo.Color.Black.ToHex ());
+		startup_color_button.DisplayColor = Cairo.Color.FromHex (colorHex) ?? Cairo.Color.Black;
+		startup_color_row.Visible = startup_background_row.Selected == (uint) BackgroundType.SecondaryColor;
 	}
 
 	private void OnLanguageChanged (Object sender, NotifySignalArgs args)
@@ -146,6 +165,31 @@ internal sealed partial class PreferencesDialog
 	private void OnStartupBackgroundChanged (Object sender, NotifySignalArgs args)
 	{
 		settings.PutSetting (SettingNames.STARTUP_IMAGE_BACKGROUND, (int) startup_background_row.Selected);
+		startup_color_row.Visible = startup_background_row.Selected == (uint) BackgroundType.SecondaryColor;
+	}
+
+	private async Task ChooseStartupColor ()
+	{
+		using ColorPickerDialog dialog = ColorPickerDialog.New (
+			PintaCore.Chrome.MainWindow,
+			PintaCore.Palette,
+			new SingleColor (startup_color_button.DisplayColor),
+			primarySelected: true,
+			false,
+			Translations.GetString ("Choose Color"));
+
+		try {
+			Gtk.ResponseType response = await dialog.RunAsync ();
+
+			if (response != Gtk.ResponseType.Ok)
+				return;
+
+			Cairo.Color color = ((SingleColor) dialog.Colors).Color;
+			startup_color_button.DisplayColor = color;
+			settings.PutSetting (SettingNames.STARTUP_IMAGE_BACKGROUND_COLOR, color.ToHex ());
+		} finally {
+			dialog.Destroy ();
+		}
 	}
 
 	private void ShowRestartMessage ()
