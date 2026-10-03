@@ -4,7 +4,7 @@ using Pinta.Core;
 namespace Pinta.Gui.Widgets;
 
 [GObject.Subclass<Gtk.Button>]
-internal sealed partial class PintaColorButton
+public sealed partial class PintaColorButton
 {
 	private Color display_color = Color.Black;
 	public Color DisplayColor {
