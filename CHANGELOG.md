@@ -25,6 +25,7 @@ Thanks to the following contributors who worked on this release:
 - @colin-i
 - @rrivvi
 - @Rakosn1cek
+- @davew85
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -48,6 +49,7 @@ Thanks to the following contributors who worked on this release:
   - Moved the color scheme and menubar options from the View menu into the preferences dialog (#2261, #2272)
   - Added a preference for enabling the selection outline animation (#2187, #2272)
   - Added a preference for changing the language (#2317, #1417)
+  - Added preferences for configuring the initial startup image (#2329, #1328)
 - Added anti-aliasing and diffusion parameters to the Frosted Glass effect (#2323, #1233)
 
 ### Changed
