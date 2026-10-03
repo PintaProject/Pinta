@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-01 00:37+0000\n"
-"PO-Revision-Date: 2026-09-19 00:02+0000\n"
+"PO-Revision-Date: 2026-10-03 12:12+0000\n"
 "Last-Translator: Stephan Paternotte <stephan@paternottes.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/pinta/pinta/nl/>\n"
 "Language: nl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.10.1.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -725,7 +725,7 @@ msgstr "Verschil"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:130
 msgid "Diffusion"
-msgstr ""
+msgstr "Diffusie"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
@@ -1289,7 +1289,7 @@ msgstr "Horizontaal"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 msgid "Language"
-msgstr ""
+msgstr "Taal"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
@@ -1571,7 +1571,7 @@ msgstr "Martian Lava"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:122
 msgid "Maximum Scatter Radius"
-msgstr ""
+msgstr "Max. spreidingsradius"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
@@ -1593,7 +1593,7 @@ msgstr "Laag naar beneden samenvoegen"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:126
 msgid "Minimum Scatter Radius"
-msgstr ""
+msgstr "Min. spreididingsradius"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
@@ -2545,7 +2545,7 @@ msgstr "Vloeiend"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
 msgid "Smoothness"
-msgstr ""
+msgstr "Gladheid"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
