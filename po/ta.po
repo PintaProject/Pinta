@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 00:31+0000\n"
+"POT-Creation-Date: 2026-10-01 00:37+0000\n"
 "PO-Revision-Date: 2025-06-17 12:30+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/pinta/pinta/ta/>\n"
@@ -61,7 +61,7 @@ msgstr "பிண்டா பற்றி"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:400
-#: ../Pinta/Actions/Edit/PasteAction.cs:173
+#: ../Pinta/Actions/Edit/PasteAction.cs:187
 msgid "Add New Layer"
 msgstr "புதிய அடுக்கைச் சேர்க்கவும்"
 
@@ -101,7 +101,7 @@ msgstr ""
 msgid "All Small Caps"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:586
+#: ../Pinta.Core/Actions/EditActions.cs:619
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:302
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
@@ -116,7 +116,6 @@ msgid "Alpha Gradient"
 msgstr "ஆல்பா சாய்வு"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
 #: ../Pinta.Effects/Effects/TwistEffect.cs:217
@@ -142,7 +141,7 @@ msgstr "நங்கூரம்:"
 msgid "Angle"
 msgstr "கோணம்"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
 msgid "Animate Selection Outline"
 msgstr ""
 
@@ -323,14 +322,14 @@ msgstr "முழுமையான அளவு மூலம்:"
 msgid "By percentage:"
 msgstr "விழுக்காடு மூலம்:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:523
+#: ../Pinta.Core/Actions/EditActions.cs:556
 #: ../Pinta.Gui.Addins/InstallDialog.cs:126
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:498
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "ரத்துசெய்"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "கேன்வாச்"
 
@@ -470,7 +469,7 @@ msgstr "படத்திற்கு செல்ல சொடுக்கு 
 msgid "Click to reset primary and secondary color."
 msgstr "முதன்மை மற்றும் இரண்டாம் நிலை வண்ணத்தை மீட்டமைக்க சொடுக்கு செய்க."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:601
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:602
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:344
 msgid "Click to select primary color."
 msgstr "முதன்மை வண்ணத்தைத் தேர்ந்தெடுக்க சொடுக்கு செய்க."
@@ -481,7 +480,7 @@ msgid ""
 "Hold shift to use Global mode."
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:606
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:348
 msgid "Click to select secondary color."
 msgstr "இரண்டாம் நிலை வண்ணத்தைத் தேர்ந்தெடுக்க சொடுக்கு செய்க."
@@ -553,7 +552,7 @@ msgstr "வண்ண பயன்முறை"
 msgid "Color Picker"
 msgstr "வண்ண தேர்வாளர்"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:90
 msgid "Color Range"
 msgstr "வண்ண வரம்பு"
 
@@ -561,7 +560,7 @@ msgstr "வண்ண வரம்பு"
 msgid "Color Saturation"
 msgstr "வண்ண செறிவு"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:6
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -670,7 +669,7 @@ msgid "Cut"
 msgstr "வெட்டு"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
 msgid "Dark"
 msgstr "இருண்ட"
 
@@ -716,6 +715,10 @@ msgstr "விவரங்கள்"
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "வேறுபாடு"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:130
+msgid "Diffusion"
+msgstr ""
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
@@ -802,11 +805,11 @@ msgstr "நீள்வட்டம் தேர்ந்தெடுக்க�
 msgid "Emboss"
 msgstr "புடைப்பு"
 
-#: ../Pinta/Main.cs:67
+#: ../Pinta/Main.cs:71
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr "பிழைத்திருத்தத்திற்கான கூடுதல் பதிவு அல்லது நடத்தை மாற்றங்களை இயக்கவும்"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:15
 msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
@@ -834,7 +837,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "விலக்கு (-) (வலது கிளிக்)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:226
+#: ../Pinta/Actions/Edit/PasteAction.cs:256
 msgid "Expand"
 msgstr "விரிவாக்கு"
 
@@ -863,7 +866,7 @@ msgstr "நீட்டிப்பு தொகுப்பை ஏற்று�
 msgid "Failed to open image"
 msgstr "படத்தைத் திறக்கத் தவறிவிட்டது"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:235
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:236
 msgid "Failed to save image"
 msgstr "படத்தை சேமிப்பதில் தோல்வி"
 
@@ -888,7 +891,7 @@ msgstr ""
 msgid "File a Bug"
 msgstr "ஒரு பிழையை தாக்கல் செய்யுங்கள்"
 
-#: ../Pinta/Main.cs:62
+#: ../Pinta/Main.cs:66
 msgid "Files to open"
 msgstr "திறக்க கோப்புகள்"
 
@@ -932,11 +935,11 @@ msgstr "பிக்சல்களை முடிக்கவும்"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:117
 #: ../Pinta.Core/Actions/ImageActions.cs:221
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:275
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:279
 msgid "Flatten"
 msgstr "தட்டையானது"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:271
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:275
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr "படத்தைத் தட்டச்சு செய்வது அனைத்து அடுக்குகளையும் ஒரே அடுக்கில் ஒன்றிணைக்கும்."
 
@@ -1120,7 +1123,7 @@ msgstr "சாயல் மற்றும் காரி"
 msgid "Hue / Saturation"
 msgstr "சாயல் / செறிவு"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:228
 msgid "ICO files can not be larger than 256 x 256 pixels."
 msgstr ""
 
@@ -1146,7 +1149,7 @@ msgstr "பட ஆசிரியர்"
 msgid "Image Tabs"
 msgstr "பட தாவல்கள்"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:206
+#: ../Pinta/Actions/Edit/PasteAction.cs:236
 msgid "Image cannot be pasted"
 msgstr "படத்தை ஒட்ட முடியாது"
 
@@ -1155,11 +1158,11 @@ msgstr "படத்தை ஒட்ட முடியாது"
 msgid "Image files"
 msgstr "படக் கோப்புகள்"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:213
+#: ../Pinta/Actions/Edit/PasteAction.cs:243
 msgid "Image larger than canvas"
 msgstr "கேன்வாசை விட பெரிய படம்"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "Image too large"
 msgstr "படம் மிகப் பெரியது"
 
@@ -1239,7 +1242,7 @@ msgid "Invert Colors"
 msgstr "வண்ணங்களை தலைகீழ்"
 
 #: ../Pinta.Core/Actions/EditActions.cs:143
-#: ../Pinta.Core/Actions/EditActions.cs:608
+#: ../Pinta.Core/Actions/EditActions.cs:641
 msgid "Invert Selection"
 msgstr "தலைகீழ் தேர்வு"
 
@@ -1267,6 +1270,10 @@ msgstr ""
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
 msgstr "நிலப்பரப்பு"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
+msgid "Language"
+msgstr ""
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
@@ -1468,7 +1475,7 @@ msgstr "உரிமம்"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:8
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "ஒளி"
@@ -1537,6 +1544,10 @@ msgstr "மாண்டல்பிரோட் ஃப்ராக்டல்"
 msgid "Martian Lava"
 msgstr "செவ்வாய் எரிமலை"
 
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:122
+msgid "Maximum Scatter Radius"
+msgstr ""
+
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
 msgstr ""
@@ -1554,6 +1565,10 @@ msgstr ""
 #: ../Pinta.Core/Actions/LayerActions.cs:335
 msgid "Merge Layer Down"
 msgstr "அடுக்கை ஒன்றிணைக்கவும்"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:126
+msgid "Minimum Scatter Radius"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
@@ -1667,7 +1682,7 @@ msgstr "சாதாரண மற்றும் அவுட்லைன்"
 msgid "Number of Cells"
 msgstr "கலங்களின் எண்ணிக்கை"
 
-#: ../Pinta/Main.cs:56
+#: ../Pinta/Main.cs:60
 msgid "Number of threads to use for rendering"
 msgstr "ரெண்டரிங்கிற்கு பயன்படுத்த நூல்களின் எண்ணிக்கை"
 
@@ -1724,7 +1739,7 @@ msgstr "படக் கோப்பைத் திறக்கவும்"
 msgid "Open Line/Curve Series"
 msgstr "திறந்த வரி/வளைவு தொடர்"
 
-#: ../Pinta.Core/Actions/EditActions.cs:488
+#: ../Pinta.Core/Actions/EditActions.cs:521
 msgid "Open Palette File"
 msgstr "திறந்த தட்டு கோப்பு"
 
@@ -1800,7 +1815,7 @@ msgstr "தட்டு"
 msgid "Palette Source"
 msgstr ""
 
-#: ../Pinta.Core/Actions/EditActions.cs:569
+#: ../Pinta.Core/Actions/EditActions.cs:602
 msgid "Palette files"
 msgstr "தட்டு கோப்புகள்"
 
@@ -1832,7 +1847,7 @@ msgstr "எழுதுகோல்"
 msgid "Pencil Sketch"
 msgstr "பென்சில் ச்கெட்ச்"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:85
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
 msgid "Pencil Tip Size"
 msgstr "பென்சில் முனை அளவு"
 
@@ -1859,7 +1874,7 @@ msgid "Phyllotaxis"
 msgstr ""
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:75
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
 msgstr "மேற்பரப்பு"
@@ -1919,7 +1934,7 @@ msgstr "படப்புள்ளிகள்"
 msgid "Piña Colada"
 msgstr "பினா கோலாடா"
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:81
+#: ../Pinta/Dialogs/PreferencesDialog.cs:122
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "மாற்றங்கள் நடைமுறைக்கு வர பிண்டாவை மறுதொடக்கம் செய்யுங்கள்."
 
@@ -1977,7 +1992,7 @@ msgid "Preferences..."
 msgstr ""
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:224
+#: ../Pinta/Actions/Edit/PasteAction.cs:254
 msgid "Preserve"
 msgstr "பாதுகாக்கவும்"
 
@@ -2103,7 +2118,7 @@ msgstr "சீரற்ற வண்ணங்கள்"
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:142
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:138
 msgid "Random Noise Seed"
 msgstr ""
 
@@ -2182,7 +2197,7 @@ msgstr "அடுக்கை மறுபெயரிடுங்கள்"
 msgid "Render"
 msgstr "வழங்கவும்"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
 msgid "Rendering Effect"
 msgstr "வழங்குதல் விளைவு"
 
@@ -2190,7 +2205,7 @@ msgstr "வழங்குதல் விளைவு"
 msgid "Replace"
 msgstr "மாற்றவும்"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12
 msgid "Replaces the header bar with a separate menu bar and tool bar."
 msgstr ""
 
@@ -2343,7 +2358,7 @@ msgstr "தெவிட்டல்"
 msgid "Saturation Percentage"
 msgstr "செறிவு விழுக்காடு"
 
-#: ../Pinta.Core/Actions/EditActions.cs:522
+#: ../Pinta.Core/Actions/EditActions.cs:555
 #: ../Pinta.Core/Actions/FileActions.cs:88
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2362,7 +2377,7 @@ msgstr "சேமி ..."
 msgid "Save Image File"
 msgstr "படக் கோப்பை சேமிக்கவும்"
 
-#: ../Pinta.Core/Actions/EditActions.cs:519
+#: ../Pinta.Core/Actions/EditActions.cs:552
 msgid "Save Palette File"
 msgstr "தட்டு கோப்பை சேமிக்கவும்"
 
@@ -2453,7 +2468,7 @@ msgstr "கட்டத்தைக் காட்டு"
 msgid "Show Layer"
 msgstr "அடுக்கு காட்டு"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Show Menu Bar"
 msgstr ""
 
@@ -2500,6 +2515,10 @@ msgstr ""
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
 msgstr "மென்மையான"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
+msgid "Smoothness"
+msgstr ""
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -2568,7 +2587,7 @@ msgstr "உரை நடை"
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr "பிண்டாவின் இந்த பதிப்போடு '{0}' சேர்க்கை பொருந்தாது"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:237
 msgid "The clipboard does not contain an image."
 msgstr "கிளிப்போர்டில் ஒரு படம் இல்லை."
 
@@ -2592,7 +2611,7 @@ msgstr "பின்வரும் தொகுப்புகள் நிற�
 msgid "The following packages will be uninstalled:"
 msgstr "பின்வரும் தொகுப்புகள் நிறுவல் நீக்கப்படும்:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:244
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2638,7 +2657,7 @@ msgstr "தடிமன்"
 msgid "Thin"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
 msgid "This format does not support layers. Flatten image?"
 msgstr "இந்த வடிவம் அடுக்குகளை ஆதரிக்காது. தட்டையான படம்?"
 
@@ -2794,7 +2813,7 @@ msgstr "சேமிக்கப்படாத படம் {0}"
 msgid "Unsupported file format"
 msgstr "ஆதரிக்கப்படாத கோப்பு வடிவம்"
 
-#: ../Pinta.Core/Actions/EditActions.cs:511
+#: ../Pinta.Core/Actions/EditActions.cs:544
 msgid "Unsupported palette format"
 msgstr "ஆதரிக்கப்படாத தட்டு வடிவம்"
 
@@ -2908,7 +2927,7 @@ msgid "You do not have access to '{0}'."
 msgstr "உங்களுக்கு '{0}' அணுகல் இல்லை."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2945,9 +2964,9 @@ msgstr "_சரிசெய்தல்"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:214
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:216
-#: ../Pinta/Actions/Edit/PasteAction.cs:222
+#: ../Pinta/Actions/Edit/PasteAction.cs:252
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:278
 #: ../Pinta/Dialogs/ProgressDialog.cs:71
 msgid "_Cancel"
 msgstr "_CANCEL"
