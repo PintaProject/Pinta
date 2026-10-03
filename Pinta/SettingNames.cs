@@ -10,6 +10,10 @@ internal static class SettingNames
 	internal const string NEW_IMAGE_HEIGHT = "new-image-height";
 	internal const string NEW_IMAGE_BACKGROUND = "new-image-bg";
 
+	internal const string STARTUP_IMAGE_WIDTH = "startup-image-width";
+	internal const string STARTUP_IMAGE_HEIGHT = "startup-image-height";
+	internal const string STARTUP_IMAGE_BACKGROUND = "startup-image-bg";
+
 	internal const string RULER_METRIC = "ruler-metric";
 	internal const string COLOR_SCHEME = "color-scheme";
 	internal const string WINDOW_MAXIMIZED = "window-maximized";
