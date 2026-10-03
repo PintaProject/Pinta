@@ -158,9 +158,18 @@ internal sealed class MainClass
 				SettingNames.STARTUP_IMAGE_BACKGROUND,
 				(int) BackgroundType.White);
 
+			Cairo.Color backgroundColor = background switch {
+				BackgroundType.Transparent => Cairo.Color.Transparent,
+				// "Custom" in the Preferences dialog: use the color chosen there.
+				BackgroundType.SecondaryColor => Cairo.Color.FromHex (PintaCore.Settings.GetSetting (
+					SettingNames.STARTUP_IMAGE_BACKGROUND_COLOR,
+					Cairo.Color.Black.ToHex ())) ?? Cairo.Color.Black,
+				_ => Cairo.Color.White,
+			};
+
 			PintaCore.Workspace.NewDocument (
 				new Core.Size (width, height),
-				background == BackgroundType.Transparent ? Cairo.Color.Transparent : Cairo.Color.White);
+				backgroundColor);
 		}
 	}
 

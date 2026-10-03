@@ -92,9 +92,16 @@
                     <items>
                       <item translatable="yes" comments="Translators: Background option for the image created at startup.">White</item>
                       <item translatable="yes" comments="Translators: Background option for the image created at startup.">Transparent</item>
+                      <item translatable="yes" comments="Translators: Background option for the image created at startup, using a chosen color.">Custom</item>
                     </items>
                   </object>
                 </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="startup_color_row">
+                <property name="title" translatable="yes">Color</property>
+                <property name="visible">False</property>
               </object>
             </child>
           </object>
