@@ -8,17 +8,17 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-01 00:37+0000\n"
-"PO-Revision-Date: 2025-12-31 18:06+0000\n"
-"Last-Translator: Stepan Andriiovych <4fbig9xyb@mozmail.com>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/uk/"
-">\n"
+"PO-Revision-Date: 2026-10-03 12:12+0000\n"
+"Last-Translator: Liam Bado <liamservermc@gmail.com>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/"
+"uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 2026.10.1.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -97,12 +97,12 @@ msgstr "Вирівняти об'єкт"
 #. Translators: 'All Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:206
 msgid "All Petite Caps"
-msgstr ""
+msgstr "Усі петит-капітельні"
 
 #. Translators: 'All Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:194
 msgid "All Small Caps"
-msgstr ""
+msgstr "Усі капітельні"
 
 #: ../Pinta.Core/Actions/EditActions.cs:619
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:302
@@ -146,7 +146,7 @@ msgstr "Кут"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
 msgid "Animate Selection Outline"
-msgstr ""
+msgstr "Анімувати контур виділення"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -177,7 +177,7 @@ msgstr "Еффект Аткінсона"
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
@@ -193,11 +193,11 @@ msgstr "Автокорекція"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "Автопрокрутка вимкнена"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
-msgstr ""
+msgstr "Автопрокрутка увімкнена"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -227,7 +227,7 @@ msgstr "Найкраще заповнення"
 #. Translators: 'Bevel Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:458
 msgid "Bevel Join"
-msgstr ""
+msgstr "Скошене з'єднання"
 
 #: ../Pinta.Core/Enumerations/ResamplingMode.cs:22
 msgid "Bilinear"
@@ -265,7 +265,7 @@ msgstr "Розмитість"
 #. Translators: 'Bold' (700) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:302
 msgid "Bold"
-msgstr "Напівжирний"
+msgstr "Жирний"
 
 #. Translators: Gradient that starts out white, like the core of a raging fire, and then goes through yellow, red, and black (like visible black smoke), and finally transparent, blending with the background
 #: ../Pinta.Effects/Utilities/GradientHelper.cs:31
@@ -275,7 +275,7 @@ msgstr "Багаття"
 #. Translators: 'Book' (380) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:278
 msgid "Book"
-msgstr ""
+msgstr "Книжний"
 
 #: ../Pinta.Effects/Dialogs/Effects.AlignmentDialog.cs:40
 msgid "Bottom Center"
@@ -346,7 +346,7 @@ msgstr "Сітка полотна..."
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
 msgid "Category"
-msgstr ""
+msgstr "Категорія"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -392,19 +392,19 @@ msgstr "Сантиметри"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:47
 msgid "Change brush width."
-msgstr ""
+msgstr "Змінити товщину пензля."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:238
 msgid "Change font size."
-msgstr ""
+msgstr "Змінити розмір шрифту."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:237
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Змінити розмір шрифту. Комбінація клавіш: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
-msgstr ""
+msgstr "Змінити товщину контуру."
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -422,7 +422,7 @@ msgstr "Виберіть колір"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:380
 msgid "Choose Colors"
-msgstr ""
+msgstr "Оберіть кольори"
 
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:164
 msgid "Choose Palette Color"
@@ -486,6 +486,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
+"Нажміть, щоб обрати область подібного кольору.\n"
+"Для використання глобального режиму, утримуйте клавішу Shift."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:348
@@ -725,7 +727,7 @@ msgstr "Різниця"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:130
 msgid "Diffusion"
-msgstr ""
+msgstr "Дифузія"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
@@ -782,7 +784,7 @@ msgstr "Виділення краю"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
 msgid "Edit"
-msgstr ""
+msgstr "Редагування"
 
 #: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
@@ -822,6 +824,8 @@ msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
 msgstr ""
+"Увімкнення ефекту «маршируючих мурашок» покращує видимість виділеної "
+"області. Вимкніть цей ефект, щоб зменшити навантаження на процесор."
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -893,7 +897,7 @@ msgstr "Об'єкт ефекту пір'їни"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -1029,7 +1033,7 @@ msgstr "Розмивання по Гаусу"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
 msgid "General"
-msgstr ""
+msgstr "Загальне"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1070,7 +1074,7 @@ msgstr "Яскраве світло"
 #. Translators: 'Heavy' (900) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:314
 msgid "Heavy"
-msgstr ""
+msgstr "Важкий"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
@@ -1081,7 +1085,7 @@ msgstr "Висота:"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 msgid "Help"
-msgstr ""
+msgstr "Довідка"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1133,11 +1137,13 @@ msgstr "Відтінок / Насиченість"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:228
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "Розмір ICO-файлів не може перевищувати 256 x 256 пікселів."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
 msgstr ""
+"Якщо ця опція увімкнена, до колірного кола буде застосованно компонент «"
+"Значення» ."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1280,7 +1286,7 @@ msgstr "Фрактал Julia"
 
 #: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Комбінації клавіш"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
@@ -1288,7 +1294,7 @@ msgstr "Альбомна"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 msgid "Language"
-msgstr ""
+msgstr "Мова"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
@@ -1431,6 +1437,9 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
+"Нажміть лівою кнопкою миші, щоб заповнити область основним кольором, правою "
+"кнопкою миші — додатковим кольором.\n"
+"Для використання глобального режиму, утримуйте клавішу Shift."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1469,6 +1478,10 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
+"Натисніть лівою кнопкою миші, щоб встановити основний колір. Натисніть "
+"правою кнопкою миші, щоб встановити додатковий колір. Натисніть середньою "
+"кнопкою миші або утримуйте {0}, а потім натисніть лівою кнопкою миші, щоб "
+"обрати колір із палітри."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -1569,7 +1582,7 @@ msgstr "Марсіанська лава"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:122
 msgid "Maximum Scatter Radius"
-msgstr ""
+msgstr "Максимальний радіус розсіювання"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
@@ -1582,7 +1595,7 @@ msgstr "Медіана"
 #. Translators: 'Medium' (500) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:290
 msgid "Medium"
-msgstr ""
+msgstr "Середній"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:82
 #: ../Pinta.Core/Actions/LayerActions.cs:335
@@ -1591,7 +1604,7 @@ msgstr "Обєднати шар з попереднім"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:126
 msgid "Minimum Scatter Radius"
-msgstr ""
+msgstr "Мінімальний радіус розсіювання"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
@@ -1600,7 +1613,7 @@ msgstr "Мінімальний розмір"
 #. Translators: 'Miter Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:446
 msgid "Miter Join"
-msgstr ""
+msgstr "Кутове з'єднання"
 
 #: ../Pinta.Tools/Tools/GradientTool.cs:322
 msgid "Mode"
@@ -1881,7 +1894,7 @@ msgstr "Процент"
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:200
 msgid "Petite Caps"
-msgstr ""
+msgstr "Петит-капітель"
 
 #: ../Pinta.Effects/Effects/GlowEffect.cs:30
 #: ../Pinta.Effects/Effects/RedEyeRemoveEffect.cs:27
@@ -2012,7 +2025,7 @@ msgstr "Потужність"
 
 #: ../Pinta.Core/Actions/AppActions.cs:49
 msgid "Preferences..."
-msgstr ""
+msgstr "Налаштування..."
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:254
@@ -2034,32 +2047,32 @@ msgstr "Шаблон:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush width"
-msgstr ""
+msgstr "Натисніть {0}, щоб зменшити товщину пензля"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:240
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr ""
+msgstr "Натисніть {0}, щоб зменшити розмір шрифту"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline width"
-msgstr ""
+msgstr "Натисніть {0}, щоб зменшити товщину контуру"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush width"
-msgstr ""
+msgstr "Натисніть {0}, щоб збільшити товщину пензля"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 #, csharp-format
 msgid "Press {0} to increase font size"
-msgstr ""
+msgstr "Натисніть {0}, щоб збільшити розмір шрифту"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline width"
-msgstr ""
+msgstr "Натисніть {0}, щоб збільшити товщину контуру"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:169
 msgid "Preview"
@@ -2230,7 +2243,7 @@ msgstr "Замінити"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:12
 msgid "Replaces the header bar with a separate menu bar and tool bar."
-msgstr ""
+msgstr "Замінює верхню панель на окрему панель меню та панель інструментів."
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
@@ -2238,7 +2251,7 @@ msgstr "Повідомити про проблему..."
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
 msgid "Repository"
-msgstr ""
+msgstr "Репозиторій"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2261,7 +2274,7 @@ msgstr "Початкові налаштування"
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:80
 msgid "Reset to image size"
-msgstr ""
+msgstr "Відновити початковий розмір зображення"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:213
@@ -2337,7 +2350,7 @@ msgstr "Шорсткість"
 #. Translators: 'Round Join' refers to the Cairo.LineJoin property
 #: ../Pinta.Tools/Tools/TextTool.cs:452
 msgid "Round Join"
-msgstr ""
+msgstr "Закруглене з'єднання"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:277
 msgid "Rounded Line Series"
@@ -2434,12 +2447,12 @@ msgstr "Обрані кольори"
 #. Translators: 'Semibold' (600) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:296
 msgid "Semibold"
-msgstr ""
+msgstr "Напівжирний"
 
 #. Translators: 'Semilight' (350) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:272
 msgid "Semilight"
-msgstr ""
+msgstr "Напівлегкий"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
 msgid "Sepia"
@@ -2476,7 +2489,7 @@ msgstr "Гарячі клавіші"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
 #: ../Pinta.Tools/Tools/TextTool.cs:239
 msgid "Shortcut keys:"
-msgstr ""
+msgstr "Комбінації клавіш:"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:75
 msgid "Show Axonometric Grid"
@@ -2493,7 +2506,7 @@ msgstr "Показати шар"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Show Menu Bar"
-msgstr ""
+msgstr "Показати панель меню"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
@@ -2528,12 +2541,12 @@ msgstr "Розмір"
 
 #: ../Pinta.Tools/Brushes/SlashBrush.cs:36
 msgid "Slash"
-msgstr ""
+msgstr "Похила риска"
 
 #. Translators: 'Small Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:188
 msgid "Small Caps"
-msgstr ""
+msgstr "Капітельні"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
@@ -2541,7 +2554,7 @@ msgstr "Згладжування"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
 msgid "Smoothness"
-msgstr ""
+msgstr "Гладкість"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -2681,7 +2694,7 @@ msgstr "Товщина"
 #. Translators: 'Thin' (100) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:254
 msgid "Thin"
-msgstr ""
+msgstr "Тонкий"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
 msgid "This format does not support layers. Flatten image?"
@@ -2706,7 +2719,7 @@ msgstr "Підказка: Клік правою кнопкою миші вида
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:218
 msgid "Title Caps"
-msgstr ""
+msgstr "Заголовні літери"
 
 #: ../Pinta.Effects/Effects/FeatherEffect.cs:171
 #: ../Pinta.Effects/Effects/OutlineObjectEffect.cs:208
@@ -2786,17 +2799,17 @@ msgstr "Тип"
 #. Translators: 'Ultrabold' (800) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:308
 msgid "Ultrabold"
-msgstr ""
+msgstr "Ультражирний"
 
 #. Translators: 'Ultraheavy' (1000) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:320
 msgid "Ultraheavy"
-msgstr ""
+msgstr "Ультраважкий"
 
 #. Translators: 'Ultralight' (200) refers to the font-weight text property
 #: ../Pinta.Tools/Tools/TextTool.cs:260
 msgid "Ultralight"
-msgstr ""
+msgstr "Ультралегкий"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:345
 msgid "Underline"
@@ -2813,7 +2826,7 @@ msgstr "Розфокусування"
 #. Translators: 'Unicase' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:212
 msgid "Unicase"
-msgstr ""
+msgstr "Однорегістровий формат"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:232
 #: ../Pinta.Gui.Addins/InstallDialog.cs:233
@@ -2862,7 +2875,7 @@ msgstr ""
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
 msgid "User Interface"
-msgstr ""
+msgstr "Користувацький інтерфейс"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
@@ -2945,7 +2958,7 @@ msgstr "Xor (логічне виключення)"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr "Викл. АБО ({0} + клацання правою кнопкою)"
+msgstr "Xor ({0} + Права кнопка миші)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:463
