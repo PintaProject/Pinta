@@ -11,7 +11,8 @@ internal sealed class MockChromeManager : IChromeService
 		Gtk.Window parent,
 		BaseEffect effect,
 		IAddinLocalizer localizer,
-		IWorkspaceService workspace)
+		IWorkspaceService workspace,
+		Action<string?> onChanged)
 	{
 		throw new NotImplementedException ();
 	}
