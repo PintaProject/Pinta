@@ -26,6 +26,15 @@ internal sealed partial class PreferencesDialog
 	[Gtk.Connect ("selection_anim_switchrow")]
 	private Adw.SwitchRow selection_anim_row;
 
+	[Gtk.Connect ("startup_width_spinrow")]
+	private Adw.SpinRow startup_width_row;
+
+	[Gtk.Connect ("startup_height_spinrow")]
+	private Adw.SpinRow startup_height_row;
+
+	[Gtk.Connect ("startup_background_comborow")]
+	private Adw.ComboRow startup_background_row;
+
 	public static PreferencesDialog New (ISettingsService settings)
 	{
 		PreferencesDialog dialog = NewWithProperties ([]);
@@ -52,6 +61,9 @@ internal sealed partial class PreferencesDialog
 		Adw.ComboRow.SelectedPropertyDefinition.Notify (color_scheme_row, OnColorSchemeChanged);
 		Adw.SwitchRow.ActivePropertyDefinition.Notify (menubar_row, OnMenuBarChanged);
 		Adw.SwitchRow.ActivePropertyDefinition.Notify (selection_anim_row, OnSelectionAnimChanged);
+		Adw.SpinRow.ValuePropertyDefinition.Notify (startup_width_row, OnStartupWidthChanged);
+		Adw.SpinRow.ValuePropertyDefinition.Notify (startup_height_row, OnStartupHeightChanged);
+		Adw.ComboRow.SelectedPropertyDefinition.Notify (startup_background_row, OnStartupBackgroundChanged);
 	}
 
 	/// <summary>
@@ -75,6 +87,10 @@ internal sealed partial class PreferencesDialog
 			Pinta.Core.SettingNames.CANVAS_SELECTION_ANIMATED,
 			Pinta.Core.SettingDefaults.CANVAS_SELECTION_ANIMATED);
 		selection_anim_row.Active = selectionAnimated;
+
+		startup_width_row.Value = settings.GetSetting (SettingNames.STARTUP_IMAGE_WIDTH, 800);
+		startup_height_row.Value = settings.GetSetting (SettingNames.STARTUP_IMAGE_HEIGHT, 600);
+		startup_background_row.SetSelected ((uint) settings.GetSetting (SettingNames.STARTUP_IMAGE_BACKGROUND, (int) BackgroundType.White));
 	}
 
 	private void OnLanguageChanged (Object sender, NotifySignalArgs args)
@@ -115,6 +131,21 @@ internal sealed partial class PreferencesDialog
 	private void OnSelectionAnimChanged (Object sender, NotifySignalArgs args)
 	{
 		settings.PutSetting (Pinta.Core.SettingNames.CANVAS_SELECTION_ANIMATED, selection_anim_row.Active);
+	}
+
+	private void OnStartupWidthChanged (Object sender, NotifySignalArgs args)
+	{
+		settings.PutSetting (SettingNames.STARTUP_IMAGE_WIDTH, (int) startup_width_row.Value);
+	}
+
+	private void OnStartupHeightChanged (Object sender, NotifySignalArgs args)
+	{
+		settings.PutSetting (SettingNames.STARTUP_IMAGE_HEIGHT, (int) startup_height_row.Value);
+	}
+
+	private void OnStartupBackgroundChanged (Object sender, NotifySignalArgs args)
+	{
+		settings.PutSetting (SettingNames.STARTUP_IMAGE_BACKGROUND, (int) startup_background_row.Selected);
 	}
 
 	private void ShowRestartMessage ()
