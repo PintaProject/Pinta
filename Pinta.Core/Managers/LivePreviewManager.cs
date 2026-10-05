@@ -282,7 +282,7 @@ public sealed class LivePreviewManager : ILivePreview
 			return chrome.LaunchSimpleEffectDialog (
 				chrome.MainWindow,
 				effect,
-				localizer ?? new TemporaryLocalizer (),
+				localizer ?? new PintaLocalizer (),
 				workspace,
 				onChanged: _ => NotifyChanged ());
 		}

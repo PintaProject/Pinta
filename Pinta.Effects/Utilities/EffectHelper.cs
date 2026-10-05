@@ -44,12 +44,3 @@ internal static class EffectHelper
 			workspace);
 #pragma warning restore CS0618
 }
-
-/// <summary>
-/// Wrapper around Pinta's translation template.
-/// </summary>
-internal sealed class PintaLocalizer : IAddinLocalizer
-{
-	public string GetString (string msgid)
-		=> Translations.GetString (msgid);
-};
