@@ -15,11 +15,13 @@ public static class AddinUtilities
 		BaseEffect effect,
 		AddinLocalizer localizer)
 	{
+#pragma warning disable CS0618 // Using obsolete method
 		return chrome.LaunchSimpleEffectDialog (
 			chrome.MainWindow,
 			effect,
 			CreateWrapper (localizer),
 			workspace);
+#pragma warning restore CS0618
 	}
 
 	private static IAddinLocalizer CreateWrapper (AddinLocalizer localizer)
