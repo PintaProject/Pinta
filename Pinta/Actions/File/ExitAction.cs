@@ -67,6 +67,8 @@ internal sealed class ExitProgramAction : IActionHandler
 				return;
 		}
 
+		PintaCore.Workspace.StopAutosave();
+
 		// Let everyone know we are quitting
 		actions.App.RaiseBeforeQuit ();
 
