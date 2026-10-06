@@ -158,6 +158,9 @@ jobs:
         update: true
         msystem: ${{matrix.build.mingw_system}}
         install: mingw-w64-${{matrix.build.mingw_repo}}-libadwaita mingw-w64-${{matrix.build.mingw_repo}}-webp-pixbuf-loader
+    - name: List mingw libraries
+      if: ${{ runner.debug == '1' }}
+      run: ls ${{matrix.build.mingw_folder}}/bin
     - name: Build
       run: dotnet build Pinta.sln -c Release -p:MinGWFolder=${{matrix.build.mingw_folder}} -p:BuildTranslations=true
     - name: Test
