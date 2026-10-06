@@ -32,6 +32,7 @@ namespace Pinta;
 
 internal static class EffectHelper
 {
+#pragma warning disable CS0618 // Using obsolete method
 	/// <summary>
 	/// Launch an effect dialog using Pinta's translation template.
 	/// </summary>
@@ -41,13 +42,5 @@ internal static class EffectHelper
 			effect,
 			new PintaLocalizer (),
 			workspace);
+#pragma warning restore CS0618
 }
-
-/// <summary>
-/// Wrapper around Pinta's translation template.
-/// </summary>
-internal sealed class PintaLocalizer : IAddinLocalizer
-{
-	public string GetString (string msgid)
-		=> Translations.GetString (msgid);
-};

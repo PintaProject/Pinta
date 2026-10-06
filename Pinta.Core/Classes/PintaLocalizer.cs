@@ -1,11 +1,8 @@
 using Mono.Addins.Localization;
-using Pinta.Core;
 
-namespace Pinta.Gui.Widgets;
+namespace Pinta.Core;
 
-/// <summary>
-/// Wrapper around Pinta's translation template.
-/// </summary>
+/// <summary>Wrapper around Pinta's translation template.</summary>
 public sealed class PintaLocalizer : IAddinLocalizer
 {
 	public string GetString (string msgid)
