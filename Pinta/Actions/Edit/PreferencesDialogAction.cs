@@ -7,15 +7,18 @@ internal sealed class PreferencesDialogAction : IActionHandler
 {
 	private readonly AppActions app;
 	private readonly IChromeService chrome;
+	private readonly IPaletteService palette;
 	private readonly ISettingsService settings;
 
 	internal PreferencesDialogAction (
 	    AppActions app,
 	    IChromeService chrome,
+			IPaletteService palette,
 	    ISettingsService settings)
 	{
 		this.app = app;
 		this.chrome = chrome;
+		this.palette = palette;
 		this.settings = settings;
 	}
 
@@ -31,7 +34,7 @@ internal sealed class PreferencesDialogAction : IActionHandler
 
 	private void Activated (object sender, EventArgs e)
 	{
-		using PreferencesDialog dialog = PreferencesDialog.New (settings);
+		using PreferencesDialog dialog = PreferencesDialog.New (chrome, palette, settings);
 		dialog.Present (chrome.MainWindow);
 	}
 }
