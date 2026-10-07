@@ -68,7 +68,7 @@ public sealed class ActionHandlers
 			new PasteIntoNewImageAction (actions, chrome, workspace),
 			new ResizePaletteAction (actions.Edit, chrome, palette),
 			new AddinManagerAction (actions.Addins, chrome, system),
-			new PreferencesDialogAction(actions.App, chrome, settings),
+			new PreferencesDialogAction(actions.App, chrome, palette, settings),
 
 			// Image
 			new ResizeImageAction (actions.Image, chrome, workspace, settings),

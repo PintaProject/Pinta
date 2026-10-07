@@ -14,6 +14,8 @@ using Pinta.Gui.Widgets;
 internal sealed partial class PreferencesDialog
 {
 	private ISettingsService settings = null!; // NRT - set by factory method
+	private IChromeService chrome = null!;
+	private IPaletteService palette = null!;
 	private List<string> language_codes = [];
 
 	[Gtk.Connect ("language_comborow")]
@@ -42,9 +44,11 @@ internal sealed partial class PreferencesDialog
 
 	private PintaColorButton startup_color_button = null!;
 
-	public static PreferencesDialog New (ISettingsService settings)
+	public static PreferencesDialog New (IChromeService chrome, IPaletteService palette, ISettingsService settings)
 	{
 		PreferencesDialog dialog = NewWithProperties ([]);
+		dialog.chrome = chrome;
+		dialog.palette = palette;
 		dialog.LoadSettings (settings);
 		return dialog;
 	}
@@ -171,8 +175,8 @@ internal sealed partial class PreferencesDialog
 	private async Task ChooseStartupColor ()
 	{
 		using ColorPickerDialog dialog = ColorPickerDialog.New (
-			PintaCore.Chrome.MainWindow,
-			PintaCore.Palette,
+			chrome.MainWindow,
+			palette,
 			new SingleColor (startup_color_button.DisplayColor),
 			primarySelected: true,
 			false,
