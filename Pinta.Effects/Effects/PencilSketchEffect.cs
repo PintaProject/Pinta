@@ -24,7 +24,7 @@ public sealed class PencilSketchEffect : BaseEffect
 
 	public override string Icon => Resources.Icons.EffectsArtisticPencilSketch;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable => false;
 
 	public override string Name => Translations.GetString ("Pencil Sketch");
 
