@@ -182,6 +182,9 @@ internal sealed partial class PreferencesDialog
 			false,
 			Translations.GetString ("Choose Color"));
 
+		// The picker needs this to receive input from Preferences on macOS
+		dialog.Modal = true;
+
 		try {
 			Gtk.ResponseType response = await dialog.RunAsync ();
 
