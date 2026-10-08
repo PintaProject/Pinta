@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 00:31+0000\n"
-"PO-Revision-Date: 2026-07-09 15:01+0000\n"
-"Last-Translator: Lucas Bittoun <lucasbittoun907@gmail.com>\n"
+"POT-Creation-Date: 2026-10-01 00:37+0000\n"
+"PO-Revision-Date: 2026-10-06 02:35+0000\n"
+"Last-Translator: 7Steeven <cuvillierch@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/pinta/pinta/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2026.7.1.dev0\n"
+"X-Generator: Weblate 2026.10.1.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -63,7 +63,7 @@ msgstr "À propos de Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:400
-#: ../Pinta/Actions/Edit/PasteAction.cs:173
+#: ../Pinta/Actions/Edit/PasteAction.cs:187
 msgid "Add New Layer"
 msgstr "Ajouter un nouveau calque"
 
@@ -103,7 +103,7 @@ msgstr "Petites capitale"
 msgid "All Small Caps"
 msgstr "Petites capitales"
 
-#: ../Pinta.Core/Actions/EditActions.cs:586
+#: ../Pinta.Core/Actions/EditActions.cs:619
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:302
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
@@ -118,7 +118,6 @@ msgid "Alpha Gradient"
 msgstr "Dégradé Alpha"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
 #: ../Pinta.Effects/Effects/TwistEffect.cs:217
@@ -144,7 +143,7 @@ msgstr "Ancre :"
 msgid "Angle"
 msgstr "Angle"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
 msgid "Animate Selection Outline"
 msgstr ""
 
@@ -177,7 +176,7 @@ msgstr "Atkinson"
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
 msgid "Auto"
@@ -192,12 +191,14 @@ msgid "Auto Level"
 msgstr "Niveau automatique"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:264
+#, fuzzy
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "Défilement automatique désactivé"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:263
+#, fuzzy
 msgid "Autoscroll On"
-msgstr ""
+msgstr "Défilement automatique activé"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
@@ -326,14 +327,14 @@ msgstr "En taille absolue :"
 msgid "By percentage:"
 msgstr "En pourcentage :"
 
-#: ../Pinta.Core/Actions/EditActions.cs:523
+#: ../Pinta.Core/Actions/EditActions.cs:556
 #: ../Pinta.Gui.Addins/InstallDialog.cs:126
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:498
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Annuler"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "Canevas"
 
@@ -347,7 +348,7 @@ msgstr "Grille du canevas…"
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
 msgid "Category"
-msgstr ""
+msgstr "Catégorie"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -406,7 +407,7 @@ msgstr "Changer la taille de police. Touche de raccourci : [ ]"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 #, fuzzy
 msgid "Change outline width."
-msgstr "Changez la largeur de la marge."
+msgstr "Changez la largeur du contour"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:300
 msgid "Changed Shape Type"
@@ -478,7 +479,7 @@ msgstr "Cliquer et déplacer pour naviguer dans l’image."
 msgid "Click to reset primary and secondary color."
 msgstr "Cliquer ici pour réinitialiser les couleurs primaire et secondaire."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:601
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:602
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:344
 msgid "Click to select primary color."
 msgstr "Cliquer pour sélectionner la couleur primaire."
@@ -491,7 +492,7 @@ msgstr ""
 "Clic pour sélectionner une zone de couleur similaire.\n"
 "Maintenir shift pour le mode global."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:606
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:348
 msgid "Click to select secondary color."
 msgstr "Cliquer pour sélectionner la couleur secondaire."
@@ -563,7 +564,7 @@ msgstr "Mode de couleur"
 msgid "Color Picker"
 msgstr "Pipette"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:90
 msgid "Color Range"
 msgstr "Gamme de couleurs"
 
@@ -571,7 +572,7 @@ msgstr "Gamme de couleurs"
 msgid "Color Saturation"
 msgstr "Saturation des couleurs"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:6
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -680,7 +681,7 @@ msgid "Cut"
 msgstr "Couper"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
 msgid "Dark"
 msgstr "Sombre"
 
@@ -726,6 +727,11 @@ msgstr "Détails"
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "Différence"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:130
+#, fuzzy
+msgid "Diffusion"
+msgstr "Diffusion"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
@@ -782,7 +788,7 @@ msgstr "Détecter les contours"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
 msgid "Edit"
-msgstr ""
+msgstr "Éditer"
 
 #: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
@@ -812,17 +818,19 @@ msgstr "Sélection elliptique"
 msgid "Emboss"
 msgstr "Gaufrer"
 
-#: ../Pinta/Main.cs:67
+#: ../Pinta/Main.cs:71
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 "Active la journalisation supplémentaire ou les modifications de comportement "
 "pour le débogage"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:15
 msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
 msgstr ""
+"Activer l'effet \"marche des fourmis\" pour améliorer la visibilité de la "
+"sélection. Désactiver pour réduire la charge CPU."
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -846,7 +854,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Exclusion (-) (Clic droit)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:226
+#: ../Pinta/Actions/Edit/PasteAction.cs:256
 msgid "Expand"
 msgstr "Étendre"
 
@@ -875,7 +883,7 @@ msgstr "Échec du chargement du paquet d’extension"
 msgid "Failed to open image"
 msgstr "Impossible d’ouvrir l’image"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:235
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:236
 msgid "Failed to save image"
 msgstr "Impossible d’enregistrer l’image"
 
@@ -894,13 +902,13 @@ msgstr "Plume"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
 msgid "File"
-msgstr ""
+msgstr "Fichier"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
 msgstr "Signaler un bogue"
 
-#: ../Pinta/Main.cs:62
+#: ../Pinta/Main.cs:66
 msgid "Files to open"
 msgstr "Fichiers à ouvrir"
 
@@ -944,11 +952,11 @@ msgstr "Dernière retouche sur les pixels"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:117
 #: ../Pinta.Core/Actions/ImageActions.cs:221
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:275
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:279
 msgid "Flatten"
 msgstr "Aplatir"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:271
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:275
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr "Aplatir l’image fusionnera tous les calques en un seul calque."
 
@@ -1030,7 +1038,7 @@ msgstr "Flou gaussien"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
 msgid "General"
-msgstr ""
+msgstr "Général"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1082,7 +1090,7 @@ msgstr "Hauteur :"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 msgid "Help"
-msgstr ""
+msgstr "Aide"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1132,9 +1140,9 @@ msgstr "Teinte & Sat."
 msgid "Hue / Saturation"
 msgstr "Teinte / Saturation"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:228
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "Un fichier *.ico ne peut pas dépasser une taille de 256 x 256 pixels."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
@@ -1158,7 +1166,7 @@ msgstr "Éditeur d’images"
 msgid "Image Tabs"
 msgstr "Onglets de l’image"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:206
+#: ../Pinta/Actions/Edit/PasteAction.cs:236
 msgid "Image cannot be pasted"
 msgstr "L’image ne peut pas être collée"
 
@@ -1167,11 +1175,11 @@ msgstr "L’image ne peut pas être collée"
 msgid "Image files"
 msgstr "Fichiers image"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:213
+#: ../Pinta/Actions/Edit/PasteAction.cs:243
 msgid "Image larger than canvas"
 msgstr "Agrandir l’image plus que le canevas"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "Image too large"
 msgstr "Image trop grande"
 
@@ -1258,7 +1266,7 @@ msgid "Invert Colors"
 msgstr "Inverser les couleurs"
 
 #: ../Pinta.Core/Actions/EditActions.cs:143
-#: ../Pinta.Core/Actions/EditActions.cs:608
+#: ../Pinta.Core/Actions/EditActions.cs:641
 msgid "Invert Selection"
 msgstr "Inverser la sélection"
 
@@ -1281,11 +1289,15 @@ msgstr "Fractale de Julia"
 
 #: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Raccourcis clavier"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
 msgstr "Paysage"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
+msgid "Language"
+msgstr "Langue"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
@@ -1500,7 +1512,7 @@ msgstr "Licence"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:8
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "Clair"
@@ -1569,6 +1581,10 @@ msgstr "Fractale de Mandelbrot"
 msgid "Martian Lava"
 msgstr "Lave martienne"
 
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:122
+msgid "Maximum Scatter Radius"
+msgstr ""
+
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
 msgstr "Taille maximale"
@@ -1586,6 +1602,10 @@ msgstr "Moyen"
 #: ../Pinta.Core/Actions/LayerActions.cs:335
 msgid "Merge Layer Down"
 msgstr "Fusionner avec le calque inférieur"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:126
+msgid "Minimum Scatter Radius"
+msgstr ""
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
@@ -1699,7 +1719,7 @@ msgstr "Normal avec contours"
 msgid "Number of Cells"
 msgstr "Nombre de cellules"
 
-#: ../Pinta/Main.cs:56
+#: ../Pinta/Main.cs:60
 msgid "Number of threads to use for rendering"
 msgstr "Nombre de fils d’éxécution à utiliser pour le rendu"
 
@@ -1756,7 +1776,7 @@ msgstr "Ouvrir un fichier image"
 msgid "Open Line/Curve Series"
 msgstr "Séries de lignes/courbes ouvertes"
 
-#: ../Pinta.Core/Actions/EditActions.cs:488
+#: ../Pinta.Core/Actions/EditActions.cs:521
 msgid "Open Palette File"
 msgstr "Ouvrir le fichier de palette"
 
@@ -1832,7 +1852,7 @@ msgstr "Palette"
 msgid "Palette Source"
 msgstr "Source de la palette"
 
-#: ../Pinta.Core/Actions/EditActions.cs:569
+#: ../Pinta.Core/Actions/EditActions.cs:602
 msgid "Palette files"
 msgstr "Fichiers de palettes"
 
@@ -1864,7 +1884,7 @@ msgstr "Crayon"
 msgid "Pencil Sketch"
 msgstr "Croquis au crayon"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:85
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
 msgid "Pencil Tip Size"
 msgstr "Taille de la mine du crayon"
 
@@ -1891,7 +1911,7 @@ msgid "Phyllotaxis"
 msgstr "Phyllotaxie"
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:75
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
 msgstr "Pinta"
@@ -1954,7 +1974,7 @@ msgstr "Pixels"
 msgid "Piña Colada"
 msgstr "Piña Colada"
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:81
+#: ../Pinta/Dialogs/PreferencesDialog.cs:122
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Veuillez redémarrer Pinta pour appliquer les changements."
 
@@ -2012,7 +2032,7 @@ msgid "Preferences..."
 msgstr ""
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:224
+#: ../Pinta/Actions/Edit/PasteAction.cs:254
 msgid "Preserve"
 msgstr "Préserver"
 
@@ -2138,7 +2158,7 @@ msgstr "Couleurs aléatoires"
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:142
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:138
 msgid "Random Noise Seed"
 msgstr "Bruit aléatoire"
 
@@ -2217,7 +2237,7 @@ msgstr "Renommer le calque"
 msgid "Render"
 msgstr "Effectuer le rendu"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
 msgid "Rendering Effect"
 msgstr "Effet de rendu"
 
@@ -2225,7 +2245,7 @@ msgstr "Effet de rendu"
 msgid "Replace"
 msgstr "Remplacer"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12
 msgid "Replaces the header bar with a separate menu bar and tool bar."
 msgstr ""
 
@@ -2378,7 +2398,7 @@ msgstr "Saturation"
 msgid "Saturation Percentage"
 msgstr "Pourcentage de saturation"
 
-#: ../Pinta.Core/Actions/EditActions.cs:522
+#: ../Pinta.Core/Actions/EditActions.cs:555
 #: ../Pinta.Core/Actions/FileActions.cs:88
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2397,7 +2417,7 @@ msgstr "Enregistrer sous..."
 msgid "Save Image File"
 msgstr "Enregistrer le fichier image"
 
-#: ../Pinta.Core/Actions/EditActions.cs:519
+#: ../Pinta.Core/Actions/EditActions.cs:552
 msgid "Save Palette File"
 msgstr "Enregistrer le fichier de palette"
 
@@ -2488,7 +2508,7 @@ msgstr "Afficher la grille"
 msgid "Show Layer"
 msgstr "Afficher le calque"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Show Menu Bar"
 msgstr ""
 
@@ -2535,6 +2555,10 @@ msgstr ""
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
 msgstr "Lisse"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
+msgid "Smoothness"
+msgstr "Lissage"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -2604,7 +2628,7 @@ msgid "The '{0}' add-in may not be compatible with this version of Pinta"
 msgstr ""
 "Le greffon '{0}' peut ne pas être compatible avec cette version de Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:237
 msgid "The clipboard does not contain an image."
 msgstr "Le presse-papiers ne contient pas d’image."
 
@@ -2628,7 +2652,7 @@ msgstr "Les paquets suivants seront installés :"
 msgid "The following packages will be uninstalled:"
 msgstr "Les paquets suivants seront désinstallés :"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:244
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2677,7 +2701,7 @@ msgstr "Épaisseur"
 msgid "Thin"
 msgstr ""
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
 msgid "This format does not support layers. Flatten image?"
 msgstr "Ce format ne prend pas en charge les calques. Aplatir l’image ?"
 
@@ -2833,7 +2857,7 @@ msgstr "Image non enregistrée {0}"
 msgid "Unsupported file format"
 msgstr "Format de fichier non pris en charge"
 
-#: ../Pinta.Core/Actions/EditActions.cs:511
+#: ../Pinta.Core/Actions/EditActions.cs:544
 msgid "Unsupported palette format"
 msgstr "Format de palette non supporté"
 
@@ -2948,7 +2972,7 @@ msgid "You do not have access to '{0}'."
 msgstr "Vous n’avez pas accès à '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2985,9 +3009,9 @@ msgstr "_Réglages"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:214
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:216
-#: ../Pinta/Actions/Edit/PasteAction.cs:222
+#: ../Pinta/Actions/Edit/PasteAction.cs:252
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:278
 #: ../Pinta/Dialogs/ProgressDialog.cs:71
 msgid "_Cancel"
 msgstr "_Annuler"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 00:31+0000\n"
-"PO-Revision-Date: 2026-09-17 02:41+0000\n"
+"POT-Creation-Date: 2026-10-01 00:37+0000\n"
+"PO-Revision-Date: 2026-10-08 13:57+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
 "Language-Team: Irish <https://hosted.weblate.org/projects/pinta/pinta/ga/>\n"
 "Language: ga\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.10.1.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -62,7 +62,7 @@ msgstr "Maidir le Pinta"
 
 #: ../Pinta.Core/Actions/LayerActions.cs:61
 #: ../Pinta.Core/Actions/LayerActions.cs:400
-#: ../Pinta/Actions/Edit/PasteAction.cs:173
+#: ../Pinta/Actions/Edit/PasteAction.cs:187
 msgid "Add New Layer"
 msgstr "Cuir Ciseal Nua Leis"
 
@@ -102,7 +102,7 @@ msgstr "Gach Caipín Beag"
 msgid "All Small Caps"
 msgstr "Gach Litir Bheag"
 
-#: ../Pinta.Core/Actions/EditActions.cs:586
+#: ../Pinta.Core/Actions/EditActions.cs:619
 #: ../Pinta.Gui.Addins/AddinManagerDialog.cs:302
 #: ../Pinta/Actions/File/OpenDocumentAction.cs:102
 msgid "All files"
@@ -117,7 +117,6 @@ msgid "Alpha Gradient"
 msgstr "Grádán Alfa"
 
 #: ../Pinta.Effects/Effects/BulgeEffect.cs:116
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:146
 #: ../Pinta.Effects/Effects/PolarInversionEffect.cs:88
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:57
 #: ../Pinta.Effects/Effects/TwistEffect.cs:217
@@ -143,7 +142,7 @@ msgstr "Ancaire:"
 msgid "Angle"
 msgstr "Uillinn"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
 msgid "Animate Selection Outline"
 msgstr "Beochan Imlíne Roghnúcháin"
 
@@ -324,14 +323,14 @@ msgstr "De réir méid:"
 msgid "By percentage:"
 msgstr "De réir céatadán:"
 
-#: ../Pinta.Core/Actions/EditActions.cs:523
+#: ../Pinta.Core/Actions/EditActions.cs:556
 #: ../Pinta.Gui.Addins/InstallDialog.cs:126
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:498
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:96
 msgid "Cancel"
 msgstr "Cealaigh"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12 ../Pinta/Pads/CanvasPad.cs:41
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:13 ../Pinta/Pads/CanvasPad.cs:41
 msgid "Canvas"
 msgstr "Canbhás"
 
@@ -475,7 +474,7 @@ msgstr "Brúigh agus tarraing chun an íomhá a ghluaiseacht."
 msgid "Click to reset primary and secondary color."
 msgstr "Brúigh anseo chun an príomhdhath agus an dath tánaisteach a athshocrú."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:601
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:602
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:344
 msgid "Click to select primary color."
 msgstr "Brúigh anseo chun an príomhdhath a roghnú."
@@ -488,7 +487,7 @@ msgstr ""
 "Cliceáil chun réigiún den dath céanna a roghnú.\n"
 "Coinnigh síos an cnaipe Shift chun an mód Domhanda a úsáid."
 
-#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:606
+#: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:348
 msgid "Click to select secondary color."
 msgstr "Brúigh anseo chun an dath tánaisteach a roghnú."
@@ -560,7 +559,7 @@ msgstr "Mód Dathanna"
 msgid "Color Picker"
 msgstr "Roghnóir Dathanna"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:89
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:90
 msgid "Color Range"
 msgstr "Raon na nDathanna"
 
@@ -568,7 +567,7 @@ msgstr "Raon na nDathanna"
 msgid "Color Saturation"
 msgstr "Sáithiú na nDathanna"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:6
 #: ../Pinta.Effects/Effects/CellsEffect.cs:183
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:148
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:158
@@ -677,7 +676,7 @@ msgid "Cut"
 msgstr "Gearr"
 
 #. Translators: This refers to using a dark variant of the color scheme.
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:9
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
 msgid "Dark"
 msgstr "Dorcha"
 
@@ -723,6 +722,10 @@ msgstr "Mionsonraí"
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:36
 msgid "Difference"
 msgstr "Éagsúlacht"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:130
+msgid "Diffusion"
+msgstr "Idirleathadh"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
@@ -809,12 +812,12 @@ msgstr "Roghnaigh Éilips"
 msgid "Emboss"
 msgstr "Cabhraíocht"
 
-#: ../Pinta/Main.cs:67
+#: ../Pinta/Main.cs:71
 msgid "Enable additional logging or behavior changes for debugging"
 msgstr ""
 "Cumasaigh logáil bhreise nó athruithe iompraíochta le haghaidh dífhabhtaithe"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:15
 msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
@@ -844,7 +847,7 @@ msgid "Exclude (-) (Right Click)"
 msgstr "Eisiamh (-) (Cliceáil ar Dheis)"
 
 #. Translators: This refers to expanding the canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:226
+#: ../Pinta/Actions/Edit/PasteAction.cs:256
 msgid "Expand"
 msgstr "Leathnaigh"
 
@@ -873,7 +876,7 @@ msgstr "Theip ar an bpacáiste síneadh a luchtú"
 msgid "Failed to open image"
 msgstr "Theip ar an íomhá a oscailt"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:235
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:236
 msgid "Failed to save image"
 msgstr "Theip ar an íomhá a shábháil"
 
@@ -898,7 +901,7 @@ msgstr "Comhad"
 msgid "File a Bug"
 msgstr "Fógraigh Fabht"
 
-#: ../Pinta/Main.cs:62
+#: ../Pinta/Main.cs:66
 msgid "Files to open"
 msgstr "Comhaid le hoscailt"
 
@@ -942,11 +945,11 @@ msgstr "Picteilíní Críochnaithe"
 
 #: ../Pinta.Core/Actions/ImageActions.cs:117
 #: ../Pinta.Core/Actions/ImageActions.cs:221
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:275
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:279
 msgid "Flatten"
 msgstr "Leacaigh"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:271
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:275
 msgid "Flattening the image will merge all layers into a single layer."
 msgstr ""
 "Trí an íomhá a chothromú, cumascfar na sraitheanna go léir in aon tsraith "
@@ -1132,7 +1135,7 @@ msgstr "Lí & Sáithiú"
 msgid "Hue / Saturation"
 msgstr "Lí / Sáithiú"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:228
 msgid "ICO files can not be larger than 256 x 256 pixels."
 msgstr "Ní féidir comhaid ICO a bheith níos mó ná 256 x 256 picteilín."
 
@@ -1160,7 +1163,7 @@ msgstr "Eagarthóir Íomhá"
 msgid "Image Tabs"
 msgstr "Cluaisíní Íomhá"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:206
+#: ../Pinta/Actions/Edit/PasteAction.cs:236
 msgid "Image cannot be pasted"
 msgstr "Ní féidir an íomhá a ghreamú"
 
@@ -1169,11 +1172,11 @@ msgstr "Ní féidir an íomhá a ghreamú"
 msgid "Image files"
 msgstr "Comhaid íomhánna"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:213
+#: ../Pinta/Actions/Edit/PasteAction.cs:243
 msgid "Image larger than canvas"
 msgstr "Íomhá níos mó ná an chanbhás"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:226
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:227
 msgid "Image too large"
 msgstr "Íomhá ró-mhór"
 
@@ -1260,7 +1263,7 @@ msgid "Invert Colors"
 msgstr "Aisiompaigh na Dathanna"
 
 #: ../Pinta.Core/Actions/EditActions.cs:143
-#: ../Pinta.Core/Actions/EditActions.cs:608
+#: ../Pinta.Core/Actions/EditActions.cs:641
 msgid "Invert Selection"
 msgstr "Aisiompaigh an Roghnúchán"
 
@@ -1288,6 +1291,10 @@ msgstr "Aicearraí Méarchláir"
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
 msgstr "Tírdhreach"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
+msgid "Language"
+msgstr "Teanga"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
@@ -1507,7 +1514,7 @@ msgstr "Ceadúnas"
 
 #. Translators: This refers to using a light variant of the color scheme.
 #. Translators: 'Light' (300) refers to the font-weight text property
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:7
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:8
 #: ../Pinta.Tools/Tools/TextTool.cs:266
 msgid "Light"
 msgstr "Geal"
@@ -1576,6 +1583,10 @@ msgstr "Fractal Mandelbrot"
 msgid "Martian Lava"
 msgstr "Laibhe Marsach"
 
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:122
+msgid "Maximum Scatter Radius"
+msgstr "Ga Scaipthe Uasta"
+
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
 msgstr "Uasmhéid Méid"
@@ -1593,6 +1604,10 @@ msgstr "Meánach"
 #: ../Pinta.Core/Actions/LayerActions.cs:335
 msgid "Merge Layer Down"
 msgstr "Cumasc Sraith Síos"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:126
+msgid "Minimum Scatter Radius"
+msgstr "Ga Scaipthe Íosta"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
@@ -1706,7 +1721,7 @@ msgstr "Gnáth agus Imlíne"
 msgid "Number of Cells"
 msgstr "Líon na gCealla"
 
-#: ../Pinta/Main.cs:56
+#: ../Pinta/Main.cs:60
 msgid "Number of threads to use for rendering"
 msgstr "Líon na snáitheanna le húsáid le haghaidh rindreála"
 
@@ -1763,7 +1778,7 @@ msgstr "Oscail Comhad Íomhá"
 msgid "Open Line/Curve Series"
 msgstr "Sraith Líne/Cuar Oscailte"
 
-#: ../Pinta.Core/Actions/EditActions.cs:488
+#: ../Pinta.Core/Actions/EditActions.cs:521
 msgid "Open Palette File"
 msgstr "Oscail Comhad Páiléid"
 
@@ -1839,7 +1854,7 @@ msgstr "Pailéad"
 msgid "Palette Source"
 msgstr "Foinse Pailéid"
 
-#: ../Pinta.Core/Actions/EditActions.cs:569
+#: ../Pinta.Core/Actions/EditActions.cs:602
 msgid "Palette files"
 msgstr "Comhaid pailéid"
 
@@ -1871,7 +1886,7 @@ msgstr "Peann Luaidhe"
 msgid "Pencil Sketch"
 msgstr "Léaráid Phinn Luaidhe"
 
-#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:85
+#: ../Pinta.Effects/Effects/PencilSketchEffect.cs:86
 msgid "Pencil Tip Size"
 msgstr "Méid Leid an Pheann luaidhe"
 
@@ -1898,7 +1913,7 @@ msgid "Phyllotaxis"
 msgstr "Fíllotaxis"
 
 #: ../xdg/com.github.PintaProject.Pinta.desktop.in.h:1
-#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:71
+#: ../Pinta/Actions/Help/AboutDialogAction.cs:65 ../Pinta/Main.cs:75
 #: ../Pinta/MainWindow.cs:57
 msgid "Pinta"
 msgstr "Pinta"
@@ -1959,7 +1974,7 @@ msgstr "Picteilíní"
 msgid "Piña Colada"
 msgstr "Piña Colada"
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:81
+#: ../Pinta/Dialogs/PreferencesDialog.cs:122
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Atosaigh Pinta le go dtiocfaidh na hathruithe i bhfeidhm."
 
@@ -2017,7 +2032,7 @@ msgid "Preferences..."
 msgstr "Roghanna..."
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
-#: ../Pinta/Actions/Edit/PasteAction.cs:224
+#: ../Pinta/Actions/Edit/PasteAction.cs:254
 msgid "Preserve"
 msgstr "Caomhnaigh"
 
@@ -2143,7 +2158,7 @@ msgstr "Dathanna Randamacha"
 #: ../Pinta.Effects/Effects/AddNoiseEffect.cs:179
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:142
 #: ../Pinta.Effects/Effects/DentsEffect.cs:151
-#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:150
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:138
 msgid "Random Noise Seed"
 msgstr "Síol Torainn Randamach"
 
@@ -2222,7 +2237,7 @@ msgstr "Athainmnigh Sraith"
 msgid "Render"
 msgstr "Cruth"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:109
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
 msgid "Rendering Effect"
 msgstr "Éifeacht Rindreála"
 
@@ -2230,7 +2245,7 @@ msgstr "Éifeacht Rindreála"
 msgid "Replace"
 msgstr "Ionadaigh"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:12
 msgid "Replaces the header bar with a separate menu bar and tool bar."
 msgstr ""
 "Cuireann sé barra roghchláir agus barra uirlisí ar leithligh in ionad an "
@@ -2385,7 +2400,7 @@ msgstr "Sáithiú"
 msgid "Saturation Percentage"
 msgstr "Céatadán Sáithithe"
 
-#: ../Pinta.Core/Actions/EditActions.cs:522
+#: ../Pinta.Core/Actions/EditActions.cs:555
 #: ../Pinta.Core/Actions/FileActions.cs:88
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:95
 msgid "Save"
@@ -2404,7 +2419,7 @@ msgstr "Cuir i dTaisce Mar..."
 msgid "Save Image File"
 msgstr "Sábháil Comhad Íomhá"
 
-#: ../Pinta.Core/Actions/EditActions.cs:519
+#: ../Pinta.Core/Actions/EditActions.cs:552
 msgid "Save Palette File"
 msgstr "Sábháil Comhad Pailéid"
 
@@ -2495,7 +2510,7 @@ msgstr "Taispeáin an Eangach"
 msgid "Show Layer"
 msgstr "Taispeáin Sraith"
 
-#: .././Pinta/Dialogs/PreferencesDialog.ui.h:10
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Show Menu Bar"
 msgstr "Taispeáin Barra Roghchláir"
 
@@ -2542,6 +2557,10 @@ msgstr "Caipitil Bheaga"
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
 msgstr "Mín"
+
+#: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
+msgid "Smoothness"
+msgstr "Míníocht"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -2612,7 +2631,7 @@ msgstr ""
 "B’fhéidir nach bhfuil an breiseán '{0}' comhoiriúnach leis an leagan seo de "
 "Pinta"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:207
+#: ../Pinta/Actions/Edit/PasteAction.cs:237
 msgid "The clipboard does not contain an image."
 msgstr "Níl íomhá ar an ngearrthaisce."
 
@@ -2637,7 +2656,7 @@ msgstr "Suiteálfar na pacáistí seo a leanas:"
 msgid "The following packages will be uninstalled:"
 msgstr "Díshuiteálfar na pacáistí seo a leanas:"
 
-#: ../Pinta/Actions/Edit/PasteAction.cs:214
+#: ../Pinta/Actions/Edit/PasteAction.cs:244
 msgid ""
 "The image being pasted is larger than the canvas. What would you like to do "
 "to the canvas size?"
@@ -2686,7 +2705,7 @@ msgstr "Tiús"
 msgid "Thin"
 msgstr "Tanaí"
 
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:270
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
 msgid "This format does not support layers. Flatten image?"
 msgstr ""
 "Ní thacaíonn an fhormáid seo le sraitheanna. An bhfuil an íomhá leacaithe?"
@@ -2843,7 +2862,7 @@ msgstr "Íomhá nár chuireadh i dtaisce {0}"
 msgid "Unsupported file format"
 msgstr "Formáid comhaid nach dtacaítear léi"
 
-#: ../Pinta.Core/Actions/EditActions.cs:511
+#: ../Pinta.Core/Actions/EditActions.cs:544
 msgid "Unsupported palette format"
 msgstr "Formáid pailéid nach dtacaítear léi"
 
@@ -2958,7 +2977,7 @@ msgid "You do not have access to '{0}'."
 msgstr "Níl rochtain agat ar '{0}'."
 
 #. Translators: {0} is the name of a file that the user does not have write permission for.
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:238
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:242
 #, csharp-format
 msgid ""
 "You do not have access to modify '{0}'. The file or folder may be read-only."
@@ -2995,9 +3014,9 @@ msgstr "_Mionathruithe"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:214
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:216
-#: ../Pinta/Actions/Edit/PasteAction.cs:222
+#: ../Pinta/Actions/Edit/PasteAction.cs:252
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:83
-#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:274
+#: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:278
 #: ../Pinta/Dialogs/ProgressDialog.cs:71
 msgid "_Cancel"
 msgstr "_Cealaigh"
