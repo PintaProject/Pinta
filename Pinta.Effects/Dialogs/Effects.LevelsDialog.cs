@@ -189,9 +189,11 @@ public sealed partial class LevelsDialog
 
 		HistogramWidget histogramInput = HistogramWidget.New ();
 		histogramInput.WidthRequest = 130;
+		histogramInput.Hexpand = true;
 		histogramInput.FlipHorizontal = true;
 		HistogramWidget histogramOutput = HistogramWidget.New ();
 		histogramOutput.WidthRequest = 130;
+		histogramOutput.Hexpand = true;
 
 		Gtk.Box vboxInput = GtkExtensions.Box (
 			verticalSpaced,
@@ -260,7 +262,7 @@ public sealed partial class LevelsDialog
 
 		Title = Translations.GetString ("Levels Adjustment");
 		Modal = true;
-		Resizable = false;
+		Resizable = true;
 
 		// --- Initialization (LevelsDialog)
 
