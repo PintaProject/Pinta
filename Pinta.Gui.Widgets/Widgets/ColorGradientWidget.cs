@@ -37,6 +37,7 @@ namespace Pinta.Gui.Widgets;
 public sealed partial class ColorGradientWidget
 {
 	private const double X_pad = 0.15; // gradient horizontal padding
+	private const double ArrowSize = 6;
 	private const double Y_pad = 0.03; // gradient vertical padding
 
 	private double[] vals = [];
@@ -332,8 +333,8 @@ public sealed partial class ColorGradientWidget
 		// right triangle
 		ReadOnlySpan<PointD> points = [
 			new (x, y),
-			new (x + X_pad * rect.Width, y + Y_pad * rect.Height),
-			new (x + X_pad * rect.Width, y - Y_pad * rect.Height),
+			new (x + ArrowSize, y + ArrowSize),
+			new (x + ArrowSize, y - ArrowSize),
 		];
 
 		g.FillPolygonal (points, color);
@@ -348,8 +349,8 @@ public sealed partial class ColorGradientWidget
 		// left triangle
 		ReadOnlySpan<PointD> points = [
 			new (rect.X, y),
-			new (rect.X - X_pad * rect.Width, y + Y_pad * rect.Height),
-			new (rect.X - X_pad * rect.Width, y - Y_pad * rect.Height),
+			new (rect.X - ArrowSize, y + ArrowSize),
+			new (rect.X - ArrowSize, y - ArrowSize),
 		];
 
 		g.FillPolygonal (points, color);
