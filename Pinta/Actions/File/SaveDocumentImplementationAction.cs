@@ -94,7 +94,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 	// This is actually both for "Save As" and saving a file that never
 	// been saved before.  Either way, we need to prompt for a filename.
-	private async Task<bool> SaveFileAs (Document document)
+	private async Task<bool> SaveFileAs (Document document, string? forcedExtension = null)
 	{
 		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Save Image File"),
@@ -231,8 +231,14 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			return false;
 		}
 
-		if (await ResolveFormatConflict (document, format) == FormatConflictResult.Cancel) {
+		var conflictResult = await ResolveFormatConflict (document, format);
+
+		if (conflictResult == FormatConflictResult.Cancel) {
 			return false;
+		}
+
+		if (conflictResult == FormatConflictResult.Convert) {
+			return await SaveFileAs (document, forcedExtension: "ora");
 		}
 
 		// Commit any pending changes
