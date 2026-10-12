@@ -160,7 +160,19 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 					format = image_formats.GetDefaultSaveFormat ();
 			}
 
-			if (await ResolveFormatConflict (document, format) == FormatConflictResult.Cancel) {
+			var conflictResult = await ResolveFormatConflict (document, format);
+
+			if (conflictResult == FormatConflictResult.Cancel) {
+				continue;
+			}
+
+			if (conflictResult == FormatConflictResult.Convert) {
+				// Set file type and filename to OpenRaster, then reopen the save dialog.
+				FormatDescriptor? oraFormat = image_formats.GetFormatByExtension ("ora");
+				if (oraFormat is not null) {
+					fcd.Filter = oraFormat.Filter;
+					fcd.SetCurrentName (System.IO.Path.ChangeExtension (displayName, "ora"));
+				}
 				continue;
 			}
 
@@ -305,4 +317,3 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		return FormatConflictResult.Proceed;
 	}
 }
-// re
