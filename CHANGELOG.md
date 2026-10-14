@@ -26,6 +26,7 @@ Thanks to the following contributors who worked on this release:
 - @rrivvi
 - @Rakosn1cek
 - @davew85
+- @cgernert
 
 ### Added
 - The splatter brush now allows the minimum and maximum splatter size to be configured separately from the brush width
@@ -73,6 +74,7 @@ Thanks to the following contributors who worked on this release:
 - Changes for add-in authors
   - Add-ins should use `Pinta.Core.Translations.GetString()` to use Pinta's translations for strings such as standard effect categories (#1933, #1935)
 - Copying and pasting now places the image at the location it was originally copied from (#2325, #2130)
+- The Levels dialog is now resizable (#2346)
 
 ### Fixed
 - Fixed a bug where duplicate submenus could be produced by add-ins with effect categories that were not translated (#1933, #1935)
