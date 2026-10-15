@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-01 00:37+0000\n"
 "PO-Revision-Date: 2026-10-17 15:49+0000\n"
-"Last-Translator: Alexey S <alexeys@users.noreply.hosted.weblate.org>\n"
+"Last-Translator: Сергей <ser82@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
 "\n"
 "Language: ru\n"
@@ -2558,10 +2558,9 @@ msgstr "Малые заглавные"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
-msgstr "Сглаженный"
+msgstr "Сглаживание"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
-#, fuzzy
 msgid "Smoothness"
 msgstr "Сглаженность"
 
