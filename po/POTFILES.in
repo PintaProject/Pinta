@@ -73,6 +73,7 @@ Pinta.Core/Classes/Fraction.cs
 Pinta.Core/Classes/HsvColor.cs
 Pinta.Core/Classes/IColor.cs
 Pinta.Core/Classes/IExtension.cs
+Pinta.Core/Classes/ILivePreviewSession.cs
 Pinta.Core/Classes/IToolHandle.cs
 Pinta.Core/Classes/Layer.cs
 Pinta.Core/Classes/LayerProperties.cs
@@ -80,6 +81,7 @@ Pinta.Core/Classes/Matrix3x2D.cs
 Pinta.Core/Classes/NumberRange.cs
 Pinta.Core/Classes/ObservableObject.cs
 Pinta.Core/Classes/Palette.cs
+Pinta.Core/Classes/PintaLocalizer.cs
 Pinta.Core/Classes/PixelOffset.cs
 Pinta.Core/Classes/Point.cs
 Pinta.Core/Classes/RandomSeed.cs
@@ -285,7 +287,6 @@ Pinta.Gui.Addins/InstallDialog.cs
 Pinta.Gui.Addins/StatusProgressBar.cs
 Pinta.Gui.Addins/Utilities.cs
 Pinta.Gui.Widgets/Dialogs/MemberReflector.cs
-Pinta.Gui.Widgets/Dialogs/PintaLocalizer.cs
 Pinta.Gui.Widgets/Dialogs/ReflectionHelper.cs
 Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs
 Pinta.Gui.Widgets/Widgets/AnglePickerGraphic.cs
