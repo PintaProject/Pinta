@@ -36,6 +36,14 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 {
 	const string RESPONSE_CANCEL = "cancel";
 	const string RESPONSE_FLATTEN = "flatten";
+	const string RESPONSE_CONVERT = "convert";
+
+	private enum FormatConflictResult
+	{
+		Proceed, // Proceed with saving (no conflict, or user agreed to flatten)
+		Cancel, // User cancelled the save operation
+		Convert // User chose to convert the image to a compatible format
+	}
 
 	private readonly FileActions file;
 	private readonly ImageActions image;
@@ -86,7 +94,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 	// This is actually both for "Save As" and saving a file that never
 	// been saved before.  Either way, we need to prompt for a filename.
-	private async Task<bool> SaveFileAs (Document document)
+	private async Task<bool> SaveFileAs (Document document, string? forcedExtension = null)
 	{
 		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Save Image File"),
@@ -152,7 +160,19 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 					format = image_formats.GetDefaultSaveFormat ();
 			}
 
-			if (!await ConfirmFlatten (document, format)) {
+			var conflictResult = await ResolveFormatConflict (document, format);
+
+			if (conflictResult == FormatConflictResult.Cancel) {
+				continue;
+			}
+
+			if (conflictResult == FormatConflictResult.Convert) {
+				// Set file type and filename to OpenRaster, then reopen the save dialog.
+				FormatDescriptor? oraFormat = image_formats.GetFormatByExtension ("ora");
+				if (oraFormat is not null) {
+					fcd.Filter = oraFormat.Filter;
+					fcd.SetCurrentName (System.IO.Path.ChangeExtension (displayName, "ora"));
+				}
 				continue;
 			}
 
@@ -211,8 +231,14 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			return false;
 		}
 
-		if (!await ConfirmFlatten (document, format)) {
+		var conflictResult = await ResolveFormatConflict (document, format);
+
+		if (conflictResult == FormatConflictResult.Cancel) {
 			return false;
+		}
+
+		if (conflictResult == FormatConflictResult.Convert) {
+			return await SaveFileAs (document, forcedExtension: "ora");
 		}
 
 		// Commit any pending changes
@@ -265,7 +291,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		return true;
 	}
 
-	private async Task<bool> ConfirmFlatten (Document document, FormatDescriptor format)
+	private async Task<FormatConflictResult> ResolveFormatConflict (Document document, FormatDescriptor format)
 	{
 		// If the format doesn't support layers but there is more than one layer, ask to flatten the image
 		if (!format.SupportsLayers
@@ -277,21 +303,27 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			using Adw.MessageDialog dialog = Adw.MessageDialog.New (chrome.MainWindow, heading, body);
 			dialog.AddResponse (RESPONSE_CANCEL, Translations.GetString ("_Cancel"));
 			dialog.AddResponse (RESPONSE_FLATTEN, Translations.GetString ("Flatten"));
-			dialog.SetResponseAppearance (RESPONSE_FLATTEN, Adw.ResponseAppearance.Suggested);
+			dialog.AddResponse (RESPONSE_CONVERT, Translations.GetString ("Convert"));
+			dialog.SetResponseAppearance (RESPONSE_CONVERT, Adw.ResponseAppearance.Suggested);
+			dialog.SetResponseAppearance (RESPONSE_FLATTEN, Adw.ResponseAppearance.Destructive);
 
 			dialog.CloseResponse = RESPONSE_CANCEL;
-			dialog.DefaultResponse = RESPONSE_FLATTEN;
+			dialog.DefaultResponse = RESPONSE_CONVERT;
 
 			string response = await dialog.RunAsync ();
 
-			if (response == RESPONSE_CANCEL) {
-				return false;
+			switch (response) {
+				case RESPONSE_CANCEL:
+					return FormatConflictResult.Cancel;
+				case RESPONSE_CONVERT:
+					return FormatConflictResult.Convert;
+				default:
+					// Flatten the image
+					tools.Commit ();
+					image.Flatten.Activate ();
+					break;
 			}
-
-			// Flatten the image
-			tools.Commit ();
-			image.Flatten.Activate ();
 		}
-		return true;
+		return FormatConflictResult.Proceed;
 	}
 }
