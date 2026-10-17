@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 00:37+0000\n"
+"POT-Creation-Date: 2026-10-15 00:27+0000\n"
 "PO-Revision-Date: 2021-08-13 14:16+0000\n"
 "Last-Translator: Rafael Neri <Unknown>\n"
 "Language-Team: English (Australia) <en_AU@li.org>\n"
@@ -177,7 +177,7 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Auto"
 msgstr "Auto"
 
@@ -197,6 +197,7 @@ msgstr ""
 msgid "Autoscroll On"
 msgstr ""
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:19
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "Background"
@@ -287,7 +288,7 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:87
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Brightness"
@@ -413,8 +414,9 @@ msgstr "Changed Shape Type"
 msgid "Cherry Blossom"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:664
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:363
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:666
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:359
+#: ../Pinta/Dialogs/PreferencesDialog.cs:183
 msgid "Choose Color"
 msgstr ""
 
@@ -523,6 +525,7 @@ msgstr "Clouds"
 msgid "Coarseness"
 msgstr "Coarseness"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:26
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
@@ -596,7 +599,7 @@ msgstr "Contents"
 msgid "Contiguous"
 msgstr "Contiguous"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:90
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Contrast"
@@ -653,6 +656,8 @@ msgstr ""
 msgid "Curves"
 msgstr "Curves"
 
+#. Translators: Background option for the image created at startup, using a chosen color.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:25
 #: ../Pinta/Dialogs/NewImageDialog.cs:375
 #: ../Pinta/Dialogs/NewImageDialog.cs:430
 #: ../Pinta/Dialogs/NewImageDialog.cs:451
@@ -1061,6 +1066,10 @@ msgstr "Hard Light"
 msgid "Heavy"
 msgstr ""
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
+msgid "Height"
+msgstr ""
+
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:87
@@ -1190,11 +1199,11 @@ msgstr "Ink Outline"
 msgid "Ink Sketch"
 msgstr "Ink Sketch"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:284
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
 msgid "Input"
 msgstr "Input"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:283
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
 msgid "Input Histogram"
 msgstr "Input Histogram"
 
@@ -1426,7 +1435,7 @@ msgstr "Length"
 msgid "Levels"
 msgstr "Levels"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:261
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
 msgid "Levels Adjustment"
 msgstr "Levels Adjustment"
 
@@ -1743,11 +1752,11 @@ msgstr "Outline Shape"
 msgid "Outline width"
 msgstr "Outline width"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:287
 msgid "Output"
 msgstr "Output"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:288
 msgid "Output Histogram"
 msgstr "Output Histogram"
 
@@ -1895,7 +1904,7 @@ msgstr "Pixels"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:122
+#: ../Pinta/Dialogs/PreferencesDialog.cs:204
 msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 
@@ -2158,7 +2167,7 @@ msgstr "Rename Layer"
 msgid "Render"
 msgstr "Render"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:120
 msgid "Rendering Effect"
 msgstr "Rendering Effect"
 
@@ -2182,12 +2191,12 @@ msgstr ""
 msgid "Resampling:"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:649
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:645
 msgid "Reseed"
 msgstr "Reseed"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:205
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:481
 msgid "Reset"
 msgstr "Reset"
@@ -2501,6 +2510,10 @@ msgstr "Splatter"
 msgid "Squares"
 msgstr "Squares"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
+msgid "Startup Image"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr ""
@@ -2692,6 +2705,8 @@ msgstr "Translate This Application"
 msgid "Transparency Mode"
 msgstr ""
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:23
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:128
 msgid "Transparent"
@@ -2844,9 +2859,15 @@ msgstr ""
 msgid "Warmth"
 msgstr "Warmth"
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:21
 #: ../Pinta/Dialogs/NewImageDialog.cs:109
 msgid "White"
 msgstr "White"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
+msgid "Width"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:105

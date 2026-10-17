@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 00:37+0000\n"
+"POT-Creation-Date: 2026-10-15 00:27+0000\n"
 "PO-Revision-Date: 2025-04-22 02:13+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/pinta/pinta/hu/"
@@ -178,7 +178,7 @@ msgstr "Atkinson"
 msgid "Author"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Auto"
 msgstr "Automatikus"
 
@@ -198,6 +198,7 @@ msgstr ""
 msgid "Autoscroll On"
 msgstr ""
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:19
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "Háttér"
@@ -288,7 +289,7 @@ msgstr "Lent balra"
 msgid "Bottom Right"
 msgstr "Lent jobbra"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:87
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Fényerő"
@@ -414,8 +415,9 @@ msgstr "Alakzattípus megváltoztatva"
 msgid "Cherry Blossom"
 msgstr "Cseresznyevirág"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:664
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:363
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:666
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:359
+#: ../Pinta/Dialogs/PreferencesDialog.cs:183
 msgid "Choose Color"
 msgstr "Szín kiválasztása"
 
@@ -528,6 +530,7 @@ msgstr "Felhők"
 msgid "Coarseness"
 msgstr "Durvaság"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:26
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
@@ -601,7 +604,7 @@ msgstr "Tartalom"
 msgid "Contiguous"
 msgstr "Egybefüggő"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:90
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Kontraszt"
@@ -658,6 +661,8 @@ msgstr "Görbe"
 msgid "Curves"
 msgstr "Görbék"
 
+#. Translators: Background option for the image created at startup, using a chosen color.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:25
 #: ../Pinta/Dialogs/NewImageDialog.cs:375
 #: ../Pinta/Dialogs/NewImageDialog.cs:430
 #: ../Pinta/Dialogs/NewImageDialog.cs:451
@@ -1067,6 +1072,10 @@ msgstr "Kemény fény"
 msgid "Heavy"
 msgstr ""
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
+msgid "Height"
+msgstr ""
+
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:87
@@ -1198,11 +1207,11 @@ msgstr "Tinta körvonala"
 msgid "Ink Sketch"
 msgstr "Tintavázlat"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:284
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
 msgid "Input"
 msgstr "Bemenet"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:283
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
 msgid "Input Histogram"
 msgstr "Bemeneti hisztogram"
 
@@ -1482,7 +1491,7 @@ msgstr "Hossz"
 msgid "Levels"
 msgstr "Szintek"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:261
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
 msgid "Levels Adjustment"
 msgstr "Szintek beállítása"
 
@@ -1799,11 +1808,11 @@ msgstr "Alakzat körberajzolása"
 msgid "Outline width"
 msgstr "Körvonal vastagsága"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:287
 msgid "Output"
 msgstr "Kimenet"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:288
 msgid "Output Histogram"
 msgstr "Kimeneti hisztogram"
 
@@ -1953,7 +1962,7 @@ msgstr "Képpontok"
 msgid "Piña Colada"
 msgstr "Piña Colada"
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:122
+#: ../Pinta/Dialogs/PreferencesDialog.cs:204
 msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 
@@ -2216,7 +2225,7 @@ msgstr "Réteg átnevezése"
 msgid "Render"
 msgstr "Megjelenítés"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:120
 msgid "Rendering Effect"
 msgstr "Hatás megjelenítése"
 
@@ -2240,12 +2249,12 @@ msgstr ""
 msgid "Resampling:"
 msgstr "Újramintavételezés:"
 
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:649
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:645
 msgid "Reseed"
 msgstr "Újraelosztás"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:205
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:481
 msgid "Reset"
 msgstr "Visszaállítás"
@@ -2559,6 +2568,10 @@ msgstr "Fröccsentő"
 msgid "Squares"
 msgstr "Négyzetek"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
+msgid "Startup Image"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr "Állapotsáv"
@@ -2757,6 +2770,8 @@ msgstr "Az alkalmazás fordítása"
 msgid "Transparency Mode"
 msgstr "Átlátszósági mód"
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:23
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:128
 msgid "Transparent"
@@ -2910,9 +2925,15 @@ msgstr "Voronoi diagram"
 msgid "Warmth"
 msgstr "Melegség"
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:21
 #: ../Pinta/Dialogs/NewImageDialog.cs:109
 msgid "White"
 msgstr "Fehér"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
+msgid "Width"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:105

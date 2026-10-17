@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 00:37+0000\n"
+"POT-Creation-Date: 2026-10-15 00:27+0000\n"
 "PO-Revision-Date: 2026-10-02 02:08+0000\n"
 "Last-Translator: Aivaz Latypov <mr.aivazlatypov@yandex.ru>\n"
 "Language-Team: Tatar <https://hosted.weblate.org/projects/pinta/pinta/tt/>\n"
@@ -176,7 +176,7 @@ msgstr "Аткинсон"
 msgid "Author"
 msgstr "Автор"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Auto"
 msgstr "Авто"
 
@@ -196,6 +196,7 @@ msgstr "Автоматик скролл сүнгән"
 msgid "Autoscroll On"
 msgstr "Автоматик скролл кабызылган"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:19
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "Фон"
@@ -286,7 +287,7 @@ msgstr "Түбән сул"
 msgid "Bottom Right"
 msgstr "Түбән уң"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:87
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Яктылык"
@@ -412,8 +413,9 @@ msgstr "Үзгәртелгән форма"
 msgid "Cherry Blossom"
 msgstr "Чия чәчәге"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:664
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:363
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:666
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:359
+#: ../Pinta/Dialogs/PreferencesDialog.cs:183
 msgid "Choose Color"
 msgstr "Төсне сайлагыз"
 
@@ -532,6 +534,7 @@ msgstr "Болытлар"
 msgid "Coarseness"
 msgstr "Катылык"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:26
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
@@ -605,7 +608,7 @@ msgstr "Эчтәлек"
 msgid "Contiguous"
 msgstr "Бәйле өлкәләр"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:90
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Контраст"
@@ -662,6 +665,8 @@ msgstr "Кәкре"
 msgid "Curves"
 msgstr "Кыек сызыклар"
 
+#. Translators: Background option for the image created at startup, using a chosen color.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:25
 #: ../Pinta/Dialogs/NewImageDialog.cs:375
 #: ../Pinta/Dialogs/NewImageDialog.cs:430
 #: ../Pinta/Dialogs/NewImageDialog.cs:451
@@ -1074,6 +1079,10 @@ msgstr "Кырыс яктылык"
 msgid "Heavy"
 msgstr "Авыр"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
+msgid "Height"
+msgstr ""
+
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:87
@@ -1210,11 +1219,11 @@ msgstr "Сия контуры"
 msgid "Ink Sketch"
 msgstr "Сия белән эскиз"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:284
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
 msgid "Input"
 msgstr "Керү"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:283
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
 msgid "Input Histogram"
 msgstr "Кертелгән гистограмма"
 
@@ -1492,7 +1501,7 @@ msgstr "Озынлык"
 msgid "Levels"
 msgstr "Дәрәҗәләр"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:261
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
 msgid "Levels Adjustment"
 msgstr "Дәрәҗәләрне көйләү"
 
@@ -1810,11 +1819,11 @@ msgstr "Контур формасы"
 msgid "Outline width"
 msgstr "Контур киңлеге"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:287
 msgid "Output"
 msgstr "Чыгару"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:288
 msgid "Output Histogram"
 msgstr "Чыгу гистограммасы"
 
@@ -1962,7 +1971,7 @@ msgstr "Пиксельләр"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:122
+#: ../Pinta/Dialogs/PreferencesDialog.cs:204
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Үзгәрешләрнең гамәлгә керүе өчен Pinta'ны яңадан эшләтеп җибәрегез."
 
@@ -2225,7 +2234,7 @@ msgstr "Катламга яңа исем биреге"
 msgid "Render"
 msgstr "Сурәт ясау"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:120
 msgid "Rendering Effect"
 msgstr ""
 
@@ -2249,12 +2258,12 @@ msgstr ""
 msgid "Resampling:"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:649
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:645
 msgid "Reseed"
 msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:205
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:481
 msgid "Reset"
 msgstr "Яңадан көйләү"
@@ -2568,6 +2577,10 @@ msgstr "Чәчрәүләр"
 msgid "Squares"
 msgstr "Квадратлар"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
+msgid "Startup Image"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr ""
@@ -2764,6 +2777,8 @@ msgstr ""
 msgid "Transparency Mode"
 msgstr ""
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:23
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:128
 msgid "Transparent"
@@ -2914,8 +2929,14 @@ msgstr ""
 msgid "Warmth"
 msgstr ""
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:21
 #: ../Pinta/Dialogs/NewImageDialog.cs:109
 msgid "White"
+msgstr ""
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
+msgid "Width"
 msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
