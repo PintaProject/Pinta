@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-15 00:27+0000\n"
-"PO-Revision-Date: 2026-10-03 01:01+0000\n"
-"Last-Translator: Matthaiks <kitynska@gmail.com>\n"
+"PO-Revision-Date: 2026-10-18 07:18+0000\n"
+"Last-Translator: Matthaiks <kityn@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.10\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -1082,7 +1082,7 @@ msgstr "Ciężka"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
 msgid "Height"
-msgstr ""
+msgstr "Wysokość"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
@@ -2584,7 +2584,7 @@ msgstr "Kwadraty"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
 msgid "Startup Image"
-msgstr ""
+msgstr "Obraz startowy"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
@@ -2945,7 +2945,7 @@ msgstr "Biały"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
 msgid "Width"
-msgstr ""
+msgstr "Szerokość"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:105
