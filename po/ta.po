@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 00:37+0000\n"
+"POT-Creation-Date: 2026-10-15 00:27+0000\n"
 "PO-Revision-Date: 2025-06-17 12:30+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/pinta/pinta/ta/>\n"
@@ -176,7 +176,7 @@ msgstr "அட்கின்சன்"
 msgid "Author"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Auto"
 msgstr "தானி"
 
@@ -196,6 +196,7 @@ msgstr ""
 msgid "Autoscroll On"
 msgstr ""
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:19
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "பின்னணி"
@@ -286,7 +287,7 @@ msgstr "கீழே இடது"
 msgid "Bottom Right"
 msgstr "கீழே வலது"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:87
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "ஒளிஅளவு"
@@ -412,8 +413,9 @@ msgstr "மாற்றப்பட்ட வடிவ வகை"
 msgid "Cherry Blossom"
 msgstr "செர்ரி மலரும்"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:664
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:363
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:666
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:359
+#: ../Pinta/Dialogs/PreferencesDialog.cs:183
 msgid "Choose Color"
 msgstr "வண்ணத்தைத் தேர்வுசெய்க"
 
@@ -526,6 +528,7 @@ msgstr "மேகங்கள்"
 msgid "Coarseness"
 msgstr "கரடுமுரடான தன்மை"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:26
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
@@ -599,7 +602,7 @@ msgstr "உள்ளடக்கங்கள்"
 msgid "Contiguous"
 msgstr "தொடர்ச்சியான"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:90
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "மாறுபாடு"
@@ -656,6 +659,8 @@ msgstr "வளைந்த"
 msgid "Curves"
 msgstr "வளைவுகள்"
 
+#. Translators: Background option for the image created at startup, using a chosen color.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:25
 #: ../Pinta/Dialogs/NewImageDialog.cs:375
 #: ../Pinta/Dialogs/NewImageDialog.cs:430
 #: ../Pinta/Dialogs/NewImageDialog.cs:451
@@ -1064,6 +1069,10 @@ msgstr "கடினமான ஒளி"
 msgid "Heavy"
 msgstr ""
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
+msgid "Height"
+msgstr ""
+
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:87
@@ -1195,11 +1204,11 @@ msgstr "மை அவுட்லைன்"
 msgid "Ink Sketch"
 msgstr "மை ச்கெட்ச்"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:284
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
 msgid "Input"
 msgstr "உள்ளீடு"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:283
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
 msgid "Input Histogram"
 msgstr "உள்ளீட்டு இச்டோகிராம்"
 
@@ -1465,7 +1474,7 @@ msgstr "நீளம்"
 msgid "Levels"
 msgstr "நிலைகள்"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:261
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
 msgid "Levels Adjustment"
 msgstr "நிலைகள் சரிசெய்தல்"
 
@@ -1782,11 +1791,11 @@ msgstr "அவுட்லைன் வடிவம்"
 msgid "Outline width"
 msgstr "அவுட்லைன் அகலம்"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:287
 msgid "Output"
 msgstr "வெளியீடு"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:288
 msgid "Output Histogram"
 msgstr "வெளியீட்டு இச்டோகிராம்"
 
@@ -1934,7 +1943,7 @@ msgstr "படப்புள்ளிகள்"
 msgid "Piña Colada"
 msgstr "பினா கோலாடா"
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:122
+#: ../Pinta/Dialogs/PreferencesDialog.cs:204
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "மாற்றங்கள் நடைமுறைக்கு வர பிண்டாவை மறுதொடக்கம் செய்யுங்கள்."
 
@@ -2197,7 +2206,7 @@ msgstr "அடுக்கை மறுபெயரிடுங்கள்"
 msgid "Render"
 msgstr "வழங்கவும்"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:120
 msgid "Rendering Effect"
 msgstr "வழங்குதல் விளைவு"
 
@@ -2221,12 +2230,12 @@ msgstr ""
 msgid "Resampling:"
 msgstr "மறுசீரமைத்தல்:"
 
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:649
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:645
 msgid "Reseed"
 msgstr "ஒத்திருக்கிறது"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:205
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:481
 msgid "Reset"
 msgstr "மீட்டமை"
@@ -2540,6 +2549,10 @@ msgstr "சிதறல்"
 msgid "Squares"
 msgstr "சதுரங்கள்"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
+msgid "Startup Image"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr "நிலை பட்டி"
@@ -2734,6 +2747,8 @@ msgstr "இந்த பயன்பாட்டை மொழிபெயர்�
 msgid "Transparency Mode"
 msgstr "வெளிப்படைத்தன்மை பயன்முறை"
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:23
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:128
 msgid "Transparent"
@@ -2886,9 +2901,15 @@ msgstr "வோரோனோய் வரைபடம்"
 msgid "Warmth"
 msgstr "அரவணைப்பு"
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:21
 #: ../Pinta/Dialogs/NewImageDialog.cs:109
 msgid "White"
 msgstr "வெள்ளை"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
+msgid "Width"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:105

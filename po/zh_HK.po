@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 00:37+0000\n"
+"POT-Creation-Date: 2026-10-15 00:27+0000\n"
 "PO-Revision-Date: 2024-07-19 08:09+0000\n"
 "Last-Translator: Ricky From Hong Kong <lamricky11@hotmail.com>\n"
 "Language-Team: Chinese (Traditional, Hong Kong) <https://hosted.weblate.org/"
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Auto"
 msgstr "自動"
 
@@ -198,6 +198,7 @@ msgstr ""
 msgid "Autoscroll On"
 msgstr ""
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:19
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "背景"
@@ -288,7 +289,7 @@ msgstr ""
 msgid "Bottom Right"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:87
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "亮度"
@@ -414,8 +415,9 @@ msgstr ""
 msgid "Cherry Blossom"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:664
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:363
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:666
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:359
+#: ../Pinta/Dialogs/PreferencesDialog.cs:183
 msgid "Choose Color"
 msgstr ""
 
@@ -524,6 +526,7 @@ msgstr "雲"
 msgid "Coarseness"
 msgstr ""
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:26
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
@@ -597,7 +600,7 @@ msgstr "內容"
 msgid "Contiguous"
 msgstr ""
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:90
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "對比度"
@@ -654,6 +657,8 @@ msgstr ""
 msgid "Curves"
 msgstr "曲線"
 
+#. Translators: Background option for the image created at startup, using a chosen color.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:25
 #: ../Pinta/Dialogs/NewImageDialog.cs:375
 #: ../Pinta/Dialogs/NewImageDialog.cs:430
 #: ../Pinta/Dialogs/NewImageDialog.cs:451
@@ -1062,6 +1067,10 @@ msgstr ""
 msgid "Heavy"
 msgstr ""
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
+msgid "Height"
+msgstr ""
+
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:87
@@ -1191,11 +1200,11 @@ msgstr ""
 msgid "Ink Sketch"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:284
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
 msgid "Input"
 msgstr "輸入"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:283
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
 msgid "Input Histogram"
 msgstr ""
 
@@ -1421,7 +1430,7 @@ msgstr "長度"
 msgid "Levels"
 msgstr "等級"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:261
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
 msgid "Levels Adjustment"
 msgstr ""
 
@@ -1738,11 +1747,11 @@ msgstr ""
 msgid "Outline width"
 msgstr ""
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:287
 msgid "Output"
 msgstr "輸出"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:288
 msgid "Output Histogram"
 msgstr ""
 
@@ -1885,7 +1894,7 @@ msgstr "像素"
 msgid "Piña Colada"
 msgstr ""
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:122
+#: ../Pinta/Dialogs/PreferencesDialog.cs:204
 msgid "Please restart Pinta for the changes to take effect."
 msgstr ""
 
@@ -2148,7 +2157,7 @@ msgstr ""
 msgid "Render"
 msgstr "壓製"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:120
 msgid "Rendering Effect"
 msgstr ""
 
@@ -2172,12 +2181,12 @@ msgstr ""
 msgid "Resampling:"
 msgstr ""
 
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:649
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:645
 msgid "Reseed"
 msgstr ""
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:205
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:481
 msgid "Reset"
 msgstr "重設"
@@ -2491,6 +2500,10 @@ msgstr ""
 msgid "Squares"
 msgstr "方"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
+msgid "Startup Image"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr ""
@@ -2682,6 +2695,8 @@ msgstr ""
 msgid "Transparency Mode"
 msgstr ""
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:23
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:128
 msgid "Transparent"
@@ -2832,8 +2847,14 @@ msgstr ""
 msgid "Warmth"
 msgstr ""
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:21
 #: ../Pinta/Dialogs/NewImageDialog.cs:109
 msgid "White"
+msgstr ""
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
+msgid "Width"
 msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
