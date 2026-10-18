@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-15 00:27+0000\n"
-"PO-Revision-Date: 2026-10-17 15:49+0000\n"
+"PO-Revision-Date: 2026-10-18 07:18+0000\n"
 "Last-Translator: Сергей <ser82@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/"
-">\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1086,7 +1086,7 @@ msgstr "Тяжёлый"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
 msgid "Height"
-msgstr ""
+msgstr "Высота"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
@@ -2595,7 +2595,7 @@ msgstr "Квадраты"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
 msgid "Startup Image"
-msgstr ""
+msgstr "Стартовое изображение"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
@@ -2957,7 +2957,7 @@ msgstr "Белый"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
 msgid "Width"
-msgstr ""
+msgstr "Ширина"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:105
