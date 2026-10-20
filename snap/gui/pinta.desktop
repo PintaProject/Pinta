@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Pinta
+GenericName=Image Editor
+X-GNOME-Gettext-Domain=Pinta
+X-GNOME-FullName=Pinta Image Editor
+Comment=Easily create and edit images
+Keywords=draw;drawing;paint;painting;graphics;raster;2d;
+Exec=pinta %U
+Icon=${SNAP}/meta/gui/pinta.svg
+Type=Application
+Categories=Graphics;2DGraphics;RasterGraphics;GTK;
+StartupNotify=false
+StartupWMClass=com.github.PintaProject.Pinta
+MimeType=x-content/image-dcf;image/bmp;image/gif;image/jpeg;image/jpg;image/pjpeg;image/png;image/svg+xml;image/tiff;image/x-bmp;image/x-gray;image/x-icb;image/x-ico;image/x-png;image/x-portable-anymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-xbitmap;image/x-xpixmap;image/x-pcx;image/x-targa;image/x-tga;image/openraster;image/webp;image/avif;image/heif;image/jxl
