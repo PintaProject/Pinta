@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 00:37+0000\n"
+"POT-Creation-Date: 2026-10-15 00:27+0000\n"
 "PO-Revision-Date: 2026-10-03 12:12+0000\n"
 "Last-Translator: Liam Bado <liamservermc@gmail.com>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/"
-"uk/>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/pinta/pinta/uk/"
+">\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -179,7 +179,7 @@ msgstr "Еффект Аткінсона"
 msgid "Author"
 msgstr "Автор"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Auto"
 msgstr "Автоматично"
 
@@ -199,6 +199,7 @@ msgstr "Автопрокрутка вимкнена"
 msgid "Autoscroll On"
 msgstr "Автопрокрутка увімкнена"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:19
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "Фон"
@@ -289,7 +290,7 @@ msgstr "Знизу ліворуч"
 msgid "Bottom Right"
 msgstr "Знизу праворуч"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:87
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Яскравість"
@@ -415,8 +416,9 @@ msgstr "Змінений тип форми"
 msgid "Cherry Blossom"
 msgstr "Вишневий цвіт"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:664
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:363
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:666
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:359
+#: ../Pinta/Dialogs/PreferencesDialog.cs:183
 msgid "Choose Color"
 msgstr "Виберіть колір"
 
@@ -535,6 +537,7 @@ msgstr "Хмари"
 msgid "Coarseness"
 msgstr "Грубість"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:26
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
@@ -608,7 +611,7 @@ msgstr "Зміст"
 msgid "Contiguous"
 msgstr "Суміжні області"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:90
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Контрастність"
@@ -665,6 +668,8 @@ msgstr "Викривлення"
 msgid "Curves"
 msgstr "Криві"
 
+#. Translators: Background option for the image created at startup, using a chosen color.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:25
 #: ../Pinta/Dialogs/NewImageDialog.cs:375
 #: ../Pinta/Dialogs/NewImageDialog.cs:430
 #: ../Pinta/Dialogs/NewImageDialog.cs:451
@@ -1076,6 +1081,10 @@ msgstr "Яскраве світло"
 msgid "Heavy"
 msgstr "Важкий"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
+msgid "Height"
+msgstr ""
+
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:87
@@ -1142,8 +1151,8 @@ msgstr "Розмір ICO-файлів не може перевищувати 256
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
 msgstr ""
-"Якщо ця опція увімкнена, до колірного кола буде застосованно компонент «"
-"Значення» ."
+"Якщо ця опція увімкнена, до колірного кола буде застосованно компонент "
+"«Значення» ."
 
 #: ../Pinta/Actions/File/CloseDocumentAction.cs:75
 msgid "If you don't save, all changes will be permanently lost."
@@ -1216,11 +1225,11 @@ msgstr "Обводка чорнилом"
 msgid "Ink Sketch"
 msgstr "Ескіз чорнилами"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:284
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
 msgid "Input"
 msgstr "Вхід"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:283
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
 msgid "Input Histogram"
 msgstr "Вхідна гістограма"
 
@@ -1501,7 +1510,7 @@ msgstr "Довжина"
 msgid "Levels"
 msgstr "Рівні"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:261
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
 msgid "Levels Adjustment"
 msgstr "Корекція рівнів"
 
@@ -1818,11 +1827,11 @@ msgstr "Обвести фігуру"
 msgid "Outline width"
 msgstr "Товщина контуру"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:287
 msgid "Output"
 msgstr "Вихід"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:288
 msgid "Output Histogram"
 msgstr "Вихідна гістограма"
 
@@ -1970,7 +1979,7 @@ msgstr "Пікселів"
 msgid "Piña Colada"
 msgstr "Піна Колада"
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:122
+#: ../Pinta/Dialogs/PreferencesDialog.cs:204
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Перезапустіть додаток Pinta, щоб зміни вступили в силу."
 
@@ -2233,7 +2242,7 @@ msgstr "Перейменувати шар"
 msgid "Render"
 msgstr "Обробка"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:120
 msgid "Rendering Effect"
 msgstr "Обробити ефекти"
 
@@ -2257,12 +2266,12 @@ msgstr "Репозиторій"
 msgid "Resampling:"
 msgstr "Переобробка:"
 
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:649
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:645
 msgid "Reseed"
 msgstr "Перемішати"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:205
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:481
 msgid "Reset"
 msgstr "Скинути"
@@ -2576,6 +2585,10 @@ msgstr "Бризки"
 msgid "Squares"
 msgstr "Квадрати"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
+msgid "Startup Image"
+msgstr ""
+
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
 msgstr "Смужка стану"
@@ -2773,6 +2786,8 @@ msgstr "Перекласти цю програму"
 msgid "Transparency Mode"
 msgstr "Режим прозорості"
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:23
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:128
 msgid "Transparent"
@@ -2926,9 +2941,15 @@ msgstr "Діаграма Вороного"
 msgid "Warmth"
 msgstr "Теплота"
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:21
 #: ../Pinta/Dialogs/NewImageDialog.cs:109
 msgid "White"
 msgstr "Білий"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
+msgid "Width"
+msgstr ""
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:105

@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-01 00:37+0000\n"
-"PO-Revision-Date: 2026-10-03 01:01+0000\n"
-"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
+"POT-Creation-Date: 2026-10-15 00:27+0000\n"
+"PO-Revision-Date: 2026-10-18 07:18+0000\n"
+"Last-Translator: Сергей <ser82@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/pinta/pinta/ru/>"
 "\n"
 "Language: ru\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.10\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
 msgid " (in user directory)"
-msgstr " (в пользовательский каталог)"
+msgstr " (в каталог пользователя)"
 
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:56
 msgid " Selection Mode: "
@@ -179,7 +179,7 @@ msgstr "Аткинсона"
 msgid "Author"
 msgstr "Автор"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:269
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Auto"
 msgstr "Автоматически"
 
@@ -199,6 +199,7 @@ msgstr "Автопрокрутка отключена"
 msgid "Autoscroll On"
 msgstr "Автопрокрутка включена"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:19
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
 msgid "Background"
 msgstr "Фон"
@@ -289,7 +290,7 @@ msgstr "По нижнему краю влево"
 msgid "Bottom Right"
 msgstr "По нижнему краю вправо"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:91
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:87
 #: ../Pinta.Effects/Effects/GlowEffect.cs:79
 msgid "Brightness"
 msgstr "Яркость"
@@ -415,8 +416,9 @@ msgstr "Изменённая форма"
 msgid "Cherry Blossom"
 msgstr "Цветущая вишня"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:664
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:363
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:666
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:359
+#: ../Pinta/Dialogs/PreferencesDialog.cs:183
 msgid "Choose Color"
 msgstr "Выберите цвет"
 
@@ -537,6 +539,7 @@ msgstr "Облака"
 msgid "Coarseness"
 msgstr "Грубость"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:26
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:43
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:23
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:323
@@ -610,7 +613,7 @@ msgstr "Содержание"
 msgid "Contiguous"
 msgstr "Смежные области"
 
-#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:94
+#: ../Pinta.Effects/Adjustments/BrightnessContrastEffect.cs:90
 #: ../Pinta.Effects/Effects/GlowEffect.cs:83
 msgid "Contrast"
 msgstr "Контраст"
@@ -667,6 +670,8 @@ msgstr "Искривление"
 msgid "Curves"
 msgstr "Кривые"
 
+#. Translators: Background option for the image created at startup, using a chosen color.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:25
 #: ../Pinta/Dialogs/NewImageDialog.cs:375
 #: ../Pinta/Dialogs/NewImageDialog.cs:430
 #: ../Pinta/Dialogs/NewImageDialog.cs:451
@@ -1079,6 +1084,10 @@ msgstr "Жёсткий свет"
 msgid "Heavy"
 msgstr "Тяжёлый"
 
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
+msgid "Height"
+msgstr "Высота"
+
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:87
@@ -1219,11 +1228,11 @@ msgstr "Чернильный контур"
 msgid "Ink Sketch"
 msgstr "Набросок чернилами"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:284
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
 msgid "Input"
 msgstr "Вход"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:283
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
 msgid "Input Histogram"
 msgstr "Гистограмма входа"
 
@@ -1508,7 +1517,7 @@ msgstr "Длина"
 msgid "Levels"
 msgstr "Уровни"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:261
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:263
 msgid "Levels Adjustment"
 msgstr "Коррекция уровней"
 
@@ -1825,11 +1834,11 @@ msgstr "Контур фигуры"
 msgid "Outline width"
 msgstr "Ширина контура"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:285
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:287
 msgid "Output"
 msgstr "Выход"
 
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:286
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:288
 msgid "Output Histogram"
 msgstr "Гистограмма выхода"
 
@@ -1978,7 +1987,7 @@ msgstr "Пиксели"
 msgid "Piña Colada"
 msgstr "Пина Колада"
 
-#: ../Pinta/Dialogs/PreferencesDialog.cs:122
+#: ../Pinta/Dialogs/PreferencesDialog.cs:204
 msgid "Please restart Pinta for the changes to take effect."
 msgstr "Пожалуйста, перезапустите Pinta, чтобы изменения вступили в силу."
 
@@ -2241,7 +2250,7 @@ msgstr "Переименовать слой"
 msgid "Render"
 msgstr "Рисование"
 
-#: ../Pinta.Core/Managers/LivePreviewManager.cs:117
+#: ../Pinta.Core/Managers/LivePreviewManager.cs:120
 msgid "Rendering Effect"
 msgstr "Эффект отрисовки"
 
@@ -2265,12 +2274,12 @@ msgstr "Репозиторий"
 msgid "Resampling:"
 msgstr "Передискретизация:"
 
-#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:649
+#: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:645
 msgid "Reseed"
 msgstr "Переделать"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:205
-#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:272
+#: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:481
 msgid "Reset"
 msgstr "Сброс"
@@ -2558,11 +2567,11 @@ msgstr "Малые заглавные"
 
 #: ../Pinta.Tools/Tools/EraserTool.cs:336
 msgid "Smooth"
-msgstr "Сглаженный"
+msgstr "Сглаживание"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
 msgid "Smoothness"
-msgstr "Гладкость"
+msgstr "Сглаженность"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -2583,6 +2592,10 @@ msgstr "Брызги"
 #: ../Pinta.Tools/Brushes/SquaresBrush.cs:35
 msgid "Squares"
 msgstr "Квадраты"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
+msgid "Startup Image"
+msgstr "Стартовое изображение"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
@@ -2781,6 +2794,8 @@ msgstr "Перевести это приложение"
 msgid "Transparency Mode"
 msgstr "Прозрачный режим"
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:23
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:22
 #: ../Pinta/Dialogs/NewImageDialog.cs:128
 msgid "Transparent"
@@ -2934,9 +2949,15 @@ msgstr "Диаграмма Вороного"
 msgid "Warmth"
 msgstr "Теплота"
 
+#. Translators: Background option for the image created at startup.
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:21
 #: ../Pinta/Dialogs/NewImageDialog.cs:109
 msgid "White"
 msgstr "Белый"
+
+#: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
+msgid "Width"
+msgstr "Ширина"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:105
