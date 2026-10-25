@@ -217,6 +217,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v7
+      with:
+        fetch-depth: 0
     - name: Correct git tags
       run: git fetch --tags --force
     - uses: canonical/action-build@v1
