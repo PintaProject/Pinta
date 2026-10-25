@@ -1,0 +1,53 @@
+name: pinta
+base: core26
+version: git
+summary: 'Painting Made Simple'
+description: |
+  Pinta is a freely licensed and cross platform simple drawing application.
+  It is designed in lieu of Paint.NET; being both simple to use and powerful for a wide variety of image manipulation purposes.
+grade: stable
+confinement: strict
+license: MIT
+compression: lzo
+
+parts:
+  pinta:
+    plugin: nil
+    source: ./
+    build-packages:
+      - build-essential
+      - pkg-config
+      - autotools-dev
+      - autoconf
+      - autoconf-archive
+      - automake
+      - autopoint
+      - libtool
+      - gettext
+      - intltool
+      - dotnet-sdk-10.0
+    stage-packages:
+      - dotnet-runtime-10.0
+      - libunwind8
+    override-build: |
+      export PATH=/usr/bin:${PATH}
+      ./autogen.sh --prefix=${CRAFT_PART_INSTALL}/
+      make install
+
+
+slots:
+  pinta-dbus-service:
+    interface: dbus
+    bus: session
+    name: com.github.PintaProject.Pinta
+
+apps:
+  pinta:
+    command: usr/bin/dotnet $SNAP/lib/pinta/Pinta.dll
+    common-id: com.github.PintaProject.Pinta
+    plugs:
+      - home
+      - removable-media
+      - network
+    slots: [pinta-dbus-service]
+    extensions: [gnome]

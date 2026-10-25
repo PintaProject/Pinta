@@ -207,3 +207,23 @@ jobs:
         path: ./signed-artifacts/Pinta.exe
         if-no-files-found: error
 
+  build-snapcraft:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-latest, ubuntu-26.04-arm]
+
+    runs-on: ${{matrix.runner}}
+
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        fetch-depth: 0
+    - name: Correct git tags
+      run: git fetch --tags --force
+    - uses: canonical/action-build@v1
+      id: build
+    - uses: actions/upload-artifact@v7
+      with:
+        path: ${{steps.build.outputs.snap}}
+        archive: false
