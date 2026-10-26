@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-15 00:27+0000\n"
-"PO-Revision-Date: 2026-10-02 02:08+0000\n"
-"Last-Translator: Aivaz Latypov <mr.aivazlatypov@yandex.ru>\n"
+"PO-Revision-Date: 2026-10-26 06:51+0000\n"
+"Last-Translator: Aivaz Latypov <pngdrift@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Tatar <https://hosted.weblate.org/projects/pinta/pinta/tt/>\n"
 "Language: tt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.10\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
 msgid " (in user directory)"
@@ -729,7 +729,7 @@ msgstr "Аерма"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:130
 msgid "Diffusion"
-msgstr ""
+msgstr "Диффузия"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
@@ -1297,7 +1297,7 @@ msgstr "Альбомлык"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 msgid "Language"
-msgstr ""
+msgstr "Тел"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
@@ -1761,7 +1761,7 @@ msgstr "Ачу"
 
 #: ../Pinta.Tools/Editable/EditEngines/LineCurveEditEngine.cs:37
 msgid "Open Curve Shape"
-msgstr ""
+msgstr "Ачык сызык"
 
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:351
 msgid "Open Image"
@@ -1829,7 +1829,7 @@ msgstr "Чыгу гистограммасы"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:35
 msgid "Overlay"
-msgstr ""
+msgstr "Өстәп урнаштыру"
 
 #: ../Pinta.Core/Classes/BaseTool.cs:342
 msgid "Overwrite"
@@ -1837,11 +1837,11 @@ msgstr "Өстенә язу"
 
 #: ../Pinta.Tools/Tools/PaintBucketTool.cs:44
 msgid "Paint Bucket"
-msgstr ""
+msgstr "Бояу чиләге"
 
 #: ../Pinta.Tools/Tools/PaintBrushTool.cs:80
 msgid "Paintbrush"
-msgstr ""
+msgstr "Рәсем кисте"
 
 #: ../Pinta.Core/Actions/EditActions.cs:237
 #: ../Pinta.Effects/Effects/DitheringEffect.cs:174
@@ -1878,7 +1878,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/PencilTool.cs:48
 msgid "Pencil"
-msgstr ""
+msgstr "Карандаш"
 
 #: ../Pinta.Effects/Effects/PencilSketchEffect.cs:29
 msgid "Pencil Sketch"
@@ -1890,7 +1890,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/MedianEffect.cs:63
 msgid "Percentile"
-msgstr ""
+msgstr "Процент"
 
 #. Translators: 'Petite Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:200
@@ -1903,7 +1903,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:58
 #: ../Pinta.Effects/Effects/VignetteEffect.cs:52
 msgid "Photo"
-msgstr ""
+msgstr "Фото"
 
 #. Translators: Arrangement of points similar to how sunflower seeds are arranged
 #: ../Pinta.Core/Algorithms/SpatialPartition.cs:174
@@ -2022,7 +2022,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/CloudsEffect.cs:138
 msgid "Power"
-msgstr ""
+msgstr "Көч"
 
 #: ../Pinta.Core/Actions/AppActions.cs:49
 msgid "Preferences..."
@@ -2043,7 +2043,7 @@ msgstr ""
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:356
 msgid "Preset:"
-msgstr ""
+msgstr "Алдан көйләү:"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
@@ -2081,11 +2081,11 @@ msgstr ""
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
-msgstr ""
+msgstr "Төп"
 
 #: ../Pinta.Core/Actions/FileActions.cs:102
 msgid "Print"
-msgstr ""
+msgstr "Печать"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:197
 #: ../Pinta.Effects/Effects/DentsEffect.cs:155
@@ -2103,7 +2103,7 @@ msgstr ""
 
 #: ../Pinta.Core/Actions/AppActions.cs:60
 msgid "Quit"
-msgstr ""
+msgstr "Чыгу"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:173
 msgid "RGB"
@@ -2170,7 +2170,7 @@ msgstr "Соңгы төсләр"
 
 #: ../Pinta.Tools/Tools/RecolorTool.cs:55
 msgid "Recolor"
-msgstr ""
+msgstr "Яңадан буяу"
 
 #: ../Pinta.Tools/Tools/RectangleTool.cs:42
 msgid "Rectangle"
@@ -2252,7 +2252,7 @@ msgstr "Хатаны хәбәр итү..."
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
 msgid "Repository"
-msgstr ""
+msgstr "Репозиторий"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2260,7 +2260,7 @@ msgstr ""
 
 #: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:645
 msgid "Reseed"
-msgstr ""
+msgstr "Яңадан ясау"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:205
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:274
@@ -2275,7 +2275,7 @@ msgstr ""
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:80
 msgid "Reset to image size"
-msgstr ""
+msgstr "Рәсем зурлыгына кайтарырга"
 
 #: ../Pinta.Core/Classes/Document.cs:327
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:213
@@ -2434,7 +2434,7 @@ msgstr "Экран"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:19
 msgid "Secondary"
-msgstr ""
+msgstr "Өстәмә"
 
 #: ../Pinta.Core/Actions/EditActions.cs:157
 #: ../Pinta.Core/Actions/EditActions.cs:338
@@ -2525,7 +2525,7 @@ msgstr ""
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:12
 msgid "Sierra"
-msgstr ""
+msgstr "Сьерра"
 
 #. Translators: Image dithering matrix named after Frankie Sierra
 #: ../Pinta.Effects/Classes/ErrorDiffusionMatrix.cs:20
@@ -2534,7 +2534,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/ColorPickerTool.cs:235
 msgid "Single Pixel"
-msgstr ""
+msgstr "Бер пиксель"
 
 #: ../Pinta.Tools/Editable/EditEngines/ArrowedEditEngine.cs:289
 msgid "Size"
@@ -2710,7 +2710,7 @@ msgstr ""
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:226
 msgid "Tile Size"
-msgstr ""
+msgstr "Плитка зурлыгы"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:234
 msgid "Tile Type"
@@ -2735,7 +2735,7 @@ msgstr ""
 
 #: ../Pinta.Core/Managers/ToolManager.cs:351
 msgid "Tool"
-msgstr ""
+msgstr "Корал"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:135
 msgid "Tool Box"
@@ -2819,7 +2819,7 @@ msgstr ""
 
 #: ../Pinta.Tools/Tools/TextTool.cs:345
 msgid "Underline"
-msgstr ""
+msgstr "Асты сызылган"
 
 #: ../Pinta.Core/Actions/EditActions.cs:72
 msgid "Undo"
