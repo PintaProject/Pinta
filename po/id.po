@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-15 00:27+0000\n"
-"PO-Revision-Date: 2026-05-03 21:23+0000\n"
-"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
+"PO-Revision-Date: 2026-10-26 06:51+0000\n"
+"Last-Translator: Indie Gozal <83010300+diego-gz@users.noreply.github.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/pinta/pinta/"
 "id/>\n"
 "Language: id\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17.1\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 "X-Poedit-Country: INDONESIA\n"
 "X-Poedit-Language: Indonesian\n"
@@ -146,8 +146,9 @@ msgid "Angle"
 msgstr "Sudut"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
+#, fuzzy
 msgid "Animate Selection Outline"
-msgstr ""
+msgstr "Garis Seleksi Bergerak"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -178,7 +179,7 @@ msgstr "Atkinson"
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
 msgid "Author"
-msgstr ""
+msgstr "Pencipta"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Auto"
@@ -193,12 +194,14 @@ msgid "Auto Level"
 msgstr "Auto-Level"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:264
+#, fuzzy
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "Autoscroll Tidak Aktif"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:263
+#, fuzzy
 msgid "Autoscroll On"
-msgstr ""
+msgstr "Autoscroll Aktif"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:19
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
@@ -348,7 +351,7 @@ msgstr "Kisi Kanvas..."
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
 msgid "Category"
-msgstr ""
+msgstr "Kategori"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -732,8 +735,9 @@ msgid "Difference"
 msgstr "Selisih"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:130
+#, fuzzy
 msgid "Diffusion"
-msgstr ""
+msgstr "Penyebaran"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
@@ -789,8 +793,9 @@ msgid "Edge Detect"
 msgstr "Deteksi Tepian"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
+#, fuzzy
 msgid "Edit"
-msgstr ""
+msgstr "Ubah"
 
 #: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
@@ -827,10 +832,13 @@ msgstr ""
 "kesalahan"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:15
+#, fuzzy
 msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
 msgstr ""
+"Aktifkan efek \"semut berjalan\" untuk meningkatkan visibilitas seleksi. "
+"Nonaktifkan untuk mengurangi penggunaan CPU."
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -901,8 +909,9 @@ msgid "Feather Object"
 msgstr "Haluskan Objek"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
+#, fuzzy
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -1039,7 +1048,7 @@ msgstr "Pengaburan Gaussian"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1084,7 +1093,7 @@ msgstr "Tebal Sekali"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
 msgid "Height"
-msgstr ""
+msgstr "Tinggi"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
@@ -1094,8 +1103,9 @@ msgid "Height:"
 msgstr "Tinggi:"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
+#, fuzzy
 msgid "Help"
-msgstr ""
+msgstr "Bantuan"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1146,8 +1156,9 @@ msgid "Hue / Saturation"
 msgstr "Warna / Kepekatan"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:228
+#, fuzzy
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "File ICO tidak boleh lebih besar dari 256 x 256 pixel."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
@@ -1292,8 +1303,9 @@ msgid "Julia Fractal"
 msgstr "Fraktal Julia"
 
 #: ../Pinta.Core/Actions/AppActions.cs:55
+#, fuzzy
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Pintasan Keyboard"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
@@ -1301,7 +1313,7 @@ msgstr "Lanskap"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 msgid "Language"
-msgstr ""
+msgstr "Bahasa"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
@@ -1581,8 +1593,9 @@ msgid "Martian Lava"
 msgstr "Lava Mars"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:122
+#, fuzzy
 msgid "Maximum Scatter Radius"
-msgstr ""
+msgstr "Radius Sebaran Maksimum"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
@@ -1603,8 +1616,9 @@ msgid "Merge Layer Down"
 msgstr "Gabungkan Ke Bawahnya"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:126
+#, fuzzy
 msgid "Minimum Scatter Radius"
-msgstr ""
+msgstr "Radius Sebaran Minimum"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
@@ -2026,8 +2040,9 @@ msgid "Power"
 msgstr "Daya"
 
 #: ../Pinta.Core/Actions/AppActions.cs:49
+#, fuzzy
 msgid "Preferences..."
-msgstr ""
+msgstr "Preferensi..."
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:254
@@ -2049,7 +2064,7 @@ msgstr "Set Awal:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush width"
-msgstr ""
+msgstr "Tekan {0} untuk mengurangi lebar kuas"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:240
 #, csharp-format
@@ -2059,12 +2074,12 @@ msgstr "Tekan {0} untuk memperkecil ukuran font"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline width"
-msgstr ""
+msgstr "Tekan {0} untuk mengurangi lebar garis luar"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush width"
-msgstr ""
+msgstr "Tekan {0} untuk meningkatkan lebar kuas"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 #, csharp-format
@@ -2074,7 +2089,7 @@ msgstr "Tekan {0} untuk memperbesar ukuran font"
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline width"
-msgstr ""
+msgstr "Tekan {0} untuk meningkatkan lebar kuas"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:169
 msgid "Preview"
@@ -2220,6 +2235,7 @@ msgid "Released under the MIT X11 License."
 msgstr "Dirilis di bawah Lisensi MIT X11."
 
 #: ../Pinta.Effects/Effects/ReliefEffect.cs:40
+#, fuzzy
 msgid "Relief"
 msgstr "Relief"
 
@@ -2244,8 +2260,9 @@ msgid "Replace"
 msgstr "Gantikan"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:12
+#, fuzzy
 msgid "Replaces the header bar with a separate menu bar and tool bar."
-msgstr ""
+msgstr "Menggantikan bilah header dengan bilah menu dan bilah alat."
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
@@ -2253,7 +2270,7 @@ msgstr "Laporkan Kutu..."
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
 msgid "Repository"
-msgstr ""
+msgstr "Repositori"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2457,6 +2474,7 @@ msgid "Semilight"
 msgstr "Semiringan"
 
 #: ../Pinta.Effects/Adjustments/SepiaEffect.cs:52
+#, fuzzy
 msgid "Sepia"
 msgstr "Sepia"
 
@@ -2508,7 +2526,7 @@ msgstr "Tampilkan Lapisan"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Show Menu Bar"
-msgstr ""
+msgstr "Tampilkan Bilah Menu"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
@@ -2556,7 +2574,7 @@ msgstr "Halus"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
 msgid "Smoothness"
-msgstr ""
+msgstr "Kehalusan"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -2579,8 +2597,9 @@ msgid "Squares"
 msgstr "Kotak"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
+#, fuzzy
 msgid "Startup Image"
-msgstr ""
+msgstr "Gambar Awal Mulai"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
@@ -2882,7 +2901,7 @@ msgstr ""
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
 msgid "User Interface"
-msgstr ""
+msgstr "Antarmuka Pengguna"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
@@ -2941,7 +2960,7 @@ msgstr "Putih"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
 msgid "Width"
-msgstr ""
+msgstr "Lebar"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:105
@@ -3083,6 +3102,7 @@ msgid "pixels"
 msgstr "piksel"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:73
+#, fuzzy
 msgid "translator-credits"
 msgstr ""
 "Launchpad Contributions:\n"
@@ -3098,7 +3118,8 @@ msgstr ""
 "  Triwanto Simanjuntak https://launchpad.net/~lu176\n"
 "  Viko Adi Rahmawan https://launchpad.net/~vikoadi\n"
 "  amir_hz https://launchpad.net/~amir-hz\n"
-"Arif Budiman <arifpedia@gmail.com>v"
+"  Arif Budiman arifpedia@gmail.com\n"
+"  Indie Gozal https://launchpad.net/~indiegozal"
 
 #. Translators: {0} is 'Ctrl', or a platform-specific key such as 'Command' on macOS.
 #: ../Pinta.Tools/Tools/CloneStampTool.cs:63
