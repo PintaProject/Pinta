@@ -94,7 +94,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 	// This is actually both for "Save As" and saving a file that never
 	// been saved before.  Either way, we need to prompt for a filename.
-	private async Task<bool> SaveFileAs (Document document, string? forcedExtension = null)
+	private async Task<bool> SaveFileAs (Document document, string? suggestedFormat = null)
 	{
 		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Save Image File"),
@@ -105,14 +105,14 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 		if (document.HasFile) {
 			fcd.SetFile (document.File!);
-			if (forcedExtension is not null)
-				fcd.SetCurrentName (System.IO.Path.ChangeExtension (document.DisplayName, forcedExtension));
+			if (suggestedFormat is not null)
+				fcd.SetCurrentName (System.IO.Path.ChangeExtension (document.DisplayName, suggestedFormat));
 		} else {
 			if (recent_files.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
 				fcd.SetCurrentFolder (dir);
 
-			// Append the forced extension if given, otherwise the default extension, producing e.g. "Unsaved Image 1.png"
-			string ext = forcedExtension ?? image_formats.GetDefaultSaveFormat ().Extensions.First ();
+			// Append the suggested extension if given, otherwise the default extension, producing e.g. "Unsaved Image 1.png"
+			string ext = suggestedFormat ?? image_formats.GetDefaultSaveFormat ().Extensions.First ();
 			fcd.SetCurrentName ($"{document.DisplayName}.{ext}");
 		}
 
@@ -134,8 +134,8 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		// If we already have a format, set it to the default.
 		// If not, default to jpeg
 		FormatDescriptor? format_desc =
-			forcedExtension is not null
-			? image_formats.GetFormatByExtension(forcedExtension)
+			suggestedFormat is not null
+			? image_formats.GetFormatByExtension (suggestedFormat)
 			: null;
 
 		if (format_desc is null && document.HasFile) {
@@ -165,20 +165,17 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 					format = image_formats.GetDefaultSaveFormat ();
 			}
 
-			var conflictResult = await ResolveFormatConflict (document, format);
-
-			if (conflictResult == FormatConflictResult.Cancel) {
-				continue;
-			}
-
-			if (conflictResult == FormatConflictResult.Convert) {
-				// Set file type and filename to OpenRaster, then reopen the save dialog.
-				FormatDescriptor? oraFormat = image_formats.GetFormatByExtension ("ora");
-				if (oraFormat is not null) {
-					fcd.Filter = oraFormat.Filter;
-					fcd.SetCurrentName (System.IO.Path.ChangeExtension (displayName, "ora"));
-				}
-				continue;
+			switch (await ResolveFormatConflict (document, format)) {
+				case FormatConflictResult.Cancel:
+					continue;
+				case FormatConflictResult.Convert:
+					// Set file type and filename to OpenRaster, then reopen the save dialog.
+					FormatDescriptor? oraFormat = image_formats.GetFormatByExtension ("ora");
+					if (oraFormat is not null) {
+						fcd.Filter = oraFormat.Filter;
+						fcd.SetCurrentName (System.IO.Path.ChangeExtension (displayName, "ora"));
+					}
+					continue;
 			}
 
 			Gio.File? directory = file.GetParent ();
@@ -236,14 +233,11 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			return false;
 		}
 
-		var conflictResult = await ResolveFormatConflict (document, format);
-
-		if (conflictResult == FormatConflictResult.Cancel) {
-			return false;
-		}
-
-		if (conflictResult == FormatConflictResult.Convert) {
-			return await SaveFileAs (document, forcedExtension: "ora");
+		switch (await ResolveFormatConflict (document, format)) {
+			case FormatConflictResult.Cancel:
+				return false;
+			case FormatConflictResult.Convert:
+				return await SaveFileAs (document, suggestedFormat: "ora");
 		}
 
 		// Commit any pending changes
