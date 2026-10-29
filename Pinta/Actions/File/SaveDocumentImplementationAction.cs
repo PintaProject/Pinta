@@ -292,8 +292,10 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		if (!format.SupportsLayers
 			&& document.Layers.Count () > 1) {
 
-			string heading = Translations.GetString ("This format does not support layers. Flatten image?");
-			string body = Translations.GetString ("Flattening the image will merge all layers into a single layer.");
+			string heading = Translations.GetString ("This format does not support layers. How would you like to proceed?");
+			string body = Translations.GetString (
+				"Flatten will merge all layers into a single layer. " +
+				"Convert will save it in the OpenRaster format.");
 
 			using Adw.MessageDialog dialog = Adw.MessageDialog.New (chrome.MainWindow, heading, body);
 			dialog.AddResponse (RESPONSE_CANCEL, Translations.GetString ("_Cancel"));
