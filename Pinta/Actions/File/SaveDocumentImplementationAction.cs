@@ -103,15 +103,17 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			Translations.GetString ("Save"),
 			Translations.GetString ("Cancel"));
 
-		if (document.HasFile)
+		if (document.HasFile) {
 			fcd.SetFile (document.File!);
-		else {
+			if (forcedExtension is not null)
+				fcd.SetCurrentName (System.IO.Path.ChangeExtension (document.DisplayName, forcedExtension));
+		} else {
 			if (recent_files.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
 				fcd.SetCurrentFolder (dir);
 
-			// Append the default extension, producing e.g. "Unsaved Image 1.png"
-			string default_ext = image_formats.GetDefaultSaveFormat ().Extensions.First ();
-			fcd.SetCurrentName ($"{document.DisplayName}.{default_ext}");
+			// Append the forced extension if given, otherwise the default extension, producing e.g. "Unsaved Image 1.png"
+			string ext = forcedExtension ?? image_formats.GetDefaultSaveFormat ().Extensions.First ();
+			fcd.SetCurrentName ($"{document.DisplayName}.{ext}");
 		}
 
 		// Add all the formats we support to the save dialog
@@ -131,9 +133,12 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 		// If we already have a format, set it to the default.
 		// If not, default to jpeg
-		FormatDescriptor? format_desc = null;
+		FormatDescriptor? format_desc =
+			forcedExtension is not null
+			? image_formats.GetFormatByExtension(forcedExtension)
+			: null;
 
-		if (document.HasFile) {
+		if (format_desc is null && document.HasFile) {
 			format_desc = image_formats.GetFormatByFile (document.DisplayName);
 		}
 
