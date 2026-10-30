@@ -9,8 +9,9 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-15 00:27+0000\n"
-"PO-Revision-Date: 2026-05-10 20:23+0000\n"
-"Last-Translator: tomasteixeira07 <tomasteixeira93@gmail.com>\n"
+"PO-Revision-Date: 2026-11-03 05:51+0000\n"
+"Last-Translator: tomasteixeira07 "
+"<tomasteixeira07@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/pinta/pinta/"
 "pt/>\n"
 "Language: pt\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.5-dev\n"
+"X-Generator: Weblate 2026.11.1.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -177,7 +178,7 @@ msgstr "Atkinson"
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:3
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: ../Pinta.Effects/Dialogs/Effects.LevelsDialog.cs:271
 msgid "Auto"
@@ -347,7 +348,7 @@ msgstr "Grade de Tela..."
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:1
 msgid "Category"
-msgstr ""
+msgstr "Categoria"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:176
 msgid "Cell Radius"
@@ -401,7 +402,7 @@ msgstr "Mudar tamanho da fonte."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:237
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr ""
+msgstr "Mudar o tamanho da fonte. Teclas de atalho: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
@@ -732,7 +733,7 @@ msgstr "Diferença"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:130
 msgid "Diffusion"
-msgstr ""
+msgstr "Difusão"
 
 #: ../Pinta.Effects/Effects/FragmentEffect.cs:128
 #: ../Pinta.Effects/Effects/MotionBlurEffect.cs:150
@@ -789,7 +790,7 @@ msgstr "Detecção de contornos"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:101
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: ../Pinta/MainWindow.cs:395
 msgid "Effe_cts"
@@ -899,7 +900,7 @@ msgstr "Objeto de Pena"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:100
 msgid "File"
-msgstr ""
+msgstr "Ficheiro"
 
 #: ../Pinta.Core/Actions/HelpActions.cs:59
 msgid "File a Bug"
@@ -1035,7 +1036,7 @@ msgstr "Mancha Gaussiana"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:1
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 #: ../Pinta.Tools/Tools/FloodTool.cs:132
 msgid "Global"
@@ -1080,7 +1081,7 @@ msgstr "Heavy"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
 msgid "Height"
-msgstr ""
+msgstr "Altura"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
@@ -1091,7 +1092,7 @@ msgstr "Altura:"
 
 #: ../Pinta/Actions/Help/KeyboardShortcutsDialogAction.cs:107
 msgid "Help"
-msgstr ""
+msgstr "Ajuda"
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:304
 msgid "Hex"
@@ -1143,7 +1144,7 @@ msgstr "Matiz/Saturação"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:228
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr ""
+msgstr "Ficheiros ICO não podem ser maiores do que 256 x 256 pixeis."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
@@ -1289,7 +1290,7 @@ msgstr "Fractal Julia"
 
 #: ../Pinta.Core/Actions/AppActions.cs:55
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Atalhos do teclado"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:315
 msgid "Landscape"
@@ -1297,7 +1298,7 @@ msgstr "Paisagem"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:3
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #: ../Pinta.Tools/Tools/LassoSelectTool.cs:213
 msgid "Lasso Mode"
@@ -2030,7 +2031,7 @@ msgstr "Energia"
 
 #: ../Pinta.Core/Actions/AppActions.cs:49
 msgid "Preferences..."
-msgstr ""
+msgstr "Preferências..."
 
 #. Translators: This refers to preserving the current canvas size when pasting a larger image.
 #: ../Pinta/Actions/Edit/PasteAction.cs:254
@@ -2256,7 +2257,7 @@ msgstr "Reportar Erro..."
 
 #: .././Pinta.Gui.Addins/AddinInfoView.ui.h:5
 msgid "Repository"
-msgstr ""
+msgstr "Repositório"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
@@ -2511,7 +2512,7 @@ msgstr "Mostrar camada"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:11
 msgid "Show Menu Bar"
-msgstr ""
+msgstr "Mostrar barra do menu"
 
 #: ../Pinta.Effects/Effects/CellsEffect.cs:162
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:208
@@ -2886,7 +2887,7 @@ msgstr ""
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:2
 msgid "User Interface"
-msgstr ""
+msgstr "Interface do Usuário"
 
 #: ../Pinta/Actions/Help/AboutDialogAction.cs:98
 msgid "Using some icons from:"
@@ -2945,7 +2946,7 @@ msgstr "Branco"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
 msgid "Width"
-msgstr ""
+msgstr "Largura"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:105
