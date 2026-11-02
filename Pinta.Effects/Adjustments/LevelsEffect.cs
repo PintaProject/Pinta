@@ -18,7 +18,7 @@ public sealed class LevelsEffect : BaseEffect
 {
 	public sealed override bool IsTileable => true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsLevels;
+	public override string Icon => Resources.Icons.AdjustmentsLevels;
 
 	public override string Name => Translations.GetString ("Levels");
 
@@ -30,23 +30,24 @@ public sealed class LevelsEffect : BaseEffect
 
 	public LevelsData Data => (LevelsData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeService chrome;
 	private readonly IPaletteService palette;
 	private readonly IWorkspaceService workspace;
 
 	public LevelsEffect (IServiceProvider services)
 	{
-		chrome = services.GetService<IChromeService> ();
 		palette = services.GetService<IPaletteService> ();
 		workspace = services.GetService<IWorkspaceService> ();
-
 		EffectData = new LevelsData ();
 	}
 
-	public override async Task<bool> LaunchConfiguration ()
+	public override async Task<bool> LaunchConfiguration (ILivePreviewSession session)
 	{
-		// TODO: Delegate `EffectData` changes to event handlers or similar
-		using LevelsDialog dialog = LevelsDialog.New (chrome, palette, workspace, Data);
+		using LevelsDialog dialog = LevelsDialog.New (
+			session.ParentWindow,
+			palette,
+			workspace,
+			Data,
+			_ => session.NotifyChanged ());
 		dialog.Title = Name;
 		dialog.IconName = Icon;
 

@@ -91,7 +91,8 @@ public sealed partial class LevelsDialog
 	private HistogramWidget histogram_input;
 	private HistogramWidget histogram_output;
 
-	private IChromeService chrome = null!; // NRT - set via factory method
+	private Gtk.Window parent_window = null!; // NRT - set via factory method
+	private Action<string?> on_changed = _ => { };
 	private IPaletteService palette = null!;
 	private IWorkspaceService workspace = null!;
 
@@ -314,17 +315,19 @@ public sealed partial class LevelsDialog
 	}
 
 	public static LevelsDialog New (
-		IChromeService chrome,
+		Gtk.Window parent,
 		IPaletteService palette,
 		IWorkspaceService workspace,
-		LevelsData effectData)
+		LevelsData effectData,
+		Action<string?> onChanged)
 	{
 		LevelsDialog dialog = NewWithProperties ([]);
-		dialog.TransientFor = chrome.MainWindow;
-		dialog.chrome = chrome;
+		dialog.TransientFor = parent;
+		dialog.parent_window = parent;
 		dialog.palette = palette;
 		dialog.workspace = workspace;
 		dialog.EffectData = effectData;
+		dialog.on_changed = onChanged;
 
 		dialog.UpdateInputHistogram ();
 		dialog.Reset ();
@@ -340,7 +343,7 @@ public sealed partial class LevelsDialog
 	}
 
 	private void UpdateLivePreview ()
-		=> EffectData.FirePropertyChanged (nameof (Levels));
+		=> on_changed (nameof (Levels));
 
 	private void UpdateInputHistogram ()
 	{
@@ -658,7 +661,7 @@ public sealed partial class LevelsDialog
 				throw new Exception ("Controller widget should be non-null");
 
 		using ColorPickerDialog ccd = ColorPickerDialog.New (
-			chrome.MainWindow,
+			parent_window,
 			palette,
 			new SingleColor (panel.CairoColor),
 			primarySelected: true,
