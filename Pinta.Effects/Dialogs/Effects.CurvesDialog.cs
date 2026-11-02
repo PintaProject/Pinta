@@ -158,11 +158,17 @@ public sealed partial class CurvesDialog
 		check_blue = checkBlue;
 	}
 
-	public static CurvesDialog New (IChromeService chrome, CurvesData effectData)
+	private Action<string?> on_changed = _ => { };
+
+	public static CurvesDialog New (
+		Gtk.Window parent,
+		CurvesData effectData,
+		Action<string?> onChanged)
 	{
 		CurvesDialog dialog = NewWithProperties ([]);
-		dialog.TransientFor = chrome.MainWindow;
+		dialog.TransientFor = parent;
 		dialog.EffectData = effectData;
+		dialog.on_changed = onChanged;
 		dialog.ResetControlPoints ();
 		return dialog;
 	}
@@ -384,7 +390,7 @@ public sealed partial class CurvesDialog
 
 		EffectData.ControlPoints = ControlPoints;
 		EffectData.Mode = Mode;
-		EffectData.FirePropertyChanged (propertyName);
+		on_changed (propertyName);
 	}
 
 	private void ResetControlPoints ()
