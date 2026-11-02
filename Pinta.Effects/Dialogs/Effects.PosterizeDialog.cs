@@ -43,6 +43,8 @@ public sealed partial class PosterizeDialog
 	public int Green => green_spinbox.ValueAsInt;
 	public int Blue => blue_spinbox.ValueAsInt;
 
+	private Action<string?> on_changed = _ => { };
+
 	public PosterizeData? EffectData { get; set; }
 
 	[MemberNotNull (nameof (red_spinbox), nameof (green_spinbox), nameof (blue_spinbox), nameof (link_button))]
@@ -80,10 +82,15 @@ public sealed partial class PosterizeDialog
 			linkButton]);
 	}
 
-	public static PosterizeDialog New (IChromeService chrome)
+	public static PosterizeDialog New (
+		Gtk.Window parent,
+		PosterizeData effectData,
+		Action<string?> onChanged)
 	{
 		PosterizeDialog dialog = NewWithProperties ([]);
-		dialog.TransientFor = chrome.MainWindow;
+		dialog.TransientFor = parent;
+		dialog.EffectData = effectData;
+		dialog.on_changed = onChanged;
 		return dialog;
 	}
 
@@ -126,6 +133,6 @@ public sealed partial class PosterizeDialog
 		EffectData.Blue = blue_spinbox.ValueAsInt;
 
 		// Only fire event once, even if all properties have changed.
-		EffectData.FirePropertyChanged ("_all_");
+		on_changed ("_all_");
 	}
 }

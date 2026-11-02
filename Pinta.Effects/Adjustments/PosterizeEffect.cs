@@ -20,7 +20,7 @@ public sealed class PosterizeEffect : BaseEffect
 
 	public sealed override bool IsTileable => true;
 
-	public override string Icon => Pinta.Resources.Icons.AdjustmentsPosterize;
+	public override string Icon => Resources.Icons.AdjustmentsPosterize;
 
 	public override string Name => Translations.GetString ("Posterize");
 
@@ -30,21 +30,19 @@ public sealed class PosterizeEffect : BaseEffect
 
 	public PosterizeData Data => (PosterizeData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeService chrome;
-
-	public PosterizeEffect (IServiceProvider services)
+	public PosterizeEffect (IServiceProvider _)
 	{
-		chrome = services.GetService<IChromeService> ();
-
 		EffectData = new PosterizeData ();
 	}
 
-	public override async Task<bool> LaunchConfiguration ()
+	public override async Task<bool> LaunchConfiguration (ILivePreviewSession session)
 	{
-		using PosterizeDialog dialog = PosterizeDialog.New (chrome);
+		using PosterizeDialog dialog = PosterizeDialog.New (
+			session.ParentWindow,
+			Data,
+			_ => session.NotifyChanged ());
 		dialog.Title = Name;
 		dialog.IconName = Icon;
-		dialog.EffectData = Data; // TODO: Delegate `EffectData` changes to event handlers or similar
 
 		Gtk.ResponseType response = await dialog.RunAsync ();
 
