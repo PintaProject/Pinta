@@ -277,6 +277,8 @@ public sealed class LivePreviewManager : ILivePreview
 			start_render = startRender;
 		}
 
+		public Gtk.Window ParentWindow => chrome.MainWindow;
+
 		public Task<bool> LaunchSimpleEffectDialog (IAddinLocalizer? localizer = null)
 		{
 			return chrome.LaunchSimpleEffectDialog (

@@ -33,19 +33,18 @@ public sealed class CurvesEffect : BaseEffect
 
 	public CurvesData Data => (CurvesData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeService chrome;
-
-	public CurvesEffect (IServiceProvider services)
+	public CurvesEffect (IServiceProvider _)
 	{
-		chrome = services.GetService<IChromeService> ();
-
 		EffectData = new CurvesData ();
 	}
 
-	public override async Task<bool> LaunchConfiguration ()
+	public override async Task<bool> LaunchConfiguration (ILivePreviewSession session)
 	{
-		// TODO: Delegate `EffectData` changes to event handlers or similar
-		using CurvesDialog dialog = CurvesDialog.New (chrome, Data);
+		using CurvesDialog dialog = CurvesDialog.New (
+			session.ParentWindow,
+			Data,
+			_ => session.NotifyChanged ());
+
 		dialog.Title = Name;
 		dialog.IconName = Icon;
 
