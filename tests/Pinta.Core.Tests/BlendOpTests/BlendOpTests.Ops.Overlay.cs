@@ -34,7 +34,7 @@ partial class BlendOpTests
 			overlayOp,
 			ColorBgra.FromBgra (50, 50, 50, 128),
 			ColorBgra.FromBgra (64, 64, 64, 128),
-			ColorBgra.FromBgra (82, 82, 82, 128));
+			ColorBgra.FromBgra (82, 82, 82, 192));
 
 		// --- Cases including invalid colors
 
