@@ -19,22 +19,22 @@ public sealed class AlignObjectEffect : BaseEffect
 
 	public AlignObjectData Data => (AlignObjectData) EffectData!; // NRT - Set in constructor
 
-	private readonly IChromeService chrome;
-
-	public AlignObjectEffect (IServiceProvider services)
+	public AlignObjectEffect (IServiceProvider _)
 	{
-		chrome = services.GetService<IChromeService> ();
 		EffectData = new AlignObjectData ();
 	}
-	public override async Task<bool> LaunchConfiguration ()
+
+	public override async Task<bool> LaunchConfiguration (ILivePreviewSession session)
 	{
-		using AlignmentDialog dialog = AlignmentDialog.New (chrome);
+		using AlignmentDialog dialog = AlignmentDialog.New (session.ParentWindow);
 
 		// Align to the default position
 		Data.Position = dialog.SelectedPosition;
+		session.NotifyChanged ();
 
 		dialog.PositionChanged += (_, _) => {
 			Data.Position = dialog.SelectedPosition;
+			session.NotifyChanged ();
 		};
 
 		Gtk.ResponseType response = await dialog.RunAsync ();
@@ -124,20 +124,13 @@ public sealed class AlignObjectEffect : BaseEffect
 
 	public sealed class AlignObjectData : EffectData
 	{
-		private AlignPosition position = AlignPosition.Center;
+		private const AlignPosition DEFAULT_POSITION = AlignPosition.Center;
 
 		[Caption ("Position")]
-		public AlignPosition Position {
-			get => position;
-			set {
-				if (value == position) return;
-				position = value;
-				FirePropertyChanged (nameof (Position));
-			}
-		}
+		public AlignPosition Position { get; set; } = DEFAULT_POSITION;
 
 		[Skip]
-		public override bool IsDefault => Position == AlignPosition.Center;
+		public override bool IsDefault => Position == DEFAULT_POSITION;
 	}
 }
 
