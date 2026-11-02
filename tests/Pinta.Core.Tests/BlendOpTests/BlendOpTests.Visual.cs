@@ -22,6 +22,6 @@ partial class BlendOpTests
 		yield return new (lightenOp, "visual_blended_lighten.png");
 		yield return new (differenceOp, "visual_blended_difference.png");
 		yield return new (colorDodgeOp, "visual_blended_colordodge.png");
-		yield return new (colorDodgeOp, "visual_blended_overlay.png");
+		yield return new (overlayOp, "visual_blended_overlay.png");
 	}
 }
