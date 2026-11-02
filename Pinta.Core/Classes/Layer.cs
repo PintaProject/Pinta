@@ -92,36 +92,20 @@ public class Layer : ObservableObject
 
 	public void FlipHorizontal ()
 	{
-		ImageSurface dest = CairoExtensions.CreateImageSurface (
-			Format.Argb32,
-			Surface.Width,
-			Surface.Height);
-
-		using Context g = new (dest);
-
-		g.SetMatrix (CairoExtensions.CreateMatrix (-1, 0, 0, 1, Surface.Width, 0));
-		g.SetSourceSurface (Surface, 0, 0);
-
-		g.Paint ();
-
-		Surface = dest;
+		Size size = Surface.GetSize ();
+		ApplyTransform (
+			CairoExtensions.CreateMatrix (-1, 0, 0, 1, size.Width, 0),
+			size,
+			size);
 	}
 
 	public void FlipVertical ()
 	{
-		ImageSurface dest = CairoExtensions.CreateImageSurface (
-			Format.Argb32,
-			Surface.Width,
-			Surface.Height);
-
-		using Context g = new (dest);
-
-		g.SetMatrix (CairoExtensions.CreateMatrix (1, 0, 0, -1, 0, Surface.Height));
-		g.SetSourceSurface (Surface, 0, 0);
-
-		g.Paint ();
-
-		Surface = dest;
+		Size size = Surface.GetSize ();
+		ApplyTransform (
+			CairoExtensions.CreateMatrix (1, 0, 0, -1, 0, size.Height),
+			size,
+			size);
 	}
 
 	public void Draw (Context ctx)
