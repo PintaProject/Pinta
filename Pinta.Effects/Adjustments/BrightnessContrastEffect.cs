@@ -8,13 +8,12 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Threading.Tasks;
 using Cairo;
 using Pinta.Core;
 
 namespace Pinta.Effects;
 
-public sealed class BrightnessContrastEffect : BaseEffect
+public sealed class BrightnessContrastEffect : ConfigurableEffect
 {
 	const int DEFAULT_BRIGHTNESS = 0;
 	const int DEFAULT_CONTRAST = 0;
@@ -39,9 +38,6 @@ public sealed class BrightnessContrastEffect : BaseEffect
 	public override string Name
 		=> Translations.GetString ("Brightness / Contrast");
 
-	public override bool IsConfigurable
-		=> true;
-
 	public override string AdjustmentMenuKey
 		=> "B";
 
@@ -52,9 +48,6 @@ public sealed class BrightnessContrastEffect : BaseEffect
 	{
 		EffectData = new BrightnessContrastData ();
 	}
-
-	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
-		=> session.LaunchSimpleEffectDialog ();
 
 	private readonly record struct BrightnessContrastSettings (BrightnessContrastPixelOp PreRender, Size CanvasSize);
 	private static BrightnessContrastSettings CreateSettings (ImageSurface destination, BrightnessContrastPixelOp pixelOp)

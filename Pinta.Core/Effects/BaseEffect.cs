@@ -28,6 +28,7 @@ using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Cairo;
+using Mono.Addins.Localization;
 
 namespace Pinta.Core;
 
@@ -186,6 +187,21 @@ public abstract class BaseEffect
 
 		return effect;
 	}
+}
+
+public abstract class ConfigurableEffect : BaseEffect
+{
+	private readonly IAddinLocalizer? localizer;
+
+	protected ConfigurableEffect (IAddinLocalizer? localizer = null)
+	{
+		this.localizer = localizer;
+	}
+
+	public sealed override bool IsConfigurable => true;
+
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog (localizer);
 }
 
 /// <summary>
