@@ -49,7 +49,7 @@ public sealed class SoftenPortraitEffect : BaseEffect
 
 	public override string Icon => Resources.Icons.EffectsPhotoSoftenPortrait;
 
-	public sealed override bool IsTileable => true;
+	public sealed override bool IsTileable => false;
 
 	public override string Name => Translations.GetString ("Soften Portrait");
 

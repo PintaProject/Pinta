@@ -13,6 +13,7 @@ internal static class Utilities
 		manager.AddService<IChromeService> (new MockChromeManager ());
 		manager.AddService<IWorkspaceService> (new MockWorkspaceService (imageSize));
 		manager.AddService<ILivePreview> (new MockLivePreview (new RectangleI (0, 0, imageSize.Width, imageSize.Height)));
+		manager.AddService<ISystemService> (new MockSystemService ());
 		return manager;
 	}
 }
