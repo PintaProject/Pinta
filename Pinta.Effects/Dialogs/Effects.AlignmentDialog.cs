@@ -90,10 +90,10 @@ public sealed partial class AlignmentDialog
 		SetSelectedPosition (AlignPosition.Center); // Set the default selection
 	}
 
-	public static AlignmentDialog New (IChromeService chrome)
+	public static AlignmentDialog New (Gtk.Window parent)
 	{
 		AlignmentDialog dialog = NewWithProperties ([]);
-		dialog.TransientFor = chrome.MainWindow;
+		dialog.TransientFor = parent;
 		return dialog;
 	}
 

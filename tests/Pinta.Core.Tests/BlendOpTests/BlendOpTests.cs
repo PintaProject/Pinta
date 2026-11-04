@@ -13,6 +13,7 @@ internal sealed partial class BlendOpTests
 	private static readonly ImmutableArray<TestCaseData> lighten_io_cases;
 	private static readonly ImmutableArray<TestCaseData> difference_io_cases;
 	private static readonly ImmutableArray<TestCaseData> color_dodge_io_cases;
+	private static readonly ImmutableArray<TestCaseData> overlay_io_cases;
 
 	private static readonly ImmutableArray<TestCaseData> op_name_cases;
 	private static readonly ImmutableArray<TestCaseData> visual_cases;
@@ -26,6 +27,7 @@ internal sealed partial class BlendOpTests
 		UserBlendOps.LightenBlendOp lightenOp = new ();
 		UserBlendOps.DifferenceBlendOp differenceOp = new ();
 		UserBlendOps.ColorDodgeBlendOp colorDodgeOp = new ();
+		UserBlendOps.OverlayBlendOp overlayOp = new ();
 
 		normal_op = normalOp;
 		multiply_op = multiplyOp;
@@ -34,6 +36,7 @@ internal sealed partial class BlendOpTests
 		lighten_op = lightenOp;
 		difference_op = differenceOp;
 		color_dodge_op = colorDodgeOp;
+		overlay_op = overlayOp;
 
 		normal_io_cases = [.. CreateNormalIOCases (normalOp)];
 		multiply_io_cases = [.. CreateMultiplyIOCases (multiplyOp)];
@@ -42,6 +45,7 @@ internal sealed partial class BlendOpTests
 		lighten_io_cases = [.. CreateLightenIOCases (lightenOp)];
 		difference_io_cases = [.. CreateDifferenceIOCases (differenceOp)];
 		color_dodge_io_cases = [.. CreateColorDodgeIOCases (colorDodgeOp)];
+		overlay_io_cases = [.. CreateOverlayIOCases (overlayOp)];
 
 		op_name_cases = [.. NamingTests (
 			normalOp,
@@ -50,7 +54,8 @@ internal sealed partial class BlendOpTests
 			darkenOp,
 			lightenOp,
 			differenceOp,
-			colorDodgeOp)];
+			colorDodgeOp,
+			overlayOp)];
 
 		visual_cases = [.. VisualTests (
 			normalOp,
@@ -59,7 +64,8 @@ internal sealed partial class BlendOpTests
 			darkenOp,
 			lightenOp,
 			differenceOp,
-			colorDodgeOp)];
+			colorDodgeOp,
+			overlayOp)];
 	}
 
 	[TestCaseSource (nameof (op_name_cases))]
@@ -75,6 +81,7 @@ internal sealed partial class BlendOpTests
 	[TestCaseSource (nameof (lighten_io_cases))]
 	[TestCaseSource (nameof (difference_io_cases))]
 	[TestCaseSource (nameof (color_dodge_io_cases))]
+	[TestCaseSource (nameof (overlay_io_cases))]
 	public void Output_Is_Expected (UserBlendOp blendOp, ColorBgra bottom, ColorBgra top, ColorBgra expected)
 	{
 		ColorBgra result = blendOp.Apply (bottom, top);
