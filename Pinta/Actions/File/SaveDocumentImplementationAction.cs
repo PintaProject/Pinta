@@ -36,6 +36,14 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 {
 	const string RESPONSE_CANCEL = "cancel";
 	const string RESPONSE_FLATTEN = "flatten";
+	const string RESPONSE_CONVERT = "convert";
+
+	private enum FormatConflictResult
+	{
+		Proceed, // Proceed with saving (no conflict, or user agreed to flatten)
+		Cancel, // User cancelled the save operation
+		Convert // User chose to convert the image to a compatible format
+	}
 
 	private readonly FileActions file;
 	private readonly ImageActions image;
@@ -86,7 +94,7 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 	// This is actually both for "Save As" and saving a file that never
 	// been saved before.  Either way, we need to prompt for a filename.
-	private async Task<bool> SaveFileAs (Document document)
+	private async Task<bool> SaveFileAs (Document document, string? suggestedFormat = null)
 	{
 		var fcd = Gtk.FileChooserNative.New (
 			Translations.GetString ("Save Image File"),
@@ -95,15 +103,17 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			Translations.GetString ("Save"),
 			Translations.GetString ("Cancel"));
 
-		if (document.HasFile)
+		if (document.HasFile) {
 			fcd.SetFile (document.File!);
-		else {
+			if (suggestedFormat is not null)
+				fcd.SetCurrentName (System.IO.Path.ChangeExtension (document.DisplayName, suggestedFormat));
+		} else {
 			if (recent_files.GetDialogDirectory () is Gio.File dir && dir.QueryExists (null))
 				fcd.SetCurrentFolder (dir);
 
-			// Append the default extension, producing e.g. "Unsaved Image 1.png"
-			string default_ext = image_formats.GetDefaultSaveFormat ().Extensions.First ();
-			fcd.SetCurrentName ($"{document.DisplayName}.{default_ext}");
+			// Append the suggested extension if given, otherwise the default extension, producing e.g. "Unsaved Image 1.png"
+			string ext = suggestedFormat ?? image_formats.GetDefaultSaveFormat ().Extensions.First ();
+			fcd.SetCurrentName ($"{document.DisplayName}.{ext}");
 		}
 
 		// Add all the formats we support to the save dialog
@@ -123,9 +133,12 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 
 		// If we already have a format, set it to the default.
 		// If not, default to jpeg
-		FormatDescriptor? format_desc = null;
+		FormatDescriptor? format_desc =
+			suggestedFormat is not null
+			? image_formats.GetFormatByExtension (suggestedFormat)
+			: null;
 
-		if (document.HasFile) {
+		if (format_desc is null && document.HasFile) {
 			format_desc = image_formats.GetFormatByFile (document.DisplayName);
 		}
 
@@ -152,8 +165,17 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 					format = image_formats.GetDefaultSaveFormat ();
 			}
 
-			if (!await ConfirmFlatten (document, format)) {
-				continue;
+			switch (await ResolveFormatConflict (document, format)) {
+				case FormatConflictResult.Cancel:
+					continue;
+				case FormatConflictResult.Convert:
+					// Set file type and filename to OpenRaster, then reopen the save dialog.
+					FormatDescriptor? oraFormat = image_formats.GetFormatByExtension ("ora");
+					if (oraFormat is not null) {
+						fcd.Filter = oraFormat.Filter;
+						fcd.SetCurrentName (System.IO.Path.ChangeExtension (displayName, "ora"));
+					}
+					continue;
 			}
 
 			Gio.File? directory = file.GetParent ();
@@ -211,8 +233,11 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 			return false;
 		}
 
-		if (!await ConfirmFlatten (document, format)) {
-			return false;
+		switch (await ResolveFormatConflict (document, format)) {
+			case FormatConflictResult.Cancel:
+				return false;
+			case FormatConflictResult.Convert:
+				return await SaveFileAs (document, suggestedFormat: "ora");
 		}
 
 		// Commit any pending changes
@@ -265,33 +290,41 @@ internal sealed class SaveDocumentImplmentationAction : IActionHandler
 		return true;
 	}
 
-	private async Task<bool> ConfirmFlatten (Document document, FormatDescriptor format)
+	private async Task<FormatConflictResult> ResolveFormatConflict (Document document, FormatDescriptor format)
 	{
 		// If the format doesn't support layers but there is more than one layer, ask to flatten the image
 		if (!format.SupportsLayers
 			&& document.Layers.Count () > 1) {
 
-			string heading = Translations.GetString ("This format does not support layers. Flatten image?");
-			string body = Translations.GetString ("Flattening the image will merge all layers into a single layer.");
+			string heading = Translations.GetString ("This format does not support layers. How would you like to proceed?");
+			string body = Translations.GetString (
+				"Flatten will merge all layers into a single layer. " +
+				"Convert will save it in the OpenRaster format.");
 
 			using Adw.MessageDialog dialog = Adw.MessageDialog.New (chrome.MainWindow, heading, body);
 			dialog.AddResponse (RESPONSE_CANCEL, Translations.GetString ("_Cancel"));
 			dialog.AddResponse (RESPONSE_FLATTEN, Translations.GetString ("Flatten"));
-			dialog.SetResponseAppearance (RESPONSE_FLATTEN, Adw.ResponseAppearance.Suggested);
+			dialog.AddResponse (RESPONSE_CONVERT, Translations.GetString ("Convert"));
+			dialog.SetResponseAppearance (RESPONSE_CONVERT, Adw.ResponseAppearance.Suggested);
+			dialog.SetResponseAppearance (RESPONSE_FLATTEN, Adw.ResponseAppearance.Destructive);
 
 			dialog.CloseResponse = RESPONSE_CANCEL;
-			dialog.DefaultResponse = RESPONSE_FLATTEN;
+			dialog.DefaultResponse = RESPONSE_CONVERT;
 
 			string response = await dialog.RunAsync ();
 
-			if (response == RESPONSE_CANCEL) {
-				return false;
+			switch (response) {
+				case RESPONSE_CANCEL:
+					return FormatConflictResult.Cancel;
+				case RESPONSE_CONVERT:
+					return FormatConflictResult.Convert;
+				default:
+					// Flatten the image
+					tools.Commit ();
+					image.Flatten.Activate ();
+					break;
 			}
-
-			// Flatten the image
-			tools.Commit ();
-			image.Flatten.Activate ();
 		}
-		return true;
+		return FormatConflictResult.Proceed;
 	}
 }
