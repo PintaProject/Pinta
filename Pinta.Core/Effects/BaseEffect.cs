@@ -189,6 +189,10 @@ public abstract class BaseEffect
 	}
 }
 
+/// <summary>
+/// Base class for configurable effects whose dialog is the standard <c>SimpleEffectDialog<c/>
+/// built from their <see cref="EffectData"/>
+/// </summary>
 public abstract class ConfigurableEffect : BaseEffect
 {
 	private readonly IAddinLocalizer? localizer;
