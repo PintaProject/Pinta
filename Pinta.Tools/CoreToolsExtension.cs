@@ -72,6 +72,7 @@ public sealed class CoreToolsExtension : IExtension
 		PintaCore.Tools.AddTool (new FreeformShapeTool (services));
 		PintaCore.Tools.AddTool (new CloneStampTool (services));
 		PintaCore.Tools.AddTool (new RecolorTool (services));
+		PintaCore.Tools.AddTool (new SmudgeTool (services));
 	}
 
 	public void Uninitialize ()
@@ -104,6 +105,7 @@ public sealed class CoreToolsExtension : IExtension
 		PintaCore.Tools.RemoveInstanceOfTool<FreeformShapeTool> ();
 		PintaCore.Tools.RemoveInstanceOfTool<CloneStampTool> ();
 		PintaCore.Tools.RemoveInstanceOfTool<RecolorTool> ();
+		PintaCore.Tools.RemoveInstanceOfTool<SmudgeTool> ();
 	}
 	#endregion
 }
