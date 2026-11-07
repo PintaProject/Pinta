@@ -34,13 +34,8 @@ public sealed class PencilSketchEffect : BaseEffect
 
 	public PencilSketchData Data => (PencilSketchData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeService chrome;
-	private readonly IWorkspaceService workspace;
 	public PencilSketchEffect (IServiceProvider services)
 	{
-		chrome = services.GetService<IChromeService> ();
-		workspace = services.GetService<IWorkspaceService> ();
-
 		EffectData = new PencilSketchData ();
 
 		gaussian_blur = new GaussianBlurEffect (services);
@@ -50,8 +45,8 @@ public sealed class PencilSketchEffect : BaseEffect
 		color_dodge = new UserBlendOps.ColorDodgeBlendOp ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	public override void Render (ImageSurface source, ImageSurface destination, ReadOnlySpan<RectangleI> rois)
 	{

@@ -28,17 +28,13 @@ public sealed class MedianEffect : BaseEffect
 
 	public MedianData Data => (MedianData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeService chrome;
-	private readonly IWorkspaceService workspace;
-	public MedianEffect (IServiceProvider services)
+	public MedianEffect (IServiceProvider _)
 	{
-		chrome = services.GetService<IChromeService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new MedianData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	// Algorithm Code Ported From PDN
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)

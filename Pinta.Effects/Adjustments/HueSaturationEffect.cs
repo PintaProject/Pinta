@@ -26,17 +26,13 @@ public sealed class HueSaturationEffect : BaseEffect
 
 	public override string AdjustmentMenuKey => "U";
 
-	private readonly IChromeService chrome;
-	private readonly IWorkspaceService workspace;
-	public HueSaturationEffect (IServiceProvider services)
+	public HueSaturationEffect (IServiceProvider _)
 	{
-		chrome = services.GetService<IChromeService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new HueSaturationData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	private UnaryPixelOp CreateOptimalOp ()
 		=>

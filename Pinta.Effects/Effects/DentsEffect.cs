@@ -57,19 +57,15 @@ public sealed class DentsEffect : BaseEffect
 	public sealed override bool IsConfigurable
 		=> true;
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
-	private readonly IChromeService chrome;
 	private readonly ILivePreview live_preview;
 	private readonly IPaletteService palette;
-	private readonly IWorkspaceService workspace;
 	public DentsEffect (IServiceProvider services)
 	{
-		chrome = services.GetService<IChromeService> ();
 		live_preview = services.GetService<ILivePreview> ();
 		palette = services.GetService<IPaletteService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new DentsData ();
 	}
 

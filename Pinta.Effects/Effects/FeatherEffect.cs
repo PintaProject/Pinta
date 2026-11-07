@@ -23,19 +23,15 @@ public sealed class FeatherEffect : BaseEffect
 
 	public FeatherData Data => (FeatherData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeService chrome;
 	private readonly ISystemService system;
-	private readonly IWorkspaceService workspace;
 	public FeatherEffect (IServiceProvider services)
 	{
-		chrome = services.GetService<IChromeService> ();
 		system = services.GetService<ISystemService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new FeatherData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	protected override void Render (
 		ImageSurface src,
