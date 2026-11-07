@@ -173,7 +173,7 @@ public sealed class DocumentLayers
 		user_layers.RemoveAt (index);
 
 		// Only change this if this wasn't already the bottom layer
-		if (CurrentUserLayerIndex > 0)
+		if (CurrentUserLayerIndex > 0 && index < CurrentUserLayerIndex)
 			CurrentUserLayerIndex--;
 
 		layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
@@ -348,6 +348,8 @@ public sealed class DocumentLayers
 		int index = CurrentUserLayerIndex;
 		DeleteLayer (index);
 		Insert (layer, index - 1);
+
+		CurrentUserLayerIndex = index - 1;
 
 		SelectedLayerChanged?.Invoke (this, EventArgs.Empty);
 
