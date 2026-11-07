@@ -13,6 +13,26 @@ public sealed class NetpbmPortablePixmap : IImageExporter, IImageImporter
 	public Document Import (Gio.File file)
 	{
 		using GioStream stream = new GioStream (file.Read (cancellable: null));
+		using ImageSurface imported = Import (stream);
+
+		Document newDocument = new (
+			PintaCore.Actions,
+			PintaCore.Tools,
+			PintaCore.Workspace,
+			imported.GetSize (),
+			file,
+			"ppm");
+
+		Layer layer = newDocument.Layers.AddNewLayer (file.GetDisplayName ());
+		using Context g = new (layer.Surface);
+		g.SetSourceSurface (imported, 0, 0);
+		g.Paint ();
+
+		return newDocument;
+	}
+
+	internal static ImageSurface Import (Stream stream)
+	{
 		using StreamReader reader = new (stream, Encoding.ASCII);
 
 		PpmTokenReader tokenizer = new (reader);
@@ -25,20 +45,10 @@ public sealed class NetpbmPortablePixmap : IImageExporter, IImageImporter
 		int height = tokenizer.ReadPositiveInt ("Image height");
 		int maxValue = tokenizer.ReadPositiveInt ("Max color value");
 
-		Size imageSize = new (width, height);
+		ImageSurface surface = CairoExtensions.CreateImageSurface (Format.Argb32, width, height);
+		Span<ColorBgra> pixelData = surface.GetPixelData ();
 
-		Document newDocument = new (
-			PintaCore.Actions,
-			PintaCore.Tools,
-			PintaCore.Workspace,
-			imageSize,
-			file,
-			"ppm");
-
-		Layer layer = newDocument.Layers.AddNewLayer (file.GetDisplayName ());
-		Span<ColorBgra> pixelData = layer.Surface.GetPixelData ();
-
-		layer.Surface.Flush ();
+		surface.Flush ();
 
 		int pixelCount = width * height;
 		if (maxValue == 255) {
@@ -49,9 +59,9 @@ public sealed class NetpbmPortablePixmap : IImageExporter, IImageImporter
 				pixelData[i] = ReadPixel (ref tokenizer, maxValue);
 		}
 
-		layer.Surface.MarkDirty ();
+		surface.MarkDirty ();
 
-		return newDocument;
+		return surface;
 
 		static ColorBgra FastReadPixel (ref PpmTokenReader tokens)
 		{

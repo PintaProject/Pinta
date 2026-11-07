@@ -94,6 +94,9 @@ public sealed class TgaExporter : IImageExporter
 	}
 
 	private static void Export (ImageSurface flattenedImage, Stream outputStream)
+		=> Export (flattenedImage.GetReadOnlyPixelData (), flattenedImage.GetSize (), outputStream);
+
+	internal static void Export (ReadOnlySpan<ColorBgra> pixels, Size imageSize, Stream outputStream)
 	{
 		using BinaryWriter writer = new (outputStream);
 
@@ -106,8 +109,8 @@ public sealed class TgaExporter : IImageExporter
 			cmapEntrySize: 0,
 			xOrigin: 0,
 			yOrigin: 0,
-			imageWidth: (ushort) flattenedImage.Width,
-			imageHeight: (ushort) flattenedImage.Height,
+			imageWidth: (ushort) imageSize.Width,
+			imageHeight: (ushort) imageSize.Height,
 			pixelDepth: 32,
 			imageDesc: 8); // 32-bit, lower-left origin, which is weird but hey...
 
@@ -115,10 +118,9 @@ public sealed class TgaExporter : IImageExporter
 
 		writer.Write (ImageIdField);
 
-		ReadOnlySpan<ColorBgra> pixels = flattenedImage.GetReadOnlyPixelData ();
-		int width = flattenedImage.Width;
+		int width = imageSize.Width;
 
-		for (int y = flattenedImage.Height - 1; y >= 0; y--) {
+		for (int y = imageSize.Height - 1; y >= 0; y--) {
 			ReadOnlySpan<ColorBgra> sourceRow = pixels.Slice (y * width, width);
 			foreach (ColorBgra premultiplied in sourceRow) {
 				ColorBgra color = premultiplied.ToStraightAlpha ();
