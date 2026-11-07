@@ -34,17 +34,13 @@ public sealed class OilPaintingEffect : BaseEffect
 	public OilPaintingData Data
 		=> (OilPaintingData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeService chrome;
-	private readonly IWorkspaceService workspace;
-	public OilPaintingEffect (IServiceProvider services)
+	public OilPaintingEffect (IServiceProvider _)
 	{
-		chrome = services.GetService<IChromeService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new OilPaintingData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	// Algorithm Code Ported From PDN
 	protected override void Render (

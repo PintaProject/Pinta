@@ -35,21 +35,17 @@ public sealed class TwistEffect : BaseEffect
 	public TwistData Data
 		=> (TwistData) EffectData!; // NRT - Set in constructor
 
-	private readonly IChromeService chrome;
 	private readonly ILivePreview live_preview;
 	private readonly IPaletteService palette;
-	private readonly IWorkspaceService workspace;
 	public TwistEffect (IServiceProvider services)
 	{
-		chrome = services.GetService<IChromeService> ();
 		live_preview = services.GetService<ILivePreview> ();
 		palette = services.GetService<IPaletteService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new TwistData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	// Algorithm Code Ported From PDN
 	protected override void Render (ImageSurface source, ImageSurface destination, RectangleI roi)

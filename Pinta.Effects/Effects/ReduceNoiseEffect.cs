@@ -34,15 +34,11 @@ public sealed class ReduceNoiseEffect : BaseEffect
 	public ReduceNoiseData Data
 		=> (ReduceNoiseData) EffectData!; // NRT - Set in constructor
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
-	private readonly IChromeService chrome;
-	private readonly IWorkspaceService workspace;
-	public ReduceNoiseEffect (IServiceProvider services)
+	public ReduceNoiseEffect (IServiceProvider _)
 	{
-		chrome = services.GetService<IChromeService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new ReduceNoiseData ();
 	}
 

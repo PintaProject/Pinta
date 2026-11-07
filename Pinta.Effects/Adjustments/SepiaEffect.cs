@@ -24,13 +24,8 @@ public sealed class SepiaEffect : BaseEffect
 			ColorBgra.Black,
 			ColorBgra.White);
 
-	private readonly IChromeService chrome;
-	private readonly IWorkspaceService workspace;
-	public SepiaEffect (IServiceProvider services)
+	public SepiaEffect (IServiceProvider _)
 	{
-		chrome = services.GetService<IChromeService> ();
-		workspace = services.GetService<IWorkspaceService> ();
-
 		EffectData = new SepiaData ();
 	}
 
@@ -39,8 +34,8 @@ public sealed class SepiaEffect : BaseEffect
 	public SepiaData Data
 		=> (SepiaData) EffectData!;
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	public sealed override bool IsTileable
 		=> true;

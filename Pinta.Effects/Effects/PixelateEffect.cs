@@ -28,17 +28,13 @@ public sealed class PixelateEffect : BaseEffect
 
 	public override string EffectMenuCategory => Translations.GetString ("Distort");
 
-	private readonly IChromeService chrome;
-	private readonly IWorkspaceService workspace;
-	public PixelateEffect (IServiceProvider services)
+	public PixelateEffect (IServiceProvider _)
 	{
-		chrome = services.GetService<IChromeService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new PixelateData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	#region Algorithm Code Ported From PDN
 	private static ColorBgra ComputeCellColor (

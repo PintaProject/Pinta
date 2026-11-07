@@ -15,12 +15,8 @@ namespace Pinta.Effects;
 
 public sealed class ReliefEffect : BaseEffect
 {
-	private readonly IChromeService chrome;
-	private readonly IWorkspaceService workspace;
-	public ReliefEffect (IServiceProvider services)
+	public ReliefEffect (IServiceProvider _)
 	{
-		chrome = services.GetService<IChromeService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new ReliefData ();
 	}
 
@@ -32,8 +28,8 @@ public sealed class ReliefEffect : BaseEffect
 
 	public override string EffectMenuCategory => Translations.GetString ("Stylize");
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	public override string Icon => Resources.Icons.EffectsStylizeRelief;
 

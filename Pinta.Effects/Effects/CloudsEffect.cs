@@ -35,18 +35,14 @@ public sealed class CloudsEffect : BaseEffect
 		=> (CloudsData) EffectData!;  // NRT - Set in constructor
 
 	private readonly IPaletteService palette;
-	private readonly IWorkspaceService workspace;
-	private readonly IChromeService chrome;
 	public CloudsEffect (IServiceProvider services)
 	{
-		chrome = services.GetService<IChromeService> ();
 		palette = services.GetService<IPaletteService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new CloudsData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	private readonly record struct CloudsSettings (
 		int Scale,

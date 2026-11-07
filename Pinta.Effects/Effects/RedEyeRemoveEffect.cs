@@ -28,18 +28,13 @@ public sealed class RedEyeRemoveEffect : BaseEffect
 
 	public RedEyeRemoveData Data => (RedEyeRemoveData) EffectData!;  // NRT - Set in constructor
 
-	private readonly IChromeService chrome;
-	private readonly IWorkspaceService workspace;
-
-	public RedEyeRemoveEffect (IServiceProvider services)
+	public RedEyeRemoveEffect (IServiceProvider _)
 	{
-		chrome = services.GetService<IChromeService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new RedEyeRemoveData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	public override void Render (ImageSurface source, ImageSurface destination, ReadOnlySpan<RectangleI> rois)
 	{

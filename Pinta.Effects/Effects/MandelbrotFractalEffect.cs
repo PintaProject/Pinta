@@ -37,19 +37,15 @@ public sealed class MandelbrotFractalEffect : BaseEffect
 	private static readonly UnaryPixelOp invert_color = new UnaryPixelOps.Invert ();
 	private static readonly UnaryPixelOp pass_through = new UnaryPixelOps.Identity ();
 
-	private readonly IChromeService chrome;
 	private readonly IPaletteService palette;
-	private readonly IWorkspaceService workspace;
 	public MandelbrotFractalEffect (IServiceProvider services)
 	{
-		chrome = services.GetService<IChromeService> ();
 		palette = services.GetService<IPaletteService> ();
-		workspace = services.GetService<IWorkspaceService> ();
 		EffectData = new MandelbrotFractalData ();
 	}
 
-	public override Task<bool> LaunchConfiguration ()
-		=> chrome.LaunchSimpleEffectDialog (this, workspace);
+	public override Task<bool> LaunchConfiguration (ILivePreviewSession session)
+		=> session.LaunchSimpleEffectDialog ();
 
 	// Algorithm Code Ported From PDN
 
