@@ -163,7 +163,7 @@ internal sealed class NewScreenshotAction : IActionHandler
 		using var _ = await request.WatchResponseAsync (
 			(Notification<(uint Response, Dictionary<string, VariantValue> Results)> notification) => {
 				if (notification.IsCompletion) {
-					requestCompletion.TrySetException (notification.Exception);
+					requestCompletion.TrySetException (notification.CompletionReason);
 				} else {
 					var reply = notification.Value;
 					try {
