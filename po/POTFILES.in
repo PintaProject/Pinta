@@ -370,6 +370,7 @@ Pinta.Tools/Tools/RectangleSelectTool.cs
 Pinta.Tools/Tools/RectangleTool.cs
 Pinta.Tools/Tools/RoundedRectangleTool.cs
 Pinta.Tools/Tools/SelectTool.cs
+Pinta.Tools/Tools/SmudgeTool.cs
 Pinta.Tools/Tools/ShapeTool.cs
 Pinta.Tools/Tools/TextTool.cs
 Pinta.Tools/Tools/ToolOptionWidgetService.cs

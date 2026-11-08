@@ -260,6 +260,7 @@ public static class Icons
 	public const string ToolSelectEllipse = "tool-select-ellipse-symbolic";
 	public const string ToolSelectLasso = "tool-select-lasso-symbolic";
 	public const string ToolSelectMagicWand = "tool-select-magicwand-symbolic";
+	public const string ToolSmudge = "tool-smudge-symbolic";
 	public const string ToolSelectRectangle = "tool-select-rectangle-symbolic";
 	public const string ToolText = "tool-text-symbolic";
 	public const string ToolZoom = "tool-zoom-symbolic";

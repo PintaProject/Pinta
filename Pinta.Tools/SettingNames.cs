@@ -22,6 +22,8 @@ internal static class SettingNames
 
 	internal const string RECOLOR_TOLERANCE = "recolor-tolerance";
 
+	internal const string SMUDGE_STRENGTH = "smudge-strength";
+
 	internal const string GRADIENT_TYPE = "gradient-type";
 	internal const string GRADIENT_COLOR_MODE = "gradient-color-mode";
 
