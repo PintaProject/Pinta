@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-15 00:27+0000\n"
-"PO-Revision-Date: 2026-10-08 13:57+0000\n"
+"PO-Revision-Date: 2026-11-09 11:04+0000\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <https://hosted.weblate.org/projects/pinta/pinta/kk/>\n"
 "Language: kk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.10.1.dev0\n"
+"X-Generator: Weblate 2026.11.2.dev0\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
 msgid " (in user directory)"
@@ -1080,7 +1080,7 @@ msgstr "Ауыр"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:18
 msgid "Height"
-msgstr ""
+msgstr "Биіктігі"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:99
 #: ../Pinta/Dialogs/NewImageDialog.cs:348
@@ -2578,7 +2578,7 @@ msgstr "Шаршылар"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
 msgid "Startup Image"
-msgstr ""
+msgstr "Іске қосылу суреті"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
@@ -2938,7 +2938,7 @@ msgstr "Ақ"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:17
 msgid "Width"
-msgstr ""
+msgstr "Ені"
 
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:95
 #: ../Pinta/Dialogs/CanvasGridSettingsDialog.cs:105
