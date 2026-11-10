@@ -161,7 +161,8 @@ public sealed class WorkspaceManager : IWorkspaceService
 	public WorkspaceManager (
 		SystemManager systemManager,
 		ChromeManager chromeManager,
-		ImageConverterManager imageFormats)
+		ImageConverterManager imageFormats,
+		SettingsManager settings)
 	{
 		open_documents = [];
 		OpenDocuments = new ReadOnlyCollection<Document> (open_documents);
@@ -169,6 +170,8 @@ public sealed class WorkspaceManager : IWorkspaceService
 
 		chrome_manager = chromeManager;
 		image_formats = imageFormats;
+
+		StartAutosaveTimer(settings);
 	}
 
 	public int ActiveDocumentIndex
@@ -463,6 +466,89 @@ public sealed class WorkspaceManager : IWorkspaceService
 		string details = Translations.GetString ("You do not have access to '{0}'.", filename);
 
 		return chrome_manager.ShowMessageDialog (parent, message, details);
+	}
+
+	private uint autosave_timer_id;
+	private uint autosave_files;
+	private int autosave_history;
+	private readonly HashSet<string> autosaveFiles = new();
+	private void StartAutosaveTimer (SettingsManager settings)
+	{
+		int interval = settings.GetSetting("autosave-interval", 0);
+		if (interval > 0) {
+			autosave_files = Math.Max(1, (uint)settings.GetSetting("autosave-files", 1));
+			autosave_history = settings.GetSetting("autosave-history", 0);
+			autosave_timer_id = GLib.Functions.TimeoutAdd(GLib.Constants.PRIORITY_DEFAULT, (uint)interval * 1000, OnAutosaveTick);
+		}
+	}
+	private bool OnAutosaveTick ()
+	{
+		if (!HasOpenDocuments)
+			return true;
+
+		var format = PintaCore.ImageFormats.GetFormatByExtension ("ora");
+		if (format?.Exporter is null) {
+			autosave_timer_id = 0;
+			return false;
+		}
+
+		foreach (var doc in OpenDocuments) {
+			if (!doc.HasFile)
+				continue;
+			if (!doc.IsAutosaveDirty)
+				continue;
+
+			string autosaveFile = doc.File.GetParseName() + ".pinta_autosave_" + doc.AutosaveFilesIndex + ".ora";
+			doc.AutosaveFilesIndex += 1;
+			if ( doc.AutosaveFilesIndex == autosave_files ) doc.AutosaveFilesIndex = 0;
+
+			format.Exporter.Export (doc, Gio.FileHelper.NewForPath (autosaveFile), PintaCore.Chrome.MainWindow);
+
+			autosaveFiles.Add(autosaveFile);
+			DumpLastHistorySteps(doc);
+			doc.IsAutosaveDirty = false;
+		}
+		if ( autosave_history != 0 ) {
+			Console.WriteLine($"Date: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+		}
+
+		return true;
+	}
+	public void StopAutosave () {
+		if (autosave_timer_id != 0)
+		{
+			GLib.Source.Remove(autosave_timer_id);
+		}
+		foreach (var file_string in autosaveFiles)
+		{
+			try
+			{
+				var file = Gio.FileHelper.NewForPath(file_string);
+				if (file.QueryExists(null))
+					file.Delete(null);
+			}
+			catch
+			{
+				// ignore cleanup failures
+			}
+		}
+		autosaveFiles.Clear();
+	}
+	private void DumpLastHistorySteps(Document doc)
+	{
+		if ( autosave_history != 0 ) {
+			Console.WriteLine("=== Last History Steps ===");
+
+			var history = doc.History;
+			var n = history.Items.Count();
+			for (var i = Math.Max(0, n - autosave_history); i < n; i++)
+			{
+				var item = history.Items.ElementAt(i);
+				Console.WriteLine($"[{i}] {item.Text}");
+			}
+
+			Console.WriteLine("==========================");
+		}
 	}
 
 	public event EventHandler? LayerAdded;
