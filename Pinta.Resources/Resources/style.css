@@ -14,3 +14,8 @@
 #new-image-preview {
     box-shadow: 0px 0px 2px 2px #7F7F7F;
 }
+
+#workspace_layout {
+    border-top: 1px solid alpha(currentColor, 0.12);
+    border-bottom: 1px solid alpha(currentColor, 0.12);
+}
