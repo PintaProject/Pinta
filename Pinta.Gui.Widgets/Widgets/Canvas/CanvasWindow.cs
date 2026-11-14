@@ -85,7 +85,7 @@ public sealed partial class CanvasWindow
 
 		// Use the drag gesture to forward a sequence of mouse press -> move -> release events to the current tool.
 		// This is more reliable than using just a click gesture in combination with the move controller (see bug #1456)
-		// Note that we attach this to the root canvas widget, not the canvas, so that it can receive drags that start outside the canvas.
+		// Attach directly to the canvas so coordinates are exactly in canvas space and immune to GTK4 viewport centering/scrolling offsets (#2165).
 		Gtk.GestureDrag dragController = Gtk.GestureDrag.New ();
 		dragController.SetButton (0); // Listen for all mouse buttons.
 		dragController.OnDragBegin += OnDragBegin;
@@ -115,8 +115,8 @@ public sealed partial class CanvasWindow
 		Focusable = true;
 
 		AddController (gestureZoom);
-		AddController (dragController);
-		AddController (motionController);
+		canvas.AddController (dragController);
+		canvas.AddController (motionController);
 
 		// --- Initialization (Gtk.Grid)
 
@@ -204,10 +204,7 @@ public sealed partial class CanvasWindow
 		Gtk.EventControllerMotion.MotionSignalArgs args)
 	{
 		PointD rootPoint = new (args.X, args.Y);
-
-		// These coordinates are relative to our grid widget, so transform into the child image
-		// view's coordinates, and then to the canvas coordinates.
-		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPos);
+		PointD viewPos = rootPoint;
 
 		current_canvas_pos = document.Workspace.ViewPointToCanvas (viewPos);
 		horizontal_ruler.Position = current_canvas_pos.X;
@@ -376,9 +373,8 @@ public sealed partial class CanvasWindow
 		// the active document to this document.
 
 		// Send the mouse press event to the current tool.
-		// Translate coordinates to the canvas widget.
 		PointD rootPoint = new (args.StartX, args.StartY);
-		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPoint);
+		PointD viewPoint = rootPoint;
 		PointD canvasPoint = document.Workspace.ViewPointToCanvas (viewPoint);
 
 		ToolMouseEventArgs tool_args = new () {
@@ -396,9 +392,7 @@ public sealed partial class CanvasWindow
 	{
 		gesture.GetStartPoint (out double startX, out double startY);
 		PointD rootPoint = new (startX + args.OffsetX, startY + args.OffsetY);
-
-		// Translate coordinates to the canvas widget.
-		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPoint);
+		PointD viewPoint = rootPoint;
 
 		current_canvas_pos = document.Workspace.ViewPointToCanvas (viewPoint);
 		if (document.Workspace.PointInCanvas (current_canvas_pos))
@@ -420,9 +414,7 @@ public sealed partial class CanvasWindow
 	{
 		gesture.GetStartPoint (out double startX, out double startY);
 		PointD rootPoint = new (startX + args.OffsetX, startY + args.OffsetY);
-
-		// Translate coordinates to the canvas widget.
-		this.TranslateCoordinates (Canvas, rootPoint, out PointD viewPoint);
+		PointD viewPoint = rootPoint;
 		PointD canvasPoint = document.Workspace.ViewPointToCanvas (viewPoint);
 
 		// Send the mouse release event to the current tool.
