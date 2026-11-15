@@ -8,8 +8,8 @@ internal sealed class UnaryPixelOpsTests
 	[Test]
 	public void LuminosityCurve_LeavesTransparentPixelUnchanged ()
 	{
-		UnaryPixelOps.LuminosityCurve curve = new ();       
-		// Raise the left end of the curve       
+		UnaryPixelOps.LuminosityCurve curve = new ();
+		// Raise the left end of the curve
 		curve.Curve[0] = 100;
 
 		ColorBgra input = ColorBgra.Transparent;
