@@ -248,6 +248,19 @@ public static class UnaryPixelOps
 
 		public override ColorBgra Apply (in ColorBgra color)
 		{
+			if (color.A == 0)
+				return color;
+
+			if (color.A == 255)
+				return ApplyStraight (color);
+
+			ColorBgra straight = color.ToStraightAlpha ();
+			ColorBgra straightModified = ApplyStraight (straight);
+			return straightModified.ToPremultipliedAlpha ();
+		}
+
+		private ColorBgra ApplyStraight (in ColorBgra color)
+		{
 			byte lumi = color.GetIntensityByte ();
 			int diff = Curve[lumi] - lumi;
 
