@@ -173,7 +173,7 @@ public sealed class DocumentLayers
 		user_layers.RemoveAt (index);
 
 		// Only change this if this wasn't already the bottom layer
-		if (CurrentUserLayerIndex > 0 && index < CurrentUserLayerIndex)
+		if (CurrentUserLayerIndex > 0 && index <= CurrentUserLayerIndex)
 			CurrentUserLayerIndex--;
 
 		layer.PropertyChanged -= RaiseLayerPropertyChangedEvent;
