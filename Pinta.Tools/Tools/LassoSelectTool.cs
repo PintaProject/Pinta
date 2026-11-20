@@ -137,7 +137,7 @@ public sealed class LassoSelectTool : BaseTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		if (IsFreeformMode) {
+		if (IsFreeformMode && is_dragging) {
 			ApplySelection (document);
 
 			FinalizeShape (document);
@@ -153,6 +153,7 @@ public sealed class LassoSelectTool : BaseTool
 			hist = null;
 		}
 		lasso_polygon.Clear ();
+		is_dragging = false;
 	}
 
 	protected override void OnDeactivated (Document? document, BaseTool? newTool)

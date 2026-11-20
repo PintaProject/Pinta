@@ -72,6 +72,17 @@ public sealed class PanTool : BaseTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
+		FinalizePan ();
+	}
+
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		FinalizePan ();
+		base.OnDeactivated (document, newTool);
+	}
+
+	private void FinalizePan ()
+	{
 		active = false;
 		SetCursor (DefaultCursor);
 	}

@@ -144,23 +144,12 @@ public sealed class CloneStampTool : BaseBrushTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		painting = false;
-
 		if (e.IsControlPressed)
 			handle.Active = true;
 
-		using Cairo.Context g = new (document.Layers.CurrentUserLayer.Surface);
-		g.SetSourceSurface (document.Layers.ToolLayer.Surface, 0, 0);
-		g.Paint ();
+		FinalizeCloneStamp (document);
 
 		base.OnMouseUp (document, e);
-
-		// Note: the offset persists until the clone source is reselected.
-		last_point = null;
-
-		document.Layers.ToolLayer.Clear ();
-		document.Layers.ToolLayer.Hidden = true;
-		document.Workspace.Invalidate ();
 	}
 
 	protected override bool OnKeyDown (Document document, ToolKeyEventArgs e)
@@ -186,8 +175,32 @@ public sealed class CloneStampTool : BaseBrushTool
 
 	protected override void OnDeactivated (Document? document, BaseTool? newTool)
 	{
+		if (document != null)
+			FinalizeCloneStamp (document);
+
 		origin = null;
 		handle.Active = false;
+
+		base.OnDeactivated (document, newTool);
+	}
+
+	private void FinalizeCloneStamp (Document document)
+	{
+		// Note: the offset persists until the clone source is reselected.
+		last_point = null;
+
+		if (!painting)
+			return;
+
+		painting = false;
+
+		using Cairo.Context g = new (document.Layers.CurrentUserLayer.Surface);
+		g.SetSourceSurface (document.Layers.ToolLayer.Surface, 0, 0);
+		g.Paint ();
+
+		document.Layers.ToolLayer.Clear ();
+		document.Layers.ToolLayer.Hidden = true;
+		document.Workspace.Invalidate ();
 	}
 
 	private void UpdateOriginHandle (Document document, int x, int y, bool move_event)

@@ -82,6 +82,7 @@ public sealed class FreeformShapeTool : BaseBrushTool
 
 	protected override void OnMouseDown (Document document, ToolMouseEventArgs e)
 	{
+		last_point = null;
 		surface_modified = false;
 		undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
 		path = null;
@@ -102,6 +103,10 @@ public sealed class FreeformShapeTool : BaseBrushTool
 			last_point = null;
 			return;
 		}
+
+		// Prevent creating a new stroke if there isn't a start position
+		if (undo_surface == null)
+			return;
 
 		var x = e.Point.X;
 		var y = e.Point.Y;
@@ -157,6 +162,21 @@ public sealed class FreeformShapeTool : BaseBrushTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
+		FinalizeFreeformShape (document);
+
+		document.Workspace.Invalidate ();
+	}
+
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		if (document != null)
+			FinalizeFreeformShape (document);
+
+		base.OnDeactivated (document, newTool);
+	}
+
+	private void FinalizeFreeformShape (Document document)
+	{
 		document.Layers.ToolLayer.Clear ();
 		document.Layers.ToolLayer.Hidden = true;
 
@@ -194,8 +214,6 @@ public sealed class FreeformShapeTool : BaseBrushTool
 
 		undo_surface = null;
 		surface_modified = false;
-
-		document.Workspace.Invalidate ();
 	}
 
 	protected override void OnSaveSettings (ISettingsService settings)

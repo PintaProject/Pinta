@@ -139,6 +139,14 @@ public abstract class BaseTransformTool : BaseTool
 		OnFinishTransform (document, transform);
 	}
 
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		if (document != null && IsActive && using_mouse)
+			OnFinishTransform (document, transform);
+
+		base.OnDeactivated (document, newTool);
+	}
+
 	protected override bool OnKeyDown (
 		Document document,
 		ToolKeyEventArgs e)
