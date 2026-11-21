@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-15 00:27+0000\n"
-"PO-Revision-Date: 2026-10-26 06:51+0000\n"
+"PO-Revision-Date: 2026-11-21 04:34+0000\n"
 "Last-Translator: Aivaz Latypov <pngdrift@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Tatar <https://hosted.weblate.org/projects/pinta/pinta/tt/>\n"
 "Language: tt\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.11.dev0\n"
+"X-Generator: Weblate 2026.12.dev0\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
 msgid " (in user directory)"
@@ -2256,7 +2256,7 @@ msgstr "Репозиторий"
 
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:141
 msgid "Resampling:"
-msgstr ""
+msgstr "Дискретлаштыру:"
 
 #: ../Pinta.Gui.Widgets/Dialogs/SimpleEffectDialog.cs:645
 msgid "Reseed"
@@ -2270,7 +2270,7 @@ msgstr "Яңадан көйләү"
 
 #: ../Pinta.Core/Actions/EditActions.cs:183
 msgid "Reset to Default"
-msgstr ""
+msgstr "Башлангыч көйләүләргә кайтару"
 
 #: ../Pinta/Dialogs/ResizeCanvasDialog.cs:97
 #: ../Pinta/Dialogs/ResizeImageDialog.cs:80
@@ -2304,7 +2304,7 @@ msgstr ""
 #: ../Pinta.Effects/Effects/JuliaFractalEffect.cs:166
 #: ../Pinta.Effects/Effects/MandelbrotFractalEffect.cs:182
 msgid "Reverse Color Scheme"
-msgstr ""
+msgstr "Төсләр схемасын кирегү"
 
 #. Translators: In this context, "reverse" is a verb, and the user can choose whether or not they want to reverse the color sorting
 #: ../Pinta.Effects/Effects/VoronoiDiagramEffect.cs:195
