@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-15 00:27+0000\n"
-"PO-Revision-Date: 2026-10-18 07:18+0000\n"
-"Last-Translator: Matthaiks <kityn@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2026-11-17 05:20+0000\n"
+"Last-Translator: konrad <konradek@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/pinta/pinta/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.11.dev0\n"
+"X-Generator: Weblate 2026.12.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -400,7 +400,7 @@ msgstr "Zmień rozmiar czcionki."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:237
 msgid "Change font size. Shortcut keys: [ ]"
-msgstr "Zmień rozmiar czcionki. Skróty klawiaturowe: [ ]"
+msgstr "Zmień rozmiar czcionki. Klawisze skrótu: [ ]"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:370
 msgid "Change outline width."
@@ -464,10 +464,10 @@ msgid ""
 "Right click to reverse.\n"
 "Click on a control point and drag to move it."
 msgstr ""
-"Kliknij i przeciągnij, aby narysować gradient od koloru podstawowego do "
-"koloru dodatkowego.\n"
-"Kliknij prawym przyciskiem myszy, aby odwrócić.\n"
-"Kliknij punkt kontrolny i przeciągnij, aby go przesunąć."
+"Nakreśl gradient od koloru podstawowego do dodatkowego naciskając i "
+"przeciągając.\n"
+"Kreśl z odwróconymi kolorami za pomocą dodatkowego przycisku myszy.\n"
+"Przesuń punkt kontrolny naciskając go i przeciągając."
 
 #: ../Pinta.Tools/Tools/PanTool.cs:42
 msgid "Click and drag to navigate image."
@@ -487,8 +487,8 @@ msgid ""
 "Click to select region of similar color.\n"
 "Hold shift to use Global mode."
 msgstr ""
-"Kliknij, aby wybrać region o podobnym kolorze.\n"
-"Przytrzymaj klawisz Shift, aby użyć trybu globalnego."
+"Naciśnij, by zaznaczyć obszar o podobnym kolorze.\n"
+"Zaznacz globalnie przytrzymując klawisz Shift."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:607
 #: ../Pinta.Gui.Widgets/Widgets/StatusBarColorPaletteWidget.cs:348
@@ -1145,7 +1145,7 @@ msgstr "Odcień / nasycenie"
 
 #: ../Pinta/Actions/File/SaveDocumentImplementationAction.cs:228
 msgid "ICO files can not be larger than 256 x 256 pixels."
-msgstr "Pliki ICO nie mogą być większe niż 256 x 256 pikseli."
+msgstr "Pliki ICO nie mogą być większe niż 256×256 pikseli."
 
 #: ../Pinta.Gui.Widgets/Widgets/ColorPickerDialog.cs:195
 msgid "If enabled, the Value component is applied to the color wheel."
@@ -1394,7 +1394,7 @@ msgid ""
 "exact same position.\n"
 "Press Enter to finalize the shape."
 msgstr ""
-"Nakreśl kształt kolorem podstawowym naciskając główny przycisku myszy.\n"
+"Nakreśl kształt kolorem podstawowym naciskając główny przycisk myszy.\n"
 "Dodaj punkt kontrolny naciskając na kształt głównym przyciskiem myszy.\n"
 "Przenieś punkt kontrolny przeciągając nacisnąwszy główny przycisk myszy.\n"
 "Zmień naprężenie punktu kontrolnego przeciągając nacisnąwszy dodatkowy "
@@ -1442,9 +1442,9 @@ msgid ""
 "the secondary color.\n"
 "Hold Shift to use Global mode."
 msgstr ""
-"Kliknij lewym przyciskiem myszy, aby wypełnić obszar kolorem podstawowym, "
-"kliknij prawym przyciskiem myszy, aby wypełnić go kolorem dodatkowym.\n"
-"Przytrzymaj klawisz Shift, aby użyć trybu globalnego."
+"Wypełnij obszar kolorem podstawowym naciskając główny przycisk myszy; "
+"wypełnij go kolorem dodatkowym za pomocą dodatkowego przycisku myszy.\n"
+"Wypełnij globalnie przytrzymując klawisz Shift."
 
 #: ../Pinta.Tools/Tools/TextTool.cs:95
 msgid ""
@@ -1484,10 +1484,10 @@ msgid ""
 "Left click to set primary color. Right click to set secondary color. Middle "
 "click or press {0} and left click to choose palette color."
 msgstr ""
-"Kliknij lewym przyciskiem myszy, aby ustawić kolor podstawowy. Kliknij "
-"prawym przyciskiem myszy, aby ustawić kolor dodatkowy. Kliknij środkowym "
-"przyciskiem myszy lub naciśnij {0} i kliknij lewym przyciskiem myszy, aby "
-"wybrać kolor palety."
+"Ustaw kolor podstawowy naciskając główny przycisk myszy; ustaw kolor "
+"dodatkowy naciskając dodatkowy przycisk myszy; wybierz kolor z palety "
+"naciskając środkowy przycisk myszy lub naciskając lewy przyciskiem myszy "
+"przytrzymawszy {0}."
 
 #: ../Pinta.Tools/Tools/ZoomTool.cs:59
 msgid ""
@@ -2474,7 +2474,7 @@ msgstr "Typ kształtu"
 
 #: ../Pinta.Effects/Effects/TileEffect.cs:244
 msgid "Sharp Edges"
-msgstr "Ostre krawędzi"
+msgstr "Ostre krawędzie"
 
 #: ../Pinta.Effects/Effects/SharpenEffect.cs:23
 msgid "Sharpen"
@@ -2489,7 +2489,7 @@ msgstr "Klawisz skrótu"
 
 #: ../Pinta.Core/Extensions/Gtk/GtkExtensions.Widget.cs:107
 msgid "Shortcut keys"
-msgstr "Skróty klawiaturowe"
+msgstr "Klawisze skrótów"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:371
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:48
@@ -2631,7 +2631,7 @@ msgstr "Styl tekstu"
 #: ../Pinta/MainWindow.cs:320
 #, csharp-format
 msgid "The '{0}' add-in may not be compatible with this version of Pinta"
-msgstr "Dodatek '{0}' może nie być kompatybilny z tą wersją Pinty"
+msgstr "Dodatek „{0}” może nie być zgodny z tą wersją Pinty"
 
 #: ../Pinta/Actions/Edit/PasteAction.cs:237
 msgid "The clipboard does not contain an image."
@@ -2723,7 +2723,7 @@ msgstr "Rodzaj płytki"
 
 #: ../Pinta.Effects/Dialogs/Effects.CurvesDialog.cs:95
 msgid "Tip: Right-click to remove control points."
-msgstr "Wskazówka: usuwaj punkty kontrolne prawym przyciskiem myszy."
+msgstr "Wskazówka: usuwaj punkty kontrolne dodatkowym przyciskiem myszy."
 
 #. Translators: 'Title Caps' refers to the font-variant text property
 #: ../Pinta.Tools/Tools/TextTool.cs:218
@@ -2975,7 +2975,7 @@ msgstr "Różnica symetryczna"
 #: ../Pinta.Core/Classes/SelectionModeHandler.cs:48
 #, csharp-format
 msgid "Xor ({0} + Right Click)"
-msgstr "Różnica symetryczna ({0} + prawy przycisk myszy)"
+msgstr "Różnica symetryczna ({0} + dodatkowy przycisk myszy)"
 
 #. Translators: {0} is the name of a file that the user does not have permission to open.
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:463

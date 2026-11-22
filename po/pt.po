@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: pinta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-15 00:27+0000\n"
-"PO-Revision-Date: 2026-11-03 05:51+0000\n"
+"PO-Revision-Date: 2026-11-17 05:20+0000\n"
 "Last-Translator: tomasteixeira07 "
 "<tomasteixeira07@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/pinta/pinta/"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.11.1.dev0\n"
+"X-Generator: Weblate 2026.12.dev0\n"
 "X-Launchpad-Export-Date: 2023-12-18 03:00+0000\n"
 
 #: ../Pinta.Gui.Addins/InstallDialog.cs:284
@@ -147,7 +147,7 @@ msgstr "Ângulo"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:14
 msgid "Animate Selection Outline"
-msgstr ""
+msgstr "Animar contorno da seleção"
 
 #: ../Pinta.Effects/Effects/TwistEffect.cs:225
 msgid "Antialias"
@@ -194,11 +194,11 @@ msgstr "Nível automático"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:264
 msgid "Autoscroll Off"
-msgstr ""
+msgstr "Deslocamento automático (Autoscroll) desligado"
 
 #: ../Pinta.Tools/Tools/SelectTool.cs:263
 msgid "Autoscroll On"
-msgstr ""
+msgstr "Deslocamento automático (Autoscroll) ligado"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:19
 #: ../Pinta.Core/Managers/WorkspaceManager.cs:131
@@ -829,6 +829,8 @@ msgid ""
 "Enables a \"marching ants\" effect to improve the selection's visibility. "
 "Disable to reduce CPU usage."
 msgstr ""
+"Ativa um efeito de \"formigas em movimento\" para melhorar a visibilidade da "
+"seleção. Desative para reduzir o uso da CPU."
 
 #: ../Pinta.Core/Actions/EditActions.cs:129
 #: ../Pinta.Core/Actions/EditActions.cs:370
@@ -1588,7 +1590,7 @@ msgstr "Lava Marciana"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:122
 msgid "Maximum Scatter Radius"
-msgstr ""
+msgstr "Raio máximo de dispersão"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:65
 msgid "Maximum Size"
@@ -1610,7 +1612,7 @@ msgstr "Unir a camada inferior"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:126
 msgid "Minimum Scatter Radius"
-msgstr ""
+msgstr "Raio mínimo de dispersão"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:56
 msgid "Minimum Size"
@@ -2053,36 +2055,36 @@ msgstr "Pré-ajuste:"
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:49
 #, csharp-format
 msgid "Press {0} to decrease brush width"
-msgstr ""
+msgstr "Prima {0} para diminuir a largura do pincel"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:240
 #, csharp-format
 msgid "Press {0} to decrease font size"
-msgstr "Pressione {0} para diminuir o tamanho da fonte"
+msgstr "Prima {0} para diminuir o tamanho da fonte"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:372
 #, csharp-format
 msgid "Press {0} to decrease outline width"
-msgstr ""
+msgstr "Prima {0} para diminuir a largura do contorno"
 
 #: ../Pinta.Tools/Tools/BaseBrushTool.cs:50
 #, csharp-format
 msgid "Press {0} to increase brush width"
-msgstr ""
+msgstr "Prima {0} para aumentar a largura do pincel"
 
 #: ../Pinta.Tools/Tools/TextTool.cs:241
 #, csharp-format
 msgid "Press {0} to increase font size"
-msgstr "Pressione {0} para aumentar o tamanho da fonte"
+msgstr "Prima {0} para aumentar o tamanho da fonte"
 
 #: ../Pinta.Tools/Editable/EditEngines/BaseEditEngine.cs:373
 #, csharp-format
 msgid "Press {0} to increase outline width"
-msgstr ""
+msgstr "Prima {0} para aumentar a largura do contorno"
 
 #: ../Pinta/Dialogs/NewImageDialog.cs:169
 msgid "Preview"
-msgstr "Prever"
+msgstr "Pré-visualização"
 
 #: ../Pinta.Effects/Classes/EdgeBehavior.cs:16
 msgid "Primary"
@@ -2250,6 +2252,8 @@ msgstr "Substituir"
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:12
 msgid "Replaces the header bar with a separate menu bar and tool bar."
 msgstr ""
+"Substitui a barra superior por uma barra de menu e uma barra de ferramentas "
+"separadas."
 
 #: ../Pinta/Dialogs/ErrorDialog.cs:71
 msgid "Report Bug..."
@@ -2560,7 +2564,7 @@ msgstr "Suave"
 
 #: ../Pinta.Effects/Effects/FrostedGlassEffect.cs:134
 msgid "Smoothness"
-msgstr ""
+msgstr "Suavidade"
 
 #: ../Pinta.Core/Algorithms/PixelOps/UserBlendOps.cs:42
 msgid "Soft Light"
@@ -2572,7 +2576,7 @@ msgstr "Retrato suavizado"
 
 #: ../Pinta.Effects/Effects/SoftenPortraitEffect.cs:125
 msgid "Softness"
-msgstr "Suavidade"
+msgstr "Suavização"
 
 #: ../Pinta.Tools/Brushes/SplatterBrush.cs:37
 msgid "Splatter"
@@ -2584,7 +2588,7 @@ msgstr "Quadrados"
 
 #: .././Pinta/Dialogs/PreferencesDialog.ui.h:16
 msgid "Startup Image"
-msgstr ""
+msgstr "Imagem inicial"
 
 #: ../Pinta.Core/Actions/ViewActions.cs:129
 msgid "Status Bar"
