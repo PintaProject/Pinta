@@ -122,9 +122,9 @@ public sealed class ZoomTool : BaseTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
-		document.Layers.ToolLayer.Hidden = true;
-
 		if (mouse_down == MouseButton.Left || mouse_down == MouseButton.Right) {
+			FinalizeZoom (document);
+
 			if (e.MouseButton == MouseButton.Left) {
 				PointD shapeOriginWindow = document.Workspace.CanvasPointToView (shape_origin);
 				if (shapeOriginWindow.DistanceSquared (e.WindowPoint) <= tolerance_squared) {
@@ -136,12 +136,26 @@ public sealed class ZoomTool : BaseTool
 				document.Workspace.ZoomOutAroundCanvasPoint (e.PointDouble);
 			}
 		}
+	}
+
+	private void FinalizeZoom (Document document)
+	{
+		document.Layers.ToolLayer.Clear ();
+		document.Layers.ToolLayer.Hidden = true;
 
 		mouse_down = MouseButton.None;
 
 		is_drawing = false;
 
 		SetCursor (cursor_zoom);//restore regular cursor
+	}
+
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		if (document != null)
+			FinalizeZoom (document);
+
+		base.OnDeactivated (document, newTool);
 	}
 
 	private void UpdateRectangle (Document document, PointD point)

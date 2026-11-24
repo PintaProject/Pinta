@@ -181,6 +181,20 @@ public sealed class GradientTool : BaseTool
 		if (!handle.Active) { return; }
 
 		if (document != null) {
+			if (handle.IsDragging) {
+				handle.EndDrag ();
+				document.Layers.ToolLayer.Clear ();
+				if (undo_surface != null) {
+					string name = is_newly_created
+						? Translations.GetString ("Gradient Created")
+						: Translations.GetString ("Gradient Modified");
+					document.History.PushNewItem (new GradientHistoryItem (Icon, name, undo_surface,
+						document.Layers.CurrentUserLayerIndex, undo_data!.Value, this));
+				}
+
+				is_newly_created = false;
+			}
+
 			undo_data = Data;
 			undo_surface = document.Layers.CurrentUserLayer.Surface.Clone ();
 			document.History.PushNewItem (new GradientHistoryItem (Icon, Name + " " + Translations.GetString ("Finalized"), undo_surface,

@@ -141,20 +141,16 @@ public abstract class SelectTool : BaseTool
 
 	protected override void OnMouseUp (Document document, ToolMouseEventArgs e)
 	{
+		// HasDragged requires a valid drag start position, or it will throw
+		// This will prevent trying to commit invalid selections
+		if (!handle.IsDragging) {
+			UpdateCursor (e.WindowPoint);
+			return;
+		}
+
 		PointD adjusted = AdjustMousePosition (document, e.PointDouble);
 		if (handle.HasDragged (adjusted) && handle.Rectangle.Width > 0 && handle.Rectangle.Height > 0) {
-			ReDraw (document);
-
-			SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
-
-			document.Selection.HandleBounds = handle.Rectangle;
-
-			if (hist != null) {
-				document.History.PushNewItem (hist);
-				hist = null;
-			}
-
-			handle.EndDrag ();
+			FinalizeSelection (document);
 		} else {
 			// If the user didn't move the mouse, they want to deselect
 
@@ -176,6 +172,22 @@ public abstract class SelectTool : BaseTool
 		UpdateCursor (e.WindowPoint);
 	}
 
+	private void FinalizeSelection (Document document)
+	{
+		ReDraw (document);
+
+		SelectionModeHandler.PerformSelectionMode (document, combine_mode, document.Selection.SelectionPolygons);
+
+		document.Selection.HandleBounds = handle.Rectangle;
+
+		if (hist != null) {
+			document.History.PushNewItem (hist);
+			hist = null;
+		}
+
+		handle.EndDrag ();
+	}
+
 	protected override void OnActivated (Document? document)
 	{
 		base.OnActivated (document);
@@ -185,6 +197,23 @@ public abstract class SelectTool : BaseTool
 		if (document is null) return;
 
 		LoadFromDocument (document);
+	}
+
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		// EndDrag requires a valid drag start position, or it will throw
+		// This will prevent trying to commit invalid selections
+		if (document != null && handle.IsDragging) {
+			if (handle.Rectangle.Width > 0 && handle.Rectangle.Height > 0) {
+				FinalizeSelection (document);
+			} else {
+				handle.EndDrag ();
+				hist?.Undo ();
+				hist = null;
+			}
+		}
+
+		base.OnDeactivated (document, newTool);
 	}
 
 	protected override void OnSaveSettings (ISettingsService settings)

@@ -136,12 +136,23 @@ public sealed class ColorPickerTool : BaseTool
 		else if (button_down == MouseButton.Right)
 			palette.SetColor (false, palette.SecondaryColor, true);
 
-		button_down = MouseButton.None;
+		FinalizeColorPick ();
 
 		if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 1 && tools.PreviousTool is not null)
 			tools.SetCurrentTool (tools.PreviousTool);
 		else if (ToolSelectionDropDown.SelectedItem.GetTagOrDefault (0) == 2)
 			tools.SetCurrentTool (nameof (PencilTool));
+	}
+
+	protected override void OnDeactivated (Document? document, BaseTool? newTool)
+	{
+		FinalizeColorPick ();
+		base.OnDeactivated (document, newTool);
+	}
+
+	private void FinalizeColorPick ()
+	{
+		button_down = MouseButton.None;
 	}
 
 	protected override void OnSaveSettings (ISettingsService settings)
