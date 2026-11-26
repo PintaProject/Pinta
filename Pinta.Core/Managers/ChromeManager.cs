@@ -42,26 +42,6 @@ public interface IChromeService
 		Action<string?> onChanged);
 }
 
-public static class ChromeExtensions
-{
-	/// <remarks>Notifies of property changes, so not equivalent to an empty handler</remarks>
-	[Obsolete ("Use overload with onChanged parameter instead")]
-	public static Task<bool> LaunchSimpleEffectDialog (
-		this IChromeService chrome,
-		Gtk.Window parent,
-		BaseEffect effect,
-		IAddinLocalizer localizer,
-		IWorkspaceService workspace)
-	{
-		return chrome.LaunchSimpleEffectDialog (
-			parent,
-			effect,
-			localizer,
-			workspace,
-			onChanged: p => effect.EffectData?.FirePropertyChanged (p));
-	}
-}
-
 public sealed class ChromeManager : IChromeService
 {
 	private PointI last_canvas_cursor_point;

@@ -10,18 +10,10 @@ public static class AddinUtilities
 	/// Launch an effect dialog using specified localizer
 	/// </summary>
 	public static Task<bool> LaunchSimpleEffectDialog (
-		this IChromeService chrome,
-		IWorkspaceService workspace,
-		BaseEffect effect,
+		this ILivePreviewSession session,
 		AddinLocalizer localizer)
 	{
-#pragma warning disable CS0618 // Using obsolete method
-		return chrome.LaunchSimpleEffectDialog (
-			chrome.MainWindow,
-			effect,
-			CreateWrapper (localizer),
-			workspace);
-#pragma warning restore CS0618
+		return session.LaunchSimpleEffectDialog (CreateWrapper (localizer));
 	}
 
 	private static IAddinLocalizer CreateWrapper (AddinLocalizer localizer)

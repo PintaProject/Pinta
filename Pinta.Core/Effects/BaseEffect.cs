@@ -80,36 +80,12 @@ public abstract class BaseEffect
 	/// </summary>
 	public EffectData? EffectData { get; protected set; }
 
-	/// <summary>
-	/// Launches the configuration dialog for this effect/adjustment.
-	/// If IsConfigurable is true, the ConfigDialogResponse event will be invoked when the user accepts or cancels the dialog.
-	/// </summary>
-	/// <returns>Whether the user's response was positive or negative</returns>
-	public virtual Task<bool> LaunchConfiguration ()
+	/// <summary>Launches the configuration dialog for this effect/adjustment.</summary>
+	/// <returns>Whether the user accepted the configuration</returns>
+	public virtual Task<bool> LaunchConfiguration (ILivePreviewSession session)
 	{
-		if (IsConfigurable)
-			throw new NotImplementedException ($"{GetType ()} is marked as configurable, but has not implemented LaunchConfiguration");
-
+		if (IsConfigurable) return session.LaunchSimpleEffectDialog ();
 		return Task.FromResult (true); // Placeholder
-	}
-
-	public virtual async Task<bool> LaunchConfiguration (ILivePreviewSession session)
-	{
-		EffectData? data = EffectData;
-
-		if (data is null)
-			return await LaunchConfiguration ();
-
-		data.PropertyChanged += OnDataChanged;
-
-		try {
-			return await LaunchConfiguration ();
-		} finally {
-			data.PropertyChanged -= OnDataChanged;
-		}
-
-		void OnDataChanged (object? o, PropertyChangedEventArgs e) =>
-			session.NotifyChanged ();
 	}
 
 	#region Overridable Render Methods
@@ -221,15 +197,6 @@ public abstract class EffectData : ObservableObject
 	/// <returns>An identical copy of this EffectData.</returns>
 	public virtual EffectData Clone ()
 		=> (EffectData) MemberwiseClone ();
-
-	/// <summary>
-	/// Fires the PropertyChanged event for this ObservableObject.
-	/// </summary>
-	/// <param name="propertyName">The name of the property that changed.</param>
-	public new void FirePropertyChanged (string? propertyName)
-	{
-		base.FirePropertyChanged (propertyName);
-	}
 
 	/// <summary>
 	/// Returns true if the current values of this EffectData do not modify the image. Returns false if current values modify the image.
